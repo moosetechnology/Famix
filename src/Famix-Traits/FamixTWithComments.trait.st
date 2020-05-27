@@ -48,7 +48,7 @@ FamixTWithComments >> hasComments [
 FamixTWithComments >> numberOfComments [
 	<FMProperty: #numberOfComments type: #Number>
 	<derived>
-	<MSEComment: 'The number of comments in a class'>
+	<FMComment: 'The number of comments in a class'>
 	^ self
 		lookUpPropertyNamed: #numberOfComments
 		computedAs: [ self comments size

@@ -173,9 +173,9 @@ MooseEntity >> isContainerEntity [
 MooseEntity >> isDead [
 	"Only container entities and behaviourals can be dead"
 
-	<MSEProperty: #isDead type: #Boolean>
+	<FMProperty: #isDead type: #Boolean>
 	<derived>
-	<MSEComment: 'Is the entity dead (not invoked in the system)'>
+	<FMComment: 'Is the entity dead (not invoked in the system)'>
 	^ false
 ]
 
