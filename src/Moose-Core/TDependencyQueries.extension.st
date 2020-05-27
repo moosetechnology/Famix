@@ -10,9 +10,9 @@ TDependencyQueries >> deadChildren [
 TDependencyQueries >> isDead [
 	"Only container entities and behaviourals can be dead"
 
-	<MSEProperty: #isDead type: #Boolean>
+	<FMProperty: #isDead type: #Boolean>
 	<derived>
-	<MSEComment: 'Is the entity dead (not invoked in the system)'>
+	<FMComment: 'Is the entity dead (not invoked in the system)'>
 	^ self isContainerEntity
 		ifTrue: [ self lookUpPropertyNamed: #isDead computedAs: [ self hasIncomingDependencies not or: [ self queryIncomingDependencies withoutSelfLoops isEmpty ] ] ]
 		ifFalse: [ false ]
@@ -20,8 +20,8 @@ TDependencyQueries >> isDead [
 
 { #category : #'*Moose-Core' }
 TDependencyQueries >> numberOfDeadChildren [
-	<MSEProperty: #numberOfDeadChildren type: #Number>
-	<MSEComment: 'Number of Dead Functions'>
+	<FMProperty: #numberOfDeadChildren type: #Number>
+	<FMComment: 'Number of Dead Functions'>
 	<derived>
 	^ self deadChildren size
 ]

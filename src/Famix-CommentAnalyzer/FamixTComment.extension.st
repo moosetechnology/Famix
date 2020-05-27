@@ -7,8 +7,8 @@ FamixTComment classSide >> fromLines: aCollectionOfLines [
 
 { #category : #'*Famix-CommentAnalyzer' }
 FamixTComment >> isCode [
-	<MSEProperty: #isCode type: #Boolean>
-	<MSEComment: 'Flag true for comments that are considered as commented code.'>
+	<FMProperty: #isCode type: #Boolean>
+	<FMComment: 'Flag true for comments that are considered as commented code.'>
 	^ self privateState attributeAt: #isCode ifAbsentPut: [ false ]
 ]
 

@@ -12,9 +12,9 @@ FamixTSourceEntity >> commentedCodeCommentsIntervals [
 
 { #category : #'*Famix-CommentAnalyzer' }
 FamixTSourceEntity >> commentedCodeCommentsPercentage [
-	<MSEProperty: #commentedCodeCommentsPercentage type: #Number>
+	<FMProperty: #commentedCodeCommentsPercentage type: #Number>
 	<derived>
-	<MSEComment: 'The percentage of commented code in a program'>
+	<FMComment: 'The percentage of commented code in a program'>
 	^ self
 		propertyNamed: #commentedCodeCommentsPercentage
 		ifAbsentPut: [ [ self commentedCodeCommentsTotalLength / self commentsTotalLength ]
@@ -34,9 +34,9 @@ FamixTSourceEntity >> commentsIntervals [
 
 { #category : #'*Famix-CommentAnalyzer' }
 FamixTSourceEntity >> commentsRatio [
-	<MSEProperty: #commentsRatio type: #Number>
+	<FMProperty: #commentsRatio type: #Number>
 	<derived>
-	<MSEComment: 'The percentage of comments in an entity'>
+	<FMComment: 'The percentage of comments in an entity'>
 	^ self propertyNamed: #commentsRatio ifAbsentPut: [ self computeCommentsPercentage ]
 ]
 
