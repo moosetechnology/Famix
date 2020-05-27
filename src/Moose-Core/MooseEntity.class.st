@@ -135,12 +135,17 @@ MooseEntity >> allProvidersIn: aMooseGroup forModel: aMooseModel [
 ]
 
 { #category : #dependencies }
+MooseEntity >> canRecursivelyBeItsParent [
+	^ false
+]
+
+{ #category : #dependencies }
 MooseEntity >> detectDependenciesUsing: aDetector [
-	| potentialTags |
-	potentialTags := aDetector potentialDependencies select: #isTag.
+	| recursiveEntity |
+	recursiveEntity := aDetector potentialDependencies select: #canRecursivelyBeItsParent.
 	aDetector
-		detectDependenciesFrom: potentialTags;
-		removeFromPotentialDependencies: potentialTags;
+		detectDependenciesFrom: recursiveEntity;
+		removeFromPotentialDependencies: recursiveEntity;
 		detectDependenciesAtAllScopesOfPossibleDependencies
 ]
 
