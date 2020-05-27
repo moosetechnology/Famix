@@ -124,13 +124,7 @@ BaselineOfFamix >> baseline: spec [
 								'Famix-TestComposedMetamodel-Entities' 'Famix-TestComposedMetamodel' 'Famix-TestComposedComposedMetamodel-Entities'
 								'Famix-TestComposed3Metamodel-Entities' 'Moose-GenericImporters-Tests' 'Famix-CommentAnalyzer-Tests') ].
 
-	spec
-		for: #'pharo7.x'
-		do: [ self ring2: spec.
-			self parametrizedTests: spec.
-			spec
-				package: 'Famix-MetamodelBuilder-Core' with: [ spec requires: #('Ring2') ];
-				package: 'Moose-Core' with: [ spec includes: #('ParametrizedTests') ]]
+	
 ]
 
 { #category : #dependencies }
@@ -174,13 +168,6 @@ BaselineOfFamix >> packageRepositoryURL [
 			'tonel://' , (IceRepository registry detect: [ :repo | repo workingCopy packageNames includes: packageName ] ifFound: [ :repo | repo location pathString , '/' , repo subdirectory ] ifNone: [ '' ]) ]
 ]
 
-{ #category : #baseline }
-BaselineOfFamix >> parametrizedTests: spec [
-	spec
-		baseline: 'ParametrizedTests'
-		with: [ spec repository: 'github://tesonep/ParametrizedTests/src' ]
-]
-
 { #category : #accessing }
 BaselineOfFamix >> projectClass [
 	^ MetacelloCypressBaselineProject
@@ -189,15 +176,6 @@ BaselineOfFamix >> projectClass [
 { #category : #dependencies }
 BaselineOfFamix >> referenceTestResources: spec [
 	spec baseline: 'ReferenceTestResources' with: [ spec repository: 'github://moosetechnology/ReferenceTestResources:v1.x.x/src' ]
-]
-
-{ #category : #baseline }
-BaselineOfFamix >> ring2: spec [
-	spec
-		baseline: 'Ring2'
-		with: [ spec
-				loads: 'runtimeSupport';
-				repository: 'github://pavel-krivanek/Ring2:v1.2.0/src' ]
 ]
 
 { #category : #dependencies }
