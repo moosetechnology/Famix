@@ -103,7 +103,7 @@ BaselineOfFamix >> baseline: spec [
 				group: 'Core' with: #('Famix-Traits' 'Moose-Query-Extensions');
 				group: 'Minimal' with: #('Moose-Core');
 				group: 'Basic' with: #('Famix-BasicInfrastructure' 'Famix-MetamodelGeneration');
-				group: 'CommentAnalyzes' with: #('Famix-CommentAnalyzer');
+				group: 'CommentAnalyzer' with: #('Famix-CommentAnalyzer');
 				group: 'TestsResources' with: #('ReferenceTestResources' 'Moose-TestResources-LAN' 'Moose-TestResources-LCOM' 'KGBTestResources' 'PackageBlueprintTestResources');
 				group: 'BasicTraits' with: #('Famix-Traits');
 				group: 'EntitiesCompatibility' with: #('Famix-Compatibility-Entities');
