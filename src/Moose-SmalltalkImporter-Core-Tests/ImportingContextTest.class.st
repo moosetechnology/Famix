@@ -36,8 +36,7 @@ ImportingContextTest >> testShouldImportAllTheRest [
 	context importClassMethodInheritance.
 	self deny: (context shouldImportMethodBody).
 	self assert: (context shouldImportClass).
-	self assert: (context shouldImport: context importingMethod).
-	self assert: (context shouldImport: context importingInheritance).
+
 ]
 
 { #category : #tests }
@@ -46,10 +45,7 @@ ImportingContextTest >> testShouldImportClasses [
 
 	context :=MooseImportingContext new.
 	context importClassMethodInheritance.
-	self assert: (context shouldImport: context importingClass).
 	self assert: (context shouldImportClass).
-	self assert: (context shouldImport: context importingMethod).
-	self assert: (context shouldImport: context importingInheritance).
 ]
 
 { #category : #tests }
@@ -71,10 +67,7 @@ ImportingContextTest >> testShouldImportClassesForMethod [
 
 	context := MooseImportingContext new.
 	context importClassMethodInheritance.
-	self assert: (context shouldImport: context importingClass).
 	self assert: (context shouldImportClass).
-	self assert: (context shouldImport: context importingMethod).
-	self assert: (context shouldImport: context importingInheritance).
 ]
 
 { #category : #tests }
