@@ -707,6 +707,11 @@ MooseImportingContext >> importSmalltalkStubMethod [
 	self entityKindsToBeExtracted addAll: self class importSmalltalkStubMethod
 ]
 
+{ #category : #'importing-filters' }
+MooseImportingContext >> importStubMethod [
+	self entityKindsToBeExtracted addAll: self class importSmalltalkStubMethod 
+]
+
 { #category : #'import options' }
 MooseImportingContext >> importSubclasses [
 	"When a class is created, we automatically import all its subclasses"
