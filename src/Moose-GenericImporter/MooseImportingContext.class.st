@@ -707,112 +707,15 @@ MooseImportingContext >> importSmalltalkStubMethod [
 	self entityKindsToBeExtracted addAll: self class importSmalltalkStubMethod
 ]
 
+{ #category : #'importing-filters' }
+MooseImportingContext >> importStubMethod [
+	self entityKindsToBeExtracted addAll: self class importSmalltalkStubMethod 
+]
+
 { #category : #'import options' }
 MooseImportingContext >> importSubclasses [
 	"When a class is created, we automatically import all its subclasses"
 	importSubclasses := true
-]
-
-{ #category : #'basic representation' }
-MooseImportingContext >> importingAccess [
-	
-	^self class importingAccess
-]
-
-{ #category : #'basic representation' }
-MooseImportingContext >> importingArgument [
-	
-	^self class importingArgument
-]
-
-{ #category : #'basic representation' }
-MooseImportingContext >> importingAttribute [
-	
-	^self class importingAttribute
-]
-
-{ #category : #'basic representation' }
-MooseImportingContext >> importingClass [
-	
-	^self class importingClass
-]
-
-{ #category : #'basic representation' }
-MooseImportingContext >> importingClassExtension [
-	
-	^self class importingClassExtension
-]
-
-{ #category : #'basic representation' }
-MooseImportingContext >> importingFormalParameter [
-	
-	^self class importingFormalParameter
-]
-
-{ #category : #'basic representation' }
-MooseImportingContext >> importingFunction [
-	
-	^self class importingFunction
-]
-
-{ #category : #'basic representation' }
-MooseImportingContext >> importingGlobalVariable [
-	
-	^self class importingGlobalVariable
-]
-
-{ #category : #'basic representation' }
-MooseImportingContext >> importingImplicitVariable [
-	
-	^self class importingImplicitVariable
-]
-
-{ #category : #'basic representation' }
-MooseImportingContext >> importingInheritance [
-	
-	^self class importingInheritance
-]
-
-{ #category : #'basic representation' }
-MooseImportingContext >> importingInvocation [
-	
-	^self class importingInvocation
-]
-
-{ #category : #'basic representation' }
-MooseImportingContext >> importingLiteral [
-	
-	^self class importingLiteral
-]
-
-{ #category : #'basic representation' }
-MooseImportingContext >> importingLocalVariable [
-	
-	^self class importingLocalVariable
-]
-
-{ #category : #'basic representation' }
-MooseImportingContext >> importingMethod [
-	
-	^self class importingMethod
-]
-
-{ #category : #'basic representation' }
-MooseImportingContext >> importingNamespace [
-	
-	^self class importingNamespace
-]
-
-{ #category : #'basic representation' }
-MooseImportingContext >> importingPackage [
-	
-	^self class importingPackage
-]
-
-{ #category : #'basic representation' }
-MooseImportingContext >> importingSmalltalkStubMethod [
-	
-	^self class importingSmalltalkStubMethod
 ]
 
 { #category : #initialization }
