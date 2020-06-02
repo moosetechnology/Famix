@@ -131,12 +131,6 @@ FamixStImportingContext >> importReference [
 ]
 
 { #category : #testing }
-FamixStImportingContext >> importScopingEntity [
-	<generated>
-	^ self import: FamixStScopingEntity
-]
-
-{ #category : #testing }
 FamixStImportingContext >> importSourceAnchor [
 	<generated>
 	^ self import: FamixStSourceAnchor
@@ -296,12 +290,6 @@ FamixStImportingContext >> shouldImportPharoEntitySourceAnchor [
 FamixStImportingContext >> shouldImportReference [
 	<generated>
 	^ self shouldImport: FamixStReference
-]
-
-{ #category : #testing }
-FamixStImportingContext >> shouldImportScopingEntity [
-	<generated>
-	^ self shouldImport: FamixStScopingEntity
 ]
 
 { #category : #testing }
