@@ -1,15 +1,19 @@
 Class {
 	#name : #FamixJavaNamespace,
-	#superclass : #FamixJavaScopingEntity,
-	#traits : 'FamixTNamespace',
-	#classTraits : 'FamixTNamespace classTrait',
+	#superclass : #FamixJavaNamedEntity,
+	#traits : 'FamixTNamespace + FamixTWithGlobalVariables',
+	#classTraits : 'FamixTNamespace classTrait + FamixTWithGlobalVariables classTrait',
+	#instVars : [
+		'#childNamespaces => FMMany type: #FamixJavaNamespace opposite: #parentNamespace',
+		'#parentNamespace => FMOne type: #FamixJavaNamespace opposite: #childNamespaces'
+	],
 	#category : #'Famix-Java-Entities-Entities'
 }
 
 { #category : #meta }
 FamixJavaNamespace class >> annotation [
 
-	<FMClass: #Namespace super: #FamixJavaScopingEntity>
+	<FMClass: #Namespace super: #FamixJavaNamedEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
 	^self
@@ -34,6 +38,12 @@ FamixJavaNamespace >> abstractness: aNumber [
 	self privateState cacheAt: #abstractness put: aNumber
 ]
 
+{ #category : #adding }
+FamixJavaNamespace >> addChildNamespace: anObject [
+	<generated>
+	^ self childNamespaces add: anObject
+]
+
 { #category : #'Famix-Extensions-metrics' }
 FamixJavaNamespace >> afferentCoupling [
 	<FMProperty: #afferentCoupling type: #Number>
@@ -45,6 +55,20 @@ FamixJavaNamespace >> afferentCoupling [
 { #category : #'Famix-Extensions-metrics' }
 FamixJavaNamespace >> afferentCoupling: aNumber [
 	self privateState cacheAt: #afferentCoupling put: aNumber
+]
+
+{ #category : #accessing }
+FamixJavaNamespace >> allClasses [
+	| result |
+	result := OrderedCollection new.
+	self withAllChildScopesDo: [ :each | result addAll: each classes ].
+	^ result
+]
+
+{ #category : #accessing }
+FamixJavaNamespace >> allClassesGroup [
+	<navigation: 'All classes'>
+	^ FamixTypeGroup withAll: self allClasses withDescription: 'All classes from ', self printString
 ]
 
 { #category : #'Famix-Extensions' }
@@ -114,9 +138,21 @@ FamixJavaNamespace >> bunchCouplingWithAll [
 	^ interConnectivities / (2 * myClasses size * (allClasses size - myClasses size)) asFloat
 ]
 
-{ #category : #'Famix-Extensions' }
-FamixJavaNamespace >> childrenOfMyKind [
-	^ self childScopes
+{ #category : #accessing }
+FamixJavaNamespace >> childNamespaces [
+	"Relation named: #childNamespaces type: #FamixJavaNamespace opposite: #parentNamespace"
+
+	<generated>
+	<FMComment: 'Namespaces embedded in this namespace, if any.'>
+	<derived>
+	^ childNamespaces
+]
+
+{ #category : #accessing }
+FamixJavaNamespace >> childNamespaces: anObject [
+
+	<generated>
+	childNamespaces value: anObject
 ]
 
 { #category : #'Famix-Extensions-accessing' }
@@ -278,6 +314,30 @@ FamixJavaNamespace >> numberOfNonInterfacesClasses: aNumber [
 	self privateState cacheAt: #numberOfNonInterfacesClasses put: aNumber
 ]
 
+{ #category : #accessing }
+FamixJavaNamespace >> parentNamespace [
+	"Relation named: #parentNamespace type: #FamixJavaNamespace opposite: #childNamespaces"
+
+	<generated>
+	<FMComment: 'Parent namespace embedding this namespace, if any.'>
+	<container>
+	^ parentNamespace
+]
+
+{ #category : #accessing }
+FamixJavaNamespace >> parentNamespace: anObject [
+
+	<generated>
+	parentNamespace := anObject
+]
+
+{ #category : #navigation }
+FamixJavaNamespace >> parentNamespaceGroup [
+	<generated>
+	<navigation: 'ParentNamespace'>
+	^ MooseGroup with: self parentNamespace
+]
+
 { #category : #printing }
 FamixJavaNamespace >> printOn: aStream [ 
 	self belongsTo ifNotNil: [:parent |
@@ -287,6 +347,26 @@ FamixJavaNamespace >> printOn: aStream [
 			nextPut: $: ].
 	self name ifNotNil: [ aStream nextPutAll: self name ].
 	aStream nextPutAll: ' (Namespace)'
+]
+
+{ #category : #accessing }
+FamixJavaNamespace >> root [
+	^ self isRoot
+		ifTrue: [ self ]
+		ifFalse: [ ^ self parentNamespace root ]
+]
+
+{ #category : #accessing }
+FamixJavaNamespace >> structuralChildren [ 
+	^ (OrderedCollection withAll: self childScopes), self classes 
+]
+
+{ #category : #'Famix-Extensions' }
+FamixJavaNamespace >> withAllChildrenOfType: anSTClass [
+	| all |
+	all := OrderedCollection new.
+	self withAllChildScopesDo: [ :each | each class = anSTClass ifTrue: [ all add: each ] ].
+	^ (Smalltalk at: (anSTClass name , 'Group') asSymbol ifAbsent: [ MooseGroup ]) withAll: all
 ]
 
 { #category : #'Famix-Extensions' }

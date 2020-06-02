@@ -203,12 +203,6 @@ FamixJavaImportingContext >> importReference [
 ]
 
 { #category : #testing }
-FamixJavaImportingContext >> importScopingEntity [
-	<generated>
-	^ self import: FamixJavaScopingEntity
-]
-
-{ #category : #testing }
 FamixJavaImportingContext >> importSourceAnchor [
 	<generated>
 	^ self import: FamixJavaSourceAnchor
@@ -452,12 +446,6 @@ FamixJavaImportingContext >> shouldImportPrimitiveType [
 FamixJavaImportingContext >> shouldImportReference [
 	<generated>
 	^ self shouldImport: FamixJavaReference
-]
-
-{ #category : #testing }
-FamixJavaImportingContext >> shouldImportScopingEntity [
-	<generated>
-	^ self shouldImport: FamixJavaScopingEntity
 ]
 
 { #category : #testing }

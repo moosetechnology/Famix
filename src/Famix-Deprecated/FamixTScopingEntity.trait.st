@@ -9,18 +9,14 @@ Trait {
 		'#childScopes => FMMany type: #FamixTScopingEntity opposite: #parentScope',
 		'#parentScope => FMOne type: #FamixTScopingEntity opposite: #childScopes'
 	],
-	#traits : '(FamixTNamedEntity + TOODependencyQueries withPrecedenceOf: TOODependencyQueries)',
-	#classTraits : '(FamixTNamedEntity classTrait + TOODependencyQueries classTrait withPrecedenceOf: TOODependencyQueries classTrait)',
-	#category : #'Famix-Traits-ScopingEntity'
+	#category : #'Famix-Deprecated'
 }
 
-{ #category : #meta }
-FamixTScopingEntity classSide >> annotation [
+{ #category : #testing }
+FamixTScopingEntity classSide >> isDeprecated [
+	"Scoping entity is a bad concept we are killing. If you have namespaces containing namespaces or packages containing packages in your language. declare properties to manage them in you generator."
 
-	<FMClass: #TScopingEntity super: #Object>
-	<package: #'Famix-Traits'>
-	<generated>
-	^self
+	^ true
 ]
 
 { #category : #accessing }
@@ -42,10 +38,10 @@ FamixTScopingEntity >> allChildScopesDo: aBlock [
 		each withAllChildScopesDo: aBlock ]
 ]
 
-{ #category : #accessing }
-FamixTScopingEntity >> allChildScopesGroup [
-	<navigation: 'All child scopes'>
-	^ FamixNamespaceGroup withAll: self allChildScopes withDescription: 'All child scopes from ', self printString
+{ #category : #'as yet unclassified' }
+FamixTScopingEntity >> allParentScopesDo: aBlock [
+	self deprecated: 'This will be removed'.
+	self parentScope ifNotNil: [ :ps | ps withAllParentScopesDo: aBlock ]
 ]
 
 { #category : #accessing }
@@ -109,4 +105,20 @@ FamixTScopingEntity >> withAllChildScopes [
 FamixTScopingEntity >> withAllChildScopesDo: aBlock [
 	aBlock value: self.
 	self allChildScopesDo: aBlock
+]
+
+{ #category : #'as yet unclassified' }
+FamixTScopingEntity >> withAllParentScopes [
+	| result |
+	self deprecated: 'This will be removed'.
+	result := OrderedCollection new.
+	self withAllParentScopesDo: [ :each | result add: each].
+	^ result 
+]
+
+{ #category : #'as yet unclassified' }
+FamixTScopingEntity >> withAllParentScopesDo: aBlock [
+	self deprecated: 'This will be removed'.
+	aBlock value: self.
+	self allParentScopesDo: aBlock
 ]

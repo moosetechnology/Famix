@@ -585,14 +585,6 @@ Internal Representation and Key Implementation Points.
 ]
 
 { #category : #comments }
-FamixGenerator >> commentForTScopingEntity [
-
-	^ 'FAMIXScopingEntity represents an entity defining a scope at a global level. 
-
-Packages and Namespaces are two different concept in terms of scoping entity. Namespaces have semantic meaning in the language so they influence the unique name of the entity, while Packages are physical entities for packaging. In Smalltalk the two are explicitly different. In C++ we have explicit Namespaces, but not so explicit Packages. In Java, we have both Namespace (what you define in your Java source), and Package (the folder structure), but they happen to overlap in naming (although one is with . and the other one is with /) so people tend to see them as packages only.'
-]
-
-{ #category : #comments }
 FamixGenerator >> commentForTSourceAnchor [
 
 	^ 'FAMIXSourceAnchor is an abstract class representing a pointer to a source. The source can be identified in multiple ways as specified by the subclasses.  The famix entity that this class is a source pointer for, is accessible via element property.'
@@ -1004,10 +996,6 @@ FamixGenerator >> defineHierarchy [
 	tReference --|> tAssociation.
 	
 	tRelativeSourceAnchor --|> tSourceAnchor.
-
-	tScopingEntity --|> tNamedEntity.
-	tScopingEntity --|> #TOODependencyQueries.
-	tScopingEntity withPrecedenceOf: #TOODependencyQueries.
 	
 	tStructuralEntity --|> tNamedEntity.
 	tStructuralEntity --|> tAccessible.
@@ -1331,13 +1319,6 @@ FamixGenerator >> defineRelations [
 	((tReferenceable property: #incomingReferences)
 			comment: 'References to this entity by other entities.').
 
-	((tScopingEntity property: #parentScope)
-			comment: 'Parent scope embedding this scope, if any.';
-			container)
-		*-
-	((tScopingEntity property: #childScopes)
-			comment: 'Child scopes embedded in this scope, if any.').
-
 	((tSourceAnchor property: #element)
 			comment: 'Enable the accessibility to the famix entity that this class is a source pointer for') "this realtion was a container in the old FAMIX"
 		-
@@ -1585,9 +1566,6 @@ FamixGenerator >> defineTraits [
 	
 	tRelativeSourceAnchor := builder newTraitNamed: #TRelativeSourceAnchor.
 	tRelativeSourceAnchor comment: self commentForTRelativeSourceAnchor.
-
-	tScopingEntity := builder newTraitNamed: #TScopingEntity.
-	tScopingEntity comment: self commentForTScopingEntity.
 
 	tSourceAnchor := builder newTraitNamed: #TSourceAnchor.
 	tSourceAnchor comment: self commentForTSourceAnchor.
