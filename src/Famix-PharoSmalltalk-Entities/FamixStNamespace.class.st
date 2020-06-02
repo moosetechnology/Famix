@@ -1,15 +1,15 @@
 Class {
 	#name : #FamixStNamespace,
-	#superclass : #FamixStScopingEntity,
-	#traits : 'FamixTInvocationsReceiver + FamixTNamespace',
-	#classTraits : 'FamixTInvocationsReceiver classTrait + FamixTNamespace classTrait',
+	#superclass : #FamixStNamedEntity,
+	#traits : 'FamixTInvocationsReceiver + FamixTNamespace + FamixTWithClasses + FamixTWithGlobalVariables + FamixTWithTypes',
+	#classTraits : 'FamixTInvocationsReceiver classTrait + FamixTNamespace classTrait + FamixTWithClasses classTrait + FamixTWithGlobalVariables classTrait + FamixTWithTypes classTrait',
 	#category : #'Famix-PharoSmalltalk-Entities-Entities'
 }
 
 { #category : #meta }
 FamixStNamespace class >> annotation [
 
-	<FMClass: #Namespace super: #FamixStScopingEntity>
+	<FMClass: #Namespace super: #FamixStNamedEntity>
 	<package: #'Famix-PharoSmalltalk-Entities'>
 	<generated>
 	^self
@@ -27,6 +27,14 @@ FamixStNamespace >> abstractness [
 	(nsClasses size == 0) ifTrue: [^nil].
 	
 	^ (nsClasses select: [:c | c isAbstract]) size / (nsClasses size)
+]
+
+{ #category : #accessing }
+FamixStNamespace >> allClasses [
+	| result |
+	result := OrderedCollection new.
+	self withAllChildScopesDo: [ :each | result addAll: each classes ].
+	^ result
 ]
 
 { #category : #'Famix-Extensions-nav All Dependencies' }
