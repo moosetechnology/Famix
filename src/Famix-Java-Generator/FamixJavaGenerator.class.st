@@ -28,7 +28,6 @@ Class {
 		'parameterizableClass',
 		'primitiveType',
 		'reference',
-		'scopingEntity',
 		'thrownException',
 		'type',
 		'unknownVariable',
@@ -86,7 +85,6 @@ FamixJavaGenerator >> defineClasses [
 	parameterizedType := builder newClassNamed: #ParameterizedType.
 	primitiveType := builder newClassNamed: #PrimitiveType.
 	reference := builder newClassNamed: #Reference.
-	scopingEntity := builder newClassNamed: #ScopingEntity.
 	thrownException := builder newClassNamed: #ThrownException.
 	type := builder newClassNamed: #Type.
 	unknownVariable := builder newClassNamed: #UnknownVariable.
@@ -204,8 +202,9 @@ FamixJavaGenerator >> defineHierarchy [
 	namedEntity --|> #TWithAnnotationInstances.
 	namedEntity --|> #THasModifiers.
 
-	namespace --|> scopingEntity.
+	namespace --|> containerEntity.
 	namespace --|> #TNamespace.
+	namespace --|> #TWithGlobalVariables.
 
 	package --|> containerEntity.
 	package --|> #TWithGlobalVariables.
@@ -232,10 +231,6 @@ FamixJavaGenerator >> defineHierarchy [
 	
 	sourcedEntity --|> #TWithFiles.
 
-	scopingEntity --|> containerEntity.
-	scopingEntity --|> #TWithGlobalVariables.
-	scopingEntity --|> #TScopingEntity.
-
 	thrownException --|> exception.
 	thrownException --|> #TThrownException.
 
@@ -251,6 +246,14 @@ FamixJavaGenerator >> defineHierarchy [
 	
 
 
+]
+
+{ #category : #definition }
+FamixJavaGenerator >> defineProperties [
+	super defineProperties.
+	((namespace property: #parentNamespace)
+		comment: 'Parent namespace embedding this namespace, if any.';
+		container) *- ((namespace property: #childNamespaces) comment: 'Namespaces embedded in this namespace, if any.')
 ]
 
 { #category : #definition }
