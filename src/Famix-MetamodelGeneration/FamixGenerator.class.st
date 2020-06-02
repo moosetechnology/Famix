@@ -49,7 +49,6 @@ Class {
 		'tPreprocessorIfdef',
 		'tReference',
 		'tReferenceable',
-		'tScopingEntity',
 		'tSourceAnchor',
 		'tSourceEntity',
 		'tSourceLanguage',

@@ -42,14 +42,3 @@ FAMIXNamespaceTest >> testMooseName [
 	self assert: child2 mooseName equals: 'a::d'.
 	self assert: child11 mooseName equals: 'a::b::c'
 ]
-
-{ #category : #testing }
-FAMIXNamespaceTest >> testWithChildScopesDo [
-	| result |
-	result := ''.
-	root withAllChildScopesDo: [ :each | result := result , each name ].
-	self assert: result equals: 'abcd'.
-	result := ''.
-	root allChildScopesDo: [ :each | result := result , each name ].
-	self assert: result equals: 'bcd'
-]

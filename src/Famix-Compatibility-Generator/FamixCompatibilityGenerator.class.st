@@ -336,7 +336,6 @@ FamixCompatibilityGenerator >> defineHierarchy [
 
 	scopingEntity --|> containerEntity.
 	scopingEntity --|> #TWithGlobalVariables.
-	scopingEntity --|> #TScopingEntity.
 
 	structuralEntity --|> leafEntity.
 	structuralEntity --|> #TStructuralEntity.
@@ -387,6 +386,17 @@ FamixCompatibilityGenerator >> defineHierarchy [
 	sourcedEntity --|> #TWithFiles
 	
 
+]
+
+{ #category : #definition }
+FamixCompatibilityGenerator >> defineProperties [
+	super defineProperties.
+	((scopingEntity property: #parentScope)
+			comment: 'Parent scope embedding this scope, if any.';
+			container)
+		*-
+	((scopingEntity property: #childScopes)
+			comment: 'Child scopes embedded in this scope, if any.').
 ]
 
 { #category : #definition }
