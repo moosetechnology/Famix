@@ -7,6 +7,8 @@ When an entity is placed inside a namespace, the fully qualified name (mooseName
 "
 Trait {
 	#name : #FamixTNamespace,
+	#traits : '(FamixTNamedEntity + TOODependencyQueries withPrecedenceOf: TOODependencyQueries)',
+	#classTraits : '(FamixTNamedEntity classTrait + TOODependencyQueries classTrait withPrecedenceOf: TOODependencyQueries classTrait)',
 	#category : #'Famix-Traits-Named'
 }
 

@@ -992,6 +992,10 @@ FamixGenerator >> defineHierarchy [
 	tNamedEntity --|> #TEntityMetaLevelDependency.
 	tNamedEntity --|> tSourceEntity.
 
+	tNamespace --|> tNamedEntity.
+	tNamespace --|> #TOODependencyQueries.
+	tNamespace withPrecedenceOf: #TOODependencyQueries.
+	
 	tPackage --|> tNamedEntity.
 
 	tParameter --|> tStructuralEntity.
