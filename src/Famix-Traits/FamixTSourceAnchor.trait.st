@@ -94,3 +94,17 @@ FamixTSourceAnchor >> privateLineCount [
 FamixTSourceAnchor >> sourceText [
 	^ self explicitRequirement
 ]
+
+{ #category : #accessing }
+FamixTSourceAnchor >> sourceTextFrom: startPos to: endPos [
+	self sourceText size < endPos ifTrue: [ ^ '' ].
+	
+	^ self sourceText copyFrom: startPos to: endPos
+]
+
+{ #category : #testing }
+FamixTSourceAnchor >> startBeforeFileAnchor: aTSourceAnchor [
+	(self startLine isNil or: [ aTSourceAnchor startLine isNil ]) ifTrue: [ ^ false ].
+		
+	^ aTSourceAnchor startLine >= self startLine
+]

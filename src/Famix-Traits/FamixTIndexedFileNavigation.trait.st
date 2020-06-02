@@ -5,6 +5,7 @@ Trait {
 		'#startPos => FMProperty'
 	],
 	#traits : 'FamixTFileAnchor',
+	#classTraits : 'FamixTFileAnchor classTrait',
 	#category : #'Famix-Traits-SourceAnchor'
 }
 
@@ -76,6 +77,13 @@ FamixTIndexedFileNavigation >> endPos [
 FamixTIndexedFileNavigation >> endPos: anObject [
 	<generated>
 	endPos := anObject
+]
+
+{ #category : #testing }
+FamixTIndexedFileNavigation >> isWithin: aFileAnchor [
+	"Test whether aSourceAnchor is contained within receiver. We test the positions before the file name because it is faster."
+
+	^ startPos >= aFileAnchor startPos and: [ endPos <= aFileAnchor endPos and: [ fileName = aFileAnchor fileName ] ]
 ]
 
 { #category : #accessing }

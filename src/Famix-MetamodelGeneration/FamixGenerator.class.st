@@ -125,7 +125,8 @@ Class {
 		'tTypeGroup',
 		'tClassGroup',
 		'tPrimitiveType',
-		'tUnknownVariable'
+		'tUnknownVariable',
+		'tRelativeSourceAnchor'
 	],
 	#category : #'Famix-MetamodelGeneration'
 }
@@ -565,6 +566,26 @@ FamixGenerator >> commentForTReferenceable [
 ]
 
 { #category : #comments }
+FamixGenerator >> commentForTRelativeSourceAnchor [
+
+	^ 'Description
+--------------------
+
+I am a source anchor storing the sources by pointing another source anchor and defining a subpart of this source as my sourced.
+
+I point another source anchor and define a start and end position in the source text of this source anchor as my anchor.
+ 
+Internal Representation and Key Implementation Points.
+--------------------
+
+    Instance Variables
+	endPos:					<anInteger>				Position of the last character of my source in the source text of the relative anchor.
+	relatedAnchor:			<aSourceAnchor>			The anchor I''ll get my relative sources from.
+	startPos:					<anInteger>				Position of the first character of my source in the source text of the relative anchor.
+'
+]
+
+{ #category : #comments }
 FamixGenerator >> commentForTScopingEntity [
 
 	^ 'FAMIXScopingEntity represents an entity defining a scope at a global level. 
@@ -978,6 +999,8 @@ FamixGenerator >> defineHierarchy [
 	tPrimitiveType --|> tType.
 	
 	tReference --|> tAssociation.
+	
+	tRelativeSourceAnchor --|> tSourceAnchor.
 
 	tScopingEntity --|> tNamedEntity.
 	tScopingEntity --|> #TOODependencyQueries.
@@ -1066,6 +1089,10 @@ FamixGenerator >> defineProperties [
 	((tMultipleFileAnchor property: #fileAnchors type: #FamixTFileAnchor)
 		comment: 'All source code definition files';
 		multivalued).
+		
+	(tRelativeSourceAnchor property: #relatedAnchor type: #FamixTSourceAnchor) comment: 'Source anchor to which I am relative.'.
+	(tRelativeSourceAnchor property: #startPos type: #Number) comment: 'Start position in the source'.
+	(tRelativeSourceAnchor property: #endPos type: #Number) comment: 'Stop position in the source'
 ]
 
 { #category : #definition }
@@ -1552,6 +1579,9 @@ FamixGenerator >> defineTraits [
 
 	tReferenceable := builder newTraitNamed: #TReferenceable.
 	tReferenceable comment: self commentForTReferenceable.
+	
+	tRelativeSourceAnchor := builder newTraitNamed: #TRelativeSourceAnchor.
+	tRelativeSourceAnchor comment: self commentForTRelativeSourceAnchor.
 
 	tScopingEntity := builder newTraitNamed: #TScopingEntity.
 	tScopingEntity comment: self commentForTScopingEntity.

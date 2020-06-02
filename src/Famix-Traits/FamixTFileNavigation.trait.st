@@ -7,6 +7,7 @@ Trait {
 		'#startLine => FMProperty'
 	],
 	#traits : 'FamixTFileAnchor',
+	#classTraits : 'FamixTFileAnchor classTrait',
 	#category : #'Famix-Traits-SourceAnchor'
 }
 
@@ -72,6 +73,15 @@ FamixTFileNavigation >> endLine: anObject [
 	endLine := anObject
 ]
 
+{ #category : #testing }
+FamixTFileNavigation >> endsBefore: aFileAnchor [
+	(self endLine isNil or: [ aFileAnchor endLine isNil ]) ifTrue: [ ^ false ].
+
+	(self endColumn isNil or: [ aFileAnchor endColumn isNil ]) ifTrue: [ ^ self endLine <= aFileAnchor endLine ].
+
+	^ self endLine < aFileAnchor endLine or: [ self endLine = aFileAnchor endLine and: [ self endColumn <= aFileAnchor endColumn ] ]
+]
+
 { #category : #accessing }
 FamixTFileNavigation >> interval [
 	| start end index |
@@ -84,6 +94,13 @@ FamixTFileNavigation >> interval [
 			self startLine = index ifTrue: [ start := lineStart ].
 			self endLine = index ifTrue: [ end := lineEnd ] ].
 	^ start to: end
+]
+
+{ #category : #testing }
+FamixTFileNavigation >> isWithin: aFileAnchor [
+	"test whether aSourceAnchor is contained within receiver"
+
+	^ self fileName = aFileAnchor fileName and: [ (self startsAfter: aFileAnchor) and: [ self endsBefore: aFileAnchor ] ]
 ]
 
 { #category : #accessing }
@@ -155,4 +172,9 @@ FamixTFileNavigation >> startLine [
 FamixTFileNavigation >> startLine: anObject [
 	<generated>
 	startLine := anObject
+]
+
+{ #category : #testing }
+FamixTFileNavigation >> startsAfter: aFileAnchor [
+	 ^ aFileAnchor startBeforeFileAnchor: self
 ]
