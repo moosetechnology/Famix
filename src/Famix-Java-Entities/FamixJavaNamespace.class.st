@@ -1,6 +1,6 @@
 Class {
 	#name : #FamixJavaNamespace,
-	#superclass : #FamixJavaNamedEntity,
+	#superclass : #FamixJavaContainerEntity,
 	#traits : 'FamixTNamespace + FamixTWithGlobalVariables',
 	#classTraits : 'FamixTNamespace classTrait + FamixTWithGlobalVariables classTrait',
 	#instVars : [
@@ -13,7 +13,7 @@ Class {
 { #category : #meta }
 FamixJavaNamespace class >> annotation [
 
-	<FMClass: #Namespace super: #FamixJavaNamedEntity>
+	<FMClass: #Namespace super: #FamixJavaContainerEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
 	^self

@@ -202,7 +202,7 @@ FamixJavaGenerator >> defineHierarchy [
 	namedEntity --|> #TWithAnnotationInstances.
 	namedEntity --|> #THasModifiers.
 
-	namespace --|> namedEntity.
+	namespace --|> containerEntity.
 	namespace --|> #TNamespace.
 	namespace --|> #TWithGlobalVariables.
 
