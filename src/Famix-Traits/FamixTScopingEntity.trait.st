@@ -10,6 +10,7 @@ Trait {
 		'#parentScope => FMOne type: #FamixTScopingEntity opposite: #childScopes'
 	],
 	#traits : '(FamixTNamedEntity + TOODependencyQueries withPrecedenceOf: TOODependencyQueries)',
+	#classTraits : '(FamixTNamedEntity classTrait + TOODependencyQueries classTrait withPrecedenceOf: TOODependencyQueries classTrait)',
 	#category : #'Famix-Traits-ScopingEntity'
 }
 
@@ -45,11 +46,6 @@ FamixTScopingEntity >> allChildScopesDo: aBlock [
 FamixTScopingEntity >> allChildScopesGroup [
 	<navigation: 'All child scopes'>
 	^ FamixNamespaceGroup withAll: self allChildScopes withDescription: 'All child scopes from ', self printString
-]
-
-{ #category : #accessing }
-FamixTScopingEntity >> allParentScopesDo: aBlock [
-	self parentScope ifNotNil: [ :ps | ps withAllParentScopesDo: aBlock ]
 ]
 
 { #category : #accessing }
@@ -113,18 +109,4 @@ FamixTScopingEntity >> withAllChildScopes [
 FamixTScopingEntity >> withAllChildScopesDo: aBlock [
 	aBlock value: self.
 	self allChildScopesDo: aBlock
-]
-
-{ #category : #accessing }
-FamixTScopingEntity >> withAllParentScopes [
-	| result |
-	result := OrderedCollection new.
-	self withAllParentScopesDo: [ :each | result add: each].
-	^ result 
-]
-
-{ #category : #accessing }
-FamixTScopingEntity >> withAllParentScopesDo: aBlock [
-	aBlock value: self.
-	self allParentScopesDo: aBlock
 ]
