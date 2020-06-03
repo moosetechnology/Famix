@@ -165,7 +165,6 @@ FamixJavaGenerator >> defineHierarchy [
 	class --|> #TLCOMMetrics.
 
 	containerEntity --|> namedEntity.
-	containerEntity --|> #TWithTypes.
 	containerEntity --|> #TWithClasses.
 	containerEntity --|> #TWithAnnotationTypes.
 	containerEntity --|> #TOODependencyQueries.

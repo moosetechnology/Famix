@@ -1,8 +1,8 @@
 Class {
 	#name : #FAMIXContainerEntity,
 	#superclass : #FAMIXNamedEntity,
-	#traits : 'FamixTWithAnnotationTypes + FamixTWithClasses + FamixTWithFunctions + FamixTWithTypes + TOODependencyQueries',
-	#classTraits : 'FamixTWithAnnotationTypes classTrait + FamixTWithClasses classTrait + FamixTWithFunctions classTrait + FamixTWithTypes classTrait + TOODependencyQueries classTrait',
+	#traits : 'FamixTWithAnnotationTypes + FamixTWithClasses + FamixTWithFunctions + TOODependencyQueries',
+	#classTraits : 'FamixTWithAnnotationTypes classTrait + FamixTWithClasses classTrait + FamixTWithFunctions classTrait + TOODependencyQueries classTrait',
 	#category : #'Famix-Compatibility-Entities-Entities'
 }
 
