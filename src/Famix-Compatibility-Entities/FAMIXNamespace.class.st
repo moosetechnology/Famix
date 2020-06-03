@@ -179,17 +179,6 @@ FAMIXNamespace >> numberOfAttributes: aNumber [
 ]
 
 { #category : #'Famix-Extensions' }
-FAMIXNamespace >> numberOfClasses [
-	<FMProperty: #numberOfClasses type: #Number>
-	<derived>
-	<FMComment: 'The number of classes in a namespace'>
-	
-	^self
-		lookUpPropertyNamed: #numberOfClasses
-		computedAs: [self types size]
-]
-
-{ #category : #'Famix-Extensions' }
 FAMIXNamespace >> numberOfClasses: aNumber [
 	self privateState cacheAt: #numberOfClasses put: aNumber
 ]

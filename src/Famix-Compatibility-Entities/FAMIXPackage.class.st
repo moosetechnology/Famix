@@ -281,15 +281,6 @@ FAMIXPackage >> methods [
 	^ self localMethods union: self extensionMethods
 ]
 
-{ #category : #'Famix-Extensions-metrics' }
-FAMIXPackage >> numberOfClasses [
-	<FMProperty: #numberOfClasses type: #Number>
-	<derived>
-	<FMComment: 'The number of classes in a package'>
-	
-	^ self classes size
-]
-
 { #category : #'Famix-Extensions' }
 FAMIXPackage >> numberOfClientPackages [
 	<FMProperty: #numberOfClientPackages type: #Number>

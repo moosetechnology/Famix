@@ -99,15 +99,6 @@ FamixStPackage >> methods [
 ]
 
 { #category : #accessing }
-FamixStPackage >> numberOfClasses [
-	<FMProperty: #numberOfClasses type: #Number>
-	<derived>
-	<FMComment: 'The number of classes in a package'>
-	
-	^ self classes size
-]
-
-{ #category : #accessing }
 FamixStPackage >> numberOfClientPackages [
 	<FMProperty: #numberOfClientPackages type: #Number>
 	<FMComment: 'The number of packages which depend on this package'>
