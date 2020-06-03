@@ -193,15 +193,6 @@ FamixJavaPackage >> methods [
 	^ self privateState cacheAt: #methods ifAbsentPut: [ self classes flatCollect: #methods ]
 ]
 
-{ #category : #'Famix-Extensions' }
-FamixJavaPackage >> numberOfClasses [
-	<FMProperty: #numberOfClasses type: #Number>
-	<derived>
-	<FMComment: 'The number of classes in a package'>
-	
-	^ self classes size
-]
-
 { #category : #accessing }
 FamixJavaPackage >> numberOfClientPackages [
 	<FMProperty: #numberOfClientPackages type: #Number>

@@ -50,17 +50,6 @@ FamixStNamespace >> mooseNameOn: aStream [
 ]
 
 { #category : #'Famix-Extensions' }
-FamixStNamespace >> numberOfClasses [
-	<FMProperty: #numberOfClasses type: #Number>
-	<derived>
-	<FMComment: 'The number of classes in a namespace'>
-	
-	^self
-		lookUpPropertyNamed: #numberOfClasses
-		computedAs: [self types size]
-]
-
-{ #category : #'Famix-Extensions' }
 FamixStNamespace >> numberOfClasses: aNumber [
 	self privateState cacheAt: #numberOfClasses put: aNumber
 ]
