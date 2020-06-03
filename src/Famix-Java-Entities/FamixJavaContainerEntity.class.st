@@ -1,8 +1,8 @@
 Class {
 	#name : #FamixJavaContainerEntity,
 	#superclass : #FamixJavaNamedEntity,
-	#traits : 'FamixTWithAnnotationTypes + FamixTWithClasses + FamixTWithTypes + TOODependencyQueries',
-	#classTraits : 'FamixTWithAnnotationTypes classTrait + FamixTWithClasses classTrait + FamixTWithTypes classTrait + TOODependencyQueries classTrait',
+	#traits : 'FamixTWithAnnotationTypes + FamixTWithClasses + TOODependencyQueries',
+	#classTraits : 'FamixTWithAnnotationTypes classTrait + FamixTWithClasses classTrait + TOODependencyQueries classTrait',
 	#category : #'Famix-Java-Entities-Entities'
 }
 

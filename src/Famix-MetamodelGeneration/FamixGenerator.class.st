@@ -1012,6 +1012,8 @@ FamixGenerator >> defineHierarchy [
 	
 	tUnknownVariable --|> tStructuralEntity.
 	
+	tWithClasses --|> tWithTypes.
+	
 	tWithStatements --|> tWithAccesses.
 	tWithStatements --|> tWithInvocations.
 	tWithStatements --|> tSourceEntity

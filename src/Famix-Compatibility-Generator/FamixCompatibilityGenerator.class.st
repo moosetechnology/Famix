@@ -233,7 +233,6 @@ FamixCompatibilityGenerator >> defineHierarchy [
 	compilationUnit --|> #TDefinedInModule.
 
 	containerEntity --|> namedEntity.
-	containerEntity --|> #TWithTypes.
 	containerEntity --|> #TWithClasses.
 	containerEntity --|> #TWithFunctions.
 	containerEntity --|> #TWithAnnotationTypes.

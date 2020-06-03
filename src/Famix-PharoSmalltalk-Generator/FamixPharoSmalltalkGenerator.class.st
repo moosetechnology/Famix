@@ -125,14 +125,12 @@ FamixPharoSmalltalkGenerator >> defineHierarchy [
 	namespace --|> namedEntity.
 	namespace --|> #TNamespace.
 	namespace --|> #TWithGlobalVariables.
-	namespace --|> #TWithTypes.
 	namespace --|> #TWithClasses.
 	namespace --|> #TInvocationsReceiver.
 
 	package --|> namedEntity.
 	package --|> #TPackage.
 	package --|> #TWithGlobalVariables.
-	package --|> #TWithTypes.
 	package --|> #TWithClasses.
 	package --|> #TCohesionCouplingMetrics.
 	package --|> #TOODependencyQueries.
