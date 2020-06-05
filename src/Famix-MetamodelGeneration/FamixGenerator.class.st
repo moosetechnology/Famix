@@ -944,6 +944,7 @@ FamixGenerator >> defineHierarchy [
 	tFolder --|> tFileSystemEntity.
 	
 	tFunction --|> tNamedEntity.
+	tFunction --|> tWithParameters.
 	tFunction --|> tHasSignature.
 	tFunction --|> tTypedEntity.
 	tFunction --|> tWithStatements.
