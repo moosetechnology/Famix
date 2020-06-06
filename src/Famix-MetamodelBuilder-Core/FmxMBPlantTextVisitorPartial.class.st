@@ -50,3 +50,13 @@ FmxMBPlantTextVisitorPartial >> visitRelationSide: aRelationSide [
 	super  visitRelationSide: aRelationSide
 
 ]
+
+{ #category : #relations }
+FmxMBPlantTextVisitorPartial >> writeGeneralizations [
+	generalizationDefinitions :=
+		generalizationDefinitions select: [ :gen |
+			(self isWantedClass: gen key) and:
+			[self isWantedClass: gen value]
+		].
+	super writeGeneralizations
+]

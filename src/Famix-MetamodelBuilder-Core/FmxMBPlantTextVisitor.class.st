@@ -74,6 +74,15 @@ FmxMBPlantTextVisitor >> initialize [
 	traitsWithUsers := Set new
 ]
 
+{ #category : #private }
+FmxMBPlantTextVisitor >> mergeTrait: aTrait withBehaviorNamed: aBehaviorName [
+
+	(behaviors at: aBehaviorName) add: aTrait.
+	
+	
+	
+]
+
 { #category : #accessing }
 FmxMBPlantTextVisitor >> mergeTraits [
 	^ mergeTraits
@@ -82,15 +91,6 @@ FmxMBPlantTextVisitor >> mergeTraits [
 { #category : #accessing }
 FmxMBPlantTextVisitor >> mergeTraits: anObject [
 	mergeTraits := anObject
-]
-
-{ #category : #private }
-FmxMBPlantTextVisitor >> mergeTrat: aTrait withBehaviorNamed: aBehaviorName [
-
-	(behaviors at: aBehaviorName) add: aTrait.
-	
-	
-	
 ]
 
 { #category : #private }
@@ -255,7 +255,7 @@ FmxMBPlantTextVisitor >> visitTypedProperty: aTypedProperty [
 
 	stream 
 		tab; 
-		nextPutAll: '- '; 
+		nextPutAll: '+ '; 
 		nextPutAll: aTypedProperty propertyType; 
 		space; 
 		nextPutAll: aTypedProperty name; 
