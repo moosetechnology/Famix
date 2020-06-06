@@ -37,7 +37,7 @@ FmxMBPlantTextVisitor >> behaviors [
 	^ behaviors
 ]
 
-{ #category : #visiting }
+{ #category : #accessing }
 FmxMBPlantTextVisitor >> contents [
 
 	^ stream contents
@@ -103,6 +103,20 @@ FmxMBPlantTextVisitor >> onlySingleUserOf: aTrait [
 ]
 
 { #category : #private }
+FmxMBPlantTextVisitor >> recordGeneralizationsForClass: aClass mergingTraits: mergesTrait [. 
+
+	aClass classGeneralization ifNotNil: [ :generalization |
+		generalizationDefinitions add: (generalization -> aClass)].
+	
+	mergesTrait ifFalse: [ 
+		aClass traitGeneralizations ifNotEmpty: [ :generalizations |
+			generalizations do: [ :generalization |
+				generalizationDefinitions add: (generalization -> aClass)]]]
+	
+	
+]
+
+{ #category : #private }
 FmxMBPlantTextVisitor >> registerNewBehavior: aBehavior [
 
 	| key |
@@ -114,7 +128,7 @@ FmxMBPlantTextVisitor >> registerNewBehavior: aBehavior [
 	
 ]
 
-{ #category : #visiting }
+{ #category : #private }
 FmxMBPlantTextVisitor >> selectTraitsWithUsersFrom: aBuilder [
 
 	^ traitsWithUsers := aBuilder classes flatCollect: [:each | each traitGeneralizations] as: Set
@@ -157,54 +171,18 @@ FmxMBPlantTextVisitor >> visitBuilder: aBuilder [
 { #category : #visiting }
 FmxMBPlantTextVisitor >> visitClass: aClass [
 
-	| behaviorKey mergesTrait displayedName | 
-	
+	| mergesTrait | 
+
 	aClass willGenerate ifFalse: [ ^ self ].
-	
+
 	mergesTrait := self mergeTraits 
 		and: [ aClass traitGeneralizations size = 1 
 		and: [ self onlySingleUserOf: aClass traitGeneralizations first ]].
 	
-	displayedName := aClass name.
+	self writeClass: aClass mergingTraits: mergesTrait.
 
-	mergesTrait	ifTrue: [ 
-		(self behaviorNameOrNilFor:	aClass traitGeneralizations first)
-				ifNil: [ behaviorKey := self ensureBehaviorNameFor: aClass.
-					self mergeTrat: aClass traitGeneralizations first withBehaviorNamed: behaviorKey. ]
-				ifNotNil: [ :key |
-					behaviorKey := key.
-					self mergeTrat: aClass withBehaviorNamed: behaviorKey. ].
-	
-	displayedName := displayedName, ' / ', aClass traitGeneralizations first name ]
-	ifFalse: [ 
-	behaviorKey := self ensureBehaviorNameFor: aClass].
+	self recordGeneralizationsForClass: aClass mergingTraits: mergesTrait. 
 
-	stream 
-		nextPutAll: 'class ';
-		nextPutAll: behaviorKey;
-		nextPutAll: ' as "';
-		nextPutAll: displayedName;
-		nextPutAll: '" {'; cr.
-
-	aClass properties do: [ :each | each acceptVisitor: self ].
-	
-	mergesTrait	ifTrue: [ 
-		| defs |
-		defs := typedProperties select: [ :each | each key = aClass traitGeneralizations first ].
-		defs do: [ :assoc | 
-			stream nextPutAll: assoc value ] ].
-
-	stream nextPutAll: '}'; cr; cr.
-	
-	aClass classGeneralization ifNotNil: [ :generalization |
-		generalizationDefinitions add: (generalization -> aClass)].
-	
-	mergesTrait ifFalse: [ 
-		aClass traitGeneralizations ifNotEmpty: [ :generalizations |
-			generalizations do: [ :generalization |
-				generalizationDefinitions add: (generalization -> aClass)]]]
-	
-	
 ]
 
 { #category : #visiting }
@@ -260,6 +238,44 @@ FmxMBPlantTextVisitor >> visitTypedProperty: aTypedProperty [
 		space; 
 		nextPutAll: aTypedProperty name; 
 		cr. 
+]
+
+{ #category : #private }
+FmxMBPlantTextVisitor >> writeClass: aClass mergingTraits: mergesTraits [
+
+	| behaviorKey displayedName |
+
+	displayedName := aClass name.
+
+	mergesTraits
+	ifTrue: [ 
+		(self behaviorNameOrNilFor:	aClass traitGeneralizations first)
+				ifNil: [ behaviorKey := self ensureBehaviorNameFor: aClass.
+					self mergeTrait: aClass traitGeneralizations first withBehaviorNamed: behaviorKey. ]
+				ifNotNil: [ :key |
+					behaviorKey := key.
+					self mergeTrait: aClass withBehaviorNamed: behaviorKey. ].
+	
+		displayedName := displayedName, ' / ', aClass traitGeneralizations first name ]
+	ifFalse: [ behaviorKey := self ensureBehaviorNameFor: aClass].
+
+	stream 
+		nextPutAll: 'class ';
+		nextPutAll: behaviorKey;
+		nextPutAll: ' as "';
+		nextPutAll: displayedName;
+		nextPutAll: '" {'; cr.
+
+	aClass properties do: [ :each | each acceptVisitor: self ].
+	
+	mergesTraits	ifTrue: [ 
+		| defs |
+		defs := typedProperties select: [ :each | each key = aClass traitGeneralizations first ].
+		defs do: [ :assoc | 
+			stream nextPutAll: assoc value ] ].
+
+	stream nextPutAll: '}'; cr; cr.
+	
 ]
 
 { #category : #relations }
