@@ -1,8 +1,8 @@
 Class {
 	#name : #FamixJavaEnum,
 	#superclass : #FamixJavaType,
-	#traits : 'FamixTWithEnumValues',
-	#classTraits : 'FamixTWithEnumValues classTrait',
+	#traits : 'FamixTEnum',
+	#classTraits : 'FamixTEnum classTrait',
 	#category : #'Famix-Java-Entities-Entities'
 }
 

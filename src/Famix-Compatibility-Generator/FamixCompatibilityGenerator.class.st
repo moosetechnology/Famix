@@ -245,7 +245,7 @@ FamixCompatibilityGenerator >> defineHierarchy [
 	dereferencedInvocation --|> #TDereferencedInvocation.
 
 	enum --|> type.
-	enum --|> #TWithEnumValues.
+	enum --|> #TEnum.
 
 	enumValue --|> structuralEntity.
 	enumValue --|> #TEnumValue.
