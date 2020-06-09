@@ -173,7 +173,7 @@ FamixJavaGenerator >> defineHierarchy [
 	declaredException --|> #TDeclaredException.
 
 	enum --|> type.
-	enum --|> #TWithEnumValues.
+	enum --|> #TEnum.
 
 	enumValue --|> namedEntity.
 	enumValue --|> #TStructuralEntity.

@@ -1,8 +1,8 @@
 Class {
 	#name : #FAMIXEnum,
 	#superclass : #FAMIXType,
-	#traits : 'FamixTWithEnumValues',
-	#classTraits : 'FamixTWithEnumValues classTrait',
+	#traits : 'FamixTEnum',
+	#classTraits : 'FamixTEnum classTrait',
 	#category : #'Famix-Compatibility-Entities-Entities'
 }
 

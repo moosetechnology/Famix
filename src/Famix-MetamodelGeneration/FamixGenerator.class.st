@@ -125,7 +125,8 @@ Class {
 		'tClassGroup',
 		'tPrimitiveType',
 		'tUnknownVariable',
-		'tRelativeSourceAnchor'
+		'tRelativeSourceAnchor',
+		'tEnum'
 	],
 	#category : #'Famix-MetamodelGeneration'
 }
@@ -308,6 +309,22 @@ FamixGenerator >> commentForTDereferencedInvocation [
 The function itself is typically unknown (referenced by the pointer).
 
 It has a referencer which is the pointer variable'
+]
+
+{ #category : #comments }
+FamixGenerator >> commentForTEnum [
+
+	^ 'This models an enum.
+
+For example, the following Java code defines an Enum with seven EnumValues.
+
+public enum Day {
+    SUNDAY, MONDAY, TUESDAY, WEDNESDAY, 
+    THURSDAY, FRIDAY, SATURDAY 
+}
+
+Instance Variables:
+	values	<(MultivalueLink of: FAMIXEnumValue)>'
 ]
 
 { #category : #comments }
@@ -933,6 +950,9 @@ FamixGenerator >> defineHierarchy [
 
 	tDereferencedInvocation --|> tInvocation.
 	
+	tEnum --|> tWithEnumValues.
+	tEnum --|> tType.
+	
 	tFileAnchor --|> tSourceAnchor.
   
 	tFile --|> tFileSystemEntity.
@@ -1454,6 +1474,9 @@ FamixGenerator >> defineTraits [
 
 	tEnumValue := builder newTraitNamed: #TEnumValue.
 	tEnumValue comment: self commentForTEnumValue.
+	
+	tEnum := builder newTraitNamed: #TEnum.
+	tEnum comment: self commentForTEnum.
 
 	tException := builder newTraitNamed: #TException.
 	tException comment: self commentForTException.
