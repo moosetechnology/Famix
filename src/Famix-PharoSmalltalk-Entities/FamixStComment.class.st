@@ -20,25 +20,3 @@ FamixStComment >> belongsTo [
 	
 	^ self container
 ]
-
-{ #category : #printing }
-FamixStComment >> gtDisplayOn: aStream [
-	| preview |
-	preview := self sourceText truncateWithElipsisTo: 10.
-	preview := preview copyReplaceAll: (String with: Character cr with: Character lf) with: ' '.
-	preview := preview copyReplaceAll: (String with: Character cr) with: ' '.
-	preview := preview copyReplaceAll: (String with: Character lf) with: ' '.
-	aStream
-		nextPut: $";
-		nextPutAll: preview;
-		nextPutAll: '" in '.
-	self belongsTo ifNotNil: [ :bt | bt gtDisplayOn: aStream ]
-]
-
-{ #category : #printing }
-FamixStComment >> printOn: aStream [
-	self sourceText ifNotNil: [ :sourceText | aStream nextPutAll: (sourceText contractTo: 50) ].
-	aStream nextPutAll: ' (comment on '.
-	self container printOn: aStream.
-	aStream nextPut: $)
-]
