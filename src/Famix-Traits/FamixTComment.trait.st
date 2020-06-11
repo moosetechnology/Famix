@@ -62,7 +62,7 @@ FamixTComment >> content: anObject [
 FamixTComment >> gtDisplayOn: aStream [
 	| preview |
 	preview := {String cr . String lf . String crlf}
-		inject: (self sourceText truncate: 10)
+		inject: (self sourceText truncateWithElipsisTo: 10)
 		into: [ :crtLine :lineReturn | crtLine copyReplaceAll: lineReturn with: ' ' ].
 	aStream
 		nextPut: $";
