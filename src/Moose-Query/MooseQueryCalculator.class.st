@@ -136,6 +136,11 @@ MooseQueryCalculator >> queryAllFor: anEntity [
 
 { #category : #query }
 MooseQueryCalculator >> queryAllFor: anEntity in: aCollection [
+	"collects in aCollection all entities on the opposite side of associations with self
+	 Opposite side depends on self strategy (incoming/outgoing)
+	
+	First collects entities from local (not inherited) properties
+	Then get children entities of self and applies recurvively on them"
 	| selectors |
 	self queryAllLocalFor: anEntity in: aCollection.
 	"Instead of #to:do: we could just use #do: but this implementation is much faster. Maybe sista will remove the needs of the todo later."
