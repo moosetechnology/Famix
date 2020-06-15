@@ -65,7 +65,10 @@ TEntityMetaLevelDependency classSide >> dependencyFM3PropertyDescriptionIn: aMet
 	 (obviously aMetamodel should contain the class self)"
 	aMetamodel ifNil: [ ^ OrderedCollection new ].
 	^ (self allDeclaredPropertiesIn: aMetamodel)
-		select: [ :e | e hasOpposite and: [ e opposite isSource or: [ e opposite isTarget ] ] ]
+		select: [ :e | e hasOpposite and:
+			[ (e opposite isSource or: [ e opposite isTarget ]) or:
+				[ e isDependencySource or: [ e opposite isDependencySource ] ] ]
+		]
 ]
 
 { #category : #accessing }

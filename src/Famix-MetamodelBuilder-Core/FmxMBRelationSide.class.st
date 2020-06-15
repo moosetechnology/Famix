@@ -1,3 +1,6 @@
+"
+Represents a property referencing another entity
+"
 Class {
 	#name : #FmxMBRelationSide,
 	#superclass : #FmxMBProperty,
@@ -12,7 +15,8 @@ Class {
 		'derived',
 		'source',
 		'target',
-		'generationStrategy'
+		'generationStrategy',
+		'dependencySource'
 	],
 	#category : #'Famix-MetamodelBuilder-Core-Implementation'
 }
@@ -62,6 +66,16 @@ FmxMBRelationSide >> container [
 { #category : #accessing }
 FmxMBRelationSide >> container: anObject [
 	container := anObject
+]
+
+{ #category : #properties }
+FmxMBRelationSide >> dependencySource [
+	self dependencySource: true.
+]
+
+{ #category : #properties }
+FmxMBRelationSide >> dependencySource: aBoolean [
+	dependencySource := aBoolean
 ]
 
 { #category : #properties }
@@ -118,6 +132,7 @@ FmxMBRelationSide >> initialize [
 	derived := false.
 	target := false.
 	source := false.
+	dependencySource := false.
 
 	self makeStandard
 ]
@@ -126,6 +141,12 @@ FmxMBRelationSide >> initialize [
 FmxMBRelationSide >> isContainer [
 
 	^ container
+]
+
+{ #category : #properties }
+FmxMBRelationSide >> isDependencySource [
+
+	^ dependencySource
 ]
 
 { #category : #properties }
@@ -308,8 +329,8 @@ FmxMBRelationSide >> source [
 ]
 
 { #category : #properties }
-FmxMBRelationSide >> source: anObject [
-	source := anObject
+FmxMBRelationSide >> source: aBoolean [
+	source := aBoolean
 ]
 
 { #category : #properties }
