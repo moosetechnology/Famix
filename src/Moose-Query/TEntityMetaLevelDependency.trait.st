@@ -201,15 +201,19 @@ TEntityMetaLevelDependency classSide >> privateParentTypesIn: aMetamodel [
 
 { #category : #private }
 TEntityMetaLevelDependency >> addAllChildrenIn: aCollection [
-	aCollection addAll: self children.
-	self children do: [ :each | each addAllChildrenIn: aCollection ].
+	self children
+		do: [ :each | 
+			aCollection add: each.
+			each addAllChildrenIn: aCollection ].
 	^ aCollection
 ]
 
 { #category : #private }
 TEntityMetaLevelDependency >> addAllParentsIn: aCollection [
-	aCollection addAll: self parents.
-	self parents do: [ :each | each addAllParentsIn: aCollection ].
+	self parents
+		do: [ :each | 
+			aCollection add: each.
+			each addAllParentsIn: aCollection ].
 	^ aCollection
 ]
 
