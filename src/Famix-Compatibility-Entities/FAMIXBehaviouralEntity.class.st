@@ -25,7 +25,6 @@ FAMIXBehaviouralEntity >> clientBehaviours [
 { #category : #'Famix-Extensions' }
 FAMIXBehaviouralEntity >> cyclomaticComplexity [
 	<FMProperty: #cyclomaticComplexity type: #Number>
-	<derived>
 	<FMComment: 'The number of linear-independent paths through a method.'>
 	^ self
 		lookUpPropertyNamed: #cyclomaticComplexity
