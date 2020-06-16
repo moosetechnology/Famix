@@ -576,6 +576,15 @@ TEntityMetaLevelDependency >> incomingMSEProperties [
 	^ self class incomingMSEPropertiesIn: self metamodel
 ]
 
+{ #category : #testing }
+TEntityMetaLevelDependency >> isIncludedIn: anEntity [
+	self = anEntity ifTrue: [ ^ true ].
+
+	self parentsDo: [ :parent | (parent isIncludedIn: anEntity) ifTrue: [ ^ true ] ].
+
+	^ false
+]
+
 { #category : #accessing }
 TEntityMetaLevelDependency >> numberOfChildren [
 	<FMProperty: #numberOfChildren type: #Number>
