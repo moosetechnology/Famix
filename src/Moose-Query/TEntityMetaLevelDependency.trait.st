@@ -673,16 +673,20 @@ TEntityMetaLevelDependency >> toScope: aClassFAMIX until: rejectBlock [
 
 { #category : #accessing }
 TEntityMetaLevelDependency >> withAllChildren [
-	"I return a collection including me and all my children in the containement tree."
+	"I return a collection including me and all my children in the containement DAG."
 
-	^ (self allChildren , {self}) asArray
+	^ self allChildren
+		add: self;
+		yourself
 ]
 
 { #category : #accessing }
 TEntityMetaLevelDependency >> withAllParents [
-	"I return a collection including me and all my parents in the containement tree."
+	"I return a collection including me and all my parents in the containement DAG."
 
-	^ (self allParents , {self}) asArray
+	^ self allParents
+		add: self;
+		yourself
 ]
 
 { #category : #scoping }
