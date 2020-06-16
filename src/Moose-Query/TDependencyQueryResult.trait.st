@@ -156,5 +156,5 @@ TDependencyQueryResult >> within: aFamixEntity [
 TDependencyQueryResult >> withoutSelfLoops [
 	"exclude dependencies which loop back to the receiver"
 
-	^ self reject: [ :dep | (self opposite: dep) asCollection anySatisfy: [ :opp | opp withAllParents includes: self receiver ] ]
+	^ self reject: [ :dep | (self opposite: dep) asCollection anySatisfy: [ :opp | opp isIncludedIn: self receiver ] ]
 ]

@@ -90,5 +90,5 @@ MooseObjectQueryResult >> within: aFAMIXEntity [
 MooseObjectQueryResult >> withoutSelfLoops [
 	"exclude objects that match the receiver (modulo the scope)"
 
-	^ self reject: [ :obj | obj withAllParents includes: self receiver ]
+	^ self reject: [ :obj | obj isIncludedIn: self receiver ]
 ]
