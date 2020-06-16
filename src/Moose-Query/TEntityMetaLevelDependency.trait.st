@@ -210,8 +210,8 @@ TEntityMetaLevelDependency >> addAllChildrenIn: aCollection [
 
 { #category : #private }
 TEntityMetaLevelDependency >> addAllParentsIn: aCollection [
-	self parents
-		do: [ :each | 
+	self
+		parentsDo: [ :each | 
 			aCollection add: each.
 			each addAllParentsIn: aCollection ].
 	^ aCollection
@@ -609,8 +609,13 @@ TEntityMetaLevelDependency >> parentTypes [
 TEntityMetaLevelDependency >> parents [
 	| res |
 	res := Set new.
-	self parentSelectors do: [ :accessor | (self perform: accessor) ifNotNil: [ :r | res addAll: r asCollection ] ].
+	self parentsDo: [ :parent | res add: parent ].
 	^ res
+]
+
+{ #category : #accessing }
+TEntityMetaLevelDependency >> parentsDo: aBlock [
+	self parentSelectors do: [ :accessor | (self perform: accessor) ifNotNil: [ :r | aBlock value: r ] ]
 ]
 
 { #category : #scoping }
