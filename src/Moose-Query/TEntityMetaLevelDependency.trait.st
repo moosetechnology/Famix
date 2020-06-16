@@ -201,15 +201,19 @@ TEntityMetaLevelDependency classSide >> privateParentTypesIn: aMetamodel [
 
 { #category : #private }
 TEntityMetaLevelDependency >> addAllChildrenIn: aCollection [
-	aCollection addAll: self children.
-	self children do: [ :each | each addAllChildrenIn: aCollection ].
+	self children
+		do: [ :each | 
+			aCollection add: each.
+			each addAllChildrenIn: aCollection ].
 	^ aCollection
 ]
 
 { #category : #private }
 TEntityMetaLevelDependency >> addAllParentsIn: aCollection [
-	aCollection addAll: self parents.
-	self parents do: [ :each | each addAllParentsIn: aCollection ].
+	self
+		parentsDo: [ :each | 
+			aCollection add: each.
+			each addAllParentsIn: aCollection ].
 	^ aCollection
 ]
 
@@ -605,8 +609,13 @@ TEntityMetaLevelDependency >> parentTypes [
 TEntityMetaLevelDependency >> parents [
 	| res |
 	res := Set new.
-	self parentSelectors do: [ :accessor | (self perform: accessor) ifNotNil: [ :r | res addAll: r asCollection ] ].
+	self parentsDo: [ :parent | res add: parent ].
 	^ res
+]
+
+{ #category : #accessing }
+TEntityMetaLevelDependency >> parentsDo: aBlock [
+	self parentSelectors do: [ :accessor | (self perform: accessor) ifNotNil: [ :r | aBlock value: r ] ]
 ]
 
 { #category : #scoping }
@@ -673,16 +682,20 @@ TEntityMetaLevelDependency >> toScope: aClassFAMIX until: rejectBlock [
 
 { #category : #accessing }
 TEntityMetaLevelDependency >> withAllChildren [
-	"I return a collection including me and all my children in the containement tree."
+	"I return a collection including me and all my children in the containement DAG."
 
-	^ (self allChildren , {self}) asArray
+	^ self allChildren
+		add: self;
+		yourself
 ]
 
 { #category : #accessing }
 TEntityMetaLevelDependency >> withAllParents [
-	"I return a collection including me and all my parents in the containement tree."
+	"I return a collection including me and all my parents in the containement DAG."
 
-	^ (self allParents , {self}) asArray
+	^ self allParents
+		add: self;
+		yourself
 ]
 
 { #category : #scoping }
