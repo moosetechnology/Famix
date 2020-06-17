@@ -375,16 +375,12 @@ TEntityMetaLevelDependency >> allToScope: aClassFAMIX [
 
 { #category : #private }
 TEntityMetaLevelDependency >> allToScope: aClassFAMIX in: aCollection [
-	^ self allToScope: aClassFAMIX in: aCollection until: [ :a | false ]
-]
-
-{ #category : #private }
-TEntityMetaLevelDependency >> allToScope: aClassFAMIX in: aCollection until: rejectBlock [
 	| selectors |
 	(self isOfType: aClassFAMIX) ifTrue: [ aCollection add: self ].
 
 	"The content of this block could be much more readable with #do: but we do this solution for performances... We need this method to be really really performant."
-	(rejectBlock value: self) ifFalse: [ 1 to: (selectors := self childrenSelectors) size do: [ :ind | (self perform: (selectors at: ind)) allToScope: aClassFAMIX in: aCollection until: rejectBlock ] ].
+	(MooseQueryCurrentContext shouldStopOn: self)
+		ifFalse: [ 1 to: (selectors := self childrenSelectors) size do: [ :ind | (self perform: (selectors at: ind)) allToScope: aClassFAMIX in: aCollection ] ].
 
 	^ aCollection
 ]
@@ -395,9 +391,7 @@ TEntityMetaLevelDependency >> allToScope: aClassFAMIX until: rejectBlock [
 	I stop the recursion when the rejectBlock is true"
 
 	self flag: #todo.	"I think we do not need the #asArray cast but it will break tests. I will probably let it now then change the tests later. Step by step."
-	^ MooseQueryCurrentContext
-		value: (MooseQueryContext until: rejectBlock)
-		during: [ (self allToScope: aClassFAMIX in: OrderedCollection new until: rejectBlock) asSet asArray ]
+	^ MooseQueryCurrentContext value: (MooseQueryContext until: rejectBlock) during: [ (self allToScope: aClassFAMIX in: OrderedCollection new) asSet asArray ]
 ]
 
 { #category : #scoping }
@@ -450,14 +444,14 @@ TEntityMetaLevelDependency >> allWithScope: aClassFAMIX in: aCollection [
 
 { #category : #private }
 TEntityMetaLevelDependency >> allWithScope: aClassFAMIX in: aCollection until: rejectBlock [
-	(self class traits includes: aClassFAMIX) ifTrue: [ self allToScope: aClassFAMIX in: aCollection until: rejectBlock ].
+	(self class traits includes: aClassFAMIX) ifTrue: [ self allToScope: aClassFAMIX in: aCollection ].
 
 	self allParentTypes
 		detect: [ :class | aClassFAMIX = class ]
 		ifFound: [ self allAtScope: aClassFAMIX in: aCollection ].
 	self allChildrenTypes
 		detect: [ :class | aClassFAMIX = class ]
-		ifFound: [ self allToScope: aClassFAMIX in: aCollection until: rejectBlock ].
+		ifFound: [ self allToScope: aClassFAMIX in: aCollection ].
 	^ aCollection
 ]
 
