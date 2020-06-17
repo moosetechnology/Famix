@@ -432,20 +432,7 @@ TEntityMetaLevelDependency >> allWithAnyScope: aCollectionOfFamixClasses until: 
 TEntityMetaLevelDependency >> allWithScope: aClassFAMIX [
 	"I am used to return all the entities at a given famix class scope that are up or down in the containment tree of the metamodel on multiple levels."
 
-	^ MooseQueryCurrentContext value: (MooseQueryContext scope: aClassFAMIX) during: [ (self allWithScope: aClassFAMIX in: OrderedCollection new) asSet ]
-]
-
-{ #category : #private }
-TEntityMetaLevelDependency >> allWithScope: aClassFAMIX in: aCollection [
-	(self class traits includes: aClassFAMIX) ifTrue: [ self allToScopeIn: aCollection ].
-
-	self allParentTypes
-		detect: [ :class | aClassFAMIX = class ]
-		ifFound: [ self allAtScopeIn: aCollection ].
-	self allChildrenTypes
-		detect: [ :class | aClassFAMIX = class ]
-		ifFound: [ self allToScopeIn: aCollection ].
-	^ aCollection
+	^ MooseQueryCurrentContext value: (MooseQueryContext scope: aClassFAMIX) during: [ (self allWithScopeIn: OrderedCollection new) asSet ]
 ]
 
 { #category : #scoping }
@@ -455,7 +442,14 @@ TEntityMetaLevelDependency >> allWithScope: aClassFAMIX until: rejectBlock [
 
 	^ MooseQueryCurrentContext
 		value: (MooseQueryContext scope: aClassFAMIX until: rejectBlock)
-		during: [ (self allWithScope: aClassFAMIX in: OrderedCollection new) asSet ]
+		during: [ (self allWithScopeIn: OrderedCollection new) asSet ]
+]
+
+{ #category : #private }
+TEntityMetaLevelDependency >> allWithScopeIn: aCollection [
+	self allAtScopeIn: aCollection.
+	self allToScopeIn: aCollection.
+	^ aCollection
 ]
 
 { #category : #scoping }
