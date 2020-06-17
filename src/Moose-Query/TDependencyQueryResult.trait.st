@@ -48,7 +48,13 @@ TDependencyQueryResult >> allToScope: aClassFamix [
 
 { #category : #filtering }
 TDependencyQueryResult >> allWithAnyScope: aCollectionOfFamixClasses [
-	^ self newObjectResultWith: (self storage inject: OrderedCollection new into: [ :res :dep | (self opposite: dep) allWithAnyScope: aCollectionOfFamixClasses in: res ]) asSet
+	^ self
+		newObjectResultWith:
+			(self storage
+				inject: OrderedCollection new
+				into:
+					[ :res :dep | MooseQueryCurrentContext value: (MooseQueryContext scopes: aCollectionOfFamixClasses) during: [ ((self opposite: dep) allWithAnyScopeIn: res) asSet ] ])
+				asSet
 ]
 
 { #category : #filtering }

@@ -396,23 +396,7 @@ TEntityMetaLevelDependency >> allToScopeIn: aCollection [
 TEntityMetaLevelDependency >> allWithAnyScope: aCollectionOfFamixClasses [
 	"I am used to return all the entities (recursively) matching one of the class scope that are up or down in the containment tree of the metamodel"
 
-	^ MooseQueryCurrentContext
-		value: (MooseQueryContext scopes: aCollectionOfFamixClasses)
-		during: [ (self allWithAnyScope: aCollectionOfFamixClasses in: OrderedCollection new) asSet ]
-]
-
-{ #category : #private }
-TEntityMetaLevelDependency >> allWithAnyScope: aCollectionOfFamixClasses in: aCollection [
-	(aCollectionOfFamixClasses anySatisfy: [ :aFAMIXClass | self class traits includes: aFAMIXClass ])
-		ifTrue: [ self allToAnyScopeIn: aCollection ].
-
-	self allParentTypes
-		detect: [ :class | aCollectionOfFamixClasses anySatisfy: [ :aFAMIXClass | aFAMIXClass = class ] ]
-		ifFound: [ self allAtAnyScopeIn: aCollection ].
-	self allChildrenTypes
-		detect: [ :class | aCollectionOfFamixClasses anySatisfy: [ :aFAMIXClass | aFAMIXClass = class ] ]
-		ifFound: [ self allToAnyScopeIn: aCollection ].
-	^ aCollection
+	^ MooseQueryCurrentContext value: (MooseQueryContext scopes: aCollectionOfFamixClasses) during: [ (self allWithAnyScopeIn: OrderedCollection new) asSet ]
 ]
 
 { #category : #scoping }
@@ -422,7 +406,14 @@ TEntityMetaLevelDependency >> allWithAnyScope: aCollectionOfFamixClasses until: 
 
 	^ MooseQueryCurrentContext
 		value: (MooseQueryContext scopes: aCollectionOfFamixClasses until: rejectBlock)
-		during: [ (self allWithAnyScope: aCollectionOfFamixClasses in: OrderedCollection new) asSet ]
+		during: [ (self allWithAnyScopeIn: OrderedCollection new) asSet ]
+]
+
+{ #category : #private }
+TEntityMetaLevelDependency >> allWithAnyScopeIn: aCollection [
+	self allAtAnyScopeIn: aCollection.
+	self allToAnyScopeIn: aCollection.
+	^ aCollection
 ]
 
 { #category : #scoping }
