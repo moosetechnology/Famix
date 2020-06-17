@@ -628,18 +628,6 @@ TEntityMetaLevelDependency >> toAnyScope: aCollectionOfFamixClasses [
 		during: [ (self toAnyScopeIn: OrderedCollection new) asSet asArray ]
 ]
 
-{ #category : #private }
-TEntityMetaLevelDependency >> toAnyScope: aCollectionOfFamixClasses in: aCollection [
-	(MooseQueryCurrentContext isOfRightType: self)
-		ifTrue: [ aCollection add: self ]
-		ifFalse:
-			[ "The content of this block could be much more readable with #do: but we do this solution for performances... We need this method to be really really performant."
-			| selectors |
-			(MooseQueryCurrentContext shouldStopOn: self)
-				ifFalse: [ 1 to: (selectors := self childrenSelectors) size do: [ :ind | (self perform: (selectors at: ind)) toAnyScopeIn: aCollection ] ] ].
-	^ aCollection
-]
-
 { #category : #scoping }
 TEntityMetaLevelDependency >> toAnyScope: aCollectionOfFamixClasses until: rejectBlock [
 	"I am used to return all the first encountered entities matching one of the class scope given as parameter that are down in the containment tree of the metamodel.
@@ -715,21 +703,7 @@ TEntityMetaLevelDependency >> withAnyScope: aCollectionOfFamixClasses [
 
 	^ MooseQueryCurrentContext
 		value: (MooseQueryContext scopes: aCollectionOfFamixClasses)
-		during: [ (self withAnyScope: aCollectionOfFamixClasses in: OrderedCollection new) asSet ]
-]
-
-{ #category : #private }
-TEntityMetaLevelDependency >> withAnyScope: aCollectionOfFamixClasses in: aCollection [
-	(aCollectionOfFamixClasses anySatisfy: [ :aFAMIXClass | (self class traits includes: aFAMIXClass) or: [ self class = aFAMIXClass ] ])
-		ifTrue: [ self atScopeIn: aCollection ].
-
-	self allParentTypes
-		detect: [ :class | aCollectionOfFamixClasses anySatisfy: [ :aFAMIXClass | aFAMIXClass = class ] ]
-		ifFound: [ self atAnyScopeIn: aCollection ].
-	self allChildrenTypes
-		detect: [ :class | aCollectionOfFamixClasses anySatisfy: [ :aFAMIXClass | aFAMIXClass = class ] ]
-		ifFound: [ self toAnyScopeIn: aCollection ].
-	^ aCollection
+		during: [ (self withAnyScopeIn: OrderedCollection new) asSet ]
 ]
 
 { #category : #scoping }
@@ -739,7 +713,14 @@ TEntityMetaLevelDependency >> withAnyScope: aCollectionOfFamixClasses until: rej
 
 	^ MooseQueryCurrentContext
 		value: (MooseQueryContext scopes: aCollectionOfFamixClasses until: rejectBlock)
-		during: [ (self withAnyScope: aCollectionOfFamixClasses in: OrderedCollection new) asSet ]
+		during: [ (self withAnyScopeIn: OrderedCollection new) asSet ]
+]
+
+{ #category : #private }
+TEntityMetaLevelDependency >> withAnyScopeIn: aCollection [
+	self atAnyScopeIn: aCollection.
+	self toAnyScopeIn: aCollection.
+	^ aCollection
 ]
 
 { #category : #scoping }
@@ -759,6 +740,7 @@ TEntityMetaLevelDependency >> withScope: aClassFAMIX until: rejectBlock [
 
 { #category : #private }
 TEntityMetaLevelDependency >> withScopeIn: aCollection [
+	self flag: #todo.	"Check perfs. Maybe checking in parents/children types before can speedup."
 	self atScopeIn: aCollection.
 	self toScopeIn: aCollection.
 	^ aCollection
