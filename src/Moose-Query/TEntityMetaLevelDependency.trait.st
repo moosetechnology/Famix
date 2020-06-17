@@ -661,19 +661,7 @@ TEntityMetaLevelDependency >> toScope: aClassFAMIX [
 	"I am used to return all the first encountered  entities at a given famix class scope that are down in the containment tree of the metamodel"
 
 	self flag: #todo.	"I think we do not need the #asArray cast but it will break tests. I will probably let it now then change the tests later. Step by step."
-	^ MooseQueryCurrentContext value: (MooseQueryContext scope: aClassFAMIX) during: [ (self toScope: aClassFAMIX in: OrderedCollection new) asSet asArray ]
-]
-
-{ #category : #private }
-TEntityMetaLevelDependency >> toScope: aClassFAMIX in: aCollection [
-	(self isOfType: aClassFAMIX)
-		ifTrue: [ aCollection add: self ]
-		ifFalse:
-			[ "The content of this block could be much more readable with #do: but we do this solution for performances... We need this method to be really really performant."
-			| selectors |
-			(MooseQueryCurrentContext shouldStopOn: self)
-				ifFalse: [ 1 to: (selectors := self childrenSelectors) size do: [ :ind | (self perform: (selectors at: ind)) toScope: aClassFAMIX in: aCollection ] ] ].
-	^ aCollection
+	^ MooseQueryCurrentContext value: (MooseQueryContext scope: aClassFAMIX) during: [ (self toScopeIn: OrderedCollection new) asSet asArray ]
 ]
 
 { #category : #scoping }
@@ -682,9 +670,19 @@ TEntityMetaLevelDependency >> toScope: aClassFAMIX until: rejectBlock [
 	I stop the recursion when the rejectBlock is true"
 
 	self flag: #todo.	"I think we do not need the #asArray cast but it will break tests. I will probably let it now then change the tests later. Step by step."
-	^ MooseQueryCurrentContext
-		value: (MooseQueryContext scope: aClassFAMIX until: rejectBlock)
-		during: [ (self toScope: aClassFAMIX in: OrderedCollection new) asSet asArray ]
+	^ MooseQueryCurrentContext value: (MooseQueryContext scope: aClassFAMIX until: rejectBlock) during: [ (self toScopeIn: OrderedCollection new) asSet asArray ]
+]
+
+{ #category : #private }
+TEntityMetaLevelDependency >> toScopeIn: aCollection [
+	(MooseQueryCurrentContext isOfRightType: self)
+		ifTrue: [ aCollection add: self ]
+		ifFalse:
+			[ "The content of this block could be much more readable with #do: but we do this solution for performances... We need this method to be really really performant."
+			| selectors |
+			(MooseQueryCurrentContext shouldStopOn: self)
+				ifFalse: [ 1 to: (selectors := self childrenSelectors) size do: [ :ind | (self perform: (selectors at: ind)) toScopeIn: aCollection ] ] ].
+	^ aCollection
 ]
 
 { #category : #accessing }
@@ -748,7 +746,7 @@ TEntityMetaLevelDependency >> withScope: aClassFAMIX [
 { #category : #private }
 TEntityMetaLevelDependency >> withScope: aClassFAMIX in: aCollection [
 	self atScopeIn: aCollection.
-	self toScope: aClassFAMIX in: aCollection.
+	self toScopeIn: aCollection.
 	^ aCollection
 ]
 
