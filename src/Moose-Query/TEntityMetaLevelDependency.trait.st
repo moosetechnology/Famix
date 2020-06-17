@@ -581,10 +581,15 @@ TEntityMetaLevelDependency >> incomingMSEProperties [
 ]
 
 { #category : #testing }
-TEntityMetaLevelDependency >> isIncludedIn: anEntity [
+TEntityMetaLevelDependency >> isIncludedIn: anEntity parentSelectorsCache: parentSelectorsCache [
+	"We use a cache for the parents selector for performances reasons. It might be really long to perform the #withoutSelfLoops thus we need to speed it up a maximum.
+	
+	[ (model allUsing: TEntityMetaLevelDependency) collect: [ :e | e  queryIncomingDependencies withoutSelfLoops ] ] timeToRun."
+
 	self = anEntity ifTrue: [ ^ true ].
 
-	self parentsDo: [ :parent | (parent isIncludedIn: anEntity) ifTrue: [ ^ true ] ].
+	(parentSelectorsCache at: self class ifAbsentPut: [ self parentSelectors ])
+		do: [ :accessor | (self perform: accessor) ifNotNil: [ :parent | (parent isIncludedIn: anEntity parentSelectorsCache: parentSelectorsCache) ifTrue: [ ^ true ] ] ].
 
 	^ false
 ]
