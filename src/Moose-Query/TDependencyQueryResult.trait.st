@@ -14,7 +14,7 @@ TDependencyQueryResult >> allAtAnyScope: aCollectionOfFamixClasses [
 		newObjectResultWith:
 			(self storage
 				inject: OrderedCollection new
-				into: [ :res :dep | MooseQueryCurrentContext value: (MooseQueryContext scopes: aCollectionOfFamixClasses) during: [ (self opposite: dep) allAtAnyScopeIn: res ] ])
+				into: [ :res :dep | MooseQueryCurrentContext value: (MooseQueryContext scopes: aCollectionOfFamixClasses) during: [ (self opposite: dep) allAtScopeIn: res ] ])
 				asSet
 ]
 
