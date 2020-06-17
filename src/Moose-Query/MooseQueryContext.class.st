@@ -2,7 +2,8 @@ Class {
 	#name : #MooseQueryContext,
 	#superclass : #Object,
 	#instVars : [
-		'until'
+		'until',
+		'scopes'
 	],
 	#classVars : [
 		'Default'
@@ -27,10 +28,46 @@ MooseQueryContext class >> resetDefault [
 ]
 
 { #category : #'instance creation' }
+MooseQueryContext class >> scope: aFamixType [
+	^ self scopes: {aFamixType}
+]
+
+{ #category : #'instance creation' }
+MooseQueryContext class >> scope: aFamixType until: aValuable [
+	^ self scopes: {aFamixType} until: aValuable
+]
+
+{ #category : #'instance creation' }
+MooseQueryContext class >> scopes: aCollectionOfType [
+	^ self new
+		scopes: aCollectionOfType;
+		yourself
+]
+
+{ #category : #'instance creation' }
+MooseQueryContext class >> scopes: aCollectionOfType until: aValuable [
+	^ self new
+		scopes: aCollectionOfType;
+		until: aValuable;
+		yourself
+]
+
+{ #category : #'instance creation' }
 MooseQueryContext class >> until: aValuable [
+	1halt.
 	^ self new
 		until: aValuable;
 		yourself
+]
+
+{ #category : #accessing }
+MooseQueryContext >> scopes [
+	^ scopes
+]
+
+{ #category : #accessing }
+MooseQueryContext >> scopes: anObject [
+	scopes := anObject
 ]
 
 { #category : #asserting }
