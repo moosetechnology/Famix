@@ -585,6 +585,16 @@ TEntityMetaLevelDependency >> isIncludedIn: anEntity [
 	^ false
 ]
 
+{ #category : #testing }
+TEntityMetaLevelDependency >> isIncludedIn: anEntity parentSelectorsCache: parentSelectorsCache [
+	self = anEntity ifTrue: [ ^ true ].
+
+	(parentSelectorsCache at: self class ifAbsentPut: [ self parentSelectors ])
+		do: [ :accessor | (self perform: accessor) ifNotNil: [ :parent | (parent isIncludedIn: anEntity parentSelectorsCache: parentSelectorsCache) ifTrue: [ ^ true ] ] ].
+
+	^ false
+]
+
 { #category : #accessing }
 TEntityMetaLevelDependency >> numberOfChildren [
 	<FMProperty: #numberOfChildren type: #Number>
