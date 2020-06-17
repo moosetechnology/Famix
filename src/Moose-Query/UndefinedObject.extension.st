@@ -6,7 +6,7 @@ UndefinedObject >> allAtAnyScope: aCollectionOfFamixClasses in: aCollection [
 ]
 
 { #category : #'*Moose-Query' }
-UndefinedObject >> allAtScope: aFAMIXScope in: aCollection [
+UndefinedObject >> allAtScopeIn: aCollection [
 	^ aCollection
 ]
 

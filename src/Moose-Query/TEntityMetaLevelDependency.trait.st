@@ -254,19 +254,7 @@ TEntityMetaLevelDependency >> allAtScope: aClassFAMIX [
 	"I am used to return all the entities at a given famix class scope that are up in the containment tree of the metamodel on multiple levels."
 
 	self flag: #todo.	"I think we do not need the #asArray cast but it will break tests. I will probably let it now then change the tests later. Step by step."
-	^ MooseQueryCurrentContext value: (MooseQueryContext scope: aClassFAMIX) during: [ (self allAtScope: aClassFAMIX in: OrderedCollection new) asSet asArray ]
-]
-
-{ #category : #private }
-TEntityMetaLevelDependency >> allAtScope: aClassFAMIX in: aCollection [
-	| selectors |
-	(self isOfType: aClassFAMIX) ifTrue: [ aCollection add: self ].
-
-	"The content of this block could be much more readable with #do: but we do this solution for performances... We need this method to be really really performant."
-	(MooseQueryCurrentContext shouldStopOn: self)
-		ifFalse: [ 1 to: (selectors := self parentSelectors) size do: [ :ind | (self perform: (selectors at: ind)) allAtScope: aClassFAMIX in: aCollection ] ].
-
-	^ aCollection
+	^ MooseQueryCurrentContext value: (MooseQueryContext scope: aClassFAMIX) during: [ (self allAtScopeIn: OrderedCollection new) asSet asArray ]
 ]
 
 { #category : #scoping }
@@ -276,7 +264,19 @@ TEntityMetaLevelDependency >> allAtScope: aClassFAMIX until: rejectBlock [
 
 	^ MooseQueryCurrentContext
 		value: (MooseQueryContext scope: aClassFAMIX until: rejectBlock)
-		during: [ (self allAtScope: aClassFAMIX in: OrderedCollection new) asSet asArray ]
+		during: [ (self allAtScopeIn: OrderedCollection new) asSet asArray ]
+]
+
+{ #category : #private }
+TEntityMetaLevelDependency >> allAtScopeIn: aCollection [
+	| selectors |
+	(MooseQueryCurrentContext isOfRightType: self) ifTrue: [ aCollection add: self ].
+
+	"The content of this block could be much more readable with #do: but we do this solution for performances... We need this method to be really really performant."
+	(MooseQueryCurrentContext shouldStopOn: self)
+		ifFalse: [ 1 to: (selectors := self parentSelectors) size do: [ :ind | (self perform: (selectors at: ind)) allAtScopeIn: aCollection ] ].
+
+	^ aCollection
 ]
 
 { #category : #accessing }
@@ -441,7 +441,7 @@ TEntityMetaLevelDependency >> allWithScope: aClassFAMIX in: aCollection [
 
 	self allParentTypes
 		detect: [ :class | aClassFAMIX = class ]
-		ifFound: [ self allAtScope: aClassFAMIX in: aCollection ].
+		ifFound: [ self allAtScopeIn: aCollection ].
 	self allChildrenTypes
 		detect: [ :class | aClassFAMIX = class ]
 		ifFound: [ self allToScope: aClassFAMIX in: aCollection ].

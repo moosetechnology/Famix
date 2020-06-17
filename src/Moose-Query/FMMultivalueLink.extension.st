@@ -1,8 +1,8 @@
 Extension { #name : #FMMultivalueLink }
 
 { #category : #'*Moose-Query' }
-FMMultivalueLink >> allAtScope: aFAMIXClass in: aCollection [
-	^ values allAtScope: aFAMIXClass in: aCollection
+FMMultivalueLink >> allAtScopeIn: aCollection [
+	^ values allAtScopeIn: aCollection
 ]
 
 { #category : #'*Moose-Query' }
