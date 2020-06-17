@@ -26,7 +26,7 @@ UndefinedObject >> allWithScopeIn: aCollection [
 ]
 
 { #category : #'*Moose-Query' }
-UndefinedObject >> atAnyScope: aCollectionOfFamixScope in: aCollection [
+UndefinedObject >> atAnyScopeIn: aCollection [
 	^ aCollection
 ]
 
