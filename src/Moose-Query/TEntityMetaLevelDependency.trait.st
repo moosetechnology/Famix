@@ -590,7 +590,7 @@ TEntityMetaLevelDependency >> toAnyScope: aCollectionOfFamixClasses [
 
 	^ MooseQueryCurrentContext
 		value: (MooseQueryContext scopes: aCollectionOfFamixClasses)
-		during: [ (self toAnyScopeIn: OrderedCollection new) asSet asArray ]
+		during: [ (self toScopeIn: OrderedCollection new) asSet asArray ]
 ]
 
 { #category : #scoping }
@@ -600,19 +600,7 @@ TEntityMetaLevelDependency >> toAnyScope: aCollectionOfFamixClasses until: rejec
 
 	^ MooseQueryCurrentContext
 		value: (MooseQueryContext scopes: aCollectionOfFamixClasses until: rejectBlock)
-		during: [ (self toAnyScopeIn: OrderedCollection new) asSet asArray ]
-]
-
-{ #category : #private }
-TEntityMetaLevelDependency >> toAnyScopeIn: aCollection [
-	(MooseQueryCurrentContext isOfRightType: self)
-		ifTrue: [ aCollection add: self ]
-		ifFalse:
-			[ "The content of this block could be much more readable with #do: but we do this solution for performances... We need this method to be really really performant."
-			| selectors |
-			(MooseQueryCurrentContext shouldStopOn: self)
-				ifFalse: [ 1 to: (selectors := self childrenSelectors) size do: [ :ind | (self perform: (selectors at: ind)) toAnyScopeIn: aCollection ] ] ].
-	^ aCollection
+		during: [ (self toScopeIn: OrderedCollection new) asSet asArray ]
 ]
 
 { #category : #scoping }
@@ -684,7 +672,7 @@ TEntityMetaLevelDependency >> withAnyScope: aCollectionOfFamixClasses until: rej
 { #category : #private }
 TEntityMetaLevelDependency >> withAnyScopeIn: aCollection [
 	self atScopeIn: aCollection.
-	self toAnyScopeIn: aCollection.
+	self toScopeIn: aCollection.
 	^ aCollection
 ]
 
