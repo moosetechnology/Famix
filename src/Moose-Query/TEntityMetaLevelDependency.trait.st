@@ -156,7 +156,7 @@ TEntityMetaLevelDependency classSide >> privateChildrenTypesIn: aMetamodel [
 	| childrenImplementingClasses childrenUsers |
 	childrenImplementingClasses := ((self allDeclaredPropertiesIn: aMetamodel) select: #isChildrenProperty) collect: #implementingType.
 
-	childrenUsers := aMetamodel concreteImplementingClasses select: [ :e | e allGeneratedTraits includesAny: childrenImplementingClasses ].
+	childrenUsers := (aMetamodel concreteImplementingClasses select: [ :e | e allGeneratedTraits includesAny: childrenImplementingClasses ]) flatCollect: #withAllSubclasses.
 
 	^ (childrenImplementingClasses , childrenUsers) asSet asArray	"<== This could later be #removeDuplicates but it is currently broken on arrays. See https://github.com/pharo-project/pharo/issues/4850"
 ]
@@ -194,7 +194,7 @@ TEntityMetaLevelDependency classSide >> privateParentTypesIn: aMetamodel [
 	| containerImplementingClasses containerUsers |
 	containerImplementingClasses := (self allDeclaredPropertiesIn: aMetamodel) select: #isContainer thenCollect: #implementingType.
 
-	containerUsers := aMetamodel concreteImplementingClasses select: [ :e | e allGeneratedTraits includesAny: containerImplementingClasses ].
+	containerUsers := (aMetamodel concreteImplementingClasses select: [ :e | e allGeneratedTraits includesAny: containerImplementingClasses ]) flatCollect: #withAllSubclasses.
 
 	^ (containerImplementingClasses , containerUsers) asSet asArray	"<== This could later be #removeDuplicates but it is currently broken on arrays. See https://github.com/pharo-project/pharo/issues/4850"
 ]
@@ -411,13 +411,14 @@ TEntityMetaLevelDependency >> allWithAnyScope: aCollectionOfFamixClasses in: aCo
 
 { #category : #private }
 TEntityMetaLevelDependency >> allWithAnyScope: aCollectionOfFamixClasses in: aCollection until: rejectBlock [
-	(aCollectionOfFamixClasses anySatisfy: [ :aFAMIXClass | self class traits includes: aFAMIXClass ]) ifTrue: [ self allToAnyScope: aCollectionOfFamixClasses in: aCollection until: rejectBlock ].
+	(aCollectionOfFamixClasses anySatisfy: [ :aFAMIXClass | self class traits includes: aFAMIXClass ])
+		ifTrue: [ self allToAnyScope: aCollectionOfFamixClasses in: aCollection until: rejectBlock ].
 
 	self allParentTypes
-		detect: [ :class | aCollectionOfFamixClasses anySatisfy: [ :aFAMIXClass | aFAMIXClass = class or: [ aFAMIXClass inheritsFrom: class ] ] ]
+		detect: [ :class | aCollectionOfFamixClasses anySatisfy: [ :aFAMIXClass | aFAMIXClass = class ] ]
 		ifFound: [ self allAtAnyScope: aCollectionOfFamixClasses in: aCollection until: rejectBlock ].
 	self allChildrenTypes
-		detect: [ :class | aCollectionOfFamixClasses anySatisfy: [ :aFAMIXClass | aFAMIXClass = class or: [ aFAMIXClass inheritsFrom: class ] ] ]
+		detect: [ :class | aCollectionOfFamixClasses anySatisfy: [ :aFAMIXClass | aFAMIXClass = class ] ]
 		ifFound: [ self allToAnyScope: aCollectionOfFamixClasses in: aCollection until: rejectBlock ].
 	^ aCollection
 ]
@@ -447,8 +448,8 @@ TEntityMetaLevelDependency >> allWithScope: aClassFAMIX in: aCollection until: r
 
 	(self class traits includes: aClassFAMIX) ifTrue: [ self allToScope: aClassFAMIX in: aCollection until: rejectBlock ].
 
-	self allParentTypes detect: [ :class | aClassFAMIX = class or: [ aClassFAMIX inheritsFrom: class ] ] ifFound: [ self allAtScope: aClassFAMIX in: aCollection until: rejectBlock ].
-	self allChildrenTypes detect: [ :class | aClassFAMIX = class or: [ aClassFAMIX inheritsFrom: class ] ] ifFound: [ self allToScope: aClassFAMIX in: aCollection until: rejectBlock ].
+	self allParentTypes detect: [ :class | aClassFAMIX = class ] ifFound: [ self allAtScope: aClassFAMIX in: aCollection until: rejectBlock ].
+	self allChildrenTypes detect: [ :class | aClassFAMIX = class ] ifFound: [ self allToScope: aClassFAMIX in: aCollection until: rejectBlock ].
 	^ aCollection
 ]
 
@@ -725,10 +726,10 @@ TEntityMetaLevelDependency >> withAnyScope: aCollectionOfFamixClasses in: aColle
 		ifTrue: [ self atScope: aCollectionOfFamixClasses in: aCollection until: rejectBlock ].
 
 	self allParentTypes
-		detect: [ :class | aCollectionOfFamixClasses anySatisfy: [ :aFAMIXClass | aFAMIXClass = class or: [ aFAMIXClass mooseInheritsFrom: class ] ] ]
+		detect: [ :class | aCollectionOfFamixClasses anySatisfy: [ :aFAMIXClass | aFAMIXClass = class ] ]
 		ifFound: [ self atAnyScope: aCollectionOfFamixClasses in: aCollection until: rejectBlock ].
 	self allChildrenTypes
-		detect: [ :class | aCollectionOfFamixClasses anySatisfy: [ :aFAMIXClass | aFAMIXClass = class or: [ aFAMIXClass mooseInheritsFrom: class ] ] ]
+		detect: [ :class | aCollectionOfFamixClasses anySatisfy: [ :aFAMIXClass | aFAMIXClass = class ] ]
 		ifFound: [ self toAnyScope: aCollectionOfFamixClasses in: aCollection until: rejectBlock ].
 	^ aCollection
 ]
