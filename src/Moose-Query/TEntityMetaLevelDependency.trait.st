@@ -374,7 +374,7 @@ TEntityMetaLevelDependency >> allToScopeIn: aCollection [
 TEntityMetaLevelDependency >> allWithAnyScope: aCollectionOfFamixClasses [
 	"I am used to return all the entities (recursively) matching one of the class scope that are up or down in the containment tree of the metamodel"
 
-	^ MooseQueryCurrentContext value: (MooseQueryContext scopes: aCollectionOfFamixClasses) during: [ (self allWithAnyScopeIn: OrderedCollection new) asSet ]
+	^ MooseQueryCurrentContext value: (MooseQueryContext scopes: aCollectionOfFamixClasses) during: [ (self allWithScopeIn: OrderedCollection new) asSet ]
 ]
 
 { #category : #scoping }
@@ -384,14 +384,7 @@ TEntityMetaLevelDependency >> allWithAnyScope: aCollectionOfFamixClasses until: 
 
 	^ MooseQueryCurrentContext
 		value: (MooseQueryContext scopes: aCollectionOfFamixClasses until: rejectBlock)
-		during: [ (self allWithAnyScopeIn: OrderedCollection new) asSet ]
-]
-
-{ #category : #private }
-TEntityMetaLevelDependency >> allWithAnyScopeIn: aCollection [
-	self allAtScopeIn: aCollection.
-	self allToScopeIn: aCollection.
-	^ aCollection
+		during: [ (self allWithScopeIn: OrderedCollection new) asSet ]
 ]
 
 { #category : #scoping }
