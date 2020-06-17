@@ -229,7 +229,7 @@ TEntityMetaLevelDependency >> allAtAnyScope: aCollectionOfFamixClasses [
 
 { #category : #private }
 TEntityMetaLevelDependency >> allAtAnyScope: aCollectionOfFamixClasses in: aCollection [
-	^ self allAtAnyScope: aCollectionOfFamixClasses in: aCollection until: self falseBlock 
+	^ self allAtAnyScope: aCollectionOfFamixClasses in: aCollection until: [ :a | false ]
 ]
 
 { #category : #private }
@@ -260,7 +260,7 @@ TEntityMetaLevelDependency >> allAtScope: aClassFAMIX [
 
 { #category : #private }
 TEntityMetaLevelDependency >> allAtScope: aClassFAMIX in: aCollection [
-	^ self allAtScope: aClassFAMIX in: aCollection until: self falseBlock 
+	^ self allAtScope: aClassFAMIX in: aCollection until: [ :a | false ]
 ]
 
 { #category : #private }
@@ -346,7 +346,7 @@ TEntityMetaLevelDependency >> allToAnyScope: aCollectionOfFamixClasses [
 
 { #category : #private }
 TEntityMetaLevelDependency >> allToAnyScope: aCollectionOfFamixClasses in: aCollection [
-	^ self allToAnyScope: aCollectionOfFamixClasses in: aCollection until: self falseBlock
+	^ self allToAnyScope: aCollectionOfFamixClasses in: aCollection until: [ :a | false ]
 ]
 
 { #category : #private }
@@ -377,7 +377,7 @@ TEntityMetaLevelDependency >> allToScope: aClassFAMIX [
 
 { #category : #private }
 TEntityMetaLevelDependency >> allToScope: aClassFAMIX in: aCollection [
-	^ self allToScope: aClassFAMIX in: aCollection until: self falseBlock 
+	^ self allToScope: aClassFAMIX in: aCollection until: [ :a | false ]
 ]
 
 { #category : #private }
@@ -409,7 +409,7 @@ TEntityMetaLevelDependency >> allWithAnyScope: aCollectionOfFamixClasses [
 
 { #category : #private }
 TEntityMetaLevelDependency >> allWithAnyScope: aCollectionOfFamixClasses in: aCollection [
-	^ self allWithAnyScope: aCollectionOfFamixClasses in: aCollection until: self falseBlock
+	^ self allWithAnyScope: aCollectionOfFamixClasses in: aCollection until: [ :a | false ]
 ]
 
 { #category : #private }
@@ -443,7 +443,7 @@ TEntityMetaLevelDependency >> allWithScope: aClassFAMIX [
 
 { #category : #private }
 TEntityMetaLevelDependency >> allWithScope: aClassFAMIX in: aCollection [
-	^ self allWithScope: aClassFAMIX in: aCollection until: self falseBlock 
+	^ self allWithScope: aClassFAMIX in: aCollection until: [ :a | false ]
 ]
 
 { #category : #private }
@@ -473,7 +473,7 @@ TEntityMetaLevelDependency >> atAnyScope: aCollectionOfFamixClasses [
 
 { #category : #private }
 TEntityMetaLevelDependency >> atAnyScope: aCollectionOfFamixScopes in: aCollection [
-	^ self atAnyScope: aCollectionOfFamixScopes in: aCollection until: self falseBlock 
+	^ self atAnyScope: aCollectionOfFamixScopes in: aCollection until: [ :a | false ]
 ]
 
 { #category : #private }
@@ -504,7 +504,7 @@ TEntityMetaLevelDependency >> atScope: aClassFAMIX [
 
 { #category : #private }
 TEntityMetaLevelDependency >> atScope: aClassFAMIX in: aCollection [
-	^ self atScope: aClassFAMIX in: aCollection until: self falseBlock 
+	^ self atScope: aClassFAMIX in: aCollection until: [ :a | false ]
 ]
 
 { #category : #private }
@@ -563,11 +563,6 @@ TEntityMetaLevelDependency >> childrenTypes [
 { #category : #accessing }
 TEntityMetaLevelDependency >> dependencyFM3PropertyDescription [
 	^ self class dependencyFM3PropertyDescriptionIn: self metamodel
-]
-
-{ #category : #private }
-TEntityMetaLevelDependency >> falseBlock [
-	^ [ :a | false ]
 ]
 
 { #category : #accessing }
@@ -645,7 +640,7 @@ TEntityMetaLevelDependency >> toAnyScope: aCollectionOfFamixClasses [
 
 { #category : #private }
 TEntityMetaLevelDependency >> toAnyScope: aCollectionOfFamixClasses in: aCollection [
-	^ self toAnyScope: aCollectionOfFamixClasses in: aCollection until: self falseBlock
+	^ self toAnyScope: aCollectionOfFamixClasses in: aCollection until: [ :a | false ]
 ]
 
 { #category : #private }
@@ -676,7 +671,7 @@ TEntityMetaLevelDependency >> toScope: aClassFAMIX [
 
 { #category : #private }
 TEntityMetaLevelDependency >> toScope: aClassFAMIX in: aCollection [
-	^ self toScope: aClassFAMIX in: aCollection until: self falseBlock 
+	^ self toScope: aClassFAMIX in: aCollection until: [ :a | false ]
 ]
 
 { #category : #private }
@@ -725,7 +720,7 @@ TEntityMetaLevelDependency >> withAnyScope: aCollectionOfFamixClasses [
 
 { #category : #private }
 TEntityMetaLevelDependency >> withAnyScope: aCollectionOfFamixClasses in: aCollection [
-	^ self withAnyScope: aCollectionOfFamixClasses in: aCollection until: self falseBlock 
+	^ self withAnyScope: aCollectionOfFamixClasses in: aCollection until: [ :a | false ]
 ]
 
 { #category : #private }
@@ -759,7 +754,7 @@ TEntityMetaLevelDependency >> withScope: aClassFAMIX [
 
 { #category : #private }
 TEntityMetaLevelDependency >> withScope: aClassFAMIX in: aCollection [
-	^ self withScope: aClassFAMIX in: aCollection until: self falseBlock 
+	^ self withScope: aClassFAMIX in: aCollection until: [ :a | false ]
 ]
 
 { #category : #private }
