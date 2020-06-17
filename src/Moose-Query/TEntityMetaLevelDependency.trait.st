@@ -229,15 +229,10 @@ TEntityMetaLevelDependency >> allAtAnyScope: aCollectionOfFamixClasses [
 
 { #category : #private }
 TEntityMetaLevelDependency >> allAtAnyScope: aCollectionOfFamixClasses in: aCollection [
-	^ self allAtAnyScope: aCollectionOfFamixClasses in: aCollection until: [ :a | false ]
-]
-
-{ #category : #private }
-TEntityMetaLevelDependency >> allAtAnyScope: aCollectionOfFamixClasses in: aCollection until: rejectBlock [
 	| selectors |
 	(aCollectionOfFamixClasses anySatisfy: [ :aFAMIXClass | self isOfType: aFAMIXClass ]) ifTrue: [ aCollection add: self ].
-	(rejectBlock value: self)
-		ifFalse: [ 1 to: (selectors := self parentSelectors) size do: [ :ind | (self perform: (selectors at: ind)) allAtAnyScope: aCollectionOfFamixClasses in: aCollection until: rejectBlock ] ].
+	(MooseQueryCurrentContext shouldStopOn: self)
+		ifFalse: [ 1 to: (selectors := self parentSelectors) size do: [ :ind | (self perform: (selectors at: ind)) allAtAnyScope: aCollectionOfFamixClasses in: aCollection ] ].
 
 	^ aCollection
 ]
@@ -247,7 +242,9 @@ TEntityMetaLevelDependency >> allAtAnyScope: aCollectionOfFamixClasses until: re
 	"I am used to return all the encountered entities (recursively) at matching one of the class scope given as parameter that are up in the containment tree of the metamodel.
 	I stop the recursion when the rejectBlock is true"
 
-	^ (self allAtAnyScope: aCollectionOfFamixClasses in: OrderedCollection new until: rejectBlock ) asSet asArray
+	^ MooseQueryCurrentContext
+		value: (MooseQueryContext until: rejectBlock)
+		during: [ (self allAtAnyScope: aCollectionOfFamixClasses in: OrderedCollection new) asSet asArray ]
 ]
 
 { #category : #scoping }
@@ -413,7 +410,7 @@ TEntityMetaLevelDependency >> allWithAnyScope: aCollectionOfFamixClasses in: aCo
 
 	self allParentTypes
 		detect: [ :class | aCollectionOfFamixClasses anySatisfy: [ :aFAMIXClass | aFAMIXClass = class ] ]
-		ifFound: [ self allAtAnyScope: aCollectionOfFamixClasses in: aCollection until: rejectBlock ].
+		ifFound: [ self allAtAnyScope: aCollectionOfFamixClasses in: aCollection ].
 	self allChildrenTypes
 		detect: [ :class | aCollectionOfFamixClasses anySatisfy: [ :aFAMIXClass | aFAMIXClass = class ] ]
 		ifFound: [ self allToAnyScope: aCollectionOfFamixClasses in: aCollection until: rejectBlock ].
