@@ -16,11 +16,6 @@ UndefinedObject >> allAtScope: aFAMIXScope in: aCollection [
 ]
 
 { #category : #'*Moose-Query' }
-UndefinedObject >> allAtScope: aFAMIXScope in: aCollection until: aRejectBlock [
-	^ aCollection
-]
-
-{ #category : #'*Moose-Query' }
 UndefinedObject >> allToAnyScope: aCollectionOfFamixClasses in: aCollection [
 	^ aCollection
 ]
