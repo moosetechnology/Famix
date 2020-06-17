@@ -348,17 +348,6 @@ TEntityMetaLevelDependency >> allToAnyScope: aCollectionOfFamixClasses in: aColl
 	^ aCollection
 ]
 
-{ #category : #private }
-TEntityMetaLevelDependency >> allToAnyScope: aCollectionOfFamixClasses in: aCollection until: rejectBlock [
-	| selectors |
-	(aCollectionOfFamixClasses anySatisfy: [ :aFAMIXClass | self isOfType: aFAMIXClass ]) ifTrue: [ aCollection add: self ].
-
-	(MooseQueryCurrentContext shouldStopOn: self)
-		ifFalse: [ 1 to: (selectors := self childrenSelectors) size do: [ :ind | (self perform: (selectors at: ind)) allToAnyScope: aCollectionOfFamixClasses in: aCollection ] ].
-
-	^ aCollection
-]
-
 { #category : #scoping }
 TEntityMetaLevelDependency >> allToAnyScope: aCollectionOfFamixClasses until: rejectBlock [
 	"I am used to return all the encountered entities (recursively) at matching one of the class scope given as parameter that are down in the containment tree of the metamodel
@@ -407,11 +396,6 @@ TEntityMetaLevelDependency >> allWithAnyScope: aCollectionOfFamixClasses [
 
 { #category : #private }
 TEntityMetaLevelDependency >> allWithAnyScope: aCollectionOfFamixClasses in: aCollection [
-	^ self allWithAnyScope: aCollectionOfFamixClasses in: aCollection until: [ :a | false ]
-]
-
-{ #category : #private }
-TEntityMetaLevelDependency >> allWithAnyScope: aCollectionOfFamixClasses in: aCollection until: rejectBlock [
 	(aCollectionOfFamixClasses anySatisfy: [ :aFAMIXClass | self class traits includes: aFAMIXClass ])
 		ifTrue: [ self allToAnyScope: aCollectionOfFamixClasses in: aCollection ].
 
@@ -431,7 +415,7 @@ TEntityMetaLevelDependency >> allWithAnyScope: aCollectionOfFamixClasses until: 
 
 	^ MooseQueryCurrentContext
 		value: (MooseQueryContext until: rejectBlock)
-		during: [ (self allWithAnyScope: aCollectionOfFamixClasses in: OrderedCollection new until: rejectBlock) asSet ]
+		during: [ (self allWithAnyScope: aCollectionOfFamixClasses in: OrderedCollection new) asSet ]
 ]
 
 { #category : #scoping }
