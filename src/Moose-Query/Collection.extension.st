@@ -88,12 +88,7 @@ Collection >> toAnyScope: aCollectionOfFamixClasses in: aCollection until: aReje
 
 { #category : #'*Moose-Query' }
 Collection >> toScope: aFAMIXScope in: aCollection [
-	^ self toScope: aFAMIXScope in: aCollection until: [ :a | false ]
-]
-
-{ #category : #'*Moose-Query' }
-Collection >> toScope: aFAMIXScope in: aCollection until: aRejectBlock [
-	1 to: self size do: [ :ind | (self at: ind) toScope: aFAMIXScope in: aCollection until: aRejectBlock ].
+	1 to: self size do: [ :ind | (self at: ind) toScope: aFAMIXScope in: aCollection ].
 	^ aCollection
 ]
 

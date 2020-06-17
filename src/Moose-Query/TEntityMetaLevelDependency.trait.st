@@ -682,16 +682,13 @@ TEntityMetaLevelDependency >> toScope: aClassFAMIX [
 
 { #category : #private }
 TEntityMetaLevelDependency >> toScope: aClassFAMIX in: aCollection [
-	^ self toScope: aClassFAMIX in: aCollection until: [ :a | false ]
-]
-
-{ #category : #private }
-TEntityMetaLevelDependency >> toScope: aClassFAMIX in: aCollection until: rejectBlock [
 	(self isOfType: aClassFAMIX)
 		ifTrue: [ aCollection add: self ]
-		ifFalse: [ "The content of this block could be much more readable with #do: but we do this solution for performances... We need this method to be really really performant."
+		ifFalse:
+			[ "The content of this block could be much more readable with #do: but we do this solution for performances... We need this method to be really really performant."
 			| selectors |
-			(rejectBlock value: self) ifFalse: [ 1 to: (selectors := self childrenSelectors) size do: [ :ind | (self perform: (selectors at: ind)) toScope: aClassFAMIX in: aCollection  until: rejectBlock ] ] ].
+			(MooseQueryCurrentContext shouldStopOn: self)
+				ifFalse: [ 1 to: (selectors := self childrenSelectors) size do: [ :ind | (self perform: (selectors at: ind)) toScope: aClassFAMIX in: aCollection ] ] ].
 	^ aCollection
 ]
 
@@ -701,9 +698,7 @@ TEntityMetaLevelDependency >> toScope: aClassFAMIX until: rejectBlock [
 	I stop the recursion when the rejectBlock is true"
 
 	self flag: #todo.	"I think we do not need the #asArray cast but it will break tests. I will probably let it now then change the tests later. Step by step."
-	^ MooseQueryCurrentContext
-		value: (MooseQueryContext until: rejectBlock)
-		during: [ (self toScope: aClassFAMIX in: OrderedCollection new until: rejectBlock) asSet asArray ]
+	^ MooseQueryCurrentContext value: (MooseQueryContext until: rejectBlock) during: [ (self toScope: aClassFAMIX in: OrderedCollection new) asSet asArray ]
 ]
 
 { #category : #accessing }
@@ -775,7 +770,7 @@ TEntityMetaLevelDependency >> withScope: aClassFAMIX in: aCollection [
 { #category : #private }
 TEntityMetaLevelDependency >> withScope: aClassFAMIX in: aCollection until: rejectBlock [
 	self atScope: aClassFAMIX in: aCollection.
-	self toScope: aClassFAMIX in: aCollection until: rejectBlock.
+	self toScope: aClassFAMIX in: aCollection.
 	^ aCollection
 ]
 
