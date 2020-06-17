@@ -45,7 +45,11 @@ TDependencyQueryResult >> atAnyScope: aCollectionOfFamixClasses [
 
 { #category : #filtering }
 TDependencyQueryResult >> atScope: aClassFamix [
-	^ self newObjectResultWith: (self storage inject: OrderedCollection new into: [ :res :dep | (self opposite: dep) atScope: aClassFamix in: res ]) asSet
+	^ self
+		newObjectResultWith:
+			(self storage
+				inject: OrderedCollection new
+				into: [ :res :dep | MooseQueryCurrentContext value: (MooseQueryContext scope: aClassFamix) during: [ (self opposite: dep) atScopeIn: res ] ]) asSet
 ]
 
 { #category : #filtering }
@@ -57,7 +61,7 @@ TDependencyQueryResult >> atScope: aClassFamix withNonMatchingEntitiesDo: aBlock
 	self storage
 		do: [ :dep | 
 			coll := OrderedCollection new.
-			(opposite := self opposite: dep) atScope: aClassFamix in: coll.
+			MooseQueryCurrentContext value: (MooseQueryContext scope: aClassFamix) during: [ (opposite := self opposite: dep) atScopeIn: coll ].
 			coll ifEmpty: [ aBlock cull: opposite cull: res ] ifNotEmpty: [ :results | res addAll: results ] ].
 	^ self newObjectResultWith: res asSet
 ]

@@ -31,7 +31,7 @@ UndefinedObject >> atAnyScope: aCollectionOfFamixScope in: aCollection [
 ]
 
 { #category : #'*Moose-Query' }
-UndefinedObject >> atScope: aFAMIXScope in: aCollection [
+UndefinedObject >> atScopeIn: aCollection [
 	^ aCollection
 ]
 

@@ -52,12 +52,9 @@ MooseQueryContext class >> scopes: aCollectionOfType until: aValuable [
 		yourself
 ]
 
-{ #category : #'instance creation' }
-MooseQueryContext class >> until: aValuable [
-	1halt.
-	^ self new
-		until: aValuable;
-		yourself
+{ #category : #testing }
+MooseQueryContext >> isOfRightType: anEntity [
+	^ self scopes anySatisfy: [ :aFAMIXClass | anEntity isOfType: aFAMIXClass ]
 ]
 
 { #category : #accessing }
@@ -70,7 +67,7 @@ MooseQueryContext >> scopes: anObject [
 	scopes := anObject
 ]
 
-{ #category : #asserting }
+{ #category : #testing }
 MooseQueryContext >> shouldStopOn: anEntity [
 	^ self until value: anEntity
 ]

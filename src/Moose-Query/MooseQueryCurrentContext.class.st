@@ -5,6 +5,11 @@ Class {
 }
 
 { #category : #testing }
+MooseQueryCurrentContext class >> isOfRightType: anEntity [
+	^ self value isOfRightType: anEntity
+]
+
+{ #category : #testing }
 MooseQueryCurrentContext class >> shouldStopOn: anEntity [
 	^ self value shouldStopOn: anEntity
 ]

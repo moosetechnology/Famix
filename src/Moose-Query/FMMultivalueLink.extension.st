@@ -16,8 +16,8 @@ FMMultivalueLink >> allWithScope: aFAMIXClass in: aCollection [
 ]
 
 { #category : #'*Moose-Query' }
-FMMultivalueLink >> atScope: aFAMIXClass in: aCollection [
-	^ values atScope: aFAMIXClass in: aCollection
+FMMultivalueLink >> atScopeIn: aCollection [
+	^ values atScopeIn: aCollection
 ]
 
 { #category : #'*Moose-Query' }
