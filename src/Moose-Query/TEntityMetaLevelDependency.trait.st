@@ -339,7 +339,13 @@ TEntityMetaLevelDependency >> allToAnyScope: aCollectionOfFamixClasses [
 
 { #category : #private }
 TEntityMetaLevelDependency >> allToAnyScope: aCollectionOfFamixClasses in: aCollection [
-	^ self allToAnyScope: aCollectionOfFamixClasses in: aCollection until: [ :a | false ]
+	| selectors |
+	(aCollectionOfFamixClasses anySatisfy: [ :aFAMIXClass | self isOfType: aFAMIXClass ]) ifTrue: [ aCollection add: self ].
+
+	(MooseQueryCurrentContext shouldStopOn: self)
+		ifFalse: [ 1 to: (selectors := self childrenSelectors) size do: [ :ind | (self perform: (selectors at: ind)) allToAnyScope: aCollectionOfFamixClasses in: aCollection ] ].
+
+	^ aCollection
 ]
 
 { #category : #private }
@@ -347,7 +353,8 @@ TEntityMetaLevelDependency >> allToAnyScope: aCollectionOfFamixClasses in: aColl
 	| selectors |
 	(aCollectionOfFamixClasses anySatisfy: [ :aFAMIXClass | self isOfType: aFAMIXClass ]) ifTrue: [ aCollection add: self ].
 
-	(rejectBlock value: self) ifFalse: [ 1 to: (selectors := self childrenSelectors) size do: [ :ind | (self perform: (selectors at: ind)) allToAnyScope: aCollectionOfFamixClasses in: aCollection  until: rejectBlock ] ].
+	(MooseQueryCurrentContext shouldStopOn: self)
+		ifFalse: [ 1 to: (selectors := self childrenSelectors) size do: [ :ind | (self perform: (selectors at: ind)) allToAnyScope: aCollectionOfFamixClasses in: aCollection ] ].
 
 	^ aCollection
 ]
@@ -359,7 +366,7 @@ TEntityMetaLevelDependency >> allToAnyScope: aCollectionOfFamixClasses until: re
 
 	^ MooseQueryCurrentContext
 		value: (MooseQueryContext until: rejectBlock)
-		during: [ (self allToAnyScope: aCollectionOfFamixClasses in: OrderedCollection new until: rejectBlock) asSet asArray ]
+		during: [ (self allToAnyScope: aCollectionOfFamixClasses in: OrderedCollection new) asSet asArray ]
 ]
 
 { #category : #scoping }
@@ -406,14 +413,14 @@ TEntityMetaLevelDependency >> allWithAnyScope: aCollectionOfFamixClasses in: aCo
 { #category : #private }
 TEntityMetaLevelDependency >> allWithAnyScope: aCollectionOfFamixClasses in: aCollection until: rejectBlock [
 	(aCollectionOfFamixClasses anySatisfy: [ :aFAMIXClass | self class traits includes: aFAMIXClass ])
-		ifTrue: [ self allToAnyScope: aCollectionOfFamixClasses in: aCollection until: rejectBlock ].
+		ifTrue: [ self allToAnyScope: aCollectionOfFamixClasses in: aCollection ].
 
 	self allParentTypes
 		detect: [ :class | aCollectionOfFamixClasses anySatisfy: [ :aFAMIXClass | aFAMIXClass = class ] ]
 		ifFound: [ self allAtAnyScope: aCollectionOfFamixClasses in: aCollection ].
 	self allChildrenTypes
 		detect: [ :class | aCollectionOfFamixClasses anySatisfy: [ :aFAMIXClass | aFAMIXClass = class ] ]
-		ifFound: [ self allToAnyScope: aCollectionOfFamixClasses in: aCollection until: rejectBlock ].
+		ifFound: [ self allToAnyScope: aCollectionOfFamixClasses in: aCollection ].
 	^ aCollection
 ]
 
