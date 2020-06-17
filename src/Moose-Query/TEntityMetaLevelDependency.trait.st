@@ -656,7 +656,7 @@ TEntityMetaLevelDependency >> withAnyScope: aCollectionOfFamixClasses [
 
 	^ MooseQueryCurrentContext
 		value: (MooseQueryContext scopes: aCollectionOfFamixClasses)
-		during: [ (self withAnyScopeIn: OrderedCollection new) asSet ]
+		during: [ (self withScopeIn: OrderedCollection new) asSet ]
 ]
 
 { #category : #scoping }
@@ -666,14 +666,7 @@ TEntityMetaLevelDependency >> withAnyScope: aCollectionOfFamixClasses until: rej
 
 	^ MooseQueryCurrentContext
 		value: (MooseQueryContext scopes: aCollectionOfFamixClasses until: rejectBlock)
-		during: [ (self withAnyScopeIn: OrderedCollection new) asSet ]
-]
-
-{ #category : #private }
-TEntityMetaLevelDependency >> withAnyScopeIn: aCollection [
-	self atScopeIn: aCollection.
-	self toScopeIn: aCollection.
-	^ aCollection
+		during: [ (self withScopeIn: OrderedCollection new) asSet ]
 ]
 
 { #category : #scoping }
