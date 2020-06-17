@@ -439,11 +439,6 @@ TEntityMetaLevelDependency >> allWithScope: aClassFAMIX [
 
 { #category : #private }
 TEntityMetaLevelDependency >> allWithScope: aClassFAMIX in: aCollection [
-	^ self allWithScope: aClassFAMIX in: aCollection until: [ :a | false ]
-]
-
-{ #category : #private }
-TEntityMetaLevelDependency >> allWithScope: aClassFAMIX in: aCollection until: rejectBlock [
 	(self class traits includes: aClassFAMIX) ifTrue: [ self allToScope: aClassFAMIX in: aCollection ].
 
 	self allParentTypes
@@ -460,9 +455,7 @@ TEntityMetaLevelDependency >> allWithScope: aClassFAMIX until: rejectBlock [
 	"I am used to return all the entities at a given famix class scope that are up or down in the containment tree of the metamodel on multiple levels.
 	I stop the recursion when the rejectBlock is true"
 
-	^ MooseQueryCurrentContext
-		value: (MooseQueryContext until: rejectBlock)
-		during: [ (self allWithScope: aClassFAMIX in: OrderedCollection new until: rejectBlock) asSet ]
+	^ MooseQueryCurrentContext value: (MooseQueryContext until: rejectBlock) during: [ (self allWithScope: aClassFAMIX in: OrderedCollection new) asSet ]
 ]
 
 { #category : #scoping }
