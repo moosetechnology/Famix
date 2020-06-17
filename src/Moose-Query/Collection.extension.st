@@ -13,12 +13,6 @@ Collection >> allAtScopeIn: aCollection [
 ]
 
 { #category : #'*Moose-Query' }
-Collection >> allToAnyScopeIn: aCollection [
-	1 to: self size do: [ :ind | (self at: ind) allToAnyScopeIn: aCollection ].
-	^ aCollection
-]
-
-{ #category : #'*Moose-Query' }
 Collection >> allToScopeIn: aCollection [
 	1 to: self size do: [ :ind | (self at: ind) allToScopeIn: aCollection ].
 	^ aCollection

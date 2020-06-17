@@ -11,11 +11,6 @@ UndefinedObject >> allAtScopeIn: aCollection [
 ]
 
 { #category : #'*Moose-Query' }
-UndefinedObject >> allToAnyScopeIn: aCollection [
-	^ aCollection
-]
-
-{ #category : #'*Moose-Query' }
 UndefinedObject >> allToScopeIn: aCollection [
 	^ aCollection
 ]
