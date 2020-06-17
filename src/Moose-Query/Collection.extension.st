@@ -19,8 +19,8 @@ Collection >> allToAnyScope: aCollectionOfFamixClasses in: aCollection [
 ]
 
 { #category : #'*Moose-Query' }
-Collection >> allToScope: aFAMIXScope in: aCollection [
-	1 to: self size do: [ :ind | (self at: ind) allToScope: aFAMIXScope in: aCollection ].
+Collection >> allToScopeIn: aCollection [
+	1 to: self size do: [ :ind | (self at: ind) allToScopeIn: aCollection ].
 	^ aCollection
 ]
 
