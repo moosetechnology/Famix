@@ -55,7 +55,7 @@ Collection >> toScopeIn: aCollection [
 ]
 
 { #category : #'*Moose-Query' }
-Collection >> withScope: aFAMIXScope in: aCollection [
-	1 to: self size do: [ :ind | (self at: ind) withScope: aFAMIXScope in: aCollection ].
+Collection >> withScopeIn: aCollection [
+	1 to: self size do: [ :ind | (self at: ind) withScopeIn: aCollection ].
 	^ aCollection
 ]

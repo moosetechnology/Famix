@@ -740,14 +740,7 @@ TEntityMetaLevelDependency >> withAnyScope: aCollectionOfFamixClasses until: rej
 TEntityMetaLevelDependency >> withScope: aClassFAMIX [
 	"I am used to return all the first encountered  entities at a given famix class scope that are up or down in the containment tree of the metamodel"
 
-	^ MooseQueryCurrentContext value: (MooseQueryContext scope: aClassFAMIX) during: [ (self withScope: aClassFAMIX in: OrderedCollection new) asSet ]
-]
-
-{ #category : #private }
-TEntityMetaLevelDependency >> withScope: aClassFAMIX in: aCollection [
-	self atScopeIn: aCollection.
-	self toScopeIn: aCollection.
-	^ aCollection
+	^ MooseQueryCurrentContext value: (MooseQueryContext scope: aClassFAMIX) during: [ (self withScopeIn: OrderedCollection new) asSet ]
 ]
 
 { #category : #scoping }
@@ -755,7 +748,12 @@ TEntityMetaLevelDependency >> withScope: aClassFAMIX until: rejectBlock [
 	"I am used to return all the first encountered  entities at a given famix class scope that are up or down in the containment tree of the metamodel.
 	I stop the recursion when the rejectBlock is true"
 
-	^ MooseQueryCurrentContext
-		value: (MooseQueryContext scope: aClassFAMIX until: rejectBlock)
-		during: [ (self withScope: aClassFAMIX in: OrderedCollection new) asSet ]
+	^ MooseQueryCurrentContext value: (MooseQueryContext scope: aClassFAMIX until: rejectBlock) during: [ (self withScopeIn: OrderedCollection new) asSet ]
+]
+
+{ #category : #private }
+TEntityMetaLevelDependency >> withScopeIn: aCollection [
+	self atScopeIn: aCollection.
+	self toScopeIn: aCollection.
+	^ aCollection
 ]
