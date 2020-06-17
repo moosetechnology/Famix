@@ -41,6 +41,11 @@ UndefinedObject >> toAnyScope: aCollectionOfFamixClasses in: aCollection [
 ]
 
 { #category : #'*Moose-Query' }
+UndefinedObject >> toAnyScopeIn: aCollection [
+	^ aCollection
+]
+
+{ #category : #'*Moose-Query' }
 UndefinedObject >> toScopeIn: aCollection [
 	^ aCollection
 ]
