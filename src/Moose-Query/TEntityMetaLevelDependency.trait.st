@@ -156,9 +156,9 @@ TEntityMetaLevelDependency classSide >> privateChildrenTypesIn: aMetamodel [
 	| childrenImplementingClasses childrenUsers |
 	childrenImplementingClasses := ((self allDeclaredPropertiesIn: aMetamodel) select: #isChildrenProperty) collect: #implementingType.
 
-	childrenUsers := (aMetamodel concreteImplementingClasses select: [ :e | e allGeneratedTraits includesAny: childrenImplementingClasses ]) flatCollect: #withAllSubclasses.
+	childrenUsers := aMetamodel concreteImplementingClasses select: [ :e | e allGeneratedTraits includesAny: childrenImplementingClasses ].
 
-	^ (childrenImplementingClasses , childrenUsers) asSet asArray	"<== This could later be #removeDuplicates but it is currently broken on arrays. See https://github.com/pharo-project/pharo/issues/4850"
+	^ (childrenImplementingClasses , childrenUsers flatCollect: #withAllSubclasses as: Set) asArray	"<== This could later be #removeDuplicates but it is currently broken on arrays. See https://github.com/pharo-project/pharo/issues/4850"
 ]
 
 { #category : #new }
@@ -192,11 +192,14 @@ TEntityMetaLevelDependency classSide >> privateParentSelectorsIn: aMetamodel [
 { #category : #new }
 TEntityMetaLevelDependency classSide >> privateParentTypesIn: aMetamodel [
 	| containerImplementingClasses containerUsers |
-	containerImplementingClasses := (self allDeclaredPropertiesIn: aMetamodel) select: #isContainer thenCollect: #implementingType.
+	containerImplementingClasses := (self allDeclaredPropertiesIn: aMetamodel)
+		select: #isContainer
+		thenCollect: #implementingType.
 
-	containerUsers := (aMetamodel concreteImplementingClasses select: [ :e | e allGeneratedTraits includesAny: containerImplementingClasses ]) flatCollect: #withAllSubclasses.
+	containerUsers := (aMetamodel concreteImplementingClasses select: [ :e | e allGeneratedTraits includesAny: containerImplementingClasses ])
+		flatCollect: #withAllSubclasses.
 
-	^ (containerImplementingClasses , containerUsers) asSet asArray	"<== This could later be #removeDuplicates but it is currently broken on arrays. See https://github.com/pharo-project/pharo/issues/4850"
+	^ (containerImplementingClasses , containerUsers flatCollect: #withAllSubclasses as: Set) asArray	"<== This could later be #removeDuplicates but it is currently broken on arrays. See https://github.com/pharo-project/pharo/issues/4850"
 ]
 
 { #category : #private }
