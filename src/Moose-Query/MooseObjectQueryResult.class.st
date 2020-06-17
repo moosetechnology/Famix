@@ -37,7 +37,12 @@ MooseObjectQueryResult >> allAtScope: aClassFamix [
 
 { #category : #filtering }
 MooseObjectQueryResult >> allToAnyScope: aCollectionOfFamixClasses [
-	^ self newObjectResultWith: (self storage inject: OrderedCollection new into: [ :res :entity | entity allToAnyScope: aCollectionOfFamixClasses in: res ]) asSet
+	^ self
+		newObjectResultWith:
+			(self storage
+				inject: OrderedCollection new
+				into: [ :res :entity | MooseQueryCurrentContext value: (MooseQueryContext scopes: aCollectionOfFamixClasses) during: [ entity allToAnyScopeIn: res ] ])
+				asSet
 ]
 
 { #category : #filtering }
