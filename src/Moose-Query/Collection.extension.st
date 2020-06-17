@@ -1,8 +1,8 @@
 Extension { #name : #Collection }
 
 { #category : #'*Moose-Query' }
-Collection >> allAtAnyScope: aCollectionOfFamixClasses in: aCollection [
-	1 to: self size do: [ :ind | (self at: ind) allAtAnyScope: aCollectionOfFamixClasses in: aCollection ].
+Collection >> allAtAnyScopeIn: aCollection [
+	1 to: self size do: [ :ind | (self at: ind) allAtAnyScopeIn: aCollection ].
 	^ aCollection
 ]
 

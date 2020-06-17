@@ -1,7 +1,7 @@
 Extension { #name : #UndefinedObject }
 
 { #category : #'*Moose-Query' }
-UndefinedObject >> allAtAnyScope: aCollectionOfFamixClasses in: aCollection [
+UndefinedObject >> allAtAnyScopeIn: aCollection [
 	^ aCollection
 ]
 

@@ -224,19 +224,7 @@ TEntityMetaLevelDependency >> addAllParentsIn: aCollection [
 TEntityMetaLevelDependency >> allAtAnyScope: aCollectionOfFamixClasses [
 	"I am used to return all the encountered entities (recursively) at matching one of the class scope given as parameter that are up in the containment tree of the metamodel"
 
-	^ MooseQueryCurrentContext
-		value: (MooseQueryContext scopes: aCollectionOfFamixClasses)
-		during: [ (self allAtAnyScope: aCollectionOfFamixClasses in: OrderedCollection new) asSet asArray ]
-]
-
-{ #category : #private }
-TEntityMetaLevelDependency >> allAtAnyScope: aCollectionOfFamixClasses in: aCollection [
-	| selectors |
-	(aCollectionOfFamixClasses anySatisfy: [ :aFAMIXClass | self isOfType: aFAMIXClass ]) ifTrue: [ aCollection add: self ].
-	(MooseQueryCurrentContext shouldStopOn: self)
-		ifFalse: [ 1 to: (selectors := self parentSelectors) size do: [ :ind | (self perform: (selectors at: ind)) allAtAnyScope: aCollectionOfFamixClasses in: aCollection ] ].
-
-	^ aCollection
+	^ MooseQueryCurrentContext value: (MooseQueryContext scopes: aCollectionOfFamixClasses) during: [ (self allAtAnyScopeIn: OrderedCollection new) asSet asArray ]
 ]
 
 { #category : #scoping }
@@ -246,7 +234,18 @@ TEntityMetaLevelDependency >> allAtAnyScope: aCollectionOfFamixClasses until: re
 
 	^ MooseQueryCurrentContext
 		value: (MooseQueryContext scopes: aCollectionOfFamixClasses until: rejectBlock)
-		during: [ (self allAtAnyScope: aCollectionOfFamixClasses in: OrderedCollection new) asSet asArray ]
+		during: [ (self allAtAnyScopeIn: OrderedCollection new) asSet asArray ]
+]
+
+{ #category : #private }
+TEntityMetaLevelDependency >> allAtAnyScopeIn: aCollection [
+	| selectors |
+	(MooseQueryCurrentContext isOfRightType: self) ifTrue: [ aCollection add: self ].
+
+	(MooseQueryCurrentContext shouldStopOn: self)
+		ifFalse: [ 1 to: (selectors := self parentSelectors) size do: [ :ind | (self perform: (selectors at: ind)) allAtAnyScopeIn: aCollection ] ].
+
+	^ aCollection
 ]
 
 { #category : #scoping }
@@ -411,7 +410,7 @@ TEntityMetaLevelDependency >> allWithAnyScope: aCollectionOfFamixClasses in: aCo
 
 	self allParentTypes
 		detect: [ :class | aCollectionOfFamixClasses anySatisfy: [ :aFAMIXClass | aFAMIXClass = class ] ]
-		ifFound: [ self allAtAnyScope: aCollectionOfFamixClasses in: aCollection ].
+		ifFound: [ self allAtAnyScopeIn: aCollection ].
 	self allChildrenTypes
 		detect: [ :class | aCollectionOfFamixClasses anySatisfy: [ :aFAMIXClass | aFAMIXClass = class ] ]
 		ifFound: [ self allToAnyScope: aCollectionOfFamixClasses in: aCollection ].

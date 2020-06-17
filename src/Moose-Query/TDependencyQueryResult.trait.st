@@ -10,7 +10,12 @@ Trait {
 
 { #category : #filtering }
 TDependencyQueryResult >> allAtAnyScope: aCollectionOfFamixClasses [
-	^ self newObjectResultWith: (self storage inject: OrderedCollection new into: [ :res :dep | (self opposite: dep) allAtAnyScope: aCollectionOfFamixClasses in: res ]) asSet
+	^ self
+		newObjectResultWith:
+			(self storage
+				inject: OrderedCollection new
+				into: [ :res :dep | MooseQueryCurrentContext value: (MooseQueryContext scopes: aCollectionOfFamixClasses) during: [ (self opposite: dep) allAtAnyScopeIn: res ] ])
+				asSet
 ]
 
 { #category : #filtering }
