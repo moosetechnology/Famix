@@ -3,7 +3,8 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'until',
-		'scopes'
+		'scopes',
+		'isRecursive'
 	],
 	#classVars : [
 		'Default'
@@ -19,6 +20,30 @@ MooseQueryContext class >> defaultContext [
 { #category : #accessing }
 MooseQueryContext class >> defaultContext: aContext [
 	Default := aContext
+]
+
+{ #category : #'instance creation' }
+MooseQueryContext class >> recursivelyScope: aFamixType [
+	^ self recursivelyScopes: {aFamixType}
+]
+
+{ #category : #'instance creation' }
+MooseQueryContext class >> recursivelyScope: aFamixType until: aValuable [
+	^ self recursivelyScopes: {aFamixType} until: aValuable
+]
+
+{ #category : #'instance creation' }
+MooseQueryContext class >> recursivelyScopes: aCollectionOfType [
+	^ (self scopes: aCollectionOfType)
+		beRecursive;
+		yourself
+]
+
+{ #category : #'instance creation' }
+MooseQueryContext class >> recursivelyScopes: aCollectionOfType until: aValuable [
+	^ (self scopes: aCollectionOfType until: aValuable)
+		beRecursive;
+		yourself
 ]
 
 { #category : #initialization }
@@ -46,15 +71,35 @@ MooseQueryContext class >> scopes: aCollectionOfType [
 
 { #category : #'instance creation' }
 MooseQueryContext class >> scopes: aCollectionOfType until: aValuable [
-	^ self new
-		scopes: aCollectionOfType;
+	^ (self scopes: aCollectionOfType)
 		until: aValuable;
 		yourself
+]
+
+{ #category : #action }
+MooseQueryContext >> beRecursive [
+	isRecursive := true
+]
+
+{ #category : #initialization }
+MooseQueryContext >> initialize [
+	super initialize.
+	isRecursive := false
 ]
 
 { #category : #testing }
 MooseQueryContext >> isOfRightType: anEntity [
 	^ self scopes anySatisfy: [ :aFAMIXClass | anEntity isOfType: aFAMIXClass ]
+]
+
+{ #category : #accessing }
+MooseQueryContext >> isRecursive [
+	^ isRecursive
+]
+
+{ #category : #accessing }
+MooseQueryContext >> isRecursive: anObject [
+	isRecursive := anObject
 ]
 
 { #category : #accessing }
