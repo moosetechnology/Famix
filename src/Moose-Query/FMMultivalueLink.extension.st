@@ -1,16 +1,16 @@
 Extension { #name : #FMMultivalueLink }
 
 { #category : #'*Moose-Query' }
-FMMultivalueLink >> atScopeIn: aCollection [
-	^ values atScopeIn: aCollection
+FMMultivalueLink >> privateAtScopeIn: aCollection [
+	^ values privateAtScopeIn: MooseQueryCurrentContext result
 ]
 
 { #category : #'*Moose-Query' }
-FMMultivalueLink >> toScopeIn: aCollection [
-	^ values toScopeIn: aCollection
+FMMultivalueLink >> privateToScopeIn: aCollection [
+	^ values privateToScopeIn: MooseQueryCurrentContext result
 ]
 
 { #category : #'*Moose-Query' }
-FMMultivalueLink >> withScopeIn: aCollection [
-	^ values withScopeIn: aCollection
+FMMultivalueLink >> privateWithScopeIn: aCollection [
+	^ values privateWithScopeIn: MooseQueryCurrentContext result
 ]

@@ -4,6 +4,11 @@ Class {
 	#category : #'Moose-Query-Core'
 }
 
+{ #category : #adding }
+MooseQueryCurrentContext class >> add: anEntity [
+	self value add: anEntity
+]
+
 { #category : #testing }
 MooseQueryCurrentContext class >> isOfRightType: anEntity [
 	^ self value isOfRightType: anEntity
@@ -12,6 +17,11 @@ MooseQueryCurrentContext class >> isOfRightType: anEntity [
 { #category : #testing }
 MooseQueryCurrentContext class >> isRecursive [
 	^ self value isRecursive
+]
+
+{ #category : #accessing }
+MooseQueryCurrentContext class >> result [
+	^ self value result
 ]
 
 { #category : #testing }

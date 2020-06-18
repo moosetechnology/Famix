@@ -5,7 +5,8 @@ Class {
 		'until',
 		'scopes',
 		'isRecursive',
-		'direction'
+		'direction',
+		'result'
 	],
 	#classVars : [
 		'Default'
@@ -85,7 +86,12 @@ MooseQueryContext class >> scopes: aCollectionOfType direction: aClass until: aV
 		yourself
 ]
 
-{ #category : #action }
+{ #category : #adding }
+MooseQueryContext >> add: anEntity [
+	self result add: anEntity
+]
+
+{ #category : #accessing }
 MooseQueryContext >> beRecursive [
 	isRecursive := true
 ]
@@ -103,7 +109,8 @@ MooseQueryContext >> direction: anObject [
 { #category : #initialization }
 MooseQueryContext >> initialize [
 	super initialize.
-	isRecursive := false
+	isRecursive := false.
+	result := OrderedCollection new
 ]
 
 { #category : #testing }
@@ -119,6 +126,16 @@ MooseQueryContext >> isRecursive [
 { #category : #accessing }
 MooseQueryContext >> isRecursive: anObject [
 	isRecursive := anObject
+]
+
+{ #category : #accessing }
+MooseQueryContext >> result [
+	^ result
+]
+
+{ #category : #accessing }
+MooseQueryContext >> result: anObject [
+	result := anObject
 ]
 
 { #category : #accessing }

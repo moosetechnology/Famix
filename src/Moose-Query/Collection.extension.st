@@ -1,19 +1,19 @@
 Extension { #name : #Collection }
 
 { #category : #'*Moose-Query' }
-Collection >> atScopeIn: aCollection [
-	1 to: self size do: [ :ind | (self at: ind) atScopeIn: aCollection ].
-	^ aCollection
+Collection >> privateAtScopeIn: aCollection [
+	1 to: self size do: [ :ind | (self at: ind) privateAtScopeIn: MooseQueryCurrentContext result ].
+	^ MooseQueryCurrentContext result
 ]
 
 { #category : #'*Moose-Query' }
-Collection >> toScopeIn: aCollection [
-	1 to: self size do: [ :ind | (self at: ind) toScopeIn: aCollection ].
-	^ aCollection
+Collection >> privateToScopeIn: aCollection [
+	1 to: self size do: [ :ind | (self at: ind) privateToScopeIn: MooseQueryCurrentContext result ].
+	^ MooseQueryCurrentContext result
 ]
 
 { #category : #'*Moose-Query' }
-Collection >> withScopeIn: aCollection [
-	1 to: self size do: [ :ind | (self at: ind) withScopeIn: aCollection ].
-	^ aCollection
+Collection >> privateWithScopeIn: aCollection [
+	1 to: self size do: [ :ind | (self at: ind) privateWithScopeIn: MooseQueryCurrentContext result ].
+	^ MooseQueryCurrentContext result
 ]

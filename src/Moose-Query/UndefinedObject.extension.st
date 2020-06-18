@@ -1,16 +1,16 @@
 Extension { #name : #UndefinedObject }
 
 { #category : #'*Moose-Query' }
-UndefinedObject >> atScopeIn: aCollection [
-	^ aCollection
+UndefinedObject >> privateAtScopeIn: aCollection [
+	^ MooseQueryCurrentContext result
 ]
 
 { #category : #'*Moose-Query' }
-UndefinedObject >> toScopeIn: aCollection [
-	^ aCollection
+UndefinedObject >> privateToScopeIn: aCollection [
+	^ MooseQueryCurrentContext result
 ]
 
 { #category : #'*Moose-Query' }
-UndefinedObject >> withScopeIn: aCollection [
-	^ aCollection
+UndefinedObject >> privateWithScopeIn: aCollection [
+	^ MooseQueryCurrentContext result
 ]
