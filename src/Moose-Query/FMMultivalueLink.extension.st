@@ -1,11 +1,6 @@
 Extension { #name : #FMMultivalueLink }
 
 { #category : #'*Moose-Query' }
-FMMultivalueLink >> allToScopeIn: aCollection [
-	^ values allToScopeIn: aCollection
-]
-
-{ #category : #'*Moose-Query' }
 FMMultivalueLink >> allWithScopeIn: aCollection [
 	^ values allWithScopeIn: aCollection
 ]

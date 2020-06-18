@@ -1,12 +1,6 @@
 Extension { #name : #Collection }
 
 { #category : #'*Moose-Query' }
-Collection >> allToScopeIn: aCollection [
-	1 to: self size do: [ :ind | (self at: ind) allToScopeIn: aCollection ].
-	^ aCollection
-]
-
-{ #category : #'*Moose-Query' }
 Collection >> allWithScopeIn: aCollection [
 	1 to: self size do: [ :ind | (self at: ind) allWithScopeIn: aCollection ].
 	^ aCollection
