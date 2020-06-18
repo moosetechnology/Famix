@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'until',
 		'scopes',
-		'isRecursive'
+		'isRecursive',
+		'direction'
 	],
 	#classVars : [
 		'Default'
@@ -23,13 +24,13 @@ MooseQueryContext class >> defaultContext: aContext [
 ]
 
 { #category : #'instance creation' }
-MooseQueryContext class >> recursivelyScope: aFamixType [
-	^ self recursivelyScopes: {aFamixType}
+MooseQueryContext class >> recursivelyScope: aFamixType direction: aClass [
+	^ self recursivelyScopes: {aFamixType} direction: aClass
 ]
 
 { #category : #'instance creation' }
-MooseQueryContext class >> recursivelyScope: aFamixType until: aValuable [
-	^ self recursivelyScopes: {aFamixType} until: aValuable
+MooseQueryContext class >> recursivelyScope: aFamixType direction: aClass until: aValuable [
+	^ self recursivelyScopes: {aFamixType} direction: aClass until: aValuable
 ]
 
 { #category : #'instance creation' }
@@ -40,8 +41,15 @@ MooseQueryContext class >> recursivelyScopes: aCollectionOfType [
 ]
 
 { #category : #'instance creation' }
-MooseQueryContext class >> recursivelyScopes: aCollectionOfType until: aValuable [
-	^ (self scopes: aCollectionOfType until: aValuable)
+MooseQueryContext class >> recursivelyScopes: aCollectionOfType direction: aClass [
+	^ (self scopes: aCollectionOfType direction: aClass)
+		beRecursive;
+		yourself
+]
+
+{ #category : #'instance creation' }
+MooseQueryContext class >> recursivelyScopes: aCollectionOfType direction: aClass until: aValuable [
+	^ (self scopes: aCollectionOfType direction: aClass until: aValuable)
 		beRecursive;
 		yourself
 ]
@@ -53,25 +61,26 @@ MooseQueryContext class >> resetDefault [
 ]
 
 { #category : #'instance creation' }
-MooseQueryContext class >> scope: aFamixType [
-	^ self scopes: {aFamixType}
+MooseQueryContext class >> scope: aFamixType direction: aClass [
+	^ self scopes: {aFamixType} direction: aClass
 ]
 
 { #category : #'instance creation' }
-MooseQueryContext class >> scope: aFamixType until: aValuable [
-	^ self scopes: {aFamixType} until: aValuable
+MooseQueryContext class >> scope: aFamixType direction: aClass until: aValuable [
+	^ self scopes: {aFamixType} direction: aClass until: aValuable
 ]
 
 { #category : #'instance creation' }
-MooseQueryContext class >> scopes: aCollectionOfType [
+MooseQueryContext class >> scopes: aCollectionOfType direction: aClass [
 	^ self new
 		scopes: aCollectionOfType;
+		direction: aClass;
 		yourself
 ]
 
 { #category : #'instance creation' }
-MooseQueryContext class >> scopes: aCollectionOfType until: aValuable [
-	^ (self scopes: aCollectionOfType)
+MooseQueryContext class >> scopes: aCollectionOfType direction: aClass until: aValuable [
+	^ (self scopes: aCollectionOfType direction: aClass)
 		until: aValuable;
 		yourself
 ]
@@ -79,6 +88,16 @@ MooseQueryContext class >> scopes: aCollectionOfType until: aValuable [
 { #category : #action }
 MooseQueryContext >> beRecursive [
 	isRecursive := true
+]
+
+{ #category : #accessing }
+MooseQueryContext >> direction [
+	^ direction
+]
+
+{ #category : #accessing }
+MooseQueryContext >> direction: anObject [
+	direction := anObject
 ]
 
 { #category : #initialization }
