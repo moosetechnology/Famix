@@ -10,6 +10,11 @@ MooseQueryCurrentContext class >> isOfRightType: anEntity [
 ]
 
 { #category : #testing }
+MooseQueryCurrentContext class >> isRecursive [
+	^ self value isRecursive
+]
+
+{ #category : #testing }
 MooseQueryCurrentContext class >> shouldStopOn: anEntity [
 	^ self value shouldStopOn: anEntity
 ]
