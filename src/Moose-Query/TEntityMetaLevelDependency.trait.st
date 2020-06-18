@@ -350,7 +350,7 @@ TEntityMetaLevelDependency >> allToScope: aClassFAMIX until: rejectBlock [
 TEntityMetaLevelDependency >> allWithAnyScope: aCollectionOfFamixClasses [
 	"I am used to return all the entities (recursively) matching one of the class scope that are up or down in the containment tree of the metamodel"
 
-	^ MooseQueryCurrentContext value: (MooseQueryContext recursivelyScopes: aCollectionOfFamixClasses) during: [ (self allWithScopeIn: OrderedCollection new) asSet ]
+	^ MooseQueryCurrentContext value: (MooseQueryContext recursivelyScopes: aCollectionOfFamixClasses) during: [ (self withScopeIn: OrderedCollection new) asSet ]
 ]
 
 { #category : #scoping }
@@ -360,14 +360,14 @@ TEntityMetaLevelDependency >> allWithAnyScope: aCollectionOfFamixClasses until: 
 
 	^ MooseQueryCurrentContext
 		value: (MooseQueryContext recursivelyScopes: aCollectionOfFamixClasses until: rejectBlock)
-		during: [ (self allWithScopeIn: OrderedCollection new) asSet ]
+		during: [ (self withScopeIn: OrderedCollection new) asSet ]
 ]
 
 { #category : #scoping }
 TEntityMetaLevelDependency >> allWithScope: aClassFAMIX [
 	"I am used to return all the entities at a given famix class scope that are up or down in the containment tree of the metamodel on multiple levels."
 
-	^ MooseQueryCurrentContext value: (MooseQueryContext recursivelyScope: aClassFAMIX) during: [ (self allWithScopeIn: OrderedCollection new) asSet ]
+	^ MooseQueryCurrentContext value: (MooseQueryContext recursivelyScope: aClassFAMIX) during: [ (self withScopeIn: OrderedCollection new) asSet ]
 ]
 
 { #category : #scoping }
@@ -377,14 +377,7 @@ TEntityMetaLevelDependency >> allWithScope: aClassFAMIX until: rejectBlock [
 
 	^ MooseQueryCurrentContext
 		value: (MooseQueryContext recursivelyScope: aClassFAMIX until: rejectBlock)
-		during: [ (self allWithScopeIn: OrderedCollection new) asSet ]
-]
-
-{ #category : #private }
-TEntityMetaLevelDependency >> allWithScopeIn: aCollection [
-	self atScopeIn: aCollection.
-	self toScopeIn: aCollection.
-	^ aCollection
+		during: [ (self withScopeIn: OrderedCollection new) asSet ]
 ]
 
 { #category : #scoping }

@@ -1,11 +1,6 @@
 Extension { #name : #UndefinedObject }
 
 { #category : #'*Moose-Query' }
-UndefinedObject >> allWithScopeIn: aCollection [
-	^ aCollection
-]
-
-{ #category : #'*Moose-Query' }
 UndefinedObject >> atScopeIn: aCollection [
 	^ aCollection
 ]
