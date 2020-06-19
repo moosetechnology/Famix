@@ -83,7 +83,7 @@ MooseEntity class >> requirements [
 
 { #category : #'stateful traits' }
 MooseEntity class >> usedStatefulTraits [
-	^ self cache at: #usedStatefulTraits ifAbsentPut: [ super usedStatefulTraits ]
+	^ self cache at: #usedStatefulTraits
 ]
 
 { #category : #dependencies }
