@@ -20,7 +20,7 @@ MooseQueryContext class >> recursivelyScope: aFamixType direction: aClass [
 
 { #category : #'instance creation' }
 MooseQueryContext class >> recursivelyScope: aFamixType direction: aClass until: aValuable [
-	^ (self scope: aFamixType direction: aClass)
+	^ (self recursivelyScope: aFamixType direction: aClass)
 		until: aValuable;
 		yourself
 ]
