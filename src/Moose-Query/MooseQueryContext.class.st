@@ -3,22 +3,26 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'until',
-		'scopes',
 		'isRecursive',
 		'direction',
-		'result'
+		'result',
+		'typeStrategy'
 	],
 	#category : #'Moose-Query-Scoping'
 }
 
 { #category : #'instance creation' }
 MooseQueryContext class >> recursivelyScope: aFamixType direction: aClass [
-	^ self recursivelyScopes: {aFamixType} direction: aClass
+	^ (self scope: aFamixType direction: aClass)
+		beRecursive;
+		yourself
 ]
 
 { #category : #'instance creation' }
 MooseQueryContext class >> recursivelyScope: aFamixType direction: aClass until: aValuable [
-	^ self recursivelyScopes: {aFamixType} direction: aClass until: aValuable
+	^ (self scope: aFamixType direction: aClass)
+		until: aValuable;
+		yourself
 ]
 
 { #category : #'instance creation' }
@@ -37,18 +41,23 @@ MooseQueryContext class >> recursivelyScopes: aCollectionOfType direction: aClas
 
 { #category : #'instance creation' }
 MooseQueryContext class >> scope: aFamixType direction: aClass [
-	^ self scopes: {aFamixType} direction: aClass
+	^ self new
+		typeStrategy: (MooseQueryScopeTypeStrategy scope: aFamixType);
+		direction: aClass;
+		yourself
 ]
 
 { #category : #'instance creation' }
 MooseQueryContext class >> scope: aFamixType direction: aClass until: aValuable [
-	^ self scopes: {aFamixType} direction: aClass until: aValuable
+	^ (self scope: aFamixType direction: aClass)
+		until: aValuable;
+		yourself
 ]
 
 { #category : #'instance creation' }
 MooseQueryContext class >> scopes: aCollectionOfType direction: aClass [
 	^ self new
-		scopes: aCollectionOfType;
+		typeStrategy: (MooseQueryScopeTypesStrategy scopes: aCollectionOfType);
 		direction: aClass;
 		yourself
 ]
@@ -87,11 +96,6 @@ MooseQueryContext >> initialize [
 	result := OrderedCollection new
 ]
 
-{ #category : #testing }
-MooseQueryContext >> isOfRightType: anEntity [
-	^ self scopes anySatisfy: [ :aFAMIXClass | anEntity isOfType: aFAMIXClass ]
-]
-
 { #category : #accessing }
 MooseQueryContext >> isRecursive [
 	^ isRecursive
@@ -120,30 +124,29 @@ MooseQueryContext >> scopeFor: anEntity [
 { #category : #query }
 MooseQueryContext >> scopeFor: anEntity direction: aDirection [
 	| selectors |
-	(self isOfRightType: anEntity)
+	(self typeStrategy isOfRightType: anEntity)
 		ifTrue: [ self add: anEntity.
 			self isRecursive ifFalse: [ ^ self result ] ].
 
 	"The content of this block could be much more readable with #do: but we do this solution for performances... We need this method to be really really performant."
 	(self shouldStopOn: anEntity)
-		ifFalse:
-			[ 1 to: (selectors := aDirection selectorsFor: anEntity) size do: [ :ind | (anEntity perform: (selectors at: ind)) scopeForQuery: self direction: aDirection ] ].
+		ifFalse: [ 1 to: (selectors := aDirection selectorsFor: anEntity) size do: [ :ind | (anEntity perform: (selectors at: ind)) scopeForQuery: self direction: aDirection ] ].
 	^ self result
-]
-
-{ #category : #accessing }
-MooseQueryContext >> scopes [
-	^ scopes
-]
-
-{ #category : #accessing }
-MooseQueryContext >> scopes: anObject [
-	scopes := anObject
 ]
 
 { #category : #testing }
 MooseQueryContext >> shouldStopOn: anEntity [
 	^ self until value: anEntity
+]
+
+{ #category : #accessing }
+MooseQueryContext >> typeStrategy [
+	^ typeStrategy
+]
+
+{ #category : #accessing }
+MooseQueryContext >> typeStrategy: anObject [
+	typeStrategy := anObject
 ]
 
 { #category : #accessing }
