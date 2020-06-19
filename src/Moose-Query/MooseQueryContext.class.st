@@ -8,21 +8,8 @@ Class {
 		'direction',
 		'result'
 	],
-	#classVars : [
-		'Default'
-	],
 	#category : #'Moose-Query-Core'
 }
-
-{ #category : #accessing }
-MooseQueryContext class >> defaultContext [
-	^ Default ifNil: [ Default := self new ]
-]
-
-{ #category : #accessing }
-MooseQueryContext class >> defaultContext: aContext [
-	Default := aContext
-]
 
 { #category : #'instance creation' }
 MooseQueryContext class >> recursivelyScope: aFamixType direction: aClass [
@@ -46,12 +33,6 @@ MooseQueryContext class >> recursivelyScopes: aCollectionOfType direction: aClas
 	^ (self scopes: aCollectionOfType direction: aClass until: aValuable)
 		beRecursive;
 		yourself
-]
-
-{ #category : #initialization }
-MooseQueryContext class >> resetDefault [
-	<script>
-	Default := nil
 ]
 
 { #category : #'instance creation' }
