@@ -13,7 +13,7 @@ Collection >> toScopeInContext: aContext [
 ]
 
 { #category : #'*Moose-Query' }
-Collection >> withScopeIn: aCollection [
-	1 to: self size do: [ :ind | (self at: ind) withScopeIn: MooseQueryCurrentContext result ].
-	^ MooseQueryCurrentContext result
+Collection >> withScopeInContext: aContext [
+	1 to: self size do: [ :ind | aContext withScopeFor: (self at: ind) ].
+	^ aContext result
 ]

@@ -589,9 +589,6 @@ TEntityMetaLevelDependency >> withScope: aClassFAMIX until: rejectBlock [
 ]
 
 { #category : #private }
-TEntityMetaLevelDependency >> withScopeIn: aCollection [
-	self flag: #todo.	"Check perfs. Maybe checking in parents/children types before can speedup."
-	MooseQueryCurrentContext value atScopeFor: self.
-	MooseQueryCurrentContext value toScopeFor: self.
-	^ MooseQueryCurrentContext result
+TEntityMetaLevelDependency >> withScopeInContext: aContext [
+	^ aContext withScopeFor: self
 ]

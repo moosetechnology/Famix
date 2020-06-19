@@ -11,6 +11,6 @@ FMMultivalueLink >> toScopeInContext: aContext [
 ]
 
 { #category : #'*Moose-Query' }
-FMMultivalueLink >> withScopeIn: aCollection [
-	^ values withScopeIn: MooseQueryCurrentContext result
+FMMultivalueLink >> withScopeInContext: aContext [
+	^ values withScopeInContext: aContext
 ]
