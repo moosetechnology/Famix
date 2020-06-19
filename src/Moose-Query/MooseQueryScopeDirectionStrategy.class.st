@@ -6,5 +6,10 @@ Class {
 
 { #category : #query }
 MooseQueryScopeDirectionStrategy class >> scopeFor: anEntity query: aQuery [
+	^ aQuery scopeFor: anEntity direction: self
+]
+
+{ #category : #accessing }
+MooseQueryScopeDirectionStrategy class >> selectorsFor: anEntity [
 	^ self subclassResponsibility
 ]

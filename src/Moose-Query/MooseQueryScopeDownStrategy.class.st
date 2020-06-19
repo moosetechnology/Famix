@@ -4,15 +4,7 @@ Class {
 	#category : #'Moose-Query-Scoping'
 }
 
-{ #category : #query }
-MooseQueryScopeDownStrategy class >> scopeFor: anEntity query: aQuery [
-	| selectors |
-	(aQuery isOfRightType: anEntity)
-		ifTrue: [ aQuery add: anEntity.
-			aQuery isRecursive ifFalse: [ ^ aQuery result ] ].
-
-	"The content of this block could be much more readable with #do: but we do this solution for performances... We need this method to be really really performant."
-	(aQuery shouldStopOn: anEntity)
-		ifFalse: [ 1 to: (selectors := anEntity childrenSelectors) size do: [ :ind | (anEntity perform: (selectors at: ind)) scopeForQuery: aQuery direction: self ] ].
-	^ aQuery result
+{ #category : #accessing }
+MooseQueryScopeDownStrategy class >> selectorsFor: anEntity [
+	^ anEntity childrenSelectors
 ]
