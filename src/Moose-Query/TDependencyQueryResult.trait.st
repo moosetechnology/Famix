@@ -12,16 +12,14 @@ Trait {
 TDependencyQueryResult >> atScope: aClassFamix withNonMatchingEntitiesDo: aBlock [
 	"I do the same at #atScope: but when an element has nothing to return as scope I execute the block with the opposite as first parameter and the result collection as second parameter."
 
-	| res opposite coll |
+	| res opposite coll query |
 	res := OrderedCollection new.
+	query := MooseQueryContext scope: aClassFamix direction: MooseQueryScopeUpStrategy.
 	self storage
 		do: [ :dep | 
 			coll := OrderedCollection new.
-			(opposite := self opposite: dep)
-				atScopeInContext:
-					((MooseQueryContext scope: aClassFamix direction: MooseQueryScopeUpStrategy)
-						result: coll;
-						yourself).
+			query result: coll.
+			(opposite := self opposite: dep) scopeForQuery: query direction: query direction.
 			coll ifEmpty: [ aBlock cull: opposite cull: res ] ifNotEmpty: [ :results | res addAll: results ] ].
 	^ self newObjectResultWith: res asSet
 ]
@@ -35,45 +33,9 @@ TDependencyQueryResult >> elementAtReceiverScope: dep [
 ]
 
 { #category : #filtering }
-TDependencyQueryResult >> executeAtScopeQuery: aQuery [
-	^ self
-		newObjectResultWith:
-			(self storage
-				inject: OrderedCollection new
-				into: [ :res :dep | 
-					(self opposite: dep)
-						atScopeInContext:
-							(aQuery
-								result: res;
-								yourself) ]) asSet
-]
-
-{ #category : #filtering }
-TDependencyQueryResult >> executeToScopeQuery: aQuery [
-	^ self
-		newObjectResultWith:
-			(self storage
-				inject: OrderedCollection new
-				into: [ :res :dep | 
-					(self opposite: dep)
-						toScopeInContext:
-							(aQuery
-								result: res;
-								yourself) ]) asSet
-]
-
-{ #category : #filtering }
-TDependencyQueryResult >> executeWithScopeQuery: aQuery [
-	^ self
-		newObjectResultWith:
-			(self storage
-				inject: OrderedCollection new
-				into: [ :res :dep | 
-					(self opposite: dep)
-						withScopeInContext:
-							(aQuery
-								result: res;
-								yourself) ]) asSet
+TDependencyQueryResult >> executeScopeQuery: aQuery [
+	self storage do: [ :dep | (self opposite: dep) scopeForQuery: aQuery direction: aQuery direction ].
+	^ self newObjectResultWith: aQuery result asSet
 ]
 
 { #category : #private }

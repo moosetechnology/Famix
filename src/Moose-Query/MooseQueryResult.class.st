@@ -51,42 +51,42 @@ MooseQueryResult >> add: newObject [
 
 { #category : #filtering }
 MooseQueryResult >> allAtAnyScope: aCollectionOfFamixClasses [
-	^ self executeAtScopeQuery: (MooseQueryContext recursivelyScopes: aCollectionOfFamixClasses direction: MooseQueryScopeUpStrategy)
+	^ self executeScopeQuery: (MooseQueryContext recursivelyScopes: aCollectionOfFamixClasses direction: MooseQueryScopeUpStrategy)
 ]
 
 { #category : #filtering }
 MooseQueryResult >> allAtScope: aClassFamix [
-	^ self executeAtScopeQuery: (MooseQueryContext recursivelyScope: aClassFamix direction: MooseQueryScopeUpStrategy)
+	^ self executeScopeQuery: (MooseQueryContext recursivelyScope: aClassFamix direction: MooseQueryScopeUpStrategy)
 ]
 
 { #category : #filtering }
 MooseQueryResult >> allToAnyScope: aCollectionOfFamixClasses [
-	^ self executeToScopeQuery: (MooseQueryContext recursivelyScopes: aCollectionOfFamixClasses direction: MooseQueryScopeDownStrategy)
+	^ self executeScopeQuery: (MooseQueryContext recursivelyScopes: aCollectionOfFamixClasses direction: MooseQueryScopeDownStrategy)
 ]
 
 { #category : #filtering }
 MooseQueryResult >> allToScope: aClassFamix [
-	^ self executeToScopeQuery: (MooseQueryContext recursivelyScope: aClassFamix direction: MooseQueryScopeDownStrategy)
+	^ self executeScopeQuery: (MooseQueryContext recursivelyScope: aClassFamix direction: MooseQueryScopeDownStrategy)
 ]
 
 { #category : #filtering }
 MooseQueryResult >> allWithAnyScope: aCollectionOfFamixClasses [
-	^ self executeWithScopeQuery: (MooseQueryContext recursivelyScopes: aCollectionOfFamixClasses direction: MooseQueryScopeAllStrategy)
+	^ self executeScopeQuery: (MooseQueryContext recursivelyScopes: aCollectionOfFamixClasses direction: MooseQueryScopeAllStrategy)
 ]
 
 { #category : #filtering }
 MooseQueryResult >> allWithScope: aClassFamix [
-	^ self executeWithScopeQuery: (MooseQueryContext recursivelyScope: aClassFamix direction: MooseQueryScopeAllStrategy)
+	^ self executeScopeQuery: (MooseQueryContext recursivelyScope: aClassFamix direction: MooseQueryScopeAllStrategy)
 ]
 
 { #category : #filtering }
 MooseQueryResult >> atAnyScope: aCollectionOfFamixClasses [
-	^ self executeAtScopeQuery: (MooseQueryContext scopes: aCollectionOfFamixClasses direction: MooseQueryScopeUpStrategy)
+	^ self executeScopeQuery: (MooseQueryContext scopes: aCollectionOfFamixClasses direction: MooseQueryScopeUpStrategy)
 ]
 
 { #category : #filtering }
 MooseQueryResult >> atScope: aClassFamix [
-	^ self executeAtScopeQuery: (MooseQueryContext scope: aClassFamix direction: MooseQueryScopeUpStrategy)
+	^ self executeScopeQuery: (MooseQueryContext scope: aClassFamix direction: MooseQueryScopeUpStrategy)
 ]
 
 { #category : #enumerating }
@@ -103,18 +103,8 @@ MooseQueryResult >> do: aBlock [
 	^ storage do: aBlock 
 ]
 
-{ #category : #accessing }
-MooseQueryResult >> executeAtScopeQuery: arg1 [ 
-	^ self subclassResponsibility
-]
-
-{ #category : #accessing }
-MooseQueryResult >> executeToScopeQuery: arg1 [ 
-	^ self subclassResponsibility
-]
-
-{ #category : #accessing }
-MooseQueryResult >> executeWithScopeQuery: arg1 [ 
+{ #category : #filtering }
+MooseQueryResult >> executeScopeQuery: aQuery [ 
 	^ self subclassResponsibility
 ]
 
@@ -210,12 +200,12 @@ MooseQueryResult >> storage: aCollection [
 
 { #category : #filtering }
 MooseQueryResult >> toAnyScope: aCollectionOfFamixClasses [
-	^ self executeToScopeQuery: (MooseQueryContext scopes: aCollectionOfFamixClasses direction: MooseQueryScopeDownStrategy)
+	^ self executeScopeQuery: (MooseQueryContext scopes: aCollectionOfFamixClasses direction: MooseQueryScopeDownStrategy)
 ]
 
 { #category : #filtering }
 MooseQueryResult >> toScope: aClassFamix [
-	^ self executeToScopeQuery: (MooseQueryContext scope: aClassFamix direction: MooseQueryScopeDownStrategy)
+	^ self executeScopeQuery: (MooseQueryContext scope: aClassFamix direction: MooseQueryScopeDownStrategy)
 ]
 
 { #category : #enumerating }
@@ -230,12 +220,12 @@ MooseQueryResult >> union: aCollection [
 
 { #category : #filtering }
 MooseQueryResult >> withAnyScope: aCollectionOfFamixClasses [
-	^ self executeWithScopeQuery: (MooseQueryContext scopes: aCollectionOfFamixClasses direction: MooseQueryScopeAllStrategy)
+	^ self executeScopeQuery: (MooseQueryContext scopes: aCollectionOfFamixClasses direction: MooseQueryScopeAllStrategy)
 ]
 
 { #category : #filtering }
 MooseQueryResult >> withScope: aClassFamix [
-	^ self executeWithScopeQuery: (MooseQueryContext scope: aClassFamix direction: MooseQueryScopeAllStrategy)
+	^ self executeScopeQuery: (MooseQueryContext scope: aClassFamix direction: MooseQueryScopeAllStrategy)
 ]
 
 { #category : #filtering }

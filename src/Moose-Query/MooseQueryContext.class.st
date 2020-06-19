@@ -8,7 +8,7 @@ Class {
 		'direction',
 		'result'
 	],
-	#category : #'Moose-Query-Core'
+	#category : #'Moose-Query-Scoping'
 }
 
 { #category : #'instance creation' }
@@ -65,19 +65,6 @@ MooseQueryContext >> add: anEntity [
 	self result add: anEntity
 ]
 
-{ #category : #query }
-MooseQueryContext >> atScopeFor: enEntity [
-	| selectors |
-	(self isOfRightType: enEntity)
-		ifTrue: [ self add: enEntity.
-			self isRecursive ifFalse: [ ^ self result ] ].
-
-	"The content of this block could be much more readable with #do: but we do this solution for performances... We need this method to be really really performant."
-	(self shouldStopOn: enEntity)
-		ifFalse: [ 1 to: (selectors := enEntity parentSelectors) size do: [ :ind | (enEntity perform: (selectors at: ind)) atScopeInContext: self ] ].
-	^ self result
-]
-
 { #category : #accessing }
 MooseQueryContext >> beRecursive [
 	isRecursive := true
@@ -125,6 +112,11 @@ MooseQueryContext >> result: anObject [
 	result := anObject
 ]
 
+{ #category : #query }
+MooseQueryContext >> scopeFor: anEntity [
+	^ direction scopeFor: anEntity query: self
+]
+
 { #category : #accessing }
 MooseQueryContext >> scopes [
 	^ scopes
@@ -140,19 +132,6 @@ MooseQueryContext >> shouldStopOn: anEntity [
 	^ self until value: anEntity
 ]
 
-{ #category : #query }
-MooseQueryContext >> toScopeFor: enEntity [
-	| selectors |
-	(self isOfRightType: enEntity)
-		ifTrue: [ self add: enEntity.
-			self isRecursive ifFalse: [ ^ self result ] ].
-
-	"The content of this block could be much more readable with #do: but we do this solution for performances... We need this method to be really really performant."
-	(self shouldStopOn: enEntity)
-		ifFalse: [ 1 to: (selectors := enEntity childrenSelectors) size do: [ :ind | (enEntity perform: (selectors at: ind)) toScopeInContext: self ] ].
-	^ self result
-]
-
 { #category : #accessing }
 MooseQueryContext >> until [
 	^ until ifNil: [ until := [ :each | false ] ]
@@ -161,11 +140,4 @@ MooseQueryContext >> until [
 { #category : #accessing }
 MooseQueryContext >> until: anObject [
 	until := anObject
-]
-
-{ #category : #query }
-MooseQueryContext >> withScopeFor: enEntity [
-	self atScopeFor: enEntity.
-	self toScopeFor: enEntity.
-	^ self result
 ]

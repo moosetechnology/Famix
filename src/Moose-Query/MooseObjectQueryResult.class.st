@@ -17,45 +17,9 @@ MooseObjectQueryResult class >> withAll: aCollection [
 ]
 
 { #category : #filtering }
-MooseObjectQueryResult >> executeAtScopeQuery: aQuery [
-	^ self
-		newObjectResultWith:
-			(self storage
-				inject: OrderedCollection new
-				into: [ :res :entity | 
-					entity
-						atScopeInContext:
-							(aQuery
-								result: res;
-								yourself) ]) asSet
-]
-
-{ #category : #filtering }
-MooseObjectQueryResult >> executeToScopeQuery: aQuery [
-	^ self
-		newObjectResultWith:
-			(self storage
-				inject: OrderedCollection new
-				into: [ :res :entity | 
-					entity
-						toScopeInContext:
-							(aQuery
-								result: res;
-								yourself) ]) asSet
-]
-
-{ #category : #filtering }
-MooseObjectQueryResult >> executeWithScopeQuery: aQuery [
-	^ self
-		newObjectResultWith:
-			(self storage
-				inject: OrderedCollection new
-				into: [ :res :entity | 
-					entity
-						withScopeInContext:
-							(aQuery
-								result: res;
-								yourself) ]) asSet
+MooseObjectQueryResult >> executeScopeQuery: aQuery [
+	self storage do: [ :entity | entity scopeForQuery: aQuery direction: aQuery direction ].
+	^ self newObjectResultWith: aQuery result asSet
 ]
 
 { #category : #evaluating }
