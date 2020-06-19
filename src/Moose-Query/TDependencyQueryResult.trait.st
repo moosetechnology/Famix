@@ -20,7 +20,7 @@ TDependencyQueryResult >> allAtAnyScope: aCollectionOfFamixClasses [
 							((MooseQueryContext recursivelyScopes: aCollectionOfFamixClasses)
 								result: res;
 								yourself)
-						during: [ (self opposite: dep) privateAtScopeIn: res ] ]) asSet
+						during: [ (self opposite: dep) atScopeIn: res ] ]) asSet
 ]
 
 { #category : #filtering }
@@ -35,7 +35,7 @@ TDependencyQueryResult >> allAtScope: aClassFamix [
 							((MooseQueryContext recursivelyScope: aClassFamix direction: MooseQueryScopeUpStrategy)
 								result: res;
 								yourself)
-						during: [ (self opposite: dep) privateAtScopeIn: res ] ]) asSet
+						during: [ (self opposite: dep) atScopeIn: res ] ]) asSet
 ]
 
 { #category : #filtering }
@@ -50,7 +50,7 @@ TDependencyQueryResult >> allToAnyScope: aCollectionOfFamixClasses [
 							((MooseQueryContext recursivelyScopes: aCollectionOfFamixClasses)
 								result: res;
 								yourself)
-						during: [ (self opposite: dep) privateToScopeIn: res ] ]) asSet
+						during: [ (self opposite: dep) toScopeIn: res ] ]) asSet
 ]
 
 { #category : #filtering }
@@ -65,7 +65,7 @@ TDependencyQueryResult >> allToScope: aClassFamix [
 							((MooseQueryContext recursivelyScope: aClassFamix direction: MooseQueryScopeDownStrategy)
 								result: res;
 								yourself)
-						during: [ (self opposite: dep) privateToScopeIn: res ] ]) asSet
+						during: [ (self opposite: dep) toScopeIn: res ] ]) asSet
 ]
 
 { #category : #filtering }
@@ -75,7 +75,7 @@ TDependencyQueryResult >> allWithAnyScope: aCollectionOfFamixClasses [
 			(self storage
 				inject: OrderedCollection new
 				into:
-					[ :res :dep | MooseQueryCurrentContext value: (MooseQueryContext recursivelyScopes: aCollectionOfFamixClasses) during: [ ((self opposite: dep) privateWithScopeIn: res) asSet ] ])
+					[ :res :dep | MooseQueryCurrentContext value: (MooseQueryContext recursivelyScopes: aCollectionOfFamixClasses) during: [ ((self opposite: dep) withScopeIn: res) asSet ] ])
 				asSet
 ]
 
@@ -85,7 +85,7 @@ TDependencyQueryResult >> allWithScope: aClassFamix [
 		newObjectResultWith:
 			(self storage
 				inject: OrderedCollection new
-				into: [ :res :dep | MooseQueryCurrentContext value: (MooseQueryContext recursivelyScope: aClassFamix direction: MooseQueryScopeAllStrategy) during: [ (self opposite: dep) privateWithScopeIn: res ] ]) asSet
+				into: [ :res :dep | MooseQueryCurrentContext value: (MooseQueryContext recursivelyScope: aClassFamix direction: MooseQueryScopeAllStrategy) during: [ (self opposite: dep) withScopeIn: res ] ]) asSet
 ]
 
 { #category : #filtering }
@@ -100,7 +100,7 @@ TDependencyQueryResult >> atAnyScope: aCollectionOfFamixClasses [
 							((MooseQueryContext scopes: aCollectionOfFamixClasses direction: MooseQueryScopeUpStrategy)
 								result: res;
 								yourself)
-						during: [ (self opposite: dep) privateAtScopeIn: res ] ]) asSet
+						during: [ (self opposite: dep) atScopeIn: res ] ]) asSet
 ]
 
 { #category : #filtering }
@@ -115,7 +115,7 @@ TDependencyQueryResult >> atScope: aClassFamix [
 							((MooseQueryContext scope: aClassFamix direction: MooseQueryScopeUpStrategy)
 								result: res;
 								yourself)
-						during: [ (self opposite: dep) privateAtScopeIn: res ] ]) asSet
+						during: [ (self opposite: dep) atScopeIn: res ] ]) asSet
 ]
 
 { #category : #filtering }
@@ -132,7 +132,7 @@ TDependencyQueryResult >> atScope: aClassFamix withNonMatchingEntitiesDo: aBlock
 					((MooseQueryContext scope: aClassFamix direction: MooseQueryScopeUpStrategy)
 						result: res;
 						yourself)
-				during: [ (opposite := self opposite: dep) privateAtScopeIn: coll ].
+				during: [ (opposite := self opposite: dep) atScopeIn: coll ].
 			coll ifEmpty: [ aBlock cull: opposite cull: res ] ifNotEmpty: [ :results | res addAll: results ] ].
 	^ self newObjectResultWith: res asSet
 ]
@@ -214,7 +214,7 @@ TDependencyQueryResult >> toAnyScope: aCollectionOfFamixClasses [
 							((MooseQueryContext scopes: aCollectionOfFamixClasses direction: MooseQueryScopeDownStrategy)
 								result: res;
 								yourself)
-						during: [ (self opposite: dep) privateToScopeIn: res ] ]) asSet
+						during: [ (self opposite: dep) toScopeIn: res ] ]) asSet
 ]
 
 { #category : #filtering }
@@ -229,7 +229,7 @@ TDependencyQueryResult >> toScope: aClassFamix [
 							((MooseQueryContext scope: aClassFamix direction: MooseQueryScopeDownStrategy)
 								result: res;
 								yourself)
-						during: [ (self opposite: dep) privateToScopeIn: res ] ]) asSet
+						during: [ (self opposite: dep) toScopeIn: res ] ]) asSet
 ]
 
 { #category : #filtering }
@@ -239,7 +239,7 @@ TDependencyQueryResult >> withAnyScope: aCollectionOfFamixClasses [
 			(self storage
 				inject: OrderedCollection new
 				into:
-					[ :res :dep | MooseQueryCurrentContext value: (MooseQueryContext scopes: aCollectionOfFamixClasses direction: MooseQueryScopeAllStrategy) during: [ (self opposite: dep) privateWithScopeIn: res ] ])
+					[ :res :dep | MooseQueryCurrentContext value: (MooseQueryContext scopes: aCollectionOfFamixClasses direction: MooseQueryScopeAllStrategy) during: [ (self opposite: dep) withScopeIn: res ] ])
 				asSet
 ]
 
@@ -249,7 +249,7 @@ TDependencyQueryResult >> withScope: aClassFamix [
 		newObjectResultWith:
 			(self storage
 				inject: OrderedCollection new
-				into: [ :res :dep | MooseQueryCurrentContext value: (MooseQueryContext scope: aClassFamix direction: MooseQueryScopeAllStrategy) during: [ (self opposite: dep) privateWithScopeIn: res ] ]) asSet
+				into: [ :res :dep | MooseQueryCurrentContext value: (MooseQueryContext scope: aClassFamix direction: MooseQueryScopeAllStrategy) during: [ (self opposite: dep) withScopeIn: res ] ]) asSet
 ]
 
 { #category : #filtering }
