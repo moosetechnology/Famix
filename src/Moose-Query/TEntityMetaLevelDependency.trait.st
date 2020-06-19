@@ -217,7 +217,7 @@ TEntityMetaLevelDependency >> addAllParentsIn: aCollection [
 TEntityMetaLevelDependency >> allAtAnyScope: aCollectionOfFamixClasses [
 	"I am used to return all the encountered entities (recursively) at matching one of the class scope given as parameter that are up in the containment tree of the metamodel"
 
-	^ MooseQueryCurrentContext value: (MooseQueryContext recursivelyScopes: aCollectionOfFamixClasses) during: [ (self atScopeIn: OrderedCollection new) asSet asArray ]
+	^ MooseQueryCurrentContext value: (MooseQueryContext recursivelyScopes: aCollectionOfFamixClasses direction: MooseQueryScopeUpStrategy) during: [ (self atScopeIn: OrderedCollection new) asSet asArray ]
 ]
 
 { #category : #scoping }
@@ -307,7 +307,7 @@ TEntityMetaLevelDependency >> allProvidersAtScope: aClass [
 TEntityMetaLevelDependency >> allToAnyScope: aCollectionOfFamixClasses [
 	"I am used to return all the encountered entities (recursively) at matching one of the class scope given as parameter that are down in the containment tree of the metamodel"
 
-	^ MooseQueryCurrentContext value: (MooseQueryContext recursivelyScopes: aCollectionOfFamixClasses) during: [ (self toScopeIn: OrderedCollection new) asSet asArray ]
+	^ MooseQueryCurrentContext value: (MooseQueryContext recursivelyScopes: aCollectionOfFamixClasses direction: MooseQueryScopeDownStrategy) during: [ (self toScopeIn: OrderedCollection new) asSet asArray ]
 ]
 
 { #category : #scoping }
@@ -343,7 +343,9 @@ TEntityMetaLevelDependency >> allToScope: aClassFAMIX until: rejectBlock [
 TEntityMetaLevelDependency >> allWithAnyScope: aCollectionOfFamixClasses [
 	"I am used to return all the entities (recursively) matching one of the class scope that are up or down in the containment tree of the metamodel"
 
-	^ MooseQueryCurrentContext value: (MooseQueryContext recursivelyScopes: aCollectionOfFamixClasses) during: [ (self withScopeIn: OrderedCollection new) asSet ]
+	^ MooseQueryCurrentContext
+		value: (MooseQueryContext recursivelyScopes: aCollectionOfFamixClasses direction: MooseQueryScopeAllStrategy)
+		during: [ (self withScopeIn: OrderedCollection new) asSet ]
 ]
 
 { #category : #scoping }

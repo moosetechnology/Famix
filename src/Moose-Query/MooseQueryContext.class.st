@@ -35,13 +35,6 @@ MooseQueryContext class >> recursivelyScope: aFamixType direction: aClass until:
 ]
 
 { #category : #'instance creation' }
-MooseQueryContext class >> recursivelyScopes: aCollectionOfType [
-	^ (self scopes: aCollectionOfType)
-		beRecursive;
-		yourself
-]
-
-{ #category : #'instance creation' }
 MooseQueryContext class >> recursivelyScopes: aCollectionOfType direction: aClass [
 	^ (self scopes: aCollectionOfType direction: aClass)
 		beRecursive;

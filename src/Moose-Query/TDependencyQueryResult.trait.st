@@ -17,7 +17,7 @@ TDependencyQueryResult >> allAtAnyScope: aCollectionOfFamixClasses [
 				into: [ :res :dep | 
 					MooseQueryCurrentContext
 						value:
-							((MooseQueryContext recursivelyScopes: aCollectionOfFamixClasses)
+							((MooseQueryContext recursivelyScopes: aCollectionOfFamixClasses direction: MooseQueryScopeUpStrategy)
 								result: res;
 								yourself)
 						during: [ (self opposite: dep) atScopeIn: res ] ]) asSet
@@ -47,7 +47,7 @@ TDependencyQueryResult >> allToAnyScope: aCollectionOfFamixClasses [
 				into: [ :res :dep | 
 					MooseQueryCurrentContext
 						value:
-							((MooseQueryContext recursivelyScopes: aCollectionOfFamixClasses)
+							((MooseQueryContext recursivelyScopes: aCollectionOfFamixClasses direction: MooseQueryScopeDownStrategy)
 								result: res;
 								yourself)
 						during: [ (self opposite: dep) toScopeIn: res ] ]) asSet
@@ -75,7 +75,7 @@ TDependencyQueryResult >> allWithAnyScope: aCollectionOfFamixClasses [
 			(self storage
 				inject: OrderedCollection new
 				into:
-					[ :res :dep | MooseQueryCurrentContext value: (MooseQueryContext recursivelyScopes: aCollectionOfFamixClasses) during: [ ((self opposite: dep) withScopeIn: res) asSet ] ])
+					[ :res :dep | MooseQueryCurrentContext value: (MooseQueryContext recursivelyScopes: aCollectionOfFamixClasses direction: MooseQueryScopeAllStrategy) during: [ ((self opposite: dep) withScopeIn: res) asSet ] ])
 				asSet
 ]
 
