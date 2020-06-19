@@ -500,7 +500,7 @@ TEntityMetaLevelDependency >> parentsDo: aBlock [
 
 { #category : #private }
 TEntityMetaLevelDependency >> scopeForQuery: aQuery direction: aDirection [
-	^ aDirection scopeFor: self query: aQuery
+	aDirection scopeFor: self query: aQuery
 ]
 
 { #category : #scoping }
