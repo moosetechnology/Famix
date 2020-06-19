@@ -6,6 +6,11 @@ UndefinedObject >> atScopeIn: aCollection [
 ]
 
 { #category : #'*Moose-Query' }
+UndefinedObject >> atScopeInContext: aContext [
+	^ aContext result
+]
+
+{ #category : #'*Moose-Query' }
 UndefinedObject >> toScopeIn: aCollection [
 	^ MooseQueryCurrentContext result
 ]

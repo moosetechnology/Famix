@@ -28,7 +28,7 @@ MooseObjectQueryResult >> allAtAnyScope: aCollectionOfFamixClasses [
 							((MooseQueryContext recursivelyScopes: aCollectionOfFamixClasses direction: MooseQueryScopeUpStrategy)
 								result: res;
 								yourself)
-						during: [ entity atScopeIn: res ] ]) asSet
+						during: [ entity atScopeInContext: MooseQueryCurrentContext value ] ]) asSet
 ]
 
 { #category : #filtering }
@@ -43,7 +43,7 @@ MooseObjectQueryResult >> allAtScope: aClassFamix [
 							((MooseQueryContext recursivelyScope: aClassFamix direction: MooseQueryScopeUpStrategy)
 								result: res;
 								yourself)
-						during: [ entity atScopeIn: res ] ]) asSet
+						during: [ entity atScopeInContext: MooseQueryCurrentContext value ] ]) asSet
 ]
 
 { #category : #filtering }
@@ -107,7 +107,7 @@ MooseObjectQueryResult >> atAnyScope: aCollectionOfFamixClasses [
 							((MooseQueryContext scopes: aCollectionOfFamixClasses direction: MooseQueryScopeUpStrategy)
 								result: res;
 								yourself)
-						during: [ entity atScopeIn: res ] ]) asSet
+						during: [ entity atScopeInContext: MooseQueryCurrentContext value ] ]) asSet
 ]
 
 { #category : #filtering }
@@ -122,7 +122,7 @@ MooseObjectQueryResult >> atScope: aClassFamix [
 							((MooseQueryContext scope: aClassFamix direction: MooseQueryScopeUpStrategy)
 								result: res;
 								yourself)
-						during: [ entity atScopeIn: res ] ]) asSet
+						during: [ entity atScopeInContext: MooseQueryCurrentContext value ] ]) asSet
 ]
 
 { #category : #evaluating }

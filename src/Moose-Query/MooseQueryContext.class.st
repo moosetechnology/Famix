@@ -85,6 +85,19 @@ MooseQueryContext >> add: anEntity [
 ]
 
 { #category : #accessing }
+MooseQueryContext >> atScopeFor: enEntity [
+	| selectors |
+	(self isOfRightType: enEntity)
+		ifTrue: [ self add: enEntity.
+			self isRecursive ifFalse: [ ^ self result ] ].
+
+	"The content of this block could be much more readable with #do: but we do this solution for performances... We need this method to be really really performant."
+	(self shouldStopOn: enEntity)
+		ifFalse: [ 1 to: (selectors := enEntity parentSelectors) size do: [ :ind | (enEntity perform: (selectors at: ind)) atScopeInContext: self ] ].
+	^ self result
+]
+
+{ #category : #accessing }
 MooseQueryContext >> beRecursive [
 	isRecursive := true
 ]

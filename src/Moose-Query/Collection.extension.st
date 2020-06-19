@@ -1,9 +1,9 @@
 Extension { #name : #Collection }
 
 { #category : #'*Moose-Query' }
-Collection >> atScopeIn: aCollection [
-	1 to: self size do: [ :ind | (self at: ind) atScopeIn: MooseQueryCurrentContext result ].
-	^ MooseQueryCurrentContext result
+Collection >> atScopeInContext: aContext [
+	1 to: self size do: [ :ind | aContext atScopeFor: (self at: ind) ].
+	^ aContext result
 ]
 
 { #category : #'*Moose-Query' }

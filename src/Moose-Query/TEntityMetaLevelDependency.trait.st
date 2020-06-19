@@ -217,7 +217,9 @@ TEntityMetaLevelDependency >> addAllParentsIn: aCollection [
 TEntityMetaLevelDependency >> allAtAnyScope: aCollectionOfFamixClasses [
 	"I am used to return all the encountered entities (recursively) at matching one of the class scope given as parameter that are up in the containment tree of the metamodel"
 
-	^ MooseQueryCurrentContext value: (MooseQueryContext recursivelyScopes: aCollectionOfFamixClasses direction: MooseQueryScopeUpStrategy) during: [ (self atScopeIn: OrderedCollection new) asSet asArray ]
+	^ MooseQueryCurrentContext
+		value: (MooseQueryContext recursivelyScopes: aCollectionOfFamixClasses direction: MooseQueryScopeUpStrategy)
+		during: [ (MooseQueryCurrentContext value atScopeFor: self) asSet asArray ]
 ]
 
 { #category : #scoping }
@@ -227,7 +229,7 @@ TEntityMetaLevelDependency >> allAtAnyScope: aCollectionOfFamixClasses until: re
 
 	^ MooseQueryCurrentContext
 		value: (MooseQueryContext recursivelyScopes: aCollectionOfFamixClasses direction: MooseQueryScopeUpStrategy until: rejectBlock)
-		during: [ (self atScopeIn: OrderedCollection new) asSet asArray ]
+		during: [ (MooseQueryCurrentContext value atScopeFor: self) asSet asArray ]
 ]
 
 { #category : #scoping }
@@ -235,7 +237,7 @@ TEntityMetaLevelDependency >> allAtScope: aClassFAMIX [
 	"I am used to return all the entities at a given famix class scope that are up in the containment tree of the metamodel on multiple levels."
 
 	self flag: #todo.	"I think we do not need the #asArray cast but it will break tests. I will probably let it now then change the tests later. Step by step."
-	^ MooseQueryCurrentContext value: (MooseQueryContext recursivelyScope: aClassFAMIX direction: MooseQueryScopeUpStrategy) during: [ (self atScopeIn: OrderedCollection new) asSet asArray ]
+	^ MooseQueryCurrentContext value: (MooseQueryContext recursivelyScope: aClassFAMIX direction: MooseQueryScopeUpStrategy) during: [ (MooseQueryCurrentContext value atScopeFor: self) asSet asArray ]
 ]
 
 { #category : #scoping }
@@ -245,7 +247,7 @@ TEntityMetaLevelDependency >> allAtScope: aClassFAMIX until: rejectBlock [
 
 	^ MooseQueryCurrentContext
 		value: (MooseQueryContext recursivelyScope: aClassFAMIX direction: MooseQueryScopeUpStrategy until: rejectBlock)
-		during: [ (self atScopeIn: OrderedCollection new) asSet asArray ]
+		during: [ (MooseQueryCurrentContext value atScopeFor: self) asSet asArray ]
 ]
 
 { #category : #accessing }
@@ -381,7 +383,7 @@ TEntityMetaLevelDependency >> atAnyScope: aCollectionOfFamixClasses [
 
 	^ MooseQueryCurrentContext
 		value: (MooseQueryContext scopes: aCollectionOfFamixClasses direction: MooseQueryScopeUpStrategy)
-		during: [ (self atScopeIn: OrderedCollection new) asSet asArray ]
+		during: [ (MooseQueryCurrentContext value atScopeFor: self) asSet asArray ]
 ]
 
 { #category : #scoping }
@@ -391,7 +393,7 @@ TEntityMetaLevelDependency >> atAnyScope: aCollectionOfFamixClasses until: rejec
 
 	^ MooseQueryCurrentContext
 		value: (MooseQueryContext scopes: aCollectionOfFamixClasses direction: MooseQueryScopeUpStrategy until: rejectBlock)
-		during: [ (self atScopeIn: OrderedCollection new) asSet asArray ]
+		during: [ (MooseQueryCurrentContext value atScopeFor: self) asSet asArray ]
 ]
 
 { #category : #scoping }
@@ -399,7 +401,9 @@ TEntityMetaLevelDependency >> atScope: aClassFAMIX [
 	"I am used to return all the first encountered entities at a given famix class scope that are up in the containment tree of the metamodel"
 
 	self flag: #todo.	"I think we do not need the #asArray cast but it will break tests. I will probably let it now then change the tests later. Step by step."
-	^ MooseQueryCurrentContext value: (MooseQueryContext scope: aClassFAMIX direction: MooseQueryScopeUpStrategy) during: [ (self atScopeIn: OrderedCollection new) asSet asArray ]
+	^ MooseQueryCurrentContext
+		value: (MooseQueryContext scope: aClassFAMIX direction: MooseQueryScopeUpStrategy)
+		during: [ (MooseQueryCurrentContext value atScopeFor: self) asSet asArray ]
 ]
 
 { #category : #scoping }
@@ -410,20 +414,12 @@ TEntityMetaLevelDependency >> atScope: aClassFAMIX until: rejectBlock [
 	self flag: #todo.	"I think we do not need the #asArray cast but it will break tests. I will probably let it now then change the tests later. Step by step."
 	^ MooseQueryCurrentContext
 		value: (MooseQueryContext scope: aClassFAMIX direction: MooseQueryScopeUpStrategy until: rejectBlock)
-		during: [ (self atScopeIn: OrderedCollection new) asSet asArray ]
+		during: [ (MooseQueryCurrentContext value atScopeFor: self) asSet asArray ]
 ]
 
 { #category : #private }
-TEntityMetaLevelDependency >> atScopeIn: aCollection [
-	| selectors |
-	(MooseQueryCurrentContext isOfRightType: self)
-		ifTrue: [ MooseQueryCurrentContext add: self.
-			MooseQueryCurrentContext isRecursive ifFalse: [ ^ MooseQueryCurrentContext result ] ].
-
-	"The content of this block could be much more readable with #do: but we do this solution for performances... We need this method to be really really performant."
-	(MooseQueryCurrentContext shouldStopOn: self)
-		ifFalse: [ 1 to: (selectors := self parentSelectors) size do: [ :ind | (self perform: (selectors at: ind)) atScopeIn: MooseQueryCurrentContext result ] ].
-	^ MooseQueryCurrentContext result
+TEntityMetaLevelDependency >> atScopeInContext: aContext [
+	^ aContext atScopeFor: self
 ]
 
 { #category : #deprecated }
@@ -635,7 +631,7 @@ TEntityMetaLevelDependency >> withScope: aClassFAMIX until: rejectBlock [
 { #category : #private }
 TEntityMetaLevelDependency >> withScopeIn: aCollection [
 	self flag: #todo.	"Check perfs. Maybe checking in parents/children types before can speedup."
-	self atScopeIn: MooseQueryCurrentContext result.
+	MooseQueryCurrentContext value atScopeFor: self.
 	self toScopeIn: MooseQueryCurrentContext result.
 	^ MooseQueryCurrentContext result
 ]

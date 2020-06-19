@@ -20,7 +20,7 @@ TDependencyQueryResult >> allAtAnyScope: aCollectionOfFamixClasses [
 							((MooseQueryContext recursivelyScopes: aCollectionOfFamixClasses direction: MooseQueryScopeUpStrategy)
 								result: res;
 								yourself)
-						during: [ (self opposite: dep) atScopeIn: res ] ]) asSet
+						during: [ (self opposite: dep) atScopeInContext: MooseQueryCurrentContext value ] ]) asSet
 ]
 
 { #category : #filtering }
@@ -35,7 +35,7 @@ TDependencyQueryResult >> allAtScope: aClassFamix [
 							((MooseQueryContext recursivelyScope: aClassFamix direction: MooseQueryScopeUpStrategy)
 								result: res;
 								yourself)
-						during: [ (self opposite: dep) atScopeIn: res ] ]) asSet
+						during: [ (self opposite: dep) atScopeInContext: MooseQueryCurrentContext value ] ]) asSet
 ]
 
 { #category : #filtering }
@@ -100,7 +100,7 @@ TDependencyQueryResult >> atAnyScope: aCollectionOfFamixClasses [
 							((MooseQueryContext scopes: aCollectionOfFamixClasses direction: MooseQueryScopeUpStrategy)
 								result: res;
 								yourself)
-						during: [ (self opposite: dep) atScopeIn: res ] ]) asSet
+						during: [ (self opposite: dep) atScopeInContext: MooseQueryCurrentContext value ] ]) asSet
 ]
 
 { #category : #filtering }
@@ -115,7 +115,7 @@ TDependencyQueryResult >> atScope: aClassFamix [
 							((MooseQueryContext scope: aClassFamix direction: MooseQueryScopeUpStrategy)
 								result: res;
 								yourself)
-						during: [ (self opposite: dep) atScopeIn: res ] ]) asSet
+						during: [ (self opposite: dep) atScopeInContext: MooseQueryCurrentContext value ] ]) asSet
 ]
 
 { #category : #filtering }
@@ -130,9 +130,9 @@ TDependencyQueryResult >> atScope: aClassFamix withNonMatchingEntitiesDo: aBlock
 			MooseQueryCurrentContext
 				value:
 					((MooseQueryContext scope: aClassFamix direction: MooseQueryScopeUpStrategy)
-						result: res;
+						result: coll;
 						yourself)
-				during: [ (opposite := self opposite: dep) atScopeIn: coll ].
+				during: [ (opposite := self opposite: dep) atScopeInContext: MooseQueryCurrentContext value ].
 			coll ifEmpty: [ aBlock cull: opposite cull: res ] ifNotEmpty: [ :results | res addAll: results ] ].
 	^ self newObjectResultWith: res asSet
 ]

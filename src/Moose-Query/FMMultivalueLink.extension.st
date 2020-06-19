@@ -1,8 +1,8 @@
 Extension { #name : #FMMultivalueLink }
 
 { #category : #'*Moose-Query' }
-FMMultivalueLink >> atScopeIn: aCollection [
-	^ values atScopeIn: MooseQueryCurrentContext result
+FMMultivalueLink >> atScopeInContext: aContext [
+	^ values atScopeInContext: aContext
 ]
 
 { #category : #'*Moose-Query' }
