@@ -181,3 +181,10 @@ MooseQueryContext >> until [
 MooseQueryContext >> until: anObject [
 	until := anObject
 ]
+
+{ #category : #query }
+MooseQueryContext >> withScopeFor: enEntity [
+	self atScopeFor: enEntity.
+	self toScopeFor: enEntity.
+	^ self result
+]
