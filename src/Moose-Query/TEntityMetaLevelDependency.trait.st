@@ -217,9 +217,7 @@ TEntityMetaLevelDependency >> addAllParentsIn: aCollection [
 TEntityMetaLevelDependency >> allAtAnyScope: aCollectionOfFamixClasses [
 	"I am used to return all the encountered entities (recursively) at matching one of the class scope given as parameter that are up in the containment tree of the metamodel"
 
-	^ MooseQueryCurrentContext
-		value: (MooseQueryContext recursivelyScopes: aCollectionOfFamixClasses direction: MooseQueryScopeUpStrategy)
-		during: [ (MooseQueryCurrentContext value atScopeFor: self) asSet asArray ]
+	^ ((MooseQueryContext recursivelyScopes: aCollectionOfFamixClasses direction: MooseQueryScopeUpStrategy) atScopeFor: self) asSet asArray
 ]
 
 { #category : #scoping }
@@ -227,9 +225,7 @@ TEntityMetaLevelDependency >> allAtAnyScope: aCollectionOfFamixClasses until: re
 	"I am used to return all the encountered entities (recursively) at matching one of the class scope given as parameter that are up in the containment tree of the metamodel.
 	I stop the recursion when the rejectBlock is true"
 
-	^ MooseQueryCurrentContext
-		value: (MooseQueryContext recursivelyScopes: aCollectionOfFamixClasses direction: MooseQueryScopeUpStrategy until: rejectBlock)
-		during: [ (MooseQueryCurrentContext value atScopeFor: self) asSet asArray ]
+	^ ((MooseQueryContext recursivelyScopes: aCollectionOfFamixClasses direction: MooseQueryScopeUpStrategy until: rejectBlock) atScopeFor: self) asSet asArray
 ]
 
 { #category : #scoping }
@@ -237,7 +233,7 @@ TEntityMetaLevelDependency >> allAtScope: aClassFAMIX [
 	"I am used to return all the entities at a given famix class scope that are up in the containment tree of the metamodel on multiple levels."
 
 	self flag: #todo.	"I think we do not need the #asArray cast but it will break tests. I will probably let it now then change the tests later. Step by step."
-	^ MooseQueryCurrentContext value: (MooseQueryContext recursivelyScope: aClassFAMIX direction: MooseQueryScopeUpStrategy) during: [ (MooseQueryCurrentContext value atScopeFor: self) asSet asArray ]
+	^ ((MooseQueryContext recursivelyScope: aClassFAMIX direction: MooseQueryScopeUpStrategy) atScopeFor: self) asSet asArray
 ]
 
 { #category : #scoping }
@@ -245,9 +241,7 @@ TEntityMetaLevelDependency >> allAtScope: aClassFAMIX until: rejectBlock [
 	"I am used to return all the entities at a given famix class scope that are up in the containment tree of the metamodel on multiple levels.
 	I stop the recursion when the rejectBlock is true."
 
-	^ MooseQueryCurrentContext
-		value: (MooseQueryContext recursivelyScope: aClassFAMIX direction: MooseQueryScopeUpStrategy until: rejectBlock)
-		during: [ (MooseQueryCurrentContext value atScopeFor: self) asSet asArray ]
+	^ ((MooseQueryContext recursivelyScope: aClassFAMIX direction: MooseQueryScopeUpStrategy until: rejectBlock) atScopeFor: self) asSet asArray
 ]
 
 { #category : #accessing }
@@ -381,9 +375,7 @@ TEntityMetaLevelDependency >> allWithScope: aClassFAMIX until: rejectBlock [
 TEntityMetaLevelDependency >> atAnyScope: aCollectionOfFamixClasses [
 	"I am used to return all the first encountered entities matching one of the class scope given as parameter that are up in the containment tree of the metamodel"
 
-	^ MooseQueryCurrentContext
-		value: (MooseQueryContext scopes: aCollectionOfFamixClasses direction: MooseQueryScopeUpStrategy)
-		during: [ (MooseQueryCurrentContext value atScopeFor: self) asSet asArray ]
+	^ ((MooseQueryContext scopes: aCollectionOfFamixClasses direction: MooseQueryScopeUpStrategy) atScopeFor: self) asSet asArray
 ]
 
 { #category : #scoping }
@@ -391,9 +383,7 @@ TEntityMetaLevelDependency >> atAnyScope: aCollectionOfFamixClasses until: rejec
 	"I am used to return all the first encountered entities matching one of the class scope given as parameter that are up in the containment tree of the metamodel.
 	I stop the recursion when the rejectBlock is true"
 
-	^ MooseQueryCurrentContext
-		value: (MooseQueryContext scopes: aCollectionOfFamixClasses direction: MooseQueryScopeUpStrategy until: rejectBlock)
-		during: [ (MooseQueryCurrentContext value atScopeFor: self) asSet asArray ]
+	^ ((MooseQueryContext scopes: aCollectionOfFamixClasses direction: MooseQueryScopeUpStrategy until: rejectBlock) atScopeFor: self) asSet asArray
 ]
 
 { #category : #scoping }
@@ -401,9 +391,7 @@ TEntityMetaLevelDependency >> atScope: aClassFAMIX [
 	"I am used to return all the first encountered entities at a given famix class scope that are up in the containment tree of the metamodel"
 
 	self flag: #todo.	"I think we do not need the #asArray cast but it will break tests. I will probably let it now then change the tests later. Step by step."
-	^ MooseQueryCurrentContext
-		value: (MooseQueryContext scope: aClassFAMIX direction: MooseQueryScopeUpStrategy)
-		during: [ (MooseQueryCurrentContext value atScopeFor: self) asSet asArray ]
+	^ ((MooseQueryContext scope: aClassFAMIX direction: MooseQueryScopeUpStrategy) atScopeFor: self) asSet asArray
 ]
 
 { #category : #scoping }
@@ -412,9 +400,7 @@ TEntityMetaLevelDependency >> atScope: aClassFAMIX until: rejectBlock [
 	I stop the recursion when the rejectBlock is true"
 
 	self flag: #todo.	"I think we do not need the #asArray cast but it will break tests. I will probably let it now then change the tests later. Step by step."
-	^ MooseQueryCurrentContext
-		value: (MooseQueryContext scope: aClassFAMIX direction: MooseQueryScopeUpStrategy until: rejectBlock)
-		during: [ (MooseQueryCurrentContext value atScopeFor: self) asSet asArray ]
+	^ ((MooseQueryContext scope: aClassFAMIX direction: MooseQueryScopeUpStrategy until: rejectBlock) atScopeFor: self) asSet asArray
 ]
 
 { #category : #private }

@@ -1,11 +1,6 @@
 Extension { #name : #UndefinedObject }
 
 { #category : #'*Moose-Query' }
-UndefinedObject >> atScopeIn: aCollection [
-	^ MooseQueryCurrentContext result
-]
-
-{ #category : #'*Moose-Query' }
 UndefinedObject >> atScopeInContext: aContext [
 	^ aContext result
 ]

@@ -23,12 +23,11 @@ MooseObjectQueryResult >> allAtAnyScope: aCollectionOfFamixClasses [
 			(self storage
 				inject: OrderedCollection new
 				into: [ :res :entity | 
-					MooseQueryCurrentContext
-						value:
+					entity
+						atScopeInContext:
 							((MooseQueryContext recursivelyScopes: aCollectionOfFamixClasses direction: MooseQueryScopeUpStrategy)
 								result: res;
-								yourself)
-						during: [ entity atScopeInContext: MooseQueryCurrentContext value ] ]) asSet
+								yourself) ]) asSet
 ]
 
 { #category : #filtering }
@@ -38,12 +37,11 @@ MooseObjectQueryResult >> allAtScope: aClassFamix [
 			(self storage
 				inject: OrderedCollection new
 				into: [ :res :entity | 
-					MooseQueryCurrentContext
-						value:
+					entity
+						atScopeInContext:
 							((MooseQueryContext recursivelyScope: aClassFamix direction: MooseQueryScopeUpStrategy)
 								result: res;
-								yourself)
-						during: [ entity atScopeInContext: MooseQueryCurrentContext value ] ]) asSet
+								yourself) ]) asSet
 ]
 
 { #category : #filtering }
@@ -102,12 +100,11 @@ MooseObjectQueryResult >> atAnyScope: aCollectionOfFamixClasses [
 			(self storage
 				inject: OrderedCollection new
 				into: [ :res :entity | 
-					MooseQueryCurrentContext
-						value:
+					entity
+						atScopeInContext:
 							((MooseQueryContext scopes: aCollectionOfFamixClasses direction: MooseQueryScopeUpStrategy)
 								result: res;
-								yourself)
-						during: [ entity atScopeInContext: MooseQueryCurrentContext value ] ]) asSet
+								yourself) ]) asSet
 ]
 
 { #category : #filtering }
@@ -117,12 +114,11 @@ MooseObjectQueryResult >> atScope: aClassFamix [
 			(self storage
 				inject: OrderedCollection new
 				into: [ :res :entity | 
-					MooseQueryCurrentContext
-						value:
+					entity
+						atScopeInContext:
 							((MooseQueryContext scope: aClassFamix direction: MooseQueryScopeUpStrategy)
 								result: res;
-								yourself)
-						during: [ entity atScopeInContext: MooseQueryCurrentContext value ] ]) asSet
+								yourself) ]) asSet
 ]
 
 { #category : #evaluating }
