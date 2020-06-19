@@ -65,10 +65,7 @@ TEntityMetaLevelDependency classSide >> dependencyFM3PropertyDescriptionIn: aMet
 	 (obviously aMetamodel should contain the class self)"
 	aMetamodel ifNil: [ ^ OrderedCollection new ].
 	^ (self allDeclaredPropertiesIn: aMetamodel)
-		select: [ :e | e hasOpposite and:
-			[ (e opposite isSource or: [ e opposite isTarget ]) or:
-				[ e isDependencySource or: [ e opposite isDependencySource ] ] ]
-		]
+		select: [ :e | e hasOpposite and: [ e opposite isSource or: [ e opposite isTarget ] ] ]
 ]
 
 { #category : #accessing }
@@ -161,7 +158,7 @@ TEntityMetaLevelDependency classSide >> privateChildrenTypesIn: aMetamodel [
 
 	childrenUsers := aMetamodel concreteImplementingClasses select: [ :e | e allGeneratedTraits includesAny: childrenImplementingClasses ].
 
-	^ (childrenImplementingClasses , childrenUsers) asSet asArray	"<== This could later be #removeDuplicates but it is currently broken on arrays. See https://github.com/pharo-project/pharo/issues/4850"
+	^ (childrenImplementingClasses , childrenUsers flatCollect: #withAllSubclasses as: Set) asArray	"<== This could later be #removeDuplicates but it is currently broken on arrays. See https://github.com/pharo-project/pharo/issues/4850"
 ]
 
 { #category : #new }
@@ -195,24 +192,31 @@ TEntityMetaLevelDependency classSide >> privateParentSelectorsIn: aMetamodel [
 { #category : #new }
 TEntityMetaLevelDependency classSide >> privateParentTypesIn: aMetamodel [
 	| containerImplementingClasses containerUsers |
-	containerImplementingClasses := (self allDeclaredPropertiesIn: aMetamodel) select: #isContainer thenCollect: #implementingType.
+	containerImplementingClasses := (self allDeclaredPropertiesIn: aMetamodel)
+		select: #isContainer
+		thenCollect: #implementingType.
 
-	containerUsers := aMetamodel concreteImplementingClasses select: [ :e | e allGeneratedTraits includesAny: containerImplementingClasses ].
+	containerUsers := (aMetamodel concreteImplementingClasses select: [ :e | e allGeneratedTraits includesAny: containerImplementingClasses ])
+		flatCollect: #withAllSubclasses.
 
-	^ (containerImplementingClasses , containerUsers) asSet asArray	"<== This could later be #removeDuplicates but it is currently broken on arrays. See https://github.com/pharo-project/pharo/issues/4850"
+	^ (containerImplementingClasses , containerUsers flatCollect: #withAllSubclasses as: Set) asArray	"<== This could later be #removeDuplicates but it is currently broken on arrays. See https://github.com/pharo-project/pharo/issues/4850"
 ]
 
 { #category : #private }
 TEntityMetaLevelDependency >> addAllChildrenIn: aCollection [
-	aCollection addAll: self children.
-	self children do: [ :each | each addAllChildrenIn: aCollection ].
+	self children
+		do: [ :each | 
+			aCollection add: each.
+			each addAllChildrenIn: aCollection ].
 	^ aCollection
 ]
 
 { #category : #private }
 TEntityMetaLevelDependency >> addAllParentsIn: aCollection [
-	aCollection addAll: self parents.
-	self parents do: [ :each | each addAllParentsIn: aCollection ].
+	self
+		parentsDo: [ :each | 
+			aCollection add: each.
+			each addAllParentsIn: aCollection ].
 	^ aCollection
 ]
 
@@ -225,7 +229,7 @@ TEntityMetaLevelDependency >> allAtAnyScope: aCollectionOfFamixClasses [
 
 { #category : #private }
 TEntityMetaLevelDependency >> allAtAnyScope: aCollectionOfFamixClasses in: aCollection [
-	^ self allAtAnyScope: aCollectionOfFamixClasses in: aCollection until: self falseBlock 
+	^ self allAtAnyScope: aCollectionOfFamixClasses in: aCollection until: [ :a | false ]
 ]
 
 { #category : #private }
@@ -256,7 +260,7 @@ TEntityMetaLevelDependency >> allAtScope: aClassFAMIX [
 
 { #category : #private }
 TEntityMetaLevelDependency >> allAtScope: aClassFAMIX in: aCollection [
-	^ self allAtScope: aClassFAMIX in: aCollection until: self falseBlock 
+	^ self allAtScope: aClassFAMIX in: aCollection until: [ :a | false ]
 ]
 
 { #category : #private }
@@ -342,7 +346,7 @@ TEntityMetaLevelDependency >> allToAnyScope: aCollectionOfFamixClasses [
 
 { #category : #private }
 TEntityMetaLevelDependency >> allToAnyScope: aCollectionOfFamixClasses in: aCollection [
-	^ self allToAnyScope: aCollectionOfFamixClasses in: aCollection until: self falseBlock
+	^ self allToAnyScope: aCollectionOfFamixClasses in: aCollection until: [ :a | false ]
 ]
 
 { #category : #private }
@@ -373,7 +377,7 @@ TEntityMetaLevelDependency >> allToScope: aClassFAMIX [
 
 { #category : #private }
 TEntityMetaLevelDependency >> allToScope: aClassFAMIX in: aCollection [
-	^ self allToScope: aClassFAMIX in: aCollection until: self falseBlock 
+	^ self allToScope: aClassFAMIX in: aCollection until: [ :a | false ]
 ]
 
 { #category : #private }
@@ -405,18 +409,19 @@ TEntityMetaLevelDependency >> allWithAnyScope: aCollectionOfFamixClasses [
 
 { #category : #private }
 TEntityMetaLevelDependency >> allWithAnyScope: aCollectionOfFamixClasses in: aCollection [
-	^ self allWithAnyScope: aCollectionOfFamixClasses in: aCollection until: self falseBlock
+	^ self allWithAnyScope: aCollectionOfFamixClasses in: aCollection until: [ :a | false ]
 ]
 
 { #category : #private }
 TEntityMetaLevelDependency >> allWithAnyScope: aCollectionOfFamixClasses in: aCollection until: rejectBlock [
-	(aCollectionOfFamixClasses anySatisfy: [ :aFAMIXClass | self class traits includes: aFAMIXClass ]) ifTrue: [ self allToAnyScope: aCollectionOfFamixClasses in: aCollection until: rejectBlock ].
+	(aCollectionOfFamixClasses anySatisfy: [ :aFAMIXClass | self class traits includes: aFAMIXClass ])
+		ifTrue: [ self allToAnyScope: aCollectionOfFamixClasses in: aCollection until: rejectBlock ].
 
 	self allParentTypes
-		detect: [ :class | aCollectionOfFamixClasses anySatisfy: [ :aFAMIXClass | aFAMIXClass = class or: [ aFAMIXClass inheritsFrom: class ] ] ]
+		detect: [ :class | aCollectionOfFamixClasses anySatisfy: [ :aFAMIXClass | aFAMIXClass = class ] ]
 		ifFound: [ self allAtAnyScope: aCollectionOfFamixClasses in: aCollection until: rejectBlock ].
 	self allChildrenTypes
-		detect: [ :class | aCollectionOfFamixClasses anySatisfy: [ :aFAMIXClass | aFAMIXClass = class or: [ aFAMIXClass inheritsFrom: class ] ] ]
+		detect: [ :class | aCollectionOfFamixClasses anySatisfy: [ :aFAMIXClass | aFAMIXClass = class ] ]
 		ifFound: [ self allToAnyScope: aCollectionOfFamixClasses in: aCollection until: rejectBlock ].
 	^ aCollection
 ]
@@ -438,7 +443,7 @@ TEntityMetaLevelDependency >> allWithScope: aClassFAMIX [
 
 { #category : #private }
 TEntityMetaLevelDependency >> allWithScope: aClassFAMIX in: aCollection [
-	^ self allWithScope: aClassFAMIX in: aCollection until: self falseBlock 
+	^ self allWithScope: aClassFAMIX in: aCollection until: [ :a | false ]
 ]
 
 { #category : #private }
@@ -446,8 +451,8 @@ TEntityMetaLevelDependency >> allWithScope: aClassFAMIX in: aCollection until: r
 
 	(self class traits includes: aClassFAMIX) ifTrue: [ self allToScope: aClassFAMIX in: aCollection until: rejectBlock ].
 
-	self allParentTypes detect: [ :class | aClassFAMIX = class or: [ aClassFAMIX inheritsFrom: class ] ] ifFound: [ self allAtScope: aClassFAMIX in: aCollection until: rejectBlock ].
-	self allChildrenTypes detect: [ :class | aClassFAMIX = class or: [ aClassFAMIX inheritsFrom: class ] ] ifFound: [ self allToScope: aClassFAMIX in: aCollection until: rejectBlock ].
+	self allParentTypes detect: [ :class | aClassFAMIX = class ] ifFound: [ self allAtScope: aClassFAMIX in: aCollection until: rejectBlock ].
+	self allChildrenTypes detect: [ :class | aClassFAMIX = class ] ifFound: [ self allToScope: aClassFAMIX in: aCollection until: rejectBlock ].
 	^ aCollection
 ]
 
@@ -468,7 +473,7 @@ TEntityMetaLevelDependency >> atAnyScope: aCollectionOfFamixClasses [
 
 { #category : #private }
 TEntityMetaLevelDependency >> atAnyScope: aCollectionOfFamixScopes in: aCollection [
-	^ self atAnyScope: aCollectionOfFamixScopes in: aCollection until: self falseBlock 
+	^ self atAnyScope: aCollectionOfFamixScopes in: aCollection until: [ :a | false ]
 ]
 
 { #category : #private }
@@ -499,7 +504,7 @@ TEntityMetaLevelDependency >> atScope: aClassFAMIX [
 
 { #category : #private }
 TEntityMetaLevelDependency >> atScope: aClassFAMIX in: aCollection [
-	^ self atScope: aClassFAMIX in: aCollection until: self falseBlock 
+	^ self atScope: aClassFAMIX in: aCollection until: [ :a | false ]
 ]
 
 { #category : #private }
@@ -560,11 +565,6 @@ TEntityMetaLevelDependency >> dependencyFM3PropertyDescription [
 	^ self class dependencyFM3PropertyDescriptionIn: self metamodel
 ]
 
-{ #category : #private }
-TEntityMetaLevelDependency >> falseBlock [
-	^ [ :a | false ]
-]
-
 { #category : #accessing }
 TEntityMetaLevelDependency >> incomingAssociationTypes [
 	^ self class incomingAssociationTypesIn: self metamodel
@@ -573,6 +573,20 @@ TEntityMetaLevelDependency >> incomingAssociationTypes [
 { #category : #accessing }
 TEntityMetaLevelDependency >> incomingMSEProperties [
 	^ self class incomingMSEPropertiesIn: self metamodel
+]
+
+{ #category : #testing }
+TEntityMetaLevelDependency >> isIncludedIn: anEntity parentSelectorsCache: parentSelectorsCache [
+	"We use a cache for the parents selector for performances reasons. It might be really long to perform the #withoutSelfLoops thus we need to speed it up a maximum.
+	
+	[ (model allUsing: TEntityMetaLevelDependency) collect: [ :e | e  queryIncomingDependencies withoutSelfLoops ] ] timeToRun."
+
+	self = anEntity ifTrue: [ ^ true ].
+
+	(parentSelectorsCache at: self class ifAbsentPut: [ self parentSelectors ])
+		do: [ :accessor | (self perform: accessor) ifNotNil: [ :parent | (parent isIncludedIn: anEntity parentSelectorsCache: parentSelectorsCache) ifTrue: [ ^ true ] ] ].
+
+	^ false
 ]
 
 { #category : #accessing }
@@ -608,8 +622,13 @@ TEntityMetaLevelDependency >> parentTypes [
 TEntityMetaLevelDependency >> parents [
 	| res |
 	res := Set new.
-	self parentSelectors do: [ :accessor | (self perform: accessor) ifNotNil: [ :r | res addAll: r asCollection ] ].
+	self parentsDo: [ :parent | res add: parent ].
 	^ res
+]
+
+{ #category : #accessing }
+TEntityMetaLevelDependency >> parentsDo: aBlock [
+	self parentSelectors do: [ :accessor | (self perform: accessor) ifNotNil: [ :r | aBlock value: r ] ]
 ]
 
 { #category : #scoping }
@@ -621,7 +640,7 @@ TEntityMetaLevelDependency >> toAnyScope: aCollectionOfFamixClasses [
 
 { #category : #private }
 TEntityMetaLevelDependency >> toAnyScope: aCollectionOfFamixClasses in: aCollection [
-	^ self toAnyScope: aCollectionOfFamixClasses in: aCollection until: self falseBlock
+	^ self toAnyScope: aCollectionOfFamixClasses in: aCollection until: [ :a | false ]
 ]
 
 { #category : #private }
@@ -652,7 +671,7 @@ TEntityMetaLevelDependency >> toScope: aClassFAMIX [
 
 { #category : #private }
 TEntityMetaLevelDependency >> toScope: aClassFAMIX in: aCollection [
-	^ self toScope: aClassFAMIX in: aCollection until: self falseBlock 
+	^ self toScope: aClassFAMIX in: aCollection until: [ :a | false ]
 ]
 
 { #category : #private }
@@ -676,16 +695,20 @@ TEntityMetaLevelDependency >> toScope: aClassFAMIX until: rejectBlock [
 
 { #category : #accessing }
 TEntityMetaLevelDependency >> withAllChildren [
-	"I return a collection including me and all my children in the containement tree."
+	"I return a collection including me and all my children in the containement DAG."
 
-	^ (self allChildren , {self}) asArray
+	^ self allChildren
+		add: self;
+		yourself
 ]
 
 { #category : #accessing }
 TEntityMetaLevelDependency >> withAllParents [
-	"I return a collection including me and all my parents in the containement tree."
+	"I return a collection including me and all my parents in the containement DAG."
 
-	^ (self allParents , {self}) asArray
+	^ self allParents
+		add: self;
+		yourself
 ]
 
 { #category : #scoping }
@@ -697,7 +720,7 @@ TEntityMetaLevelDependency >> withAnyScope: aCollectionOfFamixClasses [
 
 { #category : #private }
 TEntityMetaLevelDependency >> withAnyScope: aCollectionOfFamixClasses in: aCollection [
-	^ self withAnyScope: aCollectionOfFamixClasses in: aCollection until: self falseBlock 
+	^ self withAnyScope: aCollectionOfFamixClasses in: aCollection until: [ :a | false ]
 ]
 
 { #category : #private }
@@ -706,10 +729,10 @@ TEntityMetaLevelDependency >> withAnyScope: aCollectionOfFamixClasses in: aColle
 		ifTrue: [ self atScope: aCollectionOfFamixClasses in: aCollection until: rejectBlock ].
 
 	self allParentTypes
-		detect: [ :class | aCollectionOfFamixClasses anySatisfy: [ :aFAMIXClass | aFAMIXClass = class or: [ aFAMIXClass mooseInheritsFrom: class ] ] ]
+		detect: [ :class | aCollectionOfFamixClasses anySatisfy: [ :aFAMIXClass | aFAMIXClass = class ] ]
 		ifFound: [ self atAnyScope: aCollectionOfFamixClasses in: aCollection until: rejectBlock ].
 	self allChildrenTypes
-		detect: [ :class | aCollectionOfFamixClasses anySatisfy: [ :aFAMIXClass | aFAMIXClass = class or: [ aFAMIXClass mooseInheritsFrom: class ] ] ]
+		detect: [ :class | aCollectionOfFamixClasses anySatisfy: [ :aFAMIXClass | aFAMIXClass = class ] ]
 		ifFound: [ self toAnyScope: aCollectionOfFamixClasses in: aCollection until: rejectBlock ].
 	^ aCollection
 ]
@@ -731,7 +754,7 @@ TEntityMetaLevelDependency >> withScope: aClassFAMIX [
 
 { #category : #private }
 TEntityMetaLevelDependency >> withScope: aClassFAMIX in: aCollection [
-	^ self withScope: aClassFAMIX in: aCollection until: self falseBlock 
+	^ self withScope: aClassFAMIX in: aCollection until: [ :a | false ]
 ]
 
 { #category : #private }

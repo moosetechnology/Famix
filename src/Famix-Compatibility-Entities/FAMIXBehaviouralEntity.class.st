@@ -86,6 +86,7 @@ FAMIXBehaviouralEntity >> numberOfComments [
 { #category : #'Famix-Extensions' }
 FAMIXBehaviouralEntity >> numberOfConditionals [
 	<FMProperty: #numberOfConditionals type: #Number>
+	<derived>
 	<FMComment: 'The number of conditionals in a method'>
 	^ self
 		lookUpPropertyNamed: #numberOfConditionals
@@ -121,6 +122,7 @@ FAMIXBehaviouralEntity >> numberOfOutgoingInvocations [
 { #category : #'Famix-Extensions' }
 FAMIXBehaviouralEntity >> numberOfStatements [
 	<FMProperty: #numberOfStatements type: #Number>
+	<derived>
 	<FMComment: 'The number of statements in a method'>
 	^ self
 		lookUpPropertyNamed: #numberOfStatements
@@ -129,8 +131,9 @@ FAMIXBehaviouralEntity >> numberOfStatements [
 
 { #category : #'Famix-Extensions' }
 FAMIXBehaviouralEntity >> providerBehaviours [
-	<FMProperty: #providerBehaviours type: #FAMIXBehaviouralEntity> <derived> <multivalued>
+	<FMProperty: #providerBehaviours type: #FAMIXBehaviouralEntity>
+	<derived>
+	<multivalued>
 	<FMComment: 'All behaviours that the receiver depends on'>
-
-	^ self invokedBehaviours 
+	^ self invokedBehaviours
 ]

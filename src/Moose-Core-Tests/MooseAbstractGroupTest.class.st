@@ -303,6 +303,13 @@ MooseAbstractGroupTest >> testGroupedBy [
 ]
 
 { #category : #tests }
+MooseAbstractGroupTest >> testIfEmpty [
+	self assert: (group ifEmpty: [ true ]).
+	group add: MooseEntity new.
+	self assert: (group ifEmpty: [  ]) identicalTo: group
+]
+
+{ #category : #tests }
 MooseAbstractGroupTest >> testIndexOf [
 	| el1 el2 el3 |
 	group add: (el1 := MooseEntity new).
