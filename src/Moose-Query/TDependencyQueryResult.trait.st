@@ -43,12 +43,11 @@ TDependencyQueryResult >> allToAnyScope: aCollectionOfFamixClasses [
 			(self storage
 				inject: OrderedCollection new
 				into: [ :res :dep | 
-					MooseQueryCurrentContext
-						value:
+					(self opposite: dep)
+						toScopeInContext:
 							((MooseQueryContext recursivelyScopes: aCollectionOfFamixClasses direction: MooseQueryScopeDownStrategy)
 								result: res;
-								yourself)
-						during: [ (self opposite: dep) toScopeIn: res ] ]) asSet
+								yourself) ]) asSet
 ]
 
 { #category : #filtering }
@@ -58,12 +57,11 @@ TDependencyQueryResult >> allToScope: aClassFamix [
 			(self storage
 				inject: OrderedCollection new
 				into: [ :res :dep | 
-					MooseQueryCurrentContext
-						value:
+					(self opposite: dep)
+						toScopeInContext:
 							((MooseQueryContext recursivelyScope: aClassFamix direction: MooseQueryScopeDownStrategy)
 								result: res;
-								yourself)
-						during: [ (self opposite: dep) toScopeIn: res ] ]) asSet
+								yourself) ]) asSet
 ]
 
 { #category : #filtering }
@@ -204,12 +202,11 @@ TDependencyQueryResult >> toAnyScope: aCollectionOfFamixClasses [
 			(self storage
 				inject: OrderedCollection new
 				into: [ :res :dep | 
-					MooseQueryCurrentContext
-						value:
+					(self opposite: dep)
+						toScopeInContext:
 							((MooseQueryContext scopes: aCollectionOfFamixClasses direction: MooseQueryScopeDownStrategy)
 								result: res;
-								yourself)
-						during: [ (self opposite: dep) toScopeIn: res ] ]) asSet
+								yourself) ]) asSet
 ]
 
 { #category : #filtering }
@@ -219,12 +216,11 @@ TDependencyQueryResult >> toScope: aClassFamix [
 			(self storage
 				inject: OrderedCollection new
 				into: [ :res :dep | 
-					MooseQueryCurrentContext
-						value:
+					(self opposite: dep)
+						toScopeInContext:
 							((MooseQueryContext scope: aClassFamix direction: MooseQueryScopeDownStrategy)
 								result: res;
-								yourself)
-						during: [ (self opposite: dep) toScopeIn: res ] ]) asSet
+								yourself) ]) asSet
 ]
 
 { #category : #filtering }

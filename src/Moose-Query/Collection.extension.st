@@ -7,9 +7,9 @@ Collection >> atScopeInContext: aContext [
 ]
 
 { #category : #'*Moose-Query' }
-Collection >> toScopeIn: aCollection [
-	1 to: self size do: [ :ind | (self at: ind) toScopeIn: MooseQueryCurrentContext result ].
-	^ MooseQueryCurrentContext result
+Collection >> toScopeInContext: aContext [
+	1 to: self size do: [ :ind | aContext toScopeFor: (self at: ind) ].
+	^ aContext result
 ]
 
 { #category : #'*Moose-Query' }

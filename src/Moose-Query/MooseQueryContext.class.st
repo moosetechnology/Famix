@@ -84,7 +84,7 @@ MooseQueryContext >> add: anEntity [
 	self result add: anEntity
 ]
 
-{ #category : #accessing }
+{ #category : #query }
 MooseQueryContext >> atScopeFor: enEntity [
 	| selectors |
 	(self isOfRightType: enEntity)
@@ -157,6 +157,19 @@ MooseQueryContext >> scopes: anObject [
 { #category : #testing }
 MooseQueryContext >> shouldStopOn: anEntity [
 	^ self until value: anEntity
+]
+
+{ #category : #query }
+MooseQueryContext >> toScopeFor: enEntity [
+	| selectors |
+	(self isOfRightType: enEntity)
+		ifTrue: [ self add: enEntity.
+			self isRecursive ifFalse: [ ^ self result ] ].
+
+	"The content of this block could be much more readable with #do: but we do this solution for performances... We need this method to be really really performant."
+	(self shouldStopOn: enEntity)
+		ifFalse: [ 1 to: (selectors := enEntity childrenSelectors) size do: [ :ind | (enEntity perform: (selectors at: ind)) toScopeInContext: self ] ].
+	^ self result
 ]
 
 { #category : #accessing }
