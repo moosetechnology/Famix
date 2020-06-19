@@ -5,6 +5,15 @@ Class {
 }
 
 { #category : #tests }
+MooseQueryDependenciesTest >> testQueryIncomingDependenciesOnProperty [
+	
+	self assert: class1 queryIncomingDependencies size equals: 2.
+	self assert: (class1 queryIncomingDependencies opposites includes: var1).
+	self assert: (class1 queryIncomingDependencies opposites includes: localVariable).
+
+]
+
+{ #category : #tests }
 MooseQueryDependenciesTest >> testQueryOutgoingDependenciesOnAssociations [
 	self assert: method1 queryOutgoingDependencies size equals: 3.
 	self assert: (method1 queryOutgoingDependencies opposites includes:  class2 ).

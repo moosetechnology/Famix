@@ -236,6 +236,9 @@ FmxMBRelationSideTrait >> relationFrom: ownSide to: oppositeSide [
 		builder: self builder;
 		yourself.	
 			
+	ownSide isDependencySource ifTrue: [ oppositeSide dependencyTarget: true ].
+	oppositeSide isDependencySource ifTrue: [ ownSide dependencyTarget: true ].
+				
 	ownSide remoteBuilderDo: [ :aRemoteBuilder |
 		aRemoteBuilder = self builder 
 			ifFalse: [ aRemoteBuilder relations add: aRelation ] ].

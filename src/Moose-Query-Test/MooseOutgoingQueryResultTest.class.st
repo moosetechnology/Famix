@@ -23,7 +23,7 @@ MooseOutgoingQueryResultTest >> testWithoutSelfLoops [
 		yourself.
 	namespace2 := (FamixJavaNamespace named: 'namespace2')
 		mooseModel: model;
-		parentScope: namespace1;
+		parentNamespace: namespace1;
 		yourself.
 	class1 := (FamixJavaClass named: 'class1')
 		mooseModel: model;

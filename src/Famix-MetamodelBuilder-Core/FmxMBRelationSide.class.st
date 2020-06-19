@@ -16,7 +16,8 @@ Class {
 		'source',
 		'target',
 		'generationStrategy',
-		'dependencySource'
+		'dependencySource',
+		'dependencyTarget'
 	],
 	#category : #'Famix-MetamodelBuilder-Core-Implementation'
 }
@@ -76,6 +77,11 @@ FmxMBRelationSide >> dependencySource [
 { #category : #properties }
 FmxMBRelationSide >> dependencySource: aBoolean [
 	dependencySource := aBoolean
+]
+
+{ #category : #'as yet unclassified' }
+FmxMBRelationSide >> dependencyTarget: aBoolean [
+	dependencyTarget := aBoolean 
 ]
 
 { #category : #properties }

@@ -10,6 +10,15 @@ Class {
 	#category : #'Moose-Query-Strategies'
 }
 
+{ #category : #'as yet unclassified' }
+MooseQueryOutgoingDirectionStrategy class >> addAllAsAssociation: queryResult requestor: queryingEntity [
+	^queryResult asCollection collect: [ :res |
+		res isAssociation
+			ifTrue: [ res ]
+			ifFalse: [ MooseQueryTypeDeclarationAssociation newFrom: queryingEntity to: res  ]
+	]
+]
+
 { #category : #accessing }
 MooseQueryOutgoingDirectionStrategy class >> allAssociationTypesFor: anEntity [
 	^ anEntity allOutgoingAssociationTypes

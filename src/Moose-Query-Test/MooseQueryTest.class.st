@@ -524,7 +524,7 @@ MooseQueryTest >> testOutgoingAccessesWithANamespaceInANamespace [
 	namespaceContainer := FamixJavaNamespace new
 		name: 'Test';
 		mooseModel: model;
-		addChildScope: namespace.
+		addChildNamespace: namespace.
 	self assert: (namespaceContainer query: #out with: FamixTAccess) size equals: 1
 ]
 
