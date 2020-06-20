@@ -15,6 +15,11 @@ FamixJavaEnum class >> annotation [
 	^self
 ]
 
+{ #category : #testing }
+FamixJavaEnum >> incomingTypeDeclarations [  
+	^ self typedEntities collect: [ :var | MooseQueryDependencyAssociation newFrom: var to: self ]
+]
+
 { #category : #accessing }
 FamixJavaEnum >> values [
 	^ self enumValues

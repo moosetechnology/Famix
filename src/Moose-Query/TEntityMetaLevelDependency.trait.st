@@ -166,7 +166,11 @@ TEntityMetaLevelDependency classSide >> privateChildrenTypesIn: aMetamodel [
 
 { #category : #new }
 TEntityMetaLevelDependency classSide >> privateIncomingAssociationTypesIn: aMetamodel [
-	^ (self incomingMSEPropertiesIn: aMetamodel) collect: #implementingType
+	"collects all association for which self class is target
+	 Since #incomingMSEPropertiesIn: also returns declared dependencies, they must be rejected"
+	^ (self incomingMSEPropertiesIn: aMetamodel)
+		reject: #isDependencyTarget
+		thenCollect: #implementingType
 ]
 
 { #category : #new }
@@ -180,7 +184,11 @@ TEntityMetaLevelDependency classSide >> privateIncomingMSEPropertiesIn: aMetamod
 
 { #category : #new }
 TEntityMetaLevelDependency classSide >> privateOutgoingAssociationTypesIn: aMetamodel [
-	^ (self outgoingMSEPropertiesIn: aMetamodel) collect: #implementingType
+	"collects all association for which self class is source
+	 Since #outgoingMSEPropertiesIn: also returns declared dependencies, they must be rejected"
+	^ (self outgoingMSEPropertiesIn: aMetamodel)
+		reject: #isDependencySource
+		thenCollect: #implementingType
 ]
 
 { #category : #new }

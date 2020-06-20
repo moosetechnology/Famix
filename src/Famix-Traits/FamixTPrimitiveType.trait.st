@@ -1,6 +1,7 @@
 Trait {
 	#name : #FamixTPrimitiveType,
 	#traits : 'FamixTType',
+	#classTraits : 'FamixTType classTrait',
 	#category : #'Famix-Traits-Traits'
 }
 
@@ -11,6 +12,11 @@ FamixTPrimitiveType classSide >> annotation [
 	<package: #'Famix-Traits'>
 	<generated>
 	^self
+]
+
+{ #category : #testing }
+FamixTPrimitiveType >> incomingTypeDeclarations [  
+	^ self typedEntities collect: [ :var | MooseQueryDependencyAssociation newFrom: var to: self ]
 ]
 
 { #category : #testing }

@@ -7,6 +7,7 @@ Trait {
 		'#parentBehaviouralEntity => FMOne type: #FamixTWithParameters opposite: #parameters'
 	],
 	#traits : 'FamixTStructuralEntity',
+	#classTraits : 'FamixTStructuralEntity classTrait',
 	#category : #'Famix-Traits-Parameter'
 }
 
@@ -17,6 +18,11 @@ FamixTParameter classSide >> annotation [
 	<package: #'Famix-Traits'>
 	<generated>
 	^self
+]
+
+{ #category : #'moose query' }
+FamixTParameter >> outgoingTypeDeclarations [
+	^ self declaredType ifNil: [ {} ] ifNotNil: [ :dt | {(MooseQueryDependencyAssociation newFrom: self to: dt)} ]
 ]
 
 { #category : #accessing }

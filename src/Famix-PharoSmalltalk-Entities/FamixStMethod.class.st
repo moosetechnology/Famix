@@ -216,6 +216,11 @@ FamixStMethod >> numberOfStatements [
 	^ self lookUpPropertyNamed: #numberOfStatements computedAs: [ (RBVisitorForFAMIXMetrics for: self) numberOfStatements ]
 ]
 
+{ #category : #'moose query' }
+FamixStMethod >> outgoingTypeDeclarations [
+	^ self declaredType ifNil: [ {} ] ifNotNil: [ :dt | {(MooseQueryDependencyAssociation newFrom: self to: dt)} ]
+]
+
 { #category : #accessing }
 FamixStMethod >> protocol [
 

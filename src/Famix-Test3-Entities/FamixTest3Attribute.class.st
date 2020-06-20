@@ -14,3 +14,8 @@ FamixTest3Attribute class >> annotation [
 	<generated>
 	^self
 ]
+
+{ #category : #'moose query' }
+FamixTest3Attribute >> outgoingTypeDeclarations [
+	^ self declaredType ifNil: [ {} ] ifNotNil: [ :dt | {(MooseQueryDependencyAssociation newFrom: self to: dt)} ]
+]

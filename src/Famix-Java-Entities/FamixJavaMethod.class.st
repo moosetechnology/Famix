@@ -244,6 +244,11 @@ FamixJavaMethod >> numberOfOutgoingInvocations [
 		computedAs: [self outgoingInvocations size]
 ]
 
+{ #category : #'moose query' }
+FamixJavaMethod >> outgoingTypeDeclarations [
+	^ self declaredType ifNil: [ {} ] ifNotNil: [ :dt | {(MooseQueryDependencyAssociation newFrom: self to: dt)} ]
+]
+
 { #category : #'Famix-Implementation' }
 FamixJavaMethod >> overridesMethod [
 	^ self belongsTo superclassHierarchy collect: [ :each | each implementationOf: self signature ] thenSelect: #isNotNil

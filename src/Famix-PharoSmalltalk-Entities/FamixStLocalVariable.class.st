@@ -24,3 +24,8 @@ FamixStLocalVariable >> mooseNameOn: stream [
 		stream nextPut: $. ].
 	self name ifNotNil: [stream nextPutAll: self name]
 ]
+
+{ #category : #'moose query' }
+FamixStLocalVariable >> outgoingTypeDeclarations [
+	^ self declaredType ifNil: [ {} ] ifNotNil: [ :dt | {(MooseQueryDependencyAssociation newFrom: self to: dt)} ]
+]

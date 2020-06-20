@@ -9,6 +9,7 @@ Trait {
 		'#parentType => FMOne type: #FamixTWithAttributes opposite: #attributes'
 	],
 	#traits : 'FamixTStructuralEntity',
+	#classTraits : 'FamixTStructuralEntity classTrait',
 	#category : #'Famix-Traits-Attribute'
 }
 
@@ -64,6 +65,11 @@ FamixTAttribute >> mooseNameOn: aStream [
 			parent mooseNameOn: aStream.
 			aStream nextPut: $. ].
 	self name ifNotNil: [ aStream nextPutAll: self name ]
+]
+
+{ #category : #'moose query' }
+FamixTAttribute >> outgoingTypeDeclarations [
+	^ self declaredType ifNil: [ {} ] ifNotNil: [ :dt | {(MooseQueryDependencyAssociation newFrom: self to: dt)} ]
 ]
 
 { #category : #accessing }

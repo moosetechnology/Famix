@@ -160,7 +160,7 @@ MooseQueryCalculator >> queryAllLocalFor: anEntity [
 
 { #category : #query }
 MooseQueryCalculator >> queryAllLocalFor: anEntity in: aCollection [
-	"collects in aCollection all entities on the opposite side of associations or a declared dependency with self
+	"collects in aCollection all entities on the opposite side of associations or declared dependencies with self
 	 Opposite side depends on self strategy (incoming/outgoing)
 	
 	First collects local (not inherited) properties that match the strategy

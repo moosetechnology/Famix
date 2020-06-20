@@ -36,6 +36,11 @@ FAMIXImplicitVariable >> mooseNameOn: stream [
 	self name ifNotNil: [ stream nextPutAll: self name ]
 ]
 
+{ #category : #'moose query' }
+FAMIXImplicitVariable >> outgoingTypeDeclarations [
+	^ self declaredType ifNil: [ {} ] ifNotNil: [ :dt | {(MooseQueryDependencyAssociation newFrom: self to: dt)} ]
+]
+
 { #category : #'Famix-Implementation' }
 FAMIXImplicitVariable >> printOn: aStream [ 
 	| parent |

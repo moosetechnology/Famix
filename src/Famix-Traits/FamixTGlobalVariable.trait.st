@@ -8,6 +8,7 @@ Trait {
 		'#parentScope => FMOne type: #FamixTWithGlobalVariables opposite: #globalVariables'
 	],
 	#traits : 'FamixTStructuralEntity',
+	#classTraits : 'FamixTStructuralEntity classTrait',
 	#category : #'Famix-Traits-GlobalVariable'
 }
 
@@ -25,6 +26,11 @@ FamixTGlobalVariable classSide >> annotationFamixGlobalVariableGroup [
 	<generated>
 	<mooseGroup>
 	^ FamixGlobalVariableGroup
+]
+
+{ #category : #'moose query' }
+FamixTGlobalVariable >> outgoingTypeDeclarations [
+	^ self declaredType ifNil: [ {} ] ifNotNil: [ :dt | {(MooseQueryDependencyAssociation newFrom: self to: dt)} ]
 ]
 
 { #category : #accessing }

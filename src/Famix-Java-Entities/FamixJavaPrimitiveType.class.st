@@ -16,6 +16,11 @@ FamixJavaPrimitiveType class >> annotation [
 ]
 
 { #category : #testing }
+FamixJavaPrimitiveType >> incomingTypeDeclarations [  
+	^ self typedEntities collect: [ :var | MooseQueryDependencyAssociation newFrom: var to: self ]
+]
+
+{ #category : #testing }
 FamixJavaPrimitiveType >> isPrimitiveType [
 
 	<generated>

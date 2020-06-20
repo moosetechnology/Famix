@@ -14,6 +14,7 @@ Instance Variables:
 Trait {
 	#name : #FamixTEnum,
 	#traits : 'FamixTType + FamixTWithEnumValues',
+	#classTraits : 'FamixTType classTrait + FamixTWithEnumValues classTrait',
 	#category : #'Famix-Traits-Traits'
 }
 
@@ -24,4 +25,9 @@ FamixTEnum classSide >> annotation [
 	<package: #'Famix-Traits'>
 	<generated>
 	^self
+]
+
+{ #category : #testing }
+FamixTEnum >> incomingTypeDeclarations [  
+	^ self typedEntities collect: [ :var | MooseQueryDependencyAssociation newFrom: var to: self ]
 ]

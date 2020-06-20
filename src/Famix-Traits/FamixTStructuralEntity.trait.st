@@ -4,6 +4,7 @@ FAMIXStructuralEntity is the abstract superclass for basic data structure in the
 Trait {
 	#name : #FamixTStructuralEntity,
 	#traits : 'FamixTNamedEntity + FamixTAccessible + FamixTInvocationsReceiver + FamixTTypedEntity',
+	#classTraits : 'FamixTNamedEntity classTrait + FamixTAccessible classTrait + FamixTInvocationsReceiver classTrait + FamixTTypedEntity classTrait',
 	#category : #'Famix-Traits-Traits'
 }
 
@@ -21,4 +22,9 @@ FamixTStructuralEntity >> isStructuralEntity [
 
 	<generated>
 	^ true
+]
+
+{ #category : #'moose query' }
+FamixTStructuralEntity >> outgoingTypeDeclarations [
+	^ self declaredType ifNil: [ {} ] ifNotNil: [ :dt | {(MooseQueryDependencyAssociation newFrom: self to: dt)} ]
 ]
