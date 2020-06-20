@@ -58,7 +58,8 @@ FmxMBRelationSideTest >> testContainmentRelations [
 
 { #category : #tests }
 FmxMBRelationSideTest >> testDependencySourceLeftSide [
-	"test dependencySource and dependencyTarget on either sides of a relation"
+	"test dependencySource and dependencyTarget on either sides of a relation
+	Testing with a OneToMany relation"
 
 	| tClass1 tClass2 side1 side2 |
 	tClass1 := builder newTraitNamed: #TClass1.
@@ -79,7 +80,8 @@ FmxMBRelationSideTest >> testDependencySourceLeftSide [
 
 { #category : #tests }
 FmxMBRelationSideTest >> testDependencySourceRightSide [
-	"test dependencySource and dependencyTarget on either sides of a relation"
+	"test dependencySource and dependencyTarget on either sides of a relation
+	Testing with a OneToOne relation"
 
 	| tClass1 tClass2 side1 side2 |
 	tClass1 := builder newTraitNamed: #TClass1.
