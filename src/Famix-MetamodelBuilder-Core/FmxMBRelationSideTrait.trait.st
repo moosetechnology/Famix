@@ -119,7 +119,8 @@ FmxMBRelationSideTrait >> manyToMany: aRelationSide [
 	ownSide derived.
 	oppositeSide many.
 	self flag: 'From here to the end it''s the same in #oneToOne: , #oneToMany: , #manyToOne: , #manyToMany:'.
-	oppositeSide isDependencySource ifTrue: [ 1halt. ownSide beDependencyTarget ].
+	ownSide isDependencySource ifTrue: [ oppositeSide beDependencyTarget ].
+	oppositeSide isDependencySource ifTrue: [ ownSide beDependencyTarget ].
 	aRelation := self relationFrom: ownSide to: oppositeSide.
 	self builder configuration navigationForNonContainers
 		ifTrue: [ aRelation withNavigation ].
@@ -183,7 +184,8 @@ FmxMBRelationSideTrait >> oneToMany: aRelationSide [
 	ownSide many.
 	ownSide derived.
 	self flag: 'From here to the end it''s the same in #oneToOne: , #oneToMany: , #manyToOne: , #manyToMany:'.
-	oppositeSide isDependencySource ifTrue: [ 1halt. ownSide beDependencyTarget ].
+	ownSide isDependencySource ifTrue: [ oppositeSide beDependencyTarget ].
+	oppositeSide isDependencySource ifTrue: [ ownSide beDependencyTarget ].
 	aRelation := self relationFrom: ownSide to: oppositeSide.
 	self builder configuration navigationForNonContainers
 		ifTrue: [ aRelation withNavigation ].
@@ -207,7 +209,8 @@ FmxMBRelationSideTrait >> oneToOne: aRelationSide [
 	oppositeSide := aRelationSide asRelationSideNamed: self propertyName.
 	oppositeSide derived.
 	self flag: 'From here to the end it''s the same in #oneToOne: , #oneToMany: , #manyToOne: , #manyToMany:'.
-	oppositeSide isDependencySource ifTrue: [ 1halt. ownSide beDependencyTarget ].
+	ownSide isDependencySource ifTrue: [ oppositeSide beDependencyTarget ].
+	oppositeSide isDependencySource ifTrue: [ ownSide beDependencyTarget ].
 	aRelation := self relationFrom: ownSide to: oppositeSide.
 	self builder configuration navigationForNonContainers
 		ifTrue: [ aRelation withNavigation ].

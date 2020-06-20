@@ -222,32 +222,6 @@ FmxMBRelationSide >> many [
 	cardinality := #many
 ]
 
-{ #category : #'relations - named' }
-FmxMBRelationSide >> manyToOne: aRelationSide [
-
-	| aRelation ownSide oppositeSide  |
-	
-	ownSide := self asRelationSideNamed: aRelationSide singularPropertyName.
-	oppositeSide := aRelationSide asRelationSideNamed: self pluralPropertyName.
-	oppositeSide many.
-	oppositeSide derived.
-	self flag: 'From here to the end it''s the same in #oneToOne: , #oneToMany: , #manyToOne: , #manyToMany:'.
-	ownSide isDependencySource ifTrue: [ oppositeSide beDependencyTarget ].
-	oppositeSide isDependencySource ifTrue: [ ownSide beDependencyTarget ].
-	aRelation := self relationFrom: ownSide to: oppositeSide.
-	self builder configuration navigationForNonContainers
-		ifTrue: [ aRelation withNavigation ].
-
-	self isRemote ifTrue: [ ownSide makeRemote ].
-	aRelationSide isRemote ifTrue: [ oppositeSide makeRemote ].
-	(self isRemote and: [ aRelationSide isRemote not ]) ifTrue: [ oppositeSide makeNonremote ].
-	(self isRemote not and: [ aRelationSide isRemote ]) ifTrue: [ ownSide makeNonremote ].
-		
-	^ aRelation
-	
-	
-]
-
 { #category : #properties }
 FmxMBRelationSide >> noContainer [
 	
