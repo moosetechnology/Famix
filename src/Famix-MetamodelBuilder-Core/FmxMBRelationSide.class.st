@@ -47,6 +47,11 @@ FmxMBRelationSide >> asSlot [
 		opposite: self oppositeName
 ]
 
+{ #category : #properties }
+FmxMBRelationSide >> beDependencyTarget [
+	dependencyTarget := true.
+]
+
 { #category : #accessing }
 FmxMBRelationSide >> cardinality [
 	^ cardinality
@@ -77,11 +82,6 @@ FmxMBRelationSide >> dependencySource [
 { #category : #properties }
 FmxMBRelationSide >> dependencySource: aBoolean [
 	dependencySource := aBoolean
-]
-
-{ #category : #'as yet unclassified' }
-FmxMBRelationSide >> dependencyTarget: aBoolean [
-	dependencyTarget := aBoolean 
 ]
 
 { #category : #properties }
@@ -139,6 +139,7 @@ FmxMBRelationSide >> initialize [
 	target := false.
 	source := false.
 	dependencySource := false.
+	dependencyTarget := false.
 
 	self makeStandard
 ]
@@ -151,8 +152,13 @@ FmxMBRelationSide >> isContainer [
 
 { #category : #properties }
 FmxMBRelationSide >> isDependencySource [
-
 	^ dependencySource
+]
+
+{ #category : #properties }
+FmxMBRelationSide >> isDependencyTarget [
+
+	^ dependencyTarget
 ]
 
 { #category : #properties }
@@ -214,6 +220,32 @@ FmxMBRelationSide >> makeStandard [
 FmxMBRelationSide >> many [
 
 	cardinality := #many
+]
+
+{ #category : #'relations - named' }
+FmxMBRelationSide >> manyToOne: aRelationSide [
+
+	| aRelation ownSide oppositeSide  |
+	
+	ownSide := self asRelationSideNamed: aRelationSide singularPropertyName.
+	oppositeSide := aRelationSide asRelationSideNamed: self pluralPropertyName.
+	oppositeSide many.
+	oppositeSide derived.
+	self flag: 'From here to the end it''s the same in #oneToOne: , #oneToMany: , #manyToOne: , #manyToMany:'.
+	ownSide isDependencySource ifTrue: [ oppositeSide beDependencyTarget ].
+	oppositeSide isDependencySource ifTrue: [ ownSide beDependencyTarget ].
+	aRelation := self relationFrom: ownSide to: oppositeSide.
+	self builder configuration navigationForNonContainers
+		ifTrue: [ aRelation withNavigation ].
+
+	self isRemote ifTrue: [ ownSide makeRemote ].
+	aRelationSide isRemote ifTrue: [ oppositeSide makeRemote ].
+	(self isRemote and: [ aRelationSide isRemote not ]) ifTrue: [ oppositeSide makeNonremote ].
+	(self isRemote not and: [ aRelationSide isRemote ]) ifTrue: [ ownSide makeNonremote ].
+		
+	^ aRelation
+	
+	
 ]
 
 { #category : #properties }

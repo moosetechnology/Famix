@@ -118,6 +118,8 @@ FmxMBRelationSideTrait >> manyToMany: aRelationSide [
 	ownSide many.
 	ownSide derived.
 	oppositeSide many.
+	self flag: 'From here to the end it''s the same in #oneToOne: , #oneToMany: , #manyToOne: , #manyToMany:'.
+	oppositeSide isDependencySource ifTrue: [ 1halt. ownSide beDependencyTarget ].
 	aRelation := self relationFrom: ownSide to: oppositeSide.
 	self builder configuration navigationForNonContainers
 		ifTrue: [ aRelation withNavigation ].
@@ -141,6 +143,9 @@ FmxMBRelationSideTrait >> manyToOne: aRelationSide [
 	oppositeSide := aRelationSide asRelationSideNamed: self pluralPropertyName.
 	oppositeSide many.
 	oppositeSide derived.
+	self flag: 'From here to the end it''s the same in #oneToOne: , #oneToMany: , #manyToOne: , #manyToMany:'.
+	ownSide isDependencySource ifTrue: [ oppositeSide beDependencyTarget ].
+	oppositeSide isDependencySource ifTrue: [ ownSide beDependencyTarget ].
 	aRelation := self relationFrom: ownSide to: oppositeSide.
 	self builder configuration navigationForNonContainers
 		ifTrue: [ aRelation withNavigation ].
@@ -177,6 +182,8 @@ FmxMBRelationSideTrait >> oneToMany: aRelationSide [
 	oppositeSide := aRelationSide asRelationSideNamed: self singularPropertyName.
 	ownSide many.
 	ownSide derived.
+	self flag: 'From here to the end it''s the same in #oneToOne: , #oneToMany: , #manyToOne: , #manyToMany:'.
+	oppositeSide isDependencySource ifTrue: [ 1halt. ownSide beDependencyTarget ].
 	aRelation := self relationFrom: ownSide to: oppositeSide.
 	self builder configuration navigationForNonContainers
 		ifTrue: [ aRelation withNavigation ].
@@ -199,6 +206,8 @@ FmxMBRelationSideTrait >> oneToOne: aRelationSide [
 	ownSide := self asRelationSideNamed: aRelationSide propertyName.
 	oppositeSide := aRelationSide asRelationSideNamed: self propertyName.
 	oppositeSide derived.
+	self flag: 'From here to the end it''s the same in #oneToOne: , #oneToMany: , #manyToOne: , #manyToMany:'.
+	oppositeSide isDependencySource ifTrue: [ 1halt. ownSide beDependencyTarget ].
 	aRelation := self relationFrom: ownSide to: oppositeSide.
 	self builder configuration navigationForNonContainers
 		ifTrue: [ aRelation withNavigation ].
@@ -235,10 +244,7 @@ FmxMBRelationSideTrait >> relationFrom: ownSide to: oppositeSide [
 		oppositeSide: oppositeSide;
 		builder: self builder;
 		yourself.	
-			
-	ownSide isDependencySource ifTrue: [ oppositeSide dependencyTarget: true ].
-	oppositeSide isDependencySource ifTrue: [ ownSide dependencyTarget: true ].
-				
+
 	ownSide remoteBuilderDo: [ :aRemoteBuilder |
 		aRemoteBuilder = self builder 
 			ifFalse: [ aRemoteBuilder relations add: aRelation ] ].

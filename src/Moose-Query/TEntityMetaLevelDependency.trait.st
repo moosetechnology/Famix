@@ -61,7 +61,7 @@ TEntityMetaLevelDependency classSide >> childrenTypesIn: aMetamodel [
 
 { #category : #accessing }
 TEntityMetaLevelDependency classSide >> dependencyFM3PropertyDescriptionIn: aMetamodel [
-	"finds in aMetamodel all properties that are associations,
+	"finds in aMetamodel all properties that are associations or declared dependencies,
 	 (obviously aMetamodel should contain the class self)"
 	aMetamodel ifNil: [ ^ OrderedCollection new ].
 	^ (self allDeclaredPropertiesIn: aMetamodel)
@@ -186,7 +186,6 @@ TEntityMetaLevelDependency classSide >> privateOutgoingAssociationTypesIn: aMeta
 { #category : #new }
 TEntityMetaLevelDependency classSide >> privateOutgoingMSEPropertiesIn: aMetamodel [
 	"computes all properties that are sources of association for self (a class) belonging to aMetamodel"
-
 	^(self dependencyFM3PropertyDescriptionIn: aMetamodel)
 		select: [ :p |
 			p opposite isSource or:
