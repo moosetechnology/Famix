@@ -74,6 +74,93 @@ FmxMBBuilderRelationTest >> testClassRelations [
 ]
 
 { #category : #tests }
+FmxMBBuilderRelationTest >> testManyToManyTraitsRelation [
+
+	| tClass1 tClass2 generatedClass1 generatedClass2 |
+		
+	tClass1 := builder newTraitNamed: #TClass1. 
+	tClass2 := builder newTraitNamed: #TClass2. 
+
+	(tClass1 property: #property1) *-* (tClass2 property: #property2).
+	
+	builder generate.
+	
+	generatedClass1 := builder testingEnvironment ask classNamed: 'TstTClass1'.
+	generatedClass2 := builder testingEnvironment ask classNamed: 'TstTClass2'.
+	
+	self assert: generatedClass1 slots size equals: 1.
+	self assert: generatedClass1 slots first name equals: #property1.
+	self assert: generatedClass1 slots first expression equals: 'FMMany type: #TstTClass2 opposite: #property2'.
+
+	self assertCollection: generatedClass1 instanceSide selectors hasSameElements: #(property1 property1: addProperty1:).
+
+	self assert: generatedClass2 slots size equals: 1.
+	self assert: generatedClass2 slots first name equals: #property2.
+	self assert: generatedClass2 slots first expression equals: 'FMMany type: #TstTClass1 opposite: #property1'.
+
+	self assertCollection: generatedClass2 instanceSide selectors hasSameElements: #(property2 property2: addProperty2:).
+
+]
+
+{ #category : #tests }
+FmxMBBuilderRelationTest >> testManyToOneTraitsRelation [
+
+	| tClass1 tClass2 generatedClass1 generatedClass2 |
+		
+	tClass1 := builder newTraitNamed: #TClass1. 
+	tClass2 := builder newTraitNamed: #TClass2. 
+
+	(tClass1 property: #property1) *- (tClass2 property: #property2).
+	
+	builder generate.
+	
+	generatedClass1 := builder testingEnvironment ask classNamed: 'TstTClass1'.
+	generatedClass2 := builder testingEnvironment ask classNamed: 'TstTClass2'.
+	
+	self assert: generatedClass1 slots size equals: 1.
+	self assert: generatedClass1 slots first name equals: #property1.
+	self assert: generatedClass1 slots first expression equals: 'FMOne type: #TstTClass2 opposite: #property2'.
+
+	self assertCollection: generatedClass1 instanceSide selectors hasSameElements: #(property1 property1:).
+
+	self assert: generatedClass2 slots size equals: 1.
+	self assert: generatedClass2 slots first name equals: #property2.
+	self assert: generatedClass2 slots first expression equals: 'FMMany type: #TstTClass1 opposite: #property1'.
+
+	self assertCollection: generatedClass2 instanceSide selectors hasSameElements: #(property2 property2: addProperty2:).
+
+]
+
+{ #category : #tests }
+FmxMBBuilderRelationTest >> testOneToManyTraitsRelation [
+
+	| tClass1 tClass2 generatedClass1 generatedClass2 |
+		
+	tClass1 := builder newTraitNamed: #TClass1. 
+	tClass2 := builder newTraitNamed: #TClass2. 
+
+	(tClass1 property: #property1) -* (tClass2 property: #property2).
+	
+	builder generate.
+	
+	generatedClass1 := builder testingEnvironment ask classNamed: 'TstTClass1'.
+	generatedClass2 := builder testingEnvironment ask classNamed: 'TstTClass2'.
+	
+	self assert: generatedClass1 slots size equals: 1.
+	self assert: generatedClass1 slots first name equals: #property1.
+	self assert: generatedClass1 slots first expression equals: 'FMMany type: #TstTClass2 opposite: #property2'.
+
+	self assertCollection: generatedClass1 instanceSide selectors hasSameElements: #(property1 property1: addProperty1:).
+
+	self assert: generatedClass2 slots size equals: 1.
+	self assert: generatedClass2 slots first name equals: #property2.
+	self assert: generatedClass2 slots first expression equals: 'FMOne type: #TstTClass1 opposite: #property1'.
+
+	self assertCollection: generatedClass2 instanceSide selectors hasSameElements: #(property2 property2:).
+
+]
+
+{ #category : #tests }
 FmxMBBuilderRelationTest >> testOneToOneTraitsRelation [
 
 	| tClass tComment generatedTClass generatedTComment |
