@@ -172,7 +172,7 @@ MooseQueryCalculator >> queryAllLocalFor: anEntity in: aCollection [
 			ifNotNil: [ :coll |
 				aCollection addAll: 
 					(self strategy
-						addAllAsAssociation: coll
+						createQueryResult: coll
 						requestor: anEntity ) ] ].
 	^ aCollection
 ]
