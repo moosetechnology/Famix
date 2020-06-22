@@ -9,55 +9,17 @@ Trait {
 }
 
 { #category : #filtering }
-TDependencyQueryResult >> allAtAnyScope: aCollectionOfFamixClasses [
-	^ self newObjectResultWith: (self storage inject: OrderedCollection new into: [ :res :dep | (self opposite: dep) allAtAnyScope: aCollectionOfFamixClasses in: res ]) asSet
-]
-
-{ #category : #filtering }
-TDependencyQueryResult >> allAtScope: aClassFamix [
-	^ self newObjectResultWith: (self storage inject: OrderedCollection new into: [ :res :dep | (self opposite: dep) allAtScope: aClassFamix in: res ]) asSet
-]
-
-{ #category : #filtering }
-TDependencyQueryResult >> allToAnyScope: aCollectionOfFamixClasses [
-	^ self newObjectResultWith: (self storage inject: OrderedCollection new into: [ :res :dep | (self opposite: dep) allToAnyScope: aCollectionOfFamixClasses in: res ]) asSet
-]
-
-{ #category : #filtering }
-TDependencyQueryResult >> allToScope: aClassFamix [
-	^ self newObjectResultWith: (self storage inject: OrderedCollection new into: [ :res :dep | (self opposite: dep) allToScope: aClassFamix in: res ]) asSet
-]
-
-{ #category : #filtering }
-TDependencyQueryResult >> allWithAnyScope: aCollectionOfFamixClasses [
-	^ self newObjectResultWith: (self storage inject: OrderedCollection new into: [ :res :dep | (self opposite: dep) allWithAnyScope: aCollectionOfFamixClasses in: res ]) asSet
-]
-
-{ #category : #filtering }
-TDependencyQueryResult >> allWithScope: aClassFamix [
-	^ self newObjectResultWith: (self storage inject: OrderedCollection new into: [ :res :dep | (self opposite: dep) allWithScope: aClassFamix in: res ]) asSet
-]
-
-{ #category : #filtering }
-TDependencyQueryResult >> atAnyScope: aCollectionOfFamixClasses [
-	^ self newObjectResultWith: (self storage inject: OrderedCollection new into: [ :res :dep | (self opposite: dep) atAnyScope: aCollectionOfFamixClasses in: res ]) asSet
-]
-
-{ #category : #filtering }
-TDependencyQueryResult >> atScope: aClassFamix [
-	^ self newObjectResultWith: (self storage inject: OrderedCollection new into: [ :res :dep | (self opposite: dep) atScope: aClassFamix in: res ]) asSet
-]
-
-{ #category : #filtering }
 TDependencyQueryResult >> atScope: aClassFamix withNonMatchingEntitiesDo: aBlock [
 	"I do the same at #atScope: but when an element has nothing to return as scope I execute the block with the opposite as first parameter and the result collection as second parameter."
 
-	| res opposite coll |
+	| res opposite coll query |
 	res := OrderedCollection new.
+	query := MooseQueryScopeQuery scope: aClassFamix direction: MooseQueryScopeUpStrategy.
 	self storage
 		do: [ :dep | 
 			coll := OrderedCollection new.
-			(opposite := self opposite: dep) atScope: aClassFamix in: coll.
+			query result: coll.
+			(opposite := self opposite: dep) scopeForQuery: query direction: query direction.
 			coll ifEmpty: [ aBlock cull: opposite cull: res ] ifNotEmpty: [ :results | res addAll: results ] ].
 	^ self newObjectResultWith: res asSet
 ]
@@ -68,6 +30,12 @@ TDependencyQueryResult >> elementAtReceiverScope: dep [
 	For example, would return the class of an invoked method if query is called on a class."
 
 	^ (self opposite: dep) withScope: self receiver
+]
+
+{ #category : #filtering }
+TDependencyQueryResult >> executeScopeQuery: aQuery [
+	self storage do: [ :dep | (self opposite: dep) scopeForQuery: aQuery direction: aQuery direction ].
+	^ self newObjectResultWith: aQuery result
 ]
 
 { #category : #private }
@@ -125,26 +93,6 @@ TDependencyQueryResult >> targets [
 { #category : #accessing }
 TDependencyQueryResult >> targetsAtScope: aTraitOrClass [
 	^ self targets flatCollectAsSet: [ :e | e atScope: aTraitOrClass ]
-]
-
-{ #category : #filtering }
-TDependencyQueryResult >> toAnyScope: aCollectionOfFamixClasses [
-	^ self newObjectResultWith: (self storage inject: OrderedCollection new into: [ :res :dep | (self opposite: dep) toAnyScope: aCollectionOfFamixClasses in: res ]) asSet
-]
-
-{ #category : #filtering }
-TDependencyQueryResult >> toScope: aClassFamix [
-	^ self newObjectResultWith: (self storage inject: OrderedCollection new into: [ :res :dep | (self opposite: dep) toScope: aClassFamix in: res ]) asSet
-]
-
-{ #category : #filtering }
-TDependencyQueryResult >> withAnyScope: aCollectionOfFamixClasses [
-	^ self newObjectResultWith: (self storage inject: OrderedCollection new into: [ :res :dep | (self opposite: dep) withAnyScope: aCollectionOfFamixClasses in: res ]) asSet
-]
-
-{ #category : #filtering }
-TDependencyQueryResult >> withScope: aClassFamix [
-	^ self newObjectResultWith: (self storage inject: OrderedCollection new into: [ :res :dep | (self opposite: dep) withScope: aClassFamix in: res ]) asSet
 ]
 
 { #category : #filtering }
