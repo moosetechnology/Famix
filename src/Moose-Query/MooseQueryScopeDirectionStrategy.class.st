@@ -1,3 +1,10 @@
+"
+Description
+--------------------
+
+I am a strategy used by the scoping queries to define the direction in the containment DAG the query should follow.
+
+"
 Class {
 	#name : #MooseQueryScopeDirectionStrategy,
 	#superclass : #Object,

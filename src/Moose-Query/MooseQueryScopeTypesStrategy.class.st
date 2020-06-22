@@ -1,3 +1,11 @@
+"
+Description
+--------------------
+
+I am a strategy used by the scoping queries to define the query should match any of the kind of entity I am parametrized with.
+
+I am moslty here for performance reasons.
+"
 Class {
 	#name : #MooseQueryScopeTypesStrategy,
 	#superclass : #MooseQueryScopeAbstractTypeStrategy,

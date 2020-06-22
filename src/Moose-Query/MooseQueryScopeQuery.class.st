@@ -1,3 +1,43 @@
+"
+Description
+--------------------
+
+I am an object representing a scoping query.
+
+A scoping query is executed with a receiver and have multiple parameters:
+- The direction of the scope (up/down/both in the containment DAG)
+- Is it recursive or does it stop at one result?
+- The kind of the scope to stop to (a class or trait or collection of those?)
+- A condition to stop looking for results?
+
+Examples
+--------------------
+
+method := model allModelMethods anyOne.
+
+method query ancestors for: FamixTNamespace.
+method query ancestors recursively for: FamixTNamespace.
+method query ancestors recursively forAny: {FamixTNamespace . FamixTClass}.
+(method query ancestors recursively until: #isClass) forAny: {FamixTNamespace . FamixTClass}.
+
+method query descendants recursively for: FamixTNamespace.
+(method query descendants recursively until: #isClass) forAny: {FamixTNamespace . FamixTClass}.
+
+method query lineage recursively for: FamixTNamespace.
+(method query lineage recursively until: #isClass) forAny: {FamixTNamespace . FamixTClass}.
+ 
+Internal Representation and Key Implementation Points.
+--------------------
+
+    Instance Variables
+	direction:			<aDirectionStrategy>		A strategy managing the direction of the query (up/down/both in the containment tree).
+	isRecursive:			<aBoolean>					If true, will look in the whole tree even if some results are found.
+	receiver:				<anEntity>					The receiver of the query (optional, is used when we call #execute without parameter).
+	result:				<aSet>							Set of results found for the query.
+	typeStrategy:		<aScopeStrategy>			A strategy defining the kinds of entities matching the query.
+	until:					<aValuable>					An optional condition to stop the lookup.
+
+"
 Class {
 	#name : #MooseQueryScopeQuery,
 	#superclass : #Object,
