@@ -66,6 +66,11 @@ FamixTAttribute >> mooseNameOn: aStream [
 	self name ifNotNil: [ aStream nextPutAll: self name ]
 ]
 
+{ #category : #'moose query' }
+FamixTAttribute >> outgoingTypeDeclarations [
+	^ self declaredType ifNil: [ {} ] ifNotNil: [ :dt | {(MooseQueryDependencyAssociation newFrom: self to: dt)} ]
+]
+
 { #category : #accessing }
 FamixTAttribute >> parentType [
 	"Relation named: #parentType type: #FamixTWithAttributes opposite: #attributes"

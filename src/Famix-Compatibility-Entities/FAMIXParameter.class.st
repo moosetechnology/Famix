@@ -25,6 +25,11 @@ FAMIXParameter >> mooseNameOn: stream [
 	self name ifNotNil: [stream nextPutAll: self name]
 ]
 
+{ #category : #'moose query' }
+FAMIXParameter >> outgoingTypeDeclarations [
+	^ self declaredType ifNil: [ {} ] ifNotNil: [ :dt | {(MooseQueryDependencyAssociation newFrom: self to: dt)} ]
+]
+
 { #category : #'Famix-Extensions' }
 FAMIXParameter >> parentType [
 	^self parentBehaviouralEntity parentType

@@ -14,3 +14,8 @@ FamixTest2Class class >> annotation [
 	<generated>
 	^self
 ]
+
+{ #category : #testing }
+FamixTest2Class >> incomingTypeDeclarations [  
+	^ self typedEntities collect: [ :var | MooseQueryDependencyAssociation newFrom: var to: self ]
+]

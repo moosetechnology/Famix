@@ -20,3 +20,8 @@ FAMIXStructuralEntity >> isSharedVariable [
 
 	^ false
 ]
+
+{ #category : #'moose query' }
+FAMIXStructuralEntity >> outgoingTypeDeclarations [
+	^ self declaredType ifNil: [ {} ] ifNotNil: [ :dt | {(MooseQueryDependencyAssociation newFrom: self to: dt)} ]
+]

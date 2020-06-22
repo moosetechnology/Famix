@@ -16,7 +16,8 @@ Class {
 		'source',
 		'target',
 		'generationStrategy',
-		'dependencySource'
+		'dependencySource',
+		'dependencyTarget'
 	],
 	#category : #'Famix-MetamodelBuilder-Core-Implementation'
 }
@@ -44,6 +45,11 @@ FmxMBRelationSide >> asSlot [
 		cardinality: self cardinality
 		type: self oppositeType
 		opposite: self oppositeName
+]
+
+{ #category : #properties }
+FmxMBRelationSide >> beDependencyTarget [
+	dependencyTarget := true.
 ]
 
 { #category : #accessing }
@@ -133,6 +139,7 @@ FmxMBRelationSide >> initialize [
 	target := false.
 	source := false.
 	dependencySource := false.
+	dependencyTarget := false.
 
 	self makeStandard
 ]
@@ -145,8 +152,13 @@ FmxMBRelationSide >> isContainer [
 
 { #category : #properties }
 FmxMBRelationSide >> isDependencySource [
-
 	^ dependencySource
+]
+
+{ #category : #properties }
+FmxMBRelationSide >> isDependencyTarget [
+
+	^ dependencyTarget
 ]
 
 { #category : #properties }

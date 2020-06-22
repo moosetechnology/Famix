@@ -28,6 +28,11 @@ FamixTClass classSide >> annotationFamixClassGroup [
 ]
 
 { #category : #testing }
+FamixTClass >> incomingTypeDeclarations [  
+	^ self typedEntities collect: [ :var | MooseQueryDependencyAssociation newFrom: var to: self ]
+]
+
+{ #category : #testing }
 FamixTClass >> isClass [
 
 	<generated>

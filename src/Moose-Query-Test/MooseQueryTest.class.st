@@ -174,8 +174,8 @@ MooseQueryTest >> testAllIncoming [
 
 { #category : #tests }
 MooseQueryTest >> testAllOutgoing [
-	self assert: method2 queryAllOutgoing size equals: 2.
-	self assert: class2 queryAllOutgoing size equals: 3
+	self assert: method2 queryAllOutgoing size equals: 3.
+	self assert: class2 queryAllOutgoing size equals: 5
 ]
 
 { #category : #tests }

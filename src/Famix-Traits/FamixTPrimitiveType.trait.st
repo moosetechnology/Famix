@@ -14,6 +14,11 @@ FamixTPrimitiveType classSide >> annotation [
 ]
 
 { #category : #testing }
+FamixTPrimitiveType >> incomingTypeDeclarations [  
+	^ self typedEntities collect: [ :var | MooseQueryDependencyAssociation newFrom: var to: self ]
+]
+
+{ #category : #testing }
 FamixTPrimitiveType >> isPrimitiveType [
 
 	<generated>

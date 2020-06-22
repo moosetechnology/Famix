@@ -217,6 +217,11 @@ FAMIXMethod >> numberOfInvokedMethods [
 	^ self privateState cacheAt: #numberOfInvokedMethods ifAbsentPut: [ self invokedMethods size ]
 ]
 
+{ #category : #'moose query' }
+FAMIXMethod >> outgoingTypeDeclarations [
+	^ self declaredType ifNil: [ {} ] ifNotNil: [ :dt | {(MooseQueryDependencyAssociation newFrom: self to: dt)} ]
+]
+
 { #category : #'Famix-Implementation' }
 FAMIXMethod >> overridesMethod [
 	^ self belongsTo superclassHierarchy collect: [ :each | each implementationOf: self signature ] thenSelect: #isNotNil

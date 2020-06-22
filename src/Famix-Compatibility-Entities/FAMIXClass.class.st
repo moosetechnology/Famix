@@ -28,6 +28,11 @@ FAMIXClass >> accessedAttributes [
 	^ self methodsWithoutSutbsAndConstructors asOrderedCollection flatCollect: [ :method | method accessedAttributes ]
 ]
 
+{ #category : #testing }
+FAMIXClass >> incomingTypeDeclarations [  
+	^ self typedEntities collect: [ :var | MooseQueryDependencyAssociation newFrom: var to: self ]
+]
+
 { #category : #initialization }
 FAMIXClass >> initialize [
 

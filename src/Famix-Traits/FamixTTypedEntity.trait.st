@@ -44,5 +44,5 @@ FamixTTypedEntity >> hasDeclaredType [
 
 { #category : #'moose query' }
 FamixTTypedEntity >> outgoingTypeDeclarations [
-	^ self declaredType ifNil: [ {} ] ifNotNil: [ :dt | {(MooseQueryTypeDeclarationAssociation newFrom: self to: dt)} ]
+	^ self declaredType ifNil: [ {} ] ifNotNil: [ :dt | {(MooseQueryDependencyAssociation newFrom: self to: dt)} ]
 ]

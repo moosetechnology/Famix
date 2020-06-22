@@ -20,6 +20,15 @@ MooseQueryIncomingDirectionStrategy class >> associationTypesFor: anEntity [
 	^ anEntity incomingAssociationTypes
 ]
 
+{ #category : #converting }
+MooseQueryIncomingDirectionStrategy class >> createQueryResult: queryResult requestor: queryingEntity [
+	^queryResult asCollection collect: [ :res |
+		res isAssociation
+			ifTrue: [ res ]
+			ifFalse: [ MooseQueryDependencyAssociation newFrom: res to: queryingEntity  ]
+	]
+]
+
 { #category : #accessing }
 MooseQueryIncomingDirectionStrategy class >> determinatingSymbol [
 	^ #in

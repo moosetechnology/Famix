@@ -15,6 +15,11 @@ FamixStAnnotationTypeAttribute class >> annotation [
 	^self
 ]
 
+{ #category : #'moose query' }
+FamixStAnnotationTypeAttribute >> outgoingTypeDeclarations [
+	^ self declaredType ifNil: [ {} ] ifNotNil: [ :dt | {(MooseQueryDependencyAssociation newFrom: self to: dt)} ]
+]
+
 { #category : #accessing }
 FamixStAnnotationTypeAttribute >> parentAnnotationType [
 	<FMProperty: #parentAnnotationType type: #FamixStAnnotationType> <derived> 

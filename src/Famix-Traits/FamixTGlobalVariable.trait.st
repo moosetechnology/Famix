@@ -27,6 +27,11 @@ FamixTGlobalVariable classSide >> annotationFamixGlobalVariableGroup [
 	^ FamixGlobalVariableGroup
 ]
 
+{ #category : #'moose query' }
+FamixTGlobalVariable >> outgoingTypeDeclarations [
+	^ self declaredType ifNil: [ {} ] ifNotNil: [ :dt | {(MooseQueryDependencyAssociation newFrom: self to: dt)} ]
+]
+
 { #category : #accessing }
 FamixTGlobalVariable >> parentScope [
 	"Relation named: #parentScope type: #FamixTWithGlobalVariables opposite: #globalVariables"
