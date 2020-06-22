@@ -151,7 +151,8 @@ MooseQueryScopeQuery >> forAny: aCollection [
 MooseQueryScopeQuery >> initialize [
 	super initialize.
 	isRecursive := false.
-	result := Set new
+	result := Set new.
+	until := [ :each | false ]
 ]
 
 { #category : #accessing }
@@ -219,7 +220,7 @@ MooseQueryScopeQuery >> typeStrategy: anObject [
 
 { #category : #accessing }
 MooseQueryScopeQuery >> until [
-	^ until ifNil: [ until := [ :each | false ] ]
+	^ until
 ]
 
 { #category : #accessing }
