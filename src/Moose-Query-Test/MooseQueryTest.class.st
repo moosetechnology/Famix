@@ -587,12 +587,6 @@ MooseQueryTest >> testSourceThroughInvocation [
 ]
 
 { #category : #tests }
-MooseQueryTest >> testTargetThroughAll [
-	self assertCollection: (method2 throughAllTo) storage flattened hasSameElements: { var1 . method2}.
-	self assertCollection: (class2 throughAllTo) storage flattened hasSameElements: { var1 . method2}
-]
-
-{ #category : #tests }
 MooseQueryTest >> testTargetThroughInvocation [
 
 	self assertCollection: (method1 targetThrough: FamixTInvocation) storage flattened hasSameElements: {method2}.
