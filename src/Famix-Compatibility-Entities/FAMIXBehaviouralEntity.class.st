@@ -129,11 +129,6 @@ FAMIXBehaviouralEntity >> numberOfStatements [
 		computedAs: [ self mooseModel isSmalltalk ifTrue: [ (RBVisitorForFAMIXMetrics for: self) numberOfStatements ] ifFalse: [ self notExistentMetricValue ] ]
 ]
 
-{ #category : #'moose query' }
-FAMIXBehaviouralEntity >> outgoingTypeDeclarations [
-	^ self declaredType ifNil: [ {} ] ifNotNil: [ :dt | {(MooseQueryDependencyAssociation newFrom: self to: dt)} ]
-]
-
 { #category : #'Famix-Extensions' }
 FAMIXBehaviouralEntity >> providerBehaviours [
 	<FMProperty: #providerBehaviours type: #FAMIXBehaviouralEntity>

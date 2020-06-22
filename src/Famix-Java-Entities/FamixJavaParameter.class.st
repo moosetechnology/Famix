@@ -25,11 +25,6 @@ FamixJavaParameter >> mooseNameOn: stream [
 	self name ifNotNil: [stream nextPutAll: self name]
 ]
 
-{ #category : #'moose query' }
-FamixJavaParameter >> outgoingTypeDeclarations [
-	^ self declaredType ifNil: [ {} ] ifNotNil: [ :dt | {(MooseQueryDependencyAssociation newFrom: self to: dt)} ]
-]
-
 { #category : #accessing }
 FamixJavaParameter >> parentType [
 	^self parentBehaviouralEntity parentType

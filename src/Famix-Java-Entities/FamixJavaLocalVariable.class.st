@@ -25,11 +25,6 @@ FamixJavaLocalVariable >> mooseNameOn: stream [
 	self name ifNotNil: [stream nextPutAll: self name]
 ]
 
-{ #category : #'moose query' }
-FamixJavaLocalVariable >> outgoingTypeDeclarations [
-	^ self declaredType ifNil: [ {} ] ifNotNil: [ :dt | {(MooseQueryDependencyAssociation newFrom: self to: dt)} ]
-]
-
 { #category : #printing }
 FamixJavaLocalVariable >> printOn: stream [ 
 	| parent |

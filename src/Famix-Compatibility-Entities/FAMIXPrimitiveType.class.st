@@ -14,15 +14,3 @@ FAMIXPrimitiveType class >> annotation [
 	<generated>
 	^self
 ]
-
-{ #category : #testing }
-FAMIXPrimitiveType >> incomingTypeDeclarations [  
-	^ self typedEntities collect: [ :var | MooseQueryDependencyAssociation newFrom: var to: self ]
-]
-
-{ #category : #testing }
-FAMIXPrimitiveType >> isPrimitiveType [
-
-	<generated>
-	^ true
-]

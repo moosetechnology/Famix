@@ -22,6 +22,7 @@ Trait {
 		'#annotationAttributeInstances => FMMany type: #FamixTTypedAnnotationInstanceAttribute opposite: #annotationTypeAttribute'
 	],
 	#traits : 'FamixTAttribute',
+	#classTraits : 'FamixTAttribute classTrait',
 	#category : #'Famix-Traits-AnnotationTypeAttribute'
 }
 
@@ -55,9 +56,4 @@ FamixTAnnotationTypeAttribute >> annotationAttributeInstances: anObject [
 
 	<generated>
 	annotationAttributeInstances value: anObject
-]
-
-{ #category : #'moose query' }
-FamixTAnnotationTypeAttribute >> outgoingTypeDeclarations [
-	^ self declaredType ifNil: [ {} ] ifNotNil: [ :dt | {(MooseQueryDependencyAssociation newFrom: self to: dt)} ]
 ]

@@ -7,6 +7,7 @@ Trait {
 		'#parentBehaviouralEntity => FMOne type: #FamixTWithImplicitVariables opposite: #implicitVariables'
 	],
 	#traits : 'FamixTStructuralEntity',
+	#classTraits : 'FamixTStructuralEntity classTrait',
 	#category : #'Famix-Traits-ImplicitVariable'
 }
 
@@ -24,11 +25,6 @@ FamixTImplicitVariable >> isImplicitVariable [
 
 	<generated>
 	^ true
-]
-
-{ #category : #'moose query' }
-FamixTImplicitVariable >> outgoingTypeDeclarations [
-	^ self declaredType ifNil: [ {} ] ifNotNil: [ :dt | {(MooseQueryDependencyAssociation newFrom: self to: dt)} ]
 ]
 
 { #category : #accessing }

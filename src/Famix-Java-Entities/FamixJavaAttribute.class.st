@@ -14,8 +14,3 @@ FamixJavaAttribute class >> annotation [
 	<generated>
 	^self
 ]
-
-{ #category : #'moose query' }
-FamixJavaAttribute >> outgoingTypeDeclarations [
-	^ self declaredType ifNil: [ {} ] ifNotNil: [ :dt | {(MooseQueryDependencyAssociation newFrom: self to: dt)} ]
-]

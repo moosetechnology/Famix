@@ -61,11 +61,6 @@ FamixStClass >> implements: aString [
 	^ self methods anySatisfy: [ :each | aString = each signature ]
 ]
 
-{ #category : #testing }
-FamixStClass >> incomingTypeDeclarations [  
-	^ self typedEntities collect: [ :var | MooseQueryDependencyAssociation newFrom: var to: self ]
-]
-
 { #category : #accessing }
 FamixStClass >> instanceSide [
 	^ self isClassSide

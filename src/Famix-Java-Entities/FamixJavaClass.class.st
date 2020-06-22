@@ -33,11 +33,6 @@ FamixJavaClass >> incomingAccesses [
 ]
 
 { #category : #testing }
-FamixJavaClass >> incomingTypeDeclarations [  
-	^ self typedEntities collect: [ :var | MooseQueryDependencyAssociation newFrom: var to: self ]
-]
-
-{ #category : #testing }
 FamixJavaClass >> isADirectSubclassOf: aClass [
 	^ aClass class = FamixJavaClass
 		ifTrue: [ aClass directSubclasses includes: self ]

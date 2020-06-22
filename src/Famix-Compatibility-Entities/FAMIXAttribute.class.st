@@ -33,8 +33,3 @@ FAMIXAttribute >> isSharedVariable [
 	"^ self propertyNamed: #sharedVariable ifAbsent: [false] "
 	^ self propertyNamed: #sharedVariable ifNil: [false]
 ]
-
-{ #category : #'moose query' }
-FAMIXAttribute >> outgoingTypeDeclarations [
-	^ self declaredType ifNil: [ {} ] ifNotNil: [ :dt | {(MooseQueryDependencyAssociation newFrom: self to: dt)} ]
-]

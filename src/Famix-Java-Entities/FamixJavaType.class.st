@@ -67,11 +67,6 @@ FamixJavaType >> implements: aString [
 ]
 
 { #category : #testing }
-FamixJavaType >> incomingTypeDeclarations [  
-	^ self typedEntities collect: [ :var | MooseQueryDependencyAssociation newFrom: var to: self ]
-]
-
-{ #category : #testing }
 FamixJavaType >> isAbstract [
 	<FMProperty: #isAbstract type: #Boolean> <derived>
 	<FMComment: 'Flag true for abstract classes.'>

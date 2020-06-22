@@ -138,11 +138,6 @@ FAMIXType >> incomingAccessesGroup [
 				withDescription: 'Incoming accesses to ' , self mooseName]
 ]
 
-{ #category : #testing }
-FAMIXType >> incomingTypeDeclarations [  
-	^ self typedEntities collect: [ :var | MooseQueryDependencyAssociation newFrom: var to: self ]
-]
-
 { #category : #'Famix-Smalltalk' }
 FAMIXType >> instanceSide [
 	^self isClassSide
