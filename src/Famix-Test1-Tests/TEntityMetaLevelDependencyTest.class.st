@@ -119,7 +119,7 @@ TEntityMetaLevelDependencyTest >> testAllWithScope [
 	self assertCollection: (c2 allWithScope: FamixTSourceAnchor) hasSameElements: { }.
 	self assertCollection: (c2 allWithScope: FamixTest1SourceTextAnchor) hasSameElements: { }.
 
-	self assertCollection: (m1 allWithScope: FamixTClass) hasSameElements: { }.
+	self assertCollection: (m1 allWithScope: FamixTClass) hasSameElements: { c1 }.
 	"self assertCollection: (m1 allWithScope: FamixTest1Class) hasSameElements: { }." "issue 28"
 
 ]

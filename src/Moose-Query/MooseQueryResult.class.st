@@ -49,50 +49,44 @@ MooseQueryResult >> add: newObject [
 	^ storage add: newObject 
 ]
 
-{ #category : #scoping }
-MooseQueryResult >> allAtAnyScope: aSymbol [
-
-	^ self subclassResponsibility
+{ #category : #filtering }
+MooseQueryResult >> allAtAnyScope: aCollectionOfFamixClasses [
+	^ self executeScopeQuery: (MooseQueryScopeQuery recursivelyScopes: aCollectionOfFamixClasses direction: MooseQueryScopeUpStrategy)
 ]
 
-{ #category : #scoping }
-MooseQueryResult >> allAtScope: aSymbol [
-
-	^ self subclassResponsibility
+{ #category : #filtering }
+MooseQueryResult >> allAtScope: aClassFamix [
+	^ self executeScopeQuery: (MooseQueryScopeQuery recursivelyScope: aClassFamix direction: MooseQueryScopeUpStrategy)
 ]
 
-{ #category : #scoping }
-MooseQueryResult >> allToAnyScope: aSymbol [
-
-	^ self subclassResponsibility
+{ #category : #filtering }
+MooseQueryResult >> allToAnyScope: aCollectionOfFamixClasses [
+	^ self executeScopeQuery: (MooseQueryScopeQuery recursivelyScopes: aCollectionOfFamixClasses direction: MooseQueryScopeDownStrategy)
 ]
 
-{ #category : #scoping }
-MooseQueryResult >> allToScope: aSymbol [
-
-	^ self subclassResponsibility
+{ #category : #filtering }
+MooseQueryResult >> allToScope: aClassFamix [
+	^ self executeScopeQuery: (MooseQueryScopeQuery recursivelyScope: aClassFamix direction: MooseQueryScopeDownStrategy)
 ]
 
-{ #category : #scoping }
-MooseQueryResult >> allWithAnyScope: aSymbol [
-	^ self subclassResponsibility
+{ #category : #filtering }
+MooseQueryResult >> allWithAnyScope: aCollectionOfFamixClasses [
+	^ self executeScopeQuery: (MooseQueryScopeQuery recursivelyScopes: aCollectionOfFamixClasses direction: MooseQueryScopeAllStrategy)
 ]
 
-{ #category : #scoping }
-MooseQueryResult >> allWithScope: aSymbol [
-	^ self subclassResponsibility
+{ #category : #filtering }
+MooseQueryResult >> allWithScope: aClassFamix [
+	^ self executeScopeQuery: (MooseQueryScopeQuery recursivelyScope: aClassFamix direction: MooseQueryScopeAllStrategy)
 ]
 
-{ #category : #scoping }
-MooseQueryResult >> atAnyScope: aSymbol [
-
-	^ self subclassResponsibility
+{ #category : #filtering }
+MooseQueryResult >> atAnyScope: aCollectionOfFamixClasses [
+	^ self executeScopeQuery: (MooseQueryScopeQuery scopes: aCollectionOfFamixClasses direction: MooseQueryScopeUpStrategy)
 ]
 
-{ #category : #scoping }
-MooseQueryResult >> atScope: aSymbol [
-
-	^ self subclassResponsibility
+{ #category : #filtering }
+MooseQueryResult >> atScope: aClassFamix [
+	^ self executeScopeQuery: (MooseQueryScopeQuery scope: aClassFamix direction: MooseQueryScopeUpStrategy)
 ]
 
 { #category : #enumerating }
@@ -107,6 +101,11 @@ MooseQueryResult >> do: aBlock [
 	"Evaluate aBlock with each of the receiver's elements as the argument."
 
 	^ storage do: aBlock 
+]
+
+{ #category : #filtering }
+MooseQueryResult >> executeScopeQuery: aQuery [ 
+	^ self subclassResponsibility
 ]
 
 { #category : #initialization }
@@ -199,16 +198,14 @@ MooseQueryResult >> storage: aCollection [
 	storage := aCollection
 ]
 
-{ #category : #scoping }
-MooseQueryResult >> toAnyScope: aSymbol [
-
-	^ self subclassResponsibility
+{ #category : #filtering }
+MooseQueryResult >> toAnyScope: aCollectionOfFamixClasses [
+	^ self executeScopeQuery: (MooseQueryScopeQuery scopes: aCollectionOfFamixClasses direction: MooseQueryScopeDownStrategy)
 ]
 
-{ #category : #scoping }
-MooseQueryResult >> toScope: aSymbol [
-
-	^ self subclassResponsibility
+{ #category : #filtering }
+MooseQueryResult >> toScope: aClassFamix [
+	^ self executeScopeQuery: (MooseQueryScopeQuery scope: aClassFamix direction: MooseQueryScopeDownStrategy)
 ]
 
 { #category : #enumerating }
@@ -221,14 +218,14 @@ MooseQueryResult >> union: aCollection [
 	 ^ self class on: (self receiver) withAll: set
 ]
 
-{ #category : #scoping }
-MooseQueryResult >> withAnyScope: aSymbol [
-	^ self subclassResponsibility
+{ #category : #filtering }
+MooseQueryResult >> withAnyScope: aCollectionOfFamixClasses [
+	^ self executeScopeQuery: (MooseQueryScopeQuery scopes: aCollectionOfFamixClasses direction: MooseQueryScopeAllStrategy)
 ]
 
-{ #category : #scoping }
-MooseQueryResult >> withScope: aSymbol [
-	^ self subclassResponsibility
+{ #category : #filtering }
+MooseQueryResult >> withScope: aClassFamix [
+	^ self executeScopeQuery: (MooseQueryScopeQuery scope: aClassFamix direction: MooseQueryScopeAllStrategy)
 ]
 
 { #category : #filtering }

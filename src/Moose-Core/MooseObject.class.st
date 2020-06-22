@@ -83,7 +83,7 @@ MooseObject class >> annotation [
 
 { #category : #accessing }
 MooseObject class >> cache [
-	^ cache ifNil: [ cache := Dictionary new ]
+	^ cache ifNil: [ self initializeCache ]
 ]
 
 { #category : #accessing }
@@ -108,6 +108,16 @@ MooseObject class >> freshID [
 					'Moose''s internal element IDs are exceeding the range of SmallInteger, '
 						, 'this may cause system slow down.<n> Please contact moose-dev@iam.unibe.ch for more information.' ].
 	^ MooseID
+]
+
+{ #category : #accessing }
+MooseObject class >> initializeCache [
+	"Usually we use #at:ifAbsentPut: to declare new properties, but in MooseQuery to reduce too much the perfs to instantiate the block as second argument. Thus, we initialize this info direction at the cache creation and use a simple #at: instead"
+
+	^ cache := SmallDictionary new
+		at: #usedStatefulTraits put: super usedStatefulTraits;
+		at: #superclassesAndFamixTraits put: super usedStatefulTraits , self withAllSuperclasses;
+		yourself
 ]
 
 { #category : #testing }
@@ -166,7 +176,12 @@ MooseObject class >> setMooseID: anInteger [
 
 { #category : #testing }
 MooseObject class >> superclassesAndFamixTraits [
-	^ self cache at: #superclassesAndFamixTraits ifAbsentPut: [ self usedStatefulTraits , self withAllSuperclasses ]
+	^ self cache directAt: #superclassesAndFamixTraits
+]
+
+{ #category : #testing }
+MooseObject class >> usedStatefulTraits [
+	^ self cache directAt: #usedStatefulTraits
 ]
 
 { #category : #'meta information' }

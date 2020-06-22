@@ -81,11 +81,6 @@ MooseEntity class >> requirements [
 				ifFalse: [ {aBehavior} ] ]) asSet
 ]
 
-{ #category : #'stateful traits' }
-MooseEntity class >> usedStatefulTraits [
-	^ self cache at: #usedStatefulTraits ifAbsentPut: [ super usedStatefulTraits ]
-]
-
 { #category : #dependencies }
 MooseEntity >> addAllChildrenDependenciesThrough: aDirectionStrategy in: aCollection [
 	aCollection addAll: (aDirectionStrategy dependenciesAtReceiverScopeOf: self).
