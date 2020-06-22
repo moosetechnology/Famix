@@ -132,7 +132,7 @@ MooseQueryScopeQuery >> direction: anObject [
 
 { #category : #execution }
 MooseQueryScopeQuery >> execute [
-	^ self scopeFor: self receiver
+	^ direction scopeFor: receiver query: self
 ]
 
 { #category : #accessing }
@@ -187,11 +187,6 @@ MooseQueryScopeQuery >> result [
 { #category : #accessing }
 MooseQueryScopeQuery >> result: anObject [
 	result := anObject
-]
-
-{ #category : #execution }
-MooseQueryScopeQuery >> scopeFor: anEntity [
-	^ direction scopeFor: anEntity query: self
 ]
 
 { #category : #execution }
