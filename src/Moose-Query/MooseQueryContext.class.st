@@ -93,7 +93,7 @@ MooseQueryContext >> direction: anObject [
 MooseQueryContext >> initialize [
 	super initialize.
 	isRecursive := false.
-	result := OrderedCollection new
+	result := Set new
 ]
 
 { #category : #accessing }

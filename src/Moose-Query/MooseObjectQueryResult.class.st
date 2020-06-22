@@ -19,7 +19,7 @@ MooseObjectQueryResult class >> withAll: aCollection [
 { #category : #filtering }
 MooseObjectQueryResult >> executeScopeQuery: aQuery [
 	self storage do: [ :entity | entity scopeForQuery: aQuery direction: aQuery direction ].
-	^ self newObjectResultWith: aQuery result asSet
+	^ self newObjectResultWith: aQuery result
 ]
 
 { #category : #evaluating }

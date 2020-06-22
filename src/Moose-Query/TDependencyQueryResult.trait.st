@@ -35,7 +35,7 @@ TDependencyQueryResult >> elementAtReceiverScope: dep [
 { #category : #filtering }
 TDependencyQueryResult >> executeScopeQuery: aQuery [
 	self storage do: [ :dep | (self opposite: dep) scopeForQuery: aQuery direction: aQuery direction ].
-	^ self newObjectResultWith: aQuery result asSet
+	^ self newObjectResultWith: aQuery result
 ]
 
 { #category : #private }
