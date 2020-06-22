@@ -25,3 +25,8 @@ FamixStAttribute >> beSharedVariable [
 FamixStAttribute >> isSharedVariable [
 	^ self propertyNamed: #sharedVariable ifNil: [ false ]
 ]
+
+{ #category : #'moose query' }
+FamixStAttribute >> outgoingTypeDeclarations [
+	^ self declaredType ifNil: [ {} ] ifNotNil: [ :dt | {(MooseQueryDependencyAssociation newFrom: self to: dt)} ]
+]

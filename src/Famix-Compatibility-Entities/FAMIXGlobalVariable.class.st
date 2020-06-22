@@ -27,6 +27,11 @@ FAMIXGlobalVariable >> isPublic [
 			inv accessor parentScope ~~ self parentScope]
 ]
 
+{ #category : #'moose query' }
+FAMIXGlobalVariable >> outgoingTypeDeclarations [
+	^ self declaredType ifNil: [ {} ] ifNotNil: [ :dt | {(MooseQueryDependencyAssociation newFrom: self to: dt)} ]
+]
+
 { #category : #'Famix-Implementation' }
 FAMIXGlobalVariable >> printOn: aStream [ 
 	| parent |

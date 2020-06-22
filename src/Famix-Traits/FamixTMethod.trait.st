@@ -186,6 +186,11 @@ FamixTMethod >> numberOfMessageSends: aNumber [
 	self privateState cacheAt: #numberOfMessageSends put: aNumber
 ]
 
+{ #category : #'moose query' }
+FamixTMethod >> outgoingTypeDeclarations [
+	^ self declaredType ifNil: [ {} ] ifNotNil: [ :dt | {(MooseQueryDependencyAssociation newFrom: self to: dt)} ]
+]
+
 { #category : #accessing }
 FamixTMethod >> parentType [
 	"Relation named: #parentType type: #FamixTWithMethods opposite: #methods"

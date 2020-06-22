@@ -22,3 +22,8 @@ FamixTStructuralEntity >> isStructuralEntity [
 	<generated>
 	^ true
 ]
+
+{ #category : #'moose query' }
+FamixTStructuralEntity >> outgoingTypeDeclarations [
+	^ self declaredType ifNil: [ {} ] ifNotNil: [ :dt | {(MooseQueryDependencyAssociation newFrom: self to: dt)} ]
+]

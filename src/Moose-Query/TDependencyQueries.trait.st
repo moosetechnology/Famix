@@ -368,8 +368,8 @@ TDependencyQueries >> queryIncomingDependencies [
 	"Associations + typeDeclaractions"
 
 	^ self queryAllIncoming
-		addAll: self queryIncomingTypeDeclarations;
-		yourself
+		"addAll: self queryIncomingTypeDeclarations;
+		yourself"
 ]
 
 { #category : #'query dependencies' }
@@ -453,8 +453,8 @@ TDependencyQueries >> queryOutgoingDependencies [
 	"Associations + typeDeclarations"
 
 	^ self queryAllOutgoing
-		addAll: self queryOutgoingTypeDeclarations;
-		yourself
+		"addAll: self queryOutgoingTypeDeclarations;
+		yourself"
 ]
 
 { #category : #'query dependencies' }

@@ -14,3 +14,8 @@ FamixTTypedStructure classSide >> isDeprecated [
 
 	^ true
 ]
+
+{ #category : #'moose query' }
+FamixTTypedStructure >> outgoingTypeDeclarations [
+	^ self declaredType ifNil: [ {} ] ifNotNil: [ :dt | {(MooseQueryDependencyAssociation newFrom: self to: dt)} ]
+]

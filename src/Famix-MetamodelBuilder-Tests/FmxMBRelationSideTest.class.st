@@ -16,6 +16,8 @@ FmxMBRelationSideTest >> testBasics [
 	self deny: side isDerived.
 	self deny: side isTarget.
 	self deny: side isSource.
+	self deny: side isDependencySource.
+	self deny: side isDependencyTarget.
 	self assert: side willGenerate.
 	self assertEmpty: side comment
 ]
@@ -51,6 +53,50 @@ FmxMBRelationSideTest >> testContainmentRelations [
 	self assert: relation right isMany.
 	self assert: relation left isContainer.
 	self deny: relation right isContainer.
+
+]
+
+{ #category : #tests }
+FmxMBRelationSideTest >> testDependencySourceLeftSide [
+	"test dependencySource and dependencyTarget on either sides of a relation
+	Testing with a OneToMany relation"
+
+	| tClass1 tClass2 side1 side2 |
+	tClass1 := builder newTraitNamed: #TClass1.
+	tClass2 := builder newTraitNamed: #TClass2.
+
+	(side1 := tClass1 property: #property1)
+		dependencySource.
+	(side2 := tClass2 property: #property2).
+	side1 -* side2.
+
+	self assert: side1 isDependencySource.
+	self deny: side1 isDependencyTarget.
+
+	self deny: side2 isDependencySource.
+	self assert: side2 isDependencyTarget.
+
+]
+
+{ #category : #tests }
+FmxMBRelationSideTest >> testDependencySourceRightSide [
+	"test dependencySource and dependencyTarget on either sides of a relation
+	Testing with a OneToOne relation"
+
+	| tClass1 tClass2 side1 side2 |
+	tClass1 := builder newTraitNamed: #TClass1.
+	tClass2 := builder newTraitNamed: #TClass2.
+
+	(side1 := tClass1 property: #property1).
+	(side2 := tClass2 property: #property2)
+		dependencySource.
+	side1 - side2.
+
+	self deny: side1 isDependencySource.
+	self assert: side1 isDependencyTarget.
+
+	self assert: side2 isDependencySource.
+	self deny: side2 isDependencyTarget.
 
 ]
 
@@ -154,11 +200,15 @@ FmxMBRelationSideTest >> testProperties [
 	side target: false.
 	self deny: side isTarget.
 
-	self deny: side isTarget.
-	side target.
-	self assert: side isTarget.
-	side target: false.
-	self deny: side isTarget.
+	self deny: side isDependencySource.
+	side dependencySource.
+	self assert: side isDependencySource.
+	side dependencySource: false.
+	self deny: side isDependencySource.
+
+	self deny: side isDependencyTarget.
+	side beDependencyTarget.
+	self assert: side isDependencyTarget.
 
 	self assert: side isOne.
 	self deny: side isMany.

@@ -21,3 +21,8 @@ FamixTest3Type class >> annotationFamixTest3TypeGroup [
 	<mooseGroup>
 	^ FamixTest3TypeGroup
 ]
+
+{ #category : #testing }
+FamixTest3Type >> incomingTypeDeclarations [  
+	^ self typedEntities collect: [ :var | MooseQueryDependencyAssociation newFrom: var to: self ]
+]

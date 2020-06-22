@@ -14,3 +14,8 @@ FamixJavaEnumValue class >> annotation [
 	<generated>
 	^self
 ]
+
+{ #category : #'moose query' }
+FamixJavaEnumValue >> outgoingTypeDeclarations [
+	^ self declaredType ifNil: [ {} ] ifNotNil: [ :dt | {(MooseQueryDependencyAssociation newFrom: self to: dt)} ]
+]
