@@ -14,3 +14,10 @@ FamixJavaPrimitiveType class >> annotation [
 	<generated>
 	^self
 ]
+
+{ #category : #testing }
+FamixJavaPrimitiveType >> isPrimitiveType [
+
+	<generated>
+	^ true
+]

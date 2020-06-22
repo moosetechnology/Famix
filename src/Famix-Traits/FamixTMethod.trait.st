@@ -62,7 +62,7 @@ FamixTMethod >> hierarchyNestingLevel: aNumber [
 	self privateState cacheAt: #hierarchyNestingLevel put: aNumber
 ]
 
-{ #category : #testing }
+{ #category : #accessing }
 FamixTMethod >> isAbstract [
 
 	<FMProperty: #isAbstract type: #Boolean>

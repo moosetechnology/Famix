@@ -14,7 +14,6 @@ Instance Variables:
 Trait {
 	#name : #FamixTEnum,
 	#traits : 'FamixTType + FamixTWithEnumValues',
-	#classTraits : 'FamixTType classTrait + FamixTWithEnumValues classTrait',
 	#category : #'Famix-Traits-Traits'
 }
 

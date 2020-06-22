@@ -14,3 +14,10 @@ FAMIXPrimitiveType class >> annotation [
 	<generated>
 	^self
 ]
+
+{ #category : #testing }
+FAMIXPrimitiveType >> isPrimitiveType [
+
+	<generated>
+	^ true
+]
