@@ -104,7 +104,7 @@ MooseQueryCalculator >> hasLocalFor: anEntity [
 	do: [ :ind | 
 		(anEntity perform: (properties at: ind) name)
 			ifNotNil: [ :coll | 
-				 ^ coll asCollection isNotEmpty ] ].
+				 coll asCollection ifNotEmpty: [ ^ true ] ] ].
 	^ false
 ]
 
