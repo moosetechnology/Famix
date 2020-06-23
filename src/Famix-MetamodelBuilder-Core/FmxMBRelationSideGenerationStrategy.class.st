@@ -73,22 +73,12 @@ FmxMBRelationSideGenerationStrategy >> generateGetterIn: aClassOrTrait for: aRel
 						tab;
 						nextPutAll: '<derived>';
 						cr ].
-			(aRelationSide isSource or: [ aRelationSide isDependencySource ])
+			aRelationSide isSource
 				ifTrue: [ s
 						tab;
 						nextPutAll: '<source>';
 						cr ].
-			aRelationSide isDependencySource
-				ifTrue: [ s
-						tab;
-						nextPutAll: '<dependencySource>';
-						cr ].
-			aRelationSide isDependencyTarget
-				ifTrue: [ s
-						tab;
-						nextPutAll: '<dependencyTarget>';
-						cr ].
-			(aRelationSide isTarget or: [ aRelationSide isDependencyTarget ])
+			aRelationSide isTarget
 				ifTrue: [ s
 						tab;
 						nextPutAll: '<target>';
