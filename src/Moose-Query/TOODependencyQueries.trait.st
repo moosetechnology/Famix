@@ -5,7 +5,8 @@ For more informations: https://moosequery.ferlicot.fr/
 "
 Trait {
 	#name : #TOODependencyQueries,
-	#traits : 'TDependencyQueries',
+	#traits : 'TEntityMetaLevelDependency',
+	#classTraits : 'TEntityMetaLevelDependency classTrait',
 	#category : #'Moose-Query-Traits'
 }
 
@@ -42,4 +43,24 @@ TOODependencyQueries >> hasOutgoingTypeDeclaration [
 				| coll |
 				1 to: (coll := children asCollection) size do: [ :i | ((coll at: i) hasOutgoingTypeDeclarations) ifTrue: [ ^ true ]  ] ] ].
 	 ^ self entityHasOutgoingTypeDeclarations.
+]
+
+{ #category : #'as yet unclassified' }
+TOODependencyQueries >> queryStaticIncomingAssociations [
+
+	^ self queryIncomingAccesses
+		addAll: self queryIncomingReferences;
+		addAll: self queryIncomingInheritances;
+		yourself
+
+]
+
+{ #category : #'as yet unclassified' }
+TOODependencyQueries >> queryStaticOutgoingAssociations [
+
+	^ self queryOutgoingAccesses
+		addAll: self queryOutgoingReferences;
+		addAll: self queryOutgoingInheritances;
+		yourself
+
 ]

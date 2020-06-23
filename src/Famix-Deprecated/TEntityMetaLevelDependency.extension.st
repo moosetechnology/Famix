@@ -1,13 +1,13 @@
-Extension { #name : #TDependencyQueries }
+Extension { #name : #TEntityMetaLevelDependency }
 
 { #category : #'*Famix-Deprecated' }
-TDependencyQueries >> queryIncomingDependencies [
+TEntityMetaLevelDependency >> queryIncomingDependencies [
 	self deprecated: 'Use #queryAllIncoming' transformWith: '`@receiver queryIncomingDependencies' -> '`@receiver queryAllIncoming'.
 	^ self queryAllIncoming
 ]
 
 { #category : #'*Famix-Deprecated' }
-TDependencyQueries >> queryOutgoingDependencies [
+TEntityMetaLevelDependency >> queryOutgoingDependencies [
 	self deprecated: 'Use #queryAllOutgoing' transformWith: '`@receiver queryOutgoingDependencies' -> '`@receiver queryAllOutgoing'.
 
 	^ self queryAllOutgoing

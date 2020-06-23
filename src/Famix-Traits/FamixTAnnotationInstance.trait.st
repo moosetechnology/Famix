@@ -16,7 +16,8 @@ Trait {
 	#instVars : [
 		'#annotatedEntity => FMOne type: #FamixTWithAnnotationInstances opposite: #annotationInstances'
 	],
-	#traits : 'TEntityMetaLevelDependency + TDependencyQueries',
+	#traits : 'TEntityMetaLevelDependency',
+	#classTraits : 'TEntityMetaLevelDependency classTrait',
 	#category : #'Famix-Traits-AnnotationInstance'
 }
 

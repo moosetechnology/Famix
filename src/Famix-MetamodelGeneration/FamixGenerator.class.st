@@ -926,10 +926,8 @@ FamixGenerator >> defineHierarchy [
 	tAttribute --|> tStructuralEntity.
 
 	tAnnotationInstance --|> #TEntityMetaLevelDependency.
-	tAnnotationInstance --|> #TDependencyQueries.
 
 	tAnnotationInstanceAttribute --|> #TEntityMetaLevelDependency.
-	tAnnotationInstanceAttribute --|> #TDependencyQueries.
 
 	tAnnotationTypeAttribute --|> tAttribute.
 
@@ -1001,7 +999,6 @@ FamixGenerator >> defineHierarchy [
 	
 	tMultipleFileAnchor --|> tSourceAnchor.
 	
-	tNamedEntity --|> #TDependencyQueries.
 	tNamedEntity --|> #TEntityMetaLevelDependency.
 	tNamedEntity --|> tSourceEntity.
 

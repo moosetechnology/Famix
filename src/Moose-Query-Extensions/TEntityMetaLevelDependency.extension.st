@@ -1,7 +1,7 @@
-Extension { #name : #TDependencyQueries }
+Extension { #name : #TEntityMetaLevelDependency }
 
 { #category : #'*Moose-Query-Extensions' }
-TDependencyQueries >> queryAllIncomingAssociations [
+TEntityMetaLevelDependency >> queryAllIncomingAssociations [
 	"Be careful while using me. I hardcode the associations I should query. Users can override me if they want to query only certain types of association for performance reasons. If you prefere to be sure of your results you should use #queryAllIncoming instead."
 
 	^ self queryStaticIncomingAssociations
@@ -10,12 +10,12 @@ TDependencyQueries >> queryAllIncomingAssociations [
 ]
 
 { #category : #'*Moose-Query-Extensions' }
-TDependencyQueries >> queryAllIncomingInvocations [
+TEntityMetaLevelDependency >> queryAllIncomingInvocations [
 	^ self queryIncoming: FamixTInvocation
 ]
 
 { #category : #'*Moose-Query-Extensions' }
-TDependencyQueries >> queryAllOutgoingAssociations [
+TEntityMetaLevelDependency >> queryAllOutgoingAssociations [
 	"Be careful while using me. I hardcode the associations I should query. Users can override me if they want to query only certain types of association for performance reasons. If you prefere to be sure of your results you should use #queryAllOutgoing instead."
 
 	^ self queryStaticOutgoingAssociations
@@ -24,64 +24,64 @@ TDependencyQueries >> queryAllOutgoingAssociations [
 ]
 
 { #category : #'*Moose-Query-Extensions' }
-TDependencyQueries >> queryAllOutgoingInvocations [
+TEntityMetaLevelDependency >> queryAllOutgoingInvocations [
 	^ self queryOutgoing: FamixTInvocation
 ]
 
 { #category : #'*Moose-Query-Extensions' }
-TDependencyQueries >> queryIncomingAccesses [
+TEntityMetaLevelDependency >> queryIncomingAccesses [
 	^ self queryIncoming: FamixTAccess
 ]
 
 { #category : #'*Moose-Query-Extensions' }
-TDependencyQueries >> queryIncomingReferences [
+TEntityMetaLevelDependency >> queryIncomingReferences [
 	^ self queryIncoming: FamixTReference
 ]
 
 { #category : #'*Moose-Query-Extensions' }
-TDependencyQueries >> queryOutgoingAccesses [
+TEntityMetaLevelDependency >> queryOutgoingAccesses [
 	^ self queryOutgoing: FamixTAccess
 ]
 
 { #category : #'*Moose-Query-Extensions' }
-TDependencyQueries >> queryOutgoingReferences [
+TEntityMetaLevelDependency >> queryOutgoingReferences [
 	^ self queryOutgoing: FamixTReference
 ]
 
 { #category : #'*Moose-Query-Extensions' }
-TDependencyQueries >> queryStaticIncomingAssociations [
+TEntityMetaLevelDependency >> queryStaticIncomingAssociations [
 	^ self queryIncomingAccesses
 		addAll: self queryIncomingReferences;
 		yourself
 ]
 
 { #category : #'*Moose-Query-Extensions' }
-TDependencyQueries >> queryStaticOutgoingAssociations [
+TEntityMetaLevelDependency >> queryStaticOutgoingAssociations [
 	^ self queryOutgoingAccesses
 		addAll: self queryOutgoingReferences;
 		yourself
 ]
 
 { #category : #'*Moose-Query-Extensions' }
-TDependencyQueries >> querySureIncomingAssociations [
+TEntityMetaLevelDependency >> querySureIncomingAssociations [
 	^ self queryStaticIncomingAssociations
 		addAll: self querySureIncomingInvocations;
 		yourself
 ]
 
 { #category : #'*Moose-Query-Extensions' }
-TDependencyQueries >> querySureIncomingInvocations [
+TEntityMetaLevelDependency >> querySureIncomingInvocations [
 	^ self queryAllIncomingInvocations select: [ :invo | invo isASureInvocation ]
 ]
 
 { #category : #'*Moose-Query-Extensions' }
-TDependencyQueries >> querySureOutgoingAssociations [
+TEntityMetaLevelDependency >> querySureOutgoingAssociations [
 	^ self queryStaticOutgoingAssociations
 		addAll: self querySureOutgoingInvocations;
 		yourself
 ]
 
 { #category : #'*Moose-Query-Extensions' }
-TDependencyQueries >> querySureOutgoingInvocations [
+TEntityMetaLevelDependency >> querySureOutgoingInvocations [
 	^ self queryAllOutgoingInvocations select: [ :invo | invo isASureInvocation ]
 ]
