@@ -61,7 +61,7 @@ Trait {
 	#category : #'Moose-Query-Traits'
 }
 
-{ #category : #new }
+{ #category : #accessing }
 TEntityMetaLevelDependency classSide >> allChildrenTypesIn: aMetamodel [
 
 	^ aMetamodel additionalProperty: #allChildrenTypes for: self ifAbsentPut: [ self privateAllChildrenTypesIn: aMetamodel ]
@@ -152,7 +152,7 @@ TEntityMetaLevelDependency classSide >> parentTypesIn: aMetamodel [
 	
 ]
 
-{ #category : #new }
+{ #category : #private }
 TEntityMetaLevelDependency classSide >> privateAllChildrenTypesIn: aMetamodel [
 	"Instead of checking if we are using TEntityMetaLevolDependency it would be better to implement #childrenTypesIn: on Trait, but it is currently impossible because all methods whose selector is present in Trait, Class, Behavior are not copied to users. If we denife the method on Trait then the one of TEntityMetaLevelDependency will not be present in the users."
 
@@ -161,7 +161,7 @@ TEntityMetaLevelDependency classSide >> privateAllChildrenTypesIn: aMetamodel [
 		as: Set) asOrderedCollection
 ]
 
-{ #category : #accessing }
+{ #category : #private }
 TEntityMetaLevelDependency classSide >> privateAllIncomingAssociationTypesIn: aMetamodel [
    ^ (((self allChildrenTypesIn: aMetamodel) flatCollectAsSet: [:each | each implementingClassesIn: aMetamodel ])
 		flatCollectAsSet: [ :each | each incomingAssociationTypesIn: aMetamodel])
@@ -169,7 +169,7 @@ TEntityMetaLevelDependency classSide >> privateAllIncomingAssociationTypesIn: aM
        yourself
 ]
 
-{ #category : #accessing }
+{ #category : #private }
 TEntityMetaLevelDependency classSide >> privateAllOutgoingAssociationTypesIn: aMetamodel [
    ^ (((self allChildrenTypesIn: aMetamodel) flatCollectAsSet: [:each | each implementingClassesIn: aMetamodel ])
 		flatCollectAsSet: [ :each | each outgoingAssociationTypesIn: aMetamodel])
@@ -177,7 +177,7 @@ TEntityMetaLevelDependency classSide >> privateAllOutgoingAssociationTypesIn: aM
        yourself
 ]
 
-{ #category : #accessing }
+{ #category : #private }
 TEntityMetaLevelDependency classSide >> privateAllParentTypesIn: aMetamodel [
 	"Instead of checking if we are using TEntityMetaLevolDependency it would be better to implement #parentTypesIn: on Trait, but it is currently impossible because all methods whose selector is present in Trait, Class, Behavior are not copied to users. If we denife the method on Trait then the one of TEntityMetaLevelDependency will not be present in the users."
 
@@ -186,12 +186,12 @@ TEntityMetaLevelDependency classSide >> privateAllParentTypesIn: aMetamodel [
 		as: Set) asOrderedCollection
 ]
 
-{ #category : #accessing }
+{ #category : #private }
 TEntityMetaLevelDependency classSide >> privateChildrenSelectorsIn: aMetamodel [
 	^ (self allDeclaredPropertiesIn: aMetamodel) select: #isChildrenProperty thenCollect: #implementingSelector
 ]
 
-{ #category : #new }
+{ #category : #private }
 TEntityMetaLevelDependency classSide >> privateChildrenTypesIn: aMetamodel [
 	| childrenImplementingClasses childrenUsers |
 	childrenImplementingClasses := ((self allDeclaredPropertiesIn: aMetamodel) select: #isChildrenProperty) collect: #implementingType.
@@ -201,7 +201,7 @@ TEntityMetaLevelDependency classSide >> privateChildrenTypesIn: aMetamodel [
 	^ (childrenImplementingClasses , childrenUsers flatCollect: #withAllSubclasses as: Set) asArray	"<== This could later be #removeDuplicates but it is currently broken on arrays. See https://github.com/pharo-project/pharo/issues/4850"
 ]
 
-{ #category : #new }
+{ #category : #private }
 TEntityMetaLevelDependency classSide >> privateIncomingAssociationTypesIn: aMetamodel [
 	"collects all association for which self class is target
 	 Since #incomingMSEPropertiesIn: also returns declared dependencies, they must be rejected"
@@ -209,12 +209,12 @@ TEntityMetaLevelDependency classSide >> privateIncomingAssociationTypesIn: aMeta
 	^ ((self allDeclaredPropertiesIn: aMetamodel) select: [ :p | p hasOpposite and: [ p opposite isTarget and: [ p isSource not ] ] ]) collect: #implementingType
 ]
 
-{ #category : #new }
+{ #category : #private }
 TEntityMetaLevelDependency classSide >> privateIncomingMSEPropertiesIn: aMetamodel [
 	^ (self allDeclaredPropertiesIn: aMetamodel) select: [ :p | (p hasOpposite and: [ p opposite isTarget and: [ p isSource not ] ]) or: [ p isTarget ] ]
 ]
 
-{ #category : #new }
+{ #category : #private }
 TEntityMetaLevelDependency classSide >> privateOutgoingAssociationTypesIn: aMetamodel [
 	"collects all association for which self class is source
 	 Since #outgoingMSEPropertiesIn: also returns declared dependencies, they must be rejected"
@@ -222,19 +222,19 @@ TEntityMetaLevelDependency classSide >> privateOutgoingAssociationTypesIn: aMeta
 	^ ((self allDeclaredPropertiesIn: aMetamodel) select: [ :p | p hasOpposite and: [ p opposite isSource and: [ p isTarget not ] ] ]) collect: #implementingType
 ]
 
-{ #category : #new }
+{ #category : #private }
 TEntityMetaLevelDependency classSide >> privateOutgoingMSEPropertiesIn: aMetamodel [
 	"computes all properties that are sources of association for self (a class) belonging to aMetamodel"
 
 	^ (self allDeclaredPropertiesIn: aMetamodel) select: [ :p | (p hasOpposite and: [ p opposite isSource and: [ p isTarget not ] ]) or: [ p isSource ] ]
 ]
 
-{ #category : #new }
+{ #category : #private }
 TEntityMetaLevelDependency classSide >> privateParentSelectorsIn: aMetamodel [
 	^ (self allDeclaredPropertiesIn: aMetamodel) select: #isContainer thenCollect: #implementingSelector
 ]
 
-{ #category : #new }
+{ #category : #private }
 TEntityMetaLevelDependency classSide >> privateParentTypesIn: aMetamodel [
 	| containerImplementingClasses containerUsers |
 	containerImplementingClasses := (self allDeclaredPropertiesIn: aMetamodel)
