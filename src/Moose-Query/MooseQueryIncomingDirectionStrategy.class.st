@@ -11,27 +11,13 @@ Class {
 }
 
 { #category : #accessing }
-MooseQueryIncomingDirectionStrategy class >> allAssociationTypesFor: anEntity [
-	^ anEntity allIncomingAssociationTypes
-]
-
-{ #category : #accessing }
-MooseQueryIncomingDirectionStrategy class >> associationTypesFor: anEntity [
-	^ anEntity incomingAssociationTypes
+MooseQueryIncomingDirectionStrategy class >> determinatingSymbol [
+	^ #in
 ]
 
 { #category : #converting }
-MooseQueryIncomingDirectionStrategy class >> createQueryResult: queryResult requestor: queryingEntity [
-	^queryResult asCollection collect: [ :res |
-		res isAssociation
-			ifTrue: [ res ]
-			ifFalse: [ MooseQueryDependencyAssociation newFrom: res to: queryingEntity  ]
-	]
-]
-
-{ #category : #accessing }
-MooseQueryIncomingDirectionStrategy class >> determinatingSymbol [
-	^ #in
+MooseQueryIncomingDirectionStrategy class >> ensureAssociation: anObject with: anEntity [
+	^ anObject asAssociationTo: anEntity
 ]
 
 { #category : #accessing }

@@ -24,6 +24,7 @@ Trait {
 		'#previous => FMOne type: #FamixTAssociation opposite: #next'
 	],
 	#traits : 'FamixTSourceEntity + TAssociationMetaLevelDependency',
+	#classTraits : 'FamixTSourceEntity classTrait + TAssociationMetaLevelDependency classTrait',
 	#category : #'Famix-Traits-Association'
 }
 
@@ -49,6 +50,16 @@ FamixTAssociation classSide >> source: anEntity target: anotherEntity model: aMo
 	^ (self source: anEntity target: anotherEntity)
 		mooseModel: aMooseModel;
 		yourself
+]
+
+{ #category : #converting }
+FamixTAssociation >> asAssociationFrom: anEntity [
+	^ self
+]
+
+{ #category : #converting }
+FamixTAssociation >> asAssociationTo: anEntity [
+	^ self
 ]
 
 { #category : #printing }

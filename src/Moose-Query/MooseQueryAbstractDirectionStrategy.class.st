@@ -20,18 +20,17 @@ Class {
 }
 
 { #category : #accessing }
-MooseQueryAbstractDirectionStrategy class >> allAssociationTypesFor: anEntity [
-	^ self subclassResponsibility
-]
-
-{ #category : #accessing }
-MooseQueryAbstractDirectionStrategy class >> associationTypesFor: anEntity [
-	^ self subclassResponsibility
-]
-
-{ #category : #accessing }
 MooseQueryAbstractDirectionStrategy class >> determinatingSymbol [
 	"I should return a Symbol representing a direction. For example an Incoming direction will have #in as determinating symbol."
+
+	^ self subclassResponsibility
+]
+
+{ #category : #accessing }
+MooseQueryAbstractDirectionStrategy class >> ensureAssociation: anObject with: anEntity [
+	"Ensure the object as parameter is an association to or from the entity in parameter depending on the direction.
+	
+	I am used to manage non-reified dependencies."
 
 	^ self subclassResponsibility
 ]

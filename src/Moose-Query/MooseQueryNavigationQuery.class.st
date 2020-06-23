@@ -165,15 +165,12 @@ MooseQueryNavigationQuery >> queryAllLocalFor: anEntity in: aCollection [
 	
 	First collects local (not inherited) properties that match the strategy
 	Then applies these properties to find entities associated to self"
+
 	| properties |
 	"Instead of #to:do: we could just use #do: but this implementation is much faster. Maybe sista will remove the needs of the todo later."
-	1 to: (properties := self strategy msePropertiesOf: anEntity) size do: [ :ind |
+	1 to: (properties := self strategy msePropertiesOf: anEntity) size do: [ :ind | 
 		(anEntity perform: (properties at: ind) name)
-			ifNotNil: [ :coll |
-				aCollection addAll: 
-					(self strategy
-						createQueryResult: coll
-						requestor: anEntity ) ] ].
+			ifNotNil: [ :coll | coll asCollection do: [ :res | aCollection add: (self strategy ensureAssociation: res with: anEntity) ] ] ].
 	^ aCollection
 ]
 
@@ -276,7 +273,7 @@ MooseQueryNavigationQuery >> throughAllLocalFor: anEntity in: aCollection [
 	1 to: (properties := self strategy msePropertiesOf: anEntity) size do: [ :ind | 
 		(anEntity perform: (properties at: ind) name)
 			ifNotNil:
-				[ :coll | aCollection addAll: ((self strategy createQueryResult: coll requestor: anEntity) collect: [ :each | each perform: self strategy symbolToCollectEntities ]) ] ].
+				[ :coll | coll asCollection do: [ :res | aCollection add: ((self strategy ensureAssociation: res with: anEntity) perform: self strategy symbolToCollectEntities) ] ] ].
 	^ aCollection
 ]
 
