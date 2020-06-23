@@ -184,9 +184,13 @@ MooseModel class >> importMetamodelFrom: aStream [
 MooseModel class >> menuCommandOn: aBuilder [
 	<worldMenu>
 	(aBuilder item: #Moose)
-		order: 6.0; 
+		order: 6.0;
 		withSeparatorAfter;
-		icon: MooseIcons mooseIcon
+		icon: MooseIcons mooseIcon;
+		with: [ (aBuilder item: #'Reset metamodels additional properties')
+				order: 50;
+				action: [ self resetMetamodelsAdditionalProperties ];
+				withSeparatorAfter ]
 ]
 
 { #category : #meta }
@@ -245,6 +249,12 @@ MooseModel class >> resetMetamodel [
 MooseModel class >> resetMetamodels [
 	<script>
 	self allSubclassesDo: #resetMetamodel
+]
+
+{ #category : #accessing }
+MooseModel class >> resetMetamodelsAdditionalProperties [
+	<script>
+	self allSubclassesDo: [ :each | each metamodel cleanAdditionalProperties ]
 ]
 
 { #category : #'root model' }
