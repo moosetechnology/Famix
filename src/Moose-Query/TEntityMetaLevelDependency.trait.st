@@ -111,16 +111,6 @@ TEntityMetaLevelDependency classSide >> childrenTypesIn: aMetamodel [
 ]
 
 { #category : #accessing }
-TEntityMetaLevelDependency classSide >> dependencyFM3PropertyDescriptionIn: aMetamodel [
-	"finds in aMetamodel all properties that are associations or declared dependencies,
-	 (obviously aMetamodel should contain the class self)"
-
-	aMetamodel ifNil: [ ^ OrderedCollection new ].
-	^ (self allDeclaredPropertiesIn: aMetamodel)
-		select: [ :e | e hasOpposite and: [ (e opposite isSource or: [ e opposite isTarget ]) or: [ e isSource or: [ e isTarget ] ] ] ]
-]
-
-{ #category : #accessing }
 TEntityMetaLevelDependency classSide >> incomingAssociationTypesIn: aMetamodel [
 
 	^ aMetamodel additionalProperty: #incomingAssociationTypes for: self ifAbsentPut: [ self privateIncomingAssociationTypesIn: aMetamodel ]
@@ -131,9 +121,7 @@ TEntityMetaLevelDependency classSide >> incomingAssociationTypesIn: aMetamodel [
 TEntityMetaLevelDependency classSide >> incomingMSEPropertiesIn: aMetamodel [
 	"computes all properties that are target of association for self (a class) belonging to aMetamodel"
 
-	self flag: 'For non-association properties that we would like to be dependencies I think it should return the opposite of the non-association properties since we are in the incoming case'.
 	^ aMetamodel additionalProperty: #incomingMSEProperties for: self ifAbsentPut: [ self privateIncomingMSEPropertiesIn: aMetamodel ]
-	
 ]
 
 { #category : #accessing }
@@ -218,12 +206,12 @@ TEntityMetaLevelDependency classSide >> privateIncomingAssociationTypesIn: aMeta
 	"collects all association for which self class is target
 	 Since #incomingMSEPropertiesIn: also returns declared dependencies, they must be rejected"
 
-	^ ((self dependencyFM3PropertyDescriptionIn: aMetamodel) select: [ :p | p opposite isTarget and: [ p isSource not ] ]) collect: #implementingType
+	^ ((self allDeclaredPropertiesIn: aMetamodel) select: [ :p | p hasOpposite and: [ p opposite isTarget and: [ p isSource not ] ] ]) collect: #implementingType
 ]
 
 { #category : #new }
 TEntityMetaLevelDependency classSide >> privateIncomingMSEPropertiesIn: aMetamodel [
-	^ (self dependencyFM3PropertyDescriptionIn: aMetamodel) select: [ :p | (p opposite isTarget and: [ p isSource not ]) or: [ p isTarget ] ]
+	^ (self allDeclaredPropertiesIn: aMetamodel) select: [ :p | (p hasOpposite and: [ p opposite isTarget and: [ p isSource not ] ]) or: [ p isTarget ] ]
 ]
 
 { #category : #new }
@@ -231,14 +219,14 @@ TEntityMetaLevelDependency classSide >> privateOutgoingAssociationTypesIn: aMeta
 	"collects all association for which self class is source
 	 Since #outgoingMSEPropertiesIn: also returns declared dependencies, they must be rejected"
 
-	^ ((self dependencyFM3PropertyDescriptionIn: aMetamodel) select: [ :p | p opposite isSource and: [ p isTarget not ] ]) collect: #implementingType
+	^ ((self allDeclaredPropertiesIn: aMetamodel) select: [ :p | p hasOpposite and: [ p opposite isSource and: [ p isTarget not ] ] ]) collect: #implementingType
 ]
 
 { #category : #new }
 TEntityMetaLevelDependency classSide >> privateOutgoingMSEPropertiesIn: aMetamodel [
 	"computes all properties that are sources of association for self (a class) belonging to aMetamodel"
 
-	^ (self dependencyFM3PropertyDescriptionIn: aMetamodel) select: [ :p | (p opposite isSource and: [ p isTarget not ]) or: [ p isSource ] ]
+	^ (self allDeclaredPropertiesIn: aMetamodel) select: [ :p | (p hasOpposite and: [ p opposite isSource and: [ p isTarget not ] ]) or: [ p isSource ] ]
 ]
 
 { #category : #new }
@@ -498,11 +486,6 @@ TEntityMetaLevelDependency >> createIncomingQueryResultWith: aCollection [
 { #category : #helpers }
 TEntityMetaLevelDependency >> createOutgoingQueryResultWith: aCollection [
 	^ MooseOutgoingQueryResult on: self withAll: aCollection
-]
-
-{ #category : #accessing }
-TEntityMetaLevelDependency >> dependencyFM3PropertyDescription [
-	^ self class dependencyFM3PropertyDescriptionIn: self metamodel
 ]
 
 { #category : #testing }

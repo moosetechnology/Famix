@@ -17,26 +17,22 @@ TAssociationMetaLevelDependency classSide >> annotation [
 	^self
 ]
 
-{ #category : #accessing }
-TAssociationMetaLevelDependency classSide >> dependencyFM3PropertyDescriptionIn: aMetamodel [
-	"Return all the properties corresponding to the source or the target of the association"
-
-	aMetamodel ifNil: [ ^ OrderedCollection new ].
-	^ (self allDeclaredPropertiesIn: aMetamodel) select: [ :e | e isSource or: [ e isTarget ] ]
-]
-
 { #category : #private }
 TAssociationMetaLevelDependency classSide >> privateSourceTypesIn: aMetamodel [
 	"I return the classes that could be my source"
 
-	^ (self dependencyFM3PropertyDescriptionIn: aMetamodel) select: #isSource thenCollect: #implementingType
+	^ (self allDeclaredPropertiesIn: aMetamodel)
+		select: #isSource
+		thenCollect: #implementingType
 ]
 
 { #category : #private }
 TAssociationMetaLevelDependency classSide >> privateTargetTypesIn: aMetamodel [
 	"I return the classes that could be my target"
 
-	^ (self dependencyFM3PropertyDescriptionIn: aMetamodel) select: #isTarget thenCollect: #implementingType
+	^ (self allDeclaredPropertiesIn: aMetamodel)
+		select: #isTarget
+		thenCollect: #implementingType
 ]
 
 { #category : #accessing }
@@ -51,11 +47,6 @@ TAssociationMetaLevelDependency classSide >> targetTypesIn: aMetamodel [
 
 	^ aMetamodel additionalProperty: #targetTypes for: self ifAbsentPut: [ self privateTargetTypesIn: aMetamodel ]
 
-]
-
-{ #category : #accessing }
-TAssociationMetaLevelDependency >> dependencyFM3PropertyDescription [
-	^ self class dependencyFM3PropertyDescriptionIn: self metamodel
 ]
 
 { #category : #accessing }
