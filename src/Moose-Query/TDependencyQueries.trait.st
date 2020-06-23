@@ -364,15 +364,6 @@ TDependencyQueries >> queryIncoming: aFAMIXClassAssociation [
 ]
 
 { #category : #'query dependencies' }
-TDependencyQueries >> queryIncomingDependencies [
-	"Associations + typeDeclaractions"
-
-	^ self queryAllIncoming
-		"addAll: self queryIncomingTypeDeclarations;
-		yourself"
-]
-
-{ #category : #'query dependencies' }
 TDependencyQueries >> queryIncomingTypeDeclarations [
 	"This method should return the incoming type declarations that are not represented in FAMIX and that cannot be query by a generic algorithme.
 	
@@ -446,15 +437,6 @@ TDependencyQueries >> queryOutgoing: aFAMIXClassAssociation [
 	"
 
 	^ (MooseQueryNavigationQuery strategy: MooseQueryOutgoingDirectionStrategy) query: aFAMIXClassAssociation for: self
-]
-
-{ #category : #'query dependencies' }
-TDependencyQueries >> queryOutgoingDependencies [
-	"Associations + typeDeclarations"
-
-	^ self queryAllOutgoing
-		"addAll: self queryOutgoingTypeDeclarations;
-		yourself"
 ]
 
 { #category : #'query dependencies' }

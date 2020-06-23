@@ -14,7 +14,7 @@ TDependencyQueries >> isDead [
 	<derived>
 	<FMComment: 'Is the entity dead (not invoked in the system)'>
 	^ self isContainerEntity
-		ifTrue: [ self lookUpPropertyNamed: #isDead computedAs: [ self hasIncomingDependencies not or: [ self queryIncomingDependencies withoutSelfLoops isEmpty ] ] ]
+		ifTrue: [ self lookUpPropertyNamed: #isDead computedAs: [ self hasIncomingDependencies not or: [ self queryAllIncoming withoutSelfLoops isEmpty ] ] ]
 		ifFalse: [ false ]
 ]
 

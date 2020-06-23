@@ -268,7 +268,9 @@ TEntityMetaLevelDependency >> allClients [
 
 { #category : #accessing }
 TEntityMetaLevelDependency >> allClientsAtScope: aClass [
-	^ self queryIncomingDependencies withoutSelfLoops atScope: aClass withNonMatchingEntitiesDo: [ :entities :res | entities ifNotNil: [ res addAll: entities asCollection ] ]
+	^ self queryAllIncoming withoutSelfLoops
+		atScope: aClass
+		withNonMatchingEntitiesDo: [ :entities :res | entities ifNotNil: [ res addAll: entities asCollection ] ]
 ]
 
 { #category : #accessing }
@@ -301,7 +303,9 @@ TEntityMetaLevelDependency >> allProviders [
 
 { #category : #accessing }
 TEntityMetaLevelDependency >> allProvidersAtScope: aClass [
-	^ self queryOutgoingDependencies withoutSelfLoops atScope: aClass withNonMatchingEntitiesDo: [ :entities :res | entities ifNotNil: [ res addAll: entities asCollection ] ]
+	^ self queryAllOutgoing withoutSelfLoops
+		atScope: aClass
+		withNonMatchingEntitiesDo: [ :entities :res | entities ifNotNil: [ res addAll: entities asCollection ] ]
 ]
 
 { #category : #scoping }

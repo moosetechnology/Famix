@@ -47,8 +47,7 @@ FAMIXPackage >> afferentCoupling [
 	<FMProperty: #afferentCoupling type: #Number>
 	<derived>
 	<FMComment: 'Afferent Coupling of a package'>
-	^ (((self queryIncomingDependencies atScope: FamixTType) outOfParentUsing: FamixTPackage)
-		select: [ :c | c isInstanceSide ]) size
+	^ (((self queryAllIncoming atScope: FamixTType) outOfParentUsing: FamixTPackage) select: [ :c | c isInstanceSide ]) size
 ]
 
 { #category : #'Famix-Extensions' }
@@ -69,7 +68,7 @@ FAMIXPackage >> bunchCohesion [
 	myClasses := myClasses select: [ :c | c isInstanceSide ].
 	myClasses size == 0
 		ifTrue: [ ^ nil ].
-	intraConnectivities := (myClasses collect: [ :c | (c queryOutgoingDependencies atScope: FamixTType) withinParentUsing: FamixTPackage ])
+	intraConnectivities := (myClasses collect: [ :c | (c queryAllOutgoing atScope: FamixTType) withinParentUsing: FamixTPackage ])
 		inject: 0
 		into: [ :subTotal :each | subTotal + (each select: [ :c | c isInstanceSide ]) size ].
 	^ intraConnectivities / myClasses size squared asFloat
@@ -88,14 +87,14 @@ FAMIXPackage >> bunchCouplingWith: aPackage [
 		ifTrue: [ ^ nil ].
 
 	"All outgoing dependencies"
-	interConnectivities := (myClasses collect: [ :c | (c queryOutgoingDependencies atScope: FamixTType) within: aPackage ])
+	interConnectivities := (myClasses collect: [ :c | (c queryAllOutgoing atScope: FamixTType) within: aPackage ])
 		inject: 0
 		into: [ :subTotal :each | subTotal + (each select: [ :c | c isInstanceSide ]) size ].
 
 	"Plus all incoming dependencies"
 	interConnectivities := interConnectivities
 		+
-			((myClasses collect: [ :c | (c queryIncomingDependencies atScope: FamixTType) within: aPackage ])
+			((myClasses collect: [ :c | (c queryAllIncoming atScope: FamixTType) within: aPackage ])
 				inject: 0
 				into: [ :subTotal :each | subTotal + (each select: [ :c | c isInstanceSide ]) size ]).
 	^ interConnectivities / (2 * myClasses size * otherClasses size) asFloat
@@ -113,14 +112,14 @@ FAMIXPackage >> bunchCouplingWithAll [
 		ifTrue: [ ^ nil ].
 
 	"All outgoing dependencies"
-	interConnectivities := (myClasses collect: [ :c | (c queryOutgoingDependencies atScope: FamixTType) outOfParentUsing: FamixTPackage ])
+	interConnectivities := (myClasses collect: [ :c | (c queryAllOutgoing atScope: FamixTType) outOfParentUsing: FamixTPackage ])
 		inject: 0
 		into: [ :subTotal :each | subTotal + (each select: [ :c | c isInstanceSide ]) size ].
 
 	"Plus all incoming dependencies"
 	interConnectivities := interConnectivities
 		+
-			((myClasses collect: [ :c | (c queryIncomingDependencies atScope: FAMIXType) outOfParentUsing: FamixTPackage ]) inject: 0 into: [ :subTotal :each | subTotal + (each select: [ :c | c isInstanceSide ]) size ]).
+			((myClasses collect: [ :c | (c queryAllIncoming atScope: FAMIXType) outOfParentUsing: FamixTPackage ]) inject: 0 into: [ :subTotal :each | subTotal + (each select: [ :c | c isInstanceSide ]) size ]).
 	^ interConnectivities / (2 * myClasses size * (allClasses size - myClasses size)) asFloat
 ]
 
@@ -270,7 +269,7 @@ FAMIXPackage >> martinCohesion [
 	myClasses := (myClasses union: (myClasses flatCollect: [ :c | c allRecursiveTypes ])) select: [ :c | c isInstanceSide ].
 	myClasses size == 0
 		ifTrue: [ ^ nil ].
-	intraConnectivities := (myClasses collect: [ :c | (c queryOutgoingDependencies atScope: FamixTType) withoutSelfLoops withinParentUsing: FamixTPackage ])
+	intraConnectivities := (myClasses collect: [ :c | (c queryAllOutgoing atScope: FamixTType) withoutSelfLoops withinParentUsing: FamixTPackage ])
 		inject: 0
 		into: [ :subTotal :each | subTotal + (each select: [ :c | c isInstanceSide ]) size ].
 	^ ((intraConnectivities + 1) / myClasses size) asFloat

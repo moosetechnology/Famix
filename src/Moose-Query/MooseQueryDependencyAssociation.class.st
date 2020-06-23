@@ -19,7 +19,7 @@ Class {
 		'from',
 		'to'
 	],
-	#category : #'Moose-Core'
+	#category : #'Moose-Query-Navigating'
 }
 
 { #category : #'instance creation' }

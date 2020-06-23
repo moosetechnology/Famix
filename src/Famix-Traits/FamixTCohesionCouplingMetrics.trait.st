@@ -1,6 +1,7 @@
 Trait {
 	#name : #FamixTCohesionCouplingMetrics,
 	#traits : 'FamixTPackage',
+	#classTraits : 'FamixTPackage classTrait',
 	#category : #'Famix-Traits-Package'
 }
 
@@ -91,7 +92,7 @@ FamixTCohesionCouplingMetrics >> martinCohesion [
 	myClasses := (myClasses union: (myClasses flatCollect: [ :c | c allRecursiveTypes ])) select: [ :c | c isInstanceSide ].
 	myClasses size == 0
 		ifTrue: [ ^ nil ].
-	intraConnectivities := (myClasses collect: [ :c | (c queryOutgoingDependencies atScope: FamixTType) withoutSelfLoops withinParentUsing: FamixTNamespace ])
+	intraConnectivities := (myClasses collect: [ :c | (c queryAllOutgoing atScope: FamixTType) withoutSelfLoops withinParentUsing: FamixTNamespace ])
 		inject: 0
 		into: [ :subTotal :each | subTotal + (each select: [ :c | c isInstanceSide ]) size ].
 	^ ((intraConnectivities + 1) / myClasses size) asFloat

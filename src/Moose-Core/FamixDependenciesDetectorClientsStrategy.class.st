@@ -17,5 +17,5 @@ FamixDependenciesDetectorClientsStrategy class >> dependenciesAtReceiverScopeOf:
 
 { #category : #accessing }
 FamixDependenciesDetectorClientsStrategy class >> dependenciesOf: aMooseEntity [
-	^ aMooseEntity queryIncomingDependencies
+	^ aMooseEntity queryAllIncoming
 ]
