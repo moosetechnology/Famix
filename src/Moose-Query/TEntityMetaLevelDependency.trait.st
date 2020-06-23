@@ -56,12 +56,10 @@ TEntityMetaLevelDependency classSide >> childrenTypesIn: aMetamodel [
 TEntityMetaLevelDependency classSide >> dependencyFM3PropertyDescriptionIn: aMetamodel [
 	"finds in aMetamodel all properties that are associations or declared dependencies,
 	 (obviously aMetamodel should contain the class self)"
+
 	aMetamodel ifNil: [ ^ OrderedCollection new ].
 	^ (self allDeclaredPropertiesIn: aMetamodel)
-		select: [ :e | e hasOpposite and: [ 
-				(e opposite isSource or:
-				[ e opposite isTarget ]) or:
-					[ e isDependencySource or: [e isDependencyTarget] ] ] ]
+		select: [ :e | e hasOpposite and: [ (e opposite isSource or: [ e opposite isTarget ]) or: [ e isSource or: [ e isTarget ] ] ] ]
 ]
 
 { #category : #accessing }
@@ -161,37 +159,28 @@ TEntityMetaLevelDependency classSide >> privateChildrenTypesIn: aMetamodel [
 TEntityMetaLevelDependency classSide >> privateIncomingAssociationTypesIn: aMetamodel [
 	"collects all association for which self class is target
 	 Since #incomingMSEPropertiesIn: also returns declared dependencies, they must be rejected"
-	^ (self incomingMSEPropertiesIn: aMetamodel)
-		reject: #isDependencyTarget
-		thenCollect: #implementingType
+
+	^ ((self dependencyFM3PropertyDescriptionIn: aMetamodel) select: [ :p | p opposite isTarget and: [ p isSource not ] ]) collect: #implementingType
 ]
 
 { #category : #new }
 TEntityMetaLevelDependency classSide >> privateIncomingMSEPropertiesIn: aMetamodel [
-	^(self dependencyFM3PropertyDescriptionIn: aMetamodel)
-		select: [ :p |
-			p opposite isTarget or:
-			[ p isDependencyTarget ]
-		]
+	^ (self dependencyFM3PropertyDescriptionIn: aMetamodel) select: [ :p | (p opposite isTarget and: [ p isSource not ]) or: [ p isTarget ] ]
 ]
 
 { #category : #new }
 TEntityMetaLevelDependency classSide >> privateOutgoingAssociationTypesIn: aMetamodel [
 	"collects all association for which self class is source
 	 Since #outgoingMSEPropertiesIn: also returns declared dependencies, they must be rejected"
-	^ (self outgoingMSEPropertiesIn: aMetamodel)
-		reject: #isDependencySource
-		thenCollect: #implementingType
+
+	^ ((self dependencyFM3PropertyDescriptionIn: aMetamodel) select: [ :p | p opposite isSource and: [ p isTarget not ] ]) collect: #implementingType
 ]
 
 { #category : #new }
 TEntityMetaLevelDependency classSide >> privateOutgoingMSEPropertiesIn: aMetamodel [
 	"computes all properties that are sources of association for self (a class) belonging to aMetamodel"
-	^(self dependencyFM3PropertyDescriptionIn: aMetamodel)
-		select: [ :p |
-			p opposite isSource or:
-			[ p isDependencySource ]
-		]
+
+	^ (self dependencyFM3PropertyDescriptionIn: aMetamodel) select: [ :p | (p opposite isSource and: [ p isTarget not ]) or: [ p isSource ] ]
 ]
 
 { #category : #new }

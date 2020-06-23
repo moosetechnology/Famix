@@ -12,6 +12,7 @@ Trait {
 		'#typedEntities => FMMany type: #FamixTTypedEntity opposite: #declaredType'
 	],
 	#traits : 'FamixTNamedEntity + FamixTReferenceable',
+	#classTraits : 'FamixTNamedEntity classTrait + FamixTReferenceable classTrait',
 	#category : #'Famix-Traits-Type'
 }
 
@@ -152,6 +153,7 @@ FamixTType >> typedEntities [
 	<FMComment: 'Entities that have this type as declaredType'>
 	<derived>
 	<dependencyTarget>
+	<target>
 	^ typedEntities
 ]
 
