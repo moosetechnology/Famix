@@ -203,28 +203,42 @@ TEntityMetaLevelDependency classSide >> privateChildrenTypesIn: aMetamodel [
 
 { #category : #private }
 TEntityMetaLevelDependency classSide >> privateIncomingAssociationTypesIn: aMetamodel [
-	"collects all association for which self class is target
-	 Since #incomingMSEPropertiesIn: also returns declared dependencies, they must be rejected"
+	"Collects all reified associations for which self class is target.
+	 
+	To find they, we select my properties who have an opposite which is a targer. 
+	We reject the properties that are source because a source with a target as opposite is not a reified dependency using and association."
 
 	^ ((self allDeclaredPropertiesIn: aMetamodel) select: [ :p | p hasOpposite and: [ p opposite isTarget and: [ p isSource not ] ] ]) collect: #implementingType
 ]
 
 { #category : #private }
 TEntityMetaLevelDependency classSide >> privateIncomingMSEPropertiesIn: aMetamodel [
+	"Collects all fame properties defining a incoming dependency to self.
+	 
+	We can have 2 cases:
+	- Refified dependencies. In that case I have a property with an opposite that is a target (and since the dependency is reified, I don't have a source myself)
+	- Non reified properties. In that case I have a property that is a target."
+
 	^ (self allDeclaredPropertiesIn: aMetamodel) select: [ :p | (p hasOpposite and: [ p opposite isTarget and: [ p isSource not ] ]) or: [ p isTarget ] ]
 ]
 
 { #category : #private }
 TEntityMetaLevelDependency classSide >> privateOutgoingAssociationTypesIn: aMetamodel [
-	"collects all association for which self class is source
-	 Since #outgoingMSEPropertiesIn: also returns declared dependencies, they must be rejected"
+	"Collects all reified associations for which self class is source.
+	 
+	To find they, we select my properties who have an opposite which is a source. 
+	We reject the properties that are target because a target with a source as opposite is not a reified dependency using and association."
 
 	^ ((self allDeclaredPropertiesIn: aMetamodel) select: [ :p | p hasOpposite and: [ p opposite isSource and: [ p isTarget not ] ] ]) collect: #implementingType
 ]
 
 { #category : #private }
 TEntityMetaLevelDependency classSide >> privateOutgoingMSEPropertiesIn: aMetamodel [
-	"computes all properties that are sources of association for self (a class) belonging to aMetamodel"
+	"Collects all fame properties defining a outgoing dependency to self.
+	 
+	We can have 2 cases:
+	- Refified dependencies. In that case I have a property with an opposite that is a source (and since the dependency is reified, I don't have a target myself)
+	- Non reified properties. In that case I have a property that is a source."
 
 	^ (self allDeclaredPropertiesIn: aMetamodel) select: [ :p | (p hasOpposite and: [ p opposite isSource and: [ p isTarget not ] ]) or: [ p isSource ] ]
 ]
