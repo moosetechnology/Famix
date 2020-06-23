@@ -45,7 +45,7 @@ TOODependencyQueries >> hasOutgoingTypeDeclaration [
 	 ^ self entityHasOutgoingTypeDeclarations.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 TOODependencyQueries >> queryStaticIncomingAssociations [
 
 	^ self queryIncomingAccesses
@@ -55,7 +55,7 @@ TOODependencyQueries >> queryStaticIncomingAssociations [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 TOODependencyQueries >> queryStaticOutgoingAssociations [
 
 	^ self queryOutgoingAccesses
