@@ -9,7 +9,7 @@ Class {
 	#superclass : #MooseQueryResult,
 	#traits : 'TDependencyQueryResult',
 	#classTraits : 'TDependencyQueryResult classTrait',
-	#category : #'Moose-Query-Results'
+	#category : #'Moose-Query-Navigating'
 }
 
 { #category : #private }

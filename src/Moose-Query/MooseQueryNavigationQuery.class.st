@@ -24,28 +24,28 @@ Internal Representation and Key Implementation Points.
 
 "
 Class {
-	#name : #MooseQueryCalculator,
+	#name : #MooseQueryNavigationQuery,
 	#superclass : #Object,
 	#instVars : [
 		'strategy'
 	],
-	#category : #'Moose-Query-Core'
+	#category : #'Moose-Query-Navigating'
 }
 
 { #category : #'instance creation' }
-MooseQueryCalculator class >> direction: aSymbol [
+MooseQueryNavigationQuery class >> direction: aSymbol [
 	^ self strategy: (MooseQueryAbstractDirectionStrategy fromSymbol: aSymbol)
 ]
 
 { #category : #'instance creation' }
-MooseQueryCalculator class >> strategy: aStrategy [
+MooseQueryNavigationQuery class >> strategy: aStrategy [
 	^ self new
 		strategy: aStrategy;
 		yourself
 ]
 
 { #category : #query }
-MooseQueryCalculator >> has: aFAMIXClassAssociation for: anEntity [
+MooseQueryNavigationQuery >> has: aFAMIXClassAssociation for: anEntity [
 	"I know that we could use #do: here, but this algo takes too long on big model, so this is a speed up while the sista vm is not ready for production"
 
 	| selectors |
@@ -63,7 +63,7 @@ MooseQueryCalculator >> has: aFAMIXClassAssociation for: anEntity [
 ]
 
 { #category : #query }
-MooseQueryCalculator >> hasFor: anEntity [
+MooseQueryNavigationQuery >> hasFor: anEntity [
 	| selectors |
 	(self hasLocalFor: anEntity) ifTrue: [ ^ true ].
 	"Instead of #to:do: we could just use #do: but this implementation is much faster. Maybe sista will remove the needs of the todo later."
@@ -76,7 +76,7 @@ MooseQueryCalculator >> hasFor: anEntity [
 ]
 
 { #category : #query }
-MooseQueryCalculator >> hasLocal: aFAMIXClassAssociation for: anEntity [
+MooseQueryNavigationQuery >> hasLocal: aFAMIXClassAssociation for: anEntity [
 	"The goal here is to get all the entity's direct associations of the class in parameter. This will not check the associations of the entity's children."
 
 	"Note: Maybe adding a guard to check if the entity can have associations of this class could improve the perf. Currently it is not the case because there is not enough association. Maybe it could be the case in the futur, like with a PostgreSQL model."
@@ -93,7 +93,7 @@ MooseQueryCalculator >> hasLocal: aFAMIXClassAssociation for: anEntity [
 ]
 
 { #category : #query }
-MooseQueryCalculator >> hasLocalFor: anEntity [
+MooseQueryNavigationQuery >> hasLocalFor: anEntity [
 	"The goal here is to get all the entity's direct associations of the class in parameter. This will not check the associations of the entity's children."
 
 	"Note: Maybe adding a guard to check if the entity can have associations of this class could improve the perf. Currently it is not the case because there is not enough association. Maybe it could be the case in the futur, like with a PostgreSQL model."
@@ -109,14 +109,14 @@ MooseQueryCalculator >> hasLocalFor: anEntity [
 ]
 
 { #category : #query }
-MooseQueryCalculator >> query: aFAMIXClassAssociation for: anEntity [
+MooseQueryNavigationQuery >> query: aFAMIXClassAssociation for: anEntity [
 	^ self strategy
 		queryResultOn: anEntity
 		with: (self query: aFAMIXClassAssociation for: anEntity in: OrderedCollection new) asSet
 ]
 
 { #category : #query }
-MooseQueryCalculator >> query: aFAMIXClassAssociation for: anEntity in: aCollection [
+MooseQueryNavigationQuery >> query: aFAMIXClassAssociation for: anEntity in: aCollection [
 	"I know that we could use #do: here, but this algo takes too long on big model, so this is a speed up while the sista vm is not ready for production"
 
 	| selectors |
@@ -130,12 +130,12 @@ MooseQueryCalculator >> query: aFAMIXClassAssociation for: anEntity in: aCollect
 ]
 
 { #category : #query }
-MooseQueryCalculator >> queryAllFor: anEntity [
+MooseQueryNavigationQuery >> queryAllFor: anEntity [
 	^ self strategy queryResultOn: anEntity with: (self queryAllFor: anEntity in: OrderedCollection new) asSet
 ]
 
 { #category : #query }
-MooseQueryCalculator >> queryAllFor: anEntity in: aCollection [
+MooseQueryNavigationQuery >> queryAllFor: anEntity in: aCollection [
 	"collects in aCollection all entities on the opposite side of associations with self
 	 Opposite side depends on self strategy (incoming/outgoing)
 	
@@ -153,13 +153,13 @@ MooseQueryCalculator >> queryAllFor: anEntity in: aCollection [
 ]
 
 { #category : #query }
-MooseQueryCalculator >> queryAllLocalFor: anEntity [
+MooseQueryNavigationQuery >> queryAllLocalFor: anEntity [
 
 	^ self strategy queryResultOn: anEntity with: (self queryAllLocalFor: anEntity in: OrderedCollection new) asSet
 ]
 
 { #category : #query }
-MooseQueryCalculator >> queryAllLocalFor: anEntity in: aCollection [
+MooseQueryNavigationQuery >> queryAllLocalFor: anEntity in: aCollection [
 	"collects in aCollection all entities on the opposite side of associations or declared dependencies with self
 	 Opposite side depends on self strategy (incoming/outgoing)
 	
@@ -178,13 +178,13 @@ MooseQueryCalculator >> queryAllLocalFor: anEntity in: aCollection [
 ]
 
 { #category : #query }
-MooseQueryCalculator >> queryLocal: aFAMIXClassAssociation for: anEntity [
+MooseQueryNavigationQuery >> queryLocal: aFAMIXClassAssociation for: anEntity [
 
 	^ self strategy queryResultOn: anEntity with: (self queryLocal: aFAMIXClassAssociation for: anEntity in: OrderedCollection new) asSet
 ]
 
 { #category : #query }
-MooseQueryCalculator >> queryLocal: aFAMIXClassAssociation for: anEntity in: aCollection [
+MooseQueryNavigationQuery >> queryLocal: aFAMIXClassAssociation for: anEntity in: aCollection [
 	"The goal here is to get all the entity's direct associations of the class in parameter. This will not check the associations of the entity's children."
 
 	"Note: Maybe adding a guard to check if the entity can have associations of this class could improve the perf. Currently it is not the case because there is not enough association. Maybe it could be the case in the futur, like with a PostgreSQL model."
@@ -198,14 +198,14 @@ MooseQueryCalculator >> queryLocal: aFAMIXClassAssociation for: anEntity in: aCo
 ]
 
 { #category : #query }
-MooseQueryCalculator >> source: aFAMIXClassAssociation for: anEntity [ 
+MooseQueryNavigationQuery >> source: aFAMIXClassAssociation for: anEntity [ 
 	^ self strategy
 		queryResultOn: anEntity
 		with: (self source: aFAMIXClassAssociation for: anEntity in: OrderedCollection new) asSet
 ]
 
 { #category : #query }
-MooseQueryCalculator >> source: aFAMIXClassAssociation for: anEntity in: aCollection [
+MooseQueryNavigationQuery >> source: aFAMIXClassAssociation for: anEntity in: aCollection [
 	| selectors |
 	self sourceLocal: aFAMIXClassAssociation for: anEntity in: aCollection.
 	1 to: (selectors := anEntity childrenSelectors) size do: [ :index | 
@@ -217,24 +217,24 @@ MooseQueryCalculator >> source: aFAMIXClassAssociation for: anEntity in: aCollec
 ]
 
 { #category : #accessing }
-MooseQueryCalculator >> strategy [
+MooseQueryNavigationQuery >> strategy [
 	^ strategy
 ]
 
 { #category : #accessing }
-MooseQueryCalculator >> strategy: anObject [
+MooseQueryNavigationQuery >> strategy: anObject [
 	strategy := anObject
 ]
 
 { #category : #query }
-MooseQueryCalculator >> through: aFAMIXClassAssociation for: anEntity [ 
+MooseQueryNavigationQuery >> through: aFAMIXClassAssociation for: anEntity [ 
 	^ self strategy
 		queryResultOn: anEntity
 		with: (self through: aFAMIXClassAssociation for: anEntity in: OrderedCollection new) asSet
 ]
 
 { #category : #query }
-MooseQueryCalculator >> through: aFAMIXClassAssociation for: anEntity in: aCollection [
+MooseQueryNavigationQuery >> through: aFAMIXClassAssociation for: anEntity in: aCollection [
 	| selectors |
 	self throughLocal: aFAMIXClassAssociation for: anEntity in: aCollection.
 	1 to: (selectors := anEntity childrenSelectors) size do: [ :index | 
@@ -246,12 +246,12 @@ MooseQueryCalculator >> through: aFAMIXClassAssociation for: anEntity in: aColle
 ]
 
 { #category : #query }
-MooseQueryCalculator >> throughAllFor: anEntity [
+MooseQueryNavigationQuery >> throughAllFor: anEntity [
 	^ self strategy queryResultOn: anEntity with: (self throughAllFor: anEntity in: OrderedCollection new) asSet
 ]
 
 { #category : #query }
-MooseQueryCalculator >> throughAllFor: anEntity in: aCollection [
+MooseQueryNavigationQuery >> throughAllFor: anEntity in: aCollection [
 	| selectors |
 	self throughAllLocalFor: anEntity in: aCollection.
 	"Instead of #to:do: we could just use #do: but this implementation is much faster. Maybe sista will remove the needs of the todo later."
@@ -264,13 +264,13 @@ MooseQueryCalculator >> throughAllFor: anEntity in: aCollection [
 ]
 
 { #category : #query }
-MooseQueryCalculator >> throughAllLocalFor: anEntity [
+MooseQueryNavigationQuery >> throughAllLocalFor: anEntity [
 
 	^ self strategy queryResultOn: anEntity with: (self throughAllLocalFor: anEntity in: OrderedCollection new) asSet
 ]
 
 { #category : #query }
-MooseQueryCalculator >> throughAllLocalFor: anEntity in: aCollection [
+MooseQueryNavigationQuery >> throughAllLocalFor: anEntity in: aCollection [
 	| properties |
 	"Instead of #to:do: we could just use #do: but this implementation is much faster. Maybe sista will remove the needs of the todo later."
 	1 to: (properties := self strategy msePropertiesOf: anEntity) size do: [ :ind | 
@@ -281,7 +281,7 @@ MooseQueryCalculator >> throughAllLocalFor: anEntity in: aCollection [
 ]
 
 { #category : #query }
-MooseQueryCalculator >> throughLocal: aFAMIXClassAssociation for: anEntity in: aCollection [
+MooseQueryNavigationQuery >> throughLocal: aFAMIXClassAssociation for: anEntity in: aCollection [
 	"The goal here is to get all the entity's direct associations of the class in parameter. This will not check the associations of the entity's children."
 	
 	"Note: Maybe adding a guard to check if the entity can have associations of this class could improve the perf. Currently it is not the case because there is not enough association. Maybe it could be the case in the futur, like with a PostgreSQL model."

@@ -4,7 +4,7 @@ MooseObjectQueryResult hold the result of queries that return objects (e.g. oppo
 Class {
 	#name : #MooseObjectQueryResult,
 	#superclass : #MooseQueryResult,
-	#category : #'Moose-Query-Results'
+	#category : #'Moose-Query-Navigating'
 }
 
 { #category : #'instance creation' }

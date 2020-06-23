@@ -91,7 +91,7 @@ TDependencyQueries >> has: anInOutSymbol [
 			--> Will return true if aFAMIXMethod has the outgoing FAMIXAssociation
 	"
 
-	^ (MooseQueryCalculator direction: anInOutSymbol) hasFor: self
+	^ (MooseQueryNavigationQuery direction: anInOutSymbol) hasFor: self
 ]
 
 { #category : #testing }
@@ -105,7 +105,7 @@ TDependencyQueries >> has: anInOutSymbol with: aFAMIXClassAssociation [
 			--> Will return a MooseOutgoingQueryResult containing the FAMIXAccess associations having aFAMIXMethod or its children as source
 	"
 
-	^ (MooseQueryCalculator direction: anInOutSymbol) has: aFAMIXClassAssociation for: self
+	^ (MooseQueryNavigationQuery direction: anInOutSymbol) has: aFAMIXClassAssociation for: self
 ]
 
 { #category : #testing }
@@ -117,7 +117,7 @@ TDependencyQueries >> hasIncoming [
 			--> --> Will return true if the receiver or its children have incoming associations
 	"
 	
-	^ (MooseQueryCalculator strategy: MooseQueryIncomingDirectionStrategy) hasFor: self
+	^ (MooseQueryNavigationQuery strategy: MooseQueryIncomingDirectionStrategy) hasFor: self
 ]
 
 { #category : #testing }
@@ -129,7 +129,7 @@ TDependencyQueries >> hasIncoming: aFAMIXClassAssociation [
 			--> Will return true if aFAMIXClassAssociation has incoming associations of the FAMIXClassAssociation class for the receiver or its children.
 	"
 
-	^ (MooseQueryCalculator strategy: MooseQueryIncomingDirectionStrategy) has: aFAMIXClassAssociation for: self
+	^ (MooseQueryNavigationQuery strategy: MooseQueryIncomingDirectionStrategy) has: aFAMIXClassAssociation for: self
 ]
 
 { #category : #testing }
@@ -163,7 +163,7 @@ TDependencyQueries >> hasLocal: anInOutSymbol [
 			--> Will return true if aFAMIXMethod has the outgoing FAMIXAssociation
 	"
  
-	^ (MooseQueryCalculator direction: anInOutSymbol) hasLocalFor: self
+	^ (MooseQueryNavigationQuery direction: anInOutSymbol) hasLocalFor: self
 ]
 
 { #category : #testing }
@@ -175,7 +175,7 @@ TDependencyQueries >> hasLocalIncoming [
 			--> Will return true if aFAMIXMethod has the incoming FAMIXAssociation 
 			"
  
-	^ (MooseQueryCalculator strategy: MooseQueryIncomingDirectionStrategy) hasLocalFor: self
+	^ (MooseQueryNavigationQuery strategy: MooseQueryIncomingDirectionStrategy) hasLocalFor: self
 ]
 
 { #category : #testing }
@@ -187,7 +187,7 @@ TDependencyQueries >> hasLocalIncoming: aFAMIXClassAssociation [
 			--> Will return true if aFAMIXClassAssociation has incoming associations of the FAMIXClassAssociation class for the receiver.
 	"
 
-	^ (MooseQueryCalculator strategy: MooseQueryIncomingDirectionStrategy) hasLocal: aFAMIXClassAssociation for: self
+	^ (MooseQueryNavigationQuery strategy: MooseQueryIncomingDirectionStrategy) hasLocal: aFAMIXClassAssociation for: self
 ]
 
 { #category : #testing }
@@ -199,7 +199,7 @@ TDependencyQueries >> hasLocalOutgoing [
 			--> Will return true if the receiver has outgoingInvocation.
 	"
 
-	^ (MooseQueryCalculator strategy: MooseQueryOutgoingDirectionStrategy) hasLocalFor: self
+	^ (MooseQueryNavigationQuery strategy: MooseQueryOutgoingDirectionStrategy) hasLocalFor: self
 ]
 
 { #category : #testing }
@@ -211,7 +211,7 @@ TDependencyQueries >> hasLocalOutgoing: aFAMIXClassAssociation [
 			--> Will return true if aFAMIXClassAssociation has incoming associations of the FAMIXClassAssociation class for the receiver.
 	"
 
-	^ (MooseQueryCalculator strategy: MooseQueryOutgoingDirectionStrategy) hasLocal: aFAMIXClassAssociation for: self
+	^ (MooseQueryNavigationQuery strategy: MooseQueryOutgoingDirectionStrategy) hasLocal: aFAMIXClassAssociation for: self
 ]
 
 { #category : #testing }
@@ -223,7 +223,7 @@ TDependencyQueries >> hasOutgoing [
 			--> --> Will return true if the receiver or its children have outgoing associations
 	"
 	
-	^ (MooseQueryCalculator strategy: MooseQueryOutgoingDirectionStrategy) hasFor: self
+	^ (MooseQueryNavigationQuery strategy: MooseQueryOutgoingDirectionStrategy) hasFor: self
 ]
 
 { #category : #testing }
@@ -235,7 +235,7 @@ TDependencyQueries >> hasOutgoing: aFAMIXClassAssociation [
 			--> Will return true if aFAMIXClassAssociation has outgoing associations of the FAMIXClassAssociation class for the receiver or its children.
 	"
 
-	^ (MooseQueryCalculator strategy: MooseQueryOutgoingDirectionStrategy) has: aFAMIXClassAssociation for: self
+	^ (MooseQueryNavigationQuery strategy: MooseQueryOutgoingDirectionStrategy) has: aFAMIXClassAssociation for: self
 ]
 
 { #category : #testing }
@@ -269,7 +269,7 @@ TDependencyQueries >> query: anInOutSymbol with: aFAMIXClassAssociation [
 			--> Will return a MooseOutgoingQueryResult containing the FAMIXAccess associations having aFAMIXMethod or its children as source
 	"
 
-	^ (MooseQueryCalculator direction: anInOutSymbol) query: aFAMIXClassAssociation for: self
+	^ (MooseQueryNavigationQuery direction: anInOutSymbol) query: aFAMIXClassAssociation for: self
 ]
 
 { #category : #'query dependencies' }
@@ -283,7 +283,7 @@ TDependencyQueries >> queryAll: anInOutSymbol [
 			--> Will return a MooseOutgoingQueryResult containing the FAMIXAssociation having aFAMIXMethod or its children as source
 	"
 
-	^ (MooseQueryCalculator direction: anInOutSymbol) queryAllFor: self
+	^ (MooseQueryNavigationQuery direction: anInOutSymbol) queryAllFor: self
 ]
 
 { #category : #'query dependencies' }
@@ -295,7 +295,7 @@ TDependencyQueries >> queryAllIncoming [
 			--> Will return a MooseIncomingQueryResult containing the FAMIXAssociation having aFAMIXClass or its children as target
 	"
 
-	^ (MooseQueryCalculator strategy: MooseQueryIncomingDirectionStrategy) queryAllFor: self
+	^ (MooseQueryNavigationQuery strategy: MooseQueryIncomingDirectionStrategy) queryAllFor: self
 ]
 
 { #category : #'query dependencies' }
@@ -310,7 +310,7 @@ TDependencyQueries >> queryAllLocal: anInOutSymbol [
 			--> Will return a MooseOutgoingQueryResult containing the FAMIXAssociation having aFAMIXMethod as source
 	"
 
-	^ (MooseQueryCalculator direction: anInOutSymbol) queryAllLocalFor: self
+	^ (MooseQueryNavigationQuery direction: anInOutSymbol) queryAllLocalFor: self
 ]
 
 { #category : #'query dependencies' }
@@ -323,7 +323,7 @@ TDependencyQueries >> queryAllLocalIncoming [
 			--> Will return a MooseIncomingQueryResult containing the FAMIXAssociation having aFAMIXClass as target
 	"
 
-	^ (MooseQueryCalculator strategy: MooseQueryIncomingDirectionStrategy) queryAllLocalFor: self
+	^ (MooseQueryNavigationQuery strategy: MooseQueryIncomingDirectionStrategy) queryAllLocalFor: self
 ]
 
 { #category : #'query dependencies' }
@@ -336,7 +336,7 @@ TDependencyQueries >> queryAllLocalOutgoing [
 			--> Will return a MooseOutgoingQueryResult containing the FAMIXAssociation having aFAMIXClass as source
 	"
 
-	^ (MooseQueryCalculator strategy: MooseQueryOutgoingDirectionStrategy) queryAllLocalFor: self
+	^ (MooseQueryNavigationQuery strategy: MooseQueryOutgoingDirectionStrategy) queryAllLocalFor: self
 ]
 
 { #category : #'query dependencies' }
@@ -348,7 +348,7 @@ TDependencyQueries >> queryAllOutgoing [
 			--> Will return a MooseOutgoingQueryResult containing the FAMIXAssociation having aFAMIXClass or its children as source
 	"
 
-	^ (MooseQueryCalculator strategy: MooseQueryOutgoingDirectionStrategy) queryAllFor: self
+	^ (MooseQueryNavigationQuery strategy: MooseQueryOutgoingDirectionStrategy) queryAllFor: self
 ]
 
 { #category : #'query dependencies' }
@@ -360,7 +360,7 @@ TDependencyQueries >> queryIncoming: aFAMIXClassAssociation [
 			--> Will return a MooseIncomingQueryResult containing the FAMIXInheritance associations having aFAMIXClass or its children as target
 	"
 
-	^ (MooseQueryCalculator strategy: MooseQueryIncomingDirectionStrategy) query: aFAMIXClassAssociation for: self
+	^ (MooseQueryNavigationQuery strategy: MooseQueryIncomingDirectionStrategy) query: aFAMIXClassAssociation for: self
 ]
 
 { #category : #'query dependencies' }
@@ -407,7 +407,7 @@ TDependencyQueries >> queryLocal: anInOutSymbol with: aFAMIXClassAssociation [
 			--> Will return a MooseOutgoingQueryResult containing the FAMIXAccess associations having aFAMIXMethod as source
 	"
 
-	^ (MooseQueryCalculator direction: anInOutSymbol) queryLocal: aFAMIXClassAssociation for: self
+	^ (MooseQueryNavigationQuery direction: anInOutSymbol) queryLocal: aFAMIXClassAssociation for: self
 ]
 
 { #category : #'query dependencies' }
@@ -420,7 +420,7 @@ TDependencyQueries >> queryLocalIncoming: aFAMIXClassAssociation [
 			--> Will return a MooseIncomingQueryResult containing the FAMIXInheritance associations having aFAMIXClass as target
 	"
 
-	^ (MooseQueryCalculator strategy: MooseQueryIncomingDirectionStrategy) queryLocal: aFAMIXClassAssociation for: self
+	^ (MooseQueryNavigationQuery strategy: MooseQueryIncomingDirectionStrategy) queryLocal: aFAMIXClassAssociation for: self
 ]
 
 { #category : #'query dependencies' }
@@ -433,7 +433,7 @@ TDependencyQueries >> queryLocalOutgoing: aFAMIXClassAssociation [
 			--> Will return a MooseOutgoingQueryResult containing the FAMIXInheritance associations having aFAMIXClass as source
 	"
 
-	^ (MooseQueryCalculator strategy: MooseQueryOutgoingDirectionStrategy) queryLocal: aFAMIXClassAssociation for: self
+	^ (MooseQueryNavigationQuery strategy: MooseQueryOutgoingDirectionStrategy) queryLocal: aFAMIXClassAssociation for: self
 ]
 
 { #category : #'query dependencies' }
@@ -445,7 +445,7 @@ TDependencyQueries >> queryOutgoing: aFAMIXClassAssociation [
 			--> Will return a MooseOutgoingQueryResult containing the FAMIXInheritance associations having aFAMIXClass or its children as source
 	"
 
-	^ (MooseQueryCalculator strategy: MooseQueryOutgoingDirectionStrategy) query: aFAMIXClassAssociation for: self
+	^ (MooseQueryNavigationQuery strategy: MooseQueryOutgoingDirectionStrategy) query: aFAMIXClassAssociation for: self
 ]
 
 { #category : #'query dependencies' }
@@ -489,7 +489,7 @@ TDependencyQueries >> sourceThrough: aFAMIXClassAssociation [
 			--> Will return a MooseIncomingQueryResult containing the methods having aFAMIXClass or its children as source
 	"
 
-	^ (MooseQueryCalculator strategy: MooseQueryIncomingDirectionStrategy) through: aFAMIXClassAssociation for: self
+	^ (MooseQueryNavigationQuery strategy: MooseQueryIncomingDirectionStrategy) through: aFAMIXClassAssociation for: self
 ]
 
 { #category : #'query dependencies' }
@@ -501,7 +501,7 @@ TDependencyQueries >> sourceThroughAll [
 			--> Will return a MooseIncomingQueryResult containing the methods having aFAMIXClass or its children as source
 	"
 
-	^ (MooseQueryCalculator strategy: MooseQueryIncomingDirectionStrategy) throughAllFor: self
+	^ (MooseQueryNavigationQuery strategy: MooseQueryIncomingDirectionStrategy) throughAllFor: self
 ]
 
 { #category : #'query dependencies' }
@@ -513,7 +513,7 @@ TDependencyQueries >> targetThrough: aFAMIXClassAssociation [
 			--> Will return a MooseOutgoingQueryResult containing the class having aFAMIXClass or its children as target
 	"
 
-	^ (MooseQueryCalculator strategy: MooseQueryOutgoingDirectionStrategy) through: aFAMIXClassAssociation for: self
+	^ (MooseQueryNavigationQuery strategy: MooseQueryOutgoingDirectionStrategy) through: aFAMIXClassAssociation for: self
 ]
 
 { #category : #'query dependencies' }
@@ -525,7 +525,7 @@ TDependencyQueries >> targetThroughAll [
 			--> Will return a MooseOutgoingQueryResult containing the class having aFAMIXClass or its children as target
 	"
 
-	^ (MooseQueryCalculator strategy: MooseQueryOutgoingDirectionStrategy) throughAllFor: self
+	^ (MooseQueryNavigationQuery strategy: MooseQueryOutgoingDirectionStrategy) throughAllFor: self
 ]
 
 { #category : #'query dependencies' }
@@ -537,7 +537,7 @@ TDependencyQueries >> throughAllFrom [
 			--> Will return a MooseIncomingQueryResult containing all the FAMIXAssociations having aFAMIXClass or its children as target
 	"
 
-	^ (MooseQueryCalculator strategy: MooseQueryIncomingDirectionStrategy) throughAllFor: self
+	^ (MooseQueryNavigationQuery strategy: MooseQueryIncomingDirectionStrategy) throughAllFor: self
 ]
 
 { #category : #'query dependencies' }
@@ -549,5 +549,5 @@ TDependencyQueries >> throughAllTo [
 			--> Will return a MooseOutgoingQueryResult containing the class having aFAMIXClass or its children as source
 	"
 
-	^ (MooseQueryCalculator strategy: MooseQueryOutgoingDirectionStrategy) throughAllFor: self
+	^ (MooseQueryNavigationQuery strategy: MooseQueryOutgoingDirectionStrategy) throughAllFor: self
 ]
