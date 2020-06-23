@@ -1413,10 +1413,11 @@ FamixGenerator >> defineRelations [
 
 	((tTypedEntity property: #declaredType)
 			comment: 'Type of the entity, if any' ;
-			dependencySource)
+			source)
 		*-
 	((tType property: #typedEntities)
-			comment: 'Entities that have this type as declaredType').
+			comment: 'Entities that have this type as declaredType';
+			target).
 
 
 ]
