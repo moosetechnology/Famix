@@ -115,8 +115,7 @@ FamixMetamodelGenerator class >> menuCommandOn: aBuilder [
 	(aBuilder item: #'Reset metamodels')
 		order: 45;
 		parent: #Moose;
-		action: [ self resetMetamodels ];
-		withSeparatorAfter
+		action: [ self resetMetamodels ]
 ]
 
 { #category : #generation }
@@ -159,7 +158,7 @@ FamixMetamodelGenerator class >> prefix [
 { #category : #accessing }
 FamixMetamodelGenerator class >> resetMetamodels [
 	<script>
-	MooseModel allSubclassesDo: #resetMetamodel
+	MooseModel resetMetamodels
 ]
 
 { #category : #testing }
