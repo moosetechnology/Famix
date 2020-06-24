@@ -4,7 +4,7 @@ Class {
 	#classInstVars : [
 		'aVariable'
 	],
-	#category : #'Moose-Tests-SmalltalkImporter-LAN'
+	#category : #'Moose-SmalltalkImporter-LAN-Tests'
 }
 
 { #category : #accessing }
