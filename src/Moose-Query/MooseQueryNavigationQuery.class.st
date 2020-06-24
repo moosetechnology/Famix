@@ -206,25 +206,6 @@ MooseQueryNavigationQuery >> queryLocal: aFAMIXClassAssociation for: anEntity in
 ]
 
 { #category : #query }
-MooseQueryNavigationQuery >> source: aFAMIXClassAssociation for: anEntity [ 
-	^ self directionStrategy
-		queryResultOn: anEntity
-		with: (self source: aFAMIXClassAssociation for: anEntity in: OrderedCollection new) asSet
-]
-
-{ #category : #query }
-MooseQueryNavigationQuery >> source: aFAMIXClassAssociation for: anEntity in: aCollection [
-	| selectors |
-	self sourceLocal: aFAMIXClassAssociation for: anEntity in: aCollection.
-	1 to: (selectors := anEntity childrenSelectors) size do: [ :index | 
-		(anEntity perform: (selectors at: index))
-			ifNotNil: [ :children | 
-				| coll |
-				1 to: (coll := children asCollection) size do: [ :i | self through: aFAMIXClassAssociation for: (coll at: i) in: aCollection ] ] ].
-	^ aCollection
-]
-
-{ #category : #query }
 MooseQueryNavigationQuery >> through: aFAMIXClassAssociation for: anEntity [ 
 	^ self directionStrategy
 		queryResultOn: anEntity
