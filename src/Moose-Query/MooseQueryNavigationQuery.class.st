@@ -30,7 +30,8 @@ Class {
 		'directionStrategy',
 		'resultKindStrategy',
 		'associationSelectionStrategy',
-		'shouldCollectChildrenDependencies'
+		'shouldCollectChildrenDependencies',
+		'shouldCheckPresenceOfDependencies'
 	],
 	#category : #'Moose-Query-Navigating'
 }
@@ -53,6 +54,11 @@ MooseQueryNavigationQuery >> associationSelectionStrategy: anObject [
 ]
 
 { #category : #accessing }
+MooseQueryNavigationQuery >> checkPresenceOfDependencies [
+	shouldCheckPresenceOfDependencies := true
+]
+
+{ #category : #accessing }
 MooseQueryNavigationQuery >> directionStrategy [
 	^ directionStrategy
 ]
@@ -64,47 +70,28 @@ MooseQueryNavigationQuery >> directionStrategy: anObject [
 
 { #category : #query }
 MooseQueryNavigationQuery >> execute [
-	^ directionStrategy queryResultOn: receiver with: (self queryFor: receiver)
-]
+	shouldCheckPresenceOfDependencies ifTrue: [ ^ self hasFor: receiver ].
 
-{ #category : #query }
-MooseQueryNavigationQuery >> has: aFAMIXClassAssociation for: anEntity [
-	"I know that we could use #do: here, but this algo takes too long on big model, so this is a speed up while the sista vm is not ready for production"
+	self queryFor: receiver.
 
-	| selectors |
-	(self hasLocal: aFAMIXClassAssociation for: anEntity) ifTrue: [ ^ true ].
-	"End condition"
-	1 to: (selectors := anEntity childrenSelectors) size do: [ :index | 
-		(anEntity perform: (selectors at: index))
-			ifNotNil: [ :children | 
-				| coll |
-				1 to: (coll := children asCollection) size do: [ :i | (self has: aFAMIXClassAssociation for: (coll at: i)) ifTrue: [ ^ true ] ] ] ].
-	^ false
+	^ directionStrategy queryResultOn: receiver with: result
 ]
 
 { #category : #query }
 MooseQueryNavigationQuery >> hasFor: anEntity [
+	"I know that we could use #do: here, but this algo takes too long on big model, so this is a speed up while the sista vm is not ready for production"
+
 	| selectors |
 	(self hasLocalFor: anEntity) ifTrue: [ ^ true ].
+	
+	shouldCollectChildrenDependencies ifFalse: [ ^ false ].
+	
 	"Instead of #to:do: we could just use #do: but this implementation is much faster. Maybe sista will remove the needs of the todo later."
 	1 to: (selectors := anEntity childrenSelectors) size do: [ :index | 
 		(anEntity perform: (selectors at: index))
 			ifNotNil: [ :children | 
 				| coll |
 				1 to: (coll := children asCollection) size do: [ :i | (self hasFor: (coll at: i)) ifTrue: [ ^ true ] ] ] ].
-	^ false
-]
-
-{ #category : #query }
-MooseQueryNavigationQuery >> hasLocal: aFAMIXClassAssociation for: anEntity [
-	"The goal here is to get all the entity's direct associations of the class in parameter. This will not check the associations of the entity's children."
-
-	"Note: Maybe adding a guard to check if the entity can have associations of this class could improve the perf. Currently it is not the case because there is not enough association. Maybe it could be the case in the futur, like with a PostgreSQL model."
-
-	| properties |
-	"Instead of #to:do: we could just use #do: but this implementation is much faster. Maybe sista will remove the needs of the todo later."
-	1 to: (properties := directionStrategy msePropertiesOf: anEntity) size do:
-		[ :ind | (anEntity perform: (properties at: ind) name) ifNotNil: [ :coll | coll asCollection do: [ :each | (each isOfType: aFAMIXClassAssociation) ifTrue: [ ^ true ] ] ] ].
 	^ false
 ]
 
@@ -116,7 +103,9 @@ MooseQueryNavigationQuery >> hasLocalFor: anEntity [
 
 	| properties |
 	"Instead of #to:do: we could just use #do: but this implementation is much faster. Maybe sista will remove the needs of the todo later."
-	1 to: (properties := directionStrategy msePropertiesOf: anEntity) size do: [ :ind | (anEntity perform: (properties at: ind) name) ifNotNil: [ :coll | coll asCollection ifNotEmpty: [ ^ true ] ] ].
+	1 to: (properties := directionStrategy msePropertiesOf: anEntity) size do: [ :ind | 
+		(anEntity perform: (properties at: ind) name)
+			ifNotNil: [ :coll | (associationSelectionStrategy selectAssociationsIn: coll asCollection) ifNotEmpty: [ ^ true ] ] ].
 	^ false
 ]
 
@@ -124,7 +113,8 @@ MooseQueryNavigationQuery >> hasLocalFor: anEntity [
 MooseQueryNavigationQuery >> initialize [
 	super initialize.
 	resultKindStrategy := MooseQueryNavigationAssociationKindStrategy.
-	shouldCollectChildrenDependencies := true
+	shouldCollectChildrenDependencies := true.
+	shouldCheckPresenceOfDependencies := false
 ]
 
 { #category : #query }
@@ -138,15 +128,14 @@ MooseQueryNavigationQuery >> queryFor: anEntity [
 	| selectors |
 	self queryLocalFor: anEntity.
 
-	shouldCollectChildrenDependencies ifFalse: [ ^ result ].
+	shouldCollectChildrenDependencies ifFalse: [ ^ self ].
 
 	"Instead of #to:do: we could just use #do: but this implementation is much faster. Maybe sista will remove the needs of the todo later."
 	1 to: (selectors := anEntity childrenSelectors) size do: [ :index | 
 		(anEntity perform: (selectors at: index))
 			ifNotNil: [ :children | 
 				| coll |
-				1 to: (coll := children asCollection) size do: [ :i | self queryFor: (coll at: i) ] ] ].
-	^ result
+				1 to: (coll := children asCollection) size do: [ :i | self queryFor: (coll at: i) ] ] ]
 ]
 
 { #category : #query }
@@ -165,8 +154,7 @@ MooseQueryNavigationQuery >> queryLocalFor: anEntity [
 					addAll:
 						(resultKindStrategy
 							collectResultFrom: ((associationSelectionStrategy selectAssociationsIn: coll asCollection) collect: [ :res | directionStrategy ensureAssociation: res with: anEntity ])
-							query: self) ] ].
-	^ result
+							query: self) ] ]
 ]
 
 { #category : #accessing }

@@ -515,7 +515,9 @@ TEntityMetaLevelDependency >> has: anInOutSymbol [
 
 	^ (MooseQueryNavigationQuery direction: anInOutSymbol)
 		associationSelectionStrategy: MooseQueryNavigationAllAssociationsStrategy new;
-		hasFor: self
+		checkPresenceOfDependencies;
+		receiver: self;
+		execute
 ]
 
 { #category : #testing }
@@ -531,7 +533,9 @@ TEntityMetaLevelDependency >> has: anInOutSymbol with: aFAMIXClassAssociation [
 
 	^ (MooseQueryNavigationQuery direction: anInOutSymbol)
 		associationSelectionStrategy: (MooseQueryNavigationSpecificAssociationsStrategy association: aFAMIXClassAssociation);
-		has: aFAMIXClassAssociation for: self
+		checkPresenceOfDependencies;
+		receiver: self;
+		execute
 ]
 
 { #category : #testing }
@@ -545,7 +549,9 @@ TEntityMetaLevelDependency >> hasIncoming [
 
 	^ (MooseQueryNavigationQuery directionStrategy: MooseQueryIncomingDirectionStrategy)
 		associationSelectionStrategy: MooseQueryNavigationAllAssociationsStrategy new;
-		hasFor: self
+		checkPresenceOfDependencies;
+		receiver: self;
+		execute
 ]
 
 { #category : #testing }
@@ -559,7 +565,9 @@ TEntityMetaLevelDependency >> hasIncoming: aFAMIXClassAssociation [
 
 	^ (MooseQueryNavigationQuery directionStrategy: MooseQueryIncomingDirectionStrategy)
 		associationSelectionStrategy: (MooseQueryNavigationSpecificAssociationsStrategy association: aFAMIXClassAssociation);
-		has: aFAMIXClassAssociation for: self
+		checkPresenceOfDependencies;
+		receiver: self;
+		execute
 ]
 
 { #category : #testing }
@@ -596,7 +604,9 @@ TEntityMetaLevelDependency >> hasLocal: anInOutSymbol [
 	^ (MooseQueryNavigationQuery direction: anInOutSymbol)
 		associationSelectionStrategy: MooseQueryNavigationAllAssociationsStrategy new;
 		selectOnlyLocalDependencies;
-		hasLocalFor: self
+		checkPresenceOfDependencies;
+		receiver: self;
+		execute
 ]
 
 { #category : #testing }
@@ -611,7 +621,9 @@ TEntityMetaLevelDependency >> hasLocalIncoming [
 	^ (MooseQueryNavigationQuery directionStrategy: MooseQueryIncomingDirectionStrategy)
 		associationSelectionStrategy: MooseQueryNavigationAllAssociationsStrategy new;
 		selectOnlyLocalDependencies;
-		hasLocalFor: self
+		checkPresenceOfDependencies;
+		receiver: self;
+		execute
 ]
 
 { #category : #testing }
@@ -626,7 +638,9 @@ TEntityMetaLevelDependency >> hasLocalIncoming: aFAMIXClassAssociation [
 	^ (MooseQueryNavigationQuery directionStrategy: MooseQueryIncomingDirectionStrategy)
 		associationSelectionStrategy: (MooseQueryNavigationSpecificAssociationsStrategy association: aFAMIXClassAssociation);
 		selectOnlyLocalDependencies;
-		hasLocal: aFAMIXClassAssociation for: self
+		checkPresenceOfDependencies;
+		receiver: self;
+		execute
 ]
 
 { #category : #testing }
@@ -641,7 +655,9 @@ TEntityMetaLevelDependency >> hasLocalOutgoing [
 	^ (MooseQueryNavigationQuery directionStrategy: MooseQueryOutgoingDirectionStrategy)
 		associationSelectionStrategy: MooseQueryNavigationAllAssociationsStrategy new;
 		selectOnlyLocalDependencies;
-		hasLocalFor: self
+		checkPresenceOfDependencies;
+		receiver: self;
+		execute
 ]
 
 { #category : #testing }
@@ -656,7 +672,9 @@ TEntityMetaLevelDependency >> hasLocalOutgoing: aFAMIXClassAssociation [
 	^ (MooseQueryNavigationQuery directionStrategy: MooseQueryOutgoingDirectionStrategy)
 		associationSelectionStrategy: (MooseQueryNavigationSpecificAssociationsStrategy association: aFAMIXClassAssociation);
 		selectOnlyLocalDependencies;
-		hasLocal: aFAMIXClassAssociation for: self
+		checkPresenceOfDependencies;
+		receiver: self;
+		execute
 ]
 
 { #category : #testing }
@@ -670,7 +688,9 @@ TEntityMetaLevelDependency >> hasOutgoing [
 
 	^ (MooseQueryNavigationQuery directionStrategy: MooseQueryOutgoingDirectionStrategy)
 		associationSelectionStrategy: MooseQueryNavigationAllAssociationsStrategy new;
-		hasFor: self
+		checkPresenceOfDependencies;
+		receiver: self;
+		execute
 ]
 
 { #category : #testing }
@@ -684,7 +704,9 @@ TEntityMetaLevelDependency >> hasOutgoing: aFAMIXClassAssociation [
 
 	^ (MooseQueryNavigationQuery directionStrategy: MooseQueryOutgoingDirectionStrategy)
 		associationSelectionStrategy: (MooseQueryNavigationSpecificAssociationsStrategy association: aFAMIXClassAssociation);
-		has: aFAMIXClassAssociation for: self
+		checkPresenceOfDependencies;
+		receiver: self;
+		execute
 ]
 
 { #category : #testing }
