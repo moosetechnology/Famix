@@ -35,6 +35,13 @@ MooseQueryAbstractDirectionStrategy class >> ensureAssociation: anObject with: a
 	^ self subclassResponsibility
 ]
 
+{ #category : #accessing }
+MooseQueryAbstractDirectionStrategy class >> entityFor: anAssociation [
+	"I should return a a side of the association depending on the direction. For example an Incoming direction will return the source of the associations."
+
+	^ self subclassResponsibility
+]
+
 { #category : #'instance creation' }
 MooseQueryAbstractDirectionStrategy class >> fromSymbol: aSymbol [
 	"I return the right strategy from a Symbol representing a direction"
@@ -49,12 +56,5 @@ MooseQueryAbstractDirectionStrategy class >> msePropertiesOf: anEntity [
 
 { #category : #accessing }
 MooseQueryAbstractDirectionStrategy class >> queryResultOn: anEntity with: aCollection [
-	^ self subclassResponsibility
-]
-
-{ #category : #accessing }
-MooseQueryAbstractDirectionStrategy class >> symbolToCollectEntities [
-	"I should return a Symbol to collect entities. For example an Incoming direction will have #source as symbol to collect entities."
-
 	^ self subclassResponsibility
 ]

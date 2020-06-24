@@ -21,6 +21,11 @@ MooseQueryIncomingDirectionStrategy class >> ensureAssociation: anObject with: a
 ]
 
 { #category : #accessing }
+MooseQueryIncomingDirectionStrategy class >> entityFor: anEntity [
+	^ anEntity source
+]
+
+{ #category : #accessing }
 MooseQueryIncomingDirectionStrategy class >> msePropertiesOf: anEntity [
 	^ anEntity incomingMSEProperties
 ]
@@ -28,11 +33,4 @@ MooseQueryIncomingDirectionStrategy class >> msePropertiesOf: anEntity [
 { #category : #accessing }
 MooseQueryIncomingDirectionStrategy class >> queryResultOn: anEntity with: aCollection [
 	^ anEntity createIncomingQueryResultWith: aCollection
-]
-
-{ #category : #accessing }
-MooseQueryIncomingDirectionStrategy class >> symbolToCollectEntities [
-	"I should return a Symbol to collect entities. For example an Incoming direction will have #from as symbol to collect entities."
-
-	^ #source
 ]
