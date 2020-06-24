@@ -27,21 +27,31 @@ Class {
 	#name : #MooseQueryNavigationQuery,
 	#superclass : #Object,
 	#instVars : [
-		'strategy'
+		'directionStrategy'
 	],
 	#category : #'Moose-Query-Navigating'
 }
 
 { #category : #'instance creation' }
 MooseQueryNavigationQuery class >> direction: aSymbol [
-	^ self strategy: (MooseQueryAbstractDirectionStrategy fromSymbol: aSymbol)
+	^ self directionStrategy: (MooseQueryAbstractDirectionStrategy fromSymbol: aSymbol)
 ]
 
 { #category : #'instance creation' }
-MooseQueryNavigationQuery class >> strategy: aStrategy [
+MooseQueryNavigationQuery class >> directionStrategy: aStrategy [
 	^ self new
-		strategy: aStrategy;
+		directionStrategy: aStrategy;
 		yourself
+]
+
+{ #category : #accessing }
+MooseQueryNavigationQuery >> directionStrategy [
+	^ directionStrategy
+]
+
+{ #category : #accessing }
+MooseQueryNavigationQuery >> directionStrategy: anObject [
+	directionStrategy := anObject
 ]
 
 { #category : #query }
@@ -83,7 +93,7 @@ MooseQueryNavigationQuery >> hasLocal: aFAMIXClassAssociation for: anEntity [
 
 	| properties |
 	"Instead of #to:do: we could just use #do: but this implementation is much faster. Maybe sista will remove the needs of the todo later."
-	1 to: (properties := self strategy msePropertiesOf: anEntity) size
+	1 to: (properties := self directionStrategy msePropertiesOf: anEntity) size
 	do: [ :ind | 
 		(anEntity perform: (properties at: ind) name)
 			ifNotNil: [ :coll | 
@@ -100,7 +110,7 @@ MooseQueryNavigationQuery >> hasLocalFor: anEntity [
 
 	| properties |
 	"Instead of #to:do: we could just use #do: but this implementation is much faster. Maybe sista will remove the needs of the todo later."
-	1 to: (properties := self strategy msePropertiesOf: anEntity) size
+	1 to: (properties := self directionStrategy msePropertiesOf: anEntity) size
 	do: [ :ind | 
 		(anEntity perform: (properties at: ind) name)
 			ifNotNil: [ :coll | 
@@ -110,7 +120,7 @@ MooseQueryNavigationQuery >> hasLocalFor: anEntity [
 
 { #category : #query }
 MooseQueryNavigationQuery >> query: aFAMIXClassAssociation for: anEntity [
-	^ self strategy
+	^ self directionStrategy
 		queryResultOn: anEntity
 		with: (self query: aFAMIXClassAssociation for: anEntity in: OrderedCollection new) asSet
 ]
@@ -131,7 +141,7 @@ MooseQueryNavigationQuery >> query: aFAMIXClassAssociation for: anEntity in: aCo
 
 { #category : #query }
 MooseQueryNavigationQuery >> queryAllFor: anEntity [
-	^ self strategy queryResultOn: anEntity with: (self queryAllFor: anEntity in: OrderedCollection new) asSet
+	^ self directionStrategy queryResultOn: anEntity with: (self queryAllFor: anEntity in: OrderedCollection new) asSet
 ]
 
 { #category : #query }
@@ -155,7 +165,7 @@ MooseQueryNavigationQuery >> queryAllFor: anEntity in: aCollection [
 { #category : #query }
 MooseQueryNavigationQuery >> queryAllLocalFor: anEntity [
 
-	^ self strategy queryResultOn: anEntity with: (self queryAllLocalFor: anEntity in: OrderedCollection new) asSet
+	^ self directionStrategy queryResultOn: anEntity with: (self queryAllLocalFor: anEntity in: OrderedCollection new) asSet
 ]
 
 { #category : #query }
@@ -168,16 +178,16 @@ MooseQueryNavigationQuery >> queryAllLocalFor: anEntity in: aCollection [
 
 	| properties |
 	"Instead of #to:do: we could just use #do: but this implementation is much faster. Maybe sista will remove the needs of the todo later."
-	1 to: (properties := self strategy msePropertiesOf: anEntity) size do: [ :ind | 
+	1 to: (properties := self directionStrategy msePropertiesOf: anEntity) size do: [ :ind | 
 		(anEntity perform: (properties at: ind) name)
-			ifNotNil: [ :coll | coll asCollection do: [ :res | aCollection add: (self strategy ensureAssociation: res with: anEntity) ] ] ].
+			ifNotNil: [ :coll | coll asCollection do: [ :res | aCollection add: (self directionStrategy ensureAssociation: res with: anEntity) ] ] ].
 	^ aCollection
 ]
 
 { #category : #query }
 MooseQueryNavigationQuery >> queryLocal: aFAMIXClassAssociation for: anEntity [
 
-	^ self strategy queryResultOn: anEntity with: (self queryLocal: aFAMIXClassAssociation for: anEntity in: OrderedCollection new) asSet
+	^ self directionStrategy queryResultOn: anEntity with: (self queryLocal: aFAMIXClassAssociation for: anEntity in: OrderedCollection new) asSet
 ]
 
 { #category : #query }
@@ -188,7 +198,7 @@ MooseQueryNavigationQuery >> queryLocal: aFAMIXClassAssociation for: anEntity in
 
 	| properties |
 	"Instead of #to:do: we could just use #do: but this implementation is much faster. Maybe sista will remove the needs of the todo later."
-	1 to: (properties := self strategy msePropertiesOf: anEntity) size do: [ :ind | 
+	1 to: (properties := self directionStrategy msePropertiesOf: anEntity) size do: [ :ind | 
 		(anEntity perform: (properties at: ind) name)
 			ifNotNil: [ :coll | aCollection addAll: (coll asCollection select: [ :each | each isOfType: aFAMIXClassAssociation ]) ] ].
 	^ aCollection
@@ -196,7 +206,7 @@ MooseQueryNavigationQuery >> queryLocal: aFAMIXClassAssociation for: anEntity in
 
 { #category : #query }
 MooseQueryNavigationQuery >> source: aFAMIXClassAssociation for: anEntity [ 
-	^ self strategy
+	^ self directionStrategy
 		queryResultOn: anEntity
 		with: (self source: aFAMIXClassAssociation for: anEntity in: OrderedCollection new) asSet
 ]
@@ -213,19 +223,9 @@ MooseQueryNavigationQuery >> source: aFAMIXClassAssociation for: anEntity in: aC
 	^ aCollection
 ]
 
-{ #category : #accessing }
-MooseQueryNavigationQuery >> strategy [
-	^ strategy
-]
-
-{ #category : #accessing }
-MooseQueryNavigationQuery >> strategy: anObject [
-	strategy := anObject
-]
-
 { #category : #query }
 MooseQueryNavigationQuery >> through: aFAMIXClassAssociation for: anEntity [ 
-	^ self strategy
+	^ self directionStrategy
 		queryResultOn: anEntity
 		with: (self through: aFAMIXClassAssociation for: anEntity in: OrderedCollection new) asSet
 ]
@@ -244,7 +244,7 @@ MooseQueryNavigationQuery >> through: aFAMIXClassAssociation for: anEntity in: a
 
 { #category : #query }
 MooseQueryNavigationQuery >> throughAllFor: anEntity [
-	^ self strategy queryResultOn: anEntity with: (self throughAllFor: anEntity in: OrderedCollection new) asSet
+	^ self directionStrategy queryResultOn: anEntity with: (self throughAllFor: anEntity in: OrderedCollection new) asSet
 ]
 
 { #category : #query }
@@ -263,17 +263,17 @@ MooseQueryNavigationQuery >> throughAllFor: anEntity in: aCollection [
 { #category : #query }
 MooseQueryNavigationQuery >> throughAllLocalFor: anEntity [
 
-	^ self strategy queryResultOn: anEntity with: (self throughAllLocalFor: anEntity in: OrderedCollection new) asSet
+	^ self directionStrategy queryResultOn: anEntity with: (self throughAllLocalFor: anEntity in: OrderedCollection new) asSet
 ]
 
 { #category : #query }
 MooseQueryNavigationQuery >> throughAllLocalFor: anEntity in: aCollection [
 	| properties |
 	"Instead of #to:do: we could just use #do: but this implementation is much faster. Maybe sista will remove the needs of the todo later."
-	1 to: (properties := self strategy msePropertiesOf: anEntity) size do: [ :ind | 
+	1 to: (properties := self directionStrategy msePropertiesOf: anEntity) size do: [ :ind | 
 		(anEntity perform: (properties at: ind) name)
 			ifNotNil:
-				[ :coll | coll asCollection do: [ :res | aCollection add: ((self strategy ensureAssociation: res with: anEntity) perform: self strategy symbolToCollectEntities) ] ] ].
+				[ :coll | coll asCollection do: [ :res | aCollection add: ((self directionStrategy ensureAssociation: res with: anEntity) perform: self directionStrategy symbolToCollectEntities) ] ] ].
 	^ aCollection
 ]
 
@@ -286,9 +286,9 @@ MooseQueryNavigationQuery >> throughLocal: aFAMIXClassAssociation for: anEntity 
 	| properties |
 	"Instead of #to:do: we could just use #do: but this implementation is much faster. Maybe sista will remove the needs of the todo later."
 
-	properties := (self strategy msePropertiesOf: anEntity) select: [:each |  aFAMIXClassAssociation inheritsFromType: each implementingType ].
+	properties := (self directionStrategy msePropertiesOf: anEntity) select: [:each |  aFAMIXClassAssociation inheritsFromType: each implementingType ].
 	
 	
-	1 to: properties size do: [ :ind | (anEntity perform: (properties at: ind) name) ifNotNil: [ :coll | aCollection addAll: (coll asCollection select: [ :each | each isOfType: aFAMIXClassAssociation ] thenCollect: [ :each | each perform: self strategy symbolToCollectEntities ] ) ] ].
+	1 to: properties size do: [ :ind | (anEntity perform: (properties at: ind) name) ifNotNil: [ :coll | aCollection addAll: (coll asCollection select: [ :each | each isOfType: aFAMIXClassAssociation ] thenCollect: [ :each | each perform: self directionStrategy symbolToCollectEntities ] ) ] ].
 	^ aCollection
 ]
