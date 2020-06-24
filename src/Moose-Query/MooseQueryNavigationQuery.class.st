@@ -114,7 +114,7 @@ MooseQueryNavigationQuery >> initialize [
 	super initialize.
 
 	resultKindStrategy := MooseQueryNavigationAssociationKindStrategy.
-	result := OrderedCollection new
+	result := Set new
 ]
 
 { #category : #query }
@@ -182,22 +182,22 @@ MooseQueryNavigationQuery >> privateQueryLocal: aFAMIXClassAssociation for: anEn
 
 { #category : #query }
 MooseQueryNavigationQuery >> query: aFAMIXClassAssociation for: anEntity [
-	^ self directionStrategy queryResultOn: anEntity with: (self privateQuery: aFAMIXClassAssociation for: anEntity) asSet
+	^ self directionStrategy queryResultOn: anEntity with: (self privateQuery: aFAMIXClassAssociation for: anEntity)
 ]
 
 { #category : #query }
 MooseQueryNavigationQuery >> queryAllFor: anEntity [
-	^ self directionStrategy queryResultOn: anEntity with: (self privateQueryAllFor: anEntity) asSet
+	^ self directionStrategy queryResultOn: anEntity with: (self privateQueryAllFor: anEntity)
 ]
 
 { #category : #query }
 MooseQueryNavigationQuery >> queryAllLocalFor: anEntity [
-	^ self directionStrategy queryResultOn: anEntity with: (self privateQueryAllLocalFor: anEntity) asSet
+	^ self directionStrategy queryResultOn: anEntity with: (self privateQueryAllLocalFor: anEntity)
 ]
 
 { #category : #query }
 MooseQueryNavigationQuery >> queryLocal: aFAMIXClassAssociation for: anEntity [
-	^ self directionStrategy queryResultOn: anEntity with: (self privateQueryLocal: aFAMIXClassAssociation for: anEntity) asSet
+	^ self directionStrategy queryResultOn: anEntity with: (self privateQueryLocal: aFAMIXClassAssociation for: anEntity)
 ]
 
 { #category : #accessing }
