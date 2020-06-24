@@ -10,6 +10,6 @@ MooseQueryNavigationAssociationKindStrategy class >> getEntityFor: anEntity link
 ]
 
 { #category : #'as yet unclassified' }
-MooseQueryNavigationAssociationKindStrategy class >> matchingEntitiesIn: aCollection association: aClass query: aQuery [
-	^ aCollection select: [ :each | each isOfType: aClass ]
+MooseQueryNavigationAssociationKindStrategy class >> matchingEntitiesIn: aCollection query: aQuery [
+	^ aCollection
 ]

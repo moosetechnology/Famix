@@ -25,12 +25,11 @@ Internal Representation and Key Implementation Points.
 "
 Class {
 	#name : #MooseQueryNavigationQuery,
-	#superclass : #Object,
+	#superclass : #MooseQueryAbstractQuery,
 	#instVars : [
 		'directionStrategy',
 		'resultKindStrategy',
-		'associationSelectionStrategy',
-		'result'
+		'associationSelectionStrategy'
 	],
 	#category : #'Moose-Query-Navigating'
 }
@@ -118,9 +117,7 @@ MooseQueryNavigationQuery >> hasLocalFor: anEntity [
 { #category : #initialization }
 MooseQueryNavigationQuery >> initialize [
 	super initialize.
-
-	resultKindStrategy := MooseQueryNavigationAssociationKindStrategy.
-	result := Set new
+	resultKindStrategy := MooseQueryNavigationAssociationKindStrategy
 ]
 
 { #category : #query }
@@ -182,38 +179,33 @@ MooseQueryNavigationQuery >> privateQueryLocal: aFAMIXClassAssociation for: anEn
 	"Instead of #to:do: we could just use #do: but this implementation is much faster. Maybe sista will remove the needs of the todo later."
 	1 to: (properties := directionStrategy msePropertiesOf: anEntity) size do: [ :ind | 
 		(anEntity perform: (properties at: ind) name)
-			ifNotNil: [ :coll | result addAll: (resultKindStrategy matchingEntitiesIn: coll asCollection association: aFAMIXClassAssociation query: self) ] ].
+			ifNotNil:
+				[ :coll | result addAll: (resultKindStrategy matchingEntitiesIn: (coll asCollection select: [ :each | each isOfType: aFAMIXClassAssociation ]) query: self) ] ].
 	^ result
 ]
 
 { #category : #query }
 MooseQueryNavigationQuery >> query: aFAMIXClassAssociation for: anEntity [
+	self receiver: anEntity.
 	^ self directionStrategy queryResultOn: anEntity with: (self privateQuery: aFAMIXClassAssociation for: anEntity)
 ]
 
 { #category : #query }
 MooseQueryNavigationQuery >> queryAllFor: anEntity [
+	self receiver: anEntity.
 	^ self directionStrategy queryResultOn: anEntity with: (self privateQueryAllFor: anEntity)
 ]
 
 { #category : #query }
 MooseQueryNavigationQuery >> queryAllLocalFor: anEntity [
+	self receiver: anEntity.
 	^ self directionStrategy queryResultOn: anEntity with: (self privateQueryAllLocalFor: anEntity)
 ]
 
 { #category : #query }
 MooseQueryNavigationQuery >> queryLocal: aFAMIXClassAssociation for: anEntity [
+	self receiver: anEntity.
 	^ self directionStrategy queryResultOn: anEntity with: (self privateQueryLocal: aFAMIXClassAssociation for: anEntity)
-]
-
-{ #category : #accessing }
-MooseQueryNavigationQuery >> result [
-	^ result
-]
-
-{ #category : #accessing }
-MooseQueryNavigationQuery >> result: anObject [
-	result := anObject
 ]
 
 { #category : #accessing }

@@ -10,8 +10,6 @@ MooseQueryNavigationOppositeKindStrategy class >> getEntityFor: anEntity linkedT
 ]
 
 { #category : #'as yet unclassified' }
-MooseQueryNavigationOppositeKindStrategy class >> matchingEntitiesIn: aCollection association: aClass query: aQuery [
-	^ aCollection
-		select: [ :each | each isOfType: aClass ]
-		thenCollect: [ :each | aQuery directionStrategy entityFor: each ]
+MooseQueryNavigationOppositeKindStrategy class >> matchingEntitiesIn: aCollection query: aQuery [
+	^ aCollection collect: [ :each | aQuery directionStrategy entityFor: each ]
 ]

@@ -40,13 +40,11 @@ Internal Representation and Key Implementation Points.
 "
 Class {
 	#name : #MooseQueryScopeQuery,
-	#superclass : #Object,
+	#superclass : #MooseQueryAbstractQuery,
 	#instVars : [
-		'receiver',
 		'until',
 		'isRecursive',
 		'direction',
-		'result',
 		'typeStrategy'
 	],
 	#category : #'Moose-Query-Scoping'
@@ -151,7 +149,6 @@ MooseQueryScopeQuery >> forAny: aCollection [
 MooseQueryScopeQuery >> initialize [
 	super initialize.
 	isRecursive := false.
-	result := Set new.
 	until := [ :each | false ]
 ]
 
@@ -166,28 +163,8 @@ MooseQueryScopeQuery >> isRecursive: anObject [
 ]
 
 { #category : #accessing }
-MooseQueryScopeQuery >> receiver [
-	^ receiver
-]
-
-{ #category : #accessing }
-MooseQueryScopeQuery >> receiver: anObject [
-	receiver := anObject
-]
-
-{ #category : #accessing }
 MooseQueryScopeQuery >> recursively [
 	isRecursive := true
-]
-
-{ #category : #accessing }
-MooseQueryScopeQuery >> result [
-	^ result
-]
-
-{ #category : #accessing }
-MooseQueryScopeQuery >> result: anObject [
-	result := anObject
 ]
 
 { #category : #execution }
