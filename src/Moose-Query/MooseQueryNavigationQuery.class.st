@@ -49,6 +49,11 @@ MooseQueryNavigationQuery class >> directionStrategy: aStrategy [
 ]
 
 { #category : #accessing }
+MooseQueryNavigationQuery >> associationSelectionStrategy [
+	^ associationSelectionStrategy
+]
+
+{ #category : #accessing }
 MooseQueryNavigationQuery >> associationSelectionStrategy: anObject [
 	associationSelectionStrategy := anObject
 ]
@@ -190,6 +195,31 @@ MooseQueryNavigationQuery >> queryLocalFor: anEntity [
 ]
 
 { #category : #accessing }
+MooseQueryNavigationQuery >> resultKindStrategy [
+	^ resultKindStrategy
+]
+
+{ #category : #accessing }
 MooseQueryNavigationQuery >> resultKindStrategy: anObject [
 	resultKindStrategy := anObject
+]
+
+{ #category : #accessing }
+MooseQueryNavigationQuery >> shouldCheckPresenceOfDependencies [
+	^ shouldCheckPresenceOfDependencies
+]
+
+{ #category : #accessing }
+MooseQueryNavigationQuery >> shouldCheckPresenceOfDependencies: anObject [
+	shouldCheckPresenceOfDependencies := anObject
+]
+
+{ #category : #accessing }
+MooseQueryNavigationQuery >> shouldCollectChildrenDependencies [
+	^ shouldCollectChildrenDependencies
+]
+
+{ #category : #accessing }
+MooseQueryNavigationQuery >> shouldCollectChildrenDependencies: anObject [
+	shouldCollectChildrenDependencies := anObject
 ]
