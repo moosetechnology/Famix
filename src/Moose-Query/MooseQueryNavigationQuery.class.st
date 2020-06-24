@@ -121,21 +121,7 @@ MooseQueryNavigationQuery >> initialize [
 ]
 
 { #category : #query }
-MooseQueryNavigationQuery >> privateQuery: aFAMIXClassAssociation for: anEntity [
-	"I know that we could use #do: here, but this algo takes too long on big model, so this is a speed up while the sista vm is not ready for production"
-
-	| selectors |
-	self privateQueryLocal: aFAMIXClassAssociation for: anEntity.
-	1 to: (selectors := anEntity childrenSelectors) size do: [ :index | 
-		(anEntity perform: (selectors at: index))
-			ifNotNil: [ :children | 
-				| coll |
-				1 to: (coll := children asCollection) size do: [ :i | self privateQuery: aFAMIXClassAssociation for: (coll at: i) ] ] ].
-	^ result
-]
-
-{ #category : #query }
-MooseQueryNavigationQuery >> privateQueryAllFor: anEntity [
+MooseQueryNavigationQuery >> privateQueryFor: anEntity [
 	"collects in aCollection all entities on the opposite side of associations with self
 	 Opposite side depends on self strategy (incoming/outgoing)
 	
@@ -143,36 +129,18 @@ MooseQueryNavigationQuery >> privateQueryAllFor: anEntity [
 	Then get children entities of self and applies recurvively on them"
 
 	| selectors |
-	self privateQueryAllLocalFor: anEntity.
+	self privateQueryLocalFor: anEntity.
 	"Instead of #to:do: we could just use #do: but this implementation is much faster. Maybe sista will remove the needs of the todo later."
 	1 to: (selectors := anEntity childrenSelectors) size do: [ :index | 
 		(anEntity perform: (selectors at: index))
 			ifNotNil: [ :children | 
 				| coll |
-				1 to: (coll := children asCollection) size do: [ :i | self privateQueryAllFor: (coll at: i) ] ] ].
+				1 to: (coll := children asCollection) size do: [ :i | self privateQueryFor: (coll at: i) ] ] ].
 	^ result
 ]
 
 { #category : #query }
-MooseQueryNavigationQuery >> privateQueryAllLocalFor: anEntity [
-	"collects in aCollection all entities on the opposite side of associations or declared dependencies with self
-	 Opposite side depends on self strategy (incoming/outgoing)
-	
-	First collects local (not inherited) properties that match the strategy
-	Then applies these properties to find entities associated to self"
-
-	| properties |
-	"Instead of #to:do: we could just use #do: but this implementation is much faster. Maybe sista will remove the needs of the todo later."
-	1 to: (properties := directionStrategy msePropertiesOf: anEntity) size do: [ :ind | 
-		(anEntity perform: (properties at: ind) name)
-			ifNotNil: [ :coll | 
-				result
-					addAll: (resultKindStrategy collectResultFrom: (coll asCollection collect: [ :res | directionStrategy ensureAssociation: res with: anEntity ]) query: self) ] ].
-	^ result
-]
-
-{ #category : #query }
-MooseQueryNavigationQuery >> privateQueryLocal: aFAMIXClassAssociation for: anEntity [
+MooseQueryNavigationQuery >> privateQueryLocalFor: anEntity [
 	"The goal here is to get all the entity's direct associations of the class in parameter. This will not check the associations of the entity's children."
 
 	"Note: Maybe adding a guard to check if the entity can have associations of this class could improve the perf. Currently it is not the case because there is not enough association. Maybe it could be the case in the futur, like with a PostgreSQL model."
@@ -181,33 +149,26 @@ MooseQueryNavigationQuery >> privateQueryLocal: aFAMIXClassAssociation for: anEn
 	"Instead of #to:do: we could just use #do: but this implementation is much faster. Maybe sista will remove the needs of the todo later."
 	1 to: (properties := directionStrategy msePropertiesOf: anEntity) size do: [ :ind | 
 		(anEntity perform: (properties at: ind) name)
-			ifNotNil:
-				[ :coll | result addAll: (resultKindStrategy collectResultFrom: (coll asCollection select: [ :each | each isOfType: aFAMIXClassAssociation ]) query: self) ] ].
+			ifNotNil: [ :coll | 
+				"We ensure we have associations because non-reified associations were introduced in Moose"
+				result
+					addAll:
+						(resultKindStrategy
+							collectResultFrom: ((associationSelectionStrategy selectAssociationsIn: coll asCollection) collect: [ :res | directionStrategy ensureAssociation: res with: anEntity ])
+							query: self) ] ].
 	^ result
 ]
 
 { #category : #query }
-MooseQueryNavigationQuery >> query: aFAMIXClassAssociation for: anEntity [
+MooseQueryNavigationQuery >> queryFor: anEntity [
 	self receiver: anEntity.
-	^ self directionStrategy queryResultOn: anEntity with: (self privateQuery: aFAMIXClassAssociation for: anEntity)
+	^ self directionStrategy queryResultOn: anEntity with: (self privateQueryFor: anEntity)
 ]
 
 { #category : #query }
-MooseQueryNavigationQuery >> queryAllFor: anEntity [
+MooseQueryNavigationQuery >> queryLocalFor: anEntity [
 	self receiver: anEntity.
-	^ self directionStrategy queryResultOn: anEntity with: (self privateQueryAllFor: anEntity)
-]
-
-{ #category : #query }
-MooseQueryNavigationQuery >> queryAllLocalFor: anEntity [
-	self receiver: anEntity.
-	^ self directionStrategy queryResultOn: anEntity with: (self privateQueryAllLocalFor: anEntity)
-]
-
-{ #category : #query }
-MooseQueryNavigationQuery >> queryLocal: aFAMIXClassAssociation for: anEntity [
-	self receiver: anEntity.
-	^ self directionStrategy queryResultOn: anEntity with: (self privateQueryLocal: aFAMIXClassAssociation for: anEntity)
+	^ self directionStrategy queryResultOn: anEntity with: (self privateQueryLocalFor: anEntity)
 ]
 
 { #category : #accessing }

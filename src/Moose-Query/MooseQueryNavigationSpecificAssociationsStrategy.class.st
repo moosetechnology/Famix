@@ -23,3 +23,8 @@ MooseQueryNavigationSpecificAssociationsStrategy >> association [
 MooseQueryNavigationSpecificAssociationsStrategy >> association: anObject [
 	association := anObject
 ]
+
+{ #category : #'as yet unclassified' }
+MooseQueryNavigationSpecificAssociationsStrategy >> selectAssociationsIn: aCollection [
+	^ aCollection select: [ :each | each isOfType: association ]
+]

@@ -48,6 +48,11 @@ MooseQueryDependencyAssociation >> from: anObject [
 	from := anObject
 ]
 
+{ #category : #testing }
+MooseQueryDependencyAssociation >> isOfType: aClass [
+	^ self class isOfType: aClass
+]
+
 { #category : #converting }
 MooseQueryDependencyAssociation >> printOn: aStream [
 
