@@ -1,7 +1,7 @@
 Class {
 	#name : #MooseMorphicTestResource,
 	#superclass : #SmalltalkModelTestResource,
-	#category : #'Moose-Tests-SmalltalkImporter-LAN'
+	#category : #'Moose-SmalltalkImporter-LAN-Tests'
 }
 
 { #category : #setup }

@@ -22,7 +22,7 @@ Class {
 		'msePrinterClass',
 		'nextNodeMethod'
 	],
-	#category : #'Moose-Tests-SmalltalkImporter-LAN'
+	#category : #'Moose-SmalltalkImporter-LAN-Tests'
 }
 
 { #category : #auxiliary }

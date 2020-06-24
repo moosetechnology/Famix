@@ -1,7 +1,7 @@
 Class {
 	#name : #MooseSqueakClassPackageImporterTest,
 	#superclass : #TestCase,
-	#category : #'Moose-Tests-SmalltalkImporter-LAN'
+	#category : #'Moose-SmalltalkImporter-LAN-Tests'
 }
 
 { #category : #'testing collecting classes' }
