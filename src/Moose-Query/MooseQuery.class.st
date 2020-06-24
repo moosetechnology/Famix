@@ -53,10 +53,34 @@ MooseQuery >> descendants [
 ]
 
 { #category : #accessing }
+MooseQuery >> has [
+	^ MooseQueryNavigationQuery new
+		receiver: receiver;
+		checkPresenceOfDependencies;
+		yourself
+]
+
+{ #category : #accessing }
+MooseQuery >> incoming [
+	^ MooseQueryNavigationQuery new
+		receiver: receiver;
+		directionStrategy: MooseQueryIncomingDirectionStrategy;
+		yourself
+]
+
+{ #category : #accessing }
 MooseQuery >> lineage [
 	^ MooseQueryScopeQuery new
 		receiver: receiver;
 		direction: MooseQueryScopeAllStrategy;
+		yourself
+]
+
+{ #category : #accessing }
+MooseQuery >> outgoing [
+	^ MooseQueryNavigationQuery new
+		receiver: receiver;
+		directionStrategy: MooseQueryOutgoingDirectionStrategy;
 		yourself
 ]
 

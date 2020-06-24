@@ -547,11 +547,7 @@ TEntityMetaLevelDependency >> hasIncoming [
 			--> --> Will return true if the receiver or its children have incoming associations
 	"
 
-	^ (MooseQueryNavigationQuery directionStrategy: MooseQueryIncomingDirectionStrategy)
-		associationSelectionStrategy: MooseQueryNavigationAllAssociationsStrategy new;
-		checkPresenceOfDependencies;
-		receiver: self;
-		execute
+	^ self query has incoming dependencies
 ]
 
 { #category : #testing }
@@ -563,11 +559,7 @@ TEntityMetaLevelDependency >> hasIncoming: aFAMIXClassAssociation [
 			--> Will return true if aFAMIXClassAssociation has incoming associations of the FAMIXClassAssociation class for the receiver or its children.
 	"
 
-	^ (MooseQueryNavigationQuery directionStrategy: MooseQueryIncomingDirectionStrategy)
-		associationSelectionStrategy: (MooseQueryNavigationSpecificAssociationsStrategy association: aFAMIXClassAssociation);
-		checkPresenceOfDependencies;
-		receiver: self;
-		execute
+	^ self query has incoming dependenciesOfType: aFAMIXClassAssociation
 ]
 
 { #category : #testing }
@@ -603,7 +595,7 @@ TEntityMetaLevelDependency >> hasLocal: anInOutSymbol [
 
 	^ (MooseQueryNavigationQuery direction: anInOutSymbol)
 		associationSelectionStrategy: MooseQueryNavigationAllAssociationsStrategy new;
-		selectOnlyLocalDependencies;
+		local;
 		checkPresenceOfDependencies;
 		receiver: self;
 		execute
@@ -618,12 +610,7 @@ TEntityMetaLevelDependency >> hasLocalIncoming [
 			--> Will return true if aFAMIXMethod has the incoming FAMIXAssociation 
 			"
 
-	^ (MooseQueryNavigationQuery directionStrategy: MooseQueryIncomingDirectionStrategy)
-		associationSelectionStrategy: MooseQueryNavigationAllAssociationsStrategy new;
-		selectOnlyLocalDependencies;
-		checkPresenceOfDependencies;
-		receiver: self;
-		execute
+	^ self query has local incoming dependencies
 ]
 
 { #category : #testing }
@@ -635,12 +622,7 @@ TEntityMetaLevelDependency >> hasLocalIncoming: aFAMIXClassAssociation [
 			--> Will return true if aFAMIXClassAssociation has incoming associations of the FAMIXClassAssociation class for the receiver.
 	"
 
-	^ (MooseQueryNavigationQuery directionStrategy: MooseQueryIncomingDirectionStrategy)
-		associationSelectionStrategy: (MooseQueryNavigationSpecificAssociationsStrategy association: aFAMIXClassAssociation);
-		selectOnlyLocalDependencies;
-		checkPresenceOfDependencies;
-		receiver: self;
-		execute
+	^ self has local incoming dependenciesOfType: aFAMIXClassAssociation
 ]
 
 { #category : #testing }
@@ -652,12 +634,7 @@ TEntityMetaLevelDependency >> hasLocalOutgoing [
 			--> Will return true if the receiver has outgoingInvocation.
 	"
 
-	^ (MooseQueryNavigationQuery directionStrategy: MooseQueryOutgoingDirectionStrategy)
-		associationSelectionStrategy: MooseQueryNavigationAllAssociationsStrategy new;
-		selectOnlyLocalDependencies;
-		checkPresenceOfDependencies;
-		receiver: self;
-		execute
+	^ self query has local outgoing dependencies
 ]
 
 { #category : #testing }
@@ -669,12 +646,7 @@ TEntityMetaLevelDependency >> hasLocalOutgoing: aFAMIXClassAssociation [
 			--> Will return true if aFAMIXClassAssociation has incoming associations of the FAMIXClassAssociation class for the receiver.
 	"
 
-	^ (MooseQueryNavigationQuery directionStrategy: MooseQueryOutgoingDirectionStrategy)
-		associationSelectionStrategy: (MooseQueryNavigationSpecificAssociationsStrategy association: aFAMIXClassAssociation);
-		selectOnlyLocalDependencies;
-		checkPresenceOfDependencies;
-		receiver: self;
-		execute
+	^ self has local outgoing dependenciesOfType: aFAMIXClassAssociation
 ]
 
 { #category : #testing }
@@ -686,11 +658,7 @@ TEntityMetaLevelDependency >> hasOutgoing [
 			--> --> Will return true if the receiver or its children have outgoing associations
 	"
 
-	^ (MooseQueryNavigationQuery directionStrategy: MooseQueryOutgoingDirectionStrategy)
-		associationSelectionStrategy: MooseQueryNavigationAllAssociationsStrategy new;
-		checkPresenceOfDependencies;
-		receiver: self;
-		execute
+	^ self has outgoing dependencies
 ]
 
 { #category : #testing }
@@ -702,11 +670,7 @@ TEntityMetaLevelDependency >> hasOutgoing: aFAMIXClassAssociation [
 			--> Will return true if aFAMIXClassAssociation has outgoing associations of the FAMIXClassAssociation class for the receiver or its children.
 	"
 
-	^ (MooseQueryNavigationQuery directionStrategy: MooseQueryOutgoingDirectionStrategy)
-		associationSelectionStrategy: (MooseQueryNavigationSpecificAssociationsStrategy association: aFAMIXClassAssociation);
-		checkPresenceOfDependencies;
-		receiver: self;
-		execute
+	^ self has outgoing dependenciesOfType: aFAMIXClassAssociation
 ]
 
 { #category : #testing }
@@ -843,10 +807,7 @@ TEntityMetaLevelDependency >> queryAllIncoming [
 			--> Will return a MooseIncomingQueryResult containing the FAMIXAssociation having aFAMIXClass or its children as target
 	"
 
-	^ (MooseQueryNavigationQuery directionStrategy: MooseQueryIncomingDirectionStrategy)
-		associationSelectionStrategy: MooseQueryNavigationAllAssociationsStrategy new;
-		receiver: self;
-		execute
+	^ self query incoming dependencies
 ]
 
 { #category : #'query dependencies' }
@@ -863,7 +824,7 @@ TEntityMetaLevelDependency >> queryAllLocal: anInOutSymbol [
 
 	^ (MooseQueryNavigationQuery direction: anInOutSymbol)
 		associationSelectionStrategy: MooseQueryNavigationAllAssociationsStrategy new;
-		selectOnlyLocalDependencies;
+		local;
 		receiver: self;
 		execute
 ]
@@ -878,11 +839,7 @@ TEntityMetaLevelDependency >> queryAllLocalIncoming [
 			--> Will return a MooseIncomingQueryResult containing the FAMIXAssociation having aFAMIXClass as target
 	"
 
-	^ (MooseQueryNavigationQuery directionStrategy: MooseQueryIncomingDirectionStrategy)
-		associationSelectionStrategy: MooseQueryNavigationAllAssociationsStrategy new;
-		selectOnlyLocalDependencies;
-		receiver: self;
-		execute
+	^ self query incoming local dependencies
 ]
 
 { #category : #'query dependencies' }
@@ -895,11 +852,7 @@ TEntityMetaLevelDependency >> queryAllLocalOutgoing [
 			--> Will return a MooseOutgoingQueryResult containing the FAMIXAssociation having aFAMIXClass as source
 	"
 
-	^ (MooseQueryNavigationQuery directionStrategy: MooseQueryOutgoingDirectionStrategy)
-		associationSelectionStrategy: MooseQueryNavigationAllAssociationsStrategy new;
-		selectOnlyLocalDependencies;
-		receiver: self;
-		execute
+	^ self query outgoing local dependencies
 ]
 
 { #category : #'query dependencies' }
@@ -911,10 +864,7 @@ TEntityMetaLevelDependency >> queryAllOutgoing [
 			--> Will return a MooseOutgoingQueryResult containing the FAMIXAssociation having aFAMIXClass or its children as source
 	"
 
-	^ (MooseQueryNavigationQuery directionStrategy: MooseQueryOutgoingDirectionStrategy)
-		associationSelectionStrategy: MooseQueryNavigationAllAssociationsStrategy new;
-		receiver: self;
-		execute
+	^ self query outgoing dependencies
 ]
 
 { #category : #'query dependencies' }
@@ -926,10 +876,7 @@ TEntityMetaLevelDependency >> queryIncoming: aFAMIXClassAssociation [
 			--> Will return a MooseIncomingQueryResult containing the FAMIXInheritance associations having aFAMIXClass or its children as target
 	"
 
-	^ (MooseQueryNavigationQuery directionStrategy: MooseQueryIncomingDirectionStrategy)
-		associationSelectionStrategy: (MooseQueryNavigationSpecificAssociationsStrategy association: aFAMIXClassAssociation);
-		receiver: self;
-		execute
+	^ self query incoming dependenciesOfType: aFAMIXClassAssociation
 ]
 
 { #category : #'query dependencies' }
@@ -969,7 +916,7 @@ TEntityMetaLevelDependency >> queryLocal: anInOutSymbol with: aFAMIXClassAssocia
 
 	^ (MooseQueryNavigationQuery direction: anInOutSymbol)
 		associationSelectionStrategy: (MooseQueryNavigationSpecificAssociationsStrategy association: aFAMIXClassAssociation);
-		selectOnlyLocalDependencies;
+		local;
 		receiver: self;
 		execute
 ]
@@ -984,11 +931,7 @@ TEntityMetaLevelDependency >> queryLocalIncoming: aFAMIXClassAssociation [
 			--> Will return a MooseIncomingQueryResult containing the FAMIXInheritance associations having aFAMIXClass as target
 	"
 
-	^ (MooseQueryNavigationQuery directionStrategy: MooseQueryIncomingDirectionStrategy)
-		associationSelectionStrategy: (MooseQueryNavigationSpecificAssociationsStrategy association: aFAMIXClassAssociation);
-		selectOnlyLocalDependencies;
-		receiver: self;
-		execute
+	^ self query incoming local dependenciesOfType: aFAMIXClassAssociation
 ]
 
 { #category : #'query dependencies' }
@@ -1001,11 +944,7 @@ TEntityMetaLevelDependency >> queryLocalOutgoing: aFAMIXClassAssociation [
 			--> Will return a MooseOutgoingQueryResult containing the FAMIXInheritance associations having aFAMIXClass as source
 	"
 
-	^ (MooseQueryNavigationQuery directionStrategy: MooseQueryOutgoingDirectionStrategy)
-		associationSelectionStrategy: (MooseQueryNavigationSpecificAssociationsStrategy association: aFAMIXClassAssociation);
-		selectOnlyLocalDependencies;
-		receiver: self;
-		execute
+	^ self query outgoing local dependenciesOfType: aFAMIXClassAssociation
 ]
 
 { #category : #'query dependencies' }
@@ -1017,10 +956,7 @@ TEntityMetaLevelDependency >> queryOutgoing: aFAMIXClassAssociation [
 			--> Will return a MooseOutgoingQueryResult containing the FAMIXInheritance associations having aFAMIXClass or its children as source
 	"
 
-	^ (MooseQueryNavigationQuery directionStrategy: MooseQueryOutgoingDirectionStrategy)
-		associationSelectionStrategy: (MooseQueryNavigationSpecificAssociationsStrategy association: aFAMIXClassAssociation);
-		receiver: self;
-		execute
+	^ self query outgoing dependenciesOfType: aFAMIXClassAssociation
 ]
 
 { #category : #'query dependencies' }
@@ -1060,27 +996,7 @@ TEntityMetaLevelDependency >> sourceThrough: aFAMIXClassAssociation [
 			--> Will return a MooseIncomingQueryResult containing the methods having aFAMIXClass or its children as source
 	"
 
-	^ (MooseQueryNavigationQuery directionStrategy: MooseQueryIncomingDirectionStrategy)
-		resultKindStrategy: MooseQueryNavigationOppositeKindStrategy;
-		associationSelectionStrategy: (MooseQueryNavigationSpecificAssociationsStrategy association: aFAMIXClassAssociation);
-		receiver: self;
-		execute
-]
-
-{ #category : #'query dependencies' }
-TEntityMetaLevelDependency >> sourceThroughAll [
-	"Collect the source of all the FAMIXClassAssociation classes for the receiver and its children.
-	
-	Example:
-		aFAMIXClass sourceThroughAll.
-			--> Will return a MooseIncomingQueryResult containing the methods having aFAMIXClass or its children as source
-	"
-
-	^ (MooseQueryNavigationQuery directionStrategy: MooseQueryIncomingDirectionStrategy)
-		resultKindStrategy: MooseQueryNavigationOppositeKindStrategy;
-		associationSelectionStrategy: MooseQueryNavigationAllAssociationsStrategy new;
-		receiver: self;
-		execute
+	^ self query incoming objects dependenciesOfType: aFAMIXClassAssociation
 ]
 
 { #category : #'query dependencies' }
@@ -1092,27 +1008,7 @@ TEntityMetaLevelDependency >> targetThrough: aFAMIXClassAssociation [
 			--> Will return a MooseOutgoingQueryResult containing the class having aFAMIXClass or its children as target
 	"
 
-	^ (MooseQueryNavigationQuery directionStrategy: MooseQueryOutgoingDirectionStrategy)
-		resultKindStrategy: MooseQueryNavigationOppositeKindStrategy;
-		associationSelectionStrategy: (MooseQueryNavigationSpecificAssociationsStrategy association: aFAMIXClassAssociation);
-		receiver: self;
-		execute
-]
-
-{ #category : #'query dependencies' }
-TEntityMetaLevelDependency >> targetThroughAll [
-	"Collect the target of the FAMIXClassAssociation class for the receiver and its children.
-	
-	Example:
-		aFAMIXMethod targetThroughAll.
-			--> Will return a MooseOutgoingQueryResult containing the class having aFAMIXClass or its children as target
-	"
-
-	^ (MooseQueryNavigationQuery directionStrategy: MooseQueryOutgoingDirectionStrategy)
-		resultKindStrategy: MooseQueryNavigationOppositeKindStrategy;
-		associationSelectionStrategy: MooseQueryNavigationAllAssociationsStrategy new;
-		receiver: self;
-		execute
+	^ self query outgoing objects dependenciesOfType: aFAMIXClassAssociation
 ]
 
 { #category : #'query dependencies' }
@@ -1124,11 +1020,7 @@ TEntityMetaLevelDependency >> throughAllFrom [
 			--> Will return a MooseIncomingQueryResult containing all the FAMIXAssociations having aFAMIXClass or its children as target
 	"
 
-	^ (MooseQueryNavigationQuery directionStrategy: MooseQueryIncomingDirectionStrategy)
-		resultKindStrategy: MooseQueryNavigationOppositeKindStrategy;
-		associationSelectionStrategy: MooseQueryNavigationAllAssociationsStrategy new;
-		receiver: self;
-		execute
+	^ self query incoming objects dependencies
 ]
 
 { #category : #'query dependencies' }
@@ -1140,11 +1032,7 @@ TEntityMetaLevelDependency >> throughAllTo [
 			--> Will return a MooseOutgoingQueryResult containing the class having aFAMIXClass or its children as source
 	"
 
-	^ (MooseQueryNavigationQuery directionStrategy: MooseQueryOutgoingDirectionStrategy)
-		resultKindStrategy: MooseQueryNavigationOppositeKindStrategy;
-		associationSelectionStrategy: MooseQueryNavigationAllAssociationsStrategy new;
-		receiver: self;
-		execute
+	^ self query outgoing objects dependencies
 ]
 
 { #category : #scoping }
