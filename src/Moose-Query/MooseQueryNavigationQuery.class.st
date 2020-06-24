@@ -29,6 +29,7 @@ Class {
 	#instVars : [
 		'directionStrategy',
 		'resultKindStrategy',
+		'associationSelectionStrategy',
 		'result'
 	],
 	#category : #'Moose-Query-Navigating'
@@ -44,6 +45,11 @@ MooseQueryNavigationQuery class >> directionStrategy: aStrategy [
 	^ self new
 		directionStrategy: aStrategy;
 		yourself
+]
+
+{ #category : #accessing }
+MooseQueryNavigationQuery >> associationSelectionStrategy: anObject [
+	associationSelectionStrategy := anObject
 ]
 
 { #category : #accessing }
@@ -198,6 +204,16 @@ MooseQueryNavigationQuery >> queryAllLocalFor: anEntity [
 { #category : #query }
 MooseQueryNavigationQuery >> queryLocal: aFAMIXClassAssociation for: anEntity [
 	^ self directionStrategy queryResultOn: anEntity with: (self privateQueryLocal: aFAMIXClassAssociation for: anEntity)
+]
+
+{ #category : #accessing }
+MooseQueryNavigationQuery >> result [
+	^ result
+]
+
+{ #category : #accessing }
+MooseQueryNavigationQuery >> result: anObject [
+	result := anObject
 ]
 
 { #category : #accessing }
