@@ -165,7 +165,9 @@ MooseQueryNavigationQuery >> privateQueryAllLocalFor: anEntity [
 	"Instead of #to:do: we could just use #do: but this implementation is much faster. Maybe sista will remove the needs of the todo later."
 	1 to: (properties := directionStrategy msePropertiesOf: anEntity) size do: [ :ind | 
 		(anEntity perform: (properties at: ind) name)
-			ifNotNil: [ :coll | coll asCollection do: [ :res | result add: (resultKindStrategy getEntityFor: res linkedTo: anEntity query: self) ] ] ].
+			ifNotNil: [ :coll | 
+				result
+					addAll: (resultKindStrategy collectResultFrom: (coll asCollection collect: [ :res | directionStrategy ensureAssociation: res with: anEntity ]) query: self) ] ].
 	^ result
 ]
 
@@ -180,7 +182,7 @@ MooseQueryNavigationQuery >> privateQueryLocal: aFAMIXClassAssociation for: anEn
 	1 to: (properties := directionStrategy msePropertiesOf: anEntity) size do: [ :ind | 
 		(anEntity perform: (properties at: ind) name)
 			ifNotNil:
-				[ :coll | result addAll: (resultKindStrategy matchingEntitiesIn: (coll asCollection select: [ :each | each isOfType: aFAMIXClassAssociation ]) query: self) ] ].
+				[ :coll | result addAll: (resultKindStrategy collectResultFrom: (coll asCollection select: [ :each | each isOfType: aFAMIXClassAssociation ]) query: self) ] ].
 	^ result
 ]
 

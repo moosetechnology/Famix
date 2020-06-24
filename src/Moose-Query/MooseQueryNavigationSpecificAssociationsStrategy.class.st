@@ -10,7 +10,7 @@ Class {
 { #category : #accessing }
 MooseQueryNavigationSpecificAssociationsStrategy class >> association: aClass [
 	^ self new
-		associations: aClass;
+		association: aClass;
 		yourself
 ]
 

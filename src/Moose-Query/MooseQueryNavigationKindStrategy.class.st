@@ -5,11 +5,6 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-MooseQueryNavigationKindStrategy class >> getEntityFor: anEntity linkedTo: anotherEntity query: aQuery [
-	^ self subclassResponsibility
-]
-
-{ #category : #'as yet unclassified' }
-MooseQueryNavigationKindStrategy class >> matchingEntitiesIn: aCollection query: aQuery [
+MooseQueryNavigationKindStrategy class >> collectResultFrom: aCollection query: aQuery [
 	^ self subclassResponsibility
 ]
