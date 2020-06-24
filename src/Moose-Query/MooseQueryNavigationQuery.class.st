@@ -29,7 +29,8 @@ Class {
 	#instVars : [
 		'directionStrategy',
 		'resultKindStrategy',
-		'associationSelectionStrategy'
+		'associationSelectionStrategy',
+		'shouldCollectChildrenDependencies'
 	],
 	#category : #'Moose-Query-Navigating'
 }
@@ -59,6 +60,11 @@ MooseQueryNavigationQuery >> directionStrategy [
 { #category : #accessing }
 MooseQueryNavigationQuery >> directionStrategy: anObject [
 	directionStrategy := anObject
+]
+
+{ #category : #query }
+MooseQueryNavigationQuery >> execute [
+	^ directionStrategy queryResultOn: receiver with: (self queryFor: receiver)
 ]
 
 { #category : #query }
@@ -117,11 +123,12 @@ MooseQueryNavigationQuery >> hasLocalFor: anEntity [
 { #category : #initialization }
 MooseQueryNavigationQuery >> initialize [
 	super initialize.
-	resultKindStrategy := MooseQueryNavigationAssociationKindStrategy
+	resultKindStrategy := MooseQueryNavigationAssociationKindStrategy.
+	shouldCollectChildrenDependencies := true
 ]
 
 { #category : #query }
-MooseQueryNavigationQuery >> privateQueryFor: anEntity [
+MooseQueryNavigationQuery >> queryFor: anEntity [
 	"collects in aCollection all entities on the opposite side of associations with self
 	 Opposite side depends on self strategy (incoming/outgoing)
 	
@@ -129,18 +136,21 @@ MooseQueryNavigationQuery >> privateQueryFor: anEntity [
 	Then get children entities of self and applies recurvively on them"
 
 	| selectors |
-	self privateQueryLocalFor: anEntity.
+	self queryLocalFor: anEntity.
+
+	shouldCollectChildrenDependencies ifFalse: [ ^ result ].
+
 	"Instead of #to:do: we could just use #do: but this implementation is much faster. Maybe sista will remove the needs of the todo later."
 	1 to: (selectors := anEntity childrenSelectors) size do: [ :index | 
 		(anEntity perform: (selectors at: index))
 			ifNotNil: [ :children | 
 				| coll |
-				1 to: (coll := children asCollection) size do: [ :i | self privateQueryFor: (coll at: i) ] ] ].
+				1 to: (coll := children asCollection) size do: [ :i | self queryFor: (coll at: i) ] ] ].
 	^ result
 ]
 
 { #category : #query }
-MooseQueryNavigationQuery >> privateQueryLocalFor: anEntity [
+MooseQueryNavigationQuery >> queryLocalFor: anEntity [
 	"The goal here is to get all the entity's direct associations of the class in parameter. This will not check the associations of the entity's children."
 
 	"Note: Maybe adding a guard to check if the entity can have associations of this class could improve the perf. Currently it is not the case because there is not enough association. Maybe it could be the case in the futur, like with a PostgreSQL model."
@@ -159,19 +169,12 @@ MooseQueryNavigationQuery >> privateQueryLocalFor: anEntity [
 	^ result
 ]
 
-{ #category : #query }
-MooseQueryNavigationQuery >> queryFor: anEntity [
-	self receiver: anEntity.
-	^ self directionStrategy queryResultOn: anEntity with: (self privateQueryFor: anEntity)
-]
-
-{ #category : #query }
-MooseQueryNavigationQuery >> queryLocalFor: anEntity [
-	self receiver: anEntity.
-	^ self directionStrategy queryResultOn: anEntity with: (self privateQueryLocalFor: anEntity)
-]
-
 { #category : #accessing }
 MooseQueryNavigationQuery >> resultKindStrategy: anObject [
 	resultKindStrategy := anObject
+]
+
+{ #category : #accessing }
+MooseQueryNavigationQuery >> selectOnlyLocalDependencies [
+	shouldCollectChildrenDependencies := false
 ]

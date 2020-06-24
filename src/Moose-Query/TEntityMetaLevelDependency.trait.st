@@ -595,6 +595,7 @@ TEntityMetaLevelDependency >> hasLocal: anInOutSymbol [
 
 	^ (MooseQueryNavigationQuery direction: anInOutSymbol)
 		associationSelectionStrategy: MooseQueryNavigationAllAssociationsStrategy new;
+		selectOnlyLocalDependencies;
 		hasLocalFor: self
 ]
 
@@ -609,6 +610,7 @@ TEntityMetaLevelDependency >> hasLocalIncoming [
 
 	^ (MooseQueryNavigationQuery directionStrategy: MooseQueryIncomingDirectionStrategy)
 		associationSelectionStrategy: MooseQueryNavigationAllAssociationsStrategy new;
+		selectOnlyLocalDependencies;
 		hasLocalFor: self
 ]
 
@@ -623,6 +625,7 @@ TEntityMetaLevelDependency >> hasLocalIncoming: aFAMIXClassAssociation [
 
 	^ (MooseQueryNavigationQuery directionStrategy: MooseQueryIncomingDirectionStrategy)
 		associationSelectionStrategy: (MooseQueryNavigationSpecificAssociationsStrategy association: aFAMIXClassAssociation);
+		selectOnlyLocalDependencies;
 		hasLocal: aFAMIXClassAssociation for: self
 ]
 
@@ -637,6 +640,7 @@ TEntityMetaLevelDependency >> hasLocalOutgoing [
 
 	^ (MooseQueryNavigationQuery directionStrategy: MooseQueryOutgoingDirectionStrategy)
 		associationSelectionStrategy: MooseQueryNavigationAllAssociationsStrategy new;
+		selectOnlyLocalDependencies;
 		hasLocalFor: self
 ]
 
@@ -651,6 +655,7 @@ TEntityMetaLevelDependency >> hasLocalOutgoing: aFAMIXClassAssociation [
 
 	^ (MooseQueryNavigationQuery directionStrategy: MooseQueryOutgoingDirectionStrategy)
 		associationSelectionStrategy: (MooseQueryNavigationSpecificAssociationsStrategy association: aFAMIXClassAssociation);
+		selectOnlyLocalDependencies;
 		hasLocal: aFAMIXClassAssociation for: self
 ]
 
@@ -786,7 +791,8 @@ TEntityMetaLevelDependency >> query: anInOutSymbol with: aFAMIXClassAssociation 
 
 	^ (MooseQueryNavigationQuery direction: anInOutSymbol)
 		associationSelectionStrategy: (MooseQueryNavigationSpecificAssociationsStrategy association: aFAMIXClassAssociation);
-		queryFor: self
+		receiver: self;
+		execute
 ]
 
 { #category : #'query dependencies' }
@@ -802,7 +808,8 @@ TEntityMetaLevelDependency >> queryAll: anInOutSymbol [
 
 	^ (MooseQueryNavigationQuery direction: anInOutSymbol)
 		associationSelectionStrategy: MooseQueryNavigationAllAssociationsStrategy new;
-		queryFor: self
+		receiver: self;
+		execute
 ]
 
 { #category : #'query dependencies' }
@@ -816,7 +823,8 @@ TEntityMetaLevelDependency >> queryAllIncoming [
 
 	^ (MooseQueryNavigationQuery directionStrategy: MooseQueryIncomingDirectionStrategy)
 		associationSelectionStrategy: MooseQueryNavigationAllAssociationsStrategy new;
-		queryFor: self
+		receiver: self;
+		execute
 ]
 
 { #category : #'query dependencies' }
@@ -833,7 +841,9 @@ TEntityMetaLevelDependency >> queryAllLocal: anInOutSymbol [
 
 	^ (MooseQueryNavigationQuery direction: anInOutSymbol)
 		associationSelectionStrategy: MooseQueryNavigationAllAssociationsStrategy new;
-		queryLocalFor: self
+		selectOnlyLocalDependencies;
+		receiver: self;
+		execute
 ]
 
 { #category : #'query dependencies' }
@@ -848,7 +858,9 @@ TEntityMetaLevelDependency >> queryAllLocalIncoming [
 
 	^ (MooseQueryNavigationQuery directionStrategy: MooseQueryIncomingDirectionStrategy)
 		associationSelectionStrategy: MooseQueryNavigationAllAssociationsStrategy new;
-		queryLocalFor: self
+		selectOnlyLocalDependencies;
+		receiver: self;
+		execute
 ]
 
 { #category : #'query dependencies' }
@@ -863,7 +875,9 @@ TEntityMetaLevelDependency >> queryAllLocalOutgoing [
 
 	^ (MooseQueryNavigationQuery directionStrategy: MooseQueryOutgoingDirectionStrategy)
 		associationSelectionStrategy: MooseQueryNavigationAllAssociationsStrategy new;
-		queryLocalFor: self
+		selectOnlyLocalDependencies;
+		receiver: self;
+		execute
 ]
 
 { #category : #'query dependencies' }
@@ -877,7 +891,8 @@ TEntityMetaLevelDependency >> queryAllOutgoing [
 
 	^ (MooseQueryNavigationQuery directionStrategy: MooseQueryOutgoingDirectionStrategy)
 		associationSelectionStrategy: MooseQueryNavigationAllAssociationsStrategy new;
-		queryFor: self
+		receiver: self;
+		execute
 ]
 
 { #category : #'query dependencies' }
@@ -891,7 +906,8 @@ TEntityMetaLevelDependency >> queryIncoming: aFAMIXClassAssociation [
 
 	^ (MooseQueryNavigationQuery directionStrategy: MooseQueryIncomingDirectionStrategy)
 		associationSelectionStrategy: (MooseQueryNavigationSpecificAssociationsStrategy association: aFAMIXClassAssociation);
-		queryFor: self
+		receiver: self;
+		execute
 ]
 
 { #category : #'query dependencies' }
@@ -931,7 +947,9 @@ TEntityMetaLevelDependency >> queryLocal: anInOutSymbol with: aFAMIXClassAssocia
 
 	^ (MooseQueryNavigationQuery direction: anInOutSymbol)
 		associationSelectionStrategy: (MooseQueryNavigationSpecificAssociationsStrategy association: aFAMIXClassAssociation);
-		queryLocalFor: self
+		selectOnlyLocalDependencies;
+		receiver: self;
+		execute
 ]
 
 { #category : #'query dependencies' }
@@ -946,7 +964,9 @@ TEntityMetaLevelDependency >> queryLocalIncoming: aFAMIXClassAssociation [
 
 	^ (MooseQueryNavigationQuery directionStrategy: MooseQueryIncomingDirectionStrategy)
 		associationSelectionStrategy: (MooseQueryNavigationSpecificAssociationsStrategy association: aFAMIXClassAssociation);
-		queryLocalFor: self
+		selectOnlyLocalDependencies;
+		receiver: self;
+		execute
 ]
 
 { #category : #'query dependencies' }
@@ -961,7 +981,9 @@ TEntityMetaLevelDependency >> queryLocalOutgoing: aFAMIXClassAssociation [
 
 	^ (MooseQueryNavigationQuery directionStrategy: MooseQueryOutgoingDirectionStrategy)
 		associationSelectionStrategy: (MooseQueryNavigationSpecificAssociationsStrategy association: aFAMIXClassAssociation);
-		queryLocalFor: self
+		selectOnlyLocalDependencies;
+		receiver: self;
+		execute
 ]
 
 { #category : #'query dependencies' }
@@ -975,7 +997,8 @@ TEntityMetaLevelDependency >> queryOutgoing: aFAMIXClassAssociation [
 
 	^ (MooseQueryNavigationQuery directionStrategy: MooseQueryOutgoingDirectionStrategy)
 		associationSelectionStrategy: (MooseQueryNavigationSpecificAssociationsStrategy association: aFAMIXClassAssociation);
-		queryFor: self
+		receiver: self;
+		execute
 ]
 
 { #category : #'query dependencies' }
@@ -1018,7 +1041,8 @@ TEntityMetaLevelDependency >> sourceThrough: aFAMIXClassAssociation [
 	^ (MooseQueryNavigationQuery directionStrategy: MooseQueryIncomingDirectionStrategy)
 		resultKindStrategy: MooseQueryNavigationOppositeKindStrategy;
 		associationSelectionStrategy: (MooseQueryNavigationSpecificAssociationsStrategy association: aFAMIXClassAssociation);
-		queryFor: self
+		receiver: self;
+		execute
 ]
 
 { #category : #'query dependencies' }
@@ -1033,7 +1057,8 @@ TEntityMetaLevelDependency >> sourceThroughAll [
 	^ (MooseQueryNavigationQuery directionStrategy: MooseQueryIncomingDirectionStrategy)
 		resultKindStrategy: MooseQueryNavigationOppositeKindStrategy;
 		associationSelectionStrategy: MooseQueryNavigationAllAssociationsStrategy new;
-		queryFor: self
+		receiver: self;
+		execute
 ]
 
 { #category : #'query dependencies' }
@@ -1048,7 +1073,8 @@ TEntityMetaLevelDependency >> targetThrough: aFAMIXClassAssociation [
 	^ (MooseQueryNavigationQuery directionStrategy: MooseQueryOutgoingDirectionStrategy)
 		resultKindStrategy: MooseQueryNavigationOppositeKindStrategy;
 		associationSelectionStrategy: (MooseQueryNavigationSpecificAssociationsStrategy association: aFAMIXClassAssociation);
-		queryFor: self
+		receiver: self;
+		execute
 ]
 
 { #category : #'query dependencies' }
@@ -1063,7 +1089,8 @@ TEntityMetaLevelDependency >> targetThroughAll [
 	^ (MooseQueryNavigationQuery directionStrategy: MooseQueryOutgoingDirectionStrategy)
 		resultKindStrategy: MooseQueryNavigationOppositeKindStrategy;
 		associationSelectionStrategy: MooseQueryNavigationAllAssociationsStrategy new;
-		queryFor: self
+		receiver: self;
+		execute
 ]
 
 { #category : #'query dependencies' }
@@ -1078,7 +1105,8 @@ TEntityMetaLevelDependency >> throughAllFrom [
 	^ (MooseQueryNavigationQuery directionStrategy: MooseQueryIncomingDirectionStrategy)
 		resultKindStrategy: MooseQueryNavigationOppositeKindStrategy;
 		associationSelectionStrategy: MooseQueryNavigationAllAssociationsStrategy new;
-		queryFor: self
+		receiver: self;
+		execute
 ]
 
 { #category : #'query dependencies' }
@@ -1093,7 +1121,8 @@ TEntityMetaLevelDependency >> throughAllTo [
 	^ (MooseQueryNavigationQuery directionStrategy: MooseQueryOutgoingDirectionStrategy)
 		resultKindStrategy: MooseQueryNavigationOppositeKindStrategy;
 		associationSelectionStrategy: MooseQueryNavigationAllAssociationsStrategy new;
-		queryFor: self
+		receiver: self;
+		execute
 ]
 
 { #category : #scoping }
