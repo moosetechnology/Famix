@@ -151,6 +151,7 @@ MooseQueryNavigationQuery >> queryAllFor: anEntity in: aCollection [
 	
 	First collects entities from local (not inherited) properties
 	Then get children entities of self and applies recurvively on them"
+
 	| selectors |
 	self queryAllLocalFor: anEntity in: aCollection.
 	"Instead of #to:do: we could just use #do: but this implementation is much faster. Maybe sista will remove the needs of the todo later."
@@ -232,6 +233,8 @@ MooseQueryNavigationQuery >> through: aFAMIXClassAssociation for: anEntity [
 
 { #category : #query }
 MooseQueryNavigationQuery >> through: aFAMIXClassAssociation for: anEntity in: aCollection [
+	"I know that we could use #do: here, but this algo takes too long on big model, so this is a speed up while the sista vm is not ready for production"
+
 	| selectors |
 	self throughLocal: aFAMIXClassAssociation for: anEntity in: aCollection.
 	1 to: (selectors := anEntity childrenSelectors) size do: [ :index | 
@@ -280,15 +283,18 @@ MooseQueryNavigationQuery >> throughAllLocalFor: anEntity in: aCollection [
 { #category : #query }
 MooseQueryNavigationQuery >> throughLocal: aFAMIXClassAssociation for: anEntity in: aCollection [
 	"The goal here is to get all the entity's direct associations of the class in parameter. This will not check the associations of the entity's children."
-	
+
 	"Note: Maybe adding a guard to check if the entity can have associations of this class could improve the perf. Currently it is not the case because there is not enough association. Maybe it could be the case in the futur, like with a PostgreSQL model."
-	
+
 	| properties |
 	"Instead of #to:do: we could just use #do: but this implementation is much faster. Maybe sista will remove the needs of the todo later."
-
-	properties := (self directionStrategy msePropertiesOf: anEntity) select: [:each |  aFAMIXClassAssociation inheritsFromType: each implementingType ].
-	
-	
-	1 to: properties size do: [ :ind | (anEntity perform: (properties at: ind) name) ifNotNil: [ :coll | aCollection addAll: (coll asCollection select: [ :each | each isOfType: aFAMIXClassAssociation ] thenCollect: [ :each | each perform: self directionStrategy symbolToCollectEntities ] ) ] ].
+	1 to: (properties := self directionStrategy msePropertiesOf: anEntity) size do: [ :ind | 
+		(anEntity perform: (properties at: ind) name)
+			ifNotNil: [ :coll | 
+				aCollection
+					addAll:
+						(coll asCollection
+							select: [ :each | each isOfType: aFAMIXClassAssociation ]
+							thenCollect: [ :each | each perform: self directionStrategy symbolToCollectEntities ]) ] ].
 	^ aCollection
 ]
