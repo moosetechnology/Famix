@@ -133,18 +133,6 @@ MooseQueryScopeQuery >> execute [
 	^ direction scopeFor: receiver query: self
 ]
 
-{ #category : #accessing }
-MooseQueryScopeQuery >> for: aFamixType [
-	typeStrategy := MooseQueryScopeTypeStrategy scope: aFamixType.
-	^ self execute
-]
-
-{ #category : #accessing }
-MooseQueryScopeQuery >> forAny: aCollection [
-	typeStrategy := MooseQueryScopeTypesStrategy scopes: aCollection.
-	^ self execute
-]
-
 { #category : #initialization }
 MooseQueryScopeQuery >> initialize [
 	super initialize.
@@ -160,6 +148,18 @@ MooseQueryScopeQuery >> isRecursive [
 { #category : #accessing }
 MooseQueryScopeQuery >> isRecursive: anObject [
 	isRecursive := anObject
+]
+
+{ #category : #accessing }
+MooseQueryScopeQuery >> ofAnyType: aCollection [
+	typeStrategy := MooseQueryScopeTypesStrategy scopes: aCollection.
+	^ self execute
+]
+
+{ #category : #accessing }
+MooseQueryScopeQuery >> ofType: aFamixType [
+	typeStrategy := MooseQueryScopeTypeStrategy scope: aFamixType.
+	^ self execute
 ]
 
 { #category : #accessing }
