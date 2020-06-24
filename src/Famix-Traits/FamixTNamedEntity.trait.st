@@ -3,7 +3,7 @@ Trait {
 	#instVars : [
 		'#name => FMProperty'
 	],
-	#traits : 'FamixTSourceEntity + TDependencyQueries + TEntityMetaLevelDependency',
+	#traits : 'FamixTSourceEntity + TEntityMetaLevelDependency',
 	#category : #'Famix-Traits-Named'
 }
 

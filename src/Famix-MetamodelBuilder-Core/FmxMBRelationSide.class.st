@@ -1,3 +1,6 @@
+"
+Represents a property referencing another entity
+"
 Class {
 	#name : #FmxMBRelationSide,
 	#superclass : #FmxMBProperty,
@@ -308,8 +311,8 @@ FmxMBRelationSide >> source [
 ]
 
 { #category : #properties }
-FmxMBRelationSide >> source: anObject [
-	source := anObject
+FmxMBRelationSide >> source: aBoolean [
+	source := aBoolean
 ]
 
 { #category : #properties }

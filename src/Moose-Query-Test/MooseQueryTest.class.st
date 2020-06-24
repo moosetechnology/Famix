@@ -174,8 +174,8 @@ MooseQueryTest >> testAllIncoming [
 
 { #category : #tests }
 MooseQueryTest >> testAllOutgoing [
-	self assert: method2 queryAllOutgoing size equals: 2.
-	self assert: class2 queryAllOutgoing size equals: 3
+	self assert: method2 queryAllOutgoing size equals: 3.
+	self assert: class2 queryAllOutgoing size equals: 5
 ]
 
 { #category : #tests }
@@ -383,10 +383,9 @@ MooseQueryTest >> testHasIncomingInvocation [
 
 { #category : #tests }
 MooseQueryTest >> testHasLocalIncoming [
-
-	self assert: (method2 hasLocalIncoming).
-	self deny: (class1 hasLocalIncoming).
-	self deny: (package2 hasLocalIncoming).
+	self assert: method2 hasLocalIncoming.
+	self assert: class1 hasLocalIncoming. "Type declaration"
+	self deny: package2 hasLocalIncoming
 ]
 
 { #category : #tests }
@@ -584,12 +583,6 @@ MooseQueryTest >> testSourceThroughInvocation [
 	self assertCollection: (method2 sourceThrough: FamixTInvocation) hasSameElements: ((method2 queryIncoming: FamixTInvocation) collect: #from).
 	self assertCollection: (class2 sourceThrough: FamixTInvocation) storage flattened hasSameElements: {method2 . method1 . method3}.
 	
-]
-
-{ #category : #tests }
-MooseQueryTest >> testTargetThroughAll [
-	self assertCollection: (method2 throughAllTo) storage flattened hasSameElements: { var1 . method2}.
-	self assertCollection: (class2 throughAllTo) storage flattened hasSameElements: { var1 . method2}
 ]
 
 { #category : #tests }

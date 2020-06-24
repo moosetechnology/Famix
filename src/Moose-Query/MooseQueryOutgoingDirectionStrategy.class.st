@@ -7,22 +7,17 @@ I am a strategy managing the behavior of the Moose Queries depending on directio
 Class {
 	#name : #MooseQueryOutgoingDirectionStrategy,
 	#superclass : #MooseQueryAbstractDirectionStrategy,
-	#category : #'Moose-Query-Strategies'
+	#category : #'Moose-Query-Navigating'
 }
-
-{ #category : #accessing }
-MooseQueryOutgoingDirectionStrategy class >> allAssociationTypesFor: anEntity [
-	^ anEntity allOutgoingAssociationTypes
-]
-
-{ #category : #accessing }
-MooseQueryOutgoingDirectionStrategy class >> associationTypesFor: anEntity [
-	^ anEntity outgoingAssociationTypes
-]
 
 { #category : #accessing }
 MooseQueryOutgoingDirectionStrategy class >> determinatingSymbol [
 	^ #out
+]
+
+{ #category : #converting }
+MooseQueryOutgoingDirectionStrategy class >> ensureAssociation: anObject with: anEntity [
+	^ anObject asAssociationFrom: anEntity
 ]
 
 { #category : #accessing }

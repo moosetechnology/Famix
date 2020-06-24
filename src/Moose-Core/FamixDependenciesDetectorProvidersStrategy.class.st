@@ -17,5 +17,5 @@ FamixDependenciesDetectorProvidersStrategy class >> dependenciesAtReceiverScopeO
 
 { #category : #accessing }
 FamixDependenciesDetectorProvidersStrategy class >> dependenciesOf: aMooseEntity [
-	^ aMooseEntity queryOutgoingDependencies
+	^ aMooseEntity queryAllOutgoing
 ]

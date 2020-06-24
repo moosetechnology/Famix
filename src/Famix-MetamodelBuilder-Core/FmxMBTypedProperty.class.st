@@ -1,3 +1,6 @@
+"
+Represents a property containing a ""primitive"" type: String, Number, Boolean
+"
 Class {
 	#name : #FmxMBTypedProperty,
 	#superclass : #FmxMBProperty,

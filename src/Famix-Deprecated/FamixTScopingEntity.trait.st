@@ -38,7 +38,7 @@ FamixTScopingEntity >> allChildScopesDo: aBlock [
 		each withAllChildScopesDo: aBlock ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #enumerating }
 FamixTScopingEntity >> allParentScopesDo: aBlock [
 	self deprecated: 'This will be removed'.
 	self parentScope ifNotNil: [ :ps | ps withAllParentScopesDo: aBlock ]
@@ -116,7 +116,7 @@ FamixTScopingEntity >> withAllParentScopes [
 	^ result 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #enumerating }
 FamixTScopingEntity >> withAllParentScopesDo: aBlock [
 	self deprecated: 'This will be removed'.
 	aBlock value: self.

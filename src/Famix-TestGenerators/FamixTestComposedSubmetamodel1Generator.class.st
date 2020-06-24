@@ -50,6 +50,5 @@ FamixTestComposedSubmetamodel1Generator >> defineHierarchy [
 	method --|> namedEntity.
 	method --|> #TMethod.
 
-	customEntity5 --|> #TEntityMetaLevelDependency.
-	customEntity5 --|> #TDependencyQueries
+	customEntity5 --|> #TEntityMetaLevelDependency
 ]

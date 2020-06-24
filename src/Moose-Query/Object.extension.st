@@ -1,6 +1,16 @@
 Extension { #name : #Object }
 
 { #category : #'*Moose-Query' }
+Object >> asAssociationFrom: anEntity [
+	^ MooseQueryDependencyAssociation newFrom: anEntity to: self 
+]
+
+{ #category : #'*Moose-Query' }
+Object >> asAssociationTo: anEntity [
+	^ MooseQueryDependencyAssociation newFrom: self to: anEntity 
+]
+
+{ #category : #'*Moose-Query' }
 Object >> entityHasIncomingTypeDeclarations [
 	^ false
 ]

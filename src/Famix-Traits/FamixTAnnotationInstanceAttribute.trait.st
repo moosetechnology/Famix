@@ -15,7 +15,7 @@ Trait {
 		'#parentAnnotationInstance => FMOne type: #FamixTWithAnnotationInstanceAttributes opposite: #attributes',
 		'#value => FMProperty'
 	],
-	#traits : 'TDependencyQueries + TEntityMetaLevelDependency',
+	#traits : 'TEntityMetaLevelDependency',
 	#category : #'Famix-Traits-AnnotationInstanceAttribute'
 }
 

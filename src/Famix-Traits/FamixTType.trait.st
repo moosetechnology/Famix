@@ -62,7 +62,7 @@ FamixTType >> fanIn: aNumber [
 
 { #category : #testing }
 FamixTType >> incomingTypeDeclarations [  
-	^ self typedEntities collect: [ :var | MooseQueryTypeDeclarationAssociation newFrom: var to: self ]
+	^ self typedEntities collect: [ :var | MooseQueryDependencyAssociation newFrom: var to: self ]
 ]
 
 { #category : #testing }
@@ -151,6 +151,7 @@ FamixTType >> typedEntities [
 	<generated>
 	<FMComment: 'Entities that have this type as declaredType'>
 	<derived>
+	<target>
 	^ typedEntities
 ]
 

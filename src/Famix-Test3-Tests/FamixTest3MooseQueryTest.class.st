@@ -76,5 +76,5 @@ FamixTest3MooseQueryTest >> testParentTypes [
 
 { #category : #tests }
 FamixTest3MooseQueryTest >> testQueryIncomingDependencies [
-	self assertCollection: self pt1 queryIncomingDependencies hasSameElements: {self ref1}
+	self assertCollection: self pt1 queryAllIncoming hasSameElements: {self ref1}
 ]
