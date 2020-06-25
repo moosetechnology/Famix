@@ -55,6 +55,6 @@ MQNavigationDirectionStrategy class >> msePropertiesOf: anEntity [
 ]
 
 { #category : #accessing }
-MQNavigationDirectionStrategy class >> queryResultOn: anEntity with: aCollection [
+MQNavigationDirectionStrategy class >> queryResultClass [
 	^ self subclassResponsibility
 ]

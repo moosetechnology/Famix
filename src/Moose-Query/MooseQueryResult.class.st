@@ -26,10 +26,15 @@ MooseQueryResult class >> new: nElements [
 ]
 
 { #category : #'instance creation' }
-MooseQueryResult class >> on: aSourceObject withAll: aCollection [
-
+MooseQueryResult class >> on: anElement [
 	^ self new
-		receiver: aSourceObject;
+		receiver: anElement;
+		yourself
+]
+
+{ #category : #'instance creation' }
+MooseQueryResult class >> on: aSourceObject withAll: aCollection [
+	^ (self on: aSourceObject)
 		addAll: aCollection;
 		yourself
 ]
