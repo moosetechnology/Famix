@@ -22,3 +22,8 @@ MQNavigationResultKindStrategy class >> collectResultFrom: aCollection query: aQ
 
 	^ self subclassResponsibility
 ]
+
+{ #category : #running }
+MQNavigationResultKindStrategy class >> execute: aQuery [
+	^ aQuery executeQuery
+]

@@ -40,7 +40,6 @@ Internal Representation and Key Implementation Points.
 	associationSelectionStrategy:		<anAssociationSelectionStrategy>
 	directionStrategy:		<aDirectionStrategy> 		A strategy responsible of the behavior depending on the direction of the association
 	resultKindStrategy:		<aResultKindStrategy>
-	shouldCheckPresenceOfDependencies:		<aBoolean>
 	shouldCollectChildrenDependencies:		<aBoolean>
 
 "
@@ -51,8 +50,7 @@ Class {
 		'directionStrategy',
 		'resultKindStrategy',
 		'associationSelectionStrategy',
-		'shouldCollectChildrenDependencies',
-		'shouldCheckPresenceOfDependencies'
+		'shouldCollectChildrenDependencies'
 	],
 	#category : #'Moose-Query-Navigating'
 }
@@ -80,11 +78,6 @@ MQNavigationQuery >> associationSelectionStrategy: anObject [
 ]
 
 { #category : #accessing }
-MQNavigationQuery >> checkPresenceOfDependencies [
-	shouldCheckPresenceOfDependencies := true
-]
-
-{ #category : #accessing }
 MQNavigationQuery >> dependencies [
 	associationSelectionStrategy := MQNavigationAllAssociationsStrategy new.
 	^ self execute
@@ -106,16 +99,24 @@ MQNavigationQuery >> directionStrategy: anObject [
 	directionStrategy := anObject
 ]
 
-{ #category : #query }
+{ #category : #execution }
 MQNavigationQuery >> execute [
-	shouldCheckPresenceOfDependencies ifTrue: [ ^ self hasFor: receiver ].
+	^ resultKindStrategy execute: self
+]
 
+{ #category : #execution }
+MQNavigationQuery >> executeHasQuery [
+	^ self hasFor: receiver
+]
+
+{ #category : #execution }
+MQNavigationQuery >> executeQuery [
 	self queryFor: receiver.
 
 	^ directionStrategy queryResultOn: receiver with: result
 ]
 
-{ #category : #query }
+{ #category : #execution }
 MQNavigationQuery >> hasFor: anEntity [
 	"I know that we could use #do: here, but this algo takes too long on big model, so this is a speed up while the sista vm is not ready for production"
 
@@ -133,7 +134,7 @@ MQNavigationQuery >> hasFor: anEntity [
 	^ false
 ]
 
-{ #category : #query }
+{ #category : #execution }
 MQNavigationQuery >> hasLocalFor: anEntity [
 	"The goal here is to get all the entity's direct associations of the class in parameter. This will not check the associations of the entity's children."
 
@@ -156,8 +157,7 @@ MQNavigationQuery >> incoming [
 MQNavigationQuery >> initialize [
 	super initialize.
 	resultKindStrategy := MQNavigationAssociationKindStrategy.
-	shouldCollectChildrenDependencies := true.
-	shouldCheckPresenceOfDependencies := false
+	shouldCollectChildrenDependencies := true
 ]
 
 { #category : #accessing }
@@ -175,7 +175,7 @@ MQNavigationQuery >> outgoing [
 	^ self directionStrategy: MQNavigationOutgoingDirectionStrategy
 ]
 
-{ #category : #query }
+{ #category : #execution }
 MQNavigationQuery >> queryFor: anEntity [
 	"collects in aCollection all entities on the opposite side of associations with self
 	 Opposite side depends on self strategy (incoming/outgoing)
@@ -196,7 +196,7 @@ MQNavigationQuery >> queryFor: anEntity [
 				1 to: (coll := children asCollection) size do: [ :i | self queryFor: (coll at: i) ] ] ]
 ]
 
-{ #category : #query }
+{ #category : #execution }
 MQNavigationQuery >> queryLocalFor: anEntity [
 	"The goal here is to get all the entity's direct associations of the class in parameter. This will not check the associations of the entity's children."
 
@@ -223,16 +223,6 @@ MQNavigationQuery >> resultKindStrategy [
 { #category : #accessing }
 MQNavigationQuery >> resultKindStrategy: anObject [
 	resultKindStrategy := anObject
-]
-
-{ #category : #accessing }
-MQNavigationQuery >> shouldCheckPresenceOfDependencies [
-	^ shouldCheckPresenceOfDependencies
-]
-
-{ #category : #accessing }
-MQNavigationQuery >> shouldCheckPresenceOfDependencies: anObject [
-	shouldCheckPresenceOfDependencies := anObject
 ]
 
 { #category : #accessing }

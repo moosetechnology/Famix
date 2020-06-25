@@ -515,7 +515,7 @@ TEntityMetaLevelDependency >> has: anInOutSymbol [
 
 	^ (MQNavigationQuery direction: anInOutSymbol)
 		associationSelectionStrategy: MQNavigationAllAssociationsStrategy new;
-		checkPresenceOfDependencies;
+		resultKindStrategy: MQNavigationHasDependencyBooleanKindStrategy;
 		receiver: self;
 		execute
 ]
@@ -533,7 +533,7 @@ TEntityMetaLevelDependency >> has: anInOutSymbol with: aFAMIXClassAssociation [
 
 	^ (MQNavigationQuery direction: anInOutSymbol)
 		associationSelectionStrategy: (MQNavigationSpecificAssociationStrategy association: aFAMIXClassAssociation);
-		checkPresenceOfDependencies;
+		resultKindStrategy: MQNavigationHasDependencyBooleanKindStrategy;
 		receiver: self;
 		execute
 ]
@@ -595,8 +595,8 @@ TEntityMetaLevelDependency >> hasLocal: anInOutSymbol [
 
 	^ (MQNavigationQuery direction: anInOutSymbol)
 		associationSelectionStrategy: MQNavigationAllAssociationsStrategy new;
+		resultKindStrategy: MQNavigationHasDependencyBooleanKindStrategy;
 		local;
-		checkPresenceOfDependencies;
 		receiver: self;
 		execute
 ]

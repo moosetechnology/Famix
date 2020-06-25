@@ -56,7 +56,7 @@ MooseQuery >> descendants [
 MooseQuery >> has [
 	^ MQNavigationQuery new
 		receiver: receiver;
-		checkPresenceOfDependencies;
+		resultKindStrategy: MQNavigationHasDependencyBooleanKindStrategy;
 		yourself
 ]
 
