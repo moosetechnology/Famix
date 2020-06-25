@@ -16,23 +16,9 @@ I can be configured with multiple parameters:
 
 Examples
 -------------------
-	
-	method := model allModelMethods anyOne.
 
-	method query incoming dependencies.
-	
-	method query has local incoming dependencies.
-	
-	method
-	
-	method
-	
-	method
-	
-	method
-	
-	method
- 
+For examples check the class comment of MooseQuery.
+
 Internal Representation and Key Implementation Points.
 -------------------
 

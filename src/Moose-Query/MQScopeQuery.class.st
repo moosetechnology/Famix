@@ -13,18 +13,7 @@ A scoping query is executed with a receiver and have multiple parameters:
 Examples
 --------------------
 
-method := model allModelMethods anyOne.
-
-method query ancestors for: FamixTNamespace.
-method query ancestors recursively for: FamixTNamespace.
-method query ancestors recursively forAny: {FamixTNamespace . FamixTClass}.
-(method query ancestors recursively until: #isClass) forAny: {FamixTNamespace . FamixTClass}.
-
-method query descendants recursively for: FamixTNamespace.
-(method query descendants recursively until: #isClass) forAny: {FamixTNamespace . FamixTClass}.
-
-method query lineage recursively for: FamixTNamespace.
-(method query lineage recursively until: #isClass) forAny: {FamixTNamespace . FamixTClass}.
+For examples check the class comment of MooseQuery.
  
 Internal Representation and Key Implementation Points.
 --------------------
