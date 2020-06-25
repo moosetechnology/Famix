@@ -686,10 +686,11 @@ TEntityMetaLevelDependency >> isIncludedIn: anEntity parentSelectorsCache: paren
 	
 	[ (model allUsing: TEntityMetaLevelDependency) collect: [ :e | e  queryIncomingDependencies withoutSelfLoops ] ] timeToRun."
 
+	| selectors |
 	self = anEntity ifTrue: [ ^ true ].
 
-	(parentSelectorsCache at: self class ifAbsentPut: [ self parentSelectors ])
-		do: [ :accessor | (self perform: accessor) ifNotNil: [ :parent | (parent isIncludedIn: anEntity parentSelectorsCache: parentSelectorsCache) ifTrue: [ ^ true ] ] ].
+	"Instead of #to:do: we could just use #do: but this implementation is much faster. Maybe sista will remove the needs of the todo later."
+	1 to: (selectors := parentSelectorsCache at: self class ifAbsentPut: [ self parentSelectors ]) size do: [ :ind | ((self perform: (selectors at: ind)) isIncludedIn: anEntity parentSelectorsCache: parentSelectorsCache) ifTrue: [ ^ true ] ].
 
 	^ false
 ]
