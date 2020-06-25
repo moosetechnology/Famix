@@ -13,7 +13,7 @@ Instance Variables:
 	to	   -- the Entity on the dependencyTarget side of the relation
 "
 Class {
-	#name : #MooseQueryDependencyAssociation,
+	#name : #MQNavigationDependencyAssociation,
 	#superclass : #Object,
 	#instVars : [
 		'from',
@@ -23,7 +23,7 @@ Class {
 }
 
 { #category : #'instance creation' }
-MooseQueryDependencyAssociation class >> newFrom: varOrBehavior to: aType [
+MQNavigationDependencyAssociation class >> newFrom: varOrBehavior to: aType [
 	"some syntactic sugar"
 
 	^ self new
@@ -33,23 +33,28 @@ MooseQueryDependencyAssociation class >> newFrom: varOrBehavior to: aType [
 ]
 
 { #category : #converting }
-MooseQueryDependencyAssociation >> asString [
+MQNavigationDependencyAssociation >> asString [
 
 	^ self from asString , ' -> ' , self to asString
 ]
 
 { #category : #accessing }
-MooseQueryDependencyAssociation >> from [
+MQNavigationDependencyAssociation >> from [
 	^ from
 ]
 
 { #category : #accessing }
-MooseQueryDependencyAssociation >> from: anObject [
+MQNavigationDependencyAssociation >> from: anObject [
 	from := anObject
 ]
 
+{ #category : #testing }
+MQNavigationDependencyAssociation >> isOfType: aClass [
+	^ self class isOfType: aClass
+]
+
 { #category : #converting }
-MooseQueryDependencyAssociation >> printOn: aStream [
+MQNavigationDependencyAssociation >> printOn: aStream [
 
 	aStream nextPutAll: self from asString.
 	aStream nextPutAll: ' -> '.
@@ -57,31 +62,31 @@ MooseQueryDependencyAssociation >> printOn: aStream [
 ]
 
 { #category : #accessing }
-MooseQueryDependencyAssociation >> source [
+MQNavigationDependencyAssociation >> source [
 	^ self from
 ]
 
 { #category : #accessing }
-MooseQueryDependencyAssociation >> source: anObject [
+MQNavigationDependencyAssociation >> source: anObject [
 	self from: anObject
 ]
 
 { #category : #accessing }
-MooseQueryDependencyAssociation >> target [
+MQNavigationDependencyAssociation >> target [
 	^ self to
 ]
 
 { #category : #accessing }
-MooseQueryDependencyAssociation >> target: anObject [
+MQNavigationDependencyAssociation >> target: anObject [
 	self to: anObject
 ]
 
 { #category : #accessing }
-MooseQueryDependencyAssociation >> to [
+MQNavigationDependencyAssociation >> to [
 	^ to
 ]
 
 { #category : #accessing }
-MooseQueryDependencyAssociation >> to: anObject [
+MQNavigationDependencyAssociation >> to: anObject [
 	to := anObject
 ]

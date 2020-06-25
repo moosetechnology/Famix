@@ -14,20 +14,20 @@ Example
 	MooseQueryAbstractDirectionStrategy fromSymbol: #in
 "
 Class {
-	#name : #MooseQueryAbstractDirectionStrategy,
+	#name : #MQNavigationDirectionStrategy,
 	#superclass : #Object,
 	#category : #'Moose-Query-Navigating'
 }
 
 { #category : #accessing }
-MooseQueryAbstractDirectionStrategy class >> determinatingSymbol [
+MQNavigationDirectionStrategy class >> determinatingSymbol [
 	"I should return a Symbol representing a direction. For example an Incoming direction will have #in as determinating symbol."
 
 	^ self subclassResponsibility
 ]
 
 { #category : #accessing }
-MooseQueryAbstractDirectionStrategy class >> ensureAssociation: anObject with: anEntity [
+MQNavigationDirectionStrategy class >> ensureAssociation: anObject with: anEntity [
 	"Ensure the object as parameter is an association to or from the entity in parameter depending on the direction.
 	
 	I am used to manage non-reified dependencies."
@@ -35,26 +35,26 @@ MooseQueryAbstractDirectionStrategy class >> ensureAssociation: anObject with: a
 	^ self subclassResponsibility
 ]
 
+{ #category : #accessing }
+MQNavigationDirectionStrategy class >> entityFor: anAssociation [
+	"I should return a a side of the association depending on the direction. For example an Incoming direction will return the source of the associations."
+
+	^ self subclassResponsibility
+]
+
 { #category : #'instance creation' }
-MooseQueryAbstractDirectionStrategy class >> fromSymbol: aSymbol [
+MQNavigationDirectionStrategy class >> fromSymbol: aSymbol [
 	"I return the right strategy from a Symbol representing a direction"
 
 	^ self allSubclasses detect: [ :each | each determinatingSymbol = aSymbol ] ifNone: [ self error: 'The symbol passed to the query should be either #in or #out. Here we got ' , aSymbol asString ]
 ]
 
 { #category : #accessing }
-MooseQueryAbstractDirectionStrategy class >> msePropertiesOf: anEntity [
+MQNavigationDirectionStrategy class >> msePropertiesOf: anEntity [
 	^ self subclassResponsibility
 ]
 
 { #category : #accessing }
-MooseQueryAbstractDirectionStrategy class >> queryResultOn: anEntity with: aCollection [
-	^ self subclassResponsibility
-]
-
-{ #category : #accessing }
-MooseQueryAbstractDirectionStrategy class >> symbolToCollectEntities [
-	"I should return a Symbol to collect entities. For example an Incoming direction will have #source as symbol to collect entities."
-
+MQNavigationDirectionStrategy class >> queryResultOn: anEntity with: aCollection [
 	^ self subclassResponsibility
 ]

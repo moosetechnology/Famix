@@ -7,24 +7,13 @@ I am an object representing a scoping query.
 A scoping query is executed with a receiver and have multiple parameters:
 - The direction of the scope (up/down/both in the containment DAG)
 - Is it recursive or does it stop at one result?
-- The kind of the scope to stop to (a class or trait or collection of those?)
+- The kind of the scope to stop to (a class or trait or collection of those, any type?)
 - A condition to stop looking for results?
 
 Examples
 --------------------
 
-method := model allModelMethods anyOne.
-
-method query ancestors for: FamixTNamespace.
-method query ancestors recursively for: FamixTNamespace.
-method query ancestors recursively forAny: {FamixTNamespace . FamixTClass}.
-(method query ancestors recursively until: #isClass) forAny: {FamixTNamespace . FamixTClass}.
-
-method query descendants recursively for: FamixTNamespace.
-(method query descendants recursively until: #isClass) forAny: {FamixTNamespace . FamixTClass}.
-
-method query lineage recursively for: FamixTNamespace.
-(method query lineage recursively until: #isClass) forAny: {FamixTNamespace . FamixTClass}.
+For examples check the class comment of MooseQuery.
  
 Internal Representation and Key Implementation Points.
 --------------------
@@ -39,159 +28,142 @@ Internal Representation and Key Implementation Points.
 
 "
 Class {
-	#name : #MooseQueryScopeQuery,
-	#superclass : #Object,
+	#name : #MQScopeQuery,
+	#superclass : #MQAbstractQuery,
 	#instVars : [
-		'receiver',
 		'until',
 		'isRecursive',
 		'direction',
-		'result',
 		'typeStrategy'
 	],
 	#category : #'Moose-Query-Scoping'
 }
 
 { #category : #'instance creation' }
-MooseQueryScopeQuery class >> recursivelyScope: aFamixType direction: aClass [
+MQScopeQuery class >> recursivelyScope: aFamixType direction: aClass [
 	^ (self scope: aFamixType direction: aClass)
 		beRecursive;
 		yourself
 ]
 
 { #category : #'instance creation' }
-MooseQueryScopeQuery class >> recursivelyScope: aFamixType direction: aClass until: aValuable [
+MQScopeQuery class >> recursivelyScope: aFamixType direction: aClass until: aValuable [
 	^ (self recursivelyScope: aFamixType direction: aClass)
 		until: aValuable;
 		yourself
 ]
 
 { #category : #'instance creation' }
-MooseQueryScopeQuery class >> recursivelyScopes: aCollectionOfType direction: aClass [
+MQScopeQuery class >> recursivelyScopes: aCollectionOfType direction: aClass [
 	^ (self scopes: aCollectionOfType direction: aClass)
 		beRecursive;
 		yourself
 ]
 
 { #category : #'instance creation' }
-MooseQueryScopeQuery class >> recursivelyScopes: aCollectionOfType direction: aClass until: aValuable [
+MQScopeQuery class >> recursivelyScopes: aCollectionOfType direction: aClass until: aValuable [
 	^ (self scopes: aCollectionOfType direction: aClass until: aValuable)
 		beRecursive;
 		yourself
 ]
 
 { #category : #'instance creation' }
-MooseQueryScopeQuery class >> scope: aFamixType direction: aClass [
+MQScopeQuery class >> scope: aFamixType direction: aClass [
 	^ self new
-		typeStrategy: (MooseQueryScopeTypeStrategy scope: aFamixType);
+		typeStrategy: (MQScopeTypeStrategy scope: aFamixType);
 		direction: aClass;
 		yourself
 ]
 
 { #category : #'instance creation' }
-MooseQueryScopeQuery class >> scope: aFamixType direction: aClass until: aValuable [
+MQScopeQuery class >> scope: aFamixType direction: aClass until: aValuable [
 	^ (self scope: aFamixType direction: aClass)
 		until: aValuable;
 		yourself
 ]
 
 { #category : #'instance creation' }
-MooseQueryScopeQuery class >> scopes: aCollectionOfType direction: aClass [
+MQScopeQuery class >> scopes: aCollectionOfType direction: aClass [
 	^ self new
-		typeStrategy: (MooseQueryScopeTypesStrategy scopes: aCollectionOfType);
+		typeStrategy: (MQScopeTypesStrategy scopes: aCollectionOfType);
 		direction: aClass;
 		yourself
 ]
 
 { #category : #'instance creation' }
-MooseQueryScopeQuery class >> scopes: aCollectionOfType direction: aClass until: aValuable [
+MQScopeQuery class >> scopes: aCollectionOfType direction: aClass until: aValuable [
 	^ (self scopes: aCollectionOfType direction: aClass)
 		until: aValuable;
 		yourself
 ]
 
 { #category : #adding }
-MooseQueryScopeQuery >> add: anEntity [
+MQScopeQuery >> add: anEntity [
 	self result add: anEntity
 ]
 
 { #category : #accessing }
-MooseQueryScopeQuery >> beRecursive [
+MQScopeQuery >> beRecursive [
 	isRecursive := true
 ]
 
 { #category : #accessing }
-MooseQueryScopeQuery >> direction [
+MQScopeQuery >> direction [
 	^ direction
 ]
 
 { #category : #accessing }
-MooseQueryScopeQuery >> direction: anObject [
+MQScopeQuery >> direction: anObject [
 	direction := anObject
 ]
 
 { #category : #execution }
-MooseQueryScopeQuery >> execute [
+MQScopeQuery >> execute [
 	^ direction scopeFor: receiver query: self
 ]
 
-{ #category : #accessing }
-MooseQueryScopeQuery >> for: aFamixType [
-	typeStrategy := MooseQueryScopeTypeStrategy scope: aFamixType.
-	^ self execute
-]
-
-{ #category : #accessing }
-MooseQueryScopeQuery >> forAny: aCollection [
-	typeStrategy := MooseQueryScopeTypesStrategy scopes: aCollection.
-	^ self execute
-]
-
 { #category : #initialization }
-MooseQueryScopeQuery >> initialize [
+MQScopeQuery >> initialize [
 	super initialize.
 	isRecursive := false.
-	result := Set new.
 	until := [ :each | false ]
 ]
 
 { #category : #accessing }
-MooseQueryScopeQuery >> isRecursive [
+MQScopeQuery >> isRecursive [
 	^ isRecursive
 ]
 
 { #category : #accessing }
-MooseQueryScopeQuery >> isRecursive: anObject [
+MQScopeQuery >> isRecursive: anObject [
 	isRecursive := anObject
 ]
 
-{ #category : #accessing }
-MooseQueryScopeQuery >> receiver [
-	^ receiver
+{ #category : #DSL }
+MQScopeQuery >> ofAnyType [
+	typeStrategy := MQScopeAllTypesStrategy new.
+	^ self execute
 ]
 
-{ #category : #accessing }
-MooseQueryScopeQuery >> receiver: anObject [
-	receiver := anObject
+{ #category : #DSL }
+MQScopeQuery >> ofAnyType: aCollection [
+	typeStrategy := MQScopeTypesStrategy scopes: aCollection.
+	^ self execute
 ]
 
-{ #category : #accessing }
-MooseQueryScopeQuery >> recursively [
+{ #category : #DSL }
+MQScopeQuery >> ofType: aFamixType [
+	typeStrategy := MQScopeTypeStrategy scope: aFamixType.
+	^ self execute
+]
+
+{ #category : #DSL }
+MQScopeQuery >> recursively [
 	isRecursive := true
 ]
 
-{ #category : #accessing }
-MooseQueryScopeQuery >> result [
-	^ result
-]
-
-{ #category : #accessing }
-MooseQueryScopeQuery >> result: anObject [
-	result := anObject
-]
-
 { #category : #execution }
-MooseQueryScopeQuery >> scopeFor: anEntity direction: aDirection [
+MQScopeQuery >> scopeFor: anEntity direction: aDirection [
 	| selectors |
 	(self typeStrategy isOfRightType: anEntity)
 		ifTrue: [ self add: anEntity.
@@ -204,26 +176,26 @@ MooseQueryScopeQuery >> scopeFor: anEntity direction: aDirection [
 ]
 
 { #category : #testing }
-MooseQueryScopeQuery >> shouldStopOn: anEntity [
+MQScopeQuery >> shouldStopOn: anEntity [
 	^ self until value: anEntity
 ]
 
 { #category : #accessing }
-MooseQueryScopeQuery >> typeStrategy [
+MQScopeQuery >> typeStrategy [
 	^ typeStrategy
 ]
 
 { #category : #accessing }
-MooseQueryScopeQuery >> typeStrategy: anObject [
+MQScopeQuery >> typeStrategy: anObject [
 	typeStrategy := anObject
 ]
 
 { #category : #accessing }
-MooseQueryScopeQuery >> until [
+MQScopeQuery >> until [
 	^ until
 ]
 
-{ #category : #accessing }
-MooseQueryScopeQuery >> until: anObject [
+{ #category : #DSL }
+MQScopeQuery >> until: anObject [
 	until := anObject
 ]

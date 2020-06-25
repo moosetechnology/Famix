@@ -572,8 +572,8 @@ MooseQueryTest >> testQueryWith [
 
 { #category : #tests }
 MooseQueryTest >> testSourceThroughAll [
-	self assertCollection: (method2 throughAllFrom) storage flattened hasSameElements: {method2 . method1 . method3}.
-	self assertCollection: (class2 throughAllFrom) storage flattened hasSameElements:  {method2 . method1 . method3 . class1}
+	self assertCollection: method2 throughAllFrom storage flattened hasSameElements: {method2 . method1 . method3}.
+	self assertCollection: class2 throughAllFrom storage flattened hasSameElements: {method2 . method1 . method3 . class1}
 ]
 
 { #category : #tests }

@@ -283,7 +283,7 @@ TEntityMetaLevelDependency >> addAllParentsIn: aCollection [
 TEntityMetaLevelDependency >> allAtAnyScope: aCollectionOfFamixClasses [
 	"I am used to return all the encountered entities (recursively) at matching one of the class scope given as parameter that are up in the containment tree of the metamodel"
 
-	^ self query ancestors recursively forAny: aCollectionOfFamixClasses
+	^ self query ancestors recursively ofAnyType: aCollectionOfFamixClasses
 ]
 
 { #category : #scoping }
@@ -291,14 +291,14 @@ TEntityMetaLevelDependency >> allAtAnyScope: aCollectionOfFamixClasses until: re
 	"I am used to return all the encountered entities (recursively) at matching one of the class scope given as parameter that are up in the containment tree of the metamodel.
 	I stop the recursion when the rejectBlock is true"
 
-	^ (self query ancestors recursively until: rejectBlock) forAny: aCollectionOfFamixClasses
+	^ (self query ancestors recursively until: rejectBlock) ofAnyType: aCollectionOfFamixClasses
 ]
 
 { #category : #scoping }
 TEntityMetaLevelDependency >> allAtScope: aClassFAMIX [
 	"I am used to return all the entities at a given famix class scope that are up in the containment tree of the metamodel on multiple levels."
 
-	^ self query ancestors recursively for: aClassFAMIX
+	^ self query ancestors recursively ofType: aClassFAMIX
 ]
 
 { #category : #scoping }
@@ -306,7 +306,7 @@ TEntityMetaLevelDependency >> allAtScope: aClassFAMIX until: rejectBlock [
 	"I am used to return all the entities at a given famix class scope that are up in the containment tree of the metamodel on multiple levels.
 	I stop the recursion when the rejectBlock is true."
 
-	^ (self query ancestors recursively until: rejectBlock) for: aClassFAMIX
+	^ (self query ancestors recursively until: rejectBlock) ofType: aClassFAMIX
 ]
 
 { #category : #accessing }
@@ -372,7 +372,7 @@ TEntityMetaLevelDependency >> allProvidersAtScope: aClass [
 TEntityMetaLevelDependency >> allToAnyScope: aCollectionOfFamixClasses [
 	"I am used to return all the encountered entities (recursively) at matching one of the class scope given as parameter that are down in the containment tree of the metamodel"
 
-	^ self query descendants recursively forAny: aCollectionOfFamixClasses
+	^ self query descendants recursively ofAnyType: aCollectionOfFamixClasses
 ]
 
 { #category : #scoping }
@@ -380,14 +380,14 @@ TEntityMetaLevelDependency >> allToAnyScope: aCollectionOfFamixClasses until: re
 	"I am used to return all the encountered entities (recursively) at matching one of the class scope given as parameter that are down in the containment tree of the metamodel
 	I stop the recursion when the rejectBlock is true"
 
-	^ (self query descendants recursively until: rejectBlock) forAny: aCollectionOfFamixClasses
+	^ (self query descendants recursively until: rejectBlock) ofAnyType: aCollectionOfFamixClasses
 ]
 
 { #category : #scoping }
 TEntityMetaLevelDependency >> allToScope: aClassFAMIX [
 	"I am used to return all the entities at a given famix class scope that are down in the containment tree of the metamodel on multiple levels."
 
-	^ self query descendants recursively for: aClassFAMIX
+	^ self query descendants recursively ofType: aClassFAMIX
 ]
 
 { #category : #scoping }
@@ -395,14 +395,14 @@ TEntityMetaLevelDependency >> allToScope: aClassFAMIX until: rejectBlock [
 	"I am used to return all the entities at a given famix class scope that are down in the containment tree of the metamodel on multiple levels.
 	I stop the recursion when the rejectBlock is true"
 
-	^ (self query descendants recursively until: rejectBlock) for: aClassFAMIX
+	^ (self query descendants recursively until: rejectBlock) ofType: aClassFAMIX
 ]
 
 { #category : #scoping }
 TEntityMetaLevelDependency >> allWithAnyScope: aCollectionOfFamixClasses [
 	"I am used to return all the entities (recursively) matching one of the class scope that are up or down in the containment tree of the metamodel"
 
-	^ self query lineage recursively forAny: aCollectionOfFamixClasses
+	^ self query lineage recursively ofAnyType: aCollectionOfFamixClasses
 ]
 
 { #category : #scoping }
@@ -410,14 +410,14 @@ TEntityMetaLevelDependency >> allWithAnyScope: aCollectionOfFamixClasses until: 
 	"I am used to return all the entities (recursively) matching one of the class scope that are up or down in the containment tree of the metamodel.
 	I stop the recursion when the rejectBlock is true"
 
-	^ (self query lineage recursively until: rejectBlock) forAny: aCollectionOfFamixClasses
+	^ (self query lineage recursively until: rejectBlock) ofAnyType: aCollectionOfFamixClasses
 ]
 
 { #category : #scoping }
 TEntityMetaLevelDependency >> allWithScope: aClassFAMIX [
 	"I am used to return all the entities at a given famix class scope that are up or down in the containment tree of the metamodel on multiple levels."
 
-	^ self query lineage recursively for: aClassFAMIX
+	^ self query lineage recursively ofType: aClassFAMIX
 ]
 
 { #category : #scoping }
@@ -425,14 +425,14 @@ TEntityMetaLevelDependency >> allWithScope: aClassFAMIX until: rejectBlock [
 	"I am used to return all the entities at a given famix class scope that are up or down in the containment tree of the metamodel on multiple levels.
 	I stop the recursion when the rejectBlock is true"
 
-	^ (self query lineage recursively until: rejectBlock) for: aClassFAMIX
+	^ (self query lineage recursively until: rejectBlock) ofType: aClassFAMIX
 ]
 
 { #category : #scoping }
 TEntityMetaLevelDependency >> atAnyScope: aCollectionOfFamixClasses [
 	"I am used to return all the first encountered entities matching one of the class scope given as parameter that are up in the containment tree of the metamodel"
 
-	^ self query ancestors forAny: aCollectionOfFamixClasses
+	^ self query ancestors ofAnyType: aCollectionOfFamixClasses
 ]
 
 { #category : #scoping }
@@ -440,14 +440,14 @@ TEntityMetaLevelDependency >> atAnyScope: aCollectionOfFamixClasses until: rejec
 	"I am used to return all the first encountered entities matching one of the class scope given as parameter that are up in the containment tree of the metamodel.
 	I stop the recursion when the rejectBlock is true"
 
-	^ (self query ancestors until: rejectBlock) forAny: aCollectionOfFamixClasses
+	^ (self query ancestors until: rejectBlock) ofAnyType: aCollectionOfFamixClasses
 ]
 
 { #category : #scoping }
 TEntityMetaLevelDependency >> atScope: aClassFAMIX [
 	"I am used to return all the first encountered entities at a given famix class scope that are up in the containment tree of the metamodel"
 
-	^ self query ancestors for: aClassFAMIX
+	^ self query ancestors ofType: aClassFAMIX
 ]
 
 { #category : #scoping }
@@ -455,7 +455,7 @@ TEntityMetaLevelDependency >> atScope: aClassFAMIX until: rejectBlock [
 	"I am used to return all the first encountered entities at a given famix class scope that are up in the containment tree of the metamodel.
 	I stop the recursion when the rejectBlock is true"
 
-	^ (self query ancestors until: rejectBlock) for: aClassFAMIX
+	^ (self query ancestors until: rejectBlock) ofType: aClassFAMIX
 ]
 
 { #category : #deprecated }
@@ -513,7 +513,7 @@ TEntityMetaLevelDependency >> has: anInOutSymbol [
 			--> Will return true if aFAMIXMethod has the outgoing FAMIXAssociation
 	"
 
-	^ (MooseQueryNavigationQuery direction: anInOutSymbol) hasFor: self
+	^ (self query navigation: anInOutSymbol) has dependencies
 ]
 
 { #category : #testing }
@@ -527,7 +527,7 @@ TEntityMetaLevelDependency >> has: anInOutSymbol with: aFAMIXClassAssociation [
 			--> Will return a MooseOutgoingQueryResult containing the FAMIXAccess associations having aFAMIXMethod or its children as source
 	"
 
-	^ (MooseQueryNavigationQuery direction: anInOutSymbol) has: aFAMIXClassAssociation for: self
+	^ (self query navigation: anInOutSymbol) has dependenciesOfType: aFAMIXClassAssociation
 ]
 
 { #category : #testing }
@@ -538,8 +538,8 @@ TEntityMetaLevelDependency >> hasIncoming [
 		aFAMIXClass hasIncoming.
 			--> --> Will return true if the receiver or its children have incoming associations
 	"
-	
-	^ (MooseQueryNavigationQuery strategy: MooseQueryIncomingDirectionStrategy) hasFor: self
+
+	^ self query has incoming dependencies
 ]
 
 { #category : #testing }
@@ -551,7 +551,7 @@ TEntityMetaLevelDependency >> hasIncoming: aFAMIXClassAssociation [
 			--> Will return true if aFAMIXClassAssociation has incoming associations of the FAMIXClassAssociation class for the receiver or its children.
 	"
 
-	^ (MooseQueryNavigationQuery strategy: MooseQueryIncomingDirectionStrategy) has: aFAMIXClassAssociation for: self
+	^ self query has incoming dependenciesOfType: aFAMIXClassAssociation
 ]
 
 { #category : #testing }
@@ -584,8 +584,8 @@ TEntityMetaLevelDependency >> hasLocal: anInOutSymbol [
 		aFAMIXMethod hasLocal: #out.
 			--> Will return true if aFAMIXMethod has the outgoing FAMIXAssociation
 	"
- 
-	^ (MooseQueryNavigationQuery direction: anInOutSymbol) hasLocalFor: self
+
+	^ (self query navigation: anInOutSymbol) has local dependencies
 ]
 
 { #category : #testing }
@@ -596,8 +596,8 @@ TEntityMetaLevelDependency >> hasLocalIncoming [
 		aFAMIXClass hasLocalIncoming
 			--> Will return true if aFAMIXMethod has the incoming FAMIXAssociation 
 			"
- 
-	^ (MooseQueryNavigationQuery strategy: MooseQueryIncomingDirectionStrategy) hasLocalFor: self
+
+	^ self query has local incoming dependencies
 ]
 
 { #category : #testing }
@@ -609,7 +609,7 @@ TEntityMetaLevelDependency >> hasLocalIncoming: aFAMIXClassAssociation [
 			--> Will return true if aFAMIXClassAssociation has incoming associations of the FAMIXClassAssociation class for the receiver.
 	"
 
-	^ (MooseQueryNavigationQuery strategy: MooseQueryIncomingDirectionStrategy) hasLocal: aFAMIXClassAssociation for: self
+	^ self query has local incoming dependenciesOfType: aFAMIXClassAssociation
 ]
 
 { #category : #testing }
@@ -621,7 +621,7 @@ TEntityMetaLevelDependency >> hasLocalOutgoing [
 			--> Will return true if the receiver has outgoingInvocation.
 	"
 
-	^ (MooseQueryNavigationQuery strategy: MooseQueryOutgoingDirectionStrategy) hasLocalFor: self
+	^ self query has local outgoing dependencies
 ]
 
 { #category : #testing }
@@ -633,7 +633,7 @@ TEntityMetaLevelDependency >> hasLocalOutgoing: aFAMIXClassAssociation [
 			--> Will return true if aFAMIXClassAssociation has incoming associations of the FAMIXClassAssociation class for the receiver.
 	"
 
-	^ (MooseQueryNavigationQuery strategy: MooseQueryOutgoingDirectionStrategy) hasLocal: aFAMIXClassAssociation for: self
+	^ self query has local outgoing dependenciesOfType: aFAMIXClassAssociation
 ]
 
 { #category : #testing }
@@ -644,8 +644,8 @@ TEntityMetaLevelDependency >> hasOutgoing [
 		aFAMIXClass hasOutgoing.
 			--> --> Will return true if the receiver or its children have outgoing associations
 	"
-	
-	^ (MooseQueryNavigationQuery strategy: MooseQueryOutgoingDirectionStrategy) hasFor: self
+
+	^ self query has outgoing dependencies
 ]
 
 { #category : #testing }
@@ -657,7 +657,7 @@ TEntityMetaLevelDependency >> hasOutgoing: aFAMIXClassAssociation [
 			--> Will return true if aFAMIXClassAssociation has outgoing associations of the FAMIXClassAssociation class for the receiver or its children.
 	"
 
-	^ (MooseQueryNavigationQuery strategy: MooseQueryOutgoingDirectionStrategy) has: aFAMIXClassAssociation for: self
+	^ self query has outgoing dependenciesOfType: aFAMIXClassAssociation
 ]
 
 { #category : #testing }
@@ -762,7 +762,7 @@ TEntityMetaLevelDependency >> query: anInOutSymbol with: aFAMIXClassAssociation 
 			--> Will return a MooseOutgoingQueryResult containing the FAMIXAccess associations having aFAMIXMethod or its children as source
 	"
 
-	^ (MooseQueryNavigationQuery direction: anInOutSymbol) query: aFAMIXClassAssociation for: self
+	^ (self query navigation: anInOutSymbol) dependenciesOfType: aFAMIXClassAssociation
 ]
 
 { #category : #'query dependencies' }
@@ -776,7 +776,7 @@ TEntityMetaLevelDependency >> queryAll: anInOutSymbol [
 			--> Will return a MooseOutgoingQueryResult containing the FAMIXAssociation having aFAMIXMethod or its children as source
 	"
 
-	^ (MooseQueryNavigationQuery direction: anInOutSymbol) queryAllFor: self
+	^ (self query navigation: anInOutSymbol) dependencies
 ]
 
 { #category : #'query dependencies' }
@@ -788,7 +788,7 @@ TEntityMetaLevelDependency >> queryAllIncoming [
 			--> Will return a MooseIncomingQueryResult containing the FAMIXAssociation having aFAMIXClass or its children as target
 	"
 
-	^ (MooseQueryNavigationQuery strategy: MooseQueryIncomingDirectionStrategy) queryAllFor: self
+	^ self query incoming dependencies
 ]
 
 { #category : #'query dependencies' }
@@ -803,7 +803,7 @@ TEntityMetaLevelDependency >> queryAllLocal: anInOutSymbol [
 			--> Will return a MooseOutgoingQueryResult containing the FAMIXAssociation having aFAMIXMethod as source
 	"
 
-	^ (MooseQueryNavigationQuery direction: anInOutSymbol) queryAllLocalFor: self
+	^ (self query navigation: anInOutSymbol) local dependencies
 ]
 
 { #category : #'query dependencies' }
@@ -816,7 +816,7 @@ TEntityMetaLevelDependency >> queryAllLocalIncoming [
 			--> Will return a MooseIncomingQueryResult containing the FAMIXAssociation having aFAMIXClass as target
 	"
 
-	^ (MooseQueryNavigationQuery strategy: MooseQueryIncomingDirectionStrategy) queryAllLocalFor: self
+	^ self query incoming local dependencies
 ]
 
 { #category : #'query dependencies' }
@@ -829,7 +829,7 @@ TEntityMetaLevelDependency >> queryAllLocalOutgoing [
 			--> Will return a MooseOutgoingQueryResult containing the FAMIXAssociation having aFAMIXClass as source
 	"
 
-	^ (MooseQueryNavigationQuery strategy: MooseQueryOutgoingDirectionStrategy) queryAllLocalFor: self
+	^ self query outgoing local dependencies
 ]
 
 { #category : #'query dependencies' }
@@ -841,7 +841,7 @@ TEntityMetaLevelDependency >> queryAllOutgoing [
 			--> Will return a MooseOutgoingQueryResult containing the FAMIXAssociation having aFAMIXClass or its children as source
 	"
 
-	^ (MooseQueryNavigationQuery strategy: MooseQueryOutgoingDirectionStrategy) queryAllFor: self
+	^ self query outgoing dependencies
 ]
 
 { #category : #'query dependencies' }
@@ -853,7 +853,7 @@ TEntityMetaLevelDependency >> queryIncoming: aFAMIXClassAssociation [
 			--> Will return a MooseIncomingQueryResult containing the FAMIXInheritance associations having aFAMIXClass or its children as target
 	"
 
-	^ (MooseQueryNavigationQuery strategy: MooseQueryIncomingDirectionStrategy) query: aFAMIXClassAssociation for: self
+	^ self query incoming dependenciesOfType: aFAMIXClassAssociation
 ]
 
 { #category : #'query dependencies' }
@@ -891,7 +891,7 @@ TEntityMetaLevelDependency >> queryLocal: anInOutSymbol with: aFAMIXClassAssocia
 			--> Will return a MooseOutgoingQueryResult containing the FAMIXAccess associations having aFAMIXMethod as source
 	"
 
-	^ (MooseQueryNavigationQuery direction: anInOutSymbol) queryLocal: aFAMIXClassAssociation for: self
+	^ (self query navigation: anInOutSymbol) local dependenciesOfType: aFAMIXClassAssociation
 ]
 
 { #category : #'query dependencies' }
@@ -904,7 +904,7 @@ TEntityMetaLevelDependency >> queryLocalIncoming: aFAMIXClassAssociation [
 			--> Will return a MooseIncomingQueryResult containing the FAMIXInheritance associations having aFAMIXClass as target
 	"
 
-	^ (MooseQueryNavigationQuery strategy: MooseQueryIncomingDirectionStrategy) queryLocal: aFAMIXClassAssociation for: self
+	^ self query incoming local dependenciesOfType: aFAMIXClassAssociation
 ]
 
 { #category : #'query dependencies' }
@@ -917,7 +917,7 @@ TEntityMetaLevelDependency >> queryLocalOutgoing: aFAMIXClassAssociation [
 			--> Will return a MooseOutgoingQueryResult containing the FAMIXInheritance associations having aFAMIXClass as source
 	"
 
-	^ (MooseQueryNavigationQuery strategy: MooseQueryOutgoingDirectionStrategy) queryLocal: aFAMIXClassAssociation for: self
+	^ self query outgoing local dependenciesOfType: aFAMIXClassAssociation
 ]
 
 { #category : #'query dependencies' }
@@ -929,7 +929,7 @@ TEntityMetaLevelDependency >> queryOutgoing: aFAMIXClassAssociation [
 			--> Will return a MooseOutgoingQueryResult containing the FAMIXInheritance associations having aFAMIXClass or its children as source
 	"
 
-	^ (MooseQueryNavigationQuery strategy: MooseQueryOutgoingDirectionStrategy) query: aFAMIXClassAssociation for: self
+	^ self query outgoing dependenciesOfType: aFAMIXClassAssociation
 ]
 
 { #category : #'query dependencies' }
@@ -969,19 +969,7 @@ TEntityMetaLevelDependency >> sourceThrough: aFAMIXClassAssociation [
 			--> Will return a MooseIncomingQueryResult containing the methods having aFAMIXClass or its children as source
 	"
 
-	^ (MooseQueryNavigationQuery strategy: MooseQueryIncomingDirectionStrategy) through: aFAMIXClassAssociation for: self
-]
-
-{ #category : #'query dependencies' }
-TEntityMetaLevelDependency >> sourceThroughAll [
-	"Collect the source of all the FAMIXClassAssociation classes for the receiver and its children.
-	
-	Example:
-		aFAMIXClass sourceThroughAll.
-			--> Will return a MooseIncomingQueryResult containing the methods having aFAMIXClass or its children as source
-	"
-
-	^ (MooseQueryNavigationQuery strategy: MooseQueryIncomingDirectionStrategy) throughAllFor: self
+	^ self query incoming objects dependenciesOfType: aFAMIXClassAssociation
 ]
 
 { #category : #'query dependencies' }
@@ -993,19 +981,7 @@ TEntityMetaLevelDependency >> targetThrough: aFAMIXClassAssociation [
 			--> Will return a MooseOutgoingQueryResult containing the class having aFAMIXClass or its children as target
 	"
 
-	^ (MooseQueryNavigationQuery strategy: MooseQueryOutgoingDirectionStrategy) through: aFAMIXClassAssociation for: self
-]
-
-{ #category : #'query dependencies' }
-TEntityMetaLevelDependency >> targetThroughAll [
-	"Collect the target of the FAMIXClassAssociation class for the receiver and its children.
-	
-	Example:
-		aFAMIXMethod targetThroughAll.
-			--> Will return a MooseOutgoingQueryResult containing the class having aFAMIXClass or its children as target
-	"
-
-	^ (MooseQueryNavigationQuery strategy: MooseQueryOutgoingDirectionStrategy) throughAllFor: self
+	^ self query outgoing objects dependenciesOfType: aFAMIXClassAssociation
 ]
 
 { #category : #'query dependencies' }
@@ -1017,7 +993,7 @@ TEntityMetaLevelDependency >> throughAllFrom [
 			--> Will return a MooseIncomingQueryResult containing all the FAMIXAssociations having aFAMIXClass or its children as target
 	"
 
-	^ (MooseQueryNavigationQuery strategy: MooseQueryIncomingDirectionStrategy) throughAllFor: self
+	^ self query incoming objects dependencies
 ]
 
 { #category : #'query dependencies' }
@@ -1029,14 +1005,14 @@ TEntityMetaLevelDependency >> throughAllTo [
 			--> Will return a MooseOutgoingQueryResult containing the class having aFAMIXClass or its children as source
 	"
 
-	^ (MooseQueryNavigationQuery strategy: MooseQueryOutgoingDirectionStrategy) throughAllFor: self
+	^ self query outgoing objects dependencies
 ]
 
 { #category : #scoping }
 TEntityMetaLevelDependency >> toAnyScope: aCollectionOfFamixClasses [
 	"I am used to return all the first encountered entities matching one of the class scope given as parameter that are down in the containment tree of the metamodel"
 
-	^ self query descendants forAny: aCollectionOfFamixClasses
+	^ self query descendants ofAnyType: aCollectionOfFamixClasses
 ]
 
 { #category : #scoping }
@@ -1044,14 +1020,14 @@ TEntityMetaLevelDependency >> toAnyScope: aCollectionOfFamixClasses until: rejec
 	"I am used to return all the first encountered entities matching one of the class scope given as parameter that are down in the containment tree of the metamodel.
 	I stop the recursion when the rejectBlock is true"
 
-	^ (self query descendants until: rejectBlock) forAny: aCollectionOfFamixClasses
+	^ (self query descendants until: rejectBlock) ofAnyType: aCollectionOfFamixClasses
 ]
 
 { #category : #scoping }
 TEntityMetaLevelDependency >> toScope: aClassFAMIX [
 	"I am used to return all the first encountered  entities at a given famix class scope that are down in the containment tree of the metamodel"
 
-	^ self query descendants for: aClassFAMIX
+	^ self query descendants ofType: aClassFAMIX
 ]
 
 { #category : #scoping }
@@ -1059,7 +1035,7 @@ TEntityMetaLevelDependency >> toScope: aClassFAMIX until: rejectBlock [
 	"I am used to return all the first encountered  entities at a given famix class scope that are down in the containment tree of the metamodel.
 	I stop the recursion when the rejectBlock is true"
 
-	^ (self query descendants until: rejectBlock) for: aClassFAMIX
+	^ (self query descendants until: rejectBlock) ofType: aClassFAMIX
 ]
 
 { #category : #accessing }
@@ -1084,7 +1060,7 @@ TEntityMetaLevelDependency >> withAllParents [
 TEntityMetaLevelDependency >> withAnyScope: aCollectionOfFamixClasses [
 	"I am used to return all the first encountered entities matching one of the class scope that are up or down in the containment tree of the metamodel"
 
-	^ self query lineage forAny: aCollectionOfFamixClasses
+	^ self query lineage ofAnyType: aCollectionOfFamixClasses
 ]
 
 { #category : #scoping }
@@ -1092,14 +1068,14 @@ TEntityMetaLevelDependency >> withAnyScope: aCollectionOfFamixClasses until: rej
 	"I am used to return all the first encountered entities matching one of the class scope that are up or down in the containment tree of the metamodel.
 	I stop the recursion when the rejectBlock is true"
 
-	^ (self query lineage until: rejectBlock) forAny: aCollectionOfFamixClasses
+	^ (self query lineage until: rejectBlock) ofAnyType: aCollectionOfFamixClasses
 ]
 
 { #category : #scoping }
 TEntityMetaLevelDependency >> withScope: aClassFAMIX [
 	"I am used to return all the first encountered  entities at a given famix class scope that are up or down in the containment tree of the metamodel"
 
-	^ self query lineage for: aClassFAMIX
+	^ self query lineage ofType: aClassFAMIX
 ]
 
 { #category : #scoping }
@@ -1107,5 +1083,5 @@ TEntityMetaLevelDependency >> withScope: aClassFAMIX until: rejectBlock [
 	"I am used to return all the first encountered  entities at a given famix class scope that are up or down in the containment tree of the metamodel.
 	I stop the recursion when the rejectBlock is true"
 
-	^ (self query lineage until: rejectBlock) for: aClassFAMIX
+	^ (self query lineage until: rejectBlock) ofType: aClassFAMIX
 ]

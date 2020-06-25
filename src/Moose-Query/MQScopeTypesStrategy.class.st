@@ -7,8 +7,8 @@ I am a strategy used by the scoping queries to define the query should match any
 I am moslty here for performance reasons.
 "
 Class {
-	#name : #MooseQueryScopeTypesStrategy,
-	#superclass : #MooseQueryScopeAbstractTypeStrategy,
+	#name : #MQScopeTypesStrategy,
+	#superclass : #MQScopeAbstractTypeStrategy,
 	#instVars : [
 		'scopes'
 	],
@@ -16,23 +16,23 @@ Class {
 }
 
 { #category : #accessing }
-MooseQueryScopeTypesStrategy class >> scopes: aCollection [
+MQScopeTypesStrategy class >> scopes: aCollection [
 	^ self new
 		scopes: aCollection;
 		yourself
 ]
 
 { #category : #testing }
-MooseQueryScopeTypesStrategy >> isOfRightType: anEntity [
+MQScopeTypesStrategy >> isOfRightType: anEntity [
 	^ scopes anySatisfy: [ :aType | anEntity isOfType: aType ]
 ]
 
 { #category : #accessing }
-MooseQueryScopeTypesStrategy >> scopes [
+MQScopeTypesStrategy >> scopes [
 	^ scopes
 ]
 
 { #category : #accessing }
-MooseQueryScopeTypesStrategy >> scopes: anObject [
+MQScopeTypesStrategy >> scopes: anObject [
 	scopes := anObject
 ]

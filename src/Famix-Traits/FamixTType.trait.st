@@ -62,7 +62,7 @@ FamixTType >> fanIn: aNumber [
 
 { #category : #testing }
 FamixTType >> incomingTypeDeclarations [  
-	^ self typedEntities collect: [ :var | MooseQueryDependencyAssociation newFrom: var to: self ]
+	^ self typedEntities collect: [ :var | MQNavigationDependencyAssociation newFrom: var to: self ]
 ]
 
 { #category : #testing }
