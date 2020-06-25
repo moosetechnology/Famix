@@ -492,16 +492,6 @@ TEntityMetaLevelDependency >> childrenTypes [
 	^ self class childrenTypesIn: self metamodel
 ]
 
-{ #category : #helpers }
-TEntityMetaLevelDependency >> createIncomingQueryResultWith: aCollection [
-	^ MooseIncomingQueryResult on: self withAll: aCollection
-]
-
-{ #category : #helpers }
-TEntityMetaLevelDependency >> createOutgoingQueryResultWith: aCollection [
-	^ MooseOutgoingQueryResult on: self withAll: aCollection
-]
-
 { #category : #testing }
 TEntityMetaLevelDependency >> has: anInOutSymbol [
 	"Check the incoming or outgoing associations of the receiver or its children.
@@ -862,7 +852,7 @@ TEntityMetaLevelDependency >> queryIncomingTypeDeclarations [
 	
 	typeDeclaration is a virtual association that relates a structural entity (i.e. a variable) to its type."
 
-	^ self createIncomingQueryResultWith: (self queryIncomingTypeDeclarationsIn: OrderedCollection new) asSet
+	^ MooseIncomingQueryResult on: self withAll: (self queryIncomingTypeDeclarationsIn: OrderedCollection new) asSet
 ]
 
 { #category : #'query dependencies' }
@@ -938,7 +928,7 @@ TEntityMetaLevelDependency >> queryOutgoingTypeDeclarations [
 	
 	typeDeclaration is a virtual association that relates a structural entity (i.e. a variable) to its type."
 
-	^ self createOutgoingQueryResultWith: (self queryOutgoingTypeDeclarationsIn: OrderedCollection new) asSet
+	^ MooseOutgoingQueryResult on: self withAll: (self queryOutgoingTypeDeclarationsIn: OrderedCollection new) asSet
 ]
 
 { #category : #'query dependencies' }

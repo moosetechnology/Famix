@@ -31,6 +31,6 @@ MQNavigationIncomingDirectionStrategy class >> msePropertiesOf: anEntity [
 ]
 
 { #category : #accessing }
-MQNavigationIncomingDirectionStrategy class >> queryResultOn: anEntity with: aCollection [
-	^ anEntity createIncomingQueryResultWith: aCollection
+MQNavigationIncomingDirectionStrategy class >> queryResultClass [
+	^ MooseIncomingQueryResult
 ]
