@@ -15,6 +15,16 @@ Class {
 	#category : #'Moose-Query-Navigating'
 }
 
+{ #category : #testing }
+MQNavigationAssociationSelectionStrategy class >> isAbstract [
+	^ self = MQNavigationAssociationSelectionStrategy
+]
+
+{ #category : #accessing }
+MQNavigationAssociationSelectionStrategy class >> strategies [
+	^ self allSubclasses reject: #isAbstract
+]
+
 { #category : #enumerating }
 MQNavigationAssociationSelectionStrategy >> selectAssociationsIn: aCollection [
 	"I return a collection of associations matching the kind of dependencies asked by the user in the query from the collection of associations I got in parameter."
