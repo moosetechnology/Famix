@@ -609,7 +609,7 @@ TEntityMetaLevelDependency >> hasLocalIncoming: aFAMIXClassAssociation [
 			--> Will return true if aFAMIXClassAssociation has incoming associations of the FAMIXClassAssociation class for the receiver.
 	"
 
-	^ self has local incoming dependenciesOfType: aFAMIXClassAssociation
+	^ self query has local incoming dependenciesOfType: aFAMIXClassAssociation
 ]
 
 { #category : #testing }
@@ -633,7 +633,7 @@ TEntityMetaLevelDependency >> hasLocalOutgoing: aFAMIXClassAssociation [
 			--> Will return true if aFAMIXClassAssociation has incoming associations of the FAMIXClassAssociation class for the receiver.
 	"
 
-	^ self has local outgoing dependenciesOfType: aFAMIXClassAssociation
+	^ self query has local outgoing dependenciesOfType: aFAMIXClassAssociation
 ]
 
 { #category : #testing }
@@ -645,7 +645,7 @@ TEntityMetaLevelDependency >> hasOutgoing [
 			--> --> Will return true if the receiver or its children have outgoing associations
 	"
 
-	^ self has outgoing dependencies
+	^ self query has outgoing dependencies
 ]
 
 { #category : #testing }
@@ -657,7 +657,7 @@ TEntityMetaLevelDependency >> hasOutgoing: aFAMIXClassAssociation [
 			--> Will return true if aFAMIXClassAssociation has outgoing associations of the FAMIXClassAssociation class for the receiver or its children.
 	"
 
-	^ self has outgoing dependenciesOfType: aFAMIXClassAssociation
+	^ self query has outgoing dependenciesOfType: aFAMIXClassAssociation
 ]
 
 { #category : #testing }
