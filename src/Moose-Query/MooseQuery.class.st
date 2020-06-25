@@ -110,11 +110,11 @@ More examples:
 	method query incoming dependenciesOfType: FamixTReference.
 	method query incoming local dependenciesOfType: FamixTReference.
 	method query incoming local object dependenciesOfType: FamixTReference.
-	method query incoming local object dependenciesOfAnyTypes: { FamixTReference . FamixTInvocation }.
+	method query incoming local object dependenciesOfAnyType: { FamixTReference . FamixTInvocation }.
 	
 	method query outgoing local object dependenciesOfType: FamixTReference.
 	
-	method query has incoming local object dependenciesOfAnyTypes: { FamixTReference . FamixTInvocation }.
+	method query has incoming local object dependenciesOfAnyType: { FamixTReference . FamixTInvocation }.
 	
 ```
 
