@@ -513,11 +513,7 @@ TEntityMetaLevelDependency >> has: anInOutSymbol [
 			--> Will return true if aFAMIXMethod has the outgoing FAMIXAssociation
 	"
 
-	^ (MQNavigationQuery direction: anInOutSymbol)
-		associationSelectionStrategy: MQNavigationAllAssociationsStrategy new;
-		resultKindStrategy: MQNavigationHasDependencyBooleanKindStrategy;
-		receiver: self;
-		execute
+	^ (self query navigation: anInOutSymbol) has dependencies
 ]
 
 { #category : #testing }
@@ -531,11 +527,7 @@ TEntityMetaLevelDependency >> has: anInOutSymbol with: aFAMIXClassAssociation [
 			--> Will return a MooseOutgoingQueryResult containing the FAMIXAccess associations having aFAMIXMethod or its children as source
 	"
 
-	^ (MQNavigationQuery direction: anInOutSymbol)
-		associationSelectionStrategy: (MQNavigationSpecificAssociationStrategy association: aFAMIXClassAssociation);
-		resultKindStrategy: MQNavigationHasDependencyBooleanKindStrategy;
-		receiver: self;
-		execute
+	^ (self query navigation: anInOutSymbol) has dependenciesOfType: aFAMIXClassAssociation
 ]
 
 { #category : #testing }
@@ -593,12 +585,7 @@ TEntityMetaLevelDependency >> hasLocal: anInOutSymbol [
 			--> Will return true if aFAMIXMethod has the outgoing FAMIXAssociation
 	"
 
-	^ (MQNavigationQuery direction: anInOutSymbol)
-		associationSelectionStrategy: MQNavigationAllAssociationsStrategy new;
-		resultKindStrategy: MQNavigationHasDependencyBooleanKindStrategy;
-		local;
-		receiver: self;
-		execute
+	^ (self query navigation: anInOutSymbol) has local dependencies
 ]
 
 { #category : #testing }
@@ -775,10 +762,7 @@ TEntityMetaLevelDependency >> query: anInOutSymbol with: aFAMIXClassAssociation 
 			--> Will return a MooseOutgoingQueryResult containing the FAMIXAccess associations having aFAMIXMethod or its children as source
 	"
 
-	^ (MQNavigationQuery direction: anInOutSymbol)
-		associationSelectionStrategy: (MQNavigationSpecificAssociationStrategy association: aFAMIXClassAssociation);
-		receiver: self;
-		execute
+	^ (self query navigation: anInOutSymbol) dependenciesOfType: aFAMIXClassAssociation
 ]
 
 { #category : #'query dependencies' }
@@ -792,10 +776,7 @@ TEntityMetaLevelDependency >> queryAll: anInOutSymbol [
 			--> Will return a MooseOutgoingQueryResult containing the FAMIXAssociation having aFAMIXMethod or its children as source
 	"
 
-	^ (MQNavigationQuery direction: anInOutSymbol)
-		associationSelectionStrategy: MQNavigationAllAssociationsStrategy new;
-		receiver: self;
-		execute
+	^ (self query navigation: anInOutSymbol) dependencies
 ]
 
 { #category : #'query dependencies' }
@@ -822,11 +803,7 @@ TEntityMetaLevelDependency >> queryAllLocal: anInOutSymbol [
 			--> Will return a MooseOutgoingQueryResult containing the FAMIXAssociation having aFAMIXMethod as source
 	"
 
-	^ (MQNavigationQuery direction: anInOutSymbol)
-		associationSelectionStrategy: MQNavigationAllAssociationsStrategy new;
-		local;
-		receiver: self;
-		execute
+	^ (self query navigation: anInOutSymbol) local dependencies
 ]
 
 { #category : #'query dependencies' }
@@ -914,11 +891,7 @@ TEntityMetaLevelDependency >> queryLocal: anInOutSymbol with: aFAMIXClassAssocia
 			--> Will return a MooseOutgoingQueryResult containing the FAMIXAccess associations having aFAMIXMethod as source
 	"
 
-	^ (MQNavigationQuery direction: anInOutSymbol)
-		associationSelectionStrategy: (MQNavigationSpecificAssociationStrategy association: aFAMIXClassAssociation);
-		local;
-		receiver: self;
-		execute
+	^ (self query navigation: anInOutSymbol) local dependenciesOfType: aFAMIXClassAssociation
 ]
 
 { #category : #'query dependencies' }

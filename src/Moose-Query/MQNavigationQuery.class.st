@@ -37,10 +37,10 @@ Internal Representation and Key Implementation Points.
 -------------------
 
     Instance Variables
-	associationSelectionStrategy:		<anAssociationSelectionStrategy>
-	directionStrategy:		<aDirectionStrategy> 		A strategy responsible of the behavior depending on the direction of the association
-	resultKindStrategy:		<aResultKindStrategy>
-	shouldCollectChildrenDependencies:		<aBoolean>
+	associationSelectionStrategy:				<anAssociationSelectionStrategy>		A strategy used to select the kind of associations we want to select with the query.
+	directionStrategy:								<aDirectionStrategy> 						A strategy responsible of the behavior depending on the direction of the association.
+	resultKindStrategy:							<aResultKindStrategy>						A strategy to select what kind of result we want to return to the user.
+	shouldCollectChildrenDependencies:		<aBoolean>									If true, we collect the dependencies of the entity and its children. If false we do not check the children.
 
 "
 Class {
@@ -114,6 +114,11 @@ MQNavigationQuery >> executeQuery [
 	self queryFor: receiver.
 
 	^ directionStrategy queryResultOn: receiver with: result
+]
+
+{ #category : #accessing }
+MQNavigationQuery >> has [
+	^ self resultKindStrategy: MQNavigationHasDependencyBooleanKindStrategy
 ]
 
 { #category : #execution }

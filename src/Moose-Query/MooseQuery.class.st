@@ -62,9 +62,8 @@ MooseQuery >> has [
 
 { #category : #accessing }
 MooseQuery >> incoming [
-	^ MQNavigationQuery new
+	^ (MQNavigationQuery directionStrategy: MQNavigationIncomingDirectionStrategy)
 		receiver: receiver;
-		directionStrategy: MQNavigationIncomingDirectionStrategy;
 		yourself
 ]
 
@@ -77,10 +76,16 @@ MooseQuery >> lineage [
 ]
 
 { #category : #accessing }
-MooseQuery >> outgoing [
-	^ MQNavigationQuery new
+MooseQuery >> navigation: aSymbol [
+	^ (MQNavigationQuery direction: aSymbol)
 		receiver: receiver;
-		directionStrategy: MQNavigationOutgoingDirectionStrategy;
+		yourself
+]
+
+{ #category : #accessing }
+MooseQuery >> outgoing [
+	^ (MQNavigationQuery directionStrategy: MQNavigationOutgoingDirectionStrategy)
+		receiver: receiver;
 		yourself
 ]
 
