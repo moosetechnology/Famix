@@ -150,19 +150,19 @@ MQScopeQuery >> isRecursive: anObject [
 	isRecursive := anObject
 ]
 
-{ #category : #accessing }
+{ #category : #DSL }
 MQScopeQuery >> ofAnyType: aCollection [
 	typeStrategy := MQScopeTypesStrategy scopes: aCollection.
 	^ self execute
 ]
 
-{ #category : #accessing }
+{ #category : #DSL }
 MQScopeQuery >> ofType: aFamixType [
 	typeStrategy := MQScopeTypeStrategy scope: aFamixType.
 	^ self execute
 ]
 
-{ #category : #accessing }
+{ #category : #DSL }
 MQScopeQuery >> recursively [
 	isRecursive := true
 ]
@@ -200,7 +200,7 @@ MQScopeQuery >> until [
 	^ until
 ]
 
-{ #category : #accessing }
+{ #category : #DSL }
 MQScopeQuery >> until: anObject [
 	until := anObject
 ]

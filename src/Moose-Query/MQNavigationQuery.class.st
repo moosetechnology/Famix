@@ -77,13 +77,13 @@ MQNavigationQuery >> associationSelectionStrategy: anObject [
 	associationSelectionStrategy := anObject
 ]
 
-{ #category : #accessing }
+{ #category : #DSL }
 MQNavigationQuery >> dependencies [
 	associationSelectionStrategy := MQNavigationAllAssociationsStrategy new.
 	^ self execute
 ]
 
-{ #category : #accessing }
+{ #category : #DSL }
 MQNavigationQuery >> dependenciesOfType: anAssociation [
 	associationSelectionStrategy := MQNavigationSpecificAssociationStrategy association: anAssociation.
 	^ self execute
@@ -116,7 +116,7 @@ MQNavigationQuery >> executeQuery [
 	^ directionStrategy queryResultOn: receiver with: result
 ]
 
-{ #category : #accessing }
+{ #category : #DSL }
 MQNavigationQuery >> has [
 	^ self resultKindStrategy: MQNavigationHasDependencyBooleanKindStrategy
 ]
@@ -153,7 +153,7 @@ MQNavigationQuery >> hasLocalFor: anEntity [
 	^ false
 ]
 
-{ #category : #accessing }
+{ #category : #DSL }
 MQNavigationQuery >> incoming [
 	^ self directionStrategy: MQNavigationIncomingDirectionStrategy
 ]
@@ -165,17 +165,17 @@ MQNavigationQuery >> initialize [
 	shouldCollectChildrenDependencies := true
 ]
 
-{ #category : #accessing }
+{ #category : #DSL }
 MQNavigationQuery >> local [
 	shouldCollectChildrenDependencies := false
 ]
 
-{ #category : #accessing }
+{ #category : #DSL }
 MQNavigationQuery >> objects [
 	resultKindStrategy := MQNavigationOppositeKindStrategy
 ]
 
-{ #category : #accessing }
+{ #category : #DSL }
 MQNavigationQuery >> outgoing [
 	^ self directionStrategy: MQNavigationOutgoingDirectionStrategy
 ]
