@@ -7,7 +7,7 @@ I am an object representing a scoping query.
 A scoping query is executed with a receiver and have multiple parameters:
 - The direction of the scope (up/down/both in the containment DAG)
 - Is it recursive or does it stop at one result?
-- The kind of the scope to stop to (a class or trait or collection of those?)
+- The kind of the scope to stop to (a class or trait or collection of those, any type?)
 - A condition to stop looking for results?
 
 Examples
@@ -137,6 +137,12 @@ MQScopeQuery >> isRecursive [
 { #category : #accessing }
 MQScopeQuery >> isRecursive: anObject [
 	isRecursive := anObject
+]
+
+{ #category : #DSL }
+MQScopeQuery >> ofAnyType [
+	typeStrategy := MQScopeAllTypesStrategy new.
+	^ self execute
 ]
 
 { #category : #DSL }

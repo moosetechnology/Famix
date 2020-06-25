@@ -40,6 +40,7 @@ Last, you can have a parameter that will finish to configure and execute the que
 ```st
 	method ancestors ofType: FamixTClass. ""ofType: will select the ancestors/descendents matching the kind in parameter.""
 	method ancestors ofAnyTypes: { FamixTClass . FamixTNamespace }. ""ofAnyTypes: will select the ancestors/descendents matching any kind in parameter.""
+	method ancestors ofAnyType. ""Select all ancestors independently of the type.""
 ```
 
 More examples:
