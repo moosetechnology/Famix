@@ -13,6 +13,16 @@ Class {
 }
 
 { #category : #testing }
+MQScopeAbstractTypeStrategy class >> isAbstract [
+	^ self = MQScopeAbstractTypeStrategy
+]
+
+{ #category : #accessing }
+MQScopeAbstractTypeStrategy class >> strategies [
+	^ self allSubclasses reject: #isAbstract
+]
+
+{ #category : #testing }
 MQScopeAbstractTypeStrategy >> isOfRightType: anEntity [
 	^ self subclassResponsibility
 ]

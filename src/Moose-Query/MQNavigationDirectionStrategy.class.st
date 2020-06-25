@@ -49,6 +49,11 @@ MQNavigationDirectionStrategy class >> fromSymbol: aSymbol [
 	^ self allSubclasses detect: [ :each | each determinatingSymbol = aSymbol ] ifNone: [ self error: 'The symbol passed to the query should be either #in or #out. Here we got ' , aSymbol asString ]
 ]
 
+{ #category : #testing }
+MQNavigationDirectionStrategy class >> isAbstract [
+	^ self = MQNavigationDirectionStrategy
+]
+
 { #category : #accessing }
 MQNavigationDirectionStrategy class >> msePropertiesOf: anEntity [
 	^ self subclassResponsibility
@@ -57,4 +62,9 @@ MQNavigationDirectionStrategy class >> msePropertiesOf: anEntity [
 { #category : #accessing }
 MQNavigationDirectionStrategy class >> queryResultClass [
 	^ self subclassResponsibility
+]
+
+{ #category : #accessing }
+MQNavigationDirectionStrategy class >> strategies [
+	^ self allSubclasses reject: #isAbstract
 ]

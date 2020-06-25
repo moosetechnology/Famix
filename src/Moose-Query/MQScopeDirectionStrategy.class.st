@@ -11,6 +11,11 @@ Class {
 	#category : #'Moose-Query-Scoping'
 }
 
+{ #category : #testing }
+MQScopeDirectionStrategy class >> isAbstract [
+	^ self = MQScopeDirectionStrategy
+]
+
 { #category : #query }
 MQScopeDirectionStrategy class >> scopeFor: anEntity query: aQuery [
 	^ aQuery scopeFor: anEntity direction: self
@@ -19,4 +24,9 @@ MQScopeDirectionStrategy class >> scopeFor: anEntity query: aQuery [
 { #category : #accessing }
 MQScopeDirectionStrategy class >> selectorsFor: anEntity [
 	^ self subclassResponsibility
+]
+
+{ #category : #accessing }
+MQScopeDirectionStrategy class >> strategies [
+	^ self allSubclasses reject: #isAbstract
 ]
