@@ -39,7 +39,7 @@ Last, you can have a parameter that will finish to configure and execute the que
 
 ```st
 	method ancestors ofType: FamixTClass. ""ofType: will select the ancestors/descendents matching the kind in parameter.""
-	method ancestors ofAnyTypes: { FamixTClass . FamixTNamespace }. ""ofAnyTypes: will select the ancestors/descendents matching any kind in parameter.""
+	method ancestors ofAnyType: { FamixTClass . FamixTNamespace }. ""ofAnyTypes: will select the ancestors/descendents matching any kind in parameter.""
 	method ancestors ofAnyType. ""Select all ancestors independently of the type.""
 ```
 
@@ -50,14 +50,14 @@ More examples:
 
 	method query ancestors ofType: FamixTNamespace.
 	method query ancestors recursively ofType: FamixTNamespace.
-	method query ancestors recursively ofAnyTypes: {FamixTNamespace . FamixTClass}.
-	(method query ancestors recursively until: #isClass) ofAnyTypes: {FamixTNamespace . FamixTClass}.
+	method query ancestors recursively ofAnyType: {FamixTNamespace . FamixTClass}.
+	(method query ancestors recursively until: #isClass) ofAnyType: {FamixTNamespace . FamixTClass}.
 
 	method query descendants recursively ofType: FamixTNamespace.
-	(method query descendants recursively until: #isClass) ofAnyTypes: {FamixTNamespace . FamixTClass}.
+	(method query descendants recursively until: #isClass) ofAnyType: {FamixTNamespace . FamixTClass}.
 
 	method query lineage recursively ofType: FamixTNamespace.
-	(method query lineage recursively until: #isClass) ofAnyTypes: {FamixTNamespace . FamixTClass}.
+	(method query lineage recursively until: #isClass) ofAnyType: {FamixTNamespace . FamixTClass}.
 ```
 
 Navigation queries
@@ -98,7 +98,7 @@ Last, you can have a parameter that will finish to configure and execute the que
 ```st
 	method ancestors dependencies. ""Will select all kinds of dependencies.""
 	method ancestors dependenciesOfType: FamixTReference. ""Will select the dependencies of the type passed has parameter.""
-	method ancestors dependenciesOfAnyTypes: { FamixTReference . FamixTInvocation }. ""Will select the dependencies whose types are present in the collection of types in parameter.""
+	method ancestors dependenciesOfAnyType: { FamixTReference . FamixTInvocation }. ""Will select the dependencies whose types are present in the collection of types in parameter.""
 ```
 
 More examples:

@@ -70,6 +70,12 @@ MQNavigationQuery >> dependencies [
 ]
 
 { #category : #DSL }
+MQNavigationQuery >> dependenciesOfAnyType: aCollectionOfTypes [
+	associationSelectionStrategy := MQNavigationSpecificAssociationsStrategy associations: aCollectionOfTypes.
+	^ self execute
+]
+
+{ #category : #DSL }
 MQNavigationQuery >> dependenciesOfType: anAssociation [
 	associationSelectionStrategy := MQNavigationSpecificAssociationStrategy association: anAssociation.
 	^ self execute
