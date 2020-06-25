@@ -2,12 +2,12 @@ Extension { #name : #Object }
 
 { #category : #'*Moose-Query' }
 Object >> asAssociationFrom: anEntity [
-	^ MooseQueryDependencyAssociation newFrom: anEntity to: self 
+	^ MQNavigationDependencyAssociation newFrom: anEntity to: self 
 ]
 
 { #category : #'*Moose-Query' }
 Object >> asAssociationTo: anEntity [
-	^ MooseQueryDependencyAssociation newFrom: self to: anEntity 
+	^ MQNavigationDependencyAssociation newFrom: self to: anEntity 
 ]
 
 { #category : #'*Moose-Query' }

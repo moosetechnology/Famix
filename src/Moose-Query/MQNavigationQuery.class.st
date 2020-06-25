@@ -2,30 +2,51 @@
 Description
 -------------------
 
-I am an object reponsible for the computation of a query. I am here to hide the implementations of queries to the entities. 
+I am an object representing a navigations query of MooseQuery.
 
-For more informations: https://moosequery.ferlicot.fr/
+I allow one to to know:
+- The list of associations representing a dependency of an entity 
+- The entities that are dependencies of an entity
+- If an entity has dependencies
+
+I can be configured with multiple parameters:
+- The kind of dependencies to select (All? One? Multiple?)
+- The direction of the dependency (Incoming or outgoing)
+- If the query should look only in the entity to query or should also check the dependencies on its children
 
 Examples
 -------------------
 	
-	(MooseQueryCalculator direction: #in) query: FAMIXInvocation for: aMethod.
+	method := model allModelMethods anyOne.
+
+	method query incoming dependencies.
 	
-	(MooseQueryCalculator strategy: MooseQueryOutgoingDirectionStrategy) queryAllLocalFor: aMethod.
+	method query has local incoming dependencies.
 	
-	(MooseQueryCalculator strategy: MooseQueryIncomingDirectionStrategy) query: FAMIXInvocation for: aMethod.
+	method
+	
+	method
+	
+	method
+	
+	method
+	
+	method
  
 Internal Representation and Key Implementation Points.
 -------------------
 
     Instance Variables
-	strategy:		<aMooseQueryDirectionStrategy> 		A strategy responsible of the behavior depending on the direction of the association
-
+	associationSelectionStrategy:		<anAssociationSelectionStrategy>
+	directionStrategy:		<aDirectionStrategy> 		A strategy responsible of the behavior depending on the direction of the association
+	resultKindStrategy:		<aResultKindStrategy>
+	shouldCheckPresenceOfDependencies:		<aBoolean>
+	shouldCollectChildrenDependencies:		<aBoolean>
 
 "
 Class {
-	#name : #MooseQueryNavigationQuery,
-	#superclass : #MooseQueryAbstractQuery,
+	#name : #MQNavigationQuery,
+	#superclass : #MQAbstractQuery,
 	#instVars : [
 		'directionStrategy',
 		'resultKindStrategy',
@@ -37,56 +58,56 @@ Class {
 }
 
 { #category : #'instance creation' }
-MooseQueryNavigationQuery class >> direction: aSymbol [
-	^ self directionStrategy: (MooseQueryAbstractDirectionStrategy fromSymbol: aSymbol)
+MQNavigationQuery class >> direction: aSymbol [
+	^ self directionStrategy: (MQNavigationDirectionStrategy fromSymbol: aSymbol)
 ]
 
 { #category : #'instance creation' }
-MooseQueryNavigationQuery class >> directionStrategy: aStrategy [
+MQNavigationQuery class >> directionStrategy: aStrategy [
 	^ self new
 		directionStrategy: aStrategy;
 		yourself
 ]
 
 { #category : #accessing }
-MooseQueryNavigationQuery >> associationSelectionStrategy [
+MQNavigationQuery >> associationSelectionStrategy [
 	^ associationSelectionStrategy
 ]
 
 { #category : #accessing }
-MooseQueryNavigationQuery >> associationSelectionStrategy: anObject [
+MQNavigationQuery >> associationSelectionStrategy: anObject [
 	associationSelectionStrategy := anObject
 ]
 
 { #category : #accessing }
-MooseQueryNavigationQuery >> checkPresenceOfDependencies [
+MQNavigationQuery >> checkPresenceOfDependencies [
 	shouldCheckPresenceOfDependencies := true
 ]
 
 { #category : #accessing }
-MooseQueryNavigationQuery >> dependencies [
-	associationSelectionStrategy := MooseQueryNavigationAllAssociationsStrategy new.
+MQNavigationQuery >> dependencies [
+	associationSelectionStrategy := MQNavigationAllAssociationsStrategy new.
 	^ self execute
 ]
 
 { #category : #accessing }
-MooseQueryNavigationQuery >> dependenciesOfType: anAssociation [
-	associationSelectionStrategy := MooseQueryNavigationSpecificAssociationsStrategy association: anAssociation.
+MQNavigationQuery >> dependenciesOfType: anAssociation [
+	associationSelectionStrategy := MQNavigationSpecificAssociationStrategy association: anAssociation.
 	^ self execute
 ]
 
 { #category : #accessing }
-MooseQueryNavigationQuery >> directionStrategy [
+MQNavigationQuery >> directionStrategy [
 	^ directionStrategy
 ]
 
 { #category : #accessing }
-MooseQueryNavigationQuery >> directionStrategy: anObject [
+MQNavigationQuery >> directionStrategy: anObject [
 	directionStrategy := anObject
 ]
 
 { #category : #query }
-MooseQueryNavigationQuery >> execute [
+MQNavigationQuery >> execute [
 	shouldCheckPresenceOfDependencies ifTrue: [ ^ self hasFor: receiver ].
 
 	self queryFor: receiver.
@@ -95,7 +116,7 @@ MooseQueryNavigationQuery >> execute [
 ]
 
 { #category : #query }
-MooseQueryNavigationQuery >> hasFor: anEntity [
+MQNavigationQuery >> hasFor: anEntity [
 	"I know that we could use #do: here, but this algo takes too long on big model, so this is a speed up while the sista vm is not ready for production"
 
 	| selectors |
@@ -113,7 +134,7 @@ MooseQueryNavigationQuery >> hasFor: anEntity [
 ]
 
 { #category : #query }
-MooseQueryNavigationQuery >> hasLocalFor: anEntity [
+MQNavigationQuery >> hasLocalFor: anEntity [
 	"The goal here is to get all the entity's direct associations of the class in parameter. This will not check the associations of the entity's children."
 
 	"Note: Maybe adding a guard to check if the entity can have associations of this class could improve the perf. Currently it is not the case because there is not enough association. Maybe it could be the case in the futur, like with a PostgreSQL model."
@@ -127,35 +148,35 @@ MooseQueryNavigationQuery >> hasLocalFor: anEntity [
 ]
 
 { #category : #accessing }
-MooseQueryNavigationQuery >> incoming [
-	^ self directionStrategy: MooseQueryIncomingDirectionStrategy
+MQNavigationQuery >> incoming [
+	^ self directionStrategy: MQNavigationIncomingDirectionStrategy
 ]
 
 { #category : #initialization }
-MooseQueryNavigationQuery >> initialize [
+MQNavigationQuery >> initialize [
 	super initialize.
-	resultKindStrategy := MooseQueryNavigationAssociationKindStrategy.
+	resultKindStrategy := MQNavigationAssociationKindStrategy.
 	shouldCollectChildrenDependencies := true.
 	shouldCheckPresenceOfDependencies := false
 ]
 
 { #category : #accessing }
-MooseQueryNavigationQuery >> local [
+MQNavigationQuery >> local [
 	shouldCollectChildrenDependencies := false
 ]
 
 { #category : #accessing }
-MooseQueryNavigationQuery >> objects [
-	resultKindStrategy := MooseQueryNavigationOppositeKindStrategy
+MQNavigationQuery >> objects [
+	resultKindStrategy := MQNavigationOppositeKindStrategy
 ]
 
 { #category : #accessing }
-MooseQueryNavigationQuery >> outgoing [
-	^ self directionStrategy: MooseQueryOutgoingDirectionStrategy
+MQNavigationQuery >> outgoing [
+	^ self directionStrategy: MQNavigationOutgoingDirectionStrategy
 ]
 
 { #category : #query }
-MooseQueryNavigationQuery >> queryFor: anEntity [
+MQNavigationQuery >> queryFor: anEntity [
 	"collects in aCollection all entities on the opposite side of associations with self
 	 Opposite side depends on self strategy (incoming/outgoing)
 	
@@ -176,7 +197,7 @@ MooseQueryNavigationQuery >> queryFor: anEntity [
 ]
 
 { #category : #query }
-MooseQueryNavigationQuery >> queryLocalFor: anEntity [
+MQNavigationQuery >> queryLocalFor: anEntity [
 	"The goal here is to get all the entity's direct associations of the class in parameter. This will not check the associations of the entity's children."
 
 	"Note: Maybe adding a guard to check if the entity can have associations of this class could improve the perf. Currently it is not the case because there is not enough association. Maybe it could be the case in the futur, like with a PostgreSQL model."
@@ -195,31 +216,31 @@ MooseQueryNavigationQuery >> queryLocalFor: anEntity [
 ]
 
 { #category : #accessing }
-MooseQueryNavigationQuery >> resultKindStrategy [
+MQNavigationQuery >> resultKindStrategy [
 	^ resultKindStrategy
 ]
 
 { #category : #accessing }
-MooseQueryNavigationQuery >> resultKindStrategy: anObject [
+MQNavigationQuery >> resultKindStrategy: anObject [
 	resultKindStrategy := anObject
 ]
 
 { #category : #accessing }
-MooseQueryNavigationQuery >> shouldCheckPresenceOfDependencies [
+MQNavigationQuery >> shouldCheckPresenceOfDependencies [
 	^ shouldCheckPresenceOfDependencies
 ]
 
 { #category : #accessing }
-MooseQueryNavigationQuery >> shouldCheckPresenceOfDependencies: anObject [
+MQNavigationQuery >> shouldCheckPresenceOfDependencies: anObject [
 	shouldCheckPresenceOfDependencies := anObject
 ]
 
 { #category : #accessing }
-MooseQueryNavigationQuery >> shouldCollectChildrenDependencies [
+MQNavigationQuery >> shouldCollectChildrenDependencies [
 	^ shouldCollectChildrenDependencies
 ]
 
 { #category : #accessing }
-MooseQueryNavigationQuery >> shouldCollectChildrenDependencies: anObject [
+MQNavigationQuery >> shouldCollectChildrenDependencies: anObject [
 	shouldCollectChildrenDependencies := anObject
 ]

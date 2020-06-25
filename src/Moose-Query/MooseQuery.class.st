@@ -38,23 +38,23 @@ MooseQuery class >> receiver: anEntity [
 
 { #category : #accessing }
 MooseQuery >> ancestors [
-	^ MooseQueryScopeQuery new
+	^ MQScopeQuery new
 		receiver: receiver;
-		direction: MooseQueryScopeUpStrategy;
+		direction: MQScopeUpStrategy;
 		yourself
 ]
 
 { #category : #accessing }
 MooseQuery >> descendants [
-	^ MooseQueryScopeQuery new
+	^ MQScopeQuery new
 		receiver: receiver;
-		direction: MooseQueryScopeDownStrategy;
+		direction: MQScopeDownStrategy;
 		yourself
 ]
 
 { #category : #accessing }
 MooseQuery >> has [
-	^ MooseQueryNavigationQuery new
+	^ MQNavigationQuery new
 		receiver: receiver;
 		checkPresenceOfDependencies;
 		yourself
@@ -62,25 +62,25 @@ MooseQuery >> has [
 
 { #category : #accessing }
 MooseQuery >> incoming [
-	^ MooseQueryNavigationQuery new
+	^ MQNavigationQuery new
 		receiver: receiver;
-		directionStrategy: MooseQueryIncomingDirectionStrategy;
+		directionStrategy: MQNavigationIncomingDirectionStrategy;
 		yourself
 ]
 
 { #category : #accessing }
 MooseQuery >> lineage [
-	^ MooseQueryScopeQuery new
+	^ MQScopeQuery new
 		receiver: receiver;
-		direction: MooseQueryScopeAllStrategy;
+		direction: MQScopeAllStrategy;
 		yourself
 ]
 
 { #category : #accessing }
 MooseQuery >> outgoing [
-	^ MooseQueryNavigationQuery new
+	^ MQNavigationQuery new
 		receiver: receiver;
-		directionStrategy: MooseQueryOutgoingDirectionStrategy;
+		directionStrategy: MQNavigationOutgoingDirectionStrategy;
 		yourself
 ]
 

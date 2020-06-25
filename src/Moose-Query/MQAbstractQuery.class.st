@@ -1,5 +1,5 @@
 Class {
-	#name : #MooseQueryAbstractQuery,
+	#name : #MQAbstractQuery,
 	#superclass : #Object,
 	#instVars : [
 		'result',
@@ -9,32 +9,32 @@ Class {
 }
 
 { #category : #execution }
-MooseQueryAbstractQuery >> execute [
+MQAbstractQuery >> execute [
 	self subclassResponsibility
 ]
 
 { #category : #initialization }
-MooseQueryAbstractQuery >> initialize [
+MQAbstractQuery >> initialize [
 	super initialize.
 	result := Set new
 ]
 
 { #category : #accessing }
-MooseQueryAbstractQuery >> receiver [
+MQAbstractQuery >> receiver [
 	^ receiver
 ]
 
 { #category : #accessing }
-MooseQueryAbstractQuery >> receiver: anObject [
+MQAbstractQuery >> receiver: anObject [
 	receiver := anObject
 ]
 
 { #category : #accessing }
-MooseQueryAbstractQuery >> result [
+MQAbstractQuery >> result [
 	^ result
 ]
 
 { #category : #accessing }
-MooseQueryAbstractQuery >> result: anObject [
+MQAbstractQuery >> result: anObject [
 	result := anObject
 ]

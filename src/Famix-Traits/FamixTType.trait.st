@@ -12,6 +12,7 @@ Trait {
 		'#typedEntities => FMMany type: #FamixTTypedEntity opposite: #declaredType'
 	],
 	#traits : 'FamixTNamedEntity + FamixTReferenceable',
+	#classTraits : 'FamixTNamedEntity classTrait + FamixTReferenceable classTrait',
 	#category : #'Famix-Traits-Type'
 }
 
@@ -62,7 +63,7 @@ FamixTType >> fanIn: aNumber [
 
 { #category : #testing }
 FamixTType >> incomingTypeDeclarations [  
-	^ self typedEntities collect: [ :var | MooseQueryDependencyAssociation newFrom: var to: self ]
+	^ self typedEntities collect: [ :var | MQNavigationDependencyAssociation newFrom: var to: self ]
 ]
 
 { #category : #testing }

@@ -5,32 +5,32 @@ Description
 I am a strategy managing the behavior of the Moose Queries depending on directions in the case where the query require the incomings associations.
 "
 Class {
-	#name : #MooseQueryIncomingDirectionStrategy,
-	#superclass : #MooseQueryAbstractDirectionStrategy,
+	#name : #MQNavigationIncomingDirectionStrategy,
+	#superclass : #MQNavigationDirectionStrategy,
 	#category : #'Moose-Query-Navigating'
 }
 
 { #category : #accessing }
-MooseQueryIncomingDirectionStrategy class >> determinatingSymbol [
+MQNavigationIncomingDirectionStrategy class >> determinatingSymbol [
 	^ #in
 ]
 
 { #category : #converting }
-MooseQueryIncomingDirectionStrategy class >> ensureAssociation: anObject with: anEntity [
+MQNavigationIncomingDirectionStrategy class >> ensureAssociation: anObject with: anEntity [
 	^ anObject asAssociationTo: anEntity
 ]
 
 { #category : #accessing }
-MooseQueryIncomingDirectionStrategy class >> entityFor: anEntity [
+MQNavigationIncomingDirectionStrategy class >> entityFor: anEntity [
 	^ anEntity source
 ]
 
 { #category : #accessing }
-MooseQueryIncomingDirectionStrategy class >> msePropertiesOf: anEntity [
+MQNavigationIncomingDirectionStrategy class >> msePropertiesOf: anEntity [
 	^ anEntity incomingMSEProperties
 ]
 
 { #category : #accessing }
-MooseQueryIncomingDirectionStrategy class >> queryResultOn: anEntity with: aCollection [
+MQNavigationIncomingDirectionStrategy class >> queryResultOn: anEntity with: aCollection [
 	^ anEntity createIncomingQueryResultWith: aCollection
 ]

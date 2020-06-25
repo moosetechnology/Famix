@@ -7,12 +7,12 @@ I am a strategy used by the scoping queries to define on which kind of entity th
 I am moslty here for performance reasons.
 "
 Class {
-	#name : #MooseQueryScopeAbstractTypeStrategy,
+	#name : #MQScopeAbstractTypeStrategy,
 	#superclass : #Object,
 	#category : #'Moose-Query-Scoping'
 }
 
 { #category : #testing }
-MooseQueryScopeAbstractTypeStrategy >> isOfRightType: anEntity [
+MQScopeAbstractTypeStrategy >> isOfRightType: anEntity [
 	^ self subclassResponsibility
 ]

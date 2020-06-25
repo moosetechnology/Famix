@@ -51,42 +51,42 @@ MooseQueryResult >> add: newObject [
 
 { #category : #filtering }
 MooseQueryResult >> allAtAnyScope: aCollectionOfFamixClasses [
-	^ self executeScopeQuery: (MooseQueryScopeQuery recursivelyScopes: aCollectionOfFamixClasses direction: MooseQueryScopeUpStrategy)
+	^ self executeScopeQuery: (MQScopeQuery recursivelyScopes: aCollectionOfFamixClasses direction: MQScopeUpStrategy)
 ]
 
 { #category : #filtering }
 MooseQueryResult >> allAtScope: aClassFamix [
-	^ self executeScopeQuery: (MooseQueryScopeQuery recursivelyScope: aClassFamix direction: MooseQueryScopeUpStrategy)
+	^ self executeScopeQuery: (MQScopeQuery recursivelyScope: aClassFamix direction: MQScopeUpStrategy)
 ]
 
 { #category : #filtering }
 MooseQueryResult >> allToAnyScope: aCollectionOfFamixClasses [
-	^ self executeScopeQuery: (MooseQueryScopeQuery recursivelyScopes: aCollectionOfFamixClasses direction: MooseQueryScopeDownStrategy)
+	^ self executeScopeQuery: (MQScopeQuery recursivelyScopes: aCollectionOfFamixClasses direction: MQScopeDownStrategy)
 ]
 
 { #category : #filtering }
 MooseQueryResult >> allToScope: aClassFamix [
-	^ self executeScopeQuery: (MooseQueryScopeQuery recursivelyScope: aClassFamix direction: MooseQueryScopeDownStrategy)
+	^ self executeScopeQuery: (MQScopeQuery recursivelyScope: aClassFamix direction: MQScopeDownStrategy)
 ]
 
 { #category : #filtering }
 MooseQueryResult >> allWithAnyScope: aCollectionOfFamixClasses [
-	^ self executeScopeQuery: (MooseQueryScopeQuery recursivelyScopes: aCollectionOfFamixClasses direction: MooseQueryScopeAllStrategy)
+	^ self executeScopeQuery: (MQScopeQuery recursivelyScopes: aCollectionOfFamixClasses direction: MQScopeAllStrategy)
 ]
 
 { #category : #filtering }
 MooseQueryResult >> allWithScope: aClassFamix [
-	^ self executeScopeQuery: (MooseQueryScopeQuery recursivelyScope: aClassFamix direction: MooseQueryScopeAllStrategy)
+	^ self executeScopeQuery: (MQScopeQuery recursivelyScope: aClassFamix direction: MQScopeAllStrategy)
 ]
 
 { #category : #filtering }
 MooseQueryResult >> atAnyScope: aCollectionOfFamixClasses [
-	^ self executeScopeQuery: (MooseQueryScopeQuery scopes: aCollectionOfFamixClasses direction: MooseQueryScopeUpStrategy)
+	^ self executeScopeQuery: (MQScopeQuery scopes: aCollectionOfFamixClasses direction: MQScopeUpStrategy)
 ]
 
 { #category : #filtering }
 MooseQueryResult >> atScope: aClassFamix [
-	^ self executeScopeQuery: (MooseQueryScopeQuery scope: aClassFamix direction: MooseQueryScopeUpStrategy)
+	^ self executeScopeQuery: (MQScopeQuery scope: aClassFamix direction: MQScopeUpStrategy)
 ]
 
 { #category : #enumerating }
@@ -200,12 +200,12 @@ MooseQueryResult >> storage: aCollection [
 
 { #category : #filtering }
 MooseQueryResult >> toAnyScope: aCollectionOfFamixClasses [
-	^ self executeScopeQuery: (MooseQueryScopeQuery scopes: aCollectionOfFamixClasses direction: MooseQueryScopeDownStrategy)
+	^ self executeScopeQuery: (MQScopeQuery scopes: aCollectionOfFamixClasses direction: MQScopeDownStrategy)
 ]
 
 { #category : #filtering }
 MooseQueryResult >> toScope: aClassFamix [
-	^ self executeScopeQuery: (MooseQueryScopeQuery scope: aClassFamix direction: MooseQueryScopeDownStrategy)
+	^ self executeScopeQuery: (MQScopeQuery scope: aClassFamix direction: MQScopeDownStrategy)
 ]
 
 { #category : #enumerating }
@@ -220,12 +220,12 @@ MooseQueryResult >> union: aCollection [
 
 { #category : #filtering }
 MooseQueryResult >> withAnyScope: aCollectionOfFamixClasses [
-	^ self executeScopeQuery: (MooseQueryScopeQuery scopes: aCollectionOfFamixClasses direction: MooseQueryScopeAllStrategy)
+	^ self executeScopeQuery: (MQScopeQuery scopes: aCollectionOfFamixClasses direction: MQScopeAllStrategy)
 ]
 
 { #category : #filtering }
 MooseQueryResult >> withScope: aClassFamix [
-	^ self executeScopeQuery: (MooseQueryScopeQuery scope: aClassFamix direction: MooseQueryScopeAllStrategy)
+	^ self executeScopeQuery: (MQScopeQuery scope: aClassFamix direction: MQScopeAllStrategy)
 ]
 
 { #category : #filtering }

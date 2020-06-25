@@ -14,7 +14,7 @@ TDependencyQueryResult >> atScope: aClassFamix withNonMatchingEntitiesDo: aBlock
 
 	| res opposite coll query |
 	res := OrderedCollection new.
-	query := MooseQueryScopeQuery scope: aClassFamix direction: MooseQueryScopeUpStrategy.
+	query := MQScopeQuery scope: aClassFamix direction: MQScopeUpStrategy.
 	self storage
 		do: [ :dep | 
 			coll := OrderedCollection new.

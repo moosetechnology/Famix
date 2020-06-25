@@ -7,8 +7,8 @@ I am a strategy used by the scoping queries to define that the query should matc
 I am moslty here for performance reasons.
 "
 Class {
-	#name : #MooseQueryScopeTypeStrategy,
-	#superclass : #MooseQueryScopeAbstractTypeStrategy,
+	#name : #MQScopeTypeStrategy,
+	#superclass : #MQScopeAbstractTypeStrategy,
 	#instVars : [
 		'scope'
 	],
@@ -16,23 +16,23 @@ Class {
 }
 
 { #category : #accessing }
-MooseQueryScopeTypeStrategy class >> scope: anEntity [
+MQScopeTypeStrategy class >> scope: anEntity [
 	^ self new
 		scope: anEntity;
 		yourself
 ]
 
 { #category : #testing }
-MooseQueryScopeTypeStrategy >> isOfRightType: anEntity [
+MQScopeTypeStrategy >> isOfRightType: anEntity [
 	^ anEntity isOfType: scope
 ]
 
 { #category : #accessing }
-MooseQueryScopeTypeStrategy >> scope [
+MQScopeTypeStrategy >> scope [
 	^ scope
 ]
 
 { #category : #accessing }
-MooseQueryScopeTypeStrategy >> scope: anObject [
+MQScopeTypeStrategy >> scope: anObject [
 	scope := anObject
 ]
