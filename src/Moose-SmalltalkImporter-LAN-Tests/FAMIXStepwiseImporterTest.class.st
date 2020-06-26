@@ -269,7 +269,7 @@ FAMIXStepwiseImporterTest >> testImportOneClassAndItsMetaclass [
 	importer := importTask run.
 	importedClasses := importer classes.
 	self assert: importedClasses values size equals: 6.
-	self assert: ((importedClasses at: LANNode) usesFamixTrait: FamixTClass)
+	self assert: ((importedClasses at: LANNode) usesFamixTrait: FamixOOTClass)
 ]
 
 { #category : #tests }
@@ -290,7 +290,7 @@ FAMIXStepwiseImporterTest >> testImportOneClassAndMergeItsMetaclass [
 	importer := importTask run.
 	importedClasses := importer classes.
 	self assert: importedClasses values asSet size equals: 3.
-	self assert: ((importedClasses at: LANNode) usesFamixTrait: FamixTClass)
+	self assert: ((importedClasses at: LANNode) usesFamixTrait: FamixOOTClass)
 ]
 
 { #category : #tests }

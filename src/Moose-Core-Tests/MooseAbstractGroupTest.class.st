@@ -66,7 +66,7 @@ MooseAbstractGroupTest >> testAllSatisfy [
 MooseAbstractGroupTest >> testAllUsing [
 	group addAll: {FamixTest3Class new . FamixTest3Type new}.
 	self should: [ group allUsing: FamixTest3Type ] raise: MooseAllUsingOnClass.
-	self assert: (group allUsing: FamixTClass) size equals: 1.
+	self assert: (group allUsing: FamixOOTClass) size equals: 1.
 	self assert: (group allUsing: FamixTType) size equals: 2
 ]
 
@@ -98,7 +98,7 @@ MooseAbstractGroupTest >> testAllWithType [
 	group addAll: {FamixTest3Class new . FamixTest3Type new}.
 	self assert: (group allWithType: FamixTest3Class) size equals: 1.
 	self assert: (group allWithType: FamixTest3Type) size equals: 1.
-	self should: [ (group allWithType: FamixTClass) size ] raise: MooseAllWithTypeOnTrait.
+	self should: [ (group allWithType: FamixOOTClass) size ] raise: MooseAllWithTypeOnTrait.
 	self assertEmpty: (group allWithType: Object)
 ]
 
@@ -367,7 +367,7 @@ MooseAbstractGroupTest >> testLast [
 MooseAbstractGroupTest >> testNumberOfEntityUsing [
 	group addAll: {FamixTest3Class new . FamixTest3Type new}.
 	self should: [ group numberOfEntityUsing: FamixTest3Type ] raise: MooseAllUsingOnClass.
-	self assert: (group numberOfEntityUsing: FamixTClass) equals: 1.
+	self assert: (group numberOfEntityUsing: FamixOOTClass) equals: 1.
 	self assert: (group numberOfEntityUsing: FamixTType) equals: 2
 ]
 

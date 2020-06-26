@@ -115,9 +115,9 @@ MooseQueryTest >> testAllAtAnyScope [
 	self assertCollection: (class1 allAtAnyScope: {FamixJavaPackage}) hasSameElements: {package1}.
 	self assertCollection: (class1 allAtAnyScope: {FamixJavaClass . FamixJavaPackage}) hasSameElements: {class1. package1}.
 	self assertCollection: (class1 allAtAnyScope: {FamixJavaMethod}) hasSameElements: {}.
-	self assertCollection: (class1 allAtAnyScope: {FamixTClass}) hasSameElements: {class1}.
+	self assertCollection: (class1 allAtAnyScope: {FamixOOTClass}) hasSameElements: {class1}.
 	self assertCollection: (class1 allAtAnyScope: {FamixTPackage}) hasSameElements: {package1}.
-	self assertCollection: (class1 allAtAnyScope: {FamixTClass . FamixTPackage}) hasSameElements: {class1. package1}.
+	self assertCollection: (class1 allAtAnyScope: {FamixOOTClass . FamixTPackage}) hasSameElements: {class1. package1}.
 	self assertCollection: (class1 allAtAnyScope: {FamixTMethod}) hasSameElements: {}.
 	self assertCollection: (methodExt allAtAnyScope: {FamixJavaPackage}) hasSameElements: {package1. package2}.
 ]
@@ -127,14 +127,14 @@ MooseQueryTest >> testAllAtAnyScopeUntil [
 	self assertCollection: (class1 allAtAnyScope: {FamixJavaPackage} until: [:famixEntity | famixEntity isOfType: FamixJavaClass ]) hasSameElements: {}.
 	self assertCollection: (class1 allAtAnyScope: {FamixJavaClass . FamixJavaPackage} until: [:famixEntity | famixEntity isOfType: FamixJavaClass ]) hasSameElements: {class1}.
 	
-	self assertCollection: (class1 allAtAnyScope: {FamixTPackage} until: [:famixEntity | famixEntity isOfType: FamixTClass ]) hasSameElements: {}.
-	self assertCollection: (class1 allAtAnyScope: {FamixTClass . FamixTPackage}until: [:famixEntity | famixEntity isOfType: FamixTClass ]) hasSameElements: {class1}.
+	self assertCollection: (class1 allAtAnyScope: {FamixTPackage} until: [:famixEntity | famixEntity isOfType: FamixOOTClass ]) hasSameElements: {}.
+	self assertCollection: (class1 allAtAnyScope: {FamixOOTClass . FamixTPackage}until: [:famixEntity | famixEntity isOfType: FamixOOTClass ]) hasSameElements: {class1}.
 ]
 
 { #category : #tests }
 MooseQueryTest >> testAllAtScope [
 	| package3 |
-	self assertCollection: (class1 allAtScope: FamixTClass) hasSameElements: {class1}.
+	self assertCollection: (class1 allAtScope: FamixOOTClass) hasSameElements: {class1}.
 	self assertCollection: (class1 allAtScope: FamixTType) hasSameElements: {class1}.
 	self assertCollection: (class1 allAtScope: FamixTPackage) hasSameElements: {package1}.
 
@@ -148,9 +148,9 @@ MooseQueryTest >> testAllAtScope [
 { #category : #tests }
 MooseQueryTest >> testAllAtScopeUntil [
 	| package3 |
-	self assertCollection: (class1 allAtScope: FamixTClass until: [ :famixEntity | famixEntity isOfType: FamixTClass ]) hasSameElements: {class1}.
-	self assertCollection: (class1 allAtScope: FamixTType until: [ :famixEntity | famixEntity isOfType: FamixTClass ]) hasSameElements: {class1}.
-	self assertCollection: (class1 allAtScope: FamixTPackage until: [ :famixEntity | famixEntity isOfType: FamixTClass ]) hasSameElements: {}.
+	self assertCollection: (class1 allAtScope: FamixOOTClass until: [ :famixEntity | famixEntity isOfType: FamixOOTClass ]) hasSameElements: {class1}.
+	self assertCollection: (class1 allAtScope: FamixTType until: [ :famixEntity | famixEntity isOfType: FamixOOTClass ]) hasSameElements: {class1}.
+	self assertCollection: (class1 allAtScope: FamixTPackage until: [ :famixEntity | famixEntity isOfType: FamixOOTClass ]) hasSameElements: {}.
 
 	package3 := FamixJavaPackage new
 		name: 'package3';
@@ -207,41 +207,41 @@ MooseQueryTest >> testAllToScope [
 	self assertCollection: (class1 allToScope: FamixTMethod) hasSameElements: {method1}.
 	self assertCollection: (class2 allToScope: FamixTAttribute) hasSameElements: {var1 . var2}.
 	self assertCollection: (class2 allToScope: FamixTStructuralEntity) hasSameElements: {var1 . var2 . localVariable}.
-	self assertCollection: (package1 allToScope: FamixTClass) hasSameElements: {class1}.
+	self assertCollection: (package1 allToScope: FamixOOTClass) hasSameElements: {class1}.
 	class3 := FamixJavaClass new
 		name: 'class3';
 		typeContainer: class1;
 		mooseModel: model.
-	self assertCollection: (class1 allToScope: FamixTClass) hasSameElements: {class1 . class3}.
-	self assertCollection: (package1 allToScope: FamixTClass) hasSameElements: {class1 . class3}
+	self assertCollection: (class1 allToScope: FamixOOTClass) hasSameElements: {class1 . class3}.
+	self assertCollection: (package1 allToScope: FamixOOTClass) hasSameElements: {class1 . class3}
 ]
 
 { #category : #tests }
 MooseQueryTest >> testAllToScopeUntil [
 	self assertCollection: (class2 allToScope: FamixTStructuralEntity until: [ :entity | entity isOfType: FamixTMethod ]) hasSameElements: {var1 . var2}.
-	self assertCollection: (package1 allToScope: FamixTClass until: [ :entity | entity isOfType: FamixTPackage ]) hasSameElements: {}.
-	self assertCollection: (package1 allToScope: FamixTClass until: [ :entity | entity isOfType: FamixTClass ]) hasSameElements: {class1}.
+	self assertCollection: (package1 allToScope: FamixOOTClass until: [ :entity | entity isOfType: FamixTPackage ]) hasSameElements: {}.
+	self assertCollection: (package1 allToScope: FamixOOTClass until: [ :entity | entity isOfType: FamixOOTClass ]) hasSameElements: {class1}.
 	FamixJavaClass new
 		name: 'class3';
 		typeContainer: class1;
 		mooseModel: model.
-	self assertCollection: (class1 allToScope: FamixTClass until: [ :entity | entity name = 'class1' ]) hasSameElements: {class1}.
-	self assertCollection: (package1 allToScope: FamixTClass until: [ :entity | entity name = 'class1' ]) hasSameElements: {class1}
+	self assertCollection: (class1 allToScope: FamixOOTClass until: [ :entity | entity name = 'class1' ]) hasSameElements: {class1}.
+	self assertCollection: (package1 allToScope: FamixOOTClass until: [ :entity | entity name = 'class1' ]) hasSameElements: {class1}
 ]
 
 { #category : #tests }
 MooseQueryTest >> testAllWithAnyScope [
 	self assertCollection: (class2 allWithAnyScope: {FamixTMethod . FamixTAttribute}) hasSameElements: {method2 . method3 . var1 . var2 . methodExt}.
-	self assertCollection: (class2 allWithAnyScope: {FamixTClass . FamixTPackage}) hasSameElements: {class2. package2}.
+	self assertCollection: (class2 allWithAnyScope: {FamixOOTClass . FamixTPackage}) hasSameElements: {class2. package2}.
 	self assertCollection: (class2 allWithAnyScope: {FamixTMethod . FamixTAttribute . FamixTPackage}) hasSameElements: {method2 . method3 . var1 . var2 . methodExt . package2}.
 	self assertCollection: (class2 allWithAnyScope: {FamixTMethod . FamixTStructuralEntity . FamixTPackage}) hasSameElements: {method2 . method3 . var1 . var2 . methodExt . package2 . localVariable}
 ]
 
 { #category : #tests }
 MooseQueryTest >> testAllWithAnyScopeUntil [
-	self assertCollection: (class2 allWithAnyScope: {FamixTMethod . FamixTAttribute} until: [:el | el isOfType: FamixTClass]) hasSameElements: {}.
-	self assertCollection: (class2 allWithAnyScope: {FamixTClass . FamixTPackage} until: [:el | el isOfType: FamixTClass]) hasSameElements: {class2}.
-	self assertCollection: (class2 allWithAnyScope: {FamixTMethod . FamixTAttribute . FamixTPackage} until: [:el | el isOfType: FamixTClass]) hasSameElements: {}.
+	self assertCollection: (class2 allWithAnyScope: {FamixTMethod . FamixTAttribute} until: [:el | el isOfType: FamixOOTClass]) hasSameElements: {}.
+	self assertCollection: (class2 allWithAnyScope: {FamixOOTClass . FamixTPackage} until: [:el | el isOfType: FamixOOTClass]) hasSameElements: {class2}.
+	self assertCollection: (class2 allWithAnyScope: {FamixTMethod . FamixTAttribute . FamixTPackage} until: [:el | el isOfType: FamixOOTClass]) hasSameElements: {}.
 	self assertCollection: (class2 allWithAnyScope: {FamixTMethod . FamixTStructuralEntity . FamixTPackage} until: [:el | el isOfType: FamixTMethod]) hasSameElements: {method2 . method3 . var1 . var2 . methodExt . package2 }
 ]
 
@@ -249,7 +249,7 @@ MooseQueryTest >> testAllWithAnyScopeUntil [
 MooseQueryTest >> testAllWithScope [
 	| package3 class3 |
 	self assertCollection: (class1 allWithScope: FamixTMethod) hasSameElements: {method1}.
-	self assertCollection: (class1 allWithScope: FamixTClass) hasSameElements: {class1}.
+	self assertCollection: (class1 allWithScope: FamixOOTClass) hasSameElements: {class1}.
 	self assertCollection: (class1 allWithScope: FamixTType) hasSameElements: {class1}.
 	self assertCollection: (class1 allWithScope: FamixTPackage) hasSameElements: {package1}.
 	package3 := FamixJavaPackage new
@@ -261,7 +261,7 @@ MooseQueryTest >> testAllWithScope [
 		typeContainer: class1;
 		mooseModel: model.
 	self assertCollection: (class1 allWithScope: FamixTMethod) hasSameElements: {method1}.
-	self assertCollection: (class1 allWithScope: FamixTClass) hasSameElements: {class1 . class3}.
+	self assertCollection: (class1 allWithScope: FamixOOTClass) hasSameElements: {class1 . class3}.
 	self assertCollection: (class1 allWithScope: FamixTType) hasSameElements: {class1 . class3}.
 	self assertCollection: (class1 allWithScope: FamixTPackage) hasSameElements: {package1 . package3}
 ]
@@ -270,8 +270,8 @@ MooseQueryTest >> testAllWithScope [
 MooseQueryTest >> testAllWithScopeUntil [
 	| package3 class3 |
 	self assertCollection: (class1 allWithScope: FamixTMethod until: [ :el | el isOfType: FamixTMethod ]) hasSameElements: {method1}.
-	self assertCollection: (class1 allWithScope: FamixTMethod until: [ :el | el isOfType: FamixTClass ]) hasSameElements: {}.
-	self assertCollection: (class1 allWithScope: FamixTPackage until: [ :el | el isOfType: FamixTClass ]) hasSameElements: {}.
+	self assertCollection: (class1 allWithScope: FamixTMethod until: [ :el | el isOfType: FamixOOTClass ]) hasSameElements: {}.
+	self assertCollection: (class1 allWithScope: FamixTPackage until: [ :el | el isOfType: FamixOOTClass ]) hasSameElements: {}.
 	self assertCollection: (class1 allWithScope: FamixTPackage until: [ :el | el isOfType: FamixTPackage ]) hasSameElements: {package1}.
 	package3 := FamixJavaPackage new
 		name: 'package3';
@@ -281,8 +281,8 @@ MooseQueryTest >> testAllWithScopeUntil [
 		name: 'class3';
 		typeContainer: class1;
 		mooseModel: model.
-	self assertCollection: (class1 allWithScope: FamixTClass until: [ :el | el name = 'class1' ]) hasSameElements: {class1}.
-	self assertCollection: (class1 allWithScope: FamixTClass until: [ :el | el name = 'class3' ]) hasSameElements: {class1 . class3}.
+	self assertCollection: (class1 allWithScope: FamixOOTClass until: [ :el | el name = 'class1' ]) hasSameElements: {class1}.
+	self assertCollection: (class1 allWithScope: FamixOOTClass until: [ :el | el name = 'class3' ]) hasSameElements: {class1 . class3}.
 	self assertCollection: (class1 allWithScope: FamixTType until: [ :el | el name = 'class1' ]) hasSameElements: {class1}.
 	self assertCollection: (class1 allWithScope: FamixTType until: [ :el | el name = 'class3' ]) hasSameElements: {class1 . class3}.
 	self assertCollection: (class1 allWithScope: FamixTPackage until: [ :el | el name = 'package1' ]) hasSameElements: {package1}.
@@ -295,9 +295,9 @@ MooseQueryTest >> testAtAnyScope [
 	self assertCollection: (class1 atAnyScope: {FamixJavaPackage}) hasSameElements: {package1}.
 	self assertCollection: (class1 atAnyScope: {FamixJavaClass . FamixJavaPackage}) hasSameElements: {class1}.
 	self assertCollection: (class1 atAnyScope: {FamixJavaMethod}) hasSameElements: {}.
-	self assertCollection: (class1 atAnyScope: {FamixTClass}) hasSameElements: {class1}.
+	self assertCollection: (class1 atAnyScope: {FamixOOTClass}) hasSameElements: {class1}.
 	self assertCollection: (class1 atAnyScope: {FamixTPackage}) hasSameElements: {package1}.
-	self assertCollection: (class1 atAnyScope: {FamixTClass . FamixTPackage}) hasSameElements: {class1}.
+	self assertCollection: (class1 atAnyScope: {FamixOOTClass . FamixTPackage}) hasSameElements: {class1}.
 	self assertCollection: (class1 atAnyScope: {FamixTMethod}) hasSameElements: {}.
 	self assertCollection: (methodExt atAnyScope: {FamixJavaPackage}) hasSameElements: {package1. package2}.
 ]
@@ -305,12 +305,12 @@ MooseQueryTest >> testAtAnyScope [
 { #category : #tests }
 MooseQueryTest >> testAtAnyScopeUntil [
 	self assertCollection: (class1 atAnyScope: {FamixJavaPackage} until: [ :entity | entity isOfType: FamixTPackage ]) hasSameElements: {package1}.
-	self assertCollection: (class1 atAnyScope: {FamixJavaPackage} until: [ :entity | entity isOfType: FamixTClass ]) hasSameElements: {}.
+	self assertCollection: (class1 atAnyScope: {FamixJavaPackage} until: [ :entity | entity isOfType: FamixOOTClass ]) hasSameElements: {}.
 	self assertCollection: (class1 atAnyScope: {FamixJavaClass . FamixJavaPackage}) hasSameElements: {class1}.
-	self assertCollection: (class1 atAnyScope: {FamixTClass} until: [ :entity | entity isOfType: FamixTClass ]) hasSameElements: {class1}.
+	self assertCollection: (class1 atAnyScope: {FamixOOTClass} until: [ :entity | entity isOfType: FamixOOTClass ]) hasSameElements: {class1}.
 	self assertCollection: (class1 atAnyScope: {FamixTPackage}) hasSameElements: {package1}.
-	self assertCollection: (class1 atAnyScope: {FamixTPackage} until: [ :entity | entity isOfType: FamixTClass ]) hasSameElements: {}.
-	self assertCollection: (class1 atAnyScope: {FamixTClass . FamixTPackage} until: [ :entity | entity isOfType: FamixTClass ]) hasSameElements: {class1}.
+	self assertCollection: (class1 atAnyScope: {FamixTPackage} until: [ :entity | entity isOfType: FamixOOTClass ]) hasSameElements: {}.
+	self assertCollection: (class1 atAnyScope: {FamixOOTClass . FamixTPackage} until: [ :entity | entity isOfType: FamixOOTClass ]) hasSameElements: {class1}.
 	"the lookup for the methodExt does not go through the class"
 	self assertCollection: (methodExt atAnyScope: {FamixJavaPackage} until: [ :entity | entity isOfType: FamixTMethod ]) hasSameElements: {}.
 	self assertCollection: (methodExt atAnyScope: {FamixJavaPackage} until: [ :entity | entity isOfType: FamixTPackage ]) hasSameElements: {package1 . package2}
@@ -325,8 +325,8 @@ MooseQueryTest >> testAtScope [
 
 { #category : #tests }
 MooseQueryTest >> testAtScopeUntil [
-	self assertCollection: (class1 atScope: FamixJavaClass until: [:el | el isOfType: FamixTClass ]) hasSameElements: {class1}.
-	self assertCollection: (class1 atScope: FamixTPackage until: [:el | el isOfType: FamixTClass ]) hasSameElements: {}.
+	self assertCollection: (class1 atScope: FamixJavaClass until: [:el | el isOfType: FamixOOTClass ]) hasSameElements: {class1}.
+	self assertCollection: (class1 atScope: FamixTPackage until: [:el | el isOfType: FamixOOTClass ]) hasSameElements: {}.
 	self assertCollection: (class1 atScope: FamixTPackage until: [:el | el isOfType: FamixTPackage ]) hasSameElements: {package1}.
 ]
 
@@ -483,7 +483,7 @@ MooseQueryTest >> testHasOutgoingInvocation [
 { #category : #tests }
 MooseQueryTest >> testIncomingAssociationTypes [
 	self assertCollection: var2 incomingAssociationTypes hasSameElements: {FamixTAccess}.
-	self assertCollection: class1 incomingAssociationTypes hasSameElements: {FamixTInheritance . FamixTReference}.
+	self assertCollection: class1 incomingAssociationTypes hasSameElements: {FamixOOTInheritance . FamixTReference}.
 	self assertCollection: method1 incomingAssociationTypes hasSameElements: {FamixTInvocation}
 ]
 
@@ -529,7 +529,7 @@ MooseQueryTest >> testOutgoingAccessesWithANamespaceInANamespace [
 
 { #category : #tests }
 MooseQueryTest >> testOutgoingAssociationTypes [
-	self assertCollection: class1 outgoingAssociationTypes hasSameElements: {FamixTInheritance}.
+	self assertCollection: class1 outgoingAssociationTypes hasSameElements: {FamixOOTInheritance}.
 	self assertCollection: method1 outgoingAssociationTypes hasSameElements: {FamixTInvocation . FamixTReference . FamixTAccess}
 ]
 
@@ -618,10 +618,10 @@ MooseQueryTest >> testToAnyScope [
 { #category : #tests }
 MooseQueryTest >> testToAnyScopeUntil [
 	self assertCollection: (class2 toAnyScope: {FamixJavaMethod . FamixJavaAttribute} until: [ :el | el isOfType: FamixTMethod ]) hasSameElements: {method2 . method3 . methodExt . var1 . var2}.
-	self assertCollection: (class2 toAnyScope: {FamixJavaMethod . FamixJavaAttribute} until: [ :el | el isOfType: FamixTClass ]) hasSameElements: {}.
+	self assertCollection: (class2 toAnyScope: {FamixJavaMethod . FamixJavaAttribute} until: [ :el | el isOfType: FamixOOTClass ]) hasSameElements: {}.
 	self assertCollection: (class2 toAnyScope: {FamixJavaMethod . FamixTStructuralEntity} until: [ :el | el isOfType: FamixTMethod ]) hasSameElements: {method2 . method3 . methodExt . var1 . var2}.
-	self assertCollection: (class2 toAnyScope: {FamixJavaMethod . FamixTStructuralEntity} until: [ :el | el isOfType: FamixTClass ]) hasSameElements: {}.
-	self assertCollection: (class2 toAnyScope: {FamixJavaClass . FamixTLocalVariable} until: [ :el | el isOfType: FamixTClass ]) hasSameElements: {class2}.
+	self assertCollection: (class2 toAnyScope: {FamixJavaMethod . FamixTStructuralEntity} until: [ :el | el isOfType: FamixOOTClass ]) hasSameElements: {}.
+	self assertCollection: (class2 toAnyScope: {FamixJavaClass . FamixTLocalVariable} until: [ :el | el isOfType: FamixOOTClass ]) hasSameElements: {class2}.
 	self assertCollection: (class2 toAnyScope: {FamixJavaClass . FamixTLocalVariable} until: [ :el | el isOfType: FamixTMethod ]) hasSameElements: {class2}.
 ]
 
@@ -635,12 +635,12 @@ MooseQueryTest >> testToScope [
 
 { #category : #tests }
 MooseQueryTest >> testToScopeUntil [
-	self assertCollection: (class1 toScope: FamixJavaMethod until: [ :el | el isOfType: FamixTClass ]) hasSameElements: {}.
+	self assertCollection: (class1 toScope: FamixJavaMethod until: [ :el | el isOfType: FamixOOTClass ]) hasSameElements: {}.
 	self assertCollection: (class1 toScope: FamixJavaMethod until: [ :el | el isOfType: FamixTMethod ]) hasSameElements: {method1}.
 	self assertCollection: (class2 toScope: FamixJavaAttribute until: [ :el | el isOfType: FamixTAttribute ]) hasSameElements: {var1 . var2}.
 	self assertCollection: (class2 toScope: FamixJavaAttribute until: [ :el | el isOfType: FamixTMethod ]) hasSameElements: {var1 . var2}.
 	self assertCollection: (class2 toScope: FamixTStructuralEntity  until: [ :el | el isOfType: FamixTMethod ]) hasSameElements: {var1 . var2}.
-	self assertCollection: (class2 toScope: FamixTStructuralEntity until: [ :el | el isOfType: FamixTClass ]) hasSameElements: {}.
+	self assertCollection: (class2 toScope: FamixTStructuralEntity until: [ :el | el isOfType: FamixOOTClass ]) hasSameElements: {}.
 	self assertCollection: (class2 toScope: FamixTStructuralEntity until: [ :el | el isOfType: FamixTStructuralEntity ]) hasSameElements: {var1. var2. localVariable}.
 ]
 
@@ -662,14 +662,14 @@ MooseQueryTest >> testWithAllParents [
 { #category : #tests }
 MooseQueryTest >> testWithAnyScope [
 	self assertCollection: (class2 withAnyScope: {FamixTMethod . FamixTAttribute}) hasSameElements: {method2 . method3 . var1 . var2 . methodExt}.
-	self assertCollection: (class2 withAnyScope: {FamixTClass . FamixTPackage}) hasSameElements: {class2}.
+	self assertCollection: (class2 withAnyScope: {FamixOOTClass . FamixTPackage}) hasSameElements: {class2}.
 	self assertCollection: (class2 withAnyScope: {FamixTMethod . FamixTAttribute . FamixTPackage}) hasSameElements: {method2 . method3 . var1 . var2 . methodExt . package2}.
 	self assertCollection: (class2 withAnyScope: {FamixTMethod . FamixTStructuralEntity . FamixTPackage}) hasSameElements: {method2 . method3 . var1 . var2 . methodExt . package2}
 ]
 
 { #category : #tests }
 MooseQueryTest >> testWithAnyScopeUntil [
-	self assertCollection: (class1 withAnyScope: {FamixTMethod . FamixTStructuralEntity . FamixTPackage} until: [:el | el isOfType: FamixTClass ]) hasSameElements: {}
+	self assertCollection: (class1 withAnyScope: {FamixTMethod . FamixTStructuralEntity . FamixTPackage} until: [:el | el isOfType: FamixOOTClass ]) hasSameElements: {}
 ]
 
 { #category : #tests }
@@ -677,7 +677,7 @@ MooseQueryTest >> testWithScope [
 	self assertCollection: (class1 withScope: FamixTMethod) hasSameElements: {method1}.
 	self assertCollection: (class2 toScope: FamixTAttribute) hasSameElements: {var1 . var2}.
 	self assertCollection: (package1 toScope: FamixTMethod) hasSameElements: {method1 . methodExt}.
-	self assertCollection: (class1 withScope: FamixTClass) hasSameElements: {class1}.
+	self assertCollection: (class1 withScope: FamixOOTClass) hasSameElements: {class1}.
 	self assertCollection: (class1 withScope: FamixTType) hasSameElements: {class1}.
 	self assertCollection: (class1 withScope: FamixTPackage) hasSameElements: {package1}
 ]
@@ -685,14 +685,14 @@ MooseQueryTest >> testWithScope [
 { #category : #tests }
 MooseQueryTest >> testWithScopeUntil [
 	self assertCollection: (class1 withScope: FamixTMethod until: [ :el | el isOfType: FamixTMethod ]) hasSameElements: {method1}.
-	self assertCollection: (class1 withScope: FamixTMethod until: [ :el | el isOfType: FamixTClass ]) hasSameElements: {}.
+	self assertCollection: (class1 withScope: FamixTMethod until: [ :el | el isOfType: FamixOOTClass ]) hasSameElements: {}.
 	self assertCollection: (class2 toScope: FamixTAttribute until: [ :el | el isOfType: FamixTAttribute ]) hasSameElements: {var1 . var2}.
-	self assertCollection: (class2 toScope: FamixTAttribute until: [ :el | el isOfType: FamixTClass ]) hasSameElements: {}.
+	self assertCollection: (class2 toScope: FamixTAttribute until: [ :el | el isOfType: FamixOOTClass ]) hasSameElements: {}.
 	self assertCollection: (package1 toScope: FamixTMethod until: [ :el | el isOfType: FamixTPackage ]) hasSameElements: {}.
-	self assertCollection: (package1 toScope: FamixTMethod until: [ :el | el isOfType: FamixTClass ]) hasSameElements: { methodExt }.
+	self assertCollection: (package1 toScope: FamixTMethod until: [ :el | el isOfType: FamixOOTClass ]) hasSameElements: { methodExt }.
 	self assertCollection: (package1 toScope: FamixTMethod until: [ :el | el isOfType: FamixTMethod ]) hasSameElements: {method1 . methodExt}.
 	self assertCollection: (class1 withScope: FamixTPackage until: [:el | el isOfType: FamixTPackage]) hasSameElements: {package1}.
-	self assertCollection: (class1 withScope: FamixTPackage until: [:el | el isOfType: FamixTClass]) hasSameElements: {}.
+	self assertCollection: (class1 withScope: FamixTPackage until: [:el | el isOfType: FamixOOTClass]) hasSameElements: {}.
 ]
 
 { #category : #tests }

@@ -58,7 +58,7 @@ FmxImportingContextTest >> testImportingClasses [
 						importClass;
 						yourself) ].
 	self assert: model entities size equals: 2.
-	self assert: (model allUsing: FamixTClass) size equals: 2.
+	self assert: (model allUsing: FamixOOTClass) size equals: 2.
 	self assertEmpty: (model allUsing: FamixTMethod).
 	self assertEmpty: (model allUsing: FamixTHasImmediateSource)
 ]
@@ -75,7 +75,7 @@ FmxImportingContextTest >> testImportingClassesAndMethods [
 						importMethod;
 						yourself) ].
 	self assert: model entities size equals: 5.
-	self assert: (model allUsing: FamixTClass) size equals: 2.
+	self assert: (model allUsing: FamixOOTClass) size equals: 2.
 	self assert: (model allUsing: FamixTMethod) size equals: 3.
 	self assertEmpty: (model allUsing: FamixTHasImmediateSource)
 ]
@@ -91,7 +91,7 @@ FmxImportingContextTest >> testImportingMethodsBringClassesAsRequirement [
 						importMethod;
 						yourself) ].
 	self assert: model entities size equals: 5.
-	self assert: (model allUsing: FamixTClass) size equals: 2.
+	self assert: (model allUsing: FamixOOTClass) size equals: 2.
 	self assert: (model allUsing: FamixTMethod) size equals: 3.
 	self assertEmpty: (model allUsing: FamixTHasImmediateSource)
 ]
@@ -100,7 +100,7 @@ FmxImportingContextTest >> testImportingMethodsBringClassesAsRequirement [
 FmxImportingContextTest >> testModelWithoutImportingContext [
 	self modelMSE readStreamDo: [ :s | model := FamixTest1Model importFromMSEStream: s ].
 	self assert: model entities size equals: 7.
-	self assert: (model allUsing: FamixTClass) size equals: 2.
+	self assert: (model allUsing: FamixOOTClass) size equals: 2.
 	self assert: (model allUsing: FamixTMethod) size equals: 3.
 	self assert: (model allUsing: FamixTHasImmediateSource) size equals: 2
 ]

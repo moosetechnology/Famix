@@ -23,7 +23,7 @@ FamixTest3MooseQueryTest >> testAllClients [
 
 { #category : #tests }
 FamixTest3MooseQueryTest >> testAllClientsAtScope [
-	self assertCollection: (self pt1 allClientsAtScope: FamixTClass) hasSameElements: {self c1}.
+	self assertCollection: (self pt1 allClientsAtScope: FamixOOTClass) hasSameElements: {self c1}.
 	self assertCollection: (self pt1 allClientsAtScope: FamixTest3Class) hasSameElements: {self c1}
 ]
 
@@ -34,13 +34,13 @@ FamixTest3MooseQueryTest >> testAllProviders [
 
 { #category : #tests }
 FamixTest3MooseQueryTest >> testAllProvidersAtScope [
-	self assertCollection: (self m1 allProvidersAtScope: FamixTClass) hasSameElements: {self c1 . self pt1}.
+	self assertCollection: (self m1 allProvidersAtScope: FamixOOTClass) hasSameElements: {self c1 . self pt1}.
 	self assertCollection: (self m1 allProvidersAtScope: FamixTest3Class) hasSameElements: {self c1 . self pt1}
 ]
 
 { #category : #tests }
 FamixTest3MooseQueryTest >> testAtScope [
-	self assertCollection: (self m1 atScope: FamixTClass) hasSameElements: {self c1}.
+	self assertCollection: (self m1 atScope: FamixOOTClass) hasSameElements: {self c1}.
 	self assertCollection: (self m1 atScope: FamixTest3Class) hasSameElements: {self c1}
 ]
 
@@ -49,13 +49,13 @@ FamixTest3MooseQueryTest >> testAtScopeOnQueryResult [
 	| mooseQueryResult |
 	mooseQueryResult := MooseObjectQueryResult on: self c1 withAll: {self m1 . self m2 . self pt1 . self pt2}.
 
-	self assertCollection: (mooseQueryResult atScope: FamixTClass) hasSameElements: {self c1 . self c2}.
+	self assertCollection: (mooseQueryResult atScope: FamixOOTClass) hasSameElements: {self c1 . self c2}.
 	self assertCollection: (mooseQueryResult atScope: FamixTest3Class) hasSameElements: {self c1 . self c2}
 ]
 
 { #category : #tests }
 FamixTest3MooseQueryTest >> testAtScopeWithNonMatchingEntitiesDo [
-	self checkAtScopeWithNonMatchingEntitiesDoWith: FamixTClass.
+	self checkAtScopeWithNonMatchingEntitiesDoWith: FamixOOTClass.
 	self checkAtScopeWithNonMatchingEntitiesDoWith: FamixTest3Class
 ]
 
@@ -71,7 +71,7 @@ FamixTest3MooseQueryTest >> testIncomingReferences [
 
 { #category : #tests }
 FamixTest3MooseQueryTest >> testParentTypes [
-	self assertCollection: self m1 parentTypes hasSameElements: {FamixTWithMethods . FamixTest3Class}
+	self assertCollection: self m1 parentTypes hasSameElements: {FamixOOTWithMethods . FamixTest3Class}
 ]
 
 { #category : #tests }

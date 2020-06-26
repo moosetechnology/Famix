@@ -29,14 +29,14 @@ MooseQueryComparedToMooseQueryTest >> testIncomingAccesses [
 
 { #category : #tests }
 MooseQueryComparedToMooseQueryTest >> testIncomingInheritances [
-	self assert: (class2 queryIncoming: FamixTInheritance) asSet equals: (MooseIncomingQueryResult on: class2 withAll: class2 subInheritances) asSet.
+	self assert: (class2 queryIncoming: FamixOOTInheritance) asSet equals: (MooseIncomingQueryResult on: class2 withAll: class2 subInheritances) asSet.
 	self
-		assert: (package2 queryIncoming: FamixTInheritance) asSet
+		assert: (package2 queryIncoming: FamixOOTInheritance) asSet
 		equals: (MooseIncomingQueryResult on: package2 withAll: (package2 classes flatCollect: [ :c | c subInheritances ])) asSet.
 	self
-		assert: (namespace queryIncoming: FamixTInheritance) asSet
+		assert: (namespace queryIncoming: FamixOOTInheritance) asSet
 		equals: (MooseIncomingQueryResult on: namespace withAll: (namespace classes flatCollect: [ :c | c subInheritances ])) asSet.
-	self assert: (method2 queryIncoming: FamixTInheritance) asSet equals: Array empty asSet
+	self assert: (method2 queryIncoming: FamixOOTInheritance) asSet equals: Array empty asSet
 ]
 
 { #category : #tests }
@@ -86,11 +86,11 @@ MooseQueryComparedToMooseQueryTest >> testOutgoingAccesses [
 
 { #category : #tests }
 MooseQueryComparedToMooseQueryTest >> testOutgoingInheritances [
-	self assert: (class1 queryOutgoing: FamixTInheritance) asSet equals: (MooseOutgoingQueryResult on: class1 withAll: class1 superInheritances) asSet.
+	self assert: (class1 queryOutgoing: FamixOOTInheritance) asSet equals: (MooseOutgoingQueryResult on: class1 withAll: class1 superInheritances) asSet.
 	self
-		assert: (package1 queryOutgoing: FamixTInheritance) asSet
+		assert: (package1 queryOutgoing: FamixOOTInheritance) asSet
 		equals: (MooseOutgoingQueryResult on: package1 withAll: (package1 classes flatCollect: [ :c | c superInheritances ])) asSet.
-	self assert: (method2 queryOutgoing: FamixTInheritance) asSet equals: Array empty asSet
+	self assert: (method2 queryOutgoing: FamixOOTInheritance) asSet equals: Array empty asSet
 ]
 
 { #category : #tests }

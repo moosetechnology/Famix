@@ -39,7 +39,7 @@ LANMooseGroupTest >> testClassGroupType [
 	aCollection := self model allClasses asOrderedCollection.
 	numberOfClasses := aCollection size.
 	group := MooseGroup withAll: aCollection.
-	self assert: (group isMemberOf: FamixClassGroup).
+	self assert: (group isMemberOf: FamixOOClassGroup).
 	self assert: self model allClasses size equals: numberOfClasses
 ]
 
@@ -88,7 +88,7 @@ LANMooseGroupTest >> testGroupInsideGroup [
 	group2 := MooseGroup withAll: methods.
 	group3 := MooseGroup withAll: (OrderedCollection with: group1 with: group2).
 	self denyEmpty: (group3 select: [ :each | each == group2 ]).
-	self assert: (self model allClasses isMemberOf: FamixClassGroup).
+	self assert: (self model allClasses isMemberOf: FamixOOClassGroup).
 	self assert: self model allClasses size equals: numberOfClasses
 ]
 
@@ -98,15 +98,15 @@ LANMooseGroupTest >> testGroupType [
 	numberOfClasses := self model allClasses size.
 	numberOfMethods := self model allMethods size.
 	group := MooseGroup withAll: self model allClasses entities.
-	self assert: (group isMemberOf: FamixClassGroup).
+	self assert: (group isMemberOf: FamixOOClassGroup).
 	group addAll: self model allMethods.
 	self assert: (group isMemberOf: MooseGroup).
 	group removeAll: self model allMethods.
-	self assert: (group isMemberOf: FamixClassGroup).
+	self assert: (group isMemberOf: FamixOOClassGroup).
 	group add: self model allMethods first.
 	self assert: (group isMemberOf: MooseGroup).
 	group remove: self model allMethods first.
-	self assert: (group isMemberOf: FamixClassGroup).
+	self assert: (group isMemberOf: FamixOOClassGroup).
 	group := MooseGroup withAll: self model allMethods entities.
 	self assert: (group isMemberOf: FamixMethodGroup).
 	self assert: self model allClasses size equals: numberOfClasses.
@@ -122,7 +122,7 @@ LANMooseGroupTest >> testHeterogeneousGroupType [
 	self assert: self model allClasses size equals: numberOfClasses.
 	group := MooseGroup withAll: aCollection.
 	self deny: (group isMemberOf: MooseGroup).
-	self assert: (group isMemberOf: FamixClassGroup).
+	self assert: (group isMemberOf: FamixOOClassGroup).
 	group addAll: self model allMethods asOrderedCollection.
 	self assert: self model allMethods size equals: numberOfMethods.
 	self assert: (group isMemberOf: MooseGroup).

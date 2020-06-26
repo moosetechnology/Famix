@@ -9,7 +9,7 @@ OldFamixTest1TestIssue28 >> testAllWithScope [
 
 	<expectedFailure>
 
-	self assertCollection: (c1 allWithScope: FamixTClass) hasSameElements: { c1 }.
+	self assertCollection: (c1 allWithScope: FamixOOTClass) hasSameElements: { c1 }.
 	self assertCollection: (c1 allWithScope: FamixTest1Class) hasSameElements: { c1 }.
 
 	self assertCollection: (c1 allWithScope: FamixTMethod) hasSameElements: { m1 }.
@@ -23,7 +23,7 @@ OldFamixTest1TestIssue28 >> testAllWithScope [
 	self assertCollection: (c2 allWithScope: FamixTSourceAnchor) hasSameElements: { }.
 	self assertCollection: (c2 allWithScope: FamixTest1SourceTextAnchor) hasSameElements: { }.
 
-	self assertCollection: (m1 allWithScope: FamixTClass) hasSameElements: { }.
+	self assertCollection: (m1 allWithScope: FamixOOTClass) hasSameElements: { }.
 	self assertCollection: (m1 allWithScope: FamixTest1Class) hasSameElements: { }.
 
 ]

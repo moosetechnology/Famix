@@ -166,8 +166,8 @@ LANImporterTest >> testInheritanceReification [
 	self denyEmpty: inheritances.
 	inheritances
 		do: [ :each | 
-			self assert: (each superclass usesFamixTrait: FamixTClass).
-			self assert: (each subclass usesFamixTrait: FamixTClass) ]
+			self assert: (each superclass usesFamixTrait: FamixOOTClass).
+			self assert: (each subclass usesFamixTrait: FamixOOTClass) ]
 ]
 
 { #category : #tests }

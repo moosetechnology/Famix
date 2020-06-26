@@ -37,6 +37,6 @@ MooseObjectQueryResultTest >> testWithoutSelfLoops [
 		mooseModel: model;
 		superclass: class1;
 		subclass: class2.
-	self assert: ((namespace1 queryOutgoing: FamixJavaInheritance) atScope: FamixTClass) size equals: 1.
-	self assertEmpty: ((namespace1 queryOutgoing: FamixJavaInheritance) atScope: FamixTClass) withoutSelfLoops
+	self assert: ((namespace1 queryOutgoing: FamixJavaInheritance) atScope: FamixOOTClass) size equals: 1.
+	self assertEmpty: ((namespace1 queryOutgoing: FamixJavaInheritance) atScope: FamixOOTClass) withoutSelfLoops
 ]
