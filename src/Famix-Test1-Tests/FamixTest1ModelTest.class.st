@@ -14,10 +14,10 @@ FamixTest1ModelTest >> testModelCanBeGenerated [
 
 { #category : #tests }
 FamixTest1ModelTest >> testModelCanHaveComment [
-	self assert: FamixTest1Model comment isNotEmpty
+	self assert: (self class environment classNamed: 'FamixTest1Model') comment isNotEmpty
 ]
 
 { #category : #tests }
 FamixTest1ModelTest >> testModelCanHaveProperties [
-	self assert: (FamixTest1Model new modelHasProperties: 3) isNotNil
+	self assert: ((self class environment classNamed: 'FamixTest1Model') new modelHasProperties: 3) isNotNil
 ]
