@@ -415,7 +415,7 @@ FamixMetamodelBuilder >> prepareGeneration [
 
 	self ensureEntityClassIsTheCommonSuperclass.
 	"ensure the model entity exists before geenrating"
-	self behaviorsCount > 0 ifTrue: [ self model ].
+	(self behaviorsCount > 0 or: [ self relations size > 0 ]) ifTrue: [ self model ].
 	self traitsWithSubBuildersTraits do: [ :each | self testingSelectorsMapping at: each put: each testingSelectors ].
 	self classes do: [ :each | self testingSelectorsMapping at: each put: each testingSelectors ].
 	self traits do: [ :each | each generate ].
