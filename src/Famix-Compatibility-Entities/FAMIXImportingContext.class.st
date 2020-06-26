@@ -233,12 +233,6 @@ FAMIXImportingContext >> importMethod [
 ]
 
 { #category : #testing }
-FAMIXImportingContext >> importModel [
-	<generated>
-	^ self import: FAMIXModel
-]
-
-{ #category : #testing }
 FAMIXImportingContext >> importModule [
 	<generated>
 	^ self import: FAMIXModule
@@ -638,12 +632,6 @@ FAMIXImportingContext >> shouldImportLocalVariable [
 FAMIXImportingContext >> shouldImportMethod [
 	<generated>
 	^ self shouldImport: FAMIXMethod
-]
-
-{ #category : #testing }
-FAMIXImportingContext >> shouldImportModel [
-	<generated>
-	^ self shouldImport: FAMIXModel
 ]
 
 { #category : #testing }

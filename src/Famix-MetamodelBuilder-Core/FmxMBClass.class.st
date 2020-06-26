@@ -92,14 +92,14 @@ FmxMBClass >> generateRemotes [
 FmxMBClass >> generateRootMetamodelMethodIn: aClass [
 	self isRoot ifFalse: [ ^ self ].
 
-	self builder configuration mooseModelName
-		ifNotNil: [ :mooseModelName | 
+	self builder model
+		ifNotNil: [ :model | 
 			aClass classSide
 				compile:
 					('metamodel
 
 	<generated>
-	^ {1} metamodel' format: {mooseModelName})
+	^ {1} metamodel' format: {model fullName})
 				classified: 'meta' ]
 ]
 
