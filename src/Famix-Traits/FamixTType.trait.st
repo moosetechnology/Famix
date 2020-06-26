@@ -12,6 +12,7 @@ Trait {
 		'#typedEntities => FMMany type: #FamixTTypedEntity opposite: #declaredType'
 	],
 	#traits : 'FamixTNamedEntity + FamixTReferenceable',
+	#classTraits : 'FamixTNamedEntity classTrait + FamixTReferenceable classTrait',
 	#category : #'Famix-Traits-Type'
 }
 
@@ -45,19 +46,6 @@ FamixTType >> belongsTo [
 { #category : #testing }
 FamixTType >> entityHasIncomingTypeDeclarations [
 	^ self typedEntities isNotEmpty
-]
-
-{ #category : #metrics }
-FamixTType >> fanIn [
-	<FMProperty: #fanIn type: #Number>
-	<derived>
-	<FMComment: 'Number of client classes'>
-	^ self lookUpPropertyNamed: #fanIn computedAs: [ (self allClientsAtScope: FamixTType) size ]
-]
-
-{ #category : #metrics }
-FamixTType >> fanIn: aNumber [
-	self privateState cacheAt: #fanIn put: aNumber
 ]
 
 { #category : #testing }

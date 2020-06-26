@@ -39,19 +39,6 @@ FamixTWithTypes >> allRecursiveTypesDo: aBlock [
 		each allRecursiveTypesDo: aBlock ]
 ]
 
-{ #category : #metrics }
-FamixTWithTypes >> fanOut [
-	<FMProperty: #fanOut type: #Number>
-	<derived>
-	<FMComment: 'Number of provider classes'>
-	^ self lookUpPropertyNamed: #fanOut computedAs: [ (self allProvidersAtScope: FamixTType) size ]
-]
-
-{ #category : #metrics }
-FamixTWithTypes >> fanOut: aNumber [
-	self privateState cacheAt: #fanOut put: aNumber
-]
-
 { #category : #accessing }
 FamixTWithTypes >> types [
 	"Relation named: #types type: #FamixTType opposite: #typeContainer"
