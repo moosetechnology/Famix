@@ -492,6 +492,22 @@ TEntityMetaLevelDependency >> childrenTypes [
 	^ self class childrenTypesIn: self metamodel
 ]
 
+{ #category : #accessing }
+TEntityMetaLevelDependency >> fanIn [
+	<FMProperty: #fanIn type: #Number>
+	<derived>
+	<FMComment: 'Number of incoming links'>
+	^ self allClients size
+]
+
+{ #category : #accessing }
+TEntityMetaLevelDependency >> fanOut [
+	<FMProperty: #fanOut type: #Number>
+	<derived>
+	<FMComment: 'Number of provider classes'>
+	^ self allProviders size
+]
+
 { #category : #testing }
 TEntityMetaLevelDependency >> has: anInOutSymbol [
 	"Check the incoming or outgoing associations of the receiver or its children.
