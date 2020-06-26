@@ -1,6 +1,7 @@
 Trait {
 	#name : #FamixTWithStatements,
 	#traits : 'FamixTSourceEntity + FamixTWithAccesses + FamixTWithInvocations',
+	#classTraits : 'FamixTSourceEntity classTrait + FamixTWithAccesses classTrait + FamixTWithInvocations classTrait',
 	#category : #'Famix-Traits-Behavioral'
 }
 
@@ -11,6 +12,23 @@ FamixTWithStatements classSide >> annotation [
 	<package: #'Famix-Traits'>
 	<generated>
 	^self
+]
+
+{ #category : #metrics }
+FamixTWithStatements >> computeCyclomaticComplexity [
+	^ self notExistentMetricValue
+]
+
+{ #category : #metrics }
+FamixTWithStatements >> cyclomaticComplexity [
+	<FMProperty: #cyclomaticComplexity type: #Number>
+	<FMComment: 'The number of linear-independent paths through a method.'>
+	^ self lookUpPropertyNamed: #cyclomaticComplexity computedAs: [ self computeCyclomaticComplexity ]
+]
+
+{ #category : #metrics }
+FamixTWithStatements >> cyclomaticComplexity: aNumber [
+	self privateState cacheAt: #cyclomaticComplexity put: aNumber
 ]
 
 { #category : #testing }
