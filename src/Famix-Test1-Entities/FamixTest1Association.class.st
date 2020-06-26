@@ -14,3 +14,13 @@ FamixTest1Association class >> annotation [
 	<generated>
 	^self
 ]
+
+{ #category : #converting }
+FamixTest1Association >> source [
+	^ nil
+]
+
+{ #category : #metrics }
+FamixTest1Association >> target [
+	^ nil
+]
