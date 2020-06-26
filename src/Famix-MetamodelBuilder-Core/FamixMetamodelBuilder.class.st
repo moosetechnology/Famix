@@ -463,6 +463,11 @@ FamixMetamodelBuilder >> relations: anObject [
 ]
 
 { #category : #accessing }
+FamixMetamodelBuilder >> reservedKeywords [
+	^ { #'class' }
+]
+
+{ #category : #accessing }
 FamixMetamodelBuilder >> safeAnnotationPackageName [
 	^ self configuration packageNameForAnnotations asSymbol printString
 ]

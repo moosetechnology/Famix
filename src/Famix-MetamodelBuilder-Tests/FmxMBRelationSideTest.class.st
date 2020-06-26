@@ -172,6 +172,17 @@ FmxMBRelationSideTest >> testProperties [
 ]
 
 { #category : #tests }
+FmxMBRelationSideTest >> testPropertyReservedName [
+	"simple tests of basic relation side properties"
+
+	| side |
+	side := FmxMBRelationSide new
+		builder: builder;
+		yourself.
+	self should: [ side name: 'class' ] raise: FmxMBPropertyNameIsReserved
+]
+
+{ #category : #tests }
 FmxMBRelationSideTest >> testPropertyType [
 	"test if after changing of related trait of a relation side all will be consistent"
 

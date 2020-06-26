@@ -11,9 +11,9 @@ FmxMBRelationTest >> testCardinalityString [
 	tClass := builder newTraitNamed: #TClass.
 	tMethod := builder newTraitNamed: #TMethod.
 
-	relation := (tClass <>-* tMethod).
+	relation := (tClass <>-* (tMethod property: #methodClass)).
 	self assert: relation cardinalityString equals: '1..*'.
-	relation := (tClass - tMethod).
+	relation := (tClass - (tMethod property: #methodClass)).
 	self assert: relation cardinalityString equals: '1..1'.
 	relation := (tClass *-* tMethod).
 	self assert: relation cardinalityString equals: '*..*'.	
@@ -27,9 +27,9 @@ FmxMBRelationTest >> testShortCardinalityString [
 	tClass := builder newTraitNamed: #TClass.
 	tMethod := builder newTraitNamed: #TMethod.
 	
-	relation := (tClass <>-* tMethod).
+	relation := (tClass <>-* (tMethod property: #methodClass)).
 	self assert: relation shortCardinalityString equals: '*'.
-	relation := (tClass - tMethod).
+	relation := (tClass - (tMethod property: #methodClass)).
 	self assert: relation shortCardinalityString equals: ''.
 	relation := (tClass *-* tMethod).
 	self assert: relation shortCardinalityString equals: '*'.	
