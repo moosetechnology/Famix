@@ -95,12 +95,6 @@ FamixStImportingContext >> importMethod [
 ]
 
 { #category : #testing }
-FamixStImportingContext >> importModel [
-	<generated>
-	^ self import: FamixStModel
-]
-
-{ #category : #testing }
 FamixStImportingContext >> importNamedEntity [
 	<generated>
 	^ self import: FamixStNamedEntity
@@ -260,12 +254,6 @@ FamixStImportingContext >> shouldImportLocalVariable [
 FamixStImportingContext >> shouldImportMethod [
 	<generated>
 	^ self shouldImport: FamixStMethod
-]
-
-{ #category : #testing }
-FamixStImportingContext >> shouldImportModel [
-	<generated>
-	^ self shouldImport: FamixStModel
 ]
 
 { #category : #testing }

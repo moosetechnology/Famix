@@ -182,8 +182,7 @@ FamixMetamodelGenerator >> adoptBuilder: aBuilder [
 	aBuilder configuration
 		prefix: self prefix;
 		packageName: self packageName;
-		packageNameForAnnotations: self packageNameForAnnotations;
-		mooseModelName: self class mooseModelName
+		packageNameForAnnotations: self packageNameForAnnotations
 ]
 
 { #category : #accessing }

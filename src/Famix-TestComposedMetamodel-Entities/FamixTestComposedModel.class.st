@@ -16,10 +16,3 @@ FamixTestComposedModel class >> annotation [
 	<package: #'Famix-TestComposedMetamodel-Entities'>
 	<generated>
 ]
-
-{ #category : #testing }
-FamixTestComposedModel >> isAssociation [
-
-	<generated>
-	^ false
-]

@@ -165,13 +165,15 @@ FamixMetamodelBuilder >> generate [
 FamixMetamodelBuilder >> generateImportIn: contextClass [
 	self classes
 		do: [ :each | 
-			self environment
-				compile:
-					('import{1}
+			"No need to generate methods for model class."
+			each isModelClass
+				ifFalse: [ self environment
+						compile:
+							('import{1}
 	<generated>
 	^ self import: {2}' format: {each name . each fullName})
-				in: contextClass
-				classified: 'testing' ]
+						in: contextClass
+						classified: 'testing' ] ]
 ]
 
 { #category : #generating }
@@ -199,13 +201,15 @@ FamixMetamodelBuilder >> generateRemotes [
 FamixMetamodelBuilder >> generateShouldImportIn: contextClass [
 	self classes
 		do: [ :each | 
-			self environment
-				compile:
-					('shouldImport{1}
+			"No need to generate methods for model class."
+			each isModelClass
+				ifFalse: [ self environment
+						compile:
+							('shouldImport{1}
 	<generated>
 	^ self shouldImport: {2}' format: {each name . each fullName})
-				in: contextClass
-				classified: 'testing' ]
+						in: contextClass
+						classified: 'testing' ] ]
 ]
 
 { #category : #accessing }
@@ -286,18 +290,19 @@ FamixMetamodelBuilder >> initialize [
 
 { #category : #initialization }
 FamixMetamodelBuilder >> model [
-
 	| aClass |
 	"can only have one model by generator, so return the model class if already created"
 	self classes detect: #isModelClass ifFound: [ :found | ^ found ].
-	
+
+	self configuration prefix
+		ifEmpty: [ ^ nil	"In case of empty prefix, it would generate a classe name Model which is not possible in Pharo. Thus we prevent this case." ].
+
 	aClass := FmxMBModel new.
 	aClass builder: self.
 	aClass prefix: self configuration prefix.
 	aClass packageName: self configuration packageName.
 	self classes add: aClass.
 	^ aClass
-	
 ]
 
 { #category : #initialization }

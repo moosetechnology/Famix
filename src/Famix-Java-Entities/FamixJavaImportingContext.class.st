@@ -149,12 +149,6 @@ FamixJavaImportingContext >> importMethod [
 ]
 
 { #category : #testing }
-FamixJavaImportingContext >> importModel [
-	<generated>
-	^ self import: FamixJavaModel
-]
-
-{ #category : #testing }
 FamixJavaImportingContext >> importNamedEntity [
 	<generated>
 	^ self import: FamixJavaNamedEntity
@@ -398,12 +392,6 @@ FamixJavaImportingContext >> shouldImportLocalVariable [
 FamixJavaImportingContext >> shouldImportMethod [
 	<generated>
 	^ self shouldImport: FamixJavaMethod
-]
-
-{ #category : #testing }
-FamixJavaImportingContext >> shouldImportModel [
-	<generated>
-	^ self shouldImport: FamixJavaModel
 ]
 
 { #category : #testing }
