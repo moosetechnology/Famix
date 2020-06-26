@@ -1,3 +1,6 @@
+"
+This a comment for the Class entity
+"
 Class {
 	#name : #FamixTest1Class,
 	#superclass : #FamixTest1NamedEntity,

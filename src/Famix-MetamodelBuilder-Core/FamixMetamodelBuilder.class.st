@@ -133,6 +133,7 @@ FamixMetamodelBuilder >> ensureEntityClassIsTheCommonSuperclass [
 	self classes iterator
 		| #isRoot selectIt
 		| #isMetamodelClassGroup rejectIt
+		| #isModelClass rejectIt
 		| [ :class | class name = #Entity ] rejectIt
 		| [ :class | class --|> (self ensureClassNamed: #Entity) ] doIt
 		> NullAddableObject
@@ -184,45 +185,6 @@ FamixMetamodelBuilder >> generateImportingContext [
 	
 	self generateShouldImportIn: contextClass.
 	self generateImportIn: contextClass
-]
-
-{ #category : #generating }
-FamixMetamodelBuilder >> generateMooseModel [
-	self configuration mooseModelName
-		ifNotNil: [ :mooseModelName | 
-			| model |
-			model := self environment
-				createClassNamed: mooseModelName
-				superclass: MooseModel
-				traitNames: #()
-				slots: #()
-				in: configuration packageName
-				overwrite: false.
-
-			model tagWith: #Model.
-
-			model classSide
-				compile:
-					('annotation
-	<FMClass: #{1} super: #MooseModel>
-	<package: {2}>
-	<generated>' format: {mooseModelName . self safeAnnotationPackageName})
-				classified: 'meta'.
-			self allSubBuilders
-				ifNotEmpty: [ :subBuilders | 
-					model classSide
-						compile:
-							('allSubmetamodelsPackagesNames
-	<generated>
-	^ #({1})'
-								format:
-									{(String
-										streamContents: [ :stream | 
-											| packages |
-											packages := (subBuilders collect: [ :builder | builder configuration packageName ]) asOrderedCollection.
-											packages sort: #yourself descending.
-											packages do: [ :package | stream print: package ] separatedBy: [ stream space ] ])})
-						classified: 'accessing' ] ]
 ]
 
 { #category : #generating }
@@ -320,6 +282,22 @@ FamixMetamodelBuilder >> initialize [
 	traits := OrderedCollection new.
 	relations := OrderedCollection new.
 	testingSelectorsMapping := Dictionary new
+]
+
+{ #category : #initialization }
+FamixMetamodelBuilder >> model [
+
+	| aClass |
+	"can only have one model by generator, so return the model class if already created"
+	self classes detect: #isModelClass ifFound: [ :found | ^ found ].
+	
+	aClass := FmxMBModel new.
+	aClass builder: self.
+	aClass prefix: self configuration prefix.
+	aClass packageName: self configuration packageName.
+	self classes add: aClass.
+	^ aClass
+	
 ]
 
 { #category : #initialization }
@@ -436,12 +414,13 @@ FamixMetamodelBuilder >> prepareGeneration [
 	self registerPackages.
 
 	self ensureEntityClassIsTheCommonSuperclass.
+	"ensure the model entity exists before geenrating"
+	self model.
 	self traitsWithSubBuildersTraits do: [ :each | self testingSelectorsMapping at: each put: each testingSelectors ].
 	self classes do: [ :each | self testingSelectorsMapping at: each put: each testingSelectors ].
 	self traits do: [ :each | each generate ].
 	self sortedClasses do: [ :each | each generate ].
 	self behaviorsCount > 0 ifTrue: [ self generateImportingContext ].
-	self generateMooseModel
 ]
 
 { #category : #printing }

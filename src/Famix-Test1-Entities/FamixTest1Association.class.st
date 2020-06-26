@@ -14,13 +14,3 @@ FamixTest1Association class >> annotation [
 	<generated>
 	^self
 ]
-
-{ #category : #accessing }
-FamixTest1Association >> source [
-	^ nil
-]
-
-{ #category : #accessing }
-FamixTest1Association >> target [
-	^ nil
-]

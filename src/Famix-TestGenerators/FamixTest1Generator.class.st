@@ -35,7 +35,8 @@ Class {
 		'folder',
 		'indexedFileAnchor',
 		'multipleFileAnchor',
-		'class'
+		'class',
+		'model'
 	],
 	#category : #'Famix-TestGenerators'
 }
@@ -56,7 +57,11 @@ FamixTest1Generator class >> prefix [
 FamixTest1Generator >> defineClasses [
 	super defineClasses.
 
+	model := builder model.
+	model comment: 'This is a the comment of the model class'.
+
 	class := builder newClassNamed: #Class.
+	class comment: 'This a comment for the Class entity'.
 	method := builder newClassNamed: #Method.
 	attribute := builder newClassNamed: #Attribute.
 	association := builder newClassNamed: #Association.
@@ -99,6 +104,12 @@ FamixTest1Generator >> defineHierarchy [
 	multipleFileAnchor --|> #TMultipleFileAnchor.
 
 	sourcedEntity --|> #TWithFiles
+]
+
+{ #category : #definition }
+FamixTest1Generator >> defineProperties [
+	super defineProperties.
+	model property: #modelHasProperties type: #Object
 ]
 
 { #category : #definition }

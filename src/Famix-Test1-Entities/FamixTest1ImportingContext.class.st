@@ -65,6 +65,12 @@ FamixTest1ImportingContext >> importMethod [
 ]
 
 { #category : #testing }
+FamixTest1ImportingContext >> importModel [
+	<generated>
+	^ self import: FamixTest1Model
+]
+
+{ #category : #testing }
 FamixTest1ImportingContext >> importMultipleFileAnchor [
 	<generated>
 	^ self import: FamixTest1MultipleFileAnchor
@@ -164,6 +170,12 @@ FamixTest1ImportingContext >> shouldImportIndexedFileAnchor [
 FamixTest1ImportingContext >> shouldImportMethod [
 	<generated>
 	^ self shouldImport: FamixTest1Method
+]
+
+{ #category : #testing }
+FamixTest1ImportingContext >> shouldImportModel [
+	<generated>
+	^ self shouldImport: FamixTest1Model
 ]
 
 { #category : #testing }
