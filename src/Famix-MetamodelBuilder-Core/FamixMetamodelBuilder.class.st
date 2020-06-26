@@ -415,12 +415,12 @@ FamixMetamodelBuilder >> prepareGeneration [
 
 	self ensureEntityClassIsTheCommonSuperclass.
 	"ensure the model entity exists before geenrating"
-	self model.
+	self behaviorsCount > 0 ifTrue: [ self model ].
 	self traitsWithSubBuildersTraits do: [ :each | self testingSelectorsMapping at: each put: each testingSelectors ].
 	self classes do: [ :each | self testingSelectorsMapping at: each put: each testingSelectors ].
 	self traits do: [ :each | each generate ].
 	self sortedClasses do: [ :each | each generate ].
-	self behaviorsCount > 0 ifTrue: [ self generateImportingContext ].
+	self behaviorsCount > 0 ifTrue: [ self generateImportingContext ]
 ]
 
 { #category : #printing }
