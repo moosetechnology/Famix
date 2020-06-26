@@ -45,6 +45,12 @@ FmxMBProperty >> isContainer [
 	^ false
 ]
 
+{ #category : #accessing }
+FmxMBProperty >> name: aString [
+	(self builder reservedKeywords includes: aString) ifTrue: [ FmxMBPropertyNameIsReserved signal ].
+	name := aString
+]
+
 { #category : #printing }
 FmxMBProperty >> printOn: aStream [
 	<ignoreForCoverage>
