@@ -21,7 +21,7 @@ FamixBasicInfrastructureGenerator class >> isAbstract [
 
 { #category : #accessing }
 FamixBasicInfrastructureGenerator class >> submetamodels [
-	^ {FamixGenerator}
+	^ {FamixGenerator. FamixOOGenerator }
 ]
 
 { #category : #definition }

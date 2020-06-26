@@ -83,7 +83,6 @@ Class {
 		'tWithInheritances',
 		'tWithInvocations',
 		'tWithLocalVariables',
-		'tWithMethods',
 		'tDefinedInModule',
 		'tWithPackages',
 		'tWithParameterizedTypeUsers',
@@ -96,7 +95,6 @@ Class {
 		'tWithTypeAliases',
 		'tWithTypes',
 		'tPossibleStub',
-		'tClass',
 		'tFolder',
 		'tFileSystemEntity',
 		'tFileNavigation',
@@ -122,11 +120,11 @@ Class {
 		'tHasImmediateSource',
 		'tNamedEntity',
 		'tTypeGroup',
-		'tClassGroup',
 		'tPrimitiveType',
 		'tUnknownVariable',
 		'tRelativeSourceAnchor',
-		'tEnum'
+		'tEnum',
+		'tWithMethods'
 	],
 	#category : #'Famix-MetamodelGeneration'
 }
@@ -265,16 +263,6 @@ FamixGenerator >> commentForTAttribute [
 FamixGenerator >> commentForTCaughtException [
 
 	^ 'This is an exception that is explicitly handled by a method. For example, in Java it is an exception that appears in a catch statement.'
-]
-
-{ #category : #comments }
-FamixGenerator >> commentForTClass [
-
-	^ 'FAMIXClass represents an entity which can build new instances. A FAMIXClass is a FAMIXType, therefore it is involved in super/sub types relationships (depending on the language) and it holds attributes, methods.
-
-FAMIX does not model explicitly interfaces, but a FAMIXClass can represent a Java interface by setting the isInterface property.
-
-A class is typically scoped in a namespace. To model nested or anonymous classes, extractors can set the container of classes to classes or methods, respectively.'
 ]
 
 { #category : #comments }
@@ -418,12 +406,6 @@ FamixGenerator >> commentForTImplicitVariable [
 
 { #category : #comments }
 FamixGenerator >> commentForTIndexedFileNavigation [
-
-	^ ''
-]
-
-{ #category : #comments }
-FamixGenerator >> commentForTInheritance [
 
 	^ ''
 ]
@@ -820,12 +802,6 @@ FamixGenerator >> commentForTWithImplicitVariables [
 ]
 
 { #category : #comments }
-FamixGenerator >> commentForTWithInheritances [
-
-	^ ''
-]
-
-{ #category : #comments }
 FamixGenerator >> commentForTWithInvocations [
 
 	^ ''
@@ -933,17 +909,6 @@ FamixGenerator >> defineHierarchy [
 
 	tCohesionCouplingMetrics --|> tPackage.
 
-	tClass --|> tWithMethods.
-	tClass --|> tWithInheritances.
-	tClass --|> tWithAttributes.
-	tClass inheritsFromTrait: tType without: { #queryStaticIncomingAssociations. #queryStaticOutgoingAssociations }.
-	tClass --|> tPackageable.
-	tClass --|> tInvocationsReceiver.
-	tClass --|> tWithComments.
-	tClass --|> #TOODependencyQueries.
-
-	tClassGroup --|> tTypeGroup.
-
 	tCompilationUnit --|> tFile.
 
 	tDereferencedInvocation --|> tInvocation.
@@ -976,7 +941,6 @@ FamixGenerator >> defineHierarchy [
 	
 	tIndexedFileNavigation --|> tFileAnchor.
 
-	tInheritance --|> tAssociation.
 
 	tInvocation --|> tAssociation.
 
@@ -1288,13 +1252,6 @@ FamixGenerator >> defineRelations [
 	((tWithLocalVariables property: #localVariables)
 			comment: 'Variables locally defined by this behaviour.').
 
-	((tMethod property: #parentType)
-			comment: 'Type declaring the method. It provides the implementation for belongsTo.';
-			container)
-		*-
-	((tWithMethods property: #methods)
-			comment: 'Methods declared by this type.').
-
 	((tModule property: #moduleEntities))
 		-*
 	((tDefinedInModule property: #parentModule)
@@ -1317,6 +1274,13 @@ FamixGenerator >> defineRelations [
 	((tWithParameters property: #parameters)
 			comment: 'List of formal parameters declared by this behaviour.').
 
+	((tMethod property: #parentType)
+			comment: 'Type declaring the method. It provides the implementation for belongsTo.';
+			container)
+		*-
+	((tWithMethods property: #methods)
+			comment: 'Methods declared by this type.').
+			
 	((tParameterizedType property: #parameterizableClass)
 			comment: 'Base type of this parameterized type.')
 		*-
@@ -1351,20 +1315,6 @@ FamixGenerator >> defineRelations [
 		-*
 	((tWithSourceLanguage property: #declaredSourceLanguage)
 			comment: 'The declared SourceLanguage for the source code of this entity').
-
-	((tInheritance property: #subclass)
-			comment: 'Subclass linked to in this relationship. from-side of the association';
-			source)
-		*-
-	((tWithInheritances property: #superInheritances)
-			comment: 'Superinheritance relationships, i.e. known superclasses of this type.').
-
-	((tInheritance property: #superclass)
-			comment: 'Superclass linked to in this relationship. to-side of the association';
-			target)
-		*-
-	((tWithInheritances property: #subInheritances)
-			comment: 'Subinheritance relationships, i.e. known subclasses of this type.').
 
 	((tTemplate property: #templateOwner))
 		*-
@@ -1460,10 +1410,7 @@ FamixGenerator >> defineTraits [
 	tCompilationUnit := builder newTraitNamed: #TCompilationUnit.
 	tCompilationUnit comment: self commentForTCompilationUnit.
 
-	tClass := builder newTraitNamed: #TClass.
-	tClass comment: self commentForTClass.
-	tClass withTesting.
-	tClassGroup := tClass withGroup.
+
 
 	tDeclaredException := builder newTraitNamed: #TDeclaredException.
 	tDeclaredException comment: self commentForTDeclaredException.
@@ -1520,10 +1467,6 @@ FamixGenerator >> defineTraits [
 	tImplicitVariable comment: self commentForTImplicitVariable.
 	tImplicitVariable withTesting.
 
-	tInheritance := builder newTraitNamed: #TInheritance.
-	tInheritance comment: self commentForTInheritance.
-	tInheritance withTesting.
-
 	tInvocable := builder newTraitNamed: #TInvocable.
 	tInvocable comment: self commentForTInvocable.
 
@@ -1542,6 +1485,9 @@ FamixGenerator >> defineTraits [
 	tMethod comment: self commentForTMethod.
 	tMethod withTesting.
 	tMethod withGroup.
+	
+		tWithMethods := builder newTraitNamed: #TWithMethods.
+	tWithMethods comment: self commentForTWithMethods.
 
 	tModule := builder newTraitNamed: #TModule.
 	tModule comment: self commentForTModule.
@@ -1700,17 +1646,11 @@ FamixGenerator >> defineTraits [
 	tWithImplicitVariables := builder newTraitNamed: #TWithImplicitVariables.
 	tWithImplicitVariables comment: self commentForTWithImplicitVariables.
 
-	tWithInheritances := builder newTraitNamed: #TWithInheritances.
-	tWithInheritances comment: self commentForTWithInheritances.
-
 	tWithInvocations := builder newTraitNamed: #TWithInvocations.
 	tWithInvocations comment: self commentForTWithInvocations.
 
 	tWithLocalVariables := builder newTraitNamed: #TWithLocalVariables.
 	tWithLocalVariables comment: self commentForTWithLocalVariables.
-
-	tWithMethods := builder newTraitNamed: #TWithMethods.
-	tWithMethods comment: self commentForTWithMethods.
 
 	tDefinedInModule := builder newTraitNamed: #TDefinedInModule.
 	tDefinedInModule comment: self commentForTDefinedInModule.
