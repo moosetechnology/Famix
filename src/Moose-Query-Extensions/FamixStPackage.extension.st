@@ -1,11 +1,11 @@
-Extension { #name : #TOODependencyQueries }
+Extension { #name : #FamixStPackage }
 
 { #category : #'*Moose-Query-Extensions' }
-TOODependencyQueries >> queryIncomingInheritances [
+FamixStPackage >> queryIncomingInheritances [
 	^ self queryIncoming: FamixOOTInheritance
 ]
 
 { #category : #'*Moose-Query-Extensions' }
-TOODependencyQueries >> queryOutgoingInheritances [
+FamixStPackage >> queryOutgoingInheritances [
 	^ self queryOutgoing: FamixOOTInheritance
 ]

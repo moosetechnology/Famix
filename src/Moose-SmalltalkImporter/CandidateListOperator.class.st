@@ -43,7 +43,7 @@ CandidateListOperator >> computeCandidateListFor: anInvocation withReceivingClas
 		ifNotNil: [ candidates := self allCandidatesFor: anInvocation.
 			candidates := candidates
 				select: [ :each |
-					(each atScope: FamixTClass)
+					(each atScope: FamixOOTClass)
 						ifEmpty: [ false ]
 						ifNotEmpty: [:owningClasses | owningClasses anyOne inheritsFrom: aClass] ].
 			candidate := aClass lookUp: anInvocation signature.

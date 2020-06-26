@@ -79,7 +79,7 @@ FamixStPackage >> localClasses [
 FamixStPackage >> localClassesGroup [
 	<navigation: 'Local classes'>
 
-	^ FamixClassGroup 
+	^ FamixOOClassGroup 
 		withAll: self localClasses
 		withDescription: 'Local classes'
 ]

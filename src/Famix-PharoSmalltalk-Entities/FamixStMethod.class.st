@@ -24,7 +24,7 @@ FamixStMethod >> accessedAttributes [
 	"Returns the set of attributes of my class accessed by me (method). 
 	Used to support the calculation of LCOM"
 	
-	^ (self queryOutgoingAccesses opposites withinParentUsing: FamixTClass) asSet select: #isAttribute
+	^ (self queryOutgoingAccesses opposites withinParentUsing: FamixOOTClass) asSet select: #isAttribute
 ]
 
 { #category : #'Famix-Extensions-metrics-support' }
