@@ -27,7 +27,7 @@ FmxMBNavigationGroupTest >> testRelationGroupsForTraits [
 	class := builder newClassNamed: #Class.
 	method := builder newClassNamed: #Method.
 
-	relation := tClass <>-* tMethod.
+	relation := tClass <>-* (tMethod property: #methodClass).
 
 	class --|> tClass.
 	method --|> tMethod.
