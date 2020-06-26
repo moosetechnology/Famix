@@ -45,10 +45,8 @@ FamixStMethod >> compiledMethod [
 ]
 
 { #category : #'Famix-Extensions-private' }
-FamixStMethod >> cyclomaticComplexity [
-	<FMProperty: #cyclomaticComplexity type: #Number>
-	<FMComment: 'The number of linear-independent paths through a method.'>
-	^ self lookUpPropertyNamed: #cyclomaticComplexity computedAs: [ (RBVisitorForFAMIXMetrics for: self) cyclomaticNumber ]
+FamixStMethod >> computeCyclomaticComplexity [
+	^ (RBVisitorForFAMIXMetrics for: self) cyclomaticNumber
 ]
 
 { #category : #'Famix-Extensions-private' }

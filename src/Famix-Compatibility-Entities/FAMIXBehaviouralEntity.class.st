@@ -23,12 +23,10 @@ FAMIXBehaviouralEntity >> clientBehaviours [
 ]
 
 { #category : #'Famix-Extensions' }
-FAMIXBehaviouralEntity >> cyclomaticComplexity [
-	<FMProperty: #cyclomaticComplexity type: #Number>
-	<FMComment: 'The number of linear-independent paths through a method.'>
-	^ self
-		lookUpPropertyNamed: #cyclomaticComplexity
-		computedAs: [ self mooseModel isSmalltalk ifTrue: [ (RBVisitorForFAMIXMetrics for: self) cyclomaticNumber ] ifFalse: [ self notExistentMetricValue ] ]
+FAMIXBehaviouralEntity >> computeCyclomaticComplexity [
+	^ self mooseModel isSmalltalk
+		ifTrue: [ (RBVisitorForFAMIXMetrics for: self) cyclomaticNumber ]
+		ifFalse: [ self notExistentMetricValue ]
 ]
 
 { #category : #'Famix-Extensions' }
