@@ -23,55 +23,6 @@ FamixTest1Model class >> annotation [
 	<generated>
 ]
 
-{ #category : #testing }
-FamixTest1Model >> isAssociation [
-
-	<generated>
-	^ false
-]
-
-{ #category : #testing }
-FamixTest1Model >> isAttribute [
-
-	<generated>
-	^ false
-]
-
-{ #category : #testing }
-FamixTest1Model >> isBehavioural [
-
-	<generated>
-	^ false
-]
-
-{ #category : #testing }
-FamixTest1Model >> isClass [
-
-	<generated>
-	^ false
-]
-
-{ #category : #testing }
-FamixTest1Model >> isMethod [
-
-	<generated>
-	^ false
-]
-
-{ #category : #testing }
-FamixTest1Model >> isStructuralEntity [
-
-	<generated>
-	^ false
-]
-
-{ #category : #testing }
-FamixTest1Model >> isType [
-
-	<generated>
-	^ false
-]
-
 { #category : #accessing }
 FamixTest1Model >> modelHasProperties [
 

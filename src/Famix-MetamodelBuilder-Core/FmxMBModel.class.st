@@ -52,6 +52,12 @@ FmxMBModel >> generateRootMetamodelMethodIn: aClass [
 	because it is already the #Model entity that hold the metamodel"
 ]
 
+{ #category : #'settings - default' }
+FmxMBModel >> generateTestingMethodsIn: aClass [
+	"no need to define the testing methods in the #Model entity
+	because we already have a test that check that the entity is a Model"
+]
+
 { #category : #testing }
 FmxMBModel >> isModelClass [
 	"The class prefix, Model"

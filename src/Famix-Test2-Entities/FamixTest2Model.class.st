@@ -16,31 +16,3 @@ FamixTest2Model class >> annotation [
 	<package: #'Famix-Test2-Entities'>
 	<generated>
 ]
-
-{ #category : #testing }
-FamixTest2Model >> isAssociation [
-
-	<generated>
-	^ false
-]
-
-{ #category : #testing }
-FamixTest2Model >> isClass [
-
-	<generated>
-	^ false
-]
-
-{ #category : #testing }
-FamixTest2Model >> isInheritance [
-
-	<generated>
-	^ false
-]
-
-{ #category : #testing }
-FamixTest2Model >> isType [
-
-	<generated>
-	^ false
-]
