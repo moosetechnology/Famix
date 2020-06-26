@@ -1,6 +1,6 @@
 Class {
 	#name : #FamixTestComposed3MooseModel,
-	#superclass : #FamixTestComposed3Model,
+	#superclass : #AnObsoleteFamixTestComposed3Model,
 	#category : #'Famix-Deprecated'
 }
 
