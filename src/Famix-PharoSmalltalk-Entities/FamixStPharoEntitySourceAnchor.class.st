@@ -33,6 +33,11 @@ FamixStPharoEntitySourceAnchor class >> annotation [
 	^self
 ]
 
+{ #category : #initialization }
+FamixStPharoEntitySourceAnchor >> initialize [
+	super initialize.
+]
+
 { #category : #accessing }
 FamixStPharoEntitySourceAnchor >> pharoEntity [
 	^ pharoEntity

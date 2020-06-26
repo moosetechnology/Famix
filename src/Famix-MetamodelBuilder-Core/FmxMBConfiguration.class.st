@@ -16,7 +16,9 @@ Class {
 		'navigationForContainers',
 		'navigationForNonContainers',
 		'mooseModelName',
-		'basicGroupSuperclassName'
+		'basicGroupSuperclassName',
+		'basicModelSuperclassName',
+		'modelTag'
 	],
 	#category : #'Famix-MetamodelBuilder-Core-Basic'
 }
@@ -30,6 +32,12 @@ FmxMBConfiguration >> basicGroupSuperclassName [
 { #category : #accessing }
 FmxMBConfiguration >> basicGroupSuperclassName: anObject [
 	basicGroupSuperclassName := anObject
+]
+
+{ #category : #accessing }
+FmxMBConfiguration >> basicModelSuperclassName [
+
+	^ basicModelSuperclassName ifNil: [ basicModelSuperclassName := self defaultBasicModelSuperclassName ]
 ]
 
 { #category : #accessing }
@@ -72,6 +80,12 @@ FmxMBConfiguration >> defaultBasicGroupSuperclassName [
 ]
 
 { #category : #'settings - default' }
+FmxMBConfiguration >> defaultBasicModelSuperclassName [
+
+	^ #MooseModel
+]
+
+{ #category : #'settings - default' }
 FmxMBConfiguration >> defaultBasicSuperclassName [
 
 	^ #MooseEntity
@@ -87,6 +101,12 @@ FmxMBConfiguration >> defaultBasicTraitName [
 FmxMBConfiguration >> defaultClassTag [
 
 	^ #Entities
+]
+
+{ #category : #'settings - default' }
+FmxMBConfiguration >> defaultModelTag [
+
+	^ #Model
 ]
 
 { #category : #'settings - default' }
@@ -107,6 +127,12 @@ FmxMBConfiguration >> initialize [
 	
 	
 	
+]
+
+{ #category : #accessing }
+FmxMBConfiguration >> modelTag [
+
+	^ modelTag ifNil: [ modelTag := self defaultModelTag ]
 ]
 
 { #category : #accessing }

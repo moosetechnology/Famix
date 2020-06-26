@@ -281,6 +281,12 @@ FmxMBBehavior >> isMetamodelTrait [
 	^ false
 ]
 
+{ #category : #testing }
+FmxMBBehavior >> isModelClass [
+	"The class prefix, Model"
+	^ false
+]
+
 { #category : #accessing }
 FmxMBBehavior >> packageName [
 	^ packageName

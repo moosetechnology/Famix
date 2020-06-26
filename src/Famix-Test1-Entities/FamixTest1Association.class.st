@@ -15,12 +15,12 @@ FamixTest1Association class >> annotation [
 	^self
 ]
 
-{ #category : #accessing }
+{ #category : #converting }
 FamixTest1Association >> source [
 	^ nil
 ]
 
-{ #category : #accessing }
+{ #category : #metrics }
 FamixTest1Association >> target [
 	^ nil
 ]
