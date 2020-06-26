@@ -41,6 +41,9 @@ FamixTWithComments >> comments: anObject [
 
 { #category : #testing }
 FamixTWithComments >> hasComments [
+	<FMProperty: #hasComments type: #Boolean>
+	<derived>
+	<FMComment: 'Define if the entity has at least one comment.'>
 	^ self comments isNotEmpty
 ]
 
