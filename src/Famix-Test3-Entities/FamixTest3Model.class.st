@@ -16,3 +16,80 @@ FamixTest3Model class >> annotation [
 	<package: #'Famix-Test3-Entities'>
 	<generated>
 ]
+
+{ #category : #testing }
+FamixTest3Model >> isAccess [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+FamixTest3Model >> isAssociation [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+FamixTest3Model >> isAttribute [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+FamixTest3Model >> isBehavioural [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+FamixTest3Model >> isClass [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+FamixTest3Model >> isInvocation [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+FamixTest3Model >> isMethod [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+FamixTest3Model >> isPackage [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+FamixTest3Model >> isReference [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+FamixTest3Model >> isStructuralEntity [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+FamixTest3Model >> isType [
+
+	<generated>
+	^ false
+]
