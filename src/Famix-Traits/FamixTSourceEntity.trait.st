@@ -8,6 +8,7 @@ Trait {
 		'#sourceAnchor => FMOne type: #FamixTSourceAnchor opposite: #element'
 	],
 	#traits : 'FamixTWithComments + FamixTWithSourceLanguage',
+	#classTraits : 'FamixTWithComments classTrait + FamixTWithSourceLanguage classTrait',
 	#category : #'Famix-Traits-SourceAnchor'
 }
 
@@ -145,9 +146,12 @@ FamixTSourceEntity >> sourceAnchor: anObject [
 
 { #category : #accessing }
 FamixTSourceEntity >> sourceText [
+	<FMProperty: #sourceText type: #String>
+	<derived>
+	<FMComment: 'Source code of the entity.'>
 	self isStub ifTrue: [ ^ '' ].
-	
-	^ self sourceAnchor 
+
+	^ self sourceAnchor
 		ifNil: [ '' ]
 		ifNotNil: [ self sourceAnchor sourceText ]
 ]

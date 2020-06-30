@@ -7,6 +7,7 @@ Trait {
 		'#entities => FMMany type: #FamixTWithFiles opposite: #containerFiles'
 	],
 	#traits : 'FamixTFileSystemEntity',
+	#classTraits : 'FamixTFileSystemEntity classTrait',
 	#category : #'Famix-Traits-File'
 }
 
@@ -133,13 +134,9 @@ FamixTFile >> readStream [
 FamixTFile >> sourceText [
 	^ self
 		lookUpPropertyNamed: #sourceText
-		computedAs: [ self fileExists
-				ifTrue: [ | stream source |
-					stream := self readStream.
-					source := [ stream contents asString ]
-						ensure: [ stream ifNotNil: [ stream close ] ].
-					source ]
-				ifFalse: [ '' ] ]
+		computedAs: [ self fileReference
+				ifExists: #contents
+				ifAbsent: [ '' ] ]
 ]
 
 { #category : #accessing }
