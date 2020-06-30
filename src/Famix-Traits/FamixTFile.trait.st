@@ -134,9 +134,9 @@ FamixTFile >> readStream [
 FamixTFile >> sourceText [
 	^ self
 		lookUpPropertyNamed: #sourceText
-		computedAs: [ self fileReference
-				ifExists: #contents
-				ifAbsent: [ '' ] ]
+		computedAs: [ self fileExists
+				ifTrue: [ self fileReference contents ]
+				ifFalse: [ '' ] ]
 ]
 
 { #category : #accessing }
