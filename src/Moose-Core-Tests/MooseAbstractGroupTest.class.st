@@ -55,6 +55,16 @@ MooseAbstractGroupTest >> testAddLast [
 ]
 
 { #category : #tests }
+MooseAbstractGroupTest >> testAllMatching [
+	group addAll: {FamixTest3Class new . FamixTest3Type new}.
+	self assert: (group allMatching: FamixTClass) size equals: 1.
+	self assert: (group allMatching: FamixTType) size equals: 2.
+	self assert: (group allMatching: FamixTest3Class) size equals: 1.
+	self assert: (group allMatching: FamixTest3Type) size equals: 1.
+	self assertEmpty: (group allMatching: Object)
+]
+
+{ #category : #tests }
 MooseAbstractGroupTest >> testAllSatisfy [
 	3 timesRepeat: [ group add: MooseEntity new ].
 
