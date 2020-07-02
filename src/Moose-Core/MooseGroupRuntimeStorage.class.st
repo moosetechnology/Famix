@@ -12,14 +12,14 @@ I am managed like a collection and my caches are autoupdated when an entity is a
 Internal Representation and Key Implementation Points.
 
     Instance Variables
-	byName:		Dictionnary (key: mooseName)
+	byName:		IdentityHashTable (key: mooseName)
 	byType:		Dictionnary of OrderedCollection (key: FAMIXType)  - the orderedCollection is sorted on access
 	elements:		OrderedCollection
-	sortedCollectionList:		Dictionnary (key: FAMIXType, value: boolean)
-
 
 Implementation Points
 - On access by type, OrderedCollections in byType dictionary are sorted by MooseName to find its type faster. This sort is stored in sortedCollectionList and is invalidated on addition of a new element in the collection
+
+I am using an identity hash table to save the names because it is optimized for large collection. The possible loss of performances for small collection is negligeable compared to the gain for large collection. Creating a moose group of 2450080 entities took 6sec+ with anIdentityDictionary and now take 1.6sec+ with a IdentityHashTable.
 
 
 
@@ -72,7 +72,7 @@ MooseGroupRuntimeStorage >> elements [
 { #category : #initialization }
 MooseGroupRuntimeStorage >> initialize: capacity [
 	byType := IdentityDictionary new: 24.
-	byName := IdentityDictionary new: capacity.
+	byName := IdentityHashTable new: capacity.
 	elements := OrderedCollection new: capacity
 ]
 
