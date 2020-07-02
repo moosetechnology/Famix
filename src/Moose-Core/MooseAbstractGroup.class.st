@@ -73,6 +73,13 @@ MooseAbstractGroup >> allContainers [
 	^ self lookUpPropertyNamed: #allContainers computedAs: [ self entities select: #isContainerEntity ]
 ]
 
+{ #category : #groups }
+MooseAbstractGroup >> allMatching: aClassOrTrait [
+	"I return the list of entities of the type of the parameter, be it a class or a trait."
+
+	^ aClassOrTrait allMatchingSelfIn: self
+]
+
 { #category : #accessing }
 MooseAbstractGroup >> allModelContainers [
 	<navigation: 'All model containers'>
