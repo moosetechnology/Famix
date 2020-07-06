@@ -7,5 +7,5 @@ MQNavigationIncomingDirectionStrategy class >> dependenciesAtReceiverScopeOf: an
 
 { #category : #'*Moose-Core' }
 MQNavigationIncomingDirectionStrategy class >> dependenciesOf: aMooseEntity [
-	^ aMooseEntity query incoming dependencies
+	^ aMooseEntity query incoming objects dependencies
 ]

@@ -102,8 +102,8 @@ MQNavigationQuery >> executeHasQuery [
 ]
 
 { #category : #execution }
-MQNavigationQuery >> executeQuery [
-	result := directionStrategy queryResultClass on: receiver.
+MQNavigationQuery >> executeQueryForQueryResult: aQueryResultClass [
+	result := aQueryResultClass on: receiver.
 
 	self queryFor: receiver.
 

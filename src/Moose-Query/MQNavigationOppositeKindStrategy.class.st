@@ -14,3 +14,8 @@ Class {
 MQNavigationOppositeKindStrategy class >> collectResultFrom: aCollection query: aQuery [
 	^ aCollection collect: [ :each | aQuery directionStrategy entityFor: each ]
 ]
+
+{ #category : #running }
+MQNavigationOppositeKindStrategy class >> queryResultKindFor: aQuery [
+	^ MooseObjectQueryResult
+]

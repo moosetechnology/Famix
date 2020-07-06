@@ -19,3 +19,8 @@ MQNavigationHasDependencyBooleanKindStrategy class >> collectResultFrom: aCollec
 MQNavigationHasDependencyBooleanKindStrategy class >> execute: aQuery [
 	^ aQuery executeHasQuery
 ]
+
+{ #category : #running }
+MQNavigationHasDependencyBooleanKindStrategy class >> queryResultKindFor: aQuery [
+	^ self shouldNotImplement
+]

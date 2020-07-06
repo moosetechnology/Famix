@@ -14,3 +14,8 @@ Class {
 MQNavigationAssociationKindStrategy class >> collectResultFrom: aCollection query: aQuery [
 	^ aCollection
 ]
+
+{ #category : #running }
+MQNavigationAssociationKindStrategy class >> queryResultKindFor: aQuery [
+	^ aQuery directionStrategy queryResultClass
+]
