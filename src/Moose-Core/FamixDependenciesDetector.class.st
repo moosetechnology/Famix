@@ -32,7 +32,7 @@ Class {
 { #category : #public }
 FamixDependenciesDetector class >> computeClientsOf: aMooseEntity from: aMooseGroup in: aMooseModel [
 	^ self new
-		directionStrategy: FamixDependenciesDetectorClientsStrategy;
+		directionStrategy: MQNavigationIncomingDirectionStrategy;
 		entity: aMooseEntity;
 		potentialDependencies: aMooseGroup;
 		mooseModel: aMooseModel;
@@ -42,7 +42,7 @@ FamixDependenciesDetector class >> computeClientsOf: aMooseEntity from: aMooseGr
 { #category : #public }
 FamixDependenciesDetector class >> computeProvidersOf: aMooseEntity from: aMooseGroup in: aMooseModel [
 	^ self new
-		directionStrategy: FamixDependenciesDetectorProvidersStrategy;
+		directionStrategy: MQNavigationOutgoingDirectionStrategy;
 		entity: aMooseEntity;
 		potentialDependencies: aMooseGroup;
 		mooseModel: aMooseModel;
