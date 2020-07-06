@@ -127,6 +127,19 @@ FamixStClass >> methodsWithoutSutbsAndConstructors [
 	^ (self methods select: [ :each | each isStub not and: [ each isConstructor not ] ]) asSet
 ]
 
+{ #category : #metrics }
+FamixStClass >> numberOfMethodProtocols [
+	<FMProperty: #numberOfMethodProtocols type: #Number>
+	<derived>
+	<FMComment: 'The number of method protocols in a class'>
+	^ self lookUpPropertyNamed: #numberOfMethodProtocols computedAs: [ ((self methods collect: [ :each | each protocol ]) reject: #isNil) asSet size ]
+]
+
+{ #category : #metrics }
+FamixStClass >> numberOfMethodProtocols: aNumber [
+	self privateState cacheAt: #numberOfMethodProtocols put: aNumber
+]
+
 { #category : #'Famix-Implementation' }
 FamixStClass >> smalltalkClass [
 	"Returns the associated smalltalk class if it exist in the system."

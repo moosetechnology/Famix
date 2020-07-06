@@ -118,22 +118,6 @@ FamixTWithMethods >> numberOfMessageSends: aNumber [
 	self privateState cacheAt: #numberOfMessageSends put: aNumber
 ]
 
-{ #category : #metrics }
-FamixTWithMethods >> numberOfMethodProtocols [
-	<FMProperty: #numberOfMethodProtocols type: #Number>
-	<derived>
-	<FMComment: 'The number of method protocols in a class'>
-	
-	^self
-		lookUpPropertyNamed: #numberOfMethodProtocols
-		computedAs: [((self methods collect: [:each | each protocol]) reject: #isNil) asSet size]
-]
-
-{ #category : #metrics }
-FamixTWithMethods >> numberOfMethodProtocols: aNumber [
-	self privateState cacheAt: #numberOfMethodProtocols put: aNumber
-]
-
 { #category : #accessing }
 FamixTWithMethods >> numberOfMethods [
 	<FMProperty: #numberOfMethods type: #Number>
