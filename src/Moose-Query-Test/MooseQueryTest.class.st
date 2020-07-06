@@ -508,6 +508,11 @@ MooseQueryTest >> testIncomingInvocationAtScope [
 ]
 
 { #category : #tests }
+MooseQueryTest >> testObjectsQueryResultsKind [
+	self assert: (method2 query incoming objects dependencies isKindOf: MooseObjectQueryResult)
+]
+
+{ #category : #tests }
 MooseQueryTest >> testOutgoingAccessAtScope [
 	self assert: ((method1 queryOutgoing: FamixTAccess) atScope: FamixJavaPackage) size equals: 1.
 	self

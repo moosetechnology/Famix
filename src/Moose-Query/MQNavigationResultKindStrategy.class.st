@@ -25,12 +25,17 @@ MQNavigationResultKindStrategy class >> collectResultFrom: aCollection query: aQ
 
 { #category : #running }
 MQNavigationResultKindStrategy class >> execute: aQuery [
-	^ aQuery executeQuery
+	^ aQuery executeQueryForQueryResult: (self queryResultKindFor: aQuery)
 ]
 
 { #category : #testing }
 MQNavigationResultKindStrategy class >> isAbstract [
 	^ self = MQNavigationResultKindStrategy
+]
+
+{ #category : #running }
+MQNavigationResultKindStrategy class >> queryResultKindFor: aQuery [
+	^ self subclassResponsibility
 ]
 
 { #category : #accessing }
