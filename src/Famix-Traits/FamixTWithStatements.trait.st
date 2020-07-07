@@ -51,7 +51,7 @@ FamixTWithStatements >> numberOfStatements [
 	<FMProperty: #numberOfStatements type: #Number>
 	<derived>
 	<FMComment: 'The number of statements in a class'>
-	^ self lookUpPropertyNamed: #numberOfStatements computedAs: [ (self allToScope: FamixTWithStatements) detectSum: [ :entity | entity statements size ] ]
+	^ self lookUpPropertyNamed: #numberOfStatements computedAs: [ MooseUnavailableMetric ]
 ]
 
 { #category : #metrics }
