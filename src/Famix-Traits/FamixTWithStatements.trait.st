@@ -1,6 +1,7 @@
 Trait {
 	#name : #FamixTWithStatements,
 	#traits : 'FamixTSourceEntity + FamixTWithAccesses + FamixTWithInvocations',
+	#classTraits : 'FamixTSourceEntity classTrait + FamixTWithAccesses classTrait + FamixTWithInvocations classTrait',
 	#category : #'Famix-Traits-Behavioral'
 }
 
@@ -38,11 +39,19 @@ FamixTWithStatements >> isBehavioural [
 ]
 
 { #category : #metrics }
+FamixTWithStatements >> numberOfLinesOfDeadCode [
+	<FMProperty: #numberOflinesOfDeadCode type: #Number>
+	<FMComment: 'Number of lines of dead code present in the entity.'>
+	<derived>
+	^ self lookUpPropertyNamed: #numberOflinesOfDeadCode computedAs: [ self deadChildren sumNumbers: #numberOfLinesOfCode ]
+]
+
+{ #category : #metrics }
 FamixTWithStatements >> numberOfStatements [
 	<FMProperty: #numberOfStatements type: #Number>
 	<derived>
 	<FMComment: 'The number of statements in a class'>
-	^ self lookUpPropertyNamed: #numberOfStatements computedAs: [ (self allToScope: FamixTWithStatements) detectSum: [ :entity | entity statements size ] ]
+	^ self lookUpPropertyNamed: #numberOfStatements computedAs: [ MooseUnavailableMetric ]
 ]
 
 { #category : #metrics }

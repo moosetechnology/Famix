@@ -191,6 +191,11 @@ MooseEntity >> isLinkedTo: anEntity dependancyDirection: aDirectionStrategy in: 
 ]
 
 { #category : #testing }
+MooseEntity >> isMooseEntity [
+	^ true
+]
+
+{ #category : #testing }
 MooseEntity >> isRoot [
 	"Return true if the entity is not contained in any other entity."
 
