@@ -22,78 +22,6 @@ FamixTClassHierarchyNavigation >> addedMethods [
 ]
 
 { #category : #enumerating }
-FamixTClassHierarchyNavigation >> allSubclassesDo: aBlock [
-	self allSubclassesWithoutAliasesDo: aBlock.
-	self flag: 'Manage typeAlias in C metamodel'
-	"self typeAliases do: [ :each | each allSubclassesWithoutAliasesDo: aBlock ]"
-]
-
-{ #category : #enumerating }
-FamixTClassHierarchyNavigation >> allSubclassesWithoutAliasesDo: aBlock [
-	self subInheritances do: [ :each | aBlock value: each subclass ].
-	self subInheritances do: [ :each | each subclass allSubclassesDo: aBlock ]
-]
-
-{ #category : #enumerating }
-FamixTClassHierarchyNavigation >> allSuperclassesDo: aBlock [
-	self superInheritances do: [:each | aBlock value: each superclass].
-	self superInheritances do: [:each | each superclass allSuperclassesDo: aBlock]
-
-]
-
-{ #category : #enumerating }
-FamixTClassHierarchyNavigation >> allSuperclassesWithoutAliasesDo: aBlock [
-	self superInheritances do: [:each | aBlock value: each superclass].
-	self superInheritances do: [:each | each superclass allSuperclassesDo: aBlock]
-]
-
-{ #category : #enumerating }
-FamixTClassHierarchyNavigation >> anySuperclass [
-	^ self superInheritances
-		ifEmpty: [ nil ]
-		ifNotEmpty: [ self superInheritances anyOne superclass ]
-]
-
-{ #category : #enumerating }
-FamixTClassHierarchyNavigation >> directSubclasses [
-	"returns a collection with all subclasses of this class"
-
-	^ self subInheritances collect: [:each | each subclass]
-]
-
-{ #category : #enumerating }
-FamixTClassHierarchyNavigation >> directSuperclasses [
-	"returns a collection with all superclasses of this class"
-
-	^ self superInheritances collect: [:each | each superclass]
-]
-
-{ #category : #metrics }
-FamixTClassHierarchyNavigation >> hierarchyNestingLevel [
-	<FMProperty: #hierarchyNestingLevel type: #Number>
-	<derived>
-	<FMComment: 'The nesting of a class inside the hierarchy'>
-
-	^self
-		lookUpPropertyNamed: #hierarchyNestingLevel
-		computedAs:
-			[| currentMaxDepth |
-			(self directSuperclasses isEmpty or: [self isStub])
-				ifTrue: [0]
-				ifFalse:
-					[currentMaxDepth := 0.
-					self
-						allSuperclassesDo:
-							[:aClass | currentMaxDepth := currentMaxDepth max: aClass hierarchyNestingLevel].
-					currentMaxDepth + 1]]
-]
-
-{ #category : #metrics }
-FamixTClassHierarchyNavigation >> hierarchyNestingLevel: aNumber [
-	self privateState cacheAt: #hierarchyNestingLevel put: aNumber
-]
-
-{ #category : #enumerating }
 FamixTClassHierarchyNavigation >> inheritedAttributes [
 	| inheritedAttrs |
 	inheritedAttrs := OrderedCollection new.
@@ -128,23 +56,6 @@ FamixTClassHierarchyNavigation >> inheritedSignaturesToMethod [
 	^ inheritedSignaturesToMethod
 ]
 
-{ #category : #enumerating }
-FamixTClassHierarchyNavigation >> inheritsFrom: aClass [
-	self allSuperclassesDo: [:each | each = aClass ifTrue: [^true]].
-	^ false
-]
-
-{ #category : #enumerating }
-FamixTClassHierarchyNavigation >> isHierarchyRoot [
-	^self superclassHierarchyGroup 
-		allSatisfy: [:each | each isNil or: [each isStub] ]
-]
-
-{ #category : #enumerating }
-FamixTClassHierarchyNavigation >> isHierarchyRootWithin: aClassGroup [
-	^(self superclassHierarchyGroup intersection: aClassGroup) isEmpty
-]
-
 { #category : #metrics }
 FamixTClassHierarchyNavigation >> numberOfAttributesInherited [
 	<FMProperty: #numberOfAttributesInherited type: #Number>
@@ -159,19 +70,6 @@ FamixTClassHierarchyNavigation >> numberOfAttributesInherited [
 { #category : #metrics }
 FamixTClassHierarchyNavigation >> numberOfAttributesInherited: aNumber [
 	self privateState cacheAt: #numberOfAttributesInherited put: aNumber
-]
-
-{ #category : #metrics }
-FamixTClassHierarchyNavigation >> numberOfDirectSubclasses [
-	<FMProperty: #numberOfDirectSubclasses type: #Number>
-	<FMComment: 'The number of direct subclasses'>
-	<derived>
-	^ self privateState cacheAt: #numberOfDirectSubclasses ifAbsentPut: [ self directSubclasses size ]
-]
-
-{ #category : #metrics }
-FamixTClassHierarchyNavigation >> numberOfDirectSubclasses: aNumber [
-	self privateState cacheAt: #numberOfDirectSubclasses put: aNumber
 ]
 
 { #category : #metrics }
@@ -238,129 +136,4 @@ FamixTClassHierarchyNavigation >> numberOfMethodsOverriden [
 { #category : #metrics }
 FamixTClassHierarchyNavigation >> numberOfMethodsOverriden: aNumber [
 	self privateState cacheAt: #numberOfMethodsOverriden put: aNumber
-]
-
-{ #category : #metrics }
-FamixTClassHierarchyNavigation >> numberOfParents [
-	<FMProperty: #numberOfParents type: #Number>
-	<derived>
-	<FMComment: 'The number of superclasses'>
-			
-	^self
-		lookUpPropertyNamed: #numberOfParents
-		computedAs: [self directSuperclasses size]
-]
-
-{ #category : #metrics }
-FamixTClassHierarchyNavigation >> numberOfParents: aNumber [
-	self privateState cacheAt: #numberOfParents put: aNumber
-]
-
-{ #category : #enumerating }
-FamixTClassHierarchyNavigation >> subclassHierarchy [
-	| subclasses |
-	subclasses := OrderedCollection new.
-	self allSubclassesDo: [:each | subclasses add: each].
-	^ subclasses
-]
-
-{ #category : #metrics }
-FamixTClassHierarchyNavigation >> subclassHierarchyDepth [
-	<FMProperty: #subclassHierarchyDepth type: #Number>
-	<derived>
-	<FMComment: 'The depth of the class hierarchy for which I am the root'>
-	^ self directSubclasses
-		ifEmpty: [ 0 ]
-		ifNotEmpty: [ | currentMaxDepth |
-			currentMaxDepth := 0.
-			self allSubclassesDo: [ :aClass | currentMaxDepth := currentMaxDepth max: aClass subclassHierarchyDepth ].
-			1 + currentMaxDepth ]
-]
-
-{ #category : #metrics }
-FamixTClassHierarchyNavigation >> subclassHierarchyDepth: aNumber [
-	self privateState cacheAt: #subclassHierarchyDepth put: aNumber
-]
-
-{ #category : #enumerating }
-FamixTClassHierarchyNavigation >> subclassHierarchyGroup [
-	<navigation: 'All subclasses'>
-	^ MooseGroup
-		withAll: self subclassHierarchy asSet
-		withDescription: 'All subclasses of ' , self mooseName
-]
-
-{ #category : #enumerating }
-FamixTClassHierarchyNavigation >> superclass [
-	^self anySuperclass
-]
-
-{ #category : #enumerating }
-FamixTClassHierarchyNavigation >> superclassHierarchy [
-	| superclasses |
-	superclasses := OrderedCollection new.
-	self allSuperclassesDo: [:each |  superclasses add: each].
-	^ superclasses
-]
-
-{ #category : #enumerating }
-FamixTClassHierarchyNavigation >> superclassHierarchyGroup [
-	<navigation: 'All superclasses'>
-	^ MooseGroup
-		withAll: self superclassHierarchy asSet
-		withDescription: 'All superclasses of ' , self mooseName
-]
-
-{ #category : #metrics }
-FamixTClassHierarchyNavigation >> totalNumberOfChildren [
-	<FMProperty: #totalNumberOfChildren type: #Number>
-	<derived>	
-	<FMComment: 'The total number of subclasses of a class'>
-	
-	^self
-		lookUpPropertyNamed: #totalNumberOfChildren
-		computedAs: [self subclassHierarchyGroup size]
-]
-
-{ #category : #metrics }
-FamixTClassHierarchyNavigation >> totalNumberOfChildren: aNumber [
-	self privateState cacheAt: #totalNumberOfChildren put: aNumber
-]
-
-{ #category : #enumerating }
-FamixTClassHierarchyNavigation >> withSubclassHierarchy [
-	^ self subclassHierarchy 
-		addFirst: self realType;
-		flag: 'Manage TypeAlias for C metamodel';
-		"addAll: self realType allTypeAliases;"
-		yourself.
-]
-
-{ #category : #'Famix-Implementation' }
-FamixTClassHierarchyNavigation >> withSubclassHierarchyGroup [
-	<navigation: 'With all subclasses'>
-	^ MooseGroup
-		withAll: (self subclassHierarchy asSet; addFirst: self; yourself)
-		withDescription: 'With all subclasses of ' , self mooseName
-]
-
-{ #category : #enumerating }
-FamixTClassHierarchyNavigation >> withSubclassesDo: aBlock [
-	aBlock value: self.
-	self allSubclassesDo: aBlock
-]
-
-{ #category : #'Famix-Implementation' }
-FamixTClassHierarchyNavigation >> withSuperclassHierarchy [
-	self flag: #'We should add something to handle the typeAliases in C++, etc.'.
-	^ self realType superclassHierarchy 
-		addFirst: self realType;
-		"addAll: self realType allTypeAliases;"
-		yourself
-]
-
-{ #category : #enumerating }
-FamixTClassHierarchyNavigation >> withSuperclassesDo: aBlock [
-	aBlock value: self.
-	self allSuperclassesDo: aBlock
 ]

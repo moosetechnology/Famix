@@ -32,9 +32,13 @@ FAMIXType >> allAnnotationTypes [
 
 { #category : #'Famix-Implementation' }
 FAMIXType >> allSuperclassesDo: aBlock [
-	self allSuperclassesWithoutAliasesDo: aBlock.
+	self superInheritances do: [ :each | aBlock value: each superclass ].
+	self superInheritances do: [ :each | each superclass allSuperclassesDo: aBlock ].
 	(self mooseModel sourceLanguage isNotNil and: [ self mooseModel sourceLanguage isC ])
-		ifTrue: [ self typeAliases do: [ :each | each allSuperclassesWithoutAliasesDo: aBlock ] ]
+		ifTrue: [ self typeAliases
+				do: [ :type | 
+					type superInheritances do: [ :each | aBlock value: each superclass ].
+					type superInheritances do: [ :each | each superclass allSuperclassesDo: aBlock ] ] ]
 ]
 
 { #category : #accessing }
