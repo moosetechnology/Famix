@@ -9,6 +9,7 @@ Trait {
 		'#fileName => FMProperty'
 	],
 	#traits : 'FamixTSourceAnchor',
+	#classTraits : 'FamixTSourceAnchor classTrait',
 	#category : #'Famix-Traits-SourceAnchor'
 }
 
@@ -78,6 +79,17 @@ FamixTFileAnchor >> encoding: anObject [
 { #category : #accessing }
 FamixTFileAnchor >> endLine [
 	^ self explicitRequirement
+]
+
+{ #category : #accessing }
+FamixTFileAnchor >> endPos [
+	^ [ self
+		lookUpPropertyNamed: #endPos
+		computedAs: [ | text |
+			text := self completeText.
+			(text intervalOfLine: self endLine - 1) last + (self endColumn ifNil: [ (text lines at: self endLine) size	"In case I do not have any endcolumn." ]) ] ]
+		on: SubscriptOutOfBounds
+		do: [ :err | 0 ]
 ]
 
 { #category : #accessing }
@@ -151,5 +163,10 @@ FamixTFileAnchor >> sourcesAreReadable [
 
 { #category : #accessing }
 FamixTFileAnchor >> startLine [
+	^ self explicitRequirement
+]
+
+{ #category : #accessing }
+FamixTFileAnchor >> startPos [
 	^ self explicitRequirement
 ]
