@@ -42,7 +42,6 @@ Class {
 		'tPackage',
 		'tPackageable',
 		'tParameter',
-		'tParameterType',
 		'tParameterizedType',
 		'tParameterizedTypeUser',
 		'tPreprocessorDefine',
@@ -95,22 +94,15 @@ Class {
 		'tWithThrownExceptions',
 		'tWithTypeAliases',
 		'tWithTypes',
-		'tPossibleStub',
 		'tClass',
 		'tFolder',
 		'tFileSystemEntity',
 		'tFileNavigation',
 		'tIndexedFileNavigation',
-		'tClassHierarchyNavigation',
 		'tLCOMMetrics',
-		'tInheritanceGlue',
 		'tWithClasses',
-		'tPackageWithClassesGlue',
 		'tTraitUser',
-		'tClassWithInvocationsGlue',
 		'tWithStatements',
-		'tContainingWithStatementsGlue',
-		'tContainingWithInvocationsGlue',
 		'tMultipleFileAnchor',
 		'tCohesionCouplingMetrics',
 		'tWithTraits',
@@ -1762,8 +1754,6 @@ FamixGenerator >> defineTraits [
 	tMultipleFileAnchor := builder newTraitNamed: #TMultipleFileAnchor.
 
 	tCohesionCouplingMetrics := builder newTraitNamed: #TCohesionCouplingMetrics.
-
-	tClassHierarchyNavigation := builder newTraitNamed: #TClassHierarchyNavigation.
 
 	tLCOMMetrics := builder newTraitNamed: #TLCOMMetrics
 ]

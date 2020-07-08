@@ -1,6 +1,6 @@
 Trait {
 	#name : #FamixTClassHierarchyNavigation,
-	#category : #'Famix-Traits-Support'
+	#category : #'Famix-Deprecated'
 }
 
 { #category : #meta }
@@ -10,4 +10,10 @@ FamixTClassHierarchyNavigation classSide >> annotation [
 	<package: #'Famix-Traits'>
 	<generated>
 	^self
+]
+
+{ #category : #testing }
+FamixTClassHierarchyNavigation classSide >> isDeprecated [
+	"This class is now useless."
+	^ true
 ]
