@@ -83,13 +83,7 @@ FamixTFileAnchor >> endLine [
 
 { #category : #accessing }
 FamixTFileAnchor >> endPos [
-	^ [ self
-		lookUpPropertyNamed: #endPos
-		computedAs: [ | text |
-			text := self completeText.
-			(text intervalOfLine: self endLine - 1) last + (self endColumn ifNil: [ (text lines at: self endLine) size	"In case I do not have any endcolumn." ]) ] ]
-		on: SubscriptOutOfBounds
-		do: [ :err | 0 ]
+	^ self explicitRequirement
 ]
 
 { #category : #accessing }
