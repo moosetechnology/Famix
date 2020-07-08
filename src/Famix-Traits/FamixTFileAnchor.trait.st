@@ -9,6 +9,7 @@ Trait {
 		'#fileName => FMProperty'
 	],
 	#traits : 'FamixTSourceAnchor',
+	#classTraits : 'FamixTSourceAnchor classTrait',
 	#category : #'Famix-Traits-SourceAnchor'
 }
 
@@ -77,6 +78,11 @@ FamixTFileAnchor >> encoding: anObject [
 
 { #category : #accessing }
 FamixTFileAnchor >> endLine [
+	^ self explicitRequirement
+]
+
+{ #category : #accessing }
+FamixTFileAnchor >> endPos [
 	^ self explicitRequirement
 ]
 
@@ -151,5 +157,10 @@ FamixTFileAnchor >> sourcesAreReadable [
 
 { #category : #accessing }
 FamixTFileAnchor >> startLine [
+	^ self explicitRequirement
+]
+
+{ #category : #accessing }
+FamixTFileAnchor >> startPos [
 	^ self explicitRequirement
 ]
