@@ -134,7 +134,7 @@ Object >> mooseModel [
 
 { #category : #'*moose-core' }
 Object >> mooseName [
-	^ self printString
+	^ self printString asSymbol
 ]
 
 { #category : #'*Moose-Core' }
