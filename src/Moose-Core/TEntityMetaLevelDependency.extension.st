@@ -14,7 +14,7 @@ TEntityMetaLevelDependency >> isDead [
 	<derived>
 	<FMComment: 'Is the entity dead (not invoked in the system)'>
 	^ self isContainerEntity
-		ifTrue: [ self lookUpPropertyNamed: #isDead computedAs: [ self allClients isEmpty ] ]
+		ifTrue: [ self allClients isEmpty ]
 		ifFalse: [ false ]
 ]
 
