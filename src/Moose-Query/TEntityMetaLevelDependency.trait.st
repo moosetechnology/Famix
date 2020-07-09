@@ -323,7 +323,7 @@ TEntityMetaLevelDependency >> allChildrenTypes [
 
 { #category : #accessing }
 TEntityMetaLevelDependency >> allClients [
-	^ self allClientsAtScope: self class
+	^ self lookUpPropertyNamed: #allClients computedAs: [ self allClientsAtScope: self class ]
 ]
 
 { #category : #accessing }
@@ -358,7 +358,7 @@ TEntityMetaLevelDependency >> allParents [
 
 { #category : #accessing }
 TEntityMetaLevelDependency >> allProviders [
-	^ self allProvidersAtScope: self class
+	^ self lookUpPropertyNamed: #allProvidiers computedAs: [ self allProvidersAtScope: self class ]
 ]
 
 { #category : #accessing }
