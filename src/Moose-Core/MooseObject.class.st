@@ -44,7 +44,8 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'state',
-		'mooseID'
+		'mooseID',
+		'mooseName'
 	],
 	#classVars : [
 		'DefaultState',
@@ -339,12 +340,11 @@ MooseObject >> mooseName [
 			stream := (String new: 64) writeStream.
 			self mooseNameOn: stream.
 			^ stream contents asSymbol ].
-	^ self privateState
-		cacheAt: #mooseName
-		ifAbsentPut: [ | stream |
+	^ mooseName
+		ifNil: [ | stream |
 			stream := (String new: 64) writeStream.
 			self mooseNameOn: stream.
-			stream contents asSymbol ]
+			mooseName := stream contents asSymbol ]
 ]
 
 { #category : #printing }
@@ -392,7 +392,7 @@ MooseObject >> printOn: aStream [
 MooseObject >> privateClearMooseName [
 	" this method causes the cache to fail if called directly. Use resetMooseName instead. "
 
-	self privateState removeCache: #mooseName
+	mooseName := nil
 ]
 
 { #category : #private }
