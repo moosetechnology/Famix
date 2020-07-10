@@ -1,7 +1,7 @@
 Class {
 	#name : #MoosePropertyGroupTest,
 	#superclass : #TestCase,
-	#category : #'Moose-Core-Tests'
+	#category : #'Famix-Deprecated'
 }
 
 { #category : #tests }

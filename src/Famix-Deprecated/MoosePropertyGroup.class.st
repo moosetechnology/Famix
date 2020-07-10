@@ -12,13 +12,20 @@ Class {
 		'originalGroup',
 		'propertySymbolOrBlock'
 	],
-	#category : #'Moose-Core'
+	#category : #'Famix-Deprecated'
 }
 
 { #category : #meta }
 MoosePropertyGroup class >> annotation [
 	<FMClass: #PropertyGroup super: #MooseGroup>
 	<package: #Moose>
+]
+
+{ #category : #testing }
+MoosePropertyGroup class >> isDeprecated [
+	"This class seems unused and will be removed in the next version of Moose."
+
+	^ true
 ]
 
 { #category : #'instance creation' }
