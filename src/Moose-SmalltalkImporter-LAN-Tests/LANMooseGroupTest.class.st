@@ -7,7 +7,8 @@ Class {
 { #category : #utilities }
 LANMooseGroupTest >> model [
 	" to debug and avoid caching behavior: LANPackageTestResource reset."
-	^ LANPackageTestResource current model .
+
+	^ LANPackageTestResource current model
 ]
 
 { #category : #tests }
@@ -38,7 +39,7 @@ LANMooseGroupTest >> testClassGroupType [
 	| group aCollection numberOfClasses |
 	aCollection := self model allClasses asOrderedCollection.
 	numberOfClasses := aCollection size.
-	group := MooseGroup withAll: aCollection.
+	group := MooseSpecializedGroup withAll: aCollection.
 	self assert: (group isMemberOf: FamixClassGroup).
 	self assert: self model allClasses size equals: numberOfClasses
 ]
@@ -46,7 +47,7 @@ LANMooseGroupTest >> testClassGroupType [
 { #category : #tests }
 LANMooseGroupTest >> testCollectGroupType [
 	| collectedClasses |
-	collectedClasses := self model allMethods collect: #parentType.
+	collectedClasses := (self model allMethods collect: #parentType) specialize.
 	self assert: (collectedClasses isKindOf: FamixTypeGroup)
 ]
 
@@ -74,7 +75,7 @@ LANMooseGroupTest >> testFlatCollect [
 { #category : #tests }
 LANMooseGroupTest >> testFlatCollectType [
 	| allMethods |
-	allMethods := self model allClasses flatCollect: [:each | each methods ].
+	allMethods := (self model allClasses flatCollect: #methods) specialize.
 	self assert: (allMethods isKindOf: FamixMethodGroup)
 ]
 
@@ -97,17 +98,17 @@ LANMooseGroupTest >> testGroupType [
 	| group numberOfClasses numberOfMethods |
 	numberOfClasses := self model allClasses size.
 	numberOfMethods := self model allMethods size.
-	group := MooseGroup withAll: self model allClasses entities.
+	group := MooseSpecializedGroup withAll: self model allClasses entities.
 	self assert: (group isMemberOf: FamixClassGroup).
 	group addAll: self model allMethods.
-	self assert: (group isMemberOf: MooseGroup).
+	self assert: (group isMemberOf: MooseSpecializedGroup).
 	group removeAll: self model allMethods.
 	self assert: (group isMemberOf: FamixClassGroup).
 	group add: self model allMethods first.
-	self assert: (group isMemberOf: MooseGroup).
+	self assert: (group isMemberOf: MooseSpecializedGroup).
 	group remove: self model allMethods first.
 	self assert: (group isMemberOf: FamixClassGroup).
-	group := MooseGroup withAll: self model allMethods entities.
+	group := MooseSpecializedGroup withAll: self model allMethods entities.
 	self assert: (group isMemberOf: FamixMethodGroup).
 	self assert: self model allClasses size equals: numberOfClasses.
 	self assert: self model allMethods size equals: numberOfMethods
@@ -120,16 +121,16 @@ LANMooseGroupTest >> testHeterogeneousGroupType [
 	numberOfMethods := self model allMethods size.
 	aCollection := self model allClasses asOrderedCollection.
 	self assert: self model allClasses size equals: numberOfClasses.
-	group := MooseGroup withAll: aCollection.
-	self deny: (group isMemberOf: MooseGroup).
+	group := MooseSpecializedGroup withAll: aCollection.
+	self deny: (group isMemberOf: MooseSpecializedGroup).
 	self assert: (group isMemberOf: FamixClassGroup).
 	group addAll: self model allMethods asOrderedCollection.
 	self assert: self model allMethods size equals: numberOfMethods.
-	self assert: (group isMemberOf: MooseGroup).
+	self assert: (group isMemberOf: MooseSpecializedGroup).
 	aCollection := self model allMethods asOrderedCollection.
 	aCollection addAll: self model allClasses asOrderedCollection.
-	group := MooseGroup withAll: aCollection.
-	self assert: (group isMemberOf: MooseGroup).
+	group := MooseSpecializedGroup withAll: aCollection.
+	self assert: (group isMemberOf: MooseSpecializedGroup).
 	self assert: self model allClasses size equals: numberOfClasses.
 	self assert: self model allMethods size equals: numberOfMethods
 ]
@@ -161,13 +162,6 @@ LANMooseGroupTest >> testPrintOn [
 	| printOn |
 	printOn := String streamContents: [ :stream | self model allTypes printOn: stream ].
 	self assert: (printOn beginsWith: 'All famixttypes (' , self model allTypes size asString)
-]
-
-{ #category : #tests }
-LANMooseGroupTest >> testSelectEightyCoverForMetric [
-	| top |
-	top := self model allMethods selectEightyCoverForMetric: #numberOfLinesOfCode.
-	self denyEmpty: top
 ]
 
 { #category : #tests }

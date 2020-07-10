@@ -51,10 +51,9 @@ MooseAbstractGroup >> \ aCollection [
 ]
 
 { #category : #'adding/removing' }
-MooseAbstractGroup >> add: anItem [ 
-
+MooseAbstractGroup >> add: anItem [
 	self entityStorage add: anItem.
-	self privateState flush. 
+	self privateState flush.
 	^ anItem
 ]
 
@@ -615,9 +614,8 @@ MooseAbstractGroup >> removeAll: aCollection [
 ]
 
 { #category : #'entity collection' }
-MooseAbstractGroup >> removeEntity: anEntity [ 
-	 
-	^self entityStorage remove: anEntity
+MooseAbstractGroup >> removeEntity: anEntity [
+	^ self entityStorage remove: anEntity
 ]
 
 { #category : #loading }

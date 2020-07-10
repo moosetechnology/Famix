@@ -30,8 +30,10 @@ MoosePropertyGroup class >> isDeprecated [
 
 { #category : #'instance creation' }
 MoosePropertyGroup class >> withAll: aCollection from: aMooseGroup using: aSymbolOrBlock [
-
-	^ (self withAll: aCollection) originalGroup: aMooseGroup; property: aSymbolOrBlock; yourself
+	^ (self withAll: aCollection)
+		originalGroup: aMooseGroup;
+		property: aSymbolOrBlock;
+		yourself
 ]
 
 { #category : #accessing }

@@ -145,7 +145,7 @@ MooseObject class >> relatedGroupType [
 
 	| definingMethods selectedMethods selectedMethod |
 	definingMethods :=(Pragma allNamed: #mooseGroup from: self class to: Object) collect: #method.
-	definingMethods ifEmpty: [ ^ MooseGroup ].
+	definingMethods ifEmpty: [ ^ MooseSpecializedGroup ].
 
 	"We need to find the most specialized method, so we select the lower in the hierarchy."
 	selectedMethods := definingMethods groupedBy: [ :each | each methodClass withAllSuperclasses size ].
@@ -250,9 +250,9 @@ MooseObject >> groupFor: aSelector [
 
 	"aSelector = allPackages, allClasses, allMethods, ... "
 
-	| groupName |
-	groupName := aSelector asString capitalized , ' in ' , self mooseName.
-	^ MooseGroup withAll: (self perform: aSelector) asCollection withDescription: groupName
+	^ MooseSpecializedGroup
+		withAll: (self perform: aSelector) asCollection
+		withDescription: aSelector asString capitalized , ' in ' , self mooseName
 ]
 
 { #category : #printing }
