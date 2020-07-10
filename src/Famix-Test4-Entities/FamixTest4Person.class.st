@@ -42,5 +42,5 @@ FamixTest4Person >> books: anObject [
 FamixTest4Person >> booksGroup [
 	<generated>
 	<navigation: 'Books'>
-	^ MooseGroup withAll: self books asSet
+	^ MooseSpecializedGroup withAll: self books asSet
 ]

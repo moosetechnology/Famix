@@ -206,11 +206,11 @@ FmxMBBehavior >> generateNavigationGroupsFor: aClass [
 						ifTrue: [ '{1}
 	<generated>
 	<navigation: ''{2}''>
-	^ MooseGroup withAll: self {3} asSet' ]
+	^ MooseSpecializedGroup withAll: self {3} asSet' ]
 						ifFalse: [ '{1}
 	<generated>
 	<navigation: ''{2}''>
-	^ MooseGroup with: self {3}' ]) format: {(sideName , 'Group') . sideName capitalized . sideName})
+	^ MooseSpecializedGroup with: self {3}' ]) format: {(sideName , 'Group') . sideName capitalized . sideName})
 				in: aClass instanceSide
 				classified: #navigation ]
 ]

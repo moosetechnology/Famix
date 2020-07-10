@@ -36,5 +36,5 @@ FamixTest4Principal >> school: anObject [
 FamixTest4Principal >> schoolGroup [
 	<generated>
 	<navigation: 'School'>
-	^ MooseGroup with: self school
+	^ MooseSpecializedGroup with: self school
 ]

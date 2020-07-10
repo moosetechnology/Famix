@@ -36,5 +36,5 @@ FamixTest4Book >> person: anObject [
 FamixTest4Book >> personGroup [
 	<generated>
 	<navigation: 'Person'>
-	^ MooseGroup with: self person
+	^ MooseSpecializedGroup with: self person
 ]

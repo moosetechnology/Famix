@@ -152,7 +152,7 @@ FAMIXScopingEntity >> parentScope: anObject [
 FAMIXScopingEntity >> parentScopeGroup [
 	<generated>
 	<navigation: 'ParentScope'>
-	^ MooseGroup with: self parentScope
+	^ MooseSpecializedGroup with: self parentScope
 ]
 
 { #category : #'Famix-Extensions' }

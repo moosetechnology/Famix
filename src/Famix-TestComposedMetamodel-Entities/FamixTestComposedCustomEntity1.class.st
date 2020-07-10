@@ -63,5 +63,5 @@ FamixTestComposedCustomEntity1 >> customEntity1: anObject [
 FamixTestComposedCustomEntity1 >> customEntity1Group [
 	<generated>
 	<navigation: 'CustomEntity1'>
-	^ MooseGroup with: self customEntity1
+	^ MooseSpecializedGroup with: self customEntity1
 ]

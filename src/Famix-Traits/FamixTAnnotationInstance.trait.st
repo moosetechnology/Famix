@@ -57,5 +57,5 @@ FamixTAnnotationInstance >> annotatedEntity: anObject [
 FamixTAnnotationInstance >> annotatedEntityGroup [
 	<generated>
 	<navigation: 'AnnotatedEntity'>
-	^ MooseGroup with: self annotatedEntity
+	^ MooseSpecializedGroup with: self annotatedEntity
 ]

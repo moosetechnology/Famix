@@ -88,7 +88,7 @@ FamixTAttribute >> parentType: anObject [
 FamixTAttribute >> parentTypeGroup [
 	<generated>
 	<navigation: 'ParentType'>
-	^ MooseGroup with: self parentType
+	^ MooseSpecializedGroup with: self parentType
 ]
 
 { #category : #printing }

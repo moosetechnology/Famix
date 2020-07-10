@@ -42,5 +42,5 @@ FamixTLocalVariable >> parentBehaviouralEntity: anObject [
 FamixTLocalVariable >> parentBehaviouralEntityGroup [
 	<generated>
 	<navigation: 'ParentBehaviouralEntity'>
-	^ MooseGroup with: self parentBehaviouralEntity
+	^ MooseSpecializedGroup with: self parentBehaviouralEntity
 ]

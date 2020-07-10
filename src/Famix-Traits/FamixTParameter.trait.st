@@ -41,5 +41,5 @@ FamixTParameter >> parentBehaviouralEntity: anObject [
 FamixTParameter >> parentBehaviouralEntityGroup [
 	<generated>
 	<navigation: 'ParentBehaviouralEntity'>
-	^ MooseGroup with: self parentBehaviouralEntity
+	^ MooseSpecializedGroup with: self parentBehaviouralEntity
 ]

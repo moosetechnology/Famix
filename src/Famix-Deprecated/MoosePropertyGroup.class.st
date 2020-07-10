@@ -7,7 +7,7 @@ Instance Variables:
 "
 Class {
 	#name : #MoosePropertyGroup,
-	#superclass : #MooseGroup,
+	#superclass : #MooseSpecializedGroup,
 	#instVars : [
 		'originalGroup',
 		'propertySymbolOrBlock'
@@ -30,8 +30,10 @@ MoosePropertyGroup class >> isDeprecated [
 
 { #category : #'instance creation' }
 MoosePropertyGroup class >> withAll: aCollection from: aMooseGroup using: aSymbolOrBlock [
-
-	^ (self withAll: aCollection) originalGroup: aMooseGroup; property: aSymbolOrBlock; yourself
+	^ (self withAll: aCollection)
+		originalGroup: aMooseGroup;
+		property: aSymbolOrBlock;
+		yourself
 ]
 
 { #category : #accessing }

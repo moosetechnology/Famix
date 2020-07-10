@@ -1,6 +1,13 @@
 Extension { #name : #LANMooseGroupTest }
 
 { #category : #'*Famix-Deprecated' }
+LANMooseGroupTest >> testSelectEightyCoverForMetric [
+	| top |
+	top := self model allMethods selectEightyCoverForMetric: #numberOfLinesOfCode.
+	self denyEmpty: top
+]
+
+{ #category : #'*Famix-Deprecated' }
 LANMooseGroupTest >> testSelectTopTwentyForMetric [
 	| top remaining |
 	top := self model allMethods selectTopTwentyForMetric: #numberOfLinesOfCode.

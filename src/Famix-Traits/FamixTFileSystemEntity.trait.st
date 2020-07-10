@@ -115,7 +115,7 @@ FamixTFileSystemEntity >> parentFolder: anObject [
 FamixTFileSystemEntity >> parentFolderGroup [
 	<generated>
 	<navigation: 'ParentFolder'>
-	^ MooseGroup with: self parentFolder
+	^ MooseSpecializedGroup with: self parentFolder
 ]
 
 { #category : #accessing }

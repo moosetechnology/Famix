@@ -14,7 +14,7 @@ Behavior >> mooseInheritsFrom: aClass [
 
 { #category : #'*Moose-Core' }
 Behavior >> relatedGroupType [
-	^ MooseGroup
+	^ MooseSpecializedGroup
 ]
 
 { #category : #'*Moose-Core' }

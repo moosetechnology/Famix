@@ -194,7 +194,7 @@ FamixTMethod >> parentType: anObject [
 FamixTMethod >> parentTypeGroup [
 	<generated>
 	<navigation: 'ParentType'>
-	^ MooseGroup with: self parentType
+	^ MooseSpecializedGroup with: self parentType
 ]
 
 { #category : #testing }

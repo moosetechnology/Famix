@@ -10,15 +10,6 @@ MooseGroupTest >> actualClass [
 ]
 
 { #category : #tests }
-MooseGroupTest >> testAllModelMethod [
-	| model |
-	model := self twoClasses.
-	self assert: model allModelMethods entities size equals: 3.
-	self assert: (model allModelMethods entities includesAll: model allMethods entities).
-	self flag: #todo. "Once this bug will be fixed, we should add an assertion with stubs methods.https://github.com/moosetechnology/Moose/issues/1800"
-]
-
-{ #category : #tests }
 MooseGroupTest >> testAsMooseGroup [
 	group := #(1 2 3) asMooseGroup.
 	self assert: (group isKindOf: MooseGroup).

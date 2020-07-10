@@ -128,7 +128,7 @@ FamixTType >> typeContainer: anObject [
 FamixTType >> typeContainerGroup [
 	<generated>
 	<navigation: 'TypeContainer'>
-	^ MooseGroup with: self typeContainer
+	^ MooseSpecializedGroup with: self typeContainer
 ]
 
 { #category : #accessing }

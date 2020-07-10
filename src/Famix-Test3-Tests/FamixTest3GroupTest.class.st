@@ -16,6 +16,6 @@ FamixTest3GroupTest >> testGroupsAreGenerated [
 ]
 
 { #category : #tests }
-FamixTest3GroupTest >> testMooseGroupAllWith [
-	self assert: (model allUsing: FamixTClass) class equals: self classGroup
+FamixTest3GroupTest >> testMooseSpecializedGroupAllWith [
+	self assert: (model allUsing: FamixTClass) specialize class equals: self classGroup
 ]

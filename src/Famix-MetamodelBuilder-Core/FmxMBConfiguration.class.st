@@ -76,7 +76,7 @@ FmxMBConfiguration >> classTag: anObject [
 { #category : #'settings - default' }
 FmxMBConfiguration >> defaultBasicGroupSuperclassName [
 
-	^ #MooseGroup
+	^ #MooseSpecializedGroup
 ]
 
 { #category : #'settings - default' }

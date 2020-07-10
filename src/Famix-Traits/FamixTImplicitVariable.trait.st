@@ -49,5 +49,5 @@ FamixTImplicitVariable >> parentBehaviouralEntity: anObject [
 FamixTImplicitVariable >> parentBehaviouralEntityGroup [
 	<generated>
 	<navigation: 'ParentBehaviouralEntity'>
-	^ MooseGroup with: self parentBehaviouralEntity
+	^ MooseSpecializedGroup with: self parentBehaviouralEntity
 ]
