@@ -9,6 +9,7 @@ Trait {
 		'#parentType => FMOne type: #FamixTWithAttributes opposite: #attributes'
 	],
 	#traits : 'FamixTStructuralEntity',
+	#classTraits : 'FamixTStructuralEntity classTrait',
 	#category : #'Famix-Traits-Attribute'
 }
 
@@ -88,7 +89,7 @@ FamixTAttribute >> parentType: anObject [
 FamixTAttribute >> parentTypeGroup [
 	<generated>
 	<navigation: 'ParentType'>
-	^ MooseGroup with: self parentType
+	^ MooseSpecializedGroup with: self parentType
 ]
 
 { #category : #printing }

@@ -8,6 +8,7 @@ Trait {
 		'#parentScope => FMOne type: #FamixTWithGlobalVariables opposite: #globalVariables'
 	],
 	#traits : 'FamixTStructuralEntity',
+	#classTraits : 'FamixTStructuralEntity classTrait',
 	#category : #'Famix-Traits-GlobalVariable'
 }
 
@@ -48,5 +49,5 @@ FamixTGlobalVariable >> parentScope: anObject [
 FamixTGlobalVariable >> parentScopeGroup [
 	<generated>
 	<navigation: 'ParentScope'>
-	^ MooseGroup with: self parentScope
+	^ MooseSpecializedGroup with: self parentScope
 ]

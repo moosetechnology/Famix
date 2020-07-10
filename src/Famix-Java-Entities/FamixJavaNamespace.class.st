@@ -324,7 +324,7 @@ FamixJavaNamespace >> parentNamespace: anObject [
 FamixJavaNamespace >> parentNamespaceGroup [
 	<generated>
 	<navigation: 'ParentNamespace'>
-	^ MooseGroup with: self parentNamespace
+	^ MooseSpecializedGroup with: self parentNamespace
 ]
 
 { #category : #printing }

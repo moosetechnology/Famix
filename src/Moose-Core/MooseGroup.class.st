@@ -19,47 +19,27 @@ MooseGroup class >> annotation [
 ]
 
 { #category : #'instance creation' }
-MooseGroup class >> new [ 
-	 
-	^self new: 5
-]
-
-{ #category : #'instance creation' }
-MooseGroup class >> new: capacity [ 
-	 
-	^self basicNew initialize: capacity
-]
-
-{ #category : #'instance creation' }
-MooseGroup class >> with: anEntity withDescription: aDescription [ 
-	 
-	^(self with: anEntity) description: aDescription
+MooseGroup class >> with: anEntity withDescription: aDescription [
+	^ (self with: anEntity) description: aDescription
 ]
 
 { #category : #'instance creation' }
 MooseGroup class >> withAll: collection [
-	^ self = MooseGroup
-		ifTrue: [ | wantedClass |
-			wantedClass := collection commonSuperclass relatedGroupType.
-			self withKnownType: wantedClass withAll: collection ]
-		ifFalse: [ self withKnownType: self withAll: collection ]
+	^ (self = MooseGroup
+		ifTrue: [ collection commonSuperclass relatedGroupType ]
+		ifFalse: [ self ]) new
+		addAll: collection;
+		yourself
 ]
 
 { #category : #'instance creation' }
-MooseGroup class >> withAll: entities withDescription: aDescription [ 
-	 
-	^(self withAll: entities) description: aDescription
+MooseGroup class >> withAll: entities withDescription: aDescription [
+	^ (self withAll: entities) description: aDescription
 ]
 
 { #category : #'instance creation' }
-MooseGroup class >> withDescription: aDescription [ 
-	 
-	^self new description: aDescription
-]
-
-{ #category : #'instance creation' }
-MooseGroup class >> withKnownType: anSTClass withAll: collection [ 
-	^ (anSTClass new: collection size) initializeWithAll: collection
+MooseGroup class >> withDescription: aDescription [
+	^ self new description: aDescription
 ]
 
 { #category : #'adding/removing' }
@@ -153,15 +133,9 @@ MooseGroup >> indexOf: anEntity [
 ]
 
 { #category : #initialization }
-MooseGroup >> initialize: capacity [ 
-	 
-	self initialize. 
+MooseGroup >> initialize [
+	super initialize.
 	self description: 'Group'
-]
-
-{ #category : #initialization }
-MooseGroup >> initializeWithAll: aCollection [
-	self entityStorage addAll: aCollection.
 ]
 
 { #category : #'public interface' }

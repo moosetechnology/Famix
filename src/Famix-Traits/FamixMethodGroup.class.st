@@ -1,13 +1,13 @@
 Class {
 	#name : #FamixMethodGroup,
-	#superclass : #MooseGroup,
+	#superclass : #MooseSpecializedGroup,
 	#category : #'Famix-Traits-Entities'
 }
 
 { #category : #meta }
 FamixMethodGroup class >> annotation [
 
-	<FMClass: #MethodGroup super: #MooseGroup>
+	<FMClass: #MethodGroup super: #MooseSpecializedGroup>
 	<package: #'Famix-Traits'>
 	<generated>
 	^self

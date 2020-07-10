@@ -7,7 +7,7 @@ Instance Variables:
 "
 Class {
 	#name : #MoosePropertyGroup,
-	#superclass : #MooseGroup,
+	#superclass : #MooseSpecializedGroup,
 	#instVars : [
 		'originalGroup',
 		'propertySymbolOrBlock'

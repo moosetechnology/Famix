@@ -17,6 +17,7 @@ Trait {
 		'#annotatedEntity => FMOne type: #FamixTWithAnnotationInstances opposite: #annotationInstances'
 	],
 	#traits : 'TEntityMetaLevelDependency',
+	#classTraits : 'TEntityMetaLevelDependency classTrait',
 	#category : #'Famix-Traits-AnnotationInstance'
 }
 
@@ -57,5 +58,5 @@ FamixTAnnotationInstance >> annotatedEntity: anObject [
 FamixTAnnotationInstance >> annotatedEntityGroup [
 	<generated>
 	<navigation: 'AnnotatedEntity'>
-	^ MooseGroup with: self annotatedEntity
+	^ MooseSpecializedGroup with: self annotatedEntity
 ]

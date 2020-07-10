@@ -7,6 +7,7 @@ Trait {
 		'#parentBehaviouralEntity => FMOne type: #FamixTWithParameters opposite: #parameters'
 	],
 	#traits : 'FamixTStructuralEntity',
+	#classTraits : 'FamixTStructuralEntity classTrait',
 	#category : #'Famix-Traits-Parameter'
 }
 
@@ -41,5 +42,5 @@ FamixTParameter >> parentBehaviouralEntity: anObject [
 FamixTParameter >> parentBehaviouralEntityGroup [
 	<generated>
 	<navigation: 'ParentBehaviouralEntity'>
-	^ MooseGroup with: self parentBehaviouralEntity
+	^ MooseSpecializedGroup with: self parentBehaviouralEntity
 ]

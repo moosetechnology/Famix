@@ -62,7 +62,7 @@ FamixTEnumValue >> parentEnum: anObject [
 FamixTEnumValue >> parentEnumGroup [
 	<generated>
 	<navigation: 'ParentEnum'>
-	^ MooseGroup with: self parentEnum
+	^ MooseSpecializedGroup with: self parentEnum
 ]
 
 { #category : #accessing }
