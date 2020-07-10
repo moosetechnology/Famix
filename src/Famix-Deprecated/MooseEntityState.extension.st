@@ -7,6 +7,14 @@ MooseEntityState >> allProperties [
 ]
 
 { #category : #'*Famix-Deprecated' }
+MooseEntityState >> cache: selector initializer: aBlock [
+	self
+		deprecated: 'Uses #cacheAt:ifAbsentPut: instead'
+		transformWith: '`@receiver cache: `@arg1 initializer: `@arg2' -> '`@receiver cacheAt: `@arg1 ifAbsentPut: `@arg2'.
+	^ self cacheAt: selector ifAbsentPut: aBlock
+]
+
+{ #category : #'*Famix-Deprecated' }
 MooseEntityState >> flushGroups [
 	self deprecated: 'Use #flush instead' transformWith: '`@receiver flushGroups' -> '`@receiver flush'.
 	self flush

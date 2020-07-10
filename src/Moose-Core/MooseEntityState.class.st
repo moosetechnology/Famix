@@ -64,11 +64,6 @@ MooseEntityState >> attributes [
 ]
 
 { #category : #'accessing cache' }
-MooseEntityState >> cache: selector initializer: aBlock [
-	^ self cacheAt: selector ifAbsentPut: [ aBlock cullValue: self entity ]
-]
-
-{ #category : #'accessing cache' }
 MooseEntityState >> cacheAt: name ifAbsent: aBlock [
 	^ cache at: name ifAbsent: [ aBlock value ]
 ]
