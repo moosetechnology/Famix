@@ -48,7 +48,6 @@ Class {
 		'mooseName'
 	],
 	#classVars : [
-		'DefaultState',
 		'MooseID'
 	],
 	#classInstVars : [
@@ -85,16 +84,6 @@ MooseObject class >> annotation [
 { #category : #accessing }
 MooseObject class >> cache [
 	^ cache ifNil: [ self initializeCache ]
-]
-
-{ #category : #accessing }
-MooseObject class >> defaultState [
-	^ DefaultState ifNil: [ DefaultState := MooseEntityState ]
-]
-
-{ #category : #accessing }
-MooseObject class >> defaultState: anObject [
-	DefaultState := anObject
 ]
 
 { #category : #private }
@@ -136,7 +125,7 @@ MooseObject class >> navigationPragmas [
 	^ Pragma allNamed: #navigation: from: self to: MooseObject
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MooseObject class >> relatedGroupType [
 	" The entities can specify what is the prefered type of MooseGroup they want to be stored in.
 	They do that using a class side method with uniqueName that contains pragma <mooseGroup>. 
@@ -218,16 +207,9 @@ MooseObject >> bookmarkAs: aString [
 	^ self mooseModel add: group asBookmark: aString
 ]
 
-{ #category : #private }
-MooseObject >> defaultStateClass [
-	"Answer the default implementator of this element's state."
-
-	^ self class defaultState
-]
-
 { #category : #accessing }
 MooseObject >> description [
-	^ self privateState description
+	^ self privateState descriptionFor: self
 ]
 
 { #category : #accessing }
@@ -407,9 +389,7 @@ MooseObject >> privateState [
 
 { #category : #private }
 MooseObject >> privateState: aState [
-
-	state := aState.
-	aState entity: self.
+	state := aState
 ]
 
 { #category : #private }
@@ -488,7 +468,7 @@ MooseObject >> resetMooseName [
 
 { #category : #initialization }
 MooseObject >> resetPrivateState [
-	state := self defaultStateClass for: self
+	state := MooseEntityState new
 ]
 
 { #category : #private }

@@ -14,18 +14,10 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'attributes',
-		'entity',
 		'cache'
 	],
 	#category : #'Moose-Core'
 }
-
-{ #category : #'instance creation' }
-MooseEntityState class >> for: aMooseEntity [
-	^ self new
-		entity: aMooseEntity;
-		yourself
-]
 
 { #category : #'accessing cache' }
 MooseEntityState >> allCachedValues [
@@ -94,27 +86,13 @@ MooseEntityState >> cacheAt: name put: value [
 ]
 
 { #category : #accessing }
-MooseEntityState >> description [
-	| entity |
-	^ self
-		attributeAt: #privateDescription
-		ifAbsent: [ entity := self entity.
-			entity mooseName , ' (' , entity mooseDescription name , ')' ]
-]
-
-{ #category : #accessing }
 MooseEntityState >> description: text [
 	^ self attributeAt: #privateDescription put: text
 ]
 
 { #category : #accessing }
-MooseEntityState >> entity [
-	^ entity
-]
-
-{ #category : #accessing }
-MooseEntityState >> entity: anObject [
-	entity := anObject
+MooseEntityState >> descriptionFor: owner [
+	^ self attributeAt: #privateDescription ifAbsent: [ owner mooseName , ' (' , owner mooseDescription name , ')' ]
 ]
 
 { #category : #'accessing cache' }
