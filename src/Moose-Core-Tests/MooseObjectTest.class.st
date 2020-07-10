@@ -56,16 +56,6 @@ MooseObjectTest >> testAllPrinting [
 ]
 
 { #category : #tests }
-MooseObjectTest >> testEntityBackLink [
-	"self debug: #testEntityBackLink"
-
-	| e r |
-	e := self actualClass new.
-	r := e privateState entity.
-	self assert: r identicalTo: e
-]
-
-{ #category : #tests }
 MooseObjectTest >> testGroupFor [
 	| entity1 entity2 model classGroup methodGroup |
 	entity1 := FamixTest1Class new.
