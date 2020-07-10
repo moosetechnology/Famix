@@ -294,9 +294,8 @@ MooseObject >> isOfType: aClassFAMIX [
 ]
 
 { #category : #properties }
-MooseObject >> lookUpPropertyNamed: selector computedAs: aBlock [ 
-	 
-	^self privateState cache: selector initializer: aBlock
+MooseObject >> lookUpPropertyNamed: selector computedAs: aBlock [
+	^ self privateState cacheAt: selector ifAbsentPut: aBlock
 ]
 
 { #category : #accessing }
