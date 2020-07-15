@@ -275,6 +275,11 @@ MooseObject >> isOfType: aClassFAMIX [
 	^ self class isOfType: aClassFAMIX
 ]
 
+{ #category : #accessing }
+MooseObject >> localMooseModel [
+	^ self mooseModel
+]
+
 { #category : #properties }
 MooseObject >> lookUpPropertyNamed: selector computedAs: aBlock [
 	^ self privateState cacheAt: selector ifAbsentPut: aBlock
