@@ -193,6 +193,11 @@ MooseQueryResult >> select: aBlock [
 ]
 
 { #category : #accessing }
+MooseQueryResult >> size [
+	^ storage size
+]
+
+{ #category : #accessing }
 MooseQueryResult >> storage [
 
 	^ storage
