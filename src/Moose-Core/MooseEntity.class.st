@@ -213,11 +213,6 @@ MooseEntity >> isStub: aBoolean [
 ]
 
 { #category : #accessing }
-MooseEntity >> localMooseModel [
-	^ self mooseModel
-]
-
-{ #category : #accessing }
 MooseEntity >> mooseModel [
 	"Answers the model containing the current entity"
 
