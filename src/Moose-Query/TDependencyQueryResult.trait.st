@@ -60,7 +60,8 @@ TDependencyQueryResult >> opposites [
 
 { #category : #filtering }
 TDependencyQueryResult >> outOf: aFamixEntity [
-	^ self newAssocResultWith: (self storage reject: [ :dep | (self opposite: dep) asCollection anySatisfy: [ :entity | (entity allAtScope: aFamixEntity class) includes: aFamixEntity ] ])
+	^ self
+		rejectDependencies: [ :dep | (self opposite: dep) asCollection anySatisfy: [ :entity | (entity allAtScope: aFamixEntity class) includes: aFamixEntity ] ]
 ]
 
 { #category : #private }
@@ -97,7 +98,8 @@ TDependencyQueryResult >> targetsAtScope: aTraitOrClass [
 
 { #category : #filtering }
 TDependencyQueryResult >> within: aFamixEntity [
-	^ self newAssocResultWith: (self storage select: [ :dep | (self opposite: dep) asCollection anySatisfy: [ :entity | (entity allAtScope: aFamixEntity class) includes: aFamixEntity ] ])
+	^ self
+		selectDependencies: [ :dep | (self opposite: dep) asCollection anySatisfy: [ :entity | (entity allAtScope: aFamixEntity class) includes: aFamixEntity ] ]
 ]
 
 { #category : #filtering }
