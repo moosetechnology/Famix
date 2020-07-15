@@ -27,6 +27,12 @@ MooseEntityState >> flushProperties [
 ]
 
 { #category : #'*Famix-Deprecated' }
+MooseEntityState class >> for: aMooseEntity [
+	self deprecated: 'Use #new instead.' transformWith: '`@receiver for: `@arg' -> '`@receiver new'.
+	^ self new
+]
+
+{ #category : #'*Famix-Deprecated' }
 MooseEntityState >> propertyAt: name ifAbsent: aBlock [
 	self
 		deprecated: 'Use cacheAt:ifAbsent: instead'
@@ -56,6 +62,6 @@ MooseEntityState >> removeProperty: name [
 
 { #category : #'*Famix-Deprecated' }
 MooseEntityState class >> with: aMooseEntity [
-	self deprecated: 'Use #for: instead.' transformWith: '`@receiver with: `@arg' -> '`@receiver for: `@arg'.
-	^ self for: aMooseEntity
+	self deprecated: 'Use #new instead.' transformWith: '`@receiver with: `@arg' -> '`@receiver new'.
+	^ self new
 ]
