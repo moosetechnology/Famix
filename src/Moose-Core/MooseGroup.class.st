@@ -20,17 +20,23 @@ MooseGroup class >> annotation [
 
 { #category : #'instance creation' }
 MooseGroup class >> with: anEntity withDescription: aDescription [
-	^ (self with: anEntity) description: aDescription
+	^ (self with: anEntity)
+		description: aDescription;
+		yourself
 ]
 
 { #category : #'instance creation' }
 MooseGroup class >> withAll: entities withDescription: aDescription [
-	^ (self withAll: entities) description: aDescription
+	^ (self withAll: entities)
+		description: aDescription;
+		yourself
 ]
 
 { #category : #'instance creation' }
 MooseGroup class >> withDescription: aDescription [
-	^ self new description: aDescription
+	^ self new
+		description: aDescription;
+		yourself
 ]
 
 { #category : #'adding/removing' }
@@ -117,7 +123,7 @@ MooseGroup >> mooseDescription [
 
 { #category : #accessing }
 MooseGroup >> name [
-	^ self privateState attributeAt: #privateDescription ifAbsent: [ #group ]
+	^ self attributeAt: #privateDescription ifAbsent: [ #group ]
 ]
 
 { #category : #'public interface' }

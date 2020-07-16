@@ -45,7 +45,9 @@ Class {
 	#instVars : [
 		'state',
 		'mooseID',
-		'mooseName'
+		'mooseName',
+		'cache',
+		'entityAttributes'
 	],
 	#classVars : [
 		'MooseID'
@@ -174,6 +176,11 @@ MooseObject class >> usedStatefulTraits [
 	^ self cache directAt: #usedStatefulTraits
 ]
 
+{ #category : #accessing }
+MooseObject >> allCachedValues [
+	^ cache values
+]
+
 { #category : #'meta information' }
 MooseObject >> allDeclaredProperties [
 	"Do not use the class side version
@@ -199,6 +206,26 @@ MooseObject >> announcer: anAnnouncer [
 ]
 
 { #category : #accessing }
+MooseObject >> attributeAt: name ifAbsent: aBlock [
+	1 to: entityAttributes size do: [ :n | name == (entityAttributes at: n) key ifTrue: [ ^ (entityAttributes at: n) value ] ].
+	^ aBlock value
+]
+
+{ #category : #accessing }
+MooseObject >> attributeAt: name ifAbsentPut: aBlock [
+	1 to: entityAttributes size do: [ :n | name == (entityAttributes at: n) key ifTrue: [ ^ (entityAttributes at: n) value ] ].
+	entityAttributes := entityAttributes copyWith: name -> aBlock value.
+	^ entityAttributes last value
+]
+
+{ #category : #accessing }
+MooseObject >> attributeAt: name put: value [
+	1 to: entityAttributes size do: [ :n | name == (entityAttributes at: n) key ifTrue: [ ^ (entityAttributes at: n) value: value ] ].
+	entityAttributes := entityAttributes copyWith: name -> value.
+	^ entityAttributes last value
+]
+
+{ #category : #accessing }
 MooseObject >> bookmarkAs: aString [
 	"Adds myself in the cache of the mooseModel and mark it as a bookmark"
 	| group |
@@ -208,22 +235,58 @@ MooseObject >> bookmarkAs: aString [
 ]
 
 { #category : #accessing }
-MooseObject >> description [
-	^ self privateState descriptionFor: self
+MooseObject >> cacheAt: name ifAbsent: aBlock [
+	^ cache at: name ifAbsent: [ aBlock value ]
 ]
 
 { #category : #accessing }
-MooseObject >> description: characters [ 
-	 
-	self privateState description: characters
+MooseObject >> cacheAt: name ifAbsent: absentBlock ifPresent: presentBlock [
+	^ cache at: name ifPresent: presentBlock ifAbsent: absentBlock
 ]
 
-{ #category : #groups }
-MooseObject >> entityCache [
-	"should be used read only, i.e. you are not supposed to modify the returned groups.
-	If you want to change entityGroups, use privateState 'set' methods"
+{ #category : #accessing }
+MooseObject >> cacheAt: name ifAbsentPut: aBlock [
+	^ cache at: name ifAbsentPut: aBlock
+]
 
-	^ self privateState entityCache
+{ #category : #accessing }
+MooseObject >> cacheAt: name ifPresent: aBlock [
+	^ cache at: name ifPresent: [ :value | aBlock cull: value ]
+]
+
+{ #category : #accessing }
+MooseObject >> cacheAt: name ifPresent: presentBlock ifAbsentPut: aBlock [
+	^ cache at: name ifPresent: presentBlock ifAbsentPut: aBlock
+]
+
+{ #category : #accessing }
+MooseObject >> cacheAt: name put: value [
+	^ cache at: name put: value
+]
+
+{ #category : #accessing }
+MooseObject >> description [
+	^ self attributeAt: #privateDescription ifAbsent: [ self mooseName , ' (' , self mooseDescription name , ')' ]
+]
+
+{ #category : #accessing }
+MooseObject >> description: text [
+	self attributeAt: #privateDescription put: text
+]
+
+{ #category : #accessing }
+MooseObject >> entityAttributes [
+	^ entityAttributes
+]
+
+{ #category : #accessing }
+MooseObject >> entityCache [
+	^ cache
+]
+
+{ #category : #initialization }
+MooseObject >> flush [
+	cache initialize
 ]
 
 { #category : #groups }
@@ -245,6 +308,11 @@ MooseObject >> gtDisplayOn: aStream [
 { #category : #testing }
 MooseObject >> hasMooseModel [
 	^ self mooseModel isNotNil
+]
+
+{ #category : #testing }
+MooseObject >> includesKey: selector [
+	^ cache includesKey: selector
 ]
 
 { #category : #initialization }
@@ -389,7 +457,7 @@ MooseObject >> privateSetMooseModel: aMooseModel [
 { #category : #private }
 MooseObject >> privateState [
 
-	^ state
+	^ self
 ]
 
 { #category : #private }
@@ -446,6 +514,21 @@ MooseObject >> propertyNamed: name put: value [
 ]
 
 { #category : #accessing }
+MooseObject >> removeAttribute: aSymbol [
+	| each |
+	1 to: entityAttributes size do: [ :n | 
+		aSymbol == (each := entityAttributes at: n) key
+			ifTrue: [ entityAttributes := entityAttributes copyWithout: each.
+				^ true ] ].
+	^ false
+]
+
+{ #category : #accessing }
+MooseObject >> removeCache: name [
+	cache removeKey: name ifAbsent: [  ]
+]
+
+{ #category : #accessing }
 MooseObject >> removeFromModel [
 	^ self mooseModel
 		ifNil: [ self ]
@@ -465,7 +548,9 @@ MooseObject >> resetMooseName [
 
 { #category : #initialization }
 MooseObject >> resetPrivateState [
-	state := MooseEntityState new
+	state := MooseEntityState new.
+	entityAttributes := #().
+	cache := SmallDictionary new
 ]
 
 { #category : #private }
