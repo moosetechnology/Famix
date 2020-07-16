@@ -24,15 +24,16 @@ FamixTestComposedCustomEntity1 >> c21 [
 
 { #category : #accessing }
 FamixTestComposedCustomEntity1 >> c21: anObject [
+
 	<generated>
-	(self attributeAt: #c21 ifAbsentPut: [ nil ]) == anObject ifTrue: [ ^ anObject ].
-	anObject
-		ifNil: [ | otherSide |
-			otherSide := self c21.
-			self privateState attributeAt: #c21 put: anObject.
-			otherSide c1: nil ]
-		ifNotNil: [ self attributeAt: #c21 put: anObject.
-			anObject c1: self ]
+	(self attributeAt: #c21 ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self c21.
+		self attributeAt: #c21 put: anObject.
+		otherSide c1: nil ]
+	ifNotNil: [ 
+		self attributeAt: #c21 put: anObject.
+		anObject c1: self ]
 ]
 
 { #category : #accessing }
@@ -46,15 +47,16 @@ FamixTestComposedCustomEntity1 >> customEntity1 [
 
 { #category : #accessing }
 FamixTestComposedCustomEntity1 >> customEntity1: anObject [
+
 	<generated>
-	(self attributeAt: #customEntity1 ifAbsentPut: [ nil ]) == anObject ifTrue: [ ^ anObject ].
-	anObject
-		ifNil: [ | otherSide |
-			otherSide := self customEntity1.
-			self privateState attributeAt: #customEntity1 put: anObject.
-			otherSide customEntity1: nil ]
-		ifNotNil: [ self attributeAt: #customEntity1 put: anObject.
-			anObject customEntity1: self ]
+	(self attributeAt: #customEntity1 ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self customEntity1.
+		self attributeAt: #customEntity1 put: anObject.
+		otherSide customEntity1: nil ]
+	ifNotNil: [ 
+		self attributeAt: #customEntity1 put: anObject.
+		anObject customEntity1: self ]
 ]
 
 { #category : #navigation }

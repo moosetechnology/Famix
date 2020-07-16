@@ -12,15 +12,9 @@ FamixTestComposed1CustomEntity3 >> c23 [
 
 { #category : #'*Famix-TestComposedMetamodel-Entities-accessing' }
 FamixTestComposed1CustomEntity3 >> c23: anObject [
+
 	<generated>
-	self
-		attributeAt: #c23
-		put:
-			(FMMultivalueLink
-				on: self
-				update: #c13s
-				from: self c23
-				to: anObject)
+	self attributeAt: #c23 put: (FMMultivalueLink on: self update: #c13s from: self c23 to: anObject).
 ]
 
 { #category : #'*Famix-TestComposedMetamodel-Entities-accessing' }

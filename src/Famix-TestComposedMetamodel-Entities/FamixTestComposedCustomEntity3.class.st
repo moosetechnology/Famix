@@ -24,15 +24,9 @@ FamixTestComposedCustomEntity3 >> c23 [
 
 { #category : #accessing }
 FamixTestComposedCustomEntity3 >> c23: anObject [
+
 	<generated>
-	self
-		attributeAt: #c23
-		put:
-			(FMMultivalueLink
-				on: self
-				update: #c3s
-				from: self c23
-				to: anObject)
+	self attributeAt: #c23 put: (FMMultivalueLink on: self update: #c3s from: self c23 to: anObject).
 ]
 
 { #category : #accessing }
@@ -46,13 +40,7 @@ FamixTestComposedCustomEntity3 >> customEntity3 [
 
 { #category : #accessing }
 FamixTestComposedCustomEntity3 >> customEntity3: anObject [
+
 	<generated>
-	self
-		attributeAt: #customEntity3
-		put:
-			(FMMultivalueLink
-				on: self
-				update: #customEntities3
-				from: self customEntity3
-				to: anObject)
+	self attributeAt: #customEntity3 put: (FMMultivalueLink on: self update: #customEntities3 from: self customEntity3 to: anObject).
 ]

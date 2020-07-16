@@ -24,26 +24,28 @@ FamixTestComposed2CustomEntity1 >> c11 [
 
 { #category : #'*Famix-TestComposedMetamodel-Entities-accessing' }
 FamixTestComposed2CustomEntity1 >> c11: anObject [
+
 	<generated>
-	(self attributeAt: #c11 ifAbsentPut: [ nil ]) == anObject ifTrue: [ ^ anObject ].
-	anObject
-		ifNil: [ | otherSide |
-			otherSide := self c11.
-			self privateState attributeAt: #c11 put: anObject.
-			otherSide c21: nil ]
-		ifNotNil: [ self attributeAt: #c11 put: anObject.
-			anObject c21: self ]
+	(self attributeAt: #c11 ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self c11.
+		self attributeAt: #c11 put: anObject.
+		otherSide c21: nil ]
+	ifNotNil: [ 
+		self attributeAt: #c11 put: anObject.
+		anObject c21: self ]
 ]
 
 { #category : #'*Famix-TestComposedMetamodel-Entities-accessing' }
 FamixTestComposed2CustomEntity1 >> c1: anObject [
+
 	<generated>
-	(self attributeAt: #c1 ifAbsentPut: [ nil ]) == anObject ifTrue: [ ^ anObject ].
-	anObject
-		ifNil: [ | otherSide |
-			otherSide := self c1.
-			self privateState attributeAt: #c1 put: anObject.
-			otherSide c21: nil ]
-		ifNotNil: [ self attributeAt: #c1 put: anObject.
-			anObject c21: self ]
+	(self attributeAt: #c1 ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self c1.
+		self attributeAt: #c1 put: anObject.
+		otherSide c21: nil ]
+	ifNotNil: [ 
+		self attributeAt: #c1 put: anObject.
+		anObject c21: self ]
 ]

@@ -30,13 +30,7 @@ FamixTestComposed1CustomEntity2 >> customEntity2 [
 
 { #category : #'*Famix-TestComposedMetamodel-Entities-accessing' }
 FamixTestComposed1CustomEntity2 >> customEntity2: anObject [
+
 	<generated>
-	self
-		attributeAt: #customEntity2
-		put:
-			(FMMultivalueLink
-				on: self
-				update: #customEntities2
-				from: self customEntity2
-				to: anObject)
+	self attributeAt: #customEntity2 put: (FMMultivalueLink on: self update: #customEntities2 from: self customEntity2 to: anObject).
 ]

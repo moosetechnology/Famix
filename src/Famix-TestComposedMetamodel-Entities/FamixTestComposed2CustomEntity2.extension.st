@@ -12,15 +12,9 @@ FamixTestComposed2CustomEntity2 >> c12 [
 
 { #category : #'*Famix-TestComposedMetamodel-Entities-accessing' }
 FamixTestComposed2CustomEntity2 >> c12: anObject [
+
 	<generated>
-	self
-		attributeAt: #c12
-		put:
-			(FMMultivalueLink
-				on: self
-				update: #c22s
-				from: self c12
-				to: anObject)
+	self attributeAt: #c12 put: (FMMultivalueLink on: self update: #c22s from: self c12 to: anObject).
 ]
 
 { #category : #'*Famix-TestComposedMetamodel-Entities-accessing' }
@@ -35,13 +29,7 @@ FamixTestComposed2CustomEntity2 >> c2 [
 
 { #category : #'*Famix-TestComposedMetamodel-Entities-accessing' }
 FamixTestComposed2CustomEntity2 >> c2: anObject [
+
 	<generated>
-	self
-		attributeAt: #c2
-		put:
-			(FMMultivalueLink
-				on: self
-				update: #c22s
-				from: self c2
-				to: anObject)
+	self attributeAt: #c2 put: (FMMultivalueLink on: self update: #c22s from: self c2 to: anObject).
 ]

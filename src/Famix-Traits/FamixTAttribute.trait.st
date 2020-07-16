@@ -9,6 +9,7 @@ Trait {
 		'#parentType => FMOne type: #FamixTWithAttributes opposite: #attributes'
 	],
 	#traits : 'FamixTStructuralEntity',
+	#classTraits : 'FamixTStructuralEntity classTrait',
 	#category : #'Famix-Traits-Attribute'
 }
 
@@ -34,7 +35,7 @@ FamixTAttribute >> hierarchyNestingLevel [
 
 { #category : #metrics }
 FamixTAttribute >> hierarchyNestingLevel: aNumber [
-	self privateState cacheAt: #hierarchyNestingLevel put: aNumber
+	self cacheAt: #hierarchyNestingLevel put: aNumber
 ]
 
 { #category : #testing }

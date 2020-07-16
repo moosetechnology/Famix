@@ -27,15 +27,9 @@ FamixTestComposedAssociation >> c15 [
 
 { #category : #accessing }
 FamixTestComposedAssociation >> c15: anObject [
+
 	<generated>
-	self
-		attributeAt: #c15
-		put:
-			(FMMultivalueLink
-				on: self
-				update: #associations
-				from: self c15
-				to: anObject)
+	self attributeAt: #c15 put: (FMMultivalueLink on: self update: #associations from: self c15 to: anObject).
 ]
 
 { #category : #accessing }
@@ -50,15 +44,9 @@ FamixTestComposedAssociation >> c25 [
 
 { #category : #accessing }
 FamixTestComposedAssociation >> c25: anObject [
+
 	<generated>
-	self
-		attributeAt: #c25
-		put:
-			(FMMultivalueLink
-				on: self
-				update: #associations
-				from: self c25
-				to: anObject)
+	self attributeAt: #c25 put: (FMMultivalueLink on: self update: #associations from: self c25 to: anObject).
 ]
 
 { #category : #accessing }

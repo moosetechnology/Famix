@@ -103,7 +103,7 @@ FamixTClass >> numberOfAttributesInherited [
 
 { #category : #metrics }
 FamixTClass >> numberOfAttributesInherited: aNumber [
-	self privateState cacheAt: #numberOfAttributesInherited put: aNumber
+	self cacheAt: #numberOfAttributesInherited put: aNumber
 ]
 
 { #category : #metrics }
@@ -119,7 +119,7 @@ FamixTClass >> numberOfMethodsAdded [
 
 { #category : #metrics }
 FamixTClass >> numberOfMethodsAdded: aNumber [
-	self privateState cacheAt: #numberOfMethodsAdded put: aNumber
+	self cacheAt: #numberOfMethodsAdded put: aNumber
 ]
 
 { #category : #metrics }
@@ -137,7 +137,7 @@ FamixTClass >> numberOfMethodsInHierarchy [
 
 { #category : #metrics }
 FamixTClass >> numberOfMethodsInHierarchy: aNumber [
-	self privateState cacheAt: #numberOfMethodsInHierarchy put: aNumber
+	self cacheAt: #numberOfMethodsInHierarchy put: aNumber
 ]
 
 { #category : #metrics }
@@ -153,7 +153,7 @@ FamixTClass >> numberOfMethodsInherited [
 
 { #category : #metrics }
 FamixTClass >> numberOfMethodsInherited: aNumber [
-	self privateState cacheAt: #numberOfMethodsInherited put: aNumber
+	self cacheAt: #numberOfMethodsInherited put: aNumber
 ]
 
 { #category : #metrics }
@@ -169,7 +169,7 @@ FamixTClass >> numberOfMethodsOverriden [
 
 { #category : #metrics }
 FamixTClass >> numberOfMethodsOverriden: aNumber [
-	self privateState cacheAt: #numberOfMethodsOverriden put: aNumber
+	self cacheAt: #numberOfMethodsOverriden put: aNumber
 ]
 
 { #category : #metrics }
