@@ -196,7 +196,7 @@ MooseObject >> allPropertySelectors [
 
 { #category : #private }
 MooseObject >> announcer [
-	^ self privateState attributeAt: #announcer ifAbsentPut: [Announcer new]
+	^ self attributeAt: #announcer ifAbsentPut: [ Announcer new ]
 ]
 
 { #category : #private }
@@ -349,7 +349,7 @@ MooseObject >> localMooseModel [
 
 { #category : #properties }
 MooseObject >> lookUpPropertyNamed: selector computedAs: aBlock [
-	^ self privateState cacheAt: selector ifAbsentPut: aBlock
+	^ self cacheAt: selector ifAbsentPut: aBlock
 ]
 
 { #category : #accessing }
@@ -482,14 +482,14 @@ MooseObject >> propertyNamed: propertyName ifAbsent: aBlock [
 
 { #category : #properties }
 MooseObject >> propertyNamed: name ifAbsentPut: value [
-	^ self privateState cacheAt: name ifAbsentPut: value
+	^ self cacheAt: name ifAbsentPut: value
 ]
 
 { #category : #properties }
 MooseObject >> propertyNamed: propertyName ifNil: aBlock [
 	"Return the value of the property named propertyName, evaluate aBlock if the property does not exist"
 
-	^ self privateState
+	^ self
 		cacheAt: propertyName asSymbol
 		ifAbsent: [ ([ self mmGetProperty: (self mooseDescription propertyNamed: propertyName) ]
 				on: Error
@@ -498,7 +498,7 @@ MooseObject >> propertyNamed: propertyName ifNil: aBlock [
 
 { #category : #properties }
 MooseObject >> propertyNamed: name put: value [
-	^ self privateState cacheAt: name put: value
+	^ self cacheAt: name put: value
 ]
 
 { #category : #accessing }

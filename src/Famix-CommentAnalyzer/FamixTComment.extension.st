@@ -9,12 +9,12 @@ FamixTComment classSide >> fromLines: aCollectionOfLines [
 FamixTComment >> isCode [
 	<FMProperty: #isCode type: #Boolean>
 	<FMComment: 'Flag true for comments that are considered as commented code.'>
-	^ self privateState attributeAt: #isCode ifAbsentPut: [ false ]
+	^ self attributeAt: #isCode ifAbsentPut: [ false ]
 ]
 
 { #category : #'*Famix-CommentAnalyzer' }
 FamixTComment >> isCode: aBoolean [
-	self privateState attributeAt: #isCode put: aBoolean
+	self attributeAt: #isCode put: aBoolean
 ]
 
 { #category : #'*Famix-CommentAnalyzer' }

@@ -75,7 +75,7 @@ FamixTWithMethods >> numberOfAccessorMethods [
 
 { #category : #metrics }
 FamixTWithMethods >> numberOfAccessorMethods: aNumber [
-	self privateState cacheAt: #numberOfAccessorMethods put: aNumber
+	self cacheAt: #numberOfAccessorMethods put: aNumber
 ]
 
 { #category : #metrics }
@@ -99,7 +99,7 @@ FamixTWithMethods >> numberOfConstructorMethods [
 
 { #category : #metrics }
 FamixTWithMethods >> numberOfConstructorMethods: aNumber [
-	self privateState cacheAt: #numberOfConstructorMethods put: aNumber
+	self cacheAt: #numberOfConstructorMethods put: aNumber
 ]
 
 { #category : #metrics }
@@ -115,7 +115,7 @@ FamixTWithMethods >> numberOfMessageSends [
 
 { #category : #metrics }
 FamixTWithMethods >> numberOfMessageSends: aNumber [
-	self privateState cacheAt: #numberOfMessageSends put: aNumber
+	self cacheAt: #numberOfMessageSends put: aNumber
 ]
 
 { #category : #accessing }
@@ -131,7 +131,7 @@ FamixTWithMethods >> numberOfMethods [
 
 { #category : #accessing }
 FamixTWithMethods >> numberOfMethods: aNumber [
-	self privateState cacheAt: #numberOfMethods put: aNumber
+	self cacheAt: #numberOfMethods put: aNumber
 ]
 
 { #category : #metrics }

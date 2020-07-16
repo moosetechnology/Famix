@@ -46,7 +46,7 @@ MooseEntityTest >> testIsStub [
 	self deny: self actualClass new isStub.
 	self
 		assert:
-			(self actualClass new privateState
+			(self actualClass new
 				attributeAt: #privateIsStub put: true;
 				yourself) isStub
 ]

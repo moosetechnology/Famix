@@ -8,6 +8,7 @@ Trait {
 		'#sourceAnchor => FMOne type: #FamixTSourceAnchor opposite: #element'
 	],
 	#traits : 'FamixTWithComments + FamixTWithSourceLanguage',
+	#classTraits : 'FamixTWithComments classTrait + FamixTWithSourceLanguage classTrait',
 	#category : #'Famix-Traits-SourceAnchor'
 }
 
@@ -102,7 +103,7 @@ FamixTSourceEntity >> numberOfLinesOfCode [
 
 { #category : #metrics }
 FamixTSourceEntity >> numberOfLinesOfCode: aNumber [
-	self privateState cacheAt: #numberOfLinesOfCode put: aNumber
+	self cacheAt: #numberOfLinesOfCode put: aNumber
 ]
 
 { #category : #metrics }

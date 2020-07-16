@@ -7,14 +7,20 @@ FamixTestComposed1CustomEntity3 >> c23 [
 	<generated>
 	<FMProperty: #c23 type: #FamixTestComposed2CustomEntity3 opposite: #c13s>
 	<package: #'Famix-TestComposedMetamodel-Entities'>
-	^ self privateState attributeAt: #c23 ifAbsent: [ nil ]
+	^ self attributeAt: #c23 ifAbsent: [ nil ]
 ]
 
 { #category : #'*Famix-TestComposedMetamodel-Entities-accessing' }
 FamixTestComposed1CustomEntity3 >> c23: anObject [
-
 	<generated>
-	self privateState attributeAt: #c23 put: (FMMultivalueLink on: self update: #c13s from: self c23 to: anObject).
+	self
+		attributeAt: #c23
+		put:
+			(FMMultivalueLink
+				on: self
+				update: #c13s
+				from: self c23
+				to: anObject)
 ]
 
 { #category : #'*Famix-TestComposedMetamodel-Entities-accessing' }
@@ -25,7 +31,7 @@ FamixTestComposed1CustomEntity3 >> customEntities3 [
 	<derived>
 	<FMProperty: #customEntities3 type: #FamixTestComposedCustomEntity3 opposite: #customEntity3>
 	<package: #'Famix-TestComposedMetamodel-Entities'>
-	^ self privateState attributeAt: #customEntities3 ifAbsentPut: [ FMMultivalueLink on: self opposite: #customEntity3: ]
+	^ self attributeAt: #customEntities3 ifAbsentPut: [ FMMultivalueLink on: self opposite: #customEntity3: ]
 ]
 
 { #category : #'*Famix-TestComposedMetamodel-Entities-accessing' }

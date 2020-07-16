@@ -8,6 +8,7 @@ A class is typically scoped in a namespace. To model nested or anonymous classes
 Trait {
 	#name : #FamixTClass,
 	#traits : 'FamixTInvocationsReceiver + FamixTPackageable + (FamixTType - {#queryStaticIncomingAssociations. #queryStaticOutgoingAssociations}) + FamixTWithAttributes + FamixTWithComments + FamixTWithInheritances + FamixTWithMethods + TOODependencyQueries',
+	#classTraits : 'FamixTInvocationsReceiver classTrait + FamixTPackageable classTrait + FamixTType classTrait + FamixTWithAttributes classTrait + FamixTWithComments classTrait + FamixTWithInheritances classTrait + FamixTWithMethods classTrait + TOODependencyQueries classTrait',
 	#category : #'Famix-Traits-Class'
 }
 
@@ -78,17 +79,15 @@ FamixTClass >> isClass [
 
 { #category : #testing }
 FamixTClass >> isTestCase [
-
 	<FMProperty: #isTestCase type: #Boolean>
 	<FMComment: 'True if the method is considered as a test'>
 	<derived>
-
-	^ self privateState attributeAt: #isTestCase ifAbsent: [ false ]
+	^ self attributeAt: #isTestCase ifAbsent: [ false ]
 ]
 
 { #category : #testing }
 FamixTClass >> isTestCase: aBoolean [
-	^ self privateState attributeAt: #isTestCase put: true
+	^ self attributeAt: #isTestCase put: true
 ]
 
 { #category : #metrics }
@@ -186,5 +185,5 @@ FamixTClass >> weightOfAClass [
 
 { #category : #metrics }
 FamixTClass >> weightOfAClass: aNumber [
-	self privateState cacheAt: #weightOfAClass put: aNumber
+	self cacheAt: #weightOfAClass put: aNumber
 ]

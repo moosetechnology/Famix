@@ -142,9 +142,7 @@ FAMIXPackage >> childrenOfMyKind [
 
 { #category : #'Famix-Implementation' }
 FAMIXPackage >> classes [
-
-	^ self privateState 	cacheAt: #classes 
-							ifAbsentPut: [ self childEntities select: [ :child | child isClass ]]
+	^ self cacheAt: #classes ifAbsentPut: [ self childEntities select: [ :child | child isClass ] ]
 ]
 
 { #category : #'Famix-Extensions-accessing' }
@@ -204,9 +202,7 @@ FAMIXPackage >> extendedClassesGroup [
 FAMIXPackage >> extensionClasses [
 	"select all classes extended by this package"
 
-	^ self privateState 
-		cacheAt: #extensionClasses
-		ifAbsentPut: [ self extensionMethods collectAsSet: [ :method | method parentType ] ]
+	^ self cacheAt: #extensionClasses ifAbsentPut: [ self extensionMethods collectAsSet: [ :method | method parentType ] ]
 ]
 
 { #category : #'Famix-Smalltalk' }
@@ -222,9 +218,7 @@ FAMIXPackage >> extensionClassesGroup [
 FAMIXPackage >> extensionMethods [
 	"select all class extensions made by this package"
 
-	^ self privateState 
-		cacheAt: #extensionMethods 
-		ifAbsentPut: [ self childEntities select: [ :child | child isMethod ]]
+	^ self cacheAt: #extensionMethods ifAbsentPut: [ self childEntities select: [ :child | child isMethod ] ]
 ]
 
 { #category : #'Moose-Hismo' }
@@ -252,9 +246,7 @@ FAMIXPackage >> localClassesGroup [
 FAMIXPackage >> localMethods [
 	"select all local methods"
 
-	^ self privateState 
-			cacheAt: #localMethods 
-			ifAbsentPut: [ self classes flatCollect: [:c | c localMethods ]]
+	^ self cacheAt: #localMethods ifAbsentPut: [ self classes flatCollect: [ :c | c localMethods ] ]
 ]
 
 { #category : #'Famix-Extensions-metrics' }

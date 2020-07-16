@@ -93,7 +93,7 @@ MooseModel >> numberOfModelMethods [
 MooseModel >> sourceLanguage [
 	<FMProperty: #sourceLanguage type: #FamixTSourceLanguage>
 	<FMComment: 'Source of the Language to which the model corresponds'>
-	^ self privateState
+	^ self
 		attributeAt: #sourceLanguage
 		ifAbsentPut: [ self allSourceLanguages
 				detect: [ :each | each isAttached not ]
@@ -102,6 +102,6 @@ MooseModel >> sourceLanguage [
 
 { #category : #'*Famix-Traits' }
 MooseModel >> sourceLanguage: aFamixSourceLanguage [
-	self privateState attributeAt: #sourceLanguage put: aFamixSourceLanguage.
+	self attributeAt: #sourceLanguage put: aFamixSourceLanguage.
 	aFamixSourceLanguage mooseModel: self
 ]

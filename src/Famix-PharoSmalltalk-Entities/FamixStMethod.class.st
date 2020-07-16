@@ -253,8 +253,7 @@ FamixStMethod >> timeStamp [
 	<FMProperty: #timeStamp type: #String>
 	<FMComment: 'TimeStamp of the method with author and time of the last change'>
 	<package: 'Smalltalk'>
-	
-	^ self privateState attributeAt: #timeStamp ifAbsentPut: ['']
+	^ self attributeAt: #timeStamp ifAbsentPut: [ '' ]
 ]
 
 { #category : #'Famix-Extensions-metrics-support' }

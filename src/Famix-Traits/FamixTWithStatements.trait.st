@@ -1,6 +1,7 @@
 Trait {
 	#name : #FamixTWithStatements,
 	#traits : 'FamixTSourceEntity + FamixTWithAccesses + FamixTWithInvocations',
+	#classTraits : 'FamixTSourceEntity classTrait + FamixTWithAccesses classTrait + FamixTWithInvocations classTrait',
 	#category : #'Famix-Traits-Behavioral'
 }
 
@@ -27,7 +28,7 @@ FamixTWithStatements >> cyclomaticComplexity [
 
 { #category : #metrics }
 FamixTWithStatements >> cyclomaticComplexity: aNumber [
-	self privateState cacheAt: #cyclomaticComplexity put: aNumber
+	self cacheAt: #cyclomaticComplexity put: aNumber
 ]
 
 { #category : #testing }
@@ -55,7 +56,7 @@ FamixTWithStatements >> numberOfStatements [
 
 { #category : #metrics }
 FamixTWithStatements >> numberOfStatements: aNumber [
-	self privateState cacheAt: #numberOfStatements put: aNumber
+	self cacheAt: #numberOfStatements put: aNumber
 ]
 
 { #category : #asserting }
