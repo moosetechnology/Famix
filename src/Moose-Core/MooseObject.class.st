@@ -417,15 +417,11 @@ MooseObject >> propertyNamed: propertyName [
 MooseObject >> propertyNamed: propertyName ifAbsent: aBlock [
 	"Return the value of the property named propertyName, evaluate aBlock if the property does not exist"
 
-	| prop |
-	prop := propertyName asSymbol.
 	^ self privateState
-		cacheAt: prop
-		ifAbsent: [ | property |
-			[ property := self mmGetProperty: (self mooseDescription propertyNamed: propertyName) ]
+		cacheAt: propertyName asSymbol
+		ifAbsent: [ ([ self mmGetProperty: (self mooseDescription propertyNamed: propertyName) ]
 				on: Error
-				do: [ :ex | property := nil ].
-			property ifNil: [ aBlock value ] ]
+				do: [ :ex | nil ]) ifNil: [ aBlock value ] ]
 ]
 
 { #category : #properties }
@@ -437,15 +433,11 @@ MooseObject >> propertyNamed: name ifAbsentPut: value [
 MooseObject >> propertyNamed: propertyName ifNil: aBlock [
 	"Return the value of the property named propertyName, evaluate aBlock if the property does not exist"
 
-	| prop |
-	prop := propertyName asSymbol.
 	^ self privateState
-		cacheAt: prop
-		ifAbsent: [ | property |
-			[ property := self mmGetProperty: (self mooseDescription propertyNamed: propertyName) ]
+		cacheAt: propertyName asSymbol
+		ifAbsent: [ ([ self mmGetProperty: (self mooseDescription propertyNamed: propertyName) ]
 				on: Error
-				do: [ :ex | property := nil ].
-			property ifNil: [ aBlock value ] ]
+				do: [ :ex | nil ]) ifNil: [ aBlock value ] ]
 ]
 
 { #category : #properties }
