@@ -13,8 +13,8 @@ Class {
 	#name : #MooseEntityState,
 	#superclass : #Object,
 	#instVars : [
-		'attributes',
-		'cache'
+		'cache',
+		'entityAttributes'
 	],
 	#category : #'Moose-Core'
 }
@@ -26,33 +26,28 @@ MooseEntityState >> allCachedValues [
 
 { #category : #'accessing attributes' }
 MooseEntityState >> attributeAt: name ifAbsent: aBlock [
-	1 to: attributes size do: [ :n | 
-		name == (attributes at: n) key
-			ifTrue: [ ^ (attributes at: n) value ] ].
+	1 to: entityAttributes size do: [ :n | 
+		name == (entityAttributes at: n) key
+			ifTrue: [ ^ (entityAttributes at: n) value ] ].
 	^ aBlock value
 ]
 
 { #category : #'accessing attributes' }
 MooseEntityState >> attributeAt: name ifAbsentPut: aBlock [
-	1 to: attributes size do: [ :n | 
-		name == (attributes at: n) key
-			ifTrue: [ ^ (attributes at: n) value ] ].
-	attributes := attributes copyWith: name -> aBlock value.
-	^ attributes last value
+	1 to: entityAttributes size do: [ :n | 
+		name == (entityAttributes at: n) key
+			ifTrue: [ ^ (entityAttributes at: n) value ] ].
+	entityAttributes := entityAttributes copyWith: name -> aBlock value.
+	^ entityAttributes last value
 ]
 
 { #category : #'accessing attributes' }
 MooseEntityState >> attributeAt: name put: value [
-	1 to: attributes size do: [ :n | 
-		name == (attributes at: n) key
-			ifTrue: [ ^ (attributes at: n) value: value ] ].
-	attributes := attributes copyWith: name -> value.
-	^ attributes last value
-]
-
-{ #category : #'accessing attributes' }
-MooseEntityState >> attributes [
-	^ attributes
+	1 to: entityAttributes size do: [ :n | 
+		name == (entityAttributes at: n) key
+			ifTrue: [ ^ (entityAttributes at: n) value: value ] ].
+	entityAttributes := entityAttributes copyWith: name -> value.
+	^ entityAttributes last value
 ]
 
 { #category : #'accessing cache' }
@@ -95,6 +90,11 @@ MooseEntityState >> descriptionFor: owner [
 	^ self attributeAt: #privateDescription ifAbsent: [ owner mooseName , ' (' , owner mooseDescription name , ')' ]
 ]
 
+{ #category : #'accessing attributes' }
+MooseEntityState >> entityAttributes [
+	^ entityAttributes
+]
+
 { #category : #'accessing cache' }
 MooseEntityState >> entityCache [
 	^ cache
@@ -113,7 +113,7 @@ MooseEntityState >> includesKey: selector [
 { #category : #initialization }
 MooseEntityState >> initialize [
 	super initialize.
-	attributes := #().
+	entityAttributes := #().
 	cache := SmallDictionary new
 ]
 
@@ -131,9 +131,9 @@ MooseEntityState >> isStub: boolean [
 { #category : #'accessing attributes' }
 MooseEntityState >> removeAttribute: aSymbol [
 	| each |
-	1 to: attributes size do: [ :n | 
-		aSymbol == (each := attributes at: n) key
-			ifTrue: [ attributes := attributes copyWithout: each.
+	1 to: entityAttributes size do: [ :n | 
+		aSymbol == (each := entityAttributes at: n) key
+			ifTrue: [ entityAttributes := entityAttributes copyWithout: each.
 				^ true ] ].
 	^ false
 ]

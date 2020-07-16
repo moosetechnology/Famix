@@ -7,6 +7,12 @@ MooseEntityState >> allProperties [
 ]
 
 { #category : #'*Famix-Deprecated' }
+MooseEntityState >> attributes [
+	self deprecated: 'Use #entityAttributes instead' transformWith: '`@receiver attributes' -> '`@receiver entityAttributes'.
+	^ self entityAttributes
+]
+
+{ #category : #'*Famix-Deprecated' }
 MooseEntityState >> cache: selector initializer: aBlock [
 	self
 		deprecated: 'Uses #cacheAt:ifAbsentPut: instead'
