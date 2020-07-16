@@ -43,7 +43,6 @@ Class {
 	#name : #MooseObject,
 	#superclass : #Object,
 	#instVars : [
-		'state',
 		'mooseID',
 		'mooseName',
 		'cache',
@@ -455,17 +454,6 @@ MooseObject >> privateSetMooseModel: aMooseModel [
 ]
 
 { #category : #private }
-MooseObject >> privateState [
-
-	^ self
-]
-
-{ #category : #private }
-MooseObject >> privateState: aState [
-	state := aState
-]
-
-{ #category : #private }
 MooseObject >> properties [ 
 	 
 	"for read only uses, i.e. don't change the returned value"
@@ -548,7 +536,6 @@ MooseObject >> resetMooseName [
 
 { #category : #initialization }
 MooseObject >> resetPrivateState [
-	state := MooseEntityState new.
 	entityAttributes := #().
 	cache := SmallDictionary new
 ]
