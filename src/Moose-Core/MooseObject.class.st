@@ -4,7 +4,9 @@ Description
 
 I am an abstract class defining the basic behavior of Moose objects.
 
-Moose Object can have a state (see bellow) and are initialized with an ID. The ID should be unique inside an image. This means that when we export and re-import an entity, the ID can change.
+Moose Object have a variable #entityAttributes to store information that cannot be computed and that has no variable dedicated (allows to save memory and to make entities more extensible).
+They also have a cache to speed up most algos. 
+They are initialized with an ID. The ID should be unique inside an image. This means that when we export and re-import an entity, the ID can change.
 
 Note: (Cyril F) In the future I would like to push down mooseID on MooseEntity becaure I think that groups should not have an ID, but we need to refactor some things to do that.
 
@@ -12,16 +14,14 @@ Note: (Cyril F) In the future I would like to push down mooseID on MooseEntity b
 Extension mechanism
 --------------------
 
-The state instance variable provides a mechanism for extending the state of entities. This is achieved through MooseEntityState. Using this mechanism, a package can extend an entity to add more state. This extension will only be visible when the package is loaded. This is an important mechanism to enable extensibility and modularity. 
+The entityAttribute instance variable provides a mechanism for extending the state of entities. Using this mechanism, a package can extend an entity to add more state. This extension will only be visible when the package is loaded. This is an important mechanism to enable extensibility and modularity. 
 
 For example, if you have YourEntity that subclasses MooseEntity, you can extend it with:
 
 YourEntity>>yourExtendingAttribute
-	^ self privateState attributeAt: #yourExtendingAttribute
+	^ self attributeAt: #yourExtendingAttribute
 YourEntity>>yourExtendingAttribute: aValue
-	^ self privateState attributeAt: #yourExtendingAttribute put: aValue
-
-(see MooseEntityState for more information)
+	^ self attributeAt: #yourExtendingAttribute put: aValue
 
 Public API and Key Messages
 --------------------
@@ -35,8 +35,17 @@ Internal Representation and Key Implementation Points.
 --------------------
 
     Instance Variables
-	mooseID:		<anInteger>					The unique ID of the object in Moose.
-	state:			<aMooseEntityState>		A state on which we base the extension mechanism of Moose.
+	cache:						<aDictionary>	A dictionary useful to cache some values long to compute.
+	entityAttributes:		<anArray>			A collection used as an extension mecanism of the MooseObject. It allows to store more info for an entity.
+	mooseID:					<anInteger>		The unique ID of the object in Moose.
+	mooseName:				<aString>			Name of teh entity in Moose. Should be unique in the MooseModel in the case of FamixTNamedEntity.
+						
+						
+Attributes is a collection keeping for a key a certain value. Attributes will never be flushed, they should stay except if the user explicitly remove them!
+attributes uses an array and low level code for performences reasons.
+
+Cached properties/result is just a cache associating anything to a symbol. This cache should not contain anything that cannot be recomputed because it can be flushed.
+
 
 "
 Class {
