@@ -11,7 +11,7 @@ Class {
 
 { #category : #testing }
 MooseDevelopmentState class >> isDeprecated [
-	"Use MooseEntityState instead"
+	"State and behaviour of MooseEntityState is now directly on MooseObject to save lot of memory."
 
 	^ true
 ]

@@ -16,12 +16,37 @@ Class {
 		'cache',
 		'entityAttributes'
 	],
-	#category : #'Moose-Core'
+	#category : #'Famix-Deprecated'
 }
+
+{ #category : #'as yet unclassified' }
+MooseEntityState class >> for: aMooseEntity [
+	self deprecated: 'Use #new instead.' transformWith: '`@receiver for: `@arg' -> '`@receiver new'.
+	^ self new
+]
+
+{ #category : #testing }
+MooseEntityState class >> isDeprecated [
+	"State and behaviour of MooseEntityState is now directly on MooseObject to save lot of memory."
+
+	^ true
+]
+
+{ #category : #'as yet unclassified' }
+MooseEntityState class >> with: aMooseEntity [
+	self deprecated: 'Use #new instead.' transformWith: '`@receiver with: `@arg' -> '`@receiver new'.
+	^ self new
+]
 
 { #category : #'accessing cache' }
 MooseEntityState >> allCachedValues [
 	^ cache values
+]
+
+{ #category : #'as yet unclassified' }
+MooseEntityState >> allProperties [
+	self deprecated: 'Use #allProperties instead' transformWith: '`@receiver allProperties' -> '`@receiver allCachedValues'. 
+	^ self allCachedValues
 ]
 
 { #category : #'accessing attributes' }
@@ -48,6 +73,20 @@ MooseEntityState >> attributeAt: name put: value [
 			ifTrue: [ ^ (entityAttributes at: n) value: value ] ].
 	entityAttributes := entityAttributes copyWith: name -> value.
 	^ entityAttributes last value
+]
+
+{ #category : #'as yet unclassified' }
+MooseEntityState >> attributes [
+	self deprecated: 'Use #entityAttributes instead' transformWith: '`@receiver attributes' -> '`@receiver entityAttributes'.
+	^ self entityAttributes
+]
+
+{ #category : #'as yet unclassified' }
+MooseEntityState >> cache: selector initializer: aBlock [
+	self
+		deprecated: 'Uses #cacheAt:ifAbsentPut: instead'
+		transformWith: '`@receiver cache: `@arg1 initializer: `@arg2' -> '`@receiver cacheAt: `@arg1 ifAbsentPut: `@arg2'.
+	^ self cacheAt: selector ifAbsentPut: aBlock
 ]
 
 { #category : #'accessing cache' }
@@ -105,6 +144,18 @@ MooseEntityState >> flush [
 	cache initialize
 ]
 
+{ #category : #'as yet unclassified' }
+MooseEntityState >> flushGroups [
+	self deprecated: 'Use #flush instead' transformWith: '`@receiver flushGroups' -> '`@receiver flush'.
+	self flush
+]
+
+{ #category : #'as yet unclassified' }
+MooseEntityState >> flushProperties [
+	self deprecated: 'Use #flush instead' transformWith: '`@receiver flushProperties' -> '`@receiver flush'.
+	self flush
+]
+
 { #category : #testing }
 MooseEntityState >> includesKey: selector [
 	^ cache includesKey: selector
@@ -128,6 +179,28 @@ MooseEntityState >> isStub: boolean [
 	^self attributeAt: #privateIsStub put: boolean
 ]
 
+{ #category : #'as yet unclassified' }
+MooseEntityState >> propertyAt: name ifAbsent: aBlock [
+	self
+		deprecated: 'Use cacheAt:ifAbsent: instead'
+		transformWith: '`@receiver propertyAt: `@arg1 ifAbsent: `@arg2' -> '`@receiver cacheAt: `@arg1 ifAbsent: `@arg2'.
+	^ self cacheAt: name ifAbsent: aBlock
+]
+
+{ #category : #'as yet unclassified' }
+MooseEntityState >> propertyAt: name ifAbsentPut: aBlock [
+	self
+		deprecated: 'Use cache:ifAbsentPut: instead'
+		transformWith: '`@receiver propertyAt: `@arg1 ifAbsentPut: `@arg2' -> '`@receiver cacheAt: `@arg1 ifAbsentPut: `@arg2'.
+	^ self cacheAt: name ifAbsentPut: aBlock
+]
+
+{ #category : #'as yet unclassified' }
+MooseEntityState >> propertyAt: name put: value [
+	self deprecated: 'Use cacheAt:put: instead' transformWith: '`@receiver propertyAt: `@arg1 put: `@arg2' -> '`@receiver cacheAt: `@arg1 put: `@arg2'.
+	^ self cacheAt: name put: value
+]
+
 { #category : #'accessing attributes' }
 MooseEntityState >> removeAttribute: aSymbol [
 	| each |
@@ -141,4 +214,10 @@ MooseEntityState >> removeAttribute: aSymbol [
 { #category : #'accessing cache' }
 MooseEntityState >> removeCache: name [
 	cache removeKey: name ifAbsent: [  ]
+]
+
+{ #category : #'as yet unclassified' }
+MooseEntityState >> removeProperty: name [
+	self deprecated: 'Use removeCache: instead' transformWith: '`@receiver removeProperty: `@arg' -> '`@receiver removeCache: `@arg'.
+	^ self removeCache: name
 ]
