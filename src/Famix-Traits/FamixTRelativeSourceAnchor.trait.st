@@ -23,6 +23,7 @@ Trait {
 		'#endPos => FMProperty'
 	],
 	#traits : 'FamixTSourceAnchor',
+	#classTraits : 'FamixTSourceAnchor classTrait',
 	#category : #'Famix-Traits-SourceAnchor'
 }
 
@@ -42,10 +43,10 @@ FamixTRelativeSourceAnchor >> completeText [
 
 { #category : #accessing }
 FamixTRelativeSourceAnchor >> endLine [
-	^ self privateState
+	^ self
 		cacheAt: #endLine
 		ifAbsent: [ self ensureStartAndEndLineAreSet.
-			self privateState cacheAt: #endLine ifAbsent: [ self error ] ]
+			self cacheAt: #endLine ifAbsent: [ self error ] ]
 ]
 
 { #category : #accessing }
@@ -75,8 +76,8 @@ FamixTRelativeSourceAnchor >> fileName [
 
 { #category : #accessing }
 FamixTRelativeSourceAnchor >> initializeStartAndEndLineFrom: sourceText [
-	self privateState cacheAt: #startLine put: (sourceText lineNumberCorrespondingToIndex: self startPos) + (self relatedAnchor startLine ifNil: [ 0 ]).
-	self privateState cacheAt: #endLine put: (sourceText lineNumberCorrespondingToIndex: self endPos) + (self relatedAnchor startLine ifNil: [ 0 ])
+	self cacheAt: #startLine put: (sourceText lineNumberCorrespondingToIndex: self startPos) + (self relatedAnchor startLine ifNil: [ 0 ]).
+	self cacheAt: #endLine put: (sourceText lineNumberCorrespondingToIndex: self endPos) + (self relatedAnchor startLine ifNil: [ 0 ])
 ]
 
 { #category : #accessing }
@@ -106,10 +107,10 @@ FamixTRelativeSourceAnchor >> sourceTextFrom: start to: end [
 
 { #category : #accessing }
 FamixTRelativeSourceAnchor >> startLine [
-	^ self privateState
+	^ self
 		cacheAt: #startLine
 		ifAbsent: [ self ensureStartAndEndLineAreSet.
-			self privateState cacheAt: #startLine ifAbsent: [ self error ] ]
+			self cacheAt: #startLine ifAbsent: [ self error ] ]
 ]
 
 { #category : #accessing }

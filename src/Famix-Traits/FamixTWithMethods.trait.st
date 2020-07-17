@@ -55,7 +55,7 @@ FamixTWithMethods >> numberOfAbstractMethods [
 
 { #category : #metrics }
 FamixTWithMethods >> numberOfAbstractMethods: aNumber [
-	self privateState cacheAt: #numberOfAbstractMethods put: aNumber
+	self cacheAt: #numberOfAbstractMethods put: aNumber
 ]
 
 { #category : #metrics }
@@ -147,7 +147,7 @@ FamixTWithMethods >> numberOfPrivateMethods [
 
 { #category : #metrics }
 FamixTWithMethods >> numberOfPrivateMethods: aNumber [
-	self privateState cacheAt: #numberOfPrivateMethods put: aNumber
+	self cacheAt: #numberOfPrivateMethods put: aNumber
 ]
 
 { #category : #metrics }
@@ -163,7 +163,7 @@ FamixTWithMethods >> numberOfProtectedMethods [
 
 { #category : #metrics }
 FamixTWithMethods >> numberOfProtectedMethods: aNumber [
-	self privateState cacheAt: #numberOfProtectedMethods put: aNumber
+	self cacheAt: #numberOfProtectedMethods put: aNumber
 ]
 
 { #category : #metrics }
@@ -179,7 +179,7 @@ FamixTWithMethods >> numberOfPublicMethods [
 
 { #category : #metrics }
 FamixTWithMethods >> numberOfPublicMethods: aNumber [
-	self privateState cacheAt: #numberOfPublicMethods put: aNumber
+	self cacheAt: #numberOfPublicMethods put: aNumber
 ]
 
 { #category : #metrics }
@@ -219,7 +219,7 @@ FamixTWithMethods >> tightClassCohesion [
 
 { #category : #metrics }
 FamixTWithMethods >> tightClassCohesion: aNumber [
-	self privateState cacheAt: #tightClassCohesion put: aNumber
+	self cacheAt: #tightClassCohesion put: aNumber
 ]
 
 { #category : #metrics }
@@ -235,5 +235,5 @@ FamixTWithMethods >> weightedMethodCount [
 
 { #category : #metrics }
 FamixTWithMethods >> weightedMethodCount: aNumber [
-	self privateState cacheAt: #weightedMethodCount put: aNumber
+	self cacheAt: #weightedMethodCount put: aNumber
 ]

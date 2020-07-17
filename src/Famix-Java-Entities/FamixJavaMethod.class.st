@@ -29,7 +29,7 @@ FamixJavaMethod >> category [
 	<FMProperty: #category type: #String>
 	<FMComment: 'Category of the method'>
 	
-	^ self privateState attributeAt: #category ifAbsentPut: [ nil ]
+	^ self attributeAt: #category ifAbsentPut: [ nil ]
 ]
 
 { #category : #'Famix-Extensions' }
@@ -106,7 +106,7 @@ FamixJavaMethod >> isClassInitializer [
 	<FMProperty: #isClassInitializer type: #Boolean>
 	<derived>
 	<FMComment: 'True if the method is an initializer of the class (i.e. contains the attribute init env)'>
-	^ #initializer = self kind or: [ self privateState cacheAt: #isClassInitializer ifAbsent: [ false ] ]
+	^ #initializer = self kind or: [ self cacheAt: #isClassInitializer ifAbsent: [ false ] ]
 ]
 
 { #category : #testing }
@@ -221,7 +221,7 @@ FamixJavaMethod >> numberOfConditionals [
 
 { #category : #'Famix-Extensions-private' }
 FamixJavaMethod >> numberOfConditionals: aNumber [
-	self privateState cacheAt: #numberOfConditionals put: aNumber
+	self cacheAt: #numberOfConditionals put: aNumber
 ]
 
 { #category : #'Famix-Extensions' }
@@ -230,7 +230,7 @@ FamixJavaMethod >> numberOfInvokedMethods [
 	<FMComment: 'Return a number corresponding to the number of invoked methods'>
 	<derived>
 	
-	^ self privateState cacheAt: #numberOfInvokedMethods ifAbsentPut: [self invokedMethods size]
+	^ self cacheAt: #numberOfInvokedMethods ifAbsentPut: [self invokedMethods size]
 ]
 
 { #category : #'Famix-Extensions-private' }

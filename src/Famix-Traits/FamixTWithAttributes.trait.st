@@ -50,7 +50,7 @@ FamixTWithAttributes >> numberOfAttributes [
 
 { #category : #'Famix-Extensions' }
 FamixTWithAttributes >> numberOfAttributes: aNumber [
-	self privateState cacheAt: #numberOfAttributes put: aNumber
+	self cacheAt: #numberOfAttributes put: aNumber
 ]
 
 { #category : #metrics }
@@ -66,7 +66,7 @@ FamixTWithAttributes >> numberOfPrivateAttributes [
 
 { #category : #metrics }
 FamixTWithAttributes >> numberOfPrivateAttributes: aNumber [
-	self privateState cacheAt: #numberOfPrivateAttributes put: aNumber
+	self cacheAt: #numberOfPrivateAttributes put: aNumber
 ]
 
 { #category : #metrics }
@@ -82,7 +82,7 @@ FamixTWithAttributes >> numberOfProtectedAttributes [
 
 { #category : #metrics }
 FamixTWithAttributes >> numberOfProtectedAttributes: aNumber [
-	self privateState cacheAt: #numberOfProtectedAttributes put: aNumber
+	self cacheAt: #numberOfProtectedAttributes put: aNumber
 ]
 
 { #category : #metrics }
@@ -98,7 +98,7 @@ FamixTWithAttributes >> numberOfPublicAttributes [
 
 { #category : #metrics }
 FamixTWithAttributes >> numberOfPublicAttributes: aNumber [
-	self privateState cacheAt: #numberOfPublicAttributes put: aNumber
+	self cacheAt: #numberOfPublicAttributes put: aNumber
 ]
 
 { #category : #metrics }
@@ -115,5 +115,5 @@ FamixTWithAttributes >> numberOfRevealedAttributes [
 
 { #category : #metrics }
 FamixTWithAttributes >> numberOfRevealedAttributes: aNumber [
-	self privateState cacheAt: #numberOfRevealedAttributes put: aNumber
+	self cacheAt: #numberOfRevealedAttributes put: aNumber
 ]

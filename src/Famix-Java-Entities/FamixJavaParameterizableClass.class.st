@@ -26,5 +26,5 @@ FamixJavaParameterizableClass >> parameters [
 { #category : #accessing }
 FamixJavaParameterizableClass >> parameters: aCollection [
 
-	self privateState attributeAt: #parameters put: aCollection
+	self attributeAt: #parameters put: aCollection
 ]

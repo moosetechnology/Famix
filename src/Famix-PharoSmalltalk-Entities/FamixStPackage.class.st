@@ -98,7 +98,7 @@ FamixStPackage >> numberOfClientPackages [
 
 { #category : #accessing }
 FamixStPackage >> numberOfClientPackages: aNumber [
-	self privateState cacheAt: #numberOfClientPackages put: aNumber
+	self cacheAt: #numberOfClientPackages put: aNumber
 ]
 
 { #category : #accessing }

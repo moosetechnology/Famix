@@ -86,7 +86,7 @@ FAMIXType >> extendedInPackages [
 FAMIXType >> extendedMethods [
 	"select methods which are class extensions in this class"
 
-	^  self privateState cacheAt: #extendedMethods
+	^  self cacheAt: #extendedMethods
 							ifAbsentPut: [ self methods select: [ :m| m isExtension ] ]
 ]
 
@@ -126,7 +126,7 @@ FAMIXType >> implements: aString [
 
 { #category : #'Famix-Extensions-navigation' }
 FAMIXType >> incomingAccesses [
-	^ self privateState 
+	^ self 
 		cacheAt: #incomingAccesses
 		ifAbsentPut: [ attributes flatCollect: [ :each | each incomingAccesses ] ]
 ]
@@ -134,7 +134,7 @@ FAMIXType >> incomingAccesses [
 { #category : #'Famix-Extensions-navigation' }
 FAMIXType >> incomingAccessesGroup [
 	<navigation: 'Incoming accesses'>
-	^ self privateState cacheAt:
+	^ self cacheAt:
 		 #incomingAccessesGroup
 		ifAbsentPut:
 			[MooseGroup
@@ -259,7 +259,7 @@ FAMIXType >> isTestCase [
 FAMIXType >> localMethods [
 	"select all locally defined methods"
 
-	^ self privateState cacheAt: #localMethods
+	^ self cacheAt: #localMethods
 							ifAbsentPut: [ self methods reject: [ :m| m isExtension ] ]
 ]
 

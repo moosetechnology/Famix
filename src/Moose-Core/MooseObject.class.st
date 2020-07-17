@@ -201,7 +201,7 @@ MooseObject >> announcer [
 
 { #category : #private }
 MooseObject >> announcer: anAnnouncer [
-	^ self privateState attributeAt: #announcer put: anAnnouncer
+	^ self attributeAt: #announcer put: anAnnouncer
 ]
 
 { #category : #accessing }
@@ -458,7 +458,7 @@ MooseObject >> properties [
 	 
 	"for read only uses, i.e. don't change the returned value"
 	
-	^self privateState allCachedValues
+	^self allCachedValues
 ]
 
 { #category : #properties }
@@ -473,7 +473,7 @@ MooseObject >> propertyNamed: propertyName [
 MooseObject >> propertyNamed: propertyName ifAbsent: aBlock [
 	"Return the value of the property named propertyName, evaluate aBlock if the property does not exist"
 
-	^ self privateState
+	^ self
 		cacheAt: propertyName asSymbol
 		ifAbsent: [ ([ self mmGetProperty: (self mooseDescription propertyNamed: propertyName) ]
 				on: Error

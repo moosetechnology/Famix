@@ -70,7 +70,7 @@ FamixTWithInheritances >> hierarchyNestingLevel [
 
 { #category : #metrics }
 FamixTWithInheritances >> hierarchyNestingLevel: aNumber [
-	self privateState cacheAt: #hierarchyNestingLevel put: aNumber
+	self cacheAt: #hierarchyNestingLevel put: aNumber
 ]
 
 { #category : #testing }
@@ -94,12 +94,12 @@ FamixTWithInheritances >> numberOfDirectSubclasses [
 	<FMProperty: #numberOfDirectSubclasses type: #Number>
 	<FMComment: 'The number of direct subclasses'>
 	<derived>
-	^ self privateState cacheAt: #numberOfDirectSubclasses ifAbsentPut: [ self directSubclasses size ]
+	^ self cacheAt: #numberOfDirectSubclasses ifAbsentPut: [ self directSubclasses size ]
 ]
 
 { #category : #metrics }
 FamixTWithInheritances >> numberOfDirectSubclasses: aNumber [
-	self privateState cacheAt: #numberOfDirectSubclasses put: aNumber
+	self cacheAt: #numberOfDirectSubclasses put: aNumber
 ]
 
 { #category : #metrics }
@@ -112,7 +112,7 @@ FamixTWithInheritances >> numberOfSubclasses [
 
 { #category : #metrics }
 FamixTWithInheritances >> numberOfSubclasses: aNumber [
-	self privateState cacheAt: #numberOfSubclasses put: aNumber
+	self cacheAt: #numberOfSubclasses put: aNumber
 ]
 
 { #category : #accessing }
@@ -155,7 +155,7 @@ FamixTWithInheritances >> subclassHierarchyDepth [
 
 { #category : #metrics }
 FamixTWithInheritances >> subclassHierarchyDepth: aNumber [
-	self privateState cacheAt: #subclassHierarchyDepth put: aNumber
+	self cacheAt: #subclassHierarchyDepth put: aNumber
 ]
 
 { #category : #enumerating }
@@ -212,7 +212,7 @@ FamixTWithInheritances >> totalNumberOfSubclasses [
 
 { #category : #metrics }
 FamixTWithInheritances >> totalNumberOfSubclasses: aNumber [
-	self privateState cacheAt: #totalNumberOfSubclasses put: aNumber
+	self cacheAt: #totalNumberOfSubclasses put: aNumber
 ]
 
 { #category : #enumerating }

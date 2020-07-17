@@ -30,7 +30,7 @@ FamixTWithParameters >> numberOfParameters [
 
 { #category : #accessing }
 FamixTWithParameters >> numberOfParameters: aNumber [
-	self privateState cacheAt: #numberOfParameters put: aNumber
+	self cacheAt: #numberOfParameters put: aNumber
 ]
 
 { #category : #accessing }

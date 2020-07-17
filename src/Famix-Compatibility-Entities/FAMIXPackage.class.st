@@ -149,7 +149,7 @@ FAMIXPackage >> classes [
 FAMIXPackage >> concernedClassesCollection [
 	"it returns the collection of the receiver's concerned classes (See #__concernedClassesCollection). Before returning this value it verifies if it is cached in the receiver's state under the properiety #concernedClasses."
 
-	^self privateState cacheAt: #concernedClassesCollection
+	^self cacheAt: #concernedClassesCollection
 		ifAbsentPut: (self extensionClasses union: self localClasses)
 ]
 
@@ -184,7 +184,7 @@ FAMIXPackage >> efferentCoupling [
 FAMIXPackage >> extendedClasses [
 	"select all classes extended in this package"
 
-	^ self privateState cacheAt: #extendedClasses
+	^ self cacheAt: #extendedClasses
 							ifAbsentPut: [ self classes select: [ :c| c isExtended ] ]
 	
 ]
@@ -282,7 +282,7 @@ FAMIXPackage >> numberOfClientPackages [
 
 { #category : #'Famix-Extensions' }
 FAMIXPackage >> numberOfClientPackages: aNumber [
-	self privateState cacheAt: #numberOfClientPackages put: aNumber
+	self cacheAt: #numberOfClientPackages put: aNumber
 ]
 
 { #category : #'Famix-Extensions' }
@@ -297,7 +297,7 @@ FAMIXPackage >> numberOfMethods [
 
 { #category : #'Famix-Extensions' }
 FAMIXPackage >> numberOfMethods: aNumber [
-	self privateState cacheAt: #numberOfMethods put: aNumber
+	self cacheAt: #numberOfMethods put: aNumber
 ]
 
 { #category : #'Famix-Implementation' }

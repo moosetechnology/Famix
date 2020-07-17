@@ -17,12 +17,12 @@ FAMIXNamespace class >> annotation [
 
 { #category : #'Famix-Extensions-metrics' }
 FAMIXNamespace >> abstractness: aNumber [
-	self privateState cacheAt: #abstractness put: aNumber
+	self cacheAt: #abstractness put: aNumber
 ]
 
 { #category : #'Famix-Extensions-metrics' }
 FAMIXNamespace >> afferentCoupling: aNumber [
-	self privateState cacheAt: #afferentCoupling put: aNumber
+	self cacheAt: #afferentCoupling put: aNumber
 ]
 
 { #category : #'Famix-Extensions' }
@@ -48,7 +48,7 @@ FAMIXNamespace >> bunchCohesion [
 
 { #category : #'Famix-Extensions-metrics' }
 FAMIXNamespace >> bunchCohesion: aNumber [
-	self privateState cacheAt: #bunchCohesion put: aNumber
+	self cacheAt: #bunchCohesion put: aNumber
 ]
 
 { #category : #'Famix-Extensions-metrics' }
@@ -126,22 +126,22 @@ FAMIXNamespace >> distance [
 
 { #category : #'Famix-Extensions-metrics' }
 FAMIXNamespace >> distance: aNumber [
-	self privateState cacheAt: #distance put: aNumber
+	self cacheAt: #distance put: aNumber
 ]
 
 { #category : #'Famix-Extensions-metrics' }
 FAMIXNamespace >> efferentCoupling: aNumber [
-	self privateState cacheAt: #efferentCoupling put: aNumber
+	self cacheAt: #efferentCoupling put: aNumber
 ]
 
 { #category : #'Famix-Extensions-metrics' }
 FAMIXNamespace >> instability: aNumber [
-	self privateState cacheAt: #instability put: aNumber
+	self cacheAt: #instability put: aNumber
 ]
 
 { #category : #'Famix-Implementation' }
 FAMIXNamespace >> methods [
-	^ self privateState 
+	^ self 
 			cacheAt: #methods 
 			ifAbsentPut: [ 
 				self classes flatCollect: #methods ]
@@ -175,12 +175,12 @@ FAMIXNamespace >> numberOfAttributes [
 
 { #category : #'Famix-Extensions' }
 FAMIXNamespace >> numberOfAttributes: aNumber [
-	self privateState cacheAt: #numberOfAttributes put: aNumber
+	self cacheAt: #numberOfAttributes put: aNumber
 ]
 
 { #category : #'Famix-Extensions' }
 FAMIXNamespace >> numberOfClasses: aNumber [
-	self privateState cacheAt: #numberOfClasses put: aNumber
+	self cacheAt: #numberOfClasses put: aNumber
 ]
 
 { #category : #'Famix-Extensions' }
@@ -196,7 +196,7 @@ FAMIXNamespace >> numberOfMethods [
 
 { #category : #'Famix-Extensions' }
 FAMIXNamespace >> numberOfMethods: aNumber [
-	self privateState cacheAt: #numberOfMethods put: aNumber
+	self cacheAt: #numberOfMethods put: aNumber
 ]
 
 { #category : #'Famix-Extensions-metrics' }
@@ -212,7 +212,7 @@ FAMIXNamespace >> numberOfNonInterfacesClasses [
 
 { #category : #'Famix-Extensions-metrics' }
 FAMIXNamespace >> numberOfNonInterfacesClasses: aNumber [
-	self privateState cacheAt: #numberOfNonInterfacesClasses put: aNumber
+	self cacheAt: #numberOfNonInterfacesClasses put: aNumber
 ]
 
 { #category : #'Famix-Implementation' }

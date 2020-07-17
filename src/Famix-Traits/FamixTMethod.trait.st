@@ -12,6 +12,7 @@ Trait {
 		'#parentType => FMOne type: #FamixTWithMethods opposite: #methods'
 	],
 	#traits : '(FamixTHasSignature + FamixTInvocable + FamixTNamedEntity + FamixTTypedEntity + FamixTWithClassScope + FamixTWithImplicitVariables + FamixTWithLocalVariables + FamixTWithParameters + FamixTWithReferences + FamixTWithStatements + TOODependencyQueries withPrecedenceOf: FamixTWithStatements)',
+	#classTraits : '(FamixTHasSignature classTrait + FamixTInvocable classTrait + FamixTNamedEntity classTrait + FamixTTypedEntity classTrait + FamixTWithClassScope classTrait + FamixTWithImplicitVariables classTrait + FamixTWithLocalVariables classTrait + FamixTWithParameters classTrait + FamixTWithReferences classTrait + FamixTWithStatements classTrait + TOODependencyQueries classTrait withPrecedenceOf: FamixTWithStatements classTrait)',
 	#category : #'Famix-Traits-Behavioral'
 }
 
@@ -44,7 +45,7 @@ FamixTMethod >> hierarchyNestingLevel [
 
 { #category : #metrics }
 FamixTMethod >> hierarchyNestingLevel: aNumber [
-	self privateState cacheAt: #hierarchyNestingLevel put: aNumber
+	self cacheAt: #hierarchyNestingLevel put: aNumber
 ]
 
 { #category : #accessing }

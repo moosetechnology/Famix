@@ -461,7 +461,7 @@ MooseModel >> flushPrivateState [
 	"Clean the private state caches of all the entities of the model. This will not impact attributes in the private state (informations you cannot derive)"
 
 	self entities
-		do: [ :entity | entity privateState flush ]
+		do: [ :entity | entity flush ]
 		displayingProgress: [ :entity | 'Cleaning cache of ' , entity mooseName ]
 ]
 
