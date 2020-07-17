@@ -189,12 +189,6 @@ And, the metadescription might be different in the instance and in the class sid
 	^ self mooseDescription allProperties
 ]
 
-{ #category : #'accessing-query' }
-MooseObject >> allProperties [
-	self deprecated: 'Use #allProperties instead' transformWith: '`@receiver allProperties' -> '`@receiver allCachedValues'. 
-	^ self allCachedValues
-]
-
 { #category : #'meta information' }
 MooseObject >> allPropertySelectors [
 	^ self class allPropertySelectors
@@ -230,12 +224,6 @@ MooseObject >> attributeAt: name put: value [
 	^ entityAttributes last value
 ]
 
-{ #category : #'accessing-query' }
-MooseObject >> attributes [
-	self deprecated: 'Use #entityAttributes instead' transformWith: '`@receiver attributes' -> '`@receiver entityAttributes'.
-	^ self entityAttributes
-]
-
 { #category : #accessing }
 MooseObject >> bookmarkAs: aString [
 	"Adds myself in the cache of the mooseModel and mark it as a bookmark"
@@ -243,14 +231,6 @@ MooseObject >> bookmarkAs: aString [
 	group := self asMooseGroup description: aString.
 	group isBookmarked: true.
 	^ self mooseModel add: group asBookmark: aString
-]
-
-{ #category : #'accessing-query' }
-MooseObject >> cache: selector initializer: aBlock [
-	self
-		deprecated: 'Uses #cacheAt:ifAbsentPut: instead'
-		transformWith: '`@receiver cache: `@arg1 initializer: `@arg2' -> '`@receiver cacheAt: `@arg1 ifAbsentPut: `@arg2'.
-	^ self cacheAt: selector ifAbsentPut: aBlock
 ]
 
 { #category : #accessing }
@@ -306,18 +286,6 @@ MooseObject >> entityCache [
 { #category : #initialization }
 MooseObject >> flush [
 	cache initialize
-]
-
-{ #category : #'accessing-query' }
-MooseObject >> flushGroups [
-	self deprecated: 'Use #flush instead' transformWith: '`@receiver flushGroups' -> '`@receiver flush'.
-	self flush
-]
-
-{ #category : #'accessing-query' }
-MooseObject >> flushProperties [
-	self deprecated: 'Use #flush instead' transformWith: '`@receiver flushProperties' -> '`@receiver flush'.
-	self flush
 ]
 
 { #category : #groups }
@@ -493,28 +461,6 @@ MooseObject >> properties [
 	^self allCachedValues
 ]
 
-{ #category : #'accessing-query' }
-MooseObject >> propertyAt: name ifAbsent: aBlock [
-	self
-		deprecated: 'Use cacheAt:ifAbsent: instead'
-		transformWith: '`@receiver propertyAt: `@arg1 ifAbsent: `@arg2' -> '`@receiver cacheAt: `@arg1 ifAbsent: `@arg2'.
-	^ self cacheAt: name ifAbsent: aBlock
-]
-
-{ #category : #'accessing-query' }
-MooseObject >> propertyAt: name ifAbsentPut: aBlock [
-	self
-		deprecated: 'Use cache:ifAbsentPut: instead'
-		transformWith: '`@receiver propertyAt: `@arg1 ifAbsentPut: `@arg2' -> '`@receiver cacheAt: `@arg1 ifAbsentPut: `@arg2'.
-	^ self cacheAt: name ifAbsentPut: aBlock
-]
-
-{ #category : #'accessing-query' }
-MooseObject >> propertyAt: name put: value [
-	self deprecated: 'Use cacheAt:put: instead' transformWith: '`@receiver propertyAt: `@arg1 put: `@arg2' -> '`@receiver cacheAt: `@arg1 put: `@arg2'.
-	^ self cacheAt: name put: value
-]
-
 { #category : #properties }
 MooseObject >> propertyNamed: propertyName [ 
 	"Return the value of the property named propertyName, return nil if the property does not exist"
@@ -575,12 +521,6 @@ MooseObject >> removeFromModel [
 	^ self mooseModel
 		ifNil: [ self ]
 		ifNotNil: [ :model | model removeEntity: self ]
-]
-
-{ #category : #'accessing-query' }
-MooseObject >> removeProperty: name [
-	self deprecated: 'Use removeCache: instead' transformWith: '`@receiver removeProperty: `@arg' -> '`@receiver removeCache: `@arg'.
-	^ self removeCache: name
 ]
 
 { #category : #initialization }
