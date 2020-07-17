@@ -53,7 +53,7 @@ MooseAbstractGroup >> \ aCollection [
 { #category : #'adding/removing' }
 MooseAbstractGroup >> add: anItem [
 	self entityStorage add: anItem.
-	self privateState flush.
+	self flush.
 	^ anItem
 ]
 
@@ -107,7 +107,7 @@ MooseAbstractGroup >> allUsing: aTrait [
 { #category : #groups }
 MooseAbstractGroup >> allUsing: aTrait ofGroupClass: aGroupClass [
 	aTrait isTrait ifFalse: [ MooseAllUsingOnClass signal ].
-	^ self privateState
+	^ self
 		cacheAt: aTrait
 		ifAbsentPut: [ aGroupClass
 				withAll: ((aTrait allUsers flattened flatCollect: #withAllSubclasses) asSet flatCollect: [ :each | self entityStorage selectAllWithType: each ])
@@ -122,7 +122,7 @@ MooseAbstractGroup >> allWithSubTypesOf: aFamixClass [
 { #category : #groups }
 MooseAbstractGroup >> allWithSubTypesOf: aFamixClass ofGroupClass: aGroupClass [
 	aFamixClass isTrait ifTrue: [ MooseAllWithTypeOnTrait signal ].
-	^ self privateState
+	^ self
 		cacheAt: aFamixClass
 		ifAbsentPut: [ aGroupClass
 				withAll: (aFamixClass withAllSubclasses asSet flatCollect: [ :each | self entityStorage selectAllWithType: each ])
@@ -145,12 +145,9 @@ MooseAbstractGroup >> allWithType: aFamixClass [
 { #category : #groups }
 MooseAbstractGroup >> allWithType: aFamixClass ofGroupClass: aGroupClass [
 	aFamixClass isTrait ifTrue: [ MooseAllWithTypeOnTrait signal ].
-	^ self privateState 
+	^ self
 		cacheAt: aFamixClass
-		ifAbsentPut: [
-			aGroupClass 
-				withAll: (self entityStorage selectAllWithType: aFamixClass)
-				withDescription: 'All ' , aFamixClass name asLowercase asEnglishPlural ]
+		ifAbsentPut: [ aGroupClass withAll: (self entityStorage selectAllWithType: aFamixClass) withDescription: 'All ' , aFamixClass name asLowercase asEnglishPlural ]
 ]
 
 { #category : #accessing }
@@ -619,10 +616,10 @@ MooseAbstractGroup >> removeEntity: anEntity [
 ]
 
 { #category : #loading }
-MooseAbstractGroup >> resetMooseNameFor: anEntity [ 
+MooseAbstractGroup >> resetMooseNameFor: anEntity [
 	self entityStorage resetMooseNameFor: anEntity.
 	" this is safe, but probably a bit overdone "
-	self privateState flush
+	self flush
 ]
 
 { #category : #accessing }

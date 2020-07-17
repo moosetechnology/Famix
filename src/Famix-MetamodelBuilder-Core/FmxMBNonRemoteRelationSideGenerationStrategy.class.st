@@ -20,7 +20,7 @@ FmxMBNonRemoteRelationSideGenerationStrategy >> generateGetterCoreIn: aClassOrTr
 
 	aStream
 		tab;
-		nextPutAll: '^ self privateState attributeAt: #';
+		nextPutAll: '^ self attributeAt: #';
 		nextPutAll: aRelationSide name.
 
 	aRelationSide isOne ifTrue: [ aStream nextPutAll: ' ifAbsent: [ nil ]' ].
@@ -37,7 +37,7 @@ FmxMBNonRemoteRelationSideGenerationStrategy >> generateSetterCoreIn: aClassOrTr
 	(aRelationSide isOne and: [ aRelationSide otherSide isOne ])
 		ifTrue: [ aStream
 				tab;
-				nextPutAll: ('(self privateState attributeAt: #{1} ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].' format: {aRelationSide name});
+				nextPutAll: ('(self attributeAt: #{1} ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].' format: {aRelationSide name});
 				cr;
 				tab;
 				nextPutAll: 'anObject ifNil: [ | otherSide |';
@@ -48,7 +48,7 @@ FmxMBNonRemoteRelationSideGenerationStrategy >> generateSetterCoreIn: aClassOrTr
 				cr;
 				tab;
 				tab;
-				nextPutAll: ('self privateState attributeAt: #{1} put: anObject.' format: {aRelationSide name});
+				nextPutAll: ('self attributeAt: #{1} put: anObject.' format: {aRelationSide name});
 				cr;
 				tab;
 				tab;
@@ -59,7 +59,7 @@ FmxMBNonRemoteRelationSideGenerationStrategy >> generateSetterCoreIn: aClassOrTr
 				cr;
 				tab;
 				tab;
-				nextPutAll: ('self privateState attributeAt: #{1} put: anObject.' format: {aRelationSide name});
+				nextPutAll: ('self attributeAt: #{1} put: anObject.' format: {aRelationSide name});
 				cr;
 				tab;
 				tab;
@@ -74,7 +74,7 @@ FmxMBNonRemoteRelationSideGenerationStrategy >> generateSetterCoreIn: aClassOrTr
 		ifTrue: [ aStream
 				tab;
 				nextPutAll:
-					('self privateState attributeAt: #{1} put: (FMMultivalueLink on: self update: #{2} from: self {1} to: anObject).'
+					('self attributeAt: #{1} put: (FMMultivalueLink on: self update: #{2} from: self {1} to: anObject).'
 						format: {aRelationSide name . aRelationSide otherSide name}) ]
 ]
 

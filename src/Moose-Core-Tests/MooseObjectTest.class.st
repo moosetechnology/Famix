@@ -91,18 +91,6 @@ MooseObjectTest >> testPrintOnWithError [
 ]
 
 { #category : #tests }
-MooseObjectTest >> testPrivateStateMutator [
-	| entity state mooseState |
-	entity := self actualClass new.
-	state := entity privateState.
-	self assert: state isNotNil.
-
-	mooseState := MooseEntityState new.
-	entity privateState: mooseState.
-	self assert: entity privateState identicalTo: mooseState
-]
-
-{ #category : #tests }
 MooseObjectTest >> testResetIDGeneration [
 	self actualClass freshID.
 	self actualClass resetIDGeneration.

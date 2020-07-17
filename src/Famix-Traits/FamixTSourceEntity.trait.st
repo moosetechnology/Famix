@@ -102,7 +102,7 @@ FamixTSourceEntity >> numberOfLinesOfCode [
 
 { #category : #metrics }
 FamixTSourceEntity >> numberOfLinesOfCode: aNumber [
-	self privateState cacheAt: #numberOfLinesOfCode put: aNumber
+	self cacheAt: #numberOfLinesOfCode put: aNumber
 ]
 
 { #category : #metrics }

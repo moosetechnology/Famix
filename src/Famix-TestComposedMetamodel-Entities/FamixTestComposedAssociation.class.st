@@ -22,14 +22,14 @@ FamixTestComposedAssociation >> c15 [
 	<generated>
 	<target>
 	<FMProperty: #c15 type: #FamixTestComposed1CustomEntity5 opposite: #associations>
-	^ self privateState attributeAt: #c15 ifAbsent: [ nil ]
+	^ self attributeAt: #c15 ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
 FamixTestComposedAssociation >> c15: anObject [
 
 	<generated>
-	self privateState attributeAt: #c15 put: (FMMultivalueLink on: self update: #associations from: self c15 to: anObject).
+	self attributeAt: #c15 put: (FMMultivalueLink on: self update: #associations from: self c15 to: anObject).
 ]
 
 { #category : #accessing }
@@ -39,14 +39,14 @@ FamixTestComposedAssociation >> c25 [
 	<generated>
 	<source>
 	<FMProperty: #c25 type: #FamixTestComposed2CustomEntity5 opposite: #associations>
-	^ self privateState attributeAt: #c25 ifAbsent: [ nil ]
+	^ self attributeAt: #c25 ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
 FamixTestComposedAssociation >> c25: anObject [
 
 	<generated>
-	self privateState attributeAt: #c25 put: (FMMultivalueLink on: self update: #associations from: self c25 to: anObject).
+	self attributeAt: #c25 put: (FMMultivalueLink on: self update: #associations from: self c25 to: anObject).
 ]
 
 { #category : #accessing }

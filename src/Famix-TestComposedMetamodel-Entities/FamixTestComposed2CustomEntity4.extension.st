@@ -7,7 +7,7 @@ FamixTestComposed2CustomEntity4 >> c14s [
 	<generated>
 	<FMProperty: #c14s type: #FamixTestComposed1CustomEntity4 opposite: #c24s>
 	<package: #'Famix-TestComposedMetamodel-Entities'>
-	^ self privateState attributeAt: #c14s ifAbsentPut: [ FMMultiMultivalueLink on: self opposite: #c24s ]
+	^ self attributeAt: #c14s ifAbsentPut: [ FMMultiMultivalueLink on: self opposite: #c24s ]
 ]
 
 { #category : #'*Famix-TestComposedMetamodel-Entities-accessing' }
@@ -24,7 +24,7 @@ FamixTestComposed2CustomEntity4 >> c4s [
 	<generated>
 	<FMProperty: #c4s type: #FamixTestComposedCustomEntity4 opposite: #c24s>
 	<package: #'Famix-TestComposedMetamodel-Entities'>
-	^ self privateState attributeAt: #c4s ifAbsentPut: [ FMMultiMultivalueLink on: self opposite: #c24s ]
+	^ self attributeAt: #c4s ifAbsentPut: [ FMMultiMultivalueLink on: self opposite: #c24s ]
 ]
 
 { #category : #'*Famix-TestComposedMetamodel-Entities-accessing' }

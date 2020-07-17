@@ -26,5 +26,5 @@ FAMIXParameterizableClass >> parameters [
 { #category : #generated }
 FAMIXParameterizableClass >> parameters: aCollection [
 
-	self privateState attributeAt: #parameters put: aCollection
+	self attributeAt: #parameters put: aCollection
 ]

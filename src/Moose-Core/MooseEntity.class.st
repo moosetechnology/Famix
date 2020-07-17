@@ -203,13 +203,13 @@ MooseEntity >> isRoot [
 ]
 
 { #category : #testing }
-MooseEntity >> isStub [ 
-	^ self privateState isStub
+MooseEntity >> isStub [
+	^ self attributeAt: #privateIsStub ifAbsent: [ false ]
 ]
 
 { #category : #testing }
-MooseEntity >> isStub: aBoolean [ 
-	^ self privateState isStub: aBoolean
+MooseEntity >> isStub: boolean [
+	^ self attributeAt: #privateIsStub put: boolean
 ]
 
 { #category : #accessing }

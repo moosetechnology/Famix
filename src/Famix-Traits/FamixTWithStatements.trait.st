@@ -27,7 +27,7 @@ FamixTWithStatements >> cyclomaticComplexity [
 
 { #category : #metrics }
 FamixTWithStatements >> cyclomaticComplexity: aNumber [
-	self privateState cacheAt: #cyclomaticComplexity put: aNumber
+	self cacheAt: #cyclomaticComplexity put: aNumber
 ]
 
 { #category : #testing }
@@ -55,7 +55,7 @@ FamixTWithStatements >> numberOfStatements [
 
 { #category : #metrics }
 FamixTWithStatements >> numberOfStatements: aNumber [
-	self privateState cacheAt: #numberOfStatements put: aNumber
+	self cacheAt: #numberOfStatements put: aNumber
 ]
 
 { #category : #asserting }

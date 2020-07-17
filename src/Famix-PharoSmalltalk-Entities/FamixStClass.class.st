@@ -137,7 +137,7 @@ FamixStClass >> numberOfMethodProtocols [
 
 { #category : #metrics }
 FamixStClass >> numberOfMethodProtocols: aNumber [
-	self privateState cacheAt: #numberOfMethodProtocols put: aNumber
+	self cacheAt: #numberOfMethodProtocols put: aNumber
 ]
 
 { #category : #'Famix-Implementation' }

@@ -286,8 +286,7 @@ MooseModel >> add: anElement [
 
 { #category : #'entity collection' }
 MooseModel >> add: aBookmarkedGroup asBookmark: aString [
-	 
-	self privateState cacheAt: aString put: aBookmarkedGroup.
+	self cacheAt: aString put: aBookmarkedGroup.
 	self announcer announce: (MooseEntityAdded new entity: aBookmarkedGroup).
 	^ aBookmarkedGroup
 ]
@@ -300,11 +299,11 @@ MooseModel >> addAll: entities [
 ]
 
 { #category : #'entity collection' }
-MooseModel >> addNoAnnounce: anElement [ 
+MooseModel >> addNoAnnounce: anElement [
 	self entityStorage add: anElement.
-	self privateState flush. 
+	self flush.
 	anElement privateSetMooseModel: self.
-	^anElement
+	^ anElement
 ]
 
 { #category : #'dead code' }
@@ -336,7 +335,7 @@ MooseModel >> asMSEString [
 MooseModel >> cacheMooseGroups [
 	<menuItem: 'Cache groups' category: 'Utilities'>
 	| selectors |
-	self privateState flush.
+	self flush.
 	selectors := self navigationSelectors.
 	MooseCustomTask
 		runWithProgress: [ :bar | 
@@ -461,9 +460,7 @@ MooseModel >> factory [
 MooseModel >> flushPrivateState [
 	"Clean the private state caches of all the entities of the model. This will not impact attributes in the private state (informations you cannot derive)"
 
-	self entities
-		do: [ :entity | entity privateState flush ]
-		displayingProgress: [ :entity | 'Cleaning cache of ' , entity mooseName ]
+	self entities do: #flush displayingProgress: [ :entity | 'Cleaning cache of ' , entity mooseName ]
 ]
 
 { #category : #actions }
@@ -613,7 +610,7 @@ MooseModel >> mooseDescriptionFor: class [
 MooseModel >> mooseModel [
 	"Answer the containing moose model of self, if any."
 
-	^ self privateState attributeAt: #privateModel ifAbsent: [ nil ]
+	^ self attributeAt: #privateModel ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
@@ -660,7 +657,7 @@ MooseModel >> numberOfLinesOfCodePerClass [
 
 { #category : #accessing }
 MooseModel >> privateSetMooseModel: aMooseModel [
-	self privateState attributeAt: #privateModel put: aMooseModel
+	self attributeAt: #privateModel put: aMooseModel
 ]
 
 { #category : #actions }
@@ -671,11 +668,11 @@ MooseModel >> remove [
 
 { #category : #'entity collection' }
 MooseModel >> remove: anElement [
-	self entityStorage remove: anElement. 
-	anElement privateSetMooseModel: nil. 
-	self privateState flush. 
+	self entityStorage remove: anElement.
+	anElement privateSetMooseModel: nil.
+	self flush.
 	self announcer announce: (MooseEntityRemoved new entity: anElement).
-	^anElement
+	^ anElement
 ]
 
 { #category : #'entity collection' }
@@ -684,10 +681,11 @@ MooseModel >> removeAll [
 	However, it allows to remove all entities correctly. 
 	Setting the mooseModel of all entities at nil.
 	And we can iterate over the same collection (ie entityStorage)."
+
 	self entities
 		do: [ :anElement | 
 			anElement privateSetMooseModel: nil.
-			self privateState flush.
+			self flush.
 			self announcer announce: (MooseEntityRemoved new entity: anElement) ].
 	self entityStorage removeAll
 ]
@@ -709,15 +707,12 @@ MooseModel >> removeModelNamed: aStringOrSymbol [
 
 { #category : #accessing }
 MooseModel >> rootFolder [
-	^ self privateState 	
-		attributeAt: #rootFolder 
-		ifAbsent: [	Smalltalk imageDirectory asFileReference  / 'src' / self name]
+	^ self attributeAt: #rootFolder ifAbsent: [ Smalltalk imageDirectory asFileReference / 'src' / self name ]
 ]
 
 { #category : #accessing }
 MooseModel >> rootFolder: aString [
-
-	^ self privateState attributeAt: #rootFolder put: aString
+	^ self attributeAt: #rootFolder put: aString
 ]
 
 { #category : #'entity collection' }

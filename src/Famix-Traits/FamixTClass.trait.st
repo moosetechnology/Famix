@@ -78,17 +78,15 @@ FamixTClass >> isClass [
 
 { #category : #testing }
 FamixTClass >> isTestCase [
-
 	<FMProperty: #isTestCase type: #Boolean>
 	<FMComment: 'True if the method is considered as a test'>
 	<derived>
-
-	^ self privateState attributeAt: #isTestCase ifAbsent: [ false ]
+	^ self attributeAt: #isTestCase ifAbsent: [ false ]
 ]
 
 { #category : #testing }
 FamixTClass >> isTestCase: aBoolean [
-	^ self privateState attributeAt: #isTestCase put: true
+	^ self attributeAt: #isTestCase put: true
 ]
 
 { #category : #metrics }
@@ -104,7 +102,7 @@ FamixTClass >> numberOfAttributesInherited [
 
 { #category : #metrics }
 FamixTClass >> numberOfAttributesInherited: aNumber [
-	self privateState cacheAt: #numberOfAttributesInherited put: aNumber
+	self cacheAt: #numberOfAttributesInherited put: aNumber
 ]
 
 { #category : #metrics }
@@ -120,7 +118,7 @@ FamixTClass >> numberOfMethodsAdded [
 
 { #category : #metrics }
 FamixTClass >> numberOfMethodsAdded: aNumber [
-	self privateState cacheAt: #numberOfMethodsAdded put: aNumber
+	self cacheAt: #numberOfMethodsAdded put: aNumber
 ]
 
 { #category : #metrics }
@@ -138,7 +136,7 @@ FamixTClass >> numberOfMethodsInHierarchy [
 
 { #category : #metrics }
 FamixTClass >> numberOfMethodsInHierarchy: aNumber [
-	self privateState cacheAt: #numberOfMethodsInHierarchy put: aNumber
+	self cacheAt: #numberOfMethodsInHierarchy put: aNumber
 ]
 
 { #category : #metrics }
@@ -154,7 +152,7 @@ FamixTClass >> numberOfMethodsInherited [
 
 { #category : #metrics }
 FamixTClass >> numberOfMethodsInherited: aNumber [
-	self privateState cacheAt: #numberOfMethodsInherited put: aNumber
+	self cacheAt: #numberOfMethodsInherited put: aNumber
 ]
 
 { #category : #metrics }
@@ -170,7 +168,7 @@ FamixTClass >> numberOfMethodsOverriden [
 
 { #category : #metrics }
 FamixTClass >> numberOfMethodsOverriden: aNumber [
-	self privateState cacheAt: #numberOfMethodsOverriden put: aNumber
+	self cacheAt: #numberOfMethodsOverriden put: aNumber
 ]
 
 { #category : #metrics }
@@ -186,5 +184,5 @@ FamixTClass >> weightOfAClass [
 
 { #category : #metrics }
 FamixTClass >> weightOfAClass: aNumber [
-	self privateState cacheAt: #weightOfAClass put: aNumber
+	self cacheAt: #weightOfAClass put: aNumber
 ]

@@ -117,7 +117,7 @@ FamixJavaPackage >> childrenOfMyKind [
 
 { #category : #accessing }
 FamixJavaPackage >> classes [
-	^ self privateState cacheAt: #classes ifAbsentPut: [ self childEntities select: [ :child | child isClass ] ]
+	^ self cacheAt: #classes ifAbsentPut: [ self childEntities select: [ :child | child isClass ] ]
 ]
 
 { #category : #'Famix-Extensions-accessing' }
@@ -190,7 +190,7 @@ FamixJavaPackage >> martinCohesion [
 
 { #category : #accessing }
 FamixJavaPackage >> methods [
-	^ self privateState cacheAt: #methods ifAbsentPut: [ self classes flatCollect: #methods ]
+	^ self cacheAt: #methods ifAbsentPut: [ self classes flatCollect: #methods ]
 ]
 
 { #category : #accessing }
@@ -203,7 +203,7 @@ FamixJavaPackage >> numberOfClientPackages [
 
 { #category : #accessing }
 FamixJavaPackage >> numberOfClientPackages: aNumber [
-	self privateState cacheAt: #numberOfClientPackages put: aNumber
+	self cacheAt: #numberOfClientPackages put: aNumber
 ]
 
 { #category : #accessing }
@@ -218,7 +218,7 @@ FamixJavaPackage >> numberOfMethods [
 
 { #category : #accessing }
 FamixJavaPackage >> numberOfMethods: aNumber [
-	self privateState cacheAt: #numberOfMethods put: aNumber
+	self cacheAt: #numberOfMethods put: aNumber
 ]
 
 { #category : #printing }

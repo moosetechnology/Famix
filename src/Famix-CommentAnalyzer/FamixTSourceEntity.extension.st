@@ -62,12 +62,12 @@ FamixTSourceEntity >> computeCommentsPercentage [
 
 { #category : #'*Famix-CommentAnalyzer' }
 FamixTSourceEntity >> mergedComments [
-	^ self privateState cacheAt: #mergedComments ifAbsentPut: [ OrderedCollection new ]
+	^ self cacheAt: #mergedComments ifAbsentPut: [ OrderedCollection new ]
 ]
 
 { #category : #'*Famix-CommentAnalyzer' }
 FamixTSourceEntity >> mergedComments: collection [
-	self privateState cacheAt: #mergedComments put: collection
+	self cacheAt: #mergedComments put: collection
 ]
 
 { #category : #'*Famix-CommentAnalyzer' }
@@ -82,7 +82,7 @@ FamixTSourceEntity >> numberOfUsefulCommentLines [
 
 { #category : #'*Famix-CommentAnalyzer' }
 FamixTSourceEntity >> sourceCommentRateWithCleaning [
-	^ self privateState cacheAt: #sourceCommentRateWithCleaning ifAbsentPut: [ self sourceCommentRateWithSelector: #sourceCommentRateWithCleaning ]
+	^ self cacheAt: #sourceCommentRateWithCleaning ifAbsentPut: [ self sourceCommentRateWithSelector: #sourceCommentRateWithCleaning ]
 ]
 
 { #category : #'*Famix-CommentAnalyzer' }
@@ -97,7 +97,7 @@ FamixTSourceEntity >> sourceCommentRateWithSelector: aSelector [
 
 { #category : #'*Famix-CommentAnalyzer' }
 FamixTSourceEntity >> sourceCommentRateWithoutCleaning [
-	^ self privateState cacheAt: #sourceCommentRateWithoutCleaning ifAbsentPut: [ self sourceCommentRateWithSelector: #numberOfCommentLines ]
+	^ self cacheAt: #sourceCommentRateWithoutCleaning ifAbsentPut: [ self sourceCommentRateWithSelector: #numberOfCommentLines ]
 ]
 
 { #category : #'*Famix-CommentAnalyzer' }

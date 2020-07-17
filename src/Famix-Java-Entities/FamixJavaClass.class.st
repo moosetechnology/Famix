@@ -27,7 +27,7 @@ FamixJavaClass >> accessedAttributes [
 
 { #category : #accessing }
 FamixJavaClass >> incomingAccesses [
-	^ self privateState 
+	^ self 
 		cacheAt: #incomingAccesses
 		ifAbsentPut: [ attributes flatCollect: [ :each | each incomingAccesses ] ]
 ]
@@ -90,13 +90,13 @@ FamixJavaClass >> isInterface [
 	<FMProperty: #isInterface type: #Boolean>
 	<FMComment: 'This is a boolean flag used to distinguish between classes with implementation and interfaces'>
 
-	^ self privateState attributeAt: #isInterface ifAbsent: [ false ]
+	^ self attributeAt: #isInterface ifAbsent: [ false ]
 ]
 
 { #category : #testing }
 FamixJavaClass >> isInterface: aBoolean [
 
-	^ self privateState attributeAt: #isInterface put: true
+	^ self attributeAt: #isInterface put: true
 ]
 
 { #category : #'Famix-Extensions-metrics-support' }

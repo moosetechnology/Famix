@@ -31,7 +31,7 @@ FAMIXBehaviouralEntity >> computeCyclomaticComplexity [
 
 { #category : #'Famix-Extensions' }
 FAMIXBehaviouralEntity >> cyclomaticComplexity: aNumber [
-	self privateState cacheAt: #cyclomaticComplexity put: aNumber
+	self cacheAt: #cyclomaticComplexity put: aNumber
 ]
 
 { #category : #'Famix-Extensions' }
@@ -93,7 +93,7 @@ FAMIXBehaviouralEntity >> numberOfConditionals [
 
 { #category : #'Famix-Extensions' }
 FAMIXBehaviouralEntity >> numberOfConditionals: aNumber [
-	self privateState cacheAt: #numberOfConditionals put: aNumber
+	self cacheAt: #numberOfConditionals put: aNumber
 ]
 
 { #category : #'Famix-Extensions' }

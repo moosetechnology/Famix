@@ -81,7 +81,7 @@ FamixTType >> numberOfAccessesToForeignData [
 
 { #category : #metrics }
 FamixTType >> numberOfAccessesToForeignData: aNumber [
-	self privateState cacheAt: #numberOfAccessesToForeignData put: aNumber
+	self cacheAt: #numberOfAccessesToForeignData put: aNumber
 ]
 
 { #category : #metrics }
@@ -97,7 +97,7 @@ FamixTType >> numberOfDuplicatedLinesOfCodeInternally [
 
 { #category : #metrics }
 FamixTType >> numberOfDuplicatedLinesOfCodeInternally: aNumber [
-	self privateState cacheAt: #numberOfDuplicatedLinesOfCodeInternally put: aNumber
+	self cacheAt: #numberOfDuplicatedLinesOfCodeInternally put: aNumber
 ]
 
 { #category : #testing }

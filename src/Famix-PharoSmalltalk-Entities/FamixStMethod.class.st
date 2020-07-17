@@ -30,7 +30,7 @@ FamixStMethod >> accessedAttributes [
 { #category : #'Famix-Extensions-metrics-support' }
 FamixStMethod >> category: aString [
 
-	self privateState attributeAt: #category put: aString
+	self attributeAt: #category put: aString
 
 	
 ]
@@ -185,7 +185,7 @@ FamixStMethod >> numberOfConditionals [
 
 { #category : #'Famix-Extensions-private' }
 FamixStMethod >> numberOfConditionals: aNumber [
-	self privateState cacheAt: #numberOfConditionals put: aNumber
+	self cacheAt: #numberOfConditionals put: aNumber
 ]
 
 { #category : #'Famix-Extensions-private' }
@@ -253,12 +253,11 @@ FamixStMethod >> timeStamp [
 	<FMProperty: #timeStamp type: #String>
 	<FMComment: 'TimeStamp of the method with author and time of the last change'>
 	<package: 'Smalltalk'>
-	
-	^ self privateState attributeAt: #timeStamp ifAbsentPut: ['']
+	^ self attributeAt: #timeStamp ifAbsentPut: [ '' ]
 ]
 
 { #category : #'Famix-Extensions-metrics-support' }
 FamixStMethod >> timeStamp: aTimeStamp [
 
-	self privateState attributeAt: #timeStamp put: aTimeStamp
+	self attributeAt: #timeStamp put: aTimeStamp
 ]

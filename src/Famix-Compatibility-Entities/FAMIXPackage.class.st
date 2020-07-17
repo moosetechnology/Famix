@@ -142,16 +142,14 @@ FAMIXPackage >> childrenOfMyKind [
 
 { #category : #'Famix-Implementation' }
 FAMIXPackage >> classes [
-
-	^ self privateState 	cacheAt: #classes 
-							ifAbsentPut: [ self childEntities select: [ :child | child isClass ]]
+	^ self cacheAt: #classes ifAbsentPut: [ self childEntities select: [ :child | child isClass ] ]
 ]
 
 { #category : #'Famix-Extensions-accessing' }
 FAMIXPackage >> concernedClassesCollection [
 	"it returns the collection of the receiver's concerned classes (See #__concernedClassesCollection). Before returning this value it verifies if it is cached in the receiver's state under the properiety #concernedClasses."
 
-	^self privateState cacheAt: #concernedClassesCollection
+	^self cacheAt: #concernedClassesCollection
 		ifAbsentPut: (self extensionClasses union: self localClasses)
 ]
 
@@ -186,7 +184,7 @@ FAMIXPackage >> efferentCoupling [
 FAMIXPackage >> extendedClasses [
 	"select all classes extended in this package"
 
-	^ self privateState cacheAt: #extendedClasses
+	^ self cacheAt: #extendedClasses
 							ifAbsentPut: [ self classes select: [ :c| c isExtended ] ]
 	
 ]
@@ -204,9 +202,7 @@ FAMIXPackage >> extendedClassesGroup [
 FAMIXPackage >> extensionClasses [
 	"select all classes extended by this package"
 
-	^ self privateState 
-		cacheAt: #extensionClasses
-		ifAbsentPut: [ self extensionMethods collectAsSet: [ :method | method parentType ] ]
+	^ self cacheAt: #extensionClasses ifAbsentPut: [ self extensionMethods collectAsSet: [ :method | method parentType ] ]
 ]
 
 { #category : #'Famix-Smalltalk' }
@@ -222,9 +218,7 @@ FAMIXPackage >> extensionClassesGroup [
 FAMIXPackage >> extensionMethods [
 	"select all class extensions made by this package"
 
-	^ self privateState 
-		cacheAt: #extensionMethods 
-		ifAbsentPut: [ self childEntities select: [ :child | child isMethod ]]
+	^ self cacheAt: #extensionMethods ifAbsentPut: [ self childEntities select: [ :child | child isMethod ] ]
 ]
 
 { #category : #'Moose-Hismo' }
@@ -252,9 +246,7 @@ FAMIXPackage >> localClassesGroup [
 FAMIXPackage >> localMethods [
 	"select all local methods"
 
-	^ self privateState 
-			cacheAt: #localMethods 
-			ifAbsentPut: [ self classes flatCollect: [:c | c localMethods ]]
+	^ self cacheAt: #localMethods ifAbsentPut: [ self classes flatCollect: [ :c | c localMethods ] ]
 ]
 
 { #category : #'Famix-Extensions-metrics' }
@@ -290,7 +282,7 @@ FAMIXPackage >> numberOfClientPackages [
 
 { #category : #'Famix-Extensions' }
 FAMIXPackage >> numberOfClientPackages: aNumber [
-	self privateState cacheAt: #numberOfClientPackages put: aNumber
+	self cacheAt: #numberOfClientPackages put: aNumber
 ]
 
 { #category : #'Famix-Extensions' }
@@ -305,7 +297,7 @@ FAMIXPackage >> numberOfMethods [
 
 { #category : #'Famix-Extensions' }
 FAMIXPackage >> numberOfMethods: aNumber [
-	self privateState cacheAt: #numberOfMethods put: aNumber
+	self cacheAt: #numberOfMethods put: aNumber
 ]
 
 { #category : #'Famix-Implementation' }
