@@ -22,6 +22,18 @@ MQScopeTypesStrategy class >> scopes: aCollection [
 		yourself
 ]
 
+{ #category : #comparing }
+MQScopeTypesStrategy >> = anObject [
+	super = anObject and: [ scopes = anObject scopes ]
+]
+
+{ #category : #comparing }
+MQScopeTypesStrategy >> hash [
+	"Answer an integer value that is related to the identity of the receiver."
+
+	^ super hash bitXor: scopes hash
+]
+
 { #category : #testing }
 MQScopeTypesStrategy >> isOfRightType: anEntity [
 	^ scopes anySatisfy: [ :aType | anEntity isOfType: aType ]

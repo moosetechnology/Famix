@@ -22,6 +22,18 @@ MQScopeTypeStrategy class >> scope: anEntity [
 		yourself
 ]
 
+{ #category : #comparing }
+MQScopeTypeStrategy >> = anObject [
+	^ super = anObject and: [ scope = anObject scope ]
+]
+
+{ #category : #comparing }
+MQScopeTypeStrategy >> hash [
+	"Answer an integer value that is related to the identity of the receiver."
+
+	^ super hash bitXor: scope hash
+]
+
 { #category : #testing }
 MQScopeTypeStrategy >> isOfRightType: anEntity [
 	^ anEntity isOfType: scope
