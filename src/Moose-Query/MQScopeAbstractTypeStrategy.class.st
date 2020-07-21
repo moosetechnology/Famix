@@ -22,6 +22,20 @@ MQScopeAbstractTypeStrategy class >> strategies [
 	^ self allSubclasses reject: #isAbstract
 ]
 
+{ #category : #comparing }
+MQScopeAbstractTypeStrategy >> = anObject [
+	super = anObject ifTrue: [ ^ true ].
+
+	^ self class = anObject class
+]
+
+{ #category : #comparing }
+MQScopeAbstractTypeStrategy >> hash [
+	"Answer an integer value that is related to the identity of the receiver."
+
+	^ self class hash
+]
+
 { #category : #testing }
 MQScopeAbstractTypeStrategy >> isOfRightType: anEntity [
 	^ self subclassResponsibility
