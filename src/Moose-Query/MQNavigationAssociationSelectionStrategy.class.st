@@ -31,3 +31,10 @@ MQNavigationAssociationSelectionStrategy >> selectAssociationsIn: aCollection [
 
 	^ self subclassResponsibility
 ]
+
+{ #category : #printing }
+MQNavigationAssociationSelectionStrategy >> storeOn: aStream [
+	aStream
+		nextPutAll: self class name;
+		nextPutAll: ' new'
+]
