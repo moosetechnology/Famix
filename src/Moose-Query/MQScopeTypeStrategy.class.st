@@ -48,3 +48,13 @@ MQScopeTypeStrategy >> scope [
 MQScopeTypeStrategy >> scope: anObject [
 	scope := anObject
 ]
+
+{ #category : #printing }
+MQScopeTypeStrategy >> storeOn: aStream [
+	aStream
+		nextPut: $(;
+		nextPutAll: self class name;
+		nextPutAll: ' scope: ';
+		print: scope;
+		nextPut: $)
+]

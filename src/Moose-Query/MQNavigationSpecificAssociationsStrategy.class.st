@@ -37,3 +37,13 @@ MQNavigationSpecificAssociationsStrategy >> associations: anObject [
 MQNavigationSpecificAssociationsStrategy >> selectAssociationsIn: aCollection [
 	^ aCollection select: [ :each | associations anySatisfy: [ :association | each isOfType: association ] ]
 ]
+
+{ #category : #printing }
+MQNavigationSpecificAssociationsStrategy >> storeOn: aStream [
+	aStream
+		nextPut: $(;
+		nextPutAll: self class name;
+		nextPutAll: ' associations: { '.
+	associations do: [ :asso | asso storeOn: aStream ] separatedBy: [ aStream nextPutAll: ' . ' ].
+	aStream nextPutAll: '})'
+]

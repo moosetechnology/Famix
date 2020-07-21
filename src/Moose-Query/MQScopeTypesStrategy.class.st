@@ -48,3 +48,13 @@ MQScopeTypesStrategy >> scopes [
 MQScopeTypesStrategy >> scopes: anObject [
 	scopes := anObject
 ]
+
+{ #category : #printing }
+MQScopeTypesStrategy >> storeOn: aStream [
+	aStream
+		nextPut: $(;
+		nextPutAll: self class name;
+		nextPutAll: ' scopes: { '.
+	scopes do: [ :asso | asso storeOn: aStream ] separatedBy: [ aStream nextPutAll: ' . ' ].
+	aStream nextPutAll: '})'
+]

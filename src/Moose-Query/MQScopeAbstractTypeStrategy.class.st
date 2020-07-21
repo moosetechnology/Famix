@@ -40,3 +40,10 @@ MQScopeAbstractTypeStrategy >> hash [
 MQScopeAbstractTypeStrategy >> isOfRightType: anEntity [
 	^ self subclassResponsibility
 ]
+
+{ #category : #printing }
+MQScopeAbstractTypeStrategy >> storeOn: aStream [
+	aStream
+		nextPutAll: self class name;
+		nextPutAll: ' new'
+]
