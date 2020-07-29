@@ -60,7 +60,7 @@ FamixTIndexedFileNavigation >> countNumberOfLinesRuturnsFrom: aStream from: star
 
 { #category : #accessing }
 FamixTIndexedFileNavigation >> endLine [
-	^ self privateState cacheAt: #endLine ifAbsentPut: [ self completeText lineNumberCorrespondingToIndex: self endPos ]
+	^ self cacheAt: #endLine ifAbsentPut: [ self completeText lineNumberCorrespondingToIndex: self endPos ]
 ]
 
 { #category : #accessing }
@@ -130,7 +130,7 @@ FamixTIndexedFileNavigation >> sourceText [
 
 { #category : #accessing }
 FamixTIndexedFileNavigation >> startLine [
-	^ self privateState cacheAt: #startLine ifAbsentPut: [ self completeText lineNumberCorrespondingToIndex: self startPos ]
+	^ self cacheAt: #startLine ifAbsentPut: [ self completeText lineNumberCorrespondingToIndex: self startPos ]
 ]
 
 { #category : #accessing }

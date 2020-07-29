@@ -40,7 +40,7 @@ FamixTWithInvocations >> outgoingInvocations: anObject [
 { #category : #adding }
 FamixTWithInvocations >> outgoingInvocationsGroup [
 	<navigation: 'Outgoing invocations'>
-	^ self privateState cacheAt:
+	^ self cacheAt:
 		#outgoingInvocationsGroup
 		ifAbsentPut:
 			[MooseGroup

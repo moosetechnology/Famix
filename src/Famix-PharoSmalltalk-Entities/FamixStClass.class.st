@@ -1,8 +1,8 @@
 Class {
 	#name : #FamixStClass,
 	#superclass : #FamixStNamedEntity,
-	#traits : 'FamixTClass + FamixTClassHierarchyNavigation + FamixTHasModifiers + FamixTWithExceptions + FamixTWithTypes',
-	#classTraits : 'FamixTClass classTrait + FamixTClassHierarchyNavigation classTrait + FamixTHasModifiers classTrait + FamixTWithExceptions classTrait + FamixTWithTypes classTrait',
+	#traits : 'FamixTClass + FamixTHasModifiers + FamixTWithExceptions + FamixTWithTypes',
+	#classTraits : 'FamixTClass classTrait + FamixTHasModifiers classTrait + FamixTWithExceptions classTrait + FamixTWithTypes classTrait',
 	#category : #'Famix-PharoSmalltalk-Entities-Entities'
 }
 
@@ -59,11 +59,6 @@ FamixStClass >> implements: aString [
 	"Was changed from match: for performances and because signature is case sensitive"
 
 	^ self methods anySatisfy: [ :each | aString = each signature ]
-]
-
-{ #category : #testing }
-FamixStClass >> incomingTypeDeclarations [  
-	^ self typedEntities collect: [ :var | MooseQueryDependencyAssociation newFrom: var to: self ]
 ]
 
 { #category : #accessing }
@@ -130,6 +125,19 @@ FamixStClass >> methodsWithoutSutbsAndConstructors [
 	"Removing stub and contructor methods. Used to support the calculation of LCOM."
 
 	^ (self methods select: [ :each | each isStub not and: [ each isConstructor not ] ]) asSet
+]
+
+{ #category : #metrics }
+FamixStClass >> numberOfMethodProtocols [
+	<FMProperty: #numberOfMethodProtocols type: #Number>
+	<derived>
+	<FMComment: 'The number of method protocols in a class'>
+	^ self lookUpPropertyNamed: #numberOfMethodProtocols computedAs: [ ((self methods collect: [ :each | each protocol ]) reject: #isNil) asSet size ]
+]
+
+{ #category : #metrics }
+FamixStClass >> numberOfMethodProtocols: aNumber [
+	self cacheAt: #numberOfMethodProtocols put: aNumber
 ]
 
 { #category : #'Famix-Implementation' }

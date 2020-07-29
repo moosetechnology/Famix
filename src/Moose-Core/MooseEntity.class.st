@@ -81,11 +81,6 @@ MooseEntity class >> requirements [
 				ifFalse: [ {aBehavior} ] ]) asSet
 ]
 
-{ #category : #'stateful traits' }
-MooseEntity class >> usedStatefulTraits [
-	^ self cache at: #usedStatefulTraits ifAbsentPut: [ super usedStatefulTraits ]
-]
-
 { #category : #dependencies }
 MooseEntity >> addAllChildrenDependenciesThrough: aDirectionStrategy in: aCollection [
 	aCollection addAll: (aDirectionStrategy dependenciesAtReceiverScopeOf: self).
@@ -196,6 +191,11 @@ MooseEntity >> isLinkedTo: anEntity dependancyDirection: aDirectionStrategy in: 
 ]
 
 { #category : #testing }
+MooseEntity >> isMooseEntity [
+	^ true
+]
+
+{ #category : #testing }
 MooseEntity >> isRoot [
 	"Return true if the entity is not contained in any other entity."
 
@@ -203,18 +203,13 @@ MooseEntity >> isRoot [
 ]
 
 { #category : #testing }
-MooseEntity >> isStub [ 
-	^ self privateState isStub
+MooseEntity >> isStub [
+	^ self attributeAt: #privateIsStub ifAbsent: [ false ]
 ]
 
 { #category : #testing }
-MooseEntity >> isStub: aBoolean [ 
-	^ self privateState isStub: aBoolean
-]
-
-{ #category : #accessing }
-MooseEntity >> localMooseModel [
-	^ self mooseModel
+MooseEntity >> isStub: boolean [
+	^ self attributeAt: #privateIsStub put: boolean
 ]
 
 { #category : #accessing }

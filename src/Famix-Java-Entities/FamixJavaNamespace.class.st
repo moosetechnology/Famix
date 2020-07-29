@@ -35,7 +35,7 @@ FamixJavaNamespace >> abstractness [
 
 { #category : #'Famix-Extensions-metrics' }
 FamixJavaNamespace >> abstractness: aNumber [
-	self privateState cacheAt: #abstractness put: aNumber
+	self cacheAt: #abstractness put: aNumber
 ]
 
 { #category : #adding }
@@ -54,7 +54,7 @@ FamixJavaNamespace >> afferentCoupling [
 
 { #category : #'Famix-Extensions-metrics' }
 FamixJavaNamespace >> afferentCoupling: aNumber [
-	self privateState cacheAt: #afferentCoupling put: aNumber
+	self cacheAt: #afferentCoupling put: aNumber
 ]
 
 { #category : #accessing }
@@ -88,13 +88,13 @@ FamixJavaNamespace >> bunchCohesion [
 	(myClasses := self classes) union: (myClasses flatCollect: [ :c | c allRecursiveTypes ]).
 	myClasses size == 0
 		ifTrue: [ ^ nil ].
-	intraConnectivities := (myClasses collect: [ :c | (c queryOutgoingDependencies atScope: FamixTType) withinParentUsing: FamixTNamespace ]) inject: 0 into: [ :subTotal :each | subTotal + each size ].
+	intraConnectivities := (myClasses collect: [ :c | (c queryAllOutgoing atScope: FamixTType) withinParentUsing: FamixTNamespace ]) inject: 0 into: [ :subTotal :each | subTotal + each size ].
 	^ intraConnectivities / myClasses size squared asFloat
 ]
 
 { #category : #'Famix-Extensions-metrics' }
 FamixJavaNamespace >> bunchCohesion: aNumber [
-	self privateState cacheAt: #bunchCohesion put: aNumber
+	self cacheAt: #bunchCohesion put: aNumber
 ]
 
 { #category : #'Famix-Extensions-metrics' }
@@ -110,11 +110,11 @@ FamixJavaNamespace >> bunchCouplingWith: aNamespace [
 		ifTrue: [ ^ nil ].
 
 	"All outgoing dependencies"
-	interConnectivities := (myClasses collect: [ :c | (c queryOutgoingDependencies atScope: FamixTType) within: aNamespace ]) inject: 0 into: [ :subTotal :each | subTotal + each size ].
+	interConnectivities := (myClasses collect: [ :c | (c queryAllOutgoing atScope: FamixTType) within: aNamespace ]) inject: 0 into: [ :subTotal :each | subTotal + each size ].
 
 	"Plus all incoming dependencies"
 	interConnectivities := interConnectivities
-		+ ((myClasses collect: [ :c | (c queryIncomingDependencies atScope: FamixTType) within: aNamespace ]) inject: 0 into: [ :subTotal :each | subTotal + each size ]).
+		+ ((myClasses collect: [ :c | (c queryAllIncoming atScope: FamixTType) within: aNamespace ]) inject: 0 into: [ :subTotal :each | subTotal + each size ]).
 	^ interConnectivities / (2 * myClasses size * otherClasses size) asFloat
 ]
 
@@ -130,11 +130,11 @@ FamixJavaNamespace >> bunchCouplingWithAll [
 	(myClasses isEmpty or: [ allClasses isEmpty ]) ifTrue: [ ^ nil ].
 
 	"All outgoing dependencies"
-	interConnectivities := (myClasses collect: [ :c | (c queryOutgoingDependencies atScope: FamixTType) outOfParentUsing: FamixTNamespace ]) inject: 0 into: [ :subTotal :each | subTotal + each size ].
+	interConnectivities := (myClasses collect: [ :c | (c queryAllOutgoing atScope: FamixTType) outOfParentUsing: FamixTNamespace ]) inject: 0 into: [ :subTotal :each | subTotal + each size ].
 
 	"Plus all incoming dependencies"
 	interConnectivities := interConnectivities
-		+ ((myClasses collect: [ :c | (c queryIncomingDependencies atScope: FamixTType) outOfParentUsing: FamixTNamespace ]) inject: 0 into: [ :subTotal :each | subTotal + each size ]).
+		+ ((myClasses collect: [ :c | (c queryAllIncoming atScope: FamixTType) outOfParentUsing: FamixTNamespace ]) inject: 0 into: [ :subTotal :each | subTotal + each size ]).
 	^ interConnectivities / (2 * myClasses size * (allClasses size - myClasses size)) asFloat
 ]
 
@@ -182,7 +182,7 @@ FamixJavaNamespace >> distance [
 
 { #category : #accessing }
 FamixJavaNamespace >> distance: aNumber [
-	self privateState cacheAt: #distance put: aNumber
+	self cacheAt: #distance put: aNumber
 ]
 
 { #category : #'Famix-Extensions-metrics' }
@@ -192,12 +192,12 @@ FamixJavaNamespace >> efferentCoupling [
 	<FMProperty: #efferentCoupling type: #Number>
 	<derived>
 	<FMComment: 'Efferent coupling for a module is the number of classes it depends upon'>
-	^ ((self queryOutgoingDependencies outOfParentUsing: FamixTNamespace) atScope: FamixTType) size
+	^ ((self queryAllOutgoing outOfParentUsing: FamixTNamespace) atScope: FamixTType) size
 ]
 
 { #category : #'Famix-Extensions-metrics' }
 FamixJavaNamespace >> efferentCoupling: aNumber [
-	self privateState cacheAt: #efferentCoupling put: aNumber
+	self cacheAt: #efferentCoupling put: aNumber
 ]
 
 { #category : #'Famix-Extensions-metrics' }
@@ -217,7 +217,7 @@ FamixJavaNamespace >> instability [
 
 { #category : #'Famix-Extensions-metrics' }
 FamixJavaNamespace >> instability: aNumber [
-	self privateState cacheAt: #instability put: aNumber
+	self cacheAt: #instability put: aNumber
 ]
 
 { #category : #'Famix-Extensions-metrics' }
@@ -231,7 +231,7 @@ FamixJavaNamespace >> martinCohesion [
 	myClasses := self classes.
 	myClasses := myClasses union: (myClasses flatCollect: [ :c | c allRecursiveTypes ]).
 	myClasses size == 0 ifTrue: [ ^ nil ].
-	intraConnectivities := (myClasses collect: [ :c | (c queryOutgoingDependencies atScope: FamixTType) withoutSelfLoops withinParentUsing: FamixTNamespace ]) inject: 0 into: [ :subTotal :each | subTotal + each size ].
+	intraConnectivities := (myClasses collect: [ :c | (c queryAllOutgoing atScope: FamixTType) withoutSelfLoops withinParentUsing: FamixTNamespace ]) inject: 0 into: [ :subTotal :each | subTotal + each size ].
 	^ ((intraConnectivities + 1) / myClasses size) asFloat
 ]
 
@@ -263,12 +263,12 @@ FamixJavaNamespace >> numberOfAttributes [
 
 { #category : #'Famix-Extensions' }
 FamixJavaNamespace >> numberOfAttributes: aNumber [
-	self privateState cacheAt: #numberOfAttributes put: aNumber
+	self cacheAt: #numberOfAttributes put: aNumber
 ]
 
 { #category : #'Famix-Extensions' }
 FamixJavaNamespace >> numberOfClasses: aNumber [
-	self privateState cacheAt: #numberOfClasses put: aNumber
+	self cacheAt: #numberOfClasses put: aNumber
 ]
 
 { #category : #accessing }
@@ -284,7 +284,7 @@ FamixJavaNamespace >> numberOfMethods [
 
 { #category : #accessing }
 FamixJavaNamespace >> numberOfMethods: aNumber [
-	self privateState cacheAt: #numberOfMethods put: aNumber
+	self cacheAt: #numberOfMethods put: aNumber
 ]
 
 { #category : #'Famix-Extensions-metrics' }
@@ -300,7 +300,7 @@ FamixJavaNamespace >> numberOfNonInterfacesClasses [
 
 { #category : #'Famix-Extensions-metrics' }
 FamixJavaNamespace >> numberOfNonInterfacesClasses: aNumber [
-	self privateState cacheAt: #numberOfNonInterfacesClasses put: aNumber
+	self cacheAt: #numberOfNonInterfacesClasses put: aNumber
 ]
 
 { #category : #accessing }
@@ -324,7 +324,7 @@ FamixJavaNamespace >> parentNamespace: anObject [
 FamixJavaNamespace >> parentNamespaceGroup [
 	<generated>
 	<navigation: 'ParentNamespace'>
-	^ MooseGroup with: self parentNamespace
+	^ MooseSpecializedGroup with: self parentNamespace
 ]
 
 { #category : #printing }

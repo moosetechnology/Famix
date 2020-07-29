@@ -51,7 +51,7 @@ FamixStNamespace >> mooseNameOn: aStream [
 
 { #category : #'Famix-Extensions' }
 FamixStNamespace >> numberOfClasses: aNumber [
-	self privateState cacheAt: #numberOfClasses put: aNumber
+	self cacheAt: #numberOfClasses put: aNumber
 ]
 
 { #category : #'Famix-Extensions' }
@@ -67,5 +67,5 @@ FamixStNamespace >> numberOfMethods [
 
 { #category : #'Famix-Extensions' }
 FamixStNamespace >> numberOfMethods: aNumber [
-	self privateState cacheAt: #numberOfMethods put: aNumber
+	self cacheAt: #numberOfMethods put: aNumber
 ]

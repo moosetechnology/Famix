@@ -6,8 +6,7 @@ FamixMetamodelBuilder >> beForTesting [
 	self environment: (FmxMBRingEnvironment for: self).
 	self configuration
 		prefix: 'Tst';
-		packageName: 'Tst';
-		mooseModelName: 'TstModel'.
+		packageName: 'Tst'.
 	^ self
 ]
 

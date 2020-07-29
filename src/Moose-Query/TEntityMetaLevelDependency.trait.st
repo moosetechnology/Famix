@@ -1,16 +1,67 @@
 "
-This trait provides a common, paradigm agnostic vocabulary to query dependencies of named entities at meta level.
+Description
+--------------------
 
-It relies on associations having the trait TAssociationMetaLevelDependency.
+This trait provides a common, paradigm agnostic vocabulary to query dependencies of software entities.
+
+It includes some generic way to query an entity via its associations. The API offer the possibility to query an entity with three parameters:
+- The direction of the navigation (Incoming/Outgoing -- in/out)
+- The kind of association (FAMIXAcces, FAMIXReference, all...)
+- The scope of the query (The receiver, the receiver and its children)
+
+The actual core of the algorithms are in MooseQueryCalculator class.
+
+Most  of the generic methods takes a symbol to describe the direction. This symbol will be used to find a MooseQueryAbstactDirectionStrategy to configure a MooseQueryCalculator.
 
 For more informations: https://moosequery.ferlicot.fr/
+
+Public API and Key Messages
+--------------------
+
+- #query: aSymbol with: aFAMIXAssociation 				Looks for the associations of the kind aFAMIXAssociation in the direction described by the symbol in the receiver and its children.
+- #queryLocal: aSymbol with: aFAMIXAssociation 		Looks for the associations of the kind aFAMIXAssociation in the direction described by the symbol in the receiver.
+- #queryAll: aSymbol 									Looks for the associations in the direction described by the symbol in the receiver and its children.
+
+There is a lot of other generic queries. You can find all of them in the ""moose-queries-generic"" protocol.
+
+Examples
+--------------------
+
+	aFAMIXClass query: #in with: FAMIXInheritance.
+		--> Will return a MooseIncomingQueryResult containing the FAMIXInheritance associations having aFAMIXClass or its children as target
+			
+	aFAMIXMethod query: #out with: FAMIXAccess.
+		--> Will return a MooseOutgoingQueryResult containing the FAMIXAccess associations having aFAMIXMethod or its children as source
+	
+	
+	aFAMIXClass queryLocal: #in with: FAMIXInheritance.
+		--> Will return a MooseIncomingQueryResult containing the FAMIXInheritance associations having aFAMIXClass as target
+	
+	aFAMIXMethod queryLocal: #out with: FAMIXAccess.
+		--> Will return a MooseOutgoingQueryResult containing the FAMIXAccess associations having aFAMIXMethod as source		
+	
+			
+	aFAMIXClass queryAll: #in.
+		--> Will return a MooseIncomingQueryResult containing the FAMIXAssociation having aFAMIXClass or its children as target
+	
+	aFAMIXMethod queryAll: #out.
+		--> Will return a MooseOutgoingQueryResult containing the FAMIXAssociation having aFAMIXMethod or its children as source
+	
+		
+	aFAMIXClass queryAllLocal: #in.
+		--> Will return a MooseIncomingQueryResult containing the FAMIXAssociation having aFAMIXClass as target
+	
+	aFAMIXMethod queryAllLocal: #out.
+		--> Will return a MooseOutgoingQueryResult containing the FAMIXAssociation having aFAMIXMethod as source
+
+
 "
 Trait {
 	#name : #TEntityMetaLevelDependency,
 	#category : #'Moose-Query-Traits'
 }
 
-{ #category : #new }
+{ #category : #accessing }
 TEntityMetaLevelDependency classSide >> allChildrenTypesIn: aMetamodel [
 
 	^ aMetamodel additionalProperty: #allChildrenTypes for: self ifAbsentPut: [ self privateAllChildrenTypesIn: aMetamodel ]
@@ -60,18 +111,6 @@ TEntityMetaLevelDependency classSide >> childrenTypesIn: aMetamodel [
 ]
 
 { #category : #accessing }
-TEntityMetaLevelDependency classSide >> dependencyFM3PropertyDescriptionIn: aMetamodel [
-	"finds in aMetamodel all properties that are associations or declared dependencies,
-	 (obviously aMetamodel should contain the class self)"
-	aMetamodel ifNil: [ ^ OrderedCollection new ].
-	^ (self allDeclaredPropertiesIn: aMetamodel)
-		select: [ :e | e hasOpposite and: [ 
-				(e opposite isSource or:
-				[ e opposite isTarget ]) or:
-					[ e isDependencySource or: [e isDependencyTarget] ] ] ]
-]
-
-{ #category : #accessing }
 TEntityMetaLevelDependency classSide >> incomingAssociationTypesIn: aMetamodel [
 
 	^ aMetamodel additionalProperty: #incomingAssociationTypes for: self ifAbsentPut: [ self privateIncomingAssociationTypesIn: aMetamodel ]
@@ -82,9 +121,7 @@ TEntityMetaLevelDependency classSide >> incomingAssociationTypesIn: aMetamodel [
 TEntityMetaLevelDependency classSide >> incomingMSEPropertiesIn: aMetamodel [
 	"computes all properties that are target of association for self (a class) belonging to aMetamodel"
 
-	self flag: 'For non-association properties that we would like to be dependencies I think it should return the opposite of the non-association properties since we are in the incoming case'.
 	^ aMetamodel additionalProperty: #incomingMSEProperties for: self ifAbsentPut: [ self privateIncomingMSEPropertiesIn: aMetamodel ]
-	
 ]
 
 { #category : #accessing }
@@ -115,7 +152,7 @@ TEntityMetaLevelDependency classSide >> parentTypesIn: aMetamodel [
 	
 ]
 
-{ #category : #new }
+{ #category : #private }
 TEntityMetaLevelDependency classSide >> privateAllChildrenTypesIn: aMetamodel [
 	"Instead of checking if we are using TEntityMetaLevolDependency it would be better to implement #childrenTypesIn: on Trait, but it is currently impossible because all methods whose selector is present in Trait, Class, Behavior are not copied to users. If we denife the method on Trait then the one of TEntityMetaLevelDependency will not be present in the users."
 
@@ -124,7 +161,7 @@ TEntityMetaLevelDependency classSide >> privateAllChildrenTypesIn: aMetamodel [
 		as: Set) asOrderedCollection
 ]
 
-{ #category : #accessing }
+{ #category : #private }
 TEntityMetaLevelDependency classSide >> privateAllIncomingAssociationTypesIn: aMetamodel [
    ^ (((self allChildrenTypesIn: aMetamodel) flatCollectAsSet: [:each | each implementingClassesIn: aMetamodel ])
 		flatCollectAsSet: [ :each | each incomingAssociationTypesIn: aMetamodel])
@@ -132,7 +169,7 @@ TEntityMetaLevelDependency classSide >> privateAllIncomingAssociationTypesIn: aM
        yourself
 ]
 
-{ #category : #accessing }
+{ #category : #private }
 TEntityMetaLevelDependency classSide >> privateAllOutgoingAssociationTypesIn: aMetamodel [
    ^ (((self allChildrenTypesIn: aMetamodel) flatCollectAsSet: [:each | each implementingClassesIn: aMetamodel ])
 		flatCollectAsSet: [ :each | each outgoingAssociationTypesIn: aMetamodel])
@@ -140,7 +177,7 @@ TEntityMetaLevelDependency classSide >> privateAllOutgoingAssociationTypesIn: aM
        yourself
 ]
 
-{ #category : #accessing }
+{ #category : #private }
 TEntityMetaLevelDependency classSide >> privateAllParentTypesIn: aMetamodel [
 	"Instead of checking if we are using TEntityMetaLevolDependency it would be better to implement #parentTypesIn: on Trait, but it is currently impossible because all methods whose selector is present in Trait, Class, Behavior are not copied to users. If we denife the method on Trait then the one of TEntityMetaLevelDependency will not be present in the users."
 
@@ -149,12 +186,12 @@ TEntityMetaLevelDependency classSide >> privateAllParentTypesIn: aMetamodel [
 		as: Set) asOrderedCollection
 ]
 
-{ #category : #accessing }
+{ #category : #private }
 TEntityMetaLevelDependency classSide >> privateChildrenSelectorsIn: aMetamodel [
 	^ (self allDeclaredPropertiesIn: aMetamodel) select: #isChildrenProperty thenCollect: #implementingSelector
 ]
 
-{ #category : #new }
+{ #category : #private }
 TEntityMetaLevelDependency classSide >> privateChildrenTypesIn: aMetamodel [
 	| childrenImplementingClasses childrenUsers |
 	childrenImplementingClasses := ((self allDeclaredPropertiesIn: aMetamodel) select: #isChildrenProperty) collect: #implementingType.
@@ -164,49 +201,54 @@ TEntityMetaLevelDependency classSide >> privateChildrenTypesIn: aMetamodel [
 	^ (childrenImplementingClasses , childrenUsers flatCollect: #withAllSubclasses as: Set) asArray	"<== This could later be #removeDuplicates but it is currently broken on arrays. See https://github.com/pharo-project/pharo/issues/4850"
 ]
 
-{ #category : #new }
+{ #category : #private }
 TEntityMetaLevelDependency classSide >> privateIncomingAssociationTypesIn: aMetamodel [
-	"collects all association for which self class is target
-	 Since #incomingMSEPropertiesIn: also returns declared dependencies, they must be rejected"
-	^ (self incomingMSEPropertiesIn: aMetamodel)
-		reject: #isDependencyTarget
-		thenCollect: #implementingType
+	"Collects all reified associations for which self class is target.
+	 
+	To find they, we select my properties who have an opposite which is a targer. 
+	We reject the properties that are source because a source with a target as opposite is not a reified dependency using and association."
+
+	^ ((self allDeclaredPropertiesIn: aMetamodel) select: [ :p | p hasOpposite and: [ p opposite isTarget and: [ p isSource not ] ] ]) collect: #implementingType
 ]
 
-{ #category : #new }
+{ #category : #private }
 TEntityMetaLevelDependency classSide >> privateIncomingMSEPropertiesIn: aMetamodel [
-	^(self dependencyFM3PropertyDescriptionIn: aMetamodel)
-		select: [ :p |
-			p opposite isTarget or:
-			[ p isDependencyTarget ]
-		]
+	"Collects all fame properties defining a incoming dependency to self.
+	 
+	We can have 2 cases:
+	- Refified dependencies. In that case I have a property with an opposite that is a target (and since the dependency is reified, I don't have a source myself)
+	- Non reified properties. In that case I have a property that is a target."
+
+	^ (self allDeclaredPropertiesIn: aMetamodel) select: [ :p | (p hasOpposite and: [ p opposite isTarget and: [ p isSource not ] ]) or: [ p isTarget ] ]
 ]
 
-{ #category : #new }
+{ #category : #private }
 TEntityMetaLevelDependency classSide >> privateOutgoingAssociationTypesIn: aMetamodel [
-	"collects all association for which self class is source
-	 Since #outgoingMSEPropertiesIn: also returns declared dependencies, they must be rejected"
-	^ (self outgoingMSEPropertiesIn: aMetamodel)
-		reject: #isDependencySource
-		thenCollect: #implementingType
+	"Collects all reified associations for which self class is source.
+	 
+	To find they, we select my properties who have an opposite which is a source. 
+	We reject the properties that are target because a target with a source as opposite is not a reified dependency using and association."
+
+	^ ((self allDeclaredPropertiesIn: aMetamodel) select: [ :p | p hasOpposite and: [ p opposite isSource and: [ p isTarget not ] ] ]) collect: #implementingType
 ]
 
-{ #category : #new }
+{ #category : #private }
 TEntityMetaLevelDependency classSide >> privateOutgoingMSEPropertiesIn: aMetamodel [
-	"computes all properties that are sources of association for self (a class) belonging to aMetamodel"
-	^(self dependencyFM3PropertyDescriptionIn: aMetamodel)
-		select: [ :p |
-			p opposite isSource or:
-			[ p isDependencySource ]
-		]
+	"Collects all fame properties defining a outgoing dependency to self.
+	 
+	We can have 2 cases:
+	- Refified dependencies. In that case I have a property with an opposite that is a source (and since the dependency is reified, I don't have a target myself)
+	- Non reified properties. In that case I have a property that is a source."
+
+	^ (self allDeclaredPropertiesIn: aMetamodel) select: [ :p | (p hasOpposite and: [ p opposite isSource and: [ p isTarget not ] ]) or: [ p isSource ] ]
 ]
 
-{ #category : #new }
+{ #category : #private }
 TEntityMetaLevelDependency classSide >> privateParentSelectorsIn: aMetamodel [
 	^ (self allDeclaredPropertiesIn: aMetamodel) select: #isContainer thenCollect: #implementingSelector
 ]
 
-{ #category : #new }
+{ #category : #private }
 TEntityMetaLevelDependency classSide >> privateParentTypesIn: aMetamodel [
 	| containerImplementingClasses containerUsers |
 	containerImplementingClasses := (self allDeclaredPropertiesIn: aMetamodel)
@@ -241,22 +283,7 @@ TEntityMetaLevelDependency >> addAllParentsIn: aCollection [
 TEntityMetaLevelDependency >> allAtAnyScope: aCollectionOfFamixClasses [
 	"I am used to return all the encountered entities (recursively) at matching one of the class scope given as parameter that are up in the containment tree of the metamodel"
 
-	^ (self allAtAnyScope: aCollectionOfFamixClasses in: OrderedCollection new) asSet asArray
-]
-
-{ #category : #private }
-TEntityMetaLevelDependency >> allAtAnyScope: aCollectionOfFamixClasses in: aCollection [
-	^ self allAtAnyScope: aCollectionOfFamixClasses in: aCollection until: [ :a | false ]
-]
-
-{ #category : #private }
-TEntityMetaLevelDependency >> allAtAnyScope: aCollectionOfFamixClasses in: aCollection until: rejectBlock [
-	| selectors |
-	(aCollectionOfFamixClasses anySatisfy: [ :aFAMIXClass | self isOfType: aFAMIXClass ]) ifTrue: [ aCollection add: self ].
-	(rejectBlock value: self)
-		ifFalse: [ 1 to: (selectors := self parentSelectors) size do: [ :ind | (self perform: (selectors at: ind)) allAtAnyScope: aCollectionOfFamixClasses in: aCollection until: rejectBlock ] ].
-
-	^ aCollection
+	^ self query ancestors recursively ofAnyType: aCollectionOfFamixClasses
 ]
 
 { #category : #scoping }
@@ -264,31 +291,14 @@ TEntityMetaLevelDependency >> allAtAnyScope: aCollectionOfFamixClasses until: re
 	"I am used to return all the encountered entities (recursively) at matching one of the class scope given as parameter that are up in the containment tree of the metamodel.
 	I stop the recursion when the rejectBlock is true"
 
-	^ (self allAtAnyScope: aCollectionOfFamixClasses in: OrderedCollection new until: rejectBlock ) asSet asArray
+	^ (self query ancestors recursively until: rejectBlock) ofAnyType: aCollectionOfFamixClasses
 ]
 
 { #category : #scoping }
 TEntityMetaLevelDependency >> allAtScope: aClassFAMIX [
 	"I am used to return all the entities at a given famix class scope that are up in the containment tree of the metamodel on multiple levels."
 
-	self flag: #todo.	"I think we do not need the #asArray cast but it will break tests. I will probably let it now then change the tests later. Step by step."
-	^ (self allAtScope: aClassFAMIX in: OrderedCollection new) asSet asArray
-]
-
-{ #category : #private }
-TEntityMetaLevelDependency >> allAtScope: aClassFAMIX in: aCollection [
-	^ self allAtScope: aClassFAMIX in: aCollection until: [ :a | false ]
-]
-
-{ #category : #private }
-TEntityMetaLevelDependency >> allAtScope: aClassFAMIX in: aCollection until: rejectBlock [
-	| selectors |
-	(self isOfType: aClassFAMIX) ifTrue: [ aCollection add: self ].
-
-	"The content of this block could be much more readable with #do: but we do this solution for performances... We need this method to be really really performant."
-	(rejectBlock value: self) ifFalse: [ 1 to: (selectors := self parentSelectors) size do: [ :ind | (self perform: (selectors at: ind)) allAtScope: aClassFAMIX in: aCollection until: rejectBlock ] ].
-
-	^ aCollection
+	^ self query ancestors recursively ofType: aClassFAMIX
 ]
 
 { #category : #scoping }
@@ -296,7 +306,7 @@ TEntityMetaLevelDependency >> allAtScope: aClassFAMIX until: rejectBlock [
 	"I am used to return all the entities at a given famix class scope that are up in the containment tree of the metamodel on multiple levels.
 	I stop the recursion when the rejectBlock is true."
 
-	^ (self allAtScope: aClassFAMIX in: OrderedCollection new until: rejectBlock) asSet asArray
+	^ (self query ancestors recursively until: rejectBlock) ofType: aClassFAMIX
 ]
 
 { #category : #accessing }
@@ -313,12 +323,14 @@ TEntityMetaLevelDependency >> allChildrenTypes [
 
 { #category : #accessing }
 TEntityMetaLevelDependency >> allClients [
-	^ self allClientsAtScope: self class
+	^ self lookUpPropertyNamed: #allClients computedAs: [ self allClientsAtScope: self class ]
 ]
 
 { #category : #accessing }
 TEntityMetaLevelDependency >> allClientsAtScope: aClass [
-	^ self queryIncomingDependencies withoutSelfLoops atScope: aClass withNonMatchingEntitiesDo: [ :entities :res | entities ifNotNil: [ res addAll: entities asCollection ] ]
+	^ self queryAllIncoming withoutSelfLoops
+		atScope: aClass
+		withNonMatchingEntitiesDo: [ :entities :res | entities ifNotNil: [ res addAll: entities asCollection ] ]
 ]
 
 { #category : #accessing }
@@ -346,34 +358,21 @@ TEntityMetaLevelDependency >> allParents [
 
 { #category : #accessing }
 TEntityMetaLevelDependency >> allProviders [
-	^ self allProvidersAtScope: self class
+	^ self lookUpPropertyNamed: #allProvidiers computedAs: [ self allProvidersAtScope: self class ]
 ]
 
 { #category : #accessing }
 TEntityMetaLevelDependency >> allProvidersAtScope: aClass [
-	^ self queryOutgoingDependencies withoutSelfLoops atScope: aClass withNonMatchingEntitiesDo: [ :entities :res | entities ifNotNil: [ res addAll: entities asCollection ] ]
+	^ self queryAllOutgoing withoutSelfLoops
+		atScope: aClass
+		withNonMatchingEntitiesDo: [ :entities :res | entities ifNotNil: [ res addAll: entities asCollection ] ]
 ]
 
 { #category : #scoping }
 TEntityMetaLevelDependency >> allToAnyScope: aCollectionOfFamixClasses [
 	"I am used to return all the encountered entities (recursively) at matching one of the class scope given as parameter that are down in the containment tree of the metamodel"
 
-	^ (self allToAnyScope: aCollectionOfFamixClasses in: OrderedCollection new) asSet asArray
-]
-
-{ #category : #private }
-TEntityMetaLevelDependency >> allToAnyScope: aCollectionOfFamixClasses in: aCollection [
-	^ self allToAnyScope: aCollectionOfFamixClasses in: aCollection until: [ :a | false ]
-]
-
-{ #category : #private }
-TEntityMetaLevelDependency >> allToAnyScope: aCollectionOfFamixClasses in: aCollection until: rejectBlock [
-	| selectors |
-	(aCollectionOfFamixClasses anySatisfy: [ :aFAMIXClass | self isOfType: aFAMIXClass ]) ifTrue: [ aCollection add: self ].
-
-	(rejectBlock value: self) ifFalse: [ 1 to: (selectors := self childrenSelectors) size do: [ :ind | (self perform: (selectors at: ind)) allToAnyScope: aCollectionOfFamixClasses in: aCollection  until: rejectBlock ] ].
-
-	^ aCollection
+	^ self query descendants recursively ofAnyType: aCollectionOfFamixClasses
 ]
 
 { #category : #scoping }
@@ -381,31 +380,14 @@ TEntityMetaLevelDependency >> allToAnyScope: aCollectionOfFamixClasses until: re
 	"I am used to return all the encountered entities (recursively) at matching one of the class scope given as parameter that are down in the containment tree of the metamodel
 	I stop the recursion when the rejectBlock is true"
 
-	^ (self allToAnyScope: aCollectionOfFamixClasses in: OrderedCollection new until: rejectBlock) asSet asArray
+	^ (self query descendants recursively until: rejectBlock) ofAnyType: aCollectionOfFamixClasses
 ]
 
 { #category : #scoping }
 TEntityMetaLevelDependency >> allToScope: aClassFAMIX [
 	"I am used to return all the entities at a given famix class scope that are down in the containment tree of the metamodel on multiple levels."
 
-	self flag: #todo.	"I think we do not need the #asArray cast but it will break tests. I will probably let it now then change the tests later. Step by step."
-	^ (self allToScope: aClassFAMIX in: OrderedCollection new) asSet asArray
-]
-
-{ #category : #private }
-TEntityMetaLevelDependency >> allToScope: aClassFAMIX in: aCollection [
-	^ self allToScope: aClassFAMIX in: aCollection until: [ :a | false ]
-]
-
-{ #category : #private }
-TEntityMetaLevelDependency >> allToScope: aClassFAMIX in: aCollection until: rejectBlock [
-	| selectors |
-	(self isOfType: aClassFAMIX) ifTrue: [ aCollection add: self ].
-
-	"The content of this block could be much more readable with #do: but we do this solution for performances... We need this method to be really really performant."
-	(rejectBlock value: self) ifFalse: [ 1 to: (selectors := self childrenSelectors) size do: [ :ind | (self perform: (selectors at: ind)) allToScope: aClassFAMIX in: aCollection until: rejectBlock ] ].
-
-	^ aCollection
+	^ self query descendants recursively ofType: aClassFAMIX
 ]
 
 { #category : #scoping }
@@ -413,34 +395,14 @@ TEntityMetaLevelDependency >> allToScope: aClassFAMIX until: rejectBlock [
 	"I am used to return all the entities at a given famix class scope that are down in the containment tree of the metamodel on multiple levels.
 	I stop the recursion when the rejectBlock is true"
 
-	self flag: #todo.	"I think we do not need the #asArray cast but it will break tests. I will probably let it now then change the tests later. Step by step."
-	^ (self allToScope: aClassFAMIX in: OrderedCollection new until: rejectBlock) asSet asArray
+	^ (self query descendants recursively until: rejectBlock) ofType: aClassFAMIX
 ]
 
 { #category : #scoping }
 TEntityMetaLevelDependency >> allWithAnyScope: aCollectionOfFamixClasses [
 	"I am used to return all the entities (recursively) matching one of the class scope that are up or down in the containment tree of the metamodel"
 
-	^ (self allWithAnyScope: aCollectionOfFamixClasses in: OrderedCollection new) asSet
-]
-
-{ #category : #private }
-TEntityMetaLevelDependency >> allWithAnyScope: aCollectionOfFamixClasses in: aCollection [
-	^ self allWithAnyScope: aCollectionOfFamixClasses in: aCollection until: [ :a | false ]
-]
-
-{ #category : #private }
-TEntityMetaLevelDependency >> allWithAnyScope: aCollectionOfFamixClasses in: aCollection until: rejectBlock [
-	(aCollectionOfFamixClasses anySatisfy: [ :aFAMIXClass | self class traits includes: aFAMIXClass ])
-		ifTrue: [ self allToAnyScope: aCollectionOfFamixClasses in: aCollection until: rejectBlock ].
-
-	self allParentTypes
-		detect: [ :class | aCollectionOfFamixClasses anySatisfy: [ :aFAMIXClass | aFAMIXClass = class ] ]
-		ifFound: [ self allAtAnyScope: aCollectionOfFamixClasses in: aCollection until: rejectBlock ].
-	self allChildrenTypes
-		detect: [ :class | aCollectionOfFamixClasses anySatisfy: [ :aFAMIXClass | aFAMIXClass = class ] ]
-		ifFound: [ self allToAnyScope: aCollectionOfFamixClasses in: aCollection until: rejectBlock ].
-	^ aCollection
+	^ self query lineage recursively ofAnyType: aCollectionOfFamixClasses
 ]
 
 { #category : #scoping }
@@ -448,29 +410,14 @@ TEntityMetaLevelDependency >> allWithAnyScope: aCollectionOfFamixClasses until: 
 	"I am used to return all the entities (recursively) matching one of the class scope that are up or down in the containment tree of the metamodel.
 	I stop the recursion when the rejectBlock is true"
 
-	^ (self allWithAnyScope: aCollectionOfFamixClasses in: OrderedCollection new until: rejectBlock) asSet
+	^ (self query lineage recursively until: rejectBlock) ofAnyType: aCollectionOfFamixClasses
 ]
 
 { #category : #scoping }
 TEntityMetaLevelDependency >> allWithScope: aClassFAMIX [
 	"I am used to return all the entities at a given famix class scope that are up or down in the containment tree of the metamodel on multiple levels."
 
-	^ (self allWithScope: aClassFAMIX in: OrderedCollection new) asSet
-]
-
-{ #category : #private }
-TEntityMetaLevelDependency >> allWithScope: aClassFAMIX in: aCollection [
-	^ self allWithScope: aClassFAMIX in: aCollection until: [ :a | false ]
-]
-
-{ #category : #private }
-TEntityMetaLevelDependency >> allWithScope: aClassFAMIX in: aCollection until: rejectBlock [
-
-	(self class traits includes: aClassFAMIX) ifTrue: [ self allToScope: aClassFAMIX in: aCollection until: rejectBlock ].
-
-	self allParentTypes detect: [ :class | aClassFAMIX = class ] ifFound: [ self allAtScope: aClassFAMIX in: aCollection until: rejectBlock ].
-	self allChildrenTypes detect: [ :class | aClassFAMIX = class ] ifFound: [ self allToScope: aClassFAMIX in: aCollection until: rejectBlock ].
-	^ aCollection
+	^ self query lineage recursively ofType: aClassFAMIX
 ]
 
 { #category : #scoping }
@@ -478,29 +425,14 @@ TEntityMetaLevelDependency >> allWithScope: aClassFAMIX until: rejectBlock [
 	"I am used to return all the entities at a given famix class scope that are up or down in the containment tree of the metamodel on multiple levels.
 	I stop the recursion when the rejectBlock is true"
 
-	^ (self allWithScope: aClassFAMIX in: OrderedCollection new until: rejectBlock) asSet
+	^ (self query lineage recursively until: rejectBlock) ofType: aClassFAMIX
 ]
 
 { #category : #scoping }
 TEntityMetaLevelDependency >> atAnyScope: aCollectionOfFamixClasses [
 	"I am used to return all the first encountered entities matching one of the class scope given as parameter that are up in the containment tree of the metamodel"
 
-	^ (self atAnyScope: aCollectionOfFamixClasses in: OrderedCollection new) asSet asArray
-]
-
-{ #category : #private }
-TEntityMetaLevelDependency >> atAnyScope: aCollectionOfFamixScopes in: aCollection [
-	^ self atAnyScope: aCollectionOfFamixScopes in: aCollection until: [ :a | false ]
-]
-
-{ #category : #private }
-TEntityMetaLevelDependency >> atAnyScope: aCollectionOfFamixScopes in: aCollection until: rejectBlock [
-	(aCollectionOfFamixScopes anySatisfy: [ :aClassFAMIX | self isOfType: aClassFAMIX ])
-		ifTrue: [ aCollection add: self ]
-		ifFalse: [ "The content of this block could be much more readable with #do: but we do this solution for performances... We need this method to be really really performant."
-			| selectors |
-			(rejectBlock value: self) ifFalse: [ 1 to: (selectors := self parentSelectors) size do: [ :ind | (self perform: (selectors at: ind)) atAnyScope: aCollectionOfFamixScopes in: aCollection  until: rejectBlock ] ] ].
-	^ aCollection
+	^ self query ancestors ofAnyType: aCollectionOfFamixClasses
 ]
 
 { #category : #scoping }
@@ -508,30 +440,14 @@ TEntityMetaLevelDependency >> atAnyScope: aCollectionOfFamixClasses until: rejec
 	"I am used to return all the first encountered entities matching one of the class scope given as parameter that are up in the containment tree of the metamodel.
 	I stop the recursion when the rejectBlock is true"
 
-	^ (self atAnyScope: aCollectionOfFamixClasses in: OrderedCollection new until: rejectBlock) asSet asArray
+	^ (self query ancestors until: rejectBlock) ofAnyType: aCollectionOfFamixClasses
 ]
 
 { #category : #scoping }
 TEntityMetaLevelDependency >> atScope: aClassFAMIX [
 	"I am used to return all the first encountered entities at a given famix class scope that are up in the containment tree of the metamodel"
 
-	self flag: #todo.	"I think we do not need the #asArray cast but it will break tests. I will probably let it now then change the tests later. Step by step."
-	^ (self atScope: aClassFAMIX in: OrderedCollection new) asSet asArray
-]
-
-{ #category : #private }
-TEntityMetaLevelDependency >> atScope: aClassFAMIX in: aCollection [
-	^ self atScope: aClassFAMIX in: aCollection until: [ :a | false ]
-]
-
-{ #category : #private }
-TEntityMetaLevelDependency >> atScope: aClassFAMIX in: aCollection until: rejectBlock [
-	(self isOfType: aClassFAMIX)
-		ifTrue: [ aCollection add: self ]
-		ifFalse: [ "The content of this block could be much more readable with #do: but we do this solution for performances... We need this method to be really really performant."
-			| selectors |
-			(rejectBlock value: self) ifFalse: [ 1 to: (selectors := self parentSelectors) size do: [ :ind | (self perform: (selectors at: ind)) atScope: aClassFAMIX in: aCollection  until: rejectBlock ] ] ].
-	^ aCollection
+	^ self query ancestors ofType: aClassFAMIX
 ]
 
 { #category : #scoping }
@@ -539,8 +455,7 @@ TEntityMetaLevelDependency >> atScope: aClassFAMIX until: rejectBlock [
 	"I am used to return all the first encountered entities at a given famix class scope that are up in the containment tree of the metamodel.
 	I stop the recursion when the rejectBlock is true"
 
-	self flag: #todo.	"I think we do not need the #asArray cast but it will break tests. I will probably let it now then change the tests later. Step by step."
-	^ (self atScope: aClassFAMIX in: OrderedCollection new until: rejectBlock) asSet asArray
+	^ (self query ancestors until: rejectBlock) ofType: aClassFAMIX
 ]
 
 { #category : #deprecated }
@@ -578,8 +493,197 @@ TEntityMetaLevelDependency >> childrenTypes [
 ]
 
 { #category : #accessing }
-TEntityMetaLevelDependency >> dependencyFM3PropertyDescription [
-	^ self class dependencyFM3PropertyDescriptionIn: self metamodel
+TEntityMetaLevelDependency >> fanIn [
+	<FMProperty: #fanIn type: #Number>
+	<derived>
+	<FMComment: 'Number of incoming links'>
+	^ self allClients size
+]
+
+{ #category : #accessing }
+TEntityMetaLevelDependency >> fanOut [
+	<FMProperty: #fanOut type: #Number>
+	<derived>
+	<FMComment: 'Number of provider classes'>
+	^ self allProviders size
+]
+
+{ #category : #testing }
+TEntityMetaLevelDependency >> has: anInOutSymbol [
+	"Check the incoming or outgoing associations of the receiver or its children.
+
+	Example:
+		aFAMIXClass has: #in.
+			--> Will return trye if aFAMIXMethod has the incoming FAMIXAssociation 
+		aFAMIXMethod has: #out.
+			--> Will return true if aFAMIXMethod has the outgoing FAMIXAssociation
+	"
+
+	^ (self query navigation: anInOutSymbol) has dependencies
+]
+
+{ #category : #testing }
+TEntityMetaLevelDependency >> has: anInOutSymbol with: aFAMIXClassAssociation [
+	"Query all the incoming or outgoing associations of the FAMIXClassAssociation class for the receiver and its children.
+
+	Example:
+		aFAMIXClass query: #in with: FAMIXInheritance.
+			--> Will return a MooseIncomingQueryResult containing the FAMIXInheritance associations having aFAMIXClass or its children as target
+		aFAMIXMethod query: #out with: FAMIXAccess.
+			--> Will return a MooseOutgoingQueryResult containing the FAMIXAccess associations having aFAMIXMethod or its children as source
+	"
+
+	^ (self query navigation: anInOutSymbol) has dependenciesOfType: aFAMIXClassAssociation
+]
+
+{ #category : #testing }
+TEntityMetaLevelDependency >> hasIncoming [
+	"Checks for incoming associations of the receiver and its children.
+
+	Example:
+		aFAMIXClass hasIncoming.
+			--> --> Will return true if the receiver or its children have incoming associations
+	"
+
+	^ self query has incoming dependencies
+]
+
+{ #category : #testing }
+TEntityMetaLevelDependency >> hasIncoming: aFAMIXClassAssociation [
+	"Checks for incoming associations of the FAMIXClassAssociation class for the receiver and its children.
+	
+	Example:
+		aFAMIXClass hasIncoming: FAMIXInheritance.
+			--> Will return true if aFAMIXClassAssociation has incoming associations of the FAMIXClassAssociation class for the receiver or its children.
+	"
+
+	^ self query has incoming dependenciesOfType: aFAMIXClassAssociation
+]
+
+{ #category : #testing }
+TEntityMetaLevelDependency >> hasIncomingDependencies [
+	"Associations + typeDeclaractions"
+
+	^ self hasIncoming or: [ self hasIncomingTypeDeclarations ]
+]
+
+{ #category : #testing }
+TEntityMetaLevelDependency >> hasIncomingTypeDeclarations [
+	"This method could be more readable but it needs to be really performant"
+
+	| selectors |
+	1 to: (selectors := self childrenSelectors) size do: [ :index | 
+		(self perform: (selectors at: index))
+			ifNotNil: [ :children | 
+				| coll |
+				1 to: (coll := children asCollection) size do: [ :i | ((coll at: i) hasIncomingTypeDeclarations) ifTrue: [ ^ true ]  ] ] ].
+	 ^ self entityHasIncomingTypeDeclarations.
+]
+
+{ #category : #testing }
+TEntityMetaLevelDependency >> hasLocal: anInOutSymbol [
+	"Check the incoming or outgoing associations of the receiver.
+
+	Example:
+		aFAMIXClass hasLocal: #in.
+			--> Will return trye if aFAMIXMethod has the incoming FAMIXAssociation 
+		aFAMIXMethod hasLocal: #out.
+			--> Will return true if aFAMIXMethod has the outgoing FAMIXAssociation
+	"
+
+	^ (self query navigation: anInOutSymbol) has local dependencies
+]
+
+{ #category : #testing }
+TEntityMetaLevelDependency >> hasLocalIncoming [
+	"Check the incoming or outgoing associations of the receiver.
+
+	Example:
+		aFAMIXClass hasLocalIncoming
+			--> Will return true if aFAMIXMethod has the incoming FAMIXAssociation 
+			"
+
+	^ self query has local incoming dependencies
+]
+
+{ #category : #testing }
+TEntityMetaLevelDependency >> hasLocalIncoming: aFAMIXClassAssociation [
+	"Checks for incoming associations of the FAMIXClassAssociation class for the receiver
+	
+	Example:
+		aFAMIXClass hasIncoming: FAMIXInheritance.
+			--> Will return true if aFAMIXClassAssociation has incoming associations of the FAMIXClassAssociation class for the receiver.
+	"
+
+	^ self query has local incoming dependenciesOfType: aFAMIXClassAssociation
+]
+
+{ #category : #testing }
+TEntityMetaLevelDependency >> hasLocalOutgoing [
+	"Checks for outgoing associations of the receiver.
+	
+	Example:
+		aFAMIXClass hasOutgoing
+			--> Will return true if the receiver has outgoingInvocation.
+	"
+
+	^ self query has local outgoing dependencies
+]
+
+{ #category : #testing }
+TEntityMetaLevelDependency >> hasLocalOutgoing: aFAMIXClassAssociation [
+	"Checks for outgoing associations of the FAMIXClassAssociation class for the receiver.
+	
+	Example:
+		aFAMIXClass hasIncoming: FAMIXInheritance.
+			--> Will return true if aFAMIXClassAssociation has incoming associations of the FAMIXClassAssociation class for the receiver.
+	"
+
+	^ self query has local outgoing dependenciesOfType: aFAMIXClassAssociation
+]
+
+{ #category : #testing }
+TEntityMetaLevelDependency >> hasOutgoing [
+	"Checks for outgoing associations of the receiver and its children.
+
+	Example:
+		aFAMIXClass hasOutgoing.
+			--> --> Will return true if the receiver or its children have outgoing associations
+	"
+
+	^ self query has outgoing dependencies
+]
+
+{ #category : #testing }
+TEntityMetaLevelDependency >> hasOutgoing: aFAMIXClassAssociation [
+	"Checks for outgoing associations of the FAMIXClassAssociation class for the receiver and its children.
+	
+	Example:
+		aFAMIXClass hasOutgoing: FAMIXInheritance.
+			--> Will return true if aFAMIXClassAssociation has outgoing associations of the FAMIXClassAssociation class for the receiver or its children.
+	"
+
+	^ self query has outgoing dependenciesOfType: aFAMIXClassAssociation
+]
+
+{ #category : #testing }
+TEntityMetaLevelDependency >> hasOutgoingDependencies [
+	"Associations + typeDeclaractions"
+
+	^ self hasOutgoing or: [ self hasOutgoingTypeDeclarations ]
+]
+
+{ #category : #testing }
+TEntityMetaLevelDependency >> hasOutgoingTypeDeclarations [
+	"This method could be more readable but it needs to be really performant"
+
+	| selectors |
+	1 to: (selectors := self childrenSelectors) size do: [ :index | 
+		(self perform: (selectors at: index))
+			ifNotNil: [ :children | 
+				| coll |
+				1 to: (coll := children asCollection) size do: [ :i | ((coll at: i) hasOutgoingTypeDeclarations) ifTrue: [ ^ true ]  ] ] ].
+	 ^ self entityHasOutgoingTypeDeclarations.
 ]
 
 { #category : #accessing }
@@ -598,10 +702,11 @@ TEntityMetaLevelDependency >> isIncludedIn: anEntity parentSelectorsCache: paren
 	
 	[ (model allUsing: TEntityMetaLevelDependency) collect: [ :e | e  queryIncomingDependencies withoutSelfLoops ] ] timeToRun."
 
+	| selectors |
 	self = anEntity ifTrue: [ ^ true ].
 
-	(parentSelectorsCache at: self class ifAbsentPut: [ self parentSelectors ])
-		do: [ :accessor | (self perform: accessor) ifNotNil: [ :parent | (parent isIncludedIn: anEntity parentSelectorsCache: parentSelectorsCache) ifTrue: [ ^ true ] ] ].
+	"Instead of #to:do: we could just use #do: but this implementation is much faster. Maybe sista will remove the needs of the todo later."
+	1 to: (selectors := parentSelectorsCache at: self class ifAbsentPut: [ self parentSelectors ]) size do: [ :ind | ((self perform: (selectors at: ind)) isIncludedIn: anEntity parentSelectorsCache: parentSelectorsCache) ifTrue: [ ^ true ] ].
 
 	^ false
 ]
@@ -648,26 +753,273 @@ TEntityMetaLevelDependency >> parentsDo: aBlock [
 	self parentSelectors do: [ :accessor | (self perform: accessor) ifNotNil: [ :r | aBlock value: r ] ]
 ]
 
+{ #category : #query }
+TEntityMetaLevelDependency >> query [
+	^ MooseQuery receiver: self
+]
+
+{ #category : #'query dependencies' }
+TEntityMetaLevelDependency >> query: anInOutSymbol with: aFAMIXClassAssociation [
+	"Query all the incoming or outgoing associations of the FAMIXClassAssociation class for the receiver and its children.
+
+	Example:
+		aFAMIXClass query: #in with: FAMIXInheritance.
+			--> Will return a MooseIncomingQueryResult containing the FAMIXInheritance associations having aFAMIXClass or its children as target
+		aFAMIXMethod query: #out with: FAMIXAccess.
+			--> Will return a MooseOutgoingQueryResult containing the FAMIXAccess associations having aFAMIXMethod or its children as source
+	"
+
+	^ (self query navigation: anInOutSymbol) dependenciesOfType: aFAMIXClassAssociation
+]
+
+{ #category : #'query dependencies' }
+TEntityMetaLevelDependency >> queryAll: anInOutSymbol [
+	"Query all the incoming or outgoing associations of the receiver or its children.
+
+	Example:
+		aFAMIXClass queryAll: #in.
+			--> Will return a MooseIncomingQueryResult containing the FAMIXAssociation having aFAMIXClass or its children as target
+		aFAMIXMethod queryAll: #out.
+			--> Will return a MooseOutgoingQueryResult containing the FAMIXAssociation having aFAMIXMethod or its children as source
+	"
+
+	^ (self query navigation: anInOutSymbol) dependencies
+]
+
+{ #category : #'query dependencies' }
+TEntityMetaLevelDependency >> queryAllIncoming [
+	"Query all the incoming associations of the receiver and its children.
+
+	Example:
+		aFAMIXClass queryAllIncoming.
+			--> Will return a MooseIncomingQueryResult containing the FAMIXAssociation having aFAMIXClass or its children as target
+	"
+
+	^ self query incoming dependencies
+]
+
+{ #category : #'query dependencies' }
+TEntityMetaLevelDependency >> queryAllLocal: anInOutSymbol [
+	"Query all the incoming or outgoing associations of the receiver.
+	This method differ from #queryAll: in the fact that it will not check the associations of the reicever's children.
+
+	Example:
+		aFAMIXClass queryAllLocal: #in.
+			--> Will return a MooseIncomingQueryResult containing the FAMIXAssociation having aFAMIXClass as target
+		aFAMIXMethod queryAllLocal: #out.
+			--> Will return a MooseOutgoingQueryResult containing the FAMIXAssociation having aFAMIXMethod as source
+	"
+
+	^ (self query navigation: anInOutSymbol) local dependencies
+]
+
+{ #category : #'query dependencies' }
+TEntityMetaLevelDependency >> queryAllLocalIncoming [
+	"Query all the incoming associations of the receiver.
+	This method differ from #queryAllIncoming in the fact that it will not check the associations of the reicever's children.
+
+	Example:
+		aFAMIXClass queryAllLocalIncoming.
+			--> Will return a MooseIncomingQueryResult containing the FAMIXAssociation having aFAMIXClass as target
+	"
+
+	^ self query incoming local dependencies
+]
+
+{ #category : #'query dependencies' }
+TEntityMetaLevelDependency >> queryAllLocalOutgoing [
+	"Query all the outgoing associations of the receiver.
+	This method differ from #queryAllOutgoing in the fact that it will not check the associations of the reicever's children.
+
+	Example:
+		aFAMIXClass queryAllLocalOutgoing.
+			--> Will return a MooseOutgoingQueryResult containing the FAMIXAssociation having aFAMIXClass as source
+	"
+
+	^ self query outgoing local dependencies
+]
+
+{ #category : #'query dependencies' }
+TEntityMetaLevelDependency >> queryAllOutgoing [
+	"Query all the outgoing associations of the receiver and its children.
+
+	Example:
+		aFAMIXClass queryAllOutgoing.
+			--> Will return a MooseOutgoingQueryResult containing the FAMIXAssociation having aFAMIXClass or its children as source
+	"
+
+	^ self query outgoing dependencies
+]
+
+{ #category : #'query dependencies' }
+TEntityMetaLevelDependency >> queryIncoming: aFAMIXClassAssociation [
+	"Query all the incoming associations of the FAMIXClassAssociation class for the receiver and its children.
+
+	Example:
+		aFAMIXClass queryIncoming: FAMIXInheritance.
+			--> Will return a MooseIncomingQueryResult containing the FAMIXInheritance associations having aFAMIXClass or its children as target
+	"
+
+	^ self query incoming dependenciesOfType: aFAMIXClassAssociation
+]
+
+{ #category : #'query dependencies' }
+TEntityMetaLevelDependency >> queryIncomingTypeDeclarations [
+	"This method should return the incoming type declarations that are not represented in FAMIX and that cannot be query by a generic algorithme.
+	
+	typeDeclaration is a virtual association that relates a structural entity (i.e. a variable) to its type."
+
+	^ MooseIncomingQueryResult on: self withAll: (self queryIncomingTypeDeclarationsIn: OrderedCollection new) asSet
+]
+
+{ #category : #'query dependencies' }
+TEntityMetaLevelDependency >> queryIncomingTypeDeclarationsIn: aCollection [
+	"This method could be more readable but it needs to be really performant"
+
+	| selectors |
+	1 to: (selectors := self childrenSelectors) size do: [ :index | 
+		(self perform: (selectors at: index))
+			ifNotNil: [ :children | 
+				| coll |
+				1 to: (coll := children asCollection) size do: [ :i | (coll at: i) queryIncomingTypeDeclarationsIn: aCollection ] ] ].
+	aCollection addAll: self incomingTypeDeclarations.
+	^ aCollection
+]
+
+{ #category : #'query dependencies' }
+TEntityMetaLevelDependency >> queryLocal: anInOutSymbol with: aFAMIXClassAssociation [
+	"Query all the incoming or outgoing associations of the FAMIXClassAssociation class for the receiver.
+	This method differ from #query:with: in the fact that it will not check the associations of the reicever's children.
+
+	Example:
+		aFAMIXClass queryLocal: #in with: FAMIXInheritance.
+			--> Will return a MooseIncomingQueryResult containing the FAMIXInheritance associations having aFAMIXClass as target
+		aFAMIXMethod queryLocal: #out with: FAMIXAccess.
+			--> Will return a MooseOutgoingQueryResult containing the FAMIXAccess associations having aFAMIXMethod as source
+	"
+
+	^ (self query navigation: anInOutSymbol) local dependenciesOfType: aFAMIXClassAssociation
+]
+
+{ #category : #'query dependencies' }
+TEntityMetaLevelDependency >> queryLocalIncoming: aFAMIXClassAssociation [
+	"Query all the incoming associations of the FAMIXClassAssociation class for the receiver.
+	This method differ from #queryIncoming: in the fact that it will not check the associations of the reicever's children.
+
+	Example:
+		aFAMIXClass queryLocalIncoming: FAMIXInheritance.
+			--> Will return a MooseIncomingQueryResult containing the FAMIXInheritance associations having aFAMIXClass as target
+	"
+
+	^ self query incoming local dependenciesOfType: aFAMIXClassAssociation
+]
+
+{ #category : #'query dependencies' }
+TEntityMetaLevelDependency >> queryLocalOutgoing: aFAMIXClassAssociation [
+	"Query all the outgoing associations of the FAMIXClassAssociation class for the receiver.
+	This method differ from #queryOutgoing: in the fact that it will not check the associations of the reicever's children.
+	
+	Example:
+		aFAMIXClass queryLocalOutgoing: FAMIXInheritance.
+			--> Will return a MooseOutgoingQueryResult containing the FAMIXInheritance associations having aFAMIXClass as source
+	"
+
+	^ self query outgoing local dependenciesOfType: aFAMIXClassAssociation
+]
+
+{ #category : #'query dependencies' }
+TEntityMetaLevelDependency >> queryOutgoing: aFAMIXClassAssociation [
+	"Query all the outgoing associations of the FAMIXClassAssociation class for the receiver and its children.
+	
+	Example:
+		aFAMIXClass queryOutgoing: FAMIXInheritance.
+			--> Will return a MooseOutgoingQueryResult containing the FAMIXInheritance associations having aFAMIXClass or its children as source
+	"
+
+	^ self query outgoing dependenciesOfType: aFAMIXClassAssociation
+]
+
+{ #category : #'query dependencies' }
+TEntityMetaLevelDependency >> queryOutgoingTypeDeclarations [
+	"This method should return the outgoing type declarations that are not represented in FAMIX and that cannot be query by a generic algorithme.
+	
+	typeDeclaration is a virtual association that relates a structural entity (i.e. a variable) to its type."
+
+	^ MooseOutgoingQueryResult on: self withAll: (self queryOutgoingTypeDeclarationsIn: OrderedCollection new) asSet
+]
+
+{ #category : #'query dependencies' }
+TEntityMetaLevelDependency >> queryOutgoingTypeDeclarationsIn: aCollection [
+	"This method could be more readable but it needs to be really performant"
+
+	| selectors |
+	1 to: (selectors := self childrenSelectors) size do: [ :index | 
+		(self perform: (selectors at: index))
+			ifNotNil: [ :children | 
+				| coll |
+				1 to: (coll := children asCollection) size do: [ :i | (coll at: i) queryOutgoingTypeDeclarationsIn: aCollection ] ] ].
+	aCollection addAll: self outgoingTypeDeclarations.
+	^ aCollection
+]
+
+{ #category : #private }
+TEntityMetaLevelDependency >> scopeForQuery: aQuery direction: aDirection [
+	aDirection scopeFor: self query: aQuery
+]
+
+{ #category : #'query dependencies' }
+TEntityMetaLevelDependency >> sourceThrough: aFAMIXClassAssociation [
+	"Collect the source of the FAMIXClassAssociation class for the receiver and its children.
+	
+	Example:
+		aFAMIXClass sourceThrough: FAMIXReference.
+			--> Will return a MooseIncomingQueryResult containing the methods having aFAMIXClass or its children as source
+	"
+
+	^ self query incoming objects dependenciesOfType: aFAMIXClassAssociation
+]
+
+{ #category : #'query dependencies' }
+TEntityMetaLevelDependency >> targetThrough: aFAMIXClassAssociation [
+	"Collect the target of the FAMIXClassAssociation class for the receiver and its children.
+	
+	Example:
+		aFAMIXMethod targetThrough: FAMIXReference.
+			--> Will return a MooseOutgoingQueryResult containing the class having aFAMIXClass or its children as target
+	"
+
+	^ self query outgoing objects dependenciesOfType: aFAMIXClassAssociation
+]
+
+{ #category : #'query dependencies' }
+TEntityMetaLevelDependency >> throughAllFrom [
+	"Query all the incoming associations of the receiver and its children.
+
+	Example:
+		aFAMIXClass throughAllFrom.
+			--> Will return a MooseIncomingQueryResult containing all the FAMIXAssociations having aFAMIXClass or its children as target
+	"
+
+	^ self query incoming objects dependencies
+]
+
+{ #category : #'query dependencies' }
+TEntityMetaLevelDependency >> throughAllTo [
+	"Collect all the targets of the receiver and its children.
+	
+	Example:
+		aFAMIXMethod throughAllTo.
+			--> Will return a MooseOutgoingQueryResult containing the class having aFAMIXClass or its children as source
+	"
+
+	^ self query outgoing objects dependencies
+]
+
 { #category : #scoping }
 TEntityMetaLevelDependency >> toAnyScope: aCollectionOfFamixClasses [
 	"I am used to return all the first encountered entities matching one of the class scope given as parameter that are down in the containment tree of the metamodel"
 
-	^ (self toAnyScope: aCollectionOfFamixClasses in: OrderedCollection new) asSet asArray
-]
-
-{ #category : #private }
-TEntityMetaLevelDependency >> toAnyScope: aCollectionOfFamixClasses in: aCollection [
-	^ self toAnyScope: aCollectionOfFamixClasses in: aCollection until: [ :a | false ]
-]
-
-{ #category : #private }
-TEntityMetaLevelDependency >> toAnyScope: aCollectionOfFamixClasses in: aCollection until: rejectBlock [
-	(aCollectionOfFamixClasses anySatisfy: [ :aFAMIXClass | self isOfType: aFAMIXClass ])
-		ifTrue: [ aCollection add: self ]
-		ifFalse: [ "The content of this block could be much more readable with #do: but we do this solution for performances... We need this method to be really really performant."
-			| selectors |
-			(rejectBlock value: self) ifFalse: [ 1 to: (selectors := self childrenSelectors) size do: [ :ind | (self perform: (selectors at: ind)) toAnyScope: aCollectionOfFamixClasses in: aCollection  until: rejectBlock ] ] ].
-	^ aCollection
+	^ self query descendants ofAnyType: aCollectionOfFamixClasses
 ]
 
 { #category : #scoping }
@@ -675,30 +1027,14 @@ TEntityMetaLevelDependency >> toAnyScope: aCollectionOfFamixClasses until: rejec
 	"I am used to return all the first encountered entities matching one of the class scope given as parameter that are down in the containment tree of the metamodel.
 	I stop the recursion when the rejectBlock is true"
 
-	^ (self toAnyScope: aCollectionOfFamixClasses in: OrderedCollection new until: rejectBlock) asSet asArray
+	^ (self query descendants until: rejectBlock) ofAnyType: aCollectionOfFamixClasses
 ]
 
 { #category : #scoping }
 TEntityMetaLevelDependency >> toScope: aClassFAMIX [
 	"I am used to return all the first encountered  entities at a given famix class scope that are down in the containment tree of the metamodel"
 
-	self flag: #todo.	"I think we do not need the #asArray cast but it will break tests. I will probably let it now then change the tests later. Step by step."
-	^ (self toScope: aClassFAMIX in: OrderedCollection new) asSet asArray
-]
-
-{ #category : #private }
-TEntityMetaLevelDependency >> toScope: aClassFAMIX in: aCollection [
-	^ self toScope: aClassFAMIX in: aCollection until: [ :a | false ]
-]
-
-{ #category : #private }
-TEntityMetaLevelDependency >> toScope: aClassFAMIX in: aCollection until: rejectBlock [
-	(self isOfType: aClassFAMIX)
-		ifTrue: [ aCollection add: self ]
-		ifFalse: [ "The content of this block could be much more readable with #do: but we do this solution for performances... We need this method to be really really performant."
-			| selectors |
-			(rejectBlock value: self) ifFalse: [ 1 to: (selectors := self childrenSelectors) size do: [ :ind | (self perform: (selectors at: ind)) toScope: aClassFAMIX in: aCollection  until: rejectBlock ] ] ].
-	^ aCollection
+	^ self query descendants ofType: aClassFAMIX
 ]
 
 { #category : #scoping }
@@ -706,8 +1042,7 @@ TEntityMetaLevelDependency >> toScope: aClassFAMIX until: rejectBlock [
 	"I am used to return all the first encountered  entities at a given famix class scope that are down in the containment tree of the metamodel.
 	I stop the recursion when the rejectBlock is true"
 
-	self flag: #todo.	"I think we do not need the #asArray cast but it will break tests. I will probably let it now then change the tests later. Step by step."
-	^ (self toScope: aClassFAMIX in: OrderedCollection new until: rejectBlock) asSet asArray
+	^ (self query descendants until: rejectBlock) ofType: aClassFAMIX
 ]
 
 { #category : #accessing }
@@ -732,26 +1067,7 @@ TEntityMetaLevelDependency >> withAllParents [
 TEntityMetaLevelDependency >> withAnyScope: aCollectionOfFamixClasses [
 	"I am used to return all the first encountered entities matching one of the class scope that are up or down in the containment tree of the metamodel"
 
-	^ (self withAnyScope: aCollectionOfFamixClasses in: OrderedCollection new) asSet
-]
-
-{ #category : #private }
-TEntityMetaLevelDependency >> withAnyScope: aCollectionOfFamixClasses in: aCollection [
-	^ self withAnyScope: aCollectionOfFamixClasses in: aCollection until: [ :a | false ]
-]
-
-{ #category : #private }
-TEntityMetaLevelDependency >> withAnyScope: aCollectionOfFamixClasses in: aCollection until: rejectBlock [
-	(aCollectionOfFamixClasses anySatisfy: [ :aFAMIXClass | (self class traits includes: aFAMIXClass) or: [ self class = aFAMIXClass ] ])
-		ifTrue: [ self atScope: aCollectionOfFamixClasses in: aCollection until: rejectBlock ].
-
-	self allParentTypes
-		detect: [ :class | aCollectionOfFamixClasses anySatisfy: [ :aFAMIXClass | aFAMIXClass = class ] ]
-		ifFound: [ self atAnyScope: aCollectionOfFamixClasses in: aCollection until: rejectBlock ].
-	self allChildrenTypes
-		detect: [ :class | aCollectionOfFamixClasses anySatisfy: [ :aFAMIXClass | aFAMIXClass = class ] ]
-		ifFound: [ self toAnyScope: aCollectionOfFamixClasses in: aCollection until: rejectBlock ].
-	^ aCollection
+	^ self query lineage ofAnyType: aCollectionOfFamixClasses
 ]
 
 { #category : #scoping }
@@ -759,26 +1075,14 @@ TEntityMetaLevelDependency >> withAnyScope: aCollectionOfFamixClasses until: rej
 	"I am used to return all the first encountered entities matching one of the class scope that are up or down in the containment tree of the metamodel.
 	I stop the recursion when the rejectBlock is true"
 
-	^ (self withAnyScope: aCollectionOfFamixClasses in: OrderedCollection new until: rejectBlock) asSet
+	^ (self query lineage until: rejectBlock) ofAnyType: aCollectionOfFamixClasses
 ]
 
 { #category : #scoping }
 TEntityMetaLevelDependency >> withScope: aClassFAMIX [
 	"I am used to return all the first encountered  entities at a given famix class scope that are up or down in the containment tree of the metamodel"
 
-	^ (self withScope: aClassFAMIX in: OrderedCollection new) asSet
-]
-
-{ #category : #private }
-TEntityMetaLevelDependency >> withScope: aClassFAMIX in: aCollection [
-	^ self withScope: aClassFAMIX in: aCollection until: [ :a | false ]
-]
-
-{ #category : #private }
-TEntityMetaLevelDependency >> withScope: aClassFAMIX in: aCollection until: rejectBlock [
-	self atScope: aClassFAMIX in: aCollection until: rejectBlock.
-	self toScope: aClassFAMIX in: aCollection until: rejectBlock.
-	^ aCollection
+	^ self query lineage ofType: aClassFAMIX
 ]
 
 { #category : #scoping }
@@ -786,5 +1090,5 @@ TEntityMetaLevelDependency >> withScope: aClassFAMIX until: rejectBlock [
 	"I am used to return all the first encountered  entities at a given famix class scope that are up or down in the containment tree of the metamodel.
 	I stop the recursion when the rejectBlock is true"
 
-	^ (self withScope: aClassFAMIX in: OrderedCollection new until: rejectBlock) asSet
+	^ (self query lineage until: rejectBlock) ofType: aClassFAMIX
 ]

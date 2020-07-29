@@ -23,17 +23,15 @@ FAMIXBehaviouralEntity >> clientBehaviours [
 ]
 
 { #category : #'Famix-Extensions' }
-FAMIXBehaviouralEntity >> cyclomaticComplexity [
-	<FMProperty: #cyclomaticComplexity type: #Number>
-	<FMComment: 'The number of linear-independent paths through a method.'>
-	^ self
-		lookUpPropertyNamed: #cyclomaticComplexity
-		computedAs: [ self mooseModel isSmalltalk ifTrue: [ (RBVisitorForFAMIXMetrics for: self) cyclomaticNumber ] ifFalse: [ self notExistentMetricValue ] ]
+FAMIXBehaviouralEntity >> computeCyclomaticComplexity [
+	^ self mooseModel isSmalltalk
+		ifTrue: [ (RBVisitorForFAMIXMetrics for: self) cyclomaticNumber ]
+		ifFalse: [ self notExistentMetricValue ]
 ]
 
 { #category : #'Famix-Extensions' }
 FAMIXBehaviouralEntity >> cyclomaticComplexity: aNumber [
-	self privateState cacheAt: #cyclomaticComplexity put: aNumber
+	self cacheAt: #cyclomaticComplexity put: aNumber
 ]
 
 { #category : #'Famix-Extensions' }
@@ -95,7 +93,7 @@ FAMIXBehaviouralEntity >> numberOfConditionals [
 
 { #category : #'Famix-Extensions' }
 FAMIXBehaviouralEntity >> numberOfConditionals: aNumber [
-	self privateState cacheAt: #numberOfConditionals put: aNumber
+	self cacheAt: #numberOfConditionals put: aNumber
 ]
 
 { #category : #'Famix-Extensions' }
@@ -127,11 +125,6 @@ FAMIXBehaviouralEntity >> numberOfStatements [
 	^ self
 		lookUpPropertyNamed: #numberOfStatements
 		computedAs: [ self mooseModel isSmalltalk ifTrue: [ (RBVisitorForFAMIXMetrics for: self) numberOfStatements ] ifFalse: [ self notExistentMetricValue ] ]
-]
-
-{ #category : #'moose query' }
-FAMIXBehaviouralEntity >> outgoingTypeDeclarations [
-	^ self declaredType ifNil: [ {} ] ifNotNil: [ :dt | {(MooseQueryDependencyAssociation newFrom: self to: dt)} ]
 ]
 
 { #category : #'Famix-Extensions' }

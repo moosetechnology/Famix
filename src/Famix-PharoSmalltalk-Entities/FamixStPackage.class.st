@@ -36,36 +36,28 @@ FamixStPackage >> allClasses [
 
 { #category : #accessing }
 FamixStPackage >> classes [
-
-	^ self privateState 	cacheAt: #classes 
-							ifAbsentPut: [ self childEntities select: [ :child | child isClass ]]
+	^ self cacheAt: #classes ifAbsentPut: [ self childEntities select: [ :child | child isClass ] ]
 ]
 
 { #category : #accessing }
 FamixStPackage >> extendedClasses [
 	"select all classes extended in this package"
 
-	^ self privateState cacheAt: #extendedClasses
-							ifAbsentPut: [ self classes select: [ :c| c isExtended ] ]
-	
+	^ self cacheAt: #extendedClasses ifAbsentPut: [ self classes select: [ :c | c isExtended ] ]
 ]
 
 { #category : #accessing }
 FamixStPackage >> extensionClasses [
 	"select all classes extended by this package"
 
-	^ self privateState 
-		cacheAt: #extensionClasses
-		ifAbsentPut: [ self extensionMethods collectAsSet: [ :method | method parentType ] ]
+	^ self cacheAt: #extensionClasses ifAbsentPut: [ self extensionMethods collectAsSet: [ :method | method parentType ] ]
 ]
 
 { #category : #accessing }
 FamixStPackage >> extensionMethods [
 	"select all class extensions made by this package"
 
-	^ self privateState 
-		cacheAt: #extensionMethods 
-		ifAbsentPut: [ self childEntities select: [ :child | child isMethod ]]
+	^ self cacheAt: #extensionMethods ifAbsentPut: [ self childEntities select: [ :child | child isMethod ] ]
 ]
 
 { #category : #accessing }
@@ -88,9 +80,7 @@ FamixStPackage >> localClassesGroup [
 FamixStPackage >> localMethods [
 	"select all local methods"
 
-	^ self privateState 
-			cacheAt: #localMethods 
-			ifAbsentPut: [ self classes flatCollect: [:c | c localMethods ]]
+	^ self cacheAt: #localMethods ifAbsentPut: [ self classes flatCollect: [ :c | c localMethods ] ]
 ]
 
 { #category : #accessing }
@@ -108,7 +98,7 @@ FamixStPackage >> numberOfClientPackages [
 
 { #category : #accessing }
 FamixStPackage >> numberOfClientPackages: aNumber [
-	self privateState cacheAt: #numberOfClientPackages put: aNumber
+	self cacheAt: #numberOfClientPackages put: aNumber
 ]
 
 { #category : #accessing }

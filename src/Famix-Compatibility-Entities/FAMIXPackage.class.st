@@ -47,8 +47,7 @@ FAMIXPackage >> afferentCoupling [
 	<FMProperty: #afferentCoupling type: #Number>
 	<derived>
 	<FMComment: 'Afferent Coupling of a package'>
-	^ (((self queryIncomingDependencies atScope: FamixTType) outOfParentUsing: FamixTPackage)
-		select: [ :c | c isInstanceSide ]) size
+	^ (((self queryAllIncoming atScope: FamixTType) outOfParentUsing: FamixTPackage) select: [ :c | c isInstanceSide ]) size
 ]
 
 { #category : #'Famix-Extensions' }
@@ -69,7 +68,7 @@ FAMIXPackage >> bunchCohesion [
 	myClasses := myClasses select: [ :c | c isInstanceSide ].
 	myClasses size == 0
 		ifTrue: [ ^ nil ].
-	intraConnectivities := (myClasses collect: [ :c | (c queryOutgoingDependencies atScope: FamixTType) withinParentUsing: FamixTPackage ])
+	intraConnectivities := (myClasses collect: [ :c | (c queryAllOutgoing atScope: FamixTType) withinParentUsing: FamixTPackage ])
 		inject: 0
 		into: [ :subTotal :each | subTotal + (each select: [ :c | c isInstanceSide ]) size ].
 	^ intraConnectivities / myClasses size squared asFloat
@@ -88,14 +87,14 @@ FAMIXPackage >> bunchCouplingWith: aPackage [
 		ifTrue: [ ^ nil ].
 
 	"All outgoing dependencies"
-	interConnectivities := (myClasses collect: [ :c | (c queryOutgoingDependencies atScope: FamixTType) within: aPackage ])
+	interConnectivities := (myClasses collect: [ :c | (c queryAllOutgoing atScope: FamixTType) within: aPackage ])
 		inject: 0
 		into: [ :subTotal :each | subTotal + (each select: [ :c | c isInstanceSide ]) size ].
 
 	"Plus all incoming dependencies"
 	interConnectivities := interConnectivities
 		+
-			((myClasses collect: [ :c | (c queryIncomingDependencies atScope: FamixTType) within: aPackage ])
+			((myClasses collect: [ :c | (c queryAllIncoming atScope: FamixTType) within: aPackage ])
 				inject: 0
 				into: [ :subTotal :each | subTotal + (each select: [ :c | c isInstanceSide ]) size ]).
 	^ interConnectivities / (2 * myClasses size * otherClasses size) asFloat
@@ -113,14 +112,14 @@ FAMIXPackage >> bunchCouplingWithAll [
 		ifTrue: [ ^ nil ].
 
 	"All outgoing dependencies"
-	interConnectivities := (myClasses collect: [ :c | (c queryOutgoingDependencies atScope: FamixTType) outOfParentUsing: FamixTPackage ])
+	interConnectivities := (myClasses collect: [ :c | (c queryAllOutgoing atScope: FamixTType) outOfParentUsing: FamixTPackage ])
 		inject: 0
 		into: [ :subTotal :each | subTotal + (each select: [ :c | c isInstanceSide ]) size ].
 
 	"Plus all incoming dependencies"
 	interConnectivities := interConnectivities
 		+
-			((myClasses collect: [ :c | (c queryIncomingDependencies atScope: FAMIXType) outOfParentUsing: FamixTPackage ]) inject: 0 into: [ :subTotal :each | subTotal + (each select: [ :c | c isInstanceSide ]) size ]).
+			((myClasses collect: [ :c | (c queryAllIncoming atScope: FAMIXType) outOfParentUsing: FamixTPackage ]) inject: 0 into: [ :subTotal :each | subTotal + (each select: [ :c | c isInstanceSide ]) size ]).
 	^ interConnectivities / (2 * myClasses size * (allClasses size - myClasses size)) asFloat
 ]
 
@@ -143,16 +142,14 @@ FAMIXPackage >> childrenOfMyKind [
 
 { #category : #'Famix-Implementation' }
 FAMIXPackage >> classes [
-
-	^ self privateState 	cacheAt: #classes 
-							ifAbsentPut: [ self childEntities select: [ :child | child isClass ]]
+	^ self cacheAt: #classes ifAbsentPut: [ self childEntities select: [ :child | child isClass ] ]
 ]
 
 { #category : #'Famix-Extensions-accessing' }
 FAMIXPackage >> concernedClassesCollection [
 	"it returns the collection of the receiver's concerned classes (See #__concernedClassesCollection). Before returning this value it verifies if it is cached in the receiver's state under the properiety #concernedClasses."
 
-	^self privateState cacheAt: #concernedClassesCollection
+	^self cacheAt: #concernedClassesCollection
 		ifAbsentPut: (self extensionClasses union: self localClasses)
 ]
 
@@ -187,7 +184,7 @@ FAMIXPackage >> efferentCoupling [
 FAMIXPackage >> extendedClasses [
 	"select all classes extended in this package"
 
-	^ self privateState cacheAt: #extendedClasses
+	^ self cacheAt: #extendedClasses
 							ifAbsentPut: [ self classes select: [ :c| c isExtended ] ]
 	
 ]
@@ -205,9 +202,7 @@ FAMIXPackage >> extendedClassesGroup [
 FAMIXPackage >> extensionClasses [
 	"select all classes extended by this package"
 
-	^ self privateState 
-		cacheAt: #extensionClasses
-		ifAbsentPut: [ self extensionMethods collectAsSet: [ :method | method parentType ] ]
+	^ self cacheAt: #extensionClasses ifAbsentPut: [ self extensionMethods collectAsSet: [ :method | method parentType ] ]
 ]
 
 { #category : #'Famix-Smalltalk' }
@@ -223,9 +218,7 @@ FAMIXPackage >> extensionClassesGroup [
 FAMIXPackage >> extensionMethods [
 	"select all class extensions made by this package"
 
-	^ self privateState 
-		cacheAt: #extensionMethods 
-		ifAbsentPut: [ self childEntities select: [ :child | child isMethod ]]
+	^ self cacheAt: #extensionMethods ifAbsentPut: [ self childEntities select: [ :child | child isMethod ] ]
 ]
 
 { #category : #'Moose-Hismo' }
@@ -253,9 +246,7 @@ FAMIXPackage >> localClassesGroup [
 FAMIXPackage >> localMethods [
 	"select all local methods"
 
-	^ self privateState 
-			cacheAt: #localMethods 
-			ifAbsentPut: [ self classes flatCollect: [:c | c localMethods ]]
+	^ self cacheAt: #localMethods ifAbsentPut: [ self classes flatCollect: [ :c | c localMethods ] ]
 ]
 
 { #category : #'Famix-Extensions-metrics' }
@@ -270,7 +261,7 @@ FAMIXPackage >> martinCohesion [
 	myClasses := (myClasses union: (myClasses flatCollect: [ :c | c allRecursiveTypes ])) select: [ :c | c isInstanceSide ].
 	myClasses size == 0
 		ifTrue: [ ^ nil ].
-	intraConnectivities := (myClasses collect: [ :c | (c queryOutgoingDependencies atScope: FamixTType) withoutSelfLoops withinParentUsing: FamixTPackage ])
+	intraConnectivities := (myClasses collect: [ :c | (c queryAllOutgoing atScope: FamixTType) withoutSelfLoops withinParentUsing: FamixTPackage ])
 		inject: 0
 		into: [ :subTotal :each | subTotal + (each select: [ :c | c isInstanceSide ]) size ].
 	^ ((intraConnectivities + 1) / myClasses size) asFloat
@@ -291,7 +282,7 @@ FAMIXPackage >> numberOfClientPackages [
 
 { #category : #'Famix-Extensions' }
 FAMIXPackage >> numberOfClientPackages: aNumber [
-	self privateState cacheAt: #numberOfClientPackages put: aNumber
+	self cacheAt: #numberOfClientPackages put: aNumber
 ]
 
 { #category : #'Famix-Extensions' }
@@ -306,7 +297,7 @@ FAMIXPackage >> numberOfMethods [
 
 { #category : #'Famix-Extensions' }
 FAMIXPackage >> numberOfMethods: aNumber [
-	self privateState cacheAt: #numberOfMethods put: aNumber
+	self cacheAt: #numberOfMethods put: aNumber
 ]
 
 { #category : #'Famix-Implementation' }

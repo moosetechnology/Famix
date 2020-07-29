@@ -26,11 +26,6 @@ FamixTImplicitVariable >> isImplicitVariable [
 	^ true
 ]
 
-{ #category : #'moose query' }
-FamixTImplicitVariable >> outgoingTypeDeclarations [
-	^ self declaredType ifNil: [ {} ] ifNotNil: [ :dt | {(MooseQueryDependencyAssociation newFrom: self to: dt)} ]
-]
-
 { #category : #accessing }
 FamixTImplicitVariable >> parentBehaviouralEntity [
 	"Relation named: #parentBehaviouralEntity type: #FamixTWithImplicitVariables opposite: #implicitVariables"
@@ -54,5 +49,5 @@ FamixTImplicitVariable >> parentBehaviouralEntity: anObject [
 FamixTImplicitVariable >> parentBehaviouralEntityGroup [
 	<generated>
 	<navigation: 'ParentBehaviouralEntity'>
-	^ MooseGroup with: self parentBehaviouralEntity
+	^ MooseSpecializedGroup with: self parentBehaviouralEntity
 ]

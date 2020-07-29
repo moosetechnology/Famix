@@ -56,16 +56,6 @@ MooseObjectTest >> testAllPrinting [
 ]
 
 { #category : #tests }
-MooseObjectTest >> testEntityBackLink [
-	"self debug: #testEntityBackLink"
-
-	| e r |
-	e := self actualClass new.
-	r := e privateState entity.
-	self assert: r identicalTo: e
-]
-
-{ #category : #tests }
 MooseObjectTest >> testGroupFor [
 	| entity1 entity2 model classGroup methodGroup |
 	entity1 := FamixTest1Class new.
@@ -76,7 +66,7 @@ MooseObjectTest >> testGroupFor [
 	self assert: classGroup class identicalTo: FamixClassGroup.
 	self assert: (classGroup entities includesAll: {entity1 . entity2}).
 	methodGroup := model groupFor: #allMethods.
-	self assert: methodGroup class identicalTo: MooseGroup.
+	self assert: methodGroup class identicalTo: MooseSpecializedGroup.
 	self assertEmpty: methodGroup
 ]
 
@@ -98,18 +88,6 @@ MooseObjectTest >> testPrintOnWithError [
 	entity stub mooseName willRaise: Error new.
 	printString := String streamContents: [ :stream | entity printOn: stream ].
 	self assert: (printString endsWith: 'Error printing the object''')
-]
-
-{ #category : #tests }
-MooseObjectTest >> testPrivateStateMutator [
-	| entity state mooseState |
-	entity := self actualClass new.
-	state := entity privateState.
-	self assert: state isNotNil.
-
-	mooseState := MooseEntityState new.
-	entity privateState: mooseState.
-	self assert: entity privateState identicalTo: mooseState
 ]
 
 { #category : #tests }

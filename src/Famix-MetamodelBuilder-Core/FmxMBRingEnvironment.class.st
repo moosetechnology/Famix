@@ -20,6 +20,12 @@ FmxMBRingEnvironment >> basicGroupSuperclass [
 ]
 
 { #category : #accessing }
+FmxMBRingEnvironment >> basicModelSuperclass [
+
+	^ self ringEnvironment ensureClassNamed: self builder configuration basicModelSuperclassName
+]
+
+{ #category : #accessing }
 FmxMBRingEnvironment >> basicSuperclass [
 
 	^ self ringEnvironment ensureClassNamed: self builder configuration basicSuperclassName

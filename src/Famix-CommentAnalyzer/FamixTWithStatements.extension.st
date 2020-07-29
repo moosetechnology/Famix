@@ -2,7 +2,7 @@ Extension { #name : #FamixTWithStatements }
 
 { #category : #'*Famix-CommentAnalyzer' }
 FamixTWithStatements >> sourceCommentRateWithCleaning [
-	^ self privateState cacheAt: #sourceCommentRateWithCleaning ifAbsentPut: [ self sourceCommentRateWithSelector: #numberOfUsefulCommentLines ]
+	^ self cacheAt: #sourceCommentRateWithCleaning ifAbsentPut: [ self sourceCommentRateWithSelector: #numberOfUsefulCommentLines ]
 ]
 
 { #category : #'*Famix-CommentAnalyzer' }

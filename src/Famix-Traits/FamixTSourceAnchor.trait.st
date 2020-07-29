@@ -96,10 +96,10 @@ FamixTSourceAnchor >> sourceText [
 ]
 
 { #category : #accessing }
-FamixTSourceAnchor >> sourceTextFrom: startPos to: endPos [
-	self sourceText size < endPos ifTrue: [ ^ '' ].
+FamixTSourceAnchor >> sourceTextFrom: startPosition to: endPosition [
+	self sourceText size < endPosition ifTrue: [ ^ '' ].
 	
-	^ self sourceText copyFrom: startPos to: endPos
+	^ self sourceText copyFrom: startPosition to: endPosition
 ]
 
 { #category : #testing }

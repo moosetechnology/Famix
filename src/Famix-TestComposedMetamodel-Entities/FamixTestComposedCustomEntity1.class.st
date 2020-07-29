@@ -19,20 +19,20 @@ FamixTestComposedCustomEntity1 >> c21 [
 
 	<generated>
 	<FMProperty: #c21 type: #FamixTestComposed2CustomEntity1 opposite: #c1>
-	^ self privateState attributeAt: #c21 ifAbsent: [ nil ]
+	^ self attributeAt: #c21 ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
 FamixTestComposedCustomEntity1 >> c21: anObject [
 
 	<generated>
-	(self privateState attributeAt: #c21 ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	(self attributeAt: #c21 ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self c21.
-		self privateState attributeAt: #c21 put: anObject.
+		self attributeAt: #c21 put: anObject.
 		otherSide c1: nil ]
 	ifNotNil: [ 
-		self privateState attributeAt: #c21 put: anObject.
+		self attributeAt: #c21 put: anObject.
 		anObject c1: self ]
 ]
 
@@ -42,20 +42,20 @@ FamixTestComposedCustomEntity1 >> customEntity1 [
 
 	<generated>
 	<FMProperty: #customEntity1 type: #FamixTestComposed1CustomEntity1 opposite: #customEntity1>
-	^ self privateState attributeAt: #customEntity1 ifAbsent: [ nil ]
+	^ self attributeAt: #customEntity1 ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
 FamixTestComposedCustomEntity1 >> customEntity1: anObject [
 
 	<generated>
-	(self privateState attributeAt: #customEntity1 ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	(self attributeAt: #customEntity1 ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self customEntity1.
-		self privateState attributeAt: #customEntity1 put: anObject.
+		self attributeAt: #customEntity1 put: anObject.
 		otherSide customEntity1: nil ]
 	ifNotNil: [ 
-		self privateState attributeAt: #customEntity1 put: anObject.
+		self attributeAt: #customEntity1 put: anObject.
 		anObject customEntity1: self ]
 ]
 
@@ -63,5 +63,5 @@ FamixTestComposedCustomEntity1 >> customEntity1: anObject [
 FamixTestComposedCustomEntity1 >> customEntity1Group [
 	<generated>
 	<navigation: 'CustomEntity1'>
-	^ MooseGroup with: self customEntity1
+	^ MooseSpecializedGroup with: self customEntity1
 ]

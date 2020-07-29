@@ -55,3 +55,8 @@ FamixTest2Test >> testInheritances [
 	self assertCollection: (c3 subInheritances collect: #subclass) hasSameElements: { c5 }.	
 
 ]
+
+{ #category : #tests }
+FamixTest2Test >> testModelGeneratedNotExplicitely [
+	self assert: (self class environment classNamed: 'FamixTest2Model') isNotNil
+]

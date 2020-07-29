@@ -15,7 +15,7 @@ Trait {
 		'#parentAnnotationInstance => FMOne type: #FamixTWithAnnotationInstanceAttributes opposite: #attributes',
 		'#value => FMProperty'
 	],
-	#traits : 'TDependencyQueries + TEntityMetaLevelDependency',
+	#traits : 'TEntityMetaLevelDependency',
 	#category : #'Famix-Traits-AnnotationInstanceAttribute'
 }
 
@@ -49,7 +49,7 @@ FamixTAnnotationInstanceAttribute >> parentAnnotationInstance: anObject [
 FamixTAnnotationInstanceAttribute >> parentAnnotationInstanceGroup [
 	<generated>
 	<navigation: 'ParentAnnotationInstance'>
-	^ MooseGroup with: self parentAnnotationInstance
+	^ MooseSpecializedGroup with: self parentAnnotationInstance
 ]
 
 { #category : #accessing }

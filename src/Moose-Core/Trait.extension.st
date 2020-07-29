@@ -1,6 +1,11 @@
 Extension { #name : #Trait }
 
 { #category : #'*Moose-Core' }
+Trait >> allMatchingSelfIn: aMooseModel [ 
+	^ aMooseModel allUsing: self
+]
+
+{ #category : #'*Moose-Core' }
 Trait >> allUsers [
 	^ self users asOrderedCollection , (self users asOrderedCollection select: #isTrait thenCollect: #allUsers)
 ]

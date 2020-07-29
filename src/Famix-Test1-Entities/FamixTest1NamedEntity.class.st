@@ -14,11 +14,3 @@ FamixTest1NamedEntity class >> annotation [
 	<generated>
 	^self
 ]
-
-{ #category : #accessing }
-FamixTest1NamedEntity class >> dependencyFM3PropertyDescription [
-	"TODO: Clean"
-
-	^ self allDeclaredProperties
-		select: [ :e | e hasOpposite and: [ e opposite isSource or: [ e opposite isTarget ] ] ]
-]

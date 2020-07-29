@@ -26,7 +26,9 @@ MooseAbstractGroup class >> annotation [
 
 { #category : #'instance creation' }
 MooseAbstractGroup class >> with: anEntity [
-	^ anEntity ifNil: [ self new ] ifNotNil: [ self withAll: (Array with: anEntity) ]
+	^ anEntity
+		ifNil: [ self new ]
+		ifNotNil: [ self withAll: (Array with: anEntity) ]
 ]
 
 { #category : #'instance creation' }
@@ -49,10 +51,9 @@ MooseAbstractGroup >> \ aCollection [
 ]
 
 { #category : #'adding/removing' }
-MooseAbstractGroup >> add: anItem [ 
-
+MooseAbstractGroup >> add: anItem [
 	self entityStorage add: anItem.
-	self privateState flush. 
+	self flush.
 	^ anItem
 ]
 
@@ -71,6 +72,13 @@ MooseAbstractGroup >> addLast: anEntity [
 MooseAbstractGroup >> allContainers [
 	<navigation: 'All containers'>
 	^ self lookUpPropertyNamed: #allContainers computedAs: [ self entities select: #isContainerEntity ]
+]
+
+{ #category : #groups }
+MooseAbstractGroup >> allMatching: aClassOrTrait [
+	"I return the list of entities of the type of the parameter, be it a class or a trait."
+
+	^ aClassOrTrait allMatchingSelfIn: self
 ]
 
 { #category : #accessing }
@@ -99,7 +107,7 @@ MooseAbstractGroup >> allUsing: aTrait [
 { #category : #groups }
 MooseAbstractGroup >> allUsing: aTrait ofGroupClass: aGroupClass [
 	aTrait isTrait ifFalse: [ MooseAllUsingOnClass signal ].
-	^ self privateState
+	^ self
 		cacheAt: aTrait
 		ifAbsentPut: [ aGroupClass
 				withAll: ((aTrait allUsers flattened flatCollect: #withAllSubclasses) asSet flatCollect: [ :each | self entityStorage selectAllWithType: each ])
@@ -114,7 +122,7 @@ MooseAbstractGroup >> allWithSubTypesOf: aFamixClass [
 { #category : #groups }
 MooseAbstractGroup >> allWithSubTypesOf: aFamixClass ofGroupClass: aGroupClass [
 	aFamixClass isTrait ifTrue: [ MooseAllWithTypeOnTrait signal ].
-	^ self privateState
+	^ self
 		cacheAt: aFamixClass
 		ifAbsentPut: [ aGroupClass
 				withAll: (aFamixClass withAllSubclasses asSet flatCollect: [ :each | self entityStorage selectAllWithType: each ])
@@ -137,12 +145,9 @@ MooseAbstractGroup >> allWithType: aFamixClass [
 { #category : #groups }
 MooseAbstractGroup >> allWithType: aFamixClass ofGroupClass: aGroupClass [
 	aFamixClass isTrait ifTrue: [ MooseAllWithTypeOnTrait signal ].
-	^ self privateState 
+	^ self
 		cacheAt: aFamixClass
-		ifAbsentPut: [
-			aGroupClass 
-				withAll: (self entityStorage selectAllWithType: aFamixClass)
-				withDescription: 'All ' , aFamixClass name asLowercase asEnglishPlural ]
+		ifAbsentPut: [ aGroupClass withAll: (self entityStorage selectAllWithType: aFamixClass) withDescription: 'All ' , aFamixClass name asLowercase asEnglishPlural ]
 ]
 
 { #category : #accessing }
@@ -606,16 +611,15 @@ MooseAbstractGroup >> removeAll: aCollection [
 ]
 
 { #category : #'entity collection' }
-MooseAbstractGroup >> removeEntity: anEntity [ 
-	 
-	^self entityStorage remove: anEntity
+MooseAbstractGroup >> removeEntity: anEntity [
+	^ self entityStorage remove: anEntity
 ]
 
 { #category : #loading }
-MooseAbstractGroup >> resetMooseNameFor: anEntity [ 
+MooseAbstractGroup >> resetMooseNameFor: anEntity [
 	self entityStorage resetMooseNameFor: anEntity.
 	" this is safe, but probably a bit overdone "
-	self privateState flush
+	self flush
 ]
 
 { #category : #accessing }

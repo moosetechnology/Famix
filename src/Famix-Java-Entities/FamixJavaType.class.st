@@ -1,8 +1,8 @@
 Class {
 	#name : #FamixJavaType,
 	#superclass : #FamixJavaContainerEntity,
-	#traits : 'FamixTClassHierarchyNavigation + FamixTParameterizedTypeUser + FamixTType + FamixTWithMethods + FamixTWithTypeAliases',
-	#classTraits : 'FamixTClassHierarchyNavigation classTrait + FamixTParameterizedTypeUser classTrait + FamixTType classTrait + FamixTWithMethods classTrait + FamixTWithTypeAliases classTrait',
+	#traits : 'FamixTParameterizedTypeUser + FamixTType + FamixTWithMethods + FamixTWithTypeAliases',
+	#classTraits : 'FamixTParameterizedTypeUser classTrait + FamixTType classTrait + FamixTWithMethods classTrait + FamixTWithTypeAliases classTrait',
 	#category : #'Famix-Java-Entities-Entities'
 }
 
@@ -64,11 +64,6 @@ FamixJavaType >> implementedInterfaces [
 FamixJavaType >> implements: aString [
 	^ self methods
 		anySatisfy: [ :each | aString = each signature	 "was changed from match: for performances and because signature is case sensitive" ]
-]
-
-{ #category : #testing }
-FamixJavaType >> incomingTypeDeclarations [  
-	^ self typedEntities collect: [ :var | MooseQueryDependencyAssociation newFrom: var to: self ]
 ]
 
 { #category : #testing }

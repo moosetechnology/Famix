@@ -15,11 +15,6 @@ FamixJavaAnnotationTypeAttribute class >> annotation [
 	^self
 ]
 
-{ #category : #'moose query' }
-FamixJavaAnnotationTypeAttribute >> outgoingTypeDeclarations [
-	^ self declaredType ifNil: [ {} ] ifNotNil: [ :dt | {(MooseQueryDependencyAssociation newFrom: self to: dt)} ]
-]
-
 { #category : #accessing }
 FamixJavaAnnotationTypeAttribute >> parentAnnotationType [
 	<FMProperty: #parentAnnotationType type: #FamixJavaAnnotationType> 

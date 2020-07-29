@@ -15,11 +15,6 @@ FAMIXEnum class >> annotation [
 	^self
 ]
 
-{ #category : #testing }
-FAMIXEnum >> incomingTypeDeclarations [  
-	^ self typedEntities collect: [ :var | MooseQueryDependencyAssociation newFrom: var to: self ]
-]
-
 { #category : #accessing }
 FAMIXEnum >> values [
 	^ self enumValues

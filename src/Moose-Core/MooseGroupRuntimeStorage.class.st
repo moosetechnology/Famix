@@ -12,14 +12,14 @@ I am managed like a collection and my caches are autoupdated when an entity is a
 Internal Representation and Key Implementation Points.
 
     Instance Variables
-	byName:		Dictionnary (key: mooseName)
+	byName:		IdentityHashTable (key: mooseName)
 	byType:		Dictionnary of OrderedCollection (key: FAMIXType)  - the orderedCollection is sorted on access
 	elements:		OrderedCollection
-	sortedCollectionList:		Dictionnary (key: FAMIXType, value: boolean)
-
 
 Implementation Points
 - On access by type, OrderedCollections in byType dictionary are sorted by MooseName to find its type faster. This sort is stored in sortedCollectionList and is invalidated on addition of a new element in the collection
+
+I am using an identity hash table to save the names because it is optimized for large collection. The possible loss of performances for small collection is negligeable compared to the gain for large collection. Creating a moose group of 2450080 entities took 6sec+ with anIdentityDictionary and now take 1.6sec+ with a IdentityHashTable.
 
 
 
@@ -35,11 +35,6 @@ Class {
 	],
 	#category : #'Moose-Core'
 }
-
-{ #category : #'as yet unclassified' }
-MooseGroupRuntimeStorage class >> byTypeDefaultCollection [
-	^ OrderedCollection new
-]
 
 { #category : #adding }
 MooseGroupRuntimeStorage >> add: anElement [ 
@@ -72,7 +67,7 @@ MooseGroupRuntimeStorage >> elements [
 { #category : #initialization }
 MooseGroupRuntimeStorage >> initialize: capacity [
 	byType := IdentityDictionary new: 24.
-	byName := IdentityDictionary new: capacity.
+	byName := IdentityHashTable new: capacity.
 	elements := OrderedCollection new: capacity
 ]
 
@@ -121,7 +116,7 @@ MooseGroupRuntimeStorage >> selectAllWithType: aSmalltalkType [
 			byType keys
 				select: [ :aClass | aClass class = aSmalltalkType ]
 				thenDo: [ :aKey | (byType at: aKey) do: [ :anElement | result add: anElement ] ].
-			self class byTypeDefaultCollection addAll: result ]
+			OrderedCollection withAll: result ]
 ]
 
 { #category : #accessing }
@@ -131,26 +126,23 @@ MooseGroupRuntimeStorage >> size [
 
 { #category : #private }
 MooseGroupRuntimeStorage >> updateCacheOnAddingOf: anElement [
-	| group |
-	group := byType at: anElement class ifAbsentPut: [ self class byTypeDefaultCollection ].
-	group add: anElement.
-	anElement hasUniqueMooseNameInModel ifTrue: [ byName at: anElement mooseName asSymbol put: anElement ].
+	(byType atOrOrederedCollection: anElement class) add: anElement.
+	anElement hasUniqueMooseNameInModel ifTrue: [ byName at: anElement mooseName put: anElement ].
 	^ anElement
 ]
 
 { #category : #private }
 MooseGroupRuntimeStorage >> updateCacheOnRemovalOf: anElement [
-    | key group |
-    key := anElement class.
-    group := byType at: key ifAbsent: [ self class byTypeDefaultCollection ].
-    group remove: anElement ifAbsent: [ self error: 'Internal storage inconsistency' ].
-    anElement hasUniqueMooseNameInModel ifFalse: [ ^anElement ].
-    key := anElement mooseName asSymbol.
-    byName at: key ifAbsent: 
-            [ "In theory, objects are registered under their mooseName,
+	byType at: anElement class ifPresent: [ :group |
+		group remove: anElement ifAbsent: [ self error: 'Internal storage inconsistency' ] ].
+
+	anElement hasUniqueMooseNameInModel ifFalse: [ ^ anElement ].
+
+	byName
+		at: anElement mooseName
+		ifAbsent: [ "In theory, objects are registered under their mooseName,
             however some objects are still registered by their name
-            if #resetMooseName was not used when needed"
-            self resetMooseNameFor: anElement ].
-    byName removeKey: key ifAbsent: [ self error: 'Internal storage inconsistency' ].
-    ^anElement
+            if #resetMooseName was not used when needed" self resetMooseNameFor: anElement ].
+	byName removeKey: anElement mooseName ifAbsent: [ self error: 'Internal storage inconsistency' ].
+	^ anElement
 ]

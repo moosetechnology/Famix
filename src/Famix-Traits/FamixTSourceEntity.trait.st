@@ -102,7 +102,7 @@ FamixTSourceEntity >> numberOfLinesOfCode [
 
 { #category : #metrics }
 FamixTSourceEntity >> numberOfLinesOfCode: aNumber [
-	self privateState cacheAt: #numberOfLinesOfCode put: aNumber
+	self cacheAt: #numberOfLinesOfCode put: aNumber
 ]
 
 { #category : #metrics }
@@ -145,9 +145,12 @@ FamixTSourceEntity >> sourceAnchor: anObject [
 
 { #category : #accessing }
 FamixTSourceEntity >> sourceText [
+	<FMProperty: #sourceText type: #String>
+	<derived>
+	<FMComment: 'Source code of the entity.'>
 	self isStub ifTrue: [ ^ '' ].
-	
-	^ self sourceAnchor 
+
+	^ self sourceAnchor
 		ifNil: [ '' ]
 		ifNotNil: [ self sourceAnchor sourceText ]
 ]

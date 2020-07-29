@@ -81,6 +81,11 @@ FamixTFileAnchor >> endLine [
 ]
 
 { #category : #accessing }
+FamixTFileAnchor >> endPos [
+	^ self explicitRequirement
+]
+
+{ #category : #accessing }
 FamixTFileAnchor >> fileName [
 
 	<FMProperty: #fileName type: #String>
@@ -151,5 +156,10 @@ FamixTFileAnchor >> sourcesAreReadable [
 
 { #category : #accessing }
 FamixTFileAnchor >> startLine [
+	^ self explicitRequirement
+]
+
+{ #category : #accessing }
+FamixTFileAnchor >> startPos [
 	^ self explicitRequirement
 ]

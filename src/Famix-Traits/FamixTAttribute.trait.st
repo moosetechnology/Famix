@@ -34,7 +34,7 @@ FamixTAttribute >> hierarchyNestingLevel [
 
 { #category : #metrics }
 FamixTAttribute >> hierarchyNestingLevel: aNumber [
-	self privateState cacheAt: #hierarchyNestingLevel put: aNumber
+	self cacheAt: #hierarchyNestingLevel put: aNumber
 ]
 
 { #category : #testing }
@@ -66,11 +66,6 @@ FamixTAttribute >> mooseNameOn: aStream [
 	self name ifNotNil: [ aStream nextPutAll: self name ]
 ]
 
-{ #category : #'moose query' }
-FamixTAttribute >> outgoingTypeDeclarations [
-	^ self declaredType ifNil: [ {} ] ifNotNil: [ :dt | {(MooseQueryDependencyAssociation newFrom: self to: dt)} ]
-]
-
 { #category : #accessing }
 FamixTAttribute >> parentType [
 	"Relation named: #parentType type: #FamixTWithAttributes opposite: #attributes"
@@ -93,7 +88,7 @@ FamixTAttribute >> parentType: anObject [
 FamixTAttribute >> parentTypeGroup [
 	<generated>
 	<navigation: 'ParentType'>
-	^ MooseGroup with: self parentType
+	^ MooseSpecializedGroup with: self parentType
 ]
 
 { #category : #printing }

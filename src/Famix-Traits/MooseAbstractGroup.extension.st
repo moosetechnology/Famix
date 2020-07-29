@@ -144,47 +144,35 @@ MooseAbstractGroup >> allModelBehaviourals [
 { #category : #'*Famix-Traits' }
 MooseAbstractGroup >> allModelClasses [
 	<navigation: 'All model classes'>
-
-	^ self privateState cacheAt: 'All model classes'
-		ifAbsentPut: [
-			MooseGroup
-				withAll: ((self allClasses reject: [:each | each isStub ]) )
-				withDescription: 'All model classes' ]
+	^ self cacheAt: 'All model classes' ifAbsentPut: [ MooseGroup withAll: (self allClasses reject: [ :each | each isStub ]) withDescription: 'All model classes' ]
 ]
 
 { #category : #'*Famix-Traits' }
 MooseAbstractGroup >> allModelMethods [
 	<navigation: 'All model methods'>
-	^ self privateState
-		cacheAt: 'All model methods'
-		ifAbsentPut: [ self allMethods reject: [ :each | each isStub ] ]
+	^ self cacheAt: 'All model methods' ifAbsentPut: [ self allMethods reject: [ :each | each isStub ] ]
 ]
 
 { #category : #'*Famix-Traits' }
 MooseAbstractGroup >> allModelNamespaces [
 	<navigation: 'All model namespaces'>
-	^ self privateState
+	^ self
 		cacheAt: 'All model namespaces'
-		ifAbsentPut:
-			[ MooseGroup withAll: (self allNamespaces reject: [ :each | each isStub ]) withDescription: 'All model namespaces' ]
+		ifAbsentPut: [ MooseGroup withAll: (self allNamespaces reject: [ :each | each isStub ]) withDescription: 'All model namespaces' ]
 ]
 
 { #category : #'*Famix-Traits' }
 MooseAbstractGroup >> allModelPackages [
 	<navigation: 'All model packages'>
-	^ self privateState
-		cacheAt: 'All model packages'
-		ifAbsentPut: [ MooseGroup withAll: (self allPackages reject: #isStub) withDescription: 'All model packages' ]
+	^ self cacheAt: 'All model packages' ifAbsentPut: [ MooseGroup withAll: (self allPackages reject: #isStub) withDescription: 'All model packages' ]
 ]
 
 { #category : #'*Famix-Traits' }
 MooseAbstractGroup >> allModelPureClasses [
 	self flag: 'this method exists only the time we manage correctly the interface'.
-	^ self privateState cacheAt: 'All model classes'
-		ifAbsentPut: [
-			MooseGroup
-				withAll: ((self allClasses reject: [:each | each isStub or: [each isInterface]]) )
-				withDescription: 'All model classes' ]
+	^ self
+		cacheAt: 'All model classes'
+		ifAbsentPut: [ MooseGroup withAll: (self allClasses reject: [ :each | each isStub or: [ each isInterface ] ]) withDescription: 'All model classes' ]
 ]
 
 { #category : #'*Famix-Traits' }
@@ -196,11 +184,7 @@ MooseAbstractGroup >> allModelStructuralEntities [
 { #category : #'*Famix-Traits' }
 MooseAbstractGroup >> allModelTypes [
 	<navigation: 'All model types'>
-
-	^ self privateState cacheAt: 'All model types'
-		ifAbsentPut: [
-			(self allTypes reject: [:each | each isStub ])
-				description: 'All model types' ]
+	^ self cacheAt: 'All model types' ifAbsentPut: [ (self allTypes reject: [ :each | each isStub ]) description: 'All model types' ]
 ]
 
 { #category : #'*Famix-Traits' }
@@ -335,5 +319,5 @@ MooseAbstractGroup >> numberOfLinesOfCode [
 MooseAbstractGroup >> numberOfPackages [
 	<FMProperty: #numberOfPackages type: #Number>
 	<FMComment: 'Total number of packages'>
-	^ self privateState cacheAt: #numberOfPackages ifAbsentPut: [ self numberOfEntityUsing: FamixTPackage ]
+	^ self cacheAt: #numberOfPackages ifAbsentPut: [ self numberOfEntityUsing: FamixTPackage ]
 ]

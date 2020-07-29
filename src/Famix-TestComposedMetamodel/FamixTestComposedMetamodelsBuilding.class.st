@@ -65,14 +65,14 @@ FamixTestComposedMetamodelsBuilding >> testOneRemoteToOneNonRemote [
 
 	self assert: (generatedMethod sourceCode includesSubstring: '<generated>').
 	self assert: (generatedMethod sourceCode includesSubstring: '<FMProperty: #binding type: #TstComposedBinding opposite: #method>').
-	self assert: (generatedMethod sourceCode includesSubstring: 'privateState attributeAt: #binding').
+	self assert: (generatedMethod sourceCode includesSubstring: 'attributeAt: #binding').
 	self assert: generatedMethod package name equals: #TstComposed.
 
 	source := ((env ringEnvironment ask classNamed: #TstComposedBinding) methodNamed: #method) sourceCode.
 
 	self assert:  (source includesSubstring: '<generated>').
 	self assert:  (source includesSubstring: '<FMProperty: #method type: #Tst1Method opposite: #binding>').
-	self assert:  (source includesSubstring: 'privateState attributeAt: #method').
+	self assert:  (source includesSubstring: 'attributeAt: #method').
 	self assert: generatedMethod package name equals: #TstComposed.
 ]
 
@@ -91,14 +91,14 @@ FamixTestComposedMetamodelsBuilding >> testOneRemoteToOneRemote [
 
 	self assert: (generatedMethod sourceCode includesSubstring: '<generated>').
 	self assert: (generatedMethod sourceCode includesSubstring: '<FMProperty: #methodNode type: #Tst2MethodNode opposite: #method>').
-	self assert: (generatedMethod sourceCode includesSubstring: 'privateState attributeAt: #methodNode').
+	self assert: (generatedMethod sourceCode includesSubstring: 'attributeAt: #methodNode').
 	self assert: generatedMethod package name equals: #TstComposed.
 
 	source := ((env ringEnvironment ask classNamed: #Tst2MethodNode) methodNamed: #method) sourceCode.
 
 	self assert:  (source includesSubstring: '<generated>').
 	self assert:  (source includesSubstring: '<FMProperty: #method type: #Tst1Method opposite: #methodNode>').
-	self assert:  (source includesSubstring: 'privateState attributeAt: #method').
+	self assert:  (source includesSubstring: 'attributeAt: #method').
 	self assert: generatedMethod package name equals: #TstComposed.
 
 ]

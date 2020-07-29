@@ -383,10 +383,9 @@ MooseQueryTest >> testHasIncomingInvocation [
 
 { #category : #tests }
 MooseQueryTest >> testHasLocalIncoming [
-
-	self assert: (method2 hasLocalIncoming).
-	self deny: (class1 hasLocalIncoming).
-	self deny: (package2 hasLocalIncoming).
+	self assert: method2 hasLocalIncoming.
+	self assert: class1 hasLocalIncoming. "Type declaration"
+	self deny: package2 hasLocalIncoming
 ]
 
 { #category : #tests }
@@ -509,6 +508,11 @@ MooseQueryTest >> testIncomingInvocationAtScope [
 ]
 
 { #category : #tests }
+MooseQueryTest >> testObjectsQueryResultsKind [
+	self assert: (method2 query incoming objects dependencies isKindOf: MooseObjectQueryResult)
+]
+
+{ #category : #tests }
 MooseQueryTest >> testOutgoingAccessAtScope [
 	self assert: ((method1 queryOutgoing: FamixTAccess) atScope: FamixJavaPackage) size equals: 1.
 	self
@@ -573,8 +577,8 @@ MooseQueryTest >> testQueryWith [
 
 { #category : #tests }
 MooseQueryTest >> testSourceThroughAll [
-	self assertCollection: (method2 throughAllFrom) storage flattened hasSameElements: {method2 . method1 . method3}.
-	self assertCollection: (class2 throughAllFrom) storage flattened hasSameElements:  {method2 . method1 . method3 . class1}
+	self assertCollection: method2 throughAllFrom storage flattened hasSameElements: {method2 . method1 . method3}.
+	self assertCollection: class2 throughAllFrom storage flattened hasSameElements: {method2 . method1 . method3 . class1}
 ]
 
 { #category : #tests }

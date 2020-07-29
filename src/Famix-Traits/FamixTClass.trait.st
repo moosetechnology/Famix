@@ -27,9 +27,46 @@ FamixTClass classSide >> annotationFamixClassGroup [
 	^ FamixClassGroup
 ]
 
-{ #category : #testing }
-FamixTClass >> incomingTypeDeclarations [  
-	^ self typedEntities collect: [ :var | MooseQueryDependencyAssociation newFrom: var to: self ]
+{ #category : #metrics }
+FamixTClass >> addedMethods [
+	| inheritedMethodNames |
+	inheritedMethodNames := self inheritedMethods collect: #signature.
+	^ self methods reject: [ :each | inheritedMethodNames includes: each signature ]
+]
+
+{ #category : #enumerating }
+FamixTClass >> inheritedAttributes [
+	| inheritedAttrs |
+	inheritedAttrs := OrderedCollection new.
+	self allSuperclassesDo: [ :each | each attributes do: [ :attr | attr isPrivate ifFalse: [ inheritedAttrs add: attr ] ] ].
+	^ inheritedAttrs
+]
+
+{ #category : #enumerating }
+FamixTClass >> inheritedMethods [
+	| inheritedMethods |
+	inheritedMethods := OrderedCollection new.
+	self allSuperclassesDo: [ :each | each methods do: [ :method | method isPrivate ifFalse: [ inheritedMethods add: method ] ] ].
+	^ inheritedMethods
+]
+
+{ #category : #enumerating }
+FamixTClass >> inheritedSignatures [
+	| inheritedSignatures |
+	inheritedSignatures := Set new.
+	self superclassHierarchy do: [ :each | each methods do: [ :method | method isPrivate ifFalse: [ inheritedSignatures add: method signature ] ] ].
+	^ inheritedSignatures
+]
+
+{ #category : #enumerating }
+FamixTClass >> inheritedSignaturesToMethod [
+	| inheritedSignaturesToMethod |
+	inheritedSignaturesToMethod := Dictionary new.
+	self allSuperclassesDo: [:each | 
+			each methods do: [:method | 
+				method isPrivate ifFalse: [
+					inheritedSignaturesToMethod at: method signature ifAbsentPut: [method]]]].
+	^ inheritedSignaturesToMethod
 ]
 
 { #category : #testing }
@@ -41,17 +78,97 @@ FamixTClass >> isClass [
 
 { #category : #testing }
 FamixTClass >> isTestCase [
-
 	<FMProperty: #isTestCase type: #Boolean>
 	<FMComment: 'True if the method is considered as a test'>
 	<derived>
-
-	^ self privateState attributeAt: #isTestCase ifAbsent: [ false ]
+	^ self attributeAt: #isTestCase ifAbsent: [ false ]
 ]
 
 { #category : #testing }
 FamixTClass >> isTestCase: aBoolean [
-	^ self privateState attributeAt: #isTestCase put: true
+	^ self attributeAt: #isTestCase put: true
+]
+
+{ #category : #metrics }
+FamixTClass >> numberOfAttributesInherited [
+	<FMProperty: #numberOfAttributesInherited type: #Number>
+	<derived>
+	<FMComment: 'The number of attributes in a class inherited from super classes'>	
+	
+	^self
+		lookUpPropertyNamed: #numberOfAttributesInherited
+		computedAs: [self inheritedAttributes size]
+]
+
+{ #category : #metrics }
+FamixTClass >> numberOfAttributesInherited: aNumber [
+	self cacheAt: #numberOfAttributesInherited put: aNumber
+]
+
+{ #category : #metrics }
+FamixTClass >> numberOfMethodsAdded [
+	<FMProperty: #numberOfMethodsAdded type: #Number>
+	<derived>
+	<FMComment: 'The number of methods in a class added with respect to super classes'>	
+	
+	^self
+		lookUpPropertyNamed: #numberOfMethodsAdded
+		computedAs: [self addedMethods size]
+]
+
+{ #category : #metrics }
+FamixTClass >> numberOfMethodsAdded: aNumber [
+	self cacheAt: #numberOfMethodsAdded put: aNumber
+]
+
+{ #category : #metrics }
+FamixTClass >> numberOfMethodsInHierarchy [
+	<FMProperty: #numberOfMethodsInHierarchy type: #Number>
+	<derived>
+	<FMComment: 'The number of methods of a class included the inherited ones'>	
+	
+	| totNom |
+	totNom := self methods size.
+	self superclassHierarchyGroup
+		do: [:aClass | totNom := totNom + aClass methods size].
+	^totNom
+]
+
+{ #category : #metrics }
+FamixTClass >> numberOfMethodsInHierarchy: aNumber [
+	self cacheAt: #numberOfMethodsInHierarchy put: aNumber
+]
+
+{ #category : #metrics }
+FamixTClass >> numberOfMethodsInherited [
+	<FMProperty: #numberOfMethodsInherited type: #Number>
+	<derived>
+	<FMComment: 'The number of methods in a class inherited from super classes'>	
+
+	^self
+		lookUpPropertyNamed: #numberOfMethodsInherited
+		computedAs: [self inheritedMethods size]
+]
+
+{ #category : #metrics }
+FamixTClass >> numberOfMethodsInherited: aNumber [
+	self cacheAt: #numberOfMethodsInherited put: aNumber
+]
+
+{ #category : #metrics }
+FamixTClass >> numberOfMethodsOverriden [
+	<FMProperty: #numberOfMethodsOverriden type: #Number>
+	<derived>
+	<FMComment: 'The number of methods in a class overriden with respect to super classes'>
+			
+	^self
+		lookUpPropertyNamed: #numberOfMethodsOverriden
+		computedAs: [self numberOfMethods - self numberOfMethodsAdded]
+]
+
+{ #category : #metrics }
+FamixTClass >> numberOfMethodsOverriden: aNumber [
+	self cacheAt: #numberOfMethodsOverriden put: aNumber
 ]
 
 { #category : #metrics }
@@ -67,5 +184,5 @@ FamixTClass >> weightOfAClass [
 
 { #category : #metrics }
 FamixTClass >> weightOfAClass: aNumber [
-	self privateState cacheAt: #weightOfAClass put: aNumber
+	self cacheAt: #weightOfAClass put: aNumber
 ]

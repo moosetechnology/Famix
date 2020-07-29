@@ -42,7 +42,6 @@ Class {
 		'tPackage',
 		'tPackageable',
 		'tParameter',
-		'tParameterType',
 		'tParameterizedType',
 		'tParameterizedTypeUser',
 		'tPreprocessorDefine',
@@ -95,22 +94,15 @@ Class {
 		'tWithThrownExceptions',
 		'tWithTypeAliases',
 		'tWithTypes',
-		'tPossibleStub',
 		'tClass',
 		'tFolder',
 		'tFileSystemEntity',
 		'tFileNavigation',
 		'tIndexedFileNavigation',
-		'tClassHierarchyNavigation',
 		'tLCOMMetrics',
-		'tInheritanceGlue',
 		'tWithClasses',
-		'tPackageWithClassesGlue',
 		'tTraitUser',
-		'tClassWithInvocationsGlue',
 		'tWithStatements',
-		'tContainingWithStatementsGlue',
-		'tContainingWithInvocationsGlue',
 		'tMultipleFileAnchor',
 		'tCohesionCouplingMetrics',
 		'tWithTraits',
@@ -926,10 +918,8 @@ FamixGenerator >> defineHierarchy [
 	tAttribute --|> tStructuralEntity.
 
 	tAnnotationInstance --|> #TEntityMetaLevelDependency.
-	tAnnotationInstance --|> #TDependencyQueries.
 
 	tAnnotationInstanceAttribute --|> #TEntityMetaLevelDependency.
-	tAnnotationInstanceAttribute --|> #TDependencyQueries.
 
 	tAnnotationTypeAttribute --|> tAttribute.
 
@@ -1001,7 +991,6 @@ FamixGenerator >> defineHierarchy [
 	
 	tMultipleFileAnchor --|> tSourceAnchor.
 	
-	tNamedEntity --|> #TDependencyQueries.
 	tNamedEntity --|> #TEntityMetaLevelDependency.
 	tNamedEntity --|> tSourceEntity.
 
@@ -1413,10 +1402,11 @@ FamixGenerator >> defineRelations [
 
 	((tTypedEntity property: #declaredType)
 			comment: 'Type of the entity, if any' ;
-			dependencySource)
+			source)
 		*-
 	((tType property: #typedEntities)
-			comment: 'Entities that have this type as declaredType').
+			comment: 'Entities that have this type as declaredType';
+			target).
 
 
 ]
@@ -1764,8 +1754,6 @@ FamixGenerator >> defineTraits [
 	tMultipleFileAnchor := builder newTraitNamed: #TMultipleFileAnchor.
 
 	tCohesionCouplingMetrics := builder newTraitNamed: #TCohesionCouplingMetrics.
-
-	tClassHierarchyNavigation := builder newTraitNamed: #TClassHierarchyNavigation.
 
 	tLCOMMetrics := builder newTraitNamed: #TLCOMMetrics
 ]

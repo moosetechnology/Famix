@@ -93,6 +93,13 @@ FamixDependencyDetectorTest >> testClientsMethodFromClasses [
 	self assertCollection: (self m2 allClientsIn: model allModelClasses) hasSameElements: { self c1 }
 ]
 
+{ #category : #'tests-clients' }
+FamixDependencyDetectorTest >> testDependenciesStopAtFirstParent [
+	"The dependency finder should stop at the first found parent and not go all the way up in the containment tree if it is found."
+
+	self assertCollection: (self m2 allClientsIn: {self c1 . self p1}) hasSameElements: {self c1}
+]
+
 { #category : #'tests-providers' }
 FamixDependencyDetectorTest >> testProviderClassesToMethods [
 	self assertCollection: (self c1 allProvidersIn: model allModelMethods) hasSameElements: { self m2 }

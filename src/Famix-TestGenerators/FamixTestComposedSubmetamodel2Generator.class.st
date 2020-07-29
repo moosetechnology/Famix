@@ -41,8 +41,7 @@ FamixTestComposedSubmetamodel2Generator >> defineClasses [
 ]
 
 { #category : #definition }
-FamixTestComposedSubmetamodel2Generator >> defineHierarchy [ 
-
+FamixTestComposedSubmetamodel2Generator >> defineHierarchy [
 	super defineHierarchy.
 
 	classEntity --|> namedEntity.
@@ -51,6 +50,5 @@ FamixTestComposedSubmetamodel2Generator >> defineHierarchy [
 	method --|> namedEntity.
 	method --|> #TMethod.
 
-	customEntity5 --|> #TEntityMetaLevelDependency.
-	customEntity5 --|> #TDependencyQueries
+	customEntity5 --|> #TEntityMetaLevelDependency
 ]

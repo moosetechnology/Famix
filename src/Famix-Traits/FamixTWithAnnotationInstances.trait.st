@@ -90,5 +90,5 @@ FamixTWithAnnotationInstances >> numberOfAnnotationInstances [
 
 { #category : #metrics }
 FamixTWithAnnotationInstances >> numberOfAnnotationInstances: aNumber [
-	self privateState cacheAt: #numberOfAnnotationInstances put: aNumber
+	self cacheAt: #numberOfAnnotationInstances put: aNumber
 ]

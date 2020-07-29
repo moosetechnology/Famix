@@ -25,8 +25,3 @@ FamixTEnum classSide >> annotation [
 	<generated>
 	^self
 ]
-
-{ #category : #testing }
-FamixTEnum >> incomingTypeDeclarations [  
-	^ self typedEntities collect: [ :var | MooseQueryDependencyAssociation newFrom: var to: self ]
-]

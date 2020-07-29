@@ -206,11 +206,11 @@ FmxMBBehavior >> generateNavigationGroupsFor: aClass [
 						ifTrue: [ '{1}
 	<generated>
 	<navigation: ''{2}''>
-	^ MooseGroup withAll: self {3} asSet' ]
+	^ MooseSpecializedGroup withAll: self {3} asSet' ]
 						ifFalse: [ '{1}
 	<generated>
 	<navigation: ''{2}''>
-	^ MooseGroup with: self {3}' ]) format: {(sideName , 'Group') . sideName capitalized . sideName})
+	^ MooseSpecializedGroup with: self {3}' ]) format: {(sideName , 'Group') . sideName capitalized . sideName})
 				in: aClass instanceSide
 				classified: #navigation ]
 ]
@@ -278,6 +278,12 @@ FmxMBBehavior >> isMetamodelClassGroup [
 { #category : #testing }
 FmxMBBehavior >> isMetamodelTrait [
 
+	^ false
+]
+
+{ #category : #testing }
+FmxMBBehavior >> isModelClass [
+	"The class prefix, Model"
 	^ false
 ]
 
@@ -358,18 +364,16 @@ FmxMBBehavior >> property: propertyName [
 
 { #category : #accessing }
 FmxMBBehavior >> property: propertyName type: aTypeName [
-
 	| aSide |
-	
 	aSide := FmxMBTypedProperty new
-		name: propertyName;
 		builder: self builder;
+		name: propertyName;
 		propertyType: aTypeName asSymbol;
 		yourself.
-		
+
 	self properties add: aSide.
 
-	^ aSide.		
+	^ aSide
 ]
 
 { #category : #private }

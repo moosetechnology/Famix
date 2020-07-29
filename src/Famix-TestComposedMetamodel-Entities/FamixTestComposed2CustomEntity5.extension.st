@@ -8,7 +8,7 @@ FamixTestComposed2CustomEntity5 >> associations [
 	<derived>
 	<FMProperty: #associations type: #FamixTestComposedAssociation opposite: #c25>
 	<package: #'Famix-TestComposedMetamodel-Entities'>
-	^ self privateState attributeAt: #associations ifAbsentPut: [ FMMultivalueLink on: self opposite: #c25: ]
+	^ self attributeAt: #associations ifAbsentPut: [ FMMultivalueLink on: self opposite: #c25: ]
 ]
 
 { #category : #'*Famix-TestComposedMetamodel-Entities-accessing' }

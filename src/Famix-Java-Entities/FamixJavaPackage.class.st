@@ -47,7 +47,7 @@ FamixJavaPackage >> afferentCoupling [
 	<FMProperty: #afferentCoupling type: #Number>
 	<derived>
 	<FMComment: 'Afferent Coupling of a package'>
-	^ ((self queryIncomingDependencies atScope: FamixTType) outOfParentUsing: FamixTPackage) size
+	^ ((self queryAllIncoming atScope: FamixTType) outOfParentUsing: FamixTPackage) size
 ]
 
 { #category : #'Famix-Extensions' }
@@ -67,7 +67,7 @@ FamixJavaPackage >> bunchCohesion [
 	myClasses := self classes.
 	myClasses := myClasses union: (myClasses flatCollect: [ :c | c allRecursiveTypes ]).
 	myClasses size == 0 ifTrue: [ ^ nil ].
-	intraConnectivities := (myClasses collect: [ :c | (c queryOutgoingDependencies atScope: FamixTType) withinParentUsing: FamixTPackage ]) inject: 0 into: [ :subTotal :each | subTotal + each size ].
+	intraConnectivities := (myClasses collect: [ :c | (c queryAllOutgoing atScope: FamixTType) withinParentUsing: FamixTPackage ]) inject: 0 into: [ :subTotal :each | subTotal + each size ].
 	^ intraConnectivities / myClasses size squared asFloat
 ]
 
@@ -83,11 +83,11 @@ FamixJavaPackage >> bunchCouplingWith: aPackage [
 	(myClasses size == 0 or: [ otherClasses size == 0 ]) ifTrue: [ ^ nil ].
 
 	"All outgoing dependencies"
-	interConnectivities := (myClasses collect: [ :c | (c queryOutgoingDependencies atScope: FamixTType) within: aPackage ]) inject: 0 into: [ :subTotal :each | subTotal + each size ].
+	interConnectivities := (myClasses collect: [ :c | (c queryAllOutgoing atScope: FamixTType) within: aPackage ]) inject: 0 into: [ :subTotal :each | subTotal + each size ].
 
 	"Plus all incoming dependencies"
 	interConnectivities := interConnectivities
-		+ ((myClasses collect: [ :c | (c queryIncomingDependencies atScope: FamixTType) within: aPackage ]) inject: 0 into: [ :subTotal :each | subTotal + each size ]).
+		+ ((myClasses collect: [ :c | (c queryAllIncoming atScope: FamixTType) within: aPackage ]) inject: 0 into: [ :subTotal :each | subTotal + each size ]).
 	^ interConnectivities / (2 * myClasses size * otherClasses size) asFloat
 ]
 
@@ -102,11 +102,11 @@ FamixJavaPackage >> bunchCouplingWithAll [
 	myClasses ifEmpty: [ ^ nil ].
 
 	"All outgoing dependencies"
-	interConnectivities := (myClasses collect: [ :c | (c queryOutgoingDependencies atScope: FamixTType) outOfParentUsing: FamixTPackage ]) inject: 0 into: [ :subTotal :each | subTotal + each size ].
+	interConnectivities := (myClasses collect: [ :c | (c queryAllOutgoing atScope: FamixTType) outOfParentUsing: FamixTPackage ]) inject: 0 into: [ :subTotal :each | subTotal + each size ].
 
 	"Plus all incoming dependencies"
 	interConnectivities := interConnectivities
-		+ ((myClasses collect: [ :c | (c queryIncomingDependencies atScope: FamixTType) outOfParentUsing: FamixTPackage ]) inject: 0 into: [ :subTotal :each | subTotal + each size ]).
+		+ ((myClasses collect: [ :c | (c queryAllIncoming atScope: FamixTType) outOfParentUsing: FamixTPackage ]) inject: 0 into: [ :subTotal :each | subTotal + each size ]).
 	^ interConnectivities / (2 * myClasses size * (allClasses size - myClasses size)) asFloat
 ]
 
@@ -117,7 +117,7 @@ FamixJavaPackage >> childrenOfMyKind [
 
 { #category : #accessing }
 FamixJavaPackage >> classes [
-	^ self privateState cacheAt: #classes ifAbsentPut: [ self childEntities select: [ :child | child isClass ] ]
+	^ self cacheAt: #classes ifAbsentPut: [ self childEntities select: [ :child | child isClass ] ]
 ]
 
 { #category : #'Famix-Extensions-accessing' }
@@ -184,13 +184,13 @@ FamixJavaPackage >> martinCohesion [
 	myClasses := self classes.
 	myClasses := myClasses union: (myClasses flatCollect: [ :c | c allRecursiveTypes ]).
 	myClasses size == 0 ifTrue: [ ^ nil ].
-	intraConnectivities := (myClasses collect: [ :c | (c queryOutgoingDependencies atScope: FamixTType) withoutSelfLoops withinParentUsing: FamixTPackage ]) inject: 0 into: [ :subTotal :each | subTotal + each size ].
+	intraConnectivities := (myClasses collect: [ :c | (c queryAllOutgoing atScope: FamixTType) withoutSelfLoops withinParentUsing: FamixTPackage ]) inject: 0 into: [ :subTotal :each | subTotal + each size ].
 	^ ((intraConnectivities + 1) / myClasses size) asFloat
 ]
 
 { #category : #accessing }
 FamixJavaPackage >> methods [
-	^ self privateState cacheAt: #methods ifAbsentPut: [ self classes flatCollect: #methods ]
+	^ self cacheAt: #methods ifAbsentPut: [ self classes flatCollect: #methods ]
 ]
 
 { #category : #accessing }
@@ -203,7 +203,7 @@ FamixJavaPackage >> numberOfClientPackages [
 
 { #category : #accessing }
 FamixJavaPackage >> numberOfClientPackages: aNumber [
-	self privateState cacheAt: #numberOfClientPackages put: aNumber
+	self cacheAt: #numberOfClientPackages put: aNumber
 ]
 
 { #category : #accessing }
@@ -218,7 +218,7 @@ FamixJavaPackage >> numberOfMethods [
 
 { #category : #accessing }
 FamixJavaPackage >> numberOfMethods: aNumber [
-	self privateState cacheAt: #numberOfMethods put: aNumber
+	self cacheAt: #numberOfMethods put: aNumber
 ]
 
 { #category : #printing }

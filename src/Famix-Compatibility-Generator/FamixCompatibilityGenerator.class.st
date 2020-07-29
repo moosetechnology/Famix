@@ -350,7 +350,6 @@ FamixCompatibilityGenerator >> defineHierarchy [
 	type --|> #TWithInheritances.
 	type --|> #TWithAttributes.
 	type --|> #TParameterizedTypeUser.
-	type --|> #TClassHierarchyNavigation. 
 	type --|> #TTraitUser. 
 
 	typeAlias --|> type.

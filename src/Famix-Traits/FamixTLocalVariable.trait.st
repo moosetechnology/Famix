@@ -19,11 +19,6 @@ FamixTLocalVariable classSide >> annotation [
 	^self
 ]
 
-{ #category : #'moose query' }
-FamixTLocalVariable >> outgoingTypeDeclarations [
-	^ self declaredType ifNil: [ {} ] ifNotNil: [ :dt | {(MooseQueryDependencyAssociation newFrom: self to: dt)} ]
-]
-
 { #category : #accessing }
 FamixTLocalVariable >> parentBehaviouralEntity [
 	"Relation named: #parentBehaviouralEntity type: #FamixTWithLocalVariables opposite: #localVariables"
@@ -47,5 +42,5 @@ FamixTLocalVariable >> parentBehaviouralEntity: anObject [
 FamixTLocalVariable >> parentBehaviouralEntityGroup [
 	<generated>
 	<navigation: 'ParentBehaviouralEntity'>
-	^ MooseGroup with: self parentBehaviouralEntity
+	^ MooseSpecializedGroup with: self parentBehaviouralEntity
 ]

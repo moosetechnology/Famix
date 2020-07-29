@@ -6,6 +6,6 @@ A Mock invocation for MooseQuery's tests
 "
 Class {
 	#name : #MooseQueryMockSpecializedInvocation,
-	#superclass : #FAMIXInvocation,
+	#superclass : #FamixJavaInvocation,
 	#category : #'Moose-Query-Test'
 }

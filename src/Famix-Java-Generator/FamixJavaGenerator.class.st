@@ -237,7 +237,6 @@ FamixJavaGenerator >> defineHierarchy [
 	type --|> #TType.
 	type --|> #TWithTypeAliases.
 	type --|> #TParameterizedTypeUser.
-	type --|> #TClassHierarchyNavigation. 
 	type --|> #TWithMethods.
 
 	unknownVariable --|> namedEntity.

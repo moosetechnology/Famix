@@ -100,9 +100,7 @@ FamixCAAnalyzer >> model: anObject [
 
 { #category : #accessing }
 FamixCAAnalyzer >> mooseModel [
-	^ self model isMooseModel
-		ifTrue: [ self model ]
-		ifFalse: [ self model mooseModel ]
+	^ self model localMooseModel
 ]
 
 { #category : #computation }

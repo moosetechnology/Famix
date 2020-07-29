@@ -49,11 +49,6 @@ FAMIXFunction >> mooseNameOn: stream [
 		ifNil: [ self name ifNotNil: [ stream nextPutAll: self name] ]
 ]
 
-{ #category : #'moose query' }
-FAMIXFunction >> outgoingTypeDeclarations [
-	^ self declaredType ifNil: [ {} ] ifNotNil: [ :dt | {(MooseQueryDependencyAssociation newFrom: self to: dt)} ]
-]
-
 { #category : #accessing }
 FAMIXFunction >> parentScope [
 	^ self functionOwner

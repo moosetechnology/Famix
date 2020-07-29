@@ -57,7 +57,7 @@ FamixTest4School >> principal: anObject [
 FamixTest4School >> principalGroup [
 	<generated>
 	<navigation: 'Principal'>
-	^ MooseGroup with: self principal
+	^ MooseSpecializedGroup with: self principal
 ]
 
 { #category : #accessing }
@@ -80,7 +80,7 @@ FamixTest4School >> rooms: anObject [
 FamixTest4School >> roomsGroup [
 	<generated>
 	<navigation: 'Rooms'>
-	^ MooseGroup withAll: self rooms asSet
+	^ MooseSpecializedGroup withAll: self rooms asSet
 ]
 
 { #category : #accessing }
@@ -103,7 +103,7 @@ FamixTest4School >> students: anObject [
 FamixTest4School >> studentsGroup [
 	<generated>
 	<navigation: 'Students'>
-	^ MooseGroup withAll: self students asSet
+	^ MooseSpecializedGroup withAll: self students asSet
 ]
 
 { #category : #accessing }
@@ -126,5 +126,5 @@ FamixTest4School >> teachers: anObject [
 FamixTest4School >> teachersGroup [
 	<generated>
 	<navigation: 'Teachers'>
-	^ MooseGroup withAll: self teachers asSet
+	^ MooseSpecializedGroup withAll: self teachers asSet
 ]

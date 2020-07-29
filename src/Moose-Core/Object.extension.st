@@ -19,6 +19,11 @@ Object >> hasUniqueMooseNameInModel [
 ]
 
 { #category : #'*Moose-Core' }
+Object >> isMooseEntity [
+	^ false
+]
+
+{ #category : #'*Moose-Core' }
 Object class >> isOfType: aClassFAMIX [
 	^ false
 ]
@@ -129,7 +134,7 @@ Object >> mooseModel [
 
 { #category : #'*moose-core' }
 Object >> mooseName [
-	^ self printString
+	^ self printString asSymbol
 ]
 
 { #category : #'*Moose-Core' }

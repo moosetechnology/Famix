@@ -41,7 +41,7 @@ FamixTFunction >> functionOwner: anObject [
 FamixTFunction >> functionOwnerGroup [
 	<generated>
 	<navigation: 'FunctionOwner'>
-	^ MooseGroup with: self functionOwner
+	^ MooseSpecializedGroup with: self functionOwner
 ]
 
 { #category : #testing }
@@ -59,9 +59,4 @@ FamixTFunction >> mooseNameOn: stream [
 		ifNotNil: [ parent mooseNameOn: stream.
 			stream nextPut: $. ].
 	self signature ifNotNil: [ stream nextPutAll: self signature ] ifNil: [ self name ifNotNil: [ stream nextPutAll: self name ] ]
-]
-
-{ #category : #'moose query' }
-FamixTFunction >> outgoingTypeDeclarations [
-	^ self declaredType ifNil: [ {} ] ifNotNil: [ :dt | {(MooseQueryDependencyAssociation newFrom: self to: dt)} ]
 ]

@@ -55,7 +55,7 @@ FamixTWithMethods >> numberOfAbstractMethods [
 
 { #category : #metrics }
 FamixTWithMethods >> numberOfAbstractMethods: aNumber [
-	self privateState cacheAt: #numberOfAbstractMethods put: aNumber
+	self cacheAt: #numberOfAbstractMethods put: aNumber
 ]
 
 { #category : #metrics }
@@ -75,7 +75,7 @@ FamixTWithMethods >> numberOfAccessorMethods [
 
 { #category : #metrics }
 FamixTWithMethods >> numberOfAccessorMethods: aNumber [
-	self privateState cacheAt: #numberOfAccessorMethods put: aNumber
+	self cacheAt: #numberOfAccessorMethods put: aNumber
 ]
 
 { #category : #metrics }
@@ -99,7 +99,7 @@ FamixTWithMethods >> numberOfConstructorMethods [
 
 { #category : #metrics }
 FamixTWithMethods >> numberOfConstructorMethods: aNumber [
-	self privateState cacheAt: #numberOfConstructorMethods put: aNumber
+	self cacheAt: #numberOfConstructorMethods put: aNumber
 ]
 
 { #category : #metrics }
@@ -115,23 +115,7 @@ FamixTWithMethods >> numberOfMessageSends [
 
 { #category : #metrics }
 FamixTWithMethods >> numberOfMessageSends: aNumber [
-	self privateState cacheAt: #numberOfMessageSends put: aNumber
-]
-
-{ #category : #metrics }
-FamixTWithMethods >> numberOfMethodProtocols [
-	<FMProperty: #numberOfMethodProtocols type: #Number>
-	<derived>
-	<FMComment: 'The number of method protocols in a class'>
-	
-	^self
-		lookUpPropertyNamed: #numberOfMethodProtocols
-		computedAs: [((self methods collect: [:each | each protocol]) reject: #isNil) asSet size]
-]
-
-{ #category : #metrics }
-FamixTWithMethods >> numberOfMethodProtocols: aNumber [
-	self privateState cacheAt: #numberOfMethodProtocols put: aNumber
+	self cacheAt: #numberOfMessageSends put: aNumber
 ]
 
 { #category : #accessing }
@@ -147,7 +131,7 @@ FamixTWithMethods >> numberOfMethods [
 
 { #category : #accessing }
 FamixTWithMethods >> numberOfMethods: aNumber [
-	self privateState cacheAt: #numberOfMethods put: aNumber
+	self cacheAt: #numberOfMethods put: aNumber
 ]
 
 { #category : #metrics }
@@ -163,7 +147,7 @@ FamixTWithMethods >> numberOfPrivateMethods [
 
 { #category : #metrics }
 FamixTWithMethods >> numberOfPrivateMethods: aNumber [
-	self privateState cacheAt: #numberOfPrivateMethods put: aNumber
+	self cacheAt: #numberOfPrivateMethods put: aNumber
 ]
 
 { #category : #metrics }
@@ -179,7 +163,7 @@ FamixTWithMethods >> numberOfProtectedMethods [
 
 { #category : #metrics }
 FamixTWithMethods >> numberOfProtectedMethods: aNumber [
-	self privateState cacheAt: #numberOfProtectedMethods put: aNumber
+	self cacheAt: #numberOfProtectedMethods put: aNumber
 ]
 
 { #category : #metrics }
@@ -195,7 +179,7 @@ FamixTWithMethods >> numberOfPublicMethods [
 
 { #category : #metrics }
 FamixTWithMethods >> numberOfPublicMethods: aNumber [
-	self privateState cacheAt: #numberOfPublicMethods put: aNumber
+	self cacheAt: #numberOfPublicMethods put: aNumber
 ]
 
 { #category : #metrics }
@@ -235,7 +219,7 @@ FamixTWithMethods >> tightClassCohesion [
 
 { #category : #metrics }
 FamixTWithMethods >> tightClassCohesion: aNumber [
-	self privateState cacheAt: #tightClassCohesion put: aNumber
+	self cacheAt: #tightClassCohesion put: aNumber
 ]
 
 { #category : #metrics }
@@ -251,5 +235,5 @@ FamixTWithMethods >> weightedMethodCount [
 
 { #category : #metrics }
 FamixTWithMethods >> weightedMethodCount: aNumber [
-	self privateState cacheAt: #weightedMethodCount put: aNumber
+	self cacheAt: #weightedMethodCount put: aNumber
 ]

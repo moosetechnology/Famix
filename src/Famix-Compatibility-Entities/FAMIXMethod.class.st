@@ -43,13 +43,13 @@ FAMIXMethod >> category [
 	<FMComment: 'Category of the method'>
 	<package: 'Smalltalk'>
 	
-	^ self privateState attributeAt: #category ifAbsentPut: [ nil ]
+	^ self attributeAt: #category ifAbsentPut: [ nil ]
 ]
 
 { #category : #'Famix-Smalltalk' }
 FAMIXMethod >> category: aString [
 
-	self privateState attributeAt: #category put: aString
+	self attributeAt: #category put: aString
 
 	
 ]
@@ -113,7 +113,7 @@ FAMIXMethod >> isClassInitializer [
 	<FMProperty: #isClassInitializer type: #Boolean>
 	<derived>
 	<FMComment: 'True if the method is an initializer of the class (i.e. contains the attribute init env)'>
-	^ #initializer = self kind or: [ self privateState cacheAt: #isClassInitializer ifAbsent: [ false ] ]
+	^ #initializer = self kind or: [ self cacheAt: #isClassInitializer ifAbsent: [ false ] ]
 ]
 
 { #category : #'Famix-Extensions' }
@@ -214,12 +214,7 @@ FAMIXMethod >> numberOfInvokedMethods [
 	<FMProperty: #numberOfInvokedMethods type: #Number>
 	<FMComment: 'Return a number corresponding to the number of invoked methods'>
 	<derived>
-	^ self privateState cacheAt: #numberOfInvokedMethods ifAbsentPut: [ self invokedMethods size ]
-]
-
-{ #category : #'moose query' }
-FAMIXMethod >> outgoingTypeDeclarations [
-	^ self declaredType ifNil: [ {} ] ifNotNil: [ :dt | {(MooseQueryDependencyAssociation newFrom: self to: dt)} ]
+	^ self cacheAt: #numberOfInvokedMethods ifAbsentPut: [ self invokedMethods size ]
 ]
 
 { #category : #'Famix-Implementation' }
@@ -274,11 +269,11 @@ FAMIXMethod >> timeStamp [
 	<FMComment: 'TimeStamp of the method with author and time of the last change'>
 	<package: 'Smalltalk'>
 	
-	^ self privateState attributeAt: #timeStamp ifAbsentPut: ['']
+	^ self attributeAt: #timeStamp ifAbsentPut: ['']
 ]
 
 { #category : #'Famix-Smalltalk' }
 FAMIXMethod >> timeStamp: aTimeStamp [
 
-	self privateState attributeAt: #timeStamp put: aTimeStamp
+	self attributeAt: #timeStamp put: aTimeStamp
 ]

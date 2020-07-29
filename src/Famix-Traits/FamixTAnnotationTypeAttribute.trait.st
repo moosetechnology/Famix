@@ -56,8 +56,3 @@ FamixTAnnotationTypeAttribute >> annotationAttributeInstances: anObject [
 	<generated>
 	annotationAttributeInstances value: anObject
 ]
-
-{ #category : #'moose query' }
-FamixTAnnotationTypeAttribute >> outgoingTypeDeclarations [
-	^ self declaredType ifNil: [ {} ] ifNotNil: [ :dt | {(MooseQueryDependencyAssociation newFrom: self to: dt)} ]
-]

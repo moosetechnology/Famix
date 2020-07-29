@@ -1,114 +1,13 @@
 Extension { #name : #Collection }
 
 { #category : #'*Moose-Query' }
-Collection >> allAtAnyScope: aCollectionOfFamixClasses in: aCollection [
-	1 to: self size do: [ :ind | (self at: ind) allAtAnyScope: aCollectionOfFamixClasses in: aCollection ].
-	^ aCollection
+Collection >> isIncludedIn: anEntity parentSelectorsCache: aCollection [
+	"Use dispatch on entities or collections for performance reasons."
+
+	^ self anySatisfy: [ :each | each isIncludedIn: anEntity parentSelectorsCache: aCollection ]
 ]
 
 { #category : #'*Moose-Query' }
-Collection >> allAtAnyScope: aCollectionOfFamixClasses in: aCollection until: aRejectBlock [
-	1 to: self size do: [ :ind | (self at: ind) allAtAnyScope: aCollectionOfFamixClasses in: aCollection  until: aRejectBlock ].
-	^ aCollection
-]
-
-{ #category : #'*Moose-Query' }
-Collection >> allAtScope: aFAMIXScope in: aCollection [
-	1 to: self size do: [ :ind | (self at: ind) allAtScope: aFAMIXScope in: aCollection ].
-	^ aCollection
-]
-
-{ #category : #'*Moose-Query' }
-Collection >> allAtScope: aFAMIXScope in: aCollection until: aRejectBlock [
-	1 to: self size do: [ :ind | (self at: ind) allAtScope: aFAMIXScope in: aCollection until: aRejectBlock ].
-	^ aCollection
-]
-
-{ #category : #'*Moose-Query' }
-Collection >> allToAnyScope: aCollectionOfFamixClasses in: aCollection [
-	1 to: self size do: [ :ind | (self at: ind) allToAnyScope: aCollectionOfFamixClasses in: aCollection ].
-	^ aCollection
-]
-
-{ #category : #'*Moose-Query' }
-Collection >> allToAnyScope: aCollectionOfFamixClasses in: aCollection until: aRejectBlock [
-	1 to: self size do: [ :ind | (self at: ind) allToAnyScope: aCollectionOfFamixClasses in: aCollection until: aRejectBlock ].
-	^ aCollection
-]
-
-{ #category : #'*Moose-Query' }
-Collection >> allToScope: aFAMIXScope in: aCollection [
-	^ self allToScope: aFAMIXScope in: aCollection until: [ :a | false ]
-]
-
-{ #category : #'*Moose-Query' }
-Collection >> allToScope: aFAMIXScope in: aCollection until: aRejectBlock [
-	1 to: self size do: [ :ind | (self at: ind) allToScope: aFAMIXScope in: aCollection until: aRejectBlock ].
-	^ aCollection
-]
-
-{ #category : #'*Moose-Query' }
-Collection >> allWithScope: aFAMIXScope in: aCollection [
-	^ self allWithScope: aFAMIXScope in: aCollection until: [ :a | false ]
-]
-
-{ #category : #'*Moose-Query' }
-Collection >> allWithScope: aFAMIXScope in: aCollection until: aRejectBlock [
-	1 to: self size do: [ :ind | (self at: ind) allWithScope: aFAMIXScope in: aCollection until: aRejectBlock ].
-	^ aCollection
-]
-
-{ #category : #'*Moose-Query' }
-Collection >> atAnyScope: aCollectionOfFamixScopes in: aCollection [
-	^ self atAnyScope: aCollectionOfFamixScopes in: aCollection until: [ :a | false ]
-]
-
-{ #category : #'*Moose-Query' }
-Collection >> atAnyScope: aCollectionOfFamixScopes in: aCollection until: aRejectBlock [
-	1 to: self size do: [ :ind | (self at: ind) atAnyScope: aCollectionOfFamixScopes in: aCollection until: aRejectBlock ].
-	^ aCollection
-]
-
-{ #category : #'*Moose-Query' }
-Collection >> atScope: aFAMIXScope in: aCollection [
-	^ self atScope: aFAMIXScope in: aCollection until: [ :a | false ]
-]
-
-{ #category : #'*Moose-Query' }
-Collection >> atScope: aFAMIXScope in: aCollection until: aRejectBlock [
-	1 to: self size do: [ :ind | (self at: ind) atScope: aFAMIXScope in: aCollection until: aRejectBlock ].
-	^ aCollection
-]
-
-{ #category : #'*Moose-Query' }
-Collection >> toAnyScope: aCollectionOfFamixClasses in: aCollection [
-	^ self toAnyScope: aCollectionOfFamixClasses in: aCollection until: [ :a | false ]
-]
-
-{ #category : #'*Moose-Query' }
-Collection >> toAnyScope: aCollectionOfFamixClasses in: aCollection until: aRejectBlock [
-	1 to: self size do: [ :ind | (self at: ind) toAnyScope: aCollectionOfFamixClasses in: aCollection until: aRejectBlock ].
-	^ aCollection
-]
-
-{ #category : #'*Moose-Query' }
-Collection >> toScope: aFAMIXScope in: aCollection [
-	^ self toScope: aFAMIXScope in: aCollection until: [ :a | false ]
-]
-
-{ #category : #'*Moose-Query' }
-Collection >> toScope: aFAMIXScope in: aCollection until: aRejectBlock [
-	1 to: self size do: [ :ind | (self at: ind) toScope: aFAMIXScope in: aCollection until: aRejectBlock ].
-	^ aCollection
-]
-
-{ #category : #'*Moose-Query' }
-Collection >> withScope: aFAMIXScope in: aCollection [
-	^ self withScope: aFAMIXScope in: aCollection until: [ :a | false ]
-]
-
-{ #category : #'*Moose-Query' }
-Collection >> withScope: aFAMIXScope in: aCollection until: aRejectBlock [
-	1 to: self size do: [ :ind | (self at: ind) withScope: aFAMIXScope in: aCollection until: aRejectBlock ].
-	^ aCollection
+Collection >> scopeForQuery: aQuery direction: aDirection [
+	1 to: self size do: [ :ind | aDirection scopeFor: (self at: ind) query: aQuery ]
 ]

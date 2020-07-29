@@ -32,20 +32,6 @@ FamixTMethod classSide >> annotationFamixMethodGroup [
 ]
 
 { #category : #metrics }
-FamixTMethod >> cyclomaticComplexity [
-	<FMProperty: #cyclomaticComplexity type: #Number>
-	<FMComment: 'The number of linear-independent paths through a method.'>
-	^ self
-		lookUpPropertyNamed:  #cyclomaticComplexity
-		computedAs: [ self notExistentMetricValue ]
-]
-
-{ #category : #metrics }
-FamixTMethod >> cyclomaticComplexity: aNumber [
-	self privateState cacheAt: #cyclomaticComplexity put: aNumber
-]
-
-{ #category : #metrics }
 FamixTMethod >> hierarchyNestingLevel [
 	<FMProperty: #hierarchyNestingLevel type: #Number>
 	<derived>
@@ -58,7 +44,7 @@ FamixTMethod >> hierarchyNestingLevel [
 
 { #category : #metrics }
 FamixTMethod >> hierarchyNestingLevel: aNumber [
-	self privateState cacheAt: #hierarchyNestingLevel put: aNumber
+	self cacheAt: #hierarchyNestingLevel put: aNumber
 ]
 
 { #category : #accessing }
@@ -104,7 +90,7 @@ FamixTMethod >> isConstructor [
 	<FMProperty: #isConstructor type: #Boolean>
 	<derived>
 	<FMComment: 'True if the method is a constructor of the class'>
-	^ #constructor = self kind or: [ self privateState cacheAt: #isConstructor ifAbsent: [ false ] ]
+	^ #constructor = self kind or: [ self cacheAt: #isConstructor ifAbsent: [ false ] ]
 ]
 
 { #category : #testing }
@@ -133,7 +119,7 @@ FamixTMethod >> isMethod [
 
 { #category : #testing }
 FamixTMethod >> isPureAccessor [
-	^ self isGetter or: [ self isSetter or: [ self privateState cacheAt: #isPureAccessor ifAbsent: [ false ] ] ]
+	^ self isGetter or: [ self isSetter or: [ self cacheAt: #isPureAccessor ifAbsent: [ false ] ] ]
 ]
 
 { #category : #testing }
@@ -183,12 +169,7 @@ FamixTMethod >> numberOfMessageSends [
 
 { #category : #metrics }
 FamixTMethod >> numberOfMessageSends: aNumber [
-	self privateState cacheAt: #numberOfMessageSends put: aNumber
-]
-
-{ #category : #'moose query' }
-FamixTMethod >> outgoingTypeDeclarations [
-	^ self declaredType ifNil: [ {} ] ifNotNil: [ :dt | {(MooseQueryDependencyAssociation newFrom: self to: dt)} ]
+	self cacheAt: #numberOfMessageSends put: aNumber
 ]
 
 { #category : #accessing }
@@ -213,7 +194,7 @@ FamixTMethod >> parentType: anObject [
 FamixTMethod >> parentTypeGroup [
 	<generated>
 	<navigation: 'ParentType'>
-	^ MooseGroup with: self parentType
+	^ MooseSpecializedGroup with: self parentType
 ]
 
 { #category : #testing }

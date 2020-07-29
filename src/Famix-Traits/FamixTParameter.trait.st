@@ -19,11 +19,6 @@ FamixTParameter classSide >> annotation [
 	^self
 ]
 
-{ #category : #'moose query' }
-FamixTParameter >> outgoingTypeDeclarations [
-	^ self declaredType ifNil: [ {} ] ifNotNil: [ :dt | {(MooseQueryDependencyAssociation newFrom: self to: dt)} ]
-]
-
 { #category : #accessing }
 FamixTParameter >> parentBehaviouralEntity [
 	"Relation named: #parentBehaviouralEntity type: #FamixTWithParameters opposite: #parameters"
@@ -46,5 +41,5 @@ FamixTParameter >> parentBehaviouralEntity: anObject [
 FamixTParameter >> parentBehaviouralEntityGroup [
 	<generated>
 	<navigation: 'ParentBehaviouralEntity'>
-	^ MooseGroup with: self parentBehaviouralEntity
+	^ MooseSpecializedGroup with: self parentBehaviouralEntity
 ]

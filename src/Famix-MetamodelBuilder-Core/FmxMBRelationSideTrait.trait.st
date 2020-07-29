@@ -118,9 +118,14 @@ FmxMBRelationSideTrait >> manyToMany: aRelationSide [
 	ownSide many.
 	ownSide derived.
 	oppositeSide many.
+	aRelation := self relationFrom: ownSide to: oppositeSide.
+	self builder configuration navigationForNonContainers
+		ifTrue: [ aRelation withNavigation ].
 
-	aRelation := self setupRelationFrom: ownSide to: oppositeSide.
-	self possibleRemotes: aRelationSide ownSide: ownSide oppositeSide: oppositeSide.
+	self isRemote ifTrue: [ ownSide makeRemote ].
+	aRelationSide isRemote ifTrue: [ oppositeSide makeRemote ].
+	(self isRemote and: [ aRelationSide isRemote not ]) ifTrue: [ oppositeSide makeNonremote ].
+	(self isRemote not and: [ aRelationSide isRemote ]) ifTrue: [ ownSide makeNonremote ].
 		
 	^ aRelation
 	
@@ -136,9 +141,14 @@ FmxMBRelationSideTrait >> manyToOne: aRelationSide [
 	oppositeSide := aRelationSide asRelationSideNamed: self pluralPropertyName.
 	oppositeSide many.
 	oppositeSide derived.
+	aRelation := self relationFrom: ownSide to: oppositeSide.
+	self builder configuration navigationForNonContainers
+		ifTrue: [ aRelation withNavigation ].
 
-	aRelation := self setupRelationFrom: ownSide to: oppositeSide.
-	self possibleRemotes: aRelationSide ownSide: ownSide oppositeSide: oppositeSide.
+	self isRemote ifTrue: [ ownSide makeRemote ].
+	aRelationSide isRemote ifTrue: [ oppositeSide makeRemote ].
+	(self isRemote and: [ aRelationSide isRemote not ]) ifTrue: [ oppositeSide makeNonremote ].
+	(self isRemote not and: [ aRelationSide isRemote ]) ifTrue: [ ownSide makeNonremote ].
 		
 	^ aRelation
 	
@@ -167,10 +177,15 @@ FmxMBRelationSideTrait >> oneToMany: aRelationSide [
 	oppositeSide := aRelationSide asRelationSideNamed: self singularPropertyName.
 	ownSide many.
 	ownSide derived.
-
-	aRelation := self setupRelationFrom: ownSide to: oppositeSide.
-	self possibleRemotes: aRelationSide ownSide: ownSide oppositeSide: oppositeSide.
-	
+	aRelation := self relationFrom: ownSide to: oppositeSide.
+	self builder configuration navigationForNonContainers
+		ifTrue: [ aRelation withNavigation ].
+		
+	self isRemote ifTrue: [ ownSide makeRemote ].
+	aRelationSide isRemote ifTrue: [ oppositeSide makeRemote ].
+	(self isRemote and: [ aRelationSide isRemote not ]) ifTrue: [ oppositeSide makeNonremote ].
+	(self isRemote not and: [ aRelationSide isRemote ]) ifTrue: [ ownSide makeNonremote ].		
+		
 	^ aRelation
 	
 	
@@ -184,10 +199,15 @@ FmxMBRelationSideTrait >> oneToOne: aRelationSide [
 	ownSide := self asRelationSideNamed: aRelationSide propertyName.
 	oppositeSide := aRelationSide asRelationSideNamed: self propertyName.
 	oppositeSide derived.
-
-	aRelation := self setupRelationFrom: ownSide to: oppositeSide.
-	self possibleRemotes: aRelationSide ownSide: ownSide oppositeSide: oppositeSide.
-
+	aRelation := self relationFrom: ownSide to: oppositeSide.
+	self builder configuration navigationForNonContainers
+		ifTrue: [ aRelation withNavigation ].
+		
+	self isRemote ifTrue: [ ownSide makeRemote ].
+	aRelationSide isRemote ifTrue: [ oppositeSide makeRemote ].
+	(self isRemote and: [ aRelationSide isRemote not ]) ifTrue: [ oppositeSide makeNonremote ].
+	(self isRemote not and: [ aRelationSide isRemote ]) ifTrue: [ ownSide makeNonremote ].
+		
 	^ aRelation
 	
 	
@@ -197,14 +217,6 @@ FmxMBRelationSideTrait >> oneToOne: aRelationSide [
 FmxMBRelationSideTrait >> pluralPropertyName [
 
 	self explicitRequirement
-]
-
-{ #category : #private }
-FmxMBRelationSideTrait >> possibleRemotes: aRelationSide ownSide: ownSide oppositeSide: oppositeSide [
-	self isRemote ifTrue: [ ownSide makeRemote ].
-	aRelationSide isRemote ifTrue: [ oppositeSide makeRemote ].
-	(self isRemote and: [ aRelationSide isRemote not ]) ifTrue: [ oppositeSide makeNonremote ].
-	(self isRemote not and: [ aRelationSide isRemote ]) ifTrue: [ ownSide makeNonremote ].
 ]
 
 { #category : #private }
@@ -236,19 +248,4 @@ FmxMBRelationSideTrait >> relationFrom: ownSide to: oppositeSide [
 		
 	^ aRelation
 
-]
-
-{ #category : #private }
-FmxMBRelationSideTrait >> setupRelationFrom: fromSide to: toSide [
-	| aRelation |
-	fromSide isDependencySource ifTrue: [ toSide beDependencyTarget ].
-	toSide isDependencySource ifTrue: [ fromSide beDependencyTarget ].
-	
-	aRelation := self relationFrom: fromSide to: toSide.
-	self builder configuration navigationForNonContainers
-		ifTrue: [ aRelation withNavigation ].
-
-	^ aRelation
-	
-	
 ]

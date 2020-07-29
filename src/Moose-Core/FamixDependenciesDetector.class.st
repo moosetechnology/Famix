@@ -32,7 +32,7 @@ Class {
 { #category : #public }
 FamixDependenciesDetector class >> computeClientsOf: aMooseEntity from: aMooseGroup in: aMooseModel [
 	^ self new
-		directionStrategy: FamixDependenciesDetectorClientsStrategy;
+		directionStrategy: MQNavigationIncomingDirectionStrategy;
 		entity: aMooseEntity;
 		potentialDependencies: aMooseGroup;
 		mooseModel: aMooseModel;
@@ -42,7 +42,7 @@ FamixDependenciesDetector class >> computeClientsOf: aMooseEntity from: aMooseGr
 { #category : #public }
 FamixDependenciesDetector class >> computeProvidersOf: aMooseEntity from: aMooseGroup in: aMooseModel [
 	^ self new
-		directionStrategy: FamixDependenciesDetectorProvidersStrategy;
+		directionStrategy: MQNavigationOutgoingDirectionStrategy;
 		entity: aMooseEntity;
 		potentialDependencies: aMooseGroup;
 		mooseModel: aMooseModel;
@@ -62,11 +62,16 @@ FamixDependenciesDetector >> detectDependencies [
 
 { #category : #'links-computation' }
 FamixDependenciesDetector >> detectDependenciesAtAllScopesOfPossibleDependencies [
-	"this method computes dependencies at all possible scopes for a give moose group. For FAMIX entities, it collects the dependencies of the recevier at all the scopes of entities in the group. Tags contain themselves recursively, hence we need to see if the any one has an incoming connection from the current entity"
+	"Here we compute the dependencies of an entity and we try to find in the list of possible dependencies the closest fitting for the ones we found. 
+	
+	In order to do that, we iterate over all found dependencies and, starting from the dependency found, we check go up in the containment tree until we find an entity present in the list of potential dependencies.
+	
+	Then we add to the list of dependencies those we found."
 
-	| dependenciesAssociations |
-	dependenciesAssociations := self directionStrategy dependenciesOf: self entity.
-	self selectMatchingEntitiesFrom: ((potentialDependencies collectAsSet: #class) flatCollect: [ :aScope | dependenciesAssociations atScope: aScope ])
+	((self directionStrategy dependenciesOf: self entity) flatCollect: #asCollection)
+		do: [ :dep | 
+			self
+				selectMatchingEntitiesFrom: (dep query ancestors recursively until: [ :e | (potentialDependencies includes: e) or: [ dependencies includes: e ] ]) ofAnyType ]
 ]
 
 { #category : #'links-computation' }

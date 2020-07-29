@@ -51,6 +51,23 @@ FamixTAssociation classSide >> source: anEntity target: anotherEntity model: aMo
 		yourself
 ]
 
+{ #category : #accessing }
+FamixTAssociation >> allTargets [
+	"Since #target can return an entity or a collection, I ensure we always get a collection."
+
+	^ self target asCollection
+]
+
+{ #category : #converting }
+FamixTAssociation >> asAssociationFrom: anEntity [
+	^ self
+]
+
+{ #category : #converting }
+FamixTAssociation >> asAssociationTo: anEntity [
+	^ self
+]
+
 { #category : #printing }
 FamixTAssociation >> gtDisplayOn: aStream [
 	self source gtDisplayOn: aStream.

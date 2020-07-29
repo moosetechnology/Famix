@@ -33,19 +33,19 @@ FamixTestComposedEntity >> method [
 
 	<generated>
 	<FMProperty: #method type: #FamixTestComposed1Method opposite: #entity>
-	^ self privateState attributeAt: #method ifAbsent: [ nil ]
+	^ self attributeAt: #method ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
 FamixTestComposedEntity >> method: anObject [
 
 	<generated>
-	(self privateState attributeAt: #method ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	(self attributeAt: #method ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self method.
-		self privateState attributeAt: #method put: anObject.
+		self attributeAt: #method put: anObject.
 		otherSide entity: nil ]
 	ifNotNil: [ 
-		self privateState attributeAt: #method put: anObject.
+		self attributeAt: #method put: anObject.
 		anObject entity: self ]
 ]

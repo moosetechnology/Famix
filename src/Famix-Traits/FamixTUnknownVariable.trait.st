@@ -12,8 +12,3 @@ FamixTUnknownVariable classSide >> annotation [
 	<generated>
 	^self
 ]
-
-{ #category : #'moose query' }
-FamixTUnknownVariable >> outgoingTypeDeclarations [
-	^ self declaredType ifNil: [ {} ] ifNotNil: [ :dt | {(MooseQueryDependencyAssociation newFrom: self to: dt)} ]
-]

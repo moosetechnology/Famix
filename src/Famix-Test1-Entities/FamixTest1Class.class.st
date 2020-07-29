@@ -1,3 +1,6 @@
+"
+This a comment for the Class entity
+"
 Class {
 	#name : #FamixTest1Class,
 	#superclass : #FamixTest1NamedEntity,
@@ -13,9 +16,4 @@ FamixTest1Class class >> annotation [
 	<package: #'Famix-Test1-Entities'>
 	<generated>
 	^self
-]
-
-{ #category : #testing }
-FamixTest1Class >> incomingTypeDeclarations [  
-	^ self typedEntities collect: [ :var | MooseQueryDependencyAssociation newFrom: var to: self ]
 ]

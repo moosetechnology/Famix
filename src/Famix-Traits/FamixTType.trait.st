@@ -47,22 +47,9 @@ FamixTType >> entityHasIncomingTypeDeclarations [
 	^ self typedEntities isNotEmpty
 ]
 
-{ #category : #metrics }
-FamixTType >> fanIn [
-	<FMProperty: #fanIn type: #Number>
-	<derived>
-	<FMComment: 'Number of client classes'>
-	^ self lookUpPropertyNamed: #fanIn computedAs: [ (self allClientsAtScope: FamixTType) size ]
-]
-
-{ #category : #metrics }
-FamixTType >> fanIn: aNumber [
-	self privateState cacheAt: #fanIn put: aNumber
-]
-
 { #category : #testing }
 FamixTType >> incomingTypeDeclarations [  
-	^ self typedEntities collect: [ :var | MooseQueryDependencyAssociation newFrom: var to: self ]
+	^ self typedEntities collect: [ :var | MQNavigationDependencyAssociation newFrom: var to: self ]
 ]
 
 { #category : #testing }
@@ -94,7 +81,7 @@ FamixTType >> numberOfAccessesToForeignData [
 
 { #category : #metrics }
 FamixTType >> numberOfAccessesToForeignData: aNumber [
-	self privateState cacheAt: #numberOfAccessesToForeignData put: aNumber
+	self cacheAt: #numberOfAccessesToForeignData put: aNumber
 ]
 
 { #category : #metrics }
@@ -110,7 +97,7 @@ FamixTType >> numberOfDuplicatedLinesOfCodeInternally [
 
 { #category : #metrics }
 FamixTType >> numberOfDuplicatedLinesOfCodeInternally: aNumber [
-	self privateState cacheAt: #numberOfDuplicatedLinesOfCodeInternally put: aNumber
+	self cacheAt: #numberOfDuplicatedLinesOfCodeInternally put: aNumber
 ]
 
 { #category : #testing }
@@ -141,7 +128,7 @@ FamixTType >> typeContainer: anObject [
 FamixTType >> typeContainerGroup [
 	<generated>
 	<navigation: 'TypeContainer'>
-	^ MooseGroup with: self typeContainer
+	^ MooseSpecializedGroup with: self typeContainer
 ]
 
 { #category : #accessing }
@@ -151,7 +138,7 @@ FamixTType >> typedEntities [
 	<generated>
 	<FMComment: 'Entities that have this type as declaredType'>
 	<derived>
-	<dependencyTarget>
+	<target>
 	^ typedEntities
 ]
 
