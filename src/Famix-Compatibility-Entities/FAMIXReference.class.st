@@ -15,7 +15,7 @@ FAMIXReference class >> annotation [
 	^self
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #properties }
 FAMIXReference >> handleFameProperty: aSymbol value: anObject [
 	"Handle correctly the source and target properties"
 
