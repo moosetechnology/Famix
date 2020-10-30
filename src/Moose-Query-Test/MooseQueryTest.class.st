@@ -335,11 +335,35 @@ MooseQueryTest >> testAtScopeUntil [
 ]
 
 { #category : #tests }
+MooseQueryTest >> testAtScopeWithBlockReturnNotBoolean [
+	self
+		should: [ class1 atScopeWithProperty: [ :e | e numberOfMethods ] ]
+		raise: MQScopeShouldBeSeclectedReturnNotBooleanValueError.
+	self
+		should: [ method1 atScopeWithProperty: [ :e | e numberOfMethods ] ]
+		raise: MQScopeShouldBeSeclectedReturnNotBooleanValueError
+]
+
+{ #category : #tests }
 MooseQueryTest >> testAtScopeWithProperty [
 	self assertCollection: (class1 atScopeWithProperty: #hasSourceAnchor) hasSameElements: {class1}.
 	self assertCollection: (method1 atScopeWithProperty: #hasSourceAnchor) hasSameElements: {class1}.
 	self assertCollection: (class2 atScopeWithProperty: #hasSourceAnchor) hasSameElements: {}.
 	self assertCollection: (method2 atScopeWithProperty: #hasSourceAnchor) hasSameElements: {}.
+]
+
+{ #category : #tests }
+MooseQueryTest >> testAtScopeWithPropertyAsBlock [
+	self assertCollection: (class1 atScopeWithProperty: [:e | e hasSourceAnchor] ) hasSameElements: {class1}.
+	self assertCollection: (method1 atScopeWithProperty: [:e | e hasSourceAnchor]) hasSameElements: {class1}.
+	self assertCollection: (class2 atScopeWithProperty: [:e | e hasSourceAnchor]) hasSameElements: {}.
+	self assertCollection: (method2 atScopeWithProperty: [:e | e hasSourceAnchor]) hasSameElements: {}.
+]
+
+{ #category : #tests }
+MooseQueryTest >> testAtScopeWithPropertyAsBlockHandleError [
+	self assertCollection: (class1 atScopeWithProperty: [:e | e size ] ) hasSameElements: {}.
+	self assertCollection: (method1 atScopeWithProperty: [:e | e size ]) hasSameElements: {}
 ]
 
 { #category : #tests }
@@ -354,6 +378,16 @@ MooseQueryTest >> testAtScopeWithPropertyOnlyUnderstandByParent [
 	self assertCollection: (method1 atScopeWithProperty: #isInterface) hasSameElements: {class1}.
 	self assertCollection: (class2 atScopeWithProperty: #isInterface) hasSameElements: {}.
 	self assertCollection: (method2 atScopeWithProperty: #isInterface) hasSameElements: {}.
+]
+
+{ #category : #tests }
+MooseQueryTest >> testAtScopeWithPropertyReturnNotBoolean [
+	self
+		should: [ class1 atScopeWithProperty: #numberOfMethods ]
+		raise: MQScopeShouldBeSeclectedReturnNotBooleanValueError.
+	self
+		should: [ method1 atScopeWithProperty: #numberOfMethods ]
+		raise: MQScopeShouldBeSeclectedReturnNotBooleanValueError
 ]
 
 { #category : #tests }
