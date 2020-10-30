@@ -18,6 +18,7 @@ Trait {
 		'#referredType => FMOne type: #FamixTReferenceable opposite: #incomingReferences'
 	],
 	#traits : 'FamixTAssociation',
+	#classTraits : 'FamixTAssociation classTrait',
 	#category : #'Famix-Traits-Reference'
 }
 
@@ -74,24 +75,4 @@ FamixTReference >> referredType: anObject [
 
 	<generated>
 	referredType := anObject
-]
-
-{ #category : #accessing }
-FamixTReference >> source [
-	^ self referencer
-]
-
-{ #category : #accessing }
-FamixTReference >> source: aSource [
-	self referencer: aSource 
-]
-
-{ #category : #accessing }
-FamixTReference >> target [
-	^ referredType 
-]
-
-{ #category : #accessing }
-FamixTReference >> target: aTarget [
-	self referredType: aTarget 
 ]

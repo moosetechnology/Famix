@@ -5,6 +5,7 @@ Trait {
 		'#user => FMOne type: #FamixTTraitUser opposite: #outgoingTraitUsages'
 	],
 	#traits : 'FamixTAssociation',
+	#classTraits : 'FamixTAssociation classTrait',
 	#category : #'Famix-Traits-Trait'
 }
 
@@ -15,26 +16,6 @@ FamixTTraitUsage classSide >> annotation [
 	<package: #'Famix-Traits'>
 	<generated>
 	^self
-]
-
-{ #category : #accessing }
-FamixTTraitUsage >> source [
-	^ self user
-]
-
-{ #category : #accessing }
-FamixTTraitUsage >> source: anObject [
-	self user: anObject
-]
-
-{ #category : #accessing }
-FamixTTraitUsage >> target [
-	^ self trait
-]
-
-{ #category : #accessing }
-FamixTTraitUsage >> target: anObject [
-	self trait: anObject
 ]
 
 { #category : #accessing }
