@@ -164,14 +164,22 @@ MQScopeQuery >> recursively [
 
 { #category : #execution }
 MQScopeQuery >> scopeFor: anEntity direction: aDirection [
-	| selectors |
-	(self stopStrategy shouldBeSelected: anEntity)
-		ifTrue: [ self add: anEntity.
-			self isRecursive ifFalse: [ ^ self result ] ].
+	| selectors shouldBeSelected |
+	shouldBeSelected := self stopStrategy shouldBeSelected: anEntity.
+	(shouldBeSelected isKindOf: Boolean)
+		ifTrue: [ shouldBeSelected
+				ifTrue: [ self add: anEntity.
+					self isRecursive
+						ifFalse: [ ^ self result ] ] ]
+		ifFalse: [ MQScopeShouldBeSeclectedReturnNotBooleanValueError stopStrategySignal: self stopStrategy ].
 
 	"The content of this block could be much more readable with #do: but we do this solution for performances... We need this method to be really really performant."
 	(self shouldStopOn: anEntity)
-		ifFalse: [ 1 to: (selectors := aDirection selectorsFor: anEntity) size do: [ :ind | (anEntity perform: (selectors at: ind)) scopeForQuery: self direction: aDirection ] ].
+		ifFalse:
+			[ 1 to: (selectors := aDirection selectorsFor: anEntity) size do: [ :ind | 
+				(anEntity perform: (selectors at: ind))
+					scopeForQuery: self
+					direction: aDirection ] ].
 	^ self result
 ]
 

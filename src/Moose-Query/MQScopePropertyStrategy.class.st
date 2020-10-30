@@ -46,7 +46,15 @@ MQScopePropertyStrategy >> property: anObject [
 
 { #category : #accessing }
 MQScopePropertyStrategy >> shouldBeSelected: anEntity [
-	^ [ anEntity perform: self property ]
-		on: MessageNotUnderstood
+	^ [ self property value: anEntity  ]
+		on: Error
 		do: [ false ]
+]
+
+{ #category : #accessing }
+MQScopePropertyStrategy >> storeOn: aStream [
+	aStream nextPutAll: self class name.
+	aStream nextPutAll: '('.
+	property printOn: aStream.
+	aStream nextPutAll: ')'.
 ]
