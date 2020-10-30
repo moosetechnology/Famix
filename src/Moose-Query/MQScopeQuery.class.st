@@ -85,7 +85,7 @@ MQScopeQuery class >> scope: aFamixType direction: aClass until: aValuable [
 { #category : #'instance creation' }
 MQScopeQuery class >> scopes: aCollectionOfType direction: aClass [
 	^ self new
-		stopStrategy: (MQScopeTypesStrategy scopes: aCollectionOfType);
+		stopStrategy: (MQScopeAnyTypeStrategy scopes: aCollectionOfType);
 		direction: aClass;
 		yourself
 ]
@@ -147,7 +147,7 @@ MQScopeQuery >> ofAnyType [
 
 { #category : #DSL }
 MQScopeQuery >> ofAnyType: aCollection [
-	stopStrategy := MQScopeTypesStrategy scopes: aCollection.
+	stopStrategy := MQScopeAnyTypeStrategy scopes: aCollection.
 	^ self execute
 ]
 

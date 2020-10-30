@@ -7,7 +7,7 @@ I am a strategy used by the scoping queries to define the query should match any
 I am moslty here for performance reasons.
 "
 Class {
-	#name : #MQScopeTypesStrategy,
+	#name : #MQScopeAnyTypeStrategy,
 	#superclass : #MQScopeAbstractStopStrategy,
 	#instVars : [
 		'scopes'
@@ -16,41 +16,41 @@ Class {
 }
 
 { #category : #accessing }
-MQScopeTypesStrategy class >> scopes: aCollection [
+MQScopeAnyTypeStrategy class >> scopes: aCollection [
 	^ self new
 		scopes: aCollection;
 		yourself
 ]
 
 { #category : #comparing }
-MQScopeTypesStrategy >> = anObject [
+MQScopeAnyTypeStrategy >> = anObject [
 	super = anObject and: [ scopes = anObject scopes ]
 ]
 
 { #category : #comparing }
-MQScopeTypesStrategy >> hash [
+MQScopeAnyTypeStrategy >> hash [
 	"Answer an integer value that is related to the identity of the receiver."
 
 	^ super hash bitXor: scopes hash
 ]
 
 { #category : #accessing }
-MQScopeTypesStrategy >> scopes [
+MQScopeAnyTypeStrategy >> scopes [
 	^ scopes
 ]
 
 { #category : #accessing }
-MQScopeTypesStrategy >> scopes: anObject [
+MQScopeAnyTypeStrategy >> scopes: anObject [
 	scopes := anObject
 ]
 
 { #category : #testing }
-MQScopeTypesStrategy >> shouldBeSelected: anEntity [
+MQScopeAnyTypeStrategy >> shouldBeSelected: anEntity [
 	^ scopes anySatisfy: [ :aType | anEntity isOfType: aType ]
 ]
 
 { #category : #printing }
-MQScopeTypesStrategy >> storeOn: aStream [
+MQScopeAnyTypeStrategy >> storeOn: aStream [
 	aStream
 		nextPut: $(;
 		nextPutAll: self class name;
