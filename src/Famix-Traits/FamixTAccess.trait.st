@@ -20,6 +20,7 @@ Trait {
 		'#variable => FMOne type: #FamixTAccessible opposite: #incomingAccesses'
 	],
 	#traits : 'FamixTAssociation',
+	#classTraits : 'FamixTAssociation classTrait',
 	#category : #'Famix-Traits-Access'
 }
 
@@ -91,26 +92,6 @@ FamixTAccess >> isWrite: anObject [
 FamixTAccess >> printOn: aStream [
 	super printOn: aStream.
 	aStream nextPutAll: ' (Access)'
-]
-
-{ #category : #accessing }
-FamixTAccess >> source [
-	^ self accessor
-]
-
-{ #category : #accessing }
-FamixTAccess >> source: anAccessor [
-	self accessor: anAccessor 
-]
-
-{ #category : #accessing }
-FamixTAccess >> target [
-	^ self variable 
-]
-
-{ #category : #accessing }
-FamixTAccess >> target: aTarget [
-	self variable: aTarget
 ]
 
 { #category : #accessing }
