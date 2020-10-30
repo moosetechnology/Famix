@@ -165,7 +165,7 @@ MQScopeQuery >> recursively [
 { #category : #execution }
 MQScopeQuery >> scopeFor: anEntity direction: aDirection [
 	| selectors |
-	(self typeStrategy isOfRightType: anEntity)
+	(self typeStrategy shouldBeSelected: anEntity)
 		ifTrue: [ self add: anEntity.
 			self isRecursive ifFalse: [ ^ self result ] ].
 

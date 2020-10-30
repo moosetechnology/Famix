@@ -8,7 +8,7 @@ I am moslty here for performance reasons.
 "
 Class {
 	#name : #MQScopeTypesStrategy,
-	#superclass : #MQScopeAbstractTypeStrategy,
+	#superclass : #MQScopeAbstractStopStrategy,
 	#instVars : [
 		'scopes'
 	],
@@ -34,11 +34,6 @@ MQScopeTypesStrategy >> hash [
 	^ super hash bitXor: scopes hash
 ]
 
-{ #category : #testing }
-MQScopeTypesStrategy >> isOfRightType: anEntity [
-	^ scopes anySatisfy: [ :aType | anEntity isOfType: aType ]
-]
-
 { #category : #accessing }
 MQScopeTypesStrategy >> scopes [
 	^ scopes
@@ -47,6 +42,11 @@ MQScopeTypesStrategy >> scopes [
 { #category : #accessing }
 MQScopeTypesStrategy >> scopes: anObject [
 	scopes := anObject
+]
+
+{ #category : #testing }
+MQScopeTypesStrategy >> shouldBeSelected: anEntity [
+	^ scopes anySatisfy: [ :aType | anEntity isOfType: aType ]
 ]
 
 { #category : #printing }

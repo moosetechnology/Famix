@@ -1,6 +1,14 @@
+"
+Description
+--------------------
+
+I am a strategy used by the scoping queries to define the query should match any of the entities that satisfy the property selector.
+
+I am moslty here for performance reasons.
+"
 Class {
 	#name : #MQScopePropertyStrategy,
-	#superclass : #MQScopeAbstractTypeStrategy,
+	#superclass : #MQScopeAbstractStopStrategy,
 	#instVars : [
 		'property'
 	],
@@ -27,13 +35,6 @@ MQScopePropertyStrategy >> hash [
 ]
 
 { #category : #accessing }
-MQScopePropertyStrategy >> isOfRightType: anEntity [
-	^ [ anEntity perform: self property ]
-		on: MessageNotUnderstood
-		do: [ false ]
-]
-
-{ #category : #accessing }
 MQScopePropertyStrategy >> property [
 	^ property
 ]
@@ -41,4 +42,11 @@ MQScopePropertyStrategy >> property [
 { #category : #accessing }
 MQScopePropertyStrategy >> property: anObject [
 	property := anObject
+]
+
+{ #category : #accessing }
+MQScopePropertyStrategy >> shouldBeSelected: anEntity [
+	^ [ anEntity perform: self property ]
+		on: MessageNotUnderstood
+		do: [ false ]
 ]

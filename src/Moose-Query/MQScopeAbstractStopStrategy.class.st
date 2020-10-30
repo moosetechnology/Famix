@@ -7,42 +7,42 @@ I am a strategy used by the scoping queries to define on which kind of entity th
 I am moslty here for performance reasons.
 "
 Class {
-	#name : #MQScopeAbstractTypeStrategy,
+	#name : #MQScopeAbstractStopStrategy,
 	#superclass : #Object,
 	#category : #'Moose-Query-Scoping'
 }
 
 { #category : #testing }
-MQScopeAbstractTypeStrategy class >> isAbstract [
-	^ self = MQScopeAbstractTypeStrategy
+MQScopeAbstractStopStrategy class >> isAbstract [
+	^ self = MQScopeAbstractStopStrategy
 ]
 
 { #category : #accessing }
-MQScopeAbstractTypeStrategy class >> strategies [
+MQScopeAbstractStopStrategy class >> strategies [
 	^ self allSubclasses reject: #isAbstract
 ]
 
 { #category : #comparing }
-MQScopeAbstractTypeStrategy >> = anObject [
+MQScopeAbstractStopStrategy >> = anObject [
 	super = anObject ifTrue: [ ^ true ].
 
 	^ self class = anObject class
 ]
 
 { #category : #comparing }
-MQScopeAbstractTypeStrategy >> hash [
+MQScopeAbstractStopStrategy >> hash [
 	"Answer an integer value that is related to the identity of the receiver."
 
 	^ self class hash
 ]
 
 { #category : #testing }
-MQScopeAbstractTypeStrategy >> isOfRightType: anEntity [
+MQScopeAbstractStopStrategy >> shouldBeSelected: anEntity [
 	^ self subclassResponsibility
 ]
 
 { #category : #printing }
-MQScopeAbstractTypeStrategy >> storeOn: aStream [
+MQScopeAbstractStopStrategy >> storeOn: aStream [
 	aStream
 		nextPutAll: self class name;
 		nextPutAll: ' new'
