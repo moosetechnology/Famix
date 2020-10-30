@@ -199,3 +199,9 @@ MQScopeQuery >> until [
 MQScopeQuery >> until: anObject [
 	until := anObject
 ]
+
+{ #category : #DSL }
+MQScopeQuery >> withProperty: aSymbol [
+	typeStrategy := MQScopePropertyStrategy property: aSymbol. 
+	^ self execute
+]

@@ -24,7 +24,8 @@ Class {
 		'isolatedPackage',
 		'isolatedClass',
 		'isolatedMethod',
-		'localVariable'
+		'localVariable',
+		'anchor'
 	],
 	#category : #'Moose-Query-Test'
 }
@@ -42,10 +43,13 @@ MooseQueryTest >> setUp [
 	package2 := (FamixJavaPackage named: 'package2') mooseModel: model.
 	isolatedPackage := (FamixJavaPackage named: 'isolatedPackage') mooseModel: model.
 	namespace := (FamixJavaNamespace named: 'Smalltalk') mooseModel: model.
+	anchor := (FamixJavaSourceTextAnchor new) mooseModel: model.
 	class1 := (FamixJavaClass named: 'class1')
 		parentPackage: package1;
 		typeContainer: namespace;
+		sourceAnchor: anchor;
 		mooseModel: model.
+	
 	class2 := (FamixJavaClass named: 'class2')
 		parentPackage: package2;
 		mooseModel: model.
@@ -328,6 +332,28 @@ MooseQueryTest >> testAtScopeUntil [
 	self assertCollection: (class1 atScope: FamixJavaClass until: [:el | el isOfType: FamixTClass ]) hasSameElements: {class1}.
 	self assertCollection: (class1 atScope: FamixTPackage until: [:el | el isOfType: FamixTClass ]) hasSameElements: {}.
 	self assertCollection: (class1 atScope: FamixTPackage until: [:el | el isOfType: FamixTPackage ]) hasSameElements: {package1}.
+]
+
+{ #category : #tests }
+MooseQueryTest >> testAtScopeWithProperty [
+	self assertCollection: (class1 atScopeWithProperty: #hasSourceAnchor) hasSameElements: {class1}.
+	self assertCollection: (method1 atScopeWithProperty: #hasSourceAnchor) hasSameElements: {class1}.
+	self assertCollection: (class2 atScopeWithProperty: #hasSourceAnchor) hasSameElements: {}.
+	self assertCollection: (method2 atScopeWithProperty: #hasSourceAnchor) hasSameElements: {}.
+]
+
+{ #category : #tests }
+MooseQueryTest >> testAtScopeWithPropertyHandleError [
+	self assertCollection: (class1 atScopeWithProperty: #hasBlaBla) hasSameElements: {  }
+]
+
+{ #category : #tests }
+MooseQueryTest >> testAtScopeWithPropertyOnlyUnderstandByParent [
+	class1 isInterface: true.
+	self assertCollection: (class1 atScopeWithProperty: #isInterface) hasSameElements: {class1}.
+	self assertCollection: (method1 atScopeWithProperty: #isInterface) hasSameElements: {class1}.
+	self assertCollection: (class2 atScopeWithProperty: #isInterface) hasSameElements: {}.
+	self assertCollection: (method2 atScopeWithProperty: #isInterface) hasSameElements: {}.
 ]
 
 { #category : #tests }
