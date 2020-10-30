@@ -34,7 +34,7 @@ Class {
 		'until',
 		'isRecursive',
 		'direction',
-		'typeStrategy'
+		'stopStrategy'
 	],
 	#category : #'Moose-Query-Scoping'
 }
@@ -70,7 +70,7 @@ MQScopeQuery class >> recursivelyScopes: aCollectionOfType direction: aClass unt
 { #category : #'instance creation' }
 MQScopeQuery class >> scope: aFamixType direction: aClass [
 	^ self new
-		typeStrategy: (MQScopeTypeStrategy scope: aFamixType);
+		stopStrategy: (MQScopeTypeStrategy scope: aFamixType);
 		direction: aClass;
 		yourself
 ]
@@ -85,7 +85,7 @@ MQScopeQuery class >> scope: aFamixType direction: aClass until: aValuable [
 { #category : #'instance creation' }
 MQScopeQuery class >> scopes: aCollectionOfType direction: aClass [
 	^ self new
-		typeStrategy: (MQScopeTypesStrategy scopes: aCollectionOfType);
+		stopStrategy: (MQScopeTypesStrategy scopes: aCollectionOfType);
 		direction: aClass;
 		yourself
 ]
@@ -141,19 +141,19 @@ MQScopeQuery >> isRecursive: anObject [
 
 { #category : #DSL }
 MQScopeQuery >> ofAnyType [
-	typeStrategy := MQScopeAllTypesStrategy new.
+	stopStrategy := MQScopeAllTypesStrategy new.
 	^ self execute
 ]
 
 { #category : #DSL }
 MQScopeQuery >> ofAnyType: aCollection [
-	typeStrategy := MQScopeTypesStrategy scopes: aCollection.
+	stopStrategy := MQScopeTypesStrategy scopes: aCollection.
 	^ self execute
 ]
 
 { #category : #DSL }
 MQScopeQuery >> ofType: aFamixType [
-	typeStrategy := MQScopeTypeStrategy scope: aFamixType.
+	stopStrategy := MQScopeTypeStrategy scope: aFamixType.
 	^ self execute
 ]
 
@@ -165,7 +165,7 @@ MQScopeQuery >> recursively [
 { #category : #execution }
 MQScopeQuery >> scopeFor: anEntity direction: aDirection [
 	| selectors |
-	(self typeStrategy isOfRightType: anEntity)
+	(self stopStrategy shouldBeSelected: anEntity)
 		ifTrue: [ self add: anEntity.
 			self isRecursive ifFalse: [ ^ self result ] ].
 
@@ -181,13 +181,13 @@ MQScopeQuery >> shouldStopOn: anEntity [
 ]
 
 { #category : #accessing }
-MQScopeQuery >> typeStrategy [
-	^ typeStrategy
+MQScopeQuery >> stopStrategy [
+	^ stopStrategy
 ]
 
 { #category : #accessing }
-MQScopeQuery >> typeStrategy: anObject [
-	typeStrategy := anObject
+MQScopeQuery >> stopStrategy: anObject [
+	stopStrategy := anObject
 ]
 
 { #category : #accessing }
@@ -202,6 +202,6 @@ MQScopeQuery >> until: anObject [
 
 { #category : #DSL }
 MQScopeQuery >> withProperty: aSymbol [
-	typeStrategy := MQScopePropertyStrategy property: aSymbol. 
+	stopStrategy := MQScopePropertyStrategy property: aSymbol. 
 	^ self execute
 ]
