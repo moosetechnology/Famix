@@ -4,6 +4,11 @@ Class {
 	#category : #'Moose-SmalltalkImporter-Core-Tests'
 }
 
+{ #category : #accessing }
+MooseScriptsTest class >> defaultTimeLimit [
+	^ 1 minute
+]
+
 { #category : #tests }
 MooseScriptsTest >> testCreateLightModels [
 	| models lanModel |

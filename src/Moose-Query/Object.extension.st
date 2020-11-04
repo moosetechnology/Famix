@@ -21,6 +21,11 @@ Object >> entityHasOutgoingTypeDeclarations [
 ]
 
 { #category : #'*Moose-Query' }
+Object >> ifNotBoolean: aBlock [
+	^ aBlock value
+]
+
+{ #category : #'*Moose-Query' }
 Object >> incomingTypeDeclarations [
 	"Should return the incoming type declarations of the entity as MooseQueryTypeDeclarationAssociation.
 	

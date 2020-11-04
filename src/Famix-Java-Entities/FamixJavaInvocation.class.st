@@ -32,7 +32,7 @@ FamixJavaInvocation >> getReceivingFAMIXClass [
 
 { #category : #printing }
 FamixJavaInvocation >> gtDisplayOn: aStream [
-	self source ifNotNil: [ self source gtDisplayOn: aStream ].
+	self sender ifNotNil: [ self source gtDisplayOn: aStream ].
 	aStream nextPutAll: ' -> '.
 	self receiver ifNotNil: [ aStream nextPutAll: self receiver name ].
 	aStream nextPut: $#.

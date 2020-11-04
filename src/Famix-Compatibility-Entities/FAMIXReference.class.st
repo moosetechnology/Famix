@@ -15,6 +15,19 @@ FAMIXReference class >> annotation [
 	^self
 ]
 
+{ #category : #properties }
+FAMIXReference >> handleFameProperty: aSymbol value: anObject [
+	"Handle correctly the source and target properties"
+
+	| value |
+	value := (anObject isCollection and: [ anObject size = 1 ])
+		ifTrue: [ anObject anyOne ]
+		ifFalse: [ anObject ].
+	(aSymbol = #source or: [ aSymbol = #target ])
+		ifTrue: [ self perform: aSymbol asSymbol asMutator with: value ]
+		ifFalse: [ super handleFameProperty: aSymbol value: value ]
+]
+
 { #category : #'Famix-Implementation' }
 FAMIXReference >> mooseNameOn: aStream [
 	"aStream nextPutAll: 'Reference'."

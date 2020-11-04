@@ -34,7 +34,7 @@ Class {
 		'until',
 		'isRecursive',
 		'direction',
-		'typeStrategy'
+		'stopStrategy'
 	],
 	#category : #'Moose-Query-Scoping'
 }
@@ -70,7 +70,7 @@ MQScopeQuery class >> recursivelyScopes: aCollectionOfType direction: aClass unt
 { #category : #'instance creation' }
 MQScopeQuery class >> scope: aFamixType direction: aClass [
 	^ self new
-		typeStrategy: (MQScopeTypeStrategy scope: aFamixType);
+		stopStrategy: (MQScopeTypeStrategy scope: aFamixType);
 		direction: aClass;
 		yourself
 ]
@@ -85,7 +85,7 @@ MQScopeQuery class >> scope: aFamixType direction: aClass until: aValuable [
 { #category : #'instance creation' }
 MQScopeQuery class >> scopes: aCollectionOfType direction: aClass [
 	^ self new
-		typeStrategy: (MQScopeTypesStrategy scopes: aCollectionOfType);
+		stopStrategy: (MQScopeAnyTypeStrategy scopes: aCollectionOfType);
 		direction: aClass;
 		yourself
 ]
@@ -141,19 +141,19 @@ MQScopeQuery >> isRecursive: anObject [
 
 { #category : #DSL }
 MQScopeQuery >> ofAnyType [
-	typeStrategy := MQScopeAllTypesStrategy new.
+	stopStrategy := MQScopeAllTypesStrategy new.
 	^ self execute
 ]
 
 { #category : #DSL }
 MQScopeQuery >> ofAnyType: aCollection [
-	typeStrategy := MQScopeTypesStrategy scopes: aCollection.
+	stopStrategy := MQScopeAnyTypeStrategy scopes: aCollection.
 	^ self execute
 ]
 
 { #category : #DSL }
 MQScopeQuery >> ofType: aFamixType [
-	typeStrategy := MQScopeTypeStrategy scope: aFamixType.
+	stopStrategy := MQScopeTypeStrategy scope: aFamixType.
 	^ self execute
 ]
 
@@ -164,14 +164,15 @@ MQScopeQuery >> recursively [
 
 { #category : #execution }
 MQScopeQuery >> scopeFor: anEntity direction: aDirection [
+
 	| selectors |
-	(self typeStrategy isOfRightType: anEntity)
-		ifTrue: [ self add: anEntity.
-			self isRecursive ifFalse: [ ^ self result ] ].
+	(self stopStrategy shouldBeSelected: anEntity) ifTrue: [ 
+		self add: anEntity.
+		self isRecursive ifFalse: [ ^ self result ] ].
 
 	"The content of this block could be much more readable with #do: but we do this solution for performances... We need this method to be really really performant."
-	(self shouldStopOn: anEntity)
-		ifFalse: [ 1 to: (selectors := aDirection selectorsFor: anEntity) size do: [ :ind | (anEntity perform: (selectors at: ind)) scopeForQuery: self direction: aDirection ] ].
+	(self shouldStopOn: anEntity) ifFalse: [ 
+		1 to: (selectors := aDirection selectorsFor: anEntity) size do: [ :ind | (anEntity perform: (selectors at: ind)) scopeForQuery: self direction: aDirection ] ].
 	^ self result
 ]
 
@@ -181,13 +182,13 @@ MQScopeQuery >> shouldStopOn: anEntity [
 ]
 
 { #category : #accessing }
-MQScopeQuery >> typeStrategy [
-	^ typeStrategy
+MQScopeQuery >> stopStrategy [
+	^ stopStrategy
 ]
 
 { #category : #accessing }
-MQScopeQuery >> typeStrategy: anObject [
-	typeStrategy := anObject
+MQScopeQuery >> stopStrategy: anObject [
+	stopStrategy := anObject
 ]
 
 { #category : #accessing }
@@ -198,4 +199,10 @@ MQScopeQuery >> until [
 { #category : #DSL }
 MQScopeQuery >> until: anObject [
 	until := anObject
+]
+
+{ #category : #DSL }
+MQScopeQuery >> withProperty: aSymbol [
+	stopStrategy := MQScopePropertyStrategy property: aSymbol. 
+	^ self execute
 ]

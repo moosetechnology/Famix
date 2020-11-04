@@ -1,11 +1,11 @@
 Extension { #name : #MQNavigationOutgoingDirectionStrategy }
 
 { #category : #'*Moose-Core' }
-MQNavigationOutgoingDirectionStrategy classSide >> dependenciesAtReceiverScopeOf: anEntity [
+MQNavigationOutgoingDirectionStrategy class >> dependenciesAtReceiverScopeOf: anEntity [
 	^ anEntity allProviders
 ]
 
 { #category : #'*Moose-Core' }
-MQNavigationOutgoingDirectionStrategy classSide >> dependenciesOf: aMooseEntity [
+MQNavigationOutgoingDirectionStrategy class >> dependenciesOf: aMooseEntity [
 	^ aMooseEntity query outgoing objects dependencies
 ]

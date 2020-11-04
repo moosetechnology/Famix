@@ -1,11 +1,11 @@
 Extension { #name : #MQNavigationIncomingDirectionStrategy }
 
 { #category : #'*Moose-Core' }
-MQNavigationIncomingDirectionStrategy classSide >> dependenciesAtReceiverScopeOf: anEntity [
+MQNavigationIncomingDirectionStrategy class >> dependenciesAtReceiverScopeOf: anEntity [
 	^ anEntity allClients
 ]
 
 { #category : #'*Moose-Core' }
-MQNavigationIncomingDirectionStrategy classSide >> dependenciesOf: aMooseEntity [
+MQNavigationIncomingDirectionStrategy class >> dependenciesOf: aMooseEntity [
 	^ aMooseEntity query incoming objects dependencies
 ]

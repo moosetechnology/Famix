@@ -28,7 +28,8 @@ FAMIXException >> definingEntity: aMethod [
 
 { #category : #compatibility }
 FAMIXException >> definingMethod [
-
+	<FMProperty: #definingMethod type: #FAMIXMethod>
+	<FMComment: 'This property is for compatibility purpose. It is used by the old generator of MSE files'>
 	^ self definingEntity
 	
 
@@ -36,8 +37,6 @@ FAMIXException >> definingMethod [
 
 { #category : #compatibility }
 FAMIXException >> definingMethod: aMethod [
-	<FMProperty: #definingMethod type: #FAMIXMethod>
-	<FMComment: 'This property is for compatibility purpose. It is used by the old generator of MSE files'>
 	^ self definingEntity: aMethod
 ]
 

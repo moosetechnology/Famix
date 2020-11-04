@@ -8,11 +8,11 @@ I am moslty here for performance reasons.
 "
 Class {
 	#name : #MQScopeAllTypesStrategy,
-	#superclass : #MQScopeAbstractTypeStrategy,
+	#superclass : #MQScopeAbstractStopStrategy,
 	#category : #'Moose-Query-Scoping'
 }
 
 { #category : #testing }
-MQScopeAllTypesStrategy >> isOfRightType: anEntity [
+MQScopeAllTypesStrategy >> shouldBeSelected: anEntity [
 	^ true
 ]

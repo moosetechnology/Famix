@@ -24,6 +24,7 @@ Trait {
 		'#previous => FMOne type: #FamixTAssociation opposite: #next'
 	],
 	#traits : 'FamixTSourceEntity + TAssociationMetaLevelDependency',
+	#classTraits : 'FamixTSourceEntity classTrait + TAssociationMetaLevelDependency classTrait',
 	#category : #'Famix-Traits-Association'
 }
 
@@ -117,20 +118,32 @@ FamixTAssociation >> previous: anObject [
 
 { #category : #accessing }
 FamixTAssociation >> source [
-	^ self explicitRequirement
+	^ self sourceSelector value: self
 ]
 
 { #category : #accessing }
 FamixTAssociation >> source: aSource [
-	self explicitRequirement
+	self perform: (self sourceSelector , ':') with: aSource
+]
+
+{ #category : #accessing }
+FamixTAssociation >> sourceSelector [
+	^ (self mooseDescription allComplexProperties detect: #isSource)
+		implementingSelector
 ]
 
 { #category : #accessing }
 FamixTAssociation >> target [
-	^ self explicitRequirement
+	^ self targetSelector value: self
 ]
 
 { #category : #accessing }
 FamixTAssociation >> target: aTarget [
-	self explicitRequirement
+	self perform: (self targetSelector , ':') with: aTarget
+]
+
+{ #category : #accessing }
+FamixTAssociation >> targetSelector [
+	^ (self mooseDescription allComplexProperties detect: #isTarget)
+		implementingSelector
 ]
