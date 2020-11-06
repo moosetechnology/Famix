@@ -16,7 +16,7 @@ returns a string with a script to feed into PlantUML.com
 Other interesting method is: `#generatePlantUMLFile: aFileName with: aCollectionOfClasses` that dumps the PlantUML script into a `aFileName.puml`
 "
 Class {
-	#name : #MetamodelUMLDocumentor,
+	#name : #FamixMMUMLDocumentor,
 	#superclass : #Object,
 	#instVars : [
 		'model',
@@ -26,8 +26,13 @@ Class {
 	#category : #'Famix-MetamodelDocumentor'
 }
 
+{ #category : #accessing }
+FamixMMUMLDocumentor >> classesOfInterest: aCollection [
+	classesOfInterest := aCollection 
+]
+
 { #category : #generating }
-MetamodelUMLDocumentor >> generatePlantUML: aCollection on: aStream [
+FamixMMUMLDocumentor >> generatePlantUML: aCollection on: aStream [
 	outputStream := aStream.
 	classesOfInterest := aCollection
 		collect: [:stClass | model metamodel descriptionOf: stClass ].
@@ -45,12 +50,12 @@ MetamodelUMLDocumentor >> generatePlantUML: aCollection on: aStream [
 ]
 
 { #category : #generating }
-MetamodelUMLDocumentor >> generatePlantUMLClasses [
+FamixMMUMLDocumentor >> generatePlantUMLClasses [
 	classesOfInterest do: [ :clazz | clazz accept: self ]
 ]
 
 { #category : #generating }
-MetamodelUMLDocumentor >> generatePlantUMLFile: aString with: aCollection [
+FamixMMUMLDocumentor >> generatePlantUMLFile: aString with: aCollection [
 	| filename |
 	filename := (aString endsWith: self plantUMLExtension)
 		ifTrue: [ aString ]
@@ -61,28 +66,28 @@ MetamodelUMLDocumentor >> generatePlantUMLFile: aString with: aCollection [
 ]
 
 { #category : #generating }
-MetamodelUMLDocumentor >> generatePlantUMLInheritance [
+FamixMMUMLDocumentor >> generatePlantUMLInheritance [
 	classesOfInterest do: [ :clazz | 
 			self visitClassInheritances: clazz
 	]
 ]
 
 { #category : #generating }
-MetamodelUMLDocumentor >> generatePlantUMLRelations [
+FamixMMUMLDocumentor >> generatePlantUMLRelations [
 	classesOfInterest do: [ :clazz | 
 			self visitClassRelations: clazz
 		]
 ]
 
 { #category : #generating }
-MetamodelUMLDocumentor >> generatePlantUMLWith: aCollection [
+FamixMMUMLDocumentor >> generatePlantUMLWith: aCollection [
 	^String streamContents: [ :stream |
 		self generatePlantUML: aCollection on: stream.
 	] 
 ]
 
 { #category : #testing }
-MetamodelUMLDocumentor >> isRedundantRelation: aFM3Prop [
+FamixMMUMLDocumentor >> isRedundantRelation: aFM3Prop [
 	"whena relation has an opposite, we want to display process only one of them (the 'non redundant' one.
 	HEre are some rules to decide which one is redudant.
 	Some of these rules are pretty arbitrary, but a decision has to be made"
@@ -97,44 +102,44 @@ MetamodelUMLDocumentor >> isRedundantRelation: aFM3Prop [
 ]
 
 { #category : #accessing }
-MetamodelUMLDocumentor >> model [
+FamixMMUMLDocumentor >> model [
 	^ model
 ]
 
 { #category : #accessing }
-MetamodelUMLDocumentor >> model: anObject [
+FamixMMUMLDocumentor >> model: anObject [
 	model := anObject
 ]
 
 { #category : #testing }
-MetamodelUMLDocumentor >> ofInterest: aFMClass [
+FamixMMUMLDocumentor >> ofInterest: aFMClass [
 	^classesOfInterest includes: aFMClass 
 ]
 
 { #category : #accessing }
-MetamodelUMLDocumentor >> outputStream [
+FamixMMUMLDocumentor >> outputStream [
 	^ outputStream
 ]
 
 { #category : #accessing }
-MetamodelUMLDocumentor >> outputStream: anObject [
+FamixMMUMLDocumentor >> outputStream: anObject [
 	outputStream := anObject
 ]
 
 { #category : #private }
-MetamodelUMLDocumentor >> plantUMLColorFor: aFMClass [
+FamixMMUMLDocumentor >> plantUMLColorFor: aFMClass [
 	^ (aFMClass name first = $T)
 		ifTrue: [ 'lightGrey' ]
 		ifFalse: [ 'white' ]
 ]
 
 { #category : #accessing }
-MetamodelUMLDocumentor >> plantUMLExtension [
+FamixMMUMLDocumentor >> plantUMLExtension [
 	^'.puml'
 ]
 
 { #category : #private }
-MetamodelUMLDocumentor >> plantUMLFooter [
+FamixMMUMLDocumentor >> plantUMLFooter [
 	outputStream nextPutAll:
 	'
 @enduml
@@ -142,7 +147,7 @@ MetamodelUMLDocumentor >> plantUMLFooter [
 ]
 
 { #category : #private }
-MetamodelUMLDocumentor >> plantUMLHeader [
+FamixMMUMLDocumentor >> plantUMLHeader [
 	outputStream nextPutAll:
 	'@startuml
 hide empty members
@@ -156,14 +161,14 @@ skinparam class {
 ]
 
 { #category : #private }
-MetamodelUMLDocumentor >> plantUMLMarkerFor: aFMClass [
+FamixMMUMLDocumentor >> plantUMLMarkerFor: aFMClass [
 	^(aFMClass name first = $T)
 		ifTrue: [ 'T' ]
 		ifFalse: [ 'C' ]
 ]
 
 { #category : #visiting }
-MetamodelUMLDocumentor >> visitClass: aFMClass [
+FamixMMUMLDocumentor >> visitClass: aFMClass [
 	outputStream
 		nextPutAll: 'class ' ;
 		nextPutAll: aFMClass name ;
@@ -181,19 +186,19 @@ MetamodelUMLDocumentor >> visitClass: aFMClass [
 ]
 
 { #category : #visiting }
-MetamodelUMLDocumentor >> visitClassInheritances: aFMClass [
+FamixMMUMLDocumentor >> visitClassInheritances: aFMClass [
 	self visitInheritance: aFMClass superclass sub: aFMClass.
 	aFMClass traits do: [ :trait | self visitInheritance: trait sub: aFMClass ]
 ]
 
 { #category : #visiting }
-MetamodelUMLDocumentor >> visitClassRelations: aFMClass [
+FamixMMUMLDocumentor >> visitClassRelations: aFMClass [
 	aFMClass
 		complexProperties do: [ :rel | self visitRelation: rel ]
 ]
 
 { #category : #visiting }
-MetamodelUMLDocumentor >> visitDualRelation: aFM3Prop [
+FamixMMUMLDocumentor >> visitDualRelation: aFM3Prop [
 	"only called when we already verified that the relation should be processed"
 	| opposite |
 	opposite := aFM3Prop opposite.
@@ -210,7 +215,7 @@ MetamodelUMLDocumentor >> visitDualRelation: aFM3Prop [
 ]
 
 { #category : #visiting }
-MetamodelUMLDocumentor >> visitInheritance: aFMSuperClass sub: aFMSubClass [
+FamixMMUMLDocumentor >> visitInheritance: aFMSuperClass sub: aFMSubClass [
 	(self ofInterest: aFMSuperClass) ifFalse: [ ^ self ].
 	(self ofInterest: aFMSubClass) ifFalse: [ ^ self ].
 	outputStream
@@ -221,7 +226,7 @@ MetamodelUMLDocumentor >> visitInheritance: aFMSuperClass sub: aFMSubClass [
 ]
 
 { #category : #visiting }
-MetamodelUMLDocumentor >> visitProperty: aFMProperty [
+FamixMMUMLDocumentor >> visitProperty: aFMProperty [
 	outputStream
 		nextPutAll: '  ' ;
 		nextPutAll: aFMProperty type name ;
@@ -231,7 +236,7 @@ MetamodelUMLDocumentor >> visitProperty: aFMProperty [
 ]
 
 { #category : #visiting }
-MetamodelUMLDocumentor >> visitRelation: aFM3Prop [
+FamixMMUMLDocumentor >> visitRelation: aFM3Prop [
 	(self ofInterest: aFM3Prop type) ifFalse: [ ^ self ].
 	(self isRedundantRelation: aFM3Prop) ifTrue: [ ^self ].
 
