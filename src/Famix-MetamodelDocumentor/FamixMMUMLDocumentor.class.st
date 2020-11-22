@@ -86,6 +86,55 @@ FamixMMUMLDocumentor >> generatePlantUMLWith: aCollection [
 	] 
 ]
 
+{ #category : #generating }
+FamixMMUMLDocumentor >> generateRelationSource: aFM3Prop [
+	outputStream
+		nextPutAll: aFM3Prop mmClass name.
+]
+
+{ #category : #generating }
+FamixMMUMLDocumentor >> generateRelationSourceRole: aFM3Prop [
+	outputStream
+		nextPut: $".
+	aFM3Prop isMultivalued
+		ifTrue: [ outputStream nextPutAll: ' *' ].
+	outputStream
+		nextPutAll: aFM3Prop name;
+		nextPut: $"
+]
+
+{ #category : #generating }
+FamixMMUMLDocumentor >> generateRelationSymbol: aFM3Prop [
+	| symbol |
+	symbol :=
+		aFM3Prop isContainer "#isContainer means the property *points to* the container"
+			ifTrue: [ '--o' ]
+			ifFalse: [
+				((aFM3Prop hasOpposite) and: [ aFM3Prop opposite isContainer ])
+				ifTrue: [ 'o--' ]
+				ifFalse: [ '--' ]
+		].
+	outputStream
+		nextPutAll: symbol
+]
+
+{ #category : #generating }
+FamixMMUMLDocumentor >> generateRelationTarget: aFM3Prop [
+	outputStream
+		nextPutAll: aFM3Prop type name.
+]
+
+{ #category : #generating }
+FamixMMUMLDocumentor >> generateRelationTargetRole: aFM3Prop [
+	outputStream
+		nextPut: $".
+	(aFM3Prop hasOpposite and: aFM3Prop opposite isMultivalued)
+		ifTrue: [ outputStream nextPutAll: ' *' ].
+	outputStream
+		nextPutAll: aFM3Prop opposite name ;
+		nextPut: $"
+]
+
 { #category : #testing }
 FamixMMUMLDocumentor >> isRedundantRelation: aFM3Prop [
 	"whena relation has an opposite, we want to display process only one of them (the 'non redundant' one.
@@ -103,6 +152,11 @@ FamixMMUMLDocumentor >> isRedundantRelation: aFM3Prop [
 
 	"don't know what else to test, but a decision has to be made"
 	^aFM3Prop name < aFM3Prop opposite name
+]
+
+{ #category : #testing }
+FamixMMUMLDocumentor >> isTrait: aFMClass [
+	^aFMClass implementingClass isTrait
 ]
 
 { #category : #accessing }
@@ -132,7 +186,7 @@ FamixMMUMLDocumentor >> outputStream: anObject [
 
 { #category : #private }
 FamixMMUMLDocumentor >> plantUMLColorFor: aFMClass [
-	^ (aFMClass isTrait)
+	^ (self isTrait: aFMClass)
 		ifTrue: [ 'lightGrey' ]
 		ifFalse: [ 'white' ]
 ]
@@ -166,7 +220,7 @@ skinparam class {
 
 { #category : #private }
 FamixMMUMLDocumentor >> plantUMLMarkerFor: aFMClass [
-	^(aFMClass isTrait)
+	^(self isTrait: aFMClass)
 		ifTrue: [ 'T' ]
 		ifFalse: [ 'C' ]
 ]
@@ -224,34 +278,20 @@ FamixMMUMLDocumentor >> visitProperty: aFMProperty [
 
 { #category : #visiting }
 FamixMMUMLDocumentor >> visitRelation: aFM3Prop [
+
 	(self ofInterest: aFM3Prop type) ifFalse: [ ^ self ].
-	(self isRedundantRelation: aFM3Prop) ifTrue: [ ^self ].
+	(self isRedundantRelation: aFM3Prop) ifTrue: [ ^ self ].
 
+	self generateRelationSource: aFM3Prop.
+	outputStream space.
 	aFM3Prop opposite ifNotNil: [
-		^ self visitRelationWithOpposite: aFM3Prop ].
-
-	outputStream
-		nextPutAll: aFM3Prop mmClass name ;
-		nextPutAll: ' -- "' ;
-		nextPutAll: aFM3Prop name ;
-		nextPutAll: '" ' ;
-		nextPutAll: aFM3Prop type name ;
-		cr
-]
-
-{ #category : #visiting }
-FamixMMUMLDocumentor >> visitRelationWithOpposite: aFM3Prop [
-	"only called when we already verified that the relation should be processed"
-	| opposite |
-	opposite := aFM3Prop opposite.
-
-	outputStream
-		nextPutAll: aFM3Prop mmClass name ;
-		nextPutAll: ' "' ;
-		nextPutAll: opposite name ;
-		nextPutAll: '" -- "' ;
-		nextPutAll: aFM3Prop name ;
-		nextPutAll: '" ' ;
-		nextPutAll: aFM3Prop type name ;
-		cr
+		self generateRelationTargetRole: aFM3Prop.
+		outputStream space.
+	].
+	self generateRelationSymbol: aFM3Prop.
+	outputStream space.
+	self generateRelationSourceRole: aFM3Prop.
+	outputStream space.
+	self generateRelationTarget: aFM3Prop.
+	outputStream cr
 ]

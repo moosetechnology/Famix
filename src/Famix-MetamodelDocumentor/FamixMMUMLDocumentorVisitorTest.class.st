@@ -48,7 +48,23 @@ FamixMMUMLDocumentorVisitorTest >> testVisitInheritance [
 ]
 
 { #category : #tests }
-FamixMMUMLDocumentorVisitorTest >> testVisitRelation [
+FamixMMUMLDocumentorVisitorTest >> testVisitRelationContainer [
+	| principal school | 
+	principal := self famixClassFor: FamixTest4Principal.
+	school := self famixClassFor: FamixTest4School.
+	documentor
+		classesOfInterest: { principal . school } ;
+		visitRelation: (self famixProperty: 'school' in: FamixTest4Principal).
+
+	self
+		assert: stream contents
+		equals:
+'Principal "principal" --o "school" School
+'
+]
+
+{ #category : #tests }
+FamixMMUMLDocumentorVisitorTest >> testVisitRelationContainerSourceMany [
 	| book person | 
 	book := self famixClassFor: FamixTest4Book.
 	person := self famixClassFor: FamixTest4Person.
@@ -59,6 +75,22 @@ FamixMMUMLDocumentorVisitorTest >> testVisitRelation [
 	self
 		assert: stream contents
 		equals:
-'Book "books" -- "person" Person
+'Book "*books" --o "person" Person
+'
+]
+
+{ #category : #tests }
+FamixMMUMLDocumentorVisitorTest >> testVisitRelationNoContainer [
+	| student teacher | 
+	student := self famixClassFor: FamixTest4Student.
+	teacher := self famixClassFor: FamixTest4Teacher.
+	documentor
+		classesOfInterest: { teacher . student } ;
+		visitRelation: (self famixProperty: 'students' in: FamixTest4Teacher).
+
+	self
+		assert: stream contents
+		equals:
+'Teacher "*teachers" -- "*students" Student
 '
 ]
