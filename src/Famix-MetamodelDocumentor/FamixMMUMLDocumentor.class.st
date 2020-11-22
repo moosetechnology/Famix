@@ -1,17 +1,21 @@
 "
 A class to create plantUML graphs from a metamodel
 
-A bit different from FmxMBPlantTextVisitor in that it works on the metamodel itself, and not on the builder
+Different from FmxMBPlantTextVisitor in that it works on the metamodel itself, and not on the builder
 
-currently needs a model to access its metamodel and creates a plantUML class diagram for a collection of classes given to it
+Currently needs a model to access its metamodel and creates a plantUML class diagram for a collection of classes given to it
 
 ```language=Pharo
-MetamodelUMLDocumentor new
-  model: FAMIXModel ;
-  generatePlantUMLWith: { FamixTAccess . FamixTAccessible . FamixTWithAccesses }. 
+FamixMMUMLDocumentor new
+	model: FAMIXModel ;
+	generatePlantUMLWith: { FamixTAccess . FamixTAccessible . FamixTWithAccesses }. 
 ```
 
 returns a string with a script to feed into PlantUML.com
+The scripts displays the 3 classes to generate with their inter-relationships and properties
+
+Can also display  ""external classes"" (kindof ""stubs""): entities related to the ones we are interested in, but not in the list of classes to generate.
+For this, use `#beWithStub`.
 
 Other interesting method is: `#generatePlantUMLFile: aFileName with: aCollectionOfClasses` that dumps the PlantUML script into a `aFileName.puml`
 "
@@ -28,12 +32,12 @@ Class {
 	#category : #'Famix-MetamodelDocumentor'
 }
 
-{ #category : #accessing }
+{ #category : #'api - generation' }
 FamixMMUMLDocumentor >> beWithStub [
 	withStub := true
 ]
 
-{ #category : #accessing }
+{ #category : #'api - generation' }
 FamixMMUMLDocumentor >> beWithoutStub [
 	withStub := false
 ]
@@ -75,7 +79,7 @@ FamixMMUMLDocumentor >> generateExternalClass: aFM3Class [
 	outputStream cr
 ]
 
-{ #category : #'script generation' }
+{ #category : #'api - generation' }
 FamixMMUMLDocumentor >> generatePlantUML: aCollection onStream: aStream [
 	outputStream := aStream.
 	classesOfInterest := aCollection
@@ -107,7 +111,7 @@ FamixMMUMLDocumentor >> generatePlantUMLExternalClasses [
 		self generateExternalClass: clazz ]
 ]
 
-{ #category : #'script generation' }
+{ #category : #'api - generation' }
 FamixMMUMLDocumentor >> generatePlantUMLFile: aString with: aCollection [
 	| filename |
 	filename := (aString endsWith: self plantUMLExtension)
@@ -132,7 +136,7 @@ FamixMMUMLDocumentor >> generatePlantUMLRelations [
 		]
 ]
 
-{ #category : #'script generation' }
+{ #category : #'api - generation' }
 FamixMMUMLDocumentor >> generatePlantUMLWith: aCollection [
 	^String streamContents: [ :stream |
 		self generatePlantUML: aCollection onStream: stream.
