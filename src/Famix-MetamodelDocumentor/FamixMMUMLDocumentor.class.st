@@ -128,7 +128,7 @@ FamixMMUMLDocumentor >> outputStream: anObject [
 
 { #category : #private }
 FamixMMUMLDocumentor >> plantUMLColorFor: aFMClass [
-	^ (aFMClass name first = $T)
+	^ (aFMClass isTrait)
 		ifTrue: [ 'lightGrey' ]
 		ifFalse: [ 'white' ]
 ]
@@ -162,7 +162,7 @@ skinparam class {
 
 { #category : #private }
 FamixMMUMLDocumentor >> plantUMLMarkerFor: aFMClass [
-	^(aFMClass name first = $T)
+	^(aFMClass isTrait)
 		ifTrue: [ 'T' ]
 		ifFalse: [ 'C' ]
 ]
