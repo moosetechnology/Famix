@@ -32,7 +32,7 @@ FamixMMUMLDocumentor >> classesOfInterest: aCollection [
 ]
 
 { #category : #generating }
-FamixMMUMLDocumentor >> generatePlantUML: aCollection on: aStream [
+FamixMMUMLDocumentor >> generatePlantUML: aCollection onStream: aStream [
 	outputStream := aStream.
 	classesOfInterest := aCollection
 		collect: [:stClass | model metamodel descriptionOf: stClass ].
@@ -61,7 +61,7 @@ FamixMMUMLDocumentor >> generatePlantUMLFile: aString with: aCollection [
 		ifTrue: [ aString ]
 		ifFalse: [ aString , self plantUMLExtension].
 	^filename asFileReference writeStreamDo: [ :stream |
-		self generatePlantUML: aCollection on: stream.
+		self generatePlantUML: aCollection onStream: stream.
 	] 
 ]
 
@@ -82,7 +82,7 @@ FamixMMUMLDocumentor >> generatePlantUMLRelations [
 { #category : #generating }
 FamixMMUMLDocumentor >> generatePlantUMLWith: aCollection [
 	^String streamContents: [ :stream |
-		self generatePlantUML: aCollection on: stream.
+		self generatePlantUML: aCollection onStream: stream.
 	] 
 ]
 
@@ -198,23 +198,6 @@ FamixMMUMLDocumentor >> visitClassRelations: aFMClass [
 ]
 
 { #category : #visiting }
-FamixMMUMLDocumentor >> visitDualRelation: aFM3Prop [
-	"only called when we already verified that the relation should be processed"
-	| opposite |
-	opposite := aFM3Prop opposite.
-
-	outputStream
-		nextPutAll: aFM3Prop implementingClass name ;
-		nextPutAll: ' "' ;
-		nextPutAll: opposite name ;
-		nextPutAll: '" -- "' ;
-		nextPutAll: aFM3Prop name ;
-		nextPutAll: '" ' ;
-		nextPutAll: aFM3Prop type name ;
-		cr
-]
-
-{ #category : #visiting }
 FamixMMUMLDocumentor >> visitInheritance: aFMSuperClass sub: aFMSubClass [
 	(self ofInterest: aFMSuperClass) ifFalse: [ ^ self ].
 	(self ofInterest: aFMSubClass) ifFalse: [ ^ self ].
@@ -240,11 +223,29 @@ FamixMMUMLDocumentor >> visitRelation: aFM3Prop [
 	(self ofInterest: aFM3Prop type) ifFalse: [ ^ self ].
 	(self isRedundantRelation: aFM3Prop) ifTrue: [ ^self ].
 
-	aFM3Prop opposite ifNotNil: [ ^ self visitDualRelation: aFM3Prop ].
+	aFM3Prop opposite ifNotNil: [
+		^ self visitRelationWithOpposite: aFM3Prop ].
 
 	outputStream
-		nextPutAll: aFM3Prop implementingClass name ;
+		nextPutAll: aFM3Prop mmClass name ;
 		nextPutAll: ' -- "' ;
+		nextPutAll: aFM3Prop name ;
+		nextPutAll: '" ' ;
+		nextPutAll: aFM3Prop type name ;
+		cr
+]
+
+{ #category : #visiting }
+FamixMMUMLDocumentor >> visitRelationWithOpposite: aFM3Prop [
+	"only called when we already verified that the relation should be processed"
+	| opposite |
+	opposite := aFM3Prop opposite.
+
+	outputStream
+		nextPutAll: aFM3Prop mmClass name ;
+		nextPutAll: ' "' ;
+		nextPutAll: opposite name ;
+		nextPutAll: '" -- "' ;
 		nextPutAll: aFM3Prop name ;
 		nextPutAll: '" ' ;
 		nextPutAll: aFM3Prop type name ;
