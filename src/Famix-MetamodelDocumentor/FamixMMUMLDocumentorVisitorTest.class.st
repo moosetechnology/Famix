@@ -75,7 +75,7 @@ FamixMMUMLDocumentorVisitorTest >> testVisitRelationContainerSourceMany [
 	self
 		assert: stream contents
 		equals:
-'Book "*books" --o "person" Person
+'Book " *books" --o "person" Person
 '
 ]
 
@@ -91,6 +91,6 @@ FamixMMUMLDocumentorVisitorTest >> testVisitRelationNoContainer [
 	self
 		assert: stream contents
 		equals:
-'Teacher "*teachers" -- "*students" Student
+'Teacher " *teachers" -- " *students" Student
 '
 ]
