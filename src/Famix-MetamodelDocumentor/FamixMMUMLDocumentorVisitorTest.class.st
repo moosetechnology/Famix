@@ -39,7 +39,44 @@ FamixMMUMLDocumentorVisitorTest >> testVisitInheritance [
 	documentor
 		classesOfInterest: { person . student } ;
 		visitInheritance: person sub: student.
+		
+	self assert: documentor externalClasses isEmpty.
+	self
+		assert: stream contents
+		equals:
+'Person <|-- Student
+'
+]
 
+{ #category : #tests }
+FamixMMUMLDocumentorVisitorTest >> testVisitInheritanceFromExternal [
+	| person student |
+	person := self famixClassFor: FamixTest4Person.
+	student := self famixClassFor: FamixTest4Student. 
+	documentor
+		beWithStub ;
+		classesOfInterest: {  person } ;
+		visitInheritance: person sub: student.
+		
+	self assert: documentor externalClasses notEmpty.
+	self
+		assert: stream contents
+		equals:
+'Person <|-- Student
+'
+]
+
+{ #category : #tests }
+FamixMMUMLDocumentorVisitorTest >> testVisitInheritanceToExternal [
+	| person student |
+	person := self famixClassFor: FamixTest4Person.
+	student := self famixClassFor: FamixTest4Student. 
+	documentor
+		beWithStub ;
+		classesOfInterest: {  student } ;
+		visitInheritance: person sub: student.
+		
+	self assert: documentor externalClasses notEmpty.
 	self
 		assert: stream contents
 		equals:
@@ -55,7 +92,8 @@ FamixMMUMLDocumentorVisitorTest >> testVisitRelationContainer [
 	documentor
 		classesOfInterest: { principal . school } ;
 		visitRelation: (self famixProperty: 'school' in: FamixTest4Principal).
-
+		
+	self assert: documentor externalClasses isEmpty.
 	self
 		assert: stream contents
 		equals:
@@ -71,7 +109,8 @@ FamixMMUMLDocumentorVisitorTest >> testVisitRelationContainerSourceMany [
 	documentor
 		classesOfInterest: { person . book } ;
 		visitRelation: (self famixProperty: 'person' in: FamixTest4Book).
-
+		
+	self assert: documentor externalClasses isEmpty.
 	self
 		assert: stream contents
 		equals:
@@ -87,7 +126,26 @@ FamixMMUMLDocumentorVisitorTest >> testVisitRelationNoContainer [
 	documentor
 		classesOfInterest: { teacher . student } ;
 		visitRelation: (self famixProperty: 'students' in: FamixTest4Teacher).
+		
+	self assert: documentor externalClasses isEmpty.
+	self
+		assert: stream contents
+		equals:
+'Teacher " *teachers" -- " *students" Student
+'
+]
 
+{ #category : #tests }
+FamixMMUMLDocumentorVisitorTest >> testVisitRelationToExternalClass [
+	| student teacher | 
+	student := self famixClassFor: FamixTest4Student.
+	teacher := self famixClassFor: FamixTest4Teacher.
+	documentor
+		classesOfInterest: { teacher } ;
+		beWithStub ;
+		visitRelation: (self famixProperty: 'students' in: FamixTest4Teacher).
+		
+	self assert: documentor externalClasses notEmpty.
 	self
 		assert: stream contents
 		equals:

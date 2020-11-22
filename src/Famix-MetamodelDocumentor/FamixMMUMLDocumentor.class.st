@@ -21,14 +21,58 @@ Class {
 	#instVars : [
 		'model',
 		'outputStream',
-		'classesOfInterest'
+		'classesOfInterest',
+		'withStub',
+		'externalClasses'
 	],
 	#category : #'Famix-MetamodelDocumentor'
 }
 
 { #category : #accessing }
+FamixMMUMLDocumentor >> beWithStub [
+	withStub := true
+]
+
+{ #category : #accessing }
+FamixMMUMLDocumentor >> beWithoutStub [
+	withStub := false
+]
+
+{ #category : #accessing }
 FamixMMUMLDocumentor >> classesOfInterest: aCollection [
 	classesOfInterest := aCollection 
+]
+
+{ #category : #accessing }
+FamixMMUMLDocumentor >> externalClasses [
+	^externalClasses 
+]
+
+{ #category : #accessing }
+FamixMMUMLDocumentor >> externalClasses: aCollection [
+	externalClasses  := aCollection 
+]
+
+{ #category : #generating }
+FamixMMUMLDocumentor >> generateClassName: aFM3Class [
+	outputStream
+		nextPutAll: aFM3Class name.
+	(self ofInterest: aFM3Class)
+	ifFalse: [
+		externalClasses add: aFM3Class 
+	]
+]
+
+{ #category : #generating }
+FamixMMUMLDocumentor >> generateExternalClass: aFM3Class [
+	outputStream
+		nextPutAll: 'class '.
+	self generateClassName: aFM3Class.
+	(self ofInterest: aFM3Class)
+		ifFalse: [
+			outputStream nextPutAll: ' <<External>>'
+		].
+	outputStream cr
 ]
 
 { #category : #'script generation' }
@@ -36,6 +80,7 @@ FamixMMUMLDocumentor >> generatePlantUML: aCollection onStream: aStream [
 	outputStream := aStream.
 	classesOfInterest := aCollection
 		collect: [:stClass | model metamodel descriptionOf: stClass ].
+	externalClasses := Set new.
 
 	self plantUMLHeader.
 	outputStream cr.
@@ -45,6 +90,8 @@ FamixMMUMLDocumentor >> generatePlantUML: aCollection onStream: aStream [
 	outputStream cr.
 	self generatePlantUMLRelations.
 	outputStream cr.
+	self generatePlantUMLExternalClasses.
+	outputStream cr.
 	self plantUMLFooter.
 
 ]
@@ -52,6 +99,12 @@ FamixMMUMLDocumentor >> generatePlantUML: aCollection onStream: aStream [
 { #category : #generating }
 FamixMMUMLDocumentor >> generatePlantUMLClasses [
 	classesOfInterest do: [ :clazz | clazz accept: self ]
+]
+
+{ #category : #generating }
+FamixMMUMLDocumentor >> generatePlantUMLExternalClasses [
+	externalClasses do: [ :clazz |
+		self generateExternalClass: clazz ]
 ]
 
 { #category : #'script generation' }
@@ -88,8 +141,7 @@ FamixMMUMLDocumentor >> generatePlantUMLWith: aCollection [
 
 { #category : #generating }
 FamixMMUMLDocumentor >> generateRelationSource: aFM3Prop [
-	outputStream
-		nextPutAll: aFM3Prop mmClass name.
+	self generateClassName: aFM3Prop mmClass
 ]
 
 { #category : #generating }
@@ -120,8 +172,7 @@ FamixMMUMLDocumentor >> generateRelationSymbol: aFM3Prop [
 
 { #category : #generating }
 FamixMMUMLDocumentor >> generateRelationTarget: aFM3Prop [
-	outputStream
-		nextPutAll: aFM3Prop type name.
+	self generateClassName: aFM3Prop type
 ]
 
 { #category : #generating }
@@ -133,6 +184,12 @@ FamixMMUMLDocumentor >> generateRelationTargetRole: aFM3Prop [
 	outputStream
 		nextPutAll: aFM3Prop opposite name ;
 		nextPut: $"
+]
+
+{ #category : #initialization }
+FamixMMUMLDocumentor >> initialize [
+	self beWithoutStub.
+	externalClasses := Set new
 ]
 
 { #category : #testing }
@@ -160,6 +217,11 @@ FamixMMUMLDocumentor >> isTrait: aFMClass [
 ]
 
 { #category : #accessing }
+FamixMMUMLDocumentor >> isWithStub [
+	^withStub
+]
+
+{ #category : #accessing }
 FamixMMUMLDocumentor >> model [
 	^ model
 ]
@@ -171,7 +233,7 @@ FamixMMUMLDocumentor >> model: anObject [
 
 { #category : #testing }
 FamixMMUMLDocumentor >> ofInterest: aFMClass [
-	^classesOfInterest includes: aFMClass 
+	^classesOfInterest includes: aFMClass
 ]
 
 { #category : #accessing }
@@ -214,6 +276,8 @@ skinparam class {
   BackgroundColor white
   ArrowColor black
   BorderColor darkGray
+  BackgroundColor<<External>> LightYellow
+  BorderColor<<External>> LightGray
 }
 '
 ]
@@ -223,6 +287,13 @@ FamixMMUMLDocumentor >> plantUMLMarkerFor: aFMClass [
 	^(self isTrait: aFMClass)
 		ifTrue: [ 'T' ]
 		ifFalse: [ 'C' ]
+]
+
+{ #category : #testing }
+FamixMMUMLDocumentor >> relationEndOfInterest: aFMClass [
+	^self isWithStub
+		ifTrue: [ aFMClass class ~= FM3Object ]
+		ifFalse: [ self ofInterest: aFMClass ]
 ]
 
 { #category : #visiting }
@@ -257,13 +328,13 @@ FamixMMUMLDocumentor >> visitClassRelations: aFMClass [
 
 { #category : #visiting }
 FamixMMUMLDocumentor >> visitInheritance: aFMSuperClass sub: aFMSubClass [
-	(self ofInterest: aFMSuperClass) ifFalse: [ ^ self ].
-	(self ofInterest: aFMSubClass) ifFalse: [ ^ self ].
-	outputStream
-		nextPutAll: aFMSuperClass name ;
-		nextPutAll: ' <|-- ' ;
-		nextPutAll: aFMSubClass name ;
-		cr
+	(self relationEndOfInterest: aFMSuperClass) ifFalse: [ ^ self ].
+	(self relationEndOfInterest: aFMSubClass) ifFalse: [ ^ self ].
+
+	self generateClassName: aFMSuperClass.
+	outputStream nextPutAll: ' <|-- '.
+	self generateClassName: aFMSubClass.
+	outputStream cr
 ]
 
 { #category : #visiting }
@@ -278,8 +349,11 @@ FamixMMUMLDocumentor >> visitProperty: aFMProperty [
 
 { #category : #visiting }
 FamixMMUMLDocumentor >> visitRelation: aFM3Prop [
+	(self relationEndOfInterest: aFM3Prop mmClass)
+		ifFalse: [ ^ self ].
+	(self relationEndOfInterest: aFM3Prop type)
+		ifFalse: [ ^ self ].
 
-	(self ofInterest: aFM3Prop type) ifFalse: [ ^ self ].
 	(self isRedundantRelation: aFM3Prop) ifTrue: [ ^ self ].
 
 	self generateRelationSource: aFM3Prop.
