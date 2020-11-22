@@ -31,7 +31,7 @@ FamixMMUMLDocumentor >> classesOfInterest: aCollection [
 	classesOfInterest := aCollection 
 ]
 
-{ #category : #generating }
+{ #category : #'script generation' }
 FamixMMUMLDocumentor >> generatePlantUML: aCollection onStream: aStream [
 	outputStream := aStream.
 	classesOfInterest := aCollection
@@ -54,7 +54,7 @@ FamixMMUMLDocumentor >> generatePlantUMLClasses [
 	classesOfInterest do: [ :clazz | clazz accept: self ]
 ]
 
-{ #category : #generating }
+{ #category : #'script generation' }
 FamixMMUMLDocumentor >> generatePlantUMLFile: aString with: aCollection [
 	| filename |
 	filename := (aString endsWith: self plantUMLExtension)
@@ -79,7 +79,7 @@ FamixMMUMLDocumentor >> generatePlantUMLRelations [
 		]
 ]
 
-{ #category : #generating }
+{ #category : #'script generation' }
 FamixMMUMLDocumentor >> generatePlantUMLWith: aCollection [
 	^String streamContents: [ :stream |
 		self generatePlantUML: aCollection onStream: stream.
