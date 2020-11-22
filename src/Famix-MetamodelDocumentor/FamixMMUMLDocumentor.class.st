@@ -97,6 +97,10 @@ FamixMMUMLDocumentor >> isRedundantRelation: aFM3Prop [
 	aFM3Prop isDerived ifTrue: [ ^true ].
 	aFM3Prop isContainer ifTrue: [ ^false ].
 
+	"check whether opposite is redundant"
+	aFM3Prop opposite isDerived ifTrue: [ ^false ].
+	aFM3Prop isContainer ifTrue: [ ^true ].
+
 	"don't know what else to test, but a decision has to be made"
 	^aFM3Prop name < aFM3Prop opposite name
 ]
