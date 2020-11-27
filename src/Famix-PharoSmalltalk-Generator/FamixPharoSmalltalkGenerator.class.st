@@ -95,7 +95,7 @@ FamixPharoSmalltalkGenerator >> defineHierarchy [
 	class --|> #TWithTypes.
 	class --|> #TWithExceptions.
 	class --|> #TClass.
-	class --|> #THasModifiers.
+	class --|> #TAbstractable.
 
 	globalVariable --|> namedEntity.
 	globalVariable --|> #TGlobalVariable.

@@ -118,7 +118,8 @@ Class {
 		'tPrimitiveType',
 		'tUnknownVariable',
 		'tRelativeSourceAnchor',
-		'tEnum'
+		'tEnum',
+		'tAbstractable'
 	],
 	#category : #'Famix-MetamodelGeneration'
 }
@@ -1034,6 +1035,10 @@ FamixGenerator >> defineHierarchy [
 { #category : #definition }
 FamixGenerator >> defineProperties [
 	super defineProperties.
+	
+	((tAbstractable property: #isAbstract type: #Boolean) 
+		comment: 'Entity can be declared abstract').
+		
 	((tFileAnchor property: #correspondingFile type: #FamixTFile) 
 		comment: 'File associated to this source anchor').
 	((tFileAnchor property: #encoding type: #String) 
@@ -1414,6 +1419,8 @@ FamixGenerator >> defineRelations [
 { #category : #definition }
 FamixGenerator >> defineTraits [
 	super defineTraits.
+	
+	tAbstractable := builder newTraitNamed: #TAbstractable.
 	tAccess := builder newTraitNamed: #TAccess.
 	tAccess comment: self commentForTAccess.
 	tAccess withTesting.
