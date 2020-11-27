@@ -76,8 +76,7 @@ FamixTAccess >> isReadWriteUnknown [
 { #category : #accessing }
 FamixTAccess >> isWrite [
 
-	<FMProperty: #isWrite type: #Boolean> 
-	<derived>
+	<FMProperty: #isWrite type: #Boolean>
 	<FMComment: 'Write access'>
 	^ isWrite ifNil: [ false ]
 ]
