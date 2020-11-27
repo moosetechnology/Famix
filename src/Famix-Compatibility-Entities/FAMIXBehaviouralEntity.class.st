@@ -120,7 +120,6 @@ FAMIXBehaviouralEntity >> numberOfOutgoingInvocations [
 { #category : #'Famix-Extensions' }
 FAMIXBehaviouralEntity >> numberOfStatements [
 	<FMProperty: #numberOfStatements type: #Number>
-	<derived>
 	<FMComment: 'The number of statements in a method'>
 	^ self
 		lookUpPropertyNamed: #numberOfStatements
