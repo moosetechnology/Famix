@@ -1066,8 +1066,6 @@ FamixGenerator >> defineProperties [
 		comment: 'Tag indicating a setter, getter, constant, constructor, or abstract method').
 	((tMethod property: #isClassSide type: #Boolean) 
 		comment: 'True if class-side method').
-	((tMethod property: #isAbstract type: #Boolean) 
-		comment: 'True if abstract method').
 
 	((tHasSignature property: #signature type: #String)
 		comment: 'Signature of the message being sent').
