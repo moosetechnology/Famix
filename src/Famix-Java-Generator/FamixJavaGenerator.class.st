@@ -175,6 +175,9 @@ FamixJavaGenerator >> defineHierarchy [
 
 	enum --|> type.
 	enum --|> #TEnum.
+	enum --|> #TWithAttributes.
+	enum --|> #TWithMethods.
+	enum --|> #TWithInheritances.
 
 	enumValue --|> namedEntity.
 	enumValue --|> #TStructuralEntity.
