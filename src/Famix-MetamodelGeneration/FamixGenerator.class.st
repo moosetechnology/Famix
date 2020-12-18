@@ -119,7 +119,9 @@ Class {
 		'tUnknownVariable',
 		'tRelativeSourceAnchor',
 		'tEnum',
-		'tAbstractable'
+		'tAbstractable',
+		'tHasVisibility',
+		'tClassWithVisibility'
 	],
 	#category : #'Famix-MetamodelGeneration'
 }
@@ -934,6 +936,9 @@ FamixGenerator >> defineHierarchy [
 	tClass --|> tInvocationsReceiver.
 	tClass --|> tWithComments.
 	tClass --|> #TOODependencyQueries.
+	
+	tClassWithVisibility --|> tClass.
+	tClassWithVisibility --|> tHasVisibility.
 
 	tClassGroup --|> tTypeGroup.
 
@@ -1061,6 +1066,8 @@ FamixGenerator >> defineProperties [
 	((tHasModifiers property: #modifiers type: #String)
 		comment: 'Generic container for language dependent modifiers.';
 		multivalued).
+	((tHasVisibility property: #visibility type: #String)
+		comment: 'Visibility of the entity').
 
 	((tMethod property: #kind type: #String) 
 		comment: 'Tag indicating a setter, getter, constant, constructor, or abstract method').
@@ -1752,6 +1759,8 @@ FamixGenerator >> defineTraits [
 	tHasImmediateSource comment: self commentForTHasImmediateSource.
 
 	tHasModifiers := builder newTraitNamed: #THasModifiers.
+	tHasVisibility := builder newTraitNamed: #THasVisibility.
+	tClassWithVisibility := builder newTraitNamed: #TClassWithVisibility.
 
 	tWithStatements := builder newTraitNamed: #TWithStatements.
 	tWithStatements testingSelector: #isBehavioural.
