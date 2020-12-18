@@ -17,8 +17,3 @@ FAMIXClassTest >> testIsInterface [
 				isInterface: true;
 				isInterface)
 ]
-
-{ #category : #tests }
-FAMIXClassTest >> testModifiers [
-	self assertEmpty: self actualClass new modifiers
-]

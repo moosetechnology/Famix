@@ -48,11 +48,23 @@ FamixTHasVisibility >> isPackage [
 ]
 
 { #category : #accessing }
+FamixTHasVisibility >> isPackage: aBoolean [
+
+	aBoolean ifTrue: [ self visibility: #package ]
+]
+
+{ #category : #accessing }
 FamixTHasVisibility >> isPrivate [
 	<FMProperty: #isPrivate type: #Boolean> <derived>
 	<FMComment: 'Flag true for entities invisible out of their owner scope. Language dependent.'>
 	
 		^ self visibility = #private
+]
+
+{ #category : #accessing }
+FamixTHasVisibility >> isPrivate: aBoolean [
+
+	aBoolean ifTrue: [ self visibility: #private ]
 ]
 
 { #category : #accessing }
@@ -64,11 +76,23 @@ FamixTHasVisibility >> isProtected [
 ]
 
 { #category : #accessing }
+FamixTHasVisibility >> isProtected: aBoolean [
+
+	aBoolean ifTrue: [ self visibility: #protected ]
+]
+
+{ #category : #accessing }
 FamixTHasVisibility >> isPublic [
 	<FMProperty: #isPublic type: #Boolean> <derived>
 	<FMComment: 'Flag true for entities accessible from anywhere. Language dependent.'>	
 
 	^ self visibility = #public
+]
+
+{ #category : #accessing }
+FamixTHasVisibility >> isPublic: aBoolean [
+
+	aBoolean ifTrue: [ self visibility: #public ]
 ]
 
 { #category : #accessing }
