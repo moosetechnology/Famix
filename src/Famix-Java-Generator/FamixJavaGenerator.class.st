@@ -200,7 +200,9 @@ FamixJavaGenerator >> defineHierarchy [
 	namedEntity --|> #TPackageable.
 	namedEntity --|> #TInvocationsReceiver.
 	namedEntity --|> #TWithAnnotationInstances.
+	namedEntity --|> #THasVisibility.
 	namedEntity --|> #THasModifiers.
+	namedEntity withPrecedenceOf: #THasVisibility.
 
 	namespace --|> containerEntity.
 	namespace --|> #TNamespace.
