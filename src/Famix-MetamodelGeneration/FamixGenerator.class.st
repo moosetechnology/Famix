@@ -121,7 +121,8 @@ Class {
 		'tEnum',
 		'tAbstractable',
 		'tHasVisibility',
-		'tClassWithVisibility'
+		'tClassWithVisibility',
+		'tCanBeFinal'
 	],
 	#category : #'Famix-MetamodelGeneration'
 }
@@ -1043,6 +1044,8 @@ FamixGenerator >> defineProperties [
 	
 	((tAbstractable property: #isAbstract type: #Boolean) 
 		comment: 'Entity can be declared abstract').
+	((tCanBeFinal property: #isFinal type: #Boolean) 
+		comment: 'Entity can be declared final').
 		
 	((tFileAnchor property: #correspondingFile type: #FamixTFile) 
 		comment: 'File associated to this source anchor').
@@ -1426,6 +1429,7 @@ FamixGenerator >> defineTraits [
 	super defineTraits.
 	
 	tAbstractable := builder newTraitNamed: #TAbstractable.
+	tCanBeFinal := builder newTraitNamed: #TCanBeFinal.
 	tAccess := builder newTraitNamed: #TAccess.
 	tAccess comment: self commentForTAccess.
 	tAccess withTesting.
