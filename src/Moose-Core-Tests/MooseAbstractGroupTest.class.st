@@ -104,6 +104,14 @@ MooseAbstractGroupTest >> testAllWithSubTypesOfAny [
 ]
 
 { #category : #tests }
+MooseAbstractGroupTest >> testAllWithSubTypesOfThenAllWithType [
+	group addAll: {FamixTest3Class new . FamixTest3Type new}.
+	self assert: (group allWithSubTypesOf: FamixTest3Type) size equals: 2.
+	self assert: (group allWithType: FamixTest3Type) size equals: 1.
+	self assert: (group allWithType: FamixTest3Class) size equals: 1.
+]
+
+{ #category : #tests }
 MooseAbstractGroupTest >> testAllWithType [
 	group addAll: {FamixTest3Class new . FamixTest3Type new}.
 	self assert: (group allWithType: FamixTest3Class) size equals: 1.
@@ -128,6 +136,15 @@ MooseAbstractGroupTest >> testAllWithTypeAtSetup [
 	self assert: (group allWithType: FamixTest3Class) size equals: 1.
 	self assert: (group allWithType: FamixTest3Method) size equals: 1.
 	self assertEmpty: (group allWithType: FamixTest3Invocation)
+]
+
+{ #category : #tests }
+MooseAbstractGroupTest >> testAllWithTypeThenAllWithSubTypesOf [
+	group addAll: {FamixTest3Class new . FamixTest3Type new}.
+	self assert: (group allWithType: FamixTest3Type) size equals: 1.
+	self assert: (group allWithType: FamixTest3Class) size equals: 1.
+	self assert: (group allWithSubTypesOf: FamixTest3Type) size equals: 2.
+	
 ]
 
 { #category : #tests }
