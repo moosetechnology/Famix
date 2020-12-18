@@ -131,7 +131,6 @@ SmalltalkImporter >> createAttribute: name for: aClass [
 		ifTrue: [ attribute parentType: (self ensureClass: aClass instanceSide) ]
 		ifFalse: [ attribute parentType: (self ensureClass: aClass) ].
 	attribute isClassSide: aClass isMeta.
-	attribute beProtected.
 	"now we use RoelTyper to see a unique type can be retrieve for this attribute: "
 	importingContext shouldComputeTypeOfAttributes
 		ifTrue: [ possibleTypes := (TypeCollector
@@ -186,7 +185,6 @@ SmalltalkImporter >> createClassVarAttribute: name for: aClass [
 	attribute parentType: (self ensureClass: aClass instanceSide).
 	attribute isClassSide: true.
 	attribute beSharedVariable.
-	attribute beProtected.
 	^ attribute
 ]
 
