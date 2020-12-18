@@ -123,10 +123,10 @@ MooseAbstractGroup >> allWithSubTypesOf: aFamixClass [
 MooseAbstractGroup >> allWithSubTypesOf: aFamixClass ofGroupClass: aGroupClass [
 	aFamixClass isTrait ifTrue: [ MooseAllWithTypeOnTrait signal ].
 	^ self
-		cacheAt: aFamixClass
+		cacheAt: aFamixClass withAllSubclasses asSet
 		ifAbsentPut: [ aGroupClass
 				withAll: (aFamixClass withAllSubclasses asSet flatCollect: [ :each | self entityStorage selectAllWithType: each ])
-				withDescription: 'All ' , aFamixClass name asLowercase asEnglishPlural ]
+				withDescription: 'All subtypes of ' , aFamixClass name asLowercase asEnglishPlural ]
 ]
 
 { #category : #groups }
