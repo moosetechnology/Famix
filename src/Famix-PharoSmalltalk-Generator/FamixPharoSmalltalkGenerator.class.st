@@ -114,9 +114,7 @@ FamixPharoSmalltalkGenerator >> defineHierarchy [
 	method --|> namedEntity.
 	method --|> #TMethod.
 	method --|> #TWithAnnotationTypes.
-	method --|> #THasModifiers.
 	method --|> #TAbstractable.
-	method withPrecedenceOf: #TAbstractable.
 
 	namedEntity --|> #TPackageable.
 	namedEntity --|> #TInvocationsReceiver.

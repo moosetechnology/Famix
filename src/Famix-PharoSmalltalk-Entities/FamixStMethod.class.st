@@ -1,8 +1,8 @@
 Class {
 	#name : #FamixStMethod,
 	#superclass : #FamixStNamedEntity,
-	#traits : '(FamixTAbstractable + FamixTHasModifiers + FamixTMethod + FamixTWithAnnotationTypes withPrecedenceOf: FamixTAbstractable)',
-	#classTraits : '(FamixTAbstractable classTrait + FamixTHasModifiers classTrait + FamixTMethod classTrait + FamixTWithAnnotationTypes classTrait withPrecedenceOf: FamixTAbstractable classTrait)',
+	#traits : 'FamixTAbstractable + FamixTMethod + FamixTWithAnnotationTypes',
+	#classTraits : 'FamixTAbstractable classTrait + FamixTMethod classTrait + FamixTWithAnnotationTypes classTrait',
 	#instVars : [
 		'#protocol => FMProperty'
 	],

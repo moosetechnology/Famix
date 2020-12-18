@@ -83,7 +83,6 @@ SmalltalkImporter >> basicCreateMethod: aSelector withSignature: aSignature [
 	method name: aSelector.
 	method isStub: true.
 	method signature: aSignature.
-	method isPublic: true.
 	method isAbstract: false.
 	^ method
 	
