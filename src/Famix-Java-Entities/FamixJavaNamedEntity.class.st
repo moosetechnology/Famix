@@ -1,8 +1,8 @@
 Class {
 	#name : #FamixJavaNamedEntity,
 	#superclass : #FamixJavaSourcedEntity,
-	#traits : 'FamixTAbstractable + FamixTCanBeFinal + FamixTHasVisibility + FamixTInvocationsReceiver + FamixTNamedEntity + FamixTPackageable + FamixTWithAnnotationInstances',
-	#classTraits : 'FamixTAbstractable classTrait + FamixTCanBeFinal classTrait + FamixTHasVisibility classTrait + FamixTInvocationsReceiver classTrait + FamixTNamedEntity classTrait + FamixTPackageable classTrait + FamixTWithAnnotationInstances classTrait',
+	#traits : 'FamixTInvocationsReceiver + FamixTNamedEntity + FamixTPackageable + FamixTWithAnnotationInstances',
+	#classTraits : 'FamixTInvocationsReceiver classTrait + FamixTNamedEntity classTrait + FamixTPackageable classTrait + FamixTWithAnnotationInstances classTrait',
 	#category : #'Famix-Java-Entities-Entities'
 }
 
