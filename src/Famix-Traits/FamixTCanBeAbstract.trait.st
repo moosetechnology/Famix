@@ -1,5 +1,5 @@
 Trait {
-	#name : #FamixTAbstractable,
+	#name : #FamixTCanBeAbstract,
 	#instVars : [
 		'#isAbstract => FMProperty'
 	],
@@ -7,16 +7,16 @@ Trait {
 }
 
 { #category : #meta }
-FamixTAbstractable classSide >> annotation [
+FamixTCanBeAbstract classSide >> annotation [
 
-	<FMClass: #TAbstractable super: #Object>
+	<FMClass: #TCanBeAbstract super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
 	^self
 ]
 
 { #category : #accessing }
-FamixTAbstractable >> isAbstract [
+FamixTCanBeAbstract >> isAbstract [
 
 	<FMProperty: #isAbstract type: #Boolean>
 	<generated>
@@ -25,7 +25,7 @@ FamixTAbstractable >> isAbstract [
 ]
 
 { #category : #accessing }
-FamixTAbstractable >> isAbstract: anObject [
+FamixTCanBeAbstract >> isAbstract: anObject [
 	<generated>
 	isAbstract := anObject
 ]
