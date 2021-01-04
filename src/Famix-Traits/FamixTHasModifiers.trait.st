@@ -27,6 +27,7 @@ FamixTHasModifiers >> bePrivate [
 
 { #category : #accessing }
 FamixTHasModifiers >> beProtected [
+
 	^ self isProtected: true
 ]
 
@@ -62,24 +63,8 @@ FamixTHasModifiers >> isFinal: aBoolean [
 ]
 
 { #category : #accessing }
-FamixTHasModifiers >> isPackage [
-	<FMProperty: #isPackage type: #Boolean> <derived>
-	<FMComment: 'Flag true for entities that have a package visibility. Language dependent.'>
-	
-	^ self modifiers includes: #package
-]
-
-{ #category : #accessing }
 FamixTHasModifiers >> isPackage: aBoolean [
 	^ self modifierSet: aBoolean for: #package
-]
-
-{ #category : #accessing }
-FamixTHasModifiers >> isPrivate [
-	<FMProperty: #isPrivate type: #Boolean> <derived>
-	<FMComment: 'Flag true for entities invisible out of their owner scope. Language dependent.'>
-	
-	^ self modifiers includes: #private
 ]
 
 { #category : #accessing }
@@ -88,24 +73,9 @@ FamixTHasModifiers >> isPrivate: aBoolean [
 ]
 
 { #category : #accessing }
-FamixTHasModifiers >> isProtected [
-	<FMProperty: #isProtected type: #Boolean> <derived>
-	<FMComment: 'Flag true for protected entities, depending on language semantics.'>
-	
-	^ self modifiers includes: #protected
-]
-
-{ #category : #accessing }
 FamixTHasModifiers >> isProtected: aBoolean [
+
 	^ self modifierSet: aBoolean for: #protected
-]
-
-{ #category : #accessing }
-FamixTHasModifiers >> isPublic [
-	<FMProperty: #isPublic type: #Boolean> <derived>
-	<FMComment: 'Flag true for entities accessible from anywhere. Language dependent.'>	
-
-	^ self modifiers includes: #public
 ]
 
 { #category : #accessing }

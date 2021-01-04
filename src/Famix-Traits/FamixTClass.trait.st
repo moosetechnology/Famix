@@ -8,6 +8,7 @@ A class is typically scoped in a namespace. To model nested or anonymous classes
 Trait {
 	#name : #FamixTClass,
 	#traits : 'FamixTInvocationsReceiver + FamixTPackageable + (FamixTType - {#queryStaticIncomingAssociations. #queryStaticOutgoingAssociations}) + FamixTWithAttributes + FamixTWithComments + FamixTWithInheritances + FamixTWithMethods + TOODependencyQueries',
+	#classTraits : 'FamixTInvocationsReceiver classTrait + FamixTPackageable classTrait + FamixTType classTrait + FamixTWithAttributes classTrait + FamixTWithComments classTrait + FamixTWithInheritances classTrait + FamixTWithMethods classTrait + TOODependencyQueries classTrait',
 	#category : #'Famix-Traits-Class'
 }
 
@@ -36,36 +37,45 @@ FamixTClass >> addedMethods [
 
 { #category : #enumerating }
 FamixTClass >> inheritedAttributes [
+
 	| inheritedAttrs |
 	inheritedAttrs := OrderedCollection new.
-	self allSuperclassesDo: [ :each | each attributes do: [ :attr | attr isPrivate ifFalse: [ inheritedAttrs add: attr ] ] ].
+	self allSuperclassesDo: [ :each | 
+		inheritedAttrs addAll: each attributes ].
 	^ inheritedAttrs
 ]
 
 { #category : #enumerating }
 FamixTClass >> inheritedMethods [
+
 	| inheritedMethods |
 	inheritedMethods := OrderedCollection new.
-	self allSuperclassesDo: [ :each | each methods do: [ :method | method isPrivate ifFalse: [ inheritedMethods add: method ] ] ].
+	self allSuperclassesDo: [ :each | 
+	inheritedMethods addAll: each methods ] .
 	^ inheritedMethods
 ]
 
 { #category : #enumerating }
 FamixTClass >> inheritedSignatures [
+
 	| inheritedSignatures |
 	inheritedSignatures := Set new.
-	self superclassHierarchy do: [ :each | each methods do: [ :method | method isPrivate ifFalse: [ inheritedSignatures add: method signature ] ] ].
+	self superclassHierarchy do: [ :each | 
+		inheritedSignatures addAll:
+			(each methods collect: [ :method | method signature ]) ].
 	^ inheritedSignatures
 ]
 
 { #category : #enumerating }
 FamixTClass >> inheritedSignaturesToMethod [
+
 	| inheritedSignaturesToMethod |
 	inheritedSignaturesToMethod := Dictionary new.
-	self allSuperclassesDo: [:each | 
-			each methods do: [:method | 
-				method isPrivate ifFalse: [
-					inheritedSignaturesToMethod at: method signature ifAbsentPut: [method]]]].
+	self allSuperclassesDo: [ :each | 
+		each methods do: [ :method | 
+			inheritedSignaturesToMethod
+				at: method signature
+				ifAbsentPut: [ method ] ] ].
 	^ inheritedSignaturesToMethod
 ]
 

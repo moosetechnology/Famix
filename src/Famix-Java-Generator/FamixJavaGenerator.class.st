@@ -141,6 +141,7 @@ FamixJavaGenerator >> defineHierarchy [
 	attribute --|> namedEntity.
 	attribute --|> #TAttribute.
 	attribute --|> #TWithClassScope.
+	attribute --|> #TCanBeFinal.
 	
 	file --|> namedEntity.
 	file --|> #TFile.
@@ -156,6 +157,9 @@ FamixJavaGenerator >> defineHierarchy [
 	method --|> #TWithThrownExceptions.
 	method --|> #TWithDeclaredExceptions.
 	method --|> #TWithCaughtExceptions.
+	method --|> #TAbstractable.
+	method --|> #TCanBeFinal.
+	method --|> #THasVisibility.
 
 	caughtException --|> exception.
 	caughtException --|> #TCaughtException.
@@ -164,6 +168,9 @@ FamixJavaGenerator >> defineHierarchy [
 	class --|> #TWithExceptions.
 	class --|> #TClass.
 	class --|> #TLCOMMetrics.
+	class --|> #TAbstractable.
+	class --|> #TCanBeFinal.
+	class --|> #THasVisibility.
 
 	containerEntity --|> namedEntity.
 	containerEntity --|> #TWithClasses.
@@ -175,6 +182,7 @@ FamixJavaGenerator >> defineHierarchy [
 
 	enum --|> type.
 	enum --|> #TEnum.
+	enum --|> #THasVisibility.
 	enum --|> #TWithAttributes.
 	enum --|> #TWithMethods.
 	enum --|> #TWithInheritances.
@@ -199,11 +207,11 @@ FamixJavaGenerator >> defineHierarchy [
 
 	localVariable --|> namedEntity.
 	localVariable --|> #TLocalVariable.
+	localVariable --|> #TCanBeFinal.
 
 	namedEntity --|> #TPackageable.
 	namedEntity --|> #TInvocationsReceiver.
 	namedEntity --|> #TWithAnnotationInstances.
-	namedEntity --|> #THasModifiers.
 
 	namespace --|> containerEntity.
 	namespace --|> #TNamespace.
@@ -215,6 +223,7 @@ FamixJavaGenerator >> defineHierarchy [
 
 	parameter --|> namedEntity.
 	parameter --|> #TParameter.
+	parameter --|> #TCanBeFinal.
 
 	parameterType --|> type.
 	parameterType --|> #TParameterType.

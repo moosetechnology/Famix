@@ -118,7 +118,11 @@ Class {
 		'tPrimitiveType',
 		'tUnknownVariable',
 		'tRelativeSourceAnchor',
-		'tEnum'
+		'tEnum',
+		'tAbstractable',
+		'tHasVisibility',
+		'tClassWithVisibility',
+		'tCanBeFinal'
 	],
 	#category : #'Famix-MetamodelGeneration'
 }
@@ -933,6 +937,9 @@ FamixGenerator >> defineHierarchy [
 	tClass --|> tInvocationsReceiver.
 	tClass --|> tWithComments.
 	tClass --|> #TOODependencyQueries.
+	
+	tClassWithVisibility --|> tClass.
+	tClassWithVisibility --|> tHasVisibility.
 
 	tClassGroup --|> tTypeGroup.
 
@@ -1034,6 +1041,12 @@ FamixGenerator >> defineHierarchy [
 { #category : #definition }
 FamixGenerator >> defineProperties [
 	super defineProperties.
+	
+	((tAbstractable property: #isAbstract type: #Boolean) 
+		comment: 'Entity can be declared abstract').
+	((tCanBeFinal property: #isFinal type: #Boolean) 
+		comment: 'Entity can be declared final').
+		
 	((tFileAnchor property: #correspondingFile type: #FamixTFile) 
 		comment: 'File associated to this source anchor').
 	((tFileAnchor property: #encoding type: #String) 
@@ -1056,13 +1069,13 @@ FamixGenerator >> defineProperties [
 	((tHasModifiers property: #modifiers type: #String)
 		comment: 'Generic container for language dependent modifiers.';
 		multivalued).
+	((tHasVisibility property: #visibility type: #String)
+		comment: 'Visibility of the entity').
 
 	((tMethod property: #kind type: #String) 
 		comment: 'Tag indicating a setter, getter, constant, constructor, or abstract method').
 	((tMethod property: #isClassSide type: #Boolean) 
 		comment: 'True if class-side method').
-	((tMethod property: #isAbstract type: #Boolean) 
-		comment: 'True if abstract method').
 
 	((tHasSignature property: #signature type: #String)
 		comment: 'Signature of the message being sent').
@@ -1414,6 +1427,9 @@ FamixGenerator >> defineRelations [
 { #category : #definition }
 FamixGenerator >> defineTraits [
 	super defineTraits.
+	
+	tAbstractable := builder newTraitNamed: #TAbstractable.
+	tCanBeFinal := builder newTraitNamed: #TCanBeFinal.
 	tAccess := builder newTraitNamed: #TAccess.
 	tAccess comment: self commentForTAccess.
 	tAccess withTesting.
@@ -1747,6 +1763,8 @@ FamixGenerator >> defineTraits [
 	tHasImmediateSource comment: self commentForTHasImmediateSource.
 
 	tHasModifiers := builder newTraitNamed: #THasModifiers.
+	tHasVisibility := builder newTraitNamed: #THasVisibility.
+	tClassWithVisibility := builder newTraitNamed: #TClassWithVisibility.
 
 	tWithStatements := builder newTraitNamed: #TWithStatements.
 	tWithStatements testingSelector: #isBehavioural.

@@ -29,7 +29,7 @@ FAMIXNamedEntityTest >> testIsFinal [
 FAMIXNamedEntityTest >> testIsPackage [
 	| entity |
 	entity := self actualClass new.
-	entity isPackage: true.
+	entity bePackage.
 	self assert: entity isPackage
 ]
 
@@ -37,15 +37,16 @@ FAMIXNamedEntityTest >> testIsPackage [
 FAMIXNamedEntityTest >> testIsPrivate [
 	| entity |
 	entity := self actualClass new.
-	entity isPrivate: true.
+	entity bePrivate.
 	self assert: entity isPrivate
 ]
 
 { #category : #tests }
 FAMIXNamedEntityTest >> testIsProtected [
+
 	| entity |
 	entity := self actualClass new.
-	entity isProtected: true.
+	entity beProtected.
 	self assert: entity isProtected
 ]
 
@@ -53,6 +54,6 @@ FAMIXNamedEntityTest >> testIsProtected [
 FAMIXNamedEntityTest >> testIsPublic [
 	| entity |
 	entity := self actualClass new.
-	entity isPublic: true.
+	entity bePublic.
 	self assert: entity isPublic
 ]
