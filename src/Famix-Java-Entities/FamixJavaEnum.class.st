@@ -1,7 +1,7 @@
 Class {
 	#name : #FamixJavaEnum,
 	#superclass : #FamixJavaType,
-	#traits : 'FamixTEnum + FamixTHasVisibility + TWithAttributes + TWithMethods + TWithInheritances',
+	#traits : 'FamixTEnum + FamixTHasVisibility + FamixTWithAttributes + FamixTWithMethods + FamixTWithInheritances',
 	#classTraits : 'FamixTEnum classTrait + FamixTHasVisibility classTrait',
 
 	#category : #'Famix-Java-Entities-Entities'
