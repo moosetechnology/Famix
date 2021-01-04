@@ -119,10 +119,10 @@ Class {
 		'tUnknownVariable',
 		'tRelativeSourceAnchor',
 		'tEnum',
-		'tAbstractable',
 		'tHasVisibility',
 		'tClassWithVisibility',
-		'tCanBeFinal'
+		'tCanBeFinal',
+		'tCanBeAbstract'
 	],
 	#category : #'Famix-MetamodelGeneration'
 }
@@ -1042,7 +1042,7 @@ FamixGenerator >> defineHierarchy [
 FamixGenerator >> defineProperties [
 	super defineProperties.
 	
-	((tAbstractable property: #isAbstract type: #Boolean) 
+	((tCanBeAbstract property: #isAbstract type: #Boolean) 
 		comment: 'Entity can be declared abstract').
 	((tCanBeFinal property: #isFinal type: #Boolean) 
 		comment: 'Entity can be declared final').
@@ -1428,7 +1428,7 @@ FamixGenerator >> defineRelations [
 FamixGenerator >> defineTraits [
 	super defineTraits.
 	
-	tAbstractable := builder newTraitNamed: #TAbstractable.
+	tCanBeAbstract := builder newTraitNamed: #TCanBeAbstract.
 	tCanBeFinal := builder newTraitNamed: #TCanBeFinal.
 	tAccess := builder newTraitNamed: #TAccess.
 	tAccess comment: self commentForTAccess.

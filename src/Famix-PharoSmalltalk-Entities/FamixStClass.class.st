@@ -1,8 +1,8 @@
 Class {
 	#name : #FamixStClass,
 	#superclass : #FamixStNamedEntity,
-	#traits : 'FamixTAbstractable + FamixTClass + FamixTWithExceptions + FamixTWithTypes',
-	#classTraits : 'FamixTAbstractable classTrait + FamixTClass classTrait + FamixTWithExceptions classTrait + FamixTWithTypes classTrait',
+	#traits : 'FamixTCanBeAbstract + FamixTClass + FamixTWithExceptions + FamixTWithTypes',
+	#classTraits : 'FamixTCanBeAbstract classTrait + FamixTClass classTrait + FamixTWithExceptions classTrait + FamixTWithTypes classTrait',
 	#category : #'Famix-PharoSmalltalk-Entities-Entities'
 }
 

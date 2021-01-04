@@ -157,7 +157,7 @@ FamixJavaGenerator >> defineHierarchy [
 	method --|> #TWithThrownExceptions.
 	method --|> #TWithDeclaredExceptions.
 	method --|> #TWithCaughtExceptions.
-	method --|> #TAbstractable.
+	method --|> #TCanBeAbstract.
 	method --|> #TCanBeFinal.
 	method --|> #THasVisibility.
 
@@ -168,7 +168,7 @@ FamixJavaGenerator >> defineHierarchy [
 	class --|> #TWithExceptions.
 	class --|> #TClass.
 	class --|> #TLCOMMetrics.
-	class --|> #TAbstractable.
+	class --|> #TCanBeAbstract.
 	class --|> #TCanBeFinal.
 	class --|> #THasVisibility.
 
