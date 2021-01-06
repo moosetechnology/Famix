@@ -111,7 +111,7 @@ FamixStMethod >> isJUnit4Test [
 	^ self isAnnotatedWith: 'Test'
 ]
 
-{ #category : #'Famix-Extensions-metrics-support' }
+{ #category : #testing }
 FamixStMethod >> isOverriden [
 	"If we have a stub and we don't have the container, we can't have the information"
 
@@ -124,7 +124,7 @@ FamixStMethod >> isOverriden [
 		anySatisfy: [ :each | each implements: self signature ]
 ]
 
-{ #category : #accessing }
+{ #category : #testing }
 FamixStMethod >> isOverriding [
 	<FMProperty: #isOverriding type: #Boolean>
 	<derived>
