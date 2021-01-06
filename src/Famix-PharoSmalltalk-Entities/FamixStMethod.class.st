@@ -118,9 +118,10 @@ FamixStMethod >> isOverriden [
 	<FMProperty: #isOverriden type: #Boolean>
 	<derived>
 	<FMComment: 'The method is overrided in a sub class'>
-	(self belongsTo isNil and: [ self isStub ]) ifTrue: [ ^ false ].
-
-	^ self belongsTo subclassHierarchyGroup anySatisfy: [ :each | each implements: self signature ]
+	(self parentType isNil and: [ self isStub ])
+		ifTrue: [ ^ false ].
+	^ self parentType subclassHierarchyGroup
+		anySatisfy: [ :each | each implements: self signature ]
 ]
 
 { #category : #accessing }
@@ -128,9 +129,8 @@ FamixStMethod >> isOverriding [
 	<FMProperty: #isOverriding type: #Boolean>
 	<derived>
 	<FMComment: 'The method is overrinding a method defined in a super class'>
-	
-	^self belongsTo directSuperclasses anySatisfy: [:each | 
-		each understands: self signature]
+	^ self parentType directSuperclasses
+		anySatisfy: [ :each | each understands: self signature ]
 ]
 
 { #category : #'Famix-Extensions-metrics-support' }
