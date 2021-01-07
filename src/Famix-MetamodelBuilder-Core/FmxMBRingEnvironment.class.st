@@ -60,6 +60,7 @@ FmxMBRingEnvironment >> compile: aSource in: aClass classified: aProtocol packag
 
 { #category : #initialization }
 FmxMBRingEnvironment >> createClassNamed: aClassName superclass: aSuperclass traitNames: traitNames slots: slots in: packageName overwrite: shouldOverwrite [
+
 	| aClass existingClass composition |
 	
 	existingClass := self ringEnvironment ask
@@ -99,6 +100,7 @@ FmxMBRingEnvironment >> createClassNamed: aClassName superclass: aSuperclass tra
 			aClass layout addSlot: slot.
 			slot propertyNamed: #isGenerated put: true ].
 
+
 	^ aClass
 ]
 
@@ -121,6 +123,7 @@ FmxMBRingEnvironment >> createImportingcontextClassNamed: aClassName in: package
 
 { #category : #initialization }
 FmxMBRingEnvironment >> createTraitNamed: traitName uses: traitNames slots: slots in: packageName overwrite: shouldOverwrite [
+
 	| aPackage aTrait existingClass composition |
 	
 	existingClass := self ringEnvironment ask

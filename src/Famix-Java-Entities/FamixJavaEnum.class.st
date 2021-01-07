@@ -3,7 +3,6 @@ Class {
 	#superclass : #FamixJavaType,
 	#traits : 'FamixTEnum + FamixTHasVisibility + FamixTWithAttributes + FamixTWithMethods + FamixTWithInheritances',
 	#classTraits : 'FamixTEnum classTrait + FamixTHasVisibility classTrait',
-
 	#category : #'Famix-Java-Entities-Entities'
 }
 
