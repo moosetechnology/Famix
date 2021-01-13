@@ -109,7 +109,8 @@ BaselineOfFamix >> baseline: spec [
 				group: 'BasicTraits' with: #('Famix-Traits');
 				group: 'EntitiesCompatibility' with: #('Famix-Compatibility-Entities');
 				group: 'ModelCompatibility' with: #('Famix-Compatibility-Generator' 'EntitiesCompatibility');
-				group: 'EntitiesJava' with: #('Famix-Java-Entities' 'Famix-Java-Visitor');
+				group: 'EntitiesJava' with: #('Famix-Java-Entities');
+				group: 'EntitiesJavaWithVisitor' with: #('EntitiesJava' 'Famix-Java-Visitor');
 				group: 'ModelJava' with: #('Famix-Java-Generator' 'EntitiesJava');
 				group: 'EntitiesSmalltalk' with: #('Famix-PharoSmalltalk-Entities');
 				group: 'ModelSmalltalk' with: #('Famix-PharoSmalltalk-Generator' 'EntitiesSmalltalk');
