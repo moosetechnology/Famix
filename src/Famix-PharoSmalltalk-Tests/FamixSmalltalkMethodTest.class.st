@@ -44,6 +44,27 @@ FamixSmalltalkMethodTest >> setUp [
 ]
 
 { #category : #tests }
+FamixSmalltalkMethodTest >> testMetricsForStubMethods [
+	| stubMethod notExistingMetricValue |
+	stubMethod := FamixStMethod new
+		stub: true;
+		yourself.
+	notExistingMetricValue := MooseModel new notExistentMetricValue.
+	self
+		assert: stubMethod cyclomaticComplexity
+		equals: notExistingMetricValue.
+	self
+		assert: stubMethod numberOfConditionals
+		equals: notExistingMetricValue.
+	self
+		assert: stubMethod numberOfMessageSends
+		equals: notExistingMetricValue.
+	self
+		assert: stubMethod numberOfStatements
+		equals: notExistingMetricValue
+]
+
+{ #category : #tests }
 FamixSmalltalkMethodTest >> testNumberOfMethodProtocols [
 
 	m1 protocol: #accessing.
