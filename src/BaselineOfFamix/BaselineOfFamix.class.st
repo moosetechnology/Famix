@@ -60,7 +60,7 @@ BaselineOfFamix >> baseline: spec [
 
 				package: 'Famix-Java-Generator' with: [ spec requires: #('Basic') ];
 				package: 'Famix-Java-Entities' with: [ spec requires: #('BasicTraits') ];
-				package: 'Famix-Java-Visitor' with: [ spec requires: #('Famix-Java-Entities') ];
+				package: 'Famix-Java-Visitor' with: [ spec requires: #('Famix-Java-Entities' 'Moose-Query-Test') ];
 				package: 'Famix-Java-Tests' with: [ spec requires: #('Famix-Java-Entities' 'Famix-Java-Generator') ];
 
 				package: 'Moose-TestResources-LAN';
