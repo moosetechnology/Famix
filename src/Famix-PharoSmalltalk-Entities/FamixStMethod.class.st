@@ -46,7 +46,30 @@ FamixStMethod >> compiledMethod [
 
 { #category : #'Famix-Extensions-private' }
 FamixStMethod >> computeCyclomaticComplexity [
-	^ (RBVisitorForFAMIXMetrics for: self) cyclomaticNumber
+	^ self isStub
+		ifTrue: [ self notExistentMetricValue ]
+		ifFalse: [ (RBVisitorForFAMIXMetrics for: self) cyclomaticNumber ]
+]
+
+{ #category : #'Famix-Extensions-private' }
+FamixStMethod >> computeNumberOfConditionals [
+	^ self isStub
+		ifTrue: [ self notExistentMetricValue ]
+		ifFalse: [ (RBVisitorForFAMIXMetrics for: self) numberOfConditionals ]
+]
+
+{ #category : #'Famix-Extensions-private' }
+FamixStMethod >> computeNumberOfMessageSends [
+	^ self isStub
+		ifTrue: [ self notExistentMetricValue ]
+		ifFalse: [ (RBVisitorForFAMIXMetrics for: self) numberOfMessageSends ]
+]
+
+{ #category : #'Famix-Extensions-private' }
+FamixStMethod >> computeNumberOfStatements [
+	^ self isStub
+		ifTrue: [ self notExistentMetricValue ]
+		ifFalse: [ (RBVisitorForFAMIXMetrics for: self) numberOfStatements ]
 ]
 
 { #category : #'Famix-Extensions-private' }
@@ -180,7 +203,9 @@ FamixStMethod >> numberOfComments [
 FamixStMethod >> numberOfConditionals [
 	<FMProperty: #numberOfConditionals type: #Number>
 	<FMComment: 'The number of conditionals in a method'>
-	^ self lookUpPropertyNamed: #numberOfConditionals computedAs: [ (RBVisitorForFAMIXMetrics for: self) numberOfConditionals ]
+	^ self
+		lookUpPropertyNamed: #numberOfConditionals
+		computedAs: [ self computeNumberOfConditionals ]
 ]
 
 { #category : #'Famix-Extensions-private' }
@@ -193,7 +218,9 @@ FamixStMethod >> numberOfMessageSends [
 	<FMProperty: #numberOfMessageSends type: #Number>
 	<derived>
 	<FMComment: 'The number of message from a method'>
-	^ self lookUpPropertyNamed: #numberOfMessageSends computedAs: [ (RBVisitorForFAMIXMetrics for: self) numberOfMessageSends ]
+	^ self
+		lookUpPropertyNamed: #numberOfMessageSends
+		computedAs: [ self computeNumberOfMessageSends ]
 ]
 
 { #category : #'Famix-Extensions-private' }
@@ -211,7 +238,9 @@ FamixStMethod >> numberOfOutgoingInvocations [
 FamixStMethod >> numberOfStatements [
 	<FMProperty: #numberOfStatements type: #Number>
 	<FMComment: 'The number of statements in a method'>
-	^ self lookUpPropertyNamed: #numberOfStatements computedAs: [ (RBVisitorForFAMIXMetrics for: self) numberOfStatements ]
+	^ self
+		lookUpPropertyNamed: #numberOfStatements
+		computedAs: [ self computeNumberOfStatements ]
 ]
 
 { #category : #accessing }
