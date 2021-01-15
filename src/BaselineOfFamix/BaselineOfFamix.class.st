@@ -60,6 +60,7 @@ BaselineOfFamix >> baseline: spec [
 
 				package: 'Famix-Java-Generator' with: [ spec requires: #('Basic') ];
 				package: 'Famix-Java-Entities' with: [ spec requires: #('BasicTraits') ];
+				package: 'Famix-Java-Visitor' with: [ spec requires: #('Famix-Java-Entities') ];
 				package: 'Famix-Java-Tests' with: [ spec requires: #('Famix-Java-Entities' 'Famix-Java-Generator') ];
 
 				package: 'Moose-TestResources-LAN';
@@ -109,6 +110,7 @@ BaselineOfFamix >> baseline: spec [
 				group: 'EntitiesCompatibility' with: #('Famix-Compatibility-Entities');
 				group: 'ModelCompatibility' with: #('Famix-Compatibility-Generator' 'EntitiesCompatibility');
 				group: 'EntitiesJava' with: #('Famix-Java-Entities');
+				group: 'EntitiesJavaWithVisitor' with: #('EntitiesJava' 'Famix-Java-Visitor');
 				group: 'ModelJava' with: #('Famix-Java-Generator' 'EntitiesJava');
 				group: 'EntitiesSmalltalk' with: #('Famix-PharoSmalltalk-Entities');
 				group: 'ModelSmalltalk' with: #('Famix-PharoSmalltalk-Generator' 'EntitiesSmalltalk');

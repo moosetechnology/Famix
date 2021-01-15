@@ -18,6 +18,7 @@ Trait {
 		'#sender => FMOne type: #FamixTWithInvocations opposite: #outgoingInvocations'
 	],
 	#traits : 'FamixTAssociation',
+	#classTraits : 'FamixTAssociation classTrait',
 	#category : #'Famix-Traits-Invocation'
 }
 
@@ -102,24 +103,4 @@ FamixTInvocation >> sender: anObject [
 
 	<generated>
 	sender := anObject
-]
-
-{ #category : #accessing }
-FamixTInvocation >> source [
-	^ self sender
-]
-
-{ #category : #accessing }
-FamixTInvocation >> source: aSender [
-	self sender: aSender
-]
-
-{ #category : #accessing }
-FamixTInvocation >> target [
-	^ self candidates
-]
-
-{ #category : #accessing }
-FamixTInvocation >> target: aCollCandidates [
-	self candidates: aCollCandidates 
 ]

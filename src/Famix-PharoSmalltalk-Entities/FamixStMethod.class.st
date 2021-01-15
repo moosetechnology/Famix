@@ -1,8 +1,8 @@
 Class {
 	#name : #FamixStMethod,
 	#superclass : #FamixStNamedEntity,
-	#traits : '(FamixTHasModifiers + FamixTMethod + FamixTWithAnnotationTypes withPrecedenceOf: FamixTMethod)',
-	#classTraits : '(FamixTHasModifiers classTrait + FamixTMethod classTrait + FamixTWithAnnotationTypes classTrait withPrecedenceOf: FamixTMethod classTrait)',
+	#traits : 'FamixTCanBeAbstract + FamixTMethod + FamixTWithAnnotationTypes',
+	#classTraits : 'FamixTCanBeAbstract classTrait + FamixTMethod classTrait + FamixTWithAnnotationTypes classTrait',
 	#instVars : [
 		'#protocol => FMProperty'
 	],
@@ -46,7 +46,30 @@ FamixStMethod >> compiledMethod [
 
 { #category : #'Famix-Extensions-private' }
 FamixStMethod >> computeCyclomaticComplexity [
-	^ (RBVisitorForFAMIXMetrics for: self) cyclomaticNumber
+	^ self isStub
+		ifTrue: [ self notExistentMetricValue ]
+		ifFalse: [ (RBVisitorForFAMIXMetrics for: self) cyclomaticNumber ]
+]
+
+{ #category : #'Famix-Extensions-private' }
+FamixStMethod >> computeNumberOfConditionals [
+	^ self isStub
+		ifTrue: [ self notExistentMetricValue ]
+		ifFalse: [ (RBVisitorForFAMIXMetrics for: self) numberOfConditionals ]
+]
+
+{ #category : #'Famix-Extensions-private' }
+FamixStMethod >> computeNumberOfMessageSends [
+	^ self isStub
+		ifTrue: [ self notExistentMetricValue ]
+		ifFalse: [ (RBVisitorForFAMIXMetrics for: self) numberOfMessageSends ]
+]
+
+{ #category : #'Famix-Extensions-private' }
+FamixStMethod >> computeNumberOfStatements [
+	^ self isStub
+		ifTrue: [ self notExistentMetricValue ]
+		ifFalse: [ (RBVisitorForFAMIXMetrics for: self) numberOfStatements ]
 ]
 
 { #category : #'Famix-Extensions-private' }
@@ -111,26 +134,26 @@ FamixStMethod >> isJUnit4Test [
 	^ self isAnnotatedWith: 'Test'
 ]
 
-{ #category : #'Famix-Extensions-metrics-support' }
+{ #category : #testing }
 FamixStMethod >> isOverriden [
 	"If we have a stub and we don't have the container, we can't have the information"
 
 	<FMProperty: #isOverriden type: #Boolean>
 	<derived>
 	<FMComment: 'The method is overrided in a sub class'>
-	(self belongsTo isNil and: [ self isStub ]) ifTrue: [ ^ false ].
-
-	^ self belongsTo subclassHierarchyGroup anySatisfy: [ :each | each implements: self signature ]
+	(self parentType isNil and: [ self isStub ])
+		ifTrue: [ ^ false ].
+	^ self parentType subclassHierarchyGroup
+		anySatisfy: [ :each | each implements: self signature ]
 ]
 
-{ #category : #accessing }
+{ #category : #testing }
 FamixStMethod >> isOverriding [
 	<FMProperty: #isOverriding type: #Boolean>
 	<derived>
 	<FMComment: 'The method is overrinding a method defined in a super class'>
-	
-	^self belongsTo directSuperclasses anySatisfy: [:each | 
-		each understands: self signature]
+	^ self parentType directSuperclasses
+		anySatisfy: [ :each | each understands: self signature ]
 ]
 
 { #category : #'Famix-Extensions-metrics-support' }
@@ -180,7 +203,9 @@ FamixStMethod >> numberOfComments [
 FamixStMethod >> numberOfConditionals [
 	<FMProperty: #numberOfConditionals type: #Number>
 	<FMComment: 'The number of conditionals in a method'>
-	^ self lookUpPropertyNamed: #numberOfConditionals computedAs: [ (RBVisitorForFAMIXMetrics for: self) numberOfConditionals ]
+	^ self
+		lookUpPropertyNamed: #numberOfConditionals
+		computedAs: [ self computeNumberOfConditionals ]
 ]
 
 { #category : #'Famix-Extensions-private' }
@@ -193,7 +218,9 @@ FamixStMethod >> numberOfMessageSends [
 	<FMProperty: #numberOfMessageSends type: #Number>
 	<derived>
 	<FMComment: 'The number of message from a method'>
-	^ self lookUpPropertyNamed: #numberOfMessageSends computedAs: [ (RBVisitorForFAMIXMetrics for: self) numberOfMessageSends ]
+	^ self
+		lookUpPropertyNamed: #numberOfMessageSends
+		computedAs: [ self computeNumberOfMessageSends ]
 ]
 
 { #category : #'Famix-Extensions-private' }
@@ -211,7 +238,9 @@ FamixStMethod >> numberOfOutgoingInvocations [
 FamixStMethod >> numberOfStatements [
 	<FMProperty: #numberOfStatements type: #Number>
 	<FMComment: 'The number of statements in a method'>
-	^ self lookUpPropertyNamed: #numberOfStatements computedAs: [ (RBVisitorForFAMIXMetrics for: self) numberOfStatements ]
+	^ self
+		lookUpPropertyNamed: #numberOfStatements
+		computedAs: [ self computeNumberOfStatements ]
 ]
 
 { #category : #accessing }

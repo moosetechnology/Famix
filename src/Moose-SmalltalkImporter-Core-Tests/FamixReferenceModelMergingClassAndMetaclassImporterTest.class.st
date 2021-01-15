@@ -141,7 +141,6 @@ FamixReferenceModelMergingClassAndMetaclassImporterTest >> testSharedVariableRei
 	shared := self model entityNamed: #'Smalltalk::TheRoot.TheRootSharedVariable'.
 	self assert: shared isClassSide.
 	self assert: shared isSharedVariable.
-	self assert: shared isProtected.
 	self assert: shared belongsTo equals: (self model entityNamed: TheRoot mooseName)
 ]
 

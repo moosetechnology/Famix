@@ -294,7 +294,9 @@ FamixCompatibilityGenerator >> defineHierarchy [
 	namedEntity --|> #TPackageable.
 	namedEntity --|> #TInvocationsReceiver.
 	namedEntity --|> #TWithAnnotationInstances.
-	namedEntity --|> #THasModifiers.
+	namedEntity --|> #THasVisibility.
+	namedEntity --|> #TCanBeAbstract.
+	namedEntity --|> #TCanBeFinal.
 
 	namespace --|> scopingEntity.
 	namespace --|> #TNamespace.

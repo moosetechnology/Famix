@@ -38,15 +38,21 @@ FamixReferenceModelImporterTest >> setUp [
 
 { #category : #tests }
 FamixReferenceModelImporterTest >> testAbstractMethodAnnotation [
+
 	| definingClassName method methodName fmClass |
 	definingClassName := TheRoot mooseName.
 	methodName := (TheRoot >> #sendingSubclassResponsibility) mooseName.
 	method := self model entityNamed: methodName.
 	self assert: method isNotNil.
-	self assert: method belongsTo equals: (self model entityNamed: TheRoot mooseName).
+	self
+		assert: method belongsTo
+		equals: (self model entityNamed: TheRoot mooseName).
 	self deny: method isClassSide.
-	self assert: method signature equals: (FamixSmalltalkNameResolver signatureFromSmalltalkSelectorOn: #sendingSubclassResponsibility).
-	self assert: method isPublic.
+	self
+		assert: method signature
+		equals:
+			(FamixSmalltalkNameResolver signatureFromSmalltalkSelectorOn:
+				 #sendingSubclassResponsibility).
 	self assert: method isAbstract.
 	fmClass := self model entityNamed: definingClassName.
 	self assert: fmClass isAbstract
@@ -378,7 +384,6 @@ FamixReferenceModelImporterTest >> testConstantMethodAnnotation [
 	self assert: method belongsTo equals: (self model entityNamed: TheRoot mooseName).
 	self deny: method isClassSide.
 	self assert: method signature equals: (FamixSmalltalkNameResolver signatureFromSmalltalkSelectorOn: #constantReturningMethod).
-	self assert: method isPublic.
 	self assert: method isConstant
 ]
 
@@ -498,7 +503,6 @@ FamixReferenceModelImporterTest >> testGetterMethod [
 	self assert: method isNotNil.
 	self deny: method isClassSide.
 	self assert: method signature equals: (FamixSmalltalkNameResolver signatureFromSmalltalkSelectorOn: #x).
-	self assert: method isPublic.
 	self assert: method isPureAccessor.
 	self assert: method isGetter
 ]
@@ -561,8 +565,7 @@ FamixReferenceModelImporterTest >> testInstVariableAccessTwiceTheSameVariable [
 FamixReferenceModelImporterTest >> testInstanceVariableReified [
 	| instVar |
 	instVar := self model entityNamed: 'Smalltalk::SubRootLevelOne.k'.
-	self deny: instVar isClassSide.
-	self assert: instVar isProtected
+	self deny: instVar isClassSide
 ]
 
 { #category : #tests }
@@ -589,13 +592,20 @@ FamixReferenceModelImporterTest >> testMethodAnnotation [
 
 { #category : #tests }
 FamixReferenceModelImporterTest >> testMethodReification [
+
 	| method |
-	method := self model entityNamed: 'Smalltalk::SubRootLevelOne.accessSuperclassInstVar()'.
+	method := self model entityNamed:
+		          'Smalltalk::SubRootLevelOne.accessSuperclassInstVar()'.
 	self assert: method isNotNil.
-	self assert: method belongsTo equals: (self model entityNamed: referenceModelSubRootLevelOneName).
+	self
+		assert: method belongsTo
+		equals: (self model entityNamed: referenceModelSubRootLevelOneName).
 	self deny: method isClassSide.
-	self assert: method signature equals: (FamixSmalltalkNameResolver signatureFromSmalltalkSelectorOn: #accessSuperclassInstVar).
-	self assert: method isPublic
+	self
+		assert: method signature
+		equals:
+			(FamixSmalltalkNameResolver signatureFromSmalltalkSelectorOn:
+				 #accessSuperclassInstVar)
 ]
 
 { #category : #tests }
@@ -603,7 +613,6 @@ FamixReferenceModelImporterTest >> testOutOfModelInheritedInstanceVariableReifie
 	| instVar |
 	instVar := self model entityNamed: 'Smalltalk::Model.dependents'.
 	self deny: instVar isClassSide.
-	self assert: instVar isProtected.
 	self assert: instVar belongsTo mooseName equals: Model mooseName
 ]
 
@@ -647,14 +656,19 @@ FamixReferenceModelImporterTest >> testSelfAccessInDefiningClassOnClassSide [
 
 { #category : #tests }
 FamixReferenceModelImporterTest >> testSetterMethod [
+
 	| methodUniqueName method |
 	methodUniqueName := (TheRoot >> #x:) mooseName.
 	method := self model entityNamed: methodUniqueName.
 	self assert: method isNotNil.
-	self assert: method belongsTo equals: (self model entityNamed: TheRoot mooseName).
+	self
+		assert: method belongsTo
+		equals: (self model entityNamed: TheRoot mooseName).
 	self deny: method isClassSide.
-	self assert: method signature equals: (FamixSmalltalkNameResolver signatureFromSmalltalkSelectorOn: #x:).
-	self assert: method isPublic.
+	self
+		assert: method signature
+		equals:
+		(FamixSmalltalkNameResolver signatureFromSmalltalkSelectorOn: #x:).
 	self assert: method isPureAccessor.
 	self assert: method isSetter
 ]
@@ -665,7 +679,6 @@ FamixReferenceModelImporterTest >> testSharedVariableReification [
 	shared := self model entityNamed: #'Smalltalk::TheRoot.TheRootSharedVariable'.
 	self assert: shared isClassSide.
 	self assert: shared isSharedVariable.
-	self assert: shared isProtected.
 	self assert: shared belongsTo equals: (self model entityNamed: TheRoot mooseName)
 ]
 

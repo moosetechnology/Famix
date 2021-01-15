@@ -51,18 +51,20 @@ FamixPropertiesTest >> testAttributesOfStubClasses [
 FamixPropertiesTest >> testClassAllProperties [
 	| class |
 	class := self model entityNamed: LANNode mooseName.
-	self denyEmpty: (class allDeclaredProperties select: [ :each | each name = #modifiers ])
+	self
+		denyEmpty:
+			(class allDeclaredProperties
+				select: [ :each | each name = #isAbstract ])
 ]
 
 { #category : #testing }
 FamixPropertiesTest >> testClassAttributes [
+
 	self assert: self nodeClass numberOfAttributes equals: 2.
 	self assert: self nodeClass numberOfAttributesInherited equals: 3.
-	self assert: (self nodeClass propertyNamed: #numberOfPrivateAttributes) equals: 0.
-	self assert: (self nodeClass propertyNamed: #numberOfProtectedAttributes) equals: 2.
-	self assert: (self nodeClass propertyNamed: #numberOfPublicAttributes) equals: 0.
 	self
-		assert: (self workstationClass propertyNamed: #numberOfAttributesInherited)
+		assert:
+		(self workstationClass propertyNamed: #numberOfAttributesInherited)
 		equals: (self totalNumberOfAttributesFor: LANWorkStation superclass).
 	self
 		assert: self workstationClass numberOfAttributesInherited
@@ -95,6 +97,14 @@ FamixPropertiesTest >> testClassHierarchy [
 FamixPropertiesTest >> testClassInvocations [
 	self assert: (self nodeClass propertyNamed: #numberOfMessageSends) equals: 27.
 	self assert: self nodeClass numberOfMessageSends equals: 27
+]
+
+{ #category : #testing }
+FamixPropertiesTest >> testClassIsAbstract [
+	^ self
+		assert:
+			(self model entityNamed: #'Smalltalk::LANAbstractDestinationAddress')
+				isAbstract
 ]
 
 { #category : #testing }

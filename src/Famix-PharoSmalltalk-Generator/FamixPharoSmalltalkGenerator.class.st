@@ -88,14 +88,13 @@ FamixPharoSmalltalkGenerator >> defineHierarchy [
 	attribute --|> namedEntity.
 	attribute --|> #TAttribute.
 	attribute --|> #TWithClassScope.
-	attribute --|> #THasModifiers.	
 
 	class --|> namedEntity.
 	self flag: 'WithTypes should not be necessary but needed in tests like FamixMetricsTest>>testAfferentCouplingFAMIXClassGroup'.
 	class --|> #TWithTypes.
 	class --|> #TWithExceptions.
 	class --|> #TClass.
-	class --|> #THasModifiers.
+	class --|> #TCanBeAbstract.
 
 	globalVariable --|> namedEntity.
 	globalVariable --|> #TGlobalVariable.
@@ -114,8 +113,7 @@ FamixPharoSmalltalkGenerator >> defineHierarchy [
 	method --|> namedEntity.
 	method --|> #TMethod.
 	method --|> #TWithAnnotationTypes.
-	method --|> #THasModifiers.
-	method withPrecedenceOf: #TMethod.
+	method --|> #TCanBeAbstract.
 
 	namedEntity --|> #TPackageable.
 	namedEntity --|> #TInvocationsReceiver.

@@ -1,6 +1,7 @@
 Trait {
 	#name : #FamixTUnknownVariable,
 	#traits : 'FamixTStructuralEntity',
+	#classTraits : 'FamixTStructuralEntity classTrait',
 	#category : #'Famix-Traits-Traits'
 }
 

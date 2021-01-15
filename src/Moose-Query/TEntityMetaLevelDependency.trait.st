@@ -458,6 +458,13 @@ TEntityMetaLevelDependency >> atScope: aClassFAMIX until: rejectBlock [
 	^ (self query ancestors until: rejectBlock) ofType: aClassFAMIX
 ]
 
+{ #category : #scoping }
+TEntityMetaLevelDependency >> atScopeWithProperty: aPropertySelector [
+	"I am used to return the first encountered entity that are up in the containment tree of the metamodel satisfying the property selector"
+
+	^ self query ancestors withProperty: aPropertySelector
+]
+
 { #category : #deprecated }
 TEntityMetaLevelDependency >> belongsTo [
 	"Return the primary container of the entity if it exist"

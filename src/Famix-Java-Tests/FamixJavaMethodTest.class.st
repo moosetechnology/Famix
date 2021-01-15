@@ -39,6 +39,38 @@ FamixJavaMethodTest >> testIsStubWhenParentIsStub [
 ]
 
 { #category : #tests }
+FamixJavaMethodTest >> testOverride [
+	| overridenMethod c1 c2 package |
+	package := FamixJavaPackage new.
+	c1 := FamixJavaClass new
+		parentPackage: package;
+		yourself.
+	c2 := FamixJavaClass new
+		parentPackage: package;
+		yourself.
+	overridenMethod := FamixJavaMethod new
+		name: 'method';
+		signature: 'method()';
+		parentType: c1;
+		declaredType: c1;
+		parentPackage: package;
+		yourself.
+	method
+		name: 'method';
+		signature: 'method()';
+		parentType: c2;
+		declaredType: c2;
+		parentPackage: package.
+	c2
+		addSuperInheritance:
+			(FamixJavaInheritance new
+				subclass: c2;
+				superclass: c1).
+	self assert: method isOverriding.
+	self assert: overridenMethod isOverriden
+]
+
+{ #category : #tests }
 FamixJavaMethodTest >> testSettingIsStub [
 	method isStub: true.
 	self assert: method isStub

@@ -1,6 +1,7 @@
 Trait {
 	#name : #FamixTCohesionCouplingMetrics,
 	#traits : 'FamixTPackage',
+	#classTraits : 'FamixTPackage classTrait',
 	#category : #'Famix-Traits-Package'
 }
 

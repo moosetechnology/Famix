@@ -14,6 +14,11 @@ Object >> asMooseGroup [
 ]
 
 { #category : #'*moose-core' }
+Object >> asMooseSpecializedGroup [
+	^ MooseSpecializedGroup with: self
+]
+
+{ #category : #'*moose-core' }
 Object >> hasUniqueMooseNameInModel [
 	^false
 ]

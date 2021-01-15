@@ -37,9 +37,13 @@ LANImporterTest >> testAllImplicitVariablesAreStoredInTheModel [
 ]
 
 { #category : #tests }
-LANImporterTest >> testClassModifiers [	
-	self model allClasses 
-		do: [:each | self assert: (each modifiers isKindOf: Set)].
+LANImporterTest >> testClassIsAbstract [ 
+	self
+		assert:
+			(self model entityNamed: #'Smalltalk::LANAbstractDestinationAddress')
+				isAbstract.
+	self
+		deny: (self model entityNamed: #'Smalltalk::LANPacket') isAbstract
 ]
 
 { #category : #tests }
@@ -200,34 +204,22 @@ LANImporterTest >> testInvocationReification [
 ]
 
 { #category : #tests }
-LANImporterTest >> testIsAbstract [ 
-	 
-	self 
-		assert: 
-			(self model entityNamed: #'Smalltalk::LANOutputServer') isAbstract. 
-	self 
-		assert: 
-			(self model entityNamed: 
-					#'Smalltalk::LANOutputServer.output:(Object)') isAbstract
-]
-
-{ #category : #tests }
-LANImporterTest >> testIsClassAbstract [ 
-	| famixMethod |
-	famixMethod := self model entityNamed: #'Smalltalk::LANOutputServer.output:(Object)'.
-	self assert: (famixMethod isAbstract).
-
-	self 
-		assert: 
-			(self model entityNamed: #'Smalltalk::LANOutputServer') isAbstract. 
-	
-]
-
-{ #category : #tests }
 LANImporterTest >> testLonely [
 	| lonely |
 	lonely := self model allModelClasses select: [ :each | each isLonelyWithin: self model allModelClasses ].
 	self assert: lonely size equals: 8
+]
+
+{ #category : #tests }
+LANImporterTest >> testMethodIsAbstract [
+	self
+		assert:
+			(self model entityNamed: #'Smalltalk::LANOutputServer.output:(Object)')
+				isAbstract.
+	self
+		deny:
+			(self model entityNamed: #'Smalltalk::LANWorkStation.canOriginate()')
+				isAbstract
 ]
 
 { #category : #tests }
