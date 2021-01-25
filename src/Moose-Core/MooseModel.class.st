@@ -504,14 +504,14 @@ MooseModel >> importFrom: aFMModel named: aString [
 { #category : #actions }
 MooseModel >> importFromJSONStream: aStream [
 	"Benchmarks
-	Time millisecondsToRun: [ MooseModel new importFromMSEStream: (StandardFileStream readOnlyFileNamed: 'network3.mse') ].
-	Time millisecondsToRun: [ MooseModel new importFromMSEStream: (StandardFileStream readOnlyFileNamed: 'moose.mse') ]. 178163 simon.denier 9/11/2009 12:29
+	Time millisecondsToRun: [ MooseModel new importFromJSONStream: (StandardFileStream readOnlyFileNamed: 'network3.json') ].
+	Time millisecondsToRun: [ MooseModel new importFromJSONStream: (StandardFileStream readOnlyFileNamed: 'moose.json') ]. 178163 simon.denier 9/11/2009 12:29
 	 23678 -> simon.denier 9/11/2009 11:36 - initial run
  	 21551 -> simon.denier 9/11/2009 12:18 - IdentityHashSet (reverted)
 	 17560 -> simon_denier 9/21/2009 22:34 - removing metrics from MSE
 	"
 
-	^ self importFrom: (self class importFromJSON: aStream withMetamodel: self metamodel) named: (aStream localName removeSuffix: '.mse')
+	^ self importFrom: (self class importFromJSON: aStream withMetamodel: self metamodel) named: (aStream localName removeSuffix: '.json')
 ]
 
 { #category : #actions }
