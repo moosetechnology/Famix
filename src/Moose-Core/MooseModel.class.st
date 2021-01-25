@@ -157,6 +157,37 @@ MooseModel class >> importFrom: aStream withMetamodel: aMetamodel translationDic
 ]
 
 { #category : #'import-export' }
+MooseModel class >> importFromJSON: aStream withMetamodel: aMetamodel [
+	"Here we build with the default importer"
+
+	^ self importFromJSON: aStream withMetamodel: aMetamodel customizingImporterWith: [ :importer | importer ]
+]
+
+{ #category : #'import-export' }
+MooseModel class >> importFromJSON: aStream withMetamodel: aMetamodel customizingImporterWith: aBlock [
+	"I import a MSE with its metamodel and return a FMModel from it. It is possible to customize the importer via a block"
+
+	| model importer areWarningsEnabled |
+	model := FMModel withMetamodel: aMetamodel.
+	importer := aBlock
+		value:
+			((FMImporter model: model) autorizeDandlingReferencesAtEnd
+				parser: FMJSONParser;
+				stream: aStream;
+				yourself).
+
+	"We are currently updating the meta models and most parsers are not up to date.
+	We disable warnings to avoid all deprecation warnings during the transition phase."
+	areWarningsEnabled := Deprecation raiseWarning.
+	[ Deprecation raiseWarning: false.
+	importer run ]
+		ensure: [ Deprecation raiseWarning: areWarningsEnabled ].
+
+	model updateCache.
+	^ model
+]
+
+{ #category : #'import-export' }
 MooseModel class >> importFromMSEStream: aStream [
 	^ self new
 		importFromMSEStream: aStream;
@@ -468,6 +499,26 @@ MooseModel >> importFrom: aFMModel named: aString [
 	self silentlyAddAll: aFMModel elements.
 	self entityStorage forRuntime.
 	self name: aString
+]
+
+{ #category : #actions }
+MooseModel >> importFromJSONStream: aStream [
+	"Benchmarks
+	Time millisecondsToRun: [ MooseModel new importFromMSEStream: (StandardFileStream readOnlyFileNamed: 'network3.mse') ].
+	Time millisecondsToRun: [ MooseModel new importFromMSEStream: (StandardFileStream readOnlyFileNamed: 'moose.mse') ]. 178163 simon.denier 9/11/2009 12:29
+	 23678 -> simon.denier 9/11/2009 11:36 - initial run
+ 	 21551 -> simon.denier 9/11/2009 12:18 - IdentityHashSet (reverted)
+	 17560 -> simon_denier 9/21/2009 22:34 - removing metrics from MSE
+	"
+
+	^ self importFrom: (self class importFromJSON: aStream withMetamodel: self metamodel) named: (aStream localName removeSuffix: '.mse')
+]
+
+{ #category : #actions }
+MooseModel >> importFromJSONStream: aStream filteredBy: anImportingContext [
+	^ self
+		importFrom: (self class importFrom: aStream withMetamodel: self metamodel filteredBy: anImportingContext)
+		named: (aStream localName removeSuffix: '.json')
 ]
 
 { #category : #actions }
