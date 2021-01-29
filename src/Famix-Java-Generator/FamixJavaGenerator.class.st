@@ -171,6 +171,7 @@ FamixJavaGenerator >> defineHierarchy [
 	class --|> #TCanBeAbstract.
 	class --|> #TCanBeFinal.
 	class --|> #THasVisibility.
+	class --|> #TCanBeClassSide.
 
 	containerEntity --|> namedEntity.
 	containerEntity --|> #TWithClasses.
