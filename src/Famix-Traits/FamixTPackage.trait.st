@@ -9,8 +9,8 @@ Trait {
 		'#childEntities => FMMany type: #FamixTPackageable opposite: #parentPackage',
 		'#packageOwner => FMOne type: #FamixTWithPackages opposite: #packages'
 	],
-	#traits : 'FamixTNamedEntity',
-	#classTraits : 'FamixTNamedEntity classTrait',
+	#traits : 'FamixTNamedEntity + FamixTWithComments',
+	#classTraits : 'FamixTNamedEntity classTrait + FamixTWithComments classTrait',
 	#category : #'Famix-Traits-Package'
 }
 
