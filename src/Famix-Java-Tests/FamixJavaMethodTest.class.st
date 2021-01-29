@@ -19,6 +19,13 @@ FamixJavaMethodTest >> testDefaultIsStub [
 ]
 
 { #category : #tests }
+FamixJavaMethodTest >> testIsClassSide [
+	
+	method isClassSide: true.
+	self assert: method isClassSide .
+]
+
+{ #category : #tests }
 FamixJavaMethodTest >> testIsNotStubWhenParentIsNotStub [
 	| aClass |
 	aClass := FamixJavaClass new.
