@@ -94,12 +94,14 @@ RBVisitorForFAMIXMetrics >> initialize [
 
 { #category : #private }
 RBVisitorForFAMIXMetrics >> isDirtySuperInMethod: selector withReceiver: receiver [
-	^ selector ~~ self methodEntity name and: [ receiver isSuper ]
+
+	^ selector ~~ self methodEntity name and: [ receiver isSuperVariable ]
 ]
 
 { #category : #private }
 RBVisitorForFAMIXMetrics >> isSuperInMethod: selector withReceiver: receiver [
-	^ selector == self methodEntity name and: [ receiver isSuper ]
+
+	^ selector == self methodEntity name and: [ receiver isSuperVariable ]
 ]
 
 { #category : #'source access' }
