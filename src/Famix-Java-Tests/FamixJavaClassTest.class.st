@@ -5,6 +5,16 @@ Class {
 }
 
 { #category : #tests }
+FamixJavaClassTest >> testInheritanceAnnotationType [
+	| testAnnotation testAnnotationSub inheritance |
+	testAnnotation := FamixJavaAnnotationType new name: 'Test'.
+	testAnnotationSub := FamixJavaAnnotationType new name: 'SubTest'.
+	inheritance := FamixJavaInheritance new subclass: testAnnotationSub; superclass: testAnnotation.
+	self assertCollection: testAnnotation subInheritances hasSameElements: { inheritance } .
+	self assert: testAnnotationSub superclass equals: testAnnotation.
+]
+
+{ #category : #tests }
 FamixJavaClassTest >> testIsJUnit40TestCase [
 	| testAnnotation testAnnotationInstance famixClass famixMethod |
 	testAnnotation := FamixJavaAnnotationType new name: 'Test'.
