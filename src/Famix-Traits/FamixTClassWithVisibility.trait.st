@@ -1,7 +1,6 @@
 Trait {
 	#name : #FamixTClassWithVisibility,
 	#traits : 'FamixTClass + FamixTHasVisibility',
-	#classTraits : 'FamixTClass classTrait + FamixTHasVisibility classTrait',
 	#category : #'Famix-Traits-Traits'
 }
 
