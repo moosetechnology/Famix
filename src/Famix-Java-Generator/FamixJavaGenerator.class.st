@@ -133,6 +133,7 @@ FamixJavaGenerator >> defineHierarchy [
 	annotationType --|> type.
 	annotationType --|> #TAnnotationType.
 	annotationType --|> #TWithAttributes.
+	annotationType --|> #TWithInheritances.
 
 	annotationTypeAttribute --|> namedEntity.
 	annotationTypeAttribute --|> #TAnnotationTypeAttribute.
