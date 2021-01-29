@@ -15,6 +15,14 @@ FamixJavaClassTest >> testInheritanceAnnotationType [
 ]
 
 { #category : #tests }
+FamixJavaClassTest >> testIsClassSide [
+	| famixClass |
+	famixClass := FamixJavaClass new. 
+	famixClass isClassSide: true.
+	self assert: famixClass isClassSide
+]
+
+{ #category : #tests }
 FamixJavaClassTest >> testIsJUnit40TestCase [
 	| testAnnotation testAnnotationInstance famixClass famixMethod |
 	testAnnotation := FamixJavaAnnotationType new name: 'Test'.

@@ -122,7 +122,8 @@ Class {
 		'tHasVisibility',
 		'tClassWithVisibility',
 		'tCanBeFinal',
-		'tCanBeAbstract'
+		'tCanBeAbstract',
+		'tCanBeClassSide'
 	],
 	#category : #'Famix-MetamodelGeneration'
 }
@@ -920,6 +921,7 @@ FamixGenerator >> defineHierarchy [
 	tAssociation --|> tSourceEntity.
 
 	tAttribute --|> tStructuralEntity.
+	tAttribute --|> tCanBeClassSide.
 
 	tAnnotationInstance --|> #TEntityMetaLevelDependency.
 
@@ -995,6 +997,7 @@ FamixGenerator >> defineHierarchy [
 	tMethod --|> tNamedEntity.
 	tMethod --|> #TOODependencyQueries.
 	tMethod withPrecedenceOf: tWithStatements.
+	tMethod --|> tCanBeClassSide.
 	
 	tMultipleFileAnchor --|> tSourceAnchor.
 	
@@ -1042,6 +1045,8 @@ FamixGenerator >> defineHierarchy [
 FamixGenerator >> defineProperties [
 	super defineProperties.
 	
+	((tCanBeClassSide property: #isClassSide type: #Boolean) 
+		comment: 'Entity can be declared class side i.e. static').
 	((tCanBeAbstract property: #isAbstract type: #Boolean) 
 		comment: 'Entity can be declared abstract').
 	((tCanBeFinal property: #isFinal type: #Boolean) 
@@ -1057,9 +1062,6 @@ FamixGenerator >> defineProperties [
 	((tAccess property: #isWrite type: #Boolean) 
 		comment: 'Write access').
 		
-	((tAttribute property: #isClassSide type: #Boolean) 
-		comment: 'True if class-side attribute').
-
 	((tAnnotationInstanceAttribute property: #value type: #String)
 		comment: 'Actual value of the attribute used in an annotation').
 
@@ -1074,8 +1076,6 @@ FamixGenerator >> defineProperties [
 
 	((tMethod property: #kind type: #String) 
 		comment: 'Tag indicating a setter, getter, constant, constructor, or abstract method').
-	((tMethod property: #isClassSide type: #Boolean) 
-		comment: 'True if class-side method').
 
 	((tHasSignature property: #signature type: #String)
 		comment: 'Signature of the message being sent').
@@ -1427,7 +1427,7 @@ FamixGenerator >> defineRelations [
 { #category : #definition }
 FamixGenerator >> defineTraits [
 	super defineTraits.
-	
+	tCanBeClassSide := builder newTraitNamed: #TCanBeClassSide.
 	tCanBeAbstract := builder newTraitNamed: #TCanBeAbstract.
 	tCanBeFinal := builder newTraitNamed: #TCanBeFinal.
 	tAccess := builder newTraitNamed: #TAccess.
