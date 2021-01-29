@@ -1031,6 +1031,8 @@ FamixGenerator >> defineHierarchy [
 	tType --|> tReferenceable.
 	tType --|> tNamedEntity.
 	
+	tUnknownSourceLanguage --|> tSourceLanguage.
+	
 	tUnknownVariable --|> tStructuralEntity.
 	
 	tWithClasses --|> tWithTypes.
