@@ -951,6 +951,7 @@ FamixGenerator >> defineHierarchy [
 	
 	tEnum --|> tWithEnumValues.
 	tEnum --|> tType.
+	tEnum --|> tWithComments. 
 	
 	tFileAnchor --|> tSourceAnchor.
   
@@ -1005,10 +1006,12 @@ FamixGenerator >> defineHierarchy [
 	tNamedEntity --|> tSourceEntity.
 
 	tNamespace --|> tNamedEntity.
+	tNamespace --|> tWithComments. 
 	tNamespace --|> #TOODependencyQueries.
 	tNamespace withPrecedenceOf: #TOODependencyQueries.
 	
 	tPackage --|> tNamedEntity.
+	tPackage --|> tWithComments. 
 
 	tParameter --|> tStructuralEntity.
 	
@@ -1024,7 +1027,6 @@ FamixGenerator >> defineHierarchy [
 	tStructuralEntity --|> tTypedEntity.
  
 	tSourceEntity --|> tWithSourceLanguage.
-	tSourceEntity --|> tWithComments.
 
 	tTraitUsage --|> tAssociation.
 	
@@ -1039,7 +1041,8 @@ FamixGenerator >> defineHierarchy [
 	
 	tWithStatements --|> tWithAccesses.
 	tWithStatements --|> tWithInvocations.
-	tWithStatements --|> tSourceEntity
+	tWithStatements --|> tSourceEntity.
+	tWithStatements --|> tWithComments.
 
 ]
 
