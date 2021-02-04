@@ -6,12 +6,11 @@ A FAMIXMethod is always contained in a parentType.
 Trait {
 	#name : #FamixTMethod,
 	#instVars : [
-		'#isClassSide => FMProperty',
 		'#kind => FMProperty',
 		'#parentType => FMOne type: #FamixTWithMethods opposite: #methods'
 	],
-	#traits : '(FamixTHasSignature + FamixTInvocable + FamixTNamedEntity + FamixTTypedEntity + FamixTWithClassScope + FamixTWithImplicitVariables + FamixTWithLocalVariables + FamixTWithParameters + FamixTWithReferences + FamixTWithStatements + TOODependencyQueries withPrecedenceOf: FamixTWithStatements)',
-	#classTraits : '(FamixTHasSignature classTrait + FamixTInvocable classTrait + FamixTNamedEntity classTrait + FamixTTypedEntity classTrait + FamixTWithClassScope classTrait + FamixTWithImplicitVariables classTrait + FamixTWithLocalVariables classTrait + FamixTWithParameters classTrait + FamixTWithReferences classTrait + FamixTWithStatements classTrait + TOODependencyQueries classTrait withPrecedenceOf: FamixTWithStatements classTrait)',
+	#traits : '(FamixTCanBeClassSide + FamixTHasSignature + FamixTInvocable + FamixTNamedEntity + FamixTTypedEntity + FamixTWithClassScope + FamixTWithImplicitVariables + FamixTWithLocalVariables + FamixTWithParameters + FamixTWithReferences + FamixTWithStatements + TOODependencyQueries withPrecedenceOf: FamixTWithStatements)',
+	#classTraits : '(FamixTCanBeClassSide classTrait + FamixTHasSignature classTrait + FamixTInvocable classTrait + FamixTNamedEntity classTrait + FamixTTypedEntity classTrait + FamixTWithClassScope classTrait + FamixTWithImplicitVariables classTrait + FamixTWithLocalVariables classTrait + FamixTWithParameters classTrait + FamixTWithReferences classTrait + FamixTWithStatements classTrait + TOODependencyQueries classTrait withPrecedenceOf: FamixTWithStatements classTrait)',
 	#category : #'Famix-Traits-Behavioral'
 }
 
@@ -45,21 +44,6 @@ FamixTMethod >> hierarchyNestingLevel [
 { #category : #metrics }
 FamixTMethod >> hierarchyNestingLevel: aNumber [
 	self cacheAt: #hierarchyNestingLevel put: aNumber
-]
-
-{ #category : #accessing }
-FamixTMethod >> isClassSide [
-
-	<FMProperty: #isClassSide type: #Boolean>
-	<generated>
-	<FMComment: 'True if class-side method'>
-	^ isClassSide
-]
-
-{ #category : #accessing }
-FamixTMethod >> isClassSide: anObject [
-	<generated>
-	isClassSide := anObject
 ]
 
 { #category : #testing }
