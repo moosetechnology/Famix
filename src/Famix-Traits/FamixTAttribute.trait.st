@@ -8,7 +8,6 @@ Trait {
 		'#parentType => FMOne type: #FamixTWithAttributes opposite: #attributes'
 	],
 	#traits : 'FamixTCanBeClassSide + FamixTStructuralEntity',
-	#classTraits : 'FamixTCanBeClassSide classTrait + FamixTStructuralEntity classTrait',
 	#category : #'Famix-Traits-Attribute'
 }
 
