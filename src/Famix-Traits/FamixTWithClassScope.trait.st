@@ -1,6 +1,6 @@
 Trait {
 	#name : #FamixTWithClassScope,
-	#category : #'Famix-Traits-ClassScope'
+	#category : #'Famix-Traits-Traits'
 }
 
 { #category : #meta }

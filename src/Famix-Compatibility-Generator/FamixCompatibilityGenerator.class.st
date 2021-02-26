@@ -334,7 +334,7 @@ FamixCompatibilityGenerator >> defineHierarchy [
 
 	module --|> scopingEntity.
 	module --|> #TModule.
-	module --|> #TWithCompilationUnit.
+	module --|> #TWithCompilationUnits.
 	module --|> #TWithHeader.
 
 	namedEntity --|> #TPackageable.

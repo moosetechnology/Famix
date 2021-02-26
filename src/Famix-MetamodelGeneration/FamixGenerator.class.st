@@ -1679,7 +1679,7 @@ FamixGenerator >> defineTraits [
 	tWithComments := builder newTraitNamed: #TWithComments.
 	tWithComments comment: self commentForTWithComments.
 
-	tWithCompilationUnit := builder newTraitNamed: #TWithCompilationUnit.
+	tWithCompilationUnit := builder newTraitNamed: #TWithCompilationUnits.
 	tWithCompilationUnit comment: self commentForTWithCompilationUnit.
 
 	tWithDeclaredExceptions := builder newTraitNamed: #TWithDeclaredExceptions.
@@ -1742,7 +1742,7 @@ FamixGenerator >> defineTraits [
 	tHasSignature := builder newTraitNamed: #THasSignature.
 	tHasSignature comment: self commentForTHasSignature.
 
-	tWithSourceLanguage := builder newTraitNamed: #TWithSourceLanguage.
+	tWithSourceLanguage := builder newTraitNamed: #TWithSourceLanguages.
 	tWithSourceLanguage comment: self commentForTWithSourceLanguage.
 
 	tWithTemplates := builder newTraitNamed: #TWithTemplates.
