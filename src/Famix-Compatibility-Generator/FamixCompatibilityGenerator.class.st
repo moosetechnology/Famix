@@ -66,7 +66,10 @@ Class {
 		'fileAnchor',
 		'folder',
 		'indexedFileAnchor',
-		'multipleFileAnchor'
+		'multipleFileAnchor',
+		'tCanBeVolatile',
+		'tCanBeSynchronized',
+		'tCanBeTransient'
 	],
 	#category : #'Famix-Compatibility-Generator'
 }
@@ -101,7 +104,47 @@ FamixCompatibilityGenerator class >> translationDictionary [
 	^ Dictionary newFrom: associations.	
 ]
 
-{ #category : #initialization }
+{ #category : #comments }
+FamixCompatibilityGenerator >> commentForTCanBeSynchronized [
+	^ 'I allow an entity to be synchronized
+ex:
+
+```java
+public class SynchronizedCounter {
+    private int c = 0;
+
+    public synchronized void increment() {
+        c++;
+    }
+}
+```'
+]
+
+{ #category : #comments }
+FamixCompatibilityGenerator >> commentForTCanBeTransient [
+	^ 'I allow an entity to be transient
+ex:
+
+```java
+public class Student implements Serializable{  
+ transient int age; //Now it will not be serialized  
+}  
+```'
+]
+
+{ #category : #comments }
+FamixCompatibilityGenerator >> commentForTCanBeVolatile [
+	^ 'I allow an entity to be volatible
+ex:
+
+```java
+public class SharedObject {
+    public volatile int counter = 0;
+}
+```'
+]
+
+{ #category : #definition }
 FamixCompatibilityGenerator >> defineClasses [
 
 	super defineClasses.
@@ -173,7 +216,7 @@ FamixCompatibilityGenerator >> defineClasses [
 
 ]
 
-{ #category : #initialization }
+{ #category : #definition }
 FamixCompatibilityGenerator >> defineHierarchy [
 
 	super defineHierarchy.
@@ -199,6 +242,8 @@ FamixCompatibilityGenerator >> defineHierarchy [
 	attribute --|> structuralEntity.
 	attribute --|> #TAttribute.
 	attribute --|> #TWithClassScope.
+	attribute --|> tCanBeVolatile.
+	attribute --|> tCanBeTransient.
 
 	behaviouralEntity --|> containerEntity.
 	behaviouralEntity --|> #TWithParameters.
@@ -285,6 +330,7 @@ FamixCompatibilityGenerator >> defineHierarchy [
 	method --|> #TWithThrownExceptions.
 	method --|> #TWithDeclaredExceptions.
 	method --|> #TWithCaughtExceptions.
+	method --|> tCanBeSynchronized.
 
 	module --|> scopingEntity.
 	module --|> #TModule.
@@ -397,6 +443,21 @@ FamixCompatibilityGenerator >> defineProperties [
 		*-
 	((scopingEntity property: #childScopes)
 			comment: 'Child scopes embedded in this scope, if any.').
+			
+	((tCanBeVolatile property: #isVolatile type: #Boolean) 
+		comment: 'Entity can be declared volatile').
+	((tCanBeTransient property: #isTransient type: #Boolean) 
+		comment: 'Entity can be declared transient').
+	((tCanBeSynchronized property: #isSynchronized type: #Boolean) 
+		comment: 'Entity can be declared synchronized').
+]
+
+{ #category : #definition }
+FamixCompatibilityGenerator >> defineTraits [
+	super defineTraits.
+	tCanBeVolatile := builder newTraitNamed: #TCanBeVolatile comment: self commentForTCanBeVolatile.
+	tCanBeTransient := builder newTraitNamed: #TCanBeTransient comment: self commentForTCanBeTransient.
+	tCanBeSynchronized := builder newTraitNamed: #TCanBeSynchronized comment: self commentForTCanBeSynchronized
 ]
 
 { #category : #definition }
