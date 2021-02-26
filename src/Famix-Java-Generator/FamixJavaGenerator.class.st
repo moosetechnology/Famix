@@ -34,7 +34,10 @@ Class {
 		'parameterizedType',
 		'file',
 		'folder',
-		'indexedFileAnchor'
+		'indexedFileAnchor',
+		'tCanBeVolatile',
+		'tCanBeTransient',
+		'tCanBeSynchronized'
 	],
 	#category : #'Famix-Java-Generator'
 }
@@ -49,6 +52,46 @@ FamixJavaGenerator class >> packageName [
 FamixJavaGenerator class >> prefix [
 
 	^ #'FamixJava'
+]
+
+{ #category : #definition }
+FamixJavaGenerator >> commentForTCanBeSynchronized [
+	^ 'I allow an entity to be synchronized
+ex:
+
+```java
+public class SynchronizedCounter {
+    private int c = 0;
+
+    public synchronized void increment() {
+        c++;
+    }
+}
+```'
+]
+
+{ #category : #definition }
+FamixJavaGenerator >> commentForTCanBeTransient [
+	^ 'I allow an entity to be transient
+ex:
+
+```java
+public class Student implements Serializable{  
+ transient int age; //Now it will not be serialized  
+}  
+```'
+]
+
+{ #category : #definition }
+FamixJavaGenerator >> commentForTCanBeVolatile [
+	^ 'I allow an entity to be volatible
+ex:
+
+```java
+public class SharedObject {
+    public volatile int counter = 0;
+}
+```'
 ]
 
 { #category : #definition }
@@ -144,6 +187,8 @@ FamixJavaGenerator >> defineHierarchy [
 	attribute --|> #TWithClassScope.
 	attribute --|> #TCanBeFinal.
 	attribute --|> #THasVisibility.
+	attribute --|> tCanBeVolatile.
+	attribute --|> tCanBeTransient.
 	
 	file --|> namedEntity.
 	file --|> #TFile.
@@ -162,6 +207,7 @@ FamixJavaGenerator >> defineHierarchy [
 	method --|> #TCanBeAbstract.
 	method --|> #TCanBeFinal.
 	method --|> #THasVisibility.
+	method --|> tCanBeSynchronized.
 
 	caughtException --|> exception.
 	caughtException --|> #TCaughtException.
@@ -267,7 +313,22 @@ FamixJavaGenerator >> defineProperties [
 	super defineProperties.
 	((namespace property: #parentNamespace)
 		comment: 'Parent namespace embedding this namespace, if any.';
-		container) *- ((namespace property: #childNamespaces) comment: 'Namespaces embedded in this namespace, if any.')
+		container) *- ((namespace property: #childNamespaces) comment: 'Namespaces embedded in this namespace, if any.').
+		
+		((tCanBeVolatile property: #isVolatile type: #Boolean) 
+		comment: 'Entity can be declared volatile').
+	((tCanBeTransient property: #isTransient type: #Boolean) 
+		comment: 'Entity can be declared transient').
+	((tCanBeSynchronized property: #isSynchronized type: #Boolean) 
+		comment: 'Entity can be declared synchronized').
+]
+
+{ #category : #definition }
+FamixJavaGenerator >> defineTraits [
+	super defineTraits.
+	tCanBeVolatile := builder newTraitNamed: #TCanBeVolatile comment: self commentForTCanBeVolatile.
+	tCanBeTransient := builder newTraitNamed: #TCanBeTransient comment: self commentForTCanBeTransient.
+	tCanBeSynchronized := builder newTraitNamed: #TCanBeSynchronized comment: self commentForTCanBeSynchronized
 ]
 
 { #category : #definition }
