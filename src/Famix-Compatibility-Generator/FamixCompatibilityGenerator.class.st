@@ -272,7 +272,8 @@ FamixCompatibilityGenerator >> defineHierarchy [
 	class --|> type.
 	class --|> #TWithExceptions.
 	class --|> #TClass.
-
+	class --|> #TCanBeClassSide.	
+		
 	compilationUnit --|> cFile.
 	compilationUnit --|> #TCompilationUnit.
 	compilationUnit --|> #TDefinedInModule.
