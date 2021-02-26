@@ -10,6 +10,14 @@ FAMIXClassTest >> actualClass [
 ]
 
 { #category : #tests }
+FAMIXClassTest >> testIsClassSide [
+	| famixClass |
+	famixClass := FamixJavaClass new. 
+	famixClass isClassSide: true.
+	self assert: famixClass isClassSide
+]
+
+{ #category : #tests }
 FAMIXClassTest >> testIsInterface [
 	self
 		assert:
