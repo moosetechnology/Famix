@@ -1019,7 +1019,6 @@ FamixGenerator >> defineHierarchy [
 	
 	tStructuralEntity --|> tNamedEntity.
 	tStructuralEntity --|> tAccessible.
-	tStructuralEntity --|> tInvocationsReceiver.
 	tStructuralEntity --|> tTypedEntity.
  
 	tSourceEntity --|> tWithSourceLanguage.
