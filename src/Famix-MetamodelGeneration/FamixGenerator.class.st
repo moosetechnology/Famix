@@ -987,7 +987,6 @@ FamixGenerator >> defineHierarchy [
 
 	tMethod --|> tWithParameters.
 	tMethod --|> tInvocable.
-	tMethod --|> tWithReferences.
 	tMethod --|> tWithStatements.
 	tMethod --|> tWithLocalVariables.
 	tMethod --|> tWithImplicitVariables.
@@ -1039,7 +1038,8 @@ FamixGenerator >> defineHierarchy [
 	
 	tWithStatements --|> tWithAccesses.
 	tWithStatements --|> tWithInvocations.
-	tWithStatements --|> tSourceEntity
+	tWithStatements --|> tSourceEntity.
+	tWithStatements --|> tWithReferences.
 
 ]
 
