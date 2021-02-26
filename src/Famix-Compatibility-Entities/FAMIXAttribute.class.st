@@ -1,8 +1,8 @@
 Class {
 	#name : #FAMIXAttribute,
 	#superclass : #FAMIXStructuralEntity,
-	#traits : 'FamixTAttribute + FamixTWithClassScope',
-	#classTraits : 'FamixTAttribute classTrait + FamixTWithClassScope classTrait',
+	#traits : 'FAMIXTCanBeTransient + FAMIXTCanBeVolatile + FamixTAttribute + FamixTWithClassScope',
+	#classTraits : 'FAMIXTCanBeTransient classTrait + FAMIXTCanBeVolatile classTrait + FamixTAttribute classTrait + FamixTWithClassScope classTrait',
 	#category : #'Famix-Compatibility-Entities-Entities'
 }
 
@@ -25,6 +25,13 @@ FAMIXAttribute >> beInstanceVariable [
 FAMIXAttribute >> beSharedVariable [
 
 	self propertyNamed: #sharedVariable put: true 
+]
+
+{ #category : #initialization }
+FAMIXAttribute >> initialize [
+	super initialize.
+	isVolatile := false.
+	isTransient := false
 ]
 
 { #category : #'Famix-Smalltalk' }

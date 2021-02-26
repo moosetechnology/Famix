@@ -1,8 +1,8 @@
 Class {
 	#name : #FAMIXMethod,
 	#superclass : #FAMIXBehaviouralEntity,
-	#traits : 'FamixTMethod + FamixTWithCaughtExceptions + FamixTWithDeclaredExceptions + FamixTWithThrownExceptions',
-	#classTraits : 'FamixTMethod classTrait + FamixTWithCaughtExceptions classTrait + FamixTWithDeclaredExceptions classTrait + FamixTWithThrownExceptions classTrait',
+	#traits : 'FAMIXTCanBeSynchronized + FamixTMethod + FamixTWithCaughtExceptions + FamixTWithDeclaredExceptions + FamixTWithThrownExceptions',
+	#classTraits : 'FAMIXTCanBeSynchronized classTrait + FamixTMethod classTrait + FamixTWithCaughtExceptions classTrait + FamixTWithDeclaredExceptions classTrait + FamixTWithThrownExceptions classTrait',
 	#classVars : [
 		'#ShouldSearchForSmalltalkCodeInImage'
 	],
@@ -77,7 +77,8 @@ FAMIXMethod >> implementMethod [
 { #category : #initialization }
 FAMIXMethod >> initialize [
 	super initialize.
-	isClassSide := false
+	isClassSide := false.
+	isSynchronized := false
 ]
 
 { #category : #'Famix-Java' }
