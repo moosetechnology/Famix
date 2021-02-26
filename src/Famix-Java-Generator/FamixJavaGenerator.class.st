@@ -131,7 +131,6 @@ FamixJavaGenerator >> defineClasses [
 	thrownException := builder newClassNamed: #ThrownException.
 	type := builder newClassNamed: #Type.
 	unknownVariable := builder newClassNamed: #UnknownVariable.
-	
 	primitiveType withTesting.
 
 	self defineComments
@@ -189,6 +188,7 @@ FamixJavaGenerator >> defineHierarchy [
 	attribute --|> #THasVisibility.
 	attribute --|> tCanBeVolatile.
 	attribute --|> tCanBeTransient.
+	attribute --|> #TInvocationsReceiver.
 	
 	file --|> namedEntity.
 	file --|> #TFile.
@@ -219,7 +219,7 @@ FamixJavaGenerator >> defineHierarchy [
 	class --|> #TCanBeAbstract.
 	class --|> #TCanBeFinal.
 	class --|> #THasVisibility.
-	class --|> #TCanBeClassSide.
+	class --|> #TCanBeClassSide.	
 
 	containerEntity --|> namedEntity.
 	containerEntity --|> #TWithClasses.
@@ -245,10 +245,12 @@ FamixJavaGenerator >> defineHierarchy [
 
 	globalVariable --|> namedEntity.
 	globalVariable --|> #TGlobalVariable.
-
+	globalVariable --|> #TInvocationsReceiver.
+	
 	implicitVariable --|> namedEntity.
 	implicitVariable --|> #TImplicitVariable.
-
+	implicitVariable --|> #TInvocationsReceiver.
+	
 	inheritance --|> #TInheritance.
 
 	invocation --|> #TInvocation.
@@ -257,7 +259,8 @@ FamixJavaGenerator >> defineHierarchy [
 	localVariable --|> namedEntity.
 	localVariable --|> #TLocalVariable.
 	localVariable --|> #TCanBeFinal.
-
+	localVariable --|> #TInvocationsReceiver.
+	
 	namedEntity --|> #TPackageable.
 	namedEntity --|> #TInvocationsReceiver.
 	namedEntity --|> #TWithAnnotationInstances.
@@ -303,6 +306,7 @@ FamixJavaGenerator >> defineHierarchy [
 
 	unknownVariable --|> namedEntity.
 	unknownVariable --|> #TUnknownVariable.
+	unknownVariable --|> #TInvocationsReceiver.
 	
 
 

@@ -24,14 +24,6 @@ FamixJavaMethod >> accessedAttributes [
 	^ (self queryOutgoingAccesses opposites withinParentUsing: FamixTClass) asSet select: #isAttribute
 ]
 
-{ #category : #accessing }
-FamixJavaMethod >> category [
-	<FMProperty: #category type: #String>
-	<FMComment: 'Category of the method'>
-	
-	^ self attributeAt: #category ifAbsentPut: [ nil ]
-]
-
 { #category : #'Famix-Extensions' }
 FamixJavaMethod >> clientBehaviours [
 	<FMProperty: #clientBehaviours type: #FamixJavaMethod> <multivalued> <derived>

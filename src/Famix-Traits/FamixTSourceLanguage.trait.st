@@ -7,7 +7,7 @@ One can create a default source language for a project by not associating any en
 Trait {
 	#name : #FamixTSourceLanguage,
 	#instVars : [
-		'#sourcedEntities => FMMany type: #FamixTWithSourceLanguage opposite: #declaredSourceLanguage'
+		'#sourcedEntities => FMMany type: #FamixTWithSourceLanguages opposite: #declaredSourceLanguage'
 	],
 	#category : #'Famix-Traits-SourceLanguage'
 }
@@ -47,7 +47,7 @@ FamixTSourceLanguage >> mooseNameOn: aStream [
 
 { #category : #accessing }
 FamixTSourceLanguage >> sourcedEntities [
-	"Relation named: #sourcedEntities type: #FamixTWithSourceLanguage opposite: #declaredSourceLanguage"
+	"Relation named: #sourcedEntities type: #FamixTWithSourceLanguages opposite: #declaredSourceLanguage"
 
 	<generated>
 	<FMComment: 'References to the entities saying explicitly that are written in this language.'>

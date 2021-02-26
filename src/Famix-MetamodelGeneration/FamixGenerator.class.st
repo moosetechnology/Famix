@@ -987,7 +987,6 @@ FamixGenerator >> defineHierarchy [
 
 	tMethod --|> tWithParameters.
 	tMethod --|> tInvocable.
-	tMethod --|> tWithReferences.
 	tMethod --|> tWithStatements.
 	tMethod --|> tWithLocalVariables.
 	tMethod --|> tWithImplicitVariables.
@@ -1020,7 +1019,6 @@ FamixGenerator >> defineHierarchy [
 	
 	tStructuralEntity --|> tNamedEntity.
 	tStructuralEntity --|> tAccessible.
-	tStructuralEntity --|> tInvocationsReceiver.
 	tStructuralEntity --|> tTypedEntity.
  
 	tSourceEntity --|> tWithSourceLanguage.
@@ -1039,7 +1037,8 @@ FamixGenerator >> defineHierarchy [
 	
 	tWithStatements --|> tWithAccesses.
 	tWithStatements --|> tWithInvocations.
-	tWithStatements --|> tSourceEntity
+	tWithStatements --|> tSourceEntity.
+	tWithStatements --|> tWithReferences.
 
 ]
 
@@ -1680,7 +1679,7 @@ FamixGenerator >> defineTraits [
 	tWithComments := builder newTraitNamed: #TWithComments.
 	tWithComments comment: self commentForTWithComments.
 
-	tWithCompilationUnit := builder newTraitNamed: #TWithCompilationUnit.
+	tWithCompilationUnit := builder newTraitNamed: #TWithCompilationUnits.
 	tWithCompilationUnit comment: self commentForTWithCompilationUnit.
 
 	tWithDeclaredExceptions := builder newTraitNamed: #TWithDeclaredExceptions.
@@ -1743,7 +1742,7 @@ FamixGenerator >> defineTraits [
 	tHasSignature := builder newTraitNamed: #THasSignature.
 	tHasSignature comment: self commentForTHasSignature.
 
-	tWithSourceLanguage := builder newTraitNamed: #TWithSourceLanguage.
+	tWithSourceLanguage := builder newTraitNamed: #TWithSourceLanguages.
 	tWithSourceLanguage comment: self commentForTWithSourceLanguage.
 
 	tWithTemplates := builder newTraitNamed: #TWithTemplates.

@@ -1,22 +1,22 @@
 Trait {
-	#name : #FamixTWithCompilationUnit,
+	#name : #FamixTWithCompilationUnits,
 	#instVars : [
 		'#compilationUnit => FMOne type: #FamixTCompilationUnit opposite: #compilationUnitOwner'
 	],
-	#category : #'Famix-Traits-CompilationUnit'
+	#category : #'Famix-Traits-Traits'
 }
 
 { #category : #meta }
-FamixTWithCompilationUnit classSide >> annotation [
+FamixTWithCompilationUnits classSide >> annotation [
 
-	<FMClass: #TWithCompilationUnit super: #Object>
+	<FMClass: #TWithCompilationUnits super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
 	^self
 ]
 
 { #category : #accessing }
-FamixTWithCompilationUnit >> compilationUnit [
+FamixTWithCompilationUnits >> compilationUnit [
 	"Relation named: #compilationUnit type: #FamixTCompilationUnit opposite: #compilationUnitOwner"
 
 	<generated>
@@ -25,7 +25,7 @@ FamixTWithCompilationUnit >> compilationUnit [
 ]
 
 { #category : #accessing }
-FamixTWithCompilationUnit >> compilationUnit: anObject [
+FamixTWithCompilationUnits >> compilationUnit: anObject [
 
 	<generated>
 	compilationUnit := anObject
