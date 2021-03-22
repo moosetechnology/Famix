@@ -50,5 +50,6 @@ FamixStPharoEntitySourceAnchor >> pharoEntity: anObject [
 
 { #category : #accessing }
 FamixStPharoEntitySourceAnchor >> sourceText [
-	^ self pharoEntity ifNotNil: #definition  
+
+	^ self pharoEntity ifNotNil: #definitionString
 ]
