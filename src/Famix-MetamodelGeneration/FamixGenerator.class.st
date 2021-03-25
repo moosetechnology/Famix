@@ -939,7 +939,6 @@ FamixGenerator >> defineHierarchy [
 	tClass --|> tPackageable.
 	tClass --|> tInvocationsReceiver.
 	tClass --|> tWithComments.
-	tClass --|> tClassMetrics.
 	tClass --|> #TOODependencyQueries.
 	
 	tClassWithVisibility --|> tClass.
