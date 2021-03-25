@@ -37,7 +37,8 @@ Class {
 		'indexedFileAnchor',
 		'tCanBeVolatile',
 		'tCanBeTransient',
-		'tCanBeSynchronized'
+		'tCanBeSynchronized',
+		'tJavaClassMetrics'
 	],
 	#category : #'Famix-Java-Generator'
 }
@@ -219,7 +220,8 @@ FamixJavaGenerator >> defineHierarchy [
 	class --|> #TCanBeAbstract.
 	class --|> #TCanBeFinal.
 	class --|> #THasVisibility.
-	class --|> #TCanBeClassSide.	
+	class --|> #TCanBeClassSide.
+	class --|> tJavaClassMetrics.	
 
 	containerEntity --|> namedEntity.
 	containerEntity --|> #TWithClasses.
@@ -329,10 +331,19 @@ FamixJavaGenerator >> defineProperties [
 
 { #category : #definition }
 FamixJavaGenerator >> defineTraits [
+
 	super defineTraits.
-	tCanBeVolatile := builder newTraitNamed: #TCanBeVolatile comment: self commentForTCanBeVolatile.
-	tCanBeTransient := builder newTraitNamed: #TCanBeTransient comment: self commentForTCanBeTransient.
-	tCanBeSynchronized := builder newTraitNamed: #TCanBeSynchronized comment: self commentForTCanBeSynchronized
+	tCanBeVolatile := builder
+		                  newTraitNamed: #TCanBeVolatile
+		                  comment: self commentForTCanBeVolatile.
+	tCanBeTransient := builder
+		                   newTraitNamed: #TCanBeTransient
+		                   comment: self commentForTCanBeTransient.
+	tCanBeSynchronized := builder
+		                      newTraitNamed: #TCanBeSynchronized
+		                      comment: self commentForTCanBeSynchronized.
+
+	tJavaClassMetrics := builder newTraitNamed: #TClassMetrics
 ]
 
 { #category : #definition }
