@@ -521,6 +521,22 @@ MooseModel >> importFromJSONStream: aStream filteredBy: anImportingContext [
 		named: (aStream localName removeSuffix: '.json')
 ]
 
+{ #category : #'import-export' }
+MooseModel >> importFromMSE [
+
+	| file |
+	file := UIManager default
+		        chooseExistingFileReference: 'Import model from MSE file'
+		        extensions: #( 'mse' )
+		        path: FileLocator home.
+	file ifNotNil: [ 
+		| stream |
+		stream := file readStream.
+		self importFromMSEStream: stream.
+		self name: file basenameWithoutExtension.
+		stream close ]
+]
+
 { #category : #actions }
 MooseModel >> importFromMSEStream: aStream [
 	"Benchmarks
