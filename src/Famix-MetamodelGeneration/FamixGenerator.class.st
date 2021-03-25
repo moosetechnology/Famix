@@ -123,7 +123,8 @@ Class {
 		'tClassWithVisibility',
 		'tCanBeFinal',
 		'tCanBeAbstract',
-		'tCanBeClassSide'
+		'tCanBeClassSide',
+		'tClassMetrics'
 	],
 	#category : #'Famix-MetamodelGeneration'
 }
@@ -938,6 +939,7 @@ FamixGenerator >> defineHierarchy [
 	tClass --|> tPackageable.
 	tClass --|> tInvocationsReceiver.
 	tClass --|> tWithComments.
+	tClass --|> tClassMetrics.
 	tClass --|> #TOODependencyQueries.
 	
 	tClassWithVisibility --|> tClass.
@@ -1472,6 +1474,9 @@ FamixGenerator >> defineTraits [
 	tClass := builder newTraitNamed: #TClass.
 	tClass comment: self commentForTClass.
 	tClass withTesting.
+	
+	tClassMetrics := builder newTraitNamed: #TClassMetrics.
+	
 	tClassGroup := tClass withGroup.
 
 	tDeclaredException := builder newTraitNamed: #TDeclaredException.
