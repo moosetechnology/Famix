@@ -49,16 +49,6 @@ FamixWithMethodsTest >> testMethodsGroup [
 ]
 
 { #category : #tests }
-FamixWithMethodsTest >> testNumberOfAccessorMethods [
-
-	m1 kind: #getter.
-	self assert: c1 numberOfAccessorMethods equals: 1.
-	c1 numberOfAccessorMethods: 100.
-	self assert: c1 numberOfAccessorMethods equals: 100.
-
-]
-
-{ #category : #tests }
 FamixWithMethodsTest >> testNumberOfConstructorMethods [
 
 	m1 isConstructor: true.
