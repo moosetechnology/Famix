@@ -67,3 +67,19 @@ FamixTClassMetrics >> numberOfMethodsInHierarchy [
 FamixTClassMetrics >> numberOfMethodsInHierarchy: aNumber [
 	self cacheAt: #numberOfMethodsInHierarchy put: aNumber
 ]
+
+{ #category : #metrics }
+FamixTClassMetrics >> numberOfMethodsInherited [
+	<FMProperty: #numberOfMethodsInherited type: #Number>
+	<derived>
+	<FMComment: 'The number of methods in a class inherited from super classes'>	
+
+	^self
+		lookUpPropertyNamed: #numberOfMethodsInherited
+		computedAs: [self inheritedMethods size]
+]
+
+{ #category : #metrics }
+FamixTClassMetrics >> numberOfMethodsInherited: aNumber [
+	self cacheAt: #numberOfMethodsInherited put: aNumber
+]
