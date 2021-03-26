@@ -7,6 +7,7 @@ Trait {
 		'#startLine => FMProperty'
 	],
 	#traits : 'FamixTFileAnchor',
+	#classTraits : 'FamixTFileAnchor classTrait',
 	#category : #'Famix-Traits-SourceAnchor'
 }
 

@@ -1,6 +1,7 @@
 Trait {
 	#name : #FamixTTypedStructure,
 	#traits : 'FamixTTypedEntity',
+	#classTraits : 'FamixTTypedEntity classTrait',
 	#category : #'Famix-Deprecated'
 }
 

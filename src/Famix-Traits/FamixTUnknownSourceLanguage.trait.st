@@ -1,6 +1,7 @@
 Trait {
 	#name : #FamixTUnknownSourceLanguage,
 	#traits : 'FamixTSourceLanguage',
+	#classTraits : 'FamixTSourceLanguage classTrait',
 	#category : #'Famix-Traits-SourceLanguage'
 }
 

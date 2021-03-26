@@ -40,20 +40,3 @@ FAMIXSourceLanguageTest >> testIsUnknown [
 FAMIXSourceLanguageTest >> testName [
 	self assert:  self actualClass new name equals: ''
 ]
-
-{ #category : #tests }
-FAMIXSourceLanguageTest >> testSourcedEntities [
-	| model |
-	model := FAMIXModel new.
-	model
-		importFromMSEStream:
-			'(
-		(FAMIX.CustomSourceLanguage (id: 1) (name ''SomeLanguage''))
-		(FAMIX.Class (id: 2) (name ''ClassWithSource'') (declaredSourceLanguage (ref: 1)))
-		(FAMIX.Class (id: 3) (name ''ClassWithoutSource''))
-	)' readStream.
-	self assert: (model allClasses entityNamed: 'ClassWithSource') declaredSourceLanguage name equals: 'SomeLanguage'.
-	self assert: (model allClasses entityNamed: 'ClassWithSource') declaredSourceLanguage isAttached.
-	self assert: (model allClasses entityNamed: 'ClassWithSource') sourceLanguage name equals: 'SomeLanguage'.
-	self assert: (model allClasses entityNamed: 'ClassWithoutSource') sourceLanguage isNil
-]
