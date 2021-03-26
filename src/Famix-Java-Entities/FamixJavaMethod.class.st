@@ -1,8 +1,8 @@
 Class {
 	#name : #FamixJavaMethod,
 	#superclass : #FamixJavaContainerEntity,
-	#traits : 'FamixTCanBeAbstract + FamixTCanBeFinal + FamixTHasVisibility + FamixTMethod + FamixTWithCaughtExceptions + FamixTWithDeclaredExceptions + FamixTWithThrownExceptions',
-	#classTraits : 'FamixTCanBeAbstract classTrait + FamixTCanBeFinal classTrait + FamixTHasVisibility classTrait + FamixTMethod classTrait + FamixTWithCaughtExceptions classTrait + FamixTWithDeclaredExceptions classTrait + FamixTWithThrownExceptions classTrait',
+	#traits : 'FamixJavaTCanBeSynchronized + FamixTCanBeAbstract + FamixTCanBeFinal + FamixTHasVisibility + FamixTMethod + FamixTWithCaughtExceptions + FamixTWithDeclaredExceptions + FamixTWithThrownExceptions',
+	#classTraits : 'FamixJavaTCanBeSynchronized classTrait + FamixTCanBeAbstract classTrait + FamixTCanBeFinal classTrait + FamixTHasVisibility classTrait + FamixTMethod classTrait + FamixTWithCaughtExceptions classTrait + FamixTWithDeclaredExceptions classTrait + FamixTWithThrownExceptions classTrait',
 	#category : #'Famix-Java-Entities-Entities'
 }
 
@@ -22,14 +22,6 @@ FamixJavaMethod >> accessedAttributes [
 	Used to support the calculation of LCOM"
 	
 	^ (self queryOutgoingAccesses opposites withinParentUsing: FamixTClass) asSet select: #isAttribute
-]
-
-{ #category : #accessing }
-FamixJavaMethod >> category [
-	<FMProperty: #category type: #String>
-	<FMComment: 'Category of the method'>
-	
-	^ self attributeAt: #category ifAbsentPut: [ nil ]
 ]
 
 { #category : #'Famix-Extensions' }

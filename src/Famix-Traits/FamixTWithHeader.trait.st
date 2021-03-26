@@ -3,7 +3,7 @@ Trait {
 	#instVars : [
 		'#header => FMOne type: #FamixTHeader opposite: #headerOwner'
 	],
-	#category : #'Famix-Traits-Header'
+	#category : #'Famix-Traits-Traits'
 }
 
 { #category : #meta }

@@ -1,8 +1,8 @@
 Class {
 	#name : #FamixJavaGlobalVariable,
 	#superclass : #FamixJavaNamedEntity,
-	#traits : 'FamixTGlobalVariable',
-	#classTraits : 'FamixTGlobalVariable classTrait',
+	#traits : 'FamixTGlobalVariable + FamixTInvocationsReceiver',
+	#classTraits : 'FamixTGlobalVariable classTrait + FamixTInvocationsReceiver classTrait',
 	#category : #'Famix-Java-Entities-Entities'
 }
 

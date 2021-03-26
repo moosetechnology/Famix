@@ -7,6 +7,8 @@ name: CI
 on:
   pull_request:
     types: [assigned, opened, synchronize, reopened]
+    branches-ignore:
+      - v1
 
 jobs:
   build:
@@ -15,7 +17,7 @@ jobs:
       PROJECT_NAME: ${{ matrix.smalltalk }}-Famix
     strategy:
       matrix:
-        smalltalk: [ Pharo64-9.0, Pharo64-8.0 ]
+        smalltalk: [ Pharo64-9.0 ]
     name: ${{ matrix.smalltalk }}
     steps:
       - uses: actions/checkout@v2

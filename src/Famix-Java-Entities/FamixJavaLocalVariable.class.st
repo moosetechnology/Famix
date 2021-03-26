@@ -1,8 +1,8 @@
 Class {
 	#name : #FamixJavaLocalVariable,
 	#superclass : #FamixJavaNamedEntity,
-	#traits : 'FamixTCanBeFinal + FamixTLocalVariable',
-	#classTraits : 'FamixTCanBeFinal classTrait + FamixTLocalVariable classTrait',
+	#traits : 'FamixTCanBeFinal + FamixTInvocationsReceiver + FamixTLocalVariable',
+	#classTraits : 'FamixTCanBeFinal classTrait + FamixTInvocationsReceiver classTrait + FamixTLocalVariable classTrait',
 	#category : #'Famix-Java-Entities-Entities'
 }
 

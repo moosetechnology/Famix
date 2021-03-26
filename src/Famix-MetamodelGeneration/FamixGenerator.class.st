@@ -123,7 +123,8 @@ Class {
 		'tClassWithVisibility',
 		'tCanBeFinal',
 		'tCanBeAbstract',
-		'tCanBeClassSide'
+		'tCanBeClassSide',
+		'tClassMetrics'
 	],
 	#category : #'Famix-MetamodelGeneration'
 }
@@ -1019,7 +1020,6 @@ FamixGenerator >> defineHierarchy [
 	
 	tStructuralEntity --|> tNamedEntity.
 	tStructuralEntity --|> tAccessible.
-	tStructuralEntity --|> tInvocationsReceiver.
 	tStructuralEntity --|> tTypedEntity.
  
 	tSourceEntity --|> tWithSourceLanguage.
@@ -1473,6 +1473,9 @@ FamixGenerator >> defineTraits [
 	tClass := builder newTraitNamed: #TClass.
 	tClass comment: self commentForTClass.
 	tClass withTesting.
+	
+	tClassMetrics := builder newTraitNamed: #TClassMetrics.
+	
 	tClassGroup := tClass withGroup.
 
 	tDeclaredException := builder newTraitNamed: #TDeclaredException.
@@ -1680,7 +1683,7 @@ FamixGenerator >> defineTraits [
 	tWithComments := builder newTraitNamed: #TWithComments.
 	tWithComments comment: self commentForTWithComments.
 
-	tWithCompilationUnit := builder newTraitNamed: #TWithCompilationUnit.
+	tWithCompilationUnit := builder newTraitNamed: #TWithCompilationUnits.
 	tWithCompilationUnit comment: self commentForTWithCompilationUnit.
 
 	tWithDeclaredExceptions := builder newTraitNamed: #TWithDeclaredExceptions.
@@ -1743,7 +1746,7 @@ FamixGenerator >> defineTraits [
 	tHasSignature := builder newTraitNamed: #THasSignature.
 	tHasSignature comment: self commentForTHasSignature.
 
-	tWithSourceLanguage := builder newTraitNamed: #TWithSourceLanguage.
+	tWithSourceLanguage := builder newTraitNamed: #TWithSourceLanguages.
 	tWithSourceLanguage comment: self commentForTWithSourceLanguage.
 
 	tWithTemplates := builder newTraitNamed: #TWithTemplates.

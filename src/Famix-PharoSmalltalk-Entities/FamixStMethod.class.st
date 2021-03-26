@@ -27,6 +27,14 @@ FamixStMethod >> accessedAttributes [
 	^ (self queryOutgoingAccesses opposites withinParentUsing: FamixTClass) asSet select: #isAttribute
 ]
 
+{ #category : #accessing }
+FamixStMethod >> category [
+	<FMProperty: #category type: #String>
+	<FMComment: 'Category of the method'>
+	
+	^ self attributeAt: #category ifAbsentPut: [ nil ]
+]
+
 { #category : #'Famix-Extensions-metrics-support' }
 FamixStMethod >> category: aString [
 

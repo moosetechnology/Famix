@@ -1,8 +1,8 @@
 Class {
 	#name : #FamixStAttribute,
 	#superclass : #FamixStNamedEntity,
-	#traits : 'FamixTAttribute + FamixTWithClassScope',
-	#classTraits : 'FamixTAttribute classTrait + FamixTWithClassScope classTrait',
+	#traits : 'FamixTAttribute + FamixTInvocationsReceiver + FamixTWithClassScope',
+	#classTraits : 'FamixTAttribute classTrait + FamixTInvocationsReceiver classTrait + FamixTWithClassScope classTrait',
 	#category : #'Famix-PharoSmalltalk-Entities-Entities'
 }
 

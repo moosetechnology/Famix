@@ -1,8 +1,8 @@
 Class {
 	#name : #FAMIXClass,
 	#superclass : #FAMIXType,
-	#traits : 'FamixTClass + FamixTWithExceptions',
-	#classTraits : 'FamixTClass classTrait + FamixTWithExceptions classTrait',
+	#traits : 'FamixTCanBeClassSide + FamixTClass + FamixTWithExceptions',
+	#classTraits : 'FamixTCanBeClassSide classTrait + FamixTClass classTrait + FamixTWithExceptions classTrait',
 	#instVars : [
 		'#isInterface'
 	],
