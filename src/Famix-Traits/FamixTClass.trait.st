@@ -116,22 +116,6 @@ FamixTClass >> numberOfAttributesInherited: aNumber [
 ]
 
 { #category : #metrics }
-FamixTClass >> numberOfMethodsInherited [
-	<FMProperty: #numberOfMethodsInherited type: #Number>
-	<derived>
-	<FMComment: 'The number of methods in a class inherited from super classes'>	
-
-	^self
-		lookUpPropertyNamed: #numberOfMethodsInherited
-		computedAs: [self inheritedMethods size]
-]
-
-{ #category : #metrics }
-FamixTClass >> numberOfMethodsInherited: aNumber [
-	self cacheAt: #numberOfMethodsInherited put: aNumber
-]
-
-{ #category : #metrics }
 FamixTClass >> numberOfMethodsOverriden [
 
 	<FMProperty: #numberOfMethodsOverriden type: #Number>
