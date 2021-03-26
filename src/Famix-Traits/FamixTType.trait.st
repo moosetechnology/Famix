@@ -12,6 +12,7 @@ Trait {
 		'#typedEntities => FMMany type: #FamixTTypedEntity opposite: #declaredType'
 	],
 	#traits : 'FamixTNamedEntity + FamixTReferenceable',
+	#classTraits : 'FamixTNamedEntity classTrait + FamixTReferenceable classTrait',
 	#category : #'Famix-Traits-Type'
 }
 
@@ -82,22 +83,6 @@ FamixTType >> numberOfAccessesToForeignData [
 { #category : #metrics }
 FamixTType >> numberOfAccessesToForeignData: aNumber [
 	self cacheAt: #numberOfAccessesToForeignData put: aNumber
-]
-
-{ #category : #metrics }
-FamixTType >> numberOfDuplicatedLinesOfCodeInternally [
-	<FMProperty: #numberOfDuplicatedLinesOfCodeInternally type: #Number>
-	<derived>
-	<FMComment: 'The number of duplicated lines of code internally'>		
-
-	^self
-		lookUpPropertyNamed: #numberOfDuplicatedLinesOfCodeInternally
-		computedAs: [self notExistentMetricValue]
-]
-
-{ #category : #metrics }
-FamixTType >> numberOfDuplicatedLinesOfCodeInternally: aNumber [
-	self cacheAt: #numberOfDuplicatedLinesOfCodeInternally put: aNumber
 ]
 
 { #category : #testing }
