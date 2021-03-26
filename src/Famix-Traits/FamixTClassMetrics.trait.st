@@ -101,3 +101,16 @@ FamixTClassMetrics >> numberOfMethodsOverriden [
 FamixTClassMetrics >> numberOfMethodsOverriden: aNumber [
 	self cacheAt: #numberOfMethodsOverriden put: aNumber
 ]
+
+{ #category : #metrics }
+FamixTClassMetrics >> totalNumberOfSubclasses [
+	<FMProperty: #totalNumberOfSubclasses type: #Number>
+	<derived>
+	<FMComment: 'The total number of subclasses of a class'>
+	^ self lookUpPropertyNamed: #totalNumberOfSubclasses computedAs: [ self subclassHierarchyGroup size ]
+]
+
+{ #category : #metrics }
+FamixTClassMetrics >> totalNumberOfSubclasses: aNumber [
+	self cacheAt: #totalNumberOfSubclasses put: aNumber
+]

@@ -202,19 +202,6 @@ FamixTWithInheritances >> superclassHierarchyGroup [
 		withDescription: 'All superclasses of ' , self mooseName
 ]
 
-{ #category : #metrics }
-FamixTWithInheritances >> totalNumberOfSubclasses [
-	<FMProperty: #totalNumberOfSubclasses type: #Number>
-	<derived>
-	<FMComment: 'The total number of subclasses of a class'>
-	^ self lookUpPropertyNamed: #totalNumberOfSubclasses computedAs: [ self subclassHierarchyGroup size ]
-]
-
-{ #category : #metrics }
-FamixTWithInheritances >> totalNumberOfSubclasses: aNumber [
-	self cacheAt: #totalNumberOfSubclasses put: aNumber
-]
-
 { #category : #enumerating }
 FamixTWithInheritances >> withSubclassHierarchy [
 	^ self subclassHierarchy 
