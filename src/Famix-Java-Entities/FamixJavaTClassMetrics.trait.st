@@ -31,3 +31,27 @@ FamixJavaTClassMetrics >> numberOfAccessorMethods [
 FamixJavaTClassMetrics >> numberOfAccessorMethods: aNumber [
 	self cacheAt: #numberOfAccessorMethods put: aNumber
 ]
+
+{ #category : #metrics }
+FamixJavaTClassMetrics >> numberOfConstructorMethods [
+	<FMProperty: #numberOfConstructorMethods type: #Number>
+	<derived>
+	<FMComment: 'The number of constructor methods in a class'>
+	^ self
+		lookUpPropertyNamed: #numberOfConstructorMethods
+		computedAs: [ 
+			| nc |
+			nc := 0.
+			self methods
+				do: [ :method | 
+					method isConstructor
+						ifNotNil: [ 
+							method isConstructor
+								ifTrue: [ nc := 1 ] ] ].
+			nc ]
+]
+
+{ #category : #metrics }
+FamixJavaTClassMetrics >> numberOfConstructorMethods: aNumber [
+	self cacheAt: #numberOfConstructorMethods put: aNumber
+]

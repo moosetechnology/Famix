@@ -124,7 +124,6 @@ FamixPropertiesTest >> testClassMethods [
 	self
 		assert: (self nodeClass propertyNamed: #numberOfMethodsAdded)
 		equals: (self nodeClass propertyNamed: #numberOfMethods).
-	self assert: (self nodeClass propertyNamed: #numberOfConstructorMethods) equals: 0.
 	self
 		assert: (self workstationClass propertyNamed: #numberOfMethodsInherited)
 		equals: (self nodeClass propertyNamed: #numberOfMethods) + (self nodeClass propertyNamed: #numberOfMethodsInherited).
