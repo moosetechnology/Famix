@@ -59,30 +59,6 @@ FamixTWithMethods >> numberOfAbstractMethods: aNumber [
 ]
 
 { #category : #metrics }
-FamixTWithMethods >> numberOfConstructorMethods [
-	<FMProperty: #numberOfConstructorMethods type: #Number>
-	<derived>
-	<FMComment: 'The number of constructor methods in a class'>
-	^ self
-		lookUpPropertyNamed: #numberOfConstructorMethods
-		computedAs: [ 
-			| nc |
-			nc := 0.
-			self methods
-				do: [ :method | 
-					method isConstructor
-						ifNotNil: [ 
-							method isConstructor
-								ifTrue: [ nc := 1 ] ] ].
-			nc ]
-]
-
-{ #category : #metrics }
-FamixTWithMethods >> numberOfConstructorMethods: aNumber [
-	self cacheAt: #numberOfConstructorMethods put: aNumber
-]
-
-{ #category : #metrics }
 FamixTWithMethods >> numberOfMessageSends [
 	<FMProperty: #numberOfMessageSends type: #Number>
 	<derived>
