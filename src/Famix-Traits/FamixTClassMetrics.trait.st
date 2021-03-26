@@ -13,6 +13,22 @@ FamixTClassMetrics classSide >> annotation [
 ]
 
 { #category : #metrics }
+FamixTClassMetrics >> numberOfAttributesInherited [
+	<FMProperty: #numberOfAttributesInherited type: #Number>
+	<derived>
+	<FMComment: 'The number of attributes in a class inherited from super classes'>	
+	
+	^self
+		lookUpPropertyNamed: #numberOfAttributesInherited
+		computedAs: [self inheritedAttributes size]
+]
+
+{ #category : #metrics }
+FamixTClassMetrics >> numberOfAttributesInherited: aNumber [
+	self cacheAt: #numberOfAttributesInherited put: aNumber
+]
+
+{ #category : #metrics }
 FamixTClassMetrics >> numberOfLocallyDefinedMethods [
 
 	<FMProperty: #numberOfLocallyDefinedMethods type: #Number>

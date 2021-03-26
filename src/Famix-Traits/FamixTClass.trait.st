@@ -100,22 +100,6 @@ FamixTClass >> isTestCase: aBoolean [
 ]
 
 { #category : #metrics }
-FamixTClass >> numberOfAttributesInherited [
-	<FMProperty: #numberOfAttributesInherited type: #Number>
-	<derived>
-	<FMComment: 'The number of attributes in a class inherited from super classes'>	
-	
-	^self
-		lookUpPropertyNamed: #numberOfAttributesInherited
-		computedAs: [self inheritedAttributes size]
-]
-
-{ #category : #metrics }
-FamixTClass >> numberOfAttributesInherited: aNumber [
-	self cacheAt: #numberOfAttributesInherited put: aNumber
-]
-
-{ #category : #metrics }
 FamixTClass >> weightOfAClass [
 	<FMProperty: #weightOfAClass type: #Number>
 	<derived>
