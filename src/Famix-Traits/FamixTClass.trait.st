@@ -8,6 +8,7 @@ A class is typically scoped in a namespace. To model nested or anonymous classes
 Trait {
 	#name : #FamixTClass,
 	#traits : 'FamixTInvocationsReceiver + FamixTPackageable + (FamixTType - {#queryStaticIncomingAssociations. #queryStaticOutgoingAssociations}) + FamixTWithAttributes + FamixTWithComments + FamixTWithInheritances + FamixTWithMethods + TOODependencyQueries',
+	#classTraits : 'FamixTInvocationsReceiver classTrait + FamixTPackageable classTrait + FamixTType classTrait + FamixTWithAttributes classTrait + FamixTWithComments classTrait + FamixTWithInheritances classTrait + FamixTWithMethods classTrait + TOODependencyQueries classTrait',
 	#category : #'Famix-Traits-Class'
 }
 
@@ -115,22 +116,6 @@ FamixTClass >> numberOfAttributesInherited: aNumber [
 ]
 
 { #category : #metrics }
-FamixTClass >> numberOfMethodsAdded [
-	<FMProperty: #numberOfMethodsAdded type: #Number>
-	<derived>
-	<FMComment: 'The number of methods in a class added with respect to super classes'>	
-	
-	^self
-		lookUpPropertyNamed: #numberOfMethodsAdded
-		computedAs: [self addedMethods size]
-]
-
-{ #category : #metrics }
-FamixTClass >> numberOfMethodsAdded: aNumber [
-	self cacheAt: #numberOfMethodsAdded put: aNumber
-]
-
-{ #category : #metrics }
 FamixTClass >> numberOfMethodsInHierarchy [
 	<FMProperty: #numberOfMethodsInHierarchy type: #Number>
 	<derived>
@@ -166,13 +151,15 @@ FamixTClass >> numberOfMethodsInherited: aNumber [
 
 { #category : #metrics }
 FamixTClass >> numberOfMethodsOverriden [
+
 	<FMProperty: #numberOfMethodsOverriden type: #Number>
 	<derived>
-	<FMComment: 'The number of methods in a class overriden with respect to super classes'>
-			
-	^self
-		lookUpPropertyNamed: #numberOfMethodsOverriden
-		computedAs: [self numberOfMethods - self numberOfMethodsAdded]
+	<FMComment:
+	'The number of methods in a class overriden with respect to super classes'>
+	^ self
+		  lookUpPropertyNamed: #numberOfMethodsOverriden
+		  computedAs: [ 
+		  self numberOfMethods - self numberOfLocallyDefinedMethods ]
 ]
 
 { #category : #metrics }

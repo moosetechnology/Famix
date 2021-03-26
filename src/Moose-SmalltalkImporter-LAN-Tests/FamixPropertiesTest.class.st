@@ -122,16 +122,16 @@ FamixPropertiesTest >> testClassMethods [
 	self assert: (self nodeClass propertyNamed: #numberOfMethodsInherited) equals: 0.
 	self assert: (self nodeClass propertyNamed: #numberOfMethodsOverriden) equals: 0.
 	self
-		assert: (self nodeClass propertyNamed: #numberOfMethodsAdded)
+		assert: (self nodeClass propertyNamed: #numberOfLocallyDefinedMethods)
 		equals: (self nodeClass propertyNamed: #numberOfMethods).
 	self
 		assert: (self workstationClass propertyNamed: #numberOfMethodsInherited)
 		equals: (self nodeClass propertyNamed: #numberOfMethods) + (self nodeClass propertyNamed: #numberOfMethodsInherited).
-	self assert: (self workstationClass propertyNamed: #numberOfMethodsAdded) equals: 1.
+	self assert: (self workstationClass propertyNamed: #numberOfLocallyDefinedMethods) equals: 1.
 	self assert: (self workstationClass propertyNamed: #numberOfMethodsOverriden) equals: 3.
 	self
 		assert:
-			(self workstationClass propertyNamed: #numberOfMethodsAdded)
+			(self workstationClass propertyNamed: #numberOfLocallyDefinedMethods)
 				+ (self workstationClass propertyNamed: #numberOfMethodsOverriden)
 		equals: (self workstationClass propertyNamed: #numberOfMethods)
 ]
