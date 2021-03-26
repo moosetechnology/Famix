@@ -49,3 +49,21 @@ FamixTClassMetrics >> numberOfMethodsAdded: aNumber [
 			-> '`@receiver numberOfLocallyDefinedMethods: `@arg'.
 	^ self numberOfLocallyDefinedMethods: aNumber
 ]
+
+{ #category : #metrics }
+FamixTClassMetrics >> numberOfMethodsInHierarchy [
+	<FMProperty: #numberOfMethodsInHierarchy type: #Number>
+	<derived>
+	<FMComment: 'The number of methods of a class included the inherited ones'>	
+	
+	| totNom |
+	totNom := self methods size.
+	self superclassHierarchyGroup
+		do: [:aClass | totNom := totNom + aClass methods size].
+	^totNom
+]
+
+{ #category : #metrics }
+FamixTClassMetrics >> numberOfMethodsInHierarchy: aNumber [
+	self cacheAt: #numberOfMethodsInHierarchy put: aNumber
+]

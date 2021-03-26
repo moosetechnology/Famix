@@ -116,24 +116,6 @@ FamixTClass >> numberOfAttributesInherited: aNumber [
 ]
 
 { #category : #metrics }
-FamixTClass >> numberOfMethodsInHierarchy [
-	<FMProperty: #numberOfMethodsInHierarchy type: #Number>
-	<derived>
-	<FMComment: 'The number of methods of a class included the inherited ones'>	
-	
-	| totNom |
-	totNom := self methods size.
-	self superclassHierarchyGroup
-		do: [:aClass | totNom := totNom + aClass methods size].
-	^totNom
-]
-
-{ #category : #metrics }
-FamixTClass >> numberOfMethodsInHierarchy: aNumber [
-	self cacheAt: #numberOfMethodsInHierarchy put: aNumber
-]
-
-{ #category : #metrics }
 FamixTClass >> numberOfMethodsInherited [
 	<FMProperty: #numberOfMethodsInherited type: #Number>
 	<derived>
