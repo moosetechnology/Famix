@@ -1,6 +1,7 @@
 Trait {
 	#name : #FamixTNamed,
 	#traits : 'FamixTNamedEntity',
+	#classTraits : 'FamixTNamedEntity classTrait',
 	#category : #'Famix-Deprecated'
 }
 

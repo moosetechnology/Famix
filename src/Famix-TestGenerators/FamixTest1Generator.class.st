@@ -79,11 +79,15 @@ FamixTest1Generator >> defineHierarchy [
 
 	association --|> #TAssociation.
 
-	attribute --|> namedEntity.
-	attribute --|> #TAttribute.
+	attribute
+		--|> namedEntity ;
+		--|> #TWithSourceLanguages ;
+		--|> #TAttribute.
 
-	class --|> namedEntity.
-	class --|> #TClass.
+	class
+		--|> namedEntity ;
+		--|> #TWithSourceLanguages ;
+		--|> #TClass.
 
 	file --|> namedEntity.
 	file --|> #TFile.
@@ -97,13 +101,17 @@ FamixTest1Generator >> defineHierarchy [
 	indexedFileAnchor --|> sourceAnchor.
 	indexedFileAnchor --|> #TIndexedFileNavigation.
 
-	method --|> namedEntity.
-	method --|> #TMethod.
+	method
+		--|> namedEntity ;
+		--|> #TWithSourceLanguages ;
+		--|> #TMethod.
 
 	multipleFileAnchor --|> sourceAnchor.
 	multipleFileAnchor --|> #TMultipleFileAnchor.
 
-	sourcedEntity --|> #TWithFiles
+	sourcedEntity
+		--|> #TWithFiles ;
+		--|> #TWithSourceLanguages.
 ]
 
 { #category : #definition }
