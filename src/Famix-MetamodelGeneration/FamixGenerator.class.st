@@ -1022,7 +1022,7 @@ FamixGenerator >> defineHierarchy [
 	tStructuralEntity --|> tAccessible.
 	tStructuralEntity --|> tTypedEntity.
  
-	tSourceEntity --|> tWithSourceLanguage.
+	"tSourceEntity --|> tWithSourceLanguage."
 	tSourceEntity --|> tWithComments.
 
 	tTraitUsage --|> tAssociation.

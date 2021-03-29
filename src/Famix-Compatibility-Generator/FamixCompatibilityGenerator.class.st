@@ -430,7 +430,9 @@ FamixCompatibilityGenerator >> defineHierarchy [
 	multipleFileAnchor --|> sourceAnchor.
 	multipleFileAnchor --|> #TMultipleFileAnchor.
 
-	sourcedEntity --|> #TWithFiles
+	sourcedEntity
+		--|> #TWithSourceLanguages ;
+		--|> #TWithFiles
 	
 
 ]
