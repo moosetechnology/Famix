@@ -215,13 +215,17 @@ MooseModel class >> importMetamodelFrom: aStream [
 MooseModel class >> menuCommandOn: aBuilder [
 	<worldMenu>
 	(aBuilder item: #Moose)
-		order: 6.0;
-		withSeparatorAfter;
-		icon: MooseIcons mooseIcon;
-		with: [ (aBuilder item: #'Reset metamodels additional properties')
-				order: 50;
-				action: [ self resetMetamodelsAdditionalProperties ];
-				withSeparatorAfter ]
+		order: 6;
+		icon: MooseIcons mooseIcon.
+	(aBuilder item: self mooseDeveloperToolsMenu)
+		order: 50;
+		parent: #Moose ;
+		label: 'Moose developper tools'.
+ 	(aBuilder item: #'Reset metamodels additional properties')
+		order: 50;
+		parent: (self mooseDeveloperToolsMenu) ;
+		action: [ self resetMetamodelsAdditionalProperties ] ;
+		withSeparatorAfter
 ]
 
 { #category : #meta }
@@ -229,6 +233,11 @@ MooseModel class >> metamodel [
 	self flag: #TODO. "The next line is a hack to not break everything in Moose. It should be removed later."
 	self = MooseModel ifTrue: [ ^ FAMIXModel metamodel ].
 	^ metamodel ifNil: [ self resetMetamodel ]
+]
+
+{ #category : #'world menu' }
+MooseModel class >> mooseDeveloperToolsMenu [
+	^#MooseDevelopperTools
 ]
 
 { #category : #'instance creation' }
