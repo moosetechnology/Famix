@@ -111,11 +111,11 @@ FamixMetamodelGenerator class >> menuCommandOn: aBuilder [
 	<worldMenu>
 	(aBuilder item: #'Regenerate all metamodels')
 		order: 40;
-		parent: #Moose;
+		parent: (MooseModel mooseDeveloperToolsMenu) ;
 		action: [ self generateAllMetamodels ].
 	(aBuilder item: #'Reset metamodels')
 		order: 45;
-		parent: #Moose;
+		parent: (MooseModel mooseDeveloperToolsMenu) ;
 		action: [ self resetMetamodels ]
 ]
 
