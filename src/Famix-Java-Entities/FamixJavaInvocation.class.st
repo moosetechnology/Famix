@@ -15,6 +15,17 @@ FamixJavaInvocation class >> annotation [
 	^self
 ]
 
+{ #category : #printing }
+FamixJavaInvocation >> displayStringOn: aStream [
+	self sender ifNotNil: [ self source displayStringOn: aStream ].
+	aStream nextPutAll: ' -> '.
+	self receiver ifNotNil: [ aStream nextPutAll: self receiver name ].
+	aStream nextPut: $#.
+	aStream nextPutAll: self signature.
+	aStream nextPutAll: ' -> '.
+	self candidates size = 1 ifTrue: [ self anyCandidate displayStringOn: aStream ]
+]
+
 { #category : #'instance creation' }
 FamixJavaInvocation >> getReceivingFAMIXClass [
 	| tmpReceiver |

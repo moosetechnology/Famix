@@ -70,6 +70,14 @@ FamixTAssociation >> asAssociationTo: anEntity [
 ]
 
 { #category : #printing }
+FamixTAssociation >> displayStringOn: aStream [
+
+	self source displayStringOn: aStream.
+	aStream nextPutAll: ' -> '.
+	self target displayStringOn: aStream
+]
+
+{ #category : #printing }
 FamixTAssociation >> gtDisplayOn: aStream [
 	self source gtDisplayOn: aStream.
 	aStream nextPutAll: ' -> '.
