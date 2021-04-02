@@ -282,6 +282,11 @@ MooseObject >> description: text [
 	self attributeAt: #privateDescription put: text
 ]
 
+{ #category : #printing }
+MooseObject >> displayStringOn: aStream [ 
+	self mooseNameOn: aStream
+]
+
 { #category : #accessing }
 MooseObject >> entityAttributes [
 	^ entityAttributes
