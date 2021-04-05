@@ -42,6 +42,21 @@ MooseModel class >> defaultPackagesToProcessWith: aCollectionOfPackages [
 				ifNotNil: [ :manifest | manifest shouldBeIncludedByDefaultInMetamodelsWith: aCollectionOfPackages ] ]
 ]
 
+{ #category : #'world menu' }
+MooseModel class >> developerTool: aClass menuCommandOn: aBuilder [
+	^(aBuilder item: aClass menuLabel)
+		parent: MooseModel developerToolsMenuLabel ;
+		label: aClass menuLabel ;
+		icon: (MooseIcons mooseIcon scaledToSize: 16@16) ;
+		action:[ aClass open ] ;
+		yourself
+]
+
+{ #category : #'world menu' }
+MooseModel class >> developerToolsMenuLabel [
+	^#MooseDevelopperTools
+]
+
 { #category : #'import-export' }
 MooseModel class >> export: aModel to: aStream [ 
 	aModel exportTo: aStream
@@ -217,15 +232,26 @@ MooseModel class >> menuCommandOn: aBuilder [
 	(aBuilder item: #Moose)
 		order: 6;
 		icon: MooseIcons mooseIcon.
-	(aBuilder item: self mooseDeveloperToolsMenu)
-		order: 50;
+
+	(aBuilder item: self developerToolsMenuLabel)
+		order: 30;
 		parent: #Moose ;
-		label: 'Moose developper tools'.
+		label: 'Developer tools'.
+
+	"there are other entries before these ones in #developerToolsMenuLabel"
+	(aBuilder item: #'Regenerate all metamodels')
+		order: 40;
+		parent: (self developerToolsMenuLabel) ;
+		action: [ FamixMetamodelGenerator generateAllMetamodels ].
+	(aBuilder item: #'Reset metamodels')
+		order: 45;
+		parent: (self developerToolsMenuLabel) ;
+		action: [ self resetMetamodels ].
  	(aBuilder item: #'Reset metamodels additional properties')
 		order: 50;
-		parent: (self mooseDeveloperToolsMenu) ;
-		action: [ self resetMetamodelsAdditionalProperties ] ;
-		withSeparatorAfter
+		parent: (self developerToolsMenuLabel) ;
+		action: [ self resetMetamodelsAdditionalProperties ].
+
 ]
 
 { #category : #meta }
@@ -233,11 +259,6 @@ MooseModel class >> metamodel [
 	self flag: #TODO. "The next line is a hack to not break everything in Moose. It should be removed later."
 	self = MooseModel ifTrue: [ ^ FAMIXModel metamodel ].
 	^ metamodel ifNil: [ self resetMetamodel ]
-]
-
-{ #category : #'world menu' }
-MooseModel class >> mooseDeveloperToolsMenu [
-	^#MooseDevelopperTools
 ]
 
 { #category : #'instance creation' }
@@ -291,7 +312,7 @@ MooseModel class >> resetMetamodels [
 	self allSubclassesDo: #resetMetamodel
 ]
 
-{ #category : #accessing }
+{ #category : #meta }
 MooseModel class >> resetMetamodelsAdditionalProperties [
 	<script>
 	self allSubclassesDo: [ :each | each metamodel cleanAdditionalProperties ]

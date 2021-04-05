@@ -106,19 +106,6 @@ FamixMetamodelGenerator class >> isRealMetamodel [
 	^ self isAbstract not
 ]
 
-{ #category : #'world menu' }
-FamixMetamodelGenerator class >> menuCommandOn: aBuilder [
-	<worldMenu>
-	(aBuilder item: #'Regenerate all metamodels')
-		order: 40;
-		parent: (MooseModel mooseDeveloperToolsMenu) ;
-		action: [ self generateAllMetamodels ].
-	(aBuilder item: #'Reset metamodels')
-		order: 45;
-		parent: (MooseModel mooseDeveloperToolsMenu) ;
-		action: [ self resetMetamodels ]
-]
-
 { #category : #generation }
 FamixMetamodelGenerator class >> metamodelsToGenerate [
 	"We add she submetamodels before the MM composing them because if we do the other way around it will cause trouble when we regenerate all because it will remove the glue added by the composed MM."
