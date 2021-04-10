@@ -122,6 +122,19 @@ MooseGroup >> mooseDescription [
 ]
 
 { #category : #accessing }
+MooseGroup >> mooseNameOn: aStream [
+	"Hook to customize the rendered text of an entity. Do not specialize mooseName, but change/specialize this method if necessary."
+	aStream
+		nextPutAll: self name ;
+		nextPut: $( ;
+		nextPutAll: self entities size asString ;
+		nextPut: Character space ;
+		nextPutAll: self entities commonSuperclass name ;
+		nextPut: $)
+		
+]
+
+{ #category : #accessing }
 MooseGroup >> name [
 	^ self attributeAt: #privateDescription ifAbsent: [ #group ]
 ]
