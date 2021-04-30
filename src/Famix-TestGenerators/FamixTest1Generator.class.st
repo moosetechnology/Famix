@@ -104,7 +104,8 @@ FamixTest1Generator >> defineHierarchy [
 	method
 		--|> namedEntity ;
 		--|> #TWithSourceLanguages ;
-		--|> #TMethod.
+		--|> #TMethod; 
+		--|> #THasKind.
 
 	multipleFileAnchor --|> sourceAnchor.
 	multipleFileAnchor --|> #TMultipleFileAnchor.

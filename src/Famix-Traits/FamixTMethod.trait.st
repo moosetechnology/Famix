@@ -6,11 +6,10 @@ A FAMIXMethod is always contained in a parentType.
 Trait {
 	#name : #FamixTMethod,
 	#instVars : [
-		'#kind => FMProperty',
 		'#parentType => FMOne type: #FamixTWithMethods opposite: #methods'
 	],
-	#traits : '(FamixTCanBeClassSide + FamixTHasClassScope + FamixTHasSignature + FamixTInvocable + FamixTMethodMetrics + FamixTNamedEntity + FamixTTypedEntity + FamixTWithImplicitVariables + FamixTWithLocalVariables + FamixTWithParameters + FamixTWithStatements + TOODependencyQueries withPrecedenceOf: FamixTWithStatements)',
-	#classTraits : '(FamixTCanBeClassSide classTrait + FamixTHasClassScope classTrait + FamixTHasSignature classTrait + FamixTInvocable classTrait + FamixTMethodMetrics classTrait + FamixTNamedEntity classTrait + FamixTTypedEntity classTrait + FamixTWithImplicitVariables classTrait + FamixTWithLocalVariables classTrait + FamixTWithParameters classTrait + FamixTWithStatements classTrait + TOODependencyQueries classTrait withPrecedenceOf: FamixTWithStatements classTrait)',
+	#traits : '(FamixTCanBeClassSide + FamixTHasClassScope + FamixTHasSignature + FamixTInvocable + FamixTMethodMetrics + FamixTNamedEntity + FamixTTypedEntity + FamixTWithClassScope + FamixTWithImplicitVariables + FamixTWithLocalVariables + FamixTWithParameters + FamixTWithStatements + TOODependencyQueries withPrecedenceOf: FamixTWithStatements)',
+	#classTraits : '(FamixTCanBeClassSide classTrait + FamixTHasClassScope classTrait + FamixTHasSignature classTrait + FamixTInvocable classTrait + FamixTMethodMetrics classTrait + FamixTNamedEntity classTrait + FamixTTypedEntity classTrait + FamixTWithClassScope classTrait + FamixTWithImplicitVariables classTrait + FamixTWithLocalVariables classTrait + FamixTWithParameters classTrait + FamixTWithStatements classTrait + TOODependencyQueries classTrait withPrecedenceOf: FamixTWithStatements classTrait)',
 	#category : #'Famix-Traits-Behavioral'
 }
 
@@ -31,72 +30,10 @@ FamixTMethod classSide >> annotationFamixMethodGroup [
 ]
 
 { #category : #testing }
-FamixTMethod >> isConstant [
-	<FMProperty: #isConstant type: #Boolean>
-	<derived>
-	<FMComment: 'True if the method simply returns a constant'>
-	^#constant = self kind
-]
-
-{ #category : #testing }
-FamixTMethod >> isConstructor [
-	<FMProperty: #isConstructor type: #Boolean>
-	<derived>
-	<FMComment: 'True if the method is a constructor of the class'>
-	^ #constructor = self kind or: [ self cacheAt: #isConstructor ifAbsent: [ false ] ]
-]
-
-{ #category : #testing }
-FamixTMethod >> isConstructor: aBoolean [
-	aBoolean 
-		ifTrue: [ self kind: #constructor ]
-		ifFalse: [ 
-			self isConstructor ifTrue: [ self kind: nil ] ]
-]
-
-{ #category : #testing }
-FamixTMethod >> isGetter [
-	<FMProperty: #isGetter type: #Boolean>
-	<derived>
-	<FMComment: 'True if the method is a getter of an attribute'>
-	
-	^#getter = self kind
-]
-
-{ #category : #testing }
 FamixTMethod >> isMethod [
 
 	<generated>
 	^ true
-]
-
-{ #category : #testing }
-FamixTMethod >> isPureAccessor [
-	^ self isGetter or: [ self isSetter or: [ self cacheAt: #isPureAccessor ifAbsent: [ false ] ] ]
-]
-
-{ #category : #testing }
-FamixTMethod >> isSetter [
-	<FMProperty: #isSetter type: #Boolean>
-	<derived>
-	<FMComment: 'True if the method is a setter on an attribute'>
-
-	^#setter = self kind
-]
-
-{ #category : #accessing }
-FamixTMethod >> kind [
-
-	<FMProperty: #kind type: #String>
-	<generated>
-	<FMComment: 'Tag indicating a setter, getter, constant, constructor, or abstract method'>
-	^ kind
-]
-
-{ #category : #accessing }
-FamixTMethod >> kind: anObject [
-	<generated>
-	kind := anObject
 ]
 
 { #category : #printing }

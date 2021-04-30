@@ -11,7 +11,7 @@ OldFamixTest1TestIssue19 >> testNumberOfAccessorMethods [
 	"https://github.com/pavel-krivanek/Moose/issues/19"
 	
 	self assert: c1 numberOfAccessorMethods equals: 0.
-	m1 kind: #getter.
+	m1 beGetter.
 	self assert: c1 numberOfAccessorMethods equals: 1.
 
 ]
