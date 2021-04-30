@@ -69,7 +69,6 @@ Class {
 		'tWithAttributes',
 		'tWithCaughtExceptions',
 		'tWithComments',
-		'tWithCompilationUnit',
 		'tWithDeclaredExceptions',
 		'tWithDereferencedInvocations',
 		'tWithEnumValues',
@@ -124,7 +123,8 @@ Class {
 		'tCanBeClassSide',
 		'tClassMetrics',
 		'tHasClassScope',
-		'tWithSourceLanguages'
+		'tWithSourceLanguages',
+		'tWithCompilationUnits'
 	],
 	#category : #'Famix-MetamodelGeneration'
 }
@@ -1192,7 +1192,7 @@ FamixGenerator >> defineRelations [
 	((tCompilationUnit property: #compilationUnitOwner)
 			comment: 'The compilation unit that defines this module')
 		-
-	((tWithCompilationUnit property: #compilationUnit)).
+	((tWithCompilationUnits property: #compilationUnit)).
 
 	((tDeclaredException property: #definingEntity))
 		*-
@@ -1683,8 +1683,8 @@ FamixGenerator >> defineTraits [
 	tWithComments := builder newTraitNamed: #TWithComments.
 	tWithComments comment: self commentForTWithComments.
 
-	tWithCompilationUnit := builder newTraitNamed: #TWithCompilationUnits.
-	tWithCompilationUnit comment: self commentForTWithCompilationUnit.
+	tWithCompilationUnits := builder newTraitNamed: #TWithCompilationUnits.
+	tWithCompilationUnits comment: self commentForTWithCompilationUnit.
 
 	tWithDeclaredExceptions := builder newTraitNamed: #TWithDeclaredExceptions.
 	tWithDeclaredExceptions comment: self commentForTWithDeclaredExceptions.
