@@ -111,11 +111,6 @@ FamixTMethod >> mooseNameOn: stream [
 ]
 
 { #category : #metrics }
-FamixTMethod >> numberOfAnnotationInstances: aNumber [
-	self cacheAt: #numberOfAnnotationInstances put: aNumber
-]
-
-{ #category : #metrics }
 FamixTMethod >> numberOfMessageSends [
 	<FMProperty: #numberOfMessageSends type: #Number>
 	<derived>

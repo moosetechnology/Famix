@@ -50,3 +50,8 @@ FamixTMethodMetrics >> numberOfAnnotationInstances [
 		lookUpPropertyNamed: #numberOfAnnotationInstances
 		computedAs: [self annotationInstances size]
 ]
+
+{ #category : #metrics }
+FamixTMethodMetrics >> numberOfAnnotationInstances: aNumber [
+	self cacheAt: #numberOfAnnotationInstances put: aNumber
+]
