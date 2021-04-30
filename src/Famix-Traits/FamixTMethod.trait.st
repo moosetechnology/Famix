@@ -8,8 +8,8 @@ Trait {
 	#instVars : [
 		'#parentType => FMOne type: #FamixTWithMethods opposite: #methods'
 	],
-	#traits : '(FamixTCanBeClassSide + FamixTHasClassScope + FamixTHasSignature + FamixTInvocable + FamixTMethodMetrics + FamixTNamedEntity + FamixTTypedEntity + FamixTHasClassScope + FamixTWithImplicitVariables + FamixTWithLocalVariables + FamixTWithParameters + FamixTWithStatements + TOODependencyQueries withPrecedenceOf: FamixTWithStatements)',
-	#classTraits : '(FamixTCanBeClassSide classTrait + FamixTHasClassScope classTrait + FamixTHasSignature classTrait + FamixTInvocable classTrait + FamixTMethodMetrics classTrait + FamixTNamedEntity classTrait + FamixTTypedEntity classTrait + FamixTHasClassScope classTrait + FamixTWithImplicitVariables classTrait + FamixTWithLocalVariables classTrait + FamixTWithParameters classTrait + FamixTWithStatements classTrait + TOODependencyQueries classTrait withPrecedenceOf: FamixTWithStatements classTrait)',
+	#traits : '(FamixTCanBeClassSide + FamixTHasClassScope + FamixTHasSignature + FamixTInvocable + FamixTMethodMetrics + FamixTNamedEntity + FamixTTypedEntity + FamixTWithImplicitVariables + FamixTWithLocalVariables + FamixTWithParameters + FamixTWithStatements + TOODependencyQueries withPrecedenceOf: FamixTWithStatements)',
+	#classTraits : '(FamixTCanBeClassSide classTrait + FamixTHasClassScope classTrait + FamixTHasSignature classTrait + FamixTInvocable classTrait + FamixTMethodMetrics classTrait + FamixTNamedEntity classTrait + FamixTTypedEntity classTrait + FamixTWithImplicitVariables classTrait + FamixTWithLocalVariables classTrait + FamixTWithParameters classTrait + FamixTWithStatements classTrait + TOODependencyQueries classTrait withPrecedenceOf: FamixTWithStatements classTrait)',
 	#category : #'Famix-Traits-Behavioral'
 }
 
