@@ -121,6 +121,7 @@ Class {
 		'tCanBeAbstract',
 		'tCanBeClassSide',
 		'tClassMetrics',
+		'tMethodMetrics',
 		'tHasKind',
 		'tHasClassScope',
 		'tWithSourceLanguages',
@@ -1006,6 +1007,8 @@ FamixGenerator >> defineHierarchy [
 	tMethod withPrecedenceOf: tWithStatements.
 	tMethod --|> tCanBeClassSide.
 	
+	tMethod --|> tMethodMetrics.
+	
 	tMultipleFileAnchor --|> tSourceAnchor.
 	
 	tNamedEntity --|> #TEntityMetaLevelDependency.
@@ -1563,6 +1566,8 @@ FamixGenerator >> defineTraits [
 	tMethod withTesting.
 	tMethod withGroup.
 	
+  tMethodMetrics := builder newTraitNamed: #TMethodMetrics.
+  
 	tHasKind := builder newTraitNamed: #THasKind.
 	tHasKind comment: self commentForTHasKind.
 

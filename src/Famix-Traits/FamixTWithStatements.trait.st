@@ -19,18 +19,6 @@ FamixTWithStatements >> computeCyclomaticComplexity [
 	^ self notExistentMetricValue
 ]
 
-{ #category : #metrics }
-FamixTWithStatements >> cyclomaticComplexity [
-	<FMProperty: #cyclomaticComplexity type: #Number>
-	<FMComment: 'The number of linear-independent paths through a method.'>
-	^ self lookUpPropertyNamed: #cyclomaticComplexity computedAs: [ self computeCyclomaticComplexity ]
-]
-
-{ #category : #metrics }
-FamixTWithStatements >> cyclomaticComplexity: aNumber [
-	self cacheAt: #cyclomaticComplexity put: aNumber
-]
-
 { #category : #testing }
 FamixTWithStatements >> isBehavioural [
 

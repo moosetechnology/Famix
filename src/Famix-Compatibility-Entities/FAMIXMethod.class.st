@@ -200,17 +200,6 @@ FAMIXMethod >> isSurelyInvokedBy: aFAMIXMethod [
 ]
 
 { #category : #'Famix-Extensions' }
-FAMIXMethod >> numberOfAnnotationInstances [
-	<FMProperty: #numberOfAnnotationInstances type: #Number>
-	<derived>
-	<FMComment: 'The number of annotation instances defined in the method'>
-
-	^self
-		lookUpPropertyNamed: #numberOfAnnotationInstances
-		computedAs: [self annotationInstances size]
-]
-
-{ #category : #'Famix-Extensions' }
 FAMIXMethod >> numberOfInvokedMethods [
 	<FMProperty: #numberOfInvokedMethods type: #Number>
 	<FMComment: 'Return a number corresponding to the number of invoked methods'>

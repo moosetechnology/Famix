@@ -188,17 +188,6 @@ FamixStMethod >> numberOfAccesses [
 		computedAs: [ self accesses size ]
 ]
 
-{ #category : #'Famix-Extensions-metrics-support' }
-FamixStMethod >> numberOfAnnotationInstances [
-	<FMProperty: #numberOfAnnotationInstances type: #Number>
-	<derived>
-	<FMComment: 'The number of annotation instances defined in the method'>
-
-	^self
-		lookUpPropertyNamed: #numberOfAnnotationInstances
-		computedAs: [self annotationInstances size]
-]
-
 { #category : #'Famix-Extensions-private' }
 FamixStMethod >> numberOfComments [
 	<FMProperty: #numberOfComments type: #Number>
