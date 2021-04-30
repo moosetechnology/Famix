@@ -216,17 +216,6 @@ FamixJavaMethod >> numberOfInvokedMethods [
 	^ self cacheAt: #numberOfInvokedMethods ifAbsentPut: [self invokedMethods size]
 ]
 
-{ #category : #'Famix-Extensions-private' }
-FamixJavaMethod >> numberOfOutgoingInvocations [
-	<FMProperty: #numberOfOutgoingInvocations type: #Number>
-	<derived>
-	<FMComment: 'The number of invocations in a method'>
-	
-	^self
-		lookUpPropertyNamed: #numberOfOutgoingInvocations
-		computedAs: [self outgoingInvocations size]
-]
-
 { #category : #'Famix-Implementation' }
 FamixJavaMethod >> overridesMethod [
 	^ self belongsTo superclassHierarchy collect: [ :each | each implementationOf: self signature ] thenSelect: #isNotNil
