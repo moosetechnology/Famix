@@ -1,8 +1,8 @@
 Class {
 	#name : #FamixJavaMethod,
 	#superclass : #FamixJavaContainerEntity,
-	#traits : 'FamixJavaTCanBeSynchronized + FamixTCanBeAbstract + FamixTCanBeFinal + FamixTHasVisibility + FamixTMethod + FamixTWithCaughtExceptions + FamixTWithDeclaredExceptions + FamixTWithThrownExceptions',
-	#classTraits : 'FamixJavaTCanBeSynchronized classTrait + FamixTCanBeAbstract classTrait + FamixTCanBeFinal classTrait + FamixTHasVisibility classTrait + FamixTMethod classTrait + FamixTWithCaughtExceptions classTrait + FamixTWithDeclaredExceptions classTrait + FamixTWithThrownExceptions classTrait',
+	#traits : 'FamixJavaTCanBeSynchronized + FamixTCanBeAbstract + FamixTCanBeFinal + FamixTHasKind + FamixTHasVisibility + FamixTMethod + FamixTWithCaughtExceptions + FamixTWithDeclaredExceptions + FamixTWithThrownExceptions',
+	#classTraits : 'FamixJavaTCanBeSynchronized classTrait + FamixTCanBeAbstract classTrait + FamixTCanBeFinal classTrait + FamixTHasKind classTrait + FamixTHasVisibility classTrait + FamixTMethod classTrait + FamixTWithCaughtExceptions classTrait + FamixTWithDeclaredExceptions classTrait + FamixTWithThrownExceptions classTrait',
 	#category : #'Famix-Java-Entities-Entities'
 }
 
