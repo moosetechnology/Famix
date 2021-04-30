@@ -1,8 +1,8 @@
 Class {
 	#name : #FamixJavaMethod,
 	#superclass : #FamixJavaContainerEntity,
-	#traits : 'FamixJavaTCanBeSynchronized + FamixTCanBeAbstract + FamixTCanBeFinal + FamixTHasVisibility + FamixTMethod + FamixTWithCaughtExceptions + FamixTWithDeclaredExceptions + FamixTWithThrownExceptions',
-	#classTraits : 'FamixJavaTCanBeSynchronized classTrait + FamixTCanBeAbstract classTrait + FamixTCanBeFinal classTrait + FamixTHasVisibility classTrait + FamixTMethod classTrait + FamixTWithCaughtExceptions classTrait + FamixTWithDeclaredExceptions classTrait + FamixTWithThrownExceptions classTrait',
+	#traits : 'FamixJavaTCanBeSynchronized + FamixTCanBeAbstract + FamixTCanBeFinal + FamixTHasKind + FamixTHasVisibility + FamixTMethod + FamixTWithCaughtExceptions + FamixTWithDeclaredExceptions + FamixTWithThrownExceptions',
+	#classTraits : 'FamixJavaTCanBeSynchronized classTrait + FamixTCanBeAbstract classTrait + FamixTCanBeFinal classTrait + FamixTHasKind classTrait + FamixTHasVisibility classTrait + FamixTMethod classTrait + FamixTWithCaughtExceptions classTrait + FamixTWithDeclaredExceptions classTrait + FamixTWithThrownExceptions classTrait',
 	#category : #'Famix-Java-Entities-Entities'
 }
 
@@ -182,17 +182,6 @@ FamixJavaMethod >> numberOfAccesses [
 	^ self 
 		lookUpPropertyNamed: #numberOfAccesses
 		computedAs: [ self accesses size ]
-]
-
-{ #category : #metrics }
-FamixJavaMethod >> numberOfAnnotationInstances [
-	<FMProperty: #numberOfAnnotationInstances type: #Number>
-	<derived>
-	<FMComment: 'The number of annotation instances defined in the method'>
-
-	^self
-		lookUpPropertyNamed: #numberOfAnnotationInstances
-		computedAs: [self annotationInstances size]
 ]
 
 { #category : #accessing }

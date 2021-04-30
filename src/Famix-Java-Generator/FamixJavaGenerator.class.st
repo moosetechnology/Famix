@@ -207,6 +207,7 @@ FamixJavaGenerator >> defineHierarchy [
 	method --|> #TCanBeAbstract.
 	method --|> #TCanBeFinal.
 	method --|> #THasVisibility.
+	method --|> #THasKind.
 	method --|> tCanBeSynchronized.
 
 	caughtException --|> exception.
