@@ -124,7 +124,8 @@ Class {
 		'tCanBeFinal',
 		'tCanBeAbstract',
 		'tCanBeClassSide',
-		'tClassMetrics'
+		'tClassMetrics',
+		'tMethodMetrics'
 	],
 	#category : #'Famix-MetamodelGeneration'
 }
@@ -999,6 +1000,8 @@ FamixGenerator >> defineHierarchy [
 	tMethod withPrecedenceOf: tWithStatements.
 	tMethod --|> tCanBeClassSide.
 	
+	tMethod --|> tMethodMetrics.
+	
 	tMultipleFileAnchor --|> tSourceAnchor.
 	
 	tNamedEntity --|> #TEntityMetaLevelDependency.
@@ -1555,6 +1558,8 @@ FamixGenerator >> defineTraits [
 	tMethod comment: self commentForTMethod.
 	tMethod withTesting.
 	tMethod withGroup.
+	
+	tMethodMetrics := builder newTraitNamed: #TMethodMetrics.
 
 	tModule := builder newTraitNamed: #TModule.
 	tModule comment: self commentForTModule.
