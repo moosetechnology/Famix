@@ -38,6 +38,12 @@ FamixTWithStatements >> isBehavioural [
 	^ true
 ]
 
+{ #category : #'as yet unclassified' }
+FamixTWithStatements >> numberOfLinesOfDeadCode [
+
+	^ self deprecated: 'this method should not be used anymore'
+]
+
 { #category : #metrics }
 FamixTWithStatements >> numberOfStatements [
 	<FMProperty: #numberOfStatements type: #Number>
