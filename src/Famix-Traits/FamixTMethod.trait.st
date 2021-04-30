@@ -30,22 +30,6 @@ FamixTMethod classSide >> annotationFamixMethodGroup [
 	^ FamixMethodGroup
 ]
 
-{ #category : #metrics }
-FamixTMethod >> hierarchyNestingLevel [
-	<FMProperty: #hierarchyNestingLevel type: #Number>
-	<derived>
-	<FMComment: 'The nesting level in the hierarchy'>
-	
-	^self
-		lookUpPropertyNamed: #hierarchyNestingLevel
-		computedAs: [self belongsTo hierarchyNestingLevel]
-]
-
-{ #category : #metrics }
-FamixTMethod >> hierarchyNestingLevel: aNumber [
-	self cacheAt: #hierarchyNestingLevel put: aNumber
-]
-
 { #category : #testing }
 FamixTMethod >> isConstant [
 	<FMProperty: #isConstant type: #Boolean>
