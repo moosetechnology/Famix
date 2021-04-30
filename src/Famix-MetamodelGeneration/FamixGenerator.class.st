@@ -75,7 +75,6 @@ Class {
 		'tWithExceptions',
 		'tWithFiles',
 		'tWithFunctions',
-		'tWithHeader',
 		'tWithImplicitVariables',
 		'tWithInheritances',
 		'tWithInvocations',
@@ -124,7 +123,8 @@ Class {
 		'tClassMetrics',
 		'tHasClassScope',
 		'tWithSourceLanguages',
-		'tWithCompilationUnits'
+		'tWithCompilationUnits',
+		'tWithHeaders'
 	],
 	#category : #'Famix-MetamodelGeneration'
 }
@@ -1258,7 +1258,7 @@ FamixGenerator >> defineRelations [
 
 	((tHeader property: #headerOwner))
 		-
-	((tWithHeader property: #header)
+	((tWithHeaders property: #header)
 			comment: 'The header file that defines this module').
 
 	((tImplicitVariable property: #parentBehaviouralEntity)
@@ -1707,8 +1707,8 @@ FamixGenerator >> defineTraits [
 	tWithFunctions := builder newTraitNamed: #TWithFunctions.
 	tWithFunctions comment: self commentForTWithFunctions.
 
-	tWithHeader := builder newTraitNamed: #TWithHeader.
-	tWithHeader comment: self commentForTWithHeader.
+	tWithHeaders := builder newTraitNamed: #TWithHeaders.
+	tWithHeaders comment: self commentForTWithHeader.
 
 	tWithImplicitVariables := builder newTraitNamed: #TWithImplicitVariables.
 	tWithImplicitVariables comment: self commentForTWithImplicitVariables.
