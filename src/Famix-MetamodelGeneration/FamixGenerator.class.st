@@ -121,7 +121,6 @@ Class {
 		'tCanBeAbstract',
 		'tCanBeClassSide',
 		'tClassMetrics',
-		'tHasClassScope',
 		'tWithSourceLanguages',
 		'tWithCompilationUnits',
 		'tWithHeaders'
@@ -388,12 +387,6 @@ FamixGenerator >> commentForTGlobalVariable [
 
 	^ 'FAMIXGlobalVariable represents a global variable in the source code.
 '
-]
-
-{ #category : #comments }
-FamixGenerator >> commentForTHasClassScope [
-
-	^ ''
 ]
 
 { #category : #comments }
@@ -992,7 +985,6 @@ FamixGenerator >> defineHierarchy [
 	tMethod --|> tWithLocalVariables.
 	tMethod --|> tWithImplicitVariables.
 	tMethod --|> tHasSignature.
-	tMethod --|> tHasClassScope.
 	tMethod --|> tTypedEntity.
 	tMethod --|> tNamedEntity.
 	tMethod --|> #TOODependencyQueries.
@@ -1676,9 +1668,6 @@ FamixGenerator >> defineTraits [
 
 	tWithClasses := builder newTraitNamed: #TWithClasses.
 	tWithClasses comment: self commentForTWithClasses.
-
-	tHasClassScope := builder newTraitNamed: #THasClassScope.
-	tHasClassScope comment: self commentForTHasClassScope.
 
 	tWithComments := builder newTraitNamed: #TWithComments.
 	tWithComments comment: self commentForTWithComments.
