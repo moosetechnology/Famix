@@ -50,5 +50,8 @@ FAMIXMethodTest >> testIsConstructor [
 
 { #category : #testing }
 FAMIXMethodTest >> testIsConstructorByKind [
-	self assert: (self actualClass new kind: 'constructor'; isConstructor)
+
+	self assert: (self actualClass new
+			 beConstructor;
+			 isConstructor)
 ]

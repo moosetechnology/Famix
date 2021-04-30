@@ -60,14 +60,12 @@ FamixJavaMethodTest >> testOverride [
 		signature: 'method()';
 		parentType: c1;
 		declaredType: c1;
-		parentPackage: package;
 		yourself.
 	method
 		name: 'method';
 		signature: 'method()';
 		parentType: c2;
-		declaredType: c2;
-		parentPackage: package.
+		declaredType: c2.
 	c2
 		addSuperInheritance:
 			(FamixJavaInheritance new
