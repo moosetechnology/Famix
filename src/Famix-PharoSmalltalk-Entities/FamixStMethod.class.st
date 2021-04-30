@@ -232,17 +232,6 @@ FamixStMethod >> numberOfMessageSends [
 ]
 
 { #category : #'Famix-Extensions-private' }
-FamixStMethod >> numberOfOutgoingInvocations [
-	<FMProperty: #numberOfOutgoingInvocations type: #Number>
-	<derived>
-	<FMComment: 'The number of invocations in a method'>
-	
-	^self
-		lookUpPropertyNamed: #numberOfOutgoingInvocations
-		computedAs: [self outgoingInvocations size]
-]
-
-{ #category : #'Famix-Extensions-private' }
 FamixStMethod >> numberOfStatements [
 	<FMProperty: #numberOfStatements type: #Number>
 	<FMComment: 'The number of statements in a method'>
