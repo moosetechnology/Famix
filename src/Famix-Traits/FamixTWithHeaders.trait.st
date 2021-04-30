@@ -1,5 +1,5 @@
 Trait {
-	#name : #FamixTWithHeader,
+	#name : #FamixTWithHeaders,
 	#instVars : [
 		'#header => FMOne type: #FamixTHeader opposite: #headerOwner'
 	],
@@ -7,16 +7,16 @@ Trait {
 }
 
 { #category : #meta }
-FamixTWithHeader classSide >> annotation [
+FamixTWithHeaders classSide >> annotation [
 
-	<FMClass: #TWithHeader super: #Object>
+	<FMClass: #TWithHeaders super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
 	^self
 ]
 
 { #category : #accessing }
-FamixTWithHeader >> header [
+FamixTWithHeaders >> header [
 	"Relation named: #header type: #FamixTHeader opposite: #headerOwner"
 
 	<generated>
@@ -26,7 +26,7 @@ FamixTWithHeader >> header [
 ]
 
 { #category : #accessing }
-FamixTWithHeader >> header: anObject [
+FamixTWithHeaders >> header: anObject [
 
 	<generated>
 	header := anObject
