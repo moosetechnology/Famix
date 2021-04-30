@@ -121,7 +121,7 @@ Class {
 		'tCanBeAbstract',
 		'tCanBeClassSide',
 		'tClassMetrics',
-		'tMethodMetrics'
+		'tMethodMetrics',
 		'tHasClassScope',
 		'tWithSourceLanguages',
 		'tWithCompilationUnits',
