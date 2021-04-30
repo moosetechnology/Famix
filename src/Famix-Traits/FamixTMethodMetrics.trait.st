@@ -11,3 +11,14 @@ FamixTMethodMetrics classSide >> annotation [
 	<generated>
 	^self
 ]
+
+{ #category : #'Famix-Extensions-metrics-support' }
+FamixTMethodMetrics >> numberOfAnnotationInstances [
+	<FMProperty: #numberOfAnnotationInstances type: #Number>
+	<derived>
+	<FMComment: 'The number of annotation instances defined in the method'>
+
+	^self
+		lookUpPropertyNamed: #numberOfAnnotationInstances
+		computedAs: [self annotationInstances size]
+]
