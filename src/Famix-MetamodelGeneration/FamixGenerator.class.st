@@ -88,7 +88,6 @@ Class {
 		'tWithParameterizedTypes',
 		'tWithParameters',
 		'tWithReferences',
-		'tWithSourceLanguage',
 		'tWithTemplates',
 		'tWithThrownExceptions',
 		'tWithTypeAliases',
@@ -124,7 +123,8 @@ Class {
 		'tCanBeAbstract',
 		'tCanBeClassSide',
 		'tClassMetrics',
-		'tHasClassScope'
+		'tHasClassScope',
+		'tWithSourceLanguages'
 	],
 	#category : #'Famix-MetamodelGeneration'
 }
@@ -1356,7 +1356,7 @@ FamixGenerator >> defineRelations [
 	((tSourceLanguage property: #sourcedEntities)
 			comment: 'References to the entities saying explicitly that are written in this language.')
 		-*
-	((tWithSourceLanguage property: #declaredSourceLanguage)
+	((tWithSourceLanguages property: #declaredSourceLanguage)
 			comment: 'The declared SourceLanguage for the source code of this entity').
 
 	((tInheritance property: #subclass)
@@ -1746,8 +1746,8 @@ FamixGenerator >> defineTraits [
 	tHasSignature := builder newTraitNamed: #THasSignature.
 	tHasSignature comment: self commentForTHasSignature.
 
-	tWithSourceLanguage := builder newTraitNamed: #TWithSourceLanguages.
-	tWithSourceLanguage comment: self commentForTWithSourceLanguage.
+	tWithSourceLanguages := builder newTraitNamed: #TWithSourceLanguages.
+	tWithSourceLanguages comment: self commentForTWithSourceLanguage.
 
 	tWithTemplates := builder newTraitNamed: #TWithTemplates.
 	tWithTemplates comment: self commentForTWithTemplates.
