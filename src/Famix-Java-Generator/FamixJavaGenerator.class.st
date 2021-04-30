@@ -184,7 +184,7 @@ FamixJavaGenerator >> defineHierarchy [
 
 	attribute --|> namedEntity.
 	attribute --|> #TAttribute.
-	attribute --|> #TWithClassScope.
+	attribute --|> #THasClassScope.
 	attribute --|> #TCanBeFinal.
 	attribute --|> #THasVisibility.
 	attribute --|> tCanBeVolatile.

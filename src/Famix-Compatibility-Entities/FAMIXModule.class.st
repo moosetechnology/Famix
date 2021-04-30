@@ -1,8 +1,8 @@
 Class {
 	#name : #FAMIXModule,
 	#superclass : #FAMIXScopingEntity,
-	#traits : 'FamixTModule + FamixTWithCompilationUnits + FamixTWithHeader',
-	#classTraits : 'FamixTModule classTrait + FamixTWithCompilationUnits classTrait + FamixTWithHeader classTrait',
+	#traits : 'FamixTModule + FamixTWithCompilationUnits + FamixTWithHeaders',
+	#classTraits : 'FamixTModule classTrait + FamixTWithCompilationUnits classTrait + FamixTWithHeaders classTrait',
 	#category : #'Famix-Compatibility-Entities-Entities'
 }
 
