@@ -1,8 +1,8 @@
 Class {
 	#name : #FamixJavaAnnotationType,
 	#superclass : #FamixJavaType,
-	#traits : 'FamixTAnnotationType + FamixTWithAttributes + FamixTWithInheritances',
-	#classTraits : 'FamixTAnnotationType classTrait + FamixTWithAttributes classTrait + FamixTWithInheritances classTrait',
+	#traits : 'FamixTAnnotationType + FamixTPackageable + FamixTWithAttributes + FamixTWithInheritances',
+	#classTraits : 'FamixTAnnotationType classTrait + FamixTPackageable classTrait + FamixTWithAttributes classTrait + FamixTWithInheritances classTrait',
 	#category : #'Famix-Java-Entities-Entities'
 }
 
