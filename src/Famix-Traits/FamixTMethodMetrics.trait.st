@@ -13,6 +13,18 @@ FamixTMethodMetrics classSide >> annotation [
 ]
 
 { #category : #metrics }
+FamixTMethodMetrics >> cyclomaticComplexity [
+	<FMProperty: #cyclomaticComplexity type: #Number>
+	<FMComment: 'The number of linear-independent paths through a method.'>
+	^ self lookUpPropertyNamed: #cyclomaticComplexity computedAs: [ self computeCyclomaticComplexity ]
+]
+
+{ #category : #metrics }
+FamixTMethodMetrics >> cyclomaticComplexity: aNumber [
+	self cacheAt: #cyclomaticComplexity put: aNumber
+]
+
+{ #category : #metrics }
 FamixTMethodMetrics >> hierarchyNestingLevel [
 	<FMProperty: #hierarchyNestingLevel type: #Number>
 	<derived>
