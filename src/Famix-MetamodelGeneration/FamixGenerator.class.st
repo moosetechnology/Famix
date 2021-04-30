@@ -68,7 +68,6 @@ Class {
 		'tWithAnnotationTypes',
 		'tWithAttributes',
 		'tWithCaughtExceptions',
-		'tWithClassScope',
 		'tWithComments',
 		'tWithCompilationUnit',
 		'tWithDeclaredExceptions',
@@ -124,7 +123,8 @@ Class {
 		'tCanBeFinal',
 		'tCanBeAbstract',
 		'tCanBeClassSide',
-		'tClassMetrics'
+		'tClassMetrics',
+		'tHasClassScope'
 	],
 	#category : #'Famix-MetamodelGeneration'
 }
@@ -388,6 +388,12 @@ FamixGenerator >> commentForTGlobalVariable [
 
 	^ 'FAMIXGlobalVariable represents a global variable in the source code.
 '
+]
+
+{ #category : #comments }
+FamixGenerator >> commentForTHasClassScope [
+
+	^ ''
 ]
 
 { #category : #comments }
@@ -734,12 +740,6 @@ FamixGenerator >> commentForTWithCaughtExceptions [
 ]
 
 { #category : #comments }
-FamixGenerator >> commentForTWithClassScope [
-
-	^ ''
-]
-
-{ #category : #comments }
 FamixGenerator >> commentForTWithClasses [
 
 	^ ''
@@ -992,7 +992,7 @@ FamixGenerator >> defineHierarchy [
 	tMethod --|> tWithLocalVariables.
 	tMethod --|> tWithImplicitVariables.
 	tMethod --|> tHasSignature.
-	tMethod --|> tWithClassScope.
+	tMethod --|> tHasClassScope.
 	tMethod --|> tTypedEntity.
 	tMethod --|> tNamedEntity.
 	tMethod --|> #TOODependencyQueries.
@@ -1677,8 +1677,8 @@ FamixGenerator >> defineTraits [
 	tWithClasses := builder newTraitNamed: #TWithClasses.
 	tWithClasses comment: self commentForTWithClasses.
 
-	tWithClassScope := builder newTraitNamed: #TWithClassScope.
-	tWithClassScope comment: self commentForTWithClassScope.
+	tHasClassScope := builder newTraitNamed: #THasClassScope.
+	tHasClassScope comment: self commentForTHasClassScope.
 
 	tWithComments := builder newTraitNamed: #TWithComments.
 	tWithComments comment: self commentForTWithComments.

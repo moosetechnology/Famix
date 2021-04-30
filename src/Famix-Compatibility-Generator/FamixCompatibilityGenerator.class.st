@@ -241,7 +241,7 @@ FamixCompatibilityGenerator >> defineHierarchy [
 
 	attribute --|> structuralEntity.
 	attribute --|> #TAttribute.
-	attribute --|> #TWithClassScope.
+	attribute --|> #THasClassScope.
 	attribute --|> tCanBeVolatile.
 	attribute --|> tCanBeTransient.
 
