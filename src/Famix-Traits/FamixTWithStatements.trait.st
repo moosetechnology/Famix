@@ -39,14 +39,6 @@ FamixTWithStatements >> isBehavioural [
 ]
 
 { #category : #metrics }
-FamixTWithStatements >> numberOfLinesOfDeadCode [
-	<FMProperty: #numberOflinesOfDeadCode type: #Number>
-	<FMComment: 'Number of lines of dead code present in the entity.'>
-	<derived>
-	^ self lookUpPropertyNamed: #numberOflinesOfDeadCode computedAs: [ self deadChildren sumNumbers: #numberOfLinesOfCode ]
-]
-
-{ #category : #metrics }
 FamixTWithStatements >> numberOfStatements [
 	<FMProperty: #numberOfStatements type: #Number>
 	<derived>
