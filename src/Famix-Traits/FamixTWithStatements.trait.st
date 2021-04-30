@@ -41,7 +41,11 @@ FamixTWithStatements >> isBehavioural [
 { #category : #'as yet unclassified' }
 FamixTWithStatements >> numberOfLinesOfDeadCode [
 
-	^ self deprecated: 'this method should not be used anymore'
+	self deprecated:
+		'This method will be removed in the next version of Moose'.
+	^ self
+		  lookUpPropertyNamed: #numberOflinesOfDeadCode
+		  computedAs: [ self deadChildren sumNumbers: #numberOfLinesOfCode ]
 ]
 
 { #category : #metrics }
