@@ -100,14 +100,12 @@ FamixTHasKind >> kind [
 
 	<FMProperty: #kind type: #String>
 	<generated>
-	<FMComment:
-	'Tag indicating a setter, getter, constant, constructor method'>
+	<FMComment: 'Tag indicating a setter, getter, constant, constructor method'>
 	^ kind
 ]
 
 { #category : #accessing }
 FamixTHasKind >> kind: anObject [
-
 	<generated>
 	kind := anObject
 ]
