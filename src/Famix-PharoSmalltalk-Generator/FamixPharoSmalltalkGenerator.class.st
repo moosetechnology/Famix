@@ -88,7 +88,7 @@ FamixPharoSmalltalkGenerator >> defineHierarchy [
 
 	attribute --|> namedEntity.
 	attribute --|> #TAttribute.
-	attribute --|> #TWithClassScope.
+	attribute --|> #THasClassScope.
 	attribute --|> #TInvocationsReceiver.
 	
 	class --|> namedEntity.

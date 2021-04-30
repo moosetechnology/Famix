@@ -241,7 +241,7 @@ FamixCompatibilityGenerator >> defineHierarchy [
 
 	attribute --|> structuralEntity.
 	attribute --|> #TAttribute.
-	attribute --|> #TWithClassScope.
+	attribute --|> #THasClassScope.
 	attribute --|> tCanBeVolatile.
 	attribute --|> tCanBeTransient.
 
@@ -337,7 +337,7 @@ FamixCompatibilityGenerator >> defineHierarchy [
 	module --|> scopingEntity.
 	module --|> #TModule.
 	module --|> #TWithCompilationUnits.
-	module --|> #TWithHeader.
+	module --|> #TWithHeaders.
 
 	namedEntity --|> #TPackageable.
 	namedEntity --|> #TInvocationsReceiver.
