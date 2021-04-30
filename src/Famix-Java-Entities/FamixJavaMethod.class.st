@@ -1,8 +1,8 @@
 Class {
 	#name : #FamixJavaMethod,
 	#superclass : #FamixJavaContainerEntity,
-	#traits : 'FamixJavaTCanBeSynchronized + FamixTCanBeAbstract + FamixTCanBeFinal + FamixTHasVisibility + FamixTMethod + FamixTWithCaughtExceptions + FamixTWithDeclaredExceptions + FamixTWithThrownExceptions',
-	#classTraits : 'FamixJavaTCanBeSynchronized classTrait + FamixTCanBeAbstract classTrait + FamixTCanBeFinal classTrait + FamixTHasVisibility classTrait + FamixTMethod classTrait + FamixTWithCaughtExceptions classTrait + FamixTWithDeclaredExceptions classTrait + FamixTWithThrownExceptions classTrait',
+	#traits : 'FamixJavaTCanBeSynchronized + FamixTCanBeAbstract + FamixTCanBeFinal + FamixTHasKind + FamixTHasVisibility + FamixTMethod + FamixTWithCaughtExceptions + FamixTWithDeclaredExceptions + FamixTWithThrownExceptions',
+	#classTraits : 'FamixJavaTCanBeSynchronized classTrait + FamixTCanBeAbstract classTrait + FamixTCanBeFinal classTrait + FamixTHasKind classTrait + FamixTHasVisibility classTrait + FamixTMethod classTrait + FamixTWithCaughtExceptions classTrait + FamixTWithDeclaredExceptions classTrait + FamixTWithThrownExceptions classTrait',
 	#category : #'Famix-Java-Entities-Entities'
 }
 
@@ -184,17 +184,6 @@ FamixJavaMethod >> numberOfAccesses [
 		computedAs: [ self accesses size ]
 ]
 
-{ #category : #metrics }
-FamixJavaMethod >> numberOfAnnotationInstances [
-	<FMProperty: #numberOfAnnotationInstances type: #Number>
-	<derived>
-	<FMComment: 'The number of annotation instances defined in the method'>
-
-	^self
-		lookUpPropertyNamed: #numberOfAnnotationInstances
-		computedAs: [self annotationInstances size]
-]
-
 { #category : #accessing }
 FamixJavaMethod >> numberOfComments [
 	<FMProperty: #numberOfComments type: #Number>
@@ -225,17 +214,6 @@ FamixJavaMethod >> numberOfInvokedMethods [
 	<derived>
 	
 	^ self cacheAt: #numberOfInvokedMethods ifAbsentPut: [self invokedMethods size]
-]
-
-{ #category : #'Famix-Extensions-private' }
-FamixJavaMethod >> numberOfOutgoingInvocations [
-	<FMProperty: #numberOfOutgoingInvocations type: #Number>
-	<derived>
-	<FMComment: 'The number of invocations in a method'>
-	
-	^self
-		lookUpPropertyNamed: #numberOfOutgoingInvocations
-		computedAs: [self outgoingInvocations size]
 ]
 
 { #category : #'Famix-Implementation' }

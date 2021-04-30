@@ -68,7 +68,6 @@ FamixJavaQueryTest >> setUp [
 		name: 'm1';
 		signature: 'm1()';
 		parentType: c1;
-		parentPackage: p1;
 		declaredType: c2;
 		yourself.
 	m2 := FamixJavaMethod new
@@ -76,7 +75,6 @@ FamixJavaQueryTest >> setUp [
 		name: 'm2';
 		signature: 'm2()';
 		parentType: c2;
-		parentPackage: p1;
 		declaredType: c3;
 		yourself.
 	m3 := FamixJavaMethod new
@@ -84,7 +82,6 @@ FamixJavaQueryTest >> setUp [
 		name: 'm3';
 		signature: 'm3(C2,C3)';
 		parentType: c2;
-		parentPackage: p1;
 		declaredType: c1;
 		yourself.
 	m4 := FamixJavaMethod new
@@ -92,7 +89,6 @@ FamixJavaQueryTest >> setUp [
 		name: 'm4';
 		signature: 'm4()';
 		parentType: c3;
-		parentPackage: p2;
 		declaredType: c3;
 		yourself.
 
@@ -100,7 +96,6 @@ FamixJavaQueryTest >> setUp [
 		stub: true;
 		name: 'v1';
 		parentBehaviouralEntity: m2;
-		parentPackage: p1;
 		declaredType: c1;
 		yourself.
 
@@ -108,14 +103,12 @@ FamixJavaQueryTest >> setUp [
 		stub: true;
 		name: 'pr1';
 		parentBehaviouralEntity: m3;
-		parentPackage: p1;
 		declaredType: c2;
 		yourself.
 	pr2 := FamixJavaParameter new
 		stub: true;
 		name: 'pr2';
 		parentBehaviouralEntity: m3;
-		parentPackage: p1;
 		declaredType: c3;
 		yourself.
 
@@ -123,14 +116,12 @@ FamixJavaQueryTest >> setUp [
 		stub: true;
 		name: 'at1';
 		parentType: c1;
-		parentPackage: p1;
 		declaredType: c3;
 		yourself.
 	at2 := FamixJavaAttribute new
 		stub: true;
 		name: 'at2';
 		parentType: c3;
-		parentPackage: p2;
 		declaredType: c2;
 		yourself.
 

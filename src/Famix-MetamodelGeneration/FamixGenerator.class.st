@@ -121,6 +121,8 @@ Class {
 		'tCanBeAbstract',
 		'tCanBeClassSide',
 		'tClassMetrics',
+		'tMethodMetrics',
+		'tHasKind',
 		'tHasClassScope',
 		'tWithSourceLanguages',
 		'tWithCompilationUnits',
@@ -400,6 +402,12 @@ FamixGenerator >> commentForTHasClassScope [
 FamixGenerator >> commentForTHasImmediateSource [
 
 	^ 'An immediate source is the source code of the entity stored directly into its sourceAnchor instead of accessing it (for example in a file) through its sourceAnchor'
+]
+
+{ #category : #comments }
+FamixGenerator >> commentForTHasKind [
+
+	^ 'This is an indicator that a method is a setter, getter, constant, or constructor'
 ]
 
 { #category : #comments }
@@ -999,6 +1007,8 @@ FamixGenerator >> defineHierarchy [
 	tMethod withPrecedenceOf: tWithStatements.
 	tMethod --|> tCanBeClassSide.
 	
+	tMethod --|> tMethodMetrics.
+	
 	tMultipleFileAnchor --|> tSourceAnchor.
 	
 	tNamedEntity --|> #TEntityMetaLevelDependency.
@@ -1076,8 +1086,8 @@ FamixGenerator >> defineProperties [
 	((tHasVisibility property: #visibility type: #String)
 		comment: 'Visibility of the entity').
 
-	((tMethod property: #kind type: #String) 
-		comment: 'Tag indicating a setter, getter, constant, constructor, or abstract method').
+	((tHasKind property: #kind type: #String) 
+		comment: 'Tag indicating a setter, getter, constant, constructor method').
 
 	((tHasSignature property: #signature type: #String)
 		comment: 'Signature of the message being sent').
@@ -1555,6 +1565,11 @@ FamixGenerator >> defineTraits [
 	tMethod comment: self commentForTMethod.
 	tMethod withTesting.
 	tMethod withGroup.
+	
+  tMethodMetrics := builder newTraitNamed: #TMethodMetrics.
+  
+	tHasKind := builder newTraitNamed: #THasKind.
+	tHasKind comment: self commentForTHasKind.
 
 	tModule := builder newTraitNamed: #TModule.
 	tModule comment: self commentForTModule.

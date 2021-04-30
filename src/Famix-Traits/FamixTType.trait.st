@@ -71,18 +71,18 @@ FamixTType >> mooseNameOn: aStream [
 
 { #category : #metrics }
 FamixTType >> numberOfAccessesToForeignData [
-	<FMProperty: #numberOfAccessesToForeignData type: #Number>
-	<derived>
-	<FMComment: 'Number of accesses to foreign data'>
-	
-	^self
-		lookUpPropertyNamed: #numberOfAccessesToForeignData
-		computedAs: [self notExistentMetricValue]
+
+	self
+		deprecated: 'you should not use this method anymore.'
+		transformWith: '`@receiver numberOfAccessesToForeignData'
+			-> '`@receiver notExistentMetricValue'.
+	^ self notExistentMetricValue
 ]
 
 { #category : #metrics }
 FamixTType >> numberOfAccessesToForeignData: aNumber [
-	self cacheAt: #numberOfAccessesToForeignData put: aNumber
+
+	self deprecated: 'you should not use this method anymore.'
 ]
 
 { #category : #testing }

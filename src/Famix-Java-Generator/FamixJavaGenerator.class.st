@@ -177,6 +177,7 @@ FamixJavaGenerator >> defineHierarchy [
 	annotationType --|> #TAnnotationType.
 	annotationType --|> #TWithAttributes.
 	annotationType --|> #TWithInheritances.
+	annotationType --|> #TPackageable.
 
 	annotationTypeAttribute --|> namedEntity.
 	annotationTypeAttribute --|> #TAnnotationTypeAttribute.
@@ -208,6 +209,7 @@ FamixJavaGenerator >> defineHierarchy [
 	method --|> #TCanBeAbstract.
 	method --|> #TCanBeFinal.
 	method --|> #THasVisibility.
+	method --|> #THasKind.
 	method --|> tCanBeSynchronized.
 
 	caughtException --|> exception.
@@ -215,6 +217,7 @@ FamixJavaGenerator >> defineHierarchy [
 
 	class --|> type.
 	class --|> #TWithExceptions.
+	class --|> #TPackageable.
 	class --|> #TClass.
 	class --|> #TLCOMMetrics.
 	class --|> #TCanBeAbstract.
@@ -264,7 +267,6 @@ FamixJavaGenerator >> defineHierarchy [
 	localVariable --|> #TCanBeFinal.
 	localVariable --|> #TInvocationsReceiver.
 	
-	namedEntity --|> #TPackageable.
 	namedEntity --|> #TInvocationsReceiver.
 	namedEntity --|> #TWithAnnotationInstances.
 
@@ -275,6 +277,7 @@ FamixJavaGenerator >> defineHierarchy [
 	package --|> containerEntity.
 	package --|> #TWithGlobalVariables.
 	package --|> #TPackage.
+	package --|> #TPackageable.
 
 	parameter --|> namedEntity.
 	parameter --|> #TParameter.

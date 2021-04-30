@@ -42,7 +42,7 @@ FamixJavaClassTest >> testNumberOfAccessorMethods [
 	c1 := FamixJavaClass named: 'Class1' model: model.
 	m1 := FamixJavaMethod named: 'method1' model: model.
 	m1 parentType: c1.
-	m1 kind: #getter.
+	m1 beGetter.
 
 	self assert: c1 numberOfAccessorMethods equals: 1.
 	c1 numberOfAccessorMethods: 100.

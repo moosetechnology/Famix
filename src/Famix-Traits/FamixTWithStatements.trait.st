@@ -19,18 +19,6 @@ FamixTWithStatements >> computeCyclomaticComplexity [
 	^ self notExistentMetricValue
 ]
 
-{ #category : #metrics }
-FamixTWithStatements >> cyclomaticComplexity [
-	<FMProperty: #cyclomaticComplexity type: #Number>
-	<FMComment: 'The number of linear-independent paths through a method.'>
-	^ self lookUpPropertyNamed: #cyclomaticComplexity computedAs: [ self computeCyclomaticComplexity ]
-]
-
-{ #category : #metrics }
-FamixTWithStatements >> cyclomaticComplexity: aNumber [
-	self cacheAt: #cyclomaticComplexity put: aNumber
-]
-
 { #category : #testing }
 FamixTWithStatements >> isBehavioural [
 
@@ -38,12 +26,14 @@ FamixTWithStatements >> isBehavioural [
 	^ true
 ]
 
-{ #category : #metrics }
+{ #category : #'as yet unclassified' }
 FamixTWithStatements >> numberOfLinesOfDeadCode [
-	<FMProperty: #numberOflinesOfDeadCode type: #Number>
-	<FMComment: 'Number of lines of dead code present in the entity.'>
-	<derived>
-	^ self lookUpPropertyNamed: #numberOflinesOfDeadCode computedAs: [ self deadChildren sumNumbers: #numberOfLinesOfCode ]
+
+	self deprecated:
+		'This method will be removed in the next version of Moose'.
+	^ self
+		  lookUpPropertyNamed: #numberOflinesOfDeadCode
+		  computedAs: [ self deadChildren sumNumbers: #numberOfLinesOfCode ]
 ]
 
 { #category : #metrics }

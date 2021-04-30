@@ -20,6 +20,17 @@ FamixTWithInvocations >> addOutgoingInvocation: anInvocation [
 	outgoingInvocations add: anInvocation
 ]
 
+{ #category : #'Famix-Extensions-private' }
+FamixTWithInvocations >> numberOfOutgoingInvocations [
+
+	<FMProperty: #numberOfOutgoingInvocations type: #Number>
+	<derived>
+	<FMComment: 'The number of invocations in a method'>
+	^ self
+		  lookUpPropertyNamed: #numberOfOutgoingInvocations
+		  computedAs: [ self outgoingInvocations size ]
+]
+
 { #category : #accessing }
 FamixTWithInvocations >> outgoingInvocations [
 	"Relation named: #outgoingInvocations type: #FamixTInvocation opposite: #sender"
