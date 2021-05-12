@@ -513,8 +513,17 @@ FamixGenerator >> commentForTPackageable [
 
 { #category : #comments }
 FamixGenerator >> commentForTParameter [
+	^ 'A Parameter represents one parameter in a behavioral (method, function, lamdba...) declaration.
+	
+For example in the following code we have two Parameters. One named "a" and another named "b". Both of them have "int" as declared type.
 
-	^ 'FAMIXParameter represents one parameter in a method declaration.'
+```java
+// method with two parameters
+int addNumbers(int a, int b) {
+  // code
+}
+```
+'
 ]
 
 { #category : #comments }
