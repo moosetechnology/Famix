@@ -29,7 +29,7 @@ Class {
 { #category : #accessing }
 FmxMBTestOnlyTraits1Generator class >> packageName [
 
-	^ #'MockGenerator'
+	^ #'Famix-MetamodelBuilder-TestOnlyTraits'
 ]
 
 { #category : #accessing }
