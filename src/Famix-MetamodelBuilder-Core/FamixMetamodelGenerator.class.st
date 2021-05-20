@@ -124,9 +124,7 @@ FamixMetamodelGenerator class >> mooseModelName [
 
 { #category : #accessing }
 FamixMetamodelGenerator class >> packageName [
-
-	<ignoreForCoverage>
-	self subclassResponsibility
+	^ self subclassResponsibility .
 ]
 
 { #category : #accessing }
