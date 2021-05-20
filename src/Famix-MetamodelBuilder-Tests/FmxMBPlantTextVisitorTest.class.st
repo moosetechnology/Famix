@@ -30,7 +30,7 @@ FmxMBPlantTextVisitorTest >> testRecordGeneralizationsForClassMergingTraits [
 { #category : #tests }
 FmxMBPlantTextVisitorTest >> testRecordGeneralizationsForTrait [
 	| b v |
-	b :=  FmxMBTest1Generator builderWithDefinitions.
+	b :=  FmxMBTestOnlyTraits1Generator builderWithDefinitions.
 	v :=  FmxMBPlantTextVisitor new withAllTraits.
 	b acceptVisitor: v.
 	self assert: (v contents includesSubstring: 'behavior1 <|-- behavior2').

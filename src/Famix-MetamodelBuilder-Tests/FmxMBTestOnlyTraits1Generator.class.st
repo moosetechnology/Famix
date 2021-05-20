@@ -16,7 +16,7 @@ Internal Representation :
 	tA *-* tB.
 "
 Class {
-	#name : #FmxMBTest1Generator,
+	#name : #FmxMBTestOnlyTraits1Generator,
 	#superclass : #FamixMetamodelGenerator,
 	#instVars : [
 		'tA',
@@ -27,31 +27,31 @@ Class {
 }
 
 { #category : #accessing }
-FmxMBTest1Generator class >> packageName [
+FmxMBTestOnlyTraits1Generator class >> packageName [
 
 	^ #'MockGenerator'
 ]
 
 { #category : #accessing }
-FmxMBTest1Generator class >> prefix [
-	^ #FmxMB
+FmxMBTestOnlyTraits1Generator class >> prefix [
+	^ #FmxMBTestOnlyTraits1Generator
 ]
 
 { #category : #definition }
-FmxMBTest1Generator >> defineHierarchy [
+FmxMBTestOnlyTraits1Generator >> defineHierarchy [
 	super defineHierarchy.
 	tA <|-- tB;
 		<|-- tC.
 ]
 
 { #category : #definition }
-FmxMBTest1Generator >> defineRelations [
+FmxMBTestOnlyTraits1Generator >> defineRelations [
 	super defineRelations.
 	tA *-* tB.
 ]
 
 { #category : #definition }
-FmxMBTest1Generator >> defineTraits [
+FmxMBTestOnlyTraits1Generator >> defineTraits [
 	super defineTraits.
 	tA := builder newTraitNamed: #TA.
 	tB := builder newTraitNamed: #TB.
