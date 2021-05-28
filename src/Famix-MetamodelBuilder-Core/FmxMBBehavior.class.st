@@ -376,6 +376,21 @@ FmxMBBehavior >> property: propertyName type: aTypeName [
 	^ aSide
 ]
 
+{ #category : #accessing }
+FmxMBBehavior >> property: propertyName type: aTypeName defaultValue: aValue [ 
+	| aSide |
+	aSide := FmxMBTypedProperty new
+		builder: self builder;
+		name: propertyName;
+		propertyType: aTypeName asSymbol;
+		defaultValue: aValue;
+		yourself.
+
+	self properties add: aSide.
+
+	^ aSide
+]
+
 { #category : #private }
 FmxMBBehavior >> propertyName [
 	^ self name uncapitalized

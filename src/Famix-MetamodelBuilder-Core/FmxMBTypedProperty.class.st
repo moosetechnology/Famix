@@ -6,7 +6,8 @@ Class {
 	#superclass : #FmxMBProperty,
 	#instVars : [
 		'propertyType',
-		'multivalued'
+		'multivalued',
+		'defaultValue'
 	],
 	#category : #'Famix-MetamodelBuilder-Core-Implementation'
 }
@@ -22,6 +23,16 @@ FmxMBTypedProperty >> asSlot [
 	self propertyType ifNil: [ FmxMBIncompletePropertyDefiniton signal ].
 
 	^ self builder environment slotNamed: self name asSymbol
+]
+
+{ #category : #accessing }
+FmxMBTypedProperty >> defaultValue [
+	^ defaultValue
+]
+
+{ #category : #accessing }
+FmxMBTypedProperty >> defaultValue: aValue [
+	defaultValue := aValue
 ]
 
 { #category : #generating }
