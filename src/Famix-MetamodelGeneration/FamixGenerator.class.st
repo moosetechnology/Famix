@@ -1007,7 +1007,6 @@ FamixGenerator >> defineHierarchy [
 	tMethod --|> #TOODependencyQueries.
 	tMethod withPrecedenceOf: tWithStatements.
 	tMethod --|> tCanBeClassSide.
-	
 	tMethod --|> tMethodMetrics.
 	
 	tMultipleFileAnchor --|> tSourceAnchor.
@@ -1567,7 +1566,7 @@ FamixGenerator >> defineTraits [
 	tMethod withTesting.
 	tMethod withGroup.
 	
-  tMethodMetrics := builder newTraitNamed: #TMethodMetrics.
+  	tMethodMetrics := builder newTraitNamed: #TMethodMetrics.
   
 	tHasKind := builder newTraitNamed: #THasKind.
 	tHasKind comment: self commentForTHasKind.

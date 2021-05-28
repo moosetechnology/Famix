@@ -32,7 +32,7 @@ FamixTMethodMetrics >> hierarchyNestingLevel [
 	
 	^self
 		lookUpPropertyNamed: #hierarchyNestingLevel
-		computedAs: [self belongsTo hierarchyNestingLevel]
+		computedAs: [ self parentType hierarchyNestingLevel]
 ]
 
 { #category : #metrics }
