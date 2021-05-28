@@ -22,7 +22,7 @@ FmxMBTypedProperty >> acceptVisitor: aVisitor [
 FmxMBTypedProperty >> asSlot [
 	self propertyType ifNil: [ FmxMBIncompletePropertyDefiniton signal ].
 
-	^ self builder environment slotNamed: self name asSymbol
+	^ self builder environment slotNamed: self name asSymbol defaultValue: self defaultValue 
 ]
 
 { #category : #accessing }
