@@ -38,10 +38,12 @@ FmxMBTypedProperty >> defaultValue: aValue [
 { #category : #generating }
 FmxMBTypedProperty >> generateGetterIn: aClassOrTrait [
 
-	| methodSource propertyDefinition commentDefinition |
+	| methodSource propertyDefinition commentDefinition pragmaFormat |
 
-	propertyDefinition := '<FMProperty: #{1} type: #{2}>' 
-		format: { self name. self propertyType }.
+	pragmaFormat := self defaultValue ifNil: [ '<FMProperty: #{1} type: #{2}>' ] 
+											   ifNotNil: [ '<FMProperty: #{1} type: #{2} defaultValue: {3}>' ]. 
+	propertyDefinition := pragmaFormat
+		format: { self name. self propertyType. self defaultValue }.
 
 	commentDefinition := self comment
 		ifNotEmpty: [ '<FMComment: {1}>' format: { self comment printString } ].
