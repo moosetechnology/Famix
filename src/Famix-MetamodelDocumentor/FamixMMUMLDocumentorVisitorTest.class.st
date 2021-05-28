@@ -152,3 +152,41 @@ FamixMMUMLDocumentorVisitorTest >> testVisitRelationToExternalClass [
 'Teacher " *teachers" -- " *students" Student
 '
 ]
+
+{ #category : #tests }
+FamixMMUMLDocumentorVisitorTest >> testVisitTraitUsed [
+	| contents |
+	contents := FamixMMUMLDocumentor new
+ 		model: FDModel ;
+ 		generatePlantUMLModel. 
+		
+	self assert: [ contents includesSubstring: 'Trait1 <|.. Trait2' ].
+	self assert: [ contents includesSubstring: 'Trait2 <|.. Trait3' ].
+	self assert: [ contents includesSubstring: 'Trait2 <|.. Trait4' ].
+	self assert: [ (contents includesSubstring: 'Trait1 <|.. Trait4')not ].
+	self assert: [ (contents includesSubstring: 'Trait1 <|.. Trait3')not ].
+]
+
+{ #category : #tests }
+FamixMMUMLDocumentorVisitorTest >> testVisitWithoutClasses [
+	| contents |
+	contents := FamixMMUMLDocumentor new
+ 		model: FDModel ;
+ 		generatePlantUMLModelWithout: { }. 
+	
+	contents := FamixMMUMLDocumentor new
+ 		model: FDModel ;
+ 		generatePlantUMLModelWithout: { FDTrait1 }. 
+	
+	self assert: [ contents includesSubstring: 'hide Trait1' ].
+]
+
+{ #category : #tests }
+FamixMMUMLDocumentorVisitorTest >> testVisitWithoutClassesWithEmptyCollection [
+	| contents |
+	contents := FamixMMUMLDocumentor new
+ 		model: FDModel ;
+ 		generatePlantUMLModelWithout: { }. 
+	
+	self assert: [ ((contents allButFirst: 30) includesSubstring: 'hide')not ].
+]
