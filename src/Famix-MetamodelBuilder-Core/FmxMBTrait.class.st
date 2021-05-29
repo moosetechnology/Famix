@@ -62,6 +62,8 @@ FmxMBTrait >> generate [
 			
 	self realClass: aTrait.
 	
+	self generateInitialize.
+	
 	self generateAccessors.
 	self generateAnnotationIn: aTrait as: self name superclass: nil.
 	

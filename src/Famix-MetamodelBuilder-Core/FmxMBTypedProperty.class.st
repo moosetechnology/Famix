@@ -76,6 +76,11 @@ FmxMBTypedProperty >> generateSetterIn: aClassOrTrait [
 		classified: 'accessing'
 ]
 
+{ #category : #generating }
+FmxMBTypedProperty >> hasDefaultValue [
+	^ defaultValue isNotNil
+]
+
 { #category : #initialization }
 FmxMBTypedProperty >> initialize [
 	super initialize.
