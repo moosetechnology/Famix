@@ -42,7 +42,8 @@ Class {
 { #category : #generating }
 FamixMMUMLDocumentor >> generateClassesOfNoInterest: aFM3Class [
 	outputStream nextPutAll: 'hide '.
-		self generateClassName: aFM3Class
+		self generateClassName: aFM3Class.
+	outputStream cr.
 ]
 
 { #category : #generating }
