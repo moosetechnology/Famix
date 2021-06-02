@@ -5,6 +5,17 @@ Class {
 }
 
 { #category : #tests }
+FamixMMUMLDocumentorVisitorTest >> testTypeOfExternal [
+	| contents |
+	contents := FamixMMUMLDocumentor new
+		beWithStub;
+ 		model: FDModel ;
+ 		generatePlantUMLModel. 
+		
+	self assert: [ contents includesSubstring: 'class Model <<(C,LightYellow)External>>' ].
+]
+
+{ #category : #tests }
 FamixMMUMLDocumentorVisitorTest >> testVisitClassNoAttributes [
 
 	documentor visitClass: (self famixClassFor: FamixTest4Book).
