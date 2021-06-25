@@ -42,7 +42,8 @@ Class {
 { #category : #generating }
 FamixMMUMLDocumentor >> generateClassesOfNoInterest: aFM3Class [
 	outputStream nextPutAll: 'hide '.
-		self generateClassName: aFM3Class
+		self generateClassName: aFM3Class.
+	outputStream cr.
 ]
 
 { #category : #generating }
@@ -52,7 +53,7 @@ FamixMMUMLDocumentor >> generateExternalClass: aFM3Class [
 	self generateClassName: aFM3Class.
 	(self ofInterest: aFM3Class) ifFalse: [ 
 		outputStream nextPutAll: ' <<'.
-		aFM3Class isClass
+		aFM3Class isFM3Class
 			ifTrue: [ outputStream nextPutAll: '(C,LightYellow)' ]
 			ifFalse: [ outputStream nextPutAll: '(T,LightYellow)' ].
 		outputStream nextPutAll: 'External>>' ].
