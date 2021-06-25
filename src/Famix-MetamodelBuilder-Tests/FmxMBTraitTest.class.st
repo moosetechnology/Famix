@@ -243,13 +243,23 @@ FmxMBTraitTest >> testDefaultPackageForUserClasses [
 ]
 
 { #category : #tests }
-FmxMBTraitTest >> testGenerateRemotes [
+FmxMBTraitTest >> testGenerateRemotesGeneratesRelations [
 	| traitA traitB |
 	traitA := FmxTraitsTestGenerateAccessorBModel metamodel elementNamed: 'Famix-MetamodelBuilder-TestsTraitsResources-A.TraitA'.
 	traitB := FmxTraitsTestGenerateAccessorBModel metamodel elementNamed: 'Famix-MetamodelBuilder-TestsTraitsResources-B.TraitB'.
 
 	self assert: (traitA complexProperties anySatisfy: [:each| each opposite mmClass = traitB]).
 	self assert: (traitB complexProperties anySatisfy: [:each| each opposite mmClass = traitA]).
+]
+
+{ #category : #tests }
+FmxMBTraitTest >> testGenerateRemotesGeneratesSlots [
+	| traitA traitB |
+	traitA := FmxTraitsTestGenerateAccessorBModel metamodel elementNamed: 'Famix-MetamodelBuilder-TestsTraitsResources-A.TraitA'.
+	traitB := FmxTraitsTestGenerateAccessorBModel metamodel elementNamed: 'Famix-MetamodelBuilder-TestsTraitsResources-B.TraitB'.
+
+	self assert: (traitA implementingClass hasSlotNamed: #relationToB).
+	self assert: (traitB implementingClass hasSlotNamed: #relationToA).
 ]
 
 { #category : #tests }
