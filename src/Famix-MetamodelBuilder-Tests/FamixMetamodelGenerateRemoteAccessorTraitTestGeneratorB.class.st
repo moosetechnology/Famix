@@ -35,7 +35,7 @@ FamixMetamodelGenerateRemoteAccessorTraitTestGeneratorB class >> submetamodels [
 { #category : #definition }
 FamixMetamodelGenerateRemoteAccessorTraitTestGeneratorB >> defineRelations [
 	super defineRelations.
-	(traitA property: #relationToB) - (traitB property: #relationToB).
+	(traitA property: #relationToB) - (traitB property: #relationToA).
 ]
 
 { #category : #definition }
