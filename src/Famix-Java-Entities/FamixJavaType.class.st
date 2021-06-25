@@ -67,14 +67,6 @@ FamixJavaType >> implements: aString [
 ]
 
 { #category : #testing }
-FamixJavaType >> isAbstract [
-	<FMProperty: #isAbstract type: #Boolean> <derived>
-	<FMComment: 'Flag true for abstract classes.'>
-	
-	^super isAbstract
-]
-
-{ #category : #testing }
 FamixJavaType >> isAnonymousClass [
 	^ self container isNotNil and: [ self container isMethod or: [ self name isAllDigits or: [ '*_anonymous_*' match: self name ] ] ]
 ]
