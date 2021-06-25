@@ -119,7 +119,6 @@ Class {
 		'tClassWithVisibility',
 		'tCanBeFinal',
 		'tCanBeAbstract',
-		'tCanBeClassSide',
 		'tClassMetrics',
 		'tMethodMetrics',
 		'tHasKind',
@@ -932,7 +931,7 @@ FamixGenerator >> defineHierarchy [
 	tAssociation --|> tSourceEntity.
 
 	tAttribute --|> tStructuralEntity.
-	tAttribute --|> tCanBeClassSide.
+	
 
 	tAnnotationInstance --|> #TEntityMetaLevelDependency.
 
@@ -1006,7 +1005,7 @@ FamixGenerator >> defineHierarchy [
 	tMethod --|> tNamedEntity.
 	tMethod --|> #TOODependencyQueries.
 	tMethod withPrecedenceOf: tWithStatements.
-	tMethod --|> tCanBeClassSide.
+	
 	tMethod --|> tMethodMetrics.
 	
 	tMultipleFileAnchor --|> tSourceAnchor.
@@ -1057,8 +1056,7 @@ FamixGenerator >> defineHierarchy [
 FamixGenerator >> defineProperties [
 	super defineProperties.
 	
-	((tCanBeClassSide property: #isClassSide type: #Boolean) 
-		comment: 'Entity can be declared class side i.e. static').
+	
 	((tCanBeAbstract property: #isAbstract type: #Boolean) 
 		comment: 'Entity can be declared abstract').
 	((tCanBeFinal property: #isFinal type: #Boolean) 
@@ -1439,7 +1437,7 @@ FamixGenerator >> defineRelations [
 { #category : #definition }
 FamixGenerator >> defineTraits [
 	super defineTraits.
-	tCanBeClassSide := builder newTraitNamed: #TCanBeClassSide.
+	
 	tCanBeAbstract := builder newTraitNamed: #TCanBeAbstract.
 	tCanBeFinal := builder newTraitNamed: #TCanBeFinal.
 	tAccess := builder newTraitNamed: #TAccess.

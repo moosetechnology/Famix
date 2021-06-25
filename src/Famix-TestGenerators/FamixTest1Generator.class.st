@@ -36,7 +36,8 @@ Class {
 		'indexedFileAnchor',
 		'multipleFileAnchor',
 		'class',
-		'model'
+		'model',
+		'tCanBeClassSide'
 	],
 	#category : #'Famix-TestGenerators'
 }
@@ -82,7 +83,8 @@ FamixTest1Generator >> defineHierarchy [
 	attribute
 		--|> namedEntity ;
 		--|> #TWithSourceLanguages ;
-		--|> #TAttribute.
+		--|> #TAttribute;
+	  --|> tCanBeClassSide.
 
 	class
 		--|> namedEntity ;
@@ -105,7 +107,9 @@ FamixTest1Generator >> defineHierarchy [
 		--|> namedEntity ;
 		--|> #TWithSourceLanguages ;
 		--|> #TMethod; 
-		--|> #THasKind.
+		--|> #THasKind;
+		--|> tCanBeClassSide.
+		
 
 	multipleFileAnchor --|> sourceAnchor.
 	multipleFileAnchor --|> #TMultipleFileAnchor.
@@ -118,7 +122,16 @@ FamixTest1Generator >> defineHierarchy [
 { #category : #definition }
 FamixTest1Generator >> defineProperties [
 	super defineProperties.
-	model property: #modelHasProperties type: #Object
+	model property: #modelHasProperties type: #Object.
+	((tCanBeClassSide property: #isClassSide type: #Boolean) 
+		comment: 'Entity can be declared class side i.e. static').	
+]
+
+{ #category : #definition }
+FamixTest1Generator >> defineTraits [ 
+
+	super defineTraits.
+	tCanBeClassSide := builder newTraitNamed: #TCanBeClassSide. 
 ]
 
 { #category : #definition }
