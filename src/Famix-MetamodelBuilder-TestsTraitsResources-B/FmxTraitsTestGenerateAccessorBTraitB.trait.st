@@ -13,25 +13,25 @@ FmxTraitsTestGenerateAccessorBTraitB classSide >> annotation [
 ]
 
 { #category : #accessing }
-FmxTraitsTestGenerateAccessorBTraitB >> relationToB [
-	"Relation named: #relationToB type: #FmxTraitsTestGenerateAccessorATraitA opposite: #relationToB"
+FmxTraitsTestGenerateAccessorBTraitB >> relationToA [
+	"Relation named: #relationToA type: #FmxTraitsTestGenerateAccessorATraitA opposite: #relationToB"
 
 	<generated>
 	<derived>
-	<FMProperty: #relationToB type: #FmxTraitsTestGenerateAccessorATraitA opposite: #relationToB>
-	^ self attributeAt: #relationToB ifAbsent: [ nil ]
+	<FMProperty: #relationToA type: #FmxTraitsTestGenerateAccessorATraitA opposite: #relationToB>
+	^ self attributeAt: #relationToA ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
-FmxTraitsTestGenerateAccessorBTraitB >> relationToB: anObject [
+FmxTraitsTestGenerateAccessorBTraitB >> relationToA: anObject [
 
 	<generated>
-	(self attributeAt: #relationToB ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	(self attributeAt: #relationToA ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
-		otherSide :=  self relationToB.
-		self attributeAt: #relationToB put: anObject.
+		otherSide :=  self relationToA.
+		self attributeAt: #relationToA put: anObject.
 		otherSide relationToB: nil ]
 	ifNotNil: [ 
-		self attributeAt: #relationToB put: anObject.
+		self attributeAt: #relationToA put: anObject.
 		anObject relationToB: self ]
 ]

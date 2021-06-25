@@ -3,7 +3,9 @@ Class {
 	#superclass : #FamixMetamodelGenerator,
 	#instVars : [
 		'traitB',
-		'traitA'
+		'traitA',
+		'classA',
+		'classB'
 	],
 	#category : #'Famix-MetamodelBuilder-Tests-GeneratorRessources'
 }
@@ -33,8 +35,25 @@ FamixMetamodelGenerateRemoteAccessorTraitTestGeneratorB class >> submetamodels [
 ]
 
 { #category : #definition }
+FamixMetamodelGenerateRemoteAccessorTraitTestGeneratorB >> defineClasses [
+	super defineClasses.
+	
+	classA := builder newClassNamed: #ClassA.
+	classB := builder newClassNamed: #ClassB.
+]
+
+{ #category : #definition }
+FamixMetamodelGenerateRemoteAccessorTraitTestGeneratorB >> defineHierarchy [
+	super defineHierarchy.
+	
+	classA --|> traitA.
+	classB --|> traitB.
+]
+
+{ #category : #definition }
 FamixMetamodelGenerateRemoteAccessorTraitTestGeneratorB >> defineRelations [
 	super defineRelations.
+
 	(traitA property: #relationToB) - (traitB property: #relationToA).
 ]
 

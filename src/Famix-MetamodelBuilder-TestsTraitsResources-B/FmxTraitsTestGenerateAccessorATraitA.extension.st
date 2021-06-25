@@ -2,10 +2,10 @@ Extension { #name : #FmxTraitsTestGenerateAccessorATraitA }
 
 { #category : #'*Famix-MetamodelBuilder-TestsTraitsResources-B-accessing' }
 FmxTraitsTestGenerateAccessorATraitA >> relationToB [
-	"Relation named: #relationToB type: #FmxTraitsTestGenerateAccessorBTraitB opposite: #relationToB"
+	"Relation named: #relationToB type: #FmxTraitsTestGenerateAccessorBTraitB opposite: #relationToA"
 
 	<generated>
-	<FMProperty: #relationToB type: #FmxTraitsTestGenerateAccessorBTraitB opposite: #relationToB>
+	<FMProperty: #relationToB type: #FmxTraitsTestGenerateAccessorBTraitB opposite: #relationToA>
 	<package: #'Famix-MetamodelBuilder-TestsTraitsResources-B'>
 	^ self attributeAt: #relationToB ifAbsent: [ nil ]
 ]
@@ -18,8 +18,8 @@ FmxTraitsTestGenerateAccessorATraitA >> relationToB: anObject [
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self relationToB.
 		self attributeAt: #relationToB put: anObject.
-		otherSide relationToB: nil ]
+		otherSide relationToA: nil ]
 	ifNotNil: [ 
 		self attributeAt: #relationToB put: anObject.
-		anObject relationToB: self ]
+		anObject relationToA: self ]
 ]
