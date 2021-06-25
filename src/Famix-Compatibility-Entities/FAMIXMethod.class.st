@@ -1,8 +1,8 @@
 Class {
 	#name : #FAMIXMethod,
 	#superclass : #FAMIXBehaviouralEntity,
-	#traits : 'FAMIXTCanBeSynchronized + FamixTHasKind + FamixTMethod + FamixTWithCaughtExceptions + FamixTWithDeclaredExceptions + FamixTWithThrownExceptions',
-	#classTraits : 'FAMIXTCanBeSynchronized classTrait + FamixTHasKind classTrait + FamixTMethod classTrait + FamixTWithCaughtExceptions classTrait + FamixTWithDeclaredExceptions classTrait + FamixTWithThrownExceptions classTrait',
+	#traits : 'FAMIXTCanBeClassSide + FAMIXTCanBeSynchronized + FamixTHasKind + FamixTMethod + FamixTWithCaughtExceptions + FamixTWithDeclaredExceptions + FamixTWithThrownExceptions',
+	#classTraits : 'FAMIXTCanBeClassSide classTrait + FAMIXTCanBeSynchronized classTrait + FamixTHasKind classTrait + FamixTMethod classTrait + FamixTWithCaughtExceptions classTrait + FamixTWithDeclaredExceptions classTrait + FamixTWithThrownExceptions classTrait',
 	#classVars : [
 		'#ShouldSearchForSmalltalkCodeInImage'
 	],

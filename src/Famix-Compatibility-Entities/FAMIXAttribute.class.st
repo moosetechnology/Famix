@@ -1,8 +1,8 @@
 Class {
 	#name : #FAMIXAttribute,
 	#superclass : #FAMIXStructuralEntity,
-	#traits : 'FAMIXTCanBeTransient + FAMIXTCanBeVolatile + FamixTAttribute',
-	#classTraits : 'FAMIXTCanBeTransient classTrait + FAMIXTCanBeVolatile classTrait + FamixTAttribute classTrait',
+	#traits : 'FAMIXTCanBeClassSide + FAMIXTCanBeTransient + FAMIXTCanBeVolatile + FamixTAttribute',
+	#classTraits : 'FAMIXTCanBeClassSide classTrait + FAMIXTCanBeTransient classTrait + FAMIXTCanBeVolatile classTrait + FamixTAttribute classTrait',
 	#category : #'Famix-Compatibility-Entities-Entities'
 }
 
