@@ -243,6 +243,16 @@ FmxMBTraitTest >> testDefaultPackageForUserClasses [
 ]
 
 { #category : #tests }
+FmxMBTraitTest >> testGenerateRemotes [
+	| traitA traitB |
+	traitA := FmxTraitsTestGenerateAccessorBModel metamodel elementNamed: 'Famix-MetamodelBuilder-TestsTraitsResources-A.TraitA'.
+	traitB := FmxTraitsTestGenerateAccessorBModel metamodel elementNamed: 'Famix-MetamodelBuilder-TestsTraitsResources-B.TraitB'.
+
+	self assert: (traitA complexProperties anySatisfy: [:each| each opposite mmClass = traitB]).
+	self assert: (traitB complexProperties anySatisfy: [:each| each opposite mmClass = traitA]).
+]
+
+{ #category : #tests }
 FmxMBTraitTest >> testMultipleTraits [
 
 	builder newTraitNamed: #TComment.	

@@ -78,7 +78,7 @@ FmxMBTrait >> generateRemotes [
 	| aTrait traitName |
 	traitName := self fullName.
 
-	aTrait := self builder environment classNamed: traitName asSymbol.
+	aTrait := self class environment at: traitName asSymbol ifAbsent: [ builder environment classNamed: traitName asSymbol ].
 
 	self realClass: aTrait.
 
