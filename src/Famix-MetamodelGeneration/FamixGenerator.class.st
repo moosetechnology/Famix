@@ -81,7 +81,6 @@ Class {
 		'tWithLocalVariables',
 		'tWithMethods',
 		'tDefinedInModule',
-		'tWithPackages',
 		'tWithParameterizedTypeUsers',
 		'tWithParameterizedTypes',
 		'tWithParameters',
@@ -1323,9 +1322,6 @@ FamixGenerator >> defineRelations [
 		comment: 'Package containing the entity in the code structure (if applicable)';
 		container).
 
-	((tPackage property: #packageOwner))
-		*-
-	((tWithPackages property: #packages)).
 
 	((tParameter property: #parentBehaviouralEntity)
 			comment: 'Behavioural entity containing this parameter. belongsTo implementation';
@@ -1740,8 +1736,6 @@ FamixGenerator >> defineTraits [
 	tDefinedInModule := builder newTraitNamed: #TDefinedInModule.
 	tDefinedInModule comment: self commentForTDefinedInModule.
 
-	tWithPackages := builder newTraitNamed: #TWithPackages.
-	tWithPackages comment: self commentForTWithPackages.
 
 	tWithParameterizedTypeUsers := builder newTraitNamed: #TWithParameterizedTypeUsers.
 	tWithParameterizedTypeUsers comment: self commentForTWithParameterizedTypeUsers.
