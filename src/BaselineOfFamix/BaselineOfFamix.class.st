@@ -78,7 +78,9 @@ BaselineOfFamix >> baseline: spec [
 				package: 'Moose-SmalltalkImporter-KGB-Tests' with: [ spec requires: #('KGBTestResources' 'Moose-SmalltalkImporter-Core-Tests') ];
 
 				package: 'Famix-TestGenerators' with: [ spec requires: #('Basic') ];
-				package: 'Famix-MetamodelBuilder-Tests' with: [ spec requires: #('Famix-TestGenerators') ];
+				package: 'Famix-MetamodelBuilder-Tests' with: [ spec requires: #('Famix-TestGenerators' 'Famix-MetamodelBuilder-TestsTraitsResources-A' 'Famix-MetamodelBuilder-TestsTraitsResources-B') ];
+				package: 'Famix-MetamodelBuilder-TestsTraitsResources-A' with: [ spec requires: #('Basic') ];
+				package: 'Famix-MetamodelBuilder-TestsTraitsResources-B' with: [ spec requires: #('Basic') ];
 				
 				package: 'Famix-Test1-Entities' with: [ spec requires: #('BasicTraits') ];
 				package: 'Famix-Test1-Tests' with: [ spec requires: #('Famix-Test1-Entities') ];
