@@ -35,10 +35,15 @@ FMMetamodelFactory class >> isDefaultFor: aModel [
 
 { #category : #'*Moose-Core' }
 FMMetamodelFactory >> modelClass [
+
 	fm3Package ifNil: [ self error: 'The factory is not initialized.' ].
 
 	^ fm3Package classes
-		detect: [ :class | class superclass name = #Model ]
-		ifFound: #implementingClass
-		ifNone: [ self error: 'No subclass of MooseModel present in this FM3 package' ]
+		  detect: [ :class | 
+			  class isFM3Class and: [ 
+				  class implementingClass superclass = MooseModel ] ]
+		  ifFound: #implementingClass
+		  ifNone: [ 
+		  self error:
+			  'No subclass of MooseModel present in this FM3 package' ]
 ]
