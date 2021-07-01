@@ -191,6 +191,7 @@ FmxMBBehavior >> generateInitializeFor: aClass [
 	| methodSource defaultValuedProperties |
 	
 	defaultValuedProperties := self properties select: #hasDefaultValue.
+	defaultValuedProperties ifEmpty: [ ^ self ].
 	methodSource := String streamContents: [ :s |
 		s nextPutAll: 'initialize'; cr; cr.
 		s nextPutAll: 'super initialize.'; cr; cr.
