@@ -14,12 +14,3 @@ FamixTest6SourceTextAnchor class >> annotation [
 	<generated>
 	^self
 ]
-
-{ #category : #initialization }
-FamixTest6SourceTextAnchor >> initialize [
-
-super initialize.
-
-"Default value initialization"
-
-]

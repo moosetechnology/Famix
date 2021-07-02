@@ -14,12 +14,3 @@ FamixTest6Comment class >> annotation [
 	<generated>
 	^self
 ]
-
-{ #category : #initialization }
-FamixTest6Comment >> initialize [
-
-super initialize.
-
-"Default value initialization"
-
-]

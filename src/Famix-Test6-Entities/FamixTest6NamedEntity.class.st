@@ -14,12 +14,3 @@ FamixTest6NamedEntity class >> annotation [
 	<generated>
 	^self
 ]
-
-{ #category : #initialization }
-FamixTest6NamedEntity >> initialize [
-
-super initialize.
-
-"Default value initialization"
-
-]

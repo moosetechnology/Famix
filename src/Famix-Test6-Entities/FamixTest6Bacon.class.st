@@ -33,6 +33,7 @@ FamixTest6Bacon >> eggs: anObject [
 
 { #category : #initialization }
 FamixTest6Bacon >> initialize [
+<generated>
 
 super initialize.
 

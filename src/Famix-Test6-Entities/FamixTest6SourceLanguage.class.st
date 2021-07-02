@@ -14,12 +14,3 @@ FamixTest6SourceLanguage class >> annotation [
 	<generated>
 	^self
 ]
-
-{ #category : #initialization }
-FamixTest6SourceLanguage >> initialize [
-
-super initialize.
-
-"Default value initialization"
-
-]

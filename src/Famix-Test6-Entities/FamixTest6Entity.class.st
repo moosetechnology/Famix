@@ -19,12 +19,3 @@ FamixTest6Entity class >> metamodel [
 	<generated>
 	^ FamixTest6Model metamodel
 ]
-
-{ #category : #initialization }
-FamixTest6Entity >> initialize [
-
-super initialize.
-
-"Default value initialization"
-
-]

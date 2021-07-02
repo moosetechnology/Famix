@@ -16,12 +16,3 @@ FamixTest6Model class >> annotation [
 	<package: #'Famix-Test6-Entities'>
 	<generated>
 ]
-
-{ #category : #initialization }
-FamixTest6Model >> initialize [
-
-super initialize.
-
-"Default value initialization"
-
-]

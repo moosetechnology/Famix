@@ -18,6 +18,7 @@ FamixTest6Spam class >> annotation [
 
 { #category : #initialization }
 FamixTest6Spam >> initialize [
+<generated>
 
 super initialize.
 
