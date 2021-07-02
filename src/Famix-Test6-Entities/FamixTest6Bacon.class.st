@@ -33,13 +33,13 @@ FamixTest6Bacon >> eggs: anObject [
 
 { #category : #initialization }
 FamixTest6Bacon >> initialize [
-<generated>
 
-super initialize.
+	<generated>
+	super initialize.
 
-"Default value initialization"
-isFood := true.
-eggs := 12.
+	"Default value initialization"
+	isFood := true.
+	eggs := 12.
 
 ]
 

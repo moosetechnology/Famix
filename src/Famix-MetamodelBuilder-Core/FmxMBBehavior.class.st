@@ -193,12 +193,12 @@ FmxMBBehavior >> generateInitializeFor: aClass [
 	defaultValuedProperties := self properties select: #hasDefaultValue.
 	defaultValuedProperties ifEmpty: [ ^ self ].
 	methodSource := String streamContents: [ :s |
-		s nextPutAll: 'initialize'; cr.
-		s nextPutAll: '<generated>'; cr; cr.
-		s nextPutAll: 'super initialize.'; cr; cr.
-		s nextPutAll: '"Default value initialization"'; cr.
+		s nextPutAll: 'initialize'; cr; cr.
+		s tab; nextPutAll: '<generated>'; cr.
+		s tab; nextPutAll: 'super initialize.'; cr; cr.
+		s tab; nextPutAll: '"Default value initialization"'; cr.
 			defaultValuedProperties do: [ :prop | 
-				s nextPutAll: ('{1} := {2}.' format: {prop name. prop defaultValue}); cr.	
+				s tab; nextPutAll: ('{1} := {2}.' format: {prop name. prop defaultValue}); cr.	
 			].
 		 ].
 	self builder environment compile: methodSource 

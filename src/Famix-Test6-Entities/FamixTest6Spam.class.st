@@ -18,12 +18,12 @@ FamixTest6Spam class >> annotation [
 
 { #category : #initialization }
 FamixTest6Spam >> initialize [
-<generated>
 
-super initialize.
+	<generated>
+	super initialize.
 
-"Default value initialization"
-isSomething := false.
+	"Default value initialization"
+	isSomething := false.
 
 ]
 
