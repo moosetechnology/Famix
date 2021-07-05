@@ -616,10 +616,10 @@ MooseQueryTest >> testOutgoingInvocationWithin [
 
 { #category : #tests }
 MooseQueryTest >> testParents [
-	self assert: class2 parents size equals: 1.
-	self assert: class2 parents anyOne equals: package2.
-	self assert: method1 parents size equals: 1.
-	self assert: method1 parents anyOne equals: class1.
+	self assert: class2 subqueries size equals: 1.
+	self assert: class2 subqueries anyOne equals: package2.
+	self assert: method1 subqueries size equals: 1.
+	self assert: method1 subqueries anyOne equals: class1.
 ]
 
 { #category : #tests }
