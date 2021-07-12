@@ -83,12 +83,18 @@ FamixTestGenerator >> runForASpecificClass: aClass with: aGenerator [
 
 { #category : #'as yet unclassified' }
 FamixTestGenerator >> runForAllClassesWith: aGenerator [
+
 	self generator: aGenerator.
 	self initPackage.
 	self initClasses.
-	(self classes select: [:c | c isTrait ]) do: [ :c | FamixTraitTestAndTraitGenerator new runFor: c ].
-	(self classes select: [:c | c isClass ]) do: [ :c | FamixClassTestAndTraitGenerator new runFor: c ].
-	
+	(self classes select: [ :c | c isTrait ]) do: [ :c | 
+		FamixTraitTestAndTraitGenerator new
+			generator: self generator;
+			runFor: c ].
+	(self classes select: [ :c | c isClass ]) do: [ :c | 
+		FamixClassTestAndTraitGenerator new
+			generator: self generator;
+			runFor: c ]
 ]
 
 { #category : #accessing }
