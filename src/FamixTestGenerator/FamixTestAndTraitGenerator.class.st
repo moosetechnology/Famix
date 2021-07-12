@@ -294,8 +294,8 @@ FamixTestAndTraitGenerator >> generateSlotsOfTraitOfTestFor: aClass [
 FamixTestAndTraitGenerator >> generateSlotsOfTraitOfTestFrom: aSlot [
 	^((aSlot class == FMOne) or: [ aSlot class == FMProperty ])
 		ifTrue: [ {aSlot name} ]
-		ifFalse: [  {(self generateSlotNameOfTestTraitFrom: aSlot) asString , '1'.
-						(self generateSlotNameOfTestTraitFrom: aSlot) asString , '2' } ]
+		ifFalse: [  {(self generateSlotNameOfTestTraitFrom: aSlot) asSymbol , '1'.
+						(self generateSlotNameOfTestTraitFrom: aSlot) asSymbol , '2' } ]
 ]
 
 { #category : #'generate for FMMany slot' }
