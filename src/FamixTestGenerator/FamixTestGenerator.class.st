@@ -86,7 +86,8 @@ FamixTestGenerator >> runForAllClassesWith: aGenerator [
 	self generator: aGenerator.
 	self initPackage.
 	self initClasses.
-	self classes do: [ :c | self runFor: c ].
+	(self classes select: [:c | c isTrait ]) do: [ :c | FamixTraitTestAndTraitGenerator new runFor: c ].
+	(self classes select: [:c | c isClass ]) do: [ :c | FamixClassTestAndTraitGenerator new runFor: c ].
 	
 ]
 
