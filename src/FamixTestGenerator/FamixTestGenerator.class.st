@@ -75,10 +75,18 @@ FamixTestGenerator >> runFor: aClass [.
 
 { #category : #'as yet unclassified' }
 FamixTestGenerator >> runForASpecificClass: aClass with: aGenerator [
+
 	self generator: aGenerator.
 	self initPackage.
-	self runFor: aClass.
-	
+	aClass isTrait
+		ifTrue: [ 
+			FamixTraitTestAndTraitGenerator new
+				generator: self generator;
+				runFor: aClass ]
+		ifFalse: [ 
+			FamixClassTestAndTraitGenerator new
+				generator: self generator;
+				runFor: aClass ]
 ]
 
 { #category : #'as yet unclassified' }
