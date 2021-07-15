@@ -18,7 +18,9 @@ FamixClassTestAndTraitGenerator >> generateCodeForFMManySlotInitialization: aSlo
 	self entity addMethod: method2."
 	traitSlotName1 := (self generateSlotNameOfTestTraitFrom: aSlot) asString , '1'.
 	traitSlotName2 := (self generateSlotNameOfTestTraitFrom: aSlot) asString , '2'.
-	^ String streamContents: [ :aStream | aStream nextPutAll:  traitSlotName1 ;
+	^ String streamContents: [ :aStream | aStream nextPutAll: '<generated>';
+		cr;
+		nextPutAll:  traitSlotName1 ;
 		nextPutAll: ' := ';
 		nextPutAll: aSlot targetClass name  ;
 		nextPutAll: ' new .';
@@ -60,7 +62,9 @@ FamixClassTestAndTraitGenerator >> generateCodeForFMOneSlotInitialization: aSlot
 	model add: access.
 	self entity accessor: access."
 	traitSlotName := aSlot name asString.
-	^ String streamContents: [ :aStream | aStream nextPutAll:  traitSlotName ;
+	^ String streamContents: [ :aStream | aStream nextPutAll: '<generated>';
+		cr;
+		nextPutAll:  traitSlotName ;
 		nextPutAll: ' := ';
 		nextPutAll: aSlot targetClass name  ;
 		nextPutAll: ' new. ';
@@ -83,7 +87,10 @@ FamixClassTestAndTraitGenerator >> generateCodeForFMOneSlotInitialization: aSlot
 
 { #category : #run }
 FamixClassTestAndTraitGenerator >> generateSetUpInTraitFor: aClass [
-	^ String streamContents: [ :aStream | aStream nextPutAll: 'setUp';
+	^ String streamContents: [ :aStream | aStream
+		nextPutAll: 'setUp';
+		cr;
+		nextPutAll: '<generated>';
 		cr;
 		nextPutAll: 'super setUp.';
 		cr;
