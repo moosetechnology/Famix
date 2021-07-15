@@ -19,9 +19,9 @@ FamixClassTestAndTraitGenerator >> generateCodeForFMManySlotInitialization: aSlo
 	traitSlotName1 := (self generateSlotNameOfTestTraitFrom: aSlot) asString , '1'.
 	traitSlotName2 := (self generateSlotNameOfTestTraitFrom: aSlot) asString , '2'.
 	^ String streamContents: [ :aStream | aStream nextPutAll:  traitSlotName1 ;
-		nextPutAll: ' := MooseEntity new copyWithTalent: ';
+		nextPutAll: ' := ';
 		nextPutAll: aSlot targetClass name  ;
-		nextPutAll: '.';
+		nextPutAll: ' new .';
 		cr;
 		nextPutAll: traitSlotName1 ;
 		nextPutAll: ' class initializeSlots: ';
