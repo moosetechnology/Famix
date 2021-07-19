@@ -84,7 +84,7 @@ FamixMMUMLAbstractDocumentor >> model [
 { #category : #accessing }
 FamixMMUMLAbstractDocumentor >> model: aModel [
 
-	models add: (FamixUMLModelColorTuple model: aModel)
+	self withModel: aModel
 ]
 
 { #category : #accessing }
@@ -119,6 +119,12 @@ FamixMMUMLAbstractDocumentor >> relationEndOfInterest: aFMClass [
 	^self isWithStub
 		ifTrue: [ aFMClass class ~= FM3Object ]
 		ifFalse: [ self ofInterest: aFMClass ]
+]
+
+{ #category : #accessing }
+FamixMMUMLAbstractDocumentor >> withModel: aModel [
+
+	models add: (FamixUMLModelColorTuple model: aModel)
 ]
 
 { #category : #accessing }
