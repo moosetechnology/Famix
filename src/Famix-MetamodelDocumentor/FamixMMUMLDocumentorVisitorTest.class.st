@@ -23,7 +23,7 @@ FamixMMUMLDocumentorVisitorTest >> testVisitClassNoAttributes [
 	self
 		assert: stream contents
 		equals:
-'class Book << (C,white) >> {
+'class Book << (C,white) >> #FFFFFF {
 }
 '
 ]
@@ -36,7 +36,7 @@ FamixMMUMLDocumentorVisitorTest >> testVisitClassWithAttributes [
 	self
 		assert: stream contents
 		equals:
-'class Entity << (C,white) >> {
+'class Entity << (C,white) >> #FFFFFF {
   String name
 }
 '

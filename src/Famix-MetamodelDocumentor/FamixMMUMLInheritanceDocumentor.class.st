@@ -28,7 +28,7 @@ FamixMMUMLInheritanceDocumentor >> visitClass: aFMClass [
 { #category : #visiting }
 FamixMMUMLInheritanceDocumentor >> visitTrait: aFMTrait [
 	self flag: 'Hack to access to direct traits only - https://github.com/moosetechnology/Fame/issues/23'.
-	(aFMTrait implementingClass traits collect: [:stClass | model metamodel descriptionOf: stClass ])  do: [ :aFMSuperTrait | 
+	(aFMTrait implementingClass traits collect: [:stClass | self findDescriptionOf: stClass ])  do: [ :aFMSuperTrait | 
 	(self relationEndOfInterest: aFMTrait) ifFalse: [ ^ self ].
 	(self relationEndOfInterest: aFMSuperTrait ) ifFalse: [ ^ self ].
 	self generateClassName: aFMSuperTrait .

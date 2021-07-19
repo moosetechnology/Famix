@@ -9,11 +9,11 @@ Class {
 	#name : #FamixMMUMLAbstractDocumentor,
 	#superclass : #Object,
 	#instVars : [
-		'model',
 		'outputStream',
 		'classesOfInterest',
 		'externalClasses',
-		'withStub'
+		'withStub',
+		'models'
 	],
 	#category : #'Famix-MetamodelDocumentor'
 }
@@ -43,6 +43,17 @@ FamixMMUMLAbstractDocumentor >> externalClasses: aCollection [
 	externalClasses  := aCollection 
 ]
 
+{ #category : #'api - generation' }
+FamixMMUMLAbstractDocumentor >> findDescriptionOf: anElement [
+
+	models
+		  detect: [ :model | 
+			  ([ model model metamodel descriptionOf: anElement ]
+				   on: NotFound
+				   do: [ nil ]) isNotNil ]
+		  ifFound: [ :model | ^ model model metamodel descriptionOf: anElement ]
+]
+
 { #category : #generating }
 FamixMMUMLAbstractDocumentor >> generateClassName: aFM3Class [
 	outputStream
@@ -56,7 +67,8 @@ FamixMMUMLAbstractDocumentor >> generateClassName: aFM3Class [
 { #category : #initialization }
 FamixMMUMLAbstractDocumentor >> initialize [
 	self beWithoutStub.
-	externalClasses := Set new
+	externalClasses := Set new.
+	models := Set new.
 ]
 
 { #category : #testing }
@@ -66,12 +78,25 @@ FamixMMUMLAbstractDocumentor >> isWithStub [
 
 { #category : #accessing }
 FamixMMUMLAbstractDocumentor >> model [
-	^ model
+	^ models anyOne
 ]
 
 { #category : #accessing }
-FamixMMUMLAbstractDocumentor >> model: anObject [
-	model := anObject
+FamixMMUMLAbstractDocumentor >> model: aModel [
+
+	self withModel: aModel
+]
+
+{ #category : #accessing }
+FamixMMUMLAbstractDocumentor >> models [
+
+	^ models
+]
+
+{ #category : #accessing }
+FamixMMUMLAbstractDocumentor >> models: anObject [
+
+	models := anObject
 ]
 
 { #category : #private }
@@ -94,6 +119,18 @@ FamixMMUMLAbstractDocumentor >> relationEndOfInterest: aFMClass [
 	^self isWithStub
 		ifTrue: [ aFMClass class ~= FM3Object ]
 		ifFalse: [ self ofInterest: aFMClass ]
+]
+
+{ #category : #accessing }
+FamixMMUMLAbstractDocumentor >> withModel: aModel [
+
+	models add: (FamixUMLModelColorTuple model: aModel)
+]
+
+{ #category : #accessing }
+FamixMMUMLAbstractDocumentor >> withModel: aModel andColor: aColor [
+
+	models add: (FamixUMLModelColorTuple model: aModel color: aColor)
 ]
 
 { #category : #accessing }
