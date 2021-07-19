@@ -64,7 +64,7 @@ FamixMMUMLDocumentor >> generateExternalClass: aFM3Class [
 FamixMMUMLDocumentor >> generatePlantUML: aCollection onStream: aStream [
 	outputStream := aStream.
 	classesOfInterest := aCollection
-		collect: [:stClass | model metamodel descriptionOf: stClass ].
+		collect: [:stClass | self findDescriptionOf: stClass ].
 	externalClasses := Set new.
 
 	self plantUMLHeader.
@@ -113,11 +113,11 @@ FamixMMUMLDocumentor >> generatePlantUMLInheritance [
 
 	| aVisitor |
 	aVisitor := FamixMMUMLInheritanceDocumentor new
-		            outputStream: outputStream ;
-		            classesOfInterest: classesOfInterest ;
-		            externalClasses: externalClasses ;
-						withStub: withStub ;
-						model: model.
+		            outputStream: outputStream;
+		            classesOfInterest: classesOfInterest;
+		            externalClasses: externalClasses;
+		            withStub: withStub;
+		            models: self models.
 	classesOfInterest do: [ :clazz | clazz accept: aVisitor ]
 ]
 
@@ -154,8 +154,9 @@ FamixMMUMLDocumentor >> generatePlantUMLModelFile: aString without: aCollection 
 
 { #category : #'api - generation' }
 FamixMMUMLDocumentor >> generatePlantUMLModelOnStream: aStream [
+
 	outputStream := aStream.
-	classesOfInterest := (model metamodel descriptionOf: model) package classes.
+	classesOfInterest := models flatCollect: [ :model | (self findDescriptionOf: model model) package classes ] as: Set.
 	externalClasses := Set new.
 
 	self plantUMLHeader.
@@ -168,8 +169,7 @@ FamixMMUMLDocumentor >> generatePlantUMLModelOnStream: aStream [
 	outputStream cr.
 	self generatePlantUMLExternalClasses.
 	outputStream cr.
-	self plantUMLFooter.
-
+	self plantUMLFooter
 ]
 
 { #category : #'api - generation' }
@@ -190,9 +190,8 @@ FamixMMUMLDocumentor >> generatePlantUMLModelWithout: aCollection onStream: aStr
 
 	outputStream := aStream.
 	classesOfNoInterest := aCollection
-		collect: [:stClass | model metamodel descriptionOf: stClass ].
-	classesOfInterest := (model metamodel descriptionOf: model) package
-		                     classes.
+		collect: [:stClass | self findDescriptionOf: stClass ].
+	classesOfInterest := models flatCollect: [ :model | (self findDescriptionOf: model model) package classes ] as: Set..
 	externalClasses := Set new.
 
 	self plantUMLHeader.
@@ -296,6 +295,13 @@ FamixMMUMLDocumentor >> isTrait: aFMClass [
 ]
 
 { #category : #private }
+FamixMMUMLDocumentor >> plantUMLBackgroundColorFor: aFMClass [
+	^ (self isTrait: aFMClass)
+		ifTrue: [ 'lightGrey' ]
+		ifFalse: [ (self tupleForEntity: aFMClass) color asHexString ]
+]
+
+{ #category : #private }
 FamixMMUMLDocumentor >> plantUMLColorFor: aFMClass [
 	^ (self isTrait: aFMClass)
 		ifTrue: [ 'lightGrey' ]
@@ -338,6 +344,12 @@ FamixMMUMLDocumentor >> plantUMLMarkerFor: aFMClass [
 		ifFalse: [ 'C' ]
 ]
 
+{ #category : #private }
+FamixMMUMLDocumentor >> tupleForEntity: aFM3Class [
+
+	^ models detect: [ :model | (self findDescriptionOf: model model) package = aFM3Class package ]
+]
+
 { #category : #visiting }
 FamixMMUMLDocumentor >> visitClass: aFMClass [
 	outputStream
@@ -347,7 +359,10 @@ FamixMMUMLDocumentor >> visitClass: aFMClass [
 		nextPutAll: (self plantUMLMarkerFor: aFMClass) ;
 		nextPut: $, ;
 		nextPutAll: (self plantUMLColorFor: aFMClass) ;
-		nextPutAll: ') >> {' ;
+		nextPutAll: ') >>' ;
+		nextPutAll: ' #';
+		nextPutAll: (self plantUMLBackgroundColorFor: aFMClass) ;
+		nextPutAll: ' {';
 		cr.
 	aFMClass
 		primitiveProperties do: [ :prop | prop accept: self ].

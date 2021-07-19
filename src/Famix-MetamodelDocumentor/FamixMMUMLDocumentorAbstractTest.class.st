@@ -10,14 +10,14 @@ Class {
 
 { #category : #running }
 FamixMMUMLDocumentorAbstractTest >> famixClassFor: stClass [
-	^documentor model metamodel descriptionOf: stClass
+	^documentor findDescriptionOf: stClass
 ]
 
 { #category : #running }
 FamixMMUMLDocumentorAbstractTest >> famixProperty: aName in: stClass [
 	| famixClass |
 	famixClass := self famixClassFor: stClass.
-	^famixClass allProperties  detect: [ :p | p name = aName ]
+	^famixClass allProperties detect: [ :p | p name = aName ]
 ]
 
 { #category : #running }
