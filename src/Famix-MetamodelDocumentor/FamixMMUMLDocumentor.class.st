@@ -296,9 +296,7 @@ FamixMMUMLDocumentor >> isTrait: aFMClass [
 
 { #category : #private }
 FamixMMUMLDocumentor >> plantUMLBackgroundColorFor: aFMClass [
-	^ (self isTrait: aFMClass)
-		ifTrue: [ 'lightGrey' ]
-		ifFalse: [ (self tupleForEntity: aFMClass) color asHexString ]
+	^ (self tupleForEntity: aFMClass) color asHexString
 ]
 
 { #category : #private }
@@ -436,7 +434,10 @@ FamixMMUMLDocumentor >> visitTrait: aFMTrait [
 		nextPutAll: (self plantUMLMarkerFor: aFMTrait) ;
 		nextPut: $, ;
 		nextPutAll: (self plantUMLColorFor: aFMTrait) ;
-		nextPutAll: ') >> {' ;
+		nextPutAll: ') >>' ;
+		nextPutAll: ' #';
+		nextPutAll: (self plantUMLBackgroundColorFor: aFMTrait) ;
+		nextPutAll: ' {';
 		cr.
 	aFMTrait 
 		primitiveProperties do: [ :prop | prop accept: self ].
