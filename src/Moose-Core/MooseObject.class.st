@@ -86,7 +86,7 @@ MooseObject class >> allPropertySelectors [
 
 { #category : #meta }
 MooseObject class >> annotation [
-	<FMClass: #Object super: #Object>
+	<FMClass: #Object super: #MooseObject>
 	<package: #Moose>
 	<abstract>
 ]
