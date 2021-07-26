@@ -6,8 +6,7 @@ Java extractors map Java packages to FAMIXNamespaces. They can also mirror the s
 Trait {
 	#name : #FamixTPackage,
 	#instVars : [
-		'#childEntities => FMMany type: #FamixTPackageable opposite: #parentPackage',
-		'#packageOwner => FMOne type: #FamixTWithPackages opposite: #packages'
+		'#childEntities => FMMany type: #FamixTPackageable opposite: #parentPackage'
 	],
 	#traits : 'FamixTNamedEntity',
 	#classTraits : 'FamixTNamedEntity classTrait',
@@ -57,21 +56,6 @@ FamixTPackage >> isPackage [
 
 	<generated>
 	^ true
-]
-
-{ #category : #accessing }
-FamixTPackage >> packageOwner [
-	"Relation named: #packageOwner type: #FamixTWithPackages opposite: #packages"
-
-	<generated>
-	^ packageOwner
-]
-
-{ #category : #accessing }
-FamixTPackage >> packageOwner: anObject [
-
-	<generated>
-	packageOwner := anObject
 ]
 
 { #category : #metrics }

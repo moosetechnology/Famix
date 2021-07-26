@@ -1,9 +1,6 @@
 Trait {
 	#name : #FamixTWithPackages,
-	#instVars : [
-		'#packages => FMMany type: #FamixTPackage opposite: #packageOwner'
-	],
-	#category : #'Famix-Traits-Package'
+	#category : #'Famix-Deprecated-Package'
 }
 
 { #category : #meta }
@@ -17,7 +14,7 @@ FamixTWithPackages classSide >> annotation [
 
 { #category : #accessing }
 FamixTWithPackages >> addPackage: anObject [
-	packages add: anObject
+	
 
 ]
 
@@ -25,14 +22,11 @@ FamixTWithPackages >> addPackage: anObject [
 FamixTWithPackages >> packages [
 	"Relation named: #packages type: #FamixTPackage opposite: #packageOwner"
 
-	<generated>
-	<derived>
-	^ packages
+	
 ]
 
 { #category : #accessing }
 FamixTWithPackages >> packages: anObject [
 
-	<generated>
-	packages value: anObject
+	
 ]
