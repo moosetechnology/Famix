@@ -179,10 +179,12 @@ FamixJavaGenerator >> defineHierarchy [
 	annotationType --|> #TWithAttributes.
 	annotationType --|> #TWithInheritances.
 	annotationType --|> #TPackageable.
+	annotationType --|> #TWithComments.
 
 	annotationTypeAttribute --|> namedEntity.
 	annotationTypeAttribute --|> #TAnnotationTypeAttribute.
 	annotationTypeAttribute --|> #TTypedAnnotationInstanceAttribute.
+	annotationTypeAttribute --|> #TWithComments.
 
 	attribute --|> namedEntity.
 	attribute --|> #TAttribute.
@@ -191,6 +193,7 @@ FamixJavaGenerator >> defineHierarchy [
 	attribute --|> tCanBeVolatile.
 	attribute --|> tCanBeTransient.
 	attribute --|> #TInvocationsReceiver.
+	attribute --|> #TWithComments.
 	attribute --|> tCanBeClassSide.
 	
 	file --|> namedEntity.
@@ -211,6 +214,7 @@ FamixJavaGenerator >> defineHierarchy [
 	method --|> #TCanBeFinal.
 	method --|> #THasVisibility.
 	method --|> #THasKind.
+	method --|> #TWithComments.
 	method --|> tCanBeSynchronized.
 	method --|> tCanBeClassSide.
 
@@ -227,6 +231,7 @@ FamixJavaGenerator >> defineHierarchy [
 	class --|> #THasVisibility.
 	class --|> tCanBeClassSide. 
 	class --|> #TClassMetrics.
+	class --|> #TWithComments.
 	class --|> tJavaClassMetrics.	
 
 	containerEntity --|> namedEntity.
@@ -243,9 +248,11 @@ FamixJavaGenerator >> defineHierarchy [
 	enum --|> #TWithAttributes.
 	enum --|> #TWithMethods.
 	enum --|> #TWithInheritances.
+	enum --|> #TWithComments.
 
 	enumValue --|> namedEntity.
 	enumValue --|> #TStructuralEntity.
+	enumValue --|> #TWithComments.
 	enumValue --|> #TEnumValue.
 	enumValue withPrecedenceOf: #TEnumValue.
 

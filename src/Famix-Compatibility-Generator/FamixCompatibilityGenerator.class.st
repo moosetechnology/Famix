@@ -435,7 +435,8 @@ FamixCompatibilityGenerator >> defineHierarchy [
 
 	sourcedEntity
 		--|> #TWithSourceLanguages ;
-		--|> #TWithFiles
+		--|> #TWithFiles ;
+		--|> #TWithComments
 	
 
 ]

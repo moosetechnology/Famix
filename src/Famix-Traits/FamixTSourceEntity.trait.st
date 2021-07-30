@@ -7,8 +7,6 @@ Trait {
 		'#isStub => FMProperty',
 		'#sourceAnchor => FMOne type: #FamixTSourceAnchor opposite: #element'
 	],
-	#traits : 'FamixTWithComments',
-	#classTraits : 'FamixTWithComments classTrait',
 	#category : #'Famix-Traits-SourceAnchor'
 }
 

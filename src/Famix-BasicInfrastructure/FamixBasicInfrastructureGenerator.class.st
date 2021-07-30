@@ -45,7 +45,7 @@ FamixBasicInfrastructureGenerator >> defineHierarchy [
 	sourceLanguage --|> #TSourceLanguage.
 
 	sourcedEntity --|> #TSourceEntity.
-	sourcedEntity --|> #TWithComments.
+	"sourcedEntity --|> #TWithComments."
 
 	comment --|> sourcedEntity.
 	comment --|> #TComment.
