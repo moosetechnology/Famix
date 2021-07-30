@@ -1,8 +1,8 @@
 Class {
 	#name : #FamixStMethod,
 	#superclass : #FamixStNamedEntity,
-	#traits : 'FamixStTCanBeClassSide + FamixTCanBeAbstract + FamixTHasKind + FamixTMethod + FamixTWithAnnotationTypes',
-	#classTraits : 'FamixStTCanBeClassSide classTrait + FamixTCanBeAbstract classTrait + FamixTHasKind classTrait + FamixTMethod classTrait + FamixTWithAnnotationTypes classTrait',
+	#traits : 'FamixStTCanBeClassSide + FamixTCanBeAbstract + FamixTHasKind + FamixTMethod + FamixTWithAnnotationTypes + FamixTWithComments',
+	#classTraits : 'FamixStTCanBeClassSide classTrait + FamixTCanBeAbstract classTrait + FamixTHasKind classTrait + FamixTMethod classTrait + FamixTWithAnnotationTypes classTrait + FamixTWithComments classTrait',
 	#instVars : [
 		'#protocol => FMProperty'
 	],
