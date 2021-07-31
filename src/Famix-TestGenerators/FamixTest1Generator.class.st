@@ -89,7 +89,8 @@ FamixTest1Generator >> defineHierarchy [
 	class
 		--|> namedEntity ;
 		--|> #TWithSourceLanguages ;
-		--|> #TClass.
+		--|> #TClass ;
+		--|> #TWithComments.
 
 	file --|> namedEntity.
 	file --|> #TFile.
@@ -108,7 +109,8 @@ FamixTest1Generator >> defineHierarchy [
 		--|> #TWithSourceLanguages ;
 		--|> #TMethod; 
 		--|> #THasKind;
-		--|> tCanBeClassSide.
+		--|> tCanBeClassSide ;
+		--|> #TWithComments.
 		
 
 	multipleFileAnchor --|> sourceAnchor.

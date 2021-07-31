@@ -99,6 +99,7 @@ FamixPharoSmalltalkGenerator >> defineHierarchy [
 	class --|> #TClass.
 	class --|> #TCanBeAbstract.
 	class --|> #TClassMetrics.
+	class --|> #TWithComments.
 
 	globalVariable --|> namedEntity.
 	globalVariable --|> #TGlobalVariable.
@@ -122,6 +123,7 @@ FamixPharoSmalltalkGenerator >> defineHierarchy [
 	method --|> #TWithAnnotationTypes.
 	method --|> #TCanBeAbstract.
 	method --|> #THasKind.
+	method --|> #TWithComments.
 	method --|> tCanBeClassSide.
 
 	namedEntity --|> #TPackageable.
