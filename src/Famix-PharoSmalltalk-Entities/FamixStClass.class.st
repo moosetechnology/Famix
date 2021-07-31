@@ -127,6 +127,16 @@ FamixStClass >> methodsWithoutSutbsAndConstructors [
 	^ (self methods select: [ :each | each isStub not and: [ each isConstructor not ] ]) asSet
 ]
 
+{ #category : #accessing }
+FamixStClass >> numberOfComments [
+	"Overrides to include method comments in the numberOfComments of the class"
+	^ self
+		lookUpPropertyNamed: #numberOfComments
+		computedAs: [ self methods asArray
+			inject: self comments size into: [ :sum :child | child numberOfComments + sum ] ]
+
+]
+
 { #category : #metrics }
 FamixStClass >> numberOfMethodProtocols [
 	<FMProperty: #numberOfMethodProtocols type: #Number>
