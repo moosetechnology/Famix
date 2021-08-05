@@ -101,7 +101,8 @@ FamixMMUMLAbstractDocumentor >> models: anObject [
 
 { #category : #private }
 FamixMMUMLAbstractDocumentor >> ofInterest: aFMClass [
-	^classesOfInterest includes: aFMClass
+
+	^ classesOfInterest anySatisfy: [ :fmClassOfInterest | fmClassOfInterest fullName = aFMClass fullName ]
 ]
 
 { #category : #accessing }

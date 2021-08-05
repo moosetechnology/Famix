@@ -14,6 +14,7 @@ Class {
 
 { #category : #visiting }
 FamixMMUMLInheritanceDocumentor >> visitClass: aFMClass [
+
 	| aFMSuperClass |
 	aFMSuperClass := aFMClass superclass.
 	(self relationEndOfInterest: aFMClass) ifFalse: [ ^ self ].
@@ -22,23 +23,28 @@ FamixMMUMLInheritanceDocumentor >> visitClass: aFMClass [
 	outputStream nextPutAll: ' <|-- '.
 	self generateClassName: aFMClass.
 	outputStream cr.
-   aFMClass traits do: [ :aTrait | self visitUsedTrait: aTrait byClass: aFMClass ]
+	self flag: 'Hack to access to direct traits only - https://github.com/moosetechnology/Fame/issues/23'.
+	aFMClass implementingClass traits
+		collect: [ :stClass | self findDescriptionOf: stClass ]
+		thenDo: [ :aTrait | self visitUsedTrait: aTrait byClass: aFMClass ]
 ]
 
 { #category : #visiting }
 FamixMMUMLInheritanceDocumentor >> visitTrait: aFMTrait [
+
 	self flag: 'Hack to access to direct traits only - https://github.com/moosetechnology/Fame/issues/23'.
-	(aFMTrait implementingClass traits collect: [:stClass | self findDescriptionOf: stClass ])  do: [ :aFMSuperTrait | 
-	(self relationEndOfInterest: aFMTrait) ifFalse: [ ^ self ].
-	(self relationEndOfInterest: aFMSuperTrait ) ifFalse: [ ^ self ].
-	self generateClassName: aFMSuperTrait .
-	outputStream nextPutAll: ' <|.. '.
-	self generateClassName: aFMTrait .
-	outputStream cr.]
+	(aFMTrait implementingClass traits collect: [ :stClass | self findDescriptionOf: stClass ]) do: [ :aFMSuperTrait |
+		(self relationEndOfInterest: aFMTrait) ifFalse: [ ^ self ].
+		(self relationEndOfInterest: aFMSuperTrait) ifFalse: [ ^ self ].
+		self generateClassName: aFMSuperTrait.
+		outputStream nextPutAll: ' <|.. '.
+		self generateClassName: aFMTrait.
+		outputStream cr ]
 ]
 
 { #category : #visiting }
 FamixMMUMLInheritanceDocumentor >> visitUsedTrait: aTrait byClass: aFMClass [
+
 	(self relationEndOfInterest: aTrait) ifFalse: [ ^ self ].
 	(self relationEndOfInterest: aTrait) ifFalse: [ ^ self ].
 
