@@ -291,6 +291,7 @@ FamixJavaGenerator >> defineHierarchy [
 	parameter --|> namedEntity.
 	parameter --|> #TParameter.
 	parameter --|> #TCanBeFinal.
+	parameter --|> #TWithComments.
 
 	parameterType --|> type.
 	parameterType --|> #TParameterType.
