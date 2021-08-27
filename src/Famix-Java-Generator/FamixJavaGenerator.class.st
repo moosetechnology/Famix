@@ -274,6 +274,8 @@ FamixJavaGenerator >> defineHierarchy [
 	localVariable --|> #TLocalVariable.
 	localVariable --|> #TCanBeFinal.
 	localVariable --|> #TInvocationsReceiver.
+	localVariable --|> #TWithComments.
+
 	
 	namedEntity --|> #TInvocationsReceiver.
 	namedEntity --|> #TWithAnnotationInstances.
