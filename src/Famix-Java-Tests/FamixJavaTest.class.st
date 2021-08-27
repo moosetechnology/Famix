@@ -11,7 +11,7 @@ FamixJavaTest >> testImportAnnotations [
 	model
 		importFromMSEStream:
 			'(
-		(Famix-Java-Entities.Namespace (id: 100) (name ''aNamespace''))				
+		(Famix-Java-Entities.Package (id: 100) (name ''aPackage''))				
 		(Famix-Java-Entities.Class (id: 1) (name ''AClass''))
 		(Famix-Java-Entities.Class (id: 10) (name ''AnotherClass''))
 		(Famix-Java-Entities.Method (id: 2) (name ''aMethod'') (parentType (ref: 1)))
@@ -30,8 +30,8 @@ FamixJavaTest >> testImportAnnotations [
 		do: [ :i | 
 			self assert: (i annotationType instances includes: i).
 			self assert: (i annotatedEntity annotationInstances includes: i) ].
-	self assert: (model allAnnotationTypes entityNamed: #'aNamespace::AnAnnotation') instances size equals: 2.
-	self assert: (model allAnnotationTypes entityNamed: #'aNamespace::AnotherAnnotation') instances size equals: 1.
+	self assert: (model allAnnotationTypes entityNamed: #'aPackage::AnAnnotation') instances size equals: 2.
+	self assert: (model allAnnotationTypes entityNamed: #'aPackage::AnotherAnnotation') instances size equals: 1.
 	model allAnnotationTypes
 		do: [ :each | 
 			self assert: (each typeContainer definedAnnotationTypes includes: each).
@@ -73,10 +73,10 @@ FamixJavaTest >> testImportExceptions [
 { #category : #tests }
 FamixJavaTest >> testInferNamespaces [
 	| model |
-	model := FamixJavaModel new.
-	model add: (FamixJavaNamespace new name: 'org.project.package1').
-	model add: (FamixJavaNamespace new name: 'org.project.package2').
-	self assert: model allNamespaces size equals: 2.
-	model inferNamespaceParentsBasedOnNames.
-	self assert: model allNamespaces size equals: 4
+	model  := FamixJavaModel new.
+	model add: (FamixJavaPackage new name: 'org.project.package1').
+	model add: (FamixJavaPackage new name: 'org.project.package2').
+	self assert: model allPackages size equals: 2.
+	model inferPackageParentsBasedOnNames.
+	self assert: model allPackages size equals: 4
 ]

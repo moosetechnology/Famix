@@ -21,7 +21,6 @@ Class {
 		'invocation',
 		'localVariable',
 		'method',
-		'namespace',
 		'package',
 		'parameter',
 		'parameterType',
@@ -122,7 +121,6 @@ FamixJavaGenerator >> defineClasses [
 	invocation := builder newClassNamed: #Invocation.
 	localVariable := builder newClassNamed: #LocalVariable.
 	method := builder newClassNamed: #Method.
-	namespace := builder newClassNamed: #Namespace.
 	package := builder newClassNamed: #Package.
 	parameter := builder newClassNamed: #Parameter.
 	parameterType := builder newClassNamed: #ParameterType.
@@ -180,6 +178,7 @@ FamixJavaGenerator >> defineHierarchy [
 	annotationType --|> #TWithInheritances.
 	annotationType --|> #TPackageable.
 	annotationType --|> #TWithComments.
+	annotationType --|> #THasVisibility.
 
 	annotationTypeAttribute --|> namedEntity.
 	annotationTypeAttribute --|> #TAnnotationTypeAttribute.
@@ -279,10 +278,6 @@ FamixJavaGenerator >> defineHierarchy [
 	namedEntity --|> #TInvocationsReceiver.
 	namedEntity --|> #TWithAnnotationInstances.
 
-	namespace --|> containerEntity.
-	namespace --|> #TNamespace.
-	namespace --|> #TWithGlobalVariables.
-
 	package --|> containerEntity.
 	package --|> #TWithGlobalVariables.
 	package --|> #TPackage.
@@ -291,6 +286,7 @@ FamixJavaGenerator >> defineHierarchy [
 	parameter --|> namedEntity.
 	parameter --|> #TParameter.
 	parameter --|> #TCanBeFinal.
+	parameter --|> #TWithComments.
 
 	parameterType --|> type.
 	parameterType --|> #TParameterType.
@@ -330,9 +326,6 @@ FamixJavaGenerator >> defineHierarchy [
 { #category : #definition }
 FamixJavaGenerator >> defineProperties [
 	super defineProperties.
-	((namespace property: #parentNamespace)
-		comment: 'Parent namespace embedding this namespace, if any.';
-		container) *- ((namespace property: #childNamespaces) comment: 'Namespaces embedded in this namespace, if any.').
 		
 		((tCanBeVolatile property: #isVolatile type: #Boolean) 
 		comment: 'Entity can be declared volatile').

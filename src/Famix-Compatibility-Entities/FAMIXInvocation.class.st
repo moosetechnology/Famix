@@ -40,17 +40,6 @@ FAMIXInvocation >> getReceivingFAMIXClass [
 		ifFalse: [ ^ tmpReceiver ]
 ]
 
-{ #category : #'Famix-Implementation' }
-FAMIXInvocation >> gtDisplayOn: aStream [
-	self source ifNotNil: [ :s | s gtDisplayOn: aStream ].
-	aStream nextPutAll: ' -> '.
-	self receiver ifNotNil: [ aStream nextPutAll: self receiver name ].
-	aStream nextPut: $#.
-	aStream nextPutAll: self signature.
-	aStream nextPutAll: ' -> '.
-	self candidates size = 1 ifTrue: [ self anyCandidate gtDisplayOn: aStream ]
-]
-
 { #category : #initialization }
 FAMIXInvocation >> initialize [
 

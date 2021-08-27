@@ -42,11 +42,9 @@ MooseQueryTest >> setUp [
 	package1 := (FamixJavaPackage named: 'package1') mooseModel: model.
 	package2 := (FamixJavaPackage named: 'package2') mooseModel: model.
 	isolatedPackage := (FamixJavaPackage named: 'isolatedPackage') mooseModel: model.
-	namespace := (FamixJavaNamespace named: 'Smalltalk') mooseModel: model.
 	anchor := (FamixJavaSourceTextAnchor new) mooseModel: model.
 	class1 := (FamixJavaClass named: 'class1')
 		parentPackage: package1;
-		typeContainer: namespace;
 		sourceAnchor: anchor;
 		mooseModel: model.
 	
@@ -577,12 +575,12 @@ MooseQueryTest >> testOutgoingAccessAtScope [
 MooseQueryTest >> testOutgoingAccessesWithANamespaceInANamespace [
 	"queryOutgoing: is equivalent to query: #out with:"
 
-	| namespaceContainer |
-	namespaceContainer := FamixJavaNamespace new
+	| packageContainer |
+	packageContainer := FamixJavaPackage new
 		name: 'Test';
 		mooseModel: model;
-		addChildNamespace: namespace.
-	self assert: (namespaceContainer query: #out with: FamixTAccess) size equals: 1
+		addChildEntity: package1.
+	self assert: (packageContainer query: #out with: FamixTAccess) size equals: 1
 ]
 
 { #category : #tests }

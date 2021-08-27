@@ -15,7 +15,7 @@ FamixJavaParameterizedTypeTest >> setUp [
 	model
 		importFromMSEStream:
 			'(
-		(Famix-Java-Entities.Namespace (id: 1) (name ''NamespaceA''))
+		(Famix-Java-Entities.Package (id: 1) (name ''PackageA''))
 		(Famix-Java-Entities.Class (id: 2) (name ''ClassA''))
 		
 		(Famix-Java-Entities.ParameterizableClass (id: 3) (name ''ParameterizableClassA''))
