@@ -605,6 +605,7 @@ MooseModel >> includesElementsOfType: aClass [
 MooseModel >> inferNamespaceParentsBasedOnNames [
 	<menuItem: 'Infer Namespace Parents Based on Names' category: 'Utilities'>
 	| parent parentNameSize currentPosition parentName namespaces |
+	self deprecated: 'NameSpaces do not exist in any MooseModel'.
 	namespaces := self allNamespaces.
 	MooseCustomTask new
 		with: [ :task | 
@@ -700,7 +701,8 @@ MooseModel >> mooseDescription [
 
 { #category : #accessing }
 MooseModel >> mooseDescriptionFor: class [
-	^ self metamodel descriptionOf: class instanceSide
+
+	^ self metamodel fmTypeOf: class instanceSide
 ]
 
 { #category : #accessing }

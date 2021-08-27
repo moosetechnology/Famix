@@ -47,11 +47,11 @@ FamixMMUMLAbstractDocumentor >> externalClasses: aCollection [
 FamixMMUMLAbstractDocumentor >> findDescriptionOf: anElement [
 
 	models
-		  detect: [ :model | 
-			  ([ model model metamodel descriptionOf: anElement ]
-				   on: NotFound
-				   do: [ nil ]) isNotNil ]
-		  ifFound: [ :model | ^ model model metamodel descriptionOf: anElement ]
+		detect: [ :model | 
+			([ model model metamodel fmTypeOf: anElement ]
+				 on: NotFound
+				 do: [ nil ]) isNotNil ]
+		ifFound: [ :model | ^ model model metamodel fmTypeOf: anElement ]
 ]
 
 { #category : #generating }

@@ -101,13 +101,6 @@ FamixJavaEntity >> isMethod [
 ]
 
 { #category : #testing }
-FamixJavaEntity >> isNamespace [
-
-	<generated>
-	^ false
-]
-
-{ #category : #testing }
 FamixJavaEntity >> isPackage [
 
 	<generated>

@@ -155,12 +155,6 @@ FamixJavaImportingContext >> importNamedEntity [
 ]
 
 { #category : #testing }
-FamixJavaImportingContext >> importNamespace [
-	<generated>
-	^ self import: FamixJavaNamespace
-]
-
-{ #category : #testing }
 FamixJavaImportingContext >> importPackage [
 	<generated>
 	^ self import: FamixJavaPackage
@@ -398,12 +392,6 @@ FamixJavaImportingContext >> shouldImportMethod [
 FamixJavaImportingContext >> shouldImportNamedEntity [
 	<generated>
 	^ self shouldImport: FamixJavaNamedEntity
-]
-
-{ #category : #testing }
-FamixJavaImportingContext >> shouldImportNamespace [
-	<generated>
-	^ self shouldImport: FamixJavaNamespace
 ]
 
 { #category : #testing }
