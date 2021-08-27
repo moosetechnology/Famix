@@ -180,6 +180,7 @@ FamixJavaGenerator >> defineHierarchy [
 	annotationType --|> #TWithInheritances.
 	annotationType --|> #TPackageable.
 	annotationType --|> #TWithComments.
+	annotationType --|> #THasVisibility.
 
 	annotationTypeAttribute --|> namedEntity.
 	annotationTypeAttribute --|> #TAnnotationTypeAttribute.
