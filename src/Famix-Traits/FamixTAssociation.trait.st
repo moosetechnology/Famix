@@ -77,13 +77,6 @@ FamixTAssociation >> displayStringOn: aStream [
 	self target displayStringOn: aStream
 ]
 
-{ #category : #printing }
-FamixTAssociation >> gtDisplayOn: aStream [
-	self source gtDisplayOn: aStream.
-	aStream nextPutAll: ' -> '.
-	self target gtDisplayOn: aStream
-]
-
 { #category : #testing }
 FamixTAssociation >> isAssociation [
 

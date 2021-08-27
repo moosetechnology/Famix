@@ -700,7 +700,8 @@ MooseModel >> mooseDescription [
 
 { #category : #accessing }
 MooseModel >> mooseDescriptionFor: class [
-	^ self metamodel descriptionOf: class instanceSide
+
+	^ self metamodel fmTypeOf: class instanceSide
 ]
 
 { #category : #accessing }

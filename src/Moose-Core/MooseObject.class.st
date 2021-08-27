@@ -313,11 +313,6 @@ MooseObject >> groupFor: aSelector [
 		withDescription: aSelector asString capitalized , ' in ' , self mooseName
 ]
 
-{ #category : #printing }
-MooseObject >> gtDisplayOn: aStream [ 
-	self mooseNameOn: aStream
-]
-
 { #category : #testing }
 MooseObject >> hasMooseModel [
 	^ self mooseModel isNotNil
