@@ -73,11 +73,14 @@ FamixJavaType >> isAnonymousClass [
 
 { #category : #testing }
 FamixJavaType >> isInnerClass [
+
 	<FMProperty: #isInnerClass type: #Boolean>
 	<derived>
 	<FMComment:
-		'True if the method is considered as an innerclass (i.e. is contained elsewhere than a java package: class, method, enum,...)'>
-	^ self container ifNotNil: [ :c | c isNamespace not ] ifNil: [ false ]
+	'True if the method is considered as an innerclass (i.e. is contained elsewhere than a java package: class, method, enum,...)'>
+	^ self typeContainer
+		  ifNotNil: [ :c | c isPackage not ]
+		  ifNil: [ false ]
 ]
 
 { #category : #testing }

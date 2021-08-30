@@ -193,6 +193,18 @@ FamixJavaPackage >> methods [
 	^ self cacheAt: #methods ifAbsentPut: [ self classes flatCollect: #methods ]
 ]
 
+{ #category : #printing }
+FamixJavaPackage >> mooseNameOn: stream [
+	| parent |
+	parent := self belongsTo.
+	parent ifNotNil: 
+		[ parent mooseNameOn: stream.
+		stream
+			nextPut: $:;
+			nextPut: $: ].
+	self name ifNotNil: [stream nextPutAll: self name]
+]
+
 { #category : #accessing }
 FamixJavaPackage >> numberOfClientPackages [
 	<FMProperty: #numberOfClientPackages type: #Number>
