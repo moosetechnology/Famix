@@ -21,8 +21,8 @@ MQNavigationIncomingDirectionStrategy class >> ensureAssociation: anObject with:
 ]
 
 { #category : #accessing }
-MQNavigationIncomingDirectionStrategy class >> entityFor: anEntity [
-	^ anEntity source
+MQNavigationIncomingDirectionStrategy class >> entityFor: anAssociation [
+	^ anAssociation source
 ]
 
 { #category : #accessing }

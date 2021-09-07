@@ -660,11 +660,18 @@ MooseQueryTest >> testSourceThroughInvocation [
 { #category : #tests }
 MooseQueryTest >> testTargetThroughInvocation [
 
-	self assertCollection: (method1 targetThrough: FamixTInvocation) storage flattened hasSameElements: {method2}.
-	self assertCollection: (method1 targetThrough: FamixTInvocation) hasSameElements: ((method1 queryOutgoing: FamixTInvocation) collect: #to).
-	self assertCollection: (class2 targetThrough: FamixTInvocation) storage flattened hasSameElements: {method2}.
-
-	
+	self
+		assertCollection:
+		(method1 targetThrough: FamixTInvocation) storage flattened
+		hasSameElements: { method2 }.
+	self
+		assertCollection: (method1 targetThrough: FamixTInvocation)
+		hasSameElements:
+		((method1 queryOutgoing: FamixTInvocation) flatCollect: #target).
+	self
+		assertCollection:
+		(class2 targetThrough: FamixTInvocation) storage flattened
+		hasSameElements: { method2 }
 ]
 
 { #category : #tests }
