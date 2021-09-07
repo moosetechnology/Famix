@@ -12,7 +12,14 @@ Class {
 
 { #category : #enumerating }
 MQNavigationOppositeKindStrategy class >> collectResultFrom: aCollection query: aQuery [
-	^ aCollection collect: [ :each | aQuery directionStrategy entityFor: each ]
+
+	"We flat collect because some associations have multivalued targets (ex: TAssociation has #candidates) and some have only 1 target.
+	The mechanisms of #flatCollect: only works if all items in the collection are collections, 
+		so we use the mechanism of #flattened while collecting."
+
+	^ Array streamContents: [ :stream | 
+		  aCollection do: [ :each | 
+			  (aQuery directionStrategy entityFor: each) flattenOn: stream ] ]
 ]
 
 { #category : #running }

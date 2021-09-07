@@ -21,8 +21,8 @@ MQNavigationOutgoingDirectionStrategy class >> ensureAssociation: anObject with:
 ]
 
 { #category : #accessing }
-MQNavigationOutgoingDirectionStrategy class >> entityFor: anEntity [
-	^ anEntity target
+MQNavigationOutgoingDirectionStrategy class >> entityFor: anAssociation [
+	^ anAssociation target
 ]
 
 { #category : #accessing }
