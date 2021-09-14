@@ -199,3 +199,11 @@ MooseQuery >> receiver [
 MooseQuery >> receiver: anObject [
 	receiver := anObject
 ]
+
+{ #category : #relations }
+MooseQuery >> relations [
+
+	^ MQRelationQuery new
+		  receiver: self receiver;
+		  yourself
+]
