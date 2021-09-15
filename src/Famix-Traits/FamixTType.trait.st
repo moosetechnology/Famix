@@ -125,7 +125,6 @@ FamixTType >> typedEntities [
 	<generated>
 	<FMComment: 'Entities that have this type as declaredType'>
 	<derived>
-	<target>
 	^ typedEntities
 ]
 

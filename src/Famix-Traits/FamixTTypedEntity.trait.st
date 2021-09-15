@@ -21,7 +21,6 @@ FamixTTypedEntity >> declaredType [
 
 	<generated>
 	<FMComment: 'Type of the entity, if any'>
-	<source>
 	^ declaredType
 ]
 
