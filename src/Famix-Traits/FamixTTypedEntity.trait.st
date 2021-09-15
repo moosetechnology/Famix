@@ -40,8 +40,3 @@ FamixTTypedEntity >> entityHasOutgoingTypeDeclarations [
 FamixTTypedEntity >> hasDeclaredType [
 	^ self declaredType isNotNil
 ]
-
-{ #category : #'moose query' }
-FamixTTypedEntity >> outgoingTypeDeclarations [
-	^ self declaredType ifNil: [ {} ] ifNotNil: [ :dt | {(MQNavigationDependencyAssociation newFrom: self to: dt)} ]
-]
