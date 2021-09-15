@@ -572,26 +572,6 @@ TEntityMetaLevelDependency >> hasIncoming: aFAMIXClassAssociation [
 ]
 
 { #category : #testing }
-TEntityMetaLevelDependency >> hasIncomingDependencies [
-	"Associations + typeDeclaractions"
-
-	^ self hasIncoming or: [ self hasIncomingTypeDeclarations ]
-]
-
-{ #category : #testing }
-TEntityMetaLevelDependency >> hasIncomingTypeDeclarations [
-	"This method could be more readable but it needs to be really performant"
-
-	| selectors |
-	1 to: (selectors := self childrenSelectors) size do: [ :index | 
-		(self perform: (selectors at: index))
-			ifNotNil: [ :children | 
-				| coll |
-				1 to: (coll := children asCollection) size do: [ :i | ((coll at: i) hasIncomingTypeDeclarations) ifTrue: [ ^ true ]  ] ] ].
-	 ^ self entityHasIncomingTypeDeclarations.
-]
-
-{ #category : #testing }
 TEntityMetaLevelDependency >> hasLocal: anInOutSymbol [
 	"Check the incoming or outgoing associations of the receiver.
 
@@ -675,26 +655,6 @@ TEntityMetaLevelDependency >> hasOutgoing: aFAMIXClassAssociation [
 	"
 
 	^ self query has outgoing dependenciesOfType: aFAMIXClassAssociation
-]
-
-{ #category : #testing }
-TEntityMetaLevelDependency >> hasOutgoingDependencies [
-	"Associations + typeDeclaractions"
-
-	^ self hasOutgoing or: [ self hasOutgoingTypeDeclarations ]
-]
-
-{ #category : #testing }
-TEntityMetaLevelDependency >> hasOutgoingTypeDeclarations [
-	"This method could be more readable but it needs to be really performant"
-
-	| selectors |
-	1 to: (selectors := self childrenSelectors) size do: [ :index | 
-		(self perform: (selectors at: index))
-			ifNotNil: [ :children | 
-				| coll |
-				1 to: (coll := children asCollection) size do: [ :i | ((coll at: i) hasOutgoingTypeDeclarations) ifTrue: [ ^ true ]  ] ] ].
-	 ^ self entityHasOutgoingTypeDeclarations.
 ]
 
 { #category : #accessing }
@@ -875,29 +835,6 @@ TEntityMetaLevelDependency >> queryIncoming: aFAMIXClassAssociation [
 ]
 
 { #category : #'query dependencies' }
-TEntityMetaLevelDependency >> queryIncomingTypeDeclarations [
-	"This method should return the incoming type declarations that are not represented in FAMIX and that cannot be query by a generic algorithme.
-	
-	typeDeclaration is a virtual association that relates a structural entity (i.e. a variable) to its type."
-
-	^ MooseIncomingQueryResult on: self withAll: (self queryIncomingTypeDeclarationsIn: OrderedCollection new) asSet
-]
-
-{ #category : #'query dependencies' }
-TEntityMetaLevelDependency >> queryIncomingTypeDeclarationsIn: aCollection [
-
-	"This method could be more readable but it needs to be really performant"
-
-	| selectors |
-	1 to: (selectors := self childrenSelectors) size do: [ :index | 
-		(self perform: (selectors at: index)) ifNotNil: [ :children | 
-			| coll |
-			1 to: (coll := children asCollection) size do: [ :i | 
-			(coll at: i) queryIncomingTypeDeclarationsIn: aCollection ] ] ].
-	^ aCollection
-]
-
-{ #category : #'query dependencies' }
 TEntityMetaLevelDependency >> queryLocal: anInOutSymbol with: aFAMIXClassAssociation [
 	"Query all the incoming or outgoing associations of the FAMIXClassAssociation class for the receiver.
 	This method differ from #query:with: in the fact that it will not check the associations of the reicever's children.
@@ -948,30 +885,6 @@ TEntityMetaLevelDependency >> queryOutgoing: aFAMIXClassAssociation [
 	"
 
 	^ self query outgoing dependenciesOfType: aFAMIXClassAssociation
-]
-
-{ #category : #'query dependencies' }
-TEntityMetaLevelDependency >> queryOutgoingTypeDeclarations [
-	"This method should return the outgoing type declarations that are not represented in FAMIX and that cannot be query by a generic algorithme.
-	
-	typeDeclaration is a virtual association that relates a structural entity (i.e. a variable) to its type."
-
-	^ MooseOutgoingQueryResult on: self withAll: (self queryOutgoingTypeDeclarationsIn: OrderedCollection new) asSet
-]
-
-{ #category : #'query dependencies' }
-TEntityMetaLevelDependency >> queryOutgoingTypeDeclarationsIn: aCollection [
-
-	"This method could be more readable but it needs to be really performant"
-
-	| selectors |
-	1 to: (selectors := self childrenSelectors) size do: [ :index | 
-		(self perform: (selectors at: index)) ifNotNil: [ :children | 
-			| coll |
-			1 to: (coll := children asCollection) size do: [ :i | 
-			(coll at: i) queryOutgoingTypeDeclarationsIn: aCollection ] ] ].
-
-	^ aCollection
 ]
 
 { #category : #private }
