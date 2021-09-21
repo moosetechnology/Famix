@@ -106,7 +106,7 @@ FamixTMultipleFileAnchor >> isMultiple [
 FamixTMultipleFileAnchor >> lineCount [
 	^ self fileAnchors
 		ifEmpty: [ self notExistentMetricValue ]
-		ifNotEmpty: [ :files | files detectSum: #lineCount ]
+		ifNotEmpty: [ :files | files sum: #lineCount ]
 ]
 
 { #category : #accessing }
