@@ -60,7 +60,7 @@ BaselineOfFamix >> dependencies: spec [
 		spec
 			baseline: 'Fame'
 			with: [ 
-			spec repository: 'github://moosetechnology/Fame:pharo10-v1.x.x/src' ] ].
+			spec repository: 'github://moosetechnology/Fame:v1.x.x/src' ] ].
 
 	spec for: #'pharo10.x' do: [ 
 		spec baseline: 'Fame' with: [ 
