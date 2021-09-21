@@ -234,7 +234,7 @@ BaselineOfFamix >> packages: spec [
 		package: 'Famix-MetamodelBuilder-TestsTraitsResources-A'
 		with: [ spec requires: #( 'Basic' ) ];
 		package: 'Famix-MetamodelBuilder-TestsTraitsResources-B'
-		with: [ spec requires: #( 'Basic' ) ];
+		with: [ spec requires: #( 'Basic' 'Famix-MetamodelBuilder-TestsTraitsResources-A' ) ];
 		package: 'Famix-Test1-Entities'
 		with: [ spec requires: #( 'BasicTraits' ) ];
 		package: 'Famix-Test1-Tests'
