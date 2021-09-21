@@ -172,8 +172,8 @@ MooseQueryTest >> testAllIncoming [
 
 { #category : #tests }
 MooseQueryTest >> testAllOutgoing [
-	self assert: method2 queryAllOutgoing size equals: 3.
-	self assert: class2 queryAllOutgoing size equals: 5
+	self assert: method2 queryAllOutgoing size equals: 2.
+	self assert: class2 queryAllOutgoing size equals: 3
 ]
 
 { #category : #tests }
@@ -434,8 +434,9 @@ MooseQueryTest >> testHasIncomingInvocation [
 
 { #category : #tests }
 MooseQueryTest >> testHasLocalIncoming [
+
 	self assert: method2 hasLocalIncoming.
-	self assert: class1 hasLocalIncoming. "Type declaration"
+	self deny: class1 hasLocalIncoming.
 	self deny: package2 hasLocalIncoming
 ]
 

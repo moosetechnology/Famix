@@ -1420,12 +1420,10 @@ FamixGenerator >> defineRelations [
 			comment: 'Aliases').
 
 	((tTypedEntity property: #declaredType)
-			comment: 'Type of the entity, if any' ;
-			source)
+			comment: 'Type of the entity, if any')
 		*-
 	((tType property: #typedEntities)
-			comment: 'Entities that have this type as declaredType';
-			target).
+			comment: 'Entities that have this type as declaredType').
 
 
 ]

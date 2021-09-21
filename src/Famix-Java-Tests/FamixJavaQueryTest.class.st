@@ -147,42 +147,6 @@ FamixJavaQueryTest >> setUp [
 ]
 
 { #category : #'tests - class' }
-FamixJavaQueryTest >> testFamixClassHasIncomingTypeDeclarations [
-	self assert: c2 hasIncomingTypeDeclarations.
-	self assert: c3 hasIncomingTypeDeclarations
-]
-
-{ #category : #'tests - class' }
-FamixJavaQueryTest >> testFamixClassHasOutgoingTypeDeclarations [
-	self assert: c2 hasOutgoingTypeDeclarations.
-	self assert: c3 hasOutgoingTypeDeclarations
-]
-
-{ #category : #'tests - class' }
-FamixJavaQueryTest >> testFamixClassHasTypeDeclarationsWithoutSelfLoops [
-	self assert: c3 hasOutgoingTypeDeclarations.
-	self assert: c3 hasOutgoingTypeDeclarations
-]
-
-{ #category : #'tests - class' }
-FamixJavaQueryTest >> testFamixClassIncomingTypeDeclarations [
-	self assertCollection: (c2 queryIncomingTypeDeclarations atScope: FamixTType) hasSameElements: {c1 . c2 . c3}.
-	self assertCollection: (c3 queryIncomingTypeDeclarations atScope: FamixTType) hasSameElements: {c1 . c2 . c3}
-]
-
-{ #category : #'tests - class' }
-FamixJavaQueryTest >> testFamixClassOutgoingTypeDeclarations [
-	self assertCollection: c2 queryOutgoingTypeDeclarations opposites hasSameElements: {c1 . c2 . c3}.
-	self assertCollection: c3 queryOutgoingTypeDeclarations opposites hasSameElements: {c2 . c3}
-]
-
-{ #category : #'tests - class' }
-FamixJavaQueryTest >> testFamixClassTypeDeclarationsWithoutSelfLoops [
-	self assertCollection: (c3 queryIncomingTypeDeclarations withoutSelfLoops atScope: FamixTType) hasSameElements: {c1 . c2}.
-	self assertCollection: (c3 queryOutgoingTypeDeclarations withoutSelfLoops atScope: FamixTType) hasSameElements: {c2}
-]
-
-{ #category : #'tests - class' }
 FamixJavaQueryTest >> testFamixJavaAnnotationInstanceAttributeCanHaveIncoming [
 	self assert: annotationInstanceAttribute1 incomingMSEProperties isCollection
 ]
@@ -190,72 +154,4 @@ FamixJavaQueryTest >> testFamixJavaAnnotationInstanceAttributeCanHaveIncoming [
 { #category : #'tests - class' }
 FamixJavaQueryTest >> testFamixJavaAnnotationInstanceAttributeCanHaveOutgoing [
 	self assert: annotationInstanceAttribute1 outgoingMSEProperties isCollection
-]
-
-{ #category : #'tests - method' }
-FamixJavaQueryTest >> testFamixMethodHasIncomingTypeDeclarations [
-	self deny: m1 hasIncomingTypeDeclarations.
-	self deny: m3 hasIncomingTypeDeclarations
-]
-
-{ #category : #'tests - method' }
-FamixJavaQueryTest >> testFamixMethodHasOutgoingTypeDeclarations [
-	self assert: m2 hasOutgoingTypeDeclarations.
-	self assert: m3 hasOutgoingTypeDeclarations
-]
-
-{ #category : #'tests - method' }
-FamixJavaQueryTest >> testFamixMethodHasTypeDeclarationsWithoutSelfLoops [
-	self deny: m1 hasIncomingTypeDeclarations.
-	self assert: m3 hasOutgoingTypeDeclarations
-]
-
-{ #category : #'tests - method' }
-FamixJavaQueryTest >> testFamixMethodIncomingTypeDeclarations [
-	self assertEmpty: m1 queryIncomingTypeDeclarations.
-	self assertEmpty: m3 queryIncomingTypeDeclarations
-]
-
-{ #category : #'tests - method' }
-FamixJavaQueryTest >> testFamixMethodOutgoingTypeDeclarations [
-	self assertCollection: m2 queryOutgoingTypeDeclarations opposites hasSameElements: {c1 . c3}.
-	self assertCollection: m3 queryOutgoingTypeDeclarations opposites hasSameElements: {c1 . c2 . c3}
-]
-
-{ #category : #'tests - method' }
-FamixJavaQueryTest >> testFamixMethodTypeDeclarationsWithoutSelfLoops [
-	self assertEmpty: m1 queryIncomingTypeDeclarations withoutSelfLoops.
-	self assertCollection: (m3 queryOutgoingTypeDeclarations withoutSelfLoops atScope: FamixTType) hasSameElements: {c1 . c2 . c3}
-]
-
-{ #category : #'tests - package' }
-FamixJavaQueryTest >> testFamixPackageHasIncomingTypeDeclarations [
-	self assert: p2 hasIncomingTypeDeclarations
-]
-
-{ #category : #'tests - package' }
-FamixJavaQueryTest >> testFamixPackageHasOutgoingTypeDeclarations [
-	self assert: p1 hasOutgoingTypeDeclarations
-]
-
-{ #category : #'tests - package' }
-FamixJavaQueryTest >> testFamixPackageHasTypeDeclarationsWithoutSelfLoops [
-	self assert: p2 hasIncomingTypeDeclarations.
-	self assert: p1 hasOutgoingTypeDeclarations
-]
-
-{ #category : #'tests - package' }
-FamixJavaQueryTest >> testFamixPackageIncomingTypeDeclarations [
-	self assertCollection: (p2 queryIncomingTypeDeclarations atScope: FamixTPackage) hasSameElements: {p1 . p2}
-]
-
-{ #category : #'tests - package' }
-FamixJavaQueryTest >> testFamixPackageOutgoingTypeDeclarations [
-	self assertCollection: (p1 queryOutgoingTypeDeclarations atScope: FamixTPackage) hasSameElements: {p1 . p2}
-]
-
-{ #category : #'tests - package' }
-FamixJavaQueryTest >> testFamixPackageTypeDeclarationsWithoutSelfLoops [
-	self assertCollection: (p2 queryIncomingTypeDeclarations atScope: FamixTPackage) withoutSelfLoops hasSameElements: {p1}.
-	self assertCollection: (p1 queryOutgoingTypeDeclarations atScope: FamixTPackage) withoutSelfLoops hasSameElements: {p2}
 ]

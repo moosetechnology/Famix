@@ -49,11 +49,6 @@ FamixTType >> entityHasIncomingTypeDeclarations [
 ]
 
 { #category : #testing }
-FamixTType >> incomingTypeDeclarations [  
-	^ self typedEntities collect: [ :var | MQNavigationDependencyAssociation newFrom: var to: self ]
-]
-
-{ #category : #testing }
 FamixTType >> isType [
 
 	<generated>
@@ -125,7 +120,6 @@ FamixTType >> typedEntities [
 	<generated>
 	<FMComment: 'Entities that have this type as declaredType'>
 	<derived>
-	<target>
 	^ typedEntities
 ]
 

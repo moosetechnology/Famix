@@ -15,11 +15,6 @@ MQNavigationIncomingDirectionStrategy class >> determinatingSymbol [
 	^ #in
 ]
 
-{ #category : #converting }
-MQNavigationIncomingDirectionStrategy class >> ensureAssociation: anObject with: anEntity [
-	^ anObject asAssociationTo: anEntity
-]
-
 { #category : #accessing }
 MQNavigationIncomingDirectionStrategy class >> entityFor: anAssociation [
 	^ anAssociation source
