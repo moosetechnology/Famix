@@ -531,6 +531,22 @@ MooseModel >> importFrom: aFMModel named: aString [
 	self name: aString
 ]
 
+{ #category : #'as yet unclassified' }
+MooseModel >> importFromJSON [
+
+	| file |
+	file := UIManager default
+		        chooseExistingFileReference: 'Import model from JSON file'
+		        extensions: #( 'json' )
+		        path: FileLocator home.
+	file ifNotNil: [ 
+		| stream |
+		stream := file readStream.
+		self importFromJSONStream: stream.
+		self name: file basenameWithoutExtension.
+		stream close ]
+]
+
 { #category : #actions }
 MooseModel >> importFromJSONStream: aStream [
 	"Benchmarks
