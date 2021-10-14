@@ -40,6 +40,12 @@ MooseSpecializedGroup >> addAll: aCollection [
 	self updateTypeAccordingToEntities
 ]
 
+{ #category : #converting }
+MooseSpecializedGroup >> asMooseSpecializedGroup [
+
+	^ self
+]
+
 { #category : #private }
 MooseSpecializedGroup >> changeTypeToDefaultType [
 	self changeTypeTo: MooseSpecializedGroup
