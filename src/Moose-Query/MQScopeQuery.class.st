@@ -166,10 +166,9 @@ MQScopeQuery >> recursively [
 MQScopeQuery >> scopeFor: anEntity direction: aDirection [
 
 	| selectors |
-	anEntity = receiver ifFalse: [ 
-		(self stopStrategy shouldBeSelected: anEntity) ifTrue: [ 
-			self add: anEntity.
-			self isRecursive ifFalse: [ ^ self result ] ] ].
+	(self stopStrategy shouldBeSelected: anEntity) ifTrue: [ 
+		self add: anEntity.
+		self isRecursive ifFalse: [ ^ self result ] ].
 
 	"The content of this block could be much more readable with #do: but we do this solution for performances... We need this method to be really really performant."
 	(self shouldStopOn: anEntity) ifFalse: [ 
