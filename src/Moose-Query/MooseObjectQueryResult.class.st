@@ -18,13 +18,22 @@ MooseObjectQueryResult class >> withAll: aCollection [
 
 { #category : #filtering }
 MooseObjectQueryResult >> executeScopeQuery: aQuery [
-	self storage do: [ :entity | entity scopeForQuery: aQuery direction: aQuery direction ].
+
+	self storage do: [ :entity | 
+		entity scopeForQuery: aQuery direction: aQuery direction ].
 	^ self newObjectResultWith: aQuery result
 ]
 
 { #category : #evaluating }
 MooseObjectQueryResult >> outOf: aFAMIXEntity [
 	^ self newObjectResultWith: (storage reject: [ :obj | (obj allAtScope: aFAMIXEntity class) includes: aFAMIXEntity ])
+]
+
+{ #category : #'as yet unclassified' }
+MooseObjectQueryResult >> relationsNamed: aSymbol [
+
+	^ self newObjectResultWith: (self storage flatCollect: [ :entity | 
+			   entity query relations named: aSymbol ])
 ]
 
 { #category : #evaluating }

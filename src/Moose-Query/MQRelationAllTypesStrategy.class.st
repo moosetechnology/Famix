@@ -6,7 +6,7 @@ I am a strategy used by the relation queries to define that the query should mat
 "
 Class {
 	#name : #MQRelationAllTypesStrategy,
-	#superclass : #MQAbstractRelationTypeStrategy,
+	#superclass : #MQAbstractRelationStrategy,
 	#category : #'Moose-Query-Relations'
 }
 
