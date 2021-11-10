@@ -1139,8 +1139,7 @@ FamixGenerator >> defineRelations [
 			comment: 'All Famix accesses pointing to this structural entity').
 
 	((tAnnotationInstance property: #annotatedEntity)
-			comment: 'The NamedEntity on which the annotation occurs.';
-			container)
+			comment: 'The NamedEntity on which the annotation occurs.')
 		*-
 	((tWithAnnotationInstances property: #annotationInstances)
 			comment: 'This property corresponds to the set of annotations associated to the entity').

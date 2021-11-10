@@ -43,7 +43,6 @@ FamixTAnnotationInstance >> annotatedEntity [
 
 	<generated>
 	<FMComment: 'The NamedEntity on which the annotation occurs.'>
-	<container>
 	^ annotatedEntity
 ]
 
@@ -52,11 +51,4 @@ FamixTAnnotationInstance >> annotatedEntity: anObject [
 
 	<generated>
 	annotatedEntity := anObject
-]
-
-{ #category : #navigation }
-FamixTAnnotationInstance >> annotatedEntityGroup [
-	<generated>
-	<navigation: 'AnnotatedEntity'>
-	^ MooseSpecializedGroup with: self annotatedEntity
 ]
