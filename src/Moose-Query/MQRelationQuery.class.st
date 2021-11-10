@@ -25,7 +25,7 @@ Class {
 	#name : #MQRelationQuery,
 	#superclass : #MQAbstractQuery,
 	#instVars : [
-		'typeStrategy'
+		'relationStrategy'
 	],
 	#category : #'Moose-Query-Relations'
 }
@@ -33,21 +33,28 @@ Class {
 { #category : #execution }
 MQRelationQuery >> execute [
 
-	^ ((typeStrategy selectPropertiesIn: receiver) collect: [ :property | 
+	^ ((relationStrategy selectPropertiesIn: receiver) collect: [ :property | 
 		   receiver perform: property implementingSelector ]) flattened
+]
+
+{ #category : #DSL }
+MQRelationQuery >> named: aSymbol [
+
+	relationStrategy := MQRelationByNameStrategy name: aSymbol.
+	^ self execute
 ]
 
 { #category : #DSL }
 MQRelationQuery >> ofAnyType [
 
-	typeStrategy := MQRelationAllTypesStrategy.
+	relationStrategy := MQRelationAllTypesStrategy new.
 	^ self execute
 ]
 
 { #category : #DSL }
 MQRelationQuery >> ofAnyType: aCollection [
 
-	typeStrategy := MQRelationMultipleTypesStrategy propertyTypes:
+	relationStrategy := MQRelationMultipleTypesStrategy propertyTypes:
 		                aCollection.
 	^ self execute
 ]
@@ -55,6 +62,6 @@ MQRelationQuery >> ofAnyType: aCollection [
 { #category : #DSL }
 MQRelationQuery >> ofType: aPropertyType [
 
-	typeStrategy := MQRelationOneTypeStrategy propertyType: aPropertyType.
+	relationStrategy := MQRelationOneTypeStrategy propertyType: aPropertyType.
 	^ self execute
 ]

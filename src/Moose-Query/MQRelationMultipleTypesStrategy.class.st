@@ -6,7 +6,7 @@ I am a strategy used by the relation queries to define the query should match an
 "
 Class {
 	#name : #MQRelationMultipleTypesStrategy,
-	#superclass : #MQAbstractRelationTypeStrategy,
+	#superclass : #MQAbstractRelationStrategy,
 	#instVars : [
 		'propertyTypes'
 	],

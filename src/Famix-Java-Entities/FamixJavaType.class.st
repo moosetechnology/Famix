@@ -68,7 +68,10 @@ FamixJavaType >> implements: aString [
 
 { #category : #testing }
 FamixJavaType >> isAnonymousClass [
-	^ self container isNotNil and: [ self container isMethod or: [ self name isAllDigits or: [ '*_anonymous_*' match: self name ] ] ]
+
+	^ self typeContainer isNotNil and: [ 
+		  self typeContainer isMethod or: [ 
+			  self name isAllDigits or: [ '*_anonymous_*' match: self name ] ] ]
 ]
 
 { #category : #testing }
@@ -149,7 +152,7 @@ FamixJavaType >> lookUp: aMethodSignature [
 FamixJavaType >> parentScope [
 	"Polymorphic alias to mimic GlobalVariable#parentScope and similar"
 
-	^ self container
+	^ self typeContainer
 ]
 
 { #category : #printing }

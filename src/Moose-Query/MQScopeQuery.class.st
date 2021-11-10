@@ -172,7 +172,11 @@ MQScopeQuery >> scopeFor: anEntity direction: aDirection [
 
 	"The content of this block could be much more readable with #do: but we do this solution for performances... We need this method to be really really performant."
 	(self shouldStopOn: anEntity) ifFalse: [ 
-		1 to: (selectors := aDirection selectorsFor: anEntity) size do: [ :ind | (anEntity perform: (selectors at: ind)) scopeForQuery: self direction: aDirection ] ].
+		1 to: (selectors := aDirection selectorsFor: anEntity) size do: [ 
+			:ind | 
+			(anEntity perform: (selectors at: ind))
+				scopeForQuery: self
+				direction: aDirection ] ].
 	^ self result
 ]
 
