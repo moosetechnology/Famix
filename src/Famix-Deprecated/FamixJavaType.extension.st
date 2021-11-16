@@ -2,8 +2,6 @@ Extension { #name : #FamixJavaType }
 
 { #category : #'*Famix-Deprecated' }
 FamixJavaType >> container [
-	<FMProperty: #container type: #FamixJavaContainerEntity>
-	<FMComment: 'Deprected, use typeContainer'>
 	self deprecated: 'Use #typeContainer instead.' transformWith: '`@receiver container' -> '`@receiver typeContainer'.
 	^ self typeContainer
 ]
