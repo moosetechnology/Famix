@@ -20,6 +20,13 @@ FamixTLocalVariable classSide >> annotation [
 	^self
 ]
 
+{ #category : #printing }
+FamixTLocalVariable >> displayStringOn: aStream [
+
+	aStream << name << ' in '.
+	self parentBehaviouralEntity displayStringOn: aStream
+]
+
 { #category : #accessing }
 FamixTLocalVariable >> parentBehaviouralEntity [
 	"Relation named: #parentBehaviouralEntity type: #FamixTWithLocalVariables opposite: #localVariables"

@@ -65,6 +65,15 @@ FamixTInvocation >> candidates: anObject [
 	candidates value: anObject
 ]
 
+{ #category : #printing }
+FamixTInvocation >> displayStringOn: aStream [
+
+	self receiver ifNotNil: [ :rcvr | 
+		rcvr displayStringOn: aStream.
+		aStream nextPutAll: ' -> ' ].
+	aStream << self signature
+]
+
 { #category : #testing }
 FamixTInvocation >> isInvocation [
 

@@ -30,6 +30,13 @@ FamixTParameter classSide >> annotation [
 	^self
 ]
 
+{ #category : #printing }
+FamixTParameter >> displayStringOn: aStream [
+
+	aStream << name << ' in '.
+	self parentBehaviouralEntity displayStringOn: aStream
+]
+
 { #category : #accessing }
 FamixTParameter >> parentBehaviouralEntity [
 	"Relation named: #parentBehaviouralEntity type: #FamixTWithParameters opposite: #parameters"

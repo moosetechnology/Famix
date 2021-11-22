@@ -61,6 +61,12 @@ FamixTAnnotationType >> annotationTypesContainerGroup [
 	^ MooseSpecializedGroup with: self annotationTypesContainer
 ]
 
+{ #category : #printing }
+FamixTAnnotationType >> displayStringOn: aStream [
+
+	aStream << '@' << self name
+]
+
 { #category : #accessing }
 FamixTAnnotationType >> instances [
 	"Relation named: #instances type: #FamixTTypedAnnotationInstance opposite: #annotationType"
