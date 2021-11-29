@@ -15,6 +15,12 @@ FamixJavaException class >> annotation [
 	^self
 ]
 
+{ #category : #printing }
+FamixJavaException >> displayStringOn: aStream [
+
+	self exceptionClass displayStringOn: aStream
+]
+
 { #category : #accessing }
 FamixJavaException >> mooseNameOn: aStream [
 	aStream nextPutAll: (self class name withoutPrefix: 'FamixJava').

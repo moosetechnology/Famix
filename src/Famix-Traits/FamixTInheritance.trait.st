@@ -18,6 +18,14 @@ FamixTInheritance classSide >> annotation [
 	^self
 ]
 
+{ #category : #printing }
+FamixTInheritance >> displayStringOn: aStream [
+
+	self subclass displayStringOn: aStream.
+	aStream << ' -|> '.
+	self superclass displayStringOn: aStream
+]
+
 { #category : #testing }
 FamixTInheritance >> isInheritance [
 

@@ -26,6 +26,12 @@ FamixTSourceLanguage >> addSourcedEntity: aSourcedEntity [
 	^ self sourcedEntities add: aSourcedEntity
 ]
 
+{ #category : #printing }
+FamixTSourceLanguage >> displayStringOn: aStream [
+
+	aStream << self name
+]
+
 { #category : #testing }
 FamixTSourceLanguage >> isAttached [
 	"Returns whether the receiver (a language) has some entities associated with it. By default, if there are no entities attached, it means that all of them are of this language."

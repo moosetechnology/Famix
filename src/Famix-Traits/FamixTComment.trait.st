@@ -59,6 +59,13 @@ FamixTComment >> content: anObject [
 ]
 
 { #category : #printing }
+FamixTComment >> displayStringOn: aStream [
+
+	aStream << 'comment on '.
+	self container displayStringOn: aStream
+]
+
+{ #category : #printing }
 FamixTComment >> printOn: aStream [
 	self sourceText ifNotNil: [ :sourceText | aStream nextPutAll: (sourceText contractTo: 50) ].
 	aStream nextPutAll: ' (comment on '.

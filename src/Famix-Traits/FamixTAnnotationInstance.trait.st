@@ -52,3 +52,11 @@ FamixTAnnotationInstance >> annotatedEntity: anObject [
 	<generated>
 	annotatedEntity := anObject
 ]
+
+{ #category : #printing }
+FamixTAnnotationInstance >> displayStringOn: aStream [
+
+	self annotationType displayStringOn: aStream.
+	aStream << ' on '.
+	self annotatedEntity displayStringOn: aStream
+]

@@ -32,6 +32,12 @@ FamixTNamedEntity classSide >> named: aString model: aMooseModel [
 		yourself
 ]
 
+{ #category : #printing }
+FamixTNamedEntity >> displayStringOn: aStream [
+
+	self name ifNotNil: [ :n | aStream << n ]
+]
+
 { #category : #testing }
 FamixTNamedEntity >> hasUniqueMooseNameInModel [
 	" all subclasses should call the method: 'resetMooseName' if a change causes the moosename to change "

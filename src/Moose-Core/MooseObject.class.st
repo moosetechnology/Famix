@@ -331,6 +331,12 @@ MooseObject >> initialize [
 	self resetPrivateState
 ]
 
+{ #category : #printing }
+MooseObject >> inspectorToString [
+
+	^ String streamContents: [ :s | self displayStringOn: s ]
+]
+
 { #category : #accessing }
 MooseObject >> isBookmarked [
 	^ self propertyNamed: #isBookmarked ifNil: [false]

@@ -30,6 +30,14 @@ FamixTParameter classSide >> annotation [
 	^self
 ]
 
+{ #category : #printing }
+FamixTParameter >> displayStringOn: aStream [
+
+	self name ifNotNil: [ :n | aStream << n << ' in ' ].
+	self parentBehaviouralEntity ifNotNil: [ :pbe | 
+		pbe displayStringOn: aStream ]
+]
+
 { #category : #accessing }
 FamixTParameter >> parentBehaviouralEntity [
 	"Relation named: #parentBehaviouralEntity type: #FamixTWithParameters opposite: #parameters"

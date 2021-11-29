@@ -50,6 +50,14 @@ FamixTAccess >> accessor: anObject [
 	accessor := anObject
 ]
 
+{ #category : #printing }
+FamixTAccess >> displayStringOn: aStream [
+
+	variable displayStringOn: aStream.
+	aStream << ' accessed in '.
+	accessor displayStringOn: aStream
+]
+
 { #category : #testing }
 FamixTAccess >> isAccess [
 
