@@ -33,8 +33,9 @@ FamixTParameter classSide >> annotation [
 { #category : #printing }
 FamixTParameter >> displayStringOn: aStream [
 
-	aStream << name << ' in '.
-	self parentBehaviouralEntity displayStringOn: aStream
+	self name ifNotNil: [ :n | aStream << n << ' in ' ].
+	self parentBehaviouralEntity ifNotNil: [ :pbe | 
+		pbe displayStringOn: aStream ]
 ]
 
 { #category : #accessing }

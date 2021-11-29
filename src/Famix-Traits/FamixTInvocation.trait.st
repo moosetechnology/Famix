@@ -69,9 +69,9 @@ FamixTInvocation >> candidates: anObject [
 FamixTInvocation >> displayStringOn: aStream [
 
 	self receiver ifNotNil: [ :rcvr | 
-		rcvr displayStringOn: aStream.
+		self receiver displayStringOn: aStream.
 		aStream nextPutAll: ' -> ' ].
-	aStream << self signature
+	self sender ifNotNil: [ self sender displayStringOn: aStream ]
 ]
 
 { #category : #testing }

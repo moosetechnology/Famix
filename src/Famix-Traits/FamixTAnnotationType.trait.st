@@ -64,7 +64,7 @@ FamixTAnnotationType >> annotationTypesContainerGroup [
 { #category : #printing }
 FamixTAnnotationType >> displayStringOn: aStream [
 
-	aStream << '@' << self name
+	self name ifNotNil: [ :n | aStream << '@' << n ]
 ]
 
 { #category : #accessing }

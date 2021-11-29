@@ -35,7 +35,7 @@ FamixTNamedEntity classSide >> named: aString model: aMooseModel [
 { #category : #printing }
 FamixTNamedEntity >> displayStringOn: aStream [
 
-	aStream << name
+	self name ifNotNil: [ :n | aStream << n ]
 ]
 
 { #category : #testing }
