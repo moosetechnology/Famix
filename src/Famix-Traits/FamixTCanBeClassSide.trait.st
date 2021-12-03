@@ -1,7 +1,7 @@
 Trait {
 	#name : #FamixTCanBeClassSide,
 	#instVars : [
-		'#isClassSide => FMProperty'
+		'#isClassSide => FMProperty defaultValue: false'
 	],
 	#category : #'Famix-Traits-Traits'
 }
@@ -15,10 +15,21 @@ FamixTCanBeClassSide classSide >> annotation [
 	^self
 ]
 
+{ #category : #initialization }
+FamixTCanBeClassSide >> initialize [
+
+	<generated>
+	super initialize.
+
+	"Default value initialization"
+	isClassSide := false.
+
+]
+
 { #category : #accessing }
 FamixTCanBeClassSide >> isClassSide [
 
-	<FMProperty: #isClassSide type: #Boolean>
+	<FMProperty: #isClassSide type: #Boolean defaultValue: false>
 	<generated>
 	<FMComment: 'Entity can be declared class side i.e. static'>
 	^ isClassSide
