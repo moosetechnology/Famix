@@ -123,7 +123,8 @@ Class {
 		'tHasKind',
 		'tWithSourceLanguages',
 		'tWithCompilationUnits',
-		'tWithHeaders'
+		'tWithHeaders',
+		'tCanBeClassSide'
 	],
 	#category : #'Famix-MetamodelGeneration'
 }
@@ -1060,6 +1061,8 @@ FamixGenerator >> defineProperties [
 		comment: 'Entity can be declared abstract').
 	((tCanBeFinal property: #isFinal type: #Boolean) 
 		comment: 'Entity can be declared final').
+	((tCanBeClassSide property: #isClassSide type: #Boolean) 
+		comment: 'Entity can be declared class side i.e. static').		
 		
 	((tFileAnchor property: #correspondingFile type: #FamixTFile) 
 		comment: 'File associated to this source anchor').
@@ -1462,6 +1465,8 @@ FamixGenerator >> defineTraits [
 	tAttribute comment: self commentForTAttribute.
 	tAttribute withTesting.
 
+	tCanBeClassSide := builder newTraitNamed: #TCanBeClassSide. 
+	
 	tCaughtException := builder newTraitNamed: #TCaughtException.
 	tCaughtException comment: self commentForTCaughtException.
 
