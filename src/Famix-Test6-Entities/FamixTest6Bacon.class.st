@@ -1,9 +1,11 @@
 Class {
 	#name : #FamixTest6Bacon,
 	#superclass : #FamixTest6Entity,
+	#traits : 'FamixTest6TCooked',
+	#classTraits : 'FamixTest6TCooked classTrait',
 	#instVars : [
-		'#isFood => FMProperty defaultValue: true',
-		'#eggs => FMProperty defaultValue: 12'
+		'#eggs => FMProperty defaultValue: 12',
+		'#isFood => FMProperty defaultValue: true'
 	],
 	#category : #'Famix-Test6-Entities-Entities'
 }

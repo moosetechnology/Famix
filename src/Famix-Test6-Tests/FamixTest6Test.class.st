@@ -41,6 +41,22 @@ FamixTest6Test >> testDefaultValueOnCreation2 [
 ]
 
 { #category : #running }
+FamixTest6Test >> testDefaultValueOnCreationForTrait [
+
+	| bacon cookedProperty |
+	bacon := FamixTest6Bacon new.
+	cookedProperty := ((FamixTest6Model new mooseDescriptionFor: FamixTest6TCooked ) properties select: [ :each | 
+		                   each name = #isCooked ]) at: 1.
+
+	self assert: bacon isCooked equals: true.
+	self assert: cookedProperty defaultValue equals: true.
+
+	bacon isCooked: false.
+	self assert: bacon isCooked equals: false.
+	self assert: cookedProperty defaultValue equals: true
+]
+
+{ #category : #running }
 FamixTest6Test >> testDefaultValueOnCreationInheritance [
 
 	| spam eggProperty bacon |
