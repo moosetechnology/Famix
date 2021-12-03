@@ -16,7 +16,7 @@ FamixTHasVisibility classSide >> annotation [
 ]
 
 { #category : #accessing }
-FamixTHasVisibility >> bePackage [
+FamixTHasVisibility >> bePackageVisibility [
 
 	self visibility: #package
 ]
@@ -40,15 +40,15 @@ FamixTHasVisibility >> bePublic [
 ]
 
 { #category : #accessing }
-FamixTHasVisibility >> isPackage [
-	<FMProperty: #isPackage type: #Boolean> <derived>
+FamixTHasVisibility >> isPackageVisibility [
+	<FMProperty: #isPackageVisibility type: #Boolean> <derived>
 	<FMComment: 'Flag true for entities that have a package visibility. Language dependent.'>
 	
 	^ self visibility = #package
 ]
 
 { #category : #accessing }
-FamixTHasVisibility >> isPackage: aBoolean [
+FamixTHasVisibility >> isPackageVisibility: aBoolean [
 
 	aBoolean ifTrue: [ self visibility: #package ]
 ]
