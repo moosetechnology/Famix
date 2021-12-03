@@ -1,8 +1,8 @@
 Class {
 	#name : #FamixStMethod,
 	#superclass : #FamixStNamedEntity,
-	#traits : 'FamixStTCanBeClassSide + FamixTCanBeAbstract + FamixTHasKind + FamixTMethod + FamixTWithAnnotationTypes + FamixTWithComments',
-	#classTraits : 'FamixStTCanBeClassSide classTrait + FamixTCanBeAbstract classTrait + FamixTHasKind classTrait + FamixTMethod classTrait + FamixTWithAnnotationTypes classTrait + FamixTWithComments classTrait',
+	#traits : 'FamixTCanBeAbstract + FamixTCanBeClassSide + FamixTHasKind + FamixTMethod + FamixTWithAnnotationTypes + FamixTWithComments',
+	#classTraits : 'FamixTCanBeAbstract classTrait + FamixTCanBeClassSide classTrait + FamixTHasKind classTrait + FamixTMethod classTrait + FamixTWithAnnotationTypes classTrait + FamixTWithComments classTrait',
 	#instVars : [
 		'#protocol => FMProperty'
 	],
@@ -91,12 +91,6 @@ FamixStMethod >> hasEmptyBody [
 	empty method in this scheme (which is questionable)."
 	"note that the presence of statements should be checked too for that..."
 	^ self numberOfAccesses = 0 and: [ self numberOfOutgoingInvocations = 0 ]
-]
-
-{ #category : #initialization }
-FamixStMethod >> initialize [
-	super initialize.
-	isClassSide := false
 ]
 
 { #category : #'Famix-Extensions' }
