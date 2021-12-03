@@ -6,10 +6,10 @@ Java extractors map Java packages to FAMIXNamespaces. They can also mirror the s
 Trait {
 	#name : #FamixTPackage,
 	#instVars : [
-		'#childEntities => FMMany type: #FamixTPackageable opposite: #parentPackage',
-		'#packageOwner => FMOne type: #FamixTWithPackages opposite: #packages'
+		'#childEntities => FMMany type: #FamixTPackageable opposite: #parentPackage'
 	],
 	#traits : 'FamixTNamedEntity',
+	#classTraits : 'FamixTNamedEntity classTrait',
 	#category : #'Famix-Traits-Package'
 }
 
@@ -58,25 +58,14 @@ FamixTPackage >> isPackage [
 	^ true
 ]
 
-{ #category : #accessing }
-FamixTPackage >> packageOwner [
-	"Relation named: #packageOwner type: #FamixTWithPackages opposite: #packages"
-
-	<generated>
-	^ packageOwner
-]
-
-{ #category : #accessing }
-FamixTPackage >> packageOwner: anObject [
-
-	<generated>
-	packageOwner := anObject
-]
-
 { #category : #metrics }
 FamixTPackage >> weightedMethodCount [
+
 	<FMProperty: #weightedMethodCount type: #Number>
 	<FMComment: 'The sum of the complexity in a package'>
 	<derived>
-	^ self lookUpPropertyNamed: #WMC computedAs: [ (self toScope: FamixTWithMethods) detectSum: #weightedMethodCount ]
+	^ self
+		  lookUpPropertyNamed: #WMC
+		  computedAs: [ 
+		  (self toScope: FamixTWithMethods) sum: #weightedMethodCount ]
 ]

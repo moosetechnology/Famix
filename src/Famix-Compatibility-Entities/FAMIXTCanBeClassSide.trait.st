@@ -1,22 +1,22 @@
 Trait {
-	#name : #FamixTCanBeClassSide,
+	#name : #FAMIXTCanBeClassSide,
 	#instVars : [
 		'#isClassSide => FMProperty'
 	],
-	#category : #'Famix-Traits-Traits'
+	#category : #'Famix-Compatibility-Entities-Traits'
 }
 
 { #category : #meta }
-FamixTCanBeClassSide classSide >> annotation [
+FAMIXTCanBeClassSide classSide >> annotation [
 
 	<FMClass: #TCanBeClassSide super: #Object>
-	<package: #'Famix-Traits'>
+	<package: #FAMIX>
 	<generated>
 	^self
 ]
 
 { #category : #accessing }
-FamixTCanBeClassSide >> isClassSide [
+FAMIXTCanBeClassSide >> isClassSide [
 
 	<FMProperty: #isClassSide type: #Boolean>
 	<generated>
@@ -25,7 +25,7 @@ FamixTCanBeClassSide >> isClassSide [
 ]
 
 { #category : #accessing }
-FamixTCanBeClassSide >> isClassSide: anObject [
+FAMIXTCanBeClassSide >> isClassSide: anObject [
 	<generated>
 	isClassSide := anObject
 ]

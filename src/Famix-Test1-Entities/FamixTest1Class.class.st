@@ -4,8 +4,8 @@ This a comment for the Class entity
 Class {
 	#name : #FamixTest1Class,
 	#superclass : #FamixTest1NamedEntity,
-	#traits : 'FamixTClass',
-	#classTraits : 'FamixTClass classTrait',
+	#traits : 'FamixTClass + FamixTWithComments + FamixTWithSourceLanguages',
+	#classTraits : 'FamixTClass classTrait + FamixTWithComments classTrait + FamixTWithSourceLanguages classTrait',
 	#category : #'Famix-Test1-Entities-Entities'
 }
 

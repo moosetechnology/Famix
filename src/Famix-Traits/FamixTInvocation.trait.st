@@ -18,6 +18,7 @@ Trait {
 		'#sender => FMOne type: #FamixTWithInvocations opposite: #outgoingInvocations'
 	],
 	#traits : 'FamixTAssociation',
+	#classTraits : 'FamixTAssociation classTrait',
 	#category : #'Famix-Traits-Invocation'
 }
 
@@ -62,6 +63,15 @@ FamixTInvocation >> candidates: anObject [
 
 	<generated>
 	candidates value: anObject
+]
+
+{ #category : #printing }
+FamixTInvocation >> displayStringOn: aStream [
+
+	self receiver ifNotNil: [ :rcvr | 
+		self receiver displayStringOn: aStream.
+		aStream nextPutAll: ' -> ' ].
+	self sender ifNotNil: [ self sender displayStringOn: aStream ]
 ]
 
 { #category : #testing }

@@ -69,7 +69,8 @@ Class {
 		'multipleFileAnchor',
 		'tCanBeVolatile',
 		'tCanBeSynchronized',
-		'tCanBeTransient'
+		'tCanBeTransient',
+		'tCanBeClassSide'
 	],
 	#category : #'Famix-Compatibility-Generator'
 }
@@ -241,9 +242,9 @@ FamixCompatibilityGenerator >> defineHierarchy [
 
 	attribute --|> structuralEntity.
 	attribute --|> #TAttribute.
-	attribute --|> #TWithClassScope.
 	attribute --|> tCanBeVolatile.
 	attribute --|> tCanBeTransient.
+	attribute --|> tCanBeClassSide.
 
 	behaviouralEntity --|> containerEntity.
 	behaviouralEntity --|> #TWithParameters.
@@ -272,7 +273,7 @@ FamixCompatibilityGenerator >> defineHierarchy [
 	class --|> type.
 	class --|> #TWithExceptions.
 	class --|> #TClass.
-	class --|> #TCanBeClassSide.	
+	class --|> tCanBeClassSide. 
 		
 	compilationUnit --|> cFile.
 	compilationUnit --|> #TCompilationUnit.
@@ -331,12 +332,14 @@ FamixCompatibilityGenerator >> defineHierarchy [
 	method --|> #TWithThrownExceptions.
 	method --|> #TWithDeclaredExceptions.
 	method --|> #TWithCaughtExceptions.
+	method --|> 	#THasKind.
 	method --|> tCanBeSynchronized.
+	method --|> tCanBeClassSide.
 
 	module --|> scopingEntity.
 	module --|> #TModule.
 	module --|> #TWithCompilationUnits.
-	module --|> #TWithHeader.
+	module --|> #TWithHeaders.
 
 	namedEntity --|> #TPackageable.
 	namedEntity --|> #TInvocationsReceiver.
@@ -430,7 +433,10 @@ FamixCompatibilityGenerator >> defineHierarchy [
 	multipleFileAnchor --|> sourceAnchor.
 	multipleFileAnchor --|> #TMultipleFileAnchor.
 
-	sourcedEntity --|> #TWithFiles
+	sourcedEntity
+		--|> #TWithSourceLanguages ;
+		--|> #TWithFiles ;
+		--|> #TWithComments
 	
 
 ]
@@ -451,6 +457,8 @@ FamixCompatibilityGenerator >> defineProperties [
 		comment: 'Entity can be declared transient').
 	((tCanBeSynchronized property: #isSynchronized type: #Boolean) 
 		comment: 'Entity can be declared synchronized').
+		((tCanBeClassSide property: #isClassSide type: #Boolean) 
+		comment: 'Entity can be declared class side i.e. static')
 ]
 
 { #category : #definition }
@@ -458,7 +466,8 @@ FamixCompatibilityGenerator >> defineTraits [
 	super defineTraits.
 	tCanBeVolatile := builder newTraitNamed: #TCanBeVolatile comment: self commentForTCanBeVolatile.
 	tCanBeTransient := builder newTraitNamed: #TCanBeTransient comment: self commentForTCanBeTransient.
-	tCanBeSynchronized := builder newTraitNamed: #TCanBeSynchronized comment: self commentForTCanBeSynchronized
+	tCanBeSynchronized := builder newTraitNamed: #TCanBeSynchronized comment: self commentForTCanBeSynchronized.
+	tCanBeClassSide := builder newTraitNamed: #TCanBeClassSide.
 ]
 
 { #category : #definition }

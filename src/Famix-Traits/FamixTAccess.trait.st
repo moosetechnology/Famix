@@ -20,6 +20,7 @@ Trait {
 		'#variable => FMOne type: #FamixTAccessible opposite: #incomingAccesses'
 	],
 	#traits : 'FamixTAssociation',
+	#classTraits : 'FamixTAssociation classTrait',
 	#category : #'Famix-Traits-Access'
 }
 
@@ -47,6 +48,14 @@ FamixTAccess >> accessor: anObject [
 
 	<generated>
 	accessor := anObject
+]
+
+{ #category : #printing }
+FamixTAccess >> displayStringOn: aStream [
+
+	variable displayStringOn: aStream.
+	aStream << ' accessed in '.
+	accessor displayStringOn: aStream
 ]
 
 { #category : #testing }

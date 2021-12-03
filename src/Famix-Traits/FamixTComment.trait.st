@@ -59,16 +59,10 @@ FamixTComment >> content: anObject [
 ]
 
 { #category : #printing }
-FamixTComment >> gtDisplayOn: aStream [
-	| preview |
-	preview := {String cr . String lf . String crlf}
-		inject: (self sourceText truncateWithElipsisTo: 10)
-		into: [ :crtLine :lineReturn | crtLine copyReplaceAll: lineReturn with: ' ' ].
-	aStream
-		nextPut: $";
-		nextPutAll: preview;
-		nextPutAll: '" in '.
-	self container gtDisplayOn: aStream
+FamixTComment >> displayStringOn: aStream [
+
+	aStream << 'comment on '.
+	self container displayStringOn: aStream
 ]
 
 { #category : #printing }

@@ -24,6 +24,7 @@ Trait {
 		'#previous => FMOne type: #FamixTAssociation opposite: #next'
 	],
 	#traits : 'FamixTSourceEntity + TAssociationMetaLevelDependency',
+	#classTraits : 'FamixTSourceEntity classTrait + TAssociationMetaLevelDependency classTrait',
 	#category : #'Famix-Traits-Association'
 }
 
@@ -69,10 +70,11 @@ FamixTAssociation >> asAssociationTo: anEntity [
 ]
 
 { #category : #printing }
-FamixTAssociation >> gtDisplayOn: aStream [
-	self source gtDisplayOn: aStream.
+FamixTAssociation >> displayStringOn: aStream [
+
+	self source displayStringOn: aStream.
 	aStream nextPutAll: ' -> '.
-	self target gtDisplayOn: aStream
+	self target displayStringOn: aStream
 ]
 
 { #category : #testing }

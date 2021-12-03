@@ -197,21 +197,22 @@ MQNavigationQuery >> queryFor: anEntity [
 
 { #category : #execution }
 MQNavigationQuery >> queryLocalFor: anEntity [
+
 	"The goal here is to get all the entity's direct associations of the class in parameter. This will not check the associations of the entity's children."
 
 	"Note: Maybe adding a guard to check if the entity can have associations of this class could improve the perf. Currently it is not the case because there is not enough association. Maybe it could be the case in the futur, like with a PostgreSQL model."
 
 	| properties |
 	"Instead of #to:do: we could just use #do: but this implementation is much faster. Maybe sista will remove the needs of the todo later."
-	1 to: (properties := directionStrategy msePropertiesOf: anEntity) size do: [ :ind | 
-		(anEntity perform: (properties at: ind) name)
-			ifNotNil: [ :coll | 
-				"We ensure we have associations because non-reified associations were introduced in Moose"
-				result
-					addAll:
-						(resultKindStrategy
-							collectResultFrom: ((associationSelectionStrategy selectAssociationsIn: coll asCollection) collect: [ :res | directionStrategy ensureAssociation: res with: anEntity ])
-							query: self) ] ]
+	1 to:
+		(properties := directionStrategy msePropertiesOf: anEntity) size do: [ 
+		:ind | 
+		(anEntity perform: (properties at: ind) name) ifNotNil: [ :coll | 
+			result addAll: (resultKindStrategy
+					 collectResultFrom:
+					 (associationSelectionStrategy selectAssociationsIn:
+						  coll asCollection)
+					 query: self) ] ]
 ]
 
 { #category : #accessing }

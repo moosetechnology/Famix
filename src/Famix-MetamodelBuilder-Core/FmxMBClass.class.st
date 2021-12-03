@@ -63,6 +63,8 @@ FmxMBClass >> generate [
 			
 	self realClass: aClass.
 	
+	self generateInitialize.
+	
 	self generateAccessors.
 	self generateAnnotationIn: aClass as: self name superclass: nil.
 	

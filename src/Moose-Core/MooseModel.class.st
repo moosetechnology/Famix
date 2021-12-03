@@ -42,6 +42,21 @@ MooseModel class >> defaultPackagesToProcessWith: aCollectionOfPackages [
 				ifNotNil: [ :manifest | manifest shouldBeIncludedByDefaultInMetamodelsWith: aCollectionOfPackages ] ]
 ]
 
+{ #category : #'world menu' }
+MooseModel class >> developerTool: aClass menuCommandOn: aBuilder [
+	^(aBuilder item: aClass menuLabel)
+		parent: MooseModel developerToolsMenuLabel ;
+		label: aClass menuLabel ;
+		icon: (MooseIcons mooseIcon scaledToSize: 16@16) ;
+		action:[ aClass open ] ;
+		yourself
+]
+
+{ #category : #'world menu' }
+MooseModel class >> developerToolsMenuLabel [
+	^#MooseDevelopperTools
+]
+
 { #category : #'import-export' }
 MooseModel class >> export: aModel to: aStream [ 
 	aModel exportTo: aStream
@@ -215,13 +230,28 @@ MooseModel class >> importMetamodelFrom: aStream [
 MooseModel class >> menuCommandOn: aBuilder [
 	<worldMenu>
 	(aBuilder item: #Moose)
-		order: 6.0;
-		withSeparatorAfter;
-		icon: MooseIcons mooseIcon;
-		with: [ (aBuilder item: #'Reset metamodels additional properties')
-				order: 50;
-				action: [ self resetMetamodelsAdditionalProperties ];
-				withSeparatorAfter ]
+		order: 6;
+		icon: MooseIcons mooseIcon.
+
+	(aBuilder item: self developerToolsMenuLabel)
+		order: 30;
+		parent: #Moose ;
+		label: 'Developer tools'.
+
+	"there are other entries before these ones in #developerToolsMenuLabel"
+	(aBuilder item: #'Regenerate all metamodels')
+		order: 40;
+		parent: (self developerToolsMenuLabel) ;
+		action: [ FamixMetamodelGenerator generateAllMetamodels ].
+	(aBuilder item: #'Reset metamodels')
+		order: 45;
+		parent: (self developerToolsMenuLabel) ;
+		action: [ self resetMetamodels ].
+ 	(aBuilder item: #'Reset metamodels additional properties')
+		order: 50;
+		parent: (self developerToolsMenuLabel) ;
+		action: [ self resetMetamodelsAdditionalProperties ].
+
 ]
 
 { #category : #meta }
@@ -282,7 +312,7 @@ MooseModel class >> resetMetamodels [
 	self allSubclassesDo: #resetMetamodel
 ]
 
-{ #category : #accessing }
+{ #category : #meta }
 MooseModel class >> resetMetamodelsAdditionalProperties [
 	<script>
 	self allSubclassesDo: [ :each | each metamodel cleanAdditionalProperties ]
@@ -501,6 +531,22 @@ MooseModel >> importFrom: aFMModel named: aString [
 	self name: aString
 ]
 
+{ #category : #'as yet unclassified' }
+MooseModel >> importFromJSON [
+
+	| file |
+	file := UIManager default
+		        chooseExistingFileReference: 'Import model from JSON file'
+		        extensions: #( 'json' )
+		        path: FileLocator home.
+	file ifNotNil: [ 
+		| stream |
+		stream := file readStream.
+		self importFromJSONStream: stream.
+		self name: file basenameWithoutExtension.
+		stream close ]
+]
+
 { #category : #actions }
 MooseModel >> importFromJSONStream: aStream [
 	"Benchmarks
@@ -575,6 +621,7 @@ MooseModel >> includesElementsOfType: aClass [
 MooseModel >> inferNamespaceParentsBasedOnNames [
 	<menuItem: 'Infer Namespace Parents Based on Names' category: 'Utilities'>
 	| parent parentNameSize currentPosition parentName namespaces |
+	self deprecated: 'NameSpaces do not exist in any MooseModel'.
 	namespaces := self allNamespaces.
 	MooseCustomTask new
 		with: [ :task | 
@@ -670,7 +717,8 @@ MooseModel >> mooseDescription [
 
 { #category : #accessing }
 MooseModel >> mooseDescriptionFor: class [
-	^ self metamodel descriptionOf: class instanceSide
+
+	^ self metamodel fmTypeOf: class instanceSide
 ]
 
 { #category : #accessing }

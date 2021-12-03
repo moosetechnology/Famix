@@ -51,14 +51,10 @@ FamixTWithComments >> hasComments [
 FamixTWithComments >> numberOfComments [
 	<FMProperty: #numberOfComments type: #Number>
 	<derived>
-	<FMComment: 'The number of comments in a class'>
+	<FMComment: 'The number of comments in the entity'>
 	^ self
 		lookUpPropertyNamed: #numberOfComments
-		computedAs: [ self comments size
-				+
-					(self children asArray
-						inject: 0
-						into: [ :sum :el | el numberOfComments + sum ]) ]
+		computedAs: [ self comments size ]
 
 ]
 

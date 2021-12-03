@@ -16,13 +16,15 @@ MooseObjectTest >> actualClass [
 
 { #category : #tests }
 MooseObjectTest >> testAllMooseDisplayOn [
+
 	| t ins |
-	self withConcreteSubclasses
-		do: [ :cls | 
-			ins := cls new.
-			self shouldnt: [ t := ins gtDisplayString ] raise: Error.
-			self assert: t isByteString.
-			self assert: (String streamContents: [ :s | ins gtDisplayOn: s ]) equals: t ]
+	self withConcreteSubclasses do: [ :cls | 
+		ins := cls new.
+		self shouldnt: [ t := ins displayString ] raise: Error.
+		self assert: t isByteString.
+		self
+			assert: (String streamContents: [ :s | ins displayStringOn: s ])
+			equals: t ]
 ]
 
 { #category : #tests }

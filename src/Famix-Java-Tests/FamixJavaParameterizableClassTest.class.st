@@ -11,7 +11,7 @@ FamixJavaParameterizableClassTest >> testParameterTypes [
 	model
 		importFromMSEStream:
 			'(
-		(Famix-Java-Entities.Namespace (id: 1) (name ''NamespaceA''))
+		(Famix-Java-Entities.Package (id: 1) (name ''PackageA''))
 		(Famix-Java-Entities.ParameterizableClass (id: 2) (name ''ParameterizableClassA'') )
 		(Famix-Java-Entities.ParameterizableClass (id: 3) (name ''ParameterizableClassB'') )
 		(Famix-Java-Entities.ParameterizableClass (id: 4) (name ''ParameterizableClassC'') )

@@ -7,7 +7,8 @@ Trait {
 	#instVars : [
 		'#parentType => FMOne type: #FamixTWithAttributes opposite: #attributes'
 	],
-	#traits : 'FamixTCanBeClassSide + FamixTStructuralEntity',
+	#traits : 'FamixTStructuralEntity',
+	#classTraits : 'FamixTStructuralEntity classTrait',
 	#category : #'Famix-Traits-Attribute'
 }
 
@@ -28,7 +29,7 @@ FamixTAttribute >> hierarchyNestingLevel [
 		
 	^self
 		lookUpPropertyNamed: #hierarchyNestingLevel
-		computedAs: [self belongsTo hierarchyNestingLevel]
+		computedAs: [self parentType hierarchyNestingLevel]
 ]
 
 { #category : #metrics }
@@ -41,13 +42,6 @@ FamixTAttribute >> isAttribute [
 
 	<generated>
 	^ true
-]
-
-{ #category : #accessing }
-FamixTAttribute >> isClassSide [
-	<FMProperty: #isClassSide type: #Boolean>
-	<FMComment: 'True if class-side attribute'>
-	^ isClassSide ifNil: [ false ]
 ]
 
 { #category : #printing }

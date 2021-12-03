@@ -62,43 +62,42 @@ FmxMBRingEnvironment >> compile: aSource in: aClass classified: aProtocol packag
 FmxMBRingEnvironment >> createClassNamed: aClassName superclass: aSuperclass traitNames: traitNames slots: slots in: packageName overwrite: shouldOverwrite [
 
 	| aClass existingClass composition |
-	
-	existingClass := self ringEnvironment ask
-		behaviorNamed: aClassName asSymbol.
-	
-	(existingClass isNotNil and: [ shouldOverwrite not ])
-		ifTrue: [ ^ existingClass ].
-	
+	existingClass := self ringEnvironment ask behaviorNamed:
+		                 aClassName asSymbol.
+
+	(existingClass isNotNil and: [ shouldOverwrite not ]) ifTrue: [ 
+		^ existingClass ].
+
 	aClass := self ringEnvironment ensureClassNamed: aClassName.
-	aClass
-		superclass: (self ringEnvironment ensureClassNamed: aSuperclass name).
-	
+	aClass superclass:
+		(self ringEnvironment ensureClassNamed: aSuperclass name).
+
 	composition := RGTraitComposition parent: aClass.
 	aClass traitComposition: composition.
-	
-	traitNames
-		do: [ :each | 
-			composition
-				addTransformation: (self ringEnvironment ensureTraitNamed: each) ].
-	
-	aClass
-		package: (self ringEnvironment ensurePackageNamed: packageName).
+
+	traitNames do: [ :each | 
+		composition addTransformation:
+			(self ringEnvironment ensureTraitNamed: each) ].
+
+	aClass package:
+		(self ringEnvironment ensurePackageNamed: packageName).
 	aClass layout makeResolved.
-	
-	slots
-		do: [ :slotInBadEnvironment | 
-			| slot |
-			slot := slotInBadEnvironment isSpecial
-				ifTrue: [ (RGUnknownSlot
-						named: slotInBadEnvironment name
-						parent: aClass layout)
-						expression: slotInBadEnvironment expression;
-						yourself ]
-				ifFalse: [ RGInstanceVariableSlot
-						named: slotInBadEnvironment name
-						parent: aClass layout ].
-			aClass layout addSlot: slot.
-			slot propertyNamed: #isGenerated put: true ].
+
+	slots do: [ :slotInBadEnvironment | 
+		| slot |
+		slot := slotInBadEnvironment needsFullDefinition
+			        ifTrue: [ 
+				        (RGUnknownSlot
+					         named: slotInBadEnvironment name
+					         parent: aClass layout)
+					        expression: slotInBadEnvironment expression;
+					        yourself ]
+			        ifFalse: [ 
+				        RGInstanceVariableSlot
+					        named: slotInBadEnvironment name
+					        parent: aClass layout ].
+		aClass layout addSlot: slot.
+		slot propertyNamed: #isGenerated put: true ].
 
 
 	^ aClass
@@ -125,43 +124,42 @@ FmxMBRingEnvironment >> createImportingcontextClassNamed: aClassName in: package
 FmxMBRingEnvironment >> createTraitNamed: traitName uses: traitNames slots: slots in: packageName overwrite: shouldOverwrite [
 
 	| aPackage aTrait existingClass composition |
-	
-	existingClass := self ringEnvironment ask
-		behaviorNamed: traitName asSymbol.
-	(existingClass isNotNil and: [ shouldOverwrite not ])
-		ifTrue: [ ^ existingClass ].
-	
+	existingClass := self ringEnvironment ask behaviorNamed:
+		                 traitName asSymbol.
+	(existingClass isNotNil and: [ shouldOverwrite not ]) ifTrue: [ 
+		^ existingClass ].
+
 	aPackage := self ringEnvironment ensurePackageNamed: packageName.
-	
+
 	aTrait := ringEnvironment ensureTraitNamed: traitName.
 	aTrait superclass: self basicTrait.
-	
+
 	composition := RGTraitComposition parent: aTrait.
 	aTrait traitComposition: composition.
-	
-	traitNames
-		do: [ :each | 
-			composition
-				addTransformation: (self ringEnvironment ensureTraitNamed: each) ].
-	
+
+	traitNames do: [ :each | 
+		composition addTransformation:
+			(self ringEnvironment ensureTraitNamed: each) ].
+
 	aTrait package: aPackage.
 	aTrait layout makeResolved.
-	
-	slots
-		do: [ :slotInBadEnvironment | 
-			| slot |
-			slot := slotInBadEnvironment isSpecial
-				ifTrue: [ (RGUnknownSlot
-						named: slotInBadEnvironment name
-						parent: aTrait layout)
-						expression: slotInBadEnvironment expression;
-						yourself ]
-				ifFalse: [ RGInstanceVariableSlot
-						named: slotInBadEnvironment name
-						parent: aTrait layout ].
-			aTrait layout addSlot: slot.
-			slot propertyNamed: #isGenerated put: true ].
-	
+
+	slots do: [ :slotInBadEnvironment | 
+		| slot |
+		slot := slotInBadEnvironment needsFullDefinition
+			        ifTrue: [ 
+				        (RGUnknownSlot
+					         named: slotInBadEnvironment name
+					         parent: aTrait layout)
+					        expression: slotInBadEnvironment expression;
+					        yourself ]
+			        ifFalse: [ 
+				        RGInstanceVariableSlot
+					        named: slotInBadEnvironment name
+					        parent: aTrait layout ].
+		aTrait layout addSlot: slot.
+		slot propertyNamed: #isGenerated put: true ].
+
 	^ aTrait
 ]
 
@@ -218,4 +216,10 @@ FmxMBRingEnvironment >> slotNamed: slotName cardinality: cardinality type: type 
 	^ (RGUnknownSlot named: slotName asSymbol)
 		 expression: ('{1} type: #{2} opposite: #{3}' 
 			format: { cardinalityClassName. type. oppositeName}) 
+]
+
+{ #category : #initialization }
+FmxMBRingEnvironment >> slotNamed: slotName defaultValue: aValue [
+	aValue ifNil: [ ^ self slotNamed: slotName ].
+	^ (RGUnknownSlot named: slotName asSymbol) expression: ('FMProperty defaultValue: {1}' format: { aValue })
 ]

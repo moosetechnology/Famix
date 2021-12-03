@@ -8,6 +8,7 @@ A class is typically scoped in a namespace. To model nested or anonymous classes
 Trait {
 	#name : #FamixTClass,
 	#traits : 'FamixTInvocationsReceiver + FamixTPackageable + (FamixTType - {#queryStaticIncomingAssociations. #queryStaticOutgoingAssociations}) + FamixTWithAttributes + FamixTWithComments + FamixTWithInheritances + FamixTWithMethods + TOODependencyQueries',
+	#classTraits : 'FamixTInvocationsReceiver classTrait + FamixTPackageable classTrait + FamixTType classTrait + FamixTWithAttributes classTrait + FamixTWithComments classTrait + FamixTWithInheritances classTrait + FamixTWithMethods classTrait + TOODependencyQueries classTrait',
 	#category : #'Famix-Traits-Class'
 }
 
@@ -96,88 +97,6 @@ FamixTClass >> isTestCase [
 { #category : #testing }
 FamixTClass >> isTestCase: aBoolean [
 	^ self attributeAt: #isTestCase put: true
-]
-
-{ #category : #metrics }
-FamixTClass >> numberOfAttributesInherited [
-	<FMProperty: #numberOfAttributesInherited type: #Number>
-	<derived>
-	<FMComment: 'The number of attributes in a class inherited from super classes'>	
-	
-	^self
-		lookUpPropertyNamed: #numberOfAttributesInherited
-		computedAs: [self inheritedAttributes size]
-]
-
-{ #category : #metrics }
-FamixTClass >> numberOfAttributesInherited: aNumber [
-	self cacheAt: #numberOfAttributesInherited put: aNumber
-]
-
-{ #category : #metrics }
-FamixTClass >> numberOfMethodsAdded [
-	<FMProperty: #numberOfMethodsAdded type: #Number>
-	<derived>
-	<FMComment: 'The number of methods in a class added with respect to super classes'>	
-	
-	^self
-		lookUpPropertyNamed: #numberOfMethodsAdded
-		computedAs: [self addedMethods size]
-]
-
-{ #category : #metrics }
-FamixTClass >> numberOfMethodsAdded: aNumber [
-	self cacheAt: #numberOfMethodsAdded put: aNumber
-]
-
-{ #category : #metrics }
-FamixTClass >> numberOfMethodsInHierarchy [
-	<FMProperty: #numberOfMethodsInHierarchy type: #Number>
-	<derived>
-	<FMComment: 'The number of methods of a class included the inherited ones'>	
-	
-	| totNom |
-	totNom := self methods size.
-	self superclassHierarchyGroup
-		do: [:aClass | totNom := totNom + aClass methods size].
-	^totNom
-]
-
-{ #category : #metrics }
-FamixTClass >> numberOfMethodsInHierarchy: aNumber [
-	self cacheAt: #numberOfMethodsInHierarchy put: aNumber
-]
-
-{ #category : #metrics }
-FamixTClass >> numberOfMethodsInherited [
-	<FMProperty: #numberOfMethodsInherited type: #Number>
-	<derived>
-	<FMComment: 'The number of methods in a class inherited from super classes'>	
-
-	^self
-		lookUpPropertyNamed: #numberOfMethodsInherited
-		computedAs: [self inheritedMethods size]
-]
-
-{ #category : #metrics }
-FamixTClass >> numberOfMethodsInherited: aNumber [
-	self cacheAt: #numberOfMethodsInherited put: aNumber
-]
-
-{ #category : #metrics }
-FamixTClass >> numberOfMethodsOverriden [
-	<FMProperty: #numberOfMethodsOverriden type: #Number>
-	<derived>
-	<FMComment: 'The number of methods in a class overriden with respect to super classes'>
-			
-	^self
-		lookUpPropertyNamed: #numberOfMethodsOverriden
-		computedAs: [self numberOfMethods - self numberOfMethodsAdded]
-]
-
-{ #category : #metrics }
-FamixTClass >> numberOfMethodsOverriden: aNumber [
-	self cacheAt: #numberOfMethodsOverriden put: aNumber
 ]
 
 { #category : #metrics }

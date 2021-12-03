@@ -21,7 +21,6 @@ Class {
 		'invocation',
 		'localVariable',
 		'method',
-		'namespace',
 		'package',
 		'parameter',
 		'parameterType',
@@ -38,7 +37,8 @@ Class {
 		'tCanBeVolatile',
 		'tCanBeTransient',
 		'tCanBeSynchronized',
-		'tJavaClassMetrics'
+		'tJavaClassMetrics',
+		'tCanBeClassSide'
 	],
 	#category : #'Famix-Java-Generator'
 }
@@ -121,7 +121,6 @@ FamixJavaGenerator >> defineClasses [
 	invocation := builder newClassNamed: #Invocation.
 	localVariable := builder newClassNamed: #LocalVariable.
 	method := builder newClassNamed: #Method.
-	namespace := builder newClassNamed: #Namespace.
 	package := builder newClassNamed: #Package.
 	parameter := builder newClassNamed: #Parameter.
 	parameterType := builder newClassNamed: #ParameterType.
@@ -177,19 +176,24 @@ FamixJavaGenerator >> defineHierarchy [
 	annotationType --|> #TAnnotationType.
 	annotationType --|> #TWithAttributes.
 	annotationType --|> #TWithInheritances.
+	annotationType --|> #TPackageable.
+	annotationType --|> #TWithComments.
+	annotationType --|> #THasVisibility.
 
 	annotationTypeAttribute --|> namedEntity.
 	annotationTypeAttribute --|> #TAnnotationTypeAttribute.
 	annotationTypeAttribute --|> #TTypedAnnotationInstanceAttribute.
+	annotationTypeAttribute --|> #TWithComments.
 
 	attribute --|> namedEntity.
 	attribute --|> #TAttribute.
-	attribute --|> #TWithClassScope.
 	attribute --|> #TCanBeFinal.
 	attribute --|> #THasVisibility.
 	attribute --|> tCanBeVolatile.
 	attribute --|> tCanBeTransient.
 	attribute --|> #TInvocationsReceiver.
+	attribute --|> #TWithComments.
+	attribute --|> tCanBeClassSide.
 	
 	file --|> namedEntity.
 	file --|> #TFile.
@@ -208,20 +212,25 @@ FamixJavaGenerator >> defineHierarchy [
 	method --|> #TCanBeAbstract.
 	method --|> #TCanBeFinal.
 	method --|> #THasVisibility.
+	method --|> #THasKind.
+	method --|> #TWithComments.
 	method --|> tCanBeSynchronized.
+	method --|> tCanBeClassSide.
 
 	caughtException --|> exception.
 	caughtException --|> #TCaughtException.
 
 	class --|> type.
 	class --|> #TWithExceptions.
+	class --|> #TPackageable.
 	class --|> #TClass.
 	class --|> #TLCOMMetrics.
 	class --|> #TCanBeAbstract.
 	class --|> #TCanBeFinal.
 	class --|> #THasVisibility.
-	class --|> #TCanBeClassSide.
+	class --|> tCanBeClassSide. 
 	class --|> #TClassMetrics.
+	class --|> #TWithComments.
 	class --|> tJavaClassMetrics.	
 
 	containerEntity --|> namedEntity.
@@ -238,9 +247,11 @@ FamixJavaGenerator >> defineHierarchy [
 	enum --|> #TWithAttributes.
 	enum --|> #TWithMethods.
 	enum --|> #TWithInheritances.
+	enum --|> #TWithComments.
 
 	enumValue --|> namedEntity.
 	enumValue --|> #TStructuralEntity.
+	enumValue --|> #TWithComments.
 	enumValue --|> #TEnumValue.
 	enumValue withPrecedenceOf: #TEnumValue.
 
@@ -263,22 +274,21 @@ FamixJavaGenerator >> defineHierarchy [
 	localVariable --|> #TLocalVariable.
 	localVariable --|> #TCanBeFinal.
 	localVariable --|> #TInvocationsReceiver.
+	localVariable --|> #TWithComments.
+
 	
-	namedEntity --|> #TPackageable.
 	namedEntity --|> #TInvocationsReceiver.
 	namedEntity --|> #TWithAnnotationInstances.
-
-	namespace --|> containerEntity.
-	namespace --|> #TNamespace.
-	namespace --|> #TWithGlobalVariables.
 
 	package --|> containerEntity.
 	package --|> #TWithGlobalVariables.
 	package --|> #TPackage.
+	package --|> #TPackageable.
 
 	parameter --|> namedEntity.
 	parameter --|> #TParameter.
 	parameter --|> #TCanBeFinal.
+	parameter --|> #TWithComments.
 
 	parameterType --|> type.
 	parameterType --|> #TParameterType.
@@ -318,9 +328,6 @@ FamixJavaGenerator >> defineHierarchy [
 { #category : #definition }
 FamixJavaGenerator >> defineProperties [
 	super defineProperties.
-	((namespace property: #parentNamespace)
-		comment: 'Parent namespace embedding this namespace, if any.';
-		container) *- ((namespace property: #childNamespaces) comment: 'Namespaces embedded in this namespace, if any.').
 		
 		((tCanBeVolatile property: #isVolatile type: #Boolean) 
 		comment: 'Entity can be declared volatile').
@@ -328,6 +335,8 @@ FamixJavaGenerator >> defineProperties [
 		comment: 'Entity can be declared transient').
 	((tCanBeSynchronized property: #isSynchronized type: #Boolean) 
 		comment: 'Entity can be declared synchronized').
+		((tCanBeClassSide property: #isClassSide type: #Boolean) 
+		comment: 'Entity can be declared class side i.e. static').	
 ]
 
 { #category : #definition }
@@ -344,7 +353,8 @@ FamixJavaGenerator >> defineTraits [
 		                      newTraitNamed: #TCanBeSynchronized
 		                      comment: self commentForTCanBeSynchronized.
 
-	tJavaClassMetrics := builder newTraitNamed: #TClassMetrics
+	tJavaClassMetrics := builder newTraitNamed: #TClassMetrics.
+	tCanBeClassSide := builder newTraitNamed: #TCanBeClassSide. 
 ]
 
 { #category : #definition }

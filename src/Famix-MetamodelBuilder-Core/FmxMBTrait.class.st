@@ -62,6 +62,8 @@ FmxMBTrait >> generate [
 			
 	self realClass: aTrait.
 	
+	self generateInitialize.
+	
 	self generateAccessors.
 	self generateAnnotationIn: aTrait as: self name superclass: nil.
 	
@@ -74,14 +76,23 @@ FmxMBTrait >> generate [
 ]
 
 { #category : #generating }
+FmxMBTrait >> generateRemoteAccessors [
+	(self properties select: [ :prop | 
+         prop isRemote and: [ 
+             (self realClass localSelectors includes: prop name) not ] ]) do: [ 
+        :each | each generateAccessorsIn: self realClass ]
+]
+
+{ #category : #generating }
 FmxMBTrait >> generateRemotes [
 	| aTrait traitName |
+	
 	traitName := self fullName.
 
-	aTrait := self builder environment classNamed: traitName asSymbol.
+	aTrait := self class environment at: traitName asSymbol ifAbsent: [ builder environment classNamed: traitName asSymbol ].
 
 	self realClass: aTrait.
-
+	
 	self generateRemoteAccessors
 ]
 

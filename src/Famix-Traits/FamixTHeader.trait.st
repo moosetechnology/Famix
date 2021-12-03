@@ -4,9 +4,10 @@ I represent a header file. Typically a .h or .hpp
 Trait {
 	#name : #FamixTHeader,
 	#instVars : [
-		'#headerOwner => FMOne type: #FamixTWithHeader opposite: #header'
+		'#headerOwner => FMOne type: #FamixTWithHeaders opposite: #header'
 	],
 	#traits : 'FamixTFile',
+	#classTraits : 'FamixTFile classTrait',
 	#category : #'Famix-Traits-Header'
 }
 
@@ -21,7 +22,7 @@ FamixTHeader classSide >> annotation [
 
 { #category : #accessing }
 FamixTHeader >> headerOwner [
-	"Relation named: #headerOwner type: #FamixTWithHeader opposite: #header"
+	"Relation named: #headerOwner type: #FamixTWithHeaders opposite: #header"
 
 	<generated>
 	^ headerOwner

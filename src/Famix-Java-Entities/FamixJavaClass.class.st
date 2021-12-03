@@ -1,8 +1,8 @@
 Class {
 	#name : #FamixJavaClass,
 	#superclass : #FamixJavaType,
-	#traits : 'FamixJavaTClassMetrics + FamixTCanBeAbstract + FamixTCanBeClassSide + FamixTCanBeFinal + FamixTClass + FamixTClassMetrics + FamixTHasVisibility + FamixTLCOMMetrics + FamixTWithExceptions',
-	#classTraits : 'FamixJavaTClassMetrics classTrait + FamixTCanBeAbstract classTrait + FamixTCanBeClassSide classTrait + FamixTCanBeFinal classTrait + FamixTClass classTrait + FamixTClassMetrics classTrait + FamixTHasVisibility classTrait + FamixTLCOMMetrics classTrait + FamixTWithExceptions classTrait',
+	#traits : 'FamixJavaTCanBeClassSide + FamixJavaTClassMetrics + FamixTCanBeAbstract + FamixTCanBeFinal + FamixTClass + FamixTClassMetrics + FamixTHasVisibility + FamixTLCOMMetrics + FamixTPackageable + FamixTWithComments + FamixTWithExceptions',
+	#classTraits : 'FamixJavaTCanBeClassSide classTrait + FamixJavaTClassMetrics classTrait + FamixTCanBeAbstract classTrait + FamixTCanBeFinal classTrait + FamixTClass classTrait + FamixTClassMetrics classTrait + FamixTHasVisibility classTrait + FamixTLCOMMetrics classTrait + FamixTPackageable classTrait + FamixTWithComments classTrait + FamixTWithExceptions classTrait',
 	#category : #'Famix-Java-Entities-Entities'
 }
 
@@ -106,6 +106,16 @@ FamixJavaClass >> methodsWithoutSutbsAndConstructors [
 	
 	^ (self methods select: [ :each | 
 		each isStub not and: [each isConstructor not]]) asSet
+]
+
+{ #category : #accessing }
+FamixJavaClass >> numberOfComments [
+	"Overrides to include method comments in the numberOfComments of the class"
+	^ self
+		lookUpPropertyNamed: #numberOfComments
+		computedAs: [ self children asArray
+			inject: self comments size into: [ :sum :child | child numberOfComments + sum ] ]
+
 ]
 
 { #category : #'Famix-Extensions' }

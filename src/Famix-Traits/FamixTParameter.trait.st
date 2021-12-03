@@ -1,5 +1,15 @@
 "
-FAMIXParameter represents one parameter in a method declaration.
+A Parameter represents one parameter in a behavioral (method, function, lamdba...) declaration.
+	
+For example in the following code we have two Parameters. One named ""a"" and another named ""b"". Both of them have ""int"" as declared type.
+
+```java
+// method with two parameters
+int addNumbers(int a, int b) {
+  // code
+}
+```
+
 "
 Trait {
 	#name : #FamixTParameter,
@@ -7,6 +17,7 @@ Trait {
 		'#parentBehaviouralEntity => FMOne type: #FamixTWithParameters opposite: #parameters'
 	],
 	#traits : 'FamixTStructuralEntity',
+	#classTraits : 'FamixTStructuralEntity classTrait',
 	#category : #'Famix-Traits-Parameter'
 }
 
@@ -17,6 +28,14 @@ FamixTParameter classSide >> annotation [
 	<package: #'Famix-Traits'>
 	<generated>
 	^self
+]
+
+{ #category : #printing }
+FamixTParameter >> displayStringOn: aStream [
+
+	self name ifNotNil: [ :n | aStream << n << ' in ' ].
+	self parentBehaviouralEntity ifNotNil: [ :pbe | 
+		pbe displayStringOn: aStream ]
 ]
 
 { #category : #accessing }

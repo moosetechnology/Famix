@@ -5,6 +5,7 @@ Trait {
 		'#superclass => FMOne type: #FamixTWithInheritances opposite: #subInheritances'
 	],
 	#traits : 'FamixTAssociation',
+	#classTraits : 'FamixTAssociation classTrait',
 	#category : #'Famix-Traits-Inheritance'
 }
 
@@ -15,6 +16,14 @@ FamixTInheritance classSide >> annotation [
 	<package: #'Famix-Traits'>
 	<generated>
 	^self
+]
+
+{ #category : #printing }
+FamixTInheritance >> displayStringOn: aStream [
+
+	self subclass displayStringOn: aStream.
+	aStream << ' -|> '.
+	self superclass displayStringOn: aStream
 ]
 
 { #category : #testing }

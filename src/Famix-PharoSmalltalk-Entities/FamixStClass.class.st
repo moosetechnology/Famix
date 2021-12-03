@@ -1,8 +1,8 @@
 Class {
 	#name : #FamixStClass,
 	#superclass : #FamixStNamedEntity,
-	#traits : 'FamixTCanBeAbstract + FamixTClass + FamixTClassMetrics + FamixTWithExceptions + FamixTWithTypes',
-	#classTraits : 'FamixTCanBeAbstract classTrait + FamixTClass classTrait + FamixTClassMetrics classTrait + FamixTWithExceptions classTrait + FamixTWithTypes classTrait',
+	#traits : 'FamixTCanBeAbstract + FamixTClass + FamixTClassMetrics + FamixTWithComments + FamixTWithExceptions + FamixTWithTypes',
+	#classTraits : 'FamixTCanBeAbstract classTrait + FamixTClass classTrait + FamixTClassMetrics classTrait + FamixTWithComments classTrait + FamixTWithExceptions classTrait + FamixTWithTypes classTrait',
 	#category : #'Famix-PharoSmalltalk-Entities-Entities'
 }
 
@@ -125,6 +125,16 @@ FamixStClass >> methodsWithoutSutbsAndConstructors [
 	"Removing stub and contructor methods. Used to support the calculation of LCOM."
 
 	^ (self methods select: [ :each | each isStub not and: [ each isConstructor not ] ]) asSet
+]
+
+{ #category : #accessing }
+FamixStClass >> numberOfComments [
+	"Overrides to include method comments in the numberOfComments of the class"
+	^ self
+		lookUpPropertyNamed: #numberOfComments
+		computedAs: [ self methods asArray
+			inject: self comments size into: [ :sum :child | child numberOfComments + sum ] ]
+
 ]
 
 { #category : #metrics }

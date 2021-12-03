@@ -1,4 +1,7 @@
 "
+Class: FamixMMUMLDocumentor
+                                                                                                    
+
 A class to create plantUML graphs from a metamodel
 
 Different from FmxMBPlantTextVisitor in that it works on the metamodel itself, and not on the builder
@@ -7,75 +10,53 @@ Currently needs a model to access its metamodel and creates a plantUML class dia
 
 ```language=Pharo
 FamixMMUMLDocumentor new
-	model: FAMIXModel ;
-	generatePlantUMLWith: { FamixTAccess . FamixTAccessible . FamixTWithAccesses }. 
+ model: FAMIXModel ;
+ generatePlantUMLWith: { FamixTAccess . FamixTAccessible . FamixTWithAccesses }. 
 ```
 
 returns a string with a script to feed into PlantUML.com
 The scripts displays the 3 classes to generate with their inter-relationships and properties
 
 Can also display  ""external classes"" (kindof ""stubs""): entities related to the ones we are interested in, but not in the list of classes to generate.
-For this, use `#beWithStub`.
+For this, use #beWithStub.
 
-Other interesting method is: `#generatePlantUMLFile: aFileName with: aCollectionOfClasses` that dumps the PlantUML script into a `aFileName.puml`
+Other interesting method is: #generatePlantUMLFile: aFileName with: aCollectionOfClasses that dumps the PlantUML script into a aFileName.puml
+
+If you don't know the model you want to analyze, I can generate the associated plantUML code on all these entities via generatePlantUMLModel or generatePlantUMLModelFile:.
+
+```language=Pharo
+FamixMMUMLDocumentor new
+ model: FAMIXModel ;
+ generatePlantUMLModel.
+```
 "
 Class {
 	#name : #FamixMMUMLDocumentor,
-	#superclass : #Object,
+	#superclass : #FamixMMUMLAbstractDocumentor,
 	#instVars : [
-		'model',
-		'outputStream',
-		'classesOfInterest',
-		'withStub',
-		'externalClasses'
+		'classesOfNoInterest'
 	],
 	#category : #'Famix-MetamodelDocumentor'
 }
 
-{ #category : #'api - generation' }
-FamixMMUMLDocumentor >> beWithStub [
-	withStub := true
-]
-
-{ #category : #'api - generation' }
-FamixMMUMLDocumentor >> beWithoutStub [
-	withStub := false
-]
-
-{ #category : #accessing }
-FamixMMUMLDocumentor >> classesOfInterest: aCollection [
-	classesOfInterest := aCollection 
-]
-
-{ #category : #accessing }
-FamixMMUMLDocumentor >> externalClasses [
-	^externalClasses 
-]
-
-{ #category : #accessing }
-FamixMMUMLDocumentor >> externalClasses: aCollection [
-	externalClasses  := aCollection 
-]
-
 { #category : #generating }
-FamixMMUMLDocumentor >> generateClassName: aFM3Class [
-	outputStream
-		nextPutAll: aFM3Class name.
-	(self ofInterest: aFM3Class)
-	ifFalse: [
-		externalClasses add: aFM3Class 
-	]
+FamixMMUMLDocumentor >> generateClassesOfNoInterest: aFM3Class [
+	outputStream nextPutAll: 'hide '.
+		self generateClassName: aFM3Class.
+	outputStream cr.
 ]
 
 { #category : #generating }
 FamixMMUMLDocumentor >> generateExternalClass: aFM3Class [
-	outputStream
-		nextPutAll: 'class '.
+
+	outputStream nextPutAll: 'class '.
 	self generateClassName: aFM3Class.
-	(self ofInterest: aFM3Class)
-		ifFalse: [
-			outputStream nextPutAll: ' <<External>>'
-		].
+	(self ofInterest: aFM3Class) ifFalse: [ 
+		outputStream nextPutAll: ' <<'.
+		aFM3Class isFM3Class
+			ifTrue: [ outputStream nextPutAll: '(C,LightYellow)' ]
+			ifFalse: [ outputStream nextPutAll: '(T,LightYellow)' ].
+		outputStream nextPutAll: 'External>>' ].
 	outputStream cr
 ]
 
@@ -83,7 +64,7 @@ FamixMMUMLDocumentor >> generateExternalClass: aFM3Class [
 FamixMMUMLDocumentor >> generatePlantUML: aCollection onStream: aStream [
 	outputStream := aStream.
 	classesOfInterest := aCollection
-		collect: [:stClass | model metamodel descriptionOf: stClass ].
+		collect: [:stClass | self findDescriptionOf: stClass ].
 	externalClasses := Set new.
 
 	self plantUMLHeader.
@@ -123,10 +104,109 @@ FamixMMUMLDocumentor >> generatePlantUMLFile: aString with: aCollection [
 ]
 
 { #category : #generating }
+FamixMMUMLDocumentor >> generatePlantUMLHideClassesOfNoInterest [
+	classesOfNoInterest do: [:clazz | self generateClassesOfNoInterest: clazz]
+]
+
+{ #category : #generating }
 FamixMMUMLDocumentor >> generatePlantUMLInheritance [
-	classesOfInterest do: [ :clazz | 
-			self visitClassInheritances: clazz
-	]
+
+	| aVisitor |
+	aVisitor := FamixMMUMLInheritanceDocumentor new
+		            outputStream: outputStream;
+		            classesOfInterest: classesOfInterest;
+		            externalClasses: externalClasses;
+		            withStub: withStub;
+		            models: self models.
+	classesOfInterest do: [ :clazz | clazz accept: aVisitor ]
+]
+
+{ #category : #'api - generation' }
+FamixMMUMLDocumentor >> generatePlantUMLModel [
+
+	| aStream |
+	aStream := ReadWriteStream with: (String new).
+	self generatePlantUMLModelOnStream: aStream.
+	^ outputStream contents 
+]
+
+{ #category : #'api - generation' }
+FamixMMUMLDocumentor >> generatePlantUMLModelFile: aString [
+	| filename |
+	filename := (aString endsWith: self plantUMLExtension)
+		ifTrue: [ aString ]
+		ifFalse: [ aString , self plantUMLExtension].
+	^filename asFileReference writeStreamDo: [ :stream |
+		self generatePlantUMLModelOnStream: stream.
+	] 
+]
+
+{ #category : #'api - generation' }
+FamixMMUMLDocumentor >> generatePlantUMLModelFile: aString without: aCollection [
+	| filename |
+	filename := (aString endsWith: self plantUMLExtension)
+		ifTrue: [ aString ]
+		ifFalse: [ aString , self plantUMLExtension].
+	^filename asFileReference writeStreamDo: [ :stream |
+		self generatePlantUMLModelWithout: aCollection onStream: stream.
+	] 
+]
+
+{ #category : #'api - generation' }
+FamixMMUMLDocumentor >> generatePlantUMLModelOnStream: aStream [
+
+	outputStream := aStream.
+	classesOfInterest := models flatCollect: [ :model | (self findDescriptionOf: model model) package classes ] as: Set.
+	externalClasses := Set new.
+
+	self plantUMLHeader.
+	outputStream cr.
+	self generatePlantUMLClasses.
+	outputStream cr.
+	self generatePlantUMLInheritance.
+	outputStream cr.
+	self generatePlantUMLRelations.
+	outputStream cr.
+	self generatePlantUMLExternalClasses.
+	outputStream cr.
+	self plantUMLFooter
+]
+
+{ #category : #'api - generation' }
+FamixMMUMLDocumentor >> generatePlantUMLModelWithout: aCollection [
+
+	| aStream |
+	aStream := ReadWriteStream with: String new.
+
+	aCollection isEmpty
+		ifTrue: [ self generatePlantUMLModelOnStream: aStream ]
+		ifFalse: [ 
+		self generatePlantUMLModelWithout: aCollection onStream: aStream ].
+	^ outputStream contents
+]
+
+{ #category : #'api - generation' }
+FamixMMUMLDocumentor >> generatePlantUMLModelWithout: aCollection onStream: aStream [
+
+	outputStream := aStream.
+	classesOfNoInterest := aCollection
+		collect: [:stClass | self findDescriptionOf: stClass ].
+	classesOfInterest := models flatCollect: [ :model | (self findDescriptionOf: model model) package classes ] as: Set..
+	externalClasses := Set new.
+
+	self plantUMLHeader.
+	outputStream cr.
+	self generatePlantUMLClasses.
+	outputStream cr.
+	self generatePlantUMLInheritance.
+	outputStream cr.
+	self generatePlantUMLRelations.
+	outputStream cr.
+	self generatePlantUMLExternalClasses.
+	outputStream cr.
+	self generatePlantUMLHideClassesOfNoInterest.
+	outputStream cr.
+	self plantUMLFooter
 ]
 
 { #category : #generating }
@@ -190,12 +270,6 @@ FamixMMUMLDocumentor >> generateRelationTargetRole: aFM3Prop [
 		nextPut: $"
 ]
 
-{ #category : #initialization }
-FamixMMUMLDocumentor >> initialize [
-	self beWithoutStub.
-	externalClasses := Set new
-]
-
 { #category : #testing }
 FamixMMUMLDocumentor >> isRedundantRelation: aFM3Prop [
 	"whena relation has an opposite, we want to display process only one of them (the 'non redundant' one.
@@ -220,34 +294,9 @@ FamixMMUMLDocumentor >> isTrait: aFMClass [
 	^aFMClass implementingClass isTrait
 ]
 
-{ #category : #accessing }
-FamixMMUMLDocumentor >> isWithStub [
-	^withStub
-]
-
-{ #category : #accessing }
-FamixMMUMLDocumentor >> model [
-	^ model
-]
-
-{ #category : #accessing }
-FamixMMUMLDocumentor >> model: anObject [
-	model := anObject
-]
-
-{ #category : #testing }
-FamixMMUMLDocumentor >> ofInterest: aFMClass [
-	^classesOfInterest includes: aFMClass
-]
-
-{ #category : #accessing }
-FamixMMUMLDocumentor >> outputStream [
-	^ outputStream
-]
-
-{ #category : #accessing }
-FamixMMUMLDocumentor >> outputStream: anObject [
-	outputStream := anObject
+{ #category : #private }
+FamixMMUMLDocumentor >> plantUMLBackgroundColorFor: aFMClass [
+	^ (self tupleForEntity: aFMClass) color asHexString
 ]
 
 { #category : #private }
@@ -293,11 +342,10 @@ FamixMMUMLDocumentor >> plantUMLMarkerFor: aFMClass [
 		ifFalse: [ 'C' ]
 ]
 
-{ #category : #testing }
-FamixMMUMLDocumentor >> relationEndOfInterest: aFMClass [
-	^self isWithStub
-		ifTrue: [ aFMClass class ~= FM3Object ]
-		ifFalse: [ self ofInterest: aFMClass ]
+{ #category : #private }
+FamixMMUMLDocumentor >> tupleForEntity: aFM3Class [
+
+	^ models detect: [ :model | (self findDescriptionOf: model model) package = aFM3Class package ]
 ]
 
 { #category : #visiting }
@@ -309,7 +357,10 @@ FamixMMUMLDocumentor >> visitClass: aFMClass [
 		nextPutAll: (self plantUMLMarkerFor: aFMClass) ;
 		nextPut: $, ;
 		nextPutAll: (self plantUMLColorFor: aFMClass) ;
-		nextPutAll: ') >> {' ;
+		nextPutAll: ') >>' ;
+		nextPutAll: ' #';
+		nextPutAll: (self plantUMLBackgroundColorFor: aFMClass) ;
+		nextPutAll: ' {';
 		cr.
 	aFMClass
 		primitiveProperties do: [ :prop | prop accept: self ].
@@ -372,4 +423,25 @@ FamixMMUMLDocumentor >> visitRelation: aFM3Prop [
 	outputStream space.
 	self generateRelationTarget: aFM3Prop.
 	outputStream cr
+]
+
+{ #category : #visiting }
+FamixMMUMLDocumentor >> visitTrait: aFMTrait [
+	outputStream
+		nextPutAll: 'class ' ;
+		nextPutAll: aFMTrait name ;
+		nextPutAll: ' << (' ;
+		nextPutAll: (self plantUMLMarkerFor: aFMTrait) ;
+		nextPut: $, ;
+		nextPutAll: (self plantUMLColorFor: aFMTrait) ;
+		nextPutAll: ') >>' ;
+		nextPutAll: ' #';
+		nextPutAll: (self plantUMLBackgroundColorFor: aFMTrait) ;
+		nextPutAll: ' {';
+		cr.
+	aFMTrait 
+		primitiveProperties do: [ :prop | prop accept: self ].
+	outputStream
+		nextPutAll: '}' ;
+		cr.
 ]

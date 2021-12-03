@@ -49,16 +49,6 @@ FamixWithMethodsTest >> testMethodsGroup [
 ]
 
 { #category : #tests }
-FamixWithMethodsTest >> testNumberOfConstructorMethods [
-
-	m1 isConstructor: true.
-	self assert: c1 numberOfConstructorMethods equals: 1.
-	c1 numberOfConstructorMethods: 100.
-	self assert: c1 numberOfConstructorMethods equals: 100.
-
-]
-
-{ #category : #tests }
 FamixWithMethodsTest >> testNumberOfLinesOfCode [
 
 	self assert: c1 numberOfLinesOfCode equals: 2.

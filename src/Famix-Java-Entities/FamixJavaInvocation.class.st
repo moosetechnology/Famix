@@ -30,17 +30,6 @@ FamixJavaInvocation >> getReceivingFAMIXClass [
 		ifFalse: [ ^ tmpReceiver ]
 ]
 
-{ #category : #printing }
-FamixJavaInvocation >> gtDisplayOn: aStream [
-	self sender ifNotNil: [ self source gtDisplayOn: aStream ].
-	aStream nextPutAll: ' -> '.
-	self receiver ifNotNil: [ aStream nextPutAll: self receiver name ].
-	aStream nextPut: $#.
-	aStream nextPutAll: self signature.
-	aStream nextPutAll: ' -> '.
-	self candidates size = 1 ifTrue: [ self anyCandidate gtDisplayOn: aStream ]
-]
-
 { #category : #initialization }
 FamixJavaInvocation >> initialize [
 

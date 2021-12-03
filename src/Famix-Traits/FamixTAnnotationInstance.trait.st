@@ -17,6 +17,7 @@ Trait {
 		'#annotatedEntity => FMOne type: #FamixTWithAnnotationInstances opposite: #annotationInstances'
 	],
 	#traits : 'TEntityMetaLevelDependency',
+	#classTraits : 'TEntityMetaLevelDependency classTrait',
 	#category : #'Famix-Traits-AnnotationInstance'
 }
 
@@ -42,7 +43,6 @@ FamixTAnnotationInstance >> annotatedEntity [
 
 	<generated>
 	<FMComment: 'The NamedEntity on which the annotation occurs.'>
-	<container>
 	^ annotatedEntity
 ]
 
@@ -53,9 +53,10 @@ FamixTAnnotationInstance >> annotatedEntity: anObject [
 	annotatedEntity := anObject
 ]
 
-{ #category : #navigation }
-FamixTAnnotationInstance >> annotatedEntityGroup [
-	<generated>
-	<navigation: 'AnnotatedEntity'>
-	^ MooseSpecializedGroup with: self annotatedEntity
+{ #category : #printing }
+FamixTAnnotationInstance >> displayStringOn: aStream [
+
+	self annotationType displayStringOn: aStream.
+	aStream << ' on '.
+	self annotatedEntity displayStringOn: aStream
 ]

@@ -1,8 +1,8 @@
 Class {
 	#name : #FamixStMethod,
 	#superclass : #FamixStNamedEntity,
-	#traits : 'FamixTCanBeAbstract + FamixTMethod + FamixTWithAnnotationTypes',
-	#classTraits : 'FamixTCanBeAbstract classTrait + FamixTMethod classTrait + FamixTWithAnnotationTypes classTrait',
+	#traits : 'FamixStTCanBeClassSide + FamixTCanBeAbstract + FamixTHasKind + FamixTMethod + FamixTWithAnnotationTypes + FamixTWithComments',
+	#classTraits : 'FamixStTCanBeClassSide classTrait + FamixTCanBeAbstract classTrait + FamixTHasKind classTrait + FamixTMethod classTrait + FamixTWithAnnotationTypes classTrait + FamixTWithComments classTrait',
 	#instVars : [
 		'#protocol => FMProperty'
 	],
@@ -188,17 +188,6 @@ FamixStMethod >> numberOfAccesses [
 		computedAs: [ self accesses size ]
 ]
 
-{ #category : #'Famix-Extensions-metrics-support' }
-FamixStMethod >> numberOfAnnotationInstances [
-	<FMProperty: #numberOfAnnotationInstances type: #Number>
-	<derived>
-	<FMComment: 'The number of annotation instances defined in the method'>
-
-	^self
-		lookUpPropertyNamed: #numberOfAnnotationInstances
-		computedAs: [self annotationInstances size]
-]
-
 { #category : #'Famix-Extensions-private' }
 FamixStMethod >> numberOfComments [
 	<FMProperty: #numberOfComments type: #Number>
@@ -229,17 +218,6 @@ FamixStMethod >> numberOfMessageSends [
 	^ self
 		lookUpPropertyNamed: #numberOfMessageSends
 		computedAs: [ self computeNumberOfMessageSends ]
-]
-
-{ #category : #'Famix-Extensions-private' }
-FamixStMethod >> numberOfOutgoingInvocations [
-	<FMProperty: #numberOfOutgoingInvocations type: #Number>
-	<derived>
-	<FMComment: 'The number of invocations in a method'>
-	
-	^self
-		lookUpPropertyNamed: #numberOfOutgoingInvocations
-		computedAs: [self outgoingInvocations size]
 ]
 
 { #category : #'Famix-Extensions-private' }
