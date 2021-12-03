@@ -87,6 +87,12 @@ FamixTClass >> isClass [
 ]
 
 { #category : #testing }
+FamixTClass >> isObjectClass [
+
+	^ self name = 'Object'
+]
+
+{ #category : #testing }
 FamixTClass >> isTestCase [
 	<FMProperty: #isTestCase type: #Boolean>
 	<FMComment: 'True if the method is considered as a test'>
