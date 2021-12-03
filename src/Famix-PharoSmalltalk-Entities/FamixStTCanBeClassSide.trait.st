@@ -15,10 +15,21 @@ FamixStTCanBeClassSide classSide >> annotation [
 	^self
 ]
 
+{ #category : #initialization }
+FamixStTCanBeClassSide >> initialize [
+
+	<generated>
+	super initialize.
+
+	"Default value initialization"
+	isClassSide := false.
+
+]
+
 { #category : #accessing }
 FamixStTCanBeClassSide >> isClassSide [
 
-	<FMProperty: #isClassSide type: #Boolean>
+	<FMProperty: #isClassSide type: #Boolean defaultValue: false>
 	<generated>
 	<FMComment: 'Entity can be declared class side i.e. static'>
 	^ isClassSide

@@ -164,7 +164,7 @@ FamixPharoSmalltalkGenerator >> defineProperties [
 	super defineProperties.
 	((method property: #protocol type: #String)
 		comment: 'Protocol of the method'). 
-	((tCanBeClassSide property: #isClassSide type: #Boolean) 
+	((tCanBeClassSide property: #isClassSide type: #Boolean defaultValue: false) 
 		comment: 'Entity can be declared class side i.e. static').	
 ]
 
