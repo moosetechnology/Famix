@@ -93,12 +93,6 @@ FamixStMethod >> hasEmptyBody [
 	^ self numberOfAccesses = 0 and: [ self numberOfOutgoingInvocations = 0 ]
 ]
 
-{ #category : #initialization }
-FamixStMethod >> initialize [
-	super initialize.
-	isClassSide := false
-]
-
 { #category : #'Famix-Extensions' }
 FamixStMethod >> invokedBehaviours [
 	^ self queryAllOutgoingInvocations opposites
