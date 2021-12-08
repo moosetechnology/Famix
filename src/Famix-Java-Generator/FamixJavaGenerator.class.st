@@ -350,7 +350,8 @@ FamixJavaGenerator >> defineTraits [
 		                      newTraitNamed: #TCanBeSynchronized
 		                      comment: self commentForTCanBeSynchronized.
 
-	tJavaClassMetrics := builder newTraitNamed: #TClassMetrics
+	tJavaClassMetrics := builder newTraitNamed: #TClassMetrics.
+	
 ]
 
 { #category : #definition }

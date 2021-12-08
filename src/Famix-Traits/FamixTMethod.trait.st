@@ -30,6 +30,29 @@ FamixTMethod classSide >> annotationFamixMethodGroup [
 ]
 
 { #category : #testing }
+FamixTMethod >> isDelegating [
+
+	^ (self outgoingInvocations flatCollect: #target) anySatisfy: [ :each | 
+		  each signature == self signature and: [ 
+			  (each isInSameClassAs: self) not ] ] 
+]
+
+{ #category : #testing }
+FamixTMethod >> isExtending [
+
+	^ (self outgoingInvocations reject: [ :each | each receiver isNil ]) 
+		  anySatisfy: [ :each | 
+			  each receiver name = 'super' and: [ 
+				  (each candidates collect: #signature) includes: self signature ] ]
+]
+
+{ #category : #testing }
+FamixTMethod >> isInSameClassAs: aMethod [
+
+	^ aMethod parentType == self parentType
+]
+
+{ #category : #testing }
 FamixTMethod >> isMethod [
 
 	<generated>
