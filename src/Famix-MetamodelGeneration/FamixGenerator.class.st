@@ -1058,7 +1058,7 @@ FamixGenerator >> defineProperties [
 	super defineProperties.
 
 
-	(tCanBeAbstract property: #isAbstract type: #Boolean defaultValue: false) comment:
+	(tCanBeAbstract property: #isAbstract type: #Boolean) comment:
 		'Entity can be declared abstract'.
 	(tCanBeFinal property: #isFinal type: #Boolean) comment:
 		'Entity can be declared final'.

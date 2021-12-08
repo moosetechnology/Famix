@@ -118,10 +118,10 @@ FamixJavaMethod >> isDetectedSetter [
 { #category : #testing }
 FamixJavaMethod >> isGetter [
 
-	^ (self name beginsWith: 'get') and: [ 
+	^ self kind = #getter or: [   (self name beginsWith: 'get') and: [ 
 		  self parameters isEmpty and: [ 
 			  self accesses asOrderedCollection size = 1 and: [ 
-				  self outgoingInvocations isEmpty ] ] ]
+				  self outgoingInvocations isEmpty ] ] ]]
 ]
 
 { #category : #testing }
@@ -167,10 +167,10 @@ FamixJavaMethod >> isOverriding [
 { #category : #testing }
 FamixJavaMethod >> isSetter [
 
-	^ (self name beginsWith: 'set') and: [ 
+	^ self kind = #setter or: [ (self name beginsWith: 'set') and: [ 
 		  self parameters size = 1 and: [ 
 			  self accesses asOrderedCollection size = 1 and: [ 
-				  self outgoingInvocations isEmpty ] ] ]
+				  self outgoingInvocations isEmpty ] ] ] ]
 ]
 
 { #category : #printing }
