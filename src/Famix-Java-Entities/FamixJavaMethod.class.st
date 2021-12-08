@@ -116,6 +116,15 @@ FamixJavaMethod >> isDetectedSetter [
 ]
 
 { #category : #testing }
+FamixJavaMethod >> isGetter [
+
+	^ (self name beginsWith: 'get') and: [ 
+		  self parameters isEmpty and: [ 
+			  self accesses asOrderedCollection size = 1 and: [ 
+				  self outgoingInvocations isEmpty ] ] ]
+]
+
+{ #category : #testing }
 FamixJavaMethod >> isImplementing [
 	<FMProperty: #isImplementing type: #Boolean>
 	<derived>
@@ -153,6 +162,15 @@ FamixJavaMethod >> isOverriding [
 	^ self parentType directSuperclasses
 		anySatisfy:
 			[ :each | each isInterface not and: [ each understands: self signature ] ]
+]
+
+{ #category : #testing }
+FamixJavaMethod >> isSetter [
+
+	^ (self name beginsWith: 'set') and: [ 
+		  self parameters size = 1 and: [ 
+			  self accesses asOrderedCollection size = 1 and: [ 
+				  self outgoingInvocations isEmpty ] ] ]
 ]
 
 { #category : #printing }
