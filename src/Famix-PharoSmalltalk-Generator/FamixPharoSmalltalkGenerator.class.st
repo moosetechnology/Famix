@@ -20,8 +20,7 @@ Class {
 		'parameter',
 		'reference',
 		'unknownVariable',
-		'pharoEntitySourceAnchor',
-		'tCanBeClassSide'
+		'pharoEntitySourceAnchor'
 	],
 	#category : #'Famix-PharoSmalltalk-Generator'
 }
@@ -90,7 +89,7 @@ FamixPharoSmalltalkGenerator >> defineHierarchy [
 	attribute --|> namedEntity.
 	attribute --|> #TAttribute.
 	attribute --|> #TInvocationsReceiver.
-	attribute --|> tCanBeClassSide.
+	attribute --|> #TCanBeClassSide.
 	
 	class --|> namedEntity.
 	self flag: 'WithTypes should not be necessary but needed in tests like FamixMetricsTest>>testAfferentCouplingFAMIXClassGroup'.
@@ -124,7 +123,7 @@ FamixPharoSmalltalkGenerator >> defineHierarchy [
 	method --|> #TCanBeAbstract.
 	method --|> #THasKind.
 	method --|> #TWithComments.
-	method --|> tCanBeClassSide.
+	method --|> #TCanBeClassSide.
 
 	namedEntity --|> #TPackageable.
 	namedEntity --|> #TInvocationsReceiver.
@@ -164,15 +163,6 @@ FamixPharoSmalltalkGenerator >> defineProperties [
 	super defineProperties.
 	((method property: #protocol type: #String)
 		comment: 'Protocol of the method'). 
-	((tCanBeClassSide property: #isClassSide type: #Boolean defaultValue: false) 
-		comment: 'Entity can be declared class side i.e. static').	
-]
-
-{ #category : #definition }
-FamixPharoSmalltalkGenerator >> defineTraits [ 
-
-	super defineTraits.
-	tCanBeClassSide := builder newTraitNamed: #TCanBeClassSide. 
 ]
 
 { #category : #initialization }

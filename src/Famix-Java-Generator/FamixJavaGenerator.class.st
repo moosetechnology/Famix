@@ -37,8 +37,7 @@ Class {
 		'tCanBeVolatile',
 		'tCanBeTransient',
 		'tCanBeSynchronized',
-		'tJavaClassMetrics',
-		'tCanBeClassSide'
+		'tJavaClassMetrics'
 	],
 	#category : #'Famix-Java-Generator'
 }
@@ -193,7 +192,7 @@ FamixJavaGenerator >> defineHierarchy [
 	attribute --|> tCanBeTransient.
 	attribute --|> #TInvocationsReceiver.
 	attribute --|> #TWithComments.
-	attribute --|> tCanBeClassSide.
+	attribute --|> #TCanBeClassSide.
 	
 	file --|> namedEntity.
 	file --|> #TFile.
@@ -215,7 +214,7 @@ FamixJavaGenerator >> defineHierarchy [
 	method --|> #THasKind.
 	method --|> #TWithComments.
 	method --|> tCanBeSynchronized.
-	method --|> tCanBeClassSide.
+	method --|> #TCanBeClassSide.
 
 	caughtException --|> exception.
 	caughtException --|> #TCaughtException.
@@ -228,7 +227,7 @@ FamixJavaGenerator >> defineHierarchy [
 	class --|> #TCanBeAbstract.
 	class --|> #TCanBeFinal.
 	class --|> #THasVisibility.
-	class --|> tCanBeClassSide. 
+	class --|> #TCanBeClassSide. 
 	class --|> #TClassMetrics.
 	class --|> #TWithComments.
 	class --|> tJavaClassMetrics.	
@@ -335,8 +334,6 @@ FamixJavaGenerator >> defineProperties [
 		comment: 'Entity can be declared transient').
 	((tCanBeSynchronized property: #isSynchronized type: #Boolean) 
 		comment: 'Entity can be declared synchronized').
-	((tCanBeClassSide property: #isClassSide type: #Boolean defaultValue: false) 
-		comment: 'Entity can be declared class side i.e. static').	
 ]
 
 { #category : #definition }
@@ -353,8 +350,7 @@ FamixJavaGenerator >> defineTraits [
 		                      newTraitNamed: #TCanBeSynchronized
 		                      comment: self commentForTCanBeSynchronized.
 
-	tJavaClassMetrics := builder newTraitNamed: #TClassMetrics.
-	tCanBeClassSide := builder newTraitNamed: #TCanBeClassSide. 
+	tJavaClassMetrics := builder newTraitNamed: #TClassMetrics
 ]
 
 { #category : #definition }
