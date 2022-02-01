@@ -58,15 +58,6 @@ FamixTSourceEntity >> ensureMultiSourceAnchor [
 				sourceAnchor ]
 ]
 
-{ #category : #'as yet unclassified' }
-FamixTSourceEntity >> findChildPosition: aChildEntity [
-	"receiver is the parent of aChildEntity,
-	returns this child interval within the receiver's source text"
-
-	^self sourceAnchor
-		ifNotNil: [ :anchor | anchor findChildPosition: aChildEntity ]
-]
-
 { #category : #testing }
 FamixTSourceEntity >> hasSourceAnchor [
 	^ self sourceAnchor isNotNil

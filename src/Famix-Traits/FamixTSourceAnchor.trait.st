@@ -58,13 +58,6 @@ FamixTSourceAnchor >> element: anObject [
 	element := anObject
 ]
 
-{ #category : #'as yet unclassified' }
-FamixTSourceAnchor >> findChildPosition: aChildEntity [
-	"receiver is the sourceAnchor of a parent of aChildEntity,
-	returns this child interval within the receiver"
-	self subclassResponsibility 
-]
-
 { #category : #testing }
 FamixTSourceAnchor >> hasSource [
 	^ self explicitRequirement
