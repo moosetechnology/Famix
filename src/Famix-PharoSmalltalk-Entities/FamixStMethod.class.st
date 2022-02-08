@@ -54,7 +54,8 @@ FamixStMethod >> compiledMethod [
 
 { #category : #'Famix-Extensions-private' }
 FamixStMethod >> computeCyclomaticComplexity [
-	^ self isStub
+
+	^ (self isStub or: [ self smalltalkClass isNil ])
 		ifTrue: [ self notExistentMetricValue ]
 		ifFalse: [ (RBVisitorForFAMIXMetrics for: self) cyclomaticNumber ]
 ]
