@@ -21,7 +21,7 @@ FamixTCanBeAbstract >> isAbstract [
 	<FMProperty: #isAbstract type: #Boolean>
 	<generated>
 	<FMComment: 'Entity can be declared abstract'>
-	^ isAbstract
+	^ isAbstract  ifNil: [ false ]
 ]
 
 { #category : #accessing }
