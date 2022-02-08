@@ -115,7 +115,10 @@ FamixStMethod >> isCalledInternally [
 
 { #category : #'Famix-Extensions-metrics-support' }
 FamixStMethod >> isInitializer [
-	^ (('*initialize*' match: self protocol) or: [ '*initialize*' match: self name ]) or: [ self isConstructor ] 
+	| protocolCond nameCond |
+	protocolCond := self protocol ifNotNil: [ '*initialize*' match: self protocol ] ifNil: [ false ].
+	nameCond := self name ifNotNil: [ '*initialize*' match: self name ] ifNil: [ false ].
+	^ (protocolCond or: nameCond) or: [ self isConstructor ]  
 ]
 
 { #category : #'Famix-Extensions-metrics-support' }
