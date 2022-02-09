@@ -68,10 +68,15 @@ FamixTInvocation >> candidates: anObject [
 { #category : #printing }
 FamixTInvocation >> displayStringOn: aStream [
 
-	self receiver ifNotNil: [ :rcvr | 
-		self receiver displayStringOn: aStream.
-		aStream nextPutAll: ' -> ' ].
-	self sender ifNotNil: [ self sender displayStringOn: aStream ]
+	self sender
+		ifNotNil: [ self sender displayStringOn: aStream ]
+		ifNil: [ aStream nextPut: $? ].
+	aStream nextPutAll: ' -> '.
+	aStream nextPutAll: (self signature truncateWithElipsisTo: 40) .
+	aStream nextPutAll: ' -> '.
+	self receiver
+		ifNotNil: [ :rcvr | self receiver displayStringOn: aStream ]
+		ifNil: [ aStream nextPut: $? ]
 ]
 
 { #category : #testing }
