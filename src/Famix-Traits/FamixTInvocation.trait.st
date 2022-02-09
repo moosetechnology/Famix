@@ -72,7 +72,10 @@ FamixTInvocation >> displayStringOn: aStream [
 		ifNotNil: [ self sender displayStringOn: aStream ]
 		ifNil: [ aStream nextPut: $? ].
 	aStream nextPutAll: ' -> '.
-	aStream nextPutAll: (self signature truncateWithElipsisTo: 40) .
+	(self class usesTrait: FamixTHasSignature)
+		ifTrue: [ 
+		aStream nextPutAll: (self signature truncateWithElipsisTo: 40) ]
+		ifFalse: [ aStream nextPutAll: ' ? ' ].
 	aStream nextPutAll: ' -> '.
 	self receiver
 		ifNotNil: [ :rcvr | self receiver displayStringOn: aStream ]
