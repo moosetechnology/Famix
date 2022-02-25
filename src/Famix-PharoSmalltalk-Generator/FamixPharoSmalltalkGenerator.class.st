@@ -132,6 +132,7 @@ FamixPharoSmalltalkGenerator >> defineHierarchy [
 	namedEntity --|> #TInvocationsReceiver.
 	namedEntity --|> #TWithAnnotationInstances.
 	namedEntity --|> #TEntityMetaLevelDependency.
+	namedEntity --|> sourcedEntity.
 	
 	namespace --|> namedEntity.
 	namespace --|> #TNamespace.

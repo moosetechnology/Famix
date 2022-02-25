@@ -961,9 +961,7 @@ FamixGenerator >> defineHierarchy [
 	
 	tEnum --|> tWithEnumValues.
 	tEnum --|> tType.
-	
-	tFileAnchor --|> tSourceAnchor.
-  
+
 	tFile --|> tFileSystemEntity.
 	
 	tFileInclude --|> tAssociation.
