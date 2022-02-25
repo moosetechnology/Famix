@@ -978,6 +978,8 @@ FamixGenerator >> defineHierarchy [
 	tFunction --|> tTypedEntity.
 	tFunction --|> tWithStatements.
 	tFunction withPrecedenceOf: tWithStatements.
+	tFunction --|> #TEntityMetaLevelDependency.
+	tFunction --|> tSourceEntity.
 
 	tGlobalVariable --|> tStructuralEntity.
 	
@@ -1003,22 +1005,25 @@ FamixGenerator >> defineHierarchy [
 	tMethod --|> tHasSignature.
 	tMethod --|> tTypedEntity.
 	tMethod --|> tNamedEntity.
+	tMethod --|> #TEntityMetaLevelDependency.
+	tMethod --|> tSourceEntity.
 	tMethod --|> #TOODependencyQueries.
 	tMethod withPrecedenceOf: tWithStatements.
 	
 	tMethod --|> tMethodMetrics.
 	
 	tMultipleFileAnchor --|> tSourceAnchor.
-	
-	tNamedEntity --|> #TEntityMetaLevelDependency.
-	tNamedEntity --|> tSourceEntity.
 
 	tNamespace --|> tNamedEntity.
+	tNamespace --|> #TEntityMetaLevelDependency.
+	tNamespace --|> tSourceEntity.
 	tNamespace --|> #TOODependencyQueries.
 	tNamespace withPrecedenceOf: #TOODependencyQueries.
 	
 	tPackage --|> tNamedEntity.
-
+	tPackage --|> #TEntityMetaLevelDependency.
+	tPackage --|> tSourceEntity.
+	
 	tParameter --|> tStructuralEntity.
 	
 	tPrimitiveType --|> tType.
@@ -1028,6 +1033,8 @@ FamixGenerator >> defineHierarchy [
 	tRelativeSourceAnchor --|> tSourceAnchor.
 	
 	tStructuralEntity --|> tNamedEntity.
+	tStructuralEntity --|> #TEntityMetaLevelDependency.
+	tStructuralEntity --|> tSourceEntity.
 	tStructuralEntity --|> tAccessible.
 	tStructuralEntity --|> tTypedEntity.
  
@@ -1038,6 +1045,8 @@ FamixGenerator >> defineHierarchy [
 	
 	tType --|> tReferenceable.
 	tType --|> tNamedEntity.
+	tType --|> #TEntityMetaLevelDependency.
+	tType --|> tSourceEntity.	
 	
 	tUnknownSourceLanguage --|> tSourceLanguage.
 	

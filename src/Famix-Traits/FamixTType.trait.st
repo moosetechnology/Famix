@@ -11,8 +11,8 @@ Trait {
 		'#typeContainer => FMOne type: #FamixTWithTypes opposite: #types',
 		'#typedEntities => FMMany type: #FamixTTypedEntity opposite: #declaredType'
 	],
-	#traits : 'FamixTNamedEntity + FamixTReferenceable',
-	#classTraits : 'FamixTNamedEntity classTrait + FamixTReferenceable classTrait',
+	#traits : 'FamixTNamedEntity + FamixTReferenceable + FamixTSourceEntity + TEntityMetaLevelDependency',
+	#classTraits : 'FamixTNamedEntity classTrait + FamixTReferenceable classTrait + FamixTSourceEntity classTrait + TEntityMetaLevelDependency classTrait',
 	#category : #'Famix-Traits-Type'
 }
 

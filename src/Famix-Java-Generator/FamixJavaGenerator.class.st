@@ -278,6 +278,7 @@ FamixJavaGenerator >> defineHierarchy [
 	
 	namedEntity --|> #TInvocationsReceiver.
 	namedEntity --|> #TWithAnnotationInstances.
+	namedEntity --|> #TEntityMetaLevelDependency.
 
 	package --|> containerEntity.
 	package --|> #TWithGlobalVariables.
