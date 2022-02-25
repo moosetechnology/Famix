@@ -76,7 +76,7 @@ BaselineOfFamix >> groups: spec [
 		  group: 'Minimal' with: #( 'Moose-Core' );
 		  group: 'Basic'
 		  with: #( 'Famix-BasicInfrastructure' 'Famix-MetamodelGeneration' );
-		  group: 'CommentAnalyzer' with: #( 'Famix-CommentAnalyzer' );
+		  "group: 'CommentAnalyzer' with: #( 'Famix-CommentAnalyzer' );"
 		  group: 'TestsResources'
 		  with: #( 'ReferenceTestResources' 'Moose-TestResources-LAN'
 			     'Moose-TestResources-LCOM' 'KGBTestResources'
@@ -117,7 +117,7 @@ BaselineOfFamix >> groups: spec [
 			     'Famix-TestComposedMetamodel-Entities'
 			     'Famix-TestComposedMetamodel' 'Famix-TestComposedComposedMetamodel-Entities'
 			     'Famix-TestComposed3Metamodel-Entities'
-			     'Moose-GenericImporters-Tests' 'Famix-CommentAnalyzer-Tests' )
+			     'Moose-GenericImporters-Tests' "'Famix-CommentAnalyzer-Tests'" )
 ]
 
 { #category : #dependencies }
@@ -163,11 +163,11 @@ BaselineOfFamix >> packages: spec [
 		package: 'Moose-SmalltalkImporter' with: [ 
 			spec requires:
 					#( 'Moose-GenericImporter' 'RoelTyper' 'Famix-PharoSmalltalk-Entities' ) ];
-		package: 'Famix-CommentAnalyzer'
+		"package: 'Famix-CommentAnalyzer'
 		with: [ spec requires: #( 'BasicTraits' ) ];
 		package: 'Famix-CommentAnalyzer-Tests'
 		with: [ spec requires: #( 'Famix-CommentAnalyzer'
-				   'TestModels' ) ];
+				   'TestModels' ) ];"
 		package: 'Famix-Compatibility-Generator'
 		with: [ spec requires: #( 'Basic' ) ];
 		package: 'Famix-Compatibility-Entities'
