@@ -50,7 +50,6 @@ FamixBasicInfrastructureGenerator >> defineHierarchy [
 	comment --|> sourcedEntity.
 	comment --|> #TComment.
 
-	namedEntity --|> sourcedEntity.
 	namedEntity --|> #TNamedEntity.
 
 	sourceTextAnchor --|> sourceAnchor.

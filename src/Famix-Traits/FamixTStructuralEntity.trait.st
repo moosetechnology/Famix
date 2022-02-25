@@ -3,8 +3,8 @@ FAMIXStructuralEntity is the abstract superclass for basic data structure in the
 "
 Trait {
 	#name : #FamixTStructuralEntity,
-	#traits : 'FamixTAccessible + FamixTNamedEntity + FamixTTypedEntity',
-	#classTraits : 'FamixTAccessible classTrait + FamixTNamedEntity classTrait + FamixTTypedEntity classTrait',
+	#traits : 'FamixTAccessible + FamixTNamedEntity + FamixTSourceEntity + FamixTTypedEntity + TEntityMetaLevelDependency',
+	#classTraits : 'FamixTAccessible classTrait + FamixTNamedEntity classTrait + FamixTSourceEntity classTrait + FamixTTypedEntity classTrait + TEntityMetaLevelDependency classTrait',
 	#category : #'Famix-Traits-Traits'
 }
 

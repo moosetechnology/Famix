@@ -79,10 +79,13 @@ FamixPharoSmalltalkGenerator >> defineHierarchy [
 	annotationInstanceAttribute --|> #TTypedAnnotationInstanceAttribute.
 
 	annotationType --|> namedEntity.
+	annotationType --|> #TEntityMetaLevelDependency.
 	annotationType --|> #TAnnotationType.
 	annotationType --|> #TWithAttributes.
 
 	annotationTypeAttribute --|> namedEntity.
+	annotationTypeAttribute --|> #TEntityMetaLevelDependency.
+	annotationTypeAttribute --|> sourcedEntity.
 	annotationTypeAttribute --|> #TAnnotationTypeAttribute.
 	annotationTypeAttribute --|> #TTypedAnnotationInstanceAttribute.
 
@@ -128,6 +131,8 @@ FamixPharoSmalltalkGenerator >> defineHierarchy [
 	namedEntity --|> #TPackageable.
 	namedEntity --|> #TInvocationsReceiver.
 	namedEntity --|> #TWithAnnotationInstances.
+	namedEntity --|> #TEntityMetaLevelDependency.
+	namedEntity --|> sourcedEntity.
 	
 	namespace --|> namedEntity.
 	namespace --|> #TNamespace.
