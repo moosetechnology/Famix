@@ -219,7 +219,7 @@ BaselineOfFamix >> packages: spec [
 		package: 'Cpp-Entities-Tests' 
 			with: [ spec requires: #('Cpp-Entities' 'Cpp-Generator') ];
 		package: 'Cpp-Parser'
-			with: [ spec requires: #('PetitParser2Code' 'PetitParser') ];
+			with: [ spec requires: #('PetitParser2Core' 'PetitParser') ];
 		package: 'Cpp-Parser-Tests'
 			with: [ spec requires: #('Cpp-Parser')];
 		
