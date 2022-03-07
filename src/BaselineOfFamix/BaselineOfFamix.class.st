@@ -126,7 +126,7 @@ BaselineOfFamix >> groups: spec [
 			     'Famix-TestComposedMetamodel' 'Famix-TestComposedComposedMetamodel-Entities'
 			     'Famix-TestComposed3Metamodel-Entities'
 			     'Moose-GenericImporters-Tests' "'Famix-CommentAnalyzer-Tests'"
-				  'CPPTests'
+				  'CppTests'
 			 )
 ]
 
