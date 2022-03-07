@@ -54,7 +54,9 @@ BaselineOfFamix >> dependencies: spec [
 		referenceTestResources: spec;
 		roelTyper: spec;
 		singularizePluralize: spec;
-		talents: spec.
+		talents: spec;
+		petitParser: spec;
+		petitParser2: spec.
 
 	spec for: #( #'pharo8.x' #'pharo9.x' ) do: [ 
 		spec
@@ -87,6 +89,12 @@ BaselineOfFamix >> groups: spec [
 		  group: 'ModelCompatibility'
 		  with: #( 'Famix-Compatibility-Generator'
 			     'EntitiesCompatibility' );
+			
+		  group: 'EntitiesCPP' with: #('Cpp-Generator' 'Cpp-Entities');
+		  group: 'ParserCPP' with: #('Cpp-Parser');
+		  group: 'CppTests' with: #('Cpp-Entities-Tests' 'CPP-Parser-Tests');
+		  group: 'CppModel' with: #('EntitiesCPP' 'ParserCPP');
+		
 		  group: 'EntitiesJava' with: #( 'Famix-Java-Entities' );
 		  group: 'EntitiesJavaWithVisitor'
 		  with: #( 'EntitiesJava' 'Famix-Java-Visitor' );
@@ -117,7 +125,9 @@ BaselineOfFamix >> groups: spec [
 			     'Famix-TestComposedMetamodel-Entities'
 			     'Famix-TestComposedMetamodel' 'Famix-TestComposedComposedMetamodel-Entities'
 			     'Famix-TestComposed3Metamodel-Entities'
-			     'Moose-GenericImporters-Tests' "'Famix-CommentAnalyzer-Tests'" )
+			     'Moose-GenericImporters-Tests' "'Famix-CommentAnalyzer-Tests'"
+				  'CPPTests'
+			 )
 ]
 
 { #category : #dependencies }
@@ -201,6 +211,19 @@ BaselineOfFamix >> packages: spec [
 		package: 'Famix-Java-Tests'
 		with: [ 
 			spec requires: #( 'Famix-Java-Entities' 'Famix-Java-Generator' ) ];
+		
+		package: 'Cpp-Generator'
+			with: [ spec requires: #('Basic') ];
+		package: 'Cpp-Entities'
+			with: [ spec requires: #('BasicTraits') ];
+		package: 'Cpp-Entities-Tests' 
+			with: [ spec requires: #('Cpp-Entities' 'Cpp-Generator') ];
+		package: 'Cpp-Parser'
+			with: [ spec requires: #('PetitParser2Code' 'PetitParser') ];
+		package: 'Cpp-Parser-Tests'
+			with: [ spec requires: #('Cpp-Parser')];
+		
+		
 		package: 'Moose-TestResources-LAN';
 		package: 'Moose-TestResources-LCOM';
 		package: 'Moose-Query-Test'
@@ -282,6 +305,19 @@ BaselineOfFamix >> packages: spec [
 					#( 'Core' 'TestModels' 'Famix-TestModel1MetamodelDocumentor' ) ];
 		package: 'Famix-TestModel1MetamodelDocumentor'
 		with: [ spec requires: #( 'Core' ) ]
+]
+
+{ #category : #dependencies }
+BaselineOfFamix >> petitParser2: spec [
+	spec baseline: 'PetitParser2Core' with: [ spec repository: 'github://kursjan/petitparser2' ]
+]
+
+{ #category : #dependencies }
+BaselineOfFamix >> petitParser: spec [
+	spec baseline: 'PetitParser' with: [ 
+		spec
+			loads: #('Core' 'Preprocessor');
+			repository: 'github://moosetechnology/PetitParser:v2.x.x/src' ]
 ]
 
 { #category : #accessing }
