@@ -22,6 +22,7 @@ CppMethod >> clientTypes [
 	<derived>
 	<FMComment: 'All types that depend on the receiver'>
 	^ (self queryAllIncoming atScope: FamixTType) withoutSelfLoops
+
 ]
 
 { #category : #testing }

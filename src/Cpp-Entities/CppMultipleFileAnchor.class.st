@@ -14,3 +14,9 @@ CppMultipleFileAnchor class >> annotation [
 	<generated>
 	^self
 ]
+
+{ #category : #adding }
+CppMultipleFileAnchor >> addFile: aFileAnchor [
+	self deprecated: 'Use #addSourceAnchor: instead' transformWith: '`@receiver addFile: `@arg' -> '`@receiver addSourceAnchor: `@arg'.
+	self addSourceAnchor: aFileAnchor
+]

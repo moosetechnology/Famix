@@ -14,3 +14,9 @@ CppType class >> annotation [
 	<generated>
 	^self
 ]
+
+{ #category : #deprecated }
+CppType >> belongsTo [
+	^ self parentPackage
+
+]

@@ -14,3 +14,11 @@ CppRelativeSourceAnchor class >> annotation [
 	<generated>
 	^self
 ]
+
+{ #category : #testing }
+CppRelativeSourceAnchor >> startBeforeFileAnchor: aTFileAnchor [
+	(self startLine isNil or: [ aTFileAnchor startLine isNil ]) ifTrue: [ ^ false ].
+		
+	^ aTFileAnchor startLine >= self startLine
+
+]

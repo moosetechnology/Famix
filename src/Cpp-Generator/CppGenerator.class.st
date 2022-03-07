@@ -44,6 +44,11 @@ CppGenerator class >> prefix [
 	^ #'Cpp'
 ]
 
+{ #category : #accessing }
+CppGenerator class >> submetamodels [
+	^ { FamixGenerator }
+]
+
 { #category : #definition }
 CppGenerator >> defineClasses [
 	super defineClasses.
@@ -121,6 +126,7 @@ CppGenerator >> defineHierarchy [
 	method --|> #TMethod.
 	method --|> #THasModifiers.
 	method --|> #TWithTypes.
+	method --|> #THasKind.
 	method withPrecedenceOf: #THasModifiers.
 
 	multipleFileAnchor --|> sourceAnchor.
