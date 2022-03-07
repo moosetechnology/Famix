@@ -92,7 +92,7 @@ BaselineOfFamix >> groups: spec [
 			
 		  group: 'EntitiesCPP' with: #('Cpp-Generator' 'Cpp-Entities');
 		  group: 'ParserCPP' with: #('Cpp-Parser');
-		  group: 'CppTests' with: #('Cpp-Entities-Tests' 'CPP-Parser-Tests');
+		  group: 'CppTests' with: #('Cpp-Entities-Tests' 'Cpp-Parser-Tests');
 		  group: 'CppModel' with: #('EntitiesCPP' 'ParserCPP');
 		
 		  group: 'EntitiesJava' with: #( 'Famix-Java-Entities' );
