@@ -81,6 +81,17 @@ FamixTest3MooseQueryTest >> testNumberOfExternalClients [
 ]
 
 { #category : #tests }
+FamixTest3MooseQueryTest >> testNumberOfExternalProviders [
+	| m3 |
+	m3 := FamixTest3Method named: 'm3' model: model.
+	FamixTest3Invocation source: self m1 target: {m3} model: model.
+	m3 parentType: self c1.
+	
+	self assertCollection: self m1 allProviders hasSameElements: {self c1 . self pt1. m3}.
+	self assert: self m1 numberOfExternalProviders equals: 2.
+]
+
+{ #category : #tests }
 FamixTest3MooseQueryTest >> testNumberOfInternalClients [
 	| m3 |
 	m3 := FamixTest3Method named: 'm3' model: model.
@@ -88,6 +99,17 @@ FamixTest3MooseQueryTest >> testNumberOfInternalClients [
 	m3 parentType: self c1.
 	self assertCollection: self pt1 allClients hasSameElements: {self m1}.
 	self assert: self m1 numberOfInternalClients equals: 1.
+]
+
+{ #category : #tests }
+FamixTest3MooseQueryTest >> testNumberOfInternalProviders [
+	| m3 |
+	m3 := FamixTest3Method named: 'm3' model: model.
+	FamixTest3Invocation source: self m1 target: {m3} model: model.
+	m3 parentType: self c1.
+	
+	self assertCollection: self m1 allProviders hasSameElements: {self c1 . self pt1. m3}.
+	self assert: self m1 numberOfInternalProviders equals: 1.
 ]
 
 { #category : #tests }
