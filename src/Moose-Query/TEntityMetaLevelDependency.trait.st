@@ -701,6 +701,16 @@ TEntityMetaLevelDependency >> numberOfExternalClients [
 ]
 
 { #category : #accessing }
+TEntityMetaLevelDependency >> numberOfExternalProviders [
+	<FMProperty: #numberOfExternalProviders type: #Number>
+	<derived>
+	<FMComment: 'Number of call to myself from outside my container.'>
+	^ self
+		lookUpPropertyNamed: #numberOfExternalProviders
+		computedAs: [ (self allProviders reject: [ :entity | entity allParents includesAny: self parents ]) size ]
+]
+
+{ #category : #accessing }
 TEntityMetaLevelDependency >> numberOfInternalClients [
 	<FMProperty: #numberOfInternalClients type: #Number>
 	<derived>
@@ -708,6 +718,16 @@ TEntityMetaLevelDependency >> numberOfInternalClients [
 	^ self
 		lookUpPropertyNamed: #numberOfInternalClients
 		computedAs: [ (self allClients select: [ :entity | entity allParents includesAny: self parents ]) size ]
+]
+
+{ #category : #accessing }
+TEntityMetaLevelDependency >> numberOfInternalProviders [
+	<FMProperty: #numberOfInternalProviders type: #Number>
+	<derived>
+	<FMComment: 'Number of call to myself from entities from my container.'>
+	^ self
+		lookUpPropertyNamed: #numberOfInternalProviders
+		computedAs: [ (self allProviders select: [ :entity | entity allParents includesAny: self parents ]) size ]
 ]
 
 { #category : #accessing }
