@@ -38,9 +38,9 @@ Then the query has different parameters:
 Last, you can have a parameter that will finish to configure and execute the query:
 
 ```st
-	method ancestors ofType: FamixTClass. ""ofType: will select the ancestors/descendents matching the kind in parameter.""
-	method ancestors ofAnyType: { FamixTClass . FamixTNamespace }. ""ofAnyTypes: will select the ancestors/descendents matching any kind in parameter.""
-	method ancestors ofAnyType. ""Select all ancestors independently of the type.""
+	method query ancestors ofType: FamixTClass. ""ofType: will select the ancestors/descendents matching the kind in parameter.""
+	method query ancestors ofAnyType: { FamixTClass . FamixTNamespace }. ""ofAnyTypes: will select the ancestors/descendents matching any kind in parameter.""
+	method query ancestors ofAnyType. ""Select all ancestors independently of the type.""
 ```
 
 More examples:
@@ -96,9 +96,9 @@ By default the queries will return a collection of associations (if the paramete
 Last, you can have a parameter that will finish to configure and execute the query:
 
 ```st
-	method ancestors dependencies. ""Will select all kinds of dependencies.""
-	method ancestors dependenciesOfType: FamixTReference. ""Will select the dependencies of the type passed has parameter.""
-	method ancestors dependenciesOfAnyType: { FamixTReference . FamixTInvocation }. ""Will select the dependencies whose types are present in the collection of types in parameter.""
+	method query ancestors dependencies. ""Will select all kinds of dependencies.""
+	method query ancestors dependenciesOfType: FamixTReference. ""Will select the dependencies of the type passed has parameter.""
+	method query ancestors dependenciesOfAnyType: { FamixTReference . FamixTInvocation }. ""Will select the dependencies whose types are present in the collection of types in parameter.""
 ```
 
 More examples:
