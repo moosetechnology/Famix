@@ -197,7 +197,7 @@ BaselineOfFamix >> packages: spec [
 		with: [ 
 			spec requires: #( 'TestModels' 'Moose-Core-Tests-Entities' ) ];
 		package: 'Moose-Core-Tests-Entities'
-		with: [ spec requires: #( 'Moose-Core' ) ];
+		with: [ spec requires: #( 'Moose-Core''BasicTraits' ) ];
 		package: 'Moose-GenericImporters-Tests'
 		with: [ spec requires: #( 'Moose-GenericImporter' ) ];
 		package: 'Famix-Smalltalk-Utils-Tests' with: [ 
