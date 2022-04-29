@@ -14,8 +14,8 @@ VerveineJModelTest class >> resources [
 
 { #category : #running }
 VerveineJModelTest >> setUp [
+
 	super setUp.
-	self flag: #todo. "When Verveine J will be migrated to the new Java MM, those tests should also be migrated."
 	model := VerveineJTestResource current model
 ]
 
@@ -31,5 +31,10 @@ VerveineJModelTest >> testNumberOfLinesOfCode [
 
 { #category : #tests }
 VerveineJModelTest >> testNumberOfStatements [
-	self assert: (model allMethods entityNamed: #'moose::lan::server::PrintServer.output(Packet)') numberOfStatements equals: 7
+
+	self
+		assert: (model allMethods entityNamed:
+				 #'moose::lan::server::PrintServer.output(Packet)')
+				numberOfStatements
+		equals: MooseUnavailableMetric
 ]
