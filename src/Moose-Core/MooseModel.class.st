@@ -256,8 +256,9 @@ MooseModel class >> menuCommandOn: aBuilder [
 
 { #category : #meta }
 MooseModel class >> metamodel [
+
 	self flag: #TODO. "The next line is a hack to not break everything in Moose. It should be removed later."
-	self = MooseModel ifTrue: [ ^ FAMIXModel metamodel ].
+	self = MooseModel ifTrue: [ ^ FamixStModel metamodel ].
 	^ metamodel ifNil: [ self resetMetamodel ]
 ]
 
