@@ -139,16 +139,14 @@ FamixJavaGenerator >> defineClasses [
 FamixJavaGenerator >> defineComments [
 	(builder ensureClassNamed: #Entity)
 		comment:
-			'	file := ''ArgoUML-0-34.mse'' asFileReference readStream.
+			'file := ''ArgoUML-0-34.mse'' asFileReference readStream.
 
-	repo := MooseModel
-		        importFrom: file
-		        withMetamodel: FamixJavaModel metamodel.
+repo := MooseModel importFrom: file withMetamodel: FamixJavaModel metamodel.
 
-	model := MooseModel new.
-	model silentlyAddAll: repo elements.
-	model entityStorage forRuntime.
-	model'
+model := MooseModel new.
+model silentlyAddAll: repo elements.
+model entityStorage forRuntime.
+model'
 ]
 
 { #category : #definition }
