@@ -1,5 +1,5 @@
 Class {
-	#name : #FAMIXFileAnchorReader,
+	#name : #FamixFileAnchorReader,
 	#superclass : #Object,
 	#instVars : [
 		'readStream',
@@ -13,7 +13,7 @@ Class {
 }
 
 { #category : #reading }
-FAMIXFileAnchorReader class >> readStream: aReadStream for: aFAMIXFileAnchor into: aWriteStream [
+FamixFileAnchorReader class >> readStream: aReadStream for: aFAMIXFileAnchor into: aWriteStream [
 	^ self new
 		readStream: aReadStream;
 		writeStream: aWriteStream;
@@ -22,23 +22,23 @@ FAMIXFileAnchorReader class >> readStream: aReadStream for: aFAMIXFileAnchor int
 ]
 
 { #category : #accessing }
-FAMIXFileAnchorReader >> fileAnchor: anObject [
+FamixFileAnchorReader >> fileAnchor: anObject [
 	fileAnchor := anObject
 ]
 
 { #category : #reading }
-FAMIXFileAnchorReader >> increment [
+FamixFileAnchorReader >> increment [
 	lineCount := lineCount + 1
 ]
 
 { #category : #initialization }
-FAMIXFileAnchorReader >> initialize [
+FamixFileAnchorReader >> initialize [
 	super initialize.
 	lineCount := 1
 ]
 
 { #category : #reading }
-FAMIXFileAnchorReader >> manageNewLineReturnBeforeStartFromCr: aBoolean [
+FamixFileAnchorReader >> manageNewLineReturnBeforeStartFromCr: aBoolean [
 	self increment.
 	lineCount = self startLine ifFalse: [ ^ self ].
 	
@@ -48,7 +48,7 @@ FAMIXFileAnchorReader >> manageNewLineReturnBeforeStartFromCr: aBoolean [
 ]
 
 { #category : #reading }
-FAMIXFileAnchorReader >> read [
+FamixFileAnchorReader >> read [
 	[ [ self tryToRead ]
 		on: ZnCharacterEncodingError
 		do:
@@ -62,12 +62,12 @@ FAMIXFileAnchorReader >> read [
 ]
 
 { #category : #accessing }
-FAMIXFileAnchorReader >> readStream: anObject [
+FamixFileAnchorReader >> readStream: anObject [
 	readStream := anObject
 ]
 
 { #category : #reading }
-FAMIXFileAnchorReader >> readUntil: endLine [
+FamixFileAnchorReader >> readUntil: endLine [
 	[ lineCount < endLine ]
 		whileTrue: [ (char := readStream next) isCr
 				ifTrue: [ self increment.
@@ -83,7 +83,7 @@ FAMIXFileAnchorReader >> readUntil: endLine [
 ]
 
 { #category : #reading }
-FAMIXFileAnchorReader >> readUntilEndColumn [
+FamixFileAnchorReader >> readUntilEndColumn [
 	fileAnchor endColumn
 		ifNil: [ readStream peek ifNotNil: [ [ (char := readStream next) isCr or: [ char isLf ] ] whileFalse: [ writeStream nextPut: char ] ] ]
 		ifNotNil: [ :ec | 
@@ -95,7 +95,7 @@ FAMIXFileAnchorReader >> readUntilEndColumn [
 ]
 
 { #category : #reading }
-FAMIXFileAnchorReader >> readUntilStart [
+FamixFileAnchorReader >> readUntilStart [
 	[ lineCount < self startLine ]
 		whileTrue: [ (char := readStream next) isCr
 				ifTrue: [ self manageNewLineReturnBeforeStartFromCr: true.
@@ -106,31 +106,31 @@ FAMIXFileAnchorReader >> readUntilStart [
 ]
 
 { #category : #reading }
-FAMIXFileAnchorReader >> readUntilStartColumn [
+FamixFileAnchorReader >> readUntilStartColumn [
 	readStream skip: (fileAnchor startColumn ifNil: [ 1 ]) - 1
 ]
 
 { #category : #reading }
-FAMIXFileAnchorReader >> reset [
+FamixFileAnchorReader >> reset [
 	self initialize.
 	readStream reset.
 	writeStream reset
 ]
 
 { #category : #reading }
-FAMIXFileAnchorReader >> skipNextIfLf [
+FamixFileAnchorReader >> skipNextIfLf [
 	"I will probably be called after a CR to remove a possible CRLF"
 
 	readStream peek isLf ifTrue: [ readStream next ]
 ]
 
 { #category : #accessing }
-FAMIXFileAnchorReader >> startLine [
+FamixFileAnchorReader >> startLine [
 	^ startLine ifNil: [ startLine := fileAnchor startLine ifNil: [ 1 ] ]
 ]
 
 { #category : #reading }
-FAMIXFileAnchorReader >> tryToRead [
+FamixFileAnchorReader >> tryToRead [
 	self readUntilStart.
 	fileAnchor endLine
 		ifNil: [ writeStream nextPutAll: readStream upToEnd ]
@@ -138,6 +138,6 @@ FAMIXFileAnchorReader >> tryToRead [
 ]
 
 { #category : #accessing }
-FAMIXFileAnchorReader >> writeStream: anObject [
+FamixFileAnchorReader >> writeStream: anObject [
 	writeStream := anObject
 ]

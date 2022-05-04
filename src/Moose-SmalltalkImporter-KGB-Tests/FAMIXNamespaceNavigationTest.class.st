@@ -1,11 +1,11 @@
 Class {
-	#name : #FAMIXNamespaceNavigationTest,
-	#superclass : #AbstractFAMIXNavigationTest,
+	#name : #FamixNamespaceNavigationTest,
+	#superclass : #AbstractFamixNavigationTest,
 	#category : #'Moose-SmalltalkImporter-KGB-Tests'
 }
 
 { #category : #tests }
-FAMIXNamespaceNavigationTest >> testClientClasses [
+FamixNamespaceNavigationTest >> testClientClasses [
 	self
 		assertCollection: (self n2FullReferee allClientsAtScope: FamixTType)
 		hasSameElements:
@@ -13,35 +13,35 @@ FAMIXNamespaceNavigationTest >> testClientClasses [
 ]
 
 { #category : #tests }
-FAMIXNamespaceNavigationTest >> testClientClassesInto [
+FamixNamespaceNavigationTest >> testClientClassesInto [
 	self
 		assertCollection: ((self n2FullReferee allClientsAtScope: FamixTType) within: self n3ReferencerReferee)
 		hasSameElements: {self c14ReferencerOutSideRefereeOutSide}
 ]
 
 { #category : #tests }
-FAMIXNamespaceNavigationTest >> testClientNamespaces [
+FamixNamespaceNavigationTest >> testClientNamespaces [
 	self
 		assertCollection: (self n2FullReferee allClientsAtScope: FamixTNamespace)
 		hasSameElements: {self n1InteractedReferencerReferee . self n3ReferencerReferee}
 ]
 
 { #category : #tests }
-FAMIXNamespaceNavigationTest >> testProviderClasses [
+FamixNamespaceNavigationTest >> testProviderClasses [
 	self
 		assertCollection: (self n1InteractedReferencerReferee allProvidersAtScope: FamixTType)
 		hasSameElements: {self c11FullRefereeOutSide . self c13FullRefereeInSideOutSide . self c14ReferencerOutSideRefereeOutSide . self cObject}
 ]
 
 { #category : #tests }
-FAMIXNamespaceNavigationTest >> testProviderClassesInto [
+FamixNamespaceNavigationTest >> testProviderClassesInto [
 	self
 		assertCollection: ((self n1InteractedReferencerReferee allProvidersAtScope: FamixTType) within: self n2FullReferee)
 		hasSameElements: {self c11FullRefereeOutSide . self c13FullRefereeInSideOutSide}
 ]
 
 { #category : #tests }
-FAMIXNamespaceNavigationTest >> testProviderNamespaces [
+FamixNamespaceNavigationTest >> testProviderNamespaces [
 	self
 		assertCollection: (self n1InteractedReferencerReferee allProvidersAtScope: FamixTNamespace)
 		hasSameElements: {self n2FullReferee . self n3ReferencerReferee . self nSmalltalkCore}

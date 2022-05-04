@@ -160,15 +160,18 @@ MooseModel class >> importFrom: aStream withMetamodel: aMetamodel filteredBy: an
 
 { #category : #'import-export' }
 MooseModel class >> importFrom: aStream withMetamodel: aMetamodel translationDictionary: translationDict [
+
 	"In this case we use a translation dictionary to import model by updating the names from the MSE."
 
 	^ self
-		importFrom: aStream
-		withMetamodel: aMetamodel
-		customizingImporterWith: [ :importer | 
-			importer
-				nameTranslator: translationDict;
-				yourself ]
+		  importFrom: aStream
+		  withMetamodel: aMetamodel
+		  customizingImporterWith: [ :importer | 
+			  importer
+				  translationUnit: (FMDictionaryTranslationUnit new
+						   dictionary: translationDict;
+						   yourself);
+				  yourself ]
 ]
 
 { #category : #'import-export' }
@@ -703,7 +706,8 @@ MooseModel >> localMooseModel [
 
 { #category : #accessing }
 MooseModel >> metamodel [
-	^ metamodel ifNil: [ MooseModel meta ]
+
+	^ metamodel ifNil: [ MooseModel metamodel ]
 ]
 
 { #category : #accessing }

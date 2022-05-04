@@ -1,7 +1,7 @@
 "
-FAMIXMethod represents a behaviour in an object-oriented language.
+FamixTMethod represents a behaviour in an object-oriented language.
 
-A FAMIXMethod is always contained in a parentType.
+A FamixTMethod is always contained in a parentType.
 "
 Trait {
 	#name : #FamixTMethod,

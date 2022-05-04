@@ -13,8 +13,8 @@ public @interface MyAnno {
 When using an annotation, an annotation instance is created that points back to the annotation type. The annotation instance has attributes that are annontation instance attributes and point back to their annotation type attributes.
 
 Instance Variables:
-	parentAnnotationType	<FAMIXAnnotationType>
-	annotationAttributeInstances	<(FMMultivalueLink of: FAMIXAnnotationInstanceAttribute)>
+	parentAnnotationType	<FamixTAnnotationType>
+	annotationAttributeInstances	<(FMMultivalueLink of: FamixTAnnotationInstanceAttribute)>
 "
 Trait {
 	#name : #FamixTAnnotationTypeAttribute,

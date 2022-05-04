@@ -1,5 +1,5 @@
 "
-FAMIXGlobalVariable represents a global variable in the source code.
+FamixTGlobalVariable represents a global variable in the source code.
 
 "
 Trait {

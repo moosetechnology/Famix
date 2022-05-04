@@ -9,7 +9,7 @@ public enum Day {
 }
 
 Instance Variables:
-	values	<(MultivalueLink of: FAMIXEnumValue)>
+	values	<(MultivalueLink of: FamixTEnumValue)>
 "
 Trait {
 	#name : #FamixTEnum,

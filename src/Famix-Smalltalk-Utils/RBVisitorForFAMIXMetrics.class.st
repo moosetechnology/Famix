@@ -13,7 +13,7 @@ Instance Variables:
 
 "
 Class {
-	#name : #RBVisitorForFAMIXMetrics,
+	#name : #RBVisitorForFamixMetrics,
 	#superclass : #RBProgramNodeVisitor,
 	#instVars : [
 		'numberOfMessageSends',
@@ -29,19 +29,19 @@ Class {
 }
 
 { #category : #'instance creation' }
-RBVisitorForFAMIXMetrics class >> for: aMethod [
+RBVisitorForFamixMetrics class >> for: aMethod [
 	^ self new
 		processMethod: aMethod;
 		yourself
 ]
 
 { #category : #'private-accessing' }
-RBVisitorForFAMIXMetrics >> classNameFromMethod [
+RBVisitorForFamixMetrics >> classNameFromMethod [
 	^ self methodEntity parentType name
 ]
 
 { #category : #'private-accessing' }
-RBVisitorForFAMIXMetrics >> compiledMethod [
+RBVisitorForFamixMetrics >> compiledMethod [
 	| realSTClass stClass |
 	stClass := FamixSmalltalkNameResolver smalltalkClassFromFamixClassName: self classNameFromMethod ifAbsent: [ nil ].
 	realSTClass := (self methodEntity isClassSide and: [ stClass class ~= TraitedMetaclass ]) ifTrue: [ stClass class ] ifFalse: [ stClass ].
@@ -49,7 +49,7 @@ RBVisitorForFAMIXMetrics >> compiledMethod [
 ]
 
 { #category : #enumerating }
-RBVisitorForFAMIXMetrics >> computeCyclomaticNumber: sel [
+RBVisitorForFamixMetrics >> computeCyclomaticNumber: sel [
 	"The following equations defined McCabe Cyclomatic Complexity:
 
 	     1.The number of regions in a flow graph. 
@@ -72,7 +72,7 @@ RBVisitorForFAMIXMetrics >> computeCyclomaticNumber: sel [
 ]
 
 { #category : #enumerating }
-RBVisitorForFAMIXMetrics >> countConditionals: sel [
+RBVisitorForFamixMetrics >> countConditionals: sel [
 	
 	(#(#ifTrue: #ifFalse: #ifTrue:ifFalse: #ifFalse:ifTrue: #whileTrue #whileTrue: #whileFalse #whileFalse:)
 		includes: sel)
@@ -80,32 +80,32 @@ RBVisitorForFAMIXMetrics >> countConditionals: sel [
 ]
 
 { #category : #accessing }
-RBVisitorForFAMIXMetrics >> cyclomaticNumber [
+RBVisitorForFamixMetrics >> cyclomaticNumber [
 	
 	^cyclomaticNumber
 ]
 
 { #category : #initialization }
-RBVisitorForFAMIXMetrics >> initialize [
+RBVisitorForFamixMetrics >> initialize [
 	
 	super initialize.
 	self resetMetricValues
 ]
 
 { #category : #private }
-RBVisitorForFAMIXMetrics >> isDirtySuperInMethod: selector withReceiver: receiver [
+RBVisitorForFamixMetrics >> isDirtySuperInMethod: selector withReceiver: receiver [
 
 	^ selector ~~ self methodEntity name and: [ receiver isSuperVariable ]
 ]
 
 { #category : #private }
-RBVisitorForFAMIXMetrics >> isSuperInMethod: selector withReceiver: receiver [
+RBVisitorForFamixMetrics >> isSuperInMethod: selector withReceiver: receiver [
 
 	^ selector == self methodEntity name and: [ receiver isSuperVariable ]
 ]
 
 { #category : #'source access' }
-RBVisitorForFAMIXMetrics >> methodBodyOn: aReadStream [
+RBVisitorForFamixMetrics >> methodBodyOn: aReadStream [
 	| aux |
 	numberOfLinesOfCode := aReadStream contents occurrencesOf: Character cr.
 	aReadStream contents last = Character cr ifFalse: [ numberOfLinesOfCode := numberOfLinesOfCode + 1 ].
@@ -116,72 +116,72 @@ RBVisitorForFAMIXMetrics >> methodBodyOn: aReadStream [
 ]
 
 { #category : #'private-accessing' }
-RBVisitorForFAMIXMetrics >> methodEntity [
+RBVisitorForFamixMetrics >> methodEntity [
 	^ methodEntity
 ]
 
 { #category : #'private-accessing' }
-RBVisitorForFAMIXMetrics >> methodEntity: aMethodEntity [
+RBVisitorForFamixMetrics >> methodEntity: aMethodEntity [
 	methodEntity := aMethodEntity
 ]
 
 { #category : #accessing }
-RBVisitorForFAMIXMetrics >> numberOfConditionals [
+RBVisitorForFamixMetrics >> numberOfConditionals [
 	
 	^numberOfConditionals
 ]
 
 { #category : #accessing }
-RBVisitorForFAMIXMetrics >> numberOfConditionals: anObject [
+RBVisitorForFamixMetrics >> numberOfConditionals: anObject [
 	
 	numberOfConditionals := anObject
 ]
 
 { #category : #accessing }
-RBVisitorForFAMIXMetrics >> numberOfLinesOfCode [
+RBVisitorForFamixMetrics >> numberOfLinesOfCode [
 	
 	^numberOfLinesOfCode
 ]
 
 { #category : #accessing }
-RBVisitorForFAMIXMetrics >> numberOfLinesOfCode: anObject [
+RBVisitorForFamixMetrics >> numberOfLinesOfCode: anObject [
 	
 	numberOfLinesOfCode := anObject
 ]
 
 { #category : #accessing }
-RBVisitorForFAMIXMetrics >> numberOfMessageSends [
+RBVisitorForFamixMetrics >> numberOfMessageSends [
 	
 	^numberOfMessageSends
 ]
 
 { #category : #accessing }
-RBVisitorForFAMIXMetrics >> numberOfMessageSends: anObject [
+RBVisitorForFamixMetrics >> numberOfMessageSends: anObject [
 	
 	numberOfMessageSends := anObject
 ]
 
 { #category : #accessing }
-RBVisitorForFAMIXMetrics >> numberOfStatements [
+RBVisitorForFamixMetrics >> numberOfStatements [
 	
 	^numberOfStatements
 ]
 
 { #category : #accessing }
-RBVisitorForFAMIXMetrics >> numberOfStatements: anObject [
+RBVisitorForFamixMetrics >> numberOfStatements: anObject [
 	
 	numberOfStatements := anObject
 ]
 
 { #category : #enumerating }
-RBVisitorForFAMIXMetrics >> processMethod: aMethodEntity [
+RBVisitorForFamixMetrics >> processMethod: aMethodEntity [
 	self methodEntity: aMethodEntity.
 	self compiledMethod ifNil: [ ^ self ].
 	(self compiledMethod methodClass parseTreeFor: self compiledMethod selector) ifNotNil: [ :parseTree | self visitMethodNode: parseTree ]
 ]
 
 { #category : #initialization }
-RBVisitorForFAMIXMetrics >> resetMetricValues [
+RBVisitorForFamixMetrics >> resetMetricValues [
 	numberOfMessageSends := 0.
 	numberOfStatements := 0.
 	numberOfConditionals := 0.
@@ -190,19 +190,19 @@ RBVisitorForFAMIXMetrics >> resetMetricValues [
 ]
 
 { #category : #enumerating }
-RBVisitorForFAMIXMetrics >> visitBlockNode: aBlockNode [
+RBVisitorForFamixMetrics >> visitBlockNode: aBlockNode [
 	super visitBlockNode: aBlockNode.
 	numberOfStatements := numberOfStatements + aBlockNode body size
 ]
 
 { #category : #enumerating }
-RBVisitorForFAMIXMetrics >> visitCascadeNode: aCascadeNode [
+RBVisitorForFamixMetrics >> visitCascadeNode: aCascadeNode [
 	numberOfStatements := numberOfStatements + aCascadeNode messages size.
 	^ super visitCascadeNode: aCascadeNode
 ]
 
 { #category : #enumerating }
-RBVisitorForFAMIXMetrics >> visitMessageNode: aMessageNode [
+RBVisitorForFamixMetrics >> visitMessageNode: aMessageNode [
 	| receiver selector |
 	receiver := aMessageNode receiver.
 	selector := aMessageNode selector.
@@ -215,7 +215,7 @@ RBVisitorForFAMIXMetrics >> visitMessageNode: aMessageNode [
 ]
 
 { #category : #enumerating }
-RBVisitorForFAMIXMetrics >> visitMethodNode: aMethodNode [
+RBVisitorForFamixMetrics >> visitMethodNode: aMethodNode [
 	
 	" I do not know where this block came from"
 	"methodComplexity := methodComplexity + (0.3 * block arguments size)."
@@ -225,7 +225,7 @@ RBVisitorForFAMIXMetrics >> visitMethodNode: aMethodNode [
 ]
 
 { #category : #enumerating }
-RBVisitorForFAMIXMetrics >> visitSequenceNode: aSequenceNode [
+RBVisitorForFamixMetrics >> visitSequenceNode: aSequenceNode [
 	super visitSequenceNode: aSequenceNode.
 	numberOfStatements := numberOfStatements + aSequenceNode statements size
 ]
