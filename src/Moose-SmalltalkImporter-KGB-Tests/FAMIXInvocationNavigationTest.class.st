@@ -1,11 +1,11 @@
 Class {
-	#name : #FAMIXInvocationNavigationTest,
-	#superclass : #AbstractFAMIXNavigationTest,
+	#name : #FamixInvocationNavigationTest,
+	#superclass : #AbstractFamixNavigationTest,
 	#category : #'Moose-SmalltalkImporter-KGB-Tests'
 }
 
 { #category : #tests }
-FAMIXInvocationNavigationTest >> testIsASureInvocation [
+FamixInvocationNavigationTest >> testIsASureInvocation [
 	| invoc1 invoc2 method |
 	method := self getMethod: 'm5p10c17Mtd1()'.
 	invoc1 := method outgoingInvocations detect: [ :each | each signature = 'm5p10c18InstCreation()' ].
@@ -16,7 +16,7 @@ FAMIXInvocationNavigationTest >> testIsASureInvocation [
 ]
 
 { #category : #tests }
-FAMIXInvocationNavigationTest >> testIsSurelyInvokedBy [
+FamixInvocationNavigationTest >> testIsSurelyInvokedBy [
 	| method |
 	method := self model allMethods entityNamed: #'Model5InteractedReferencer::M5P10C17FullReferencerInSide.m5p10c17Mtd1()'.
 

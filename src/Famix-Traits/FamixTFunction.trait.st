@@ -1,5 +1,5 @@
 "
-FAMIXFunction represents a behavioural entity in a procedural language.
+FamixTFunction represents a behavioural entity in a procedural language.
 "
 Trait {
 	#name : #FamixTFunction,

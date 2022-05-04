@@ -1,5 +1,5 @@
 Class {
-	#name : #FAMIXStepwiseImporterTest,
+	#name : #FamixStepwiseImporterTest,
 	#superclass : #TestCase,
 	#classInstVars : [
 		'aVariable'
@@ -8,19 +8,19 @@ Class {
 }
 
 { #category : #accessing }
-FAMIXStepwiseImporterTest >> defaultTimeLimit [
+FamixStepwiseImporterTest >> defaultTimeLimit [
 	^ 30 seconds
 ]
 
 { #category : #'instance creation' }
-FAMIXStepwiseImporterTest >> newImportClassesTask [
+FamixStepwiseImporterTest >> newImportClassesTask [
 	^ MooseImportClassesTask new
 		factory: FamixStModel factory;
 		yourself
 ]
 
 { #category : #tests }
-FAMIXStepwiseImporterTest >> testCheckFormalParameterIsCreated [
+FamixStepwiseImporterTest >> testCheckFormalParameterIsCreated [
 	"self debug: #testCheckFormalParameterIsCreated"
 
 	| mseFormalParameter model |
@@ -42,7 +42,7 @@ FAMIXStepwiseImporterTest >> testCheckFormalParameterIsCreated [
 ]
 
 { #category : #tests }
-FAMIXStepwiseImporterTest >> testCheckSelfIsCreated [
+FamixStepwiseImporterTest >> testCheckSelfIsCreated [
 	"self debug: #testCheckSelfIsCreated"
 
 	| model mseSelf |
@@ -64,7 +64,7 @@ FAMIXStepwiseImporterTest >> testCheckSelfIsCreated [
 ]
 
 { #category : #tests }
-FAMIXStepwiseImporterTest >> testImportAttribute [
+FamixStepwiseImporterTest >> testImportAttribute [
 	"self debug: #testImportAttribute"
 
 	| importTask importer nodeClass |
@@ -86,7 +86,7 @@ FAMIXStepwiseImporterTest >> testImportAttribute [
 ]
 
 { #category : #tests }
-FAMIXStepwiseImporterTest >> testImportAttributeAccesses [
+FamixStepwiseImporterTest >> testImportAttributeAccesses [
 	"self debug: #testImportAttributeAccesses"
 
 	| importTask importer nodeClass attr |
@@ -110,7 +110,7 @@ FAMIXStepwiseImporterTest >> testImportAttributeAccesses [
 ]
 
 { #category : #tests }
-FAMIXStepwiseImporterTest >> testImportClassAndAttributeAndMergeItsMetaclass [
+FamixStepwiseImporterTest >> testImportClassAndAttributeAndMergeItsMetaclass [
 	"self debug: #testImportClassAndAttributeAndMergeItsMetaclass"
 
 	| importTask importer nodeClass |
@@ -130,7 +130,7 @@ FAMIXStepwiseImporterTest >> testImportClassAndAttributeAndMergeItsMetaclass [
 ]
 
 { #category : #tests }
-FAMIXStepwiseImporterTest >> testImportClassAndInheritance [
+FamixStepwiseImporterTest >> testImportClassAndInheritance [
 	"self debug: #testImportClassAndInheritance"
 
 	| importTask importer importedClasses |
@@ -153,7 +153,7 @@ FAMIXStepwiseImporterTest >> testImportClassAndInheritance [
 ]
 
 { #category : #tests }
-FAMIXStepwiseImporterTest >> testImportClassAndMethodAndMergeItsMetaclass [
+FamixStepwiseImporterTest >> testImportClassAndMethodAndMergeItsMetaclass [
 	"self debug: #testImportClassAndMethodAndMergeItsMetaclass"
 
 	| importTask importer importedMethods |
@@ -174,7 +174,7 @@ FAMIXStepwiseImporterTest >> testImportClassAndMethodAndMergeItsMetaclass [
 ]
 
 { #category : #tests }
-FAMIXStepwiseImporterTest >> testImportLANPackage [
+FamixStepwiseImporterTest >> testImportLANPackage [
 	"self debug: #testImportLANPackage"
 
 	| model class package |
@@ -198,7 +198,7 @@ FAMIXStepwiseImporterTest >> testImportLANPackage [
 ]
 
 { #category : #tests }
-FAMIXStepwiseImporterTest >> testImportMethodBody [
+FamixStepwiseImporterTest >> testImportMethodBody [
 	"Check if when importing the arguments of the LAN example, methods body are imported as well"
 
 	"This is so since importing arguments implies an import of method body"
@@ -234,7 +234,7 @@ FAMIXStepwiseImporterTest >> testImportMethodBody [
 ]
 
 { #category : #tests }
-FAMIXStepwiseImporterTest >> testImportNamespace [
+FamixStepwiseImporterTest >> testImportNamespace [
 	"self debug: #testImportNamespace"
 
 	| model nap |
@@ -257,7 +257,7 @@ FAMIXStepwiseImporterTest >> testImportNamespace [
 ]
 
 { #category : #tests }
-FAMIXStepwiseImporterTest >> testImportOneClassAndItsMetaclass [
+FamixStepwiseImporterTest >> testImportOneClassAndItsMetaclass [
 	"self debug: #testImportOneClassAndItsMetaclass"
 
 	| importTask importer importedClasses |
@@ -273,7 +273,7 @@ FAMIXStepwiseImporterTest >> testImportOneClassAndItsMetaclass [
 ]
 
 { #category : #tests }
-FAMIXStepwiseImporterTest >> testImportOneClassAndMergeItsMetaclass [
+FamixStepwiseImporterTest >> testImportOneClassAndMergeItsMetaclass [
 	"self debug: #testImportOneClassAndMergeItsMetaclass"
 
 	| importTask importer importedClasses |
@@ -294,7 +294,7 @@ FAMIXStepwiseImporterTest >> testImportOneClassAndMergeItsMetaclass [
 ]
 
 { #category : #tests }
-FAMIXStepwiseImporterTest >> testImportOneClassAndMethodAndMergeItsMetaclass [
+FamixStepwiseImporterTest >> testImportOneClassAndMethodAndMergeItsMetaclass [
 	"self debug: #testImportOneClassAndMethodAndMergeItsMetaclass"
 
 	| importTask importer importedMethods |
@@ -315,7 +315,7 @@ FAMIXStepwiseImporterTest >> testImportOneClassAndMethodAndMergeItsMetaclass [
 ]
 
 { #category : #tests }
-FAMIXStepwiseImporterTest >> testImportOneClassAndOneAttributeAndMergeItsMetaclass [
+FamixStepwiseImporterTest >> testImportOneClassAndOneAttributeAndMergeItsMetaclass [
 	"self debug: #testImportOneClassAndOneAttributeAndMergeItsMetaclass"
 
 	| importTask importer nodeClass |

@@ -57,28 +57,28 @@ FamixStMethod >> computeCyclomaticComplexity [
 
 	^ (self isStub or: [ self smalltalkClass isNil ])
 		ifTrue: [ self notExistentMetricValue ]
-		ifFalse: [ (RBVisitorForFAMIXMetrics for: self) cyclomaticNumber ]
+		ifFalse: [ (RBVisitorForFamixMetrics for: self) cyclomaticNumber ]
 ]
 
 { #category : #'Famix-Extensions-private' }
 FamixStMethod >> computeNumberOfConditionals [
 	^ self isStub
 		ifTrue: [ self notExistentMetricValue ]
-		ifFalse: [ (RBVisitorForFAMIXMetrics for: self) numberOfConditionals ]
+		ifFalse: [ (RBVisitorForFamixMetrics for: self) numberOfConditionals ]
 ]
 
 { #category : #'Famix-Extensions-private' }
 FamixStMethod >> computeNumberOfMessageSends [
 	^ self isStub
 		ifTrue: [ self notExistentMetricValue ]
-		ifFalse: [ (RBVisitorForFAMIXMetrics for: self) numberOfMessageSends ]
+		ifFalse: [ (RBVisitorForFamixMetrics for: self) numberOfMessageSends ]
 ]
 
 { #category : #'Famix-Extensions-private' }
 FamixStMethod >> computeNumberOfStatements [
 	^ self isStub
 		ifTrue: [ self notExistentMetricValue ]
-		ifFalse: [ (RBVisitorForFAMIXMetrics for: self) numberOfStatements ]
+		ifFalse: [ (RBVisitorForFamixMetrics for: self) numberOfStatements ]
 ]
 
 { #category : #'Famix-Extensions-private' }
@@ -164,14 +164,19 @@ FamixStMethod >> isOverriding [
 
 { #category : #'Famix-Extensions-metrics-support' }
 FamixStMethod >> isSurelyInvokedBy: aFAMIXMethod [
+
 	| outgoingInvo |
-	((self isAbstract or: [ aFAMIXMethod isAbstract ]) or: [ (outgoingInvo := aFAMIXMethod queryAllOutgoingInvocations) isEmpty ])
-		ifFalse: [ outgoingInvo
-				do: [ :invo | 
-					(invo signature = self signature and: [ invo isASureInvocation ])
-						ifTrue: [ | invocationRVar |
-							invocationRVar := invo getReceivingFAMIXClass.
-							(invocationRVar isNotNil and: [ (invocationRVar lookUp: self signature) = self ]) ifTrue: [ ^ true ] ] ] ].
+	((self isAbstract or: [ aFAMIXMethod isAbstract ]) or: [ 
+		 (outgoingInvo := aFAMIXMethod queryAllOutgoingInvocations) isEmpty ]) 
+		ifFalse: [ 
+			outgoingInvo do: [ :invo | 
+				(invo signature = self signature and: [ invo isASureInvocation ]) 
+					ifTrue: [ 
+						| invocationRVar |
+						invocationRVar := invo getReceivingFamixClass.
+						(invocationRVar isNotNil and: [ 
+							 (invocationRVar lookUp: self signature) = self ]) ifTrue: [ 
+							^ true ] ] ] ].
 	^ false
 ]
 
@@ -255,10 +260,11 @@ FamixStMethod >> smalltalkClass [
 
 { #category : #'Famix-Extensions-metrics-support' }
 FamixStMethod >> sourceText [
-	self flag: 'This code should be delegated to the FAMIXPharoAnchor'.
+
+	self flag: 'This code should be delegated to the anchor'.
 	^ [ self compiledMethod sourceCode ]
-		on: Error
-		do: [ "probably class is not in the system" super sourceText ]
+		  on: Error
+		  do: [ "probably class is not in the system" super sourceText ]
 ]
 
 { #category : #'Famix-Extensions-metrics-support' }

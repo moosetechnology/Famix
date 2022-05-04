@@ -8,8 +8,8 @@ And the following is an AnnotationInstance in Java:
 @Test(timeout = 500)
 
 Instance Variables:
-	annotatedEntity	<FAMIXEntity>
-	annotationType		<FAMIXAnnotationType>
+	annotatedEntity	<FamixTEntity>
+	annotationType		<FamixTAnnotationType>
 "
 Trait {
 	#name : #FamixTAnnotationInstance,

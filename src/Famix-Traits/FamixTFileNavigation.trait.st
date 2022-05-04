@@ -149,7 +149,7 @@ FamixTFileNavigation >> sourceText [
 		binaryReadStreamDo: [ :in | 
 			String
 				streamContents: [ :s | 
-					[ FAMIXFileAnchorReader readStream: ((ZnCharacterReadStream on: (ZnBufferedReadStream on: in) encoding: self encoding)) for: self into: s ]
+					[ FamixFileAnchorReader readStream: ((ZnCharacterReadStream on: (ZnBufferedReadStream on: in) encoding: self encoding)) for: self into: s ]
 						on: MessageNotUnderstood
 						do: [ self endLine: nil.
 							s ] ] ]

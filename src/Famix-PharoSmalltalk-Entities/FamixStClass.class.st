@@ -159,10 +159,11 @@ FamixStClass >> smalltalkClass [
 
 { #category : #'Famix-Implementation' }
 FamixStClass >> sourceText [
-	self flag: 'This code should be delegated to the FAMIXPharoAnchor'.
+
+	self flag: 'This code should be delegated to the anchor'.
 	^ self instanceSide smalltalkClass
-		ifNotNil: [ :aClass | TonelWriter sourceCodeOf: aClass ]
-		ifNil: [ super sourceText ]
+		  ifNotNil: [ :aClass | TonelWriter sourceCodeOf: aClass ]
+		  ifNil: [ super sourceText ]
 ]
 
 { #category : #testing }

@@ -1,5 +1,5 @@
 "
-FAMIXTrait models a trait as it can be found in Pharo or PHP.
+FamixTTrait models a trait as it can be found in Pharo or PHP.
 "
 Trait {
 	#name : #FamixTTrait,

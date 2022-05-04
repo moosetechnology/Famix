@@ -65,6 +65,7 @@ FamixPharoSmalltalkGenerator >> defineClasses [
 
 { #category : #initialization }
 FamixPharoSmalltalkGenerator >> defineHierarchy [
+
 	super defineHierarchy.
 
 	access --|> #TAccess.
@@ -93,9 +94,10 @@ FamixPharoSmalltalkGenerator >> defineHierarchy [
 	attribute --|> #TAttribute.
 	attribute --|> #TInvocationsReceiver.
 	attribute --|> #TCanBeClassSide.
-	
+
 	class --|> namedEntity.
-	self flag: 'WithTypes should not be necessary but needed in tests like FamixMetricsTest>>testAfferentCouplingFAMIXClassGroup'.
+	self flag:
+		'WithTypes should not be necessary but needed in tests like FamixMetricsTest>>testAfferentCouplingFamixClassGroup'.
 	class --|> #TWithTypes.
 	class --|> #TWithExceptions.
 	class --|> #TClass.
@@ -106,11 +108,11 @@ FamixPharoSmalltalkGenerator >> defineHierarchy [
 	globalVariable --|> namedEntity.
 	globalVariable --|> #TGlobalVariable.
 	globalVariable --|> #TInvocationsReceiver.
-	
+
 	implicitVariable --|> namedEntity.
 	implicitVariable --|> #TImplicitVariable.
 	implicitVariable --|> #TInvocationsReceiver.
-	
+
 	inheritance --|> #TInheritance.
 
 	invocation --|> #TInvocation.
@@ -119,7 +121,7 @@ FamixPharoSmalltalkGenerator >> defineHierarchy [
 	localVariable --|> namedEntity.
 	localVariable --|> #TLocalVariable.
 	localVariable --|> #TInvocationsReceiver.
-	
+
 	method --|> namedEntity.
 	method --|> #TMethod.
 	method --|> #TWithAnnotationTypes.
@@ -133,7 +135,7 @@ FamixPharoSmalltalkGenerator >> defineHierarchy [
 	namedEntity --|> #TWithAnnotationInstances.
 	namedEntity --|> #TEntityMetaLevelDependency.
 	namedEntity --|> sourcedEntity.
-	
+
 	namespace --|> namedEntity.
 	namespace --|> #TNamespace.
 	namespace --|> #TWithGlobalVariables.
@@ -151,16 +153,15 @@ FamixPharoSmalltalkGenerator >> defineHierarchy [
 	parameter --|> namedEntity.
 	parameter --|> #TParameter.
 	parameter --|> #TInvocationsReceiver.
-	
+
 	reference --|> #TReference.
-	
+
 	pharoEntitySourceAnchor --|> sourceAnchor.
 	pharoEntitySourceAnchor --|> #TSourceAnchor.
- 
+
 	unknownVariable --|> namedEntity.
 	unknownVariable --|> #TUnknownVariable.
-	unknownVariable --|> #TInvocationsReceiver.
-	
+	unknownVariable --|> #TInvocationsReceiver
 ]
 
 { #category : #definition }
