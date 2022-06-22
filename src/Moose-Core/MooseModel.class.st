@@ -229,34 +229,6 @@ MooseModel class >> importMetamodelFrom: aStream [
 	generator previewChanges	"keep shift pressed to see the changes"
 ]
 
-{ #category : #'world menu' }
-MooseModel class >> menuCommandOn: aBuilder [
-	<worldMenu>
-	(aBuilder item: #Moose)
-		order: 6;
-		icon: MooseIcons mooseIcon.
-
-	(aBuilder item: self developerToolsMenuLabel)
-		order: 30;
-		parent: #Moose ;
-		label: 'Developer tools'.
-
-	"there are other entries before these ones in #developerToolsMenuLabel"
-	(aBuilder item: #'Regenerate all metamodels')
-		order: 40;
-		parent: (self developerToolsMenuLabel) ;
-		action: [ FamixMetamodelGenerator generateAllMetamodels ].
-	(aBuilder item: #'Reset metamodels')
-		order: 45;
-		parent: (self developerToolsMenuLabel) ;
-		action: [ self resetMetamodels ].
- 	(aBuilder item: #'Reset metamodels additional properties')
-		order: 50;
-		parent: (self developerToolsMenuLabel) ;
-		action: [ self resetMetamodelsAdditionalProperties ].
-
-]
-
 { #category : #meta }
 MooseModel class >> metamodel [
 
