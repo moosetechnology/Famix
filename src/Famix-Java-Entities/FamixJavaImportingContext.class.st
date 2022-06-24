@@ -113,6 +113,12 @@ FamixJavaImportingContext >> importGlobalVariable [
 ]
 
 { #category : #testing }
+FamixJavaImportingContext >> importImplementation [
+	<generated>
+	^ self import: FamixJavaImplementation
+]
+
+{ #category : #testing }
 FamixJavaImportingContext >> importImplicitVariable [
 	<generated>
 	^ self import: FamixJavaImplicitVariable
@@ -356,6 +362,12 @@ FamixJavaImportingContext >> shouldImportFolder [
 FamixJavaImportingContext >> shouldImportGlobalVariable [
 	<generated>
 	^ self shouldImport: FamixJavaGlobalVariable
+]
+
+{ #category : #testing }
+FamixJavaImportingContext >> shouldImportImplementation [
+	<generated>
+	^ self shouldImport: FamixJavaImplementation
 ]
 
 { #category : #testing }
