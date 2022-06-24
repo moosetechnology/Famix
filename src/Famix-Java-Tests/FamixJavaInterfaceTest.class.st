@@ -5,6 +5,24 @@ Class {
 }
 
 { #category : #tests }
+FamixJavaInterfaceTest >> testImplementation [
+
+
+	
+	| interface class impl |
+	interface := FamixJavaInterface new.
+	class := FamixJavaClass new.
+	impl := FamixJavaImplementation new.
+	impl interface: interface.
+	impl implementingClass: class.
+
+	
+	self assertCollection: interface implementations hasSameElements: { impl }.
+	self assertCollection: class interfaceImplementations hasSameElements: { impl }.
+	
+]
+
+{ #category : #tests }
 FamixJavaInterfaceTest >> testMultipleInheritance [
 
 	| interface supInt1 supInt2 inh1 inh2 |

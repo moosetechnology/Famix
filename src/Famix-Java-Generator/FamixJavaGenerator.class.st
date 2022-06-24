@@ -254,6 +254,7 @@ FamixJavaGenerator >> defineHierarchy [
 	class --|> #TClassMetrics.
 	class --|> #TWithComments.
 	class --|> tJavaClassMetrics.	
+	class --|> tCanImplement.
 	
 	interface --|> type.
 	interface --|> #TPackageable.
@@ -266,6 +267,7 @@ FamixJavaGenerator >> defineHierarchy [
 	interface --|> #THasVisibility.
 	interface --|> #TCanBeClassSide. 
 	interface --|> #TWithComments.
+	interface --|> tImplementable.
 	
 	implementation --|> #TAssociation.
 
