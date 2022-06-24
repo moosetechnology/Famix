@@ -131,6 +131,12 @@ FamixJavaImportingContext >> importInheritance [
 ]
 
 { #category : #testing }
+FamixJavaImportingContext >> importInterface [
+	<generated>
+	^ self import: FamixJavaInterface
+]
+
+{ #category : #testing }
 FamixJavaImportingContext >> importInvocation [
 	<generated>
 	^ self import: FamixJavaInvocation
@@ -368,6 +374,12 @@ FamixJavaImportingContext >> shouldImportIndexedFileAnchor [
 FamixJavaImportingContext >> shouldImportInheritance [
 	<generated>
 	^ self shouldImport: FamixJavaInheritance
+]
+
+{ #category : #testing }
+FamixJavaImportingContext >> shouldImportInterface [
+	<generated>
+	^ self shouldImport: FamixJavaInterface
 ]
 
 { #category : #testing }
