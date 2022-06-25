@@ -5,6 +5,21 @@ Class {
 }
 
 { #category : #tests }
+FamixJavaInterfaceTest >> testClassContainInterface [
+
+	| interface class |
+	interface := FamixJavaInterface new.
+	class := FamixJavaClass new.
+	class addInterface: interface. 
+
+
+	self
+		assertCollection: class interfaces
+		hasSameElements: { interface }.
+
+]
+
+{ #category : #tests }
 FamixJavaInterfaceTest >> testImplementation [
 
 
@@ -20,6 +35,20 @@ FamixJavaInterfaceTest >> testImplementation [
 	self assertCollection: interface implementations hasSameElements: { impl }.
 	self assertCollection: class interfaceImplementations hasSameElements: { impl }.
 	
+]
+
+{ #category : #tests }
+FamixJavaInterfaceTest >> testInterfaceContainInterface [
+
+	| interface int2 |
+	interface := FamixJavaInterface new.
+	int2 := FamixJavaInterface new.
+	int2 addInterface: interface. 
+
+
+	self
+		assertCollection: int2 interfaces
+		hasSameElements: { interface }.
 ]
 
 { #category : #tests }

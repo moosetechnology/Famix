@@ -41,7 +41,8 @@ Class {
 		'interface',
 		'implementation',
 		'tImplementable',
-		'tCanImplement'
+		'tCanImplement',
+		'tWithInterfaces'
 	],
 	#category : #'Famix-Java-Generator'
 }
@@ -123,6 +124,14 @@ FamixJavaGenerator >> commentForTInterface [
 ]
 
 { #category : #definition }
+FamixJavaGenerator >> commentForTWithInterfaces [
+
+^ 'I can contain interfaces (Packages, Methods, Classes...)'
+
+	
+]
+
+{ #category : #definition }
 FamixJavaGenerator >> defineClasses [
 	super defineClasses.
 
@@ -135,6 +144,7 @@ FamixJavaGenerator >> defineClasses [
 	caughtException := builder newClassNamed: #CaughtException.
 	class := builder newClassNamed: #Class.
 	interface := builder newClassNamed: #Interface.
+	interface withTesting.
 	implementation := builder newClassNamed: #Implementation.
 	containerEntity := builder newClassNamed: #ContainerEntity.
 	declaredException := builder newClassNamed: #DeclaredException.
@@ -272,9 +282,12 @@ FamixJavaGenerator >> defineHierarchy [
 	implementation --|> #TAssociation.
 
 	containerEntity --|> namedEntity.
+	containerEntity --|> tWithInterfaces.
 	containerEntity --|> #TWithClasses.
 	containerEntity --|> #TWithAnnotationTypes.
 	containerEntity --|> #TOODependencyQueries.
+	
+	tWithInterfaces --|> #TWithTypes.
 
 	declaredException --|> exception.
 	declaredException --|> #TDeclaredException.
@@ -415,6 +428,9 @@ FamixJavaGenerator >> defineTraits [
 	tCanImplement := builder
 		                  newTraitNamed: #TCanImplement
 		                  comment: self commentForTCanImplement.
+		
+	tWithInterfaces := builder newTraitNamed: #TWithInterfaces.
+	tWithInterfaces comment: self commentForTWithInterfaces.
 
 	tJavaClassMetrics := builder newTraitNamed: #TClassMetrics.
 	

@@ -14,3 +14,10 @@ FamixJavaInterface class >> annotation [
 	<generated>
 	^self
 ]
+
+{ #category : #testing }
+FamixJavaInterface >> isInterface [
+
+	<generated>
+	^ true
+]
