@@ -586,7 +586,7 @@ MooseQueryTest >> testOutgoingAccessesWithANamespaceInANamespace [
 
 { #category : #tests }
 MooseQueryTest >> testOutgoingAssociationTypes [
-	self assertCollection: class1 outgoingAssociationTypes hasSameElements: {FamixTInheritance}.
+	self assertCollection: class1 outgoingAssociationTypes hasSameElements: {FamixTInheritance. FamixJavaImplementation }.
 	self assertCollection: method1 outgoingAssociationTypes hasSameElements: {FamixTInvocation . FamixTReference . FamixTAccess}
 ]
 
