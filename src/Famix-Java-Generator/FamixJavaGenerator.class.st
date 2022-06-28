@@ -100,24 +100,6 @@ public class SharedObject {
 ]
 
 { #category : #definition }
-FamixJavaGenerator >> commentForTCanImplement [
-
-^'I can be the source of an implementation (cf a class implementing an Interface)'
-	
-
-	
-]
-
-{ #category : #definition }
-FamixJavaGenerator >> commentForTImplementable [
-
-^'I can be the target of an implementation cf Interface '
-	
-
-	
-]
-
-{ #category : #definition }
 FamixJavaGenerator >> commentForTInterface [
 	'I correspond to an interface'
 
@@ -264,7 +246,7 @@ FamixJavaGenerator >> defineHierarchy [
 	class --|> #TClassMetrics.
 	class --|> #TWithComments.
 	class --|> tJavaClassMetrics.	
-	class --|> tCanImplement.
+	class --|> #TCanImplement.
 	
 	interface --|> type.
 	interface --|> #TPackageable.
@@ -277,9 +259,9 @@ FamixJavaGenerator >> defineHierarchy [
 	interface --|> #THasVisibility.
 	interface --|> #TCanBeClassSide. 
 	interface --|> #TWithComments.
-	interface --|> tImplementable.
+	interface --|> #TImplementable.
 	
-	implementation --|> #TAssociation.
+	implementation --|> #TImplementation.
 
 	containerEntity --|> namedEntity.
 	containerEntity --|> tWithInterfaces.
@@ -392,19 +374,7 @@ FamixJavaGenerator >> defineProperties [
 
 { #category : #definition }
 FamixJavaGenerator >> defineRelations [ 
-	((implementation property: #implementingClass)
-			comment: 'Class linked to in this relationship. from-side of the association';
-			source)
-		*-
-	((tCanImplement property: #interfaceImplementations)
-			comment: 'Implementation relationships').
 
-	((implementation property: #interface)
-			comment: 'Interface linked to in this relationship. to-side of the association';
-			target)
-		*-
-	((tImplementable property: #implementations)
-			comment: 'Implementation relationships.').
 ]
 
 { #category : #definition }
@@ -421,13 +391,7 @@ FamixJavaGenerator >> defineTraits [
 		                      newTraitNamed: #TCanBeSynchronized
 		                      comment: self commentForTCanBeSynchronized.
 	
-	tImplementable := builder
-		                  newTraitNamed: #TImplementable
-		                  comment: self commentForTImplementable.
-		
-	tCanImplement := builder
-		                  newTraitNamed: #TCanImplement
-		                  comment: self commentForTCanImplement.
+
 		
 	tWithInterfaces := builder newTraitNamed: #TWithInterfaces.
 	tWithInterfaces comment: self commentForTWithInterfaces.

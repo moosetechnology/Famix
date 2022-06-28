@@ -124,7 +124,10 @@ Class {
 		'tWithSourceLanguages',
 		'tWithCompilationUnits',
 		'tWithHeaders',
-		'tCanBeClassSide'
+		'tCanBeClassSide',
+		'tImplementable',
+		'tCanImplement',
+		'tImplementation'
 	],
 	#category : #'Famix-MetamodelGeneration'
 }
@@ -257,6 +260,15 @@ FamixGenerator >> commentForTAttribute [
 
 	^ 'FamixTAttribute represents a field of a class. It is an attribute of the parent type.
 '
+]
+
+{ #category : #comments }
+FamixGenerator >> commentForTCanImplement [
+
+^'I can be the source of an implementation (cf a class implementing an Interface)'
+	
+
+	
 ]
 
 { #category : #comments }
@@ -412,6 +424,15 @@ FamixGenerator >> commentForTHasSignature [
 FamixGenerator >> commentForTHeader [
 
 	^ 'I represent a header file. Typically a .h or .hpp'
+]
+
+{ #category : #definition }
+FamixGenerator >> commentForTImplementable [
+
+^'I can be the target of an implementation cf Interface '
+	
+
+	
 ]
 
 { #category : #comments }
@@ -927,6 +948,8 @@ FamixGenerator >> defineHierarchy [
 	super defineHierarchy.
 	tAccess --|> tAssociation.
 	
+	tImplementation --|> tAssociation.
+	
 	tAssociation --|> #TAssociationMetaLevelDependency.
 	tAssociation --|> tSourceEntity.
 
@@ -1441,6 +1464,20 @@ FamixGenerator >> defineRelations [
 		*-
 	((tType property: #typedEntities)
 			comment: 'Entities that have this type as declaredType').
+			
+		((tImplementation property: #implementingClass)
+			comment: 'Class linked to in this relationship. from-side of the association';
+			source)
+		*-
+	((tCanImplement property: #interfaceImplementations)
+			comment: 'Implementation relationships').
+
+	((tImplementation property: #interface)
+			comment: 'Interface linked to in this relationship. to-side of the association';
+			target)
+		*-
+	((tImplementable property: #implementations)
+			comment: 'Implementation relationships.').
 
 
 ]
@@ -1799,5 +1836,14 @@ FamixGenerator >> defineTraits [
 
 	tCohesionCouplingMetrics := builder newTraitNamed: #TCohesionCouplingMetrics.
 
-	tLCOMMetrics := builder newTraitNamed: #TLCOMMetrics
+	tLCOMMetrics := builder newTraitNamed: #TLCOMMetrics.
+	
+	tImplementable := builder
+		                  newTraitNamed: #TImplementable
+		                  comment: self commentForTImplementable.
+		
+	tCanImplement := builder
+		                  newTraitNamed: #TCanImplement
+		                  comment: self commentForTCanImplement.
+	tImplementation := builder newTraitNamed: #TImplementation. 
 ]
