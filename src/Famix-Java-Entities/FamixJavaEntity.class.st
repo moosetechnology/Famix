@@ -80,6 +80,13 @@ FamixJavaEntity >> isInheritance [
 ]
 
 { #category : #testing }
+FamixJavaEntity >> isInterface [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
 FamixJavaEntity >> isInvocation [
 
 	<generated>

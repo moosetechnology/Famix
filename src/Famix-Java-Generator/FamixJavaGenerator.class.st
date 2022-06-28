@@ -37,7 +37,12 @@ Class {
 		'tCanBeVolatile',
 		'tCanBeTransient',
 		'tCanBeSynchronized',
-		'tJavaClassMetrics'
+		'tJavaClassMetrics',
+		'interface',
+		'implementation',
+		'tImplementable',
+		'tCanImplement',
+		'tWithInterfaces'
 	],
 	#category : #'Famix-Java-Generator'
 }
@@ -95,6 +100,38 @@ public class SharedObject {
 ]
 
 { #category : #definition }
+FamixJavaGenerator >> commentForTCanImplement [
+
+^'I can be the source of an implementation (cf a class implementing an Interface)'
+	
+
+	
+]
+
+{ #category : #definition }
+FamixJavaGenerator >> commentForTImplementable [
+
+^'I can be the target of an implementation cf Interface '
+	
+
+	
+]
+
+{ #category : #definition }
+FamixJavaGenerator >> commentForTInterface [
+	'I correspond to an interface'
+
+]
+
+{ #category : #definition }
+FamixJavaGenerator >> commentForTWithInterfaces [
+
+^ 'I can contain interfaces (Packages, Methods, Classes...)'
+
+	
+]
+
+{ #category : #definition }
 FamixJavaGenerator >> defineClasses [
 	super defineClasses.
 
@@ -106,6 +143,9 @@ FamixJavaGenerator >> defineClasses [
 	attribute := builder newClassNamed: #Attribute.
 	caughtException := builder newClassNamed: #CaughtException.
 	class := builder newClassNamed: #Class.
+	interface := builder newClassNamed: #Interface.
+	interface withTesting.
+	implementation := builder newClassNamed: #Implementation.
 	containerEntity := builder newClassNamed: #ContainerEntity.
 	declaredException := builder newClassNamed: #DeclaredException.
 	enum := builder newClassNamed: #Enum.
@@ -224,11 +264,30 @@ FamixJavaGenerator >> defineHierarchy [
 	class --|> #TClassMetrics.
 	class --|> #TWithComments.
 	class --|> tJavaClassMetrics.	
+	class --|> tCanImplement.
+	
+	interface --|> type.
+	interface --|> #TPackageable.
+	interface --|> #TWithMethods.
+	interface --|> #TWithInheritances.
+	interface --|> #TWithAttributes.
+	interface --|> #TInvocationsReceiver.
+	interface --|> #TOODependencyQueries.
+	interface --|> #TCanBeFinal.
+	interface --|> #THasVisibility.
+	interface --|> #TCanBeClassSide. 
+	interface --|> #TWithComments.
+	interface --|> tImplementable.
+	
+	implementation --|> #TAssociation.
 
 	containerEntity --|> namedEntity.
+	containerEntity --|> tWithInterfaces.
 	containerEntity --|> #TWithClasses.
 	containerEntity --|> #TWithAnnotationTypes.
 	containerEntity --|> #TOODependencyQueries.
+	
+	tWithInterfaces --|> #TWithTypes.
 
 	declaredException --|> exception.
 	declaredException --|> #TDeclaredException.
@@ -332,6 +391,23 @@ FamixJavaGenerator >> defineProperties [
 ]
 
 { #category : #definition }
+FamixJavaGenerator >> defineRelations [ 
+	((implementation property: #implementingClass)
+			comment: 'Class linked to in this relationship. from-side of the association';
+			source)
+		*-
+	((tCanImplement property: #interfaceImplementations)
+			comment: 'Implementation relationships').
+
+	((implementation property: #interface)
+			comment: 'Interface linked to in this relationship. to-side of the association';
+			target)
+		*-
+	((tImplementable property: #implementations)
+			comment: 'Implementation relationships.').
+]
+
+{ #category : #definition }
 FamixJavaGenerator >> defineTraits [
 
 	super defineTraits.
@@ -344,8 +420,21 @@ FamixJavaGenerator >> defineTraits [
 	tCanBeSynchronized := builder
 		                      newTraitNamed: #TCanBeSynchronized
 		                      comment: self commentForTCanBeSynchronized.
+	
+	tImplementable := builder
+		                  newTraitNamed: #TImplementable
+		                  comment: self commentForTImplementable.
+		
+	tCanImplement := builder
+		                  newTraitNamed: #TCanImplement
+		                  comment: self commentForTCanImplement.
+		
+	tWithInterfaces := builder newTraitNamed: #TWithInterfaces.
+	tWithInterfaces comment: self commentForTWithInterfaces.
 
 	tJavaClassMetrics := builder newTraitNamed: #TClassMetrics.
+	
+
 	
 ]
 
