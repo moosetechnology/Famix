@@ -42,7 +42,8 @@ Class {
 		'implementation',
 		'tImplementable',
 		'tCanImplement',
-		'tWithInterfaces'
+		'tWithInterfaces',
+		'parameterizableInterface'
 	],
 	#category : #'Famix-Java-Generator'
 }
@@ -146,6 +147,7 @@ FamixJavaGenerator >> defineClasses [
 	parameter := builder newClassNamed: #Parameter.
 	parameterType := builder newClassNamed: #ParameterType.
 	parameterizableClass := builder newClassNamed: #ParameterizableClass.
+	parameterizableInterface := builder newClassNamed: #ParameterizableInterface.
 	parameterizedType := builder newClassNamed: #ParameterizedType.
 	primitiveType := builder newClassNamed: #PrimitiveType.
 	reference := builder newClassNamed: #Reference.
@@ -330,6 +332,9 @@ FamixJavaGenerator >> defineHierarchy [
 
 	parameterizableClass --|> class.
 	parameterizableClass --|> #TWithParameterizedTypes.
+	
+	parameterizableInterface --|> interface.
+	parameterizableInterface --|> #TWithParameterizedTypes.
 
 	parameterizedType --|> type.
 	parameterizedType --|> #TParameterizedType.

@@ -191,6 +191,12 @@ FamixJavaImportingContext >> importParameterizableClass [
 ]
 
 { #category : #testing }
+FamixJavaImportingContext >> importParameterizableInterface [
+	<generated>
+	^ self import: FamixJavaParameterizableInterface
+]
+
+{ #category : #testing }
 FamixJavaImportingContext >> importParameterizedType [
 	<generated>
 	^ self import: FamixJavaParameterizedType
@@ -440,6 +446,12 @@ FamixJavaImportingContext >> shouldImportParameterType [
 FamixJavaImportingContext >> shouldImportParameterizableClass [
 	<generated>
 	^ self shouldImport: FamixJavaParameterizableClass
+]
+
+{ #category : #testing }
+FamixJavaImportingContext >> shouldImportParameterizableInterface [
+	<generated>
+	^ self shouldImport: FamixJavaParameterizableInterface
 ]
 
 { #category : #testing }
