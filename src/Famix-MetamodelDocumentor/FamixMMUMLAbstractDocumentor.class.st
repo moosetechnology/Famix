@@ -13,7 +13,8 @@ Class {
 		'classesOfInterest',
 		'externalClasses',
 		'withStub',
-		'models'
+		'models',
+		'prefs'
 	],
 	#category : #'Famix-MetamodelDocumentor'
 }
@@ -69,6 +70,7 @@ FamixMMUMLAbstractDocumentor >> initialize [
 	self beWithoutStub.
 	externalClasses := Set new.
 	models := Set new.
+	prefs := Set new.
 ]
 
 { #category : #testing }
@@ -132,6 +134,12 @@ FamixMMUMLAbstractDocumentor >> withModel: aModel [
 FamixMMUMLAbstractDocumentor >> withModel: aModel andColor: aColor [
 
 	models add: (FamixUMLModelColorTuple model: aModel color: aColor)
+]
+
+{ #category : #accessing }
+FamixMMUMLAbstractDocumentor >> withPreference: plantUMLStatement [
+
+	prefs add: plantUMLStatement
 ]
 
 { #category : #accessing }
