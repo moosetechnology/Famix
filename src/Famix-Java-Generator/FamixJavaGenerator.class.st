@@ -340,6 +340,8 @@ FamixJavaGenerator >> defineHierarchy [
 	parameterizedType --|> #TParameterizedType.
 	parameterizedType --|> #TWithParameterizedTypeUsers.
 	parameterizedType --|> #TWithInheritances.
+	parameterizedType --|> #TCanImplement.
+	parameterizedType --|> #TImplementable.
 
 	primitiveType --|> type.
 	primitiveType --|> #TPrimitiveType.
