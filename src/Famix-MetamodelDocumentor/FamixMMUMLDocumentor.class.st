@@ -322,9 +322,11 @@ FamixMMUMLDocumentor >> plantUMLFooter [
 { #category : #private }
 FamixMMUMLDocumentor >> plantUMLHeader [
 	outputStream nextPutAll:
-	'@startuml
-hide empty members
+	'@startuml'; cr.
 
+	prefs do: [:p | outputStream nextPutAll: p; cr].
+
+	outputStream nextPutAll: 'hide empty members
 skinparam class {
   BackgroundColor white
   ArrowColor black
@@ -332,7 +334,7 @@ skinparam class {
   BackgroundColor<<External>> LightYellow
   BorderColor<<External>> LightGray
 }
-'
+'.
 ]
 
 { #category : #private }
