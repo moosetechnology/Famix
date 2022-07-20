@@ -1,5 +1,5 @@
 Class {
-	#name : #FAMIXMetaModelClassesShouldNotOverrideRule,
+	#name : #FamixMetaModelClassesShouldNotOverrideRule,
 	#superclass : #RBBlockLintRule,
 	#instVars : [
 		'metaModelClasses'
@@ -8,12 +8,12 @@ Class {
 }
 
 { #category : #accessing }
-FAMIXMetaModelClassesShouldNotOverrideRule class >> uniqueIdentifierName [
+FamixMetaModelClassesShouldNotOverrideRule class >> uniqueIdentifierName [
 	^ 'MetaModelClassShouldNotOverride'
 ]
 
 { #category : #running }
-FAMIXMetaModelClassesShouldNotOverrideRule >> checkClass: aContext [
+FamixMetaModelClassesShouldNotOverrideRule >> checkClass: aContext [
 	|class  |
 	class := aContext.
 	
@@ -29,30 +29,31 @@ FAMIXMetaModelClassesShouldNotOverrideRule >> checkClass: aContext [
 ]
 
 { #category : #accessing }
-FAMIXMetaModelClassesShouldNotOverrideRule >> group [
-	^ 'FAMIX'
+FamixMetaModelClassesShouldNotOverrideRule >> group [
+
+	^ 'Famix'
 ]
 
 { #category : #accessing }
-FAMIXMetaModelClassesShouldNotOverrideRule >> metaModelClasses [
+FamixMetaModelClassesShouldNotOverrideRule >> metaModelClasses [
 	"return all classes that have to be checked in this rule"
 	^ metaModelClasses ifNil: [metaModelClasses := MooseEntity allSubclasses].
 ]
 
 { #category : #accessing }
-FAMIXMetaModelClassesShouldNotOverrideRule >> name [
+FamixMetaModelClassesShouldNotOverrideRule >> name [
 
 	^ 'A metamodel class override a method that it should not override'
 ]
 
 { #category : #accessing }
-FAMIXMetaModelClassesShouldNotOverrideRule >> rationale [
+FamixMetaModelClassesShouldNotOverrideRule >> rationale [
 
-	^ 'check if a metamodel class (FAMIXEntity and all its subclasses) override some methods that it should not override. Those methods are specified by RBFAMIXMetaModelClassesShouldNotOverrideRule >> selectorsThatShouldNotBeOverriden'
+	^ 'check if a metamodel class (MooseEntity and all its subclasses) override some methods that it should not override. Those methods are specified by FamixMetaModelClassesShouldNotOverrideRule >> selectorsThatShouldNotBeOverriden'
 ]
 
 { #category : #accessing }
-FAMIXMetaModelClassesShouldNotOverrideRule >> selectorsThatShouldNotBeOverriden [
+FamixMetaModelClassesShouldNotOverrideRule >> selectorsThatShouldNotBeOverriden [
 
 	^ #(#mooseName #printString)
 ]

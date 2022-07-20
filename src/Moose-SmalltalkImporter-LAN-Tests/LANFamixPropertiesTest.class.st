@@ -1,21 +1,21 @@
 Class {
-	#name : #FamixPropertiesTest,
+	#name : #LANFamixPropertiesTest,
 	#superclass : #LANAbstractImportTest,
 	#category : #'Moose-SmalltalkImporter-LAN-Tests'
 }
 
 { #category : #testing }
-FamixPropertiesTest >> lanInterfaceOriginateMethod [
+LANFamixPropertiesTest >> lanInterfaceOriginateMethod [
 	^self model entityNamed: #'Smalltalk::LANInterface.originate()'
 ]
 
 { #category : #testing }
-FamixPropertiesTest >> nodeClass [
+LANFamixPropertiesTest >> nodeClass [
 	^self model entityNamed: LANNode mooseName
 ]
 
 { #category : #testing }
-FamixPropertiesTest >> testAttributeMetrics [
+LANFamixPropertiesTest >> testAttributeMetrics [
 	| attribute1 attribute2 |
 	attribute1 := self model entityNamed: #'Smalltalk::LANInterface.nextNode'.
 	attribute2 := self model entityNamed: #'Smalltalk::LANOutputServer.serverType'.
@@ -34,21 +34,21 @@ FamixPropertiesTest >> testAttributeMetrics [
 ]
 
 { #category : #testing }
-FamixPropertiesTest >> testAttributesOfNonStubClasses [
+LANFamixPropertiesTest >> testAttributesOfNonStubClasses [
 	"testing issue 960"
 
 	self model allClasses do: [ :cl | cl isStub ifFalse: [ self assert: (cl attributes noneSatisfy: [ :att | att isStub ]) ] ]
 ]
 
 { #category : #testing }
-FamixPropertiesTest >> testAttributesOfStubClasses [
+LANFamixPropertiesTest >> testAttributesOfStubClasses [
 	"testing issue 960"
 	self model allClasses do: [ :cl |
 		(cl isStub) ifTrue: [ self assert: (cl attributes allSatisfy: [:att | att isStub])] ]
 ]
 
 { #category : #testing }
-FamixPropertiesTest >> testClassAllProperties [
+LANFamixPropertiesTest >> testClassAllProperties [
 	| class |
 	class := self model entityNamed: LANNode mooseName.
 	self
@@ -58,7 +58,7 @@ FamixPropertiesTest >> testClassAllProperties [
 ]
 
 { #category : #testing }
-FamixPropertiesTest >> testClassAttributes [
+LANFamixPropertiesTest >> testClassAttributes [
 
 	self assert: self nodeClass numberOfAttributes equals: 2.
 	self assert: self nodeClass numberOfAttributesInherited equals: 3.
@@ -72,21 +72,21 @@ FamixPropertiesTest >> testClassAttributes [
 ]
 
 { #category : #testing }
-FamixPropertiesTest >> testClassCategories [
+LANFamixPropertiesTest >> testClassCategories [
 "1halt."
 	self assert: (self nodeClass propertyNamed: #numberOfMethodProtocols) equals: 6.
 	self assert: self nodeClass numberOfMethodProtocols equals: 6
 ]
 
 { #category : #testing }
-FamixPropertiesTest >> testClassComments [
+LANFamixPropertiesTest >> testClassComments [
 	self model allClasses do: [ :each | self assert: each numberOfComments >= 0 ].
 	self assert: (self nodeClass propertyNamed: #numberOfComments) equals: 11.
 	self assert: self nodeClass numberOfComments equals: 11
 ]
 
 { #category : #testing }
-FamixPropertiesTest >> testClassHierarchy [
+LANFamixPropertiesTest >> testClassHierarchy [
 	self assert: (self nodeClass propertyNamed: #numberOfSubclasses) equals: 2.
 	self assert: self nodeClass numberOfSubclasses equals: (self nodeClass propertyNamed: #numberOfSubclasses).
 	self assert: self nodeClass totalNumberOfSubclasses equals: 4.
@@ -94,13 +94,13 @@ FamixPropertiesTest >> testClassHierarchy [
 ]
 
 { #category : #testing }
-FamixPropertiesTest >> testClassInvocations [
+LANFamixPropertiesTest >> testClassInvocations [
 	self assert: (self nodeClass propertyNamed: #numberOfMessageSends) equals: 27.
 	self assert: self nodeClass numberOfMessageSends equals: 27
 ]
 
 { #category : #testing }
-FamixPropertiesTest >> testClassIsAbstract [
+LANFamixPropertiesTest >> testClassIsAbstract [
 	^ self
 		assert:
 			(self model entityNamed: #'Smalltalk::LANAbstractDestinationAddress')
@@ -108,7 +108,7 @@ FamixPropertiesTest >> testClassIsAbstract [
 ]
 
 { #category : #testing }
-FamixPropertiesTest >> testClassLinesOfCode [
+LANFamixPropertiesTest >> testClassLinesOfCode [
 	"2020/05/06 - Cyril - I updated the value for the number of lines of code because before we were using only the sum of methods while now we use the tonel export that contains also the class definition."
 
 	self model allClasses do: [ :each | self assert: each numberOfLinesOfCode >= 0 ].
@@ -117,7 +117,7 @@ FamixPropertiesTest >> testClassLinesOfCode [
 ]
 
 { #category : #testing }
-FamixPropertiesTest >> testClassMethods [
+LANFamixPropertiesTest >> testClassMethods [
 	self assert: self nodeClass numberOfMethods equals: 12.
 	self assert: (self nodeClass propertyNamed: #numberOfMethodsInherited) equals: 0.
 	self assert: (self nodeClass propertyNamed: #numberOfMethodsOverriden) equals: 0.
@@ -137,17 +137,17 @@ FamixPropertiesTest >> testClassMethods [
 ]
 
 { #category : #testing }
-FamixPropertiesTest >> testClassWeightedMethodCount [
+LANFamixPropertiesTest >> testClassWeightedMethodCount [
 	self assert: self nodeClass weightedMethodCount equals: 13
 ]
 
 { #category : #testing }
-FamixPropertiesTest >> testHasComments [
+LANFamixPropertiesTest >> testHasComments [
 	self deny: self nodeClass hasComments
 ]
 
 { #category : #testing }
-FamixPropertiesTest >> testMethodAccesses [
+LANFamixPropertiesTest >> testMethodAccesses [
 	self assert: self lanInterfaceOriginateMethod numberOfAccesses equals: 22.
 	self
 		assert: self lanInterfaceOriginateMethod numberOfAccesses
@@ -156,20 +156,20 @@ FamixPropertiesTest >> testMethodAccesses [
 ]
 
 { #category : #testing }
-FamixPropertiesTest >> testMethodHierarchyNesting [
+LANFamixPropertiesTest >> testMethodHierarchyNesting [
 	self assert: (self lanInterfaceOriginateMethod propertyNamed: #hierarchyNestingLevel) equals: 1.
 	self assert: self lanInterfaceOriginateMethod hierarchyNestingLevel equals: 1
 ]
 
 { #category : #testing }
-FamixPropertiesTest >> testMethodInvocations [
+LANFamixPropertiesTest >> testMethodInvocations [
 	self assert: (self lanInterfaceOriginateMethod propertyNamed: #numberOfOutgoingInvocations) equals: 22.
 	self assert: self lanInterfaceOriginateMethod numberOfOutgoingInvocations equals: 22.
 	self assert: (self model entityNamed: #'Smalltalk::LANInterface.initialize()') numberOfOutgoingInvocations equals: 2
 ]
 
 { #category : #testing }
-FamixPropertiesTest >> testMethodInvocationsWithoutCascading [
+LANFamixPropertiesTest >> testMethodInvocationsWithoutCascading [
 	self assert: (self model entityNamed: #'Smalltalk::LANInterface.remove()') numberOfOutgoingInvocations equals: 6.
 	self
 		assert: (self model entityNamed: #'Smalltalk::LANInterface.newWorkstation()') numberOfOutgoingInvocations
@@ -177,43 +177,43 @@ FamixPropertiesTest >> testMethodInvocationsWithoutCascading [
 ]
 
 { #category : #testing }
-FamixPropertiesTest >> testMethodLOC [
+LANFamixPropertiesTest >> testMethodLOC [
 	self assert: (self lanInterfaceOriginateMethod propertyNamed: #numberOfLinesOfCode) equals: 22.
 	self assert: self lanInterfaceOriginateMethod numberOfLinesOfCode equals: 22
 ]
 
 { #category : #testing }
-FamixPropertiesTest >> testMethodSmalltalkConditionals [
+LANFamixPropertiesTest >> testMethodSmalltalkConditionals [
 	self assert: (self lanInterfaceOriginateMethod propertyNamed: #numberOfConditionals) equals: 1.
 	self assert: self lanInterfaceOriginateMethod numberOfConditionals equals: 1
 ]
 
 { #category : #testing }
-FamixPropertiesTest >> testMethodSmalltalkCyclomaticComplexity [
+LANFamixPropertiesTest >> testMethodSmalltalkCyclomaticComplexity [
 	self assert: (self lanInterfaceOriginateMethod propertyNamed: #cyclomaticComplexity) equals: 2.
 	self assert: self lanInterfaceOriginateMethod cyclomaticComplexity equals: 2
 ]
 
 { #category : #testing }
-FamixPropertiesTest >> testMethodSmalltalkMessageSends [
+LANFamixPropertiesTest >> testMethodSmalltalkMessageSends [
 	self assert: (self lanInterfaceOriginateMethod propertyNamed: #numberOfMessageSends) equals: 22.
 	self assert: self lanInterfaceOriginateMethod numberOfMessageSends equals: 22
 ]
 
 { #category : #testing }
-FamixPropertiesTest >> testMethodSmalltalkParameters [
+LANFamixPropertiesTest >> testMethodSmalltalkParameters [
 	self assert: self lanInterfaceOriginateMethod numberOfParameters equals: 0.
 	self assert: (self lanInterfaceOriginateMethod propertyNamed: #numberOfParameters) equals: 0
 ]
 
 { #category : #testing }
-FamixPropertiesTest >> testMethodSmalltalkStatements [
+LANFamixPropertiesTest >> testMethodSmalltalkStatements [
 	self assert: (self lanInterfaceOriginateMethod propertyNamed: #numberOfStatements) equals: 15.
 	self assert: self lanInterfaceOriginateMethod numberOfStatements equals: 15
 ]
 
 { #category : #testing }
-FamixPropertiesTest >> testMethodTimeStamp [
+LANFamixPropertiesTest >> testMethodTimeStamp [
 	| method |
 	method := self model entityNamed: #'Smalltalk::LANInterface.initialize()'.
 	self assert: (method propertyNamed: #timeStamp) equals: (LANInterface compiledMethodAt: #initialize) timeStamp.
@@ -234,7 +234,7 @@ FamixPropertiesTest >> testMethodTimeStamp [
 ]
 
 { #category : #testing }
-FamixPropertiesTest >> testMethodsSimpleProperties [
+LANFamixPropertiesTest >> testMethodsSimpleProperties [
 	| method |
 	method := self model entityNamed: #'Smalltalk::LANInterface.initialize()'.
 	self assert: method isInitializer.
@@ -253,24 +253,24 @@ FamixPropertiesTest >> testMethodsSimpleProperties [
 ]
 
 { #category : #testing }
-FamixPropertiesTest >> testNoDuplicatesOfClassVariables [
+LANFamixPropertiesTest >> testNoDuplicatesOfClassVariables [
 	self assert: ((self model entityNamed: #'Smalltalk::Object') attributes contains: [ :each | each name = #DependentsFields ]).
 	self assert: (self model entityNamed: #'Smalltalk::Object') attributes first identicalTo: (self model entityNamed: #'Smalltalk::Object') attributes last.
 	self assert: (self model entityNamed: #'Smalltalk::Object') attributes size equals: 1
 ]
 
 { #category : #testing }
-FamixPropertiesTest >> testOverridenMethods [
+LANFamixPropertiesTest >> testOverridenMethods [
 	self assert: (self model entityNamed: #Smalltalk::LANOutputServer) numberOfMethodsOverriden equals: 2
 ]
 
 { #category : #testing }
-FamixPropertiesTest >> testPropertyNamed [
+LANFamixPropertiesTest >> testPropertyNamed [
 	self assert: (self nodeClass propertyNamed: #numberOfAttributes) equals: 2.
 	self assert: self nodeClass numberOfAttributes equals: 2
 ]
 
 { #category : #testing }
-FamixPropertiesTest >> workstationClass [
+LANFamixPropertiesTest >> workstationClass [
 	^self model entityNamed: #'Smalltalk::LANWorkStation'
 ]

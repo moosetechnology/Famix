@@ -1,15 +1,15 @@
 "
-FAMIXMethod represents a behaviour in an object-oriented language.
+FamixTMethod represents a behaviour in an object-oriented language.
 
-A FAMIXMethod is always contained in a parentType.
+A FamixTMethod is always contained in a parentType.
 "
 Trait {
 	#name : #FamixTMethod,
 	#instVars : [
 		'#parentType => FMOne type: #FamixTWithMethods opposite: #methods'
 	],
-	#traits : '(FamixTHasSignature + FamixTInvocable + FamixTMethodMetrics + FamixTNamedEntity + FamixTTypedEntity + FamixTWithImplicitVariables + FamixTWithLocalVariables + FamixTWithParameters + FamixTWithStatements + TOODependencyQueries withPrecedenceOf: FamixTWithStatements)',
-	#classTraits : '(FamixTHasSignature classTrait + FamixTInvocable classTrait + FamixTMethodMetrics classTrait + FamixTNamedEntity classTrait + FamixTTypedEntity classTrait + FamixTWithImplicitVariables classTrait + FamixTWithLocalVariables classTrait + FamixTWithParameters classTrait + FamixTWithStatements classTrait + TOODependencyQueries classTrait withPrecedenceOf: FamixTWithStatements classTrait)',
+	#traits : '(FamixTHasSignature + FamixTInvocable + FamixTMethodMetrics + FamixTNamedEntity + FamixTSourceEntity + FamixTTypedEntity + FamixTWithImplicitVariables + FamixTWithLocalVariables + FamixTWithParameters + FamixTWithStatements + TEntityMetaLevelDependency + TOODependencyQueries withPrecedenceOf: FamixTWithStatements)',
+	#classTraits : '(FamixTHasSignature classTrait + FamixTInvocable classTrait + FamixTMethodMetrics classTrait + FamixTNamedEntity classTrait + FamixTSourceEntity classTrait + FamixTTypedEntity classTrait + FamixTWithImplicitVariables classTrait + FamixTWithLocalVariables classTrait + FamixTWithParameters classTrait + FamixTWithStatements classTrait + TEntityMetaLevelDependency classTrait + TOODependencyQueries classTrait withPrecedenceOf: FamixTWithStatements classTrait)',
 	#category : #'Famix-Traits-Behavioral'
 }
 
@@ -27,6 +27,29 @@ FamixTMethod classSide >> annotationFamixMethodGroup [
 	<generated>
 	<mooseGroup>
 	^ FamixMethodGroup
+]
+
+{ #category : #testing }
+FamixTMethod >> isDelegating [
+
+	^ (self outgoingInvocations flatCollect: #target) anySatisfy: [ :each | 
+		  each signature == self signature and: [ 
+			  (each isInSameClassAs: self) not ] ] 
+]
+
+{ #category : #testing }
+FamixTMethod >> isExtending [
+
+	^ (self outgoingInvocations reject: [ :each | each receiver isNil ]) 
+		  anySatisfy: [ :each | 
+			  each receiver name = 'super' and: [ 
+				  (each candidates collect: #signature) includes: self signature ] ]
+]
+
+{ #category : #testing }
+FamixTMethod >> isInSameClassAs: aMethod [
+
+	^ aMethod parentType == self parentType
 ]
 
 { #category : #testing }

@@ -1,5 +1,5 @@
 "
-FAMIXLocalVariable represents a local variable in the scope of a behavioural entity.
+FamixTLocalVariable represents a local variable in the scope of a behavioural entity.
 "
 Trait {
 	#name : #FamixTLocalVariable,

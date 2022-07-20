@@ -1,15 +1,15 @@
 "
-FAMIXPackage represents a package in the source language, meaning that it provides a means to group entities without any baring on lexical scoping. 
+FamixTPackage represents a package in the source language, meaning that it provides a means to group entities without any baring on lexical scoping. 
 
-Java extractors map Java packages to FAMIXNamespaces. They can also mirror the same information in terms of FAMIXPackage instances.
+Java extractors map Java packages to FamixTNamespaces. They can also mirror the same information in terms of FamixTPackage instances.
 "
 Trait {
 	#name : #FamixTPackage,
 	#instVars : [
 		'#childEntities => FMMany type: #FamixTPackageable opposite: #parentPackage'
 	],
-	#traits : 'FamixTNamedEntity',
-	#classTraits : 'FamixTNamedEntity classTrait',
+	#traits : 'FamixTNamedEntity + FamixTSourceEntity + TEntityMetaLevelDependency',
+	#classTraits : 'FamixTNamedEntity classTrait + FamixTSourceEntity classTrait + TEntityMetaLevelDependency classTrait',
 	#category : #'Famix-Traits-Package'
 }
 

@@ -84,12 +84,14 @@ FamixTest1Generator >> defineHierarchy [
 		--|> namedEntity ;
 		--|> #TWithSourceLanguages ;
 		--|> #TAttribute;
+		--|> #TSourceEntity;
 	  --|> tCanBeClassSide.
 
 	class
 		--|> namedEntity ;
 		--|> #TWithSourceLanguages ;
 		--|> #TClass ;
+		--|> #TSourceEntity;
 		--|> #TWithComments.
 
 	file --|> namedEntity.
@@ -142,3 +144,4 @@ FamixTest1Generator >> newBuilder [
 		withImportingContext;
 		yourself
 ]
+

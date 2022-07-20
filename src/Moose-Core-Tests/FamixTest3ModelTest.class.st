@@ -28,13 +28,16 @@ FamixTest3ModelTest >> testExport [
 
 { #category : #tests }
 FamixTest3ModelTest >> testPrintOn [
+
 	self assert: group printString equals: 'a FamixTest3Model #noname(0)'.
 	group name: 'hello'.
 	self assert: group printString equals: 'a FamixTest3Model #hello(0)'.
 	group name: 'hello2'.
 	group add: MooseEntity new.
 	self assert: group printString equals: 'a FamixTest3Model #hello2(1)'.
-	self assert: self actualClass meta printString equals: 'a FMMetaModel'
+	self
+		assert: self actualClass metamodel printString
+		equals: 'a FMMetaModel'
 ]
 
 { #category : #tests }

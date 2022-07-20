@@ -113,6 +113,12 @@ FamixJavaImportingContext >> importGlobalVariable [
 ]
 
 { #category : #testing }
+FamixJavaImportingContext >> importImplementation [
+	<generated>
+	^ self import: FamixJavaImplementation
+]
+
+{ #category : #testing }
 FamixJavaImportingContext >> importImplicitVariable [
 	<generated>
 	^ self import: FamixJavaImplicitVariable
@@ -128,6 +134,12 @@ FamixJavaImportingContext >> importIndexedFileAnchor [
 FamixJavaImportingContext >> importInheritance [
 	<generated>
 	^ self import: FamixJavaInheritance
+]
+
+{ #category : #testing }
+FamixJavaImportingContext >> importInterface [
+	<generated>
+	^ self import: FamixJavaInterface
 ]
 
 { #category : #testing }
@@ -176,6 +188,12 @@ FamixJavaImportingContext >> importParameterType [
 FamixJavaImportingContext >> importParameterizableClass [
 	<generated>
 	^ self import: FamixJavaParameterizableClass
+]
+
+{ #category : #testing }
+FamixJavaImportingContext >> importParameterizableInterface [
+	<generated>
+	^ self import: FamixJavaParameterizableInterface
 ]
 
 { #category : #testing }
@@ -353,6 +371,12 @@ FamixJavaImportingContext >> shouldImportGlobalVariable [
 ]
 
 { #category : #testing }
+FamixJavaImportingContext >> shouldImportImplementation [
+	<generated>
+	^ self shouldImport: FamixJavaImplementation
+]
+
+{ #category : #testing }
 FamixJavaImportingContext >> shouldImportImplicitVariable [
 	<generated>
 	^ self shouldImport: FamixJavaImplicitVariable
@@ -368,6 +392,12 @@ FamixJavaImportingContext >> shouldImportIndexedFileAnchor [
 FamixJavaImportingContext >> shouldImportInheritance [
 	<generated>
 	^ self shouldImport: FamixJavaInheritance
+]
+
+{ #category : #testing }
+FamixJavaImportingContext >> shouldImportInterface [
+	<generated>
+	^ self shouldImport: FamixJavaInterface
 ]
 
 { #category : #testing }
@@ -416,6 +446,12 @@ FamixJavaImportingContext >> shouldImportParameterType [
 FamixJavaImportingContext >> shouldImportParameterizableClass [
 	<generated>
 	^ self shouldImport: FamixJavaParameterizableClass
+]
+
+{ #category : #testing }
+FamixJavaImportingContext >> shouldImportParameterizableInterface [
+	<generated>
+	^ self shouldImport: FamixJavaParameterizableInterface
 ]
 
 { #category : #testing }

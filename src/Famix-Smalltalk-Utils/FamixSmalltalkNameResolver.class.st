@@ -55,33 +55,50 @@ FamixSmalltalkNameResolver class >> signatureFromSmalltalkSelectorOn: aName [
 ]
 
 { #category : #'naming conventions' }
-FamixSmalltalkNameResolver class >> smalltalkClassFromFamixClassName: aFAMIXName ifAbsent: aBlock [
-	"Given the FAMIX2 name for a class (for a meta class or not): return 
-	that Smalltalk class."
+FamixSmalltalkNameResolver class >> smalltalkClassFromFamixClassName: aFamixStName ifAbsent: aBlock [
+
+	"Given the FamixSt name of a class (meta class or not): return that Smalltalk class."
 
 	| stName isMeta newName |
-	stName := self smalltalkClassNameFromFamixClassName: aFAMIXName.
+	stName := self smalltalkClassNameFromFamixClassName: aFamixStName.
 	isMeta := '*' , self stMetaclassTag match: stName.
-	newName := isMeta ifTrue: [ stName copyFrom: 1 to: stName size - self stMetaclassTag size ] ifFalse: [ stName ].
-	^ (self findClassNamedOrNilFromFullName: newName) ifNil: [ aBlock value ] ifNotNil: [ :res | isMeta ifTrue: [ res class ] ifFalse: [ res ] ]
+	newName := isMeta
+		           ifTrue: [ 
+		           stName
+			           copyFrom: 1
+			           to: stName size - self stMetaclassTag size ]
+		           ifFalse: [ stName ].
+	^ (self findClassNamedOrNilFromFullName: newName)
+		  ifNil: [ aBlock value ]
+		  ifNotNil: [ :res | 
+			  isMeta
+				  ifTrue: [ res class ]
+				  ifFalse: [ res ] ]
 ]
 
 { #category : #'naming conventions' }
-FamixSmalltalkNameResolver class >> smalltalkClassNameFromFamixClassName: aFAMIXName [
-	"Given the FAMIX2 name for a class (for a meta class or not): return the Smalltalk name."
+FamixSmalltalkNameResolver class >> smalltalkClassNameFromFamixClassName: aFamixStName [
+
+	"Given the FamixSt name of a class (meta class or not): return the Smalltalk name."
 
 	| isMetaclass index |
-	isMetaclass := '*' , self metaclassTag match: aFAMIXName.
-	
-	"we check whether there is a reference to a namespace in the famix name"
-	index := aFAMIXName findString: self famixNamespaceSeparator.
-	index := index isZero 
-				ifTrue: [1]
-				ifFalse: [(aFAMIXName findString: self famixNamespaceSeparator) + self famixNamespaceSeparator size].
-	^ isMetaclass
-		ifTrue: [ ((aFAMIXName copyFrom: index to: ((aFAMIXName findString: self metaclassTag) -1) ), ' class') asSymbol]
-		ifFalse: [ (aFAMIXName copyFrom: index to: aFAMIXName size) asSymbol ]
+	isMetaclass := '*' , self metaclassTag match: aFamixStName.
 
+	"We check whether there is a reference to a namespace in the famix name"
+	index := aFamixStName findString: self famixNamespaceSeparator.
+	index := index isZero
+		         ifTrue: [ 1 ]
+		         ifFalse: [ 
+			         (aFamixStName findString: self famixNamespaceSeparator)
+			         + self famixNamespaceSeparator size ].
+	^ isMetaclass
+		  ifTrue: [ 
+			  ((aFamixStName
+				    copyFrom: index
+				    to: (aFamixStName findString: self metaclassTag) - 1)
+			   , ' class') asSymbol ]
+		  ifFalse: [ 
+		  (aFamixStName copyFrom: index to: aFamixStName size) asSymbol ]
 ]
 
 { #category : #'naming conventions' }

@@ -1,19 +1,12 @@
 "
-file :=  'ArgoUML-0.34.mse' asFileReference readStream.
+file := 'ArgoUML-0-34.mse' asFileReference readStream.
 
-dictionary := Dictionary newFrom: (
-	FamixJavaEntity withAllSubclasses collect: [ :c | 
-		cn := c name withoutPrefix: #FamixJava.
-		('FAMIX.', cn) -> ('FamixJava-Entities.', cn) ]).
-
-dictionary at: 'FAMIX.JavaSourceLanguage' put: 'FamixJava-Entities.SourceLanguage'.
-
-repo := MooseModel importFrom: file withMetamodel: FamixJavaGenerator metamodel translationDictionary: dictionary.
+repo := MooseModel importFrom: file withMetamodel: FamixJavaModel metamodel.
 
 model := MooseModel new.
-	model silentlyAddAll: repo elements.
-	model entityStorage forRuntime.
-model.
+model silentlyAddAll: repo elements.
+model entityStorage forRuntime.
+model
 "
 Class {
 	#name : #FamixJavaEntity,
@@ -81,6 +74,13 @@ FamixJavaEntity >> isImplicitVariable [
 
 { #category : #testing }
 FamixJavaEntity >> isInheritance [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+FamixJavaEntity >> isInterface [
 
 	<generated>
 	^ false

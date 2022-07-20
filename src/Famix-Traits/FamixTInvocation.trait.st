@@ -1,6 +1,6 @@
 "
-FAMIXInvocation represents the invocation of a message (signature) on a receiver by a behavioural entity. 
-FAMIXInvocation has:
+FamixTInvocation represents the invocation of a message (signature) on a receiver by a behavioural entity. 
+FamixTInvocation has:
    (i)  sender: the behavioral entity that sends the message;
    (ii) receiver: the structural entity (variable) that receives the message;
    (iii) candidates: the list of potential behavioral entities that are actually being invoked. This is particularly useful for dynamic languages.
@@ -68,10 +68,48 @@ FamixTInvocation >> candidates: anObject [
 { #category : #printing }
 FamixTInvocation >> displayStringOn: aStream [
 
-	self receiver ifNotNil: [ :rcvr | 
-		self receiver displayStringOn: aStream.
-		aStream nextPutAll: ' -> ' ].
-	self sender ifNotNil: [ self sender displayStringOn: aStream ]
+	self sender
+		ifNotNil: [ self sender displayStringOn: aStream ]
+		ifNil: [ aStream nextPut: $? ].
+	aStream nextPutAll: ' -> '.
+	(self class usesTrait: FamixTHasSignature)
+		ifTrue: [ 
+		aStream nextPutAll: (self signature truncateWithElipsisTo: 40) ]
+		ifFalse: [ aStream nextPutAll: ' ? ' ].
+	aStream nextPutAll: ' -> '.
+	self receiver
+		ifNotNil: [ :rcvr | self receiver displayStringOn: aStream ]
+		ifNil: [ aStream nextPut: $? ]
+]
+
+{ #category : #'instance creation' }
+FamixTInvocation >> getReceivingFAMIXClass [
+
+	self
+		deprecated: 'Please use getReceivingFamixClass instead'
+		transformWith: '`@receiver getReceivingFAMIXClass'
+			-> '`@receiver getReceivingFamixClass'.
+	^ self getReceivingFamixClass
+]
+
+{ #category : #'instance creation' }
+FamixTInvocation >> getReceivingFamixClass [
+
+	"Returns the Famix class of the receiver. If the receiver is a Famix class, this one is returned. 
+	If it is self or super, the corresponding Famix class is returned. 
+	The receiver may not be nil"
+
+	| tmpReceiver |
+	tmpReceiver := self receiver.
+
+	tmpReceiver isImplicitVariable
+		ifTrue: [ 
+			| belongsTo |
+			belongsTo := tmpReceiver belongsTo parentType.
+			tmpReceiver isSelf ifTrue: [ ^ belongsTo ].
+			tmpReceiver isSuper ifTrue: [ 
+				^ belongsTo superclass ifNil: [ belongsTo ] ] ]
+		ifFalse: [ ^ tmpReceiver ]
 ]
 
 { #category : #testing }
