@@ -6,8 +6,8 @@ Trait {
 	#instVars : [
 		'#functionOwner => FMOne type: #FamixTWithFunctions opposite: #functions'
 	],
-	#traits : '(FamixTHasSignature + FamixTNamedEntity + FamixTSourceEntity + FamixTTypedEntity + FamixTWithParameters + FamixTWithStatements + TEntityMetaLevelDependency withPrecedenceOf: FamixTWithStatements)',
-	#classTraits : '(FamixTHasSignature classTrait + FamixTNamedEntity classTrait + FamixTSourceEntity classTrait + FamixTTypedEntity classTrait + FamixTWithParameters classTrait + FamixTWithStatements classTrait + TEntityMetaLevelDependency classTrait withPrecedenceOf: FamixTWithStatements classTrait)',
+	#traits : 'FamixTHasSignature + FamixTNamedEntity + FamixTTypedEntity + FamixTWithParameters + FamixTWithStatements + TEntityMetaLevelDependency',
+	#classTraits : 'FamixTHasSignature classTrait + FamixTNamedEntity classTrait + FamixTTypedEntity classTrait + FamixTWithParameters classTrait + FamixTWithStatements classTrait + TEntityMetaLevelDependency classTrait',
 	#category : #'Famix-Traits-Behavioral'
 }
 

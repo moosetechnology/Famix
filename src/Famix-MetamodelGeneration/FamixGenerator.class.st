@@ -998,9 +998,7 @@ FamixGenerator >> defineHierarchy [
 	tFunction --|> tHasSignature.
 	tFunction --|> tTypedEntity.
 	tFunction --|> tWithStatements.
-	tFunction withPrecedenceOf: tWithStatements.
 	tFunction --|> #TEntityMetaLevelDependency.
-	tFunction --|> tSourceEntity.
 
 	tGlobalVariable --|> tStructuralEntity.
 	
@@ -1027,9 +1025,7 @@ FamixGenerator >> defineHierarchy [
 	tMethod --|> tTypedEntity.
 	tMethod --|> tNamedEntity.
 	tMethod --|> #TEntityMetaLevelDependency.
-	tMethod --|> tSourceEntity.
 	tMethod --|> #TOODependencyQueries.
-	tMethod withPrecedenceOf: tWithStatements.
 	
 	tMethod --|> tMethodMetrics.
 	
