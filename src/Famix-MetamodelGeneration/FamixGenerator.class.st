@@ -1027,9 +1027,7 @@ FamixGenerator >> defineHierarchy [
 	tMethod --|> tTypedEntity.
 	tMethod --|> tNamedEntity.
 	tMethod --|> #TEntityMetaLevelDependency.
-	tMethod --|> tSourceEntity.
 	tMethod --|> #TOODependencyQueries.
-	tMethod withPrecedenceOf: tWithStatements.
 	
 	tMethod --|> tMethodMetrics.
 	
