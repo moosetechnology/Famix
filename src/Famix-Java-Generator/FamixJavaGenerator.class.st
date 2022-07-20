@@ -239,7 +239,6 @@ FamixJavaGenerator >> defineHierarchy [
 
 	class --|> type.
 	class --|> #TWithExceptions.
-	class --|> #TPackageable.
 	class --|> #TClass.
 	class --|> #TLCOMMetrics.
 	class --|> #TCanBeAbstract.
@@ -247,7 +246,6 @@ FamixJavaGenerator >> defineHierarchy [
 	class --|> #THasVisibility.
 	class --|> #TCanBeClassSide. 
 	class --|> #TClassMetrics.
-	class --|> #TWithComments.
 	class --|> tJavaClassMetrics.	
 	class --|> #TCanImplement.
 	
