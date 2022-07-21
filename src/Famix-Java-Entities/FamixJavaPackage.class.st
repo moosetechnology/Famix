@@ -1,8 +1,8 @@
 Class {
 	#name : #FamixJavaPackage,
 	#superclass : #FamixJavaContainerEntity,
-	#traits : 'FamixTPackage + FamixTPackageable + FamixTWithGlobalVariables',
-	#classTraits : 'FamixTPackage classTrait + FamixTPackageable classTrait + FamixTWithGlobalVariables classTrait',
+	#traits : 'FamixTPackage + FamixTPackageable + FamixTWithComments + FamixTWithGlobalVariables',
+	#classTraits : 'FamixTPackage classTrait + FamixTPackageable classTrait + FamixTWithComments classTrait + FamixTWithGlobalVariables classTrait',
 	#category : #'Famix-Java-Entities-Entities'
 }
 
