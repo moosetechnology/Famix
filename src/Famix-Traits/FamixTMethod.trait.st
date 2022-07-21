@@ -70,21 +70,6 @@ FamixTMethod >> mooseNameOn: stream [
 		ifNil: [ self name ifNotNil: [ :aName | stream nextPutAll: aName ] ]
 ]
 
-{ #category : #metrics }
-FamixTMethod >> numberOfMessageSends [
-	<FMProperty: #numberOfMessageSends type: #Number>
-	<derived>
-	<FMComment: 'The number of message from a method'>
-	^ self
-		lookUpPropertyNamed: #numberOfMessageSends
-		computedAs: [ self notExistentMetricValue ]
-]
-
-{ #category : #metrics }
-FamixTMethod >> numberOfMessageSends: aNumber [
-	self cacheAt: #numberOfMessageSends put: aNumber
-]
-
 { #category : #accessing }
 FamixTMethod >> parentType [
 	"Relation named: #parentType type: #FamixTWithMethods opposite: #methods"
