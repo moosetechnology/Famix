@@ -124,15 +124,6 @@ FamixMethodTest >> testNumberOfLinesOfCode [
 ]
 
 { #category : #tests }
-FamixMethodTest >> testNumberOfMessageSends [
-
-	self assert: m1 numberOfMessageSends equals: model notExistentMetricValue.
-	m1 numberOfMessageSends: 100.
-	self assert: m1 numberOfMessageSends equals: 100.
-
-]
-
-{ #category : #tests }
 FamixMethodTest >> testParentType [
 
 	self assertCollection: m1 parentType equals: c1.
