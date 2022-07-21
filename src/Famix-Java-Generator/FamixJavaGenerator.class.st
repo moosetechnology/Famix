@@ -320,6 +320,7 @@ FamixJavaGenerator >> defineHierarchy [
 	package --|> #TWithGlobalVariables.
 	package --|> #TPackage.
 	package --|> #TPackageable.
+	package --|> #TWithComments.
 
 	parameter --|> namedEntity.
 	parameter --|> #TParameter.
