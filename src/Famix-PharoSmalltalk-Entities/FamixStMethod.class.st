@@ -224,6 +224,11 @@ FamixStMethod >> numberOfMessageSends [
 ]
 
 { #category : #'Famix-Extensions-private' }
+FamixStMethod >> numberOfMessageSends: aNumber [
+	self cacheAt: #numberOfMessageSends put: aNumber
+]
+
+{ #category : #'Famix-Extensions-private' }
 FamixStMethod >> numberOfStatements [
 	<FMProperty: #numberOfStatements type: #Number>
 	<FMComment: 'The number of statements in a method'>

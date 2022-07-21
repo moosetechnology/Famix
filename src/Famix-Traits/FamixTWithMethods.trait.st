@@ -58,22 +58,6 @@ FamixTWithMethods >> numberOfAbstractMethods: aNumber [
 	self cacheAt: #numberOfAbstractMethods put: aNumber
 ]
 
-{ #category : #metrics }
-FamixTWithMethods >> numberOfMessageSends [
-	<FMProperty: #numberOfMessageSends type: #Number>
-	<derived>
-	<FMComment: 'The number of message sends from a class'>
-	
-	^self
-		lookUpPropertyNamed: #numberOfMessageSends
-		computedAs: [self methodsGroup sumNumbers: #numberOfMessageSends]
-]
-
-{ #category : #metrics }
-FamixTWithMethods >> numberOfMessageSends: aNumber [
-	self cacheAt: #numberOfMessageSends put: aNumber
-]
-
 { #category : #accessing }
 FamixTWithMethods >> numberOfMethods [
 	<FMProperty: #numberOfMethods type: #Number>
