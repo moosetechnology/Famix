@@ -1,8 +1,8 @@
 Class {
 	#name : #FamixStNamedEntity,
 	#superclass : #FamixStSourcedEntity,
-	#traits : 'FamixTInvocationsReceiver + FamixTNamedEntity + FamixTPackageable + FamixTWithAnnotationInstances + TEntityMetaLevelDependency',
-	#classTraits : 'FamixTInvocationsReceiver classTrait + FamixTNamedEntity classTrait + FamixTPackageable classTrait + FamixTWithAnnotationInstances classTrait + TEntityMetaLevelDependency classTrait',
+	#traits : 'FamixTInvocationsReceiver + FamixTNamedEntity + FamixTPackageable + TEntityMetaLevelDependency',
+	#classTraits : 'FamixTInvocationsReceiver classTrait + FamixTNamedEntity classTrait + FamixTPackageable classTrait + TEntityMetaLevelDependency classTrait',
 	#category : #'Famix-PharoSmalltalk-Entities-Entities'
 }
 
