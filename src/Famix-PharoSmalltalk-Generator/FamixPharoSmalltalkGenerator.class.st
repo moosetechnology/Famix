@@ -127,11 +127,11 @@ FamixPharoSmalltalkGenerator >> defineHierarchy [
 	method --|> #TCanBeAbstract.
 	method --|> #THasKind.
 	method --|> #TWithComments.
+	method --|> #TWithAnnotationInstances.
 	method --|> #TCanBeClassSide.
 
 	namedEntity --|> #TPackageable.
 	namedEntity --|> #TInvocationsReceiver.
-	namedEntity --|> #TWithAnnotationInstances.
 	namedEntity --|> #TEntityMetaLevelDependency.
 	namedEntity --|> sourcedEntity.
 
