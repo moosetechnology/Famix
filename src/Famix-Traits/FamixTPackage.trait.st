@@ -8,8 +8,8 @@ Trait {
 	#instVars : [
 		'#childEntities => FMMany type: #FamixTPackageable opposite: #parentPackage'
 	],
-	#traits : 'FamixTNamedEntity + FamixTSourceEntity + TEntityMetaLevelDependency',
-	#classTraits : 'FamixTNamedEntity classTrait + FamixTSourceEntity classTrait + TEntityMetaLevelDependency classTrait',
+	#traits : 'FamixTNamedEntity + FamixTSourceEntity + FamixTWithClasses + TEntityMetaLevelDependency',
+	#classTraits : 'FamixTNamedEntity classTrait + FamixTSourceEntity classTrait + FamixTWithClasses classTrait + TEntityMetaLevelDependency classTrait',
 	#category : #'Famix-Traits-Package'
 }
 

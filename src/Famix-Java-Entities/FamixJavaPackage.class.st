@@ -115,11 +115,6 @@ FamixJavaPackage >> childrenOfMyKind [
 	^ self childEntities allWithSubTypesOf: self class
 ]
 
-{ #category : #accessing }
-FamixJavaPackage >> classes [
-	^ self cacheAt: #classes ifAbsentPut: [ self childEntities select: [ :child | child isClass ] ]
-]
-
 { #category : #'Famix-Extensions-accessing' }
 FamixJavaPackage >> containedEntities [
 	^ super containedEntities union: self childEntities
