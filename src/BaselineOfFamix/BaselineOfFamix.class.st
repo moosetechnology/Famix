@@ -75,7 +75,7 @@ BaselineOfFamix >> groups: spec [
 		  group: 'Core' with: #( 'Famix-Traits' 'Moose-Query-Extensions' );
 		  group: 'Minimal' with: #( 'Moose-Core' );
 		  group: 'Basic'
-		  with: #( 'Famix-BasicInfrastructure' 'Famix-MetamodelGeneration' );
+		  with: #( 'Famix-BasicInfrastructure' 'Famix-MetamodelGeneration' 'Moose-Core-Generator' );
 		  group: 'TestsResources'
 		  with: #( 'ReferenceTestResources' 'Moose-TestResources-LAN'
 			     'Moose-TestResources-LCOM' 'KGBTestResources'
@@ -146,6 +146,7 @@ BaselineOfFamix >> packages: spec [
 			spec requires: #( 'Fame' 'DeepTraverser' 'CollectionExtensions' ) ];
 		package: 'Moose-Core'
 		with: [ spec requires: #( 'Fame' 'Moose-Query' ) ];
+		package: 'Moose-Core-Generator';
 		package: 'Moose-Query-Extensions'
 		with: [ spec requires: #( 'Moose-Query' 'BasicTraits' ) ];
 		package: 'Famix-Traits' with: [ spec requires: #( 'Moose-Core' ) ];
