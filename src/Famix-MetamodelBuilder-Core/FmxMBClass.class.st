@@ -20,7 +20,7 @@ FmxMBClass >> allClassGeneralizations [
 	result := OrderedCollection new.
 	c := self.
 	[ g := c classGeneralization.
-	g isNotNil ]
+	g isNotNil and: [ g isKindOf: FmxMBClass ] ]
 		whileTrue: [ result add: g.
 			c := g ].
 	^ result
