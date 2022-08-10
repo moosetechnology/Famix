@@ -119,13 +119,13 @@ MooseGroupStorage >> includesID: mooseID [
 MooseGroupStorage >> initialize [
 
 	super initialize.
-	self species: OrderedCollection
+	species := OrderedCollection
 ]
 
 { #category : #initialization }
 MooseGroupStorage >> initialize: aSize [
 
-	self species: OrderedCollection
+	species := OrderedCollection
 ]
 
 { #category : #iterators }
