@@ -53,3 +53,17 @@ MooseModelTest1lTest >> testAllRootContainers [
 MooseModelTest1lTest >> testAllStructuralEntities [
 	self assertCollection: model allStructuralEntities hasSameElements: {a1 . a2}
 ]
+
+{ #category : #tests }
+MooseModelTest1lTest >> testNumberOfComments [
+	self assert: c1 numberOfComments equals: 0.
+	c1 resetPrivateState.
+	c1 addComment: FamixTest1Comment new.
+	self assert: c1 numberOfComments equals: 1.
+	c1 resetPrivateState.
+	c1 addComment: FamixTest1Comment new.
+	self assert: c1 numberOfComments equals: 2.
+	c1 resetPrivateState.
+	c1 numberOfComments: 100.
+	self assert: c1 numberOfComments equals: 100
+]
