@@ -15,7 +15,6 @@ Class {
 		'enum',
 		'enumValue',
 		'exception',
-		'globalVariable',
 		'implicitVariable',
 		'inheritance',
 		'invocation',
@@ -136,7 +135,6 @@ FamixJavaGenerator >> defineClasses [
 	exception := builder newClassNamed: #Exception.
 	file := builder newClassNamed: #File.
 	folder := builder newClassNamed: #Folder.
-	globalVariable := builder newClassNamed: #GlobalVariable.
 	implicitVariable := builder newClassNamed: #ImplicitVariable.
 	indexedFileAnchor := builder newClassNamed: #IndexedFileAnchor.
 	inheritance := builder newClassNamed: #Inheritance.
@@ -290,10 +288,6 @@ FamixJavaGenerator >> defineHierarchy [
 	enumValue withPrecedenceOf: #TEnumValue.
 
 	exception --|> #TException.
-
-	globalVariable --|> namedEntity.
-	globalVariable --|> #TGlobalVariable.
-	globalVariable --|> #TInvocationsReceiver.
 	
 	implicitVariable --|> namedEntity.
 	implicitVariable --|> #TImplicitVariable.
