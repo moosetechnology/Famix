@@ -253,7 +253,6 @@ FamixJavaGenerator >> defineHierarchy [
 	interface --|> #TWithInheritances.
 	interface --|> #TWithAttributes.
 	interface --|> #TInvocationsReceiver.
-	interface --|> #TOODependencyQueries.
 	interface --|> #TCanBeFinal.
 	interface --|> #THasVisibility.
 	interface --|> #TCanBeClassSide. 
@@ -266,7 +265,6 @@ FamixJavaGenerator >> defineHierarchy [
 	containerEntity --|> tWithInterfaces.
 	containerEntity --|> #TWithClasses.
 	containerEntity --|> #TWithAnnotationTypes.
-	containerEntity --|> #TOODependencyQueries.
 	
 	tWithInterfaces --|> #TWithTypes.
 

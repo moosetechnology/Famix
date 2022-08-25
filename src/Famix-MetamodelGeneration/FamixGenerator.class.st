@@ -971,7 +971,6 @@ FamixGenerator >> defineHierarchy [
 	tClass --|> tPackageable.
 	tClass --|> tInvocationsReceiver.
 	tClass --|> tWithComments.
-	tClass --|> #TOODependencyQueries.
 	
 	tClassWithVisibility --|> tClass.
 	tClassWithVisibility --|> tHasVisibility.
@@ -1025,7 +1024,6 @@ FamixGenerator >> defineHierarchy [
 	tMethod --|> tTypedEntity.
 	tMethod --|> tNamedEntity.
 	tMethod --|> #TEntityMetaLevelDependency.
-	tMethod --|> #TOODependencyQueries.
 	
 	tMethod --|> tMethodMetrics.
 	
@@ -1034,8 +1032,6 @@ FamixGenerator >> defineHierarchy [
 	tNamespace --|> tNamedEntity.
 	tNamespace --|> #TEntityMetaLevelDependency.
 	tNamespace --|> tSourceEntity.
-	tNamespace --|> #TOODependencyQueries.
-	tNamespace withPrecedenceOf: #TOODependencyQueries.
 	
 	tPackage --|> tNamedEntity.
 	tPackage --|> #TEntityMetaLevelDependency.

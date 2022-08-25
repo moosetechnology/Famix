@@ -576,7 +576,7 @@ FamixClassNavigationChefTest >> testSourcesInStaticReferencedClasses [
 { #category : #'tests - static dependencies' }
 FamixClassNavigationChefTest >> testStaticClientClasses [
 	self
-		assertCollection: (self c11FullRefereeOutSide queryStaticIncomingAssociations atScope: FamixTType)
+		assertCollection: (self c11FullRefereeOutSide queryAllIncoming atScope: FamixTType)
 		hasSameElements:
 			{self c3ReferencerInSideRefereeOutSide . self c14ReferencerOutSideRefereeOutSide . self c6FullReferencerInSideOutSide.
 			self c1FullReferencerOutSide . self c11FullRefereeOutSide}
@@ -585,31 +585,31 @@ FamixClassNavigationChefTest >> testStaticClientClasses [
 { #category : #'tests - static dependencies' }
 FamixClassNavigationChefTest >> testStaticClientClassesInto [
 	self
-		assertCollection: ((self c11FullRefereeOutSide queryStaticIncomingAssociations atScope: FamixTType) within: self n1InteractedReferencerReferee)
+		assertCollection: ((self c11FullRefereeOutSide queryAllIncoming atScope: FamixTType) within: self n1InteractedReferencerReferee)
 		hasSameElements: {self c3ReferencerInSideRefereeOutSide . self c6FullReferencerInSideOutSide . self c1FullReferencerOutSide}.
 	self
-		assertCollection: ((self c11FullRefereeOutSide queryStaticIncomingAssociations atScope: FamixTType) within: self p3InteractedReferencer)
+		assertCollection: ((self c11FullRefereeOutSide queryAllIncoming atScope: FamixTType) within: self p3InteractedReferencer)
 		hasSameElements: {self c6FullReferencerInSideOutSide}
 ]
 
 { #category : #'tests - static dependencies' }
 FamixClassNavigationChefTest >> testStaticClientClassesIntoMyNamespace [
 	self
-		assertCollection: ((self c11FullRefereeOutSide queryStaticIncomingAssociations atScope: FamixTType) withinParentUsing: FamixTNamespace)
+		assertCollection: ((self c11FullRefereeOutSide queryAllIncoming atScope: FamixTType) withinParentUsing: FamixTNamespace)
 		hasSameElements: {self c11FullRefereeOutSide}
 ]
 
 { #category : #'tests - static dependencies' }
 FamixClassNavigationChefTest >> testStaticClientClassesIntoMyPackage [
 	self
-		assertCollection: ((self c11FullRefereeOutSide queryStaticIncomingAssociations atScope: FamixTType) withinParentUsing: FamixTPackage)
+		assertCollection: ((self c11FullRefereeOutSide queryAllIncoming atScope: FamixTType) withinParentUsing: FamixTPackage)
 		hasSameElements: {self c11FullRefereeOutSide}
 ]
 
 { #category : #'tests - static dependencies' }
 FamixClassNavigationChefTest >> testStaticClientClassesOutOfMyNamespace [
 	self
-		assertCollection: ((self c11FullRefereeOutSide queryStaticIncomingAssociations atScope: FamixTType) outOfParentUsing: FamixTNamespace)
+		assertCollection: ((self c11FullRefereeOutSide queryAllIncoming atScope: FamixTType) outOfParentUsing: FamixTNamespace)
 		hasSameElements:
 			{self c3ReferencerInSideRefereeOutSide . self c14ReferencerOutSideRefereeOutSide . self c6FullReferencerInSideOutSide.
 			self c1FullReferencerOutSide}
@@ -618,7 +618,7 @@ FamixClassNavigationChefTest >> testStaticClientClassesOutOfMyNamespace [
 { #category : #'tests - static dependencies' }
 FamixClassNavigationChefTest >> testStaticClientClassesOutOfMyPackage [
 	self
-		assertCollection: ((self c11FullRefereeOutSide queryStaticIncomingAssociations atScope: FamixTType) outOfParentUsing: FamixTPackage)
+		assertCollection: ((self c11FullRefereeOutSide queryAllIncoming atScope: FamixTType) outOfParentUsing: FamixTPackage)
 		hasSameElements:
 			{self c3ReferencerInSideRefereeOutSide . self c14ReferencerOutSideRefereeOutSide . self c6FullReferencerInSideOutSide.
 			self c1FullReferencerOutSide}
@@ -626,15 +626,21 @@ FamixClassNavigationChefTest >> testStaticClientClassesOutOfMyPackage [
 
 { #category : #'tests - static dependencies' }
 FamixClassNavigationChefTest >> testStaticClientNamespaces [
+
 	self
-		assertCollection: (self c11FullRefereeOutSide queryStaticIncomingAssociations atScope: FamixTNamespace)
-		hasSameElements: {self n1InteractedReferencerReferee . self n3ReferencerReferee . self n2FullReferee}
+		assertCollection:
+		(self c11FullRefereeOutSide queryAllIncoming atScope:
+			 FamixTNamespace)
+		hasSameElements: { 
+				self n1InteractedReferencerReferee.
+				self n3ReferencerReferee.
+				self n2FullReferee }
 ]
 
 { #category : #'tests - static dependencies' }
 FamixClassNavigationChefTest >> testStaticClientPackages [
 	self
-		assertCollection: (self c11FullRefereeOutSide queryStaticIncomingAssociations atScope: FamixTPackage)
+		assertCollection: (self c11FullRefereeOutSide queryAllIncoming atScope: FamixTPackage)
 		hasSameElements:
 			{self p1FullReferencer . self p2InteractedReferencerReferee . self p3InteractedReferencer . self p7ReferencerReferee.
 			self p5FullReferee}
@@ -642,57 +648,91 @@ FamixClassNavigationChefTest >> testStaticClientPackages [
 
 { #category : #'tests - static dependencies' }
 FamixClassNavigationChefTest >> testStaticProviderClasses [
+
 	self
-		assertCollection: (self c11FullRefereeOutSide queryStaticOutgoingAssociations atScope: FamixTType)
-		hasSameElements: {self c12FullReferencerInSide . self c11FullRefereeOutSide}
+		assertCollection:
+		(self c11FullRefereeOutSide queryAllOutgoing atScope: FamixTType)
+		hasSameElements: { 
+				self c12FullReferencerInSide.
+				self c11FullRefereeOutSide }
 ]
 
 { #category : #'tests - static dependencies' }
 FamixClassNavigationChefTest >> testStaticProviderClassesInto [
+
 	self
-		assertCollection: ((self c11FullRefereeOutSide queryStaticOutgoingAssociations atScope: FamixTType) within: self p6InteractedReferee)
-		hasSameElements: {self c12FullReferencerInSide}.
+		assertCollection:
+			((self c11FullRefereeOutSide queryAllOutgoing atScope: FamixTType) 
+				 within: self p6InteractedReferee)
+		hasSameElements: { self c12FullReferencerInSide }.
 	self
-		assertCollection: ((self c11FullRefereeOutSide queryStaticOutgoingAssociations atScope: FamixTType) within: self n2FullReferee)
-		hasSameElements: {self c12FullReferencerInSide . self c11FullRefereeOutSide}
+		assertCollection:
+			((self c11FullRefereeOutSide queryAllOutgoing atScope: FamixTType) 
+				 within: self n2FullReferee)
+		hasSameElements: { 
+				self c12FullReferencerInSide.
+				self c11FullRefereeOutSide }
 ]
 
 { #category : #'tests - static dependencies' }
 FamixClassNavigationChefTest >> testStaticProviderClassesIntoMyNamespace [
+
 	self
-		assertCollection: ((self c11FullRefereeOutSide queryStaticOutgoingAssociations atScope: FamixTType) withinParentUsing: FamixTNamespace)
-		hasSameElements: {self c12FullReferencerInSide . self c11FullRefereeOutSide}
+		assertCollection:
+			((self c11FullRefereeOutSide queryAllOutgoing atScope: FamixTType) 
+				 withinParentUsing: FamixTNamespace)
+		hasSameElements: { 
+				self c12FullReferencerInSide.
+				self c11FullRefereeOutSide }
 ]
 
 { #category : #'tests - static dependencies' }
 FamixClassNavigationChefTest >> testStaticProviderClassesIntoMyPackage [
+
 	self
-		assertCollection: ((self c11FullRefereeOutSide queryStaticOutgoingAssociations atScope: FamixTType) withinParentUsing: FamixTPackage)
-		hasSameElements: {self c11FullRefereeOutSide}
+		assertCollection:
+			((self c11FullRefereeOutSide queryAllOutgoing atScope: FamixTType) 
+				 withinParentUsing: FamixTPackage)
+		hasSameElements: { self c11FullRefereeOutSide }
 ]
 
 { #category : #'tests - static dependencies' }
 FamixClassNavigationChefTest >> testStaticProviderClassesOutOfMyNamespace [
-	self assertEmpty: ((self c11FullRefereeOutSide queryStaticOutgoingAssociations atScope: FamixTType) outOfParentUsing: FamixTNamespace)
+
+	self assertEmpty:
+		((self c11FullRefereeOutSide queryAllOutgoing atScope: FamixTType) 
+			 outOfParentUsing: FamixTNamespace)
 ]
 
 { #category : #'tests - static dependencies' }
 FamixClassNavigationChefTest >> testStaticProviderClassesOutOfMyPackage [
+
 	self
-		assertCollection: ((self c11FullRefereeOutSide queryStaticOutgoingAssociations atScope: FamixTType) outOfParentUsing: FamixTPackage)
-		hasSameElements: {self c12FullReferencerInSide}
+		assertCollection:
+			((self c11FullRefereeOutSide queryAllOutgoing atScope: FamixTType) 
+				 outOfParentUsing: FamixTPackage)
+		hasSameElements: { self c12FullReferencerInSide }
 ]
 
 { #category : #'tests - static dependencies' }
 FamixClassNavigationChefTest >> testStaticProviderNamespaces [
-	self assertCollection: (self c11FullRefereeOutSide queryStaticOutgoingAssociations atScope: FamixTNamespace) hasSameElements: {self n2FullReferee}
+
+	self
+		assertCollection:
+		(self c11FullRefereeOutSide queryAllOutgoing atScope:
+			 FamixTNamespace)
+		hasSameElements: { self n2FullReferee }
 ]
 
 { #category : #'tests - static dependencies' }
 FamixClassNavigationChefTest >> testStaticProviderPackages [
+
 	self
-		assertCollection: (self c11FullRefereeOutSide queryStaticOutgoingAssociations atScope: FamixTPackage)
-		hasSameElements: {self p6InteractedReferee . self p5FullReferee}
+		assertCollection:
+		(self c11FullRefereeOutSide queryAllOutgoing atScope: FamixTPackage)
+		hasSameElements: { 
+				self p6InteractedReferee.
+				self p5FullReferee }
 ]
 
 { #category : #'tests - references' }
@@ -853,10 +893,10 @@ FamixClassNavigationChefTest >> testSureReferencedClasses [
 
 { #category : #'tests - references' }
 FamixClassNavigationChefTest >> testSureReferencedClassesIncludeAllStaticReferencedClasses [
-	self
-		assert:
-			(self model allClasses
-				allSatisfy: [ :referencer | (referencer queryAllOutgoing atScope: FamixTType) includesAll: (referencer queryStaticOutgoingAssociations atScope: FamixTType) ])
+
+	self assert: (self model allClasses allSatisfy: [ :referencer | 
+			 (referencer queryAllOutgoing atScope: FamixTType) includesAll:
+				 (referencer queryAllOutgoing atScope: FamixTType) ])
 ]
 
 { #category : #'tests - sure invocations' }
@@ -932,10 +972,10 @@ FamixClassNavigationChefTest >> testSureReferencingClasses [
 
 { #category : #'tests - references' }
 FamixClassNavigationChefTest >> testSureReferencingClassesIncludeAllStaticReferencingClasses [
-	self
-		assert:
-			(self model allClasses
-				allSatisfy: [ :referencer | (referencer queryAllIncoming atScope: FamixTType) includesAll: (referencer queryStaticIncomingAssociations atScope: FamixTType) ])
+
+	self assert: (self model allClasses allSatisfy: [ :referencer | 
+			 (referencer queryAllIncoming atScope: FamixTType) includesAll:
+				 (referencer queryAllIncoming atScope: FamixTType) ])
 ]
 
 { #category : #'tests - sure invocations' }
