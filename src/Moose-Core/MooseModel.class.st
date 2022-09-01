@@ -5,8 +5,8 @@ Class {
 	#name : #MooseModel,
 	#superclass : #MooseAbstractGroup,
 	#instVars : [
-		'name',
-		'metamodel'
+		'metamodel',
+		'name'
 	],
 	#classVars : [
 		'MostRecentOwner'

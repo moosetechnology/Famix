@@ -971,7 +971,6 @@ FamixGenerator >> defineHierarchy [
 	tClass --|> tPackageable.
 	tClass --|> tInvocationsReceiver.
 	tClass --|> tWithComments.
-	tClass --|> #TOODependencyQueries.
 	
 	tClassWithVisibility --|> tClass.
 	tClassWithVisibility --|> tHasVisibility.
@@ -1025,7 +1024,6 @@ FamixGenerator >> defineHierarchy [
 	tMethod --|> tTypedEntity.
 	tMethod --|> tNamedEntity.
 	tMethod --|> #TEntityMetaLevelDependency.
-	tMethod --|> #TOODependencyQueries.
 	
 	tMethod --|> tMethodMetrics.
 	
@@ -1034,8 +1032,6 @@ FamixGenerator >> defineHierarchy [
 	tNamespace --|> tNamedEntity.
 	tNamespace --|> #TEntityMetaLevelDependency.
 	tNamespace --|> tSourceEntity.
-	tNamespace --|> #TOODependencyQueries.
-	tNamespace withPrecedenceOf: #TOODependencyQueries.
 	
 	tPackage --|> tNamedEntity.
 	tPackage --|> #TEntityMetaLevelDependency.
@@ -1095,8 +1091,6 @@ FamixGenerator >> defineProperties [
 		 defaultValue: false) comment:
 		'Entity can be declared class side i.e. static'.
 
-	(tFileAnchor property: #correspondingFile type: #FamixTFile) 
-		comment: 'File associated to this source anchor'.
 	(tFileAnchor property: #encoding type: #String) comment:
 		'A string representing the encoding of a file'.
 	(tFileAnchor property: #fileName type: #String) comment:
@@ -1285,6 +1279,12 @@ FamixGenerator >> defineRelations [
 		*-
 	((tWithFileIncludes property: #incomingIncludeRelations)
 			comment: 'The include entities that have this file as a target.').
+			
+	((tFileAnchor property: #correspondingFile) 
+		comment: 'File associated to this source anchor')
+		-
+	((tFile property: #fileAnchor ) 
+		comment: 'SourceAnchor associated to this file')	.
 
 	((tFunction property: #functionOwner)
 			comment: 'The container defining the function. The function is placed in a container, because certain languages can nest functions in functions.';

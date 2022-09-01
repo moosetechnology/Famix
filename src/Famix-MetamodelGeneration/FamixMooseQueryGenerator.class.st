@@ -3,8 +3,7 @@ Class {
 	#superclass : #FamixMetamodelGenerator,
 	#instVars : [
 		'tAssociationMetaLevelDependency',
-		'tEntityMetaLevelDependency',
-		'tOODependencyQueries'
+		'tEntityMetaLevelDependency'
 	],
 	#category : #'Famix-MetamodelGeneration'
 }
@@ -22,17 +21,9 @@ FamixMooseQueryGenerator class >> prefix [
 ]
 
 { #category : #definition }
-FamixMooseQueryGenerator >> defineHierarchy [
-
-	tOODependencyQueries --|> tEntityMetaLevelDependency.
-
-]
-
-{ #category : #definition }
 FamixMooseQueryGenerator >> defineTraits [
 
 	tAssociationMetaLevelDependency := builder newTraitNamed: #TAssociationMetaLevelDependency.
 	tEntityMetaLevelDependency := builder newTraitNamed: #TEntityMetaLevelDependency.
-	tOODependencyQueries := builder newTraitNamed: #TOODependencyQueries.
 
 ]
