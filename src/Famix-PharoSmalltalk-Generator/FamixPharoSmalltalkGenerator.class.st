@@ -146,8 +146,6 @@ FamixPharoSmalltalkGenerator >> defineHierarchy [
 	package --|> #TWithGlobalVariables.
 	package --|> #TWithClasses.
 	package --|> #TCohesionCouplingMetrics.
-	package --|> #TOODependencyQueries.
-	package withPrecedenceOf: #TOODependencyQueries.
 
 	parameter --|> namedEntity.
 	parameter --|> #TParameter.
