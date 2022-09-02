@@ -66,6 +66,13 @@ FamixJavaEntity >> isClass [
 ]
 
 { #category : #testing }
+FamixJavaEntity >> isException [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
 FamixJavaEntity >> isImplicitVariable [
 
 	<generated>

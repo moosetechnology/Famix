@@ -41,12 +41,6 @@ FamixJavaImportingContext >> importAttribute [
 ]
 
 { #category : #testing }
-FamixJavaImportingContext >> importCaughtException [
-	<generated>
-	^ self import: FamixJavaCaughtException
-]
-
-{ #category : #testing }
 FamixJavaImportingContext >> importClass [
 	<generated>
 	^ self import: FamixJavaClass
@@ -62,12 +56,6 @@ FamixJavaImportingContext >> importComment [
 FamixJavaImportingContext >> importContainerEntity [
 	<generated>
 	^ self import: FamixJavaContainerEntity
-]
-
-{ #category : #testing }
-FamixJavaImportingContext >> importDeclaredException [
-	<generated>
-	^ self import: FamixJavaDeclaredException
 ]
 
 { #category : #testing }
@@ -233,12 +221,6 @@ FamixJavaImportingContext >> importSourcedEntity [
 ]
 
 { #category : #testing }
-FamixJavaImportingContext >> importThrownException [
-	<generated>
-	^ self import: FamixJavaThrownException
-]
-
-{ #category : #testing }
 FamixJavaImportingContext >> importType [
 	<generated>
 	^ self import: FamixJavaType
@@ -293,12 +275,6 @@ FamixJavaImportingContext >> shouldImportAttribute [
 ]
 
 { #category : #testing }
-FamixJavaImportingContext >> shouldImportCaughtException [
-	<generated>
-	^ self shouldImport: FamixJavaCaughtException
-]
-
-{ #category : #testing }
 FamixJavaImportingContext >> shouldImportClass [
 	<generated>
 	^ self shouldImport: FamixJavaClass
@@ -314,12 +290,6 @@ FamixJavaImportingContext >> shouldImportComment [
 FamixJavaImportingContext >> shouldImportContainerEntity [
 	<generated>
 	^ self shouldImport: FamixJavaContainerEntity
-]
-
-{ #category : #testing }
-FamixJavaImportingContext >> shouldImportDeclaredException [
-	<generated>
-	^ self shouldImport: FamixJavaDeclaredException
 ]
 
 { #category : #testing }
@@ -482,12 +452,6 @@ FamixJavaImportingContext >> shouldImportSourceTextAnchor [
 FamixJavaImportingContext >> shouldImportSourcedEntity [
 	<generated>
 	^ self shouldImport: FamixJavaSourcedEntity
-]
-
-{ #category : #testing }
-FamixJavaImportingContext >> shouldImportThrownException [
-	<generated>
-	^ self shouldImport: FamixJavaThrownException
 ]
 
 { #category : #testing }
