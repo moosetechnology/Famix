@@ -126,7 +126,7 @@ LANFamixPropertiesTest >> testClassMethods [
 		equals: (self nodeClass propertyNamed: #numberOfMethods).
 	self
 		assert: (self workstationClass propertyNamed: #numberOfMethodsInherited)
-		equals: (self nodeClass propertyNamed: #numberOfMethods) + (self nodeClass propertyNamed: #numberOfMethodsInherited).
+		equals: 9.
 	self assert: (self workstationClass propertyNamed: #numberOfLocallyDefinedMethods) equals: 1.
 	self assert: (self workstationClass propertyNamed: #numberOfMethodsOverriden) equals: 3.
 	self

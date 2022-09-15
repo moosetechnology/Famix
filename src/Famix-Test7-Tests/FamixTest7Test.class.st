@@ -85,6 +85,30 @@ FamixTest7Test >> setUp [
 
 ]
 
+{ #category : #tests }
+FamixTest7Test >> testAddedMethods [
+
+	self assertCollection: c1 addedMethods hasSameElements: c1 methods.
+	self assertCollection: c2 addedMethods hasSameElements: {m3}.
+	self assertCollection: c3 addedMethods hasSameElements: { m6. m7 }
+]
+
+{ #category : #tests }
+FamixTest7Test >> testAllHierarchyMethods [
+
+	self assert: c1 allHierarchyMethods isEmpty .
+	self assertCollection: c2 allHierarchyMethods hasSameElements: c1 methods.
+	self assertCollection: c3 allHierarchyMethods hasSameElements: c1 methods , c2 methods
+]
+
+{ #category : #tests }
+FamixTest7Test >> testAllMethods [
+
+	self assertCollection: c1 allMethods hasSameElements: c1 methods.
+	self assertCollection: c2 allMethods hasSameElements:  {m3 . m5. m9. m1. m11 }.
+	self assertCollection: c3 allMethods hasSameElements: { m4. m6. m7. m10. m3. m5. m11 }
+]
+
 { #category : #running }
 FamixTest7Test >> testClassNumberOfMethods [
 
@@ -99,4 +123,12 @@ FamixTest7Test >> testInheritedMethods [
 	self assert: c1 inheritedMethods size equals: 0.
 	self assertCollection: c2 inheritedMethods hasSameElements: {m1. m11}.
 	self assertCollection: c3 inheritedMethods hasSameElements: { m3. m5. m11 }
+]
+
+{ #category : #tests }
+FamixTest7Test >> testOverriddenMethods [
+
+	self assert: c1 overriddenMethods isEmpty .
+	self assertCollection: c2 overriddenMethods hasSameElements:  {m5. m9. }.
+	self assertCollection: c3 overriddenMethods hasSameElements: { m4. m10. }
 ]
