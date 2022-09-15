@@ -95,7 +95,8 @@ BaselineOfFamix >> groups: spec [
 		  with: #( 'Moose-GenericImporter' 'Moose-SmalltalkImporter' );
 		  group: 'TestModels'
 		  with: #( 'Famix-Test1-Entities' 'Famix-Test2-Entities'
-			     'Famix-Test3-Entities' 'Famix-Test4-Entities' );
+			     'Famix-Test3-Entities' 'Famix-Test4-Entities' 'Famix-Test7-Entities' );
+		
 		  group: 'Tests'
 		  with: #( 'Famix-Tests' 'Moose-Query-Test' 'Moose-Core-Tests'
 			     'Famix-Smalltalk-Utils-Tests' 'Moose-SmalltalkImporter-LAN-Tests'
@@ -104,7 +105,7 @@ BaselineOfFamix >> groups: spec [
 			     'Famix-Java-Tests' 'Famix-VerveineJ-Tests'
 			     'Famix-PharoSmalltalk-Tests' 'Famix-TestGenerators'
 			     'Famix-MetamodelBuilder-Tests' 'Famix-Test1-Tests'
-			     'Famix-Test2-Tests' 'Famix-Test3-Tests' 'Famix-Test4-Tests'
+			     'Famix-Test2-Tests' 'Famix-Test3-Tests' 'Famix-Test4-Tests' 'Famix-Test7-Tests'
 			     'Famix-TestComposedSubmetamodel1-Entities'
 			     'Famix-TestComposedSubmetamodel2-Entities'
 			     'Famix-TestComposedMetamodel-Entities'
