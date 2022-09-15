@@ -28,13 +28,6 @@ FamixTest7Entity >> isAssociation [
 ]
 
 { #category : #testing }
-FamixTest7Entity >> isAttribute [
-
-	<generated>
-	^ false
-]
-
-{ #category : #testing }
 FamixTest7Entity >> isBehavioural [
 
 	<generated>
@@ -57,13 +50,6 @@ FamixTest7Entity >> isInheritance [
 
 { #category : #testing }
 FamixTest7Entity >> isMethod [
-
-	<generated>
-	^ false
-]
-
-{ #category : #testing }
-FamixTest7Entity >> isStructuralEntity [
 
 	<generated>
 	^ false

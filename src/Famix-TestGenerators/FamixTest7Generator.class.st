@@ -2,7 +2,6 @@ Class {
 	#name : #FamixTest7Generator,
 	#superclass : #FamixBasicInfrastructureGenerator,
 	#instVars : [
-		'attribute',
 		'classEntity',
 		'method',
 		'inheritance'
@@ -26,7 +25,6 @@ FamixTest7Generator class >> prefix [
 FamixTest7Generator >> defineClasses [
 
 	super defineClasses.
-	attribute := builder newClassNamed: #Attribute.
 	classEntity := builder newClassNamed: #Class.
 	method := builder newClassNamed: #Method.
 	inheritance := builder newClassNamed: #Inheritance.
@@ -37,7 +35,6 @@ FamixTest7Generator >> defineClasses [
 FamixTest7Generator >> defineHierarchy [
 
 	super defineHierarchy.
-	attribute --|> #TAttribute.
 	
 	classEntity --|> #TClass.
 	
