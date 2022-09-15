@@ -50,8 +50,13 @@ FamixTClass >> inheritedMethods [
 
 	| inheritedMethods |
 	inheritedMethods := OrderedCollection new.
+
 	self allSuperclassesDo: [ :each | 
-	inheritedMethods addAll: each methods ] .
+		| workingMethods |
+		workingMethods := self methods , inheritedMethods.
+		each methods do: [ :m | 
+			(workingMethods allSatisfy: [ :m2 | m signature ~= m2 signature ]) 
+				ifTrue: [ inheritedMethods add: m ] ] ].
 	^ inheritedMethods
 ]
 
