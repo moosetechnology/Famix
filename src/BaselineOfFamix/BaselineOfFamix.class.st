@@ -250,6 +250,10 @@ BaselineOfFamix >> packages: spec [
 		with: [ spec requires: #( 'BasicTraits' ) ];
 		package: 'Famix-Test6-Tests'
 		with: [ spec requires: #( 'Famix-Test6-Entities' ) ];
+		package: 'Famix-Test7-Entities'
+		with: [ spec requires: #( 'BasicTraits' ) ];
+		package: 'Famix-Test7-Tests'
+		with: [ spec requires: #( 'Famix-Test7-Entities' ) ];
 		package: 'Famix-TestComposedSubmetamodel1-Entities'
 		with: [ spec requires: #( 'BasicTraits' ) ];
 		package: 'Famix-TestComposedSubmetamodel2-Entities'
