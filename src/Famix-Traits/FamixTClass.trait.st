@@ -30,9 +30,25 @@ FamixTClass classSide >> annotationFamixClassGroup [
 
 { #category : #metrics }
 FamixTClass >> addedMethods [
-	| inheritedMethodNames |
-	inheritedMethodNames := self inheritedMethods collect: #signature.
-	^ self methods reject: [ :each | inheritedMethodNames includes: each signature ]
+	| allHierarchyMethodSignatures |
+	allHierarchyMethodSignatures := self allHierarchyMethods collect: #signature.
+	^ self methods reject: [ :each | allHierarchyMethodSignatures includes: each signature ]
+]
+
+{ #category : #enumerating }
+FamixTClass >> allHierarchyMethods [
+
+	| allHierarchyMethods |
+	allHierarchyMethods := OrderedCollection new.
+	self allSuperclassesDo: [ :each | 
+	allHierarchyMethods addAll: each methods ] .
+	^ allHierarchyMethods
+]
+
+{ #category : #enumerating }
+FamixTClass >> allMethods [
+
+	^ self methods , self inheritedMethods 
 ]
 
 { #category : #enumerating }
@@ -50,8 +66,13 @@ FamixTClass >> inheritedMethods [
 
 	| inheritedMethods |
 	inheritedMethods := OrderedCollection new.
+
 	self allSuperclassesDo: [ :each | 
-	inheritedMethods addAll: each methods ] .
+		| workingMethods |
+		workingMethods := self methods , inheritedMethods.
+		each methods do: [ :m | 
+			(workingMethods allSatisfy: [ :m2 | m signature ~= m2 signature ]) 
+				ifTrue: [ inheritedMethods add: m ] ] ].
 	^ inheritedMethods
 ]
 
@@ -103,6 +124,12 @@ FamixTClass >> isTestCase [
 { #category : #testing }
 FamixTClass >> isTestCase: aBoolean [
 	^ self attributeAt: #isTestCase put: true
+]
+
+{ #category : #enumerating }
+FamixTClass >> overriddenMethods [
+
+	^ self methods select: [ :m | self allHierarchyMethods anySatisfy: [ :superMethod | superMethod signature = m signature ] ].
 ]
 
 { #category : #metrics }
