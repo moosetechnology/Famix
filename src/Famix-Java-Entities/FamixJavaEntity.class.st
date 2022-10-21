@@ -101,6 +101,13 @@ FamixJavaEntity >> isInvocation [
 ]
 
 { #category : #testing }
+FamixJavaEntity >> isLocalVariable [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
 FamixJavaEntity >> isMethod [
 
 	<generated>

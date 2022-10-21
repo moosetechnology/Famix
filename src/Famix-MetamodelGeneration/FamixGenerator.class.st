@@ -1557,6 +1557,7 @@ FamixGenerator >> defineTraits [
 	tGlobalVariable := builder newTraitNamed: #TGlobalVariable.
 	tGlobalVariable comment: self commentForTGlobalVariable.
 	tGlobalVariable withGroup.
+	tGlobalVariable withTesting.
 
 	tWithGlobalVariables := builder newTraitNamed: #TWithGlobalVariables.
 	tWithGlobalVariables comment: self commentForTWithGlobalVariables.
@@ -1585,6 +1586,7 @@ FamixGenerator >> defineTraits [
 
 	tLocalVariable := builder newTraitNamed: #TLocalVariable.
 	tLocalVariable comment: self commentForTLocalVariable.
+	tLocalVariable withTesting.
 
 	tMethod := builder newTraitNamed: #TMethod.
 	tMethod comment: self commentForTMethod.
