@@ -28,6 +28,13 @@ FamixTGlobalVariable classSide >> annotationFamixGlobalVariableGroup [
 	^ FamixGlobalVariableGroup
 ]
 
+{ #category : #testing }
+FamixTGlobalVariable >> isGlobalVariable [
+
+	<generated>
+	^ true
+]
+
 { #category : #accessing }
 FamixTGlobalVariable >> parentScope [
 	"Relation named: #parentScope type: #FamixTWithGlobalVariables opposite: #globalVariables"
