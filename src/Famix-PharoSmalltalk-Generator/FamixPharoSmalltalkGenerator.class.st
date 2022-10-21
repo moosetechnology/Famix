@@ -99,7 +99,6 @@ FamixPharoSmalltalkGenerator >> defineHierarchy [
 	self flag:
 		'WithTypes should not be necessary but needed in tests like FamixMetricsTest>>testAfferentCouplingFamixClassGroup'.
 	class --|> #TWithTypes.
-	class --|> #TWithExceptions.
 	class --|> #TClass.
 	class --|> #TCanBeAbstract.
 	class --|> #TClassMetrics.

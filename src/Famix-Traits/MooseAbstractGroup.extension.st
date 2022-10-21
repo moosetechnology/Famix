@@ -35,13 +35,6 @@ MooseAbstractGroup >> allBehaviourals [
 ]
 
 { #category : #'*Famix-Traits' }
-MooseAbstractGroup >> allCaughtExceptions [
-	<navigation: 'All caught exceptions'>
-	<package: #Java>
-	^ self allUsing: FamixTCaughtException
-]
-
-{ #category : #'*Famix-Traits' }
 MooseAbstractGroup >> allClasses [
 	<navigation: 'All classes'>
 	^ self allUsing: FamixTClass ofGroupClass: FamixClassGroup
@@ -53,13 +46,6 @@ MooseAbstractGroup >> allComments [
 	<navigation: 'All comments'>
 	^self allUsing: FamixTComment 
 	
-]
-
-{ #category : #'*Famix-Traits' }
-MooseAbstractGroup >> allDeclaredExceptions [
-	<navigation: 'All declared exceptions'>
-	<package: #Java>
-	^ self allUsing: FamixTDeclaredException
 ]
 
 { #category : #'*Famix-Traits' }
@@ -261,13 +247,6 @@ MooseAbstractGroup >> allTestMethods [
 	<package: #Java>
 	^ self allModelMethods select: [ :each | 
 		(each respondsTo: #isJUnit4Test) and: [ each isJUnit4Test ]]
-]
-
-{ #category : #'*Famix-Traits' }
-MooseAbstractGroup >> allThrownExceptions [
-	<navigation: 'All thrown exceptions'>
-	<package: #Java>
-	^ self allUsing: FamixTThrownException
 ]
 
 { #category : #'*Famix-Traits' }
