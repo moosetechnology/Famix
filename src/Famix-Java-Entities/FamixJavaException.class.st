@@ -1,8 +1,8 @@
 Class {
 	#name : #FamixJavaException,
 	#superclass : #FamixJavaEntity,
-	#traits : 'FamixTException',
-	#classTraits : 'FamixTException classTrait',
+	#traits : 'FamixTCanImplement + FamixTException + FamixTHasVisibility + FamixTWithAnnotationInstances + FamixTWithTypes',
+	#classTraits : 'FamixTCanImplement classTrait + FamixTException classTrait + FamixTHasVisibility classTrait + FamixTWithAnnotationInstances classTrait + FamixTWithTypes classTrait',
 	#category : #'Famix-Java-Entities-Entities'
 }
 
