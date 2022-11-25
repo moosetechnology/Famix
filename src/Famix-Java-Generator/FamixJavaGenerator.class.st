@@ -271,6 +271,10 @@ FamixJavaGenerator >> defineHierarchy [
 	enumValue withPrecedenceOf: #TEnumValue.
 
 	exception --|> #TException.
+	exception --|> #TWithAnnotationInstances.
+	exception --|> #THasVisibility.
+	exception --|> #TCanImplement.
+	exception --|> #TWithTypes.
 	
 	implicitVariable --|> namedEntity.
 	implicitVariable --|> #TImplicitVariable.
