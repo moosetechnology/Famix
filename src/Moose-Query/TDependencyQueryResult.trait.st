@@ -61,7 +61,9 @@ TDependencyQueryResult >> opposites [
 { #category : #filtering }
 TDependencyQueryResult >> outOf: aFamixEntity [
 	^ self
-		rejectDependencies: [ :dep | (self opposite: dep) asCollection anySatisfy: [ :entity | (entity allAtScope: aFamixEntity class) includes: aFamixEntity ] ]
+		rejectDependencies: [ :dep |
+			(self opposite: dep) asCollection anySatisfy: [ :entity |
+				(entity allAtScope: aFamixEntity class) includes: aFamixEntity ] ]
 ]
 
 { #category : #private }
@@ -99,7 +101,9 @@ TDependencyQueryResult >> targetsAtScope: aTraitOrClass [
 { #category : #filtering }
 TDependencyQueryResult >> within: aFamixEntity [
 	^ self
-		selectDependencies: [ :dep | (self opposite: dep) asCollection anySatisfy: [ :entity | (entity allAtScope: aFamixEntity class) includes: aFamixEntity ] ]
+		selectDependencies: [ :dep |
+			(self opposite: dep) asCollection anySatisfy: [ :entity |
+				(entity allAtScope: aFamixEntity class) includes: aFamixEntity ] ]
 ]
 
 { #category : #filtering }
@@ -112,5 +116,6 @@ TDependencyQueryResult >> withoutSelfLoops [
 
 	| parentSelectorsCache |
 	parentSelectorsCache := SmallDictionary new.
-	^ self reject: [ :dep | (self opposite: dep) isIncludedIn: self receiver parentSelectorsCache: parentSelectorsCache ]
+	^ self reject: [ :dep |
+		(self opposite: dep) isIncludedIn: self receiver parentSelectorsCache: parentSelectorsCache ]
 ]
