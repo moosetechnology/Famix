@@ -29,12 +29,6 @@ FamixTWithExceptions >> addDeclaredException: anObject [
 	^ self declaredExceptions add: anObject
 ]
 
-{ #category : #accessing }
-FamixTWithExceptions >> addException: anObject [
-	exceptions add: anObject
-
-]
-
 { #category : #adding }
 FamixTWithExceptions >> addThrownException: anObject [
 	<generated>
