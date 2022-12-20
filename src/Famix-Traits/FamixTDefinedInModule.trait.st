@@ -21,6 +21,7 @@ FamixTDefinedInModule >> parentModule [
 
 	<generated>
 	<FMComment: 'Module that contains the definition of this entity'>
+	<container>
 	^ parentModule
 ]
 
@@ -29,4 +30,11 @@ FamixTDefinedInModule >> parentModule: anObject [
 
 	<generated>
 	parentModule := anObject
+]
+
+{ #category : #navigation }
+FamixTDefinedInModule >> parentModuleGroup [
+	<generated>
+	<navigation: 'ParentModule'>
+	^ MooseSpecializedGroup with: self parentModule
 ]
