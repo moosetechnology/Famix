@@ -1225,7 +1225,8 @@ FamixGenerator >> defineRelations [
 			comment: 'list of comments defined in the entity').
 
 	((tCompilationUnit property: #compilationUnitOwner)
-			comment: 'The compilation unit that defines this module')
+			comment: 'The compilation unit that defines this module';
+			container)
 		-
 	((tWithCompilationUnits property: #compilationUnit)).
 
@@ -1285,7 +1286,7 @@ FamixGenerator >> defineRelations [
 	((tWithGlobalVariables property: #globalVariables)
 			comment: 'Global variables defined in the scope, if any.').
 
-	((tHeader property: #headerOwner))
+	((tHeader property: #headerOwner) container )
 		-
 	((tWithHeaders property: #header)
 			comment: 'The header file that defines this module').
@@ -1334,7 +1335,8 @@ FamixGenerator >> defineRelations [
 	((tModule property: #moduleEntities))
 		-*
 	((tDefinedInModule property: #parentModule)
-			comment: 'Module that contains the definition of this entity').
+			comment: 'Module that contains the definition of this entity';
+			container).
 
 	((tPackage property: #childEntities))
 		-*
@@ -1399,7 +1401,7 @@ FamixGenerator >> defineRelations [
 	((tWithInheritances property: #subInheritances)
 			comment: 'Subinheritance relationships, i.e. known subclasses of this type.').
 
-	((tTemplate property: #templateOwner))
+	((tTemplate property: #templateOwner) container)
 		*-
 	((tWithTemplates property: #templates)).
 
@@ -1412,7 +1414,7 @@ FamixGenerator >> defineRelations [
 	((tWithExceptions property: #thrownExceptions)
 			comment: 'The exceptions thrown by the method').
 
-	((tTrait property: #traitOwner))
+	((tTrait property: #traitOwner) container )
 		*-
 	((tWithTraits property: #traits)).
 
