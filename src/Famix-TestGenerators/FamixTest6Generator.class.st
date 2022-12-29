@@ -44,3 +44,9 @@ FamixTest6Generator >> defineProperties [
 	bacon property: #eggs type: #Number defaultValue: 12.
 	spam property: #isSomething type: #Boolean defaultValue: false
 ]
+
+{ #category : #initialization }
+FamixTest6Generator >> initialize [
+	super initialize.
+	self notImportedFromFile
+]

@@ -82,3 +82,9 @@ FamixTestComposedGenerator >> define [
 	(test1Custom5 property: #associations) -* (association property: #c15) target.
 	(association property: #c25) source *- (test2Custom5 property: #associations)
 ]
+
+{ #category : #initialization }
+FamixTestComposedGenerator >> initialize [
+	super initialize.
+	self notImportedFromFile
+]
