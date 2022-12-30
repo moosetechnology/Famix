@@ -42,3 +42,9 @@ FamixTest7Generator >> defineHierarchy [
 	
 	inheritance --|> #TInheritance.
 ]
+
+{ #category : #initialization }
+FamixTest7Generator >> initialize [
+	super initialize.
+	self notImportedFromFile
+]

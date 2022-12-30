@@ -86,3 +86,9 @@ FamixTest4Generator >> defineRelations [
 	(school <>-* room) withNavigation.
 	
 ]
+
+{ #category : #initialization }
+FamixTest4Generator >> initialize [
+	super initialize.
+	self notImportedFromFile
+]

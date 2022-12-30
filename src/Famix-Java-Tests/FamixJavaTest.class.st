@@ -92,3 +92,8 @@ FamixJavaTest >> testInferNamespaces [
 	model inferPackageParentsBasedOnNames.
 	self assert: model allPackages size equals: 4
 ]
+
+{ #category : #tests }
+FamixJavaTest >> testModelImportableFromFile [
+	self assert: FamixJavaModel canBeImportedFromFile
+]
