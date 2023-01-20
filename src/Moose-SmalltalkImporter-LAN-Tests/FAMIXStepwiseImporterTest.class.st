@@ -213,7 +213,7 @@ FamixStepwiseImporterTest >> testImportMergingMetaclassDoesNotDuplicateComment [
 
 	self assert: comments size equals: 1.
 	self
-		assert: comments anyOne container
+		assert: comments anyOne commentedEntity
 		equals: (importer classes at: LANInterface)
 ]
 
@@ -371,7 +371,7 @@ FamixStepwiseImporterTest >> testImportWithoutMergingMetaclassDoesDuplicateComme
 	self assert: comments size equals: 2.
 	self
 		assertCollection:
-		(comments collect: [ :comment | comment container ])
+		(comments collect: [ :comment | comment commentedEntity ])
 		hasSameElements: { 
 				(importer classes at: LANInterface).
 				(importer classes at: LANInterface class) }
