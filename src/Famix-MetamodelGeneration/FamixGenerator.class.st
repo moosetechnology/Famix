@@ -1218,11 +1218,11 @@ FamixGenerator >> defineRelations [
 	((tWithExceptions property: #caughtExceptions)
 			comment: 'The exceptions caught by the method').
 
-	((tComment property: #container)
-			comment: 'Source code entity containing the comment')
+	((tComment property: #commentedEntity)
+			comment: 'Source code commented by the comment')
 		*-
 	((tWithComments property: #comments)
-			comment: 'list of comments defined in the entity').
+			comment: 'List of comments for the entity').
 
 	((tCompilationUnit property: #compilationUnitOwner)
 			comment: 'The compilation unit that defines this module';

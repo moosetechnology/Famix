@@ -17,6 +17,6 @@ FamixStComment class >> annotation [
 
 { #category : #accessing }
 FamixStComment >> belongsTo [
-	
-	^ self container
+
+	^ self commentedEntity
 ]

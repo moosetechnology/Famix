@@ -189,7 +189,7 @@ SmalltalkImporter >> createClass: aClass [
 				| comment |
 				comment := self addEntity: self factory comment new.
 				comment content: aClass comment asString.
-				comment container: class ] ].
+				comment commentedEntity: class ] ].
 
 	^ class
 ]
