@@ -195,6 +195,29 @@ FamixStepwiseImporterTest >> testImportLANPackage [
 ]
 
 { #category : #tests }
+FamixStepwiseImporterTest >> testImportMergingMetaclassDoesNotDuplicateComment [
+
+	| importTask importer comments |
+	importTask := self newImportClassesTask.
+	importTask importerClass: SmalltalkImporter.
+	importTask importingContext: (MooseImportingContext new
+			 importClass;
+			 importComment;
+			 mergeClassAndMetaclass;
+			 yourself).
+	importTask addClass: LANInterface.
+	importer := importTask run.
+
+	comments := importer allElements select: [ :e | 
+		            e class = FamixStComment ].
+
+	self assert: comments size equals: 1.
+	self
+		assert: comments anyOne container
+		equals: (importer classes at: LANInterface)
+]
+
+{ #category : #tests }
 FamixStepwiseImporterTest >> testImportMethodBody [
 	"Check if when importing the arguments of the LAN example, methods body are imported as well"
 
@@ -327,4 +350,29 @@ FamixStepwiseImporterTest >> testImportOneClassAndOneAttributeAndMergeItsMetacla
 	importer := importTask run.
 	nodeClass := importer classes at: LANNode.
 	self assert: nodeClass attributes size equals: 2
+]
+
+{ #category : #tests }
+FamixStepwiseImporterTest >> testImportWithoutMergingMetaclassDoesDuplicateComment [
+
+	| importTask importer comments |
+	importTask := self newImportClassesTask.
+	importTask importerClass: SmalltalkImporter.
+	importTask importingContext: (MooseImportingContext new
+			 importClass;
+			 importComment;
+			 distinguishClassAndMetaclass;
+			 yourself).
+	importTask addClass: LANInterface.
+	importer := importTask run.
+
+	comments := importer allElements select: [ :e | 
+		            e class = FamixStComment ].
+	self assert: comments size equals: 2.
+	self
+		assertCollection:
+		(comments collect: [ :comment | comment container ])
+		hasSameElements: { 
+				(importer classes at: LANInterface).
+				(importer classes at: LANInterface class) }
 ]
