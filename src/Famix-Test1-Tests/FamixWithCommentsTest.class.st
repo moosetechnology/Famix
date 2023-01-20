@@ -18,8 +18,8 @@ FamixWithCommentsTest >> testComments [
 	c1 comments: { 
 			comment.
 			comment2 }.
-	self assert: comment container equals: c1.
-	self assert: comment2 container equals: c1
+	self assert: comment commentedEntity equals: c1.
+	self assert: comment2 commentedEntity equals: c1
 ]
 
 { #category : #tests }
