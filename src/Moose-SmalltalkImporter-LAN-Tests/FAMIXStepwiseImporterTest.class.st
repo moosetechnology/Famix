@@ -111,18 +111,15 @@ FamixStepwiseImporterTest >> testImportAttributeAccesses [
 
 { #category : #tests }
 FamixStepwiseImporterTest >> testImportClassAndAttributeAndMergeItsMetaclass [
-	"self debug: #testImportClassAndAttributeAndMergeItsMetaclass"
 
 	| importTask importer nodeClass |
 	importTask := self newImportClassesTask.
 	importTask importerClass: SmalltalkImporter.
-	importTask
-		importingContext:
-			(MooseImportingContext new
-				importClass;
-				importAttribute;
-				mergeClassAndMetaclass;
-				yourself).
+	importTask importingContext: (MooseImportingContext new
+			 importClass;
+			 importAttribute;
+			 mergeClassAndMetaclass;
+			 yourself).
 	importTask addClass: LANNode.
 	importer := importTask run.
 	nodeClass := importer classes at: LANNode.
@@ -274,23 +271,21 @@ FamixStepwiseImporterTest >> testImportOneClassAndItsMetaclass [
 
 { #category : #tests }
 FamixStepwiseImporterTest >> testImportOneClassAndMergeItsMetaclass [
-	"self debug: #testImportOneClassAndMergeItsMetaclass"
 
 	| importTask importer importedClasses |
 	importTask := self newImportClassesTask.
 	importTask importerClass: SmalltalkImporter.
-	importTask
-		importingContext:
-			(MooseImportingContext new
-				importClass;
-				mergeClassAndMetaclass;
-				yourself).
+	importTask importingContext: (MooseImportingContext new
+			 importClass;
+			 mergeClassAndMetaclass;
+			 yourself).
 	importTask addClass: LANNode.
 	self assert: importTask classes size equals: 1.
 	importer := importTask run.
 	importedClasses := importer classes.
 	self assert: importedClasses values asSet size equals: 3.
-	self assert: ((importedClasses at: LANNode) usesFamixTrait: FamixTClass)
+	self assert:
+		((importedClasses at: LANNode) usesFamixTrait: FamixTClass)
 ]
 
 { #category : #tests }
