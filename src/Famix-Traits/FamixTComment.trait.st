@@ -45,6 +45,8 @@ FamixTComment >> commentedEntity: anObject [
 { #category : #accessing }
 FamixTComment >> container [
 
+	"Marked as deprecated in January, 2023"
+
 	self
 		deprecated: 'Use #commentedEntity instead'
 		transformWith:
@@ -55,6 +57,8 @@ FamixTComment >> container [
 
 { #category : #accessing }
 FamixTComment >> container: anObject [
+
+	"Marked as deprecated in January, 2023"
 
 	self
 		deprecated: 'Use #commentedEntity: instead'
