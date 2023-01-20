@@ -29,6 +29,12 @@ MooseModel class >> annotation [
 
 ]
 
+{ #category : #testing }
+MooseModel class >> canBeImportedFromFile [
+
+	^ false
+]
+
 { #category : #accessing }
 MooseModel class >> defaultPackagesToProcessWith: aCollectionOfPackages [
 	"We add to the creation of a metamodel all the metamodel entities of packages declaring to be part of the metamodels by default. 
