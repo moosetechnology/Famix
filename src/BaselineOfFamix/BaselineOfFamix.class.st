@@ -55,17 +55,22 @@ BaselineOfFamix >> dependencies: spec [
 		roelTyper: spec;
 		singularizePluralize: spec;
 		talents: spec.
+	self fame: spec
+]
 
-	spec for: #( #'pharo8.x' #'pharo9.x' ) do: [ 
-		spec
-			baseline: 'Fame'
-			with: [ 
-			spec repository: 'github://moosetechnology/Fame:v1.x.x/src' ] ].
+{ #category : #baseline }
+BaselineOfFamix >> fame: spec [
 
-	spec for: #'pharo10.x' do: [ 
-		spec baseline: 'Fame' with: [ 
-			spec repository:
-				'github://moosetechnology/Fame:pharo10-compatibility/src' ] ]
+	"We load Fame development version for new Moose images."
+	"For retrocompatibility with Pharo 9 and older, the latest version is v1.1.6"
+
+	| version |
+	version := 'development'.
+	spec for: #( #'pharo8.x' #'pharo9.x' ) do: [ version := 'v1.1.6' ].
+
+	spec baseline: 'Fame' with: [ 
+		spec repository:
+			('github://moosetechnology/Fame:{1}/src' format: { version }) ]
 ]
 
 { #category : #baseline }
