@@ -41,9 +41,9 @@ MooseGroupSetupStorage >> do: aBlock [
 ]
 
 { #category : #accessing }
-MooseGroupSetupStorage >> elements [ 
-	 
-	^self asArray
+MooseGroupSetupStorage >> elements [
+
+	^ self asArray
 ]
 
 { #category : #'accessing-sequenceable' }
@@ -56,13 +56,14 @@ MooseGroupSetupStorage >> first [
 MooseGroupSetupStorage >> initialize [
 	super initialize.
 
-	elements := OrderedCollection new: 10000
+	elements := self species new: 10000
 ]
 
 { #category : #initialization }
-MooseGroupSetupStorage >> initialize: capacity [ 
-	 
-	elements := OrderedCollection new: capacity
+MooseGroupSetupStorage >> initialize: capacity [
+
+	super initialize: capacity.
+	elements := self species new: capacity
 ]
 
 { #category : #'accessing-sequenceable' }
@@ -101,4 +102,16 @@ MooseGroupSetupStorage >> selectAllWithType: aSmalltalkClass [
 MooseGroupSetupStorage >> size [ 
 	 
 	^elements size
+]
+
+{ #category : #accessing }
+MooseGroupSetupStorage >> species: anObject [
+
+	"WARNING: Changing the species of the inner collection might have unattempted consequences.
+	DO NOT EXECUTE THIS METHOD EXCEPT IF YOU ARE REALLY SURE OF YOUR NEED
+	
+	For instance, `model species: Set` would make indexed access to collection element impossible"
+
+	super species: anObject.
+	elements := self species withAll: elements
 ]

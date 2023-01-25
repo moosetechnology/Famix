@@ -362,7 +362,7 @@ TEntityMetaLevelDependency >> allParents [
 
 { #category : #accessing }
 TEntityMetaLevelDependency >> allProviders [
-	^ self lookUpPropertyNamed: #allProvidiers computedAs: [ self allProvidersAtScope: self class ]
+	^ self lookUpPropertyNamed: #allProviders computedAs: [ self allProvidersAtScope: self class ]
 ]
 
 { #category : #accessing }
@@ -688,6 +688,46 @@ TEntityMetaLevelDependency >> numberOfChildren [
 	<FMComment: 'Number of direct children entities in the containment tree.'>
 	<derived>
 	^ self isContainerEntity ifTrue: [ self children size ] ifFalse: [ 0 ]
+]
+
+{ #category : #accessing }
+TEntityMetaLevelDependency >> numberOfExternalClients [
+	<FMProperty: #numberOfExternalClients type: #Number>
+	<derived>
+	<FMComment: 'Number of call from myself to outside my container.'>
+	^ self
+		lookUpPropertyNamed: #numberOfExternalClients
+		computedAs: [ (self allClients reject: [ :entity | entity allParents includesAny: self parents ]) size ]
+]
+
+{ #category : #accessing }
+TEntityMetaLevelDependency >> numberOfExternalProviders [
+	<FMProperty: #numberOfExternalProviders type: #Number>
+	<derived>
+	<FMComment: 'Number of call to myself from outside my container.'>
+	^ self
+		lookUpPropertyNamed: #numberOfExternalProviders
+		computedAs: [ (self allProviders reject: [ :entity | entity allParents includesAny: self parents ]) size ]
+]
+
+{ #category : #accessing }
+TEntityMetaLevelDependency >> numberOfInternalClients [
+	<FMProperty: #numberOfInternalClients type: #Number>
+	<derived>
+	<FMComment: 'Number of call from myself to entities of my container.'>
+	^ self
+		lookUpPropertyNamed: #numberOfInternalClients
+		computedAs: [ (self allClients select: [ :entity | entity allParents includesAny: self parents ]) size ]
+]
+
+{ #category : #accessing }
+TEntityMetaLevelDependency >> numberOfInternalProviders [
+	<FMProperty: #numberOfInternalProviders type: #Number>
+	<derived>
+	<FMComment: 'Number of call to myself from entities from my container.'>
+	^ self
+		lookUpPropertyNamed: #numberOfInternalProviders
+		computedAs: [ (self allProviders select: [ :entity | entity allParents includesAny: self parents ]) size ]
 ]
 
 { #category : #accessing }

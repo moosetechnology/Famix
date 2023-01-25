@@ -16,17 +16,22 @@ FamixMultipleFileAnchorTest >> actualClass [
 FamixMultipleFileAnchorTest >> setUp [
 	super setUp.
 	multipleFileAnchor := self actualClass model: FamixTest1Model new.
-	1 to: 2 do: [ :each | multipleFileAnchor addFileAnchorWithPath: 'aFileName' , each asString ]
+	multipleFileAnchor addFileAnchorWithPath: 'aFileName1'.
+	multipleFileAnchor addFileAnchorWithPath: 'aFileName2'.
 ]
 
 { #category : #tests }
 FamixMultipleFileAnchorTest >> testAdditionOfFiles [
 	self assert: multipleFileAnchor fileAnchors size equals: 2.
+	self assert: multipleFileAnchor sourceText lines size equals: 4.
+
 	multipleFileAnchor addFileAnchorWithPath: 'newFileName1'.
 	self assert: multipleFileAnchor fileAnchors size equals: 3.
-	self assert: multipleFileAnchor sourceText lines size equals: 3.
+	self assert: multipleFileAnchor sourceText lines size equals: 6.
+	
 	multipleFileAnchor addFileAnchorWithPath: 'newFileName2'.
-	self assert: multipleFileAnchor sourceText lines size equals: 4
+	self assert: multipleFileAnchor fileAnchors size equals: 4.
+	self assert: multipleFileAnchor sourceText lines size equals: 8
 ]
 
 { #category : #tests }
@@ -104,10 +109,8 @@ FamixMultipleFileAnchorTest >> testSimilarFileAnchors [
 
 { #category : #tests }
 FamixMultipleFileAnchorTest >> testSourceText [
-	| sourceText |
-	sourceText := multipleFileAnchor sourceText.
-	self denyEmpty: sourceText.
-	self assert: (sourceText includesSubstring: '=============' , String lf)
+
+	self assert: (multipleFileAnchor sourceText includesSubstring: ' ~~~ aFileName1 ~~~ ')
 ]
 
 { #category : #tests }

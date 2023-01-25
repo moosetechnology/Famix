@@ -55,7 +55,8 @@ Class {
 		'generator',
 		'testingSelectorsMapping',
 		'configuration',
-		'parentBuilder'
+		'parentBuilder',
+		'importedFromFile'
 	],
 	#category : #'Famix-MetamodelBuilder-Core-Basic'
 }
@@ -281,11 +282,18 @@ FamixMetamodelBuilder >> initialize [
 	environment := FmxMBRealRingEnvironment for: self.
 
 	configuration := FmxMBConfiguration new.
+	importedFromFile := true.  "should be set in configuration ???"
 
 	classes := OrderedCollection new.
 	traits := OrderedCollection new.
 	relations := OrderedCollection new.
 	testingSelectorsMapping := Dictionary new
+]
+
+{ #category : #accessing }
+FamixMetamodelBuilder >> isImportedFromFile [
+	^ importedFromFile 
+
 ]
 
 { #category : #initialization }
@@ -391,6 +399,11 @@ FamixMetamodelBuilder >> newTraitNamed: aClassName comment: aString [
 	^ (self newTraitNamed: aClassName)
 		comment: aString;
 		yourself
+]
+
+{ #category : #accessing }
+FamixMetamodelBuilder >> notImportedFromFile [
+	importedFromFile := false
 ]
 
 { #category : #accessing }

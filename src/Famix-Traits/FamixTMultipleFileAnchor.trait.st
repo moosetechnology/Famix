@@ -109,16 +109,26 @@ FamixTMultipleFileAnchor >> lineCount [
 		ifNotEmpty: [ :files | files sum: #lineCount ]
 ]
 
+{ #category : #private }
+FamixTMultipleFileAnchor >> multipleFilesSourceSeparator: aFileAnchor [
+	^String streamContents: [ :stream |
+		stream
+			cr ;
+			<< ' ~~~ ~~~ ~~~ ~~~ ' ;
+			<< aFileAnchor fileName ;
+			<< ' ~~~ ~~~ ~~~ ~~~ ' ;
+			cr ]
+]
+
 { #category : #accessing }
 FamixTMultipleFileAnchor >> sourceText [
-	^ String
-		streamContents: [ :s | 
+	^self fileAnchors size > 1
+	ifFalse: [ self fileAnchors anyOne sourceText ]
+	ifTrue: [
+		String streamContents: [ :s | 
 			self fileAnchors
-				do: [ :file | 
-					s
-						<< '=======================';
-						<< file fileName;
-						<< '====================';
-						lf;
-						<< file sourceText ] ]
+			do: [ :file | 
+				s
+					<< (self multipleFilesSourceSeparator: file) ;
+					<< file sourceText ] ] ]
 ]

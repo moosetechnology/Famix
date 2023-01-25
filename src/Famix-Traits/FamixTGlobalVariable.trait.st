@@ -1,5 +1,5 @@
 "
-FAMIXGlobalVariable represents a global variable in the source code.
+FamixTGlobalVariable represents a global variable in the source code.
 
 "
 Trait {
@@ -26,6 +26,13 @@ FamixTGlobalVariable classSide >> annotationFamixGlobalVariableGroup [
 	<generated>
 	<mooseGroup>
 	^ FamixGlobalVariableGroup
+]
+
+{ #category : #testing }
+FamixTGlobalVariable >> isGlobalVariable [
+
+	<generated>
+	^ true
 ]
 
 { #category : #accessing }

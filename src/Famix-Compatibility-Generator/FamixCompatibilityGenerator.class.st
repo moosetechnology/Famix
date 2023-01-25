@@ -347,6 +347,7 @@ FamixCompatibilityGenerator >> defineHierarchy [
 	namedEntity --|> #THasVisibility.
 	namedEntity --|> #TCanBeAbstract.
 	namedEntity --|> #TCanBeFinal.
+	namedEntity --|> sourcedEntity.
 
 	namespace --|> scopingEntity.
 	namespace --|> #TNamespace.

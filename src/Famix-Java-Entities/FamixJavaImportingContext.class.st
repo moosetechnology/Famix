@@ -41,12 +41,6 @@ FamixJavaImportingContext >> importAttribute [
 ]
 
 { #category : #testing }
-FamixJavaImportingContext >> importCaughtException [
-	<generated>
-	^ self import: FamixJavaCaughtException
-]
-
-{ #category : #testing }
 FamixJavaImportingContext >> importClass [
 	<generated>
 	^ self import: FamixJavaClass
@@ -62,12 +56,6 @@ FamixJavaImportingContext >> importComment [
 FamixJavaImportingContext >> importContainerEntity [
 	<generated>
 	^ self import: FamixJavaContainerEntity
-]
-
-{ #category : #testing }
-FamixJavaImportingContext >> importDeclaredException [
-	<generated>
-	^ self import: FamixJavaDeclaredException
 ]
 
 { #category : #testing }
@@ -107,9 +95,9 @@ FamixJavaImportingContext >> importFolder [
 ]
 
 { #category : #testing }
-FamixJavaImportingContext >> importGlobalVariable [
+FamixJavaImportingContext >> importImplementation [
 	<generated>
-	^ self import: FamixJavaGlobalVariable
+	^ self import: FamixJavaImplementation
 ]
 
 { #category : #testing }
@@ -128,6 +116,12 @@ FamixJavaImportingContext >> importIndexedFileAnchor [
 FamixJavaImportingContext >> importInheritance [
 	<generated>
 	^ self import: FamixJavaInheritance
+]
+
+{ #category : #testing }
+FamixJavaImportingContext >> importInterface [
+	<generated>
+	^ self import: FamixJavaInterface
 ]
 
 { #category : #testing }
@@ -179,6 +173,18 @@ FamixJavaImportingContext >> importParameterizableClass [
 ]
 
 { #category : #testing }
+FamixJavaImportingContext >> importParameterizableException [
+	<generated>
+	^ self import: FamixJavaParameterizableException
+]
+
+{ #category : #testing }
+FamixJavaImportingContext >> importParameterizableInterface [
+	<generated>
+	^ self import: FamixJavaParameterizableInterface
+]
+
+{ #category : #testing }
 FamixJavaImportingContext >> importParameterizedType [
 	<generated>
 	^ self import: FamixJavaParameterizedType
@@ -218,12 +224,6 @@ FamixJavaImportingContext >> importSourceTextAnchor [
 FamixJavaImportingContext >> importSourcedEntity [
 	<generated>
 	^ self import: FamixJavaSourcedEntity
-]
-
-{ #category : #testing }
-FamixJavaImportingContext >> importThrownException [
-	<generated>
-	^ self import: FamixJavaThrownException
 ]
 
 { #category : #testing }
@@ -281,12 +281,6 @@ FamixJavaImportingContext >> shouldImportAttribute [
 ]
 
 { #category : #testing }
-FamixJavaImportingContext >> shouldImportCaughtException [
-	<generated>
-	^ self shouldImport: FamixJavaCaughtException
-]
-
-{ #category : #testing }
 FamixJavaImportingContext >> shouldImportClass [
 	<generated>
 	^ self shouldImport: FamixJavaClass
@@ -302,12 +296,6 @@ FamixJavaImportingContext >> shouldImportComment [
 FamixJavaImportingContext >> shouldImportContainerEntity [
 	<generated>
 	^ self shouldImport: FamixJavaContainerEntity
-]
-
-{ #category : #testing }
-FamixJavaImportingContext >> shouldImportDeclaredException [
-	<generated>
-	^ self shouldImport: FamixJavaDeclaredException
 ]
 
 { #category : #testing }
@@ -347,9 +335,9 @@ FamixJavaImportingContext >> shouldImportFolder [
 ]
 
 { #category : #testing }
-FamixJavaImportingContext >> shouldImportGlobalVariable [
+FamixJavaImportingContext >> shouldImportImplementation [
 	<generated>
-	^ self shouldImport: FamixJavaGlobalVariable
+	^ self shouldImport: FamixJavaImplementation
 ]
 
 { #category : #testing }
@@ -368,6 +356,12 @@ FamixJavaImportingContext >> shouldImportIndexedFileAnchor [
 FamixJavaImportingContext >> shouldImportInheritance [
 	<generated>
 	^ self shouldImport: FamixJavaInheritance
+]
+
+{ #category : #testing }
+FamixJavaImportingContext >> shouldImportInterface [
+	<generated>
+	^ self shouldImport: FamixJavaInterface
 ]
 
 { #category : #testing }
@@ -419,6 +413,18 @@ FamixJavaImportingContext >> shouldImportParameterizableClass [
 ]
 
 { #category : #testing }
+FamixJavaImportingContext >> shouldImportParameterizableException [
+	<generated>
+	^ self shouldImport: FamixJavaParameterizableException
+]
+
+{ #category : #testing }
+FamixJavaImportingContext >> shouldImportParameterizableInterface [
+	<generated>
+	^ self shouldImport: FamixJavaParameterizableInterface
+]
+
+{ #category : #testing }
 FamixJavaImportingContext >> shouldImportParameterizedType [
 	<generated>
 	^ self shouldImport: FamixJavaParameterizedType
@@ -458,12 +464,6 @@ FamixJavaImportingContext >> shouldImportSourceTextAnchor [
 FamixJavaImportingContext >> shouldImportSourcedEntity [
 	<generated>
 	^ self shouldImport: FamixJavaSourcedEntity
-]
-
-{ #category : #testing }
-FamixJavaImportingContext >> shouldImportThrownException [
-	<generated>
-	^ self shouldImport: FamixJavaThrownException
 ]
 
 { #category : #testing }

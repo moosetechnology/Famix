@@ -1,8 +1,8 @@
 Class {
 	#name : #FamixStClass,
 	#superclass : #FamixStNamedEntity,
-	#traits : 'FamixTCanBeAbstract + FamixTClass + FamixTClassMetrics + FamixTWithComments + FamixTWithExceptions + FamixTWithTypes',
-	#classTraits : 'FamixTCanBeAbstract classTrait + FamixTClass classTrait + FamixTClassMetrics classTrait + FamixTWithComments classTrait + FamixTWithExceptions classTrait + FamixTWithTypes classTrait',
+	#traits : 'FamixTCanBeAbstract + FamixTClass + FamixTClassMetrics + FamixTWithTypes',
+	#classTraits : 'FamixTCanBeAbstract classTrait + FamixTClass classTrait + FamixTClassMetrics classTrait + FamixTWithTypes classTrait',
 	#category : #'Famix-PharoSmalltalk-Entities-Entities'
 }
 
@@ -138,6 +138,22 @@ FamixStClass >> numberOfComments [
 ]
 
 { #category : #metrics }
+FamixStClass >> numberOfMessageSends [
+	<FMProperty: #numberOfMessageSends type: #Number>
+	<derived>
+	<FMComment: 'The number of message sends from a class'>
+	
+	^self
+		lookUpPropertyNamed: #numberOfMessageSends
+		computedAs: [self methodsGroup sumNumbers: #numberOfMessageSends]
+]
+
+{ #category : #'as yet unclassified' }
+FamixStClass >> numberOfMessageSends: aNumber [
+	self cacheAt: #numberOfMessageSends put: aNumber
+]
+
+{ #category : #metrics }
 FamixStClass >> numberOfMethodProtocols [
 	<FMProperty: #numberOfMethodProtocols type: #Number>
 	<derived>
@@ -159,10 +175,11 @@ FamixStClass >> smalltalkClass [
 
 { #category : #'Famix-Implementation' }
 FamixStClass >> sourceText [
-	self flag: 'This code should be delegated to the FAMIXPharoAnchor'.
+
+	self flag: 'This code should be delegated to the anchor'.
 	^ self instanceSide smalltalkClass
-		ifNotNil: [ :aClass | TonelWriter sourceCodeOf: aClass ]
-		ifNil: [ super sourceText ]
+		  ifNotNil: [ :aClass | TonelWriter sourceCodeOf: aClass ]
+		  ifNil: [ super sourceText ]
 ]
 
 { #category : #testing }

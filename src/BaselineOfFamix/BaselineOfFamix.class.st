@@ -55,17 +55,22 @@ BaselineOfFamix >> dependencies: spec [
 		roelTyper: spec;
 		singularizePluralize: spec;
 		talents: spec.
+	self fame: spec
+]
 
-	spec for: #( #'pharo8.x' #'pharo9.x' ) do: [ 
-		spec
-			baseline: 'Fame'
-			with: [ 
-			spec repository: 'github://moosetechnology/Fame:v1.x.x/src' ] ].
+{ #category : #baseline }
+BaselineOfFamix >> fame: spec [
 
-	spec for: #'pharo10.x' do: [ 
-		spec baseline: 'Fame' with: [ 
-			spec repository:
-				'github://moosetechnology/Fame:pharo10-compatibility/src' ] ]
+	"We load Fame development version for new Moose images."
+	"For retrocompatibility with Pharo 9 and older, the latest version is v1.1.6"
+
+	| version |
+	version := 'development'.
+	spec for: #( #'pharo8.x' #'pharo9.x' ) do: [ version := 'v1.1.6' ].
+
+	spec baseline: 'Fame' with: [ 
+		spec repository:
+			('github://moosetechnology/Fame:{1}/src' format: { version }) ]
 ]
 
 { #category : #baseline }
@@ -75,18 +80,12 @@ BaselineOfFamix >> groups: spec [
 		  group: 'Core' with: #( 'Famix-Traits' 'Moose-Query-Extensions' );
 		  group: 'Minimal' with: #( 'Moose-Core' );
 		  group: 'Basic'
-		  with: #( 'Famix-BasicInfrastructure' 'Famix-MetamodelGeneration' );
-		  group: 'CommentAnalyzer' with: #( 'Famix-CommentAnalyzer' );
+		  with: #( 'Famix-BasicInfrastructure' 'Famix-MetamodelGeneration' 'Moose-Core-Generator' );
 		  group: 'TestsResources'
 		  with: #( 'ReferenceTestResources' 'Moose-TestResources-LAN'
 			     'Moose-TestResources-LCOM' 'KGBTestResources'
 			     'PackageBlueprintTestResources' );
 		  group: 'BasicTraits' with: #( 'Famix-Traits' );
-		  group: 'EntitiesCompatibility'
-		  with: #( 'Famix-Compatibility-Entities' );
-		  group: 'ModelCompatibility'
-		  with: #( 'Famix-Compatibility-Generator'
-			     'EntitiesCompatibility' );
 		  group: 'EntitiesJava' with: #( 'Famix-Java-Entities' );
 		  group: 'EntitiesJavaWithVisitor'
 		  with: #( 'EntitiesJava' 'Famix-Java-Visitor' );
@@ -101,23 +100,23 @@ BaselineOfFamix >> groups: spec [
 		  with: #( 'Moose-GenericImporter' 'Moose-SmalltalkImporter' );
 		  group: 'TestModels'
 		  with: #( 'Famix-Test1-Entities' 'Famix-Test2-Entities'
-			     'Famix-Test3-Entities' 'Famix-Test4-Entities' );
+			     'Famix-Test3-Entities' 'Famix-Test4-Entities' 'Famix-Test7-Entities' );
+		
 		  group: 'Tests'
 		  with: #( 'Famix-Tests' 'Moose-Query-Test' 'Moose-Core-Tests'
 			     'Famix-Smalltalk-Utils-Tests' 'Moose-SmalltalkImporter-LAN-Tests'
 			     'Moose-SmalltalkImporter-Core-Tests'
 			     'Moose-SmalltalkImporter-KGB-Tests'
-			     'Famix-Java-Tests' 'Famix-Compatibility-Tests-C'
-			     'Famix-VerveineJ-Tests' 'Famix-Compatibility-Tests-Core'
+			     'Famix-Java-Tests' 'Famix-VerveineJ-Tests'
 			     'Famix-PharoSmalltalk-Tests' 'Famix-TestGenerators'
 			     'Famix-MetamodelBuilder-Tests' 'Famix-Test1-Tests'
-			     'Famix-Test2-Tests' 'Famix-Test3-Tests' 'Famix-Test4-Tests'
+			     'Famix-Test2-Tests' 'Famix-Test3-Tests' 'Famix-Test4-Tests' 'Famix-Test7-Tests'
 			     'Famix-TestComposedSubmetamodel1-Entities'
 			     'Famix-TestComposedSubmetamodel2-Entities'
 			     'Famix-TestComposedMetamodel-Entities'
 			     'Famix-TestComposedMetamodel' 'Famix-TestComposedComposedMetamodel-Entities'
 			     'Famix-TestComposed3Metamodel-Entities'
-			     'Moose-GenericImporters-Tests' 'Famix-CommentAnalyzer-Tests' )
+			     'Moose-GenericImporters-Tests' )
 ]
 
 { #category : #dependencies }
@@ -132,10 +131,16 @@ BaselineOfFamix >> packageBlueprintTestResources: spec [
 
 { #category : #accessing }
 BaselineOfFamix >> packageRepositoryURL [
-	^ super packageRepositoryURL
-		ifEmpty: [ | packageName |
-			packageName := self class package name.
-			'tonel://' , (IceRepository registry detect: [ :repo | repo workingCopy packageNames includes: packageName ] ifFound: [ :repo | repo location pathString , '/' , repo subdirectory ] ifNone: [ '' ]) ]
+
+	^ super packageRepositoryURL ifEmpty: [ 
+		  | packageName |
+		  packageName := self class package name.
+		  'tonel://' , (IceRepository registry
+			   detect: [ :repo | 
+			   repo workingCopy packageNames includes: packageName ]
+			   ifFound: [ :repo | 
+			   repo location pathString , '/' , repo subdirectory ]
+			   ifNone: [ '' ]) ]
 ]
 
 { #category : #baseline }
@@ -147,6 +152,8 @@ BaselineOfFamix >> packages: spec [
 			spec requires: #( 'Fame' 'DeepTraverser' 'CollectionExtensions' ) ];
 		package: 'Moose-Core'
 		with: [ spec requires: #( 'Fame' 'Moose-Query' ) ];
+		package: 'Moose-Core-Generator'
+		with: [ spec requires: #( 'Famix-MetamodelBuilder-Core' ) ];
 		package: 'Moose-Query-Extensions'
 		with: [ spec requires: #( 'Moose-Query' 'BasicTraits' ) ];
 		package: 'Famix-Traits' with: [ spec requires: #( 'Moose-Core' ) ];
@@ -163,24 +170,9 @@ BaselineOfFamix >> packages: spec [
 		package: 'Moose-SmalltalkImporter' with: [ 
 			spec requires:
 					#( 'Moose-GenericImporter' 'RoelTyper' 'Famix-PharoSmalltalk-Entities' ) ];
-		package: 'Famix-CommentAnalyzer'
-		with: [ spec requires: #( 'BasicTraits' ) ];
-		package: 'Famix-CommentAnalyzer-Tests'
-		with: [ spec requires: #( 'Famix-CommentAnalyzer'
-				   'TestModels' ) ];
-		package: 'Famix-Compatibility-Generator'
-		with: [ spec requires: #( 'Basic' ) ];
-		package: 'Famix-Compatibility-Entities'
-		with: [ spec requires: #( 'BasicTraits' 'Famix-Smalltalk-Utils' ) ];
-		package: 'Famix-Compatibility-Tests-C'
-		with: [ spec requires: #( 'Famix-Compatibility-Entities' ) ];
-		package: 'Famix-Compatibility-Tests-Core' with: [ 
-			spec requires:
-					#( 'Famix-Compatibility-Entities' 'Moose-SmalltalkImporter-LAN-Tests'
-					   'Moose-SmalltalkImporter-KGB-Tests' ) ];
-		package: 'Famix-VerveineJ-Tests' with: [ 
-			spec requires:
-					#( 'Moose-Core-Tests' 'Famix-Compatibility-Entities' ) ];
+		package: 'Famix-VerveineJ-Tests'
+		with: [ 
+			spec requires: #( 'Moose-Core-Tests' 'Famix-Java-Entities' ) ];
 		package: 'Famix-PharoSmalltalk-Generator'
 		with: [ spec requires: #( 'Basic' ) ];
 		package: 'Famix-PharoSmalltalk-Entities'
@@ -210,7 +202,10 @@ BaselineOfFamix >> packages: spec [
 		package: 'Famix-Tests'
 		with: [ spec requires: #( 'BasicTraits' 'Talents' ) ];
 		package: 'Moose-Core-Tests'
-		with: [ spec requires: #( 'TestModels' ) ];
+		with: [ 
+			spec requires: #( 'TestModels' 'Moose-Core-Tests-Entities' ) ];
+		package: 'Moose-Core-Tests-Entities'
+		with: [ spec requires: #( 'Moose-Core' 'BasicTraits' ) ];
 		package: 'Moose-GenericImporters-Tests'
 		with: [ spec requires: #( 'Moose-GenericImporter' ) ];
 		package: 'Famix-Smalltalk-Utils-Tests' with: [ 
@@ -233,8 +228,9 @@ BaselineOfFamix >> packages: spec [
 					   'Famix-MetamodelBuilder-TestsTraitsResources-B' ) ];
 		package: 'Famix-MetamodelBuilder-TestsTraitsResources-A'
 		with: [ spec requires: #( 'Basic' ) ];
-		package: 'Famix-MetamodelBuilder-TestsTraitsResources-B'
-		with: [ spec requires: #( 'Basic' 'Famix-MetamodelBuilder-TestsTraitsResources-A' ) ];
+		package: 'Famix-MetamodelBuilder-TestsTraitsResources-B' with: [ 
+			spec requires:
+					#( 'Basic' 'Famix-MetamodelBuilder-TestsTraitsResources-A' ) ];
 		package: 'Famix-Test1-Entities'
 		with: [ spec requires: #( 'BasicTraits' ) ];
 		package: 'Famix-Test1-Tests'
@@ -259,6 +255,10 @@ BaselineOfFamix >> packages: spec [
 		with: [ spec requires: #( 'BasicTraits' ) ];
 		package: 'Famix-Test6-Tests'
 		with: [ spec requires: #( 'Famix-Test6-Entities' ) ];
+		package: 'Famix-Test7-Entities'
+		with: [ spec requires: #( 'BasicTraits' ) ];
+		package: 'Famix-Test7-Tests'
+		with: [ spec requires: #( 'Famix-Test7-Entities' ) ];
 		package: 'Famix-TestComposedSubmetamodel1-Entities'
 		with: [ spec requires: #( 'BasicTraits' ) ];
 		package: 'Famix-TestComposedSubmetamodel2-Entities'
@@ -273,10 +273,10 @@ BaselineOfFamix >> packages: spec [
 		with: [ spec requires: #( 'Famix-TestComposedMetamodel-Entities' ) ];
 		package: 'Famix-TestComposedMetamodel'
 		with: [ spec requires: #( 'Famix-TestComposedMetamodel-Entities' ) ];
-		package: 'Famix-Deprecated' with: [ 
-			spec requires:
-					#( 'Core' 'ModelCompatibility' 'ModelJava' 'ModelSmalltalk'
-					   'Tests' ) ];
+		package: 'Famix-Deprecated'
+		with: [ 
+			spec requires: #( 'Core' 'ModelJava' 'ModelSmalltalk'
+				   'Tests' ) ];
 		package: 'Famix-MetamodelDocumentor' with: [ 
 			spec requires:
 					#( 'Core' 'TestModels' 'Famix-TestModel1MetamodelDocumentor' ) ];

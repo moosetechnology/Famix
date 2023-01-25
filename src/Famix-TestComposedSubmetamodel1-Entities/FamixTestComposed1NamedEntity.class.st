@@ -1,6 +1,6 @@
 Class {
 	#name : #FamixTestComposed1NamedEntity,
-	#superclass : #FamixTestComposed1SourcedEntity,
+	#superclass : #FamixTestComposed1Entity,
 	#traits : 'FamixTNamedEntity',
 	#classTraits : 'FamixTNamedEntity classTrait',
 	#category : #'Famix-TestComposedSubmetamodel1-Entities-Entities'
@@ -9,7 +9,7 @@ Class {
 { #category : #meta }
 FamixTestComposed1NamedEntity class >> annotation [
 
-	<FMClass: #NamedEntity super: #FamixTestComposed1SourcedEntity>
+	<FMClass: #NamedEntity super: #FamixTestComposed1Entity>
 	<package: #'Famix-TestComposedSubmetamodel1-Entities'>
 	<generated>
 	^self

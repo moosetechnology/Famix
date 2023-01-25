@@ -1,12 +1,12 @@
 "
-FAMIXAccess represents an access to a variable by a behavioural entity (for example, a function or a method). 
+FamixTAccess represents an access to a variable by a behavioural entity (for example, a function or a method). 
 
 For example if the method foo accesses the instance variable x, there is an access with the following information:
-	(i) From: aFAMIXMethod (foo)
-	(ii) To: aFAMIXAttribute (x)
+	(i) From: aFamixTMethod (foo)
+	(ii) To: aFamixTAttribute (x)
 	
-aFAMIXMethod (foo) can be accessed using the message accessor (and from)
-aFAMIXAttribute (x) can be accessed using the message variable (and to). 
+aFamixTMethod (foo) can be accessed using the message accessor (and from)
+aFamixTAttribute (x) can be accessed using the message variable (and to). 
 
 Furthermore it can be tagged as read or write using isWrite: aBoolean.
 

@@ -1,15 +1,15 @@
 "
-FAMIXMethod represents a behaviour in an object-oriented language.
+FamixTMethod represents a behaviour in an object-oriented language.
 
-A FAMIXMethod is always contained in a parentType.
+A FamixTMethod is always contained in a parentType.
 "
 Trait {
 	#name : #FamixTMethod,
 	#instVars : [
 		'#parentType => FMOne type: #FamixTWithMethods opposite: #methods'
 	],
-	#traits : '(FamixTHasSignature + FamixTInvocable + FamixTMethodMetrics + FamixTNamedEntity + FamixTTypedEntity + FamixTWithImplicitVariables + FamixTWithLocalVariables + FamixTWithParameters + FamixTWithStatements + TOODependencyQueries withPrecedenceOf: FamixTWithStatements)',
-	#classTraits : '(FamixTHasSignature classTrait + FamixTInvocable classTrait + FamixTMethodMetrics classTrait + FamixTNamedEntity classTrait + FamixTTypedEntity classTrait + FamixTWithImplicitVariables classTrait + FamixTWithLocalVariables classTrait + FamixTWithParameters classTrait + FamixTWithStatements classTrait + TOODependencyQueries classTrait withPrecedenceOf: FamixTWithStatements classTrait)',
+	#traits : 'FamixTHasSignature + FamixTInvocable + FamixTMethodMetrics + FamixTNamedEntity + FamixTTypedEntity + FamixTWithImplicitVariables + FamixTWithLocalVariables + FamixTWithParameters + FamixTWithStatements + TEntityMetaLevelDependency',
+	#classTraits : 'FamixTHasSignature classTrait + FamixTInvocable classTrait + FamixTMethodMetrics classTrait + FamixTNamedEntity classTrait + FamixTTypedEntity classTrait + FamixTWithImplicitVariables classTrait + FamixTWithLocalVariables classTrait + FamixTWithParameters classTrait + FamixTWithStatements classTrait + TEntityMetaLevelDependency classTrait',
 	#category : #'Famix-Traits-Behavioral'
 }
 
@@ -30,6 +30,29 @@ FamixTMethod classSide >> annotationFamixMethodGroup [
 ]
 
 { #category : #testing }
+FamixTMethod >> isDelegating [
+
+	^ (self outgoingInvocations flatCollect: #target) anySatisfy: [ :each | 
+		  each signature == self signature and: [ 
+			  (each isInSameClassAs: self) not ] ] 
+]
+
+{ #category : #testing }
+FamixTMethod >> isExtending [
+
+	^ (self outgoingInvocations reject: [ :each | each receiver isNil ]) 
+		  anySatisfy: [ :each | 
+			  each receiver name = 'super' and: [ 
+				  (each candidates collect: #signature) includes: self signature ] ]
+]
+
+{ #category : #testing }
+FamixTMethod >> isInSameClassAs: aMethod [
+
+	^ aMethod parentType == self parentType
+]
+
+{ #category : #testing }
 FamixTMethod >> isMethod [
 
 	<generated>
@@ -45,21 +68,6 @@ FamixTMethod >> mooseNameOn: stream [
 	self signature
 		ifNotNil: [ :aSignature | stream nextPutAll: aSignature ]
 		ifNil: [ self name ifNotNil: [ :aName | stream nextPutAll: aName ] ]
-]
-
-{ #category : #metrics }
-FamixTMethod >> numberOfMessageSends [
-	<FMProperty: #numberOfMessageSends type: #Number>
-	<derived>
-	<FMComment: 'The number of message from a method'>
-	^ self
-		lookUpPropertyNamed: #numberOfMessageSends
-		computedAs: [ self notExistentMetricValue ]
-]
-
-{ #category : #metrics }
-FamixTMethod >> numberOfMessageSends: aNumber [
-	self cacheAt: #numberOfMessageSends put: aNumber
 ]
 
 { #category : #accessing }

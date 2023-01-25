@@ -5,8 +5,8 @@ In the following AnnotationInstance of Java, timeout is an annotation instance a
 @Test(timeout = 500)
 
 Instance Variables:
-	parentAnnotationInstance	<FAMIXAnnotationInstance>
-	annotationTypeAttribute	<FAMIXAnnotationTypeAttribute>
+	parentAnnotationInstance	<FamixTAnnotationInstance>
+	annotationTypeAttribute	<FamixTAnnotationTypeAttribute>
 	value	<Object>
 "
 Trait {

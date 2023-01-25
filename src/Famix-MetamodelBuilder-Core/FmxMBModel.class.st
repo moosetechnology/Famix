@@ -29,6 +29,15 @@ FmxMBModel >> generateModelMethods: aModelClass [
 	<package: {2}>
 	<generated>' format: {self fullName . self builder safeAnnotationPackageName})
 		classified: 'meta'.
+
+	self builder isImportedFromFile ifTrue: [ 
+	aModelClass classSide
+		compile: 'canBeImportedFromFile
+	<generated>
+	^true' 
+	classified: 'testing'.	
+	].
+		
 	self builder allSubBuilders
 		ifNotEmpty: [ :subBuilders | 
 			aModelClass classSide

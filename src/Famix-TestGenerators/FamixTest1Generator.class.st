@@ -84,12 +84,14 @@ FamixTest1Generator >> defineHierarchy [
 		--|> namedEntity ;
 		--|> #TWithSourceLanguages ;
 		--|> #TAttribute;
+		--|> #TSourceEntity;
 	  --|> tCanBeClassSide.
 
 	class
 		--|> namedEntity ;
 		--|> #TWithSourceLanguages ;
 		--|> #TClass ;
+		--|> #TSourceEntity;
 		--|> #TWithComments.
 
 	file --|> namedEntity.
@@ -134,6 +136,12 @@ FamixTest1Generator >> defineTraits [
 
 	super defineTraits.
 	tCanBeClassSide := builder newTraitNamed: #TCanBeClassSide. 
+]
+
+{ #category : #initialization }
+FamixTest1Generator >> initialize [
+	super initialize.
+	self notImportedFromFile
 ]
 
 { #category : #definition }

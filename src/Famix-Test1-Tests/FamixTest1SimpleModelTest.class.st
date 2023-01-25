@@ -13,7 +13,8 @@ Class {
 		'm2',
 		'm3',
 		'anchorC1',
-		'a1'
+		'a1',
+		'anchorA1'
 	],
 	#category : #'Famix-Test1-Tests'
 }
@@ -38,6 +39,7 @@ FamixTest1SimpleModelTest >> setUp [
 	anchor1 := FamixTest1SourceTextAnchor source: 'method1\source1' withCRs model: model.
 	anchor2 := FamixTest1SourceTextAnchor source: 'method2\source2a\source2b' withCRs model: model.
 	anchor3 := FamixTest1SourceTextAnchor source: 'method3\source3a\source3b\source3c' withCRs model: model.
+	anchorA1 := FamixTest1SourceTextAnchor source: 'Attribute1 definition' withCRs model: model.
 
 	m1 parentType: c1.
 	m2 parentType: c2.	"opposite way"
@@ -46,5 +48,6 @@ FamixTest1SimpleModelTest >> setUp [
 	c1 sourceAnchor: anchorC1.
 	m1 sourceAnchor: anchor1.
 	m2 sourceAnchor: anchor2.
-	m3 sourceAnchor: anchor3
+	m3 sourceAnchor: anchor3.
+	a1 sourceAnchor: anchorA1.
 ]

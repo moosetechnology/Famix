@@ -28,6 +28,7 @@ FamixTTemplate >> templateOwner [
 	"Relation named: #templateOwner type: #FamixTWithTemplates opposite: #templates"
 
 	<generated>
+	<container>
 	^ templateOwner
 ]
 
@@ -36,6 +37,13 @@ FamixTTemplate >> templateOwner: anObject [
 
 	<generated>
 	templateOwner := anObject
+]
+
+{ #category : #navigation }
+FamixTTemplate >> templateOwnerGroup [
+	<generated>
+	<navigation: 'TemplateOwner'>
+	^ MooseSpecializedGroup with: self templateOwner
 ]
 
 { #category : #accessing }

@@ -1,8 +1,8 @@
 Class {
 	#name : #FamixJavaMethod,
 	#superclass : #FamixJavaContainerEntity,
-	#traits : 'FamixJavaTCanBeClassSide + FamixJavaTCanBeSynchronized + FamixTCanBeAbstract + FamixTCanBeFinal + FamixTHasKind + FamixTHasVisibility + FamixTMethod + FamixTWithCaughtExceptions + FamixTWithComments + FamixTWithDeclaredExceptions + FamixTWithThrownExceptions',
-	#classTraits : 'FamixJavaTCanBeClassSide classTrait + FamixJavaTCanBeSynchronized classTrait + FamixTCanBeAbstract classTrait + FamixTCanBeFinal classTrait + FamixTHasKind classTrait + FamixTHasVisibility classTrait + FamixTMethod classTrait + FamixTWithCaughtExceptions classTrait + FamixTWithComments classTrait + FamixTWithDeclaredExceptions classTrait + FamixTWithThrownExceptions classTrait',
+	#traits : 'FamixJavaTCanBeSynchronized + FamixTCanBeAbstract + FamixTCanBeClassSide + FamixTCanBeFinal + FamixTHasKind + FamixTHasVisibility + FamixTMethod + FamixTWithComments + FamixTWithExceptions',
+	#classTraits : 'FamixJavaTCanBeSynchronized classTrait + FamixTCanBeAbstract classTrait + FamixTCanBeClassSide classTrait + FamixTCanBeFinal classTrait + FamixTHasKind classTrait + FamixTHasVisibility classTrait + FamixTMethod classTrait + FamixTWithComments classTrait + FamixTWithExceptions classTrait',
 	#category : #'Famix-Java-Entities-Entities'
 }
 
@@ -116,6 +116,15 @@ FamixJavaMethod >> isDetectedSetter [
 ]
 
 { #category : #testing }
+FamixJavaMethod >> isGetter [
+
+	^ self kind = #getter or: [   (self name beginsWith: 'get') and: [ 
+		  self parameters isEmpty and: [ 
+			  self accesses asOrderedCollection size = 1 and: [ 
+				  self outgoingInvocations isEmpty ] ] ]]
+]
+
+{ #category : #testing }
 FamixJavaMethod >> isImplementing [
 	<FMProperty: #isImplementing type: #Boolean>
 	<derived>
@@ -153,6 +162,15 @@ FamixJavaMethod >> isOverriding [
 	^ self parentType directSuperclasses
 		anySatisfy:
 			[ :each | each isInterface not and: [ each understands: self signature ] ]
+]
+
+{ #category : #testing }
+FamixJavaMethod >> isSetter [
+
+	^ self kind = #setter or: [ (self name beginsWith: 'set') and: [ 
+		  self parameters size = 1 and: [ 
+			  self accesses asOrderedCollection size = 1 and: [ 
+				  self outgoingInvocations isEmpty ] ] ] ]
 ]
 
 { #category : #printing }

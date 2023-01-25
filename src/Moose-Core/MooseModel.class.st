@@ -5,8 +5,8 @@ Class {
 	#name : #MooseModel,
 	#superclass : #MooseAbstractGroup,
 	#instVars : [
-		'name',
-		'metamodel'
+		'metamodel',
+		'name'
 	],
 	#classVars : [
 		'MostRecentOwner'
@@ -27,6 +27,12 @@ MooseModel class >> annotation [
 	<FMClass: #Model super: #MooseAbstractGroup>
 	<package: #Moose>
 
+]
+
+{ #category : #testing }
+MooseModel class >> canBeImportedFromFile [
+
+	^ false
 ]
 
 { #category : #accessing }
@@ -160,15 +166,18 @@ MooseModel class >> importFrom: aStream withMetamodel: aMetamodel filteredBy: an
 
 { #category : #'import-export' }
 MooseModel class >> importFrom: aStream withMetamodel: aMetamodel translationDictionary: translationDict [
+
 	"In this case we use a translation dictionary to import model by updating the names from the MSE."
 
 	^ self
-		importFrom: aStream
-		withMetamodel: aMetamodel
-		customizingImporterWith: [ :importer | 
-			importer
-				nameTranslator: translationDict;
-				yourself ]
+		  importFrom: aStream
+		  withMetamodel: aMetamodel
+		  customizingImporterWith: [ :importer | 
+			  importer
+				  translationUnit: (FMDictionaryTranslationUnit new
+						   dictionary: translationDict;
+						   yourself);
+				  yourself ]
 ]
 
 { #category : #'import-export' }
@@ -226,38 +235,11 @@ MooseModel class >> importMetamodelFrom: aStream [
 	generator previewChanges	"keep shift pressed to see the changes"
 ]
 
-{ #category : #'world menu' }
-MooseModel class >> menuCommandOn: aBuilder [
-	<worldMenu>
-	(aBuilder item: #Moose)
-		order: 6;
-		icon: MooseIcons mooseIcon.
-
-	(aBuilder item: self developerToolsMenuLabel)
-		order: 30;
-		parent: #Moose ;
-		label: 'Developer tools'.
-
-	"there are other entries before these ones in #developerToolsMenuLabel"
-	(aBuilder item: #'Regenerate all metamodels')
-		order: 40;
-		parent: (self developerToolsMenuLabel) ;
-		action: [ FamixMetamodelGenerator generateAllMetamodels ].
-	(aBuilder item: #'Reset metamodels')
-		order: 45;
-		parent: (self developerToolsMenuLabel) ;
-		action: [ self resetMetamodels ].
- 	(aBuilder item: #'Reset metamodels additional properties')
-		order: 50;
-		parent: (self developerToolsMenuLabel) ;
-		action: [ self resetMetamodelsAdditionalProperties ].
-
-]
-
 { #category : #meta }
 MooseModel class >> metamodel [
+
 	self flag: #TODO. "The next line is a hack to not break everything in Moose. It should be removed later."
-	self = MooseModel ifTrue: [ ^ FAMIXModel metamodel ].
+	self = MooseModel ifTrue: [ ^ FamixStModel metamodel ].
 	^ metamodel ifNil: [ self resetMetamodel ]
 ]
 
@@ -702,7 +684,8 @@ MooseModel >> localMooseModel [
 
 { #category : #accessing }
 MooseModel >> metamodel [
-	^ metamodel ifNil: [ MooseModel meta ]
+
+	^ metamodel ifNil: [ MooseModel metamodel ]
 ]
 
 { #category : #accessing }

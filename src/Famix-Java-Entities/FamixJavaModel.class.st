@@ -17,6 +17,12 @@ FamixJavaModel class >> annotation [
 	<generated>
 ]
 
+{ #category : #testing }
+FamixJavaModel class >> canBeImportedFromFile [
+	<generated>
+	^true
+]
+
 { #category : #'as yet unclassified' }
 FamixJavaModel >> inferPackageParentsBasedOnNames [
 	<menuItem: 'Infer Namespace Parents Based on Names' category: 'Utilities'>
