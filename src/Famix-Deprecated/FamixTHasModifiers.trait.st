@@ -3,7 +3,7 @@ Trait {
 	#instVars : [
 		'#modifiers => FMProperty'
 	],
-	#category : #'Famix-Traits-Modifiers'
+	#category : #'Famix-Deprecated-Modifiers'
 }
 
 { #category : #meta }
@@ -63,7 +63,7 @@ FamixTHasModifiers >> isFinal: aBoolean [
 ]
 
 { #category : #accessing }
-FamixTHasModifiers >> isPackage: aBoolean [
+FamixTHasModifiers >> isPackageVisibility: aBoolean [
 	^ self modifierSet: aBoolean for: #package
 ]
 

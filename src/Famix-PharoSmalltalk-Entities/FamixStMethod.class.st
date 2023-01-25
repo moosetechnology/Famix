@@ -1,8 +1,8 @@
 Class {
 	#name : #FamixStMethod,
 	#superclass : #FamixStNamedEntity,
-	#traits : 'FamixTCanBeAbstract + FamixTCanBeClassSide + FamixTHasKind + FamixTMethod + FamixTWithAnnotationTypes + FamixTWithComments',
-	#classTraits : 'FamixTCanBeAbstract classTrait + FamixTCanBeClassSide classTrait + FamixTHasKind classTrait + FamixTMethod classTrait + FamixTWithAnnotationTypes classTrait + FamixTWithComments classTrait',
+	#traits : 'FamixTCanBeAbstract + FamixTCanBeClassSide + FamixTHasKind + FamixTMethod + FamixTPackageable + FamixTWithAnnotationInstances + FamixTWithAnnotationTypes + FamixTWithComments',
+	#classTraits : 'FamixTCanBeAbstract classTrait + FamixTCanBeClassSide classTrait + FamixTHasKind classTrait + FamixTMethod classTrait + FamixTPackageable classTrait + FamixTWithAnnotationInstances classTrait + FamixTWithAnnotationTypes classTrait + FamixTWithComments classTrait',
 	#instVars : [
 		'#protocol => FMProperty'
 	],
@@ -221,6 +221,11 @@ FamixStMethod >> numberOfMessageSends [
 	^ self
 		lookUpPropertyNamed: #numberOfMessageSends
 		computedAs: [ self computeNumberOfMessageSends ]
+]
+
+{ #category : #'Famix-Extensions-private' }
+FamixStMethod >> numberOfMessageSends: aNumber [
+	self cacheAt: #numberOfMessageSends put: aNumber
 ]
 
 { #category : #'Famix-Extensions-private' }

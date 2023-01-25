@@ -8,8 +8,8 @@ Trait {
 	#instVars : [
 		'#parentType => FMOne type: #FamixTWithMethods opposite: #methods'
 	],
-	#traits : '(FamixTHasSignature + FamixTInvocable + FamixTMethodMetrics + FamixTNamedEntity + FamixTSourceEntity + FamixTTypedEntity + FamixTWithImplicitVariables + FamixTWithLocalVariables + FamixTWithParameters + FamixTWithStatements + TEntityMetaLevelDependency + TOODependencyQueries withPrecedenceOf: FamixTWithStatements)',
-	#classTraits : '(FamixTHasSignature classTrait + FamixTInvocable classTrait + FamixTMethodMetrics classTrait + FamixTNamedEntity classTrait + FamixTSourceEntity classTrait + FamixTTypedEntity classTrait + FamixTWithImplicitVariables classTrait + FamixTWithLocalVariables classTrait + FamixTWithParameters classTrait + FamixTWithStatements classTrait + TEntityMetaLevelDependency classTrait + TOODependencyQueries classTrait withPrecedenceOf: FamixTWithStatements classTrait)',
+	#traits : 'FamixTHasSignature + FamixTInvocable + FamixTMethodMetrics + FamixTNamedEntity + FamixTTypedEntity + FamixTWithImplicitVariables + FamixTWithLocalVariables + FamixTWithParameters + FamixTWithStatements + TEntityMetaLevelDependency',
+	#classTraits : 'FamixTHasSignature classTrait + FamixTInvocable classTrait + FamixTMethodMetrics classTrait + FamixTNamedEntity classTrait + FamixTTypedEntity classTrait + FamixTWithImplicitVariables classTrait + FamixTWithLocalVariables classTrait + FamixTWithParameters classTrait + FamixTWithStatements classTrait + TEntityMetaLevelDependency classTrait',
 	#category : #'Famix-Traits-Behavioral'
 }
 
@@ -68,21 +68,6 @@ FamixTMethod >> mooseNameOn: stream [
 	self signature
 		ifNotNil: [ :aSignature | stream nextPutAll: aSignature ]
 		ifNil: [ self name ifNotNil: [ :aName | stream nextPutAll: aName ] ]
-]
-
-{ #category : #metrics }
-FamixTMethod >> numberOfMessageSends [
-	<FMProperty: #numberOfMessageSends type: #Number>
-	<derived>
-	<FMComment: 'The number of message from a method'>
-	^ self
-		lookUpPropertyNamed: #numberOfMessageSends
-		computedAs: [ self notExistentMetricValue ]
-]
-
-{ #category : #metrics }
-FamixTMethod >> numberOfMessageSends: aNumber [
-	self cacheAt: #numberOfMessageSends put: aNumber
 ]
 
 { #category : #accessing }

@@ -39,7 +39,7 @@ FmxMBGeneratorTest >> testGeneratorsAreUpToDate [
 		do: [ :mm | 
 			self
 				deny: mm new regenerationIsNeeded
-				description: 'The meta-model ' , mm asString , ' is not in sync with its generator. Please, regenerate your MMs with `FamixMetamodelGenerator generateAllMetamodels.' ]
+				description: 'The generator ' , mm asString , ' is not in sync with its meta-model. Please, regenerate your MMs with `FamixMetamodelGenerator generateAllMetamodels.' ]
 ]
 
 { #category : #tests }

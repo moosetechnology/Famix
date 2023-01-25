@@ -55,3 +55,9 @@ FamixTest6Generator >> defineTraits [
 	super defineTraits.
 	tCooked := builder newTraitNamed: #TCooked
 ]
+
+{ #category : #initialization }
+FamixTest6Generator >> initialize [
+	super initialize.
+	self notImportedFromFile
+]

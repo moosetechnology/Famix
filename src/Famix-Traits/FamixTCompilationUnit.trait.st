@@ -26,6 +26,7 @@ FamixTCompilationUnit >> compilationUnitOwner [
 
 	<generated>
 	<FMComment: 'The compilation unit that defines this module'>
+	<container>
 	^ compilationUnitOwner
 ]
 
@@ -34,4 +35,11 @@ FamixTCompilationUnit >> compilationUnitOwner: anObject [
 
 	<generated>
 	compilationUnitOwner := anObject
+]
+
+{ #category : #navigation }
+FamixTCompilationUnit >> compilationUnitOwnerGroup [
+	<generated>
+	<navigation: 'CompilationUnitOwner'>
+	^ MooseSpecializedGroup with: self compilationUnitOwner
 ]

@@ -28,6 +28,13 @@ FamixTLocalVariable >> displayStringOn: aStream [
 		pbe displayStringOn: aStream ]
 ]
 
+{ #category : #testing }
+FamixTLocalVariable >> isLocalVariable [
+
+	<generated>
+	^ true
+]
+
 { #category : #accessing }
 FamixTLocalVariable >> parentBehaviouralEntity [
 	"Relation named: #parentBehaviouralEntity type: #FamixTWithLocalVariables opposite: #localVariables"

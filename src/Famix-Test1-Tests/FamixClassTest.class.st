@@ -6,17 +6,20 @@ Class {
 
 { #category : #tests }
 FamixClassTest >> testComments [
+
 	| comment comment2 |
 	comment := FamixTest1Comment new.
 	comment2 := FamixTest1Comment new.
 
 	self assertEmpty: c1 comments.
 
-	self deny: comment container equals: c1.
-	self deny: comment2 container equals: c1.
-	c1 comments: {comment . comment2}.
-	self assert: comment container equals: c1.
-	self assert: comment2 container equals: c1
+	self deny: comment commentedEntity equals: c1.
+	self deny: comment2 commentedEntity equals: c1.
+	c1 comments: { 
+			comment.
+			comment2 }.
+	self assert: comment commentedEntity equals: c1.
+	self assert: comment2 commentedEntity equals: c1
 ]
 
 { #category : #tests }

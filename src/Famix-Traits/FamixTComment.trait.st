@@ -4,7 +4,7 @@ FamixTComment represents one instance of a comment (in the sense of programming 
 Trait {
 	#name : #FamixTComment,
 	#instVars : [
-		'#container => FMOne type: #FamixTWithComments opposite: #comments',
+		'#commentedEntity => FMOne type: #FamixTWithComments opposite: #comments',
 		'#content => FMProperty'
 	],
 	#category : #'Famix-Traits-Comment'
@@ -27,20 +27,45 @@ FamixTComment classSide >> content: aString [
 ]
 
 { #category : #accessing }
-FamixTComment >> container [
-	"Relation named: #container type: #FamixTWithComments opposite: #comments"
+FamixTComment >> commentedEntity [
+	"Relation named: #commentedEntity type: #FamixTWithComments opposite: #comments"
 
 	<generated>
-	<FMComment: 'Source code entity containing the comment'>
-	^ container
+	<FMComment: 'Source code commented by the comment'>
+	^ commentedEntity
+]
+
+{ #category : #accessing }
+FamixTComment >> commentedEntity: anObject [
+
+	<generated>
+	commentedEntity := anObject
+]
+
+{ #category : #accessing }
+FamixTComment >> container [
+
+	"Marked as deprecated in January, 2023"
+
+	self
+		deprecated: 'Use #commentedEntity instead'
+		transformWith:
+		'`@receiver container' -> '`@receiver commentedEntity'.
+
+	^ self commentedEntity
 ]
 
 { #category : #accessing }
 FamixTComment >> container: anObject [
 
-	container := anObject.
-	self resetMooseName.
+	"Marked as deprecated in January, 2023"
 
+	self
+		deprecated: 'Use #commentedEntity: instead'
+		transformWith:
+		'`@receiver container: `@arg' -> '`@receiver commentedEntity: `@arg'.
+
+	self commentedEntity: anObject
 ]
 
 { #category : #accessing }
@@ -62,14 +87,16 @@ FamixTComment >> content: anObject [
 FamixTComment >> displayStringOn: aStream [
 
 	aStream << 'comment on '.
-	self container displayStringOn: aStream
+	self commentedEntity displayStringOn: aStream
 ]
 
 { #category : #printing }
 FamixTComment >> printOn: aStream [
-	self sourceText ifNotNil: [ :sourceText | aStream nextPutAll: (sourceText contractTo: 50) ].
+
+	self sourceText ifNotNil: [ :sourceText | 
+		aStream nextPutAll: (sourceText contractTo: 50) ].
 	aStream nextPutAll: ' (comment on '.
-	self container printOn: aStream.
+	self commentedEntity printOn: aStream.
 	aStream nextPut: $)
 ]
 

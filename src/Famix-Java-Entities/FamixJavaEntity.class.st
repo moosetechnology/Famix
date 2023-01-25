@@ -66,6 +66,13 @@ FamixJavaEntity >> isClass [
 ]
 
 { #category : #testing }
+FamixJavaEntity >> isException [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
 FamixJavaEntity >> isImplicitVariable [
 
 	<generated>
@@ -88,6 +95,13 @@ FamixJavaEntity >> isInterface [
 
 { #category : #testing }
 FamixJavaEntity >> isInvocation [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+FamixJavaEntity >> isLocalVariable [
 
 	<generated>
 	^ false

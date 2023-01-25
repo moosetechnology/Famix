@@ -5,8 +5,8 @@ Class {
 	#name : #MooseModel,
 	#superclass : #MooseAbstractGroup,
 	#instVars : [
-		'name',
-		'metamodel'
+		'metamodel',
+		'name'
 	],
 	#classVars : [
 		'MostRecentOwner'
@@ -27,6 +27,12 @@ MooseModel class >> annotation [
 	<FMClass: #Model super: #MooseAbstractGroup>
 	<package: #Moose>
 
+]
+
+{ #category : #testing }
+MooseModel class >> canBeImportedFromFile [
+
+	^ false
 ]
 
 { #category : #accessing }

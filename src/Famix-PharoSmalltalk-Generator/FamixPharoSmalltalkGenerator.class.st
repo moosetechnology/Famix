@@ -83,6 +83,7 @@ FamixPharoSmalltalkGenerator >> defineHierarchy [
 	annotationType --|> #TEntityMetaLevelDependency.
 	annotationType --|> #TAnnotationType.
 	annotationType --|> #TWithAttributes.
+	annotationType --|> #TPackageable.
 
 	annotationTypeAttribute --|> namedEntity.
 	annotationTypeAttribute --|> #TEntityMetaLevelDependency.
@@ -99,11 +100,9 @@ FamixPharoSmalltalkGenerator >> defineHierarchy [
 	self flag:
 		'WithTypes should not be necessary but needed in tests like FamixMetricsTest>>testAfferentCouplingFamixClassGroup'.
 	class --|> #TWithTypes.
-	class --|> #TWithExceptions.
 	class --|> #TClass.
 	class --|> #TCanBeAbstract.
 	class --|> #TClassMetrics.
-	class --|> #TWithComments.
 
 	globalVariable --|> namedEntity.
 	globalVariable --|> #TGlobalVariable.
@@ -128,11 +127,11 @@ FamixPharoSmalltalkGenerator >> defineHierarchy [
 	method --|> #TCanBeAbstract.
 	method --|> #THasKind.
 	method --|> #TWithComments.
+	method --|> #TWithAnnotationInstances.
 	method --|> #TCanBeClassSide.
+	method --|> #TPackageable.
 
-	namedEntity --|> #TPackageable.
 	namedEntity --|> #TInvocationsReceiver.
-	namedEntity --|> #TWithAnnotationInstances.
 	namedEntity --|> #TEntityMetaLevelDependency.
 	namedEntity --|> sourcedEntity.
 
@@ -147,8 +146,6 @@ FamixPharoSmalltalkGenerator >> defineHierarchy [
 	package --|> #TWithGlobalVariables.
 	package --|> #TWithClasses.
 	package --|> #TCohesionCouplingMetrics.
-	package --|> #TOODependencyQueries.
-	package withPrecedenceOf: #TOODependencyQueries.
 
 	parameter --|> namedEntity.
 	parameter --|> #TParameter.

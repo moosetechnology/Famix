@@ -56,6 +56,13 @@ FamixStEntity >> isClass [
 ]
 
 { #category : #testing }
+FamixStEntity >> isGlobalVariable [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
 FamixStEntity >> isImplicitVariable [
 
 	<generated>
@@ -71,6 +78,13 @@ FamixStEntity >> isInheritance [
 
 { #category : #testing }
 FamixStEntity >> isInvocation [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+FamixStEntity >> isLocalVariable [
 
 	<generated>
 	^ false
