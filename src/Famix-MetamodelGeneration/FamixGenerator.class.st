@@ -121,7 +121,10 @@ Class {
 		'tCanBeClassSide',
 		'tImplementable',
 		'tCanImplement',
-		'tImplementation'
+		'tImplementation',
+		'tImportable',
+		'tImport',
+		'tWithImports'
 	],
 	#category : #'Famix-MetamodelGeneration'
 }
@@ -1007,6 +1010,8 @@ FamixGenerator >> defineHierarchy [
 
 	tInheritance --|> tAssociation.
 
+	tImport --|> tAssociation.
+
 	tInvocation --|> tAssociation.
 
 	tImplicitVariable --|> tStructuralEntity.
@@ -1320,6 +1325,20 @@ FamixGenerator >> defineRelations [
 	((tInvocationsReceiver property: #receivingInvocations)
 			comment: 'List of invocations performed on this entity (considered as the receiver)').
 
+	((tWithImports property: #outgoingImports)
+			comment: '')
+		-*
+	((tImport property: #importingEntity) 
+			comment: 'Importing entity';
+			target).
+
+	((tImport property: #importedEntity)
+			comment: 'Imported entity';
+			source)
+		*-
+	((tImportable property: #incomingImports)
+			comment: 'List of imports of this entity').
+
 	((tLocalVariable property: #parentBehaviouralEntity)
 			comment: 'Behavioural entity declaring this local variable. belongsTo implementation';
 			container)
@@ -1572,7 +1591,11 @@ FamixGenerator >> defineTraits [
 	tImplicitVariable := builder newTraitNamed: #TImplicitVariable.
 	tImplicitVariable comment: self commentForTImplicitVariable.
 	tImplicitVariable withTesting.
-
+	
+	tImport := builder newTraitNamed: #TImport.
+	tImportable := builder newTraitNamed: #TImportable.
+	tWithImports := builder newTraitNamed: #TWithImports.
+	
 	tInheritance := builder newTraitNamed: #TInheritance.
 	tInheritance comment: self commentForTInheritance.
 	tInheritance withTesting.
