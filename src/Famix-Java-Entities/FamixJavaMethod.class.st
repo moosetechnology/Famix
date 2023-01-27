@@ -117,11 +117,20 @@ FamixJavaMethod >> isDetectedSetter [
 
 { #category : #testing }
 FamixJavaMethod >> isGetter [
+	"No parameter AND
+	Has a return type AND
+		Has no outgoing invocation AND
+			Name starts with get OR
+				Name starts with is AND returns a boolean"
 
-	^ self kind = #getter or: [   (self name beginsWith: 'get') and: [ 
-		  self parameters isEmpty and: [ 
-			  self accesses asOrderedCollection size = 1 and: [ 
-				  self outgoingInvocations isEmpty ] ] ]]
+	^ self kind = #getter or: [
+		  self parameters isEmpty and: [
+			  self declaredType isNotNil and: [
+				  self declaredType name ~= 'void' and: [
+					  self outgoingInvocations isEmpty and: [
+						  (self name beginsWith: 'get') or: [
+							  (self name beginsWith: 'is') and: [
+								  self declaredType name caseInsensitiveLessOrEqual: 'boolean' ] ] ] ] ] ] ]
 ]
 
 { #category : #testing }
