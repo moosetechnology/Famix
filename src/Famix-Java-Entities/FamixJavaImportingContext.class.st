@@ -95,6 +95,12 @@ FamixJavaImportingContext >> importImplicitVariable [
 ]
 
 { #category : #testing }
+FamixJavaImportingContext >> importImport [
+	<generated>
+	^ self import: FamixJavaImport
+]
+
+{ #category : #testing }
 FamixJavaImportingContext >> importIndexedFileAnchor [
 	<generated>
 	^ self import: FamixJavaIndexedFileAnchor
@@ -320,6 +326,12 @@ FamixJavaImportingContext >> shouldImportImplementation [
 FamixJavaImportingContext >> shouldImportImplicitVariable [
 	<generated>
 	^ self shouldImport: FamixJavaImplicitVariable
+]
+
+{ #category : #testing }
+FamixJavaImportingContext >> shouldImportImport [
+	<generated>
+	^ self shouldImport: FamixJavaImport
 ]
 
 { #category : #testing }

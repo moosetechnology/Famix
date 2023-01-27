@@ -38,7 +38,8 @@ Class {
 		'tCanImplement',
 		'tWithInterfaces',
 		'parameterizableInterface',
-		'parameterizableException'
+		'parameterizableException',
+		'import'
 	],
 	#category : #'Famix-Java-Generator'
 }
@@ -128,6 +129,7 @@ FamixJavaGenerator >> defineClasses [
 	enumValue := builder newClassNamed: #EnumValue.
 	exception := builder newClassNamed: #Exception.
 	implicitVariable := builder newClassNamed: #ImplicitVariable.
+	import := builder newClassNamed: #Import.
 	indexedFileAnchor := builder newClassNamed: #IndexedFileAnchor.
 	inheritance := builder newClassNamed: #Inheritance.
 	invocation := builder newClassNamed: #Invocation.
@@ -215,6 +217,7 @@ FamixJavaGenerator >> defineHierarchy [
 	method --|> #TWithComments.
 	method --|> tCanBeSynchronized.
 	method --|> #TCanBeClassSide.
+	method --|> #TImportable.
 
 	class --|> type.
 	class --|> #TClass.
@@ -226,7 +229,9 @@ FamixJavaGenerator >> defineHierarchy [
 	class --|> #TClassMetrics.
 	class --|> tJavaClassMetrics.	
 	class --|> #TCanImplement.
-	
+	class --|> #TWithImports.
+	class --|> #TImportable.
+		
 	interface --|> type.
 	interface --|> #TPackageable.
 	interface --|> #TWithMethods.
@@ -238,6 +243,8 @@ FamixJavaGenerator >> defineHierarchy [
 	interface --|> #TCanBeClassSide. 
 	interface --|> #TWithComments.
 	interface --|> #TImplementable.
+	interface --|> #TWithImports.
+	interface --|> #TImportable.
 	
 	implementation --|> #TImplementation.
 
@@ -255,6 +262,8 @@ FamixJavaGenerator >> defineHierarchy [
 	enum --|> #TWithMethods.
 	enum --|> #TWithInheritances.
 	enum --|> #TWithComments.
+	enum --|> #TWithImports.
+	enum --|> #TImportable.
 
 	enumValue --|> namedEntity.
 	enumValue --|> #TWithComments.
@@ -269,6 +278,8 @@ FamixJavaGenerator >> defineHierarchy [
 	implicitVariable --|> namedEntity.
 	implicitVariable --|> #TImplicitVariable.
 	implicitVariable --|> #TInvocationsReceiver.
+
+	import --|> #TImport.
 	
 	inheritance --|> #TInheritance.
 
@@ -290,6 +301,7 @@ FamixJavaGenerator >> defineHierarchy [
 	package --|> #TPackage.
 	package --|> #TPackageable.
 	package --|> #TWithComments.
+	package --|> #TImportable.
 
 	parameter --|> namedEntity.
 	parameter --|> #TParameter.
