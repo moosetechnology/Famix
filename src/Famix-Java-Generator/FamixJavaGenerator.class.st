@@ -319,8 +319,6 @@ FamixJavaGenerator >> defineHierarchy [
 	primitiveType --|> #TPrimitiveType.
 
 	reference --|> #TReference.
-	
-	sourcedEntity --|> #TWithFiles.
 
 	type --|> containerEntity.
 	type --|> #TType.
