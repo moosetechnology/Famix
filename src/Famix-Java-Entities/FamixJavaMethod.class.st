@@ -103,16 +103,20 @@ FamixJavaMethod >> isClassInitializer [
 
 { #category : #testing }
 FamixJavaMethod >> isDetectedGetter [
+
+	self deprecated: 'This is legacy and is not used. January 2023'.
+
 	^ self outgoingInvocations isEmpty and: [ 
-		self accesses size = 1 and: [ 
-			self accesses first isWrite not ] ]
+		  self accesses size = 1 and: [ self accesses first isWrite not ] ]
 ]
 
 { #category : #testing }
 FamixJavaMethod >> isDetectedSetter [
+
+	self deprecated: 'This is legacy and is not used. January 2023'.
+
 	^ self outgoingInvocations isEmpty and: [ 
-		self accesses size = 1 and: [ 
-			self accesses first isWrite ] ]
+		  self accesses size = 1 and: [ self accesses first isWrite ] ]
 ]
 
 { #category : #testing }
