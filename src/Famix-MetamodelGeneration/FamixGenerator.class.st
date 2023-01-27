@@ -949,6 +949,7 @@ FamixGenerator >> defineHierarchy [
 
 	tAttribute --|> tStructuralEntity.
 	
+	tEnumValue --|> tStructuralEntity.	
 
 	tAnnotationInstance --|> #TEntityMetaLevelDependency.
 
