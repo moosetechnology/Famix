@@ -16,6 +16,8 @@ Trait {
 	#instVars : [
 		'#parentEnum => FMOne type: #FamixTWithEnumValues opposite: #enumValues'
 	],
+	#traits : 'FamixTStructuralEntity',
+	#classTraits : 'FamixTStructuralEntity classTrait',
 	#category : #'Famix-Traits-EnumValue'
 }
 
