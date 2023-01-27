@@ -1,8 +1,8 @@
 Class {
 	#name : #FamixJavaType,
 	#superclass : #FamixJavaContainerEntity,
-	#traits : 'FamixTParameterizedTypeUser + FamixTType + FamixTWithTypeAliases',
-	#classTraits : 'FamixTParameterizedTypeUser classTrait + FamixTType classTrait + FamixTWithTypeAliases classTrait',
+	#traits : 'FamixTParameterizedTypeUser + FamixTType',
+	#classTraits : 'FamixTParameterizedTypeUser classTrait + FamixTType classTrait',
 	#category : #'Famix-Java-Entities-Entities'
 }
 
