@@ -27,8 +27,6 @@ Class {
 		'type',
 		'unknownVariable',
 		'parameterizedType',
-		'file',
-		'folder',
 		'indexedFileAnchor',
 		'tCanBeVolatile',
 		'tCanBeTransient',
@@ -129,8 +127,6 @@ FamixJavaGenerator >> defineClasses [
 	enum := builder newClassNamed: #Enum.
 	enumValue := builder newClassNamed: #EnumValue.
 	exception := builder newClassNamed: #Exception.
-	file := builder newClassNamed: #File.
-	folder := builder newClassNamed: #Folder.
 	implicitVariable := builder newClassNamed: #ImplicitVariable.
 	indexedFileAnchor := builder newClassNamed: #IndexedFileAnchor.
 	inheritance := builder newClassNamed: #Inheritance.
@@ -206,12 +202,6 @@ FamixJavaGenerator >> defineHierarchy [
 	attribute --|> #TWithComments.
 	attribute --|> #TCanBeClassSide.
 	
-	file --|> namedEntity.
-	file --|> #TFile.
-	
-	folder --|> namedEntity.
-	folder --|> #TFolder.
-
 	indexedFileAnchor --|> sourceAnchor.
 	indexedFileAnchor --|> #TIndexedFileNavigation.
 

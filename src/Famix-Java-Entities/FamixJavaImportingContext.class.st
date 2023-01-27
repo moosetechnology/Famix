@@ -83,18 +83,6 @@ FamixJavaImportingContext >> importException [
 ]
 
 { #category : #testing }
-FamixJavaImportingContext >> importFile [
-	<generated>
-	^ self import: FamixJavaFile
-]
-
-{ #category : #testing }
-FamixJavaImportingContext >> importFolder [
-	<generated>
-	^ self import: FamixJavaFolder
-]
-
-{ #category : #testing }
 FamixJavaImportingContext >> importImplementation [
 	<generated>
 	^ self import: FamixJavaImplementation
@@ -320,18 +308,6 @@ FamixJavaImportingContext >> shouldImportEnumValue [
 FamixJavaImportingContext >> shouldImportException [
 	<generated>
 	^ self shouldImport: FamixJavaException
-]
-
-{ #category : #testing }
-FamixJavaImportingContext >> shouldImportFile [
-	<generated>
-	^ self shouldImport: FamixJavaFile
-]
-
-{ #category : #testing }
-FamixJavaImportingContext >> shouldImportFolder [
-	<generated>
-	^ self shouldImport: FamixJavaFolder
 ]
 
 { #category : #testing }
