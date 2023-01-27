@@ -29,13 +29,25 @@ FamixJavaMethodTest >> testIsClassSide [
 FamixJavaMethodTest >> testIsGetter [
 
 	self deny: method isGetter.
-	
+
+	method name: 'getLogin'.
+	method declaredType: (FamixJavaClass named: 'String').
+	self assert: method isGetter.
+
+	method name: 'getLogin'.
+	method declaredType: (FamixJavaPrimitiveType named: 'void').
+	self deny: method isGetter
+]
+
+{ #category : #tests }
+FamixJavaMethodTest >> testIsGetterForBooleanAttribute [
+
 	method name: 'isActif'.
 	method declaredType: (FamixJavaPrimitiveType named: 'boolean').
 	self assert: method isGetter.
 
-	method name: 'getLogin'.
-	method declaredType: (FamixJavaClass named: 'String').
+	method name: 'isActif'.
+	method declaredType: (FamixJavaClass named: 'Boolean').
 	self assert: method isGetter.
 
 	method name: 'isActif'.
