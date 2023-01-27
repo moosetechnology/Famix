@@ -71,9 +71,13 @@ FamixJavaMethodTest >> testIsSetter [
 	self deny: method isSetter.
 
 	method name: 'setLogin'.
+	self deny: method isSetter.
+
 	method parameters: { FamixJavaParameter new }.
+	self deny: method isSetter.
+
 	method declaredType: (FamixJavaPrimitiveType named: 'void').
-	self assert: method isSetter.
+	self assert: method isSetter
 ]
 
 { #category : #tests }
