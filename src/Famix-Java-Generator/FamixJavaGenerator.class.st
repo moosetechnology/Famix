@@ -291,14 +291,12 @@ FamixJavaGenerator >> defineHierarchy [
 	localVariable --|> #TInvocationsReceiver.
 	localVariable --|> #TWithComments.
 
-	
 	namedEntity --|> #TInvocationsReceiver.
 	namedEntity --|> #TWithAnnotationInstances.
 	namedEntity --|> #TEntityMetaLevelDependency.
 	namedEntity --|> sourcedEntity.
 
 	package --|> containerEntity.
-	package --|> #TWithGlobalVariables.
 	package --|> #TPackage.
 	package --|> #TPackageable.
 	package --|> #TWithComments.
