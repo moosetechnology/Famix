@@ -267,10 +267,8 @@ FamixJavaGenerator >> defineHierarchy [
 	enum --|> #TWithComments.
 
 	enumValue --|> namedEntity.
-	enumValue --|> #TStructuralEntity.
 	enumValue --|> #TWithComments.
 	enumValue --|> #TEnumValue.
-	enumValue withPrecedenceOf: #TEnumValue.
 
 	exception --|> #TException.
 	exception --|> #TWithAnnotationInstances.
