@@ -334,7 +334,6 @@ FamixJavaGenerator >> defineHierarchy [
 
 	type --|> containerEntity.
 	type --|> #TType.
-	type --|> #TWithTypeAliases.
 	type --|> #TParameterizedTypeUser.
 
 	unknownVariable --|> namedEntity.
