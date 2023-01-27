@@ -26,6 +26,36 @@ FamixJavaMethodTest >> testIsClassSide [
 ]
 
 { #category : #tests }
+FamixJavaMethodTest >> testIsGetter [
+
+	self deny: method isGetter.
+
+	method name: 'getLogin'.
+	method declaredType: (FamixJavaClass named: 'String').
+	self assert: method isGetter.
+
+	method name: 'getLogin'.
+	method declaredType: (FamixJavaPrimitiveType named: 'void').
+	self deny: method isGetter
+]
+
+{ #category : #tests }
+FamixJavaMethodTest >> testIsGetterForBooleanAttribute [
+
+	method name: 'isActif'.
+	method declaredType: (FamixJavaPrimitiveType named: 'boolean').
+	self assert: method isGetter.
+
+	method name: 'isActif'.
+	method declaredType: (FamixJavaClass named: 'Boolean').
+	self assert: method isGetter.
+
+	method name: 'isActif'.
+	method declaredType: (FamixJavaClass named: 'String').
+	self deny: method isGetter
+]
+
+{ #category : #tests }
 FamixJavaMethodTest >> testIsNotStubWhenParentIsNotStub [
 	| aClass |
 	aClass := FamixJavaClass new.
@@ -33,6 +63,21 @@ FamixJavaMethodTest >> testIsNotStubWhenParentIsNotStub [
 	aClass isStub: false.
 	self deny: aClass isStub.
 	self deny: method isStub
+]
+
+{ #category : #tests }
+FamixJavaMethodTest >> testIsSetter [
+
+	self deny: method isSetter.
+
+	method name: 'setLogin'.
+	self deny: method isSetter.
+
+	method parameters: { FamixJavaParameter new }.
+	self deny: method isSetter.
+
+	method declaredType: (FamixJavaPrimitiveType named: 'void').
+	self assert: method isSetter
 ]
 
 { #category : #tests }
