@@ -1,8 +1,8 @@
 Class {
 	#name : #FamixJavaSourcedEntity,
 	#superclass : #FamixJavaEntity,
-	#traits : 'FamixTSourceEntity + FamixTWithFiles',
-	#classTraits : 'FamixTSourceEntity classTrait + FamixTWithFiles classTrait',
+	#traits : 'FamixTSourceEntity',
+	#classTraits : 'FamixTSourceEntity classTrait',
 	#category : #'Famix-Java-Entities-Entities'
 }
 
