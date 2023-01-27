@@ -115,7 +115,6 @@ FamixPharoSmalltalkGenerator >> defineHierarchy [
 	inheritance --|> #TInheritance.
 
 	invocation --|> #TInvocation.
-	invocation --|> #THasSignature.
 
 	localVariable --|> namedEntity.
 	localVariable --|> #TLocalVariable.

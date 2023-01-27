@@ -1013,6 +1013,7 @@ FamixGenerator >> defineHierarchy [
 	tImport --|> tAssociation.
 
 	tInvocation --|> tAssociation.
+	tInvocation --|> tHasSignature.
 
 	tImplicitVariable --|> tStructuralEntity.
 
