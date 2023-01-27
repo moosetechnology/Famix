@@ -118,19 +118,21 @@ FamixJavaMethod >> isDetectedSetter [
 { #category : #testing }
 FamixJavaMethod >> isGetter [
 	"No parameter AND
-	Has a return type AND
-		Has no outgoing invocation AND
-			Name starts with get OR
-				Name starts with is AND returns a boolean"
+		Has a declared type (not void) AND
+			Has no outgoing invocation AND
+				Name starts with get OR
+					Name starts with is AND returns a boolean"
 
 	^ self kind = #getter or: [
 		  self parameters isEmpty and: [
 			  self declaredType isNotNil and: [
 				  self declaredType name ~= 'void' and: [
 					  self outgoingInvocations isEmpty and: [
-						  (self name beginsWith: 'get') or: [
-							  (self name beginsWith: 'is') and: [
-								  self declaredType name caseInsensitiveLessOrEqual: 'boolean' ] ] ] ] ] ] ]
+						  self name isNotNil and: [
+							  (self name beginsWith: 'get') or: [
+								  (self name beginsWith: 'is') and: [
+									  self declaredType name caseInsensitiveLessOrEqual:
+										  'boolean' ] ] ] ] ] ] ] ]
 ]
 
 { #category : #testing }
@@ -175,11 +177,18 @@ FamixJavaMethod >> isOverriding [
 
 { #category : #testing }
 FamixJavaMethod >> isSetter [
+	"Name begins with set AND
+		Has 1 parameter AND
+			Declared type is void AND
+				Has no outgoing invocation"
 
-	^ self kind = #setter or: [ (self name beginsWith: 'set') and: [ 
-		  self parameters size = 1 and: [ 
-			  self accesses asOrderedCollection size = 1 and: [ 
-				  self outgoingInvocations isEmpty ] ] ] ]
+	^ self kind = #setter or: [
+		  self name isNotNil and: [
+			  (self name beginsWith: 'set') and: [
+				  self parameters size = 1 and: [
+					  self declaredType isNotNil and: [
+						  self declaredType name = 'void' and: [
+							  self outgoingInvocations isEmpty ] ] ] ] ] ]
 ]
 
 { #category : #printing }

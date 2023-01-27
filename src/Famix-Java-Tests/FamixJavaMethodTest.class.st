@@ -66,6 +66,17 @@ FamixJavaMethodTest >> testIsNotStubWhenParentIsNotStub [
 ]
 
 { #category : #tests }
+FamixJavaMethodTest >> testIsSetter [
+
+	self deny: method isSetter.
+
+	method name: 'setLogin'.
+	method parameters: { FamixJavaParameter new }.
+	method declaredType: (FamixJavaPrimitiveType named: 'void').
+	self assert: method isSetter.
+]
+
+{ #category : #tests }
 FamixJavaMethodTest >> testIsStubWhenParentIsStub [
 	| aClass |
 	aClass := FamixJavaClass new.
