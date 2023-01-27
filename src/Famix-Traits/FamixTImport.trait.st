@@ -24,7 +24,7 @@ FamixTImport >> importedEntity [
 
 	<generated>
 	<FMComment: 'Imported entity'>
-	<source>
+	<target>
 	^ importedEntity
 ]
 
@@ -41,7 +41,7 @@ FamixTImport >> importingEntity [
 
 	<generated>
 	<FMComment: 'Importing entity'>
-	<target>
+	<source>
 	^ importingEntity
 ]
 

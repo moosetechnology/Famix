@@ -1330,11 +1330,11 @@ FamixGenerator >> defineRelations [
 		-*
 	((tImport property: #importingEntity) 
 			comment: 'Importing entity';
-			target).
+			source).
 
 	((tImport property: #importedEntity)
 			comment: 'Imported entity';
-			source)
+			target )
 		*-
 	((tImportable property: #incomingImports)
 			comment: 'List of imports of this entity').

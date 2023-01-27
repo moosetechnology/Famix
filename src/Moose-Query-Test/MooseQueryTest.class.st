@@ -534,9 +534,21 @@ MooseQueryTest >> testHasOutgoingInvocation [
 
 { #category : #tests }
 MooseQueryTest >> testIncomingAssociationTypes [
-	self assertCollection: var2 incomingAssociationTypes hasSameElements: {FamixTAccess}.
-	self assertCollection: class1 incomingAssociationTypes hasSameElements: {FamixTInheritance . FamixTReference}.
-	self assertCollection: method1 incomingAssociationTypes hasSameElements: {FamixTInvocation}
+
+	self
+		assertCollection: var2 incomingAssociationTypes
+		hasSameElements: { FamixTAccess }.
+	self
+		assertCollection: class1 incomingAssociationTypes
+		hasSameElements: { 
+				FamixTInheritance.
+				FamixTReference.
+				FamixTImport }.
+	self
+		assertCollection: method1 incomingAssociationTypes
+		hasSameElements: { 
+				FamixTInvocation.
+				FamixTImport }
 ]
 
 { #category : #tests }
@@ -586,8 +598,19 @@ MooseQueryTest >> testOutgoingAccessesWithANamespaceInANamespace [
 
 { #category : #tests }
 MooseQueryTest >> testOutgoingAssociationTypes [
-	self assertCollection: class1 outgoingAssociationTypes hasSameElements: {FamixTInheritance. FamixTImplementation }.
-	self assertCollection: method1 outgoingAssociationTypes hasSameElements: {FamixTInvocation . FamixTReference . FamixTAccess}
+
+	self
+		assertCollection: class1 outgoingAssociationTypes
+		hasSameElements: { 
+				FamixTInheritance.
+				FamixTImplementation.
+				FamixTImport }.
+	self
+		assertCollection: method1 outgoingAssociationTypes
+		hasSameElements: { 
+				FamixTInvocation.
+				FamixTReference.
+				FamixTAccess }
 ]
 
 { #category : #tests }
