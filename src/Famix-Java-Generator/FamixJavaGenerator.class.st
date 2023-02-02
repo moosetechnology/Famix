@@ -325,7 +325,6 @@ FamixJavaGenerator >> defineHierarchy [
 	parameterizedType --|> #TWithInheritances.
 	parameterizedType --|> #TCanImplement.
 	parameterizedType --|> #TImplementable.
-	parameterizedType --|> #TWithMethods.
 
 	primitiveType --|> type.
 	primitiveType --|> #TPrimitiveType.
@@ -335,6 +334,7 @@ FamixJavaGenerator >> defineHierarchy [
 	type --|> containerEntity.
 	type --|> #TType.
 	type --|> #TParameterizedTypeUser.
+	type --|> #TWithMethods.
 
 	unknownVariable --|> namedEntity.
 	unknownVariable --|> #TUnknownVariable.
