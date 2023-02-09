@@ -243,9 +243,9 @@ FamixMetamodelBuilder >> generateShouldImportIn: contextClass [
 			self environment
 				compile: ('shouldImport{1}
 	<generated>
-	^ self shouldImport: {2}' format: { 
+	^ self shouldImport: #{2}' format: { 
 							 each name.
-							 each fullName })
+							 each name })
 				in: contextClass
 				classified: 'testing' ] ]
 ]

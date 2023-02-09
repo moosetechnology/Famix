@@ -203,161 +203,161 @@ FamixStImportingContext >> importUnknownVariable [
 { #category : #testing }
 FamixStImportingContext >> shouldImportAccess [
 	<generated>
-	^ self shouldImport: FamixStAccess
+	^ self shouldImport: #Access
 ]
 
 { #category : #testing }
 FamixStImportingContext >> shouldImportAnnotationInstance [
 	<generated>
-	^ self shouldImport: FamixStAnnotationInstance
+	^ self shouldImport: #AnnotationInstance
 ]
 
 { #category : #testing }
 FamixStImportingContext >> shouldImportAnnotationInstanceAttribute [
 	<generated>
-	^ self shouldImport: FamixStAnnotationInstanceAttribute
+	^ self shouldImport: #AnnotationInstanceAttribute
 ]
 
 { #category : #testing }
 FamixStImportingContext >> shouldImportAnnotationType [
 	<generated>
-	^ self shouldImport: FamixStAnnotationType
+	^ self shouldImport: #AnnotationType
 ]
 
 { #category : #testing }
 FamixStImportingContext >> shouldImportAnnotationTypeAttribute [
 	<generated>
-	^ self shouldImport: FamixStAnnotationTypeAttribute
+	^ self shouldImport: #AnnotationTypeAttribute
 ]
 
 { #category : #testing }
 FamixStImportingContext >> shouldImportAttribute [
 	<generated>
-	^ self shouldImport: FamixStAttribute
+	^ self shouldImport: #Attribute
 ]
 
 { #category : #testing }
 FamixStImportingContext >> shouldImportClass [
 	<generated>
-	^ self shouldImport: FamixStClass
+	^ self shouldImport: #Class
 ]
 
 { #category : #testing }
 FamixStImportingContext >> shouldImportComment [
 	<generated>
-	^ self shouldImport: FamixStComment
+	^ self shouldImport: #Comment
 ]
 
 { #category : #testing }
 FamixStImportingContext >> shouldImportEntity [
 	<generated>
-	^ self shouldImport: FamixStEntity
+	^ self shouldImport: #Entity
 ]
 
 { #category : #testing }
 FamixStImportingContext >> shouldImportGlobalVariable [
 	<generated>
-	^ self shouldImport: FamixStGlobalVariable
+	^ self shouldImport: #GlobalVariable
 ]
 
 { #category : #testing }
 FamixStImportingContext >> shouldImportImplicitVariable [
 	<generated>
-	^ self shouldImport: FamixStImplicitVariable
+	^ self shouldImport: #ImplicitVariable
 ]
 
 { #category : #testing }
 FamixStImportingContext >> shouldImportInheritance [
 	<generated>
-	^ self shouldImport: FamixStInheritance
+	^ self shouldImport: #Inheritance
 ]
 
 { #category : #testing }
 FamixStImportingContext >> shouldImportInvocation [
 	<generated>
-	^ self shouldImport: FamixStInvocation
+	^ self shouldImport: #Invocation
 ]
 
 { #category : #testing }
 FamixStImportingContext >> shouldImportLocalVariable [
 	<generated>
-	^ self shouldImport: FamixStLocalVariable
+	^ self shouldImport: #LocalVariable
 ]
 
 { #category : #testing }
 FamixStImportingContext >> shouldImportMethod [
 	<generated>
-	^ self shouldImport: FamixStMethod
+	^ self shouldImport: #Method
 ]
 
 { #category : #testing }
 FamixStImportingContext >> shouldImportNamedEntity [
 	<generated>
-	^ self shouldImport: FamixStNamedEntity
+	^ self shouldImport: #NamedEntity
 ]
 
 { #category : #testing }
 FamixStImportingContext >> shouldImportNamespace [
 	<generated>
-	^ self shouldImport: FamixStNamespace
+	^ self shouldImport: #Namespace
 ]
 
 { #category : #testing }
 FamixStImportingContext >> shouldImportPackage [
 	<generated>
-	^ self shouldImport: FamixStPackage
+	^ self shouldImport: #Package
 ]
 
 { #category : #testing }
 FamixStImportingContext >> shouldImportParameter [
 	<generated>
-	^ self shouldImport: FamixStParameter
+	^ self shouldImport: #Parameter
 ]
 
 { #category : #testing }
 FamixStImportingContext >> shouldImportPharoEntitySourceAnchor [
 	<generated>
-	^ self shouldImport: FamixStPharoEntitySourceAnchor
+	^ self shouldImport: #PharoEntitySourceAnchor
 ]
 
 { #category : #testing }
 FamixStImportingContext >> shouldImportReference [
 	<generated>
-	^ self shouldImport: FamixStReference
+	^ self shouldImport: #Reference
 ]
 
 { #category : #testing }
 FamixStImportingContext >> shouldImportSourceAnchor [
 	<generated>
-	^ self shouldImport: FamixStSourceAnchor
+	^ self shouldImport: #SourceAnchor
 ]
 
 { #category : #testing }
 FamixStImportingContext >> shouldImportSourceLanguage [
 	<generated>
-	^ self shouldImport: FamixStSourceLanguage
+	^ self shouldImport: #SourceLanguage
 ]
 
 { #category : #testing }
 FamixStImportingContext >> shouldImportSourceTextAnchor [
 	<generated>
-	^ self shouldImport: FamixStSourceTextAnchor
+	^ self shouldImport: #SourceTextAnchor
 ]
 
 { #category : #testing }
 FamixStImportingContext >> shouldImportSourcedEntity [
 	<generated>
-	^ self shouldImport: FamixStSourcedEntity
+	^ self shouldImport: #SourcedEntity
 ]
 
 { #category : #testing }
 FamixStImportingContext >> shouldImportUnknownSourceLanguage [
 	<generated>
-	^ self shouldImport: FamixStUnknownSourceLanguage
+	^ self shouldImport: #UnknownSourceLanguage
 ]
 
 { #category : #testing }
 FamixStImportingContext >> shouldImportUnknownVariable [
 	<generated>
-	^ self shouldImport: FamixStUnknownVariable
+	^ self shouldImport: #UnknownVariable
 ]

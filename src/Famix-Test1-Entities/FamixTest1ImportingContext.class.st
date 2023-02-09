@@ -133,101 +133,101 @@ FamixTest1ImportingContext >> importUnknownSourceLanguage [
 { #category : #testing }
 FamixTest1ImportingContext >> shouldImportAssociation [
 	<generated>
-	^ self shouldImport: FamixTest1Association
+	^ self shouldImport: #Association
 ]
 
 { #category : #testing }
 FamixTest1ImportingContext >> shouldImportAttribute [
 	<generated>
-	^ self shouldImport: FamixTest1Attribute
+	^ self shouldImport: #Attribute
 ]
 
 { #category : #testing }
 FamixTest1ImportingContext >> shouldImportClass [
 	<generated>
-	^ self shouldImport: FamixTest1Class
+	^ self shouldImport: #Class
 ]
 
 { #category : #testing }
 FamixTest1ImportingContext >> shouldImportComment [
 	<generated>
-	^ self shouldImport: FamixTest1Comment
+	^ self shouldImport: #Comment
 ]
 
 { #category : #testing }
 FamixTest1ImportingContext >> shouldImportEntity [
 	<generated>
-	^ self shouldImport: FamixTest1Entity
+	^ self shouldImport: #Entity
 ]
 
 { #category : #testing }
 FamixTest1ImportingContext >> shouldImportFile [
 	<generated>
-	^ self shouldImport: FamixTest1File
+	^ self shouldImport: #File
 ]
 
 { #category : #testing }
 FamixTest1ImportingContext >> shouldImportFileAnchor [
 	<generated>
-	^ self shouldImport: FamixTest1FileAnchor
+	^ self shouldImport: #FileAnchor
 ]
 
 { #category : #testing }
 FamixTest1ImportingContext >> shouldImportFolder [
 	<generated>
-	^ self shouldImport: FamixTest1Folder
+	^ self shouldImport: #Folder
 ]
 
 { #category : #testing }
 FamixTest1ImportingContext >> shouldImportIndexedFileAnchor [
 	<generated>
-	^ self shouldImport: FamixTest1IndexedFileAnchor
+	^ self shouldImport: #IndexedFileAnchor
 ]
 
 { #category : #testing }
 FamixTest1ImportingContext >> shouldImportMethod [
 	<generated>
-	^ self shouldImport: FamixTest1Method
+	^ self shouldImport: #Method
 ]
 
 { #category : #testing }
 FamixTest1ImportingContext >> shouldImportMultipleFileAnchor [
 	<generated>
-	^ self shouldImport: FamixTest1MultipleFileAnchor
+	^ self shouldImport: #MultipleFileAnchor
 ]
 
 { #category : #testing }
 FamixTest1ImportingContext >> shouldImportNamedEntity [
 	<generated>
-	^ self shouldImport: FamixTest1NamedEntity
+	^ self shouldImport: #NamedEntity
 ]
 
 { #category : #testing }
 FamixTest1ImportingContext >> shouldImportSourceAnchor [
 	<generated>
-	^ self shouldImport: FamixTest1SourceAnchor
+	^ self shouldImport: #SourceAnchor
 ]
 
 { #category : #testing }
 FamixTest1ImportingContext >> shouldImportSourceLanguage [
 	<generated>
-	^ self shouldImport: FamixTest1SourceLanguage
+	^ self shouldImport: #SourceLanguage
 ]
 
 { #category : #testing }
 FamixTest1ImportingContext >> shouldImportSourceTextAnchor [
 	<generated>
-	^ self shouldImport: FamixTest1SourceTextAnchor
+	^ self shouldImport: #SourceTextAnchor
 ]
 
 { #category : #testing }
 FamixTest1ImportingContext >> shouldImportSourcedEntity [
 	<generated>
-	^ self shouldImport: FamixTest1SourcedEntity
+	^ self shouldImport: #SourcedEntity
 ]
 
 { #category : #testing }
 FamixTest1ImportingContext >> shouldImportUnknownSourceLanguage [
 	<generated>
-	^ self shouldImport: FamixTest1UnknownSourceLanguage
+	^ self shouldImport: #UnknownSourceLanguage
 ]
