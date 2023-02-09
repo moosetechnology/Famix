@@ -13,14 +13,9 @@ Class {
 { #category : #'importing-filters' }
 FmxImportingContext >> containersOf: aFM3Class [
 
-	| allMetamodelClasses |
-	allMetamodelClasses := self class importedMetamodel classes.
-
 	^ aFM3Class allContainerProperties flatCollectAsSet: [ :prop | 
 		  prop type isFM3Trait
-			  ifTrue: [ 
-				  allMetamodelClasses select: [ :fm3Class | 
-					  fm3Class traits includes: prop type ] ]
+			  ifTrue: [ prop type classUsers ]
 			  ifFalse: [ { prop type } ] ]
 ]
 
@@ -48,19 +43,18 @@ FmxImportingContext >> import: aFM3Class traversed: traversedClasses [
 { #category : #'importing-filters' }
 FmxImportingContext >> importMaximum [
 
-	(self class methods
-		 select: [ :m | m selector beginsWith: #import ]
-		 thenCollect: #selector) \ #( importMaximum ) do: [ :aSelector | 
-		self perform: aSelector ]
+	self imports: self class importedMetamodel classes
 ]
 
 { #category : #accessing }
 FmxImportingContext >> imports [
+
 	^ imports
 ]
 
 { #category : #accessing }
 FmxImportingContext >> imports: anObject [
+
 	imports := anObject
 ]
 
@@ -68,8 +62,7 @@ FmxImportingContext >> imports: anObject [
 FmxImportingContext >> initialize [
 
 	super initialize.
-	
-	imports := Set new.
+	imports := Set new
 ]
 
 { #category : #testing }
