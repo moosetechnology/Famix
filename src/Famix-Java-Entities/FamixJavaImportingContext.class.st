@@ -4,238 +4,284 @@ Class {
 	#category : #'Famix-Java-Entities'
 }
 
-{ #category : #testing }
+{ #category : #accessing }
+FamixJavaImportingContext class >> importedMetamodel [
+
+	<generated>
+	^ FamixJavaModel metamodel
+]
+
+{ #category : #importing }
 FamixJavaImportingContext >> importAccess [
+
 	<generated>
-	^ self import: FamixJavaAccess
+	^ self import: #Access
 ]
 
-{ #category : #testing }
+{ #category : #importing }
 FamixJavaImportingContext >> importAnnotationInstance [
+
 	<generated>
-	^ self import: FamixJavaAnnotationInstance
+	^ self import: #AnnotationInstance
 ]
 
-{ #category : #testing }
+{ #category : #importing }
 FamixJavaImportingContext >> importAnnotationInstanceAttribute [
+
 	<generated>
-	^ self import: FamixJavaAnnotationInstanceAttribute
+	^ self import: #AnnotationInstanceAttribute
 ]
 
-{ #category : #testing }
+{ #category : #importing }
 FamixJavaImportingContext >> importAnnotationType [
+
 	<generated>
-	^ self import: FamixJavaAnnotationType
+	^ self import: #AnnotationType
 ]
 
-{ #category : #testing }
+{ #category : #importing }
 FamixJavaImportingContext >> importAnnotationTypeAttribute [
+
 	<generated>
-	^ self import: FamixJavaAnnotationTypeAttribute
+	^ self import: #AnnotationTypeAttribute
 ]
 
-{ #category : #testing }
+{ #category : #importing }
 FamixJavaImportingContext >> importAttribute [
+
 	<generated>
-	^ self import: FamixJavaAttribute
+	^ self import: #Attribute
 ]
 
-{ #category : #testing }
+{ #category : #importing }
 FamixJavaImportingContext >> importClass [
+
 	<generated>
-	^ self import: FamixJavaClass
+	^ self import: #Class
 ]
 
-{ #category : #testing }
+{ #category : #importing }
 FamixJavaImportingContext >> importComment [
+
 	<generated>
-	^ self import: FamixJavaComment
+	^ self import: #Comment
 ]
 
-{ #category : #testing }
+{ #category : #importing }
 FamixJavaImportingContext >> importContainerEntity [
+
 	<generated>
-	^ self import: FamixJavaContainerEntity
+	^ self import: #ContainerEntity
 ]
 
-{ #category : #testing }
+{ #category : #importing }
 FamixJavaImportingContext >> importEntity [
+
 	<generated>
-	^ self import: FamixJavaEntity
+	^ self import: #Entity
 ]
 
-{ #category : #testing }
+{ #category : #importing }
 FamixJavaImportingContext >> importEnum [
+
 	<generated>
-	^ self import: FamixJavaEnum
+	^ self import: #Enum
 ]
 
-{ #category : #testing }
+{ #category : #importing }
 FamixJavaImportingContext >> importEnumValue [
+
 	<generated>
-	^ self import: FamixJavaEnumValue
+	^ self import: #EnumValue
 ]
 
-{ #category : #testing }
+{ #category : #importing }
 FamixJavaImportingContext >> importException [
+
 	<generated>
-	^ self import: FamixJavaException
+	^ self import: #Exception
 ]
 
-{ #category : #testing }
+{ #category : #importing }
 FamixJavaImportingContext >> importImplementation [
+
 	<generated>
-	^ self import: FamixJavaImplementation
+	^ self import: #Implementation
 ]
 
-{ #category : #testing }
+{ #category : #importing }
 FamixJavaImportingContext >> importImplicitVariable [
+
 	<generated>
-	^ self import: FamixJavaImplicitVariable
+	^ self import: #ImplicitVariable
 ]
 
-{ #category : #testing }
+{ #category : #importing }
 FamixJavaImportingContext >> importImport [
+
 	<generated>
-	^ self import: FamixJavaImport
+	^ self import: #Import
 ]
 
-{ #category : #testing }
+{ #category : #importing }
 FamixJavaImportingContext >> importIndexedFileAnchor [
+
 	<generated>
-	^ self import: FamixJavaIndexedFileAnchor
+	^ self import: #IndexedFileAnchor
 ]
 
-{ #category : #testing }
+{ #category : #importing }
 FamixJavaImportingContext >> importInheritance [
+
 	<generated>
-	^ self import: FamixJavaInheritance
+	^ self import: #Inheritance
 ]
 
-{ #category : #testing }
+{ #category : #importing }
 FamixJavaImportingContext >> importInterface [
+
 	<generated>
-	^ self import: FamixJavaInterface
+	^ self import: #Interface
 ]
 
-{ #category : #testing }
+{ #category : #importing }
 FamixJavaImportingContext >> importInvocation [
+
 	<generated>
-	^ self import: FamixJavaInvocation
+	^ self import: #Invocation
 ]
 
-{ #category : #testing }
+{ #category : #importing }
 FamixJavaImportingContext >> importLocalVariable [
+
 	<generated>
-	^ self import: FamixJavaLocalVariable
+	^ self import: #LocalVariable
 ]
 
-{ #category : #testing }
+{ #category : #importing }
 FamixJavaImportingContext >> importMethod [
+
 	<generated>
-	^ self import: FamixJavaMethod
+	^ self import: #Method
 ]
 
-{ #category : #testing }
+{ #category : #importing }
 FamixJavaImportingContext >> importNamedEntity [
+
 	<generated>
-	^ self import: FamixJavaNamedEntity
+	^ self import: #NamedEntity
 ]
 
-{ #category : #testing }
+{ #category : #importing }
 FamixJavaImportingContext >> importPackage [
+
 	<generated>
-	^ self import: FamixJavaPackage
+	^ self import: #Package
 ]
 
-{ #category : #testing }
+{ #category : #importing }
 FamixJavaImportingContext >> importParameter [
+
 	<generated>
-	^ self import: FamixJavaParameter
+	^ self import: #Parameter
 ]
 
-{ #category : #testing }
+{ #category : #importing }
 FamixJavaImportingContext >> importParameterType [
+
 	<generated>
-	^ self import: FamixJavaParameterType
+	^ self import: #ParameterType
 ]
 
-{ #category : #testing }
+{ #category : #importing }
 FamixJavaImportingContext >> importParameterizableClass [
+
 	<generated>
-	^ self import: FamixJavaParameterizableClass
+	^ self import: #ParameterizableClass
 ]
 
-{ #category : #testing }
+{ #category : #importing }
 FamixJavaImportingContext >> importParameterizableException [
+
 	<generated>
-	^ self import: FamixJavaParameterizableException
+	^ self import: #ParameterizableException
 ]
 
-{ #category : #testing }
+{ #category : #importing }
 FamixJavaImportingContext >> importParameterizableInterface [
+
 	<generated>
-	^ self import: FamixJavaParameterizableInterface
+	^ self import: #ParameterizableInterface
 ]
 
-{ #category : #testing }
+{ #category : #importing }
 FamixJavaImportingContext >> importParameterizedType [
+
 	<generated>
-	^ self import: FamixJavaParameterizedType
+	^ self import: #ParameterizedType
 ]
 
-{ #category : #testing }
+{ #category : #importing }
 FamixJavaImportingContext >> importPrimitiveType [
+
 	<generated>
-	^ self import: FamixJavaPrimitiveType
+	^ self import: #PrimitiveType
 ]
 
-{ #category : #testing }
+{ #category : #importing }
 FamixJavaImportingContext >> importReference [
+
 	<generated>
-	^ self import: FamixJavaReference
+	^ self import: #Reference
 ]
 
-{ #category : #testing }
+{ #category : #importing }
 FamixJavaImportingContext >> importSourceAnchor [
+
 	<generated>
-	^ self import: FamixJavaSourceAnchor
+	^ self import: #SourceAnchor
 ]
 
-{ #category : #testing }
+{ #category : #importing }
 FamixJavaImportingContext >> importSourceLanguage [
+
 	<generated>
-	^ self import: FamixJavaSourceLanguage
+	^ self import: #SourceLanguage
 ]
 
-{ #category : #testing }
+{ #category : #importing }
 FamixJavaImportingContext >> importSourceTextAnchor [
+
 	<generated>
-	^ self import: FamixJavaSourceTextAnchor
+	^ self import: #SourceTextAnchor
 ]
 
-{ #category : #testing }
+{ #category : #importing }
 FamixJavaImportingContext >> importSourcedEntity [
+
 	<generated>
-	^ self import: FamixJavaSourcedEntity
+	^ self import: #SourcedEntity
 ]
 
-{ #category : #testing }
+{ #category : #importing }
 FamixJavaImportingContext >> importType [
+
 	<generated>
-	^ self import: FamixJavaType
+	^ self import: #Type
 ]
 
-{ #category : #testing }
+{ #category : #importing }
 FamixJavaImportingContext >> importUnknownSourceLanguage [
+
 	<generated>
-	^ self import: FamixJavaUnknownSourceLanguage
+	^ self import: #UnknownSourceLanguage
 ]
 
-{ #category : #testing }
+{ #category : #importing }
 FamixJavaImportingContext >> importUnknownVariable [
+
 	<generated>
-	^ self import: FamixJavaUnknownVariable
+	^ self import: #UnknownVariable
 ]
 
 { #category : #testing }

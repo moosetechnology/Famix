@@ -4,106 +4,130 @@ Class {
 	#category : #'Famix-Test1-Entities'
 }
 
-{ #category : #testing }
+{ #category : #accessing }
+FamixTest1ImportingContext class >> importedMetamodel [
+
+	<generated>
+	^ FamixTest1Model metamodel
+]
+
+{ #category : #importing }
 FamixTest1ImportingContext >> importAssociation [
+
 	<generated>
-	^ self import: FamixTest1Association
+	^ self import: #Association
 ]
 
-{ #category : #testing }
+{ #category : #importing }
 FamixTest1ImportingContext >> importAttribute [
+
 	<generated>
-	^ self import: FamixTest1Attribute
+	^ self import: #Attribute
 ]
 
-{ #category : #testing }
+{ #category : #importing }
 FamixTest1ImportingContext >> importClass [
+
 	<generated>
-	^ self import: FamixTest1Class
+	^ self import: #Class
 ]
 
-{ #category : #testing }
+{ #category : #importing }
 FamixTest1ImportingContext >> importComment [
+
 	<generated>
-	^ self import: FamixTest1Comment
+	^ self import: #Comment
 ]
 
-{ #category : #testing }
+{ #category : #importing }
 FamixTest1ImportingContext >> importEntity [
+
 	<generated>
-	^ self import: FamixTest1Entity
+	^ self import: #Entity
 ]
 
-{ #category : #testing }
+{ #category : #importing }
 FamixTest1ImportingContext >> importFile [
+
 	<generated>
-	^ self import: FamixTest1File
+	^ self import: #File
 ]
 
-{ #category : #testing }
+{ #category : #importing }
 FamixTest1ImportingContext >> importFileAnchor [
+
 	<generated>
-	^ self import: FamixTest1FileAnchor
+	^ self import: #FileAnchor
 ]
 
-{ #category : #testing }
+{ #category : #importing }
 FamixTest1ImportingContext >> importFolder [
+
 	<generated>
-	^ self import: FamixTest1Folder
+	^ self import: #Folder
 ]
 
-{ #category : #testing }
+{ #category : #importing }
 FamixTest1ImportingContext >> importIndexedFileAnchor [
+
 	<generated>
-	^ self import: FamixTest1IndexedFileAnchor
+	^ self import: #IndexedFileAnchor
 ]
 
-{ #category : #testing }
+{ #category : #importing }
 FamixTest1ImportingContext >> importMethod [
+
 	<generated>
-	^ self import: FamixTest1Method
+	^ self import: #Method
 ]
 
-{ #category : #testing }
+{ #category : #importing }
 FamixTest1ImportingContext >> importMultipleFileAnchor [
+
 	<generated>
-	^ self import: FamixTest1MultipleFileAnchor
+	^ self import: #MultipleFileAnchor
 ]
 
-{ #category : #testing }
+{ #category : #importing }
 FamixTest1ImportingContext >> importNamedEntity [
+
 	<generated>
-	^ self import: FamixTest1NamedEntity
+	^ self import: #NamedEntity
 ]
 
-{ #category : #testing }
+{ #category : #importing }
 FamixTest1ImportingContext >> importSourceAnchor [
+
 	<generated>
-	^ self import: FamixTest1SourceAnchor
+	^ self import: #SourceAnchor
 ]
 
-{ #category : #testing }
+{ #category : #importing }
 FamixTest1ImportingContext >> importSourceLanguage [
+
 	<generated>
-	^ self import: FamixTest1SourceLanguage
+	^ self import: #SourceLanguage
 ]
 
-{ #category : #testing }
+{ #category : #importing }
 FamixTest1ImportingContext >> importSourceTextAnchor [
+
 	<generated>
-	^ self import: FamixTest1SourceTextAnchor
+	^ self import: #SourceTextAnchor
 ]
 
-{ #category : #testing }
+{ #category : #importing }
 FamixTest1ImportingContext >> importSourcedEntity [
+
 	<generated>
-	^ self import: FamixTest1SourcedEntity
+	^ self import: #SourcedEntity
 ]
 
-{ #category : #testing }
+{ #category : #importing }
 FamixTest1ImportingContext >> importUnknownSourceLanguage [
+
 	<generated>
-	^ self import: FamixTest1UnknownSourceLanguage
+	^ self import: #UnknownSourceLanguage
 ]
 
 { #category : #testing }

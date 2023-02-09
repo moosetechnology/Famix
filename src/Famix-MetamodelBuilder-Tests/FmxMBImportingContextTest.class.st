@@ -38,11 +38,11 @@ FmxMBImportingContextTest >> setUp [
 FmxMBImportingContextTest >> testDefineImport [
 
 	| localMethod |
-	
 	localMethod := generatedContext methodNamed: #importMethod.
-	self assert: (localMethod sourceCode includesSubstring: '<generated>').
-	self assert: (localMethod sourceCode includesSubstring: '^ self import: TstMethod').
-
+	self assert:
+		(localMethod sourceCode includesSubstring: '<generated>').
+	self assert:
+		(localMethod sourceCode includesSubstring: '^ self import: #Method')
 ]
 
 { #category : #tests }

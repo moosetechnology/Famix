@@ -49,14 +49,13 @@ source2b''))
 
 { #category : #tests }
 FmxImportingContextTest >> testImportingClasses [
-	self modelMSE
-		readStreamDo: [ :s | 
-			model := FamixTest1Model
-				importFromMSEStream: s
-				filteredBy:
-					(FamixTest1ImportingContext new
-						importClass;
-						yourself) ].
+
+	self modelMSE readStreamDo: [ :s | 
+		model := FamixTest1Model
+			         importFromMSEStream: s
+			         filteredBy: (FamixTest1ImportingContext new
+					          importClass;
+					          yourself) ].
 	self assert: model entities size equals: 2.
 	self assert: (model allUsing: FamixTClass) size equals: 2.
 	self assertEmpty: (model allUsing: FamixTMethod).

@@ -70,15 +70,19 @@ MooseEntity class >> model: aMooseModel [
 
 { #category : #accessing }
 MooseEntity class >> requirements [
+
 	| metamodelClasses usedBehaviors |
 	metamodelClasses := self metamodel concreteImplementingClasses.
 
-	usedBehaviors := (self allDeclaredPropertiesIn: self metamodel) select: #isContainer thenCollect: [ :p | p opposite implementingClass ].
+	usedBehaviors := (self allDeclaredPropertiesIn: self metamodel)
+		                 select: #isContainer
+		                 thenCollect: [ :p | p opposite implementingClass ].
 
-	^ (usedBehaviors flatCollect: [ :aBehavior |
-			aBehavior isTrait
-				ifTrue: [ metamodelClasses select: [ :each | each isComposedBy: aBehavior ] ]
-				ifFalse: [ {aBehavior} ] ]) asSet
+	^ (usedBehaviors flatCollect: [ :aBehavior | 
+		   aBehavior isTrait
+			   ifTrue: [ 
+			   metamodelClasses select: [ :each | each isComposedBy: aBehavior ] ]
+			   ifFalse: [ { aBehavior } ] ]) asSet
 ]
 
 { #category : #dependencies }
