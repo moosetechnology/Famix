@@ -1544,6 +1544,7 @@ FamixGenerator >> defineTraits [
 
 	tEnumValue := builder newTraitNamed: #TEnumValue.
 	tEnumValue comment: self commentForTEnumValue.
+	tEnumValue withTesting.
 	
 	tEnum := builder newTraitNamed: #TEnum.
 	tEnum comment: self commentForTEnum.
