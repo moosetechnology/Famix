@@ -5,68 +5,153 @@ Class {
 	#name : #FmxImportingContext,
 	#superclass : #Object,
 	#instVars : [
-		'imports'
+		'importedAssociations',
+		'allMetamodelConcreteEntities',
+		'allMetamodelAssociations',
+		'importedEntities'
 	],
-	#category : #'Moose-Core'
+	#category : #'Moose-Core-Import'
 }
 
-{ #category : #'importing-filters' }
-FmxImportingContext >> containersOf: aFM3Class [
+{ #category : #accessing }
+FmxImportingContext class >> allMetamodelAssociations [
 
-	^ aFM3Class allContainerProperties flatCollectAsSet: [ :prop | 
-		  prop type isFM3Trait
-			  ifTrue: [ prop type classUsers ]
-			  ifFalse: [ { prop type } ] ]
+	^ (self importedMetamodel traits detect: [ :trait | 
+		   trait name = #TAssociation ]) classUsers
 ]
 
-{ #category : #'importing-filters' }
-FmxImportingContext >> import: aClassName [
+{ #category : #accessing }
+FmxImportingContext class >> allMetamodelEntities [
 
-	self
-		import: (self class importedMetamodel elements detect: [ :e | 
-				 e name = aClassName ])
-		traversed: Set new
+	^ self importedMetamodel classes reject: [ :fm3Class | 
+		  fm3Class traits anySatisfy: [ :fm3Trait | 
+			  fm3Trait name = #TAssociation ] ]
 ]
 
-{ #category : #'importing-filters' }
-FmxImportingContext >> import: aFM3Class traversed: traversedClasses [
+{ #category : #accessing }
+FmxImportingContext class >> fm3ClassNamed: aName [
 
-	(traversedClasses includes: aFM3Class) ifTrue: [ ^ self ].
-
-	self imports add: aFM3Class.
-	traversedClasses add: aFM3Class.
-
-	(self containersOf: aFM3Class) do: [ :fm3Behavior | 
-		self import: fm3Behavior traversed: traversedClasses ]
+	^ self importedMetamodel classes detect: [ :fm3Class | 
+		  fm3Class name = aName ]
 ]
 
-{ #category : #'importing-filters' }
+{ #category : #accessing }
+FmxImportingContext class >> importedMetamodel [
+
+	^ self subclassResponsibility
+]
+
+{ #category : #'importing-remove' }
+FmxImportingContext >> doNotImportAssociation: aFM3AssociationClass [
+
+	importedAssociations remove: aFM3AssociationClass ifAbsent: [  ]
+]
+
+{ #category : #'importing-remove' }
+FmxImportingContext >> doNotImportAssociationsDependingOn: aFM3Class [
+
+	aFM3Class allProperties
+		select: [ :prop | 
+		importedAssociations includesAny: prop type classUsers ]
+		thenDo: [ :prop | 
+			prop type classUsers do: [ :fm3Class | 
+				self doNotImportAssociation: fm3Class ] ]
+]
+
+{ #category : #'importing-remove' }
+FmxImportingContext >> doNotImportConcreteEntity: aFM3Class [
+
+	self importedEntities remove: aFM3Class ifAbsent: [ ^ self ].
+
+	self doNotImportEntitiesContainedIn: aFM3Class.
+	self doNotImportAssociationsDependingOn: aFM3Class
+]
+
+{ #category : #'importing-remove' }
+FmxImportingContext >> doNotImportEntitiesContainedIn: aFM3Class [
+
+	aFM3Class allComplexProperties
+		select: [ :property | 
+			property hasOpposite and: [ property opposite isContainer ] ]
+		thenDo: [ :property | 
+			property type classUsers do: [ :fm3Class | 
+				self doNotImportConcreteEntity: fm3Class ] ]
+]
+
+{ #category : #'importing-all' }
+FmxImportingContext >> importAllAssociations [
+
+	allMetamodelAssociations do: [ :association | 
+		self importAssociation: association ]
+]
+
+{ #category : #'importing-all' }
+FmxImportingContext >> importAllEntities [
+
+	allMetamodelConcreteEntities do: [ :fm3Class | 
+		self importConcreteEntity: fm3Class ]
+]
+
+{ #category : #'importing-add' }
+FmxImportingContext >> importAssociation: aFM3AssociationClass [
+
+	(importedAssociations includes: aFM3AssociationClass) ifTrue: [ 
+		^ self ].
+
+	importedAssociations add: aFM3AssociationClass.
+
+	aFM3AssociationClass allComplexProperties
+		select: [ :property | property isSource or: [ property isTarget ] ]
+		thenDo: [ :property | 
+			property type classUsers do: [ :fm3Class | 
+				self importConcreteEntity: fm3Class ] ]
+]
+
+{ #category : #'importing-add' }
+FmxImportingContext >> importConcreteEntity: aFM3Class [
+
+	(self importedEntities includes: aFM3Class) ifTrue: [ ^ self ].
+
+	self importedEntities add: aFM3Class.
+
+	aFM3Class allContainerProperties do: [ :containerProperty | 
+		containerProperty type classUsers do: [ :fm3Class | 
+			self importConcreteEntity: fm3Class ] ]
+]
+
+{ #category : #'importing-all' }
 FmxImportingContext >> importMaximum [
 
-	self imports: self class importedMetamodel classes
+	self importAllEntities.
+	self importAllAssociations
+]
+
+{ #category : #accessing }
+FmxImportingContext >> importedEntities [
+
+	^ importedEntities
 ]
 
 { #category : #accessing }
 FmxImportingContext >> imports [
 
-	^ imports
-]
-
-{ #category : #accessing }
-FmxImportingContext >> imports: anObject [
-
-	imports := anObject
+	^ importedEntities , importedAssociations
 ]
 
 { #category : #initialization }
 FmxImportingContext >> initialize [
 
 	super initialize.
-	imports := Set new
+	importedEntities := Set new.
+	importedAssociations := Set new.
+
+	allMetamodelAssociations := self class allMetamodelAssociations.
+	allMetamodelConcreteEntities := self class allMetamodelEntities
 ]
 
 { #category : #testing }
-FmxImportingContext >> shouldImport: aClass [
+FmxImportingContext >> shouldImport: aClassName [
 
-	^ self imports includes: aClass
+	^ (importedEntities includes: aClassName) or: [ 
+		  importedAssociations includes: aClassName ]
 ]

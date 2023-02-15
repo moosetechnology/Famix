@@ -183,19 +183,44 @@ FamixMetamodelBuilder >> generate [
 ]
 
 { #category : #generating }
-FamixMetamodelBuilder >> generateImportIn: contextClass [
+FamixMetamodelBuilder >> generateImportAssociation: aFmxMBAssociationClass in: contextClass [
 
-	self classes do: [ :each | "No need to generate methods for model class."
-		each isModelClass ifFalse: [ 
-			self environment
-				compile: ('import{1}
+	^ self environment
+		  compile: ('import{1}
 
 	<generated>
-	^ self import: #{2}' format: { 
-							 each name.
-							 each name })
-				in: contextClass
-				classified: 'importing' ] ]
+	^ self importAssociation: (self class fm3ClassNamed: #{1})' format:
+				   { aFmxMBAssociationClass name })
+		  in: contextClass
+		  classified: 'importing'
+]
+
+{ #category : #generating }
+FamixMetamodelBuilder >> generateImportConcreteEntity: aFmxMBClass in: contextClass [
+
+	^ self environment
+		  compile: ('import{1}
+
+	<generated>
+	^ self importConcreteEntity: (self class fm3ClassNamed: #{1})' 
+				   format: { aFmxMBClass name })
+		  in: contextClass
+		  classified: 'importing'
+]
+
+{ #category : #generating }
+FamixMetamodelBuilder >> generateImportIn: contextClass [
+
+	self classes do: [ :each | 
+		
+		"No need to generate methods for model class."
+		each isModelClass ifFalse: [ 
+		
+			"Associations and other entities are managed differently by the importing context"
+			each allTransitiveTraits
+				detect: [ :trait | trait name = #TAssociation ]
+				ifFound: [ self generateImportAssociation: each in: contextClass ]
+				ifNone: [ self generateImportConcreteEntity: each in: contextClass ] ] ]
 ]
 
 { #category : #generating }
@@ -242,10 +267,9 @@ FamixMetamodelBuilder >> generateShouldImportIn: contextClass [
 		each isModelClass ifFalse: [ 
 			self environment
 				compile: ('shouldImport{1}
+
 	<generated>
-	^ self shouldImport: #{2}' format: { 
-							 each name.
-							 each name })
+	^ self shouldImport: #{1}' format: { each name })
 				in: contextClass
 				classified: 'testing' ] ]
 ]
