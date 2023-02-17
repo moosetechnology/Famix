@@ -24,8 +24,10 @@ FmxImportingContext class >> allMetamodelAssociations [
 FmxImportingContext class >> allMetamodelEntities [
 
 	^ self importedMetamodel classes reject: [ :fm3Class | 
-		  fm3Class traits anySatisfy: [ :fm3Trait | 
-			  fm3Trait name = #TAssociation ] ]
+		  (fm3Class inheritsFrom:
+			   (self importedMetamodel fmTypeOf: MooseAbstractGroup)) or: [ 
+			  fm3Class traits anySatisfy: [ :fm3Trait | 
+				  fm3Trait name = #TAssociation ] ] ]
 ]
 
 { #category : #accessing }
@@ -124,6 +126,19 @@ FmxImportingContext >> importMaximum [
 
 	self importAllEntities.
 	self importAllAssociations
+]
+
+{ #category : #'importing-remove' }
+FmxImportingContext >> importNone [
+
+	importedAssociations := Set new.
+	importedEntities := Set new
+]
+
+{ #category : #accessing }
+FmxImportingContext >> importedAssociations [
+
+	^ importedAssociations
 ]
 
 { #category : #accessing }

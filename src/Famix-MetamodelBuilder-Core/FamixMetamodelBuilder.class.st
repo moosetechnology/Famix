@@ -213,14 +213,15 @@ FamixMetamodelBuilder >> generateImportIn: contextClass [
 
 	self classes do: [ :each | 
 		
-		"No need to generate methods for model class."
-		each isModelClass ifFalse: [ 
-		
+		"No need to generate methods for model class and groups."
+		(each isModelClass or: [ each isMetamodelClassGroup ]) ifFalse: [ 
+			
 			"Associations and other entities are managed differently by the importing context"
 			each allTransitiveTraits
 				detect: [ :trait | trait name = #TAssociation ]
 				ifFound: [ self generateImportAssociation: each in: contextClass ]
-				ifNone: [ self generateImportConcreteEntity: each in: contextClass ] ] ]
+				ifNone: [ 
+				self generateImportConcreteEntity: each in: contextClass ] ] ]
 ]
 
 { #category : #generating }
