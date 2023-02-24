@@ -59,7 +59,7 @@ FamixTClass >> inheritedAttributes [
 	self allSuperclassesDo: [ :each | 
 		inheritedAttrs addAll: (each isParameterizedType
 				 ifTrue: [ each parameterizableClass ]
-				 ifFalse: each) attributes ].
+				 ifFalse: [ each ]) attributes ].
 	^ inheritedAttrs
 ]
 
