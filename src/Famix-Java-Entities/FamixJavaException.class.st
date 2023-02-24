@@ -1,6 +1,6 @@
 Class {
 	#name : #FamixJavaException,
-	#superclass : #FamixJavaEntity,
+	#superclass : #FamixJavaClass,
 	#traits : 'FamixTCanImplement + FamixTException + FamixTHasVisibility + FamixTWithAnnotationInstances + FamixTWithTypes',
 	#classTraits : 'FamixTCanImplement classTrait + FamixTException classTrait + FamixTHasVisibility classTrait + FamixTWithAnnotationInstances classTrait + FamixTWithTypes classTrait',
 	#category : #'Famix-Java-Entities-Entities'
@@ -9,7 +9,7 @@ Class {
 { #category : #meta }
 FamixJavaException class >> annotation [
 
-	<FMClass: #Exception super: #FamixJavaEntity>
+	<FMClass: #Exception super: #FamixJavaClass>
 	<package: #'Famix-Java-Entities'>
 	<generated>
 	^self
