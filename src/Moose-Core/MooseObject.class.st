@@ -179,6 +179,12 @@ MooseObject class >> superclassesAndFamixTraits [
 	^ self cache directAt: #superclassesAndFamixTraits
 ]
 
+{ #category : #accessing }
+MooseObject class >> undefinedName [
+
+	^ #noname
+]
+
 { #category : #testing }
 MooseObject class >> usedStatefulTraits [
 	^ self cache directAt: #usedStatefulTraits
@@ -426,7 +432,7 @@ MooseObject >> mooseNameOn: aStream [
 
 { #category : #accessing }
 MooseObject >> name [
-	^ #noname
+	^ self class undefinedName
 ]
 
 { #category : #accessing }
