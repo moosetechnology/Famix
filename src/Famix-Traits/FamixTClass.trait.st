@@ -57,7 +57,9 @@ FamixTClass >> inheritedAttributes [
 	| inheritedAttrs |
 	inheritedAttrs := OrderedCollection new.
 	self allSuperclassesDo: [ :each | 
-		inheritedAttrs addAll: each attributes ].
+		inheritedAttrs addAll: (each isClass
+				 ifTrue: [ each ]
+				 ifFalse: [ each parameterizableClass ]) attributes ].
 	^ inheritedAttrs
 ]
 
