@@ -58,17 +58,6 @@ FamixTAccess >> displayStringOn: aStream [
 	accessor displayStringOn: aStream
 ]
 
-{ #category : #initialization }
-FamixTAccess >> initialize [
-
-	<generated>
-	super initialize.
-
-	"Default value initialization"
-	isWrite := false.
-
-]
-
 { #category : #testing }
 FamixTAccess >> isAccess [
 

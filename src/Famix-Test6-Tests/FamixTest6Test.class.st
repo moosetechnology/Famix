@@ -33,10 +33,6 @@ FamixTest6Test >> testDefaultValueOnCreation2 [
 
 	bacon eggs: 0.
 	self assert: bacon eggs equals: 0.
-	self assert: eggProperty defaultValue equals: 12.
-
-	bacon eggs: nil.
-	self assert: bacon eggs equals: nil.
 	self assert: eggProperty defaultValue equals: 12
 ]
 

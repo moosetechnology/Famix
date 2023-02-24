@@ -22,7 +22,7 @@ FamixTest6Bacon >> eggs [
 
 	<FMProperty: #eggs type: #Number defaultValue: 12>
 	<generated>
-	^ eggs
+	^ eggs ifNil: [ eggs := 12 ]
 ]
 
 { #category : #accessing }
@@ -31,24 +31,12 @@ FamixTest6Bacon >> eggs: anObject [
 	eggs := anObject
 ]
 
-{ #category : #initialization }
-FamixTest6Bacon >> initialize [
-
-	<generated>
-	super initialize.
-
-	"Default value initialization"
-	isFood := true.
-	eggs := 12.
-
-]
-
 { #category : #accessing }
 FamixTest6Bacon >> isFood [
 
 	<FMProperty: #isFood type: #Boolean defaultValue: true>
 	<generated>
-	^ isFood
+	^ isFood ifNil: [ isFood := true ]
 ]
 
 { #category : #accessing }
