@@ -63,6 +63,17 @@ FamixTSourceEntity >> hasSourceAnchor [
 	^ self sourceAnchor isNotNil
 ]
 
+{ #category : #initialization }
+FamixTSourceEntity >> initialize [
+
+	<generated>
+	super initialize.
+
+	"Default value initialization"
+	isStub := false.
+
+]
+
 { #category : #accessing }
 FamixTSourceEntity >> isStub [
 

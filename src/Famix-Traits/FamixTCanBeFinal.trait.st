@@ -15,10 +15,21 @@ FamixTCanBeFinal classSide >> annotation [
 	^self
 ]
 
+{ #category : #initialization }
+FamixTCanBeFinal >> initialize [
+
+	<generated>
+	super initialize.
+
+	"Default value initialization"
+	isFinal := false.
+
+]
+
 { #category : #accessing }
 FamixTCanBeFinal >> isFinal [
 
-	<FMProperty: #isFinal type: #Boolean>
+	<FMProperty: #isFinal type: #Boolean defaultValue: false>
 	<generated>
 	<FMComment: 'Entity can be declared final'>
 	^ isFinal
