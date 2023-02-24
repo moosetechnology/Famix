@@ -1084,10 +1084,12 @@ FamixGenerator >> defineProperties [
 	super defineProperties.
 
 
-	(tCanBeAbstract property: #isAbstract type: #Boolean) comment:
-		'Entity can be declared abstract'.
-	(tCanBeFinal property: #isFinal type: #Boolean) comment:
-		'Entity can be declared final'.
+	(tCanBeAbstract
+		 property: #isAbstract
+		 type: #Boolean
+		 defaultValue: false) comment: 'Entity can be declared abstract'.
+	(tCanBeFinal property: #isFinal type: #Boolean defaultValue: false) 
+		comment: 'Entity can be declared final'.
 	(tCanBeClassSide
 		 property: #isClassSide
 		 type: #Boolean
@@ -1101,7 +1103,8 @@ FamixGenerator >> defineProperties [
 	(tFileAnchor property: #fileName type: #String) comment:
 		'Name of the source file'.
 
-	(tAccess property: #isWrite type: #Boolean) comment: 'Write access'.
+	(tAccess property: #isWrite type: #Boolean defaultValue: false) 
+		comment: 'Write access'.
 
 	(tAnnotationInstanceAttribute property: #value type: #String) 
 		comment: 'Actual value of the attribute used in an annotation'.
@@ -1124,7 +1127,8 @@ FamixGenerator >> defineProperties [
 	(tComment property: #content type: #String) comment:
 		'Content of the comment as a String'.
 
-	(tSourceEntity property: #isStub type: #Boolean) comment:
+	(tSourceEntity property: #isStub type: #Boolean defaultValue: false) 
+		comment:
 		'Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.'.
 
 	(tFileNavigation property: #startLine type: #Number) comment:

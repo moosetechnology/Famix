@@ -16,23 +16,12 @@ FamixTest6Spam class >> annotation [
 	^self
 ]
 
-{ #category : #initialization }
-FamixTest6Spam >> initialize [
-
-	<generated>
-	super initialize.
-
-	"Default value initialization"
-	isSomething := false.
-
-]
-
 { #category : #accessing }
 FamixTest6Spam >> isSomething [
 
 	<FMProperty: #isSomething type: #Boolean defaultValue: false>
 	<generated>
-	^ isSomething
+	^ isSomething ifNil: [ isSomething := false ]
 ]
 
 { #category : #accessing }
