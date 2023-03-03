@@ -670,7 +670,7 @@ MooseModel >> inferNamespaceParentsBasedOnNames [
 { #category : #initialization }
 MooseModel >> initialize [
 	super initialize.
-	name := #noname.
+	name := self class undefinedName. 
 	self metamodel: self class metamodel
 ]
 

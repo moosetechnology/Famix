@@ -18,10 +18,10 @@ FamixTCanBeFinal classSide >> annotation [
 { #category : #accessing }
 FamixTCanBeFinal >> isFinal [
 
-	<FMProperty: #isFinal type: #Boolean>
+	<FMProperty: #isFinal type: #Boolean defaultValue: false>
 	<generated>
 	<FMComment: 'Entity can be declared final'>
-	^ isFinal
+	^ isFinal ifNil: [ isFinal := false ]
 ]
 
 { #category : #accessing }

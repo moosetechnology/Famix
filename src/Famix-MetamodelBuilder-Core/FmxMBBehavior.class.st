@@ -182,31 +182,6 @@ FmxMBBehavior >> generateAnnotationIn: aRealClass as: aName superclass: aSupercl
 ]
 
 { #category : #generating }
-FmxMBBehavior >> generateInitialize [
-	self generateInitializeFor: self realClass
-]
-
-{ #category : #generating }
-FmxMBBehavior >> generateInitializeFor: aClass [
-	| methodSource defaultValuedProperties |
-	
-	defaultValuedProperties := self properties select: #hasDefaultValue.
-	defaultValuedProperties ifEmpty: [ ^ self ].
-	methodSource := String streamContents: [ :s |
-		s nextPutAll: 'initialize'; cr; cr.
-		s tab; nextPutAll: '<generated>'; cr.
-		s tab; nextPutAll: 'super initialize.'; cr; cr.
-		s tab; nextPutAll: '"Default value initialization"'; cr.
-			defaultValuedProperties do: [ :prop | 
-				s tab; nextPutAll: ('{1} := {2}.' format: {prop name. prop defaultValue}); cr.	
-			].
-		 ].
-	self builder environment compile: methodSource 
-								   in: aClass instanceSide
-									classified: #initialization
-]
-
-{ #category : #generating }
 FmxMBBehavior >> generateMethodsToRemoveFromTraitCompositionFor: aBehavioral [
 	"In case of method conflict the user can select methods to remove from a trait. In that case we give the information to ring here."
 

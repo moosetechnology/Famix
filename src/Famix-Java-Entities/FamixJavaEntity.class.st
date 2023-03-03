@@ -66,6 +66,13 @@ FamixJavaEntity >> isClass [
 ]
 
 { #category : #testing }
+FamixJavaEntity >> isEnumValue [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
 FamixJavaEntity >> isException [
 
 	<generated>

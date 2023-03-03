@@ -269,6 +269,7 @@ FamixJavaGenerator >> defineHierarchy [
 	enumValue --|> #TWithComments.
 	enumValue --|> #TEnumValue.
 
+	exception --|> class.
 	exception --|> #TException.
 	exception --|> #TWithAnnotationInstances.
 	exception --|> #THasVisibility.

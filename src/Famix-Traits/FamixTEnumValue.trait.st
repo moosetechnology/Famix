@@ -30,6 +30,13 @@ FamixTEnumValue classSide >> annotation [
 	^self
 ]
 
+{ #category : #testing }
+FamixTEnumValue >> isEnumValue [
+
+	<generated>
+	^ true
+]
+
 { #category : #accessing }
 FamixTEnumValue >> mooseNameOn: aStream [
 	(self belongsTo isNotNil and: [ self belongsTo name isNotNil ])
