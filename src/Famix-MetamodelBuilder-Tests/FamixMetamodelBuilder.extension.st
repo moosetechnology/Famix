@@ -2,6 +2,7 @@ Extension { #name : #FamixMetamodelBuilder }
 
 { #category : #'*Famix-MetamodelBuilder-Tests' }
 FamixMetamodelBuilder >> beForTesting [
+
 	<ignoreForCoverage>
 	self environment: (FmxMBRingEnvironment for: self).
 	self configuration

@@ -67,12 +67,15 @@ MooseGroupStorage >> basicIterator [
 ]
 
 { #category : #private }
-MooseGroupStorage >> becomeKind: elementStorageClass [ 
-	
+MooseGroupStorage >> becomeKind: elementStorageClass [
+
 	self class = elementStorageClass ifTrue: [ ^ self ].
-	[elementStorageClass includesBehavior: MooseGroupStorage] assert.
+
+	[ elementStorageClass includesBehavior: MooseGroupStorage ] assert.
+
 	self do: [ :each | 
 		each hasUniqueMooseNameInModel ifTrue: [ each privateClearMooseName ] ].
+
 	self become: (elementStorageClass withAll: self)
 ]
 

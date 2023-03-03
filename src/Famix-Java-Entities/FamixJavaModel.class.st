@@ -23,6 +23,13 @@ FamixJavaModel class >> canBeImportedFromFile [
 	^true
 ]
 
+{ #category : #accessing }
+FamixJavaModel class >> importingContextClass [
+
+	<generated>
+	^ FamixJavaImportingContext
+]
+
 { #category : #'as yet unclassified' }
 FamixJavaModel >> inferPackageParentsBasedOnNames [
 	<menuItem: 'Infer Namespace Parents Based on Names' category: 'Utilities'>

@@ -61,16 +61,17 @@ SmalltalkImporter >> allImplementorsOf: aSignature [
 
 { #category : #'private-entity-creation' }
 SmalltalkImporter >> basicClassCreation: aClass [
+
 	| class anchor |
 	class := classes at: aClass put: self factory classEntity new.
 	class name: (aClass name replaceAll: Character space with: $_).
 	class stub: true.
-	importingContext shouldImportNamespace
-		ifTrue: [ class typeContainer: (self ensureNamespace: aClass environment) ].
+	importingContext shouldImportNamespace ifTrue: [ 
+		class typeContainer: (self ensureNamespace: aClass environment) ].
 	anchor := self factory anchor new
-		element: class;
-		pharoEntity: aClass;
-		yourself.
+		          element: class;
+		          pharoEntity: aClass;
+		          yourself.
 	class sourceAnchor: anchor.
 	self addEntity: anchor.
 	^ class
@@ -224,16 +225,17 @@ SmalltalkImporter >> createGlobalVariable: name value: value [
 
 { #category : #'private-entity-creation' }
 SmalltalkImporter >> createMethod: aCompiledMethod [
+
 	| method anchor |
 	method := self createStubMethod: aCompiledMethod.
-	importingContext shouldImportMethodBody
-		ifTrue: [ | visitor |
-			visitor := SmalltalkMethodVisitor on: self.
-			visitor runWith: aCompiledMethod and: method ].
+	importingContext shouldImportMethodBody ifTrue: [ 
+		| visitor |
+		visitor := SmalltalkMethodVisitor on: self.
+		visitor runWith: aCompiledMethod and: method ].
 	anchor := self factory anchor new
-		element: method;
-		pharoEntity: aCompiledMethod;
-		yourself.
+		          element: method;
+		          pharoEntity: aCompiledMethod;
+		          yourself.
 	method sourceAnchor: anchor.
 	self addEntity: anchor.
 	^ method
@@ -357,12 +359,11 @@ SmalltalkImporter >> ensureAttribute: name for: aClass [
 ]
 
 { #category : #'public-entity-creation' }
-SmalltalkImporter >> ensureClass: aClass [ 
-	"aClass is aSmalltalk. This method returns a FAMIXClass" 
-	 
-	^classes 
-		at: aClass 
-		ifAbsent: [self createClass: aClass]
+SmalltalkImporter >> ensureClass: aClass [
+
+	"aClass is aSmalltalk. This method returns a FamixStClass"
+
+	^ classes at: aClass ifAbsent: [ self createClass: aClass ]
 ]
 
 { #category : #'public-entity-creation' }
@@ -432,22 +433,25 @@ SmalltalkImporter >> ensurePackage: aPackageModel [
 ]
 
 { #category : #'public-entity-creation' }
-SmalltalkImporter >> ensureSmalltalkStubMethod: aCompiledMethod [ 
-	 
-	^methods 
-		at: aCompiledMethod 
-		ifAbsent: [self createStubMethod: aCompiledMethod]
+SmalltalkImporter >> ensureSmalltalkStubMethod: aCompiledMethod [
+
+	^ methods
+		  at: aCompiledMethod
+		  ifAbsent: [ self createStubMethod: aCompiledMethod ]
 ]
 
 { #category : #'public-entity-creation' }
 SmalltalkImporter >> ensureSmalltalkStubMethodsFor: aSignature [
+
 	| implementors |
-	importingContext shouldImportSmalltalkStubMethod
-		ifFalse: [^#()].
+	importingContext shouldImportSmalltalkStubMethod ifFalse: [ ^ #(  ) ].
 	implementors := self allImplementorsOf: aSignature.
-	implementors ifEmpty: [
-		^{ self basicCreateMethod: (aSignature copyUpTo: $() withSignature: aSignature } ].
-	^ implementors collect: [ :meth | self ensureSmalltalkStubMethod: meth ]
+	implementors ifEmpty: [ 
+		^ { (self
+			   basicCreateMethod: (aSignature copyUpTo: $()
+			   withSignature: aSignature) } ].
+	^ implementors collect: [ :meth | 
+		  self ensureSmalltalkStubMethod: meth ]
 ]
 
 { #category : #'public-entity-creation' }
@@ -501,14 +505,15 @@ SmalltalkImporter >> importClass: aClass [
 ]
 
 { #category : #importing }
-SmalltalkImporter >> importClassExtension: aClassExtension [ 
-	 
-	| method | 
-	importingContext shouldImportClassExtension ifTrue: [
-		method := (self ensureMethod: aClassExtension) isStub: false.
-		importingContext shouldImportPackage ifTrue: [
-			method parentPackage isStub: false ].
- 	]
+SmalltalkImporter >> importClassExtension: aClassExtension [
+
+	| method |
+	importingContext shouldImportClassExtension ifFalse: [ ^ self ].
+
+	method := (self ensureMethod: aClassExtension) isStub: false.
+
+	importingContext shouldImportPackage ifTrue: [ 
+		method parentPackage isStub: false ]
 ]
 
 { #category : #initialization }

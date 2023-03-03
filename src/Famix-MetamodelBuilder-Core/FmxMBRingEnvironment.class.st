@@ -107,17 +107,18 @@ FmxMBRingEnvironment >> createClassNamed: aClassName superclass: aSuperclass tra
 FmxMBRingEnvironment >> createImportingcontextClassNamed: aClassName in: packageName [
 
 	| resultantClass |
-	
-	(self hasBehaviorNamed: aClassName asSymbol ) 
-		ifTrue: [ ^ self ringEnvironment ensureClassNamed: aClassName asSymbol ].
-	
-	resultantClass := self ringEnvironment ensureClassNamed: aClassName asSymbol.
-	resultantClass superclass: (self ringEnvironment ensureClassNamed: self builder baseImportingContextName).
-	resultantClass layout makeResolved.
-	resultantClass package: (self ringEnvironment ensurePackageNamed: packageName).
-						
-	^ resultantClass
+	(self hasBehaviorNamed: aClassName asSymbol) ifTrue: [ 
+		^ self ringEnvironment ensureClassNamed: aClassName asSymbol ].
 
+	resultantClass := self ringEnvironment ensureClassNamed:
+		                  aClassName asSymbol.
+	resultantClass superclass: (self ringEnvironment ensureClassNamed:
+			 self builder baseImportingContextName).
+	resultantClass layout makeResolved.
+	resultantClass package:
+		(self ringEnvironment ensurePackageNamed: packageName).
+
+	^ resultantClass
 ]
 
 { #category : #initialization }
