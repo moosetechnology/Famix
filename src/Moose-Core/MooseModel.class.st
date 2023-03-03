@@ -219,6 +219,22 @@ MooseModel class >> importFromJSON: aStream withMetamodel: aMetamodel customizin
 ]
 
 { #category : #'import-export' }
+MooseModel class >> importFromJSON: aStream withMetamodel: aMetamodel filteredBy: anImportingContext [
+
+	"In the way to import a model we filter the entites we want to import via a FmxImportContext."
+
+	| famixElementNames |
+	famixElementNames := anImportingContext imports collect: [ :each | 
+		                     each fullName ].
+
+	^ self
+		  importFromJSON: aStream
+		  withMetamodel: aMetamodel
+		  customizingImporterWith: [ :importer | 
+			  FMImporterFilter on: importer filtering: famixElementNames ]
+]
+
+{ #category : #'import-export' }
 MooseModel class >> importFromMSEStream: aStream [
 	^ self new
 		importFromMSEStream: aStream;
@@ -561,7 +577,7 @@ MooseModel >> importFromJSONStream: aStream filteredBy: anImportingContext [
 
 	^ self
 		  importFrom: (self class
-				   importFrom: aStream
+				   importFromJSON: aStream
 				   withMetamodel: self metamodel
 				   filteredBy: anImportingContext)
 		  named: (aStream localName removeSuffix: '.json')

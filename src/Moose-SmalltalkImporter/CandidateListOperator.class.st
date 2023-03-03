@@ -19,7 +19,7 @@ CandidateListOperator >> allCandidatesFor: invocation [
 			   stubs := self importer ensureSmalltalkStubMethodsFor:
 				            invocation signature.
 			   groups at: invocation signature put: stubs.
-			   stubs do: [ :each | model add: each. model add: each parentType ].
+			   stubs do: [ :each | model add: each ].
 			   stubs ])
 ]
 
