@@ -22,3 +22,10 @@ FamixStModel class >> canBeImportedFromFile [
 	<generated>
 	^true
 ]
+
+{ #category : #accessing }
+FamixStModel class >> importingContextClass [
+
+	<generated>
+	^ FamixStImportingContext
+]

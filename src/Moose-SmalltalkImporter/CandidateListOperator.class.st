@@ -12,27 +12,33 @@ Class {
 }
 
 { #category : #running }
-CandidateListOperator >> allCandidatesFor: invocation [ 
-	^Array 
-		withAll: 
-			(groups 
-				at: invocation signature 
-				ifAbsent: [ | stubs |
-					stubs := self importer ensureSmalltalkStubMethodsFor: invocation signature.
-					groups at: invocation signature put: stubs.
-					stubs do: [:each | model add: each].
-					stubs ])
+CandidateListOperator >> allCandidatesFor: invocation [
+
+	^ Array withAll: (groups at: invocation signature ifAbsent: [ 
+			   | stubs |
+			   stubs := self importer ensureSmalltalkStubMethodsFor:
+				            invocation signature.
+			   groups at: invocation signature put: stubs.
+			   stubs do: [ :each | model add: each. model add: each parentType ].
+			   stubs ])
 ]
 
 { #category : #running }
 CandidateListOperator >> computeCandidateListFor: anInvocation [
-	anInvocation receiver
-		ifNotNil: [ :receiver | 
-			(receiver isImplicitVariable and: [ receiver isSuper ])
-				ifTrue: [ ^ self computeCandidateListFor: anInvocation withBaseClass: receiver belongsTo parentType superclass ].
-			(receiver isImplicitVariable and: [ receiver isSelf ])
-				ifTrue: [ ^ self computeCandidateListFor: anInvocation withReceivingClass: receiver belongsTo parentType ].
-			receiver isClass ifTrue: [ ^ self computeCandidateListFor: anInvocation withBaseClass: receiver ] ].
+
+	anInvocation receiver ifNotNil: [ :receiver | 
+		(receiver isImplicitVariable and: [ receiver isSuper ]) ifTrue: [ 
+			^ self
+				  computeCandidateListFor: anInvocation
+				  withBaseClass: receiver belongsTo parentType superclass ].
+		(receiver isImplicitVariable and: [ receiver isSelf ]) ifTrue: [ 
+			^ self
+				  computeCandidateListFor: anInvocation
+				  withReceivingClass: receiver belongsTo parentType ].
+		receiver isClass ifTrue: [ 
+			^ self
+				  computeCandidateListFor: anInvocation
+				  withBaseClass: receiver ] ].
 	anInvocation candidates: (self allCandidatesFor: anInvocation)
 ]
 

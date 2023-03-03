@@ -183,6 +183,18 @@ FamixMetamodelBuilder >> generate [
 ]
 
 { #category : #generating }
+FamixMetamodelBuilder >> generateContextClassMethodInModel [
+
+	self environment
+		compile: ('importingContextClass
+
+	<generated>
+	^ {1}' format: { self importingContextName })
+		in: self model realClass classSide
+		classified: 'accessing'
+]
+
+{ #category : #generating }
 FamixMetamodelBuilder >> generateImportAssociation: aFmxMBAssociationClass in: contextClass [
 
 	^ self environment
@@ -237,7 +249,9 @@ FamixMetamodelBuilder >> generateImportingContext [
 
 	self generateImportingContextMetamodelIn: contextClass.
 	self generateShouldImportIn: contextClass.
-	self generateImportIn: contextClass
+	self generateImportIn: contextClass.
+
+	self generateContextClassMethodInModel
 ]
 
 { #category : #generating }
@@ -265,7 +279,7 @@ FamixMetamodelBuilder >> generateRemotes [
 FamixMetamodelBuilder >> generateShouldImportIn: contextClass [
 
 	self classes do: [ :each | "No need to generate methods for model class."
-		each isModelClass ifFalse: [ 
+		(each isModelClass or: [ each isMetamodelClassGroup ]) ifFalse: [ 
 			self environment
 				compile: ('shouldImport{1}
 

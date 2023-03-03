@@ -23,7 +23,7 @@ FmxImportingPresenter class >> title [
 ]
 
 { #category : #specs }
-FmxImportingPresenter class >> windowSize [
+FmxImportingPresenter class >> windowExtent [
 
 	^ 600 @ 400
 ]
@@ -105,13 +105,13 @@ FmxImportingPresenter >> initializeToolbar [
 	toolbar
 		add: (self newToolbarButton
 				 label: 'Select All';
-				 icon: (self iconNamed: #checkedBox);
+				 icon: (self iconNamed: #smallAdd);
 				 action: [ 
 					 importingContext importMaximum.
 					 self updateSelection ]);
 		add: (self newToolbarButton
 				 label: 'Unselect All';
-				 icon: (self iconNamed: #uncheckedBox);
+				 icon: (self iconNamed: #smallDelete);
 				 action: [ 
 					 importingContext importNone.
 					 self updateSelection ])
@@ -122,7 +122,7 @@ FmxImportingPresenter >> initializeWindow: aWindowPresenter [
 
 	aWindowPresenter
 		title: self class title;
-		initialExtent: self class windowSize
+		initialExtent: self class windowExtent
 ]
 
 { #category : #'accessing - model' }

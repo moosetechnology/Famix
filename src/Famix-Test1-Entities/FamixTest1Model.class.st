@@ -24,6 +24,13 @@ FamixTest1Model class >> annotation [
 ]
 
 { #category : #accessing }
+FamixTest1Model class >> importingContextClass [
+
+	<generated>
+	^ FamixTest1ImportingContext
+]
+
+{ #category : #accessing }
 FamixTest1Model >> modelHasProperties [
 
 	<FMProperty: #modelHasProperties type: #Object>
