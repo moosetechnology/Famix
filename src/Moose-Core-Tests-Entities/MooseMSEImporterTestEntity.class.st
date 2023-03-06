@@ -13,6 +13,13 @@ MooseMSEImporterTestEntity class >> annotation [
 	^self
 ]
 
+{ #category : #testing }
+MooseMSEImporterTestEntity class >> isAbstract [
+
+	<generated>
+	^ self == MooseMSEImporterTestEntity
+]
+
 { #category : #meta }
 MooseMSEImporterTestEntity class >> metamodel [
 

@@ -13,6 +13,13 @@ FamixTestComposed1Entity class >> annotation [
 	^self
 ]
 
+{ #category : #testing }
+FamixTestComposed1Entity class >> isAbstract [
+
+	<generated>
+	^ self == FamixTestComposed1Entity
+]
+
 { #category : #meta }
 FamixTestComposed1Entity class >> metamodel [
 

@@ -13,6 +13,13 @@ FamixTest1Entity class >> annotation [
 	^self
 ]
 
+{ #category : #testing }
+FamixTest1Entity class >> isAbstract [
+
+	<generated>
+	^ self == FamixTest1Entity
+]
+
 { #category : #meta }
 FamixTest1Entity class >> metamodel [
 
