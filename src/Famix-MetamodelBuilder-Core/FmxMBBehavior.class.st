@@ -114,7 +114,7 @@ FmxMBBehavior >> defaultTag [
 	^ self builder configuration classTag
 ]
 
-{ #category : #accessing }
+{ #category : #generating }
 FmxMBBehavior >> ensureRealClass [
 	^ realClass
 		ifNil: [ self generate.
@@ -134,7 +134,7 @@ FmxMBBehavior >> generalization: anObject [
 		ifFalse: [ anObject isMetamodelTrait ifTrue: [ self addTraitGeneralization: anObject ] ifFalse: [ self classGeneralization: anObject ] ]
 ]
 
-{ #category : #accessing }
+{ #category : #generating }
 FmxMBBehavior >> generate [
 	^ self subclassResponsibility
 ]

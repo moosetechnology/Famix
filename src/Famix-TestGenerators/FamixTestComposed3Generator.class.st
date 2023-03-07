@@ -21,9 +21,3 @@ FamixTestComposed3Generator class >> submetamodels [
 
 	^ { FamixTestComposedComposedGenerator }
 ]
-
-{ #category : #initialization }
-FamixTestComposed3Generator >> initialize [
-	super initialize.
-	self notImportedFromFile
-]

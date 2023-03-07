@@ -389,7 +389,8 @@ FamixJavaGenerator >> defineTraits [
 
 { #category : #definition }
 FamixJavaGenerator >> newBuilder [
+
 	^ super newBuilder
-		withImportingContext;
-		yourself
+		  withFileImport;
+		  yourself
 ]

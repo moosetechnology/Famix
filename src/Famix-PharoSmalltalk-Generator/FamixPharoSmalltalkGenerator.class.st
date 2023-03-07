@@ -169,7 +169,8 @@ FamixPharoSmalltalkGenerator >> defineProperties [
 
 { #category : #initialization }
 FamixPharoSmalltalkGenerator >> newBuilder [
+
 	^ super newBuilder
-		withImportingContext;
-		yourself
+		  withFileImport;
+		  yourself
 ]

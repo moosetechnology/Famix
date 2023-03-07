@@ -47,31 +47,36 @@ FmxMBClass >> classGeneralization: anObject [
 FmxMBClass >> generate [
 
 	| aClass aSuperclass aClassName |
-	
 	self willGenerate ifFalse: [ ^ self ].
-	
+
 	aClassName := self fullName.
-	
-	aSuperclass := 	self classGeneralization 
-		ifNil: [ self defaultSuperclass ]
-		ifNotNil: [ self classGeneralization realClass ].
-	
-	aClass := self builder environment createClassNamed: aClassName asSymbol superclass: aSuperclass traitNames: self allTraitNames slots: self slotDefinitions in: self packageName overwrite: true.
-	
+
+	aSuperclass := self classGeneralization
+		               ifNil: [ self defaultSuperclass ]
+		               ifNotNil: [ self classGeneralization realClass ].
+
+	aClass := self builder environment
+		          createClassNamed: aClassName asSymbol
+		          superclass: aSuperclass
+		          traitNames: self allTraitNames
+		          slots: self slotDefinitions
+		          in: self packageName
+		          overwrite: true.
+
 	aClass tagWith: self tag.
 	self builder environment setComment: self comment for: aClass.
-			
+
 	self realClass: aClass.
-	
+
 	self generateAccessors.
 	self generateAnnotationIn: aClass as: self name superclass: nil.
-	
+
 	self generateTestingMethodsIn: aClass.
 	self generateRootMetamodelMethodIn: aClass.
 
 	self generateMethodsToRemoveFromTraitCompositionFor: aClass.
 	self generatePrecedenceInTraitComposition: aClass.
-	
+
 	self generateNavigationGroupsFor: aClass.
 	self generateAddToCollectionFor: aClass
 ]
@@ -88,7 +93,7 @@ FmxMBClass >> generateRemotes [
 	self generateRemoteAccessors
 ]
 
-{ #category : #generating }
+{ #category : #'generating-methods' }
 FmxMBClass >> generateRootMetamodelMethodIn: aClass [
 	self isRoot ifFalse: [ ^ self ].
 
@@ -103,7 +108,7 @@ FmxMBClass >> generateRootMetamodelMethodIn: aClass [
 				classified: 'meta' ]
 ]
 
-{ #category : #accessing }
+{ #category : #'generating-methods' }
 FmxMBClass >> generateTestingMethodsIn: aClass [
 	self isRoot
 		ifTrue: [ builder testingSelectorsMapping

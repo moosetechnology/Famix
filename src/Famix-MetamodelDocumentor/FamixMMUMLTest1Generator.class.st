@@ -43,9 +43,3 @@ FamixMMUMLTest1Generator >> defineTraits [
 	t3 := builder newTraitNamed: #Trait3.
 	t4 := builder newTraitNamed: #Trait4
 ]
-
-{ #category : #initialization }
-FamixMMUMLTest1Generator >> initialize [
-	super initialize.
-	self notImportedFromFile
-]

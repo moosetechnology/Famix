@@ -50,9 +50,3 @@ FamixTest5Generator >> defineRelations [
 	self apply: #TWithAnnotationTypes on: withAnnotationType2 oppositeOn: annotationType2.
 
 ]
-
-{ #category : #initialization }
-FamixTest5Generator >> initialize [
-	super initialize.
-	self notImportedFromFile
-]

@@ -317,11 +317,6 @@ FamixMetamodelGenerator >> newBuilder [
 	^ FamixMetamodelBuilder forGenerator: self
 ]
 
-{ #category : #initialization }
-FamixMetamodelGenerator >> notImportedFromFile [
-	builder notImportedFromFile
-]
-
 { #category : #definition }
 FamixMetamodelGenerator >> packageName [
 

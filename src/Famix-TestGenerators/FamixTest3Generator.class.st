@@ -80,9 +80,3 @@ FamixTest3Generator >> defineHierarchy [
 	"groups"
 	classEntitygroup --|> typeGroup.
 ]
-
-{ #category : #initialization }
-FamixTest3Generator >> initialize [
-	super initialize.
-	self notImportedFromFile
-]

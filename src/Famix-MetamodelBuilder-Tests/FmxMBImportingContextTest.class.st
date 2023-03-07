@@ -18,20 +18,23 @@ FmxMBImportingContextTest >> setUp [
 
 	super setUp.
 
-	builder withImportingContext.
+	builder withFileImport.
 
-	access := builder newClassNamed: #Access.	
-	variable := builder newClassNamed: #Variable.	
+	access := builder newClassNamed: #Access.
+	variable := builder newClassNamed: #Variable.
 	method := builder newClassNamed: #Method.
 
 	builder generate.
-		
-	generatedAccess := builder testingEnvironment ask classNamed: #TstAccess.
-	generatedVariable := builder testingEnvironment ask classNamed: #TstVariable.
-	generatedMethod := builder testingEnvironment ask classNamed: #TstMethod.
 
-	generatedContext := builder testingEnvironment ask classNamed: #TstImportingContext.
+	generatedAccess := builder testingEnvironment ask classNamed:
+		                   #TstAccess.
+	generatedVariable := builder testingEnvironment ask classNamed:
+		                     #TstVariable.
+	generatedMethod := builder testingEnvironment ask classNamed:
+		                   #TstMethod.
 
+	generatedContext := builder testingEnvironment ask classNamed:
+		                    #TstImportingContext
 ]
 
 { #category : #tests }
@@ -71,13 +74,13 @@ FmxMBImportingContextTest >> testNotGenerated [
 FmxMBImportingContextTest >> testNotGeneratedForEmptyBuilder [
 
 	builder := FamixMetamodelBuilder forTesting.
-	builder withImportingContext.
+	builder withFileImport.
 
 	builder generate.
-		
-	generatedContext := builder testingEnvironment ask classNamed: #TstImportingContext.
-	self assert: generatedContext isNil.
 
+	generatedContext := builder testingEnvironment ask classNamed:
+		                    #TstImportingContext.
+	self assert: generatedContext isNil
 ]
 
 { #category : #tests }

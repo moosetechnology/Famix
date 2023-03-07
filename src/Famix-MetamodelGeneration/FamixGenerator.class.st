@@ -1847,9 +1847,3 @@ FamixGenerator >> defineTraits [
 		                  comment: self commentForTCanImplement.
 	tImplementation := builder newTraitNamed: #TImplementation. 
 ]
-
-{ #category : #initialization }
-FamixGenerator >> initialize [
-	super initialize.
-	self notImportedFromFile
-]

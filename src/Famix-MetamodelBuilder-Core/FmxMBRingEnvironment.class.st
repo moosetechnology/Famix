@@ -20,6 +20,13 @@ FmxMBRingEnvironment >> basicGroupSuperclass [
 ]
 
 { #category : #accessing }
+FmxMBRingEnvironment >> basicImportingContextSuperclass [
+
+	^ self ringEnvironment ensureClassNamed:
+		  self builder configuration basicImportingContextSuperclassName
+]
+
+{ #category : #accessing }
 FmxMBRingEnvironment >> basicModelSuperclass [
 
 	^ self ringEnvironment ensureClassNamed: self builder configuration basicModelSuperclassName
@@ -101,24 +108,6 @@ FmxMBRingEnvironment >> createClassNamed: aClassName superclass: aSuperclass tra
 
 
 	^ aClass
-]
-
-{ #category : #initialization }
-FmxMBRingEnvironment >> createImportingcontextClassNamed: aClassName in: packageName [
-
-	| resultantClass |
-	(self hasBehaviorNamed: aClassName asSymbol) ifTrue: [ 
-		^ self ringEnvironment ensureClassNamed: aClassName asSymbol ].
-
-	resultantClass := self ringEnvironment ensureClassNamed:
-		                  aClassName asSymbol.
-	resultantClass superclass: (self ringEnvironment ensureClassNamed:
-			 self builder baseImportingContextName).
-	resultantClass layout makeResolved.
-	resultantClass package:
-		(self ringEnvironment ensurePackageNamed: packageName).
-
-	^ resultantClass
 ]
 
 { #category : #initialization }

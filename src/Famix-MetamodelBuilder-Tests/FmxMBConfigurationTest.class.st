@@ -31,7 +31,7 @@ FmxMBConfigurationTest >> testConfiguration [
 	config navigationForNonContainers: true.
 	self assert: config navigationForNonContainers.
 
-	self deny: config wantsToGenerateImportingContext.
-	config wantsToGenerateImportingContext: true.
-	self assert: config wantsToGenerateImportingContext
+	self deny: config shouldGenerateFileImportHelpers.
+	config shouldGenerateFileImportHelpers: true.
+	self assert: config shouldGenerateFileImportHelpers
 ]

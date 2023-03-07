@@ -55,8 +55,7 @@ Class {
 		'generator',
 		'testingSelectorsMapping',
 		'configuration',
-		'parentBuilder',
-		'importedFromFile'
+		'parentBuilder'
 	],
 	#category : #'Famix-MetamodelBuilder-Core-Basic'
 }
@@ -183,87 +182,17 @@ FamixMetamodelBuilder >> generate [
 ]
 
 { #category : #generating }
-FamixMetamodelBuilder >> generateContextClassMethodInModel [
-
-	self environment
-		compile: ('importingContextClass
-
-	<generated>
-	^ {1}' format: { self importingContextName })
-		in: self model realClass classSide
-		classified: 'accessing'
-]
-
-{ #category : #generating }
-FamixMetamodelBuilder >> generateImportAssociation: aFmxMBAssociationClass in: contextClass [
-
-	^ self environment
-		  compile: ('import{1}
-
-	<generated>
-	^ self importAssociation: (self class fm3ClassNamed: #{1})' format:
-				   { aFmxMBAssociationClass name })
-		  in: contextClass
-		  classified: 'importing'
-]
-
-{ #category : #generating }
-FamixMetamodelBuilder >> generateImportConcreteEntity: aFmxMBClass in: contextClass [
-
-	^ self environment
-		  compile: ('import{1}
-
-	<generated>
-	^ self importConcreteEntity: (self class fm3ClassNamed: #{1})' 
-				   format: { aFmxMBClass name })
-		  in: contextClass
-		  classified: 'importing'
-]
-
-{ #category : #generating }
-FamixMetamodelBuilder >> generateImportIn: contextClass [
-
-	self classes do: [ :each | 
-		
-		"No need to generate methods for model class and groups."
-		(each isModelClass or: [ each isMetamodelClassGroup ]) ifFalse: [ 
-			
-			"Associations and other entities are managed differently by the importing context"
-			each allTransitiveTraits
-				detect: [ :trait | trait name = #TAssociation ]
-				ifFound: [ self generateImportAssociation: each in: contextClass ]
-				ifNone: [ 
-				self generateImportConcreteEntity: each in: contextClass ] ] ]
-]
-
-{ #category : #generating }
 FamixMetamodelBuilder >> generateImportingContext [
 
-	| contextClass |
-	self configuration wantsToGenerateImportingContext ifFalse: [ ^ self ].
+	| aClass |
+	self configuration shouldGenerateFileImportHelpers ifFalse: [ ^ self ].
 
-	contextClass := self environment
-		                createImportingcontextClassNamed:
-		                self importingContextName
-		                in: self configuration packageName.
-
-	self generateImportingContextMetamodelIn: contextClass.
-	self generateShouldImportIn: contextClass.
-	self generateImportIn: contextClass.
-
-	self generateContextClassMethodInModel
-]
-
-{ #category : #generating }
-FamixMetamodelBuilder >> generateImportingContextMetamodelIn: contextClass [
-
-	self environment
-		compile: ('importedMetamodel
-
-	<generated>
-	^ {1}Model metamodel' format: { self configuration prefix })
-		in: contextClass classSide
-		classified: 'accessing'
+	aClass := FmxMBImportingContext new.
+	aClass builder: self.
+	aClass prefix: self configuration prefix.
+	aClass packageName: self configuration packageName.
+	aClass tag: 'Import'.
+	aClass generate
 ]
 
 { #category : #generating }
@@ -273,20 +202,6 @@ FamixMetamodelBuilder >> generateRemotes [
 	self classes do: [ :each | each generateRemotes ].
 
 	self apply
-]
-
-{ #category : #generating }
-FamixMetamodelBuilder >> generateShouldImportIn: contextClass [
-
-	self classes do: [ :each | "No need to generate methods for model class."
-		(each isModelClass or: [ each isMetamodelClassGroup ]) ifFalse: [ 
-			self environment
-				compile: ('shouldImport{1}
-
-	<generated>
-	^ self shouldImport: #{1}' format: { each name })
-				in: contextClass
-				classified: 'testing' ] ]
 ]
 
 { #category : #accessing }
@@ -366,18 +281,11 @@ FamixMetamodelBuilder >> initialize [
 	environment := FmxMBRealRingEnvironment for: self.
 
 	configuration := FmxMBConfiguration new.
-	importedFromFile := true. "should be set in configuration ???"
 
 	classes := OrderedCollection new.
 	traits := OrderedCollection new.
 	relations := OrderedCollection new.
 	testingSelectorsMapping := Dictionary new
-]
-
-{ #category : #accessing }
-FamixMetamodelBuilder >> isImportedFromFile [
-
-	^ importedFromFile
 ]
 
 { #category : #initialization }
@@ -486,12 +394,6 @@ FamixMetamodelBuilder >> newTraitNamed: aClassName comment: aString [
 	^ (self newTraitNamed: aClassName)
 		  comment: aString;
 		  yourself
-]
-
-{ #category : #accessing }
-FamixMetamodelBuilder >> notImportedFromFile [
-
-	importedFromFile := false
 ]
 
 { #category : #accessing }
@@ -652,7 +554,17 @@ FamixMetamodelBuilder >> unsafeNewTraitNamed: aTraitName [
 ]
 
 { #category : #accessing }
+FamixMetamodelBuilder >> withFileImport [
+
+	self configuration shouldGenerateFileImportHelpers: true
+]
+
+{ #category : #accessing }
 FamixMetamodelBuilder >> withImportingContext [
 
-	self configuration wantsToGenerateImportingContext: true
+	self
+		deprecated: 'Use #withFileImport instead'
+		transformWith:
+		'`@receiver withImportingContext' -> '`@receiver withFileImport'.
+	self withFileImport
 ]

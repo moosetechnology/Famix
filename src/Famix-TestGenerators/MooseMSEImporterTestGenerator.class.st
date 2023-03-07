@@ -75,9 +75,3 @@ MooseMSEImporterTestGenerator >> defineHierarchy [
 
 	primitiveType --|> #TPrimitiveType
 ]
-
-{ #category : #initialization }
-MooseMSEImporterTestGenerator >> initialize [
-	super initialize.
-	self notImportedFromFile
-]
