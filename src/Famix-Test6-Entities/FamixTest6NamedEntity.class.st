@@ -14,3 +14,10 @@ FamixTest6NamedEntity class >> annotation [
 	<generated>
 	^self
 ]
+
+{ #category : #testing }
+FamixTest6NamedEntity class >> isAbstract [
+
+	<generated>
+	^ self == FamixTest6NamedEntity
+]

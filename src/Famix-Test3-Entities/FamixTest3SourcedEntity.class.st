@@ -14,3 +14,10 @@ FamixTest3SourcedEntity class >> annotation [
 	<generated>
 	^self
 ]
+
+{ #category : #testing }
+FamixTest3SourcedEntity class >> isAbstract [
+
+	<generated>
+	^ self == FamixTest3SourcedEntity
+]

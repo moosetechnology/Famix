@@ -14,3 +14,10 @@ MooseMSEImporterTestSourcedEntity class >> annotation [
 	<generated>
 	^self
 ]
+
+{ #category : #testing }
+MooseMSEImporterTestSourcedEntity class >> isAbstract [
+
+	<generated>
+	^ self == MooseMSEImporterTestSourcedEntity
+]

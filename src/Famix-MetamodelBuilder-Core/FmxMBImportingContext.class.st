@@ -88,7 +88,7 @@ FmxMBImportingContext >> generateImportIn: aClass [
 	self builder classes do: [ :each | 
 		"No need to generate methods for model and groups."
 		(each isModelClass or: [ 
-			 each isMetamodelClassGroup "or: [ each isAbstractClass ] "]) ifFalse: [ 
+			 each isMetamodelClassGroup or: [ each isAbstractClass ] ]) ifFalse: [ 
 			
 			"Associations and other entities are managed differently by the importing context"
 			each allTransitiveTraits
@@ -122,7 +122,7 @@ FmxMBImportingContext >> generateShouldImportIn: aClass [
 	self builder classes do: [ :each | 
 		"No need to generate methods for model and groups."
 		(each isModelClass or: [ 
-			 each isMetamodelClassGroup "or: [ each isAbstractClass ] "]) ifFalse: [ 
+			 each isMetamodelClassGroup or: [ each isAbstractClass ] ]) ifFalse: [ 
 			aClass
 				compile: ('shouldImport{1}
 

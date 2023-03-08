@@ -15,6 +15,13 @@ FamixJavaSourcedEntity class >> annotation [
 	^self
 ]
 
+{ #category : #testing }
+FamixJavaSourcedEntity class >> isAbstract [
+
+	<generated>
+	^ self == FamixJavaSourcedEntity
+]
+
 { #category : #'Famix-SourceAnchor' }
 FamixJavaSourcedEntity >> fileAnchorPath: aString startLine: anInteger startColumn: anInteger2 endLine: anInteger3 endColumn: anInteger4 [
 	"I need to be called after the mooseModel is set."

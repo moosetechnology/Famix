@@ -15,6 +15,13 @@ FamixJavaNamedEntity class >> annotation [
 	^self
 ]
 
+{ #category : #testing }
+FamixJavaNamedEntity class >> isAbstract [
+
+	<generated>
+	^ self == FamixJavaNamedEntity
+]
+
 { #category : #'Famix-Extensions' }
 FamixJavaNamedEntity >> stubFormattedName [
 	 ^ self isStub 

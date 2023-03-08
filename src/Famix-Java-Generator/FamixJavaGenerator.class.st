@@ -124,7 +124,7 @@ FamixJavaGenerator >> defineClasses [
 	interface := builder newClassNamed: #Interface.
 	interface withTesting.
 	implementation := builder newClassNamed: #Implementation.
-	containerEntity := builder newClassNamed: #ContainerEntity.
+	containerEntity := builder newAbstractClassNamed: #ContainerEntity.
 	enum := builder newClassNamed: #Enum.
 	enumValue := builder newClassNamed: #EnumValue.
 	exception := builder newClassNamed: #Exception.

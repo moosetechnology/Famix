@@ -14,3 +14,10 @@ MooseMSEImporterTestSourceAnchor class >> annotation [
 	<generated>
 	^self
 ]
+
+{ #category : #testing }
+MooseMSEImporterTestSourceAnchor class >> isAbstract [
+
+	<generated>
+	^ self == MooseMSEImporterTestSourceAnchor
+]

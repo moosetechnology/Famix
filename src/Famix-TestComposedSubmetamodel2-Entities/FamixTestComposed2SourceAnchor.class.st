@@ -14,3 +14,10 @@ FamixTestComposed2SourceAnchor class >> annotation [
 	<generated>
 	^self
 ]
+
+{ #category : #testing }
+FamixTestComposed2SourceAnchor class >> isAbstract [
+
+	<generated>
+	^ self == FamixTestComposed2SourceAnchor
+]

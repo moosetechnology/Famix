@@ -71,6 +71,7 @@ FmxMBClass >> generate [
 
 	self generateAccessors.
 	self generateAnnotationIn: aClass as: self name superclass: nil.
+	self generateIsAbstractMethodIfNecessaryIn: aClass.
 
 	self generateTestingMethodsIn: aClass.
 	self generateRootMetamodelMethodIn: aClass.

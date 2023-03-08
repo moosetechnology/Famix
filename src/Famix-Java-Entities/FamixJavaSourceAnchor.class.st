@@ -14,3 +14,10 @@ FamixJavaSourceAnchor class >> annotation [
 	<generated>
 	^self
 ]
+
+{ #category : #testing }
+FamixJavaSourceAnchor class >> isAbstract [
+
+	<generated>
+	^ self == FamixJavaSourceAnchor
+]

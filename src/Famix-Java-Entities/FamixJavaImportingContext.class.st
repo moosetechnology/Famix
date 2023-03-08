@@ -68,20 +68,6 @@ FamixJavaImportingContext >> importComment [
 ]
 
 { #category : #importing }
-FamixJavaImportingContext >> importContainerEntity [
-
-	<generated>
-	^ self importConcreteEntity: (self class fm3ClassNamed: #ContainerEntity)
-]
-
-{ #category : #importing }
-FamixJavaImportingContext >> importEntity [
-
-	<generated>
-	^ self importConcreteEntity: (self class fm3ClassNamed: #Entity)
-]
-
-{ #category : #importing }
 FamixJavaImportingContext >> importEnum [
 
 	<generated>
@@ -166,13 +152,6 @@ FamixJavaImportingContext >> importMethod [
 ]
 
 { #category : #importing }
-FamixJavaImportingContext >> importNamedEntity [
-
-	<generated>
-	^ self importConcreteEntity: (self class fm3ClassNamed: #NamedEntity)
-]
-
-{ #category : #importing }
 FamixJavaImportingContext >> importPackage [
 
 	<generated>
@@ -236,13 +215,6 @@ FamixJavaImportingContext >> importReference [
 ]
 
 { #category : #importing }
-FamixJavaImportingContext >> importSourceAnchor [
-
-	<generated>
-	^ self importConcreteEntity: (self class fm3ClassNamed: #SourceAnchor)
-]
-
-{ #category : #importing }
 FamixJavaImportingContext >> importSourceLanguage [
 
 	<generated>
@@ -254,13 +226,6 @@ FamixJavaImportingContext >> importSourceTextAnchor [
 
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #SourceTextAnchor)
-]
-
-{ #category : #importing }
-FamixJavaImportingContext >> importSourcedEntity [
-
-	<generated>
-	^ self importConcreteEntity: (self class fm3ClassNamed: #SourcedEntity)
 ]
 
 { #category : #importing }
@@ -338,20 +303,6 @@ FamixJavaImportingContext >> shouldImportComment [
 
 	<generated>
 	^ self shouldImport: #Comment
-]
-
-{ #category : #testing }
-FamixJavaImportingContext >> shouldImportContainerEntity [
-
-	<generated>
-	^ self shouldImport: #ContainerEntity
-]
-
-{ #category : #testing }
-FamixJavaImportingContext >> shouldImportEntity [
-
-	<generated>
-	^ self shouldImport: #Entity
 ]
 
 { #category : #testing }
@@ -439,13 +390,6 @@ FamixJavaImportingContext >> shouldImportMethod [
 ]
 
 { #category : #testing }
-FamixJavaImportingContext >> shouldImportNamedEntity [
-
-	<generated>
-	^ self shouldImport: #NamedEntity
-]
-
-{ #category : #testing }
 FamixJavaImportingContext >> shouldImportPackage [
 
 	<generated>
@@ -509,13 +453,6 @@ FamixJavaImportingContext >> shouldImportReference [
 ]
 
 { #category : #testing }
-FamixJavaImportingContext >> shouldImportSourceAnchor [
-
-	<generated>
-	^ self shouldImport: #SourceAnchor
-]
-
-{ #category : #testing }
 FamixJavaImportingContext >> shouldImportSourceLanguage [
 
 	<generated>
@@ -527,13 +464,6 @@ FamixJavaImportingContext >> shouldImportSourceTextAnchor [
 
 	<generated>
 	^ self shouldImport: #SourceTextAnchor
-]
-
-{ #category : #testing }
-FamixJavaImportingContext >> shouldImportSourcedEntity [
-
-	<generated>
-	^ self shouldImport: #SourcedEntity
 ]
 
 { #category : #testing }
