@@ -132,6 +132,18 @@ FamixMetamodelBuilder >> configuration: anObject [
 ]
 
 { #category : #initialization }
+FamixMetamodelBuilder >> ensureAbstractClassNamed: aString [
+
+	^ self classes
+		  detect: [ :each | each name = aString ]
+		  ifFound: [ :aClass | 
+			  aClass
+				  isAbstractClass: true;
+				  yourself ]
+		  ifNone: [ self newAbstractClassNamed: aString ]
+]
+
+{ #category : #initialization }
 FamixMetamodelBuilder >> ensureClassNamed: aString [
 
 	^ self classes
@@ -147,7 +159,7 @@ FamixMetamodelBuilder >> ensureEntityClassIsTheCommonSuperclass [
 	self classes iterator | #isRoot selectIt
 	| #isMetamodelClassGroup rejectIt | #isModelClass rejectIt
 	| [ :class | class name = #Entity ] rejectIt
-	| [ :class | class --|> (self ensureClassNamed: #Entity) ] doIt
+	| [ :class | class --|> (self ensureAbstractClassNamed: #Entity) ] doIt
 	> NullAddableObject
 ]
 
@@ -304,6 +316,18 @@ FamixMetamodelBuilder >> model [
 	aClass packageName: self configuration packageName.
 	self classes add: aClass.
 	^ aClass
+]
+
+{ #category : #initialization }
+FamixMetamodelBuilder >> newAbstractClassNamed: aClassName [
+
+	(self classes select: [ :each | each name = aClassName ]) 
+		ifNotEmpty: [ FmxMBEntityAlreadyExists signal ].
+
+	^ self newClass
+		  name: aClassName;
+		  isAbstractClass: true;
+		  yourself
 ]
 
 { #category : #initialization }

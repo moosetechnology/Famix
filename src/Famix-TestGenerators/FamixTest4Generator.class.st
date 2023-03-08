@@ -42,10 +42,11 @@ FamixTest4Generator >> adoptBuilder: aBuilder [
 
 { #category : #definition }
 FamixTest4Generator >> defineClasses [
+
 	super defineClasses.
 
 	book := builder newClassNamed: #Book.
-	person := builder newClassNamed: #Person.
+	person := builder newAbstractClassNamed: #Person.
 	principal := builder newClassNamed: #Principal.
 	student := builder newClassNamed: #Student.
 	teacher := builder newClassNamed: #Teacher.

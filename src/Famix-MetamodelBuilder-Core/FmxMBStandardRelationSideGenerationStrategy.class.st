@@ -4,23 +4,27 @@ Class {
 	#category : #'Famix-MetamodelBuilder-Core-Implementation'
 }
 
-{ #category : #accessing }
+{ #category : #generation }
 FmxMBStandardRelationSideGenerationStrategy >> generateGetterCoreIn: aClassOrTrait on: aStream for: aRelationSide [
+
 	aStream
 		tab;
 		nextPutAll: '^ ';
 		nextPutAll: aRelationSide name
 ]
 
-{ #category : #accessing }
+{ #category : #generation }
 FmxMBStandardRelationSideGenerationStrategy >> generateSetterCoreIn: aClassOrTrait on: aStream for: aRelationSide [
+
 	aStream
 		tab;
 		nextPutAll: aRelationSide name.
-	aRelationSide isOne ifTrue: [ aStream nextPutAll: ' := anObject' ] ifFalse: [ aStream nextPutAll: ' value: anObject' ]
+	aRelationSide isOne
+		ifTrue: [ aStream nextPutAll: ' := anObject' ]
+		ifFalse: [ aStream nextPutAll: ' value: anObject' ]
 ]
 
-{ #category : #printing }
+{ #category : #testing }
 FmxMBStandardRelationSideGenerationStrategy >> producesSlot [
 
 	^ true

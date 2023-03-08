@@ -2,7 +2,8 @@ Class {
 	#name : #FmxMBClass,
 	#superclass : #FmxMBBehavior,
 	#instVars : [
-		'classGeneralization'
+		'classGeneralization',
+		'isAbstractClass'
 	],
 	#category : #'Famix-MetamodelBuilder-Core-Implementation'
 }
@@ -82,6 +83,18 @@ FmxMBClass >> generate [
 ]
 
 { #category : #generating }
+FmxMBClass >> generateIsAbstractMethodIfNecessaryIn: aClass [
+
+	self isAbstractClass ifTrue: [ 
+		aClass classSide
+			compile: ('isAbstract
+
+	<generated>
+	^ self == {1}' format: { aClass name asString })
+			classified: 'testing' ]
+]
+
+{ #category : #generating }
 FmxMBClass >> generateRemotes [
 	| aClass aClassName |
 	aClassName := self fullName.
@@ -125,6 +138,18 @@ FmxMBClass >> generateTestingMethodsIn: aClass [
 ]
 
 { #category : #testing }
+FmxMBClass >> isAbstractClass [
+
+	^ isAbstractClass ifNil: [ false ]
+]
+
+{ #category : #accessing }
+FmxMBClass >> isAbstractClass: aBoolean [
+
+	isAbstractClass := aBoolean
+]
+
+{ #category : #testing }
 FmxMBClass >> isMetamodelClass [
 
 	^ true
@@ -135,7 +160,7 @@ FmxMBClass >> isRoot [
 	^ self classGeneralization isNil
 ]
 
-{ #category : #generating }
+{ #category : #generalization }
 FmxMBClass >> subclassOf: aClass [
 	
 	self generalization: aClass

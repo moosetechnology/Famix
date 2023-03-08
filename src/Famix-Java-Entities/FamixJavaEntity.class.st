@@ -23,6 +23,13 @@ FamixJavaEntity class >> annotation [
 	^self
 ]
 
+{ #category : #testing }
+FamixJavaEntity class >> isAbstract [
+
+	<generated>
+	^ self == FamixJavaEntity
+]
+
 { #category : #meta }
 FamixJavaEntity class >> metamodel [
 

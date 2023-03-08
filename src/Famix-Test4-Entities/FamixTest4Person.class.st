@@ -16,6 +16,13 @@ FamixTest4Person class >> annotation [
 	^self
 ]
 
+{ #category : #testing }
+FamixTest4Person class >> isAbstract [
+
+	<generated>
+	^ self == FamixTest4Person
+]
+
 { #category : #adding }
 FamixTest4Person >> addBook: anObject [
 	<generated>

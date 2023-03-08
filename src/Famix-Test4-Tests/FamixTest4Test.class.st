@@ -52,6 +52,13 @@ FamixTest4Test >> setUp [
 ]
 
 { #category : #tests }
+FamixTest4Test >> testAbstractClasses [
+
+	self assert: FamixTest4Entity isAbstract.
+	self assert: FamixTest4Person isAbstract
+]
+
+{ #category : #tests }
 FamixTest4Test >> testRelations [
 	self assert: (principal books includes: book2).
 	self assert: (student1 books includes: book1).

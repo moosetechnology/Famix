@@ -13,6 +13,13 @@ FamixTestComposedEntity class >> annotation [
 	^self
 ]
 
+{ #category : #testing }
+FamixTestComposedEntity class >> isAbstract [
+
+	<generated>
+	^ self == FamixTestComposedEntity
+]
+
 { #category : #meta }
 FamixTestComposedEntity class >> metamodel [
 
@@ -25,27 +32,4 @@ FamixTestComposedEntity >> isAssociation [
 
 	<generated>
 	^ false
-]
-
-{ #category : #accessing }
-FamixTestComposedEntity >> method [
-	"Relation named: #method type: #FamixTestComposed1Method opposite: #entity"
-
-	<generated>
-	<FMProperty: #method type: #FamixTestComposed1Method opposite: #entity>
-	^ self attributeAt: #method ifAbsent: [ nil ]
-]
-
-{ #category : #accessing }
-FamixTestComposedEntity >> method: anObject [
-
-	<generated>
-	(self attributeAt: #method ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	anObject ifNil: [ | otherSide |
-		otherSide :=  self method.
-		self attributeAt: #method put: anObject.
-		otherSide entity: nil ]
-	ifNotNil: [ 
-		self attributeAt: #method put: anObject.
-		anObject entity: self ]
 ]
