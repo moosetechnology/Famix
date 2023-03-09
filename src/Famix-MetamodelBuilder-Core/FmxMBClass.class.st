@@ -84,6 +84,39 @@ FmxMBClass >> generate [
 ]
 
 { #category : #generating }
+FmxMBClass >> generateAnnotationIn: aRealClass as: aName superclass: aSuperclass [
+
+	| aSuperclassName |
+	aSuperclassName := aSuperclass
+		                   ifNotNil: [ aSuperclass name ]
+		                   ifNil: [ 
+			                   self classGeneralization
+			                   = self defaultSuperclass
+				                   ifTrue: [ self defaultSuperclassName ]
+				                   ifFalse: [ 
+					                   self classGeneralization
+						                   ifNil: [ self defaultSuperclassName ]
+						                   ifNotNil: [ :cg | cg realClass name ] ] ].
+
+	aRealClass classSide
+		compile: ('annotation
+
+	<FMClass: #{1} super: #{2}>
+	<package: {3}>
+	<generated>{4}
+	^self' format: { 
+					 aName.
+					 aSuperclassName.
+					 self builder safeAnnotationPackageName.
+					 (self isAbstractClass
+						  ifTrue: [ 
+							  '
+	<abstract>' ]
+						  ifFalse: [ '' ]) })
+		classified: 'meta'
+]
+
+{ #category : #generating }
 FmxMBClass >> generateIsAbstractMethodIfNecessaryIn: aClass [
 
 	self isAbstractClass ifTrue: [ 
@@ -107,7 +140,7 @@ FmxMBClass >> generateRemotes [
 	self generateRemoteAccessors
 ]
 
-{ #category : #generating }
+{ #category : #'generating-methods' }
 FmxMBClass >> generateRootMetamodelMethodIn: aClass [
 	self isRoot ifFalse: [ ^ self ].
 
@@ -122,7 +155,7 @@ FmxMBClass >> generateRootMetamodelMethodIn: aClass [
 				classified: 'meta' ]
 ]
 
-{ #category : #accessing }
+{ #category : #'generating-methods' }
 FmxMBClass >> generateTestingMethodsIn: aClass [
 	self isRoot
 		ifTrue: [ builder testingSelectorsMapping

@@ -12,7 +12,15 @@ FamixJavaSourcedEntity class >> annotation [
 	<FMClass: #SourcedEntity super: #FamixJavaEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
+	<abstract>
 	^self
+]
+
+{ #category : #testing }
+FamixJavaSourcedEntity class >> isAbstract [
+
+	<generated>
+	^ self == FamixJavaSourcedEntity
 ]
 
 { #category : #'Famix-SourceAnchor' }

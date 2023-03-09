@@ -138,15 +138,10 @@ FamixTest1Generator >> defineTraits [
 	tCanBeClassSide := builder newTraitNamed: #TCanBeClassSide. 
 ]
 
-{ #category : #initialization }
-FamixTest1Generator >> initialize [
-	super initialize.
-	self notImportedFromFile
-]
-
 { #category : #definition }
 FamixTest1Generator >> newBuilder [
+
 	^ super newBuilder
-		withImportingContext;
-		yourself
+		  withFileImport;
+		  yourself
 ]

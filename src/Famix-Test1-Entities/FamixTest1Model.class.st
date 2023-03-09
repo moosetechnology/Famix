@@ -23,6 +23,15 @@ FamixTest1Model class >> annotation [
 	<generated>
 ]
 
+{ #category : #testing }
+FamixTest1Model class >> canBeImportedFromFile [
+
+	"Please keep this method even if it is the same as in superclass.
+	It is here to avoid generation of a method returning true"
+
+	^ false
+]
+
 { #category : #accessing }
 FamixTest1Model class >> importingContextClass [
 

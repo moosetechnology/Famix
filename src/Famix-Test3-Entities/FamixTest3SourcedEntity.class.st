@@ -12,5 +12,13 @@ FamixTest3SourcedEntity class >> annotation [
 	<FMClass: #SourcedEntity super: #FamixTest3Entity>
 	<package: #'Famix-Test3-Entities'>
 	<generated>
+	<abstract>
 	^self
+]
+
+{ #category : #testing }
+FamixTest3SourcedEntity class >> isAbstract [
+
+	<generated>
+	^ self == FamixTest3SourcedEntity
 ]

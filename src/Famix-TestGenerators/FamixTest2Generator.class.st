@@ -40,9 +40,3 @@ FamixTest2Generator >> defineHierarchy [
 
 	inheritance --|> #TInheritance
 ]
-
-{ #category : #initialization }
-FamixTest2Generator >> initialize [
-	super initialize.
-	self notImportedFromFile
-]

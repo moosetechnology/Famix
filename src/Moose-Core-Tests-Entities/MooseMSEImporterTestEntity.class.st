@@ -10,6 +10,7 @@ MooseMSEImporterTestEntity class >> annotation [
 	<FMClass: #Entity super: #MooseEntity>
 	<package: #'Moose-Core-Tests-Entities'>
 	<generated>
+	<abstract>
 	^self
 ]
 

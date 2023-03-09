@@ -12,7 +12,15 @@ FamixStNamedEntity class >> annotation [
 	<FMClass: #NamedEntity super: #FamixStSourcedEntity>
 	<package: #'Famix-PharoSmalltalk-Entities'>
 	<generated>
+	<abstract>
 	^self
+]
+
+{ #category : #testing }
+FamixStNamedEntity class >> isAbstract [
+
+	<generated>
+	^ self == FamixStNamedEntity
 ]
 
 { #category : #'Famix-Extensions' }

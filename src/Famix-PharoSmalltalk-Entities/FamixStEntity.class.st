@@ -10,6 +10,7 @@ FamixStEntity class >> annotation [
 	<FMClass: #Entity super: #MooseEntity>
 	<package: #'Famix-PharoSmalltalk-Entities'>
 	<generated>
+	<abstract>
 	^self
 ]
 

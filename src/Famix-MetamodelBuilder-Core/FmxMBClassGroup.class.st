@@ -12,20 +12,20 @@ FmxMBClassGroup >> defaultSuperclass [
 	^ self builder environment basicGroupSuperclass
 ]
 
-{ #category : #'settings - default' }
+{ #category : #generating }
 FmxMBClassGroup >> generate [
 	super generate.
 	self generateMooseGroupAnnotationIn: innerClass ensureRealClass as: self fullName superclass: nil.
 ]
 
-{ #category : #'settings - default' }
+{ #category : #'generating-methods' }
 FmxMBClassGroup >> generateMooseGroupAnnotationIn: aRealClass as: aName superclass: aSuperclass [
+
 	aRealClass classSide
-		compile:
-			('annotation{1}
+		compile: ('annotation{1}
 	<generated>
 	<mooseGroup>
-	^ {1}' format: {aName})
+	^ {1}' format: { aName })
 		classified: 'groups'
 ]
 

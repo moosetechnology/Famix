@@ -52,9 +52,3 @@ FamixTestComposedSubmetamodel1Generator >> defineHierarchy [
 
 	customEntity5 --|> #TEntityMetaLevelDependency
 ]
-
-{ #category : #initialization }
-FamixTestComposedSubmetamodel1Generator >> initialize [
-	super initialize.
-	self notImportedFromFile
-]

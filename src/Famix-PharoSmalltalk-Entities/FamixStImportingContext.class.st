@@ -68,13 +68,6 @@ FamixStImportingContext >> importComment [
 ]
 
 { #category : #importing }
-FamixStImportingContext >> importEntity [
-
-	<generated>
-	^ self importConcreteEntity: (self class fm3ClassNamed: #Entity)
-]
-
-{ #category : #importing }
 FamixStImportingContext >> importGlobalVariable [
 
 	<generated>
@@ -117,13 +110,6 @@ FamixStImportingContext >> importMethod [
 ]
 
 { #category : #importing }
-FamixStImportingContext >> importNamedEntity [
-
-	<generated>
-	^ self importConcreteEntity: (self class fm3ClassNamed: #NamedEntity)
-]
-
-{ #category : #importing }
 FamixStImportingContext >> importNamespace [
 
 	<generated>
@@ -159,13 +145,6 @@ FamixStImportingContext >> importReference [
 ]
 
 { #category : #importing }
-FamixStImportingContext >> importSourceAnchor [
-
-	<generated>
-	^ self importConcreteEntity: (self class fm3ClassNamed: #SourceAnchor)
-]
-
-{ #category : #importing }
 FamixStImportingContext >> importSourceLanguage [
 
 	<generated>
@@ -177,13 +156,6 @@ FamixStImportingContext >> importSourceTextAnchor [
 
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #SourceTextAnchor)
-]
-
-{ #category : #importing }
-FamixStImportingContext >> importSourcedEntity [
-
-	<generated>
-	^ self importConcreteEntity: (self class fm3ClassNamed: #SourcedEntity)
 ]
 
 { #category : #importing }
@@ -257,13 +229,6 @@ FamixStImportingContext >> shouldImportComment [
 ]
 
 { #category : #testing }
-FamixStImportingContext >> shouldImportEntity [
-
-	<generated>
-	^ self shouldImport: #Entity
-]
-
-{ #category : #testing }
 FamixStImportingContext >> shouldImportGlobalVariable [
 
 	<generated>
@@ -306,13 +271,6 @@ FamixStImportingContext >> shouldImportMethod [
 ]
 
 { #category : #testing }
-FamixStImportingContext >> shouldImportNamedEntity [
-
-	<generated>
-	^ self shouldImport: #NamedEntity
-]
-
-{ #category : #testing }
 FamixStImportingContext >> shouldImportNamespace [
 
 	<generated>
@@ -348,13 +306,6 @@ FamixStImportingContext >> shouldImportReference [
 ]
 
 { #category : #testing }
-FamixStImportingContext >> shouldImportSourceAnchor [
-
-	<generated>
-	^ self shouldImport: #SourceAnchor
-]
-
-{ #category : #testing }
 FamixStImportingContext >> shouldImportSourceLanguage [
 
 	<generated>
@@ -366,13 +317,6 @@ FamixStImportingContext >> shouldImportSourceTextAnchor [
 
 	<generated>
 	^ self shouldImport: #SourceTextAnchor
-]
-
-{ #category : #testing }
-FamixStImportingContext >> shouldImportSourcedEntity [
-
-	<generated>
-	^ self shouldImport: #SourcedEntity
 ]
 
 { #category : #testing }

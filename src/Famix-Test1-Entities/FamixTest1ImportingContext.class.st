@@ -1,7 +1,7 @@
 Class {
 	#name : #FamixTest1ImportingContext,
 	#superclass : #FmxImportingContext,
-	#category : #'Famix-Test1-Entities'
+	#category : #'Famix-Test1-Entities-Import'
 }
 
 { #category : #accessing }
@@ -37,13 +37,6 @@ FamixTest1ImportingContext >> importComment [
 
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #Comment)
-]
-
-{ #category : #importing }
-FamixTest1ImportingContext >> importEntity [
-
-	<generated>
-	^ self importConcreteEntity: (self class fm3ClassNamed: #Entity)
 ]
 
 { #category : #importing }
@@ -89,20 +82,6 @@ FamixTest1ImportingContext >> importMultipleFileAnchor [
 ]
 
 { #category : #importing }
-FamixTest1ImportingContext >> importNamedEntity [
-
-	<generated>
-	^ self importConcreteEntity: (self class fm3ClassNamed: #NamedEntity)
-]
-
-{ #category : #importing }
-FamixTest1ImportingContext >> importSourceAnchor [
-
-	<generated>
-	^ self importConcreteEntity: (self class fm3ClassNamed: #SourceAnchor)
-]
-
-{ #category : #importing }
 FamixTest1ImportingContext >> importSourceLanguage [
 
 	<generated>
@@ -114,13 +93,6 @@ FamixTest1ImportingContext >> importSourceTextAnchor [
 
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #SourceTextAnchor)
-]
-
-{ #category : #importing }
-FamixTest1ImportingContext >> importSourcedEntity [
-
-	<generated>
-	^ self importConcreteEntity: (self class fm3ClassNamed: #SourcedEntity)
 ]
 
 { #category : #importing }
@@ -156,13 +128,6 @@ FamixTest1ImportingContext >> shouldImportComment [
 
 	<generated>
 	^ self shouldImport: #Comment
-]
-
-{ #category : #testing }
-FamixTest1ImportingContext >> shouldImportEntity [
-
-	<generated>
-	^ self shouldImport: #Entity
 ]
 
 { #category : #testing }
@@ -208,20 +173,6 @@ FamixTest1ImportingContext >> shouldImportMultipleFileAnchor [
 ]
 
 { #category : #testing }
-FamixTest1ImportingContext >> shouldImportNamedEntity [
-
-	<generated>
-	^ self shouldImport: #NamedEntity
-]
-
-{ #category : #testing }
-FamixTest1ImportingContext >> shouldImportSourceAnchor [
-
-	<generated>
-	^ self shouldImport: #SourceAnchor
-]
-
-{ #category : #testing }
 FamixTest1ImportingContext >> shouldImportSourceLanguage [
 
 	<generated>
@@ -233,13 +184,6 @@ FamixTest1ImportingContext >> shouldImportSourceTextAnchor [
 
 	<generated>
 	^ self shouldImport: #SourceTextAnchor
-]
-
-{ #category : #testing }
-FamixTest1ImportingContext >> shouldImportSourcedEntity [
-
-	<generated>
-	^ self shouldImport: #SourcedEntity
 ]
 
 { #category : #testing }

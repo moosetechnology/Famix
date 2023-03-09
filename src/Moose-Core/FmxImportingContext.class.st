@@ -24,10 +24,11 @@ FmxImportingContext class >> allMetamodelAssociations [
 FmxImportingContext class >> allMetamodelEntities [
 
 	^ self importedMetamodel classes reject: [ :fm3Class | 
-		  (fm3Class inheritsFrom:
-			   (self importedMetamodel fmTypeOf: MooseAbstractGroup)) or: [ 
-			  fm3Class traits anySatisfy: [ :fm3Trait | 
-				  fm3Trait name = #TAssociation ] ] ]
+		  fm3Class isAbstract or: [ 
+			  (fm3Class inheritsFrom:
+				   (self importedMetamodel fmTypeOf: MooseAbstractGroup)) or: [ 
+				  fm3Class traits anySatisfy: [ :fm3Trait | 
+					  fm3Trait name = #TAssociation ] ] ] ]
 ]
 
 { #category : #accessing }
@@ -112,7 +113,8 @@ FmxImportingContext >> importAssociation: aFM3AssociationClass [
 { #category : #'importing-add' }
 FmxImportingContext >> importConcreteEntity: aFM3Class [
 
-	(self importedEntities includes: aFM3Class) ifTrue: [ ^ self ].
+	((self importedEntities includes: aFM3Class) or: [ 
+		 aFM3Class isAbstract ]) ifTrue: [ ^ self ].
 
 	self importedEntities add: aFM3Class.
 

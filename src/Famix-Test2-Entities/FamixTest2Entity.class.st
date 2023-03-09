@@ -10,6 +10,7 @@ FamixTest2Entity class >> annotation [
 	<FMClass: #Entity super: #MooseEntity>
 	<package: #'Famix-Test2-Entities'>
 	<generated>
+	<abstract>
 	^self
 ]
 

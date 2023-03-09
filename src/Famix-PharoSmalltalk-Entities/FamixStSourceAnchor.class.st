@@ -12,5 +12,13 @@ FamixStSourceAnchor class >> annotation [
 	<FMClass: #SourceAnchor super: #FamixStEntity>
 	<package: #'Famix-PharoSmalltalk-Entities'>
 	<generated>
+	<abstract>
 	^self
+]
+
+{ #category : #testing }
+FamixStSourceAnchor class >> isAbstract [
+
+	<generated>
+	^ self == FamixStSourceAnchor
 ]

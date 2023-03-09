@@ -16,7 +16,7 @@ FmxMBTrait >> allTraitGeneralizations [
 	^ (self traitGeneralizations flatCollect: [ :each | {each} , each allTraitGeneralizations ]) asSet
 ]
 
-{ #category : #generating }
+{ #category : #accessing }
 FmxMBTrait >> classGeneralization [
 
 	^ self builder environment basicTrait
@@ -27,7 +27,7 @@ FmxMBTrait >> classGeneralization: anObject [
 	FmxMBTraitsGeneralizationError signal
 ]
 
-{ #category : #generating }
+{ #category : #accessing }
 FmxMBTrait >> defaultSuperclass [
 	
 	^ self builder environment basicTrait
