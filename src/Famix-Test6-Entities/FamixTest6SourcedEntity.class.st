@@ -12,6 +12,7 @@ FamixTest6SourcedEntity class >> annotation [
 	<FMClass: #SourcedEntity super: #FamixTest6Entity>
 	<package: #'Famix-Test6-Entities'>
 	<generated>
+	<abstract>
 	^self
 ]
 

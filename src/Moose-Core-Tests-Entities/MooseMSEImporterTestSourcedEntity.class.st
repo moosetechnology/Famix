@@ -12,6 +12,7 @@ MooseMSEImporterTestSourcedEntity class >> annotation [
 	<FMClass: #SourcedEntity super: #MooseMSEImporterTestEntity>
 	<package: #'Moose-Core-Tests-Entities'>
 	<generated>
+	<abstract>
 	^self
 ]
 

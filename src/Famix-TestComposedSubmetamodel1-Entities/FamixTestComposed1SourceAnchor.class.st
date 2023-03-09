@@ -12,6 +12,7 @@ FamixTestComposed1SourceAnchor class >> annotation [
 	<FMClass: #SourceAnchor super: #FamixTestComposed1Entity>
 	<package: #'Famix-TestComposedSubmetamodel1-Entities'>
 	<generated>
+	<abstract>
 	^self
 ]
 

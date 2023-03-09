@@ -13,6 +13,7 @@ FamixTest4Person class >> annotation [
 	<FMClass: #Person super: #FamixTest4Entity>
 	<package: #'Famix-Test4-Entities'>
 	<generated>
+	<abstract>
 	^self
 ]
 

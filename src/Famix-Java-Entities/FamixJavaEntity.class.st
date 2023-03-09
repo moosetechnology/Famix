@@ -20,6 +20,7 @@ FamixJavaEntity class >> annotation [
 	<FMClass: #Entity super: #MooseEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
+	<abstract>
 	^self
 ]
 

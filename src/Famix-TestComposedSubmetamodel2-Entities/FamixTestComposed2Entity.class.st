@@ -10,6 +10,7 @@ FamixTestComposed2Entity class >> annotation [
 	<FMClass: #Entity super: #MooseEntity>
 	<package: #'Famix-TestComposedSubmetamodel2-Entities'>
 	<generated>
+	<abstract>
 	^self
 ]
 

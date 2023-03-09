@@ -12,6 +12,7 @@ MooseMSEImporterTestSourceAnchor class >> annotation [
 	<FMClass: #SourceAnchor super: #MooseMSEImporterTestEntity>
 	<package: #'Moose-Core-Tests-Entities'>
 	<generated>
+	<abstract>
 	^self
 ]
 

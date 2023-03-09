@@ -12,6 +12,7 @@ FamixStSourcedEntity class >> annotation [
 	<FMClass: #SourcedEntity super: #FamixStEntity>
 	<package: #'Famix-PharoSmalltalk-Entities'>
 	<generated>
+	<abstract>
 	^self
 ]
 

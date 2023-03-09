@@ -12,6 +12,7 @@ FamixStSourceAnchor class >> annotation [
 	<FMClass: #SourceAnchor super: #FamixStEntity>
 	<package: #'Famix-PharoSmalltalk-Entities'>
 	<generated>
+	<abstract>
 	^self
 ]
 

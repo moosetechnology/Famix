@@ -12,6 +12,7 @@ FamixJavaSourceAnchor class >> annotation [
 	<FMClass: #SourceAnchor super: #FamixJavaEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
+	<abstract>
 	^self
 ]
 

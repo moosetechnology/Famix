@@ -12,6 +12,7 @@ FamixJavaContainerEntity class >> annotation [
 	<FMClass: #ContainerEntity super: #FamixJavaNamedEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
+	<abstract>
 	^self
 ]
 

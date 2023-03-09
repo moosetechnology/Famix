@@ -12,6 +12,7 @@ FamixTest7NamedEntity class >> annotation [
 	<FMClass: #NamedEntity super: #FamixTest7Entity>
 	<package: #'Famix-Test7-Entities'>
 	<generated>
+	<abstract>
 	^self
 ]
 
