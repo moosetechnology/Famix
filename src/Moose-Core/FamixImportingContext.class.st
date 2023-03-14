@@ -1,5 +1,6 @@
 "
-basic class for generated importing contexts
+This is the superclass of importing contexts used to choose the entities to be imported when loading a model from file.
+These classes are used by `MiImportingContextPresenter` in a `MiImportModelFromFileDialog`.
 "
 Class {
 	#name : #FamixImportingContext,

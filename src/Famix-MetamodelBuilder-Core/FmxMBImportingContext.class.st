@@ -29,6 +29,14 @@ FmxMBImportingContext >> classGeneralization [
 	^ self builder environment basicImportingContextSuperclass
 ]
 
+{ #category : #accessing }
+FmxMBImportingContext >> comment [
+
+	^ 'This class is used to choose the entities to be imported when loading a model from file.
+It is used by `MiImportingContextPresenter` in a `MiImportModelFromFileDialog` to import a {1}Model.' 
+		  format: { self builder configuration prefix }
+]
+
 { #category : #'settings - default' }
 FmxMBImportingContext >> defaultSuperclass [
 

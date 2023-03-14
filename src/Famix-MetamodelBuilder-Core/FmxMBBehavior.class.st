@@ -301,7 +301,7 @@ FmxMBBehavior >> optionalPragma [
 
 	"Override to add a pragma to your entity #annotation method"
 
-	^ ''
+	^ String new
 ]
 
 { #category : #accessing }

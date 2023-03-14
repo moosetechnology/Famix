@@ -1,3 +1,7 @@
+"
+This class is used to choose the entities to be imported when loading a model from file.
+It is used by `MiImportingContextPresenter` in a `MiImportModelFromFileDialog` to import a FamixJavaModel.
+"
 Class {
 	#name : #FamixJavaImportingContext,
 	#superclass : #FamixImportingContext,
