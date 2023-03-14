@@ -1,7 +1,7 @@
 Class {
 	#name : #FamixStImportingContext,
 	#superclass : #FamixImportingContext,
-	#category : #'Famix-PharoSmalltalk-Entities'
+	#category : #'Famix-PharoSmalltalk-Entities-Import'
 }
 
 { #category : #accessing }

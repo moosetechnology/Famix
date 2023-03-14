@@ -1,7 +1,7 @@
 Class {
 	#name : #FamixJavaImportingContext,
 	#superclass : #FamixImportingContext,
-	#category : #'Famix-Java-Entities'
+	#category : #'Famix-Java-Entities-Import'
 }
 
 { #category : #accessing }
