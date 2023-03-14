@@ -162,7 +162,7 @@ FmxMBBehavior >> generateAddToCollectionFor: aClass [
 ]
 
 { #category : #generating }
-FmxMBBehavior >> generateAnnotationIn: aRealClass as: aName superclass: aSuperclass [
+FmxMBBehavior >> generateAnnotationIn: aRealClass superclass: aSuperclass [
 
 	| aSuperclassName |
 	aSuperclassName := aSuperclass
@@ -181,11 +181,12 @@ FmxMBBehavior >> generateAnnotationIn: aRealClass as: aName superclass: aSupercl
 
 	<FMClass: #{1} super: #{2}>
 	<package: {3}>
-	<generated>
-	^self' format: { 
-					 aName.
+	<generated>{4}
+	^ self' format: { 
+					 self name.
 					 aSuperclassName.
-					 self builder safeAnnotationPackageName })
+					 self builder safeAnnotationPackageName.
+					 self optionalPragma })
 		classified: 'meta'
 ]
 
@@ -293,6 +294,14 @@ FmxMBBehavior >> isMetamodelTrait [
 FmxMBBehavior >> isModelClass [
 	"The class prefix, Model"
 	^ false
+]
+
+{ #category : #generating }
+FmxMBBehavior >> optionalPragma [
+
+	"Override to add a pragma to your entity #annotation method"
+
+	^ ''
 ]
 
 { #category : #accessing }

@@ -10,7 +10,7 @@ FamixFileGroup class >> annotation [
 	<FMClass: #FileGroup super: #MooseSpecializedGroup>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #meta }

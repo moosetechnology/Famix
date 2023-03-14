@@ -14,7 +14,7 @@ TAssociationMetaLevelDependency classSide >> annotation [
 	<FMClass: #TAssociationMetaLevelDependency super: #Object>
 	<package: #'Moose-Query'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #private }

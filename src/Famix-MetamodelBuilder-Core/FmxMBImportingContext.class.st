@@ -1,9 +1,6 @@
 Class {
 	#name : #FmxMBImportingContext,
 	#superclass : #FmxMBBehavior,
-	#instVars : [
-		'classGeneralization'
-	],
 	#category : #'Famix-MetamodelBuilder-Core-Implementation'
 }
 
@@ -17,12 +14,6 @@ FmxMBImportingContext >> acceptVisitor: aVisitor [
 FmxMBImportingContext >> classGeneralization [
 
 	^ self builder environment basicImportingContextSuperclass
-]
-
-{ #category : #accessing }
-FmxMBImportingContext >> classGeneralization: anObject [
-
-	classGeneralization := anObject
 ]
 
 { #category : #'settings - default' }

@@ -10,5 +10,5 @@ FamixTest4Cafeteria class >> annotation [
 	<FMClass: #Cafeteria super: #FamixTest4Room>
 	<package: #'Famix-Test4-Entities'>
 	<generated>
-	^self
+	^ self
 ]

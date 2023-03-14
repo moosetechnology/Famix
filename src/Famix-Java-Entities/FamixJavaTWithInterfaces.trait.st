@@ -14,7 +14,7 @@ FamixJavaTWithInterfaces classSide >> annotation [
 	<FMClass: #TWithInterfaces super: #Object>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #'as yet unclassified' }

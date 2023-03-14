@@ -11,7 +11,7 @@ FamixTClassWithVisibility classSide >> annotation [
 	<FMClass: #TClassWithVisibility super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #enumerating }

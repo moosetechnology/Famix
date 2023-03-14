@@ -21,7 +21,7 @@ FamixJavaEntity class >> annotation [
 	<package: #'Famix-Java-Entities'>
 	<generated>
 	<abstract>
-	^self
+	^ self
 ]
 
 { #category : #testing }

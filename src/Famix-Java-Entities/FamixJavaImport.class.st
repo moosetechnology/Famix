@@ -12,5 +12,5 @@ FamixJavaImport class >> annotation [
 	<FMClass: #Import super: #FamixJavaEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^self
+	^ self
 ]

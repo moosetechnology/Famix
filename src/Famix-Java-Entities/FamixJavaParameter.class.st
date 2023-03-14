@@ -12,7 +12,7 @@ FamixJavaParameter class >> annotation [
 	<FMClass: #Parameter super: #FamixJavaNamedEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #printing }

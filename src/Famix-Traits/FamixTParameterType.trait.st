@@ -19,5 +19,5 @@ FamixTParameterType classSide >> annotation [
 	<FMClass: #TParameterType super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
 ]

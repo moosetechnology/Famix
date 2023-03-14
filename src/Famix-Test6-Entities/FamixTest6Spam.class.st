@@ -13,7 +13,7 @@ FamixTest6Spam class >> annotation [
 	<FMClass: #Spam super: #FamixTest6Bacon>
 	<package: #'Famix-Test6-Entities'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }

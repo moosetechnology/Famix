@@ -12,5 +12,5 @@ FamixJavaException class >> annotation [
 	<FMClass: #Exception super: #FamixJavaClass>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^self
+	^ self
 ]

@@ -11,5 +11,5 @@ FDTrait4 classSide >> annotation [
 	<FMClass: #Trait4 super: #Object>
 	<package: #'Famix-TestModel1MetamodelDocumentor'>
 	<generated>
-	^self
+	^ self
 ]

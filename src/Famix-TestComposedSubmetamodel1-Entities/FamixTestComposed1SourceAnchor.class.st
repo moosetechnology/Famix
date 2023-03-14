@@ -13,7 +13,7 @@ FamixTestComposed1SourceAnchor class >> annotation [
 	<package: #'Famix-TestComposedSubmetamodel1-Entities'>
 	<generated>
 	<abstract>
-	^self
+	^ self
 ]
 
 { #category : #testing }

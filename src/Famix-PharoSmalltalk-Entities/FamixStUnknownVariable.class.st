@@ -12,5 +12,5 @@ FamixStUnknownVariable class >> annotation [
 	<FMClass: #UnknownVariable super: #FamixStNamedEntity>
 	<package: #'Famix-PharoSmalltalk-Entities'>
 	<generated>
-	^self
+	^ self
 ]

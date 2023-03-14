@@ -30,7 +30,7 @@ FamixTAccess classSide >> annotation [
 	<FMClass: #TAccess super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }

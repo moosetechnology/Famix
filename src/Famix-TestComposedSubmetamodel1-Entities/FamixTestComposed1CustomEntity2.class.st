@@ -10,5 +10,5 @@ FamixTestComposed1CustomEntity2 class >> annotation [
 	<FMClass: #CustomEntity2 super: #FamixTestComposed1Entity>
 	<package: #'Famix-TestComposedSubmetamodel1-Entities'>
 	<generated>
-	^self
+	^ self
 ]

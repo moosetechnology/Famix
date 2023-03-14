@@ -12,7 +12,7 @@ FamixJavaParameterType class >> annotation [
 	<FMClass: #ParameterType super: #FamixJavaType>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #testing }

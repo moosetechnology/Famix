@@ -16,7 +16,7 @@ FamixTComment classSide >> annotation [
 	<FMClass: #TComment super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #'instance creation' }

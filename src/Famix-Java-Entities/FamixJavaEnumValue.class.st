@@ -12,5 +12,5 @@ FamixJavaEnumValue class >> annotation [
 	<FMClass: #EnumValue super: #FamixJavaNamedEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^self
+	^ self
 ]

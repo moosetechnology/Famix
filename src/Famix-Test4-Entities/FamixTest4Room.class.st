@@ -13,7 +13,7 @@ FamixTest4Room class >> annotation [
 	<FMClass: #Room super: #FamixTest4Entity>
 	<package: #'Famix-Test4-Entities'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }

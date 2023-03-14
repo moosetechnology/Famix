@@ -12,7 +12,7 @@ FamixStImplicitVariable class >> annotation [
 	<FMClass: #ImplicitVariable super: #FamixStNamedEntity>
 	<package: #'Famix-PharoSmalltalk-Entities'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #testing }

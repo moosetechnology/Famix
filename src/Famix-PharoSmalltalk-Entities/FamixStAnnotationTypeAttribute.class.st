@@ -12,7 +12,7 @@ FamixStAnnotationTypeAttribute class >> annotation [
 	<FMClass: #AnnotationTypeAttribute super: #FamixStSourcedEntity>
 	<package: #'Famix-PharoSmalltalk-Entities'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }

@@ -12,7 +12,7 @@ FamixJavaType class >> annotation [
 	<FMClass: #Type super: #FamixJavaContainerEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #'Famix-Extensions' }

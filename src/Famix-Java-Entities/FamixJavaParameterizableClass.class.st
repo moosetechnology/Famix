@@ -12,7 +12,7 @@ FamixJavaParameterizableClass class >> annotation [
 	<FMClass: #ParameterizableClass super: #FamixJavaClass>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }

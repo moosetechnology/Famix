@@ -20,7 +20,7 @@ FamixTAnnotationType classSide >> annotation [
 	<FMClass: #TAnnotationType super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #groups }

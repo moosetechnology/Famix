@@ -14,7 +14,7 @@ FamixTStructuralEntity classSide >> annotation [
 	<FMClass: #TStructuralEntity super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #testing }

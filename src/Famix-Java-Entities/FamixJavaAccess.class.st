@@ -12,5 +12,5 @@ FamixJavaAccess class >> annotation [
 	<FMClass: #Access super: #FamixJavaEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^self
+	^ self
 ]

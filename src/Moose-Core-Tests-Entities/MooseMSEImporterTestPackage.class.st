@@ -12,5 +12,5 @@ MooseMSEImporterTestPackage class >> annotation [
 	<FMClass: #Package super: #MooseMSEImporterTestNamedEntity>
 	<package: #'Moose-Core-Tests-Entities'>
 	<generated>
-	^self
+	^ self
 ]

@@ -11,7 +11,7 @@ FamixTest5Entity class >> annotation [
 	<package: #'Famix-Test5-Entities'>
 	<generated>
 	<abstract>
-	^self
+	^ self
 ]
 
 { #category : #testing }

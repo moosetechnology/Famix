@@ -12,7 +12,7 @@ FamixTWithReferences classSide >> annotation [
 	<FMClass: #TWithReferences super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }

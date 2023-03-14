@@ -12,7 +12,7 @@ FamixTestComposedAssociation class >> annotation [
 	<FMClass: #Association super: #FamixTestComposedStandardEntity>
 	<package: #'Famix-TestComposedMetamodel-Entities'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }

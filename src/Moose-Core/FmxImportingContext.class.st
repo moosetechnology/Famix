@@ -6,8 +6,6 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'importedAssociations',
-		'allMetamodelConcreteEntities',
-		'allMetamodelAssociations',
 		'importedEntities'
 	],
 	#category : #'Moose-Core-Import'
@@ -21,7 +19,7 @@ FmxImportingContext class >> allMetamodelAssociations [
 ]
 
 { #category : #accessing }
-FmxImportingContext class >> allMetamodelEntities [
+FmxImportingContext class >> allMetamodelConcreteEntities [
 
 	^ self importedMetamodel classes reject: [ :fm3Class | 
 		  fm3Class isAbstract or: [ 
@@ -84,14 +82,14 @@ FmxImportingContext >> doNotImportEntitiesContainedIn: aFM3Class [
 { #category : #'importing-all' }
 FmxImportingContext >> importAllAssociations [
 
-	allMetamodelAssociations do: [ :association | 
+	self class allMetamodelAssociations do: [ :association | 
 		self importAssociation: association ]
 ]
 
 { #category : #'importing-all' }
 FmxImportingContext >> importAllEntities [
 
-	allMetamodelConcreteEntities do: [ :fm3Class | 
+	self class allMetamodelConcreteEntities do: [ :fm3Class | 
 		self importConcreteEntity: fm3Class ]
 ]
 
@@ -160,10 +158,7 @@ FmxImportingContext >> initialize [
 
 	super initialize.
 	importedEntities := Set new.
-	importedAssociations := Set new.
-
-	allMetamodelAssociations := self class allMetamodelAssociations.
-	allMetamodelConcreteEntities := self class allMetamodelEntities
+	importedAssociations := Set new
 ]
 
 { #category : #testing }

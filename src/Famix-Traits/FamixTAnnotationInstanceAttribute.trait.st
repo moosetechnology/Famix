@@ -26,7 +26,7 @@ FamixTAnnotationInstanceAttribute classSide >> annotation [
 	<FMClass: #TAnnotationInstanceAttribute super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }

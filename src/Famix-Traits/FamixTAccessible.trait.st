@@ -12,7 +12,7 @@ FamixTAccessible classSide >> annotation [
 	<FMClass: #TAccessible super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }

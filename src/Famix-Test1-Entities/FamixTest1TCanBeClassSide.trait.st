@@ -12,7 +12,7 @@ FamixTest1TCanBeClassSide classSide >> annotation [
 	<FMClass: #TCanBeClassSide super: #Object>
 	<package: #'Famix-Test1-Entities'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }

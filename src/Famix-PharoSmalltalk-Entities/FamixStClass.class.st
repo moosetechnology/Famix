@@ -12,7 +12,7 @@ FamixStClass class >> annotation [
 	<FMClass: #Class super: #FamixStNamedEntity>
 	<package: #'Famix-PharoSmalltalk-Entities'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #'Famix-Extensions-metrics-support' }

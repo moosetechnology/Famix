@@ -10,7 +10,7 @@ FamixTypeGroup class >> annotation [
 	<FMClass: #TypeGroup super: #MooseSpecializedGroup>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #meta }
