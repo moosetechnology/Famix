@@ -15,7 +15,7 @@ FamixTInheritance classSide >> annotation [
 	<FMClass: #TInheritance super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #printing }

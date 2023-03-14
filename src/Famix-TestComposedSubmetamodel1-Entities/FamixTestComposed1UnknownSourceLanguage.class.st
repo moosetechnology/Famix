@@ -12,5 +12,5 @@ FamixTestComposed1UnknownSourceLanguage class >> annotation [
 	<FMClass: #UnknownSourceLanguage super: #FamixTestComposed1SourceLanguage>
 	<package: #'Famix-TestComposedSubmetamodel1-Entities'>
 	<generated>
-	^self
+	^ self
 ]

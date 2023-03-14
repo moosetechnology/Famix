@@ -12,7 +12,7 @@ FamixTWithSourceLanguages classSide >> annotation [
 	<FMClass: #TWithSourceLanguages super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }

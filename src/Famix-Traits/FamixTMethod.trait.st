@@ -19,7 +19,7 @@ FamixTMethod classSide >> annotation [
 	<FMClass: #TMethod super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #groups }

@@ -1,7 +1,11 @@
+"
+This class is used to choose the entities to be imported when loading a model from file.
+It is used by `MiImportingContextPresenter` in a `MiImportModelFromFileDialog` to import a FamixStModel.
+"
 Class {
 	#name : #FamixStImportingContext,
-	#superclass : #FmxImportingContext,
-	#category : #'Famix-PharoSmalltalk-Entities'
+	#superclass : #FamixImportingContext,
+	#category : #'Famix-PharoSmalltalk-Entities-Import'
 }
 
 { #category : #accessing }

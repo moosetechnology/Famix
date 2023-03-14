@@ -12,7 +12,7 @@ MooseMSEImporterTestClass class >> annotation [
 	<FMClass: #Class super: #MooseMSEImporterTestNamedEntity>
 	<package: #'Moose-Core-Tests-Entities'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #printing }

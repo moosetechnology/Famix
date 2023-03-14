@@ -15,7 +15,7 @@ FamixTImplementable classSide >> annotation [
 	<FMClass: #TImplementable super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #adding }

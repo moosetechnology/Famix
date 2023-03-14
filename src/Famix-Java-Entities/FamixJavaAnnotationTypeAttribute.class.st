@@ -12,7 +12,7 @@ FamixJavaAnnotationTypeAttribute class >> annotation [
 	<FMClass: #AnnotationTypeAttribute super: #FamixJavaNamedEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }

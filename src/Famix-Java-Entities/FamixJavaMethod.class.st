@@ -12,7 +12,7 @@ FamixJavaMethod class >> annotation [
 	<FMClass: #Method super: #FamixJavaContainerEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #'Famix-Extensions-metrics-support' }

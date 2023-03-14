@@ -12,5 +12,5 @@ FamixJavaParameterizableInterface class >> annotation [
 	<FMClass: #ParameterizableInterface super: #FamixJavaInterface>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^self
+	^ self
 ]

@@ -12,7 +12,7 @@ FamixTPackageable classSide >> annotation [
 	<FMClass: #TPackageable super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }

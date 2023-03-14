@@ -10,5 +10,5 @@ FamixClassGroup class >> annotation [
 	<FMClass: #ClassGroup super: #FamixTypeGroup>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
 ]

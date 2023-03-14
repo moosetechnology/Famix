@@ -17,7 +17,7 @@ FamixTHasImmediateSource classSide >> annotation [
 	<FMClass: #THasImmediateSource super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #'instance creation' }

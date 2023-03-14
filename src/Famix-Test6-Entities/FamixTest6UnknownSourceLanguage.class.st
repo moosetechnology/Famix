@@ -12,5 +12,5 @@ FamixTest6UnknownSourceLanguage class >> annotation [
 	<FMClass: #UnknownSourceLanguage super: #FamixTest6SourceLanguage>
 	<package: #'Famix-Test6-Entities'>
 	<generated>
-	^self
+	^ self
 ]

@@ -12,5 +12,5 @@ FamixTest1IndexedFileAnchor class >> annotation [
 	<FMClass: #IndexedFileAnchor super: #FamixTest1SourceAnchor>
 	<package: #'Famix-Test1-Entities'>
 	<generated>
-	^self
+	^ self
 ]

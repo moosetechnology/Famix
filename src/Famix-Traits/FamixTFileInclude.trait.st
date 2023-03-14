@@ -15,7 +15,7 @@ FamixTFileInclude classSide >> annotation [
 	<FMClass: #TFileInclude super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }

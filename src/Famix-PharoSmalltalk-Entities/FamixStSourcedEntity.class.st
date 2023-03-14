@@ -13,7 +13,7 @@ FamixStSourcedEntity class >> annotation [
 	<package: #'Famix-PharoSmalltalk-Entities'>
 	<generated>
 	<abstract>
-	^self
+	^ self
 ]
 
 { #category : #testing }

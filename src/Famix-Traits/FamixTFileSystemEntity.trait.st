@@ -12,7 +12,7 @@ FamixTFileSystemEntity classSide >> annotation [
 	<FMClass: #TFileSystemEntity super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #constants }

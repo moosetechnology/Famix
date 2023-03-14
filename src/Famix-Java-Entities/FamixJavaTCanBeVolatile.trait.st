@@ -22,7 +22,7 @@ FamixJavaTCanBeVolatile classSide >> annotation [
 	<FMClass: #TCanBeVolatile super: #Object>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }

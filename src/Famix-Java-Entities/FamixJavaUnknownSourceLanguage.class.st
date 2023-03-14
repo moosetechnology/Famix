@@ -12,7 +12,7 @@ FamixJavaUnknownSourceLanguage class >> annotation [
 	<FMClass: #UnknownSourceLanguage super: #FamixJavaSourceLanguage>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }

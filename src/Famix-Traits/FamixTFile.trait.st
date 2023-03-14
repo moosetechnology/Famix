@@ -17,7 +17,7 @@ FamixTFile classSide >> annotation [
 	<FMClass: #TFile super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #groups }

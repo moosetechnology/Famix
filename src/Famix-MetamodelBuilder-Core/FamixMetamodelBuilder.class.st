@@ -91,7 +91,7 @@ FamixMetamodelBuilder >> apply [
 { #category : #accessing }
 FamixMetamodelBuilder >> baseImportingContextName [
 
-	^ #FmxImportingContext
+	^ #FamixImportingContext
 ]
 
 { #category : #accessing }

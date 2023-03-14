@@ -26,7 +26,7 @@ FamixJavaTCanBeSynchronized classSide >> annotation [
 	<FMClass: #TCanBeSynchronized super: #Object>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }

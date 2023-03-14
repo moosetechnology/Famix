@@ -17,7 +17,7 @@ FamixTHeader classSide >> annotation [
 	<FMClass: #THeader super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }

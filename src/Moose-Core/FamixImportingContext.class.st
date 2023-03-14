@@ -1,27 +1,26 @@
 "
-basic class for generated importing contexts
+This is the superclass of importing contexts used to choose the entities to be imported when loading a model from file.
+These classes are used by `MiImportingContextPresenter` in a `MiImportModelFromFileDialog`.
 "
 Class {
-	#name : #FmxImportingContext,
+	#name : #FamixImportingContext,
 	#superclass : #Object,
 	#instVars : [
 		'importedAssociations',
-		'allMetamodelConcreteEntities',
-		'allMetamodelAssociations',
 		'importedEntities'
 	],
 	#category : #'Moose-Core-Import'
 }
 
 { #category : #accessing }
-FmxImportingContext class >> allMetamodelAssociations [
+FamixImportingContext class >> allMetamodelAssociations [
 
 	^ (self importedMetamodel traits detect: [ :trait | 
 		   trait name = #TAssociation ]) classUsers
 ]
 
 { #category : #accessing }
-FmxImportingContext class >> allMetamodelEntities [
+FamixImportingContext class >> allMetamodelConcreteEntities [
 
 	^ self importedMetamodel classes reject: [ :fm3Class | 
 		  fm3Class isAbstract or: [ 
@@ -32,26 +31,26 @@ FmxImportingContext class >> allMetamodelEntities [
 ]
 
 { #category : #accessing }
-FmxImportingContext class >> fm3ClassNamed: aName [
+FamixImportingContext class >> fm3ClassNamed: aName [
 
 	^ self importedMetamodel classes detect: [ :fm3Class | 
 		  fm3Class name = aName ]
 ]
 
 { #category : #accessing }
-FmxImportingContext class >> importedMetamodel [
+FamixImportingContext class >> importedMetamodel [
 
 	^ self subclassResponsibility
 ]
 
 { #category : #'importing-remove' }
-FmxImportingContext >> doNotImportAssociation: aFM3AssociationClass [
+FamixImportingContext >> doNotImportAssociation: aFM3AssociationClass [
 
 	importedAssociations remove: aFM3AssociationClass ifAbsent: [  ]
 ]
 
 { #category : #'importing-remove' }
-FmxImportingContext >> doNotImportAssociationsDependingOn: aFM3Class [
+FamixImportingContext >> doNotImportAssociationsDependingOn: aFM3Class [
 
 	aFM3Class allProperties
 		select: [ :prop | 
@@ -62,7 +61,7 @@ FmxImportingContext >> doNotImportAssociationsDependingOn: aFM3Class [
 ]
 
 { #category : #'importing-remove' }
-FmxImportingContext >> doNotImportConcreteEntity: aFM3Class [
+FamixImportingContext >> doNotImportConcreteEntity: aFM3Class [
 
 	self importedEntities remove: aFM3Class ifAbsent: [ ^ self ].
 
@@ -71,7 +70,7 @@ FmxImportingContext >> doNotImportConcreteEntity: aFM3Class [
 ]
 
 { #category : #'importing-remove' }
-FmxImportingContext >> doNotImportEntitiesContainedIn: aFM3Class [
+FamixImportingContext >> doNotImportEntitiesContainedIn: aFM3Class [
 
 	aFM3Class allComplexProperties
 		select: [ :property | 
@@ -82,21 +81,21 @@ FmxImportingContext >> doNotImportEntitiesContainedIn: aFM3Class [
 ]
 
 { #category : #'importing-all' }
-FmxImportingContext >> importAllAssociations [
+FamixImportingContext >> importAllAssociations [
 
-	allMetamodelAssociations do: [ :association | 
+	self class allMetamodelAssociations do: [ :association | 
 		self importAssociation: association ]
 ]
 
 { #category : #'importing-all' }
-FmxImportingContext >> importAllEntities [
+FamixImportingContext >> importAllEntities [
 
-	allMetamodelConcreteEntities do: [ :fm3Class | 
+	self class allMetamodelConcreteEntities do: [ :fm3Class | 
 		self importConcreteEntity: fm3Class ]
 ]
 
 { #category : #'importing-add' }
-FmxImportingContext >> importAssociation: aFM3AssociationClass [
+FamixImportingContext >> importAssociation: aFM3AssociationClass [
 
 	(importedAssociations includes: aFM3AssociationClass) ifTrue: [ 
 		^ self ].
@@ -111,7 +110,7 @@ FmxImportingContext >> importAssociation: aFM3AssociationClass [
 ]
 
 { #category : #'importing-add' }
-FmxImportingContext >> importConcreteEntity: aFM3Class [
+FamixImportingContext >> importConcreteEntity: aFM3Class [
 
 	((self importedEntities includes: aFM3Class) or: [ 
 		 aFM3Class isAbstract ]) ifTrue: [ ^ self ].
@@ -124,50 +123,47 @@ FmxImportingContext >> importConcreteEntity: aFM3Class [
 ]
 
 { #category : #'importing-all' }
-FmxImportingContext >> importMaximum [
+FamixImportingContext >> importMaximum [
 
 	self importAllEntities.
 	self importAllAssociations
 ]
 
 { #category : #'importing-remove' }
-FmxImportingContext >> importNone [
+FamixImportingContext >> importNone [
 
 	importedAssociations := Set new.
 	importedEntities := Set new
 ]
 
 { #category : #accessing }
-FmxImportingContext >> importedAssociations [
+FamixImportingContext >> importedAssociations [
 
 	^ importedAssociations
 ]
 
 { #category : #accessing }
-FmxImportingContext >> importedEntities [
+FamixImportingContext >> importedEntities [
 
 	^ importedEntities
 ]
 
 { #category : #accessing }
-FmxImportingContext >> imports [
+FamixImportingContext >> imports [
 
 	^ importedEntities , importedAssociations
 ]
 
 { #category : #initialization }
-FmxImportingContext >> initialize [
+FamixImportingContext >> initialize [
 
 	super initialize.
 	importedEntities := Set new.
-	importedAssociations := Set new.
-
-	allMetamodelAssociations := self class allMetamodelAssociations.
-	allMetamodelConcreteEntities := self class allMetamodelEntities
+	importedAssociations := Set new
 ]
 
 { #category : #testing }
-FmxImportingContext >> shouldImport: aClassName [
+FamixImportingContext >> shouldImport: aClassName [
 
 	^ (importedEntities includes: aClassName) or: [ 
 		  importedAssociations includes: aClassName ]

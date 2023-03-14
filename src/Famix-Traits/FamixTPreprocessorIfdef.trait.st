@@ -14,5 +14,5 @@ FamixTPreprocessorIfdef classSide >> annotation [
 	<FMClass: #TPreprocessorIfdef super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
 ]

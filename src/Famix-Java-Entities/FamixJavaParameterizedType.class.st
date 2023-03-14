@@ -12,7 +12,7 @@ FamixJavaParameterizedType class >> annotation [
 	<FMClass: #ParameterizedType super: #FamixJavaType>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #enumerating }

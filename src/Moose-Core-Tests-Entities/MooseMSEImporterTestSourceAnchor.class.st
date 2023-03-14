@@ -13,7 +13,7 @@ MooseMSEImporterTestSourceAnchor class >> annotation [
 	<package: #'Moose-Core-Tests-Entities'>
 	<generated>
 	<abstract>
-	^self
+	^ self
 ]
 
 { #category : #testing }

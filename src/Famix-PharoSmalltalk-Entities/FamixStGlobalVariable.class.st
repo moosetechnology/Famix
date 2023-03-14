@@ -12,5 +12,5 @@ FamixStGlobalVariable class >> annotation [
 	<FMClass: #GlobalVariable super: #FamixStNamedEntity>
 	<package: #'Famix-PharoSmalltalk-Entities'>
 	<generated>
-	^self
+	^ self
 ]

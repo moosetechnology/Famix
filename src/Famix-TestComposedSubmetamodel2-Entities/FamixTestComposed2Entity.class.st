@@ -11,7 +11,7 @@ FamixTestComposed2Entity class >> annotation [
 	<package: #'Famix-TestComposedSubmetamodel2-Entities'>
 	<generated>
 	<abstract>
-	^self
+	^ self
 ]
 
 { #category : #testing }

@@ -17,7 +17,7 @@ FamixTImplicitVariable classSide >> annotation [
 	<FMClass: #TImplicitVariable super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #testing }

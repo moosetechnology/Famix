@@ -13,7 +13,7 @@ FamixTest7NamedEntity class >> annotation [
 	<package: #'Famix-Test7-Entities'>
 	<generated>
 	<abstract>
-	^self
+	^ self
 ]
 
 { #category : #testing }

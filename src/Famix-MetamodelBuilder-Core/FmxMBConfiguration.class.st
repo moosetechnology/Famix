@@ -91,7 +91,7 @@ FmxMBConfiguration >> defaultBasicGroupSuperclassName [
 { #category : #'settings - default' }
 FmxMBConfiguration >> defaultBasicImportingContextSuperclassName [
 
-	^ #FmxImportingContext
+	^ #FamixImportingContext
 ]
 
 { #category : #'settings - default' }

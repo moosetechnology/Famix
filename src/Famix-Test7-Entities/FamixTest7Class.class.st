@@ -12,5 +12,5 @@ FamixTest7Class class >> annotation [
 	<FMClass: #Class super: #FamixTest7Entity>
 	<package: #'Famix-Test7-Entities'>
 	<generated>
-	^self
+	^ self
 ]

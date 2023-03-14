@@ -27,7 +27,7 @@ FamixTParameter classSide >> annotation [
 	<FMClass: #TParameter super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #printing }

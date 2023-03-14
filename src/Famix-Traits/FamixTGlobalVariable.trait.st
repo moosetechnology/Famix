@@ -18,7 +18,7 @@ FamixTGlobalVariable classSide >> annotation [
 	<FMClass: #TGlobalVariable super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #groups }

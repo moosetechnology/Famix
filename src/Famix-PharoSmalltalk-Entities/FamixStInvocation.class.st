@@ -12,7 +12,7 @@ FamixStInvocation class >> annotation [
 	<FMClass: #Invocation super: #FamixStEntity>
 	<package: #'Famix-PharoSmalltalk-Entities'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #initialization }

@@ -70,7 +70,7 @@ FmxMBClass >> generate [
 	self realClass: aClass.
 
 	self generateAccessors.
-	self generateAnnotationIn: aClass as: self name superclass: nil.
+	self generateAnnotationIn: aClass superclass: nil.
 	self generateIsAbstractMethodIfNecessaryIn: aClass.
 
 	self generateTestingMethodsIn: aClass.
@@ -81,39 +81,6 @@ FmxMBClass >> generate [
 
 	self generateNavigationGroupsFor: aClass.
 	self generateAddToCollectionFor: aClass
-]
-
-{ #category : #generating }
-FmxMBClass >> generateAnnotationIn: aRealClass as: aName superclass: aSuperclass [
-
-	| aSuperclassName |
-	aSuperclassName := aSuperclass
-		                   ifNotNil: [ aSuperclass name ]
-		                   ifNil: [ 
-			                   self classGeneralization
-			                   = self defaultSuperclass
-				                   ifTrue: [ self defaultSuperclassName ]
-				                   ifFalse: [ 
-					                   self classGeneralization
-						                   ifNil: [ self defaultSuperclassName ]
-						                   ifNotNil: [ :cg | cg realClass name ] ] ].
-
-	aRealClass classSide
-		compile: ('annotation
-
-	<FMClass: #{1} super: #{2}>
-	<package: {3}>
-	<generated>{4}
-	^self' format: { 
-					 aName.
-					 aSuperclassName.
-					 self builder safeAnnotationPackageName.
-					 (self isAbstractClass
-						  ifTrue: [ 
-							  '
-	<abstract>' ]
-						  ifFalse: [ '' ]) })
-		classified: 'meta'
 ]
 
 { #category : #generating }
@@ -192,6 +159,16 @@ FmxMBClass >> isMetamodelClass [
 { #category : #testing }
 FmxMBClass >> isRoot [
 	^ self classGeneralization isNil
+]
+
+{ #category : #generating }
+FmxMBClass >> optionalPragma [
+
+	^ self isAbstractClass
+		  ifTrue: [ 
+			  '
+	<abstract>' ]
+		  ifFalse: [ super optionalPragma ]
 ]
 
 { #category : #generalization }

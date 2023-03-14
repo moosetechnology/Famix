@@ -12,5 +12,5 @@ FamixTest5AnnotationType2 class >> annotation [
 	<FMClass: #AnnotationType2 super: #FamixTest5Entity>
 	<package: #'Famix-Test5-Entities'>
 	<generated>
-	^self
+	^ self
 ]

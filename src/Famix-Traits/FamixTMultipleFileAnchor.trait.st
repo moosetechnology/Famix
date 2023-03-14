@@ -14,7 +14,7 @@ FamixTMultipleFileAnchor classSide >> annotation [
 	<FMClass: #TMultipleFileAnchor super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #adding }
