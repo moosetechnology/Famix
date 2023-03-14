@@ -1,3 +1,16 @@
+"
+FmxMBImportingContext is the class responsible for the generation of a subclass of `FamixImportingContext` for each metamodel.
+
+This importing context is generated when specified in the metamodel generator with #withFileImport, as follows: 
+
+```
+newBuilder
+
+	^ super newBuilder
+		  withFileImport;
+		  yourself
+```
+"
 Class {
 	#name : #FmxMBImportingContext,
 	#superclass : #FmxMBBehavior,

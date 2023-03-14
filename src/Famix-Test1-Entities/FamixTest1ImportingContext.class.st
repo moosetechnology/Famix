@@ -1,6 +1,6 @@
 Class {
 	#name : #FamixTest1ImportingContext,
-	#superclass : #FmxImportingContext,
+	#superclass : #FamixImportingContext,
 	#category : #'Famix-Test1-Entities-Import'
 }
 
