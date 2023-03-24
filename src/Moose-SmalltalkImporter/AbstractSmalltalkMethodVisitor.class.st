@@ -173,7 +173,7 @@ AbstractSmalltalkMethodVisitor >> runWith: aCompiledMethod and: anEntity [
 		initializeForMethod: anEntity
 		inClass: aCompiledMethod methodClass.
 
-	parseTree := theClass parseTreeForSelector: aCompiledMethod selector.
+	parseTree := theClass parseTreeFor: aCompiledMethod selector.
 	parseTree ifNotNil: [
 		self visitMethodNode: parseTree "sourceCodeAt:" ]
 ]
