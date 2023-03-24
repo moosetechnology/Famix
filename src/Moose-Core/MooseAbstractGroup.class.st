@@ -174,6 +174,12 @@ MooseAbstractGroup >> asBag [
 ]
 
 { #category : #converting }
+MooseAbstractGroup >> asCollection [
+
+	^ self entityStorage asCollection
+]
+
+{ #category : #converting }
 MooseAbstractGroup >> asMooseGroup [ 
 	^ self 
 ]
