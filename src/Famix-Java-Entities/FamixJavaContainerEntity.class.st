@@ -1,8 +1,8 @@
 Class {
 	#name : #FamixJavaContainerEntity,
 	#superclass : #FamixJavaNamedEntity,
-	#traits : 'FamixTWithAnnotationTypes + FamixTWithClasses + TOODependencyQueries',
-	#classTraits : 'FamixTWithAnnotationTypes classTrait + FamixTWithClasses classTrait + TOODependencyQueries classTrait',
+	#traits : 'FamixJavaTWithInterfaces + FamixTWithAnnotationTypes + FamixTWithClasses',
+	#classTraits : 'FamixJavaTWithInterfaces classTrait + FamixTWithAnnotationTypes classTrait + FamixTWithClasses classTrait',
 	#category : #'Famix-Java-Entities-Entities'
 }
 
@@ -12,13 +12,27 @@ FamixJavaContainerEntity class >> annotation [
 	<FMClass: #ContainerEntity super: #FamixJavaNamedEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^self
+	<abstract>
+	^ self
+]
+
+{ #category : #testing }
+FamixJavaContainerEntity class >> isAbstract [
+
+	<generated>
+	^ self == FamixJavaContainerEntity
 ]
 
 { #category : #adding }
 FamixJavaContainerEntity >> addClass: aClass [
 	
 	types add: aClass
+]
+
+{ #category : #adding }
+FamixJavaContainerEntity >> addInterface: anInterface [
+	
+	types add: anInterface
 ]
 
 { #category : #'Famix-Java' }

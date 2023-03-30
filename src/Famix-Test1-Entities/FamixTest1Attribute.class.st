@@ -1,8 +1,8 @@
 Class {
 	#name : #FamixTest1Attribute,
 	#superclass : #FamixTest1NamedEntity,
-	#traits : 'FamixTAttribute',
-	#classTraits : 'FamixTAttribute classTrait',
+	#traits : 'FamixTAttribute + FamixTSourceEntity + FamixTWithSourceLanguages + FamixTest1TCanBeClassSide',
+	#classTraits : 'FamixTAttribute classTrait + FamixTSourceEntity classTrait + FamixTWithSourceLanguages classTrait + FamixTest1TCanBeClassSide classTrait',
 	#category : #'Famix-Test1-Entities-Entities'
 }
 
@@ -12,5 +12,5 @@ FamixTest1Attribute class >> annotation [
 	<FMClass: #Attribute super: #FamixTest1NamedEntity>
 	<package: #'Famix-Test1-Entities'>
 	<generated>
-	^self
+	^ self
 ]

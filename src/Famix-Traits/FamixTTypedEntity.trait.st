@@ -12,7 +12,7 @@ FamixTTypedEntity classSide >> annotation [
 	<FMClass: #TTypedEntity super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }
@@ -21,7 +21,6 @@ FamixTTypedEntity >> declaredType [
 
 	<generated>
 	<FMComment: 'Type of the entity, if any'>
-	<source>
 	^ declaredType
 ]
 
@@ -40,9 +39,4 @@ FamixTTypedEntity >> entityHasOutgoingTypeDeclarations [
 { #category : #testing }
 FamixTTypedEntity >> hasDeclaredType [
 	^ self declaredType isNotNil
-]
-
-{ #category : #'moose query' }
-FamixTTypedEntity >> outgoingTypeDeclarations [
-	^ self declaredType ifNil: [ {} ] ifNotNil: [ :dt | {(MQNavigationDependencyAssociation newFrom: self to: dt)} ]
 ]

@@ -1,13 +1,13 @@
 "
-FAMIXFunction represents a behavioural entity in a procedural language.
+FamixTFunction represents a behavioural entity in a procedural language.
 "
 Trait {
 	#name : #FamixTFunction,
 	#instVars : [
 		'#functionOwner => FMOne type: #FamixTWithFunctions opposite: #functions'
 	],
-	#traits : '(FamixTHasSignature + FamixTNamedEntity + FamixTTypedEntity + FamixTWithParameters + FamixTWithStatements withPrecedenceOf: FamixTWithStatements)',
-	#classTraits : '(FamixTHasSignature classTrait + FamixTNamedEntity classTrait + FamixTTypedEntity classTrait + FamixTWithParameters classTrait + FamixTWithStatements classTrait withPrecedenceOf: FamixTWithStatements classTrait)',
+	#traits : 'FamixTHasSignature + FamixTNamedEntity + FamixTTypedEntity + FamixTWithLocalVariables + FamixTWithParameters + FamixTWithStatements + TEntityMetaLevelDependency',
+	#classTraits : 'FamixTHasSignature classTrait + FamixTNamedEntity classTrait + FamixTTypedEntity classTrait + FamixTWithLocalVariables classTrait + FamixTWithParameters classTrait + FamixTWithStatements classTrait + TEntityMetaLevelDependency classTrait',
 	#category : #'Famix-Traits-Behavioral'
 }
 
@@ -17,7 +17,7 @@ FamixTFunction classSide >> annotation [
 	<FMClass: #TFunction super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }

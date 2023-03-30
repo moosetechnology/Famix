@@ -12,7 +12,7 @@ FamixTWithAnnotationInstances classSide >> annotation [
 	<FMClass: #TWithAnnotationInstances super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }
@@ -85,7 +85,7 @@ FamixTWithAnnotationInstances >> numberOfAnnotationInstances [
 	^self
 		lookUpPropertyNamed: #numberOfAnnotationInstances
 		computedAs: [
-			self annotationInstances size + (self methods inject: 0 into: [:sum :each | sum + each numberOfAnnotationInstances])]
+			self annotationInstances size + (self children inject: 0 into: [:sum :each | sum + each numberOfAnnotationInstances])]
 ]
 
 { #category : #metrics }

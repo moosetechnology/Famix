@@ -5,8 +5,8 @@ Class {
 	#name : #MooseModel,
 	#superclass : #MooseAbstractGroup,
 	#instVars : [
-		'name',
-		'metamodel'
+		'metamodel',
+		'name'
 	],
 	#classVars : [
 		'MostRecentOwner'
@@ -29,6 +29,12 @@ MooseModel class >> annotation [
 
 ]
 
+{ #category : #testing }
+MooseModel class >> canBeImportedFromFile [
+
+	^ false
+]
+
 { #category : #accessing }
 MooseModel class >> defaultPackagesToProcessWith: aCollectionOfPackages [
 	"We add to the creation of a metamodel all the metamodel entities of packages declaring to be part of the metamodels by default. 
@@ -40,6 +46,21 @@ MooseModel class >> defaultPackagesToProcessWith: aCollectionOfPackages [
 			package packageManifestOrNil
 				ifNil: [ false ]
 				ifNotNil: [ :manifest | manifest shouldBeIncludedByDefaultInMetamodelsWith: aCollectionOfPackages ] ]
+]
+
+{ #category : #'world menu' }
+MooseModel class >> developerTool: aClass menuCommandOn: aBuilder [
+	^(aBuilder item: aClass menuLabel)
+		parent: MooseModel developerToolsMenuLabel ;
+		label: aClass menuLabel ;
+		icon: (MooseIcons mooseIcon scaledToSize: 16@16) ;
+		action:[ aClass open ] ;
+		yourself
+]
+
+{ #category : #'world menu' }
+MooseModel class >> developerToolsMenuLabel [
+	^#MooseDevelopperTools
 ]
 
 { #category : #'import-export' }
@@ -136,24 +157,34 @@ MooseModel class >> importFrom: aStream withMetamodel: aMetamodel customizingImp
 
 { #category : #'import-export' }
 MooseModel class >> importFrom: aStream withMetamodel: aMetamodel filteredBy: anImportingContext [
+
 	"In the way to import a model we filter the entites we want to import via a FmxImportContext."
 
 	| famixElementNames |
-	famixElementNames := anImportingContext imports collect: [ :each | each mooseDescription fullName ].
-	^ self importFrom: aStream withMetamodel: aMetamodel customizingImporterWith: [ :importer | FMImporterFilter on: importer filtering: famixElementNames ]
+	famixElementNames := anImportingContext imports collect: [ :each | 
+		                     each fullName ].
+
+	^ self
+		  importFrom: aStream
+		  withMetamodel: aMetamodel
+		  customizingImporterWith: [ :importer | 
+			  FMImporterFilter on: importer filtering: famixElementNames ]
 ]
 
 { #category : #'import-export' }
 MooseModel class >> importFrom: aStream withMetamodel: aMetamodel translationDictionary: translationDict [
+
 	"In this case we use a translation dictionary to import model by updating the names from the MSE."
 
 	^ self
-		importFrom: aStream
-		withMetamodel: aMetamodel
-		customizingImporterWith: [ :importer | 
-			importer
-				nameTranslator: translationDict;
-				yourself ]
+		  importFrom: aStream
+		  withMetamodel: aMetamodel
+		  customizingImporterWith: [ :importer | 
+			  importer
+				  translationUnit: (FMDictionaryTranslationUnit new
+						   dictionary: translationDict;
+						   yourself);
+				  yourself ]
 ]
 
 { #category : #'import-export' }
@@ -188,6 +219,22 @@ MooseModel class >> importFromJSON: aStream withMetamodel: aMetamodel customizin
 ]
 
 { #category : #'import-export' }
+MooseModel class >> importFromJSON: aStream withMetamodel: aMetamodel filteredBy: anImportingContext [
+
+	"In the way to import a model we filter the entites we want to import via a FmxImportContext."
+
+	| famixElementNames |
+	famixElementNames := anImportingContext imports collect: [ :each | 
+		                     each fullName ].
+
+	^ self
+		  importFromJSON: aStream
+		  withMetamodel: aMetamodel
+		  customizingImporterWith: [ :importer | 
+			  FMImporterFilter on: importer filtering: famixElementNames ]
+]
+
+{ #category : #'import-export' }
 MooseModel class >> importFromMSEStream: aStream [
 	^ self new
 		importFromMSEStream: aStream;
@@ -196,9 +243,10 @@ MooseModel class >> importFromMSEStream: aStream [
 
 { #category : #'import-export' }
 MooseModel class >> importFromMSEStream: aStream filteredBy: anImportingContext [
+
 	^ self new
-		importFromMSEStream: aStream filteredBy: anImportingContext;
-		yourself
+		  importFromMSEStream: aStream filteredBy: anImportingContext;
+		  yourself
 ]
 
 { #category : #'import-export' }
@@ -211,23 +259,11 @@ MooseModel class >> importMetamodelFrom: aStream [
 	generator previewChanges	"keep shift pressed to see the changes"
 ]
 
-{ #category : #'world menu' }
-MooseModel class >> menuCommandOn: aBuilder [
-	<worldMenu>
-	(aBuilder item: #Moose)
-		order: 6.0;
-		withSeparatorAfter;
-		icon: MooseIcons mooseIcon;
-		with: [ (aBuilder item: #'Reset metamodels additional properties')
-				order: 50;
-				action: [ self resetMetamodelsAdditionalProperties ];
-				withSeparatorAfter ]
-]
-
 { #category : #meta }
 MooseModel class >> metamodel [
+
 	self flag: #TODO. "The next line is a hack to not break everything in Moose. It should be removed later."
-	self = MooseModel ifTrue: [ ^ FAMIXModel metamodel ].
+	self = MooseModel ifTrue: [ ^ FamixStModel metamodel ].
 	^ metamodel ifNil: [ self resetMetamodel ]
 ]
 
@@ -282,7 +318,7 @@ MooseModel class >> resetMetamodels [
 	self allSubclassesDo: #resetMetamodel
 ]
 
-{ #category : #accessing }
+{ #category : #meta }
 MooseModel class >> resetMetamodelsAdditionalProperties [
 	<script>
 	self allSubclassesDo: [ :each | each metamodel cleanAdditionalProperties ]
@@ -331,6 +367,7 @@ MooseModel >> addAll: entities [
 
 { #category : #'entity collection' }
 MooseModel >> addNoAnnounce: anElement [
+
 	self entityStorage add: anElement.
 	self flush.
 	anElement privateSetMooseModel: self.
@@ -496,13 +533,31 @@ MooseModel >> flushPrivateState [
 
 { #category : #actions }
 MooseModel >> importFrom: aFMModel named: aString [
+
 	self silentlyAddAll: aFMModel elements.
 	self entityStorage forRuntime.
 	self name: aString
 ]
 
+{ #category : #'as yet unclassified' }
+MooseModel >> importFromJSON [
+
+	| file |
+	file := UIManager default
+		        chooseExistingFileReference: 'Import model from JSON file'
+		        extensions: #( 'json' )
+		        path: FileLocator home.
+	file ifNotNil: [ 
+		| stream |
+		stream := file readStream.
+		self importFromJSONStream: stream.
+		self name: file basenameWithoutExtension.
+		stream close ]
+]
+
 { #category : #actions }
 MooseModel >> importFromJSONStream: aStream [
+
 	"Benchmarks
 	Time millisecondsToRun: [ MooseModel new importFromJSONStream: (StandardFileStream readOnlyFileNamed: 'network3.json') ].
 	Time millisecondsToRun: [ MooseModel new importFromJSONStream: (StandardFileStream readOnlyFileNamed: 'moose.json') ]. 178163 simon.denier 9/11/2009 12:29
@@ -511,18 +566,42 @@ MooseModel >> importFromJSONStream: aStream [
 	 17560 -> simon_denier 9/21/2009 22:34 - removing metrics from MSE
 	"
 
-	^ self importFrom: (self class importFromJSON: aStream withMetamodel: self metamodel) named: (aStream localName removeSuffix: '.json')
+	^ self
+		  importFrom:
+		  (self class importFromJSON: aStream withMetamodel: self metamodel)
+		  named: (aStream localName removeSuffix: '.json')
 ]
 
 { #category : #actions }
 MooseModel >> importFromJSONStream: aStream filteredBy: anImportingContext [
+
 	^ self
-		importFrom: (self class importFrom: aStream withMetamodel: self metamodel filteredBy: anImportingContext)
-		named: (aStream localName removeSuffix: '.json')
+		  importFrom: (self class
+				   importFromJSON: aStream
+				   withMetamodel: self metamodel
+				   filteredBy: anImportingContext)
+		  named: (aStream localName removeSuffix: '.json')
+]
+
+{ #category : #'import-export' }
+MooseModel >> importFromMSE [
+
+	| file |
+	file := UIManager default
+		        chooseExistingFileReference: 'Import model from MSE file'
+		        extensions: #( 'mse' )
+		        path: FileLocator home.
+	file ifNotNil: [ 
+		| stream |
+		stream := file readStream.
+		self importFromMSEStream: stream.
+		self name: file basenameWithoutExtension.
+		stream close ]
 ]
 
 { #category : #actions }
 MooseModel >> importFromMSEStream: aStream [
+
 	"Benchmarks
 	Time millisecondsToRun: [ MooseModel new importFromMSEStream: (StandardFileStream readOnlyFileNamed: 'network3.mse') ].
 	Time millisecondsToRun: [ MooseModel new importFromMSEStream: (StandardFileStream readOnlyFileNamed: 'moose.mse') ]. 178163 simon.denier 9/11/2009 12:29
@@ -531,14 +610,21 @@ MooseModel >> importFromMSEStream: aStream [
 	 17560 -> simon_denier 9/21/2009 22:34 - removing metrics from MSE
 	"
 
-	^ self importFrom: (self class importFrom: aStream withMetamodel: self metamodel) named: (aStream localName removeSuffix: '.mse')
+	^ self
+		  importFrom:
+		  (self class importFrom: aStream withMetamodel: self metamodel)
+		  named: (aStream localName removeSuffix: '.mse')
 ]
 
 { #category : #actions }
 MooseModel >> importFromMSEStream: aStream filteredBy: anImportingContext [
+
 	^ self
-		importFrom: (self class importFrom: aStream withMetamodel: self metamodel filteredBy: anImportingContext)
-		named: (aStream localName removeSuffix: '.mse')
+		  importFrom: (self class
+				   importFrom: aStream
+				   withMetamodel: self metamodel
+				   filteredBy: anImportingContext)
+		  named: (aStream localName removeSuffix: '.mse')
 ]
 
 { #category : #testing }
@@ -559,6 +645,7 @@ MooseModel >> includesElementsOfType: aClass [
 MooseModel >> inferNamespaceParentsBasedOnNames [
 	<menuItem: 'Infer Namespace Parents Based on Names' category: 'Utilities'>
 	| parent parentNameSize currentPosition parentName namespaces |
+	self deprecated: 'NameSpaces do not exist in any MooseModel'.
 	namespaces := self allNamespaces.
 	MooseCustomTask new
 		with: [ :task | 
@@ -599,7 +686,7 @@ MooseModel >> inferNamespaceParentsBasedOnNames [
 { #category : #initialization }
 MooseModel >> initialize [
 	super initialize.
-	name := #noname.
+	name := self class undefinedName. 
 	self metamodel: self class metamodel
 ]
 
@@ -639,7 +726,8 @@ MooseModel >> localMooseModel [
 
 { #category : #accessing }
 MooseModel >> metamodel [
-	^ metamodel ifNil: [ MooseModel meta ]
+
+	^ metamodel ifNil: [ MooseModel metamodel ]
 ]
 
 { #category : #accessing }
@@ -654,7 +742,8 @@ MooseModel >> mooseDescription [
 
 { #category : #accessing }
 MooseModel >> mooseDescriptionFor: class [
-	^ self metamodel descriptionOf: class instanceSide
+
+	^ self metamodel fmTypeOf: class instanceSide
 ]
 
 { #category : #accessing }
@@ -767,16 +856,16 @@ MooseModel >> rootFolder: aString [
 ]
 
 { #category : #'entity collection' }
-MooseModel >> silentlyAdd: anElement [ 
-	 
-	self suspendAllAnnouncementsDuring: [^self add: anElement].
+MooseModel >> silentlyAdd: anElement [
+
+	self suspendAllAnnouncementsDuring: [ ^ self add: anElement ]
 ]
 
 { #category : #'entity collection' }
-MooseModel >> silentlyAddAll: entities [ 
-	 
-	entities do: [:each | self addNoAnnounce: each].
-	^entities
+MooseModel >> silentlyAddAll: entities [
+
+	entities do: [ :each | self addNoAnnounce: each ].
+	^ entities
 ]
 
 { #category : #'entity collection' }
@@ -786,11 +875,10 @@ MooseModel >> silentlyRemove: anElement [
 ]
 
 { #category : #'entity collection' }
-MooseModel >> silentlyRemoveAll: collection [ 
-	
-	collection do: [:each | self silentlyRemove: each].
-	^collection
-	
+MooseModel >> silentlyRemoveAll: collection [
+
+	collection do: [ :each | self silentlyRemove: each ].
+	^ collection
 ]
 
 { #category : #'set operations' }

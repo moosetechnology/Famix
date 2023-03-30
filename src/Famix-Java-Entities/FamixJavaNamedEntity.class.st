@@ -1,8 +1,8 @@
 Class {
 	#name : #FamixJavaNamedEntity,
 	#superclass : #FamixJavaSourcedEntity,
-	#traits : 'FamixTInvocationsReceiver + FamixTNamedEntity + FamixTPackageable + FamixTWithAnnotationInstances',
-	#classTraits : 'FamixTInvocationsReceiver classTrait + FamixTNamedEntity classTrait + FamixTPackageable classTrait + FamixTWithAnnotationInstances classTrait',
+	#traits : 'FamixTInvocationsReceiver + FamixTNamedEntity + FamixTWithAnnotationInstances + TEntityMetaLevelDependency',
+	#classTraits : 'FamixTInvocationsReceiver classTrait + FamixTNamedEntity classTrait + FamixTWithAnnotationInstances classTrait + TEntityMetaLevelDependency classTrait',
 	#category : #'Famix-Java-Entities-Entities'
 }
 
@@ -12,7 +12,15 @@ FamixJavaNamedEntity class >> annotation [
 	<FMClass: #NamedEntity super: #FamixJavaSourcedEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^self
+	<abstract>
+	^ self
+]
+
+{ #category : #testing }
+FamixJavaNamedEntity class >> isAbstract [
+
+	<generated>
+	^ self == FamixJavaNamedEntity
 ]
 
 { #category : #'Famix-Extensions' }

@@ -12,5 +12,5 @@ FamixTest2Inheritance class >> annotation [
 	<FMClass: #Inheritance super: #FamixTest2Entity>
 	<package: #'Famix-Test2-Entities'>
 	<generated>
-	^self
+	^ self
 ]

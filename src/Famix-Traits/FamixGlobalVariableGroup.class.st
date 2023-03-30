@@ -10,7 +10,7 @@ FamixGlobalVariableGroup class >> annotation [
 	<FMClass: #GlobalVariableGroup super: #MooseSpecializedGroup>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #meta }

@@ -1,5 +1,5 @@
 "
-FAMIXSourceAnchor is an abstract class representing a pointer to a source. The source can be identified in multiple ways as specified by the subclasses.  The famix entity that this class is a source pointer for, is accessible via element property.
+FamixTSourceAnchor is an abstract class representing a pointer to a source. The source can be identified in multiple ways as specified by the subclasses.  The famix entity that this class is a source pointer for, is accessible via element property.
 "
 Trait {
 	#name : #FamixTSourceAnchor,
@@ -15,7 +15,7 @@ FamixTSourceAnchor classSide >> annotation [
 	<FMClass: #TSourceAnchor super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }

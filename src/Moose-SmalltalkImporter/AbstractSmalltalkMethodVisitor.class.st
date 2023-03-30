@@ -52,17 +52,15 @@ AbstractSmalltalkMethodVisitor >> createReferenceTo: aNamedEntity [
 AbstractSmalltalkMethodVisitor >> extractCommentsFromNode: aSequenceNode [
 
 	| comment |
-	importer importingContext shouldImportComment
-		ifTrue:
-			[aSequenceNode comments
-				do:
-					[:eachComment | 
-					comment := self importer factory comment new.
-					comment content: (aSequenceNode source 
-										copyFrom: eachComment start
-										to: eachComment stop) asString.
-					comment container: self methodEntity.
-					importer addEntity: comment]]
+	importer importingContext shouldImportComment ifTrue: [ 
+		aSequenceNode comments do: [ :eachComment | 
+			comment := self importer factory comment new.
+			comment content:
+				(aSequenceNode source
+					 copyFrom: eachComment start
+					 to: eachComment stop) asString.
+			comment commentedEntity: self methodEntity.
+			importer addEntity: comment ] ]
 ]
 
 { #category : #accessing }
@@ -87,42 +85,54 @@ AbstractSmalltalkMethodVisitor >> initializeForMethod: aMethod inClass: aClass [
 
 { #category : #'method-classifying' }
 AbstractSmalltalkMethodVisitor >> matchConstant: aMethodNode [
-	aMethodNode body isSequence
-		ifTrue: [ aMethodNode body statements
-				ifNotEmpty: [ :statements | statements last isReturn ifTrue: [ statements last value isLiteralNode ifTrue: [ famixMethod kind: #constant ] ] ] ]
+
+	aMethodNode body isSequence ifTrue: [ 
+		aMethodNode body statements ifNotEmpty: [ :statements | 
+			statements last isReturn ifTrue: [ 
+				statements last value isLiteralNode ifTrue: [ 
+					famixMethod beConstant ] ] ] ]
 ]
 
 { #category : #'method-classifying' }
 AbstractSmalltalkMethodVisitor >> matchConstructor: aMethodNode [
-	famixMethod protocol ifNotNil: [ ('*instance*creation*' match: famixMethod protocol asLowercase) ifTrue: [ famixMethod kind: #constructor ] ]
+
+	famixMethod protocol ifNotNil: [ 
+		('*instance*creation*' match: famixMethod protocol asLowercase) 
+			ifTrue: [ famixMethod beConstructor ] ]
 ]
 
 { #category : #'method-classifying' }
 AbstractSmalltalkMethodVisitor >> matchGetter: aMethodNode [
+
 	aMethodNode arguments ifNotEmpty: [ ^ self ].
-	aMethodNode body isSequence
-		ifTrue: [ aMethodNode body statements size = 1
-				ifTrue: [ | return |
-					return := aMethodNode body statements first.
-					return isReturn
-						ifTrue: [ return value isVariable
-								ifTrue: [ (methodScope resolve: return value name ifAbsent: nil)
-										ifNotNil: [ :attribute | attribute class = self importer factory attribute ifTrue: [ famixMethod kind: #getter ] ] ] ] ] ]
+	aMethodNode body isSequence ifTrue: [ 
+		aMethodNode body statements size = 1 ifTrue: [ 
+			| return |
+			return := aMethodNode body statements first.
+			return isReturn ifTrue: [ 
+				return value isVariable ifTrue: [ 
+					(methodScope resolve: return value name ifAbsent: nil) ifNotNil: [ 
+						:attribute | 
+						attribute class = self importer factory attribute ifTrue: [ 
+							famixMethod beGetter ] ] ] ] ] ]
 ]
 
 { #category : #'method-classifying' }
 AbstractSmalltalkMethodVisitor >> matchSetter: aMethodNode [
+
 	| assignment |
-	aMethodNode arguments size = 1
-		ifTrue: [ aMethodNode body isSequence
-				ifTrue: [ aMethodNode body statements size = 1
-						ifTrue: [ assignment := aMethodNode body statements first.
-							assignment isReturn ifTrue: [ assignment := assignment value ].
-							assignment isAssignment
-								ifTrue: [ (methodScope resolve: assignment variable name ifAbsent: nil)
-										ifNotNil: [ :attribute | 
-											attribute class = self importer factory attribute
-												ifTrue: [ assignment value isVariable ifTrue: [ assignment value name = aMethodNode arguments first name ifTrue: [ famixMethod kind: #setter ] ] ] ] ] ] ] ]
+	aMethodNode arguments size = 1 ifTrue: [ 
+		aMethodNode body isSequence ifTrue: [ 
+			aMethodNode body statements size = 1 ifTrue: [ 
+				assignment := aMethodNode body statements first.
+				assignment isReturn ifTrue: [ assignment := assignment value ].
+				assignment isAssignment ifTrue: [ 
+					(methodScope resolve: assignment variable name ifAbsent: nil) 
+						ifNotNil: [ :attribute | 
+							attribute class = self importer factory attribute ifTrue: [ 
+								assignment value isVariable ifTrue: [ 
+									assignment value name = aMethodNode arguments first name 
+										ifTrue: [ famixMethod beSetter ] ] ] ] ] ] ] ]
 ]
 
 { #category : #accessing }
@@ -156,12 +166,16 @@ AbstractSmalltalkMethodVisitor >> resolveInstanceSide: aNamedEntity [
 ]
 
 { #category : #accessing }
-AbstractSmalltalkMethodVisitor >> runWith: aCompiledMethod and: anEntity [ 
+AbstractSmalltalkMethodVisitor >> runWith: aCompiledMethod and: anEntity [
+
 	| parseTree |
-	self initializeForMethod: anEntity inClass: aCompiledMethod methodClass.
+	self
+		initializeForMethod: anEntity
+		inClass: aCompiledMethod methodClass.
 
 	parseTree := theClass parseTreeFor: aCompiledMethod selector.
-	parseTree ifNotNil: [ self visitMethodNode: parseTree	"sourceCodeAt:" ]
+	parseTree ifNotNil: [
+		self visitMethodNode: parseTree "sourceCodeAt:" ]
 ]
 
 { #category : #accessing }

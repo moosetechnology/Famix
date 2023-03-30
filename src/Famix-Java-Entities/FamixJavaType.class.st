@@ -1,8 +1,8 @@
 Class {
 	#name : #FamixJavaType,
 	#superclass : #FamixJavaContainerEntity,
-	#traits : 'FamixTParameterizedTypeUser + FamixTType + FamixTWithMethods + FamixTWithTypeAliases',
-	#classTraits : 'FamixTParameterizedTypeUser classTrait + FamixTType classTrait + FamixTWithMethods classTrait + FamixTWithTypeAliases classTrait',
+	#traits : 'FamixTParameterizedTypeUser + FamixTType + FamixTWithMethods',
+	#classTraits : 'FamixTParameterizedTypeUser classTrait + FamixTType classTrait + FamixTWithMethods classTrait',
 	#category : #'Famix-Java-Entities-Entities'
 }
 
@@ -12,7 +12,7 @@ FamixJavaType class >> annotation [
 	<FMClass: #Type super: #FamixJavaContainerEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #'Famix-Extensions' }
@@ -67,25 +67,23 @@ FamixJavaType >> implements: aString [
 ]
 
 { #category : #testing }
-FamixJavaType >> isAbstract [
-	<FMProperty: #isAbstract type: #Boolean> <derived>
-	<FMComment: 'Flag true for abstract classes.'>
-	
-	^super isAbstract
-]
-
-{ #category : #testing }
 FamixJavaType >> isAnonymousClass [
-	^ self container isNotNil and: [ self container isMethod or: [ self name isAllDigits or: [ '*_anonymous_*' match: self name ] ] ]
+
+	^ self typeContainer isNotNil and: [ 
+		  self typeContainer isMethod or: [ 
+			  self name isAllDigits or: [ '*_anonymous_*' match: self name ] ] ]
 ]
 
 { #category : #testing }
 FamixJavaType >> isInnerClass [
+
 	<FMProperty: #isInnerClass type: #Boolean>
 	<derived>
 	<FMComment:
-		'True if the method is considered as an innerclass (i.e. is contained elsewhere than a java package: class, method, enum,...)'>
-	^ self container ifNotNil: [ :c | c isNamespace not ] ifNil: [ false ]
+	'True if the method is considered as an innerclass (i.e. is contained elsewhere than a java package: class, method, enum,...)'>
+	^ self typeContainer
+		  ifNotNil: [ :c | c isPackage not ]
+		  ifNil: [ false ]
 ]
 
 { #category : #testing }
@@ -154,7 +152,7 @@ FamixJavaType >> lookUp: aMethodSignature [
 FamixJavaType >> parentScope [
 	"Polymorphic alias to mimic GlobalVariable#parentScope and similar"
 
-	^ self container
+	^ self typeContainer
 ]
 
 { #category : #printing }

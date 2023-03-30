@@ -18,10 +18,13 @@ FamixTPackage >> childScopes: aCollection [
 
 { #category : #'*Famix-Deprecated' }
 FamixTPackage >> parentScope [
+
 	self
-		deprecated: 'FamixTScopingEntites should not be used anymore. You should adapt your metamodel.'
-		transformWith: '`@receiver parentScope' -> '`@receiver packageOwner'.
-	^ self packageOwner
+		deprecated:
+		'FamixTScopingEntites should not be used anymore. You should adapt your metamodel.'
+		transformWith:
+		'`@receiver parentScope' -> '`@receiver parentPackage'.
+	^ self parentPackage
 ]
 
 { #category : #'*Famix-Deprecated' }

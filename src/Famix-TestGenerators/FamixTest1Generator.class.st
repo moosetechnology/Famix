@@ -36,7 +36,8 @@ Class {
 		'indexedFileAnchor',
 		'multipleFileAnchor',
 		'class',
-		'model'
+		'model',
+		'tCanBeClassSide'
 	],
 	#category : #'Famix-TestGenerators'
 }
@@ -79,11 +80,19 @@ FamixTest1Generator >> defineHierarchy [
 
 	association --|> #TAssociation.
 
-	attribute --|> namedEntity.
-	attribute --|> #TAttribute.
+	attribute
+		--|> namedEntity ;
+		--|> #TWithSourceLanguages ;
+		--|> #TAttribute;
+		--|> #TSourceEntity;
+	  --|> tCanBeClassSide.
 
-	class --|> namedEntity.
-	class --|> #TClass.
+	class
+		--|> namedEntity ;
+		--|> #TWithSourceLanguages ;
+		--|> #TClass ;
+		--|> #TSourceEntity;
+		--|> #TWithComments.
 
 	file --|> namedEntity.
 	file --|> #TFile.
@@ -97,24 +106,42 @@ FamixTest1Generator >> defineHierarchy [
 	indexedFileAnchor --|> sourceAnchor.
 	indexedFileAnchor --|> #TIndexedFileNavigation.
 
-	method --|> namedEntity.
-	method --|> #TMethod.
+	method
+		--|> namedEntity ;
+		--|> #TWithSourceLanguages ;
+		--|> #TMethod; 
+		--|> #THasKind;
+		--|> tCanBeClassSide ;
+		--|> #TWithComments.
+		
 
 	multipleFileAnchor --|> sourceAnchor.
 	multipleFileAnchor --|> #TMultipleFileAnchor.
 
-	sourcedEntity --|> #TWithFiles
+	sourcedEntity
+		--|> #TWithFiles ;
+		--|> #TWithSourceLanguages.
 ]
 
 { #category : #definition }
 FamixTest1Generator >> defineProperties [
 	super defineProperties.
-	model property: #modelHasProperties type: #Object
+	model property: #modelHasProperties type: #Object.
+	((tCanBeClassSide property: #isClassSide type: #Boolean) 
+		comment: 'Entity can be declared class side i.e. static').	
+]
+
+{ #category : #definition }
+FamixTest1Generator >> defineTraits [ 
+
+	super defineTraits.
+	tCanBeClassSide := builder newTraitNamed: #TCanBeClassSide. 
 ]
 
 { #category : #definition }
 FamixTest1Generator >> newBuilder [
+
 	^ super newBuilder
-		withImportingContext;
-		yourself
+		  withFileImport;
+		  yourself
 ]

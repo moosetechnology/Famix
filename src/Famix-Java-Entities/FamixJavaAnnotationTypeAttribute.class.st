@@ -1,8 +1,8 @@
 Class {
 	#name : #FamixJavaAnnotationTypeAttribute,
 	#superclass : #FamixJavaNamedEntity,
-	#traits : 'FamixTAnnotationTypeAttribute + FamixTTypedAnnotationInstanceAttribute',
-	#classTraits : 'FamixTAnnotationTypeAttribute classTrait + FamixTTypedAnnotationInstanceAttribute classTrait',
+	#traits : 'FamixTAnnotationTypeAttribute + FamixTTypedAnnotationInstanceAttribute + FamixTWithComments',
+	#classTraits : 'FamixTAnnotationTypeAttribute classTrait + FamixTTypedAnnotationInstanceAttribute classTrait + FamixTWithComments classTrait',
 	#category : #'Famix-Java-Entities-Entities'
 }
 
@@ -12,7 +12,7 @@ FamixJavaAnnotationTypeAttribute class >> annotation [
 	<FMClass: #AnnotationTypeAttribute super: #FamixJavaNamedEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }

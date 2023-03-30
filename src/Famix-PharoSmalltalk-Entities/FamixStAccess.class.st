@@ -12,5 +12,5 @@ FamixStAccess class >> annotation [
 	<FMClass: #Access super: #FamixStEntity>
 	<package: #'Famix-PharoSmalltalk-Entities'>
 	<generated>
-	^self
+	^ self
 ]

@@ -1,176 +1,176 @@
 Class {
-	#name : #AbstractFAMIXNavigationTest,
+	#name : #AbstractFamixNavigationTest,
 	#superclass : #TestCase,
 	#category : #'Moose-SmalltalkImporter-KGB-Tests'
 }
 
 { #category : #accessing }
-AbstractFAMIXNavigationTest class >> resources [
+AbstractFamixNavigationTest class >> resources [
 	^ {FamixStNavigationTestResource}
 ]
 
 { #category : #'helpers - classes' }
-AbstractFAMIXNavigationTest >> c10FullReferencerInSide [ 
+AbstractFamixNavigationTest >> c10FullReferencerInSide [ 
 	 
 	^self model entityNamed: 
 			#'Model2FullReferee::M2P4C10FullReferencerInSide'
 ]
 
 { #category : #'helpers - classes' }
-AbstractFAMIXNavigationTest >> c11FullRefereeOutSide [ 
+AbstractFamixNavigationTest >> c11FullRefereeOutSide [ 
 	 
 	^self model entityNamed: 
 			#'Model2FullReferee::M2P5C11FullRefereeOutSide'
 ]
 
 { #category : #'helpers - classes' }
-AbstractFAMIXNavigationTest >> c12FullReferencerInSide [ 
+AbstractFamixNavigationTest >> c12FullReferencerInSide [ 
 	 
 	^self model entityNamed: 
 			#'Model2FullReferee::M2P6C12FullReferencerInSide'
 ]
 
 { #category : #'helpers - classes' }
-AbstractFAMIXNavigationTest >> c13FullRefereeInSideOutSide [ 
+AbstractFamixNavigationTest >> c13FullRefereeInSideOutSide [ 
 	 
 	^self model entityNamed: 
 			#'Model2FullReferee::M2P6C13FullRefereeInSideOutSide'
 ]
 
 { #category : #'helpers - classes' }
-AbstractFAMIXNavigationTest >> c14ReferencerOutSideRefereeOutSide [ 
+AbstractFamixNavigationTest >> c14ReferencerOutSideRefereeOutSide [ 
 	 
 	^self model entityNamed: 
 			#'Model3ReferencerReferee::M3P7C14ReferencerOutSideRefereeOutSide'
 ]
 
 { #category : #'helpers - classes' }
-AbstractFAMIXNavigationTest >> c15FullReferencerOutSide [ 
+AbstractFamixNavigationTest >> c15FullReferencerOutSide [ 
 	 
 	^self model entityNamed: 
 			#'Model4FullReferencer::M4P8C15FullReferencerOutSide'
 ]
 
 { #category : #'helpers - classes' }
-AbstractFAMIXNavigationTest >> c16FullReferencerOutSideInSide [ 
+AbstractFamixNavigationTest >> c16FullReferencerOutSideInSide [ 
 	 
 	^self model entityNamed: 
 			#'Model5InteractedReferencer::M5P9C16FullReferencerOutSideInSide'
 ]
 
 { #category : #'helpers - classes' }
-AbstractFAMIXNavigationTest >> c17FullReferencerInSide [ 
+AbstractFamixNavigationTest >> c17FullReferencerInSide [ 
 	 
 	^self model entityNamed: 
 			#'Model5InteractedReferencer::M5P10C17FullReferencerInSide'
 ]
 
 { #category : #'helpers - classes' }
-AbstractFAMIXNavigationTest >> c18FullRefereeInSideOutSide [ 
+AbstractFamixNavigationTest >> c18FullRefereeInSideOutSide [ 
 	 
 	^self model entityNamed: 
 			#'Model5InteractedReferencer::M5P10C18FullRefereeInSideOutSide'
 ]
 
 { #category : #'helpers - classes' }
-AbstractFAMIXNavigationTest >> c19FullRefereeOutSide [ 
+AbstractFamixNavigationTest >> c19FullRefereeOutSide [ 
 	 
 	^self model entityNamed: 
 			#'Model6InteractedReferee::M6P11C19FullRefereeOutSide'
 ]
 
 { #category : #'helpers - classes' }
-AbstractFAMIXNavigationTest >> c1FullReferencerOutSide [ 
+AbstractFamixNavigationTest >> c1FullReferencerOutSide [ 
 	 
 	^self model entityNamed: 
 			#'Model1InteractedReferencerReferee::M1P1C1FullReferencerOutSide'
 ]
 
 { #category : #'helpers - classes' }
-AbstractFAMIXNavigationTest >> c20FullReferencerOutSide [ 
+AbstractFamixNavigationTest >> c20FullReferencerOutSide [ 
 	 
 	^self model entityNamed: 
 			#'Model6InteractedReferee::M6P12C20FullReferencerOutSide'
 ]
 
 { #category : #'helpers - classes' }
-AbstractFAMIXNavigationTest >> c21FullReferencerOutSide [ 
+AbstractFamixNavigationTest >> c21FullReferencerOutSide [ 
 	 
 	^self model entityNamed: 
 			#'Model7FullInteracted::M7P13C21FullReferencerOutSide'
 ]
 
 { #category : #'helpers - classes' }
-AbstractFAMIXNavigationTest >> c22FullRefereeOutSide [ 
+AbstractFamixNavigationTest >> c22FullRefereeOutSide [ 
 	 
 	^self model entityNamed: 
 			#'Model7FullInteracted::M7P14C22FullRefereeOutSide'
 ]
 
 { #category : #'helpers - classes' }
-AbstractFAMIXNavigationTest >> c2ReferencerOutSideRefereeInSide [ 
+AbstractFamixNavigationTest >> c2ReferencerOutSideRefereeInSide [ 
 	 
 	^self model entityNamed: 
 			#'Model1InteractedReferencerReferee::M1P2C2ReferencerOutSideRefereeInSide'
 ]
 
 { #category : #'helpers - classes' }
-AbstractFAMIXNavigationTest >> c3ReferencerInSideRefereeOutSide [ 
+AbstractFamixNavigationTest >> c3ReferencerInSideRefereeOutSide [ 
 	 
 	^self model entityNamed: 
 			#'Model1InteractedReferencerReferee::M1P2C3ReferencerInSideRefereeOutSide'
 ]
 
 { #category : #'helpers - classes' }
-AbstractFAMIXNavigationTest >> c4FullRefereeInSide [ 
+AbstractFamixNavigationTest >> c4FullRefereeInSide [ 
 	 
 	^self model entityNamed: 
 			#'Model1InteractedReferencerReferee::M1P2C4FullRefereeInSide'
 ]
 
 { #category : #'helpers - classes' }
-AbstractFAMIXNavigationTest >> c5ReferencerInSideRefereeInSide [ 
+AbstractFamixNavigationTest >> c5ReferencerInSideRefereeInSide [ 
 	 
 	^self model entityNamed: 
 			#'Model1InteractedReferencerReferee::M1P3C5ReferencerInSideRefereeInSide'
 ]
 
 { #category : #'helpers - classes' }
-AbstractFAMIXNavigationTest >> c6FullReferencerInSideOutSide [ 
+AbstractFamixNavigationTest >> c6FullReferencerInSideOutSide [ 
 	 
 	^self model entityNamed: 
 			#'Model1InteractedReferencerReferee::M1P3C6FullReferencerInSideOutSide'
 ]
 
 { #category : #'helpers - classes' }
-AbstractFAMIXNavigationTest >> c7FullRefereeInSide [ 
+AbstractFamixNavigationTest >> c7FullRefereeInSide [ 
 	 
 	^self model entityNamed: 
 			#'Model1InteractedReferencerReferee::M1P3C7FullRefereeInSide'
 ]
 
 { #category : #'helpers - classes' }
-AbstractFAMIXNavigationTest >> c8FullReferencerInSide [ 
+AbstractFamixNavigationTest >> c8FullReferencerInSide [ 
 	 
 	^self model entityNamed: 
 			#'Model1InteractedReferencerReferee::M1P3C8FullReferencerInSide'
 ]
 
 { #category : #'helpers - classes' }
-AbstractFAMIXNavigationTest >> c9FullRefereeInSide [ 
+AbstractFamixNavigationTest >> c9FullRefereeInSide [ 
 	 
 	^self model entityNamed: 
 			#'Model2FullReferee::M2P4C9FullRefereeInSide'
 ]
 
 { #category : #'helpers - classes' }
-AbstractFAMIXNavigationTest >> cObject [ 
+AbstractFamixNavigationTest >> cObject [ 
 	 
 	^self model entityNamed: #'Smalltalk::Object'
 ]
 
 { #category : #'helpers - utilites' }
-AbstractFAMIXNavigationTest >> getMethod: methodNameString [
+AbstractFamixNavigationTest >> getMethod: methodNameString [
 	| results |
 	results := self model allMethods select: [ :method | method mooseName endsWith: methodNameString ].
 	results size = 1 ifFalse: [ self error: 'Not one method named ' , methodNameString ].
@@ -178,152 +178,152 @@ AbstractFAMIXNavigationTest >> getMethod: methodNameString [
 ]
 
 { #category : #'helpers - utilites' }
-AbstractFAMIXNavigationTest >> model [ 
+AbstractFamixNavigationTest >> model [ 
 	 
 	^FamixStNavigationTestResource current model
 ]
 
 { #category : #'helpers - packages' }
-AbstractFAMIXNavigationTest >> n1InteractedReferencerReferee [ 
+AbstractFamixNavigationTest >> n1InteractedReferencerReferee [ 
 	 
 	^self model entityNamed: 
 			#'Model1InteractedReferencerReferee'
 ]
 
 { #category : #'helpers - packages' }
-AbstractFAMIXNavigationTest >> n2FullReferee [ 
+AbstractFamixNavigationTest >> n2FullReferee [ 
 	 
 	^self model entityNamed: 
 			#'Model2FullReferee'
 ]
 
 { #category : #'helpers - packages' }
-AbstractFAMIXNavigationTest >> n3ReferencerReferee [
+AbstractFamixNavigationTest >> n3ReferencerReferee [
 	 
 	^self model entityNamed: 
 			#'Model3ReferencerReferee'
 ]
 
 { #category : #'helpers - packages' }
-AbstractFAMIXNavigationTest >> n4FullReferencer [ 
+AbstractFamixNavigationTest >> n4FullReferencer [ 
 	 
 	^self model entityNamed: 
 			#'Model4FullReferencer'
 ]
 
 { #category : #'helpers - packages' }
-AbstractFAMIXNavigationTest >> n5InteractedReferencer [ 
+AbstractFamixNavigationTest >> n5InteractedReferencer [ 
 	 
 	^self model entityNamed: 
 			#'Model5InteractedReferencer'
 ]
 
 { #category : #'helpers - packages' }
-AbstractFAMIXNavigationTest >> n6InteractedReferee [ 
+AbstractFamixNavigationTest >> n6InteractedReferee [ 
 	 
 	^self model entityNamed: 
 			#'Model6InteractedReferee'
 ]
 
 { #category : #'helpers - packages' }
-AbstractFAMIXNavigationTest >> n7FullInteracted [ 
+AbstractFamixNavigationTest >> n7FullInteracted [ 
 	 
 	^self model entityNamed: 
 			#'Model7FullInteracted'
 ]
 
 { #category : #'helpers - packages' }
-AbstractFAMIXNavigationTest >> nSmalltalkCore [ 
+AbstractFamixNavigationTest >> nSmalltalkCore [ 
 	 
 	^self model entityNamed: #'Smalltalk'
 ]
 
 { #category : #'helpers - packages' }
-AbstractFAMIXNavigationTest >> p10InteractedReferee [
+AbstractFamixNavigationTest >> p10InteractedReferee [
 	 
 	^self model entityNamed: #'Moose-TestResources-KGB-P10InteractedReferee'. 
 ]
 
 { #category : #'helpers - packages' }
-AbstractFAMIXNavigationTest >> p11FullReferee [
+AbstractFamixNavigationTest >> p11FullReferee [
 	 
 	^self model entityNamed: #'Moose-TestResources-KGB-P11FullReferee'. 
 ]
 
 { #category : #'helpers - packages' }
-AbstractFAMIXNavigationTest >> p12FullReferencer [
+AbstractFamixNavigationTest >> p12FullReferencer [
 	 
 	^self model entityNamed: #'Moose-TestResources-KGB-P12FullReferencer'. 
 ]
 
 { #category : #'helpers - packages' }
-AbstractFAMIXNavigationTest >> p13FullReferencer [
+AbstractFamixNavigationTest >> p13FullReferencer [
 	 
 	^self model entityNamed: #'Moose-TestResources-KGB-P13FullReferencer'. 
 ]
 
 { #category : #'helpers - packages' }
-AbstractFAMIXNavigationTest >> p14FullReferee [
+AbstractFamixNavigationTest >> p14FullReferee [
 	 
 	^self model entityNamed: #'Moose-TestResources-KGB-P14FullReferee'. 
 ]
 
 { #category : #'helpers - packages' }
-AbstractFAMIXNavigationTest >> p1FullReferencer [ 
+AbstractFamixNavigationTest >> p1FullReferencer [ 
 	 
 	^self model entityNamed: #'Moose-TestResources-KGB-P1FullReferencer'. 
 ]
 
 { #category : #'helpers - packages' }
-AbstractFAMIXNavigationTest >> p2InteractedReferencerReferee [
+AbstractFamixNavigationTest >> p2InteractedReferencerReferee [
 	 
 	^self model entityNamed: #'Moose-TestResources-KGB-P2InteractedReferencerReferee'. 
 ]
 
 { #category : #'helpers - packages' }
-AbstractFAMIXNavigationTest >> p3InteractedReferencer [
+AbstractFamixNavigationTest >> p3InteractedReferencer [
 	 
 	^self model entityNamed: #'Moose-TestResources-KGB-P3InteractedReferencer'. 
 ]
 
 { #category : #'helpers - packages' }
-AbstractFAMIXNavigationTest >> p4FullInteracted [
+AbstractFamixNavigationTest >> p4FullInteracted [
 	 
 	^self model entityNamed: #'Moose-TestResources-KGB-P4FullInteracted'. 
 ]
 
 { #category : #'helpers - packages' }
-AbstractFAMIXNavigationTest >> p5FullReferee [
+AbstractFamixNavigationTest >> p5FullReferee [
 	 
 	^self model entityNamed: #'Moose-TestResources-KGB-P5FullReferee'. 
 ]
 
 { #category : #'helpers - packages' }
-AbstractFAMIXNavigationTest >> p6InteractedReferee [
+AbstractFamixNavigationTest >> p6InteractedReferee [
 	 
 	^self model entityNamed: #'Moose-TestResources-KGB-P6InteractedReferee'. 
 ]
 
 { #category : #'helpers - packages' }
-AbstractFAMIXNavigationTest >> p7ReferencerReferee [
+AbstractFamixNavigationTest >> p7ReferencerReferee [
 	 
 	^self model entityNamed: #'Moose-TestResources-KGB-P7ReferencerReferee'. 
 ]
 
 { #category : #'helpers - packages' }
-AbstractFAMIXNavigationTest >> p8FullReferencer [
+AbstractFamixNavigationTest >> p8FullReferencer [
 	 
 	^self model entityNamed: #'Moose-TestResources-KGB-P8FullReferencer'. 
 ]
 
 { #category : #'helpers - packages' }
-AbstractFAMIXNavigationTest >> p9FullReferencer [
+AbstractFamixNavigationTest >> p9FullReferencer [
 	 
 	^self model entityNamed: #'Moose-TestResources-KGB-P9FullReferencer'. 
 ]
 
 { #category : #'helpers - packages' }
-AbstractFAMIXNavigationTest >> pExtensions [
+AbstractFamixNavigationTest >> pExtensions [
 	 
 	^self model entityNamed: #'Moose-TestResources-KGB-PExtensions'. 
 ]

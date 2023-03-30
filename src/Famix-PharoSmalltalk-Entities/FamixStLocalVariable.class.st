@@ -1,8 +1,8 @@
 Class {
 	#name : #FamixStLocalVariable,
 	#superclass : #FamixStNamedEntity,
-	#traits : 'FamixTLocalVariable',
-	#classTraits : 'FamixTLocalVariable classTrait',
+	#traits : 'FamixTInvocationsReceiver + FamixTLocalVariable',
+	#classTraits : 'FamixTInvocationsReceiver classTrait + FamixTLocalVariable classTrait',
 	#category : #'Famix-PharoSmalltalk-Entities-Entities'
 }
 
@@ -12,7 +12,7 @@ FamixStLocalVariable class >> annotation [
 	<FMClass: #LocalVariable super: #FamixStNamedEntity>
 	<package: #'Famix-PharoSmalltalk-Entities'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }

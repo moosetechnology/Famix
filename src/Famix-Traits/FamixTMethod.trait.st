@@ -1,16 +1,15 @@
 "
-FAMIXMethod represents a behaviour in an object-oriented language.
+FamixTMethod represents a behaviour in an object-oriented language.
 
-A FAMIXMethod is always contained in a parentType.
+A FamixTMethod is always contained in a parentType.
 "
 Trait {
 	#name : #FamixTMethod,
 	#instVars : [
-		'#kind => FMProperty',
 		'#parentType => FMOne type: #FamixTWithMethods opposite: #methods'
 	],
-	#traits : '(FamixTCanBeClassSide + FamixTHasSignature + FamixTInvocable + FamixTNamedEntity + FamixTTypedEntity + FamixTWithClassScope + FamixTWithImplicitVariables + FamixTWithLocalVariables + FamixTWithParameters + FamixTWithReferences + FamixTWithStatements + TOODependencyQueries withPrecedenceOf: FamixTWithStatements)',
-	#classTraits : '(FamixTCanBeClassSide classTrait + FamixTHasSignature classTrait + FamixTInvocable classTrait + FamixTNamedEntity classTrait + FamixTTypedEntity classTrait + FamixTWithClassScope classTrait + FamixTWithImplicitVariables classTrait + FamixTWithLocalVariables classTrait + FamixTWithParameters classTrait + FamixTWithReferences classTrait + FamixTWithStatements classTrait + TOODependencyQueries classTrait withPrecedenceOf: FamixTWithStatements classTrait)',
+	#traits : 'FamixTHasSignature + FamixTInvocable + FamixTMethodMetrics + FamixTNamedEntity + FamixTTypedEntity + FamixTWithImplicitVariables + FamixTWithLocalVariables + FamixTWithParameters + FamixTWithStatements + TEntityMetaLevelDependency',
+	#classTraits : 'FamixTHasSignature classTrait + FamixTInvocable classTrait + FamixTMethodMetrics classTrait + FamixTNamedEntity classTrait + FamixTTypedEntity classTrait + FamixTWithImplicitVariables classTrait + FamixTWithLocalVariables classTrait + FamixTWithParameters classTrait + FamixTWithStatements classTrait + TEntityMetaLevelDependency classTrait',
 	#category : #'Famix-Traits-Behavioral'
 }
 
@@ -20,7 +19,7 @@ FamixTMethod classSide >> annotation [
 	<FMClass: #TMethod super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #groups }
@@ -30,53 +29,27 @@ FamixTMethod classSide >> annotationFamixMethodGroup [
 	^ FamixMethodGroup
 ]
 
-{ #category : #metrics }
-FamixTMethod >> hierarchyNestingLevel [
-	<FMProperty: #hierarchyNestingLevel type: #Number>
-	<derived>
-	<FMComment: 'The nesting level in the hierarchy'>
-	
-	^self
-		lookUpPropertyNamed: #hierarchyNestingLevel
-		computedAs: [self belongsTo hierarchyNestingLevel]
-]
+{ #category : #testing }
+FamixTMethod >> isDelegating [
 
-{ #category : #metrics }
-FamixTMethod >> hierarchyNestingLevel: aNumber [
-	self cacheAt: #hierarchyNestingLevel put: aNumber
+	^ (self outgoingInvocations flatCollect: #target) anySatisfy: [ :each | 
+		  each signature == self signature and: [ 
+			  (each isInSameClassAs: self) not ] ] 
 ]
 
 { #category : #testing }
-FamixTMethod >> isConstant [
-	<FMProperty: #isConstant type: #Boolean>
-	<derived>
-	<FMComment: 'True if the method simply returns a constant'>
-	^#constant = self kind
+FamixTMethod >> isExtending [
+
+	^ (self outgoingInvocations reject: [ :each | each receiver isNil ]) 
+		  anySatisfy: [ :each | 
+			  each receiver name = 'super' and: [ 
+				  (each candidates collect: #signature) includes: self signature ] ]
 ]
 
 { #category : #testing }
-FamixTMethod >> isConstructor [
-	<FMProperty: #isConstructor type: #Boolean>
-	<derived>
-	<FMComment: 'True if the method is a constructor of the class'>
-	^ #constructor = self kind or: [ self cacheAt: #isConstructor ifAbsent: [ false ] ]
-]
+FamixTMethod >> isInSameClassAs: aMethod [
 
-{ #category : #testing }
-FamixTMethod >> isConstructor: aBoolean [
-	aBoolean 
-		ifTrue: [ self kind: #constructor ]
-		ifFalse: [ 
-			self isConstructor ifTrue: [ self kind: nil ] ]
-]
-
-{ #category : #testing }
-FamixTMethod >> isGetter [
-	<FMProperty: #isGetter type: #Boolean>
-	<derived>
-	<FMComment: 'True if the method is a getter of an attribute'>
-	
-	^#getter = self kind
+	^ aMethod parentType == self parentType
 ]
 
 { #category : #testing }
@@ -84,35 +57,6 @@ FamixTMethod >> isMethod [
 
 	<generated>
 	^ true
-]
-
-{ #category : #testing }
-FamixTMethod >> isPureAccessor [
-	^ self isGetter or: [ self isSetter or: [ self cacheAt: #isPureAccessor ifAbsent: [ false ] ] ]
-]
-
-{ #category : #testing }
-FamixTMethod >> isSetter [
-	<FMProperty: #isSetter type: #Boolean>
-	<derived>
-	<FMComment: 'True if the method is a setter on an attribute'>
-
-	^#setter = self kind
-]
-
-{ #category : #accessing }
-FamixTMethod >> kind [
-
-	<FMProperty: #kind type: #String>
-	<generated>
-	<FMComment: 'Tag indicating a setter, getter, constant, constructor, or abstract method'>
-	^ kind
-]
-
-{ #category : #accessing }
-FamixTMethod >> kind: anObject [
-	<generated>
-	kind := anObject
 ]
 
 { #category : #printing }
@@ -124,21 +68,6 @@ FamixTMethod >> mooseNameOn: stream [
 	self signature
 		ifNotNil: [ :aSignature | stream nextPutAll: aSignature ]
 		ifNil: [ self name ifNotNil: [ :aName | stream nextPutAll: aName ] ]
-]
-
-{ #category : #metrics }
-FamixTMethod >> numberOfMessageSends [
-	<FMProperty: #numberOfMessageSends type: #Number>
-	<derived>
-	<FMComment: 'The number of message from a method'>
-	^ self
-		lookUpPropertyNamed: #numberOfMessageSends
-		computedAs: [ self notExistentMetricValue ]
-]
-
-{ #category : #metrics }
-FamixTMethod >> numberOfMessageSends: aNumber [
-	self cacheAt: #numberOfMessageSends put: aNumber
 ]
 
 { #category : #accessing }

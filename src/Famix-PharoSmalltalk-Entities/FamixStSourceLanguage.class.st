@@ -12,7 +12,7 @@ FamixStSourceLanguage class >> annotation [
 	<FMClass: #SourceLanguage super: #FamixStEntity>
 	<package: #'Famix-PharoSmalltalk-Entities'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #testing }

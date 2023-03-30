@@ -1,5 +1,5 @@
 "
-FAMIXLocalVariable represents a local variable in the scope of a behavioural entity.
+FamixTLocalVariable represents a local variable in the scope of a behavioural entity.
 "
 Trait {
 	#name : #FamixTLocalVariable,
@@ -17,7 +17,22 @@ FamixTLocalVariable classSide >> annotation [
 	<FMClass: #TLocalVariable super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
+]
+
+{ #category : #printing }
+FamixTLocalVariable >> displayStringOn: aStream [
+
+	self name ifNotNil: [ :n | aStream << n << ' in ' ].
+	self parentBehaviouralEntity ifNotNil: [ :pbe | 
+		pbe displayStringOn: aStream ]
+]
+
+{ #category : #testing }
+FamixTLocalVariable >> isLocalVariable [
+
+	<generated>
+	^ true
 ]
 
 { #category : #accessing }

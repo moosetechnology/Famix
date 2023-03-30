@@ -1,6 +1,6 @@
 Class {
 	#name : #FamixTestComposedAssociation,
-	#superclass : #FamixTestComposedEntity,
+	#superclass : #FamixTestComposedStandardEntity,
 	#traits : 'FamixTAssociation + TAssociationMetaLevelDependency',
 	#classTraits : 'FamixTAssociation classTrait + TAssociationMetaLevelDependency classTrait',
 	#category : #'Famix-TestComposedMetamodel-Entities-Entities'
@@ -9,10 +9,10 @@ Class {
 { #category : #meta }
 FamixTestComposedAssociation class >> annotation [
 
-	<FMClass: #Association super: #FamixTestComposedEntity>
+	<FMClass: #Association super: #FamixTestComposedStandardEntity>
 	<package: #'Famix-TestComposedMetamodel-Entities'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }

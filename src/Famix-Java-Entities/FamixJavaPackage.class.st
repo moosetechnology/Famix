@@ -1,8 +1,8 @@
 Class {
 	#name : #FamixJavaPackage,
 	#superclass : #FamixJavaContainerEntity,
-	#traits : 'FamixTPackage + FamixTWithGlobalVariables',
-	#classTraits : 'FamixTPackage classTrait + FamixTWithGlobalVariables classTrait',
+	#traits : 'FamixTImportable + FamixTPackage + FamixTPackageable + FamixTWithComments',
+	#classTraits : 'FamixTImportable classTrait + FamixTPackage classTrait + FamixTPackageable classTrait + FamixTWithComments classTrait',
 	#category : #'Famix-Java-Entities-Entities'
 }
 
@@ -12,7 +12,7 @@ FamixJavaPackage class >> annotation [
 	<FMClass: #Package super: #FamixJavaContainerEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #'Famix-Implementation' }
@@ -191,6 +191,18 @@ FamixJavaPackage >> martinCohesion [
 { #category : #accessing }
 FamixJavaPackage >> methods [
 	^ self cacheAt: #methods ifAbsentPut: [ self classes flatCollect: #methods ]
+]
+
+{ #category : #printing }
+FamixJavaPackage >> mooseNameOn: stream [
+	| parent |
+	parent := self belongsTo.
+	parent ifNotNil: 
+		[ parent mooseNameOn: stream.
+		stream
+			nextPut: $:;
+			nextPut: $: ].
+	self name ifNotNil: [stream nextPutAll: self name]
 ]
 
 { #category : #accessing }

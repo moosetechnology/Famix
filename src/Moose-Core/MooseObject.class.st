@@ -179,6 +179,12 @@ MooseObject class >> superclassesAndFamixTraits [
 	^ self cache directAt: #superclassesAndFamixTraits
 ]
 
+{ #category : #accessing }
+MooseObject class >> undefinedName [
+
+	^ #noname
+]
+
 { #category : #testing }
 MooseObject class >> usedStatefulTraits [
 	^ self cache directAt: #usedStatefulTraits
@@ -282,6 +288,11 @@ MooseObject >> description: text [
 	self attributeAt: #privateDescription put: text
 ]
 
+{ #category : #printing }
+MooseObject >> displayStringOn: aStream [ 
+	self mooseNameOn: aStream
+]
+
 { #category : #accessing }
 MooseObject >> entityAttributes [
 	^ entityAttributes
@@ -308,11 +319,6 @@ MooseObject >> groupFor: aSelector [
 		withDescription: aSelector asString capitalized , ' in ' , self mooseName
 ]
 
-{ #category : #printing }
-MooseObject >> gtDisplayOn: aStream [ 
-	self mooseNameOn: aStream
-]
-
 { #category : #testing }
 MooseObject >> hasMooseModel [
 	^ self mooseModel isNotNil
@@ -329,6 +335,12 @@ MooseObject >> initialize [
 
 	mooseID := self class freshID.
 	self resetPrivateState
+]
+
+{ #category : #printing }
+MooseObject >> inspectorToString [
+
+	^ String streamContents: [ :s | self displayStringOn: s ]
 ]
 
 { #category : #accessing }
@@ -420,7 +432,7 @@ MooseObject >> mooseNameOn: aStream [
 
 { #category : #accessing }
 MooseObject >> name [
-	^ #noname
+	^ self class undefinedName
 ]
 
 { #category : #accessing }

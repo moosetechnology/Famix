@@ -1,8 +1,8 @@
 Class {
 	#name : #FamixJavaMethod,
 	#superclass : #FamixJavaContainerEntity,
-	#traits : 'FamixTCanBeAbstract + FamixTCanBeFinal + FamixTHasVisibility + FamixTMethod + FamixTWithCaughtExceptions + FamixTWithDeclaredExceptions + FamixTWithThrownExceptions',
-	#classTraits : 'FamixTCanBeAbstract classTrait + FamixTCanBeFinal classTrait + FamixTHasVisibility classTrait + FamixTMethod classTrait + FamixTWithCaughtExceptions classTrait + FamixTWithDeclaredExceptions classTrait + FamixTWithThrownExceptions classTrait',
+	#traits : 'FamixJavaTCanBeSynchronized + FamixTCanBeAbstract + FamixTCanBeClassSide + FamixTCanBeFinal + FamixTHasKind + FamixTHasVisibility + FamixTImportable + FamixTMethod + FamixTWithComments + FamixTWithExceptions',
+	#classTraits : 'FamixJavaTCanBeSynchronized classTrait + FamixTCanBeAbstract classTrait + FamixTCanBeClassSide classTrait + FamixTCanBeFinal classTrait + FamixTHasKind classTrait + FamixTHasVisibility classTrait + FamixTImportable classTrait + FamixTMethod classTrait + FamixTWithComments classTrait + FamixTWithExceptions classTrait',
 	#category : #'Famix-Java-Entities-Entities'
 }
 
@@ -12,7 +12,7 @@ FamixJavaMethod class >> annotation [
 	<FMClass: #Method super: #FamixJavaContainerEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #'Famix-Extensions-metrics-support' }
@@ -22,14 +22,6 @@ FamixJavaMethod >> accessedAttributes [
 	Used to support the calculation of LCOM"
 	
 	^ (self queryOutgoingAccesses opposites withinParentUsing: FamixTClass) asSet select: #isAttribute
-]
-
-{ #category : #accessing }
-FamixJavaMethod >> category [
-	<FMProperty: #category type: #String>
-	<FMComment: 'Category of the method'>
-	
-	^ self attributeAt: #category ifAbsentPut: [ nil ]
 ]
 
 { #category : #'Famix-Extensions' }
@@ -111,16 +103,40 @@ FamixJavaMethod >> isClassInitializer [
 
 { #category : #testing }
 FamixJavaMethod >> isDetectedGetter [
+
+	self deprecated: 'This is legacy and is not used. January 2023'.
+
 	^ self outgoingInvocations isEmpty and: [ 
-		self accesses size = 1 and: [ 
-			self accesses first isWrite not ] ]
+		  self accesses size = 1 and: [ self accesses first isWrite not ] ]
 ]
 
 { #category : #testing }
 FamixJavaMethod >> isDetectedSetter [
+
+	self deprecated: 'This is legacy and is not used. January 2023'.
+
 	^ self outgoingInvocations isEmpty and: [ 
-		self accesses size = 1 and: [ 
-			self accesses first isWrite ] ]
+		  self accesses size = 1 and: [ self accesses first isWrite ] ]
+]
+
+{ #category : #testing }
+FamixJavaMethod >> isGetter [
+	"No parameter AND
+		Has a declared type (not void) AND
+			Has no outgoing invocation AND
+				Name starts with get OR
+					Name starts with is AND returns a boolean"
+
+	^ self kind = #getter or: [
+		  self parameters isEmpty and: [
+			  self declaredType isNotNil and: [
+				  self declaredType name ~= 'void' and: [
+					  self outgoingInvocations isEmpty and: [
+						  self name isNotNil and: [
+							  (self name beginsWith: 'get') or: [
+								  (self name beginsWith: 'is') and: [
+									  self declaredType name caseInsensitiveLessOrEqual:
+										  'boolean' ] ] ] ] ] ] ] ]
 ]
 
 { #category : #testing }
@@ -163,6 +179,22 @@ FamixJavaMethod >> isOverriding [
 			[ :each | each isInterface not and: [ each understands: self signature ] ]
 ]
 
+{ #category : #testing }
+FamixJavaMethod >> isSetter [
+	"Name begins with set AND
+		Has 1 parameter AND
+			Declared type is void AND
+				Has no outgoing invocation"
+
+	^ self kind = #setter or: [
+		  self name isNotNil and: [
+			  (self name beginsWith: 'set') and: [
+				  self parameters size = 1 and: [
+					  self declaredType isNotNil and: [
+						  self declaredType name = 'void' and: [
+							  self outgoingInvocations isEmpty ] ] ] ] ] ]
+]
+
 { #category : #printing }
 FamixJavaMethod >> isStub [
 	^ super isStub or: [ self parentType isNotNil and: [ self parentType isStub ] ]
@@ -190,17 +222,6 @@ FamixJavaMethod >> numberOfAccesses [
 	^ self 
 		lookUpPropertyNamed: #numberOfAccesses
 		computedAs: [ self accesses size ]
-]
-
-{ #category : #metrics }
-FamixJavaMethod >> numberOfAnnotationInstances [
-	<FMProperty: #numberOfAnnotationInstances type: #Number>
-	<derived>
-	<FMComment: 'The number of annotation instances defined in the method'>
-
-	^self
-		lookUpPropertyNamed: #numberOfAnnotationInstances
-		computedAs: [self annotationInstances size]
 ]
 
 { #category : #accessing }
@@ -233,17 +254,6 @@ FamixJavaMethod >> numberOfInvokedMethods [
 	<derived>
 	
 	^ self cacheAt: #numberOfInvokedMethods ifAbsentPut: [self invokedMethods size]
-]
-
-{ #category : #'Famix-Extensions-private' }
-FamixJavaMethod >> numberOfOutgoingInvocations [
-	<FMProperty: #numberOfOutgoingInvocations type: #Number>
-	<derived>
-	<FMComment: 'The number of invocations in a method'>
-	
-	^self
-		lookUpPropertyNamed: #numberOfOutgoingInvocations
-		computedAs: [self outgoingInvocations size]
 ]
 
 { #category : #'Famix-Implementation' }

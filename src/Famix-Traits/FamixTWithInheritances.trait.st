@@ -13,7 +13,7 @@ FamixTWithInheritances classSide >> annotation [
 	<FMClass: #TWithInheritances super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }
@@ -34,9 +34,10 @@ FamixTWithInheritances >> allSubclassesDo: aBlock [
 
 { #category : #enumerating }
 FamixTWithInheritances >> allSuperclassesDo: aBlock [
-	self superInheritances do: [:each | aBlock value: each superclass].
-	self superInheritances do: [:each | each superclass allSuperclassesDo: aBlock]
 
+	self superInheritances do: [ :each | aBlock value: each superclass ].
+	self superInheritances do: [ :each |  
+			each superclass allSuperclassesDo: aBlock ] 
 ]
 
 { #category : #enumerating }
@@ -200,19 +201,6 @@ FamixTWithInheritances >> superclassHierarchyGroup [
 	^ MooseGroup
 		withAll: self superclassHierarchy asSet
 		withDescription: 'All superclasses of ' , self mooseName
-]
-
-{ #category : #metrics }
-FamixTWithInheritances >> totalNumberOfSubclasses [
-	<FMProperty: #totalNumberOfSubclasses type: #Number>
-	<derived>
-	<FMComment: 'The total number of subclasses of a class'>
-	^ self lookUpPropertyNamed: #totalNumberOfSubclasses computedAs: [ self subclassHierarchyGroup size ]
-]
-
-{ #category : #metrics }
-FamixTWithInheritances >> totalNumberOfSubclasses: aNumber [
-	self cacheAt: #totalNumberOfSubclasses put: aNumber
 ]
 
 { #category : #enumerating }

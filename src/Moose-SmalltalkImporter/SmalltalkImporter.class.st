@@ -61,16 +61,17 @@ SmalltalkImporter >> allImplementorsOf: aSignature [
 
 { #category : #'private-entity-creation' }
 SmalltalkImporter >> basicClassCreation: aClass [
+
 	| class anchor |
 	class := classes at: aClass put: self factory classEntity new.
 	class name: (aClass name replaceAll: Character space with: $_).
 	class stub: true.
-	importingContext shouldImportNamespace
-		ifTrue: [ class typeContainer: (self ensureNamespace: aClass environment) ].
+	importingContext shouldImportNamespace ifTrue: [ 
+		class typeContainer: (self ensureNamespace: aClass environment) ].
 	anchor := self factory anchor new
-		element: class;
-		pharoEntity: aClass;
-		yourself.
+		          element: class;
+		          pharoEntity: aClass;
+		          yourself.
 	class sourceAnchor: anchor.
 	self addEntity: anchor.
 	^ class
@@ -143,31 +144,54 @@ SmalltalkImporter >> createAttribute: name for: aClass [
 
 { #category : #'private-entity-creation' }
 SmalltalkImporter >> createClass: aClass [
-	| class inheritance |
-	importingContext shouldMergeClassAndMetaclass
-		ifFalse: [ class := self basicClassCreation: aClass ]
-		ifTrue: [ aClass isMeta
-				ifTrue: [ class := self ensureClass: aClass soleInstance.
-					classes at: aClass put: class ]
-				ifFalse: [ class := self basicClassCreation: aClass ] ].
-	importingContext shouldImportPackage ifTrue: [ class parentPackage: (self ensurePackage: aClass package) ].
-	importingContext shouldImportInheritance
-		ifTrue: [ (aClass superclass isNotNil
-				and: [ importingContext shouldMergeClassAndMetaclass
-						ifFalse: [ true ]
-						ifTrue: [ aClass isMeta not ] ])
-				ifTrue: [ inheritance := self addEntity: self factory inheritance new.
-					inheritance superclass: (self ensureClass: aClass superclass).
-					inheritance subclass: class ] ].
-	aClass isMeta ifFalse: [ self ensureClass: aClass class ].
-	importingContext shouldImportAttribute
-		ifTrue: [ aClass instVarNames do: [ :eachName | self ensureAttribute: eachName for: aClass ].
-			"since the classVar of a class are not the same as the classVar of the class class"
 
-			"with latest pharo class classVar = class class classVar so we should not need that anymore"
-			aClass isMeta
-				ifTrue: [ aClass soleInstance classVarNames do: [ :eachClassVarName | self ensureClassVarAttribute: eachClassVarName for: aClass soleInstance ] ]
-				ifFalse: [ aClass classVarNames do: [ :eachClassVarName | self ensureClassVarAttribute: eachClassVarName for: aClass ] ] ].
+	| class inheritance |
+	class := (importingContext shouldMergeClassAndMetaclass and: [ 
+		          aClass isMeta ])
+		         ifTrue: [ 
+		         classes
+			         at: aClass
+			         put: (self ensureClass: aClass soleInstance) ]
+		         ifFalse: [ self basicClassCreation: aClass ].
+
+	importingContext shouldImportPackage ifTrue: [ 
+		class parentPackage: (self ensurePackage: aClass package) ].
+
+	importingContext shouldImportInheritance ifTrue: [ 
+		(aClass superclass isNotNil and: [ 
+			 importingContext shouldMergeClassAndMetaclass
+				 ifFalse: [ true ]
+				 ifTrue: [ aClass isMeta not ] ]) ifTrue: [ 
+			inheritance := self addEntity: self factory inheritance new.
+			inheritance superclass: (self ensureClass: aClass superclass).
+			inheritance subclass: class ] ].
+
+	aClass isMeta ifFalse: [ self ensureClass: aClass class ].
+
+	importingContext shouldImportAttribute ifTrue: [ 
+		aClass instVarNames do: [ :eachName | 
+			self ensureAttribute: eachName for: aClass ].
+		"since the classVar of a class are not the same as the classVar of the class class"
+		"with latest pharo class classVar = class class classVar so we should not need that anymore"
+		aClass isMeta
+			ifTrue: [ 
+				aClass soleInstance classVarNames do: [ :eachClassVarName | 
+					self
+						ensureClassVarAttribute: eachClassVarName
+						for: aClass soleInstance ] ]
+			ifFalse: [ 
+				aClass classVarNames do: [ :eachClassVarName | 
+					self ensureClassVarAttribute: eachClassVarName for: aClass ] ] ].
+
+	(importingContext shouldImportComment and: [ aClass hasComment ]) 
+		ifTrue: [ 
+			(importingContext shouldMergeClassAndMetaclass and: [ 
+				 aClass isMeta ]) ifFalse: [ 
+				| comment |
+				comment := self addEntity: self factory comment new.
+				comment content: aClass comment asString.
+				comment commentedEntity: class ] ].
+
 	^ class
 ]
 
@@ -201,16 +225,17 @@ SmalltalkImporter >> createGlobalVariable: name value: value [
 
 { #category : #'private-entity-creation' }
 SmalltalkImporter >> createMethod: aCompiledMethod [
+
 	| method anchor |
 	method := self createStubMethod: aCompiledMethod.
-	importingContext shouldImportMethodBody
-		ifTrue: [ | visitor |
-			visitor := SmalltalkMethodVisitor on: self.
-			visitor runWith: aCompiledMethod and: method ].
+	importingContext shouldImportMethodBody ifTrue: [ 
+		| visitor |
+		visitor := SmalltalkMethodVisitor on: self.
+		visitor runWith: aCompiledMethod and: method ].
 	anchor := self factory anchor new
-		element: method;
-		pharoEntity: aCompiledMethod;
-		yourself.
+		          element: method;
+		          pharoEntity: aCompiledMethod;
+		          yourself.
 	method sourceAnchor: anchor.
 	self addEntity: anchor.
 	^ method
@@ -334,12 +359,11 @@ SmalltalkImporter >> ensureAttribute: name for: aClass [
 ]
 
 { #category : #'public-entity-creation' }
-SmalltalkImporter >> ensureClass: aClass [ 
-	"aClass is aSmalltalk. This method returns a FAMIXClass" 
-	 
-	^classes 
-		at: aClass 
-		ifAbsent: [self createClass: aClass]
+SmalltalkImporter >> ensureClass: aClass [
+
+	"aClass is aSmalltalk. This method returns a FamixStClass"
+
+	^ classes at: aClass ifAbsent: [ self createClass: aClass ]
 ]
 
 { #category : #'public-entity-creation' }
@@ -409,22 +433,25 @@ SmalltalkImporter >> ensurePackage: aPackageModel [
 ]
 
 { #category : #'public-entity-creation' }
-SmalltalkImporter >> ensureSmalltalkStubMethod: aCompiledMethod [ 
-	 
-	^methods 
-		at: aCompiledMethod 
-		ifAbsent: [self createStubMethod: aCompiledMethod]
+SmalltalkImporter >> ensureSmalltalkStubMethod: aCompiledMethod [
+
+	^ methods
+		  at: aCompiledMethod
+		  ifAbsent: [ self createStubMethod: aCompiledMethod ]
 ]
 
 { #category : #'public-entity-creation' }
 SmalltalkImporter >> ensureSmalltalkStubMethodsFor: aSignature [
+
 	| implementors |
-	importingContext shouldImportSmalltalkStubMethod
-		ifFalse: [^#()].
+	importingContext shouldImportSmalltalkStubMethod ifFalse: [ ^ #(  ) ].
 	implementors := self allImplementorsOf: aSignature.
-	implementors ifEmpty: [
-		^{ self basicCreateMethod: (aSignature copyUpTo: $() withSignature: aSignature } ].
-	^ implementors collect: [ :meth | self ensureSmalltalkStubMethod: meth ]
+	implementors ifEmpty: [ 
+		^ { (self
+			   basicCreateMethod: (aSignature copyUpTo: $()
+			   withSignature: aSignature) } ].
+	^ implementors collect: [ :meth | 
+		  self ensureSmalltalkStubMethod: meth ]
 ]
 
 { #category : #'public-entity-creation' }
@@ -454,40 +481,39 @@ SmalltalkImporter >> famixClasses [
 ]
 
 { #category : #importing }
-SmalltalkImporter >> importClass: aClass [ 
-	 
-	| class comment | 
-	importingContext shouldImportClass 
-		ifTrue: 
-			[class := self ensureClass: aClass. 
-			class stub: false.
-			class attributes do: [ :each | each stub: false ].
-			importingContext shouldImportPackage ifTrue: [
-				class parentPackage stub: false ].
-			importingContext shouldImportSubclasses ifTrue: [aClass subclasses do: [:each | self ensureClass: each]]. 
-			importingContext shouldImportMethod 
-				ifTrue: 
-					[aClass methods do: [:each | (self ensureMethod: each) isStub: false ]. 
-					self checkAbstractClass: class]. 
-			importingContext shouldImportComment 
-				ifTrue: 
-					[aClass hasComment 
-						ifTrue: 
-							[comment := self addEntity: self factory comment new. 
-							comment content: aClass comment asString. 
-							comment container: class]]. 
-			aClass isMeta ifFalse: [self importClass: aClass class]]
+SmalltalkImporter >> importClass: aClass [
+
+	| class |
+	importingContext shouldImportClass ifFalse: [ ^ self ].
+
+	class := self ensureClass: aClass.
+	class stub: false.
+	class attributes do: [ :each | each stub: false ].
+
+	importingContext shouldImportPackage ifTrue: [ 
+		class parentPackage stub: false ].
+
+	importingContext shouldImportSubclasses ifTrue: [ 
+		aClass subclasses do: [ :each | self ensureClass: each ] ].
+
+	importingContext shouldImportMethod ifTrue: [ 
+		aClass methods do: [ :each | 
+			(self ensureMethod: each) isStub: false ].
+		self checkAbstractClass: class ].
+
+	aClass isMeta ifFalse: [ self importClass: aClass class ]
 ]
 
 { #category : #importing }
-SmalltalkImporter >> importClassExtension: aClassExtension [ 
-	 
-	| method | 
-	importingContext shouldImportClassExtension ifTrue: [
-		method := (self ensureMethod: aClassExtension) isStub: false.
-		importingContext shouldImportPackage ifTrue: [
-			method parentPackage isStub: false ].
- 	]
+SmalltalkImporter >> importClassExtension: aClassExtension [
+
+	| method |
+	importingContext shouldImportClassExtension ifFalse: [ ^ self ].
+
+	method := (self ensureMethod: aClassExtension) isStub: false.
+
+	importingContext shouldImportPackage ifTrue: [ 
+		method parentPackage isStub: false ]
 ]
 
 { #category : #initialization }

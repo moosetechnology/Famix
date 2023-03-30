@@ -43,12 +43,6 @@ FamixJavaVisitor >> visitAttribute: aFamixJavaAttribute [
 ]
 
 { #category : #visiting }
-FamixJavaVisitor >> visitCaughtException: aFamixJavaCaughtException [
-	<generated>
-	^ self visitException: aFamixJavaCaughtException
-]
-
-{ #category : #visiting }
 FamixJavaVisitor >> visitClass: aFamixJavaClass [
 	<generated>
 	^ self visitType: aFamixJavaClass
@@ -64,12 +58,6 @@ FamixJavaVisitor >> visitComment: aFamixJavaComment [
 FamixJavaVisitor >> visitContainerEntity: aFamixJavaContainerEntity [
 	<generated>
 	^ self visitNamedEntity: aFamixJavaContainerEntity
-]
-
-{ #category : #visiting }
-FamixJavaVisitor >> visitDeclaredException: aFamixJavaDeclaredException [
-	<generated>
-	^ self visitException: aFamixJavaDeclaredException
 ]
 
 { #category : #visiting }
@@ -231,12 +219,6 @@ FamixJavaVisitor >> visitSourceTextAnchor: aFamixJavaSourceTextAnchor [
 FamixJavaVisitor >> visitSourcedEntity: aFamixJavaSourcedEntity [
 	<generated>
 	^ self visitEntity: aFamixJavaSourcedEntity
-]
-
-{ #category : #visiting }
-FamixJavaVisitor >> visitThrownException: aFamixJavaThrownException [
-	<generated>
-	^ self visitException: aFamixJavaThrownException
 ]
 
 { #category : #visiting }

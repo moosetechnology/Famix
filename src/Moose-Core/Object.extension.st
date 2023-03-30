@@ -25,7 +25,7 @@ Object >> hasUniqueMooseNameInModel [
 
 { #category : #'*Moose-Core' }
 Object >> isMooseEntity [
-	^ false
+	^ false 
 ]
 
 { #category : #'*Moose-Core' }

@@ -1,23 +1,16 @@
 Class {
 	#name : #FamixJavaException,
-	#superclass : #FamixJavaEntity,
-	#traits : 'FamixTException',
-	#classTraits : 'FamixTException classTrait',
+	#superclass : #FamixJavaClass,
+	#traits : 'FamixTCanImplement + FamixTException + FamixTHasVisibility + FamixTWithAnnotationInstances + FamixTWithTypes',
+	#classTraits : 'FamixTCanImplement classTrait + FamixTException classTrait + FamixTHasVisibility classTrait + FamixTWithAnnotationInstances classTrait + FamixTWithTypes classTrait',
 	#category : #'Famix-Java-Entities-Entities'
 }
 
 { #category : #meta }
 FamixJavaException class >> annotation [
 
-	<FMClass: #Exception super: #FamixJavaEntity>
+	<FMClass: #Exception super: #FamixJavaClass>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^self
-]
-
-{ #category : #accessing }
-FamixJavaException >> mooseNameOn: aStream [
-	aStream nextPutAll: (self class name withoutPrefix: 'FamixJava').
-	aStream nextPut: $-.
-	self exceptionClass ifNotNil: [ :ec | ec mooseNameOn: aStream ]
+	^ self
 ]

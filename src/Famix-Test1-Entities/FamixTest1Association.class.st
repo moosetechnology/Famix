@@ -12,7 +12,7 @@ FamixTest1Association class >> annotation [
 	<FMClass: #Association super: #FamixTest1Entity>
 	<package: #'Famix-Test1-Entities'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #converting }

@@ -1,5 +1,5 @@
 "
-FAMIXNamespace represents a namespace from the source language. Namespaces have semantic meaning in the language so they influence the unique name of the entity.
+FamixTNamespace represents a namespace from the source language. Namespaces have semantic meaning in the language so they influence the unique name of the entity.
 
 A namespace denotes an entity that has meaning from a language point of view. For example, in C++, there exist a concept with the same name that has no other responsibility beside providing a lexical scope for the contained classes and funcions.
 
@@ -7,8 +7,8 @@ When an entity is placed inside a namespace, the fully qualified name (mooseName
 "
 Trait {
 	#name : #FamixTNamespace,
-	#traits : '(FamixTNamedEntity + TOODependencyQueries withPrecedenceOf: TOODependencyQueries)',
-	#classTraits : '(FamixTNamedEntity classTrait + TOODependencyQueries classTrait withPrecedenceOf: TOODependencyQueries classTrait)',
+	#traits : 'FamixTNamedEntity + FamixTSourceEntity + TEntityMetaLevelDependency',
+	#classTraits : 'FamixTNamedEntity classTrait + FamixTSourceEntity classTrait + TEntityMetaLevelDependency classTrait',
 	#category : #'Famix-Traits-Named'
 }
 
@@ -18,7 +18,7 @@ FamixTNamespace classSide >> annotation [
 	<FMClass: #TNamespace super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #groups }

@@ -1,5 +1,5 @@
 "
-FAMIXImplicitVariable represents a variable defined by the compiler in a context, such as self, super, thisContext.
+FamixTImplicitVariable represents a variable defined by the compiler in a context, such as self, super, thisContext.
 "
 Trait {
 	#name : #FamixTImplicitVariable,
@@ -17,7 +17,7 @@ FamixTImplicitVariable classSide >> annotation [
 	<FMClass: #TImplicitVariable super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #testing }

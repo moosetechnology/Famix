@@ -1,5 +1,5 @@
 "
-ParameterType represents the symbolic type used in parameterizable classes. This is a FAMIXType.
+ParameterType represents the symbolic type used in parameterizable classes. This is a FamixTType.
 
 Example:
 public class AClass<A,B,C> {
@@ -19,5 +19,5 @@ FamixTParameterType classSide >> annotation [
 	<FMClass: #TParameterType super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
 ]

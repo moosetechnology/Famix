@@ -29,8 +29,8 @@ FAMIXNamedEntityTest >> testIsFinal [
 FAMIXNamedEntityTest >> testIsPackage [
 	| entity |
 	entity := self actualClass new.
-	entity bePackage.
-	self assert: entity isPackage
+	entity bePackageVisibility.
+	self assert: entity isPackageVisibility
 ]
 
 { #category : #tests }

@@ -30,7 +30,7 @@ FamixStPharoEntitySourceAnchor class >> annotation [
 	<FMClass: #PharoEntitySourceAnchor super: #FamixStSourceAnchor>
 	<package: #'Famix-PharoSmalltalk-Entities'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #initialization }
@@ -50,5 +50,6 @@ FamixStPharoEntitySourceAnchor >> pharoEntity: anObject [
 
 { #category : #accessing }
 FamixStPharoEntitySourceAnchor >> sourceText [
-	^ self pharoEntity ifNotNil: #definition  
+
+	^ self pharoEntity ifNotNil: #definitionString
 ]

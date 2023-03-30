@@ -15,14 +15,9 @@ MQNavigationOutgoingDirectionStrategy class >> determinatingSymbol [
 	^ #out
 ]
 
-{ #category : #converting }
-MQNavigationOutgoingDirectionStrategy class >> ensureAssociation: anObject with: anEntity [
-	^ anObject asAssociationFrom: anEntity
-]
-
 { #category : #accessing }
-MQNavigationOutgoingDirectionStrategy class >> entityFor: anEntity [
-	^ anEntity target
+MQNavigationOutgoingDirectionStrategy class >> entityFor: anAssociation [
+	^ anAssociation target
 ]
 
 { #category : #accessing }

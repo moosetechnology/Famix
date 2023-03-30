@@ -1,9 +1,9 @@
 "
-FAMIXType is a generic class representing a type. It has several specializations for specific kinds of types, the typical one being FAMIXClass.
-A type is defined in a container (instance of FAMIXContainer). 
-The container is typically a namespace (instance of FAMIXNamespace), but may also be a class (in the case of nested classes), or a method (in the case of anonymous classes).
+FamixTType is a generic class representing a type. It has several specializations for specific kinds of types, the typical one being FamixTClass.
+A type is defined in a container (instance of FamixTContainer). 
+The container is typically a namespace (instance of FamixTNamespace), but may also be a class (in the case of nested classes), or a method (in the case of anonymous classes).
 
-A type can have multiple subtypes or supertypes. These are modelled by means of FAMIXInheritance instances.
+A type can have multiple subtypes or supertypes. These are modelled by means of FamixTInheritance instances.
 "
 Trait {
 	#name : #FamixTType,
@@ -11,8 +11,8 @@ Trait {
 		'#typeContainer => FMOne type: #FamixTWithTypes opposite: #types',
 		'#typedEntities => FMMany type: #FamixTTypedEntity opposite: #declaredType'
 	],
-	#traits : 'FamixTNamedEntity + FamixTReferenceable',
-	#classTraits : 'FamixTNamedEntity classTrait + FamixTReferenceable classTrait',
+	#traits : 'FamixTNamedEntity + FamixTReferenceable + FamixTSourceEntity + TEntityMetaLevelDependency',
+	#classTraits : 'FamixTNamedEntity classTrait + FamixTReferenceable classTrait + FamixTSourceEntity classTrait + TEntityMetaLevelDependency classTrait',
 	#category : #'Famix-Traits-Type'
 }
 
@@ -22,7 +22,7 @@ FamixTType classSide >> annotation [
 	<FMClass: #TType super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #groups }
@@ -49,11 +49,6 @@ FamixTType >> entityHasIncomingTypeDeclarations [
 ]
 
 { #category : #testing }
-FamixTType >> incomingTypeDeclarations [  
-	^ self typedEntities collect: [ :var | MQNavigationDependencyAssociation newFrom: var to: self ]
-]
-
-{ #category : #testing }
 FamixTType >> isType [
 
 	<generated>
@@ -71,34 +66,20 @@ FamixTType >> mooseNameOn: aStream [
 
 { #category : #metrics }
 FamixTType >> numberOfAccessesToForeignData [
-	<FMProperty: #numberOfAccessesToForeignData type: #Number>
-	<derived>
-	<FMComment: 'Number of accesses to foreign data'>
-	
-	^self
-		lookUpPropertyNamed: #numberOfAccessesToForeignData
-		computedAs: [self notExistentMetricValue]
+
+	self deprecated:
+		'This method will be removed in the nex version of Moose'.
+	^ self
+		  lookUpPropertyNamed: #numberOfAccessesToForeignData
+		  computedAs: [ self notExistentMetricValue ]
 ]
 
 { #category : #metrics }
 FamixTType >> numberOfAccessesToForeignData: aNumber [
+
+	self deprecated:
+		'This method will be removed in the nex version of Moose'.
 	self cacheAt: #numberOfAccessesToForeignData put: aNumber
-]
-
-{ #category : #metrics }
-FamixTType >> numberOfDuplicatedLinesOfCodeInternally [
-	<FMProperty: #numberOfDuplicatedLinesOfCodeInternally type: #Number>
-	<derived>
-	<FMComment: 'The number of duplicated lines of code internally'>		
-
-	^self
-		lookUpPropertyNamed: #numberOfDuplicatedLinesOfCodeInternally
-		computedAs: [self notExistentMetricValue]
-]
-
-{ #category : #metrics }
-FamixTType >> numberOfDuplicatedLinesOfCodeInternally: aNumber [
-	self cacheAt: #numberOfDuplicatedLinesOfCodeInternally put: aNumber
 ]
 
 { #category : #testing }
@@ -139,7 +120,6 @@ FamixTType >> typedEntities [
 	<generated>
 	<FMComment: 'Entities that have this type as declaredType'>
 	<derived>
-	<target>
 	^ typedEntities
 ]
 

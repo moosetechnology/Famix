@@ -1,6 +1,6 @@
 Class {
 	#name : #FamixTest1NamedEntity,
-	#superclass : #FamixTest1SourcedEntity,
+	#superclass : #FamixTest1Entity,
 	#traits : 'FamixTNamedEntity',
 	#classTraits : 'FamixTNamedEntity classTrait',
 	#category : #'Famix-Test1-Entities-Entities'
@@ -9,8 +9,16 @@ Class {
 { #category : #meta }
 FamixTest1NamedEntity class >> annotation [
 
-	<FMClass: #NamedEntity super: #FamixTest1SourcedEntity>
+	<FMClass: #NamedEntity super: #FamixTest1Entity>
 	<package: #'Famix-Test1-Entities'>
 	<generated>
-	^self
+	<abstract>
+	^ self
+]
+
+{ #category : #testing }
+FamixTest1NamedEntity class >> isAbstract [
+
+	<generated>
+	^ self == FamixTest1NamedEntity
 ]

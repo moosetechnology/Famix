@@ -4,7 +4,7 @@ I represent a compilation unit file. Typically a .c or .cpp file
 Trait {
 	#name : #FamixTCompilationUnit,
 	#instVars : [
-		'#compilationUnitOwner => FMOne type: #FamixTWithCompilationUnit opposite: #compilationUnit'
+		'#compilationUnitOwner => FMOne type: #FamixTWithCompilationUnits opposite: #compilationUnit'
 	],
 	#traits : 'FamixTFile',
 	#classTraits : 'FamixTFile classTrait',
@@ -17,15 +17,16 @@ FamixTCompilationUnit classSide >> annotation [
 	<FMClass: #TCompilationUnit super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }
 FamixTCompilationUnit >> compilationUnitOwner [
-	"Relation named: #compilationUnitOwner type: #FamixTWithCompilationUnit opposite: #compilationUnit"
+	"Relation named: #compilationUnitOwner type: #FamixTWithCompilationUnits opposite: #compilationUnit"
 
 	<generated>
 	<FMComment: 'The compilation unit that defines this module'>
+	<container>
 	^ compilationUnitOwner
 ]
 
@@ -34,4 +35,11 @@ FamixTCompilationUnit >> compilationUnitOwner: anObject [
 
 	<generated>
 	compilationUnitOwner := anObject
+]
+
+{ #category : #navigation }
+FamixTCompilationUnit >> compilationUnitOwnerGroup [
+	<generated>
+	<navigation: 'CompilationUnitOwner'>
+	^ MooseSpecializedGroup with: self compilationUnitOwner
 ]

@@ -1,9 +1,9 @@
 Class {
 	#name : #FamixJavaParameterizedType,
 	#superclass : #FamixJavaType,
-	#traits : 'FamixTParameterizedType + FamixTWithInheritances + FamixTWithParameterizedTypeUsers',
-	#classTraits : 'FamixTParameterizedType classTrait + FamixTWithInheritances classTrait + FamixTWithParameterizedTypeUsers classTrait',
-	#category : #'Famix-Java-Entities-Entities'
+	#traits : 'FamixTCanImplement + FamixTImplementable + FamixTParameterizedType + FamixTWithInheritances + FamixTWithParameterizedTypeUsers',
+	#classTraits : 'FamixTCanImplement classTrait + FamixTImplementable classTrait + FamixTParameterizedType classTrait + FamixTWithInheritances classTrait + FamixTWithParameterizedTypeUsers classTrait',
+	#category : #'Famix-Java-Entities'
 }
 
 { #category : #meta }
@@ -12,7 +12,7 @@ FamixJavaParameterizedType class >> annotation [
 	<FMClass: #ParameterizedType super: #FamixJavaType>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #enumerating }

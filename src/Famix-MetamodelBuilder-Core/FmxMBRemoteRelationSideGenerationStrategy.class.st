@@ -4,8 +4,12 @@ Class {
 	#category : #'Famix-MetamodelBuilder-Core-Implementation'
 }
 
-{ #category : #printing }
+{ #category : #generation }
 FmxMBRemoteRelationSideGenerationStrategy >> compileMethod: methodSource for: aRelationSide in: aClassOrTrait [
-		
-	aRelationSide builder environment compile: methodSource in: aClassOrTrait classified: self category package: self relationSide builder parentBuilderPackageName.
+
+	aRelationSide builder environment
+		compile: methodSource
+		in: aClassOrTrait
+		classified: self category
+		package: self relationSide builder parentBuilderPackageName
 ]

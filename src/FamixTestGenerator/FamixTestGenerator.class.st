@@ -75,19 +75,34 @@ FamixTestGenerator >> runFor: aClass [.
 
 { #category : #'as yet unclassified' }
 FamixTestGenerator >> runForASpecificClass: aClass with: aGenerator [
+
 	self generator: aGenerator.
 	self initPackage.
-	self runFor: aClass.
-	
+	aClass isTrait
+		ifTrue: [ 
+			FamixTraitTestAndTraitGenerator new
+				generator: self generator;
+				runFor: aClass ]
+		ifFalse: [ 
+			FamixClassTestAndTraitGenerator new
+				generator: self generator;
+				runFor: aClass ]
 ]
 
 { #category : #'as yet unclassified' }
 FamixTestGenerator >> runForAllClassesWith: aGenerator [
+
 	self generator: aGenerator.
 	self initPackage.
 	self initClasses.
-	self classes do: [ :c | self runFor: c ].
-	
+	(self classes select: [ :c | c isTrait ]) do: [ :c | 
+		FamixTraitTestAndTraitGenerator new
+			generator: self generator;
+			runFor: c ].
+	(self classes select: [ :c | c isClass ]) do: [ :c | 
+		FamixClassTestAndTraitGenerator new
+			generator: self generator;
+			runFor: c ]
 ]
 
 { #category : #accessing }

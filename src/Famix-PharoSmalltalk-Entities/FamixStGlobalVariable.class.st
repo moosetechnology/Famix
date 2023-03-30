@@ -1,8 +1,8 @@
 Class {
 	#name : #FamixStGlobalVariable,
 	#superclass : #FamixStNamedEntity,
-	#traits : 'FamixTGlobalVariable',
-	#classTraits : 'FamixTGlobalVariable classTrait',
+	#traits : 'FamixTGlobalVariable + FamixTInvocationsReceiver',
+	#classTraits : 'FamixTGlobalVariable classTrait + FamixTInvocationsReceiver classTrait',
 	#category : #'Famix-PharoSmalltalk-Entities-Entities'
 }
 
@@ -12,5 +12,5 @@ FamixStGlobalVariable class >> annotation [
 	<FMClass: #GlobalVariable super: #FamixStNamedEntity>
 	<package: #'Famix-PharoSmalltalk-Entities'>
 	<generated>
-	^self
+	^ self
 ]

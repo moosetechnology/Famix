@@ -13,7 +13,7 @@ FamixTest4Principal class >> annotation [
 	<FMClass: #Principal super: #FamixTest4Person>
 	<package: #'Famix-Test4-Entities'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }

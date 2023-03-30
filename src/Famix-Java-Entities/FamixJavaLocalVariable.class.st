@@ -1,8 +1,8 @@
 Class {
 	#name : #FamixJavaLocalVariable,
 	#superclass : #FamixJavaNamedEntity,
-	#traits : 'FamixTCanBeFinal + FamixTLocalVariable',
-	#classTraits : 'FamixTCanBeFinal classTrait + FamixTLocalVariable classTrait',
+	#traits : 'FamixTCanBeFinal + FamixTInvocationsReceiver + FamixTLocalVariable + FamixTWithComments',
+	#classTraits : 'FamixTCanBeFinal classTrait + FamixTInvocationsReceiver classTrait + FamixTLocalVariable classTrait + FamixTWithComments classTrait',
 	#category : #'Famix-Java-Entities-Entities'
 }
 
@@ -12,7 +12,7 @@ FamixJavaLocalVariable class >> annotation [
 	<FMClass: #LocalVariable super: #FamixJavaNamedEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #printing }

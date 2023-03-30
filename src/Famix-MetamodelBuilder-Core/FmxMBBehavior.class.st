@@ -114,7 +114,7 @@ FmxMBBehavior >> defaultTag [
 	^ self builder configuration classTag
 ]
 
-{ #category : #accessing }
+{ #category : #generating }
 FmxMBBehavior >> ensureRealClass [
 	^ realClass
 		ifNil: [ self generate.
@@ -134,7 +134,7 @@ FmxMBBehavior >> generalization: anObject [
 		ifFalse: [ anObject isMetamodelTrait ifTrue: [ self addTraitGeneralization: anObject ] ifFalse: [ self classGeneralization: anObject ] ]
 ]
 
-{ #category : #accessing }
+{ #category : #generating }
 FmxMBBehavior >> generate [
 	^ self subclassResponsibility
 ]
@@ -162,22 +162,31 @@ FmxMBBehavior >> generateAddToCollectionFor: aClass [
 ]
 
 { #category : #generating }
-FmxMBBehavior >> generateAnnotationIn: aRealClass as: aName superclass: aSuperclass [
+FmxMBBehavior >> generateAnnotationIn: aRealClass superclass: aSuperclass [
+
 	| aSuperclassName |
 	aSuperclassName := aSuperclass
-		ifNotNil: [ aSuperclass name ]
-		ifNil: [ self classGeneralization = self defaultSuperclass
-				ifTrue: [ self defaultSuperclassName ]
-				ifFalse: [ self classGeneralization ifNil: [ self defaultSuperclassName ] ifNotNil: [ :cg | cg realClass name ] ] ].
+		                   ifNotNil: [ aSuperclass name ]
+		                   ifNil: [ 
+			                   self classGeneralization
+			                   = self defaultSuperclass
+				                   ifTrue: [ self defaultSuperclassName ]
+				                   ifFalse: [ 
+					                   self classGeneralization
+						                   ifNil: [ self defaultSuperclassName ]
+						                   ifNotNil: [ :cg | cg realClass name ] ] ].
 
 	aRealClass classSide
-		compile:
-			('annotation
+		compile: ('annotation
 
 	<FMClass: #{1} super: #{2}>
 	<package: {3}>
-	<generated>
-	^self' format: {aName . aSuperclassName . self builder safeAnnotationPackageName})
+	<generated>{4}
+	^ self' format: { 
+					 self name.
+					 aSuperclassName.
+					 self builder safeAnnotationPackageName.
+					 self optionalPragma })
 		classified: 'meta'
 ]
 
@@ -287,6 +296,14 @@ FmxMBBehavior >> isModelClass [
 	^ false
 ]
 
+{ #category : #generating }
+FmxMBBehavior >> optionalPragma [
+
+	"Override to add a pragma to your entity #annotation method"
+
+	^ String new
+]
+
 { #category : #accessing }
 FmxMBBehavior >> packageName [
 	^ packageName
@@ -369,6 +386,21 @@ FmxMBBehavior >> property: propertyName type: aTypeName [
 		builder: self builder;
 		name: propertyName;
 		propertyType: aTypeName asSymbol;
+		yourself.
+
+	self properties add: aSide.
+
+	^ aSide
+]
+
+{ #category : #accessing }
+FmxMBBehavior >> property: propertyName type: aTypeName defaultValue: aValue [ 
+	| aSide |
+	aSide := FmxMBTypedProperty new
+		builder: self builder;
+		name: propertyName;
+		propertyType: aTypeName asSymbol;
+		defaultValue: aValue;
 		yourself.
 
 	self properties add: aSide.

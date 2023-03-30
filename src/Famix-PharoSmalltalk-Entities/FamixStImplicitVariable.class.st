@@ -1,8 +1,8 @@
 Class {
 	#name : #FamixStImplicitVariable,
 	#superclass : #FamixStNamedEntity,
-	#traits : 'FamixTImplicitVariable',
-	#classTraits : 'FamixTImplicitVariable classTrait',
+	#traits : 'FamixTImplicitVariable + FamixTInvocationsReceiver',
+	#classTraits : 'FamixTImplicitVariable classTrait + FamixTInvocationsReceiver classTrait',
 	#category : #'Famix-PharoSmalltalk-Entities-Entities'
 }
 
@@ -12,7 +12,7 @@ FamixStImplicitVariable class >> annotation [
 	<FMClass: #ImplicitVariable super: #FamixStNamedEntity>
 	<package: #'Famix-PharoSmalltalk-Entities'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #testing }

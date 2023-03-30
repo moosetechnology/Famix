@@ -1,19 +1,12 @@
 "
-file :=  'ArgoUML-0.34.mse' asFileReference readStream.
+file := 'ArgoUML-0-34.mse' asFileReference readStream.
 
-dictionary := Dictionary newFrom: (
-	FamixJavaEntity withAllSubclasses collect: [ :c | 
-		cn := c name withoutPrefix: #FamixJava.
-		('FAMIX.', cn) -> ('FamixJava-Entities.', cn) ]).
-
-dictionary at: 'FAMIX.JavaSourceLanguage' put: 'FamixJava-Entities.SourceLanguage'.
-
-repo := MooseModel importFrom: file withMetamodel: FamixJavaGenerator metamodel translationDictionary: dictionary.
+repo := MooseModel importFrom: file withMetamodel: FamixJavaModel metamodel.
 
 model := MooseModel new.
-	model silentlyAddAll: repo elements.
-	model entityStorage forRuntime.
-model.
+model silentlyAddAll: repo elements.
+model entityStorage forRuntime.
+model
 "
 Class {
 	#name : #FamixJavaEntity,
@@ -27,7 +20,15 @@ FamixJavaEntity class >> annotation [
 	<FMClass: #Entity super: #MooseEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^self
+	<abstract>
+	^ self
+]
+
+{ #category : #testing }
+FamixJavaEntity class >> isAbstract [
+
+	<generated>
+	^ self == FamixJavaEntity
 ]
 
 { #category : #meta }
@@ -73,6 +74,20 @@ FamixJavaEntity >> isClass [
 ]
 
 { #category : #testing }
+FamixJavaEntity >> isEnumValue [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+FamixJavaEntity >> isException [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
 FamixJavaEntity >> isImplicitVariable [
 
 	<generated>
@@ -87,6 +102,13 @@ FamixJavaEntity >> isInheritance [
 ]
 
 { #category : #testing }
+FamixJavaEntity >> isInterface [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
 FamixJavaEntity >> isInvocation [
 
 	<generated>
@@ -94,14 +116,14 @@ FamixJavaEntity >> isInvocation [
 ]
 
 { #category : #testing }
-FamixJavaEntity >> isMethod [
+FamixJavaEntity >> isLocalVariable [
 
 	<generated>
 	^ false
 ]
 
 { #category : #testing }
-FamixJavaEntity >> isNamespace [
+FamixJavaEntity >> isMethod [
 
 	<generated>
 	^ false

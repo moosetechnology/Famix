@@ -3,8 +3,6 @@ Trait {
 	#instVars : [
 		'#name => FMProperty'
 	],
-	#traits : 'FamixTSourceEntity + TEntityMetaLevelDependency',
-	#classTraits : 'FamixTSourceEntity classTrait + TEntityMetaLevelDependency classTrait',
 	#category : #'Famix-Traits-Named'
 }
 
@@ -14,7 +12,7 @@ FamixTNamedEntity classSide >> annotation [
 	<FMClass: #TNamedEntity super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #'instance creation' }
@@ -30,6 +28,12 @@ FamixTNamedEntity classSide >> named: aString model: aMooseModel [
 		mooseModel: aMooseModel;
 		name: aString;
 		yourself
+]
+
+{ #category : #printing }
+FamixTNamedEntity >> displayStringOn: aStream [
+
+	self name ifNotNil: [ :n | aStream << n ]
 ]
 
 { #category : #testing }

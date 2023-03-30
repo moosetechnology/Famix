@@ -12,7 +12,7 @@ FamixTWithParameterizedTypeUsers classSide >> annotation [
 	<FMClass: #TWithParameterizedTypeUsers super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }

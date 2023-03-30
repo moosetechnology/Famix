@@ -1,18 +1,18 @@
 Class {
 	#name : #FamixStAnnotationTypeAttribute,
-	#superclass : #FamixStNamedEntity,
-	#traits : 'FamixTAnnotationTypeAttribute + FamixTTypedAnnotationInstanceAttribute',
-	#classTraits : 'FamixTAnnotationTypeAttribute classTrait + FamixTTypedAnnotationInstanceAttribute classTrait',
+	#superclass : #FamixStSourcedEntity,
+	#traits : 'FamixTAnnotationTypeAttribute + FamixTTypedAnnotationInstanceAttribute + TEntityMetaLevelDependency',
+	#classTraits : 'FamixTAnnotationTypeAttribute classTrait + FamixTTypedAnnotationInstanceAttribute classTrait + TEntityMetaLevelDependency classTrait',
 	#category : #'Famix-PharoSmalltalk-Entities-Entities'
 }
 
 { #category : #meta }
 FamixStAnnotationTypeAttribute class >> annotation [
 
-	<FMClass: #AnnotationTypeAttribute super: #FamixStNamedEntity>
+	<FMClass: #AnnotationTypeAttribute super: #FamixStSourcedEntity>
 	<package: #'Famix-PharoSmalltalk-Entities'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }

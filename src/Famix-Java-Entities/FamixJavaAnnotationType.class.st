@@ -1,8 +1,8 @@
 Class {
 	#name : #FamixJavaAnnotationType,
 	#superclass : #FamixJavaType,
-	#traits : 'FamixTAnnotationType + FamixTWithAttributes + FamixTWithInheritances',
-	#classTraits : 'FamixTAnnotationType classTrait + FamixTWithAttributes classTrait + FamixTWithInheritances classTrait',
+	#traits : 'FamixTAnnotationType + FamixTHasVisibility + FamixTImplementable + FamixTPackageable + FamixTWithAttributes + FamixTWithComments + FamixTWithInheritances',
+	#classTraits : 'FamixTAnnotationType classTrait + FamixTHasVisibility classTrait + FamixTImplementable classTrait + FamixTPackageable classTrait + FamixTWithAttributes classTrait + FamixTWithComments classTrait + FamixTWithInheritances classTrait',
 	#category : #'Famix-Java-Entities-Entities'
 }
 
@@ -12,7 +12,7 @@ FamixJavaAnnotationType class >> annotation [
 	<FMClass: #AnnotationType super: #FamixJavaType>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #'accessing-query' }

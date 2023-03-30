@@ -34,6 +34,11 @@ FmxMBProperty >> generateSetterIn: aClassOrTrait [
 	self subclassResponsibility
 ]
 
+{ #category : #printing }
+FmxMBProperty >> hasDefaultValue [
+	^ false
+]
+
 { #category : #initialization }
 FmxMBProperty >> initialize [
 	super initialize.

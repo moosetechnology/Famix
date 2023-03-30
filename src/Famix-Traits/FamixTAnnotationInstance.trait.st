@@ -8,8 +8,8 @@ And the following is an AnnotationInstance in Java:
 @Test(timeout = 500)
 
 Instance Variables:
-	annotatedEntity	<FAMIXEntity>
-	annotationType		<FAMIXAnnotationType>
+	annotatedEntity	<FamixTEntity>
+	annotationType		<FamixTAnnotationType>
 "
 Trait {
 	#name : #FamixTAnnotationInstance,
@@ -27,7 +27,7 @@ FamixTAnnotationInstance classSide >> annotation [
 	<FMClass: #TAnnotationInstance super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #groups }
@@ -43,7 +43,6 @@ FamixTAnnotationInstance >> annotatedEntity [
 
 	<generated>
 	<FMComment: 'The NamedEntity on which the annotation occurs.'>
-	<container>
 	^ annotatedEntity
 ]
 
@@ -54,9 +53,10 @@ FamixTAnnotationInstance >> annotatedEntity: anObject [
 	annotatedEntity := anObject
 ]
 
-{ #category : #navigation }
-FamixTAnnotationInstance >> annotatedEntityGroup [
-	<generated>
-	<navigation: 'AnnotatedEntity'>
-	^ MooseSpecializedGroup with: self annotatedEntity
+{ #category : #printing }
+FamixTAnnotationInstance >> displayStringOn: aStream [
+
+	self annotationType displayStringOn: aStream.
+	aStream << ' on '.
+	self annotatedEntity displayStringOn: aStream
 ]

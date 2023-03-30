@@ -2,6 +2,9 @@ Class {
 	#name : #MooseGroupStorage,
 	#superclass : #Collection,
 	#type : #variable,
+	#instVars : [
+		'species'
+	],
 	#category : #'Moose-Core'
 }
 
@@ -64,12 +67,15 @@ MooseGroupStorage >> basicIterator [
 ]
 
 { #category : #private }
-MooseGroupStorage >> becomeKind: elementStorageClass [ 
-	
+MooseGroupStorage >> becomeKind: elementStorageClass [
+
 	self class = elementStorageClass ifTrue: [ ^ self ].
-	[elementStorageClass includesBehavior: MooseGroupStorage] assert.
+
+	[ elementStorageClass includesBehavior: MooseGroupStorage ] assert.
+
 	self do: [ :each | 
 		each hasUniqueMooseNameInModel ifTrue: [ each privateClearMooseName ] ].
+
 	self become: (elementStorageClass withAll: self)
 ]
 
@@ -113,8 +119,16 @@ MooseGroupStorage >> includesID: mooseID [
 ]
 
 { #category : #initialization }
+MooseGroupStorage >> initialize [
+
+	super initialize.
+	species := OrderedCollection
+]
+
+{ #category : #initialization }
 MooseGroupStorage >> initialize: aSize [
-	self subclassResponsibility
+
+	species := OrderedCollection
 ]
 
 { #category : #iterators }
@@ -161,5 +175,15 @@ MooseGroupStorage >> size [
 { #category : #private }
 MooseGroupStorage >> species [ 
 	 
-	^OrderedCollection
+	^ species
+]
+
+{ #category : #accessing }
+MooseGroupStorage >> species: anObject [
+
+	"WARNING: Changing the species of the inner collection might have unattempted consequences.
+	DO NOT EXECUTE THIS METHOD EXCEPT IF YOU ARE REALLY SURE OF YOUR NEED
+	
+	For instance, `model species: Set` would make indexed access to collection element impossible"
+	species := anObject
 ]

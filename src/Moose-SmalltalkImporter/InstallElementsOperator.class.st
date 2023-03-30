@@ -36,21 +36,22 @@ InstallElementsOperator class >> with: elements runOn: aMooseModel [
 		run
 ]
 
-{ #category : #running }
-InstallElementsOperator >> basicRun [ 
-	model entityStorage forSetup. 
-	self container 
-		do: 
-			[:each |  
-			model add: each. 
-			self increment]. 
+{ #category : #private }
+InstallElementsOperator >> basicRun [
+
+	model entityStorage forSetup.
+
+	self container do: [ :each | 
+		model add: each.
+		self increment ].
+
 	model entityStorage forRuntime
 ]
 
 { #category : #accessing }
-InstallElementsOperator >> container [ 
-	 
-	^container
+InstallElementsOperator >> container [
+
+	^ container
 ]
 
 { #category : #accessing }
@@ -60,14 +61,14 @@ InstallElementsOperator >> container: anObject [
 ]
 
 { #category : #accessing }
-InstallElementsOperator >> description [ 
-	 
-	^'Installing <1p> entities in Moose model' 
-		expandMacrosWith: self container size
+InstallElementsOperator >> description [
+
+	^ 'Installing <1p> entities in Moose model' expandMacrosWith:
+		  self container size
 ]
 
 { #category : #accessing }
-InstallElementsOperator >> length [ 
-	 
-	^self container size
+InstallElementsOperator >> length [
+
+	^ self container size
 ]

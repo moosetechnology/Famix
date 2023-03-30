@@ -75,7 +75,7 @@ FamixMetricsTest >> setUp [
 ]
 
 { #category : #tests }
-FamixMetricsTest >> testAbstractnessFAMIXClassGroup [
+FamixMetricsTest >> testAbstractnessFamixClassGroup [
 	| class1 class2 class3 class4 class5 class6 class7 class8 class9 class10 class11 class12 class13 class14 class15 class16 f |
 	class1 := (p1m1 allClasses detect: [ :each | each name = #M1P1C1FullReferencerOutSide ]).
 	class2 := (p2m1 allClasses detect: [ :each | each name = #M1P2C2ReferencerOutSideRefereeInSide ]).
@@ -167,7 +167,7 @@ FamixMetricsTest >> testAbstractnessFAMIXClassGroup [
 ]
 
 { #category : #tests }
-FamixMetricsTest >> testAbstractnessFAMIXPackage [
+FamixMetricsTest >> testAbstractnessFamixPackage [
 	self assert: p1m1 abstractness equals: 0.0.
 	self assert: p2m1 abstractness equals: 0.0.
 	self assert: p1m2 abstractness equals: 0.0.
@@ -177,7 +177,7 @@ FamixMetricsTest >> testAbstractnessFAMIXPackage [
 ]
 
 { #category : #tests }
-FamixMetricsTest >> testAfferentCouplingFAMIXClassGroup [
+FamixMetricsTest >> testAfferentCouplingFamixClassGroup [
 	| class1 class2 class3 class4 class5 class6 class7 class8 class9 class10 class11 class12 class13 class14 class15 class16 f |
 	class1 := p1m1 allClasses detect: [ :each | each name = #M1P1C1FullReferencerOutSide ].
 	class2 := p2m1 allClasses detect: [ :each | each name = #M1P2C2ReferencerOutSideRefereeInSide ].
@@ -268,7 +268,7 @@ FamixMetricsTest >> testAfferentCouplingFAMIXClassGroup [
 ]
 
 { #category : #tests }
-FamixMetricsTest >> testAfferentCouplingFAMIXPackage [
+FamixMetricsTest >> testAfferentCouplingFamixPackage [
 	self assert: p1m1 afferentCoupling equals: 0.
 	self assert: p2m1 afferentCoupling equals: 1.
 	self assert: p1m2 afferentCoupling equals: 0.
@@ -278,7 +278,7 @@ FamixMetricsTest >> testAfferentCouplingFAMIXPackage [
 ]
 
 { #category : #tests }
-FamixMetricsTest >> testDistanceFAMIXClassGroup [
+FamixMetricsTest >> testDistanceFamixClassGroup [
 	| class1 class2 class3 class4 class5 class6 class7 class8 class9 class10 class11 class12 class13 class14 class15 class16 f |
 	class1 := p1m1 allClasses detect: [ :each | each name = #M1P1C1FullReferencerOutSide ].
 	class2 := p2m1 allClasses detect: [ :each | each name = #M1P2C2ReferencerOutSideRefereeInSide ].
@@ -370,7 +370,7 @@ FamixMetricsTest >> testDistanceFAMIXClassGroup [
 ]
 
 { #category : #tests }
-FamixMetricsTest >> testDistanceFAMIXPackage [
+FamixMetricsTest >> testDistanceFamixPackage [
 	self assert: p1m1 distance equals: 0.0.
 	self assert: p2m1 distance equals: -0.25.
 	self assert: p1m2 distance equals: 0.0.
@@ -380,7 +380,7 @@ FamixMetricsTest >> testDistanceFAMIXPackage [
 ]
 
 { #category : #tests }
-FamixMetricsTest >> testEfferentCouplingFAMIXClassGroup [
+FamixMetricsTest >> testEfferentCouplingFamixClassGroup [
 	| class1 class2 class3 class4 class5 class6 class7 class8 class9 class10 class11 class12 class13 class14 class15 class16 f |
 	class1 := p1m1 allClasses detect: [ :each | each name = #M1P1C1FullReferencerOutSide ].
 	class2 := p2m1 allClasses detect: [ :each | each name = #M1P2C2ReferencerOutSideRefereeInSide ].
@@ -486,7 +486,7 @@ FamixMetricsTest >> testEfferentCouplingFAMIXClassGroup [
 ]
 
 { #category : #tests }
-FamixMetricsTest >> testEfferentCouplingFAMIXPackage [
+FamixMetricsTest >> testEfferentCouplingFamixPackage [
 	self assert: p1m1 efferentCoupling equals: 4.	"Object M2P6C13 M2P5C11 M1 P2C3"
 	self assert: p2m1 efferentCoupling equals: 3.	"Object M3P7C14 M2P5C11"
 	self assert: p1m2 efferentCoupling equals: 7.	"Object A2 B2  A3 B3 C3 A4"
@@ -496,7 +496,7 @@ FamixMetricsTest >> testEfferentCouplingFAMIXPackage [
 ]
 
 { #category : #tests }
-FamixMetricsTest >> testInstabilityFAMIXClassGroup [
+FamixMetricsTest >> testInstabilityFamixClassGroup [
 	| class1 class2 class3 class4 class5 class6 class7 class8 class9 class10 class11 class12 class13 class14 class15 class16 f |
 	class1 := p1m1 allClasses detect: [ :each | each name = #M1P1C1FullReferencerOutSide ].
 	class2 := p2m1 allClasses detect: [ :each | each name = #M1P2C2ReferencerOutSideRefereeInSide ].
@@ -587,7 +587,7 @@ FamixMetricsTest >> testInstabilityFAMIXClassGroup [
 ]
 
 { #category : #tests }
-FamixMetricsTest >> testInstabilityFAMIXPackage [
+FamixMetricsTest >> testInstabilityFamixPackage [
 	self assert: p1m1 instability equals: 1.0.
 	self assert: p2m1 instability equals: 0.75.
 	self assert: p1m2 instability equals: 1.0.
@@ -627,7 +627,7 @@ FamixMetricsTest >> testLCOM3 [
 ]
 
 { #category : #tests }
-FamixMetricsTest >> testMartinCohesionFAMIXPackage [
+FamixMetricsTest >> testMartinCohesionFamixPackage [
 self skip.
 	self flag: 'should be rethink with FamixNG'.
 	self assert: p1m1 martinCohesion equals: 1.0.	"i.e. (0+1)/1"

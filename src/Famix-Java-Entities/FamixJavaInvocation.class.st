@@ -1,8 +1,8 @@
 Class {
 	#name : #FamixJavaInvocation,
 	#superclass : #FamixJavaEntity,
-	#traits : 'FamixTHasSignature + FamixTInvocation',
-	#classTraits : 'FamixTHasSignature classTrait + FamixTInvocation classTrait',
+	#traits : 'FamixTInvocation',
+	#classTraits : 'FamixTInvocation classTrait',
 	#category : #'Famix-Java-Entities-Entities'
 }
 
@@ -12,33 +12,7 @@ FamixJavaInvocation class >> annotation [
 	<FMClass: #Invocation super: #FamixJavaEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^self
-]
-
-{ #category : #'instance creation' }
-FamixJavaInvocation >> getReceivingFAMIXClass [
-	| tmpReceiver |
-	"return the FAMIXClass of the receiver. If the receiver is a FAMIXClass, this one is returned. If it is self or super, the corresponding FAMIXClass is returned. The receiver may not be nil"
-	tmpReceiver := self receiver.
-
-	tmpReceiver isImplicitVariable
-		ifTrue: [ | belongsTo |
-			belongsTo := tmpReceiver belongsTo parentType.
-			tmpReceiver isSelf ifTrue: [ ^ belongsTo ].
-			tmpReceiver isSuper
-				ifTrue: [ ^ belongsTo superclass ifNil: [ belongsTo ] ] ]
-		ifFalse: [ ^ tmpReceiver ]
-]
-
-{ #category : #printing }
-FamixJavaInvocation >> gtDisplayOn: aStream [
-	self sender ifNotNil: [ self source gtDisplayOn: aStream ].
-	aStream nextPutAll: ' -> '.
-	self receiver ifNotNil: [ aStream nextPutAll: self receiver name ].
-	aStream nextPut: $#.
-	aStream nextPutAll: self signature.
-	aStream nextPutAll: ' -> '.
-	self candidates size = 1 ifTrue: [ self anyCandidate gtDisplayOn: aStream ]
+	^ self
 ]
 
 { #category : #initialization }

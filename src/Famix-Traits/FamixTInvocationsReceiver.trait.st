@@ -12,7 +12,7 @@ FamixTInvocationsReceiver classSide >> annotation [
 	<FMClass: #TInvocationsReceiver super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #adding }

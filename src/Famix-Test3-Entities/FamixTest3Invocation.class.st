@@ -12,5 +12,5 @@ FamixTest3Invocation class >> annotation [
 	<FMClass: #Invocation super: #FamixTest3Entity>
 	<package: #'Famix-Test3-Entities'>
 	<generated>
-	^self
+	^ self
 ]

@@ -10,7 +10,7 @@ FamixTestComposedCustomEntity3 class >> annotation [
 	<FMClass: #CustomEntity3 super: #FamixTestComposedEntity>
 	<package: #'Famix-TestComposedMetamodel-Entities'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }

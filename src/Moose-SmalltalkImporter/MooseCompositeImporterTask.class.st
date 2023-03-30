@@ -39,7 +39,7 @@ MooseCompositeImporterTask >> basicRun [
 	importerTask addAll: self allClasses.
 	importerTask addAllExtensions: self allClassExtensions.
 	importer := importerTask runSelector: runSelector.
-	"InstallElementsOperator populates a Moose model with (unary) elements"
+	"InstallElementsOperator populates a Moose model with (unary) elements" 
 	(InstallElementsOperator with: importer on: self model) runSelector: runSelector.
 	"CandidateListOperator populates a Moose model with (binary) element relations like: methodA invokes methodB"
 	candidateOperator ifTrue: [ (self candidateClass runOn: self model importer: importer) runSelector: runSelector ].

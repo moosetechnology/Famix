@@ -128,16 +128,6 @@ MooseModelTest >> testIntersectionWithRealCollection [
 ]
 
 { #category : #tests }
-MooseModelTest >> testMenuCommandOn [
-	| builder |
-	builder := PragmaMenuBuilder new.
-	self assert: builder itemList isNil.
-	MooseModel menuCommandOn: builder.
-	self assert: builder itemList isCollection.
-	self denyEmpty: builder itemList
-]
-
-{ #category : #tests }
 MooseModelTest >> testPrintOn [
 	self assert: group printString equals: 'a MooseModel #noname(0)'.
 	group name: 'hello'.

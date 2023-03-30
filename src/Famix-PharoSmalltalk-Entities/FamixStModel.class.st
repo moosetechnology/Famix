@@ -16,3 +16,16 @@ FamixStModel class >> annotation [
 	<package: #'Famix-PharoSmalltalk-Entities'>
 	<generated>
 ]
+
+{ #category : #testing }
+FamixStModel class >> canBeImportedFromFile [
+	<generated>
+	^true
+]
+
+{ #category : #accessing }
+FamixStModel class >> importingContextClass [
+
+	<generated>
+	^ FamixStImportingContext
+]

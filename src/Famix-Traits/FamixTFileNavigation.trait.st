@@ -17,7 +17,7 @@ FamixTFileNavigation classSide >> annotation [
 	<FMClass: #TFileNavigation super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #'instance creation' }
@@ -149,7 +149,7 @@ FamixTFileNavigation >> sourceText [
 		binaryReadStreamDo: [ :in | 
 			String
 				streamContents: [ :s | 
-					[ FAMIXFileAnchorReader readStream: ((ZnCharacterReadStream on: (ZnBufferedReadStream on: in) encoding: self encoding)) for: self into: s ]
+					[ FamixFileAnchorReader readStream: ((ZnCharacterReadStream on: (ZnBufferedReadStream on: in) encoding: self encoding)) for: self into: s ]
 						on: MessageNotUnderstood
 						do: [ self endLine: nil.
 							s ] ] ]

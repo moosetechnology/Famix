@@ -1,5 +1,5 @@
 "
-FAMIXAttribute represents a field of a class. It is an attribute of the parent type.
+FamixTAttribute represents a field of a class. It is an attribute of the parent type.
 
 "
 Trait {
@@ -7,8 +7,8 @@ Trait {
 	#instVars : [
 		'#parentType => FMOne type: #FamixTWithAttributes opposite: #attributes'
 	],
-	#traits : 'FamixTCanBeClassSide + FamixTStructuralEntity',
-	#classTraits : 'FamixTCanBeClassSide classTrait + FamixTStructuralEntity classTrait',
+	#traits : 'FamixTStructuralEntity',
+	#classTraits : 'FamixTStructuralEntity classTrait',
 	#category : #'Famix-Traits-Attribute'
 }
 
@@ -18,7 +18,7 @@ FamixTAttribute classSide >> annotation [
 	<FMClass: #TAttribute super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #metrics }
@@ -29,7 +29,7 @@ FamixTAttribute >> hierarchyNestingLevel [
 		
 	^self
 		lookUpPropertyNamed: #hierarchyNestingLevel
-		computedAs: [self belongsTo hierarchyNestingLevel]
+		computedAs: [self parentType hierarchyNestingLevel]
 ]
 
 { #category : #metrics }
@@ -42,13 +42,6 @@ FamixTAttribute >> isAttribute [
 
 	<generated>
 	^ true
-]
-
-{ #category : #accessing }
-FamixTAttribute >> isClassSide [
-	<FMProperty: #isClassSide type: #Boolean>
-	<FMComment: 'True if class-side attribute'>
-	^ isClassSide ifNil: [ false ]
 ]
 
 { #category : #printing }

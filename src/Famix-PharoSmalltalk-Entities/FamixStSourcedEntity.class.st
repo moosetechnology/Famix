@@ -1,8 +1,8 @@
 Class {
 	#name : #FamixStSourcedEntity,
 	#superclass : #FamixStEntity,
-	#traits : 'FamixTSourceEntity + FamixTWithComments',
-	#classTraits : 'FamixTSourceEntity classTrait + FamixTWithComments classTrait',
+	#traits : 'FamixTSourceEntity',
+	#classTraits : 'FamixTSourceEntity classTrait',
 	#category : #'Famix-PharoSmalltalk-Entities-Entities'
 }
 
@@ -12,5 +12,13 @@ FamixStSourcedEntity class >> annotation [
 	<FMClass: #SourcedEntity super: #FamixStEntity>
 	<package: #'Famix-PharoSmalltalk-Entities'>
 	<generated>
-	^self
+	<abstract>
+	^ self
+]
+
+{ #category : #testing }
+FamixStSourcedEntity class >> isAbstract [
+
+	<generated>
+	^ self == FamixStSourcedEntity
 ]

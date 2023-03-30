@@ -1,8 +1,8 @@
 Class {
 	#name : #FamixStAttribute,
 	#superclass : #FamixStNamedEntity,
-	#traits : 'FamixTAttribute + FamixTWithClassScope',
-	#classTraits : 'FamixTAttribute classTrait + FamixTWithClassScope classTrait',
+	#traits : 'FamixTAttribute + FamixTCanBeClassSide + FamixTInvocationsReceiver',
+	#classTraits : 'FamixTAttribute classTrait + FamixTCanBeClassSide classTrait + FamixTInvocationsReceiver classTrait',
 	#category : #'Famix-PharoSmalltalk-Entities-Entities'
 }
 
@@ -12,7 +12,7 @@ FamixStAttribute class >> annotation [
 	<FMClass: #Attribute super: #FamixStNamedEntity>
 	<package: #'Famix-PharoSmalltalk-Entities'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #'Famix-Implementation' }

@@ -13,7 +13,15 @@ FamixTest4Person class >> annotation [
 	<FMClass: #Person super: #FamixTest4Entity>
 	<package: #'Famix-Test4-Entities'>
 	<generated>
-	^self
+	<abstract>
+	^ self
+]
+
+{ #category : #testing }
+FamixTest4Person class >> isAbstract [
+
+	<generated>
+	^ self == FamixTest4Person
 ]
 
 { #category : #adding }

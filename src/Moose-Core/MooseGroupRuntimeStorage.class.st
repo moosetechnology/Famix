@@ -66,9 +66,11 @@ MooseGroupRuntimeStorage >> elements [
 
 { #category : #initialization }
 MooseGroupRuntimeStorage >> initialize: capacity [
+
+	super initialize: capacity.
 	byType := IdentityDictionary new: 24.
 	byName := IdentityHashTable new: capacity.
-	elements := OrderedCollection new: capacity
+	elements := self species new: capacity
 ]
 
 { #category : #copying }
@@ -122,6 +124,17 @@ MooseGroupRuntimeStorage >> selectAllWithType: aSmalltalkType [
 { #category : #accessing }
 MooseGroupRuntimeStorage >> size [ 
 	^ elements size
+]
+
+{ #category : #accessing }
+MooseGroupRuntimeStorage >> species: anObject [
+
+	"WARNING: Changing the species of the inner collection might have unattempted consequences.
+	DO NOT EXECUTE THIS METHOD EXCEPT IF YOU ARE REALLY SURE OF YOUR NEED
+	
+	For instance, `model species: Set` would make indexed access to collection element impossible"
+	super species: anObject.
+	elements := self species withAll: elements
 ]
 
 { #category : #private }

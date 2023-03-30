@@ -1,8 +1,8 @@
 Class {
 	#name : #FamixStClass,
 	#superclass : #FamixStNamedEntity,
-	#traits : 'FamixTCanBeAbstract + FamixTClass + FamixTWithExceptions + FamixTWithTypes',
-	#classTraits : 'FamixTCanBeAbstract classTrait + FamixTClass classTrait + FamixTWithExceptions classTrait + FamixTWithTypes classTrait',
+	#traits : 'FamixTCanBeAbstract + FamixTClass + FamixTClassMetrics + FamixTWithTypes',
+	#classTraits : 'FamixTCanBeAbstract classTrait + FamixTClass classTrait + FamixTClassMetrics classTrait + FamixTWithTypes classTrait',
 	#category : #'Famix-PharoSmalltalk-Entities-Entities'
 }
 
@@ -12,7 +12,7 @@ FamixStClass class >> annotation [
 	<FMClass: #Class super: #FamixStNamedEntity>
 	<package: #'Famix-PharoSmalltalk-Entities'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #'Famix-Extensions-metrics-support' }
@@ -127,6 +127,32 @@ FamixStClass >> methodsWithoutSutbsAndConstructors [
 	^ (self methods select: [ :each | each isStub not and: [ each isConstructor not ] ]) asSet
 ]
 
+{ #category : #accessing }
+FamixStClass >> numberOfComments [
+	"Overrides to include method comments in the numberOfComments of the class"
+	^ self
+		lookUpPropertyNamed: #numberOfComments
+		computedAs: [ self methods asArray
+			inject: self comments size into: [ :sum :child | child numberOfComments + sum ] ]
+
+]
+
+{ #category : #metrics }
+FamixStClass >> numberOfMessageSends [
+	<FMProperty: #numberOfMessageSends type: #Number>
+	<derived>
+	<FMComment: 'The number of message sends from a class'>
+	
+	^self
+		lookUpPropertyNamed: #numberOfMessageSends
+		computedAs: [self methodsGroup sumNumbers: #numberOfMessageSends]
+]
+
+{ #category : #'as yet unclassified' }
+FamixStClass >> numberOfMessageSends: aNumber [
+	self cacheAt: #numberOfMessageSends put: aNumber
+]
+
 { #category : #metrics }
 FamixStClass >> numberOfMethodProtocols [
 	<FMProperty: #numberOfMethodProtocols type: #Number>
@@ -149,10 +175,11 @@ FamixStClass >> smalltalkClass [
 
 { #category : #'Famix-Implementation' }
 FamixStClass >> sourceText [
-	self flag: 'This code should be delegated to the FAMIXPharoAnchor'.
+
+	self flag: 'This code should be delegated to the anchor'.
 	^ self instanceSide smalltalkClass
-		ifNotNil: [ :aClass | TonelWriter sourceCodeOf: aClass ]
-		ifNil: [ super sourceText ]
+		  ifNotNil: [ :aClass | TonelWriter sourceCodeOf: aClass ]
+		  ifNil: [ super sourceText ]
 ]
 
 { #category : #testing }

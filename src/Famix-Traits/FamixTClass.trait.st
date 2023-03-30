@@ -1,14 +1,14 @@
 "
-FAMIXClass represents an entity which can build new instances. A FAMIXClass is a FAMIXType, therefore it is involved in super/sub types relationships (depending on the language) and it holds attributes, methods.
+FamixTClass represents an entity which can build new instances. A FamixTClass is a FamixTType, therefore it is involved in super/sub types relationships (depending on the language) and it holds attributes, methods.
 
-FAMIX does not model explicitly interfaces, but a FAMIXClass can represent a Java interface by setting the isInterface property.
+FamixT does not model explicitly interfaces, but a FamixTClass can represent a Java interface by setting the isInterface property.
 
 A class is typically scoped in a namespace. To model nested or anonymous classes, extractors can set the container of classes to classes or methods, respectively.
 "
 Trait {
 	#name : #FamixTClass,
-	#traits : 'FamixTInvocationsReceiver + FamixTPackageable + (FamixTType - {#queryStaticIncomingAssociations. #queryStaticOutgoingAssociations}) + FamixTWithAttributes + FamixTWithComments + FamixTWithInheritances + FamixTWithMethods + TOODependencyQueries',
-	#classTraits : 'FamixTInvocationsReceiver classTrait + FamixTPackageable classTrait + FamixTType classTrait + FamixTWithAttributes classTrait + FamixTWithComments classTrait + FamixTWithInheritances classTrait + FamixTWithMethods classTrait + TOODependencyQueries classTrait',
+	#traits : 'FamixTInvocationsReceiver + FamixTPackageable + (FamixTType - {#queryStaticIncomingAssociations. #queryStaticOutgoingAssociations}) + FamixTWithAttributes + FamixTWithComments + FamixTWithInheritances + FamixTWithMethods',
+	#classTraits : 'FamixTInvocationsReceiver classTrait + FamixTPackageable classTrait + FamixTType classTrait + FamixTWithAttributes classTrait + FamixTWithComments classTrait + FamixTWithInheritances classTrait + FamixTWithMethods classTrait',
 	#category : #'Famix-Traits-Class'
 }
 
@@ -18,7 +18,7 @@ FamixTClass classSide >> annotation [
 	<FMClass: #TClass super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #groups }
@@ -30,9 +30,25 @@ FamixTClass classSide >> annotationFamixClassGroup [
 
 { #category : #metrics }
 FamixTClass >> addedMethods [
-	| inheritedMethodNames |
-	inheritedMethodNames := self inheritedMethods collect: #signature.
-	^ self methods reject: [ :each | inheritedMethodNames includes: each signature ]
+	| allHierarchyMethodSignatures |
+	allHierarchyMethodSignatures := self allHierarchyMethods collect: #signature.
+	^ self methods reject: [ :each | allHierarchyMethodSignatures includes: each signature ]
+]
+
+{ #category : #enumerating }
+FamixTClass >> allHierarchyMethods [
+
+	| allHierarchyMethods |
+	allHierarchyMethods := OrderedCollection new.
+	self allSuperclassesDo: [ :each | 
+	allHierarchyMethods addAll: each methods ] .
+	^ allHierarchyMethods
+]
+
+{ #category : #enumerating }
+FamixTClass >> allMethods [
+
+	^ self methods , self inheritedMethods 
 ]
 
 { #category : #enumerating }
@@ -41,7 +57,9 @@ FamixTClass >> inheritedAttributes [
 	| inheritedAttrs |
 	inheritedAttrs := OrderedCollection new.
 	self allSuperclassesDo: [ :each | 
-		inheritedAttrs addAll: each attributes ].
+		inheritedAttrs addAll: (each isClass
+				 ifTrue: [ each ]
+				 ifFalse: [ each parameterizableClass ]) attributes ].
 	^ inheritedAttrs
 ]
 
@@ -50,8 +68,13 @@ FamixTClass >> inheritedMethods [
 
 	| inheritedMethods |
 	inheritedMethods := OrderedCollection new.
+
 	self allSuperclassesDo: [ :each | 
-	inheritedMethods addAll: each methods ] .
+		| workingMethods |
+		workingMethods := self methods , inheritedMethods.
+		each methods do: [ :m | 
+			(workingMethods allSatisfy: [ :m2 | m signature ~= m2 signature ]) 
+				ifTrue: [ inheritedMethods add: m ] ] ].
 	^ inheritedMethods
 ]
 
@@ -87,6 +110,12 @@ FamixTClass >> isClass [
 ]
 
 { #category : #testing }
+FamixTClass >> isObjectClass [
+
+	^ self name = 'Object'
+]
+
+{ #category : #testing }
 FamixTClass >> isTestCase [
 	<FMProperty: #isTestCase type: #Boolean>
 	<FMComment: 'True if the method is considered as a test'>
@@ -99,86 +128,10 @@ FamixTClass >> isTestCase: aBoolean [
 	^ self attributeAt: #isTestCase put: true
 ]
 
-{ #category : #metrics }
-FamixTClass >> numberOfAttributesInherited [
-	<FMProperty: #numberOfAttributesInherited type: #Number>
-	<derived>
-	<FMComment: 'The number of attributes in a class inherited from super classes'>	
-	
-	^self
-		lookUpPropertyNamed: #numberOfAttributesInherited
-		computedAs: [self inheritedAttributes size]
-]
+{ #category : #enumerating }
+FamixTClass >> overriddenMethods [
 
-{ #category : #metrics }
-FamixTClass >> numberOfAttributesInherited: aNumber [
-	self cacheAt: #numberOfAttributesInherited put: aNumber
-]
-
-{ #category : #metrics }
-FamixTClass >> numberOfMethodsAdded [
-	<FMProperty: #numberOfMethodsAdded type: #Number>
-	<derived>
-	<FMComment: 'The number of methods in a class added with respect to super classes'>	
-	
-	^self
-		lookUpPropertyNamed: #numberOfMethodsAdded
-		computedAs: [self addedMethods size]
-]
-
-{ #category : #metrics }
-FamixTClass >> numberOfMethodsAdded: aNumber [
-	self cacheAt: #numberOfMethodsAdded put: aNumber
-]
-
-{ #category : #metrics }
-FamixTClass >> numberOfMethodsInHierarchy [
-	<FMProperty: #numberOfMethodsInHierarchy type: #Number>
-	<derived>
-	<FMComment: 'The number of methods of a class included the inherited ones'>	
-	
-	| totNom |
-	totNom := self methods size.
-	self superclassHierarchyGroup
-		do: [:aClass | totNom := totNom + aClass methods size].
-	^totNom
-]
-
-{ #category : #metrics }
-FamixTClass >> numberOfMethodsInHierarchy: aNumber [
-	self cacheAt: #numberOfMethodsInHierarchy put: aNumber
-]
-
-{ #category : #metrics }
-FamixTClass >> numberOfMethodsInherited [
-	<FMProperty: #numberOfMethodsInherited type: #Number>
-	<derived>
-	<FMComment: 'The number of methods in a class inherited from super classes'>	
-
-	^self
-		lookUpPropertyNamed: #numberOfMethodsInherited
-		computedAs: [self inheritedMethods size]
-]
-
-{ #category : #metrics }
-FamixTClass >> numberOfMethodsInherited: aNumber [
-	self cacheAt: #numberOfMethodsInherited put: aNumber
-]
-
-{ #category : #metrics }
-FamixTClass >> numberOfMethodsOverriden [
-	<FMProperty: #numberOfMethodsOverriden type: #Number>
-	<derived>
-	<FMComment: 'The number of methods in a class overriden with respect to super classes'>
-			
-	^self
-		lookUpPropertyNamed: #numberOfMethodsOverriden
-		computedAs: [self numberOfMethods - self numberOfMethodsAdded]
-]
-
-{ #category : #metrics }
-FamixTClass >> numberOfMethodsOverriden: aNumber [
-	self cacheAt: #numberOfMethodsOverriden put: aNumber
+	^ self methods select: [ :m | self allHierarchyMethods anySatisfy: [ :superMethod | superMethod signature = m signature ] ].
 ]
 
 { #category : #metrics }

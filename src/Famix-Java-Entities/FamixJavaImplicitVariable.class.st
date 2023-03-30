@@ -1,8 +1,8 @@
 Class {
 	#name : #FamixJavaImplicitVariable,
 	#superclass : #FamixJavaNamedEntity,
-	#traits : 'FamixTImplicitVariable',
-	#classTraits : 'FamixTImplicitVariable classTrait',
+	#traits : 'FamixTImplicitVariable + FamixTInvocationsReceiver',
+	#classTraits : 'FamixTImplicitVariable classTrait + FamixTInvocationsReceiver classTrait',
 	#category : #'Famix-Java-Entities-Entities'
 }
 
@@ -12,7 +12,7 @@ FamixJavaImplicitVariable class >> annotation [
 	<FMClass: #ImplicitVariable super: #FamixJavaNamedEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #printing }

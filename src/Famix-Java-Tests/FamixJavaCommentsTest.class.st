@@ -6,26 +6,24 @@ Class {
 
 { #category : #tests }
 FamixJavaCommentsTest >> testClassWithComment [
+
 	| javaClass |
 	javaClass := FamixJavaClass new.
-	FamixJavaComment new container: javaClass.
+	FamixJavaComment new commentedEntity: javaClass.
 	self assert: javaClass numberOfComments equals: 1
 ]
 
 { #category : #tests }
 FamixJavaCommentsTest >> testClassWithCommentAndMethodsWithComments [
+
 	| javaClass |
 	javaClass := FamixJavaClass new.
-	FamixJavaComment new container: javaClass.
-	FamixJavaComment new
-		container:
-			(FamixJavaMethod new
-				parentType: javaClass;
-				yourself).
-	FamixJavaComment new
-		container:
-			(FamixJavaMethod new
-				parentType: javaClass;
-				yourself).
-	self assert: javaClass numberOfComments equals: 3	"one in the class, one on each of the 2 methods"
+	FamixJavaComment new commentedEntity: javaClass.
+	FamixJavaComment new commentedEntity: (FamixJavaMethod new
+			 parentType: javaClass;
+			 yourself).
+	FamixJavaComment new commentedEntity: (FamixJavaMethod new
+			 parentType: javaClass;
+			 yourself).
+	self assert: javaClass numberOfComments equals: 3 "one in the class, one on each of the 2 methods"
 ]

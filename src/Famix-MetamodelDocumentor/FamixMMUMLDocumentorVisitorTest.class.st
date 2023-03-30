@@ -5,6 +5,17 @@ Class {
 }
 
 { #category : #tests }
+FamixMMUMLDocumentorVisitorTest >> testTypeOfExternal [
+	| contents |
+	contents := FamixMMUMLDocumentor new
+		beWithStub;
+ 		model: FDModel ;
+ 		generatePlantUMLModel. 
+		
+	self assert: [ contents includesSubstring: 'class Model <<(C,LightYellow)External>>' ].
+]
+
+{ #category : #tests }
 FamixMMUMLDocumentorVisitorTest >> testVisitClassNoAttributes [
 
 	documentor visitClass: (self famixClassFor: FamixTest4Book).
@@ -12,7 +23,7 @@ FamixMMUMLDocumentorVisitorTest >> testVisitClassNoAttributes [
 	self
 		assert: stream contents
 		equals:
-'class Book << (C,white) >> {
+'class Book << (C,white) >> #FFFFFF {
 }
 '
 ]
@@ -25,7 +36,7 @@ FamixMMUMLDocumentorVisitorTest >> testVisitClassWithAttributes [
 	self
 		assert: stream contents
 		equals:
-'class Entity << (C,white) >> {
+'class Entity << (C,white) >> #FFFFFF {
   String name
 }
 '
@@ -151,4 +162,43 @@ FamixMMUMLDocumentorVisitorTest >> testVisitRelationToExternalClass [
 		equals:
 'Teacher " *teachers" -- " *students" Student
 '
+]
+
+{ #category : #tests }
+FamixMMUMLDocumentorVisitorTest >> testVisitTraitUsed [
+	| contents |
+	contents := FamixMMUMLDocumentor new
+ 		model: FDModel ;
+ 		generatePlantUMLModel. 
+		
+	self assert: [ contents includesSubstring: 'Trait1 <|.. Trait2' ].
+	self assert: [ contents includesSubstring: 'Trait2 <|.. Trait3' ].
+	self assert: [ contents includesSubstring: 'Trait2 <|.. Trait4' ].
+	self assert: [ (contents includesSubstring: 'Trait1 <|.. Trait4')not ].
+	self assert: [ (contents includesSubstring: 'Trait1 <|.. Trait3')not ].
+]
+
+{ #category : #tests }
+FamixMMUMLDocumentorVisitorTest >> testVisitWithoutClasses [
+	| contents |
+	contents := FamixMMUMLDocumentor new
+ 		model: FDModel ;
+ 		generatePlantUMLModelWithout: { }. 
+	
+	contents := FamixMMUMLDocumentor new
+ 		model: FDModel ;
+ 		generatePlantUMLModelWithout: { FDTrait1 . FDTrait2 }.
+		
+	self assert: [ contents includesSubstring: 'hide Trait1' ].
+	self assert: [ (contents allButFirst: 450) includesSubstring: 'hide Trait2' ].
+]
+
+{ #category : #tests }
+FamixMMUMLDocumentorVisitorTest >> testVisitWithoutClassesWithEmptyCollection [
+	| contents |
+	contents := FamixMMUMLDocumentor new
+ 		model: FDModel ;
+ 		generatePlantUMLModelWithout: { }. 
+	
+	self assert: [ ((contents allButFirst: 30) includesSubstring: 'hide')not ].
 ]

@@ -1,10 +1,10 @@
 "
-FAMIXStructuralEntity is the abstract superclass for basic data structure in the source code. A structural entity has a declaredType that points to the type of the variable.
+FamixTStructuralEntity is the abstract superclass for basic data structure in the source code. A structural entity has a declaredType that points to the type of the variable.
 "
 Trait {
 	#name : #FamixTStructuralEntity,
-	#traits : 'FamixTNamedEntity + FamixTAccessible + FamixTInvocationsReceiver + FamixTTypedEntity',
-	#classTraits : 'FamixTNamedEntity classTrait + FamixTAccessible classTrait + FamixTInvocationsReceiver classTrait + FamixTTypedEntity classTrait',
+	#traits : 'FamixTAccessible + FamixTNamedEntity + FamixTSourceEntity + FamixTTypedEntity + TEntityMetaLevelDependency',
+	#classTraits : 'FamixTAccessible classTrait + FamixTNamedEntity classTrait + FamixTSourceEntity classTrait + FamixTTypedEntity classTrait + TEntityMetaLevelDependency classTrait',
 	#category : #'Famix-Traits-Traits'
 }
 
@@ -14,7 +14,7 @@ FamixTStructuralEntity classSide >> annotation [
 	<FMClass: #TStructuralEntity super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #testing }

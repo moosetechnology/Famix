@@ -1,8 +1,8 @@
 Class {
 	#name : #FAMIXMethod,
 	#superclass : #FAMIXBehaviouralEntity,
-	#traits : 'FamixTMethod + FamixTWithCaughtExceptions + FamixTWithDeclaredExceptions + FamixTWithThrownExceptions',
-	#classTraits : 'FamixTMethod classTrait + FamixTWithCaughtExceptions classTrait + FamixTWithDeclaredExceptions classTrait + FamixTWithThrownExceptions classTrait',
+	#traits : 'FAMIXTCanBeClassSide + FAMIXTCanBeSynchronized + FamixTHasKind + FamixTMethod + FamixTWithCaughtExceptions + FamixTWithDeclaredExceptions + FamixTWithThrownExceptions',
+	#classTraits : 'FAMIXTCanBeClassSide classTrait + FAMIXTCanBeSynchronized classTrait + FamixTHasKind classTrait + FamixTMethod classTrait + FamixTWithCaughtExceptions classTrait + FamixTWithDeclaredExceptions classTrait + FamixTWithThrownExceptions classTrait',
 	#classVars : [
 		'#ShouldSearchForSmalltalkCodeInImage'
 	],
@@ -77,7 +77,8 @@ FAMIXMethod >> implementMethod [
 { #category : #initialization }
 FAMIXMethod >> initialize [
 	super initialize.
-	isClassSide := false
+	isClassSide := false.
+	isSynchronized := false
 ]
 
 { #category : #'Famix-Java' }
@@ -196,17 +197,6 @@ FAMIXMethod >> isSurelyInvokedBy: aFAMIXMethod [
 							invocationRVar := invo getReceivingFAMIXClass.
 							(invocationRVar isNotNil and: [ (invocationRVar lookUp: self signature) = self ]) ifTrue: [ ^ true ] ] ] ].
 	^ false
-]
-
-{ #category : #'Famix-Extensions' }
-FAMIXMethod >> numberOfAnnotationInstances [
-	<FMProperty: #numberOfAnnotationInstances type: #Number>
-	<derived>
-	<FMComment: 'The number of annotation instances defined in the method'>
-
-	^self
-		lookUpPropertyNamed: #numberOfAnnotationInstances
-		computedAs: [self annotationInstances size]
 ]
 
 { #category : #'Famix-Extensions' }

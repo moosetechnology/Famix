@@ -91,6 +91,28 @@ FamixModelExtractionTest >> testAllFormalParameters [
 ]
 
 { #category : #tests }
+FamixModelExtractionTest >> testAllHierarchyMethods [ 
+	| allHierarchyMethods |
+	allHierarchyMethods := msePrinterClass allHierarchyMethods.
+	self assert: allHierarchyMethods size equals: 15.
+	self assert: (allHierarchyMethods includes: outputServer).
+	self assert: (allHierarchyMethods includes: acceptServer).
+	self assert: (allHierarchyMethods includes: acceptNode).
+	self assert: (allHierarchyMethods includes: canOutputServer).
+	self assert: (allHierarchyMethods includes: canOutputNode).	"overridden in OutputServer"
+	self assert: (allHierarchyMethods includes: nameNode).
+	self assert: (allHierarchyMethods includes: nameNodeColon).
+	self assert: (allHierarchyMethods includes: nextNodeMethod).
+	self assert: (allHierarchyMethods includes: nextNodeColon).
+	self assert: (allHierarchyMethods includes: initializeNode).
+	self assert: (allHierarchyMethods includes: printOnNode).
+	self assert: (allHierarchyMethods includes: sendNode).
+	self assert: (allHierarchyMethods includes: canOriginateNode).
+	self assert: (allHierarchyMethods includes: methodWithEmptyBodyNode).
+	self deny: (allHierarchyMethods includes: newNodeClass)	"class method of Node"
+]
+
+{ #category : #tests }
 FamixModelExtractionTest >> testAllLocalVariables [
 	self
 		assert: self model allLocalVariables size
@@ -144,12 +166,9 @@ FamixModelExtractionTest >> testInheritedAttributes [
 FamixModelExtractionTest >> testInheritedMethods [
 	| inheritedMethods |
 	inheritedMethods := msePrinterClass inheritedMethods.
-	self assert: inheritedMethods size equals: 15.
-	self assert: (inheritedMethods includes: outputServer).
+	self assert: inheritedMethods size equals: 12.
 	self assert: (inheritedMethods includes: acceptServer).
-	self assert: (inheritedMethods includes: acceptNode).
 	self assert: (inheritedMethods includes: canOutputServer).
-	self assert: (inheritedMethods includes: canOutputNode).	"overridden in OutputServer"
 	self assert: (inheritedMethods includes: nameNode).
 	self assert: (inheritedMethods includes: nameNodeColon).
 	self assert: (inheritedMethods includes: nextNodeMethod).

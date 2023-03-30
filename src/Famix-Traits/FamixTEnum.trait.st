@@ -9,7 +9,7 @@ public enum Day {
 }
 
 Instance Variables:
-	values	<(MultivalueLink of: FAMIXEnumValue)>
+	values	<(MultivalueLink of: FamixTEnumValue)>
 "
 Trait {
 	#name : #FamixTEnum,
@@ -24,5 +24,5 @@ FamixTEnum classSide >> annotation [
 	<FMClass: #TEnum super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
 ]

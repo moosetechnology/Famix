@@ -12,7 +12,7 @@ FamixTWithMethods classSide >> annotation [
 	<FMClass: #TWithMethods super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }
@@ -58,66 +58,6 @@ FamixTWithMethods >> numberOfAbstractMethods: aNumber [
 	self cacheAt: #numberOfAbstractMethods put: aNumber
 ]
 
-{ #category : #metrics }
-FamixTWithMethods >> numberOfAccessorMethods [
-	<FMProperty: #numberOfAccessorMethods type: #Number>
-	<derived>
-	<FMComment: 'The number of accessor methods in a class'>
-	^ self
-		lookUpPropertyNamed: #numberOfAccessorMethods
-		computedAs: [ | noa |
-			noa := 0.
-			self methods
-				do:
-					[ :method | method isPureAccessor ifNotNil: [ (method isPureAccessor or: [ (method propertyNamed: #AccessorMethod) isNotNil ]) ifTrue: [ noa := noa + 1 ] ] ].
-			noa ]
-]
-
-{ #category : #metrics }
-FamixTWithMethods >> numberOfAccessorMethods: aNumber [
-	self cacheAt: #numberOfAccessorMethods put: aNumber
-]
-
-{ #category : #metrics }
-FamixTWithMethods >> numberOfConstructorMethods [
-	<FMProperty: #numberOfConstructorMethods type: #Number>
-	<derived>
-	<FMComment: 'The number of constructor methods in a class'>
-	^ self
-		lookUpPropertyNamed: #numberOfConstructorMethods
-		computedAs: [ 
-			| nc |
-			nc := 0.
-			self methods
-				do: [ :method | 
-					method isConstructor
-						ifNotNil: [ 
-							method isConstructor
-								ifTrue: [ nc := 1 ] ] ].
-			nc ]
-]
-
-{ #category : #metrics }
-FamixTWithMethods >> numberOfConstructorMethods: aNumber [
-	self cacheAt: #numberOfConstructorMethods put: aNumber
-]
-
-{ #category : #metrics }
-FamixTWithMethods >> numberOfMessageSends [
-	<FMProperty: #numberOfMessageSends type: #Number>
-	<derived>
-	<FMComment: 'The number of message sends from a class'>
-	
-	^self
-		lookUpPropertyNamed: #numberOfMessageSends
-		computedAs: [self methodsGroup sumNumbers: #numberOfMessageSends]
-]
-
-{ #category : #metrics }
-FamixTWithMethods >> numberOfMessageSends: aNumber [
-	self cacheAt: #numberOfMessageSends put: aNumber
-]
-
 { #category : #accessing }
 FamixTWithMethods >> numberOfMethods [
 	<FMProperty: #numberOfMethods type: #Number>
@@ -132,54 +72,6 @@ FamixTWithMethods >> numberOfMethods [
 { #category : #accessing }
 FamixTWithMethods >> numberOfMethods: aNumber [
 	self cacheAt: #numberOfMethods put: aNumber
-]
-
-{ #category : #metrics }
-FamixTWithMethods >> numberOfPrivateMethods [
-	<FMProperty: #numberOfPrivateMethods type: #Number>
-	<derived>
-	<FMComment: 'The number of private methods in a class'>
-			
-	^self
-		lookUpPropertyNamed: #numberOfPrivateMethods
-		computedAs: [(self methods select: [:each | each isPrivate]) size]
-]
-
-{ #category : #metrics }
-FamixTWithMethods >> numberOfPrivateMethods: aNumber [
-	self cacheAt: #numberOfPrivateMethods put: aNumber
-]
-
-{ #category : #metrics }
-FamixTWithMethods >> numberOfProtectedMethods [
-	<FMProperty: #numberOfProtectedMethods type: #Number>
-	<derived>
-	<FMComment: 'The number of protected methods in a class'>		
-	
-	^self
-		lookUpPropertyNamed: #numberOfProtectedMethods
-		computedAs: [(self methods select: [:each | each isProtected]) size]
-]
-
-{ #category : #metrics }
-FamixTWithMethods >> numberOfProtectedMethods: aNumber [
-	self cacheAt: #numberOfProtectedMethods put: aNumber
-]
-
-{ #category : #metrics }
-FamixTWithMethods >> numberOfPublicMethods [
-	<FMProperty: #numberOfPublicMethods type: #Number>
-	<derived>
-	<FMComment: 'The number of public methods in a class'>		
-		
-	^self
-		lookUpPropertyNamed: #numberOfPublicMethods
-		computedAs: [(self methods select: [:each | each isPublic]) size]
-]
-
-{ #category : #metrics }
-FamixTWithMethods >> numberOfPublicMethods: aNumber [
-	self cacheAt: #numberOfPublicMethods put: aNumber
 ]
 
 { #category : #metrics }

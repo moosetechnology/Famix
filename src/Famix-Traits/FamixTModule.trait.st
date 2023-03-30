@@ -1,5 +1,5 @@
 "
-FAMIXModule represents a that basically provides a simple scoping abstraction for a .C/.CPP/.H files.
+FamixTModule represents a that basically provides a simple scoping abstraction for a .C/.CPP/.H files.
 
 "
 Trait {
@@ -16,7 +16,7 @@ FamixTModule classSide >> annotation [
 	<FMClass: #TModule super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }

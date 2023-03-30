@@ -1,8 +1,8 @@
 Class {
 	#name : #FamixJavaParameter,
 	#superclass : #FamixJavaNamedEntity,
-	#traits : 'FamixTCanBeFinal + FamixTParameter',
-	#classTraits : 'FamixTCanBeFinal classTrait + FamixTParameter classTrait',
+	#traits : 'FamixTCanBeFinal + FamixTParameter + FamixTWithComments',
+	#classTraits : 'FamixTCanBeFinal classTrait + FamixTParameter classTrait + FamixTWithComments classTrait',
 	#category : #'Famix-Java-Entities-Entities'
 }
 
@@ -12,7 +12,7 @@ FamixJavaParameter class >> annotation [
 	<FMClass: #Parameter super: #FamixJavaNamedEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #printing }

@@ -10,6 +10,23 @@ FAMIXMethodTest >> actualClass [
 ]
 
 { #category : #testing }
+FAMIXMethodTest >> testCanBeSynchronized [
+	| method |
+	method := self actualClass new.
+	self deny: method isSynchronized.
+	method isSynchronized: true.
+	self assert: method isSynchronized
+]
+
+{ #category : #testing }
+FAMIXMethodTest >> testImportSynchronized [
+	| model |
+	model := '((FAMIX.Method (id: 1) (isSynchronized true)))'
+		readStreamDo: [ :stream | FAMIXModel importFromMSEStream: stream ].
+	self assert: model anyOne isSynchronized
+]
+
+{ #category : #testing }
 FAMIXMethodTest >> testIsConstructor [
 	self
 		assert:
@@ -33,5 +50,8 @@ FAMIXMethodTest >> testIsConstructor [
 
 { #category : #testing }
 FAMIXMethodTest >> testIsConstructorByKind [
-	self assert: (self actualClass new kind: 'constructor'; isConstructor)
+
+	self assert: (self actualClass new
+			 beConstructor;
+			 isConstructor)
 ]

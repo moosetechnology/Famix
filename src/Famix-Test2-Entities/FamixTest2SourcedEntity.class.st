@@ -1,8 +1,8 @@
 Class {
 	#name : #FamixTest2SourcedEntity,
 	#superclass : #FamixTest2Entity,
-	#traits : 'FamixTSourceEntity + FamixTWithComments',
-	#classTraits : 'FamixTSourceEntity classTrait + FamixTWithComments classTrait',
+	#traits : 'FamixTSourceEntity',
+	#classTraits : 'FamixTSourceEntity classTrait',
 	#category : #'Famix-Test2-Entities-Entities'
 }
 
@@ -12,5 +12,13 @@ FamixTest2SourcedEntity class >> annotation [
 	<FMClass: #SourcedEntity super: #FamixTest2Entity>
 	<package: #'Famix-Test2-Entities'>
 	<generated>
-	^self
+	<abstract>
+	^ self
+]
+
+{ #category : #testing }
+FamixTest2SourcedEntity class >> isAbstract [
+
+	<generated>
+	^ self == FamixTest2SourcedEntity
 ]

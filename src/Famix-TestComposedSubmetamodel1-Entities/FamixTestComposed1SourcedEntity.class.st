@@ -1,8 +1,8 @@
 Class {
 	#name : #FamixTestComposed1SourcedEntity,
 	#superclass : #FamixTestComposed1Entity,
-	#traits : 'FamixTSourceEntity + FamixTWithComments',
-	#classTraits : 'FamixTSourceEntity classTrait + FamixTWithComments classTrait',
+	#traits : 'FamixTSourceEntity',
+	#classTraits : 'FamixTSourceEntity classTrait',
 	#category : #'Famix-TestComposedSubmetamodel1-Entities-Entities'
 }
 
@@ -12,5 +12,13 @@ FamixTestComposed1SourcedEntity class >> annotation [
 	<FMClass: #SourcedEntity super: #FamixTestComposed1Entity>
 	<package: #'Famix-TestComposedSubmetamodel1-Entities'>
 	<generated>
-	^self
+	<abstract>
+	^ self
+]
+
+{ #category : #testing }
+FamixTestComposed1SourcedEntity class >> isAbstract [
+
+	<generated>
+	^ self == FamixTestComposed1SourcedEntity
 ]

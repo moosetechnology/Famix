@@ -22,7 +22,8 @@ Class {
 		'mergeTraits',
 		'generalizationDefinitions',
 		'typedProperties',
-		'traitsWithUsers'
+		'traitsWithUsers',
+		'withAllTraits'
 	],
 	#category : #'Famix-MetamodelBuilder-Core-Visitors'
 }
@@ -35,6 +36,15 @@ FmxMBPlantTextVisitor >> behaviorNameOrNilFor: aBehavior [
 { #category : #accessing }
 FmxMBPlantTextVisitor >> behaviors [
 	^ behaviors
+]
+
+{ #category : #checking }
+FmxMBPlantTextVisitor >> checkTrait: aTrait [
+
+	^ aTrait willGenerate and: [ 
+		  (traitsWithUsers includes: aTrait) and: [ 
+			  (aTrait builder classes flatCollect: [ :each | 
+				   each traitGeneralizations ]) includes: aTrait ] ]
 ]
 
 { #category : #accessing }
@@ -71,7 +81,8 @@ FmxMBPlantTextVisitor >> initialize [
 	mergeTraits := true.
 	generalizationDefinitions := OrderedCollection new.
 	typedProperties := OrderedCollection new.
-	traitsWithUsers := Set new
+	traitsWithUsers := Set new.
+	withAllTraits := false.
 ]
 
 { #category : #private }
@@ -103,15 +114,21 @@ FmxMBPlantTextVisitor >> onlySingleUserOf: aTrait [
 ]
 
 { #category : #private }
-FmxMBPlantTextVisitor >> recordGeneralizationsForClass: aClass mergingTraits: mergesTrait [. 
+FmxMBPlantTextVisitor >> recordGeneralizationsForClass: aClass mergingTraits: mergesTrait [
 
-	aClass classGeneralization ifNotNil: [ :generalization |
-		generalizationDefinitions add: (generalization -> aClass)].
-	
+	aClass classGeneralization ifNotNil: [ :generalization | 
+		generalizationDefinitions add: generalization -> aClass ].
 	mergesTrait ifFalse: [ 
-		aClass traitGeneralizations ifNotEmpty: [ :generalizations |
-			generalizations do: [ :generalization |
-				generalizationDefinitions add: (generalization -> aClass)]]]
+		aClass traitGeneralizations ifNotEmpty: [ :generalizations | 
+			generalizations do: [ :generalization | 
+				generalizationDefinitions add: generalization -> aClass ] ] ]
+]
+
+{ #category : #visiting }
+FmxMBPlantTextVisitor >> recordGeneralizationsForTrait: aTrait [
+
+		aTrait traitGeneralizations do: [ :generalization |
+				generalizationDefinitions add: (generalization -> aTrait)]
 	
 	
 ]
@@ -136,6 +153,7 @@ FmxMBPlantTextVisitor >> selectTraitsWithUsersFrom: aBuilder [
 
 { #category : #visiting }
 FmxMBPlantTextVisitor >> visitBuilder: aBuilder [
+
 	stream
 		nextPutAll: '@startuml';
 		cr;
@@ -143,23 +161,18 @@ FmxMBPlantTextVisitor >> visitBuilder: aBuilder [
 		nextPutAll: 'hide empty members';
 		cr;
 		cr.
-
-	self gatherTraits
-		ifTrue: [ stream
-				nextPutAll: 'together {';
-				cr ].
-
+	self gatherTraits ifTrue: [ 
+		stream
+			nextPutAll: 'together {';
+			cr ].
 	self selectTraitsWithUsersFrom: aBuilder.
-
-	(aBuilder traits select: #willGenerate) do: [ :each | each acceptVisitor: self ].
-
-	self gatherTraits
-		ifTrue: [ stream
-				nextPutAll: '}';
-				cr ].
-
+	(aBuilder traits select: #willGenerate) do: [ :each | 
+		each acceptVisitor: self ].
+	self gatherTraits ifTrue: [ 
+		stream
+			nextPutAll: '}';
+			cr ].
 	aBuilder sortedClasses do: [ :each | each acceptVisitor: self ].
-
 	self writeGeneralizations.
 	self writeRelations.
 	stream
@@ -196,36 +209,19 @@ FmxMBPlantTextVisitor >> visitRelationSide: aRelationSide [
 FmxMBPlantTextVisitor >> visitTrait: aTrait [
 
 	| behaviorKey |
-	
-	aTrait willGenerate ifFalse: [ ^ self ].
-	
-	(traitsWithUsers includes: aTrait) ifFalse: [ ^self ].
-	
-	((aTrait builder classes flatCollect: [:each | each traitGeneralizations]) includes: aTrait)
-		ifFalse: [ ^ self ].
+	withAllTraits
+		ifFalse: [ (self checkTrait: aTrait) ifFalse: [^ self]]
+		ifTrue: [ self recordGeneralizationsForTrait: aTrait ].
 
 	behaviorKey := self ensureBehaviorNameFor: aTrait.
-	
-	(self onlySingleUserOf: aTrait) ifTrue: [ 
-		| savedStream |
-		savedStream := stream.
-		stream := String new writeStream.
-		aTrait properties do: [ :each | each acceptVisitor: self ].
-		typedProperties add: (aTrait -> stream contents).
-		stream := savedStream.
-		^ self ].	
 
-	stream nextPutAll: 'class ';
-		nextPutAll: behaviorKey; 
-		nextPutAll: ' as "';
-		nextPutAll: aTrait name; 
-		nextPutAll: '" << (T,orchid) >> {'; 
-		cr.
+	(self onlySingleUserOf: aTrait) ifTrue: [ self writeSingleUseOf: aTrait.].
+
+	self writeTraitBeginningOf: aTrait with: behaviorKey.
 
 	aTrait properties do: [ :each | each acceptVisitor: self ].
 
-	stream nextPutAll: '}'; cr; cr.
-
+	self writeTraitEnd.
 ]
 
 { #category : #visiting }
@@ -238,6 +234,16 @@ FmxMBPlantTextVisitor >> visitTypedProperty: aTypedProperty [
 		space; 
 		nextPutAll: aTypedProperty name; 
 		cr. 
+]
+
+{ #category : #'public - configuration' }
+FmxMBPlantTextVisitor >> withAllTraits [
+	withAllTraits := true.
+]
+
+{ #category : #'public - configuration' }
+FmxMBPlantTextVisitor >> withoutAllTraits [
+	withAllTraits := false.
 ]
 
 { #category : #private }
@@ -281,17 +287,14 @@ FmxMBPlantTextVisitor >> writeClass: aClass mergingTraits: mergesTraits [
 { #category : #relations }
 FmxMBPlantTextVisitor >> writeGeneralizations [
 
-	generalizationDefinitions do: [ :each| 
-		
-		(each key willGenerate and: [ each value willGenerate ])
-			ifTrue: [  
-				stream 
-					nextPutAll: (self ensureBehaviorNameFor: each key);
-					nextPutAll: ' <|-- ';
-					nextPutAll: (self ensureBehaviorNameFor: each value);
-					cr ]].
-	stream cr.
-	
+	generalizationDefinitions do: [ :each | 
+		(each key willGenerate and: [ each value willGenerate ]) ifTrue: [ 
+			stream
+				nextPutAll: (self ensureBehaviorNameFor: each key);
+				nextPutAll: ' <|-- ';
+				nextPutAll: (self ensureBehaviorNameFor: each value);
+				cr ] ].
+	stream cr
 ]
 
 { #category : #relations }
@@ -333,4 +336,34 @@ FmxMBPlantTextVisitor >> writeRelations [
 			nextPutAll: (self ensureBehaviorNameFor: relation to relatedEntity); 
 			cr]
 	
+]
+
+{ #category : #writing }
+FmxMBPlantTextVisitor >> writeSingleUseOf: aTrait [
+	| savedStream |
+		savedStream := stream.
+		stream := String new writeStream.
+		aTrait properties do: [ :each | each acceptVisitor: self ].
+		typedProperties add: aTrait -> stream contents.
+		stream := savedStream.
+		^ self
+]
+
+{ #category : #writing }
+FmxMBPlantTextVisitor >> writeTraitBeginningOf: aTrait with: aBehaviorKey [
+	stream
+		nextPutAll: 'class ';
+		nextPutAll: aBehaviorKey;
+		nextPutAll: ' as "';
+		nextPutAll: aTrait name;
+		nextPutAll: '" << (T,orchid) >> {';
+		cr.
+]
+
+{ #category : #writing }
+FmxMBPlantTextVisitor >> writeTraitEnd [
+	stream
+		nextPutAll: '}';
+		cr;
+		cr
 ]

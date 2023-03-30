@@ -49,40 +49,11 @@ FamixWithMethodsTest >> testMethodsGroup [
 ]
 
 { #category : #tests }
-FamixWithMethodsTest >> testNumberOfAccessorMethods [
-
-	m1 kind: #getter.
-	self assert: c1 numberOfAccessorMethods equals: 1.
-	c1 numberOfAccessorMethods: 100.
-	self assert: c1 numberOfAccessorMethods equals: 100.
-
-]
-
-{ #category : #tests }
-FamixWithMethodsTest >> testNumberOfConstructorMethods [
-
-	m1 isConstructor: true.
-	self assert: c1 numberOfConstructorMethods equals: 1.
-	c1 numberOfConstructorMethods: 100.
-	self assert: c1 numberOfConstructorMethods equals: 100.
-
-]
-
-{ #category : #tests }
 FamixWithMethodsTest >> testNumberOfLinesOfCode [
 
 	self assert: c1 numberOfLinesOfCode equals: 2.
 	self assert: c2 numberOfLinesOfCode equals: 7.
 
-
-]
-
-{ #category : #tests }
-FamixWithMethodsTest >> testNumberOfMessageSends [
-
-	self assert: c1 numberOfMessageSends equals: model notExistentMetricValue.
-	c1 numberOfMessageSends: 100.
-	self assert: c1 numberOfMessageSends equals: 100.
 
 ]
 

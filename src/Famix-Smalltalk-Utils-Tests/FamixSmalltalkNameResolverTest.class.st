@@ -42,8 +42,18 @@ FamixSmalltalkNameResolverTest >> testResolvingName [
 ]
 
 { #category : #tests }
-FamixSmalltalkNameResolverTest >> testSmalltalkNameFromFAMIXNAme [
-	self assert: (self actualClass smalltalkClassNameFromFamixClassName: #Object) equals: #Object.
-	self assert: (self actualClass smalltalkClassNameFromFamixClassName: #FooBarZorkAbsent) equals: #FooBarZorkAbsent.
-	self assert: (self actualClass smalltalkClassNameFromFamixClassName: #M::FooBarZorkAbsent) equals: #FooBarZorkAbsent
+FamixSmalltalkNameResolverTest >> testSmalltalkNameFromFamixName [
+
+	self
+		assert:
+		(self actualClass smalltalkClassNameFromFamixClassName: #Object)
+		equals: #Object.
+	self
+		assert: (self actualClass smalltalkClassNameFromFamixClassName:
+				 #FooBarZorkAbsent)
+		equals: #FooBarZorkAbsent.
+	self
+		assert: (self actualClass smalltalkClassNameFromFamixClassName:
+				 #'M::FooBarZorkAbsent')
+		equals: #FooBarZorkAbsent
 ]

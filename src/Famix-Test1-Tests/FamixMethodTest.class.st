@@ -53,7 +53,7 @@ FamixMethodTest >> testIsClassSide [
 FamixMethodTest >> testIsConstant [
 
 	self deny: m1 isConstant.
-	m1 kind: #constant.
+	m1 beConstant.
 	self assert: m1 isConstant.
 
 ]
@@ -71,7 +71,7 @@ FamixMethodTest >> testIsConstructor [
 FamixMethodTest >> testIsGetter [
 
 	self deny: m1 isGetter.
-	m1 kind: #getter.
+	m1 beGetter.
 	self assert: m1 isGetter.
 
 ]
@@ -87,9 +87,9 @@ FamixMethodTest >> testIsMethod [
 FamixMethodTest >> testIsPureAccessor [
 
 	self deny: m1 isPureAccessor.
-	m1 kind: #getter.
+	m1 beGetter.
 	self assert: m1 isPureAccessor.
-	m1 kind: #setter.
+	m1 beSetter.
 	self assert: m1 isPureAccessor.
 
 ]
@@ -98,7 +98,7 @@ FamixMethodTest >> testIsPureAccessor [
 FamixMethodTest >> testIsSetter [
 
 	self deny: m1 isSetter.
-	m1 kind: #setter.
+	m1 beSetter.
 	self assert: m1 isSetter.
 
 ]
@@ -106,7 +106,7 @@ FamixMethodTest >> testIsSetter [
 { #category : #tests }
 FamixMethodTest >> testKind [
 
-	m1 kind: #constant.
+	m1 beConstant.
 	self assert: m1 kind equals: #constant.
 
 ]
@@ -120,15 +120,6 @@ FamixMethodTest >> testNumberOfLinesOfCode [
 	self assert: m1 numberOfLinesOfCode equals: 100.
 	
 
-
-]
-
-{ #category : #tests }
-FamixMethodTest >> testNumberOfMessageSends [
-
-	self assert: m1 numberOfMessageSends equals: model notExistentMetricValue.
-	m1 numberOfMessageSends: 100.
-	self assert: m1 numberOfMessageSends equals: 100.
 
 ]
 

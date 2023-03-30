@@ -59,11 +59,13 @@ FamixPharoSmalltalkGenerator >> defineClasses [
 	package := builder newClassNamed: #Package.
 	parameter := builder newClassNamed: #Parameter.
 	reference := builder newClassNamed: #Reference.
-	unknownVariable := builder newClassNamed: #UnknownVariable
+	unknownVariable := builder newClassNamed: #UnknownVariable.
+
 ]
 
 { #category : #initialization }
 FamixPharoSmalltalkGenerator >> defineHierarchy [
+
 	super defineHierarchy.
 
 	access --|> #TAccess.
@@ -78,47 +80,60 @@ FamixPharoSmalltalkGenerator >> defineHierarchy [
 	annotationInstanceAttribute --|> #TTypedAnnotationInstanceAttribute.
 
 	annotationType --|> namedEntity.
+	annotationType --|> #TEntityMetaLevelDependency.
 	annotationType --|> #TAnnotationType.
 	annotationType --|> #TWithAttributes.
+	annotationType --|> #TPackageable.
 
 	annotationTypeAttribute --|> namedEntity.
+	annotationTypeAttribute --|> #TEntityMetaLevelDependency.
+	annotationTypeAttribute --|> sourcedEntity.
 	annotationTypeAttribute --|> #TAnnotationTypeAttribute.
 	annotationTypeAttribute --|> #TTypedAnnotationInstanceAttribute.
 
 	attribute --|> namedEntity.
 	attribute --|> #TAttribute.
-	attribute --|> #TWithClassScope.
+	attribute --|> #TInvocationsReceiver.
+	attribute --|> #TCanBeClassSide.
 
 	class --|> namedEntity.
-	self flag: 'WithTypes should not be necessary but needed in tests like FamixMetricsTest>>testAfferentCouplingFAMIXClassGroup'.
+	self flag:
+		'WithTypes should not be necessary but needed in tests like FamixMetricsTest>>testAfferentCouplingFamixClassGroup'.
 	class --|> #TWithTypes.
-	class --|> #TWithExceptions.
 	class --|> #TClass.
 	class --|> #TCanBeAbstract.
+	class --|> #TClassMetrics.
 
 	globalVariable --|> namedEntity.
 	globalVariable --|> #TGlobalVariable.
+	globalVariable --|> #TInvocationsReceiver.
 
 	implicitVariable --|> namedEntity.
 	implicitVariable --|> #TImplicitVariable.
+	implicitVariable --|> #TInvocationsReceiver.
 
 	inheritance --|> #TInheritance.
 
 	invocation --|> #TInvocation.
-	invocation --|> #THasSignature.
 
 	localVariable --|> namedEntity.
 	localVariable --|> #TLocalVariable.
+	localVariable --|> #TInvocationsReceiver.
 
 	method --|> namedEntity.
 	method --|> #TMethod.
 	method --|> #TWithAnnotationTypes.
 	method --|> #TCanBeAbstract.
+	method --|> #THasKind.
+	method --|> #TWithComments.
+	method --|> #TWithAnnotationInstances.
+	method --|> #TCanBeClassSide.
+	method --|> #TPackageable.
 
-	namedEntity --|> #TPackageable.
 	namedEntity --|> #TInvocationsReceiver.
-	namedEntity --|> #TWithAnnotationInstances.
-	
+	namedEntity --|> #TEntityMetaLevelDependency.
+	namedEntity --|> sourcedEntity.
+
 	namespace --|> namedEntity.
 	namespace --|> #TNamespace.
 	namespace --|> #TWithGlobalVariables.
@@ -130,31 +145,32 @@ FamixPharoSmalltalkGenerator >> defineHierarchy [
 	package --|> #TWithGlobalVariables.
 	package --|> #TWithClasses.
 	package --|> #TCohesionCouplingMetrics.
-	package --|> #TOODependencyQueries.
-	package withPrecedenceOf: #TOODependencyQueries.
 
 	parameter --|> namedEntity.
 	parameter --|> #TParameter.
+	parameter --|> #TInvocationsReceiver.
 
 	reference --|> #TReference.
-	
+
 	pharoEntitySourceAnchor --|> sourceAnchor.
 	pharoEntitySourceAnchor --|> #TSourceAnchor.
- 
+
 	unknownVariable --|> namedEntity.
-	unknownVariable --|> #TUnknownVariable
+	unknownVariable --|> #TUnknownVariable.
+	unknownVariable --|> #TInvocationsReceiver
 ]
 
 { #category : #definition }
 FamixPharoSmalltalkGenerator >> defineProperties [
 	super defineProperties.
 	((method property: #protocol type: #String)
-		comment: 'Protocol of the method').
+		comment: 'Protocol of the method'). 
 ]
 
 { #category : #initialization }
 FamixPharoSmalltalkGenerator >> newBuilder [
+
 	^ super newBuilder
-		withImportingContext;
-		yourself
+		  withFileImport;
+		  yourself
 ]
