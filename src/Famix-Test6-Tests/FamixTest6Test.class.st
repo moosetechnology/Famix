@@ -5,6 +5,19 @@ Class {
 }
 
 { #category : #running }
+FamixTest6Test >> testDefaultValueFromType [
+
+	| spam brandProperty |
+	spam := FamixTest6Spam new.
+
+	brandProperty := spam mooseDescription properties detect: [ :each | 
+		                 each name = #brand ].
+
+	self assert: spam brand class equals: FamixTest6Brand.
+	self assert: brandProperty hasDefaultValueFromType
+]
+
+{ #category : #running }
 FamixTest6Test >> testDefaultValueOnCreation [
 
 	| bacon foodProperty |

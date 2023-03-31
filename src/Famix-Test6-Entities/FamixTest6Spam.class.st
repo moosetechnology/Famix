@@ -2,6 +2,7 @@ Class {
 	#name : #FamixTest6Spam,
 	#superclass : #FamixTest6Bacon,
 	#instVars : [
+		'#brand => FMProperty',
 		'#isSomething => FMProperty defaultValue: false'
 	],
 	#category : #'Famix-Test6-Entities-Entities'
@@ -14,6 +15,21 @@ FamixTest6Spam class >> annotation [
 	<package: #'Famix-Test6-Entities'>
 	<generated>
 	^ self
+]
+
+{ #category : #accessing }
+FamixTest6Spam >> brand [
+
+	<FMProperty: #brand type: #FamixTest6Brand>
+	<withDefaultValueFromType>
+	<generated>
+	^ brand ifNil: [ brand := FamixTest6Brand new ]
+]
+
+{ #category : #accessing }
+FamixTest6Spam >> brand: anObject [
+	<generated>
+	brand := anObject
 ]
 
 { #category : #accessing }

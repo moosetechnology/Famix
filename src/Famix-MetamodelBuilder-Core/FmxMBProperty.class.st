@@ -34,7 +34,7 @@ FmxMBProperty >> generateSetterIn: aClassOrTrait [
 	self subclassResponsibility
 ]
 
-{ #category : #printing }
+{ #category : #testing }
 FmxMBProperty >> hasDefaultValue [
 	^ false
 ]

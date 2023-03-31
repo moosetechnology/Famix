@@ -3,7 +3,8 @@ Class {
 	#superclass : #FamixBasicInfrastructureGenerator,
 	#instVars : [
 		'spam',
-		'bacon'
+		'bacon',
+		'brand'
 	],
 	#category : #'Famix-TestGenerators'
 }
@@ -25,7 +26,8 @@ FamixTest6Generator >> defineClasses [
 
 	super defineClasses.
 	spam := builder newClassNamed: #Spam.
-	bacon := builder newClassNamed: #Bacon
+	bacon := builder newClassNamed: #Bacon.
+	brand :=  builder newClassNamed: #Brand
 ]
 
 { #category : #definition }
@@ -42,5 +44,6 @@ FamixTest6Generator >> defineProperties [
 	super defineProperties.
 	bacon property: #isFood type: #Boolean defaultValue: true.
 	bacon property: #eggs type: #Number defaultValue: 12.
-	spam property: #isSomething type: #Boolean defaultValue: false
+	spam property: #isSomething type: #Boolean defaultValue: false.
+	(spam property: #brand type: #FamixTest6Brand) withDefaultValueFromType 
 ]

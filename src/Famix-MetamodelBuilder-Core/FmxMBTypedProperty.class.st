@@ -7,7 +7,8 @@ Class {
 	#instVars : [
 		'propertyType',
 		'multivalued',
-		'defaultValue'
+		'defaultValue',
+		'withDefaultValueFromType'
 	],
 	#category : #'Famix-MetamodelBuilder-Core-Implementation'
 }
@@ -32,6 +33,8 @@ FmxMBTypedProperty >> defaultValue [
 
 { #category : #accessing }
 FmxMBTypedProperty >> defaultValue: aValue [
+
+	self assert: self hasDefaultValueFromType not.
 	defaultValue := aValue
 ]
 
@@ -51,6 +54,7 @@ FmxMBTypedProperty >> generateGetterIn: aClassOrTrait [
 	methodSource := String streamContents: [ :s |
 		s nextPutAll: self name; cr; cr.
 		s tab; nextPutAll: propertyDefinition; cr.
+		self hasDefaultValueFromType ifTrue: [ s tab; nextPutAll: '<withDefaultValueFromType>'; cr ].
 		s tab; nextPutAll: '<generated>'; cr.
 		self isMultivalued ifTrue: [ 
 			 s tab; nextPutAll: '<multivalued>'; cr. ].
@@ -58,7 +62,7 @@ FmxMBTypedProperty >> generateGetterIn: aClassOrTrait [
 			ifNotEmpty: [ s tab; nextPutAll: commentDefinition; cr].
 		s tab; nextPutAll: '^ '; nextPutAll: self name.
 		self defaultValue ifNotNil: [
-			s nextPutAll: (' ifNil: [ {1} := {2} ]' format: { self name. self defaultValue }) ] ].
+			s nextPutAll: (' ifNil: [ {1} := {2} ]' format: { self name. self defaultValue }) ] ifNil: [ self hasDefaultValueFromType ifTrue: [(s nextPutAll: (' ifNil: [ {1} := {2} new ]' format: { self name. self propertyType }))] ] ].
 
 	self builder environment compile: methodSource in: aClassOrTrait classified: 'accessing'.	
 	
@@ -77,18 +81,26 @@ FmxMBTypedProperty >> generateSetterIn: aClassOrTrait [
 		classified: 'accessing'
 ]
 
-{ #category : #generating }
+{ #category : #testing }
 FmxMBTypedProperty >> hasDefaultValue [
 	^ defaultValue isNotNil
 ]
 
-{ #category : #initialization }
-FmxMBTypedProperty >> initialize [
-	super initialize.
-	multivalued := false
+{ #category : #testing }
+FmxMBTypedProperty >> hasDefaultValueFromType [
+
+	^ withDefaultValueFromType
 ]
 
-{ #category : #accessing }
+{ #category : #initialization }
+FmxMBTypedProperty >> initialize [
+
+	super initialize.
+	multivalued := false.
+	withDefaultValueFromType := false
+]
+
+{ #category : #testing }
 FmxMBTypedProperty >> isMultivalued [
 
 	^ multivalued
@@ -112,4 +124,11 @@ FmxMBTypedProperty >> propertyType [
 { #category : #accessing }
 FmxMBTypedProperty >> propertyType: anObject [
 	propertyType := anObject
+]
+
+{ #category : #'accessing - defaults' }
+FmxMBTypedProperty >> withDefaultValueFromType [
+
+	self assert: self hasDefaultValue not.
+	withDefaultValueFromType := true
 ]
