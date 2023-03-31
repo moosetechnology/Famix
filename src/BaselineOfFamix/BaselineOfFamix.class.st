@@ -61,11 +61,11 @@ BaselineOfFamix >> dependencies: spec [
 { #category : #baseline }
 BaselineOfFamix >> fame: spec [
 
-	"We load Fame development version for new Moose images."
+	"We load Fame v1.1.7 version for Moose 10 images."
 	"For retrocompatibility with Pharo 9 and older, the latest version is v1.1.6"
 
 	| version |
-	version := 'development'.
+	version := 'v1.1.7'.
 	spec for: #( #'pharo8.x' #'pharo9.x' ) do: [ version := 'v1.1.6' ].
 
 	spec baseline: 'Fame' with: [ 
