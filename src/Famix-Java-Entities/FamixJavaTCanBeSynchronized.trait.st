@@ -15,7 +15,7 @@ public class SynchronizedCounter {
 Trait {
 	#name : #FamixJavaTCanBeSynchronized,
 	#instVars : [
-		'#isSynchronized => FMProperty'
+		'#isSynchronized => FMProperty defaultValue: false'
 	],
 	#category : #'Famix-Java-Entities-Traits'
 }

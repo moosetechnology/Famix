@@ -11,7 +11,7 @@ public class Student implements Serializable{
 Trait {
 	#name : #FamixJavaTCanBeTransient,
 	#instVars : [
-		'#isTransient => FMProperty'
+		'#isTransient => FMProperty defaultValue: false'
 	],
 	#category : #'Famix-Java-Entities-Traits'
 }
