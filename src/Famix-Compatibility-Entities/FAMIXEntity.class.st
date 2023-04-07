@@ -1,6 +1,8 @@
 Class {
 	#name : #FAMIXEntity,
 	#superclass : #MooseEntity,
+	#traits : 'TEntityMetaLevelDependency',
+	#classTraits : 'TEntityMetaLevelDependency classTrait',
 	#category : #'Famix-Compatibility-Entities-Entities'
 }
 

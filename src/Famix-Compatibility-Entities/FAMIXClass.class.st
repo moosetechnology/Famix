@@ -1,7 +1,7 @@
 Class {
 	#name : #FAMIXClass,
 	#superclass : #FAMIXType,
-	#traits : 'FAMIXTCanBeClassSide + FamixTClass + FamixTWithExceptions',
+	#traits : 'FAMIXTCanBeClassSide + (FamixTClass - {#belongsTo}) + FamixTWithExceptions',
 	#classTraits : 'FAMIXTCanBeClassSide classTrait + FamixTClass classTrait + FamixTWithExceptions classTrait',
 	#instVars : [
 		'#isInterface'

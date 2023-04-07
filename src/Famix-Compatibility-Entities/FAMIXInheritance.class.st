@@ -1,6 +1,6 @@
 Class {
 	#name : #FAMIXInheritance,
-	#superclass : #FAMIXEntity,
+	#superclass : #FAMIXAssociation,
 	#traits : 'FamixTInheritance',
 	#classTraits : 'FamixTInheritance classTrait',
 	#category : #'Famix-Compatibility-Entities-Entities'

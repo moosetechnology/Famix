@@ -3,6 +3,9 @@ Class {
 	#superclass : #FAMIXBehaviouralEntity,
 	#traits : 'FAMIXTCanBeClassSide + FAMIXTCanBeSynchronized + FamixTHasKind + FamixTMethod + FamixTWithCaughtExceptions + FamixTWithDeclaredExceptions + FamixTWithThrownExceptions',
 	#classTraits : 'FAMIXTCanBeClassSide classTrait + FAMIXTCanBeSynchronized classTrait + FamixTHasKind classTrait + FamixTMethod classTrait + FamixTWithCaughtExceptions classTrait + FamixTWithDeclaredExceptions classTrait + FamixTWithThrownExceptions classTrait',
+	#instVars : [
+		'#protocol'
+	],
 	#classVars : [
 		'#ShouldSearchForSmalltalkCodeInImage'
 	],
@@ -225,6 +228,16 @@ FAMIXMethod >> printOn: aStream [
 	aStream nextPutAll: '>>'.
 	signature ifNotNil: [ aStream nextPutAll: signature ].
 	aStream nextPutAll: ' (Method)'
+]
+
+{ #category : #NicolasA }
+FAMIXMethod >> protocol [
+	^protocol
+]
+
+{ #category : #NicolasA }
+FAMIXMethod >> protocol: aString [ 
+	protocol := aString
 ]
 
 { #category : #'Famix-Implementation' }

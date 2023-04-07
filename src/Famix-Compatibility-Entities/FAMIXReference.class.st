@@ -1,6 +1,6 @@
 Class {
 	#name : #FAMIXReference,
-	#superclass : #FAMIXEntity,
+	#superclass : #FAMIXAssociation,
 	#traits : 'FamixTReference',
 	#classTraits : 'FamixTReference classTrait',
 	#category : #'Famix-Compatibility-Entities-Entities'
