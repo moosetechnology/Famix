@@ -10,9 +10,7 @@ Class {
 { #category : #running }
 FamixTFunctionTest >> setUp [
 	super setUp.
-	function := MooseEntity new
-		addTalent: FamixTFunction;
-		yourself
+	function := FamixTestFunction new
 ]
 
 { #category : #tests }
