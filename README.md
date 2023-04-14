@@ -1,6 +1,6 @@
 # Famix
 
-Famix is an abstract representation of source code. Famix is generic and it may describe applications in multiple programation languages.
+Famix is an abstract representation of source code. It is generic and can describe applications in multiple programming languages.
 
   - [Installation](#installation)
   - [Documentation](#documentation)
