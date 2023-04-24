@@ -76,6 +76,14 @@ FamixMetamodelBuilder >> acceptVisitor: aVisitor [
 	^ aVisitor visitBuilder: self
 ]
 
+{ #category : #initialization }
+FamixMetamodelBuilder >> addEntityCreatorTraitToModel: aClass [
+
+	(self classes anySatisfy: [ :cls | 
+		 cls isAbstractClass not and: [ cls isMetamodelClassGroup not ] ]) 
+		ifTrue: [ aClass addTraitGeneralization: self entityCreatorTrait ]
+]
+
 { #category : #accessing }
 FamixMetamodelBuilder >> allSubBuilders [
 
@@ -172,6 +180,17 @@ FamixMetamodelBuilder >> ensureLocalTraitNamed: aString [
 			  each name = aString and: [ 
 				  each prefix = self configuration prefix ] ]
 		  ifNone: [ self unsafeNewTraitNamed: aString ]
+]
+
+{ #category : #initialization }
+FamixMetamodelBuilder >> entityCreatorTrait [
+
+	^ (self
+		   newTraitNamed: #TEntityCreator
+		   comment: 'This trait is used by Famix models.
+It provides an API for creating new entities and adding them in the model.')
+		  tag: 'Model';
+		  yourself
 ]
 
 { #category : #accessing }
@@ -456,6 +475,9 @@ FamixMetamodelBuilder >> prepareGeneration [
 		self testingSelectorsMapping at: each put: each testingSelectors ].
 	self classes do: [ :each | 
 		self testingSelectorsMapping at: each put: each testingSelectors ].
+
+	self withSubBuildersAddEntityCreatorTraitTo: self model.
+
 	self traits do: [ :each | each generate ].
 	self sortedClasses do: [ :each | each generate ].
 	self behaviorsCount > 0 ifTrue: [ self generateImportingContext ]
@@ -591,4 +613,12 @@ FamixMetamodelBuilder >> withImportingContext [
 		transformWith:
 		'`@receiver withImportingContext' -> '`@receiver withFileImport'.
 	self withFileImport
+]
+
+{ #category : #initialization }
+FamixMetamodelBuilder >> withSubBuildersAddEntityCreatorTraitTo: aClass [
+
+	self addEntityCreatorTraitToModel: aClass.
+	self allSubBuilders do: [ :subBuilder | 
+		subBuilder addEntityCreatorTraitToModel: aClass ]
 ]
