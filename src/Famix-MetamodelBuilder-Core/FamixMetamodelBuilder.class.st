@@ -472,14 +472,13 @@ FamixMetamodelBuilder >> prepareGeneration [
 	"ensure the model entity exists before generating"
 	(self behaviorsCount > 0 or: [ 
 		 self relations size > 0 or: [ self subBuilders size > 0 ] ]) 
-		ifTrue: [ self model ].
+		ifTrue: [ 
+			self model.
+			self withSubBuildersAddEntityCreatorTraitTo: self model ].
 	self traitsWithSubBuildersTraits do: [ :each | 
 		self testingSelectorsMapping at: each put: each testingSelectors ].
 	self classes do: [ :each | 
 		self testingSelectorsMapping at: each put: each testingSelectors ].
-
-	self withSubBuildersAddEntityCreatorTraitTo: self model.
-
 	self traits do: [ :each | each generate ].
 	self sortedClasses do: [ :each | each generate ].
 	self behaviorsCount > 0 ifTrue: [ self generateImportingContext ]
