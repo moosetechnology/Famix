@@ -12,20 +12,43 @@ Class {
 FmxMBEntityCreatorTrait >> generate [
 
 	super generate.
-	
+
 	self builder classes
 		select: [ :cls | 
 			cls isAbstractClass not and: [ cls isMetamodelClassGroup not ] ]
 		thenDo: [ :cls | 
-			self builder environment
-				compile: ('new{1}
+			self generateEntityCreationMethodFor: cls.
+			(cls allTransitiveTraits anySatisfy: [ :trait | 
+				 trait name = #TNamedEntity ]) ifTrue: [ 
+				self generateNamedEntityCreationMethodFor: cls ] ]
+]
+
+{ #category : #generating }
+FmxMBEntityCreatorTrait >> generateEntityCreationMethodFor: cls [
+
+	self builder environment
+		compile: ('new{1}
 
 	<generated>
 	^ self add: {2} new' format: { 
-							 cls name.
-							 cls fullName })
-				in: self realClass
-				classified: 'entity creation' ]
+					 cls name.
+					 cls fullName })
+		in: self realClass
+		classified: 'entity creation'
+]
+
+{ #category : #generating }
+FmxMBEntityCreatorTrait >> generateNamedEntityCreationMethodFor: cls [
+
+	^ self builder environment
+		  compile: ('new{1}Named: aName
+
+	<generated>
+	^ self add: ({2} named: aName)' format: { 
+					   cls name.
+					   cls fullName })
+		  in: self realClass
+		  classified: 'entity creation'
 ]
 
 { #category : #initialization }

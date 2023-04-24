@@ -31,10 +31,24 @@ FamixTest3TEntityCreator >> newAttribute [
 ]
 
 { #category : #'entity creation' }
+FamixTest3TEntityCreator >> newAttributeNamed: aName [
+
+	<generated>
+	^ self add: (FamixTest3Attribute named: aName)
+]
+
+{ #category : #'entity creation' }
 FamixTest3TEntityCreator >> newClass [
 
 	<generated>
 	^ self add: FamixTest3Class new
+]
+
+{ #category : #'entity creation' }
+FamixTest3TEntityCreator >> newClassNamed: aName [
+
+	<generated>
+	^ self add: (FamixTest3Class named: aName)
 ]
 
 { #category : #'entity creation' }
@@ -59,6 +73,13 @@ FamixTest3TEntityCreator >> newMethod [
 ]
 
 { #category : #'entity creation' }
+FamixTest3TEntityCreator >> newMethodNamed: aName [
+
+	<generated>
+	^ self add: (FamixTest3Method named: aName)
+]
+
+{ #category : #'entity creation' }
 FamixTest3TEntityCreator >> newModel [
 
 	<generated>
@@ -70,6 +91,13 @@ FamixTest3TEntityCreator >> newPackage [
 
 	<generated>
 	^ self add: FamixTest3Package new
+]
+
+{ #category : #'entity creation' }
+FamixTest3TEntityCreator >> newPackageNamed: aName [
+
+	<generated>
+	^ self add: (FamixTest3Package named: aName)
 ]
 
 { #category : #'entity creation' }
@@ -105,6 +133,13 @@ FamixTest3TEntityCreator >> newType [
 
 	<generated>
 	^ self add: FamixTest3Type new
+]
+
+{ #category : #'entity creation' }
+FamixTest3TEntityCreator >> newTypeNamed: aName [
+
+	<generated>
+	^ self add: (FamixTest3Type named: aName)
 ]
 
 { #category : #'entity creation' }

@@ -31,10 +31,24 @@ FamixTest1TEntityCreator >> newAttribute [
 ]
 
 { #category : #'entity creation' }
+FamixTest1TEntityCreator >> newAttributeNamed: aName [
+
+	<generated>
+	^ self add: (FamixTest1Attribute named: aName)
+]
+
+{ #category : #'entity creation' }
 FamixTest1TEntityCreator >> newClass [
 
 	<generated>
 	^ self add: FamixTest1Class new
+]
+
+{ #category : #'entity creation' }
+FamixTest1TEntityCreator >> newClassNamed: aName [
+
+	<generated>
+	^ self add: (FamixTest1Class named: aName)
 ]
 
 { #category : #'entity creation' }
@@ -77,6 +91,13 @@ FamixTest1TEntityCreator >> newMethod [
 
 	<generated>
 	^ self add: FamixTest1Method new
+]
+
+{ #category : #'entity creation' }
+FamixTest1TEntityCreator >> newMethodNamed: aName [
+
+	<generated>
+	^ self add: (FamixTest1Method named: aName)
 ]
 
 { #category : #'entity creation' }

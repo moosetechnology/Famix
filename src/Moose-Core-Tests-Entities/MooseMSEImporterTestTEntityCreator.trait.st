@@ -24,10 +24,24 @@ MooseMSEImporterTestTEntityCreator >> newAttribute [
 ]
 
 { #category : #'entity creation' }
+MooseMSEImporterTestTEntityCreator >> newAttributeNamed: aName [
+
+	<generated>
+	^ self add: (MooseMSEImporterTestAttribute named: aName)
+]
+
+{ #category : #'entity creation' }
 MooseMSEImporterTestTEntityCreator >> newClass [
 
 	<generated>
 	^ self add: MooseMSEImporterTestClass new
+]
+
+{ #category : #'entity creation' }
+MooseMSEImporterTestTEntityCreator >> newClassNamed: aName [
+
+	<generated>
+	^ self add: (MooseMSEImporterTestClass named: aName)
 ]
 
 { #category : #'entity creation' }
@@ -52,6 +66,13 @@ MooseMSEImporterTestTEntityCreator >> newMethod [
 ]
 
 { #category : #'entity creation' }
+MooseMSEImporterTestTEntityCreator >> newMethodNamed: aName [
+
+	<generated>
+	^ self add: (MooseMSEImporterTestMethod named: aName)
+]
+
+{ #category : #'entity creation' }
 MooseMSEImporterTestTEntityCreator >> newModel [
 
 	<generated>
@@ -66,6 +87,13 @@ MooseMSEImporterTestTEntityCreator >> newNamespace [
 ]
 
 { #category : #'entity creation' }
+MooseMSEImporterTestTEntityCreator >> newNamespaceNamed: aName [
+
+	<generated>
+	^ self add: (MooseMSEImporterTestNamespace named: aName)
+]
+
+{ #category : #'entity creation' }
 MooseMSEImporterTestTEntityCreator >> newPackage [
 
 	<generated>
@@ -73,10 +101,24 @@ MooseMSEImporterTestTEntityCreator >> newPackage [
 ]
 
 { #category : #'entity creation' }
+MooseMSEImporterTestTEntityCreator >> newPackageNamed: aName [
+
+	<generated>
+	^ self add: (MooseMSEImporterTestPackage named: aName)
+]
+
+{ #category : #'entity creation' }
 MooseMSEImporterTestTEntityCreator >> newPrimitiveType [
 
 	<generated>
 	^ self add: MooseMSEImporterTestPrimitiveType new
+]
+
+{ #category : #'entity creation' }
+MooseMSEImporterTestTEntityCreator >> newPrimitiveTypeNamed: aName [
+
+	<generated>
+	^ self add: (MooseMSEImporterTestPrimitiveType named: aName)
 ]
 
 { #category : #'entity creation' }

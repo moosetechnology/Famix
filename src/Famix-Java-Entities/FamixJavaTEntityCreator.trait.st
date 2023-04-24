@@ -52,6 +52,13 @@ FamixJavaTEntityCreator >> newAnnotationTypeAttribute [
 ]
 
 { #category : #'entity creation' }
+FamixJavaTEntityCreator >> newAnnotationTypeAttributeNamed: aName [
+
+	<generated>
+	^ self add: (FamixJavaAnnotationTypeAttribute named: aName)
+]
+
+{ #category : #'entity creation' }
 FamixJavaTEntityCreator >> newAttribute [
 
 	<generated>
@@ -59,10 +66,24 @@ FamixJavaTEntityCreator >> newAttribute [
 ]
 
 { #category : #'entity creation' }
+FamixJavaTEntityCreator >> newAttributeNamed: aName [
+
+	<generated>
+	^ self add: (FamixJavaAttribute named: aName)
+]
+
+{ #category : #'entity creation' }
 FamixJavaTEntityCreator >> newClass [
 
 	<generated>
 	^ self add: FamixJavaClass new
+]
+
+{ #category : #'entity creation' }
+FamixJavaTEntityCreator >> newClassNamed: aName [
+
+	<generated>
+	^ self add: (FamixJavaClass named: aName)
 ]
 
 { #category : #'entity creation' }
@@ -80,6 +101,13 @@ FamixJavaTEntityCreator >> newEnum [
 ]
 
 { #category : #'entity creation' }
+FamixJavaTEntityCreator >> newEnumNamed: aName [
+
+	<generated>
+	^ self add: (FamixJavaEnum named: aName)
+]
+
+{ #category : #'entity creation' }
 FamixJavaTEntityCreator >> newEnumValue [
 
 	<generated>
@@ -87,10 +115,24 @@ FamixJavaTEntityCreator >> newEnumValue [
 ]
 
 { #category : #'entity creation' }
+FamixJavaTEntityCreator >> newEnumValueNamed: aName [
+
+	<generated>
+	^ self add: (FamixJavaEnumValue named: aName)
+]
+
+{ #category : #'entity creation' }
 FamixJavaTEntityCreator >> newException [
 
 	<generated>
 	^ self add: FamixJavaException new
+]
+
+{ #category : #'entity creation' }
+FamixJavaTEntityCreator >> newExceptionNamed: aName [
+
+	<generated>
+	^ self add: (FamixJavaException named: aName)
 ]
 
 { #category : #'entity creation' }
@@ -105,6 +147,13 @@ FamixJavaTEntityCreator >> newImplicitVariable [
 
 	<generated>
 	^ self add: FamixJavaImplicitVariable new
+]
+
+{ #category : #'entity creation' }
+FamixJavaTEntityCreator >> newImplicitVariableNamed: aName [
+
+	<generated>
+	^ self add: (FamixJavaImplicitVariable named: aName)
 ]
 
 { #category : #'entity creation' }
@@ -150,10 +199,24 @@ FamixJavaTEntityCreator >> newLocalVariable [
 ]
 
 { #category : #'entity creation' }
+FamixJavaTEntityCreator >> newLocalVariableNamed: aName [
+
+	<generated>
+	^ self add: (FamixJavaLocalVariable named: aName)
+]
+
+{ #category : #'entity creation' }
 FamixJavaTEntityCreator >> newMethod [
 
 	<generated>
 	^ self add: FamixJavaMethod new
+]
+
+{ #category : #'entity creation' }
+FamixJavaTEntityCreator >> newMethodNamed: aName [
+
+	<generated>
+	^ self add: (FamixJavaMethod named: aName)
 ]
 
 { #category : #'entity creation' }
@@ -171,10 +234,24 @@ FamixJavaTEntityCreator >> newPackage [
 ]
 
 { #category : #'entity creation' }
+FamixJavaTEntityCreator >> newPackageNamed: aName [
+
+	<generated>
+	^ self add: (FamixJavaPackage named: aName)
+]
+
+{ #category : #'entity creation' }
 FamixJavaTEntityCreator >> newParameter [
 
 	<generated>
 	^ self add: FamixJavaParameter new
+]
+
+{ #category : #'entity creation' }
+FamixJavaTEntityCreator >> newParameterNamed: aName [
+
+	<generated>
+	^ self add: (FamixJavaParameter named: aName)
 ]
 
 { #category : #'entity creation' }
@@ -220,6 +297,13 @@ FamixJavaTEntityCreator >> newPrimitiveType [
 ]
 
 { #category : #'entity creation' }
+FamixJavaTEntityCreator >> newPrimitiveTypeNamed: aName [
+
+	<generated>
+	^ self add: (FamixJavaPrimitiveType named: aName)
+]
+
+{ #category : #'entity creation' }
 FamixJavaTEntityCreator >> newReference [
 
 	<generated>
@@ -248,6 +332,13 @@ FamixJavaTEntityCreator >> newType [
 ]
 
 { #category : #'entity creation' }
+FamixJavaTEntityCreator >> newTypeNamed: aName [
+
+	<generated>
+	^ self add: (FamixJavaType named: aName)
+]
+
+{ #category : #'entity creation' }
 FamixJavaTEntityCreator >> newUnknownSourceLanguage [
 
 	<generated>
@@ -259,4 +350,11 @@ FamixJavaTEntityCreator >> newUnknownVariable [
 
 	<generated>
 	^ self add: FamixJavaUnknownVariable new
+]
+
+{ #category : #'entity creation' }
+FamixJavaTEntityCreator >> newUnknownVariableNamed: aName [
+
+	<generated>
+	^ self add: (FamixJavaUnknownVariable named: aName)
 ]

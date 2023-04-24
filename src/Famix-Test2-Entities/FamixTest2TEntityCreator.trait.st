@@ -24,6 +24,13 @@ FamixTest2TEntityCreator >> newClass [
 ]
 
 { #category : #'entity creation' }
+FamixTest2TEntityCreator >> newClassNamed: aName [
+
+	<generated>
+	^ self add: (FamixTest2Class named: aName)
+]
+
+{ #category : #'entity creation' }
 FamixTest2TEntityCreator >> newComment [
 
 	<generated>

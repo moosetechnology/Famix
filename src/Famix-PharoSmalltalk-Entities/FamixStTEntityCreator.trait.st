@@ -52,6 +52,13 @@ FamixStTEntityCreator >> newAnnotationTypeAttribute [
 ]
 
 { #category : #'entity creation' }
+FamixStTEntityCreator >> newAnnotationTypeAttributeNamed: aName [
+
+	<generated>
+	^ self add: (FamixStAnnotationTypeAttribute named: aName)
+]
+
+{ #category : #'entity creation' }
 FamixStTEntityCreator >> newAttribute [
 
 	<generated>
@@ -59,10 +66,24 @@ FamixStTEntityCreator >> newAttribute [
 ]
 
 { #category : #'entity creation' }
+FamixStTEntityCreator >> newAttributeNamed: aName [
+
+	<generated>
+	^ self add: (FamixStAttribute named: aName)
+]
+
+{ #category : #'entity creation' }
 FamixStTEntityCreator >> newClass [
 
 	<generated>
 	^ self add: FamixStClass new
+]
+
+{ #category : #'entity creation' }
+FamixStTEntityCreator >> newClassNamed: aName [
+
+	<generated>
+	^ self add: (FamixStClass named: aName)
 ]
 
 { #category : #'entity creation' }
@@ -80,10 +101,24 @@ FamixStTEntityCreator >> newGlobalVariable [
 ]
 
 { #category : #'entity creation' }
+FamixStTEntityCreator >> newGlobalVariableNamed: aName [
+
+	<generated>
+	^ self add: (FamixStGlobalVariable named: aName)
+]
+
+{ #category : #'entity creation' }
 FamixStTEntityCreator >> newImplicitVariable [
 
 	<generated>
 	^ self add: FamixStImplicitVariable new
+]
+
+{ #category : #'entity creation' }
+FamixStTEntityCreator >> newImplicitVariableNamed: aName [
+
+	<generated>
+	^ self add: (FamixStImplicitVariable named: aName)
 ]
 
 { #category : #'entity creation' }
@@ -108,10 +143,24 @@ FamixStTEntityCreator >> newLocalVariable [
 ]
 
 { #category : #'entity creation' }
+FamixStTEntityCreator >> newLocalVariableNamed: aName [
+
+	<generated>
+	^ self add: (FamixStLocalVariable named: aName)
+]
+
+{ #category : #'entity creation' }
 FamixStTEntityCreator >> newMethod [
 
 	<generated>
 	^ self add: FamixStMethod new
+]
+
+{ #category : #'entity creation' }
+FamixStTEntityCreator >> newMethodNamed: aName [
+
+	<generated>
+	^ self add: (FamixStMethod named: aName)
 ]
 
 { #category : #'entity creation' }
@@ -129,6 +178,13 @@ FamixStTEntityCreator >> newNamespace [
 ]
 
 { #category : #'entity creation' }
+FamixStTEntityCreator >> newNamespaceNamed: aName [
+
+	<generated>
+	^ self add: (FamixStNamespace named: aName)
+]
+
+{ #category : #'entity creation' }
 FamixStTEntityCreator >> newPackage [
 
 	<generated>
@@ -136,10 +192,24 @@ FamixStTEntityCreator >> newPackage [
 ]
 
 { #category : #'entity creation' }
+FamixStTEntityCreator >> newPackageNamed: aName [
+
+	<generated>
+	^ self add: (FamixStPackage named: aName)
+]
+
+{ #category : #'entity creation' }
 FamixStTEntityCreator >> newParameter [
 
 	<generated>
 	^ self add: FamixStParameter new
+]
+
+{ #category : #'entity creation' }
+FamixStTEntityCreator >> newParameterNamed: aName [
+
+	<generated>
+	^ self add: (FamixStParameter named: aName)
 ]
 
 { #category : #'entity creation' }
@@ -182,4 +252,11 @@ FamixStTEntityCreator >> newUnknownVariable [
 
 	<generated>
 	^ self add: FamixStUnknownVariable new
+]
+
+{ #category : #'entity creation' }
+FamixStTEntityCreator >> newUnknownVariableNamed: aName [
+
+	<generated>
+	^ self add: (FamixStUnknownVariable named: aName)
 ]

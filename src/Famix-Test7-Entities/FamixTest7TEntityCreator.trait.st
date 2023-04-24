@@ -24,6 +24,13 @@ FamixTest7TEntityCreator >> newClass [
 ]
 
 { #category : #'entity creation' }
+FamixTest7TEntityCreator >> newClassNamed: aName [
+
+	<generated>
+	^ self add: (FamixTest7Class named: aName)
+]
+
+{ #category : #'entity creation' }
 FamixTest7TEntityCreator >> newComment [
 
 	<generated>
@@ -42,6 +49,13 @@ FamixTest7TEntityCreator >> newMethod [
 
 	<generated>
 	^ self add: FamixTest7Method new
+]
+
+{ #category : #'entity creation' }
+FamixTest7TEntityCreator >> newMethodNamed: aName [
+
+	<generated>
+	^ self add: (FamixTest7Method named: aName)
 ]
 
 { #category : #'entity creation' }
