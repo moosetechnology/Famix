@@ -185,12 +185,14 @@ FamixMetamodelBuilder >> ensureLocalTraitNamed: aString [
 { #category : #initialization }
 FamixMetamodelBuilder >> entityCreatorTrait [
 
-	^ (self
-		   newTraitNamed: #TEntityCreator
-		   comment: 'This trait is used by Famix models.
-It provides an API for creating new entities and adding them in the model.')
-		  tag: 'Model';
-		  yourself
+	^ self traits
+		  detect: [ :each | each name = #TEntityCreator ]
+		  ifNone: [ 
+			  self traits add: (FmxMBEntityCreatorTrait new
+					   builder: self;
+					   prefix: self configuration prefix;
+					   packageName: self configuration packageName;
+					   yourself) ]
 ]
 
 { #category : #accessing }

@@ -40,46 +40,73 @@ FmxMBRealRingEnvironment >> compile: aSource in: aClass classified: aProtocol pa
 
 { #category : #installing }
 FmxMBRealRingEnvironment >> recordAdoptionOfClassDefinitionFrom: realClass to: anRGClass [
+
 	| customSlots customSlotNames slotDefinitions slotsString definition traitsString |
+
 	(realClass needToAdaptTo: anRGClass) ifFalse: [ ^ self ].
 
-	customSlots := realClass localSlots copyWithoutAll: realClass generatedSlots.
+	customSlots := realClass localSlots copyWithoutAll:
+		               realClass generatedSlots.
 	customSlotNames := customSlots collect: #name.
-	slotDefinitions := ((anRGClass slots reject: [ :each | customSlotNames includes: each name ]) collect: #definitionString) asOrderedCollection.
+	slotDefinitions := ((anRGClass slots reject: [ :each | 
+		                     customSlotNames includes: each name ]) 
+		                    collect: #definitionString) asOrderedCollection.
 	slotDefinitions addAll: (customSlots collect: #definitionString).
 	slotDefinitions := slotDefinitions sorted.
 
 	slotsString := '{' , (slotDefinitions joinUsing: '. ') , '}'.
 	traitsString := self traitStringFrom: realClass to: anRGClass.
 	definition := anRGClass isTrait
-		ifFalse: [ '{superclass} subclass: #{className} 
+		              ifFalse: [ 
+			              '{superclass} subclass: #{className} 
 		uses: {traits} 
 		slots: {slots} 
 		classVariables: {classVariables}
 		poolDictionaries: ''{poolDictionaries}''
-		category: ''{category}'''
-				format:
-					(Dictionary
-						newFrom:
-							{(#superclass -> anRGClass superclass name) . (#className -> anRGClass name) . (#layout -> realClass classLayout class name) . (#traits -> traitsString) . (#slots -> slotsString).
-							(#classVariables -> (self classVariablesStringFor: realClass)) . (#poolDictionaries -> realClass sharedPoolsString) . (#category -> realClass category)}) ]
-		ifTrue: [ '{superclass} named: #{className} 
+		category: ''{category}''' format: (Dictionary newFrom: { 
+						               (#superclass -> anRGClass superclass name).
+						               (#className -> anRGClass name).
+						               (#layout -> realClass classLayout class name).
+						               (#traits -> traitsString).
+						               (#slots -> slotsString).
+						               (#classVariables
+						                -> (self classVariablesStringFor: realClass)).
+						               (#poolDictionaries -> realClass sharedPoolsString).
+						               (#category -> realClass category) }) ]
+		              ifTrue: [ 
+			              '{superclass} named: #{className} 
 		uses: {traits} 
 		slots: {slots} 
-		category: ''{category}'''
-				format: (Dictionary newFrom: {(#superclass -> anRGClass superclass name) . (#className -> anRGClass name) . (#traits -> traitsString) . (#slots -> slotsString) . (#category -> realClass category)}) ].
+		category: ''{category}''' format: (Dictionary newFrom: { 
+						               (#superclass -> anRGClass superclass name).
+						               (#className -> anRGClass name).
+						               (#traits -> traitsString).
+						               (#slots -> slotsString).
+						               (#category -> realClass category) }) ].
 
 	changesToApply add: (FmxClassAddition definition: definition)
 ]
 
 { #category : #installing }
 FmxMBRealRingEnvironment >> recordClassChangesFor: anRGClass [
+
 	| realClass |
 	realClass := self class environment classNamed: anRGClass name.
-	realClass ifNil: [ changesToApply add: (FmxClassAddition definition: anRGClass definition) ] ifNotNil: [ self recordAdoptionOfClassDefinitionFrom: realClass to: anRGClass ].
+	realClass
+		ifNil: [ 
+			changesToApply add:
+				(FmxClassAddition definition: anRGClass definition) ]
+		ifNotNil: [ 
+		self recordAdoptionOfClassDefinitionFrom: realClass to: anRGClass ].
 	self recordClassCommentChangeOf: realClass to: anRGClass.
-	self recordMethodsAdoptionsOf: realClass to: anRGClass realClassName: anRGClass name.
-	self recordMethodsAdoptionsOf: (realClass ifNotNil: #class) to: anRGClass classSide realClassName: anRGClass name
+	self
+		recordMethodsAdoptionsOf: realClass
+		to: anRGClass
+		realClassName: anRGClass name.
+	self
+		recordMethodsAdoptionsOf: (realClass ifNotNil: #class)
+		to: anRGClass classSide
+		realClassName: anRGClass name
 ]
 
 { #category : #installing }
@@ -163,20 +190,37 @@ FmxMBRealRingEnvironment >> regenerationIsNeeded [
 
 { #category : #installing }
 FmxMBRealRingEnvironment >> traitStringFrom: realClass to: aRGClass [
+
 	"We need to collect the generated traits + the custom traits added by the user."
 
 	| customTraitNames traitsDefinitions traitCompositionString precedingTrait |
-	customTraitNames := (realClass traitComposition rootMembers select: [ :e | realClass customTraitNames includes: e name ]) collect: #traitCompositionExpression.
-	traitsDefinitions := aRGClass traitsDefinitions ifEmpty: [ {} ] ifNotEmpty: [ :rgDefinitions | {rgDefinitions anyOne} , (rgDefinitions allButFirst collect: [ :e | '(' , e , ')' ]) ].
+	customTraitNames := (realClass traitComposition rootMembers select: [ 
+		                     :e | 
+		                     realClass customTraitNames includes: e name ]) 
+		                    collect: #traitCompositionExpression.
+	traitsDefinitions := aRGClass traitsDefinitions
+		                     ifEmpty: [ {  } ]
+		                     ifNotEmpty: [ :rgDefinitions | 
+			                     { rgDefinitions anyOne }
+			                     ,
+			                     (rgDefinitions allButFirst collect: [ :e | 
+				                      '(' , e , ')' ]) ].
 	traitsDefinitions := traitsDefinitions , customTraitNames.
-	
-	traitCompositionString := traitsDefinitions ifEmpty: [ ^ '{ }' ] ifNotEmpty: [ traitsDefinitions joinUsing: ' + ' ].
-	
-	precedingTrait := aRGClass propertyNamed: #precedingTrait ifAbsent: [ ^ traitCompositionString ].
-	
-	^ String streamContents: [ :s | s nextPutAll: '(( ' ; 
-			nextPutAll: traitCompositionString ; 
-			nextPutAll: ' ) withPrecedenceOf: '; nextPutAll: precedingTrait; nextPutAll: ' )' ].
-	
-	
+
+	traitCompositionString := traitsDefinitions
+		                          ifEmpty: [ ^ '{ }' ]
+		                          ifNotEmpty: [ 
+		                          traitsDefinitions joinUsing: ' + ' ].
+
+	precedingTrait := aRGClass
+		                  propertyNamed: #precedingTrait
+		                  ifAbsent: [ ^ traitCompositionString ].
+
+	^ String streamContents: [ :s | 
+		  s
+			  nextPutAll: '(( ';
+			  nextPutAll: traitCompositionString;
+			  nextPutAll: ' ) withPrecedenceOf: ';
+			  nextPutAll: precedingTrait;
+			  nextPutAll: ' )' ]
 ]

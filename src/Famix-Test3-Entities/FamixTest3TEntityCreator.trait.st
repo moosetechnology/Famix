@@ -15,3 +15,101 @@ FamixTest3TEntityCreator classSide >> annotation [
 	<generated>
 	^ self
 ]
+
+{ #category : #'entity creation' }
+FamixTest3TEntityCreator >> newAccess [
+
+	<generated>
+	^ self add: FamixTest3Access new
+]
+
+{ #category : #'entity creation' }
+FamixTest3TEntityCreator >> newAttribute [
+
+	<generated>
+	^ self add: FamixTest3Attribute new
+]
+
+{ #category : #'entity creation' }
+FamixTest3TEntityCreator >> newClass [
+
+	<generated>
+	^ self add: FamixTest3Class new
+]
+
+{ #category : #'entity creation' }
+FamixTest3TEntityCreator >> newComment [
+
+	<generated>
+	^ self add: FamixTest3Comment new
+]
+
+{ #category : #'entity creation' }
+FamixTest3TEntityCreator >> newInvocation [
+
+	<generated>
+	^ self add: FamixTest3Invocation new
+]
+
+{ #category : #'entity creation' }
+FamixTest3TEntityCreator >> newMethod [
+
+	<generated>
+	^ self add: FamixTest3Method new
+]
+
+{ #category : #'entity creation' }
+FamixTest3TEntityCreator >> newModel [
+
+	<generated>
+	^ self add: FamixTest3Model new
+]
+
+{ #category : #'entity creation' }
+FamixTest3TEntityCreator >> newPackage [
+
+	<generated>
+	^ self add: FamixTest3Package new
+]
+
+{ #category : #'entity creation' }
+FamixTest3TEntityCreator >> newPrimitiveType [
+
+	<generated>
+	^ self add: FamixTest3PrimitiveType new
+]
+
+{ #category : #'entity creation' }
+FamixTest3TEntityCreator >> newReference [
+
+	<generated>
+	^ self add: FamixTest3Reference new
+]
+
+{ #category : #'entity creation' }
+FamixTest3TEntityCreator >> newSourceLanguage [
+
+	<generated>
+	^ self add: FamixTest3SourceLanguage new
+]
+
+{ #category : #'entity creation' }
+FamixTest3TEntityCreator >> newSourceTextAnchor [
+
+	<generated>
+	^ self add: FamixTest3SourceTextAnchor new
+]
+
+{ #category : #'entity creation' }
+FamixTest3TEntityCreator >> newType [
+
+	<generated>
+	^ self add: FamixTest3Type new
+]
+
+{ #category : #'entity creation' }
+FamixTest3TEntityCreator >> newUnknownSourceLanguage [
+
+	<generated>
+	^ self add: FamixTest3UnknownSourceLanguage new
+]

@@ -3,22 +3,22 @@ This trait is used by Famix models.
 It provides an API for creating new entities and adding them in the model.
 "
 Trait {
-	#name : #FamixTEntityCreator,
-	#category : #'Famix-Traits-Traits'
+	#name : #FDTEntityCreator,
+	#category : #'Famix-TestModel1MetamodelDocumentor-Model'
 }
 
 { #category : #meta }
-FamixTEntityCreator classSide >> annotation [
+FDTEntityCreator classSide >> annotation [
 
 	<FMClass: #TEntityCreator super: #Object>
-	<package: #'Famix-Traits'>
+	<package: #'Famix-TestModel1MetamodelDocumentor'>
 	<generated>
 	^ self
 ]
 
 { #category : #'entity creation' }
-FamixTEntityCreator >> newModel [
+FDTEntityCreator >> newModel [
 
 	<generated>
-	^ self add: FamixModel new
+	^ self add: FDModel new
 ]

@@ -1,6 +1,8 @@
 Class {
 	#name : #FDModel,
 	#superclass : #MooseModel,
+	#traits : 'FDTEntityCreator',
+	#classTraits : 'FDTEntityCreator classTrait',
 	#category : #'Famix-TestModel1MetamodelDocumentor-Model'
 }
 
