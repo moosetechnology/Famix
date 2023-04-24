@@ -1,6 +1,8 @@
 Class {
 	#name : #FamixJavaModel,
 	#superclass : #MooseModel,
+	#traits : 'FamixJavaTEntityCreator',
+	#classTraits : 'FamixJavaTEntityCreator classTrait',
 	#category : #'Famix-Java-Entities-Model'
 }
 

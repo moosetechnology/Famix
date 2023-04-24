@@ -4,6 +4,8 @@ This is a the comment of the model class
 Class {
 	#name : #FamixTest1Model,
 	#superclass : #MooseModel,
+	#traits : 'FamixTest1TEntityCreator',
+	#classTraits : 'FamixTest1TEntityCreator classTrait',
 	#instVars : [
 		'#modelHasProperties => FMProperty'
 	],

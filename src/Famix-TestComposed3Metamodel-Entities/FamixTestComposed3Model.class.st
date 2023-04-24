@@ -1,6 +1,8 @@
 Class {
 	#name : #FamixTestComposed3Model,
 	#superclass : #MooseModel,
+	#traits : 'FamixTestComposed1TEntityCreator + FamixTestComposed2TEntityCreator + FamixTestComposed3TEntityCreator + FamixTestComposedTEntityCreator',
+	#classTraits : 'FamixTestComposed1TEntityCreator classTrait + FamixTestComposed2TEntityCreator classTrait + FamixTestComposed3TEntityCreator classTrait + FamixTestComposedTEntityCreator classTrait',
 	#category : #'Famix-TestComposed3Metamodel-Entities-Model'
 }
 

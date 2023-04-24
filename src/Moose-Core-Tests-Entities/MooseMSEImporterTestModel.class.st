@@ -1,6 +1,8 @@
 Class {
 	#name : #MooseMSEImporterTestModel,
 	#superclass : #MooseModel,
+	#traits : 'MooseMSEImporterTestTEntityCreator',
+	#classTraits : 'MooseMSEImporterTestTEntityCreator classTrait',
 	#category : #'Moose-Core-Tests-Entities-Model'
 }
 
