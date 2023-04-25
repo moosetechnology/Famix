@@ -14,13 +14,14 @@ FmxMBEntityCreatorTrait >> generate [
 	super generate.
 
 	self builder classes
-		select: [ :cls | 
-			cls isAbstractClass not and: [ cls isMetamodelClassGroup not ] ]
+		reject: [ :cls | 
+			cls isAbstractClass or: [ 
+				cls isModelClass or: [ cls isMetamodelClassGroup ] ] ]
 		thenDo: [ :cls | 
 			self generateEntityCreationMethodFor: cls.
 			(cls allTransitiveTraits anySatisfy: [ :trait | 
-				 trait name = #TNamedEntity ]) ifTrue: [ 
-				self generateNamedEntityCreationMethodFor: cls ] ]
+				 trait prefix = #Famix and: [ trait name = #TNamedEntity ] ]) 
+				ifTrue: [ self generateNamedEntityCreationMethodFor: cls ] ]
 ]
 
 { #category : #generating }
@@ -57,6 +58,6 @@ FmxMBEntityCreatorTrait >> initialize [
 	super initialize.
 	name := #TEntityCreator.
 	comment := 'This trait is used by Famix models.
-It provides an API for creating new entities and adding them in the model.'.
+It provides an API for creating entities and adding them to the model.'.
 	tag := 'Model'
 ]

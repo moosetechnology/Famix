@@ -1,6 +1,6 @@
 "
 This trait is used by Famix models.
-It provides an API for creating new entities and adding them in the model.
+It provides an API for creating entities and adding them to the model.
 "
 Trait {
 	#name : #FamixTest5TEntityCreator,
@@ -28,13 +28,6 @@ FamixTest5TEntityCreator >> newAnnotationType2 [
 
 	<generated>
 	^ self add: FamixTest5AnnotationType2 new
-]
-
-{ #category : #'entity creation' }
-FamixTest5TEntityCreator >> newModel [
-
-	<generated>
-	^ self add: FamixTest5Model new
 ]
 
 { #category : #'entity creation' }

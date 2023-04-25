@@ -80,7 +80,8 @@ FamixMetamodelBuilder >> acceptVisitor: aVisitor [
 FamixMetamodelBuilder >> addEntityCreatorTraitToModel: aClass [
 
 	(self classes anySatisfy: [ :cls | 
-		 cls isAbstractClass not and: [ cls isMetamodelClassGroup not ] ]) 
+		 cls isAbstractClass not and: [ 
+			 cls isModelClass not and: [ cls isMetamodelClassGroup not ] ] ]) 
 		ifTrue: [ aClass addTraitGeneralization: self entityCreatorTrait ]
 ]
 
