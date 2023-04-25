@@ -1,6 +1,6 @@
 "
 This trait is used by Famix models.
-It provides an API for creating new entities and adding them in the model.
+It provides an API for creating entities and adding them to the model.
 "
 Trait {
 	#name : #MooseMSEImporterTestTEntityCreator,
@@ -70,13 +70,6 @@ MooseMSEImporterTestTEntityCreator >> newMethodNamed: aName [
 
 	<generated>
 	^ self add: (MooseMSEImporterTestMethod named: aName)
-]
-
-{ #category : #'entity creation' }
-MooseMSEImporterTestTEntityCreator >> newModel [
-
-	<generated>
-	^ self add: MooseMSEImporterTestModel new
 ]
 
 { #category : #'entity creation' }
