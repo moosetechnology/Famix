@@ -1,7 +1,7 @@
 Class {
 	#name : #FamixClassGroup,
 	#superclass : #FamixTypeGroup,
-	#category : #'Famix-Traits-Entities'
+	#category : #'Famix-Traits-Groups'
 }
 
 { #category : #meta }

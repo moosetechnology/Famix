@@ -19,7 +19,8 @@ Class {
 		'basicModelSuperclassName',
 		'modelTag',
 		'shouldGenerateFileImportHelpers',
-		'basicImportingContextSuperclassName'
+		'basicImportingContextSuperclassName',
+		'groupTag'
 	],
 	#category : #'Famix-MetamodelBuilder-Core-Basic'
 }
@@ -119,6 +120,12 @@ FmxMBConfiguration >> defaultClassTag [
 ]
 
 { #category : #'settings - default' }
+FmxMBConfiguration >> defaultGroupTag [
+
+	^ #Groups
+]
+
+{ #category : #'settings - default' }
 FmxMBConfiguration >> defaultModelTag [
 
 	^ #Model
@@ -128,6 +135,12 @@ FmxMBConfiguration >> defaultModelTag [
 FmxMBConfiguration >> defaultTraitTag [
 
 	^ #Traits
+]
+
+{ #category : #accessing }
+FmxMBConfiguration >> groupTag [
+
+	^ groupTag ifNil: [ groupTag := self defaultGroupTag ]
 ]
 
 { #category : #initialization }
