@@ -31,6 +31,11 @@ FamixJavaParameterizedType >> allSuperclassesDo: aBlock [
 	self parameterizableClass ifNotNil: [ :a | a withSuperclassesDo: aBlock ]
 ]
 
+{ #category : #printing }
+FamixJavaParameterizedType >> displayStringOn: aStream [
+	self mooseNameOn: aStream
+]
+
 { #category : #testing }
 FamixJavaParameterizedType >> isParameterizedType [
 	^ true
@@ -38,8 +43,14 @@ FamixJavaParameterizedType >> isParameterizedType [
 
 { #category : #accessing }
 FamixJavaParameterizedType >> mooseNameOn: aStream [
-	self parameterizableClass ifNotNil: [ :pc | pc mooseNameOn: aStream ].
+
+	self name ifNotNil: [ :n | aStream << n ] ifNil: [ 
+		parameterizableClass
+			ifNotNil: [ :pc | pc mooseNameOn: aStream ]
+			ifNil: [ aStream nextPutAll: self class undefinedName ] ].
 	aStream nextPut: $<.
-	self arguments do: [ :each | each mooseNameOn: aStream ] separatedBy: [ aStream nextPut: $, ].
+	self arguments
+		do: [ :each | each mooseNameOn: aStream ]
+		separatedBy: [ aStream nextPut: $, ].
 	aStream nextPut: $>
 ]
