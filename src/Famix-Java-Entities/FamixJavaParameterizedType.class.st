@@ -15,22 +15,6 @@ FamixJavaParameterizedType class >> annotation [
 	^ self
 ]
 
-{ #category : #enumerating }
-FamixJavaParameterizedType >> allSubclassesDo: aBlock [
-	"we override this traversal because we want to
-	traverse the parameter type"
-
-	self parameterizableClass ifNotNil: [ :a | a withSubclassesDo: aBlock ]
-]
-
-{ #category : #enumerating }
-FamixJavaParameterizedType >> allSuperclassesDo: aBlock [
-	"we override this traversal because we want to
-	traverse the parameter type"
-
-	self parameterizableClass ifNotNil: [ :a | a withSuperclassesDo: aBlock ]
-]
-
 { #category : #printing }
 FamixJavaParameterizedType >> displayStringOn: aStream [
 	self mooseNameOn: aStream
