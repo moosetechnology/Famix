@@ -28,3 +28,24 @@ FamixJavaParameterizableClass >> parameters: aCollection [
 
 	self attributeAt: #parameters put: aCollection
 ]
+
+{ #category : #enumerating }
+FamixJavaParameterizableClass >> subclassHierarchy [
+	"has to redefine this method to override the one from TWithInheritance"
+	| superclasses |
+	superclasses := OrderedCollection new.
+	self parameterizedTypes do: [ :parameterizedType | 
+		parameterizedType allSubclassesDo: [ :each | superclasses add: each ] ].
+	^ superclasses
+]
+
+{ #category : #enumerating }
+FamixJavaParameterizableClass >> superclassHierarchy [
+	"has to redefine this method to override the one from TWithInheritance"
+	| superclasses |
+	superclasses := OrderedCollection new.
+	self parameterizedTypes do: [ :parameterizedType | 
+		parameterizedType allSuperclassesDo: [ :each | 
+			superclasses add: each ] ].
+	^ superclasses
+]

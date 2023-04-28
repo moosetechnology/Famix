@@ -36,3 +36,24 @@ FamixTWithParameterizedTypes >> parameterizedTypes: anObject [
 	<generated>
 	parameterizedTypes value: anObject
 ]
+
+{ #category : #enumerating }
+FamixTWithParameterizedTypes >> subclassHierarchy [
+
+	| superclasses |
+	superclasses := OrderedCollection new.
+	self parameterizedTypes do: [ :parameterizedType | 
+		parameterizedType allSubclassesDo: [ :each | superclasses add: each ] ].
+	^ superclasses
+]
+
+{ #category : #enumerating }
+FamixTWithParameterizedTypes >> superclassHierarchy [
+
+	| superclasses |
+	superclasses := OrderedCollection new.
+	self parameterizedTypes do: [ :parameterizedType | 
+		parameterizedType allSuperclassesDo: [ :each | 
+			superclasses add: each ] ].
+	^ superclasses
+]

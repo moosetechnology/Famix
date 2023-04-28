@@ -28,16 +28,18 @@ FamixTWithInheritances >> addSuperInheritance: anInheritance [
 
 { #category : #enumerating }
 FamixTWithInheritances >> allSubclassesDo: aBlock [
-	self subInheritances do: [ :each | aBlock value: each subclass ].
-	self subInheritances do: [ :each | each subclass allSubclassesDo: aBlock ]
+
+	self subInheritances do: [ :each | 
+		aBlock value: each subclass.
+		each subclass allSubclassesDo: aBlock ]
 ]
 
 { #category : #enumerating }
 FamixTWithInheritances >> allSuperclassesDo: aBlock [
 
-	self superInheritances do: [ :each | aBlock value: each superclass ].
-	self superInheritances do: [ :each |  
-			each superclass allSuperclassesDo: aBlock ] 
+	self superInheritances do: [ :each | 
+		aBlock value: each superclass.
+		each superclass allSuperclassesDo: aBlock ]
 ]
 
 { #category : #enumerating }
@@ -191,7 +193,7 @@ FamixTWithInheritances >> superclass [
 FamixTWithInheritances >> superclassHierarchy [
 	| superclasses |
 	superclasses := OrderedCollection new.
-	self allSuperclassesDo: [:each |  superclasses add: each].
+	self allSuperclassesDo: [:each | superclasses add: each].
 	^ superclasses
 ]
 
