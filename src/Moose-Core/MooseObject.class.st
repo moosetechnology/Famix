@@ -289,7 +289,7 @@ MooseObject >> description: text [
 ]
 
 { #category : #printing }
-MooseObject >> displayStringOn: aStream [ 
+MooseObject >> displayStringOn: aStream [
 	self mooseNameOn: aStream
 ]
 
