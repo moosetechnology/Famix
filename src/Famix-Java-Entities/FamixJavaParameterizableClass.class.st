@@ -15,6 +15,19 @@ FamixJavaParameterizableClass class >> annotation [
 	^ self
 ]
 
+{ #category : #enumerating }
+FamixJavaParameterizableClass >> allSubclassesDo: aBlock [
+	"override traversal to include subtypes of parameterized types"
+
+	| recursion |
+	recursion := [ :each | 
+	             aBlock value: each subclass.
+	             each subclass allSubclassesDo: aBlock ].
+	self subInheritances do: recursion.
+	self parameterizedTypes do: [ :type | 
+		type subInheritances do: recursion ]
+]
+
 { #category : #accessing }
 FamixJavaParameterizableClass >> parameters [
 	<FMProperty: #parameters type: #FamixJavaParameterType> <multivalued> <derived>
@@ -27,25 +40,4 @@ FamixJavaParameterizableClass >> parameters [
 FamixJavaParameterizableClass >> parameters: aCollection [
 
 	self attributeAt: #parameters put: aCollection
-]
-
-{ #category : #enumerating }
-FamixJavaParameterizableClass >> subclassHierarchy [
-	"has to redefine this method to override the one from TWithInheritance"
-	| superclasses |
-	superclasses := OrderedCollection new.
-	self parameterizedTypes do: [ :parameterizedType | 
-		parameterizedType allSubclassesDo: [ :each | superclasses add: each ] ].
-	^ superclasses
-]
-
-{ #category : #enumerating }
-FamixJavaParameterizableClass >> superclassHierarchy [
-	"has to redefine this method to override the one from TWithInheritance"
-	| superclasses |
-	superclasses := OrderedCollection new.
-	self parameterizedTypes do: [ :parameterizedType | 
-		parameterizedType allSuperclassesDo: [ :each | 
-			superclasses add: each ] ].
-	^ superclasses
 ]

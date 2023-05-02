@@ -15,6 +15,19 @@ FamixJavaParameterizedType class >> annotation [
 	^ self
 ]
 
+{ #category : #enumerating }
+FamixJavaParameterizedType >> allSuperclassesDo: aBlock [
+	"override traversal to include supertypes of parameterizable class"
+
+	| recursion |
+	recursion := [ :each | 
+	             aBlock value: each superclass.
+	             each superclass allSuperclassesDo: aBlock ].
+	self superInheritances do: recursion.
+	self parameterizableClass ifNotNil: [ :class | 
+		class superInheritances do: recursion ]
+]
+
 { #category : #printing }
 FamixJavaParameterizedType >> displayStringOn: aStream [
 	self mooseNameOn: aStream
