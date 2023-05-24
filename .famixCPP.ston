@@ -5,7 +5,7 @@ SmalltalkCISpec {
       #directory : 'src',
       #onConflict : #useIncoming,
       #onUpgrade : #useIncoming,
-      #repository : 'https://github.com/moosetechnology/Famix-Cpp',
+      #repository : 'https://github.com/moosetechnology/Famix-Cpp'
     }
   ]
 }
