@@ -1,0 +1,20 @@
+name: Other metamodels
+
+on: push
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      PROJECT_NAME: ${{ matrix.smalltalk }}
+    strategy:
+      matrix:
+        smalltalk: [ Pharo64-10, Pharo64-11 ]
+    name: ${{ matrix.smalltalk }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: hpi-swa/setup-smalltalkCI@v1
+        with:
+          smalltalk-image: ${{ matrix.smalltalk }}
+      - run: smalltalkci -s ${{ matrix.smalltalk }}
+        shell: bash
+        timeout-minutes: 15
