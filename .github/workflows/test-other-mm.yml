@@ -4,17 +4,16 @@ on: push
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      PROJECT_NAME: ${{ matrix.smalltalk }}
     strategy:
       matrix:
         smalltalk: [ Pharo64-10, Pharo64-11 ]
+        smalltalk_config: [ .smalltalk.ston ]
     name: ${{ matrix.smalltalk }}
     steps:
       - uses: actions/checkout@v3
       - uses: hpi-swa/setup-smalltalkCI@v1
         with:
           smalltalk-image: ${{ matrix.smalltalk }}
-      - run: smalltalkci -s ${{ matrix.smalltalk }}
+      - run: smalltalkci -s ${{ matrix.smalltalk }} ${{ matrix.smalltalk_config }}
         shell: bash
         timeout-minutes: 15
