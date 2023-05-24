@@ -7,7 +7,7 @@ jobs:
     strategy:
       matrix:
         smalltalk: [ Pharo64-10, Pharo64-11 ]
-        smalltalk_config: [ .smalltalk.ston ]
+        smalltalk_config: [ .smalltalk.ston, .famixCPP.ston ]
     name: ${{ matrix.smalltalk }}
     steps:
       - uses: actions/checkout@v3
