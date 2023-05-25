@@ -1,4 +1,4 @@
 SmalltalkCISpec {
   #preLoading : 'load-metamodels.st',
-  #testing : { #packages : [ 'Famix*' ] }
+  #testing : { #categories : [ 'Famix*' ] }
 }
