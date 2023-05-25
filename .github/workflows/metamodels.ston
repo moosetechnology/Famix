@@ -1,0 +1,4 @@
+SmalltalkCISpec {
+  #preLoading : 'load-metamodels.st',
+  #testing : #allTestCases : true
+}
