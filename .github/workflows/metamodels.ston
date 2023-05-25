@@ -1,4 +1,10 @@
 SmalltalkCISpec {
+  #loading : [
+    SCIMetacelloLoadSpec {
+      #baseline : 'Famix',
+      #directory : '../../src'
+    }
+  ],
   #preTesting : 'load-metamodels.st',
-  #testing : { #categories : [ 'Famix*' ] }
+  #testing : { #categories : [ 'Famix-C*' ] }
 }
