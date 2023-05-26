@@ -417,7 +417,7 @@ MooseAbstractGroupTest >> testOccurenceOf [
 
 { #category : #tests }
 MooseAbstractGroupTest >> testPropertyNamed [
-	self assert: (group propertyNamed: #UNKNOWN) isNil.
+	self should: [group propertyNamed: #UNKNOWN] raise: NotFound.
 	group propertyNamed: 'UNKNOWN' put: 10.
 	self assert: (group propertyNamed: #UNKNOWN) equals: 10
 ]

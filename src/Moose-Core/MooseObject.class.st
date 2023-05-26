@@ -484,10 +484,9 @@ MooseObject >> properties [
 
 { #category : #properties }
 MooseObject >> propertyNamed: propertyName [ 
-	"Return the value of the property named propertyName, return nil if the property does not exist"
+	"Returns the value of the property named propertyName, raises an error if the property does not exist"
 
-	^ self propertyNamed: propertyName ifNil: [ nil ]
-
+	^ self propertyNamed: propertyName ifAbsent: [ NotFound signalFor: 'Property named ', propertyName  ]
 ]
 
 { #category : #properties }
