@@ -8,13 +8,12 @@ jobs:
       matrix:
         smalltalk: [ Moose64-10, Moose64-11 ]
         # smalltalk_config: [ .github/workflows/smalltalk.ston, .github/workflows/metamodels.ston ]
-        smalltalk_config: [ .github/workflows/smalltalk.ston ]
     name: ${{ matrix.smalltalk }} #, ${{ matrix.smalltalk_config }}
     steps:
       - uses: actions/checkout@v3
       - uses: hpi-swa/setup-smalltalkCI@v1
         with:
           smalltalk-image: ${{ matrix.smalltalk }}
-      - run: smalltalkci -s ${{ matrix.smalltalk }} ${{ matrix.smalltalk_config }}
+      - run: smalltalkci -s ${{ matrix.smalltalk }} # ${{ matrix.smalltalk_config }}
         shell: bash
         timeout-minutes: 15
