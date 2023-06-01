@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        smalltalk: [ Moose-10, Moose-11 ]
+        smalltalk: [ Moose64-10, Moose64-11 ]
         smalltalk_config: [ .github/workflows/smalltalk.ston, .github/workflows/metamodels.ston ]
     name: ${{ matrix.smalltalk }}
     steps:
