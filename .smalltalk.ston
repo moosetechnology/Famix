@@ -3,7 +3,8 @@ SmalltalkCISpec {
     SCIMetacelloLoadSpec {
       #baseline : 'Famix',
       #directory : 'src',
-      #onConflict : #useIncoming
+      #onConflict : #useIncoming,
+      #ignoreImage : true
     }
   ]
 }
