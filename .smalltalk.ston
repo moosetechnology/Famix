@@ -1,10 +1,9 @@
 SmalltalkCISpec {
+  #preLoading: 'create-famix-directory.st',
   #loading : [
     SCIMetacelloLoadSpec {
       #baseline : 'Famix',
-      #directory : 'src',
-      #onConflict : #useIncoming,
-      #ignoreImage : true
+      #directory : 'src'
     }
   ]
 }
