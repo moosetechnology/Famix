@@ -1,5 +1,5 @@
 SmalltalkCISpec {
-  #preLoading: '.workflows/create-famix-directory.st',
+  #preLoading: '.github/workflows/create-famix-directory.st',
   #loading : [
     SCIMetacelloLoadSpec {
       #baseline : 'Famix',
