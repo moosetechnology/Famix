@@ -301,7 +301,10 @@ BaselineOfFamix >> roelTyper: spec [
 
 { #category : #dependencies }
 BaselineOfFamix >> singularizePluralize: spec [
-	spec baseline: 'SingularizePluralize' with: [ spec repository: 'github://olekscode/SingularizePluralize:v1.0/src' ]
+
+	spec baseline: 'SingularizePluralize' with: [ 
+		spec repository:
+			'github://pharo-contributions/SingularizePluralize:v1.1/src' ]
 ]
 
 { #category : #dependencies }
