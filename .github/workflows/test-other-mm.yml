@@ -6,14 +6,13 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        smalltalk: [ Moose64-10, Moose64-11 ]
         smalltalk_config: [ .github/workflows/smalltalk.ston, .github/workflows/metamodels.ston ]
     name: ${{ matrix.smalltalk }}, ${{ matrix.smalltalk_config }}
     steps:
       - uses: actions/checkout@v3
       - uses: hpi-swa/setup-smalltalkCI@v1
         with:
-          smalltalk-image: ${{ matrix.smalltalk }}
-      - run: smalltalkci -s ${{ matrix.smalltalk }} ${{ matrix.smalltalk_config }}
+          smalltalk-image: Moose64-11
+      - run: smalltalkci -s ${{ steps.smalltalkci.outputs.smalltalk-image }} ${{ matrix.smalltalk_config }}
         shell: bash
         timeout-minutes: 15
