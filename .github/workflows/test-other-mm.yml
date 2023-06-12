@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        smalltalk-config: [ .github/workflows/smalltalk.ston, .github/workflows/metamodels.ston ]
+        smalltalk-config: [ .github/workflows/famix.ston, .github/workflows/famixCpp.ston ]
         include:
           - smalltalk-config: .github/workflows/famix.ston
             name: Famix tests
