@@ -6,11 +6,11 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        smalltalk_config: [ .github/workflows/smalltalk.ston, .github/workflows/metamodels.ston ]
+        smalltalk-config: [ .github/workflows/smalltalk.ston, .github/workflows/metamodels.ston ]
         include:
-          - smalltalk_config: .github/workflows/smalltalk.ston
+          - smalltalk-config: .github/workflows/smalltalk.ston
             name: Famix
-          - smalltalk_config: .github/workflows/metamodels.ston
+          - smalltalk-config: .github/workflows/metamodels.ston
             name: Other metamodels
         
     name: ${{ matrix.name }}
@@ -19,7 +19,7 @@ jobs:
       - uses: hpi-swa/setup-smalltalkCI@v1
         id: smalltalkci
         with:
-          smalltalk_image: Moose64-11
-      - run: smalltalkci -s ${{ steps.smalltalkci.outputs.smalltalk_image }} ${{ matrix.smalltalk_config }}
+          smalltalk-image: Moose64-11
+      - run: smalltalkci -s ${{ steps.smalltalkci.outputs.smalltalk-image }} ${{ matrix.smalltalk-config }}
         shell: bash
         timeout-minutes: 15
