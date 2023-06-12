@@ -22,7 +22,7 @@ jobs:
         id: smalltalkci
         with:
           smalltalk-image: Moose64-11
-          smalltalk-source: ${{ matrix.source }}
+          smalltalkCI-source: ${{ matrix.source }}
       - run: smalltalkci -s ${{ steps.smalltalkci.outputs.smalltalk-image }} ${{ matrix.smalltalk-config }}
         shell: bash
         timeout-minutes: 15
