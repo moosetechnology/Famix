@@ -13,7 +13,7 @@ jobs:
           - smalltalk_config: .github/workflows/metamodels.ston
             name: Other metamodels
         
-    name: ${{ matrix.config }}
+    name: ${{ matrix.name }}
     steps:
       - uses: actions/checkout@v3
       - uses: hpi-swa/setup-smalltalkCI@v1
