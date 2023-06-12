@@ -6,12 +6,12 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        smalltalk-config: [ .github/workflows/famix.ston, .github/workflows/famixCpp.ston ]
+        smalltalk-config: [ .github/workflows/famix-config.ston, .github/workflows/famixCpp-config.ston ]
         include:
-          - smalltalk-config: .github/workflows/famix.ston
+          - smalltalk-config: .github/workflows/famix-config.ston
             name: Famix tests
-          - smalltalk-config: .github/workflows/famixCpp.ston
-            name: CPP
+          - smalltalk-config: .github/workflows/famixCpp-config.ston
+            name: FamixCpp tests
         
     name: ${{ matrix.name }}
     steps:
