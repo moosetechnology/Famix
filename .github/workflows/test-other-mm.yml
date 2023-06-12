@@ -8,9 +8,9 @@ jobs:
       matrix:
         smalltalk-config: [ .github/workflows/smalltalk.ston, .github/workflows/metamodels.ston ]
         include:
-          - smalltalk-config: .github/workflows/smalltalk.ston
+          - smalltalk-config: .github/workflows/famix.ston
             name: Famix tests
-          - smalltalk-config: .github/workflows/metamodels.ston
+          - smalltalk-config: .github/workflows/famixCpp.ston
             name: CPP
         
     name: ${{ matrix.name }}
@@ -19,7 +19,7 @@ jobs:
       - uses: hpi-swa/setup-smalltalkCI@v1
         id: smalltalkci
         with:
-          smalltalk-image: Moose64-11
+          smalltalk-image: Pharo64-11
       - run: smalltalkci -s ${{ steps.smalltalkci.outputs.smalltalk-image }} ${{ matrix.smalltalk-config }}
         shell: bash
         timeout-minutes: 15
