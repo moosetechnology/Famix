@@ -10,7 +10,7 @@ jobs:
         include:
           - smalltalk-config: .github/workflows/smalltalk.ston
             name: Famix tests
-            source: github.repository
+            source: ${{github.repository}}
           - smalltalk-config: .github/workflows/metamodels.ston
             name: CPP
             source: moosetechnology/Famix-Cpp
