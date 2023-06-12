@@ -9,9 +9,11 @@ jobs:
         smalltalk-config: [ .github/workflows/smalltalk.ston, .github/workflows/metamodels.ston ]
         include:
           - smalltalk-config: .github/workflows/smalltalk.ston
-            name: Famix
+            name: Famix tests
+            source: github.repository
           - smalltalk-config: .github/workflows/metamodels.ston
-            name: Other metamodels
+            name: CPP
+            source: moosetechnology/Famix-Cpp
         
     name: ${{ matrix.name }}
     steps:
@@ -20,6 +22,7 @@ jobs:
         id: smalltalkci
         with:
           smalltalk-image: Moose64-11
+          smalltalk-source: ${{ matrix.source }}
       - run: smalltalkci -s ${{ steps.smalltalkci.outputs.smalltalk-image }} ${{ matrix.smalltalk-config }}
         shell: bash
         timeout-minutes: 15
