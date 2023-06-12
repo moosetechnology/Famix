@@ -5,6 +5,6 @@ SmalltalkCISpec {
       #directory : '../../src'
     }
   ],
-  #preTesting : 'load-metamodels.st',
+  #preTesting : 'famixCpp-Baseline.st',
   #testing : { #categories : [ 'Famix-C*' ] }
 }
