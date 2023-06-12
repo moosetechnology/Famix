@@ -1,5 +1,4 @@
 SmalltalkCISpec {
-  #preLoading: 'create-famix-directory.st',
   #loading : [
     SCIMetacelloLoadSpec {
       #baseline : 'Famix',
