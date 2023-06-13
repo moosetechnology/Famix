@@ -5,6 +5,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         smalltalk-config: [ .github/workflows/famix-config.ston, .github/workflows/famixCpp-config.ston ]
         include:
