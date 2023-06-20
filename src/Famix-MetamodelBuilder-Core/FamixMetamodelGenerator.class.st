@@ -108,11 +108,11 @@ FamixMetamodelGenerator class >> isRealMetamodel [
 
 { #category : #generation }
 FamixMetamodelGenerator class >> metamodelsToGenerate [
-	"We add she submetamodels before the MM composing them because if we do the other way around it will cause trouble when we regenerate all because it will remove the glue added by the composed MM."
+	"We add the submetamodels before the MM that composes them because if we do it the other way around, it will cause problems when we regenerate everything because it will remove the glue added by the composed MM."
 
 	| metamodels |
 	metamodels := self individualGenerators.
-	self addSubmetamodelsToGenerateFrom: metamodels to: metamodels.
+	self addSubmetamodelsToGenerateFrom: metamodels copy to: metamodels.
 	^ metamodels
 ]
 
