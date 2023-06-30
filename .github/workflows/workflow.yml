@@ -7,7 +7,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        smalltalk-config: [ .github/workflows/famix-config.ston, .github/workflows/famixCpp-config.ston, .github/workflows/criticBrowser-config.ston ]
+        smalltalk-config: [ .github/workflows/famix-config.ston, .github/workflows/famixCpp-config.ston, .github/workflows/criticBrowser-config.ston, .github/workflows/famixFortran-config.ston ]
         include:
           - smalltalk-config: .github/workflows/famix-config.ston
             name: Famix tests
