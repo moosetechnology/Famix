@@ -15,6 +15,8 @@ jobs:
             name: FamixCpp tests
           - smalltalk-config: .github/workflows/criticBrowser-config.ston
             name: CriticBrowser tests
+          - smalltalk-config: .github/workflows/famixFortran-config.ston
+            name: Fortran tests
         
     name: ${{ matrix.name }}
     steps:
