@@ -8,6 +8,7 @@ jobs:
       fail-fast: false
       matrix:
         smalltalk-config: [ .github/workflows/famix-config.ston, .github/workflows/famixCpp-config.ston, .github/workflows/criticBrowser-config.ston, .github/workflows/famixFortran-config.ston ]
+        smalltalk: [ Pharo64-10, Pharo64-11 ]
         include:
           - smalltalk-config: .github/workflows/famix-config.ston
             name: Famix tests
@@ -18,7 +19,7 @@ jobs:
           - smalltalk-config: .github/workflows/famixFortran-config.ston
             name: Fortran tests
         
-    name: ${{ matrix.name }}
+    name: ${{ matrix.name }} ${{ matrix.smalltalk}}
     steps:
       - uses: actions/checkout@v3
       - uses: hpi-swa/setup-smalltalkCI@v1
