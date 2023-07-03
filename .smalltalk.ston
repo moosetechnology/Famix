@@ -1,9 +1,0 @@
-SmalltalkCISpec {
-  #preLoading: '.github/workflows/create-famix-directory.st',
-  #loading : [
-    SCIMetacelloLoadSpec {
-      #baseline : 'Famix',
-      #directory : 'src'
-    }
-  ]
-}
