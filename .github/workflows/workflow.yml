@@ -8,7 +8,7 @@ jobs:
       fail-fast: false
       matrix:
         smalltalk-config: [ .github/workflows/famix-config.ston, .github/workflows/famixCpp-config.ston, .github/workflows/criticBrowser-config.ston, .github/workflows/famixFortran-config.ston ]
-        smalltalk: [ Pharo64-10, Pharo64-11 ]
+        smalltalk-image: [ Pharo64-10 , Pharo64-11 ]
         include:
           - smalltalk-config: .github/workflows/famix-config.ston
             name: Famix tests
@@ -19,13 +19,13 @@ jobs:
           - smalltalk-config: .github/workflows/famixFortran-config.ston
             name: Fortran tests
         
-    name: ${{ matrix.name }} ${{ matrix.smalltalk}}
+    name: ${{ matrix.name }} - ${{ matrix.smalltalk }}
     steps:
       - uses: actions/checkout@v3
       - uses: hpi-swa/setup-smalltalkCI@v1
         id: smalltalkci
         with:
-          smalltalk-image: Pharo64-11
+          smalltalk-image: ${{ matrix.smalltalk-image }}
       - run: smalltalkci -s ${{ steps.smalltalkci.outputs.smalltalk-image }} ${{ matrix.smalltalk-config }}
         shell: bash
         timeout-minutes: 15
