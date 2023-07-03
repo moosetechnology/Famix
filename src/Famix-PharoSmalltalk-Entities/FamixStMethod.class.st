@@ -237,6 +237,12 @@ FamixStMethod >> numberOfStatements [
 		computedAs: [ self computeNumberOfStatements ]
 ]
 
+{ #category : #'Famix-Extensions-metrics-support' }
+FamixStMethod >> printProtocol [
+
+	^ '" ' , self protocol , ' "' , String cr
+]
+
 { #category : #accessing }
 FamixStMethod >> protocol [
 
@@ -267,7 +273,7 @@ FamixStMethod >> smalltalkClass [
 FamixStMethod >> sourceText [
 
 	self flag: 'This code should be delegated to the anchor'.
-	^ [ self compiledMethod sourceCode ]
+	^ [ self printProtocol , self compiledMethod sourceCode ]
 		  on: Error
 		  do: [ "probably class is not in the system" super sourceText ]
 ]
