@@ -19,7 +19,7 @@ jobs:
           - smalltalk-config: .github/workflows/famixFortran-config.ston
             name: Fortran tests
         
-    name: ${{ matrix.name }} - ${{ matrix.smalltalk }}
+    name: ${{ matrix.name }} - ${{ matrix.smalltalk-image }}
     steps:
       - uses: actions/checkout@v3
       - uses: hpi-swa/setup-smalltalkCI@v1
