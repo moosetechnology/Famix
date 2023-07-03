@@ -6,5 +6,5 @@ SmalltalkCISpec {
     }
   ],
   #postLoading : 'famixCpp-baseline.st',
-  #testing : { #categories : [ 'Famix-C*' ] }
+  #testing : { #categories : [ 'Famix-Cpp-Entities-Tests', 'Famix-Cpp-Parser-Tests', 'Famix-CPreproc-Importer-Tests' ] }
 }
