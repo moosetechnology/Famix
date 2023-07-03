@@ -1,4 +1,4 @@
-name: Other metamodels
+name: Pull request
 
 on: 
   pull_request:
