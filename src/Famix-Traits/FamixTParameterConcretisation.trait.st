@@ -1,7 +1,7 @@
 Trait {
 	#name : #FamixTParameterConcretisation,
 	#instVars : [
-		'#concreteParameter => FMOne type: #FamixTConcreteParameterType opposite: #generic',
+		'#concreteParameter => FMOne type: #FamixTConcreteParameterType opposite: #generics',
 		'#concretisation => FMMany type: #FamixTConcretisation opposite: #parameterConcretisation',
 		'#genericParameter => FMOne type: #FamixTGenericParameterType opposite: #concretisations'
 	],
@@ -27,7 +27,7 @@ FamixTParameterConcretisation >> addConcretisation: anObject [
 
 { #category : #accessing }
 FamixTParameterConcretisation >> concreteParameter [
-	"Relation named: #concreteParameter type: #FamixTConcreteParameterType opposite: #generic"
+	"Relation named: #concreteParameter type: #FamixTConcreteParameterType opposite: #generics"
 
 	<generated>
 	<FMComment: 'concreteParameter linked to in this relationship. to-side of the association'>

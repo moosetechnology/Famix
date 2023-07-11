@@ -1525,7 +1525,7 @@ FamixGenerator >> defineRelations [
 	((tParameterConcretisation property:#concreteParameter)
 			comment: 'concreteParameter linked to in this relationship. to-side of the association'; target)
 			*-
-	((tConcreteParameterType  property:#generic)
+	((tConcreteParameterType  property:#generics)
 			comment: 'generic relationships, i.e. known genericParameter of this type.').
 
 	((tConcretisation property: #genericEntity)

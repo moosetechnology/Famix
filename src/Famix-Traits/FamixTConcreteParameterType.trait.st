@@ -5,7 +5,7 @@ Trait {
 	#name : #FamixTConcreteParameterType,
 	#instVars : [
 		'#concreteEntity => FMMany type: #FamixTParametricEntity opposite: #concreteParameters',
-		'#generic => FMMany type: #FamixTParameterConcretisation opposite: #concreteParameter'
+		'#generics => FMMany type: #FamixTParameterConcretisation opposite: #concreteParameter'
 	],
 	#traits : 'FamixTType',
 	#classTraits : 'FamixTType classTrait',
@@ -30,7 +30,7 @@ FamixTConcreteParameterType >> addConcreteEntity: anObject [
 { #category : #adding }
 FamixTConcreteParameterType >> addGeneric: anObject [
 	<generated>
-	^ self generic add: anObject
+	^ self generics add: anObject
 ]
 
 { #category : #accessing }
@@ -51,18 +51,18 @@ FamixTConcreteParameterType >> concreteEntity: anObject [
 ]
 
 { #category : #accessing }
-FamixTConcreteParameterType >> generic [
-	"Relation named: #generic type: #FamixTParameterConcretisation opposite: #concreteParameter"
+FamixTConcreteParameterType >> generics [
+	"Relation named: #generics type: #FamixTParameterConcretisation opposite: #concreteParameter"
 
 	<generated>
 	<FMComment: 'generic relationships, i.e. known genericParameter of this type.'>
 	<derived>
-	^ generic
+	^ generics
 ]
 
 { #category : #accessing }
-FamixTConcreteParameterType >> generic: anObject [
+FamixTConcreteParameterType >> generics: anObject [
 
 	<generated>
-	generic value: anObject
+	generics value: anObject
 ]
