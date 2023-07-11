@@ -1,9 +1,9 @@
 Trait {
 	#name : #FamixTWithExceptions,
 	#instVars : [
-		'#caughtExceptions => FMMany type: #FamixTException opposite: #catchingEntities',
-		'#declaredExceptions => FMMany type: #FamixTException opposite: #declaringEntities',
-		'#thrownExceptions => FMMany type: #FamixTException opposite: #throwingEntities'
+		'#caughtExceptions => FMMany type: #FamixTThrowable opposite: #catchingEntities',
+		'#declaredExceptions => FMMany type: #FamixTThrowable opposite: #declaringEntities',
+		'#thrownExceptions => FMMany type: #FamixTThrowable opposite: #throwingEntities'
 	],
 	#category : #'Famix-Traits-Exception'
 }
@@ -37,7 +37,7 @@ FamixTWithExceptions >> addThrownException: anObject [
 
 { #category : #accessing }
 FamixTWithExceptions >> caughtExceptions [
-	"Relation named: #caughtExceptions type: #FamixTException opposite: #catchingEntities"
+	"Relation named: #caughtExceptions type: #FamixTThrowable opposite: #catchingEntities"
 
 	<generated>
 	<FMComment: 'The exceptions caught by the method'>
@@ -53,7 +53,7 @@ FamixTWithExceptions >> caughtExceptions: anObject [
 
 { #category : #accessing }
 FamixTWithExceptions >> declaredExceptions [
-	"Relation named: #declaredExceptions type: #FamixTException opposite: #declaringEntities"
+	"Relation named: #declaredExceptions type: #FamixTThrowable opposite: #declaringEntities"
 
 	<generated>
 	<FMComment: 'The exceptions declared by the method'>
@@ -69,7 +69,7 @@ FamixTWithExceptions >> declaredExceptions: anObject [
 
 { #category : #accessing }
 FamixTWithExceptions >> thrownExceptions [
-	"Relation named: #thrownExceptions type: #FamixTException opposite: #throwingEntities"
+	"Relation named: #thrownExceptions type: #FamixTThrowable opposite: #throwingEntities"
 
 	<generated>
 	<FMComment: 'The exceptions thrown by the method'>

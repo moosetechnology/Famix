@@ -9,6 +9,7 @@ Class {
 		'annotationTypeAttribute',
 		'attribute',
 		'class',
+		'concretisation',
 		'containerEntity',
 		'enum',
 		'enumValue',
@@ -20,13 +21,15 @@ Class {
 		'method',
 		'package',
 		'parameter',
+		'parameterConcretisation',
 		'parameterType',
-		'parameterizableClass',
+		'parametricClass',
+		'parametricInterface',
+		'parametricMethod',
 		'primitiveType',
 		'reference',
 		'type',
 		'unknownVariable',
-		'parameterizedType',
 		'indexedFileAnchor',
 		'tCanBeVolatile',
 		'tCanBeTransient',
@@ -37,9 +40,10 @@ Class {
 		'tImplementable',
 		'tCanImplement',
 		'tWithInterfaces',
-		'parameterizableInterface',
-		'parameterizableException',
 		'import'
+	],
+	#classInstVars : [
+		'builder'
 	],
 	#category : #'Famix-Java-Generator'
 }
@@ -138,16 +142,21 @@ FamixJavaGenerator >> defineClasses [
 	package := builder newClassNamed: #Package.
 	parameter := builder newClassNamed: #Parameter.
 	parameterType := builder newClassNamed: #ParameterType.
-	parameterizableClass := builder newClassNamed: #ParameterizableClass.
-	parameterizableException := builder newClassNamed: #ParameterizableException.
-	parameterizableInterface := builder newClassNamed: #ParameterizableInterface.
-	parameterizedType := builder newClassNamed: #ParameterizedType.
 	primitiveType := builder newClassNamed: #PrimitiveType.
 	reference := builder newClassNamed: #Reference.
 	type := builder newClassNamed: #Type.
 	unknownVariable := builder newClassNamed: #UnknownVariable.
 	primitiveType withTesting.
-
+	
+	
+	parametricClass   := builder newClassNamed: #ParametricClass.
+	parametricMethod  := builder newClassNamed: #ParametricMethod.
+	parametricInterface := builder newClassNamed: #ParametricInterface.
+	parameterConcretisation := builder newClassNamed: #ParameterConcretisation.
+	
+	concretisation := builder newClassNamed: #Concretisation.
+	
+	
 	self defineComments
 ]
 
@@ -309,23 +318,6 @@ FamixJavaGenerator >> defineHierarchy [
 	parameter --|> #TWithComments.
 
 	parameterType --|> type.
-	parameterType --|> #TParameterType.
-
-	parameterizableClass --|> class.
-	parameterizableClass --|> #TWithParameterizedTypes.
-	
-	parameterizableException --|> exception.
-	parameterizableException --|> #TWithParameterizedTypes.
-	
-	parameterizableInterface --|> interface.
-	parameterizableInterface --|> #TWithParameterizedTypes.
-
-	parameterizedType --|> type.
-	parameterizedType --|> #TParameterizedType.
-	parameterizedType --|> #TWithParameterizedTypeUsers.
-	parameterizedType --|> #TWithInheritances.
-	parameterizedType --|> #TCanImplement.
-	parameterizedType --|> #TImplementable.
 
 	primitiveType --|> type.
 	primitiveType --|> #TPrimitiveType.
@@ -333,35 +325,46 @@ FamixJavaGenerator >> defineHierarchy [
 	reference --|> #TReference.
 
 	type --|> containerEntity.
-	type --|> #TType.
-	type --|> #TParameterizedTypeUser.
 	type --|> #TWithMethods.
 
 	unknownVariable --|> namedEntity.
 	unknownVariable --|> #TUnknownVariable.
 	unknownVariable --|> #TInvocationsReceiver.
 	
-
-
+		
+	parametricClass  --|> class.
+	parametricClass  --|> #TParametricEntity.
+	
+	parametricMethod  --|> method.
+	parametricMethod  --|> #TParametricEntity.
+	
+	parametricInterface --|> interface.
+	parametricInterface --|> #TParametricEntity.
+	
+	parameterType --|> #TGenericParameterType.
+	parameterType --|> #TTypedEntity .
+	
+	type --|> #TConcreteParameterType.
+	
+	concretisation --|> #TConcretisation.
+	
+	parameterConcretisation --|> #TParameterConcretisation.
+	
+	inheritance --|> #TInheritance.
+	parameterType --|> #TWithInheritances.
+	parameterType --|> #TThrowable.
 ]
 
 { #category : #definition }
 FamixJavaGenerator >> defineProperties [
-
 	super defineProperties.
-
-	(tCanBeVolatile
-		 property: #isVolatile
-		 type: #Boolean
-		 defaultValue: false) comment: 'Entity can be declared volatile'.
-	(tCanBeTransient
-		 property: #isTransient
-		 type: #Boolean
-		 defaultValue: false) comment: 'Entity can be declared transient'.
-	(tCanBeSynchronized
-		 property: #isSynchronized
-		 type: #Boolean
-		 defaultValue: false) comment: 'Entity can be declared synchronized'
+		
+	((tCanBeVolatile property: #isVolatile type: #Boolean) 
+		comment: 'Entity can be declared volatile').
+	((tCanBeTransient property: #isTransient type: #Boolean) 
+		comment: 'Entity can be declared transient').
+	((tCanBeSynchronized property: #isSynchronized type: #Boolean) 
+		comment: 'Entity can be declared synchronized').
 ]
 
 { #category : #definition }
