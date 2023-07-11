@@ -59,18 +59,26 @@ FamixDeprecatedSlot >> printOn: aStream [
 
 { #category : #'meta-object-protocol' }
 FamixDeprecatedSlot >> read: anObject [
-	FamixSlotDeprecation new
-		context: thisContext;
-		explanation: self message;
-		signal.
+
+	"In case this is ShiftClassInstaller then we are migrating the instances and we should not raise a deprecation"
+	thisContext sender contextClass = ShiftClassInstaller ifFalse: [
+		FamixSlotDeprecation new
+			context: thisContext;
+			explanation: self message;
+			signal ].
+
 	super read: anObject
 ]
 
 { #category : #'meta-object-protocol' }
 FamixDeprecatedSlot >> write: aValue to: anObject [
-	FamixSlotDeprecation new
-		context: thisContext;
-		explanation: self message;
-		signal.
+
+	"In case this is ShiftClassInstaller then we are migrating the instances and we should not raise a deprecation"
+	thisContext sender contextClass = ShiftClassInstaller ifFalse: [
+		FamixSlotDeprecation new
+			context: thisContext;
+			explanation: self message;
+			signal ].
+
 	super write: aValue to: anObject
 ]
