@@ -4,7 +4,7 @@ FamixTConcreteParameterType represents the concretePamameters of an FamixTParame
 Trait {
 	#name : #FamixTConcreteParameterType,
 	#instVars : [
-		'#concreteEntity => FMMany type: #FamixTParametricEntity opposite: #concreteParameters',
+		'#concreteEntities => FMMany type: #FamixTParametricEntity opposite: #concreteParameters',
 		'#generics => FMMany type: #FamixTParameterConcretisation opposite: #concreteParameter'
 	],
 	#traits : 'FamixTType',
@@ -24,7 +24,7 @@ FamixTConcreteParameterType classSide >> annotation [
 { #category : #adding }
 FamixTConcreteParameterType >> addConcreteEntity: anObject [
 	<generated>
-	^ self concreteEntity add: anObject
+	^ self concreteEntities add: anObject
 ]
 
 { #category : #adding }
@@ -34,20 +34,20 @@ FamixTConcreteParameterType >> addGeneric: anObject [
 ]
 
 { #category : #accessing }
-FamixTConcreteParameterType >> concreteEntity [
-	"Relation named: #concreteEntity type: #FamixTParametricEntity opposite: #concreteParameters"
+FamixTConcreteParameterType >> concreteEntities [
+	"Relation named: #concreteEntities type: #FamixTParametricEntity opposite: #concreteParameters"
 
 	<generated>
 	<FMComment: 'concreteEntity of a parameter'>
 	<derived>
-	^ concreteEntity
+	^ concreteEntities
 ]
 
 { #category : #accessing }
-FamixTConcreteParameterType >> concreteEntity: anObject [
+FamixTConcreteParameterType >> concreteEntities: anObject [
 
 	<generated>
-	concreteEntity value: anObject
+	concreteEntities value: anObject
 ]
 
 { #category : #accessing }

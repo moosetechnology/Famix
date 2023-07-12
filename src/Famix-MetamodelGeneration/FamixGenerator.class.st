@@ -1508,19 +1508,19 @@ FamixGenerator >> defineRelations [
 	(tConcretisation property:#parameterConcretisations)
 	*-*
 	(tParameterConcretisation property:#concretisations).
-	
-	((tGenericParameterType property:#genericEntity)
+
+	((tGenericParameterType property:#genericEntities)
 			comment: 'genericEntity of a parameter')
 			*-*
 	((tParametricEntity property:#genericParameters)
 			comment: 'list of genericParameters').
 	
-	((tConcreteParameterType  property:#concreteEntity)
+	((tConcreteParameterType  property:#concreteEntities)
 			comment: 'concreteEntity of a parameter')
 			*-*
 	((tParametricEntity property:#concreteParameters)
 			comment: 'list of concreteParameters').
-	
+
 	
 	((tParameterConcretisation property:#genericParameter)
 			comment: 'genericParameter linked to in this relationship. from-side of the association'; source)

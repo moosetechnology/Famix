@@ -11,10 +11,10 @@ Where Map<String,Collection> is the FamixTParametricEntity of anAttribute. Strin
 Trait {
 	#name : #FamixTParametricEntity,
 	#instVars : [
-		'#concreteParameters => FMMany type: #FamixTConcreteParameterType opposite: #concreteEntity',
+		'#concreteParameters => FMMany type: #FamixTConcreteParameterType opposite: #concreteEntities',
 		'#concretisations => FMMany type: #FamixTConcretisation opposite: #genericEntity',
 		'#genericEntities => FMMany type: #FamixTConcretisation opposite: #concreteEntity',
-		'#genericParameters => FMMany type: #FamixTGenericParameterType opposite: #genericEntity'
+		'#genericParameters => FMMany type: #FamixTGenericParameterType opposite: #genericEntities'
 	],
 	#category : #'Famix-Traits-Traits'
 }
@@ -54,7 +54,7 @@ FamixTParametricEntity >> addGenericParameter: anObject [
 
 { #category : #accessing }
 FamixTParametricEntity >> concreteParameters [
-	"Relation named: #concreteParameters type: #FamixTConcreteParameterType opposite: #concreteEntity"
+	"Relation named: #concreteParameters type: #FamixTConcreteParameterType opposite: #concreteEntities"
 
 	<generated>
 	<FMComment: 'list of concreteParameters'>
@@ -104,7 +104,7 @@ FamixTParametricEntity >> genericEntities: anObject [
 
 { #category : #accessing }
 FamixTParametricEntity >> genericParameters [
-	"Relation named: #genericParameters type: #FamixTGenericParameterType opposite: #genericEntity"
+	"Relation named: #genericParameters type: #FamixTGenericParameterType opposite: #genericEntities"
 
 	<generated>
 	<FMComment: 'list of genericParameters'>
