@@ -1505,9 +1505,9 @@ FamixGenerator >> defineRelations [
 			
 
 			
-	(tConcretisation property:#parameterConcretisation)
+	(tConcretisation property:#parameterConcretisations)
 	*-*
-	(tParameterConcretisation property:#concretisation).
+	(tParameterConcretisation property:#concretisations).
 	
 	((tGenericParameterType property:#genericEntity)
 			comment: 'genericEntity of a parameter')

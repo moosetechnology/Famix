@@ -1,3 +1,6 @@
+"
+TThrowable represents all types of possible exceptions.
+"
 Trait {
 	#name : #FamixTThrowable,
 	#instVars : [

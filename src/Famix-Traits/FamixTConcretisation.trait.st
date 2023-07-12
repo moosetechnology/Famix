@@ -3,7 +3,7 @@ Trait {
 	#instVars : [
 		'#concreteEntity => FMOne type: #FamixTParametricEntity opposite: #genericEntities',
 		'#genericEntity => FMOne type: #FamixTParametricEntity opposite: #concretisations',
-		'#parameterConcretisation => FMMany type: #FamixTParameterConcretisation opposite: #concretisation'
+		'#parameterConcretisations => FMMany type: #FamixTParameterConcretisation opposite: #concretisations'
 	],
 	#traits : 'FamixTAssociation',
 	#classTraits : 'FamixTAssociation classTrait',
@@ -22,7 +22,7 @@ FamixTConcretisation classSide >> annotation [
 { #category : #adding }
 FamixTConcretisation >> addParameterConcretisation: anObject [
 	<generated>
-	^ self parameterConcretisation add: anObject
+	^ self parameterConcretisations add: anObject
 ]
 
 { #category : #accessing }
@@ -60,17 +60,17 @@ FamixTConcretisation >> genericEntity: anObject [
 ]
 
 { #category : #accessing }
-FamixTConcretisation >> parameterConcretisation [
-	"Relation named: #parameterConcretisation type: #FamixTParameterConcretisation opposite: #concretisation"
+FamixTConcretisation >> parameterConcretisations [
+	"Relation named: #parameterConcretisations type: #FamixTParameterConcretisation opposite: #concretisations"
 
 	<generated>
 	<derived>
-	^ parameterConcretisation
+	^ parameterConcretisations
 ]
 
 { #category : #accessing }
-FamixTConcretisation >> parameterConcretisation: anObject [
+FamixTConcretisation >> parameterConcretisations: anObject [
 
 	<generated>
-	parameterConcretisation value: anObject
+	parameterConcretisations value: anObject
 ]
