@@ -702,6 +702,12 @@ FamixGenerator >> commentForTTemplateUser [
 ]
 
 { #category : #comments }
+FamixGenerator >> commentForTThrowable [
+
+^ 'TThrowable represents all types of possible exceptions.'
+]
+
+{ #category : #comments }
 FamixGenerator >> commentForTThrownException [
 
 	^ 'This is an exception explicitly thrown by a method.'
@@ -1891,6 +1897,7 @@ FamixGenerator >> defineTraits [
 								comment: self commentForTConcretisation.
 	tParameterConcretisation  := builder newTraitNamed: #TParameterConcretisation 
 								comment: self commentForTParameterConcretisation.
-	tThrowable  := builder newTraitNamed: #TThrowable .
+	tThrowable  := builder newTraitNamed: #TThrowable 
+								comment: self commentForTThrowable.
 
 ]
