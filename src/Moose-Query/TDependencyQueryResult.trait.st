@@ -55,15 +55,18 @@ TDependencyQueryResult >> opposite: dep [
 
 { #category : #accessing }
 TDependencyQueryResult >> opposites [
-	^ self newObjectResultWith: (self storage flatCollectAsSet: [ :d | (self opposite: d) asCollection ])
+	^ self newObjectResultWith: (self storage flatCollectAsSet: [ :d || opposite |
+		opposite := self opposite: d.
+		opposite isCollection ifTrue: [ opposite ] ifFalse: [ { opposite } ] ])
 ]
 
 { #category : #filtering }
 TDependencyQueryResult >> outOf: aFamixEntity [
 	^ self
-		rejectDependencies: [ :dep |
-			(self opposite: dep) asCollection anySatisfy: [ :entity |
-				(entity allAtScope: aFamixEntity class) includes: aFamixEntity ] ]
+		rejectDependencies: [ :dep || opposite |
+			opposite := self opposite: dep.
+			(opposite isCollection ifTrue: [ opposite ] ifFalse: [ { opposite } ])
+				anySatisfy: [ :entity | (entity allAtScope: aFamixEntity class) includes: aFamixEntity ] ]
 ]
 
 { #category : #private }
