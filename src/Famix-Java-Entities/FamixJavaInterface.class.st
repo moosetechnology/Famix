@@ -15,6 +15,21 @@ FamixJavaInterface class >> annotation [
 	^ self
 ]
 
+{ #category : #adding }
+FamixJavaInterface >> addMethodOverriding: aMethod in: aCollection [
+
+	(self implementations collect: #implementingClass) do: [
+		:implementingClass |
+		implementingClass addMethodOverriding: aMethod in: aCollection ].
+
+	self directSubclasses do: [ :subInterface |
+		subInterface methods
+			detect: [ :method | method signature = aMethod signature ]
+			ifFound: [ :overridingMethod | aCollection add: overridingMethod ]
+			ifNone: [
+			subInterface addMethodOverriding: aMethod in: aCollection ] ]
+]
+
 { #category : #testing }
 FamixJavaInterface >> isInterface [
 

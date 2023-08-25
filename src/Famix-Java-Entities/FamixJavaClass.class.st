@@ -25,6 +25,16 @@ FamixJavaClass >> accessedAttributes [
 	^ self methodsWithoutSutbsAndConstructors asOrderedCollection flatCollect: [ :method | method accessedAttributes ]
 ]
 
+{ #category : #adding }
+FamixJavaClass >> addMethodOverriding: aMethod in: aCollection [
+
+	self directSubclasses do: [ :subClass |
+		subClass methods
+			detect: [ :method | method signature = aMethod signature ]
+			ifFound: [ :overridingMethod | aCollection add: overridingMethod ]
+			ifNone: [ subClass addMethodOverriding: aMethod in: aCollection ] ]
+]
+
 { #category : #accessing }
 FamixJavaClass >> incomingAccesses [
 	^ self 
