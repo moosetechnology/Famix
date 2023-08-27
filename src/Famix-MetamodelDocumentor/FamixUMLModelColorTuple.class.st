@@ -1,5 +1,11 @@
 "
-I represent a tuple between a model (meta-model) and the color that will be used to represent the entities of this meta-model
+I represent a tuple between a Famix meta-model and the color that will be used to represent the entities of this meta-model.
+
+If not specified, the meta-model uses the #defaultColor
+
+API:
+- FamixUMLModelColorTuple model: <aModel>
+- FamixUMLModelColorTuple model: <aModel> color: <aColor>
 "
 Class {
 	#name : #FamixUMLModelColorTuple,
@@ -26,6 +32,11 @@ FamixUMLModelColorTuple class >> model: aModel color: aColor [
 		  model: aModel;
 		  color: aColor;
 		  yourself
+]
+
+{ #category : #accessing }
+FamixUMLModelColorTuple >> allClasses [
+	^model allClasses
 ]
 
 { #category : #accessing }

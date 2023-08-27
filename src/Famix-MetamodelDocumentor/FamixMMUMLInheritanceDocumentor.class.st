@@ -19,10 +19,12 @@ FamixMMUMLInheritanceDocumentor >> visitClass: aFMClass [
 	aFMSuperClass := aFMClass superclass.
 	(self relationEndOfInterest: aFMClass) ifFalse: [ ^ self ].
 	(self relationEndOfInterest: aFMSuperClass) ifFalse: [ ^ self ].
+
 	self generateClassName: aFMSuperClass.
 	outputStream nextPutAll: ' <|-- '.
 	self generateClassName: aFMClass.
 	outputStream cr.
+
 	self flag: 'Hack to access to direct traits only - https://github.com/moosetechnology/Fame/issues/23'.
 	aFMClass implementingClass traits
 		collect: [ :stClass | self findDescriptionOf: stClass ]

@@ -39,32 +39,13 @@ Class {
 	#category : #'Famix-MetamodelDocumentor'
 }
 
-{ #category : #generating }
-FamixMMUMLDocumentor >> generateClassesOfNoInterest: aFM3Class [
-	outputStream nextPutAll: 'hide '.
-		self generateClassName: aFM3Class.
-	outputStream cr.
-]
-
-{ #category : #generating }
-FamixMMUMLDocumentor >> generateExternalClass: aFM3Class [
-
-	outputStream nextPutAll: 'class '.
-	self generateClassName: aFM3Class.
-	(self ofInterest: aFM3Class) ifFalse: [ 
-		outputStream nextPutAll: ' <<'.
-		aFM3Class isFM3Class
-			ifTrue: [ outputStream nextPutAll: '(C,LightYellow)' ]
-			ifFalse: [ outputStream nextPutAll: '(T,LightYellow)' ].
-		outputStream nextPutAll: 'External>>' ].
-	outputStream cr
-]
-
 { #category : #'api - generation' }
-FamixMMUMLDocumentor >> generatePlantUML: aCollection onStream: aStream [
-	outputStream := aStream.
-	classesOfInterest := aCollection
-		collect: [:stClass | self findDescriptionOf: stClass ].
+FamixMMUMLDocumentor >> generate [
+
+	models ifEmpty: [ Error signal: 'no meta-model(s) to work on' ].
+
+	self with: (models flatCollect: [ :model | model allClasses ] as: Set).
+
 	externalClasses := Set new.
 
 	self plantUMLHeader.
@@ -79,6 +60,38 @@ FamixMMUMLDocumentor >> generatePlantUML: aCollection onStream: aStream [
 	outputStream cr.
 	self plantUMLFooter.
 
+	^outputStream
+		close ;
+		contents
+
+]
+
+{ #category : #generating }
+FamixMMUMLDocumentor >> generateClassesOfNoInterest: aFM3Class [
+	outputStream nextPutAll: 'hide '.
+		self generateClassName: aFM3Class.
+	outputStream cr.
+]
+
+{ #category : #generating }
+FamixMMUMLDocumentor >> generateExternalClass: aFM3Class [
+
+	outputStream nextPutAll: 'class '.
+	self generateClassName: aFM3Class.
+	(self isOfInterest: aFM3Class) ifFalse: [ 
+		outputStream nextPutAll: ' <<'.
+		aFM3Class isFM3Class "is it a class or a trait ?"
+			ifTrue: [ outputStream nextPutAll: '(C,LightYellow)' ]
+			ifFalse: [ outputStream nextPutAll: '(T,LightYellow)' ].
+		outputStream nextPutAll: 'External>>' ].
+	outputStream cr
+]
+
+{ #category : #'api - generation' }
+FamixMMUMLDocumentor >> generatePlantUML: aCollection onStream: aStream [
+	self onStream: aStream.
+	self with: aCollection.
+	^self generate
 ]
 
 { #category : #generating }
@@ -94,13 +107,9 @@ FamixMMUMLDocumentor >> generatePlantUMLExternalClasses [
 
 { #category : #'api - generation' }
 FamixMMUMLDocumentor >> generatePlantUMLFile: aString with: aCollection [
-	| filename |
-	filename := (aString endsWith: self plantUMLExtension)
-		ifTrue: [ aString ]
-		ifFalse: [ aString , self plantUMLExtension].
-	^filename asFileReference writeStreamDo: [ :stream |
-		self generatePlantUML: aCollection onStream: stream.
-	] 
+	self onFile: aString.
+	self with: aCollection.
+	^self generate
 ]
 
 { #category : #generating }
@@ -113,7 +122,7 @@ FamixMMUMLDocumentor >> generatePlantUMLInheritance [
 
 	| aVisitor |
 	aVisitor := FamixMMUMLInheritanceDocumentor new
-		            outputStream: outputStream;
+		            backend: backend ;
 		            classesOfInterest: classesOfInterest;
 		            externalClasses: externalClasses;
 		            withStub: withStub;
@@ -124,89 +133,39 @@ FamixMMUMLDocumentor >> generatePlantUMLInheritance [
 { #category : #'api - generation' }
 FamixMMUMLDocumentor >> generatePlantUMLModel [
 
-	| aStream |
-	aStream := ReadWriteStream with: (String new).
-	self generatePlantUMLModelOnStream: aStream.
-	^ outputStream contents 
+	^self generate
 ]
 
 { #category : #'api - generation' }
 FamixMMUMLDocumentor >> generatePlantUMLModelFile: aString [
-	| filename |
-	filename := (aString endsWith: self plantUMLExtension)
-		ifTrue: [ aString ]
-		ifFalse: [ aString , self plantUMLExtension].
-	^filename asFileReference writeStreamDo: [ :stream |
-		self generatePlantUMLModelOnStream: stream.
-	] 
+	self onFile: aString.
+
+	^self generate
 ]
 
 { #category : #'api - generation' }
 FamixMMUMLDocumentor >> generatePlantUMLModelFile: aString without: aCollection [
-	| filename |
-	filename := (aString endsWith: self plantUMLExtension)
-		ifTrue: [ aString ]
-		ifFalse: [ aString , self plantUMLExtension].
-	^filename asFileReference writeStreamDo: [ :stream |
-		self generatePlantUMLModelWithout: aCollection onStream: stream.
-	] 
+	self onFile: aString.
+	^self generatePlantUMLModelWithout: aCollection
 ]
 
 { #category : #'api - generation' }
 FamixMMUMLDocumentor >> generatePlantUMLModelOnStream: aStream [
+	self onStream: aStream.
+	^self generatePlantUMLModel
 
-	outputStream := aStream.
-	classesOfInterest := models flatCollect: [ :model | (self findDescriptionOf: model model) package classes ] as: Set.
-	externalClasses := Set new.
-
-	self plantUMLHeader.
-	outputStream cr.
-	self generatePlantUMLClasses.
-	outputStream cr.
-	self generatePlantUMLInheritance.
-	outputStream cr.
-	self generatePlantUMLRelations.
-	outputStream cr.
-	self generatePlantUMLExternalClasses.
-	outputStream cr.
-	self plantUMLFooter
 ]
 
 { #category : #'api - generation' }
 FamixMMUMLDocumentor >> generatePlantUMLModelWithout: aCollection [
-
-	| aStream |
-	aStream := ReadWriteStream with: String new.
-
-	aCollection isEmpty
-		ifTrue: [ self generatePlantUMLModelOnStream: aStream ]
-		ifFalse: [ 
-		self generatePlantUMLModelWithout: aCollection onStream: aStream ].
-	^ outputStream contents
+	self without: aCollection.
+	^self generatePlantUMLModel
 ]
 
 { #category : #'api - generation' }
 FamixMMUMLDocumentor >> generatePlantUMLModelWithout: aCollection onStream: aStream [
-
-	outputStream := aStream.
-	classesOfNoInterest := aCollection
-		collect: [:stClass | self findDescriptionOf: stClass ].
-	classesOfInterest := models flatCollect: [ :model | (self findDescriptionOf: model model) package classes ] as: Set..
-	externalClasses := Set new.
-
-	self plantUMLHeader.
-	outputStream cr.
-	self generatePlantUMLClasses.
-	outputStream cr.
-	self generatePlantUMLInheritance.
-	outputStream cr.
-	self generatePlantUMLRelations.
-	outputStream cr.
-	self generatePlantUMLExternalClasses.
-	outputStream cr.
-	self generatePlantUMLHideClassesOfNoInterest.
-	outputStream cr.
-	self plantUMLFooter
+	self onStream: aStream.
+	^self generatePlantUMLModelWithout: aCollection
 ]
 
 { #category : #generating }
@@ -218,9 +177,8 @@ FamixMMUMLDocumentor >> generatePlantUMLRelations [
 
 { #category : #'api - generation' }
 FamixMMUMLDocumentor >> generatePlantUMLWith: aCollection [
-	^String streamContents: [ :stream |
-		self generatePlantUML: aCollection onStream: stream.
-	] 
+	self with: aCollection.
+	^self generate
 ]
 
 { #category : #generating }
@@ -270,6 +228,13 @@ FamixMMUMLDocumentor >> generateRelationTargetRole: aFM3Prop [
 		nextPut: $"
 ]
 
+{ #category : #initialization }
+FamixMMUMLDocumentor >> initialize [ 
+	super initialize.
+
+	self onStream: (WriteStream with: String new)
+]
+
 { #category : #testing }
 FamixMMUMLDocumentor >> isRedundantRelation: aFM3Prop [
 	"whena relation has an opposite, we want to display process only one of them (the 'non redundant' one.
@@ -292,6 +257,22 @@ FamixMMUMLDocumentor >> isRedundantRelation: aFM3Prop [
 { #category : #testing }
 FamixMMUMLDocumentor >> isTrait: aFMClass [
 	^aFMClass implementingClass isTrait
+]
+
+{ #category : #accessing }
+FamixMMUMLDocumentor >> onFile: aString [
+	| filename |
+	filename := (aString endsWith: self plantUMLExtension)
+		ifTrue: [ aString ]
+		ifFalse: [ aString , self plantUMLExtension].
+
+	self onStream: filename asFileReference writeStream
+]
+
+{ #category : #accessing }
+FamixMMUMLDocumentor >> onStream: aStream [
+	outputStream := aStream.
+	backend outputStream: aStream.
 ]
 
 { #category : #private }
@@ -446,4 +427,18 @@ FamixMMUMLDocumentor >> visitTrait: aFMTrait [
 	outputStream
 		nextPutAll: '}' ;
 		cr.
+]
+
+{ #category : #accessing }
+FamixMMUMLDocumentor >> with: aCollection [
+	classesOfInterest := aCollection
+		collect: [:stClass | self findDescriptionOf: stClass ].
+
+]
+
+{ #category : #accessing }
+FamixMMUMLDocumentor >> without: aCollection [
+	classesOfNoInterest := aCollection
+		collect: [:stClass | self findDescriptionOf: stClass ].
+
 ]

@@ -14,7 +14,8 @@ Class {
 		'externalClasses',
 		'withStub',
 		'models',
-		'prefs'
+		'prefs',
+		'backend'
 	],
 	#category : #'Famix-MetamodelDocumentor'
 }
@@ -59,7 +60,7 @@ FamixMMUMLAbstractDocumentor >> findDescriptionOf: anElement [
 FamixMMUMLAbstractDocumentor >> generateClassName: aFM3Class [
 	outputStream
 		nextPutAll: aFM3Class name.
-	(self ofInterest: aFM3Class)
+	(self isOfInterest: aFM3Class)
 	ifFalse: [
 		externalClasses add: aFM3Class 
 	]
@@ -67,6 +68,10 @@ FamixMMUMLAbstractDocumentor >> generateClassName: aFM3Class [
 
 { #category : #initialization }
 FamixMMUMLAbstractDocumentor >> initialize [
+	super initialize.
+	
+	self plantUMLBackend.
+
 	self beWithoutStub.
 	externalClasses := Set new.
 	models := Set new.
@@ -74,8 +79,20 @@ FamixMMUMLAbstractDocumentor >> initialize [
 ]
 
 { #category : #testing }
+FamixMMUMLAbstractDocumentor >> isOfInterest: aFMClass [
+
+	^ classesOfInterest anySatisfy: [ :fmClassOfInterest | fmClassOfInterest fullName = aFMClass fullName ]
+]
+
+{ #category : #testing }
 FamixMMUMLAbstractDocumentor >> isWithStub [
 	^withStub
+]
+
+{ #category : #'api - generation' }
+FamixMMUMLAbstractDocumentor >> mermaidBackend [
+
+	backend := FamixMMUMLMermaidBackend new.
 ]
 
 { #category : #accessing }
@@ -101,12 +118,6 @@ FamixMMUMLAbstractDocumentor >> models: anObject [
 	models := anObject
 ]
 
-{ #category : #private }
-FamixMMUMLAbstractDocumentor >> ofInterest: aFMClass [
-
-	^ classesOfInterest anySatisfy: [ :fmClassOfInterest | fmClassOfInterest fullName = aFMClass fullName ]
-]
-
 { #category : #accessing }
 FamixMMUMLAbstractDocumentor >> outputStream [
 	^ outputStream
@@ -117,11 +128,17 @@ FamixMMUMLAbstractDocumentor >> outputStream: anObject [
 	outputStream := anObject
 ]
 
+{ #category : #'api - generation' }
+FamixMMUMLAbstractDocumentor >> plantUMLBackend [
+
+	backend := FamixMMUMLPlantUMLBackend new.
+]
+
 { #category : #private }
 FamixMMUMLAbstractDocumentor >> relationEndOfInterest: aFMClass [
 	^self isWithStub
 		ifTrue: [ aFMClass class ~= FM3Object ]
-		ifFalse: [ self ofInterest: aFMClass ]
+		ifFalse: [ self isOfInterest: aFMClass ]
 ]
 
 { #category : #accessing }
