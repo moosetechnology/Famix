@@ -14,9 +14,10 @@ To install the project on your Pharo image, execute the following script:
 
 ```Smalltalk
 Metacello new
-	githubUser: 'moosetechnology' project: 'Famix' commitish: 'development' path: 'src';
-	baseline: 'Famix';
-	load
+  baseline: 'Famix';
+  repository: 'github://moosetechnology/Famix:development/src';
+  onConflict: [ :ex | ex allow ];
+  load.
 ```
 
 To add the project to your baseline:
