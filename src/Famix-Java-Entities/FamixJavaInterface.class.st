@@ -15,7 +15,7 @@ FamixJavaInterface class >> annotation [
 	^ self
 ]
 
-{ #category : #adding }
+{ #category : #private }
 FamixJavaInterface >> addMethodOverriding: aMethod in: aCollection [
 
 	(self implementations collect: #implementingClass) do: [

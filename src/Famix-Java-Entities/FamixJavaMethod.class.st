@@ -256,6 +256,27 @@ FamixJavaMethod >> numberOfInvokedMethods [
 	^ self cacheAt: #numberOfInvokedMethods ifAbsentPut: [self invokedMethods size]
 ]
 
+{ #category : #testing }
+FamixJavaMethod >> overridenMethods [
+
+	| overridenMethods |
+	overridenMethods := OrderedCollection new.
+
+	self parentType addMethodOverridenBy: self in: overridenMethods.
+
+	overridenMethods ifEmpty: [
+		self parentType withSuperclassesDo: [ :cls |
+			cls withAllImplementedInterfacesHierarchyDo: [ :interface |
+				interface methods
+					detect: [ :method | method signature = self signature ]
+					ifFound: [ :method |
+						overridenMethods add: method.
+						^ overridenMethods ]
+					ifNone: [ "No method overriden by self" ] ] ] ].
+
+	^ overridenMethods
+]
+
 { #category : #'Famix-Implementation' }
 FamixJavaMethod >> overridesMethod [
 	^ self belongsTo superclassHierarchy collect: [ :each | each implementationOf: self signature ] thenSelect: #isNotNil
