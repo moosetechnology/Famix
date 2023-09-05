@@ -26,18 +26,6 @@ FamixJavaClass >> accessedAttributes [
 ]
 
 { #category : #private }
-FamixJavaClass >> addMethodOverridenBy: aMethod in: aCollectionOfMethods [
-
-	self directSuperclasses do: [ :superClass |
-		superClass methods
-			detect: [ :method | method signature = aMethod signature ]
-			ifFound: [ :overridenMethod |
-			aCollectionOfMethods add: overridenMethod ]
-			ifNone: [
-			superClass addMethodOverridenBy: aMethod in: aCollectionOfMethods ] ]
-]
-
-{ #category : #private }
 FamixJavaClass >> addMethodOverriding: aMethod in: aCollection [
 
 	self directSubclasses do: [ :subClass |
@@ -45,6 +33,25 @@ FamixJavaClass >> addMethodOverriding: aMethod in: aCollection [
 			detect: [ :method | method signature = aMethod signature ]
 			ifFound: [ :overridingMethod | aCollection add: overridingMethod ]
 			ifNone: [ subClass addMethodOverriding: aMethod in: aCollection ] ]
+]
+
+{ #category : #enumerating }
+FamixJavaClass >> allImplementedInterfacesHierarchy [
+
+	| allImplementedInterfaces |
+	allImplementedInterfaces := OrderedCollection new.
+
+	self allImplementedInterfacesHierarchyDo: [ :interface |
+		allImplementedInterfaces add: interface ].
+
+	^ allImplementedInterfaces
+]
+
+{ #category : #enumerating }
+FamixJavaClass >> allImplementedInterfacesHierarchyDo: aBlock [
+
+	self directImplementedInterfaces do: [ :directInterface |
+		directInterface withSuperclassesDo: aBlock ]
 ]
 
 { #category : #accessing }
@@ -119,6 +126,16 @@ FamixJavaClass >> isInterface [
 FamixJavaClass >> isInterface: aBoolean [
 
 	^ self attributeAt: #isInterface put: true
+]
+
+{ #category : #private }
+FamixJavaClass >> lookUpInInterfaces: aMethodSignature [
+
+	self allImplementedInterfacesHierarchyDo: [ :interface |
+		(interface lookUp: aMethodSignature) ifNotNil: [ :method | ^ method ] ].
+
+	^ self superclass ifNotNil: [ :superclass |
+		  superclass lookUpInInterfaces: aMethodSignature ]
 ]
 
 { #category : #'Famix-Extensions-metrics-support' }

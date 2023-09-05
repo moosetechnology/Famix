@@ -25,18 +25,6 @@ FamixTCanImplement >> addInterfaceImplementation: anObject [
 ]
 
 { #category : #accessing }
-FamixTCanImplement >> allImplementedInterfacesHierarchy [
-
-	| allImplementedInterfaces |
-	allImplementedInterfaces := OrderedCollection new.
-
-	self withAllImplementedInterfacesHierarchyDo: [ :interface |
-		allImplementedInterfaces add: interface ].
-
-	^ allImplementedInterfaces
-]
-
-{ #category : #accessing }
 FamixTCanImplement >> directImplementedInterfaces [
 
 	^ self interfaceImplementations collect: [ :implementation |
@@ -58,11 +46,4 @@ FamixTCanImplement >> interfaceImplementations: anObject [
 
 	<generated>
 	interfaceImplementations value: anObject
-]
-
-{ #category : #enumerating }
-FamixTCanImplement >> withAllImplementedInterfacesHierarchyDo: aBlock [
-
-	self directImplementedInterfaces do: [ :directInterface |
-		directInterface withSuperclassesDo: aBlock ]
 ]
