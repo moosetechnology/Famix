@@ -25,6 +25,13 @@ FamixTCanImplement >> addInterfaceImplementation: anObject [
 ]
 
 { #category : #accessing }
+FamixTCanImplement >> directImplementedInterfaces [
+
+	^ self interfaceImplementations collect: [ :implementation |
+		  implementation interface ]
+]
+
+{ #category : #accessing }
 FamixTCanImplement >> interfaceImplementations [
 	"Relation named: #interfaceImplementations type: #FamixTImplementation opposite: #implementingClass"
 
