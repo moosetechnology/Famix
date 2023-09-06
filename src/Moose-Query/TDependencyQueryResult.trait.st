@@ -103,10 +103,18 @@ TDependencyQueryResult >> targetsAtScope: aTraitOrClass [
 
 { #category : #filtering }
 TDependencyQueryResult >> within: aFamixEntity [
-	^ self
-		selectDependencies: [ :dep |
-			(self opposite: dep) asCollection anySatisfy: [ :entity |
-				(entity allAtScope: aFamixEntity class) includes: aFamixEntity ] ]
+
+	| withinBlock |
+	withinBlock := [ :entity |
+	               (entity allAtScope: aFamixEntity class) includes:
+		               aFamixEntity ].
+
+	^ self selectDependencies: [ :dep |
+		  | opposite |
+		  opposite := self opposite: dep.
+		  opposite isCollection
+			  ifFalse: [ withinBlock value: opposite ]
+			  ifTrue: [ opposite anySatisfy: withinBlock ] ]
 ]
 
 { #category : #filtering }
