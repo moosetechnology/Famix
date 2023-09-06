@@ -256,9 +256,35 @@ FamixJavaMethod >> numberOfInvokedMethods [
 	^ self cacheAt: #numberOfInvokedMethods ifAbsentPut: [self invokedMethods size]
 ]
 
+{ #category : #testing }
+FamixJavaMethod >> overridenMethod [
+
+	^ (self parentType superclass ifNotNil: [ :superclass |
+		   superclass lookUp: self signature ]) ifNil: [
+		  self parentType lookUpInInterfaces: self signature ]
+]
+
 { #category : #'Famix-Implementation' }
 FamixJavaMethod >> overridesMethod [
-	^ self belongsTo superclassHierarchy collect: [ :each | each implementationOf: self signature ] thenSelect: #isNotNil
+
+	self deprecated: 'This method seems to not be used anymore.'.
+	"Please consider using #overridenMethod instead.
+	We are not automatically replacing it because the behavior is not identical: 
+		#overridenMethod is a detect and not a collect + it goes through intefaces."
+
+	^ self belongsTo superclassHierarchy
+		  collect: [ :each | each implementationOf: self signature ]
+		  thenSelect: #isNotNil
+]
+
+{ #category : #testing }
+FamixJavaMethod >> overridingMethods [
+
+	| overridingMethods |
+	overridingMethods := OrderedCollection new.
+
+	self parentType addMethodOverriding: self in: overridingMethods.
+	^ overridingMethods
 ]
 
 { #category : #accessing }
