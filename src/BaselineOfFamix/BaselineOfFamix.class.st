@@ -309,9 +309,9 @@ BaselineOfFamix >> singularizePluralize: spec [
 
 { #category : #dependencies }
 BaselineOfFamix >> talents: spec [
-	spec
-		baseline: 'Talents'
-		with: [ spec
-				loads: 'core';
-				repository: 'github://tesonep/pharo-talents:v2.0.0/src' ]
+
+	spec baseline: 'Talents' with: [
+		spec
+			loads: 'core';
+			repository: 'github://pharo-contributions/pharo-talents:v3.0.0/src' ]
 ]
