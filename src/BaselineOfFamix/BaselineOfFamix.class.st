@@ -313,5 +313,5 @@ BaselineOfFamix >> talents: spec [
 	spec baseline: 'Talents' with: [
 		spec
 			loads: 'core';
-			repository: 'github://pharo-contributions/pharo-talents:v3.0.0/src' ]
+			repository: 'github://pharo-contributions/pharo-talents/src' ]
 ]
