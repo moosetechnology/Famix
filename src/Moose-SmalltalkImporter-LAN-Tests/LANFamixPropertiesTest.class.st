@@ -120,7 +120,7 @@ LANFamixPropertiesTest >> testClassLinesOfCode [
 LANFamixPropertiesTest >> testClassMethods [
 	self assert: self nodeClass numberOfMethods equals: 12.
 	self assert: (self nodeClass propertyNamed: #numberOfMethodsInherited) equals: 0.
-	self assert: (self nodeClass propertyNamed: #numberOfMethodsOverriden) equals: 0.
+	self assert: (self nodeClass propertyNamed: #numberOfMethodsOverridden) equals: 0.
 	self
 		assert: (self nodeClass propertyNamed: #numberOfLocallyDefinedMethods)
 		equals: (self nodeClass propertyNamed: #numberOfMethods).
@@ -128,11 +128,11 @@ LANFamixPropertiesTest >> testClassMethods [
 		assert: (self workstationClass propertyNamed: #numberOfMethodsInherited)
 		equals: 9.
 	self assert: (self workstationClass propertyNamed: #numberOfLocallyDefinedMethods) equals: 1.
-	self assert: (self workstationClass propertyNamed: #numberOfMethodsOverriden) equals: 3.
+	self assert: (self workstationClass propertyNamed: #numberOfMethodsOverridden) equals: 3.
 	self
 		assert:
 			(self workstationClass propertyNamed: #numberOfLocallyDefinedMethods)
-				+ (self workstationClass propertyNamed: #numberOfMethodsOverriden)
+				+ (self workstationClass propertyNamed: #numberOfMethodsOverridden)
 		equals: (self workstationClass propertyNamed: #numberOfMethods)
 ]
 
@@ -260,8 +260,8 @@ LANFamixPropertiesTest >> testNoDuplicatesOfClassVariables [
 ]
 
 { #category : #testing }
-LANFamixPropertiesTest >> testOverridenMethods [
-	self assert: (self model entityNamed: #Smalltalk::LANOutputServer) numberOfMethodsOverriden equals: 2
+LANFamixPropertiesTest >> testOverriddenMethods [
+	self assert: (self model entityNamed: #Smalltalk::LANOutputServer) numberOfMethodsOverridden equals: 2
 ]
 
 { #category : #testing }
