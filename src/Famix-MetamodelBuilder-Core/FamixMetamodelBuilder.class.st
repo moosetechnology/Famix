@@ -187,8 +187,8 @@ FamixMetamodelBuilder >> ensureLocalTraitNamed: aString [
 FamixMetamodelBuilder >> entityCreatorTrait [
 
 	^ self traits
-		  detect: [ :each | each name = #TEntityCreator ]
-		  ifNone: [ 
+		  detect: [ :each | each isEntityCreatorTrait ]
+		  ifNone: [
 			  self traits add: (FmxMBEntityCreatorTrait new
 					   builder: self;
 					   prefix: self configuration prefix;
@@ -465,23 +465,31 @@ FamixMetamodelBuilder >> parentBuilderPackageName [
 ]
 
 { #category : #generating }
+FamixMetamodelBuilder >> prepareBehaviorsGeneration [
+
+	self traitsWithSubBuildersTraits do: [ :each |
+		self testingSelectorsMapping at: each put: each testingSelectors ].
+	self classes do: [ :each |
+		self testingSelectorsMapping at: each put: each testingSelectors ].
+	self traits do: [ :each | each generate ].
+	self sortedClasses do: [ :each | each generate ]
+]
+
+{ #category : #generating }
 FamixMetamodelBuilder >> prepareGeneration [
 
 	self registerPackages.
-
 	self ensureEntityClassIsTheCommonSuperclass.
-	"ensure the model entity exists before generating"
-	(self behaviorsCount > 0 or: [ 
-		 self relations size > 0 or: [ self subBuilders size > 0 ] ]) 
-		ifTrue: [ 
-			self model.
-			self withSubBuildersAddEntityCreatorTraitTo: self model ].
-	self traitsWithSubBuildersTraits do: [ :each | 
-		self testingSelectorsMapping at: each put: each testingSelectors ].
-	self classes do: [ :each | 
-		self testingSelectorsMapping at: each put: each testingSelectors ].
-	self traits do: [ :each | each generate ].
-	self sortedClasses do: [ :each | each generate ].
+
+	self shouldGenerateModel
+		ifTrue: [
+			| model |
+			model := self model.
+			self withSubBuildersAddEntityCreatorTraitTo: model.
+			self prepareBehaviorsGeneration.
+			self entityCreatorTrait generateEntityCreationMethods ]
+		ifFalse: [ self prepareBehaviorsGeneration ].
+
 	self behaviorsCount > 0 ifTrue: [ self generateImportingContext ]
 ]
 
@@ -533,6 +541,13 @@ FamixMetamodelBuilder >> reservedKeywords [
 FamixMetamodelBuilder >> safeAnnotationPackageName [
 
 	^ self configuration packageNameForAnnotations asSymbol printString
+]
+
+{ #category : #generating }
+FamixMetamodelBuilder >> shouldGenerateModel [
+
+	^ self behaviorsCount > 0 or: [
+		  self relations isNotEmpty or: [ self subBuilders isNotEmpty ] ]
 ]
 
 { #category : #accessing }
