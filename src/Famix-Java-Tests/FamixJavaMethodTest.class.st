@@ -92,7 +92,7 @@ FamixJavaMethodTest >> testIsStubWhenParentIsStub [
 
 { #category : #tests }
 FamixJavaMethodTest >> testOverride [
-	| overridenMethod c1 c2 package |
+	| overriddenMethod c1 c2 package |
 	package := FamixJavaPackage new.
 	c1 := FamixJavaClass new
 		parentPackage: package;
@@ -100,7 +100,7 @@ FamixJavaMethodTest >> testOverride [
 	c2 := FamixJavaClass new
 		parentPackage: package;
 		yourself.
-	overridenMethod := FamixJavaMethod new
+	overriddenMethod := FamixJavaMethod new
 		name: 'method';
 		signature: 'method()';
 		parentType: c1;
@@ -117,67 +117,67 @@ FamixJavaMethodTest >> testOverride [
 				subclass: c2;
 				superclass: c1).
 	self assert: method isOverriding.
-	self assert: overridenMethod isOverriden
+	self assert: overriddenMethod isOverridden
 ]
 
 { #category : #tests }
-FamixJavaMethodTest >> testOverridenMethod [
+FamixJavaMethodTest >> testOverriddenMethod [
 
-	| signature overridenMethod localClass superclass |
+	| signature overriddenMethod localClass superclass |
 	signature := 'javaMethod()'.
 	method signature: signature.
-	overridenMethod := FamixJavaMethod new signature: signature.
+	overriddenMethod := FamixJavaMethod new signature: signature.
 
 	localClass := FamixJavaClass named: #LocalClass.
 	superclass := FamixJavaClass named: #Superclass.
 
 	localClass addMethod: method.
-	superclass addMethod: overridenMethod.
+	superclass addMethod: overriddenMethod.
 
 	FamixJavaInheritance new
 		superclass: superclass;
 		subclass: localClass.
 
-	self assert: method overridenMethod equals: overridenMethod
+	self assert: method overriddenMethod equals: overriddenMethod
 ]
 
 { #category : #tests }
-FamixJavaMethodTest >> testOverridenMethodFromInterface [
+FamixJavaMethodTest >> testOverriddenMethodFromInterface [
 
-	| signature interfaceOverridenMethod localClass interface |
+	| signature interfaceOverriddenMethod localClass interface |
 	signature := 'javaMethod()'.
 	method signature: signature.
-	interfaceOverridenMethod := FamixJavaMethod new signature: signature.
+	interfaceOverriddenMethod := FamixJavaMethod new signature: signature.
 
 	localClass := FamixJavaClass named: #LocalClass.
 	interface := FamixJavaInterface named: #Interface.
 
 	localClass addMethod: method.
-	interface addMethod: interfaceOverridenMethod.
+	interface addMethod: interfaceOverriddenMethod.
 
 	FamixJavaImplementation new
 		interface: interface;
 		implementingClass: localClass.
 
-	self assert: method overridenMethod equals: interfaceOverridenMethod
+	self assert: method overriddenMethod equals: interfaceOverriddenMethod
 ]
 
 { #category : #tests }
-FamixJavaMethodTest >> testOverridenMethodOnlyOneLevel [
+FamixJavaMethodTest >> testOverriddenMethodOnlyOneLevel [
 
-	| signature overridenMethod localClass superclass superSuperclass otherOverridenMethod |
+	| signature overriddenMethod localClass superclass superSuperclass otherOverriddenMethod |
 	signature := 'javaMethod()'.
 	method signature: signature.
-	overridenMethod := FamixJavaMethod new signature: signature.
-	otherOverridenMethod := FamixJavaMethod new signature: signature.
+	overriddenMethod := FamixJavaMethod new signature: signature.
+	otherOverriddenMethod := FamixJavaMethod new signature: signature.
 
 	localClass := FamixJavaClass named: #LocalClass.
 	superclass := FamixJavaClass named: #Superclass.
 	superSuperclass := FamixJavaClass named: #SuperSuperclass.
 
 	localClass addMethod: method.
-	superclass addMethod: overridenMethod.
-	superSuperclass addMethod: otherOverridenMethod.
+	superclass addMethod: overriddenMethod.
+	superSuperclass addMethod: otherOverriddenMethod.
 
 	FamixJavaInheritance new
 		superclass: superclass;
@@ -186,7 +186,7 @@ FamixJavaMethodTest >> testOverridenMethodOnlyOneLevel [
 		superclass: superSuperclass;
 		subclass: superclass.
 
-	self assert: method overridenMethod equals: overridenMethod
+	self assert: method overriddenMethod equals: overriddenMethod
 ]
 
 { #category : #tests }

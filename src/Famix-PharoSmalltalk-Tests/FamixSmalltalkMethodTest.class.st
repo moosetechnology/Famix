@@ -85,7 +85,7 @@ FamixSmalltalkMethodTest >> testOverride [
 				subclass: c2;
 				superclass: c1).
 	self assert: newM1 isOverriding.
-	self assert: m1 isOverriden
+	self assert: m1 isOverridden
 ]
 
 { #category : #tests }
