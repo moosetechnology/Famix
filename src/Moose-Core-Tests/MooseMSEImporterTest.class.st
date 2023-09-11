@@ -17,11 +17,11 @@ MooseMSEImporterTest >> testComplex [
 	mooseModel := self readMSEStream: '(
 	(Moose-Core-Tests-Entities.Namespace (id: 1) (name ''aNamespace''))
 
-	(Moose-Core-Tests-Entities.Class (id: 2) (name ''ClassA'') (container (ref: 1)) (parentPackage (ref: 201)))
+	(Moose-Core-Tests-Entities.Class (id: 2) (name ''ClassA'') (typeContainer (ref: 1)) (parentPackage (ref: 201)))
 	(Moose-Core-Tests-Entities.Method (name ''methodA1'') (signature ''methodA1()'') (parentType (ref: 2)) (LOC 2))
 	(Moose-Core-Tests-Entities.Attribute (name ''attributeA1'') (parentType (ref: 2)))
 
-	(Moose-Core-Tests-Entities.Class (id: 3) (name ''ClassB'') (container (ref: 1)) (parentPackage (ref: 201)))
+	(Moose-Core-Tests-Entities.Class (id: 3) (name ''ClassB'') (typeContainer (ref: 1)) (parentPackage (ref: 201)))
 
 	(Moose-Core-Tests-Entities.Inheritance (subclass (ref: 3)) (superclass (ref: 2)))
 
