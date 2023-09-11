@@ -166,8 +166,8 @@ FAMIXMethod >> isJUnit4Test [
 ]
 
 { #category : #'Famix-Extensions' }
-FAMIXMethod >> isOverriden [
-	<FMProperty: #isOverriden type: #Boolean>
+FAMIXMethod >> isOverridden [
+	<FMProperty: #isOverridden type: #Boolean>
 	<derived>
 	<FMComment: 'The method is overrided in a sub class'>
 	"If we have a stub and we don't have the container, we can't have the information"
