@@ -135,7 +135,7 @@ MooseSampleData >> modelVersion4 [
 	(Moose-Core-Tests-Entities.Inheritance (subclass (ref: 5)) (superclass (ref: 4)))
 
 
-	(Moose-Core-Tests-Entities.Namespace (id: 101) (name ''anotherNamespace'') (parentScope (ref: 1)))
+	(Moose-Core-Tests-Entities.Namespace (id: 101) (name ''anotherNamespace''))
 	(Moose-Core-Tests-Entities.Class (id: 102) (name ''ClassA'') (typeContainer (ref: 101)) (parentPackage (ref: 203)))
 
 	(Moose-Core-Tests-Entities.Package (id: 201) (name ''aPackage''))

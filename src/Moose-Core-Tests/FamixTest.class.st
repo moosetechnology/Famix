@@ -6,6 +6,7 @@ Class {
 
 { #category : #tests }
 FamixTest >> classWithUnknownAttribute [
+
 	^ '
 (
 	(Famix-Test3-Entities.Class (id: 1)
@@ -16,16 +17,14 @@ FamixTest >> classWithUnknownAttribute [
 		(name ''SuperClass'')
 	)
 	(Famix-Test3-Entities.Reference (id: 3)
-		(source (ref: 4))
-		(target (ref: 2))
+		(referencer (ref: 4))
+		(referredType (ref: 2))
 	)
 	(Famix-Test3-Entities.Method (id: 4)
 		(name ''aMethod'') 
 		(parentType (ref: 1))
 	)
 )'
-
-	"(Famix-Test3-Entities.UnknownElement (id: 3))"
 ]
 
 { #category : #tests }
@@ -61,10 +60,15 @@ FamixTest >> testMSEImport [
 
 { #category : #tests }
 FamixTest >> testRobustMSEImport [
+
 	| importer model |
-	importer := (FMImporter model: (FMModel withMetamodel: FamixTest3Model metamodel))
-		fromString: self classWithUnknownAttribute;
-		run.
+	"The importer writes a trace when a property is undeclared.
+	This line will appear in CI traces, hence the following:"
+	self trace: '[Testing: This line is expected] '.
+	importer := (FMImporter model:
+			             (FMModel withMetamodel: FamixTest3Model metamodel))
+		            fromString: self classWithUnknownAttribute;
+		            run.
 
 	self assert: importer model elements size equals: 4.
 	model := FamixTest3Model new.
