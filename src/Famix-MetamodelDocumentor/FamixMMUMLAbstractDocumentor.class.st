@@ -9,13 +9,11 @@ Class {
 	#name : #FamixMMUMLAbstractDocumentor,
 	#superclass : #Object,
 	#instVars : [
-		'outputStream',
 		'classesOfInterest',
 		'externalClasses',
 		'withStub',
 		'models',
-		'prefs',
-		'backend'
+		'prefs'
 	],
 	#category : #'Famix-MetamodelDocumentor-Generate'
 }
@@ -69,8 +67,6 @@ FamixMMUMLAbstractDocumentor >> generateClassName: aFM3Class [
 { #category : #initialization }
 FamixMMUMLAbstractDocumentor >> initialize [
 	super initialize.
-	
-	self plantUMLBackend.
 
 	self beWithoutStub.
 	classesOfInterest := Set new.
@@ -89,12 +85,6 @@ FamixMMUMLAbstractDocumentor >> isOfInterest: aFMClass [
 { #category : #testing }
 FamixMMUMLAbstractDocumentor >> isWithStub [
 	^withStub
-]
-
-{ #category : #'api - generation' }
-FamixMMUMLAbstractDocumentor >> mermaidBackend [
-
-	backend := FamixMMUMLMermaidBackend new.
 ]
 
 { #category : #accessing }
@@ -118,22 +108,6 @@ FamixMMUMLAbstractDocumentor >> models [
 FamixMMUMLAbstractDocumentor >> models: anObject [
 
 	models := anObject
-]
-
-{ #category : #accessing }
-FamixMMUMLAbstractDocumentor >> outputStream [
-	^ outputStream
-]
-
-{ #category : #accessing }
-FamixMMUMLAbstractDocumentor >> outputStream: anObject [
-	outputStream := anObject
-]
-
-{ #category : #'api - generation' }
-FamixMMUMLAbstractDocumentor >> plantUMLBackend [
-
-	backend := FamixMMUMLPlantUMLBackend new.
 ]
 
 { #category : #testing }

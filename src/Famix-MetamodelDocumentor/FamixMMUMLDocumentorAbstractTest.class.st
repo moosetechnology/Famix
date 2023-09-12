@@ -25,7 +25,6 @@ FamixMMUMLDocumentorAbstractTest >> setUp [
 	String streamContents: [ :st | stream := st ] .
 	documentor := FamixMMUMLDocumentor new
 		model: FamixTest4Model ;
-		outputStream: stream ;
 		yourself.
 	
 ]

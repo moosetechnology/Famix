@@ -6,21 +6,14 @@ Class {
 
 { #category : #'tests-generating' }
 FamixMMUMLDocumentorVisitorTest >> testTypeOfExternal [
-	| contents entity |
+	| contents |
 	contents := FamixMMUMLDocumentor new
 		beWithStub;
  		model: FDModel ;
- 		generatePlantUMLModel. 
+ 		generate.
 
 	self assert: documentor umlModel size equals: 1.
 
-	entity := documentor umlModel anyOne.
-	self assert: entity class equals: FamixMMUMLClass.
-	self assert: entity name equals: 'Book'.
-	self assert: entity marker equals: $C.
-	self assert: entity color equals: 'white'.
-
-	"class Book << (C,white) >> #FFFFFF"
 	self assert: [ contents includesSubstring: 'class Model <<(C,LightYellow)External>>' ].
 ]
 

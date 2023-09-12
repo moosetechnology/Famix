@@ -35,10 +35,24 @@ Class {
 	#superclass : #FamixMMUMLAbstractDocumentor,
 	#instVars : [
 		'classesOfNoInterest',
-		'umlModel'
+		'umlModel',
+		'backend',
+		'outputStream'
 	],
 	#category : #'Famix-MetamodelDocumentor-Generate'
 }
+
+{ #category : #accessing }
+FamixMMUMLDocumentor >> backend [
+
+	^ backend
+]
+
+{ #category : #accessing }
+FamixMMUMLDocumentor >> backend: anObject [
+
+	backend := anObject
+]
 
 { #category : #visiting }
 FamixMMUMLDocumentor >> checkExternalClass: aFM3Class [
@@ -57,17 +71,7 @@ FamixMMUMLDocumentor >> generate [
 
 	externalClasses := Set new.
 
-	self plantUMLHeader.
-	outputStream cr.
-	self generatePlantUMLClasses.
-	outputStream cr.
-	self generatePlantUMLInheritance.
-	outputStream cr.
-	self generatePlantUMLRelations.
-	outputStream cr.
-	self generatePlantUMLExternalClasses.
-	outputStream cr.
-	self plantUMLFooter.
+	self backend generate: self umlModel on: outputStream.
 
 	^outputStream
 		close ;
@@ -241,7 +245,8 @@ FamixMMUMLDocumentor >> initialize [
 	super initialize.
 
 	umlModel := Dictionary new.
-	self onStream: (WriteStream with: String new)
+	self onStream: (WriteStream with: String new).
+	self plantUMLBackend
 ]
 
 { #category : #testing }
@@ -265,6 +270,12 @@ FamixMMUMLDocumentor >> isTrait: aFMClass [
 	^aFMClass implementingClass isTrait
 ]
 
+{ #category : #'api - generation' }
+FamixMMUMLDocumentor >> mermaidBackend [
+
+	backend := FamixMMUMLMermaidBackend new
+]
+
 { #category : #accessing }
 FamixMMUMLDocumentor >> onFile: aString [
 	| filename |
@@ -277,8 +288,13 @@ FamixMMUMLDocumentor >> onFile: aString [
 
 { #category : #accessing }
 FamixMMUMLDocumentor >> onStream: aStream [
-	outputStream := aStream.
-	backend outputStream: aStream.
+	outputStream := aStream
+]
+
+{ #category : #'api - generation' }
+FamixMMUMLDocumentor >> plantUMLBackend [
+
+	backend := FamixMMUMLPlantUMLBackend new
 ]
 
 { #category : #private }
