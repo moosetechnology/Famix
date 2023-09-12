@@ -1,7 +1,7 @@
 Class {
 	#name : #FamixMMUMLPlantUMLBackend,
 	#superclass : #FamixMMUMLAbstractBackend,
-	#category : #'Famix-MetamodelDocumentor'
+	#category : #'Famix-MetamodelDocumentor-Backend'
 }
 
 { #category : #'as yet unclassified' }

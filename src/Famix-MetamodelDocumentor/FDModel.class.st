@@ -1,7 +1,7 @@
 Class {
 	#name : #FDModel,
 	#superclass : #MooseModel,
-	#category : #'Famix-TestModel1MetamodelDocumentor-Model'
+	#category : #'Famix-MetamodelDocumentor-tests'
 }
 
 { #category : #meta }

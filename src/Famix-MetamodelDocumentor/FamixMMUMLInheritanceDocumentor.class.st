@@ -9,7 +9,7 @@ I am called by the main visitor, FamixMMUMLDocumentor, in its generatePlantUMLIn
 Class {
 	#name : #FamixMMUMLInheritanceDocumentor,
 	#superclass : #FamixMMUMLAbstractDocumentor,
-	#category : #'Famix-MetamodelDocumentor'
+	#category : #'Famix-MetamodelDocumentor-Generate'
 }
 
 { #category : #visiting }

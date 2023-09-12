@@ -17,7 +17,7 @@ Class {
 		'prefs',
 		'backend'
 	],
-	#category : #'Famix-MetamodelDocumentor'
+	#category : #'Famix-MetamodelDocumentor-Generate'
 }
 
 { #category : #'api - generation' }
@@ -48,12 +48,12 @@ FamixMMUMLAbstractDocumentor >> externalClasses: aCollection [
 { #category : #'api - generation' }
 FamixMMUMLAbstractDocumentor >> findDescriptionOf: anElement [
 
-	models
-		detect: [ :model | 
-			([ model model metamodel fmTypeOf: anElement ]
-				 on: NotFound
-				 do: [ nil ]) isNotNil ]
-		ifFound: [ :model | ^ model model metamodel fmTypeOf: anElement ]
+	models do: [ :modelColorTuple |
+		^[ modelColorTuple model metamodel fmTypeOf: anElement ]
+			on: NotFound
+			do: [ nil ]
+	]
+
 ]
 
 { #category : #generating }
@@ -73,6 +73,7 @@ FamixMMUMLAbstractDocumentor >> initialize [
 	self plantUMLBackend.
 
 	self beWithoutStub.
+	classesOfInterest := Set new.
 	externalClasses := Set new.
 	models := Set new.
 	prefs := Set new.
@@ -81,7 +82,8 @@ FamixMMUMLAbstractDocumentor >> initialize [
 { #category : #testing }
 FamixMMUMLAbstractDocumentor >> isOfInterest: aFMClass [
 
-	^ classesOfInterest anySatisfy: [ :fmClassOfInterest | fmClassOfInterest fullName = aFMClass fullName ]
+	^classesOfInterest anySatisfy: [ :fmClassOfInterest |
+		fmClassOfInterest fullName = aFMClass fullName ]
 ]
 
 { #category : #testing }
@@ -134,7 +136,7 @@ FamixMMUMLAbstractDocumentor >> plantUMLBackend [
 	backend := FamixMMUMLPlantUMLBackend new.
 ]
 
-{ #category : #private }
+{ #category : #testing }
 FamixMMUMLAbstractDocumentor >> relationEndOfInterest: aFMClass [
 	^self isWithStub
 		ifTrue: [ aFMClass class ~= FM3Object ]

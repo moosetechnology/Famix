@@ -34,17 +34,26 @@ Class {
 	#name : #FamixMMUMLDocumentor,
 	#superclass : #FamixMMUMLAbstractDocumentor,
 	#instVars : [
-		'classesOfNoInterest'
+		'classesOfNoInterest',
+		'umlModel'
 	],
-	#category : #'Famix-MetamodelDocumentor'
+	#category : #'Famix-MetamodelDocumentor-Generate'
 }
+
+{ #category : #visiting }
+FamixMMUMLDocumentor >> checkExternalClass: aFM3Class [
+
+	(self isOfInterest: aFM3Class) ifFalse: [
+		externalClasses add: aFM3Class ]
+]
 
 { #category : #'api - generation' }
 FamixMMUMLDocumentor >> generate [
 
 	models ifEmpty: [ Error signal: 'no meta-model(s) to work on' ].
 
-	self with: (models flatCollect: [ :model | model allClasses ] as: Set).
+	self with: (models flatCollect: [ :modelColorTuple |
+		modelColorTuple model metamodel classes ] as: Set).
 
 	externalClasses := Set new.
 
@@ -68,23 +77,22 @@ FamixMMUMLDocumentor >> generate [
 
 { #category : #generating }
 FamixMMUMLDocumentor >> generateClassesOfNoInterest: aFM3Class [
-	outputStream nextPutAll: 'hide '.
-		self generateClassName: aFM3Class.
-	outputStream cr.
+
+	umlModel
+		at: aFM3Class
+		put: ((FamixMMUMLClass from: aFM3Class)
+			hide: true ;
+			yourself)
+	"self generateClassName: aFM3Class"
 ]
 
 { #category : #generating }
 FamixMMUMLDocumentor >> generateExternalClass: aFM3Class [
 
-	outputStream nextPutAll: 'class '.
-	self generateClassName: aFM3Class.
+	umlModel at: aFM3Class put: (FamixMMUMLClass from: aFM3Class)
+	"self generateClassName: aFM3Class.
 	(self isOfInterest: aFM3Class) ifFalse: [ 
-		outputStream nextPutAll: ' <<'.
-		aFM3Class isFM3Class "is it a class or a trait ?"
-			ifTrue: [ outputStream nextPutAll: '(C,LightYellow)' ]
-			ifFalse: [ outputStream nextPutAll: '(T,LightYellow)' ].
-		outputStream nextPutAll: 'External>>' ].
-	outputStream cr
+		outputStream nextPutAll: 'External>>' ]"
 ]
 
 { #category : #'api - generation' }
@@ -232,26 +240,24 @@ FamixMMUMLDocumentor >> generateRelationTargetRole: aFM3Prop [
 FamixMMUMLDocumentor >> initialize [ 
 	super initialize.
 
+	umlModel := Dictionary new.
 	self onStream: (WriteStream with: String new)
 ]
 
 { #category : #testing }
+FamixMMUMLDocumentor >> isInUMLModel: aFM3Entity [
+
+	^umlModel at: aFM3Entity ifPresent: [true] ifAbsent: [false]
+]
+
+{ #category : #testing }
 FamixMMUMLDocumentor >> isRedundantRelation: aFM3Prop [
-	"whena relation has an opposite, we want to display process only one of them (the 'non redundant' one.
-	HEre are some rules to decide which one is redudant.
-	Some of these rules are pretty arbitrary, but a decision has to be made"
+
+	(self isInUMLModel: aFM3Prop) ifTrue: [ true ].
 	
-	aFM3Prop opposite ifNil: [ ^false ].
-
-	aFM3Prop isDerived ifTrue: [ ^true ].
-	aFM3Prop isContainer ifTrue: [ ^false ].
-
-	"check whether opposite is redundant"
-	aFM3Prop opposite isDerived ifTrue: [ ^false ].
-	aFM3Prop isContainer ifTrue: [ ^true ].
-
-	"don't know what else to test, but a decision has to be made"
-	^aFM3Prop name < aFM3Prop opposite name
+	aFM3Prop hasOpposite ifFalse: [ false ].
+	
+	^(self isInUMLModel: aFM3Prop opposite)
 ]
 
 { #category : #testing }
@@ -331,36 +337,52 @@ FamixMMUMLDocumentor >> tupleForEntity: aFM3Class [
 	^ models detect: [ :model | (self findDescriptionOf: model model) package = aFM3Class package ]
 ]
 
-{ #category : #visiting }
-FamixMMUMLDocumentor >> visitClass: aFMClass [
-	outputStream
-		nextPutAll: 'class ' ;
-		nextPutAll: aFMClass name ;
-		nextPutAll: ' << (' ;
-		nextPutAll: (self plantUMLMarkerFor: aFMClass) ;
-		nextPut: $, ;
-		nextPutAll: (self plantUMLColorFor: aFMClass) ;
-		nextPutAll: ') >>' ;
-		nextPutAll: ' #';
-		nextPutAll: (self plantUMLBackgroundColorFor: aFMClass) ;
-		nextPutAll: ' {';
-		cr.
-	aFMClass
-		primitiveProperties do: [ :prop | prop accept: self ].
-	outputStream
-		nextPutAll: '}' ;
-		cr.
+{ #category : #accessing }
+FamixMMUMLDocumentor >> umlClassNamed: aString [
+	^umlModel values detect: [ :each |
+		(each class = FamixMMUMLClass) and:
+		[ each name = aString ]
+	]
+]
+
+{ #category : #accessing }
+FamixMMUMLDocumentor >> umlModel [
+	^umlModel values
 ]
 
 { #category : #visiting }
-FamixMMUMLDocumentor >> visitClassInheritances: aFMClass [
-	self visitInheritance: aFMClass superclass sub: aFMClass.
-	aFMClass traits do: [ :trait | self visitInheritance: trait sub: aFMClass ]
+FamixMMUMLDocumentor >> visitClass: aFM3Class [
+
+	| entity |
+	(self isInUMLModel: aFM3Class) ifTrue: [ ^self ].
+
+	entity := (FamixMMUMLClass from: aFM3Class)
+		          color: (self plantUMLColorFor: aFM3Class);
+		          yourself.
+	"self plantUMLBackgroundColorFor: aFMClass"
+	self checkExternalClass: aFM3Class.
+
+	entity properties:
+		(aFM3Class primitiveProperties collect: [ :prop | prop accept: self ]).
+
+	umlModel at: aFM3Class put: entity.
+
+	^entity
 ]
 
 { #category : #visiting }
-FamixMMUMLDocumentor >> visitClassRelations: aFMClass [
-	aFMClass
+FamixMMUMLDocumentor >> visitClassInheritances: aFM3Class [
+
+	self checkExternalClass: aFM3Class.
+	self visitInheritance: aFM3Class superclass sub: aFM3Class.
+	aFM3Class traits do: [ :trait | self visitInheritance: trait sub: aFM3Class ]
+]
+
+{ #category : #visiting }
+FamixMMUMLDocumentor >> visitClassRelations: aFM3Class [
+	
+	self checkExternalClass: aFM3Class.
+	aFM3Class
 		complexProperties do: [ :rel | self visitRelation: rel ]
 ]
 
@@ -369,76 +391,45 @@ FamixMMUMLDocumentor >> visitInheritance: aFMSuperClass sub: aFMSubClass [
 	(self relationEndOfInterest: aFMSuperClass) ifFalse: [ ^ self ].
 	(self relationEndOfInterest: aFMSubClass) ifFalse: [ ^ self ].
 
-	self generateClassName: aFMSuperClass.
-	outputStream nextPutAll: ' <|-- '.
-	self generateClassName: aFMSubClass.
-	outputStream cr
+	umlModel
+		at: (aFMSubClass -> aFMSuperClass)
+		put: (FamixMMUMLInheritance from: aFMSubClass to: aFMSuperClass)
 ]
 
 { #category : #visiting }
 FamixMMUMLDocumentor >> visitProperty: aFMProperty [
-	outputStream
-		nextPutAll: '  ' ;
-		nextPutAll: aFMProperty type name ;
-		space ;
-		nextPutAll: aFMProperty name ;
-		cr
+
+	^FamixMMUMLProperty from: aFMProperty
 ]
 
 { #category : #visiting }
 FamixMMUMLDocumentor >> visitRelation: aFM3Prop [
-	(self relationEndOfInterest: aFM3Prop mmClass)
-		ifFalse: [ ^ self ].
-	(self relationEndOfInterest: aFM3Prop type)
-		ifFalse: [ ^ self ].
-
+	(self relationEndOfInterest: aFM3Prop mmClass) ifFalse: [ ^ self ].
+	(self relationEndOfInterest: aFM3Prop type) ifFalse: [ ^ self ].
 	(self isRedundantRelation: aFM3Prop) ifTrue: [ ^ self ].
 
-	self generateRelationSource: aFM3Prop.
-	outputStream space.
-	aFM3Prop opposite ifNotNil: [
-		self generateRelationTargetRole: aFM3Prop.
-		outputStream space.
-	].
-	self generateRelationSymbol: aFM3Prop.
-	outputStream space.
-	self generateRelationSourceRole: aFM3Prop.
-	outputStream space.
-	self generateRelationTarget: aFM3Prop.
-	outputStream cr
+	umlModel at: aFM3Prop put: (FamixMMUMLAssociation from: aFM3Prop).
+
+	aFM3Prop mmClass accept: self.
+	aFM3Prop type accept: self.
 ]
 
 { #category : #visiting }
 FamixMMUMLDocumentor >> visitTrait: aFMTrait [
-	outputStream
-		nextPutAll: 'class ' ;
-		nextPutAll: aFMTrait name ;
-		nextPutAll: ' << (' ;
-		nextPutAll: (self plantUMLMarkerFor: aFMTrait) ;
-		nextPut: $, ;
-		nextPutAll: (self plantUMLColorFor: aFMTrait) ;
-		nextPutAll: ') >>' ;
-		nextPutAll: ' #';
-		nextPutAll: (self plantUMLBackgroundColorFor: aFMTrait) ;
-		nextPutAll: ' {';
-		cr.
-	aFMTrait 
-		primitiveProperties do: [ :prop | prop accept: self ].
-	outputStream
-		nextPutAll: '}' ;
-		cr.
+
+	^self visitClass: aFMTrait
 ]
 
 { #category : #accessing }
 FamixMMUMLDocumentor >> with: aCollection [
 	classesOfInterest := aCollection
 		collect: [:stClass | self findDescriptionOf: stClass ].
-
 ]
 
 { #category : #accessing }
 FamixMMUMLDocumentor >> without: aCollection [
 	classesOfNoInterest := aCollection
 		collect: [:stClass | self findDescriptionOf: stClass ].
+
 
 ]

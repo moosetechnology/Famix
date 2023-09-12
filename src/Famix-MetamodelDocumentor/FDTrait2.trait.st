@@ -2,7 +2,7 @@ Trait {
 	#name : #FDTrait2,
 	#traits : 'FDTrait1',
 	#classTraits : 'FDTrait1 classTrait',
-	#category : #'Famix-TestModel1MetamodelDocumentor-Traits'
+	#category : #'Famix-MetamodelDocumentor-tests'
 }
 
 { #category : #meta }

@@ -14,7 +14,7 @@ Class {
 		'model',
 		'color'
 	],
-	#category : #'Famix-MetamodelDocumentor'
+	#category : #'Famix-MetamodelDocumentor-Model'
 }
 
 { #category : #accessing }
@@ -32,11 +32,6 @@ FamixUMLModelColorTuple class >> model: aModel color: aColor [
 		  model: aModel;
 		  color: aColor;
 		  yourself
-]
-
-{ #category : #accessing }
-FamixUMLModelColorTuple >> allClasses [
-	^model allClasses
 ]
 
 { #category : #accessing }

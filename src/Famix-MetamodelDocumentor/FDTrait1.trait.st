@@ -1,6 +1,6 @@
 Trait {
 	#name : #FDTrait1,
-	#category : #'Famix-TestModel1MetamodelDocumentor-Traits'
+	#category : #'Famix-MetamodelDocumentor-tests'
 }
 
 { #category : #meta }

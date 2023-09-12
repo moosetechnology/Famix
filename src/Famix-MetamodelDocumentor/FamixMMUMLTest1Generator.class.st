@@ -10,7 +10,7 @@ Class {
 		't3',
 		't4'
 	],
-	#category : #'Famix-MetamodelDocumentor'
+	#category : #'Famix-MetamodelDocumentor-tests'
 }
 
 { #category : #accessing }
