@@ -436,8 +436,11 @@ MooseModel >> deadCodeRate [
 MooseModel >> detectEncodingOfAllFileAnchors [
 	"I can be execute to reduce the time of detection of the encoding of each file anchor because multiple file anchor can point to the same file."
 
-	(((self select: #isFileAnchor) asOrderedCollection reject:
-		  #privateHasEncoding) groupedBy: #fileName) valuesDo: [ :anchors |
+	(((self select: [ :entity |
+		   entity isFileAnchor
+			   on: MessageNotUnderstood
+			   do: [ false ] ]) asOrderedCollection reject: #privateHasEncoding)
+		 groupedBy: #fileName) valuesDo: [ :anchors |
 		| encoding |
 		encoding := anchors anyOne detectEncoding.
 		anchors do: [ :anchor | anchor encoding: encoding ] ]
