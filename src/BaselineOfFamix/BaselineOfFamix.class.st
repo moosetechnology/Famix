@@ -151,7 +151,7 @@ BaselineOfFamix >> packages: spec [
 		with: [
 			spec requires: #( 'Fame' 'DeepTraverser' 'CollectionExtensions' ) ];
 		package: 'Moose-Core'
-		with: [ spec requires: #( 'Fame' 'BasicTraits' 'Moose-Query' ) ];
+		with: [ spec requires: #( 'Fame' 'Moose-Query' ) ];
 		package: 'Moose-Core-Generator'
 		with: [ spec requires: #( 'Famix-MetamodelBuilder-Core' ) ];
 		package: 'Moose-Query-Extensions'
