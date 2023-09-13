@@ -5,28 +5,6 @@ Class {
 }
 
 { #category : #generating }
-FamixMMUMLPlantUMLBackend >> generateClass: aUMLClass [
-
-	outputStream
-		nextPutAll: 'class ' ;
-		nextPutAll: aUMLClass name ;
-		nextPutAll: ' << (' ;
-		nextPutAll: (self plantUMLMarkerFor: aUMLClass) ;
-		nextPut: $, ;
-		nextPutAll: (self plantUMLColorFor: aUMLClass) ;
-		nextPutAll: ') >>' ;
-		nextPutAll: ' #';
-		nextPutAll: (self plantUMLBackgroundColorFor: aUMLClass) ;
-		nextPutAll: ' {';
-		cr.
-	aUMLClass
-		primitiveProperties do: [ :prop | prop accept: self ].
-	outputStream
-		nextPutAll: '}' ;
-		cr.
-]
-
-{ #category : #generating }
 FamixMMUMLPlantUMLBackend >> generateClassFooter: aUMLClass [
 
 	outputStream

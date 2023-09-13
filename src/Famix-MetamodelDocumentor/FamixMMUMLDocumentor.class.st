@@ -66,10 +66,13 @@ FamixMMUMLDocumentor >> generate [
 
 	models ifEmpty: [ Error signal: 'no meta-model(s) to work on' ].
 
-	self with: (models flatCollect: [ :modelColorTuple |
-		modelColorTuple model metamodel classes ] as: Set).
+	classesOfInterest := (models flatCollect: [ :modelColorTuple |
+		(self findDescriptionOf: modelColorTuple model) package classes ] as: Set).
 
 	externalClasses := Set new.
+	
+	classesOfInterest do: [ :c | c accept: self ].
+	externalClasses do: [ :ec | ec accept: self ].
 
 	self backend generate: self umlModel on: outputStream.
 

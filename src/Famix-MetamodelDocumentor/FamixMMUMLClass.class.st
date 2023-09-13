@@ -8,6 +8,7 @@ Class {
 	#instVars : [
 		'name',
 		'color',
+		'backgroundColor',
 		'marker',
 		'hide',
 		'properties'
@@ -26,6 +27,18 @@ FamixMMUMLClass class >> from: aFM3Class [
 FamixMMUMLClass >> addProperty: anObject [
 
 	properties add: anObject
+]
+
+{ #category : #accessing }
+FamixMMUMLClass >> backgroundColor [
+
+	^ backgroundColor
+]
+
+{ #category : #accessing }
+FamixMMUMLClass >> backgroundColor: anObject [
+
+	backgroundColor := anObject
 ]
 
 { #category : #accessing }
@@ -60,7 +73,8 @@ FamixMMUMLClass >> initialize [
 	name := 'An-Unknown-Class'.
 	hide := false.
 	marker := $C.
-	color := #LightYellow
+	color := #black.
+	backgroundColor := #lightYellow
 ]
 
 { #category : #initialization }

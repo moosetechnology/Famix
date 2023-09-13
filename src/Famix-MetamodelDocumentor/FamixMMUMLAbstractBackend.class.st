@@ -21,7 +21,7 @@ FamixMMUMLAbstractBackend >> generate: entities on: aStream [
 	self generateHeader.
 
 	self generateClasses: entities.
-	self generateInheritance: entities.
+	self generateInheritances: entities.
 	self generateRelations: entities.
 	self generateExternalClasses: entities.
 
@@ -80,7 +80,7 @@ FamixMMUMLAbstractBackend >> generateClassHeader: aClass [
 { #category : #generating }
 FamixMMUMLAbstractBackend >> generateClassProperties: aClass [
 
-	aClass primitiveProperties do: [ :prop | self generateProperty: prop ].
+	aClass properties do: [ :prop | self generateProperty: prop ].
 ]
 
 { #category : #generating }
@@ -133,6 +133,15 @@ FamixMMUMLAbstractBackend >> generateInheritanceSuper: superclass sub: subclass 
 		nextPutAll: ' <|-- ' ;
 		nextPutAll: subclass ;
 		cr
+]
+
+{ #category : #generating }
+FamixMMUMLAbstractBackend >> generateInheritances: entities [
+
+	entities do: [ :each |
+		(each class = FamixMMUMLInheritance)
+		ifTrue: [ self generateInheritance: each ]
+	]
 ]
 
 { #category : #generating }
