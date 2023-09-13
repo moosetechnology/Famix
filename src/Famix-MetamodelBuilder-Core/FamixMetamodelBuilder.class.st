@@ -475,7 +475,7 @@ FamixMetamodelBuilder >> prepareBehaviorsGeneration [
 	self sortedClasses do: [ :each | each generate ]
 ]
 
-{ #category : #generating }
+{ #category : #'as yet unclassified' }
 FamixMetamodelBuilder >> prepareGeneration [
 
 	self registerPackages.
@@ -554,8 +554,11 @@ FamixMetamodelBuilder >> shouldGenerateModel [
 FamixMetamodelBuilder >> sortedClasses [
 
 	<ignoreForMutations: #( ReplaceLessOrEqualWithLessMutantOperator )>
-	^ self classes sorted:
-		  [ :class | class allClassGeneralizations size ] ascending
+
+	^ self classes sorted: [ :class |
+		  class isModelClass
+			  ifTrue: [ -1 ]
+			  ifFalse: [ class allClassGeneralizations size ] ] ascending
 ]
 
 { #category : #accessing }

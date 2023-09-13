@@ -1456,7 +1456,7 @@ FamixGenerator >> defineRelations [
 
 
 	((tType property: #typeContainer)
-			comment: 'Container entity to which this type belongs to. Container is a namespace, not a package (Smalltalk).';
+			comment: 'Container entity to which this type belongs. Container is a namespace, not a package (Smalltalk).';
 			container)
 		*-
 	((tWithTypes property: #types)
