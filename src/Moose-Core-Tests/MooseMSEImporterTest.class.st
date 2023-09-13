@@ -167,7 +167,7 @@ MooseMSEImporterTest >> testUndeclaredProperty [
 	| mooseModel |
 	"The importer writes a trace when a property is undeclared.
 	This line will appear in CI traces, hence the following:"
-	self trace: '[Testing: This line is expected] '.
+	self crTrace: '[Testing: This line is expected] '.
 	mooseModel := self readMSEStream:
 		              '((Moose-Core-Tests-Entities.Class (name ''ClassA'') (Undeclared 42) ))'
 			              readStream.
