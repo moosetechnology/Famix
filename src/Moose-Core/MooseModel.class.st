@@ -437,7 +437,7 @@ MooseModel >> detectEncodingOfAllFileAnchors [
 	"I can be execute to reduce the time of detection of the encoding of each file anchor because multiple file anchor can point to the same file."
 
 	(((self select: [ :entity |
-		   entity isFileAnchor
+		   [ entity isFileAnchor ]
 			   on: MessageNotUnderstood
 			   do: [ false ] ]) asOrderedCollection reject: #privateHasEncoding)
 		 groupedBy: #fileName) valuesDo: [ :anchors |
