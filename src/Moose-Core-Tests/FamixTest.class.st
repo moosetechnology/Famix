@@ -64,7 +64,7 @@ FamixTest >> testRobustMSEImport [
 	| importer model |
 	"The importer writes a trace when a property is undeclared.
 	This line will appear in CI traces, hence the following:"
-	self trace: 'crTrace: This line is expected] '.
+	self crTrace: '[Testing: This line is expected] '.
 	importer := (FMImporter model:
 			             (FMModel withMetamodel: FamixTest3Model metamodel))
 		            fromString: self classWithUnknownAttribute;
