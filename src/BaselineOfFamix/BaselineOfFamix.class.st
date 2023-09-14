@@ -207,7 +207,8 @@ BaselineOfFamix >> packages: spec [
 		package: 'Moose-Core-Tests-Entities'
 		with: [ spec requires: #( 'Moose-Core' 'BasicTraits' ) ];
 		package: 'Moose-GenericImporters-Tests'
-		with: [ spec requires: #( 'Moose-GenericImporter' ) ];
+		with: [
+			spec requires: #( 'Moose-GenericImporter' 'Famix-Test1-Entities' ) ];
 		package: 'Famix-Smalltalk-Utils-Tests' with: [
 			spec requires:
 					#( 'Famix-Smalltalk-Utils' 'ReferenceTestResources' ) ];
@@ -225,7 +226,8 @@ BaselineOfFamix >> packages: spec [
 		package: 'Famix-MetamodelBuilder-Tests' with: [
 			spec requires:
 					#( 'Famix-TestGenerators' 'Famix-MetamodelBuilder-TestsTraitsResources-A'
-					   'Famix-MetamodelBuilder-TestsTraitsResources-B' ) ];
+					   'Famix-MetamodelBuilder-TestsTraitsResources-B'
+					   'Famix-Test1-Entities' ) ];
 		package: 'Famix-MetamodelBuilder-TestsTraitsResources-A'
 		with: [ spec requires: #( 'Basic' ) ];
 		package: 'Famix-MetamodelBuilder-TestsTraitsResources-B' with: [
