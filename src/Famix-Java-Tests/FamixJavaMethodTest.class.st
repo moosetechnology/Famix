@@ -91,36 +91,6 @@ FamixJavaMethodTest >> testIsStubWhenParentIsStub [
 ]
 
 { #category : #tests }
-FamixJavaMethodTest >> testOverride [
-	| overriddenMethod c1 c2 package |
-	package := FamixJavaPackage new.
-	c1 := FamixJavaClass new
-		parentPackage: package;
-		yourself.
-	c2 := FamixJavaClass new
-		parentPackage: package;
-		yourself.
-	overriddenMethod := FamixJavaMethod new
-		name: 'method';
-		signature: 'method()';
-		parentType: c1;
-		declaredType: c1;
-		yourself.
-	method
-		name: 'method';
-		signature: 'method()';
-		parentType: c2;
-		declaredType: c2.
-	c2
-		addSuperInheritance:
-			(FamixJavaInheritance new
-				subclass: c2;
-				superclass: c1).
-	self assert: method isOverriding.
-	self assert: overriddenMethod isOverridden
-]
-
-{ #category : #tests }
 FamixJavaMethodTest >> testOverriddenMethod [
 
 	| signature overriddenMethod localClass superclass |
@@ -187,6 +157,36 @@ FamixJavaMethodTest >> testOverriddenMethodOnlyOneLevel [
 		subclass: superclass.
 
 	self assert: method overriddenMethod equals: overriddenMethod
+]
+
+{ #category : #tests }
+FamixJavaMethodTest >> testOverride [
+	| overriddenMethod c1 c2 package |
+	package := FamixJavaPackage new.
+	c1 := FamixJavaClass new
+		parentPackage: package;
+		yourself.
+	c2 := FamixJavaClass new
+		parentPackage: package;
+		yourself.
+	overriddenMethod := FamixJavaMethod new
+		name: 'method';
+		signature: 'method()';
+		parentType: c1;
+		declaredType: c1;
+		yourself.
+	method
+		name: 'method';
+		signature: 'method()';
+		parentType: c2;
+		declaredType: c2.
+	c2
+		addSuperInheritance:
+			(FamixJavaInheritance new
+				subclass: c2;
+				superclass: c1).
+	self assert: method isOverriding.
+	self assert: overriddenMethod isOverridden
 ]
 
 { #category : #tests }

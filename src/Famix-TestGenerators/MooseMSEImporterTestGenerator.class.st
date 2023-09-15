@@ -66,6 +66,7 @@ MooseMSEImporterTestGenerator >> defineHierarchy [
 	package
 		--|> namedEntity;
 		--|> #TPackage;
+		--|> #TPackageable;
 		--|> #TWithClasses.
 
 	namespace

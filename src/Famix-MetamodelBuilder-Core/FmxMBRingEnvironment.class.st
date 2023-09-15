@@ -168,7 +168,9 @@ FmxMBRingEnvironment >> initialize [
 	ringEnvironment version: 7.
 	ringEnvironment ensureClassNamed: #FMOne.
 	ringEnvironment ensureClassNamed: #FMMany.		
-
+	ringEnvironment ensureClassNamed: #FMMultivalueLink.
+	ringEnvironment ensureClassNamed: #FMMultiMultivalueLink.
+	ringEnvironment ensureClassNamed: #MooseSpecializedGroup.
 ]
 
 { #category : #'public registration' }

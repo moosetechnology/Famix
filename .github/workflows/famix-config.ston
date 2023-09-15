@@ -1,8 +1,9 @@
 SmalltalkCISpec {
-  #loading : [
+#loading : [
     SCIMetacelloLoadSpec {
       #baseline : 'Famix',
       #directory : '../../src'
     }
-  ]
+  ],
+#postLoading : 'silence-compiler-warnings.st'
 }

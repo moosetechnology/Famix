@@ -9,22 +9,6 @@ Class {
 }
 
 { #category : #generating }
-FmxMBEntityCreatorTrait >> generate [
-
-	super generate.
-
-	self builder classes
-		reject: [ :cls | 
-			cls isAbstractClass or: [ 
-				cls isModelClass or: [ cls isMetamodelClassGroup ] ] ]
-		thenDo: [ :cls | 
-			self generateEntityCreationMethodFor: cls.
-			(cls allTransitiveTraits anySatisfy: [ :trait | 
-				 trait prefix = #Famix and: [ trait name = #TNamedEntity ] ]) 
-				ifTrue: [ self generateNamedEntityCreationMethodFor: cls ] ]
-]
-
-{ #category : #generating }
 FmxMBEntityCreatorTrait >> generateEntityCreationMethodFor: cls [
 
 	self builder environment
@@ -36,6 +20,20 @@ FmxMBEntityCreatorTrait >> generateEntityCreationMethodFor: cls [
 					 cls fullName })
 		in: self realClass
 		classified: 'entity creation'
+]
+
+{ #category : #generating }
+FmxMBEntityCreatorTrait >> generateEntityCreationMethods [
+
+	self builder classes
+		reject: [ :cls |
+			cls isAbstractClass or: [
+				cls isModelClass or: [ cls isMetamodelClassGroup ] ] ]
+		thenDo: [ :cls |
+			self generateEntityCreationMethodFor: cls.
+			(cls allTransitiveTraits anySatisfy: [ :trait |
+				 trait prefix = #Famix and: [ trait name = #TNamedEntity ] ])
+				ifTrue: [ self generateNamedEntityCreationMethodFor: cls ] ]
 ]
 
 { #category : #generating }
@@ -60,4 +58,10 @@ FmxMBEntityCreatorTrait >> initialize [
 	comment := 'This trait is used by Famix models.
 It provides an API for creating entities and adding them to the model.'.
 	tag := 'Model'
+]
+
+{ #category : #testing }
+FmxMBEntityCreatorTrait >> isEntityCreatorTrait [
+
+	^ true
 ]

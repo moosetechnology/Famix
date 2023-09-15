@@ -45,28 +45,32 @@ MooseSmalltalkImporterSubclassesTest >> setUp [
 
 { #category : #tests }
 MooseSmalltalkImporterSubclassesTest >> testDoNotImportSubClasses [
+
 	self pharoImporterTask
-		importingContext:
-				(self pharoImporterTask importingContext
-						doNotImportSubclasses;
-						yourself);
+		importingContext: (self pharoImporterTask importingContext
+				 doNotImportSubclasses;
+				 yourself);
 		model: model;
-		addFromPackagesMatching: [ :e | e name beginsWith: 'Moose-TestResources-Reference-Core' ];
-		run;
-		yourself.
-	self deny: ((model allClasses collect: #name) includes: 'SubRootModelTwo')
+		addFromPackagesMatching: [ :e |
+		e name beginsWith: 'Moose-TestResources-Reference-Core' ];
+		run.
+
+	self deny:
+		((model allClasses collect: #name) includes: 'SubRootModelTwo')
 ]
 
 { #category : #tests }
 MooseSmalltalkImporterSubclassesTest >> testImportSubClasses [
-self pharoImporterTask
-		importingContext:
-				(self pharoImporterTask importingContext
-						importSubclasses;
-						yourself);
+
+	self pharoImporterTask
+		importingContext: (self pharoImporterTask importingContext
+				 importSubclasses;
+				 yourself);
 		model: model;
-		addFromPackagesMatching: [ :e | e name beginsWith: 'Moose-TestResources-Reference-Core' ];
-		run;
-		yourself.
-	self assert: ((model allClasses collect: #name) includes: 'SubRootModelTwo')
+		addFromPackagesMatching: [ :e |
+		e name beginsWith: 'Moose-TestResources-Reference-Core' ];
+		run.
+
+	self assert:
+		((model allClasses collect: #name) includes: 'SubRootModelTwo')
 ]
