@@ -3,6 +3,10 @@ name: Pull request
 on: 
   pull_request:
     types: [assigned, opened, synchronize, reopened]
+  push:
+    branches:
+      - development
+      - master
 
 jobs:
   build:
