@@ -93,6 +93,12 @@ FamixUMLClass >> initializeFrom: aFM3Class [
 
 ]
 
+{ #category : #testing }
+FamixUMLClass >> isTrait [
+
+	^ isTrait
+]
+
 { #category : #accessing }
 FamixUMLClass >> isTrait: aBoolean [
 
