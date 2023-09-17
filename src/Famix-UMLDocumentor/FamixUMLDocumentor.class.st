@@ -3,9 +3,10 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'withStub',
-		'modelClasses',
 		'umlModel',
-		'modelColors'
+		'modelColors',
+		'onlyModelClasses',
+		'fmClasses'
 	],
 	#category : #'Famix-UMLDocumentor-Generator'
 }
@@ -25,14 +26,16 @@ FamixUMLDocumentor >> beWithoutStub [
 { #category : #private }
 FamixUMLDocumentor >> colorForEntity: aFMEntity [
 	^modelColors
-		detect: [ :modelColor | (self fm3DescriptionOf: modelColor key) package classes includes: aFMEntity ]
+		detect: [ :modelColor |
+			(self fm3DescriptionOf: modelColor key) package classes
+				includes: aFMEntity ]
 		ifFound: [ :modelColor | modelColor value ]
 		ifNone:  [ Color white ]
 .
 
 ]
 
-{ #category : #accessing }
+{ #category : #private }
 FamixUMLDocumentor >> defaultColor: i [
 
 	^Color perform: ( #(white lightYellow lightBlue lightGreen pink) at: i )
@@ -63,21 +66,31 @@ FamixUMLDocumentor >> fm3DescriptionOf: anFM3Element [
 	^nil
 ]
 
+{ #category : #private }
+FamixUMLDocumentor >> fm3DescriptionsOf: aCollection [
+
+	^aCollection collect: [ :aClass | self fm3DescriptionOf: aClass ]
+]
+
+{ #category : #accessing }
+FamixUMLDocumentor >> fmClasses: aCollection [
+	fmClasses addAll: aCollection 
+]
+
 { #category : #api }
 FamixUMLDocumentor >> generate [
 
 	modelColors ifEmpty: [ Error signal: 'no meta-model(s) to work on' ].
 
 	"if no classes specified, generate the entire meta-model"
-	modelClasses ifEmpty: [
-		modelClasses := (modelColors flatCollect: [ :modelColor |
-			(self fm3DescriptionOf: modelColor key) package classes ])].
+	fmClasses := onlyModelClasses
+		ifNil: [ self getClassesFromModels ]
+		ifNotNil: [ self fm3DescriptionsOf: onlyModelClasses ].
 
 	self generateUMLClasses.
 	self generateUMLInheritance.
-	self generateUMLRelations.
+	self generateUMLRelations
 	"self generateUMLExternalClasses."
-
 ]
 
 { #category : #generating }
@@ -136,7 +149,7 @@ FamixUMLDocumentor >> generateRelation: aFMProperty of: aUMLClass [
 
 { #category : #generating }
 FamixUMLDocumentor >> generateUMLClasses [
-	modelClasses do: [ :class | self generateClass: class ].
+	fmClasses do: [ :class | self generateClass: class ].
 	
 ]
 
@@ -159,11 +172,18 @@ FamixUMLDocumentor >> generateUsedTrait: aTrait byClass: aFMSubClass [
 		put: (FamixUMLUse from: aFMSubClass to: (self fm3DescriptionOf: aTrait))
 ]
 
+{ #category : #private }
+FamixUMLDocumentor >> getClassesFromModels [
+
+	^modelColors flatCollect: [ :modelColor |
+		(self fm3DescriptionOf: modelColor key) package classes ]
+]
+
 { #category : #initialization }
 FamixUMLDocumentor >> initialize [
 	super initialize.
 
-	modelClasses := Set new.
+	fmClasses := Set new.
 	"3 seems like a good default maximum value for the model we want to document"
 	modelColors := OrderedCollection new: 3.
 	umlModel := Dictionary new.
@@ -181,7 +201,7 @@ FamixUMLDocumentor >> isOfInterest: aFMClass [
 
 	^self isWithStub
 		ifTrue: [ aFMClass class ~= FM3Object ]
-		ifFalse: [ modelClasses includes: aFMClass ]
+		ifFalse: [ fmClasses includes: aFMClass ]
 ]
 
 { #category : #testing }
@@ -219,15 +239,16 @@ FamixUMLDocumentor >> model: aModel color: aColor [
 	modelColors add: (aModel -> aColor)
 ]
 
-{ #category : #api }
-FamixUMLDocumentor >> modelClasses: aCollection [
-	modelClasses addAll: aCollection 
-]
-
 { #category : #accessing }
 FamixUMLDocumentor >> modelColors [
 
 	^ modelColors
+]
+
+{ #category : #api }
+FamixUMLDocumentor >> onlyClasses: aCollection [
+
+	onlyModelClasses := aCollection
 ]
 
 { #category : #accessing }

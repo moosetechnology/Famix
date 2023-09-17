@@ -17,6 +17,8 @@ FamixUMLDocumentorTest >> mockModel: modelName classes: aCollection [
 	mockModel := Mock named: modelName.
 	mockModel stub metamodel willReturn: mockModel.
 	mockModel stub classes willReturn: aCollection.
+	(mockModel stub descriptionOf: Any ifAbsent: Any)
+		will: [ :entity :block | (aCollection includes: entity) ifTrue: [ entity ] ifFalse: [ block value ] ].
 	^mockModel
 
 ]
@@ -31,28 +33,53 @@ FamixUMLDocumentorTest >> setUp [
 { #category : #tests }
 FamixUMLDocumentorTest >> testColorForEntity [
 
-	documentor model: (self mockModel: #model1 classes: #(class1 class2)).
-	documentor model: (self mockModel: #model2 classes: #(class3 class4)).
+	documentor model: FDModel.
+	documentor model: FamixStModel.
 
-	self assert: (documentor colorForEntity: #class1) equals: (documentor modelColors first value).
-	self assert: (documentor colorForEntity: #class2) equals: (documentor modelColors first value).
+	documentor fmClasses: (documentor getClassesFromModels).
 
-	self assert: (documentor colorForEntity: #class3) equals: (documentor modelColors second value).
-	self assert: (documentor colorForEntity: #class4) equals: (documentor modelColors second value).
+	self
+		assert: (documentor colorForEntity: (FDModel metamodel fmTypeOf: FDTrait1))
+		equals: (documentor modelColors first value).
+	self
+		assert: (documentor colorForEntity: (FamixStModel metamodel fmTypeOf: FamixStClass))
+		equals: (documentor modelColors second value).
 ]
 
 { #category : #tests }
-FamixUMLDocumentorTest >> testGenerateClassColor [
+FamixUMLDocumentorTest >> testGenerateClass [
 
-	| umlClass |
+	| fmClass umlClass |
+	fmClass := FDModel metamodel fmTypeOf: FDModel.
+
 	documentor model: FDModel color: Color red.
-	documentor generate.
+	documentor fmClasses: { fmClass }.
+	documentor generateClass: fmClass.
 
-	self assert: documentor umlEntities isNotEmpty.
+	self assert: documentor umlEntities size equals: 1.
 
-	umlClass := documentor umlEntities detect: [ :e | e class = FamixUMLClass ] ifNone: [nil].
-	self assert: umlClass isNotNil.
+	umlClass := documentor umlEntities anyOne.
+	self assert: umlClass name equals: 'FDModel'.
 	self assert: umlClass color equals: Color red.
+	self deny: umlClass isTrait
+]
+
+{ #category : #tests }
+FamixUMLDocumentorTest >> testGenerateTrait [
+
+	| fmClass umlClass |
+	fmClass := FDModel metamodel fmTypeOf: FDTrait1.
+
+	documentor model: FDModel color: Color red.
+	documentor fmClasses: { fmClass }.
+	documentor generateClass: fmClass.
+
+	self assert: documentor umlEntities size equals: 1.
+
+	umlClass := documentor umlEntities anyOne.
+	self assert: umlClass name equals: 'Trait1'.
+	self assert: umlClass color equals: Color red.
+	self assert: umlClass isTrait
 ]
 
 { #category : #tests }
