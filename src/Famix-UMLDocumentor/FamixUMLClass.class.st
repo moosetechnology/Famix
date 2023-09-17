@@ -8,7 +8,6 @@ Class {
 	#instVars : [
 		'name',
 		'color',
-		'backgroundColor',
 		'hide',
 		'properties',
 		'isTrait'
@@ -27,18 +26,6 @@ FamixUMLClass class >> from: aFM3Class [
 FamixUMLClass >> addProperty: anObject [
 
 	properties add: anObject
-]
-
-{ #category : #accessing }
-FamixUMLClass >> backgroundColor [
-
-	^ backgroundColor
-]
-
-{ #category : #accessing }
-FamixUMLClass >> backgroundColor: anObject [
-
-	backgroundColor := anObject
 ]
 
 { #category : #accessing }
@@ -79,8 +66,7 @@ FamixUMLClass >> initialize [
 	name := 'An-Unknown-Class'.
 	hide := false.
 	isTrait := false.
-	color := #black.
-	backgroundColor := #lightYellow.
+	color := #white.
 	properties := OrderedCollection new
 ]
 
