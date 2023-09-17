@@ -12,12 +12,14 @@ Class {
 
 { #category : #api }
 FamixUMLDocumentor >> beWithStub [
-	self withStub: true
+
+	withStub := OrderedCollection new
 ]
 
 { #category : #api }
 FamixUMLDocumentor >> beWithoutStub [
-	self withStub: false
+
+	withStub := nil
 ]
 
 { #category : #private }
@@ -79,8 +81,62 @@ FamixUMLDocumentor >> generate [
 ]
 
 { #category : #generating }
+FamixUMLDocumentor >> generateClass: aFM3Class [
+
+	| entity |
+	(self isInUMLModel: aFM3Class) ifTrue: [ ^self ].
+
+	entity := (FamixUMLClass from: aFM3Class).
+	entity color: (self colorForEntity: aFM3Class).
+		"color: (self plantUMLColorFor: aFM3Class);
+		 backgroundColor: (self plantUMLBackgroundColorFor: aFM3Class)"
+		umlModel at: aFM3Class put: entity.
+
+"	self checkExternalClass: aFM3Class."
+
+	(self isOfInterest: aFM3Class) ifFalse: [ ^ self ].
+	
+	aFM3Class primitiveProperties do: [ :prop | self generateProperty: prop of: entity ].
+	aFM3Class complexProperties do: [ :rel | self generateRelation: rel of: entity ].
+	
+	aFM3Class isFM3Trait
+		ifFalse: [ self generateInheritance: aFM3Class superclass sub: aFM3Class ].
+	aFM3Class implementingClass traits do: [ :trait |
+		self generateUsedTrait: trait byClass: aFM3Class ].
+
+]
+
+{ #category : #generating }
+FamixUMLDocumentor >> generateInheritance: aFMSuperClass sub: aFMSubClass [
+	(self isOfInterest: aFMSuperClass) ifFalse: [ ^ self ].
+
+	umlModel
+		at: (aFMSubClass -> aFMSuperClass)
+		put: (FamixUMLInheritance from: aFMSubClass to: aFMSuperClass)
+]
+
+{ #category : #generating }
+FamixUMLDocumentor >> generateProperty: aFMProperty of: aUMLClass [
+	aUMLClass addProperty: (FamixUMLProperty from: aFMProperty)
+]
+
+{ #category : #generating }
+FamixUMLDocumentor >> generateRelation: aFMProperty of: aUMLClass [
+
+	| relatedClass |
+	relatedClass := aFMProperty type.
+	
+	(self isOfInterest: relatedClass) ifFalse: [ ^ self ].
+	(self isRedundantRelation: aFMProperty) ifTrue: [ ^ self ].
+
+	umlModel at: aFMProperty put: (FamixUMLAssociation from: aFMProperty).
+
+	self generateClass: relatedClass.
+]
+
+{ #category : #generating }
 FamixUMLDocumentor >> generateUMLClasses [
-	modelClasses do: [ :class | self visitClass: class ].
+	modelClasses do: [ :class | self generateClass: class ].
 	
 ]
 
@@ -92,6 +148,15 @@ FamixUMLDocumentor >> generateUMLInheritance [
 { #category : #generating }
 FamixUMLDocumentor >> generateUMLRelations [
 
+]
+
+{ #category : #generating }
+FamixUMLDocumentor >> generateUsedTrait: aTrait byClass: aFMSubClass [
+	(self isOfInterest: aTrait) ifFalse: [ ^ self ].
+
+	umlModel
+		at: (aFMSubClass -> aTrait)
+		put: (FamixUMLUse from: aFMSubClass to: (self fm3DescriptionOf: aTrait))
 ]
 
 { #category : #initialization }
@@ -131,7 +196,8 @@ FamixUMLDocumentor >> isRedundantRelation: aFM3Prop [
 
 { #category : #testing }
 FamixUMLDocumentor >> isWithStub [
-	^withStub
+
+	^withStub isCollection
 ]
 
 { #category : #accessing }
@@ -168,97 +234,4 @@ FamixUMLDocumentor >> modelColors [
 FamixUMLDocumentor >> umlEntities [
 
 	^umlModel values
-]
-
-{ #category : #visiting }
-FamixUMLDocumentor >> visitClass: aFM3Class [
-
-	| entity |
-	(self isInUMLModel: aFM3Class) ifTrue: [ ^self ].
-
-	entity := (FamixUMLClass from: aFM3Class).
-	entity color: (self colorForEntity: aFM3Class).
-		"color: (self plantUMLColorFor: aFM3Class);
-		 backgroundColor: (self plantUMLBackgroundColorFor: aFM3Class)"
-		umlModel at: aFM3Class put: entity.
-
-"	self checkExternalClass: aFM3Class."
-
-	(self isOfInterest: aFM3Class) ifFalse: [ ^ self ].
-	
-	aFM3Class primitiveProperties do: [ :prop | self visitProperty: prop of: entity ].
-	aFM3Class complexProperties do: [ :rel | self visitRelation: rel of: entity ].
-	
-	aFM3Class isFM3Trait
-		ifFalse: [ self visitInheritance: aFM3Class superclass sub: aFM3Class ].
-	aFM3Class implementingClass traits do: [ :trait |
-		self visitUsedTrait: trait byClass: aFM3Class ].
-
-]
-
-{ #category : #visiting }
-FamixUMLDocumentor >> visitInheritance: aFMSuperClass sub: aFMSubClass [
-	(self isOfInterest: aFMSuperClass) ifFalse: [ ^ self ].
-
-	umlModel
-		at: (aFMSubClass -> aFMSuperClass)
-		put: (FamixUMLInheritance from: aFMSubClass to: aFMSuperClass)
-]
-
-{ #category : #visiting }
-FamixUMLDocumentor >> visitProperty: aFMProperty of: aUMLClass [
-	aUMLClass addProperty: (FamixUMLProperty from: aFMProperty)
-]
-
-{ #category : #visiting }
-FamixUMLDocumentor >> visitRelation: aFMProperty of: aUMLClass [
-
-	| relatedClass |
-	relatedClass := aFMProperty type.
-	
-	(self isOfInterest: relatedClass) ifFalse: [ ^ self ].
-	(self isRedundantRelation: aFMProperty) ifTrue: [ ^ self ].
-
-	umlModel at: aFMProperty put: (FamixUMLAssociation from: aFMProperty).
-
-	self visitClass: relatedClass.
-]
-
-{ #category : #visiting }
-FamixUMLDocumentor >> visitTrait: aFM3Class [
-
-	| entity |
-	(self isInUMLModel: aFM3Class) ifTrue: [ ^self ].
-
-	entity := (FamixUMLClass from: aFM3Class).
-		"color: (self plantUMLColorFor: aFM3Class);
-		 backgroundColor: (self plantUMLBackgroundColorFor: aFM3Class)"
-		umlModel at: aFM3Class put: entity.
-
-"	self checkExternalClass: aFM3Class."
-
-	(self isOfInterest: aFM3Class) ifFalse: [ ^ self ].
-	
-	aFM3Class primitiveProperties do: [ :prop | self visitProperty: prop of: entity ].
-	aFM3Class complexProperties do: [ :rel | self visitRelation: rel of: entity ].
-	
-	aFM3Class isTrait
-		ifFalse: [ self visitInheritance: aFM3Class superclass sub: aFM3Class ].
-	aFM3Class implementingClass traits do: [ :trait |
-		self visitUsedTrait: trait byClass: aFM3Class ].
-
-]
-
-{ #category : #visiting }
-FamixUMLDocumentor >> visitUsedTrait: aTrait byClass: aFMSubClass [
-	(self isOfInterest: aTrait) ifFalse: [ ^ self ].
-
-	umlModel
-		at: (aFMSubClass -> aTrait)
-		put: (FamixUMLUse from: aFMSubClass to: (self fm3DescriptionOf: aTrait))
-]
-
-{ #category : #accessing }
-FamixUMLDocumentor >> withStub: aBoolean [
-	withStub := aBoolean
 ]

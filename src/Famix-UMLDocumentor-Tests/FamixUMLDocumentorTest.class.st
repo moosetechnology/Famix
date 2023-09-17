@@ -42,6 +42,20 @@ FamixUMLDocumentorTest >> testColorForEntity [
 ]
 
 { #category : #tests }
+FamixUMLDocumentorTest >> testGenerateClassColor [
+
+	| umlClass |
+	documentor model: FDModel color: Color red.
+	documentor generate.
+
+	self assert: documentor umlEntities isNotEmpty.
+
+	umlClass := documentor umlEntities detect: [ :e | e class = FamixUMLClass ] ifNone: [nil].
+	self assert: umlClass isNotNil.
+	self assert: umlClass color equals: Color red.
+]
+
+{ #category : #tests }
 FamixUMLDocumentorTest >> testModel [
 
 	self assert: documentor modelColors size equals: 0.
@@ -78,18 +92,4 @@ FamixUMLDocumentorTest >> testSeveralModels [
 	self deny: documentor modelColors first value equals: documentor modelColors third value.
 	self deny: documentor modelColors second value equals: documentor modelColors third value.
 
-]
-
-{ #category : #tests }
-FamixUMLDocumentorTest >> testVisitClassColor [
-
-	| umlClass |
-	documentor model: FDModel color: Color red.
-	documentor generate.
-
-	self assert: documentor umlEntities isNotEmpty.
-
-	umlClass := documentor umlEntities detect: [ :e | e class = FamixUMLClass ] ifNone: [nil].
-	self assert: umlClass isNotNil.
-	self assert: umlClass color equals: Color red.
 ]

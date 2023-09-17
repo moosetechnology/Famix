@@ -26,7 +26,6 @@ FamixUMLAbstractBackend >> export: entities [
 	self generateFooter.
 	
 	^outputStream contents
-
 ]
 
 { #category : #generating }
