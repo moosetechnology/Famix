@@ -14,13 +14,13 @@ Class {
 { #category : #api }
 FamixUMLDocumentor >> beWithStub [
 
-	withStub := OrderedCollection new
+	withStub := true
 ]
 
 { #category : #api }
 FamixUMLDocumentor >> beWithoutStub [
 
-	withStub := nil
+	withStub := false
 ]
 
 { #category : #private }
@@ -39,6 +39,12 @@ FamixUMLDocumentor >> colorForEntity: aFMEntity [
 FamixUMLDocumentor >> defaultColor: i [
 
 	^Color perform: ( #(white lightYellow lightBlue lightGreen pink) at: i )
+]
+
+{ #category : #testing }
+FamixUMLDocumentor >> entityAlreadyInUMLModel: aFM3Entity [
+
+	^umlModel at: aFM3Entity ifPresent: [true] ifAbsent: [false]
 ]
 
 { #category : #api }
@@ -97,17 +103,15 @@ FamixUMLDocumentor >> generate [
 FamixUMLDocumentor >> generateClass: aFM3Class [
 
 	| entity |
-	(self isInUMLModel: aFM3Class) ifTrue: [ ^self ].
+	(self entityAlreadyInUMLModel: aFM3Class) ifTrue: [ ^self ].
 
 	entity := (FamixUMLClass from: aFM3Class).
 	entity color: (self colorForEntity: aFM3Class).
-		"color: (self plantUMLColorFor: aFM3Class);
-		 backgroundColor: (self plantUMLBackgroundColorFor: aFM3Class)"
-		umlModel at: aFM3Class put: entity.
+	umlModel at: aFM3Class put: entity.
 
 "	self checkExternalClass: aFM3Class."
 
-	(self isOfInterest: aFM3Class) ifFalse: [ ^ self ].
+	(self isStubClass: aFM3Class) ifTrue: [ ^ self ].
 	
 	aFM3Class primitiveProperties do: [ :prop | self generateProperty: prop of: entity ].
 	aFM3Class complexProperties do: [ :rel | self generateRelation: rel of: entity ].
@@ -121,7 +125,7 @@ FamixUMLDocumentor >> generateClass: aFM3Class [
 
 { #category : #generating }
 FamixUMLDocumentor >> generateInheritance: aFMSuperClass sub: aFMSubClass [
-	(self isOfInterest: aFMSuperClass) ifFalse: [ ^ self ].
+	(self shouldBeInUMLModel: aFMSuperClass) ifFalse: [ ^ self ].
 
 	self generateClass: aFMSuperClass.
 
@@ -141,8 +145,8 @@ FamixUMLDocumentor >> generateRelation: aFMProperty of: aUMLClass [
 	| relatedClass |
 	relatedClass := aFMProperty type.
 	
-	(self isOfInterest: relatedClass) ifFalse: [ ^ self ].
-	(self isRedundantRelation: aFMProperty) ifTrue: [ ^ self ].
+	(self shouldBeInUMLModel: relatedClass) ifFalse: [ ^ self ].
+	(self relationAlreadyInUMLModel: aFMProperty) ifTrue: [ ^ self ].
 
 	umlModel at: aFMProperty put: (FamixUMLAssociation from: aFMProperty).
 
@@ -167,7 +171,7 @@ FamixUMLDocumentor >> generateUMLRelations [
 
 { #category : #generating }
 FamixUMLDocumentor >> generateUsedTrait: aTrait byClass: aFMSubClass [
-	(self isOfInterest: aTrait) ifFalse: [ ^ self ].
+	(self shouldBeInUMLModel: aTrait) ifFalse: [ ^ self ].
 
 	self generateClass: (self fm3DescriptionOf: aTrait).
 
@@ -195,33 +199,16 @@ FamixUMLDocumentor >> initialize [
 ]
 
 { #category : #testing }
-FamixUMLDocumentor >> isInUMLModel: aFM3Entity [
+FamixUMLDocumentor >> isStubClass: aFMClass [
+	"aFMClass is a model class to export"
 
-	^umlModel at: aFM3Entity ifPresent: [true] ifAbsent: [false]
-]
-
-{ #category : #testing }
-FamixUMLDocumentor >> isOfInterest: aFMClass [
-
-	^self isWithStub
-		ifTrue: [ aFMClass class ~= FM3Object ]
-		ifFalse: [ fmClasses includes: aFMClass ]
-]
-
-{ #category : #testing }
-FamixUMLDocumentor >> isRedundantRelation: aFM3Prop [
-
-	(self isInUMLModel: aFM3Prop) ifTrue: [ true ].
-	
-	aFM3Prop hasOpposite ifFalse: [ false ].
-	
-	^(self isInUMLModel: aFM3Prop opposite)
+	^(fmClasses includes: aFMClass) not
 ]
 
 { #category : #testing }
 FamixUMLDocumentor >> isWithStub [
 
-	^withStub isCollection
+	^withStub
 ]
 
 { #category : #accessing }
@@ -253,6 +240,24 @@ FamixUMLDocumentor >> modelColors [
 FamixUMLDocumentor >> onlyClasses: aCollection [
 
 	onlyModelClasses := aCollection
+]
+
+{ #category : #testing }
+FamixUMLDocumentor >> relationAlreadyInUMLModel: aFMRelation [
+
+	(self entityAlreadyInUMLModel: aFMRelation) ifTrue: [ ^true ].
+	
+	aFMRelation hasOpposite ifFalse: [ ^false ].
+	
+	^(self entityAlreadyInUMLModel: aFMRelation opposite)
+]
+
+{ #category : #testing }
+FamixUMLDocumentor >> shouldBeInUMLModel: aFMClass [
+
+	^ self isWithStub
+		  ifTrue: [ aFMClass class ~= FM3Object ]
+		  ifFalse: [ (self isStubClass: aFMClass) not ]
 ]
 
 { #category : #accessing }

@@ -34,7 +34,7 @@ FamixUMLDocumentorTest >> setUp [
 FamixUMLDocumentorTest >> testBeWithStub [
 
 	| fmClass |
-	fmClass := FDModel metamodel fmTypeOf: FDTrait2.
+	fmClass := FDModel metamodel fmTypeOf: FDTrait3.
 
 	documentor model: FDModel.
 	documentor fmClasses: { fmClass }.
