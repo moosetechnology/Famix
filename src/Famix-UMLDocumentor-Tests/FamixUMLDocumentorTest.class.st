@@ -30,7 +30,7 @@ FamixUMLDocumentorTest >> setUp [
 	documentor := FamixUMLDocumentor new
 ]
 
-{ #category : #tests }
+{ #category : #'tests - generation' }
 FamixUMLDocumentorTest >> testBeWithStub [
 
 	| fmClass |
@@ -49,7 +49,7 @@ FamixUMLDocumentorTest >> testBeWithStub [
 	self assert: (documentor umlEntities count: [ :e | e class = FamixUMLUse]) equals: 1.
 ]
 
-{ #category : #tests }
+{ #category : #'tests - generation' }
 FamixUMLDocumentorTest >> testBeWithoutStub [
 
 	| fmClass umlClass |
@@ -68,7 +68,7 @@ FamixUMLDocumentorTest >> testBeWithoutStub [
 	self assert: umlClass name equals: 'Trait2'
 ]
 
-{ #category : #tests }
+{ #category : #'tests - model' }
 FamixUMLDocumentorTest >> testColorForEntity [
 
 	documentor model: FDModel.
@@ -84,7 +84,7 @@ FamixUMLDocumentorTest >> testColorForEntity [
 		equals: (documentor modelColors second value).
 ]
 
-{ #category : #tests }
+{ #category : #'tests - generation' }
 FamixUMLDocumentorTest >> testGenerateClass [
 
 	| fmClass umlClass |
@@ -102,7 +102,29 @@ FamixUMLDocumentorTest >> testGenerateClass [
 	self deny: umlClass isTrait
 ]
 
-{ #category : #tests }
+{ #category : #'tests - generation' }
+FamixUMLDocumentorTest >> testGeneratePropertyOf [
+
+	| fmClass umlEntity |
+	fmClass := FDModel metamodel fmTypeOf: FDTrait4.
+
+	documentor model: FDModel.
+	documentor fmClasses: { fmClass }.
+	documentor generateClass: fmClass.
+
+	self assert: documentor umlEntities size equals: 1.
+
+	umlEntity := documentor umlEntities anyOne.
+	self assert: umlEntity name equals: 'Trait4'.
+	self assert: umlEntity properties size equals: 1.
+
+	umlEntity := umlEntity properties anyOne.
+	self assert: umlEntity name equals: 'someProp'.
+	self assert: umlEntity type equals: 'String'.
+
+]
+
+{ #category : #'tests - generation' }
 FamixUMLDocumentorTest >> testGenerateTrait [
 
 	| fmClass umlClass |
@@ -120,7 +142,7 @@ FamixUMLDocumentorTest >> testGenerateTrait [
 	self assert: umlClass isTrait
 ]
 
-{ #category : #tests }
+{ #category : #'tests - model' }
 FamixUMLDocumentorTest >> testModel [
 
 	self assert: documentor modelColors size equals: 0.
@@ -132,7 +154,7 @@ FamixUMLDocumentorTest >> testModel [
 	self assert: documentor modelColors anyOne value equals: Color white.
 ]
 
-{ #category : #tests }
+{ #category : #'tests - model' }
 FamixUMLDocumentorTest >> testModelColor [
 
 	documentor model: #aModel color: Color red.
@@ -140,7 +162,7 @@ FamixUMLDocumentorTest >> testModelColor [
 	self assert: documentor modelColors anyOne value equals: Color red.
 ]
 
-{ #category : #tests }
+{ #category : #'tests - model' }
 FamixUMLDocumentorTest >> testSeveralModels [
 
 	self assert: documentor modelColors size equals: 0.

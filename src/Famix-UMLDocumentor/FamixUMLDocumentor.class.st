@@ -8,7 +8,7 @@ Class {
 		'onlyModelClasses',
 		'fmClasses'
 	],
-	#category : #'Famix-UMLDocumentor-Generator'
+	#category : #'Famix-UMLDocumentor-Generation'
 }
 
 { #category : #api }
