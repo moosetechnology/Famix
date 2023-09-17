@@ -22,9 +22,12 @@ FamixMMUMLDocumentorAbstractTest >> famixProperty: aName in: stClass [
 
 { #category : #running }
 FamixMMUMLDocumentorAbstractTest >> setUp [
+	super setUp.
+
 	String streamContents: [ :st | stream := st ] .
 	documentor := FamixMMUMLDocumentor new
 		model: FamixTest4Model ;
+		outputStream: stream ;
 		yourself.
 	
 ]
