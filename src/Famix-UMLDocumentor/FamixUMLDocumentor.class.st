@@ -5,24 +5,10 @@ Class {
 		'withStub',
 		'modelClasses',
 		'umlModel',
-		'backend',
-		'outputStream',
 		'modelColors'
 	],
 	#category : #'Famix-UMLDocumentor-Generator'
 }
-
-{ #category : #accessing }
-FamixUMLDocumentor >> backend [
-
-	^ backend
-]
-
-{ #category : #accessing }
-FamixUMLDocumentor >> backend: anObject [
-
-	backend := anObject
-]
 
 { #category : #api }
 FamixUMLDocumentor >> beWithStub [
@@ -50,6 +36,12 @@ FamixUMLDocumentor >> defaultColor: i [
 	^Color perform: ( #(white lightYellow lightBlue lightGreen pink) at: i )
 ]
 
+{ #category : #api }
+FamixUMLDocumentor >> exportWith: aBackend [
+
+	^aBackend export: self umlEntities
+]
+
 { #category : #private }
 FamixUMLDocumentor >> fm3: metamodel descriptionOf: anFM3Element [
 
@@ -74,19 +66,15 @@ FamixUMLDocumentor >> generate [
 
 	modelColors ifEmpty: [ Error signal: 'no meta-model(s) to work on' ].
 
-	modelClasses addAll: (modelColors flatCollect: [ :modelColor |
-		(self fm3DescriptionOf: modelColor key) package classes ]).
+	"if no classes specified, generate the entire meta-model"
+	modelClasses ifEmpty: [
+		modelClasses := (modelColors flatCollect: [ :modelColor |
+			(self fm3DescriptionOf: modelColor key) package classes ])].
 
 	self generateUMLClasses.
 	self generateUMLInheritance.
 	self generateUMLRelations.
 	"self generateUMLExternalClasses."
-
-	self backend export: self umlEntities on: outputStream.
-
-	^outputStream
-		close ;
-		contents
 
 ]
 
@@ -113,9 +101,7 @@ FamixUMLDocumentor >> initialize [
 	modelClasses := Set new.
 	"3 seems like a good default maximum value for the model we want to document"
 	modelColors := OrderedCollection new: 3.
-	self onStream: (WriteStream with: String new).
 	umlModel := Dictionary new.
-	self plantUMLBackend.
 	self beWithoutStub.
 ]
 
@@ -148,12 +134,6 @@ FamixUMLDocumentor >> isWithStub [
 	^withStub
 ]
 
-{ #category : #api }
-FamixUMLDocumentor >> mermaidBackend [
-
-	backend := FamixUMLMermaidBackend new
-]
-
 { #category : #accessing }
 FamixUMLDocumentor >> model [
 	^ modelColors anyOne key
@@ -182,23 +162,6 @@ FamixUMLDocumentor >> modelClasses: aCollection [
 FamixUMLDocumentor >> modelColors [
 
 	^ modelColors
-]
-
-{ #category : #api }
-FamixUMLDocumentor >> onFile: filename [
-
-	self onStream: filename asFileReference writeStream
-]
-
-{ #category : #api }
-FamixUMLDocumentor >> onStream: aStream [
-	outputStream := aStream
-]
-
-{ #category : #api }
-FamixUMLDocumentor >> plantUMLBackend [
-
-	backend := FamixUMLPlantUMLBackend new
 ]
 
 { #category : #accessing }

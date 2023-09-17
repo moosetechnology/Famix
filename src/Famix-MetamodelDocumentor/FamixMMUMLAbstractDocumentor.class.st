@@ -9,13 +9,14 @@ Class {
 	#name : #FamixMMUMLAbstractDocumentor,
 	#superclass : #Object,
 	#instVars : [
+		'outputStream',
 		'classesOfInterest',
 		'externalClasses',
 		'withStub',
 		'models',
 		'prefs'
 	],
-	#category : #'Famix-MetamodelDocumentor-Generate'
+	#category : #'Famix-MetamodelDocumentor'
 }
 
 { #category : #'api - generation' }
@@ -46,19 +47,19 @@ FamixMMUMLAbstractDocumentor >> externalClasses: aCollection [
 { #category : #'api - generation' }
 FamixMMUMLAbstractDocumentor >> findDescriptionOf: anElement [
 
-	models do: [ :modelColorTuple |
-		^[ modelColorTuple model metamodel fmTypeOf: anElement ]
-			on: NotFound
-			do: [ nil ]
-	]
-
+	models
+		detect: [ :model | 
+			([ model model metamodel fmTypeOf: anElement ]
+				 on: NotFound
+				 do: [ nil ]) isNotNil ]
+		ifFound: [ :model | ^ model model metamodel fmTypeOf: anElement ]
 ]
 
 { #category : #generating }
 FamixMMUMLAbstractDocumentor >> generateClassName: aFM3Class [
 	outputStream
 		nextPutAll: aFM3Class name.
-	(self isOfInterest: aFM3Class)
+	(self ofInterest: aFM3Class)
 	ifFalse: [
 		externalClasses add: aFM3Class 
 	]
@@ -66,20 +67,10 @@ FamixMMUMLAbstractDocumentor >> generateClassName: aFM3Class [
 
 { #category : #initialization }
 FamixMMUMLAbstractDocumentor >> initialize [
-	super initialize.
-
 	self beWithoutStub.
-	classesOfInterest := Set new.
 	externalClasses := Set new.
 	models := Set new.
 	prefs := Set new.
-]
-
-{ #category : #testing }
-FamixMMUMLAbstractDocumentor >> isOfInterest: aFMClass [
-
-	^classesOfInterest anySatisfy: [ :fmClassOfInterest |
-		fmClassOfInterest fullName = aFMClass fullName ]
 ]
 
 { #category : #testing }
@@ -110,11 +101,27 @@ FamixMMUMLAbstractDocumentor >> models: anObject [
 	models := anObject
 ]
 
-{ #category : #testing }
+{ #category : #private }
+FamixMMUMLAbstractDocumentor >> ofInterest: aFMClass [
+
+	^ classesOfInterest anySatisfy: [ :fmClassOfInterest | fmClassOfInterest fullName = aFMClass fullName ]
+]
+
+{ #category : #accessing }
+FamixMMUMLAbstractDocumentor >> outputStream [
+	^ outputStream
+]
+
+{ #category : #accessing }
+FamixMMUMLAbstractDocumentor >> outputStream: anObject [
+	outputStream := anObject
+]
+
+{ #category : #private }
 FamixMMUMLAbstractDocumentor >> relationEndOfInterest: aFMClass [
 	^self isWithStub
 		ifTrue: [ aFMClass class ~= FM3Object ]
-		ifFalse: [ self isOfInterest: aFMClass ]
+		ifFalse: [ self ofInterest: aFMClass ]
 ]
 
 { #category : #accessing }

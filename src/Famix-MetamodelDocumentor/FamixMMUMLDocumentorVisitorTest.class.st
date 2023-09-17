@@ -4,57 +4,47 @@ Class {
 	#category : #'Famix-MetamodelDocumentor-tests'
 }
 
-{ #category : #'tests-generating' }
+{ #category : #tests }
 FamixMMUMLDocumentorVisitorTest >> testTypeOfExternal [
 	| contents |
 	contents := FamixMMUMLDocumentor new
 		beWithStub;
  		model: FDModel ;
- 		generate.
-
-	self assert: documentor umlModel size equals: 1.
-
+ 		generatePlantUMLModel. 
+		
 	self assert: [ contents includesSubstring: 'class Model <<(C,LightYellow)External>>' ].
 ]
 
-{ #category : #'tests-visiting' }
+{ #category : #tests }
 FamixMMUMLDocumentorVisitorTest >> testVisitClassNoAttributes [
-	| entity |
 
 	documentor visitClass: (self famixClassFor: FamixTest4Book).
 	
-	self assert: documentor umlModel size equals: 1.
-
-	entity := documentor umlModel anyOne.
-	self assert: entity class equals: FamixMMUMLClass.
-	self assert: entity name equals: 'Book'.
-	self assert: entity marker equals: $C.
-	self assert: entity color equals: 'white'.
-
-	"class Book << (C,white) >> #FFFFFF"
+	self
+		assert: stream contents
+		equals:
+'class Book << (C,white) >> #FFFFFF {
+}
+'
 ]
 
-{ #category : #'tests-visiting' }
+{ #category : #tests }
 FamixMMUMLDocumentorVisitorTest >> testVisitClassWithAttributes [
 
-	| entity |
 	documentor visitClass: (self famixClassFor: FamixTest4Entity).
 	
-	self assert: documentor umlModel size equals: 1.
-
-	entity := documentor umlModel anyOne.
-	self assert: entity class equals: FamixMMUMLClass.
-	self assert: entity name equals: 'Entity'.
-	self assert: entity properties size equals: 1.
-
-	entity := entity properties anyOne.
-	self assert: entity name equals: 'name'.
-	self assert: entity type equals: 'String'
+	self
+		assert: stream contents
+		equals:
+'class Entity << (C,white) >> #FFFFFF {
+  String name
+}
+'
 ]
 
-{ #category : #'tests-visiting' }
+{ #category : #tests }
 FamixMMUMLDocumentorVisitorTest >> testVisitInheritance [
-	| person student entity |
+	| person student |
 	person := self famixClassFor: FamixTest4Person.
 	student := self famixClassFor: FamixTest4Student. 
 	documentor
@@ -62,19 +52,16 @@ FamixMMUMLDocumentorVisitorTest >> testVisitInheritance [
 		visitInheritance: person sub: student.
 		
 	self assert: documentor externalClasses isEmpty.
-
-	self assert: documentor umlModel size equals: 1.
-
-	entity := documentor umlModel anyOne.
-	self assert: entity class equals: FamixMMUMLInheritance.
-	self assert: entity source equals: 'Student'.
-	self assert: entity target equals: 'Person'.
-
+	self
+		assert: stream contents
+		equals:
+'Person <|-- Student
+'
 ]
 
-{ #category : #'tests-visiting' }
+{ #category : #tests }
 FamixMMUMLDocumentorVisitorTest >> testVisitInheritanceFromExternal [
-	| person student entity |
+	| person student |
 	person := self famixClassFor: FamixTest4Person.
 	student := self famixClassFor: FamixTest4Student. 
 	documentor
@@ -82,20 +69,17 @@ FamixMMUMLDocumentorVisitorTest >> testVisitInheritanceFromExternal [
 		classesOfInterest: {  person } ;
 		visitInheritance: person sub: student.
 		
-	"self assert: documentor externalClasses notEmpty."
-
-	self assert: documentor umlModel size equals: 1.
-
-	entity := documentor umlModel anyOne.
-	self assert: entity class equals: FamixMMUMLInheritance.
-	self assert: entity source equals: 'Student'.
-	self assert: entity target equals: 'Person'.
-
+	self assert: documentor externalClasses notEmpty.
+	self
+		assert: stream contents
+		equals:
+'Person <|-- Student
+'
 ]
 
-{ #category : #'tests-visiting' }
+{ #category : #tests }
 FamixMMUMLDocumentorVisitorTest >> testVisitInheritanceToExternal [
-	| person student entity |
+	| person student |
 	person := self famixClassFor: FamixTest4Person.
 	student := self famixClassFor: FamixTest4Student. 
 	documentor
@@ -103,45 +87,34 @@ FamixMMUMLDocumentorVisitorTest >> testVisitInheritanceToExternal [
 		classesOfInterest: {  student } ;
 		visitInheritance: person sub: student.
 		
-	"self assert: documentor externalClasses notEmpty."
-
-	self assert: documentor umlModel size equals: 1.
-
-	entity := documentor umlModel anyOne.
-	self assert: entity class equals: FamixMMUMLInheritance.
-	self assert: entity source equals: 'Student'.
-	self assert: entity target equals: 'Person'.
-
+	self assert: documentor externalClasses notEmpty.
+	self
+		assert: stream contents
+		equals:
+'Person <|-- Student
+'
 ]
 
-{ #category : #'tests-visiting' }
+{ #category : #tests }
 FamixMMUMLDocumentorVisitorTest >> testVisitRelationContainer [
-	| principal school entity | 
+	| principal school | 
 	principal := self famixClassFor: FamixTest4Principal.
 	school := self famixClassFor: FamixTest4School.
 	documentor
 		classesOfInterest: { principal . school } ;
 		visitRelation: (self famixProperty: 'school' in: FamixTest4Principal).
-
+		
 	self assert: documentor externalClasses isEmpty.
-
-	"stream contents equals: 'Principal ""principal"" --o ""school"" School' ".
-
-	self assert: documentor umlModel size equals: 3.
-
-	entity := documentor umlModel detect: [:each | each class = FamixMMUMLAssociation ].
-	self assert: entity source equals: 'Principal'.
-	self assert: entity target equals: 'School'.
-	self assert: entity sourceRole equals: 'school'.
-	self assert: entity targetRole equals: 'principal'.
-	self assert: entity sourceCardinality equals: ''.
-	self assert: entity targetCardinality equals: ''.
-	self assert: entity aggregation equals: #source.
+	self
+		assert: stream contents
+		equals:
+'Principal "principal" --o "school" School
+'
 ]
 
-{ #category : #'tests-visiting' }
+{ #category : #tests }
 FamixMMUMLDocumentorVisitorTest >> testVisitRelationContainerSourceMany [
-	| book person entity | 
+	| book person | 
 	book := self famixClassFor: FamixTest4Book.
 	person := self famixClassFor: FamixTest4Person.
 	documentor
@@ -149,24 +122,16 @@ FamixMMUMLDocumentorVisitorTest >> testVisitRelationContainerSourceMany [
 		visitRelation: (self famixProperty: 'person' in: FamixTest4Book).
 		
 	self assert: documentor externalClasses isEmpty.
-
-	"stream contents equals: 'Book "" *books"" --o ""person"" Person'."
-
-	self assert: documentor umlModel size equals: 3.
-
-	entity := documentor umlModel detect: [:each | each class = FamixMMUMLAssociation ].
-	self assert: entity source equals: 'Book'.
-	self assert: entity target equals: 'Person'.
-	self assert: entity sourceRole equals: 'person'.
-	self assert: entity targetRole equals: 'books'.
-	self assert: entity sourceCardinality equals: ''.
-	self assert: entity targetCardinality equals: '*'.
-	self assert: entity aggregation equals: #source.
+	self
+		assert: stream contents
+		equals:
+'Book " *books" --o "person" Person
+'
 ]
 
-{ #category : #'tests-visiting' }
+{ #category : #tests }
 FamixMMUMLDocumentorVisitorTest >> testVisitRelationNoContainer [
-	| student teacher entity | 
+	| student teacher | 
 	student := self famixClassFor: FamixTest4Student.
 	teacher := self famixClassFor: FamixTest4Teacher.
 	documentor
@@ -174,24 +139,16 @@ FamixMMUMLDocumentorVisitorTest >> testVisitRelationNoContainer [
 		visitRelation: (self famixProperty: 'students' in: FamixTest4Teacher).
 		
 	self assert: documentor externalClasses isEmpty.
-	
-	"stream contents equals: 'Teacher "" *teachers"" -- "" *students"" Student'."
-
-	self assert: documentor umlModel size equals: 3.
-
-	entity := documentor umlModel detect: [:each | each class = FamixMMUMLAssociation ].
-	self assert: entity source equals: 'Teacher'.
-	self assert: entity target equals: 'Student'.
-	self assert: entity sourceRole equals: 'students'.
-	self assert: entity targetRole equals: 'teachers'.
-	self assert: entity sourceCardinality equals: '*'.
-	self assert: entity targetCardinality equals: '*'.
-	self assert: entity aggregation isNil.
+	self
+		assert: stream contents
+		equals:
+'Teacher " *teachers" -- " *students" Student
+'
 ]
 
-{ #category : #'tests-visiting' }
+{ #category : #tests }
 FamixMMUMLDocumentorVisitorTest >> testVisitRelationToExternalClass [
-	| student teacher entity | 
+	| student teacher | 
 	student := self famixClassFor: FamixTest4Student.
 	teacher := self famixClassFor: FamixTest4Teacher.
 	documentor
@@ -200,22 +157,14 @@ FamixMMUMLDocumentorVisitorTest >> testVisitRelationToExternalClass [
 		visitRelation: (self famixProperty: 'students' in: FamixTest4Teacher).
 		
 	self assert: documentor externalClasses notEmpty.
-	
-	"stream contents equals: 'Teacher "" *teachers"" -- "" *students"" Student'."
-
-	self assert: documentor umlModel size equals: 3.
-
-	entity := documentor umlModel detect: [:each | each class = FamixMMUMLAssociation ].
-	self assert: entity source equals: 'Teacher'.
-	self assert: entity target equals: 'Student'.
-	self assert: entity sourceRole equals: 'students'.
-	self assert: entity targetRole equals: 'teachers'.
-	self assert: entity sourceCardinality equals: '*'.
-	self assert: entity targetCardinality equals: '*'.
-	self assert: entity aggregation isNil.
+	self
+		assert: stream contents
+		equals:
+'Teacher " *teachers" -- " *students" Student
+'
 ]
 
-{ #category : #'tests-generating' }
+{ #category : #tests }
 FamixMMUMLDocumentorVisitorTest >> testVisitTraitUsed [
 	| contents |
 	contents := FamixMMUMLDocumentor new
@@ -229,7 +178,7 @@ FamixMMUMLDocumentorVisitorTest >> testVisitTraitUsed [
 	self assert: [ (contents includesSubstring: 'Trait1 <|.. Trait3')not ].
 ]
 
-{ #category : #'tests-generating' }
+{ #category : #tests }
 FamixMMUMLDocumentorVisitorTest >> testVisitWithoutClasses [
 	| contents |
 	contents := FamixMMUMLDocumentor new
@@ -244,7 +193,7 @@ FamixMMUMLDocumentorVisitorTest >> testVisitWithoutClasses [
 	self assert: [ (contents allButFirst: 450) includesSubstring: 'hide Trait2' ].
 ]
 
-{ #category : #'tests-generating' }
+{ #category : #tests }
 FamixMMUMLDocumentorVisitorTest >> testVisitWithoutClassesWithEmptyCollection [
 	| contents |
 	contents := FamixMMUMLDocumentor new

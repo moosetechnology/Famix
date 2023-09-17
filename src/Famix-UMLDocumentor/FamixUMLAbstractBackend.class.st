@@ -13,10 +13,8 @@ Class {
 }
 
 { #category : #api }
-FamixUMLAbstractBackend >> export: entities on: aStream [
+FamixUMLAbstractBackend >> export: entities [
 	"for readibility of results, entities are grouped according to their class"
-
-	outputStream := aStream.
 
 	self generateHeader.
 
@@ -26,6 +24,8 @@ FamixUMLAbstractBackend >> export: entities on: aStream [
 	self generateExternalClasses: entities.
 
 	self generateFooter.
+	
+	^outputStream contents
 
 ]
 
@@ -153,6 +153,14 @@ FamixUMLAbstractBackend >> generateUseTrait: aTrait class: aclass [
 		nextPutAll: ' <|.. ' ;
 		nextPutAll: aclass ;
 		cr
+]
+
+{ #category : #initialization }
+FamixUMLAbstractBackend >> initialize [
+
+	super initialize.
+
+	self outputStream: (WriteStream with: String new).
 ]
 
 { #category : #accessing }
