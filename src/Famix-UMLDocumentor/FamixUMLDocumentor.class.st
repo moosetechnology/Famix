@@ -123,6 +123,8 @@ FamixUMLDocumentor >> generateClass: aFM3Class [
 FamixUMLDocumentor >> generateInheritance: aFMSuperClass sub: aFMSubClass [
 	(self isOfInterest: aFMSuperClass) ifFalse: [ ^ self ].
 
+	self generateClass: aFMSuperClass.
+
 	umlModel
 		at: (aFMSubClass -> aFMSuperClass)
 		put: (FamixUMLInheritance from: aFMSubClass to: aFMSuperClass)
@@ -166,6 +168,8 @@ FamixUMLDocumentor >> generateUMLRelations [
 { #category : #generating }
 FamixUMLDocumentor >> generateUsedTrait: aTrait byClass: aFMSubClass [
 	(self isOfInterest: aTrait) ifFalse: [ ^ self ].
+
+	self generateClass: (self fm3DescriptionOf: aTrait).
 
 	umlModel
 		at: (aFMSubClass -> aTrait)

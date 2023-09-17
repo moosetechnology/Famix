@@ -31,6 +31,44 @@ FamixUMLDocumentorTest >> setUp [
 ]
 
 { #category : #tests }
+FamixUMLDocumentorTest >> testBeWithStub [
+
+	| fmClass |
+	fmClass := FDModel metamodel fmTypeOf: FDTrait2.
+
+	documentor model: FDModel.
+	documentor fmClasses: { fmClass }.
+	documentor beWithStub.
+
+	documentor generateClass: fmClass.
+
+	self assert: documentor isWithStub.
+	self assert: documentor umlEntities size equals: 3.
+
+	self assert: (documentor umlEntities count: [ :e | e class = FamixUMLClass]) equals: 2.
+	self assert: (documentor umlEntities count: [ :e | e class = FamixUMLUse]) equals: 1.
+]
+
+{ #category : #tests }
+FamixUMLDocumentorTest >> testBeWithoutStub [
+
+	| fmClass umlClass |
+	fmClass := FDModel metamodel fmTypeOf: FDTrait2.
+
+	documentor model: FDModel.
+	documentor fmClasses: { fmClass }.
+	documentor beWithoutStub.
+
+	documentor generateClass: fmClass.
+
+	self deny: documentor isWithStub.
+	self assert: documentor umlEntities size equals: 1.
+
+	umlClass := documentor umlEntities anyOne.
+	self assert: umlClass name equals: 'Trait2'
+]
+
+{ #category : #tests }
 FamixUMLDocumentorTest >> testColorForEntity [
 
 	documentor model: FDModel.
