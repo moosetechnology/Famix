@@ -37,7 +37,7 @@ FamixUMLDocumentor >> beWithoutStub [
 { #category : #private }
 FamixUMLDocumentor >> colorForEntity: aFMEntity [
 	^modelColors
-		detect: [ :modelColor | modelColor key metamodel classes includes: aFMEntity ]
+		detect: [ :modelColor | (self fm3DescriptionOf: modelColor key) package classes includes: aFMEntity ]
 		ifFound: [ :modelColor | modelColor value ]
 		ifNone:  [ Color white ]
 .
