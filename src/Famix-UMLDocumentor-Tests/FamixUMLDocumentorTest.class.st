@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'documentor'
 	],
-	#category : #'Famix-UMLDocumentor-Tests-Generator'
+	#category : #'Famix-UMLDocumentor-Tests-Generation'
 }
 
 { #category : #running }
