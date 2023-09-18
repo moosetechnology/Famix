@@ -8,7 +8,9 @@ Class {
 		't1',
 		't2',
 		't3',
-		't4'
+		't4',
+		'c1',
+		'c2'
 	],
 	#category : #'Famix-UMLDocumentor-Tests-FamixGenerator'
 }
@@ -26,12 +28,25 @@ FamixUMLTestGenerator class >> prefix [
 ]
 
 { #category : #definition }
+FamixUMLTestGenerator >> defineClasses [
+
+	super defineClasses.
+
+	c1 := builder newClassNamed: #Class1.
+	c2 := builder newClassNamed: #Class2.
+]
+
+{ #category : #definition }
 FamixUMLTestGenerator >> defineHierarchy [
 
 	super defineHierarchy.
+
+	c1 --|> t3.
+	c2 --|> c1.
+
 	t2 --|> t1.
 	t3 --|> t2.
-	t4 --|> t2
+	t4 --|> t2.
 ]
 
 { #category : #definition }

@@ -208,6 +208,40 @@ FamixUMLDocumentorTest >> testGenerateTrait [
 	self assert: umlClass isTrait
 ]
 
+{ #category : #'tests - generation' }
+FamixUMLDocumentorTest >> testGenerateUMLInheritance [
+
+	| inh |
+	documentor model: FDModel.
+	documentor onlyClasses: { FDClass1 . FDClass2 }.
+
+	documentor generate.
+
+	self assert: documentor umlEntities size equals: 3.
+
+	self assert: (documentor umlEntities count: [ :e | e class = FamixUMLClass]) equals: 2.
+	
+	self assert: (documentor umlEntities count: [ :e | e class = FamixUMLInheritance]) equals: 1.
+	
+	inh := documentor umlEntities detect: [ :e | e class = FamixUMLInheritance].
+	self assert: inh source equals: 'Class2'.
+	self assert: inh target equals: 'Class1'.
+]
+
+{ #category : #'tests - generation' }
+FamixUMLDocumentorTest >> testGenerateUMLUse [
+
+	documentor model: FDModel.
+	documentor onlyClasses: { FDClass1 . FDTrait3 }.
+
+	documentor generate.
+
+	self assert: documentor umlEntities size equals: 3.
+
+	self assert: (documentor umlEntities count: [ :e | e class = FamixUMLClass]) equals: 2.
+	self assert: (documentor umlEntities count: [ :e | e class = FamixUMLUse]) equals: 1.
+]
+
 { #category : #'tests - model' }
 FamixUMLDocumentorTest >> testModel [
 

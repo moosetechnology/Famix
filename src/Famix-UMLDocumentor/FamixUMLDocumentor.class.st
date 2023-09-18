@@ -119,7 +119,7 @@ FamixUMLDocumentor >> generateClass: aFM3Class [
 	aFM3Class isFM3Trait
 		ifFalse: [ self generateInheritance: aFM3Class superclass sub: aFM3Class ].
 	aFM3Class implementingClass traits do: [ :trait |
-		self generateUsedTrait: trait byClass: aFM3Class ].
+		self generateUsedTrait: (self fm3DescriptionOf: trait) byClass: aFM3Class ].
 
 ]
 
@@ -173,11 +173,11 @@ FamixUMLDocumentor >> generateUMLRelations [
 FamixUMLDocumentor >> generateUsedTrait: aTrait byClass: aFMSubClass [
 	(self shouldBeInUMLModel: aTrait) ifFalse: [ ^ self ].
 
-	self generateClass: (self fm3DescriptionOf: aTrait).
+	self generateClass: aTrait.
 
 	umlModel
 		at: (aFMSubClass -> aTrait)
-		put: (FamixUMLUse from: aFMSubClass to: (self fm3DescriptionOf: aTrait))
+		put: (FamixUMLUse from: aFMSubClass to: aTrait)
 ]
 
 { #category : #private }
@@ -196,6 +196,14 @@ FamixUMLDocumentor >> initialize [
 	modelColors := OrderedCollection new: 3.
 	umlModel := Dictionary new.
 	self beWithoutStub.
+]
+
+{ #category : #api }
+FamixUMLDocumentor >> initializeClassesToShow [
+
+	fmClasses := onlyModelClasses
+		             ifNil: [ self getClassesFromModels ]
+		             ifNotNil: [ self fm3DescriptionsOf: onlyModelClasses ]
 ]
 
 { #category : #testing }
