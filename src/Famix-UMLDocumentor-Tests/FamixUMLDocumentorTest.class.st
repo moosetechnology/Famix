@@ -150,6 +150,47 @@ FamixUMLDocumentorTest >> testGenerateRelationOf [
 ]
 
 { #category : #'tests - generation' }
+FamixUMLDocumentorTest >> testGenerateRelationOfWithStub [
+
+	| fmTrait4 umlEntity |
+	fmTrait4 := FDModel metamodel fmTypeOf: FDTrait4.
+
+	documentor model: FDModel.
+	documentor fmClasses: { fmTrait4 }.
+	documentor beWithStub.
+	documentor generateClass: fmTrait4.
+
+	self assert: documentor umlEntities size equals: 4. "Trait4, Trait2, FamixUMLAssociation, FamixUMLUse"
+
+	umlEntity := documentor umlEntities detect: [ :e | e class = FamixUMLAssociation ] ifNone: [nil].
+	self assert: umlEntity isNotNil.
+	self assert: umlEntity aggregation equals: #off.
+
+	self assert: umlEntity source equals: 'Trait4'. "because it comes from generating class 'Trait4'"
+	self assert: umlEntity target equals: 'Trait2'.
+
+	self assert: umlEntity sourceCardinality equals: #multi.
+	self assert: umlEntity targetCardinality equals: #one.
+
+]
+
+{ #category : #'tests - generation' }
+FamixUMLDocumentorTest >> testGenerateRelationOfWithoutStub [
+
+	| fmTrait4 |
+	fmTrait4 := FDModel metamodel fmTypeOf: FDTrait4.
+
+	documentor model: FDModel.
+	documentor fmClasses: { fmTrait4 }.
+	documentor generateClass: fmTrait4.
+
+	self assert: documentor umlEntities size equals: 1.
+
+	self assert: documentor umlEntities anyOne class equals: FamixUMLClass.
+	self assert: documentor umlEntities anyOne name equals: 'Trait4'
+]
+
+{ #category : #'tests - generation' }
 FamixUMLDocumentorTest >> testGenerateTrait [
 
 	| fmClass umlClass |
