@@ -10,7 +10,7 @@ Class {
 		't3',
 		't4'
 	],
-	#category : #'Famix-UMLDocumentor-FamixGenerator'
+	#category : #'Famix-UMLDocumentor-Tests-FamixGenerator'
 }
 
 { #category : #accessing }
