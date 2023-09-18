@@ -26,9 +26,17 @@ FamixUMLAssociation >> aggregation [
 ]
 
 { #category : #accessing }
-FamixUMLAssociation >> aggregation: anObject [
+FamixUMLAssociation >> aggregation: aSymbol [
+	"#off, #source, or #target"
 
-	aggregation := anObject
+	self assert: ( #(off source target) includes: aSymbol ).
+	aggregation := aSymbol
+]
+
+{ #category : #accessing }
+FamixUMLAssociation >> checkCardinalitySymbol: aSymbol [
+
+	self assert: ((aSymbol = #one) or: [ aSymbol = #multi ])
 ]
 
 { #category : #initialization }
@@ -41,13 +49,13 @@ FamixUMLAssociation >> initialize [
 	sourceRole := ''.
 	targetRole := ''.
 	
-	aggregation := nil
+	aggregation := #off
 ]
 
 { #category : #initialization }
 FamixUMLAssociation >> initializeFrom: aFM3Prop [
 	self source: aFM3Prop mmClass name.
-	aFM3Prop isMultivalued ifTrue: [ self sourceCardinality: '*' ].
+	aFM3Prop isMultivalued ifTrue: [ self sourceCardinality: #multi ].
 	self sourceRole: aFM3Prop name.
 	aFM3Prop isContainer ifTrue: [ self aggregation: #source ].
 	self target: aFM3Prop type name.
@@ -56,7 +64,7 @@ FamixUMLAssociation >> initializeFrom: aFM3Prop [
 
 	self targetRole: aFM3Prop opposite name.
 	aFM3Prop opposite isMultivalued
-		ifTrue: [ self targetCardinality: '*' ].
+		ifTrue: [ self targetCardinality: #multi ].
 	aFM3Prop opposite isContainer ifTrue: [ self aggregation: #target ].
 
 
@@ -71,8 +79,9 @@ FamixUMLAssociation >> sourceCardinality [
 
 { #category : #accessing }
 FamixUMLAssociation >> sourceCardinality: aSymbol [
-	"#one or #multiple"
+	"#one or #multi"
 
+	self checkCardinalitySymbol: aSymbol.
 	sourceCardinality := aSymbol
 ]
 
@@ -97,8 +106,9 @@ FamixUMLAssociation >> targetCardinality [
 
 { #category : #accessing }
 FamixUMLAssociation >> targetCardinality: aSymbol [
-	"#one or #multiple"
+	"#one or #multi"
 
+	self checkCardinalitySymbol: aSymbol.
 	targetCardinality := aSymbol
 ]
 

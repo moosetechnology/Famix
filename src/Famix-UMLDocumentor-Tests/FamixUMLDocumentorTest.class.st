@@ -125,6 +125,31 @@ FamixUMLDocumentorTest >> testGeneratePropertyOf [
 ]
 
 { #category : #'tests - generation' }
+FamixUMLDocumentorTest >> testGenerateRelationOf [
+
+	| fmTrait2 fmTrait4 umlEntity |
+	fmTrait2 := FDModel metamodel fmTypeOf: FDTrait2.
+	fmTrait4 := FDModel metamodel fmTypeOf: FDTrait4.
+
+	documentor model: FDModel.
+	documentor fmClasses: { fmTrait2 . fmTrait4 }.
+	documentor generateClass: fmTrait4.
+
+	self assert: documentor umlEntities size equals: 3.
+
+	umlEntity := documentor umlEntities detect: [ :e | e class = FamixUMLAssociation ] ifNone: [nil].
+	self assert: umlEntity isNotNil.
+	self assert: umlEntity aggregation equals: #off.
+
+	self assert: umlEntity source equals: 'Trait4'.
+	self assert: umlEntity target equals: 'Trait2'.
+
+	self assert: umlEntity sourceCardinality equals: #multi.
+	self assert: umlEntity targetCardinality equals: #one.
+
+]
+
+{ #category : #'tests - generation' }
 FamixUMLDocumentorTest >> testGenerateTrait [
 
 	| fmClass umlClass |
