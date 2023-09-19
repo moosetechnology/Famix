@@ -4,7 +4,7 @@ Class {
 	#traits : 'FDTrait3',
 	#classTraits : 'FDTrait3 classTrait',
 	#instVars : [
-		'#trait4 => FMOne type: #FDTrait4 opposite: #classes1'
+		'#myTrait => FMOne type: #FDTrait4 opposite: #class1'
 	],
 	#category : #'FamixDocumentor-TestMetaModel-Entities'
 }
@@ -19,16 +19,16 @@ FDClass1 class >> annotation [
 ]
 
 { #category : #accessing }
-FDClass1 >> trait4 [
-	"Relation named: #trait4 type: #FDTrait4 opposite: #classes1"
+FDClass1 >> myTrait [
+	"Relation named: #myTrait type: #FDTrait4 opposite: #class1"
 
 	<generated>
-	^ trait4
+	^ myTrait
 ]
 
 { #category : #accessing }
-FDClass1 >> trait4: anObject [
+FDClass1 >> myTrait: anObject [
 
 	<generated>
-	trait4 := anObject
+	myTrait := anObject
 ]

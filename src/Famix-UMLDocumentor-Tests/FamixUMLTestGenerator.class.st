@@ -63,7 +63,7 @@ FamixUMLTestGenerator >> defineRelations [
 
 	super defineRelations.
 
-	c1 *- t4
+	(c1 property: #myTrait) *- t4
 ]
 
 { #category : #definition }

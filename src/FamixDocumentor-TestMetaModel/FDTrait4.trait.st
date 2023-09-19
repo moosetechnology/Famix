@@ -1,7 +1,7 @@
 Trait {
 	#name : #FDTrait4,
 	#instVars : [
-		'#classes1 => FMMany type: #FDClass1 opposite: #trait4',
+		'#class1 => FMMany type: #FDClass1 opposite: #myTrait',
 		'#someProp => FMProperty'
 	],
 	#traits : 'FDTrait2',
@@ -19,25 +19,25 @@ FDTrait4 classSide >> annotation [
 ]
 
 { #category : #adding }
-FDTrait4 >> addClasses1: anObject [
+FDTrait4 >> addClass1: anObject [
 	<generated>
-	^ self classes1 add: anObject
+	^ self class1 add: anObject
 ]
 
 { #category : #accessing }
-FDTrait4 >> classes1 [
-	"Relation named: #classes1 type: #FDClass1 opposite: #trait4"
+FDTrait4 >> class1 [
+	"Relation named: #class1 type: #FDClass1 opposite: #myTrait"
 
 	<generated>
 	<derived>
-	^ classes1
+	^ class1
 ]
 
 { #category : #accessing }
-FDTrait4 >> classes1: anObject [
+FDTrait4 >> class1: anObject [
 
 	<generated>
-	classes1 value: anObject
+	class1 value: anObject
 ]
 
 { #category : #accessing }
