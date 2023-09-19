@@ -108,27 +108,29 @@ FamixUMLPlantUMLBackend >> generateProperty: property [
 { #category : #generating }
 FamixUMLPlantUMLBackend >> generateSourceRole: association [
 
+	(association sourceRole isNil and: [ association sourceCardinality = #one ])
+		ifTrue: [ ^self ].
+
 	outputStream << ' "'.
 
-	(association sourceCardinality = #multi)
-		ifTrue: [ outputStream << ' *' ].
-	outputStream
-		<< association sourceRole ;
-		<< $"
+	(association sourceCardinality = #multi) ifTrue: [ outputStream << '*' ].
+	association sourceRole ifNotNil: [ outputStream << association sourceRole ].
+	outputStream << $"
 ]
 
 { #category : #generating }
 FamixUMLPlantUMLBackend >> generateTargetRole: association [
 
-	outputStream
-		<< $" ;
-		<< association targetRole.
+	(association targetRole isNil and: [ association targetCardinality = #one ])
+		ifTrue: [ ^self ].
+
+	outputStream << $".
+	association targetRole ifNotNil: [ outputStream << association targetRole ].
 
 	(association targetCardinality = #multi)
-		ifTrue: [ outputStream << '* ' ].
+		ifTrue: [ outputStream << '*' ].
 
-	outputStream
-		<< '" '
+	outputStream << '" '
 ]
 
 { #category : #generating }

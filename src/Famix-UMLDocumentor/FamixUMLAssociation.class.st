@@ -45,9 +45,6 @@ FamixUMLAssociation >> initialize [
 	
 	sourceCardinality := #one.
 	targetCardinality := #one.
-
-	sourceRole := ''.
-	targetRole := ''.
 	
 	aggregation := #off
 ]
@@ -58,12 +55,17 @@ FamixUMLAssociation >> initializeFrom: aFM3Prop [
 	self source: aFM3Prop mmClass name.
 	aFM3Prop isMultivalued ifTrue: [ self sourceCardinality: #multi ].
 	aFM3Prop isContainer ifTrue: [ self aggregation: #source ].
-	self sourceRole: aFM3Prop opposite name.
 
 	self target: aFM3Prop type name.
+
+	"an association might not have an opposite if it is inherited"
+	(aFM3Prop hasOpposite) ifFalse: [ ^self ]	.
+
+	self sourceRole: aFM3Prop opposite name.
+	self targetRole: aFM3Prop name.
+
 	aFM3Prop opposite isMultivalued ifTrue: [ self targetCardinality: #multi ].
 	aFM3Prop opposite isContainer ifTrue: [ self aggregation: #target ].
-	self targetRole: aFM3Prop name.
 
 
 ]

@@ -43,8 +43,6 @@ FamixUMLPlantUMLBackendTest >> setUp [
 
 { #category : #tests }
 FamixUMLPlantUMLBackendTest >> testGenerateAggregation [
-	"note: association role is not supposed to be empty.
-	this test is not realistic in this sense"
 
 	| umlLink |
 	umlLink := self link: FamixUMLAssociation from: 'ClassA' to: 'ClassB'.
@@ -53,23 +51,22 @@ FamixUMLPlantUMLBackendTest >> testGenerateAggregation [
 	backend generateAssociation: umlLink.
 
 	self assert: backend outputStream contents equals:
-'ClassA "" o-- "" ClassB
+'ClassA o-- ClassB
 '
 ]
 
 { #category : #tests }
 FamixUMLPlantUMLBackendTest >> testGenerateAssociationCardinality [
-	"note: association role is not supposed to be empty.
-	this test is not realistic in this sense"
 
 	| umlLink |
 	umlLink := self link: FamixUMLAssociation from: 'ClassA' to: 'ClassB'.
+	umlLink sourceCardinality: #multi.
 	umlLink targetCardinality: #multi.
 
 	backend generateAssociation: umlLink.
 
 	self assert: backend outputStream contents equals:
-'ClassA "" -- "* " ClassB
+'ClassA "*" -- "*" ClassB
 '
 ]
 
@@ -101,7 +98,7 @@ FamixUMLPlantUMLBackendTest >> testGenerateAssociationSimple [
 	backend generateAssociation: umlLink.
 
 	self assert: backend outputStream contents equals:
-'ClassA "" -- "" ClassB
+'ClassA -- ClassB
 '
 ]
 
