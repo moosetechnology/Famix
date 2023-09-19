@@ -20,8 +20,8 @@ FamixUMLAbstractBackend >> export: entities [
 
 	self generateClasses: entities.
 	self generateInheritances: entities.
+	self generateUses: entities.
 	self generateRelations: entities.
-	self generateExternalClasses: entities.
 
 	self generateFooter.
 	
@@ -33,15 +33,6 @@ FamixUMLAbstractBackend >> generateAssociation: association [
 
 	outputStream 
 		<< association asString
-]
-
-{ #category : #generating }
-FamixUMLAbstractBackend >> generateAssociationBetween: class1 and: class2 [
-	outputStream
-		nextPutAll: class1 ;
-		nextPutAll: ' -- ' ;
-		nextPutAll: class2 ;
-		cr
 ]
 
 { #category : #generating }
@@ -79,20 +70,6 @@ FamixUMLAbstractBackend >> generateClasses: entities [
 	entities do: [ :each |
 		(each class = FamixUMLClass)
 		ifTrue: [ self generateClass: each ]
-	]
-]
-
-{ #category : #generating }
-FamixUMLAbstractBackend >> generateExternalClass: entity [
-
-]
-
-{ #category : #generating }
-FamixUMLAbstractBackend >> generateExternalClasses: entities [
-
-	entities do: [ :each |
-		(each class = FamixUMLAssociation)
-		ifTrue: [ self generateExternalClass: each ]
 	]
 ]
 
@@ -146,12 +123,22 @@ FamixUMLAbstractBackend >> generateRelations: entities [
 ]
 
 { #category : #generating }
-FamixUMLAbstractBackend >> generateUseTrait: aTrait class: aclass [
+FamixUMLAbstractBackend >> generateUse: aUseLink [
+
 	outputStream
-		nextPutAll: aTrait ;
-		nextPutAll: ' <|.. ' ;
-		nextPutAll: aclass ;
+		<< aUseLink source ;
+		<< ' uses-trait: ' ;
+		<< aUseLink target ;
 		cr
+]
+
+{ #category : #generating }
+FamixUMLAbstractBackend >> generateUses: entities [
+
+	entities do: [ :each |
+		(each class = FamixUMLUse)
+		ifTrue: [ self generateUse: each ]
+	]
 ]
 
 { #category : #initialization }

@@ -73,7 +73,7 @@ FamixUMLPlantUMLBackend >> generateInheritance: inheritance [
 
 	outputStream
 		nextPutAll: inheritance target ;
-		nextPutAll: (inheritance target isTrait ifTrue: [' <|.. '] ifFalse: [' <|-- ']) ;
+		nextPutAll: ' <|-- ' ;
 		nextPutAll: inheritance source ;
 		cr
 ]
@@ -86,5 +86,15 @@ FamixUMLPlantUMLBackend >> generateProperty: property [
 		<< property type ;
 		<< ' ' ;
 		<< property name ;
+		cr
+]
+
+{ #category : #generating }
+FamixUMLPlantUMLBackend >> generateUse: aUseLink [
+
+	outputStream
+		<< aUseLink target ;
+		<< ' <|.. ' ;
+		<< aUseLink source ;
 		cr
 ]
