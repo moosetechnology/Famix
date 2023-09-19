@@ -110,7 +110,7 @@ FamixUMLPlantUMLBackendTest >> testGenerateClass [
 	backend generateClass: umlClass.
 
 	self assert: backend outputStream contents equals:
-'class AClass << (C,#FFFFFF) >> #FFFFFF {
+'class AClass <<(C,#FFFFFF)>> #FFFFFF {
 }
 '
 ]
@@ -118,8 +118,8 @@ FamixUMLPlantUMLBackendTest >> testGenerateClass [
 { #category : #tests }
 FamixUMLPlantUMLBackendTest >> testGenerateClassProperties [
 	| umlClass |
-	umlClass := (self classNamed: 'AClass')
-		properties: {
+	umlClass := (self classNamed: 'AClass').
+	umlClass 	properties: {
 			self property: 'prop1' type: 'integer' .
 			self property: 'prop2' type: 'whatever' .
 		}.
@@ -127,9 +127,23 @@ FamixUMLPlantUMLBackendTest >> testGenerateClassProperties [
 	backend generateClass: umlClass.
 
 	self assert: backend outputStream contents equals:
-'class AClass << (C,#FFFFFF) >> #FFFFFF {
+'class AClass <<(C,#FFFFFF)>> #FFFFFF {
   integer prop1
   whatever prop2
+}
+'
+]
+
+{ #category : #tests }
+FamixUMLPlantUMLBackendTest >> testGenerateClassStub [
+	| umlClass |
+	umlClass := (self classNamed: 'AClass').
+	umlClass beStub.
+
+	backend generateClass: umlClass.
+
+	self assert: backend outputStream contents equals:
+'class AClass <<(C,#FFFFFF)External>> #FFFFFF {
 }
 '
 ]

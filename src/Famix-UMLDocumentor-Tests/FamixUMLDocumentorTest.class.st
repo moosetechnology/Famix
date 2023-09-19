@@ -20,20 +20,24 @@ FamixUMLDocumentorTest >> setUp [
 { #category : #'tests - generation' }
 FamixUMLDocumentorTest >> testBeWithStub [
 
-	| fmClass |
-	fmClass := FDModel metamodel fmTypeOf: FDTrait3.
+	| t3 entities |
+	t3 := FDModel metamodel fmTypeOf: FDTrait3.
 
 	documentor model: FDModel.
-	documentor fmClasses: { fmClass }.
+	documentor fmClasses: { t3 }.
 	documentor beWithStub.
 
-	documentor generateClass: fmClass.
+	documentor generateClass: t3.
 
 	self assert: documentor isWithStub.
 	self assert: documentor umlEntities size equals: 3.
 
-	self assert: (documentor umlEntities count: [ :e | e class = FamixUMLClass]) equals: 2.
 	self assert: (documentor umlEntities count: [ :e | e class = FamixUMLUse]) equals: 1.
+
+	entities := documentor umlEntities select: [ :e | e class = FamixUMLClass].
+	self assert: entities size equals: 2.
+	self deny: entities first color equals: entities second color.
+	self assert: (entities count: #isStub) equals: 1
 ]
 
 { #category : #'tests - generation' }

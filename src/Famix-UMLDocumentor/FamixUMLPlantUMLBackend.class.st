@@ -51,11 +51,14 @@ FamixUMLPlantUMLBackend >> generateClassHeader: aUMLClass [
 	outputStream
 		<< 'class ' ;
 		<< aUMLClass name ;
-		<< ' << (' ;
+		<< ' <<(' ;
 		<< (self classMarker: aUMLClass) ;
 		<< ',#' ;
 		<< aUMLClass color asHexString ;
-		<< ') >> #' ;
+		<< $).
+	aUMLClass isStub ifTrue: [ outputStream << 'External' ].
+	outputStream
+		<< '>> #' ;
 		<< aUMLClass color asHexString ;
 		<< ' {';
 		cr.
@@ -78,7 +81,6 @@ skinparam class {
   BackgroundColor white
   ArrowColor black
   BorderColor darkGray
-  BackgroundColor<<External>> LightYellow
   BorderColor<<External>> LightGray
 }' ;
 	cr

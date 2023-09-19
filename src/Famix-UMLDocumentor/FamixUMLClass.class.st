@@ -8,7 +8,7 @@ Class {
 	#instVars : [
 		'name',
 		'color',
-		'hide',
+		'isStub',
 		'properties',
 		'isTrait'
 	],
@@ -29,6 +29,11 @@ FamixUMLClass >> addProperty: anObject [
 ]
 
 { #category : #accessing }
+FamixUMLClass >> beStub [
+	isStub := true
+]
+
+{ #category : #accessing }
 FamixUMLClass >> beTrait [
 
 	isTrait := true
@@ -46,25 +51,13 @@ FamixUMLClass >> color: anObject [
 	color := anObject
 ]
 
-{ #category : #accessing }
-FamixUMLClass >> hide [
-
-	^ hide
-]
-
-{ #category : #accessing }
-FamixUMLClass >> hide: anObject [
-
-	hide := anObject
-]
-
 { #category : #initialization }
 FamixUMLClass >> initialize [
 
 	super initialize.
 
 	name := 'An-Unknown-Class'.
-	hide := false.
+	isStub := false.
 	isTrait := false.
 	color := #white.
 	properties := OrderedCollection new
@@ -77,6 +70,16 @@ FamixUMLClass >> initializeFrom: aFM3Class [
 	aFM3Class isFM3Class
 		ifFalse: [ self beTrait ].
 
+]
+
+{ #category : #accessing }
+FamixUMLClass >> isStub [
+	^isStub
+]
+
+{ #category : #accessing }
+FamixUMLClass >> isStub: aBoolean [
+	isStub := aBoolean 
 ]
 
 { #category : #testing }
