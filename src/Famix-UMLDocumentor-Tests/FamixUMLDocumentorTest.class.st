@@ -20,14 +20,12 @@ FamixUMLDocumentorTest >> setUp [
 { #category : #'tests - generation' }
 FamixUMLDocumentorTest >> testBeWithStub [
 
-	| t3 entities |
-	t3 := FDModel metamodel fmTypeOf: FDTrait3.
-
-	documentor model: FDModel.
-	documentor fmClasses: { t3 }.
-	documentor beWithStub.
-
-	documentor generateClass: t3.
+	| entities |
+	documentor
+		model: FDModel ;
+		onlyClasses: { FDTrait3 } ;
+		beWithStub ;
+		generate.
 
 	self assert: documentor isWithStub.
 	self assert: documentor umlEntities size equals: 3.
@@ -36,8 +34,10 @@ FamixUMLDocumentorTest >> testBeWithStub [
 
 	entities := documentor umlEntities select: [ :e | e class = FamixUMLClass].
 	self assert: entities size equals: 2.
+
+	self assert: (entities count: #isStub) equals: 1.
 	self deny: entities first color equals: entities second color.
-	self assert: (entities count: #isStub) equals: 1
+
 ]
 
 { #category : #'tests - generation' }
@@ -116,15 +116,30 @@ FamixUMLDocumentorTest >> testGeneratePropertyOf [
 ]
 
 { #category : #'tests - generation' }
+FamixUMLDocumentorTest >> testGenerateRelationBetweenStub [
+
+	documentor
+		model: FDModel ;
+		onlyClasses: { FDClass1 . FDTrait4 } ;
+		beWithStub ;
+		generate.
+
+	self assert: documentor umlEntities size equals: 10.
+
+	self assert: (documentor umlEntities count: [ :e | e class = FamixUMLClass ]) equals: 5.
+	self assert: (documentor umlEntities count: [ :e | e class = FamixUMLAssociation ]) equals: 1.
+	self assert: (documentor umlEntities count: [ :e | e class = FamixUMLInheritance ]) equals: 1.
+	self assert: (documentor umlEntities count: [ :e | e class = FamixUMLUse ]) equals: 3.
+]
+
+{ #category : #'tests - generation' }
 FamixUMLDocumentorTest >> testGenerateRelationOf [
 
-	| c1 t4 umlEntity |
-	c1 := FDModel metamodel fmTypeOf: FDClass1.
-	t4 := FDModel metamodel fmTypeOf: FDTrait4.
-
-	documentor model: FDModel.
-	documentor onlyClasses: { FDClass1 . FDTrait4 }.
-	documentor generate.
+	| umlEntity |
+	documentor
+		model: FDModel ;
+		onlyClasses: { FDClass1 . FDTrait4 } ;
+		generate.
 
 	self assert: documentor umlEntities size equals: 3.
 
@@ -146,13 +161,13 @@ FamixUMLDocumentorTest >> testGenerateRelationOf [
 { #category : #'tests - generation' }
 FamixUMLDocumentorTest >> testGenerateRelationOfWithStub [
 
-	| t4 umlEntity |
-	t4 := FDModel metamodel fmTypeOf: FDTrait4.
+	| umlEntity |
 
-	documentor model: FDModel.
-	documentor fmClasses: { t4 }.
-	documentor beWithStub.
-	documentor generateClass: t4.
+	documentor
+		model: FDModel ;
+		onlyClasses: { FDTrait4 } ;
+		beWithStub ;
+		generate.
 
 	self assert: documentor umlEntities size equals: 5. "Class1, Trait4, Trait2, FamixUMLAssociation, FamixUMLUse"
 

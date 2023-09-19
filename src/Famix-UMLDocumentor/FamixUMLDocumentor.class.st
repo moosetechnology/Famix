@@ -85,6 +85,19 @@ FamixUMLDocumentor >> fm3DescriptionsOf: aCollection [
 	^aCollection collect: [ :aClass | self fm3DescriptionOf: aClass ]
 ]
 
+{ #category : #private }
+FamixUMLDocumentor >> fmClassToUMLClass: aFM3Class [
+
+	| umlClass |
+	umlClass := FamixUMLClass from: aFM3Class.
+	(self isStubClass: aFM3Class) ifTrue: [ umlClass beStub ].
+	umlClass color: (self colorForEntity: aFM3Class).
+
+	umlModel at: aFM3Class put: umlClass.
+	
+	^umlClass
+]
+
 { #category : #accessing }
 FamixUMLDocumentor >> fmClasses: aCollection [
 	fmClasses addAll: aCollection 
@@ -106,66 +119,81 @@ FamixUMLDocumentor >> generate [
 { #category : #generating }
 FamixUMLDocumentor >> generateClass: aFM3Class [
 
-	| entity |
+	| umlClass |
 	(self entityAlreadyInUMLModel: aFM3Class) ifTrue: [ ^self ].
 
-	entity := (FamixUMLClass from: aFM3Class).
-	umlModel at: aFM3Class put: entity.
-	entity color: (self colorForEntity: aFM3Class).
-	(self isStubClass: aFM3Class) ifTrue: [
-		entity beStub.
-		^ self ].
-	
-	aFM3Class primitiveProperties do: [ :prop | self generateProperty: prop of: entity ].
-	aFM3Class complexProperties do: [ :rel | self generateRelation: rel of: entity ].
-	
-	aFM3Class isFM3Trait
-		ifFalse: [ self generateInheritance: aFM3Class superclass sub: aFM3Class ].
-	aFM3Class implementingClass traits do: [ :trait |
-		self generateUsedTrait: (self fm3DescriptionOf: trait) byClass: aFM3Class ].
+	umlClass := self fmClassToUMLClass: aFM3Class.
 
+	self generateProperties: umlClass fromFMClass: aFM3Class.
+	self generateInheritancesFromFMClass: aFM3Class
 ]
 
 { #category : #generating }
-FamixUMLDocumentor >> generateInheritance: aFMSuperClass sub: aFMSubClass [
-	(self shouldBeInUMLModel: aFMSuperClass) ifFalse: [ ^ self ].
+FamixUMLDocumentor >> generateInheritance: umlLink sub: aFMSubClass super: aFMSuperClass [
+	"only generates inheritance if both ends are in the UML model and it has not be generated yet
+	 make sure both classes (or Trait) exist before creating the link (recursive call)
+	 Note that #generateClass: tests that the class is not already generated before doing anything"
 
+	(self shouldBeInUMLModel: aFMSubClass) ifFalse: [ ^ self ].
+	(self shouldBeInUMLModel: aFMSuperClass) ifFalse: [ ^ self ].
+	(self entityAlreadyInUMLModel: (aFMSubClass -> aFMSuperClass)) ifTrue: [ ^self ].
+
+	self generateClass: aFMSubClass.
 	self generateClass: aFMSuperClass.
 
 	umlModel
 		at: (aFMSubClass -> aFMSuperClass)
-		put: (FamixUMLInheritance from: aFMSubClass to: aFMSuperClass)
+		put: (umlLink from: aFMSubClass to: aFMSuperClass)
 ]
 
 { #category : #generating }
-FamixUMLDocumentor >> generateProperty: aFMProperty of: aUMLClass [
+FamixUMLDocumentor >> generateInheritancesFromFMClass: aFM3Class [
+
+	aFM3Class isFM3Trait
+		ifFalse: [
+			self
+				generateInheritance: FamixUMLInheritance
+				sub: aFM3Class
+				super: aFM3Class superclass ].
+
+	aFM3Class implementingClass traits do: [ :trait |
+		self 
+			generateInheritance: FamixUMLUse
+			sub: aFM3Class
+			super: (self fm3DescriptionOf: trait) ].
+]
+
+{ #category : #generating }
+FamixUMLDocumentor >> generateProperties: umlClass fromFMClass: aFM3Class [
+
+	aFM3Class primitiveProperties do: [ :prop | self generateProperty: prop in: umlClass ].
+	aFM3Class complexProperties do: [ :rel | self generateRelation: rel for: umlClass ].
+]
+
+{ #category : #generating }
+FamixUMLDocumentor >> generateProperty: aFMProperty in: aUMLClass [
 	aUMLClass addProperty: (FamixUMLProperty from: aFMProperty)
 ]
 
 { #category : #generating }
-FamixUMLDocumentor >> generateRelation: aFMProperty of: aUMLClass [
+FamixUMLDocumentor >> generateRelation: aFMProperty for: aUMLClass [
+	"assumes owner of perperty should be in uml model
+	 only generates relation if other end should be in the UML model
+	  and the relation has not be generated yet and its opposite has not been generated either
+	 make sure other end exist before creating the link (recursive call)
+	 Note that #generateClass: tests that the class is not already generated before doing anything"
 
 	| relatedClass |
 
-	(self relationAlreadyInUMLModel: aFMProperty) ifTrue: [ ^ self ].
-	
 	relatedClass := aFMProperty type.
+	
 	(self shouldBeInUMLModel: relatedClass) ifFalse: [ ^ self ].
+	(self relationAlreadyInUMLModel: aFMProperty) ifTrue: [ ^ self ].
+
+	self generateClass: relatedClass.	
 
 	umlModel at: aFMProperty put: (FamixUMLAssociation from: aFMProperty).
 
-	self generateClass: relatedClass.
-]
-
-{ #category : #generating }
-FamixUMLDocumentor >> generateUsedTrait: aTrait byClass: aFMSubClass [
-	(self shouldBeInUMLModel: aTrait) ifFalse: [ ^ self ].
-
-	self generateClass: aTrait.
-
-	umlModel
-		at: (aFMSubClass -> aTrait)
-		put: (FamixUMLUse from: aFMSubClass to: aTrait)
 ]
 
 { #category : #private }
