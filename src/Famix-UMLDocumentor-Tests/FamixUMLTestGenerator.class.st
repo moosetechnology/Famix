@@ -63,7 +63,7 @@ FamixUMLTestGenerator >> defineRelations [
 
 	super defineRelations.
 
-	t2 *- t4
+	c1 *- t4
 ]
 
 { #category : #definition }

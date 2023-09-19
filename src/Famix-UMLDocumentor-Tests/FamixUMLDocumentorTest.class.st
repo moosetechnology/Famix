@@ -127,13 +127,13 @@ FamixUMLDocumentorTest >> testGeneratePropertyOf [
 { #category : #'tests - generation' }
 FamixUMLDocumentorTest >> testGenerateRelationOf [
 
-	| fmTrait2 fmTrait4 umlEntity |
-	fmTrait2 := FDModel metamodel fmTypeOf: FDTrait2.
-	fmTrait4 := FDModel metamodel fmTypeOf: FDTrait4.
+	| c1 t4 umlEntity |
+	c1 := FDModel metamodel fmTypeOf: FDClass1.
+	t4 := FDModel metamodel fmTypeOf: FDTrait4.
 
 	documentor model: FDModel.
-	documentor fmClasses: { fmTrait2 . fmTrait4 }.
-	documentor generateClass: fmTrait4.
+	documentor onlyClasses: { FDClass1 . FDTrait4 }.
+	documentor generate.
 
 	self assert: documentor umlEntities size equals: 3.
 
@@ -141,33 +141,33 @@ FamixUMLDocumentorTest >> testGenerateRelationOf [
 	self assert: umlEntity isNotNil.
 	self assert: umlEntity aggregation equals: #off.
 
-	self assert: umlEntity source equals: 'Trait4'.
-	self assert: umlEntity target equals: 'Trait2'.
+	self assert: umlEntity source equals: 'Class1'.
+	self assert: umlEntity target equals: 'Trait4'.
 
-	self assert: umlEntity sourceCardinality equals: #multi.
-	self assert: umlEntity targetCardinality equals: #one.
+	self assert: umlEntity sourceCardinality equals: #one.
+	self assert: umlEntity targetCardinality equals: #multi.
 
 ]
 
 { #category : #'tests - generation' }
 FamixUMLDocumentorTest >> testGenerateRelationOfWithStub [
 
-	| fmTrait4 umlEntity |
-	fmTrait4 := FDModel metamodel fmTypeOf: FDTrait4.
+	| t4 umlEntity |
+	t4 := FDModel metamodel fmTypeOf: FDTrait4.
 
 	documentor model: FDModel.
-	documentor fmClasses: { fmTrait4 }.
+	documentor fmClasses: { t4 }.
 	documentor beWithStub.
-	documentor generateClass: fmTrait4.
+	documentor generateClass: t4.
 
-	self assert: documentor umlEntities size equals: 4. "Trait4, Trait2, FamixUMLAssociation, FamixUMLUse"
+	self assert: documentor umlEntities size equals: 5. "Class1, Trait4, Trait2, FamixUMLAssociation, FamixUMLUse"
 
 	umlEntity := documentor umlEntities detect: [ :e | e class = FamixUMLAssociation ] ifNone: [nil].
 	self assert: umlEntity isNotNil.
 	self assert: umlEntity aggregation equals: #off.
 
 	self assert: umlEntity source equals: 'Trait4'. "because it comes from generating class 'Trait4'"
-	self assert: umlEntity target equals: 'Trait2'.
+	self assert: umlEntity target equals: 'Class1'.
 
 	self assert: umlEntity sourceCardinality equals: #multi.
 	self assert: umlEntity targetCardinality equals: #one.
