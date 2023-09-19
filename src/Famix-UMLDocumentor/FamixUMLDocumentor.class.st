@@ -93,10 +93,7 @@ FamixUMLDocumentor >> generate [
 		ifNil: [ self getClassesFromModels ]
 		ifNotNil: [ self fm3DescriptionsOf: onlyModelClasses ].
 
-	self generateUMLClasses.
-	self generateUMLInheritance.
-	self generateUMLRelations
-	"self generateUMLExternalClasses."
+	fmClasses do: [ :class | self generateClass: class ]
 ]
 
 { #category : #generating }
@@ -143,30 +140,15 @@ FamixUMLDocumentor >> generateProperty: aFMProperty of: aUMLClass [
 FamixUMLDocumentor >> generateRelation: aFMProperty of: aUMLClass [
 
 	| relatedClass |
-	relatedClass := aFMProperty type.
-	
-	(self shouldBeInUMLModel: relatedClass) ifFalse: [ ^ self ].
+
 	(self relationAlreadyInUMLModel: aFMProperty) ifTrue: [ ^ self ].
+	
+	relatedClass := aFMProperty type.
+	(self shouldBeInUMLModel: relatedClass) ifFalse: [ ^ self ].
 
 	umlModel at: aFMProperty put: (FamixUMLAssociation from: aFMProperty).
 
 	self generateClass: relatedClass.
-]
-
-{ #category : #generating }
-FamixUMLDocumentor >> generateUMLClasses [
-	fmClasses do: [ :class | self generateClass: class ].
-	
-]
-
-{ #category : #generating }
-FamixUMLDocumentor >> generateUMLInheritance [
-
-]
-
-{ #category : #generating }
-FamixUMLDocumentor >> generateUMLRelations [
-
 ]
 
 { #category : #generating }

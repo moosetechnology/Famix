@@ -131,8 +131,8 @@ FamixUMLDocumentorTest >> testGenerateRelationOf [
 	self assert: umlEntity source equals: 'Class1'.
 	self assert: umlEntity target equals: 'Trait4'.
 
-	self assert: umlEntity sourceRole equals: #myTrait.
-	self assert: umlEntity targetRole equals: #class1.
+	self assert: umlEntity sourceRole equals: #class1.
+	self assert: umlEntity targetRole equals: #myTrait.
 
 	self assert: umlEntity sourceCardinality equals: #one.
 	self assert: umlEntity targetCardinality equals: #multi.
