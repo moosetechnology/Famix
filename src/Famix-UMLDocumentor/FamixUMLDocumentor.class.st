@@ -25,6 +25,12 @@ FamixUMLDocumentor >> beWithoutStub [
 
 { #category : #private }
 FamixUMLDocumentor >> colorForEntity: aFMEntity [
+	"find the color of the meta-model associated with aFMEntity
+	 if is a stub, try to find another color"
+
+	(self isStubClass: aFMEntity)
+		ifTrue: [ ^self defaultColor: modelColors size + 1 ].
+
 	^modelColors
 		detect: [ :modelColor |
 			(self fm3DescriptionOf: modelColor key) package classes
@@ -37,8 +43,9 @@ FamixUMLDocumentor >> colorForEntity: aFMEntity [
 
 { #category : #private }
 FamixUMLDocumentor >> defaultColor: i [
+	"note: colors chosen from Color class>>#defaultColors3"
 
-	^Color perform: ( #(white lightYellow lightBlue lightGreen pink) at: i )
+	^Color perform: ( #(white lightYellow lightGreen veryPaleRed lightBlue lightMagenta lightOrange paleTan lightCyan lightBrown ) at: i )
 ]
 
 { #category : #testing }
@@ -103,12 +110,11 @@ FamixUMLDocumentor >> generateClass: aFM3Class [
 	(self entityAlreadyInUMLModel: aFM3Class) ifTrue: [ ^self ].
 
 	entity := (FamixUMLClass from: aFM3Class).
-	entity color: (self colorForEntity: aFM3Class).
 	umlModel at: aFM3Class put: entity.
-
-"	self checkExternalClass: aFM3Class."
-
-	(self isStubClass: aFM3Class) ifTrue: [ ^ self ].
+	entity color: (self colorForEntity: aFM3Class).
+	(self isStubClass: aFM3Class) ifTrue: [
+		entity beStub.
+		^ self ].
 	
 	aFM3Class primitiveProperties do: [ :prop | self generateProperty: prop of: entity ].
 	aFM3Class complexProperties do: [ :rel | self generateRelation: rel of: entity ].
