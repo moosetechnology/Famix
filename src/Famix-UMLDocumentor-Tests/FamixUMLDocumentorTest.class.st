@@ -11,19 +11,6 @@ Class {
 }
 
 { #category : #running }
-FamixUMLDocumentorTest >> mockModel: modelName classes: aCollection [
-
-	| mockModel |
-	mockModel := Mock named: modelName.
-	mockModel stub metamodel willReturn: mockModel.
-	mockModel stub classes willReturn: aCollection.
-	(mockModel stub descriptionOf: Any ifAbsent: Any)
-		will: [ :entity :block | (aCollection includes: entity) ifTrue: [ entity ] ifFalse: [ block value ] ].
-	^mockModel
-
-]
-
-{ #category : #running }
 FamixUMLDocumentorTest >> setUp [
 	super setUp.
 

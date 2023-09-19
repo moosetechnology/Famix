@@ -14,11 +14,27 @@ FamixUMLPlantUMLBackend >> classMarker: aUMLClass [
 { #category : #generating }
 FamixUMLPlantUMLBackend >> generateAssociation: association [
 
+	outputStream << association source.
+
+	self generateSourceRole: association.
+	self generateAssociationSymbol: association.
+	self generateTargetRole: association.
+
 	outputStream
-		nextPutAll: association source ;
-		nextPutAll: ' -- ' ;
-		nextPutAll: association target ;
+		<< association target ;
 		cr
+]
+
+{ #category : #generating }
+FamixUMLPlantUMLBackend >> generateAssociationSymbol: association [
+
+	(association aggregation = #source)
+		ifTrue: [ outputStream << ' o-- '. ^self ].
+		
+	(association aggregation = #target)
+		ifTrue: [ outputStream << ' --o '. ^self ].
+
+	outputStream << ' -- '
 ]
 
 { #category : #generating }
@@ -37,7 +53,7 @@ FamixUMLPlantUMLBackend >> generateClassHeader: aUMLClass [
 		<< aUMLClass name ;
 		<< ' << (' ;
 		<< (self classMarker: aUMLClass) ;
-		<< $, ;
+		<< ',#' ;
 		<< aUMLClass color asHexString ;
 		<< ') >> #' ;
 		<< aUMLClass color asHexString ;
@@ -87,6 +103,32 @@ FamixUMLPlantUMLBackend >> generateProperty: property [
 		<< ' ' ;
 		<< property name ;
 		cr
+]
+
+{ #category : #generating }
+FamixUMLPlantUMLBackend >> generateSourceRole: association [
+
+	outputStream << ' "'.
+
+	(association sourceCardinality = #multi)
+		ifTrue: [ outputStream << ' *' ].
+	outputStream
+		<< association sourceRole ;
+		<< $"
+]
+
+{ #category : #generating }
+FamixUMLPlantUMLBackend >> generateTargetRole: association [
+
+	outputStream
+		<< $" ;
+		<< association targetRole.
+
+	(association targetCardinality = #multi)
+		ifTrue: [ outputStream << '* ' ].
+
+	outputStream
+		<< '" '
 ]
 
 { #category : #generating }
