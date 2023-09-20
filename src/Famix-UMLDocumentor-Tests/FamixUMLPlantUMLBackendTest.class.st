@@ -42,7 +42,7 @@ FamixUMLPlantUMLBackendTest >> setUp [
 ]
 
 { #category : #tests }
-FamixUMLPlantUMLBackendTest >> testGenerateAggregation [
+FamixUMLPlantUMLBackendTest >> testGenerateAggregationSource [
 
 	| umlLink |
 	umlLink := self link: FamixUMLAssociation from: 'ClassA' to: 'ClassB'.
@@ -52,6 +52,20 @@ FamixUMLPlantUMLBackendTest >> testGenerateAggregation [
 
 	self assert: backend outputStream contents equals:
 'ClassA o-- ClassB
+'
+]
+
+{ #category : #tests }
+FamixUMLPlantUMLBackendTest >> testGenerateAggregationTarget [
+
+	| umlLink |
+	umlLink := self link: FamixUMLAssociation from: 'ClassA' to: 'ClassB'.
+	umlLink aggregation: #target.
+
+	backend generateAssociation: umlLink.
+
+	self assert: backend outputStream contents equals:
+'ClassA --o ClassB
 '
 ]
 

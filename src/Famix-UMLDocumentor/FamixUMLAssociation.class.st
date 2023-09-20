@@ -54,12 +54,14 @@ FamixUMLAssociation >> initializeFrom: aFM3Prop [
 
 	self source: aFM3Prop mmClass name.
 	aFM3Prop isMultivalued ifTrue: [ self sourceCardinality: #multi ].
-	aFM3Prop isContainer ifTrue: [ self aggregation: #source ].
+	aFM3Prop isContainer ifTrue: [ self aggregation: #target ].
 
 	self target: aFM3Prop type name.
 
 	"an association might not have an opposite if it is inherited"
-	(aFM3Prop hasOpposite) ifFalse: [ ^self ]	.
+	(aFM3Prop hasOpposite) ifFalse: [ ^self ].
+
+	aFM3Prop opposite isContainer ifTrue: [ self aggregation: #source ].
 
 	self sourceRole: aFM3Prop opposite name.
 	self targetRole: aFM3Prop name.

@@ -20,37 +20,39 @@ FamixUMLDocumentorTest >> setUp [
 { #category : #'tests - generation' }
 FamixUMLDocumentorTest >> testBeWithStub [
 
-	| entities |
+	| entity |
 	documentor
 		model: FDModel ;
 		onlyClasses: { FDTrait3 } ;
 		beWithStub ;
-		generate.
+		generateClass: (documentor fm3DescriptionOf: FDTrait3).
 
 	self assert: documentor isWithStub.
-	self assert: documentor umlEntities size equals: 3.
+	self assert: documentor umlEntities size equals: 2.
 
-	self assert: (documentor umlEntities count: [ :e | e class = FamixUMLUse]) equals: 1.
+	entity := documentor umlEntities first.
+	self assert: entity class equals: FamixUMLClass.
+	self assert: entity name equals: 'Trait3'.
+	self deny: entity isStub.
 
-	entities := documentor umlEntities select: [ :e | e class = FamixUMLClass].
-	self assert: entities size equals: 2.
+	entity := documentor umlEntities second.
+	self assert: entity class equals: FamixUMLClass.
+	self assert: entity name equals: 'Trait2'.
+	self assert: entity isStub.
 
-	self assert: (entities count: #isStub) equals: 1.
-	self deny: entities first color equals: entities second color.
+	self deny: documentor umlEntities first color equals: documentor umlEntities second color.
 
 ]
 
 { #category : #'tests - generation' }
 FamixUMLDocumentorTest >> testBeWithoutStub [
 
-	| fmClass umlClass |
-	fmClass := FDModel metamodel fmTypeOf: FDTrait2.
-
-	documentor model: FDModel.
-	documentor fmClasses: { fmClass }.
-	documentor beWithoutStub.
-
-	documentor generateClass: fmClass.
+	| umlClass |
+	documentor
+		model: FDModel ;
+		onlyClasses: { FDTrait2 } ;
+		beWithoutStub ;
+		generateClass: (documentor fm3DescriptionOf: FDTrait2).
 
 	self deny: documentor isWithStub.
 	self assert: documentor umlEntities size equals: 1.
@@ -62,16 +64,16 @@ FamixUMLDocumentorTest >> testBeWithoutStub [
 { #category : #'tests - model' }
 FamixUMLDocumentorTest >> testColorForEntity [
 
-	documentor model: FDModel.
-	documentor model: FamixStModel.
-
-	documentor fmClasses: (documentor getClassesFromModels).
+	documentor
+		model: FDModel ;
+		model: FamixStModel ;
+		onlyClasses: { FDClass1 . FamixStClass } .
 
 	self
-		assert: (documentor colorForEntity: (FDModel metamodel fmTypeOf: FDTrait1))
+		assert: (documentor colorForEntity: (documentor fm3DescriptionOf: FDClass1))
 		equals: (documentor modelColors first value).
 	self
-		assert: (documentor colorForEntity: (FamixStModel metamodel fmTypeOf: FamixStClass))
+		assert: (documentor colorForEntity: (documentor fm3DescriptionOf: FamixStClass))
 		equals: (documentor modelColors second value).
 ]
 
@@ -81,32 +83,46 @@ FamixUMLDocumentorTest >> testGenerateClass [
 	| fmClass umlClass |
 	fmClass := FDModel metamodel fmTypeOf: FDModel.
 
-	documentor model: FDModel color: Color red.
-	documentor fmClasses: { fmClass }.
-	documentor generateClass: fmClass.
+	documentor
+		model: FDModel color: Color red ;
+		onlyClasses: { FDClass1 } ;
+		generateClass: (documentor fm3DescriptionOf: FDClass1).
 
 	self assert: documentor umlEntities size equals: 1.
 
 	umlClass := documentor umlEntities anyOne.
-	self assert: umlClass name equals: 'FDModel'.
+	self assert: umlClass name equals: 'Class1'.
 	self assert: umlClass color equals: Color red.
 	self deny: umlClass isTrait
+]
+
+{ #category : #'tests - generation' }
+FamixUMLDocumentorTest >> testGenerateEntireModel [
+
+	documentor
+		model: FDModel ;
+		generate.
+
+	self assert: (documentor umlEntities count: [:e | e class = FamixUMLClass]) equals: 9
+
 ]
 
 { #category : #'tests - generation' }
 FamixUMLDocumentorTest >> testGeneratePropertyOf [
 
 	| fmClass umlEntity |
-	fmClass := FDModel metamodel fmTypeOf: FDTrait4.
 
-	documentor model: FDModel.
-	documentor fmClasses: { fmClass }.
+	documentor
+		model: FDModel ;
+		onlyClasses: { FDTrait4 }.
+	fmClass := documentor fm3DescriptionOf: FDTrait4.
 	documentor generateClass: fmClass.
 
 	self assert: documentor umlEntities size equals: 1.
-
 	umlEntity := documentor umlEntities anyOne.
-	self assert: umlEntity name equals: 'Trait4'.
+
+	documentor generateProperties: fmClass uml: umlEntity.
+
 	self assert: umlEntity properties size equals: 1.
 
 	umlEntity := umlEntity properties anyOne.
@@ -116,82 +132,13 @@ FamixUMLDocumentorTest >> testGeneratePropertyOf [
 ]
 
 { #category : #'tests - generation' }
-FamixUMLDocumentorTest >> testGenerateRelationBetweenStub [
-
-	documentor
-		model: FDModel ;
-		onlyClasses: { FDClass1 . FDTrait4 } ;
-		beWithStub ;
-		generate.
-
-	self assert: documentor umlEntities size equals: 10.
-
-	self assert: (documentor umlEntities count: [ :e | e class = FamixUMLClass ]) equals: 5.
-	self assert: (documentor umlEntities count: [ :e | e class = FamixUMLAssociation ]) equals: 1.
-	self assert: (documentor umlEntities count: [ :e | e class = FamixUMLInheritance ]) equals: 1.
-	self assert: (documentor umlEntities count: [ :e | e class = FamixUMLUse ]) equals: 3.
-]
-
-{ #category : #'tests - generation' }
-FamixUMLDocumentorTest >> testGenerateRelationOf [
-
-	| umlEntity |
-	documentor
-		model: FDModel ;
-		onlyClasses: { FDClass1 . FDTrait4 } ;
-		generate.
-
-	self assert: documentor umlEntities size equals: 3.
-
-	umlEntity := documentor umlEntities detect: [ :e | e class = FamixUMLAssociation ] ifNone: [nil].
-	self assert: umlEntity isNotNil.
-	self assert: umlEntity aggregation equals: #off.
-
-	self assert: umlEntity source equals: 'Class1'.
-	self assert: umlEntity target equals: 'Trait4'.
-
-	self assert: umlEntity sourceRole equals: #class1.
-	self assert: umlEntity targetRole equals: #myTrait.
-
-	self assert: umlEntity sourceCardinality equals: #one.
-	self assert: umlEntity targetCardinality equals: #multi.
-
-]
-
-{ #category : #'tests - generation' }
-FamixUMLDocumentorTest >> testGenerateRelationOfWithStub [
-
-	| umlEntity |
+FamixUMLDocumentorTest >> testGenerateRelationNotWithoutStub [
+	"don't generate a relation with a stub if we are WithoutStub"
 
 	documentor
 		model: FDModel ;
 		onlyClasses: { FDTrait4 } ;
-		beWithStub ;
-		generate.
-
-	self assert: documentor umlEntities size equals: 5. "Class1, Trait4, Trait2, FamixUMLAssociation, FamixUMLUse"
-
-	umlEntity := documentor umlEntities detect: [ :e | e class = FamixUMLAssociation ] ifNone: [nil].
-	self assert: umlEntity isNotNil.
-	self assert: umlEntity aggregation equals: #off.
-
-	self assert: umlEntity source equals: 'Trait4'. "because it comes from generating class 'Trait4'"
-	self assert: umlEntity target equals: 'Class1'.
-
-	self assert: umlEntity sourceCardinality equals: #multi.
-	self assert: umlEntity targetCardinality equals: #one.
-
-]
-
-{ #category : #'tests - generation' }
-FamixUMLDocumentorTest >> testGenerateRelationOfWithoutStub [
-
-	| fmTrait4 |
-	fmTrait4 := FDModel metamodel fmTypeOf: FDTrait4.
-
-	documentor model: FDModel.
-	documentor fmClasses: { fmTrait4 }.
-	documentor generateClass: fmTrait4.
+		generateClass: (documentor fm3DescriptionOf: FDTrait4).
 
 	self assert: documentor umlEntities size equals: 1.
 
@@ -200,14 +147,174 @@ FamixUMLDocumentorTest >> testGenerateRelationOfWithoutStub [
 ]
 
 { #category : #'tests - generation' }
+FamixUMLDocumentorTest >> testGenerateRelationOf [
+
+	| rel fmClass1 umlClass1 |
+
+	documentor model: FDModel.
+	fmClass1 := documentor fm3DescriptionOf: FDClass1.
+
+	documentor
+		onlyClasses: { FDClass1 . FDTrait4 } ;
+		generateClass: fmClass1 ;
+		generateClass: (documentor fm3DescriptionOf: FDTrait4 ).
+
+	self assert: documentor umlEntities size equals: 2.
+
+	umlClass1 := documentor umlEntities first.
+	documentor generateRelations: fmClass1 uml: umlClass1.
+
+	self assert: documentor umlEntities size equals: 3.
+
+	rel := documentor umlEntities detect: [ :e | e class = FamixUMLAssociation ] ifNone: [nil].
+	self assert: rel isNotNil.
+	self assert: rel aggregation equals: #off.
+
+	self assert: rel source equals: 'Class1'.
+	self assert: rel target equals: 'Trait4'.
+
+	self assert: rel sourceRole equals: #class1.
+	self assert: rel targetRole equals: #myTrait.
+
+	self assert: rel sourceCardinality equals: #one.
+	self assert: rel targetCardinality equals: #multi.
+
+]
+
+{ #category : #'tests - generation' }
+FamixUMLDocumentorTest >> testGenerateRelationSourceStub [
+	"not sure which source/target is stub, but the idea is to test both sides"
+
+	| rel fmClass1 umlClass1 umlClass2 |
+
+	documentor model: FDModel.
+	fmClass1 := documentor fm3DescriptionOf: FDClass1.
+
+	documentor
+		onlyClasses: { FDClass1 } ;
+		beWithStub ;
+		generateClass: fmClass1 ;
+		generateClass: (documentor fm3DescriptionOf: FDTrait4 ).
+
+	self assert: documentor umlEntities size equals: 4. "Class1 --|> Trait3 ; Class1 --|> FDEntity ; Trait4"
+
+	umlClass1 := documentor umlEntities detect: [:e | e name = 'Class1'].
+	self deny: umlClass1 isStub.
+
+	umlClass2 := documentor umlEntities detect: [:e | e name = 'Trait4'].
+	self assert: umlClass2 isStub.
+
+	documentor generateRelations: fmClass1 uml: umlClass1.
+
+	self assert: documentor umlEntities size equals: 5.
+
+	rel := documentor umlEntities detect: [ :e | e class = FamixUMLAssociation ] ifNone: [nil].
+	self assert: rel isNotNil.
+	self assert: rel aggregation equals: #off.
+
+	self assert: rel source equals: 'Class1'.
+	self assert: rel target equals: 'Trait4'.
+
+	self assert: rel sourceRole equals: #class1.
+	self assert: rel targetRole equals: #myTrait.
+
+	self assert: rel sourceCardinality equals: #one.
+	self assert: rel targetCardinality equals: #multi.
+
+]
+
+{ #category : #'tests - generation' }
+FamixUMLDocumentorTest >> testGenerateRelationSourceTargetStubs [
+
+	| rel fmClass1 umlClass1 umlClass2 |
+
+	documentor model: FDModel.
+	fmClass1 := documentor fm3DescriptionOf: FDClass1.
+
+	documentor
+		onlyClasses: { FDClass2 } ;
+		beWithStub ;
+		generateClass: (documentor fm3DescriptionOf: FDClass2 ) ;
+		generateClass: (documentor fm3DescriptionOf: FDTrait4 ).
+
+	self assert: documentor umlEntities size equals: 3. "Class2 --|> Class1 ; Trait4"
+
+	umlClass1 := documentor umlEntities detect: [:e | e name = 'Class1'].
+	self assert: umlClass1 isStub.
+
+	umlClass2 := documentor umlEntities detect: [:e | e name = 'Trait4'].
+	self assert: umlClass2 isStub.
+
+	documentor generateRelations: fmClass1 uml: umlClass1.
+
+	self assert: documentor umlEntities size equals: 4.
+
+	rel := documentor umlEntities detect: [ :e | e class = FamixUMLAssociation ] ifNone: [nil].
+	self assert: rel isNotNil.
+	self assert: rel aggregation equals: #off.
+
+	self assert: rel source equals: 'Class1'.
+	self assert: rel target equals: 'Trait4'.
+
+	self assert: rel sourceRole equals: #class1.
+	self assert: rel targetRole equals: #myTrait.
+
+	self assert: rel sourceCardinality equals: #one.
+	self assert: rel targetCardinality equals: #multi.
+
+]
+
+{ #category : #'tests - generation' }
+FamixUMLDocumentorTest >> testGenerateRelationTargetStub [
+	"not sure which source/target is stub, but the idea is to test both sides"
+
+	| rel fmClass1 umlClass1 umlClass2 |
+
+	documentor model: FDModel.
+	fmClass1 := documentor fm3DescriptionOf: FDClass1.
+
+	documentor
+		onlyClasses: { FDTrait4 } ;
+		beWithStub ;
+		generateClass: fmClass1 ;
+		generateClass: (documentor fm3DescriptionOf: FDTrait4 ).
+
+	self assert: documentor umlEntities size equals: 3. "Trait4 --|> Trait2 ; Class1"
+
+	umlClass1 := documentor umlEntities detect: [:e | e name = 'Class1'].
+	self assert: umlClass1 isStub.
+
+	umlClass2 := documentor umlEntities detect: [:e | e name = 'Trait4'].
+	self deny: umlClass2 isStub.
+
+	documentor generateRelations: fmClass1 uml: umlClass1.
+
+	self assert: documentor umlEntities size equals: 4.
+
+	rel := documentor umlEntities detect: [ :e | e class = FamixUMLAssociation ] ifNone: [nil].
+	self assert: rel isNotNil.
+	self assert: rel aggregation equals: #off.
+
+	self assert: rel source equals: 'Class1'.
+	self assert: rel target equals: 'Trait4'.
+
+	self assert: rel sourceRole equals: #class1.
+	self assert: rel targetRole equals: #myTrait.
+
+	self assert: rel sourceCardinality equals: #one.
+	self assert: rel targetCardinality equals: #multi.
+
+]
+
+{ #category : #'tests - generation' }
 FamixUMLDocumentorTest >> testGenerateTrait [
 
-	| fmClass umlClass |
-	fmClass := FDModel metamodel fmTypeOf: FDTrait1.
+	| umlClass |
 
-	documentor model: FDModel color: Color red.
-	documentor fmClasses: { fmClass }.
-	documentor generateClass: fmClass.
+	documentor
+		model: FDModel color: Color red ;
+		onlyClasses: { FDTrait1 } ;
+		generateClass: (documentor fm3DescriptionOf: FDTrait1).
 
 	self assert: documentor umlEntities size equals: 1.
 
@@ -220,19 +327,25 @@ FamixUMLDocumentorTest >> testGenerateTrait [
 { #category : #'tests - generation' }
 FamixUMLDocumentorTest >> testGenerateUMLInheritance [
 
-	| inh |
-	documentor model: FDModel.
-	documentor onlyClasses: { FDClass1 . FDClass2 }.
+	| fmClass2 umlClass2 inh |
 
-	documentor generate.
+	documentor model: FDModel.
+	fmClass2 := documentor fm3DescriptionOf: FDClass2.
+
+	documentor
+		onlyClasses: { FDClass1 . FDClass2 } ;
+		generateClass: (documentor fm3DescriptionOf: FDClass1) ;
+		generateClass: fmClass2.
+
+	self assert: documentor umlEntities size equals: 2.
+
+	umlClass2 := documentor umlEntities second.
+	documentor generateInheritance: fmClass2 uml: umlClass2.
 
 	self assert: documentor umlEntities size equals: 3.
-
-	self assert: (documentor umlEntities count: [ :e | e class = FamixUMLClass]) equals: 2.
 	
-	self assert: (documentor umlEntities count: [ :e | e class = FamixUMLInheritance]) equals: 1.
-	
-	inh := documentor umlEntities detect: [ :e | e class = FamixUMLInheritance].
+	inh := documentor umlEntities detect: [ :e | e class = FamixUMLInheritance] ifNone: [nil].
+	self assert: inh isNotNil.
 	self assert: inh source equals: 'Class2'.
 	self assert: inh target equals: 'Class1'.
 ]
@@ -240,15 +353,40 @@ FamixUMLDocumentorTest >> testGenerateUMLInheritance [
 { #category : #'tests - generation' }
 FamixUMLDocumentorTest >> testGenerateUMLUse [
 
-	documentor model: FDModel.
-	documentor onlyClasses: { FDClass1 . FDTrait3 }.
+	| fmClass1 umlClass1 use |
 
-	documentor generate.
+	documentor model: FDModel.
+	fmClass1 := documentor fm3DescriptionOf: FDClass1.
+
+	documentor
+		onlyClasses: { FDClass1 . FDTrait3 } ;
+		generateClass: fmClass1 ;
+		generateClass: (documentor fm3DescriptionOf: FDTrait3).
+
+	self assert: documentor umlEntities size equals: 2.
+
+	umlClass1 := documentor umlEntities first.
+	documentor generateInheritance: fmClass1 uml: umlClass1.
 
 	self assert: documentor umlEntities size equals: 3.
+	
+	use := documentor umlEntities detect: [ :e | e class = FamixUMLUse] ifNone: [nil].
+	self assert: use isNotNil.
+	self assert: use source equals: 'Class1'.
+	self assert: use target equals: 'Trait3'.
+]
 
-	self assert: (documentor umlEntities count: [ :e | e class = FamixUMLClass]) equals: 2.
-	self assert: (documentor umlEntities count: [ :e | e class = FamixUMLUse]) equals: 1.
+{ #category : #'tests - model' }
+FamixUMLDocumentorTest >> testIsStubClass [
+
+	documentor
+		model: FDModel ;
+		onlyClasses: { FDClass1 . FDTrait1 . FDTrait3 }.
+
+	self assert: (documentor userRequestedClass: (documentor fm3DescriptionOf: FDClass1)).
+	self assert: (documentor userRequestedClass: (documentor fm3DescriptionOf: FDTrait1)).
+	self deny: (documentor userRequestedClass: (documentor fm3DescriptionOf: FDClass2)).
+	self deny: (documentor userRequestedClass: (documentor fm3DescriptionOf: FDTrait2)).
 ]
 
 { #category : #'tests - model' }

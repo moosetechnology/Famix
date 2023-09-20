@@ -5,8 +5,7 @@ Class {
 		'withStub',
 		'umlModel',
 		'modelColors',
-		'onlyModelClasses',
-		'fmClasses'
+		'onlyModelClasses'
 	],
 	#category : #'Famix-UMLDocumentor-Generation'
 }
@@ -24,12 +23,27 @@ FamixUMLDocumentor >> beWithoutStub [
 ]
 
 { #category : #private }
+FamixUMLDocumentor >> classesForUML [
+	"if no classes specified, generate the entire meta-model"
+
+	^onlyModelClasses
+		ifNotNil: [
+			onlyModelClasses collect: [ :aClass | self fm3DescriptionOf: aClass ]
+		]
+		ifNil: [
+			modelColors flatCollect: [ :modelColor |
+				(self fm3DescriptionOf: modelColor key) package classes ]
+		]
+
+]
+
+{ #category : #private }
 FamixUMLDocumentor >> colorForEntity: aFMEntity [
 	"find the color of the meta-model associated with aFMEntity
 	 if is a stub, try to find another color"
 
-	(self isStubClass: aFMEntity)
-		ifTrue: [ ^self defaultColor: modelColors size + 1 ].
+	(self userRequestedClass: aFMEntity)
+		ifFalse: [ ^self defaultColor: modelColors size + 1 ].
 
 	^modelColors
 		detect: [ :modelColor |
@@ -48,12 +62,6 @@ FamixUMLDocumentor >> defaultColor: i [
 	^Color perform: ( #(white lightYellow lightGreen veryPaleRed lightBlue lightMagenta lightOrange paleTan lightCyan lightBrown ) at: i )
 ]
 
-{ #category : #testing }
-FamixUMLDocumentor >> entityAlreadyInUMLModel: aFM3Entity [
-
-	^umlModel at: aFM3Entity ifPresent: [true] ifAbsent: [false]
-]
-
 { #category : #api }
 FamixUMLDocumentor >> exportWith: aBackend [
 
@@ -61,9 +69,9 @@ FamixUMLDocumentor >> exportWith: aBackend [
 ]
 
 { #category : #private }
-FamixUMLDocumentor >> fm3: metamodel descriptionOf: anFM3Element [
+FamixUMLDocumentor >> fm3: metamodel descriptionOf: aClass [
 
-	^metamodel descriptionOf: anFM3Element ifAbsent: [ nil ]
+	^metamodel descriptionOf: aClass ifAbsent: [ nil ]
 ]
 
 { #category : #private }
@@ -79,67 +87,44 @@ FamixUMLDocumentor >> fm3DescriptionOf: anFM3Element [
 	^nil
 ]
 
-{ #category : #private }
-FamixUMLDocumentor >> fm3DescriptionsOf: aCollection [
-
-	^aCollection collect: [ :aClass | self fm3DescriptionOf: aClass ]
-]
-
-{ #category : #private }
-FamixUMLDocumentor >> fmClassToUMLClass: aFM3Class [
-
-	| umlClass |
-	umlClass := FamixUMLClass from: aFM3Class.
-	(self isStubClass: aFM3Class) ifTrue: [ umlClass beStub ].
-	umlClass color: (self colorForEntity: aFM3Class).
-
-	umlModel at: aFM3Class put: umlClass.
-	
-	^umlClass
-]
-
-{ #category : #accessing }
-FamixUMLDocumentor >> fmClasses: aCollection [
-	fmClasses addAll: aCollection 
-]
-
 { #category : #api }
 FamixUMLDocumentor >> generate [
 
 	modelColors ifEmpty: [ Error signal: 'no meta-model(s) to work on' ].
 
-	"if no classes specified, generate the entire meta-model"
-	fmClasses := onlyModelClasses
-		ifNil: [ self getClassesFromModels ]
-		ifNotNil: [ self fm3DescriptionsOf: onlyModelClasses ].
+	self classesForUML do: [ :fmClass | self generateClass: fmClass ].
 
-	fmClasses do: [ :class | self generateClass: class ]
+	self umlClassesDo: [ :fmClass :umlClass | self generateInheritance: fmClass uml: umlClass ].
+	self umlClassesDo: [ :fmClass :umlClass | self generateProperties: fmClass uml: umlClass ].
+	self umlClassesDo: [ :fmClass :umlClass | self generateRelations: fmClass uml: umlClass ].
 ]
 
 { #category : #generating }
 FamixUMLDocumentor >> generateClass: aFM3Class [
 
 	| umlClass |
-	(self entityAlreadyInUMLModel: aFM3Class) ifTrue: [ ^self ].
+	(self umlModelIncludes: aFM3Class) ifTrue: [ ^self ].
+	(self shouldGenerateClass: aFM3Class) ifFalse: [ ^self ].
 
-	umlClass := self fmClassToUMLClass: aFM3Class.
+	umlClass := FamixUMLClass from: aFM3Class.
+	(self userRequestedClass: aFM3Class) ifFalse: [ umlClass beStub ].
+	umlClass color: (self colorForEntity: aFM3Class).
 
-	self generateProperties: umlClass fromFMClass: aFM3Class.
-	self generateInheritancesFromFMClass: aFM3Class
+	umlModel at: aFM3Class put: umlClass.
+
+	umlClass isStub
+	ifFalse: [
+		self generateSuperClasses: aFM3Class
+	]
+	
 ]
 
 { #category : #generating }
 FamixUMLDocumentor >> generateInheritance: umlLink sub: aFMSubClass super: aFMSuperClass [
-	"only generates inheritance if both ends are in the UML model and it has not be generated yet
-	 make sure both classes (or Trait) exist before creating the link (recursive call)
-	 Note that #generateClass: tests that the class is not already generated before doing anything"
 
-	(self shouldBeInUMLModel: aFMSubClass) ifFalse: [ ^ self ].
-	(self shouldBeInUMLModel: aFMSuperClass) ifFalse: [ ^ self ].
-	(self entityAlreadyInUMLModel: (aFMSubClass -> aFMSuperClass)) ifTrue: [ ^self ].
-
-	self generateClass: aFMSubClass.
-	self generateClass: aFMSuperClass.
+	(self shouldGenerateClass: aFMSubClass) ifFalse: [ ^ self ].
+	(self shouldGenerateClass: aFMSuperClass) ifFalse: [ ^ self ].
+	(self umlModelIncludes: (aFMSubClass -> aFMSuperClass)) ifTrue: [ ^self ].
 
 	umlModel
 		at: (aFMSubClass -> aFMSuperClass)
@@ -147,89 +132,75 @@ FamixUMLDocumentor >> generateInheritance: umlLink sub: aFMSubClass super: aFMSu
 ]
 
 { #category : #generating }
-FamixUMLDocumentor >> generateInheritancesFromFMClass: aFM3Class [
+FamixUMLDocumentor >> generateInheritance: fmClass uml: umlClass [
 
-	aFM3Class isFM3Trait
-		ifFalse: [
-			self
-				generateInheritance: FamixUMLInheritance
-				sub: aFM3Class
-				super: aFM3Class superclass ].
+	fmClass isFM3Trait
+	ifFalse: [
+		self
+			generateInheritance: FamixUMLInheritance
+			sub: fmClass
+			super: fmClass superclass ].
 
-	aFM3Class implementingClass traits do: [ :trait |
+	fmClass implementingClass traits
+	do: [ :trait |
 		self 
 			generateInheritance: FamixUMLUse
-			sub: aFM3Class
+			sub: fmClass
 			super: (self fm3DescriptionOf: trait) ].
 ]
 
 { #category : #generating }
-FamixUMLDocumentor >> generateProperties: umlClass fromFMClass: aFM3Class [
+FamixUMLDocumentor >> generateProperties: aFMClass uml: umlClass [
 
-	aFM3Class primitiveProperties do: [ :prop | self generateProperty: prop in: umlClass ].
-	aFM3Class complexProperties do: [ :rel | self generateRelation: rel for: umlClass ].
+	aFMClass primitiveProperties do: [ :prop |
+		umlClass addProperty: (FamixUMLProperty from: prop) ].
+
 ]
 
 { #category : #generating }
-FamixUMLDocumentor >> generateProperty: aFMProperty in: aUMLClass [
-	aUMLClass addProperty: (FamixUMLProperty from: aFMProperty)
-]
-
-{ #category : #generating }
-FamixUMLDocumentor >> generateRelation: aFMProperty for: aUMLClass [
-	"assumes owner of perperty should be in uml model
-	 only generates relation if other end should be in the UML model
-	  and the relation has not be generated yet and its opposite has not been generated either
-	 make sure other end exist before creating the link (recursive call)
-	 Note that #generateClass: tests that the class is not already generated before doing anything"
+FamixUMLDocumentor >> generateRelation: aFMProperty from: fmClass [
 
 	| relatedClass |
 
 	relatedClass := aFMProperty type.
 	
-	(self shouldBeInUMLModel: relatedClass) ifFalse: [ ^ self ].
-	(self relationAlreadyInUMLModel: aFMProperty) ifTrue: [ ^ self ].
-
-	self generateClass: relatedClass.	
+	(self umlModelIncludes: fmClass) ifFalse: [ ^ self ].
+	(self umlModelIncludes: relatedClass) ifFalse: [ ^ self ].
+	(self umlModelIncludesRelation: aFMProperty) ifTrue: [ ^ self ].
 
 	umlModel at: aFMProperty put: (FamixUMLAssociation from: aFMProperty).
 
 ]
 
-{ #category : #private }
-FamixUMLDocumentor >> getClassesFromModels [
+{ #category : #generating }
+FamixUMLDocumentor >> generateRelations: fmClass uml: umlClass [
+	"umlClass actually not needed, but kept for coherence with other method names"
 
-	^modelColors flatCollect: [ :modelColor |
-		(self fm3DescriptionOf: modelColor key) package classes ]
+	fmClass complexProperties do: [ :rel |
+		self generateRelation: rel from: fmClass ].
+]
+
+{ #category : #generating }
+FamixUMLDocumentor >> generateSuperClasses: aFM3Class [
+	
+	aFM3Class isFM3Trait
+	ifFalse: [self generateClass: aFM3Class superclass].
+
+	aFM3Class implementingClass traits
+	do: [ :trait | self generateClass: (self fm3DescriptionOf: trait) ].
 ]
 
 { #category : #initialization }
 FamixUMLDocumentor >> initialize [
 	super initialize.
 
-	fmClasses := Set new.
-	"3 seems like a good default maximum value for the model we want to document"
+	"3 seems like a good default maximum size for the models we want to document"
 	modelColors := OrderedCollection new: 3.
 	umlModel := Dictionary new.
 	self beWithoutStub.
 ]
 
-{ #category : #api }
-FamixUMLDocumentor >> initializeClassesToShow [
-
-	fmClasses := onlyModelClasses
-		             ifNil: [ self getClassesFromModels ]
-		             ifNotNil: [ self fm3DescriptionsOf: onlyModelClasses ]
-]
-
-{ #category : #testing }
-FamixUMLDocumentor >> isStubClass: aFMClass [
-	"aFMClass is a model class to export"
-
-	^(fmClasses includes: aFMClass) not
-]
-
-{ #category : #testing }
+{ #category : #accessing }
 FamixUMLDocumentor >> isWithStub [
 
 	^withStub
@@ -267,25 +238,56 @@ FamixUMLDocumentor >> onlyClasses: aCollection [
 ]
 
 { #category : #testing }
-FamixUMLDocumentor >> relationAlreadyInUMLModel: aFMRelation [
-
-	(self entityAlreadyInUMLModel: aFMRelation) ifTrue: [ ^true ].
-	
-	aFMRelation hasOpposite ifFalse: [ ^false ].
-	
-	^(self entityAlreadyInUMLModel: aFMRelation opposite)
-]
-
-{ #category : #testing }
-FamixUMLDocumentor >> shouldBeInUMLModel: aFMClass [
+FamixUMLDocumentor >> shouldGenerateClass: aFMClass [
+	"should generate if user asked for stub (except for Object)
+	 or if user asked for this class"
 
 	^ self isWithStub
 		  ifTrue: [ aFMClass class ~= FM3Object ]
-		  ifFalse: [ (self isStubClass: aFMClass) not ]
+		  ifFalse: [ self userRequestedClass: aFMClass ]
+]
+
+{ #category : #private }
+FamixUMLDocumentor >> umlClassesDo: aBlock [
+	"aBlock takes 2 argument: fmClass and corresponding umlClass.
+	It is applied on all mathcing pairs in umlModel"
+
+	^umlModel keysAndValuesDo: [ :fmEntity :umlEntity |
+		(umlEntity class = FamixUMLClass)
+			ifTrue: [ aBlock value: fmEntity value: umlEntity ]
+	]
 ]
 
 { #category : #accessing }
 FamixUMLDocumentor >> umlEntities [
 
 	^umlModel values
+]
+
+{ #category : #testing }
+FamixUMLDocumentor >> umlModelIncludes: aFM3Entity [
+
+	^umlModel at: aFM3Entity ifPresent: [true] ifAbsent: [false]
+]
+
+{ #category : #testing }
+FamixUMLDocumentor >> umlModelIncludesRelation: aFMRelation [
+
+	(self umlModelIncludes: aFMRelation) ifTrue: [ ^true ].
+	
+	aFMRelation hasOpposite ifFalse: [ ^false ].
+	
+	^(self umlModelIncludes: aFMRelation opposite)
+]
+
+{ #category : #testing }
+FamixUMLDocumentor >> userRequestedClass: aFMClass [
+	"requested by uiser if:
+	 - is in onlyClasses
+	 - onlyClasses is empty and is a class from one of requested models"
+
+	^onlyModelClasses
+		ifNil: [ modelColors anySatisfy: [:modelColor | (self fm3DescriptionOf: modelColor key) package classes includes: aFMClass] ]
+		ifNotNil: [ onlyModelClasses includes: aFMClass implementingClass ].
+
 ]
