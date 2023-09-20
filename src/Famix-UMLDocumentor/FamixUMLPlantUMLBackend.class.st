@@ -1,6 +1,6 @@
 Class {
 	#name : #FamixUMLPlantUMLBackend,
-	#superclass : #FamixUMLAbstractBackend,
+	#superclass : #FamixUMLDummyBackend,
 	#category : #'Famix-UMLDocumentor-Backend'
 }
 

@@ -1,6 +1,6 @@
 Class {
 	#name : #FamixUMLMermaidBackend,
-	#superclass : #FamixUMLAbstractBackend,
+	#superclass : #FamixUMLDummyBackend,
 	#category : #'Famix-UMLDocumentor-Backend'
 }
 

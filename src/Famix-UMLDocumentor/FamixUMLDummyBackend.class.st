@@ -4,7 +4,7 @@ I offer methods to output a UML diagram according to a specif backend.
 The backends are implemented as subclasses
 "
 Class {
-	#name : #FamixUMLAbstractBackend,
+	#name : #FamixUMLDummyBackend,
 	#superclass : #Object,
 	#instVars : [
 		'outputStream'
@@ -13,7 +13,7 @@ Class {
 }
 
 { #category : #api }
-FamixUMLAbstractBackend >> export: entities [
+FamixUMLDummyBackend >> export: entities [
 	"for readibility of results, entities are grouped according to their class"
 
 	self generateHeader.
@@ -29,14 +29,14 @@ FamixUMLAbstractBackend >> export: entities [
 ]
 
 { #category : #generating }
-FamixUMLAbstractBackend >> generateAssociation: association [
+FamixUMLDummyBackend >> generateAssociation: association [
 
 	outputStream 
 		<< association asString
 ]
 
 { #category : #generating }
-FamixUMLAbstractBackend >> generateClass: aClass [
+FamixUMLDummyBackend >> generateClass: aClass [
 
 	self generateClassHeader: aClass.
 	self generateClassProperties: aClass.
@@ -44,14 +44,14 @@ FamixUMLAbstractBackend >> generateClass: aClass [
 ]
 
 { #category : #generating }
-FamixUMLAbstractBackend >> generateClassFooter: aUMLClass [
+FamixUMLDummyBackend >> generateClassFooter: aUMLClass [
 
 	outputStream
 		cr.
 ]
 
 { #category : #generating }
-FamixUMLAbstractBackend >> generateClassHeader: aClass [
+FamixUMLDummyBackend >> generateClassHeader: aClass [
 
 	outputStream
 		<< 'aUMLClass: ' ;
@@ -59,13 +59,13 @@ FamixUMLAbstractBackend >> generateClassHeader: aClass [
 ]
 
 { #category : #generating }
-FamixUMLAbstractBackend >> generateClassProperties: aClass [
+FamixUMLDummyBackend >> generateClassProperties: aClass [
 
 	aClass properties do: [ :prop | self generateProperty: prop ].
 ]
 
 { #category : #generating }
-FamixUMLAbstractBackend >> generateClasses: entities [
+FamixUMLDummyBackend >> generateClasses: entities [
 
 	entities do: [ :each |
 		(each class = FamixUMLClass)
@@ -74,17 +74,17 @@ FamixUMLAbstractBackend >> generateClasses: entities [
 ]
 
 { #category : #generating }
-FamixUMLAbstractBackend >> generateFooter [
+FamixUMLDummyBackend >> generateFooter [
 
 ]
 
 { #category : #generating }
-FamixUMLAbstractBackend >> generateHeader [
+FamixUMLDummyBackend >> generateHeader [
 
 ]
 
 { #category : #generating }
-FamixUMLAbstractBackend >> generateInheritance: inheritance [
+FamixUMLDummyBackend >> generateInheritance: inheritance [
 
 	outputStream
 		<< inheritance source ;
@@ -94,7 +94,7 @@ FamixUMLAbstractBackend >> generateInheritance: inheritance [
 ]
 
 { #category : #generating }
-FamixUMLAbstractBackend >> generateInheritances: entities [
+FamixUMLDummyBackend >> generateInheritances: entities [
 
 	entities do: [ :each |
 		(each class = FamixUMLInheritance)
@@ -103,7 +103,7 @@ FamixUMLAbstractBackend >> generateInheritances: entities [
 ]
 
 { #category : #generating }
-FamixUMLAbstractBackend >> generateProperty: property [
+FamixUMLDummyBackend >> generateProperty: property [
 
 	outputStream
 		<< '  ' ;
@@ -114,7 +114,7 @@ FamixUMLAbstractBackend >> generateProperty: property [
 ]
 
 { #category : #generating }
-FamixUMLAbstractBackend >> generateRelations: entities [
+FamixUMLDummyBackend >> generateRelations: entities [
 
 	entities do: [ :each |
 		(each class = FamixUMLAssociation)
@@ -123,7 +123,7 @@ FamixUMLAbstractBackend >> generateRelations: entities [
 ]
 
 { #category : #generating }
-FamixUMLAbstractBackend >> generateUse: aUseLink [
+FamixUMLDummyBackend >> generateUse: aUseLink [
 
 	outputStream
 		<< aUseLink source ;
@@ -133,7 +133,7 @@ FamixUMLAbstractBackend >> generateUse: aUseLink [
 ]
 
 { #category : #generating }
-FamixUMLAbstractBackend >> generateUses: entities [
+FamixUMLDummyBackend >> generateUses: entities [
 
 	entities do: [ :each |
 		(each class = FamixUMLUse)
@@ -142,7 +142,7 @@ FamixUMLAbstractBackend >> generateUses: entities [
 ]
 
 { #category : #initialization }
-FamixUMLAbstractBackend >> initialize [
+FamixUMLDummyBackend >> initialize [
 
 	super initialize.
 
@@ -150,13 +150,13 @@ FamixUMLAbstractBackend >> initialize [
 ]
 
 { #category : #accessing }
-FamixUMLAbstractBackend >> outputStream [
+FamixUMLDummyBackend >> outputStream [
 
 	^ outputStream
 ]
 
 { #category : #accessing }
-FamixUMLAbstractBackend >> outputStream: anObject [
+FamixUMLDummyBackend >> outputStream: anObject [
 
 	outputStream := anObject
 ]
