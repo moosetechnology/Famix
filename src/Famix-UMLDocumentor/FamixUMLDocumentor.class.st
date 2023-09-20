@@ -1,3 +1,23 @@
+"
+A Tool to generate an UML representation of Famix meta-models
+
+Simple use:
+```
+FamixUMLDocumentor new
+  model: FamixStModel ;
+  generate ;
+  exportWith: (FamixUMLPlantUMLBackend new).
+```
+
+API:
+- `model:` adds a metamodel to export (entities of the model will have a color to it)
+- `model:color:` same but specify a color to use for the entities of this model
+- `onlyClasses:` list of the only classes (from the specifed meta-model) to export (other classes from the meta-model will not be exported (except with `beWithStub`)
+- `beWithStub` also export the super-classes and used traits of classes exported, even if these super-classes/traits or not part of the models. These stubs have a specific color.
+- `beWithoutStub` opposite of the preceding, default option
+- `generate` creates an internal representation of a UML class diagram according to the options given before
+- `exportWith:` exports the internal representation with the ""backend"" given (see `FamixUMLDummyBackend`)
+"
 Class {
 	#name : #FamixUMLDocumentor,
 	#superclass : #Object,
