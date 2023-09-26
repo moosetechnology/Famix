@@ -78,6 +78,26 @@ FamixUMLDocumentorTest >> testColorForEntity [
 ]
 
 { #category : #'tests - generation' }
+FamixUMLDocumentorTest >> testExcludeClasses [
+
+	| entity |
+	documentor
+		model: FDModel ;
+		excludeClasses: { FDTrait1 . FDTrait2 . FDTrait3 . FDTrait4 } ;
+		generate.
+
+
+	self assert: (documentor umlEntities count: [:e | e class = FamixUMLClass]) equals: 5.
+	entity := documentor umlEntities detect: [ :e |
+		(e class = FamixUMLClass) and: [ e name = 'Class1' ] ] ifNone: [nil].
+	self assert: entity isNotNil.
+	entity := documentor umlEntities detect: [ :e |
+		(e class = FamixUMLClass) and: [ e name = 'Class2' ] ] ifNone: [nil].
+	self assert: entity isNotNil.
+
+]
+
+{ #category : #'tests - generation' }
 FamixUMLDocumentorTest >> testGenerateClass [
 
 	| fmClass umlClass |

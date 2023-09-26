@@ -25,7 +25,8 @@ Class {
 		'withStub',
 		'umlModel',
 		'modelColors',
-		'onlyModelClasses'
+		'onlyModelClasses',
+		'excludeModelClasses'
 	],
 	#category : #'Famix-UMLDocumentor-Generation'
 }
@@ -80,6 +81,12 @@ FamixUMLDocumentor >> defaultColor: i [
 	"note: colors chosen from Color class>>#defaultColors3"
 
 	^Color perform: ( #(white lightYellow lightGreen veryPaleRed lightBlue lightMagenta lightOrange paleTan lightCyan lightBrown ) at: i )
+]
+
+{ #category : #api }
+FamixUMLDocumentor >> excludeClasses: aCollection [
+
+	excludeModelClasses := aCollection
 ]
 
 { #category : #api }
@@ -217,6 +224,7 @@ FamixUMLDocumentor >> initialize [
 	"3 seems like a good default maximum size for the models we want to document"
 	modelColors := OrderedCollection new: 3.
 	umlModel := Dictionary new.
+	excludeModelClasses := #().
 	self beWithoutStub.
 ]
 
@@ -260,9 +268,11 @@ FamixUMLDocumentor >> onlyClasses: aCollection [
 { #category : #testing }
 FamixUMLDocumentor >> shouldGenerateClass: aFMClass [
 	"should generate if user asked for stub (except for Object)
-	 or if user asked for this class"
+	 or if user asked for this class
+	nil parameter could happen with some stub classes"
 
-	^ self isWithStub
+	aFMClass ifNil: [ ^false ].
+	^self isWithStub
 		  ifTrue: [ aFMClass class ~= FM3Object ]
 		  ifFalse: [ self userRequestedClass: aFMClass ]
 ]
@@ -302,12 +312,18 @@ FamixUMLDocumentor >> umlModelIncludesRelation: aFMRelation [
 
 { #category : #testing }
 FamixUMLDocumentor >> userRequestedClass: aFMClass [
-	"requested by uiser if:
+	"requested by user if:
+	 - is not explicitly excluded
 	 - is in onlyClasses
 	 - onlyClasses is empty and is a class from one of requested models"
 
-	^onlyModelClasses
-		ifNil: [ modelColors anySatisfy: [:modelColor | (self fm3DescriptionOf: modelColor key) package classes includes: aFMClass] ]
-		ifNotNil: [ onlyModelClasses includes: aFMClass implementingClass ].
+	(excludeModelClasses includes: aFMClass implementingClass)
+		ifTrue: [ ^false ].
+	
+	onlyModelClasses
+		ifNotNil: [ ^onlyModelClasses includes: aFMClass implementingClass ].
+
+	^modelColors anySatisfy: [:modelColor | (self fm3DescriptionOf: modelColor key) package classes includes: aFMClass]
+		
 
 ]
