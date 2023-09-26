@@ -82,7 +82,6 @@ skinparam class {
   BackgroundColor white
   ArrowColor black
   BorderColor darkGray
-  BorderColor<<External>> LightGray
 }' ;
 	cr
 ]
