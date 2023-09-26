@@ -19,7 +19,7 @@ FamixMetaModelClassesShouldNotOverrideRule >> checkClass: aContext [
 	
 	(self metaModelClasses includes: class) 
 		ifTrue: [
-			self selectorsThatShouldNotBeOverriden do: [:each |
+			self selectorsThatShouldNotBeOverridden do: [:each |
 				(class includesSelector: each)
 					ifTrue: [
 						result addClass: class  selector: each
@@ -49,11 +49,11 @@ FamixMetaModelClassesShouldNotOverrideRule >> name [
 { #category : #accessing }
 FamixMetaModelClassesShouldNotOverrideRule >> rationale [
 
-	^ 'check if a metamodel class (MooseEntity and all its subclasses) override some methods that it should not override. Those methods are specified by FamixMetaModelClassesShouldNotOverrideRule >> selectorsThatShouldNotBeOverriden'
+	^ 'check if a metamodel class (MooseEntity and all its subclasses) override some methods that it should not override. Those methods are specified by FamixMetaModelClassesShouldNotOverrideRule >> selectorsThatShouldNotBeOverridden'
 ]
 
 { #category : #accessing }
-FamixMetaModelClassesShouldNotOverrideRule >> selectorsThatShouldNotBeOverriden [
+FamixMetaModelClassesShouldNotOverrideRule >> selectorsThatShouldNotBeOverridden [
 
 	^ #(#mooseName #printString)
 ]

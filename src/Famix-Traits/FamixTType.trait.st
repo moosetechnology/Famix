@@ -93,7 +93,7 @@ FamixTType >> typeContainer [
 	"Relation named: #typeContainer type: #FamixTWithTypes opposite: #types"
 
 	<generated>
-	<FMComment: 'Container entity to which this type belongs to. Container is a namespace, not a package (Smalltalk).'>
+	<FMComment: 'Container entity to which this type belongs. Container is a namespace, not a package (Smalltalk).'>
 	<container>
 	^ typeContainer
 ]

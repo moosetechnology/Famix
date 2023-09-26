@@ -273,6 +273,12 @@ FmxMBBehavior >> initialize [
 ]
 
 { #category : #testing }
+FmxMBBehavior >> isEntityCreatorTrait [
+
+	^ false
+]
+
+{ #category : #testing }
 FmxMBBehavior >> isMetamodelClass [
 
 	^ false

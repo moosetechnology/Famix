@@ -262,8 +262,6 @@ MooseModel class >> importMetamodelFrom: aStream [
 { #category : #meta }
 MooseModel class >> metamodel [
 
-	self flag: #TODO. "The next line is a hack to not break everything in Moose. It should be removed later."
-	self = MooseModel ifTrue: [ ^ FamixStModel metamodel ].
 	^ metamodel ifNil: [ self resetMetamodel ]
 ]
 
@@ -436,11 +434,14 @@ MooseModel >> deadCodeRate [
 MooseModel >> detectEncodingOfAllFileAnchors [
 	"I can be execute to reduce the time of detection of the encoding of each file anchor because multiple file anchor can point to the same file."
 
-	(((self allUsing: FamixTFileAnchor) asOrderedCollection reject: #privateHasEncoding) groupedBy: #fileName)
-		valuesDo: [ :anchors | 
-			| encoding |
-			encoding := anchors anyOne detectEncoding.
-			anchors do: [ :anchor | anchor encoding: encoding ] ]
+	(((self select: [ :entity |
+		   [ entity isFileAnchor ]
+			   on: MessageNotUnderstood
+			   do: [ false ] ]) asOrderedCollection reject: #privateHasEncoding)
+		 groupedBy: #fileName) valuesDo: [ :anchors |
+		| encoding |
+		encoding := anchors anyOne detectEncoding.
+		anchors do: [ :anchor | anchor encoding: encoding ] ]
 ]
 
 { #category : #'set operations' }

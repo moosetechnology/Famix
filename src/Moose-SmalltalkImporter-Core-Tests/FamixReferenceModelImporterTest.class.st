@@ -20,17 +20,24 @@ FamixReferenceModelImporterTest >> model [
 
 { #category : #'reference model access' }
 FamixReferenceModelImporterTest >> privateTestAccessingVar: aVarName from: aMethodName shouldBeRead: aBoolean hasAccessesSize: anInteger [
+
 	| methodName var access |
 	methodName := self model allMethods entityNamed: aMethodName.
 	var := (self model allUsing: FamixTAccessible) entityNamed: aVarName.
-	self assert: (var incomingAccesses select: [ :each | each accessor = methodName ]) size equals: anInteger.
-	access := (var incomingAccesses select: [ :each | each accessor = methodName ]) first.
-	self assert: access isRead identicalTo: aBoolean.
-	self assert: access isWrite ~~ aBoolean
+	self
+		assert:
+			(var incomingAccesses select: [ :each | each accessor = methodName ])
+				size
+		equals: anInteger.
+	access := (var incomingAccesses select: [ :each |
+		           each accessor = methodName ]) first.
+	self assert: access isRead equals: aBoolean.
+	self deny: access isWrite equals: aBoolean
 ]
 
 { #category : #running }
 FamixReferenceModelImporterTest >> setUp [
+
 	super setUp.
 	referenceModelSubRootLevelOneName := SubRootLevelOne mooseName.
 	referenceModelTheRootName := TheRoot mooseName
@@ -786,6 +793,7 @@ FamixReferenceModelImporterTest >> testTheRootInheritsFromUIModel [
 
 { #category : #tests }
 FamixReferenceModelImporterTest >> testUnknownVariableAccess [
+
 	self
 		privateTestAccessingVar: #undeclaredStubInstVar
 		from: #'Smalltalk::TheRoot.accessingUnknowVariable()'

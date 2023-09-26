@@ -6,7 +6,7 @@ Class {
 
 { #category : #setup }
 FamixReferenceModelNamespaceTestResource >> importModel [
-	
+
 	MoosePharoImporterTask new
 		importerClass: SmalltalkImporter;
 		model: model;
@@ -15,5 +15,5 @@ FamixReferenceModelNamespaceTestResource >> importModel [
 		addFromPackageNamed: #'Moose-TestResources-Reference-PackageOne';
 		addFromPackageNamed: #'Moose-TestResources-Reference-PackageTwo';
 		run;
-		yourself  
+		yourself
 ]
