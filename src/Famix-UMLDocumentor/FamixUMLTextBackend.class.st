@@ -1,11 +1,11 @@
 "
-I offer methods to output a UML diagram according to a specif backend.
+I output the model in a text form
 
-The backends are implemented as subclasses
+I can outpout in a stream or in a file
 "
 Class {
-	#name : #FamixUMLDummyBackend,
-	#superclass : #Object,
+	#name : #FamixUMLTextBackend,
+	#superclass : #FamixUMLAbstractBackend,
 	#instVars : [
 		'outputStream'
 	],
@@ -13,7 +13,7 @@ Class {
 }
 
 { #category : #api }
-FamixUMLDummyBackend >> export: entities [
+FamixUMLTextBackend >> export: entities [
 	"for readibility of results, entities are grouped according to their class"
 
 	self generateHeader.
@@ -33,14 +33,14 @@ FamixUMLDummyBackend >> export: entities [
 ]
 
 { #category : #generating }
-FamixUMLDummyBackend >> generateAssociation: association [
+FamixUMLTextBackend >> generateAssociation: association [
 
 	outputStream 
 		<< association asString
 ]
 
 { #category : #generating }
-FamixUMLDummyBackend >> generateClass: aClass [
+FamixUMLTextBackend >> generateClass: aClass [
 
 	self generateClassHeader: aClass.
 	self generateClassProperties: aClass.
@@ -48,14 +48,14 @@ FamixUMLDummyBackend >> generateClass: aClass [
 ]
 
 { #category : #generating }
-FamixUMLDummyBackend >> generateClassFooter: aUMLClass [
+FamixUMLTextBackend >> generateClassFooter: aUMLClass [
 
 	outputStream
 		cr.
 ]
 
 { #category : #generating }
-FamixUMLDummyBackend >> generateClassHeader: aClass [
+FamixUMLTextBackend >> generateClassHeader: aClass [
 
 	outputStream
 		<< 'aUMLClass: ' ;
@@ -63,13 +63,13 @@ FamixUMLDummyBackend >> generateClassHeader: aClass [
 ]
 
 { #category : #generating }
-FamixUMLDummyBackend >> generateClassProperties: aClass [
+FamixUMLTextBackend >> generateClassProperties: aClass [
 
 	aClass properties do: [ :prop | self generateProperty: prop ].
 ]
 
 { #category : #generating }
-FamixUMLDummyBackend >> generateClasses: entities [
+FamixUMLTextBackend >> generateClasses: entities [
 
 	entities do: [ :each |
 		(each class = FamixUMLClass)
@@ -78,17 +78,17 @@ FamixUMLDummyBackend >> generateClasses: entities [
 ]
 
 { #category : #generating }
-FamixUMLDummyBackend >> generateFooter [
+FamixUMLTextBackend >> generateFooter [
 
 ]
 
 { #category : #generating }
-FamixUMLDummyBackend >> generateHeader [
+FamixUMLTextBackend >> generateHeader [
 
 ]
 
 { #category : #generating }
-FamixUMLDummyBackend >> generateInheritance: inheritance [
+FamixUMLTextBackend >> generateInheritance: inheritance [
 
 	outputStream
 		<< inheritance source ;
@@ -98,7 +98,7 @@ FamixUMLDummyBackend >> generateInheritance: inheritance [
 ]
 
 { #category : #generating }
-FamixUMLDummyBackend >> generateInheritances: entities [
+FamixUMLTextBackend >> generateInheritances: entities [
 
 	entities do: [ :each |
 		(each class = FamixUMLInheritance)
@@ -107,7 +107,7 @@ FamixUMLDummyBackend >> generateInheritances: entities [
 ]
 
 { #category : #generating }
-FamixUMLDummyBackend >> generateProperty: property [
+FamixUMLTextBackend >> generateProperty: property [
 
 	outputStream
 		<< '  ' ;
@@ -118,7 +118,7 @@ FamixUMLDummyBackend >> generateProperty: property [
 ]
 
 { #category : #generating }
-FamixUMLDummyBackend >> generateRelations: entities [
+FamixUMLTextBackend >> generateRelations: entities [
 
 	entities do: [ :each |
 		(each class = FamixUMLAssociation)
@@ -127,7 +127,7 @@ FamixUMLDummyBackend >> generateRelations: entities [
 ]
 
 { #category : #generating }
-FamixUMLDummyBackend >> generateUse: aUseLink [
+FamixUMLTextBackend >> generateUse: aUseLink [
 
 	outputStream
 		<< aUseLink source ;
@@ -137,7 +137,7 @@ FamixUMLDummyBackend >> generateUse: aUseLink [
 ]
 
 { #category : #generating }
-FamixUMLDummyBackend >> generateUses: entities [
+FamixUMLTextBackend >> generateUses: entities [
 
 	entities do: [ :each |
 		(each class = FamixUMLUse)
@@ -146,7 +146,7 @@ FamixUMLDummyBackend >> generateUses: entities [
 ]
 
 { #category : #initialization }
-FamixUMLDummyBackend >> initialize [
+FamixUMLTextBackend >> initialize [
 
 	super initialize.
 
@@ -154,19 +154,19 @@ FamixUMLDummyBackend >> initialize [
 ]
 
 { #category : #accessing }
-FamixUMLDummyBackend >> outputStream [
+FamixUMLTextBackend >> outputStream [
 
 	^ outputStream
 ]
 
 { #category : #accessing }
-FamixUMLDummyBackend >> outputStream: anObject [
+FamixUMLTextBackend >> outputStream: anObject [
 
 	outputStream := anObject
 ]
 
 { #category : #api }
-FamixUMLDummyBackend >> toFile: filename [
+FamixUMLTextBackend >> toFile: filename [
 
 	outputStream := filename asFileReference writeStream
 ]
