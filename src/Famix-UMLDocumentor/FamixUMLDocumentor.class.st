@@ -227,7 +227,7 @@ FamixUMLDocumentor >> initialize [
 	modelColors := OrderedCollection new: 3.
 	umlModel := Dictionary new.
 	excludeModelClasses := #().
-	self beWithoutStub.
+	self beWithoutStubs.
 ]
 
 { #category : #accessing }
@@ -269,13 +269,13 @@ FamixUMLDocumentor >> onlyClasses: aCollection [
 
 { #category : #testing }
 FamixUMLDocumentor >> shouldGenerateClass: aFMClass [
-	"should generate if user asked for stub (except for Object)
+	"should generate if user asked for stub (except for explicitly excluded classes)
 	 or if user asked for this class
 	nil parameter could happen with some stub classes"
 
 	aFMClass ifNil: [ ^false ].
 	^self isWithStub
-		  ifTrue: [ aFMClass class ~= FM3Object ]
+		  ifTrue: [ (excludeModelClasses includes: aFMClass implementingClass) not ]
 		  ifFalse: [ self userRequestedClass: aFMClass ]
 ]
 

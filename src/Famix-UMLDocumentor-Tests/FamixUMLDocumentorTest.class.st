@@ -94,6 +94,23 @@ FamixUMLDocumentorTest >> testExcludeClasses [
 ]
 
 { #category : #'tests - generation' }
+FamixUMLDocumentorTest >> testExcludeClassesWithStub [
+
+	documentor
+		model: FDModel ;
+		excludeClasses: { FDTrait1 . FDTrait2 . FDTrait3 . FDTrait4 } ;
+		beWithStubs ;
+		generate.
+
+	self assert:
+		(documentor umlEntities count: [ :e |
+			(e class = FamixUMLClass) and:
+			[ e name beginsWith: 'Trait' ] ])
+	equals: 0.
+
+]
+
+{ #category : #'tests - generation' }
 FamixUMLDocumentorTest >> testGenerateClass [
 
 	| fmClass umlClass |
