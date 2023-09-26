@@ -30,14 +30,12 @@ FamixUMLDocumentorTest >> testBeWithStub [
 	self assert: documentor isWithStub.
 	self assert: documentor umlEntities size equals: 2.
 
-	entity := documentor umlEntities first.
-	self assert: entity class equals: FamixUMLClass.
-	self assert: entity name equals: 'Trait3'.
+	entity := documentor umlEntities detect: [:e | (e class = FamixUMLClass) and: [e name = 'Trait3']] ifNone: [nil].
+	self assert: entity isNotNil.
 	self deny: entity isStub.
 
-	entity := documentor umlEntities second.
-	self assert: entity class equals: FamixUMLClass.
-	self assert: entity name equals: 'Trait2'.
+	entity := documentor umlEntities detect: [:e | (e class = FamixUMLClass) and: [e name = 'Trait2']] ifNone: [nil].
+	self assert: entity isNotNil.
 	self assert: entity isStub.
 
 	self deny: documentor umlEntities first color equals: documentor umlEntities second color.
