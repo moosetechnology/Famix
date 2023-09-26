@@ -97,7 +97,7 @@ FamixUMLPlantUMLBackendTest >> testGenerateAssociationRole [
 	backend generateAssociation: umlLink.
 
 	self assert: backend outputStream contents equals:
-'ClassA "roll" -- "lol" ClassB
+'ClassA "lol" -- "roll" ClassB
 '
 ]
 
