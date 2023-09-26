@@ -279,10 +279,10 @@ BaselineOfFamix >> packages: spec [
 		with: [
 			spec requires: #( 'Core' 'ModelJava' 'ModelSmalltalk'
 				   'Tests' ) ];
-		package: 'Famix-MetamodelDocumentor' with: [
+		package: 'Famix-UMLDocumentor' with: [
 			spec requires:
-					#( 'Core' 'TestModels' 'Famix-TestModel1MetamodelDocumentor' ) ];
-		package: 'Famix-TestModel1MetamodelDocumentor'
+					#( 'Core' 'TestModels' 'FamixDocumentor-TestMetaModel-Entities' ) ];
+		package: 'FamixDocumentor-TestMetaModel-Entities'
 		with: [ spec requires: #( 'Core' ) ]
 ]
 
