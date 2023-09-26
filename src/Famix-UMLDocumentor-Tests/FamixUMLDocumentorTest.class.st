@@ -24,7 +24,7 @@ FamixUMLDocumentorTest >> testBeWithStub [
 	documentor
 		model: FDModel ;
 		onlyClasses: { FDTrait3 } ;
-		beWithStub ;
+		beWithStubs ;
 		generateClass: (documentor fm3DescriptionOf: FDTrait3).
 
 	self assert: documentor isWithStub.
@@ -51,7 +51,7 @@ FamixUMLDocumentorTest >> testBeWithoutStub [
 	documentor
 		model: FDModel ;
 		onlyClasses: { FDTrait2 } ;
-		beWithoutStub ;
+		beWithoutStubs ;
 		generateClass: (documentor fm3DescriptionOf: FDTrait2).
 
 	self deny: documentor isWithStub.
@@ -80,20 +80,16 @@ FamixUMLDocumentorTest >> testColorForEntity [
 { #category : #'tests - generation' }
 FamixUMLDocumentorTest >> testExcludeClasses [
 
-	| entity |
 	documentor
 		model: FDModel ;
 		excludeClasses: { FDTrait1 . FDTrait2 . FDTrait3 . FDTrait4 } ;
 		generate.
 
-
-	self assert: (documentor umlEntities count: [:e | e class = FamixUMLClass]) equals: 5.
-	entity := documentor umlEntities detect: [ :e |
-		(e class = FamixUMLClass) and: [ e name = 'Class1' ] ] ifNone: [nil].
-	self assert: entity isNotNil.
-	entity := documentor umlEntities detect: [ :e |
-		(e class = FamixUMLClass) and: [ e name = 'Class2' ] ] ifNone: [nil].
-	self assert: entity isNotNil.
+	self assert:
+		(documentor umlEntities count: [ :e |
+			(e class = FamixUMLClass) and:
+			[ e name beginsWith: 'Trait' ] ])
+	equals: 0.
 
 ]
 
@@ -212,7 +208,7 @@ FamixUMLDocumentorTest >> testGenerateRelationSourceStub [
 
 	documentor
 		onlyClasses: { FDClass1 } ;
-		beWithStub ;
+		beWithStubs ;
 		generateClass: fmClass1 ;
 		generateClass: (documentor fm3DescriptionOf: FDTrait4 ).
 
@@ -253,7 +249,7 @@ FamixUMLDocumentorTest >> testGenerateRelationSourceTargetStubs [
 
 	documentor
 		onlyClasses: { FDClass2 } ;
-		beWithStub ;
+		beWithStubs ;
 		generateClass: (documentor fm3DescriptionOf: FDClass2 ) ;
 		generateClass: (documentor fm3DescriptionOf: FDTrait4 ).
 
@@ -295,7 +291,7 @@ FamixUMLDocumentorTest >> testGenerateRelationTargetStub [
 
 	documentor
 		onlyClasses: { FDTrait4 } ;
-		beWithStub ;
+		beWithStubs ;
 		generateClass: fmClass1 ;
 		generateClass: (documentor fm3DescriptionOf: FDTrait4 ).
 

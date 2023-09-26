@@ -10,11 +10,13 @@ FamixUMLDocumentor new
 ```
 
 API:
-- `model:` adds a metamodel to export (entities of the model will have a color to it)
-- `model:color:` same but specify a color to use for the entities of this model
-- `onlyClasses:` list of the only classes (from the specifed meta-model) to export (other classes from the meta-model will not be exported (except with `beWithStub`)
-- `beWithStub` also export the super-classes and used traits of classes exported, even if these super-classes/traits or not part of the models. These stubs have a specific color.
-- `beWithoutStub` opposite of the preceding, default option
+- `model:` adds a meta-model to export (entities of the meta-model will have an automatically assigned color)
+  several meta-models can be specified
+- `model:color:` same as previous but manually assign a color to the entities of this meta-model
+- `onlyClasses:` a list of the classes to export (additional classes may appear with `beWithStubs`)
+- `excludeClasses:` a list of classes to exclude from the export (they could appear as External with `beWithStubs`). As precedence over `onlyClasses:`
+- `beWithStubs` also export the super-classes and used traits of classes exported, even if these super-classes/traits or not part of the meta-models. These stubs have an automatically selected color.
+- `beWithoutStubs` opposite of the preceding, default option
 - `generate` creates an internal representation of a UML class diagram according to the options given before
 - `exportWith:` exports the internal representation with the ""backend"" given (see `FamixUMLDummyBackend`)
 "
@@ -32,13 +34,13 @@ Class {
 }
 
 { #category : #api }
-FamixUMLDocumentor >> beWithStub [
+FamixUMLDocumentor >> beWithStubs [
 
 	withStub := true
 ]
 
 { #category : #api }
-FamixUMLDocumentor >> beWithoutStub [
+FamixUMLDocumentor >> beWithoutStubs [
 
 	withStub := false
 ]
