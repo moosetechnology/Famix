@@ -173,8 +173,8 @@ FamixUMLDocumentorTest >> testGenerateRelationOf [
 	self assert: rel source equals: 'Class1'.
 	self assert: rel target equals: 'Trait4'.
 
-	self assert: rel sourceRole equals: #class1.
-	self assert: rel targetRole equals: #myTrait.
+	self assert: rel sourceRole equals: #myTrait.
+	self assert: rel targetRole equals: #class1.
 
 	self assert: rel sourceCardinality equals: #one.
 	self assert: rel targetCardinality equals: #multi.
@@ -215,8 +215,8 @@ FamixUMLDocumentorTest >> testGenerateRelationSourceStub [
 	self assert: rel source equals: 'Class1'.
 	self assert: rel target equals: 'Trait4'.
 
-	self assert: rel sourceRole equals: #class1.
-	self assert: rel targetRole equals: #myTrait.
+	self assert: rel sourceRole equals: #myTrait.
+	self assert: rel targetRole equals: #class1.
 
 	self assert: rel sourceCardinality equals: #one.
 	self assert: rel targetCardinality equals: #multi.
@@ -256,8 +256,8 @@ FamixUMLDocumentorTest >> testGenerateRelationSourceTargetStubs [
 	self assert: rel source equals: 'Class1'.
 	self assert: rel target equals: 'Trait4'.
 
-	self assert: rel sourceRole equals: #class1.
-	self assert: rel targetRole equals: #myTrait.
+	self assert: rel sourceRole equals: #myTrait.
+	self assert: rel targetRole equals: #class1.
 
 	self assert: rel sourceCardinality equals: #one.
 	self assert: rel targetCardinality equals: #multi.
@@ -298,8 +298,8 @@ FamixUMLDocumentorTest >> testGenerateRelationTargetStub [
 	self assert: rel source equals: 'Class1'.
 	self assert: rel target equals: 'Trait4'.
 
-	self assert: rel sourceRole equals: #class1.
-	self assert: rel targetRole equals: #myTrait.
+	self assert: rel sourceRole equals: #myTrait.
+	self assert: rel targetRole equals: #class1.
 
 	self assert: rel sourceCardinality equals: #one.
 	self assert: rel targetCardinality equals: #multi.

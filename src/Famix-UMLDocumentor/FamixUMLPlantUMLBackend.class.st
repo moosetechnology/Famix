@@ -16,9 +16,10 @@ FamixUMLPlantUMLBackend >> generateAssociation: association [
 
 	outputStream << association source.
 
-	self generateSourceRole: association.
-	self generateAssociationSymbol: association.
+	"in UML source role is on target side and vice-versa"
 	self generateTargetRole: association.
+	self generateAssociationSymbol: association.
+	self generateSourceRole: association.
 
 	outputStream
 		<< association target ;
@@ -115,9 +116,10 @@ FamixUMLPlantUMLBackend >> generateSourceRole: association [
 
 	outputStream << ' "'.
 
-	(association sourceCardinality = #multi) ifTrue: [ outputStream << '*' ].
 	association sourceRole ifNotNil: [ outputStream << association sourceRole ].
+	(association sourceCardinality = #multi) ifTrue: [ outputStream << '* ' ].
 	outputStream << $"
+
 ]
 
 { #category : #generating }
@@ -128,9 +130,7 @@ FamixUMLPlantUMLBackend >> generateTargetRole: association [
 
 	outputStream << $".
 	association targetRole ifNotNil: [ outputStream << association targetRole ].
-
-	(association targetCardinality = #multi)
-		ifTrue: [ outputStream << '*' ].
+	(association targetCardinality = #multi) ifTrue: [ outputStream << '*' ].
 
 	outputStream << '" '
 ]
