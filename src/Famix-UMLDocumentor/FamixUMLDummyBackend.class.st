@@ -25,7 +25,11 @@ FamixUMLDummyBackend >> export: entities [
 
 	self generateFooter.
 	
-	^outputStream contents
+	^[outputStream close ; contents]
+	on: MessageNotUnderstood
+	do: [ "for ZnCharacterWriteStream do3s not answer to #contents :-("
+		''
+	]
 ]
 
 { #category : #generating }
@@ -159,4 +163,10 @@ FamixUMLDummyBackend >> outputStream [
 FamixUMLDummyBackend >> outputStream: anObject [
 
 	outputStream := anObject
+]
+
+{ #category : #api }
+FamixUMLDummyBackend >> toFile: filename [
+
+	outputStream := filename asFileReference writeStream
 ]
