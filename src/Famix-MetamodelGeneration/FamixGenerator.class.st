@@ -966,7 +966,6 @@ FamixGenerator >> defineHierarchy [
 	tClass --|> tWithInheritances.
 	tClass --|> tWithAttributes.
 	tClass inheritsFromTrait: tType without: { #queryStaticIncomingAssociations. #queryStaticOutgoingAssociations }.
-	tClass --|> tPackageable.
 	tClass --|> tInvocationsReceiver.
 	tClass --|> tWithComments.
 	

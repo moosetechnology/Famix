@@ -231,6 +231,7 @@ FamixJavaGenerator >> defineHierarchy [
 	class --|> #TCanImplement.
 	class --|> #TWithImports.
 	class --|> #TImportable.
+	class --|> #TPackageable.
 		
 	interface --|> type.
 	interface --|> #TPackageable.
