@@ -113,21 +113,6 @@ FamixJavaClass >> isInheritedBy: anInheritance [
 	^anInheritance superclass == self
 ]
 
-{ #category : #testing }
-FamixJavaClass >> isInterface [
-
-	<FMProperty: #isInterface type: #Boolean>
-	<FMComment: 'This is a boolean flag used to distinguish between classes with implementation and interfaces'>
-
-	^ self attributeAt: #isInterface ifAbsent: [ false ]
-]
-
-{ #category : #testing }
-FamixJavaClass >> isInterface: aBoolean [
-
-	^ self attributeAt: #isInterface put: true
-]
-
 { #category : #private }
 FamixJavaClass >> lookUpInInterfaces: aMethodSignature [
 
