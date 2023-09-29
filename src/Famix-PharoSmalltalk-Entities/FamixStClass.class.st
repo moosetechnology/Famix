@@ -54,13 +54,6 @@ FamixStClass >> extendedMethods [
 	^ self methods select: #isExtension
 ]
 
-{ #category : #testing }
-FamixStClass >> implements: aString [
-	"Was changed from match: for performances and because signature is case sensitive"
-
-	^ self methods anySatisfy: [ :each | aString = each signature ]
-]
-
 { #category : #accessing }
 FamixStClass >> instanceSide [
 	^ self isClassSide
@@ -180,12 +173,4 @@ FamixStClass >> sourceText [
 	^ self instanceSide smalltalkClass
 		  ifNotNil: [ :aClass | TonelWriter sourceCodeOf: aClass ]
 		  ifNil: [ super sourceText ]
-]
-
-{ #category : #testing }
-FamixStClass >> understands: signature [
-	"returns true if a class is able to respond to an invocation to aSignature on itself; false otherwise"
-
-	self withSuperclassesDo: [ :each | (each implements: signature) ifTrue: [ ^ true ] ].
-	^ false
 ]
