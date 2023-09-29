@@ -1,13 +1,13 @@
 Trait {
 	#name : #FDTrait1,
-	#category : #'Famix-TestModel1MetamodelDocumentor-Traits'
+	#category : #'FamixDocumentor-TestMetaModel-Traits'
 }
 
 { #category : #meta }
 FDTrait1 classSide >> annotation [
 
 	<FMClass: #Trait1 super: #Object>
-	<package: #'Famix-TestModel1MetamodelDocumentor'>
+	<package: #'FamixDocumentor-TestMetaModel'>
 	<generated>
 	^ self
 ]

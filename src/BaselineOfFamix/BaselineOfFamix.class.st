@@ -277,13 +277,11 @@ BaselineOfFamix >> packages: spec [
 		with: [ spec requires: #( 'Famix-TestComposedMetamodel-Entities' ) ];
 		package: 'Famix-Deprecated'
 		with: [
-			spec requires: #( 'Core' 'ModelJava' 'ModelSmalltalk'
-				   'Tests' ) ];
-		package: 'Famix-MetamodelDocumentor' with: [
-			spec requires:
-					#( 'Core' 'TestModels' 'Famix-TestModel1MetamodelDocumentor' ) ];
-		package: 'Famix-TestModel1MetamodelDocumentor'
-		with: [ spec requires: #( 'Core' ) ]
+			spec requires: #( 'Core' 'ModelJava' 'ModelSmalltalk' 'Tests' ) ];
+		package: 'Famix-UMLDocumentor' with: [ spec requires: #( 'Core' ) ];
+		package: 'Famix-UMLDocumentor-Tests' with: [
+			spec requires: #( 'Famix-UMLDocumentor' 'FamixDocumentor-TestMetaModel' ) ];
+		package: 'FamixDocumentor-TestMetaModel'
 ]
 
 { #category : #accessing }
