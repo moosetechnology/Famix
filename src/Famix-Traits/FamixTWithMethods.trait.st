@@ -20,6 +20,13 @@ FamixTWithMethods >> addMethod: aMethod [
 	methods add: aMethod
 ]
 
+{ #category : #testing }
+FamixTWithMethods >> implements: aString [
+	"Was changed from match: for performances and because signature is case sensitive"
+
+	^ self methods anySatisfy: [ :each | aString = each signature ]
+]
+
 { #category : #accessing }
 FamixTWithMethods >> methods [
 	"Relation named: #methods type: #FamixTMethod opposite: #parentType"
