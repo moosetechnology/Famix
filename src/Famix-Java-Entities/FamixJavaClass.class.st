@@ -104,7 +104,9 @@ FamixJavaClass >> isIgnored [
 	<derived>
 	<FMComment:
 		'If the class is a test class, it can be annotated with Ignore, all the tests of contained are bypassed'>
-	^ (self isAnnotatedWith: 'Ignore') 
+		
+	(self isAnnotatedWith: 'Ignore') .
+	^ self deprecated: 'This method is not supported in VerveineJ'.
 ]
 
 { #category : #testing }
