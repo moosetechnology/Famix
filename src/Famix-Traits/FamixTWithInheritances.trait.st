@@ -205,6 +205,15 @@ FamixTWithInheritances >> superclassHierarchyGroup [
 		withDescription: 'All superclasses of ' , self mooseName
 ]
 
+{ #category : #'Famix-Implementation' }
+FamixTWithInheritances >> understands: signature [
+	"returns true if a class is able to respond to an invocation to aSignature on itself; false otherwise"
+
+	self withSuperclassesDo: [:each | 
+		(each implements: signature) ifTrue: [^true]].
+	^false
+]
+
 { #category : #enumerating }
 FamixTWithInheritances >> withSubclassHierarchy [
 	^ self subclassHierarchy 
