@@ -15,7 +15,7 @@ jobs:
       fail-fast: false
       matrix:
         smalltalk-config: [ .github/workflows/famix-config.ston, .github/workflows/famixCpp-config.ston, .github/workflows/criticBrowser-config.ston, .github/workflows/famixFortran-config.ston ]
-        smalltalk-image: [ Pharo64-10 , Pharo64-11 ]
+        smalltalk-image: [ Pharo64-11 ]
         include:
           - smalltalk-config: .github/workflows/famix-config.ston
             name: Famix tests
