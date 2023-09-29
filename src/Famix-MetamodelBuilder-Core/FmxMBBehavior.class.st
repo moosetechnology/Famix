@@ -114,7 +114,7 @@ FmxMBBehavior >> defaultTag [
 	^ self builder configuration classTag
 ]
 
-{ #category : #accessing }
+{ #category : #generating }
 FmxMBBehavior >> ensureRealClass [
 	^ realClass
 		ifNil: [ self generate.
@@ -134,7 +134,7 @@ FmxMBBehavior >> generalization: anObject [
 		ifFalse: [ anObject isMetamodelTrait ifTrue: [ self addTraitGeneralization: anObject ] ifFalse: [ self classGeneralization: anObject ] ]
 ]
 
-{ #category : #accessing }
+{ #category : #generating }
 FmxMBBehavior >> generate [
 	^ self subclassResponsibility
 ]
@@ -162,48 +162,32 @@ FmxMBBehavior >> generateAddToCollectionFor: aClass [
 ]
 
 { #category : #generating }
-FmxMBBehavior >> generateAnnotationIn: aRealClass as: aName superclass: aSuperclass [
+FmxMBBehavior >> generateAnnotationIn: aRealClass superclass: aSuperclass [
+
 	| aSuperclassName |
 	aSuperclassName := aSuperclass
-		ifNotNil: [ aSuperclass name ]
-		ifNil: [ self classGeneralization = self defaultSuperclass
-				ifTrue: [ self defaultSuperclassName ]
-				ifFalse: [ self classGeneralization ifNil: [ self defaultSuperclassName ] ifNotNil: [ :cg | cg realClass name ] ] ].
+		                   ifNotNil: [ aSuperclass name ]
+		                   ifNil: [ 
+			                   self classGeneralization
+			                   = self defaultSuperclass
+				                   ifTrue: [ self defaultSuperclassName ]
+				                   ifFalse: [ 
+					                   self classGeneralization
+						                   ifNil: [ self defaultSuperclassName ]
+						                   ifNotNil: [ :cg | cg realClass name ] ] ].
 
 	aRealClass classSide
-		compile:
-			('annotation
+		compile: ('annotation
 
 	<FMClass: #{1} super: #{2}>
 	<package: {3}>
-	<generated>
-	^self' format: {aName . aSuperclassName . self builder safeAnnotationPackageName})
+	<generated>{4}
+	^ self' format: { 
+					 self name.
+					 aSuperclassName.
+					 self builder safeAnnotationPackageName.
+					 self optionalPragma })
 		classified: 'meta'
-]
-
-{ #category : #generating }
-FmxMBBehavior >> generateInitialize [
-	self generateInitializeFor: self realClass
-]
-
-{ #category : #generating }
-FmxMBBehavior >> generateInitializeFor: aClass [
-	| methodSource defaultValuedProperties |
-	
-	defaultValuedProperties := self properties select: #hasDefaultValue.
-	defaultValuedProperties ifEmpty: [ ^ self ].
-	methodSource := String streamContents: [ :s |
-		s nextPutAll: 'initialize'; cr; cr.
-		s tab; nextPutAll: '<generated>'; cr.
-		s tab; nextPutAll: 'super initialize.'; cr; cr.
-		s tab; nextPutAll: '"Default value initialization"'; cr.
-			defaultValuedProperties do: [ :prop | 
-				s tab; nextPutAll: ('{1} := {2}.' format: {prop name. prop defaultValue}); cr.	
-			].
-		 ].
-	self builder environment compile: methodSource 
-								   in: aClass instanceSide
-									classified: #initialization
 ]
 
 { #category : #generating }
@@ -289,6 +273,12 @@ FmxMBBehavior >> initialize [
 ]
 
 { #category : #testing }
+FmxMBBehavior >> isEntityCreatorTrait [
+
+	^ false
+]
+
+{ #category : #testing }
 FmxMBBehavior >> isMetamodelClass [
 
 	^ false
@@ -310,6 +300,14 @@ FmxMBBehavior >> isMetamodelTrait [
 FmxMBBehavior >> isModelClass [
 	"The class prefix, Model"
 	^ false
+]
+
+{ #category : #generating }
+FmxMBBehavior >> optionalPragma [
+
+	"Override to add a pragma to your entity #annotation method"
+
+	^ String new
 ]
 
 { #category : #accessing }

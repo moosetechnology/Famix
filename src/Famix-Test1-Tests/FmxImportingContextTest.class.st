@@ -49,14 +49,13 @@ source2b''))
 
 { #category : #tests }
 FmxImportingContextTest >> testImportingClasses [
-	self modelMSE
-		readStreamDo: [ :s | 
-			model := FamixTest1Model
-				importFromMSEStream: s
-				filteredBy:
-					(FamixTest1ImportingContext new
-						importClass;
-						yourself) ].
+
+	self modelMSE readStreamDo: [ :s | 
+		model := FamixTest1Model
+			         importFromMSEStream: s
+			         filteredBy: (FamixTest1ImportingContext new
+					          importClass;
+					          yourself) ].
 	self assert: model entities size equals: 2.
 	self assert: (model allUsing: FamixTClass) size equals: 2.
 	self assertEmpty: (model allUsing: FamixTMethod).
@@ -65,15 +64,14 @@ FmxImportingContextTest >> testImportingClasses [
 
 { #category : #tests }
 FmxImportingContextTest >> testImportingClassesAndMethods [
-	self modelMSE
-		readStreamDo: [ :s | 
-			model := FamixTest1Model
-				importFromMSEStream: s
-				filteredBy:
-					(FamixTest1ImportingContext new
-						importClass;
-						importMethod;
-						yourself) ].
+
+	self modelMSE readStreamDo: [ :s | 
+		model := FamixTest1Model
+			         importFromMSEStream: s
+			         filteredBy: (FamixTest1ImportingContext new
+					          importClass;
+					          importMethod;
+					          yourself) ].
 	self assert: model entities size equals: 5.
 	self assert: (model allUsing: FamixTClass) size equals: 2.
 	self assert: (model allUsing: FamixTMethod) size equals: 3.
@@ -82,14 +80,13 @@ FmxImportingContextTest >> testImportingClassesAndMethods [
 
 { #category : #tests }
 FmxImportingContextTest >> testImportingMethodsBringClassesAsRequirement [
-	self modelMSE
-		readStreamDo: [ :s | 
-			model := FamixTest1Model
-				importFromMSEStream: s
-				filteredBy:
-					(FamixTest1ImportingContext new
-						importMethod;
-						yourself) ].
+
+	self modelMSE readStreamDo: [ :s | 
+		model := FamixTest1Model
+			         importFromMSEStream: s
+			         filteredBy: (FamixTest1ImportingContext new
+					          importMethod;
+					          yourself) ].
 	self assert: model entities size equals: 5.
 	self assert: (model allUsing: FamixTClass) size equals: 2.
 	self assert: (model allUsing: FamixTMethod) size equals: 3.

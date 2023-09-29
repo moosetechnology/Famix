@@ -12,5 +12,13 @@ FamixTestComposed1NamedEntity class >> annotation [
 	<FMClass: #NamedEntity super: #FamixTestComposed1Entity>
 	<package: #'Famix-TestComposedSubmetamodel1-Entities'>
 	<generated>
-	^self
+	<abstract>
+	^ self
+]
+
+{ #category : #testing }
+FamixTestComposed1NamedEntity class >> isAbstract [
+
+	<generated>
+	^ self == FamixTestComposed1NamedEntity
 ]

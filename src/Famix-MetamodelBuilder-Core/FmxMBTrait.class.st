@@ -16,7 +16,7 @@ FmxMBTrait >> allTraitGeneralizations [
 	^ (self traitGeneralizations flatCollect: [ :each | {each} , each allTraitGeneralizations ]) asSet
 ]
 
-{ #category : #generating }
+{ #category : #accessing }
 FmxMBTrait >> classGeneralization [
 
 	^ self builder environment basicTrait
@@ -27,7 +27,7 @@ FmxMBTrait >> classGeneralization: anObject [
 	FmxMBTraitsGeneralizationError signal
 ]
 
-{ #category : #generating }
+{ #category : #accessing }
 FmxMBTrait >> defaultSuperclass [
 	
 	^ self builder environment basicTrait
@@ -50,27 +50,29 @@ FmxMBTrait >> defaultTag [
 FmxMBTrait >> generate [
 
 	| aTrait traitName |
-		
 	self willGenerate ifFalse: [ ^ self ].
-	
+
 	traitName := self fullName.
-	
-	aTrait := self builder environment createTraitNamed: traitName asSymbol uses: self allTraitNames slots: self slotDefinitions in: self packageName overwrite: true.
+
+	aTrait := self builder environment
+		          createTraitNamed: traitName asSymbol
+		          uses: self allTraitNames
+		          slots: self slotDefinitions
+		          in: self packageName
+		          overwrite: true.
 
 	aTrait tagWith: self tag.
 	self builder environment setComment: self comment for: aTrait.
-			
+
 	self realClass: aTrait.
-	
-	self generateInitialize.
-	
+
 	self generateAccessors.
-	self generateAnnotationIn: aTrait as: self name superclass: nil.
-	
+	self generateAnnotationIn: aTrait superclass: nil.
+
 	self generateTestingMethodsIn: aTrait.
 	self generateMethodsToRemoveFromTraitCompositionFor: aTrait.
 	self generatePrecedenceInTraitComposition: aTrait.
-	
+
 	self generateNavigationGroupsFor: aTrait.
 	self generateAddToCollectionFor: aTrait
 ]

@@ -68,19 +68,6 @@ MooseEntity class >> model: aMooseModel [
 		yourself
 ]
 
-{ #category : #accessing }
-MooseEntity class >> requirements [
-	| metamodelClasses usedBehaviors |
-	metamodelClasses := self metamodel concreteImplementingClasses.
-
-	usedBehaviors := (self allDeclaredPropertiesIn: self metamodel) select: #isContainer thenCollect: [ :p | p opposite implementingClass ].
-
-	^ (usedBehaviors flatCollect: [ :aBehavior |
-			aBehavior isTrait
-				ifTrue: [ metamodelClasses select: [ :each | each isComposedBy: aBehavior ] ]
-				ifFalse: [ {aBehavior} ] ]) asSet
-]
-
 { #category : #dependencies }
 MooseEntity >> addAllChildrenDependenciesThrough: aDirectionStrategy in: aCollection [
 	aCollection addAll: (aDirectionStrategy dependenciesAtReceiverScopeOf: self).
@@ -146,10 +133,12 @@ MooseEntity >> detectDependenciesUsing: aDetector [
 
 { #category : #properties }
 MooseEntity >> handleFameProperty: aSymbol value: anObject [
-	
+
 	| value |
 	super handleFameProperty: aSymbol value: anObject.
-	value := (anObject isCollection and: [anObject size = 1]) ifTrue: [anObject anyOne] ifFalse: [anObject].
+	value := (anObject isCollection and: [ anObject size = 1 ])
+		         ifTrue: [ anObject anyOne ]
+		         ifFalse: [ anObject ].
 	self propertyNamed: aSymbol put: value
 ]
 

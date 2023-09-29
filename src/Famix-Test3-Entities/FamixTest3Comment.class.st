@@ -12,5 +12,5 @@ FamixTest3Comment class >> annotation [
 	<FMClass: #Comment super: #FamixTest3SourcedEntity>
 	<package: #'Famix-Test3-Entities'>
 	<generated>
-	^self
+	^ self
 ]

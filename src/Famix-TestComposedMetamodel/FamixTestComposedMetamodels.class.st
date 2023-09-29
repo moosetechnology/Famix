@@ -33,7 +33,6 @@ FamixTestComposedMetamodels >> setUp [
 	model := FamixTestComposedModel new.
 	
 	remoteMethod := FamixTestComposed1Method new.
-	entity := FamixTestComposedEntity new.
 	remoteClass := FamixTestComposed2Class new.
 	
 	c1 := FamixTestComposedCustomEntity1 new.
@@ -51,7 +50,7 @@ FamixTestComposedMetamodels >> setUp [
 	c23 := FamixTestComposed2CustomEntity3 new.
 	c24 := FamixTestComposed2CustomEntity4 new.
 
-	model addAll: { remoteMethod. entity. remoteClass. c1. c2. c3. c4. c11. c12. c13. c14. c21. c22. c23. c24 }.
+	model addAll: { remoteMethod. remoteClass. c1. c2. c3. c4. c11. c12. c13. c14. c21. c22. c23. c24 }.
 	
 	
 ]

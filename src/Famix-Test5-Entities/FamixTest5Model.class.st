@@ -1,6 +1,8 @@
 Class {
 	#name : #FamixTest5Model,
 	#superclass : #MooseModel,
+	#traits : 'FamixTest5TEntityCreator',
+	#classTraits : 'FamixTest5TEntityCreator classTrait',
 	#category : #'Famix-Test5-Entities-Model'
 }
 

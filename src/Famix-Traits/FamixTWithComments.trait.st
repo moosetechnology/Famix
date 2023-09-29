@@ -1,7 +1,7 @@
 Trait {
 	#name : #FamixTWithComments,
 	#instVars : [
-		'#comments => FMMany type: #FamixTComment opposite: #container'
+		'#comments => FMMany type: #FamixTComment opposite: #commentedEntity'
 	],
 	#category : #'Famix-Traits-Comment'
 }
@@ -12,7 +12,7 @@ FamixTWithComments classSide >> annotation [
 	<FMClass: #TWithComments super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #removing }
@@ -24,10 +24,10 @@ FamixTWithComments >> addComment: aComment [
 
 { #category : #accessing }
 FamixTWithComments >> comments [
-	"Relation named: #comments type: #FamixTComment opposite: #container"
+	"Relation named: #comments type: #FamixTComment opposite: #commentedEntity"
 
 	<generated>
-	<FMComment: 'list of comments defined in the entity'>
+	<FMComment: 'List of comments for the entity'>
 	<derived>
 	^ comments
 ]

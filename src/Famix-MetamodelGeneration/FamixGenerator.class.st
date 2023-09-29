@@ -17,10 +17,8 @@ Class {
 		'tAnnotationTypeAttribute',
 		'tAssociation',
 		'tAttribute',
-		'tCaughtException',
 		'tComment',
 		'tCompilationUnit',
-		'tDeclaredException',
 		'tDereferencedInvocation',
 		'tEnumValue',
 		'tException',
@@ -54,7 +52,6 @@ Class {
 		'tStructuralEntity',
 		'tTemplate',
 		'tTemplateUser',
-		'tThrownException',
 		'tTrait',
 		'tTraitUsage',
 		'tType',
@@ -67,9 +64,7 @@ Class {
 		'tWithAnnotationInstances',
 		'tWithAnnotationTypes',
 		'tWithAttributes',
-		'tWithCaughtExceptions',
 		'tWithComments',
-		'tWithDeclaredExceptions',
 		'tWithDereferencedInvocations',
 		'tWithEnumValues',
 		'tWithExceptions',
@@ -86,7 +81,6 @@ Class {
 		'tWithParameters',
 		'tWithReferences',
 		'tWithTemplates',
-		'tWithThrownExceptions',
 		'tWithTypeAliases',
 		'tWithTypes',
 		'tClass',
@@ -127,7 +121,10 @@ Class {
 		'tCanBeClassSide',
 		'tImplementable',
 		'tCanImplement',
-		'tImplementation'
+		'tImplementation',
+		'tImportable',
+		'tImport',
+		'tWithImports'
 	],
 	#category : #'Famix-MetamodelGeneration'
 }
@@ -955,6 +952,7 @@ FamixGenerator >> defineHierarchy [
 
 	tAttribute --|> tStructuralEntity.
 	
+	tEnumValue --|> tStructuralEntity.	
 
 	tAnnotationInstance --|> #TEntityMetaLevelDependency.
 
@@ -983,6 +981,8 @@ FamixGenerator >> defineHierarchy [
 	
 	tEnum --|> tWithEnumValues.
 	tEnum --|> tType.
+	
+	tException --|> tClass.
 
 	tFile --|> tFileSystemEntity.
 	
@@ -997,6 +997,7 @@ FamixGenerator >> defineHierarchy [
 	tFunction --|> tHasSignature.
 	tFunction --|> tTypedEntity.
 	tFunction --|> tWithStatements.
+	tFunction --|> tWithLocalVariables.
 	tFunction --|> #TEntityMetaLevelDependency.
 
 	tGlobalVariable --|> tStructuralEntity.
@@ -1009,7 +1010,10 @@ FamixGenerator >> defineHierarchy [
 
 	tInheritance --|> tAssociation.
 
+	tImport --|> tAssociation.
+
 	tInvocation --|> tAssociation.
+	tInvocation --|> tHasSignature.
 
 	tImplicitVariable --|> tStructuralEntity.
 
@@ -1081,22 +1085,27 @@ FamixGenerator >> defineProperties [
 	super defineProperties.
 
 
-	(tCanBeAbstract property: #isAbstract type: #Boolean) comment:
-		'Entity can be declared abstract'.
-	(tCanBeFinal property: #isFinal type: #Boolean) comment:
-		'Entity can be declared final'.
+	(tCanBeAbstract
+		 property: #isAbstract
+		 type: #Boolean
+		 defaultValue: false) comment: 'Entity can be declared abstract'.
+	(tCanBeFinal property: #isFinal type: #Boolean defaultValue: false) 
+		comment: 'Entity can be declared final'.
 	(tCanBeClassSide
 		 property: #isClassSide
 		 type: #Boolean
 		 defaultValue: false) comment:
 		'Entity can be declared class side i.e. static'.
 
+	(tFileAnchor property: #correspondingFile type: #FamixTFile) 
+		comment: 'File associated to this source anchor'.
 	(tFileAnchor property: #encoding type: #String) comment:
 		'A string representing the encoding of a file'.
 	(tFileAnchor property: #fileName type: #String) comment:
 		'Name of the source file'.
 
-	(tAccess property: #isWrite type: #Boolean) comment: 'Write access'.
+	(tAccess property: #isWrite type: #Boolean defaultValue: false) 
+		comment: 'Write access'.
 
 	(tAnnotationInstanceAttribute property: #value type: #String) 
 		comment: 'Actual value of the attribute used in an annotation'.
@@ -1119,7 +1128,8 @@ FamixGenerator >> defineProperties [
 	(tComment property: #content type: #String) comment:
 		'Content of the comment as a String'.
 
-	(tSourceEntity property: #isStub type: #Boolean) comment:
+	(tSourceEntity property: #isStub type: #Boolean defaultValue: false) 
+		comment:
 		'Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.'.
 
 	(tFileNavigation property: #startLine type: #Number) comment:
@@ -1216,25 +1226,26 @@ FamixGenerator >> defineRelations [
 	((tWithAttributes property: #attributes)
 			comment: 'List of attributes declared by this type.').
 
-	((tCaughtException property: #definingEntity))
-		*-
-	((tWithCaughtExceptions property: #caughtExceptions)
+	((tException property: #catchingEntities))
+		*-*
+	((tWithExceptions property: #caughtExceptions)
 			comment: 'The exceptions caught by the method').
 
-	((tComment property: #container)
-			comment: 'Source code entity containing the comment')
+	((tComment property: #commentedEntity)
+			comment: 'Source code commented by the comment')
 		*-
 	((tWithComments property: #comments)
-			comment: 'list of comments defined in the entity').
+			comment: 'List of comments for the entity').
 
 	((tCompilationUnit property: #compilationUnitOwner)
-			comment: 'The compilation unit that defines this module')
+			comment: 'The compilation unit that defines this module';
+			container)
 		-
 	((tWithCompilationUnits property: #compilationUnit)).
 
-	((tDeclaredException property: #definingEntity))
-		*-
-	((tWithDeclaredExceptions property: #declaredExceptions)
+	((tException property: #declaringEntities))
+		*-*
+	((tWithExceptions property: #declaredExceptions)
 			comment: 'The exceptions declared by the method').
 
 	((tDereferencedInvocation property: #referencer)
@@ -1248,12 +1259,6 @@ FamixGenerator >> defineRelations [
 			container)
 		*-
 	((tWithEnumValues property: #enumValues)).
-
-	((tException property: #exceptionClass)
-			comment: 'Class to which the exception points. It is specific to Java')
-		*-
-	((tWithExceptions property: #exceptions)
-			comment: 'Exceptions which class is myself.').
 
 	((tFolder property: #childrenFileSystemEntities)
 			comment: 'List of entities contained in this folder.')
@@ -1279,12 +1284,6 @@ FamixGenerator >> defineRelations [
 		*-
 	((tWithFileIncludes property: #incomingIncludeRelations)
 			comment: 'The include entities that have this file as a target.').
-			
-	((tFileAnchor property: #correspondingFile) 
-		comment: 'File associated to this source anchor')
-		-
-	((tFile property: #fileAnchor ) 
-		comment: 'SourceAnchor associated to this file')	.
 
 	((tFunction property: #functionOwner)
 			comment: 'The container defining the function. The function is placed in a container, because certain languages can nest functions in functions.';
@@ -1300,7 +1299,7 @@ FamixGenerator >> defineRelations [
 	((tWithGlobalVariables property: #globalVariables)
 			comment: 'Global variables defined in the scope, if any.').
 
-	((tHeader property: #headerOwner))
+	((tHeader property: #headerOwner) container )
 		-
 	((tWithHeaders property: #header)
 			comment: 'The header file that defines this module').
@@ -1332,6 +1331,20 @@ FamixGenerator >> defineRelations [
 	((tInvocationsReceiver property: #receivingInvocations)
 			comment: 'List of invocations performed on this entity (considered as the receiver)').
 
+	((tWithImports property: #outgoingImports)
+			comment: '')
+		-*
+	((tImport property: #importingEntity) 
+			comment: 'Importing entity';
+			source).
+
+	((tImport property: #importedEntity)
+			comment: 'Imported entity';
+			target )
+		*-
+	((tImportable property: #incomingImports)
+			comment: 'List of imports of this entity').
+
 	((tLocalVariable property: #parentBehaviouralEntity)
 			comment: 'Behavioural entity declaring this local variable. belongsTo implementation';
 			container)
@@ -1349,7 +1362,8 @@ FamixGenerator >> defineRelations [
 	((tModule property: #moduleEntities))
 		-*
 	((tDefinedInModule property: #parentModule)
-			comment: 'Module that contains the definition of this entity').
+			comment: 'Module that contains the definition of this entity';
+			container).
 
 	((tPackage property: #childEntities))
 		-*
@@ -1414,7 +1428,7 @@ FamixGenerator >> defineRelations [
 	((tWithInheritances property: #subInheritances)
 			comment: 'Subinheritance relationships, i.e. known subclasses of this type.').
 
-	((tTemplate property: #templateOwner))
+	((tTemplate property: #templateOwner) container)
 		*-
 	((tWithTemplates property: #templates)).
 
@@ -1422,12 +1436,12 @@ FamixGenerator >> defineRelations [
 		-*
 	((tTemplateUser property: #template)).
 
-	((tThrownException property: #definingEntity))
-		*-
-	((tWithThrownExceptions property: #thrownExceptions)
+	((tException property: #throwingEntities))
+		*-*
+	((tWithExceptions property: #thrownExceptions)
 			comment: 'The exceptions thrown by the method').
 
-	((tTrait property: #traitOwner))
+	((tTrait property: #traitOwner) container )
 		*-
 	((tWithTraits property: #traits)).
 
@@ -1443,7 +1457,7 @@ FamixGenerator >> defineRelations [
 
 
 	((tType property: #typeContainer)
-			comment: 'Container entity to which this type belongs to. Container is a namespace, not a package (Smalltalk).';
+			comment: 'Container entity to which this type belongs. Container is a namespace, not a package (Smalltalk).';
 			container)
 		*-
 	((tWithTypes property: #types)
@@ -1516,9 +1530,6 @@ FamixGenerator >> defineTraits [
 
 	tCanBeClassSide := builder newTraitNamed: #TCanBeClassSide. 
 	
-	tCaughtException := builder newTraitNamed: #TCaughtException.
-	tCaughtException comment: self commentForTCaughtException.
-
 	tComment := builder newTraitNamed: #TComment.
 	tComment comment: self commentForTComment.
 
@@ -1533,20 +1544,19 @@ FamixGenerator >> defineTraits [
 	
 	tClassGroup := tClass withGroup.
 
-	tDeclaredException := builder newTraitNamed: #TDeclaredException.
-	tDeclaredException comment: self commentForTDeclaredException.
-
 	tDereferencedInvocation := builder newTraitNamed: #TDereferencedInvocation.
 	tDereferencedInvocation comment: self commentForTDereferencedInvocation.
 
 	tEnumValue := builder newTraitNamed: #TEnumValue.
 	tEnumValue comment: self commentForTEnumValue.
+	tEnumValue withTesting.
 	
 	tEnum := builder newTraitNamed: #TEnum.
 	tEnum comment: self commentForTEnum.
 
 	tException := builder newTraitNamed: #TException.
 	tException comment: self commentForTException.
+	tException withTesting.
 
 	tFile := builder newTraitNamed: #TFile.
 	tFile comment: self commentForTFile.
@@ -1577,6 +1587,7 @@ FamixGenerator >> defineTraits [
 	tGlobalVariable := builder newTraitNamed: #TGlobalVariable.
 	tGlobalVariable comment: self commentForTGlobalVariable.
 	tGlobalVariable withGroup.
+	tGlobalVariable withTesting.
 
 	tWithGlobalVariables := builder newTraitNamed: #TWithGlobalVariables.
 	tWithGlobalVariables comment: self commentForTWithGlobalVariables.
@@ -1587,7 +1598,11 @@ FamixGenerator >> defineTraits [
 	tImplicitVariable := builder newTraitNamed: #TImplicitVariable.
 	tImplicitVariable comment: self commentForTImplicitVariable.
 	tImplicitVariable withTesting.
-
+	
+	tImport := builder newTraitNamed: #TImport.
+	tImportable := builder newTraitNamed: #TImportable.
+	tWithImports := builder newTraitNamed: #TWithImports.
+	
 	tInheritance := builder newTraitNamed: #TInheritance.
 	tInheritance comment: self commentForTInheritance.
 	tInheritance withTesting.
@@ -1605,6 +1620,7 @@ FamixGenerator >> defineTraits [
 
 	tLocalVariable := builder newTraitNamed: #TLocalVariable.
 	tLocalVariable comment: self commentForTLocalVariable.
+	tLocalVariable withTesting.
 
 	tMethod := builder newTraitNamed: #TMethod.
 	tMethod comment: self commentForTMethod.
@@ -1685,9 +1701,6 @@ FamixGenerator >> defineTraits [
 	tTemplateUser := builder newTraitNamed: #TTemplateUser.
 	tTemplateUser comment: self commentForTTemplateUser.
 
-	tThrownException := builder newTraitNamed: #TThrownException.
-	tThrownException comment: self commentForTThrownException.
-
 	tTrait := builder newTraitNamed: #TTrait.
 	tTrait comment: self commentForTTrait.
 
@@ -1731,9 +1744,6 @@ FamixGenerator >> defineTraits [
 	tWithAttributes := builder newTraitNamed: #TWithAttributes.
 	tWithAttributes comment: self commentForTWithAttributes.
 
-	tWithCaughtExceptions := builder newTraitNamed: #TWithCaughtExceptions.
-	tWithCaughtExceptions comment: self commentForTWithCaughtExceptions.
-
 	tWithClasses := builder newTraitNamed: #TWithClasses.
 	tWithClasses comment: self commentForTWithClasses.
 
@@ -1742,9 +1752,6 @@ FamixGenerator >> defineTraits [
 
 	tWithCompilationUnits := builder newTraitNamed: #TWithCompilationUnits.
 	tWithCompilationUnits comment: self commentForTWithCompilationUnit.
-
-	tWithDeclaredExceptions := builder newTraitNamed: #TWithDeclaredExceptions.
-	tWithDeclaredExceptions comment: self commentForTWithDeclaredExceptions.
 
 	tWithDereferencedInvocations := builder newTraitNamed: #TWithDereferencedInvocations.
 	tWithDereferencedInvocations comment: self commentForTWithDereferencedInvocations.
@@ -1806,9 +1813,6 @@ FamixGenerator >> defineTraits [
 
 	tWithTemplates := builder newTraitNamed: #TWithTemplates.
 	tWithTemplates comment: self commentForTWithTemplates.
-
-	tWithThrownExceptions := builder newTraitNamed: #TWithThrownExceptions.
-	tWithThrownExceptions comment: self commentForTWithThrownExceptions.
 
 	tWithTraits := builder newTraitNamed: #TWithTraits.
 	tWithTraits comment: self commentForTWithTraits.

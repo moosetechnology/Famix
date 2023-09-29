@@ -20,6 +20,13 @@ FmxMBRingEnvironment >> basicGroupSuperclass [
 ]
 
 { #category : #accessing }
+FmxMBRingEnvironment >> basicImportingContextSuperclass [
+
+	^ self ringEnvironment ensureClassNamed:
+		  self builder configuration basicImportingContextSuperclassName
+]
+
+{ #category : #accessing }
 FmxMBRingEnvironment >> basicModelSuperclass [
 
 	^ self ringEnvironment ensureClassNamed: self builder configuration basicModelSuperclassName
@@ -104,23 +111,6 @@ FmxMBRingEnvironment >> createClassNamed: aClassName superclass: aSuperclass tra
 ]
 
 { #category : #initialization }
-FmxMBRingEnvironment >> createImportingcontextClassNamed: aClassName in: packageName [
-
-	| resultantClass |
-	
-	(self hasBehaviorNamed: aClassName asSymbol ) 
-		ifTrue: [ ^ self ringEnvironment ensureClassNamed: aClassName asSymbol ].
-	
-	resultantClass := self ringEnvironment ensureClassNamed: aClassName asSymbol.
-	resultantClass superclass: (self ringEnvironment ensureClassNamed: self builder baseImportingContextName).
-	resultantClass layout makeResolved.
-	resultantClass package: (self ringEnvironment ensurePackageNamed: packageName).
-						
-	^ resultantClass
-
-]
-
-{ #category : #initialization }
 FmxMBRingEnvironment >> createTraitNamed: traitName uses: traitNames slots: slots in: packageName overwrite: shouldOverwrite [
 
 	| aPackage aTrait existingClass composition |
@@ -178,7 +168,9 @@ FmxMBRingEnvironment >> initialize [
 	ringEnvironment version: 7.
 	ringEnvironment ensureClassNamed: #FMOne.
 	ringEnvironment ensureClassNamed: #FMMany.		
-
+	ringEnvironment ensureClassNamed: #FMMultivalueLink.
+	ringEnvironment ensureClassNamed: #FMMultiMultivalueLink.
+	ringEnvironment ensureClassNamed: #MooseSpecializedGroup.
 ]
 
 { #category : #'public registration' }

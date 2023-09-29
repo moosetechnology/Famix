@@ -12,5 +12,5 @@ FamixJavaUnknownVariable class >> annotation [
 	<FMClass: #UnknownVariable super: #FamixJavaNamedEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^self
+	^ self
 ]

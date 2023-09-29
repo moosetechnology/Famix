@@ -12,5 +12,5 @@ FamixJavaAttribute class >> annotation [
 	<FMClass: #Attribute super: #FamixJavaNamedEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^self
+	^ self
 ]

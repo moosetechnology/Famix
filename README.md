@@ -1,6 +1,6 @@
 # Famix
 
-Famix is An abstract representation of source code. Famix is generic and it may describe applications in multiple programation languages.
+Famix is an abstract representation of source code. It is generic and can describe applications in multiple programming languages.
 
   - [Installation](#installation)
   - [Documentation](#documentation)
@@ -14,9 +14,10 @@ To install the project on your Pharo image, execute the following script:
 
 ```Smalltalk
 Metacello new
-	githubUser: 'moosetechnology' project: 'Famix' commitish: 'development' path: 'src';
-	baseline: 'Famix';
-	load
+  baseline: 'Famix';
+  repository: 'github://moosetechnology/Famix:development/src';
+  onConflict: [ :ex | ex allow ];
+  load.
 ```
 
 To add the project to your baseline:

@@ -10,7 +10,15 @@ MooseMSEImporterTestEntity class >> annotation [
 	<FMClass: #Entity super: #MooseEntity>
 	<package: #'Moose-Core-Tests-Entities'>
 	<generated>
-	^self
+	<abstract>
+	^ self
+]
+
+{ #category : #testing }
+MooseMSEImporterTestEntity class >> isAbstract [
+
+	<generated>
+	^ self == MooseMSEImporterTestEntity
 ]
 
 { #category : #meta }

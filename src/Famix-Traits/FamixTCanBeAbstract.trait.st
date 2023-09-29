@@ -12,16 +12,16 @@ FamixTCanBeAbstract classSide >> annotation [
 	<FMClass: #TCanBeAbstract super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }
 FamixTCanBeAbstract >> isAbstract [
 
-	<FMProperty: #isAbstract type: #Boolean>
+	<FMProperty: #isAbstract type: #Boolean defaultValue: false>
 	<generated>
 	<FMComment: 'Entity can be declared abstract'>
-	^ isAbstract
+	^ isAbstract ifNil: [ isAbstract := false ]
 ]
 
 { #category : #accessing }

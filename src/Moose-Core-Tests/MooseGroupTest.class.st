@@ -125,6 +125,7 @@ MooseGroupTest >> testIsOfType [
 
 { #category : #tests }
 MooseGroupTest >> testNumberOfPackages [
+
 	self assert: group numberOfPackages equals: 0.
 	group add: (MooseEntity new copyWithTalent: FamixTPackage).
 	group add: (MooseEntity new copyWithTalent: FamixTPackage).

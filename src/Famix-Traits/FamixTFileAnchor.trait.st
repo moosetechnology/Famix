@@ -4,7 +4,7 @@ This offers a source anchor that connects a sourced entity to a file through a r
 Trait {
 	#name : #FamixTFileAnchor,
 	#instVars : [
-		'#correspondingFile => FMOne type: #FamixTFile opposite: #fileAnchor',
+		'#correspondingFile => FMProperty',
 		'#encoding => FMProperty',
 		'#fileName => FMProperty'
 	],
@@ -17,7 +17,7 @@ FamixTFileAnchor classSide >> annotation [
 	<FMClass: #TFileAnchor super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #adding }
@@ -39,8 +39,8 @@ FamixTFileAnchor >> containerFiles [
 
 { #category : #accessing }
 FamixTFileAnchor >> correspondingFile [
-	"Relation named: #correspondingFile type: #FamixTFile opposite: #fileAnchor"
 
+	<FMProperty: #correspondingFile type: #FamixTFile>
 	<generated>
 	<FMComment: 'File associated to this source anchor'>
 	^ correspondingFile
@@ -48,7 +48,6 @@ FamixTFileAnchor >> correspondingFile [
 
 { #category : #accessing }
 FamixTFileAnchor >> correspondingFile: anObject [
-
 	<generated>
 	correspondingFile := anObject
 ]

@@ -2,7 +2,8 @@ Class {
 	#name : #FmxMBClass,
 	#superclass : #FmxMBBehavior,
 	#instVars : [
-		'classGeneralization'
+		'classGeneralization',
+		'isAbstractClass'
 	],
 	#category : #'Famix-MetamodelBuilder-Core-Implementation'
 }
@@ -47,35 +48,51 @@ FmxMBClass >> classGeneralization: anObject [
 FmxMBClass >> generate [
 
 	| aClass aSuperclass aClassName |
-	
 	self willGenerate ifFalse: [ ^ self ].
-	
+
 	aClassName := self fullName.
-	
-	aSuperclass := 	self classGeneralization 
-		ifNil: [ self defaultSuperclass ]
-		ifNotNil: [ self classGeneralization realClass ].
-	
-	aClass := self builder environment createClassNamed: aClassName asSymbol superclass: aSuperclass traitNames: self allTraitNames slots: self slotDefinitions in: self packageName overwrite: true.
-	
+
+	aSuperclass := self classGeneralization
+		               ifNil: [ self defaultSuperclass ]
+		               ifNotNil: [ self classGeneralization realClass ].
+
+	aClass := self builder environment
+		          createClassNamed: aClassName asSymbol
+		          superclass: aSuperclass
+		          traitNames: self allTraitNames
+		          slots: self slotDefinitions
+		          in: self packageName
+		          overwrite: true.
+
 	aClass tagWith: self tag.
 	self builder environment setComment: self comment for: aClass.
-			
+
 	self realClass: aClass.
-	
-	self generateInitialize.
-	
+
 	self generateAccessors.
-	self generateAnnotationIn: aClass as: self name superclass: nil.
-	
+	self generateAnnotationIn: aClass superclass: nil.
+	self generateIsAbstractMethodIfNecessaryIn: aClass.
+
 	self generateTestingMethodsIn: aClass.
 	self generateRootMetamodelMethodIn: aClass.
 
 	self generateMethodsToRemoveFromTraitCompositionFor: aClass.
 	self generatePrecedenceInTraitComposition: aClass.
-	
+
 	self generateNavigationGroupsFor: aClass.
 	self generateAddToCollectionFor: aClass
+]
+
+{ #category : #generating }
+FmxMBClass >> generateIsAbstractMethodIfNecessaryIn: aClass [
+
+	self isAbstractClass ifTrue: [ 
+		aClass classSide
+			compile: ('isAbstract
+
+	<generated>
+	^ self == {1}' format: { aClass name asString })
+			classified: 'testing' ]
 ]
 
 { #category : #generating }
@@ -90,7 +107,7 @@ FmxMBClass >> generateRemotes [
 	self generateRemoteAccessors
 ]
 
-{ #category : #generating }
+{ #category : #'generating-methods' }
 FmxMBClass >> generateRootMetamodelMethodIn: aClass [
 	self isRoot ifFalse: [ ^ self ].
 
@@ -105,7 +122,7 @@ FmxMBClass >> generateRootMetamodelMethodIn: aClass [
 				classified: 'meta' ]
 ]
 
-{ #category : #accessing }
+{ #category : #'generating-methods' }
 FmxMBClass >> generateTestingMethodsIn: aClass [
 	self isRoot
 		ifTrue: [ builder testingSelectorsMapping
@@ -122,6 +139,18 @@ FmxMBClass >> generateTestingMethodsIn: aClass [
 ]
 
 { #category : #testing }
+FmxMBClass >> isAbstractClass [
+
+	^ isAbstractClass ifNil: [ false ]
+]
+
+{ #category : #accessing }
+FmxMBClass >> isAbstractClass: aBoolean [
+
+	isAbstractClass := aBoolean
+]
+
+{ #category : #testing }
 FmxMBClass >> isMetamodelClass [
 
 	^ true
@@ -133,6 +162,16 @@ FmxMBClass >> isRoot [
 ]
 
 { #category : #generating }
+FmxMBClass >> optionalPragma [
+
+	^ self isAbstractClass
+		  ifTrue: [ 
+			  '
+	<abstract>' ]
+		  ifFalse: [ super optionalPragma ]
+]
+
+{ #category : #generalization }
 FmxMBClass >> subclassOf: aClass [
 	
 	self generalization: aClass

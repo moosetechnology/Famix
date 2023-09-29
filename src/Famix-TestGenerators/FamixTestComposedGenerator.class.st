@@ -3,11 +3,11 @@ Class {
 	#superclass : #FamixMetamodelGenerator,
 	#instVars : [
 		'association',
-		'entity',
 		'customEntity1',
 		'customEntity2',
 		'customEntity3',
-		'customEntity4'
+		'customEntity4',
+		'standardEntity'
 	],
 	#category : #'Famix-TestGenerators'
 }
@@ -35,7 +35,7 @@ FamixTestComposedGenerator >> define [
 	| test1Method test1Custom1 test1Custom2 test1Custom3 test1Custom4 test2Custom1 test2Custom2 test2Custom3 test2Custom4 test1Custom5 test2Custom5 |
 	super define.
 
-	entity := builder newClassNamed: #Entity.
+	standardEntity := builder newClassNamed: #StandardEntity.
 
 	test1Method := self remoteEntity: #Method withPrefix: #FamixTestComposed1.
 	self remoteEntity: #Class withPrefix: #FamixTestComposed2.
@@ -55,7 +55,7 @@ FamixTestComposedGenerator >> define [
 	customEntity3 := builder newClassNamed: #CustomEntity3.
 	customEntity4 := builder newClassNamed: #CustomEntity4.
 
-	entity - test1Method.
+	standardEntity - test1Method.
 
 	customEntity1 <>- test1Custom1.
 	customEntity2 -* test1Custom2.
@@ -73,7 +73,7 @@ FamixTestComposedGenerator >> define [
 	(test1Custom4 property: #c24s) *-* (test2Custom4 property: #c14s).
 
 	association := builder newClassNamed: #Association.
-	association --|> entity.
+	association --|> standardEntity.
 	association --|> #TAssociation.
 	association --|> #TAssociationMetaLevelDependency.
 

@@ -60,3 +60,8 @@ FamixTest2Test >> testInheritances [
 FamixTest2Test >> testModelGeneratedNotExplicitely [
 	self assert: (self class environment classNamed: 'FamixTest2Model') isNotNil
 ]
+
+{ #category : #tests }
+FamixTest2Test >> testModelNotImportableFromFile [
+	self deny: FamixTest2Model canBeImportedFromFile
+]

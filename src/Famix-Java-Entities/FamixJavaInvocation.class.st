@@ -1,8 +1,8 @@
 Class {
 	#name : #FamixJavaInvocation,
 	#superclass : #FamixJavaEntity,
-	#traits : 'FamixTHasSignature + FamixTInvocation',
-	#classTraits : 'FamixTHasSignature classTrait + FamixTInvocation classTrait',
+	#traits : 'FamixTInvocation',
+	#classTraits : 'FamixTInvocation classTrait',
 	#category : #'Famix-Java-Entities-Entities'
 }
 
@@ -12,7 +12,7 @@ FamixJavaInvocation class >> annotation [
 	<FMClass: #Invocation super: #FamixJavaEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #initialization }

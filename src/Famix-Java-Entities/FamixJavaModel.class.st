@@ -1,6 +1,8 @@
 Class {
 	#name : #FamixJavaModel,
 	#superclass : #MooseModel,
+	#traits : 'FamixJavaTEntityCreator',
+	#classTraits : 'FamixJavaTEntityCreator classTrait',
 	#category : #'Famix-Java-Entities-Model'
 }
 
@@ -15,6 +17,19 @@ FamixJavaModel class >> annotation [
 	<FMClass: #FamixJavaModel super: #MooseModel>
 	<package: #'Famix-Java-Entities'>
 	<generated>
+]
+
+{ #category : #testing }
+FamixJavaModel class >> canBeImportedFromFile [
+	<generated>
+	^true
+]
+
+{ #category : #accessing }
+FamixJavaModel class >> importingContextClass [
+
+	<generated>
+	^ FamixJavaImportingContext
 ]
 
 { #category : #'as yet unclassified' }

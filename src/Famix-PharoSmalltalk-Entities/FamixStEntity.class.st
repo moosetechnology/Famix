@@ -10,7 +10,15 @@ FamixStEntity class >> annotation [
 	<FMClass: #Entity super: #MooseEntity>
 	<package: #'Famix-PharoSmalltalk-Entities'>
 	<generated>
-	^self
+	<abstract>
+	^ self
+]
+
+{ #category : #testing }
+FamixStEntity class >> isAbstract [
+
+	<generated>
+	^ self == FamixStEntity
 ]
 
 { #category : #meta }
@@ -56,6 +64,13 @@ FamixStEntity >> isClass [
 ]
 
 { #category : #testing }
+FamixStEntity >> isGlobalVariable [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
 FamixStEntity >> isImplicitVariable [
 
 	<generated>
@@ -71,6 +86,13 @@ FamixStEntity >> isInheritance [
 
 { #category : #testing }
 FamixStEntity >> isInvocation [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+FamixStEntity >> isLocalVariable [
 
 	<generated>
 	^ false

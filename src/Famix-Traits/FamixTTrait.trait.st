@@ -16,7 +16,7 @@ FamixTTrait classSide >> annotation [
 	<FMClass: #TTrait super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }
@@ -47,6 +47,7 @@ FamixTTrait >> traitOwner [
 	"Relation named: #traitOwner type: #FamixTWithTraits opposite: #traits"
 
 	<generated>
+	<container>
 	^ traitOwner
 ]
 
@@ -55,4 +56,11 @@ FamixTTrait >> traitOwner: anObject [
 
 	<generated>
 	traitOwner := anObject
+]
+
+{ #category : #navigation }
+FamixTTrait >> traitOwnerGroup [
+	<generated>
+	<navigation: 'TraitOwner'>
+	^ MooseSpecializedGroup with: self traitOwner
 ]

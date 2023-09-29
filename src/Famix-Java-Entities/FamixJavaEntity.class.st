@@ -20,7 +20,15 @@ FamixJavaEntity class >> annotation [
 	<FMClass: #Entity super: #MooseEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^self
+	<abstract>
+	^ self
+]
+
+{ #category : #testing }
+FamixJavaEntity class >> isAbstract [
+
+	<generated>
+	^ self == FamixJavaEntity
 ]
 
 { #category : #meta }
@@ -66,6 +74,20 @@ FamixJavaEntity >> isClass [
 ]
 
 { #category : #testing }
+FamixJavaEntity >> isEnumValue [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+FamixJavaEntity >> isException [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
 FamixJavaEntity >> isImplicitVariable [
 
 	<generated>
@@ -88,6 +110,13 @@ FamixJavaEntity >> isInterface [
 
 { #category : #testing }
 FamixJavaEntity >> isInvocation [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+FamixJavaEntity >> isLocalVariable [
 
 	<generated>
 	^ false

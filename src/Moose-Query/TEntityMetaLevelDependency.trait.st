@@ -95,7 +95,7 @@ TEntityMetaLevelDependency classSide >> annotation [
 	<FMClass: #TEntityMetaLevelDependency super: #Object>
 	<package: #'Moose-Query'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }
@@ -334,7 +334,13 @@ TEntityMetaLevelDependency >> allClients [
 TEntityMetaLevelDependency >> allClientsAtScope: aClass [
 	^ self queryAllIncoming withoutSelfLoops
 		atScope: aClass
-		withNonMatchingEntitiesDo: [ :entities :res | entities ifNotNil: [ res addAll: entities asCollection ] ]
+		withNonMatchingEntitiesDo: [ :entities :res |
+			entities ifNotNil: [
+				entities isCollection
+				ifTrue: [ res addAll: entities ]
+				ifFalse: [ res add: entities ]
+			]
+		]
 ]
 
 { #category : #accessing }
@@ -369,7 +375,13 @@ TEntityMetaLevelDependency >> allProviders [
 TEntityMetaLevelDependency >> allProvidersAtScope: aClass [
 	^ self queryAllOutgoing withoutSelfLoops
 		atScope: aClass
-		withNonMatchingEntitiesDo: [ :entities :res | entities ifNotNil: [ res addAll: entities asCollection ] ]
+		withNonMatchingEntitiesDo: [ :entities :res |
+			entities ifNotNil: [
+				entities isCollection
+				ifTrue: [ res addAll: entities ]
+				ifFalse: [ res add: entities ]
+			]
+		]
 ]
 
 { #category : #scoping }
@@ -489,7 +501,13 @@ TEntityMetaLevelDependency >> belongsTo: anEntity [
 TEntityMetaLevelDependency >> children [
 	| res |
 	res := Set new.
-	self childrenSelectors do: [ :accessor | (self perform: accessor) ifNotNil: [ :r | res addAll: r asCollection ] ].
+	self childrenSelectors do: [ :accessor | (self perform: accessor) ifNotNil: [ :r |
+		r ifNotNil: [
+			r isCollection
+				ifTrue: [ res addAll: r ]
+				ifFalse: [ res add: r ]
+		]
+	] ].
 	^ res
 ]
 

@@ -1,8 +1,8 @@
 Class {
 	#name : #FamixJavaMethod,
 	#superclass : #FamixJavaContainerEntity,
-	#traits : 'FamixJavaTCanBeSynchronized + FamixTCanBeAbstract + FamixTCanBeClassSide + FamixTCanBeFinal + FamixTHasKind + FamixTHasVisibility + FamixTMethod + FamixTWithCaughtExceptions + FamixTWithComments + FamixTWithDeclaredExceptions + FamixTWithThrownExceptions',
-	#classTraits : 'FamixJavaTCanBeSynchronized classTrait + FamixTCanBeAbstract classTrait + FamixTCanBeClassSide classTrait + FamixTCanBeFinal classTrait + FamixTHasKind classTrait + FamixTHasVisibility classTrait + FamixTMethod classTrait + FamixTWithCaughtExceptions classTrait + FamixTWithComments classTrait + FamixTWithDeclaredExceptions classTrait + FamixTWithThrownExceptions classTrait',
+	#traits : 'FamixJavaTCanBeSynchronized + FamixTCanBeAbstract + FamixTCanBeClassSide + FamixTCanBeFinal + FamixTHasKind + FamixTHasVisibility + FamixTImportable + FamixTMethod + FamixTWithComments + FamixTWithExceptions',
+	#classTraits : 'FamixJavaTCanBeSynchronized classTrait + FamixTCanBeAbstract classTrait + FamixTCanBeClassSide classTrait + FamixTCanBeFinal classTrait + FamixTHasKind classTrait + FamixTHasVisibility classTrait + FamixTImportable classTrait + FamixTMethod classTrait + FamixTWithComments classTrait + FamixTWithExceptions classTrait',
 	#category : #'Famix-Java-Entities-Entities'
 }
 
@@ -12,7 +12,7 @@ FamixJavaMethod class >> annotation [
 	<FMClass: #Method super: #FamixJavaContainerEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #'Famix-Extensions-metrics-support' }
@@ -103,25 +103,40 @@ FamixJavaMethod >> isClassInitializer [
 
 { #category : #testing }
 FamixJavaMethod >> isDetectedGetter [
+
+	self deprecated: 'This is legacy and is not used. January 2023'.
+
 	^ self outgoingInvocations isEmpty and: [ 
-		self accesses size = 1 and: [ 
-			self accesses first isWrite not ] ]
+		  self accesses size = 1 and: [ self accesses first isWrite not ] ]
 ]
 
 { #category : #testing }
 FamixJavaMethod >> isDetectedSetter [
+
+	self deprecated: 'This is legacy and is not used. January 2023'.
+
 	^ self outgoingInvocations isEmpty and: [ 
-		self accesses size = 1 and: [ 
-			self accesses first isWrite ] ]
+		  self accesses size = 1 and: [ self accesses first isWrite ] ]
 ]
 
 { #category : #testing }
 FamixJavaMethod >> isGetter [
+	"No parameter AND
+		Has a declared type (not void) AND
+			Has no outgoing invocation AND
+				Name starts with get OR
+					Name starts with is AND returns a boolean"
 
-	^ self kind = #getter or: [   (self name beginsWith: 'get') and: [ 
-		  self parameters isEmpty and: [ 
-			  self accesses asOrderedCollection size = 1 and: [ 
-				  self outgoingInvocations isEmpty ] ] ]]
+	^ self kind = #getter or: [
+		  self parameters isEmpty and: [
+			  self declaredType isNotNil and: [
+				  self declaredType name ~= 'void' and: [
+					  self outgoingInvocations isEmpty and: [
+						  self name isNotNil and: [
+							  (self name beginsWith: 'get') or: [
+								  (self name beginsWith: 'is') and: [
+									  self declaredType name caseInsensitiveLessOrEqual:
+										  'boolean' ] ] ] ] ] ] ] ]
 ]
 
 { #category : #testing }
@@ -142,10 +157,10 @@ FamixJavaMethod >> isJUnit4Test [
 ]
 
 { #category : #testing }
-FamixJavaMethod >> isOverriden [
+FamixJavaMethod >> isOverridden [
 	"If we have a stub and we don't have the container, we can't have the information"
 
-	<FMProperty: #isOverriden type: #Boolean>
+	<FMProperty: #isOverridden type: #Boolean>
 	<derived>
 	<FMComment: 'The method is overrided in a sub class'>
 	(self parentType isNil and: [ self isStub ])
@@ -166,11 +181,18 @@ FamixJavaMethod >> isOverriding [
 
 { #category : #testing }
 FamixJavaMethod >> isSetter [
+	"Name begins with set AND
+		Has 1 parameter AND
+			Declared type is void AND
+				Has no outgoing invocation"
 
-	^ self kind = #setter or: [ (self name beginsWith: 'set') and: [ 
-		  self parameters size = 1 and: [ 
-			  self accesses asOrderedCollection size = 1 and: [ 
-				  self outgoingInvocations isEmpty ] ] ] ]
+	^ self kind = #setter or: [
+		  self name isNotNil and: [
+			  (self name beginsWith: 'set') and: [
+				  self parameters size = 1 and: [
+					  self declaredType isNotNil and: [
+						  self declaredType name = 'void' and: [
+							  self outgoingInvocations isEmpty ] ] ] ] ] ]
 ]
 
 { #category : #printing }
@@ -234,9 +256,35 @@ FamixJavaMethod >> numberOfInvokedMethods [
 	^ self cacheAt: #numberOfInvokedMethods ifAbsentPut: [self invokedMethods size]
 ]
 
+{ #category : #testing }
+FamixJavaMethod >> overriddenMethod [
+
+	^ (self parentType superclass ifNotNil: [ :superclass |
+		   superclass lookUp: self signature ]) ifNil: [
+		  self parentType lookUpInInterfaces: self signature ]
+]
+
 { #category : #'Famix-Implementation' }
 FamixJavaMethod >> overridesMethod [
-	^ self belongsTo superclassHierarchy collect: [ :each | each implementationOf: self signature ] thenSelect: #isNotNil
+
+	self deprecated: 'This method seems to not be used anymore.'.
+	"Please consider using #overriddenMethod instead.
+	We are not automatically replacing it because the behavior is not identical: 
+		#overriddenMethod is a detect and not a collect + it goes through intefaces."
+
+	^ self belongsTo superclassHierarchy
+		  collect: [ :each | each implementationOf: self signature ]
+		  thenSelect: #isNotNil
+]
+
+{ #category : #testing }
+FamixJavaMethod >> overridingMethods [
+
+	| overridingMethods |
+	overridingMethods := OrderedCollection new.
+
+	self parentType addMethodOverriding: self in: overridingMethods.
+	^ overridingMethods
 ]
 
 { #category : #accessing }

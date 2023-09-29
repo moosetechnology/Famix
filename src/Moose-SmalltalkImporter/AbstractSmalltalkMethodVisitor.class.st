@@ -52,17 +52,15 @@ AbstractSmalltalkMethodVisitor >> createReferenceTo: aNamedEntity [
 AbstractSmalltalkMethodVisitor >> extractCommentsFromNode: aSequenceNode [
 
 	| comment |
-	importer importingContext shouldImportComment
-		ifTrue:
-			[aSequenceNode comments
-				do:
-					[:eachComment | 
-					comment := self importer factory comment new.
-					comment content: (aSequenceNode source 
-										copyFrom: eachComment start
-										to: eachComment stop) asString.
-					comment container: self methodEntity.
-					importer addEntity: comment]]
+	importer importingContext shouldImportComment ifTrue: [ 
+		aSequenceNode comments do: [ :eachComment | 
+			comment := self importer factory comment new.
+			comment content:
+				(aSequenceNode source
+					 copyFrom: eachComment start
+					 to: eachComment stop) asString.
+			comment commentedEntity: self methodEntity.
+			importer addEntity: comment ] ]
 ]
 
 { #category : #accessing }
@@ -168,12 +166,16 @@ AbstractSmalltalkMethodVisitor >> resolveInstanceSide: aNamedEntity [
 ]
 
 { #category : #accessing }
-AbstractSmalltalkMethodVisitor >> runWith: aCompiledMethod and: anEntity [ 
-	| parseTree |
-	self initializeForMethod: anEntity inClass: aCompiledMethod methodClass.
+AbstractSmalltalkMethodVisitor >> runWith: aCompiledMethod and: anEntity [
 
-	parseTree := theClass parseTreeFor: aCompiledMethod selector.
-	parseTree ifNotNil: [ self visitMethodNode: parseTree	"sourceCodeAt:" ]
+	| parseTree |
+	self
+		initializeForMethod: anEntity
+		inClass: aCompiledMethod methodClass.
+
+	parseTree := theClass parseTreeForSelector: aCompiledMethod selector.
+	parseTree ifNotNil: [
+		self visitMethodNode: parseTree "sourceCodeAt:" ]
 ]
 
 { #category : #accessing }

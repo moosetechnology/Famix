@@ -39,19 +39,19 @@ MooseAbstractGroupTest >> testAdd [
 
 { #category : #tests }
 MooseAbstractGroupTest >> testAddLast [
-	| entity class method |
-	group addLast: (entity := FamixTest1Entity new).
-	self assert: group last identicalTo: entity.
-
+	| attribute class method |
 	group addLast: (class := FamixTest1Class new).
 	self assert: group last identicalTo: class.
 
 	group addLast: (method := FamixTest1Method new).
 	self assert: group last identicalTo: method.
 
-	self assert: (group at: 1) identicalTo: entity.
-	self assert: (group at: 2) identicalTo: class.
-	self assert: (group at: 3) identicalTo: method
+	group addLast: (attribute := FamixTest1Attribute new).
+	self assert: group last identicalTo: attribute.
+	
+	self assert: (group at: 1) identicalTo: class.
+	self assert: (group at: 2) identicalTo: method.
+	self assert: (group at: 3) identicalTo: attribute
 ]
 
 { #category : #tests }
@@ -417,7 +417,7 @@ MooseAbstractGroupTest >> testOccurenceOf [
 
 { #category : #tests }
 MooseAbstractGroupTest >> testPropertyNamed [
-	self assert: (group propertyNamed: #UNKNOWN) isNil.
+	self should: [group propertyNamed: #UNKNOWN] raise: NotFound.
 	group propertyNamed: 'UNKNOWN' put: 10.
 	self assert: (group propertyNamed: #UNKNOWN) equals: 10
 ]

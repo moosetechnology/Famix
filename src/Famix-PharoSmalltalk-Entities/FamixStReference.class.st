@@ -12,5 +12,5 @@ FamixStReference class >> annotation [
 	<FMClass: #Reference super: #FamixStEntity>
 	<package: #'Famix-PharoSmalltalk-Entities'>
 	<generated>
-	^self
+	^ self
 ]

@@ -17,7 +17,7 @@ FamixTHeader classSide >> annotation [
 	<FMClass: #THeader super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }
@@ -25,6 +25,7 @@ FamixTHeader >> headerOwner [
 	"Relation named: #headerOwner type: #FamixTWithHeaders opposite: #header"
 
 	<generated>
+	<container>
 	^ headerOwner
 ]
 
@@ -33,4 +34,11 @@ FamixTHeader >> headerOwner: anObject [
 
 	<generated>
 	headerOwner := anObject
+]
+
+{ #category : #navigation }
+FamixTHeader >> headerOwnerGroup [
+	<generated>
+	<navigation: 'HeaderOwner'>
+	^ MooseSpecializedGroup with: self headerOwner
 ]

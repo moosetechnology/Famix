@@ -15,13 +15,20 @@ FamixTCanImplement classSide >> annotation [
 	<FMClass: #TCanImplement super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #adding }
 FamixTCanImplement >> addInterfaceImplementation: anObject [
 	<generated>
 	^ self interfaceImplementations add: anObject
+]
+
+{ #category : #accessing }
+FamixTCanImplement >> directImplementedInterfaces [
+
+	^ self interfaceImplementations collect: [ :implementation |
+		  implementation interface ]
 ]
 
 { #category : #accessing }

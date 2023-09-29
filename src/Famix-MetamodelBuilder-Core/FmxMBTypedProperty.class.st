@@ -56,9 +56,10 @@ FmxMBTypedProperty >> generateGetterIn: aClassOrTrait [
 			 s tab; nextPutAll: '<multivalued>'; cr. ].
 		commentDefinition  
 			ifNotEmpty: [ s tab; nextPutAll: commentDefinition; cr].
-		s tab; nextPutAll: '^ ';
-			nextPutAll: self name.].
-		
+		s tab; nextPutAll: '^ '; nextPutAll: self name.
+		self defaultValue ifNotNil: [
+			s nextPutAll: (' ifNil: [ {1} := {2} ]' format: { self name. self defaultValue }) ] ].
+
 	self builder environment compile: methodSource in: aClassOrTrait classified: 'accessing'.	
 	
 

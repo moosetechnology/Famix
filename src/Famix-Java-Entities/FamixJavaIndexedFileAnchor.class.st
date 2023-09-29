@@ -12,5 +12,5 @@ FamixJavaIndexedFileAnchor class >> annotation [
 	<FMClass: #IndexedFileAnchor super: #FamixJavaSourceAnchor>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^self
+	^ self
 ]

@@ -13,7 +13,15 @@ FamixTest4Entity class >> annotation [
 	<FMClass: #Entity super: #MooseEntity>
 	<package: #'Famix-Test4-Entities'>
 	<generated>
-	^self
+	<abstract>
+	^ self
+]
+
+{ #category : #testing }
+FamixTest4Entity class >> isAbstract [
+
+	<generated>
+	^ self == FamixTest4Entity
 ]
 
 { #category : #meta }

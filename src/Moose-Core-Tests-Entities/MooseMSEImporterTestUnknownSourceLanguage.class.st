@@ -12,5 +12,5 @@ MooseMSEImporterTestUnknownSourceLanguage class >> annotation [
 	<FMClass: #UnknownSourceLanguage super: #MooseMSEImporterTestSourceLanguage>
 	<package: #'Moose-Core-Tests-Entities'>
 	<generated>
-	^self
+	^ self
 ]

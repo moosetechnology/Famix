@@ -15,7 +15,7 @@ FamixTSourceAnchor classSide >> annotation [
 	<FMClass: #TSourceAnchor super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }

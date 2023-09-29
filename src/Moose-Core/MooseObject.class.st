@@ -179,6 +179,12 @@ MooseObject class >> superclassesAndFamixTraits [
 	^ self cache directAt: #superclassesAndFamixTraits
 ]
 
+{ #category : #accessing }
+MooseObject class >> undefinedName [
+
+	^ #noname
+]
+
 { #category : #testing }
 MooseObject class >> usedStatefulTraits [
 	^ self cache directAt: #usedStatefulTraits
@@ -283,7 +289,7 @@ MooseObject >> description: text [
 ]
 
 { #category : #printing }
-MooseObject >> displayStringOn: aStream [ 
+MooseObject >> displayStringOn: aStream [
 	self mooseNameOn: aStream
 ]
 
@@ -426,7 +432,7 @@ MooseObject >> mooseNameOn: aStream [
 
 { #category : #accessing }
 MooseObject >> name [
-	^ #noname
+	^ self class undefinedName
 ]
 
 { #category : #accessing }
@@ -478,10 +484,9 @@ MooseObject >> properties [
 
 { #category : #properties }
 MooseObject >> propertyNamed: propertyName [ 
-	"Return the value of the property named propertyName, return nil if the property does not exist"
+	"Returns the value of the property named propertyName, raises an error if the property does not exist"
 
-	^ self propertyNamed: propertyName ifNil: [ nil ]
-
+	^ self propertyNamed: propertyName ifAbsent: [ NotFound signalFor: 'Property named ', propertyName  ]
 ]
 
 { #category : #properties }

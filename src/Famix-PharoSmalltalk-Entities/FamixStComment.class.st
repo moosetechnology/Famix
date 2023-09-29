@@ -12,11 +12,11 @@ FamixStComment class >> annotation [
 	<FMClass: #Comment super: #FamixStSourcedEntity>
 	<package: #'Famix-PharoSmalltalk-Entities'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }
 FamixStComment >> belongsTo [
-	
-	^ self container
+
+	^ self commentedEntity
 ]

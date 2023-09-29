@@ -29,6 +29,12 @@ MooseModel class >> annotation [
 
 ]
 
+{ #category : #testing }
+MooseModel class >> canBeImportedFromFile [
+
+	^ false
+]
+
 { #category : #accessing }
 MooseModel class >> defaultPackagesToProcessWith: aCollectionOfPackages [
 	"We add to the creation of a metamodel all the metamodel entities of packages declaring to be part of the metamodels by default. 
@@ -151,11 +157,18 @@ MooseModel class >> importFrom: aStream withMetamodel: aMetamodel customizingImp
 
 { #category : #'import-export' }
 MooseModel class >> importFrom: aStream withMetamodel: aMetamodel filteredBy: anImportingContext [
+
 	"In the way to import a model we filter the entites we want to import via a FmxImportContext."
 
 	| famixElementNames |
-	famixElementNames := anImportingContext imports collect: [ :each | each mooseDescription fullName ].
-	^ self importFrom: aStream withMetamodel: aMetamodel customizingImporterWith: [ :importer | FMImporterFilter on: importer filtering: famixElementNames ]
+	famixElementNames := anImportingContext imports collect: [ :each | 
+		                     each fullName ].
+
+	^ self
+		  importFrom: aStream
+		  withMetamodel: aMetamodel
+		  customizingImporterWith: [ :importer | 
+			  FMImporterFilter on: importer filtering: famixElementNames ]
 ]
 
 { #category : #'import-export' }
@@ -206,6 +219,22 @@ MooseModel class >> importFromJSON: aStream withMetamodel: aMetamodel customizin
 ]
 
 { #category : #'import-export' }
+MooseModel class >> importFromJSON: aStream withMetamodel: aMetamodel filteredBy: anImportingContext [
+
+	"In the way to import a model we filter the entites we want to import via a FmxImportContext."
+
+	| famixElementNames |
+	famixElementNames := anImportingContext imports collect: [ :each | 
+		                     each fullName ].
+
+	^ self
+		  importFromJSON: aStream
+		  withMetamodel: aMetamodel
+		  customizingImporterWith: [ :importer | 
+			  FMImporterFilter on: importer filtering: famixElementNames ]
+]
+
+{ #category : #'import-export' }
 MooseModel class >> importFromMSEStream: aStream [
 	^ self new
 		importFromMSEStream: aStream;
@@ -214,9 +243,10 @@ MooseModel class >> importFromMSEStream: aStream [
 
 { #category : #'import-export' }
 MooseModel class >> importFromMSEStream: aStream filteredBy: anImportingContext [
+
 	^ self new
-		importFromMSEStream: aStream filteredBy: anImportingContext;
-		yourself
+		  importFromMSEStream: aStream filteredBy: anImportingContext;
+		  yourself
 ]
 
 { #category : #'import-export' }
@@ -232,8 +262,6 @@ MooseModel class >> importMetamodelFrom: aStream [
 { #category : #meta }
 MooseModel class >> metamodel [
 
-	self flag: #TODO. "The next line is a hack to not break everything in Moose. It should be removed later."
-	self = MooseModel ifTrue: [ ^ FamixStModel metamodel ].
 	^ metamodel ifNil: [ self resetMetamodel ]
 ]
 
@@ -337,6 +365,7 @@ MooseModel >> addAll: entities [
 
 { #category : #'entity collection' }
 MooseModel >> addNoAnnounce: anElement [
+
 	self entityStorage add: anElement.
 	self flush.
 	anElement privateSetMooseModel: self.
@@ -405,11 +434,14 @@ MooseModel >> deadCodeRate [
 MooseModel >> detectEncodingOfAllFileAnchors [
 	"I can be execute to reduce the time of detection of the encoding of each file anchor because multiple file anchor can point to the same file."
 
-	(((self allUsing: FamixTFileAnchor) asOrderedCollection reject: #privateHasEncoding) groupedBy: #fileName)
-		valuesDo: [ :anchors | 
-			| encoding |
-			encoding := anchors anyOne detectEncoding.
-			anchors do: [ :anchor | anchor encoding: encoding ] ]
+	(((self select: [ :entity |
+		   [ entity isFileAnchor ]
+			   on: MessageNotUnderstood
+			   do: [ false ] ]) asOrderedCollection reject: #privateHasEncoding)
+		 groupedBy: #fileName) valuesDo: [ :anchors |
+		| encoding |
+		encoding := anchors anyOne detectEncoding.
+		anchors do: [ :anchor | anchor encoding: encoding ] ]
 ]
 
 { #category : #'set operations' }
@@ -502,6 +534,7 @@ MooseModel >> flushPrivateState [
 
 { #category : #actions }
 MooseModel >> importFrom: aFMModel named: aString [
+
 	self silentlyAddAll: aFMModel elements.
 	self entityStorage forRuntime.
 	self name: aString
@@ -525,6 +558,7 @@ MooseModel >> importFromJSON [
 
 { #category : #actions }
 MooseModel >> importFromJSONStream: aStream [
+
 	"Benchmarks
 	Time millisecondsToRun: [ MooseModel new importFromJSONStream: (StandardFileStream readOnlyFileNamed: 'network3.json') ].
 	Time millisecondsToRun: [ MooseModel new importFromJSONStream: (StandardFileStream readOnlyFileNamed: 'moose.json') ]. 178163 simon.denier 9/11/2009 12:29
@@ -533,14 +567,21 @@ MooseModel >> importFromJSONStream: aStream [
 	 17560 -> simon_denier 9/21/2009 22:34 - removing metrics from MSE
 	"
 
-	^ self importFrom: (self class importFromJSON: aStream withMetamodel: self metamodel) named: (aStream localName removeSuffix: '.json')
+	^ self
+		  importFrom:
+		  (self class importFromJSON: aStream withMetamodel: self metamodel)
+		  named: (aStream localName removeSuffix: '.json')
 ]
 
 { #category : #actions }
 MooseModel >> importFromJSONStream: aStream filteredBy: anImportingContext [
+
 	^ self
-		importFrom: (self class importFrom: aStream withMetamodel: self metamodel filteredBy: anImportingContext)
-		named: (aStream localName removeSuffix: '.json')
+		  importFrom: (self class
+				   importFromJSON: aStream
+				   withMetamodel: self metamodel
+				   filteredBy: anImportingContext)
+		  named: (aStream localName removeSuffix: '.json')
 ]
 
 { #category : #'import-export' }
@@ -561,6 +602,7 @@ MooseModel >> importFromMSE [
 
 { #category : #actions }
 MooseModel >> importFromMSEStream: aStream [
+
 	"Benchmarks
 	Time millisecondsToRun: [ MooseModel new importFromMSEStream: (StandardFileStream readOnlyFileNamed: 'network3.mse') ].
 	Time millisecondsToRun: [ MooseModel new importFromMSEStream: (StandardFileStream readOnlyFileNamed: 'moose.mse') ]. 178163 simon.denier 9/11/2009 12:29
@@ -569,14 +611,21 @@ MooseModel >> importFromMSEStream: aStream [
 	 17560 -> simon_denier 9/21/2009 22:34 - removing metrics from MSE
 	"
 
-	^ self importFrom: (self class importFrom: aStream withMetamodel: self metamodel) named: (aStream localName removeSuffix: '.mse')
+	^ self
+		  importFrom:
+		  (self class importFrom: aStream withMetamodel: self metamodel)
+		  named: (aStream localName removeSuffix: '.mse')
 ]
 
 { #category : #actions }
 MooseModel >> importFromMSEStream: aStream filteredBy: anImportingContext [
+
 	^ self
-		importFrom: (self class importFrom: aStream withMetamodel: self metamodel filteredBy: anImportingContext)
-		named: (aStream localName removeSuffix: '.mse')
+		  importFrom: (self class
+				   importFrom: aStream
+				   withMetamodel: self metamodel
+				   filteredBy: anImportingContext)
+		  named: (aStream localName removeSuffix: '.mse')
 ]
 
 { #category : #testing }
@@ -638,7 +687,7 @@ MooseModel >> inferNamespaceParentsBasedOnNames [
 { #category : #initialization }
 MooseModel >> initialize [
 	super initialize.
-	name := #noname.
+	name := self class undefinedName. 
 	self metamodel: self class metamodel
 ]
 
@@ -808,16 +857,16 @@ MooseModel >> rootFolder: aString [
 ]
 
 { #category : #'entity collection' }
-MooseModel >> silentlyAdd: anElement [ 
-	 
-	self suspendAllAnnouncementsDuring: [^self add: anElement].
+MooseModel >> silentlyAdd: anElement [
+
+	self suspendAllAnnouncementsDuring: [ ^ self add: anElement ]
 ]
 
 { #category : #'entity collection' }
-MooseModel >> silentlyAddAll: entities [ 
-	 
-	entities do: [:each | self addNoAnnounce: each].
-	^entities
+MooseModel >> silentlyAddAll: entities [
+
+	entities do: [ :each | self addNoAnnounce: each ].
+	^ entities
 ]
 
 { #category : #'entity collection' }
@@ -827,11 +876,10 @@ MooseModel >> silentlyRemove: anElement [
 ]
 
 { #category : #'entity collection' }
-MooseModel >> silentlyRemoveAll: collection [ 
-	
-	collection do: [:each | self silentlyRemove: each].
-	^collection
-	
+MooseModel >> silentlyRemoveAll: collection [
+
+	collection do: [ :each | self silentlyRemove: each ].
+	^ collection
 ]
 
 { #category : #'set operations' }

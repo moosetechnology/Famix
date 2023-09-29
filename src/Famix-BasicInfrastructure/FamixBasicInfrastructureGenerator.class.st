@@ -28,12 +28,12 @@ FamixBasicInfrastructureGenerator class >> submetamodels [
 FamixBasicInfrastructureGenerator >> defineClasses [
 	super defineClasses.
 
-	sourceAnchor := builder newClassNamed: #SourceAnchor.
+	sourceAnchor := builder newAbstractClassNamed: #SourceAnchor.
 	sourceLanguage := builder newClassNamed: #SourceLanguage.
 	unknownSourceLanguage := builder newClassNamed: #UnknownSourceLanguage.
-	sourcedEntity := builder newClassNamed: #SourcedEntity.
+	sourcedEntity := builder newAbstractClassNamed: #SourcedEntity.
 	comment := builder newClassNamed: #Comment.
-	namedEntity := builder newClassNamed: #NamedEntity.
+	namedEntity := builder newAbstractClassNamed: #NamedEntity.
 	sourceTextAnchor := builder newClassNamed: #SourceTextAnchor
 ]
 

@@ -1,0 +1,10 @@
+SmalltalkCISpec {
+  #loading : [
+    SCIMetacelloLoadSpec {
+      #baseline : 'Famix',
+      #directory : '../../src'
+    }
+  ],
+  #postLoading : 'famixFortran-baseline.st',
+  #testing : { #categories : [ 'Famix-Fortran77-Tests', 'FortranCamfortImporter-Tests', 'FAST-Fortran-Json-Exporter-Visitor-Tests' ] }
+}

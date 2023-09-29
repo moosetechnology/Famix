@@ -12,5 +12,13 @@ MooseMSEImporterTestSourceAnchor class >> annotation [
 	<FMClass: #SourceAnchor super: #MooseMSEImporterTestEntity>
 	<package: #'Moose-Core-Tests-Entities'>
 	<generated>
-	^self
+	<abstract>
+	^ self
+]
+
+{ #category : #testing }
+MooseMSEImporterTestSourceAnchor class >> isAbstract [
+
+	<generated>
+	^ self == MooseMSEImporterTestSourceAnchor
 ]

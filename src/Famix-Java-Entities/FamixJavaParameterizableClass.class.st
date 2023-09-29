@@ -12,7 +12,20 @@ FamixJavaParameterizableClass class >> annotation [
 	<FMClass: #ParameterizableClass super: #FamixJavaClass>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^self
+	^ self
+]
+
+{ #category : #enumerating }
+FamixJavaParameterizableClass >> allSubclassesDo: aBlock [
+	"override traversal to include subtypes of parameterized types"
+
+	| recursion |
+	recursion := [ :each | 
+	             aBlock value: each subclass.
+	             each subclass allSubclassesDo: aBlock ].
+	self subInheritances do: recursion.
+	self parameterizedTypes do: [ :type | 
+		type subInheritances do: recursion ]
 ]
 
 { #category : #accessing }

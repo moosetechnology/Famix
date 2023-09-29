@@ -16,6 +16,8 @@ Trait {
 	#instVars : [
 		'#parentEnum => FMOne type: #FamixTWithEnumValues opposite: #enumValues'
 	],
+	#traits : 'FamixTStructuralEntity',
+	#classTraits : 'FamixTStructuralEntity classTrait',
 	#category : #'Famix-Traits-EnumValue'
 }
 
@@ -25,7 +27,14 @@ FamixTEnumValue classSide >> annotation [
 	<FMClass: #TEnumValue super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
+]
+
+{ #category : #testing }
+FamixTEnumValue >> isEnumValue [
+
+	<generated>
+	^ true
 ]
 
 { #category : #accessing }

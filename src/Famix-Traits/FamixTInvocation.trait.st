@@ -17,8 +17,8 @@ Trait {
 		'#receiver => FMOne type: #FamixTInvocationsReceiver opposite: #receivingInvocations',
 		'#sender => FMOne type: #FamixTWithInvocations opposite: #outgoingInvocations'
 	],
-	#traits : 'FamixTAssociation',
-	#classTraits : 'FamixTAssociation classTrait',
+	#traits : 'FamixTAssociation + FamixTHasSignature',
+	#classTraits : 'FamixTAssociation classTrait + FamixTHasSignature classTrait',
 	#category : #'Famix-Traits-Invocation'
 }
 
@@ -28,7 +28,7 @@ FamixTInvocation classSide >> annotation [
 	<FMClass: #TInvocation super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #groups }
@@ -72,14 +72,15 @@ FamixTInvocation >> displayStringOn: aStream [
 		ifNotNil: [ self sender displayStringOn: aStream ]
 		ifNil: [ aStream nextPut: $? ].
 	aStream nextPutAll: ' -> '.
-	(self class usesTrait: FamixTHasSignature)
-		ifTrue: [ 
-		aStream nextPutAll: (self signature truncateWithElipsisTo: 40) ]
-		ifFalse: [ aStream nextPutAll: ' ? ' ].
-	aStream nextPutAll: ' -> '.
 	self receiver
 		ifNotNil: [ :rcvr | self receiver displayStringOn: aStream ]
-		ifNil: [ aStream nextPut: $? ]
+		ifNil: [ aStream nextPut: $? ].
+	aStream nextPutAll: ' . '.
+
+	self signature
+		ifNotNil: [ 
+		aStream nextPutAll: (self signature truncateWithElipsisTo: 40) ]
+		ifNil: [ aStream nextPutAll: ' ? ' ]
 ]
 
 { #category : #'instance creation' }

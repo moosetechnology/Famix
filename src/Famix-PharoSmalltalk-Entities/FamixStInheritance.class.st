@@ -12,5 +12,5 @@ FamixStInheritance class >> annotation [
 	<FMClass: #Inheritance super: #FamixStEntity>
 	<package: #'Famix-PharoSmalltalk-Entities'>
 	<generated>
-	^self
+	^ self
 ]

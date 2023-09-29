@@ -12,7 +12,15 @@ FamixJavaContainerEntity class >> annotation [
 	<FMClass: #ContainerEntity super: #FamixJavaNamedEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^self
+	<abstract>
+	^ self
+]
+
+{ #category : #testing }
+FamixJavaContainerEntity class >> isAbstract [
+
+	<generated>
+	^ self == FamixJavaContainerEntity
 ]
 
 { #category : #adding }

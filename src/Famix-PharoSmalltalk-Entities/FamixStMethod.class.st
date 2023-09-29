@@ -1,8 +1,8 @@
 Class {
 	#name : #FamixStMethod,
 	#superclass : #FamixStNamedEntity,
-	#traits : 'FamixTCanBeAbstract + FamixTCanBeClassSide + FamixTHasKind + FamixTMethod + FamixTWithAnnotationInstances + FamixTWithAnnotationTypes + FamixTWithComments',
-	#classTraits : 'FamixTCanBeAbstract classTrait + FamixTCanBeClassSide classTrait + FamixTHasKind classTrait + FamixTMethod classTrait + FamixTWithAnnotationInstances classTrait + FamixTWithAnnotationTypes classTrait + FamixTWithComments classTrait',
+	#traits : 'FamixTCanBeAbstract + FamixTCanBeClassSide + FamixTHasKind + FamixTMethod + FamixTPackageable + FamixTWithAnnotationInstances + FamixTWithAnnotationTypes + FamixTWithComments',
+	#classTraits : 'FamixTCanBeAbstract classTrait + FamixTCanBeClassSide classTrait + FamixTHasKind classTrait + FamixTMethod classTrait + FamixTPackageable classTrait + FamixTWithAnnotationInstances classTrait + FamixTWithAnnotationTypes classTrait + FamixTWithComments classTrait',
 	#instVars : [
 		'#protocol => FMProperty'
 	],
@@ -15,7 +15,7 @@ FamixStMethod class >> annotation [
 	<FMClass: #Method super: #FamixStNamedEntity>
 	<package: #'Famix-PharoSmalltalk-Entities'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #'Famix-Extensions-metrics-support' }
@@ -141,10 +141,10 @@ FamixStMethod >> isJUnit4Test [
 ]
 
 { #category : #testing }
-FamixStMethod >> isOverriden [
+FamixStMethod >> isOverridden [
 	"If we have a stub and we don't have the container, we can't have the information"
 
-	<FMProperty: #isOverriden type: #Boolean>
+	<FMProperty: #isOverridden type: #Boolean>
 	<derived>
 	<FMComment: 'The method is overrided in a sub class'>
 	(self parentType isNil and: [ self isStub ])
@@ -237,6 +237,12 @@ FamixStMethod >> numberOfStatements [
 		computedAs: [ self computeNumberOfStatements ]
 ]
 
+{ #category : #'Famix-Extensions-metrics-support' }
+FamixStMethod >> printProtocol [
+
+	^ '" ' , self protocol , ' "' , String cr
+]
+
 { #category : #accessing }
 FamixStMethod >> protocol [
 
@@ -267,7 +273,7 @@ FamixStMethod >> smalltalkClass [
 FamixStMethod >> sourceText [
 
 	self flag: 'This code should be delegated to the anchor'.
-	^ [ self compiledMethod sourceCode ]
+	^ [ self printProtocol , self compiledMethod sourceCode ]
 		  on: Error
 		  do: [ "probably class is not in the system" super sourceText ]
 ]

@@ -1,8 +1,8 @@
 Class {
 	#name : #FamixJavaClass,
 	#superclass : #FamixJavaType,
-	#traits : 'FamixJavaTClassMetrics + FamixTCanBeAbstract + FamixTCanBeClassSide + FamixTCanBeFinal + FamixTCanImplement + FamixTClass + FamixTClassMetrics + FamixTHasVisibility + FamixTLCOMMetrics + FamixTWithExceptions',
-	#classTraits : 'FamixJavaTClassMetrics classTrait + FamixTCanBeAbstract classTrait + FamixTCanBeClassSide classTrait + FamixTCanBeFinal classTrait + FamixTCanImplement classTrait + FamixTClass classTrait + FamixTClassMetrics classTrait + FamixTHasVisibility classTrait + FamixTLCOMMetrics classTrait + FamixTWithExceptions classTrait',
+	#traits : 'FamixJavaTClassMetrics + FamixTCanBeAbstract + FamixTCanBeClassSide + FamixTCanBeFinal + FamixTCanImplement + FamixTClass + FamixTClassMetrics + FamixTHasVisibility + FamixTImportable + FamixTLCOMMetrics + FamixTWithImports',
+	#classTraits : 'FamixJavaTClassMetrics classTrait + FamixTCanBeAbstract classTrait + FamixTCanBeClassSide classTrait + FamixTCanBeFinal classTrait + FamixTCanImplement classTrait + FamixTClass classTrait + FamixTClassMetrics classTrait + FamixTHasVisibility classTrait + FamixTImportable classTrait + FamixTLCOMMetrics classTrait + FamixTWithImports classTrait',
 	#category : #'Famix-Java-Entities-Entities'
 }
 
@@ -12,7 +12,7 @@ FamixJavaClass class >> annotation [
 	<FMClass: #Class super: #FamixJavaType>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #'Famix-Extensions-metrics-support' }
@@ -23,6 +23,35 @@ FamixJavaClass >> accessedAttributes [
 	Used to support the calculation of LCOM"
 	
 	^ self methodsWithoutSutbsAndConstructors asOrderedCollection flatCollect: [ :method | method accessedAttributes ]
+]
+
+{ #category : #private }
+FamixJavaClass >> addMethodOverriding: aMethod in: aCollection [
+
+	self directSubclasses do: [ :subClass |
+		subClass methods
+			detect: [ :method | method signature = aMethod signature ]
+			ifFound: [ :overridingMethod | aCollection add: overridingMethod ]
+			ifNone: [ subClass addMethodOverriding: aMethod in: aCollection ] ]
+]
+
+{ #category : #enumerating }
+FamixJavaClass >> allImplementedInterfacesHierarchy [
+
+	| allImplementedInterfaces |
+	allImplementedInterfaces := OrderedCollection new.
+
+	self allImplementedInterfacesHierarchyDo: [ :interface |
+		allImplementedInterfaces add: interface ].
+
+	^ allImplementedInterfaces
+]
+
+{ #category : #enumerating }
+FamixJavaClass >> allImplementedInterfacesHierarchyDo: aBlock [
+
+	self directImplementedInterfaces do: [ :directInterface |
+		directInterface withSuperclassesDo: aBlock ]
 ]
 
 { #category : #accessing }
@@ -97,6 +126,16 @@ FamixJavaClass >> isInterface [
 FamixJavaClass >> isInterface: aBoolean [
 
 	^ self attributeAt: #isInterface put: true
+]
+
+{ #category : #private }
+FamixJavaClass >> lookUpInInterfaces: aMethodSignature [
+
+	self allImplementedInterfacesHierarchyDo: [ :interface |
+		(interface lookUp: aMethodSignature) ifNotNil: [ :method | ^ method ] ].
+
+	^ self superclass ifNotNil: [ :superclass |
+		  superclass lookUpInInterfaces: aMethodSignature ]
 ]
 
 { #category : #'Famix-Extensions-metrics-support' }

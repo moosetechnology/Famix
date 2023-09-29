@@ -83,6 +83,7 @@ FamixPharoSmalltalkGenerator >> defineHierarchy [
 	annotationType --|> #TEntityMetaLevelDependency.
 	annotationType --|> #TAnnotationType.
 	annotationType --|> #TWithAttributes.
+	annotationType --|> #TPackageable.
 
 	annotationTypeAttribute --|> namedEntity.
 	annotationTypeAttribute --|> #TEntityMetaLevelDependency.
@@ -99,7 +100,6 @@ FamixPharoSmalltalkGenerator >> defineHierarchy [
 	self flag:
 		'WithTypes should not be necessary but needed in tests like FamixMetricsTest>>testAfferentCouplingFamixClassGroup'.
 	class --|> #TWithTypes.
-	class --|> #TWithExceptions.
 	class --|> #TClass.
 	class --|> #TCanBeAbstract.
 	class --|> #TClassMetrics.
@@ -115,7 +115,6 @@ FamixPharoSmalltalkGenerator >> defineHierarchy [
 	inheritance --|> #TInheritance.
 
 	invocation --|> #TInvocation.
-	invocation --|> #THasSignature.
 
 	localVariable --|> namedEntity.
 	localVariable --|> #TLocalVariable.
@@ -129,8 +128,8 @@ FamixPharoSmalltalkGenerator >> defineHierarchy [
 	method --|> #TWithComments.
 	method --|> #TWithAnnotationInstances.
 	method --|> #TCanBeClassSide.
+	method --|> #TPackageable.
 
-	namedEntity --|> #TPackageable.
 	namedEntity --|> #TInvocationsReceiver.
 	namedEntity --|> #TEntityMetaLevelDependency.
 	namedEntity --|> sourcedEntity.
@@ -169,7 +168,8 @@ FamixPharoSmalltalkGenerator >> defineProperties [
 
 { #category : #initialization }
 FamixPharoSmalltalkGenerator >> newBuilder [
+
 	^ super newBuilder
-		withImportingContext;
-		yourself
+		  withFileImport;
+		  yourself
 ]

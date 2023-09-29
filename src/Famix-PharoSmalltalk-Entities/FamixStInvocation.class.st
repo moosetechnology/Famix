@@ -1,8 +1,8 @@
 Class {
 	#name : #FamixStInvocation,
 	#superclass : #FamixStEntity,
-	#traits : 'FamixTHasSignature + FamixTInvocation',
-	#classTraits : 'FamixTHasSignature classTrait + FamixTInvocation classTrait',
+	#traits : 'FamixTInvocation',
+	#classTraits : 'FamixTInvocation classTrait',
 	#category : #'Famix-PharoSmalltalk-Entities-Entities'
 }
 
@@ -12,7 +12,7 @@ FamixStInvocation class >> annotation [
 	<FMClass: #Invocation super: #FamixStEntity>
 	<package: #'Famix-PharoSmalltalk-Entities'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #initialization }

@@ -1,8 +1,8 @@
 Class {
 	#name : #FamixJavaPackage,
 	#superclass : #FamixJavaContainerEntity,
-	#traits : 'FamixTPackage + FamixTPackageable + FamixTWithComments + FamixTWithGlobalVariables',
-	#classTraits : 'FamixTPackage classTrait + FamixTPackageable classTrait + FamixTWithComments classTrait + FamixTWithGlobalVariables classTrait',
+	#traits : 'FamixTImportable + FamixTPackage + FamixTPackageable + FamixTWithComments',
+	#classTraits : 'FamixTImportable classTrait + FamixTPackage classTrait + FamixTPackageable classTrait + FamixTWithComments classTrait',
 	#category : #'Famix-Java-Entities-Entities'
 }
 
@@ -12,7 +12,7 @@ FamixJavaPackage class >> annotation [
 	<FMClass: #Package super: #FamixJavaContainerEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #'Famix-Implementation' }

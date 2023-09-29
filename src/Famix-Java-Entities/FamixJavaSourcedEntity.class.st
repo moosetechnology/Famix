@@ -1,8 +1,8 @@
 Class {
 	#name : #FamixJavaSourcedEntity,
 	#superclass : #FamixJavaEntity,
-	#traits : 'FamixTSourceEntity + FamixTWithFiles',
-	#classTraits : 'FamixTSourceEntity classTrait + FamixTWithFiles classTrait',
+	#traits : 'FamixTSourceEntity',
+	#classTraits : 'FamixTSourceEntity classTrait',
 	#category : #'Famix-Java-Entities-Entities'
 }
 
@@ -12,7 +12,15 @@ FamixJavaSourcedEntity class >> annotation [
 	<FMClass: #SourcedEntity super: #FamixJavaEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^self
+	<abstract>
+	^ self
+]
+
+{ #category : #testing }
+FamixJavaSourcedEntity class >> isAbstract [
+
+	<generated>
+	^ self == FamixJavaSourcedEntity
 ]
 
 { #category : #'Famix-SourceAnchor' }

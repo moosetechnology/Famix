@@ -12,7 +12,7 @@ FamixStLocalVariable class >> annotation [
 	<FMClass: #LocalVariable super: #FamixStNamedEntity>
 	<package: #'Famix-PharoSmalltalk-Entities'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }

@@ -12,5 +12,5 @@ FamixTest3PrimitiveType class >> annotation [
 	<FMClass: #PrimitiveType super: #FamixTest3Type>
 	<package: #'Famix-Test3-Entities'>
 	<generated>
-	^self
+	^ self
 ]

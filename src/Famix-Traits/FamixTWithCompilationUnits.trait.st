@@ -12,7 +12,7 @@ FamixTWithCompilationUnits classSide >> annotation [
 	<FMClass: #TWithCompilationUnits super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #accessing }

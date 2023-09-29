@@ -10,5 +10,5 @@ FamixTest4Classroom class >> annotation [
 	<FMClass: #Classroom super: #FamixTest4Room>
 	<package: #'Famix-Test4-Entities'>
 	<generated>
-	^self
+	^ self
 ]

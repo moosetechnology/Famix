@@ -11,7 +11,7 @@ FamixTPrimitiveType classSide >> annotation [
 	<FMClass: #TPrimitiveType super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #testing }

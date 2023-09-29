@@ -1,7 +1,7 @@
 Class {
 	#name : #FamixNamespaceGroup,
 	#superclass : #MooseSpecializedGroup,
-	#category : #'Famix-Traits-Entities'
+	#category : #'Famix-Traits-Groups'
 }
 
 { #category : #meta }
@@ -10,7 +10,7 @@ FamixNamespaceGroup class >> annotation [
 	<FMClass: #NamespaceGroup super: #MooseSpecializedGroup>
 	<package: #'Famix-Traits'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #meta }

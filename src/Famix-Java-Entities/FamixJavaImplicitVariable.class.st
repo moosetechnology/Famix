@@ -12,7 +12,7 @@ FamixJavaImplicitVariable class >> annotation [
 	<FMClass: #ImplicitVariable super: #FamixJavaNamedEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #printing }

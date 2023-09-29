@@ -12,7 +12,7 @@ FamixJavaLocalVariable class >> annotation [
 	<FMClass: #LocalVariable super: #FamixJavaNamedEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^self
+	^ self
 ]
 
 { #category : #printing }
