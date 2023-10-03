@@ -20,6 +20,7 @@ MooseSpecializedGroup class >> annotation [
 
 { #category : #'instance creation' }
 MooseSpecializedGroup class >> withAll: collection [
+
 	^ (self = MooseSpecializedGroup
 		ifTrue: [ collection commonSuperclass relatedGroupType ]
 		ifFalse: [ self ]) new
