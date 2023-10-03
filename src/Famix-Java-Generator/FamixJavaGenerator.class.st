@@ -42,7 +42,8 @@ Class {
 		'tWithInterfaces',
 		'import',
 		'tBounded',
-		'tBound'
+		'tBound',
+		'wildcard'
 	],
 	#classInstVars : [
 		'builder'
@@ -169,6 +170,7 @@ FamixJavaGenerator >> defineClasses [
 	parameterConcretisation := builder newClassNamed: #ParameterConcretisation.
 	
 	concretisation := builder newClassNamed: #Concretisation.
+	wildcard := builder newClassNamed:  #Wildcard. 
 	
 	
 	self defineComments
@@ -359,10 +361,14 @@ FamixJavaGenerator >> defineHierarchy [
 	parameterType --|> #TTypedEntity .
 	
 	type --|> #TConcreteParameterType.
+	type --|> #TBound.
 	
 	concretisation --|> #TConcretisation.
 	
 	parameterConcretisation --|> #TParameterConcretisation.
+	
+	wildcard --|> type.
+	wildcard --|> #TBounded
 	
 	inheritance --|> #TInheritance.
 	parameterType --|> #TWithInheritances.
