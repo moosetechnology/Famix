@@ -11,7 +11,7 @@ public class SharedObject {
 Trait {
 	#name : #FamixJavaTCanBeVolatile,
 	#instVars : [
-		'#isVolatile => FMProperty'
+		'#isVolatile => FMProperty defaultValue: false'
 	],
 	#category : #'Famix-Java-Entities-Traits'
 }

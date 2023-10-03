@@ -365,3 +365,10 @@ FamixJavaTEntityCreator >> newUnknownVariableNamed: aName [
 	<generated>
 	^ self add: (FamixJavaUnknownVariable named: aName)
 ]
+
+{ #category : #'entity creation' }
+FamixJavaTEntityCreator >> newWildcard [
+
+	<generated>
+	^ self add: FamixJavaWildcard new
+]

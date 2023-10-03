@@ -260,6 +260,13 @@ FamixJavaImportingContext >> importUnknownVariable [
 	^ self importConcreteEntity: (self class fm3ClassNamed: #UnknownVariable)
 ]
 
+{ #category : #importing }
+FamixJavaImportingContext >> importWildcard [
+
+	<generated>
+	^ self importConcreteEntity: (self class fm3ClassNamed: #Wildcard)
+]
+
 { #category : #testing }
 FamixJavaImportingContext >> shouldImportAccess [
 
@@ -503,4 +510,11 @@ FamixJavaImportingContext >> shouldImportUnknownVariable [
 
 	<generated>
 	^ self shouldImport: #UnknownVariable
+]
+
+{ #category : #testing }
+FamixJavaImportingContext >> shouldImportWildcard [
+
+	<generated>
+	^ self shouldImport: #Wildcard
 ]

@@ -361,14 +361,14 @@ FamixJavaGenerator >> defineHierarchy [
 	parameterType --|> #TTypedEntity .
 	
 	type --|> #TConcreteParameterType.
-	type --|> #TBound.
+	type --|> tBound.
 	
 	concretisation --|> #TConcretisation.
 	
 	parameterConcretisation --|> #TParameterConcretisation.
 	
 	wildcard --|> type.
-	wildcard --|> #TBounded
+	wildcard --|> tBounded.
 	
 	inheritance --|> #TInheritance.
 	parameterType --|> #TWithInheritances.
