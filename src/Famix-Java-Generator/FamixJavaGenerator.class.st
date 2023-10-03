@@ -390,6 +390,14 @@ FamixJavaGenerator >> defineProperties [
 { #category : #definition }
 FamixJavaGenerator >> defineRelations [ 
 
+	((tBounded property: #lowerBound) comment: 'Lower bound on wildcard, specified by super keyword.')
+	*-
+	((tBound property: #lowerBoundedWildcards) comment: 'Wildcards lower bounded by this bound.').
+	
+	((tBounded property: #upperBound) comment: 'Upper bound on wildcard, specified by extends keyword.')
+	*-
+	((tBound property: #upperBoundedWildcards) comment: 'Wildcards upper bounded by this bound.').
+	
 ]
 
 { #category : #definition }
