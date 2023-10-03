@@ -40,7 +40,9 @@ Class {
 		'tImplementable',
 		'tCanImplement',
 		'tWithInterfaces',
-		'import'
+		'import',
+		'tBounded',
+		'tBound'
 	],
 	#classInstVars : [
 		'builder'
@@ -58,6 +60,18 @@ FamixJavaGenerator class >> packageName [
 FamixJavaGenerator class >> prefix [
 
 	^ #'FamixJava'
+]
+
+{ #category : #definition }
+FamixJavaGenerator >> commentForTBound [
+
+	^ 'Represents a bound for a lower bounded and upper bounded wildcard.'
+]
+
+{ #category : #definition }
+FamixJavaGenerator >> commentForTBounded [
+
+	^ 'Represents a bounded wildcard, lower bounded with keyword super or upper bounded with keyword extends.'
 ]
 
 { #category : #definition }
@@ -393,7 +407,8 @@ FamixJavaGenerator >> defineTraits [
 
 	tJavaClassMetrics := builder newTraitNamed: #TClassMetrics.
 	
-
+	tBounded := builder newTraitNamed: #TBounded comment: self commentForTBounded.
+	tBound := builder newTraitNamed: #TBound comment: self commentForTBound
 	
 ]
 
