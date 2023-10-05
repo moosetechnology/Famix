@@ -51,6 +51,12 @@ MooseGroup >> addAll: collection [
 	self entityStorage addAll: collection
 ]
 
+{ #category : #converting }
+MooseGroup >> asMooseSpecializedGroup [
+
+	^ self specialize
+]
+
 { #category : #private }
 MooseGroup >> changeTypeTo: aSmalltalkClass [
 	self class == aSmalltalkClass ifTrue: [ ^ self ].

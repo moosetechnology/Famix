@@ -161,6 +161,8 @@ BaselineOfFamix >> packages: spec [
 		with: [ spec requires: #( 'Moose-Core' 'SingularizePluralize' ) ];
 		package: 'Famix-MetamodelGeneration'
 		with: [ spec requires: #( 'Famix-MetamodelBuilder-Core' ) ];
+		package: 'Famix-Visualizations'
+		with: [ spec requires: #( 'Famix-Traits' 'Fame' 'Moose-Core' ) ];
 		package: 'Famix-BasicInfrastructure'
 		with: [ spec requires: #( 'Famix-MetamodelGeneration' ) ];
 		package: 'Famix-Smalltalk-Utils'
@@ -277,10 +279,12 @@ BaselineOfFamix >> packages: spec [
 		with: [ spec requires: #( 'Famix-TestComposedMetamodel-Entities' ) ];
 		package: 'Famix-Deprecated'
 		with: [
-			spec requires: #( 'Core' 'ModelJava' 'ModelSmalltalk' 'Tests' ) ];
+			spec requires: #( 'Core' 'ModelJava' 'ModelSmalltalk'
+				   'Tests' ) ];
 		package: 'Famix-UMLDocumentor' with: [ spec requires: #( 'Core' ) ];
 		package: 'Famix-UMLDocumentor-Tests' with: [
-			spec requires: #( 'Famix-UMLDocumentor' 'FamixDocumentor-TestMetaModel' ) ];
+			spec requires:
+					#( 'Famix-UMLDocumentor' 'FamixDocumentor-TestMetaModel' ) ];
 		package: 'FamixDocumentor-TestMetaModel'
 ]
 
