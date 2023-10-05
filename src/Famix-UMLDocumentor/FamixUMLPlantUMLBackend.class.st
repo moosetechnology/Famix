@@ -57,9 +57,7 @@ FamixUMLPlantUMLBackend >> generateClassHeader: aUMLClass [
 		<< aUMLClass name ;
 		<< ' <<(' ;
 		<< (self classMarker: aUMLClass) ;
-		<< ',#' ;
-		<< aUMLClass color asHexString ;
-		<< $).
+		<< ',white)'.
 	aUMLClass isStub ifTrue: [ outputStream << 'External' ].
 	outputStream
 		<< '>> #' ;
