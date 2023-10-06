@@ -1538,13 +1538,13 @@ FamixGenerator >> defineRelations [
 			comment: 'genericEntity linked to in this relationship. from-side of the association'; source)
 			*-
 	((tParametricEntity property: #concretisations)
-			comment: 'concretisations relationships, i.e. known concreteEntity of this type.').
+			comment: 'concretisations relationships, i.e. known concreteEntities of this type.').
 
 	((tConcretisation property: #concreteEntity)
 			comment: 'concreteEntity linked to in this relationship. to-side of the association';	target)
-			*-
-	((tParametricEntity property: #genericEntities)
-			comment: 'genericEntities relationships, i.e. known genericEntity of this type.').
+			-
+	((tParametricEntity property: #genericEntity)
+			comment: 'genericEntity relationships, i.e. known genericEntity of this type.').
 	
 ]
 

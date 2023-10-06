@@ -13,7 +13,7 @@ Trait {
 	#instVars : [
 		'#concreteParameters => FMMany type: #FamixTConcreteParameterType opposite: #concreteEntities',
 		'#concretisations => FMMany type: #FamixTConcretisation opposite: #genericEntity',
-		'#genericEntities => FMMany type: #FamixTConcretisation opposite: #concreteEntity',
+		'#genericEntity => FMOne type: #FamixTConcretisation opposite: #concreteEntity',
 		'#genericParameters => FMMany type: #FamixTGenericParameterType opposite: #genericEntities'
 	],
 	#category : #'Famix-Traits-Traits'
@@ -38,12 +38,6 @@ FamixTParametricEntity >> addConcreteParameter: anObject [
 FamixTParametricEntity >> addConcretisation: anObject [
 	<generated>
 	^ self concretisations add: anObject
-]
-
-{ #category : #adding }
-FamixTParametricEntity >> addGenericEntity: anObject [
-	<generated>
-	^ self genericEntities add: anObject
 ]
 
 { #category : #adding }
@@ -73,7 +67,7 @@ FamixTParametricEntity >> concretisations [
 	"Relation named: #concretisations type: #FamixTConcretisation opposite: #genericEntity"
 
 	<generated>
-	<FMComment: 'concretisations relationships, i.e. known concreteEntity of this type.'>
+	<FMComment: 'concretisations relationships, i.e. known concreteEntities of this type.'>
 	<derived>
 	^ concretisations
 ]
@@ -86,20 +80,20 @@ FamixTParametricEntity >> concretisations: anObject [
 ]
 
 { #category : #accessing }
-FamixTParametricEntity >> genericEntities [
-	"Relation named: #genericEntities type: #FamixTConcretisation opposite: #concreteEntity"
+FamixTParametricEntity >> genericEntity [
+	"Relation named: #genericEntity type: #FamixTConcretisation opposite: #concreteEntity"
 
 	<generated>
-	<FMComment: 'genericEntities relationships, i.e. known genericEntity of this type.'>
+	<FMComment: 'genericEntity relationships, i.e. known genericEntity of this type.'>
 	<derived>
-	^ genericEntities
+	^ genericEntity
 ]
 
 { #category : #accessing }
-FamixTParametricEntity >> genericEntities: anObject [
+FamixTParametricEntity >> genericEntity: anObject [
 
 	<generated>
-	genericEntities value: anObject
+	genericEntity := anObject
 ]
 
 { #category : #accessing }
