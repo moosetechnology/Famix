@@ -15,6 +15,7 @@ Object >> asMooseGroup [
 
 { #category : #'*moose-core' }
 Object >> asMooseSpecializedGroup [
+
 	^ MooseSpecializedGroup with: self
 ]
 

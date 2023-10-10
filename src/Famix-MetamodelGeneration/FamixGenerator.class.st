@@ -980,7 +980,6 @@ FamixGenerator >> defineHierarchy [
 	tClass --|> tWithInheritances.
 	tClass --|> tWithAttributes.
 	tClass inheritsFromTrait: tType without: { #queryStaticIncomingAssociations. #queryStaticOutgoingAssociations }.
-	tClass --|> tPackageable.
 	tClass --|> tInvocationsReceiver.
 	tClass --|> tWithComments.
 	
@@ -1469,7 +1468,7 @@ FamixGenerator >> defineRelations [
 
 
 	((tType property: #typeContainer)
-			comment: 'Container entity to which this type belongs to. Container is a namespace, not a package (Smalltalk).';
+			comment: 'Container entity to which this type belongs. Container is a namespace, not a package (Smalltalk).';
 			container)
 		*-
 	((tWithTypes property: #types)

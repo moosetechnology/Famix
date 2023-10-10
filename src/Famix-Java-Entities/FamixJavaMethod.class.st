@@ -157,10 +157,10 @@ FamixJavaMethod >> isJUnit4Test [
 ]
 
 { #category : #testing }
-FamixJavaMethod >> isOverriden [
+FamixJavaMethod >> isOverridden [
 	"If we have a stub and we don't have the container, we can't have the information"
 
-	<FMProperty: #isOverriden type: #Boolean>
+	<FMProperty: #isOverridden type: #Boolean>
 	<derived>
 	<FMComment: 'The method is overrided in a sub class'>
 	(self parentType isNil and: [ self isStub ])
@@ -256,9 +256,35 @@ FamixJavaMethod >> numberOfInvokedMethods [
 	^ self cacheAt: #numberOfInvokedMethods ifAbsentPut: [self invokedMethods size]
 ]
 
+{ #category : #testing }
+FamixJavaMethod >> overriddenMethod [
+
+	^ (self parentType superclass ifNotNil: [ :superclass |
+		   superclass lookUp: self signature ]) ifNil: [
+		  self parentType lookUpInInterfaces: self signature ]
+]
+
 { #category : #'Famix-Implementation' }
 FamixJavaMethod >> overridesMethod [
-	^ self belongsTo superclassHierarchy collect: [ :each | each implementationOf: self signature ] thenSelect: #isNotNil
+
+	self deprecated: 'This method seems to not be used anymore.'.
+	"Please consider using #overriddenMethod instead.
+	We are not automatically replacing it because the behavior is not identical: 
+		#overriddenMethod is a detect and not a collect + it goes through intefaces."
+
+	^ self belongsTo superclassHierarchy
+		  collect: [ :each | each implementationOf: self signature ]
+		  thenSelect: #isNotNil
+]
+
+{ #category : #testing }
+FamixJavaMethod >> overridingMethods [
+
+	| overridingMethods |
+	overridingMethods := OrderedCollection new.
+
+	self parentType addMethodOverriding: self in: overridingMethods.
+	^ overridingMethods
 ]
 
 { #category : #accessing }

@@ -1,8 +1,8 @@
 Class {
 	#name : #FamixStClass,
 	#superclass : #FamixStNamedEntity,
-	#traits : 'FamixTCanBeAbstract + FamixTClass + FamixTClassMetrics + FamixTWithTypes',
-	#classTraits : 'FamixTCanBeAbstract classTrait + FamixTClass classTrait + FamixTClassMetrics classTrait + FamixTWithTypes classTrait',
+	#traits : 'FamixTCanBeAbstract + FamixTClass + FamixTClassMetrics + FamixTPackageable + FamixTWithTypes',
+	#classTraits : 'FamixTCanBeAbstract classTrait + FamixTClass classTrait + FamixTClassMetrics classTrait + FamixTPackageable classTrait + FamixTWithTypes classTrait',
 	#category : #'Famix-PharoSmalltalk-Entities-Entities'
 }
 
@@ -52,13 +52,6 @@ FamixStClass >> extendedMethods [
 	<FMComment: 'Methods which are class extensions in this class.'>
 	<derived>
 	^ self methods select: #isExtension
-]
-
-{ #category : #testing }
-FamixStClass >> implements: aString [
-	"Was changed from match: for performances and because signature is case sensitive"
-
-	^ self methods anySatisfy: [ :each | aString = each signature ]
 ]
 
 { #category : #accessing }
@@ -180,12 +173,4 @@ FamixStClass >> sourceText [
 	^ self instanceSide smalltalkClass
 		  ifNotNil: [ :aClass | TonelWriter sourceCodeOf: aClass ]
 		  ifNil: [ super sourceText ]
-]
-
-{ #category : #testing }
-FamixStClass >> understands: signature [
-	"returns true if a class is able to respond to an invocation to aSignature on itself; false otherwise"
-
-	self withSuperclassesDo: [ :each | (each implements: signature) ifTrue: [ ^ true ] ].
-	^ false
 ]

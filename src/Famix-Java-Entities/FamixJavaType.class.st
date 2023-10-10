@@ -60,12 +60,6 @@ FamixJavaType >> implementedInterfaces [
 	^ self directSuperclasses select: #isInterface
 ]
 
-{ #category : #'Famix-Implementation' }
-FamixJavaType >> implements: aString [
-	^ self methods
-		anySatisfy: [ :each | aString = each signature	 "was changed from match: for performances and because signature is case sensitive" ]
-]
-
 { #category : #testing }
 FamixJavaType >> isAnonymousClass [
 
@@ -166,15 +160,6 @@ FamixJavaType >> printOn: aStream [
 		nextPutAll: ' (';
 		nextPutAll: (self class name removePrefix: 'FamixJava');
 		nextPut: $)
-]
-
-{ #category : #'Famix-Implementation' }
-FamixJavaType >> understands: signature [
-	"returns true if a class is able to respond to an invocation to aSignature on itself; false otherwise"
-
-	self withSuperclassesDo: [:each | 
-		(each implements: signature) ifTrue: [^true]].
-	^false
 ]
 
 { #category : #'Famix-Implementation' }

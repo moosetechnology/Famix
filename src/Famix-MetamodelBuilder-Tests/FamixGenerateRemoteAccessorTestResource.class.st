@@ -42,15 +42,19 @@ FamixGenerateRemoteAccessorTestResource >> entityB [
 
 { #category : #running }
 FamixGenerateRemoteAccessorTestResource >> setUp [
+
 	super setUp.
 	FamixMetamodelGenerateRemoteAccessorTestGeneratorA generate.
 	FamixMetamodelGenerateRemoteAccessorTestGeneratorB generate.
 	FamixMetamodelGenerateRemoteAccessorTestGeneratorAB generate.
-	"the following entities are created by the generators
+
+	"The following entities are created by the generators
 	Do not remove them (or change the all the tests)"
 	entityA := (self classNamed: #FmxTestGenerateAccessorAEntityA) new.
 	entityB := (self classNamed: #FmxTestGenerateAccessorBEntityB) new.
-	(self classNamed: #FmxTestGenerateAccessorABModel) new addAll: {entityA . entityB}
+	(self classNamed: #FmxTestGenerateAccessorABModel) new addAll: {
+			entityA.
+			entityB }
 ]
 
 { #category : #running }

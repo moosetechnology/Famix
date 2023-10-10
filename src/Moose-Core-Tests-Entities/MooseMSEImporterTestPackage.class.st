@@ -1,8 +1,8 @@
 Class {
 	#name : #MooseMSEImporterTestPackage,
 	#superclass : #MooseMSEImporterTestNamedEntity,
-	#traits : 'FamixTPackage + FamixTWithClasses',
-	#classTraits : 'FamixTPackage classTrait + FamixTWithClasses classTrait',
+	#traits : 'FamixTPackage + FamixTPackageable + FamixTWithClasses',
+	#classTraits : 'FamixTPackage classTrait + FamixTPackageable classTrait + FamixTWithClasses classTrait',
 	#category : #'Moose-Core-Tests-Entities-Entities'
 }
 

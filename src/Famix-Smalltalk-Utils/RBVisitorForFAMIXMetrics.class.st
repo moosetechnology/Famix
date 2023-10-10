@@ -175,9 +175,12 @@ RBVisitorForFamixMetrics >> numberOfStatements: anObject [
 
 { #category : #enumerating }
 RBVisitorForFamixMetrics >> processMethod: aMethodEntity [
+
 	self methodEntity: aMethodEntity.
 	self compiledMethod ifNil: [ ^ self ].
-	(self compiledMethod methodClass parseTreeFor: self compiledMethod selector) ifNotNil: [ :parseTree | self visitMethodNode: parseTree ]
+	(self compiledMethod methodClass parseTreeForSelector:
+		 self compiledMethod selector) ifNotNil: [ :parseTree |
+		self visitMethodNode: parseTree ]
 ]
 
 { #category : #initialization }

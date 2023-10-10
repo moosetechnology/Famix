@@ -63,6 +63,7 @@ FamixTest3Generator >> defineHierarchy [
 
 	classEntity --|> type.
 	classEntity --|> #TClass.
+	classEntity --|> #TPackageable.
 
 	method --|> namedEntity.
 	method --|> #TMethod.
