@@ -28,10 +28,10 @@ FamixJavaTCanBeTransient classSide >> annotation [
 { #category : #accessing }
 FamixJavaTCanBeTransient >> isTransient [
 
-	<FMProperty: #isTransient type: #Boolean>
+	<FMProperty: #isTransient type: #Boolean defaultValue: false>
 	<generated>
 	<FMComment: 'Entity can be declared transient'>
-	^ isTransient
+	^ isTransient ifNil: [ isTransient := false ]
 ]
 
 { #category : #accessing }

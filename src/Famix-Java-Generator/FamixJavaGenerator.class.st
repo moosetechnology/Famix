@@ -380,11 +380,11 @@ FamixJavaGenerator >> defineHierarchy [
 FamixJavaGenerator >> defineProperties [
 	super defineProperties.
 		
-	((tCanBeVolatile property: #isVolatile type: #Boolean) 
+	((tCanBeVolatile property: #isVolatile type: #Boolean defaultValue: false) 
 		comment: 'Entity can be declared volatile').
-	((tCanBeTransient property: #isTransient type: #Boolean) 
-		comment: 'Entity can be declared transient').
-	((tCanBeSynchronized property: #isSynchronized type: #Boolean) 
+	((tCanBeTransient property: #isTransient type: #Boolean defaultValue: false) 
+		comment: 'Entity can be declared transient' ).
+	((tCanBeSynchronized property: #isSynchronized type: #Boolean defaultValue: false) 
 		comment: 'Entity can be declared synchronized').
 ]
 

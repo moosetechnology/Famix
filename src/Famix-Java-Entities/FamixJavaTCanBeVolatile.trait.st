@@ -28,10 +28,10 @@ FamixJavaTCanBeVolatile classSide >> annotation [
 { #category : #accessing }
 FamixJavaTCanBeVolatile >> isVolatile [
 
-	<FMProperty: #isVolatile type: #Boolean>
+	<FMProperty: #isVolatile type: #Boolean defaultValue: false>
 	<generated>
 	<FMComment: 'Entity can be declared volatile'>
-	^ isVolatile
+	^ isVolatile ifNil: [ isVolatile := false ]
 ]
 
 { #category : #accessing }

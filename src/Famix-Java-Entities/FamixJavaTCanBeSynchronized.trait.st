@@ -32,10 +32,10 @@ FamixJavaTCanBeSynchronized classSide >> annotation [
 { #category : #accessing }
 FamixJavaTCanBeSynchronized >> isSynchronized [
 
-	<FMProperty: #isSynchronized type: #Boolean>
+	<FMProperty: #isSynchronized type: #Boolean defaultValue: false>
 	<generated>
 	<FMComment: 'Entity can be declared synchronized'>
-	^ isSynchronized
+	^ isSynchronized ifNil: [ isSynchronized := false ]
 ]
 
 { #category : #accessing }
