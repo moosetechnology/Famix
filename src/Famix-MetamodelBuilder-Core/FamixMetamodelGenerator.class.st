@@ -233,9 +233,14 @@ FamixMetamodelGenerator >> cleaningStrategy: anObject [
 FamixMetamodelGenerator >> define [
 	self defineTraits.
 	self defineClasses.
+	self defineAssociations.
 	self defineHierarchy.
 	self defineProperties.
 	self defineRelations
+]
+
+{ #category : #definition }
+FamixMetamodelGenerator >> defineAssociations [
 ]
 
 { #category : #definition }
