@@ -100,12 +100,14 @@ FamixMetamodelBuilder >> apply [
 { #category : #accessing }
 FamixMetamodelBuilder >> association: anAssociationName [
 
-	| association |
+	| association trait |
+	trait := self ensureLocalTraitNamed: #T , anAssociationName.
 	association := self ensureClassNamed: anAssociationName.
 
-	association --|> #TAssociation.
+	association --|> trait.
+	trait --|> #TAssociation.
 
-	^ association
+	^ trait
 ]
 
 { #category : #accessing }
