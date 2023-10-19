@@ -487,7 +487,7 @@ FmxMBBehavior >> source: aPropertySymbol type: aFmxMBBehaviorOrCollection [
 FmxMBBehavior >> sourceManyToMany: aPropertySymbol type: aFmxMBBehaviorOrCollection [
 
 	| sourceTrait |
-	sourceTrait := self builder ensureTraitNamed:
+	sourceTrait := self builder ensureLocalTraitNamed:
 		               #T , aPropertySymbol capitalized.
 	{ aFmxMBBehaviorOrCollection } flattened do: [ :behavior |
 		sourceTrait <|-- behavior ].
@@ -513,7 +513,7 @@ FmxMBBehavior >> sourceManyToOne: aPropertySymbol type: aFmxMBBehaviorOrCollecti
 FmxMBBehavior >> sourceOneToMany: aPropertySymbol type: aFmxMBBehaviorOrCollection [
 
 	| sourceTrait |
-	sourceTrait := self builder ensureTraitNamed:
+	sourceTrait := self builder ensureLocalTraitNamed:
 		               #T , aPropertySymbol capitalized.
 	{ aFmxMBBehaviorOrCollection } flattened do: [ :behavior |
 		sourceTrait <|-- behavior ].
@@ -526,7 +526,7 @@ FmxMBBehavior >> sourceOneToMany: aPropertySymbol type: aFmxMBBehaviorOrCollecti
 FmxMBBehavior >> sourceOneToOne: aPropertySymbol type: aFmxMBBehaviorOrCollection [
 
 	| sourceTrait |
-	sourceTrait := self builder ensureTraitNamed:
+	sourceTrait := self builder ensureLocalTraitNamed:
 		               #T , aPropertySymbol capitalized.
 	{ aFmxMBBehaviorOrCollection } flattened do: [ :behavior |
 		sourceTrait <|-- behavior ].
@@ -559,7 +559,7 @@ FmxMBBehavior >> target: aPropertySymbol type: aFmxMBBehaviorOrCollection [
 FmxMBBehavior >> targetManyToMany: aPropertySymbol type: aFmxMBBehaviorOrCollection [
 
 	| targetTrait |
-	targetTrait := self builder ensureTraitNamed:
+	targetTrait := self builder ensureLocalTraitNamed:
 		               #T , aPropertySymbol capitalized.
 	{ aFmxMBBehaviorOrCollection } flattened do: [ :behavior |
 		targetTrait <|-- behavior ].
@@ -585,7 +585,7 @@ FmxMBBehavior >> targetManyToOne: aPropertySymbol type: aFmxMBBehaviorOrCollecti
 FmxMBBehavior >> targetOneToMany: aPropertySymbol type: aFmxMBBehaviorOrCollection [
 
 	| targetTrait |
-	targetTrait := self builder ensureTraitNamed:
+	targetTrait := self builder ensureLocalTraitNamed:
 		               #T , aPropertySymbol capitalized.
 	{ aFmxMBBehaviorOrCollection } flattened do: [ :behavior |
 		targetTrait <|-- behavior ].
@@ -598,7 +598,7 @@ FmxMBBehavior >> targetOneToMany: aPropertySymbol type: aFmxMBBehaviorOrCollecti
 FmxMBBehavior >> targetOneToOne: aPropertySymbol type: aFmxMBBehaviorOrCollection [
 
 	| targetTrait |
-	targetTrait := self builder ensureTraitNamed:
+	targetTrait := self builder ensureLocalTraitNamed:
 		               #T , aPropertySymbol capitalized.
 	{ aFmxMBBehaviorOrCollection } flattened do: [ :behavior |
 		targetTrait <|-- behavior ].
