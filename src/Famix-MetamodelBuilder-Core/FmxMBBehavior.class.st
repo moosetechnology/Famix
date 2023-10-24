@@ -475,64 +475,40 @@ FmxMBBehavior >> slotDefinitions [
 ]
 
 { #category : #associations }
-FmxMBBehavior >> source: aPropertySymbol type: aFmxMBBehaviorOrCollection [
+FmxMBBehavior >> source: aFmxTrait [
 	"By default, a source property is *-"
 
-	self
-		sourceManyToOne: aPropertySymbol
-		type: aFmxMBBehaviorOrCollection
+	self sourceManyToOne: aFmxTrait
 ]
 
 { #category : #associations }
-FmxMBBehavior >> sourceManyToMany: aPropertySymbol type: aFmxMBBehaviorOrCollection [
+FmxMBBehavior >> sourceManyToMany: aFmxTrait [
 
-	| sourceTrait |
-	sourceTrait := self builder ensureLocalTraitNamed:
-		               #T , aPropertySymbol capitalized.
-	{ aFmxMBBehaviorOrCollection } flattened do: [ :behavior |
-		sourceTrait <|-- behavior ].
-
-	(self property: aPropertySymbol) source
-	*-* (sourceTrait property: #outgoing , self name asEnglishPlural)
+	(self property: (aFmxTrait name copyWithoutFirst: $T) uncapitalized)
+		source
+	*-* (aFmxTrait property: #outgoing , self name asEnglishPlural)
 ]
 
 { #category : #associations }
-FmxMBBehavior >> sourceManyToOne: aPropertySymbol type: aFmxMBBehaviorOrCollection [
+FmxMBBehavior >> sourceManyToOne: aFmxTrait [
 
-	| sourceTrait |
-	sourceTrait := self builder ensureLocalTraitNamed:
-		               #T , aPropertySymbol capitalized.
-	{ aFmxMBBehaviorOrCollection } flattened do: [ :behavior |
-		sourceTrait <|-- behavior ].
-
-	(self property: aPropertySymbol) source
-	*- (sourceTrait property: #outgoing , self name asEnglishPlural)
+	(self property: (aFmxTrait name copyWithoutFirst: $T) uncapitalized)
+		source
+	*- (aFmxTrait property: #outgoing , self name asEnglishPlural)
 ]
 
 { #category : #associations }
-FmxMBBehavior >> sourceOneToMany: aPropertySymbol type: aFmxMBBehaviorOrCollection [
+FmxMBBehavior >> sourceOneToMany: aFmxTrait [
 
-	| sourceTrait |
-	sourceTrait := self builder ensureLocalTraitNamed:
-		               #T , aPropertySymbol capitalized.
-	{ aFmxMBBehaviorOrCollection } flattened do: [ :behavior |
-		sourceTrait <|-- behavior ].
-
-	(self property: aPropertySymbol) source
-	-* (sourceTrait property: #outgoing , self name)
+	(self property: (aFmxTrait name copyWithoutFirst: $T) uncapitalized)
+		source -* (aFmxTrait property: #outgoing , self name)
 ]
 
 { #category : #associations }
-FmxMBBehavior >> sourceOneToOne: aPropertySymbol type: aFmxMBBehaviorOrCollection [
+FmxMBBehavior >> sourceOneToOne: aFmxTrait [
 
-	| sourceTrait |
-	sourceTrait := self builder ensureLocalTraitNamed:
-		               #T , aPropertySymbol capitalized.
-	{ aFmxMBBehaviorOrCollection } flattened do: [ :behavior |
-		sourceTrait <|-- behavior ].
-
-	(self property: aPropertySymbol) source
-	- (sourceTrait property: #outgoing , self name)
+	(self property: (aFmxTrait name copyWithoutFirst: $T) uncapitalized)
+		source - (aFmxTrait property: #outgoing , self name)
 ]
 
 { #category : #accessing }
@@ -547,64 +523,40 @@ FmxMBBehavior >> tag: aSymbol [
 ]
 
 { #category : #associations }
-FmxMBBehavior >> target: aPropertySymbol type: aFmxMBBehaviorOrCollection [
+FmxMBBehavior >> target: aFmxTrait [
 	"By default, a source property is *-"
 
-	self
-		targetManyToOne: aPropertySymbol
-		type: aFmxMBBehaviorOrCollection
+	self targetManyToOne: aFmxTrait
 ]
 
 { #category : #associations }
-FmxMBBehavior >> targetManyToMany: aPropertySymbol type: aFmxMBBehaviorOrCollection [
+FmxMBBehavior >> targetManyToMany: aFmxTrait [
 
-	| targetTrait |
-	targetTrait := self builder ensureLocalTraitNamed:
-		               #T , aPropertySymbol capitalized.
-	{ aFmxMBBehaviorOrCollection } flattened do: [ :behavior |
-		targetTrait <|-- behavior ].
-
-	(self property: aPropertySymbol) source
-	*-* (targetTrait property: #incoming , self name asEnglishPlural)
+	(self property: (aFmxTrait name copyWithoutFirst: $T) uncapitalized)
+		target
+	*-* (aFmxTrait property: #incoming , self name asEnglishPlural)
 ]
 
 { #category : #associations }
-FmxMBBehavior >> targetManyToOne: aPropertySymbol type: aFmxMBBehaviorOrCollection [
+FmxMBBehavior >> targetManyToOne: aFmxTrait [
 
-	| targetTrait |
-	targetTrait := self builder ensureLocalTraitNamed:
-		               #T , aPropertySymbol capitalized.
-	{ aFmxMBBehaviorOrCollection } flattened do: [ :behavior |
-		targetTrait <|-- behavior ].
-
-	(self property: aPropertySymbol) source
-	*- (targetTrait property: #incoming , self name asEnglishPlural)
+	(self property: (aFmxTrait name copyWithoutFirst: $T) uncapitalized)
+		target
+	*- (aFmxTrait property: #incoming , self name asEnglishPlural)
 ]
 
 { #category : #associations }
-FmxMBBehavior >> targetOneToMany: aPropertySymbol type: aFmxMBBehaviorOrCollection [
+FmxMBBehavior >> targetOneToMany: aFmxTrait [
 
-	| targetTrait |
-	targetTrait := self builder ensureLocalTraitNamed:
-		               #T , aPropertySymbol capitalized.
-	{ aFmxMBBehaviorOrCollection } flattened do: [ :behavior |
-		targetTrait <|-- behavior ].
-
-	(self property: aPropertySymbol) source
-	-* (targetTrait property: #incoming , self name)
+	(self property: (aFmxTrait name copyWithoutFirst: $T) uncapitalized)
+		target -* (aFmxTrait property: #incoming , self name)
 ]
 
 { #category : #associations }
-FmxMBBehavior >> targetOneToOne: aPropertySymbol type: aFmxMBBehaviorOrCollection [
+FmxMBBehavior >> targetOneToOne: aFmxTrait [
 
-	| targetTrait |
-	targetTrait := self builder ensureLocalTraitNamed:
-		               #T , aPropertySymbol capitalized.
-	{ aFmxMBBehaviorOrCollection } flattened do: [ :behavior |
-		targetTrait <|-- behavior ].
-
-	(self property: aPropertySymbol) source
-	- (targetTrait property: #incoming , self name)
+	(self property: (aFmxTrait name copyWithoutFirst: $T) uncapitalized)
+		target - (aFmxTrait property: #incoming , self name)
 ]
 
 { #category : #'testing selectors' }

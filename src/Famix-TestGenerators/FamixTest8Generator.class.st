@@ -7,7 +7,13 @@ Class {
 		'plant',
 		'bacteria',
 		'virus',
-		'biotope'
+		'biotope',
+		'tResident',
+		'tBiotope',
+		'tInfectious',
+		'tInfectable',
+		'residence',
+		'infection'
 	],
 	#category : #'Famix-TestGenerators'
 }
@@ -33,17 +39,15 @@ FamixTest8Generator class >> submetamodels [
 { #category : #definition }
 FamixTest8Generator >> defineAssociations [
 
-	(self builder association: #Residence)
-		source: #resident type: livingBeing;
-		target: #biotope type: biotope.
+	residence := (self builder association: #Residence)
+		             source: tResident;
+		             target: tBiotope;
+		             yourself.
 
-	(self builder association: #Infection)
-		source: #infectious type: {
-				bacteria.
-				virus };
-		target: #infectable type: {
-				animal.
-				plant }
+	infection := (self builder association: #Infection)
+		             source: tInfectious;
+		             target: tInfectable;
+		             yourself
 ]
 
 { #category : #definition }
@@ -62,18 +66,34 @@ FamixTest8Generator >> defineHierarchy [
 
 	animal --|> livingBeing.
 	plant --|> livingBeing.
-	bacteria --|> livingBeing
+	bacteria --|> livingBeing.
+
+	"TResident -> Residence -> TBiotope"
+	livingBeing --|> tResident.
+	biotope --|> tBiotope.
+
+	"TInfectious -> Infection -> TInfectable"
+	animal --|> tInfectable.
+	plant --|> tInfectable.
+
+	bacteria --|> tInfectious.
+	virus --|> tInfectious
 ]
 
 { #category : #definition }
 FamixTest8Generator >> defineProperties [
 
-	(self builder classNamed: #Residence)
-		property: #isInvasive
-		type: #Boolean
-		defaultValue: false.
+	infection property: #isInvasive type: #Boolean defaultValue: false.
 
-	(self builder traitNamed: #TInfectious)
-		property: #pathogenicity
-		type: #Number
+	tInfectious property: #pathogenicity type: #Number
+]
+
+{ #category : #definition }
+FamixTest8Generator >> defineTraits [
+
+	tResident := self builder newTraitNamed: #TResident.
+	tBiotope := self builder newTraitNamed: #TBiotope.
+
+	tInfectious := self builder newTraitNamed: #TInfectable.
+	tInfectable := self builder newTraitNamed: #TInfectious
 ]
