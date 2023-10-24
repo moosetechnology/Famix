@@ -4,8 +4,8 @@ Class {
 	#traits : 'FamixTAssociation',
 	#classTraits : 'FamixTAssociation classTrait',
 	#instVars : [
-		'#biotope => FMOne type: #FamixTest8TBiotope opposite: #incomingResidences',
-		'#resident => FMOne type: #FamixTest8TResident opposite: #outgoingResidences'
+		'#resident => FMOne type: #FamixTest8TResident opposite: #outgoingResidences',
+		'#biotope => FMOne type: #FamixTest8TBiotope opposite: #incomingResidences'
 	],
 	#category : #'Famix-Test8-Entities-Entities'
 }
