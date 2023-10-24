@@ -474,6 +474,43 @@ FmxMBBehavior >> slotDefinitions [
 	^ slotGroups values collect: [ :each | each anyOne ]
 ]
 
+{ #category : #associations }
+FmxMBBehavior >> source: aFmxTrait [
+	"By default, a source property is *-"
+
+	self sourceManyToOne: aFmxTrait
+]
+
+{ #category : #associations }
+FmxMBBehavior >> sourceManyToMany: aFmxTrait [
+
+	(self property: (aFmxTrait name copyWithoutFirst: $T) uncapitalized)
+		source
+	*-* (aFmxTrait property: #outgoing , self name asEnglishPlural)
+]
+
+{ #category : #associations }
+FmxMBBehavior >> sourceManyToOne: aFmxTrait [
+
+	(self property: (aFmxTrait name copyWithoutFirst: $T) uncapitalized)
+		source
+	*- (aFmxTrait property: #outgoing , self name asEnglishPlural)
+]
+
+{ #category : #associations }
+FmxMBBehavior >> sourceOneToMany: aFmxTrait [
+
+	(self property: (aFmxTrait name copyWithoutFirst: $T) uncapitalized)
+		source -* (aFmxTrait property: #outgoing , self name)
+]
+
+{ #category : #associations }
+FmxMBBehavior >> sourceOneToOne: aFmxTrait [
+
+	(self property: (aFmxTrait name copyWithoutFirst: $T) uncapitalized)
+		source - (aFmxTrait property: #outgoing , self name)
+]
+
 { #category : #accessing }
 FmxMBBehavior >> tag [
 	^ tag ifNil: [ self defaultTag ]
@@ -483,6 +520,43 @@ FmxMBBehavior >> tag [
 FmxMBBehavior >> tag: aSymbol [
 
 	tag := aSymbol
+]
+
+{ #category : #associations }
+FmxMBBehavior >> target: aFmxTrait [
+	"By default, a source property is *-"
+
+	self targetManyToOne: aFmxTrait
+]
+
+{ #category : #associations }
+FmxMBBehavior >> targetManyToMany: aFmxTrait [
+
+	(self property: (aFmxTrait name copyWithoutFirst: $T) uncapitalized)
+		target
+	*-* (aFmxTrait property: #incoming , self name asEnglishPlural)
+]
+
+{ #category : #associations }
+FmxMBBehavior >> targetManyToOne: aFmxTrait [
+
+	(self property: (aFmxTrait name copyWithoutFirst: $T) uncapitalized)
+		target
+	*- (aFmxTrait property: #incoming , self name asEnglishPlural)
+]
+
+{ #category : #associations }
+FmxMBBehavior >> targetOneToMany: aFmxTrait [
+
+	(self property: (aFmxTrait name copyWithoutFirst: $T) uncapitalized)
+		target -* (aFmxTrait property: #incoming , self name)
+]
+
+{ #category : #associations }
+FmxMBBehavior >> targetOneToOne: aFmxTrait [
+
+	(self property: (aFmxTrait name copyWithoutFirst: $T) uncapitalized)
+		target - (aFmxTrait property: #incoming , self name)
 ]
 
 { #category : #'testing selectors' }

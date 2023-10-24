@@ -98,6 +98,17 @@ FamixMetamodelBuilder >> apply [
 ]
 
 { #category : #accessing }
+FamixMetamodelBuilder >> association: anAssociationName [
+
+	| association |
+	association := self ensureClassNamed: anAssociationName.
+
+	association --|> #TAssociation.
+
+	^ association
+]
+
+{ #category : #accessing }
 FamixMetamodelBuilder >> baseImportingContextName [
 
 	^ #FamixImportingContext
