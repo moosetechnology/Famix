@@ -192,7 +192,7 @@ MQNavigationQuery >> queryFor: anEntity [
 		(anEntity perform: (selectors at: index))
 			ifNotNil: [ :children | 
 				| coll |
-				1 to: (coll := children asCollection) size do: [ :i | self queryFor: (coll at: i) ] ] ]
+				1 to: (coll := OrderedCollection withAll: children) size do: [ :i | self queryFor: (coll at: i) ] ] ]
 ]
 
 { #category : #execution }
