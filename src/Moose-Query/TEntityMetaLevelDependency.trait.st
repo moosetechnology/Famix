@@ -327,7 +327,12 @@ TEntityMetaLevelDependency >> allChildrenTypes [
 
 { #category : #accessing }
 TEntityMetaLevelDependency >> allClients [
-	^ self lookUpPropertyNamed: #allClients computedAs: [ self allClientsAtScope: self class ]
+	^ self lookUpPropertyNamed: #allClients computedAs: [ self queryAllIncoming withoutSelfLoops collect: #source ]
+]
+
+{ #category : #accessing }
+TEntityMetaLevelDependency >> allClientsAtMyScope [
+	^ self lookUpPropertyNamed: #allClientsAtMyScope computedAs: [ self allClientsAtScope: self class ]
 ]
 
 { #category : #accessing }
@@ -715,7 +720,7 @@ TEntityMetaLevelDependency >> numberOfExternalClients [
 	<FMComment: 'Number of call from myself to outside my container.'>
 	^ self
 		lookUpPropertyNamed: #numberOfExternalClients
-		computedAs: [ (self allClients reject: [ :entity | entity allParents includesAny: self parents ]) size ]
+		computedAs: [ (self allClientsAtMyScope reject: [ :entity | entity allParents includesAny: self parents ]) size ]
 ]
 
 { #category : #accessing }

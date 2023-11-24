@@ -177,6 +177,20 @@ AbstractFamixNavigationTest >> getMethod: methodNameString [
 	^ results anyOne
 ]
 
+{ #category : #'helpers - classes' }
+AbstractFamixNavigationTest >> m1p2c2Mtd1 [  
+	 
+	^self model entityNamed: 
+			#'Model1InteractedReferencerReferee::M1P2C2ReferencerOutSideRefereeInSide.m1p2c2Mtd1()'
+]
+
+{ #category : #'helpers - classes' }
+AbstractFamixNavigationTest >> m1p2c2Mtd2 [ 
+	 
+	^self model entityNamed: 
+			#'Model1InteractedReferencerReferee::M1P2C2ReferencerOutSideRefereeInSide.m1p2c2Mtd2()'
+]
+
 { #category : #'helpers - utilites' }
 AbstractFamixNavigationTest >> model [ 
 	 
