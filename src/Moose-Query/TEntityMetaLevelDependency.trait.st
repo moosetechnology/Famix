@@ -337,15 +337,10 @@ TEntityMetaLevelDependency >> allClientsAtMyScope [
 
 { #category : #accessing }
 TEntityMetaLevelDependency >> allClientsAtScope: aClass [
+"Attention, this method returns only the clients at the requested scope. The other clients non matching the scope are not return. Like this we are sure that all the return entities are at the requested scope"
 	^ self queryAllIncoming withoutSelfLoops
 		atScope: aClass
-		withNonMatchingEntitiesDo: [ :entities :res |
-			entities ifNotNil: [
-				entities isCollection
-				ifTrue: [ res addAll: entities ]
-				ifFalse: [ res add: entities ]
-			]
-		]
+		
 ]
 
 { #category : #accessing }
@@ -720,7 +715,7 @@ TEntityMetaLevelDependency >> numberOfExternalClients [
 	<FMComment: 'Number of call from myself to outside my container.'>
 	^ self
 		lookUpPropertyNamed: #numberOfExternalClients
-		computedAs: [ (self allClientsAtMyScope reject: [ :entity | entity allParents includesAny: self parents ]) size ]
+		computedAs: [ (self allClients reject: [ :entity | entity allParents includesAny: self parents ]) size ]
 ]
 
 { #category : #accessing }
