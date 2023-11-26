@@ -364,7 +364,7 @@ FamixClassNavigationChefTest >> testProviderClasses [
 		hasSameElements: {self c14ReferencerOutSideRefereeOutSide . self c18FullRefereeInSideOutSide . self c19FullRefereeOutSide}.
 	self
 		assertCollection: (self c15FullReferencerOutSide allProvidersAtScope: FamixTType)
-		hasSameElements: self c15FullReferencerOutSide allProviders
+		hasSameElements: self c15FullReferencerOutSide allProvidersAtMyScope
 ]
 
 { #category : #'tests - providers' }

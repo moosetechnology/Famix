@@ -368,20 +368,19 @@ TEntityMetaLevelDependency >> allParents [
 
 { #category : #accessing }
 TEntityMetaLevelDependency >> allProviders [
-	^ self lookUpPropertyNamed: #allProviders computedAs: [ self allProvidersAtScope: self class ]
+^ self lookUpPropertyNamed: #allProviders computedAs: [ self queryAllOutgoing  withoutSelfLoops collect: #target ]
+]
+
+{ #category : #accessing }
+TEntityMetaLevelDependency >> allProvidersAtMyScope [
+	^ self lookUpPropertyNamed: #allProvidersAtMyScope computedAs: [ self allProvidersAtScope: self class ]
 ]
 
 { #category : #accessing }
 TEntityMetaLevelDependency >> allProvidersAtScope: aClass [
+"Attention, this method returns only the providers at the requested scope. The other providers non matching the scope are not return. Like this we are sure that all the return entities are at the requested scope"
 	^ self queryAllOutgoing withoutSelfLoops
 		atScope: aClass
-		withNonMatchingEntitiesDo: [ :entities :res |
-			entities ifNotNil: [
-				entities isCollection
-				ifTrue: [ res addAll: entities ]
-				ifFalse: [ res add: entities ]
-			]
-		]
 ]
 
 { #category : #scoping }
@@ -533,7 +532,7 @@ TEntityMetaLevelDependency >> fanIn [
 TEntityMetaLevelDependency >> fanOut [
 	<FMProperty: #fanOut type: #Number>
 	<derived>
-	<FMComment: 'Number of provider classes'>
+	<FMComment: 'Number of provider'>
 	^ self allProviders size
 ]
 
