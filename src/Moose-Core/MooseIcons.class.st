@@ -11,7 +11,9 @@ Class {
 MooseIcons class >> buildCache [
 
 	(Pragma allNamed: #mooseIcon in: self class) do: [ :pragma | 
-		pragma method selector value: self ]
+		pragma method selector value: self ].
+	
+	Smalltalk ui icons icons addAll: self icons
 ]
 
 { #category : #'icon creation' }
