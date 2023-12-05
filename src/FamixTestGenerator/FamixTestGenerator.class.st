@@ -60,7 +60,7 @@ FamixTestGenerator >> initializeClassesFrom: aBlock [
 
 { #category : #initialization }
 FamixTestGenerator >> initializePackageFrom: aPackageName [
-	package := RPackageOrganizer default packageNamed: aPackageName.
+	package := self packageOrganizer packageNamed: aPackageName.
 ]
 
 { #category : #accessing }
