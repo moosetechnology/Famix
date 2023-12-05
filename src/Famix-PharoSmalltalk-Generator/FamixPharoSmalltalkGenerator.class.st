@@ -144,7 +144,6 @@ FamixPharoSmalltalkGenerator >> defineHierarchy [
 	package --|> namedEntity.
 	package --|> #TPackage.
 	package --|> #TWithGlobalVariables.
-	package --|> #TWithClasses.
 	package --|> #TCohesionCouplingMetrics.
 
 	parameter --|> namedEntity.
