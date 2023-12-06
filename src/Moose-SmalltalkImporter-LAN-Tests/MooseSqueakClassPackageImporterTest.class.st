@@ -48,7 +48,7 @@ MooseSqueakClassPackageImporterTest >> testImportClassUsingAddCategory [
 	importer := MoosePharoImporterTask new
 		model: model;
 		importingContext: MooseImportingContext new importClass.
-	importer addFromPackage: (RPackageOrganizer default packageNamed: #'Moose-TestResources-LAN').
+	importer addFromPackage: (self packageOrganizer packageNamed: #'Moose-TestResources-LAN').
 	importer run.
 	self assert: model allClasses size equals: (self numberOfClassesIn: #('Moose-TestResources-LAN')) * 2
 ]
@@ -74,13 +74,11 @@ MooseSqueakClassPackageImporterTest >> testImportClassUsingAddPackage [
 	| model importer |
 	model := FamixStModel new.
 	importer := MoosePharoImporterTask new
-		model: model;
-		importingContext: MooseImportingContext new importClass.
-	importer addFromPackage: (RPackage organizer packageNamed: #'Moose-TestResources-LAN').
+		            model: model;
+		            importingContext: MooseImportingContext new importClass.
+	importer addFromPackage: (self packageOrganizer packageNamed: #'Moose-TestResources-LAN').
 	importer run.
-	self
-		assert: model allClasses size
-		equals: 2 * (RPackage organizer packageNamed: #'Moose-TestResources-LAN') definedClasses size
+	self assert: model allClasses size equals: 2 * (self packageOrganizer packageNamed: #'Moose-TestResources-LAN') definedClasses size
 ]
 
 { #category : #'test importing' }
@@ -95,7 +93,5 @@ MooseSqueakClassPackageImporterTest >> testImportClassUsingAddPackageNamed [
 		importingContext: MooseImportingContext new importClass.
 	importer addFromPackageNamed: 'Moose-TestResources-LAN'.
 	importer run.
-	self
-		assert: model allClasses size
-		equals: 2 * (RPackage organizer packageNamed: #'Moose-TestResources-LAN') definedClasses size
+	self assert: model allClasses size equals: 2 * (self packageOrganizer packageNamed: #'Moose-TestResources-LAN') definedClasses size
 ]

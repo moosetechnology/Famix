@@ -248,8 +248,8 @@ MooseScripts class >> packageNamesFor: aPrefixString withTestPackages: aBoolean 
 	"
 	
 	| packages packageNames aTestPrefixString |
-	RPackage organizer unregisterPackageNamed: aPrefixString. 
-	packages := RPackage organizer packages select: [:each | aPrefixString match: each name ].
+	self packageOrganizer unregisterPackageNamed: aPrefixString. 
+	packages := self packageOrganizer packages select: [:each | aPrefixString match: each name ].
 	packageNames := packages collect: [:pak | pak name].
 	aBoolean ifFalse: [
 		aTestPrefixString := aPrefixString, 'Tests*'.
@@ -280,7 +280,7 @@ MooseScripts class >> pharoPackageNames [
 	"self pharoPackageNames"
 	
 	| packages packageNames |
-	packages := (RPackage organizer packages select:[:each | each class = RPackage])
+	packages := (self packageOrganizer packages select:[:each | each class = RPackage])
 									  asSortedCollection: [:a :b | a name <= b name].
 	packageNames := packages collect: [:pak | pak name].
 	^ packageNames
