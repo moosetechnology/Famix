@@ -99,14 +99,11 @@ FamixJavaClass >> isAccessedBy: anAccess [
 
 { #category : #testing }
 FamixJavaClass >> isIgnored [
-	<FMProperty: #isIgnored type: #Boolean>
-	<multivalued>
-	<derived>
-	<FMComment:
-		'If the class is a test class, it can be annotated with Ignore, all the tests of contained are bypassed'>
-		
-	(self isAnnotatedWith: 'Ignore') .
-	^ self deprecated: 'This method is not supported in VerveineJ'.
+
+	"If the class is a test class, it can be annotated with Ignore, all the tests of contained are bypassed"
+
+	self deprecated: 'This method is not supported in VerveineJ'.
+	^ self isAnnotatedWith: 'Ignore'
 ]
 
 { #category : #testing }
