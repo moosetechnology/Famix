@@ -37,7 +37,13 @@ FmxClassAddition class >> definition: aString [
 
 { #category : #accessing }
 FmxClassAddition >> apply [
-	self class compiler evaluate: self definition
+
+	| installation |
+	installation := self definition.
+	"In Pharo 12 the definition string does not install the class, it just builds a builder. Thus we need to install it explicitly.
+	When Moose will have its minimal version on P12 we should probably refactor to not hold a string but manage ShiftClassBuilder instance directly. In the meantime here is a quick fix to have this work in P11 and P12."
+	SystemVersion current major < 12 ifFalse: [ installation := installation , '; install' ].
+	self class compiler evaluate: installation
 ]
 
 { #category : #accessing }
