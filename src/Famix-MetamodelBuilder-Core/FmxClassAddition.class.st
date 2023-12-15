@@ -23,35 +23,30 @@ Class {
 	#name : #FmxClassAddition,
 	#superclass : #FmxCodeChange,
 	#instVars : [
-		'definition'
+		'creationCode'
 	],
 	#category : #'Famix-MetamodelBuilder-Core-Changes'
 }
 
 { #category : #'instance creation' }
-FmxClassAddition class >> definition: aString [
+FmxClassAddition class >> creationCode: aString [
 	^ self new
-		definition: aString;
+		creationCode: aString;
 		yourself
 ]
 
 { #category : #accessing }
 FmxClassAddition >> apply [
 
-	| installation |
-	installation := self definition.
-	"In Pharo 12 the definition string does not install the class, it just builds a builder. Thus we need to install it explicitly.
-	When Moose will have its minimal version on P12 we should probably refactor to not hold a string but manage ShiftClassBuilder instance directly. In the meantime here is a quick fix to have this work in P11 and P12."
-	SystemVersion current major < 12 ifFalse: [ installation := installation , '; install' ].
-	self class compiler evaluate: installation
+	self class compiler evaluate: self creationCode
 ]
 
 { #category : #accessing }
-FmxClassAddition >> definition [
-	^ definition
+FmxClassAddition >> creationCode [
+	^ creationCode
 ]
 
 { #category : #accessing }
-FmxClassAddition >> definition: anObject [
-	definition := anObject
+FmxClassAddition >> creationCode: anObject [
+	creationCode := anObject
 ]

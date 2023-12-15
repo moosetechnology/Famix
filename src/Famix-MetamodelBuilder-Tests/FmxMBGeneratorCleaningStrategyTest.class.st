@@ -120,8 +120,11 @@ FmxMBGeneratorCleaningStrategyTest >> setUp [
 
 { #category : #running }
 FmxMBGeneratorCleaningStrategyTest >> tearDown [
-	[ self packageName asPackage removeFromSystem ] on: NotFound  do: [ ].
-	super tearDown.
+
+	[ self packageName asPackage removeFromSystem ]
+		on: NotFound
+		do: [  ].
+	super tearDown
 ]
 
 { #category : #tests }
