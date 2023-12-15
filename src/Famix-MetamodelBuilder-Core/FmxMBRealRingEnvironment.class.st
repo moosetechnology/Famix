@@ -49,10 +49,11 @@ FmxMBRealRingEnvironment >> recordAdoptionOfClassDefinitionFrom: realClass to: a
 		traits: (self traitStringFrom: realClass to: anRGClass)
 		slots: '{' , (slotDefinitions joinUsing: '. ') , '}'
 		sharedVariables: '{' , ((realClass classVarNames collect: [ :each | '#' , each ]) joinUsing: ' ') , '}'
+		category: realClass category
 ]
 
 { #category : #installing }
-FmxMBRealRingEnvironment >> recordClassAdditionFromClass: aRGClass traits: traitsString slots: slotsString sharedVariables: sharedVariablesString [
+FmxMBRealRingEnvironment >> recordClassAdditionFromClass: aRGClass traits: traitsString slots: slotsString sharedVariables: sharedVariablesString category: aString [
 
 	changesToApply add: (FmxClassAddition creationCode: ('Smalltalk classInstaller
 	make: [ :builder |
@@ -71,7 +72,7 @@ FmxMBRealRingEnvironment >> recordClassAdditionFromClass: aRGClass traits: trait
 						   (#traits -> (traitsString ifNil: [ aRGClass traitCompositionString ])).
 						   (#slots -> (slotsString ifNil: [ aRGClass slotDefinitionString ])).
 						   (#classVariables -> (sharedVariablesString ifNil: [ '{}' ])).
-						   (#category -> aRGClass category printString) })))
+						   (#category -> (aString ifNil: [ aRGClass category ]) printString) })))
 ]
 
 { #category : #installing }
@@ -80,7 +81,7 @@ FmxMBRealRingEnvironment >> recordClassChangesFor: anRGClass [
 	| realClass |
 	realClass := self class environment classNamed: anRGClass name.
 	realClass
-		ifNil: [ self recordClassAdditionFromClass: anRGClass  traits: nil  slots: nil sharedVariables: nil  ]
+		ifNil: [ self recordClassAdditionFromClass: anRGClass  traits: nil  slots: nil sharedVariables: nil category: nil  ]
 		ifNotNil: [ self recordAdoptionOfClassDefinitionFrom: realClass to: anRGClass ].
 	self recordClassCommentChangeOf: realClass to: anRGClass.
 	self recordMethodsAdoptionsOf: realClass to: anRGClass realClassName: anRGClass name.
