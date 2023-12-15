@@ -13,12 +13,6 @@ FmxMBRealRingEnvironment >> apply [
 	changesToApply do: #apply
 ]
 
-{ #category : #installing }
-FmxMBRealRingEnvironment >> classVariablesStringFor: realClass [
-
-	^ '{', ((realClass classVarNames collect: [ :each | '#', each ]) joinUsing: ' '), '}'
-]
-
 { #category : #accessing }
 FmxMBRealRingEnvironment >> collectChangesToApply [
 	| resolvedClasses resolvedPackages |
@@ -52,38 +46,24 @@ FmxMBRealRingEnvironment >> recordAdoptionOfClassDefinitionFrom: realClass to: a
 
 	slotsString := '{' , (slotDefinitions joinUsing: '. ') , '}'.
 	traitsString := self traitStringFrom: realClass to: anRGClass.
-	definition := anRGClass isTrait
-		              ifFalse: [
-			              'Smalltalk classInstaller
+	definition := 'Smalltalk classInstaller
 	make: [ :builder |
 		builder 
-			superclass: {superclass};
+			{superclassOrTraitDeclaration};
 			name: {className};
 			traits: {traits};
 			slots: {slots};
 			sharedVariables: {classVariables};
 			category: {category}
 		 ]' format: (Dictionary newFrom: {
-						               (#superclass -> anRGClass superclass name).
-						               (#className -> anRGClass name asSymbol printString).
-						               (#traits -> traitsString).
-						               (#slots -> slotsString).
-						               (#classVariables -> (self classVariablesStringFor: realClass)).
-						               (#category -> realClass category printString) }) ]
-		              ifTrue: [
-			              'Smalltalk classInstaller
-	make: [ :builder |
-		builder 
-			beTrait;
-			name: {className};
-			traits: {traits};
-			slots: {slots};
-			category: {category}
-		 ]' format: (Dictionary newFrom: {
-						               (#className -> anRGClass name asSymbol printString).
-						               (#traits -> traitsString).
-						               (#slots -> slotsString).
-						               (#category -> realClass category printString) }) ].
+				               (#superclassOrTraitDeclaration -> (anRGClass isTrait
+					                 ifTrue: [ 'beTrait' ]
+					                 ifFalse: [ 'superclass: ' , anRGClass superclass name ])).
+				               (#className -> anRGClass name asSymbol printString).
+				               (#traits -> traitsString).
+				               (#slots -> slotsString).
+				               (#classVariables -> ('{' , ((realClass classVarNames collect: [ :each | '#' , each ]) joinUsing: ' ') , '}')).
+				               (#category -> realClass category printString) }).
 
 	changesToApply add: (FmxClassAddition definition: definition)
 ]
