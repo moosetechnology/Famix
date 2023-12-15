@@ -55,6 +55,7 @@ FmxMBRealRingEnvironment >> recordAdoptionOfClassDefinitionFrom: realClass to: a
 { #category : #installing }
 FmxMBRealRingEnvironment >> recordClassAdditionFromClass: aRGClass traits: traitsString slots: slotsString sharedVariables: sharedVariablesString category: aString [
 
+	self flag: #todo. "We will need to remove the use of categories to use packages and tags. I'm just not sure if it is easy to manage this with the ShiftClassBuilder of P11. Maybe we should wait for P12 to be the minimal pharo used or add some comaptibility methods. LEt's see later."
 	changesToApply add: (FmxClassAddition creationCode: ('Smalltalk classInstaller
 	make: [ :builder |
 		builder 
@@ -69,23 +70,29 @@ FmxMBRealRingEnvironment >> recordClassAdditionFromClass: aRGClass traits: trait
 							     ifTrue: [ 'beTrait' ]
 							     ifFalse: [ 'superclass: ' , aRGClass superclass name ])).
 						   (#className -> aRGClass name asSymbol printString).
-						   (#traits -> (traitsString ifNil: [ aRGClass traitCompositionString ])).
-						   (#slots -> (slotsString ifNil: [ aRGClass slotDefinitionString ])).
-						   (#classVariables -> (sharedVariablesString ifNil: [ '{}' ])).
-						   (#category -> (aString ifNil: [ aRGClass category ]) printString) })))
+						   (#traits -> traitsString).
+						   (#slots -> slotsString).
+						   (#classVariables -> sharedVariablesString).
+						   (#category -> aString printString) })))
 ]
 
 { #category : #installing }
-FmxMBRealRingEnvironment >> recordClassChangesFor: anRGClass [
+FmxMBRealRingEnvironment >> recordClassChangesFor: aRGClass [
 
 	| realClass |
-	realClass := self class environment classNamed: anRGClass name.
+	realClass := self class environment classNamed: aRGClass name.
 	realClass
-		ifNil: [ self recordClassAdditionFromClass: anRGClass  traits: nil  slots: nil sharedVariables: nil category: nil  ]
-		ifNotNil: [ self recordAdoptionOfClassDefinitionFrom: realClass to: anRGClass ].
-	self recordClassCommentChangeOf: realClass to: anRGClass.
-	self recordMethodsAdoptionsOf: realClass to: anRGClass realClassName: anRGClass name.
-	self recordMethodsAdoptionsOf: (realClass ifNotNil: #class) to: anRGClass classSide realClassName: anRGClass name
+		ifNil: [
+			self
+				recordClassAdditionFromClass: aRGClass
+				traits: aRGClass traitCompositionString
+				slots: aRGClass slotDefinitionString
+				sharedVariables: '{}'
+				category: aRGClass category ]
+		ifNotNil: [ self recordAdoptionOfClassDefinitionFrom: realClass to: aRGClass ].
+	self recordClassCommentChangeOf: realClass to: aRGClass.
+	self recordMethodsAdoptionsOf: realClass to: aRGClass realClassName: aRGClass name.
+	self recordMethodsAdoptionsOf: (realClass ifNotNil: [ realClass class ]) to: aRGClass classSide realClassName: aRGClass name
 ]
 
 { #category : #installing }
