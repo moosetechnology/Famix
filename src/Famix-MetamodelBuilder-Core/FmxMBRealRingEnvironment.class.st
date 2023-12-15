@@ -42,47 +42,48 @@ FmxMBRealRingEnvironment >> compile: aSource in: aClass classified: aProtocol pa
 FmxMBRealRingEnvironment >> recordAdoptionOfClassDefinitionFrom: realClass to: anRGClass [
 
 	| customSlots customSlotNames slotDefinitions slotsString definition traitsString |
-
 	(realClass needToAdaptTo: anRGClass) ifFalse: [ ^ self ].
 
-	customSlots := realClass localSlots copyWithoutAll:
-		               realClass generatedSlots.
+	customSlots := realClass localSlots copyWithoutAll: realClass generatedSlots.
 	customSlotNames := customSlots collect: #name.
-	slotDefinitions := ((anRGClass slots reject: [ :each | 
-		                     customSlotNames includes: each name ]) 
-		                    collect: #definitionString) asOrderedCollection.
+	slotDefinitions := ((anRGClass slots reject: [ :each | customSlotNames includes: each name ]) collect: #definitionString) asOrderedCollection.
 	slotDefinitions addAll: (customSlots collect: #definitionString).
 	slotDefinitions := slotDefinitions sorted.
 
 	slotsString := '{' , (slotDefinitions joinUsing: '. ') , '}'.
 	traitsString := self traitStringFrom: realClass to: anRGClass.
 	definition := anRGClass isTrait
-		              ifFalse: [ 
-			              '{superclass} subclass: #{className} 
-		uses: {traits} 
-		slots: {slots} 
-		classVariables: {classVariables}
-		poolDictionaries: ''{poolDictionaries}''
-		category: ''{category}''' format: (Dictionary newFrom: { 
+		              ifFalse: [
+			              'Smalltalk classInstaller
+	make: [ :builder |
+		builder 
+			superclass: {superclass};
+			name: {className};
+			traits: {traits};
+			slots: {slots};
+			sharedVariables: {classVariables};
+			category: {category}
+		 ]' format: (Dictionary newFrom: {
 						               (#superclass -> anRGClass superclass name).
-						               (#className -> anRGClass name).
-						               (#layout -> realClass classLayout class name).
+						               (#className -> anRGClass name asSymbol printString).
 						               (#traits -> traitsString).
 						               (#slots -> slotsString).
-						               (#classVariables
-						                -> (self classVariablesStringFor: realClass)).
-						               (#poolDictionaries -> realClass sharedPoolsString).
-						               (#category -> realClass category) }) ]
-		              ifTrue: [ 
-			              '{superclass} named: #{className} 
-		uses: {traits} 
-		slots: {slots} 
-		category: ''{category}''' format: (Dictionary newFrom: { 
-						               (#superclass -> anRGClass superclass name).
-						               (#className -> anRGClass name).
+						               (#classVariables -> (self classVariablesStringFor: realClass)).
+						               (#category -> realClass category printString) }) ]
+		              ifTrue: [
+			              'Smalltalk classInstaller
+	make: [ :builder |
+		builder 
+			beTrait;
+			name: {className};
+			traits: {traits};
+			slots: {slots};
+			category: {category}
+		 ]' format: (Dictionary newFrom: {
+						               (#className -> anRGClass name asSymbol printString).
 						               (#traits -> traitsString).
 						               (#slots -> slotsString).
-						               (#category -> realClass category) }) ].
+						               (#category -> realClass category printString) }) ].
 
 	changesToApply add: (FmxClassAddition definition: definition)
 ]
