@@ -48,14 +48,16 @@ FmxMBRealRingEnvironment >> recordAdoptionOfClassDefinitionFrom: realClass to: a
 		recordClassAdditionFromClass: anRGClass
 		traits: (self traitStringFrom: realClass to: anRGClass)
 		slots: '{' , (slotDefinitions joinUsing: '. ') , '}'
+		classSlots: '{' , ((realClass class localSlots collect: #definitionString) joinUsing: ' . ') , '}'
 		sharedVariables: '{' , ((realClass classVarNames collect: [ :each | '#' , each ]) joinUsing: ' ') , '}'
 		package: realClass package name
 		tag: realClass packageTag name
 ]
 
 { #category : #installing }
-FmxMBRealRingEnvironment >> recordClassAdditionFromClass: aRGClass traits: traitsString slots: slotsString sharedVariables: sharedVariablesString package: packageName tag: tagName [
+FmxMBRealRingEnvironment >> recordClassAdditionFromClass: aRGClass traits: traitsString slots: slotsString classSlots: classSlotsString sharedVariables: sharedVariablesString package: packageName tag: tagName [
 
+	self flag: #todo. "When P12 will be the minimal version used we should use the ShiftClassBuilder instead of manipulation a string. This would make the code a lot easier and we would not rely on compiler evaluation of strings to generate the classes."
 	changesToApply add: (FmxClassAddition creationCode: ('Smalltalk classInstaller
 	make: [ :builder |
 		builder 
@@ -63,6 +65,7 @@ FmxMBRealRingEnvironment >> recordClassAdditionFromClass: aRGClass traits: trait
 			name: {className};
 			traits: {traits};
 			slots: {slots};
+			classSlots: {classSlots};
 			sharedVariables: {classVariables};
 			package: {package};
 			tag: {tag}
@@ -73,6 +76,7 @@ FmxMBRealRingEnvironment >> recordClassAdditionFromClass: aRGClass traits: trait
 						   (#className -> aRGClass name asSymbol printString).
 						   (#traits -> traitsString).
 						   (#slots -> slotsString).
+						   (#classSlots -> classSlotsString).
 						   (#classVariables -> sharedVariablesString).
 						   (#package -> packageName printString).
 						   (#tag -> tagName printString) })))
@@ -89,6 +93,7 @@ FmxMBRealRingEnvironment >> recordClassChangesFor: aRGClass [
 				recordClassAdditionFromClass: aRGClass
 				traits: aRGClass traitCompositionString
 				slots: aRGClass slotDefinitionString
+				classSlots: '{}'
 				sharedVariables: '{}'
 				package: aRGClass package name
 				tag: aRGClass tags anyOne ]
