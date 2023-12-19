@@ -137,7 +137,7 @@ FmxMBGeneratorCleaningStrategyTest >> testGenerateNoCleaningCleaning [
 			self assert: (class localMethods anySatisfy: [ :method | method selector = #banana ]).
 			self assert: (class localMethods anySatisfy: [ :method | method selector = #generatedBanana ]).
 			self assert: (class localMethods anySatisfy: [ :method | method selector = #potatoExtendedMethod ]).
-			self assert: (class localMethods detect: [ :method | method selector = #potatoExtendedMethod ]) protocol equals: #* , self class package name.
+			self assert: (class localMethods detect: [ :method | method selector = #potatoExtendedMethod ]) protocolName equals: #* , self class package name.
 			self assert: (class traitComposition allTraits anySatisfy: [ :trait | trait name = #FamixTestExternalTraits ]).
 			self assert: (class hasInstVarNamed: #bananaTree).
 			self assert: (class hasClassVarNamed: #Fuhrmanator).
@@ -187,13 +187,13 @@ FmxMBGeneratorCleaningStrategyTest >> testGenerateNoCleaningGeneration [
 		at: #FmxTestCleaningStrategyFmxTestEntity
 		ifPresent: [ :class | 
 			self assert: (class class localMethods anySatisfy: [ :method | method selector = #tree ]).
-			self assert: (class class localMethods detect: [ :method | method selector = #tree ]) protocol equals: 'monkey'.
+			self assert: (class class localMethods detect: [ :method | method selector = #tree ]) protocolName equals: 'monkey'.
 			self assert: (class localMethods anySatisfy: [ :method | method selector = #banana ]).
-			self assert: (class localMethods detect: [ :method | method selector = #banana ]) protocol equals: 'monkey'.
+			self assert: (class localMethods detect: [ :method | method selector = #banana ]) protocolName equals: 'monkey'.
 			"Generated methods that were removed from the generator should be removed after a new generation."
 			self deny: (class localMethods anySatisfy: [ :method | method selector = #generatedBanana ]).
 			self assert: (class localMethods anySatisfy: [ :method | method selector = #potatoExtendedMethod ]).
-			self assert: (class localMethods detect: [ :method | method selector = #potatoExtendedMethod ]) protocol equals: #* , self class package name.
+			self assert: (class localMethods detect: [ :method | method selector = #potatoExtendedMethod ]) protocolName equals: #* , self class package name.
 			self assert: (class traitComposition allTraits anySatisfy: [ :trait | trait name = #FamixTestExternalTraits ]).
 			self assert: (class hasInstVarNamed: #bananaTree).
 			self assert: (class hasClassVarNamed: #Fuhrmanator).
