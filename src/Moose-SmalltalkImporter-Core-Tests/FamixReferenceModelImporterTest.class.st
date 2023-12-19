@@ -636,7 +636,7 @@ FamixReferenceModelImporterTest >> testReadAndWrite [
 { #category : #tests }
 FamixReferenceModelImporterTest >> testReferenceBindingReified [
 	| famixClass |
-	famixClass := self model entityNamed: TestRunner class mooseName.
+	famixClass := self model entityNamed: TestCase class mooseName.
 	self assert: famixClass isNotNil
 ]
 
