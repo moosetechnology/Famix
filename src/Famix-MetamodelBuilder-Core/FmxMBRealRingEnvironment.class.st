@@ -49,13 +49,13 @@ FmxMBRealRingEnvironment >> recordAdoptionOfClassDefinitionFrom: realClass to: a
 		traits: (self traitStringFrom: realClass to: anRGClass)
 		slots: '{' , (slotDefinitions joinUsing: '. ') , '}'
 		sharedVariables: '{' , ((realClass classVarNames collect: [ :each | '#' , each ]) joinUsing: ' ') , '}'
-		category: realClass category
+		package: realClass package name
+		tag: realClass packageTag name
 ]
 
 { #category : #installing }
-FmxMBRealRingEnvironment >> recordClassAdditionFromClass: aRGClass traits: traitsString slots: slotsString sharedVariables: sharedVariablesString category: aString [
+FmxMBRealRingEnvironment >> recordClassAdditionFromClass: aRGClass traits: traitsString slots: slotsString sharedVariables: sharedVariablesString package: packageName tag: tagName [
 
-	self flag: #todo. "We will need to remove the use of categories to use packages and tags. I'm just not sure if it is easy to manage this with the ShiftClassBuilder of P11. Maybe we should wait for P12 to be the minimal pharo used or add some comaptibility methods. LEt's see later."
 	changesToApply add: (FmxClassAddition creationCode: ('Smalltalk classInstaller
 	make: [ :builder |
 		builder 
@@ -64,7 +64,8 @@ FmxMBRealRingEnvironment >> recordClassAdditionFromClass: aRGClass traits: trait
 			traits: {traits};
 			slots: {slots};
 			sharedVariables: {classVariables};
-			category: {category}
+			package: {package};
+			tag: {tag}
 		 ]' format: (Dictionary newFrom: {
 						   (#superclassOrTraitDeclaration -> (aRGClass isTrait
 							     ifTrue: [ 'beTrait' ]
@@ -73,7 +74,8 @@ FmxMBRealRingEnvironment >> recordClassAdditionFromClass: aRGClass traits: trait
 						   (#traits -> traitsString).
 						   (#slots -> slotsString).
 						   (#classVariables -> sharedVariablesString).
-						   (#category -> aString printString) })))
+						   (#package -> packageName printString).
+						   (#tag -> tagName printString) })))
 ]
 
 { #category : #installing }
@@ -88,7 +90,8 @@ FmxMBRealRingEnvironment >> recordClassChangesFor: aRGClass [
 				traits: aRGClass traitCompositionString
 				slots: aRGClass slotDefinitionString
 				sharedVariables: '{}'
-				category: aRGClass category ]
+				package: aRGClass package name
+				tag: aRGClass tags anyOne ]
 		ifNotNil: [ self recordAdoptionOfClassDefinitionFrom: realClass to: aRGClass ].
 	self recordClassCommentChangeOf: realClass to: aRGClass.
 	self recordMethodsAdoptionsOf: realClass to: aRGClass realClassName: aRGClass name.
