@@ -14,6 +14,7 @@ FmxMBGeneratorCleaningStrategyTest class >> defaultTimeLimit [
 
 { #category : #running }
 FmxMBGeneratorCleaningStrategyTest >> generateClasses [
+
 	| generatedClassToRemove generatedTraitToRemove |
 	FamixMetamodelCleaningStrategiesTestGenerator new generate.
 
@@ -25,28 +26,24 @@ FmxMBGeneratorCleaningStrategyTest >> generateClasses [
 
 	self class environment
 		at: #FmxTestCleaningStrategyFmxTestEntity
-		ifPresent: [ :class | 
+		ifPresent: [ :class |
 			class
-				compile:
-					'banana
+				compile: 'banana
 
 	^ 42'
 				classified: #monkey.
 			class class
-				compile:
-					'tree
+				compile: 'tree
 
 	^ #Christopher'
 				classified: #monkey.
 			class
-				compile:
-					'generatedBanana
+				compile: 'generatedBanana
 	<generated>
 	^ #Christopher'
 				classified: #monkey.
 			class
-				compile:
-					'potatoExtendedMethod
+				compile: 'potatoExtendedMethod
 
 	^ 42'
 				classified: #* , self class package name.
@@ -54,24 +51,25 @@ FmxMBGeneratorCleaningStrategyTest >> generateClasses [
 			class addInstVarNamed: 'bananaTree'.
 			class addClassVarNamed: 'Fuhrmanator'.
 			class class addInstVarNamed: 'grandFrais'.
-			(class slotNamed: #fursonas) inClass: #FmxTestCleaningStrategyFmxTestEntity	"Here we change the type of the slot to ensure it is regenerated correctly" ]
+			(class slotNamed: #fursonas) inClass: #FmxTestCleaningStrategyFmxTestEntity "Here we change the type of the slot to ensure it is regenerated correctly" ]
 		ifAbsent: [ self fail ].
-	Object
-		subclass: #FmxCleanerTestAddedClass
-		slots: {}
-		classVariables: {}
-		package: self packageName.
-	Trait named: #TFmxCleanerTestAddedTrait uses: {} package: self packageName.
+	self class classInstaller make: [ :aBuilder |
+		aBuilder
+			name: #FmxCleanerTestAddedClass;
+			package: self packageName ].
+	self class classInstaller make: [ :aBuilder |
+		aBuilder
+			beTrait;
+			name: #TFmxCleanerTestAddedTrait;
+			package: self packageName ].
 
 	"We add a class with Famix pragma to ensure it is deleted after the generation."
-	generatedClassToRemove := MooseEntity
-		subclass: #FmxCleanerTestAddedClassFromFamix
-		slots: {}
-		classVariables: {}
-		package: self packageName.
-	generatedClassToRemove class
-		compile:
-			'annotation
+	generatedClassToRemove := self class classInstaller make: [ :aBuilder |
+		                          aBuilder
+			                          superclass: MooseEntity;
+			                          name: #FmxCleanerTestAddedClassFromFamix;
+			                          package: self packageName ].
+	generatedClassToRemove class compile: 'annotation
 
 	<FMClass: #AddedClassFromFamix super: #MooseEntity>
 	<package: #'',  self packageName , ''>
@@ -79,14 +77,12 @@ FmxMBGeneratorCleaningStrategyTest >> generateClasses [
 	^self'.
 
 	"We add a Trait with Famix pragma to ensure it is deleted after the generation."
-	generatedTraitToRemove := Trait
-		named: #FmxCleanerTestTAddedClassFromFamix
-		uses: {}
-		slots: {}
-		package: self packageName.
-	generatedTraitToRemove class
-		compile:
-			'annotation
+	generatedTraitToRemove := self class classInstaller make: [ :aBuilder |
+		                          aBuilder
+			                          beTrait;
+			                          name: #FmxCleanerTestTAddedClassFromFamix;
+			                          package: self packageName ].
+	generatedTraitToRemove class compile: 'annotation
 
 	<FMClass: #TAddedClassFromFamix super: #Trait>
 	<package: #'',  self packageName , ''>
@@ -96,12 +92,12 @@ FmxMBGeneratorCleaningStrategyTest >> generateClasses [
 	"We change the superclass of this class to ensure regeneration will update it. Check non regression for: https://github.com/moosetechnology/Moose/issues/1668"
 	self class environment
 		at: #FmxTestCleaningStrategyFmxTestEntityWithDifferentSuperclass
-		ifPresent: [ :class | 
-			MooseEntity
-				subclass: #FmxTestCleaningStrategyFmxTestEntityWithDifferentSuperclass
-				slots: {}
-				classVariables: {}
-				package: 'Famix-MetamodelBuilder-TestsResources-Entities' ]
+		ifPresent: [ :class |
+			self class classInstaller make: [ :aBuilder |
+				aBuilder
+					superclass: MooseEntity;
+					name: #FmxTestCleaningStrategyFmxTestEntityWithDifferentSuperclass;
+					package: 'Famix-MetamodelBuilder-TestsResources-Entities' ] ]
 		ifAbsent: [ self fail ].
 	self class compile: 'extensionsMethodForTest' classified: '*' , generator packageName
 ]
