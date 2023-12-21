@@ -79,14 +79,13 @@ SmalltalkImporter >> basicClassCreation: aClass [
 
 { #category : #'private-entity-creation' }
 SmalltalkImporter >> basicCreateMethod: aSelector withSignature: aSignature [
-	| method |
-	method := self factory method new.
-	method name: aSelector.
-	method isStub: true.
-	method signature: aSignature.
-	method isAbstract: false.
-	^ method
-	
+
+	^ self factory method new
+		  name: aSelector;
+		  isStub: true;
+		  signature: aSignature;
+		  isAbstract: false;
+		  yourself
 ]
 
 { #category : #'private utils' }
@@ -287,6 +286,7 @@ SmalltalkImporter >> createSpecialVariable: name forFamixMethod: aFamixMethod [
 { #category : #'private-entity-creation' }
 SmalltalkImporter >> createStubMethod: aCompiledMethod [
 	"same as #createMethod but does not import body"
+
 	| method thisClass |
 	method := self basicCreateMethod: aCompiledMethod selector withSignature: aCompiledMethod signature.
 	methods at: aCompiledMethod put: method.
@@ -296,15 +296,12 @@ SmalltalkImporter >> createStubMethod: aCompiledMethod [
 	=> the method belong to a package extension, we should refer to this extending packages 
 	=> if not, we should not refer to package of the class"
 	"parentPackage := aCompiledMethod methodClass package."
-	aCompiledMethod methodClass extendingPackages
-		do: [ :aRPackage | 
-			(aCompiledMethod isExtensionInPackage: aRPackage)
-				ifTrue: [ method parentPackage: (self ensurePackage: aRPackage) ] ].
-	method isClassSide: aCompiledMethod methodClass isMeta.
+	aCompiledMethod methodClass extendingPackages do: [ :aRPackage |
+		(aCompiledMethod isExtensionInPackage: aRPackage) ifTrue: [ method parentPackage: (self ensurePackage: aRPackage) ] ].
 	method
-		protocol:
-			(aCompiledMethod methodClass organization
-				categoryOfElement: aCompiledMethod selector).
+		isClassSide: aCompiledMethod methodClass isMeta;
+		protocol: aCompiledMethod protocolName;
+		timeStamp: aCompiledMethod timeStamp.
 	^ method
 ]
 
