@@ -96,7 +96,6 @@ FamixInvocationsTest >> testCandidateInvocationsUnknownReceiver [
 
 { #category : #tests }
 FamixInvocationsTest >> testReceivingFormalParameter [
-	"self debug: #testReceivingFormalParameter"
 
 	| invocation |
 	invocation := self invocationFromOutputServerAcceptMethodTo: #'addressee()'.
@@ -210,7 +209,6 @@ FamixInvocationsTest >> testReceivingSuper6 [
 
 { #category : #tests }
 FamixInvocationsTest >> testReceivingUnknownType [
-	"self debug: #testReceivingUnknownType"
 
 	| invocation |
 	invocation := self invocationFromOutputServerAcceptMethodTo: #'isDestinationFor:(Object)'.

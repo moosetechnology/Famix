@@ -20,7 +20,7 @@ FamixJavaSourceLanguage >> isC [
 	^ false
 ]
 
-{ #category : #'*Famix-Java-Entities' }
+{ #category : #testing }
 FamixJavaSourceLanguage >> isJava [
 	^ true
 ]
