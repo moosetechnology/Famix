@@ -13,12 +13,6 @@ FmxMBRealRingEnvironment >> apply [
 	changesToApply do: #apply
 ]
 
-{ #category : #installing }
-FmxMBRealRingEnvironment >> classVariablesStringFor: realClass [
-
-	^ '{', ((realClass classVarNames collect: [ :each | '#', each ]) joinUsing: ' '), '}'
-]
-
 { #category : #accessing }
 FmxMBRealRingEnvironment >> collectChangesToApply [
 	| resolvedClasses resolvedPackages |
@@ -41,72 +35,72 @@ FmxMBRealRingEnvironment >> compile: aSource in: aClass classified: aProtocol pa
 { #category : #installing }
 FmxMBRealRingEnvironment >> recordAdoptionOfClassDefinitionFrom: realClass to: anRGClass [
 
-	| customSlots customSlotNames slotDefinitions slotsString definition traitsString |
-
+	| customSlots customSlotNames slotDefinitions |
 	(realClass needToAdaptTo: anRGClass) ifFalse: [ ^ self ].
 
-	customSlots := realClass localSlots copyWithoutAll:
-		               realClass generatedSlots.
+	customSlots := realClass localSlots copyWithoutAll: realClass generatedSlots.
 	customSlotNames := customSlots collect: #name.
-	slotDefinitions := ((anRGClass slots reject: [ :each | 
-		                     customSlotNames includes: each name ]) 
-		                    collect: #definitionString) asOrderedCollection.
+	slotDefinitions := ((anRGClass slots reject: [ :each | customSlotNames includes: each name ]) collect: #definitionString) asOrderedCollection.
 	slotDefinitions addAll: (customSlots collect: #definitionString).
 	slotDefinitions := slotDefinitions sorted.
 
-	slotsString := '{' , (slotDefinitions joinUsing: '. ') , '}'.
-	traitsString := self traitStringFrom: realClass to: anRGClass.
-	definition := anRGClass isTrait
-		              ifFalse: [ 
-			              '{superclass} subclass: #{className} 
-		uses: {traits} 
-		slots: {slots} 
-		classVariables: {classVariables}
-		poolDictionaries: ''{poolDictionaries}''
-		category: ''{category}''' format: (Dictionary newFrom: { 
-						               (#superclass -> anRGClass superclass name).
-						               (#className -> anRGClass name).
-						               (#layout -> realClass classLayout class name).
-						               (#traits -> traitsString).
-						               (#slots -> slotsString).
-						               (#classVariables
-						                -> (self classVariablesStringFor: realClass)).
-						               (#poolDictionaries -> realClass sharedPoolsString).
-						               (#category -> realClass category) }) ]
-		              ifTrue: [ 
-			              '{superclass} named: #{className} 
-		uses: {traits} 
-		slots: {slots} 
-		category: ''{category}''' format: (Dictionary newFrom: { 
-						               (#superclass -> anRGClass superclass name).
-						               (#className -> anRGClass name).
-						               (#traits -> traitsString).
-						               (#slots -> slotsString).
-						               (#category -> realClass category) }) ].
-
-	changesToApply add: (FmxClassAddition definition: definition)
+	self
+		recordClassAdditionFromClass: anRGClass
+		traits: (self traitStringFrom: realClass to: anRGClass)
+		slots: '{' , (slotDefinitions joinUsing: '. ') , '}'
+		classSlots: '{' , ((realClass class localSlots collect: #definitionString) joinUsing: ' . ') , '}'
+		sharedVariables: '{' , ((realClass classVarNames collect: [ :each | '#' , each ]) joinUsing: ' ') , '}'
+		package: realClass package name
+		tag: realClass packageTag name
 ]
 
 { #category : #installing }
-FmxMBRealRingEnvironment >> recordClassChangesFor: anRGClass [
+FmxMBRealRingEnvironment >> recordClassAdditionFromClass: aRGClass traits: traitsString slots: slotsString classSlots: classSlotsString sharedVariables: sharedVariablesString package: packageName tag: tagName [
+
+	self flag: #todo. "When P12 will be the minimal version used we should use the ShiftClassBuilder instead of manipulation a string. This would make the code a lot easier and we would not rely on compiler evaluation of strings to generate the classes."
+	changesToApply add: (FmxClassAddition creationCode: ('Smalltalk classInstaller
+	make: [ :builder |
+		builder 
+			{superclassOrTraitDeclaration};
+			name: {className};
+			traits: {traits};
+			slots: {slots};
+			classSlots: {classSlots};
+			sharedVariables: {classVariables};
+			package: {package};
+			tag: {tag}
+		 ]' format: (Dictionary newFrom: {
+						   (#superclassOrTraitDeclaration -> (aRGClass isTrait
+							     ifTrue: [ 'beTrait' ]
+							     ifFalse: [ 'superclass: ' , aRGClass superclass name ])).
+						   (#className -> aRGClass name asSymbol printString).
+						   (#traits -> traitsString).
+						   (#slots -> slotsString).
+						   (#classSlots -> classSlotsString).
+						   (#classVariables -> sharedVariablesString).
+						   (#package -> packageName printString).
+						   (#tag -> tagName printString) })))
+]
+
+{ #category : #installing }
+FmxMBRealRingEnvironment >> recordClassChangesFor: aRGClass [
 
 	| realClass |
-	realClass := self class environment classNamed: anRGClass name.
+	realClass := self class environment classNamed: aRGClass name.
 	realClass
-		ifNil: [ 
-			changesToApply add:
-				(FmxClassAddition definition: anRGClass definition) ]
-		ifNotNil: [ 
-		self recordAdoptionOfClassDefinitionFrom: realClass to: anRGClass ].
-	self recordClassCommentChangeOf: realClass to: anRGClass.
-	self
-		recordMethodsAdoptionsOf: realClass
-		to: anRGClass
-		realClassName: anRGClass name.
-	self
-		recordMethodsAdoptionsOf: (realClass ifNotNil: #class)
-		to: anRGClass classSide
-		realClassName: anRGClass name
+		ifNil: [
+			self
+				recordClassAdditionFromClass: aRGClass
+				traits: aRGClass traitCompositionString
+				slots: aRGClass slotDefinitionString
+				classSlots: '{}'
+				sharedVariables: '{}'
+				package: aRGClass package name
+				tag: aRGClass tags anyOne ]
+		ifNotNil: [ self recordAdoptionOfClassDefinitionFrom: realClass to: aRGClass ].
+	self recordClassCommentChangeOf: realClass to: aRGClass.
+	self recordMethodsAdoptionsOf: realClass to: aRGClass realClassName: aRGClass name.
+	self recordMethodsAdoptionsOf: (realClass ifNotNil: [ realClass class ]) to: aRGClass classSide realClassName: aRGClass name
 ]
 
 { #category : #installing }
@@ -163,8 +157,9 @@ FmxMBRealRingEnvironment >> recordMethodsAdoptionsOf: realClass to: anRGClass re
 
 { #category : #installing }
 FmxMBRealRingEnvironment >> recordPackagesChangesFor: resolvedPackages [
+
 	resolvedPackages
-		select: [ :each | (RPackageOrganizer default includesPackageNamed: each name) not ]
+		reject: [ :each | self packageOrganizer includesPackageNamed: each name ]
 		thenDo: [ :each | changesToApply add: (FmxPackageAddition named: each name) ]
 ]
 

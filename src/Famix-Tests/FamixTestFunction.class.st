@@ -3,5 +3,5 @@ Class {
 	#superclass : #MooseEntity,
 	#traits : 'FamixTFunction',
 	#classTraits : 'FamixTFunction classTrait',
-	#category : #'Famix-Tests-Uncategorized'
+	#category : #'Famix-Tests'
 }

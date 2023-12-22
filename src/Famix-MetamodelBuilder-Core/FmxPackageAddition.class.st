@@ -33,7 +33,7 @@ FmxPackageAddition class >> named: aName [
 
 { #category : #accessing }
 FmxPackageAddition >> apply [
-	RPackageOrganizer default createPackageNamed: self packageName
+	self packageOrganizer createPackageNamed: self packageName
 ]
 
 { #category : #accessing }

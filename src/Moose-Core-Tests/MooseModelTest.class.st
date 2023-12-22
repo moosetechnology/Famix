@@ -193,13 +193,14 @@ MooseModelTest >> testRemoveFromModel [
 
 { #category : #tests }
 MooseModelTest >> testRemoveModelNamedFromRoot [
-	"self debug: #testRemoveModelNamedFromRoot"
 
 	| group2 parentModel res |
 	group name: 'zork'.
 	group2 := self actualClass new.
 	group2 name: 'baz'.
-	parentModel := self actualClass withAll: {group . group2}.
+	parentModel := self actualClass withAll: {
+			               group.
+			               group2 }.
 	self assert: group mooseModel identicalTo: parentModel.
 	self assert: group2 mooseModel identicalTo: parentModel.
 	self assert: parentModel size equals: 2.

@@ -286,7 +286,10 @@ SmalltalkImporter >> createSpecialVariable: name forFamixMethod: aFamixMethod [
 
 { #category : #'private-entity-creation' }
 SmalltalkImporter >> createStubMethod: aCompiledMethod [
+	"private-entity-creation"
+
 	"same as #createMethod but does not import body"
+
 	| method thisClass |
 	method := self basicCreateMethod: aCompiledMethod selector withSignature: aCompiledMethod signature.
 	methods at: aCompiledMethod put: method.
@@ -296,15 +299,12 @@ SmalltalkImporter >> createStubMethod: aCompiledMethod [
 	=> the method belong to a package extension, we should refer to this extending packages 
 	=> if not, we should not refer to package of the class"
 	"parentPackage := aCompiledMethod methodClass package."
-	aCompiledMethod methodClass extendingPackages
-		do: [ :aRPackage | 
-			(aCompiledMethod isExtensionInPackage: aRPackage)
-				ifTrue: [ method parentPackage: (self ensurePackage: aRPackage) ] ].
-	method isClassSide: aCompiledMethod methodClass isMeta.
+	aCompiledMethod methodClass extendingPackages do: [ :aPackage |
+		(aCompiledMethod isExtension and: [ aCompiledMethod package = aPackage ]) ifTrue: [ method parentPackage: (self ensurePackage: aPackage) ] ].
 	method
-		protocol:
-			(aCompiledMethod methodClass organization
-				categoryOfElement: aCompiledMethod selector).
+		isClassSide: aCompiledMethod methodClass isMeta;
+		protocol: aCompiledMethod protocolName;
+		timeStamp: aCompiledMethod timeStamp.
 	^ method
 ]
 
