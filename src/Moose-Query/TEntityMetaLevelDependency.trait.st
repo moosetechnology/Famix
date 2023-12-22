@@ -327,7 +327,7 @@ TEntityMetaLevelDependency >> allChildrenTypes [
 
 { #category : #accessing }
 TEntityMetaLevelDependency >> allClients [
-	^ self lookUpPropertyNamed: #allClients computedAs: [ self queryAllIncoming withoutSelfLoops collect: #source ]
+	^ self lookUpPropertyNamed: #allClients computedAs: [( self queryAllIncoming withoutSelfLoops collect: #source ) flattened ]
 ]
 
 { #category : #accessing }
@@ -368,7 +368,7 @@ TEntityMetaLevelDependency >> allParents [
 
 { #category : #accessing }
 TEntityMetaLevelDependency >> allProviders [
-^ self lookUpPropertyNamed: #allProviders computedAs: [ self queryAllOutgoing  withoutSelfLoops collect: #target ]
+^ self lookUpPropertyNamed: #allProviders computedAs: [ (self queryAllOutgoing  withoutSelfLoops collect: #target) flattened ]
 ]
 
 { #category : #accessing }
