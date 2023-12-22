@@ -237,6 +237,23 @@ FamixStMethod >> numberOfStatements [
 		computedAs: [ self computeNumberOfStatements ]
 ]
 
+{ #category : #protocol }
+FamixStMethod >> overriddenMethod [
+"currently does not take into account traits"
+	^ (self parentType superclass ifNotNil: [ :superclass |
+		   superclass lookUp: self signature ]) 
+]
+
+{ #category : #testing }
+FamixStMethod >> overridingMethods [
+
+	| overridingMethods |
+	overridingMethods := OrderedCollection new.
+
+	self parentType addMethodOverriding: self in: overridingMethods.
+	^ overridingMethods
+]
+
 { #category : #'Famix-Extensions-metrics-support' }
 FamixStMethod >> printProtocol [
 
