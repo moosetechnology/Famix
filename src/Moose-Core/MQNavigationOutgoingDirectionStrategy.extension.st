@@ -2,7 +2,7 @@ Extension { #name : #MQNavigationOutgoingDirectionStrategy }
 
 { #category : #'*Moose-Core' }
 MQNavigationOutgoingDirectionStrategy class >> dependenciesAtReceiverScopeOf: anEntity [
-	^ anEntity allProviders
+	^ anEntity allProvidersAtMyScope
 ]
 
 { #category : #'*Moose-Core' }

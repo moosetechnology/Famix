@@ -15,7 +15,7 @@ FamixPackageNavigationTest >> testClientClasses [
 { #category : #tests }
 FamixPackageNavigationTest >> testClientPackages [
 	self
-		assertCollection: self p5FullReferee allClients
+		assertCollection: self p5FullReferee allClientsAtMyScope
 		hasSameElements: {self p1FullReferencer . self p2InteractedReferencerReferee . self p7ReferencerReferee . self p3InteractedReferencer}
 ]
 

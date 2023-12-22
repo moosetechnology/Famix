@@ -39,8 +39,8 @@ FamixTest3MooseQueryTest >> testAllProviders [
 
 { #category : #tests }
 FamixTest3MooseQueryTest >> testAllProvidersAtScope [
-	self assertCollection: (self m1 allProvidersAtScope: FamixTClass) hasSameElements: {self c1 . self pt1}.
-	self assertCollection: (self m1 allProvidersAtScope: FamixTest3Class) hasSameElements: {self c1 . self pt1}
+	self assertCollection: (self m1 allProviders) hasSameElements: {self c1 . self pt1}.
+	self assertCollection: (self m1 allProviders) hasSameElements: {self c1 . self pt1}
 ]
 
 { #category : #tests }

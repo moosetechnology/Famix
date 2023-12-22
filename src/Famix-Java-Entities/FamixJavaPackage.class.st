@@ -210,7 +210,7 @@ FamixJavaPackage >> numberOfClientPackages [
 	<FMProperty: #numberOfClientPackages type: #Number>
 	<FMComment: 'The number of packages which depend on this package'>
 	<derived>
-	^ self lookUpPropertyNamed: #numberOfClientPackages computedAs: [ self allClients size ]
+	^ self lookUpPropertyNamed: #numberOfClientPackages computedAs: [ self allClientsAtMyScope size ]
 ]
 
 { #category : #accessing }
