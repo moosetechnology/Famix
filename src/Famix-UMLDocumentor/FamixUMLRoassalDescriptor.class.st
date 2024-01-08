@@ -1,3 +1,6 @@
+"
+The Roassal part of the Roassal backend exporter
+"
 Class {
 	#name : #FamixUMLRoassalDescriptor,
 	#superclass : #RSUMLClassDescriptor,
