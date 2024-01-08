@@ -1,7 +1,7 @@
 "
 A Tool to generate an UML representation of Famix meta-models
 
-Simple use:
+## Simple use:
 ```
 FamixUMLDocumentor new
   model: FamixStModel ;
@@ -9,7 +9,7 @@ FamixUMLDocumentor new
   exportWith: (FamixUMLPlantUMLBackend new).
 ```
 
-API:
+## API:
 - `model:` adds a meta-model to export (entities of the meta-model will have an automatically assigned color)
   several meta-models can be specified
 - `model:color:` same as previous but manually assign a color to the entities of this meta-model
@@ -18,7 +18,15 @@ API:
 - `beWithStubs` also export the super-classes and used traits of classes exported, even if these super-classes/traits or not part of the meta-models. These stubs have an automatically selected color.
 - `beWithoutStubs` opposite of the preceding, default option
 - `generate` creates an internal representation of a UML class diagram according to the options given before
-- `exportWith:` exports the internal representation with the ""backend"" given (see `FamixUMLDummyBackend`)
+- `exportWith:` exports the internal representation with the ""backend"" given
+
+## Backends
+
+The backends export the model in some specific format.
+- `FamixUMLTextBackend`: exports a textual description of the model
+- `FamixUMLPlantUMLBackend`: exports a description of the model in PlantUML format
+- `FamixUMLMermaidBackend`: exports a textual description of the model in Mermaid format
+- `FamixUMLRoassalBackend`: creates a Roassal representation of the model (work in progress)
 "
 Class {
 	#name : #FamixUMLDocumentor,
