@@ -180,9 +180,12 @@ FamixUMLDocumentor >> generateInheritance: fmClass uml: umlClass [
 
 { #category : #generating }
 FamixUMLDocumentor >> generateProperties: aFMClass uml: umlClass [
+	"accept FM3Object as a primitive type (#isRoot = true)"
 
-	aFMClass primitiveProperties do: [ :prop |
-		umlClass addProperty: (FamixUMLProperty from: prop) ].
+	aFMClass properties do: [ :prop |
+		(prop type isPrimitive or: [  prop type isRoot ])
+			ifTrue: [umlClass addProperty: (FamixUMLProperty from: prop) ]
+	]
 
 ]
 
