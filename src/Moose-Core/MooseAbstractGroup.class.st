@@ -489,7 +489,8 @@ MooseAbstractGroup >> initialize [
 MooseAbstractGroup >> initializeWithAll: aCollection [
 
 	self initialize.
-	storage := MooseGroupRuntimeStorage withAll: aCollection
+	storage := MooseGroupRuntimeStorage new: aCollection size.
+	self addAll: aCollection
 ]
 
 { #category : #enumerating }
