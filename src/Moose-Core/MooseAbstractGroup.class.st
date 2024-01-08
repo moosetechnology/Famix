@@ -35,9 +35,9 @@ MooseAbstractGroup class >> with: anEntity [
 MooseAbstractGroup class >> withAll: aCollection [
 	"Create a new collection containing all the elements from aCollection."
 
-	^ self new
-		addAll: aCollection;
-		yourself
+	^ self basicNew
+		  initializeWithAll: aCollection;
+		  yourself
 ]
 
 { #category : #'set operations' }
@@ -483,6 +483,14 @@ MooseAbstractGroup >> initialize [
 	 
 	super initialize.
 	storage := MooseGroupStorage empty
+]
+
+{ #category : #initialization }
+MooseAbstractGroup >> initializeWithAll: aCollection [
+
+	self initialize.
+	storage := MooseGroupRuntimeStorage new: aCollection size.
+	self addAll: aCollection
 ]
 
 { #category : #enumerating }
