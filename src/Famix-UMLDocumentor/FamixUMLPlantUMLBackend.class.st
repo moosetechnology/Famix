@@ -1,3 +1,8 @@
+"
+I export the model in PlantUML format.
+
+The result can be given to [PlantUML.com](https://plantuml.com) to generate a graphical representation of the class diagram
+"
 Class {
 	#name : #FamixUMLPlantUMLBackend,
 	#superclass : #FamixUMLTextBackend,
