@@ -55,7 +55,10 @@ FamixUMLTestGenerator >> defineProperties [
 	super defineProperties.
 
 	(t4 property: #someProp type: #String)
-		comment: 'A property in the trait'
+		comment: 'A property in the trait'.
+
+	(t4 property: #otherProp type: #Object)
+		comment: 'Another property in the trait'.
 ]
 
 { #category : #definition }
