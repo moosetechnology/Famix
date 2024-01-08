@@ -1,6 +1,6 @@
 Class {
 	#name : #FamixUMLRoassalDescriptor,
-	#superclass : #RSUMLClassDescriptor,
+	#superclass : #AnObsoleteRSUMLClassDescriptor,
 	#instVars : [
 		'umlModel'
 	],
