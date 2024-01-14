@@ -699,6 +699,16 @@ TEntityMetaLevelDependency >> isIncludedIn: anEntity parentSelectorsCache: paren
 	^ false
 ]
 
+{ #category : #testing }
+TEntityMetaLevelDependency >> isRoot [
+
+	<FMProperty: #isRoot type: #Boolean>
+	<derived>
+	<FMComment:
+	'An entity is root if it has no parent in the model. This is useful for example to be able to build visualization where the displayed elements are the roots of the model and to let those elements be expanded to display their children.'>
+	^ self parents isEmpty
+]
+
 { #category : #accessing }
 TEntityMetaLevelDependency >> numberOfChildren [
 	<FMProperty: #numberOfChildren type: #Number>

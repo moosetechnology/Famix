@@ -185,13 +185,6 @@ MooseEntity >> isMooseEntity [
 ]
 
 { #category : #testing }
-MooseEntity >> isRoot [
-	"Return true if the entity is not contained in any other entity."
-
-	^ self parents isEmpty
-]
-
-{ #category : #testing }
 MooseEntity >> isStub [
 	^ self attributeAt: #privateIsStub ifAbsent: [ false ]
 ]
