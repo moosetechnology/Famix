@@ -1,3 +1,12 @@
+"
+## Relations
+======================
+
+### Outgoing dependencies
+- Relation: #outgoingResidences Type: #FamixTest8Residence Opposite: #resident
+
+
+"
 Class {
 	#name : #FamixTest8LivingBeing,
 	#superclass : #FamixTest8Entity,

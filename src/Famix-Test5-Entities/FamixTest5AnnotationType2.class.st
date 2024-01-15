@@ -1,3 +1,14 @@
+"
+## Relations
+======================
+
+### Parents
+- Relation: #annotationTypesContainer Type: #FamixTWithAnnotationTypes Opposite: #definedAnnotationTypes Comment: Container in which an AnnotationType may reside
+### Other
+- Relation: #instances Type: #FamixTTypedAnnotationInstance Opposite: #annotationType Comment: Annotations of this type
+
+
+"
 Class {
 	#name : #FamixTest5AnnotationType2,
 	#superclass : #FamixTest5Entity,

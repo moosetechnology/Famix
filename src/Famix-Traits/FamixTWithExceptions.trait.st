@@ -1,3 +1,14 @@
+"
+## Relations
+======================
+
+### Other
+- Relation: #declaredExceptions Type: #FamixTException Opposite: #declaringEntities Comment: The exceptions declared by the method
+- Relation: #thrownExceptions Type: #FamixTException Opposite: #throwingEntities Comment: The exceptions thrown by the method
+- Relation: #caughtExceptions Type: #FamixTException Opposite: #catchingEntities Comment: The exceptions caught by the method
+
+
+"
 Trait {
 	#name : #FamixTWithExceptions,
 	#instVars : [

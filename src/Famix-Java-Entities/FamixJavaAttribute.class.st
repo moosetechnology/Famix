@@ -1,3 +1,29 @@
+"
+## Relations
+======================
+
+### Parents
+- Relation: #parentType Type: #FamixTWithAttributes Opposite: #attributes Comment: Type declaring the attribute. belongsTo implementation
+### Incomming dependencies
+- Relation: #incomingAccesses Type: #FamixTAccess Opposite: #variable Comment: All Famix accesses pointing to this structural entity
+### Other
+- Relation: #receivingInvocations Type: #FamixTInvocation Opposite: #receiver Comment: List of invocations performed on this entity (considered as the receiver)
+- Relation: #comments Type: #FamixTComment Opposite: #commentedEntity Comment: List of comments for the entity
+- Relation: #declaredType Type: #FamixTType Opposite: #typedEntities Comment: Type of the entity, if any
+- Relation: #sourceAnchor Type: #FamixTSourceAnchor Opposite: #element Comment: SourceAnchor entity linking to the original source code for this entity
+
+## Properties
+======================
+
+- Named: #visibility Type: String Comment: Visibility of the entity
+- Named: #isTransient Type: Boolean Comment: Entity can be declared transient
+- Named: #isClassSide Type: Boolean Comment: Entity can be declared class side i.e. static
+- Named: #isVolatile Type: Boolean Comment: Entity can be declared volatile
+- Named: #name Type: String Comment: Basic name of the entity, not full reference.
+- Named: #isStub Type: Boolean Comment: Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.
+- Named: #isFinal Type: Boolean Comment: Entity can be declared final
+
+"
 Class {
 	#name : #FamixJavaAttribute,
 	#superclass : #FamixJavaNamedEntity,

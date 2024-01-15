@@ -1,3 +1,12 @@
+"
+## Relations
+======================
+
+### Other
+- Relation: #receivingInvocations Type: #FamixTInvocation Opposite: #receiver Comment: List of invocations performed on this entity (considered as the receiver)
+
+
+"
 Trait {
 	#name : #FamixTInvocationsReceiver,
 	#instVars : [

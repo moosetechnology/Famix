@@ -7,6 +7,12 @@ public class Student implements Serializable{
  transient int age; //Now it will not be serialized  
 }  
 ```
+
+## Properties
+======================
+
+- Named: #isTransient Type: Boolean Comment: Entity can be declared transient
+
 "
 Trait {
 	#name : #FamixJavaTCanBeTransient,

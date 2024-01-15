@@ -10,6 +10,14 @@ And the following is an AnnotationInstance in Java:
 Instance Variables:
 	annotatedEntity	<FamixTEntity>
 	annotationType		<FamixTAnnotationType>
+
+## Relations
+======================
+
+### Other
+- Relation: #annotatedEntity Type: #FamixTWithAnnotationInstances Opposite: #annotationInstances Comment: The NamedEntity on which the annotation occurs.
+
+
 "
 Trait {
 	#name : #FamixTAnnotationInstance,

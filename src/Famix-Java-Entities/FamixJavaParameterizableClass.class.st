@@ -1,3 +1,12 @@
+"
+## Relations
+======================
+
+### Other
+- Relation: #parameterizedTypes Type: #FamixTParameterizedType Opposite: #parameterizableClass
+
+
+"
 Class {
 	#name : #FamixJavaParameterizableClass,
 	#superclass : #FamixJavaClass,

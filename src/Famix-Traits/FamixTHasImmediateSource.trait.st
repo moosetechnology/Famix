@@ -1,5 +1,17 @@
 "
 An immediate source is the source code of the entity stored directly into its sourceAnchor instead of accessing it (for example in a file) through its sourceAnchor
+
+## Relations
+======================
+
+### Other
+- Relation: #element Type: #FamixTSourceEntity Opposite: #sourceAnchor Comment: Enable the accessibility to the famix entity that this class is a source pointer for
+
+## Properties
+======================
+
+- Named: #source Type: String Comment: Actual source code of the source entity
+
 "
 Trait {
 	#name : #FamixTHasImmediateSource,

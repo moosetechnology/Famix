@@ -11,6 +11,12 @@ public class SynchronizedCounter {
     }
 }
 ```
+
+## Properties
+======================
+
+- Named: #isSynchronized Type: Boolean Comment: Entity can be declared synchronized
+
 "
 Trait {
 	#name : #FamixJavaTCanBeSynchronized,

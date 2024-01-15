@@ -72,6 +72,20 @@ FmxMBBehavior >> allNavigationGroups [
 ]
 
 { #category : #accessing }
+FmxMBBehavior >> allProperties [
+	"Return my properties and the properties from my traits."
+
+	^ (self allTransitiveTraits flatCollect: [ :trait | trait properties ]) , self properties
+]
+
+{ #category : #accessing }
+FmxMBBehavior >> allRelations [
+	"Return my relations and the relations from my traits."
+
+	^ (self allTransitiveTraits flatCollect: [ :trait | trait relations ]) , self relations
+]
+
+{ #category : #accessing }
 FmxMBBehavior >> allTraitNames [
 	^ (self allLocalTraits collect: #fullName) sorted
 ]
@@ -97,6 +111,82 @@ FmxMBBehavior >> classGeneralization [
 { #category : #accessing }
 FmxMBBehavior >> classGeneralization: anObject [
 	^ self subclassResponsibility
+]
+
+{ #category : #accessing }
+FmxMBBehavior >> commentWithRelations [
+	"It is sometimes hard to find our way in all the methods and relations of a moose entity. To help with this I am adding informations in the class comments about the different kind of relations of the model."
+
+	^ String streamContents: [ :aStream |
+		  aStream nextPutAll: self comment.
+		  self comment ifNotEmpty: [
+			  aStream
+				  lf;
+				  lf ].
+		  self allRelations ifNotEmpty: [ :rels |
+			  aStream
+				  nextPutAll: '## Relations
+======================';
+				  lf;
+				  lf.
+			  OrderedDictionary new
+				  at: 'Parents' put: [ :relation | relation side isContainer ];
+				  at: 'Children' put: [ :relation | relation oppositeSide isContainer ];
+				  at: 'Outgoing dependencies' put: [ :relation | relation oppositeSide isSource ];
+				  at: 'Incoming dependencies' put: [ :relation | relation oppositeSide isTarget ];
+				  at: 'Association source' put: [ :relation | relation side isSource ];
+				  at: 'Association target' put: [ :relation | relation side isTarget ];
+				  at: 'Other' put: [ :relation |
+					  relation side isTarget not and: [
+							  relation side isSource not and: [
+									  relation side isContainer not and: [
+											  relation oppositeSide isTarget not and: [ relation oppositeSide isSource not and: [ relation oppositeSide isContainer not ] ] ] ] ] ];
+				  keysAndValuesDo: [ :relationKind :selectionBlock |
+					  (rels select: selectionBlock) ifNotEmpty: [ :parents |
+							  aStream
+								  nextPutAll: '### ';
+								  nextPutAll: relationKind;
+								  lf.
+
+							  parents do: [ :parent |
+								  | strategy |
+								  strategy := parent side generationStrategy.
+
+								  aStream
+									  nextPutAll: '- Relation: #';
+									  nextPutAll: strategy relationSide name;
+									  nextPutAll: ' Type: #';
+									  nextPutAll: strategy relationSide oppositeType;
+									  nextPutAll: ' Opposite: #';
+									  nextPutAll: strategy relationSide oppositeName.
+
+								  strategy relationSide comment ifNotEmpty: [ :com |
+									  aStream
+										  nextPutAll: ' Comment: ';
+										  nextPutAll: com ].
+
+								  aStream lf ] ] ].
+			  aStream lf ].
+
+		  (self allProperties reject: [ :p | p isRelation ]) ifNotEmpty: [ :props |
+			  aStream
+				  nextPutAll: '## Properties
+======================';
+				  lf;
+				  lf.
+
+			  props do: [ :property |
+				  aStream
+					  nextPutAll: '- Named: #';
+					  nextPutAll: property name;
+					  nextPutAll: ' Type: ';
+					  nextPutAll: property propertyType.
+
+				  property comment ifNotEmpty: [ :com |
+					  aStream
+						  nextPutAll: ' Comment: ';
+						  nextPutAll: com ].
+				  aStream lf ] ] ]
 ]
 
 { #category : #'settings - default' }

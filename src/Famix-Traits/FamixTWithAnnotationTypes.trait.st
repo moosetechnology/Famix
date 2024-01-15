@@ -1,3 +1,12 @@
+"
+## Relations
+======================
+
+### Children
+- Relation: #definedAnnotationTypes Type: #FamixTAnnotationType Opposite: #annotationTypesContainer Comment: The container in which the AnnotationTypes may be declared
+
+
+"
 Trait {
 	#name : #FamixTWithAnnotationTypes,
 	#instVars : [

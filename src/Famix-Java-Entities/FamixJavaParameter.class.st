@@ -1,3 +1,24 @@
+"
+## Relations
+======================
+
+### Parents
+- Relation: #parentBehaviouralEntity Type: #FamixTWithParameters Opposite: #parameters Comment: Behavioural entity containing this parameter. belongsTo implementation
+### Incomming dependencies
+- Relation: #incomingAccesses Type: #FamixTAccess Opposite: #variable Comment: All Famix accesses pointing to this structural entity
+### Other
+- Relation: #declaredType Type: #FamixTType Opposite: #typedEntities Comment: Type of the entity, if any
+- Relation: #comments Type: #FamixTComment Opposite: #commentedEntity Comment: List of comments for the entity
+- Relation: #sourceAnchor Type: #FamixTSourceAnchor Opposite: #element Comment: SourceAnchor entity linking to the original source code for this entity
+
+## Properties
+======================
+
+- Named: #name Type: String Comment: Basic name of the entity, not full reference.
+- Named: #isStub Type: Boolean Comment: Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.
+- Named: #isFinal Type: Boolean Comment: Entity can be declared final
+
+"
 Class {
 	#name : #FamixJavaParameter,
 	#superclass : #FamixJavaNamedEntity,

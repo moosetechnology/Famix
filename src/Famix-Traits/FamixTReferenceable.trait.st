@@ -1,3 +1,12 @@
+"
+## Relations
+======================
+
+### Incomming dependencies
+- Relation: #incomingReferences Type: #FamixTReference Opposite: #referredType Comment: References to this entity by other entities.
+
+
+"
 Trait {
 	#name : #FamixTReferenceable,
 	#instVars : [

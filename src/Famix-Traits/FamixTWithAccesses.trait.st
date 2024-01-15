@@ -1,3 +1,12 @@
+"
+## Relations
+======================
+
+### Outgoing dependencies
+- Relation: #accesses Type: #FamixTAccess Opposite: #accessor Comment: Accesses to variables made by this behaviour.
+
+
+"
 Trait {
 	#name : #FamixTWithAccesses,
 	#instVars : [

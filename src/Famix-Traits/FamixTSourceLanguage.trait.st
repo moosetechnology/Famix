@@ -3,6 +3,14 @@ FamixTSourceLanguage represents the programming language in which an entity is w
 
 A source language has a name and entities that are written in this language. 
 One can create a default source language for a project by not associating any entities to it. In this case, all entities that do not have specific source langauge, belong to the default source language. One can attach entities to a sourceLanguage using addSourceEntity:.
+
+## Relations
+======================
+
+### Other
+- Relation: #sourcedEntities Type: #FamixTWithSourceLanguages Opposite: #declaredSourceLanguage Comment: References to the entities saying explicitly that are written in this language.
+
+
 "
 Trait {
 	#name : #FamixTSourceLanguage,

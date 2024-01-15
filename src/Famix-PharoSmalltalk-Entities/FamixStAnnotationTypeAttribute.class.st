@@ -1,3 +1,24 @@
+"
+## Relations
+======================
+
+### Parents
+- Relation: #parentType Type: #FamixTWithAttributes Opposite: #attributes Comment: Type declaring the attribute. belongsTo implementation
+### Incomming dependencies
+- Relation: #incomingAccesses Type: #FamixTAccess Opposite: #variable Comment: All Famix accesses pointing to this structural entity
+### Other
+- Relation: #annotationTypeAttribute Type: #FamixTAnnotationTypeAttribute Opposite: #annotationAttributeInstances Comment: This corresponds to the type of the attribute in an AnnotationInstance
+- Relation: #annotationAttributeInstances Type: #FamixTTypedAnnotationInstanceAttribute Opposite: #annotationTypeAttribute Comment: A collection of AnnotationInstanceAttribute which hold the usages of this attribute in actual AnnotationInstances
+- Relation: #sourceAnchor Type: #FamixTSourceAnchor Opposite: #element Comment: SourceAnchor entity linking to the original source code for this entity
+- Relation: #declaredType Type: #FamixTType Opposite: #typedEntities Comment: Type of the entity, if any
+
+## Properties
+======================
+
+- Named: #name Type: String Comment: Basic name of the entity, not full reference.
+- Named: #isStub Type: Boolean Comment: Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.
+
+"
 Class {
 	#name : #FamixStAnnotationTypeAttribute,
 	#superclass : #FamixStSourcedEntity,

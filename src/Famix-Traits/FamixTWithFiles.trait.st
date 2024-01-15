@@ -1,3 +1,12 @@
+"
+## Relations
+======================
+
+### Other
+- Relation: #containerFiles Type: #FamixTFile Opposite: #entities Comment: List of files containing the entity
+
+
+"
 Trait {
 	#name : #FamixTWithFiles,
 	#instVars : [

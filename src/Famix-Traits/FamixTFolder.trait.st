@@ -1,5 +1,15 @@
 "
 It represents a folder in the file system. It can contain other files or folders.
+
+## Relations
+======================
+
+### Parents
+- Relation: #parentFolder Type: #FamixTFolder Opposite: #childrenFileSystemEntities Comment: Folder entity containing this file.
+### Children
+- Relation: #childrenFileSystemEntities Type: #FamixTFileSystemEntity Opposite: #parentFolder Comment: List of entities contained in this folder.
+
+
 "
 Trait {
 	#name : #FamixTFolder,

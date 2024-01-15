@@ -1,3 +1,12 @@
+"
+## Relations
+======================
+
+### Incomming dependencies
+- Relation: #incomingInfections Type: #FamixTest8Infection Opposite: #infectious
+
+
+"
 Trait {
 	#name : #FamixTest8TInfectious,
 	#instVars : [

@@ -1,3 +1,12 @@
+"
+## Relations
+======================
+
+### Children
+- Relation: #localVariables Type: #FamixTLocalVariable Opposite: #parentBehaviouralEntity Comment: Variables locally defined by this behaviour.
+
+
+"
 Trait {
 	#name : #FamixTWithLocalVariables,
 	#instVars : [

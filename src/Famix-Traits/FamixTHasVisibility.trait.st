@@ -1,3 +1,10 @@
+"
+## Properties
+======================
+
+- Named: #visibility Type: String Comment: Visibility of the entity
+
+"
 Trait {
 	#name : #FamixTHasVisibility,
 	#instVars : [

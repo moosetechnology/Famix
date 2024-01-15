@@ -1,3 +1,12 @@
+"
+## Relations
+======================
+
+### Children
+- Relation: #parameters Type: #FamixTParameter Opposite: #parentBehaviouralEntity Comment: List of formal parameters declared by this behaviour.
+
+
+"
 Trait {
 	#name : #FamixTWithParameters,
 	#instVars : [

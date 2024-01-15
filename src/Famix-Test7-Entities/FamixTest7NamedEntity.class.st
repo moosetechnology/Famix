@@ -1,3 +1,10 @@
+"
+## Properties
+======================
+
+- Named: #name Type: String Comment: Basic name of the entity, not full reference.
+
+"
 Class {
 	#name : #FamixTest7NamedEntity,
 	#superclass : #FamixTest7Entity,

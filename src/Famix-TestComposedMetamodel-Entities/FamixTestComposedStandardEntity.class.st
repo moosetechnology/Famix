@@ -1,3 +1,12 @@
+"
+## Relations
+======================
+
+### Other
+- Relation: #method Type: #FamixTestComposed1Method Opposite: #standardEntity
+
+
+"
 Class {
 	#name : #FamixTestComposedStandardEntity,
 	#superclass : #FamixTestComposedEntity,

@@ -1,3 +1,22 @@
+"
+## Relations
+======================
+
+### Association source
+- Relation: #resident Type: #FamixTest8TResident Opposite: #outgoingResidences
+### Association target
+- Relation: #biotope Type: #FamixTest8TBiotope Opposite: #incomingResidences
+### Other
+- Relation: #sourceAnchor Type: #FamixTSourceAnchor Opposite: #element Comment: SourceAnchor entity linking to the original source code for this entity
+- Relation: #previous Type: #FamixTAssociation Opposite: #next Comment: Previous association in an ordered collection of associations. Currently not supported by the Moose importer
+- Relation: #next Type: #FamixTAssociation Opposite: #previous Comment: Next association in an ordered collection of associations. Currently not supported by the Moose importer
+
+## Properties
+======================
+
+- Named: #isStub Type: Boolean Comment: Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.
+
+"
 Class {
 	#name : #FamixTest8Residence,
 	#superclass : #FamixTest8Entity,

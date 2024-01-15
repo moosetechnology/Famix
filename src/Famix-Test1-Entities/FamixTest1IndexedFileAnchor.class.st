@@ -1,3 +1,14 @@
+"
+## Properties
+======================
+
+- Named: #fileName Type: String Comment: Name of the source file
+- Named: #endPos Type: Number Comment: Stop position in the source
+- Named: #encoding Type: String Comment: A string representing the encoding of a file
+- Named: #startPos Type: Number Comment: Start position in the source
+- Named: #correspondingFile Type: FamixTFile Comment: File associated to this source anchor
+
+"
 Class {
 	#name : #FamixTest1IndexedFileAnchor,
 	#superclass : #FamixTest1SourceAnchor,

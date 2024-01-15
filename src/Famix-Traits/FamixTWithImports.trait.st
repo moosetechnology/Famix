@@ -1,3 +1,12 @@
+"
+## Relations
+======================
+
+### Outgoing dependencies
+- Relation: #outgoingImports Type: #FamixTImport Opposite: #importingEntity
+
+
+"
 Trait {
 	#name : #FamixTWithImports,
 	#instVars : [

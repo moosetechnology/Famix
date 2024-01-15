@@ -1,3 +1,12 @@
+"
+## Relations
+======================
+
+### Other
+- Relation: #template Type: #FamixTTemplate Opposite: #templateUsers
+
+
+"
 Trait {
 	#name : #FamixTTemplateUser,
 	#instVars : [

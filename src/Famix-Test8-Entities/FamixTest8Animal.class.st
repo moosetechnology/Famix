@@ -1,3 +1,12 @@
+"
+## Relations
+======================
+
+### Incomming dependencies
+- Relation: #incomingInfections Type: #FamixTest8Infection Opposite: #infectious
+
+
+"
 Class {
 	#name : #FamixTest8Animal,
 	#superclass : #FamixTest8LivingBeing,

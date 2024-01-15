@@ -1,3 +1,13 @@
+"
+## Relations
+======================
+
+### Other
+- Relation: #outgoingIncludeRelations Type: #FamixTFileInclude Opposite: #source Comment: The include entities that have this file as a source.
+- Relation: #incomingIncludeRelations Type: #FamixTFileInclude Opposite: #target Comment: The include entities that have this file as a target.
+
+
+"
 Trait {
 	#name : #FamixTWithFileIncludes,
 	#instVars : [

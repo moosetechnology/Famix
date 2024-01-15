@@ -1,3 +1,12 @@
+"
+## Relations
+======================
+
+### Other
+- Relation: #annotationType Type: #FamixTAnnotationType Opposite: #instances Comment: Refers to the type of an annotation. (In some languages, Java and C#, an annotation as an explicit type). 
+
+
+"
 Trait {
 	#name : #FamixTTypedAnnotationInstance,
 	#instVars : [

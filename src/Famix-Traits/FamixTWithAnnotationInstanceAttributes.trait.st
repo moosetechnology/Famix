@@ -1,3 +1,12 @@
+"
+## Relations
+======================
+
+### Children
+- Relation: #attributes Type: #FamixTAnnotationInstanceAttribute Opposite: #parentAnnotationInstance Comment: This corresponds to the actual values of the attributes in an AnnotationInstance
+
+
+"
 Trait {
 	#name : #FamixTWithAnnotationInstanceAttributes,
 	#instVars : [

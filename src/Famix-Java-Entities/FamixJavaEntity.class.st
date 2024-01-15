@@ -7,6 +7,8 @@ model := MooseModel new.
 model silentlyAddAll: repo elements.
 model entityStorage forRuntime.
 model
+
+
 "
 Class {
 	#name : #FamixJavaEntity,

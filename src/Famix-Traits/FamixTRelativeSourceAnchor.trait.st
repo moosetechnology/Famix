@@ -14,6 +14,19 @@ Internal Representation and Key Implementation Points.
 	relatedAnchor:			<aSourceAnchor>			The anchor I'll get my relative sources from.
 	startPos:					<anInteger>				Position of the first character of my source in the source text of the relative anchor.
 
+## Relations
+======================
+
+### Other
+- Relation: #element Type: #FamixTSourceEntity Opposite: #sourceAnchor Comment: Enable the accessibility to the famix entity that this class is a source pointer for
+
+## Properties
+======================
+
+- Named: #relatedAnchor Type: FamixTSourceAnchor Comment: Source anchor to which I am relative.
+- Named: #endPos Type: Number Comment: Stop position in the source
+- Named: #startPos Type: Number Comment: Start position in the source
+
 "
 Trait {
 	#name : #FamixTRelativeSourceAnchor,

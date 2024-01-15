@@ -1,3 +1,12 @@
+"
+## Relations
+======================
+
+### Other
+- Relation: #comments Type: #FamixTComment Opposite: #commentedEntity Comment: List of comments for the entity
+
+
+"
 Trait {
 	#name : #FamixTWithComments,
 	#instVars : [

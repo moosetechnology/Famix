@@ -1,3 +1,12 @@
+"
+## Relations
+======================
+
+### Other
+- Relation: #declaredSourceLanguage Type: #FamixTSourceLanguage Opposite: #sourcedEntities Comment: The declared SourceLanguage for the source code of this entity
+
+
+"
 Trait {
 	#name : #FamixTWithSourceLanguages,
 	#instVars : [

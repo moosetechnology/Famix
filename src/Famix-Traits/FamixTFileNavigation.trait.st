@@ -1,3 +1,16 @@
+"
+## Properties
+======================
+
+- Named: #endColumn Type: Number Comment: Number of the end column
+- Named: #encoding Type: String Comment: A string representing the encoding of a file
+- Named: #endLine Type: Number Comment: Number of the end line
+- Named: #startLine Type: Number Comment: Number of the start line
+- Named: #fileName Type: String Comment: Name of the source file
+- Named: #startColumn Type: Number Comment: Number of the start column
+- Named: #correspondingFile Type: FamixTFile Comment: File associated to this source anchor
+
+"
 Trait {
 	#name : #FamixTFileNavigation,
 	#instVars : [

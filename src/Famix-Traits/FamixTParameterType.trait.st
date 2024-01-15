@@ -7,6 +7,8 @@ public class AClass<A,B,C> {
 }
 
 Where AClass is a ParameterizableClass. A, B and C are ParameterType of AClass.
+
+
 "
 Trait {
 	#name : #FamixTParameterType,

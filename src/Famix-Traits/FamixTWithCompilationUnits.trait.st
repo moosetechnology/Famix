@@ -1,3 +1,12 @@
+"
+## Relations
+======================
+
+### Children
+- Relation: #compilationUnit Type: #FamixTCompilationUnit Opposite: #compilationUnitOwner
+
+
+"
 Trait {
 	#name : #FamixTWithCompilationUnits,
 	#instVars : [

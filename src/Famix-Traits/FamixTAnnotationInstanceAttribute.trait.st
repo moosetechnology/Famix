@@ -8,6 +8,18 @@ Instance Variables:
 	parentAnnotationInstance	<FamixTAnnotationInstance>
 	annotationTypeAttribute	<FamixTAnnotationTypeAttribute>
 	value	<Object>
+
+## Relations
+======================
+
+### Parents
+- Relation: #parentAnnotationInstance Type: #FamixTWithAnnotationInstanceAttributes Opposite: #attributes Comment: The instance of the annotation in which the attribute is used.
+
+## Properties
+======================
+
+- Named: #value Type: String Comment: Actual value of the attribute used in an annotation
+
 "
 Trait {
 	#name : #FamixTAnnotationInstanceAttribute,

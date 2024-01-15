@@ -1,3 +1,12 @@
+"
+## Relations
+======================
+
+### Children
+- Relation: #implicitVariables Type: #FamixTImplicitVariable Opposite: #parentBehaviouralEntity Comment: Implicit variables used locally by this behaviour.
+
+
+"
 Trait {
 	#name : #FamixTWithImplicitVariables,
 	#instVars : [

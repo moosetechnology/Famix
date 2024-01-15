@@ -1,3 +1,12 @@
+"
+## Relations
+======================
+
+### Incomming dependencies
+- Relation: #incomingResidences Type: #FamixTest8Residence Opposite: #biotope
+
+
+"
 Class {
 	#name : #FamixTest8Biotope,
 	#superclass : #FamixTest8Entity,
