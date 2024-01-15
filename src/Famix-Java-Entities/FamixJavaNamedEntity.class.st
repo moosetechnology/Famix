@@ -3,8 +3,8 @@
 ======================
 
 ### Other
-- Relation: #receivingInvocations Type: #FamixTInvocation Opposite: #receiver Comment: List of invocations performed on this entity (considered as the receiver)
 - Relation: #annotationInstances Type: #FamixTAnnotationInstance Opposite: #annotatedEntity Comment: This property corresponds to the set of annotations associated to the entity
+- Relation: #receivingInvocations Type: #FamixTInvocation Opposite: #receiver Comment: List of invocations performed on this entity (considered as the receiver)
 
 ## Properties
 ======================

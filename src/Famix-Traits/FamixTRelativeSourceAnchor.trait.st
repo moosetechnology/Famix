@@ -23,8 +23,8 @@ Internal Representation and Key Implementation Points.
 ## Properties
 ======================
 
-- Named: #relatedAnchor Type: FamixTSourceAnchor Comment: Source anchor to which I am relative.
 - Named: #endPos Type: Number Comment: Stop position in the source
+- Named: #relatedAnchor Type: FamixTSourceAnchor Comment: Source anchor to which I am relative.
 - Named: #startPos Type: Number Comment: Start position in the source
 
 "

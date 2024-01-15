@@ -6,11 +6,11 @@ FamixTAttribute represents a field of a class. It is an attribute of the parent 
 
 ### Parents
 - Relation: #parentType Type: #FamixTWithAttributes Opposite: #attributes Comment: Type declaring the attribute. belongsTo implementation
-### Incomming dependencies
+### Incoming dependencies
 - Relation: #incomingAccesses Type: #FamixTAccess Opposite: #variable Comment: All Famix accesses pointing to this structural entity
 ### Other
-- Relation: #sourceAnchor Type: #FamixTSourceAnchor Opposite: #element Comment: SourceAnchor entity linking to the original source code for this entity
 - Relation: #declaredType Type: #FamixTType Opposite: #typedEntities Comment: Type of the entity, if any
+- Relation: #sourceAnchor Type: #FamixTSourceAnchor Opposite: #element Comment: SourceAnchor entity linking to the original source code for this entity
 
 ## Properties
 ======================

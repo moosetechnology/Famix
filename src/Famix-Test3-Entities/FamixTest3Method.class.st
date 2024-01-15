@@ -10,9 +10,9 @@
 - Relation: #parameters Type: #FamixTParameter Opposite: #parentBehaviouralEntity Comment: List of formal parameters declared by this behaviour.
 ### Outgoing dependencies
 - Relation: #accesses Type: #FamixTAccess Opposite: #accessor Comment: Accesses to variables made by this behaviour.
-- Relation: #outgoingReferences Type: #FamixTReference Opposite: #referencer Comment: References from this entity to other entities.
 - Relation: #outgoingInvocations Type: #FamixTInvocation Opposite: #sender Comment: Outgoing invocations sent by this behaviour.
-### Incomming dependencies
+- Relation: #outgoingReferences Type: #FamixTReference Opposite: #referencer Comment: References from this entity to other entities.
+### Incoming dependencies
 - Relation: #incomingInvocations Type: #FamixTInvocation Opposite: #candidates Comment: Incoming invocations from other behaviours computed by the candidate operator.
 ### Other
 - Relation: #declaredType Type: #FamixTType Opposite: #typedEntities Comment: Type of the entity, if any
@@ -22,8 +22,8 @@
 ======================
 
 - Named: #isStub Type: Boolean Comment: Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.
-- Named: #signature Type: String Comment: Signature of the message being sent
 - Named: #name Type: String Comment: Basic name of the entity, not full reference.
+- Named: #signature Type: String Comment: Signature of the message being sent
 
 "
 Class {

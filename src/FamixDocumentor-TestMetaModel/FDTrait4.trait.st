@@ -8,8 +8,8 @@
 ## Properties
 ======================
 
-- Named: #someProp Type: String Comment: A property in the trait
 - Named: #otherProp Type: Object Comment: Another property in the trait
+- Named: #someProp Type: String Comment: A property in the trait
 
 "
 Trait {

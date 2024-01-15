@@ -4,7 +4,7 @@
 
 ### Parents
 - Relation: #parentType Type: #FamixTWithAttributes Opposite: #attributes Comment: Type declaring the attribute. belongsTo implementation
-### Incomming dependencies
+### Incoming dependencies
 - Relation: #incomingAccesses Type: #FamixTAccess Opposite: #variable Comment: All Famix accesses pointing to this structural entity
 ### Other
 - Relation: #declaredType Type: #FamixTType Opposite: #typedEntities Comment: Type of the entity, if any

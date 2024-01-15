@@ -2,7 +2,7 @@
 ## Relations
 ======================
 
-### Incomming dependencies
+### Incoming dependencies
 - Relation: #incomingResidences Type: #FamixTest8Residence Opposite: #biotope
 
 

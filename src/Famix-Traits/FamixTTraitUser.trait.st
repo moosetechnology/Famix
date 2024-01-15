@@ -2,7 +2,7 @@
 ## Relations
 ======================
 
-### Incomming dependencies
+### Incoming dependencies
 - Relation: #outgoingTraitUsages Type: #FamixTTraitUsage Opposite: #user
 
 

@@ -148,7 +148,7 @@ FmxMBBehavior >> commentWithRelations [
 								  nextPutAll: relationKind;
 								  lf.
 
-							  parents do: [ :parent |
+							  (parents sorted: [ :parent | parent side generationStrategy relationSide name ] ascending) do: [ :parent |
 								  | strategy |
 								  strategy := parent side generationStrategy.
 
@@ -175,7 +175,7 @@ FmxMBBehavior >> commentWithRelations [
 				  lf;
 				  lf.
 
-			  props do: [ :property |
+			  (props sorted: #name ascending) do: [ :property |
 				  aStream
 					  nextPutAll: '- Named: #';
 					  nextPutAll: property name;

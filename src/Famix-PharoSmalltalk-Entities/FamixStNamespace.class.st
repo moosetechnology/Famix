@@ -13,8 +13,8 @@
 ## Properties
 ======================
 
-- Named: #name Type: String Comment: Basic name of the entity, not full reference.
 - Named: #isStub Type: Boolean Comment: Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.
+- Named: #name Type: String Comment: Basic name of the entity, not full reference.
 
 "
 Class {

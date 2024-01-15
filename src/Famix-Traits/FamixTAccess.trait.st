@@ -20,15 +20,15 @@ For each access in the source code, there is one famix access created even if it
 ### Association target
 - Relation: #variable Type: #FamixTAccessible Opposite: #incomingAccesses Comment: Variable accessed. to-side of the association
 ### Other
+- Relation: #next Type: #FamixTAssociation Opposite: #previous Comment: Next association in an ordered collection of associations. Currently not supported by the Moose importer
 - Relation: #previous Type: #FamixTAssociation Opposite: #next Comment: Previous association in an ordered collection of associations. Currently not supported by the Moose importer
 - Relation: #sourceAnchor Type: #FamixTSourceAnchor Opposite: #element Comment: SourceAnchor entity linking to the original source code for this entity
-- Relation: #next Type: #FamixTAssociation Opposite: #previous Comment: Next association in an ordered collection of associations. Currently not supported by the Moose importer
 
 ## Properties
 ======================
 
-- Named: #isWrite Type: Boolean Comment: Write access
 - Named: #isStub Type: Boolean Comment: Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.
+- Named: #isWrite Type: Boolean Comment: Write access
 
 "
 Trait {

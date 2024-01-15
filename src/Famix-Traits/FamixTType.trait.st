@@ -10,7 +10,7 @@ A type can have multiple subtypes or supertypes. These are modelled by means of 
 
 ### Parents
 - Relation: #typeContainer Type: #FamixTWithTypes Opposite: #types Comment: Container entity to which this type belongs. Container is a namespace, not a package (Smalltalk).
-### Incomming dependencies
+### Incoming dependencies
 - Relation: #incomingReferences Type: #FamixTReference Opposite: #referredType Comment: References to this entity by other entities.
 ### Other
 - Relation: #sourceAnchor Type: #FamixTSourceAnchor Opposite: #element Comment: SourceAnchor entity linking to the original source code for this entity

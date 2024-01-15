@@ -5,8 +5,8 @@ I represent a header file. Typically a .h or .hpp
 ======================
 
 ### Parents
-- Relation: #parentFolder Type: #FamixTFolder Opposite: #childrenFileSystemEntities Comment: Folder entity containing this file.
 - Relation: #headerOwner Type: #FamixTWithHeaders Opposite: #header
+- Relation: #parentFolder Type: #FamixTFolder Opposite: #childrenFileSystemEntities Comment: Folder entity containing this file.
 ### Other
 - Relation: #entities Type: #FamixTWithFiles Opposite: #containerFiles Comment: List of entities defined in the file
 

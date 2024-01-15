@@ -2,7 +2,7 @@
 ## Relations
 ======================
 
-### Incomming dependencies
+### Incoming dependencies
 - Relation: #incomingInfections Type: #FamixTest8Infection Opposite: #infectious
 
 

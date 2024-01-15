@@ -4,7 +4,7 @@ I can be the target of an implementation cf Interface
 ## Relations
 ======================
 
-### Incomming dependencies
+### Incoming dependencies
 - Relation: #implementations Type: #FamixTImplementation Opposite: #interface Comment: Implementation relationships.
 
 

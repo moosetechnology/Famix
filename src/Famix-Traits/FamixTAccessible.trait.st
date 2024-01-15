@@ -2,7 +2,7 @@
 ## Relations
 ======================
 
-### Incomming dependencies
+### Incoming dependencies
 - Relation: #incomingAccesses Type: #FamixTAccess Opposite: #variable Comment: All Famix accesses pointing to this structural entity
 
 

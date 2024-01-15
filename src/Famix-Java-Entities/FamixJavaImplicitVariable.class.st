@@ -4,7 +4,7 @@
 
 ### Parents
 - Relation: #parentBehaviouralEntity Type: #FamixTWithImplicitVariables Opposite: #implicitVariables Comment: The behaviour containing this implicit variable. belongsTo implementation
-### Incomming dependencies
+### Incoming dependencies
 - Relation: #incomingAccesses Type: #FamixTAccess Opposite: #variable Comment: All Famix accesses pointing to this structural entity
 ### Other
 - Relation: #declaredType Type: #FamixTType Opposite: #typedEntities Comment: Type of the entity, if any
@@ -14,8 +14,8 @@
 ## Properties
 ======================
 
-- Named: #name Type: String Comment: Basic name of the entity, not full reference.
 - Named: #isStub Type: Boolean Comment: Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.
+- Named: #name Type: String Comment: Basic name of the entity, not full reference.
 
 "
 Class {

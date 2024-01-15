@@ -3,11 +3,11 @@
 ======================
 
 ### Other
-- Relation: #target Type: #FamixTWithFileIncludes Opposite: #incomingIncludeRelations Comment: The file that is included
-- Relation: #sourceAnchor Type: #FamixTSourceAnchor Opposite: #element Comment: SourceAnchor entity linking to the original source code for this entity
-- Relation: #previous Type: #FamixTAssociation Opposite: #next Comment: Previous association in an ordered collection of associations. Currently not supported by the Moose importer
 - Relation: #next Type: #FamixTAssociation Opposite: #previous Comment: Next association in an ordered collection of associations. Currently not supported by the Moose importer
+- Relation: #previous Type: #FamixTAssociation Opposite: #next Comment: Previous association in an ordered collection of associations. Currently not supported by the Moose importer
 - Relation: #source Type: #FamixTWithFileIncludes Opposite: #outgoingIncludeRelations Comment: The file that is including
+- Relation: #sourceAnchor Type: #FamixTSourceAnchor Opposite: #element Comment: SourceAnchor entity linking to the original source code for this entity
+- Relation: #target Type: #FamixTWithFileIncludes Opposite: #incomingIncludeRelations Comment: The file that is included
 
 ## Properties
 ======================

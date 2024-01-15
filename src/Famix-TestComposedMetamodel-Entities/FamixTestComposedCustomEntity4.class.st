@@ -3,8 +3,8 @@
 ======================
 
 ### Other
-- Relation: #customEntities4 Type: #FamixTestComposed1CustomEntity4 Opposite: #customEntities4
 - Relation: #c24s Type: #FamixTestComposed2CustomEntity4 Opposite: #c4s
+- Relation: #customEntities4 Type: #FamixTestComposed1CustomEntity4 Opposite: #customEntities4
 
 
 "

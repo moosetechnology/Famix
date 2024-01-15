@@ -4,7 +4,7 @@
 
 ### Outgoing dependencies
 - Relation: #superInheritances Type: #FamixTInheritance Opposite: #subclass Comment: Superinheritance relationships, i.e. known superclasses of this type.
-### Incomming dependencies
+### Incoming dependencies
 - Relation: #subInheritances Type: #FamixTInheritance Opposite: #superclass Comment: Subinheritance relationships, i.e. known subclasses of this type.
 
 

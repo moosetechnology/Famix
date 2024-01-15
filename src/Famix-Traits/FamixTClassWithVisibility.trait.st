@@ -9,21 +9,21 @@
 - Relation: #methods Type: #FamixTMethod Opposite: #parentType Comment: Methods declared by this type.
 ### Outgoing dependencies
 - Relation: #superInheritances Type: #FamixTInheritance Opposite: #subclass Comment: Superinheritance relationships, i.e. known superclasses of this type.
-### Incomming dependencies
+### Incoming dependencies
 - Relation: #incomingReferences Type: #FamixTReference Opposite: #referredType Comment: References to this entity by other entities.
 - Relation: #subInheritances Type: #FamixTInheritance Opposite: #superclass Comment: Subinheritance relationships, i.e. known subclasses of this type.
 ### Other
-- Relation: #sourceAnchor Type: #FamixTSourceAnchor Opposite: #element Comment: SourceAnchor entity linking to the original source code for this entity
-- Relation: #receivingInvocations Type: #FamixTInvocation Opposite: #receiver Comment: List of invocations performed on this entity (considered as the receiver)
 - Relation: #comments Type: #FamixTComment Opposite: #commentedEntity Comment: List of comments for the entity
+- Relation: #receivingInvocations Type: #FamixTInvocation Opposite: #receiver Comment: List of invocations performed on this entity (considered as the receiver)
+- Relation: #sourceAnchor Type: #FamixTSourceAnchor Opposite: #element Comment: SourceAnchor entity linking to the original source code for this entity
 - Relation: #typedEntities Type: #FamixTTypedEntity Opposite: #declaredType Comment: Entities that have this type as declaredType
 
 ## Properties
 ======================
 
-- Named: #visibility Type: String Comment: Visibility of the entity
 - Named: #isStub Type: Boolean Comment: Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.
 - Named: #name Type: String Comment: Basic name of the entity, not full reference.
+- Named: #visibility Type: String Comment: Visibility of the entity
 
 "
 Trait {

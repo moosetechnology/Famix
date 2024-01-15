@@ -16,11 +16,11 @@ Instance Variables:
 
 ### Parents
 - Relation: #parentEnum Type: #FamixTWithEnumValues Opposite: #enumValues Comment: The Enum declaring this value. It offers the implementation of belongsTo
-### Incomming dependencies
+### Incoming dependencies
 - Relation: #incomingAccesses Type: #FamixTAccess Opposite: #variable Comment: All Famix accesses pointing to this structural entity
 ### Other
-- Relation: #sourceAnchor Type: #FamixTSourceAnchor Opposite: #element Comment: SourceAnchor entity linking to the original source code for this entity
 - Relation: #declaredType Type: #FamixTType Opposite: #typedEntities Comment: Type of the entity, if any
+- Relation: #sourceAnchor Type: #FamixTSourceAnchor Opposite: #element Comment: SourceAnchor entity linking to the original source code for this entity
 
 ## Properties
 ======================

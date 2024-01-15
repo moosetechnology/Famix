@@ -5,7 +5,7 @@
 ### Outgoing dependencies
 - Relation: #interfaceImplementations Type: #FamixTImplementation Opposite: #implementingClass Comment: Implementation relationships
 - Relation: #superInheritances Type: #FamixTInheritance Opposite: #subclass Comment: Superinheritance relationships, i.e. known superclasses of this type.
-### Incomming dependencies
+### Incoming dependencies
 - Relation: #implementations Type: #FamixTImplementation Opposite: #interface Comment: Implementation relationships.
 - Relation: #subInheritances Type: #FamixTInheritance Opposite: #superclass Comment: Subinheritance relationships, i.e. known subclasses of this type.
 ### Other

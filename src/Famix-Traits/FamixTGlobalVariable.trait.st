@@ -6,11 +6,11 @@ FamixTGlobalVariable represents a global variable in the source code.
 
 ### Parents
 - Relation: #parentScope Type: #FamixTWithGlobalVariables Opposite: #globalVariables Comment: Scope declaring the global variable. belongsTo implementation
-### Incomming dependencies
+### Incoming dependencies
 - Relation: #incomingAccesses Type: #FamixTAccess Opposite: #variable Comment: All Famix accesses pointing to this structural entity
 ### Other
-- Relation: #sourceAnchor Type: #FamixTSourceAnchor Opposite: #element Comment: SourceAnchor entity linking to the original source code for this entity
 - Relation: #declaredType Type: #FamixTType Opposite: #typedEntities Comment: Type of the entity, if any
+- Relation: #sourceAnchor Type: #FamixTSourceAnchor Opposite: #element Comment: SourceAnchor entity linking to the original source code for this entity
 
 ## Properties
 ======================
