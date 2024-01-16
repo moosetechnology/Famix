@@ -2,7 +2,8 @@
 ## Properties
 ======================
 
-- Named: #isSomething Type: Boolean
+| Name | Type | Default value | Comment |
+| `isSomething` | `Boolean` | false | |
 
 "
 Class {

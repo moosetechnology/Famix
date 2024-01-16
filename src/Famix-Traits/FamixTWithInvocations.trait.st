@@ -3,7 +3,9 @@
 ======================
 
 ### Outgoing dependencies
-- Relation: #outgoingInvocations Type: #FamixTInvocation Opposite: #sender Comment: Outgoing invocations sent by this behaviour.
+| Relation | Origin | Opposite | Type | Comment |
+| `outgoingInvocations` | `FamixTWithInvocations` | `sender` | `FamixTInvocation` | Outgoing invocations sent by this behaviour.|
+
 
 
 "

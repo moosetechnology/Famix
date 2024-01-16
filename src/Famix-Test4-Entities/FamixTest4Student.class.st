@@ -3,9 +3,13 @@
 ======================
 
 ### Parents
-- Relation: #school Type: #FamixTest4School Opposite: #students
+| Relation | Origin | Opposite | Type | Comment |
+| `school` | `FamixTest4Student` | `students` | `FamixTest4School` | |
+
 ### Other
-- Relation: #teachers Type: #FamixTest4Teacher Opposite: #students
+| Relation | Origin | Opposite | Type | Comment |
+| `teachers` | `FamixTest4Student` | `students` | `FamixTest4Teacher` | |
+
 
 
 "

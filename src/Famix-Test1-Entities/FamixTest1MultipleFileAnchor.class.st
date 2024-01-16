@@ -3,12 +3,15 @@
 ======================
 
 ### Other
-- Relation: #element Type: #FamixTSourceEntity Opposite: #sourceAnchor Comment: Enable the accessibility to the famix entity that this class is a source pointer for
+| Relation | Origin | Opposite | Type | Comment |
+| `element` | `FamixTSourceAnchor` | `sourceAnchor` | `FamixTSourceEntity` | Enable the accessibility to the famix entity that this class is a source pointer for|
+
 
 ## Properties
 ======================
 
-- Named: #fileAnchors Type: FamixTFileAnchor Comment: All source code definition files
+| Name | Type | Default value | Comment |
+| `fileAnchors` | `FamixTFileAnchor` | nil | All source code definition files|
 
 "
 Class {

@@ -2,7 +2,8 @@
 ## Properties
 ======================
 
-- Named: #isFinal Type: Boolean Comment: Entity can be declared final
+| Name | Type | Default value | Comment |
+| `isFinal` | `Boolean` | false | Entity can be declared final|
 
 "
 Trait {

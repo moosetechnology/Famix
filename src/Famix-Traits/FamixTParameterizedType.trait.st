@@ -12,7 +12,9 @@ Where Map<String,Collection> is the FamixTParameterizedType of anAttribute. Stri
 ======================
 
 ### Other
-- Relation: #parameterizableClass Type: #FamixTWithParameterizedTypes Opposite: #parameterizedTypes Comment: Base type of this parameterized type.
+| Relation | Origin | Opposite | Type | Comment |
+| `parameterizableClass` | `FamixTParameterizedType` | `parameterizedTypes` | `FamixTWithParameterizedTypes` | Base type of this parameterized type.|
+
 
 
 "

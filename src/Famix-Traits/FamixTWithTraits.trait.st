@@ -3,7 +3,9 @@
 ======================
 
 ### Children
-- Relation: #traits Type: #FamixTTrait Opposite: #traitOwner
+| Relation | Origin | Opposite | Type | Comment |
+| `traits` | `FamixTWithTraits` | `traitOwner` | `FamixTTrait` | |
+
 
 
 "

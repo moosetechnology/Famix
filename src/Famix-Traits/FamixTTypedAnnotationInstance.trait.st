@@ -3,7 +3,9 @@
 ======================
 
 ### Other
-- Relation: #annotationType Type: #FamixTAnnotationType Opposite: #instances Comment: Refers to the type of an annotation. (In some languages, Java and C#, an annotation as an explicit type). 
+| Relation | Origin | Opposite | Type | Comment |
+| `annotationType` | `FamixTTypedAnnotationInstance` | `instances` | `FamixTAnnotationType` | Refers to the type of an annotation. (In some languages, Java and C#, an annotation as an explicit type). |
+
 
 
 "

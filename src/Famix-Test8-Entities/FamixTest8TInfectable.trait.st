@@ -3,12 +3,15 @@
 ======================
 
 ### Outgoing dependencies
-- Relation: #outgoingInfections Type: #FamixTest8Infection Opposite: #infectable
+| Relation | Origin | Opposite | Type | Comment |
+| `outgoingInfections` | `FamixTest8TInfectable` | `infectable` | `FamixTest8Infection` | |
+
 
 ## Properties
 ======================
 
-- Named: #pathogenicity Type: Number
+| Name | Type | Default value | Comment |
+| `pathogenicity` | `Number` | nil | |
 
 "
 Trait {

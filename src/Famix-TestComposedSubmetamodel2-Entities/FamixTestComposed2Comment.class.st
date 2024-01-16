@@ -3,12 +3,15 @@
 ======================
 
 ### Other
-- Relation: #commentedEntity Type: #FamixTWithComments Opposite: #comments Comment: Source code commented by the comment
+| Relation | Origin | Opposite | Type | Comment |
+| `commentedEntity` | `FamixTComment` | `comments` | `FamixTWithComments` | Source code commented by the comment|
+
 
 ## Properties
 ======================
 
-- Named: #content Type: String Comment: Content of the comment as a String
+| Name | Type | Default value | Comment |
+| `content` | `String` | nil | Content of the comment as a String|
 
 "
 Class {

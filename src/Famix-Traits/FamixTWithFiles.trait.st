@@ -3,7 +3,9 @@
 ======================
 
 ### Other
-- Relation: #containerFiles Type: #FamixTFile Opposite: #entities Comment: List of files containing the entity
+| Relation | Origin | Opposite | Type | Comment |
+| `containerFiles` | `FamixTWithFiles` | `entities` | `FamixTFile` | List of files containing the entity|
+
 
 
 "

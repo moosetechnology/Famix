@@ -2,13 +2,14 @@
 ## Properties
 ======================
 
-- Named: #correspondingFile Type: FamixTFile Comment: File associated to this source anchor
-- Named: #encoding Type: String Comment: A string representing the encoding of a file
-- Named: #endColumn Type: Number Comment: Number of the end column
-- Named: #endLine Type: Number Comment: Number of the end line
-- Named: #fileName Type: String Comment: Name of the source file
-- Named: #startColumn Type: Number Comment: Number of the start column
-- Named: #startLine Type: Number Comment: Number of the start line
+| Name | Type | Default value | Comment |
+| `correspondingFile` | `FamixTFile` | nil | File associated to this source anchor|
+| `encoding` | `String` | nil | A string representing the encoding of a file|
+| `endColumn` | `Number` | nil | Number of the end column|
+| `endLine` | `Number` | nil | Number of the end line|
+| `fileName` | `String` | nil | Name of the source file|
+| `startColumn` | `Number` | nil | Number of the start column|
+| `startLine` | `Number` | nil | Number of the start line|
 
 "
 Trait {

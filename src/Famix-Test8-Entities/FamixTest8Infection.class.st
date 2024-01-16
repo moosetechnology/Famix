@@ -3,19 +3,26 @@
 ======================
 
 ### Association source
-- Relation: #infectable Type: #FamixTest8TInfectable Opposite: #outgoingInfections
+| Relation | Origin | Opposite | Type | Comment |
+| `infectable` | `FamixTest8Infection` | `outgoingInfections` | `FamixTest8TInfectable` | |
+
 ### Association target
-- Relation: #infectious Type: #FamixTest8TInfectious Opposite: #incomingInfections
+| Relation | Origin | Opposite | Type | Comment |
+| `infectious` | `FamixTest8Infection` | `incomingInfections` | `FamixTest8TInfectious` | |
+
 ### Other
-- Relation: #next Type: #FamixTAssociation Opposite: #previous Comment: Next association in an ordered collection of associations. Currently not supported by the Moose importer
-- Relation: #previous Type: #FamixTAssociation Opposite: #next Comment: Previous association in an ordered collection of associations. Currently not supported by the Moose importer
-- Relation: #sourceAnchor Type: #FamixTSourceAnchor Opposite: #element Comment: SourceAnchor entity linking to the original source code for this entity
+| Relation | Origin | Opposite | Type | Comment |
+| `next` | `FamixTAssociation` | `previous` | `FamixTAssociation` | Next association in an ordered collection of associations. Currently not supported by the Moose importer|
+| `previous` | `FamixTAssociation` | `next` | `FamixTAssociation` | Previous association in an ordered collection of associations. Currently not supported by the Moose importer|
+| `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
+
 
 ## Properties
 ======================
 
-- Named: #isInvasive Type: Boolean
-- Named: #isStub Type: Boolean Comment: Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.
+| Name | Type | Default value | Comment |
+| `isInvasive` | `Boolean` | false | |
+| `isStub` | `Boolean` | false | Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.|
 
 "
 Class {

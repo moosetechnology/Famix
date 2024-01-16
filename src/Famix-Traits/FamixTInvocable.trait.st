@@ -3,7 +3,9 @@
 ======================
 
 ### Incoming dependencies
-- Relation: #incomingInvocations Type: #FamixTInvocation Opposite: #candidates Comment: Incoming invocations from other behaviours computed by the candidate operator.
+| Relation | Origin | Opposite | Type | Comment |
+| `incomingInvocations` | `FamixTInvocable` | `candidates` | `FamixTInvocation` | Incoming invocations from other behaviours computed by the candidate operator.|
+
 
 
 "

@@ -3,7 +3,9 @@
 ======================
 
 ### Children
-- Relation: #parameters Type: #FamixTParameter Opposite: #parentBehaviouralEntity Comment: List of formal parameters declared by this behaviour.
+| Relation | Origin | Opposite | Type | Comment |
+| `parameters` | `FamixTWithParameters` | `parentBehaviouralEntity` | `FamixTParameter` | List of formal parameters declared by this behaviour.|
+
 
 
 "

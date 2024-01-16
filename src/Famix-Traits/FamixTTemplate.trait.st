@@ -3,9 +3,13 @@
 ======================
 
 ### Parents
-- Relation: #templateOwner Type: #FamixTWithTemplates Opposite: #templates
+| Relation | Origin | Opposite | Type | Comment |
+| `templateOwner` | `FamixTTemplate` | `templates` | `FamixTWithTemplates` | |
+
 ### Other
-- Relation: #templateUsers Type: #FamixTTemplateUser Opposite: #template
+| Relation | Origin | Opposite | Type | Comment |
+| `templateUsers` | `FamixTTemplate` | `template` | `FamixTTemplateUser` | |
+
 
 
 "

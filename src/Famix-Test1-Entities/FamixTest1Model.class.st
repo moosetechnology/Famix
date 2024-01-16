@@ -4,7 +4,8 @@ This is a the comment of the model class
 ## Properties
 ======================
 
-- Named: #modelHasProperties Type: Object
+| Name | Type | Default value | Comment |
+| `modelHasProperties` | `Object` | nil | |
 
 "
 Class {

@@ -15,7 +15,9 @@ Instance Variables:
 ======================
 
 ### Other
-- Relation: #annotatedEntity Type: #FamixTWithAnnotationInstances Opposite: #annotationInstances Comment: The NamedEntity on which the annotation occurs.
+| Relation | Origin | Opposite | Type | Comment |
+| `annotatedEntity` | `FamixTAnnotationInstance` | `annotationInstances` | `FamixTWithAnnotationInstances` | The NamedEntity on which the annotation occurs.|
+
 
 
 "

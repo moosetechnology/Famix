@@ -3,7 +3,9 @@
 ======================
 
 ### Other
-- Relation: #declaredType Type: #FamixTType Opposite: #typedEntities Comment: Type of the entity, if any
+| Relation | Origin | Opposite | Type | Comment |
+| `declaredType` | `FamixTTypedEntity` | `typedEntities` | `FamixTType` | Type of the entity, if any|
+
 
 
 "

@@ -3,9 +3,13 @@
 ======================
 
 ### Parents
-- Relation: #annotationTypesContainer Type: #FamixTWithAnnotationTypes Opposite: #definedAnnotationTypes Comment: Container in which an AnnotationType may reside
+| Relation | Origin | Opposite | Type | Comment |
+| `annotationTypesContainer` | `FamixTAnnotationType` | `definedAnnotationTypes` | `FamixTWithAnnotationTypes` | Container in which an AnnotationType may reside|
+
 ### Other
-- Relation: #instances Type: #FamixTTypedAnnotationInstance Opposite: #annotationType Comment: Annotations of this type
+| Relation | Origin | Opposite | Type | Comment |
+| `instances` | `FamixTAnnotationType` | `annotationType` | `FamixTTypedAnnotationInstance` | Annotations of this type|
+
 
 
 "

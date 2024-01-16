@@ -3,7 +3,9 @@
 ======================
 
 ### Outgoing dependencies
-- Relation: #outgoingResidences Type: #FamixTest8Residence Opposite: #resident
+| Relation | Origin | Opposite | Type | Comment |
+| `outgoingResidences` | `FamixTest8TResident` | `resident` | `FamixTest8Residence` | |
+
 
 
 "

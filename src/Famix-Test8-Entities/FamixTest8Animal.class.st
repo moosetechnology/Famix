@@ -3,7 +3,9 @@
 ======================
 
 ### Incoming dependencies
-- Relation: #incomingInfections Type: #FamixTest8Infection Opposite: #infectious
+| Relation | Origin | Opposite | Type | Comment |
+| `incomingInfections` | `FamixTest8TInfectious` | `infectious` | `FamixTest8Infection` | |
+
 
 
 "

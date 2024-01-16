@@ -4,7 +4,8 @@ The signature of any behavioural entity
 ## Properties
 ======================
 
-- Named: #signature Type: String Comment: Signature of the message being sent
+| Name | Type | Default value | Comment |
+| `signature` | `String` | nil | Signature of the message being sent|
 
 "
 Trait {

@@ -11,7 +11,8 @@ public class SharedObject {
 ## Properties
 ======================
 
-- Named: #isVolatile Type: Boolean Comment: Entity can be declared volatile
+| Name | Type | Default value | Comment |
+| `isVolatile` | `Boolean` | false | Entity can be declared volatile|
 
 "
 Trait {

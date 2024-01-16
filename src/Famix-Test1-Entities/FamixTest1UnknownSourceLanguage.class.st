@@ -3,7 +3,9 @@
 ======================
 
 ### Other
-- Relation: #sourcedEntities Type: #FamixTWithSourceLanguages Opposite: #declaredSourceLanguage Comment: References to the entities saying explicitly that are written in this language.
+| Relation | Origin | Opposite | Type | Comment |
+| `sourcedEntities` | `FamixTSourceLanguage` | `declaredSourceLanguage` | `FamixTWithSourceLanguages` | References to the entities saying explicitly that are written in this language.|
+
 
 
 "

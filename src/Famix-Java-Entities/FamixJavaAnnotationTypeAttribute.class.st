@@ -3,21 +3,28 @@
 ======================
 
 ### Parents
-- Relation: #parentType Type: #FamixTWithAttributes Opposite: #attributes Comment: Type declaring the attribute. belongsTo implementation
+| Relation | Origin | Opposite | Type | Comment |
+| `parentType` | `FamixTAttribute` | `attributes` | `FamixTWithAttributes` | Type declaring the attribute. belongsTo implementation|
+
 ### Incoming dependencies
-- Relation: #incomingAccesses Type: #FamixTAccess Opposite: #variable Comment: All Famix accesses pointing to this structural entity
+| Relation | Origin | Opposite | Type | Comment |
+| `incomingAccesses` | `FamixTAccessible` | `variable` | `FamixTAccess` | All Famix accesses pointing to this structural entity|
+
 ### Other
-- Relation: #annotationAttributeInstances Type: #FamixTTypedAnnotationInstanceAttribute Opposite: #annotationTypeAttribute Comment: A collection of AnnotationInstanceAttribute which hold the usages of this attribute in actual AnnotationInstances
-- Relation: #annotationTypeAttribute Type: #FamixTAnnotationTypeAttribute Opposite: #annotationAttributeInstances Comment: This corresponds to the type of the attribute in an AnnotationInstance
-- Relation: #comments Type: #FamixTComment Opposite: #commentedEntity Comment: List of comments for the entity
-- Relation: #declaredType Type: #FamixTType Opposite: #typedEntities Comment: Type of the entity, if any
-- Relation: #sourceAnchor Type: #FamixTSourceAnchor Opposite: #element Comment: SourceAnchor entity linking to the original source code for this entity
+| Relation | Origin | Opposite | Type | Comment |
+| `annotationAttributeInstances` | `FamixTAnnotationTypeAttribute` | `annotationTypeAttribute` | `FamixTTypedAnnotationInstanceAttribute` | A collection of AnnotationInstanceAttribute which hold the usages of this attribute in actual AnnotationInstances|
+| `annotationTypeAttribute` | `FamixTTypedAnnotationInstanceAttribute` | `annotationAttributeInstances` | `FamixTAnnotationTypeAttribute` | This corresponds to the type of the attribute in an AnnotationInstance|
+| `comments` | `FamixTWithComments` | `commentedEntity` | `FamixTComment` | List of comments for the entity|
+| `declaredType` | `FamixTTypedEntity` | `typedEntities` | `FamixTType` | Type of the entity, if any|
+| `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
+
 
 ## Properties
 ======================
 
-- Named: #isStub Type: Boolean Comment: Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.
-- Named: #name Type: String Comment: Basic name of the entity, not full reference.
+| Name | Type | Default value | Comment |
+| `isStub` | `Boolean` | false | Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.|
+| `name` | `String` | nil | Basic name of the entity, not full reference.|
 
 "
 Class {

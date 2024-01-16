@@ -3,7 +3,9 @@
 ======================
 
 ### Children
-- Relation: #attributes Type: #FamixTAttribute Opposite: #parentType Comment: List of attributes declared by this type.
+| Relation | Origin | Opposite | Type | Comment |
+| `attributes` | `FamixTWithAttributes` | `parentType` | `FamixTAttribute` | List of attributes declared by this type.|
+
 
 
 "

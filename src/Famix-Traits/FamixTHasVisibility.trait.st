@@ -2,7 +2,8 @@
 ## Properties
 ======================
 
-- Named: #visibility Type: String Comment: Visibility of the entity
+| Name | Type | Default value | Comment |
+| `visibility` | `String` | nil | Visibility of the entity|
 
 "
 Trait {

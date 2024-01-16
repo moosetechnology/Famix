@@ -5,10 +5,14 @@ I represent a header file. Typically a .h or .hpp
 ======================
 
 ### Parents
-- Relation: #headerOwner Type: #FamixTWithHeaders Opposite: #header
-- Relation: #parentFolder Type: #FamixTFolder Opposite: #childrenFileSystemEntities Comment: Folder entity containing this file.
+| Relation | Origin | Opposite | Type | Comment |
+| `headerOwner` | `FamixTHeader` | `header` | `FamixTWithHeaders` | |
+| `parentFolder` | `FamixTFileSystemEntity` | `childrenFileSystemEntities` | `FamixTFolder` | Folder entity containing this file.|
+
 ### Other
-- Relation: #entities Type: #FamixTWithFiles Opposite: #containerFiles Comment: List of entities defined in the file
+| Relation | Origin | Opposite | Type | Comment |
+| `entities` | `FamixTFile` | `containerFiles` | `FamixTWithFiles` | List of entities defined in the file|
+
 
 
 "

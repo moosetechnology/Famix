@@ -3,13 +3,16 @@
 ======================
 
 ### Other
-- Relation: #class1 Type: #FDClass1 Opposite: #myTrait
+| Relation | Origin | Opposite | Type | Comment |
+| `class1` | `FDTrait4` | `myTrait` | `FDClass1` | |
+
 
 ## Properties
 ======================
 
-- Named: #otherProp Type: Object Comment: Another property in the trait
-- Named: #someProp Type: String Comment: A property in the trait
+| Name | Type | Default value | Comment |
+| `otherProp` | `Object` | nil | Another property in the trait|
+| `someProp` | `String` | nil | A property in the trait|
 
 "
 Trait {

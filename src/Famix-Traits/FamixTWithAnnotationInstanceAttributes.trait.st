@@ -3,7 +3,9 @@
 ======================
 
 ### Children
-- Relation: #attributes Type: #FamixTAnnotationInstanceAttribute Opposite: #parentAnnotationInstance Comment: This corresponds to the actual values of the attributes in an AnnotationInstance
+| Relation | Origin | Opposite | Type | Comment |
+| `attributes` | `FamixTWithAnnotationInstanceAttributes` | `parentAnnotationInstance` | `FamixTAnnotationInstanceAttribute` | This corresponds to the actual values of the attributes in an AnnotationInstance|
+
 
 
 "

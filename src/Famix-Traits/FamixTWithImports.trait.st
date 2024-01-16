@@ -3,7 +3,9 @@
 ======================
 
 ### Outgoing dependencies
-- Relation: #outgoingImports Type: #FamixTImport Opposite: #importingEntity
+| Relation | Origin | Opposite | Type | Comment |
+| `outgoingImports` | `FamixTWithImports` | `importingEntity` | `FamixTImport` | |
+
 
 
 "

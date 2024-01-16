@@ -3,9 +3,13 @@
 ======================
 
 ### Children
-- Relation: #customEntity1 Type: #FamixTestComposed1CustomEntity1 Opposite: #customEntity1
+| Relation | Origin | Opposite | Type | Comment |
+| `customEntity1` | `FamixTestComposedCustomEntity1` | `customEntity1` | `FamixTestComposed1CustomEntity1` | |
+
 ### Other
-- Relation: #c21 Type: #FamixTestComposed2CustomEntity1 Opposite: #c1
+| Relation | Origin | Opposite | Type | Comment |
+| `c21` | `FamixTestComposedCustomEntity1` | `c1` | `FamixTestComposed2CustomEntity1` | |
+
 
 
 "

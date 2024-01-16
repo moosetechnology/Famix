@@ -3,7 +3,9 @@
 ======================
 
 ### Parents
-- Relation: #parentPackage Type: #FamixTPackage Opposite: #childEntities Comment: Package containing the entity in the code structure (if applicable)
+| Relation | Origin | Opposite | Type | Comment |
+| `parentPackage` | `FamixTPackageable` | `childEntities` | `FamixTPackage` | Package containing the entity in the code structure (if applicable)|
+
 
 
 "

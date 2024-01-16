@@ -5,9 +5,13 @@ FamixTTrait models a trait as it can be found in Pharo or PHP.
 ======================
 
 ### Parents
-- Relation: #traitOwner Type: #FamixTWithTraits Opposite: #traits
+| Relation | Origin | Opposite | Type | Comment |
+| `traitOwner` | `FamixTTrait` | `traits` | `FamixTWithTraits` | |
+
 ### Outgoing dependencies
-- Relation: #incomingTraitUsages Type: #FamixTTraitUsage Opposite: #trait
+| Relation | Origin | Opposite | Type | Comment |
+| `incomingTraitUsages` | `FamixTTrait` | `trait` | `FamixTTraitUsage` | |
+
 
 
 "

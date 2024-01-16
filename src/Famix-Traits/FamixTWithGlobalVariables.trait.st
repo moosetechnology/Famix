@@ -5,7 +5,9 @@ A container having Global variables
 ======================
 
 ### Children
-- Relation: #globalVariables Type: #FamixTGlobalVariable Opposite: #parentScope Comment: Global variables defined in the scope, if any.
+| Relation | Origin | Opposite | Type | Comment |
+| `globalVariables` | `FamixTWithGlobalVariables` | `parentScope` | `FamixTGlobalVariable` | Global variables defined in the scope, if any.|
+
 
 
 "

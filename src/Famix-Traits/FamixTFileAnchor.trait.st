@@ -4,9 +4,10 @@ This offers a source anchor that connects a sourced entity to a file through a r
 ## Properties
 ======================
 
-- Named: #correspondingFile Type: FamixTFile Comment: File associated to this source anchor
-- Named: #encoding Type: String Comment: A string representing the encoding of a file
-- Named: #fileName Type: String Comment: Name of the source file
+| Name | Type | Default value | Comment |
+| `correspondingFile` | `FamixTFile` | nil | File associated to this source anchor|
+| `encoding` | `String` | nil | A string representing the encoding of a file|
+| `fileName` | `String` | nil | Name of the source file|
 
 "
 Trait {

@@ -3,19 +3,26 @@
 ======================
 
 ### Association source
-- Relation: #accessor Type: #FamixTWithAccesses Opposite: #accesses Comment: Behavioural entity making the access to the variable. from-side of the association
+| Relation | Origin | Opposite | Type | Comment |
+| `accessor` | `FamixTAccess` | `accesses` | `FamixTWithAccesses` | Behavioural entity making the access to the variable. from-side of the association|
+
 ### Association target
-- Relation: #variable Type: #FamixTAccessible Opposite: #incomingAccesses Comment: Variable accessed. to-side of the association
+| Relation | Origin | Opposite | Type | Comment |
+| `variable` | `FamixTAccess` | `incomingAccesses` | `FamixTAccessible` | Variable accessed. to-side of the association|
+
 ### Other
-- Relation: #next Type: #FamixTAssociation Opposite: #previous Comment: Next association in an ordered collection of associations. Currently not supported by the Moose importer
-- Relation: #previous Type: #FamixTAssociation Opposite: #next Comment: Previous association in an ordered collection of associations. Currently not supported by the Moose importer
-- Relation: #sourceAnchor Type: #FamixTSourceAnchor Opposite: #element Comment: SourceAnchor entity linking to the original source code for this entity
+| Relation | Origin | Opposite | Type | Comment |
+| `next` | `FamixTAssociation` | `previous` | `FamixTAssociation` | Next association in an ordered collection of associations. Currently not supported by the Moose importer|
+| `previous` | `FamixTAssociation` | `next` | `FamixTAssociation` | Previous association in an ordered collection of associations. Currently not supported by the Moose importer|
+| `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
+
 
 ## Properties
 ======================
 
-- Named: #isStub Type: Boolean Comment: Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.
-- Named: #isWrite Type: Boolean Comment: Write access
+| Name | Type | Default value | Comment |
+| `isStub` | `Boolean` | false | Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.|
+| `isWrite` | `Boolean` | false | Write access|
 
 "
 Class {

@@ -3,7 +3,9 @@
 ======================
 
 ### Children
-- Relation: #header Type: #FamixTHeader Opposite: #headerOwner Comment: The header file that defines this module
+| Relation | Origin | Opposite | Type | Comment |
+| `header` | `FamixTWithHeaders` | `headerOwner` | `FamixTHeader` | The header file that defines this module|
+
 
 
 "

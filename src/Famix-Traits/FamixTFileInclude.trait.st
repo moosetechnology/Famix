@@ -3,16 +3,19 @@
 ======================
 
 ### Other
-- Relation: #next Type: #FamixTAssociation Opposite: #previous Comment: Next association in an ordered collection of associations. Currently not supported by the Moose importer
-- Relation: #previous Type: #FamixTAssociation Opposite: #next Comment: Previous association in an ordered collection of associations. Currently not supported by the Moose importer
-- Relation: #source Type: #FamixTWithFileIncludes Opposite: #outgoingIncludeRelations Comment: The file that is including
-- Relation: #sourceAnchor Type: #FamixTSourceAnchor Opposite: #element Comment: SourceAnchor entity linking to the original source code for this entity
-- Relation: #target Type: #FamixTWithFileIncludes Opposite: #incomingIncludeRelations Comment: The file that is included
+| Relation | Origin | Opposite | Type | Comment |
+| `next` | `FamixTAssociation` | `previous` | `FamixTAssociation` | Next association in an ordered collection of associations. Currently not supported by the Moose importer|
+| `previous` | `FamixTAssociation` | `next` | `FamixTAssociation` | Previous association in an ordered collection of associations. Currently not supported by the Moose importer|
+| `source` | `FamixTFileInclude` | `outgoingIncludeRelations` | `FamixTWithFileIncludes` | The file that is including|
+| `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
+| `target` | `FamixTFileInclude` | `incomingIncludeRelations` | `FamixTWithFileIncludes` | The file that is included|
+
 
 ## Properties
 ======================
 
-- Named: #isStub Type: Boolean Comment: Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.
+| Name | Type | Default value | Comment |
+| `isStub` | `Boolean` | false | Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.|
 
 "
 Trait {

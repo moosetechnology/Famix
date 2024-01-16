@@ -3,20 +3,27 @@
 ======================
 
 ### Parents
-- Relation: #parentType Type: #FamixTWithAttributes Opposite: #attributes Comment: Type declaring the attribute. belongsTo implementation
+| Relation | Origin | Opposite | Type | Comment |
+| `parentType` | `FamixTAttribute` | `attributes` | `FamixTWithAttributes` | Type declaring the attribute. belongsTo implementation|
+
 ### Incoming dependencies
-- Relation: #incomingAccesses Type: #FamixTAccess Opposite: #variable Comment: All Famix accesses pointing to this structural entity
+| Relation | Origin | Opposite | Type | Comment |
+| `incomingAccesses` | `FamixTAccessible` | `variable` | `FamixTAccess` | All Famix accesses pointing to this structural entity|
+
 ### Other
-- Relation: #declaredSourceLanguage Type: #FamixTSourceLanguage Opposite: #sourcedEntities Comment: The declared SourceLanguage for the source code of this entity
-- Relation: #declaredType Type: #FamixTType Opposite: #typedEntities Comment: Type of the entity, if any
-- Relation: #sourceAnchor Type: #FamixTSourceAnchor Opposite: #element Comment: SourceAnchor entity linking to the original source code for this entity
+| Relation | Origin | Opposite | Type | Comment |
+| `declaredSourceLanguage` | `FamixTWithSourceLanguages` | `sourcedEntities` | `FamixTSourceLanguage` | The declared SourceLanguage for the source code of this entity|
+| `declaredType` | `FamixTTypedEntity` | `typedEntities` | `FamixTType` | Type of the entity, if any|
+| `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
+
 
 ## Properties
 ======================
 
-- Named: #isClassSide Type: Boolean Comment: Entity can be declared class side i.e. static
-- Named: #isStub Type: Boolean Comment: Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.
-- Named: #name Type: String Comment: Basic name of the entity, not full reference.
+| Name | Type | Default value | Comment |
+| `isClassSide` | `Boolean` | nil | Entity can be declared class side i.e. static|
+| `isStub` | `Boolean` | false | Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.|
+| `name` | `String` | nil | Basic name of the entity, not full reference.|
 
 "
 Class {

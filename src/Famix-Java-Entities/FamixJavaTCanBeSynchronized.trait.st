@@ -15,7 +15,8 @@ public class SynchronizedCounter {
 ## Properties
 ======================
 
-- Named: #isSynchronized Type: Boolean Comment: Entity can be declared synchronized
+| Name | Type | Default value | Comment |
+| `isSynchronized` | `Boolean` | false | Entity can be declared synchronized|
 
 "
 Trait {

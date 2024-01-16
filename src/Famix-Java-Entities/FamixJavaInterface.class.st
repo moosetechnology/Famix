@@ -3,27 +3,38 @@
 ======================
 
 ### Parents
-- Relation: #parentPackage Type: #FamixTPackage Opposite: #childEntities Comment: Package containing the entity in the code structure (if applicable)
+| Relation | Origin | Opposite | Type | Comment |
+| `parentPackage` | `FamixTPackageable` | `childEntities` | `FamixTPackage` | Package containing the entity in the code structure (if applicable)|
+
 ### Children
-- Relation: #attributes Type: #FamixTAttribute Opposite: #parentType Comment: List of attributes declared by this type.
-- Relation: #methods Type: #FamixTMethod Opposite: #parentType Comment: Methods declared by this type.
+| Relation | Origin | Opposite | Type | Comment |
+| `attributes` | `FamixTWithAttributes` | `parentType` | `FamixTAttribute` | List of attributes declared by this type.|
+| `methods` | `FamixTWithMethods` | `parentType` | `FamixTMethod` | Methods declared by this type.|
+
 ### Outgoing dependencies
-- Relation: #outgoingImports Type: #FamixTImport Opposite: #importingEntity
-- Relation: #superInheritances Type: #FamixTInheritance Opposite: #subclass Comment: Superinheritance relationships, i.e. known superclasses of this type.
+| Relation | Origin | Opposite | Type | Comment |
+| `outgoingImports` | `FamixTWithImports` | `importingEntity` | `FamixTImport` | |
+| `superInheritances` | `FamixTWithInheritances` | `subclass` | `FamixTInheritance` | Superinheritance relationships, i.e. known superclasses of this type.|
+
 ### Incoming dependencies
-- Relation: #implementations Type: #FamixTImplementation Opposite: #interface Comment: Implementation relationships.
-- Relation: #incomingImports Type: #FamixTImport Opposite: #importedEntity Comment: List of imports of this entity
-- Relation: #subInheritances Type: #FamixTInheritance Opposite: #superclass Comment: Subinheritance relationships, i.e. known subclasses of this type.
+| Relation | Origin | Opposite | Type | Comment |
+| `implementations` | `FamixTImplementable` | `interface` | `FamixTImplementation` | Implementation relationships.|
+| `incomingImports` | `FamixTImportable` | `importedEntity` | `FamixTImport` | List of imports of this entity|
+| `subInheritances` | `FamixTWithInheritances` | `superclass` | `FamixTInheritance` | Subinheritance relationships, i.e. known subclasses of this type.|
+
 ### Other
-- Relation: #comments Type: #FamixTComment Opposite: #commentedEntity Comment: List of comments for the entity
-- Relation: #receivingInvocations Type: #FamixTInvocation Opposite: #receiver Comment: List of invocations performed on this entity (considered as the receiver)
+| Relation | Origin | Opposite | Type | Comment |
+| `comments` | `FamixTWithComments` | `commentedEntity` | `FamixTComment` | List of comments for the entity|
+| `receivingInvocations` | `FamixTInvocationsReceiver` | `receiver` | `FamixTInvocation` | List of invocations performed on this entity (considered as the receiver)|
+
 
 ## Properties
 ======================
 
-- Named: #isClassSide Type: Boolean Comment: Entity can be declared class side i.e. static
-- Named: #isFinal Type: Boolean Comment: Entity can be declared final
-- Named: #visibility Type: String Comment: Visibility of the entity
+| Name | Type | Default value | Comment |
+| `isClassSide` | `Boolean` | false | Entity can be declared class side i.e. static|
+| `isFinal` | `Boolean` | false | Entity can be declared final|
+| `visibility` | `String` | nil | Visibility of the entity|
 
 "
 Class {

@@ -3,7 +3,9 @@
 ======================
 
 ### Incoming dependencies
-- Relation: #outgoingTraitUsages Type: #FamixTTraitUsage Opposite: #user
+| Relation | Origin | Opposite | Type | Comment |
+| `outgoingTraitUsages` | `FamixTTraitUser` | `user` | `FamixTTraitUsage` | |
+
 
 
 "

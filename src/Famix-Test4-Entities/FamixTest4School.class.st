@@ -3,10 +3,12 @@
 ======================
 
 ### Children
-- Relation: #principal Type: #FamixTest4Principal Opposite: #school
-- Relation: #rooms Type: #FamixTest4Room Opposite: #school
-- Relation: #students Type: #FamixTest4Student Opposite: #school
-- Relation: #teachers Type: #FamixTest4Teacher Opposite: #school
+| Relation | Origin | Opposite | Type | Comment |
+| `principal` | `FamixTest4School` | `school` | `FamixTest4Principal` | |
+| `rooms` | `FamixTest4School` | `school` | `FamixTest4Room` | |
+| `students` | `FamixTest4School` | `school` | `FamixTest4Student` | |
+| `teachers` | `FamixTest4School` | `school` | `FamixTest4Teacher` | |
+
 
 
 "

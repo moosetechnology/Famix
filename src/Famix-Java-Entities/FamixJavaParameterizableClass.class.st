@@ -3,7 +3,9 @@
 ======================
 
 ### Other
-- Relation: #parameterizedTypes Type: #FamixTParameterizedType Opposite: #parameterizableClass
+| Relation | Origin | Opposite | Type | Comment |
+| `parameterizedTypes` | `FamixTWithParameterizedTypes` | `parameterizableClass` | `FamixTParameterizedType` | |
+
 
 
 "

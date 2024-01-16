@@ -3,12 +3,15 @@
 ======================
 
 ### Other
-- Relation: #receivingInvocations Type: #FamixTInvocation Opposite: #receiver Comment: List of invocations performed on this entity (considered as the receiver)
+| Relation | Origin | Opposite | Type | Comment |
+| `receivingInvocations` | `FamixTInvocationsReceiver` | `receiver` | `FamixTInvocation` | List of invocations performed on this entity (considered as the receiver)|
+
 
 ## Properties
 ======================
 
-- Named: #name Type: String Comment: Basic name of the entity, not full reference.
+| Name | Type | Default value | Comment |
+| `name` | `String` | nil | Basic name of the entity, not full reference.|
 
 "
 Class {

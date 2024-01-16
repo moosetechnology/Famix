@@ -3,7 +3,9 @@
 ======================
 
 ### Other
-- Relation: #template Type: #FamixTTemplate Opposite: #templateUsers
+| Relation | Origin | Opposite | Type | Comment |
+| `template` | `FamixTTemplateUser` | `templateUsers` | `FamixTTemplate` | |
+
 
 
 "
