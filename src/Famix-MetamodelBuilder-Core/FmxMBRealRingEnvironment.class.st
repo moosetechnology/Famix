@@ -13,6 +13,14 @@ FmxMBRealRingEnvironment >> apply [
 	changesToApply do: #apply
 ]
 
+{ #category : #testing }
+FmxMBRealRingEnvironment >> changesToApply [
+	"Return the list of changes to apply if a regeneration would cause changes in the system."
+
+	self collectChangesToApply.
+	^ changesToApply
+]
+
 { #category : #accessing }
 FmxMBRealRingEnvironment >> collectChangesToApply [
 	| resolvedClasses resolvedPackages |
@@ -173,14 +181,6 @@ FmxMBRealRingEnvironment >> recordRemovalOfGeneratedEntitiesIn: resolvedPackages
 			package
 				ifNotNil:
 					[ package definedClasses select: #isMetamodelEntity thenDo: [ :class | resolvedClasses detect: [ :rgClass | rgClass name = class name ] ifNone: [ changesToApply add: (FmxClassRemoval class: class) ] ] ] ]
-]
-
-{ #category : #testing }
-FmxMBRealRingEnvironment >> regenerationIsNeeded [
-	"Return true if a regeneration would cause changes in the system."
-
-	self collectChangesToApply.
-	^ changesToApply isNotEmpty
 ]
 
 { #category : #installing }

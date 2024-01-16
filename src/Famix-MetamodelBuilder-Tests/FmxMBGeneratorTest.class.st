@@ -35,11 +35,14 @@ FmxMBGeneratorTest >> testGeneratedClassesDoNotOverrideMethodsWithGeneratedPragm
 
 { #category : #tests }
 FmxMBGeneratorTest >> testGeneratorsAreUpToDate [
-	FamixMetamodelGenerator generatorsToKeepUpToDate
-		do: [ :mm | 
-			self
-				deny: mm new regenerationIsNeeded
-				description: 'The generator ' , mm asString , ' is not in sync with its meta-model. Please, regenerate your MMs with `FamixMetamodelGenerator generateAllMetamodels.' ]
+
+	FamixMetamodelGenerator generatorsToKeepUpToDate do: [ :mm |
+		| changes |
+		changes := mm new changesToApply.
+		self assert: changes isEmpty description: [
+			'The generator ' , mm asString
+			, ' is not in sync with its meta-model. Please, regenerate your MMs with `FamixMetamodelGenerator generateAllMetamodels`. List of changes: '
+			, changes printString ] ]
 ]
 
 { #category : #tests }

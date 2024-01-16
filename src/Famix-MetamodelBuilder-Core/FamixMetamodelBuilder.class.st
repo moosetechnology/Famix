@@ -120,6 +120,13 @@ FamixMetamodelBuilder >> behaviorsCount [
 	^ self traits size + self classes size
 ]
 
+{ #category : #generating }
+FamixMetamodelBuilder >> changesToApply [
+
+	self prepareGeneration.
+	^ self environment changesToApply
+]
+
 { #category : #initialization }
 FamixMetamodelBuilder >> classNamed: aClassName [
 
@@ -514,13 +521,6 @@ FamixMetamodelBuilder >> printOn: aStream [
 			nextPut: $(;
 			print: g class;
 			nextPut: $) ]
-]
-
-{ #category : #generating }
-FamixMetamodelBuilder >> regenerationIsNeeded [
-
-	self prepareGeneration.
-	^ self environment regenerationIsNeeded
 ]
 
 { #category : #generating }
