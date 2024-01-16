@@ -46,3 +46,13 @@ FmxPackageAddition >> packageName [
 FmxPackageAddition >> packageName: aPackageName [
 	packageName := aPackageName
 ]
+
+{ #category : #printing }
+FmxPackageAddition >> printOn: aStream [
+
+	super printOn: aStream.
+	aStream
+		nextPut: $(;
+		nextPutAll: (packageName ifNil: [ #unamed ]);
+		nextPut: $)
+]
