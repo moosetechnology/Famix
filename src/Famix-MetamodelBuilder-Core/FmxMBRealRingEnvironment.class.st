@@ -113,6 +113,7 @@ FmxMBRealRingEnvironment >> recordClassChangesFor: aRGClass [
 
 { #category : #installing }
 FmxMBRealRingEnvironment >> recordClassCommentChangeOf: realClass to: anRGClass [
+
 	| newComment |
 	newComment := anRGClass comment content.
 	(realClass isNotNil and: [ newComment = realClass comment ]) ifTrue: [ ^ self ].

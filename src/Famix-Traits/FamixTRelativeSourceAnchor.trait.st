@@ -14,6 +14,7 @@ Internal Representation and Key Implementation Points.
 	relatedAnchor:			<aSourceAnchor>			The anchor I'll get my relative sources from.
 	startPos:					<anInteger>				Position of the first character of my source in the source text of the relative anchor.
 
+
 ## Relations
 ======================
 

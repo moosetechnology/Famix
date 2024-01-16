@@ -9,6 +9,7 @@ In an invocation, From is the sender of the message and To is the list of candid
 anObject aSelector.
 will produce one invocation association from current method to a variable anObject with candidate aSelector. The list of candidates will also contain all the methods defining a similar signature as aSelector. 
 
+
 ## Relations
 ======================
 

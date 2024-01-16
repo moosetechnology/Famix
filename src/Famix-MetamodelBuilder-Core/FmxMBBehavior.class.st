@@ -121,14 +121,14 @@ FmxMBBehavior >> commentWithRelations [
 		  aStream nextPutAll: self comment.
 		  self comment ifNotEmpty: [
 			  aStream
-				  lf;
-				  lf ].
+				  cr;
+				  cr ].
 		  self allRelations ifNotEmpty: [ :rels |
 			  aStream
 				  nextPutAll: '## Relations
 ======================';
-				  lf;
-				  lf.
+				  cr;
+				  cr.
 			  OrderedDictionary new
 				  at: 'Parents' put: [ :relation | relation side isContainer ];
 				  at: 'Children' put: [ :relation | relation oppositeSide isContainer ];
@@ -146,7 +146,7 @@ FmxMBBehavior >> commentWithRelations [
 							  aStream
 								  nextPutAll: '### ';
 								  nextPutAll: relationKind;
-								  lf.
+								  cr.
 
 							  (parents sorted: [ :parent | parent side generationStrategy relationSide name ] ascending) do: [ :parent |
 								  | strategy |
@@ -165,15 +165,15 @@ FmxMBBehavior >> commentWithRelations [
 										  nextPutAll: ' Comment: ';
 										  nextPutAll: com ].
 
-								  aStream lf ] ] ].
-			  aStream lf ].
+								  aStream cr ] ] ].
+			  aStream cr ].
 
 		  (self allProperties reject: [ :p | p isRelation ]) ifNotEmpty: [ :props |
 			  aStream
 				  nextPutAll: '## Properties
 ======================';
-				  lf;
-				  lf.
+				  cr;
+				  cr.
 
 			  (props sorted: #name ascending) do: [ :property |
 				  aStream
@@ -186,7 +186,7 @@ FmxMBBehavior >> commentWithRelations [
 					  aStream
 						  nextPutAll: ' Comment: ';
 						  nextPutAll: com ].
-				  aStream lf ] ] ]
+				  aStream cr ] ] ]
 ]
 
 { #category : #'settings - default' }
