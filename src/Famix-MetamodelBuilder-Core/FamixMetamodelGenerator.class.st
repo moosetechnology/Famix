@@ -219,6 +219,12 @@ FamixMetamodelGenerator >> builder: anObject [
 	builder := anObject
 ]
 
+{ #category : #testing }
+FamixMetamodelGenerator >> changesToApply [
+	self define.
+	^ self builder changesToApply
+]
+
 { #category : #accessing }
 FamixMetamodelGenerator >> cleaningStrategy [
 	^ cleaningStrategy
@@ -343,12 +349,6 @@ FamixMetamodelGenerator >> packageNameForAnnotations [
 FamixMetamodelGenerator >> prefix [
 
 	^ self class prefix
-]
-
-{ #category : #testing }
-FamixMetamodelGenerator >> regenerationIsNeeded [
-	self define.
-	^ self builder regenerationIsNeeded
 ]
 
 { #category : #definition }

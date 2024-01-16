@@ -46,3 +46,15 @@ FmxClassRemoval >> classToRemove [
 FmxClassRemoval >> classToRemove: anObject [
 	class := anObject
 ]
+
+{ #category : #printing }
+FmxClassRemoval >> printOn: aStream [
+
+	super printOn: aStream.
+	aStream
+		nextPut: $(;
+		nextPutAll: (class
+				 ifNotNil: [ class name ]
+				 ifNil: [ #unamed ]);
+		nextPut: $)
+]

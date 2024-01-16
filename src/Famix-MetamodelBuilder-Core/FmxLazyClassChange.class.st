@@ -54,6 +54,16 @@ FmxLazyClassChange >> isClassSide: anObject [
 	isClassSide := anObject
 ]
 
+{ #category : #printing }
+FmxLazyClassChange >> printOn: aStream [
+
+	super printOn: aStream.
+	aStream
+		nextPut: $(;
+		nextPutAll: (className ifNil: [ #unamed ]);
+		nextPut: $)
+]
+
 { #category : #accessing }
 FmxLazyClassChange >> realClass [
 	| class |
