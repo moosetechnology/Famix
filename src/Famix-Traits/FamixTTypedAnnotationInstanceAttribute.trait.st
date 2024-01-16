@@ -3,8 +3,8 @@
 ======================
 
 ### Other
-| Relation | Type | Opposite | Comment |
-| `annotationTypeAttribute` | `FamixTAnnotationTypeAttribute` | `annotationAttributeInstances` | This corresponds to the type of the attribute in an AnnotationInstance|
+| Relation | Origin | Opposite | Type | Comment |
+| `annotationTypeAttribute` | `FamixTTypedAnnotationInstanceAttribute` | `annotationAttributeInstances` | `FamixTAnnotationTypeAttribute` | This corresponds to the type of the attribute in an AnnotationInstance|
 
 
 

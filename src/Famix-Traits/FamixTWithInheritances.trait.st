@@ -3,12 +3,12 @@
 ======================
 
 ### Outgoing dependencies
-| Relation | Type | Opposite | Comment |
-| `superInheritances` | `FamixTInheritance` | `subclass` | Superinheritance relationships, i.e. known superclasses of this type.|
+| Relation | Origin | Opposite | Type | Comment |
+| `superInheritances` | `FamixTWithInheritances` | `subclass` | `FamixTInheritance` | Superinheritance relationships, i.e. known superclasses of this type.|
 
 ### Incoming dependencies
-| Relation | Type | Opposite | Comment |
-| `subInheritances` | `FamixTInheritance` | `superclass` | Subinheritance relationships, i.e. known subclasses of this type.|
+| Relation | Origin | Opposite | Type | Comment |
+| `subInheritances` | `FamixTWithInheritances` | `superclass` | `FamixTInheritance` | Subinheritance relationships, i.e. known subclasses of this type.|
 
 
 

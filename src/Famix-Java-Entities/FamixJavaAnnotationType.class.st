@@ -3,34 +3,34 @@
 ======================
 
 ### Parents
-| Relation | Type | Opposite | Comment |
-| `annotationTypesContainer` | `FamixTWithAnnotationTypes` | `definedAnnotationTypes` | Container in which an AnnotationType may reside|
-| `parentPackage` | `FamixTPackage` | `childEntities` | Package containing the entity in the code structure (if applicable)|
+| Relation | Origin | Opposite | Type | Comment |
+| `annotationTypesContainer` | `FamixTAnnotationType` | `definedAnnotationTypes` | `FamixTWithAnnotationTypes` | Container in which an AnnotationType may reside|
+| `parentPackage` | `FamixTPackageable` | `childEntities` | `FamixTPackage` | Package containing the entity in the code structure (if applicable)|
 
 ### Children
-| Relation | Type | Opposite | Comment |
-| `attributes` | `FamixTAttribute` | `parentType` | List of attributes declared by this type.|
+| Relation | Origin | Opposite | Type | Comment |
+| `attributes` | `FamixTWithAttributes` | `parentType` | `FamixTAttribute` | List of attributes declared by this type.|
 
 ### Outgoing dependencies
-| Relation | Type | Opposite | Comment |
-| `superInheritances` | `FamixTInheritance` | `subclass` | Superinheritance relationships, i.e. known superclasses of this type.|
+| Relation | Origin | Opposite | Type | Comment |
+| `superInheritances` | `FamixTWithInheritances` | `subclass` | `FamixTInheritance` | Superinheritance relationships, i.e. known superclasses of this type.|
 
 ### Incoming dependencies
-| Relation | Type | Opposite | Comment |
-| `implementations` | `FamixTImplementation` | `interface` | Implementation relationships.|
-| `subInheritances` | `FamixTInheritance` | `superclass` | Subinheritance relationships, i.e. known subclasses of this type.|
+| Relation | Origin | Opposite | Type | Comment |
+| `implementations` | `FamixTImplementable` | `interface` | `FamixTImplementation` | Implementation relationships.|
+| `subInheritances` | `FamixTWithInheritances` | `superclass` | `FamixTInheritance` | Subinheritance relationships, i.e. known subclasses of this type.|
 
 ### Other
-| Relation | Type | Opposite | Comment |
-| `comments` | `FamixTComment` | `commentedEntity` | List of comments for the entity|
-| `instances` | `FamixTTypedAnnotationInstance` | `annotationType` | Annotations of this type|
+| Relation | Origin | Opposite | Type | Comment |
+| `comments` | `FamixTWithComments` | `commentedEntity` | `FamixTComment` | List of comments for the entity|
+| `instances` | `FamixTAnnotationType` | `annotationType` | `FamixTTypedAnnotationInstance` | Annotations of this type|
 
 
 ## Properties
 ======================
 
-| Name | Type | Comment |
-| `visibility` | String | Visibility of the entity|
+| Name | Type | Default value | Comment |
+| `visibility` | `String` | nil | Visibility of the entity|
 
 "
 Class {

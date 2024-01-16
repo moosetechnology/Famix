@@ -3,8 +3,8 @@
 ======================
 
 ### Children
-| Relation | Type | Opposite | Comment |
-| `compilationUnit` | `FamixTCompilationUnit` | `compilationUnitOwner` | |
+| Relation | Origin | Opposite | Type | Comment |
+| `compilationUnit` | `FamixTWithCompilationUnits` | `compilationUnitOwner` | `FamixTCompilationUnit` | |
 
 
 

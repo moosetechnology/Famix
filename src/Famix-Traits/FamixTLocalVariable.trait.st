@@ -5,25 +5,25 @@ FamixTLocalVariable represents a local variable in the scope of a behavioural en
 ======================
 
 ### Parents
-| Relation | Type | Opposite | Comment |
-| `parentBehaviouralEntity` | `FamixTWithLocalVariables` | `localVariables` | Behavioural entity declaring this local variable. belongsTo implementation|
+| Relation | Origin | Opposite | Type | Comment |
+| `parentBehaviouralEntity` | `FamixTLocalVariable` | `localVariables` | `FamixTWithLocalVariables` | Behavioural entity declaring this local variable. belongsTo implementation|
 
 ### Incoming dependencies
-| Relation | Type | Opposite | Comment |
-| `incomingAccesses` | `FamixTAccess` | `variable` | All Famix accesses pointing to this structural entity|
+| Relation | Origin | Opposite | Type | Comment |
+| `incomingAccesses` | `FamixTAccessible` | `variable` | `FamixTAccess` | All Famix accesses pointing to this structural entity|
 
 ### Other
-| Relation | Type | Opposite | Comment |
-| `declaredType` | `FamixTType` | `typedEntities` | Type of the entity, if any|
-| `sourceAnchor` | `FamixTSourceAnchor` | `element` | SourceAnchor entity linking to the original source code for this entity|
+| Relation | Origin | Opposite | Type | Comment |
+| `declaredType` | `FamixTTypedEntity` | `typedEntities` | `FamixTType` | Type of the entity, if any|
+| `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
 
 
 ## Properties
 ======================
 
-| Name | Type | Comment |
-| `isStub` | Boolean | Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.|
-| `name` | String | Basic name of the entity, not full reference.|
+| Name | Type | Default value | Comment |
+| `isStub` | `Boolean` | false | Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.|
+| `name` | `String` | nil | Basic name of the entity, not full reference.|
 
 "
 Trait {

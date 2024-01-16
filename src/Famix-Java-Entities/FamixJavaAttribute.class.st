@@ -3,32 +3,32 @@
 ======================
 
 ### Parents
-| Relation | Type | Opposite | Comment |
-| `parentType` | `FamixTWithAttributes` | `attributes` | Type declaring the attribute. belongsTo implementation|
+| Relation | Origin | Opposite | Type | Comment |
+| `parentType` | `FamixTAttribute` | `attributes` | `FamixTWithAttributes` | Type declaring the attribute. belongsTo implementation|
 
 ### Incoming dependencies
-| Relation | Type | Opposite | Comment |
-| `incomingAccesses` | `FamixTAccess` | `variable` | All Famix accesses pointing to this structural entity|
+| Relation | Origin | Opposite | Type | Comment |
+| `incomingAccesses` | `FamixTAccessible` | `variable` | `FamixTAccess` | All Famix accesses pointing to this structural entity|
 
 ### Other
-| Relation | Type | Opposite | Comment |
-| `comments` | `FamixTComment` | `commentedEntity` | List of comments for the entity|
-| `declaredType` | `FamixTType` | `typedEntities` | Type of the entity, if any|
-| `receivingInvocations` | `FamixTInvocation` | `receiver` | List of invocations performed on this entity (considered as the receiver)|
-| `sourceAnchor` | `FamixTSourceAnchor` | `element` | SourceAnchor entity linking to the original source code for this entity|
+| Relation | Origin | Opposite | Type | Comment |
+| `comments` | `FamixTWithComments` | `commentedEntity` | `FamixTComment` | List of comments for the entity|
+| `declaredType` | `FamixTTypedEntity` | `typedEntities` | `FamixTType` | Type of the entity, if any|
+| `receivingInvocations` | `FamixTInvocationsReceiver` | `receiver` | `FamixTInvocation` | List of invocations performed on this entity (considered as the receiver)|
+| `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
 
 
 ## Properties
 ======================
 
-| Name | Type | Comment |
-| `isClassSide` | Boolean | Entity can be declared class side i.e. static|
-| `isFinal` | Boolean | Entity can be declared final|
-| `isStub` | Boolean | Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.|
-| `isTransient` | Boolean | Entity can be declared transient|
-| `isVolatile` | Boolean | Entity can be declared volatile|
-| `name` | String | Basic name of the entity, not full reference.|
-| `visibility` | String | Visibility of the entity|
+| Name | Type | Default value | Comment |
+| `isClassSide` | `Boolean` | false | Entity can be declared class side i.e. static|
+| `isFinal` | `Boolean` | false | Entity can be declared final|
+| `isStub` | `Boolean` | false | Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.|
+| `isTransient` | `Boolean` | false | Entity can be declared transient|
+| `isVolatile` | `Boolean` | false | Entity can be declared volatile|
+| `name` | `String` | nil | Basic name of the entity, not full reference.|
+| `visibility` | `String` | nil | Visibility of the entity|
 
 "
 Class {

@@ -3,8 +3,8 @@
 ======================
 
 ### Children
-| Relation | Type | Opposite | Comment |
-| `definedAnnotationTypes` | `FamixTAnnotationType` | `annotationTypesContainer` | The container in which the AnnotationTypes may be declared|
+| Relation | Origin | Opposite | Type | Comment |
+| `definedAnnotationTypes` | `FamixTWithAnnotationTypes` | `annotationTypesContainer` | `FamixTAnnotationType` | The container in which the AnnotationTypes may be declared|
 
 
 

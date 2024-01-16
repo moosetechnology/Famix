@@ -3,8 +3,8 @@
 ======================
 
 ### Other
-| Relation | Type | Opposite | Comment |
-| `comments` | `FamixTComment` | `commentedEntity` | List of comments for the entity|
+| Relation | Origin | Opposite | Type | Comment |
+| `comments` | `FamixTWithComments` | `commentedEntity` | `FamixTComment` | List of comments for the entity|
 
 
 

@@ -3,12 +3,12 @@
 ======================
 
 ### Parents
-| Relation | Type | Opposite | Comment |
-| `parentFolder` | `FamixTFolder` | `childrenFileSystemEntities` | Folder entity containing this file.|
+| Relation | Origin | Opposite | Type | Comment |
+| `parentFolder` | `FamixTFileSystemEntity` | `childrenFileSystemEntities` | `FamixTFolder` | Folder entity containing this file.|
 
 ### Children
-| Relation | Type | Opposite | Comment |
-| `childrenFileSystemEntities` | `FamixTFileSystemEntity` | `parentFolder` | List of entities contained in this folder.|
+| Relation | Origin | Opposite | Type | Comment |
+| `childrenFileSystemEntities` | `FamixTFolder` | `parentFolder` | `FamixTFileSystemEntity` | List of entities contained in this folder.|
 
 
 

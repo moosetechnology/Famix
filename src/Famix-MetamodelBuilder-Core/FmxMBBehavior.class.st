@@ -147,7 +147,7 @@ FmxMBBehavior >> commentWithRelations [
 								  nextPutAll: '### ';
 								  nextPutAll: relationKind;
 								  cr;
-								  nextPutAll: '| Relation | Type | Opposite | Comment |';
+								  nextPutAll: '| Relation | Origin | Opposite | Type | Comment |';
 								  cr.
 							  (parents sorted: [ :parent | parent side generationStrategy relationSide name ] ascending) do: [ :parent |
 								  | strategy |
@@ -157,9 +157,11 @@ FmxMBBehavior >> commentWithRelations [
 									  nextPutAll: '| `';
 									  nextPutAll: strategy relationSide name;
 									  nextPutAll: '` | `';
-									  nextPutAll: strategy relationSide oppositeType;
+									  nextPutAll: strategy relationSide type;
 									  nextPutAll: '` | `';
 									  nextPutAll: strategy relationSide oppositeName;
+									  nextPutAll: '` | `';
+									  nextPutAll: strategy relationSide oppositeType;
 									  nextPutAll: '` | ';
 									  nextPutAll: strategy relationSide comment;
 									  nextPut: $|;
@@ -174,15 +176,17 @@ FmxMBBehavior >> commentWithRelations [
 ======================';
 				  cr;
 				  cr;
-				  nextPutAll: '| Name | Type | Comment |';
+				  nextPutAll: '| Name | Type | Default value | Comment |';
 				  cr.
 
 			  (props sorted: #name ascending) do: [ :property |
 				  aStream
 					  nextPutAll: '| `';
 					  nextPutAll: property name;
-					  nextPutAll: '` | ';
+					  nextPutAll: '` | `';
 					  nextPutAll: property propertyType;
+					  nextPutAll: '` | ';
+					  print: property defaultValue;
 					  nextPutAll: ' | ';
 					  nextPutAll: property comment;
 					  nextPut: $|;

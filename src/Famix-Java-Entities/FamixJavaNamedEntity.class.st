@@ -3,16 +3,16 @@
 ======================
 
 ### Other
-| Relation | Type | Opposite | Comment |
-| `annotationInstances` | `FamixTAnnotationInstance` | `annotatedEntity` | This property corresponds to the set of annotations associated to the entity|
-| `receivingInvocations` | `FamixTInvocation` | `receiver` | List of invocations performed on this entity (considered as the receiver)|
+| Relation | Origin | Opposite | Type | Comment |
+| `annotationInstances` | `FamixTWithAnnotationInstances` | `annotatedEntity` | `FamixTAnnotationInstance` | This property corresponds to the set of annotations associated to the entity|
+| `receivingInvocations` | `FamixTInvocationsReceiver` | `receiver` | `FamixTInvocation` | List of invocations performed on this entity (considered as the receiver)|
 
 
 ## Properties
 ======================
 
-| Name | Type | Comment |
-| `name` | String | Basic name of the entity, not full reference.|
+| Name | Type | Default value | Comment |
+| `name` | `String` | nil | Basic name of the entity, not full reference.|
 
 "
 Class {

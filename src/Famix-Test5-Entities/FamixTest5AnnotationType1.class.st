@@ -3,12 +3,12 @@
 ======================
 
 ### Parents
-| Relation | Type | Opposite | Comment |
-| `annotationTypesContainer` | `FamixTWithAnnotationTypes` | `definedAnnotationTypes` | Container in which an AnnotationType may reside|
+| Relation | Origin | Opposite | Type | Comment |
+| `annotationTypesContainer` | `FamixTAnnotationType` | `definedAnnotationTypes` | `FamixTWithAnnotationTypes` | Container in which an AnnotationType may reside|
 
 ### Other
-| Relation | Type | Opposite | Comment |
-| `instances` | `FamixTTypedAnnotationInstance` | `annotationType` | Annotations of this type|
+| Relation | Origin | Opposite | Type | Comment |
+| `instances` | `FamixTAnnotationType` | `annotationType` | `FamixTTypedAnnotationInstance` | Annotations of this type|
 
 
 

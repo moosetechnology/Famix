@@ -8,8 +8,8 @@ Instance Variables:
 ======================
 
 ### Other
-| Relation | Type | Opposite | Comment |
-| `aliasedType` | `FamixTWithTypeAliases` | `typeAliases` | Points to the actual type.|
+| Relation | Origin | Opposite | Type | Comment |
+| `aliasedType` | `FamixTTypeAlias` | `typeAliases` | `FamixTWithTypeAliases` | Points to the actual type.|
 
 
 

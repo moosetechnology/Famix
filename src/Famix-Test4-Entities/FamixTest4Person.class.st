@@ -3,8 +3,8 @@
 ======================
 
 ### Children
-| Relation | Type | Opposite | Comment |
-| `books` | `FamixTest4Book` | `person` | |
+| Relation | Origin | Opposite | Type | Comment |
+| `books` | `FamixTest4Person` | `person` | `FamixTest4Book` | |
 
 
 

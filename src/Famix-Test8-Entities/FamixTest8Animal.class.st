@@ -3,8 +3,8 @@
 ======================
 
 ### Incoming dependencies
-| Relation | Type | Opposite | Comment |
-| `incomingInfections` | `FamixTest8Infection` | `infectious` | |
+| Relation | Origin | Opposite | Type | Comment |
+| `incomingInfections` | `FamixTest8TInfectious` | `infectious` | `FamixTest8Infection` | |
 
 
 

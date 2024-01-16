@@ -3,15 +3,15 @@
 ======================
 
 ### Outgoing dependencies
-| Relation | Type | Opposite | Comment |
-| `outgoingInfections` | `FamixTest8Infection` | `infectable` | |
+| Relation | Origin | Opposite | Type | Comment |
+| `outgoingInfections` | `FamixTest8TInfectable` | `infectable` | `FamixTest8Infection` | |
 
 
 ## Properties
 ======================
 
-| Name | Type | Comment |
-| `pathogenicity` | Number | |
+| Name | Type | Default value | Comment |
+| `pathogenicity` | `Number` | nil | |
 
 "
 Class {

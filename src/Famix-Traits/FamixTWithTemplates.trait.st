@@ -3,8 +3,8 @@
 ======================
 
 ### Children
-| Relation | Type | Opposite | Comment |
-| `templates` | `FamixTTemplate` | `templateOwner` | |
+| Relation | Origin | Opposite | Type | Comment |
+| `templates` | `FamixTWithTemplates` | `templateOwner` | `FamixTTemplate` | |
 
 
 

@@ -2,8 +2,8 @@
 ## Properties
 ======================
 
-| Name | Type | Comment |
-| `name` | String | |
+| Name | Type | Default value | Comment |
+| `name` | `String` | nil | |
 
 "
 Class {

@@ -3,8 +3,8 @@
 ======================
 
 ### Outgoing dependencies
-| Relation | Type | Opposite | Comment |
-| `outgoingReferences` | `FamixTReference` | `referencer` | References from this entity to other entities.|
+| Relation | Origin | Opposite | Type | Comment |
+| `outgoingReferences` | `FamixTWithReferences` | `referencer` | `FamixTReference` | References from this entity to other entities.|
 
 
 

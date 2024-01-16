@@ -3,9 +3,9 @@
 ======================
 
 ### Other
-| Relation | Type | Opposite | Comment |
-| `c23` | `FamixTestComposed2CustomEntity3` | `c3s` | |
-| `customEntity3` | `FamixTestComposed1CustomEntity3` | `customEntities3` | |
+| Relation | Origin | Opposite | Type | Comment |
+| `c23` | `FamixTestComposedCustomEntity3` | `c3s` | `FamixTestComposed2CustomEntity3` | |
+| `customEntity3` | `FamixTestComposedCustomEntity3` | `customEntities3` | `FamixTestComposed1CustomEntity3` | |
 
 
 

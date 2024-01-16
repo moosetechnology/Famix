@@ -2,8 +2,8 @@
 ## Properties
 ======================
 
-| Name | Type | Comment |
-| `name` | String | Basic name of the entity, not full reference.|
+| Name | Type | Default value | Comment |
+| `name` | `String` | nil | Basic name of the entity, not full reference.|
 
 "
 Class {

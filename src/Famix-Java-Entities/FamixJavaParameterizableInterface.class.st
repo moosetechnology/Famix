@@ -3,8 +3,8 @@
 ======================
 
 ### Other
-| Relation | Type | Opposite | Comment |
-| `parameterizedTypes` | `FamixTParameterizedType` | `parameterizableClass` | |
+| Relation | Origin | Opposite | Type | Comment |
+| `parameterizedTypes` | `FamixTWithParameterizedTypes` | `parameterizableClass` | `FamixTParameterizedType` | |
 
 
 

@@ -3,8 +3,8 @@
 ======================
 
 ### Parents
-| Relation | Type | Opposite | Comment |
-| `school` | `FamixTest4School` | `rooms` | |
+| Relation | Origin | Opposite | Type | Comment |
+| `school` | `FamixTest4Room` | `rooms` | `FamixTest4School` | |
 
 
 

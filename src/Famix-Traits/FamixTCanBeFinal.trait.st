@@ -2,8 +2,8 @@
 ## Properties
 ======================
 
-| Name | Type | Comment |
-| `isFinal` | Boolean | Entity can be declared final|
+| Name | Type | Default value | Comment |
+| `isFinal` | `Boolean` | false | Entity can be declared final|
 
 "
 Trait {

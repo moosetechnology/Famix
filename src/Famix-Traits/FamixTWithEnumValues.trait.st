@@ -3,8 +3,8 @@
 ======================
 
 ### Children
-| Relation | Type | Opposite | Comment |
-| `enumValues` | `FamixTEnumValue` | `parentEnum` | |
+| Relation | Origin | Opposite | Type | Comment |
+| `enumValues` | `FamixTWithEnumValues` | `parentEnum` | `FamixTEnumValue` | |
 
 
 

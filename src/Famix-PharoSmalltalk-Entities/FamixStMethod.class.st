@@ -3,46 +3,46 @@
 ======================
 
 ### Parents
-| Relation | Type | Opposite | Comment |
-| `parentPackage` | `FamixTPackage` | `childEntities` | Package containing the entity in the code structure (if applicable)|
-| `parentType` | `FamixTWithMethods` | `methods` | Type declaring the method. It provides the implementation for belongsTo.|
+| Relation | Origin | Opposite | Type | Comment |
+| `parentPackage` | `FamixTPackageable` | `childEntities` | `FamixTPackage` | Package containing the entity in the code structure (if applicable)|
+| `parentType` | `FamixTMethod` | `methods` | `FamixTWithMethods` | Type declaring the method. It provides the implementation for belongsTo.|
 
 ### Children
-| Relation | Type | Opposite | Comment |
-| `definedAnnotationTypes` | `FamixTAnnotationType` | `annotationTypesContainer` | The container in which the AnnotationTypes may be declared|
-| `implicitVariables` | `FamixTImplicitVariable` | `parentBehaviouralEntity` | Implicit variables used locally by this behaviour.|
-| `localVariables` | `FamixTLocalVariable` | `parentBehaviouralEntity` | Variables locally defined by this behaviour.|
-| `parameters` | `FamixTParameter` | `parentBehaviouralEntity` | List of formal parameters declared by this behaviour.|
+| Relation | Origin | Opposite | Type | Comment |
+| `definedAnnotationTypes` | `FamixTWithAnnotationTypes` | `annotationTypesContainer` | `FamixTAnnotationType` | The container in which the AnnotationTypes may be declared|
+| `implicitVariables` | `FamixTWithImplicitVariables` | `parentBehaviouralEntity` | `FamixTImplicitVariable` | Implicit variables used locally by this behaviour.|
+| `localVariables` | `FamixTWithLocalVariables` | `parentBehaviouralEntity` | `FamixTLocalVariable` | Variables locally defined by this behaviour.|
+| `parameters` | `FamixTWithParameters` | `parentBehaviouralEntity` | `FamixTParameter` | List of formal parameters declared by this behaviour.|
 
 ### Outgoing dependencies
-| Relation | Type | Opposite | Comment |
-| `accesses` | `FamixTAccess` | `accessor` | Accesses to variables made by this behaviour.|
-| `outgoingInvocations` | `FamixTInvocation` | `sender` | Outgoing invocations sent by this behaviour.|
-| `outgoingReferences` | `FamixTReference` | `referencer` | References from this entity to other entities.|
+| Relation | Origin | Opposite | Type | Comment |
+| `accesses` | `FamixTWithAccesses` | `accessor` | `FamixTAccess` | Accesses to variables made by this behaviour.|
+| `outgoingInvocations` | `FamixTWithInvocations` | `sender` | `FamixTInvocation` | Outgoing invocations sent by this behaviour.|
+| `outgoingReferences` | `FamixTWithReferences` | `referencer` | `FamixTReference` | References from this entity to other entities.|
 
 ### Incoming dependencies
-| Relation | Type | Opposite | Comment |
-| `incomingInvocations` | `FamixTInvocation` | `candidates` | Incoming invocations from other behaviours computed by the candidate operator.|
+| Relation | Origin | Opposite | Type | Comment |
+| `incomingInvocations` | `FamixTInvocable` | `candidates` | `FamixTInvocation` | Incoming invocations from other behaviours computed by the candidate operator.|
 
 ### Other
-| Relation | Type | Opposite | Comment |
-| `annotationInstances` | `FamixTAnnotationInstance` | `annotatedEntity` | This property corresponds to the set of annotations associated to the entity|
-| `comments` | `FamixTComment` | `commentedEntity` | List of comments for the entity|
-| `declaredType` | `FamixTType` | `typedEntities` | Type of the entity, if any|
-| `sourceAnchor` | `FamixTSourceAnchor` | `element` | SourceAnchor entity linking to the original source code for this entity|
+| Relation | Origin | Opposite | Type | Comment |
+| `annotationInstances` | `FamixTWithAnnotationInstances` | `annotatedEntity` | `FamixTAnnotationInstance` | This property corresponds to the set of annotations associated to the entity|
+| `comments` | `FamixTWithComments` | `commentedEntity` | `FamixTComment` | List of comments for the entity|
+| `declaredType` | `FamixTTypedEntity` | `typedEntities` | `FamixTType` | Type of the entity, if any|
+| `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
 
 
 ## Properties
 ======================
 
-| Name | Type | Comment |
-| `isAbstract` | Boolean | Entity can be declared abstract|
-| `isClassSide` | Boolean | Entity can be declared class side i.e. static|
-| `isStub` | Boolean | Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.|
-| `kind` | String | Tag indicating a setter, getter, constant, constructor method|
-| `name` | String | Basic name of the entity, not full reference.|
-| `protocol` | String | Protocol of the method|
-| `signature` | String | Signature of the message being sent|
+| Name | Type | Default value | Comment |
+| `isAbstract` | `Boolean` | false | Entity can be declared abstract|
+| `isClassSide` | `Boolean` | false | Entity can be declared class side i.e. static|
+| `isStub` | `Boolean` | false | Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.|
+| `kind` | `String` | nil | Tag indicating a setter, getter, constant, constructor method|
+| `name` | `String` | nil | Basic name of the entity, not full reference.|
+| `protocol` | `String` | nil | Protocol of the method|
+| `signature` | `String` | nil | Signature of the message being sent|
 
 "
 Class {

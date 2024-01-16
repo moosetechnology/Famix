@@ -2,12 +2,12 @@
 ## Properties
 ======================
 
-| Name | Type | Comment |
-| `correspondingFile` | FamixTFile | File associated to this source anchor|
-| `encoding` | String | A string representing the encoding of a file|
-| `endPos` | Number | Stop position in the source|
-| `fileName` | String | Name of the source file|
-| `startPos` | Number | Start position in the source|
+| Name | Type | Default value | Comment |
+| `correspondingFile` | `FamixTFile` | nil | File associated to this source anchor|
+| `encoding` | `String` | nil | A string representing the encoding of a file|
+| `endPos` | `Number` | nil | Stop position in the source|
+| `fileName` | `String` | nil | Name of the source file|
+| `startPos` | `Number` | nil | Start position in the source|
 
 "
 Trait {

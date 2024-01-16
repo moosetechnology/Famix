@@ -3,12 +3,12 @@
 ======================
 
 ### Parents
-| Relation | Type | Opposite | Comment |
-| `school` | `FamixTest4School` | `students` | |
+| Relation | Origin | Opposite | Type | Comment |
+| `school` | `FamixTest4Student` | `students` | `FamixTest4School` | |
 
 ### Other
-| Relation | Type | Opposite | Comment |
-| `teachers` | `FamixTest4Teacher` | `students` | |
+| Relation | Origin | Opposite | Type | Comment |
+| `teachers` | `FamixTest4Student` | `students` | `FamixTest4Teacher` | |
 
 
 

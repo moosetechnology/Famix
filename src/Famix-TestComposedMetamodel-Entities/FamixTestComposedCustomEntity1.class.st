@@ -3,12 +3,12 @@
 ======================
 
 ### Children
-| Relation | Type | Opposite | Comment |
-| `customEntity1` | `FamixTestComposed1CustomEntity1` | `customEntity1` | |
+| Relation | Origin | Opposite | Type | Comment |
+| `customEntity1` | `FamixTestComposedCustomEntity1` | `customEntity1` | `FamixTestComposed1CustomEntity1` | |
 
 ### Other
-| Relation | Type | Opposite | Comment |
-| `c21` | `FamixTestComposed2CustomEntity1` | `c1` | |
+| Relation | Origin | Opposite | Type | Comment |
+| `c21` | `FamixTestComposedCustomEntity1` | `c1` | `FamixTestComposed2CustomEntity1` | |
 
 
 

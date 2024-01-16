@@ -3,8 +3,8 @@
 ======================
 
 ### Other
-| Relation | Type | Opposite | Comment |
-| `method` | `FamixTestComposed1Method` | `standardEntity` | |
+| Relation | Origin | Opposite | Type | Comment |
+| `method` | `FamixTestComposedStandardEntity` | `standardEntity` | `FamixTestComposed1Method` | |
 
 
 

@@ -2,9 +2,9 @@
 ## Properties
 ======================
 
-| Name | Type | Comment |
-| `eggs` | Number | |
-| `isFood` | Boolean | |
+| Name | Type | Default value | Comment |
+| `eggs` | `Number` | 12 | |
+| `isFood` | `Boolean` | true | |
 
 "
 Class {

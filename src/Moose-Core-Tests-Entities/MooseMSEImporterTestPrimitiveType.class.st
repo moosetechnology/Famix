@@ -3,25 +3,25 @@
 ======================
 
 ### Parents
-| Relation | Type | Opposite | Comment |
-| `typeContainer` | `FamixTWithTypes` | `types` | Container entity to which this type belongs. Container is a namespace, not a package (Smalltalk).|
+| Relation | Origin | Opposite | Type | Comment |
+| `typeContainer` | `FamixTType` | `types` | `FamixTWithTypes` | Container entity to which this type belongs. Container is a namespace, not a package (Smalltalk).|
 
 ### Incoming dependencies
-| Relation | Type | Opposite | Comment |
-| `incomingReferences` | `FamixTReference` | `referredType` | References to this entity by other entities.|
+| Relation | Origin | Opposite | Type | Comment |
+| `incomingReferences` | `FamixTReferenceable` | `referredType` | `FamixTReference` | References to this entity by other entities.|
 
 ### Other
-| Relation | Type | Opposite | Comment |
-| `sourceAnchor` | `FamixTSourceAnchor` | `element` | SourceAnchor entity linking to the original source code for this entity|
-| `typedEntities` | `FamixTTypedEntity` | `declaredType` | Entities that have this type as declaredType|
+| Relation | Origin | Opposite | Type | Comment |
+| `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
+| `typedEntities` | `FamixTType` | `declaredType` | `FamixTTypedEntity` | Entities that have this type as declaredType|
 
 
 ## Properties
 ======================
 
-| Name | Type | Comment |
-| `isStub` | Boolean | Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.|
-| `name` | String | Basic name of the entity, not full reference.|
+| Name | Type | Default value | Comment |
+| `isStub` | `Boolean` | false | Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.|
+| `name` | `String` | nil | Basic name of the entity, not full reference.|
 
 "
 Class {

@@ -3,8 +3,8 @@
 ======================
 
 ### Outgoing dependencies
-| Relation | Type | Opposite | Comment |
-| `outgoingInvocations` | `FamixTInvocation` | `sender` | Outgoing invocations sent by this behaviour.|
+| Relation | Origin | Opposite | Type | Comment |
+| `outgoingInvocations` | `FamixTWithInvocations` | `sender` | `FamixTInvocation` | Outgoing invocations sent by this behaviour.|
 
 
 

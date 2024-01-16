@@ -3,8 +3,8 @@
 ======================
 
 ### Parents
-| Relation | Type | Opposite | Comment |
-| `parentModule` | `FamixTModule` | `moduleEntities` | Module that contains the definition of this entity|
+| Relation | Origin | Opposite | Type | Comment |
+| `parentModule` | `FamixTDefinedInModule` | `moduleEntities` | `FamixTModule` | Module that contains the definition of this entity|
 
 
 

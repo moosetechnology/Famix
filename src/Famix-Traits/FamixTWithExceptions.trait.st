@@ -3,10 +3,10 @@
 ======================
 
 ### Other
-| Relation | Type | Opposite | Comment |
-| `caughtExceptions` | `FamixTException` | `catchingEntities` | The exceptions caught by the method|
-| `declaredExceptions` | `FamixTException` | `declaringEntities` | The exceptions declared by the method|
-| `thrownExceptions` | `FamixTException` | `throwingEntities` | The exceptions thrown by the method|
+| Relation | Origin | Opposite | Type | Comment |
+| `caughtExceptions` | `FamixTWithExceptions` | `catchingEntities` | `FamixTException` | The exceptions caught by the method|
+| `declaredExceptions` | `FamixTWithExceptions` | `declaringEntities` | `FamixTException` | The exceptions declared by the method|
+| `thrownExceptions` | `FamixTWithExceptions` | `throwingEntities` | `FamixTException` | The exceptions thrown by the method|
 
 
 

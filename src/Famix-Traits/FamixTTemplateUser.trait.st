@@ -3,8 +3,8 @@
 ======================
 
 ### Other
-| Relation | Type | Opposite | Comment |
-| `template` | `FamixTTemplate` | `templateUsers` | |
+| Relation | Origin | Opposite | Type | Comment |
+| `template` | `FamixTTemplateUser` | `templateUsers` | `FamixTTemplate` | |
 
 
 

@@ -3,19 +3,19 @@
 ======================
 
 ### Outgoing dependencies
-| Relation | Type | Opposite | Comment |
-| `interfaceImplementations` | `FamixTImplementation` | `implementingClass` | Implementation relationships|
-| `superInheritances` | `FamixTInheritance` | `subclass` | Superinheritance relationships, i.e. known superclasses of this type.|
+| Relation | Origin | Opposite | Type | Comment |
+| `interfaceImplementations` | `FamixTCanImplement` | `implementingClass` | `FamixTImplementation` | Implementation relationships|
+| `superInheritances` | `FamixTWithInheritances` | `subclass` | `FamixTInheritance` | Superinheritance relationships, i.e. known superclasses of this type.|
 
 ### Incoming dependencies
-| Relation | Type | Opposite | Comment |
-| `implementations` | `FamixTImplementation` | `interface` | Implementation relationships.|
-| `subInheritances` | `FamixTInheritance` | `superclass` | Subinheritance relationships, i.e. known subclasses of this type.|
+| Relation | Origin | Opposite | Type | Comment |
+| `implementations` | `FamixTImplementable` | `interface` | `FamixTImplementation` | Implementation relationships.|
+| `subInheritances` | `FamixTWithInheritances` | `superclass` | `FamixTInheritance` | Subinheritance relationships, i.e. known subclasses of this type.|
 
 ### Other
-| Relation | Type | Opposite | Comment |
-| `arguments` | `FamixTParameterizedTypeUser` | `argumentsInParameterizedTypes` | |
-| `parameterizableClass` | `FamixTWithParameterizedTypes` | `parameterizedTypes` | Base type of this parameterized type.|
+| Relation | Origin | Opposite | Type | Comment |
+| `arguments` | `FamixTWithParameterizedTypeUsers` | `argumentsInParameterizedTypes` | `FamixTParameterizedTypeUser` | |
+| `parameterizableClass` | `FamixTParameterizedType` | `parameterizedTypes` | `FamixTWithParameterizedTypes` | Base type of this parameterized type.|
 
 
 

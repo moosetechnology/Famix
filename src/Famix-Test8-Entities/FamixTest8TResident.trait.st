@@ -3,8 +3,8 @@
 ======================
 
 ### Outgoing dependencies
-| Relation | Type | Opposite | Comment |
-| `outgoingResidences` | `FamixTest8Residence` | `resident` | |
+| Relation | Origin | Opposite | Type | Comment |
+| `outgoingResidences` | `FamixTest8TResident` | `resident` | `FamixTest8Residence` | |
 
 
 

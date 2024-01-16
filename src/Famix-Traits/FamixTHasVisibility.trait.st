@@ -2,8 +2,8 @@
 ## Properties
 ======================
 
-| Name | Type | Comment |
-| `visibility` | String | Visibility of the entity|
+| Name | Type | Default value | Comment |
+| `visibility` | `String` | nil | Visibility of the entity|
 
 "
 Trait {

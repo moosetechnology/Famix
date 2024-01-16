@@ -4,8 +4,8 @@ This is an indicator that a method is a setter, getter, constant, or constructor
 ## Properties
 ======================
 
-| Name | Type | Comment |
-| `kind` | String | Tag indicating a setter, getter, constant, constructor method|
+| Name | Type | Default value | Comment |
+| `kind` | `String` | nil | Tag indicating a setter, getter, constant, constructor method|
 
 "
 Trait {

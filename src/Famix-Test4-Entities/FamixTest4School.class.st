@@ -3,11 +3,11 @@
 ======================
 
 ### Children
-| Relation | Type | Opposite | Comment |
-| `principal` | `FamixTest4Principal` | `school` | |
-| `rooms` | `FamixTest4Room` | `school` | |
-| `students` | `FamixTest4Student` | `school` | |
-| `teachers` | `FamixTest4Teacher` | `school` | |
+| Relation | Origin | Opposite | Type | Comment |
+| `principal` | `FamixTest4School` | `school` | `FamixTest4Principal` | |
+| `rooms` | `FamixTest4School` | `school` | `FamixTest4Room` | |
+| `students` | `FamixTest4School` | `school` | `FamixTest4Student` | |
+| `teachers` | `FamixTest4School` | `school` | `FamixTest4Teacher` | |
 
 
 

@@ -5,8 +5,8 @@ I can be the source of an implementation (cf a class implementing an Interface)
 ======================
 
 ### Outgoing dependencies
-| Relation | Type | Opposite | Comment |
-| `interfaceImplementations` | `FamixTImplementation` | `implementingClass` | Implementation relationships|
+| Relation | Origin | Opposite | Type | Comment |
+| `interfaceImplementations` | `FamixTCanImplement` | `implementingClass` | `FamixTImplementation` | Implementation relationships|
 
 
 

@@ -3,7 +3,7 @@ Used by Roassal (`RSUMLClassBuilder`) to get informations about classes to put i
 "
 Class {
 	#name : #FamixUMLRoassalDescriptor,
-	#superclass : #RSUMLClassDescriptor,
+	#superclass : #AnObsoleteRSUMLClassDescriptor,
 	#instVars : [
 		'umlModel'
 	],

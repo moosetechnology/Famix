@@ -3,8 +3,8 @@
 ======================
 
 ### Other
-| Relation | Type | Opposite | Comment |
-| `containerFiles` | `FamixTFile` | `entities` | List of files containing the entity|
+| Relation | Origin | Opposite | Type | Comment |
+| `containerFiles` | `FamixTWithFiles` | `entities` | `FamixTFile` | List of files containing the entity|
 
 
 

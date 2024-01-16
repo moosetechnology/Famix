@@ -3,9 +3,9 @@
 ======================
 
 ### Other
-| Relation | Type | Opposite | Comment |
-| `incomingIncludeRelations` | `FamixTFileInclude` | `target` | The include entities that have this file as a target.|
-| `outgoingIncludeRelations` | `FamixTFileInclude` | `source` | The include entities that have this file as a source.|
+| Relation | Origin | Opposite | Type | Comment |
+| `incomingIncludeRelations` | `FamixTWithFileIncludes` | `target` | `FamixTFileInclude` | The include entities that have this file as a target.|
+| `outgoingIncludeRelations` | `FamixTWithFileIncludes` | `source` | `FamixTFileInclude` | The include entities that have this file as a source.|
 
 
 

@@ -3,8 +3,8 @@
 ======================
 
 ### Other
-| Relation | Type | Opposite | Comment |
-| `myTrait` | `FDTrait4` | `class1` | |
+| Relation | Origin | Opposite | Type | Comment |
+| `myTrait` | `FDClass1` | `class1` | `FDTrait4` | |
 
 
 

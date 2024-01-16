@@ -3,8 +3,8 @@
 ======================
 
 ### Children
-| Relation | Type | Opposite | Comment |
-| `header` | `FamixTHeader` | `headerOwner` | The header file that defines this module|
+| Relation | Origin | Opposite | Type | Comment |
+| `header` | `FamixTWithHeaders` | `headerOwner` | `FamixTHeader` | The header file that defines this module|
 
 
 

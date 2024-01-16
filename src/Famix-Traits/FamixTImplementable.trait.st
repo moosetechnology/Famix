@@ -5,8 +5,8 @@ I can be the target of an implementation cf Interface
 ======================
 
 ### Incoming dependencies
-| Relation | Type | Opposite | Comment |
-| `implementations` | `FamixTImplementation` | `interface` | Implementation relationships.|
+| Relation | Origin | Opposite | Type | Comment |
+| `implementations` | `FamixTImplementable` | `interface` | `FamixTImplementation` | Implementation relationships.|
 
 
 

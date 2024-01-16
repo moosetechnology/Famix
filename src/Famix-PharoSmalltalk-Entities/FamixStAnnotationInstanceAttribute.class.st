@@ -3,19 +3,19 @@
 ======================
 
 ### Parents
-| Relation | Type | Opposite | Comment |
-| `parentAnnotationInstance` | `FamixTWithAnnotationInstanceAttributes` | `attributes` | The instance of the annotation in which the attribute is used.|
+| Relation | Origin | Opposite | Type | Comment |
+| `parentAnnotationInstance` | `FamixTAnnotationInstanceAttribute` | `attributes` | `FamixTWithAnnotationInstanceAttributes` | The instance of the annotation in which the attribute is used.|
 
 ### Other
-| Relation | Type | Opposite | Comment |
-| `annotationTypeAttribute` | `FamixTAnnotationTypeAttribute` | `annotationAttributeInstances` | This corresponds to the type of the attribute in an AnnotationInstance|
+| Relation | Origin | Opposite | Type | Comment |
+| `annotationTypeAttribute` | `FamixTTypedAnnotationInstanceAttribute` | `annotationAttributeInstances` | `FamixTAnnotationTypeAttribute` | This corresponds to the type of the attribute in an AnnotationInstance|
 
 
 ## Properties
 ======================
 
-| Name | Type | Comment |
-| `value` | String | Actual value of the attribute used in an annotation|
+| Name | Type | Default value | Comment |
+| `value` | `String` | nil | Actual value of the attribute used in an annotation|
 
 "
 Class {

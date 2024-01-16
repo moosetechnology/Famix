@@ -3,8 +3,8 @@
 ======================
 
 ### Incoming dependencies
-| Relation | Type | Opposite | Comment |
-| `outgoingTraitUsages` | `FamixTTraitUsage` | `user` | |
+| Relation | Origin | Opposite | Type | Comment |
+| `outgoingTraitUsages` | `FamixTTraitUser` | `user` | `FamixTTraitUsage` | |
 
 
 

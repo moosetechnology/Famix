@@ -3,8 +3,8 @@
 ======================
 
 ### Other
-| Relation | Type | Opposite | Comment |
-| `dereferencedInvocations` | `FamixTDereferencedInvocation` | `referencer` | List of invocations performed on BehaviouralEntities referenced by this entity|
+| Relation | Origin | Opposite | Type | Comment |
+| `dereferencedInvocations` | `FamixTWithDereferencedInvocations` | `referencer` | `FamixTDereferencedInvocation` | List of invocations performed on BehaviouralEntities referenced by this entity|
 
 
 

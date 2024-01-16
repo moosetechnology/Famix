@@ -3,8 +3,8 @@
 ======================
 
 ### Incoming dependencies
-| Relation | Type | Opposite | Comment |
-| `incomingResidences` | `FamixTest8Residence` | `biotope` | |
+| Relation | Origin | Opposite | Type | Comment |
+| `incomingResidences` | `FamixTest8TBiotope` | `biotope` | `FamixTest8Residence` | |
 
 
 

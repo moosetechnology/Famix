@@ -3,8 +3,8 @@
 ======================
 
 ### Other
-| Relation | Type | Opposite | Comment |
-| `annotationInstances` | `FamixTAnnotationInstance` | `annotatedEntity` | This property corresponds to the set of annotations associated to the entity|
+| Relation | Origin | Opposite | Type | Comment |
+| `annotationInstances` | `FamixTWithAnnotationInstances` | `annotatedEntity` | `FamixTAnnotationInstance` | This property corresponds to the set of annotations associated to the entity|
 
 
 

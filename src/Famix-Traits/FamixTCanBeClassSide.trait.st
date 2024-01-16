@@ -2,8 +2,8 @@
 ## Properties
 ======================
 
-| Name | Type | Comment |
-| `isClassSide` | Boolean | Entity can be declared class side i.e. static|
+| Name | Type | Default value | Comment |
+| `isClassSide` | `Boolean` | false | Entity can be declared class side i.e. static|
 
 "
 Trait {

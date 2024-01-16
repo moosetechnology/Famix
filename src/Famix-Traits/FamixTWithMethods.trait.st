@@ -3,8 +3,8 @@
 ======================
 
 ### Children
-| Relation | Type | Opposite | Comment |
-| `methods` | `FamixTMethod` | `parentType` | Methods declared by this type.|
+| Relation | Origin | Opposite | Type | Comment |
+| `methods` | `FamixTWithMethods` | `parentType` | `FamixTMethod` | Methods declared by this type.|
 
 
 

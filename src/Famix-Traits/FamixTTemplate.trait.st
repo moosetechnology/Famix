@@ -3,12 +3,12 @@
 ======================
 
 ### Parents
-| Relation | Type | Opposite | Comment |
-| `templateOwner` | `FamixTWithTemplates` | `templates` | |
+| Relation | Origin | Opposite | Type | Comment |
+| `templateOwner` | `FamixTTemplate` | `templates` | `FamixTWithTemplates` | |
 
 ### Other
-| Relation | Type | Opposite | Comment |
-| `templateUsers` | `FamixTTemplateUser` | `template` | |
+| Relation | Origin | Opposite | Type | Comment |
+| `templateUsers` | `FamixTTemplate` | `template` | `FamixTTemplateUser` | |
 
 
 

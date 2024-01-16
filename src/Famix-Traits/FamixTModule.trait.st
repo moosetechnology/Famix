@@ -6,8 +6,8 @@ FamixTModule represents a that basically provides a simple scoping abstraction f
 ======================
 
 ### Children
-| Relation | Type | Opposite | Comment |
-| `moduleEntities` | `FamixTDefinedInModule` | `parentModule` | |
+| Relation | Origin | Opposite | Type | Comment |
+| `moduleEntities` | `FamixTModule` | `parentModule` | `FamixTDefinedInModule` | |
 
 
 

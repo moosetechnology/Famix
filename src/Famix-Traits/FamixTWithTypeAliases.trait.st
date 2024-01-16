@@ -3,8 +3,8 @@
 ======================
 
 ### Other
-| Relation | Type | Opposite | Comment |
-| `typeAliases` | `FamixTTypeAlias` | `aliasedType` | Aliases|
+| Relation | Origin | Opposite | Type | Comment |
+| `typeAliases` | `FamixTWithTypeAliases` | `aliasedType` | `FamixTTypeAlias` | Aliases|
 
 
 

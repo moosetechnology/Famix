@@ -3,19 +3,19 @@
 ======================
 
 ### Other
-| Relation | Type | Opposite | Comment |
-| `next` | `FamixTAssociation` | `previous` | Next association in an ordered collection of associations. Currently not supported by the Moose importer|
-| `previous` | `FamixTAssociation` | `next` | Previous association in an ordered collection of associations. Currently not supported by the Moose importer|
-| `source` | `FamixTWithFileIncludes` | `outgoingIncludeRelations` | The file that is including|
-| `sourceAnchor` | `FamixTSourceAnchor` | `element` | SourceAnchor entity linking to the original source code for this entity|
-| `target` | `FamixTWithFileIncludes` | `incomingIncludeRelations` | The file that is included|
+| Relation | Origin | Opposite | Type | Comment |
+| `next` | `FamixTAssociation` | `previous` | `FamixTAssociation` | Next association in an ordered collection of associations. Currently not supported by the Moose importer|
+| `previous` | `FamixTAssociation` | `next` | `FamixTAssociation` | Previous association in an ordered collection of associations. Currently not supported by the Moose importer|
+| `source` | `FamixTFileInclude` | `outgoingIncludeRelations` | `FamixTWithFileIncludes` | The file that is including|
+| `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
+| `target` | `FamixTFileInclude` | `incomingIncludeRelations` | `FamixTWithFileIncludes` | The file that is included|
 
 
 ## Properties
 ======================
 
-| Name | Type | Comment |
-| `isStub` | Boolean | Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.|
+| Name | Type | Default value | Comment |
+| `isStub` | `Boolean` | false | Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.|
 
 "
 Trait {

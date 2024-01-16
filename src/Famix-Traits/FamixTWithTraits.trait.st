@@ -3,8 +3,8 @@
 ======================
 
 ### Children
-| Relation | Type | Opposite | Comment |
-| `traits` | `FamixTTrait` | `traitOwner` | |
+| Relation | Origin | Opposite | Type | Comment |
+| `traits` | `FamixTWithTraits` | `traitOwner` | `FamixTTrait` | |
 
 
 

@@ -3,8 +3,8 @@
 ======================
 
 ### Outgoing dependencies
-| Relation | Type | Opposite | Comment |
-| `accesses` | `FamixTAccess` | `accessor` | Accesses to variables made by this behaviour.|
+| Relation | Origin | Opposite | Type | Comment |
+| `accesses` | `FamixTWithAccesses` | `accessor` | `FamixTAccess` | Accesses to variables made by this behaviour.|
 
 
 

@@ -2,8 +2,8 @@
 ## Properties
 ======================
 
-| Name | Type | Comment |
-| `isAbstract` | Boolean | Entity can be declared abstract|
+| Name | Type | Default value | Comment |
+| `isAbstract` | `Boolean` | false | Entity can be declared abstract|
 
 "
 Trait {

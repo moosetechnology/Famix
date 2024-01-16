@@ -3,8 +3,8 @@
 ======================
 
 ### Children
-| Relation | Type | Opposite | Comment |
-| `functions` | `FamixTFunction` | `functionOwner` | Functions defined in the container, if any.|
+| Relation | Origin | Opposite | Type | Comment |
+| `functions` | `FamixTWithFunctions` | `functionOwner` | `FamixTFunction` | Functions defined in the container, if any.|
 
 
 

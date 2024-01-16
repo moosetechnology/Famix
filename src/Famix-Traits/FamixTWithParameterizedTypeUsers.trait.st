@@ -3,8 +3,8 @@
 ======================
 
 ### Other
-| Relation | Type | Opposite | Comment |
-| `arguments` | `FamixTParameterizedTypeUser` | `argumentsInParameterizedTypes` | |
+| Relation | Origin | Opposite | Type | Comment |
+| `arguments` | `FamixTWithParameterizedTypeUsers` | `argumentsInParameterizedTypes` | `FamixTParameterizedTypeUser` | |
 
 
 

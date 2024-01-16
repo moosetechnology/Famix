@@ -3,40 +3,40 @@
 ======================
 
 ### Parents
-| Relation | Type | Opposite | Comment |
-| `typeContainer` | `FamixTWithTypes` | `types` | Container entity to which this type belongs. Container is a namespace, not a package (Smalltalk).|
+| Relation | Origin | Opposite | Type | Comment |
+| `typeContainer` | `FamixTType` | `types` | `FamixTWithTypes` | Container entity to which this type belongs. Container is a namespace, not a package (Smalltalk).|
 
 ### Children
-| Relation | Type | Opposite | Comment |
-| `attributes` | `FamixTAttribute` | `parentType` | List of attributes declared by this type.|
-| `enumValues` | `FamixTEnumValue` | `parentEnum` | |
-| `methods` | `FamixTMethod` | `parentType` | Methods declared by this type.|
+| Relation | Origin | Opposite | Type | Comment |
+| `attributes` | `FamixTWithAttributes` | `parentType` | `FamixTAttribute` | List of attributes declared by this type.|
+| `enumValues` | `FamixTWithEnumValues` | `parentEnum` | `FamixTEnumValue` | |
+| `methods` | `FamixTWithMethods` | `parentType` | `FamixTMethod` | Methods declared by this type.|
 
 ### Outgoing dependencies
-| Relation | Type | Opposite | Comment |
-| `outgoingImports` | `FamixTImport` | `importingEntity` | |
-| `superInheritances` | `FamixTInheritance` | `subclass` | Superinheritance relationships, i.e. known superclasses of this type.|
+| Relation | Origin | Opposite | Type | Comment |
+| `outgoingImports` | `FamixTWithImports` | `importingEntity` | `FamixTImport` | |
+| `superInheritances` | `FamixTWithInheritances` | `subclass` | `FamixTInheritance` | Superinheritance relationships, i.e. known superclasses of this type.|
 
 ### Incoming dependencies
-| Relation | Type | Opposite | Comment |
-| `incomingImports` | `FamixTImport` | `importedEntity` | List of imports of this entity|
-| `incomingReferences` | `FamixTReference` | `referredType` | References to this entity by other entities.|
-| `subInheritances` | `FamixTInheritance` | `superclass` | Subinheritance relationships, i.e. known subclasses of this type.|
+| Relation | Origin | Opposite | Type | Comment |
+| `incomingImports` | `FamixTImportable` | `importedEntity` | `FamixTImport` | List of imports of this entity|
+| `incomingReferences` | `FamixTReferenceable` | `referredType` | `FamixTReference` | References to this entity by other entities.|
+| `subInheritances` | `FamixTWithInheritances` | `superclass` | `FamixTInheritance` | Subinheritance relationships, i.e. known subclasses of this type.|
 
 ### Other
-| Relation | Type | Opposite | Comment |
-| `comments` | `FamixTComment` | `commentedEntity` | List of comments for the entity|
-| `sourceAnchor` | `FamixTSourceAnchor` | `element` | SourceAnchor entity linking to the original source code for this entity|
-| `typedEntities` | `FamixTTypedEntity` | `declaredType` | Entities that have this type as declaredType|
+| Relation | Origin | Opposite | Type | Comment |
+| `comments` | `FamixTWithComments` | `commentedEntity` | `FamixTComment` | List of comments for the entity|
+| `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
+| `typedEntities` | `FamixTType` | `declaredType` | `FamixTTypedEntity` | Entities that have this type as declaredType|
 
 
 ## Properties
 ======================
 
-| Name | Type | Comment |
-| `isStub` | Boolean | Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.|
-| `name` | String | Basic name of the entity, not full reference.|
-| `visibility` | String | Visibility of the entity|
+| Name | Type | Default value | Comment |
+| `isStub` | `Boolean` | false | Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.|
+| `name` | `String` | nil | Basic name of the entity, not full reference.|
+| `visibility` | `String` | nil | Visibility of the entity|
 
 "
 Class {

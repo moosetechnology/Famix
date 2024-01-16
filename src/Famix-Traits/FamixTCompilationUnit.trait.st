@@ -5,13 +5,13 @@ I represent a compilation unit file. Typically a .c or .cpp file
 ======================
 
 ### Parents
-| Relation | Type | Opposite | Comment |
-| `compilationUnitOwner` | `FamixTWithCompilationUnits` | `compilationUnit` | The compilation unit that defines this module|
-| `parentFolder` | `FamixTFolder` | `childrenFileSystemEntities` | Folder entity containing this file.|
+| Relation | Origin | Opposite | Type | Comment |
+| `compilationUnitOwner` | `FamixTCompilationUnit` | `compilationUnit` | `FamixTWithCompilationUnits` | The compilation unit that defines this module|
+| `parentFolder` | `FamixTFileSystemEntity` | `childrenFileSystemEntities` | `FamixTFolder` | Folder entity containing this file.|
 
 ### Other
-| Relation | Type | Opposite | Comment |
-| `entities` | `FamixTWithFiles` | `containerFiles` | List of entities defined in the file|
+| Relation | Origin | Opposite | Type | Comment |
+| `entities` | `FamixTFile` | `containerFiles` | `FamixTWithFiles` | List of entities defined in the file|
 
 
 

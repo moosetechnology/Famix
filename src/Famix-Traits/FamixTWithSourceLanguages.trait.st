@@ -3,8 +3,8 @@
 ======================
 
 ### Other
-| Relation | Type | Opposite | Comment |
-| `declaredSourceLanguage` | `FamixTSourceLanguage` | `sourcedEntities` | The declared SourceLanguage for the source code of this entity|
+| Relation | Origin | Opposite | Type | Comment |
+| `declaredSourceLanguage` | `FamixTWithSourceLanguages` | `sourcedEntities` | `FamixTSourceLanguage` | The declared SourceLanguage for the source code of this entity|
 
 
 

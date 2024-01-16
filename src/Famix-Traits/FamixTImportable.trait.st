@@ -3,8 +3,8 @@
 ======================
 
 ### Incoming dependencies
-| Relation | Type | Opposite | Comment |
-| `incomingImports` | `FamixTImport` | `importedEntity` | List of imports of this entity|
+| Relation | Origin | Opposite | Type | Comment |
+| `incomingImports` | `FamixTImportable` | `importedEntity` | `FamixTImport` | List of imports of this entity|
 
 
 
