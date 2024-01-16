@@ -3,7 +3,9 @@
 ======================
 
 ### Children
-- Relation: #templates Type: #FamixTTemplate Opposite: #templateOwner
+| Relation | Type | Opposite | Comment |
+| `templates` | `FamixTTemplate` | `templateOwner` | |
+
 
 
 "

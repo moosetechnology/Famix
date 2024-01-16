@@ -3,7 +3,9 @@
 ======================
 
 ### Incoming dependencies
-- Relation: #incomingResidences Type: #FamixTest8Residence Opposite: #biotope
+| Relation | Type | Opposite | Comment |
+| `incomingResidences` | `FamixTest8Residence` | `biotope` | |
+
 
 
 "

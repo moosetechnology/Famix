@@ -3,21 +3,30 @@
 ======================
 
 ### Parents
-- Relation: #typeContainer Type: #FamixTWithTypes Opposite: #types Comment: Container entity to which this type belongs. Container is a namespace, not a package (Smalltalk).
+| Relation | Type | Opposite | Comment |
+| `typeContainer` | `FamixTWithTypes` | `types` | Container entity to which this type belongs. Container is a namespace, not a package (Smalltalk).|
+
 ### Children
-- Relation: #methods Type: #FamixTMethod Opposite: #parentType Comment: Methods declared by this type.
+| Relation | Type | Opposite | Comment |
+| `methods` | `FamixTMethod` | `parentType` | Methods declared by this type.|
+
 ### Incoming dependencies
-- Relation: #incomingReferences Type: #FamixTReference Opposite: #referredType Comment: References to this entity by other entities.
+| Relation | Type | Opposite | Comment |
+| `incomingReferences` | `FamixTReference` | `referredType` | References to this entity by other entities.|
+
 ### Other
-- Relation: #argumentsInParameterizedTypes Type: #FamixTWithParameterizedTypeUsers Opposite: #arguments
-- Relation: #sourceAnchor Type: #FamixTSourceAnchor Opposite: #element Comment: SourceAnchor entity linking to the original source code for this entity
-- Relation: #typedEntities Type: #FamixTTypedEntity Opposite: #declaredType Comment: Entities that have this type as declaredType
+| Relation | Type | Opposite | Comment |
+| `argumentsInParameterizedTypes` | `FamixTWithParameterizedTypeUsers` | `arguments` | |
+| `sourceAnchor` | `FamixTSourceAnchor` | `element` | SourceAnchor entity linking to the original source code for this entity|
+| `typedEntities` | `FamixTTypedEntity` | `declaredType` | Entities that have this type as declaredType|
+
 
 ## Properties
 ======================
 
-- Named: #isStub Type: Boolean Comment: Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.
-- Named: #name Type: String Comment: Basic name of the entity, not full reference.
+| Name | Type | Comment |
+| `isStub` | Boolean | Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.|
+| `name` | String | Basic name of the entity, not full reference.|
 
 "
 Class {

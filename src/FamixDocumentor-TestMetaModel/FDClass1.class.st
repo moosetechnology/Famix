@@ -3,7 +3,9 @@
 ======================
 
 ### Other
-- Relation: #myTrait Type: #FDTrait4 Opposite: #class1
+| Relation | Type | Opposite | Comment |
+| `myTrait` | `FDTrait4` | `class1` | |
+
 
 
 "

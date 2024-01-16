@@ -3,7 +3,9 @@
 ======================
 
 ### Parents
-- Relation: #parentModule Type: #FamixTModule Opposite: #moduleEntities Comment: Module that contains the definition of this entity
+| Relation | Type | Opposite | Comment |
+| `parentModule` | `FamixTModule` | `moduleEntities` | Module that contains the definition of this entity|
+
 
 
 "

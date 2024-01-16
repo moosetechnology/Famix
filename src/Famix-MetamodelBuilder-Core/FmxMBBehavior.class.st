@@ -146,26 +146,26 @@ FmxMBBehavior >> commentWithRelations [
 							  aStream
 								  nextPutAll: '### ';
 								  nextPutAll: relationKind;
+								  cr;
+								  nextPutAll: '| Relation | Type | Opposite | Comment |';
 								  cr.
-
 							  (parents sorted: [ :parent | parent side generationStrategy relationSide name ] ascending) do: [ :parent |
 								  | strategy |
 								  strategy := parent side generationStrategy.
 
 								  aStream
-									  nextPutAll: '- Relation: #';
+									  nextPutAll: '| `';
 									  nextPutAll: strategy relationSide name;
-									  nextPutAll: ' Type: #';
+									  nextPutAll: '` | `';
 									  nextPutAll: strategy relationSide oppositeType;
-									  nextPutAll: ' Opposite: #';
-									  nextPutAll: strategy relationSide oppositeName.
+									  nextPutAll: '` | `';
+									  nextPutAll: strategy relationSide oppositeName;
+									  nextPutAll: '` | ';
+									  nextPutAll: strategy relationSide comment;
+									  nextPut: $|;
+									  cr ].
 
-								  strategy relationSide comment ifNotEmpty: [ :com |
-									  aStream
-										  nextPutAll: ' Comment: ';
-										  nextPutAll: com ].
-
-								  aStream cr ] ] ].
+							  aStream cr ] ].
 			  aStream cr ].
 
 		  (self allProperties reject: [ :p | p isRelation ]) ifNotEmpty: [ :props |
@@ -173,20 +173,20 @@ FmxMBBehavior >> commentWithRelations [
 				  nextPutAll: '## Properties
 ======================';
 				  cr;
+				  cr;
+				  nextPutAll: '| Name | Type | Comment |';
 				  cr.
 
 			  (props sorted: #name ascending) do: [ :property |
 				  aStream
-					  nextPutAll: '- Named: #';
+					  nextPutAll: '| `';
 					  nextPutAll: property name;
-					  nextPutAll: ' Type: ';
-					  nextPutAll: property propertyType.
-
-				  property comment ifNotEmpty: [ :com |
-					  aStream
-						  nextPutAll: ' Comment: ';
-						  nextPutAll: com ].
-				  aStream cr ] ] ]
+					  nextPutAll: '` | ';
+					  nextPutAll: property propertyType;
+					  nextPutAll: ' | ';
+					  nextPutAll: property comment;
+					  nextPut: $|;
+					  cr ] ] ]
 ]
 
 { #category : #'settings - default' }

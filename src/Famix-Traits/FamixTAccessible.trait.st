@@ -3,7 +3,9 @@
 ======================
 
 ### Incoming dependencies
-- Relation: #incomingAccesses Type: #FamixTAccess Opposite: #variable Comment: All Famix accesses pointing to this structural entity
+| Relation | Type | Opposite | Comment |
+| `incomingAccesses` | `FamixTAccess` | `variable` | All Famix accesses pointing to this structural entity|
+
 
 
 "

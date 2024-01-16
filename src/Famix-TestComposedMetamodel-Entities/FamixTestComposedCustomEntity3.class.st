@@ -3,8 +3,10 @@
 ======================
 
 ### Other
-- Relation: #c23 Type: #FamixTestComposed2CustomEntity3 Opposite: #c3s
-- Relation: #customEntity3 Type: #FamixTestComposed1CustomEntity3 Opposite: #customEntities3
+| Relation | Type | Opposite | Comment |
+| `c23` | `FamixTestComposed2CustomEntity3` | `c3s` | |
+| `customEntity3` | `FamixTestComposed1CustomEntity3` | `customEntities3` | |
+
 
 
 "

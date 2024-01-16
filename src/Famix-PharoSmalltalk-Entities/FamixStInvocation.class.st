@@ -3,20 +3,27 @@
 ======================
 
 ### Association source
-- Relation: #sender Type: #FamixTWithInvocations Opposite: #outgoingInvocations Comment: Behavioural entity making the call. from-side of the association
+| Relation | Type | Opposite | Comment |
+| `sender` | `FamixTWithInvocations` | `outgoingInvocations` | Behavioural entity making the call. from-side of the association|
+
 ### Association target
-- Relation: #candidates Type: #FamixTInvocable Opposite: #incomingInvocations Comment: List of candidate behavioural entities for receiving the invocation
+| Relation | Type | Opposite | Comment |
+| `candidates` | `FamixTInvocable` | `incomingInvocations` | List of candidate behavioural entities for receiving the invocation|
+
 ### Other
-- Relation: #next Type: #FamixTAssociation Opposite: #previous Comment: Next association in an ordered collection of associations. Currently not supported by the Moose importer
-- Relation: #previous Type: #FamixTAssociation Opposite: #next Comment: Previous association in an ordered collection of associations. Currently not supported by the Moose importer
-- Relation: #receiver Type: #FamixTInvocationsReceiver Opposite: #receivingInvocations Comment: Named entity (variable, class...) receiving the invocation. to-side of the association
-- Relation: #sourceAnchor Type: #FamixTSourceAnchor Opposite: #element Comment: SourceAnchor entity linking to the original source code for this entity
+| Relation | Type | Opposite | Comment |
+| `next` | `FamixTAssociation` | `previous` | Next association in an ordered collection of associations. Currently not supported by the Moose importer|
+| `previous` | `FamixTAssociation` | `next` | Previous association in an ordered collection of associations. Currently not supported by the Moose importer|
+| `receiver` | `FamixTInvocationsReceiver` | `receivingInvocations` | Named entity (variable, class...) receiving the invocation. to-side of the association|
+| `sourceAnchor` | `FamixTSourceAnchor` | `element` | SourceAnchor entity linking to the original source code for this entity|
+
 
 ## Properties
 ======================
 
-- Named: #isStub Type: Boolean Comment: Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.
-- Named: #signature Type: String Comment: Signature of the message being sent
+| Name | Type | Comment |
+| `isStub` | Boolean | Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.|
+| `signature` | String | Signature of the message being sent|
 
 "
 Class {

@@ -3,9 +3,13 @@
 ======================
 
 ### Outgoing dependencies
-- Relation: #superInheritances Type: #FamixTInheritance Opposite: #subclass Comment: Superinheritance relationships, i.e. known superclasses of this type.
+| Relation | Type | Opposite | Comment |
+| `superInheritances` | `FamixTInheritance` | `subclass` | Superinheritance relationships, i.e. known superclasses of this type.|
+
 ### Incoming dependencies
-- Relation: #subInheritances Type: #FamixTInheritance Opposite: #superclass Comment: Subinheritance relationships, i.e. known subclasses of this type.
+| Relation | Type | Opposite | Comment |
+| `subInheritances` | `FamixTInheritance` | `superclass` | Subinheritance relationships, i.e. known subclasses of this type.|
+
 
 
 "

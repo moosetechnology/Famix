@@ -3,7 +3,9 @@
 ======================
 
 ### Incoming dependencies
-- Relation: #incomingReferences Type: #FamixTReference Opposite: #referredType Comment: References to this entity by other entities.
+| Relation | Type | Opposite | Comment |
+| `incomingReferences` | `FamixTReference` | `referredType` | References to this entity by other entities.|
+
 
 
 "

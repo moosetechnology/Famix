@@ -3,7 +3,9 @@
 ======================
 
 ### Other
-- Relation: #receivingInvocations Type: #FamixTInvocation Opposite: #receiver Comment: List of invocations performed on this entity (considered as the receiver)
+| Relation | Type | Opposite | Comment |
+| `receivingInvocations` | `FamixTInvocation` | `receiver` | List of invocations performed on this entity (considered as the receiver)|
+
 
 
 "

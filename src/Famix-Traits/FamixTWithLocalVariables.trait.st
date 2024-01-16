@@ -3,7 +3,9 @@
 ======================
 
 ### Children
-- Relation: #localVariables Type: #FamixTLocalVariable Opposite: #parentBehaviouralEntity Comment: Variables locally defined by this behaviour.
+| Relation | Type | Opposite | Comment |
+| `localVariables` | `FamixTLocalVariable` | `parentBehaviouralEntity` | Variables locally defined by this behaviour.|
+
 
 
 "

@@ -3,7 +3,9 @@
 ======================
 
 ### Children
-- Relation: #enumValues Type: #FamixTEnumValue Opposite: #parentEnum
+| Relation | Type | Opposite | Comment |
+| `enumValues` | `FamixTEnumValue` | `parentEnum` | |
+
 
 
 "

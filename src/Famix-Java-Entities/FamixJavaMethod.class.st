@@ -3,38 +3,49 @@
 ======================
 
 ### Parents
-- Relation: #parentType Type: #FamixTWithMethods Opposite: #methods Comment: Type declaring the method. It provides the implementation for belongsTo.
+| Relation | Type | Opposite | Comment |
+| `parentType` | `FamixTWithMethods` | `methods` | Type declaring the method. It provides the implementation for belongsTo.|
+
 ### Children
-- Relation: #implicitVariables Type: #FamixTImplicitVariable Opposite: #parentBehaviouralEntity Comment: Implicit variables used locally by this behaviour.
-- Relation: #localVariables Type: #FamixTLocalVariable Opposite: #parentBehaviouralEntity Comment: Variables locally defined by this behaviour.
-- Relation: #parameters Type: #FamixTParameter Opposite: #parentBehaviouralEntity Comment: List of formal parameters declared by this behaviour.
+| Relation | Type | Opposite | Comment |
+| `implicitVariables` | `FamixTImplicitVariable` | `parentBehaviouralEntity` | Implicit variables used locally by this behaviour.|
+| `localVariables` | `FamixTLocalVariable` | `parentBehaviouralEntity` | Variables locally defined by this behaviour.|
+| `parameters` | `FamixTParameter` | `parentBehaviouralEntity` | List of formal parameters declared by this behaviour.|
+
 ### Outgoing dependencies
-- Relation: #accesses Type: #FamixTAccess Opposite: #accessor Comment: Accesses to variables made by this behaviour.
-- Relation: #outgoingInvocations Type: #FamixTInvocation Opposite: #sender Comment: Outgoing invocations sent by this behaviour.
-- Relation: #outgoingReferences Type: #FamixTReference Opposite: #referencer Comment: References from this entity to other entities.
+| Relation | Type | Opposite | Comment |
+| `accesses` | `FamixTAccess` | `accessor` | Accesses to variables made by this behaviour.|
+| `outgoingInvocations` | `FamixTInvocation` | `sender` | Outgoing invocations sent by this behaviour.|
+| `outgoingReferences` | `FamixTReference` | `referencer` | References from this entity to other entities.|
+
 ### Incoming dependencies
-- Relation: #incomingImports Type: #FamixTImport Opposite: #importedEntity Comment: List of imports of this entity
-- Relation: #incomingInvocations Type: #FamixTInvocation Opposite: #candidates Comment: Incoming invocations from other behaviours computed by the candidate operator.
+| Relation | Type | Opposite | Comment |
+| `incomingImports` | `FamixTImport` | `importedEntity` | List of imports of this entity|
+| `incomingInvocations` | `FamixTInvocation` | `candidates` | Incoming invocations from other behaviours computed by the candidate operator.|
+
 ### Other
-- Relation: #caughtExceptions Type: #FamixTException Opposite: #catchingEntities Comment: The exceptions caught by the method
-- Relation: #comments Type: #FamixTComment Opposite: #commentedEntity Comment: List of comments for the entity
-- Relation: #declaredExceptions Type: #FamixTException Opposite: #declaringEntities Comment: The exceptions declared by the method
-- Relation: #declaredType Type: #FamixTType Opposite: #typedEntities Comment: Type of the entity, if any
-- Relation: #sourceAnchor Type: #FamixTSourceAnchor Opposite: #element Comment: SourceAnchor entity linking to the original source code for this entity
-- Relation: #thrownExceptions Type: #FamixTException Opposite: #throwingEntities Comment: The exceptions thrown by the method
+| Relation | Type | Opposite | Comment |
+| `caughtExceptions` | `FamixTException` | `catchingEntities` | The exceptions caught by the method|
+| `comments` | `FamixTComment` | `commentedEntity` | List of comments for the entity|
+| `declaredExceptions` | `FamixTException` | `declaringEntities` | The exceptions declared by the method|
+| `declaredType` | `FamixTType` | `typedEntities` | Type of the entity, if any|
+| `sourceAnchor` | `FamixTSourceAnchor` | `element` | SourceAnchor entity linking to the original source code for this entity|
+| `thrownExceptions` | `FamixTException` | `throwingEntities` | The exceptions thrown by the method|
+
 
 ## Properties
 ======================
 
-- Named: #isAbstract Type: Boolean Comment: Entity can be declared abstract
-- Named: #isClassSide Type: Boolean Comment: Entity can be declared class side i.e. static
-- Named: #isFinal Type: Boolean Comment: Entity can be declared final
-- Named: #isStub Type: Boolean Comment: Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.
-- Named: #isSynchronized Type: Boolean Comment: Entity can be declared synchronized
-- Named: #kind Type: String Comment: Tag indicating a setter, getter, constant, constructor method
-- Named: #name Type: String Comment: Basic name of the entity, not full reference.
-- Named: #signature Type: String Comment: Signature of the message being sent
-- Named: #visibility Type: String Comment: Visibility of the entity
+| Name | Type | Comment |
+| `isAbstract` | Boolean | Entity can be declared abstract|
+| `isClassSide` | Boolean | Entity can be declared class side i.e. static|
+| `isFinal` | Boolean | Entity can be declared final|
+| `isStub` | Boolean | Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.|
+| `isSynchronized` | Boolean | Entity can be declared synchronized|
+| `kind` | String | Tag indicating a setter, getter, constant, constructor method|
+| `name` | String | Basic name of the entity, not full reference.|
+| `signature` | String | Signature of the message being sent|
+| `visibility` | String | Visibility of the entity|
 
 "
 Class {

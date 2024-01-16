@@ -3,7 +3,9 @@
 ======================
 
 ### Other
-- Relation: #method Type: #FamixTestComposed1Method Opposite: #standardEntity
+| Relation | Type | Opposite | Comment |
+| `method` | `FamixTestComposed1Method` | `standardEntity` | |
+
 
 
 "

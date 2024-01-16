@@ -3,7 +3,9 @@
 ======================
 
 ### Children
-- Relation: #implicitVariables Type: #FamixTImplicitVariable Opposite: #parentBehaviouralEntity Comment: Implicit variables used locally by this behaviour.
+| Relation | Type | Opposite | Comment |
+| `implicitVariables` | `FamixTImplicitVariable` | `parentBehaviouralEntity` | Implicit variables used locally by this behaviour.|
+
 
 
 "

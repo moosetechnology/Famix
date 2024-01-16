@@ -3,7 +3,9 @@
 ======================
 
 ### Outgoing dependencies
-- Relation: #accesses Type: #FamixTAccess Opposite: #accessor Comment: Accesses to variables made by this behaviour.
+| Relation | Type | Opposite | Comment |
+| `accesses` | `FamixTAccess` | `accessor` | Accesses to variables made by this behaviour.|
+
 
 
 "

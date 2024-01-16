@@ -5,12 +5,15 @@ FamixTSourcedEntity models any fact in a program source and it is the superclass
 ======================
 
 ### Other
-- Relation: #sourceAnchor Type: #FamixTSourceAnchor Opposite: #element Comment: SourceAnchor entity linking to the original source code for this entity
+| Relation | Type | Opposite | Comment |
+| `sourceAnchor` | `FamixTSourceAnchor` | `element` | SourceAnchor entity linking to the original source code for this entity|
+
 
 ## Properties
 ======================
 
-- Named: #isStub Type: Boolean Comment: Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.
+| Name | Type | Comment |
+| `isStub` | Boolean | Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.|
 
 "
 Trait {

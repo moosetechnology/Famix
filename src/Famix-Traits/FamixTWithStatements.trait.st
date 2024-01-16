@@ -3,16 +3,21 @@
 ======================
 
 ### Outgoing dependencies
-- Relation: #accesses Type: #FamixTAccess Opposite: #accessor Comment: Accesses to variables made by this behaviour.
-- Relation: #outgoingInvocations Type: #FamixTInvocation Opposite: #sender Comment: Outgoing invocations sent by this behaviour.
-- Relation: #outgoingReferences Type: #FamixTReference Opposite: #referencer Comment: References from this entity to other entities.
+| Relation | Type | Opposite | Comment |
+| `accesses` | `FamixTAccess` | `accessor` | Accesses to variables made by this behaviour.|
+| `outgoingInvocations` | `FamixTInvocation` | `sender` | Outgoing invocations sent by this behaviour.|
+| `outgoingReferences` | `FamixTReference` | `referencer` | References from this entity to other entities.|
+
 ### Other
-- Relation: #sourceAnchor Type: #FamixTSourceAnchor Opposite: #element Comment: SourceAnchor entity linking to the original source code for this entity
+| Relation | Type | Opposite | Comment |
+| `sourceAnchor` | `FamixTSourceAnchor` | `element` | SourceAnchor entity linking to the original source code for this entity|
+
 
 ## Properties
 ======================
 
-- Named: #isStub Type: Boolean Comment: Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.
+| Name | Type | Comment |
+| `isStub` | Boolean | Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.|
 
 "
 Trait {

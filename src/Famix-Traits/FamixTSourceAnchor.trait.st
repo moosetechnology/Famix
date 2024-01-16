@@ -5,7 +5,9 @@ FamixTSourceAnchor is an abstract class representing a pointer to a source. The 
 ======================
 
 ### Other
-- Relation: #element Type: #FamixTSourceEntity Opposite: #sourceAnchor Comment: Enable the accessibility to the famix entity that this class is a source pointer for
+| Relation | Type | Opposite | Comment |
+| `element` | `FamixTSourceEntity` | `sourceAnchor` | Enable the accessibility to the famix entity that this class is a source pointer for|
+
 
 
 "

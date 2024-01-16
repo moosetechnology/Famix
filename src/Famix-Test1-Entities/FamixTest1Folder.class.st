@@ -3,9 +3,13 @@
 ======================
 
 ### Parents
-- Relation: #parentFolder Type: #FamixTFolder Opposite: #childrenFileSystemEntities Comment: Folder entity containing this file.
+| Relation | Type | Opposite | Comment |
+| `parentFolder` | `FamixTFolder` | `childrenFileSystemEntities` | Folder entity containing this file.|
+
 ### Children
-- Relation: #childrenFileSystemEntities Type: #FamixTFileSystemEntity Opposite: #parentFolder Comment: List of entities contained in this folder.
+| Relation | Type | Opposite | Comment |
+| `childrenFileSystemEntities` | `FamixTFileSystemEntity` | `parentFolder` | List of entities contained in this folder.|
+
 
 
 "

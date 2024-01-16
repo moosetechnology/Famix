@@ -3,7 +3,9 @@
 ======================
 
 ### Other
-- Relation: #dereferencedInvocations Type: #FamixTDereferencedInvocation Opposite: #referencer Comment: List of invocations performed on BehaviouralEntities referenced by this entity
+| Relation | Type | Opposite | Comment |
+| `dereferencedInvocations` | `FamixTDereferencedInvocation` | `referencer` | List of invocations performed on BehaviouralEntities referenced by this entity|
+
 
 
 "

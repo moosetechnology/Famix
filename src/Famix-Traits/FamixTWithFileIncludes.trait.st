@@ -3,8 +3,10 @@
 ======================
 
 ### Other
-- Relation: #incomingIncludeRelations Type: #FamixTFileInclude Opposite: #target Comment: The include entities that have this file as a target.
-- Relation: #outgoingIncludeRelations Type: #FamixTFileInclude Opposite: #source Comment: The include entities that have this file as a source.
+| Relation | Type | Opposite | Comment |
+| `incomingIncludeRelations` | `FamixTFileInclude` | `target` | The include entities that have this file as a target.|
+| `outgoingIncludeRelations` | `FamixTFileInclude` | `source` | The include entities that have this file as a source.|
+
 
 
 "

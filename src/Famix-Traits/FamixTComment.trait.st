@@ -5,12 +5,15 @@ FamixTComment represents one instance of a comment (in the sense of programming 
 ======================
 
 ### Other
-- Relation: #commentedEntity Type: #FamixTWithComments Opposite: #comments Comment: Source code commented by the comment
+| Relation | Type | Opposite | Comment |
+| `commentedEntity` | `FamixTWithComments` | `comments` | Source code commented by the comment|
+
 
 ## Properties
 ======================
 
-- Named: #content Type: String Comment: Content of the comment as a String
+| Name | Type | Comment |
+| `content` | String | Content of the comment as a String|
 
 "
 Trait {

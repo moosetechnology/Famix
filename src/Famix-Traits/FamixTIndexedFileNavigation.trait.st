@@ -2,11 +2,12 @@
 ## Properties
 ======================
 
-- Named: #correspondingFile Type: FamixTFile Comment: File associated to this source anchor
-- Named: #encoding Type: String Comment: A string representing the encoding of a file
-- Named: #endPos Type: Number Comment: Stop position in the source
-- Named: #fileName Type: String Comment: Name of the source file
-- Named: #startPos Type: Number Comment: Start position in the source
+| Name | Type | Comment |
+| `correspondingFile` | FamixTFile | File associated to this source anchor|
+| `encoding` | String | A string representing the encoding of a file|
+| `endPos` | Number | Stop position in the source|
+| `fileName` | String | Name of the source file|
+| `startPos` | Number | Start position in the source|
 
 "
 Trait {

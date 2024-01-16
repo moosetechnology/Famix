@@ -3,35 +3,46 @@
 ======================
 
 ### Parents
-- Relation: #parentPackage Type: #FamixTPackage Opposite: #childEntities Comment: Package containing the entity in the code structure (if applicable)
-- Relation: #parentType Type: #FamixTWithMethods Opposite: #methods Comment: Type declaring the method. It provides the implementation for belongsTo.
+| Relation | Type | Opposite | Comment |
+| `parentPackage` | `FamixTPackage` | `childEntities` | Package containing the entity in the code structure (if applicable)|
+| `parentType` | `FamixTWithMethods` | `methods` | Type declaring the method. It provides the implementation for belongsTo.|
+
 ### Children
-- Relation: #definedAnnotationTypes Type: #FamixTAnnotationType Opposite: #annotationTypesContainer Comment: The container in which the AnnotationTypes may be declared
-- Relation: #implicitVariables Type: #FamixTImplicitVariable Opposite: #parentBehaviouralEntity Comment: Implicit variables used locally by this behaviour.
-- Relation: #localVariables Type: #FamixTLocalVariable Opposite: #parentBehaviouralEntity Comment: Variables locally defined by this behaviour.
-- Relation: #parameters Type: #FamixTParameter Opposite: #parentBehaviouralEntity Comment: List of formal parameters declared by this behaviour.
+| Relation | Type | Opposite | Comment |
+| `definedAnnotationTypes` | `FamixTAnnotationType` | `annotationTypesContainer` | The container in which the AnnotationTypes may be declared|
+| `implicitVariables` | `FamixTImplicitVariable` | `parentBehaviouralEntity` | Implicit variables used locally by this behaviour.|
+| `localVariables` | `FamixTLocalVariable` | `parentBehaviouralEntity` | Variables locally defined by this behaviour.|
+| `parameters` | `FamixTParameter` | `parentBehaviouralEntity` | List of formal parameters declared by this behaviour.|
+
 ### Outgoing dependencies
-- Relation: #accesses Type: #FamixTAccess Opposite: #accessor Comment: Accesses to variables made by this behaviour.
-- Relation: #outgoingInvocations Type: #FamixTInvocation Opposite: #sender Comment: Outgoing invocations sent by this behaviour.
-- Relation: #outgoingReferences Type: #FamixTReference Opposite: #referencer Comment: References from this entity to other entities.
+| Relation | Type | Opposite | Comment |
+| `accesses` | `FamixTAccess` | `accessor` | Accesses to variables made by this behaviour.|
+| `outgoingInvocations` | `FamixTInvocation` | `sender` | Outgoing invocations sent by this behaviour.|
+| `outgoingReferences` | `FamixTReference` | `referencer` | References from this entity to other entities.|
+
 ### Incoming dependencies
-- Relation: #incomingInvocations Type: #FamixTInvocation Opposite: #candidates Comment: Incoming invocations from other behaviours computed by the candidate operator.
+| Relation | Type | Opposite | Comment |
+| `incomingInvocations` | `FamixTInvocation` | `candidates` | Incoming invocations from other behaviours computed by the candidate operator.|
+
 ### Other
-- Relation: #annotationInstances Type: #FamixTAnnotationInstance Opposite: #annotatedEntity Comment: This property corresponds to the set of annotations associated to the entity
-- Relation: #comments Type: #FamixTComment Opposite: #commentedEntity Comment: List of comments for the entity
-- Relation: #declaredType Type: #FamixTType Opposite: #typedEntities Comment: Type of the entity, if any
-- Relation: #sourceAnchor Type: #FamixTSourceAnchor Opposite: #element Comment: SourceAnchor entity linking to the original source code for this entity
+| Relation | Type | Opposite | Comment |
+| `annotationInstances` | `FamixTAnnotationInstance` | `annotatedEntity` | This property corresponds to the set of annotations associated to the entity|
+| `comments` | `FamixTComment` | `commentedEntity` | List of comments for the entity|
+| `declaredType` | `FamixTType` | `typedEntities` | Type of the entity, if any|
+| `sourceAnchor` | `FamixTSourceAnchor` | `element` | SourceAnchor entity linking to the original source code for this entity|
+
 
 ## Properties
 ======================
 
-- Named: #isAbstract Type: Boolean Comment: Entity can be declared abstract
-- Named: #isClassSide Type: Boolean Comment: Entity can be declared class side i.e. static
-- Named: #isStub Type: Boolean Comment: Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.
-- Named: #kind Type: String Comment: Tag indicating a setter, getter, constant, constructor method
-- Named: #name Type: String Comment: Basic name of the entity, not full reference.
-- Named: #protocol Type: String Comment: Protocol of the method
-- Named: #signature Type: String Comment: Signature of the message being sent
+| Name | Type | Comment |
+| `isAbstract` | Boolean | Entity can be declared abstract|
+| `isClassSide` | Boolean | Entity can be declared class side i.e. static|
+| `isStub` | Boolean | Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.|
+| `kind` | String | Tag indicating a setter, getter, constant, constructor method|
+| `name` | String | Basic name of the entity, not full reference.|
+| `protocol` | String | Protocol of the method|
+| `signature` | String | Signature of the message being sent|
 
 "
 Class {

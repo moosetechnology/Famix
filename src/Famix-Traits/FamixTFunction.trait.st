@@ -5,24 +5,33 @@ FamixTFunction represents a behavioural entity in a procedural language.
 ======================
 
 ### Parents
-- Relation: #functionOwner Type: #FamixTWithFunctions Opposite: #functions Comment: The container defining the function. The function is placed in a container, because certain languages can nest functions in functions.
+| Relation | Type | Opposite | Comment |
+| `functionOwner` | `FamixTWithFunctions` | `functions` | The container defining the function. The function is placed in a container, because certain languages can nest functions in functions.|
+
 ### Children
-- Relation: #localVariables Type: #FamixTLocalVariable Opposite: #parentBehaviouralEntity Comment: Variables locally defined by this behaviour.
-- Relation: #parameters Type: #FamixTParameter Opposite: #parentBehaviouralEntity Comment: List of formal parameters declared by this behaviour.
+| Relation | Type | Opposite | Comment |
+| `localVariables` | `FamixTLocalVariable` | `parentBehaviouralEntity` | Variables locally defined by this behaviour.|
+| `parameters` | `FamixTParameter` | `parentBehaviouralEntity` | List of formal parameters declared by this behaviour.|
+
 ### Outgoing dependencies
-- Relation: #accesses Type: #FamixTAccess Opposite: #accessor Comment: Accesses to variables made by this behaviour.
-- Relation: #outgoingInvocations Type: #FamixTInvocation Opposite: #sender Comment: Outgoing invocations sent by this behaviour.
-- Relation: #outgoingReferences Type: #FamixTReference Opposite: #referencer Comment: References from this entity to other entities.
+| Relation | Type | Opposite | Comment |
+| `accesses` | `FamixTAccess` | `accessor` | Accesses to variables made by this behaviour.|
+| `outgoingInvocations` | `FamixTInvocation` | `sender` | Outgoing invocations sent by this behaviour.|
+| `outgoingReferences` | `FamixTReference` | `referencer` | References from this entity to other entities.|
+
 ### Other
-- Relation: #declaredType Type: #FamixTType Opposite: #typedEntities Comment: Type of the entity, if any
-- Relation: #sourceAnchor Type: #FamixTSourceAnchor Opposite: #element Comment: SourceAnchor entity linking to the original source code for this entity
+| Relation | Type | Opposite | Comment |
+| `declaredType` | `FamixTType` | `typedEntities` | Type of the entity, if any|
+| `sourceAnchor` | `FamixTSourceAnchor` | `element` | SourceAnchor entity linking to the original source code for this entity|
+
 
 ## Properties
 ======================
 
-- Named: #isStub Type: Boolean Comment: Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.
-- Named: #name Type: String Comment: Basic name of the entity, not full reference.
-- Named: #signature Type: String Comment: Signature of the message being sent
+| Name | Type | Comment |
+| `isStub` | Boolean | Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.|
+| `name` | String | Basic name of the entity, not full reference.|
+| `signature` | String | Signature of the message being sent|
 
 "
 Trait {

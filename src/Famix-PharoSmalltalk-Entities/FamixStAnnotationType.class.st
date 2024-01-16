@@ -3,12 +3,18 @@
 ======================
 
 ### Parents
-- Relation: #annotationTypesContainer Type: #FamixTWithAnnotationTypes Opposite: #definedAnnotationTypes Comment: Container in which an AnnotationType may reside
-- Relation: #parentPackage Type: #FamixTPackage Opposite: #childEntities Comment: Package containing the entity in the code structure (if applicable)
+| Relation | Type | Opposite | Comment |
+| `annotationTypesContainer` | `FamixTWithAnnotationTypes` | `definedAnnotationTypes` | Container in which an AnnotationType may reside|
+| `parentPackage` | `FamixTPackage` | `childEntities` | Package containing the entity in the code structure (if applicable)|
+
 ### Children
-- Relation: #attributes Type: #FamixTAttribute Opposite: #parentType Comment: List of attributes declared by this type.
+| Relation | Type | Opposite | Comment |
+| `attributes` | `FamixTAttribute` | `parentType` | List of attributes declared by this type.|
+
 ### Other
-- Relation: #instances Type: #FamixTTypedAnnotationInstance Opposite: #annotationType Comment: Annotations of this type
+| Relation | Type | Opposite | Comment |
+| `instances` | `FamixTTypedAnnotationInstance` | `annotationType` | Annotations of this type|
+
 
 
 "

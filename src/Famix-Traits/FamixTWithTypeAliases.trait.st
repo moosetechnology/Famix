@@ -3,7 +3,9 @@
 ======================
 
 ### Other
-- Relation: #typeAliases Type: #FamixTTypeAlias Opposite: #aliasedType Comment: Aliases
+| Relation | Type | Opposite | Comment |
+| `typeAliases` | `FamixTTypeAlias` | `aliasedType` | Aliases|
+
 
 
 "

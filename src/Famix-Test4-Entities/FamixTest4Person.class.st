@@ -3,7 +3,9 @@
 ======================
 
 ### Children
-- Relation: #books Type: #FamixTest4Book Opposite: #person
+| Relation | Type | Opposite | Comment |
+| `books` | `FamixTest4Book` | `person` | |
+
 
 
 "

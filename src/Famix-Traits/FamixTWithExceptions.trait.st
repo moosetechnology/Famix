@@ -3,9 +3,11 @@
 ======================
 
 ### Other
-- Relation: #caughtExceptions Type: #FamixTException Opposite: #catchingEntities Comment: The exceptions caught by the method
-- Relation: #declaredExceptions Type: #FamixTException Opposite: #declaringEntities Comment: The exceptions declared by the method
-- Relation: #thrownExceptions Type: #FamixTException Opposite: #throwingEntities Comment: The exceptions thrown by the method
+| Relation | Type | Opposite | Comment |
+| `caughtExceptions` | `FamixTException` | `catchingEntities` | The exceptions caught by the method|
+| `declaredExceptions` | `FamixTException` | `declaringEntities` | The exceptions declared by the method|
+| `thrownExceptions` | `FamixTException` | `throwingEntities` | The exceptions thrown by the method|
+
 
 
 "

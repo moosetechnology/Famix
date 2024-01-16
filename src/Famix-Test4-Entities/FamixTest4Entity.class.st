@@ -2,7 +2,8 @@
 ## Properties
 ======================
 
-- Named: #name Type: String
+| Name | Type | Comment |
+| `name` | String | |
 
 "
 Class {

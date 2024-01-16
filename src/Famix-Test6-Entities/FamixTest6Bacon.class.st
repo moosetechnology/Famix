@@ -2,8 +2,9 @@
 ## Properties
 ======================
 
-- Named: #eggs Type: Number
-- Named: #isFood Type: Boolean
+| Name | Type | Comment |
+| `eggs` | Number | |
+| `isFood` | Boolean | |
 
 "
 Class {

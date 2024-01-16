@@ -8,7 +8,9 @@ Instance Variables:
 ======================
 
 ### Other
-- Relation: #aliasedType Type: #FamixTWithTypeAliases Opposite: #typeAliases Comment: Points to the actual type.
+| Relation | Type | Opposite | Comment |
+| `aliasedType` | `FamixTWithTypeAliases` | `typeAliases` | Points to the actual type.|
+
 
 
 "

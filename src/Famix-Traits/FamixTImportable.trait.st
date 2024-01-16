@@ -3,7 +3,9 @@
 ======================
 
 ### Incoming dependencies
-- Relation: #incomingImports Type: #FamixTImport Opposite: #importedEntity Comment: List of imports of this entity
+| Relation | Type | Opposite | Comment |
+| `incomingImports` | `FamixTImport` | `importedEntity` | List of imports of this entity|
+
 
 
 "

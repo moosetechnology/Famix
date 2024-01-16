@@ -3,7 +3,9 @@
 ======================
 
 ### Other
-- Relation: #arguments Type: #FamixTParameterizedTypeUser Opposite: #argumentsInParameterizedTypes
+| Relation | Type | Opposite | Comment |
+| `arguments` | `FamixTParameterizedTypeUser` | `argumentsInParameterizedTypes` | |
+
 
 
 "

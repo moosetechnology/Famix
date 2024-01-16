@@ -3,18 +3,25 @@
 ======================
 
 ### Association source
-- Relation: #c25 Type: #FamixTestComposed2CustomEntity5 Opposite: #associations
+| Relation | Type | Opposite | Comment |
+| `c25` | `FamixTestComposed2CustomEntity5` | `associations` | |
+
 ### Association target
-- Relation: #c15 Type: #FamixTestComposed1CustomEntity5 Opposite: #associations
+| Relation | Type | Opposite | Comment |
+| `c15` | `FamixTestComposed1CustomEntity5` | `associations` | |
+
 ### Other
-- Relation: #next Type: #FamixTAssociation Opposite: #previous Comment: Next association in an ordered collection of associations. Currently not supported by the Moose importer
-- Relation: #previous Type: #FamixTAssociation Opposite: #next Comment: Previous association in an ordered collection of associations. Currently not supported by the Moose importer
-- Relation: #sourceAnchor Type: #FamixTSourceAnchor Opposite: #element Comment: SourceAnchor entity linking to the original source code for this entity
+| Relation | Type | Opposite | Comment |
+| `next` | `FamixTAssociation` | `previous` | Next association in an ordered collection of associations. Currently not supported by the Moose importer|
+| `previous` | `FamixTAssociation` | `next` | Previous association in an ordered collection of associations. Currently not supported by the Moose importer|
+| `sourceAnchor` | `FamixTSourceAnchor` | `element` | SourceAnchor entity linking to the original source code for this entity|
+
 
 ## Properties
 ======================
 
-- Named: #isStub Type: Boolean Comment: Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.
+| Name | Type | Comment |
+| `isStub` | Boolean | Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.|
 
 "
 Class {

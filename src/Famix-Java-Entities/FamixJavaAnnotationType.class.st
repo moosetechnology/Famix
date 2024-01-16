@@ -3,23 +3,34 @@
 ======================
 
 ### Parents
-- Relation: #annotationTypesContainer Type: #FamixTWithAnnotationTypes Opposite: #definedAnnotationTypes Comment: Container in which an AnnotationType may reside
-- Relation: #parentPackage Type: #FamixTPackage Opposite: #childEntities Comment: Package containing the entity in the code structure (if applicable)
+| Relation | Type | Opposite | Comment |
+| `annotationTypesContainer` | `FamixTWithAnnotationTypes` | `definedAnnotationTypes` | Container in which an AnnotationType may reside|
+| `parentPackage` | `FamixTPackage` | `childEntities` | Package containing the entity in the code structure (if applicable)|
+
 ### Children
-- Relation: #attributes Type: #FamixTAttribute Opposite: #parentType Comment: List of attributes declared by this type.
+| Relation | Type | Opposite | Comment |
+| `attributes` | `FamixTAttribute` | `parentType` | List of attributes declared by this type.|
+
 ### Outgoing dependencies
-- Relation: #superInheritances Type: #FamixTInheritance Opposite: #subclass Comment: Superinheritance relationships, i.e. known superclasses of this type.
+| Relation | Type | Opposite | Comment |
+| `superInheritances` | `FamixTInheritance` | `subclass` | Superinheritance relationships, i.e. known superclasses of this type.|
+
 ### Incoming dependencies
-- Relation: #implementations Type: #FamixTImplementation Opposite: #interface Comment: Implementation relationships.
-- Relation: #subInheritances Type: #FamixTInheritance Opposite: #superclass Comment: Subinheritance relationships, i.e. known subclasses of this type.
+| Relation | Type | Opposite | Comment |
+| `implementations` | `FamixTImplementation` | `interface` | Implementation relationships.|
+| `subInheritances` | `FamixTInheritance` | `superclass` | Subinheritance relationships, i.e. known subclasses of this type.|
+
 ### Other
-- Relation: #comments Type: #FamixTComment Opposite: #commentedEntity Comment: List of comments for the entity
-- Relation: #instances Type: #FamixTTypedAnnotationInstance Opposite: #annotationType Comment: Annotations of this type
+| Relation | Type | Opposite | Comment |
+| `comments` | `FamixTComment` | `commentedEntity` | List of comments for the entity|
+| `instances` | `FamixTTypedAnnotationInstance` | `annotationType` | Annotations of this type|
+
 
 ## Properties
 ======================
 
-- Named: #visibility Type: String Comment: Visibility of the entity
+| Name | Type | Comment |
+| `visibility` | String | Visibility of the entity|
 
 "
 Class {

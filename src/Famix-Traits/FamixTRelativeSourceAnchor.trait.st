@@ -19,14 +19,17 @@ Internal Representation and Key Implementation Points.
 ======================
 
 ### Other
-- Relation: #element Type: #FamixTSourceEntity Opposite: #sourceAnchor Comment: Enable the accessibility to the famix entity that this class is a source pointer for
+| Relation | Type | Opposite | Comment |
+| `element` | `FamixTSourceEntity` | `sourceAnchor` | Enable the accessibility to the famix entity that this class is a source pointer for|
+
 
 ## Properties
 ======================
 
-- Named: #endPos Type: Number Comment: Stop position in the source
-- Named: #relatedAnchor Type: FamixTSourceAnchor Comment: Source anchor to which I am relative.
-- Named: #startPos Type: Number Comment: Start position in the source
+| Name | Type | Comment |
+| `endPos` | Number | Stop position in the source|
+| `relatedAnchor` | FamixTSourceAnchor | Source anchor to which I am relative.|
+| `startPos` | Number | Start position in the source|
 
 "
 Trait {

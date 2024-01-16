@@ -9,9 +9,13 @@ Instance Variables:
 ======================
 
 ### Parents
-- Relation: #annotationTypesContainer Type: #FamixTWithAnnotationTypes Opposite: #definedAnnotationTypes Comment: Container in which an AnnotationType may reside
+| Relation | Type | Opposite | Comment |
+| `annotationTypesContainer` | `FamixTWithAnnotationTypes` | `definedAnnotationTypes` | Container in which an AnnotationType may reside|
+
 ### Other
-- Relation: #instances Type: #FamixTTypedAnnotationInstance Opposite: #annotationType Comment: Annotations of this type
+| Relation | Type | Opposite | Comment |
+| `instances` | `FamixTTypedAnnotationInstance` | `annotationType` | Annotations of this type|
+
 
 
 "

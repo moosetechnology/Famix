@@ -3,7 +3,9 @@
 ======================
 
 ### Children
-- Relation: #compilationUnit Type: #FamixTCompilationUnit Opposite: #compilationUnitOwner
+| Relation | Type | Opposite | Comment |
+| `compilationUnit` | `FamixTCompilationUnit` | `compilationUnitOwner` | |
+
 
 
 "

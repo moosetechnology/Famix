@@ -3,7 +3,9 @@
 ======================
 
 ### Children
-- Relation: #definedAnnotationTypes Type: #FamixTAnnotationType Opposite: #annotationTypesContainer Comment: The container in which the AnnotationTypes may be declared
+| Relation | Type | Opposite | Comment |
+| `definedAnnotationTypes` | `FamixTAnnotationType` | `annotationTypesContainer` | The container in which the AnnotationTypes may be declared|
+
 
 
 "

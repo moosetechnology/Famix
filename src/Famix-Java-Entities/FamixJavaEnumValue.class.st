@@ -3,19 +3,26 @@
 ======================
 
 ### Parents
-- Relation: #parentEnum Type: #FamixTWithEnumValues Opposite: #enumValues Comment: The Enum declaring this value. It offers the implementation of belongsTo
+| Relation | Type | Opposite | Comment |
+| `parentEnum` | `FamixTWithEnumValues` | `enumValues` | The Enum declaring this value. It offers the implementation of belongsTo|
+
 ### Incoming dependencies
-- Relation: #incomingAccesses Type: #FamixTAccess Opposite: #variable Comment: All Famix accesses pointing to this structural entity
+| Relation | Type | Opposite | Comment |
+| `incomingAccesses` | `FamixTAccess` | `variable` | All Famix accesses pointing to this structural entity|
+
 ### Other
-- Relation: #comments Type: #FamixTComment Opposite: #commentedEntity Comment: List of comments for the entity
-- Relation: #declaredType Type: #FamixTType Opposite: #typedEntities Comment: Type of the entity, if any
-- Relation: #sourceAnchor Type: #FamixTSourceAnchor Opposite: #element Comment: SourceAnchor entity linking to the original source code for this entity
+| Relation | Type | Opposite | Comment |
+| `comments` | `FamixTComment` | `commentedEntity` | List of comments for the entity|
+| `declaredType` | `FamixTType` | `typedEntities` | Type of the entity, if any|
+| `sourceAnchor` | `FamixTSourceAnchor` | `element` | SourceAnchor entity linking to the original source code for this entity|
+
 
 ## Properties
 ======================
 
-- Named: #isStub Type: Boolean Comment: Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.
-- Named: #name Type: String Comment: Basic name of the entity, not full reference.
+| Name | Type | Comment |
+| `isStub` | Boolean | Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.|
+| `name` | String | Basic name of the entity, not full reference.|
 
 "
 Class {

@@ -11,7 +11,8 @@ public class Student implements Serializable{
 ## Properties
 ======================
 
-- Named: #isTransient Type: Boolean Comment: Entity can be declared transient
+| Name | Type | Comment |
+| `isTransient` | Boolean | Entity can be declared transient|
 
 "
 Trait {

@@ -3,19 +3,26 @@
 ======================
 
 ### Association source
-- Relation: #infectable Type: #FamixTest8TInfectable Opposite: #outgoingInfections
+| Relation | Type | Opposite | Comment |
+| `infectable` | `FamixTest8TInfectable` | `outgoingInfections` | |
+
 ### Association target
-- Relation: #infectious Type: #FamixTest8TInfectious Opposite: #incomingInfections
+| Relation | Type | Opposite | Comment |
+| `infectious` | `FamixTest8TInfectious` | `incomingInfections` | |
+
 ### Other
-- Relation: #next Type: #FamixTAssociation Opposite: #previous Comment: Next association in an ordered collection of associations. Currently not supported by the Moose importer
-- Relation: #previous Type: #FamixTAssociation Opposite: #next Comment: Previous association in an ordered collection of associations. Currently not supported by the Moose importer
-- Relation: #sourceAnchor Type: #FamixTSourceAnchor Opposite: #element Comment: SourceAnchor entity linking to the original source code for this entity
+| Relation | Type | Opposite | Comment |
+| `next` | `FamixTAssociation` | `previous` | Next association in an ordered collection of associations. Currently not supported by the Moose importer|
+| `previous` | `FamixTAssociation` | `next` | Previous association in an ordered collection of associations. Currently not supported by the Moose importer|
+| `sourceAnchor` | `FamixTSourceAnchor` | `element` | SourceAnchor entity linking to the original source code for this entity|
+
 
 ## Properties
 ======================
 
-- Named: #isInvasive Type: Boolean
-- Named: #isStub Type: Boolean Comment: Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.
+| Name | Type | Comment |
+| `isInvasive` | Boolean | |
+| `isStub` | Boolean | Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.|
 
 "
 Class {

@@ -3,7 +3,9 @@
 ======================
 
 ### Other
-- Relation: #comments Type: #FamixTComment Opposite: #commentedEntity Comment: List of comments for the entity
+| Relation | Type | Opposite | Comment |
+| `comments` | `FamixTComment` | `commentedEntity` | List of comments for the entity|
+
 
 
 "

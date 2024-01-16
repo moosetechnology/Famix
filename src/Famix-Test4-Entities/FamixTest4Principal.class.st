@@ -3,7 +3,9 @@
 ======================
 
 ### Parents
-- Relation: #school Type: #FamixTest4School Opposite: #principal
+| Relation | Type | Opposite | Comment |
+| `school` | `FamixTest4School` | `principal` | |
+
 
 
 "

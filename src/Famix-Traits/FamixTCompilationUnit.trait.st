@@ -5,10 +5,14 @@ I represent a compilation unit file. Typically a .c or .cpp file
 ======================
 
 ### Parents
-- Relation: #compilationUnitOwner Type: #FamixTWithCompilationUnits Opposite: #compilationUnit Comment: The compilation unit that defines this module
-- Relation: #parentFolder Type: #FamixTFolder Opposite: #childrenFileSystemEntities Comment: Folder entity containing this file.
+| Relation | Type | Opposite | Comment |
+| `compilationUnitOwner` | `FamixTWithCompilationUnits` | `compilationUnit` | The compilation unit that defines this module|
+| `parentFolder` | `FamixTFolder` | `childrenFileSystemEntities` | Folder entity containing this file.|
+
 ### Other
-- Relation: #entities Type: #FamixTWithFiles Opposite: #containerFiles Comment: List of entities defined in the file
+| Relation | Type | Opposite | Comment |
+| `entities` | `FamixTWithFiles` | `containerFiles` | List of entities defined in the file|
+
 
 
 "

@@ -3,7 +3,9 @@
 ======================
 
 ### Outgoing dependencies
-- Relation: #outgoingReferences Type: #FamixTReference Opposite: #referencer Comment: References from this entity to other entities.
+| Relation | Type | Opposite | Comment |
+| `outgoingReferences` | `FamixTReference` | `referencer` | References from this entity to other entities.|
+
 
 
 "

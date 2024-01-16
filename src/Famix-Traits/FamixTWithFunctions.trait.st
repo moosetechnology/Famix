@@ -3,7 +3,9 @@
 ======================
 
 ### Children
-- Relation: #functions Type: #FamixTFunction Opposite: #functionOwner Comment: Functions defined in the container, if any.
+| Relation | Type | Opposite | Comment |
+| `functions` | `FamixTFunction` | `functionOwner` | Functions defined in the container, if any.|
+
 
 
 "

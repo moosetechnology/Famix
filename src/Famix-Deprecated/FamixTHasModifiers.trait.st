@@ -2,7 +2,8 @@
 ## Properties
 ======================
 
-- Named: #modifiers Type: String Comment: Generic container for language dependent modifiers.
+| Name | Type | Comment |
+| `modifiers` | String | Generic container for language dependent modifiers.|
 
 "
 Trait {

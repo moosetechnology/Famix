@@ -3,7 +3,9 @@
 ======================
 
 ### Children
-- Relation: #methods Type: #FamixTMethod Opposite: #parentType Comment: Methods declared by this type.
+| Relation | Type | Opposite | Comment |
+| `methods` | `FamixTMethod` | `parentType` | Methods declared by this type.|
+
 
 
 "

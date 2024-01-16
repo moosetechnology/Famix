@@ -3,7 +3,9 @@
 ======================
 
 ### Other
-- Relation: #annotationTypeAttribute Type: #FamixTAnnotationTypeAttribute Opposite: #annotationAttributeInstances Comment: This corresponds to the type of the attribute in an AnnotationInstance
+| Relation | Type | Opposite | Comment |
+| `annotationTypeAttribute` | `FamixTAnnotationTypeAttribute` | `annotationAttributeInstances` | This corresponds to the type of the attribute in an AnnotationInstance|
+
 
 
 "
