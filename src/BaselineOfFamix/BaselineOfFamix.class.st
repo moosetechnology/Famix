@@ -17,9 +17,12 @@ Class {
 BaselineOfFamix >> baseline: spec [
 
 	<baseline>
-	repository := self packageRepositoryURL.
+	"In P12 the need of this hack got removed and now Metacello is able to give us the URL itself. Once P11 will not be maintained for Moose we can remove this check and the method #packageRepositoryURL we are overriding."
+	repository := SystemVersion current major < 12
+		              ifTrue: [ self packageRepositoryURL ]
+		              ifFalse: [ self packageRepositoryURLForSpec: spec ].
 
-	spec for: #common do: [ 
+	spec for: #common do: [
 		self dependencies: spec.
 		self packages: spec.
 		self groups: spec ]
