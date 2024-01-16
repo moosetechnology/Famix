@@ -8,8 +8,6 @@
 ### Children
 - Relation: #attributes Type: #FamixTAttribute Opposite: #parentType Comment: List of attributes declared by this type.
 - Relation: #methods Type: #FamixTMethod Opposite: #parentType Comment: Methods declared by this type.
-- Relation: #types Type: #FamixTType Opposite: #typeContainer Comment: Types contained (declared) in this entity, if any.
-#types is declared in ContainerEntity because different kinds of container can embed types. Types are usually contained in a Famix.Namespace. But types can also be contained in a Famix.Class or Famix.Method (in Java with inner classes for example). Famix.Function can also contain some types such as structs.
 ### Outgoing dependencies
 - Relation: #superInheritances Type: #FamixTInheritance Opposite: #subclass Comment: Superinheritance relationships, i.e. known superclasses of this type.
 ### Incoming dependencies
@@ -32,8 +30,8 @@
 Class {
 	#name : #FamixStClass,
 	#superclass : #FamixStNamedEntity,
-	#traits : 'FamixTCanBeAbstract + FamixTClass + FamixTClassMetrics + FamixTPackageable + FamixTWithTypes',
-	#classTraits : 'FamixTCanBeAbstract classTrait + FamixTClass classTrait + FamixTClassMetrics classTrait + FamixTPackageable classTrait + FamixTWithTypes classTrait',
+	#traits : 'FamixTCanBeAbstract + FamixTClass + FamixTClassMetrics + FamixTPackageable',
+	#classTraits : 'FamixTCanBeAbstract classTrait + FamixTClass classTrait + FamixTClassMetrics classTrait + FamixTPackageable classTrait',
 	#category : #'Famix-PharoSmalltalk-Entities-Entities'
 }
 
@@ -64,6 +62,13 @@ FamixStClass >> addMethodOverriding: aMethod in: aCollection [
 			detect: [ :method | method signature = aMethod signature ]
 			ifFound: [ :overridingMethod | aCollection add: overridingMethod ]
 			ifNone: [ subClass addMethodOverriding: aMethod in: aCollection ] ]
+]
+
+{ #category : #accessing }
+FamixStClass >> allRecursiveTypes [
+	"We cannot have children types in Smalltalk but this method is useful to compute some metrics."
+
+	^ #(  )
 ]
 
 { #category : #accessing }
