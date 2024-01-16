@@ -10,6 +10,24 @@ There is only one reference which is created when the static method aStaticMetho
 
 
 Note that FamixTReference was defined between two FamixTContainerEntity entities. So, it used to represent dependencies between container entities that are computed from the dependencies of contained entities. For example, references between two packages can be computed from dependencies between classes of the packages.
+
+## Relations
+======================
+
+### Association source
+- Relation: #referencer Type: #FamixTWithReferences Opposite: #outgoingReferences Comment: Source entity making the reference. from-side of the association
+### Association target
+- Relation: #referredType Type: #FamixTReferenceable Opposite: #incomingReferences Comment: Target entity referenced. to-side of the association
+### Other
+- Relation: #next Type: #FamixTAssociation Opposite: #previous Comment: Next association in an ordered collection of associations. Currently not supported by the Moose importer
+- Relation: #previous Type: #FamixTAssociation Opposite: #next Comment: Previous association in an ordered collection of associations. Currently not supported by the Moose importer
+- Relation: #sourceAnchor Type: #FamixTSourceAnchor Opposite: #element Comment: SourceAnchor entity linking to the original source code for this entity
+
+## Properties
+======================
+
+- Named: #isStub Type: Boolean Comment: Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.
+
 "
 Trait {
 	#name : #FamixTReference,

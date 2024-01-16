@@ -1,3 +1,12 @@
+"
+## Relations
+======================
+
+### Outgoing dependencies
+- Relation: #outgoingReferences Type: #FamixTReference Opposite: #referencer Comment: References from this entity to other entities.
+
+
+"
 Trait {
 	#name : #FamixTWithReferences,
 	#instVars : [

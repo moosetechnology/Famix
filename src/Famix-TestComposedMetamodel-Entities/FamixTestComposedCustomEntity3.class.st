@@ -1,3 +1,13 @@
+"
+## Relations
+======================
+
+### Other
+- Relation: #c23 Type: #FamixTestComposed2CustomEntity3 Opposite: #c3s
+- Relation: #customEntity3 Type: #FamixTestComposed1CustomEntity3 Opposite: #customEntities3
+
+
+"
 Class {
 	#name : #FamixTestComposedCustomEntity3,
 	#superclass : #FamixTestComposedEntity,

@@ -1,3 +1,24 @@
+"
+## Relations
+======================
+
+### Parents
+- Relation: #parentPackage Type: #FamixTPackage Opposite: #childEntities Comment: Package containing the entity in the code structure (if applicable)
+### Children
+- Relation: #childEntities Type: #FamixTPackageable Opposite: #parentPackage
+### Incoming dependencies
+- Relation: #incomingImports Type: #FamixTImport Opposite: #importedEntity Comment: List of imports of this entity
+### Other
+- Relation: #comments Type: #FamixTComment Opposite: #commentedEntity Comment: List of comments for the entity
+- Relation: #sourceAnchor Type: #FamixTSourceAnchor Opposite: #element Comment: SourceAnchor entity linking to the original source code for this entity
+
+## Properties
+======================
+
+- Named: #isStub Type: Boolean Comment: Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.
+- Named: #name Type: String Comment: Basic name of the entity, not full reference.
+
+"
 Class {
 	#name : #FamixJavaPackage,
 	#superclass : #FamixJavaContainerEntity,

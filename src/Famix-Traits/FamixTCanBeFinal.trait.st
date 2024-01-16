@@ -1,3 +1,10 @@
+"
+## Properties
+======================
+
+- Named: #isFinal Type: Boolean Comment: Entity can be declared final
+
+"
 Trait {
 	#name : #FamixTCanBeFinal,
 	#instVars : [

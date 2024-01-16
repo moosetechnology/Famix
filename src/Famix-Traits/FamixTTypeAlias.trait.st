@@ -3,6 +3,14 @@ This entity models a typedef in C.
 
 Instance Variables:
 	aliasedType	<ProtoObject | PseudoContext>
+
+## Relations
+======================
+
+### Other
+- Relation: #aliasedType Type: #FamixTWithTypeAliases Opposite: #typeAliases Comment: Points to the actual type.
+
+
 "
 Trait {
 	#name : #FamixTTypeAlias,

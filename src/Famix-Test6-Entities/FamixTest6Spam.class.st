@@ -1,3 +1,10 @@
+"
+## Properties
+======================
+
+- Named: #isSomething Type: Boolean
+
+"
 Class {
 	#name : #FamixTest6Spam,
 	#superclass : #FamixTest6Bacon,

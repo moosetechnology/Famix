@@ -1,3 +1,11 @@
+"
+## Properties
+======================
+
+- Named: #eggs Type: Number
+- Named: #isFood Type: Boolean
+
+"
 Class {
 	#name : #FamixTest6Bacon,
 	#superclass : #FamixTest6Entity,

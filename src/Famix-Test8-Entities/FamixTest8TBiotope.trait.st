@@ -1,3 +1,12 @@
+"
+## Relations
+======================
+
+### Incoming dependencies
+- Relation: #incomingResidences Type: #FamixTest8Residence Opposite: #biotope
+
+
+"
 Trait {
 	#name : #FamixTest8TBiotope,
 	#instVars : [

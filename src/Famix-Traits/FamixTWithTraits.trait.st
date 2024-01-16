@@ -1,3 +1,12 @@
+"
+## Relations
+======================
+
+### Children
+- Relation: #traits Type: #FamixTTrait Opposite: #traitOwner
+
+
+"
 Trait {
 	#name : #FamixTWithTraits,
 	#instVars : [

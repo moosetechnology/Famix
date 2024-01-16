@@ -1,3 +1,12 @@
+"
+## Relations
+======================
+
+### Children
+- Relation: #header Type: #FamixTHeader Opposite: #headerOwner Comment: The header file that defines this module
+
+
+"
 Trait {
 	#name : #FamixTWithHeaders,
 	#instVars : [

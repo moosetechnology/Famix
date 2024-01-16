@@ -1,3 +1,12 @@
+"
+## Relations
+======================
+
+### Children
+- Relation: #methods Type: #FamixTMethod Opposite: #parentType Comment: Methods declared by this type.
+
+
+"
 Trait {
 	#name : #FamixTWithMethods,
 	#instVars : [

@@ -1,5 +1,16 @@
 "
 I represent a compilation unit file. Typically a .c or .cpp file
+
+## Relations
+======================
+
+### Parents
+- Relation: #compilationUnitOwner Type: #FamixTWithCompilationUnits Opposite: #compilationUnit Comment: The compilation unit that defines this module
+- Relation: #parentFolder Type: #FamixTFolder Opposite: #childrenFileSystemEntities Comment: Folder entity containing this file.
+### Other
+- Relation: #entities Type: #FamixTWithFiles Opposite: #containerFiles Comment: List of entities defined in the file
+
+
 "
 Trait {
 	#name : #FamixTCompilationUnit,

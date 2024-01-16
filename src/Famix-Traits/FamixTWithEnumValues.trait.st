@@ -1,3 +1,12 @@
+"
+## Relations
+======================
+
+### Children
+- Relation: #enumValues Type: #FamixTEnumValue Opposite: #parentEnum
+
+
+"
 Trait {
 	#name : #FamixTWithEnumValues,
 	#instVars : [

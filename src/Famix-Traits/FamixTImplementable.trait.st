@@ -1,5 +1,13 @@
 "
 I can be the target of an implementation cf Interface 
+
+## Relations
+======================
+
+### Incoming dependencies
+- Relation: #implementations Type: #FamixTImplementation Opposite: #interface Comment: Implementation relationships.
+
+
 "
 Trait {
 	#name : #FamixTImplementable,

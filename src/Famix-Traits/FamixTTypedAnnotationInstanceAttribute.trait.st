@@ -1,3 +1,12 @@
+"
+## Relations
+======================
+
+### Other
+- Relation: #annotationTypeAttribute Type: #FamixTAnnotationTypeAttribute Opposite: #annotationAttributeInstances Comment: This corresponds to the type of the attribute in an AnnotationInstance
+
+
+"
 Trait {
 	#name : #FamixTTypedAnnotationInstanceAttribute,
 	#instVars : [

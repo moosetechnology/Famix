@@ -51,6 +51,12 @@ FmxMBProperty >> isContainer [
 ]
 
 { #category : #accessing }
+FmxMBProperty >> isRelation [
+
+	^ false
+]
+
+{ #category : #accessing }
 FmxMBProperty >> name: aString [
 	(self builder reservedKeywords includes: aString) ifTrue: [ FmxMBPropertyNameIsReserved signal ].
 	name := aString

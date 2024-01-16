@@ -1,3 +1,10 @@
+"
+## Properties
+======================
+
+- Named: #isAbstract Type: Boolean Comment: Entity can be declared abstract
+
+"
 Trait {
 	#name : #FamixTCanBeAbstract,
 	#instVars : [

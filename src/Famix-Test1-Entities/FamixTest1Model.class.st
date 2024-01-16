@@ -1,5 +1,11 @@
 "
 This is a the comment of the model class
+
+## Properties
+======================
+
+- Named: #modelHasProperties Type: Object
+
 "
 Class {
 	#name : #FamixTest1Model,

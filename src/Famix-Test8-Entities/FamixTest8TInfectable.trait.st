@@ -1,3 +1,16 @@
+"
+## Relations
+======================
+
+### Outgoing dependencies
+- Relation: #outgoingInfections Type: #FamixTest8Infection Opposite: #infectable
+
+## Properties
+======================
+
+- Named: #pathogenicity Type: Number
+
+"
 Trait {
 	#name : #FamixTest8TInfectable,
 	#instVars : [

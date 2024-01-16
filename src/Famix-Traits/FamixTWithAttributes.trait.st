@@ -1,3 +1,12 @@
+"
+## Relations
+======================
+
+### Children
+- Relation: #attributes Type: #FamixTAttribute Opposite: #parentType Comment: List of attributes declared by this type.
+
+
+"
 Trait {
 	#name : #FamixTWithAttributes,
 	#instVars : [

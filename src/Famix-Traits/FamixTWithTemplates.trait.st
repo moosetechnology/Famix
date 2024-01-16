@@ -1,3 +1,12 @@
+"
+## Relations
+======================
+
+### Children
+- Relation: #templates Type: #FamixTTemplate Opposite: #templateOwner
+
+
+"
 Trait {
 	#name : #FamixTWithTemplates,
 	#instVars : [

@@ -1,3 +1,12 @@
+"
+## Relations
+======================
+
+### Children
+- Relation: #functions Type: #FamixTFunction Opposite: #functionOwner Comment: Functions defined in the container, if any.
+
+
+"
 Trait {
 	#name : #FamixTWithFunctions,
 	#instVars : [

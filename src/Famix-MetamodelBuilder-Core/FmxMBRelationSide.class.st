@@ -150,6 +150,11 @@ FmxMBRelationSide >> isOne [
 ]
 
 { #category : #testing }
+FmxMBRelationSide >> isRelation [
+	^ true
+]
+
+{ #category : #testing }
 FmxMBRelationSide >> isRemote [
 
 	^ self relatedClass isRemote
@@ -342,4 +347,10 @@ FmxMBRelationSide >> trait: anObject [
 	self relatedEntity ifNotNil: [ :aRelatedEntity | aRelatedEntity removeRelationSide: self ].
 	trait := anObject.
 	trait addRelationSide: self
+]
+
+{ #category : #accessing }
+FmxMBRelationSide >> type [
+
+	^ (self builder configuration prefix , self relatedEntityName) asSymbol
 ]

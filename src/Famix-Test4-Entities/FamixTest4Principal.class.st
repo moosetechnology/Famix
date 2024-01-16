@@ -1,3 +1,12 @@
+"
+## Relations
+======================
+
+### Parents
+- Relation: #school Type: #FamixTest4School Opposite: #principal
+
+
+"
 Class {
 	#name : #FamixTest4Principal,
 	#superclass : #FamixTest4Person,

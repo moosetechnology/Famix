@@ -1,3 +1,12 @@
+"
+## Relations
+======================
+
+### Other
+- Relation: #myTrait Type: #FDTrait4 Opposite: #class1
+
+
+"
 Class {
 	#name : #FDClass1,
 	#superclass : #FDEntity,

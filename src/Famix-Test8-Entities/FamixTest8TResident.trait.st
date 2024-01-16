@@ -1,3 +1,12 @@
+"
+## Relations
+======================
+
+### Outgoing dependencies
+- Relation: #outgoingResidences Type: #FamixTest8Residence Opposite: #resident
+
+
+"
 Trait {
 	#name : #FamixTest8TResident,
 	#instVars : [

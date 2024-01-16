@@ -1,3 +1,12 @@
+"
+## Relations
+======================
+
+### Other
+- Relation: #arguments Type: #FamixTParameterizedTypeUser Opposite: #argumentsInParameterizedTypes
+
+
+"
 Trait {
 	#name : #FamixTWithParameterizedTypeUsers,
 	#instVars : [

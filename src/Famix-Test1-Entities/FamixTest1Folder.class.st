@@ -1,3 +1,14 @@
+"
+## Relations
+======================
+
+### Parents
+- Relation: #parentFolder Type: #FamixTFolder Opposite: #childrenFileSystemEntities Comment: Folder entity containing this file.
+### Children
+- Relation: #childrenFileSystemEntities Type: #FamixTFileSystemEntity Opposite: #parentFolder Comment: List of entities contained in this folder.
+
+
+"
 Class {
 	#name : #FamixTest1Folder,
 	#superclass : #FamixTest1NamedEntity,

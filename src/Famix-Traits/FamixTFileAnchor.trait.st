@@ -1,5 +1,13 @@
 "
 This offers a source anchor that connects a sourced entity to a file through a relative path stored in the fileName. In addition, the source can be further specified with a startLine and an endLine number in the file.
+
+## Properties
+======================
+
+- Named: #correspondingFile Type: FamixTFile Comment: File associated to this source anchor
+- Named: #encoding Type: String Comment: A string representing the encoding of a file
+- Named: #fileName Type: String Comment: Name of the source file
+
 "
 Trait {
 	#name : #FamixTFileAnchor,

@@ -1,3 +1,12 @@
+"
+## Relations
+======================
+
+### Children
+- Relation: #books Type: #FamixTest4Book Opposite: #person
+
+
+"
 Class {
 	#name : #FamixTest4Person,
 	#superclass : #FamixTest4Entity,

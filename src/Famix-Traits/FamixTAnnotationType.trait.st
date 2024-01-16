@@ -4,6 +4,16 @@ FamixTAnnotationType represents the type of an annotation. In some languages, Ja
 Instance Variables:
 	instances	<(FMMultivalueLink of: FamixTAnnotationInstance)>
 	container	<FamixTContainerEntity>
+
+## Relations
+======================
+
+### Parents
+- Relation: #annotationTypesContainer Type: #FamixTWithAnnotationTypes Opposite: #definedAnnotationTypes Comment: Container in which an AnnotationType may reside
+### Other
+- Relation: #instances Type: #FamixTTypedAnnotationInstance Opposite: #annotationType Comment: Annotations of this type
+
+
 "
 Trait {
 	#name : #FamixTAnnotationType,

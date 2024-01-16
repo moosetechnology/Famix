@@ -1,3 +1,17 @@
+"
+## Relations
+======================
+
+### Other
+- Relation: #class1 Type: #FDClass1 Opposite: #myTrait
+
+## Properties
+======================
+
+- Named: #otherProp Type: Object Comment: Another property in the trait
+- Named: #someProp Type: String Comment: A property in the trait
+
+"
 Trait {
 	#name : #FDTrait4,
 	#instVars : [

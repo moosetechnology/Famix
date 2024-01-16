@@ -1,3 +1,10 @@
+"
+## Properties
+======================
+
+- Named: #name Type: String
+
+"
 Class {
 	#name : #FamixTest4Entity,
 	#superclass : #MooseEntity,

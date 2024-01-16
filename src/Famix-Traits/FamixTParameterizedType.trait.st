@@ -7,6 +7,14 @@ public Map<String,Collection> anAttribute;
 ...
 
 Where Map<String,Collection> is the FamixTParameterizedType of anAttribute. String and Collection are arguments. Map is the parameterizableClass.
+
+## Relations
+======================
+
+### Other
+- Relation: #parameterizableClass Type: #FamixTWithParameterizedTypes Opposite: #parameterizedTypes Comment: Base type of this parameterized type.
+
+
 "
 Trait {
 	#name : #FamixTParameterizedType,

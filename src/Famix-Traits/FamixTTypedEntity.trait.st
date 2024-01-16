@@ -1,3 +1,12 @@
+"
+## Relations
+======================
+
+### Other
+- Relation: #declaredType Type: #FamixTType Opposite: #typedEntities Comment: Type of the entity, if any
+
+
+"
 Trait {
 	#name : #FamixTTypedEntity,
 	#instVars : [

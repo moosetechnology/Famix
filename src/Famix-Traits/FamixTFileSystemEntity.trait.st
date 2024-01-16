@@ -1,3 +1,12 @@
+"
+## Relations
+======================
+
+### Parents
+- Relation: #parentFolder Type: #FamixTFolder Opposite: #childrenFileSystemEntities Comment: Folder entity containing this file.
+
+
+"
 Trait {
 	#name : #FamixTFileSystemEntity,
 	#instVars : [
