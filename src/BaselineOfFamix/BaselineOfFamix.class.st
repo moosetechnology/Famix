@@ -302,7 +302,7 @@ BaselineOfFamix >> projectClass [
 
 { #category : #dependencies }
 BaselineOfFamix >> referenceTestResources: spec [
-	spec baseline: 'ReferenceTestResources' with: [ spec repository: 'github://moosetechnology/ReferenceTestResources:v2.x.x/src' ]
+	spec baseline: 'ReferenceTestResources' with: [ spec repository: 'github://moosetechnology/ReferenceTestResources:v3.x.x/src' ]
 ]
 
 { #category : #dependencies }
