@@ -107,13 +107,11 @@ FamixReferenceModelImporterTest >> testAccessSharedVariableOfSuperclassClassSide
 
 { #category : #tests }
 FamixReferenceModelImporterTest >> testAccessSharedVariableOfSuperclassClassSide2 [
-	| instVarUniqueName accessDefinition methodUniqueName |
-	"we test
-		SubRootLevelOne class>>accessSharedVariableOfSuperSuperClassClassSide
 
-			DependentsFields := 6"
-	methodUniqueName := (SubRootLevelOne class >> #accessSharedVariableOfSuperSuperClassClassSide) mooseName.
-	instVarUniqueName := Object @ #DependentsFields.
+	| instVarUniqueName accessDefinition methodUniqueName |
+	"we test OtherRootFromClass class>>accessSharedVariableOfSuperSuperClassClassSide6"
+	methodUniqueName := (OtherRootFromClass class >> #accessSharedVariableOfSuperSuperClassClassSide) mooseName.
+	instVarUniqueName := Behavior @ #ClassProperties.
 	accessDefinition := self model allAccesses select: [ :acc | acc variable mooseName = instVarUniqueName and: [ acc accessor mooseName = methodUniqueName ] ].
 	self assert: accessDefinition size equals: 1.
 	self assert: (accessDefinition at: 1) isWrite
@@ -746,28 +744,24 @@ FamixReferenceModelImporterTest >> testStubInstanceVariableReified [
 ]
 
 { #category : #tests }
-FamixReferenceModelImporterTest >> testStubSharedVariableAccessShortName [
-	"We want to test that
-	TheRoot>>accessingStubSharedVariableShortName
-
-			^ DependentsFields"
+FamixReferenceModelImporterTest >> testStubSharedVariableAccess [
+	"We want to test OtherRootFromClass>>accessingStubSharedVariable"
 
 	| methodName classVarUniqueName accessDefinition |
-	methodName := (TheRoot >> #accessingStubSharedVariableShortName) mooseName.
-	classVarUniqueName := Object @ #DependentsFields.
-	accessDefinition := self model allAccesses
-		select: [ :acc | acc variable mooseName = classVarUniqueName and: [ acc accessor mooseName = methodName ] ].
+	methodName := (OtherRootFromClass >> #accessingStubSharedVariable) mooseName.
+	classVarUniqueName := Behavior @ #ClassProperties.
+	accessDefinition := self model allAccesses select: [ :acc | acc variable mooseName = classVarUniqueName and: [ acc accessor mooseName = methodName ] ].
 	self assert: accessDefinition size equals: 1
 ]
 
 { #category : #tests }
 FamixReferenceModelImporterTest >> testStubSharedVariableReified [
 	| classVar |
-	classVar := self model entityNamed: 'Smalltalk::Object.DependentsFields'.
+	classVar := self model entityNamed: 'Smalltalk::Behavior.ClassProperties'.
 	self deny: classVar isNil.
 	self assert: classVar isStub.
 	self assert: classVar isSharedVariable.
-	self assert: classVar belongsTo equals: (self model entityNamed: Object mooseName)
+	self assert: classVar belongsTo equals: (self model entityNamed: Behavior mooseName)
 ]
 
 { #category : #tests }
