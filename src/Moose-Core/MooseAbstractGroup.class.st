@@ -107,11 +107,7 @@ MooseAbstractGroup >> allUsing: aTrait [
 { #category : #groups }
 MooseAbstractGroup >> allUsing: aTrait ofGroupClass: aGroupClass [
 
-	aTrait isTrait ifFalse: [ MooseAllUsingOnClass signal ].
-	^ self cacheAt: aTrait ifAbsentPut: [
-		  aGroupClass
-			  withAll: (self entityStorage select: [ :entity | entity class traitComposition includesTrait: aTrait ])
-			  withDescription: 'All ' , aTrait name asLowercase asEnglishPlural ]
+	^ self cacheAt: aTrait ifAbsentPut: [ aGroupClass withAll: (self rawAllUsing: aTrait) withDescription: 'All ' , aTrait name asLowercase asEnglishPlural ]
 ]
 
 { #category : #groups }
@@ -564,9 +560,10 @@ MooseAbstractGroup >> notEmpty [
 	^ self entities isNotEmpty
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MooseAbstractGroup >> numberOfEntityUsing: aTrait [
-	^ (self allUsing: aTrait) size
+
+	^ (self rawAllUsing: aTrait) size
 ]
 
 { #category : #accessing }
@@ -594,6 +591,14 @@ MooseAbstractGroup >> printOn: aStream [
 	aStream nextPut: $(.
 	aStream print: self size.
 	aStream nextPut: $)
+]
+
+{ #category : #groups }
+MooseAbstractGroup >> rawAllUsing: aTrait [
+	"This is an optimization of #allUsing: when we do not need to manipulate a MooseGroup as result."
+
+	aTrait isTrait ifFalse: [ MooseAllUsingOnClass signal ].
+	^ self entityStorage select: [ :entity | entity class traitComposition includesTrait: aTrait ]
 ]
 
 { #category : #'adding/removing' }
