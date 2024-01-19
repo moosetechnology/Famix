@@ -106,12 +106,12 @@ MooseAbstractGroup >> allUsing: aTrait [
 
 { #category : #groups }
 MooseAbstractGroup >> allUsing: aTrait ofGroupClass: aGroupClass [
+
 	aTrait isTrait ifFalse: [ MooseAllUsingOnClass signal ].
-	^ self
-		cacheAt: aTrait
-		ifAbsentPut: [ aGroupClass
-				withAll: ((aTrait allUsers flattened flatCollect: #withAllSubclasses) asSet flatCollect: [ :each | self entityStorage selectAllWithType: each ])
-				withDescription: 'All ' , aTrait name asLowercase asEnglishPlural ]
+	^ self cacheAt: aTrait ifAbsentPut: [
+		  aGroupClass
+			  withAll: (self entityStorage select: [ :entity | entity class traitComposition includesTrait: aTrait ])
+			  withDescription: 'All ' , aTrait name asLowercase asEnglishPlural ]
 ]
 
 { #category : #groups }
