@@ -146,6 +146,29 @@ MooseGroupTest >> testObjectAsMooseGroup [
 
 { #category : #tests }
 MooseGroupTest >> testSort [
-	group addAll: #(4 3 1 2).
-	self assertCollection: (group sorted: #yourself ascending) hasSameElements: #(1 2 3 4)
+
+	| newGroup |
+	group addAll: #( 4 3 1 2 ).
+	newGroup := group sort: #yourself ascending.
+	"#sort: should sort the receiver."
+	self assert: group identicalTo: newGroup.
+	self assert: newGroup first equals: 1.
+	self assert: newGroup second equals: 2.
+	self assert: newGroup third equals: 3.
+	self assert: newGroup fourth equals: 4
+]
+
+{ #category : #tests }
+MooseGroupTest >> testSorted [
+
+	| newGroup |
+	group addAll: #( 4 3 1 2 ).
+	newGroup := group sorted: #yourself ascending.
+	"#sorted: should return a new collection and not sort the receiver."
+	self deny: group identicalTo: newGroup.
+	self assert: newGroup first equals: 1.
+	self assert: newGroup second equals: 2.
+	self assert: newGroup third equals: 3.
+	self assert: newGroup fourth equals: 4.
+	self assert: group first equals: 4
 ]

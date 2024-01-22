@@ -126,6 +126,12 @@ MooseGroupRuntimeStorage >> size [
 	^ elements size
 ]
 
+{ #category : #sorting }
+MooseGroupRuntimeStorage >> sort: aBlock [
+
+	self elements sort: aBlock
+]
+
 { #category : #accessing }
 MooseGroupRuntimeStorage >> species: anObject [
 

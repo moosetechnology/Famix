@@ -186,7 +186,8 @@ MooseGroup >> select: aBlock [
 
 { #category : #'public interface' }
 MooseGroup >> sort: aBlock [
-	self entities: (self entities sorted: aBlock)
+
+	self entityStorage sort: aBlock
 ]
 
 { #category : #'public interface' }
