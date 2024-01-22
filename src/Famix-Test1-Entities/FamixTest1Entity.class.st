@@ -64,6 +64,13 @@ FamixTest1Entity >> isMethod [
 ]
 
 { #category : #testing }
+FamixTest1Entity >> isQueryable [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
 FamixTest1Entity >> isStructuralEntity [
 
 	<generated>

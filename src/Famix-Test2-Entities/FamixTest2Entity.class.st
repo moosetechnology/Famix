@@ -50,6 +50,13 @@ FamixTest2Entity >> isInheritance [
 ]
 
 { #category : #testing }
+FamixTest2Entity >> isQueryable [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
 FamixTest2Entity >> isType [
 
 	<generated>
