@@ -85,6 +85,13 @@ FamixTest3Entity >> isPackage [
 ]
 
 { #category : #testing }
+FamixTest3Entity >> isQueryable [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
 FamixTest3Entity >> isReference [
 
 	<generated>

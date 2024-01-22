@@ -92,6 +92,13 @@ MooseMSEImporterTestEntity >> isPrimitiveType [
 ]
 
 { #category : #testing }
+MooseMSEImporterTestEntity >> isQueryable [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
 MooseMSEImporterTestEntity >> isStructuralEntity [
 
 	<generated>

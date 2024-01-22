@@ -50,6 +50,13 @@ FamixTestComposed2Entity >> isMethod [
 ]
 
 { #category : #testing }
+FamixTestComposed2Entity >> isQueryable [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
 FamixTestComposed2Entity >> isType [
 
 	<generated>

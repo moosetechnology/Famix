@@ -700,6 +700,13 @@ TEntityMetaLevelDependency >> isIncludedIn: anEntity parentSelectorsCache: paren
 ]
 
 { #category : #testing }
+TEntityMetaLevelDependency >> isQueryable [
+
+	<generated>
+	^ true
+]
+
+{ #category : #testing }
 TEntityMetaLevelDependency >> isRoot [
 
 	<FMProperty: #isRoot type: #Boolean>

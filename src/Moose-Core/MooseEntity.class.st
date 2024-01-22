@@ -185,6 +185,14 @@ MooseEntity >> isMooseEntity [
 ]
 
 { #category : #testing }
+MooseEntity >> isQueryable [
+	"This should probably be removed in the future but is here for compatibility.
+	Could be removed in Moose 12."
+
+	^ false
+]
+
+{ #category : #testing }
 MooseEntity >> isStub [
 	^ self attributeAt: #privateIsStub ifAbsent: [ false ]
 ]

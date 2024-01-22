@@ -146,6 +146,13 @@ FamixJavaEntity >> isPrimitiveType [
 ]
 
 { #category : #testing }
+FamixJavaEntity >> isQueryable [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
 FamixJavaEntity >> isReference [
 
 	<generated>

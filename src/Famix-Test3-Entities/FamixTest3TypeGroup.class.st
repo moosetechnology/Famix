@@ -77,6 +77,13 @@ FamixTest3TypeGroup >> isPackage [
 ]
 
 { #category : #testing }
+FamixTest3TypeGroup >> isQueryable [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
 FamixTest3TypeGroup >> isReference [
 
 	<generated>
