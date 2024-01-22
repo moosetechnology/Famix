@@ -95,12 +95,6 @@ MooseGroupStorage >> elements [
 ]
 
 { #category : #converting }
-MooseGroupStorage >> forRemoving [ 
-	 
-	self becomeKind: MooseGroupTeardownStorage
-]
-
-{ #category : #converting }
 MooseGroupStorage >> forRuntime [ 
 	 
 	self becomeKind: MooseGroupRuntimeStorage
