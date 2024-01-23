@@ -1,6 +1,9 @@
 Class {
 	#name : #LANAbstractDestinationAddress,
 	#superclass : #Object,
+	#classVars : [
+		'MySharedVariable'
+	],
 	#category : #'Moose-TestResources-LAN'
 }
 

@@ -188,5 +188,5 @@ LANMooseGroupTest >> testSelectGroupType [
 
 { #category : #tests }
 LANMooseGroupTest >> testSum [
-	self assert: (self model allModelClasses sumNumbers: #numberOfAttributes) equals: 16
+	self assert: (self model allModelClasses sumNumbers: #numberOfAttributes) equals: 17
 ]
