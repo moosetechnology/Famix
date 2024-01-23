@@ -25,5 +25,5 @@ FamixMooseQueryGenerator >> defineTraits [
 
 	tAssociationMetaLevelDependency := builder newTraitNamed: #TAssociationMetaLevelDependency.
 	tEntityMetaLevelDependency := builder newTraitNamed: #TEntityMetaLevelDependency.
-
+	tEntityMetaLevelDependency testingSelector: #isQueryable
 ]

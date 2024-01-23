@@ -1,3 +1,14 @@
+"
+## Relations
+======================
+
+### Other
+| Relation | Origin | Opposite | Type | Comment |
+| `declaredSourceLanguage` | `FamixTWithSourceLanguages` | `sourcedEntities` | `FamixTSourceLanguage` | The declared SourceLanguage for the source code of this entity|
+
+
+
+"
 Trait {
 	#name : #FamixTWithSourceLanguages,
 	#instVars : [

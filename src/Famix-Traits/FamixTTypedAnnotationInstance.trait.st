@@ -1,3 +1,14 @@
+"
+## Relations
+======================
+
+### Other
+| Relation | Origin | Opposite | Type | Comment |
+| `annotationType` | `FamixTTypedAnnotationInstance` | `instances` | `FamixTAnnotationType` | Refers to the type of an annotation. (In some languages, Java and C#, an annotation as an explicit type). |
+
+
+
+"
 Trait {
 	#name : #FamixTTypedAnnotationInstance,
 	#instVars : [

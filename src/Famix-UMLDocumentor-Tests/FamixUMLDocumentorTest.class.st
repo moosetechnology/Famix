@@ -141,7 +141,7 @@ FamixUMLDocumentorTest >> testGenerateEntireModel [
 { #category : #'tests - generation' }
 FamixUMLDocumentorTest >> testGeneratePropertyOf [
 
-	| fmClass umlEntity |
+	| fmClass umlClass umlProp |
 
 	documentor
 		model: FDModel ;
@@ -150,15 +150,19 @@ FamixUMLDocumentorTest >> testGeneratePropertyOf [
 	documentor generateClass: fmClass.
 
 	self assert: documentor umlEntities size equals: 1.
-	umlEntity := documentor umlEntities anyOne.
+	umlClass := documentor umlEntities anyOne.
 
-	documentor generateProperties: fmClass uml: umlEntity.
+	documentor generateProperties: fmClass uml: umlClass.
 
-	self assert: umlEntity properties size equals: 1.
+	self assert: umlClass properties size equals: 2.
 
-	umlEntity := umlEntity properties anyOne.
-	self assert: umlEntity name equals: 'someProp'.
-	self assert: umlEntity type equals: 'String'.
+	umlProp := umlClass properties detect: [:p | p name = 'someProp' ] ifNone: [ nil ].
+	self assert: umlProp isNotNil.
+	self assert: umlProp type equals: 'String'.
+
+	umlProp := umlClass properties detect: [:p | p name = 'otherProp' ] ifNone: [ nil ].
+	self assert: umlProp isNotNil.
+	self assert: umlProp type equals: 'Object'.
 
 ]
 

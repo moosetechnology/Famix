@@ -1,5 +1,20 @@
 "
 FamixTComment represents one instance of a comment (in the sense of programming language comments) for any Famix sourced entity. The commented sourced entity is called the container in the FamixT model.
+
+## Relations
+======================
+
+### Other
+| Relation | Origin | Opposite | Type | Comment |
+| `commentedEntity` | `FamixTComment` | `comments` | `FamixTWithComments` | Source code commented by the comment|
+
+
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+| `content` | `String` | nil | Content of the comment as a String|
+
 "
 Trait {
 	#name : #FamixTComment,

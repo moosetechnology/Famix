@@ -1,6 +1,16 @@
 "
 FamixTModule represents a that basically provides a simple scoping abstraction for a .C/.CPP/.H files.
 
+
+## Relations
+======================
+
+### Children
+| Relation | Origin | Opposite | Type | Comment |
+| `moduleEntities` | `FamixTModule` | `parentModule` | `FamixTDefinedInModule` | |
+
+
+
 "
 Trait {
 	#name : #FamixTModule,

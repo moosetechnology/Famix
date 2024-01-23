@@ -219,6 +219,12 @@ FamixMetamodelGenerator >> builder: anObject [
 	builder := anObject
 ]
 
+{ #category : #testing }
+FamixMetamodelGenerator >> changesToApply [
+	self define.
+	^ self builder changesToApply
+]
+
 { #category : #accessing }
 FamixMetamodelGenerator >> cleaningStrategy [
 	^ cleaningStrategy
@@ -233,9 +239,17 @@ FamixMetamodelGenerator >> cleaningStrategy: anObject [
 FamixMetamodelGenerator >> define [
 	self defineTraits.
 	self defineClasses.
+	self defineAssociations.
 	self defineHierarchy.
 	self defineProperties.
 	self defineRelations
+]
+
+{ #category : #definition }
+FamixMetamodelGenerator >> defineAssociations [
+	"See example in FamixTest8Generator>>#defineAssociations"
+
+	
 ]
 
 { #category : #definition }
@@ -335,12 +349,6 @@ FamixMetamodelGenerator >> packageNameForAnnotations [
 FamixMetamodelGenerator >> prefix [
 
 	^ self class prefix
-]
-
-{ #category : #testing }
-FamixMetamodelGenerator >> regenerationIsNeeded [
-	self define.
-	^ self builder regenerationIsNeeded
 ]
 
 { #category : #definition }

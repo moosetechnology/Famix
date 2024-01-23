@@ -21,7 +21,7 @@ FamixComposingTestTraitsGenerator >> addingTraitsToTestTraitFor: aClass [
 
 { #category : #'as yet unclassified' }
 FamixComposingTestTraitsGenerator >> findTestFrom: aTrait [
-	^ (RPackageOrganizer default packageNamed: self generator prefix, '-Tests-Traits') classes detect: [ :c | c name = ('T', (self testNameFrom: aTrait)) ]
+	^ (self packageOrganizer packageNamed: self generator prefix, '-Tests-Traits') classes detect: [ :c | c name = ('T', (self testNameFrom: aTrait)) ]
 ]
 
 { #category : #run }
@@ -32,7 +32,7 @@ FamixComposingTestTraitsGenerator >> runFor: aClass [
 
 { #category : #tests }
 FamixComposingTestTraitsGenerator >> testAssociatedTo: aClass [
-	test := (RPackageOrganizer default packageNamed: self generator prefix, 'Tests-Tests') classes detect: [ :c | c name = (self testNameFrom: aClass) ].
+	test := (self packageOrganizer packageNamed: self generator prefix, 'Tests-Tests') classes detect: [ :c | c name = (self testNameFrom: aClass) ].
 	
 	
 ]

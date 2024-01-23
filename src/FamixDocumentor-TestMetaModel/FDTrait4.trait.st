@@ -1,7 +1,25 @@
+"
+## Relations
+======================
+
+### Other
+| Relation | Origin | Opposite | Type | Comment |
+| `class1` | `FDTrait4` | `myTrait` | `FDClass1` | |
+
+
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+| `otherProp` | `Object` | nil | Another property in the trait|
+| `someProp` | `String` | nil | A property in the trait|
+
+"
 Trait {
 	#name : #FDTrait4,
 	#instVars : [
 		'#class1 => FMMany type: #FDClass1 opposite: #myTrait',
+		'#otherProp => FMProperty',
 		'#someProp => FMProperty'
 	],
 	#traits : 'FDTrait2',
@@ -38,6 +56,21 @@ FDTrait4 >> class1: anObject [
 
 	<generated>
 	class1 value: anObject
+]
+
+{ #category : #accessing }
+FDTrait4 >> otherProp [
+
+	<FMProperty: #otherProp type: #Object>
+	<generated>
+	<FMComment: 'Another property in the trait'>
+	^ otherProp
+]
+
+{ #category : #accessing }
+FDTrait4 >> otherProp: anObject [
+	<generated>
+	otherProp := anObject
 ]
 
 { #category : #accessing }

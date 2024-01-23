@@ -1,3 +1,11 @@
+"
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+| `name` | `String` | nil | Basic name of the entity, not full reference.|
+
+"
 Class {
 	#name : #FamixTest2NamedEntity,
 	#superclass : #FamixTest2Entity,

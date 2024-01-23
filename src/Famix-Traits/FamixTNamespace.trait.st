@@ -4,6 +4,22 @@ FamixTNamespace represents a namespace from the source language. Namespaces have
 A namespace denotes an entity that has meaning from a language point of view. For example, in C++, there exist a concept with the same name that has no other responsibility beside providing a lexical scope for the contained classes and funcions.
 
 When an entity is placed inside a namespace, the fully qualified name (mooseName) is affected.
+
+## Relations
+======================
+
+### Other
+| Relation | Origin | Opposite | Type | Comment |
+| `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
+
+
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+| `isStub` | `Boolean` | false | Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.|
+| `name` | `String` | nil | Basic name of the entity, not full reference.|
+
 "
 Trait {
 	#name : #FamixTNamespace,

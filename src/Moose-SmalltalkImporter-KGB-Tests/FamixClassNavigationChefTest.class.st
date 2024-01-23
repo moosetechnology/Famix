@@ -66,11 +66,14 @@ FamixClassNavigationChefTest >> testClientClasses [
 		assertCollection: (self c14ReferencerOutSideRefereeOutSide allClientsAtScope: FamixTType)
 		hasSameElements: {self c2ReferencerOutSideRefereeInSide . self c15FullReferencerOutSide}.
 	self
-		assertCollection: self c14ReferencerOutSideRefereeOutSide allClients
+		assertCollection: self c14ReferencerOutSideRefereeOutSide allClientsAtMyScope
 		hasSameElements: (self c14ReferencerOutSideRefereeOutSide allClientsAtScope: FamixTType).
 	self
 		assertCollection: (self c3ReferencerInSideRefereeOutSide allClientsAtScope: FamixTType)
-		hasSameElements: {self c1FullReferencerOutSide . self c6FullReferencerInSideOutSide . self c14ReferencerOutSideRefereeOutSide}
+		hasSameElements: {self c1FullReferencerOutSide . self c6FullReferencerInSideOutSide . self c14ReferencerOutSideRefereeOutSide}.
+	self
+		assertCollection: (self c14ReferencerOutSideRefereeOutSide allClients)
+		hasSameElements: {self m1p2c2Mtd2 . self m1p2c2Mtd1 . self c15FullReferencerOutSide }.
 ]
 
 { #category : #'tests - clients' }
@@ -361,7 +364,7 @@ FamixClassNavigationChefTest >> testProviderClasses [
 		hasSameElements: {self c14ReferencerOutSideRefereeOutSide . self c18FullRefereeInSideOutSide . self c19FullRefereeOutSide}.
 	self
 		assertCollection: (self c15FullReferencerOutSide allProvidersAtScope: FamixTType)
-		hasSameElements: self c15FullReferencerOutSide allProviders
+		hasSameElements: self c15FullReferencerOutSide allProvidersAtMyScope
 ]
 
 { #category : #'tests - providers' }

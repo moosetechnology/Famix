@@ -327,20 +327,20 @@ TEntityMetaLevelDependency >> allChildrenTypes [
 
 { #category : #accessing }
 TEntityMetaLevelDependency >> allClients [
-	^ self lookUpPropertyNamed: #allClients computedAs: [ self allClientsAtScope: self class ]
+	^ self lookUpPropertyNamed: #allClients computedAs: [( self queryAllIncoming withoutSelfLoops collect: #source ) flattened ]
+]
+
+{ #category : #accessing }
+TEntityMetaLevelDependency >> allClientsAtMyScope [
+	^ self lookUpPropertyNamed: #allClientsAtMyScope computedAs: [ self allClientsAtScope: self class ]
 ]
 
 { #category : #accessing }
 TEntityMetaLevelDependency >> allClientsAtScope: aClass [
+"Attention, this method returns only the clients at the requested scope. The other clients non matching the scope are not return. Like this we are sure that all the return entities are at the requested scope"
 	^ self queryAllIncoming withoutSelfLoops
 		atScope: aClass
-		withNonMatchingEntitiesDo: [ :entities :res |
-			entities ifNotNil: [
-				entities isCollection
-				ifTrue: [ res addAll: entities ]
-				ifFalse: [ res add: entities ]
-			]
-		]
+		
 ]
 
 { #category : #accessing }
@@ -368,20 +368,19 @@ TEntityMetaLevelDependency >> allParents [
 
 { #category : #accessing }
 TEntityMetaLevelDependency >> allProviders [
-	^ self lookUpPropertyNamed: #allProviders computedAs: [ self allProvidersAtScope: self class ]
+^ self lookUpPropertyNamed: #allProviders computedAs: [ (self queryAllOutgoing  withoutSelfLoops collect: #target) flattened ]
+]
+
+{ #category : #accessing }
+TEntityMetaLevelDependency >> allProvidersAtMyScope [
+	^ self lookUpPropertyNamed: #allProvidersAtMyScope computedAs: [ self allProvidersAtScope: self class ]
 ]
 
 { #category : #accessing }
 TEntityMetaLevelDependency >> allProvidersAtScope: aClass [
+"Attention, this method returns only the providers at the requested scope. The other providers non matching the scope are not return. Like this we are sure that all the return entities are at the requested scope"
 	^ self queryAllOutgoing withoutSelfLoops
 		atScope: aClass
-		withNonMatchingEntitiesDo: [ :entities :res |
-			entities ifNotNil: [
-				entities isCollection
-				ifTrue: [ res addAll: entities ]
-				ifFalse: [ res add: entities ]
-			]
-		]
 ]
 
 { #category : #scoping }
@@ -533,7 +532,7 @@ TEntityMetaLevelDependency >> fanIn [
 TEntityMetaLevelDependency >> fanOut [
 	<FMProperty: #fanOut type: #Number>
 	<derived>
-	<FMComment: 'Number of provider classes'>
+	<FMComment: 'Number of provider'>
 	^ self allProviders size
 ]
 
@@ -698,6 +697,23 @@ TEntityMetaLevelDependency >> isIncludedIn: anEntity parentSelectorsCache: paren
 	1 to: (selectors := parentSelectorsCache at: self class ifAbsentPut: [ self parentSelectors ]) size do: [ :ind | ((self perform: (selectors at: ind)) isIncludedIn: anEntity parentSelectorsCache: parentSelectorsCache) ifTrue: [ ^ true ] ].
 
 	^ false
+]
+
+{ #category : #testing }
+TEntityMetaLevelDependency >> isQueryable [
+
+	<generated>
+	^ true
+]
+
+{ #category : #testing }
+TEntityMetaLevelDependency >> isRoot [
+
+	<FMProperty: #isRoot type: #Boolean>
+	<derived>
+	<FMComment:
+	'An entity is root if it has no parent in the model. This is useful for example to be able to build visualization where the displayed elements are the roots of the model and to let those elements be expanded to display their children.'>
+	^ self parents isEmpty
 ]
 
 { #category : #accessing }

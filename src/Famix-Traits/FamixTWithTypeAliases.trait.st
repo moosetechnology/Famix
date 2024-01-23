@@ -1,3 +1,14 @@
+"
+## Relations
+======================
+
+### Other
+| Relation | Origin | Opposite | Type | Comment |
+| `typeAliases` | `FamixTWithTypeAliases` | `aliasedType` | `FamixTTypeAlias` | Aliases|
+
+
+
+"
 Trait {
 	#name : #FamixTWithTypeAliases,
 	#instVars : [

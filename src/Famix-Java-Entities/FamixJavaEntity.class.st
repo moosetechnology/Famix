@@ -7,6 +7,8 @@ model := MooseModel new.
 model silentlyAddAll: repo elements.
 model entityStorage forRuntime.
 model
+
+
 "
 Class {
 	#name : #FamixJavaEntity,
@@ -138,6 +140,13 @@ FamixJavaEntity >> isPackage [
 
 { #category : #testing }
 FamixJavaEntity >> isPrimitiveType [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+FamixJavaEntity >> isQueryable [
 
 	<generated>
 	^ false

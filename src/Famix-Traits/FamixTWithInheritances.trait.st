@@ -1,3 +1,18 @@
+"
+## Relations
+======================
+
+### Outgoing dependencies
+| Relation | Origin | Opposite | Type | Comment |
+| `superInheritances` | `FamixTWithInheritances` | `subclass` | `FamixTInheritance` | Superinheritance relationships, i.e. known superclasses of this type.|
+
+### Incoming dependencies
+| Relation | Origin | Opposite | Type | Comment |
+| `subInheritances` | `FamixTWithInheritances` | `superclass` | `FamixTInheritance` | Subinheritance relationships, i.e. known subclasses of this type.|
+
+
+
+"
 Trait {
 	#name : #FamixTWithInheritances,
 	#instVars : [

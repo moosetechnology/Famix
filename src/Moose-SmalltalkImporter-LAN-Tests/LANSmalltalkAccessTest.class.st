@@ -6,8 +6,6 @@ Class {
 
 { #category : #tests }
 LANSmalltalkAccessTest >> testWhenDistinguishingClassAndMetaclassAccessWorks [
-	"self debug: #testWhenDistinguishingClassAndMetaclassAccessWorks"
-
 	"this test tests that we can access smalltalk class and compiledMethod from famix when the class and metaclasses are not merged"
 
 	| model |
@@ -32,8 +30,6 @@ LANSmalltalkAccessTest >> testWhenDistinguishingClassAndMetaclassAccessWorks [
 
 { #category : #tests }
 LANSmalltalkAccessTest >> testWhenMergingClassAndMetaclassAccessWorks [
-	"self debug: #testWhenMergingClassAndMetaclassAccessWorks"
-
 	"this test tests that we can access smalltalk class and compiledMethod from famix when the class and metaclasses are  merged"
 
 	| model importer |

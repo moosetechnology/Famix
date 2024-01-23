@@ -17,9 +17,12 @@ Class {
 BaselineOfFamix >> baseline: spec [
 
 	<baseline>
-	repository := self packageRepositoryURL.
+	"In P12 the need of this hack got removed and now Metacello is able to give us the URL itself. Once P11 will not be maintained for Moose we can remove this check and the method #packageRepositoryURL we are overriding."
+	repository := SystemVersion current major < 12
+		              ifTrue: [ self packageRepositoryURL ]
+		              ifFalse: [ self packageRepositoryURLForSpec: spec ].
 
-	spec for: #common do: [ 
+	spec for: #common do: [
 		self dependencies: spec.
 		self packages: spec.
 		self groups: spec ]
@@ -263,6 +266,10 @@ BaselineOfFamix >> packages: spec [
 		with: [ spec requires: #( 'BasicTraits' ) ];
 		package: 'Famix-Test7-Tests'
 		with: [ spec requires: #( 'Famix-Test7-Entities' ) ];
+		package: 'Famix-Test8-Entities'
+		with: [ spec requires: #( 'BasicTraits' ) ];
+		package: 'Famix-Test8-Tests'
+		with: [ spec requires: #( 'Famix-Test8-Entities' ) ];
 		package: 'Famix-TestComposedSubmetamodel1-Entities'
 		with: [ spec requires: #( 'BasicTraits' ) ];
 		package: 'Famix-TestComposedSubmetamodel2-Entities'
@@ -295,7 +302,7 @@ BaselineOfFamix >> projectClass [
 
 { #category : #dependencies }
 BaselineOfFamix >> referenceTestResources: spec [
-	spec baseline: 'ReferenceTestResources' with: [ spec repository: 'github://moosetechnology/ReferenceTestResources:v1.x.x/src' ]
+	spec baseline: 'ReferenceTestResources' with: [ spec repository: 'github://moosetechnology/ReferenceTestResources:v3.x.x/src' ]
 ]
 
 { #category : #dependencies }

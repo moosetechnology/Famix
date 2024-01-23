@@ -1,3 +1,14 @@
+"
+## Relations
+======================
+
+### Children
+| Relation | Origin | Opposite | Type | Comment |
+| `parameters` | `FamixTWithParameters` | `parentBehaviouralEntity` | `FamixTParameter` | List of formal parameters declared by this behaviour.|
+
+
+
+"
 Trait {
 	#name : #FamixTWithParameters,
 	#instVars : [

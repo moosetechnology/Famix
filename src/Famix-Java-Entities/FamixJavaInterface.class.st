@@ -1,3 +1,42 @@
+"
+## Relations
+======================
+
+### Parents
+| Relation | Origin | Opposite | Type | Comment |
+| `parentPackage` | `FamixTPackageable` | `childEntities` | `FamixTPackage` | Package containing the entity in the code structure (if applicable)|
+
+### Children
+| Relation | Origin | Opposite | Type | Comment |
+| `attributes` | `FamixTWithAttributes` | `parentType` | `FamixTAttribute` | List of attributes declared by this type.|
+| `methods` | `FamixTWithMethods` | `parentType` | `FamixTMethod` | Methods declared by this type.|
+
+### Outgoing dependencies
+| Relation | Origin | Opposite | Type | Comment |
+| `outgoingImports` | `FamixTWithImports` | `importingEntity` | `FamixTImport` | |
+| `superInheritances` | `FamixTWithInheritances` | `subclass` | `FamixTInheritance` | Superinheritance relationships, i.e. known superclasses of this type.|
+
+### Incoming dependencies
+| Relation | Origin | Opposite | Type | Comment |
+| `implementations` | `FamixTImplementable` | `interface` | `FamixTImplementation` | Implementation relationships.|
+| `incomingImports` | `FamixTImportable` | `importedEntity` | `FamixTImport` | List of imports of this entity|
+| `subInheritances` | `FamixTWithInheritances` | `superclass` | `FamixTInheritance` | Subinheritance relationships, i.e. known subclasses of this type.|
+
+### Other
+| Relation | Origin | Opposite | Type | Comment |
+| `comments` | `FamixTWithComments` | `commentedEntity` | `FamixTComment` | List of comments for the entity|
+| `receivingInvocations` | `FamixTInvocationsReceiver` | `receiver` | `FamixTInvocation` | List of invocations performed on this entity (considered as the receiver)|
+
+
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+| `isClassSide` | `Boolean` | false | Entity can be declared class side i.e. static|
+| `isFinal` | `Boolean` | false | Entity can be declared final|
+| `visibility` | `String` | nil | Visibility of the entity|
+
+"
 Class {
 	#name : #FamixJavaInterface,
 	#superclass : #FamixJavaType,

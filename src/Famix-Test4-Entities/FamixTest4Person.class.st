@@ -1,3 +1,14 @@
+"
+## Relations
+======================
+
+### Children
+| Relation | Origin | Opposite | Type | Comment |
+| `books` | `FamixTest4Person` | `person` | `FamixTest4Book` | |
+
+
+
+"
 Class {
 	#name : #FamixTest4Person,
 	#superclass : #FamixTest4Entity,

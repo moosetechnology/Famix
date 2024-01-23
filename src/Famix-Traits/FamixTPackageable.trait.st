@@ -1,3 +1,14 @@
+"
+## Relations
+======================
+
+### Parents
+| Relation | Origin | Opposite | Type | Comment |
+| `parentPackage` | `FamixTPackageable` | `childEntities` | `FamixTPackage` | Package containing the entity in the code structure (if applicable)|
+
+
+
+"
 Trait {
 	#name : #FamixTPackageable,
 	#instVars : [

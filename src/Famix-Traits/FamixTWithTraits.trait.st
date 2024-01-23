@@ -1,3 +1,14 @@
+"
+## Relations
+======================
+
+### Children
+| Relation | Origin | Opposite | Type | Comment |
+| `traits` | `FamixTWithTraits` | `traitOwner` | `FamixTTrait` | |
+
+
+
+"
 Trait {
 	#name : #FamixTWithTraits,
 	#instVars : [

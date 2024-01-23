@@ -14,6 +14,23 @@ Internal Representation and Key Implementation Points.
 	relatedAnchor:			<aSourceAnchor>			The anchor I'll get my relative sources from.
 	startPos:					<anInteger>				Position of the first character of my source in the source text of the relative anchor.
 
+
+## Relations
+======================
+
+### Other
+| Relation | Origin | Opposite | Type | Comment |
+| `element` | `FamixTSourceAnchor` | `sourceAnchor` | `FamixTSourceEntity` | Enable the accessibility to the famix entity that this class is a source pointer for|
+
+
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+| `endPos` | `Number` | nil | Stop position in the source|
+| `relatedAnchor` | `FamixTSourceAnchor` | nil | Source anchor to which I am relative.|
+| `startPos` | `Number` | nil | Start position in the source|
+
 "
 Trait {
 	#name : #FamixTRelativeSourceAnchor,

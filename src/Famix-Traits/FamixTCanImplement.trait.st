@@ -1,5 +1,15 @@
 "
 I can be the source of an implementation (cf a class implementing an Interface)
+
+## Relations
+======================
+
+### Outgoing dependencies
+| Relation | Origin | Opposite | Type | Comment |
+| `interfaceImplementations` | `FamixTCanImplement` | `implementingClass` | `FamixTImplementation` | Implementation relationships|
+
+
+
 "
 Trait {
 	#name : #FamixTCanImplement,

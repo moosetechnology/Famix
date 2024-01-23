@@ -1,3 +1,14 @@
+"
+## Relations
+======================
+
+### Other
+| Relation | Origin | Opposite | Type | Comment |
+| `myTrait` | `FDClass1` | `class1` | `FDTrait4` | |
+
+
+
+"
 Class {
 	#name : #FDClass1,
 	#superclass : #FDEntity,

@@ -1,3 +1,18 @@
+"
+## Relations
+======================
+
+### Children
+| Relation | Origin | Opposite | Type | Comment |
+| `customEntity1` | `FamixTestComposedCustomEntity1` | `customEntity1` | `FamixTestComposed1CustomEntity1` | |
+
+### Other
+| Relation | Origin | Opposite | Type | Comment |
+| `c21` | `FamixTestComposedCustomEntity1` | `c1` | `FamixTestComposed2CustomEntity1` | |
+
+
+
+"
 Class {
 	#name : #FamixTestComposedCustomEntity1,
 	#superclass : #FamixTestComposedEntity,

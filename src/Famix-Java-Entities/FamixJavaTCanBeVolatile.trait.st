@@ -7,6 +7,13 @@ public class SharedObject {
     public volatile int counter = 0;
 }
 ```
+
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+| `isVolatile` | `Boolean` | false | Entity can be declared volatile|
+
 "
 Trait {
 	#name : #FamixJavaTCanBeVolatile,

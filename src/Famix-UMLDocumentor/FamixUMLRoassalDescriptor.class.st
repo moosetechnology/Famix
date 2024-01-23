@@ -1,3 +1,6 @@
+"
+Used by Roassal (`RSUMLClassBuilder`) to get informations about classes to put in the visualization
+"
 Class {
 	#name : #FamixUMLRoassalDescriptor,
 	#superclass : #RSUMLClassDescriptor,
@@ -7,20 +10,36 @@ Class {
 	#category : #'Famix-UMLDocumentor-Backend'
 }
 
+{ #category : #accessing }
+FamixUMLRoassalDescriptor >> aggregations [
+
+	^(umlModel
+		select: [ :umlEntity |
+			(umlEntity class = FamixUMLAssociation) and:
+			[ umlEntity aggregation = #source ] ]
+		thenCollect: [ :aggreg |
+			(self umlClassNamed: aggreg target) -> (self umlClassNamed: aggreg source) ])
+		,
+		(umlModel
+		select: [ :umlEntity |
+			(umlEntity class = FamixUMLAssociation) and:
+			[ umlEntity aggregation = #target ] ]
+		thenCollect: [ :aggreg |
+			(self umlClassNamed: aggreg source) -> (self umlClassNamed: aggreg target) ])
+]
+
 { #category : #initialization }
 FamixUMLRoassalDescriptor >> initialize [ 
 
 	super initialize.
 
-
 	self
-		classname: #name;
-		superclass: [ :famixUMLClass | self superClassOf: famixUMLClass ];
-		instVars: [ :famixUMLClass | famixUMLClass properties ] ;
-		methods: [ :famixUMLClass | #() ];
-		methodSelector: #name;
-		instVarSelector: #name;
-		methodsLimit: SmallInteger maxVal;
+		classname: #name ;
+		superclass: [ :famixUMLClass | self superClassOf: famixUMLClass ] ;
+		instVars: [ :famixUMLClass | famixUMLClass properties sorted: #name ascending ] ;
+		methods: [ :famixUMLClass | #() ] ;
+		instVarSelector: #name ;
+		methodsLimit: SmallInteger maxVal ;
 		isAbstract: [ :famixUMLClass | famixUMLClass isStub ]
 ]
 

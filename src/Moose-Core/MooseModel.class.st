@@ -41,7 +41,7 @@ MooseModel class >> defaultPackagesToProcessWith: aCollectionOfPackages [
 	
 	If a user of Famix wishes to add entities to all metamodels, they should add a methode #shouldBeIncludedByDefaultInMetamodelsWith: to their package manifest to return true."
 
-	^ RPackageOrganizer default packages
+	^ self packageOrganizer packages
 		select: [ :package | 
 			package packageManifestOrNil
 				ifNil: [ false ]

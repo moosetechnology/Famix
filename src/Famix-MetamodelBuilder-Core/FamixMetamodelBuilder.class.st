@@ -98,6 +98,17 @@ FamixMetamodelBuilder >> apply [
 ]
 
 { #category : #accessing }
+FamixMetamodelBuilder >> association: anAssociationName [
+
+	| association |
+	association := self ensureClassNamed: anAssociationName.
+
+	association --|> #TAssociation.
+
+	^ association
+]
+
+{ #category : #accessing }
 FamixMetamodelBuilder >> baseImportingContextName [
 
 	^ #FamixImportingContext
@@ -107,6 +118,13 @@ FamixMetamodelBuilder >> baseImportingContextName [
 FamixMetamodelBuilder >> behaviorsCount [
 
 	^ self traits size + self classes size
+]
+
+{ #category : #generating }
+FamixMetamodelBuilder >> changesToApply [
+
+	self prepareGeneration.
+	^ self environment changesToApply
 ]
 
 { #category : #initialization }
@@ -503,13 +521,6 @@ FamixMetamodelBuilder >> printOn: aStream [
 			nextPut: $(;
 			print: g class;
 			nextPut: $) ]
-]
-
-{ #category : #generating }
-FamixMetamodelBuilder >> regenerationIsNeeded [
-
-	self prepareGeneration.
-	^ self environment regenerationIsNeeded
 ]
 
 { #category : #generating }

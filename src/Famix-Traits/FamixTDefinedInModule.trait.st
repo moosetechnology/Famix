@@ -1,3 +1,14 @@
+"
+## Relations
+======================
+
+### Parents
+| Relation | Origin | Opposite | Type | Comment |
+| `parentModule` | `FamixTDefinedInModule` | `moduleEntities` | `FamixTModule` | Module that contains the definition of this entity|
+
+
+
+"
 Trait {
 	#name : #FamixTDefinedInModule,
 	#instVars : [

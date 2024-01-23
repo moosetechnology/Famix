@@ -1,5 +1,12 @@
 "
 The signature of any behavioural entity
+
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+| `signature` | `String` | nil | Signature of the message being sent|
+
 "
 Trait {
 	#name : #FamixTHasSignature,
