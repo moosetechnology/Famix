@@ -1,5 +1,16 @@
 "
 Represents a bound for a lower bounded and upper bounded wildcard.
+
+## Relations
+======================
+
+### Other
+| Relation | Origin | Opposite | Type | Comment |
+| `lowerBoundedWildcards` | `FamixJavaTBound` | `lowerBound` | `FamixJavaTBounded` | Wildcards lower bounded by this bound.|
+| `upperBoundedWildcards` | `FamixJavaTBound` | `upperBound` | `FamixJavaTBounded` | Wildcards upper bounded by this bound.|
+
+
+
 "
 Trait {
 	#name : #FamixJavaTBound,
