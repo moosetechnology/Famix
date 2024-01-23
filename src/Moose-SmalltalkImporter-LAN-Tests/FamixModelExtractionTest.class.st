@@ -151,6 +151,7 @@ FamixModelExtractionTest >> testHasEmptyBody [
 
 { #category : #tests }
 FamixModelExtractionTest >> testInheritedAttributes [
+
 	| inheritedAtts |
 	inheritedAtts := msePrinterClass inheritedAttributes.
 	self assert: msePrinterClass superclassHierarchy size equals: 5.
@@ -159,7 +160,10 @@ FamixModelExtractionTest >> testInheritedAttributes [
 	self assert: (inheritedAtts includes: nodeName).
 	self assert: (inheritedAtts includes: nextNode).
 	self assert: (inheritedAtts includes: serverType).
-	self assert: (inheritedAtts select: [ :each | each isClassSide ]) size equals: 1
+	"In P12 DependentFileds class var gor removed from Object. Remove this condition once P12 will be the minimal version used for this project."
+	self assert: (inheritedAtts select: [ :each | each isClassSide ]) size equals: (SystemVersion current major < 12
+			 ifTrue: [ 1 ]
+			 ifFalse: [ 0 ])
 ]
 
 { #category : #tests }
@@ -233,7 +237,7 @@ FamixModelExtractionTest >> testIsSide [
 
 { #category : #tests }
 FamixModelExtractionTest >> testModelDoesNotContainDuplicateSharedVars [
-	self assert: (self model entities select: [ :e | e name = 'DependentsFields' ]) size equals: 1
+	self assert: (self model entities select: [ :e | e name = 'MySharedVariable' ]) size equals: 1
 ]
 
 { #category : #tests }

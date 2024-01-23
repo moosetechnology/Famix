@@ -61,14 +61,12 @@ LANFamixPropertiesTest >> testClassAllProperties [
 LANFamixPropertiesTest >> testClassAttributes [
 
 	self assert: self nodeClass numberOfAttributes equals: 2.
-	self assert: self nodeClass numberOfAttributesInherited equals: 3.
-	self
-		assert:
-		(self workstationClass propertyNamed: #numberOfAttributesInherited)
-		equals: (self totalNumberOfAttributesFor: LANWorkStation superclass).
-	self
-		assert: self workstationClass numberOfAttributesInherited
-		equals: (self totalNumberOfAttributesFor: LANWorkStation superclass)
+	"In P12 DependentFileds class var gor removed from Object. Remove this condition once P12 will be the minimal version used for this project."
+	self assert: self nodeClass numberOfAttributesInherited equals: (SystemVersion current major < 12
+			 ifTrue: [ 3 ]
+			 ifFalse: [ 2 ]).
+	self assert: (self workstationClass propertyNamed: #numberOfAttributesInherited) equals: (self totalNumberOfAttributesFor: LANWorkStation superclass).
+	self assert: self workstationClass numberOfAttributesInherited equals: (self totalNumberOfAttributesFor: LANWorkStation superclass)
 ]
 
 { #category : #testing }
@@ -259,9 +257,9 @@ LANFamixPropertiesTest >> testMethodsSimpleProperties [
 
 { #category : #testing }
 LANFamixPropertiesTest >> testNoDuplicatesOfClassVariables [
-	self assert: ((self model entityNamed: #'Smalltalk::Object') attributes contains: [ :each | each name = #DependentsFields ]).
-	self assert: (self model entityNamed: #'Smalltalk::Object') attributes first identicalTo: (self model entityNamed: #'Smalltalk::Object') attributes last.
-	self assert: (self model entityNamed: #'Smalltalk::Object') attributes size equals: 1
+	self assert: ((self model entityNamed: #'Smalltalk::LANAbstractDestinationAddress') attributes contains: [ :each | each name = #MySharedVariable ]).
+	self assert: (self model entityNamed: #'Smalltalk::LANAbstractDestinationAddress') attributes first identicalTo: (self model entityNamed: #'Smalltalk::LANAbstractDestinationAddress') attributes last.
+	self assert: (self model entityNamed: #'Smalltalk::LANAbstractDestinationAddress') attributes size equals: 1
 ]
 
 { #category : #testing }
