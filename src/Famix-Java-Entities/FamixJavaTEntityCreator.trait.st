@@ -96,6 +96,13 @@ FamixJavaTEntityCreator >> newComment [
 ]
 
 { #category : #'entity creation' }
+FamixJavaTEntityCreator >> newConcretisation [
+
+	<generated>
+	^ self add: FamixJavaConcretisation new
+]
+
+{ #category : #'entity creation' }
 FamixJavaTEntityCreator >> newEnum [
 
 	<generated>
@@ -243,6 +250,13 @@ FamixJavaTEntityCreator >> newParameter [
 ]
 
 { #category : #'entity creation' }
+FamixJavaTEntityCreator >> newParameterConcretisation [
+
+	<generated>
+	^ self add: FamixJavaParameterConcretisation new
+]
+
+{ #category : #'entity creation' }
 FamixJavaTEntityCreator >> newParameterNamed: aName [
 
 	<generated>
@@ -257,31 +271,31 @@ FamixJavaTEntityCreator >> newParameterType [
 ]
 
 { #category : #'entity creation' }
-FamixJavaTEntityCreator >> newParameterizableClass [
+FamixJavaTEntityCreator >> newParameterTypeNamed: aName [
 
 	<generated>
-	^ self add: FamixJavaParameterizableClass new
+	^ self add: (FamixJavaParameterType named: aName)
 ]
 
 { #category : #'entity creation' }
-FamixJavaTEntityCreator >> newParameterizableException [
+FamixJavaTEntityCreator >> newParametricClass [
 
 	<generated>
-	^ self add: FamixJavaParameterizableException new
+	^ self add: FamixJavaParametricClass new
 ]
 
 { #category : #'entity creation' }
-FamixJavaTEntityCreator >> newParameterizableInterface [
+FamixJavaTEntityCreator >> newParametricInterface [
 
 	<generated>
-	^ self add: FamixJavaParameterizableInterface new
+	^ self add: FamixJavaParametricInterface new
 ]
 
 { #category : #'entity creation' }
-FamixJavaTEntityCreator >> newParameterizedType [
+FamixJavaTEntityCreator >> newParametricMethod [
 
 	<generated>
-	^ self add: FamixJavaParameterizedType new
+	^ self add: FamixJavaParametricMethod new
 ]
 
 { #category : #'entity creation' }
@@ -352,4 +366,11 @@ FamixJavaTEntityCreator >> newUnknownVariableNamed: aName [
 
 	<generated>
 	^ self add: (FamixJavaUnknownVariable named: aName)
+]
+
+{ #category : #'entity creation' }
+FamixJavaTEntityCreator >> newWildcard [
+
+	<generated>
+	^ self add: FamixJavaWildcard new
 ]

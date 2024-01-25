@@ -191,21 +191,7 @@ MooseAbstractGroup >> allPackages [
 MooseAbstractGroup >> allParameterTypes [
 	<navigation: 'All parameter types'>
 	<package: #Java>
-	^ self allUsing: FamixTParameterType
-]
-
-{ #category : #'*Famix-Traits' }
-MooseAbstractGroup >> allParameterizableClasses [
-	<navigation: 'All parameterizable classes'>
-	<package: #Java>
-	^ self allUsing: FamixTWithParameterizedTypes
-]
-
-{ #category : #'*Famix-Traits' }
-MooseAbstractGroup >> allParameterizedTypes [
-	<navigation: 'All parameterized types'>
-	<package: #Java>
-	^ self allUsing: FamixTParameterizedType
+	^ self allUsing: FamixTParameter
 ]
 
 { #category : #'*Famix-Traits' }
@@ -213,6 +199,13 @@ MooseAbstractGroup >> allParameters [
 	
 	<navigation: 'All parameters'>
 	^self allUsing: FamixTParameter 
+]
+
+{ #category : #'*Famix-Traits' }
+MooseAbstractGroup >> allParametricEntities [
+	<navigation: 'All parameteric entities'>
+	<package: #Java>
+	^ self allUsing: FamixTParametricEntity
 ]
 
 { #category : #'*Famix-Traits' }

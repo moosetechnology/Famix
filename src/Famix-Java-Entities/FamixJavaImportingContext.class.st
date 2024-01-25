@@ -72,6 +72,13 @@ FamixJavaImportingContext >> importComment [
 ]
 
 { #category : #importing }
+FamixJavaImportingContext >> importConcretisation [
+
+	<generated>
+	^ self importAssociation: (self class fm3ClassNamed: #Concretisation)
+]
+
+{ #category : #importing }
 FamixJavaImportingContext >> importEnum [
 
 	<generated>
@@ -170,6 +177,13 @@ FamixJavaImportingContext >> importParameter [
 ]
 
 { #category : #importing }
+FamixJavaImportingContext >> importParameterConcretisation [
+
+	<generated>
+	^ self importAssociation: (self class fm3ClassNamed: #ParameterConcretisation)
+]
+
+{ #category : #importing }
 FamixJavaImportingContext >> importParameterType [
 
 	<generated>
@@ -177,31 +191,24 @@ FamixJavaImportingContext >> importParameterType [
 ]
 
 { #category : #importing }
-FamixJavaImportingContext >> importParameterizableClass [
+FamixJavaImportingContext >> importParametricClass [
 
 	<generated>
-	^ self importConcreteEntity: (self class fm3ClassNamed: #ParameterizableClass)
+	^ self importConcreteEntity: (self class fm3ClassNamed: #ParametricClass)
 ]
 
 { #category : #importing }
-FamixJavaImportingContext >> importParameterizableException [
+FamixJavaImportingContext >> importParametricInterface [
 
 	<generated>
-	^ self importConcreteEntity: (self class fm3ClassNamed: #ParameterizableException)
+	^ self importConcreteEntity: (self class fm3ClassNamed: #ParametricInterface)
 ]
 
 { #category : #importing }
-FamixJavaImportingContext >> importParameterizableInterface [
+FamixJavaImportingContext >> importParametricMethod [
 
 	<generated>
-	^ self importConcreteEntity: (self class fm3ClassNamed: #ParameterizableInterface)
-]
-
-{ #category : #importing }
-FamixJavaImportingContext >> importParameterizedType [
-
-	<generated>
-	^ self importConcreteEntity: (self class fm3ClassNamed: #ParameterizedType)
+	^ self importConcreteEntity: (self class fm3ClassNamed: #ParametricMethod)
 ]
 
 { #category : #importing }
@@ -251,6 +258,13 @@ FamixJavaImportingContext >> importUnknownVariable [
 
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #UnknownVariable)
+]
+
+{ #category : #importing }
+FamixJavaImportingContext >> importWildcard [
+
+	<generated>
+	^ self importConcreteEntity: (self class fm3ClassNamed: #Wildcard)
 ]
 
 { #category : #testing }
@@ -307,6 +321,13 @@ FamixJavaImportingContext >> shouldImportComment [
 
 	<generated>
 	^ self shouldImport: #Comment
+]
+
+{ #category : #testing }
+FamixJavaImportingContext >> shouldImportConcretisation [
+
+	<generated>
+	^ self shouldImport: #Concretisation
 ]
 
 { #category : #testing }
@@ -408,6 +429,13 @@ FamixJavaImportingContext >> shouldImportParameter [
 ]
 
 { #category : #testing }
+FamixJavaImportingContext >> shouldImportParameterConcretisation [
+
+	<generated>
+	^ self shouldImport: #ParameterConcretisation
+]
+
+{ #category : #testing }
 FamixJavaImportingContext >> shouldImportParameterType [
 
 	<generated>
@@ -415,31 +443,24 @@ FamixJavaImportingContext >> shouldImportParameterType [
 ]
 
 { #category : #testing }
-FamixJavaImportingContext >> shouldImportParameterizableClass [
+FamixJavaImportingContext >> shouldImportParametricClass [
 
 	<generated>
-	^ self shouldImport: #ParameterizableClass
+	^ self shouldImport: #ParametricClass
 ]
 
 { #category : #testing }
-FamixJavaImportingContext >> shouldImportParameterizableException [
+FamixJavaImportingContext >> shouldImportParametricInterface [
 
 	<generated>
-	^ self shouldImport: #ParameterizableException
+	^ self shouldImport: #ParametricInterface
 ]
 
 { #category : #testing }
-FamixJavaImportingContext >> shouldImportParameterizableInterface [
+FamixJavaImportingContext >> shouldImportParametricMethod [
 
 	<generated>
-	^ self shouldImport: #ParameterizableInterface
-]
-
-{ #category : #testing }
-FamixJavaImportingContext >> shouldImportParameterizedType [
-
-	<generated>
-	^ self shouldImport: #ParameterizedType
+	^ self shouldImport: #ParametricMethod
 ]
 
 { #category : #testing }
@@ -489,4 +510,11 @@ FamixJavaImportingContext >> shouldImportUnknownVariable [
 
 	<generated>
 	^ self shouldImport: #UnknownVariable
+]
+
+{ #category : #testing }
+FamixJavaImportingContext >> shouldImportWildcard [
+
+	<generated>
+	^ self shouldImport: #Wildcard
 ]

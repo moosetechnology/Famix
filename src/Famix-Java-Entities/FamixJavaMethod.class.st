@@ -25,12 +25,12 @@
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
-| `caughtExceptions` | `FamixTWithExceptions` | `catchingEntities` | `FamixTException` | The exceptions caught by the method|
+| `caughtExceptions` | `FamixTWithExceptions` | `catchingEntities` | `FamixTThrowable` | The exceptions caught by the method|
 | `comments` | `FamixTWithComments` | `commentedEntity` | `FamixTComment` | List of comments for the entity|
-| `declaredExceptions` | `FamixTWithExceptions` | `declaringEntities` | `FamixTException` | The exceptions declared by the method|
+| `declaredExceptions` | `FamixTWithExceptions` | `declaringEntities` | `FamixTThrowable` | The exceptions declared by the method|
 | `declaredType` | `FamixTTypedEntity` | `typedEntities` | `FamixTType` | Type of the entity, if any|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
-| `thrownExceptions` | `FamixTWithExceptions` | `throwingEntities` | `FamixTException` | The exceptions thrown by the method|
+| `thrownExceptions` | `FamixTWithExceptions` | `throwingEntities` | `FamixTThrowable` | The exceptions thrown by the method|
 
 
 ## Properties
