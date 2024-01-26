@@ -66,6 +66,18 @@ FamixTParametricEntity >> addGenericParameter: anObject [
 ]
 
 { #category : #accessing }
+FamixTParametricEntity >> allTypeParameters [
+
+	| collection |
+	collection := OrderedCollection new:
+		              self concreteParameters + self genericParameters size.
+	collection
+		addAll: self concreteParameters;
+		addAll: self genericParameters.
+	^ collection
+]
+
+{ #category : #accessing }
 FamixTParametricEntity >> concreteParameters [
 	"Relation named: #concreteParameters type: #FamixTConcreteParameterType opposite: #concreteEntities"
 
@@ -133,40 +145,25 @@ FamixTParametricEntity >> genericParameters: anObject [
 
 { #category : #accessing }
 FamixTParametricEntity >> isConcreteEntity [
-"An Entity is generic if it has at least one ParameterType"
+	"An Entity is generic if it has at least one ParameterType"
 
-	| param res |
-	res := true.
-	param := OrderedCollection new.
-	param addAll: self genericParameters.
-	param addAll: self concreteParameters.
-	param do: [ :p | p isParameterType 
-		ifTrue: [ res := false ]  ].
-	^ res.
-	
-	"self genericParameters ifNotEmpty: [ ^ false ] 
-	ifEmpty: [^ true]."
+	^ self isGenericEntity not
 ]
 
 { #category : #accessing }
 FamixTParametricEntity >> isGenericEntity [
-"An Entity is generic if it has at least one ParameterType"
+	"An Entity is generic if it has at least one ParameterType"
 
-	| param res |
-	res := false.
-	param := OrderedCollection new.
-	param addAll: self genericParameters.
-	param addAll: self concreteParameters.
-	param do: [ :p | p isParameterType 
-		ifTrue: [ res := true ]  ].
-	^ res.
+	self genericParameters ifNotEmpty: [ ^ true ].
+	^ self concreteParameters anySatisfy: [ :p | p isParameterType ]
 ]
 
 { #category : #accessing }
-FamixTParametricEntity >> parametricParameters [
+FamixTParametricEntity >> rootGenericEntity [
 
-	|collection|
-	collection := OrderedCollection new.
-	collection addAll: self concreteParameters , self genericParameters .
-	^ collection 
+	| root |
+	root := self.
+	[ root genericEntity isNotNil ] whileTrue: [
+		root := root genericEntity ].
+	^ root
 ]
