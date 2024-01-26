@@ -1,11 +1,6 @@
 Extension { #name : #FamixTypeGroup }
 
 { #category : #'*Famix-Visualizations' }
-FamixTypeGroup >> blueprintComplexity [
-	^ FamixTypeGroupBlueprintComplexity forTypeGroup: self
-]
-
-{ #category : #'*Famix-Visualizations' }
 FamixTypeGroup >> inspectorShowComplexity [
 
 	<inspectorPresentationOrder: 10 title: 'System Complexity'>
