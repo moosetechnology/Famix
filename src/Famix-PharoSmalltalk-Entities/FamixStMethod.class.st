@@ -4,11 +4,13 @@
 
 ### Parents
 | Relation | Origin | Opposite | Type | Comment |
+|---|
 | `parentPackage` | `FamixTPackageable` | `childEntities` | `FamixTPackage` | Package containing the entity in the code structure (if applicable)|
 | `parentType` | `FamixTMethod` | `methods` | `FamixTWithMethods` | Type declaring the method. It provides the implementation for belongsTo.|
 
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
+|---|
 | `definedAnnotationTypes` | `FamixTWithAnnotationTypes` | `annotationTypesContainer` | `FamixTAnnotationType` | The container in which the AnnotationTypes may be declared|
 | `implicitVariables` | `FamixTWithImplicitVariables` | `parentBehaviouralEntity` | `FamixTImplicitVariable` | Implicit variables used locally by this behaviour.|
 | `localVariables` | `FamixTWithLocalVariables` | `parentBehaviouralEntity` | `FamixTLocalVariable` | Variables locally defined by this behaviour.|
@@ -16,16 +18,19 @@
 
 ### Outgoing dependencies
 | Relation | Origin | Opposite | Type | Comment |
+|---|
 | `accesses` | `FamixTWithAccesses` | `accessor` | `FamixTAccess` | Accesses to variables made by this behaviour.|
 | `outgoingInvocations` | `FamixTWithInvocations` | `sender` | `FamixTInvocation` | Outgoing invocations sent by this behaviour.|
 | `outgoingReferences` | `FamixTWithReferences` | `referencer` | `FamixTReference` | References from this entity to other entities.|
 
 ### Incoming dependencies
 | Relation | Origin | Opposite | Type | Comment |
+|---|
 | `incomingInvocations` | `FamixTInvocable` | `candidates` | `FamixTInvocation` | Incoming invocations from other behaviours computed by the candidate operator.|
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
+|---|
 | `annotationInstances` | `FamixTWithAnnotationInstances` | `annotatedEntity` | `FamixTAnnotationInstance` | This property corresponds to the set of annotations associated to the entity|
 | `comments` | `FamixTWithComments` | `commentedEntity` | `FamixTComment` | List of comments for the entity|
 | `declaredType` | `FamixTTypedEntity` | `typedEntities` | `FamixTType` | Type of the entity, if any|
@@ -36,6 +41,7 @@
 ======================
 
 | Name | Type | Default value | Comment |
+|---|
 | `isAbstract` | `Boolean` | false | Entity can be declared abstract|
 | `isClassSide` | `Boolean` | false | Entity can be declared class side i.e. static|
 | `isStub` | `Boolean` | false | Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.|

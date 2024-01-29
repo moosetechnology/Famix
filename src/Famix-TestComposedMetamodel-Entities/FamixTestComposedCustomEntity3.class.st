@@ -4,6 +4,7 @@
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
+|---|
 | `c23` | `FamixTestComposedCustomEntity3` | `c3s` | `FamixTestComposed2CustomEntity3` | |
 | `customEntity3` | `FamixTestComposedCustomEntity3` | `customEntities3` | `FamixTestComposed1CustomEntity3` | |
 

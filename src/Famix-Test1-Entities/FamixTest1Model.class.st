@@ -5,6 +5,7 @@ This is a the comment of the model class
 ======================
 
 | Name | Type | Default value | Comment |
+|---|
 | `modelHasProperties` | `Object` | nil | |
 
 "

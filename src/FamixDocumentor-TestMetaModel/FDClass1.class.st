@@ -4,6 +4,7 @@
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
+|---|
 | `myTrait` | `FDClass1` | `class1` | `FDTrait4` | |
 
 

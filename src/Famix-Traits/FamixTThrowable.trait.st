@@ -6,6 +6,7 @@ TThrowable represents all types of possible exceptions.
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
+|---|
 | `catchingEntities` | `FamixTThrowable` | `caughtExceptions` | `FamixTWithExceptions` | |
 | `declaringEntities` | `FamixTThrowable` | `declaredExceptions` | `FamixTWithExceptions` | |
 | `throwingEntities` | `FamixTThrowable` | `thrownExceptions` | `FamixTWithExceptions` | |

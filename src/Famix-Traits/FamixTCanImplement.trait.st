@@ -6,6 +6,7 @@ I can be the source of an implementation (cf a class implementing an Interface)
 
 ### Outgoing dependencies
 | Relation | Origin | Opposite | Type | Comment |
+|---|
 | `interfaceImplementations` | `FamixTCanImplement` | `implementingClass` | `FamixTImplementation` | Implementation relationships|
 
 

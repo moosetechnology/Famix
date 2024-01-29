@@ -4,6 +4,7 @@
 
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
+|---|
 | `principal` | `FamixTest4School` | `school` | `FamixTest4Principal` | |
 | `rooms` | `FamixTest4School` | `school` | `FamixTest4Room` | |
 | `students` | `FamixTest4School` | `school` | `FamixTest4Student` | |

@@ -3,6 +3,7 @@
 ======================
 
 | Name | Type | Default value | Comment |
+|---|
 | `isAbstract` | `Boolean` | false | Entity can be declared abstract|
 
 "

@@ -4,6 +4,7 @@
 
 ### Incoming dependencies
 | Relation | Origin | Opposite | Type | Comment |
+|---|
 | `outgoingTraitUsages` | `FamixTTraitUser` | `user` | `FamixTTraitUsage` | |
 
 

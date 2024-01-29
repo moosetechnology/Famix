@@ -4,10 +4,12 @@
 
 ### Parents
 | Relation | Origin | Opposite | Type | Comment |
+|---|
 | `parentFolder` | `FamixTFileSystemEntity` | `childrenFileSystemEntities` | `FamixTFolder` | Folder entity containing this file.|
 
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
+|---|
 | `childrenFileSystemEntities` | `FamixTFolder` | `parentFolder` | `FamixTFileSystemEntity` | List of entities contained in this folder.|
 
 

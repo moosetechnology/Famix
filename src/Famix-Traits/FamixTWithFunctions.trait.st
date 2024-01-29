@@ -4,6 +4,7 @@
 
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
+|---|
 | `functions` | `FamixTWithFunctions` | `functionOwner` | `FamixTFunction` | Functions defined in the container, if any.|
 
 

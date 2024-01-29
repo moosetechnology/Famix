@@ -4,6 +4,7 @@
 
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
+|---|
 | `enumValues` | `FamixTWithEnumValues` | `parentEnum` | `FamixTEnumValue` | |
 
 

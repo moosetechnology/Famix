@@ -3,6 +3,7 @@
 ======================
 
 | Name | Type | Default value | Comment |
+|---|
 | `isFinal` | `Boolean` | false | Entity can be declared final|
 
 "

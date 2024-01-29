@@ -3,6 +3,7 @@
 ======================
 
 | Name | Type | Default value | Comment |
+|---|
 | `isClassSide` | `Boolean` | nil | Entity can be declared class side i.e. static|
 
 "

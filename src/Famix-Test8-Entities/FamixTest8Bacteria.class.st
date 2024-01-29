@@ -4,6 +4,7 @@
 
 ### Outgoing dependencies
 | Relation | Origin | Opposite | Type | Comment |
+|---|
 | `outgoingInfections` | `FamixTest8TInfectable` | `infectable` | `FamixTest8Infection` | |
 
 
@@ -11,6 +12,7 @@
 ======================
 
 | Name | Type | Default value | Comment |
+|---|
 | `pathogenicity` | `Number` | nil | |
 
 "

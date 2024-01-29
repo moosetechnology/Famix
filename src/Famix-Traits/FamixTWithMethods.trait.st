@@ -4,6 +4,7 @@
 
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
+|---|
 | `methods` | `FamixTWithMethods` | `parentType` | `FamixTMethod` | Methods declared by this type.|
 
 

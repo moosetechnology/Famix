@@ -12,6 +12,7 @@ public class Student implements Serializable{
 ======================
 
 | Name | Type | Default value | Comment |
+|---|
 | `isTransient` | `Boolean` | false | Entity can be declared transient|
 
 "

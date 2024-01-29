@@ -4,6 +4,7 @@
 
 ### Incoming dependencies
 | Relation | Origin | Opposite | Type | Comment |
+|---|
 | `incomingInfections` | `FamixTest8TInfectious` | `infectious` | `FamixTest8Infection` | |
 
 

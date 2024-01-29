@@ -3,6 +3,7 @@
 ======================
 
 | Name | Type | Default value | Comment |
+|---|
 | `name` | `String` | nil | |
 
 "

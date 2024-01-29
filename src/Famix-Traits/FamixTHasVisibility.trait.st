@@ -3,6 +3,7 @@
 ======================
 
 | Name | Type | Default value | Comment |
+|---|
 | `visibility` | `String` | nil | Visibility of the entity|
 
 "

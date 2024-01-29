@@ -4,6 +4,7 @@
 
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
+|---|
 | `templates` | `FamixTWithTemplates` | `templateOwner` | `FamixTTemplate` | |
 
 

@@ -10,10 +10,12 @@ Instance Variables:
 
 ### Parents
 | Relation | Origin | Opposite | Type | Comment |
+|---|
 | `annotationTypesContainer` | `FamixTAnnotationType` | `definedAnnotationTypes` | `FamixTWithAnnotationTypes` | Container in which an AnnotationType may reside|
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
+|---|
 | `instances` | `FamixTAnnotationType` | `annotationType` | `FamixTTypedAnnotationInstance` | Annotations of this type|
 
 

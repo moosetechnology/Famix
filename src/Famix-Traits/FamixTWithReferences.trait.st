@@ -4,6 +4,7 @@
 
 ### Outgoing dependencies
 | Relation | Origin | Opposite | Type | Comment |
+|---|
 | `outgoingReferences` | `FamixTWithReferences` | `referencer` | `FamixTReference` | References from this entity to other entities.|
 
 

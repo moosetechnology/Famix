@@ -4,6 +4,7 @@
 
 ### Outgoing dependencies
 | Relation | Origin | Opposite | Type | Comment |
+|---|
 | `outgoingImports` | `FamixTWithImports` | `importingEntity` | `FamixTImport` | |
 
 

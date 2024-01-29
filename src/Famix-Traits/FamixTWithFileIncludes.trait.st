@@ -4,6 +4,7 @@
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
+|---|
 | `incomingIncludeRelations` | `FamixTWithFileIncludes` | `target` | `FamixTFileInclude` | The include entities that have this file as a target.|
 | `outgoingIncludeRelations` | `FamixTWithFileIncludes` | `source` | `FamixTFileInclude` | The include entities that have this file as a source.|
 

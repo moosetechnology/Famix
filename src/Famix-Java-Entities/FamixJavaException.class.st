@@ -4,10 +4,12 @@
 
 ### Parents
 | Relation | Origin | Opposite | Type | Comment |
+|---|
 | `typeContainer` | `FamixTType` | `types` | `FamixTWithTypes` | Container entity to which this type belongs. Container is a namespace, not a package (Smalltalk).|
 
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
+|---|
 | `attributes` | `FamixTWithAttributes` | `parentType` | `FamixTAttribute` | List of attributes declared by this type.|
 | `methods` | `FamixTWithMethods` | `parentType` | `FamixTMethod` | Methods declared by this type.|
 | `types` | `FamixTWithTypes` | `typeContainer` | `FamixTType` | Types contained (declared) in this entity, if any.
@@ -15,16 +17,19 @@
 
 ### Outgoing dependencies
 | Relation | Origin | Opposite | Type | Comment |
+|---|
 | `interfaceImplementations` | `FamixTCanImplement` | `implementingClass` | `FamixTImplementation` | Implementation relationships|
 | `superInheritances` | `FamixTWithInheritances` | `subclass` | `FamixTInheritance` | Superinheritance relationships, i.e. known superclasses of this type.|
 
 ### Incoming dependencies
 | Relation | Origin | Opposite | Type | Comment |
+|---|
 | `incomingReferences` | `FamixTReferenceable` | `referredType` | `FamixTReference` | References to this entity by other entities.|
 | `subInheritances` | `FamixTWithInheritances` | `superclass` | `FamixTInheritance` | Subinheritance relationships, i.e. known subclasses of this type.|
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
+|---|
 | `annotationInstances` | `FamixTWithAnnotationInstances` | `annotatedEntity` | `FamixTAnnotationInstance` | This property corresponds to the set of annotations associated to the entity|
 | `catchingEntities` | `FamixTThrowable` | `caughtExceptions` | `FamixTWithExceptions` | |
 | `comments` | `FamixTWithComments` | `commentedEntity` | `FamixTComment` | List of comments for the entity|
@@ -39,6 +44,7 @@
 ======================
 
 | Name | Type | Default value | Comment |
+|---|
 | `isStub` | `Boolean` | false | Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.|
 | `name` | `String` | nil | Basic name of the entity, not full reference.|
 | `visibility` | `String` | nil | Visibility of the entity|

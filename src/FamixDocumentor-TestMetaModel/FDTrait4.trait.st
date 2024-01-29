@@ -4,6 +4,7 @@
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
+|---|
 | `class1` | `FDTrait4` | `myTrait` | `FDClass1` | |
 
 
@@ -11,6 +12,7 @@
 ======================
 
 | Name | Type | Default value | Comment |
+|---|
 | `otherProp` | `Object` | nil | Another property in the trait|
 | `someProp` | `String` | nil | A property in the trait|
 

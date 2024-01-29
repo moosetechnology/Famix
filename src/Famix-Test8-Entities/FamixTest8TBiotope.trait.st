@@ -4,6 +4,7 @@
 
 ### Incoming dependencies
 | Relation | Origin | Opposite | Type | Comment |
+|---|
 | `incomingResidences` | `FamixTest8TBiotope` | `biotope` | `FamixTest8Residence` | |
 
 
