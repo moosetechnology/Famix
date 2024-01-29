@@ -6,6 +6,7 @@ Represents a bounded wildcard, lower bounded with keyword super or upper bounded
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
+|---|
 | `lowerBound` | `FamixJavaTBounded` | `lowerBoundedWildcards` | `FamixJavaTBound` | Lower bound on wildcard, specified by super keyword.|
 | `upperBound` | `FamixJavaTBounded` | `upperBoundedWildcards` | `FamixJavaTBound` | Upper bound on wildcard, specified by extends keyword.|
 

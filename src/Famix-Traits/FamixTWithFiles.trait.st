@@ -4,6 +4,7 @@
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
+|---|
 | `containerFiles` | `FamixTWithFiles` | `entities` | `FamixTFile` | List of files containing the entity|
 
 

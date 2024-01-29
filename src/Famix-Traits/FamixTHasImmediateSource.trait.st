@@ -6,6 +6,7 @@ An immediate source is the source code of the entity stored directly into its so
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
+|---|
 | `element` | `FamixTSourceAnchor` | `sourceAnchor` | `FamixTSourceEntity` | Enable the accessibility to the famix entity that this class is a source pointer for|
 
 
@@ -13,6 +14,7 @@ An immediate source is the source code of the entity stored directly into its so
 ======================
 
 | Name | Type | Default value | Comment |
+|---|
 | `source` | `String` | nil | Actual source code of the source entity|
 
 "

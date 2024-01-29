@@ -5,6 +5,7 @@ The signature of any behavioural entity
 ======================
 
 | Name | Type | Default value | Comment |
+|---|
 | `signature` | `String` | nil | Signature of the message being sent|
 
 "

@@ -4,6 +4,7 @@
 
 ### Parents
 | Relation | Origin | Opposite | Type | Comment |
+|---|
 | `parentFolder` | `FamixTFileSystemEntity` | `childrenFileSystemEntities` | `FamixTFolder` | Folder entity containing this file.|
 
 

@@ -16,6 +16,7 @@ public class SynchronizedCounter {
 ======================
 
 | Name | Type | Default value | Comment |
+|---|
 | `isSynchronized` | `Boolean` | false | Entity can be declared synchronized|
 
 "

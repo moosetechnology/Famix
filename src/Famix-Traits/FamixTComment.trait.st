@@ -6,6 +6,7 @@ FamixTComment represents one instance of a comment (in the sense of programming 
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
+|---|
 | `commentedEntity` | `FamixTComment` | `comments` | `FamixTWithComments` | Source code commented by the comment|
 
 
@@ -13,6 +14,7 @@ FamixTComment represents one instance of a comment (in the sense of programming 
 ======================
 
 | Name | Type | Default value | Comment |
+|---|
 | `content` | `String` | nil | Content of the comment as a String|
 
 "

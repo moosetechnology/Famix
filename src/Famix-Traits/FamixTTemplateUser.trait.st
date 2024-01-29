@@ -4,6 +4,7 @@
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
+|---|
 | `template` | `FamixTTemplateUser` | `templateUsers` | `FamixTTemplate` | |
 
 

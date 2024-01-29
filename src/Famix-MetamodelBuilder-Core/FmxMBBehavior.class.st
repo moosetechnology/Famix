@@ -148,6 +148,8 @@ FmxMBBehavior >> commentWithRelations [
 								  nextPutAll: relationKind;
 								  cr;
 								  nextPutAll: '| Relation | Origin | Opposite | Type | Comment |';
+								  cr;
+								  nextPutAll: '|---|';
 								  cr.
 							  (parents sorted: [ :parent | parent side generationStrategy relationSide name ] ascending) do: [ :parent |
 								  | strategy |
@@ -177,6 +179,8 @@ FmxMBBehavior >> commentWithRelations [
 				  cr;
 				  cr;
 				  nextPutAll: '| Name | Type | Default value | Comment |';
+				  cr;
+				  nextPutAll: '|---|';
 				  cr.
 
 			  (props sorted: #name ascending) do: [ :property |

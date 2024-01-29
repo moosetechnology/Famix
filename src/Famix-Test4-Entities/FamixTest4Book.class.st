@@ -4,6 +4,7 @@
 
 ### Parents
 | Relation | Origin | Opposite | Type | Comment |
+|---|
 | `person` | `FamixTest4Book` | `books` | `FamixTest4Person` | |
 
 

@@ -12,6 +12,7 @@ public class SharedObject {
 ======================
 
 | Name | Type | Default value | Comment |
+|---|
 | `isVolatile` | `Boolean` | false | Entity can be declared volatile|
 
 "

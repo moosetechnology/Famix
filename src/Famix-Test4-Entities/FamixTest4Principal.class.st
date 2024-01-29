@@ -4,6 +4,7 @@
 
 ### Parents
 | Relation | Origin | Opposite | Type | Comment |
+|---|
 | `school` | `FamixTest4Principal` | `principal` | `FamixTest4School` | |
 
 

@@ -5,6 +5,7 @@ This offers a source anchor that connects a sourced entity to a file through a r
 ======================
 
 | Name | Type | Default value | Comment |
+|---|
 | `correspondingFile` | `FamixTFile` | nil | File associated to this source anchor|
 | `encoding` | `String` | nil | A string representing the encoding of a file|
 | `fileName` | `String` | nil | Name of the source file|

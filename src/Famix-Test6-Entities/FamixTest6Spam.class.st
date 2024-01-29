@@ -3,6 +3,7 @@
 ======================
 
 | Name | Type | Default value | Comment |
+|---|
 | `isSomething` | `Boolean` | false | |
 
 "

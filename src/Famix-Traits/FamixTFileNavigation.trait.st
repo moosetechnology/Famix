@@ -3,6 +3,7 @@
 ======================
 
 | Name | Type | Default value | Comment |
+|---|
 | `correspondingFile` | `FamixTFile` | nil | File associated to this source anchor|
 | `encoding` | `String` | nil | A string representing the encoding of a file|
 | `endColumn` | `Number` | nil | Number of the end column|

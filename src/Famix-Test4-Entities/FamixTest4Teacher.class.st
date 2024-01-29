@@ -4,10 +4,12 @@
 
 ### Parents
 | Relation | Origin | Opposite | Type | Comment |
+|---|
 | `school` | `FamixTest4Teacher` | `teachers` | `FamixTest4School` | |
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
+|---|
 | `students` | `FamixTest4Teacher` | `teachers` | `FamixTest4Student` | |
 
 

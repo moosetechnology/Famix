@@ -3,6 +3,7 @@
 ======================
 
 | Name | Type | Default value | Comment |
+|---|
 | `eggs` | `Number` | 12 | |
 | `isFood` | `Boolean` | true | |
 

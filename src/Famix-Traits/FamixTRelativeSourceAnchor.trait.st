@@ -20,6 +20,7 @@ Internal Representation and Key Implementation Points.
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
+|---|
 | `element` | `FamixTSourceAnchor` | `sourceAnchor` | `FamixTSourceEntity` | Enable the accessibility to the famix entity that this class is a source pointer for|
 
 
@@ -27,6 +28,7 @@ Internal Representation and Key Implementation Points.
 ======================
 
 | Name | Type | Default value | Comment |
+|---|
 | `endPos` | `Number` | nil | Stop position in the source|
 | `relatedAnchor` | `FamixTSourceAnchor` | nil | Source anchor to which I am relative.|
 | `startPos` | `Number` | nil | Start position in the source|

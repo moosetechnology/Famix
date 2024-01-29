@@ -4,6 +4,7 @@
 
 ### Outgoing dependencies
 | Relation | Origin | Opposite | Type | Comment |
+|---|
 | `outgoingResidences` | `FamixTest8TResident` | `resident` | `FamixTest8Residence` | |
 
 

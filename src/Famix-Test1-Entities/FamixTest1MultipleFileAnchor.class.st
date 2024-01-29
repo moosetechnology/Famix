@@ -4,6 +4,7 @@
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
+|---|
 | `element` | `FamixTSourceAnchor` | `sourceAnchor` | `FamixTSourceEntity` | Enable the accessibility to the famix entity that this class is a source pointer for|
 
 
@@ -11,6 +12,7 @@
 ======================
 
 | Name | Type | Default value | Comment |
+|---|
 | `fileAnchors` | `FamixTFileAnchor` | nil | All source code definition files|
 
 "

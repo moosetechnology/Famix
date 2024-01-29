@@ -4,10 +4,12 @@
 
 ### Parents
 | Relation | Origin | Opposite | Type | Comment |
+|---|
 | `templateOwner` | `FamixTTemplate` | `templates` | `FamixTWithTemplates` | |
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
+|---|
 | `templateUsers` | `FamixTTemplate` | `template` | `FamixTTemplateUser` | |
 
 

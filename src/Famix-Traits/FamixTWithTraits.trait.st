@@ -4,6 +4,7 @@
 
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
+|---|
 | `traits` | `FamixTWithTraits` | `traitOwner` | `FamixTTrait` | |
 
 
