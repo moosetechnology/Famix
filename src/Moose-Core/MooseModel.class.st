@@ -536,7 +536,6 @@ MooseModel >> flushPrivateState [
 MooseModel >> importFrom: aFMModel named: aString [
 
 	self silentlyAddAll: aFMModel elements.
-	self entityStorage forRuntime.
 	self name: aString
 ]
 

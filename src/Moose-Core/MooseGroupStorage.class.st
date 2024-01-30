@@ -1,16 +1,44 @@
+"
+I am storing the items of the group during the standard usage of moose entities.
+
+I store the entites for fast access byName and byType. I also contains the all the entities in elements which is not sorted. 
+
+I am used by MooseAbstractGroup subclasses.
+
+Public API and Key Messages
+
+I am managed like a collection and my caches are autoupdated when an entity is added or removed.
+ 
+Internal Representation and Key Implementation Points.
+
+    Instance Variables
+	byName:		IdentityHashTable (key: mooseName)
+	byType:		Dictionnary of OrderedCollection (key: FAMIXType)  - the orderedCollection is sorted on access
+	elements:		OrderedCollection
+
+Implementation Points
+- On access by type, OrderedCollections in byType dictionary are sorted by MooseName to find its type faster. This sort is stored in sortedCollectionList and is invalidated on addition of a new element in the collection
+
+I am using an identity hash table to save the names because it is optimized for large collection. The possible loss of performances for small collection is negligeable compared to the gain for large collection. Creating a moose group of 2450080 entities took 6sec+ with anIdentityDictionary and now take 1.6sec+ with a IdentityHashTable.
+
+
+
+"
 Class {
 	#name : #MooseGroupStorage,
 	#superclass : #Collection,
 	#type : #variable,
 	#instVars : [
-		'species'
+		'byName',
+		'elements',
+		'byType'
 	],
 	#category : #'Moose-Core'
 }
 
 { #category : #'instance creation' }
 MooseGroupStorage class >> empty [
-	^ MooseGroupRuntimeStorage new
+	^ MooseGroupStorage new
 ]
 
 { #category : #'instance creation' }
@@ -38,13 +66,14 @@ MooseGroupStorage class >> withAll: aCollection [
 
 { #category : #adding }
 MooseGroupStorage >> add: anElement [ 
-	 
-	^self subclassResponsibility
+	self privateAdd: anElement.
+	self updateCacheOnAddingOf: anElement.
+	^anElement
 ]
 
-{ #category : #enumerating }
+{ #category : #adding }
 MooseGroupStorage >> allEntityTypes [
-	self subclassResponsibility
+	^ byType keys
 ]
 
 { #category : #accessing }
@@ -57,26 +86,12 @@ MooseGroupStorage >> at: uniqueName [
 
 { #category : #accessing }
 MooseGroupStorage >> at: uniqueName ifAbsent: exceptionBlock [ 
-	 
-	^self subclassResponsibility
+	^byName at: uniqueName asSymbol ifAbsent: exceptionBlock
 ]
 
 { #category : #iterators }
 MooseGroupStorage >> basicIterator [
 	^ self elements basicIterator
-]
-
-{ #category : #private }
-MooseGroupStorage >> becomeKind: elementStorageClass [
-
-	self class = elementStorageClass ifTrue: [ ^ self ].
-
-	[ elementStorageClass includesBehavior: MooseGroupStorage ] assert.
-
-	self do: [ :each | 
-		each hasUniqueMooseNameInModel ifTrue: [ each privateClearMooseName ] ].
-
-	self become: (elementStorageClass withAll: self)
 ]
 
 { #category : #enumerating }
@@ -88,22 +103,15 @@ MooseGroupStorage >> collect: aBlock [
 	^newCollection
 ]
 
+{ #category : #enumerating }
+MooseGroupStorage >> do: aBlock [ 
+	 
+	elements do: aBlock
+]
+
 { #category : #accessing }
 MooseGroupStorage >> elements [ 
-	 
-	^self subclassResponsibility
-]
-
-{ #category : #converting }
-MooseGroupStorage >> forRuntime [ 
-	 
-	self becomeKind: MooseGroupRuntimeStorage
-]
-
-{ #category : #converting }
-MooseGroupStorage >> forSetup [ 
-	 
-	self becomeKind: MooseGroupSetupStorage
+	^ elements
 ]
 
 { #category : #testing }
@@ -113,21 +121,29 @@ MooseGroupStorage >> includesID: mooseID [
 ]
 
 { #category : #initialization }
-MooseGroupStorage >> initialize [
+MooseGroupStorage >> initialize: capacity [
 
-	super initialize.
-	species := OrderedCollection
-]
-
-{ #category : #initialization }
-MooseGroupStorage >> initialize: aSize [
-
-	species := OrderedCollection
+	byType := IdentityDictionary new: 24.
+	byName := IdentityHashTable new: capacity.
+	elements := self species new: capacity
 ]
 
 { #category : #iterators }
 MooseGroupStorage >> iterator [
 	^ self elements iterator
+]
+
+{ #category : #copying }
+MooseGroupStorage >> postCopy [  
+	super postCopy.
+	elements := elements copy.
+	byName := byName copy.
+	byType := byType copy
+]
+
+{ #category : #adding }
+MooseGroupStorage >> privateAdd: anElement [
+	^elements add: anElement
 ]
 
 { #category : #removing }
@@ -139,45 +155,77 @@ MooseGroupStorage >> remove: anElement [
 ]
 
 { #category : #removing }
-MooseGroupStorage >> remove: anElement ifAbsent: exceptionBlock [ 
-	 
-	^self subclassResponsibility
+MooseGroupStorage >> remove: anElement ifAbsent: exceptionBlock [
+	self updateCacheOnRemovalOf: anElement.
+	elements remove: anElement.
+	^ anElement
 ]
 
 { #category : #removing }
 MooseGroupStorage >> removeAll [ 
 	 
-	^self subclassResponsibility
+	self initialize: 10000
 ]
 
 { #category : #private }
 MooseGroupStorage >> resetMooseNameFor: anEntity [
-	anEntity privateClearMooseName
+
+	anEntity hasUniqueMooseNameInModel
+		ifTrue: [
+			byName removeKey: anEntity mooseName asSymbol ifAbsent: [  ].
+			anEntity privateClearMooseName.
+			byName at: anEntity mooseName asSymbol put: anEntity ]
+		ifFalse: [ anEntity privateClearMooseName ]
 ]
 
 { #category : #enumerating }
-MooseGroupStorage >> selectAllWithType: aSmalltalkClass [ 
-	^ self subclassResponsibility
+MooseGroupStorage >> selectAllWithType: aSmalltalkType [
+	^ byType
+		at: aSmalltalkType
+		ifAbsent: [ | result |
+			result := Set new.
+			byType keys
+				select: [ :aClass | aClass class = aSmalltalkType ]
+				thenDo: [ :aKey | (byType at: aKey) do: [ :anElement | result add: anElement ] ].
+			OrderedCollection withAll: result ]
 ]
 
 { #category : #accessing }
 MooseGroupStorage >> size [ 
-	 
-	^self subclassResponsibility
+	^ elements size
+]
+
+{ #category : #sorting }
+MooseGroupStorage >> sort: aBlock [
+
+	self elements sort: aBlock
 ]
 
 { #category : #private }
-MooseGroupStorage >> species [ 
-	 
-	^ species
+MooseGroupStorage >> species [
+
+	^ OrderedCollection
 ]
 
-{ #category : #accessing }
-MooseGroupStorage >> species: anObject [
+{ #category : #private }
+MooseGroupStorage >> updateCacheOnAddingOf: anElement [
+	(byType atOrOrederedCollection: anElement class) add: anElement.
+	anElement hasUniqueMooseNameInModel ifTrue: [ byName at: anElement mooseName put: anElement ].
+	^ anElement
+]
 
-	"WARNING: Changing the species of the inner collection might have unattempted consequences.
-	DO NOT EXECUTE THIS METHOD EXCEPT IF YOU ARE REALLY SURE OF YOUR NEED
-	
-	For instance, `model species: Set` would make indexed access to collection element impossible"
-	species := anObject
+{ #category : #private }
+MooseGroupStorage >> updateCacheOnRemovalOf: anElement [
+	byType at: anElement class ifPresent: [ :group |
+		group remove: anElement ifAbsent: [ self error: 'Internal storage inconsistency' ] ].
+
+	anElement hasUniqueMooseNameInModel ifFalse: [ ^ anElement ].
+
+	byName
+		at: anElement mooseName
+		ifAbsent: [ "In theory, objects are registered under their mooseName,
+            however some objects are still registered by their name
+            if #resetMooseName was not used when needed" self resetMooseNameFor: anElement ].
+	byName removeKey: anElement mooseName ifAbsent: [ self error: 'Internal storage inconsistency' ].
+	^ anElement
 ]

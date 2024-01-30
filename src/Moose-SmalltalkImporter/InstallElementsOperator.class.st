@@ -39,13 +39,9 @@ InstallElementsOperator class >> with: elements runOn: aMooseModel [
 { #category : #private }
 InstallElementsOperator >> basicRun [
 
-	model entityStorage forSetup.
-
-	self container do: [ :each | 
+	self container do: [ :each |
 		model add: each.
-		self increment ].
-
-	model entityStorage forRuntime
+		self increment ]
 ]
 
 { #category : #accessing }
