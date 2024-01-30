@@ -168,7 +168,7 @@ FmxMBRealRingEnvironment >> recordMethodsAdoptionsOf: realClass to: anRGClass re
 FmxMBRealRingEnvironment >> recordPackagesChangesFor: resolvedPackages [
 
 	resolvedPackages
-		reject: [ :each | self packageOrganizer includesPackageNamed: each name ]
+		reject: [ :each | self packageOrganizer hasPackage: each name ]
 		thenDo: [ :each | changesToApply add: (FmxPackageAddition named: each name) ]
 ]
 
