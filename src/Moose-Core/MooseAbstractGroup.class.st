@@ -485,7 +485,7 @@ MooseAbstractGroup >> initialize [
 MooseAbstractGroup >> initializeWithAll: aCollection [
 
 	self initialize.
-	storage := MooseGroupRuntimeStorage new: aCollection size.
+	storage := MooseGroupStorage new: aCollection size.
 	self addAll: aCollection
 ]
 

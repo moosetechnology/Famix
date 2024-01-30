@@ -31,11 +31,6 @@ MooseGroupTest >> testAsMooseGroupWithClasses [
 ]
 
 { #category : #tests }
-MooseGroupTest >> testDefaultStorage [
-	self assert: (group entityStorage isKindOf: MooseGroupRuntimeStorage)
-]
-
-{ #category : #tests }
 MooseGroupTest >> testDefaultStorageIterator [
 	self assert: group entityStorage iterator class equals: IteratorWithCollectionAPI
 ]
