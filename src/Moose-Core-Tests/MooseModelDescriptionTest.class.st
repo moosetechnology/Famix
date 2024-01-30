@@ -57,16 +57,16 @@ MooseModelDescriptionTest >> testOppositeOfOppositePropertyIsMyself [
 
 { #category : #tests }
 MooseModelDescriptionTest >> testOppositePropertyExist [
+
 	| allSelector |
+	allSelector := SystemNavigation new allMethods select: [ :e | e hasPragmaNamed: #FMProperty:type:opposite: ].
 
-	allSelector := SystemNavigation new allMethods select: [:e | e hasPragmaNamed: #FMProperty:type:opposite: ].
-
-	self assert: (allSelector reject: [ :s || pragma |
-							pragma := self msePropertyPragmaFor: s.
-							[ pragma arguments second asClass includesSelector: pragma arguments third ]
-							on: NotFound
-							do: [ true ] "type: is not a class, e.g. FM3.Property"
-						]) size
-			equals: 0.
-
+	self
+		assert: (allSelector reject: [ :s |
+				 | pragma |
+				 pragma := self msePropertyPragmaFor: s.
+				 [ (self class environment at: pragma arguments second) includesSelector: pragma arguments third ]
+					 on: NotFound
+					 do: [ "type: is not a class, e.g. FM3.Property" true ] ]) size
+		equals: 0
 ]
