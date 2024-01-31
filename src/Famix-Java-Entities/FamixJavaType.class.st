@@ -149,11 +149,6 @@ FamixJavaType >> isParameterType [
 ]
 
 { #category : #testing }
-FamixJavaType >> isParameterizedType [
-	^ false
-]
-
-{ #category : #testing }
 FamixJavaType >> isTestCase [
 	<FMProperty: #isTestCase type: #Boolean>
 	<derived>

@@ -139,6 +139,13 @@ FamixJavaEntity >> isPackage [
 ]
 
 { #category : #testing }
+FamixJavaEntity >> isParametricEntity [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
 FamixJavaEntity >> isPrimitiveType [
 
 	<generated>

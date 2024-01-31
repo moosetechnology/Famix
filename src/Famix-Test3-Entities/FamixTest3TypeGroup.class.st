@@ -77,6 +77,13 @@ FamixTest3TypeGroup >> isPackage [
 ]
 
 { #category : #testing }
+FamixTest3TypeGroup >> isParametricEntity [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
 FamixTest3TypeGroup >> isQueryable [
 
 	<generated>

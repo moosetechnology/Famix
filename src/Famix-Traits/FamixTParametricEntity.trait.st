@@ -159,6 +159,13 @@ FamixTParametricEntity >> isGenericEntity [
 	^ self concreteParameters anySatisfy: [ :p | p isParameterType ]
 ]
 
+{ #category : #testing }
+FamixTParametricEntity >> isParametricEntity [
+
+	<generated>
+	^ true
+]
+
 { #category : #accessing }
 FamixTParametricEntity >> rootGenericEntity [
 
