@@ -118,7 +118,7 @@ FamixTest3MooseQueryTest >> testNumberOfInternalProviders [
 
 { #category : #tests }
 FamixTest3MooseQueryTest >> testParentTypes [
-	self assertCollection: self m1 parentTypes hasSameElements: {FamixTWithMethods . FamixTest3Class}
+	self assertCollection: self m1 parentTypes hasSameElements: {FamixTWithMethods . FamixTest3Class . FamixTest3ParametricClass}
 ]
 
 { #category : #tests }
