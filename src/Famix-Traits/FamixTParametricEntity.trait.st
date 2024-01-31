@@ -167,13 +167,3 @@ FamixTParametricEntity >> isGenericEntity [
 	self genericParameters ifNotEmpty: [ ^ true ].
 	^ self concreteParameters anySatisfy: [ :p | p isParameterType ]
 ]
-
-{ #category : #accessing }
-FamixTParametricEntity >> rootGenericEntity [
-
-	| root |
-	root := self.
-	[ root genericEntity isNotNil ] whileTrue: [
-		root := root genericEntity ].
-	^ root
-]
