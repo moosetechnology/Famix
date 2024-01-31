@@ -120,6 +120,12 @@ FamixStEntity >> isPackage [
 ]
 
 { #category : #testing }
+FamixStEntity >> isParametricEntity [
+
+	^ false
+]
+
+{ #category : #testing }
 FamixStEntity >> isQueryable [
 
 	<generated>
