@@ -5,18 +5,18 @@
 ### Association source
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `genericEntity` | `FamixTConcretisation` | `concretisations` | `FamixTParametricEntity` | genericEntity linked to in this relationship. from-side of the association|
+| `genericEntity` | `FamixTConcretization` | `concretizations` | `FamixTParametricEntity` | Generic entity linked to in this relationship. from-side of the association|
 
 ### Association target
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `concreteEntity` | `FamixTConcretisation` | `genericization` | `FamixTParametricEntity` | concreteEntity linked to in this relationship. to-side of the association|
+| `concreteEntity` | `FamixTConcretization` | `genericization` | `FamixTParametricEntity` | Concrete entity linked to in this relationship. to-side of the association|
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `next` | `FamixTAssociation` | `previous` | `FamixTAssociation` | Next association in an ordered collection of associations. Currently not supported by the Moose importer|
-| `parameterConcretisations` | `FamixTConcretisation` | `concretisations` | `FamixTParameterConcretisation` | |
+| `parameterConcretizations` | `FamixTConcretization` | `concretizations` | `FamixTParameterConcretization` | |
 | `previous` | `FamixTAssociation` | `next` | `FamixTAssociation` | Previous association in an ordered collection of associations. Currently not supported by the Moose importer|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
 
@@ -30,11 +30,11 @@
 
 "
 Trait {
-	#name : #FamixTConcretisation,
+	#name : #FamixTConcretization,
 	#instVars : [
-		'#concreteEntity => FMOne type: #FamixTParametricEntity opposite: #genericization',
-		'#genericEntity => FMOne type: #FamixTParametricEntity opposite: #concretisations',
-		'#parameterConcretisations => FMMany type: #FamixTParameterConcretisation opposite: #concretisations'
+		'#parameterConcretizations => FMMany type: #FamixTParameterConcretization opposite: #concretizations',
+		'#genericEntity => FMOne type: #FamixTParametricEntity opposite: #concretizations',
+		'#concreteEntity => FMOne type: #FamixTParametricEntity opposite: #genericization'
 	],
 	#traits : 'FamixTAssociation',
 	#classTraits : 'FamixTAssociation classTrait',
@@ -42,66 +42,66 @@ Trait {
 }
 
 { #category : #meta }
-FamixTConcretisation classSide >> annotation [
+FamixTConcretization classSide >> annotation [
 
-	<FMClass: #TConcretisation super: #Object>
+	<FMClass: #TConcretization super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
 	^ self
 ]
 
 { #category : #adding }
-FamixTConcretisation >> addParameterConcretisation: anObject [
+FamixTConcretization >> addParameterConcretization: anObject [
 	<generated>
-	^ self parameterConcretisations add: anObject
+	^ self parameterConcretizations add: anObject
 ]
 
 { #category : #accessing }
-FamixTConcretisation >> concreteEntity [
+FamixTConcretization >> concreteEntity [
 	"Relation named: #concreteEntity type: #FamixTParametricEntity opposite: #genericization"
 
 	<generated>
-	<FMComment: 'concreteEntity linked to in this relationship. to-side of the association'>
+	<FMComment: 'Concrete entity linked to in this relationship. to-side of the association'>
 	<target>
 	^ concreteEntity
 ]
 
 { #category : #accessing }
-FamixTConcretisation >> concreteEntity: anObject [
+FamixTConcretization >> concreteEntity: anObject [
 
 	<generated>
 	concreteEntity := anObject
 ]
 
 { #category : #accessing }
-FamixTConcretisation >> genericEntity [
-	"Relation named: #genericEntity type: #FamixTParametricEntity opposite: #concretisations"
+FamixTConcretization >> genericEntity [
+	"Relation named: #genericEntity type: #FamixTParametricEntity opposite: #concretizations"
 
 	<generated>
-	<FMComment: 'genericEntity linked to in this relationship. from-side of the association'>
+	<FMComment: 'Generic entity linked to in this relationship. from-side of the association'>
 	<source>
 	^ genericEntity
 ]
 
 { #category : #accessing }
-FamixTConcretisation >> genericEntity: anObject [
+FamixTConcretization >> genericEntity: anObject [
 
 	<generated>
 	genericEntity := anObject
 ]
 
 { #category : #accessing }
-FamixTConcretisation >> parameterConcretisations [
-	"Relation named: #parameterConcretisations type: #FamixTParameterConcretisation opposite: #concretisations"
+FamixTConcretization >> parameterConcretizations [
+	"Relation named: #parameterConcretizations type: #FamixTParameterConcretization opposite: #concretizations"
 
 	<generated>
 	<derived>
-	^ parameterConcretisations
+	^ parameterConcretizations
 ]
 
 { #category : #accessing }
-FamixTConcretisation >> parameterConcretisations: anObject [
+FamixTConcretization >> parameterConcretizations: anObject [
 
 	<generated>
-	parameterConcretisations value: anObject
+	parameterConcretizations value: anObject
 ]

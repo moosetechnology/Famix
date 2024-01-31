@@ -9,5 +9,7 @@ Class {
 
 { #category : #'code-critics' }
 ManifestFamixJavaGenerator class >> ruleLongMethodsRuleV1FalsePositive [
-	^ #(#(#(#RGMethodDefinition #(#FamixJavaGenerator #defineHierarchy #false)) #'2022-02-25T14:13:05.813733+01:00') )
+
+	<ignoreForCoverage>
+	^ #(#(#(#RGClassDefinition #(#FamixJavaGenerator)) #'2024-01-31T17:17:11.328708+01:00') )
 ]

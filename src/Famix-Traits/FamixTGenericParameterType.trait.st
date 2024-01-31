@@ -12,7 +12,7 @@ FamixTGenericParameterType represents generic parameters in an FamixJavaParametr
 ### Outgoing dependencies
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `concretisations` | `FamixTGenericParameterType` | `genericParameter` | `FamixTParameterConcretisation` | concretisations relationships, i.e. known concretisation of this type.|
+| `concretizations` | `FamixTGenericParameterType` | `genericParameter` | `FamixTParameterConcretization` | Concretization relationships, i.e. known concretizations of this type.|
 
 ### Incoming dependencies
 | Relation | Origin | Opposite | Type | Comment |
@@ -22,7 +22,7 @@ FamixTGenericParameterType represents generic parameters in an FamixJavaParametr
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `genericEntities` | `FamixTGenericParameterType` | `genericParameters` | `FamixTParametricEntity` | genericEntity of a parameter|
+| `genericEntities` | `FamixTGenericParameterType` | `genericParameters` | `FamixTParametricEntity` | The generic entities that use me.|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
 | `typedEntities` | `FamixTType` | `declaredType` | `FamixTTypedEntity` | Entities that have this type as declaredType|
 
@@ -39,7 +39,7 @@ FamixTGenericParameterType represents generic parameters in an FamixJavaParametr
 Trait {
 	#name : #FamixTGenericParameterType,
 	#instVars : [
-		'#concretisations => FMMany type: #FamixTParameterConcretisation opposite: #genericParameter',
+		'#concretizations => FMMany type: #FamixTParameterConcretization opposite: #genericParameter',
 		'#genericEntities => FMMany type: #FamixTParametricEntity opposite: #genericParameters'
 	],
 	#traits : 'FamixTType',
@@ -57,9 +57,9 @@ FamixTGenericParameterType classSide >> annotation [
 ]
 
 { #category : #adding }
-FamixTGenericParameterType >> addConcretisation: anObject [
+FamixTGenericParameterType >> addConcretization: anObject [
 	<generated>
-	^ self concretisations add: anObject
+	^ self concretizations add: anObject
 ]
 
 { #category : #adding }
@@ -69,20 +69,20 @@ FamixTGenericParameterType >> addGenericEntity: anObject [
 ]
 
 { #category : #accessing }
-FamixTGenericParameterType >> concretisations [
-	"Relation named: #concretisations type: #FamixTParameterConcretisation opposite: #genericParameter"
+FamixTGenericParameterType >> concretizations [
+	"Relation named: #concretizations type: #FamixTParameterConcretization opposite: #genericParameter"
 
 	<generated>
-	<FMComment: 'concretisations relationships, i.e. known concretisation of this type.'>
+	<FMComment: 'Concretization relationships, i.e. known concretizations of this type.'>
 	<derived>
-	^ concretisations
+	^ concretizations
 ]
 
 { #category : #accessing }
-FamixTGenericParameterType >> concretisations: anObject [
+FamixTGenericParameterType >> concretizations: anObject [
 
 	<generated>
-	concretisations value: anObject
+	concretizations value: anObject
 ]
 
 { #category : #accessing }
@@ -90,7 +90,7 @@ FamixTGenericParameterType >> genericEntities [
 	"Relation named: #genericEntities type: #FamixTParametricEntity opposite: #genericParameters"
 
 	<generated>
-	<FMComment: 'genericEntity of a parameter'>
+	<FMComment: 'The generic entities that use me.'>
 	<derived>
 	^ genericEntities
 ]

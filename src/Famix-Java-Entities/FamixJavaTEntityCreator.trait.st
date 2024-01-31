@@ -96,10 +96,10 @@ FamixJavaTEntityCreator >> newComment [
 ]
 
 { #category : #'entity creation' }
-FamixJavaTEntityCreator >> newConcretisation [
+FamixJavaTEntityCreator >> newConcretization [
 
 	<generated>
-	^ self add: FamixJavaConcretisation new
+	^ self add: FamixJavaConcretization new
 ]
 
 { #category : #'entity creation' }
@@ -250,10 +250,10 @@ FamixJavaTEntityCreator >> newParameter [
 ]
 
 { #category : #'entity creation' }
-FamixJavaTEntityCreator >> newParameterConcretisation [
+FamixJavaTEntityCreator >> newParameterConcretization [
 
 	<generated>
-	^ self add: FamixJavaParameterConcretisation new
+	^ self add: FamixJavaParameterConcretization new
 ]
 
 { #category : #'entity creation' }

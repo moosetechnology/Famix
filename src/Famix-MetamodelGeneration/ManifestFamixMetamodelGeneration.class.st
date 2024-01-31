@@ -9,5 +9,7 @@ Class {
 
 { #category : #'code-critics' }
 ManifestFamixMetamodelGeneration class >> ruleLongMethodsRuleV1FalsePositive [
-	^ #(#(#(#RGMethodDefinition #(#FamixGenerator #defineHierarchy #false)) #'2022-02-25T13:58:54.050352+01:00') #(#(#RGMethodDefinition #(#FamixGenerator #defineTraits #false)) #'2022-02-25T15:49:05.41552+01:00') )
+
+	<ignoreForCoverage>
+	^ #(#(#(#RGClassDefinition #(#FamixGenerator)) #'2024-01-31T17:11:51.063524+01:00') )
 ]

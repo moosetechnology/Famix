@@ -121,12 +121,12 @@ Class {
 		'tImportable',
 		'tImport',
 		'tWithImports',
-		'tConcretisation',
-		'tParameterConcretisation',
 		'tParametricEntity',
 		'tConcreteParameterType',
 		'tGenericParameterType',
-		'tThrowable'
+		'tThrowable',
+		'tConcretization',
+		'tParameterConcretization'
 	],
 	#category : #'Famix-MetamodelGeneration'
 }
@@ -305,7 +305,7 @@ FamixGenerator >> commentForTConcreteParameterType [
 ]
 
 { #category : #comments }
-FamixGenerator >> commentForTConcretisation [
+FamixGenerator >> commentForTConcretization [
 
 	^ ''
 ]
@@ -564,7 +564,7 @@ int addNumbers(int a, int b) {
 ]
 
 { #category : #comments }
-FamixGenerator >> commentForTParameterConcretisation [
+FamixGenerator >> commentForTParameterConcretization [
 
 	^ ''
 ]
@@ -1089,8 +1089,8 @@ FamixGenerator >> defineHierarchy [
 	tWithStatements --|> tSourceEntity.
 	tWithStatements --|> tWithReferences.
 
-	tConcretisation --|> tAssociation.
-	tParameterConcretisation --|> tAssociation.
+	tConcretization --|> tAssociation.
+	tParameterConcretization --|> tAssociation.
 
 	tConcreteParameterType --|> tType.
 	tGenericParameterType --|> tType.
@@ -1498,45 +1498,49 @@ FamixGenerator >> defineRelations [
 	((tImplementable property: #implementations)
 			comment: 'Implementation relationships.').
 
-	(tConcretisation property: #parameterConcretisations)
+	(tConcretization property: #parameterConcretizations)
 		*-*
-	(tParameterConcretisation property: #concretisations).
+	(tParameterConcretization property: #concretizations).
 
 	((tGenericParameterType property: #genericEntities)
-			comment: 'genericEntity of a parameter')
+			comment: 'The generic entities that use me.')
 		*-*
 	((tParametricEntity property: #genericParameters)
-			comment: 'list of genericParameters').
+			comment: 'List of generic parameters.').
 
 	((tConcreteParameterType property: #concreteEntities)
-			comment: 'concreteEntity of a parameter')
+			comment: 'The concrete entities that use me.')
 		*-*
 	((tParametricEntity property: #concreteParameters)
-			comment: 'list of concreteParameters').
+			comment: 'List of concrete parameters.').
 
-	((tParameterConcretisation property: #genericParameter)
-			comment: 'genericParameter linked to in this relationship. from-side of the association'; source)
+	((tParameterConcretization property: #genericParameter)
+			comment: 'Generic parameter linked to in this relationship. from-side of the association';
+			source)
 		*-
-	((tGenericParameterType property: #concretisations)
-			comment: 'concretisations relationships, i.e. known concretisation of this type.').
+	((tGenericParameterType property: #concretizations)
+			comment: 'Concretization relationships, i.e. known concretizations of this type.').
 
-	((tParameterConcretisation property: #concreteParameter)
-			comment: 'concreteParameter linked to in this relationship. to-side of the association'; target)
+	((tParameterConcretization property: #concreteParameter)
+			comment: 'Concrete parameter linked to in this relationship. to-side of the association';
+			target)
 		*-
 	((tConcreteParameterType property: #generics)
-			comment: 'generic relationships, i.e. known genericParameter of this type.').
+			comment: 'Generic relationships, i.e. known genericParameter of this type.').
 
-	((tConcretisation property: #genericEntity)
-			comment: 'genericEntity linked to in this relationship. from-side of the association'; source)
+	((tConcretization property: #genericEntity)
+			comment: 'Generic entity linked to in this relationship. from-side of the association';
+			source)
 		*-
-	((tParametricEntity property: #concretisations)
-			comment: 'concretisations relationships, i.e. known concreteEntities of this type.').
+	((tParametricEntity property: #concretizations)
+			comment: 'Concretization relationships, i.e. the associations of known concrete entities of this type.').
 
-	((tConcretisation property: #concreteEntity)
-			comment: 'concreteEntity linked to in this relationship. to-side of the association';	target)
+	((tConcretization property: #concreteEntity)
+			comment: 'Concrete entity linked to in this relationship. to-side of the association';
+			target)
 		-
 	((tParametricEntity property: #genericization)
-			comment: 'genericEntity relationship, i.e. the genericEntity of this type.').
+			comment: 'Generic entity relationship, i.e. the association to the generic entity of this type.').
 ]
 
 { #category : #definition }
@@ -1545,6 +1549,7 @@ FamixGenerator >> defineTraits [
 
 	tCanBeAbstract := builder newTraitNamed: #TCanBeAbstract.
 	tCanBeFinal := builder newTraitNamed: #TCanBeFinal.
+
 	tAccess := builder newTraitNamed: #TAccess.
 	tAccess comment: self commentForTAccess.
 	tAccess withTesting.
@@ -1886,11 +1891,11 @@ FamixGenerator >> defineTraits [
 	tGenericParameterType := builder newTraitNamed: #TGenericParameterType.
 	tGenericParameterType comment: self commentForTGenericParameterType.
 
-	tConcretisation := builder newTraitNamed: #TConcretisation.
-	tConcretisation comment: self commentForTConcretisation.
+	tConcretization := builder newTraitNamed: #TConcretization.
+	tConcretization comment: self commentForTConcretization.
 
-	tParameterConcretisation := builder newTraitNamed: #TParameterConcretisation.
-	tParameterConcretisation comment: self commentForTParameterConcretisation.
+	tParameterConcretization := builder newTraitNamed: #TParameterConcretization.
+	tParameterConcretization comment: self commentForTParameterConcretization.
 
 	tThrowable := builder newTraitNamed: #TThrowable.
 	tThrowable comment: self commentForTThrowable.
