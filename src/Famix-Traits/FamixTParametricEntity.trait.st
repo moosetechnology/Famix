@@ -167,6 +167,13 @@ FamixTParametricEntity >> isGenericEntity [
 	^ self genericization isNil
 ]
 
+{ #category : #testing }
+FamixTParametricEntity >> isParametricEntity [
+
+	<generated>
+	^ true
+]
+
 { #category : #accessing }
 FamixTParametricEntity >> usesGenerics [
 	"Concrete parameters can still be generic, e.g. in Java:

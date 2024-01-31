@@ -131,6 +131,7 @@ FamixJavaGenerator >> commentForTWithInterfaces [
 
 { #category : #definition }
 FamixJavaGenerator >> defineClasses [
+
 	super defineClasses.
 
 	access := builder newClassNamed: #Access.
