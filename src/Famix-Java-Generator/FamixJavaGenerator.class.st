@@ -131,6 +131,7 @@ FamixJavaGenerator >> commentForTWithInterfaces [
 
 { #category : #definition }
 FamixJavaGenerator >> defineClasses [
+
 	super defineClasses.
 
 	access := builder newClassNamed: #Access.
@@ -162,32 +163,15 @@ FamixJavaGenerator >> defineClasses [
 	type := builder newClassNamed: #Type.
 	unknownVariable := builder newClassNamed: #UnknownVariable.
 	primitiveType withTesting.
-	
-	
-	parametricClass   := builder newClassNamed: #ParametricClass.
-	parametricMethod  := builder newClassNamed: #ParametricMethod.
+
+
+	parametricClass := builder newClassNamed: #ParametricClass.
+	parametricMethod := builder newClassNamed: #ParametricMethod.
 	parametricInterface := builder newClassNamed: #ParametricInterface.
 	parameterConcretisation := builder newClassNamed: #ParameterConcretisation.
-	
+
 	concretisation := builder newClassNamed: #Concretisation.
-	wildcard := builder newClassNamed:  #Wildcard. 
-	
-	
-	self defineComments
-]
-
-{ #category : #definition }
-FamixJavaGenerator >> defineComments [
-	(builder ensureClassNamed: #Entity)
-		comment:
-			'file := ''ArgoUML-0-34.mse'' asFileReference readStream.
-
-repo := MooseModel importFrom: file withMetamodel: FamixJavaModel metamodel.
-
-model := MooseModel new.
-model silentlyAddAll: repo elements.
-model entityStorage forRuntime.
-model'
+	wildcard := builder newClassNamed: #Wildcard
 ]
 
 { #category : #definition }
