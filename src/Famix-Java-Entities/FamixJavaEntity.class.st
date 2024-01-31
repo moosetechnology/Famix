@@ -1,15 +1,3 @@
-"
-file := 'ArgoUML-0-34.mse' asFileReference readStream.
-
-repo := MooseModel importFrom: file withMetamodel: FamixJavaModel metamodel.
-
-model := MooseModel new.
-model silentlyAddAll: repo elements.
-model entityStorage forRuntime.
-model
-
-
-"
 Class {
 	#name : #FamixJavaEntity,
 	#superclass : #MooseEntity,
