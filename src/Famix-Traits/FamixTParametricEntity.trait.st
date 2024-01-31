@@ -71,13 +71,11 @@ FamixTParametricEntity >> addGenericParameter: anObject [
 { #category : #accessing }
 FamixTParametricEntity >> allTypeParameters [
 
-	| collection |
-	collection := OrderedCollection new:
-		              self concreteParameters + self genericParameters size.
-	collection
-		addAll: self concreteParameters;
-		addAll: self genericParameters.
-	^ collection
+	^ (OrderedCollection new:
+			   self concreteParameters size + self genericParameters size)
+		  addAll: self concreteParameters;
+		  addAll: self genericParameters;
+		  yourself
 ]
 
 { #category : #accessing }
