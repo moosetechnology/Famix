@@ -99,10 +99,10 @@ FamixTClass >> inheritedAttributes [
 
 	| inheritedAttrs |
 	inheritedAttrs := OrderedCollection new.
-	self allSuperclassesDo: [ :each | 
-		inheritedAttrs addAll: (each isClass
-				 ifTrue: [ each ]
-				 ifFalse: [ each parameterizableClass ]) attributes ].
+	self allSuperclassesDo: [ :each |
+		inheritedAttrs addAll: (each isParametricEntity
+				 ifTrue: [ each genericEntity ]
+				 ifFalse: [ each ]) attributes ].
 	^ inheritedAttrs
 ]
 
