@@ -96,6 +96,13 @@ FamixTest3TEntityCreator >> newPackageNamed: aName [
 ]
 
 { #category : #'entity creation' }
+FamixTest3TEntityCreator >> newParametricClass [
+
+	<generated>
+	^ self add: FamixTest3ParametricClass new
+]
+
+{ #category : #'entity creation' }
 FamixTest3TEntityCreator >> newPrimitiveType [
 
 	<generated>

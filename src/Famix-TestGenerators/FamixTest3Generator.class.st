@@ -12,7 +12,8 @@ Class {
 		'typeGroup',
 		'attribute',
 		'access',
-		'package'
+		'package',
+		'parametricClass'
 	],
 	#category : #'Famix-TestGenerators'
 }
@@ -45,8 +46,7 @@ FamixTest3Generator >> defineClasses [
 	primitiveType := builder newClassNamed: #PrimitiveType.
 	reference := builder newClassNamed: #Reference.
 	invocation := builder newClassNamed: #Invocation.
-
-
+	parametricClass := builder newClassNamed: #ParametricClass.
 ]
 
 { #category : #definition }
@@ -57,7 +57,7 @@ FamixTest3Generator >> defineHierarchy [
 	access --|> #TAccess.
 
 	attribute --|> #TAttribute.
-	
+
 	type --|> namedEntity.
 	type --|> #TType.
 
@@ -65,19 +65,22 @@ FamixTest3Generator >> defineHierarchy [
 	classEntity --|> #TClass.
 	classEntity --|> #TPackageable.
 
+	parametricClass --|> classEntity.
+	parametricClass --|> #TParametricEntity.
+
 	method --|> namedEntity.
 	method --|> #TMethod.
-	
+
 	package --|> #TPackage.
-	
+
 	primitiveType --|> type.
 	primitiveType --|> #TWithTypes.
 	primitiveType --|> #TReferenceable.
 
 	reference --|> #TReference.
-	
+
 	invocation --|> #TInvocation.
-	
+
 	"groups"
-	classEntitygroup --|> typeGroup.
+	classEntitygroup --|> typeGroup
 ]

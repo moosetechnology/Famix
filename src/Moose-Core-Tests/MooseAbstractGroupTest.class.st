@@ -74,10 +74,10 @@ MooseAbstractGroupTest >> testAllSatisfy [
 
 { #category : #tests }
 MooseAbstractGroupTest >> testAllUsing [
-	group addAll: {FamixTest3Class new . FamixTest3Type new}.
+	group addAll: {FamixTest3Class new . FamixTest3Type new . FamixTest3ParametricClass new}.
 	self should: [ group allUsing: FamixTest3Type ] raise: MooseAllUsingOnClass.
-	self assert: (group allUsing: FamixTClass) size equals: 1.
-	self assert: (group allUsing: FamixTType) size equals: 2
+	self assert: (group allUsing: FamixTClass) size equals: 2.
+	self assert: (group allUsing: FamixTType) size equals: 3.
 ]
 
 { #category : #tests }
