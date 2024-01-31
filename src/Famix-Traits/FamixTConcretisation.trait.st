@@ -10,7 +10,7 @@
 ### Association target
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `concreteEntity` | `FamixTConcretisation` | `genericEntity` | `FamixTParametricEntity` | concreteEntity linked to in this relationship. to-side of the association|
+| `concreteEntity` | `FamixTConcretisation` | `genericization` | `FamixTParametricEntity` | concreteEntity linked to in this relationship. to-side of the association|
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
@@ -32,7 +32,7 @@
 Trait {
 	#name : #FamixTConcretisation,
 	#instVars : [
-		'#concreteEntity => FMOne type: #FamixTParametricEntity opposite: #genericEntity',
+		'#concreteEntity => FMOne type: #FamixTParametricEntity opposite: #genericization',
 		'#genericEntity => FMOne type: #FamixTParametricEntity opposite: #concretisations',
 		'#parameterConcretisations => FMMany type: #FamixTParameterConcretisation opposite: #concretisations'
 	],
@@ -58,7 +58,7 @@ FamixTConcretisation >> addParameterConcretisation: anObject [
 
 { #category : #accessing }
 FamixTConcretisation >> concreteEntity [
-	"Relation named: #concreteEntity type: #FamixTParametricEntity opposite: #genericEntity"
+	"Relation named: #concreteEntity type: #FamixTParametricEntity opposite: #genericization"
 
 	<generated>
 	<FMComment: 'concreteEntity linked to in this relationship. to-side of the association'>

@@ -10,7 +10,7 @@
 ### Association target
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `concreteEntity` | `FamixTConcretisation` | `genericEntity` | `FamixTParametricEntity` | concreteEntity linked to in this relationship. to-side of the association|
+| `concreteEntity` | `FamixTConcretisation` | `genericization` | `FamixTParametricEntity` | concreteEntity linked to in this relationship. to-side of the association|
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |

@@ -10,7 +10,7 @@
 ### Incoming dependencies
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `genericEntity` | `FamixTParametricEntity` | `concreteEntity` | `FamixTConcretisation` | genericEntity relationships, i.e. known genericEntity of this type.|
+| `genericization` | `FamixTParametricEntity` | `concreteEntity` | `FamixTConcretisation` | genericEntity relationship, i.e. the genericEntity of this type.|
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |

@@ -958,15 +958,15 @@ FamixGenerator >> commentForTWithTypes [
 FamixGenerator >> defineHierarchy [
 	super defineHierarchy.
 	tAccess --|> tAssociation.
-	
+
 	tImplementation --|> tAssociation.
-	
+
 	tAssociation --|> #TAssociationMetaLevelDependency.
 	tAssociation --|> tSourceEntity.
 
 	tAttribute --|> tStructuralEntity.
-	
-	tEnumValue --|> tStructuralEntity.	
+
+	tEnumValue --|> tStructuralEntity.
 
 	tAnnotationInstance --|> #TEntityMetaLevelDependency.
 
@@ -982,7 +982,7 @@ FamixGenerator >> defineHierarchy [
 	tClass inheritsFromTrait: tType without: { #queryStaticIncomingAssociations. #queryStaticOutgoingAssociations }.
 	tClass --|> tInvocationsReceiver.
 	tClass --|> tWithComments.
-	
+
 	tClassWithVisibility --|> tClass.
 	tClassWithVisibility --|> tHasVisibility.
 
@@ -991,20 +991,20 @@ FamixGenerator >> defineHierarchy [
 	tCompilationUnit --|> tFile.
 
 	tDereferencedInvocation --|> tInvocation.
-	
+
 	tEnum --|> tWithEnumValues.
 	tEnum --|> tType.
-	
+
 	tException --|> tClass.
 
 	tFile --|> tFileSystemEntity.
-	
+
 	tFileInclude --|> tAssociation.
-	
+
 	tFileNavigation --|> tFileAnchor.
 
 	tFolder --|> tFileSystemEntity.
-	
+
 	tFunction --|> tNamedEntity.
 	tFunction --|> tWithParameters.
 	tFunction --|> tHasSignature.
@@ -1014,11 +1014,11 @@ FamixGenerator >> defineHierarchy [
 	tFunction --|> #TEntityMetaLevelDependency.
 
 	tGlobalVariable --|> tStructuralEntity.
-	
+
 	tHasImmediateSource --|> tSourceAnchor.
-	
+
 	tHeader --|> tFile.
-	
+
 	tIndexedFileNavigation --|> tFileAnchor.
 
 	tInheritance --|> tAssociation.
@@ -1041,61 +1041,60 @@ FamixGenerator >> defineHierarchy [
 	tMethod --|> tTypedEntity.
 	tMethod --|> tNamedEntity.
 	tMethod --|> #TEntityMetaLevelDependency.
-	
+
 	tMethod --|> tMethodMetrics.
-	
+
 	tMultipleFileAnchor --|> tSourceAnchor.
 
 	tNamespace --|> tNamedEntity.
 	tNamespace --|> #TEntityMetaLevelDependency.
 	tNamespace --|> tSourceEntity.
-	
+
 	tPackage --|> tNamedEntity.
 	tPackage --|> #TEntityMetaLevelDependency.
 	tPackage --|> tSourceEntity.
-	
+
 	tParameter --|> tStructuralEntity.
-	
+
 	tPrimitiveType --|> tType.
-	
+
 	tReference --|> tAssociation.
-	
+
 	tRelativeSourceAnchor --|> tSourceAnchor.
-	
+
 	tStructuralEntity --|> tNamedEntity.
 	tStructuralEntity --|> #TEntityMetaLevelDependency.
 	tStructuralEntity --|> tSourceEntity.
 	tStructuralEntity --|> tAccessible.
 	tStructuralEntity --|> tTypedEntity.
- 
+
 	"tSourceEntity --|> tWithSourceLanguage."
 	"tSourceEntity --|> tWithComments."
 
 	tTraitUsage --|> tAssociation.
-	
+
 	tType --|> tReferenceable.
 	tType --|> tNamedEntity.
 	tType --|> #TEntityMetaLevelDependency.
-	tType --|> tSourceEntity.	
-	
+	tType --|> tSourceEntity.
+
 	tUnknownSourceLanguage --|> tSourceLanguage.
-	
+
 	tUnknownVariable --|> tStructuralEntity.
-	
+
 	tWithClasses --|> tWithTypes.
-	
+
 	tWithStatements --|> tWithAccesses.
 	tWithStatements --|> tWithInvocations.
 	tWithStatements --|> tSourceEntity.
 	tWithStatements --|> tWithReferences.
 
+	tConcretisation --|> tAssociation.
+	tParameterConcretisation --|> tAssociation.
 
-	tConcretisation --|> tAssociation .
-	tParameterConcretisation --|> tAssociation .
-	
-	tConcreteParameterType  --|> tType .
+	tConcreteParameterType --|> tType.
 	tGenericParameterType --|> tType.
-	
+
 	tException --|> tThrowable.
 ]
 
@@ -1104,12 +1103,11 @@ FamixGenerator >> defineProperties [
 
 	super defineProperties.
 
-
 	(tCanBeAbstract
 		 property: #isAbstract
 		 type: #Boolean
 		 defaultValue: false) comment: 'Entity can be declared abstract'.
-	(tCanBeFinal property: #isFinal type: #Boolean defaultValue: false) 
+	(tCanBeFinal property: #isFinal type: #Boolean defaultValue: false)
 		comment: 'Entity can be declared final'.
 	(tCanBeClassSide
 		 property: #isClassSide
@@ -1117,17 +1115,17 @@ FamixGenerator >> defineProperties [
 		 defaultValue: false) comment:
 		'Entity can be declared class side i.e. static'.
 
-	(tFileAnchor property: #correspondingFile type: #FamixTFile) 
+	(tFileAnchor property: #correspondingFile type: #FamixTFile)
 		comment: 'File associated to this source anchor'.
 	(tFileAnchor property: #encoding type: #String) comment:
 		'A string representing the encoding of a file'.
 	(tFileAnchor property: #fileName type: #String) comment:
 		'Name of the source file'.
 
-	(tAccess property: #isWrite type: #Boolean defaultValue: false) 
+	(tAccess property: #isWrite type: #Boolean defaultValue: false)
 		comment: 'Write access'.
 
-	(tAnnotationInstanceAttribute property: #value type: #String) 
+	(tAnnotationInstanceAttribute property: #value type: #String)
 		comment: 'Actual value of the attribute used in an annotation'.
 
 	(tNamedEntity property: #name type: #String) comment:
@@ -1148,7 +1146,7 @@ FamixGenerator >> defineProperties [
 	(tComment property: #content type: #String) comment:
 		'Content of the comment as a String'.
 
-	(tSourceEntity property: #isStub type: #Boolean defaultValue: false) 
+	(tSourceEntity property: #isStub type: #Boolean defaultValue: false)
 		comment:
 		'Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.'.
 
@@ -1237,7 +1235,7 @@ FamixGenerator >> defineRelations [
 			comment: 'Previous association in an ordered collection of associations. Currently not supported by the Moose importer')
 		-
 	((tAssociation property: #next)
-			comment: 'Next association in an ordered collection of associations. Currently not supported by the Moose importer').	
+			comment: 'Next association in an ordered collection of associations. Currently not supported by the Moose importer').
 
 	((tAttribute property: #parentType)
 			comment: 'Type declaring the attribute. belongsTo implementation';
@@ -1246,7 +1244,7 @@ FamixGenerator >> defineRelations [
 	((tWithAttributes property: #attributes)
 			comment: 'List of attributes declared by this type.').
 
-	((tThrowable  property: #catchingEntities))
+	((tThrowable property: #catchingEntities))
 		*-*
 	((tWithExceptions property: #caughtExceptions)
 			comment: 'The exceptions caught by the method').
@@ -1334,7 +1332,7 @@ FamixGenerator >> defineRelations [
 	((tInvocable property: #incomingInvocations)
 			comment: 'Incoming invocations from other behaviours computed by the candidate operator.')
 		*-*
-	((tInvocation property: #candidates) 
+	((tInvocation property: #candidates)
 			comment: 'List of candidate behavioural entities for receiving the invocation';
 			target).
 
@@ -1354,7 +1352,7 @@ FamixGenerator >> defineRelations [
 	((tWithImports property: #outgoingImports)
 			comment: '')
 		-*
-	((tImport property: #importingEntity) 
+	((tImport property: #importingEntity)
 			comment: 'Importing entity';
 			source).
 
@@ -1466,7 +1464,6 @@ FamixGenerator >> defineRelations [
 	((tTraitUsage property: #user)
 			target).
 
-
 	((tType property: #typeContainer)
 			comment: 'Container entity to which this type belongs. Container is a namespace, not a package (Smalltalk).';
 			container)
@@ -1486,7 +1483,7 @@ FamixGenerator >> defineRelations [
 		*-
 	((tType property: #typedEntities)
 			comment: 'Entities that have this type as declaredType').
-			
+
 		((tImplementation property: #implementingClass)
 			comment: 'Class linked to in this relationship. from-side of the association';
 			source)
@@ -1500,57 +1497,52 @@ FamixGenerator >> defineRelations [
 		*-
 	((tImplementable property: #implementations)
 			comment: 'Implementation relationships.').
-			
-			
 
-			
-	(tConcretisation property:#parameterConcretisations)
-	*-*
-	(tParameterConcretisation property:#concretisations).
+	(tConcretisation property: #parameterConcretisations)
+		*-*
+	(tParameterConcretisation property: #concretisations).
 
-	((tGenericParameterType property:#genericEntities)
+	((tGenericParameterType property: #genericEntities)
 			comment: 'genericEntity of a parameter')
-			*-*
-	((tParametricEntity property:#genericParameters)
+		*-*
+	((tParametricEntity property: #genericParameters)
 			comment: 'list of genericParameters').
-	
-	((tConcreteParameterType  property:#concreteEntities)
+
+	((tConcreteParameterType property: #concreteEntities)
 			comment: 'concreteEntity of a parameter')
-			*-*
-	((tParametricEntity property:#concreteParameters)
+		*-*
+	((tParametricEntity property: #concreteParameters)
 			comment: 'list of concreteParameters').
 
-	
-	((tParameterConcretisation property:#genericParameter)
+	((tParameterConcretisation property: #genericParameter)
 			comment: 'genericParameter linked to in this relationship. from-side of the association'; source)
-			*-
-	((tGenericParameterType property:#concretisations)
+		*-
+	((tGenericParameterType property: #concretisations)
 			comment: 'concretisations relationships, i.e. known concretisation of this type.').
-	
-	((tParameterConcretisation property:#concreteParameter)
+
+	((tParameterConcretisation property: #concreteParameter)
 			comment: 'concreteParameter linked to in this relationship. to-side of the association'; target)
-			*-
-	((tConcreteParameterType  property:#generics)
+		*-
+	((tConcreteParameterType property: #generics)
 			comment: 'generic relationships, i.e. known genericParameter of this type.').
 
 	((tConcretisation property: #genericEntity)
 			comment: 'genericEntity linked to in this relationship. from-side of the association'; source)
-			*-
+		*-
 	((tParametricEntity property: #concretisations)
 			comment: 'concretisations relationships, i.e. known concreteEntities of this type.').
 
 	((tConcretisation property: #concreteEntity)
 			comment: 'concreteEntity linked to in this relationship. to-side of the association';	target)
-			-
-	((tParametricEntity property: #genericEntity)
-			comment: 'genericEntity relationships, i.e. known genericEntity of this type.').
-	
+		-
+	((tParametricEntity property: #genericization)
+			comment: 'genericEntity relationship, i.e. the genericEntity of this type.').
 ]
 
 { #category : #definition }
 FamixGenerator >> defineTraits [
 	super defineTraits.
-	
+
 	tCanBeAbstract := builder newTraitNamed: #TCanBeAbstract.
 	tCanBeFinal := builder newTraitNamed: #TCanBeFinal.
 	tAccess := builder newTraitNamed: #TAccess.
@@ -1582,8 +1574,8 @@ FamixGenerator >> defineTraits [
 	tAttribute comment: self commentForTAttribute.
 	tAttribute withTesting.
 
-	tCanBeClassSide := builder newTraitNamed: #TCanBeClassSide. 
-	
+	tCanBeClassSide := builder newTraitNamed: #TCanBeClassSide.
+
 	tComment := builder newTraitNamed: #TComment.
 	tComment comment: self commentForTComment.
 
@@ -1593,9 +1585,9 @@ FamixGenerator >> defineTraits [
 	tClass := builder newTraitNamed: #TClass.
 	tClass comment: self commentForTClass.
 	tClass withTesting.
-	
+
 	tClassMetrics := builder newTraitNamed: #TClassMetrics.
-	
+
 	tClassGroup := tClass withGroup.
 
 	tDereferencedInvocation := builder newTraitNamed: #TDereferencedInvocation.
@@ -1604,7 +1596,7 @@ FamixGenerator >> defineTraits [
 	tEnumValue := builder newTraitNamed: #TEnumValue.
 	tEnumValue comment: self commentForTEnumValue.
 	tEnumValue withTesting.
-	
+
 	tEnum := builder newTraitNamed: #TEnum.
 	tEnum comment: self commentForTEnum.
 
@@ -1652,11 +1644,11 @@ FamixGenerator >> defineTraits [
 	tImplicitVariable := builder newTraitNamed: #TImplicitVariable.
 	tImplicitVariable comment: self commentForTImplicitVariable.
 	tImplicitVariable withTesting.
-	
+
 	tImport := builder newTraitNamed: #TImport.
 	tImportable := builder newTraitNamed: #TImportable.
 	tWithImports := builder newTraitNamed: #TWithImports.
-	
+
 	tInheritance := builder newTraitNamed: #TInheritance.
 	tInheritance comment: self commentForTInheritance.
 	tInheritance withTesting.
@@ -1680,9 +1672,9 @@ FamixGenerator >> defineTraits [
 	tMethod comment: self commentForTMethod.
 	tMethod withTesting.
 	tMethod withGroup.
-	
-  	tMethodMetrics := builder newTraitNamed: #TMethodMetrics.
-  
+
+	tMethodMetrics := builder newTraitNamed: #TMethodMetrics.
+
 	tHasKind := builder newTraitNamed: #THasKind.
 	tHasKind comment: self commentForTHasKind.
 
@@ -1723,7 +1715,7 @@ FamixGenerator >> defineTraits [
 
 	tReferenceable := builder newTraitNamed: #TReferenceable.
 	tReferenceable comment: self commentForTReferenceable.
-	
+
 	tRelativeSourceAnchor := builder newTraitNamed: #TRelativeSourceAnchor.
 	tRelativeSourceAnchor comment: self commentForTRelativeSourceAnchor.
 
@@ -1771,7 +1763,7 @@ FamixGenerator >> defineTraits [
 	tTypedEntity comment: self commentForTTypedStructure.
 
 	tUnknownSourceLanguage := builder newTraitNamed: #TUnknownSourceLanguage.
-	
+
 	tUnknownVariable := builder newTraitNamed: #TUnknownVariable.
 
 	tWithAccesses := builder newTraitNamed: #TWithAccesses.
@@ -1876,27 +1868,30 @@ FamixGenerator >> defineTraits [
 	tCohesionCouplingMetrics := builder newTraitNamed: #TCohesionCouplingMetrics.
 
 	tLCOMMetrics := builder newTraitNamed: #TLCOMMetrics.
-	
-	tImplementable := builder
-		                  newTraitNamed: #TImplementable
-		                  comment: self commentForTImplementable.
-		
-	tCanImplement := builder
-		                  newTraitNamed: #TCanImplement
-		                  comment: self commentForTCanImplement.
-	tImplementation := builder newTraitNamed: #TImplementation. 
-		
-	tParametricEntity := builder newTraitNamed: #TParametricEntity 
-								comment: self commentForTParametricEntity .
-	tConcreteParameterType  := builder newTraitNamed: #TConcreteParameterType 
-								comment: self commentForTConcreteParameterType.
-	tGenericParameterType  := builder newTraitNamed: #TGenericParameterType 
-								comment: self commentForTGenericParameterType.
-	tConcretisation  := builder newTraitNamed: #TConcretisation 
-								comment: self commentForTConcretisation.
-	tParameterConcretisation  := builder newTraitNamed: #TParameterConcretisation 
-								comment: self commentForTParameterConcretisation.
-	tThrowable  := builder newTraitNamed: #TThrowable 
-								comment: self commentForTThrowable.
 
+	tImplementable := builder newTraitNamed: #TImplementable.
+	tImplementable comment: self commentForTImplementable.
+
+	tCanImplement := builder newTraitNamed: #TCanImplement.
+	tCanImplement comment: self commentForTCanImplement.
+
+	tImplementation := builder newTraitNamed: #TImplementation.
+
+	tParametricEntity := builder newTraitNamed: #TParametricEntity.
+	tParametricEntity comment: self commentForTParametricEntity.
+
+	tConcreteParameterType := builder newTraitNamed: #TConcreteParameterType.
+	tConcreteParameterType comment: self commentForTConcreteParameterType.
+
+	tGenericParameterType := builder newTraitNamed: #TGenericParameterType.
+	tGenericParameterType comment: self commentForTGenericParameterType.
+
+	tConcretisation := builder newTraitNamed: #TConcretisation.
+	tConcretisation comment: self commentForTConcretisation.
+
+	tParameterConcretisation := builder newTraitNamed: #TParameterConcretisation.
+	tParameterConcretisation comment: self commentForTParameterConcretisation.
+
+	tThrowable := builder newTraitNamed: #TThrowable.
+	tThrowable comment: self commentForTThrowable.
 ]
