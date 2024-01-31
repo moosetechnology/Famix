@@ -5,17 +5,17 @@
 ### Association source
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `genericParameter` | `FamixTParameterConcretisation` | `concretisations` | `FamixTGenericParameterType` | genericParameter linked to in this relationship. from-side of the association|
+| `genericParameter` | `FamixTParameterConcretization` | `concretizations` | `FamixTGenericParameterType` | Generic parameter linked to in this relationship. from-side of the association|
 
 ### Association target
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `concreteParameter` | `FamixTParameterConcretisation` | `generics` | `FamixTConcreteParameterType` | concreteParameter linked to in this relationship. to-side of the association|
+| `concreteParameter` | `FamixTParameterConcretization` | `generics` | `FamixTConcreteParameterType` | Concrete parameter linked to in this relationship. to-side of the association|
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `concretisations` | `FamixTParameterConcretisation` | `parameterConcretisations` | `FamixTConcretisation` | |
+| `concretizations` | `FamixTParameterConcretization` | `parameterConcretizations` | `FamixTConcretization` | |
 | `next` | `FamixTAssociation` | `previous` | `FamixTAssociation` | Next association in an ordered collection of associations. Currently not supported by the Moose importer|
 | `previous` | `FamixTAssociation` | `next` | `FamixTAssociation` | Previous association in an ordered collection of associations. Currently not supported by the Moose importer|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
@@ -30,17 +30,17 @@
 
 "
 Class {
-	#name : #FamixJavaParameterConcretisation,
+	#name : #FamixJavaParameterConcretization,
 	#superclass : #FamixJavaEntity,
-	#traits : 'FamixTParameterConcretisation',
-	#classTraits : 'FamixTParameterConcretisation classTrait',
+	#traits : 'FamixTParameterConcretization',
+	#classTraits : 'FamixTParameterConcretization classTrait',
 	#category : #'Famix-Java-Entities-Entities'
 }
 
 { #category : #meta }
-FamixJavaParameterConcretisation class >> annotation [
+FamixJavaParameterConcretization class >> annotation [
 
-	<FMClass: #ParameterConcretisation super: #FamixJavaEntity>
+	<FMClass: #ParameterConcretization super: #FamixJavaEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
 	^ self

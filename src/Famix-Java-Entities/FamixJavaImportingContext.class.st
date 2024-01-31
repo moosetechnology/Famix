@@ -72,10 +72,10 @@ FamixJavaImportingContext >> importComment [
 ]
 
 { #category : #importing }
-FamixJavaImportingContext >> importConcretisation [
+FamixJavaImportingContext >> importConcretization [
 
 	<generated>
-	^ self importAssociation: (self class fm3ClassNamed: #Concretisation)
+	^ self importAssociation: (self class fm3ClassNamed: #Concretization)
 ]
 
 { #category : #importing }
@@ -177,10 +177,10 @@ FamixJavaImportingContext >> importParameter [
 ]
 
 { #category : #importing }
-FamixJavaImportingContext >> importParameterConcretisation [
+FamixJavaImportingContext >> importParameterConcretization [
 
 	<generated>
-	^ self importAssociation: (self class fm3ClassNamed: #ParameterConcretisation)
+	^ self importAssociation: (self class fm3ClassNamed: #ParameterConcretization)
 ]
 
 { #category : #importing }
@@ -324,10 +324,10 @@ FamixJavaImportingContext >> shouldImportComment [
 ]
 
 { #category : #testing }
-FamixJavaImportingContext >> shouldImportConcretisation [
+FamixJavaImportingContext >> shouldImportConcretization [
 
 	<generated>
-	^ self shouldImport: #Concretisation
+	^ self shouldImport: #Concretization
 ]
 
 { #category : #testing }
@@ -429,10 +429,10 @@ FamixJavaImportingContext >> shouldImportParameter [
 ]
 
 { #category : #testing }
-FamixJavaImportingContext >> shouldImportParameterConcretisation [
+FamixJavaImportingContext >> shouldImportParameterConcretization [
 
 	<generated>
-	^ self shouldImport: #ParameterConcretisation
+	^ self shouldImport: #ParameterConcretization
 ]
 
 { #category : #testing }

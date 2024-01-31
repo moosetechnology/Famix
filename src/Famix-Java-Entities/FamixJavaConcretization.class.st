@@ -5,18 +5,18 @@
 ### Association source
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `genericEntity` | `FamixTConcretisation` | `concretisations` | `FamixTParametricEntity` | genericEntity linked to in this relationship. from-side of the association|
+| `genericEntity` | `FamixTConcretization` | `concretizations` | `FamixTParametricEntity` | Generic entity linked to in this relationship. from-side of the association|
 
 ### Association target
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `concreteEntity` | `FamixTConcretisation` | `genericEntity` | `FamixTParametricEntity` | concreteEntity linked to in this relationship. to-side of the association|
+| `concreteEntity` | `FamixTConcretization` | `genericization` | `FamixTParametricEntity` | Concrete entity linked to in this relationship. to-side of the association|
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `next` | `FamixTAssociation` | `previous` | `FamixTAssociation` | Next association in an ordered collection of associations. Currently not supported by the Moose importer|
-| `parameterConcretisations` | `FamixTConcretisation` | `concretisations` | `FamixTParameterConcretisation` | |
+| `parameterConcretizations` | `FamixTConcretization` | `concretizations` | `FamixTParameterConcretization` | |
 | `previous` | `FamixTAssociation` | `next` | `FamixTAssociation` | Previous association in an ordered collection of associations. Currently not supported by the Moose importer|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
 
@@ -30,17 +30,17 @@
 
 "
 Class {
-	#name : #FamixJavaConcretisation,
+	#name : #FamixJavaConcretization,
 	#superclass : #FamixJavaEntity,
-	#traits : 'FamixTConcretisation',
-	#classTraits : 'FamixTConcretisation classTrait',
+	#traits : 'FamixTConcretization',
+	#classTraits : 'FamixTConcretization classTrait',
 	#category : #'Famix-Java-Entities-Entities'
 }
 
 { #category : #meta }
-FamixJavaConcretisation class >> annotation [
+FamixJavaConcretization class >> annotation [
 
-	<FMClass: #Concretisation super: #FamixJavaEntity>
+	<FMClass: #Concretization super: #FamixJavaEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
 	^ self

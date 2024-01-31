@@ -9,7 +9,6 @@ Class {
 		'annotationTypeAttribute',
 		'attribute',
 		'class',
-		'concretisation',
 		'containerEntity',
 		'enum',
 		'enumValue',
@@ -21,7 +20,6 @@ Class {
 		'method',
 		'package',
 		'parameter',
-		'parameterConcretisation',
 		'parameterType',
 		'parametricClass',
 		'parametricInterface',
@@ -43,7 +41,9 @@ Class {
 		'import',
 		'tBounded',
 		'tBound',
-		'wildcard'
+		'wildcard',
+		'parameterConcretization',
+		'concretization'
 	],
 	#classInstVars : [
 		'builder'
@@ -159,19 +159,18 @@ FamixJavaGenerator >> defineClasses [
 	parameter := builder newClassNamed: #Parameter.
 	parameterType := builder newClassNamed: #ParameterType.
 	primitiveType := builder newClassNamed: #PrimitiveType.
+	primitiveType withTesting.
 	reference := builder newClassNamed: #Reference.
 	type := builder newClassNamed: #Type.
 	unknownVariable := builder newClassNamed: #UnknownVariable.
-	primitiveType withTesting.
-
 
 	parametricClass := builder newClassNamed: #ParametricClass.
 	parametricMethod := builder newClassNamed: #ParametricMethod.
 	parametricInterface := builder newClassNamed: #ParametricInterface.
-	parameterConcretisation := builder newClassNamed: #ParameterConcretisation.
+	parameterConcretization := builder newClassNamed: #ParameterConcretization.
 
-	concretisation := builder newClassNamed: #Concretisation.
-	wildcard := builder newClassNamed: #Wildcard
+	concretization := builder newClassNamed: #Concretization.
+	wildcard := builder newClassNamed: #Wildcard.
 ]
 
 { #category : #definition }
@@ -212,7 +211,7 @@ FamixJavaGenerator >> defineHierarchy [
 	attribute --|> #TInvocationsReceiver.
 	attribute --|> #TWithComments.
 	attribute --|> #TCanBeClassSide.
-	
+
 	indexedFileAnchor --|> sourceAnchor.
 	indexedFileAnchor --|> #TIndexedFileNavigation.
 
@@ -234,14 +233,14 @@ FamixJavaGenerator >> defineHierarchy [
 	class --|> #TCanBeAbstract.
 	class --|> #TCanBeFinal.
 	class --|> #THasVisibility.
-	class --|> #TCanBeClassSide. 
+	class --|> #TCanBeClassSide.
 	class --|> #TClassMetrics.
-	class --|> tJavaClassMetrics.	
+	class --|> tJavaClassMetrics.
 	class --|> #TCanImplement.
 	class --|> #TWithImports.
 	class --|> #TImportable.
 	class --|> #TPackageable.
-		
+
 	interface --|> type.
 	interface --|> #TPackageable.
 	interface --|> #TWithMethods.
@@ -250,19 +249,19 @@ FamixJavaGenerator >> defineHierarchy [
 	interface --|> #TInvocationsReceiver.
 	interface --|> #TCanBeFinal.
 	interface --|> #THasVisibility.
-	interface --|> #TCanBeClassSide. 
+	interface --|> #TCanBeClassSide.
 	interface --|> #TWithComments.
 	interface --|> #TImplementable.
 	interface --|> #TWithImports.
 	interface --|> #TImportable.
-	
+
 	implementation --|> #TImplementation.
 
 	containerEntity --|> namedEntity.
 	containerEntity --|> tWithInterfaces.
 	containerEntity --|> #TWithClasses.
 	containerEntity --|> #TWithAnnotationTypes.
-	
+
 	tWithInterfaces --|> #TWithTypes.
 
 	enum --|> type.
@@ -285,13 +284,13 @@ FamixJavaGenerator >> defineHierarchy [
 	exception --|> #THasVisibility.
 	exception --|> #TCanImplement.
 	exception --|> #TWithTypes.
-	
+
 	implicitVariable --|> namedEntity.
 	implicitVariable --|> #TImplicitVariable.
 	implicitVariable --|> #TInvocationsReceiver.
 
 	import --|> #TImport.
-	
+
 	inheritance --|> #TInheritance.
 
 	invocation --|> #TInvocation.
@@ -331,30 +330,30 @@ FamixJavaGenerator >> defineHierarchy [
 	unknownVariable --|> namedEntity.
 	unknownVariable --|> #TUnknownVariable.
 	unknownVariable --|> #TInvocationsReceiver.
-	
-		
-	parametricClass  --|> class.
-	parametricClass  --|> #TParametricEntity.
-	
-	parametricMethod  --|> method.
-	parametricMethod  --|> #TParametricEntity.
-	
+
+
+	parametricClass --|> class.
+	parametricClass --|> #TParametricEntity.
+
+	parametricMethod --|> method.
+	parametricMethod --|> #TParametricEntity.
+
 	parametricInterface --|> interface.
 	parametricInterface --|> #TParametricEntity.
-	
+
 	parameterType --|> #TGenericParameterType.
 	parameterType --|> #TTypedEntity .
-	
+
 	type --|> #TConcreteParameterType.
 	type --|> tBound.
-	
-	concretisation --|> #TConcretisation.
-	
-	parameterConcretisation --|> #TParameterConcretisation.
-	
+
+	concretization --|> #TConcretization.
+
+	parameterConcretization --|> #TParameterConcretization.
+
 	wildcard --|> type.
 	wildcard --|> tBounded.
-	
+
 	inheritance --|> #TInheritance.
 	parameterType --|> #TWithInheritances.
 	parameterType --|> #TThrowable.
@@ -363,52 +362,52 @@ FamixJavaGenerator >> defineHierarchy [
 { #category : #definition }
 FamixJavaGenerator >> defineProperties [
 	super defineProperties.
-		
-	((tCanBeVolatile property: #isVolatile type: #Boolean defaultValue: false) 
+
+	((tCanBeVolatile property: #isVolatile type: #Boolean defaultValue: false)
 		comment: 'Entity can be declared volatile').
-	((tCanBeTransient property: #isTransient type: #Boolean defaultValue: false) 
+	((tCanBeTransient property: #isTransient type: #Boolean defaultValue: false)
 		comment: 'Entity can be declared transient' ).
-	((tCanBeSynchronized property: #isSynchronized type: #Boolean defaultValue: false) 
+	((tCanBeSynchronized property: #isSynchronized type: #Boolean defaultValue: false)
 		comment: 'Entity can be declared synchronized').
 ]
 
 { #category : #definition }
-FamixJavaGenerator >> defineRelations [ 
+FamixJavaGenerator >> defineRelations [
+	super defineRelations.
 
-	((tBounded property: #lowerBound) comment: 'Lower bound on wildcard, specified by super keyword.')
-	*-
-	((tBound property: #lowerBoundedWildcards) comment: 'Wildcards lower bounded by this bound.').
-	
-	((tBounded property: #upperBound) comment: 'Upper bound on wildcard, specified by extends keyword.')
-	*-
-	((tBound property: #upperBoundedWildcards) comment: 'Wildcards upper bounded by this bound.').
-	
+	((tBounded property: #lowerBound)
+			comment: 'Lower bound on wildcard, specified by super keyword.')
+		*-
+	((tBound property: #lowerBoundedWildcards)
+			comment: 'Wildcards lower bounded by this bound.').
+
+	((tBounded property: #upperBound)
+			comment: 'Upper bound on wildcard, specified by extends keyword.')
+		*-
+	((tBound property: #upperBoundedWildcards)
+			comment: 'Wildcards upper bounded by this bound.').
 ]
 
 { #category : #definition }
 FamixJavaGenerator >> defineTraits [
-
 	super defineTraits.
-	tCanBeVolatile := builder
-		                  newTraitNamed: #TCanBeVolatile
-		                  comment: self commentForTCanBeVolatile.
-	tCanBeTransient := builder
-		                   newTraitNamed: #TCanBeTransient
-		                   comment: self commentForTCanBeTransient.
-	tCanBeSynchronized := builder
-		                      newTraitNamed: #TCanBeSynchronized
-		                      comment: self commentForTCanBeSynchronized.
-	
 
-		
+	tCanBeVolatile := builder newTraitNamed: #TCanBeVolatile.
+	tCanBeVolatile comment: self commentForTCanBeVolatile.
+
+	tCanBeTransient := builder newTraitNamed: #TCanBeTransient.
+	tCanBeTransient comment: self commentForTCanBeTransient.
+
+	tCanBeSynchronized := builder newTraitNamed: #TCanBeSynchronized.
+	tCanBeSynchronized comment: self commentForTCanBeSynchronized.
+
 	tWithInterfaces := builder newTraitNamed: #TWithInterfaces.
 	tWithInterfaces comment: self commentForTWithInterfaces.
 
 	tJavaClassMetrics := builder newTraitNamed: #TClassMetrics.
-	
+
 	tBounded := builder newTraitNamed: #TBounded comment: self commentForTBounded.
-	tBound := builder newTraitNamed: #TBound comment: self commentForTBound
-	
+	tBound := builder newTraitNamed: #TBound comment: self commentForTBound.
 ]
 
 { #category : #definition }

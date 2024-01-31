@@ -546,7 +546,7 @@ MooseQueryTest >> testIncomingAssociationTypes [
 				FamixTInheritance.
 				FamixTReference.
 				FamixTImport.
-				FamixTParameterConcretisation }.
+				FamixTParameterConcretization }.
 	self
 		assertCollection: method1 incomingAssociationTypes
 		hasSameElements: { 
