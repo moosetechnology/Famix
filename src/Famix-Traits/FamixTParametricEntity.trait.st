@@ -112,6 +112,15 @@ FamixTParametricEntity >> concretisations: anObject [
 ]
 
 { #category : #accessing }
+FamixTParametricEntity >> genericEntity [
+	"Returns the generic entity that typically holds relevant information, such as the source anchor."
+
+	^ self genericization
+		  ifNil: [ self ]
+		  ifNotNil: [ :concretization | concretization genericEntity ]
+]
+
+{ #category : #accessing }
 FamixTParametricEntity >> genericParameters [
 	"Relation named: #genericParameters type: #FamixTGenericParameterType opposite: #genericEntities"
 
