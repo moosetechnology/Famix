@@ -1888,6 +1888,7 @@ FamixGenerator >> defineTraits [
 		
 	tParametricEntity := builder newTraitNamed: #TParametricEntity 
 								comment: self commentForTParametricEntity .
+	tParametricEntity withTesting.
 	tConcreteParameterType  := builder newTraitNamed: #TConcreteParameterType 
 								comment: self commentForTConcreteParameterType.
 	tGenericParameterType  := builder newTraitNamed: #TGenericParameterType 
