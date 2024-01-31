@@ -155,14 +155,23 @@ FamixTParametricEntity >> genericization: anObject [
 
 { #category : #accessing }
 FamixTParametricEntity >> isConcreteEntity [
-	"An Entity is generic if it has at least one ParameterType"
+	"I am concrete if I concretize a generic entity."
 
-	^ self isGenericEntity not
+	^ self genericization isNotNil
 ]
 
 { #category : #accessing }
 FamixTParametricEntity >> isGenericEntity [
-	"An Entity is generic if it has at least one ParameterType"
+	"I am generic if I don't concretize a generic entity."
+
+	^ self genericization isNil
+]
+
+{ #category : #accessing }
+FamixTParametricEntity >> usesGenerics [
+	"Concrete parameters can still be generic, e.g. in Java:
+	<C> List<C> foo(C bar);
+	List<C> is a concretization of the generic interface List<T>, where C concretizes T, but is still generic."
 
 	self genericParameters ifNotEmpty: [ ^ true ].
 	^ self concreteParameters anySatisfy: [ :p | p isParameterType ]
