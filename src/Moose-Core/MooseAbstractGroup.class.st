@@ -597,8 +597,15 @@ MooseAbstractGroup >> printOn: aStream [
 MooseAbstractGroup >> rawAllUsing: aTrait [
 	"This is an optimization of #allUsing: when we do not need to manipulate a MooseGroup as result."
 
+	| seen |
 	aTrait isTrait ifFalse: [ MooseAllUsingOnClass signal ].
-	^ self entityStorage select: [ :entity | entity class traitComposition includesTrait: aTrait ]
+	seen := IdentitySet new.
+	^ Array streamContents: [ :stream |
+		  aTrait allUsers flattened do: [ :directUser |
+			  directUser withAllSubclasses do: [ :user |
+				  (seen includes: user) ifFalse: [
+					  seen add: user.
+					  stream nextPutAll: (self entityStorage selectAllWithType: user) ] ] ] ]
 ]
 
 { #category : #'adding/removing' }
