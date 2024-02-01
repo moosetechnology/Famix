@@ -83,9 +83,10 @@ FamixTSourceEntity >> hasSourceAnchor [
 { #category : #accessing }
 FamixTSourceEntity >> isStub [
 
-	<FMProperty: #isStub type: #Boolean>
+	<FMProperty: #isStub type: #Boolean defaultValue: false>
+	<generated>
 	<FMComment: 'Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.'>
-	^ isStub ifNil: [ false ]
+	^ isStub ifNil: [ isStub := false ]
 ]
 
 { #category : #accessing }
