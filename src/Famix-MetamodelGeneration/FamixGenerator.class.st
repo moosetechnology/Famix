@@ -1011,6 +1011,7 @@ FamixGenerator >> defineHierarchy [
 	tFunction --|> tTypedEntity.
 	tFunction --|> tWithStatements.
 	tFunction --|> tWithLocalVariables.
+	tFunction --|> tInvocable.
 	tFunction --|> #TEntityMetaLevelDependency.
 
 	tGlobalVariable --|> tStructuralEntity.

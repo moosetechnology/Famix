@@ -22,6 +22,11 @@ FamixTFunction represents a behavioural entity in a procedural language.
 | `outgoingInvocations` | `FamixTWithInvocations` | `sender` | `FamixTInvocation` | Outgoing invocations sent by this behaviour.|
 | `outgoingReferences` | `FamixTWithReferences` | `referencer` | `FamixTReference` | References from this entity to other entities.|
 
+### Incoming dependencies
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `incomingInvocations` | `FamixTInvocable` | `candidates` | `FamixTInvocation` | Incoming invocations from other behaviours computed by the candidate operator.|
+
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
@@ -44,8 +49,8 @@ Trait {
 	#instVars : [
 		'#functionOwner => FMOne type: #FamixTWithFunctions opposite: #functions'
 	],
-	#traits : 'FamixTHasSignature + FamixTNamedEntity + FamixTTypedEntity + FamixTWithLocalVariables + FamixTWithParameters + FamixTWithStatements + TEntityMetaLevelDependency',
-	#classTraits : 'FamixTHasSignature classTrait + FamixTNamedEntity classTrait + FamixTTypedEntity classTrait + FamixTWithLocalVariables classTrait + FamixTWithParameters classTrait + FamixTWithStatements classTrait + TEntityMetaLevelDependency classTrait',
+	#traits : 'FamixTHasSignature + FamixTInvocable + FamixTNamedEntity + FamixTTypedEntity + FamixTWithLocalVariables + FamixTWithParameters + FamixTWithStatements + TEntityMetaLevelDependency',
+	#classTraits : 'FamixTHasSignature classTrait + FamixTInvocable classTrait + FamixTNamedEntity classTrait + FamixTTypedEntity classTrait + FamixTWithLocalVariables classTrait + FamixTWithParameters classTrait + FamixTWithStatements classTrait + TEntityMetaLevelDependency classTrait',
 	#category : #'Famix-Traits-Behavioral'
 }
 
