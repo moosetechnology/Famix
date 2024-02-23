@@ -297,16 +297,6 @@ FamixStMethod >> overriddenMethod [
 		   superclass lookUp: self signature ]) 
 ]
 
-{ #category : #testing }
-FamixStMethod >> overridingMethods [
-
-	| overridingMethods |
-	overridingMethods := OrderedCollection new.
-
-	self parentType addMethodOverriding: self in: overridingMethods.
-	^ overridingMethods
-]
-
 { #category : #'Famix-Extensions-metrics-support' }
 FamixStMethod >> printProtocol [
 

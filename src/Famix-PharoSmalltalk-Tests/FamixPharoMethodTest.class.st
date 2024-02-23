@@ -20,6 +20,34 @@ FamixPharoMethodTest >> setUp [
 ]
 
 { #category : #tests }
+FamixPharoMethodTest >> testFirstOverridingMethods [
+
+	| overridingMethod otherOverridingMethod localClass subclass subSubclass |
+
+	overridingMethod := FamixStMethod new signature: signature.
+	otherOverridingMethod := FamixStMethod new signature: signature.
+
+	localClass := FamixStClass new.
+	subclass := FamixStClass new.
+	subSubclass := FamixStClass new.
+
+	localClass addMethod: method.
+	subclass addMethod: overridingMethod.
+	subSubclass addMethod: otherOverridingMethod.
+
+	FamixStInheritance new
+		superclass: localClass;
+		subclass: subclass.
+	FamixStInheritance new
+		superclass: subclass;
+		subclass: subSubclass.
+
+	self
+		assertCollection: method firstOverridingMethods
+		hasSameElements: { overridingMethod }
+]
+
+{ #category : #tests }
 FamixPharoMethodTest >> testIsClassSide [
 	| method |
 	method := FamixStMethod new.
@@ -76,8 +104,7 @@ FamixPharoMethodTest >> testOverriddenMethodOnlyOneLevel [
 { #category : #tests }
 FamixPharoMethodTest >> testOverridingMethods [
 
-	| signature overridingMethod c1 c2 |
-	signature := 'pharoMethod'.
+	| overridingMethod c1 c2 |
 	method signature: signature.
 	overridingMethod := FamixStMethod new signature: signature.
 
@@ -90,34 +117,6 @@ FamixPharoMethodTest >> testOverridingMethods [
 	FamixStInheritance new
 		superclass: c1;
 		subclass: c2.
-
-	self
-		assertCollection: method overridingMethods
-		hasSameElements: { overridingMethod }
-]
-
-{ #category : #tests }
-FamixPharoMethodTest >> testOverridingMethodsOnlyOneLevel [
-
-	| overridingMethod otherOverridingMethod localClass subclass subSubclass |
-
-	overridingMethod := FamixStMethod new signature: signature.
-	otherOverridingMethod := FamixStMethod new signature: signature.
-
-	localClass := FamixStClass new.
-	subclass := FamixStClass new.
-	subSubclass := FamixStClass new.
-
-	localClass addMethod: method.
-	subclass addMethod: overridingMethod.
-	subSubclass addMethod: otherOverridingMethod.
-
-	FamixStInheritance new
-		superclass: localClass;
-		subclass: subclass.
-	FamixStInheritance new
-		superclass: subclass;
-		subclass: subSubclass.
 
 	self
 		assertCollection: method overridingMethods

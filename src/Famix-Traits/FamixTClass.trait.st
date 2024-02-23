@@ -71,6 +71,26 @@ FamixTClass classSide >> annotationFamixClassGroup [
 	^ FamixClassGroup
 ]
 
+{ #category : #adding }
+FamixTClass >> addFirstMethodsOverriding: aMethod in: aCollection [
+
+	self directSubclasses do: [ :subClass |
+		subClass methods
+			detect: [ :method | method signature = aMethod signature ]
+			ifFound: [ :overridingMethod | aCollection add: overridingMethod ]
+			ifNone: [ subClass addMethodOverriding: aMethod in: aCollection ] ]
+]
+
+{ #category : #private }
+FamixTClass >> addMethodOverriding: aMethod in: aCollection [
+
+	self directSubclasses do: [ :subClass |
+		subClass methods
+			detect: [ :method |   method signature = aMethod signature ]
+			ifFound: [ :overridingMethod | aCollection add: overridingMethod ].
+			subClass addMethodOverriding: aMethod in: aCollection  ]
+]
+
 { #category : #metrics }
 FamixTClass >> addedMethods [
 	| allHierarchyMethodSignatures |
