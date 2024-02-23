@@ -175,6 +175,12 @@ FamixTParametricEntity >> isParametricEntity [
 ]
 
 { #category : #accessing }
+FamixTParametricEntity >> typeWithInformation [
+	"Generic entities have information about methods, attributes, etc. A concrete entity does not have this information. We need to find the generic entity that has this information."
+	^ self genericEntity
+]
+
+{ #category : #accessing }
 FamixTParametricEntity >> usesGenerics [
 	"Concrete parameters can still be generic, e.g. in Java:
 	<C> List<C> foo(C bar);

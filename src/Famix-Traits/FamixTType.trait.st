@@ -143,6 +143,13 @@ FamixTType >> typeContainerGroup [
 ]
 
 { #category : #accessing }
+FamixTType >> typeWithInformation [
+	
+	"See FamixTParametricEntity>>typeWithInformation for details"
+	^ self
+]
+
+{ #category : #accessing }
 FamixTType >> typedEntities [
 	"Relation named: #typedEntities type: #FamixTTypedEntity opposite: #declaredType"
 

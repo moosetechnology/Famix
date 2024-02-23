@@ -74,28 +74,34 @@ FamixTClass classSide >> annotationFamixClassGroup [
 { #category : #adding }
 FamixTClass >> addFirstMethodsOverriding: aMethod in: aCollection [
 
-	self directSubclasses do: [ :subClass |
+	self typeWithInformation directSubclasses do: [ :subClass |
 		subClass methods
 			detect: [ :method | method signature = aMethod signature ]
 			ifFound: [ :overridingMethod | aCollection add: overridingMethod ]
-			ifNone: [ subClass addMethodOverriding: aMethod in: aCollection ] ]
+			ifNone: [ subClass typeWithInformation addMethodOverriding: aMethod in: aCollection ] ]
 ]
 
 { #category : #private }
 FamixTClass >> addMethodOverriding: aMethod in: aCollection [
 
 	self directSubclasses do: [ :subClass |
-		subClass methods
-			detect: [ :method |   method signature = aMethod signature ]
+		subClass typeWithInformation methods
+			detect: [ :method | method signature = aMethod signature ]
 			ifFound: [ :overridingMethod | aCollection add: overridingMethod ].
-			subClass addMethodOverriding: aMethod in: aCollection  ]
+		subClass typeWithInformation
+			addMethodOverriding: aMethod
+			in: aCollection ]
 ]
 
 { #category : #metrics }
 FamixTClass >> addedMethods [
+
 	| allHierarchyMethodSignatures |
-	allHierarchyMethodSignatures := self allHierarchyMethods collect: #signature.
-	^ self methods reject: [ :each | allHierarchyMethodSignatures includes: each signature ]
+	allHierarchyMethodSignatures := self typeWithInformation
+		                                allHierarchyMethods collect:
+		                                #signature.
+	^ self typeWithInformation methods reject: [ :each |
+		  allHierarchyMethodSignatures includes: each signature ]
 ]
 
 { #category : #enumerating }
@@ -103,7 +109,7 @@ FamixTClass >> allHierarchyMethods [
 
 	| allHierarchyMethods |
 	allHierarchyMethods := OrderedCollection new.
-	self allSuperclassesDo: [ :each | 
+	self typeWithInformation allSuperclassesDo: [ :each | 
 	allHierarchyMethods addAll: each methods ] .
 	^ allHierarchyMethods
 ]
@@ -111,7 +117,7 @@ FamixTClass >> allHierarchyMethods [
 { #category : #enumerating }
 FamixTClass >> allMethods [
 
-	^ self methods , self inheritedMethods 
+	^ self typeWithInformation methods , self inheritedMethods
 ]
 
 { #category : #enumerating }
@@ -132,10 +138,10 @@ FamixTClass >> inheritedMethods [
 	| inheritedMethods |
 	inheritedMethods := OrderedCollection new.
 
-	self allSuperclassesDo: [ :each | 
+	self typeWithInformation allSuperclassesDo: [ :each | 
 		| workingMethods |
 		workingMethods := self methods , inheritedMethods.
-		each methods do: [ :m | 
+		each typeWithInformation methods do: [ :m | 
 			(workingMethods allSatisfy: [ :m2 | m signature ~= m2 signature ]) 
 				ifTrue: [ inheritedMethods add: m ] ] ].
 	^ inheritedMethods
@@ -194,7 +200,7 @@ FamixTClass >> isTestCase: aBoolean [
 { #category : #enumerating }
 FamixTClass >> overriddenMethods [
 
-	^ self methods select: [ :m | self allHierarchyMethods anySatisfy: [ :superMethod | superMethod signature = m signature ] ].
+	^ self typeWithInformation methods select: [ :m | self allHierarchyMethods anySatisfy: [ :superMethod | superMethod signature = m signature ] ].
 ]
 
 { #category : #metrics }
