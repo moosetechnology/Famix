@@ -14,8 +14,68 @@ FamixJavaMethodTest >> setUp [
 ]
 
 { #category : #tests }
+FamixJavaMethodTest >> testAllOverridingMethods [
+
+	| signature overridingMethod otherOverridingMethod localClass subclass subSubclass |
+	signature := 'javaMethod()'.
+	method signature: signature.
+	overridingMethod := FamixJavaMethod new signature: signature.
+	otherOverridingMethod := FamixJavaMethod new signature: signature.
+
+	localClass := FamixJavaClass new.
+	subclass := FamixJavaClass new.
+	subSubclass := FamixJavaClass new.
+
+	localClass addMethod: method.
+	subclass addMethod: overridingMethod.
+	subSubclass addMethod: otherOverridingMethod.
+
+	FamixJavaInheritance new
+		superclass: localClass;
+		subclass: subclass.
+	FamixJavaInheritance new
+		superclass: subclass;
+		subclass: subSubclass.
+
+	self
+		assertCollection: method overridingMethods
+		hasSameElements: {
+				overridingMethod.
+				otherOverridingMethod }
+]
+
+{ #category : #tests }
 FamixJavaMethodTest >> testDefaultIsStub [
 	self deny: method isStub
+]
+
+{ #category : #tests }
+FamixJavaMethodTest >> testFirstOverridingMethods [
+
+	| signature overridingMethod otherOverridingMethod localClass subclass subSubclass |
+	signature := 'javaMethod()'.
+	method signature: signature.
+	overridingMethod := FamixJavaMethod new signature: signature.
+	otherOverridingMethod := FamixJavaMethod new signature: signature.
+
+	localClass := FamixJavaClass new.
+	subclass := FamixJavaClass new.
+	subSubclass := FamixJavaClass new.
+
+	localClass addMethod: method.
+	subclass addMethod: overridingMethod.
+	subSubclass addMethod: otherOverridingMethod.
+
+	FamixJavaInheritance new
+		superclass: localClass;
+		subclass: subclass.
+	FamixJavaInheritance new
+		superclass: subclass;
+		subclass: subSubclass.
+
+	self
+		assertCollection: method firstOverridingMethods
+		hasSameElements: { overridingMethod }
 ]
 
 { #category : #tests }
@@ -206,35 +266,6 @@ FamixJavaMethodTest >> testOverridingMethods [
 	FamixJavaInheritance new
 		superclass: c1;
 		subclass: c2.
-
-	self
-		assertCollection: method overridingMethods
-		hasSameElements: { overridingMethod }
-]
-
-{ #category : #tests }
-FamixJavaMethodTest >> testOverridingMethodsOnlyOneLevel [
-
-	| signature overridingMethod otherOverridingMethod localClass subclass subSubclass |
-	signature := 'javaMethod()'.
-	method signature: signature.
-	overridingMethod := FamixJavaMethod new signature: signature.
-	otherOverridingMethod := FamixJavaMethod new signature: signature.
-
-	localClass := FamixJavaClass new.
-	subclass := FamixJavaClass new.
-	subSubclass := FamixJavaClass new.
-
-	localClass addMethod: method.
-	subclass addMethod: overridingMethod.
-	subSubclass addMethod: otherOverridingMethod.
-
-	FamixJavaInheritance new
-		superclass: localClass;
-		subclass: subclass.
-	FamixJavaInheritance new
-		superclass: subclass;
-		subclass: subSubclass.
 
 	self
 		assertCollection: method overridingMethods

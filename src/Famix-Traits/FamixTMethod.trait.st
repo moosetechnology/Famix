@@ -73,6 +73,16 @@ FamixTMethod classSide >> annotationFamixMethodGroup [
 	^ FamixMethodGroup
 ]
 
+{ #category : #accessing }
+FamixTMethod >> firstOverridingMethods [
+
+	| overridingMethods |
+	overridingMethods := OrderedCollection new.
+
+	self parentType addFirstMethodsOverriding: self in: overridingMethods.
+	^ overridingMethods
+]
+
 { #category : #testing }
 FamixTMethod >> isDelegating [
 
@@ -112,6 +122,16 @@ FamixTMethod >> mooseNameOn: stream [
 	self signature
 		ifNotNil: [ :aSignature | stream nextPutAll: aSignature ]
 		ifNil: [ self name ifNotNil: [ :aName | stream nextPutAll: aName ] ]
+]
+
+{ #category : #testing }
+FamixTMethod >> overridingMethods [
+
+	| overridingMethods |
+	overridingMethods := OrderedCollection new.
+
+	self parentType addMethodOverriding: self in: overridingMethods.
+	^ overridingMethods
 ]
 
 { #category : #accessing }

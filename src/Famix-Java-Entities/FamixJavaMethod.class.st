@@ -333,16 +333,6 @@ FamixJavaMethod >> overridesMethod [
 		  thenSelect: #isNotNil
 ]
 
-{ #category : #testing }
-FamixJavaMethod >> overridingMethods [
-
-	| overridingMethods |
-	overridingMethods := OrderedCollection new.
-
-	self parentType addMethodOverriding: self in: overridingMethods.
-	^ overridingMethods
-]
-
 { #category : #accessing }
 FamixJavaMethod >> parentScope [
 	"Polymorphic alias to mimic GlobalVariable#parentScope and similar"
