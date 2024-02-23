@@ -63,16 +63,20 @@ FamixJavaInterface class >> annotation [
 { #category : #private }
 FamixJavaInterface >> addMethodOverriding: aMethod in: aCollection [
 
-	(self implementations collect: #implementingClass) do: [
-		:implementingClass |
-		implementingClass addMethodOverriding: aMethod in: aCollection ].
+	self implementations do: [ :implementation |
+		| implClass |
+		implClass := implementation implementingClass.
+		implClass methods
+			detect: [ :method | method signature = aMethod signature ]
+			ifFound: [ :overridingMethod | aCollection add: overridingMethod ].
+		implClass addMethodOverriding: aMethod in: aCollection ].
 
 	self directSubclasses do: [ :subInterface |
 		subInterface methods
 			detect: [ :method | method signature = aMethod signature ]
-			ifFound: [ :overridingMethod | aCollection add: overridingMethod ]
-			ifNone: [
-			subInterface addMethodOverriding: aMethod in: aCollection ] ]
+			ifFound: [ :overridingMethod | aCollection add: overridingMethod ].
+
+		subInterface addMethodOverriding: aMethod in: aCollection ]
 ]
 
 { #category : #testing }
