@@ -5,7 +5,7 @@ Class {
 		'mooseModel',
 		'factory'
 	],
-	#category : #'Moose-GenericImporter-Importers'
+	#category : #'Moose-Importers-Importers'
 }
 
 { #category : #accessing }
