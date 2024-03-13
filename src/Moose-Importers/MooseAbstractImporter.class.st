@@ -10,7 +10,7 @@ Class {
 		'loggingStream',
 		'targetModel'
 	],
-	#category : #'Moose-GenericImporter-Importers'
+	#category : #'Moose-Importers-Importers'
 }
 
 { #category : #public }

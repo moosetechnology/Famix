@@ -5,7 +5,7 @@ Class {
 		'model',
 		'toDelete'
 	],
-	#category : #'Moose-GenericImporters-Tests'
+	#category : #'Moose-Importers-Tests'
 }
 
 { #category : #setup }
