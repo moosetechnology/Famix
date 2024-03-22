@@ -34,7 +34,7 @@ FmxPackageAddition class >> named: aName [
 { #category : #accessing }
 FmxPackageAddition >> apply [
 
-	self packageOrganizer addPackage: self packageName
+	self packageOrganizer ensurePackage: self packageName
 ]
 
 { #category : #accessing }
