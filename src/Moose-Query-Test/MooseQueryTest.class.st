@@ -395,7 +395,7 @@ MooseQueryTest >> testChildren [
 MooseQueryTest >> testChildrenSelectors [
 	self
 		assertCollection: class1 childrenSelectors
-		hasSameElements: #(#types #attributes #methods #definedAnnotationTypes)
+		hasSameElements: #(#types #attributes #methods #definedAnnotationTypes #comments)
 ]
 
 { #category : #tests }

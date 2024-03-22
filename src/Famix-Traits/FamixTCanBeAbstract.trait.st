@@ -10,7 +10,7 @@
 Trait {
 	#name : #FamixTCanBeAbstract,
 	#instVars : [
-		'#isAbstract => FMProperty'
+		'#isAbstract => FMProperty defaultValue: false'
 	],
 	#category : #'Famix-Traits-Traits'
 }

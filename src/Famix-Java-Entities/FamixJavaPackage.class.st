@@ -11,6 +11,7 @@
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `childEntities` | `FamixTPackage` | `parentPackage` | `FamixTPackageable` | |
+| `comments` | `FamixTWithComments` | `commentedEntity` | `FamixTComment` | List of comments for the entity|
 
 ### Incoming dependencies
 | Relation | Origin | Opposite | Type | Comment |
@@ -20,7 +21,6 @@
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `comments` | `FamixTWithComments` | `commentedEntity` | `FamixTComment` | List of comments for the entity|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
 
 

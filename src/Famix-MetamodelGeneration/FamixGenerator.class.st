@@ -987,6 +987,8 @@ FamixGenerator >> defineHierarchy [
 	tClassWithVisibility --|> tHasVisibility.
 
 	tClassGroup --|> tTypeGroup.
+	
+	tComment  --|> #TEntityMetaLevelDependency.
 
 	tCompilationUnit --|> tFile.
 
@@ -1251,7 +1253,8 @@ FamixGenerator >> defineRelations [
 			comment: 'The exceptions caught by the method').
 
 	((tComment property: #commentedEntity)
-			comment: 'Source code commented by the comment')
+			comment: 'Source code commented by the comment';
+			container)
 		*-
 	((tWithComments property: #comments)
 			comment: 'List of comments for the entity').
