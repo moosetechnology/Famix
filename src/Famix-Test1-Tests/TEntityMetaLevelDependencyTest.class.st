@@ -51,13 +51,33 @@ TEntityMetaLevelDependencyTest >> testAllChildren [
 
 { #category : #tests }
 TEntityMetaLevelDependencyTest >> testAllChildrenTypes [
-	self
-		assertCollection: c1 allChildrenTypes
-		hasSameElements: {FamixTParameter . FamixTImplicitVariable . FamixTest1Attribute . FamixTAttribute . FamixTest1Method . FamixTLocalVariable . FamixTMethod}.
-	self
-		assertCollection: c2 allChildrenTypes
-		hasSameElements: {FamixTParameter . FamixTImplicitVariable . FamixTest1Attribute . FamixTAttribute . FamixTest1Method . FamixTLocalVariable . FamixTMethod}.
-	self assertCollection: m1 allChildrenTypes hasSameElements: {FamixTImplicitVariable . FamixTParameter . FamixTLocalVariable}
+
+	self assertCollection: c1 allChildrenTypes hasSameElements: {
+			FamixTParameter.
+			FamixTImplicitVariable.
+			FamixTest1Attribute.
+			FamixTAttribute.
+			FamixTest1Method.
+			FamixTLocalVariable.
+			FamixTMethod.
+			FamixTComment.
+			FamixTest1Comment }.
+	self assertCollection: c2 allChildrenTypes hasSameElements: {
+			FamixTParameter.
+			FamixTImplicitVariable.
+			FamixTest1Attribute.
+			FamixTAttribute.
+			FamixTest1Method.
+			FamixTLocalVariable.
+			FamixTMethod.
+			FamixTComment.
+			FamixTest1Comment }.
+	self assertCollection: m1 allChildrenTypes hasSameElements: {
+			FamixTImplicitVariable.
+			FamixTParameter.
+			FamixTLocalVariable.
+			FamixTComment.
+			FamixTest1Comment }
 ]
 
 { #category : #tests }
@@ -139,9 +159,10 @@ TEntityMetaLevelDependencyTest >> testChildren [
 
 { #category : #tests }
 TEntityMetaLevelDependencyTest >> testChildrenSelectors [
-	self assertCollection: m1 childrenSelectors hasSameElements: {#parameters . #localVariables . #implicitVariables}.
-	self assertCollection: c1 childrenSelectors hasSameElements: {#methods . #attributes}.
-	self assertCollection: c2 childrenSelectors hasSameElements: {#methods . #attributes}
+
+	self assertCollection: m1 childrenSelectors hasSameElements: { #parameters. #localVariables. #implicitVariables. #comments }.
+	self assertCollection: c1 childrenSelectors hasSameElements: { #methods. #attributes. #comments }.
+	self assertCollection: c2 childrenSelectors hasSameElements: { #methods. #attributes. #comments }
 ]
 
 { #category : #tests }

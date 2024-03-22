@@ -66,7 +66,14 @@ FamixTest3MooseQueryTest >> testAtScopeWithNonMatchingEntitiesDo [
 
 { #category : #tests }
 FamixTest3MooseQueryTest >> testChildrenTypes [
-	self assertCollection: self c1 childrenTypes hasSameElements: {FamixTAttribute . FamixTMethod . FamixTest3Attribute . FamixTest3Method}
+
+	self assertCollection: self c1 childrenTypes hasSameElements: {
+			FamixTAttribute.
+			FamixTMethod.
+			FamixTest3Attribute.
+			FamixTest3Method.
+			FamixTComment.
+			FamixTest3Comment }
 ]
 
 { #category : #tests }

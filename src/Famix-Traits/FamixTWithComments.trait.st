@@ -2,7 +2,7 @@
 ## Relations
 ======================
 
-### Other
+### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `comments` | `FamixTWithComments` | `commentedEntity` | `FamixTComment` | List of comments for the entity|

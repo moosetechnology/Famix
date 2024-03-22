@@ -4,7 +4,7 @@ FamixTComment represents one instance of a comment (in the sense of programming 
 ## Relations
 ======================
 
-### Other
+### Parents
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `commentedEntity` | `FamixTComment` | `comments` | `FamixTWithComments` | Source code commented by the comment|
@@ -24,6 +24,8 @@ Trait {
 		'#commentedEntity => FMOne type: #FamixTWithComments opposite: #comments',
 		'#content => FMProperty'
 	],
+	#traits : 'TEntityMetaLevelDependency',
+	#classTraits : 'TEntityMetaLevelDependency classTrait',
 	#category : #'Famix-Traits-Comment'
 }
 
@@ -49,6 +51,7 @@ FamixTComment >> commentedEntity [
 
 	<generated>
 	<FMComment: 'Source code commented by the comment'>
+	<container>
 	^ commentedEntity
 ]
 
@@ -57,6 +60,13 @@ FamixTComment >> commentedEntity: anObject [
 
 	<generated>
 	commentedEntity := anObject
+]
+
+{ #category : #navigation }
+FamixTComment >> commentedEntityGroup [
+	<generated>
+	<navigation: 'CommentedEntity'>
+	^ MooseSpecializedGroup with: self commentedEntity
 ]
 
 { #category : #accessing }
