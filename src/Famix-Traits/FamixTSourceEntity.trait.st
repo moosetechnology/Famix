@@ -21,7 +21,7 @@ FamixTSourcedEntity models any fact in a program source and it is the superclass
 Trait {
 	#name : #FamixTSourceEntity,
 	#instVars : [
-		'#isStub => FMProperty',
+		'#isStub => FMProperty defaultValue: false',
 		'#sourceAnchor => FMOne type: #FamixTSourceAnchor opposite: #element'
 	],
 	#category : #'Famix-Traits-SourceAnchor'

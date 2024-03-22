@@ -10,7 +10,7 @@
 Trait {
 	#name : #FamixTCanBeFinal,
 	#instVars : [
-		'#isFinal => FMProperty'
+		'#isFinal => FMProperty defaultValue: false'
 	],
 	#category : #'Famix-Traits-Traits'
 }

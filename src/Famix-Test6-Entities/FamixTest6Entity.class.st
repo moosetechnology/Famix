@@ -27,3 +27,10 @@ FamixTest6Entity class >> metamodel [
 	<generated>
 	^ FamixTest6Model metamodel
 ]
+
+{ #category : #testing }
+FamixTest6Entity >> isQueryable [
+
+	<generated>
+	^ false
+]

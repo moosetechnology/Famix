@@ -12,6 +12,7 @@
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `attributes` | `FamixTWithAttributes` | `parentType` | `FamixTAttribute` | List of attributes declared by this type.|
+| `comments` | `FamixTWithComments` | `commentedEntity` | `FamixTComment` | List of comments for the entity|
 
 ### Outgoing dependencies
 | Relation | Origin | Opposite | Type | Comment |
@@ -27,7 +28,6 @@
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `comments` | `FamixTWithComments` | `commentedEntity` | `FamixTComment` | List of comments for the entity|
 | `instances` | `FamixTAnnotationType` | `annotationType` | `FamixTTypedAnnotationInstance` | Annotations of this type|
 
 
