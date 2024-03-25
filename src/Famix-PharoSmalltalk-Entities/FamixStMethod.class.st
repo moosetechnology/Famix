@@ -245,14 +245,6 @@ FamixStMethod >> numberOfAccesses [
 ]
 
 { #category : #'Famix-Extensions-private' }
-FamixStMethod >> numberOfComments [
-	<FMProperty: #numberOfComments type: #Number>
-	<FMComment: 'The number of comment fragments'>
-	<derived>
-	^ self lookUpPropertyNamed: #numberOfComments computedAs: [ self comments size ]
-]
-
-{ #category : #'Famix-Extensions-private' }
 FamixStMethod >> numberOfConditionals [
 	<FMProperty: #numberOfConditionals type: #Number>
 	<FMComment: 'The number of conditionals in a method'>
