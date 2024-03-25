@@ -173,17 +173,6 @@ FamixStClass >> methodsWithoutSutbsAndConstructors [
 	^ (self methods select: [ :each | each isStub not and: [ each isConstructor not ] ]) asSet
 ]
 
-{ #category : #accessing }
-FamixStClass >> numberOfComments [
-	"Overrides to include method comments in the numberOfComments of the class"
-
-	^ self lookUpPropertyNamed: #numberOfComments computedAs: [
-		  self children asArray inject: self comments size into: [ :sum :child |
-			  (child class includesTrait: FamixTWithComments)
-				  ifTrue: [ child numberOfComments + sum ]
-				  ifFalse: [ sum ] ] ]
-]
-
 { #category : #metrics }
 FamixStClass >> numberOfMessageSends [
 	<FMProperty: #numberOfMessageSends type: #Number>

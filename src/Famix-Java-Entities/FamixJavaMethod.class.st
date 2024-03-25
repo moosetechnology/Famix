@@ -280,14 +280,6 @@ FamixJavaMethod >> numberOfAccesses [
 		computedAs: [ self accesses size ]
 ]
 
-{ #category : #accessing }
-FamixJavaMethod >> numberOfComments [
-	<FMProperty: #numberOfComments type: #Number>
-	<FMComment: 'The number of comment fragments'>
-	<derived>
-	^ self lookUpPropertyNamed: #numberOfComments computedAs: [ self comments size ]
-]
-
 { #category : #'Famix-Extensions-private' }
 FamixJavaMethod >> numberOfConditionals [
 	<FMProperty: #numberOfConditionals type: #Number>

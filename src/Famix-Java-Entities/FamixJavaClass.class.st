@@ -173,17 +173,6 @@ FamixJavaClass >> methodsWithoutSutbsAndConstructors [
 		each isStub not and: [each isConstructor not]]) asSet
 ]
 
-{ #category : #accessing }
-FamixJavaClass >> numberOfComments [
-	"Overrides to include method comments in the numberOfComments of the class"
-
-	^ self lookUpPropertyNamed: #numberOfComments computedAs: [
-		  self children asArray inject: self comments size into: [ :sum :child |
-			  (child class includesTrait: FamixTWithComments)
-				  ifTrue: [ child numberOfComments + sum ]
-				  ifFalse: [ sum ] ] ]
-]
-
 { #category : #'Famix-Extensions' }
 FamixJavaClass >> structuralChildren [
 	^ (OrderedCollection withAll: self methods), self attributes

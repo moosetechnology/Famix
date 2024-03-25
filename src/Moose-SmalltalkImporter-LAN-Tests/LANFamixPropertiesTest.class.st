@@ -78,9 +78,10 @@ LANFamixPropertiesTest >> testClassCategories [
 
 { #category : #testing }
 LANFamixPropertiesTest >> testClassComments [
+
 	self model allClasses do: [ :each | self assert: each numberOfComments >= 0 ].
-	self assert: (self nodeClass propertyNamed: #numberOfComments) equals: 11.
-	self assert: self nodeClass numberOfComments equals: 11
+	self assert: (self nodeClass propertyNamed: #numberOfComments) equals: 0.
+	self assert: self nodeClass numberOfComments equals: 0
 ]
 
 { #category : #testing }
@@ -156,6 +157,14 @@ LANFamixPropertiesTest >> testMethodAccesses [
 		assert: self lanInterfaceOriginateMethod numberOfAccesses
 		equals: (self lanInterfaceOriginateMethod propertyNamed: #numberOfAccesses).
 	self assert: (self model entityNamed: #'Smalltalk::LANInterface.originator()') numberOfAccesses equals: 3
+]
+
+{ #category : #testing }
+LANFamixPropertiesTest >> testMethodComments [
+
+	self model allMethods do: [ :each | self assert: each numberOfComments >= 0 ].
+	self assert: (self lanInterfaceOriginateMethod propertyNamed: #numberOfComments) equals: 6.
+	self assert: self lanInterfaceOriginateMethod numberOfComments equals: 6
 ]
 
 { #category : #testing }
