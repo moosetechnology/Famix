@@ -494,6 +494,29 @@ MooseAbstractGroupTest >> testWithIndexDo [
 	self assertCollection: t hasSameElements: {{el1 . 1} . {el2 . 2} . {el3 . 3}}
 ]
 
+{ #category : #tests }
+MooseAbstractGroupTest >> testWithoutStubs [
+
+	| stubEntity1 stubEntity2 |
+
+	stubEntity1 := MooseEntity new
+		               isStub: true;
+		               yourself.
+	stubEntity2 := MooseEntity new
+		               isStub: true;
+		               yourself.
+	group
+		add: MooseEntity new;
+		add: MooseEntity new;
+		add: stubEntity1;
+		add: stubEntity2.
+
+	self assert: group size equals: 4.
+	self assert: group withoutStubs isMooseObject.
+	self assert: group withoutStubs size equals: 2.
+	group withoutStubs do: [ :entity | self deny: entity isStub ]
+]
+
 { #category : #utilities }
 MooseAbstractGroupTest >> twoClasses [
 	| classA classB |
