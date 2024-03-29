@@ -359,6 +359,11 @@ MooseObject >> isMooseModel [
 ]
 
 { #category : #testing }
+MooseObject >> isMooseObject [
+	^ true
+]
+
+{ #category : #testing }
 MooseObject >> isOfType: aClassFAMIX [
 	^ self class isOfType: aClassFAMIX
 ]
