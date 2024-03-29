@@ -115,7 +115,7 @@ FmxMBBehavior >> classGeneralization: anObject [
 
 { #category : #accessing }
 FmxMBBehavior >> commentWithRelations [
-	"It is sometimes hard to find our way in all the methods and relations of a moose entity. To help with this I am adding informations in the class comments about the different kind of relations of the model."
+	"It is sometimes hard to find our way through all the methods and relations of a moose entity. To help, I add information in the class comments about the different kind of relations in the model."
 
 	^ String streamContents: [ :aStream |
 		  aStream nextPutAll: self comment.
@@ -165,7 +165,9 @@ FmxMBBehavior >> commentWithRelations [
 									  nextPutAll: '` | `';
 									  nextPutAll: strategy relationSide oppositeType;
 									  nextPutAll: '` | ';
-									  nextPutAll: strategy relationSide comment;
+									  nextPutAll: (strategy relationSide comment
+											   copyWithRegex: (String with: Character cr with: $+)
+											   matchesReplacedWith: ' ');
 									  nextPut: $|;
 									  cr ].
 
@@ -192,7 +194,9 @@ FmxMBBehavior >> commentWithRelations [
 					  nextPutAll: '` | ';
 					  print: property defaultValue;
 					  nextPutAll: ' | ';
-					  nextPutAll: property comment;
+					  nextPutAll: (property comment
+							   copyWithRegex: (String with: Character cr with: $+)
+							   matchesReplacedWith: ' ');
 					  nextPut: $|;
 					  cr ] ] ]
 ]
