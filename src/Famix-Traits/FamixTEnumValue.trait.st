@@ -66,7 +66,7 @@ FamixTEnumValue >> isEnumValue [
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : #printing }
 FamixTEnumValue >> mooseNameOn: aStream [
 	(self belongsTo isNotNil and: [ self belongsTo name isNotNil ])
 		ifTrue: [ self belongsTo mooseNameOn: aStream.
