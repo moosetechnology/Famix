@@ -205,6 +205,12 @@ MooseAbstractGroup >> at: anIndex [
 	^ self entities at: anIndex
 ]
 
+{ #category : #accessing }
+MooseAbstractGroup >> at: anIndex ifAbsent: aBlock [
+
+	^ self entities at: anIndex ifAbsent: aBlock
+]
+
 { #category : #'public interface' }
 MooseAbstractGroup >> average: aSymbolOrBlock [ 
 	 
@@ -237,6 +243,12 @@ MooseAbstractGroup >> collect: collectBlock thenReject: selectBlock [
 ]
 
 { #category : #enumerating }
+MooseAbstractGroup >> collect: aBlockCollect thenSelect: aBlockThenSelect [
+
+	^ self entities collect: aBlockCollect thenSelect: aBlockThenSelect
+]
+
+{ #category : #enumerating }
 MooseAbstractGroup >> collectAsSet: aBlock [
 	^ self entities collectAsSet: aBlock
 ]
@@ -262,6 +274,12 @@ MooseAbstractGroup >> copyWithout: anEntity [
 	^ self entities copyWithout: anEntity
 ]
 
+{ #category : #copying }
+MooseAbstractGroup >> copyWithoutAll: mooseEntities [
+
+	^ self entities copyWithoutAll: mooseEntities
+]
+
 { #category : #enumerating }
 MooseAbstractGroup >> count: aBlock [ 
 	 
@@ -281,6 +299,12 @@ MooseAbstractGroup >> detect: aBlock [
 MooseAbstractGroup >> detect: aBlock ifNone: anotherBlock [ 
 	 
 	^self entities detect: aBlock ifNone: anotherBlock
+]
+
+{ #category : #enumerating }
+MooseAbstractGroup >> detectMax: aString [
+
+	^ self entities detectMax: aString
 ]
 
 { #category : #'entity collection' }
@@ -309,13 +333,10 @@ MooseAbstractGroup >> doWithIndex: aBlockClosure [
 	self entities doWithIndex: aBlockClosure 
 ]
 
-{ #category : #'reflective operations' }
-MooseAbstractGroup >> doesNotUnderstand: aMessage [
-	"Forward message to collection"
+{ #category : #accessing }
+MooseAbstractGroup >> eighth [
 
-	^ [ aMessage sendTo: self entities ]
-		on: MessageNotUnderstood
-		do: [ super doesNotUnderstand: aMessage ]
+	^ self entities eighth
 ]
 
 { #category : #'entity collection' }
@@ -382,6 +403,12 @@ MooseAbstractGroup >> equalsTo: aCollection [
 ]
 
 { #category : #accessing }
+MooseAbstractGroup >> fifth [
+
+	^ self entities fifth
+]
+
+{ #category : #accessing }
 MooseAbstractGroup >> first [ 
 	 
 	^self entities first
@@ -409,6 +436,18 @@ MooseAbstractGroup >> flatten [
 	as objects rather than as collection."
 
 	^self gather: [ :each | each ]
+]
+
+{ #category : #enumerating }
+MooseAbstractGroup >> fold: aBlock [
+
+	^ self entities fold: aBlock
+]
+
+{ #category : #accessing }
+MooseAbstractGroup >> fourth [
+
+	^ self entities fourth
 ]
 
 { #category : #enumerating }
@@ -453,6 +492,12 @@ MooseAbstractGroup >> ifNotEmpty: aBlock [
 ]
 
 { #category : #testing }
+MooseAbstractGroup >> ifNotEmpty: aBlockIfNotEmpty ifEmpty: aBlockIfEmpty [
+
+	^ self entities ifEmpty: aBlockIfEmpty ifNotEmpty: aBlockIfNotEmpty
+]
+
+{ #category : #testing }
 MooseAbstractGroup >> includes: anEntity [ 
 	 
 	^self entities includes: anEntity
@@ -472,6 +517,12 @@ MooseAbstractGroup >> includesAllOf: aCollection [
 MooseAbstractGroup >> includesID: elementID [ 
 	 
 	^self entityStorage includesID: elementID
+]
+
+{ #category : #accessing }
+MooseAbstractGroup >> indexOf: aMooseEntity [
+
+	^ self entities indexOf: aMooseEntity
 ]
 
 { #category : #initialization }
@@ -553,6 +604,12 @@ MooseAbstractGroup >> minValue: aBlock [
 { #category : #accessing }
 MooseAbstractGroup >> mooseModel [
 	^ self ifEmpty: [ nil ] ifNotEmpty: [ self anyOne mooseModel ]
+]
+
+{ #category : #accessing }
+MooseAbstractGroup >> ninth [ 
+
+	^ self entities ninth
 ]
 
 { #category : #testing }
@@ -661,6 +718,12 @@ MooseAbstractGroup >> select: aBlock [
 ]
 
 { #category : #enumerating }
+MooseAbstractGroup >> select: aBlockSelect thenDo: aBlockThenDo [
+
+	^ self entities select: aBlockSelect thenDo: aBlockThenDo
+]
+
+{ #category : #enumerating }
 MooseAbstractGroup >> selectFirst: anInteger [ 
 	 
 	self flag: #patched. "VW uses sliceTo:, which is a copyFrom:To: with checked indices. Not the case here"
@@ -675,8 +738,26 @@ MooseAbstractGroup >> selectWithNameSimilarTo: anEntity [
 ]
 
 { #category : #accessing }
+MooseAbstractGroup >> seventh [
+
+	^ self entities seventh
+]
+
+{ #category : #accessing }
+MooseAbstractGroup >> sixth [
+
+	^ self entities sixth
+]
+
+{ #category : #accessing }
 MooseAbstractGroup >> size [	 
 	^ self entityStorage size
+]
+
+{ #category : #sorting }
+MooseAbstractGroup >> sorted [
+
+	^ self entities sorted
 ]
 
 { #category : #arithmetic }
