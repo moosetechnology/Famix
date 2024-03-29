@@ -786,6 +786,12 @@ MooseAbstractGroup >> withIndexDo: aBlockClosure [
 	self entities withIndexDo: aBlockClosure 
 ]
 
+{ #category : #accessing }
+MooseAbstractGroup >> withoutStubs [
+
+	^ (self reject: #isStub) asMooseGroup
+]
+
 { #category : #'set operations' }
 MooseAbstractGroup >> | aCollection [
 	^ self union: aCollection
