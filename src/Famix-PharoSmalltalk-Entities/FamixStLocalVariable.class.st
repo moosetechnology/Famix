@@ -46,7 +46,7 @@ FamixStLocalVariable class >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : #printing }
 FamixStLocalVariable >> mooseNameOn: stream [ 
 	| parent |
 	parent := self parentBehaviouralEntity.

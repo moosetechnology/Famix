@@ -84,7 +84,7 @@ FamixTType >> isType [
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : #printing }
 FamixTType >> mooseNameOn: aStream [
 	self typeContainer
 		ifNotNil: [ :parent |

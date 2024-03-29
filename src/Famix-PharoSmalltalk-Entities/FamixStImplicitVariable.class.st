@@ -56,7 +56,7 @@ FamixStImplicitVariable >> isSuper [
 	^ self name == #super
 ]
 
-{ #category : #testing }
+{ #category : #printing }
 FamixStImplicitVariable >> mooseNameOn: stream [ 
 	| parent |
 	parent := self parentBehaviouralEntity.

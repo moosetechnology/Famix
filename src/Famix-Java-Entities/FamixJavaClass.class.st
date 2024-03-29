@@ -173,15 +173,14 @@ FamixJavaClass >> methodsWithoutSutbsAndConstructors [
 		each isStub not and: [each isConstructor not]]) asSet
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #printing }
 FamixJavaClass >> mooseNameOn: aStream [
 
 	self typeContainer ifNotNil: [ :parent |
-		| separator |
 		parent mooseNameOn: aStream.
-		separator := '::'.
-		self isInnerClass ifTrue: [ separator := '$' ].
-		aStream nextPutAll: separator ].
+		self isInnerClass
+			ifTrue: [ aStream nextPut: $$ ]
+			ifFalse: [ aStream nextPutAll: '::' ] ].
 	self name ifNotNil: [ :n | aStream nextPutAll: n ]
 ]
 
