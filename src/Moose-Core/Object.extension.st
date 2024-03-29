@@ -30,6 +30,11 @@ Object >> isMooseEntity [
 ]
 
 { #category : #'*Moose-Core' }
+Object >> isMooseObject [
+	^ false
+]
+
+{ #category : #'*Moose-Core' }
 Object class >> isOfType: aClassFAMIX [
 	^ false
 ]
