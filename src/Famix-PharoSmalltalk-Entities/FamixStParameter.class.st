@@ -46,7 +46,7 @@ FamixStParameter class >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : #printing }
 FamixStParameter >> mooseNameOn: stream [ 
 	| parent |
 	parent := self parentBehaviouralEntity.
