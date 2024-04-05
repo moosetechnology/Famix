@@ -67,8 +67,11 @@ FamixJavaFoldersImporter class >> importSettingsOn: aBuilder [
 
 { #category : #accessing }
 FamixJavaFoldersImporter class >> verveineJPath [
+	"We check that the path exists because the loading of the settings are setting it in the CI and we end up with a folder that is not the right one :("
 
-	^ VerveineJPath ifNil: [ VerveineJPath := self defaultVerveineJDirectory ]
+	^ (VerveineJPath isNotNil and: [ VerveineJPath exists ])
+		  ifTrue: [ VerveineJPath ]
+		  ifFalse: [ VerveineJPath := self defaultVerveineJDirectory ]
 ]
 
 { #category : #accessing }
