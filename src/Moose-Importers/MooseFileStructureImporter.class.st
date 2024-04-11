@@ -22,9 +22,7 @@ MooseFileStructureImporter >> completeImport: folders [
 			| folder |
 			folder := self folderClass named: each filedIn: nil.
 			self importContentsInFolderNamed: (FileSystem disk referenceTo: each) filedInFolder: folder.
-			self mooseModel add: folder ].
-	self mooseModel sourceLanguage
-		ifNil: [ self mooseModel sourceLanguage: self unknownSourceLanguageClass new ]
+			self mooseModel add: folder ]
 ]
 
 { #category : #accessing }
@@ -75,9 +73,4 @@ MooseFileStructureImporter >> mooseModel [
 { #category : #accessing }
 MooseFileStructureImporter >> mooseModel: anObject [
 	mooseModel := anObject
-]
-
-{ #category : #accessing }
-MooseFileStructureImporter >> unknownSourceLanguageClass [
-	^ self classNamed: #UnknownSourceLanguage
 ]

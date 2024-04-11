@@ -348,13 +348,6 @@ FamixJavaTEntityCreator >> newTypeNamed: aName [
 ]
 
 { #category : #'entity creation' }
-FamixJavaTEntityCreator >> newUnknownSourceLanguage [
-
-	<generated>
-	^ self add: FamixJavaUnknownSourceLanguage new
-]
-
-{ #category : #'entity creation' }
 FamixJavaTEntityCreator >> newUnknownVariable [
 
 	<generated>

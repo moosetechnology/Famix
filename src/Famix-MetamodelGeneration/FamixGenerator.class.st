@@ -56,7 +56,6 @@ Class {
 		'tTypeAlias',
 		'tTypedAnnotationInstance',
 		'tTypedAnnotationInstanceAttribute',
-		'tUnknownSourceLanguage',
 		'tWithAccesses',
 		'tWithAnnotationInstanceAttributes',
 		'tWithAnnotationInstances',
@@ -1081,8 +1080,6 @@ FamixGenerator >> defineHierarchy [
 	tType --|> #TEntityMetaLevelDependency.
 	tType --|> tSourceEntity.
 
-	tUnknownSourceLanguage --|> tSourceLanguage.
-
 	tUnknownVariable --|> tStructuralEntity.
 
 	tWithClasses --|> tWithTypes.
@@ -1770,8 +1767,6 @@ FamixGenerator >> defineTraits [
 
 	tTypedEntity := builder newTraitNamed: #TTypedEntity.
 	tTypedEntity comment: self commentForTTypedStructure.
-
-	tUnknownSourceLanguage := builder newTraitNamed: #TUnknownSourceLanguage.
 
 	tUnknownVariable := builder newTraitNamed: #TUnknownVariable.
 

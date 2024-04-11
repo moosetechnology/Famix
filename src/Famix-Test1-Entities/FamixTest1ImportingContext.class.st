@@ -99,13 +99,6 @@ FamixTest1ImportingContext >> importSourceTextAnchor [
 	^ self importConcreteEntity: (self class fm3ClassNamed: #SourceTextAnchor)
 ]
 
-{ #category : #importing }
-FamixTest1ImportingContext >> importUnknownSourceLanguage [
-
-	<generated>
-	^ self importConcreteEntity: (self class fm3ClassNamed: #UnknownSourceLanguage)
-]
-
 { #category : #testing }
 FamixTest1ImportingContext >> shouldImportAssociation [
 
@@ -188,11 +181,4 @@ FamixTest1ImportingContext >> shouldImportSourceTextAnchor [
 
 	<generated>
 	^ self shouldImport: #SourceTextAnchor
-]
-
-{ #category : #testing }
-FamixTest1ImportingContext >> shouldImportUnknownSourceLanguage [
-
-	<generated>
-	^ self shouldImport: #UnknownSourceLanguage
 ]

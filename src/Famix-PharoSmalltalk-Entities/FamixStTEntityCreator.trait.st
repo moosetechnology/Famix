@@ -236,13 +236,6 @@ FamixStTEntityCreator >> newSourceTextAnchor [
 ]
 
 { #category : #'entity creation' }
-FamixStTEntityCreator >> newUnknownSourceLanguage [
-
-	<generated>
-	^ self add: FamixStUnknownSourceLanguage new
-]
-
-{ #category : #'entity creation' }
 FamixStTEntityCreator >> newUnknownVariable [
 
 	<generated>

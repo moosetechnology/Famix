@@ -101,10 +101,3 @@ FamixTestComposed2TEntityCreator >> newSourceTextAnchor [
 	<generated>
 	^ self add: FamixTestComposed2SourceTextAnchor new
 ]
-
-{ #category : #'entity creation' }
-FamixTestComposed2TEntityCreator >> newUnknownSourceLanguage [
-
-	<generated>
-	^ self add: FamixTestComposed2UnknownSourceLanguage new
-]

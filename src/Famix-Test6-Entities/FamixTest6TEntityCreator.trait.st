@@ -52,10 +52,3 @@ FamixTest6TEntityCreator >> newSpam [
 	<generated>
 	^ self add: FamixTest6Spam new
 ]
-
-{ #category : #'entity creation' }
-FamixTest6TEntityCreator >> newUnknownSourceLanguage [
-
-	<generated>
-	^ self add: FamixTest6UnknownSourceLanguage new
-]

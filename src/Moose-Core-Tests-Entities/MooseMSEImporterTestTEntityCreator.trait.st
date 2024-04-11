@@ -129,10 +129,3 @@ MooseMSEImporterTestTEntityCreator >> newSourceTextAnchor [
 	<generated>
 	^ self add: MooseMSEImporterTestSourceTextAnchor new
 ]
-
-{ #category : #'entity creation' }
-MooseMSEImporterTestTEntityCreator >> newUnknownSourceLanguage [
-
-	<generated>
-	^ self add: MooseMSEImporterTestUnknownSourceLanguage new
-]
