@@ -247,13 +247,6 @@ FamixJavaImportingContext >> importType [
 ]
 
 { #category : #importing }
-FamixJavaImportingContext >> importUnknownSourceLanguage [
-
-	<generated>
-	^ self importConcreteEntity: (self class fm3ClassNamed: #UnknownSourceLanguage)
-]
-
-{ #category : #importing }
 FamixJavaImportingContext >> importUnknownVariable [
 
 	<generated>
@@ -496,13 +489,6 @@ FamixJavaImportingContext >> shouldImportType [
 
 	<generated>
 	^ self shouldImport: #Type
-]
-
-{ #category : #testing }
-FamixJavaImportingContext >> shouldImportUnknownSourceLanguage [
-
-	<generated>
-	^ self shouldImport: #UnknownSourceLanguage
 ]
 
 { #category : #testing }

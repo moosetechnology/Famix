@@ -143,10 +143,3 @@ FamixTest3TEntityCreator >> newTypeNamed: aName [
 	<generated>
 	^ self add: (FamixTest3Type named: aName)
 ]
-
-{ #category : #'entity creation' }
-FamixTest3TEntityCreator >> newUnknownSourceLanguage [
-
-	<generated>
-	^ self add: FamixTest3UnknownSourceLanguage new
-]
