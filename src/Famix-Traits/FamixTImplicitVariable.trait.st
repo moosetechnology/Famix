@@ -59,7 +59,7 @@ FamixTImplicitVariable >> isImplicitVariable [
 { #category : #testing }
 FamixTImplicitVariable >> isSelf [
 
-	^ self name == #self
+	^ self name = 'self'
 ]
 
 { #category : #accessing }
