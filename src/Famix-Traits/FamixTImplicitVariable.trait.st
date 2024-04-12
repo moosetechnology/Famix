@@ -56,6 +56,12 @@ FamixTImplicitVariable >> isImplicitVariable [
 	^ true
 ]
 
+{ #category : #testing }
+FamixTImplicitVariable >> isSelf [
+
+	^ self name == #self
+]
+
 { #category : #accessing }
 FamixTImplicitVariable >> parentBehaviouralEntity [
 	"Relation named: #parentBehaviouralEntity type: #FamixTWithImplicitVariables opposite: #implicitVariables"

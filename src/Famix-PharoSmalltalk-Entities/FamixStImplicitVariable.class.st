@@ -47,11 +47,6 @@ FamixStImplicitVariable class >> annotation [
 ]
 
 { #category : #testing }
-FamixStImplicitVariable >> isSelf [
-	^ self name = #self
-]
-
-{ #category : #testing }
 FamixStImplicitVariable >> isSuper [
 	^ self name == #super
 ]
