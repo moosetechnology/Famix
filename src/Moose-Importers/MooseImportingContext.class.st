@@ -72,16 +72,8 @@ MooseImportingContext class >> defaultMergeClassAndMetaclass: aBoolean [
 
 { #category : #initialize }
 MooseImportingContext class >> defineEntityDependencies [
-	"self initialize"
-	"when we extract literals extract  methods"
-	
-	self entityDependencies
-		at: self importingLiteral
-		put:
-			((Set new)
-				add: self importingLiteral;
-				add: self importingMethod;
-				yourself).	"when we extract comments do not extract anything else per default "
+	<script>
+	"when we extract comments do not extract anything else per default "
 	self entityDependencies
 		at: self importingComment
 		put:
@@ -277,12 +269,6 @@ MooseImportingContext class >> importInvocationAndDependents [
 ]
 
 { #category : #'importing-filters' }
-MooseImportingContext class >> importLiteralAndDependents [
-	
-	^self allDependentsOf: self importingLiteral
-]
-
-{ #category : #'importing-filters' }
 MooseImportingContext class >> importLocalVariableAndDependents [
 	
 	^self allDependentsOf: self importingLocalVariable
@@ -384,12 +370,6 @@ MooseImportingContext class >> importingInheritance [
 MooseImportingContext class >> importingInvocation [
 	
 	^#Invocation
-]
-
-{ #category : #'basic representation' }
-MooseImportingContext class >> importingLiteral [
-	
-	^#Literal
 ]
 
 { #category : #'basic representation' }
@@ -594,12 +574,6 @@ MooseImportingContext >> importInvocation [
 ]
 
 { #category : #'importing-filters' }
-MooseImportingContext >> importLiteral [
-	
-	self entityKindsToBeExtracted addAll: self class importLiteralAndDependents
-]
-
-{ #category : #'importing-filters' }
 MooseImportingContext >> importLocalVariable [
 	"in fact you check the dependents of the dependents"
 	
@@ -611,16 +585,6 @@ MooseImportingContext >> importLocalVariable [
 MooseImportingContext >> importMaximum [
 	
 	self entityKindsToBeExtracted: self maximum
-]
-
-{ #category : #'importing-filters' }
-MooseImportingContext >> importMaximumExceptLiteral [
-	" self new importMaximumExceptLiteral "
-	
-	| set |
-	set := self maximum.
-	set remove: self class importingLiteral.
-	self entityKindsToBeExtracted: set
 ]
 
 { #category : #'importing-filters' }
@@ -754,12 +718,6 @@ MooseImportingContext >> shouldImportInheritance [
 MooseImportingContext >> shouldImportInvocation [
 	
 	^self shouldImport: self class importingInvocation
-]
-
-{ #category : #'importing queries' }
-MooseImportingContext >> shouldImportLiteral [
-	
-	^self shouldImport: self class importingLiteral
 ]
 
 { #category : #'importing queries' }
