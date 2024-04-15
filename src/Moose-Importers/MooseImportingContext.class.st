@@ -27,9 +27,6 @@ Class {
 		'importSubclasses',
 		'computeAttributeTypes'
 	],
-	#classVars : [
-		'DefaultMergeClassAndMetaclass'
-	],
 	#classInstVars : [
 		'entityDependencies'
 	],
@@ -38,36 +35,18 @@ Class {
 
 { #category : #'importing-filters' }
 MooseImportingContext class >> allDependentsOf: aKey [
-	
-	^self
-		allDependentsOf: aKey
-		alreadyIn: Set new
+
+	^ self allDependentsOf: aKey alreadyIn: Set new
 ]
 
 { #category : #'importing-filters' }
 MooseImportingContext class >> allDependentsOf: aKey alreadyIn: aSet [
-	
-	(self entityDependencies at: aKey)
-		do:
-			[:each | 
-			(aSet includes: each)
-				ifFalse:
-					[aSet add: each.
-					aSet addAll: (self allDependentsOf: each alreadyIn: aSet)]].
-	^aSet
-]
 
-{ #category : #defaults }
-MooseImportingContext class >> defaultMergeClassAndMetaclass [
-	^ DefaultMergeClassAndMetaclass ifNil: [ DefaultMergeClassAndMetaclass := false ]
-]
-
-{ #category : #defaults }
-MooseImportingContext class >> defaultMergeClassAndMetaclass: aBoolean [
-	"self defaultHaveExplicitMetaClasses: false"
-	"self defaultHaveExplicitMetaClasses: true"
-	
-	DefaultMergeClassAndMetaclass := aBoolean
+	(self entityDependencies at: aKey) do: [ :each |
+		(aSet includes: each) ifFalse: [
+			aSet add: each.
+			aSet addAll: (self allDependentsOf: each alreadyIn: aSet) ] ].
+	^ aSet
 ]
 
 { #category : #initialize }
@@ -80,18 +59,6 @@ MooseImportingContext class >> defineEntityDependencies [
 			((Set new)
 				add: self importingComment;
 				add: self importingMethod;
-				yourself).	"when we extract files do not extract anything else per default "
-	self entityDependencies
-		at: self importingFolder
-		put:
-			((Set new)
-				add: self importingFolder;
-				yourself).	"when we extract files do not extract anything else per default "
-	self entityDependencies
-		at: self importingFile
-		put:
-			((Set new)
-				add: self importingFile;
 				yourself).	"when we extract namespace do not extract anything else per default "
 	self entityDependencies
 		at: self importingNamespace
@@ -239,18 +206,6 @@ MooseImportingContext class >> importComment [
 ]
 
 { #category : #'importing-filters' }
-MooseImportingContext class >> importFileAndDependents [
-	
-	^self allDependentsOf: self importingFile
-]
-
-{ #category : #'importing-filters' }
-MooseImportingContext class >> importFolderAndDependents [
-	
-	^self allDependentsOf: self importingFolder
-]
-
-{ #category : #'importing-filters' }
 MooseImportingContext class >> importImplicitVariableAndDependents [
 	
 	^self allDependentsOf: self importingImplicitVariable
@@ -334,18 +289,6 @@ MooseImportingContext class >> importingClassExtension [
 MooseImportingContext class >> importingComment [
 	
 	^#Comment
-]
-
-{ #category : #'basic representation' }
-MooseImportingContext class >> importingFile [
-	
-	^#File
-]
-
-{ #category : #'basic representation' }
-MooseImportingContext class >> importingFolder [
-	
-	^#Folder
 ]
 
 { #category : #'basic representation' }
@@ -490,20 +433,6 @@ MooseImportingContext >> importComment [
 ]
 
 { #category : #'importing-filters' }
-MooseImportingContext >> importFile [
-	"in fact you check the dependents of the dependents"
-	
-	self entityKindsToBeExtracted addAll: self class importFileAndDependents
-]
-
-{ #category : #'importing-filters' }
-MooseImportingContext >> importFolder [
-	"in fact you check the dependents of the dependents"
-	
-	self entityKindsToBeExtracted addAll: self class importFolderAndDependents
-]
-
-{ #category : #'importing-filters' }
 MooseImportingContext >> importImplicitVariable [
 	"in fact you check the dependents of the dependents"
 	
@@ -569,11 +498,6 @@ MooseImportingContext >> importSmalltalkStubMethod [
 	self entityKindsToBeExtracted addAll: self class importSmalltalkStubMethod
 ]
 
-{ #category : #'importing-filters' }
-MooseImportingContext >> importStubMethod [
-	self entityKindsToBeExtracted addAll: self class importSmalltalkStubMethod 
-]
-
 { #category : #'import options' }
 MooseImportingContext >> importSubclasses [
 	"When a class is created, we automatically import all its subclasses"
@@ -582,9 +506,10 @@ MooseImportingContext >> importSubclasses [
 
 { #category : #initialization }
 MooseImportingContext >> initialize [
+
 	super initialize.
 	self entityKindsToBeExtracted: Set new.
-	mergeClassAndMetaclass := self class defaultMergeClassAndMetaclass.
+	mergeClassAndMetaclass := false.
 	computeAttributeTypes := false.
 	"for subclasses import for the moment we just do the same as before but it should be discussed and probably should be set to false"
 	importSubclasses := true
@@ -592,12 +517,11 @@ MooseImportingContext >> initialize [
 
 { #category : #'importing-filters' }
 MooseImportingContext >> maximum [
-	
+
 	| all |
 	all := Set new.
-	self class entityDependencies
-		keysAndValuesDo: [:key :value | all addAll: value].
-	^all
+	self class entityDependencies keysAndValuesDo: [ :key :value | all addAll: value ].
+	^ all
 ]
 
 { #category : #'import options' }
