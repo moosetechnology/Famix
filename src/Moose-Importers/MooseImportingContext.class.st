@@ -35,110 +35,28 @@ Class {
 
 { #category : #initialize }
 MooseImportingContext class >> defineEntityDependencies [
-	<script>
-	"when we extract comments do not extract anything else per default "
-	self entityDependencies
-		at: self importingComment
-		put:
-			((Set new)
-				add: self importingComment;
-				add: self importingMethod;
-				yourself).	"when we extract namespace do not extract anything else per default "
-	self entityDependencies
-		at: self importingNamespace
-		put:
-			((Set new)
-				add: self importingNamespace;
-				yourself).	"when we extract package do not extract anything else per default "
-	self entityDependencies
-		at: self importingPackage
-		put:
-			((Set new)
-				add: self importingPackage;
-				yourself).
-	self entityDependencies
-		at: self importingClass
-		put:
-			((Set new)
-				add: self importingClass;
-				add: self importingNamespace;
-				yourself).	"when we extract inheritance we extract classes"
-	self entityDependencies
-		at: self importingInheritance
-		put:
-			((Set new)
-				add: self importingClass;
-				add: self importingInheritance;
-				yourself).	"when we extract inheritance we extract classes"
-	self entityDependencies
-		at: self importingMethod
-		put:
-			((Set new)
-				add: self importingMethod;
-				add: self importingClass;
-				yourself).
-	self entityDependencies
-		at: self importingClassExtension 
-		put:
-			((Set new)
-				add: self importingClassExtension;
-				add: self importingMethod;
-				add: self importingPackage;
-				yourself).
-	"when we extract implicit variable we extract also method"
-	self entityDependencies
-		at: self importingImplicitVariable
-		put:
-			((Set new)
-				add: self importingMethod;
-				add: self importingImplicitVariable;
-				yourself).	"when we extract local variable we extract also method"
-	self entityDependencies
-		at: self importingLocalVariable
-		put:
-			((Set new)
-				add: self importingMethod;
-				add: self importingLocalVariable;
-				yourself).
-	self entityDependencies
-		at: self importingAttribute
-		put:
-			((Set new)
-				add: self importingAttribute;
-				add: self importingClass;
-				yourself).
-	self entityDependencies
-		at: self importingInvocation
-		put:
-			((Set new)
-				add: self importingInvocation;
-				add: self importingMethod;
-				yourself).
-	self entityDependencies
-		at: self importingArgument
-		put:
-			((Set new)
-				add: self importingMethod;
-				add: self importingArgument;
-				yourself).
-	self entityDependencies
-		at: self importingAccess
-		put:
-			((Set new)
-				add: self importingMethod;
-				add: self importingImplicitVariable;
-				add: self importingLocalVariable;
-				add: self importingAccess;
-				add: self importingArgument;
-				yourself).
-	self entityDependencies
-		at: self importingSmalltalkStubMethod
-		put:
-			((Set new)
-				add: self importingMethod;
-				add: self importingSmalltalkStubMethod;
-				yourself).
 
+	<script>
+	self entityDependencies
+		at: self importingComment put: (Set with: self importingComment with: self importingMethod);
+		at: self importingNamespace put: (Set with: self importingNamespace);
+		at: self importingPackage put: (Set with: self importingPackage);
+		at: self importingClass put: (Set with: self importingClass with: self importingNamespace);
+		at: self importingInheritance put: (Set with: self importingClass with: self importingInheritance);
+		at: self importingMethod put: (Set with: self importingMethod with: self importingClass);
+		at: self importingClassExtension put: (Set with: self importingClassExtension with: self importingMethod with: self importingPackage);
+		at: self importingImplicitVariable put: (Set with: self importingMethod with: self importingImplicitVariable);
+		at: self importingLocalVariable put: (Set with: self importingMethod with: self importingLocalVariable);
+		at: self importingAttribute put: (Set with: self importingAttribute with: self importingClass);
+		at: self importingInvocation put: (Set with: self importingInvocation with: self importingMethod);
+		at: self importingArgument put: (Set with: self importingMethod with: self importingArgument);
+		at: self importingAccess put: (Set
+				 with: self importingMethod
+				 with: self importingImplicitVariable
+				 with: self importingLocalVariable
+				 with: self importingAccess
+				 with: self importingArgument);
+		at: self importingSmalltalkStubMethod put: (Set with: self importingMethod with: self importingSmalltalkStubMethod)
 ]
 
 { #category : #initialize }
