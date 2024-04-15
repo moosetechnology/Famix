@@ -200,7 +200,7 @@ MooseImportingContext class >> importClassExtensionAndDependents [
 ]
 
 { #category : #'importing-filters' }
-MooseImportingContext class >> importComment [
+MooseImportingContext class >> importCommentAndDependents [
 	
 	^ self allDependentsOf:  self importingComment
 ]
@@ -237,16 +237,16 @@ MooseImportingContext class >> importMethodAndDependents [
 ]
 
 { #category : #'importing-filters' }
-MooseImportingContext class >> importNamespace [
+MooseImportingContext class >> importNamespaceAndDependents [
 	"self importNamespace"
 	
 	^self allDependentsOf: self importingNamespace
 ]
 
 { #category : #'importing-filters' }
-MooseImportingContext class >> importPackage [
-	
-	^ Set with: self importingPackage
+MooseImportingContext class >> importPackageAndDependents [
+
+	^ self allDependentsOf: self importingPackage
 ]
 
 { #category : #'importing-filters' }
@@ -423,7 +423,7 @@ MooseImportingContext >> importClassExtension [
 MooseImportingContext >> importComment [
 	"in fact you check the dependents of the dependents"
 	
-	self entityKindsToBeExtracted addAll: self class importComment
+	self entityKindsToBeExtracted addAll: self class importCommentAndDependents
 ]
 
 { #category : #'importing-filters' }
@@ -475,14 +475,14 @@ MooseImportingContext >> importMethod [
 MooseImportingContext >> importNamespace [
 	"just import a package and nothing else"
 	
-	self entityKindsToBeExtracted addAll: self class importNamespace
+	self entityKindsToBeExtracted addAll: self class importNamespaceAndDependents
 ]
 
 { #category : #'importing-filters' }
 MooseImportingContext >> importPackage [
 	"just import a package and nothing else"
 	
-	self entityKindsToBeExtracted addAll: self class importPackage
+	self entityKindsToBeExtracted addAll: self class importPackageAndDependents
 ]
 
 { #category : #'importing-filters' }
