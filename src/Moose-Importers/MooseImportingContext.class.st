@@ -483,52 +483,6 @@ MooseImportingContext >> importClassExtension [
 ]
 
 { #category : #'importing-filters' }
-MooseImportingContext >> importClassMethodInheritance [
-	
-	self entityKindsToBeExtracted addAll: self class importClassAndDependents.
-	self entityKindsToBeExtracted addAll: self class importMethodAndDependents.
-	self entityKindsToBeExtracted
-		addAll: self class importInheritanceAndDependents
-]
-
-{ #category : #'importing-filters' }
-MooseImportingContext >> importClassMethodInheritanceAttribute [
-	
-	self entityKindsToBeExtracted addAll: self class importClassAndDependents.
-	self entityKindsToBeExtracted addAll: self class importMethodAndDependents.
-	self entityKindsToBeExtracted
-		addAll: self class importInheritanceAndDependents.
-	self entityKindsToBeExtracted
-		addAll: self class importAttributeAndDependents
-]
-
-{ #category : #'importing-filters' }
-MooseImportingContext >> importClassMethodInheritanceAttributeAccess [
-	
-	self entityKindsToBeExtracted addAll: self class importClassAndDependents.
-	self entityKindsToBeExtracted addAll: self class importMethodAndDependents.
-	self entityKindsToBeExtracted
-		addAll: self class importInheritanceAndDependents.
-	self entityKindsToBeExtracted
-		addAll: self class importAttributeAndDependents.
-	self entityKindsToBeExtracted addAll: self class importAccessAndDependents
-]
-
-{ #category : #'importing-filters' }
-MooseImportingContext >> importClassMethodInheritanceAttributeAccessInvocation [
-	
-	self entityKindsToBeExtracted addAll: self class importClassAndDependents.
-	self entityKindsToBeExtracted addAll: self class importMethodAndDependents.
-	self entityKindsToBeExtracted
-		addAll: self class importInheritanceAndDependents.
-	self entityKindsToBeExtracted
-		addAll: self class importAttributeAndDependents.
-	self entityKindsToBeExtracted addAll: self class importAccessAndDependents.
-	self entityKindsToBeExtracted
-		addAll: self class importInvocationAndDependents
-]
-
-{ #category : #'importing-filters' }
 MooseImportingContext >> importComment [
 	"in fact you check the dependents of the dependents"
 	

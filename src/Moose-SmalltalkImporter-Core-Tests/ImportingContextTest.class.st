@@ -30,22 +30,24 @@ ImportingContextTest >> testShouldComputeTypeOfAttributes [
 
 { #category : #tests }
 ImportingContextTest >> testShouldImportAllTheRest [
+
 	| context |
-
-	context :=MooseImportingContext new.
-	context importClassMethodInheritance.
-	self deny: (context shouldImportMethodBody).
-	self assert: (context shouldImportClass).
-
+	context := MooseImportingContext new.
+	context
+		importClass;
+		importMethod;
+		importInheritance.
+	self deny: context shouldImportMethodBody.
+	self assert: context shouldImportClass
 ]
 
 { #category : #tests }
 ImportingContextTest >> testShouldImportClasses [
-	| context |
 
-	context :=MooseImportingContext new.
-	context importClassMethodInheritance.
-	self assert: (context shouldImportClass).
+	| context |
+	context := MooseImportingContext new.
+	context importClass.
+	self assert: context shouldImportClass
 ]
 
 { #category : #tests }
@@ -63,11 +65,11 @@ ImportingContextTest >> testShouldImportClassesForInheritance [
 
 { #category : #tests }
 ImportingContextTest >> testShouldImportClassesForMethod [
-	| context |
 
+	| context |
 	context := MooseImportingContext new.
-	context importClassMethodInheritance.
-	self assert: (context shouldImportClass).
+	context importMethod.
+	self assert: context shouldImportClass
 ]
 
 { #category : #tests }
