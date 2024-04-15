@@ -172,13 +172,6 @@ MooseImportingContext class >> defineEntityDependencies [
 				add: self importingMethod;
 				yourself).
 	self entityDependencies
-		at: self importingFormalParameter
-		put:
-			((Set new)
-				add: self importingMethod;
-				add: self importingFormalParameter;
-				yourself).
-	self entityDependencies
 		at: self importingArgument
 		put:
 			((Set new)
@@ -202,7 +195,6 @@ MooseImportingContext class >> defineEntityDependencies [
 				add: self importingAccess;
 				add: self importingGlobalVariable;
 				add: self importingArgument;
-				add: self importingFormalParameter;
 				yourself).
 	self entityDependencies
 		at: self importingSmalltalkStubMethod
@@ -272,12 +264,6 @@ MooseImportingContext class >> importFileAndDependents [
 MooseImportingContext class >> importFolderAndDependents [
 	
 	^self allDependentsOf: self importingFolder
-]
-
-{ #category : #'importing-filters' }
-MooseImportingContext class >> importFormalParameterAndDependents [
-	
-	^self allDependentsOf: self importingFormalParameter
 ]
 
 { #category : #'importing-filters' }
@@ -388,12 +374,6 @@ MooseImportingContext class >> importingFile [
 MooseImportingContext class >> importingFolder [
 	
 	^#Folder
-]
-
-{ #category : #'basic representation' }
-MooseImportingContext class >> importingFormalParameter [
-	
-	^#FormalParameter
 ]
 
 { #category : #'basic representation' }
@@ -610,14 +590,6 @@ MooseImportingContext >> importFolder [
 ]
 
 { #category : #'importing-filters' }
-MooseImportingContext >> importFormalParameter [
-	"in fact you check the dependents of the dependents"
-	
-	self entityKindsToBeExtracted
-		addAll: self class importFormalParameterAndDependents
-]
-
-{ #category : #'importing-filters' }
 MooseImportingContext >> importGlobalVariable [
 	"in fact you check the dependents of the dependents"
 	
@@ -792,12 +764,6 @@ MooseImportingContext >> shouldImportClassExtension [
 MooseImportingContext >> shouldImportComment [
 	
 	^self shouldImport: self class importingComment
-]
-
-{ #category : #'importing queries' }
-MooseImportingContext >> shouldImportFormalParameter [
-	
-	^self shouldImport: self class importingFormalParameter
 ]
 
 { #category : #'importing queries' }
