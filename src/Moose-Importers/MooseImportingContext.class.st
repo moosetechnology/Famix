@@ -179,13 +179,6 @@ MooseImportingContext class >> defineEntityDependencies [
 				add: self importingArgument;
 				yourself).
 	self entityDependencies
-		at: self importingGlobalVariable
-		put:
-			((Set new)
-				add: self importingArgument;
-				add: self importingArgument;
-				yourself).
-	self entityDependencies
 		at: self importingAccess
 		put:
 			((Set new)
@@ -193,7 +186,6 @@ MooseImportingContext class >> defineEntityDependencies [
 				add: self importingImplicitVariable;
 				add: self importingLocalVariable;
 				add: self importingAccess;
-				add: self importingGlobalVariable;
 				add: self importingArgument;
 				yourself).
 	self entityDependencies
@@ -264,12 +256,6 @@ MooseImportingContext class >> importFileAndDependents [
 MooseImportingContext class >> importFolderAndDependents [
 	
 	^self allDependentsOf: self importingFolder
-]
-
-{ #category : #'importing-filters' }
-MooseImportingContext class >> importGlobalVariableAndDependents [
-	
-	^self allDependentsOf: self importingGlobalVariable
 ]
 
 { #category : #'importing-filters' }
@@ -380,12 +366,6 @@ MooseImportingContext class >> importingFolder [
 MooseImportingContext class >> importingFunction [
 	
 	^#Function
-]
-
-{ #category : #'basic representation' }
-MooseImportingContext class >> importingGlobalVariable [
-	
-	^#GlobalVariable
 ]
 
 { #category : #'basic representation' }
@@ -590,14 +570,6 @@ MooseImportingContext >> importFolder [
 ]
 
 { #category : #'importing-filters' }
-MooseImportingContext >> importGlobalVariable [
-	"in fact you check the dependents of the dependents"
-	
-	self entityKindsToBeExtracted
-		addAll: self class importGlobalVariableAndDependents
-]
-
-{ #category : #'importing-filters' }
 MooseImportingContext >> importImplicitVariable [
 	"in fact you check the dependents of the dependents"
 	
@@ -764,12 +736,6 @@ MooseImportingContext >> shouldImportClassExtension [
 MooseImportingContext >> shouldImportComment [
 	
 	^self shouldImport: self class importingComment
-]
-
-{ #category : #'importing queries' }
-MooseImportingContext >> shouldImportGlobalVariable [
-	
-	^self shouldImport: self class importingGlobalVariable
 ]
 
 { #category : #'importing queries' }
