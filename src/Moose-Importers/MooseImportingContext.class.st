@@ -292,12 +292,6 @@ MooseImportingContext class >> importingComment [
 ]
 
 { #category : #'basic representation' }
-MooseImportingContext class >> importingFunction [
-	
-	^#Function
-]
-
-{ #category : #'basic representation' }
 MooseImportingContext class >> importingImplicitVariable [
 	
 	^#ImplicitVariable
