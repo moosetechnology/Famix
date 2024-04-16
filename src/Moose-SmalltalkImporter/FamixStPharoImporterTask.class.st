@@ -5,7 +5,6 @@ Class {
 	#name : #FamixStPharoImporterTask,
 	#superclass : #FamixStAbstractImporter,
 	#instVars : [
-		'classes',
 		'packages',
 		'classExtensions',
 		'runSelector',
@@ -66,7 +65,7 @@ FamixStPharoImporterTask >> basicRun [
 	"importerTask applies an import filter definition (context) on a set of classes (allClasses) and yields elements"
 	importerTask := FamixStImportClassesTask new.
 	importerTask factory: self factory.
-	importerTask importingContext: importingContext.
+	importerTask importingContext: self importingContext.
 	importerTask addAll: self classes.
 	importerTask addAllExtensions: self classExtensions.
 	importer := importerTask runSelector: runSelector.
@@ -96,18 +95,14 @@ FamixStPharoImporterTask >> classExtensions [
 	^classExtensions 
 ]
 
-{ #category : #accessing }
-FamixStPharoImporterTask >> classes [
-	^classes
-]
-
 { #category : #initialization }
 FamixStPharoImporterTask >> defaultImportingContext [
 	"does not import stub methods by default because it can create a lot of methods"
+
 	| context |
-	context := super defaultImportingContext.
-	context entityKindsToBeExtracted remove: (context class importingSmalltalkStubMethod).
-	^context
+	context := MooseImportingContext new importMaximum.
+	context entityKindsToBeExtracted remove: context class importingSmalltalkStubMethod.
+	^ context
 ]
 
 { #category : #accessing }

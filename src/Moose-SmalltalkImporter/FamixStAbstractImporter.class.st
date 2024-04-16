@@ -7,7 +7,8 @@ Class {
 	#superclass : #MooseTask,
 	#instVars : [
 		'importingContext',
-		'factory'
+		'factory',
+		'classes'
 	],
 	#category : #'Moose-SmalltalkImporter-Importers'
 }
@@ -15,6 +16,12 @@ Class {
 { #category : #public }
 FamixStAbstractImporter class >> run [
 	^ self new run
+]
+
+{ #category : #accessing }
+FamixStAbstractImporter >> classes [
+
+	^ classes
 ]
 
 { #category : #accessing }
@@ -35,16 +42,11 @@ FamixStAbstractImporter >> factory: anObject [
 
 { #category : #accessing }
 FamixStAbstractImporter >> importingContext [
-	^ importingContext
+
+	^ importingContext ifNil: [ importingContext := self defaultImportingContext ]
 ]
 
 { #category : #accessing }
 FamixStAbstractImporter >> importingContext: anObject [
 	importingContext := anObject
-]
-
-{ #category : #initialization }
-FamixStAbstractImporter >> initialize [
-	super initialize.
-	importingContext := self defaultImportingContext
 ]
