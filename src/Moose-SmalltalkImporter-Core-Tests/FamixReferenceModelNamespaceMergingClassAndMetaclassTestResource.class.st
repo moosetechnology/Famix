@@ -7,8 +7,10 @@ Class {
 { #category : #setup }
 FamixReferenceModelNamespaceMergingClassAndMetaclassTestResource >> importModel [
 
-	FamixStPharoImporterTask new importingContext
-		mergeClassAndMetaclass;
+	| importer |
+	importer := FamixStPharoImporterTask new.
+	importer importingContext mergeClassAndMetaclass.
+	importer
 		doNotRunCandidateOperator;
 		model: model;
 		addFromPackageNamed: #'Moose-TestResources-Reference-Core';

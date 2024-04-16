@@ -254,14 +254,14 @@ MooseScripts class >> packageNamesFor: aPrefixString withTestPackages: aBoolean 
 	self packageNamesFor: 'Network*' withTestPackages: false.
 	self packageNamesFor: 'Network*' withTestPackages: true
 	"
-	
+
 	| packages packageNames aTestPrefixString |
-	self packageOrganizer unregisterPackageNamed: aPrefixString. 
-	packages := self packageOrganizer packages select: [:each | aPrefixString match: each name ].
-	packageNames := packages collect: [:pak | pak name].
+	self packageOrganizer unregisterPackage: aPrefixString.
+	packages := self packageOrganizer packages select: [ :each | aPrefixString match: each name ].
+	packageNames := packages collect: [ :pak | pak name ].
 	aBoolean ifFalse: [
-		aTestPrefixString := aPrefixString, 'Tests*'.
-		packageNames := packageNames reject: [ :pakName | aTestPrefixString match: pakName] ].
+		aTestPrefixString := aPrefixString , 'Tests*'.
+		packageNames := packageNames reject: [ :pakName | aTestPrefixString match: pakName ] ].
 	^ packageNames
 ]
 
