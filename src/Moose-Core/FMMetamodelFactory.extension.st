@@ -15,12 +15,13 @@ FMMetamodelFactory class >> defaultModel [
 
 { #category : #'*Moose-Core' }
 FMMetamodelFactory class >> forModel: aModel [
-	^ self allFactories
-		detect: [ :factory | factory isDefaultFor: aModel ]
-		ifFound: [ :factory | factory new ]
-		ifNone: [ self new
-				forModel: aModel;
-				yourself ]
+
+	^ (self allFactories
+		   detect: [ :factory | factory isDefaultFor: aModel ]
+		   ifFound: [ :factory | factory ]
+		   ifNone: [ self ]) new
+		  forModel: aModel;
+		  yourself
 ]
 
 { #category : #'*Moose-Core' }
