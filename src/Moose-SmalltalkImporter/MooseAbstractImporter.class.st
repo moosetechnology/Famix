@@ -8,7 +8,7 @@ Class {
 	#instVars : [
 		'importingContext'
 	],
-	#category : #'Moose-Importers-Importers'
+	#category : #'Moose-SmalltalkImporter'
 }
 
 { #category : #public }

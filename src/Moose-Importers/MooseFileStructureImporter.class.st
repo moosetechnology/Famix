@@ -1,6 +1,9 @@
+"
+I am an importer taking a model as parameter and creating a model of folders and files from a file reference given to me as parameter in this model.
+"
 Class {
 	#name : #MooseFileStructureImporter,
-	#superclass : #MooseAbstractImporter,
+	#superclass : #Object,
 	#instVars : [
 		'mooseModel',
 		'factory'
