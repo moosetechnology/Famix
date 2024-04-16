@@ -16,12 +16,14 @@ MooseScripts class >> createLightModelForLAN [
 	model := FamixStModel new.
 	model name: 'lightLAN'.
 	MoosePharoImporterTask new
-		importingContext:
-			(MooseImportingContext new
-				importClassMethodInheritanceAttribute;
-				importPackage;
-				mergeClassAndMetaclass;
-				yourself);
+		importingContext: (MooseImportingContext new
+				 importClass;
+				 importMethod;
+				 importInheritance;
+				 importAttribute;
+				 importPackage;
+				 mergeClassAndMetaclass;
+				 yourself);
 		doNotRunCandidateOperator;
 		model: model;
 		addFromPackagesNamed: (self packageNamesFor: 'Moose-LAN*');
@@ -42,12 +44,14 @@ MooseScripts class >> createLightModelForMorphic [
 	model := FamixStModel new.
 	model name: 'lightMorphic'.
 	MoosePharoImporterTask new
-		importingContext:
-			(MooseImportingContext new
-				importClassMethodInheritanceAttribute;
-				importPackage;
-				mergeClassAndMetaclass;
-				yourself);
+		importingContext: (MooseImportingContext new
+				 importClass;
+				 importMethod;
+				 importInheritance;
+				 importAttribute;
+				 importPackage;
+				 mergeClassAndMetaclass;
+				 yourself);
 		doNotRunCandidateOperator;
 		model: model;
 		addFromPackagesNamed: (self packageNamesFor: 'Morphic*');
@@ -70,12 +74,14 @@ MooseScripts class >> createLightModelForNetwork [
 	model := FamixStModel new.
 	model name: 'lightNetwork'.
 	MoosePharoImporterTask new
-		importingContext:
-			(MooseImportingContext new
-				importClassMethodInheritanceAttribute;
-				importPackage;
-				mergeClassAndMetaclass;
-				yourself);
+		importingContext: (MooseImportingContext new
+				 importClass;
+				 importMethod;
+				 importInheritance;
+				 importAttribute;
+				 importPackage;
+				 mergeClassAndMetaclass;
+				 yourself);
 		doNotRunCandidateOperator;
 		model: model;
 		addFromPackagesNamed: (self packageNamesFor: 'Network*');
@@ -97,12 +103,14 @@ MooseScripts class >> createLightModelForPharo [
 	model := FamixStModel new.
 	model name: 'lightPharo'.
 	MoosePharoImporterTask new
-		importingContext:
-			(MooseImportingContext new
-				importClassMethodInheritanceAttribute;
-				importPackage;
-				mergeClassAndMetaclass;
-				yourself);
+		importingContext: (MooseImportingContext new
+				 importClass;
+				 importMethod;
+				 importInheritance;
+				 importAttribute;
+				 importPackage;
+				 mergeClassAndMetaclass;
+				 yourself);
 		doNotRunCandidateOperator;
 		model: model;
 		addFromPackagesNamed: self pharoPackageNames;

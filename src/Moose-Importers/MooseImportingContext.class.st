@@ -27,191 +27,36 @@ Class {
 		'importSubclasses',
 		'computeAttributeTypes'
 	],
-	#classVars : [
-		'DefaultMergeClassAndMetaclass'
-	],
 	#classInstVars : [
 		'entityDependencies'
 	],
 	#category : #'Moose-Importers-Contexts'
 }
 
-{ #category : #'importing-filters' }
-MooseImportingContext class >> allDependentsOf: aKey [
-	
-	^self
-		allDependentsOf: aKey
-		alreadyIn: Set new
-]
-
-{ #category : #'importing-filters' }
-MooseImportingContext class >> allDependentsOf: aKey alreadyIn: aSet [
-	
-	(self entityDependencies at: aKey)
-		do:
-			[:each | 
-			(aSet includes: each)
-				ifFalse:
-					[aSet add: each.
-					aSet addAll: (self allDependentsOf: each alreadyIn: aSet)]].
-	^aSet
-]
-
-{ #category : #defaults }
-MooseImportingContext class >> defaultMergeClassAndMetaclass [
-	^ DefaultMergeClassAndMetaclass ifNil: [ DefaultMergeClassAndMetaclass := false ]
-]
-
-{ #category : #defaults }
-MooseImportingContext class >> defaultMergeClassAndMetaclass: aBoolean [
-	"self defaultHaveExplicitMetaClasses: false"
-	"self defaultHaveExplicitMetaClasses: true"
-	
-	DefaultMergeClassAndMetaclass := aBoolean
-]
-
 { #category : #initialize }
 MooseImportingContext class >> defineEntityDependencies [
-	"self initialize"
-	"when we extract literals extract  methods"
-	
-	self entityDependencies
-		at: self importingLiteral
-		put:
-			((Set new)
-				add: self importingLiteral;
-				add: self importingMethod;
-				yourself).	"when we extract comments do not extract anything else per default "
-	self entityDependencies
-		at: self importingComment
-		put:
-			((Set new)
-				add: self importingComment;
-				add: self importingMethod;
-				yourself).	"when we extract files do not extract anything else per default "
-	self entityDependencies
-		at: self importingFolder
-		put:
-			((Set new)
-				add: self importingFolder;
-				yourself).	"when we extract files do not extract anything else per default "
-	self entityDependencies
-		at: self importingFile
-		put:
-			((Set new)
-				add: self importingFile;
-				yourself).	"when we extract namespace do not extract anything else per default "
-	self entityDependencies
-		at: self importingNamespace
-		put:
-			((Set new)
-				add: self importingNamespace;
-				yourself).	"when we extract package do not extract anything else per default "
-	self entityDependencies
-		at: self importingPackage
-		put:
-			((Set new)
-				add: self importingPackage;
-				yourself).
-	self entityDependencies
-		at: self importingClass
-		put:
-			((Set new)
-				add: self importingClass;
-				add: self importingNamespace;
-				yourself).	"when we extract inheritance we extract classes"
-	self entityDependencies
-		at: self importingInheritance
-		put:
-			((Set new)
-				add: self importingClass;
-				add: self importingInheritance;
-				yourself).	"when we extract inheritance we extract classes"
-	self entityDependencies
-		at: self importingMethod
-		put:
-			((Set new)
-				add: self importingMethod;
-				add: self importingClass;
-				yourself).
-	self entityDependencies
-		at: self importingClassExtension 
-		put:
-			((Set new)
-				add: self importingClassExtension;
-				add: self importingMethod;
-				add: self importingPackage;
-				yourself).
-	"when we extract implicit variable we extract also method"
-	self entityDependencies
-		at: self importingImplicitVariable
-		put:
-			((Set new)
-				add: self importingMethod;
-				add: self importingImplicitVariable;
-				yourself).	"when we extract local variable we extract also method"
-	self entityDependencies
-		at: self importingLocalVariable
-		put:
-			((Set new)
-				add: self importingMethod;
-				add: self importingLocalVariable;
-				yourself).
-	self entityDependencies
-		at: self importingAttribute
-		put:
-			((Set new)
-				add: self importingAttribute;
-				add: self importingClass;
-				yourself).
-	self entityDependencies
-		at: self importingInvocation
-		put:
-			((Set new)
-				add: self importingInvocation;
-				add: self importingMethod;
-				yourself).
-	self entityDependencies
-		at: self importingFormalParameter
-		put:
-			((Set new)
-				add: self importingMethod;
-				add: self importingFormalParameter;
-				yourself).
-	self entityDependencies
-		at: self importingArgument
-		put:
-			((Set new)
-				add: self importingMethod;
-				add: self importingArgument;
-				yourself).
-	self entityDependencies
-		at: self importingGlobalVariable
-		put:
-			((Set new)
-				add: self importingArgument;
-				add: self importingArgument;
-				yourself).
-	self entityDependencies
-		at: self importingAccess
-		put:
-			((Set new)
-				add: self importingMethod;
-				add: self importingImplicitVariable;
-				add: self importingLocalVariable;
-				add: self importingAccess;
-				add: self importingGlobalVariable;
-				add: self importingArgument;
-				add: self importingFormalParameter;
-				yourself).
-	self entityDependencies
-		at: self importingSmalltalkStubMethod
-		put:
-			((Set new)
-				add: self importingMethod;
-				add: self importingSmalltalkStubMethod;
-				yourself).
 
+	<script>
+	self entityDependencies
+		at: self importingComment put: (Set with: self importingComment with: self importingMethod);
+		at: self importingNamespace put: (Set with: self importingNamespace);
+		at: self importingPackage put: (Set with: self importingPackage);
+		at: self importingClass put: (Set with: self importingClass with: self importingNamespace);
+		at: self importingInheritance put: (Set with: self importingClass with: self importingInheritance);
+		at: self importingMethod put: (Set with: self importingMethod with: self importingClass);
+		at: self importingClassExtension put: (Set with: self importingClassExtension with: self importingMethod with: self importingPackage);
+		at: self importingImplicitVariable put: (Set with: self importingMethod with: self importingImplicitVariable);
+		at: self importingLocalVariable put: (Set with: self importingMethod with: self importingLocalVariable);
+		at: self importingAttribute put: (Set with: self importingAttribute with: self importingClass);
+		at: self importingInvocation put: (Set with: self importingInvocation with: self importingMethod);
+		at: self importingArgument put: (Set with: self importingMethod with: self importingArgument);
+		at: self importingAccess put: (Set
+				 with: self importingMethod
+				 with: self importingImplicitVariable
+				 with: self importingLocalVariable
+				 with: self importingAccess
+				 with: self importingArgument);
+		at: self importingSmalltalkStubMethod put: (Set with: self importingMethod with: self importingSmalltalkStubMethod)
 ]
 
 { #category : #initialize }
@@ -224,122 +69,6 @@ MooseImportingContext class >> entityDependencies [
 MooseImportingContext class >> entityDependencies: aDictionary [
 	
 	entityDependencies := aDictionary
-]
-
-{ #category : #'importing-filters' }
-MooseImportingContext class >> importAccessAndDependents [
-	
-	^self allDependentsOf: self importingAccess
-]
-
-{ #category : #'importing-filters' }
-MooseImportingContext class >> importArgumentAndDependents [
-	
-	^self allDependentsOf: self importingArgument
-]
-
-{ #category : #'importing-filters' }
-MooseImportingContext class >> importAttributeAndDependents [
-	
-	^self allDependentsOf: self importingAttribute
-]
-
-{ #category : #'importing-filters' }
-MooseImportingContext class >> importClassAndDependents [
-	
-	^self allDependentsOf: self importingClass
-]
-
-{ #category : #'importing-filters' }
-MooseImportingContext class >> importClassExtensionAndDependents [
-	
-	^self allDependentsOf: self importingClassExtension 
-]
-
-{ #category : #'importing-filters' }
-MooseImportingContext class >> importComment [
-	
-	^ self allDependentsOf:  self importingComment
-]
-
-{ #category : #'importing-filters' }
-MooseImportingContext class >> importFileAndDependents [
-	
-	^self allDependentsOf: self importingFile
-]
-
-{ #category : #'importing-filters' }
-MooseImportingContext class >> importFolderAndDependents [
-	
-	^self allDependentsOf: self importingFolder
-]
-
-{ #category : #'importing-filters' }
-MooseImportingContext class >> importFormalParameterAndDependents [
-	
-	^self allDependentsOf: self importingFormalParameter
-]
-
-{ #category : #'importing-filters' }
-MooseImportingContext class >> importGlobalVariableAndDependents [
-	
-	^self allDependentsOf: self importingGlobalVariable
-]
-
-{ #category : #'importing-filters' }
-MooseImportingContext class >> importImplicitVariableAndDependents [
-	
-	^self allDependentsOf: self importingImplicitVariable
-]
-
-{ #category : #'importing-filters' }
-MooseImportingContext class >> importInheritanceAndDependents [
-	
-	^self allDependentsOf: self importingInheritance
-]
-
-{ #category : #'importing-filters' }
-MooseImportingContext class >> importInvocationAndDependents [
-	
-	^self allDependentsOf: self importingInvocation
-]
-
-{ #category : #'importing-filters' }
-MooseImportingContext class >> importLiteralAndDependents [
-	
-	^self allDependentsOf: self importingLiteral
-]
-
-{ #category : #'importing-filters' }
-MooseImportingContext class >> importLocalVariableAndDependents [
-	
-	^self allDependentsOf: self importingLocalVariable
-]
-
-{ #category : #'importing-filters' }
-MooseImportingContext class >> importMethodAndDependents [
-	"self importMethodAndDependents"
-	
-	^self allDependentsOf: self importingMethod
-]
-
-{ #category : #'importing-filters' }
-MooseImportingContext class >> importNamespace [
-	"self importNamespace"
-	
-	^self allDependentsOf: self importingNamespace
-]
-
-{ #category : #'importing-filters' }
-MooseImportingContext class >> importPackage [
-	
-	^ Set with: self importingPackage
-]
-
-{ #category : #'importing-filters' }
-MooseImportingContext class >> importSmalltalkStubMethod [
-	
-	^self allDependentsOf: self importingSmalltalkStubMethod
 ]
 
 { #category : #'basic representation' }
@@ -379,36 +108,6 @@ MooseImportingContext class >> importingComment [
 ]
 
 { #category : #'basic representation' }
-MooseImportingContext class >> importingFile [
-	
-	^#File
-]
-
-{ #category : #'basic representation' }
-MooseImportingContext class >> importingFolder [
-	
-	^#Folder
-]
-
-{ #category : #'basic representation' }
-MooseImportingContext class >> importingFormalParameter [
-	
-	^#FormalParameter
-]
-
-{ #category : #'basic representation' }
-MooseImportingContext class >> importingFunction [
-	
-	^#Function
-]
-
-{ #category : #'basic representation' }
-MooseImportingContext class >> importingGlobalVariable [
-	
-	^#GlobalVariable
-]
-
-{ #category : #'basic representation' }
 MooseImportingContext class >> importingImplicitVariable [
 	
 	^#ImplicitVariable
@@ -424,12 +123,6 @@ MooseImportingContext class >> importingInheritance [
 MooseImportingContext class >> importingInvocation [
 	
 	^#Invocation
-]
-
-{ #category : #'basic representation' }
-MooseImportingContext class >> importingLiteral [
-	
-	^#Literal
 ]
 
 { #category : #'basic representation' }
@@ -468,6 +161,22 @@ MooseImportingContext class >> initialize [
 	
 	self entityDependencies: IdentityDictionary new.
 	self defineEntityDependencies
+]
+
+{ #category : #accessing }
+MooseImportingContext >> allDependentsOf: aKey [
+
+	^ self allDependentsOf: aKey alreadyIn: Set new
+]
+
+{ #category : #accessing }
+MooseImportingContext >> allDependentsOf: aKey alreadyIn: aSet [
+
+	(self class entityDependencies at: aKey) do: [ :each |
+		(aSet includes: each) ifFalse: [
+			aSet add: each.
+			aSet addAll: (self allDependentsOf: each alreadyIn: aSet) ] ].
+	^ aSet
 ]
 
 { #category : #'import options' }
@@ -510,157 +219,69 @@ MooseImportingContext >> entityKindsToBeExtracted: anObject [
 { #category : #'importing-filters' }
 MooseImportingContext >> importAccess [
 	"in fact you check the dependents of the dependents"
-	
-	self entityKindsToBeExtracted addAll: self class importAccessAndDependents
+
+	self entityKindsToBeExtracted addAll: (self allDependentsOf: self class importingAccess)
 ]
 
 { #category : #'importing-filters' }
 MooseImportingContext >> importArgument [
-	
-	self entityKindsToBeExtracted
-		addAll: self class importArgumentAndDependents
+
+	self entityKindsToBeExtracted addAll: (self allDependentsOf: self class importingArgument)
 ]
 
 { #category : #'importing-filters' }
 MooseImportingContext >> importAttribute [
 	"in fact you check the dependents of the dependents"
-	
-	self entityKindsToBeExtracted
-		addAll: self class importAttributeAndDependents
+
+	self entityKindsToBeExtracted addAll: (self allDependentsOf: self class importingAttribute)
 ]
 
 { #category : #'importing-filters' }
 MooseImportingContext >> importClass [
 	"in fact you check the dependents of the dependents"
-	
-	self entityKindsToBeExtracted addAll: self class importClassAndDependents
+
+	self entityKindsToBeExtracted addAll: (self allDependentsOf: self class importingClass)
 ]
 
 { #category : #'importing-filters' }
 MooseImportingContext >> importClassExtension [
-	
-	self entityKindsToBeExtracted addAll: self class importClassExtensionAndDependents 
-]
 
-{ #category : #'importing-filters' }
-MooseImportingContext >> importClassMethodInheritance [
-	
-	self entityKindsToBeExtracted addAll: self class importClassAndDependents.
-	self entityKindsToBeExtracted addAll: self class importMethodAndDependents.
-	self entityKindsToBeExtracted
-		addAll: self class importInheritanceAndDependents
-]
-
-{ #category : #'importing-filters' }
-MooseImportingContext >> importClassMethodInheritanceAttribute [
-	
-	self entityKindsToBeExtracted addAll: self class importClassAndDependents.
-	self entityKindsToBeExtracted addAll: self class importMethodAndDependents.
-	self entityKindsToBeExtracted
-		addAll: self class importInheritanceAndDependents.
-	self entityKindsToBeExtracted
-		addAll: self class importAttributeAndDependents
-]
-
-{ #category : #'importing-filters' }
-MooseImportingContext >> importClassMethodInheritanceAttributeAccess [
-	
-	self entityKindsToBeExtracted addAll: self class importClassAndDependents.
-	self entityKindsToBeExtracted addAll: self class importMethodAndDependents.
-	self entityKindsToBeExtracted
-		addAll: self class importInheritanceAndDependents.
-	self entityKindsToBeExtracted
-		addAll: self class importAttributeAndDependents.
-	self entityKindsToBeExtracted addAll: self class importAccessAndDependents
-]
-
-{ #category : #'importing-filters' }
-MooseImportingContext >> importClassMethodInheritanceAttributeAccessInvocation [
-	
-	self entityKindsToBeExtracted addAll: self class importClassAndDependents.
-	self entityKindsToBeExtracted addAll: self class importMethodAndDependents.
-	self entityKindsToBeExtracted
-		addAll: self class importInheritanceAndDependents.
-	self entityKindsToBeExtracted
-		addAll: self class importAttributeAndDependents.
-	self entityKindsToBeExtracted addAll: self class importAccessAndDependents.
-	self entityKindsToBeExtracted
-		addAll: self class importInvocationAndDependents
+	self entityKindsToBeExtracted addAll: (self allDependentsOf: self class importingClassExtension)
 ]
 
 { #category : #'importing-filters' }
 MooseImportingContext >> importComment [
 	"in fact you check the dependents of the dependents"
-	
-	self entityKindsToBeExtracted addAll: self class importComment
-]
 
-{ #category : #'importing-filters' }
-MooseImportingContext >> importFile [
-	"in fact you check the dependents of the dependents"
-	
-	self entityKindsToBeExtracted addAll: self class importFileAndDependents
-]
-
-{ #category : #'importing-filters' }
-MooseImportingContext >> importFolder [
-	"in fact you check the dependents of the dependents"
-	
-	self entityKindsToBeExtracted addAll: self class importFolderAndDependents
-]
-
-{ #category : #'importing-filters' }
-MooseImportingContext >> importFormalParameter [
-	"in fact you check the dependents of the dependents"
-	
-	self entityKindsToBeExtracted
-		addAll: self class importFormalParameterAndDependents
-]
-
-{ #category : #'importing-filters' }
-MooseImportingContext >> importGlobalVariable [
-	"in fact you check the dependents of the dependents"
-	
-	self entityKindsToBeExtracted
-		addAll: self class importGlobalVariableAndDependents
+	self entityKindsToBeExtracted addAll: (self allDependentsOf: self class importingComment)
 ]
 
 { #category : #'importing-filters' }
 MooseImportingContext >> importImplicitVariable [
 	"in fact you check the dependents of the dependents"
-	
-	self entityKindsToBeExtracted
-		addAll: self class importImplicitVariableAndDependents
+
+	self entityKindsToBeExtracted addAll: (self allDependentsOf: self class importingImplicitVariable)
 ]
 
 { #category : #'importing-filters' }
 MooseImportingContext >> importInheritance [
 	"in fact you check the dependents of the dependents"
-	
-	self entityKindsToBeExtracted
-		addAll: self class importInheritanceAndDependents
+
+	self entityKindsToBeExtracted addAll: (self allDependentsOf: self class importingInheritance)
 ]
 
 { #category : #'importing-filters' }
 MooseImportingContext >> importInvocation [
 	"in fact you check the dependents of the dependents"
-	
-	self entityKindsToBeExtracted
-		addAll: self class importInvocationAndDependents
-]
 
-{ #category : #'importing-filters' }
-MooseImportingContext >> importLiteral [
-	
-	self entityKindsToBeExtracted addAll: self class importLiteralAndDependents
+	self entityKindsToBeExtracted addAll: (self allDependentsOf: self class importingInvocation)
 ]
 
 { #category : #'importing-filters' }
 MooseImportingContext >> importLocalVariable [
 	"in fact you check the dependents of the dependents"
-	
-	self entityKindsToBeExtracted
-		addAll: self class importLocalVariableAndDependents
+
+	self entityKindsToBeExtracted addAll: (self allDependentsOf: self class importingLocalVariable)
 ]
 
 { #category : #'importing-filters' }
@@ -670,46 +291,31 @@ MooseImportingContext >> importMaximum [
 ]
 
 { #category : #'importing-filters' }
-MooseImportingContext >> importMaximumExceptLiteral [
-	" self new importMaximumExceptLiteral "
-	
-	| set |
-	set := self maximum.
-	set remove: self class importingLiteral.
-	self entityKindsToBeExtracted: set
-]
-
-{ #category : #'importing-filters' }
 MooseImportingContext >> importMethod [
 	"in fact you check the dependents of the dependents"
-	
-	self entityKindsToBeExtracted addAll: self class importMethodAndDependents
+
+	self entityKindsToBeExtracted addAll: (self allDependentsOf: self class importingMethod)
 ]
 
 { #category : #'importing-filters' }
 MooseImportingContext >> importNamespace [
 	"just import a package and nothing else"
-	
-	self entityKindsToBeExtracted addAll: self class importNamespace
+
+	self entityKindsToBeExtracted addAll: (self allDependentsOf: self class importingNamespace)
 ]
 
 { #category : #'importing-filters' }
 MooseImportingContext >> importPackage [
 	"just import a package and nothing else"
-	
-	self entityKindsToBeExtracted addAll: self class importPackage
+
+	self entityKindsToBeExtracted addAll: (self allDependentsOf: self class importingPackage)
 ]
 
 { #category : #'importing-filters' }
 MooseImportingContext >> importSmalltalkStubMethod [
 	"Kind of a hack to import stub-methods in smalltalk"
-	
-	self entityKindsToBeExtracted addAll: self class importSmalltalkStubMethod
-]
 
-{ #category : #'importing-filters' }
-MooseImportingContext >> importStubMethod [
-	self entityKindsToBeExtracted addAll: self class importSmalltalkStubMethod 
+	self entityKindsToBeExtracted addAll: (self allDependentsOf: self class importingSmalltalkStubMethod)
 ]
 
 { #category : #'import options' }
@@ -720,9 +326,10 @@ MooseImportingContext >> importSubclasses [
 
 { #category : #initialization }
 MooseImportingContext >> initialize [
+
 	super initialize.
 	self entityKindsToBeExtracted: Set new.
-	mergeClassAndMetaclass := self class defaultMergeClassAndMetaclass.
+	mergeClassAndMetaclass := false.
 	computeAttributeTypes := false.
 	"for subclasses import for the moment we just do the same as before but it should be discussed and probably should be set to false"
 	importSubclasses := true
@@ -730,12 +337,11 @@ MooseImportingContext >> initialize [
 
 { #category : #'importing-filters' }
 MooseImportingContext >> maximum [
-	
+
 	| all |
 	all := Set new.
-	self class entityDependencies
-		keysAndValuesDo: [:key :value | all addAll: value].
-	^all
+	self class entityDependencies keysAndValuesDo: [ :key :value | all addAll: value ].
+	^ all
 ]
 
 { #category : #'import options' }
@@ -795,18 +401,6 @@ MooseImportingContext >> shouldImportComment [
 ]
 
 { #category : #'importing queries' }
-MooseImportingContext >> shouldImportFormalParameter [
-	
-	^self shouldImport: self class importingFormalParameter
-]
-
-{ #category : #'importing queries' }
-MooseImportingContext >> shouldImportGlobalVariable [
-	
-	^self shouldImport: self class importingGlobalVariable
-]
-
-{ #category : #'importing queries' }
 MooseImportingContext >> shouldImportImplicitVariable [
 	
 	^self shouldImport: self class importingImplicitVariable
@@ -822,12 +416,6 @@ MooseImportingContext >> shouldImportInheritance [
 MooseImportingContext >> shouldImportInvocation [
 	
 	^self shouldImport: self class importingInvocation
-]
-
-{ #category : #'importing queries' }
-MooseImportingContext >> shouldImportLiteral [
-	
-	^self shouldImport: self class importingLiteral
 ]
 
 { #category : #'importing queries' }
