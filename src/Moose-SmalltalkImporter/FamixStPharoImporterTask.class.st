@@ -102,7 +102,7 @@ FamixStPharoImporterTask >> defaultImportingContext [
 	"does not import stub methods by default because it can create a lot of methods"
 
 	| context |
-	context := MooseImportingContext new importMaximum.
+	context := FamixStImporterContext new importMaximum.
 	context entityKindsToBeExtracted remove: context class importingSmalltalkStubMethod.
 	^ context
 ]

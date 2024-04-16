@@ -21,7 +21,7 @@ FamixStTImportUtils >> classes [
 
 { #category : #accessing }
 FamixStTImportUtils >> defaultImportingContext [
-	^ MooseImportingContext new importMaximum
+	^ FamixStImporterContext new importMaximum
 ]
 
 { #category : #accessing }

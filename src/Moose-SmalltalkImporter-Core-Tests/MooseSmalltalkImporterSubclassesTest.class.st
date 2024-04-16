@@ -36,7 +36,7 @@ MooseSmalltalkImporterSubclassesTest >> setUp [
 	model name: 'Test'.
 	pharoImporterTask := FamixStPharoImporterTask new
 		                     doNotRunCandidateOperator;
-		                     importingContext: (MooseImportingContext new
+		                     importingContext: (FamixStImporterContext new
 				                      importPackage;
 				                      importInheritance;
 				                      importAccess;

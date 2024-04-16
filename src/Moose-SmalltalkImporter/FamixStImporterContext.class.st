@@ -1,5 +1,5 @@
 "
-I represent the context of import (reification level) for an importer: been it a fact extractor (only for Smalltalk in this version of Moose), or an MSE or other format importing. 
+I represent the context of import (reification level) for a smalltalk importer. 
 The idea is that given a graph dependencies between metamodel entities, I help to decide whether certain information should be extracted or kept in a model.
 
 For example, since to get inheritance, classes are needed (such dependency is expressed on my class side), then when we model inheritance, my instance encapsulate that fact extractor or importers should also consider classes. Similar dependencies exist between an access and a instance variable and a method. 
@@ -19,7 +19,7 @@ My class side implements a semantically coherent graph of dependency.
 
 "
 Class {
-	#name : #MooseImportingContext,
+	#name : #FamixStImporterContext,
 	#superclass : #Object,
 	#instVars : [
 		'entityKindsToBeExtracted',
@@ -34,7 +34,7 @@ Class {
 }
 
 { #category : #initialize }
-MooseImportingContext class >> defineEntityDependencies [
+FamixStImporterContext class >> defineEntityDependencies [
 
 	<script>
 	self entityDependencies
@@ -60,103 +60,103 @@ MooseImportingContext class >> defineEntityDependencies [
 ]
 
 { #category : #initialize }
-MooseImportingContext class >> entityDependencies [
+FamixStImporterContext class >> entityDependencies [
 	
 	^entityDependencies
 ]
 
 { #category : #initialize }
-MooseImportingContext class >> entityDependencies: aDictionary [
+FamixStImporterContext class >> entityDependencies: aDictionary [
 	
 	entityDependencies := aDictionary
 ]
 
 { #category : #'basic representation' }
-MooseImportingContext class >> importingAccess [
+FamixStImporterContext class >> importingAccess [
 	
 	^#Access
 ]
 
 { #category : #'basic representation' }
-MooseImportingContext class >> importingArgument [
+FamixStImporterContext class >> importingArgument [
 	
 	^#Argument
 ]
 
 { #category : #'basic representation' }
-MooseImportingContext class >> importingAttribute [
+FamixStImporterContext class >> importingAttribute [
 	
 	^#Attribute
 ]
 
 { #category : #'basic representation' }
-MooseImportingContext class >> importingClass [
+FamixStImporterContext class >> importingClass [
 	
 	^#Class
 ]
 
 { #category : #'basic representation' }
-MooseImportingContext class >> importingClassExtension [
+FamixStImporterContext class >> importingClassExtension [
 	
 	^#ClassExtension
 ]
 
 { #category : #'basic representation' }
-MooseImportingContext class >> importingComment [
+FamixStImporterContext class >> importingComment [
 	
 	^#Comment
 ]
 
 { #category : #'basic representation' }
-MooseImportingContext class >> importingImplicitVariable [
+FamixStImporterContext class >> importingImplicitVariable [
 	
 	^#ImplicitVariable
 ]
 
 { #category : #'basic representation' }
-MooseImportingContext class >> importingInheritance [
+FamixStImporterContext class >> importingInheritance [
 	
 	^#Inheritance
 ]
 
 { #category : #'basic representation' }
-MooseImportingContext class >> importingInvocation [
+FamixStImporterContext class >> importingInvocation [
 	
 	^#Invocation
 ]
 
 { #category : #'basic representation' }
-MooseImportingContext class >> importingLocalVariable [
+FamixStImporterContext class >> importingLocalVariable [
 	
 	^#LocalVariable
 ]
 
 { #category : #'basic representation' }
-MooseImportingContext class >> importingMethod [
+FamixStImporterContext class >> importingMethod [
 	
 	^#Method
 ]
 
 { #category : #'basic representation' }
-MooseImportingContext class >> importingNamespace [
+FamixStImporterContext class >> importingNamespace [
 	
 	^#Namespace
 ]
 
 { #category : #'basic representation' }
-MooseImportingContext class >> importingPackage [
+FamixStImporterContext class >> importingPackage [
 	
 	^#Package
 ]
 
 { #category : #'basic representation' }
-MooseImportingContext class >> importingSmalltalkStubMethod [
+FamixStImporterContext class >> importingSmalltalkStubMethod [
 	
 	^#StubMethod
 ]
 
 { #category : #initialization }
-MooseImportingContext class >> initialize [
+FamixStImporterContext class >> initialize [
 	"self initialize"
 	
 	self entityDependencies: IdentityDictionary new.
@@ -164,13 +164,13 @@ MooseImportingContext class >> initialize [
 ]
 
 { #category : #accessing }
-MooseImportingContext >> allDependentsOf: aKey [
+FamixStImporterContext >> allDependentsOf: aKey [
 
 	^ self allDependentsOf: aKey alreadyIn: Set new
 ]
 
 { #category : #accessing }
-MooseImportingContext >> allDependentsOf: aKey alreadyIn: aSet [
+FamixStImporterContext >> allDependentsOf: aKey alreadyIn: aSet [
 
 	(self class entityDependencies at: aKey) do: [ :each |
 		(aSet includes: each) ifFalse: [
@@ -180,152 +180,152 @@ MooseImportingContext >> allDependentsOf: aKey alreadyIn: aSet [
 ]
 
 { #category : #'import options' }
-MooseImportingContext >> computeTypeOfAttributes [
+FamixStImporterContext >> computeTypeOfAttributes [
 
 	"use this method to tell the importer that it should compute the type of attributes (using RoelType). By default this not the case, because computing types can take some time "
 	computeAttributeTypes := true.
 ]
 
 { #category : #'import options' }
-MooseImportingContext >> distinguishClassAndMetaclass [
+FamixStImporterContext >> distinguishClassAndMetaclass [
 	
 	mergeClassAndMetaclass := false
 ]
 
 { #category : #'import options' }
-MooseImportingContext >> doNotComputeTypeOfAttributes [
+FamixStImporterContext >> doNotComputeTypeOfAttributes [
 
 	computeAttributeTypes := false.
 ]
 
 { #category : #'import options' }
-MooseImportingContext >> doNotImportSubclasses [
+FamixStImporterContext >> doNotImportSubclasses [
 	
 	importSubclasses := false
 ]
 
 { #category : #accessing }
-MooseImportingContext >> entityKindsToBeExtracted [
+FamixStImporterContext >> entityKindsToBeExtracted [
 	
 	^entityKindsToBeExtracted
 ]
 
 { #category : #accessing }
-MooseImportingContext >> entityKindsToBeExtracted: anObject [
+FamixStImporterContext >> entityKindsToBeExtracted: anObject [
 	
 	entityKindsToBeExtracted := anObject
 ]
 
 { #category : #'importing-filters' }
-MooseImportingContext >> importAccess [
+FamixStImporterContext >> importAccess [
 	"in fact you check the dependents of the dependents"
 
 	self entityKindsToBeExtracted addAll: (self allDependentsOf: self class importingAccess)
 ]
 
 { #category : #'importing-filters' }
-MooseImportingContext >> importArgument [
+FamixStImporterContext >> importArgument [
 
 	self entityKindsToBeExtracted addAll: (self allDependentsOf: self class importingArgument)
 ]
 
 { #category : #'importing-filters' }
-MooseImportingContext >> importAttribute [
+FamixStImporterContext >> importAttribute [
 	"in fact you check the dependents of the dependents"
 
 	self entityKindsToBeExtracted addAll: (self allDependentsOf: self class importingAttribute)
 ]
 
 { #category : #'importing-filters' }
-MooseImportingContext >> importClass [
+FamixStImporterContext >> importClass [
 	"in fact you check the dependents of the dependents"
 
 	self entityKindsToBeExtracted addAll: (self allDependentsOf: self class importingClass)
 ]
 
 { #category : #'importing-filters' }
-MooseImportingContext >> importClassExtension [
+FamixStImporterContext >> importClassExtension [
 
 	self entityKindsToBeExtracted addAll: (self allDependentsOf: self class importingClassExtension)
 ]
 
 { #category : #'importing-filters' }
-MooseImportingContext >> importComment [
+FamixStImporterContext >> importComment [
 	"in fact you check the dependents of the dependents"
 
 	self entityKindsToBeExtracted addAll: (self allDependentsOf: self class importingComment)
 ]
 
 { #category : #'importing-filters' }
-MooseImportingContext >> importImplicitVariable [
+FamixStImporterContext >> importImplicitVariable [
 	"in fact you check the dependents of the dependents"
 
 	self entityKindsToBeExtracted addAll: (self allDependentsOf: self class importingImplicitVariable)
 ]
 
 { #category : #'importing-filters' }
-MooseImportingContext >> importInheritance [
+FamixStImporterContext >> importInheritance [
 	"in fact you check the dependents of the dependents"
 
 	self entityKindsToBeExtracted addAll: (self allDependentsOf: self class importingInheritance)
 ]
 
 { #category : #'importing-filters' }
-MooseImportingContext >> importInvocation [
+FamixStImporterContext >> importInvocation [
 	"in fact you check the dependents of the dependents"
 
 	self entityKindsToBeExtracted addAll: (self allDependentsOf: self class importingInvocation)
 ]
 
 { #category : #'importing-filters' }
-MooseImportingContext >> importLocalVariable [
+FamixStImporterContext >> importLocalVariable [
 	"in fact you check the dependents of the dependents"
 
 	self entityKindsToBeExtracted addAll: (self allDependentsOf: self class importingLocalVariable)
 ]
 
 { #category : #'importing-filters' }
-MooseImportingContext >> importMaximum [
+FamixStImporterContext >> importMaximum [
 	
 	self entityKindsToBeExtracted: self maximum
 ]
 
 { #category : #'importing-filters' }
-MooseImportingContext >> importMethod [
+FamixStImporterContext >> importMethod [
 	"in fact you check the dependents of the dependents"
 
 	self entityKindsToBeExtracted addAll: (self allDependentsOf: self class importingMethod)
 ]
 
 { #category : #'importing-filters' }
-MooseImportingContext >> importNamespace [
+FamixStImporterContext >> importNamespace [
 	"just import a package and nothing else"
 
 	self entityKindsToBeExtracted addAll: (self allDependentsOf: self class importingNamespace)
 ]
 
 { #category : #'importing-filters' }
-MooseImportingContext >> importPackage [
+FamixStImporterContext >> importPackage [
 	"just import a package and nothing else"
 
 	self entityKindsToBeExtracted addAll: (self allDependentsOf: self class importingPackage)
 ]
 
 { #category : #'importing-filters' }
-MooseImportingContext >> importSmalltalkStubMethod [
+FamixStImporterContext >> importSmalltalkStubMethod [
 	"Kind of a hack to import stub-methods in smalltalk"
 
 	self entityKindsToBeExtracted addAll: (self allDependentsOf: self class importingSmalltalkStubMethod)
 ]
 
 { #category : #'import options' }
-MooseImportingContext >> importSubclasses [
+FamixStImporterContext >> importSubclasses [
 	"When a class is created, we automatically import all its subclasses"
 	importSubclasses := true
 ]
 
 { #category : #initialization }
-MooseImportingContext >> initialize [
+FamixStImporterContext >> initialize [
 
 	super initialize.
 	self entityKindsToBeExtracted: Set new.
@@ -336,7 +336,7 @@ MooseImportingContext >> initialize [
 ]
 
 { #category : #'importing-filters' }
-MooseImportingContext >> maximum [
+FamixStImporterContext >> maximum [
 
 	| all |
 	all := Set new.
@@ -345,13 +345,13 @@ MooseImportingContext >> maximum [
 ]
 
 { #category : #'import options' }
-MooseImportingContext >> mergeClassAndMetaclass [
+FamixStImporterContext >> mergeClassAndMetaclass [
 	
 	mergeClassAndMetaclass := true
 ]
 
 { #category : #'importing queries' }
-MooseImportingContext >> shouldComputeTypeOfAttributes [
+FamixStImporterContext >> shouldComputeTypeOfAttributes [
 	"return true if the importer has to compute the type of attributes. False if not. "
 	self flag: 'why does it not use #shouldImport: ?'.
 
@@ -359,79 +359,79 @@ MooseImportingContext >> shouldComputeTypeOfAttributes [
 ]
 
 { #category : #'importing queries' }
-MooseImportingContext >> shouldImport: aSymbol [
+FamixStImporterContext >> shouldImport: aSymbol [
 	
 	^self entityKindsToBeExtracted includes: aSymbol
 ]
 
 { #category : #'importing queries' }
-MooseImportingContext >> shouldImportAccess [
+FamixStImporterContext >> shouldImportAccess [
 	
 	^self shouldImport: self class importingAccess
 ]
 
 { #category : #'importing queries' }
-MooseImportingContext >> shouldImportArgument [
+FamixStImporterContext >> shouldImportArgument [
 	
 	^self shouldImport: self class importingArgument
 ]
 
 { #category : #'importing queries' }
-MooseImportingContext >> shouldImportAttribute [
+FamixStImporterContext >> shouldImportAttribute [
 	
 	^self shouldImport: self class importingAttribute
 ]
 
 { #category : #'importing queries' }
-MooseImportingContext >> shouldImportClass [
+FamixStImporterContext >> shouldImportClass [
 	
 	^self shouldImport: self class importingClass
 ]
 
 { #category : #'importing queries' }
-MooseImportingContext >> shouldImportClassExtension [
+FamixStImporterContext >> shouldImportClassExtension [
 	
 	^self shouldImport: self class importingClassExtension
 ]
 
 { #category : #'importing queries' }
-MooseImportingContext >> shouldImportComment [
+FamixStImporterContext >> shouldImportComment [
 	
 	^self shouldImport: self class importingComment
 ]
 
 { #category : #'importing queries' }
-MooseImportingContext >> shouldImportImplicitVariable [
+FamixStImporterContext >> shouldImportImplicitVariable [
 	
 	^self shouldImport: self class importingImplicitVariable
 ]
 
 { #category : #'importing queries' }
-MooseImportingContext >> shouldImportInheritance [
+FamixStImporterContext >> shouldImportInheritance [
 	
 	^self shouldImport: self class importingInheritance
 ]
 
 { #category : #'importing queries' }
-MooseImportingContext >> shouldImportInvocation [
+FamixStImporterContext >> shouldImportInvocation [
 	
 	^self shouldImport: self class importingInvocation
 ]
 
 { #category : #'importing queries' }
-MooseImportingContext >> shouldImportLocalVariable [
+FamixStImporterContext >> shouldImportLocalVariable [
 	
 	^self shouldImport: self class importingLocalVariable
 ]
 
 { #category : #'importing queries' }
-MooseImportingContext >> shouldImportMethod [
+FamixStImporterContext >> shouldImportMethod [
 	
 	^self shouldImport: self class importingMethod
 ]
 
 { #category : #'importing queries' }
-MooseImportingContext >> shouldImportMethodBody [
+FamixStImporterContext >> shouldImportMethodBody [
 	
 	^self shouldImportAccess
 		or:
@@ -442,32 +442,32 @@ MooseImportingContext >> shouldImportMethodBody [
 ]
 
 { #category : #'importing queries' }
-MooseImportingContext >> shouldImportNamespace [
+FamixStImporterContext >> shouldImportNamespace [
 	
 	^self shouldImport: self class importingNamespace
 ]
 
 { #category : #'importing queries' }
-MooseImportingContext >> shouldImportPackage [
+FamixStImporterContext >> shouldImportPackage [
 	
 	^self shouldImport: self class importingPackage
 ]
 
 { #category : #'importing queries' }
-MooseImportingContext >> shouldImportSmalltalkStubMethod [
+FamixStImporterContext >> shouldImportSmalltalkStubMethod [
 	
 	^self shouldImport: self class importingSmalltalkStubMethod
 ]
 
 { #category : #'importing queries' }
-MooseImportingContext >> shouldImportSubclasses [
+FamixStImporterContext >> shouldImportSubclasses [
 	self flag: 'why does it not use #shouldImport: ?'.
 
 	^importSubclasses
 ]
 
 { #category : #'importing queries' }
-MooseImportingContext >> shouldMergeClassAndMetaclass [
+FamixStImporterContext >> shouldMergeClassAndMetaclass [
 	self flag: 'why does it not use #shouldImport: ?'.
 
 	^mergeClassAndMetaclass

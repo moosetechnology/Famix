@@ -16,7 +16,7 @@ MooseScripts class >> createLightModelForLAN [
 	model := FamixStModel new.
 	model name: 'lightLAN'.
 	FamixStPharoImporterTask new
-		importingContext: (MooseImportingContext new
+		importingContext: (FamixStImporterContext new
 				 importClass;
 				 importMethod;
 				 importInheritance;
@@ -44,7 +44,7 @@ MooseScripts class >> createLightModelForMorphic [
 	model := FamixStModel new.
 	model name: 'lightMorphic'.
 	FamixStPharoImporterTask new
-		importingContext: (MooseImportingContext new
+		importingContext: (FamixStImporterContext new
 				 importClass;
 				 importMethod;
 				 importInheritance;
@@ -74,7 +74,7 @@ MooseScripts class >> createLightModelForNetwork [
 	model := FamixStModel new.
 	model name: 'lightNetwork'.
 	FamixStPharoImporterTask new
-		importingContext: (MooseImportingContext new
+		importingContext: (FamixStImporterContext new
 				 importClass;
 				 importMethod;
 				 importInheritance;
@@ -103,7 +103,7 @@ MooseScripts class >> createLightModelForPharo [
 	model := FamixStModel new.
 	model name: 'lightPharo'.
 	FamixStPharoImporterTask new
-		importingContext: (MooseImportingContext new
+		importingContext: (FamixStImporterContext new
 				 importClass;
 				 importMethod;
 				 importInheritance;
@@ -213,7 +213,7 @@ MooseScripts class >> createModelNamed: modelName withPackages: packages importe
 	mooseModel := FamixStModel new.
 	mooseModel name: modelName.
 	
-	importingContext := MooseImportingContext new.
+	importingContext := FamixStImporterContext new.
 	(context select: [:anAssoc | anAssoc value = true] thenCollect: [:each | each key]) do: [ :each | importingContext perform: (#import , each) asSymbol ].
 	merge ifTrue: [ importingContext mergeClassAndMetaclass ].
 	
