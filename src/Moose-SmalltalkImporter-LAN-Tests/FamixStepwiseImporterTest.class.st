@@ -25,7 +25,7 @@ FamixStepwiseImporterTest >> testCheckFormalParameterIsCreated [
 	| mseFormalParameter model |
 	model := FamixStModel new.
 	FamixStPharoImporterTask new
-		importingContext: (MooseImportingContext new
+		importingContext: (FamixStImporterContext new
 				 importImplicitVariable;
 				 importAccess;
 				 mergeClassAndMetaclass;
@@ -44,7 +44,7 @@ FamixStepwiseImporterTest >> testCheckSelfIsCreated [
 	| model mseSelf |
 	model := FamixStModel new.
 	FamixStPharoImporterTask new
-		importingContext: (MooseImportingContext new
+		importingContext: (FamixStImporterContext new
 				 importImplicitVariable;
 				 importAccess;
 				 mergeClassAndMetaclass;
@@ -62,7 +62,7 @@ FamixStepwiseImporterTest >> testImportAttribute [
 
 	| importTask importer nodeClass |
 	importTask := self newImportClassesTask.
-	importTask importingContext: (MooseImportingContext new
+	importTask importingContext: (FamixStImporterContext new
 			 importClass;
 			 importAttribute;
 			 importMethod;
@@ -80,7 +80,7 @@ FamixStepwiseImporterTest >> testImportAttributeAccesses [
 
 	| importTask importer nodeClass attr |
 	importTask := self newImportClassesTask.
-	importTask importingContext: (MooseImportingContext new
+	importTask importingContext: (FamixStImporterContext new
 			 importClass;
 			 importAttribute;
 			 importMethod;
@@ -100,7 +100,7 @@ FamixStepwiseImporterTest >> testImportClassAndAttributeAndMergeItsMetaclass [
 
 	| importTask importer nodeClass |
 	importTask := self newImportClassesTask.
-	importTask importingContext: (MooseImportingContext new
+	importTask importingContext: (FamixStImporterContext new
 			 importClass;
 			 importAttribute;
 			 mergeClassAndMetaclass;
@@ -116,7 +116,7 @@ FamixStepwiseImporterTest >> testImportClassAndInheritance [
 
 	| importTask importer importedClasses |
 	importTask := self newImportClassesTask.
-	importTask importingContext: (MooseImportingContext new
+	importTask importingContext: (FamixStImporterContext new
 			 importClass;
 			 importInheritance;
 			 mergeClassAndMetaclass;
@@ -134,7 +134,7 @@ FamixStepwiseImporterTest >> testImportClassAndMethodAndMergeItsMetaclass [
 
 	| importTask importer importedMethods |
 	importTask := self newImportClassesTask.
-	importTask importingContext: (MooseImportingContext new
+	importTask importingContext: (FamixStImporterContext new
 			 importClass;
 			 importMethod;
 			 mergeClassAndMetaclass;
@@ -153,7 +153,7 @@ FamixStepwiseImporterTest >> testImportLANPackage [
 	model := FamixStModel new.
 	FamixStPharoImporterTask new
 		doNotRunCandidateOperator;
-		importingContext: (MooseImportingContext new
+		importingContext: (FamixStImporterContext new
 				 importClass;
 				 importPackage;
 				 yourself);
@@ -172,7 +172,7 @@ FamixStepwiseImporterTest >> testImportMergingMetaclassDoesNotDuplicateComment [
 
 	| importTask importer comments |
 	importTask := self newImportClassesTask.
-	importTask importingContext: (MooseImportingContext new
+	importTask importingContext: (FamixStImporterContext new
 			 importClass;
 			 importComment;
 			 mergeClassAndMetaclass;
@@ -194,7 +194,7 @@ FamixStepwiseImporterTest >> testImportMethodBody [
 
 	| importTask importer context importedClasses famixClassNode nextNodeMethod nameMethod xFormalParameter |
 	importTask := self newImportClassesTask.
-	context := MooseImportingContext new
+	context := FamixStImporterContext new
 		           importArgument;
 		           mergeClassAndMetaclass;
 		           yourself.
@@ -226,7 +226,7 @@ FamixStepwiseImporterTest >> testImportNamespace [
 	model := FamixStModel new.
 	FamixStPharoImporterTask new
 		doNotRunCandidateOperator;
-		importingContext: (MooseImportingContext new
+		importingContext: (FamixStImporterContext new
 				 importNamespace;
 				 importClass;
 				 importPackage;
@@ -244,7 +244,7 @@ FamixStepwiseImporterTest >> testImportOneClassAndItsMetaclass [
 
 	| importTask importer importedClasses |
 	importTask := self newImportClassesTask.
-	importTask importingContext: MooseImportingContext new importClass.
+	importTask importingContext: FamixStImporterContext new importClass.
 	importTask addClass: LANNode.
 	self assert: importTask classes size equals: 1.
 	importer := importTask run.
@@ -258,7 +258,7 @@ FamixStepwiseImporterTest >> testImportOneClassAndMergeItsMetaclass [
 
 	| importTask importer importedClasses |
 	importTask := self newImportClassesTask.
-	importTask importingContext: (MooseImportingContext new
+	importTask importingContext: (FamixStImporterContext new
 			 importClass;
 			 mergeClassAndMetaclass;
 			 yourself).
@@ -275,7 +275,7 @@ FamixStepwiseImporterTest >> testImportOneClassAndMethodAndMergeItsMetaclass [
 
 	| importTask importer importedMethods |
 	importTask := self newImportClassesTask.
-	importTask importingContext: (MooseImportingContext new
+	importTask importingContext: (FamixStImporterContext new
 			 importClass;
 			 importMethod;
 			 mergeClassAndMetaclass;
@@ -292,7 +292,7 @@ FamixStepwiseImporterTest >> testImportOneClassAndOneAttributeAndMergeItsMetacla
 
 	| importTask importer nodeClass |
 	importTask := self newImportClassesTask.
-	importTask importingContext: (MooseImportingContext new
+	importTask importingContext: (FamixStImporterContext new
 			 importClass;
 			 importAttribute;
 			 mergeClassAndMetaclass;
@@ -308,7 +308,7 @@ FamixStepwiseImporterTest >> testImportWithoutMergingMetaclassDoesDuplicateComme
 
 	| importTask importer comments |
 	importTask := self newImportClassesTask.
-	importTask importingContext: (MooseImportingContext new
+	importTask importingContext: (FamixStImporterContext new
 			 importClass;
 			 importComment;
 			 distinguishClassAndMetaclass;
