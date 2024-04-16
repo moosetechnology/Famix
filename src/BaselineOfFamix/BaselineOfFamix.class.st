@@ -13,11 +13,12 @@ Class {
 	#category : #BaselineOfFamix
 }
 
-{ #category : #baseline }
+{ #category : #baselines }
 BaselineOfFamix >> baseline: spec [
+	"In P12 the need of this hack got removed and now Metacello is able to give us the URL itself. Once P11 will not be maintained for Moose we can remove this check and the method #packageRepositoryURL we are overriding."
 
 	<baseline>
-	"In P12 the need of this hack got removed and now Metacello is able to give us the URL itself. Once P11 will not be maintained for Moose we can remove this check and the method #packageRepositoryURL we are overriding."
+	<ignoreNotImplementedSelectors: #( #packageRepositoryURLForSpec: )>
 	repository := SystemVersion current major < 12
 		              ifTrue: [ self packageRepositoryURL ]
 		              ifFalse: [ self packageRepositoryURLForSpec: spec ].
@@ -46,7 +47,7 @@ BaselineOfFamix >> deepTraverser: spec [
 				repository: 'github://pharo-contributions/DeepTraverser:v1.x.x/src' ]
 ]
 
-{ #category : #baseline }
+{ #category : #baselines }
 BaselineOfFamix >> dependencies: spec [
 
 	self
@@ -61,7 +62,7 @@ BaselineOfFamix >> dependencies: spec [
 	self fame: spec
 ]
 
-{ #category : #baseline }
+{ #category : #dependencies }
 BaselineOfFamix >> fame: spec [
 
 	"We load Fame development version for new Moose images."
@@ -76,7 +77,7 @@ BaselineOfFamix >> fame: spec [
 			('github://moosetechnology/Fame:{1}/src' format: { version }) ]
 ]
 
-{ #category : #baseline }
+{ #category : #baselines }
 BaselineOfFamix >> groups: spec [
 
 	^ spec
@@ -146,7 +147,7 @@ BaselineOfFamix >> packageRepositoryURL [
 			   ifNone: [ '' ]) ]
 ]
 
-{ #category : #baseline }
+{ #category : #baselines }
 BaselineOfFamix >> packages: spec [
 
 	spec

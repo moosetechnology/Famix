@@ -228,12 +228,6 @@ FamixJavaVisitor >> visitType: aFamixJavaType [
 ]
 
 { #category : #visiting }
-FamixJavaVisitor >> visitUnknownSourceLanguage: aFamixJavaUnknownSourceLanguage [
-	<generated>
-	^ self visitSourceLanguage: aFamixJavaUnknownSourceLanguage
-]
-
-{ #category : #visiting }
 FamixJavaVisitor >> visitUnknownVariable: aFamixJavaUnknownVariable [
 	<generated>
 	^ self visitNamedEntity: aFamixJavaUnknownVariable
