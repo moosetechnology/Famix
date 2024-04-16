@@ -14,20 +14,20 @@ MoosePharoImporterTaskOnLANTest >> numberOfClassesIn: packageNames [
 { #category : #'testing collecting classes' }
 MoosePharoImporterTaskOnLANTest >> testFromPackageNamed [
 
-	self assert: ((FamixStPharoImporterTask new addFromPackageNamed: #'Moose-TestResources-LAN') allClasses includes: LANNode)
+	self assert: ((FamixStPharoImporterTask new addFromPackageNamed: #'Moose-TestResources-LAN') classes includes: LANNode)
 ]
 
 { #category : #'testing collecting classes' }
 MoosePharoImporterTaskOnLANTest >> testFromPackagesMatching [
 
-	self assert: ((FamixStPharoImporterTask new addFromPackagesMatching: [ :each | each name = #'Moose-TestResources-LAN' ]) allClasses includes: LANNode)
+	self assert: ((FamixStPharoImporterTask new addFromPackagesMatching: [ :each | each name = #'Moose-TestResources-LAN' ]) classes includes: LANNode)
 ]
 
 { #category : #'testing collecting classes' }
 MoosePharoImporterTaskOnLANTest >> testFromPackagesMatching2 [
 
 	self
-		assert: (FamixStPharoImporterTask new addFromPackagesMatching: [ :each | 'Moose-TestResources-LA*' match: each name asString ]) allClasses size
+		assert: (FamixStPharoImporterTask new addFromPackagesMatching: [ :each | 'Moose-TestResources-LA*' match: each name asString ]) classes size
 		equals: (self numberOfClassesIn: #( 'Moose-TestResources-LA*' ))
 ]
 
