@@ -10,11 +10,15 @@ Implementation notes.
 "
 Class {
 	#name : #MoosePharoImporterTask,
-	#superclass : #MooseCompositeImporterTask,
+	#superclass : #MooseImportingTask,
 	#instVars : [
 		'classes',
 		'packages',
-		'classExtensions'
+		'classExtensions',
+		'runSelector',
+		'candidateClass',
+		'candidateOperator',
+		'model'
 	],
 	#category : #'Moose-SmalltalkImporter'
 }
@@ -82,6 +86,37 @@ MoosePharoImporterTask >> allPackagesDo: aBlock [
 	packages do: aBlock
 ]
 
+{ #category : #running }
+MoosePharoImporterTask >> basicRun [
+	| importerTask importer |
+	"importerTask applies an import filter definition (context) on a set of classes (allClasses) and yields elements"
+	importerTask := MooseImportClassesTask new importerClass: importerClass.
+	importerTask factory: self factory.
+	importerTask importingContext: importingContext.
+	importerTask addAll: self allClasses.
+	importerTask addAllExtensions: self allClassExtensions.
+	importer := importerTask runSelector: runSelector.
+	"InstallElementsOperator populates a Moose model with (unary) elements" 
+	(InstallElementsOperator with: importer on: self model) runSelector: runSelector.
+	"CandidateListOperator populates a Moose model with (binary) element relations like: methodA invokes methodB"
+	candidateOperator ifTrue: [ (self candidateClass runOn: self model importer: importer) runSelector: runSelector ].
+	self model sourceLanguage: importer factory sourceLanguage new.
+	^ self model
+]
+
+{ #category : #'protected hooks' }
+MoosePharoImporterTask >> candidateClass [
+	candidateClass ifNil: [ candidateClass := CandidateListOperator ].
+	^ candidateClass
+]
+
+{ #category : #'protected hooks' }
+MoosePharoImporterTask >> candidateClass: anObject [
+	"Normally you should not invoke such method. Use run and doNotRunCandidateOperator instead"
+	
+	candidateClass := anObject
+]
+
 { #category : #accessing }
 MoosePharoImporterTask >> classes [
 	^classes
@@ -104,13 +139,44 @@ MoosePharoImporterTask >> description [
 
 ]
 
+{ #category : #setting }
+MoosePharoImporterTask >> doNotRunCandidateOperator [
+
+	candidateOperator := false
+]
+
+{ #category : #accessing }
+MoosePharoImporterTask >> factory [
+	^ super factory ifNil: [ factory := self model factory ]
+]
+
 { #category : #initialization }
 MoosePharoImporterTask >> initialize [
 
 	super initialize.
+	candidateOperator := true.
+	runSelector := #run.
 	classes := OrderedCollection new.
 	classExtensions := OrderedCollection new.
 	packages := OrderedCollection new.
+]
+
+{ #category : #accessing }
+MoosePharoImporterTask >> length [ 
+	 
+	^0	"dummy value since we are a task holder"
+]
+
+{ #category : #accessing }
+MoosePharoImporterTask >> model [ 
+	 
+	^model ifNil: [model := MooseModel new name: self modelName; yourself]
+]
+
+{ #category : #accessing }
+MoosePharoImporterTask >> model: mooseModel [ 
+	 
+	model := mooseModel
 ]
 
 { #category : #accessing }
@@ -138,4 +204,35 @@ MoosePharoImporterTask >> packagesString [
 				nextPut: $,; 
 				space]. 
 	^stream contents
+]
+
+{ #category : #setting }
+MoosePharoImporterTask >> runCandidateOperator [
+
+	candidateOperator := true
+]
+
+{ #category : #running }
+MoosePharoImporterTask >> runWithProgress [
+
+	self withProgress.
+	self run.
+]
+
+{ #category : #running }
+MoosePharoImporterTask >> updateModelName [ 
+	 
+	self model name: self modelName
+]
+
+{ #category : #running }
+MoosePharoImporterTask >> withProgress [
+
+	runSelector := #runWithProgress
+]
+
+{ #category : #running }
+MoosePharoImporterTask >> withoutProgress [
+
+	runSelector := #run
 ]

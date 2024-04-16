@@ -30,7 +30,7 @@ Class {
 	#classInstVars : [
 		'entityDependencies'
 	],
-	#category : #'Moose-Importers-Contexts'
+	#category : #'Moose-SmalltalkImporter'
 }
 
 { #category : #initialize }
