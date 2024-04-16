@@ -11,9 +11,10 @@ is trigged by the MooseCompositeImporterTask and implemented by InstallElementsO
 "
 Class {
 	#name : #FamixStImportClassesTask,
-	#superclass : #FamixStAbstractImporter,
+	#superclass : #MooseTask,
+	#traits : 'FamixStTImportUtils',
+	#classTraits : 'FamixStTImportUtils classTrait',
 	#instVars : [
-		'classes',
 		'classExtensions'
 	],
 	#category : #'Moose-SmalltalkImporter-Importers'
@@ -47,7 +48,7 @@ FamixStImportClassesTask >> addClassExtension: aClassExtension [
 FamixStImportClassesTask >> basicRun [
 
 	| importer |
-	importer := FamixStImporter new importingContext: importingContext.
+	importer := FamixStImporter new importingContext: self importingContext.
 	importer factory: self factory.
 	self classes do: [ :class |
 		importer importClass: class.
@@ -60,12 +61,6 @@ FamixStImportClassesTask >> basicRun [
 FamixStImportClassesTask >> classExtensions [ 
 	 
 	^classExtensions 
-]
-
-{ #category : #accessing }
-FamixStImportClassesTask >> classes [ 
-	 
-	^classes
 ]
 
 { #category : #accessing }

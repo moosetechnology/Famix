@@ -4,10 +4,11 @@ I'm mainly invoked by the MooseImportClassesTask
 "
 Class {
 	#name : #FamixStImporter,
-	#superclass : #FamixStAbstractImporter,
+	#superclass : #Object,
+	#traits : 'FamixStTImportUtils',
+	#classTraits : 'FamixStTImportUtils classTrait',
 	#instVars : [
 		'methods',
-		'classes',
 		'namespaces',
 		'packages',
 		'globals',
@@ -65,8 +66,7 @@ FamixStImporter >> basicClassCreation: aClass [
 	class := classes at: aClass put: self factory classEntity new.
 	class name: (aClass name replaceAll: Character space with: $_).
 	class stub: true.
-	importingContext shouldImportNamespace ifTrue: [ 
-		class typeContainer: (self ensureNamespace: aClass environment) ].
+	self importingContext shouldImportNamespace ifTrue: [ class typeContainer: (self ensureNamespace: aClass environment) ].
 	anchor := self factory anchor new
 		          element: class;
 		          pharoEntity: aClass;
@@ -93,12 +93,6 @@ FamixStImporter >> checkAbstractClass: class [
 	class isAbstract:  (class methods contains: [ :each | each isAbstract ]) 
 ]
 
-{ #category : #'private accessing' }
-FamixStImporter >> classes [
-	
-	^ classes
-]
-
 { #category : #'private-entity-creation' }
 FamixStImporter >> createAnnotationType: aPragmaNode [ 
 	| pragmaAnnotationType |
@@ -119,25 +113,20 @@ FamixStImporter >> createAnnotationType: aPragmaNode [
 
 { #category : #'private-entity-creation' }
 FamixStImporter >> createAttribute: name for: aClass [
+
 	| attribute realName possibleTypes |
 	realName := self nameForInstanceVariable: name class: aClass.
-	attribute := (self scopeOfClass: aClass)
-		at: realName
-		bind: self factory attribute new.
+	attribute := (self scopeOfClass: aClass) at: realName bind: self factory attribute new.
 	attribute stub: true.
 	attribute name: realName asSymbol.
-	importingContext shouldMergeClassAndMetaclass
+	self importingContext shouldMergeClassAndMetaclass
 		ifTrue: [ attribute parentType: (self ensureClass: aClass instanceSide) ]
 		ifFalse: [ attribute parentType: (self ensureClass: aClass) ].
 	attribute isClassSide: aClass isMeta.
 	"now we use RoelTyper to see a unique type can be retrieve for this attribute: "
-	importingContext shouldComputeTypeOfAttributes
-		ifTrue: [ possibleTypes := (TypeCollector
-				typeInstvar: name asSymbol
-				ofClassWithLookup: aClass) types.
-			possibleTypes size = 1
-				ifTrue: [ attribute
-						declaredType: (self ensureClass: possibleTypes first instanceSide) ] ].
+	self importingContext shouldComputeTypeOfAttributes ifTrue: [
+		possibleTypes := (TypeCollector typeInstvar: name asSymbol ofClassWithLookup: aClass) types.
+		possibleTypes size = 1 ifTrue: [ attribute declaredType: (self ensureClass: possibleTypes first instanceSide) ] ].
 	^ attribute
 ]
 
@@ -145,51 +134,37 @@ FamixStImporter >> createAttribute: name for: aClass [
 FamixStImporter >> createClass: aClass [
 
 	| class inheritance |
-	class := (importingContext shouldMergeClassAndMetaclass and: [ 
-		          aClass isMeta ])
-		         ifTrue: [ 
-		         classes
-			         at: aClass
-			         put: (self ensureClass: aClass soleInstance) ]
+	class := (self importingContext shouldMergeClassAndMetaclass and: [ aClass isMeta ])
+		         ifTrue: [ classes at: aClass put: (self ensureClass: aClass soleInstance) ]
 		         ifFalse: [ self basicClassCreation: aClass ].
 
-	importingContext shouldImportPackage ifTrue: [ 
-		class parentPackage: (self ensurePackage: aClass package) ].
+	self importingContext shouldImportPackage ifTrue: [ class parentPackage: (self ensurePackage: aClass package) ].
 
-	importingContext shouldImportInheritance ifTrue: [ 
-		(aClass superclass isNotNil and: [ 
-			 importingContext shouldMergeClassAndMetaclass
+	self importingContext shouldImportInheritance ifTrue: [
+		(aClass superclass isNotNil and: [
+			 self importingContext shouldMergeClassAndMetaclass
 				 ifFalse: [ true ]
-				 ifTrue: [ aClass isMeta not ] ]) ifTrue: [ 
+				 ifTrue: [ aClass isMeta not ] ]) ifTrue: [
 			inheritance := self addEntity: self factory inheritance new.
 			inheritance superclass: (self ensureClass: aClass superclass).
 			inheritance subclass: class ] ].
 
 	aClass isMeta ifFalse: [ self ensureClass: aClass class ].
 
-	importingContext shouldImportAttribute ifTrue: [ 
-		aClass instVarNames do: [ :eachName | 
-			self ensureAttribute: eachName for: aClass ].
+	self importingContext shouldImportAttribute ifTrue: [
+		aClass instVarNames do: [ :eachName | self ensureAttribute: eachName for: aClass ].
 		"since the classVar of a class are not the same as the classVar of the class class"
 		"with latest pharo class classVar = class class classVar so we should not need that anymore"
 		aClass isMeta
-			ifTrue: [ 
-				aClass soleInstance classVarNames do: [ :eachClassVarName | 
-					self
-						ensureClassVarAttribute: eachClassVarName
-						for: aClass soleInstance ] ]
-			ifFalse: [ 
-				aClass classVarNames do: [ :eachClassVarName | 
-					self ensureClassVarAttribute: eachClassVarName for: aClass ] ] ].
+			ifTrue: [ aClass soleInstance classVarNames do: [ :eachClassVarName | self ensureClassVarAttribute: eachClassVarName for: aClass soleInstance ] ]
+			ifFalse: [ aClass classVarNames do: [ :eachClassVarName | self ensureClassVarAttribute: eachClassVarName for: aClass ] ] ].
 
-	(importingContext shouldImportComment and: [ aClass hasComment ]) 
-		ifTrue: [ 
-			(importingContext shouldMergeClassAndMetaclass and: [ 
-				 aClass isMeta ]) ifFalse: [ 
-				| comment |
-				comment := self addEntity: self factory comment new.
-				comment content: aClass comment asString.
-				comment commentedEntity: class ] ].
+	(self importingContext shouldImportComment and: [ aClass hasComment ]) ifTrue: [
+		(self importingContext shouldMergeClassAndMetaclass and: [ aClass isMeta ]) ifFalse: [
+			| comment |
+			comment := self addEntity: self factory comment new.
+			comment content: aClass comment asString.
+			comment commentedEntity: class ] ].
 
 	^ class
 ]
@@ -227,7 +202,7 @@ FamixStImporter >> createMethod: aCompiledMethod [
 
 	| method anchor |
 	method := self createStubMethod: aCompiledMethod.
-	importingContext shouldImportMethodBody ifTrue: [ 
+	self importingContext shouldImportMethodBody ifTrue: [
 		| visitor |
 		visitor := SmalltalkMethodVisitor on: self.
 		visitor runWith: aCompiledMethod and: method ].
@@ -443,14 +418,10 @@ FamixStImporter >> ensureSmalltalkStubMethod: aCompiledMethod [
 FamixStImporter >> ensureSmalltalkStubMethodsFor: aSignature [
 
 	| implementors |
-	importingContext shouldImportSmalltalkStubMethod ifFalse: [ ^ #(  ) ].
+	self importingContext shouldImportSmalltalkStubMethod ifFalse: [ ^ #(  ) ].
 	implementors := self allImplementorsOf: aSignature.
-	implementors ifEmpty: [ 
-		^ { (self
-			   basicCreateMethod: (aSignature copyUpTo: $()
-			   withSignature: aSignature) } ].
-	^ implementors collect: [ :meth | 
-		  self ensureSmalltalkStubMethod: meth ]
+	implementors ifEmpty: [ ^ { (self basicCreateMethod: (aSignature copyUpTo: $() withSignature: aSignature) } ].
+	^ implementors collect: [ :meth | self ensureSmalltalkStubMethod: meth ]
 ]
 
 { #category : #'public-entity-creation' }
@@ -472,21 +443,18 @@ FamixStImporter >> famixClasses [
 FamixStImporter >> importClass: aClass [
 
 	| class |
-	importingContext shouldImportClass ifFalse: [ ^ self ].
+	self importingContext shouldImportClass ifFalse: [ ^ self ].
 
 	class := self ensureClass: aClass.
 	class stub: false.
 	class attributes do: [ :each | each stub: false ].
 
-	importingContext shouldImportPackage ifTrue: [ 
-		class parentPackage stub: false ].
+	self importingContext shouldImportPackage ifTrue: [ class parentPackage stub: false ].
 
-	importingContext shouldImportSubclasses ifTrue: [ 
-		aClass subclasses do: [ :each | self ensureClass: each ] ].
+	self importingContext shouldImportSubclasses ifTrue: [ aClass subclasses do: [ :each | self ensureClass: each ] ].
 
-	importingContext shouldImportMethod ifTrue: [ 
-		aClass methods do: [ :each | 
-			(self ensureMethod: each) isStub: false ].
+	self importingContext shouldImportMethod ifTrue: [
+		aClass methods do: [ :each | (self ensureMethod: each) isStub: false ].
 		self checkAbstractClass: class ].
 
 	aClass isMeta ifFalse: [ self importClass: aClass class ]
@@ -496,12 +464,11 @@ FamixStImporter >> importClass: aClass [
 FamixStImporter >> importClassExtension: aClassExtension [
 
 	| method |
-	importingContext shouldImportClassExtension ifFalse: [ ^ self ].
+	self importingContext shouldImportClassExtension ifFalse: [ ^ self ].
 
 	method := (self ensureMethod: aClassExtension) isStub: false.
 
-	importingContext shouldImportPackage ifTrue: [ 
-		method parentPackage isStub: false ]
+	self importingContext shouldImportPackage ifTrue: [ method parentPackage isStub: false ]
 ]
 
 { #category : #initialization }
@@ -526,12 +493,9 @@ FamixStImporter >> methods [
 
 { #category : #'private utils' }
 FamixStImporter >> nameForInstanceVariable: name class: aClass [
-	
-    (importingContext shouldMergeClassAndMetaclass) 
-		and: [aClass isMeta ifTrue: [ ^ self CIVString, name]].
+
+	self importingContext shouldMergeClassAndMetaclass and: [ aClass isMeta ifTrue: [ ^ self CIVString , name ] ].
 	^ name
-					
-	
 ]
 
 { #category : #'private-entity-creation' }

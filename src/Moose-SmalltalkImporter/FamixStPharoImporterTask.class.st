@@ -3,9 +3,10 @@ This class specifies that the Smalltalk classes are identified using packages
 "
 Class {
 	#name : #FamixStPharoImporterTask,
-	#superclass : #FamixStAbstractImporter,
+	#superclass : #MooseTask,
+	#traits : 'FamixStTImportUtils',
+	#classTraits : 'FamixStTImportUtils classTrait',
 	#instVars : [
-		'classes',
 		'packages',
 		'classExtensions',
 		'runSelector',
@@ -66,7 +67,7 @@ FamixStPharoImporterTask >> basicRun [
 	"importerTask applies an import filter definition (context) on a set of classes (allClasses) and yields elements"
 	importerTask := FamixStImportClassesTask new.
 	importerTask factory: self factory.
-	importerTask importingContext: importingContext.
+	importerTask importingContext: self importingContext.
 	importerTask addAll: self classes.
 	importerTask addAllExtensions: self classExtensions.
 	importer := importerTask runSelector: runSelector.
@@ -96,18 +97,14 @@ FamixStPharoImporterTask >> classExtensions [
 	^classExtensions 
 ]
 
-{ #category : #accessing }
-FamixStPharoImporterTask >> classes [
-	^classes
-]
-
 { #category : #initialization }
 FamixStPharoImporterTask >> defaultImportingContext [
 	"does not import stub methods by default because it can create a lot of methods"
+
 	| context |
-	context := super defaultImportingContext.
-	context entityKindsToBeExtracted remove: (context class importingSmalltalkStubMethod).
-	^context
+	context := MooseImportingContext new importMaximum.
+	context entityKindsToBeExtracted remove: context class importingSmalltalkStubMethod.
+	^ context
 ]
 
 { #category : #accessing }
@@ -124,7 +121,8 @@ FamixStPharoImporterTask >> doNotRunCandidateOperator [
 
 { #category : #accessing }
 FamixStPharoImporterTask >> factory [
-	^ super factory ifNil: [ factory := self model factory ]
+
+	^ factory ifNil: [ factory := self model factory ]
 ]
 
 { #category : #initialization }
