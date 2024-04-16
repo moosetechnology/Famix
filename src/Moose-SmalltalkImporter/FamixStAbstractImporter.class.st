@@ -6,9 +6,10 @@ Class {
 	#name : #FamixStAbstractImporter,
 	#superclass : #MooseTask,
 	#instVars : [
-		'importingContext'
+		'importingContext',
+		'factory'
 	],
-	#category : #'Moose-SmalltalkImporter'
+	#category : #'Moose-SmalltalkImporter-Importers'
 }
 
 { #category : #public }
@@ -19,6 +20,17 @@ FamixStAbstractImporter class >> run [
 { #category : #accessing }
 FamixStAbstractImporter >> defaultImportingContext [
 	^ MooseImportingContext new importMaximum
+]
+
+{ #category : #accessing }
+FamixStAbstractImporter >> factory [
+
+	^ factory
+]
+
+{ #category : #accessing }
+FamixStAbstractImporter >> factory: anObject [
+	factory := anObject
 ]
 
 { #category : #accessing }
@@ -35,10 +47,4 @@ FamixStAbstractImporter >> importingContext: anObject [
 FamixStAbstractImporter >> initialize [
 	super initialize.
 	importingContext := self defaultImportingContext
-]
-
-{ #category : #'Moose deprecated' }
-FamixStAbstractImporter >> logFileSuffix [ 
-	 
-	^'.log'
 ]

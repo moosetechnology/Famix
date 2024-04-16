@@ -24,7 +24,7 @@ FamixStNavigationTestResource >> importModel [
 	                 #M5P10C17FullReferencerInSide #M5P10C18FullRefereeInSideOutSide )
 	              #( #M6P11C19FullRefereeOutSide #M6P12C20FullReferencerOutSide ) #( #M7P13C21FullReferencerOutSide #M7P14C22FullRefereeOutSide ) ).
 
-	importer := MoosePharoImporterTask new.
+	importer := FamixStPharoImporterTask new.
 	importer model: model.
 	namespaces := #( 'Model1InteractedReferencerReferee' 'Model2FullReferee' 'Model3ReferencerReferee' 'Model4FullReferencer' 'Model5InteractedReferencer'
 	                 'Model6InteractedReferee' 'Model7FullInteracted' ) collect: [ :each | importer factory namespace new name: each ].

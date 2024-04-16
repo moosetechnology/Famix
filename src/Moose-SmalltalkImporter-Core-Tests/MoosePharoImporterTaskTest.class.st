@@ -6,13 +6,13 @@ Class {
 
 { #category : #tests }
 MoosePharoImporterTaskTest >> testDefaultModel [
-	self assert: (MoosePharoImporterTask new model isKindOf: MooseModel)
+	self assert: (FamixStPharoImporterTask new model isKindOf: MooseModel)
 ]
 
 { #category : #tests }
 MoosePharoImporterTaskTest >> testImportedModelHasSmalltalkMetamodel [
 	| model |
-	model := MoosePharoImporterTask new
+	model := FamixStPharoImporterTask new
 		model: FamixStModel new;
 		addFromPackageNamed: 'Moose-SmalltalkImporter-Core-Tests';
 		basicRun.

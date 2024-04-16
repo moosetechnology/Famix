@@ -10,7 +10,7 @@ Class {
 { #category : #setup }
 KGBForMetricsTestResource >> importModel [
 
-	MoosePharoImporterTask new
+	FamixStPharoImporterTask new
 		model: model;
 		addFromPackageNamed: #'Moose-TestResources-KGB-P1FullReferencer';
 		addFromPackageNamed: #'Moose-TestResources-KGB-P2InteractedReferencerReferee';

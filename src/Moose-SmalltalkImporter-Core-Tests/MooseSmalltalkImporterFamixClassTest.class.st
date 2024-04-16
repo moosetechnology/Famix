@@ -9,7 +9,7 @@ MooseSmalltalkImporterFamixClassTest >> testIsTestCase [
 
 	| mooseModel |
 	mooseModel := FamixStModel new.
-	MoosePharoImporterTask new
+	FamixStPharoImporterTask new
 		model: mooseModel;
 		addClasses: (OrderedCollection with: self class);
 		run.

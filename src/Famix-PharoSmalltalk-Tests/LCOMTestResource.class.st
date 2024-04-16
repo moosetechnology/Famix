@@ -10,7 +10,7 @@ Class {
 { #category : #setup }
 LCOMTestResource >> importModel [
 
-	MoosePharoImporterTask new
+	FamixStPharoImporterTask new
 		model: model;
 		addFromPackageNamed: #'Moose-TestResources-LCOM';
 		run

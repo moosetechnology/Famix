@@ -34,7 +34,7 @@ MooseSmalltalkImporterSubclassesTest >> setUp [
 	super setUp.
 	model := FamixStModel new.
 	model name: 'Test'.
-	pharoImporterTask := MoosePharoImporterTask new
+	pharoImporterTask := FamixStPharoImporterTask new
 		                     doNotRunCandidateOperator;
 		                     importingContext: (MooseImportingContext new
 				                      importPackage;

@@ -9,7 +9,7 @@ MooseSmalltalkImporterRoelTyperTest >> testASTCore [
 	| model importer |
 	model := FamixStModel new.
 	self timeLimit: 60 seconds.
-	importer := MoosePharoImporterTask new.
+	importer := FamixStPharoImporterTask new.
 	importer importingContext mergeClassAndMetaclass.	";
 		computeTypeOfAttributes"
 	importer runCandidateOperator.

@@ -11,7 +11,7 @@ should normally accept any kind of receiver, but all type are not yet supported 
 Class {
 	#name : #CandidateListOperatorAcceptingAnyKindOfReceiver,
 	#superclass : #AbstractCandidateListOperator,
-	#category : #'Moose-SmalltalkImporter'
+	#category : #'Moose-SmalltalkImporter-Operators'
 }
 
 { #category : #running }

@@ -15,7 +15,7 @@ ImportStubMethodSpecialTest >> setUp [
 
 	| importingTask |
 	super setUp.
-	importingTask := MoosePharoImporterTask new
+	importingTask := FamixStPharoImporterTask new
 		                 model: FamixStModel new;
 		                 addFromPackageNamed: #'Moose-TestResources-LAN';
 		                 yourself.

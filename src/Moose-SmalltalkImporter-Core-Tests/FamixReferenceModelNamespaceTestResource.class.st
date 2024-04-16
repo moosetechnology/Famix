@@ -7,7 +7,7 @@ Class {
 { #category : #setup }
 FamixReferenceModelNamespaceTestResource >> importModel [
 
-	MoosePharoImporterTask new
+	FamixStPharoImporterTask new
 		model: model;
 		doNotRunCandidateOperator;
 		addFromPackageNamed: #'Moose-TestResources-Reference-Core';

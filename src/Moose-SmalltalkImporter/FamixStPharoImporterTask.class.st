@@ -2,8 +2,8 @@
 This class specifies that the Smalltalk classes are identified using packages
 "
 Class {
-	#name : #MoosePharoImporterTask,
-	#superclass : #MooseImportingTask,
+	#name : #FamixStPharoImporterTask,
+	#superclass : #FamixStAbstractImporter,
 	#instVars : [
 		'classes',
 		'packages',
@@ -13,26 +13,26 @@ Class {
 		'candidateOperator',
 		'model'
 	],
-	#category : #'Moose-SmalltalkImporter'
+	#category : #'Moose-SmalltalkImporter-Importers'
 }
 
 { #category : #adding }
-MoosePharoImporterTask >> addClass: aClass [
+FamixStPharoImporterTask >> addClass: aClass [
 	classes add: aClass
 ]
 
 { #category : #adding }
-MoosePharoImporterTask >> addClassExtensions: col [
+FamixStPharoImporterTask >> addClassExtensions: col [
 	classExtensions addAll: col
 ]
 
 { #category : #adding }
-MoosePharoImporterTask >> addClasses: col [
+FamixStPharoImporterTask >> addClasses: col [
 	classes addAll: col
 ]
 
 { #category : #adding }
-MoosePharoImporterTask >> addFromPackage: aRPackage [
+FamixStPharoImporterTask >> addFromPackage: aRPackage [
 
 	"late-bound cache initialization for classes"
 	self addClasses: aRPackage definedClasses.
@@ -41,30 +41,30 @@ MoosePharoImporterTask >> addFromPackage: aRPackage [
 ]
 
 { #category : #adding }
-MoosePharoImporterTask >> addFromPackageNamed: aPackageName [
+FamixStPharoImporterTask >> addFromPackageNamed: aPackageName [
 
 	self addFromPackage: (self packageOrganizer packageNamed: aPackageName asSymbol)
 ]
 
 { #category : #adding }
-MoosePharoImporterTask >> addFromPackagesMatching: aBlock [
+FamixStPharoImporterTask >> addFromPackagesMatching: aBlock [
 
 	self packageOrganizer packages do: [:each |
 		 (aBlock value: each) ifTrue: [self addFromPackage: each]]
 ]
 
 { #category : #adding }
-MoosePharoImporterTask >> addFromPackagesNamed: aCollection [
+FamixStPharoImporterTask >> addFromPackagesNamed: aCollection [
 
 	aCollection do: [:each| self addFromPackageNamed: each]
 ]
 
 { #category : #running }
-MoosePharoImporterTask >> basicRun [
+FamixStPharoImporterTask >> basicRun [
 
 	| importerTask importer |
 	"importerTask applies an import filter definition (context) on a set of classes (allClasses) and yields elements"
-	importerTask := MooseImportClassesTask new.
+	importerTask := FamixStImportClassesTask new.
 	importerTask factory: self factory.
 	importerTask importingContext: importingContext.
 	importerTask addAll: self classes.
@@ -79,30 +79,30 @@ MoosePharoImporterTask >> basicRun [
 ]
 
 { #category : #'protected hooks' }
-MoosePharoImporterTask >> candidateClass [
+FamixStPharoImporterTask >> candidateClass [
 
 	^ candidateClass ifNil: [ candidateClass := CandidateListOperator ]
 ]
 
 { #category : #'protected hooks' }
-MoosePharoImporterTask >> candidateClass: anObject [
+FamixStPharoImporterTask >> candidateClass: anObject [
 	"Normally you should not invoke such method. Use run and doNotRunCandidateOperator instead"
 	
 	candidateClass := anObject
 ]
 
 { #category : #accessing }
-MoosePharoImporterTask >> classExtensions [ 
+FamixStPharoImporterTask >> classExtensions [ 
 	^classExtensions 
 ]
 
 { #category : #accessing }
-MoosePharoImporterTask >> classes [
+FamixStPharoImporterTask >> classes [
 	^classes
 ]
 
 { #category : #initialization }
-MoosePharoImporterTask >> defaultImportingContext [
+FamixStPharoImporterTask >> defaultImportingContext [
 	"does not import stub methods by default because it can create a lot of methods"
 	| context |
 	context := super defaultImportingContext.
@@ -111,24 +111,24 @@ MoosePharoImporterTask >> defaultImportingContext [
 ]
 
 { #category : #accessing }
-MoosePharoImporterTask >> description [
+FamixStPharoImporterTask >> description [
 
 	^ 'Importing <1p> packages from Smalltalk' expandMacrosWith: self packages size
 ]
 
 { #category : #setting }
-MoosePharoImporterTask >> doNotRunCandidateOperator [
+FamixStPharoImporterTask >> doNotRunCandidateOperator [
 
 	candidateOperator := false
 ]
 
 { #category : #accessing }
-MoosePharoImporterTask >> factory [
+FamixStPharoImporterTask >> factory [
 	^ super factory ifNil: [ factory := self model factory ]
 ]
 
 { #category : #initialization }
-MoosePharoImporterTask >> initialize [
+FamixStPharoImporterTask >> initialize [
 
 	super initialize.
 	candidateOperator := true.
@@ -139,25 +139,25 @@ MoosePharoImporterTask >> initialize [
 ]
 
 { #category : #accessing }
-MoosePharoImporterTask >> length [ 
+FamixStPharoImporterTask >> length [ 
 	 
 	^0	"dummy value since we are a task holder"
 ]
 
 { #category : #accessing }
-MoosePharoImporterTask >> model [ 
+FamixStPharoImporterTask >> model [ 
 	 
 	^model ifNil: [model := MooseModel new name: self modelName; yourself]
 ]
 
 { #category : #accessing }
-MoosePharoImporterTask >> model: mooseModel [ 
+FamixStPharoImporterTask >> model: mooseModel [ 
 	 
 	model := mooseModel
 ]
 
 { #category : #accessing }
-MoosePharoImporterTask >> modelName [
+FamixStPharoImporterTask >> modelName [
 
 	^'<1s> package<2#:s>' 
 		expandMacrosWith: self packagesString 
@@ -165,12 +165,12 @@ MoosePharoImporterTask >> modelName [
 ]
 
 { #category : #accessing }
-MoosePharoImporterTask >> packages [
+FamixStPharoImporterTask >> packages [
 	^packages
 ]
 
 { #category : #accessing }
-MoosePharoImporterTask >> packagesString [ 
+FamixStPharoImporterTask >> packagesString [ 
 	 
 	| stream | 
 	stream := String new writeStream. 
@@ -184,32 +184,32 @@ MoosePharoImporterTask >> packagesString [
 ]
 
 { #category : #setting }
-MoosePharoImporterTask >> runCandidateOperator [
+FamixStPharoImporterTask >> runCandidateOperator [
 
 	candidateOperator := true
 ]
 
 { #category : #running }
-MoosePharoImporterTask >> runWithProgress [
+FamixStPharoImporterTask >> runWithProgress [
 
 	self withProgress.
 	self run.
 ]
 
 { #category : #running }
-MoosePharoImporterTask >> updateModelName [ 
+FamixStPharoImporterTask >> updateModelName [ 
 	 
 	self model name: self modelName
 ]
 
 { #category : #running }
-MoosePharoImporterTask >> withProgress [
+FamixStPharoImporterTask >> withProgress [
 
 	runSelector := #runWithProgress
 ]
 
 { #category : #running }
-MoosePharoImporterTask >> withoutProgress [
+FamixStPharoImporterTask >> withoutProgress [
 
 	runSelector := #run
 ]

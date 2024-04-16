@@ -14,7 +14,7 @@ FamixStepwiseImporterTest >> defaultTimeLimit [
 
 { #category : #'instance creation' }
 FamixStepwiseImporterTest >> newImportClassesTask [
-	^ MooseImportClassesTask new
+	^ FamixStImportClassesTask new
 		factory: FamixStModel factory;
 		yourself
 ]
@@ -24,7 +24,7 @@ FamixStepwiseImporterTest >> testCheckFormalParameterIsCreated [
 
 	| mseFormalParameter model |
 	model := FamixStModel new.
-	MoosePharoImporterTask new
+	FamixStPharoImporterTask new
 		importingContext: (MooseImportingContext new
 				 importImplicitVariable;
 				 importAccess;
@@ -43,7 +43,7 @@ FamixStepwiseImporterTest >> testCheckSelfIsCreated [
 
 	| model mseSelf |
 	model := FamixStModel new.
-	MoosePharoImporterTask new
+	FamixStPharoImporterTask new
 		importingContext: (MooseImportingContext new
 				 importImplicitVariable;
 				 importAccess;
@@ -151,7 +151,7 @@ FamixStepwiseImporterTest >> testImportLANPackage [
 
 	| model class package |
 	model := FamixStModel new.
-	MoosePharoImporterTask new
+	FamixStPharoImporterTask new
 		doNotRunCandidateOperator;
 		importingContext: (MooseImportingContext new
 				 importClass;
@@ -224,7 +224,7 @@ FamixStepwiseImporterTest >> testImportNamespace [
 
 	| model nap |
 	model := FamixStModel new.
-	MoosePharoImporterTask new
+	FamixStPharoImporterTask new
 		doNotRunCandidateOperator;
 		importingContext: (MooseImportingContext new
 				 importNamespace;

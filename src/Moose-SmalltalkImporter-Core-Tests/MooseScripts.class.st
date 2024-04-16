@@ -15,7 +15,7 @@ MooseScripts class >> createLightModelForLAN [
 	| model |
 	model := FamixStModel new.
 	model name: 'lightLAN'.
-	MoosePharoImporterTask new
+	FamixStPharoImporterTask new
 		importingContext: (MooseImportingContext new
 				 importClass;
 				 importMethod;
@@ -43,7 +43,7 @@ MooseScripts class >> createLightModelForMorphic [
 	| model |
 	model := FamixStModel new.
 	model name: 'lightMorphic'.
-	MoosePharoImporterTask new
+	FamixStPharoImporterTask new
 		importingContext: (MooseImportingContext new
 				 importClass;
 				 importMethod;
@@ -73,7 +73,7 @@ MooseScripts class >> createLightModelForNetwork [
 	| model |
 	model := FamixStModel new.
 	model name: 'lightNetwork'.
-	MoosePharoImporterTask new
+	FamixStPharoImporterTask new
 		importingContext: (MooseImportingContext new
 				 importClass;
 				 importMethod;
@@ -102,7 +102,7 @@ MooseScripts class >> createLightModelForPharo [
 	| model |
 	model := FamixStModel new.
 	model name: 'lightPharo'.
-	MoosePharoImporterTask new
+	FamixStPharoImporterTask new
 		importingContext: (MooseImportingContext new
 				 importClass;
 				 importMethod;
@@ -128,7 +128,7 @@ MooseScripts class >> createMediumModelForNetwork [
 	| model importer |
 	model := FamixStModel new.
 	model name: 'mediumNetwork'.
-	importer := MoosePharoImporterTask new.
+	importer := FamixStPharoImporterTask new.
 	importer importingContext mergeClassAndMetaclass.
 	importer doNotRunCandidateOperator.
 	importer model: model; addFromPackagesNamed: (self packageNamesFor: 'Network*'); runWithProgress.
@@ -148,7 +148,7 @@ MooseScripts class >> createModelForMorphic [
 	| model importer |
 	model := FamixStModel new.
 	model name: 'Morphic'.
-	importer := MoosePharoImporterTask new.
+	importer := FamixStPharoImporterTask new.
 	importer importingContext mergeClassAndMetaclass.
 	importer runCandidateOperator.
 	importer model: model; addFromPackagesNamed: (self packageNamesFor: 'Morphic*'); runWithProgress.
@@ -171,7 +171,7 @@ MooseScripts class >> createModelForNetwork [
 	| model importer |
 	model := FamixStModel new.
 	model name: 'Network'.
-	importer := MoosePharoImporterTask new.
+	importer := FamixStPharoImporterTask new.
 	importer importingContext mergeClassAndMetaclass.
 	importer runCandidateOperator.
 	importer model: model; addFromPackagesNamed: (self packageNamesFor: 'Network*') ; runWithProgress.
@@ -185,7 +185,7 @@ MooseScripts class >> createModelForPharo [
 	| model importer |
 	model := FamixStModel new.
 	model name: 'Pharo'.
-	importer := MoosePharoImporterTask new.
+	importer := FamixStPharoImporterTask new.
 	importer importingContext mergeClassAndMetaclass.
 	importer runCandidateOperator.
 	importer model: model; addFromPackagesNamed: self pharoPackageNames; runWithProgress.
@@ -198,7 +198,7 @@ MooseScripts class >> createModelNamed: modelName with: aCollectionOfPackageName
 	| model importer |
 	model := FamixStModel new.
 	model name: modelName.
-	importer := MoosePharoImporterTask new.
+	importer := FamixStPharoImporterTask new.
 	importer importingContext mergeClassAndMetaclass.
 	importer runCandidateOperator.
 	importer model: model; addFromPackagesNamed: aCollectionOfPackageNames; runWithProgress.

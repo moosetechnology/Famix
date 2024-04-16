@@ -8,7 +8,7 @@ a CandidateListOperator compute a list of possible type for a FamixInvocation's 
 Class {
 	#name : #CandidateListOperator,
 	#superclass : #AbstractCandidateListOperator,
-	#category : #'Moose-SmalltalkImporter'
+	#category : #'Moose-SmalltalkImporter-Operators'
 }
 
 { #category : #running }

@@ -6,7 +6,7 @@ Class {
 
 { #category : #private }
 SmalltalkMethodVisitor >> CIVString [
-	^ SmalltalkImporter CIVString
+	^ FamixStImporter CIVString
 ]
 
 { #category : #private }
