@@ -3,7 +3,9 @@ This class specifies that the Smalltalk classes are identified using packages
 "
 Class {
 	#name : #FamixStPharoImporterTask,
-	#superclass : #FamixStAbstractImporter,
+	#superclass : #MooseTask,
+	#traits : 'FamixStTImportUtils',
+	#classTraits : 'FamixStTImportUtils classTrait',
 	#instVars : [
 		'packages',
 		'classExtensions',
@@ -119,7 +121,8 @@ FamixStPharoImporterTask >> doNotRunCandidateOperator [
 
 { #category : #accessing }
 FamixStPharoImporterTask >> factory [
-	^ super factory ifNil: [ factory := self model factory ]
+
+	^ factory ifNil: [ factory := self model factory ]
 ]
 
 { #category : #initialization }

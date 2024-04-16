@@ -4,7 +4,9 @@ I'm mainly invoked by the MooseImportClassesTask
 "
 Class {
 	#name : #FamixStImporter,
-	#superclass : #FamixStAbstractImporter,
+	#superclass : #Object,
+	#traits : 'FamixStTImportUtils',
+	#classTraits : 'FamixStTImportUtils classTrait',
 	#instVars : [
 		'methods',
 		'namespaces',

@@ -11,7 +11,9 @@ is trigged by the MooseCompositeImporterTask and implemented by InstallElementsO
 "
 Class {
 	#name : #FamixStImportClassesTask,
-	#superclass : #FamixStAbstractImporter,
+	#superclass : #MooseTask,
+	#traits : 'FamixStTImportUtils',
+	#classTraits : 'FamixStTImportUtils classTrait',
 	#instVars : [
 		'classExtensions'
 	],
