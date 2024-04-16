@@ -4,7 +4,7 @@ I'm mainly invoked by the MooseImportClassesTask
 "
 Class {
 	#name : #SmalltalkImporter,
-	#superclass : #MooseAbstractImporter,
+	#superclass : #FamixStAbstractImporter,
 	#instVars : [
 		'methods',
 		'classes',

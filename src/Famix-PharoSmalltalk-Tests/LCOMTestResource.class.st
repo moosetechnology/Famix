@@ -9,8 +9,8 @@ Class {
 
 { #category : #setup }
 LCOMTestResource >> importModel [
+
 	MoosePharoImporterTask new
-		importerClass: SmalltalkImporter;
 		model: model;
 		addFromPackageNamed: #'Moose-TestResources-LCOM';
 		run

@@ -9,8 +9,8 @@ Class {
 
 { #category : #setup }
 KGBForMetricsTestResource >> importModel [
+
 	MoosePharoImporterTask new
-		importerClass: SmalltalkImporter;
 		model: model;
 		addFromPackageNamed: #'Moose-TestResources-KGB-P1FullReferencer';
 		addFromPackageNamed: #'Moose-TestResources-KGB-P2InteractedReferencerReferee';

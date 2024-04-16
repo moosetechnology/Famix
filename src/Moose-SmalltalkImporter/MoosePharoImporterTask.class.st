@@ -1,12 +1,5 @@
 "
-This class specifies that the Smalltalk classes are identified using packages.
-
-
-
-Implementation notes.
-
-	Should check packageFrom: because it may be useless and has to be fixed anyway
-	packageFrom: and namesString do not have a sender. -> get rid of them
+This class specifies that the Smalltalk classes are identified using packages
 "
 Class {
 	#name : #MoosePharoImporterTask,
@@ -66,37 +59,18 @@ MoosePharoImporterTask >> addFromPackagesNamed: aCollection [
 	aCollection do: [:each| self addFromPackageNamed: each]
 ]
 
-{ #category : #accessing }
-MoosePharoImporterTask >> allClassExtensions [ 
-	^classExtensions 
-]
-
-{ #category : #accessing }
-MoosePharoImporterTask >> allClasses [ 
-	^classes
-]
-
-{ #category : #enumerating }
-MoosePharoImporterTask >> allClassesDo: aBlock [
-	classes do: aBlock
-]
-
-{ #category : #enumerating }
-MoosePharoImporterTask >> allPackagesDo: aBlock [
-	packages do: aBlock
-]
-
 { #category : #running }
 MoosePharoImporterTask >> basicRun [
+
 	| importerTask importer |
 	"importerTask applies an import filter definition (context) on a set of classes (allClasses) and yields elements"
-	importerTask := MooseImportClassesTask new importerClass: importerClass.
+	importerTask := MooseImportClassesTask new.
 	importerTask factory: self factory.
 	importerTask importingContext: importingContext.
-	importerTask addAll: self allClasses.
-	importerTask addAllExtensions: self allClassExtensions.
+	importerTask addAll: self classes.
+	importerTask addAllExtensions: self classExtensions.
 	importer := importerTask runSelector: runSelector.
-	"InstallElementsOperator populates a Moose model with (unary) elements" 
+	"InstallElementsOperator populates a Moose model with (unary) elements"
 	(InstallElementsOperator with: importer on: self model) runSelector: runSelector.
 	"CandidateListOperator populates a Moose model with (binary) element relations like: methodA invokes methodB"
 	candidateOperator ifTrue: [ (self candidateClass runOn: self model importer: importer) runSelector: runSelector ].
@@ -106,8 +80,8 @@ MoosePharoImporterTask >> basicRun [
 
 { #category : #'protected hooks' }
 MoosePharoImporterTask >> candidateClass [
-	candidateClass ifNil: [ candidateClass := CandidateListOperator ].
-	^ candidateClass
+
+	^ candidateClass ifNil: [ candidateClass := CandidateListOperator ]
 ]
 
 { #category : #'protected hooks' }
@@ -115,6 +89,11 @@ MoosePharoImporterTask >> candidateClass: anObject [
 	"Normally you should not invoke such method. Use run and doNotRunCandidateOperator instead"
 	
 	candidateClass := anObject
+]
+
+{ #category : #accessing }
+MoosePharoImporterTask >> classExtensions [ 
+	^classExtensions 
 ]
 
 { #category : #accessing }
@@ -134,9 +113,7 @@ MoosePharoImporterTask >> defaultImportingContext [
 { #category : #accessing }
 MoosePharoImporterTask >> description [
 
-	^'Importing <1p> packages from Smalltalk' 
-		expandMacrosWith: self packages size
-
+	^ 'Importing <1p> packages from Smalltalk' expandMacrosWith: self packages size
 ]
 
 { #category : #setting }

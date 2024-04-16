@@ -3,7 +3,7 @@ I'm the root for the new importer.
 This way my subclasses share error logging and importerContext
 "
 Class {
-	#name : #MooseAbstractImporter,
+	#name : #FamixStAbstractImporter,
 	#superclass : #MooseTask,
 	#instVars : [
 		'importingContext'
@@ -12,33 +12,33 @@ Class {
 }
 
 { #category : #public }
-MooseAbstractImporter class >> run [
+FamixStAbstractImporter class >> run [
 	^ self new run
 ]
 
 { #category : #accessing }
-MooseAbstractImporter >> defaultImportingContext [
+FamixStAbstractImporter >> defaultImportingContext [
 	^ MooseImportingContext new importMaximum
 ]
 
 { #category : #accessing }
-MooseAbstractImporter >> importingContext [
+FamixStAbstractImporter >> importingContext [
 	^ importingContext
 ]
 
 { #category : #accessing }
-MooseAbstractImporter >> importingContext: anObject [
+FamixStAbstractImporter >> importingContext: anObject [
 	importingContext := anObject
 ]
 
 { #category : #initialization }
-MooseAbstractImporter >> initialize [
+FamixStAbstractImporter >> initialize [
 	super initialize.
 	importingContext := self defaultImportingContext
 ]
 
 { #category : #'Moose deprecated' }
-MooseAbstractImporter >> logFileSuffix [ 
+FamixStAbstractImporter >> logFileSuffix [ 
 	 
 	^'.log'
 ]

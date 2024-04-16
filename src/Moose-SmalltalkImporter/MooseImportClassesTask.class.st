@@ -45,13 +45,13 @@ MooseImportClassesTask >> addClassExtension: aClassExtension [
 
 { #category : #running }
 MooseImportClassesTask >> basicRun [
+
 	| importer |
-	importer := importerClass new importingContext: importingContext.
+	importer := SmalltalkImporter new importingContext: importingContext.
 	importer factory: self factory.
-	self classes
-		do: [ :class | 
-			importer importClass: class.
-			self increment ].
+	self classes do: [ :class |
+		importer importClass: class.
+		self increment ].
 	self classExtensions do: [ :ext | importer importClassExtension: ext ].
 	^ importer
 ]

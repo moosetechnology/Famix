@@ -12,13 +12,13 @@ Class {
 
 { #category : #running }
 ImportStubMethodSpecialTest >> setUp [
+
 	| importingTask |
 	super setUp.
 	importingTask := MoosePharoImporterTask new
-		importerClass: SmalltalkImporter;
-		model: FamixStModel new;
-		addFromPackageNamed: #'Moose-TestResources-LAN';
-		yourself.
+		                 model: FamixStModel new;
+		                 addFromPackageNamed: #'Moose-TestResources-LAN';
+		                 yourself.
 	importingTask importingContext importSmalltalkStubMethod.
 	importingTask run.
 	model := importingTask model
