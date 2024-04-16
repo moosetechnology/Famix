@@ -9,8 +9,8 @@ Class {
 
 { #category : #setup }
 PackageBlueprintTestResource >> importModel [
-	MoosePharoImporterTask new
-		importerClass: SmalltalkImporter;
+
+	FamixStPharoImporterTask new
 		model: model;
 		addFromPackageNamed: #'Moose-TestResources-PackageBlueprint-P1';
 		addFromPackageNamed: #'Moose-TestResources-PackageBlueprint-P2';

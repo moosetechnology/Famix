@@ -10,80 +10,80 @@ is trigged by the MooseCompositeImporterTask and implemented by InstallElementsO
 
 "
 Class {
-	#name : #MooseImportClassesTask,
-	#superclass : #MooseImportingTask,
+	#name : #FamixStImportClassesTask,
+	#superclass : #FamixStAbstractImporter,
 	#instVars : [
 		'classes',
 		'classExtensions'
 	],
-	#category : #'Moose-SmalltalkImporter'
+	#category : #'Moose-SmalltalkImporter-Importers'
 }
 
 { #category : #adding }
-MooseImportClassesTask >> addAll: classCollection [ 
+FamixStImportClassesTask >> addAll: classCollection [ 
 	 
 	^classCollection do: [:each | self addClass: each]
 ]
 
 { #category : #adding }
-MooseImportClassesTask >> addAllExtensions: extCollection [ 
+FamixStImportClassesTask >> addAllExtensions: extCollection [ 
 	 
 	^extCollection do: [:each | self addClassExtension: each]
 ]
 
 { #category : #adding }
-MooseImportClassesTask >> addClass: aClass [ 
+FamixStImportClassesTask >> addClass: aClass [ 
 	 
 	^classes add: aClass
 ]
 
 { #category : #adding }
-MooseImportClassesTask >> addClassExtension: aClassExtension [ 
+FamixStImportClassesTask >> addClassExtension: aClassExtension [ 
 	 
 	^classExtensions add: aClassExtension 
 ]
 
 { #category : #running }
-MooseImportClassesTask >> basicRun [
+FamixStImportClassesTask >> basicRun [
+
 	| importer |
-	importer := importerClass new importingContext: importingContext.
+	importer := FamixStImporter new importingContext: importingContext.
 	importer factory: self factory.
-	self classes
-		do: [ :class | 
-			importer importClass: class.
-			self increment ].
+	self classes do: [ :class |
+		importer importClass: class.
+		self increment ].
 	self classExtensions do: [ :ext | importer importClassExtension: ext ].
 	^ importer
 ]
 
 { #category : #accessing }
-MooseImportClassesTask >> classExtensions [ 
+FamixStImportClassesTask >> classExtensions [ 
 	 
 	^classExtensions 
 ]
 
 { #category : #accessing }
-MooseImportClassesTask >> classes [ 
+FamixStImportClassesTask >> classes [ 
 	 
 	^classes
 ]
 
 { #category : #accessing }
-MooseImportClassesTask >> description [ 
+FamixStImportClassesTask >> description [ 
 	 
 	^'Importing <1p> classes from Smalltalk' 
 		expandMacrosWith: self classes size
 ]
 
 { #category : #initialization }
-MooseImportClassesTask >> initialize [
+FamixStImportClassesTask >> initialize [
 	super initialize. 
 	classes := IdentitySet new. 
 	classExtensions := IdentitySet new.
 ]
 
 { #category : #accessing }
-MooseImportClassesTask >> length [ 
+FamixStImportClassesTask >> length [ 
 	 
 	^self classes size
 ]

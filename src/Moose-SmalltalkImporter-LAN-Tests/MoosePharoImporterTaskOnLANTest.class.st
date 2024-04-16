@@ -14,20 +14,20 @@ MoosePharoImporterTaskOnLANTest >> numberOfClassesIn: packageNames [
 { #category : #'testing collecting classes' }
 MoosePharoImporterTaskOnLANTest >> testFromPackageNamed [
 
-	self assert: ((MoosePharoImporterTask new addFromPackageNamed: #'Moose-TestResources-LAN') allClasses includes: LANNode)
+	self assert: ((FamixStPharoImporterTask new addFromPackageNamed: #'Moose-TestResources-LAN') classes includes: LANNode)
 ]
 
 { #category : #'testing collecting classes' }
 MoosePharoImporterTaskOnLANTest >> testFromPackagesMatching [
 
-	self assert: ((MoosePharoImporterTask new addFromPackagesMatching: [ :each | each name = #'Moose-TestResources-LAN' ]) allClasses includes: LANNode)
+	self assert: ((FamixStPharoImporterTask new addFromPackagesMatching: [ :each | each name = #'Moose-TestResources-LAN' ]) classes includes: LANNode)
 ]
 
 { #category : #'testing collecting classes' }
 MoosePharoImporterTaskOnLANTest >> testFromPackagesMatching2 [
 
 	self
-		assert: (MoosePharoImporterTask new addFromPackagesMatching: [ :each | 'Moose-TestResources-LA*' match: each name asString ]) allClasses size
+		assert: (FamixStPharoImporterTask new addFromPackagesMatching: [ :each | 'Moose-TestResources-LA*' match: each name asString ]) classes size
 		equals: (self numberOfClassesIn: #( 'Moose-TestResources-LA*' ))
 ]
 
@@ -35,7 +35,7 @@ MoosePharoImporterTaskOnLANTest >> testFromPackagesMatching2 [
 MoosePharoImporterTaskOnLANTest >> testImportClassUsingAddCategory [
 
 	| model |
-	MoosePharoImporterTask new
+	FamixStPharoImporterTask new
 		model: (model := FamixStModel new);
 		importingContext: MooseImportingContext new importClass;
 		addFromPackage: (self packageOrganizer packageNamed: #'Moose-TestResources-LAN');
@@ -47,7 +47,7 @@ MoosePharoImporterTaskOnLANTest >> testImportClassUsingAddCategory [
 MoosePharoImporterTaskOnLANTest >> testImportClassUsingAddClass [
 
 	| model |
-	MoosePharoImporterTask new
+	FamixStPharoImporterTask new
 		model: (model := FamixStModel new);
 		importingContext: MooseImportingContext new importClass;
 		addClass: LANNode;
@@ -59,7 +59,7 @@ MoosePharoImporterTaskOnLANTest >> testImportClassUsingAddClass [
 MoosePharoImporterTaskOnLANTest >> testImportClassUsingAddPackage [
 
 	| model |
-	MoosePharoImporterTask new
+	FamixStPharoImporterTask new
 		model: (model := FamixStModel new);
 		importingContext: MooseImportingContext new importClass;
 		addFromPackage: (self packageOrganizer packageNamed: #'Moose-TestResources-LAN');
@@ -71,7 +71,7 @@ MoosePharoImporterTaskOnLANTest >> testImportClassUsingAddPackage [
 MoosePharoImporterTaskOnLANTest >> testImportClassUsingAddPackageNamed [
 
 	| model |
-	MoosePharoImporterTask new
+	FamixStPharoImporterTask new
 		model: (model := FamixStModel new);
 		importingContext: MooseImportingContext new importClass;
 		addFromPackageNamed: 'Moose-TestResources-LAN';

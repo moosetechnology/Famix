@@ -10,12 +10,10 @@ LANSmalltalkAccessTest >> testWhenDistinguishingClassAndMetaclassAccessWorks [
 
 	| model |
 	model := FamixStModel new.
-	MoosePharoImporterTask new
-		importerClass: SmalltalkImporter;
+	FamixStPharoImporterTask new
 		model: model;
 		addFromPackageNamed: #'Moose-TestResources-LAN';
-		run;
-		yourself.
+		run.
 	self assert: (model entityNamed: LANNode mooseName) smalltalkClass equals: LANNode.
 	self assert: (model entityNamed: LANNode class mooseName) smalltalkClass equals: LANNode class.
 	self assert: (model entityNamed: LANNode mooseName) isInstanceSide.
@@ -34,8 +32,7 @@ LANSmalltalkAccessTest >> testWhenMergingClassAndMetaclassAccessWorks [
 
 	| model importer |
 	model := FamixStModel new.
-	importer := MoosePharoImporterTask new.
-	importer importerClass: SmalltalkImporter.
+	importer := FamixStPharoImporterTask new.
 	importer importingContext mergeClassAndMetaclass.
 	importer model: model.
 	importer addFromPackageNamed: #'Moose-TestResources-LAN'.

@@ -14,7 +14,7 @@ FamixStepwiseImporterTest >> defaultTimeLimit [
 
 { #category : #'instance creation' }
 FamixStepwiseImporterTest >> newImportClassesTask [
-	^ MooseImportClassesTask new
+	^ FamixStImportClassesTask new
 		factory: FamixStModel factory;
 		yourself
 ]
@@ -24,8 +24,7 @@ FamixStepwiseImporterTest >> testCheckFormalParameterIsCreated [
 
 	| mseFormalParameter model |
 	model := FamixStModel new.
-	MoosePharoImporterTask new
-		importerClass: SmalltalkImporter;
+	FamixStPharoImporterTask new
 		importingContext: (MooseImportingContext new
 				 importImplicitVariable;
 				 importAccess;
@@ -44,8 +43,7 @@ FamixStepwiseImporterTest >> testCheckSelfIsCreated [
 
 	| model mseSelf |
 	model := FamixStModel new.
-	MoosePharoImporterTask new
-		importerClass: SmalltalkImporter;
+	FamixStPharoImporterTask new
 		importingContext: (MooseImportingContext new
 				 importImplicitVariable;
 				 importAccess;
@@ -64,7 +62,6 @@ FamixStepwiseImporterTest >> testImportAttribute [
 
 	| importTask importer nodeClass |
 	importTask := self newImportClassesTask.
-	importTask importerClass: SmalltalkImporter.
 	importTask importingContext: (MooseImportingContext new
 			 importClass;
 			 importAttribute;
@@ -83,7 +80,6 @@ FamixStepwiseImporterTest >> testImportAttributeAccesses [
 
 	| importTask importer nodeClass attr |
 	importTask := self newImportClassesTask.
-	importTask importerClass: SmalltalkImporter.
 	importTask importingContext: (MooseImportingContext new
 			 importClass;
 			 importAttribute;
@@ -104,7 +100,6 @@ FamixStepwiseImporterTest >> testImportClassAndAttributeAndMergeItsMetaclass [
 
 	| importTask importer nodeClass |
 	importTask := self newImportClassesTask.
-	importTask importerClass: SmalltalkImporter.
 	importTask importingContext: (MooseImportingContext new
 			 importClass;
 			 importAttribute;
@@ -121,7 +116,6 @@ FamixStepwiseImporterTest >> testImportClassAndInheritance [
 
 	| importTask importer importedClasses |
 	importTask := self newImportClassesTask.
-	importTask importerClass: SmalltalkImporter.
 	importTask importingContext: (MooseImportingContext new
 			 importClass;
 			 importInheritance;
@@ -140,7 +134,6 @@ FamixStepwiseImporterTest >> testImportClassAndMethodAndMergeItsMetaclass [
 
 	| importTask importer importedMethods |
 	importTask := self newImportClassesTask.
-	importTask importerClass: SmalltalkImporter.
 	importTask importingContext: (MooseImportingContext new
 			 importClass;
 			 importMethod;
@@ -158,8 +151,7 @@ FamixStepwiseImporterTest >> testImportLANPackage [
 
 	| model class package |
 	model := FamixStModel new.
-	MoosePharoImporterTask new
-		importerClass: SmalltalkImporter;
+	FamixStPharoImporterTask new
 		doNotRunCandidateOperator;
 		importingContext: (MooseImportingContext new
 				 importClass;
@@ -180,7 +172,6 @@ FamixStepwiseImporterTest >> testImportMergingMetaclassDoesNotDuplicateComment [
 
 	| importTask importer comments |
 	importTask := self newImportClassesTask.
-	importTask importerClass: SmalltalkImporter.
 	importTask importingContext: (MooseImportingContext new
 			 importClass;
 			 importComment;
@@ -189,13 +180,10 @@ FamixStepwiseImporterTest >> testImportMergingMetaclassDoesNotDuplicateComment [
 	importTask addClass: LANInterface.
 	importer := importTask run.
 
-	comments := importer allElements select: [ :e | 
-		            e class = FamixStComment ].
+	comments := importer allElements select: [ :e | e class = FamixStComment ].
 
 	self assert: comments size equals: 1.
-	self
-		assert: comments anyOne commentedEntity
-		equals: (importer classes at: LANInterface)
+	self assert: comments anyOne commentedEntity equals: (importer classes at: LANInterface)
 ]
 
 { #category : #tests }
@@ -212,7 +200,6 @@ FamixStepwiseImporterTest >> testImportMethodBody [
 		           yourself.
 	self assert: context shouldImportMethodBody.
 	importTask importingContext: context.
-	importTask importerClass: SmalltalkImporter.
 	self assert: context shouldImportMethod.
 	importTask addClass: LANNode.
 	importer := importTask run.
@@ -237,8 +224,7 @@ FamixStepwiseImporterTest >> testImportNamespace [
 
 	| model nap |
 	model := FamixStModel new.
-	MoosePharoImporterTask new
-		importerClass: SmalltalkImporter;
+	FamixStPharoImporterTask new
 		doNotRunCandidateOperator;
 		importingContext: (MooseImportingContext new
 				 importNamespace;
@@ -258,7 +244,6 @@ FamixStepwiseImporterTest >> testImportOneClassAndItsMetaclass [
 
 	| importTask importer importedClasses |
 	importTask := self newImportClassesTask.
-	importTask importerClass: SmalltalkImporter.
 	importTask importingContext: MooseImportingContext new importClass.
 	importTask addClass: LANNode.
 	self assert: importTask classes size equals: 1.
@@ -273,7 +258,6 @@ FamixStepwiseImporterTest >> testImportOneClassAndMergeItsMetaclass [
 
 	| importTask importer importedClasses |
 	importTask := self newImportClassesTask.
-	importTask importerClass: SmalltalkImporter.
 	importTask importingContext: (MooseImportingContext new
 			 importClass;
 			 mergeClassAndMetaclass;
@@ -283,8 +267,7 @@ FamixStepwiseImporterTest >> testImportOneClassAndMergeItsMetaclass [
 	importer := importTask run.
 	importedClasses := importer classes.
 	self assert: importedClasses values asSet size equals: 3.
-	self assert:
-		((importedClasses at: LANNode) usesFamixTrait: FamixTClass)
+	self assert: ((importedClasses at: LANNode) usesFamixTrait: FamixTClass)
 ]
 
 { #category : #tests }
@@ -292,7 +275,6 @@ FamixStepwiseImporterTest >> testImportOneClassAndMethodAndMergeItsMetaclass [
 
 	| importTask importer importedMethods |
 	importTask := self newImportClassesTask.
-	importTask importerClass: SmalltalkImporter.
 	importTask importingContext: (MooseImportingContext new
 			 importClass;
 			 importMethod;
@@ -310,7 +292,6 @@ FamixStepwiseImporterTest >> testImportOneClassAndOneAttributeAndMergeItsMetacla
 
 	| importTask importer nodeClass |
 	importTask := self newImportClassesTask.
-	importTask importerClass: SmalltalkImporter.
 	importTask importingContext: (MooseImportingContext new
 			 importClass;
 			 importAttribute;
@@ -327,7 +308,6 @@ FamixStepwiseImporterTest >> testImportWithoutMergingMetaclassDoesDuplicateComme
 
 	| importTask importer comments |
 	importTask := self newImportClassesTask.
-	importTask importerClass: SmalltalkImporter.
 	importTask importingContext: (MooseImportingContext new
 			 importClass;
 			 importComment;
@@ -336,13 +316,9 @@ FamixStepwiseImporterTest >> testImportWithoutMergingMetaclassDoesDuplicateComme
 	importTask addClass: LANInterface.
 	importer := importTask run.
 
-	comments := importer allElements select: [ :e | 
-		            e class = FamixStComment ].
+	comments := importer allElements select: [ :e | e class = FamixStComment ].
 	self assert: comments size equals: 2.
-	self
-		assertCollection:
-		(comments collect: [ :comment | comment commentedEntity ])
-		hasSameElements: { 
-				(importer classes at: LANInterface).
-				(importer classes at: LANInterface class) }
+	self assertCollection: (comments collect: [ :comment | comment commentedEntity ]) hasSameElements: {
+			(importer classes at: LANInterface).
+			(importer classes at: LANInterface class) }
 ]

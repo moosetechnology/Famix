@@ -5,7 +5,7 @@ Class {
 		'groups',
 		'importer'
 	],
-	#category : #'Moose-SmalltalkImporter'
+	#category : #'Moose-SmalltalkImporter-Operators'
 }
 
 { #category : #'as yet unclassified' }

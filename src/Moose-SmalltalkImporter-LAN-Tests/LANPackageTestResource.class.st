@@ -6,8 +6,8 @@ Class {
 
 { #category : #hook }
 LANPackageTestResource >> importModel [
-	MoosePharoImporterTask new
-		importerClass: SmalltalkImporter;
+
+	FamixStPharoImporterTask new
 		model: model;
 		addFromPackageNamed: #'Moose-TestResources-LAN';
 		run
