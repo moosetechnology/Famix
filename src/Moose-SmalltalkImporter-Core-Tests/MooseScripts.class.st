@@ -256,7 +256,6 @@ MooseScripts class >> packageNamesFor: aPrefixString withTestPackages: aBoolean 
 	"
 
 	| packages packageNames aTestPrefixString |
-	self packageOrganizer unregisterPackageNamed: aPrefixString.
 	packages := self packageOrganizer packages select: [ :each | aPrefixString match: each name ].
 	packageNames := packages collect: [ :pak | pak name ].
 	aBoolean ifFalse: [
