@@ -103,7 +103,7 @@ FamixStPharoImporterTask >> defaultImportingContext [
 
 	| context |
 	context := FamixStImporterContext new importMaximum.
-	context entityKindsToBeExtracted remove: context class importingSmalltalkStubMethod.
+	context entityKindsToBeExtracted remove: context class importingStubMethod.
 	^ context
 ]
 

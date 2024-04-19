@@ -56,7 +56,7 @@ FamixStImporterContext class >> defineEntityDependencies [
 				 with: self importingLocalVariable
 				 with: self importingAccess
 				 with: self importingArgument);
-		at: self importingSmalltalkStubMethod put: (Set with: self importingMethod with: self importingSmalltalkStubMethod)
+		at: self importingStubMethod put: (Set with: self importingMethod with: self importingStubMethod)
 ]
 
 { #category : #initialize }
@@ -150,7 +150,7 @@ FamixStImporterContext class >> importingPackage [
 ]
 
 { #category : #'basic representation' }
-FamixStImporterContext class >> importingSmalltalkStubMethod [
+FamixStImporterContext class >> importingStubMethod [
 	
 	^#StubMethod
 ]
@@ -312,10 +312,10 @@ FamixStImporterContext >> importPackage [
 ]
 
 { #category : #'importing-filters' }
-FamixStImporterContext >> importSmalltalkStubMethod [
+FamixStImporterContext >> importStubMethod [
 	"Kind of a hack to import stub-methods in smalltalk"
 
-	self entityKindsToBeExtracted addAll: (self allDependentsOf: self class importingSmalltalkStubMethod)
+	self entityKindsToBeExtracted addAll: (self allDependentsOf: self class importingStubMethod)
 ]
 
 { #category : #'import options' }
@@ -456,7 +456,7 @@ FamixStImporterContext >> shouldImportPackage [
 { #category : #'importing queries' }
 FamixStImporterContext >> shouldImportSmalltalkStubMethod [
 	
-	^self shouldImport: self class importingSmalltalkStubMethod
+	^self shouldImport: self class importingStubMethod
 ]
 
 { #category : #'importing queries' }
