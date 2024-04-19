@@ -19,7 +19,7 @@ ImportStubMethodSpecialTest >> setUp [
 		                 model: FamixStModel new;
 		                 addFromPackageNamed: #'Moose-TestResources-LAN';
 		                 yourself.
-	importingTask importingContext importSmalltalkStubMethod.
+	importingTask importingContext importStubMethod.
 	importingTask run.
 	model := importingTask model
 ]
