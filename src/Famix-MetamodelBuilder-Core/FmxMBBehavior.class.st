@@ -34,6 +34,14 @@ FmxMBBehavior >> <|-- anObject [
 ]
 
 { #category : #accessing }
+FmxMBBehavior >> addAllTransitiveTraitsIn: aCollection [
+
+	aCollection add: self.
+	self allLocalTraits do: [ :trait | trait addAllTransitiveTraitsIn: aCollection ].
+	^ aCollection
+]
+
+{ #category : #accessing }
 FmxMBBehavior >> addRelation: aRelation with: anotherClass [
 
 	self relations add: aRelation.
@@ -92,9 +100,8 @@ FmxMBBehavior >> allTraitNames [
 
 { #category : #accessing }
 FmxMBBehavior >> allTransitiveTraits [
-	^ (Set with: self)
-		addAll: (self allLocalTraits flatCollect: [ :trait | trait allTransitiveTraits ]);
-		yourself
+
+	^ self addAllTransitiveTraitsIn: Set new
 ]
 
 { #category : #converting }
