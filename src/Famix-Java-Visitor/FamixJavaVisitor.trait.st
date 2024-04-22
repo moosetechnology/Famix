@@ -55,6 +55,12 @@ FamixJavaVisitor >> visitComment: aFamixJavaComment [
 ]
 
 { #category : #visiting }
+FamixJavaVisitor >> visitConcretization: aFamixJavaConcretization [
+	<generated>
+	^ self visitEntity: aFamixJavaConcretization
+]
+
+{ #category : #visiting }
 FamixJavaVisitor >> visitContainerEntity: aFamixJavaContainerEntity [
 	<generated>
 	^ self visitNamedEntity: aFamixJavaContainerEntity
@@ -80,31 +86,25 @@ FamixJavaVisitor >> visitEnumValue: aFamixJavaEnumValue [
 { #category : #visiting }
 FamixJavaVisitor >> visitException: aFamixJavaException [
 	<generated>
-	^ self visitEntity: aFamixJavaException
+	^ self visitClass: aFamixJavaException
 ]
 
 { #category : #visiting }
-FamixJavaVisitor >> visitFile: aFamixJavaFile [
+FamixJavaVisitor >> visitImplementation: aFamixJavaImplementation [
 	<generated>
-	^ self visitNamedEntity: aFamixJavaFile
-]
-
-{ #category : #visiting }
-FamixJavaVisitor >> visitFolder: aFamixJavaFolder [
-	<generated>
-	^ self visitNamedEntity: aFamixJavaFolder
-]
-
-{ #category : #visiting }
-FamixJavaVisitor >> visitGlobalVariable: aFamixJavaGlobalVariable [
-	<generated>
-	^ self visitNamedEntity: aFamixJavaGlobalVariable
+	^ self visitEntity: aFamixJavaImplementation
 ]
 
 { #category : #visiting }
 FamixJavaVisitor >> visitImplicitVariable: aFamixJavaImplicitVariable [
 	<generated>
 	^ self visitNamedEntity: aFamixJavaImplicitVariable
+]
+
+{ #category : #visiting }
+FamixJavaVisitor >> visitImport: aFamixJavaImport [
+	<generated>
+	^ self visitEntity: aFamixJavaImport
 ]
 
 { #category : #visiting }
@@ -117,6 +117,12 @@ FamixJavaVisitor >> visitIndexedFileAnchor: aFamixJavaIndexedFileAnchor [
 FamixJavaVisitor >> visitInheritance: aFamixJavaInheritance [
 	<generated>
 	^ self visitEntity: aFamixJavaInheritance
+]
+
+{ #category : #visiting }
+FamixJavaVisitor >> visitInterface: aFamixJavaInterface [
+	<generated>
+	^ self visitType: aFamixJavaInterface
 ]
 
 { #category : #visiting }
@@ -150,12 +156,6 @@ FamixJavaVisitor >> visitNamedEntity: aFamixJavaNamedEntity [
 ]
 
 { #category : #visiting }
-FamixJavaVisitor >> visitNamespace: aFamixJavaNamespace [
-	<generated>
-	^ self visitContainerEntity: aFamixJavaNamespace
-]
-
-{ #category : #visiting }
 FamixJavaVisitor >> visitPackage: aFamixJavaPackage [
 	<generated>
 	^ self visitContainerEntity: aFamixJavaPackage
@@ -168,21 +168,33 @@ FamixJavaVisitor >> visitParameter: aFamixJavaParameter [
 ]
 
 { #category : #visiting }
+FamixJavaVisitor >> visitParameterConcretization: aFamixJavaParameterConcretization [
+	<generated>
+	^ self visitEntity: aFamixJavaParameterConcretization
+]
+
+{ #category : #visiting }
 FamixJavaVisitor >> visitParameterType: aFamixJavaParameterType [
 	<generated>
 	^ self visitType: aFamixJavaParameterType
 ]
 
 { #category : #visiting }
-FamixJavaVisitor >> visitParameterizableClass: aFamixJavaParameterizableClass [
+FamixJavaVisitor >> visitParametricClass: aFamixJavaParametricClass [
 	<generated>
-	^ self visitClass: aFamixJavaParameterizableClass
+	^ self visitClass: aFamixJavaParametricClass
 ]
 
 { #category : #visiting }
-FamixJavaVisitor >> visitParameterizedType: aFamixJavaParameterizedType [
+FamixJavaVisitor >> visitParametricInterface: aFamixJavaParametricInterface [
 	<generated>
-	^ self visitType: aFamixJavaParameterizedType
+	^ self visitInterface: aFamixJavaParametricInterface
+]
+
+{ #category : #visiting }
+FamixJavaVisitor >> visitParametricMethod: aFamixJavaParametricMethod [
+	<generated>
+	^ self visitMethod: aFamixJavaParametricMethod
 ]
 
 { #category : #visiting }
@@ -231,4 +243,10 @@ FamixJavaVisitor >> visitType: aFamixJavaType [
 FamixJavaVisitor >> visitUnknownVariable: aFamixJavaUnknownVariable [
 	<generated>
 	^ self visitNamedEntity: aFamixJavaUnknownVariable
+]
+
+{ #category : #visiting }
+FamixJavaVisitor >> visitWildcard: aFamixJavaWildcard [
+	<generated>
+	^ self visitType: aFamixJavaWildcard
 ]
