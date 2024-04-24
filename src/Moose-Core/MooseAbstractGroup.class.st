@@ -290,15 +290,21 @@ MooseAbstractGroup >> count: aBlock [
 ]
 
 { #category : #enumerating }
-MooseAbstractGroup >> detect: aBlock [ 
-	 
-	^self entities detect: aBlock
+MooseAbstractGroup >> detect: aBlock [
+
+	^ self entities detect: aBlock
 ]
 
 { #category : #enumerating }
-MooseAbstractGroup >> detect: aBlock ifNone: anotherBlock [ 
-	 
-	^self entities detect: aBlock ifNone: anotherBlock
+MooseAbstractGroup >> detect: aBlock ifFound: anotherBlock [
+
+	^ self entities detect: aBlock ifFound: anotherBlock
+]
+
+{ #category : #enumerating }
+MooseAbstractGroup >> detect: aBlock ifNone: anotherBlock [
+
+	^ self entities detect: aBlock ifNone: anotherBlock
 ]
 
 { #category : #enumerating }
