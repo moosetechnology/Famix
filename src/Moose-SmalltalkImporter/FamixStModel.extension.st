@@ -15,10 +15,10 @@ FamixStModel >> newModelAddingAll: classesAndPackages [
 		           collect: [ :famixPackage | famixPackage name asPackage ]
 		           as: Set.
 	request addAll: classesAndPackages.
-	request do: [ :packageOrClass |
-		packageOrClass isClass
-			ifTrue: [ task addClass: packageOrClass ]
-			ifFalse: [ task addFromPackage: packageOrClass ] ].
+	request do: [ :classOrPackage |
+		classOrPackage isClass
+			ifTrue: [ task addClass: classOrPackage ]
+			ifFalse: [ task addFromPackage: classOrPackage ] ].
 
 	task runWithProgress.
 	^ model "no install: not added to root and groups not cached"
