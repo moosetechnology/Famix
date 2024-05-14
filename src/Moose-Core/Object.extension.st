@@ -1,6 +1,15 @@
 Extension { #name : #Object }
 
 { #category : #'*Moose-Core' }
+Object >> allComplexPropertiesIn: aMetamodel [
+	"All complex properties described in the metamodel.
+	A complex property is a property whose type is not a primitive."
+
+	aMetamodel ifNil: [ ^ OrderedCollection new ].
+	^ aMetamodel descriptionOf: self class instanceSide ifPresent: #allComplexProperties ifAbsent: [ OrderedCollection new ]
+]
+
+{ #category : #'*Moose-Core' }
 Object >> allDeclaredPropertiesIn: aMetamodel [
 	"All properties described in the metamodel"
 
