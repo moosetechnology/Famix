@@ -78,6 +78,13 @@ FamixJavaEntity >> isException [
 ]
 
 { #category : #testing }
+FamixJavaEntity >> isFileAnchor [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
 FamixJavaEntity >> isImplicitVariable [
 
 	<generated>
