@@ -115,8 +115,10 @@ MooseModelTest >> testDifferenceWithRealCollection [
 ]
 
 { #category : #tests }
-MooseModelTest >> testExportMetamodelTo [
-	self denyEmpty: (String streamContents: [ :s | group exportMetamodelTo: s ])
+MooseModelTest >> testExportMetamodelToMSEStream [
+
+	self denyEmpty:
+		(String streamContents: [ :s | group exportMetamodelToMSEStream: s ])
 ]
 
 { #category : #tests }
