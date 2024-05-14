@@ -75,7 +75,11 @@ FamixTAssociation classSide >> source: anEntity target: anotherEntity model: aMo
 FamixTAssociation >> allTargets [
 	"Since #target can return an entity or a collection, I ensure we always get a collection."
 
-	^ self target asCollection
+	| tempTarget |
+	tempTarget := self target.
+	^ tempTarget isCollection
+		  ifTrue: [ tempTarget ]
+		  ifFalse: [ OrderedCollection with: tempTarget ]
 ]
 
 { #category : #converting }
