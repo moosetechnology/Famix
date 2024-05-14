@@ -147,12 +147,6 @@ FamixTAssociation >> source: aSource [
 ]
 
 { #category : #accessing }
-FamixTAssociation >> sourceSelector [
-	^ (self mooseDescription allComplexProperties detect: #isSource)
-		implementingSelector
-]
-
-{ #category : #accessing }
 FamixTAssociation >> target [
 	^ self targetSelector value: self
 ]
@@ -160,10 +154,4 @@ FamixTAssociation >> target [
 { #category : #accessing }
 FamixTAssociation >> target: aTarget [
 	self perform: (self targetSelector , ':') with: aTarget
-]
-
-{ #category : #accessing }
-FamixTAssociation >> targetSelector [
-	^ (self mooseDescription allComplexProperties detect: #isTarget)
-		implementingSelector
 ]
