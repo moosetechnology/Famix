@@ -1622,6 +1622,7 @@ FamixGenerator >> defineTraits [
 
 	tFileAnchor := builder newTraitNamed: #TFileAnchor.
 	tFileAnchor comment: self commentForTFileAnchor.
+	tFileAnchor withTesting.
 
 	tFileNavigation := builder newTraitNamed: #TFileNavigation.
 	tFileNavigation comment: self commentForTFileNavigation.

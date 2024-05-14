@@ -131,6 +131,8 @@ FamixTFileAnchor >> isContiguousWith: anotherFileAnchor [
 
 { #category : #testing }
 FamixTFileAnchor >> isFileAnchor [
+
+	<generated>
 	^ true
 ]
 
