@@ -31,3 +31,10 @@ MooseMSEImporterTestNamedEntity class >> isAbstract [
 	<generated>
 	^ self == MooseMSEImporterTestNamedEntity
 ]
+
+{ #category : #testing }
+MooseMSEImporterTestNamedEntity >> isNamedEntity [
+
+	<generated>
+	^ true
+]

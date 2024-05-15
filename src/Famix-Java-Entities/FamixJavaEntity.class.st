@@ -127,6 +127,13 @@ FamixJavaEntity >> isMethod [
 ]
 
 { #category : #testing }
+FamixJavaEntity >> isNamedEntity [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
 FamixJavaEntity >> isPackage [
 
 	<generated>

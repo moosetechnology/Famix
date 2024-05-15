@@ -71,6 +71,13 @@ MooseMSEImporterTestEntity >> isMethod [
 ]
 
 { #category : #testing }
+MooseMSEImporterTestEntity >> isNamedEntity [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
 MooseMSEImporterTestEntity >> isNamespace [
 
 	<generated>

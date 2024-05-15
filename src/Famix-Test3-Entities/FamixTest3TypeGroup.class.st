@@ -70,6 +70,13 @@ FamixTest3TypeGroup >> isMethod [
 ]
 
 { #category : #testing }
+FamixTest3TypeGroup >> isNamedEntity [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
 FamixTest3TypeGroup >> isPackage [
 
 	<generated>

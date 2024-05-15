@@ -32,6 +32,7 @@ FamixBasicInfrastructureGenerator >> defineClasses [
 	sourcedEntity := builder newAbstractClassNamed: #SourcedEntity.
 	comment := builder newClassNamed: #Comment.
 	namedEntity := builder newAbstractClassNamed: #NamedEntity.
+	namedEntity withTesting.
 	sourceTextAnchor := builder newClassNamed: #SourceTextAnchor
 ]
 

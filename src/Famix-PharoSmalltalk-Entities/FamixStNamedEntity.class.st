@@ -41,6 +41,13 @@ FamixStNamedEntity class >> isAbstract [
 	^ self == FamixStNamedEntity
 ]
 
+{ #category : #testing }
+FamixStNamedEntity >> isNamedEntity [
+
+	<generated>
+	^ true
+]
+
 { #category : #'Famix-Extensions' }
 FamixStNamedEntity >> stubFormattedName [
 	 ^ self isStub 

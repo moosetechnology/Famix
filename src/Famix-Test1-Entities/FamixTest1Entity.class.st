@@ -71,6 +71,13 @@ FamixTest1Entity >> isMethod [
 ]
 
 { #category : #testing }
+FamixTest1Entity >> isNamedEntity [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
 FamixTest1Entity >> isQueryable [
 
 	<generated>
