@@ -42,6 +42,13 @@ FamixJavaNamedEntity class >> isAbstract [
 	^ self == FamixJavaNamedEntity
 ]
 
+{ #category : #testing }
+FamixJavaNamedEntity >> isNamedEntity [
+
+	<generated>
+	^ true
+]
+
 { #category : #'Famix-Extensions' }
 FamixJavaNamedEntity >> stubFormattedName [
 	 ^ self isStub 

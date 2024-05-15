@@ -106,6 +106,13 @@ FamixStEntity >> isMethod [
 ]
 
 { #category : #testing }
+FamixStEntity >> isNamedEntity [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
 FamixStEntity >> isNamespace [
 
 	<generated>

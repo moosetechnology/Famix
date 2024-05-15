@@ -31,3 +31,10 @@ FamixTest3NamedEntity class >> isAbstract [
 	<generated>
 	^ self == FamixTest3NamedEntity
 ]
+
+{ #category : #testing }
+FamixTest3NamedEntity >> isNamedEntity [
+
+	<generated>
+	^ true
+]
