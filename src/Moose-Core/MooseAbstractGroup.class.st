@@ -302,6 +302,12 @@ MooseAbstractGroup >> detect: aBlock ifFound: anotherBlock [
 ]
 
 { #category : #enumerating }
+MooseAbstractGroup >> detect: aBlock ifFound: foundBlock ifNone: noneBlock [
+
+	^ self entities detect: aBlock ifFound: foundBlock ifNone: noneBlock
+]
+
+{ #category : #enumerating }
 MooseAbstractGroup >> detect: aBlock ifNone: anotherBlock [
 
 	^ self entities detect: aBlock ifNone: anotherBlock
