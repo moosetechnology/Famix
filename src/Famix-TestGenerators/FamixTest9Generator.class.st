@@ -20,6 +20,13 @@ FamixTest9Generator class >> prefix [
 	^ #'FamixTest9'
 ]
 
+{ #category : #testing }
+FamixTest9Generator class >> shouldBeUpToDateInLatestMoose [
+
+	"This generator is used dynamically by the tests"
+	^ false
+]
+
 { #category : #definition }
 FamixTest9Generator >> defineClasses [
 
