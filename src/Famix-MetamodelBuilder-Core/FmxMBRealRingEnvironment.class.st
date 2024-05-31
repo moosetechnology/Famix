@@ -9,8 +9,10 @@ Class {
 
 { #category : #accessing }
 FmxMBRealRingEnvironment >> apply [
+
 	self collectChangesToApply.
-	changesToApply do: #apply
+	changesToApply select: [ :e | e isRemoval ] thenDo: #apply.
+	changesToApply select: [ :e | e isRemoval not ] thenDo: #apply
 ]
 
 { #category : #testing }
@@ -41,25 +43,48 @@ FmxMBRealRingEnvironment >> compile: aSource in: aClass classified: aProtocol pa
 ]
 
 { #category : #installing }
-FmxMBRealRingEnvironment >> recordAdoptionOfClassDefinitionFrom: realClass to: anRGClass [
+FmxMBRealRingEnvironment >> recordAdoptionOfClassDefinitionFrom: currentClass to: anRGClassModel [
 
-	| customSlots customSlotNames slotDefinitions |
-	(realClass needToAdaptTo: anRGClass) ifFalse: [ ^ self ].
+	| currentCustomSlots currentCustomSlotNames modelSlotDefinitions currentGeneratedSlots modelGeneratedSlots slotRemovals |
+	(currentClass needToAdaptTo: anRGClassModel) ifFalse: [ ^ self ].
 
-	customSlots := realClass localSlots copyWithoutAll: realClass generatedSlots.
-	customSlotNames := customSlots collect: #name.
-	slotDefinitions := ((anRGClass slots reject: [ :each | customSlotNames includes: each name ]) collect: #definitionString) asOrderedCollection.
-	slotDefinitions addAll: (customSlots collect: #definitionString).
-	slotDefinitions := slotDefinitions sorted.
+	"We are updating a class installed in the system (currentClass) to a new representation defined in the model (anRGClass).
+	This has to be done in order to allow updating the class at run time"
+
+	currentGeneratedSlots := currentClass generatedSlots.
+	currentCustomSlots := currentClass localSlots copyWithoutAll:
+		                      currentGeneratedSlots.
+	currentCustomSlotNames := currentCustomSlots collect: #name.
+
+	modelGeneratedSlots := anRGClassModel slots reject: [ :each |
+		                       currentCustomSlotNames includes: each name ].
+
+	modelSlotDefinitions := (modelGeneratedSlots collect:
+		                         #definitionString) asOrderedCollection.
+	modelSlotDefinitions addAll:
+		(currentCustomSlots collect: #definitionString).
+	modelSlotDefinitions := modelSlotDefinitions sorted.
+
+	slotRemovals := currentGeneratedSlots reject: [ :e |
+		                modelGeneratedSlots anySatisfy: [ :current |
+			                current name = e name ] ].
+
+	slotRemovals ifNotEmpty: [
+		changesToApply add: (FmxSlotRemovals slots: slotRemovals) ].
 
 	self
-		recordClassAdditionFromClass: anRGClass
-		traits: (self traitStringFrom: realClass to: anRGClass)
-		slots: '{' , (slotDefinitions joinUsing: '. ') , '}'
-		classSlots: '{' , ((realClass class localSlots collect: #definitionString) joinUsing: ' . ') , '}'
-		sharedVariables: '{' , ((realClass classVarNames collect: [ :each | '#' , each ]) joinUsing: ' ') , '}'
-		package: realClass package name
-		tag: realClass packageTag name
+		recordClassAdditionFromClass: anRGClassModel
+		traits: (self traitStringFrom: currentClass to: anRGClassModel)
+		slots: '{' , (modelSlotDefinitions joinUsing: '. ') , '}'
+		classSlots:
+			'{' , ((currentClass class localSlots collect: #definitionString)
+				 joinUsing: ' . ') , '}'
+		sharedVariables:
+			'{'
+			, ((currentClass classVarNames collect: [ :each | '#' , each ])
+					 joinUsing: ' ') , '}'
+		package: currentClass package name
+		tag: currentClass packageTag name
 ]
 
 { #category : #installing }
