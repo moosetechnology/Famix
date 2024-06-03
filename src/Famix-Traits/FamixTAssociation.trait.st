@@ -93,6 +93,14 @@ FamixTAssociation >> asAssociationTo: anEntity [
 ]
 
 { #category : #printing }
+FamixTAssociation >> displayFullStringOn: aStream [
+
+	self source displayFullStringOn: aStream.
+	aStream nextPutAll: ' -> '.
+	self target displayFullStringOn: aStream
+]
+
+{ #category : #printing }
 FamixTAssociation >> displayStringOn: aStream [
 
 	self source displayStringOn: aStream.
