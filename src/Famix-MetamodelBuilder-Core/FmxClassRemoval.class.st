@@ -47,6 +47,12 @@ FmxClassRemoval >> classToRemove: anObject [
 	class := anObject
 ]
 
+{ #category : #testing }
+FmxClassRemoval >> isRemoval [
+
+	^ true
+]
+
 { #category : #printing }
 FmxClassRemoval >> printOn: aStream [
 

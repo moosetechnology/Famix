@@ -28,3 +28,9 @@ FmxCodeChange class >> isAbstract [
 FmxCodeChange >> apply [
 	self subclassResponsibility
 ]
+
+{ #category : #testing }
+FmxCodeChange >> isRemoval [
+
+	^ false
+]
