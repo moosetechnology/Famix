@@ -393,6 +393,15 @@ FamixReferenceModelImporterTest >> testConstantMethodAnnotation [
 ]
 
 { #category : #tests }
+FamixReferenceModelImporterTest >> testDisplayFullString [
+	"Smoke test for #displayFullString"
+
+	self shouldnt: [ self model entities do: [ :entity | entity displayFullString ] ] raise: Error.
+
+	self assertEmpty: ((self model entities select: [ :entity | entity isAssociation ]) select: [ :asso | asso displayFullString = #noname ])
+]
+
+{ #category : #tests }
 FamixReferenceModelImporterTest >> testExtendedClasses [
 	| subRootModelTwo p1 p2 subRootModelThree extensionMethod |
 	p1 := self model entityNamed: #'Moose-TestResources-Reference-PackageOne'.

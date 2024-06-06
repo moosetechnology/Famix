@@ -253,6 +253,13 @@ MooseAbstractGroup >> collectAsSet: aBlock [
 	^ self entities collectAsSet: aBlock
 ]
 
+{ #category : #enumerating }
+MooseAbstractGroup >> collectWithIndex: aBlock [
+
+	^ self entities
+		collectWithIndex:  aBlock
+]
+
 { #category : #accessing }
 MooseAbstractGroup >> commonSuperclass [ 
 	^ self entityStorage commonSuperclass
@@ -302,9 +309,26 @@ MooseAbstractGroup >> detect: aBlock ifFound: anotherBlock [
 ]
 
 { #category : #enumerating }
+MooseAbstractGroup >> detect: aBlock ifFound: foundBlock ifNone: noneBlock [
+
+	^ self entities 
+		detect:  aBlock
+		ifFound: foundBlock
+		ifNone:  noneBlock
+]
+
+{ #category : #enumerating }
 MooseAbstractGroup >> detect: aBlock ifNone: anotherBlock [
 
 	^ self entities detect: aBlock ifNone: anotherBlock
+]
+
+{ #category : #enumerating }
+MooseAbstractGroup >> detect: aBlock ifOne: anotherBlock [
+
+	^ self entities
+		detect: aBlock
+		ifOne:  anotherBlock
 ]
 
 { #category : #enumerating }
