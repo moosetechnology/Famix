@@ -289,6 +289,18 @@ MooseObject >> description: text [
 ]
 
 { #category : #printing }
+MooseObject >> displayFullString [
+	"Return a name corresponding to the moose name but also for the associations instead of returning #noname"
+
+	^ String streamContents: [ :stream | self displayFullStringOn: stream ]
+]
+
+{ #category : #printing }
+MooseObject >> displayFullStringOn: aStream [
+	self mooseNameOn: aStream
+]
+
+{ #category : #printing }
 MooseObject >> displayStringOn: aStream [
 	self mooseNameOn: aStream
 ]

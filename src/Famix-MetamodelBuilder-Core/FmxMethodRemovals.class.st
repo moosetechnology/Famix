@@ -41,6 +41,12 @@ FmxMethodRemovals >> apply [
 	self selectors do: [ :selector | class removeSelector: selector ]
 ]
 
+{ #category : #testing }
+FmxMethodRemovals >> isRemoval [
+
+	^ true
+]
+
 { #category : #accessing }
 FmxMethodRemovals >> selectors [
 	^ selectors

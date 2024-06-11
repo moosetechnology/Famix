@@ -253,6 +253,13 @@ MooseAbstractGroup >> collectAsSet: aBlock [
 	^ self entities collectAsSet: aBlock
 ]
 
+{ #category : #enumerating }
+MooseAbstractGroup >> collectWithIndex: aBlock [
+
+	^ self entities
+		collectWithIndex:  aBlock
+]
+
 { #category : #accessing }
 MooseAbstractGroup >> commonSuperclass [ 
 	^ self entityStorage commonSuperclass
