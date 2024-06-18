@@ -4,7 +4,7 @@ Importer for MSE files
 Class {
 	#name : #FamixMSEFileImporter,
 	#superclass : #FamixAbstractFileImporter,
-	#category : #'Moose-Importers'
+	#category : #'Moose-Importers-FromPersistedFiles'
 }
 
 { #category : #executing }

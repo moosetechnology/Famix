@@ -13,7 +13,7 @@ Class {
 		'model',
 		'inputStream'
 	],
-	#category : #'Moose-Importers'
+	#category : #'Moose-Importers-FromPersistedFiles'
 }
 
 { #category : #testing }
