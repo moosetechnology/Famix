@@ -47,13 +47,16 @@ FamixStAttribute class >> annotation [
 	^ self
 ]
 
-{ #category : #'Famix-Implementation' }
+{ #category : #properties }
 FamixStAttribute >> beSharedVariable [
 
-	self propertyNamed: #sharedVariable put: true 
+	^ self attributeAt: #isSharedVariable put: true
 ]
 
-{ #category : #'Famix-Implementation' }
+{ #category : #testing }
 FamixStAttribute >> isSharedVariable [
-	^ self propertyNamed: #sharedVariable ifNil: [ false ]
+
+	<FMProperty: #isSharedVariable type: #Boolean>
+	<FMComment: 'True if the attribute is a shared variable'>
+	^ self attributeAt: #isSharedVariable ifAbsent: [ false ]
 ]
