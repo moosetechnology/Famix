@@ -24,12 +24,13 @@ Class {
 	#name : #FamixJavaFoldersImporter,
 	#superclass : #Object,
 	#instVars : [
-		'folders'
+		'folders',
+		'models'
 	],
 	#classVars : [
 		'VerveineJPath'
 	],
-	#category : #'Moose-Importers'
+	#category : #'Moose-Importers-ParseFolders'
 }
 
 { #category : #accessing }
@@ -39,13 +40,23 @@ FamixJavaFoldersImporter class >> defaultVerveineJDirectory [
 ]
 
 { #category : #actions }
-FamixJavaFoldersImporter class >> importFolder: aFileReference [
+FamixJavaFoldersImporter class >> importAndInstallFolder: aFileReference [
 
-	^ self importFolders: { aFileReference }
+	^ self importAndInstallFolders: { aFileReference }
+]
+
+{ #category : #actions }
+FamixJavaFoldersImporter class >> importAndInstallFolders: aCollection [
+	"I'll parse, import in a moose model and install the models  for each folder in the collection."
+
+	^ self new
+		  folders: aCollection;
+		  importAndInstall
 ]
 
 { #category : #actions }
 FamixJavaFoldersImporter class >> importFolders: aCollection [
+	"I'll parse and import in a moose model for each folder in the collection."
 
 	^ self new
 		  folders: aCollection;
@@ -124,7 +135,19 @@ FamixJavaFoldersImporter >> import [
 
 	self generateJsonOfProjects.
 
-	self importModels
+	self importModels.
+
+	^ models
+]
+
+{ #category : #actions }
+FamixJavaFoldersImporter >> importAndInstall [
+
+	self import.
+
+	self installModels.
+
+	^ models
 ]
 
 { #category : #actions }
@@ -143,10 +166,22 @@ FamixJavaFoldersImporter >> importModels [
 				inputFile: json;
 				run.
 
-			model
-				name: folder basename;
-				install ]
+			model name: folder basename.
+			models add: model ]
 		displayingProgress: [ :folder | folder basename ]
+]
+
+{ #category : #initialization }
+FamixJavaFoldersImporter >> initialize [
+
+	super initialize.
+	models := OrderedCollection new
+]
+
+{ #category : #actions }
+FamixJavaFoldersImporter >> installModels [
+
+	models do: [ :model | model install ]
 ]
 
 { #category : #actions }
