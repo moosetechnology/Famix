@@ -337,8 +337,38 @@ FamixMetamodelGenerator >> mooseModelName [
 ]
 
 { #category : #definition }
+FamixMetamodelGenerator >> newAbstractClassNamed: aClassName [
+
+	^ builder newAbstractClassNamed: aClassName
+]
+
+{ #category : #definition }
 FamixMetamodelGenerator >> newBuilder [
 	^ FamixMetamodelBuilder forGenerator: self
+]
+
+{ #category : #definition }
+FamixMetamodelGenerator >> newClassNamed: aClassName [
+
+	^ builder newClassNamed: aClassName
+]
+
+{ #category : #definition }
+FamixMetamodelGenerator >> newClassNamed: aClassName comment: aComment [
+
+	^ builder newClassNamed: aClassName comment: aComment
+]
+
+{ #category : #definition }
+FamixMetamodelGenerator >> newTraitNamed: aTraitName [
+
+	^ builder newTraitNamed: aTraitName
+]
+
+{ #category : #definition }
+FamixMetamodelGenerator >> newTraitNamed: aClassName comment: aString [
+
+	^ builder newTraitNamed: aClassName comment: aString
 ]
 
 { #category : #definition }
