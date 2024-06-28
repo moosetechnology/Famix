@@ -343,6 +343,12 @@ FamixMetamodelGenerator >> newAbstractClassNamed: aClassName [
 ]
 
 { #category : #definition }
+FamixMetamodelGenerator >> newAbstractClassNamed: aClassName comment: aComment [
+
+	^ builder newAbstractClassNamed: aClassName comment: aComment
+]
+
+{ #category : #definition }
 FamixMetamodelGenerator >> newBuilder [
 	^ FamixMetamodelBuilder forGenerator: self
 ]
