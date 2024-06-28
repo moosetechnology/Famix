@@ -6,7 +6,7 @@ It provides an API for creating entities and adding them to the model.
 "
 Trait {
 	#name : #FamixTest4TEntityCreator,
-	#category : #'Famix-Test4-Entities-Traits'
+	#category : #'Famix-Test4-Entities-Model'
 }
 
 { #category : #meta }

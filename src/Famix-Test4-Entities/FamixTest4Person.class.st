@@ -8,12 +8,21 @@
 | `books` | `FamixTest4Person` | `person` | `FamixTest4Book` | |
 
 
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+|---|
+| `firstName` | `String` | nil | |
+| `lastName` | `String` | nil | |
 
 "
 Class {
 	#name : #FamixTest4Person,
 	#superclass : #FamixTest4Entity,
 	#instVars : [
+		'#firstName => FMProperty',
+		'#lastName => FMProperty',
 		'#books => FMMany type: #FamixTest4Book opposite: #person'
 	],
 	#category : #'Famix-Test4-Entities-Entities'
@@ -34,6 +43,13 @@ FamixTest4Person class >> isAbstract [
 
 	<generated>
 	^ self == FamixTest4Person
+]
+
+{ #category : #comparing }
+FamixTest4Person >> = aFamixTest4Person [
+
+	<generated>
+	^ aFamixTest4Person firstName = self firstName and: [ aFamixTest4Person lastName = self lastName] 
 ]
 
 { #category : #adding }
@@ -63,4 +79,39 @@ FamixTest4Person >> booksGroup [
 	<generated>
 	<navigation: 'Books'>
 	^ MooseSpecializedGroup withAll: self books asSet
+]
+
+{ #category : #accessing }
+FamixTest4Person >> firstName [
+
+	<FMProperty: #firstName type: #String>
+	<generated>
+	^ firstName
+]
+
+{ #category : #accessing }
+FamixTest4Person >> firstName: anObject [
+	<generated>
+	firstName := anObject
+]
+
+{ #category : #comparing }
+FamixTest4Person >> hash [
+
+	<generated>
+	^ self firstName hash bitXor: self lastName hash 
+]
+
+{ #category : #accessing }
+FamixTest4Person >> lastName [
+
+	<FMProperty: #lastName type: #String>
+	<generated>
+	^ lastName
+]
+
+{ #category : #accessing }
+FamixTest4Person >> lastName: anObject [
+	<generated>
+	lastName := anObject
 ]
