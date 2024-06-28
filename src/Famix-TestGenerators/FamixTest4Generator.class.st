@@ -76,7 +76,8 @@ FamixTest4Generator >> defineProperties [
 
 	person property: #firstName type: #String.
 	person property: #lastName type: #String.
-	person withEqualityCheckOn: { #firstName. #lastName }.
+	person property: #age type: #Number.
+	person withEqualityCheckOn: { #firstName. #lastName. #age }.
 
 	book property: #id type: #Number.
 	book withEqualityCheckOn: { #id }

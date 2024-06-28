@@ -13,6 +13,7 @@
 
 | Name | Type | Default value | Comment |
 |---|
+| `age` | `Number` | nil | |
 | `firstName` | `String` | nil | |
 | `lastName` | `String` | nil | |
 
@@ -23,6 +24,7 @@ Class {
 	#instVars : [
 		'#firstName => FMProperty',
 		'#lastName => FMProperty',
+		'#age => FMProperty',
 		'#books => FMMany type: #FamixTest4Book opposite: #person'
 	],
 	#category : #'Famix-Test4-Entities-Entities'
@@ -49,13 +51,27 @@ FamixTest4Person class >> isAbstract [
 FamixTest4Person >> = aFamixTest4Person [
 
 	<generated>
-	^ aFamixTest4Person firstName = self firstName and: [ aFamixTest4Person lastName = self lastName] 
+	^ aFamixTest4Person firstName = self firstName and: [ aFamixTest4Person lastName = self lastName and: [ aFamixTest4Person age = self age] ] 
 ]
 
 { #category : #adding }
 FamixTest4Person >> addBook: anObject [
 	<generated>
 	^ self books add: anObject
+]
+
+{ #category : #accessing }
+FamixTest4Person >> age [
+
+	<FMProperty: #age type: #Number>
+	<generated>
+	^ age
+]
+
+{ #category : #accessing }
+FamixTest4Person >> age: anObject [
+	<generated>
+	age := anObject
 ]
 
 { #category : #accessing }
@@ -99,7 +115,7 @@ FamixTest4Person >> firstName: anObject [
 FamixTest4Person >> hash [
 
 	<generated>
-	^ self firstName hash bitXor: self lastName hash 
+	^ self firstName hash bitXor: self lastName hash bitXor: self age hash 
 ]
 
 { #category : #accessing }
