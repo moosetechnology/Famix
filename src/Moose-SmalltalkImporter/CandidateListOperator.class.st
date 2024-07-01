@@ -14,12 +14,13 @@ Class {
 { #category : #running }
 CandidateListOperator >> allCandidatesFor: invocation [
 
-	^ Array withAll: (groups at: invocation signature ifAbsent: [ 
+	^ Array withAll: (groups at: invocation signature ifAbsent: [
 			   | stubs |
-			   stubs := self importer ensureSmalltalkStubMethodsFor:
-				            invocation signature.
+			   stubs := self importer ensureSmalltalkStubMethodsFor: invocation signature.
 			   groups at: invocation signature put: stubs.
-			   stubs do: [ :each | model add: each ].
+			   stubs do: [ :each |
+				   model add: each.
+				   each allParents do: [ :parent | parent mooseModel = model ifFalse: [ model add: parent ] ] ].
 			   stubs ])
 ]
 

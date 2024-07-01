@@ -134,43 +134,43 @@ FamixJavaGenerator >> defineClasses [
 
 	super defineClasses.
 
-	access := builder newClassNamed: #Access.
-	annotationInstance := builder newClassNamed: #AnnotationInstance.
-	annotationInstanceAttribute := builder newClassNamed: #AnnotationInstanceAttribute.
-	annotationType := builder newClassNamed: #AnnotationType.
-	annotationTypeAttribute := builder newClassNamed: #AnnotationTypeAttribute.
-	attribute := builder newClassNamed: #Attribute.
-	class := builder newClassNamed: #Class.
-	interface := builder newClassNamed: #Interface.
+	access := self newClassNamed: #Access.
+	annotationInstance := self newClassNamed: #AnnotationInstance.
+	annotationInstanceAttribute := self newClassNamed: #AnnotationInstanceAttribute.
+	annotationType := self newClassNamed: #AnnotationType.
+	annotationTypeAttribute := self newClassNamed: #AnnotationTypeAttribute.
+	attribute := self newClassNamed: #Attribute.
+	class := self newClassNamed: #Class.
+	interface := self newClassNamed: #Interface.
 	interface withTesting.
-	implementation := builder newClassNamed: #Implementation.
-	containerEntity := builder newAbstractClassNamed: #ContainerEntity.
-	enum := builder newClassNamed: #Enum.
-	enumValue := builder newClassNamed: #EnumValue.
-	exception := builder newClassNamed: #Exception.
-	implicitVariable := builder newClassNamed: #ImplicitVariable.
-	import := builder newClassNamed: #Import.
-	indexedFileAnchor := builder newClassNamed: #IndexedFileAnchor.
-	inheritance := builder newClassNamed: #Inheritance.
-	invocation := builder newClassNamed: #Invocation.
-	localVariable := builder newClassNamed: #LocalVariable.
-	method := builder newClassNamed: #Method.
-	package := builder newClassNamed: #Package.
-	parameter := builder newClassNamed: #Parameter.
-	parameterType := builder newClassNamed: #ParameterType.
-	primitiveType := builder newClassNamed: #PrimitiveType.
+	implementation := self newClassNamed: #Implementation.
+	containerEntity := self newAbstractClassNamed: #ContainerEntity.
+	enum := self newClassNamed: #Enum.
+	enumValue := self newClassNamed: #EnumValue.
+	exception := self newClassNamed: #Exception.
+	implicitVariable := self newClassNamed: #ImplicitVariable.
+	import := self newClassNamed: #Import.
+	indexedFileAnchor := self newClassNamed: #IndexedFileAnchor.
+	inheritance := self newClassNamed: #Inheritance.
+	invocation := self newClassNamed: #Invocation.
+	localVariable := self newClassNamed: #LocalVariable.
+	method := self newClassNamed: #Method.
+	package := self newClassNamed: #Package.
+	parameter := self newClassNamed: #Parameter.
+	parameterType := self newClassNamed: #ParameterType.
+	primitiveType := self newClassNamed: #PrimitiveType.
 	primitiveType withTesting.
-	reference := builder newClassNamed: #Reference.
-	type := builder newClassNamed: #Type.
-	unknownVariable := builder newClassNamed: #UnknownVariable.
+	reference := self newClassNamed: #Reference.
+	type := self newClassNamed: #Type.
+	unknownVariable := self newClassNamed: #UnknownVariable.
 
-	parametricClass := builder newClassNamed: #ParametricClass.
-	parametricMethod := builder newClassNamed: #ParametricMethod.
-	parametricInterface := builder newClassNamed: #ParametricInterface.
-	parameterConcretization := builder newClassNamed: #ParameterConcretization.
+	parametricClass := self newClassNamed: #ParametricClass.
+	parametricMethod := self newClassNamed: #ParametricMethod.
+	parametricInterface := self newClassNamed: #ParametricInterface.
+	parameterConcretization := self newClassNamed: #ParameterConcretization.
 
-	concretization := builder newClassNamed: #Concretization.
-	wildcard := builder newClassNamed: #Wildcard.
+	concretization := self newClassNamed: #Concretization.
+	wildcard := self newClassNamed: #Wildcard.
 ]
 
 { #category : #definition }
@@ -392,22 +392,22 @@ FamixJavaGenerator >> defineRelations [
 FamixJavaGenerator >> defineTraits [
 	super defineTraits.
 
-	tCanBeVolatile := builder newTraitNamed: #TCanBeVolatile.
+	tCanBeVolatile := self newTraitNamed: #TCanBeVolatile.
 	tCanBeVolatile comment: self commentForTCanBeVolatile.
 
-	tCanBeTransient := builder newTraitNamed: #TCanBeTransient.
+	tCanBeTransient := self newTraitNamed: #TCanBeTransient.
 	tCanBeTransient comment: self commentForTCanBeTransient.
 
-	tCanBeSynchronized := builder newTraitNamed: #TCanBeSynchronized.
+	tCanBeSynchronized := self newTraitNamed: #TCanBeSynchronized.
 	tCanBeSynchronized comment: self commentForTCanBeSynchronized.
 
-	tWithInterfaces := builder newTraitNamed: #TWithInterfaces.
+	tWithInterfaces := self newTraitNamed: #TWithInterfaces.
 	tWithInterfaces comment: self commentForTWithInterfaces.
 
-	tJavaClassMetrics := builder newTraitNamed: #TClassMetrics.
+	tJavaClassMetrics := self newTraitNamed: #TClassMetrics.
 
-	tBounded := builder newTraitNamed: #TBounded comment: self commentForTBounded.
-	tBound := builder newTraitNamed: #TBound comment: self commentForTBound.
+	tBounded := self newTraitNamed: #TBounded comment: self commentForTBounded.
+	tBound := self newTraitNamed: #TBound comment: self commentForTBound.
 ]
 
 { #category : #definition }

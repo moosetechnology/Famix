@@ -8,7 +8,7 @@ Class {
 		'mooseModel',
 		'factory'
 	],
-	#category : #'Moose-Importers-Importers'
+	#category : #'Moose-Importers-FileSystem'
 }
 
 { #category : #accessing }
