@@ -1,5 +1,13 @@
 "
 Used by Roassal (`RSUMLClassBuilder`) to get informations about classes to put in the visualization
+
+""Formating"" is in #initialize
+
+The other methods or mainly helpers
+
+API:
+- aggregations -- returns all aggregations in the model
+- compositions -- used to represent class-use-trait relationships
 "
 Class {
 	#name : #FamixUMLRoassalDescriptor,
@@ -28,6 +36,16 @@ FamixUMLRoassalDescriptor >> aggregations [
 			(self umlClassNamed: aggreg source) -> (self umlClassNamed: aggreg target) ])
 ]
 
+{ #category : #accessing }
+FamixUMLRoassalDescriptor >> compositions [
+
+	^(umlModel
+		select: [ :umlEntity | umlEntity class = FamixUMLUse ]
+		thenCollect: [ :use |
+			(self umlClassNamed: use target) -> (self umlClassNamed: use source) ])
+
+]
+
 { #category : #initialization }
 FamixUMLRoassalDescriptor >> initialize [ 
 
@@ -39,7 +57,7 @@ FamixUMLRoassalDescriptor >> initialize [
 		instVars: [ :famixUMLClass | famixUMLClass properties sorted: #name ascending ] ;
 		methods: [ :famixUMLClass | #() ] ;
 		instVarSelector: #name ;
-		methodsLimit: SmallInteger maxVal ;
+		"methodSelector: #name ;"
 		isAbstract: [ :famixUMLClass | famixUMLClass isStub ]
 ]
 
