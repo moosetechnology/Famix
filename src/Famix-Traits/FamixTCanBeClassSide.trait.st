@@ -1,3 +1,12 @@
+"
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+|---|
+| `isClassSide` | `Boolean` | false | Entity can be declared class side i.e. static|
+
+"
 Trait {
 	#name : #FamixTCanBeClassSide,
 	#instVars : [

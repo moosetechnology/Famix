@@ -1,3 +1,15 @@
+"
+## Relations
+======================
+
+### Incoming dependencies
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `outgoingTraitUsages` | `FamixTTraitUser` | `user` | `FamixTTraitUsage` | |
+
+
+
+"
 Trait {
 	#name : #FamixTTraitUser,
 	#instVars : [

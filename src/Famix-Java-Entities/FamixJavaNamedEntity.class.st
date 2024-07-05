@@ -1,3 +1,22 @@
+"
+## Relations
+======================
+
+### Other
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `annotationInstances` | `FamixTWithAnnotationInstances` | `annotatedEntity` | `FamixTAnnotationInstance` | This property corresponds to the set of annotations associated to the entity|
+| `receivingInvocations` | `FamixTInvocationsReceiver` | `receiver` | `FamixTInvocation` | List of invocations performed on this entity (considered as the receiver)|
+
+
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+|---|
+| `name` | `String` | nil | Basic name of the entity, not full reference.|
+
+"
 Class {
 	#name : #FamixJavaNamedEntity,
 	#superclass : #FamixJavaSourcedEntity,
@@ -21,6 +40,13 @@ FamixJavaNamedEntity class >> isAbstract [
 
 	<generated>
 	^ self == FamixJavaNamedEntity
+]
+
+{ #category : #testing }
+FamixJavaNamedEntity >> isNamedEntity [
+
+	<generated>
+	^ true
 ]
 
 { #category : #'Famix-Extensions' }

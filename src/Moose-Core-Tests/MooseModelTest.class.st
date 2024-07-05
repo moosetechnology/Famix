@@ -20,9 +20,10 @@ MooseModelTest >> testAdd [
 
 { #category : #tests }
 MooseModelTest >> testAddAnnouncement [
+
 	| entity announcedEntity |
 	entity := MooseEntity new.
-	group announcer when: MooseEntityAdded do: [ :a | announcedEntity := a entity ].
+	group announcer when: MooseEntityAdded do: [ :a | announcedEntity := a entity ] for: self.
 
 	group add: entity.
 	self assert: announcedEntity identicalTo: entity
@@ -57,10 +58,11 @@ MooseModelTest >> testAsMSEString [
 
 { #category : #tests }
 MooseModelTest >> testBookmarkAsRaisesAnnouncement [
+
 	| entity1 announcedEntity |
 	entity1 := MooseEntity new.
 	group add: entity1.
-	group announcer when: MooseEntityAdded do: [ :a | announcedEntity := a entity ].
+	group announcer when: MooseEntityAdded do: [ :a | announcedEntity := a entity ] for: self.
 
 	entity1 bookmarkAs: 'one'.
 	self assert: announcedEntity isNotNil
@@ -113,8 +115,10 @@ MooseModelTest >> testDifferenceWithRealCollection [
 ]
 
 { #category : #tests }
-MooseModelTest >> testExportMetamodelTo [
-	self denyEmpty: (String streamContents: [ :s | group exportMetamodelTo: s ])
+MooseModelTest >> testExportMetamodelToMSEStream [
+
+	self denyEmpty:
+		(String streamContents: [ :s | group exportMetamodelToMSEStream: s ])
 ]
 
 { #category : #tests }
@@ -162,9 +166,10 @@ MooseModelTest >> testRemoveAllEntity [
 
 { #category : #tests }
 MooseModelTest >> testRemoveAnnouncement [
+
 	| entity announcedEntity |
 	entity := MooseEntity new.
-	group announcer when: MooseEntityRemoved do: [ :a | announcedEntity := a entity ].
+	group announcer when: MooseEntityRemoved do: [ :a | announcedEntity := a entity ] for: self.
 	group add: entity.
 	self assert: announcedEntity isNil.
 	group remove: entity.
@@ -193,13 +198,14 @@ MooseModelTest >> testRemoveFromModel [
 
 { #category : #tests }
 MooseModelTest >> testRemoveModelNamedFromRoot [
-	"self debug: #testRemoveModelNamedFromRoot"
 
 	| group2 parentModel res |
 	group name: 'zork'.
 	group2 := self actualClass new.
 	group2 name: 'baz'.
-	parentModel := self actualClass withAll: {group . group2}.
+	parentModel := self actualClass withAll: {
+			               group.
+			               group2 }.
 	self assert: group mooseModel identicalTo: parentModel.
 	self assert: group2 mooseModel identicalTo: parentModel.
 	self assert: parentModel size equals: 2.
@@ -212,8 +218,9 @@ MooseModelTest >> testRemoveModelNamedFromRoot [
 
 { #category : #tests }
 MooseModelTest >> testRenamedAnnouncement [
+
 	| oldName |
-	group announcer when: MooseEntityRenamed do: [ :a | oldName := a oldName ].
+	group announcer when: MooseEntityRenamed do: [ :a | oldName := a oldName ] for: self.
 	group name: #somename.
 	self assert: oldName equals: #noname.
 	group name: #anothername.

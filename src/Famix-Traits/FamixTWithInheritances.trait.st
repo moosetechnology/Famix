@@ -1,3 +1,20 @@
+"
+## Relations
+======================
+
+### Outgoing dependencies
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `superInheritances` | `FamixTWithInheritances` | `subclass` | `FamixTInheritance` | Superinheritance relationships, i.e. known superclasses of this type.|
+
+### Incoming dependencies
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `subInheritances` | `FamixTWithInheritances` | `superclass` | `FamixTInheritance` | Subinheritance relationships, i.e. known subclasses of this type.|
+
+
+
+"
 Trait {
 	#name : #FamixTWithInheritances,
 	#instVars : [
@@ -28,16 +45,18 @@ FamixTWithInheritances >> addSuperInheritance: anInheritance [
 
 { #category : #enumerating }
 FamixTWithInheritances >> allSubclassesDo: aBlock [
-	self subInheritances do: [ :each | aBlock value: each subclass ].
-	self subInheritances do: [ :each | each subclass allSubclassesDo: aBlock ]
+
+	self subInheritances do: [ :each | 
+		aBlock value: each subclass.
+		each subclass allSubclassesDo: aBlock ]
 ]
 
 { #category : #enumerating }
 FamixTWithInheritances >> allSuperclassesDo: aBlock [
 
-	self superInheritances do: [ :each | aBlock value: each superclass ].
-	self superInheritances do: [ :each |  
-			each superclass allSuperclassesDo: aBlock ] 
+	self superInheritances do: [ :each | 
+		aBlock value: each superclass.
+		each superclass allSuperclassesDo: aBlock ]
 ]
 
 { #category : #enumerating }
@@ -191,7 +210,7 @@ FamixTWithInheritances >> superclass [
 FamixTWithInheritances >> superclassHierarchy [
 	| superclasses |
 	superclasses := OrderedCollection new.
-	self allSuperclassesDo: [:each |  superclasses add: each].
+	self allSuperclassesDo: [:each | superclasses add: each].
 	^ superclasses
 ]
 
@@ -201,6 +220,15 @@ FamixTWithInheritances >> superclassHierarchyGroup [
 	^ MooseGroup
 		withAll: self superclassHierarchy asSet
 		withDescription: 'All superclasses of ' , self mooseName
+]
+
+{ #category : #'Famix-Implementation' }
+FamixTWithInheritances >> understands: signature [
+	"returns true if a class is able to respond to an invocation to aSignature on itself; false otherwise"
+
+	self withSuperclassesDo: [:each | 
+		(each implements: signature) ifTrue: [^true]].
+	^false
 ]
 
 { #category : #enumerating }

@@ -2,6 +2,29 @@
 FamixTPackage represents a package in the source language, meaning that it provides a means to group entities without any baring on lexical scoping. 
 
 Java extractors map Java packages to FamixTNamespaces. They can also mirror the same information in terms of FamixTPackage instances.
+
+## Relations
+======================
+
+### Children
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `childEntities` | `FamixTPackage` | `parentPackage` | `FamixTPackageable` | |
+
+### Other
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
+
+
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+|---|
+| `isStub` | `Boolean` | false | Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.|
+| `name` | `String` | nil | Basic name of the entity, not full reference.|
+
 "
 Trait {
 	#name : #FamixTPackage,

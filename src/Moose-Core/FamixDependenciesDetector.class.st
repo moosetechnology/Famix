@@ -68,7 +68,8 @@ FamixDependenciesDetector >> detectDependenciesAtAllScopesOfPossibleDependencies
 	
 	Then we add to the list of dependencies those we found."
 
-	((self directionStrategy dependenciesOf: self entity) flatCollect: #asCollection)
+	((self directionStrategy dependenciesOf: self entity)
+		flatCollect: [:each | each isCollection ifTrue: [ each ] ifFalse: [ { each } ]])
 		do: [ :dep | 
 			self
 				selectMatchingEntitiesFrom: (dep query ancestors recursively until: [ :e | (potentialDependencies includes: e) or: [ dependencies includes: e ] ]) ofAnyType ]

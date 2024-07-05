@@ -23,29 +23,30 @@ Class {
 	#name : #FmxClassAddition,
 	#superclass : #FmxCodeChange,
 	#instVars : [
-		'definition'
+		'creationCode'
 	],
 	#category : #'Famix-MetamodelBuilder-Core-Changes'
 }
 
 { #category : #'instance creation' }
-FmxClassAddition class >> definition: aString [
+FmxClassAddition class >> creationCode: aString [
 	^ self new
-		definition: aString;
+		creationCode: aString;
 		yourself
 ]
 
 { #category : #accessing }
 FmxClassAddition >> apply [
-	self class compiler evaluate: self definition
+
+	self class compiler evaluate: self creationCode
 ]
 
 { #category : #accessing }
-FmxClassAddition >> definition [
-	^ definition
+FmxClassAddition >> creationCode [
+	^ creationCode
 ]
 
 { #category : #accessing }
-FmxClassAddition >> definition: anObject [
-	definition := anObject
+FmxClassAddition >> creationCode: anObject [
+	creationCode := anObject
 ]

@@ -1,16 +1,13 @@
 "
-Description
---------------------
+## Relations
+======================
 
-A Pharo entity source anchor is an anchor poiting to a Pharo entity to get the source code.
+### Other
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `element` | `FamixTSourceAnchor` | `sourceAnchor` | `FamixTSourceEntity` | Enable the accessibility to the famix entity that this class is a source pointer for|
 
-It uses a WeakSlot to let the entity be garbage collected in case we unload the code.
- 
-Internal Representation and Key Implementation Points.
---------------------
 
-    Instance Variables
-	pharoEntity:		<aClassOrCompiledMethod>		The Pharo class or compiled method holding the source code.
 
 "
 Class {

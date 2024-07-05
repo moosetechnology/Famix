@@ -33,7 +33,8 @@ FmxPackageAddition class >> named: aName [
 
 { #category : #accessing }
 FmxPackageAddition >> apply [
-	RPackageOrganizer default createPackageNamed: self packageName
+
+	self packageOrganizer ensurePackage: self packageName
 ]
 
 { #category : #accessing }
@@ -45,4 +46,14 @@ FmxPackageAddition >> packageName [
 { #category : #initialization }
 FmxPackageAddition >> packageName: aPackageName [
 	packageName := aPackageName
+]
+
+{ #category : #printing }
+FmxPackageAddition >> printOn: aStream [
+
+	super printOn: aStream.
+	aStream
+		nextPut: $(;
+		nextPutAll: (packageName ifNil: [ #unamed ]);
+		nextPut: $)
 ]

@@ -106,6 +106,13 @@ FamixStEntity >> isMethod [
 ]
 
 { #category : #testing }
+FamixStEntity >> isNamedEntity [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
 FamixStEntity >> isNamespace [
 
 	<generated>
@@ -114,6 +121,19 @@ FamixStEntity >> isNamespace [
 
 { #category : #testing }
 FamixStEntity >> isPackage [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+FamixStEntity >> isParametricEntity [
+
+	^ false
+]
+
+{ #category : #testing }
+FamixStEntity >> isQueryable [
 
 	<generated>
 	^ false

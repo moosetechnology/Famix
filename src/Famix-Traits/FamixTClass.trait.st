@@ -4,11 +4,54 @@ FamixTClass represents an entity which can build new instances. A FamixTClass is
 FamixT does not model explicitly interfaces, but a FamixTClass can represent a Java interface by setting the isInterface property.
 
 A class is typically scoped in a namespace. To model nested or anonymous classes, extractors can set the container of classes to classes or methods, respectively.
+
+## Relations
+======================
+
+### Parents
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `typeContainer` | `FamixTType` | `types` | `FamixTWithTypes` | Container entity to which this type belongs. Container is a namespace, not a package (Smalltalk).|
+
+### Children
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `attributes` | `FamixTWithAttributes` | `parentType` | `FamixTAttribute` | List of attributes declared by this type.|
+| `comments` | `FamixTWithComments` | `commentedEntity` | `FamixTComment` | List of comments for the entity|
+| `methods` | `FamixTWithMethods` | `parentType` | `FamixTMethod` | Methods declared by this type.|
+
+### Outgoing dependencies
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `superInheritances` | `FamixTWithInheritances` | `subclass` | `FamixTInheritance` | Superinheritance relationships, i.e. known superclasses of this type.|
+
+### Incoming dependencies
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `incomingReferences` | `FamixTReferenceable` | `referredType` | `FamixTReference` | References to this entity by other entities.|
+| `subInheritances` | `FamixTWithInheritances` | `superclass` | `FamixTInheritance` | Subinheritance relationships, i.e. known subclasses of this type.|
+
+### Other
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `receivingInvocations` | `FamixTInvocationsReceiver` | `receiver` | `FamixTInvocation` | List of invocations performed on this entity (considered as the receiver)|
+| `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
+| `typedEntities` | `FamixTType` | `declaredType` | `FamixTTypedEntity` | Entities that have this type as declaredType|
+
+
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+|---|
+| `isStub` | `Boolean` | false | Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.|
+| `name` | `String` | nil | Basic name of the entity, not full reference.|
+
 "
 Trait {
 	#name : #FamixTClass,
-	#traits : 'FamixTInvocationsReceiver + FamixTPackageable + (FamixTType - {#queryStaticIncomingAssociations. #queryStaticOutgoingAssociations}) + FamixTWithAttributes + FamixTWithComments + FamixTWithInheritances + FamixTWithMethods',
-	#classTraits : 'FamixTInvocationsReceiver classTrait + FamixTPackageable classTrait + FamixTType classTrait + FamixTWithAttributes classTrait + FamixTWithComments classTrait + FamixTWithInheritances classTrait + FamixTWithMethods classTrait',
+	#traits : 'FamixTInvocationsReceiver + (FamixTType - {#queryStaticIncomingAssociations. #queryStaticOutgoingAssociations}) + FamixTWithAttributes + FamixTWithComments + FamixTWithInheritances + FamixTWithMethods',
+	#classTraits : 'FamixTInvocationsReceiver classTrait + FamixTType classTrait + FamixTWithAttributes classTrait + FamixTWithComments classTrait + FamixTWithInheritances classTrait + FamixTWithMethods classTrait',
 	#category : #'Famix-Traits-Class'
 }
 
@@ -26,6 +69,26 @@ FamixTClass classSide >> annotationFamixClassGroup [
 	<generated>
 	<mooseGroup>
 	^ FamixClassGroup
+]
+
+{ #category : #adding }
+FamixTClass >> addFirstMethodsOverriding: aMethod in: aCollection [
+
+	self directSubclasses do: [ :subClass |
+		subClass methods
+			detect: [ :method | method signature = aMethod signature ]
+			ifFound: [ :overridingMethod | aCollection add: overridingMethod ]
+			ifNone: [ subClass addMethodOverriding: aMethod in: aCollection ] ]
+]
+
+{ #category : #private }
+FamixTClass >> addMethodOverriding: aMethod in: aCollection [
+
+	self directSubclasses do: [ :subClass |
+		subClass methods
+			detect: [ :method |   method signature = aMethod signature ]
+			ifFound: [ :overridingMethod | aCollection add: overridingMethod ].
+			subClass addMethodOverriding: aMethod in: aCollection  ]
 ]
 
 { #category : #metrics }
@@ -56,10 +119,10 @@ FamixTClass >> inheritedAttributes [
 
 	| inheritedAttrs |
 	inheritedAttrs := OrderedCollection new.
-	self allSuperclassesDo: [ :each | 
-		inheritedAttrs addAll: (each isClass
-				 ifTrue: [ each ]
-				 ifFalse: [ each parameterizableClass ]) attributes ].
+	self allSuperclassesDo: [ :each |
+		inheritedAttrs addAll: (each isParametricEntity
+				 ifTrue: [ each genericEntity ]
+				 ifFalse: [ each ]) attributes ].
 	^ inheritedAttrs
 ]
 

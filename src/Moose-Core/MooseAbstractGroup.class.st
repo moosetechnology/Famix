@@ -35,9 +35,9 @@ MooseAbstractGroup class >> with: anEntity [
 MooseAbstractGroup class >> withAll: aCollection [
 	"Create a new collection containing all the elements from aCollection."
 
-	^ self new
-		addAll: aCollection;
-		yourself
+	^ self basicNew
+		  initializeWithAll: aCollection;
+		  yourself
 ]
 
 { #category : #'set operations' }
@@ -106,12 +106,8 @@ MooseAbstractGroup >> allUsing: aTrait [
 
 { #category : #groups }
 MooseAbstractGroup >> allUsing: aTrait ofGroupClass: aGroupClass [
-	aTrait isTrait ifFalse: [ MooseAllUsingOnClass signal ].
-	^ self
-		cacheAt: aTrait
-		ifAbsentPut: [ aGroupClass
-				withAll: ((aTrait allUsers flattened flatCollect: #withAllSubclasses) asSet flatCollect: [ :each | self entityStorage selectAllWithType: each ])
-				withDescription: 'All ' , aTrait name asLowercase asEnglishPlural ]
+
+	^ self cacheAt: aTrait ifAbsentPut: [ aGroupClass withAll: (self rawAllUsing: aTrait) withDescription: 'All ' , aTrait name asLowercase asEnglishPlural ]
 ]
 
 { #category : #groups }
@@ -209,6 +205,12 @@ MooseAbstractGroup >> at: anIndex [
 	^ self entities at: anIndex
 ]
 
+{ #category : #accessing }
+MooseAbstractGroup >> at: anIndex ifAbsent: aBlock [
+
+	^ self entities at: anIndex ifAbsent: aBlock
+]
+
 { #category : #'public interface' }
 MooseAbstractGroup >> average: aSymbolOrBlock [ 
 	 
@@ -241,8 +243,21 @@ MooseAbstractGroup >> collect: collectBlock thenReject: selectBlock [
 ]
 
 { #category : #enumerating }
+MooseAbstractGroup >> collect: aBlockCollect thenSelect: aBlockThenSelect [
+
+	^ self entities collect: aBlockCollect thenSelect: aBlockThenSelect
+]
+
+{ #category : #enumerating }
 MooseAbstractGroup >> collectAsSet: aBlock [
 	^ self entities collectAsSet: aBlock
+]
+
+{ #category : #enumerating }
+MooseAbstractGroup >> collectWithIndex: aBlock [
+
+	^ self entities
+		collectWithIndex:  aBlock
 ]
 
 { #category : #accessing }
@@ -266,6 +281,12 @@ MooseAbstractGroup >> copyWithout: anEntity [
 	^ self entities copyWithout: anEntity
 ]
 
+{ #category : #copying }
+MooseAbstractGroup >> copyWithoutAll: mooseEntities [
+
+	^ self entities copyWithoutAll: mooseEntities
+]
+
 { #category : #enumerating }
 MooseAbstractGroup >> count: aBlock [ 
 	 
@@ -276,15 +297,44 @@ MooseAbstractGroup >> count: aBlock [
 ]
 
 { #category : #enumerating }
-MooseAbstractGroup >> detect: aBlock [ 
-	 
-	^self entities detect: aBlock
+MooseAbstractGroup >> detect: aBlock [
+
+	^ self entities detect: aBlock
 ]
 
 { #category : #enumerating }
-MooseAbstractGroup >> detect: aBlock ifNone: anotherBlock [ 
-	 
-	^self entities detect: aBlock ifNone: anotherBlock
+MooseAbstractGroup >> detect: aBlock ifFound: anotherBlock [
+
+	^ self entities detect: aBlock ifFound: anotherBlock
+]
+
+{ #category : #enumerating }
+MooseAbstractGroup >> detect: aBlock ifFound: foundBlock ifNone: noneBlock [
+
+	^ self entities 
+		detect:  aBlock
+		ifFound: foundBlock
+		ifNone:  noneBlock
+]
+
+{ #category : #enumerating }
+MooseAbstractGroup >> detect: aBlock ifNone: anotherBlock [
+
+	^ self entities detect: aBlock ifNone: anotherBlock
+]
+
+{ #category : #enumerating }
+MooseAbstractGroup >> detect: aBlock ifOne: anotherBlock [
+
+	^ self entities
+		detect: aBlock
+		ifOne:  anotherBlock
+]
+
+{ #category : #enumerating }
+MooseAbstractGroup >> detectMax: aString [
+
+	^ self entities detectMax: aString
 ]
 
 { #category : #'entity collection' }
@@ -313,13 +363,10 @@ MooseAbstractGroup >> doWithIndex: aBlockClosure [
 	self entities doWithIndex: aBlockClosure 
 ]
 
-{ #category : #'reflective operations' }
-MooseAbstractGroup >> doesNotUnderstand: aMessage [
-	"Forward message to collection"
+{ #category : #accessing }
+MooseAbstractGroup >> eighth [
 
-	^ [ aMessage sendTo: self entities ]
-		on: MessageNotUnderstood
-		do: [ super doesNotUnderstand: aMessage ]
+	^ self entities eighth
 ]
 
 { #category : #'entity collection' }
@@ -386,6 +433,12 @@ MooseAbstractGroup >> equalsTo: aCollection [
 ]
 
 { #category : #accessing }
+MooseAbstractGroup >> fifth [
+
+	^ self entities fifth
+]
+
+{ #category : #accessing }
 MooseAbstractGroup >> first [ 
 	 
 	^self entities first
@@ -413,6 +466,18 @@ MooseAbstractGroup >> flatten [
 	as objects rather than as collection."
 
 	^self gather: [ :each | each ]
+]
+
+{ #category : #enumerating }
+MooseAbstractGroup >> fold: aBlock [
+
+	^ self entities fold: aBlock
+]
+
+{ #category : #accessing }
+MooseAbstractGroup >> fourth [
+
+	^ self entities fourth
 ]
 
 { #category : #enumerating }
@@ -457,6 +522,12 @@ MooseAbstractGroup >> ifNotEmpty: aBlock [
 ]
 
 { #category : #testing }
+MooseAbstractGroup >> ifNotEmpty: aBlockIfNotEmpty ifEmpty: aBlockIfEmpty [
+
+	^ self entities ifEmpty: aBlockIfEmpty ifNotEmpty: aBlockIfNotEmpty
+]
+
+{ #category : #testing }
 MooseAbstractGroup >> includes: anEntity [ 
 	 
 	^self entities includes: anEntity
@@ -478,11 +549,25 @@ MooseAbstractGroup >> includesID: elementID [
 	^self entityStorage includesID: elementID
 ]
 
+{ #category : #accessing }
+MooseAbstractGroup >> indexOf: aMooseEntity [
+
+	^ self entities indexOf: aMooseEntity
+]
+
 { #category : #initialization }
 MooseAbstractGroup >> initialize [ 
 	 
 	super initialize.
 	storage := MooseGroupStorage empty
+]
+
+{ #category : #initialization }
+MooseAbstractGroup >> initializeWithAll: aCollection [
+
+	self initialize.
+	storage := MooseGroupStorage new: aCollection size.
+	self addAll: aCollection
 ]
 
 { #category : #enumerating }
@@ -551,14 +636,21 @@ MooseAbstractGroup >> mooseModel [
 	^ self ifEmpty: [ nil ] ifNotEmpty: [ self anyOne mooseModel ]
 ]
 
+{ #category : #accessing }
+MooseAbstractGroup >> ninth [ 
+
+	^ self entities ninth
+]
+
 { #category : #testing }
 MooseAbstractGroup >> notEmpty [
 	^ self entities isNotEmpty
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MooseAbstractGroup >> numberOfEntityUsing: aTrait [
-	^ (self allUsing: aTrait) size
+
+	^ (self rawAllUsing: aTrait) size
 ]
 
 { #category : #accessing }
@@ -586,6 +678,21 @@ MooseAbstractGroup >> printOn: aStream [
 	aStream nextPut: $(.
 	aStream print: self size.
 	aStream nextPut: $)
+]
+
+{ #category : #groups }
+MooseAbstractGroup >> rawAllUsing: aTrait [
+	"This is an optimization of #allUsing: when we do not need to manipulate a MooseGroup as result."
+
+	| seen |
+	aTrait isTrait ifFalse: [ MooseAllUsingOnClass signal ].
+	seen := IdentitySet new.
+	^ Array streamContents: [ :stream |
+		  aTrait allUsers flattened do: [ :directUser |
+			  directUser withAllSubclasses do: [ :user |
+				  (seen includes: user) ifFalse: [
+					  seen add: user.
+					  stream nextPutAll: (self entityStorage selectAllWithType: user) ] ] ] ]
 ]
 
 { #category : #'adding/removing' }
@@ -641,6 +748,12 @@ MooseAbstractGroup >> select: aBlock [
 ]
 
 { #category : #enumerating }
+MooseAbstractGroup >> select: aBlockSelect thenDo: aBlockThenDo [
+
+	^ self entities select: aBlockSelect thenDo: aBlockThenDo
+]
+
+{ #category : #enumerating }
 MooseAbstractGroup >> selectFirst: anInteger [ 
 	 
 	self flag: #patched. "VW uses sliceTo:, which is a copyFrom:To: with checked indices. Not the case here"
@@ -655,8 +768,26 @@ MooseAbstractGroup >> selectWithNameSimilarTo: anEntity [
 ]
 
 { #category : #accessing }
+MooseAbstractGroup >> seventh [
+
+	^ self entities seventh
+]
+
+{ #category : #accessing }
+MooseAbstractGroup >> sixth [
+
+	^ self entities sixth
+]
+
+{ #category : #accessing }
 MooseAbstractGroup >> size [	 
 	^ self entityStorage size
+]
+
+{ #category : #sorting }
+MooseAbstractGroup >> sorted [
+
+	^ self entities sorted
 ]
 
 { #category : #arithmetic }
@@ -683,6 +814,12 @@ MooseAbstractGroup >> with: aCollection do: aBlockClosure [
 { #category : #enumerating }
 MooseAbstractGroup >> withIndexDo: aBlockClosure [ 
 	self entities withIndexDo: aBlockClosure 
+]
+
+{ #category : #accessing }
+MooseAbstractGroup >> withoutStubs [
+
+	^ (self reject: #isStub) asMooseGroup
 ]
 
 { #category : #'set operations' }

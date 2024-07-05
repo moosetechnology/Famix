@@ -16,6 +16,25 @@ will produce two invocation associations first from method a to method b, and se
 
 
 
+
+## Relations
+======================
+
+### Other
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `next` | `FamixTAssociation` | `previous` | `FamixTAssociation` | Next association in an ordered collection of associations. Currently not supported by the Moose importer|
+| `previous` | `FamixTAssociation` | `next` | `FamixTAssociation` | Previous association in an ordered collection of associations. Currently not supported by the Moose importer|
+| `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
+
+
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+|---|
+| `isStub` | `Boolean` | false | Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.|
+
 "
 Trait {
 	#name : #FamixTAssociation,
@@ -56,7 +75,11 @@ FamixTAssociation classSide >> source: anEntity target: anotherEntity model: aMo
 FamixTAssociation >> allTargets [
 	"Since #target can return an entity or a collection, I ensure we always get a collection."
 
-	^ self target asCollection
+	| tempTarget |
+	tempTarget := self target.
+	^ tempTarget isCollection
+		  ifTrue: [ tempTarget ]
+		  ifFalse: [ OrderedCollection with: tempTarget ]
 ]
 
 { #category : #converting }
@@ -67,6 +90,14 @@ FamixTAssociation >> asAssociationFrom: anEntity [
 { #category : #converting }
 FamixTAssociation >> asAssociationTo: anEntity [
 	^ self
+]
+
+{ #category : #printing }
+FamixTAssociation >> displayFullStringOn: aStream [
+
+	self source displayFullStringOn: aStream.
+	aStream nextPutAll: ' -> '.
+	self target displayFullStringOn: aStream
 ]
 
 { #category : #printing }
@@ -128,12 +159,6 @@ FamixTAssociation >> source: aSource [
 ]
 
 { #category : #accessing }
-FamixTAssociation >> sourceSelector [
-	^ (self mooseDescription allComplexProperties detect: #isSource)
-		implementingSelector
-]
-
-{ #category : #accessing }
 FamixTAssociation >> target [
 	^ self targetSelector value: self
 ]
@@ -141,10 +166,4 @@ FamixTAssociation >> target [
 { #category : #accessing }
 FamixTAssociation >> target: aTarget [
 	self perform: (self targetSelector , ':') with: aTarget
-]
-
-{ #category : #accessing }
-FamixTAssociation >> targetSelector [
-	^ (self mooseDescription allComplexProperties detect: #isTarget)
-		implementingSelector
 ]

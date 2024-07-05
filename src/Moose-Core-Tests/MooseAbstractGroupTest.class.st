@@ -74,10 +74,10 @@ MooseAbstractGroupTest >> testAllSatisfy [
 
 { #category : #tests }
 MooseAbstractGroupTest >> testAllUsing [
-	group addAll: {FamixTest3Class new . FamixTest3Type new}.
+	group addAll: {FamixTest3Class new . FamixTest3Type new . FamixTest3ParametricClass new}.
 	self should: [ group allUsing: FamixTest3Type ] raise: MooseAllUsingOnClass.
-	self assert: (group allUsing: FamixTClass) size equals: 1.
-	self assert: (group allUsing: FamixTType) size equals: 2
+	self assert: (group allUsing: FamixTClass) size equals: 2.
+	self assert: (group allUsing: FamixTType) size equals: 3.
 ]
 
 { #category : #tests }
@@ -118,24 +118,6 @@ MooseAbstractGroupTest >> testAllWithType [
 	self assert: (group allWithType: FamixTest3Type) size equals: 1.
 	self should: [ (group allWithType: FamixTClass) size ] raise: MooseAllWithTypeOnTrait.
 	self assertEmpty: (group allWithType: Object)
-]
-
-{ #category : #tests }
-MooseAbstractGroupTest >> testAllWithTypeAtRuntime [
-	group addAll: {FamixTest3Class new . FamixTest3Method new}.
-	group entityStorage forRuntime.
-	self assert: (group allWithType: FamixTest3Class) size equals: 1.
-	self assert: (group allWithType: FamixTest3Method) size equals: 1.
-	self assertEmpty: (group allWithType: FamixTest3Invocation)
-]
-
-{ #category : #tests }
-MooseAbstractGroupTest >> testAllWithTypeAtSetup [
-	group addAll: {FamixTest3Class new . FamixTest3Method new}.
-	group entityStorage forSetup.
-	self assert: (group allWithType: FamixTest3Class) size equals: 1.
-	self assert: (group allWithType: FamixTest3Method) size equals: 1.
-	self assertEmpty: (group allWithType: FamixTest3Invocation)
 ]
 
 { #category : #tests }
@@ -417,7 +399,7 @@ MooseAbstractGroupTest >> testOccurenceOf [
 
 { #category : #tests }
 MooseAbstractGroupTest >> testPropertyNamed [
-	self assert: (group propertyNamed: #UNKNOWN) isNil.
+	self should: [group propertyNamed: #UNKNOWN] raise: NotFound.
 	group propertyNamed: 'UNKNOWN' put: 10.
 	self assert: (group propertyNamed: #UNKNOWN) equals: 10
 ]
@@ -510,6 +492,29 @@ MooseAbstractGroupTest >> testWithIndexDo [
 	t := OrderedCollection new.
 	group withIndexDo: [ :x :i | t add: {x . i} ].
 	self assertCollection: t hasSameElements: {{el1 . 1} . {el2 . 2} . {el3 . 3}}
+]
+
+{ #category : #tests }
+MooseAbstractGroupTest >> testWithoutStubs [
+
+	| stubEntity1 stubEntity2 |
+
+	stubEntity1 := MooseEntity new
+		               isStub: true;
+		               yourself.
+	stubEntity2 := MooseEntity new
+		               isStub: true;
+		               yourself.
+	group
+		add: MooseEntity new;
+		add: MooseEntity new;
+		add: stubEntity1;
+		add: stubEntity2.
+
+	self assert: group size equals: 4.
+	self assert: group withoutStubs isMooseObject.
+	self assert: group withoutStubs size equals: 2.
+	group withoutStubs do: [ :entity | self deny: entity isStub ]
 ]
 
 { #category : #utilities }

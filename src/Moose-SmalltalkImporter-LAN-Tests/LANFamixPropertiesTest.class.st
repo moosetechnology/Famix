@@ -61,14 +61,12 @@ LANFamixPropertiesTest >> testClassAllProperties [
 LANFamixPropertiesTest >> testClassAttributes [
 
 	self assert: self nodeClass numberOfAttributes equals: 2.
-	self assert: self nodeClass numberOfAttributesInherited equals: 3.
-	self
-		assert:
-		(self workstationClass propertyNamed: #numberOfAttributesInherited)
-		equals: (self totalNumberOfAttributesFor: LANWorkStation superclass).
-	self
-		assert: self workstationClass numberOfAttributesInherited
-		equals: (self totalNumberOfAttributesFor: LANWorkStation superclass)
+	"In P12 DependentFileds class var gor removed from Object. Remove this condition once P12 will be the minimal version used for this project."
+	self assert: self nodeClass numberOfAttributesInherited equals: (SystemVersion current major < 12
+			 ifTrue: [ 3 ]
+			 ifFalse: [ 2 ]).
+	self assert: (self workstationClass propertyNamed: #numberOfAttributesInherited) equals: (self totalNumberOfAttributesFor: LANWorkStation superclass).
+	self assert: self workstationClass numberOfAttributesInherited equals: (self totalNumberOfAttributesFor: LANWorkStation superclass)
 ]
 
 { #category : #testing }
@@ -80,9 +78,10 @@ LANFamixPropertiesTest >> testClassCategories [
 
 { #category : #testing }
 LANFamixPropertiesTest >> testClassComments [
+
 	self model allClasses do: [ :each | self assert: each numberOfComments >= 0 ].
-	self assert: (self nodeClass propertyNamed: #numberOfComments) equals: 11.
-	self assert: self nodeClass numberOfComments equals: 11
+	self assert: (self nodeClass propertyNamed: #numberOfComments) equals: 0.
+	self assert: self nodeClass numberOfComments equals: 0
 ]
 
 { #category : #testing }
@@ -111,16 +110,21 @@ LANFamixPropertiesTest >> testClassIsAbstract [
 LANFamixPropertiesTest >> testClassLinesOfCode [
 	"2020/05/06 - Cyril - I updated the value for the number of lines of code because before we were using only the sum of methods while now we use the tonel export that contains also the class definition."
 
+	| numberOfLines |
+	"In P12 the Tonel format changed and there is one more line exported."
+	numberOfLines := SystemVersion current major < 12
+		                 ifTrue: [ 112 ]
+		                 ifFalse: [ 113 ].
 	self model allClasses do: [ :each | self assert: each numberOfLinesOfCode >= 0 ].
-	self assert: (self nodeClass propertyNamed: #numberOfLinesOfCode) equals: 112.
-	self assert: self nodeClass numberOfLinesOfCode equals: 112
+	self assert: (self nodeClass propertyNamed: #numberOfLinesOfCode) equals: numberOfLines.
+	self assert: self nodeClass numberOfLinesOfCode equals: numberOfLines
 ]
 
 { #category : #testing }
 LANFamixPropertiesTest >> testClassMethods [
 	self assert: self nodeClass numberOfMethods equals: 12.
 	self assert: (self nodeClass propertyNamed: #numberOfMethodsInherited) equals: 0.
-	self assert: (self nodeClass propertyNamed: #numberOfMethodsOverriden) equals: 0.
+	self assert: (self nodeClass propertyNamed: #numberOfMethodsOverridden) equals: 0.
 	self
 		assert: (self nodeClass propertyNamed: #numberOfLocallyDefinedMethods)
 		equals: (self nodeClass propertyNamed: #numberOfMethods).
@@ -128,11 +132,11 @@ LANFamixPropertiesTest >> testClassMethods [
 		assert: (self workstationClass propertyNamed: #numberOfMethodsInherited)
 		equals: 9.
 	self assert: (self workstationClass propertyNamed: #numberOfLocallyDefinedMethods) equals: 1.
-	self assert: (self workstationClass propertyNamed: #numberOfMethodsOverriden) equals: 3.
+	self assert: (self workstationClass propertyNamed: #numberOfMethodsOverridden) equals: 3.
 	self
 		assert:
 			(self workstationClass propertyNamed: #numberOfLocallyDefinedMethods)
-				+ (self workstationClass propertyNamed: #numberOfMethodsOverriden)
+				+ (self workstationClass propertyNamed: #numberOfMethodsOverridden)
 		equals: (self workstationClass propertyNamed: #numberOfMethods)
 ]
 
@@ -153,6 +157,14 @@ LANFamixPropertiesTest >> testMethodAccesses [
 		assert: self lanInterfaceOriginateMethod numberOfAccesses
 		equals: (self lanInterfaceOriginateMethod propertyNamed: #numberOfAccesses).
 	self assert: (self model entityNamed: #'Smalltalk::LANInterface.originator()') numberOfAccesses equals: 3
+]
+
+{ #category : #testing }
+LANFamixPropertiesTest >> testMethodComments [
+
+	self model allMethods do: [ :each | self assert: each numberOfComments >= 0 ].
+	self assert: (self lanInterfaceOriginateMethod propertyNamed: #numberOfComments) equals: 6.
+	self assert: self lanInterfaceOriginateMethod numberOfComments equals: 6
 ]
 
 { #category : #testing }
@@ -254,14 +266,14 @@ LANFamixPropertiesTest >> testMethodsSimpleProperties [
 
 { #category : #testing }
 LANFamixPropertiesTest >> testNoDuplicatesOfClassVariables [
-	self assert: ((self model entityNamed: #'Smalltalk::Object') attributes contains: [ :each | each name = #DependentsFields ]).
-	self assert: (self model entityNamed: #'Smalltalk::Object') attributes first identicalTo: (self model entityNamed: #'Smalltalk::Object') attributes last.
-	self assert: (self model entityNamed: #'Smalltalk::Object') attributes size equals: 1
+	self assert: ((self model entityNamed: #'Smalltalk::LANAbstractDestinationAddress') attributes contains: [ :each | each name = #MySharedVariable ]).
+	self assert: (self model entityNamed: #'Smalltalk::LANAbstractDestinationAddress') attributes first identicalTo: (self model entityNamed: #'Smalltalk::LANAbstractDestinationAddress') attributes last.
+	self assert: (self model entityNamed: #'Smalltalk::LANAbstractDestinationAddress') attributes size equals: 1
 ]
 
 { #category : #testing }
-LANFamixPropertiesTest >> testOverridenMethods [
-	self assert: (self model entityNamed: #Smalltalk::LANOutputServer) numberOfMethodsOverriden equals: 2
+LANFamixPropertiesTest >> testOverriddenMethods [
+	self assert: (self model entityNamed: #Smalltalk::LANOutputServer) numberOfMethodsOverridden equals: 2
 ]
 
 { #category : #testing }

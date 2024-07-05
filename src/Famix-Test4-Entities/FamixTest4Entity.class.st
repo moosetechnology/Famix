@@ -1,3 +1,12 @@
+"
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+|---|
+| `name` | `String` | nil | |
+
+"
 Class {
 	#name : #FamixTest4Entity,
 	#superclass : #MooseEntity,

@@ -12,14 +12,14 @@ Class {
 
 { #category : #running }
 ImportStubMethodSpecialTest >> setUp [
+
 	| importingTask |
 	super setUp.
-	importingTask := MoosePharoImporterTask new
-		importerClass: SmalltalkImporter;
-		model: FamixStModel new;
-		addFromPackageNamed: #'Moose-TestResources-LAN';
-		yourself.
-	importingTask importingContext importSmalltalkStubMethod.
+	importingTask := FamixStPharoImporterTask new
+		                 model: FamixStModel new;
+		                 addFromPackageNamed: #'Moose-TestResources-LAN';
+		                 yourself.
+	importingTask importingContext importStubMethod.
 	importingTask run.
 	model := importingTask model
 ]
@@ -28,4 +28,18 @@ ImportStubMethodSpecialTest >> setUp [
 ImportStubMethodSpecialTest >> testStubMethodCreation [
 	self denyEmpty: (model allMethods select: #isStub).
 	self denyEmpty: model allModelMethods
+]
+
+{ #category : #tests }
+ImportStubMethodSpecialTest >> testStubParentsAreInMooseModel [
+
+	| method class |
+	method := model entityNamed: #'Smalltalk::False.ifTrue:(Object)'.
+	self assert: method mooseModel isNotNil.
+	self assert: method isStub.
+
+	class := method parentType.
+	self assert: class name equals: 'False'.
+	self assert: class mooseModel isNotNil.
+	self assert: class isStub
 ]

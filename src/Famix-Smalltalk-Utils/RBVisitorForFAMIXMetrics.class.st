@@ -92,18 +92,6 @@ RBVisitorForFamixMetrics >> initialize [
 	self resetMetricValues
 ]
 
-{ #category : #private }
-RBVisitorForFamixMetrics >> isDirtySuperInMethod: selector withReceiver: receiver [
-
-	^ selector ~~ self methodEntity name and: [ receiver isSuperVariable ]
-]
-
-{ #category : #private }
-RBVisitorForFamixMetrics >> isSuperInMethod: selector withReceiver: receiver [
-
-	^ selector == self methodEntity name and: [ receiver isSuperVariable ]
-]
-
 { #category : #'source access' }
 RBVisitorForFamixMetrics >> methodBodyOn: aReadStream [
 	| aux |
@@ -175,9 +163,12 @@ RBVisitorForFamixMetrics >> numberOfStatements: anObject [
 
 { #category : #enumerating }
 RBVisitorForFamixMetrics >> processMethod: aMethodEntity [
+
 	self methodEntity: aMethodEntity.
 	self compiledMethod ifNil: [ ^ self ].
-	(self compiledMethod methodClass parseTreeFor: self compiledMethod selector) ifNotNil: [ :parseTree | self visitMethodNode: parseTree ]
+	(self compiledMethod methodClass parseTreeForSelector:
+		 self compiledMethod selector) ifNotNil: [ :parseTree |
+		self visitMethodNode: parseTree ]
 ]
 
 { #category : #initialization }
@@ -189,32 +180,31 @@ RBVisitorForFamixMetrics >> resetMetricValues [
 	cyclomaticNumber := 1
 ]
 
-{ #category : #enumerating }
+{ #category : #visiting }
 RBVisitorForFamixMetrics >> visitBlockNode: aBlockNode [
 	super visitBlockNode: aBlockNode.
 	numberOfStatements := numberOfStatements + aBlockNode body size
 ]
 
-{ #category : #enumerating }
+{ #category : #visiting }
 RBVisitorForFamixMetrics >> visitCascadeNode: aCascadeNode [
 	numberOfStatements := numberOfStatements + aCascadeNode messages size.
 	^ super visitCascadeNode: aCascadeNode
 ]
 
-{ #category : #enumerating }
+{ #category : #visiting }
 RBVisitorForFamixMetrics >> visitMessageNode: aMessageNode [
+
 	| receiver selector |
 	receiver := aMessageNode receiver.
 	selector := aMessageNode selector.
 	super visitMessageNode: aMessageNode.
 	numberOfMessageSends := numberOfMessageSends + 1.
 	self countConditionals: selector.
-	self computeCyclomaticNumber: selector.
-	(self isSuperInMethod: selector withReceiver: receiver) ifTrue: [ self methodEntity propertyNamed: #cleanSuperSend put: true ].
-	(self isDirtySuperInMethod: selector withReceiver: receiver) ifTrue: [ self methodEntity propertyNamed: #dirtySuperSend put: true ]
+	self computeCyclomaticNumber: selector
 ]
 
-{ #category : #enumerating }
+{ #category : #visiting }
 RBVisitorForFamixMetrics >> visitMethodNode: aMethodNode [
 	
 	" I do not know where this block came from"
@@ -224,7 +214,7 @@ RBVisitorForFamixMetrics >> visitMethodNode: aMethodNode [
 	^ super visitMethodNode: aMethodNode
 ]
 
-{ #category : #enumerating }
+{ #category : #visiting }
 RBVisitorForFamixMetrics >> visitSequenceNode: aSequenceNode [
 	super visitSequenceNode: aSequenceNode.
 	numberOfStatements := numberOfStatements + aSequenceNode statements size

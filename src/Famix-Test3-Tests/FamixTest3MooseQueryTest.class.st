@@ -11,7 +11,11 @@ FamixTest3MooseQueryTest >> checkAtScopeWithNonMatchingEntitiesDoWith: aBehavior
 
 	nonMatching := Set new.
 	self
-		assertCollection: (mooseQueryResult atScope: aBehavior withNonMatchingEntitiesDo: [ :entities :matchingAtTheScope | nonMatching addAll: entities asCollection ])
+		assertCollection: (mooseQueryResult atScope: aBehavior withNonMatchingEntitiesDo: [ :entities :matchingAtTheScope |
+			entities isCollection
+				ifTrue: [ nonMatching addAll: entities ]
+				ifFalse: [ nonMatching add: entities ]
+ 			])
 		hasSameElements: {self c1}.
 	self assertCollection: nonMatching hasSameElements: {self pt1}
 ]
@@ -35,8 +39,8 @@ FamixTest3MooseQueryTest >> testAllProviders [
 
 { #category : #tests }
 FamixTest3MooseQueryTest >> testAllProvidersAtScope [
-	self assertCollection: (self m1 allProvidersAtScope: FamixTClass) hasSameElements: {self c1 . self pt1}.
-	self assertCollection: (self m1 allProvidersAtScope: FamixTest3Class) hasSameElements: {self c1 . self pt1}
+	self assertCollection: (self m1 allProviders) hasSameElements: {self c1 . self pt1}.
+	self assertCollection: (self m1 allProviders) hasSameElements: {self c1 . self pt1}
 ]
 
 { #category : #tests }
@@ -62,7 +66,14 @@ FamixTest3MooseQueryTest >> testAtScopeWithNonMatchingEntitiesDo [
 
 { #category : #tests }
 FamixTest3MooseQueryTest >> testChildrenTypes [
-	self assertCollection: self c1 childrenTypes hasSameElements: {FamixTAttribute . FamixTMethod . FamixTest3Attribute . FamixTest3Method}
+
+	self assertCollection: self c1 childrenTypes hasSameElements: {
+			FamixTAttribute.
+			FamixTMethod.
+			FamixTest3Attribute.
+			FamixTest3Method.
+			FamixTComment.
+			FamixTest3Comment }
 ]
 
 { #category : #tests }
@@ -114,7 +125,7 @@ FamixTest3MooseQueryTest >> testNumberOfInternalProviders [
 
 { #category : #tests }
 FamixTest3MooseQueryTest >> testParentTypes [
-	self assertCollection: self m1 parentTypes hasSameElements: {FamixTWithMethods . FamixTest3Class}
+	self assertCollection: self m1 parentTypes hasSameElements: {FamixTWithMethods . FamixTest3Class . FamixTest3ParametricClass}
 ]
 
 { #category : #tests }

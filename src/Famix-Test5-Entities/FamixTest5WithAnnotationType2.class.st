@@ -1,3 +1,15 @@
+"
+## Relations
+======================
+
+### Children
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `definedAnnotationTypes` | `FamixTWithAnnotationTypes` | `annotationTypesContainer` | `FamixTAnnotationType` | The container in which the AnnotationTypes may be declared|
+
+
+
+"
 Class {
 	#name : #FamixTest5WithAnnotationType2,
 	#superclass : #FamixTest5Entity,

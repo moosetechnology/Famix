@@ -34,6 +34,14 @@ FmxMBBehavior >> <|-- anObject [
 ]
 
 { #category : #accessing }
+FmxMBBehavior >> addAllTransitiveTraitsIn: aCollection [
+
+	aCollection add: self.
+	self allLocalTraits do: [ :trait | trait addAllTransitiveTraitsIn: aCollection ].
+	^ aCollection
+]
+
+{ #category : #accessing }
 FmxMBBehavior >> addRelation: aRelation with: anotherClass [
 
 	self relations add: aRelation.
@@ -72,15 +80,28 @@ FmxMBBehavior >> allNavigationGroups [
 ]
 
 { #category : #accessing }
+FmxMBBehavior >> allProperties [
+	"Return my properties and the properties from my traits."
+
+	^ (self allTransitiveTraits flatCollect: [ :trait | trait properties ]) , self properties
+]
+
+{ #category : #accessing }
+FmxMBBehavior >> allRelations [
+	"Return my relations and the relations from my traits."
+
+	^ (self allTransitiveTraits flatCollect: [ :trait | trait relations ]) , self relations
+]
+
+{ #category : #accessing }
 FmxMBBehavior >> allTraitNames [
 	^ (self allLocalTraits collect: #fullName) sorted
 ]
 
 { #category : #accessing }
 FmxMBBehavior >> allTransitiveTraits [
-	^ (Set with: self)
-		addAll: (self allLocalTraits flatCollect: [ :trait | trait allTransitiveTraits ]);
-		yourself
+
+	^ self addAllTransitiveTraitsIn: Set new
 ]
 
 { #category : #converting }
@@ -97,6 +118,94 @@ FmxMBBehavior >> classGeneralization [
 { #category : #accessing }
 FmxMBBehavior >> classGeneralization: anObject [
 	^ self subclassResponsibility
+]
+
+{ #category : #accessing }
+FmxMBBehavior >> commentWithRelations [
+	"It is sometimes hard to find our way through all the methods and relations of a moose entity. To help, I add information in the class comments about the different kind of relations in the model."
+
+	^ String streamContents: [ :aStream |
+		  aStream nextPutAll: self comment.
+		  self comment ifNotEmpty: [
+			  aStream
+				  cr;
+				  cr ].
+		  self allRelations ifNotEmpty: [ :rels |
+			  aStream
+				  nextPutAll: '## Relations
+======================';
+				  cr;
+				  cr.
+			  OrderedDictionary new
+				  at: 'Parents' put: [ :relation | relation side isContainer ];
+				  at: 'Children' put: [ :relation | relation oppositeSide isContainer ];
+				  at: 'Outgoing dependencies' put: [ :relation | relation oppositeSide isSource ];
+				  at: 'Incoming dependencies' put: [ :relation | relation oppositeSide isTarget ];
+				  at: 'Association source' put: [ :relation | relation side isSource ];
+				  at: 'Association target' put: [ :relation | relation side isTarget ];
+				  at: 'Other' put: [ :relation |
+					  relation side isTarget not and: [
+							  relation side isSource not and: [
+									  relation side isContainer not and: [
+											  relation oppositeSide isTarget not and: [ relation oppositeSide isSource not and: [ relation oppositeSide isContainer not ] ] ] ] ] ];
+				  keysAndValuesDo: [ :relationKind :selectionBlock |
+					  (rels select: selectionBlock) ifNotEmpty: [ :parents |
+							  aStream
+								  nextPutAll: '### ';
+								  nextPutAll: relationKind;
+								  cr;
+								  nextPutAll: '| Relation | Origin | Opposite | Type | Comment |';
+								  cr;
+								  nextPutAll: '|---|';
+								  cr.
+							  (parents sorted: [ :parent | parent side generationStrategy relationSide name ] ascending) do: [ :parent |
+								  | strategy |
+								  strategy := parent side generationStrategy.
+
+								  aStream
+									  nextPutAll: '| `';
+									  nextPutAll: strategy relationSide name;
+									  nextPutAll: '` | `';
+									  nextPutAll: strategy relationSide type;
+									  nextPutAll: '` | `';
+									  nextPutAll: strategy relationSide oppositeName;
+									  nextPutAll: '` | `';
+									  nextPutAll: strategy relationSide oppositeType;
+									  nextPutAll: '` | ';
+									  nextPutAll: (strategy relationSide comment
+											   copyWithRegex: (String with: Character cr with: $+)
+											   matchesReplacedWith: ' ');
+									  nextPut: $|;
+									  cr ].
+
+							  aStream cr ] ].
+			  aStream cr ].
+
+		  (self allProperties reject: [ :p | p isRelation ]) ifNotEmpty: [ :props |
+			  aStream
+				  nextPutAll: '## Properties
+======================';
+				  cr;
+				  cr;
+				  nextPutAll: '| Name | Type | Default value | Comment |';
+				  cr;
+				  nextPutAll: '|---|';
+				  cr.
+
+			  (props sorted: #name ascending) do: [ :property |
+				  aStream
+					  nextPutAll: '| `';
+					  nextPutAll: property name;
+					  nextPutAll: '` | `';
+					  nextPutAll: property propertyType;
+					  nextPutAll: '` | ';
+					  print: property defaultValue;
+					  nextPutAll: ' | ';
+					  nextPutAll: (property comment
+							   copyWithRegex: (String with: Character cr with: $+)
+							   matchesReplacedWith: ' ');
+					  nextPut: $|;
+					  cr ] ] ]
 ]
 
 { #category : #'settings - default' }
@@ -270,6 +379,12 @@ FmxMBBehavior >> initialize [
 	prefix := ''.
 	packageName := ''.
 	testingSelectors := Set new
+]
+
+{ #category : #testing }
+FmxMBBehavior >> isEntityCreatorTrait [
+
+	^ false
 ]
 
 { #category : #testing }
@@ -468,6 +583,43 @@ FmxMBBehavior >> slotDefinitions [
 	^ slotGroups values collect: [ :each | each anyOne ]
 ]
 
+{ #category : #associations }
+FmxMBBehavior >> source: aFmxTrait [
+	"By default, a source property is *-"
+
+	self sourceManyToOne: aFmxTrait
+]
+
+{ #category : #associations }
+FmxMBBehavior >> sourceManyToMany: aFmxTrait [
+
+	(self property: (aFmxTrait name copyWithoutFirst: $T) uncapitalized)
+		source
+	*-* (aFmxTrait property: #outgoing , self name asEnglishPlural)
+]
+
+{ #category : #associations }
+FmxMBBehavior >> sourceManyToOne: aFmxTrait [
+
+	(self property: (aFmxTrait name copyWithoutFirst: $T) uncapitalized)
+		source
+	*- (aFmxTrait property: #outgoing , self name asEnglishPlural)
+]
+
+{ #category : #associations }
+FmxMBBehavior >> sourceOneToMany: aFmxTrait [
+
+	(self property: (aFmxTrait name copyWithoutFirst: $T) uncapitalized)
+		source -* (aFmxTrait property: #outgoing , self name)
+]
+
+{ #category : #associations }
+FmxMBBehavior >> sourceOneToOne: aFmxTrait [
+
+	(self property: (aFmxTrait name copyWithoutFirst: $T) uncapitalized)
+		source - (aFmxTrait property: #outgoing , self name)
+]
+
 { #category : #accessing }
 FmxMBBehavior >> tag [
 	^ tag ifNil: [ self defaultTag ]
@@ -477,6 +629,43 @@ FmxMBBehavior >> tag [
 FmxMBBehavior >> tag: aSymbol [
 
 	tag := aSymbol
+]
+
+{ #category : #associations }
+FmxMBBehavior >> target: aFmxTrait [
+	"By default, a source property is *-"
+
+	self targetManyToOne: aFmxTrait
+]
+
+{ #category : #associations }
+FmxMBBehavior >> targetManyToMany: aFmxTrait [
+
+	(self property: (aFmxTrait name copyWithoutFirst: $T) uncapitalized)
+		target
+	*-* (aFmxTrait property: #incoming , self name asEnglishPlural)
+]
+
+{ #category : #associations }
+FmxMBBehavior >> targetManyToOne: aFmxTrait [
+
+	(self property: (aFmxTrait name copyWithoutFirst: $T) uncapitalized)
+		target
+	*- (aFmxTrait property: #incoming , self name asEnglishPlural)
+]
+
+{ #category : #associations }
+FmxMBBehavior >> targetOneToMany: aFmxTrait [
+
+	(self property: (aFmxTrait name copyWithoutFirst: $T) uncapitalized)
+		target -* (aFmxTrait property: #incoming , self name)
+]
+
+{ #category : #associations }
+FmxMBBehavior >> targetOneToOne: aFmxTrait [
+
+	(self property: (aFmxTrait name copyWithoutFirst: $T) uncapitalized)
+		target - (aFmxTrait property: #incoming , self name)
 ]
 
 { #category : #'testing selectors' }

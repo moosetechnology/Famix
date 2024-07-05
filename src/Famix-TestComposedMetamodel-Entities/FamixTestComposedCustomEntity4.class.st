@@ -1,3 +1,16 @@
+"
+## Relations
+======================
+
+### Other
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `c24s` | `FamixTestComposedCustomEntity4` | `c4s` | `FamixTestComposed2CustomEntity4` | |
+| `customEntities4` | `FamixTestComposedCustomEntity4` | `customEntities4` | `FamixTestComposed1CustomEntity4` | |
+
+
+
+"
 Class {
 	#name : #FamixTestComposedCustomEntity4,
 	#superclass : #FamixTestComposedEntity,

@@ -1,3 +1,15 @@
+"
+## Relations
+======================
+
+### Children
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `enumValues` | `FamixTWithEnumValues` | `parentEnum` | `FamixTEnumValue` | |
+
+
+
+"
 Trait {
 	#name : #FamixTWithEnumValues,
 	#instVars : [

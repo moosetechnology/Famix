@@ -9,6 +9,37 @@ In an invocation, From is the sender of the message and To is the list of candid
 anObject aSelector.
 will produce one invocation association from current method to a variable anObject with candidate aSelector. The list of candidates will also contain all the methods defining a similar signature as aSelector. 
 
+
+## Relations
+======================
+
+### Association source
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `sender` | `FamixTInvocation` | `outgoingInvocations` | `FamixTWithInvocations` | Behavioural entity making the call. from-side of the association|
+
+### Association target
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `candidates` | `FamixTInvocation` | `incomingInvocations` | `FamixTInvocable` | List of candidate behavioural entities for receiving the invocation|
+
+### Other
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `next` | `FamixTAssociation` | `previous` | `FamixTAssociation` | Next association in an ordered collection of associations. Currently not supported by the Moose importer|
+| `previous` | `FamixTAssociation` | `next` | `FamixTAssociation` | Previous association in an ordered collection of associations. Currently not supported by the Moose importer|
+| `receiver` | `FamixTInvocation` | `receivingInvocations` | `FamixTInvocationsReceiver` | Named entity (variable, class...) receiving the invocation. to-side of the association|
+| `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
+
+
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+|---|
+| `isStub` | `Boolean` | false | Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.|
+| `signature` | `String` | nil | Signature of the message being sent|
+
 "
 Trait {
 	#name : #FamixTInvocation,
@@ -63,6 +94,23 @@ FamixTInvocation >> candidates: anObject [
 
 	<generated>
 	candidates value: anObject
+]
+
+{ #category : #printing }
+FamixTInvocation >> displayFullStringOn: aStream [
+
+	self sender
+		ifNotNil: [ self sender displayFullStringOn: aStream ]
+		ifNil: [ aStream nextPut: $? ].
+	aStream nextPutAll: ' -> '.
+	self receiver
+		ifNotNil: [ :rcvr | self receiver displayFullStringOn: aStream ]
+		ifNil: [ aStream nextPut: $? ].
+	aStream nextPutAll: '.'.
+
+	self signature
+		ifNotNil: [ aStream nextPutAll: (self signature truncateWithElipsisTo: 40) ]
+		ifNil: [ aStream nextPutAll: ' ? ' ]
 ]
 
 { #category : #printing }

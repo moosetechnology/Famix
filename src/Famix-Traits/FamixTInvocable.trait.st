@@ -1,3 +1,15 @@
+"
+## Relations
+======================
+
+### Incoming dependencies
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `incomingInvocations` | `FamixTInvocable` | `candidates` | `FamixTInvocation` | Incoming invocations from other behaviours computed by the candidate operator.|
+
+
+
+"
 Trait {
 	#name : #FamixTInvocable,
 	#instVars : [

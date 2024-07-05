@@ -11,7 +11,7 @@ a CandidateListOperatorAcceptingBasicAndVariableReceivers  compute a list of pos
 Class {
 	#name : #CandidateListOperatorAcceptingBasicAndVariableReceivers,
 	#superclass : #AbstractCandidateListOperator,
-	#category : #'Moose-SmalltalkImporter'
+	#category : #'Moose-SmalltalkImporter-Operators'
 }
 
 { #category : #running }

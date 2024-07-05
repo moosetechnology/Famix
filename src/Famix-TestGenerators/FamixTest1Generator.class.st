@@ -92,6 +92,7 @@ FamixTest1Generator >> defineHierarchy [
 		--|> #TWithSourceLanguages ;
 		--|> #TClass ;
 		--|> #TSourceEntity;
+		--|> #TPackageable;
 		--|> #TWithComments.
 
 	file --|> namedEntity.

@@ -1,5 +1,16 @@
 "
 I can be the source of an implementation (cf a class implementing an Interface)
+
+## Relations
+======================
+
+### Outgoing dependencies
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `interfaceImplementations` | `FamixTCanImplement` | `implementingClass` | `FamixTImplementation` | Implementation relationships|
+
+
+
 "
 Trait {
 	#name : #FamixTCanImplement,
@@ -22,6 +33,13 @@ FamixTCanImplement classSide >> annotation [
 FamixTCanImplement >> addInterfaceImplementation: anObject [
 	<generated>
 	^ self interfaceImplementations add: anObject
+]
+
+{ #category : #accessing }
+FamixTCanImplement >> directImplementedInterfaces [
+
+	^ self interfaceImplementations collect: [ :implementation |
+		  implementation interface ]
 ]
 
 { #category : #accessing }

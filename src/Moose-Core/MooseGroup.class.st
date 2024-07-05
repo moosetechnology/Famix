@@ -51,6 +51,12 @@ MooseGroup >> addAll: collection [
 	self entityStorage addAll: collection
 ]
 
+{ #category : #converting }
+MooseGroup >> asMooseSpecializedGroup [
+
+	^ self specialize
+]
+
 { #category : #private }
 MooseGroup >> changeTypeTo: aSmalltalkClass [
 	self class == aSmalltalkClass ifTrue: [ ^ self ].
@@ -121,7 +127,7 @@ MooseGroup >> mooseDescription [
 		ifNotNil: [ :model | model mooseDescriptionFor: self class ]
 ]
 
-{ #category : #accessing }
+{ #category : #printing }
 MooseGroup >> mooseNameOn: aStream [
 	"Hook to customize the rendered text of an entity. Do not specialize mooseName, but change/specialize this method if necessary."
 	aStream
@@ -180,7 +186,8 @@ MooseGroup >> select: aBlock [
 
 { #category : #'public interface' }
 MooseGroup >> sort: aBlock [
-	self entities: (self entities sorted: aBlock)
+
+	self entityStorage sort: aBlock
 ]
 
 { #category : #'public interface' }

@@ -1,3 +1,15 @@
+"
+## Relations
+======================
+
+### Children
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `compilationUnit` | `FamixTWithCompilationUnits` | `compilationUnitOwner` | `FamixTCompilationUnit` | |
+
+
+
+"
 Trait {
 	#name : #FamixTWithCompilationUnits,
 	#instVars : [

@@ -4,15 +4,15 @@ Class {
 	#category : #'Moose-SmalltalkImporter-Core-Tests'
 }
 
-{ #category : #importing }
+{ #category : #setup }
 FamixReferenceModelNamespaceMergingClassAndMetaclassTestResource >> importModel [
-	
-	| importer | 
-	importer := MoosePharoImporterTask new.
+
+	| importer |
+	importer := FamixStPharoImporterTask new.
 	importer importingContext mergeClassAndMetaclass.
-	importer importerClass: SmalltalkImporter.
-	importer doNotRunCandidateOperator.
-	importer 
-			model: model; 
-			addFromPackageNamed: #'Moose-TestResources-Reference-Core'; run.
+	importer
+		doNotRunCandidateOperator;
+		model: model;
+		addFromPackageNamed: #'Moose-TestResources-Reference-Core';
+		run
 ]

@@ -1,6 +1,8 @@
 Class {
 	#name : #FamixStModel,
 	#superclass : #MooseModel,
+	#traits : 'FamixStTEntityCreator',
+	#classTraits : 'FamixStTEntityCreator classTrait',
 	#category : #'Famix-PharoSmalltalk-Entities-Model'
 }
 

@@ -1,3 +1,15 @@
+"
+## Relations
+======================
+
+### Parents
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `school` | `FamixTest4Principal` | `principal` | `FamixTest4School` | |
+
+
+
+"
 Class {
 	#name : #FamixTest4Principal,
 	#superclass : #FamixTest4Person,

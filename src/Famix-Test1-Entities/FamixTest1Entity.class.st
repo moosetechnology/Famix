@@ -57,7 +57,28 @@ FamixTest1Entity >> isClass [
 ]
 
 { #category : #testing }
+FamixTest1Entity >> isFileAnchor [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
 FamixTest1Entity >> isMethod [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+FamixTest1Entity >> isNamedEntity [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+FamixTest1Entity >> isQueryable [
 
 	<generated>
 	^ false

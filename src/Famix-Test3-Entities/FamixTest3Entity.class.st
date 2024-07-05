@@ -78,7 +78,28 @@ FamixTest3Entity >> isMethod [
 ]
 
 { #category : #testing }
+FamixTest3Entity >> isNamedEntity [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
 FamixTest3Entity >> isPackage [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+FamixTest3Entity >> isParametricEntity [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+FamixTest3Entity >> isQueryable [
 
 	<generated>
 	^ false

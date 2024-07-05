@@ -1,7 +1,7 @@
 Class {
 	#name : #FamixAnnotationTypeGroup,
 	#superclass : #MooseSpecializedGroup,
-	#category : #'Famix-Traits-Entities'
+	#category : #'Famix-Traits-Groups'
 }
 
 { #category : #meta }

@@ -14,12 +14,14 @@ FamixTest3ModelTest >> actualClass [
 
 { #category : #tests }
 FamixTest3ModelTest >> testExport [
-	self assert: (String streamContents: [ :s | group exportTo: s ]) equals: '()'.
+
+	self
+		assert: (String streamContents: [ :s | group exportToMSEStream: s ])
+		equals: '()'.
 	group add: (FamixTest3Class named: 'Foo').
 	self
-		assert: (String streamContents: [ :s | group exportTo: s ])
-		equals:
-			'(
+		assert: (String streamContents: [ :s | group exportToMSEStream: s ])
+		equals: '(
 	(Famix-Test3-Entities.Class (id: 1)
 		(name ''Foo'')
 		(isStub false)

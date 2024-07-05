@@ -1,5 +1,16 @@
 "
 A container having Global variables
+
+## Relations
+======================
+
+### Children
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `globalVariables` | `FamixTWithGlobalVariables` | `parentScope` | `FamixTGlobalVariable` | Global variables defined in the scope, if any.|
+
+
+
 "
 Trait {
 	#name : #FamixTWithGlobalVariables,

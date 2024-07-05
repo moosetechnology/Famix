@@ -1,13 +1,3 @@
-"
-file := 'ArgoUML-0-34.mse' asFileReference readStream.
-
-repo := MooseModel importFrom: file withMetamodel: FamixJavaModel metamodel.
-
-model := MooseModel new.
-model silentlyAddAll: repo elements.
-model entityStorage forRuntime.
-model
-"
 Class {
 	#name : #FamixJavaEntity,
 	#superclass : #MooseEntity,
@@ -88,6 +78,13 @@ FamixJavaEntity >> isException [
 ]
 
 { #category : #testing }
+FamixJavaEntity >> isFileAnchor [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
 FamixJavaEntity >> isImplicitVariable [
 
 	<generated>
@@ -130,6 +127,13 @@ FamixJavaEntity >> isMethod [
 ]
 
 { #category : #testing }
+FamixJavaEntity >> isNamedEntity [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
 FamixJavaEntity >> isPackage [
 
 	<generated>
@@ -137,7 +141,21 @@ FamixJavaEntity >> isPackage [
 ]
 
 { #category : #testing }
+FamixJavaEntity >> isParametricEntity [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
 FamixJavaEntity >> isPrimitiveType [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+FamixJavaEntity >> isQueryable [
 
 	<generated>
 	^ false

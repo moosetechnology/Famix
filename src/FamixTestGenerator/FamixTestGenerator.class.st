@@ -18,9 +18,8 @@ FamixTestGenerator >> classes [
 
 { #category : #'as yet unclassified' }
 FamixTestGenerator >> createPackageToPutGeneratedTests [
-	(RPackageOrganizer new includesPackageNamed: self generator prefix, '-Tests') ifFalse: 
-	[RPackageOrganizer new createPackageNamed: self generator prefix, '-Tests']
 
+	(RPackageOrganizer new hasPackage: self generator prefix , '-Tests') ifFalse: [ RPackageOrganizer new ensurePackage: self generator prefix , '-Tests' ]
 ]
 
 { #category : #accessing }
@@ -60,7 +59,7 @@ FamixTestGenerator >> initializeClassesFrom: aBlock [
 
 { #category : #initialization }
 FamixTestGenerator >> initializePackageFrom: aPackageName [
-	package := RPackageOrganizer default packageNamed: aPackageName.
+	package := self packageOrganizer packageNamed: aPackageName.
 ]
 
 { #category : #accessing }

@@ -76,6 +76,15 @@ FamixMetamodelBuilder >> acceptVisitor: aVisitor [
 	^ aVisitor visitBuilder: self
 ]
 
+{ #category : #initialization }
+FamixMetamodelBuilder >> addEntityCreatorTraitToModel: aClass [
+
+	(self classes anySatisfy: [ :cls | 
+		 cls isAbstractClass not and: [ 
+			 cls isModelClass not and: [ cls isMetamodelClassGroup not ] ] ]) 
+		ifTrue: [ aClass addTraitGeneralization: self entityCreatorTrait ]
+]
+
 { #category : #accessing }
 FamixMetamodelBuilder >> allSubBuilders [
 
@@ -89,6 +98,17 @@ FamixMetamodelBuilder >> apply [
 ]
 
 { #category : #accessing }
+FamixMetamodelBuilder >> association: anAssociationName [
+
+	| association |
+	association := self ensureClassNamed: anAssociationName.
+
+	association --|> #TAssociation.
+
+	^ association
+]
+
+{ #category : #accessing }
 FamixMetamodelBuilder >> baseImportingContextName [
 
 	^ #FamixImportingContext
@@ -98,6 +118,13 @@ FamixMetamodelBuilder >> baseImportingContextName [
 FamixMetamodelBuilder >> behaviorsCount [
 
 	^ self traits size + self classes size
+]
+
+{ #category : #generating }
+FamixMetamodelBuilder >> changesToApply [
+
+	self prepareGeneration.
+	^ self environment changesToApply
 ]
 
 { #category : #initialization }
@@ -174,6 +201,19 @@ FamixMetamodelBuilder >> ensureLocalTraitNamed: aString [
 		  ifNone: [ self unsafeNewTraitNamed: aString ]
 ]
 
+{ #category : #initialization }
+FamixMetamodelBuilder >> entityCreatorTrait [
+
+	^ self traits
+		  detect: [ :each | each isEntityCreatorTrait ]
+		  ifNone: [
+			  self traits add: (FmxMBEntityCreatorTrait new
+					   builder: self;
+					   prefix: self configuration prefix;
+					   packageName: self configuration packageName;
+					   yourself) ]
+]
+
 { #category : #accessing }
 FamixMetamodelBuilder >> environment [
 
@@ -232,40 +272,26 @@ FamixMetamodelBuilder >> generator: aGenerator [
 
 { #category : #initialization }
 FamixMetamodelBuilder >> getTraitNamed: aSymbol [
-
 	"Check if I contain a trait of this name. If yes, return it. 
-	If I do not contain a trait of this name, check if one of my subMM has a trait of this name. If one is found, return it. If more is found raise an error. If non is found, create a new trait of this name and return it."
+	If no, check if one of my subMM has a trait of this name. If one is found, return it. If more is found raise an error. If non is found, create a new trait of this name and return it."
 
 	| remoteTraits |
-	self flag: #todo. "Maybe we could cache the sub MM entities."
 	remoteTraits := Dictionary new.
-	self allSubBuilders do: [ :builder | 
+	self allSubBuilders do: [ :builder |
 		builder traits
 			detect: [ :each | each name = aSymbol ]
 			ifFound: [ :trait | remoteTraits at: builder put: trait ] ].
-	remoteTraits size = 1 ifTrue: [ 
+	remoteTraits size = 1 ifTrue: [
 		^ remoteTraits values anyOne
 			  isRemote: true;
 			  remoteBuilder: self;
 			  yourself ].
-	remoteTraits size > 1 ifTrue: [ 
-		self error:
-			('Multiple remote traits named {1} where found in sub metamodels. Found in: {2}.
-In order to fix the issue you should use #remoteTrait:withPrefix: in your generator to select yourself the right trait to use. If you want to create an entity of this name in your model and not use the trait of this name from a sub metamodel, declare this trait before referencing it.' 
-				 format: { 
+	remoteTraits size > 1 ifTrue: [
+		self error: ('Multiple remote traits named {1} where found in sub metamodels. Found in: {2}.
+In order to fix the issue you should use #remoteTrait:withPrefix: in your generator to select yourself the right trait to use. If you want to create an entity of this name in your model and not use the trait of this name from a sub metamodel, declare this trait before referencing it.'
+				 format: {
 						 aSymbol.
-						 (', ' join:
-							  (remoteTraits keys collect: [ :builder | 
-								   builder generator asString ])) }) ].
-
-	self flag: #todo. "Cyril: I introduced this warning in the development of Moose 8 to not break every existing generators. We should remove the full detect in the future, for example in the development of Moose 9 (not before!) and revome the warning class."
-	self traits
-		detect: [ :each | each name = aSymbol ]
-		ifFound: [ :trait | 
-			FamixShouldNotUseSymbolsToAccessLocalEntities
-				signalFor: aSymbol
-				from: self generator.
-			^ trait ].
+						 (', ' join: (remoteTraits keys collect: [ :builder | builder generator asString ])) }) ].
 
 	^ self traitNamed: aSymbol
 ]
@@ -443,21 +469,31 @@ FamixMetamodelBuilder >> parentBuilderPackageName [
 ]
 
 { #category : #generating }
+FamixMetamodelBuilder >> prepareBehaviorsGeneration [
+
+	self traitsWithSubBuildersTraits do: [ :each |
+		self testingSelectorsMapping at: each put: each testingSelectors ].
+	self classes do: [ :each |
+		self testingSelectorsMapping at: each put: each testingSelectors ].
+	self traits do: [ :each | each generate ].
+	self sortedClasses do: [ :each | each generate ]
+]
+
+{ #category : #'as yet unclassified' }
 FamixMetamodelBuilder >> prepareGeneration [
 
 	self registerPackages.
-
 	self ensureEntityClassIsTheCommonSuperclass.
-	"ensure the model entity exists before generating"
-	(self behaviorsCount > 0 or: [ 
-		 self relations size > 0 or: [ self subBuilders size > 0 ] ]) 
-		ifTrue: [ self model ].
-	self traitsWithSubBuildersTraits do: [ :each | 
-		self testingSelectorsMapping at: each put: each testingSelectors ].
-	self classes do: [ :each | 
-		self testingSelectorsMapping at: each put: each testingSelectors ].
-	self traits do: [ :each | each generate ].
-	self sortedClasses do: [ :each | each generate ].
+
+	self shouldGenerateModel
+		ifTrue: [
+			| model |
+			model := self model.
+			self withSubBuildersAddEntityCreatorTraitTo: model.
+			self prepareBehaviorsGeneration.
+			self entityCreatorTrait generateEntityCreationMethods ]
+		ifFalse: [ self prepareBehaviorsGeneration ].
+
 	self behaviorsCount > 0 ifTrue: [ self generateImportingContext ]
 ]
 
@@ -471,13 +507,6 @@ FamixMetamodelBuilder >> printOn: aStream [
 			nextPut: $(;
 			print: g class;
 			nextPut: $) ]
-]
-
-{ #category : #generating }
-FamixMetamodelBuilder >> regenerationIsNeeded [
-
-	self prepareGeneration.
-	^ self environment regenerationIsNeeded
 ]
 
 { #category : #generating }
@@ -511,12 +540,22 @@ FamixMetamodelBuilder >> safeAnnotationPackageName [
 	^ self configuration packageNameForAnnotations asSymbol printString
 ]
 
+{ #category : #generating }
+FamixMetamodelBuilder >> shouldGenerateModel [
+
+	^ self behaviorsCount > 0 or: [
+		  self relations isNotEmpty or: [ self subBuilders isNotEmpty ] ]
+]
+
 { #category : #accessing }
 FamixMetamodelBuilder >> sortedClasses [
 
 	<ignoreForMutations: #( ReplaceLessOrEqualWithLessMutantOperator )>
-	^ self classes sorted:
-		  [ :class | class allClassGeneralizations size ] ascending
+
+	^ self classes sorted: [ :class |
+		  class isModelClass
+			  ifTrue: [ -1 ]
+			  ifFalse: [ class allClassGeneralizations size ] ] ascending
 ]
 
 { #category : #accessing }
@@ -591,4 +630,12 @@ FamixMetamodelBuilder >> withImportingContext [
 		transformWith:
 		'`@receiver withImportingContext' -> '`@receiver withFileImport'.
 	self withFileImport
+]
+
+{ #category : #initialization }
+FamixMetamodelBuilder >> withSubBuildersAddEntityCreatorTraitTo: aClass [
+
+	self addEntityCreatorTraitToModel: aClass.
+	self allSubBuilders do: [ :subBuilder | 
+		subBuilder addEntityCreatorTraitToModel: aClass ]
 ]

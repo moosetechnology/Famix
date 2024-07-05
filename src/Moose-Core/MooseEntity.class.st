@@ -133,10 +133,12 @@ MooseEntity >> detectDependenciesUsing: aDetector [
 
 { #category : #properties }
 MooseEntity >> handleFameProperty: aSymbol value: anObject [
-	
+
 	| value |
 	super handleFameProperty: aSymbol value: anObject.
-	value := (anObject isCollection and: [anObject size = 1]) ifTrue: [anObject anyOne] ifFalse: [anObject].
+	value := (anObject isCollection and: [ anObject size = 1 ])
+		         ifTrue: [ anObject anyOne ]
+		         ifFalse: [ anObject ].
 	self propertyNamed: aSymbol put: value
 ]
 
@@ -183,10 +185,11 @@ MooseEntity >> isMooseEntity [
 ]
 
 { #category : #testing }
-MooseEntity >> isRoot [
-	"Return true if the entity is not contained in any other entity."
+MooseEntity >> isQueryable [
+	"This should probably be removed in the future but is here for compatibility.
+	Could be removed in Moose 12."
 
-	^ self parents isEmpty
+	^ false
 ]
 
 { #category : #testing }

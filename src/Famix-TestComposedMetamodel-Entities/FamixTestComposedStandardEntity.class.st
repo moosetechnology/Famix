@@ -1,3 +1,15 @@
+"
+## Relations
+======================
+
+### Other
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `method` | `FamixTestComposedStandardEntity` | `standardEntity` | `FamixTestComposed1Method` | |
+
+
+
+"
 Class {
 	#name : #FamixTestComposedStandardEntity,
 	#superclass : #FamixTestComposedEntity,

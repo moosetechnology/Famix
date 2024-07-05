@@ -1,3 +1,15 @@
+"
+## Relations
+======================
+
+### Children
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `comments` | `FamixTWithComments` | `commentedEntity` | `FamixTComment` | List of comments for the entity|
+
+
+
+"
 Trait {
 	#name : #FamixTWithComments,
 	#instVars : [
@@ -49,13 +61,11 @@ FamixTWithComments >> hasComments [
 
 { #category : #accessing }
 FamixTWithComments >> numberOfComments [
+
 	<FMProperty: #numberOfComments type: #Number>
 	<derived>
-	<FMComment: 'The number of comments in the entity'>
-	^ self
-		lookUpPropertyNamed: #numberOfComments
-		computedAs: [ self comments size ]
-
+	<FMComment: 'The number of comments in the entity. Does not count comments of children entities (for example, for a class, I will count the comments associated to the class and not the methods or arguments.'>
+	^ self lookUpPropertyNamed: #numberOfComments computedAs: [ self comments size ]
 ]
 
 { #category : #accessing }

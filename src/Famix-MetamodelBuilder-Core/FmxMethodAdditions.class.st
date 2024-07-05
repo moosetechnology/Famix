@@ -53,7 +53,10 @@ FmxMethodAdditions >> apply [
 
 { #category : #compiling }
 FmxMethodAdditions >> compile: aRGMethod into: realClass [
-	^ realClass compile: aRGMethod sourceCode classified: aRGMethod protocol
+
+	^ realClass
+		  compile: aRGMethod sourceCode
+		  classified: aRGMethod protocol
 ]
 
 { #category : #accessing }

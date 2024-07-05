@@ -1,5 +1,15 @@
 "
 This offers a source anchor that connects a sourced entity to a file through a relative path stored in the fileName. In addition, the source can be further specified with a startLine and an endLine number in the file.
+
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+|---|
+| `correspondingFile` | `FamixTFile` | nil | File associated to this source anchor|
+| `encoding` | `String` | nil | A string representing the encoding of a file|
+| `fileName` | `String` | nil | Name of the source file|
+
 "
 Trait {
 	#name : #FamixTFileAnchor,
@@ -121,6 +131,8 @@ FamixTFileAnchor >> isContiguousWith: anotherFileAnchor [
 
 { #category : #testing }
 FamixTFileAnchor >> isFileAnchor [
+
+	<generated>
 	^ true
 ]
 

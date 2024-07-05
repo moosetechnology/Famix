@@ -289,7 +289,19 @@ MooseObject >> description: text [
 ]
 
 { #category : #printing }
-MooseObject >> displayStringOn: aStream [ 
+MooseObject >> displayFullString [
+	"Return a name corresponding to the moose name but also for the associations instead of returning #noname"
+
+	^ String streamContents: [ :stream | self displayFullStringOn: stream ]
+]
+
+{ #category : #printing }
+MooseObject >> displayFullStringOn: aStream [
+	self mooseNameOn: aStream
+]
+
+{ #category : #printing }
+MooseObject >> displayStringOn: aStream [
 	self mooseNameOn: aStream
 ]
 
@@ -356,6 +368,11 @@ MooseObject >> isBookmarked: aBoolean [
 { #category : #testing }
 MooseObject >> isMooseModel [
 	^ false
+]
+
+{ #category : #testing }
+MooseObject >> isMooseObject [
+	^ true
 ]
 
 { #category : #testing }
@@ -484,10 +501,9 @@ MooseObject >> properties [
 
 { #category : #properties }
 MooseObject >> propertyNamed: propertyName [ 
-	"Return the value of the property named propertyName, return nil if the property does not exist"
+	"Returns the value of the property named propertyName, raises an error if the property does not exist"
 
-	^ self propertyNamed: propertyName ifNil: [ nil ]
-
+	^ self propertyNamed: propertyName ifAbsent: [ NotFound signalFor: 'Property named ', propertyName  ]
 ]
 
 { #category : #properties }

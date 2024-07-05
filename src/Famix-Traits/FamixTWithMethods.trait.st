@@ -1,3 +1,15 @@
+"
+## Relations
+======================
+
+### Children
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `methods` | `FamixTWithMethods` | `parentType` | `FamixTMethod` | Methods declared by this type.|
+
+
+
+"
 Trait {
 	#name : #FamixTWithMethods,
 	#instVars : [
@@ -18,6 +30,13 @@ FamixTWithMethods classSide >> annotation [
 { #category : #accessing }
 FamixTWithMethods >> addMethod: aMethod [
 	methods add: aMethod
+]
+
+{ #category : #testing }
+FamixTWithMethods >> implements: aString [
+	"Was changed from match: for performances and because signature is case sensitive"
+
+	^ self methods anySatisfy: [ :each | aString = each signature ]
 ]
 
 { #category : #accessing }

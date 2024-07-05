@@ -11,11 +11,19 @@ public class SynchronizedCounter {
     }
 }
 ```
+
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+|---|
+| `isSynchronized` | `Boolean` | false | Entity can be declared synchronized|
+
 "
 Trait {
 	#name : #FamixJavaTCanBeSynchronized,
 	#instVars : [
-		'#isSynchronized => FMProperty'
+		'#isSynchronized => FMProperty defaultValue: false'
 	],
 	#category : #'Famix-Java-Entities-Traits'
 }
@@ -32,10 +40,10 @@ FamixJavaTCanBeSynchronized classSide >> annotation [
 { #category : #accessing }
 FamixJavaTCanBeSynchronized >> isSynchronized [
 
-	<FMProperty: #isSynchronized type: #Boolean>
+	<FMProperty: #isSynchronized type: #Boolean defaultValue: false>
 	<generated>
 	<FMComment: 'Entity can be declared synchronized'>
-	^ isSynchronized
+	^ isSynchronized ifNil: [ isSynchronized := false ]
 ]
 
 { #category : #accessing }

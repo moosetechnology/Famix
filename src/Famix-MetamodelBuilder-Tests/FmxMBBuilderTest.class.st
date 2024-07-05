@@ -121,32 +121,28 @@ FmxMBBuilderTest >> testMultipleTraitsCreation [
 FmxMBBuilderTest >> testNewClassNamedComment [
 
 	| c1 aClass |
-	
 	aClass := builder newClassNamed: #C1 comment: 'comment'.
 	self assert: aClass comment equals: 'comment'.
 	self assert: aClass isMetamodelClass.
-	
+
 	builder generate.
-	
+
 	c1 := builder testingEnvironment ask classNamed: 'TstC1'.
-	self assert: c1 comment content equals: 'comment'
-	
+	self assert: (c1 comment content beginsWith: 'comment')
 ]
 
 { #category : #tests }
 FmxMBBuilderTest >> testNewTraitNamedComment [
 
 	| t1 aTrait |
-	
 	aTrait := builder newTraitNamed: #T1 comment: 'comment'.
 	self assert: aTrait comment equals: 'comment'.
 	self assert: aTrait isMetamodelTrait.
-	
+
 	builder generate.
-	
+
 	t1 := builder testingEnvironment ask traitNamed: 'TstT1'.
-	self assert: t1 comment content equals: 'comment'
-	
+	self assert: (t1 comment content beginsWith: 'comment')
 ]
 
 { #category : #tests }

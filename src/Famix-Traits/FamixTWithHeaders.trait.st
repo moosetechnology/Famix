@@ -1,3 +1,15 @@
+"
+## Relations
+======================
+
+### Children
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `header` | `FamixTWithHeaders` | `headerOwner` | `FamixTHeader` | The header file that defines this module|
+
+
+
+"
 Trait {
 	#name : #FamixTWithHeaders,
 	#instVars : [

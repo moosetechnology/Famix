@@ -1,3 +1,12 @@
+"
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+|---|
+| `modifiers` | `String` | nil | Generic container for language dependent modifiers.|
+
+"
 Trait {
 	#name : #FamixTHasModifiers,
 	#instVars : [

@@ -7,5 +7,5 @@ Class {
 { #category : #hook }
 ClassesExtensionTestResource >> importModel [
 
-	SmalltalkImporter new model: model; addPackageNamed: 'ReferenceModel' ; run.
+	FamixStImporter new model: model; addPackageNamed: 'ReferenceModel' ; run.
 ]

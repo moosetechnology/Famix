@@ -1,3 +1,12 @@
+"
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+|---|
+| `name` | `String` | nil | Basic name of the entity, not full reference.|
+
+"
 Class {
 	#name : #FamixTest6NamedEntity,
 	#superclass : #FamixTest6Entity,
@@ -21,4 +30,11 @@ FamixTest6NamedEntity class >> isAbstract [
 
 	<generated>
 	^ self == FamixTest6NamedEntity
+]
+
+{ #category : #testing }
+FamixTest6NamedEntity >> isNamedEntity [
+
+	<generated>
+	^ true
 ]

@@ -1,10 +1,27 @@
 "
 FamixTSourcedEntity models any fact in a program source and it is the superclass (root class) of all source code entities and their relationships. It is a FamixTEntity and it can hold comments, a source anchor and a source language.
+
+## Relations
+======================
+
+### Other
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
+
+
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+|---|
+| `isStub` | `Boolean` | false | Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.|
+
 "
 Trait {
 	#name : #FamixTSourceEntity,
 	#instVars : [
-		'#isStub => FMProperty',
+		'#isStub => FMProperty defaultValue: false',
 		'#sourceAnchor => FMOne type: #FamixTSourceAnchor opposite: #element'
 	],
 	#category : #'Famix-Traits-SourceAnchor'
@@ -66,9 +83,10 @@ FamixTSourceEntity >> hasSourceAnchor [
 { #category : #accessing }
 FamixTSourceEntity >> isStub [
 
-	<FMProperty: #isStub type: #Boolean>
+	<FMProperty: #isStub type: #Boolean defaultValue: false>
+	<generated>
 	<FMComment: 'Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.'>
-	^ isStub ifNil: [ false ]
+	^ isStub ifNil: [ isStub := false ]
 ]
 
 { #category : #accessing }

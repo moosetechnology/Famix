@@ -1,3 +1,15 @@
+"
+## Relations
+======================
+
+### Outgoing dependencies
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `outgoingInvocations` | `FamixTWithInvocations` | `sender` | `FamixTInvocation` | Outgoing invocations sent by this behaviour.|
+
+
+
+"
 Trait {
 	#name : #FamixTWithInvocations,
 	#instVars : [

@@ -1,9 +1,19 @@
 "
 This is a the comment of the model class
+
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+|---|
+| `modelHasProperties` | `Object` | nil | |
+
 "
 Class {
 	#name : #FamixTest1Model,
 	#superclass : #MooseModel,
+	#traits : 'FamixTest1TEntityCreator',
+	#classTraits : 'FamixTest1TEntityCreator classTrait',
 	#instVars : [
 		'#modelHasProperties => FMProperty'
 	],

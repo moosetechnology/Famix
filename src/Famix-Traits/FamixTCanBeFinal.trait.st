@@ -1,7 +1,16 @@
+"
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+|---|
+| `isFinal` | `Boolean` | false | Entity can be declared final|
+
+"
 Trait {
 	#name : #FamixTCanBeFinal,
 	#instVars : [
-		'#isFinal => FMProperty'
+		'#isFinal => FMProperty defaultValue: false'
 	],
 	#category : #'Famix-Traits-Traits'
 }

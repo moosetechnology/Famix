@@ -8,7 +8,7 @@ a CandidateListOperatorAcceptingSimpleKindsOfReceiver compute a list of possible
 Class {
 	#name : #CandidateListOperatorAcceptingSimpleKindsOfReceiver,
 	#superclass : #AbstractCandidateListOperator,
-	#category : #'Moose-SmalltalkImporter'
+	#category : #'Moose-SmalltalkImporter-Operators'
 }
 
 { #category : #running }

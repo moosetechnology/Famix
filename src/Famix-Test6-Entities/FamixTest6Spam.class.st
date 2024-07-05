@@ -1,3 +1,12 @@
+"
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+|---|
+| `isSomething` | `Boolean` | false | |
+
+"
 Class {
 	#name : #FamixTest6Spam,
 	#superclass : #FamixTest6Bacon,

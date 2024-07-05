@@ -364,9 +364,11 @@ MooseQueryTest >> testAtScopeWithPropertyHandleError [
 
 { #category : #tests }
 MooseQueryTest >> testAtScopeWithPropertyOnlyUnderstandByParent [
-	class1 isInterface: true.
-	self assertCollection: (class1 atScopeWithProperty: #isInterface) hasSameElements: {class1}.
-	self assertCollection: (method1 atScopeWithProperty: #isInterface) hasSameElements: {class1}.
+	| interface1 methodInt1 |
+	interface1 := (FamixJavaInterface named: 'interface1').
+	methodInt1 := (FamixJavaMethod named: 'methodInt1') parentType: interface1.
+	self assertCollection: (interface1 atScopeWithProperty: #isInterface) hasSameElements: {interface1}.
+	self assertCollection: (methodInt1 atScopeWithProperty: #isInterface) hasSameElements: {interface1}.
 	self assertCollection: (class2 atScopeWithProperty: #isInterface) hasSameElements: {}.
 	self assertCollection: (method2 atScopeWithProperty: #isInterface) hasSameElements: {}.
 ]
@@ -393,7 +395,7 @@ MooseQueryTest >> testChildren [
 MooseQueryTest >> testChildrenSelectors [
 	self
 		assertCollection: class1 childrenSelectors
-		hasSameElements: #(#types #attributes #methods #definedAnnotationTypes)
+		hasSameElements: #(#types #attributes #methods #definedAnnotationTypes #comments)
 ]
 
 { #category : #tests }
@@ -543,7 +545,8 @@ MooseQueryTest >> testIncomingAssociationTypes [
 		hasSameElements: { 
 				FamixTInheritance.
 				FamixTReference.
-				FamixTImport }.
+				FamixTImport.
+				FamixTParameterConcretization }.
 	self
 		assertCollection: method1 incomingAssociationTypes
 		hasSameElements: { 

@@ -1,7 +1,16 @@
+"
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+|---|
+| `isAbstract` | `Boolean` | false | Entity can be declared abstract|
+
+"
 Trait {
 	#name : #FamixTCanBeAbstract,
 	#instVars : [
-		'#isAbstract => FMProperty'
+		'#isAbstract => FMProperty defaultValue: false'
 	],
 	#category : #'Famix-Traits-Traits'
 }

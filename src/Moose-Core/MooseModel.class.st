@@ -41,7 +41,7 @@ MooseModel class >> defaultPackagesToProcessWith: aCollectionOfPackages [
 	
 	If a user of Famix wishes to add entities to all metamodels, they should add a methode #shouldBeIncludedByDefaultInMetamodelsWith: to their package manifest to return true."
 
-	^ RPackageOrganizer default packages
+	^ self packageOrganizer packages
 		select: [ :package | 
 			package packageManifestOrNil
 				ifNil: [ false ]
@@ -64,25 +64,32 @@ MooseModel class >> developerToolsMenuLabel [
 ]
 
 { #category : #'import-export' }
-MooseModel class >> export: aModel to: aStream [ 
-	aModel exportTo: aStream
+MooseModel class >> export: aModel to: aStream [
+
+	self
+		deprecated:
+			'This method is not used and will be removed in the next Moose version. 
+Please use an instance side method instead. 
+The default export is done in a MSE format. JSON is also available'
+		transformWith: '`@modelClass export: `@model to: `@stream'
+			-> '`@model exportToMSEStream: `@stream'.
+
+	aModel exportToMSEStream: aStream
 ]
 
 { #category : #'import-export' }
-MooseModel class >> export: aModel withMetamodel: aMetamodel to: aStream [
-	aModel exportWithMetamodel: aMetamodel to: aStream
-]
+MooseModel class >> exportMetamodel: aMetamodel to: aStream [
 
-{ #category : #'import-export' }
-MooseModel class >> exportMetamodel: aMetamodel to: aStream [ 
+	self
+		deprecated:
+			'This method is not used and will be removed in the next Moose version. 
+Please use an instance side method instead.
+The default export is done in a MSE format. JSON is also available'
+		transformWith:
+			'`@modelClass exportMetamodel: `@metamodel to: `@stream'
+			-> '`@metamodel exportMetamodelToMSEStream: `@stream'.
 
-	aMetamodel exportOn: aStream
-]
-
-{ #category : #'import-export' }
-MooseModel class >> exportMetamodelTo: aStream [
-	self deprecated: 'Use exportMetamodelTo: in instance side'.
-	self exportMetamodel: self metamodel to: aStream
+	aMetamodel exportMetamodelToMSEStream: aStream
 ]
 
 { #category : #accessing }
@@ -262,8 +269,6 @@ MooseModel class >> importMetamodelFrom: aStream [
 { #category : #meta }
 MooseModel class >> metamodel [
 
-	self flag: #TODO. "The next line is a hack to not break everything in Moose. It should be removed later."
-	self = MooseModel ifTrue: [ ^ FamixStModel metamodel ].
 	^ metamodel ifNil: [ self resetMetamodel ]
 ]
 
@@ -391,12 +396,10 @@ MooseModel >> allRootContainers [
 	^ self allModelContainers select: #isRoot
 ]
 
-{ #category : #actions }
+{ #category : #'import-export' }
 MooseModel >> asMSEString [
-	| stream |
-	stream := (String new: 1024) writeStream.
-	self exportToMSEStream: stream.
-	^ stream contents
+
+	^ String streamContents: [ :stream | self exportToMSEStream: stream ]
 ]
 
 { #category : #groups }
@@ -432,15 +435,16 @@ MooseModel >> deadCodeRate [
 		computedAs: [ self allBehaviouralsWithDeadCode size / self allModelBehaviourals size ]
 ]
 
-{ #category : #actions }
+{ #category : #'import-export' }
 MooseModel >> detectEncodingOfAllFileAnchors [
+
 	"I can be execute to reduce the time of detection of the encoding of each file anchor because multiple file anchor can point to the same file."
 
-	(((self allUsing: FamixTFileAnchor) asOrderedCollection reject: #privateHasEncoding) groupedBy: #fileName)
-		valuesDo: [ :anchors | 
-			| encoding |
-			encoding := anchors anyOne detectEncoding.
-			anchors do: [ :anchor | anchor encoding: encoding ] ]
+	(((self allUsing: FamixTFileAnchor) asOrderedCollection reject:
+		  #privateHasEncoding) groupedBy: #fileName) valuesDo: [ :anchors |
+		| encoding |
+		encoding := anchors anyOne detectEncoding.
+		anchors do: [ :anchor | anchor encoding: encoding ] ]
 ]
 
 { #category : #'set operations' }
@@ -453,70 +457,55 @@ MooseModel >> difference: aGroup [
 ]
 
 { #category : #'import-export' }
-MooseModel >> exportMetamodel: aMetamodel to: aStream [
+MooseModel >> exportMetamodelTo: aStream [
 
-	self class exportMetamodel: aMetamodel to: aStream
+	self
+		deprecated: 'Renamed to specify the format.'
+		transformWith: '`@receiver exportMetamodelTo: `@arg'
+			-> '`@receiver exportMetamodelToMSEStream: `@arg'.
+
+	self metamodel exportMetamodelToMSEStream: aStream
 ]
 
 { #category : #'import-export' }
-MooseModel >> exportMetamodelTo: aStream [
-	self exportMetamodel: self metamodel to: aStream
+MooseModel >> exportMetamodelToMSEStream: aStream [
+
+	self metamodel exportToMSEStream: aStream
 ]
 
 { #category : #'import-export' }
 MooseModel >> exportTo: aStream [
-	self exportWithMetamodel: self metamodel to: aStream
+
+	self
+		deprecated:
+		'Please specify the format you want to export to. Default is MSE. JSON is also available.'
+		transformWith:
+		'`@model exportTo: `@stream'
+		-> '`@model exportToMSEStream: `@stream'.
+
+	self exportToMSEStream: aStream
 ]
 
 { #category : #'import-export' }
-MooseModel >> exportTo: aStream usingPrinter: aPrinter [
-	self exportWithMetamodel: self metamodel to: aStream usingPrinter: aPrinter
-]
-
-{ #category : #actions }
 MooseModel >> exportToJSONStream: aStream [
-	"Benchmarks on Network packages
-		Time millisecondsToRun: [ self exportToMSEStream: (StandardFileStream forceNewFileNamed: 'network.mse') ]
-		34408ms -> simon.denier 9/11/2009 11:12 - initial run
-		35527ms -> simon.denier 9/11/2009 11:51 - IdentityHashSet in FMRepository#elements, worse?
-		rewind
-		32236ms -> simon.denier 9/11/2009 17:46 - IdentityHashTable in FMRepositoryVisitor, a bit better but not much
-		30963ms -> simon.denier 9/15/2009 12:28 - cache for roots (UI process)
-		24661ms -> simon_denier 9/21/2009 22:32 - removing metrics from MSE
-	"
 
 	self detectEncodingOfAllFileAnchors.
-	self exportTo: aStream usingPrinter: FMJSONPrinter
+	self exportWithMetamodelUsingPrinter: (FMJSONPrinter on: aStream)
 ]
 
-{ #category : #actions }
+{ #category : #'import-export' }
 MooseModel >> exportToMSEStream: aStream [
-	"Benchmarks on Network packages
-		Time millisecondsToRun: [ self exportToMSEStream: (StandardFileStream forceNewFileNamed: 'network.mse') ]
-		34408ms -> simon.denier 9/11/2009 11:12 - initial run
-		35527ms -> simon.denier 9/11/2009 11:51 - IdentityHashSet in FMRepository#elements, worse?
-		rewind
-		32236ms -> simon.denier 9/11/2009 17:46 - IdentityHashTable in FMRepositoryVisitor, a bit better but not much
-		30963ms -> simon.denier 9/15/2009 12:28 - cache for roots (UI process)
-		24661ms -> simon_denier 9/21/2009 22:32 - removing metrics from MSE
-	"
 
 	self detectEncodingOfAllFileAnchors.
-	self exportTo: aStream usingPrinter: FMMSEPrinter
+	self exportWithMetamodelUsingPrinter: (FMMSEPrinter on: aStream)
 ]
 
 { #category : #'import-export' }
-MooseModel >> exportWithMetamodel: aMetamodel to: aStream [
-	(FMModel withMetamodel: aMetamodel)
-		addAll: self entities;
-		exportOn: aStream usingPrinter: FMMSEPrinter
-]
+MooseModel >> exportWithMetamodelUsingPrinter: aPrinter [
 
-{ #category : #'import-export' }
-MooseModel >> exportWithMetamodel: aMetamodel to: aStream usingPrinter: aPrinter [
-	(FMModel withMetamodel: aMetamodel)
+	(FMModel withMetamodel: self metamodel)
 		addAll: self entities;
-		exportOn: aStream usingPrinter: aPrinter
+		exportWithPrinter: aPrinter
 ]
 
 { #category : #accessing }
@@ -531,15 +520,14 @@ MooseModel >> flushPrivateState [
 	self entities do: #flush displayingProgress: [ :entity | 'Cleaning cache of ' , entity mooseName ]
 ]
 
-{ #category : #actions }
+{ #category : #'import-export' }
 MooseModel >> importFrom: aFMModel named: aString [
 
 	self silentlyAddAll: aFMModel elements.
-	self entityStorage forRuntime.
 	self name: aString
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'import-export' }
 MooseModel >> importFromJSON [
 
 	| file |
@@ -555,7 +543,7 @@ MooseModel >> importFromJSON [
 		stream close ]
 ]
 
-{ #category : #actions }
+{ #category : #'import-export' }
 MooseModel >> importFromJSONStream: aStream [
 
 	"Benchmarks
@@ -572,7 +560,7 @@ MooseModel >> importFromJSONStream: aStream [
 		  named: (aStream localName removeSuffix: '.json')
 ]
 
-{ #category : #actions }
+{ #category : #'import-export' }
 MooseModel >> importFromJSONStream: aStream filteredBy: anImportingContext [
 
 	^ self
@@ -599,7 +587,7 @@ MooseModel >> importFromMSE [
 		stream close ]
 ]
 
-{ #category : #actions }
+{ #category : #'import-export' }
 MooseModel >> importFromMSEStream: aStream [
 
 	"Benchmarks
@@ -616,7 +604,7 @@ MooseModel >> importFromMSEStream: aStream [
 		  named: (aStream localName removeSuffix: '.mse')
 ]
 
-{ #category : #actions }
+{ #category : #'import-export' }
 MooseModel >> importFromMSEStream: aStream filteredBy: anImportingContext [
 
 	^ self

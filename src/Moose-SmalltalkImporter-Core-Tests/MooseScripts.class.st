@@ -15,13 +15,15 @@ MooseScripts class >> createLightModelForLAN [
 	| model |
 	model := FamixStModel new.
 	model name: 'lightLAN'.
-	MoosePharoImporterTask new
-		importingContext:
-			(MooseImportingContext new
-				importClassMethodInheritanceAttribute;
-				importPackage;
-				mergeClassAndMetaclass;
-				yourself);
+	FamixStPharoImporterTask new
+		importingContext: (FamixStImporterContext new
+				 importClass;
+				 importMethod;
+				 importInheritance;
+				 importAttribute;
+				 importPackage;
+				 mergeClassAndMetaclass;
+				 yourself);
 		doNotRunCandidateOperator;
 		model: model;
 		addFromPackagesNamed: (self packageNamesFor: 'Moose-LAN*');
@@ -41,13 +43,15 @@ MooseScripts class >> createLightModelForMorphic [
 	| model |
 	model := FamixStModel new.
 	model name: 'lightMorphic'.
-	MoosePharoImporterTask new
-		importingContext:
-			(MooseImportingContext new
-				importClassMethodInheritanceAttribute;
-				importPackage;
-				mergeClassAndMetaclass;
-				yourself);
+	FamixStPharoImporterTask new
+		importingContext: (FamixStImporterContext new
+				 importClass;
+				 importMethod;
+				 importInheritance;
+				 importAttribute;
+				 importPackage;
+				 mergeClassAndMetaclass;
+				 yourself);
 		doNotRunCandidateOperator;
 		model: model;
 		addFromPackagesNamed: (self packageNamesFor: 'Morphic*');
@@ -69,13 +73,15 @@ MooseScripts class >> createLightModelForNetwork [
 	| model |
 	model := FamixStModel new.
 	model name: 'lightNetwork'.
-	MoosePharoImporterTask new
-		importingContext:
-			(MooseImportingContext new
-				importClassMethodInheritanceAttribute;
-				importPackage;
-				mergeClassAndMetaclass;
-				yourself);
+	FamixStPharoImporterTask new
+		importingContext: (FamixStImporterContext new
+				 importClass;
+				 importMethod;
+				 importInheritance;
+				 importAttribute;
+				 importPackage;
+				 mergeClassAndMetaclass;
+				 yourself);
 		doNotRunCandidateOperator;
 		model: model;
 		addFromPackagesNamed: (self packageNamesFor: 'Network*');
@@ -96,13 +102,15 @@ MooseScripts class >> createLightModelForPharo [
 	| model |
 	model := FamixStModel new.
 	model name: 'lightPharo'.
-	MoosePharoImporterTask new
-		importingContext:
-			(MooseImportingContext new
-				importClassMethodInheritanceAttribute;
-				importPackage;
-				mergeClassAndMetaclass;
-				yourself);
+	FamixStPharoImporterTask new
+		importingContext: (FamixStImporterContext new
+				 importClass;
+				 importMethod;
+				 importInheritance;
+				 importAttribute;
+				 importPackage;
+				 mergeClassAndMetaclass;
+				 yourself);
 		doNotRunCandidateOperator;
 		model: model;
 		addFromPackagesNamed: self pharoPackageNames;
@@ -120,7 +128,7 @@ MooseScripts class >> createMediumModelForNetwork [
 	| model importer |
 	model := FamixStModel new.
 	model name: 'mediumNetwork'.
-	importer := MoosePharoImporterTask new.
+	importer := FamixStPharoImporterTask new.
 	importer importingContext mergeClassAndMetaclass.
 	importer doNotRunCandidateOperator.
 	importer model: model; addFromPackagesNamed: (self packageNamesFor: 'Network*'); runWithProgress.
@@ -140,7 +148,7 @@ MooseScripts class >> createModelForMorphic [
 	| model importer |
 	model := FamixStModel new.
 	model name: 'Morphic'.
-	importer := MoosePharoImporterTask new.
+	importer := FamixStPharoImporterTask new.
 	importer importingContext mergeClassAndMetaclass.
 	importer runCandidateOperator.
 	importer model: model; addFromPackagesNamed: (self packageNamesFor: 'Morphic*'); runWithProgress.
@@ -163,7 +171,7 @@ MooseScripts class >> createModelForNetwork [
 	| model importer |
 	model := FamixStModel new.
 	model name: 'Network'.
-	importer := MoosePharoImporterTask new.
+	importer := FamixStPharoImporterTask new.
 	importer importingContext mergeClassAndMetaclass.
 	importer runCandidateOperator.
 	importer model: model; addFromPackagesNamed: (self packageNamesFor: 'Network*') ; runWithProgress.
@@ -177,7 +185,7 @@ MooseScripts class >> createModelForPharo [
 	| model importer |
 	model := FamixStModel new.
 	model name: 'Pharo'.
-	importer := MoosePharoImporterTask new.
+	importer := FamixStPharoImporterTask new.
 	importer importingContext mergeClassAndMetaclass.
 	importer runCandidateOperator.
 	importer model: model; addFromPackagesNamed: self pharoPackageNames; runWithProgress.
@@ -190,7 +198,7 @@ MooseScripts class >> createModelNamed: modelName with: aCollectionOfPackageName
 	| model importer |
 	model := FamixStModel new.
 	model name: modelName.
-	importer := MoosePharoImporterTask new.
+	importer := FamixStPharoImporterTask new.
 	importer importingContext mergeClassAndMetaclass.
 	importer runCandidateOperator.
 	importer model: model; addFromPackagesNamed: aCollectionOfPackageNames; runWithProgress.
@@ -205,7 +213,7 @@ MooseScripts class >> createModelNamed: modelName withPackages: packages importe
 	mooseModel := FamixStModel new.
 	mooseModel name: modelName.
 	
-	importingContext := MooseImportingContext new.
+	importingContext := FamixStImporterContext new.
 	(context select: [:anAssoc | anAssoc value = true] thenCollect: [:each | each key]) do: [ :each | importingContext perform: (#import , each) asSymbol ].
 	merge ifTrue: [ importingContext mergeClassAndMetaclass ].
 	
@@ -246,14 +254,13 @@ MooseScripts class >> packageNamesFor: aPrefixString withTestPackages: aBoolean 
 	self packageNamesFor: 'Network*' withTestPackages: false.
 	self packageNamesFor: 'Network*' withTestPackages: true
 	"
-	
+
 	| packages packageNames aTestPrefixString |
-	RPackage organizer unregisterPackageNamed: aPrefixString. 
-	packages := RPackage organizer packages select: [:each | aPrefixString match: each name ].
-	packageNames := packages collect: [:pak | pak name].
+	packages := self packageOrganizer packages select: [ :each | aPrefixString match: each name ].
+	packageNames := packages collect: [ :pak | pak name ].
 	aBoolean ifFalse: [
-		aTestPrefixString := aPrefixString, 'Tests*'.
-		packageNames := packageNames reject: [ :pakName | aTestPrefixString match: pakName] ].
+		aTestPrefixString := aPrefixString , 'Tests*'.
+		packageNames := packageNames reject: [ :pakName | aTestPrefixString match: pakName ] ].
 	^ packageNames
 ]
 
@@ -280,7 +287,7 @@ MooseScripts class >> pharoPackageNames [
 	"self pharoPackageNames"
 	
 	| packages packageNames |
-	packages := (RPackage organizer packages select:[:each | each class = RPackage])
+	packages := (self packageOrganizer packages select:[:each | each class = RPackage])
 									  asSortedCollection: [:a :b | a name <= b name].
 	packageNames := packages collect: [:pak | pak name].
 	^ packageNames

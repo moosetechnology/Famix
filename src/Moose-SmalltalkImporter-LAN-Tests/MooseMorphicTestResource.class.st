@@ -7,7 +7,7 @@ Class {
 { #category : #setup }
 MooseMorphicTestResource >> importModel [
 	| importer |
-	importer := MoosePharoImporterTask new.
+	importer := FamixStPharoImporterTask new.
 	importer importingContext mergeClassAndMetaclass.
 	importer
 		runCandidateOperator;

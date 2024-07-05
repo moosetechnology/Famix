@@ -1,3 +1,15 @@
+"
+## Relations
+======================
+
+### Other
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `annotationInstances` | `FamixTWithAnnotationInstances` | `annotatedEntity` | `FamixTAnnotationInstance` | This property corresponds to the set of annotations associated to the entity|
+
+
+
+"
 Trait {
 	#name : #FamixTWithAnnotationInstances,
 	#instVars : [

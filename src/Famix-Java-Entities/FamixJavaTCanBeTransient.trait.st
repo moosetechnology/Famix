@@ -7,11 +7,19 @@ public class Student implements Serializable{
  transient int age; //Now it will not be serialized  
 }  
 ```
+
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+|---|
+| `isTransient` | `Boolean` | false | Entity can be declared transient|
+
 "
 Trait {
 	#name : #FamixJavaTCanBeTransient,
 	#instVars : [
-		'#isTransient => FMProperty'
+		'#isTransient => FMProperty defaultValue: false'
 	],
 	#category : #'Famix-Java-Entities-Traits'
 }
@@ -28,10 +36,10 @@ FamixJavaTCanBeTransient classSide >> annotation [
 { #category : #accessing }
 FamixJavaTCanBeTransient >> isTransient [
 
-	<FMProperty: #isTransient type: #Boolean>
+	<FMProperty: #isTransient type: #Boolean defaultValue: false>
 	<generated>
 	<FMComment: 'Entity can be declared transient'>
-	^ isTransient
+	^ isTransient ifNil: [ isTransient := false ]
 ]
 
 { #category : #accessing }

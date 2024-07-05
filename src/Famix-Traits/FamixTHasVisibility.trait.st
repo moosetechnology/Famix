@@ -1,3 +1,12 @@
+"
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+|---|
+| `visibility` | `String` | nil | Visibility of the entity|
+
+"
 Trait {
 	#name : #FamixTHasVisibility,
 	#instVars : [

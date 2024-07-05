@@ -17,7 +17,6 @@ LANAbstractImportTest >> model [
 
 { #category : #tests }
 LANAbstractImportTest >> testClasses [
-	"self debug: #testClasses"
 
 	self model metamodel.
 	self denyEmpty: (self model allUsing: FamixTClass)

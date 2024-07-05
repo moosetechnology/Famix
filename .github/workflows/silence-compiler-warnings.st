@@ -1,0 +1,1 @@
+CompilationContext optionSkipSemanticWarnings: true

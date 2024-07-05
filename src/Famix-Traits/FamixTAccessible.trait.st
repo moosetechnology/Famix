@@ -1,3 +1,15 @@
+"
+## Relations
+======================
+
+### Incoming dependencies
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `incomingAccesses` | `FamixTAccessible` | `variable` | `FamixTAccess` | All Famix accesses pointing to this structural entity|
+
+
+
+"
 Trait {
 	#name : #FamixTAccessible,
 	#instVars : [

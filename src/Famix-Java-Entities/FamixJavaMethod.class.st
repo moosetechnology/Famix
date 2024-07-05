@@ -1,3 +1,59 @@
+"
+## Relations
+======================
+
+### Parents
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `parentType` | `FamixTMethod` | `methods` | `FamixTWithMethods` | Type declaring the method. It provides the implementation for belongsTo.|
+
+### Children
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `comments` | `FamixTWithComments` | `commentedEntity` | `FamixTComment` | List of comments for the entity|
+| `implicitVariables` | `FamixTWithImplicitVariables` | `parentBehaviouralEntity` | `FamixTImplicitVariable` | Implicit variables used locally by this behaviour.|
+| `localVariables` | `FamixTWithLocalVariables` | `parentBehaviouralEntity` | `FamixTLocalVariable` | Variables locally defined by this behaviour.|
+| `parameters` | `FamixTWithParameters` | `parentBehaviouralEntity` | `FamixTParameter` | List of formal parameters declared by this behaviour.|
+
+### Outgoing dependencies
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `accesses` | `FamixTWithAccesses` | `accessor` | `FamixTAccess` | Accesses to variables made by this behaviour.|
+| `outgoingInvocations` | `FamixTWithInvocations` | `sender` | `FamixTInvocation` | Outgoing invocations sent by this behaviour.|
+| `outgoingReferences` | `FamixTWithReferences` | `referencer` | `FamixTReference` | References from this entity to other entities.|
+
+### Incoming dependencies
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `incomingImports` | `FamixTImportable` | `importedEntity` | `FamixTImport` | List of imports of this entity|
+| `incomingInvocations` | `FamixTInvocable` | `candidates` | `FamixTInvocation` | Incoming invocations from other behaviours computed by the candidate operator.|
+
+### Other
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `caughtExceptions` | `FamixTWithExceptions` | `catchingEntities` | `FamixTThrowable` | The exceptions caught by the method|
+| `declaredExceptions` | `FamixTWithExceptions` | `declaringEntities` | `FamixTThrowable` | The exceptions declared by the method|
+| `declaredType` | `FamixTTypedEntity` | `typedEntities` | `FamixTType` | Type of the entity, if any|
+| `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
+| `thrownExceptions` | `FamixTWithExceptions` | `throwingEntities` | `FamixTThrowable` | The exceptions thrown by the method|
+
+
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+|---|
+| `isAbstract` | `Boolean` | false | Entity can be declared abstract|
+| `isClassSide` | `Boolean` | false | Entity can be declared class side i.e. static|
+| `isFinal` | `Boolean` | false | Entity can be declared final|
+| `isStub` | `Boolean` | false | Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.|
+| `isSynchronized` | `Boolean` | false | Entity can be declared synchronized|
+| `kind` | `String` | nil | Tag indicating a setter, getter, constant, constructor method|
+| `name` | `String` | nil | Basic name of the entity, not full reference.|
+| `signature` | `String` | nil | Signature of the message being sent|
+| `visibility` | `String` | nil | Visibility of the entity|
+
+"
 Class {
 	#name : #FamixJavaMethod,
 	#superclass : #FamixJavaContainerEntity,
@@ -157,10 +213,10 @@ FamixJavaMethod >> isJUnit4Test [
 ]
 
 { #category : #testing }
-FamixJavaMethod >> isOverriden [
+FamixJavaMethod >> isOverridden [
 	"If we have a stub and we don't have the container, we can't have the information"
 
-	<FMProperty: #isOverriden type: #Boolean>
+	<FMProperty: #isOverridden type: #Boolean>
 	<derived>
 	<FMComment: 'The method is overrided in a sub class'>
 	(self parentType isNil and: [ self isStub ])
@@ -224,14 +280,6 @@ FamixJavaMethod >> numberOfAccesses [
 		computedAs: [ self accesses size ]
 ]
 
-{ #category : #accessing }
-FamixJavaMethod >> numberOfComments [
-	<FMProperty: #numberOfComments type: #Number>
-	<FMComment: 'The number of comment fragments'>
-	<derived>
-	^ self lookUpPropertyNamed: #numberOfComments computedAs: [ self comments size ]
-]
-
 { #category : #'Famix-Extensions-private' }
 FamixJavaMethod >> numberOfConditionals [
 	<FMProperty: #numberOfConditionals type: #Number>
@@ -256,9 +304,25 @@ FamixJavaMethod >> numberOfInvokedMethods [
 	^ self cacheAt: #numberOfInvokedMethods ifAbsentPut: [self invokedMethods size]
 ]
 
+{ #category : #testing }
+FamixJavaMethod >> overriddenMethod [
+
+	^ (self parentType superclass ifNotNil: [ :superclass |
+		   superclass lookUp: self signature ]) ifNil: [
+		  self parentType lookUpInInterfaces: self signature ]
+]
+
 { #category : #'Famix-Implementation' }
 FamixJavaMethod >> overridesMethod [
-	^ self belongsTo superclassHierarchy collect: [ :each | each implementationOf: self signature ] thenSelect: #isNotNil
+
+	self deprecated: 'This method seems to not be used anymore.'.
+	"Please consider using #overriddenMethod instead.
+	We are not automatically replacing it because the behavior is not identical: 
+		#overriddenMethod is a detect and not a collect + it goes through intefaces."
+
+	^ self belongsTo superclassHierarchy
+		  collect: [ :each | each implementationOf: self signature ]
+		  thenSelect: #isNotNil
 ]
 
 { #category : #accessing }

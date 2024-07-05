@@ -1,11 +1,26 @@
+"
+## Relations
+======================
+
+### Children
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `principal` | `FamixTest4School` | `school` | `FamixTest4Principal` | |
+| `rooms` | `FamixTest4School` | `school` | `FamixTest4Room` | |
+| `students` | `FamixTest4School` | `school` | `FamixTest4Student` | |
+| `teachers` | `FamixTest4School` | `school` | `FamixTest4Teacher` | |
+
+
+
+"
 Class {
 	#name : #FamixTest4School,
 	#superclass : #FamixTest4Entity,
 	#instVars : [
 		'#principal => FMOne type: #FamixTest4Principal opposite: #school',
-		'#rooms => FMMany type: #FamixTest4Room opposite: #school',
 		'#students => FMMany type: #FamixTest4Student opposite: #school',
-		'#teachers => FMMany type: #FamixTest4Teacher opposite: #school'
+		'#teachers => FMMany type: #FamixTest4Teacher opposite: #school',
+		'#rooms => FMMany type: #FamixTest4Room opposite: #school'
 	],
 	#category : #'Famix-Test4-Entities-Entities'
 }

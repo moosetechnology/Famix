@@ -1,5 +1,22 @@
 "
 I represent a header file. Typically a .h or .hpp
+
+## Relations
+======================
+
+### Parents
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `headerOwner` | `FamixTHeader` | `header` | `FamixTWithHeaders` | |
+| `parentFolder` | `FamixTFileSystemEntity` | `childrenFileSystemEntities` | `FamixTFolder` | Folder entity containing this file.|
+
+### Other
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `entities` | `FamixTFile` | `containerFiles` | `FamixTWithFiles` | List of entities defined in the file|
+
+
+
 "
 Trait {
 	#name : #FamixTHeader,

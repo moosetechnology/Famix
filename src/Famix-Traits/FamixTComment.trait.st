@@ -1,5 +1,22 @@
 "
 FamixTComment represents one instance of a comment (in the sense of programming language comments) for any Famix sourced entity. The commented sourced entity is called the container in the FamixT model.
+
+## Relations
+======================
+
+### Parents
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `commentedEntity` | `FamixTComment` | `comments` | `FamixTWithComments` | Source code commented by the comment|
+
+
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+|---|
+| `content` | `String` | nil | Content of the comment as a String|
+
 "
 Trait {
 	#name : #FamixTComment,
@@ -7,6 +24,8 @@ Trait {
 		'#commentedEntity => FMOne type: #FamixTWithComments opposite: #comments',
 		'#content => FMProperty'
 	],
+	#traits : 'TEntityMetaLevelDependency',
+	#classTraits : 'TEntityMetaLevelDependency classTrait',
 	#category : #'Famix-Traits-Comment'
 }
 
@@ -32,6 +51,7 @@ FamixTComment >> commentedEntity [
 
 	<generated>
 	<FMComment: 'Source code commented by the comment'>
+	<container>
 	^ commentedEntity
 ]
 
@@ -40,6 +60,13 @@ FamixTComment >> commentedEntity: anObject [
 
 	<generated>
 	commentedEntity := anObject
+]
+
+{ #category : #navigation }
+FamixTComment >> commentedEntityGroup [
+	<generated>
+	<navigation: 'CommentedEntity'>
+	^ MooseSpecializedGroup with: self commentedEntity
 ]
 
 { #category : #accessing }
