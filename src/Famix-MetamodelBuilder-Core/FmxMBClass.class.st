@@ -3,7 +3,8 @@ Class {
 	#superclass : #FmxMBBehavior,
 	#instVars : [
 		'classGeneralization',
-		'isAbstractClass'
+		'isAbstractClass',
+		'propertiesForEqualityCheck'
 	],
 	#category : #'Famix-MetamodelBuilder-Core-Implementation'
 }
@@ -80,7 +81,70 @@ FmxMBClass >> generate [
 	self generatePrecedenceInTraitComposition: aClass.
 
 	self generateNavigationGroupsFor: aClass.
-	self generateAddToCollectionFor: aClass
+	self generateAddToCollectionFor: aClass.
+	
+	self generateEqualsMethodFor: aClass.
+	self generateHashMethodFor: aClass.
+]
+
+{ #category : #'generating-methods' }
+FmxMBClass >> generateEqualsMethodFor: aClass [
+
+	propertiesForEqualityCheck ifNotNil: [
+		| variableName |
+		variableName := 'a' , aClass name.
+		self builder environment
+			compile: (String streamContents: [ :stream |
+					 stream << '= '.
+					 stream << variableName.
+					 stream << '
+
+	<generated>
+	^ '.
+					 stream
+						 << variableName;
+						 << ' ';
+						 << propertiesForEqualityCheck first;
+						 << ' = self ';
+						 << propertiesForEqualityCheck first.
+					 propertiesForEqualityCheck size > 1 ifTrue: [
+						 2 to: propertiesForEqualityCheck size do: [ :idx |
+							 stream << ' and: [ '.
+							 stream
+								 << variableName;
+								 << ' ';
+								 << (propertiesForEqualityCheck at: idx);
+								 << ' = self ';
+								 << (propertiesForEqualityCheck at: idx) ].
+						 2 to: propertiesForEqualityCheck size do: [ :idx |
+						 stream << '] ' ] ] ])
+			in: aClass instanceSide
+			classified: #comparing ]
+]
+
+{ #category : #'generating-methods' }
+FmxMBClass >> generateHashMethodFor: aClass [
+
+	propertiesForEqualityCheck ifNotNil: [
+		self builder environment
+			compile: (String streamContents: [ :stream |
+					 stream << 'hash'.
+					 stream << '
+
+	<generated>
+	^ '.
+					 stream
+						 << 'self ';
+						 << propertiesForEqualityCheck first;
+						 << ' hash '.
+					 propertiesForEqualityCheck size > 1 ifTrue: [
+						 2 to: propertiesForEqualityCheck size do: [ :idx |
+							 stream
+								 << 'bitXor: self ';
+								 << (propertiesForEqualityCheck at: idx);
+								 << ' hash ' ] ] ])
+			in: aClass instanceSide
+			classified: #comparing ]
 ]
 
 { #category : #generating }
@@ -182,4 +246,10 @@ FmxMBClass >> traitsFromRelations [
 	"returns traits defined by relations"
 
 	^ (self relations collect: [ :each | each side trait ] thenSelect: #isNotNil) asSet
+]
+
+{ #category : #generalization }
+FmxMBClass >> withEqualityCheckOn: aCollectionOfPropertySymbol [
+
+	propertiesForEqualityCheck := aCollectionOfPropertySymbol
 ]
