@@ -1,11 +1,17 @@
 Class {
 	#name : #FamixMetaModelClassesShouldNotOverrideRule,
-	#superclass : #RBBlockLintRule,
+	#superclass : #ReAbstractRule,
 	#instVars : [
 		'metaModelClasses'
 	],
 	#category : #'Moose-Core'
 }
+
+{ #category : #testing }
+FamixMetaModelClassesShouldNotOverrideRule class >> checksClass [
+
+	^ true
+]
 
 { #category : #accessing }
 FamixMetaModelClassesShouldNotOverrideRule class >> group [
@@ -31,19 +37,10 @@ FamixMetaModelClassesShouldNotOverrideRule class >> uniqueIdentifierName [
 ]
 
 { #category : #running }
-FamixMetaModelClassesShouldNotOverrideRule >> checkClass: aContext [
-	|class  |
-	class := aContext.
-	
-	(self metaModelClasses includes: class) 
-		ifTrue: [
-			self selectorsThatShouldNotBeOverridden do: [:each |
-				(class includesSelector: each)
-					ifTrue: [
-						result addClass: class  selector: each
-						].
-			].
-		].
+FamixMetaModelClassesShouldNotOverrideRule >> basicCheck: aClass [
+
+	(self metaModelClasses includes: aClass) ifTrue: [ self selectorsThatShouldNotBeOverridden do: [ :each | (aClass includesSelector: each) ifTrue: [ ^ true ] ] ].
+	^ false
 ]
 
 { #category : #accessing }
