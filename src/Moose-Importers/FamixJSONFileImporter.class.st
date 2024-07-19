@@ -5,7 +5,7 @@ Importer for JSON file
 Class {
 	#name : #FamixJSONFileImporter,
 	#superclass : #FamixAbstractFileImporter,
-	#category : #'Moose-Importers'
+	#category : #'Moose-Importers-FromPersistedFiles'
 }
 
 { #category : #executing }

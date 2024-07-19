@@ -33,9 +33,13 @@ FamixTest4Test >> setUp [
 	student1 := FamixTest4Student new.
 	student1 := FamixTest4Student new.
 	student2 := FamixTest4Student new.
+	student2 firstName: 'firstname'.
+	student2 lastName: 'lastName'.
 	student3 := FamixTest4Student new.
 	teacher1 := FamixTest4Teacher new.
+	teacher1 firstName: 'John'.
 	teacher2 := FamixTest4Teacher new.
+	teacher2 firstName: 'Bob'.
 	book1 := FamixTest4Book new.
 	book2 := FamixTest4Book new.
 
@@ -56,6 +60,18 @@ FamixTest4Test >> testAbstractClasses [
 
 	self assert: FamixTest4Entity isAbstract.
 	self assert: FamixTest4Person isAbstract
+]
+
+{ #category : #tests }
+FamixTest4Test >> testEqualityStudent [
+
+	| sameStudent |
+	"A copy of student2 to test same"
+	sameStudent := FamixTest4Student new.
+	sameStudent firstName: 'firstname'.
+	sameStudent lastName: 'lastName'.
+
+	self assert: student2 equals: sameStudent
 ]
 
 { #category : #tests }

@@ -69,9 +69,18 @@ FamixTest4Generator >> defineHierarchy [
 
 { #category : #definition }
 FamixTest4Generator >> defineProperties [
+
 	super defineProperties.
 
-	(builder ensureClassNamed: #Entity) property: #name type: #String
+	(builder ensureClassNamed: #Entity) property: #name type: #String.
+
+	person property: #firstName type: #String.
+	person property: #lastName type: #String.
+	person property: #age type: #Number.
+	person withEqualityCheckOn: { #firstName. #lastName. #age }.
+
+	book property: #id type: #Number.
+	book withEqualityCheckOn: { #id }
 ]
 
 { #category : #definition }

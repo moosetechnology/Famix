@@ -97,6 +97,23 @@ FamixTInvocation >> candidates: anObject [
 ]
 
 { #category : #printing }
+FamixTInvocation >> displayFullStringOn: aStream [
+
+	self sender
+		ifNotNil: [ self sender displayFullStringOn: aStream ]
+		ifNil: [ aStream nextPut: $? ].
+	aStream nextPutAll: ' -> '.
+	self receiver
+		ifNotNil: [ :rcvr | self receiver displayFullStringOn: aStream ]
+		ifNil: [ aStream nextPut: $? ].
+	aStream nextPutAll: '.'.
+
+	self signature
+		ifNotNil: [ aStream nextPutAll: (self signature truncateWithElipsisTo: 40) ]
+		ifNil: [ aStream nextPutAll: ' ? ' ]
+]
+
+{ #category : #printing }
 FamixTInvocation >> displayStringOn: aStream [
 
 	self sender

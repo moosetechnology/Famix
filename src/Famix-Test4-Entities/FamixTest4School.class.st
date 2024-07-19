@@ -18,9 +18,9 @@ Class {
 	#superclass : #FamixTest4Entity,
 	#instVars : [
 		'#principal => FMOne type: #FamixTest4Principal opposite: #school',
-		'#rooms => FMMany type: #FamixTest4Room opposite: #school',
 		'#students => FMMany type: #FamixTest4Student opposite: #school',
-		'#teachers => FMMany type: #FamixTest4Teacher opposite: #school'
+		'#teachers => FMMany type: #FamixTest4Teacher opposite: #school',
+		'#rooms => FMMany type: #FamixTest4Room opposite: #school'
 	],
 	#category : #'Famix-Test4-Entities-Entities'
 }

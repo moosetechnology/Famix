@@ -41,25 +41,25 @@ FamixPharoSmalltalkGenerator class >> prefix [
 FamixPharoSmalltalkGenerator >> defineClasses [
 	super defineClasses.
 
-	access := builder newClassNamed: #Access.
-	annotationInstance := builder newClassNamed: #AnnotationInstance.
-	annotationInstanceAttribute := builder newClassNamed: #AnnotationInstanceAttribute.
-	annotationType := builder newClassNamed: #AnnotationType.
-	annotationTypeAttribute := builder newClassNamed: #AnnotationTypeAttribute.
-	attribute := builder newClassNamed: #Attribute.
-	class := builder newClassNamed: #Class.
-	globalVariable := builder newClassNamed: #GlobalVariable.
-	implicitVariable := builder newClassNamed: #ImplicitVariable.
-	inheritance := builder newClassNamed: #Inheritance.
-	invocation := builder newClassNamed: #Invocation.
-	localVariable := builder newClassNamed: #LocalVariable.
-	pharoEntitySourceAnchor := builder newClassNamed: #PharoEntitySourceAnchor.
-	method := builder newClassNamed: #Method.
-	namespace := builder newClassNamed: #Namespace.
-	package := builder newClassNamed: #Package.
-	parameter := builder newClassNamed: #Parameter.
-	reference := builder newClassNamed: #Reference.
-	unknownVariable := builder newClassNamed: #UnknownVariable.
+	access := self newClassNamed: #Access.
+	annotationInstance := self newClassNamed: #AnnotationInstance.
+	annotationInstanceAttribute := self newClassNamed: #AnnotationInstanceAttribute.
+	annotationType := self newClassNamed: #AnnotationType.
+	annotationTypeAttribute := self newClassNamed: #AnnotationTypeAttribute.
+	attribute := self newClassNamed: #Attribute.
+	class := self newClassNamed: #Class.
+	globalVariable := self newClassNamed: #GlobalVariable.
+	implicitVariable := self newClassNamed: #ImplicitVariable.
+	inheritance := self newClassNamed: #Inheritance.
+	invocation := self newClassNamed: #Invocation.
+	localVariable := self newClassNamed: #LocalVariable.
+	pharoEntitySourceAnchor := self newClassNamed: #PharoEntitySourceAnchor.
+	method := self newClassNamed: #Method.
+	namespace := self newClassNamed: #Namespace.
+	package := self newClassNamed: #Package.
+	parameter := self newClassNamed: #Parameter.
+	reference := self newClassNamed: #Reference.
+	unknownVariable := self newClassNamed: #UnknownVariable.
 
 ]
 
