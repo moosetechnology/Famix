@@ -12,6 +12,18 @@ Class {
 }
 
 { #category : #accessing }
+FamixMetaModelClassesNotDeclaredInFameRule class >> group [
+
+	^ 'Famix'
+]
+
+{ #category : #accessing }
+FamixMetaModelClassesNotDeclaredInFameRule class >> ruleName [
+
+	^ 'A metamodel class is not properly Fame-described by a <FMClass:super:> pragma'
+]
+
+{ #category : #accessing }
 FamixMetaModelClassesNotDeclaredInFameRule class >> uniqueIdentifierName [
 	^ 'MetaModelClassesNotDeclaredInFame'
 ]
@@ -32,21 +44,9 @@ FamixMetaModelClassesNotDeclaredInFameRule >> checkClass: aContext [
 ]
 
 { #category : #accessing }
-FamixMetaModelClassesNotDeclaredInFameRule >> group [
-
-	^ 'Famix'
-]
-
-{ #category : #accessing }
 FamixMetaModelClassesNotDeclaredInFameRule >> metaModelClasses [
 	"return all classes that have to be checked in this rule"
 	^ metaModelClasses ifNil: [metaModelClasses := MooseEntity withAllSubclasses].
-]
-
-{ #category : #accessing }
-FamixMetaModelClassesNotDeclaredInFameRule >> name [
-
-	^ 'A metamodel class is not properly Fame-described by a <FMClass:super:> pragma'
 ]
 
 { #category : #running }
