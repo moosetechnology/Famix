@@ -4,6 +4,15 @@ Class {
 	#category : #'Famix-Test10-Tests'
 }
 
+{ #category : #running }
+FamixTest10Test >> tearDown [
+
+	FamixTest10Generator packageName asPackageIfAbsent: [
+		^ super tearDown ].
+	FamixTest10Generator deleteMetaModel.
+	super tearDown
+]
+
 { #category : #tests }
 FamixTest10Test >> testRegenerationWithSlightDifferenceFromScratchWorks [
 
