@@ -210,7 +210,7 @@ FamixJavaPackage >> instability [
 
 { #category : #testing }
 FamixJavaPackage >> isTopLevelPackage [
-	^ self parentPackage isNil.
+	^ self topLevelPackage == self.
 ]
 
 { #category : #'Famix-Extensions-metrics' }
