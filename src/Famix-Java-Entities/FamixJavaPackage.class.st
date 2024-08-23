@@ -303,5 +303,5 @@ FamixJavaPackage >> relativeImportanceForSystem [
 
 { #category : #testing }
 FamixJavaPackage >> topLevelPackage [
-	^ self parentPackage ifNil: [ self ] ifNotNil: [ self parentPackage topLevelPackage ]
+	^ (self parentPackage isNotNil and: [ self parentPackage childEntities anySatisfy: #isType ] ) ifTrue: [ self parentPackage topLevelPackage ] ifFalse: [ self  ]
 ]

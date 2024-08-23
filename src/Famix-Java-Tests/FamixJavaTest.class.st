@@ -6,7 +6,14 @@ Class {
 		'pkg2',
 		'subPkg',
 		'subSubPkg',
-		'model'
+		'model',
+		'cls',
+		'meth',
+		'att',
+		'subPkg2',
+		'intf',
+		'cls2',
+		'meth2'
 	],
 	#category : #'Famix-Java-Tests'
 }
@@ -20,12 +27,19 @@ FamixJavaTest >> setUp [
 	pkg2 := FamixJavaPackage new name: 'package2'.
 	subPkg := FamixJavaPackage new name: 'subpackage'.
 	subSubPkg := FamixJavaPackage new name: 'subsubpackage'.
-	model add: pkg1.
-	model add: pkg2.
-	model add: subPkg.
-	model add: subSubPkg.
+	subPkg2 := FamixJavaPackage new name: 'subpackage2'.
 	subSubPkg parentPackage: subPkg.
-	subPkg parentPackage: pkg1
+	subPkg parentPackage: pkg1.
+	subPkg2 parentPackage: pkg2 .
+
+
+	cls := FamixJavaClass new name: 'Class1' ; parentPackage: subSubPkg .
+	cls2 := FamixJavaClass new name: 'Class2' ; parentPackage: subPkg .
+	meth := FamixJavaMethod new name: 'Method1' ; parentType: cls.
+	att := FamixJavaAttribute new name: 'Attribute1' ; parentType: cls.
+	intf := FamixJavaInterface new name: 'Interface1' ; parentPackage: subPkg2 .
+	meth2 := FamixJavaMethod new name: 'Method2' ; parentType: intf.
+	model addAll: { cls. meth. att . pkg1 . pkg2 . subPkg . subPkg2 . subSubPkg }. 
 ]
 
 { #category : #tests }
@@ -125,22 +139,22 @@ FamixJavaTest >> testModelImportableFromFile [
 { #category : #tests }
 FamixJavaTest >> testTopLevelPackage [
 
-	self assert: model allPackages size equals: 4.
+	self assert: model allPackages size equals: 5.
 	self assert: pkg1 topLevelPackage equals: pkg1.
 	self assert: pkg2 topLevelPackage equals: pkg2.
-	self assert: subPkg topLevelPackage equals: pkg1.
-	self assert: subSubPkg topLevelPackage equals: pkg1.
+	self assert: subPkg topLevelPackage equals: subPkg .
+	self assert: subPkg2 topLevelPackage equals: subPkg2 .
+	self assert: subSubPkg topLevelPackage equals: subPkg .
 ]
 
 { #category : #tests }
 FamixJavaTest >> testTopLevelPackageForOtherEntities [
 
-	| cls meth att |
-	cls := FamixJavaClass new name: 'Class1' ; parentPackage: subSubPkg .
-	meth := FamixJavaMethod new name: 'Method1' ; parentType: cls.
-	att := FamixJavaAttribute new name: 'Attribute1' ; parentType: cls.
-	model addAll: { cls. meth. att }. 
-	self assert: cls topLevelPackage equals: pkg1.
-	self assert: meth topLevelPackage equals: pkg1.
-	self assert: att topLevelPackage equals: pkg1.
+	self assert: cls topLevelPackage equals: subPkg .
+	self assert: meth topLevelPackage equals: subPkg .
+	self assert: att topLevelPackage equals: subPkg .
+	self assert: cls2 topLevelPackage equals: subPkg .
+	self assert: intf topLevelPackage equals: subPkg2 .
+	self assert: meth2 topLevelPackage equals: subPkg2 .
+	
 ]
