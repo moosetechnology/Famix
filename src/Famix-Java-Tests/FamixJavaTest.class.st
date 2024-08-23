@@ -132,6 +132,17 @@ FamixJavaTest >> testInferNamespaces [
 ]
 
 { #category : #tests }
+FamixJavaTest >> testIsTopLevelPackage [
+
+	self assert: model allPackages size equals: 5.
+	self assert: pkg1 isTopLevelPackage.
+	self assert: pkg2 isTopLevelPackage.
+	self assert: subPkg isTopLevelPackage.
+	self assert: subPkg2 isTopLevelPackage.
+	self deny: subSubPkg isTopLevelPackage .
+]
+
+{ #category : #tests }
 FamixJavaTest >> testModelImportableFromFile [
 	self assert: FamixJavaModel canBeImportedFromFile
 ]
