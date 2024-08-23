@@ -208,6 +208,11 @@ FamixJavaPackage >> instability [
 	^ efferentCoupling / (efferentCoupling + afferentCoupling)
 ]
 
+{ #category : #testing }
+FamixJavaPackage >> isTopLevelPackage [
+	^ self parentPackage isNil.
+]
+
 { #category : #'Famix-Extensions-metrics' }
 FamixJavaPackage >> martinCohesion [
 	"Computing cohesion as described by Robert C. Martin"
@@ -294,4 +299,9 @@ FamixJavaPackage >> relativeImportanceForSystem [
 							]
 						ifFalse: [0]
 						]
+]
+
+{ #category : #testing }
+FamixJavaPackage >> topLevelPackage [
+	^ self parentPackage ifNil: [ self ] ifNotNil: [ self parentPackage topLevelPackage ]
 ]
