@@ -57,3 +57,8 @@ FamixJavaNamedEntity >> stubFormattedName [
 					attribute: TextEmphasis italic ]
 		ifFalse: [ Text fromString: self name ] 
 ]
+
+{ #category : #testing }
+FamixJavaNamedEntity >> topLevelPackage [ 
+	^ (self atScope: FamixTPackage) anyOne topLevelPackage 
+]
