@@ -498,15 +498,14 @@ TEntityMetaLevelDependency >> belongsTo: anEntity [
 
 { #category : #accessing }
 TEntityMetaLevelDependency >> children [
+
 	| res |
 	res := Set new.
-	self childrenSelectors do: [ :accessor | (self perform: accessor) ifNotNil: [ :r |
-		r ifNotNil: [
+	self childrenSelectors do: [ :accessor |
+		(self perform: accessor) ifNotNil: [ :r |
 			r isCollection
 				ifTrue: [ res addAll: r ]
-				ifFalse: [ res add: r ]
-		]
-	] ].
+				ifFalse: [ res add: r ] ] ].
 	^ res
 ]
 
