@@ -140,6 +140,12 @@ MooseAbstractGroup >> allModelMethods [
 ]
 
 { #category : #'*Famix-Traits' }
+MooseAbstractGroup >> allModelModules [
+	<navigation: 'All model modules'>
+	^ self cacheAt: 'All model modules' ifAbsentPut: [ MooseGroup withAll: (self allModules reject: #isStub) withDescription: 'All model modules' ]
+]
+
+{ #category : #'*Famix-Traits' }
 MooseAbstractGroup >> allModelNamespaces [
 	<navigation: 'All model namespaces'>
 	^ self
@@ -171,6 +177,12 @@ MooseAbstractGroup >> allModelStructuralEntities [
 MooseAbstractGroup >> allModelTypes [
 	<navigation: 'All model types'>
 	^ self cacheAt: 'All model types' ifAbsentPut: [ (self allTypes reject: [ :each | each isStub ]) description: 'All model types' ]
+]
+
+{ #category : #'*Famix-Traits' }
+MooseAbstractGroup >> allModules [
+	<navigation: 'All modules'>
+	^ self allUsing: FamixTModule
 ]
 
 { #category : #'*Famix-Traits' }
