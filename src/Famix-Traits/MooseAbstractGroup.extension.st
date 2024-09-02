@@ -95,6 +95,13 @@ MooseAbstractGroup >> allImplicitVariables [
 ]
 
 { #category : #'*Famix-Traits' }
+MooseAbstractGroup >> allImports [
+	
+	<navigation: 'All imports'>
+	^self allUsing: FamixTImport 
+]
+
+{ #category : #'*Famix-Traits' }
 MooseAbstractGroup >> allInheritanceDefinitions [
 	<navigation: 'All inheritances'>
 	^ self allUsing: FamixTInheritance
@@ -131,6 +138,13 @@ MooseAbstractGroup >> allModelBehaviourals [
 MooseAbstractGroup >> allModelClasses [
 	<navigation: 'All model classes'>
 	^ self cacheAt: 'All model classes' ifAbsentPut: [ MooseGroup withAll: (self allClasses reject: [ :each | each isStub ]) withDescription: 'All model classes' ]
+]
+
+{ #category : #'*Famix-Traits' }
+MooseAbstractGroup >> allModelImports [
+
+	<navigation: 'All model imports'>
+	^ self cacheAt: 'All model imports' ifAbsentPut: [ MooseGroup withAll: (self allImports reject: [ :each | each isStub ]) withDescription: 'All model imports' ]
 ]
 
 { #category : #'*Famix-Traits' }
