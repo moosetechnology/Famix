@@ -37,6 +37,13 @@ FamixTModule >> addModuleEntity: anObject [
 
 ]
 
+{ #category : #testing }
+FamixTModule >> isModule [
+
+	<generated>
+	^ true
+]
+
 { #category : #accessing }
 FamixTModule >> moduleEntities [
 	"Relation named: #moduleEntities type: #FamixTDefinedInModule opposite: #parentModule"

@@ -1687,6 +1687,7 @@ FamixGenerator >> defineTraits [
 
 	tModule := builder newTraitNamed: #TModule.
 	tModule comment: self commentForTModule.
+	tModule withTesting.
 
 	tNamedEntity := builder newTraitNamed: #TNamedEntity.
 	tNamedEntity comment: self commentForTNamed.
