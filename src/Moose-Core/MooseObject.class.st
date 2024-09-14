@@ -240,15 +240,6 @@ MooseObject >> attributeAt: name put: value [
 ]
 
 { #category : #accessing }
-MooseObject >> bookmarkAs: aString [
-	"Adds myself in the cache of the mooseModel and mark it as a bookmark"
-	| group |
-	group := self asMooseGroup description: aString.
-	group isBookmarked: true.
-	^ self mooseModel add: group asBookmark: aString
-]
-
-{ #category : #accessing }
 MooseObject >> cacheAt: name ifAbsent: aBlock [
 	^ cache at: name ifAbsent: [ aBlock value ]
 ]
@@ -353,16 +344,6 @@ MooseObject >> initialize [
 MooseObject >> inspectorToString [
 
 	^ String streamContents: [ :s | self displayStringOn: s ]
-]
-
-{ #category : #accessing }
-MooseObject >> isBookmarked [
-	^ self propertyNamed: #isBookmarked ifNil: [false]
-]
-
-{ #category : #accessing }
-MooseObject >> isBookmarked: aBoolean [
-	self propertyNamed: #isBookmarked put: aBoolean
 ]
 
 { #category : #testing }
