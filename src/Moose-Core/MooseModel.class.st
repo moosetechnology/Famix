@@ -357,13 +357,6 @@ MooseModel >> add: anElement [
 ]
 
 { #category : #'entity collection' }
-MooseModel >> add: aBookmarkedGroup asBookmark: aString [
-	self cacheAt: aString put: aBookmarkedGroup.
-	self announcer announce: (MooseEntityAdded new entity: aBookmarkedGroup).
-	^ aBookmarkedGroup
-]
-
-{ #category : #'entity collection' }
 MooseModel >> addAll: entities [ 
 	 
 	entities do: [:each | self add: each]. 
@@ -383,12 +376,6 @@ MooseModel >> addNoAnnounce: anElement [
 MooseModel >> allBehaviouralsWithDeadCode [
 	<navigation: 'All behaviourals with dead code'>
 	^ self lookUpPropertyNamed: #allBehaviouralsWithDeadCode computedAs: [ self computeAllBehaviouralsWithDeadCode ]
-]
-
-{ #category : #accessing }
-MooseModel >> allBookmarks [
-	<navigation: 'All bookmarks'>
-	^ MooseGroup withAll: (self entityCache select: [ :group | group asMooseGroup isBookmarked ]) withDescription: 'Bookmarks'
 ]
 
 { #category : #accessing }

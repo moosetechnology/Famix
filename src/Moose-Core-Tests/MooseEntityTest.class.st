@@ -21,16 +21,6 @@ MooseEntityTest >> testAnnotation [
 ]
 
 { #category : #tests }
-MooseEntityTest >> testBookmark [
-	| entity model bookmark |
-	model := MooseModel new.
-	entity := self actualClass new.
-	model add: entity.
-	bookmark := entity bookmarkAs: #test.
-	self assert: bookmark isBookmarked
-]
-
-{ #category : #tests }
 MooseEntityTest >> testIsStub [
 	self deny: self actualClass new isStub.
 	self
