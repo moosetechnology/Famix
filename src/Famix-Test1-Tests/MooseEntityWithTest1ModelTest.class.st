@@ -15,3 +15,11 @@ MooseEntityWithTest1ModelTest >> testIsRoot [
 	self assert: c1 isRoot.
 	self deny: m1 isRoot
 ]
+
+{ #category : #tests }
+MooseEntityWithTest1ModelTest >> testRootEntities [
+
+	self assertCollection: model rootEntities hasSameElements: {
+			c1.
+			c2 }
+]
