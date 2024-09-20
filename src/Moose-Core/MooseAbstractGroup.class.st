@@ -736,6 +736,12 @@ MooseAbstractGroup >> resetMooseNameFor: anEntity [
 ]
 
 { #category : #accessing }
+MooseAbstractGroup >> rootEntities [
+
+	^ self propertyNamed: #rootEntities ifAbsentPut: [ self entities select: [ :entity | entity isQueryable and: [ entity isRoot ] ] ]
+]
+
+{ #category : #accessing }
 MooseAbstractGroup >> second [ 
 	 
 	^self entities second
