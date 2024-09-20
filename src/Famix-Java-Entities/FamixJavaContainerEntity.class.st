@@ -47,8 +47,3 @@ FamixJavaContainerEntity >> addInterface: anInterface [
 	
 	types add: anInterface
 ]
-
-{ #category : #'Famix-Java' }
-FamixJavaContainerEntity >> mooseNameWithDots [
-	^ self mooseName ifNotNil: [ :mName |  '.' join: (mName substrings: '::') ]
-]
