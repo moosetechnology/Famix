@@ -86,9 +86,9 @@ FamixTClass >> addMethodOverriding: aMethod in: aCollection [
 
 	self directSubclasses do: [ :subClass |
 		subClass methods
-			detect: [ :method |   method signature = aMethod signature ]
+			detect: [ :method | method signature = aMethod signature ]
 			ifFound: [ :overridingMethod | aCollection add: overridingMethod ].
-			subClass addMethodOverriding: aMethod in: aCollection  ]
+		subClass addMethodOverriding: aMethod in: aCollection ]
 ]
 
 { #category : #metrics }
