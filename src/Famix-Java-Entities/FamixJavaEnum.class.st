@@ -62,6 +62,16 @@ FamixJavaEnum class >> annotation [
 	^ self
 ]
 
+{ #category : #private }
+FamixJavaEnum >> addMethodOverriding: aMethod in: aCollection [
+
+	self directSubclasses do: [ :subClass |
+		subClass methods
+			detect: [ :method | method signature = aMethod signature ]
+			ifFound: [ :overridingMethod | aCollection add: overridingMethod ].
+		subClass addMethodOverriding: aMethod in: aCollection ]
+]
+
 { #category : #accessing }
 FamixJavaEnum >> values [
 	^ self enumValues
