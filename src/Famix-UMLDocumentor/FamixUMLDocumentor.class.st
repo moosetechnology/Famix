@@ -41,6 +41,12 @@ Class {
 	#category : #'Famix-UMLDocumentor-Generation'
 }
 
+{ #category : #accessing }
+FamixUMLDocumentor class >> help [
+
+	^BeautifulComments render: self comment
+]
+
 { #category : #api }
 FamixUMLDocumentor >> beWithStubs [
 
