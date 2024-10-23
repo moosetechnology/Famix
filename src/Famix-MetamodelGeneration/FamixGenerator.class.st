@@ -442,7 +442,7 @@ FamixGenerator >> commentForTHeader [
 	^ 'I represent a header file. Typically a .h or .hpp'
 ]
 
-{ #category : #definition }
+{ #category : #comments }
 FamixGenerator >> commentForTImplementable [
 
 ^'I can be the target of an implementation cf Interface '
