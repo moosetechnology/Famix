@@ -590,6 +590,23 @@ FmxMBBehavior >> source: aFmxTrait [
 	self sourceManyToOne: aFmxTrait
 ]
 
+{ #category : #generating }
+FmxMBBehavior >> source: sourceRelationDesciption target: targetRelationDescription [
+
+	| sourceProperty targetProperty |
+	sourceProperty := (self property: sourceRelationDesciption first)
+		source.
+	sourceProperty
+		perform: sourceRelationDesciption second
+		with: sourceRelationDesciption third.
+
+	targetProperty := (self property: targetRelationDescription first)
+		target.
+	targetProperty
+		perform: targetRelationDescription second
+		with: targetRelationDescription third.
+]
+
 { #category : #associations }
 FmxMBBehavior >> sourceManyToMany: aFmxTrait [
 
