@@ -63,19 +63,19 @@ FamixJavaGenerator class >> prefix [
 	^ #'FamixJava'
 ]
 
-{ #category : #definition }
+{ #category : #comments }
 FamixJavaGenerator >> commentForTBound [
 
 	^ 'Represents a bound for a lower bounded and upper bounded wildcard.'
 ]
 
-{ #category : #definition }
+{ #category : #comments }
 FamixJavaGenerator >> commentForTBounded [
 
 	^ 'Represents a bounded wildcard, lower bounded with keyword super or upper bounded with keyword extends.'
 ]
 
-{ #category : #definition }
+{ #category : #comments }
 FamixJavaGenerator >> commentForTCanBeSynchronized [
 	^ 'I allow an entity to be synchronized
 ex:
@@ -91,7 +91,7 @@ public class SynchronizedCounter {
 ```'
 ]
 
-{ #category : #definition }
+{ #category : #comments }
 FamixJavaGenerator >> commentForTCanBeTransient [
 	^ 'I allow an entity to be transient
 ex:
@@ -103,7 +103,7 @@ public class Student implements Serializable{
 ```'
 ]
 
-{ #category : #definition }
+{ #category : #comments }
 FamixJavaGenerator >> commentForTCanBeVolatile [
 	^ 'I allow an entity to be volatible
 ex:
@@ -115,13 +115,13 @@ public class SharedObject {
 ```'
 ]
 
-{ #category : #definition }
+{ #category : #comments }
 FamixJavaGenerator >> commentForTInterface [
 	'I correspond to an interface'
 
 ]
 
-{ #category : #definition }
+{ #category : #comments }
 FamixJavaGenerator >> commentForTWithInterfaces [
 
 ^ 'I can contain interfaces (Packages, Methods, Classes...)'
