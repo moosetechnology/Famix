@@ -1184,6 +1184,7 @@ FamixGenerator >> defineProperties [
 { #category : #definition }
 FamixGenerator >> defineRelations [
 
+	"ASSOCIATION: Access"
 	((tAccess property: #accessor)
 			comment: 'Behavioural entity making the access to the variable. from-side of the association';
 			source)
@@ -1198,12 +1199,33 @@ FamixGenerator >> defineRelations [
 	((tAccessible property: #incomingAccesses)
 			comment: 'All Famix accesses pointing to this structural entity').
 
+	"-----"
+	"NEW ANNOTATIONS:
+	 - TAnnotationInstance is an association between TWithAnnotationInstance and TAnnotationType
+	   source: TWithAnnotationInstance ; target: TAnnotationType
+	   - merge TTypedAnnotationInstance into TAnnotationInstance
+	   - merge TWithAnnotationInstanceAttribute into TAnnotationInstance
+	 - merge TTypedAnnotationInstanceAttribute into TAnnotationInstanceAttribute
+	 - TAnnotationTypeAttribute to TAnnotationInstanceAttribute is still a simple relation (?)
+	"
+
+	"ASSOCIATION: tAnnotationInstance"
 	((tAnnotationInstance property: #annotatedEntity)
 			comment: 'The NamedEntity on which the annotation occurs.')
 		*-
 	((tWithAnnotationInstances property: #annotationInstances)
 			comment: 'This property corresponds to the set of annotations associated to the entity').
 
+	((tAnnotationType property: #instances)
+			comment: 'Annotations of this type')
+		-*
+	"tTypedAnnotationInstance should be tAnnotationInstance ?
+	 other end of the ASSOCIATION"
+	((tTypedAnnotationInstance property: #annotationType)
+			comment: 'Refers to the type of an annotation. (In some languages, Java and C#, an annotation as an explicit type). '";
+			container"). "TODO: resolve"
+
+	"-----"
 	((tAnnotationInstanceAttribute property: #parentAnnotationInstance)
 			comment: 'The instance of the annotation in which the attribute is used.';
 			container)
@@ -1211,32 +1233,31 @@ FamixGenerator >> defineRelations [
 	((tWithAnnotationInstanceAttributes property: #attributes)
 			comment: 'This corresponds to the actual values of the attributes in an AnnotationInstance').
 
-	((tAnnotationType property: #instances)
-			comment: 'Annotations of this type')
-		-*
-	((tTypedAnnotationInstance property: #annotationType)
-			comment: 'Refers to the type of an annotation. (In some languages, Java and C#, an annotation as an explicit type). '";
-			container"). "TODO: resolve"
-
+	"-----"
+	"CONTAINER"
 	((tAnnotationType property: #annotationTypesContainer)
 			comment: 'Container in which an AnnotationType may reside';
 			container	)
 		*-
 	((tWithAnnotationTypes property: #definedAnnotationTypes)
-			comment: 'The container in which the AnnotationTypes may be declared').
+			comment: 'The AnnotationTypes declared in this container').
 
+	"-----"
 	((tAnnotationTypeAttribute property: #annotationAttributeInstances)
 			comment: 'A collection of AnnotationInstanceAttribute which hold the usages of this attribute in actual AnnotationInstances')
 		-*
 	((tTypedAnnotationInstanceAttribute property: #annotationTypeAttribute)
 			comment: 'This corresponds to the type of the attribute in an AnnotationInstance').
 
+	"-----"
 	((tAssociation property: #previous)
 			comment: 'Previous association in an ordered collection of associations. Currently not supported by the Moose importer')
 		-
 	((tAssociation property: #next)
 			comment: 'Next association in an ordered collection of associations. Currently not supported by the Moose importer').
 
+	"-----"
+	"CONTAINER"
 	((tAttribute property: #parentType)
 			comment: 'Type declaring the attribute. belongsTo implementation';
 			container)
@@ -1244,11 +1265,29 @@ FamixGenerator >> defineRelations [
 	((tWithAttributes property: #attributes)
 			comment: 'List of attributes declared by this type.').
 
+	"-----"
+	"ASSOCIATIONS: catches"
 	((tThrowable property: #catchingEntities))
 		*-*
 	((tWithExceptions property: #caughtExceptions)
 			comment: 'The exceptions caught by the method').
 
+	"-----"
+	"ASSOCIATIONS: ExceptionDeclaration"
+	((tThrowable property: #declaringEntities))
+		*-*
+	((tWithExceptions property: #declaredExceptions)
+			comment: 'The exceptions declared by the method').
+
+	"-----"
+	"ASSOCIATIONS: throws"
+	((tThrowable property: #throwingEntities))
+		*-*
+	((tWithExceptions property: #thrownExceptions)
+			comment: 'The exceptions thrown by the method').
+
+	"-----"
+	"CONTAINER"
 	((tComment property: #commentedEntity)
 			comment: 'Source code commented by the comment';
 			container)
@@ -1256,29 +1295,32 @@ FamixGenerator >> defineRelations [
 	((tWithComments property: #comments)
 			comment: 'List of comments for the entity').
 
+	"-----"
+	"CONTAINER"
 	((tCompilationUnit property: #compilationUnitOwner)
 			comment: 'The compilation unit that defines this module';
 			container)
 		-
 	((tWithCompilationUnits property: #compilationUnit)).
 
-	((tThrowable property: #declaringEntities))
-		*-*
-	((tWithExceptions property: #declaredExceptions)
-			comment: 'The exceptions declared by the method').
-
+	"-----"
+	"ASSOCIATIONS: inherit from Invocation ?"
 	((tDereferencedInvocation property: #referencer)
 			comment: 'Structural entity that references the BehaviouralEntity invoked')
 		*-
 	((tWithDereferencedInvocations property: #dereferencedInvocations)
 			comment: 'List of invocations performed on BehaviouralEntities referenced by this entity').
 
+	"-----"
+	"CONTAINER"
 	((tEnumValue property: #parentEnum)
 			comment: 'The Enum declaring this value. It offers the implementation of belongsTo';
 			container)
 		*-
 	((tWithEnumValues property: #enumValues)).
 
+	"-----"
+	"CONTAINER"
 	((tFolder property: #childrenFileSystemEntities)
 			comment: 'List of entities contained in this folder.')
 		-*
@@ -1286,12 +1328,17 @@ FamixGenerator >> defineRelations [
 		comment: 'Folder entity containing this file.';
 		container).
 
+	"-----"
+	"ASSOCIATIONS: FileDeclarations"
+	"CONTAINER"
 	((tFile property: #entities)
 			comment: 'List of entities defined in the file')
 		*-*
 	((tWithFiles property: #containerFiles)
 			comment: 'List of files containing the entity').
 
+	"-----"
+	"ASSOCIATIONS: tFileInclude"
 	((tFileInclude property: #source)
 			comment: 'The file that is including')
 		*-
@@ -1304,6 +1351,8 @@ FamixGenerator >> defineRelations [
 	((tWithFileIncludes property: #incomingIncludeRelations)
 			comment: 'The include entities that have this file as a target.').
 
+	"-----"
+	"CONTAINER"
 	((tFunction property: #functionOwner)
 			comment: 'The container defining the function. The function is placed in a container, because certain languages can nest functions in functions.';
 			container)
@@ -1311,6 +1360,8 @@ FamixGenerator >> defineRelations [
 	((tWithFunctions property: #functions)
 			comment: 'Functions defined in the container, if any.').
 
+	"-----"
+	"CONTAINER"
 	((tGlobalVariable property: #parentScope)
 			comment: 'Scope declaring the global variable. belongsTo implementation';
 			container)
@@ -1318,11 +1369,16 @@ FamixGenerator >> defineRelations [
 	((tWithGlobalVariables property: #globalVariables)
 			comment: 'Global variables defined in the scope, if any.').
 
-	((tHeader property: #headerOwner) container )
+	"-----"
+	"CONTAINER"
+	((tHeader property: #headerOwner)
+		container )
 		-
 	((tWithHeaders property: #header)
-			comment: 'The header file that defines this module').
+		comment: 'The header file that defines this module').
 
+	"-----"
+	"CONTAINER"
 	((tImplicitVariable property: #parentBehaviouralEntity)
 			comment: 'The behaviour containing this implicit variable. belongsTo implementation';
 			container)
@@ -1330,6 +1386,8 @@ FamixGenerator >> defineRelations [
 	((tWithImplicitVariables property: #implicitVariables)
 			comment: 'Implicit variables used locally by this behaviour.').
 
+	"-----"
+	"ASSOCIATION: Invocation"
 	((tInvocable property: #incomingInvocations)
 			comment: 'Incoming invocations from other behaviours computed by the candidate operator.')
 		*-*
@@ -1350,6 +1408,8 @@ FamixGenerator >> defineRelations [
 	((tInvocationsReceiver property: #receivingInvocations)
 			comment: 'List of invocations performed on this entity (considered as the receiver)').
 
+	"-----"
+	"ASSOCIATION: TImport"
 	((tWithImports property: #outgoingImports)
 			comment: '')
 		-*
@@ -1364,6 +1424,8 @@ FamixGenerator >> defineRelations [
 	((tImportable property: #incomingImports)
 			comment: 'List of imports of this entity').
 
+	"-----"
+	"CONTAINER"
 	((tLocalVariable property: #parentBehaviouralEntity)
 			comment: 'Behavioural entity declaring this local variable. belongsTo implementation';
 			container)
@@ -1371,6 +1433,8 @@ FamixGenerator >> defineRelations [
 	((tWithLocalVariables property: #localVariables)
 			comment: 'Variables locally defined by this behaviour.').
 
+	"-----"
+	"CONTAINER"
 	((tMethod property: #parentType)
 			comment: 'Type declaring the method. It provides the implementation for belongsTo.';
 			container)
@@ -1378,19 +1442,24 @@ FamixGenerator >> defineRelations [
 	((tWithMethods property: #methods)
 			comment: 'Methods declared by this type.').
 
+	"-----"
+	"CONTAINER"
 	((tModule property: #moduleEntities))
 		-*
 	((tDefinedInModule property: #parentModule)
 			comment: 'Module that contains the definition of this entity';
 			container).
 
+	"-----"
+	"CONTAINER"
 	((tPackage property: #childEntities))
 		-*
 	((tPackageable property: #parentPackage)
 		comment: 'Package containing the entity in the code structure (if applicable)';
 		container).
 
-
+	"-----"
+	"CONTAINER"
 	((tParameter property: #parentBehaviouralEntity)
 			comment: 'Behavioural entity containing this parameter. belongsTo implementation';
 			container)
@@ -1398,6 +1467,8 @@ FamixGenerator >> defineRelations [
 	((tWithParameters property: #parameters)
 			comment: 'List of formal parameters declared by this behaviour.').
 
+	"-----"
+	"ASSOCIATION: TReference"
 	((tReference property: #referencer)
 			comment: 'Source entity making the reference. from-side of the association';
 			source)
@@ -1412,18 +1483,24 @@ FamixGenerator >> defineRelations [
 	((tReferenceable property: #incomingReferences)
 			comment: 'References to this entity by other entities.').
 
+	"-----"
+	"CONTAINER ???"
 	((tSourceAnchor property: #element)
-			comment: 'Enable the accessibility to the famix entity that this class is a source pointer for') "this realtion was a container in the old FamixT"
+			comment: 'Enable the accessibility to the famix entity that this class is a source pointer for') "this relation was a container in the old FamixT"
 		-
 	((tSourceEntity property: #sourceAnchor)
 			comment: 'SourceAnchor entity linking to the original source code for this entity').
 
+	"-----"
+	"REMOVE ???"
 	((tSourceLanguage property: #sourcedEntities)
 			comment: 'References to the entities saying explicitly that are written in this language.')
 		-*
 	((tWithSourceLanguages property: #declaredSourceLanguage)
 			comment: 'The declared SourceLanguage for the source code of this entity').
 
+	"-----"
+	"ASSOCIATION: TInheritance"
 	((tInheritance property: #subclass)
 			comment: 'Subclass linked to in this relationship. from-side of the association';
 			source)
@@ -1438,7 +1515,11 @@ FamixGenerator >> defineRelations [
 	((tWithInheritances property: #subInheritances)
 			comment: 'Subinheritance relationships, i.e. known subclasses of this type.').
 
-	((tTemplate property: #templateOwner) container)
+	"-----"
+	"REMOVE
+	 ASSOCIATION: template ???"
+	((tTemplate property: #templateOwner)
+		container)
 		*-
 	((tWithTemplates property: #templates)).
 
@@ -1446,25 +1527,27 @@ FamixGenerator >> defineRelations [
 		-*
 	((tTemplateUser property: #template)).
 
-	((tThrowable property: #throwingEntities))
-		*-*
-	((tWithExceptions property: #thrownExceptions)
-			comment: 'The exceptions thrown by the method').
-
-	((tTrait property: #traitOwner) container )
+	"-----"
+	"CONTAINER"
+	((tTrait property: #traitOwner)
+		container )
 		*-
 	((tWithTraits property: #traits)).
 
+	"-----"
+	"ASSOCIATION: TraitUse"
 	((tTrait property: #incomingTraitUsages))
 		-*
 	((tTraitUsage property: #trait)
-			source).
+		source).
 
 	((tTraitUser property: #outgoingTraitUsages))
 		-*
 	((tTraitUsage property: #user)
-			target).
+		target).
 
+	"-----"
+	"CONTAINER"
 	((tType property: #typeContainer)
 			comment: 'Container entity to which this type belongs. Container is a namespace, not a package (Smalltalk).';
 			container)
@@ -1473,19 +1556,25 @@ FamixGenerator >> defineRelations [
 		comment: 'Types contained (declared) in this entity, if any.
 #types is declared in ContainerEntity because different kinds of container can embed types. Types are usually contained in a Famix.Namespace. But types can also be contained in a Famix.Class or Famix.Method (in Java with inner classes for example). Famix.Function can also contain some types such as structs.').
 
+	"-----"
+	"ASSOCIATION: Alias"
 	((tTypeAlias property: #aliasedType)
 			comment: 'Points to the actual type.')
 		*-
 	((tWithTypeAliases property: #typeAliases)
 			comment: 'Aliases').
 
+	"-----"
+	"ASSOCIATION: DeclaredType"
 	((tTypedEntity property: #declaredType)
 			comment: 'Type of the entity, if any')
 		*-
 	((tType property: #typedEntities)
 			comment: 'Entities that have this type as declaredType').
 
-		((tImplementation property: #implementingClass)
+	"-----"
+	"ASSOCIATION: TImplementation"
+	((tImplementation property: #implementingClass)
 			comment: 'Class linked to in this relationship. from-side of the association';
 			source)
 		*-
@@ -1499,22 +1588,30 @@ FamixGenerator >> defineRelations [
 	((tImplementable property: #implementations)
 			comment: 'Implementation relationships.').
 
+	"-----"
+	"ASSOCIATION ???"
 	(tConcretization property: #parameterConcretizations)
 		*-*
 	(tParameterConcretization property: #concretizations).
 
+	"-----"
+	"ASSOCIATION ???"
 	((tGenericParameterType property: #genericEntities)
 			comment: 'The generic entities that use me.')
 		*-*
 	((tParametricEntity property: #genericParameters)
 			comment: 'List of generic parameters.').
 
+	"-----"
+	"ASSOCIATION ???"
 	((tConcreteParameterType property: #concreteEntities)
 			comment: 'The concrete entities that use me.')
 		*-*
 	((tParametricEntity property: #concreteParameters)
 			comment: 'List of concrete parameters.').
 
+	"-----"
+	"ASSOCIATION: ParameterConcretization"
 	((tParameterConcretization property: #genericParameter)
 			comment: 'Generic parameter linked to in this relationship. from-side of the association';
 			source)
@@ -1529,6 +1626,8 @@ FamixGenerator >> defineRelations [
 	((tConcreteParameterType property: #generics)
 			comment: 'Generic relationships, i.e. known genericParameter of this type.').
 
+	"-----"
+	"ASSOCIATION: Concretization"
 	((tConcretization property: #genericEntity)
 			comment: 'Generic entity linked to in this relationship. from-side of the association';
 			source)
