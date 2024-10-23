@@ -28,5 +28,6 @@ FamixUMLRoassalBackend >> export: famixUMLEntities [
 	builder build.
 
 	canvas := builder canvas.
+	canvas shapes do: [ :shape | shape draggable ].
 	^canvas
 ]
