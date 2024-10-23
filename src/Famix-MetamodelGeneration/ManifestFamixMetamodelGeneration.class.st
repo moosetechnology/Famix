@@ -11,5 +11,5 @@ Class {
 ManifestFamixMetamodelGeneration class >> ruleLongMethodsRuleV1FalsePositive [
 
 	<ignoreForCoverage>
-	^ #(#(#(#RGClassDefinition #(#FamixGenerator)) #'2024-01-31T17:11:51.063524+01:00') )
+	^ #(#(#(#RGClassDefinition #(#FamixGenerator)) #'2024-01-31T17:11:51.063524+01:00') #(#(#RGClassDefinition #(#NewFamixGenerator)) #'2024-10-23T13:47:53.987006+02:00') )
 ]
