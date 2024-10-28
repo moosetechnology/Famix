@@ -125,7 +125,9 @@ Class {
 		'tGenericParameterType',
 		'tThrowable',
 		'tConcretization',
-		'tParameterConcretization'
+		'tParameterConcretization',
+		'tShadowable',
+		'tShadower'
 	],
 	#category : #'Famix-MetamodelGeneration'
 }
@@ -442,7 +444,7 @@ FamixGenerator >> commentForTHeader [
 	^ 'I represent a header file. Typically a .h or .hpp'
 ]
 
-{ #category : #definition }
+{ #category : #comments }
 FamixGenerator >> commentForTImplementable [
 
 ^'I can be the target of an implementation cf Interface '
@@ -648,6 +650,64 @@ Internal Representation and Key Implementation Points.
 	endPos:					<anInteger>				Position of the last character of my source in the source text of the relative anchor.
 	relatedAnchor:			<aSourceAnchor>			The anchor I''ll get my relative sources from.
 	startPos:					<anInteger>				Position of the first character of my source in the source text of the relative anchor.
+'
+]
+
+{ #category : #comments }
+FamixGenerator >> commentForTShadowable [
+
+	^ 'An entity that is shadowable is an entity that can be redefined and the new implementation with the same name takes precedence over the old one when calling it by its name later. 
+	
+	For example in Python it is possible to have this:
+	
+	```python
+def return3():
+    return 3
+
+print(return3())
+
+from moduleAtRoot8 import functionReturningSomething as return3
+
+print(return3())
+
+def return3():
+    return 3
+
+print(return3())
+```
+
+In this case, return3 is shadowed twice. Once by the alias of an import and a second time by another function.
+
+The opposite of a shadowable is a shadower.
+'
+]
+
+{ #category : #comments }
+FamixGenerator >> commentForTShadower [
+
+	^ 'An entity that is a shadower is an entity that can redefine another entity and the new implementation with the same name takes precedence over the old one when calling it by its name later. 
+	
+	For example in Python it is possible to have this:
+	
+	```python
+def return3():
+    return 3
+
+print(return3())
+
+from moduleAtRoot8 import functionReturningSomething as return3
+
+print(return3())
+
+def return3():
+    return 3
+
+print(return3())
+```
+
+In this case, return3 is shadowed twice. Once by the alias of an import and a second time by another function.
+
+The opposite of a shadower is a shadowable.
 '
 ]
 
@@ -1542,6 +1602,12 @@ FamixGenerator >> defineRelations [
 		-
 	((tParametricEntity property: #genericization)
 			comment: 'Generic entity relationship, i.e. the association to the generic entity of this type.').
+			
+	((tShadowable property: #shadowingEntity)
+		comment: 'Entity shadowing me in my defining scope.')
+		-
+	((tShadower property: #shadowedEntity)
+		comment: 'Entity that is been shadowed by myself in my defining scope.')
 ]
 
 { #category : #definition }
@@ -1901,4 +1967,10 @@ FamixGenerator >> defineTraits [
 
 	tThrowable := builder newTraitNamed: #TThrowable.
 	tThrowable comment: self commentForTThrowable.
+	
+	tShadowable := builder newTraitNamed: #TShadowable.
+	tShadowable comment: self commentForTShadowable.
+
+	tShadower := builder newTraitNamed: #TShadower.
+	tShadower comment: self commentForTShadower
 ]
