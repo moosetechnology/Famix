@@ -185,14 +185,6 @@ FamixStMethod >> isInternalImplementation [
 		and: [ self isPureAccessor not ]
 ]
 
-{ #category : #'Famix-Extensions-metrics-support' }
-FamixStMethod >> isJUnit4Test [
-	<FMProperty: #isJUnit4Test type: #Boolean>
-	<derived>
-	<FMComment: 'True if the method is considered as a Junit 4 Java test'>
-	^ self isAnnotatedWith: 'Test'
-]
-
 { #category : #testing }
 FamixStMethod >> isOverridden [
 	"If we have a stub and we don't have the container, we can't have the information"
