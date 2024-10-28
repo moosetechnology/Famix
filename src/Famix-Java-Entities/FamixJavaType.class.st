@@ -125,19 +125,6 @@ FamixJavaType >> isInterface [
 ]
 
 { #category : #testing }
-FamixJavaType >> isJUnit3TestCase [
-	^ self superclassHierarchy anySatisfy: [:each | each mooseName =  #'junit::framework::TestCase']
-]
-
-{ #category : #testing }
-FamixJavaType >> isJUnit4TestCase [
-	<FMProperty: #isJUnit4TestCase type: #Boolean>
-	<derived>
-	<FMComment: 'True if the method is considered as a Junit 4 Java test'>
-	^ self methods anySatisfy: [ :m | m isJUnit4Test ]
-]
-
-{ #category : #testing }
 FamixJavaType >> isLonelyWithin: aClassGroup [
 	^ ( self subclassHierarchyGroup intersection: aClassGroup ) isEmpty and: [
 		( self superclassHierarchyGroup intersection: aClassGroup ) isEmpty ]
@@ -146,14 +133,6 @@ FamixJavaType >> isLonelyWithin: aClassGroup [
 { #category : #testing }
 FamixJavaType >> isParameterType [
 	^ false
-]
-
-{ #category : #testing }
-FamixJavaType >> isTestCase [
-	<FMProperty: #isTestCase type: #Boolean>
-	<derived>
-	<FMComment: 'True if the method is considered as a Java test'>
-	^ self isJUnit3TestCase or: [ self isJUnit4TestCase ] 
 ]
 
 { #category : #'Famix-Extensions-operations' }

@@ -104,6 +104,13 @@ FamixJavaClass >> incomingAccesses [
 ]
 
 { #category : #testing }
+FamixJavaClass >> inheritsFromTestCase [
+	"In the past we checked for the one from junit, but Apache also have its own way to test with a superclass named TestCase."
+
+	^ self superclassHierarchy anySatisfy: [ :each | each name = #TestCase ]
+]
+
+{ #category : #testing }
 FamixJavaClass >> isADirectSubclassOf: aClass [
 	^ aClass class = FamixJavaClass
 		ifTrue: [ aClass directSubclasses includes: self ]
@@ -152,6 +159,24 @@ FamixJavaClass >> isIgnored [
 FamixJavaClass >> isInheritedBy: anInheritance [ 
 	 
 	^anInheritance superclass == self
+]
+
+{ #category : #testing }
+FamixJavaClass >> isJUnit4TestCase [
+
+	<FMProperty: #isJUnit4TestCase type: #Boolean>
+	<derived>
+	<FMComment: 'True if the method is considered as a Junit 4 Java test'>
+	^ self methods anySatisfy: [ :m | m isJUnit4Test ]
+]
+
+{ #category : #testing }
+FamixJavaClass >> isTestCase [
+
+	<FMProperty: #isTestCase type: #Boolean>
+	<derived>
+	<FMComment: 'True if the method is considered as a Java test'>
+	^ self inheritsFromTestCase or: [ self isJUnit4TestCase ]
 ]
 
 { #category : #private }

@@ -145,6 +145,7 @@ FamixStClass >> isLonelyWithin: aClassGroup [
 
 { #category : #testing }
 FamixStClass >> isTestCase [
+
 	<FMProperty: #isTestCase type: #Boolean>
 	<derived>
 	<FMComment: 'True if the method is considered as a Java test'>
