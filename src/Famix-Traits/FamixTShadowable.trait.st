@@ -52,6 +52,12 @@ FamixTShadowable classSide >> annotation [
 	^ self
 ]
 
+{ #category : #testing }
+FamixTShadowable >> isShadowed [
+
+	^ self shadowingEntity isNotNil
+]
+
 { #category : #accessing }
 FamixTShadowable >> shadowingEntity [
 	"Relation named: #shadowingEntity type: #FamixTShadower opposite: #shadowedEntity"
