@@ -54,9 +54,14 @@ FamixTWithInheritances >> allSubclassesDo: aBlock [
 { #category : #enumerating }
 FamixTWithInheritances >> allSuperclassesDo: aBlock [
 
-	self superInheritances do: [ :each | 
-		aBlock value: each superclass.
-		each superclass allSuperclassesDo: aBlock ]
+	self superInheritances do: [ :each |
+		| superclass |
+		superclass := each superclass.
+		(superclass isParametricEntity and: [
+			 superclass isGenericEntity not ]) ifTrue: [
+			superclass := superclass genericEntity ].
+		aBlock value: superclass.
+		superclass allSuperclassesDo: aBlock ]
 ]
 
 { #category : #enumerating }
