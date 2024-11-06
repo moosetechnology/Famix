@@ -33,6 +33,7 @@ Class {
 		'tInvocable',
 		'tInvocation',
 		'tInvocationsReceiver',
+		'tLambda',
 		'tLocalVariable',
 		'tMethod',
 		'tModule',
@@ -70,6 +71,7 @@ Class {
 		'tWithImplicitVariables',
 		'tWithInheritances',
 		'tWithInvocations',
+		'tWithLambdas',
 		'tWithLocalVariables',
 		'tWithMethods',
 		'tDefinedInModule',
@@ -496,6 +498,12 @@ will produce one invocation association from current method to a variable anObje
 FamixGenerator >> commentForTInvocationsReceiver [
 
 	^ ''
+]
+
+{ #category : #comments }
+FamixGenerator >> commentForTLambda [
+
+	^ 'FamixTLabmda represents a behavioural entity that does not have a name. It can be used to represent lambdas, closures, blocks...'
 ]
 
 { #category : #comments }
@@ -942,6 +950,12 @@ FamixGenerator >> commentForTWithInvocations [
 ]
 
 { #category : #comments }
+FamixGenerator >> commentForTWithLambdas [
+
+	^ 'I represent an entity that can owned lambda expressions.'
+]
+
+{ #category : #comments }
 FamixGenerator >> commentForTWithLocalVariables [
 
 	^ ''
@@ -1091,6 +1105,13 @@ FamixGenerator >> defineHierarchy [
 	tInvocation --|> tHasSignature.
 
 	tImplicitVariable --|> tStructuralEntity.
+	
+	tLambda --|> tWithParameters.
+	tLambda --|> tHasSignature.
+	tLambda --|> tWithStatements.
+	tLambda --|> tWithLocalVariables.
+	tLambda --|> tInvocable.
+	tLambda --|> #TEntityMetaLevelDependency.
 
 	tLocalVariable --|> tStructuralEntity.
 
@@ -1370,6 +1391,13 @@ FamixGenerator >> defineRelations [
 		*-
 	((tWithFunctions property: #functions)
 			comment: 'Functions defined in the container, if any.').
+
+	((tLambda property: #lambdaContainer)
+			comment: 'The container defining the lambda expression. The lambda is placed in a container, because certain languages can nest lambdas in lambdas.';
+			container)
+		*-
+	((tWithLambdas property: #lambdas)
+			comment: 'Lambdas defined in the container, if any.').
 
 	((tGlobalVariable property: #parentScope)
 			comment: 'Scope declaring the global variable. belongsTo implementation';
@@ -1736,6 +1764,9 @@ FamixGenerator >> defineTraits [
 
 	tInvocationsReceiver := builder newTraitNamed: #TInvocationsReceiver.
 	tInvocationsReceiver comment: self commentForTInvocationsReceiver.
+	
+	tLambda := builder newTraitNamed: #TLambda.
+	tLambda comment: self commentForTLambda.
 
 	tLocalVariable := builder newTraitNamed: #TLocalVariable.
 	tLocalVariable comment: self commentForTLocalVariable.
@@ -1891,6 +1922,9 @@ FamixGenerator >> defineTraits [
 
 	tWithInvocations := builder newTraitNamed: #TWithInvocations.
 	tWithInvocations comment: self commentForTWithInvocations.
+	
+	tWithLambdas := builder newTraitNamed: #TWithLambdas.
+	tWithLambdas comment: self commentForTWithLambdas.
 
 	tWithLocalVariables := builder newTraitNamed: #TWithLocalVariables.
 	tWithLocalVariables comment: self commentForTWithLocalVariables.

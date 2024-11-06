@@ -115,6 +115,13 @@ MooseAbstractGroup >> allInvocations [
 ]
 
 { #category : #'*Famix-Traits' }
+MooseAbstractGroup >> allLambdas [
+
+	<navigation: 'All lambdas'>
+	^ self allUsing: FamixTLambda
+]
+
+{ #category : #'*Famix-Traits' }
 MooseAbstractGroup >> allLocalVariables [
 	
 	<navigation: 'All local variables'>
@@ -145,6 +152,13 @@ MooseAbstractGroup >> allModelImports [
 
 	<navigation: 'All model imports'>
 	^ self cacheAt: 'All model imports' ifAbsentPut: [ MooseGroup withAll: (self allImports reject: [ :each | each isStub ]) withDescription: 'All model imports' ]
+]
+
+{ #category : #'*Famix-Traits' }
+MooseAbstractGroup >> allModelLambdas [
+
+	<navigation: 'All model lambdas'>
+	^ self cacheAt: 'All model lambdas' ifAbsentPut: [ MooseGroup withAll: (self allLambdas reject: [ :each | each isStub ]) withDescription: 'All model lambdas' ]
 ]
 
 { #category : #'*Famix-Traits' }
