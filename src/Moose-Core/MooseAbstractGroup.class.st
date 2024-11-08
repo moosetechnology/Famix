@@ -455,8 +455,9 @@ MooseAbstractGroup >> flatCollect: aBlock [
 ]
 
 { #category : #enumerating }
-MooseAbstractGroup >> flatCollectAsSet: aBlock [ 
-	^ (self entities flatCollectAsSet: aBlock) asMooseGroup
+MooseAbstractGroup >> flatCollectAsSet: aBlock [
+
+	^ self entities flatCollectAsSet: aBlock
 ]
 
 { #category : #flattening }
