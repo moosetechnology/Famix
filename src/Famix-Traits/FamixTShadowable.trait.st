@@ -53,6 +53,13 @@ FamixTShadowable classSide >> annotation [
 ]
 
 { #category : #testing }
+FamixTShadowable >> isShadowable [
+
+	<generated>
+	^ true
+]
+
+{ #category : #testing }
 FamixTShadowable >> isShadowed [
 
 	^ self shadowingEntity isNotNil
