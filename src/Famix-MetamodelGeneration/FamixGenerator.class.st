@@ -2003,6 +2003,7 @@ FamixGenerator >> defineTraits [
 	tThrowable comment: self commentForTThrowable.
 	
 	tShadowable := builder newTraitNamed: #TShadowable.
+	tShadowable withTesting.
 	tShadowable comment: self commentForTShadowable.
 
 	tShadower := builder newTraitNamed: #TShadower.
