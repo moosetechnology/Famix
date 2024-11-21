@@ -251,11 +251,6 @@ FamixJavaMethod >> isSetter [
 							  self outgoingInvocations isEmpty ] ] ] ] ] ]
 ]
 
-{ #category : #printing }
-FamixJavaMethod >> isStub [
-	^ super isStub or: [ self parentType isNotNil and: [ self parentType isStub ] ]
-]
-
 { #category : #testing }
 FamixJavaMethod >> isSurelyInvokedBy: aFAMIXMethod [
 	| outgoingInvo |
