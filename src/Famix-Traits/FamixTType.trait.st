@@ -40,8 +40,8 @@ Trait {
 		'#typeContainer => FMOne type: #FamixTWithTypes opposite: #types',
 		'#typedEntities => FMMany type: #FamixTTypedEntity opposite: #declaredType'
 	],
-	#traits : 'FamixTNamedEntity + FamixTReferenceable + FamixTSourceEntity + TEntityMetaLevelDependency',
-	#classTraits : 'FamixTNamedEntity classTrait + FamixTReferenceable classTrait + FamixTSourceEntity classTrait + TEntityMetaLevelDependency classTrait',
+	#traits : 'FamixTCanBeStub + FamixTNamedEntity + FamixTReferenceable + TEntityMetaLevelDependency',
+	#classTraits : 'FamixTCanBeStub classTrait + FamixTNamedEntity classTrait + FamixTReferenceable classTrait + TEntityMetaLevelDependency classTrait',
 	#category : #'Famix-Traits-Type'
 }
 
