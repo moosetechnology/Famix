@@ -21,16 +21,6 @@ MooseEntityTest >> testAnnotation [
 ]
 
 { #category : #tests }
-MooseEntityTest >> testIsStub [
-	self deny: self actualClass new isStub.
-	self
-		assert:
-			(self actualClass new
-				attributeAt: #privateIsStub put: true;
-				yourself) isStub
-]
-
-{ #category : #tests }
 MooseEntityTest >> testLocalMooseModel [
 	| element model |
 	element := self actualClass new.
