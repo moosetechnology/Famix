@@ -212,6 +212,8 @@ FmxMBRingEnvironment >> slotNamed: slotName cardinality: cardinality type: type 
 
 { #category : #initialization }
 FmxMBRingEnvironment >> slotNamed: slotName defaultValue: aValue [
+
 	aValue ifNil: [ ^ self slotNamed: slotName ].
-	^ (RGUnknownSlot named: slotName asSymbol) expression: ('FMProperty defaultValue: {1}' format: { aValue })
+	^ (RGUnknownSlot named: slotName asSymbol) expression:
+		  ('FMProperty defaultValue: {1}' format: { aValue printString })
 ]
