@@ -26,7 +26,6 @@
 
 | Name | Type | Default value | Comment |
 |---|
-| `isStub` | `Boolean` | false | Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.|
 | `signature` | `String` | nil | Signature of the message being sent|
 
 "

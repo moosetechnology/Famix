@@ -194,12 +194,9 @@ MooseEntity >> isQueryable [
 
 { #category : #testing }
 MooseEntity >> isStub [
-	^ self attributeAt: #privateIsStub ifAbsent: [ false ]
-]
+	"I'll be overriden in TCanBeStub if the applies."
 
-{ #category : #testing }
-MooseEntity >> isStub: boolean [
-	^ self attributeAt: #privateIsStub put: boolean
+	^ false
 ]
 
 { #category : #accessing }
