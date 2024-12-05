@@ -712,6 +712,12 @@ MooseAbstractGroup >> reject: rejectBlock thenCollect: collectBlock [
 	^ (self reject: rejectBlock) collect: collectBlock
 ]
 
+{ #category : #enumerating }
+MooseAbstractGroup >> reject: aBlockSelect thenDo: aBlockThenDo [
+
+	^ self entities reject: aBlockSelect thenDo: aBlockThenDo
+]
+
 { #category : #'adding/removing' }
 MooseAbstractGroup >> remove: anItem [ 
 	 
