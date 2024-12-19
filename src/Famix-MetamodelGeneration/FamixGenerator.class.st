@@ -96,7 +96,6 @@ Class {
 		'tTypedEntity',
 		'tHasSignature',
 		'tWithGlobalVariables',
-		'tHasModifiers',
 		'tHasImmediateSource',
 		'tNamedEntity',
 		'tTypeGroup',
