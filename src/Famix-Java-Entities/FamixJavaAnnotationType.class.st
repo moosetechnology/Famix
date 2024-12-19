@@ -23,11 +23,13 @@
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `implementations` | `FamixTImplementable` | `interface` | `FamixTImplementation` | Implementation relationships.|
+| `outgoingConcretizations` | `FamixTConcreteType` | `concreteParameter` | `FamixTConcretization` | Concretizations where the concrete parameter is this type.|
 | `subInheritances` | `FamixTWithInheritances` | `superclass` | `FamixTInheritance` | Subinheritance relationships, i.e. known subclasses of this type.|
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
+| `genericEntities` | `FamixTConcreteType` | `parameters` | `FamixTParametricEntity` | Generic entities for which a type parameter is this type.|
 | `instances` | `FamixTAnnotationType` | `annotationType` | `FamixTTypedAnnotationInstance` | Annotations of this type|
 
 
@@ -42,8 +44,8 @@
 Class {
 	#name : #FamixJavaAnnotationType,
 	#superclass : #FamixJavaType,
-	#traits : 'FamixTAnnotationType + FamixTHasVisibility + FamixTImplementable + FamixTPackageable + FamixTWithAttributes + FamixTWithComments + FamixTWithInheritances',
-	#classTraits : 'FamixTAnnotationType classTrait + FamixTHasVisibility classTrait + FamixTImplementable classTrait + FamixTPackageable classTrait + FamixTWithAttributes classTrait + FamixTWithComments classTrait + FamixTWithInheritances classTrait',
+	#traits : 'FamixTAnnotationType + FamixTConcreteType + FamixTHasVisibility + FamixTImplementable + FamixTPackageable + FamixTWithAttributes + FamixTWithComments + FamixTWithInheritances',
+	#classTraits : 'FamixTAnnotationType classTrait + FamixTConcreteType classTrait + FamixTHasVisibility classTrait + FamixTImplementable classTrait + FamixTPackageable classTrait + FamixTWithAttributes classTrait + FamixTWithComments classTrait + FamixTWithInheritances classTrait',
 	#category : #'Famix-Java-Entities-Entities'
 }
 

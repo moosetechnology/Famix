@@ -250,31 +250,10 @@ FamixJavaTEntityCreator >> newParameter [
 ]
 
 { #category : #'entity creation' }
-FamixJavaTEntityCreator >> newParameterConcretization [
-
-	<generated>
-	^ self add: FamixJavaParameterConcretization new
-]
-
-{ #category : #'entity creation' }
 FamixJavaTEntityCreator >> newParameterNamed: aName [
 
 	<generated>
 	^ self add: (FamixJavaParameter named: aName)
-]
-
-{ #category : #'entity creation' }
-FamixJavaTEntityCreator >> newParameterType [
-
-	<generated>
-	^ self add: FamixJavaParameterType new
-]
-
-{ #category : #'entity creation' }
-FamixJavaTEntityCreator >> newParameterTypeNamed: aName [
-
-	<generated>
-	^ self add: (FamixJavaParameterType named: aName)
 ]
 
 { #category : #'entity creation' }
@@ -285,10 +264,31 @@ FamixJavaTEntityCreator >> newParametricClass [
 ]
 
 { #category : #'entity creation' }
+FamixJavaTEntityCreator >> newParametricImplementation [
+
+	<generated>
+	^ self add: FamixJavaParametricImplementation new
+]
+
+{ #category : #'entity creation' }
+FamixJavaTEntityCreator >> newParametricInheritance [
+
+	<generated>
+	^ self add: FamixJavaParametricInheritance new
+]
+
+{ #category : #'entity creation' }
 FamixJavaTEntityCreator >> newParametricInterface [
 
 	<generated>
 	^ self add: FamixJavaParametricInterface new
+]
+
+{ #category : #'entity creation' }
+FamixJavaTEntityCreator >> newParametricInvocation [
+
+	<generated>
+	^ self add: FamixJavaParametricInvocation new
 ]
 
 { #category : #'entity creation' }
@@ -345,6 +345,13 @@ FamixJavaTEntityCreator >> newTypeNamed: aName [
 
 	<generated>
 	^ self add: (FamixJavaType named: aName)
+]
+
+{ #category : #'entity creation' }
+FamixJavaTEntityCreator >> newTypeParameter [
+
+	<generated>
+	^ self add: FamixJavaTypeParameter new
 ]
 
 { #category : #'entity creation' }
