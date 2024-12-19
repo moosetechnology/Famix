@@ -285,12 +285,10 @@ MooseScripts class >> packagesForConfigurationVersion: aConfiguration [
 { #category : #'loading scripts' }
 MooseScripts class >> pharoPackageNames [
 	"self pharoPackageNames"
-	
-	| packages packageNames |
-	packages := (self packageOrganizer packages select:[:each | each class = RPackage])
-									  asSortedCollection: [:a :b | a name <= b name].
-	packageNames := packages collect: [:pak | pak name].
-	^ packageNames
+
+	^ (self packageOrganizer packageNames reject: [ :packageName |
+		   packageName = UndefinedPackage undefinedPackageName ]) sorted:
+		  #yourself ascending
 ]
 
 { #category : #notes }
