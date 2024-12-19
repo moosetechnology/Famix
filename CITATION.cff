@@ -14,5 +14,8 @@ authors:
   given-names: "Clotilde"
 - family-names: "Ferlicot"
   given-names: "Cyril"
+- family-names: "Ducasse"
+  given-names: "Stéphane"
+  orcid: "https://orcid.org/0000-0001-6070-6599"
 title: "Famix"
 url: "https://github.com/moosetechnology/Famix"
