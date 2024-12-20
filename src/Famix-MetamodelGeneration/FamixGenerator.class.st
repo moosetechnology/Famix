@@ -623,9 +623,10 @@ Knows the name of the macro tested and whether it is "negated" (#ifndef) or not 
 { #category : #comments }
 FamixGenerator >> commentForTReference [
 
-	^ 'A FamixTReference entity is created whenever one manipulates a class name as a variable. For example:
-(i) if the class is passed as a parameter to a method, or
-(ii) if a static method is invoked on a class.
+	^ 'A FamixTReference entity is created whenever one manipulates an entity as a variable. For example:
+- if a class is passed as a parameter to a method, or
+- if a static method is invoked on a class.
+- if a method is referenced as a method and not as method invocation
 
 For example, in the following Java code
 method a()
@@ -639,7 +640,17 @@ Note that FamixTReference was defined between two FamixTContainerEntity entities
 { #category : #comments }
 FamixGenerator >> commentForTReferenceable [
 
-	^ ''
+	^ 'A Referenceable is an entity that can be the target of a Reference.
+	
+It is usually a type but depending on the language it can be other things such as methods, functions, and even modules or packages in the case of Python.
+
+History:
+In the past the opposite of Referenceable was `#referredType` but we extended it to any kind of entity.
+The reason is that in Python we can reference methods, functions, class, modules, packages, lambdas... Or in Java we can reference methods.
+We found 3 solutions to manage this:
+- Extend Reference to cover all kind of references: Selected solution
+- Add a "PythonQuoteAssociation" for all other references than the ones targeting the types: This was not selected since it seems incoherente to have everything in an association except types
+- Add an association for each kind of targets: This was not selected because it seemed too much work for little gain'
 ]
 
 { #category : #comments }
@@ -1496,7 +1507,7 @@ FamixGenerator >> defineRelations [
 	((tWithReferences property: #outgoingReferences)
 			comment: 'References from this entity to other entities.').
 
-	((tReference property: #referredType)
+	((tReference property: #referredEntity)
 			comment: 'Target entity referenced. to-side of the association';
 			target)
 		*-

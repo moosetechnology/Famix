@@ -45,7 +45,7 @@ Trait {
 	#name : #FamixTAccess,
 	#instVars : [
 		'#accessor => FMOne type: #FamixTWithAccesses opposite: #accesses',
-		'#isWrite => FMProperty',
+		'#isWrite => FMProperty defaultValue: false',
 		'#variable => FMOne type: #FamixTAccessible opposite: #incomingAccesses'
 	],
 	#traits : 'FamixTAssociation',
