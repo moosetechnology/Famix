@@ -15,7 +15,7 @@ Class {
 { #category : #accessing }
 FamixDeclaredTypeAutomationError >> defaultMessageText [
 
-	^ 'This entity has no model. Automatic type declaration is impossible'
+	^ 'This entity has no model. Automatic type declaration is impossible.'
 ]
 
 { #category : #accessing }

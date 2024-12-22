@@ -166,6 +166,12 @@ SmalltalkMetamodelFactory >> sourcedEntity [
 ]
 
 { #category : #accessing }
+SmalltalkMetamodelFactory >> typeDeclaration [
+
+	^ self entityNamed: #TypeDeclaration
+]
+
+{ #category : #accessing }
 SmalltalkMetamodelFactory >> unknownVariable [
 
 	^ self entityNamed: #UnknownVariable

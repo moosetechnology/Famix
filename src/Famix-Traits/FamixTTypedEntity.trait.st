@@ -40,10 +40,19 @@ FamixTTypedEntity >> declaredType: aType [
 	"This method exists for compatibility reasons after reifying #declaredType with Type declaration.
 	It can be kept as a shortcut to build type declarations."
 
-	self mooseModel ifNil: [ FamixDeclaredTypeAutomationError signal ].
+	Warning signal:
+		'You tried to use #declaredType: to create a direct relation between you typed entity and its type.
+	This relation has been reified. You need to create an association named a TypeDeclaration.
+	Your typed entity is the source and the type is the target.
+	
+	If you proceed, the TypeDeclaration will be automatically created, based on the metamodel of this typed entity'.
 
-	self typeDeclaration:
-		(self mooseModel newTypeDeclaration declaredType: aType)
+	self class mooseDescription metamodel classes
+		detect: [ :cls | cls name = #TypeDeclaration ]
+		ifFound: [ :fm3Class |
+			self typeDeclaration:
+				(fm3Class implementingClass new declaredType: aType) ]
+		ifNone: [ FamixDeclaredTypeAutomationError signal ]
 ]
 
 { #category : #testing }

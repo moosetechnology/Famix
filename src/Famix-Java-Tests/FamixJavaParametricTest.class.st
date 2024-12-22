@@ -37,9 +37,9 @@ FamixJavaParametricTest >> test2 [
 	| m p return |
 	m := FamixJavaParametricMethod named: 'genericMethod'.
 	p := FamixJavaParameter named: 't'.
-	p declaredType: (FamixJavaParameterType named: 'T').
+	p declaredType: (FamixJavaTypeParameter named: 'T').
 	m addParameter: p.
-	return := FamixJavaParameterType named: 'T'.
+	return := FamixJavaTypeParameter named: 'T'.
 	FamixJavaInheritance new
 		subclass: return;
 		superclass: (FamixJavaClass named: 'Building').
@@ -56,14 +56,14 @@ FamixJavaParametricTest >> test3 [
 	| classA k v string |
 	(classA := FamixJavaParametricClass named: 'ClassA')
 		genericParameters: {
-				(k := FamixJavaParameterType named: 'K').
-				(v := FamixJavaParameterType named: 'V') }.
+				(k := FamixJavaTypeParameter named: 'K').
+				(v := FamixJavaTypeParameter named: 'V') }.
 
 	FamixJavaConcretization new
 		concreteEntity: (FamixJavaParametricClass named: 'ClassA');
 		genericEntity: classA.
 
-	FamixJavaParameterConcretization new
+	FamixJavaConcretization new
 		concreteParameter: (string := FamixJavaClass named: 'string');
 		genericParameter: k.
 
