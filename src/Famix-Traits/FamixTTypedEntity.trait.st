@@ -64,8 +64,7 @@ FamixTTypedEntity >> entityHasOutgoingTypeDeclarations [
 { #category : #testing }
 FamixTTypedEntity >> hasDeclaredType [
 
-	^ self typeDeclaration isNotNil and: [
-		  self typeDeclaration declaredType isNotNil ]
+	^ self declaredType isNotNil
 ]
 
 { #category : #accessing }
