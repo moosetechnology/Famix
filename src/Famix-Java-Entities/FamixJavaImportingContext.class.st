@@ -254,6 +254,13 @@ FamixJavaImportingContext >> importType [
 ]
 
 { #category : #importing }
+FamixJavaImportingContext >> importTypeDeclaration [
+
+	<generated>
+	^ self importAssociation: (self class fm3ClassNamed: #TypeDeclaration)
+]
+
+{ #category : #importing }
 FamixJavaImportingContext >> importTypeParameter [
 
 	<generated>
@@ -510,6 +517,13 @@ FamixJavaImportingContext >> shouldImportType [
 
 	<generated>
 	^ self shouldImport: #Type
+]
+
+{ #category : #testing }
+FamixJavaImportingContext >> shouldImportTypeDeclaration [
+
+	<generated>
+	^ self shouldImport: #TypeDeclaration
 ]
 
 { #category : #testing }

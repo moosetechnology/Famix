@@ -341,6 +341,13 @@ FamixJavaTEntityCreator >> newType [
 ]
 
 { #category : #'entity creation' }
+FamixJavaTEntityCreator >> newTypeDeclaration [
+
+	<generated>
+	^ self add: FamixJavaTypeDeclaration new
+]
+
+{ #category : #'entity creation' }
 FamixJavaTEntityCreator >> newTypeNamed: aName [
 
 	<generated>

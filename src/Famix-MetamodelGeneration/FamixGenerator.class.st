@@ -129,7 +129,8 @@ Class {
 		'tParametricAssociation',
 		'tTypeParameter',
 		'tConcretization',
-		'tConcreteType'
+		'tConcreteType',
+		'tTypeDeclaration'
 	],
 	#category : #'Famix-MetamodelGeneration'
 }
@@ -1165,6 +1166,8 @@ FamixGenerator >> defineHierarchy [
 	tType --|> #TEntityMetaLevelDependency.
 	tType --|> tCanBeStub.
 
+	tTypeDeclaration --|> tAssociation.
+	
 	tUnknownVariable --|> tStructuralEntity.
 
 	tWithClasses --|> tWithTypes.
@@ -1602,13 +1605,19 @@ FamixGenerator >> defineRelations [
 	((tWithTypeAliases property: #typeAliases)
 			comment: 'Aliases').
 
-	((tTypedEntity property: #declaredType)
-			comment: 'Type of the entity, if any')
-		*-
-	((tType property: #typedEntities)
-			comment: 'Entities that have this type as declaredType').
+	((tTypedEntity property: #typeDeclaration) comment:
+		 'Association linking this entity to its declared type.')
+		- ((tTypeDeclaration property: #typedEntity)
+			comment: 'Entity deckaring the type.';
+			source).
 
-		((tImplementation property: #implementingClass)
+	((tTypeDeclaration property: #declaredType)
+		 comment: 'Type of the entity.';
+		 target) 
+		*- ((tType property: #incomingDeclarations) 
+			comment: 'Relations to the entities that have this as type.').
+
+	((tImplementation property: #implementingClass)
 			comment: 'Class linked to in this relationship. from-side of the association';
 			source)
 		*-
@@ -1806,6 +1815,8 @@ FamixGenerator >> defineTraits [
 
 	tTypedEntity := builder newTraitNamed: #TTypedEntity.
 	tTypedEntity comment: self commentForTTypedStructure.
+	
+	tTypeDeclaration := builder newTraitNamed: #TTypeDeclaration.
 
 	tUnknownVariable := builder newTraitNamed: #TUnknownVariable.
 

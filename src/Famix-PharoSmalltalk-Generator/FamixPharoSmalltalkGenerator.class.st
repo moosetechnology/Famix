@@ -20,7 +20,8 @@ Class {
 		'parameter',
 		'reference',
 		'unknownVariable',
-		'pharoEntitySourceAnchor'
+		'pharoEntitySourceAnchor',
+		'typeDeclaration'
 	],
 	#category : #'Famix-PharoSmalltalk-Generator'
 }
@@ -59,6 +60,7 @@ FamixPharoSmalltalkGenerator >> defineClasses [
 	package := self newClassNamed: #Package.
 	parameter := self newClassNamed: #Parameter.
 	reference := self newClassNamed: #Reference.
+	typeDeclaration := self newClassNamed: #TypeDeclaration.
 	unknownVariable := self newClassNamed: #UnknownVariable.
 
 ]
@@ -149,6 +151,8 @@ FamixPharoSmalltalkGenerator >> defineHierarchy [
 	parameter --|> #TInvocationsReceiver.
 
 	reference --|> #TReference.
+	
+	typeDeclaration --|> #TTypeDeclaration. 
 
 	pharoEntitySourceAnchor --|> sourceAnchor.
 	pharoEntitySourceAnchor --|> #TSourceAnchor.

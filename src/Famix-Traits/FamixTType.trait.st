@@ -16,13 +16,13 @@ A type can have multiple subtypes or supertypes. These are modelled by means of 
 ### Incoming dependencies
 | Relation | Origin | Opposite | Type | Comment |
 |---|
+| `incomingDeclarations` | `FamixTType` | `declaredType` | `FamixTTypeDeclaration` | Relations to the entities that have this as type.|
 | `incomingReferences` | `FamixTReferenceable` | `referredType` | `FamixTReference` | References to this entity by other entities.|
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
-| `typedEntities` | `FamixTType` | `declaredType` | `FamixTTypedEntity` | Entities that have this type as declaredType|
 
 
 ## Properties
@@ -37,8 +37,8 @@ A type can have multiple subtypes or supertypes. These are modelled by means of 
 Trait {
 	#name : #FamixTType,
 	#instVars : [
-		'#typeContainer => FMOne type: #FamixTWithTypes opposite: #types',
-		'#typedEntities => FMMany type: #FamixTTypedEntity opposite: #declaredType'
+		'#incomingDeclarations => FMMany type: #FamixTTypeDeclaration opposite: #declaredType',
+		'#typeContainer => FMOne type: #FamixTWithTypes opposite: #types'
 	],
 	#traits : 'FamixTCanBeStub + FamixTNamedEntity + FamixTReferenceable + TEntityMetaLevelDependency',
 	#classTraits : 'FamixTCanBeStub classTrait + FamixTNamedEntity classTrait + FamixTReferenceable classTrait + TEntityMetaLevelDependency classTrait',
@@ -62,9 +62,9 @@ FamixTType classSide >> annotationFamixTypeGroup [
 ]
 
 { #category : #adding }
-FamixTType >> addTypedEntity: anObject [
+FamixTType >> addIncomingDeclaration: anObject [
 	<generated>
-	^ self typedEntities add: anObject
+	^ self incomingDeclarations add: anObject
 ]
 
 { #category : #deprecated }
@@ -74,7 +74,25 @@ FamixTType >> belongsTo [
 
 { #category : #testing }
 FamixTType >> entityHasIncomingTypeDeclarations [
-	^ self typedEntities isNotEmpty
+
+	^ self incomingDeclarations isNotEmpty
+]
+
+{ #category : #accessing }
+FamixTType >> incomingDeclarations [
+	"Relation named: #incomingDeclarations type: #FamixTTypeDeclaration opposite: #declaredType"
+
+	<generated>
+	<FMComment: 'Relations to the entities that have this as type.'>
+	<derived>
+	^ incomingDeclarations
+]
+
+{ #category : #accessing }
+FamixTType >> incomingDeclarations: anObject [
+
+	<generated>
+	incomingDeclarations value: anObject
 ]
 
 { #category : #testing }
@@ -140,21 +158,4 @@ FamixTType >> typeContainerGroup [
 	<generated>
 	<navigation: 'TypeContainer'>
 	^ MooseSpecializedGroup with: self typeContainer
-]
-
-{ #category : #accessing }
-FamixTType >> typedEntities [
-	"Relation named: #typedEntities type: #FamixTTypedEntity opposite: #declaredType"
-
-	<generated>
-	<FMComment: 'Entities that have this type as declaredType'>
-	<derived>
-	^ typedEntities
-]
-
-{ #category : #accessing }
-FamixTType >> typedEntities: anObject [
-
-	<generated>
-	typedEntities value: anObject
 ]

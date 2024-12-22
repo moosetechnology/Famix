@@ -163,6 +163,13 @@ FamixStImportingContext >> importSourceTextAnchor [
 ]
 
 { #category : #importing }
+FamixStImportingContext >> importTypeDeclaration [
+
+	<generated>
+	^ self importAssociation: (self class fm3ClassNamed: #TypeDeclaration)
+]
+
+{ #category : #importing }
 FamixStImportingContext >> importUnknownVariable [
 
 	<generated>
@@ -314,6 +321,13 @@ FamixStImportingContext >> shouldImportSourceTextAnchor [
 
 	<generated>
 	^ self shouldImport: #SourceTextAnchor
+]
+
+{ #category : #testing }
+FamixStImportingContext >> shouldImportTypeDeclaration [
+
+	<generated>
+	^ self shouldImport: #TypeDeclaration
 ]
 
 { #category : #testing }

@@ -236,6 +236,13 @@ FamixStTEntityCreator >> newSourceTextAnchor [
 ]
 
 { #category : #'entity creation' }
+FamixStTEntityCreator >> newTypeDeclaration [
+
+	<generated>
+	^ self add: FamixStTypeDeclaration new
+]
+
+{ #category : #'entity creation' }
 FamixStTEntityCreator >> newUnknownVariable [
 
 	<generated>

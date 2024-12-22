@@ -2,10 +2,10 @@
 ## Relations
 ======================
 
-### Other
+### Outgoing dependencies
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `declaredType` | `FamixTTypedEntity` | `typedEntities` | `FamixTType` | Type of the entity, if any|
+| `typeDeclaration` | `FamixTTypedEntity` | `typedEntity` | `FamixTTypeDeclaration` | Association linking this entity to its declared type.|
 
 
 
@@ -13,7 +13,7 @@
 Trait {
 	#name : #FamixTTypedEntity,
 	#instVars : [
-		'#declaredType => FMOne type: #FamixTType opposite: #typedEntities'
+		'#typeDeclaration => FMOne type: #FamixTTypeDeclaration opposite: #typedEntity'
 	],
 	#category : #'Famix-Traits-Type'
 }
@@ -29,26 +29,48 @@ FamixTTypedEntity classSide >> annotation [
 
 { #category : #accessing }
 FamixTTypedEntity >> declaredType [
-	"Relation named: #declaredType type: #FamixTType opposite: #typedEntities"
+	"This method exists for compatibility reasons after reifying #declaredType with Type declaration.
+	It can be kept as a shortcut to build type declarations."
 
-	<generated>
-	<FMComment: 'Type of the entity, if any'>
-	^ declaredType
+	^ self typeDeclaration ifNotNil: [ self typeDeclaration declaredType ]
 ]
 
 { #category : #accessing }
-FamixTTypedEntity >> declaredType: anObject [
+FamixTTypedEntity >> declaredType: aType [
+	"This method exists for compatibility reasons after reifying #declaredType with Type declaration.
+	It can be kept as a shortcut to build type declarations."
 
-	<generated>
-	declaredType := anObject
+	self mooseModel ifNil: [ FamixDeclaredTypeAutomationError signal ].
+
+	self typeDeclaration:
+		(self mooseModel newTypeDeclaration declaredType: aType)
 ]
 
-{ #category : #'moose query' }
+{ #category : #testing }
 FamixTTypedEntity >> entityHasOutgoingTypeDeclarations [
+
 	^ self hasDeclaredType
 ]
 
 { #category : #testing }
 FamixTTypedEntity >> hasDeclaredType [
-	^ self declaredType isNotNil
+
+	^ self typeDeclaration isNotNil and: [
+		  self typeDeclaration declaredType isNotNil ]
+]
+
+{ #category : #accessing }
+FamixTTypedEntity >> typeDeclaration [
+	"Relation named: #typeDeclaration type: #FamixTTypeDeclaration opposite: #typedEntity"
+
+	<generated>
+	<FMComment: 'Association linking this entity to its declared type.'>
+	^ typeDeclaration
+]
+
+{ #category : #accessing }
+FamixTTypedEntity >> typeDeclaration: anObject [
+
+	<generated>
+	typeDeclaration := anObject
 ]
