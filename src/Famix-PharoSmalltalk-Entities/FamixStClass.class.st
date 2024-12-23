@@ -47,8 +47,8 @@
 Class {
 	#name : #FamixStClass,
 	#superclass : #FamixStNamedEntity,
-	#traits : 'FamixTCanBeAbstract + FamixTClass + FamixTClassMetrics + FamixTPackageable',
-	#classTraits : 'FamixTCanBeAbstract classTrait + FamixTClass classTrait + FamixTClassMetrics classTrait + FamixTPackageable classTrait',
+	#traits : 'FamixTClass + FamixTCanBeAbstract + FamixTClassMetrics + FamixTPackageable',
+	#classTraits : 'FamixTClass classTrait + FamixTCanBeAbstract classTrait + FamixTClassMetrics classTrait + FamixTPackageable classTrait',
 	#category : #'Famix-PharoSmalltalk-Entities-Entities'
 }
 
