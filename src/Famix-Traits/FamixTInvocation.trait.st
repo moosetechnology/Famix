@@ -160,6 +160,16 @@ FamixTInvocation >> getReceivingFamixClass [
 		ifFalse: [ ^ tmpReceiver ]
 ]
 
+{ #category : #accessing }
+FamixTInvocation >> invokedEntity [
+	"This method returns only one candidate if there is one, or raises an error if there is more or less than one candidate."
+
+	self candidates size = 1 ifFalse: [
+		self error: '1 candidate was expected but ' , self candidates size asString , ' candidates are present in this invocation.' ].
+
+	^ self candidates anyOne
+]
+
 { #category : #testing }
 FamixTInvocation >> isInvocation [
 
