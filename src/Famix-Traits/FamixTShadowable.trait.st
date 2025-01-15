@@ -68,7 +68,7 @@ FamixTShadowable >> isShadowable [
 { #category : #testing }
 FamixTShadowable >> isShadowed [
 
-	^ self shadowingEntity isNotNil
+	^ self shadowingEntities isNotEmpty
 ]
 
 { #category : #accessing }
