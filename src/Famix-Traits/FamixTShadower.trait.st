@@ -30,7 +30,7 @@ The opposite of a shadower is a shadowable.
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `shadowedEntity` | `FamixTShadower` | `shadowingEntity` | `FamixTShadowable` | Entity that is been shadowed by myself in my defining scope.|
+| `shadowedEntity` | `FamixTShadower` | `shadowingEntities` | `FamixTShadowable` | Entity that is been shadowed by myself in my defining scope.|
 
 
 
@@ -38,7 +38,7 @@ The opposite of a shadower is a shadowable.
 Trait {
 	#name : #FamixTShadower,
 	#instVars : [
-		'#shadowedEntity => FMOne type: #FamixTShadowable opposite: #shadowingEntity'
+		'#shadowedEntity => FMOne type: #FamixTShadowable opposite: #shadowingEntities'
 	],
 	#category : #'Famix-Traits-Traits'
 }
@@ -54,11 +54,10 @@ FamixTShadower classSide >> annotation [
 
 { #category : #accessing }
 FamixTShadower >> shadowedEntity [
-	"Relation named: #shadowedEntity type: #FamixTShadowable opposite: #shadowingEntity"
+	"Relation named: #shadowedEntity type: #FamixTShadowable opposite: #shadowingEntities"
 
 	<generated>
 	<FMComment: 'Entity that is been shadowed by myself in my defining scope.'>
-	<derived>
 	^ shadowedEntity
 ]
 

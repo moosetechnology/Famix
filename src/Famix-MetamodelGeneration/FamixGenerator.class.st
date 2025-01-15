@@ -1645,9 +1645,9 @@ FamixGenerator >> defineRelations [
 	((tParametricEntity property: #genericization)
 			comment: 'Generic entity relationship, i.e. the association to the generic entity of this type.').
 			
-	((tShadowable property: #shadowingEntity)
-		comment: 'Entity shadowing me in my defining scope.')
-		-
+	((tShadowable property: #shadowingEntities)
+		comment: 'Entities shadowing me in my defining scope.')
+		-*
 	((tShadower property: #shadowedEntity)
 		comment: 'Entity that is been shadowed by myself in my defining scope.')
 ]
