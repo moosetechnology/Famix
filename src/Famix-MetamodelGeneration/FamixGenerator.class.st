@@ -1542,7 +1542,7 @@ FamixGenerator >> defineRelations [
 	((tWithReferences property: #outgoingReferences)
 			comment: 'References from this entity to other entities.').
 
-	((tReference property: #referredType)
+	((tReference property: #referredEntity)
 			comment: 'Target entity referenced. to-side of the association';
 			target)
 		*-
@@ -1642,8 +1642,8 @@ FamixGenerator >> defineRelations [
 	((tImplementable property: #implementations)
 			comment: 'Implementation relationships.').
 			
-	((tShadowable property: #shadowingEntity)
-		comment: 'Entity shadowing me in my defining scope.')
+	((tShadowable property: #shadowingEntities)
+		comment: 'Entities shadowing me in my defining scope.')
 		-
 	((tShadower property: #shadowedEntity)
 		comment: 'Entity that is been shadowed by myself in my defining scope.').

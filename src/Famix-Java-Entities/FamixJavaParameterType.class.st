@@ -7,30 +7,28 @@
 |---|
 | `typeContainer` | `FamixTType` | `types` | `FamixTWithTypes` | Container entity to which this type belongs. Container is a namespace, not a package (Smalltalk).|
 
-### Children
-| Relation | Origin | Opposite | Type | Comment |
-|---|
-| `attributes` | `FamixTWithAttributes` | `parentType` | `FamixTAttribute` | List of attributes declared by this type.|
-| `comments` | `FamixTWithComments` | `commentedEntity` | `FamixTComment` | List of comments for the entity|
-| `methods` | `FamixTWithMethods` | `parentType` | `FamixTMethod` | Methods declared by this type.|
-
 ### Outgoing dependencies
 | Relation | Origin | Opposite | Type | Comment |
 |---|
+| `concretizations` | `FamixTGenericParameterType` | `genericParameter` | `FamixTParameterConcretization` | Concretization relationships, i.e. known concretizations of this type.|
 | `superInheritances` | `FamixTWithInheritances` | `subclass` | `FamixTInheritance` | Superinheritance relationships, i.e. known superclasses of this type.|
 
 ### Incoming dependencies
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `incomingDeclarations` | `FamixTType` | `declaredType` | `FamixTTypeDeclaration` | Relations to the entities that have this as type.|
 | `incomingReferences` | `FamixTReferenceable` | `referredEntity` | `FamixTReference` | References to this entity by other entities.|
 | `subInheritances` | `FamixTWithInheritances` | `superclass` | `FamixTInheritance` | Subinheritance relationships, i.e. known subclasses of this type.|
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `receivingInvocations` | `FamixTInvocationsReceiver` | `receiver` | `FamixTInvocation` | List of invocations performed on this entity (considered as the receiver)|
+| `catchingEntities` | `FamixTThrowable` | `caughtExceptions` | `FamixTWithExceptions` | |
+| `declaredType` | `FamixTTypedEntity` | `typedEntities` | `FamixTType` | Type of the entity, if any|
+| `declaringEntities` | `FamixTThrowable` | `declaredExceptions` | `FamixTWithExceptions` | |
+| `genericEntities` | `FamixTGenericParameterType` | `genericParameters` | `FamixTParametricEntity` | The generic entities that use me.|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
+| `throwingEntities` | `FamixTThrowable` | `thrownExceptions` | `FamixTWithExceptions` | |
+| `typedEntities` | `FamixTType` | `declaredType` | `FamixTTypedEntity` | Entities that have this type as declaredType|
 
 
 ## Properties
@@ -43,18 +41,9 @@
 
 "
 Class {
-	#name : #FamixTestComposed1Class,
-	#superclass : #FamixTestComposed1NamedEntity,
-	#traits : 'FamixTClass',
-	#classTraits : 'FamixTClass classTrait',
-	#category : #'Famix-TestComposedSubmetamodel1-Entities-Entities'
+	#name : #FamixJavaParameterType,
+	#superclass : #FamixJavaType,
+	#traits : 'FamixTThrowable + FamixTTypedEntity + FamixTWithInheritances',
+	#classTraits : 'FamixTThrowable classTrait + FamixTTypedEntity classTrait + FamixTWithInheritances classTrait',
+	#category : #'Famix-Java-Entities-Entities'
 }
-
-{ #category : #meta }
-FamixTestComposed1Class class >> annotation [
-
-	<FMClass: #Class super: #FamixTestComposed1NamedEntity>
-	<package: #'Famix-TestComposedSubmetamodel1-Entities'>
-	<generated>
-	^ self
-]
