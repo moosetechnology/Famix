@@ -127,7 +127,9 @@ FamixPackageGroupComplexity >> shapeForPackage: aPackage [
 
 { #category : #shapes }
 FamixPackageGroupComplexity >> systemComplexityOf: aPackage [
+
+	aPackage allClasses ifEmpty: [ ^ RSCanvas new asShape ].
 	^ (aPackage allClasses asMooseSpecializedGroup systemComplexity
-		build;
-		yourself) canvas asShape
+		   build;
+		   yourself) canvas asShape
 ]
