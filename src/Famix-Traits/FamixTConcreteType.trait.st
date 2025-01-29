@@ -4,15 +4,15 @@ A type that can be the source of a concretization. Entities using this trait sho
 ## Relations
 ======================
 
-### Incoming dependencies
+### Outgoing dependencies
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `outgoingConcretizations` | `FamixTConcreteType` | `concreteParameter` | `FamixTConcretization` | Concretizations where the concrete parameter is this type.|
+| `outgoingConcretizations` | `FamixTConcreteType` | `concreteParameter` | `FamixTConcretization` | Concretizations where this type is the concrete parameter.|
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `genericEntities` | `FamixTConcreteType` | `parameters` | `FamixTParametricEntity` | Generic entities for which a type parameter is this type.|
+| `genericEntities` | `FamixTConcreteType` | `parameters` | `FamixTParametricEntity` | Generic entities that have this type as type parameter.|
 
 
 
@@ -52,7 +52,7 @@ FamixTConcreteType >> genericEntities [
 	"Relation named: #genericEntities type: #FamixTParametricEntity opposite: #parameters"
 
 	<generated>
-	<FMComment: 'Generic entities for which a type parameter is this type.'>
+	<FMComment: 'Generic entities that have this type as type parameter.'>
 	^ genericEntities
 ]
 
@@ -68,7 +68,7 @@ FamixTConcreteType >> outgoingConcretizations [
 	"Relation named: #outgoingConcretizations type: #FamixTConcretization opposite: #concreteParameter"
 
 	<generated>
-	<FMComment: 'Concretizations where the concrete parameter is this type.'>
+	<FMComment: 'Concretizations where this type is the concrete parameter.'>
 	<derived>
 	^ outgoingConcretizations
 ]

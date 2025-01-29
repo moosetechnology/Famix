@@ -46,7 +46,8 @@ Class {
 		'parametricInheritance',
 		'parametricImplementation',
 		'parametricInvocation',
-		'typeDeclaration'
+		'typeDeclaration',
+		'parametricTypeDeclaration'
 	],
 	#classInstVars : [
 		'builder'
@@ -174,6 +175,7 @@ FamixJavaGenerator >> defineClasses [
 	parametricInheritance := self newClassNamed: #ParametricInheritance.
 	parametricImplementation := self newClassNamed: #ParametricImplementation.
 	parametricInvocation := self newClassNamed: #ParametricInvocation.
+	parametricTypeDeclaration := self newClassNamed: #ParametricTypeDeclaration.
 	concretization := self newClassNamed: #Concretization.
 	wildcard := self newClassNamed: #Wildcard.
 ]
@@ -354,7 +356,9 @@ FamixJavaGenerator >> defineHierarchy [
 	parametricImplementation --|> implementation.
 	parametricImplementation --|> #TParametricAssociation.
 	parametricInvocation --|> invocation.
-	parametricInvocation --|> #TParametricAssociation.  
+	parametricInvocation --|> #TParametricAssociation.
+	parametricTypeDeclaration --|> typeDeclaration.
+	parametricTypeDeclaration --|> #TParametricAssociation.
 
 	concretization --|> #TConcretization.
 

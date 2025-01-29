@@ -5,10 +5,14 @@ Relation between a concrete type and a generic type parameter.
 ## Relations
 ======================
 
-### Association target
+### Association source
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `concreteParameter` | `FamixTConcretization` | `outgoingConcretizations` | `FamixTConcreteType` | Concrete parameter linked to in this relationship. This can be a class or another type parameter.|
+
+### Association target
+| Relation | Origin | Opposite | Type | Comment |
+|---|
 | `genericParameter` | `FamixTConcretization` | `concretizations` | `FamixTTypeParameter` | Generic parameter linked to in this relationship.|
 
 ### Other
@@ -49,7 +53,7 @@ FamixTConcretization >> concreteParameter [
 
 	<generated>
 	<FMComment: 'Concrete parameter linked to in this relationship. This can be a class or another type parameter.'>
-	<target>
+	<source>
 	^ concreteParameter
 ]
 
