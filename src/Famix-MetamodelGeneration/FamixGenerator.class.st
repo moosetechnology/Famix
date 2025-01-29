@@ -1204,6 +1204,7 @@ FamixGenerator >> defineParametricRelations [
 	The generic type parameter is target of the concretization AND linked to the parametric entity that is target of the triggering association."
 
 	"A concretization is always triggered by another association: Inheritance, Implementation, Type declaration, Invocation(?)"
+
 	((tParametricAssociation property: #concretization) comment:
 		 'The parameter concretizations associated with this association.')
 	-* ((tConcretization property: #triggeringAssociation) comment:
@@ -1214,21 +1215,22 @@ FamixGenerator >> defineParametricRelations [
 	((tConcretization property: #concreteParameter)
 		 comment:
 			 'Concrete parameter linked to in this relationship. This can be a class or another type parameter.';
-		 target)
+		 source)
 	*- ((tConcreteType property: #outgoingConcretizations) comment:
-			 'Concretizations where the concrete parameter is this type.').
+			 'Concretizations where this type is the concrete parameter.').
 
 	"Target of a concretization: the generic type parameter."
 	((tConcretization property: #genericParameter)
 		 comment: 'Generic parameter linked to in this relationship.';
-		 target) *- ((tTypeParameter property: #concretizations) comment:
+		 target) 
+	*- ((tTypeParameter property: #concretizations) comment:
 		 'Known concretizations of this type parameter.').
-	
+
 	"The generic type parameter that is target of the concretization is defined in a parametric entity."
 	((tParametricEntity property: #parameters) comment:
 		 'The parameters of this parametric entity. They can be concrete classes or types or generic type parameters')
 	*-* ((tConcreteType property: #genericEntities) comment:
-			 'Generic entities for which a type parameter is this type.')
+			 'Generic entities that have this type as type parameter.')
 ]
 
 { #category : #definition }
