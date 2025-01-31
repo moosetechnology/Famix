@@ -1618,7 +1618,7 @@ FamixGenerator >> defineRelations [
 	((tWithTypeAliases property: #typeAliases)
 			comment: 'Aliases').
 
-	((tTypedEntity property: #typeDeclaration) comment:
+	((tTypedEntity property: #typing) comment:
 		 'Association linking this entity to its declared type.')
 		- ((tEntityTyping property: #typedEntity)
 			comment: 'Entity deckaring the type.';
@@ -1627,7 +1627,7 @@ FamixGenerator >> defineRelations [
 	((tEntityTyping property: #declaredType)
 		 comment: 'Type of the entity.';
 		 target) 
-		*- ((tType property: #incomingDeclarations) 
+		*- ((tType property: #incomingTypings) 
 			comment: 'Relations to the entities that have this as type.').
 
 	((tImplementation property: #implementingClass)

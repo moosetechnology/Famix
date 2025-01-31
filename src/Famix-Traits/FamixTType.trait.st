@@ -16,8 +16,8 @@ A type can have multiple subtypes or supertypes. These are modelled by means of 
 ### Incoming dependencies
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `incomingDeclarations` | `FamixTType` | `declaredType` | `FamixTEntityTyping` | Relations to the entities that have this as type.|
 | `incomingReferences` | `FamixTReferenceable` | `referredEntity` | `FamixTReference` | References to this entity by other entities.|
+| `incomingTypings` | `FamixTType` | `declaredType` | `FamixTEntityTyping` | Relations to the entities that have this as type.|
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
@@ -37,7 +37,7 @@ A type can have multiple subtypes or supertypes. These are modelled by means of 
 Trait {
 	#name : #FamixTType,
 	#instVars : [
-		'#incomingDeclarations => FMMany type: #FamixTEntityTyping opposite: #declaredType',
+		'#incomingTypings => FMMany type: #FamixTEntityTyping opposite: #declaredType',
 		'#typeContainer => FMOne type: #FamixTWithTypes opposite: #types'
 	],
 	#traits : 'FamixTCanBeStub + FamixTNamedEntity + FamixTReferenceable + TEntityMetaLevelDependency',
@@ -62,9 +62,9 @@ FamixTType classSide >> annotationFamixTypeGroup [
 ]
 
 { #category : #adding }
-FamixTType >> addIncomingDeclaration: anObject [
+FamixTType >> addIncomingTyping: anObject [
 	<generated>
-	^ self incomingDeclarations add: anObject
+	^ self incomingTypings add: anObject
 ]
 
 { #category : #deprecated }
@@ -79,20 +79,20 @@ FamixTType >> entityHasIncomingTypeDeclarations [
 ]
 
 { #category : #accessing }
-FamixTType >> incomingDeclarations [
-	"Relation named: #incomingDeclarations type: #FamixTEntityTyping opposite: #declaredType"
+FamixTType >> incomingTypings [
+	"Relation named: #incomingTypings type: #FamixTEntityTyping opposite: #declaredType"
 
 	<generated>
 	<FMComment: 'Relations to the entities that have this as type.'>
 	<derived>
-	^ incomingDeclarations
+	^ incomingTypings
 ]
 
 { #category : #accessing }
-FamixTType >> incomingDeclarations: anObject [
+FamixTType >> incomingTypings: anObject [
 
 	<generated>
-	incomingDeclarations value: anObject
+	incomingTypings value: anObject
 ]
 
 { #category : #testing }

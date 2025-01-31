@@ -46,8 +46,8 @@ Class {
 		'parametricInheritance',
 		'parametricImplementation',
 		'parametricInvocation',
-		'typeDeclaration',
-		'parametricTypeDeclaration'
+		'parametricTypeDeclaration',
+		'entityTyping'
 	],
 	#classInstVars : [
 		'builder'
@@ -166,7 +166,7 @@ FamixJavaGenerator >> defineClasses [
 	primitiveType withTesting.
 	reference := self newClassNamed: #Reference.
 	type := self newClassNamed: #Type.
-	typeDeclaration := self newClassNamed: #TypeDeclaration.
+	entityTyping := self newClassNamed: #TEntityTyping.
 	unknownVariable := self newClassNamed: #UnknownVariable.
 
 	parametricClass := self newClassNamed: #ParametricClass.
@@ -338,7 +338,7 @@ FamixJavaGenerator >> defineHierarchy [
 	type --|> #TWithMethods.
 	type --|> tBound.
 
-	typeDeclaration --|> #TTypeDeclaration.
+	entityTyping --|> #TEntityTyping.
 
 	unknownVariable --|> namedEntity.
 	unknownVariable --|> #TUnknownVariable.
@@ -357,7 +357,7 @@ FamixJavaGenerator >> defineHierarchy [
 	parametricImplementation --|> #TParametricAssociation.
 	parametricInvocation --|> invocation.
 	parametricInvocation --|> #TParametricAssociation.
-	parametricTypeDeclaration --|> typeDeclaration.
+	parametricTypeDeclaration --|> entityTyping.
 	parametricTypeDeclaration --|> #TParametricAssociation.
 
 	concretization --|> #TConcretization.

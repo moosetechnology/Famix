@@ -5,12 +5,12 @@
 ### Association source
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `typedEntity` | `FamixTEntityTyping` | `typeDeclaration` | `FamixTTypedEntity` | Entity deckaring the type.|
+| `typedEntity` | `FamixTEntityTyping` | `typing` | `FamixTTypedEntity` | Entity deckaring the type.|
 
 ### Association target
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `declaredType` | `FamixTEntityTyping` | `incomingDeclarations` | `FamixTType` | Type of the entity.|
+| `declaredType` | `FamixTEntityTyping` | `incomingTypings` | `FamixTType` | Type of the entity.|
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
@@ -25,8 +25,8 @@
 Trait {
 	#name : #FamixTEntityTyping,
 	#instVars : [
-		'#typedEntity => FMOne type: #FamixTTypedEntity opposite: #typeDeclaration',
-		'#declaredType => FMOne type: #FamixTType opposite: #incomingDeclarations'
+		'#declaredType => FMOne type: #FamixTType opposite: #incomingTypings',
+		'#typedEntity => FMOne type: #FamixTTypedEntity opposite: #typing'
 	],
 	#traits : 'FamixTAssociation',
 	#classTraits : 'FamixTAssociation classTrait',
@@ -44,7 +44,7 @@ FamixTEntityTyping classSide >> annotation [
 
 { #category : #accessing }
 FamixTEntityTyping >> declaredType [
-	"Relation named: #declaredType type: #FamixTType opposite: #incomingDeclarations"
+	"Relation named: #declaredType type: #FamixTType opposite: #incomingTypings"
 
 	<generated>
 	<FMComment: 'Type of the entity.'>
@@ -61,7 +61,7 @@ FamixTEntityTyping >> declaredType: anObject [
 
 { #category : #accessing }
 FamixTEntityTyping >> typedEntity [
-	"Relation named: #typedEntity type: #FamixTTypedEntity opposite: #typeDeclaration"
+	"Relation named: #typedEntity type: #FamixTTypedEntity opposite: #typing"
 
 	<generated>
 	<FMComment: 'Entity deckaring the type.'>
