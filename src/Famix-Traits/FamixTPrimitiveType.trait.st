@@ -10,7 +10,7 @@
 ### Incoming dependencies
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `incomingDeclarations` | `FamixTType` | `declaredType` | `FamixTTypeDeclaration` | Relations to the entities that have this as type.|
+| `incomingDeclarations` | `FamixTType` | `declaredType` | `FamixTEntityTyping` | Relations to the entities that have this as type.|
 | `incomingReferences` | `FamixTReferenceable` | `referredEntity` | `FamixTReference` | References to this entity by other entities.|
 
 ### Other

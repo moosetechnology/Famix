@@ -5,7 +5,7 @@
 ### Outgoing dependencies
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `typeDeclaration` | `FamixTTypedEntity` | `typedEntity` | `FamixTTypeDeclaration` | Association linking this entity to its declared type.|
+| `typeDeclaration` | `FamixTTypedEntity` | `typedEntity` | `FamixTEntityTyping` | Association linking this entity to its declared type.|
 
 
 
@@ -13,7 +13,7 @@
 Trait {
 	#name : #FamixTTypedEntity,
 	#instVars : [
-		'#typeDeclaration => FMOne type: #FamixTTypeDeclaration opposite: #typedEntity'
+		'#typeDeclaration => FMOne type: #FamixTEntityTyping opposite: #typedEntity'
 	],
 	#category : #'Famix-Traits-Type'
 }
@@ -69,7 +69,7 @@ FamixTTypedEntity >> hasDeclaredType [
 
 { #category : #accessing }
 FamixTTypedEntity >> typeDeclaration [
-	"Relation named: #typeDeclaration type: #FamixTTypeDeclaration opposite: #typedEntity"
+	"Relation named: #typeDeclaration type: #FamixTEntityTyping opposite: #typedEntity"
 
 	<generated>
 	<FMComment: 'Association linking this entity to its declared type.'>

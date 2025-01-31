@@ -25,8 +25,6 @@
 Class {
 	#name : #FamixJavaTypeDeclaration,
 	#superclass : #FamixJavaEntity,
-	#traits : 'FamixTTypeDeclaration',
-	#classTraits : 'FamixTTypeDeclaration classTrait',
 	#category : #'Famix-Java-Entities-Entities'
 }
 

@@ -16,7 +16,7 @@ A type can have multiple subtypes or supertypes. These are modelled by means of 
 ### Incoming dependencies
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `incomingDeclarations` | `FamixTType` | `declaredType` | `FamixTTypeDeclaration` | Relations to the entities that have this as type.|
+| `incomingDeclarations` | `FamixTType` | `declaredType` | `FamixTEntityTyping` | Relations to the entities that have this as type.|
 | `incomingReferences` | `FamixTReferenceable` | `referredEntity` | `FamixTReference` | References to this entity by other entities.|
 
 ### Other
@@ -37,7 +37,7 @@ A type can have multiple subtypes or supertypes. These are modelled by means of 
 Trait {
 	#name : #FamixTType,
 	#instVars : [
-		'#incomingDeclarations => FMMany type: #FamixTTypeDeclaration opposite: #declaredType',
+		'#incomingDeclarations => FMMany type: #FamixTEntityTyping opposite: #declaredType',
 		'#typeContainer => FMOne type: #FamixTWithTypes opposite: #types'
 	],
 	#traits : 'FamixTCanBeStub + FamixTNamedEntity + FamixTReferenceable + TEntityMetaLevelDependency',
@@ -80,7 +80,7 @@ FamixTType >> entityHasIncomingTypeDeclarations [
 
 { #category : #accessing }
 FamixTType >> incomingDeclarations [
-	"Relation named: #incomingDeclarations type: #FamixTTypeDeclaration opposite: #declaredType"
+	"Relation named: #incomingDeclarations type: #FamixTEntityTyping opposite: #declaredType"
 
 	<generated>
 	<FMComment: 'Relations to the entities that have this as type.'>

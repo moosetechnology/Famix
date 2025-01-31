@@ -25,8 +25,6 @@
 Class {
 	#name : #FamixStTypeDeclaration,
 	#superclass : #FamixStEntity,
-	#traits : 'FamixTTypeDeclaration',
-	#classTraits : 'FamixTTypeDeclaration classTrait',
 	#category : #'Famix-PharoSmalltalk-Entities-Entities'
 }
 
