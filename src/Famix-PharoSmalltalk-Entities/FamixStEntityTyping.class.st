@@ -5,12 +5,12 @@
 ### Association source
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `typedEntity` | `FamixTTypeDeclaration` | `typeDeclaration` | `FamixTTypedEntity` | Entity deckaring the type.|
+| `typedEntity` | `FamixTEntityTyping` | `typing` | `FamixTTypedEntity` | Entity deckaring the type.|
 
 ### Association target
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `declaredType` | `FamixTTypeDeclaration` | `incomingDeclarations` | `FamixTType` | Type of the entity.|
+| `declaredType` | `FamixTEntityTyping` | `incomingTypings` | `FamixTType` | Type of the entity.|
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
@@ -23,15 +23,17 @@
 
 "
 Class {
-	#name : #FamixStTypeDeclaration,
+	#name : #FamixStEntityTyping,
 	#superclass : #FamixStEntity,
+	#traits : 'FamixTEntityTyping',
+	#classTraits : 'FamixTEntityTyping classTrait',
 	#category : #'Famix-PharoSmalltalk-Entities-Entities'
 }
 
 { #category : #meta }
-FamixStTypeDeclaration class >> annotation [
+FamixStEntityTyping class >> annotation [
 
-	<FMClass: #TypeDeclaration super: #FamixStEntity>
+	<FMClass: #EntityTyping super: #FamixStEntity>
 	<package: #'Famix-PharoSmalltalk-Entities'>
 	<generated>
 	^ self

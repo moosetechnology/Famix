@@ -72,6 +72,13 @@ FamixStImportingContext >> importComment [
 ]
 
 { #category : #importing }
+FamixStImportingContext >> importEntityTyping [
+
+	<generated>
+	^ self importAssociation: (self class fm3ClassNamed: #EntityTyping)
+]
+
+{ #category : #importing }
 FamixStImportingContext >> importGlobalVariable [
 
 	<generated>
@@ -163,13 +170,6 @@ FamixStImportingContext >> importSourceTextAnchor [
 ]
 
 { #category : #importing }
-FamixStImportingContext >> importTypeDeclaration [
-
-	<generated>
-	^ self importAssociation: (self class fm3ClassNamed: #TypeDeclaration)
-]
-
-{ #category : #importing }
 FamixStImportingContext >> importUnknownVariable [
 
 	<generated>
@@ -230,6 +230,13 @@ FamixStImportingContext >> shouldImportComment [
 
 	<generated>
 	^ self shouldImport: #Comment
+]
+
+{ #category : #testing }
+FamixStImportingContext >> shouldImportEntityTyping [
+
+	<generated>
+	^ self shouldImport: #EntityTyping
 ]
 
 { #category : #testing }
@@ -321,13 +328,6 @@ FamixStImportingContext >> shouldImportSourceTextAnchor [
 
 	<generated>
 	^ self shouldImport: #SourceTextAnchor
-]
-
-{ #category : #testing }
-FamixStImportingContext >> shouldImportTypeDeclaration [
-
-	<generated>
-	^ self shouldImport: #TypeDeclaration
 ]
 
 { #category : #testing }
