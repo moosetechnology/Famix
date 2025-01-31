@@ -96,6 +96,13 @@ FamixStTEntityCreator >> newComment [
 ]
 
 { #category : #'entity creation' }
+FamixStTEntityCreator >> newEntityTyping [
+
+	<generated>
+	^ self add: FamixStEntityTyping new
+]
+
+{ #category : #'entity creation' }
 FamixStTEntityCreator >> newGlobalVariable [
 
 	<generated>
@@ -233,13 +240,6 @@ FamixStTEntityCreator >> newSourceTextAnchor [
 
 	<generated>
 	^ self add: FamixStSourceTextAnchor new
-]
-
-{ #category : #'entity creation' }
-FamixStTEntityCreator >> newTypeDeclaration [
-
-	<generated>
-	^ self add: FamixStTypeDeclaration new
 ]
 
 { #category : #'entity creation' }

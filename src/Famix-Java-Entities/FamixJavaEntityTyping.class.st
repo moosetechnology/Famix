@@ -5,12 +5,12 @@
 ### Association source
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `typedEntity` | `FamixTTypeDeclaration` | `typeDeclaration` | `FamixTTypedEntity` | Entity deckaring the type.|
+| `typedEntity` | `FamixTEntityTyping` | `typing` | `FamixTTypedEntity` | Entity deckaring the type.|
 
 ### Association target
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `declaredType` | `FamixTTypeDeclaration` | `incomingDeclarations` | `FamixTType` | Type of the entity.|
+| `declaredType` | `FamixTEntityTyping` | `incomingTypings` | `FamixTType` | Type of the entity.|
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
@@ -23,18 +23,18 @@
 
 "
 Class {
-	#name : #FamixStTypeDeclaration,
-	#superclass : #FamixStEntity,
-	#traits : 'FamixTTypeDeclaration',
-	#classTraits : 'FamixTTypeDeclaration classTrait',
-	#category : #'Famix-PharoSmalltalk-Entities-Entities'
+	#name : #FamixJavaEntityTyping,
+	#superclass : #FamixJavaEntity,
+	#traits : 'FamixTEntityTyping',
+	#classTraits : 'FamixTEntityTyping classTrait',
+	#category : #'Famix-Java-Entities-Entities'
 }
 
 { #category : #meta }
-FamixStTypeDeclaration class >> annotation [
+FamixJavaEntityTyping class >> annotation [
 
-	<FMClass: #TypeDeclaration super: #FamixStEntity>
-	<package: #'Famix-PharoSmalltalk-Entities'>
+	<FMClass: #EntityTyping super: #FamixJavaEntity>
+	<package: #'Famix-Java-Entities'>
 	<generated>
 	^ self
 ]

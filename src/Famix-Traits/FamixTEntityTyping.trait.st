@@ -5,12 +5,12 @@
 ### Association source
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `typedEntity` | `FamixTTypeDeclaration` | `typeDeclaration` | `FamixTTypedEntity` | Entity deckaring the type.|
+| `typedEntity` | `FamixTEntityTyping` | `typing` | `FamixTTypedEntity` | Entity deckaring the type.|
 
 ### Association target
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `declaredType` | `FamixTTypeDeclaration` | `incomingDeclarations` | `FamixTType` | Type of the entity.|
+| `declaredType` | `FamixTEntityTyping` | `incomingTypings` | `FamixTType` | Type of the entity.|
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
@@ -23,10 +23,10 @@
 
 "
 Trait {
-	#name : #FamixTTypeDeclaration,
+	#name : #FamixTEntityTyping,
 	#instVars : [
-		'#declaredType => FMOne type: #FamixTType opposite: #incomingDeclarations',
-		'#typedEntity => FMOne type: #FamixTTypedEntity opposite: #typeDeclaration'
+		'#declaredType => FMOne type: #FamixTType opposite: #incomingTypings',
+		'#typedEntity => FMOne type: #FamixTTypedEntity opposite: #typing'
 	],
 	#traits : 'FamixTAssociation',
 	#classTraits : 'FamixTAssociation classTrait',
@@ -34,17 +34,17 @@ Trait {
 }
 
 { #category : #meta }
-FamixTTypeDeclaration classSide >> annotation [
+FamixTEntityTyping classSide >> annotation [
 
-	<FMClass: #TTypeDeclaration super: #Object>
+	<FMClass: #TEntityTyping super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
 	^ self
 ]
 
 { #category : #accessing }
-FamixTTypeDeclaration >> declaredType [
-	"Relation named: #declaredType type: #FamixTType opposite: #incomingDeclarations"
+FamixTEntityTyping >> declaredType [
+	"Relation named: #declaredType type: #FamixTType opposite: #incomingTypings"
 
 	<generated>
 	<FMComment: 'Type of the entity.'>
@@ -53,15 +53,15 @@ FamixTTypeDeclaration >> declaredType [
 ]
 
 { #category : #accessing }
-FamixTTypeDeclaration >> declaredType: anObject [
+FamixTEntityTyping >> declaredType: anObject [
 
 	<generated>
 	declaredType := anObject
 ]
 
 { #category : #accessing }
-FamixTTypeDeclaration >> typedEntity [
-	"Relation named: #typedEntity type: #FamixTTypedEntity opposite: #typeDeclaration"
+FamixTEntityTyping >> typedEntity [
+	"Relation named: #typedEntity type: #FamixTTypedEntity opposite: #typing"
 
 	<generated>
 	<FMComment: 'Entity deckaring the type.'>
@@ -71,7 +71,7 @@ FamixTTypeDeclaration >> typedEntity [
 ]
 
 { #category : #accessing }
-FamixTTypeDeclaration >> typedEntity: anObject [
+FamixTEntityTyping >> typedEntity: anObject [
 
 	<generated>
 	typedEntity := anObject
