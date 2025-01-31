@@ -23,7 +23,7 @@
 
 "
 Class {
-	#name : #FamixJavaTEntityTyping,
+	#name : #FamixJavaEntityTyping,
 	#superclass : #FamixJavaEntity,
 	#traits : 'FamixTEntityTyping',
 	#classTraits : 'FamixTEntityTyping classTrait',
@@ -31,9 +31,9 @@ Class {
 }
 
 { #category : #meta }
-FamixJavaTEntityTyping class >> annotation [
+FamixJavaEntityTyping class >> annotation [
 
-	<FMClass: #TEntityTyping super: #FamixJavaEntity>
+	<FMClass: #EntityTyping super: #FamixJavaEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
 	^ self

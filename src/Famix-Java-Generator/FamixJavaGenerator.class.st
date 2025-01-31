@@ -46,8 +46,8 @@ Class {
 		'parametricInheritance',
 		'parametricImplementation',
 		'parametricInvocation',
-		'parametricTypeDeclaration',
-		'entityTyping'
+		'entityTyping',
+		'parametricEntityTyping'
 	],
 	#classInstVars : [
 		'builder'
@@ -166,7 +166,7 @@ FamixJavaGenerator >> defineClasses [
 	primitiveType withTesting.
 	reference := self newClassNamed: #Reference.
 	type := self newClassNamed: #Type.
-	entityTyping := self newClassNamed: #TEntityTyping.
+	entityTyping := self newClassNamed: #EntityTyping.
 	unknownVariable := self newClassNamed: #UnknownVariable.
 
 	parametricClass := self newClassNamed: #ParametricClass.
@@ -175,7 +175,7 @@ FamixJavaGenerator >> defineClasses [
 	parametricInheritance := self newClassNamed: #ParametricInheritance.
 	parametricImplementation := self newClassNamed: #ParametricImplementation.
 	parametricInvocation := self newClassNamed: #ParametricInvocation.
-	parametricTypeDeclaration := self newClassNamed: #ParametricTypeDeclaration.
+	parametricEntityTyping := self newClassNamed: #ParametricEntityTyping.
 	concretization := self newClassNamed: #Concretization.
 	wildcard := self newClassNamed: #Wildcard.
 ]
@@ -357,8 +357,8 @@ FamixJavaGenerator >> defineHierarchy [
 	parametricImplementation --|> #TParametricAssociation.
 	parametricInvocation --|> invocation.
 	parametricInvocation --|> #TParametricAssociation.
-	parametricTypeDeclaration --|> entityTyping.
-	parametricTypeDeclaration --|> #TParametricAssociation.
+	parametricEntityTyping --|> entityTyping.
+	parametricEntityTyping --|> #TParametricAssociation.
 
 	concretization --|> #TConcretization.
 

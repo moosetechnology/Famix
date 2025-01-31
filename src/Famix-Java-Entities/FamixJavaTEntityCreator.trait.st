@@ -103,6 +103,13 @@ FamixJavaTEntityCreator >> newConcretization [
 ]
 
 { #category : #'entity creation' }
+FamixJavaTEntityCreator >> newEntityTyping [
+
+	<generated>
+	^ self add: FamixJavaEntityTyping new
+]
+
+{ #category : #'entity creation' }
 FamixJavaTEntityCreator >> newEnum [
 
 	<generated>
@@ -264,6 +271,13 @@ FamixJavaTEntityCreator >> newParametricClass [
 ]
 
 { #category : #'entity creation' }
+FamixJavaTEntityCreator >> newParametricEntityTyping [
+
+	<generated>
+	^ self add: FamixJavaParametricEntityTyping new
+]
+
+{ #category : #'entity creation' }
 FamixJavaTEntityCreator >> newParametricImplementation [
 
 	<generated>
@@ -299,13 +313,6 @@ FamixJavaTEntityCreator >> newParametricMethod [
 ]
 
 { #category : #'entity creation' }
-FamixJavaTEntityCreator >> newParametricTypeDeclaration [
-
-	<generated>
-	^ self add: FamixJavaParametricTypeDeclaration new
-]
-
-{ #category : #'entity creation' }
 FamixJavaTEntityCreator >> newPrimitiveType [
 
 	<generated>
@@ -338,13 +345,6 @@ FamixJavaTEntityCreator >> newSourceTextAnchor [
 
 	<generated>
 	^ self add: FamixJavaSourceTextAnchor new
-]
-
-{ #category : #'entity creation' }
-FamixJavaTEntityCreator >> newTEntityTyping [
-
-	<generated>
-	^ self add: FamixJavaTEntityTyping new
 ]
 
 { #category : #'entity creation' }

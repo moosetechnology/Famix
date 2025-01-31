@@ -79,6 +79,13 @@ FamixJavaImportingContext >> importConcretization [
 ]
 
 { #category : #importing }
+FamixJavaImportingContext >> importEntityTyping [
+
+	<generated>
+	^ self importAssociation: (self class fm3ClassNamed: #EntityTyping)
+]
+
+{ #category : #importing }
 FamixJavaImportingContext >> importEnum [
 
 	<generated>
@@ -184,6 +191,13 @@ FamixJavaImportingContext >> importParametricClass [
 ]
 
 { #category : #importing }
+FamixJavaImportingContext >> importParametricEntityTyping [
+
+	<generated>
+	^ self importConcreteEntity: (self class fm3ClassNamed: #ParametricEntityTyping)
+]
+
+{ #category : #importing }
 FamixJavaImportingContext >> importParametricImplementation [
 
 	<generated>
@@ -219,13 +233,6 @@ FamixJavaImportingContext >> importParametricMethod [
 ]
 
 { #category : #importing }
-FamixJavaImportingContext >> importParametricTypeDeclaration [
-
-	<generated>
-	^ self importConcreteEntity: (self class fm3ClassNamed: #ParametricTypeDeclaration)
-]
-
-{ #category : #importing }
 FamixJavaImportingContext >> importPrimitiveType [
 
 	<generated>
@@ -251,13 +258,6 @@ FamixJavaImportingContext >> importSourceTextAnchor [
 
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #SourceTextAnchor)
-]
-
-{ #category : #importing }
-FamixJavaImportingContext >> importTEntityTyping [
-
-	<generated>
-	^ self importAssociation: (self class fm3ClassNamed: #TEntityTyping)
 ]
 
 { #category : #importing }
@@ -349,6 +349,13 @@ FamixJavaImportingContext >> shouldImportConcretization [
 
 	<generated>
 	^ self shouldImport: #Concretization
+]
+
+{ #category : #testing }
+FamixJavaImportingContext >> shouldImportEntityTyping [
+
+	<generated>
+	^ self shouldImport: #EntityTyping
 ]
 
 { #category : #testing }
@@ -457,6 +464,13 @@ FamixJavaImportingContext >> shouldImportParametricClass [
 ]
 
 { #category : #testing }
+FamixJavaImportingContext >> shouldImportParametricEntityTyping [
+
+	<generated>
+	^ self shouldImport: #ParametricEntityTyping
+]
+
+{ #category : #testing }
 FamixJavaImportingContext >> shouldImportParametricImplementation [
 
 	<generated>
@@ -492,13 +506,6 @@ FamixJavaImportingContext >> shouldImportParametricMethod [
 ]
 
 { #category : #testing }
-FamixJavaImportingContext >> shouldImportParametricTypeDeclaration [
-
-	<generated>
-	^ self shouldImport: #ParametricTypeDeclaration
-]
-
-{ #category : #testing }
 FamixJavaImportingContext >> shouldImportPrimitiveType [
 
 	<generated>
@@ -524,13 +531,6 @@ FamixJavaImportingContext >> shouldImportSourceTextAnchor [
 
 	<generated>
 	^ self shouldImport: #SourceTextAnchor
-]
-
-{ #category : #testing }
-FamixJavaImportingContext >> shouldImportTEntityTyping [
-
-	<generated>
-	^ self shouldImport: #TEntityTyping
 ]
 
 { #category : #testing }
