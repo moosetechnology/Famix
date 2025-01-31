@@ -341,17 +341,17 @@ FamixJavaTEntityCreator >> newSourceTextAnchor [
 ]
 
 { #category : #'entity creation' }
+FamixJavaTEntityCreator >> newTEntityTyping [
+
+	<generated>
+	^ self add: FamixJavaTEntityTyping new
+]
+
+{ #category : #'entity creation' }
 FamixJavaTEntityCreator >> newType [
 
 	<generated>
 	^ self add: FamixJavaType new
-]
-
-{ #category : #'entity creation' }
-FamixJavaTEntityCreator >> newTypeDeclaration [
-
-	<generated>
-	^ self add: FamixJavaTypeDeclaration new
 ]
 
 { #category : #'entity creation' }

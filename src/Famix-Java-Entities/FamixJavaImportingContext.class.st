@@ -254,17 +254,17 @@ FamixJavaImportingContext >> importSourceTextAnchor [
 ]
 
 { #category : #importing }
+FamixJavaImportingContext >> importTEntityTyping [
+
+	<generated>
+	^ self importAssociation: (self class fm3ClassNamed: #TEntityTyping)
+]
+
+{ #category : #importing }
 FamixJavaImportingContext >> importType [
 
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #Type)
-]
-
-{ #category : #importing }
-FamixJavaImportingContext >> importTypeDeclaration [
-
-	<generated>
-	^ self importAssociation: (self class fm3ClassNamed: #TypeDeclaration)
 ]
 
 { #category : #importing }
@@ -527,17 +527,17 @@ FamixJavaImportingContext >> shouldImportSourceTextAnchor [
 ]
 
 { #category : #testing }
+FamixJavaImportingContext >> shouldImportTEntityTyping [
+
+	<generated>
+	^ self shouldImport: #TEntityTyping
+]
+
+{ #category : #testing }
 FamixJavaImportingContext >> shouldImportType [
 
 	<generated>
 	^ self shouldImport: #Type
-]
-
-{ #category : #testing }
-FamixJavaImportingContext >> shouldImportTypeDeclaration [
-
-	<generated>
-	^ self shouldImport: #TypeDeclaration
 ]
 
 { #category : #testing }

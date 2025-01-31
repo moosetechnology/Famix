@@ -12,7 +12,7 @@
 "
 Class {
 	#name : #FamixJavaParametricTypeDeclaration,
-	#superclass : #FamixJavaTypeDeclaration,
+	#superclass : #FamixJavaTEntityTyping,
 	#traits : 'FamixTParametricAssociation',
 	#classTraits : 'FamixTParametricAssociation classTrait',
 	#category : #'Famix-Java-Entities-Entities'
@@ -21,7 +21,7 @@ Class {
 { #category : #meta }
 FamixJavaParametricTypeDeclaration class >> annotation [
 
-	<FMClass: #ParametricTypeDeclaration super: #FamixJavaTypeDeclaration>
+	<FMClass: #ParametricTypeDeclaration super: #FamixJavaTEntityTyping>
 	<package: #'Famix-Java-Entities'>
 	<generated>
 	^ self
