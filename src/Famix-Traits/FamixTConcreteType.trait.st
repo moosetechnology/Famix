@@ -12,7 +12,7 @@ A type that can be the source of a concretization. Entities using this trait sho
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `genericEntities` | `FamixTConcreteType` | `parameters` | `FamixTParametricEntity` | Generic entities that have this type as type parameter.|
+| `genericEntities` | `FamixTConcreteType` | `typeParameters` | `FamixTParametricEntity` | Generic entities that have this type as type parameter.|
 
 
 
@@ -20,7 +20,7 @@ A type that can be the source of a concretization. Entities using this trait sho
 Trait {
 	#name : #FamixTConcreteType,
 	#instVars : [
-		'#genericEntities => FMMany type: #FamixTParametricEntity opposite: #parameters',
+		'#genericEntities => FMMany type: #FamixTParametricEntity opposite: #typeParameters',
 		'#outgoingConcretizations => FMMany type: #FamixTConcretization opposite: #concreteParameter'
 	],
 	#category : #'Famix-Traits-Traits'
@@ -49,7 +49,7 @@ FamixTConcreteType >> addOutgoingConcretization: anObject [
 
 { #category : #accessing }
 FamixTConcreteType >> genericEntities [
-	"Relation named: #genericEntities type: #FamixTParametricEntity opposite: #parameters"
+	"Relation named: #genericEntities type: #FamixTParametricEntity opposite: #typeParameters"
 
 	<generated>
 	<FMComment: 'Generic entities that have this type as type parameter.'>

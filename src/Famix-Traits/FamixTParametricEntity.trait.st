@@ -14,7 +14,7 @@ Where Map<String,Collection> is the FamixTParametricEntity of anAttribute. Strin
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `parameters` | `FamixTParametricEntity` | `genericEntities` | `FamixTConcreteType` | The parameters of this parametric entity. They can be concrete classes or types or generic type parameters|
+| `typeParameters` | `FamixTParametricEntity` | `genericEntities` | `FamixTConcreteType` | The parameters of this parametric entity. They can be concrete classes or types or generic type parameters|
 
 
 
@@ -22,7 +22,7 @@ Where Map<String,Collection> is the FamixTParametricEntity of anAttribute. Strin
 Trait {
 	#name : #FamixTParametricEntity,
 	#instVars : [
-		'#parameters => FMMany type: #FamixTConcreteType opposite: #genericEntities'
+		'#typeParameters => FMMany type: #FamixTConcreteType opposite: #genericEntities'
 	],
 	#category : #'Famix-Traits-Traits'
 }
@@ -37,9 +37,9 @@ FamixTParametricEntity classSide >> annotation [
 ]
 
 { #category : #adding }
-FamixTParametricEntity >> addParameter: anObject [
+FamixTParametricEntity >> addTypeParameter: anObject [
 	<generated>
-	^ self parameters add: anObject
+	^ self typeParameters add: anObject
 ]
 
 { #category : #accessing }
@@ -83,20 +83,20 @@ FamixTParametricEntity >> isParametricEntity [
 ]
 
 { #category : #accessing }
-FamixTParametricEntity >> parameters [
-	"Relation named: #parameters type: #FamixTConcreteType opposite: #genericEntities"
+FamixTParametricEntity >> typeParameters [
+	"Relation named: #typeParameters type: #FamixTConcreteType opposite: #genericEntities"
 
 	<generated>
 	<FMComment: 'The parameters of this parametric entity. They can be concrete classes or types or generic type parameters'>
 	<derived>
-	^ parameters
+	^ typeParameters
 ]
 
 { #category : #accessing }
-FamixTParametricEntity >> parameters: anObject [
+FamixTParametricEntity >> typeParameters: anObject [
 
 	<generated>
-	parameters value: anObject
+	typeParameters value: anObject
 ]
 
 { #category : #accessing }

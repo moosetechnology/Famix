@@ -1227,7 +1227,7 @@ FamixGenerator >> defineParametricRelations [
 		 'Known concretizations of this type parameter.').
 
 	"The generic type parameter that is target of the concretization is defined in a parametric entity."
-	((tParametricEntity property: #parameters) comment:
+	((tParametricEntity property: #typeParameters) comment:
 		 'The parameters of this parametric entity. They can be concrete classes or types or generic type parameters')
 	*-* ((tConcreteType property: #genericEntities) comment:
 			 'Generic entities that have this type as type parameter.')
