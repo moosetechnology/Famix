@@ -34,6 +34,21 @@ FamixTInvocationTest >> testInvokedEntity [
 ]
 
 { #category : #running }
+FamixTInvocationTest >> testInvokedEntitySetter [
+
+	| function |
+	function := MooseEntity new
+		            addTalent: FamixTFunction;
+		            initialize;
+		            yourself.
+
+	invocation invokedEntity: function.
+
+	self assert: invocation candidates size equals: 1.
+	self assert: invocation invokedEntity equals: function
+]
+
+{ #category : #running }
 FamixTInvocationTest >> testInvokedEntityWithMoreThan1Candidate [
 
 	| function1 function2 |
