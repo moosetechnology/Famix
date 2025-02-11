@@ -170,6 +170,12 @@ FamixTInvocation >> invokedEntity [
 	^ self candidates anyOne
 ]
 
+{ #category : #accessing }
+FamixTInvocation >> invokedEntity: anEntity [
+
+	^ self candidates: { anEntity }
+]
+
 { #category : #testing }
 FamixTInvocation >> isInvocation [
 
