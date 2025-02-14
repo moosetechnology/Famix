@@ -1,5 +1,8 @@
-Trait {
+Class {
 	#name : #FamixFusionnerJava,
+	#superclass : #Object,
+	#traits : 'FamixJavaVisitor',
+	#classTraits : 'FamixJavaVisitor classTrait',
 	#instVars : [
 		'resourceModel',
 		'consumerModel'
@@ -17,6 +20,12 @@ FamixFusionnerJava >> consumerModel [
 FamixFusionnerJava >> consumerModel: anObject [
 
 	consumerModel := anObject
+]
+
+{ #category : #api }
+FamixFusionnerJava >> fusion [
+
+	consumerModel select: #isStub.
 ]
 
 { #category : #accessing }
