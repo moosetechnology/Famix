@@ -1,5 +1,5 @@
 Class {
 	#name : #FamixTraitVisitor,
 	#superclass : #Object,
-	#category : #'Famix-Trait-Visitor'
+	#category : #'Famix-Visitor'
 }
