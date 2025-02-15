@@ -82,6 +82,13 @@ FamixVisitorCodeGenerator >> generateAccepts: anObject [
 	generateAccepts := anObject
 ]
 
+{ #category : #run }
+FamixVisitorCodeGenerator >> generateAcceptsForCollection: aCollection [
+	"generates #accept: methods for all classes in aCollection"
+
+	aCollection do: [ :class | self generateAccept: class ]
+]
+
 { #category : #'code generation' }
 FamixVisitorCodeGenerator >> generatePragmaOn: stream [
 
