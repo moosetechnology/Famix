@@ -19,14 +19,14 @@ FamixTTraitVisitor >> visitFamixTAccessible: aFamixTAccessible [
 { #category : #'visiting - traits' }
 FamixTTraitVisitor >> visitFamixTAnnotationInstance: aFamixTAnnotationInstance [
 	<generated>
-	self visitTEntityMetaLevelDependency: aFamixTAnnotationInstance.
+	self visitFamixTEntityMetaLevelDependency: aFamixTAnnotationInstance.
 
 ]
 
 { #category : #'visiting - traits' }
 FamixTTraitVisitor >> visitFamixTAnnotationInstanceAttribute: aFamixTAnnotationInstanceAttribute [
 	<generated>
-	self visitTEntityMetaLevelDependency: aFamixTAnnotationInstanceAttribute.
+	self visitFamixTEntityMetaLevelDependency: aFamixTAnnotationInstanceAttribute.
 
 ]
 
@@ -47,8 +47,12 @@ FamixTTraitVisitor >> visitFamixTAnnotationTypeAttribute: aFamixTAnnotationTypeA
 FamixTTraitVisitor >> visitFamixTAssociation: aFamixTAssociation [
 	<generated>
 	self visitFamixTSourceEntity: aFamixTAssociation.
-	self visitTAssociationMetaLevelDependency: aFamixTAssociation.
+	self visitFamixTAssociationMetaLevelDependency: aFamixTAssociation.
 
+]
+
+{ #category : #'visiting - traits' }
+FamixTTraitVisitor >> visitFamixTAssociationMetaLevelDependency: FamixEntity [
 ]
 
 { #category : #'visiting - traits' }
@@ -125,7 +129,7 @@ FamixTTraitVisitor >> visitFamixTCohesionCouplingMetrics: aFamixTCohesionCouplin
 { #category : #'visiting - traits' }
 FamixTTraitVisitor >> visitFamixTComment: aFamixTComment [
 	<generated>
-	self visitTEntityMetaLevelDependency: aFamixTComment.
+	self visitFamixTEntityMetaLevelDependency: aFamixTComment.
 
 ]
 
@@ -161,6 +165,10 @@ FamixTTraitVisitor >> visitFamixTDereferencedInvocation: aFamixTDereferencedInvo
 	<generated>
 	self visitFamixTInvocation: aFamixTDereferencedInvocation.
 
+]
+
+{ #category : #'visiting - traits' }
+FamixTTraitVisitor >> visitFamixTEntityMetaLevelDependency: FamixEntity [
 ]
 
 { #category : #'visiting - traits' }
@@ -236,7 +244,7 @@ FamixTTraitVisitor >> visitFamixTFunction: aFamixTFunction [
 	self visitFamixTWithLocalVariables: aFamixTFunction.
 	self visitFamixTWithParameters: aFamixTFunction.
 	self visitFamixTWithStatements: aFamixTFunction.
-	self visitTEntityMetaLevelDependency: aFamixTFunction.
+	self visitFamixTEntityMetaLevelDependency: aFamixTFunction.
 
 ]
 
@@ -373,7 +381,7 @@ FamixTTraitVisitor >> visitFamixTLambda: aFamixTLambda [
 	self visitFamixTWithLocalVariables: aFamixTLambda.
 	self visitFamixTWithParameters: aFamixTLambda.
 	self visitFamixTWithStatements: aFamixTLambda.
-	self visitTEntityMetaLevelDependency: aFamixTLambda.
+	self visitFamixTEntityMetaLevelDependency: aFamixTLambda.
 
 ]
 
@@ -396,7 +404,7 @@ FamixTTraitVisitor >> visitFamixTMethod: aFamixTMethod [
 	self visitFamixTWithLocalVariables: aFamixTMethod.
 	self visitFamixTWithParameters: aFamixTMethod.
 	self visitFamixTWithStatements: aFamixTMethod.
-	self visitTEntityMetaLevelDependency: aFamixTMethod.
+	self visitFamixTEntityMetaLevelDependency: aFamixTMethod.
 
 ]
 
@@ -430,7 +438,7 @@ FamixTTraitVisitor >> visitFamixTNamespace: aFamixTNamespace [
 	<generated>
 	self visitFamixTCanBeStub: aFamixTNamespace.
 	self visitFamixTNamedEntity: aFamixTNamespace.
-	self visitTEntityMetaLevelDependency: aFamixTNamespace.
+	self visitFamixTEntityMetaLevelDependency: aFamixTNamespace.
 
 ]
 
@@ -439,7 +447,7 @@ FamixTTraitVisitor >> visitFamixTPackage: aFamixTPackage [
 	<generated>
 	self visitFamixTCanBeStub: aFamixTPackage.
 	self visitFamixTNamedEntity: aFamixTPackage.
-	self visitTEntityMetaLevelDependency: aFamixTPackage.
+	self visitFamixTEntityMetaLevelDependency: aFamixTPackage.
 
 ]
 
@@ -545,7 +553,7 @@ FamixTTraitVisitor >> visitFamixTStructuralEntity: aFamixTStructuralEntity [
 	self visitFamixTCanBeStub: aFamixTStructuralEntity.
 	self visitFamixTNamedEntity: aFamixTStructuralEntity.
 	self visitFamixTTypedEntity: aFamixTStructuralEntity.
-	self visitTEntityMetaLevelDependency: aFamixTStructuralEntity.
+	self visitFamixTEntityMetaLevelDependency: aFamixTStructuralEntity.
 
 ]
 
@@ -592,7 +600,7 @@ FamixTTraitVisitor >> visitFamixTType: aFamixTType [
 	self visitFamixTCanBeStub: aFamixTType.
 	self visitFamixTNamedEntity: aFamixTType.
 	self visitFamixTReferenceable: aFamixTType.
-	self visitTEntityMetaLevelDependency: aFamixTType.
+	self visitFamixTEntityMetaLevelDependency: aFamixTType.
 
 ]
 
@@ -816,8 +824,4 @@ FamixTTraitVisitor >> visitFamixTWithTypeAliases: aFamixTWithTypeAliases [
 FamixTTraitVisitor >> visitFamixTWithTypes: aFamixTWithTypes [
 	<generated>
 
-]
-
-{ #category : #'visiting - traits' }
-FamixTTraitVisitor >> visitTEntityMetaLevelDependency: FamixEntity [
 ]
