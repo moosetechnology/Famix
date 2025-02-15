@@ -53,10 +53,14 @@ FamixFusionnerJava >> fusionStubs: aCollection [
 
 { #category : #api }
 FamixFusionnerJava >> replace: stub by: resource [
-	"using the double-dispatch mechanism to replace all references to stub by references to resource"
+	"make everything pointing to stub (in consumerModel) now pointing to resource (in resourceModel)
+	 using the double-dispatch mechanism for this
+	 then remove sub from its model"
 
 	resourceEntity := resource.
-	stub accept: self
+	stub accept: self.
+
+	consumerModel remove: stub
 ]
 
 { #category : #accessing }
@@ -69,4 +73,45 @@ FamixFusionnerJava >> resourceModel [
 FamixFusionnerJava >> resourceModel: anObject [
 
 	resourceModel := anObject
+]
+
+{ #category : #visiting }
+FamixFusionnerJava >> visitClass: aFamixJavaClass [
+
+	self visitFamixTClassMetrics: aFamixJavaClass.
+	self visitFamixTCanBeAbstract: aFamixJavaClass.
+	self visitFamixTCanBeClassSide: aFamixJavaClass.
+	self visitFamixTCanBeFinal: aFamixJavaClass.
+	self visitFamixTCanImplement: aFamixJavaClass.
+	self visitFamixTClass: aFamixJavaClass.
+	self visitFamixTClassMetrics: aFamixJavaClass.
+	self visitFamixTHasVisibility: aFamixJavaClass.
+	self visitFamixTImportable: aFamixJavaClass.
+	self visitFamixTLCOMMetrics: aFamixJavaClass.
+	self visitFamixTPackageable: aFamixJavaClass.
+	self visitFamixTWithImports: aFamixJavaClass.
+
+]
+
+{ #category : #'visiting - traits' }
+FamixFusionnerJava >> visitFamixTType: aFamixTType [
+	<generated>
+	self visitFamixTCanBeStub: aFamixTType.
+	self visitFamixTNamedEntity: aFamixTType.
+	self visitFamixTReferenceable: aFamixTType.
+	self visitFamixTEntityMetaLevelDependency: aFamixTType.
+
+	aFamixTType typedEntities do: [ :typedEntity |
+		typedEntity declaredType: resourceEntity 
+	]
+
+]
+
+{ #category : #'visiting - traits' }
+FamixFusionnerJava >> visitFamixTWithInheritances: aFamixTWithInheritances [
+
+	aFamixTWithInheritances subInheritances do: [ :inheritance |
+		inheritance superclass: resourceEntity
+	]
+
 ]
