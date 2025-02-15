@@ -1,8 +1,8 @@
 Class {
 	#name : #FamixFusionnerJava,
 	#superclass : #Object,
-	#traits : 'FamixTTraitVisitor + FamixJavaVisitor',
-	#classTraits : 'FamixTTraitVisitor classTrait + FamixJavaVisitor classTrait',
+	#traits : 'FamixJavaVisitor',
+	#classTraits : 'FamixJavaVisitor classTrait',
 	#instVars : [
 		'resourceModel',
 		'consumerModel',
