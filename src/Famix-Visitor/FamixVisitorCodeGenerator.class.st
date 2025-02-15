@@ -8,6 +8,15 @@ To use:
 FASTVisitorCodeGenerator new
 	rootClass: FAST<XYZ>Entity visitorClass: FAST<XYZ>Visitor
 ```
+
+Other use (For FamixTraits):
+```
+FamixVisitorCodeGenerator new
+	visitorClass: FamixTTraitVisitor ;
+	generateTraitsIn: FamixTClass package ;
+	generateAcceptsForCollection: (FamixTClass package classes select: #isTrait)
+```
+
 Assumptions:
 - Classes and traits of the meta-model are all gathered in one package (typically **FAST-<XYZ>-Entities**) where the root entity class (**FAST<XYZ>Entity**) is also located
 - The class **FAST<XYZ>Visitor** should exist
