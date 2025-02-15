@@ -28,7 +28,6 @@ FamixJavaFusionnerTest >> testOneEntityFusion [
 
 	fusionner fusion.
 
-	self assert: consumerModel size equals: 1.
-	self deny: consumerModel anyOne isStub.
-	self assert: consumerModel anyOne equals: resourceModel anyOne
+	self assert: consumerModel size equals: 0.
+	self assert: resourceModel size equals: 1.
 ]
