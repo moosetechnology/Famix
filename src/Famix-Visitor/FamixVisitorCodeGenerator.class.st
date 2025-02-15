@@ -29,14 +29,14 @@ Class {
 	#category : #'Famix-Visitor'
 }
 
-{ #category : #'code generation' }
+{ #category : #private }
 FamixVisitorCodeGenerator >> asParameterName: aModelClass [
 	"generates a parameter name from a class name"
 
 	^'a' , aModelClass name
 ]
 
-{ #category : #run }
+{ #category : #private }
 FamixVisitorCodeGenerator >> compileCode: code into: aModelClass [
 
 	visitorClass compile: code classified: (aModelClass isTrait
@@ -46,7 +46,7 @@ FamixVisitorCodeGenerator >> compileCode: code into: aModelClass [
 
 { #category : #'code generation' }
 FamixVisitorCodeGenerator >> generateAccept: modelClass [
-	"generates and #accept: method in modelClass as extension of the package of the visitorClass.
+	"generates an #accept: method in modelClass as extension of the package of the visitorClass.
 	 Note the trick in calling #generateVisitCallFor:receiver:argument:on: where the 'receiver'
 	 includes a return statement"
 
@@ -116,7 +116,7 @@ FamixVisitorCodeGenerator >> generateVisitCallFor: modelClass receiver: receiver
 		cr
 ]
 
-{ #category : #run }
+{ #category : #'code generation' }
 FamixVisitorCodeGenerator >> generateVisitFor: aModelClass [
 	"main method: generates a default visit method for instances of aModelClass and put it in visitorClass
 	 - first generates the selector and put a 'generated' pragma
@@ -132,14 +132,14 @@ FamixVisitorCodeGenerator >> generateVisitFor: aModelClass [
 	self compileCode: code into: aModelClass
 ]
 
-{ #category : #run }
+{ #category : #'code generation' }
 FamixVisitorCodeGenerator >> generateVisitForBodyOf: aModelClass on: stream [
 
 	self generateVisitToTraits: aModelClass on: stream.
 	self generateVisitToSuperclass: aModelClass on: stream
 ]
 
-{ #category : #run }
+{ #category : #'code generation' }
 FamixVisitorCodeGenerator >> generateVisitMethodHeader: aModelClass on: stream [
 
 	self
@@ -160,7 +160,7 @@ FamixVisitorCodeGenerator >> generateVisitSelectorFor: aModelClass parameter: pa
 		<< parameter
 ]
 
-{ #category : #run }
+{ #category : #'code generation' }
 FamixVisitorCodeGenerator >> generateVisitToSuperclass: aModelClass on: stream [
 
 	aModelClass superclass ifNotNil: [ :superclass |
@@ -174,7 +174,7 @@ FamixVisitorCodeGenerator >> generateVisitToSuperclass: aModelClass on: stream [
 	]
 ]
 
-{ #category : #run }
+{ #category : #'code generation' }
 FamixVisitorCodeGenerator >> generateVisitToTraits: aModelClass on: stream [
 	"generates calls to traits used by aModelClass and not used by its super-classes
 	 (because they will alreay have a class to visit that trait)"
