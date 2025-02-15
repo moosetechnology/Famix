@@ -94,6 +94,17 @@ FamixFusionnerJava >> visitClass: aFamixJavaClass [
 ]
 
 { #category : #'visiting - traits' }
+FamixFusionnerJava >> visitFamixTAssociation: aFamixTAssociation [
+	"Note 1: we arrived here while visiting the (stub) target entity
+	 Note 2: association don't have the #isStub property, but if the #source is a stub, then the association is
+	 In that case, it should be removed from the consumerModel because it must exist in the resourceModel"
+
+	aFamixTAssociation source isStub
+		ifTrue: [ consumerModel remove: aFamixTAssociation ]
+		ifFalse: [ aFamixTAssociation target: resourceEntity ]
+]
+
+{ #category : #'visiting - traits' }
 FamixFusionnerJava >> visitFamixTType: aFamixTType [
 	<generated>
 	self visitFamixTCanBeStub: aFamixTType.
@@ -111,7 +122,7 @@ FamixFusionnerJava >> visitFamixTType: aFamixTType [
 FamixFusionnerJava >> visitFamixTWithInheritances: aFamixTWithInheritances [
 
 	aFamixTWithInheritances subInheritances do: [ :inheritance |
-		inheritance superclass: resourceEntity
+		self visitFamixTAssociation: inheritance.
 	]
 
 ]
