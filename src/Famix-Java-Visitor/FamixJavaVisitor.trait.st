@@ -70,7 +70,8 @@ FamixJavaVisitor >> visitContainerEntity: aFamixJavaContainerEntity [
 
 { #category : #visiting }
 FamixJavaVisitor >> visitEntity: aFamixJavaEntity [
-	^ self subclassResponsibility
+
+	^aFamixJavaEntity children collect: [ :child | child accept: self ]
 ]
 
 { #category : #visiting }
