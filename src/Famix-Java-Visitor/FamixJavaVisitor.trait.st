@@ -3,6 +3,8 @@ I am a visitor for FamixJavaEntity
 "
 Trait {
 	#name : #FamixJavaVisitor,
+	#traits : 'FamixTTraitVisitor',
+	#classTraits : 'FamixTTraitVisitor classTrait',
 	#category : #'Famix-Java-Visitor'
 }
 
