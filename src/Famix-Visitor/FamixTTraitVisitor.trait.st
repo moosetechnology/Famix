@@ -817,3 +817,7 @@ FamixTTraitVisitor >> visitFamixTWithTypes: aFamixTWithTypes [
 	<generated>
 
 ]
+
+{ #category : #'visiting - traits' }
+FamixTTraitVisitor >> visitTEntityMetaLevelDependency: FamixEntity [
+]
