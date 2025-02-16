@@ -1,3 +1,21 @@
+"
+Takes 2 models (resource and consumer) and replace stub entities in the consumerModel by their non-stub equivalent in the resourceModel
+
+For all stub entities in consumerModel, looks for a non-stub entity with same mooseName in resourceModel.
+If one is found, replace all references to the stub entity in consumerModel by references to te corresponding non-stub entity in resourceModel.
+The result is that both models depend on one another ""as one model"".
+Yet they are not one model so some behavior (like exporting) might produce unespected results.
+
+Use:
+```
+FamixFusionnerJava new
+	resourceModel: <resourceModel> ;
+	consumerModel: <consumerModel> ;
+	fusion
+```
+
+
+"
 Class {
 	#name : #FamixFusionnerJava,
 	#superclass : #Object,
