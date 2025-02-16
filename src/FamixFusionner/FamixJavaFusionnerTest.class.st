@@ -42,6 +42,18 @@ FamixJavaFusionnerTest >> inheritanceFrom: subName to: superName [
 ]
 
 { #category : #running }
+FamixJavaFusionnerTest >> method: methodName class: className [
+
+	(resourceModel newMethodNamed: methodName)
+		isStub: false ;
+		parentType: (resourceModel entityNamed: className).
+	(consumerModel newMethodNamed: methodName)
+		isStub: true ;
+		parentType: (consumerModel entityNamed: className).
+
+]
+
+{ #category : #running }
 FamixJavaFusionnerTest >> setUp [
 	super setUp.
 
@@ -91,6 +103,46 @@ FamixJavaFusionnerTest >> testStubClassAndAttribute [
 
 	self assert: consumerModel size equals: 0.
 	self assert: resourceModel size equals: 2.
+]
+
+{ #category : #tests }
+FamixJavaFusionnerTest >> testStubClassInvocationReceiver [
+	"caller() { Blah.meth(); }
+	 resourceModel: Blah, meth
+	 consumerModel: Blah, meth, caller, invocation"
+
+	| invoc |
+	self class: 'Blah'.
+	self method: 'meth' class: 'Blah'.
+	consumerModel newInvocation
+		sender: (consumerModel newMethodNamed: 'caller') ;
+		receiver: (consumerModel entityNamed: 'Blah') ;
+		candidates: { consumerModel entityNamed: 'meth' }.
+
+	self assert: consumerModel size equals: 4.
+	self assert: resourceModel size equals: 2.
+	
+	fusionner fusion.
+
+	self assert: consumerModel size equals: 2.
+	self assert: resourceModel size equals: 2.
+
+	self assert: (consumerModel entityNamed: 'caller') outgoingInvocations size equals: 1.
+	invoc := (consumerModel entityNamed: 'caller') outgoingInvocations anyOne.
+	self assert: invoc sender equals: (consumerModel entityNamed: 'caller').
+	self assert: invoc receiver equals: (resourceModel entityNamed: 'Blah').
+	self assert: invoc invokedEntity equals: (resourceModel entityNamed: 'meth').
+
+	self assert: (resourceModel entityNamed: 'Blah') receivingInvocations size equals: 1.
+	self
+		assert: (resourceModel entityNamed: 'Blah') receivingInvocations anyOne mooseModel
+		equals: consumerModel.
+
+	self assert: (resourceModel entityNamed: 'meth') incomingInvocations size equals: 1.
+	self
+		assert: (resourceModel entityNamed: 'meth') incomingInvocations anyOne mooseModel
+		equals: consumerModel.
+
 ]
 
 { #category : #tests }

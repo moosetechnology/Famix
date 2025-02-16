@@ -123,12 +123,49 @@ FamixFusionnerJava >> visitFamixTAssociation: aFamixTAssociation [
 ]
 
 { #category : #'visiting - traits' }
+FamixFusionnerJava >> visitFamixTInvocable: aFamixTInvocable [
+	"similar to #visitFamixTAssociation:
+	 but the #target of the invocation is a collection
+	 see also #visitFamixTInvocationReceiver:"
+
+	
+	aFamixTInvocable incomingInvocations do: [ :invocation |
+		invocation sender isStub
+			ifTrue: [ consumerModel remove: invocation ]
+			ifFalse: [
+				invocation candidates remove: aFamixTInvocable.
+				invocation addCandidate: resourceEntity
+			]
+	]
+
+]
+
+{ #category : #'visiting - traits' }
+FamixFusionnerJava >> visitFamixTInvocation: aFamixTInvocation [
+	"Should not be called, Invocations must be treated in #visitFamixTInvocable: and #visitFamixTInvocationsReceiver:"
+
+	self shouldNotImplement 
+]
+
+{ #category : #'visiting - traits' }
+FamixFusionnerJava >> visitFamixTInvocationsReceiver: aFamixTInvocationsReceiver [
+	"similar to #visitFamixTAssociation:
+	 but invocation receiver is not #target of the association
+	 see also #visitFamixTInvocable:"
+
+	
+	aFamixTInvocationsReceiver receivingInvocations do: [ :invocation |
+		invocation sender isStub
+			ifTrue: [ consumerModel remove: invocation ]
+			ifFalse: [ invocation receiver: resourceEntity ]
+	]
+
+]
+
+{ #category : #'visiting - traits' }
 FamixFusionnerJava >> visitFamixTType: aFamixTType [
-	<generated>
-	self visitFamixTCanBeStub: aFamixTType.
-	self visitFamixTNamedEntity: aFamixTType.
+
 	self visitFamixTReferenceable: aFamixTType.
-	self visitFamixTEntityMetaLevelDependency: aFamixTType.
 
 	aFamixTType typedEntities do: [ :typedEntity |
 		typedEntity declaredType: resourceEntity 
@@ -138,9 +175,8 @@ FamixFusionnerJava >> visitFamixTType: aFamixTType [
 
 { #category : #'visiting - traits' }
 FamixFusionnerJava >> visitFamixTWithInheritances: aFamixTWithInheritances [
+	"default implementation visits superInheritances, but we need subInheritances"
 
-	aFamixTWithInheritances subInheritances do: [ :inheritance |
-		self visitFamixTAssociation: inheritance.
-	]
+	aFamixTWithInheritances subInheritances do: [ :inheritance | self visitFamixTAssociation: inheritance ]
 
 ]
