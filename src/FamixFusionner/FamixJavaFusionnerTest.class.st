@@ -95,12 +95,11 @@ FamixJavaFusionnerTest >> testStubClassAndAttribute [
 
 { #category : #tests }
 FamixJavaFusionnerTest >> testStubInheritance [
-	"real class with inheritance to stub class"
+	"non-stub class inheriting from stub class"
 
 	self class: 'SuperBlah'.
 	(consumerModel newClassNamed: 'Blah') isStub: false.
 	consumerModel newInheritance
-		isStub: false ;
 		superclass: (consumerModel entityNamed: 'SuperBlah') ;
 		subclass: (consumerModel entityNamed: 'Blah').
 
@@ -112,6 +111,7 @@ FamixJavaFusionnerTest >> testStubInheritance [
 	self assert: consumerModel size equals: 2.
 	self assert: resourceModel size equals: 1.
 
+	self assert: (consumerModel entityNamed: 'SuperBlah') isNil.
 	self
 		assert: (consumerModel entityNamed: 'Blah') superclass
 		equals: (resourceModel entityNamed: 'SuperBlah')
@@ -133,6 +133,7 @@ FamixJavaFusionnerTest >> testVariableWithStubDeclaredType [
 	self assert: consumerModel size equals: 1.
 	self assert: resourceModel size equals: 1.
 
+	self assert: (consumerModel entityNamed: 'Blah') isNil.
 	self
 		assert: (consumerModel entityNamed: 'var') declaredType
 		equals: (resourceModel entityNamed: 'Blah').
