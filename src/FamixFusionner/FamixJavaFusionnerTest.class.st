@@ -119,23 +119,28 @@ FamixJavaFusionnerTest >> testStubInheritance [
 
 { #category : #tests }
 FamixJavaFusionnerTest >> testVariableWithStubDeclaredType [
-	"real class with inheritance to stub class"
 
 	self class: 'Blah'.
-	self variable: 'var' declaredType: 'Blah'.
-	(consumerModel entityNamed: 'var') stub: false.
+	(consumerModel newLocalVariableNamed: 'var')
+		stub: false ;
+		declaredType: (consumerModel entityNamed: 'Blah').
 
 	self assert: consumerModel size equals: 2.
-	self assert: resourceModel size equals: 2.
+	self assert: resourceModel size equals: 1.
 
 	fusionner fusion.
 
 	self assert: consumerModel size equals: 1.
-	self assert: resourceModel size equals: 2.
+	self assert: resourceModel size equals: 1.
 
 	self
 		assert: (consumerModel entityNamed: 'var') declaredType
-		equals: (resourceModel entityNamed: 'Blah')
+		equals: (resourceModel entityNamed: 'Blah').
+
+	self assert: (resourceModel entityNamed: 'Blah') typedEntities size equals: 1.
+	self
+		assert: (resourceModel entityNamed: 'Blah') typedEntities anyOne 
+		equals: (consumerModel entityNamed: 'var')
 ]
 
 { #category : #running }
