@@ -130,8 +130,8 @@ FamixJavaVisitor >> visitInterface: aFamixJavaInterface [
 
 { #category : #visiting }
 FamixJavaVisitor >> visitInvocation: aFamixJavaInvocation [
-	<generated>
-	^ self visitEntity: aFamixJavaInvocation
+
+	^ self visitFamixTInvocation: aFamixJavaInvocation
 ]
 
 { #category : #visiting }
@@ -142,8 +142,16 @@ FamixJavaVisitor >> visitLocalVariable: aFamixJavaLocalVariable [
 
 { #category : #visiting }
 FamixJavaVisitor >> visitMethod: aFamixJavaMethod [
-	<generated>
-	^ self visitContainerEntity: aFamixJavaMethod
+
+	self visitFamixTCanBeAbstract: aFamixJavaMethod.
+	self visitFamixTCanBeClassSide: aFamixJavaMethod.
+	self visitFamixTCanBeFinal: aFamixJavaMethod.
+	self visitFamixTHasKind: aFamixJavaMethod.
+	self visitFamixTHasVisibility: aFamixJavaMethod.
+	self visitFamixTImportable: aFamixJavaMethod.
+	self visitFamixTMethod: aFamixJavaMethod.
+	self visitFamixTWithComments: aFamixJavaMethod.
+	self visitFamixTWithExceptions: aFamixJavaMethod.
 ]
 
 { #category : #visiting }

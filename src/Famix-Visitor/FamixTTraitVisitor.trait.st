@@ -12,8 +12,8 @@ FamixTTraitVisitor >> visitFamixTAccess: aFamixTAccess [
 
 { #category : #'visiting - traits' }
 FamixTTraitVisitor >> visitFamixTAccessible: aFamixTAccessible [
-	<generated>
 
+	^self visitList: aFamixTAccessible incomingAccesses
 ]
 
 { #category : #'visiting - traits' }
@@ -363,7 +363,10 @@ FamixTTraitVisitor >> visitFamixTInvocation: aFamixTInvocation [
 
 { #category : #'visiting - traits' }
 FamixTTraitVisitor >> visitFamixTInvocationsReceiver: aFamixTInvocationsReceiver [
-	<generated>
+
+	^aFamixTInvocationsReceiver receivingInvocations collect: [ :invocation |
+		invocation accept: self
+	]
 
 ]
 
@@ -746,14 +749,16 @@ FamixTTraitVisitor >> visitFamixTWithImports: aFamixTWithImports [
 
 { #category : #'visiting - traits' }
 FamixTTraitVisitor >> visitFamixTWithInheritances: aFamixTWithInheritances [
-	<generated>
+	"not a good idea to visit both super and sub inheritances. Could duplicate the visits.
+	 Arbitrarily choose to visit superInheritances"
 
+	^aFamixTWithInheritances superInheritances collect: [ :inheritance | inheritance accept: self ]
 ]
 
 { #category : #'visiting - traits' }
 FamixTTraitVisitor >> visitFamixTWithInvocations: aFamixTWithInvocations [
-	<generated>
 
+	^aFamixTWithInvocations outgoingInvocations collect: [ :invocation | invocation accept: self ]
 ]
 
 { #category : #'visiting - traits' }
@@ -782,8 +787,8 @@ FamixTTraitVisitor >> visitFamixTWithParameters: aFamixTWithParameters [
 
 { #category : #'visiting - traits' }
 FamixTTraitVisitor >> visitFamixTWithReferences: aFamixTWithReferences [
-	<generated>
 
+	^aFamixTWithReferences outgoingReferences do: [ :reference | reference accept: self ]
 ]
 
 { #category : #'visiting - traits' }
@@ -822,6 +827,12 @@ FamixTTraitVisitor >> visitFamixTWithTypeAliases: aFamixTWithTypeAliases [
 
 { #category : #'visiting - traits' }
 FamixTTraitVisitor >> visitFamixTWithTypes: aFamixTWithTypes [
-	<generated>
 
+	^self visitList: aFamixTWithTypes types
+]
+
+{ #category : #visiting }
+FamixTTraitVisitor >> visitList: aCollection [
+
+	^aCollection collect: [ :each | each accept: self ]
 ]
