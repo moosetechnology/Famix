@@ -111,6 +111,16 @@ FamixFusionnerJava >> visitClass: aFamixJavaClass [
 
 ]
 
+{ #category : #visiting }
+FamixFusionnerJava >> visitFamixJavaType: aFamixJavaType [
+
+	self visitFamixJavaTBound: aFamixJavaType.
+	self visitFamixTConcreteParameterType: aFamixJavaType.
+	"self visitFamixTWithMethods: aFamixJavaType."
+	self visitFamixJavaContainerEntity: aFamixJavaType.
+
+]
+
 { #category : #'visiting - traits' }
 FamixFusionnerJava >> visitFamixTAssociation: aFamixTAssociation [
 	"Note 1: we arrived here while visiting the (stub) target entity
@@ -120,6 +130,18 @@ FamixFusionnerJava >> visitFamixTAssociation: aFamixTAssociation [
 	aFamixTAssociation source isStub
 		ifTrue: [ consumerModel remove: aFamixTAssociation ]
 		ifFalse: [ aFamixTAssociation target: resourceEntity ]
+]
+
+{ #category : #'visiting - traits' }
+FamixFusionnerJava >> visitFamixTClass: aFamixTClass [
+
+	self visitFamixTInvocationsReceiver: aFamixTClass.
+	self visitFamixTType: aFamixTClass.
+	"self visitFamixTWithAttributes: aFamixTClass.
+	self visitFamixTWithComments: aFamixTClass."
+	self visitFamixTWithInheritances: aFamixTClass.
+	"self visitFamixTWithMethods: aFamixTClass."
+
 ]
 
 { #category : #'visiting - traits' }
@@ -159,6 +181,11 @@ FamixFusionnerJava >> visitFamixTInvocationsReceiver: aFamixTInvocationsReceiver
 			ifTrue: [ consumerModel remove: invocation ]
 			ifFalse: [ invocation receiver: resourceEntity ]
 	]
+
+]
+
+{ #category : #'visiting - traits' }
+FamixFusionnerJava >> visitFamixTPackageable: aFamixTPackageable [
 
 ]
 
