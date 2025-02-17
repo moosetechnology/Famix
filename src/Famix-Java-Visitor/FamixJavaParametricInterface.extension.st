@@ -1,6 +1,9 @@
 Extension { #name : #FamixJavaParametricInterface }
 
-{ #category : #'*Famix-Java-Visitor-generated' }
-FamixJavaParametricInterface >> accept: aFamixJavaVisitor [
-	^ aFamixJavaVisitor visitParametricInterface: self
+{ #category : #'*Famix-Java-Visitor' }
+FamixJavaParametricInterface >> accept: aVisitor [
+	<generated>
+
+	^ aVisitor visitFamixJavaParametricInterface: self.
+
 ]

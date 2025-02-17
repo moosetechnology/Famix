@@ -1,6 +1,9 @@
 Extension { #name : #FamixJavaType }
 
-{ #category : #'*Famix-Java-Visitor-generated' }
-FamixJavaType >> accept: aFamixJavaVisitor [
-	^ aFamixJavaVisitor visitType: self
+{ #category : #'*Famix-Java-Visitor' }
+FamixJavaType >> accept: aVisitor [
+	<generated>
+
+	^ aVisitor visitFamixJavaType: self.
+
 ]

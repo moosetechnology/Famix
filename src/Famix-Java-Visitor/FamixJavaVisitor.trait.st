@@ -8,141 +8,265 @@ Trait {
 	#category : #'Famix-Java-Visitor'
 }
 
-{ #category : #visiting }
-FamixJavaVisitor >> visitAccess: aFamixJavaAccess [
+{ #category : #'visiting - traits' }
+FamixJavaVisitor >> acceptMeIfNotNil: aFamixEntity [
 	<generated>
-	^ self visitEntity: aFamixJavaAccess
+
+	^aFamixEntity ifNil: [ nil ] ifNotNil: [ aFamixEntity accept: self ]
+
 ]
 
 { #category : #visiting }
-FamixJavaVisitor >> visitAnnotationInstance: aFamixJavaAnnotationInstance [
+FamixJavaVisitor >> visitFamixJavaAccess: aFamixJavaAccess [
 	<generated>
-	^ self visitSourcedEntity: aFamixJavaAnnotationInstance
+
+	self visitFamixTAccess: aFamixJavaAccess.
+
 ]
 
 { #category : #visiting }
-FamixJavaVisitor >> visitAnnotationInstanceAttribute: aFamixJavaAnnotationInstanceAttribute [
+FamixJavaVisitor >> visitFamixJavaAnnotationInstance: aFamixJavaAnnotationInstance [
 	<generated>
-	^ self visitSourcedEntity: aFamixJavaAnnotationInstanceAttribute
+
+	self visitFamixTAnnotationInstance: aFamixJavaAnnotationInstance.
+	self visitFamixTTypedAnnotationInstance: aFamixJavaAnnotationInstance.
+	self visitFamixTWithAnnotationInstanceAttributes: aFamixJavaAnnotationInstance.
+	self visitFamixJavaSourcedEntity: aFamixJavaAnnotationInstance.
+
 ]
 
 { #category : #visiting }
-FamixJavaVisitor >> visitAnnotationType: aFamixJavaAnnotationType [
+FamixJavaVisitor >> visitFamixJavaAnnotationInstanceAttribute: aFamixJavaAnnotationInstanceAttribute [
 	<generated>
-	^ self visitType: aFamixJavaAnnotationType
+
+	self visitFamixTAnnotationInstanceAttribute: aFamixJavaAnnotationInstanceAttribute.
+	self visitFamixTTypedAnnotationInstanceAttribute: aFamixJavaAnnotationInstanceAttribute.
+	self visitFamixJavaSourcedEntity: aFamixJavaAnnotationInstanceAttribute.
+
 ]
 
 { #category : #visiting }
-FamixJavaVisitor >> visitAnnotationTypeAttribute: aFamixJavaAnnotationTypeAttribute [
+FamixJavaVisitor >> visitFamixJavaAnnotationType: aFamixJavaAnnotationType [
 	<generated>
-	^ self visitNamedEntity: aFamixJavaAnnotationTypeAttribute
+
+	self visitFamixTAnnotationType: aFamixJavaAnnotationType.
+	self visitFamixTHasVisibility: aFamixJavaAnnotationType.
+	self visitFamixTImplementable: aFamixJavaAnnotationType.
+	self visitFamixTPackageable: aFamixJavaAnnotationType.
+	self visitFamixTWithAttributes: aFamixJavaAnnotationType.
+	self visitFamixTWithComments: aFamixJavaAnnotationType.
+	self visitFamixTWithInheritances: aFamixJavaAnnotationType.
+	self visitFamixJavaType: aFamixJavaAnnotationType.
+
 ]
 
 { #category : #visiting }
-FamixJavaVisitor >> visitAttribute: aFamixJavaAttribute [
+FamixJavaVisitor >> visitFamixJavaAnnotationTypeAttribute: aFamixJavaAnnotationTypeAttribute [
 	<generated>
-	^ self visitNamedEntity: aFamixJavaAttribute
+
+	self visitFamixTAnnotationTypeAttribute: aFamixJavaAnnotationTypeAttribute.
+	self visitFamixTTypedAnnotationInstanceAttribute: aFamixJavaAnnotationTypeAttribute.
+	self visitFamixTWithComments: aFamixJavaAnnotationTypeAttribute.
+	self visitFamixJavaNamedEntity: aFamixJavaAnnotationTypeAttribute.
+
 ]
 
 { #category : #visiting }
-FamixJavaVisitor >> visitClass: aFamixJavaClass [
+FamixJavaVisitor >> visitFamixJavaAttribute: aFamixJavaAttribute [
 	<generated>
-	^ self visitType: aFamixJavaClass
+
+	self visitFamixJavaTCanBeTransient: aFamixJavaAttribute.
+	self visitFamixJavaTCanBeVolatile: aFamixJavaAttribute.
+	self visitFamixTAttribute: aFamixJavaAttribute.
+	self visitFamixTCanBeClassSide: aFamixJavaAttribute.
+	self visitFamixTCanBeFinal: aFamixJavaAttribute.
+	self visitFamixTHasVisibility: aFamixJavaAttribute.
+	self visitFamixTWithComments: aFamixJavaAttribute.
+	self visitFamixJavaNamedEntity: aFamixJavaAttribute.
+
 ]
 
 { #category : #visiting }
-FamixJavaVisitor >> visitComment: aFamixJavaComment [
+FamixJavaVisitor >> visitFamixJavaClass: aFamixJavaClass [
 	<generated>
-	^ self visitSourcedEntity: aFamixJavaComment
+
+	self visitFamixJavaTClassMetrics: aFamixJavaClass.
+	self visitFamixTCanBeAbstract: aFamixJavaClass.
+	self visitFamixTCanBeClassSide: aFamixJavaClass.
+	self visitFamixTCanBeFinal: aFamixJavaClass.
+	self visitFamixTCanImplement: aFamixJavaClass.
+	self visitFamixTClass: aFamixJavaClass.
+	self visitFamixTClassMetrics: aFamixJavaClass.
+	self visitFamixTHasVisibility: aFamixJavaClass.
+	self visitFamixTImportable: aFamixJavaClass.
+	self visitFamixTLCOMMetrics: aFamixJavaClass.
+	self visitFamixTPackageable: aFamixJavaClass.
+	self visitFamixTWithImports: aFamixJavaClass.
+	self visitFamixJavaType: aFamixJavaClass.
+
 ]
 
 { #category : #visiting }
-FamixJavaVisitor >> visitConcretization: aFamixJavaConcretization [
+FamixJavaVisitor >> visitFamixJavaComment: aFamixJavaComment [
 	<generated>
-	^ self visitEntity: aFamixJavaConcretization
+
+	self visitFamixTComment: aFamixJavaComment.
+	self visitFamixJavaSourcedEntity: aFamixJavaComment.
+
 ]
 
 { #category : #visiting }
-FamixJavaVisitor >> visitContainerEntity: aFamixJavaContainerEntity [
+FamixJavaVisitor >> visitFamixJavaConcretization: aFamixJavaConcretization [
 	<generated>
-	^ self visitNamedEntity: aFamixJavaContainerEntity
+
+	self visitFamixTConcretization: aFamixJavaConcretization.
+
 ]
 
 { #category : #visiting }
-FamixJavaVisitor >> visitEntity: aFamixJavaEntity [
-
-	^aFamixJavaEntity children collect: [ :child | child accept: self ]
-]
-
-{ #category : #visiting }
-FamixJavaVisitor >> visitEnum: aFamixJavaEnum [
+FamixJavaVisitor >> visitFamixJavaContainerEntity: aFamixJavaContainerEntity [
 	<generated>
-	^ self visitType: aFamixJavaEnum
+
+	self visitFamixJavaTWithInterfaces: aFamixJavaContainerEntity.
+	self visitFamixTWithAnnotationTypes: aFamixJavaContainerEntity.
+	self visitFamixTWithClasses: aFamixJavaContainerEntity.
+	self visitFamixJavaNamedEntity: aFamixJavaContainerEntity.
+
 ]
 
 { #category : #visiting }
-FamixJavaVisitor >> visitEnumValue: aFamixJavaEnumValue [
+FamixJavaVisitor >> visitFamixJavaEntity: aFamixJavaEntity [
 	<generated>
-	^ self visitNamedEntity: aFamixJavaEnumValue
+
+
 ]
 
 { #category : #visiting }
-FamixJavaVisitor >> visitException: aFamixJavaException [
+FamixJavaVisitor >> visitFamixJavaEnum: aFamixJavaEnum [
 	<generated>
-	^ self visitClass: aFamixJavaException
+
+	self visitFamixTEnum: aFamixJavaEnum.
+	self visitFamixTHasVisibility: aFamixJavaEnum.
+	self visitFamixTImportable: aFamixJavaEnum.
+	self visitFamixTWithAttributes: aFamixJavaEnum.
+	self visitFamixTWithComments: aFamixJavaEnum.
+	self visitFamixTWithImports: aFamixJavaEnum.
+	self visitFamixTWithInheritances: aFamixJavaEnum.
+	self visitFamixJavaType: aFamixJavaEnum.
+
 ]
 
 { #category : #visiting }
-FamixJavaVisitor >> visitImplementation: aFamixJavaImplementation [
+FamixJavaVisitor >> visitFamixJavaEnumValue: aFamixJavaEnumValue [
 	<generated>
-	^ self visitEntity: aFamixJavaImplementation
+
+	self visitFamixTEnumValue: aFamixJavaEnumValue.
+	self visitFamixTWithComments: aFamixJavaEnumValue.
+	self visitFamixJavaNamedEntity: aFamixJavaEnumValue.
+
 ]
 
 { #category : #visiting }
-FamixJavaVisitor >> visitImplicitVariable: aFamixJavaImplicitVariable [
+FamixJavaVisitor >> visitFamixJavaException: aFamixJavaException [
 	<generated>
-	^ self visitNamedEntity: aFamixJavaImplicitVariable
+
+	self visitFamixTException: aFamixJavaException.
+	self visitFamixTWithTypes: aFamixJavaException.
+	self visitFamixJavaClass: aFamixJavaException.
+
 ]
 
 { #category : #visiting }
-FamixJavaVisitor >> visitImport: aFamixJavaImport [
+FamixJavaVisitor >> visitFamixJavaImplementation: aFamixJavaImplementation [
 	<generated>
-	^ self visitEntity: aFamixJavaImport
+
+	self visitFamixTImplementation: aFamixJavaImplementation.
+
 ]
 
 { #category : #visiting }
-FamixJavaVisitor >> visitIndexedFileAnchor: aFamixJavaIndexedFileAnchor [
+FamixJavaVisitor >> visitFamixJavaImplicitVariable: aFamixJavaImplicitVariable [
 	<generated>
-	^ self visitSourceAnchor: aFamixJavaIndexedFileAnchor
+
+	self visitFamixTImplicitVariable: aFamixJavaImplicitVariable.
+	self visitFamixJavaNamedEntity: aFamixJavaImplicitVariable.
+
 ]
 
 { #category : #visiting }
-FamixJavaVisitor >> visitInheritance: aFamixJavaInheritance [
+FamixJavaVisitor >> visitFamixJavaImport: aFamixJavaImport [
 	<generated>
-	^ self visitEntity: aFamixJavaInheritance
+
+	self visitFamixTImport: aFamixJavaImport.
+
 ]
 
 { #category : #visiting }
-FamixJavaVisitor >> visitInterface: aFamixJavaInterface [
+FamixJavaVisitor >> visitFamixJavaImportingContext: aFamixJavaImportingContext [
 	<generated>
-	^ self visitType: aFamixJavaInterface
+
+
 ]
 
 { #category : #visiting }
-FamixJavaVisitor >> visitInvocation: aFamixJavaInvocation [
-
-	^ self visitFamixTInvocation: aFamixJavaInvocation
-]
-
-{ #category : #visiting }
-FamixJavaVisitor >> visitLocalVariable: aFamixJavaLocalVariable [
+FamixJavaVisitor >> visitFamixJavaIndexedFileAnchor: aFamixJavaIndexedFileAnchor [
 	<generated>
-	^ self visitNamedEntity: aFamixJavaLocalVariable
+
+	self visitFamixTIndexedFileNavigation: aFamixJavaIndexedFileAnchor.
+	self visitFamixJavaSourceAnchor: aFamixJavaIndexedFileAnchor.
+
 ]
 
 { #category : #visiting }
-FamixJavaVisitor >> visitMethod: aFamixJavaMethod [
+FamixJavaVisitor >> visitFamixJavaInheritance: aFamixJavaInheritance [
+	<generated>
 
+	self visitFamixTInheritance: aFamixJavaInheritance.
+
+]
+
+{ #category : #visiting }
+FamixJavaVisitor >> visitFamixJavaInterface: aFamixJavaInterface [
+	<generated>
+
+	self visitFamixTCanBeClassSide: aFamixJavaInterface.
+	self visitFamixTCanBeFinal: aFamixJavaInterface.
+	self visitFamixTHasVisibility: aFamixJavaInterface.
+	self visitFamixTImplementable: aFamixJavaInterface.
+	self visitFamixTImportable: aFamixJavaInterface.
+	self visitFamixTPackageable: aFamixJavaInterface.
+	self visitFamixTWithAttributes: aFamixJavaInterface.
+	self visitFamixTWithComments: aFamixJavaInterface.
+	self visitFamixTWithImports: aFamixJavaInterface.
+	self visitFamixTWithInheritances: aFamixJavaInterface.
+	self visitFamixJavaType: aFamixJavaInterface.
+
+]
+
+{ #category : #visiting }
+FamixJavaVisitor >> visitFamixJavaInvocation: aFamixJavaInvocation [
+	<generated>
+
+	self visitFamixTInvocation: aFamixJavaInvocation.
+
+]
+
+{ #category : #visiting }
+FamixJavaVisitor >> visitFamixJavaLocalVariable: aFamixJavaLocalVariable [
+	<generated>
+
+	self visitFamixTCanBeFinal: aFamixJavaLocalVariable.
+	self visitFamixTLocalVariable: aFamixJavaLocalVariable.
+	self visitFamixTWithComments: aFamixJavaLocalVariable.
+	self visitFamixJavaNamedEntity: aFamixJavaLocalVariable.
+
+]
+
+{ #category : #visiting }
+FamixJavaVisitor >> visitFamixJavaMethod: aFamixJavaMethod [
+	<generated>
+
+	self visitFamixJavaTCanBeSynchronized: aFamixJavaMethod.
 	self visitFamixTCanBeAbstract: aFamixJavaMethod.
 	self visitFamixTCanBeClassSide: aFamixJavaMethod.
 	self visitFamixTCanBeFinal: aFamixJavaMethod.
@@ -152,112 +276,236 @@ FamixJavaVisitor >> visitMethod: aFamixJavaMethod [
 	self visitFamixTMethod: aFamixJavaMethod.
 	self visitFamixTWithComments: aFamixJavaMethod.
 	self visitFamixTWithExceptions: aFamixJavaMethod.
+	self visitFamixJavaContainerEntity: aFamixJavaMethod.
+
 ]
 
 { #category : #visiting }
-FamixJavaVisitor >> visitMooseQueryMockSpecializedInvocation: aMooseQueryMockSpecializedInvocation [
+FamixJavaVisitor >> visitFamixJavaNamedEntity: aFamixJavaNamedEntity [
 	<generated>
-	^ self visitInvocation: aMooseQueryMockSpecializedInvocation
+
+	self visitFamixTInvocationsReceiver: aFamixJavaNamedEntity.
+	self visitFamixTNamedEntity: aFamixJavaNamedEntity.
+	self visitFamixTWithAnnotationInstances: aFamixJavaNamedEntity.
+	self visitTEntityMetaLevelDependency: aFamixJavaNamedEntity.
+	self visitFamixJavaSourcedEntity: aFamixJavaNamedEntity.
+
 ]
 
 { #category : #visiting }
-FamixJavaVisitor >> visitNamedEntity: aFamixJavaNamedEntity [
+FamixJavaVisitor >> visitFamixJavaPackage: aFamixJavaPackage [
 	<generated>
-	^ self visitSourcedEntity: aFamixJavaNamedEntity
+
+	self visitFamixTImportable: aFamixJavaPackage.
+	self visitFamixTPackage: aFamixJavaPackage.
+	self visitFamixTPackageable: aFamixJavaPackage.
+	self visitFamixTWithComments: aFamixJavaPackage.
+	self visitFamixJavaContainerEntity: aFamixJavaPackage.
+
 ]
 
 { #category : #visiting }
-FamixJavaVisitor >> visitPackage: aFamixJavaPackage [
+FamixJavaVisitor >> visitFamixJavaParameter: aFamixJavaParameter [
 	<generated>
-	^ self visitContainerEntity: aFamixJavaPackage
+
+	self visitFamixTCanBeFinal: aFamixJavaParameter.
+	self visitFamixTParameter: aFamixJavaParameter.
+	self visitFamixTWithComments: aFamixJavaParameter.
+	self visitFamixJavaNamedEntity: aFamixJavaParameter.
+
 ]
 
 { #category : #visiting }
-FamixJavaVisitor >> visitParameter: aFamixJavaParameter [
+FamixJavaVisitor >> visitFamixJavaParameterConcretization: aFamixJavaParameterConcretization [
 	<generated>
-	^ self visitNamedEntity: aFamixJavaParameter
+
+	self visitFamixTParameterConcretization: aFamixJavaParameterConcretization.
+
 ]
 
 { #category : #visiting }
-FamixJavaVisitor >> visitParameterConcretization: aFamixJavaParameterConcretization [
+FamixJavaVisitor >> visitFamixJavaParameterType: aFamixJavaParameterType [
 	<generated>
-	^ self visitEntity: aFamixJavaParameterConcretization
+
+	self visitFamixTGenericParameterType: aFamixJavaParameterType.
+	self visitFamixTThrowable: aFamixJavaParameterType.
+	self visitFamixTTypedEntity: aFamixJavaParameterType.
+	self visitFamixTWithInheritances: aFamixJavaParameterType.
+	self visitFamixJavaType: aFamixJavaParameterType.
+
 ]
 
 { #category : #visiting }
-FamixJavaVisitor >> visitParameterType: aFamixJavaParameterType [
+FamixJavaVisitor >> visitFamixJavaParametricClass: aFamixJavaParametricClass [
 	<generated>
-	^ self visitType: aFamixJavaParameterType
+
+	self visitFamixTParametricEntity: aFamixJavaParametricClass.
+	self visitFamixJavaClass: aFamixJavaParametricClass.
+
 ]
 
 { #category : #visiting }
-FamixJavaVisitor >> visitParametricClass: aFamixJavaParametricClass [
+FamixJavaVisitor >> visitFamixJavaParametricInterface: aFamixJavaParametricInterface [
 	<generated>
-	^ self visitClass: aFamixJavaParametricClass
+
+	self visitFamixTParametricEntity: aFamixJavaParametricInterface.
+	self visitFamixJavaInterface: aFamixJavaParametricInterface.
+
 ]
 
 { #category : #visiting }
-FamixJavaVisitor >> visitParametricInterface: aFamixJavaParametricInterface [
+FamixJavaVisitor >> visitFamixJavaParametricMethod: aFamixJavaParametricMethod [
 	<generated>
-	^ self visitInterface: aFamixJavaParametricInterface
+
+	self visitFamixTParametricEntity: aFamixJavaParametricMethod.
+	self visitFamixJavaMethod: aFamixJavaParametricMethod.
+
 ]
 
 { #category : #visiting }
-FamixJavaVisitor >> visitParametricMethod: aFamixJavaParametricMethod [
+FamixJavaVisitor >> visitFamixJavaPrimitiveType: aFamixJavaPrimitiveType [
 	<generated>
-	^ self visitMethod: aFamixJavaParametricMethod
+
+	self visitFamixTPrimitiveType: aFamixJavaPrimitiveType.
+	self visitFamixJavaType: aFamixJavaPrimitiveType.
+
 ]
 
 { #category : #visiting }
-FamixJavaVisitor >> visitPrimitiveType: aFamixJavaPrimitiveType [
+FamixJavaVisitor >> visitFamixJavaReference: aFamixJavaReference [
 	<generated>
-	^ self visitType: aFamixJavaPrimitiveType
+
+	self visitFamixTReference: aFamixJavaReference.
+
 ]
 
 { #category : #visiting }
-FamixJavaVisitor >> visitReference: aFamixJavaReference [
+FamixJavaVisitor >> visitFamixJavaSourceAnchor: aFamixJavaSourceAnchor [
 	<generated>
-	^ self visitEntity: aFamixJavaReference
+
+	self visitFamixTSourceAnchor: aFamixJavaSourceAnchor.
+
 ]
 
 { #category : #visiting }
-FamixJavaVisitor >> visitSourceAnchor: aFamixJavaSourceAnchor [
+FamixJavaVisitor >> visitFamixJavaSourceLanguage: aFamixJavaSourceLanguage [
 	<generated>
-	^ self visitEntity: aFamixJavaSourceAnchor
+
+	self visitFamixTSourceLanguage: aFamixJavaSourceLanguage.
+
 ]
 
 { #category : #visiting }
-FamixJavaVisitor >> visitSourceLanguage: aFamixJavaSourceLanguage [
+FamixJavaVisitor >> visitFamixJavaSourceTextAnchor: aFamixJavaSourceTextAnchor [
 	<generated>
-	^ self visitEntity: aFamixJavaSourceLanguage
+
+	self visitFamixTHasImmediateSource: aFamixJavaSourceTextAnchor.
+	self visitFamixJavaSourceAnchor: aFamixJavaSourceTextAnchor.
+
 ]
 
 { #category : #visiting }
-FamixJavaVisitor >> visitSourceTextAnchor: aFamixJavaSourceTextAnchor [
+FamixJavaVisitor >> visitFamixJavaSourcedEntity: aFamixJavaSourcedEntity [
 	<generated>
-	^ self visitSourceAnchor: aFamixJavaSourceTextAnchor
+
+	self visitFamixTSourceEntity: aFamixJavaSourcedEntity.
+
+]
+
+{ #category : #'visiting - traits' }
+FamixJavaVisitor >> visitFamixJavaTBound: aFamixJavaTBound [
+	<generated>
+
+	self visitList: aFamixJavaTBound lowerBoundedWildcards.
+	self visitList: aFamixJavaTBound upperBoundedWildcards.
+
+]
+
+{ #category : #'visiting - traits' }
+FamixJavaVisitor >> visitFamixJavaTBounded: aFamixJavaTBounded [
+	<generated>
+
+	self acceptMeIfNotNil: aFamixJavaTBounded lowerBound.
+	self acceptMeIfNotNil: aFamixJavaTBounded upperBound.
+
+]
+
+{ #category : #'visiting - traits' }
+FamixJavaVisitor >> visitFamixJavaTCanBeSynchronized: aFamixJavaTCanBeSynchronized [
+	<generated>
+
+
+]
+
+{ #category : #'visiting - traits' }
+FamixJavaVisitor >> visitFamixJavaTCanBeTransient: aFamixJavaTCanBeTransient [
+	<generated>
+
+
+]
+
+{ #category : #'visiting - traits' }
+FamixJavaVisitor >> visitFamixJavaTCanBeVolatile: aFamixJavaTCanBeVolatile [
+	<generated>
+
+
+]
+
+{ #category : #'visiting - traits' }
+FamixJavaVisitor >> visitFamixJavaTClassMetrics: aFamixJavaTClassMetrics [
+	<generated>
+
+
+]
+
+{ #category : #'visiting - traits' }
+FamixJavaVisitor >> visitFamixJavaTEntityCreator: aFamixJavaTEntityCreator [
+	<generated>
+
+
+]
+
+{ #category : #'visiting - traits' }
+FamixJavaVisitor >> visitFamixJavaTWithInterfaces: aFamixJavaTWithInterfaces [
+	<generated>
+
+	self visitFamixTWithTypes: aFamixJavaTWithInterfaces.
+
 ]
 
 { #category : #visiting }
-FamixJavaVisitor >> visitSourcedEntity: aFamixJavaSourcedEntity [
+FamixJavaVisitor >> visitFamixJavaType: aFamixJavaType [
 	<generated>
-	^ self visitEntity: aFamixJavaSourcedEntity
+
+	self visitFamixJavaTBound: aFamixJavaType.
+	self visitFamixTConcreteParameterType: aFamixJavaType.
+	self visitFamixTWithMethods: aFamixJavaType.
+	self visitFamixJavaContainerEntity: aFamixJavaType.
+
 ]
 
 { #category : #visiting }
-FamixJavaVisitor >> visitType: aFamixJavaType [
+FamixJavaVisitor >> visitFamixJavaUnknownVariable: aFamixJavaUnknownVariable [
 	<generated>
-	^ self visitContainerEntity: aFamixJavaType
+
+	self visitFamixTUnknownVariable: aFamixJavaUnknownVariable.
+	self visitFamixJavaNamedEntity: aFamixJavaUnknownVariable.
+
 ]
 
 { #category : #visiting }
-FamixJavaVisitor >> visitUnknownVariable: aFamixJavaUnknownVariable [
+FamixJavaVisitor >> visitFamixJavaWildcard: aFamixJavaWildcard [
 	<generated>
-	^ self visitNamedEntity: aFamixJavaUnknownVariable
+
+	self visitFamixJavaTBounded: aFamixJavaWildcard.
+	self visitFamixJavaType: aFamixJavaWildcard.
+
 ]
 
-{ #category : #visiting }
-FamixJavaVisitor >> visitWildcard: aFamixJavaWildcard [
+{ #category : #'visiting - traits' }
+FamixJavaVisitor >> visitList: aCollection [
 	<generated>
-	^ self visitType: aFamixJavaWildcard
+
+	^aCollection collect: [ :each | each accept: self ]
+
 ]

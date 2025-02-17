@@ -1,6 +1,9 @@
 Extension { #name : #FamixJavaSourceTextAnchor }
 
-{ #category : #'*Famix-Java-Visitor-generated' }
-FamixJavaSourceTextAnchor >> accept: aFamixJavaVisitor [
-	^ aFamixJavaVisitor visitSourceTextAnchor: self
+{ #category : #'*Famix-Java-Visitor' }
+FamixJavaSourceTextAnchor >> accept: aVisitor [
+	<generated>
+
+	^ aVisitor visitFamixJavaSourceTextAnchor: self.
+
 ]
