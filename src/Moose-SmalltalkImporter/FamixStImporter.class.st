@@ -161,9 +161,13 @@ FamixStImporter >> createClass: aClass [
 
 	(self importingContext shouldImportComment and: [ aClass hasComment ]) ifTrue: [
 		(self importingContext shouldMergeClassAndMetaclass and: [ aClass isMeta ]) ifFalse: [
-			| comment |
+			| comment anchor |
 			comment := self addEntity: self factory comment new.
-			comment content: aClass comment asString.
+			anchor := self factory sourceTextAnchor new
+				          element: comment;
+				          source: aClass comment asString;
+				          yourself.
+			comment sourceAnchor: anchor.
 			comment commentedEntity: class ] ].
 
 	^ class
