@@ -44,12 +44,13 @@ FamixJavaFusionnerTest >> inheritanceFrom: subName to: superName [
 { #category : #running }
 FamixJavaFusionnerTest >> method: methodName class: className [
 
-	(resourceModel newMethodNamed: methodName)
-		isStub: false ;
-		parentType: (resourceModel entityNamed: className).
-	(consumerModel newMethodNamed: methodName)
-		isStub: true ;
-		parentType: (consumerModel entityNamed: className).
+	| entity |
+	entity := resourceModel newMethodNamed: methodName.
+	entity isStub: false.
+	className ifNotNil: [ entity parentType: (resourceModel entityNamed: className) ].
+	entity := consumerModel newMethodNamed: methodName.
+	entity isStub: true.
+	className ifNotNil: [ entity parentType: (consumerModel entityNamed: className) ]
 
 ]
 
@@ -106,47 +107,76 @@ FamixJavaFusionnerTest >> testStubClassAndAttribute [
 ]
 
 { #category : #tests }
-FamixJavaFusionnerTest >> testStubClassInvocationReceiver [
-	"caller() { Blah.meth(); }
-	 resourceModel: Blah, meth
-	 consumerModel: Blah, meth, caller, invocation"
+FamixJavaFusionnerTest >> testStubClassAndMethod [
 
-	| invoc |
 	self class: 'Blah'.
-	self method: 'meth' class: 'Blah'.
-	consumerModel newInvocation
-		sender: (consumerModel newMethodNamed: 'caller') ;
-		receiver: (consumerModel entityNamed: 'Blah') ;
-		candidates: { consumerModel entityNamed: 'meth' }.
+	self method: 'mth' class: 'Blah'.
 
-	self assert: consumerModel size equals: 4.
+	self assert: consumerModel size equals: 2.
 	self assert: resourceModel size equals: 2.
 	
 	fusionner fusion.
 
-	self assert: consumerModel size equals: 2.
+	self assert: consumerModel size equals: 0.
 	self assert: resourceModel size equals: 2.
+]
+
+{ #category : #tests }
+FamixJavaFusionnerTest >> testStubClassInvocationReceiver [
+	"note: need the sender of the invocatin to verify that the invocation is not stub"
+
+	| invoc |
+	self class: 'Blah'.
+	consumerModel newInvocation
+		sender: (consumerModel newMethodNamed: 'caller') ;
+		receiver: (consumerModel entityNamed: 'Blah').
+
+	self assert: consumerModel size equals: 3.
+	self assert: resourceModel size equals: 1.
+	
+	fusionner fusion.
+
+	self assert: consumerModel size equals: 2.
+	self assert: resourceModel size equals: 1.
 
 	self assert: (consumerModel entityNamed: 'caller') outgoingInvocations size equals: 1.
 	invoc := (consumerModel entityNamed: 'caller') outgoingInvocations anyOne.
 	self assert: invoc sender equals: (consumerModel entityNamed: 'caller').
 	self assert: invoc receiver equals: (resourceModel entityNamed: 'Blah').
-	self assert: invoc invokedEntity equals: (resourceModel entityNamed: 'meth').
 
 	self assert: (resourceModel entityNamed: 'Blah') receivingInvocations size equals: 1.
 	self
 		assert: (resourceModel entityNamed: 'Blah') receivingInvocations anyOne mooseModel
 		equals: consumerModel.
 
-	self assert: (resourceModel entityNamed: 'meth') incomingInvocations size equals: 1.
-	self
-		assert: (resourceModel entityNamed: 'meth') incomingInvocations anyOne mooseModel
-		equals: consumerModel.
+]
+
+{ #category : #tests }
+FamixJavaFusionnerTest >> testStubInvokedMethod [
+
+	| invoc |
+	self method: 'meth' class: nil.
+	consumerModel newInvocation
+		sender: (consumerModel newMethodNamed: 'caller') ;
+		candidates: { consumerModel entityNamed: 'meth' }.
+
+	self assert: consumerModel size equals: 3.
+	self assert: resourceModel size equals: 1.
+	
+	fusionner fusion.
+
+	self assert: consumerModel size equals: 2.
+	self assert: resourceModel size equals: 1.
+
+	self assert: (consumerModel entityNamed: 'caller') outgoingInvocations size equals: 1.
+	invoc := (consumerModel entityNamed: 'caller') outgoingInvocations anyOne.
+	self assert: invoc sender equals: (consumerModel entityNamed: 'caller').
+	self assert: invoc invokedEntity equals: (resourceModel entityNamed: 'meth').
 
 ]
 
 { #category : #tests }
-FamixJavaFusionnerTest >> testStubInheritance [
+FamixJavaFusionnerTest >> testStubSuperClass [
 	"non-stub class inheriting from stub class"
 
 	self class: 'SuperBlah'.

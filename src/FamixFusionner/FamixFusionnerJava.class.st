@@ -94,30 +94,12 @@ FamixFusionnerJava >> resourceModel: anObject [
 ]
 
 { #category : #visiting }
-FamixFusionnerJava >> visitClass: aFamixJavaClass [
-
-	self visitFamixTClassMetrics: aFamixJavaClass.
-	self visitFamixTCanBeAbstract: aFamixJavaClass.
-	self visitFamixTCanBeClassSide: aFamixJavaClass.
-	self visitFamixTCanBeFinal: aFamixJavaClass.
-	self visitFamixTCanImplement: aFamixJavaClass.
-	self visitFamixTClass: aFamixJavaClass.
-	self visitFamixTClassMetrics: aFamixJavaClass.
-	self visitFamixTHasVisibility: aFamixJavaClass.
-	self visitFamixTImportable: aFamixJavaClass.
-	self visitFamixTLCOMMetrics: aFamixJavaClass.
-	self visitFamixTPackageable: aFamixJavaClass.
-	self visitFamixTWithImports: aFamixJavaClass.
-
-]
-
-{ #category : #visiting }
 FamixFusionnerJava >> visitFamixJavaType: aFamixJavaType [
 
 	self visitFamixJavaTBound: aFamixJavaType.
 	self visitFamixTConcreteParameterType: aFamixJavaType.
-	"self visitFamixTWithMethods: aFamixJavaType."
-	self visitFamixJavaContainerEntity: aFamixJavaType.
+	"self visitFamixTWithMethods: aFamixJavaType.
+	self visitFamixJavaContainerEntity: aFamixJavaType."
 
 ]
 
@@ -181,6 +163,23 @@ FamixFusionnerJava >> visitFamixTInvocationsReceiver: aFamixTInvocationsReceiver
 			ifTrue: [ consumerModel remove: invocation ]
 			ifFalse: [ invocation receiver: resourceEntity ]
 	]
+
+]
+
+{ #category : #'visiting - traits' }
+FamixFusionnerJava >> visitFamixTMethod: aFamixTMethod [
+
+	"self visitFamixTHasSignature: aFamixTMethod."
+	self visitFamixTInvocable: aFamixTMethod.
+	"self visitFamixTMethodMetrics: aFamixTMethod.
+	self visitFamixTNamedEntity: aFamixTMethod."
+	self visitFamixTTypedEntity: aFamixTMethod.
+	"self visitFamixTWithImplicitVariables: aFamixTMethod.
+	self visitFamixTWithLocalVariables: aFamixTMethod.
+	self visitFamixTWithParameters: aFamixTMethod."
+	self visitFamixTWithStatements: aFamixTMethod.
+	"self visitTEntityMetaLevelDependency: aFamixTMethod.
+	self acceptMeIfNotNil: aFamixTMethod parentType."
 
 ]
 
