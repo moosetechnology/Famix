@@ -82,6 +82,33 @@ FamixJavaFusionnerTest >> testClassWithStubInheritance [
 ]
 
 { #category : #tests }
+FamixJavaFusionnerTest >> testMethodWithStubDeclaredType [
+
+	self class: 'Blah'.
+	(consumerModel newMethodNamed: 'meth')
+		stub: false ;
+		declaredType: (consumerModel entityNamed: 'Blah').
+
+	self assert: consumerModel size equals: 2.
+	self assert: resourceModel size equals: 1.
+
+	fusionner fusion.
+
+	self assert: consumerModel size equals: 1.
+	self assert: resourceModel size equals: 1.
+
+	self assert: (consumerModel entityNamed: 'Blah') isNil.
+	self
+		assert: (consumerModel entityNamed: 'meth') declaredType
+		equals: (resourceModel entityNamed: 'Blah').
+
+	self assert: (resourceModel entityNamed: 'Blah') typedEntities size equals: 1.
+	self
+		assert: (resourceModel entityNamed: 'Blah') typedEntities anyOne 
+		equals: (consumerModel entityNamed: 'meth')
+]
+
+{ #category : #tests }
 FamixJavaFusionnerTest >> testStubClass [
 
 	self class: 'Blah'.
@@ -123,7 +150,7 @@ FamixJavaFusionnerTest >> testStubClassAndMethod [
 
 { #category : #tests }
 FamixJavaFusionnerTest >> testStubClassInvocationReceiver [
-	"note: need the sender of the invocatin to verify that the invocation is not stub"
+	"note: need the sender of the invocation to verify that the invocation is not stub"
 
 	| invoc |
 	self class: 'Blah'.
