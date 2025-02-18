@@ -303,7 +303,6 @@ FamixJavaGenerator >> defineHierarchy [
 	localVariable --|> #TCanBeFinal.
 	localVariable --|> #TWithComments.
 
-	namedEntity --|> #TInvocationsReceiver.
 	namedEntity --|> #TWithAnnotationInstances.
 	namedEntity --|> #TEntityMetaLevelDependency.
 	namedEntity --|> sourcedEntity.
