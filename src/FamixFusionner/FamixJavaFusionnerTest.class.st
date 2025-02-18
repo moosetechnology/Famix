@@ -43,6 +43,19 @@ FamixJavaFusionnerTest >> inheritanceFrom: subName to: superName [
 ]
 
 { #category : #running }
+FamixJavaFusionnerTest >> localVariable: variableName method: methodName [
+
+	| entity |
+	entity := resourceModel newLocalVariableNamed: variableName.
+	entity isStub: false.
+	methodName ifNotNil: [ entity parentBehaviouralEntity: (resourceModel entityNamed: methodName) ].
+	entity := consumerModel newLocalVariableNamed: variableName.
+	entity isStub: true.
+	methodName ifNotNil: [ entity parentBehaviouralEntity: (consumerModel entityNamed: methodName) ]
+
+]
+
+{ #category : #running }
 FamixJavaFusionnerTest >> method: methodName class: className [
 
 	| entity |
@@ -91,6 +104,30 @@ FamixJavaFusionnerTest >> testAccessedStubAttribute [
 ]
 
 { #category : #tests }
+FamixJavaFusionnerTest >> testAccessedStubLocalVariable [
+	"non stub method accessing a stub attribute...."
+
+	| access |
+	self localVariable: 'var' method: nil.
+	consumerModel newAccess
+		accessor: (consumerModel newMethodNamed: 'meth') ;
+		variable: (consumerModel entityNamed: 'var').
+
+	self assert: consumerModel size equals: 3.
+	self assert: resourceModel size equals: 1.
+
+	fusionner fusion.
+
+	self assert: consumerModel size equals: 2.
+	self assert: resourceModel size equals: 1.
+
+	self assert: (consumerModel entityNamed: 'meth') accesses size equals: 1.
+	access := (consumerModel entityNamed: 'meth') accesses anyOne.
+	self assert: access variable equals: (resourceModel entityNamed: 'var').
+
+]
+
+{ #category : #tests }
 FamixJavaFusionnerTest >> testAttributeWithStubDeclaredType [
 
 	self class: 'Blah'.
@@ -131,6 +168,33 @@ FamixJavaFusionnerTest >> testClassWithStubInheritance [
 
 	self assert: consumerModel size equals: 0.
 	self assert: resourceModel size equals: 3.
+]
+
+{ #category : #tests }
+FamixJavaFusionnerTest >> testLocalVariableWithStubDeclaredType [
+
+	self class: 'Blah'.
+	(consumerModel newLocalVariableNamed: 'var')
+		stub: false ;
+		declaredType: (consumerModel entityNamed: 'Blah').
+
+	self assert: consumerModel size equals: 2.
+	self assert: resourceModel size equals: 1.
+
+	fusionner fusion.
+
+	self assert: consumerModel size equals: 1.
+	self assert: resourceModel size equals: 1.
+
+	self assert: (consumerModel entityNamed: 'Blah') isNil.
+	self
+		assert: (consumerModel entityNamed: 'var') declaredType
+		equals: (resourceModel entityNamed: 'Blah').
+
+	self assert: (resourceModel entityNamed: 'Blah') typedEntities size equals: 1.
+	self
+		assert: (resourceModel entityNamed: 'Blah') typedEntities anyOne 
+		equals: (consumerModel entityNamed: 'var')
 ]
 
 { #category : #tests }
