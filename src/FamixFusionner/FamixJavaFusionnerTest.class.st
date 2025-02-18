@@ -69,6 +69,19 @@ FamixJavaFusionnerTest >> method: methodName class: className [
 ]
 
 { #category : #running }
+FamixJavaFusionnerTest >> parameter: parameterName method: methodName [
+
+	| entity |
+	entity := resourceModel newParameterNamed: parameterName.
+	entity isStub: false.
+	methodName ifNotNil: [ entity parentBehaviouralEntity: (resourceModel entityNamed: methodName) ].
+	entity := consumerModel newParameterNamed: parameterName.
+	entity isStub: true.
+	methodName ifNotNil: [ entity parentBehaviouralEntity: (consumerModel entityNamed: methodName) ]
+
+]
+
+{ #category : #running }
 FamixJavaFusionnerTest >> setUp [
 	super setUp.
 
@@ -124,6 +137,30 @@ FamixJavaFusionnerTest >> testAccessedStubLocalVariable [
 	self assert: (consumerModel entityNamed: 'meth') accesses size equals: 1.
 	access := (consumerModel entityNamed: 'meth') accesses anyOne.
 	self assert: access variable equals: (resourceModel entityNamed: 'var').
+
+]
+
+{ #category : #tests }
+FamixJavaFusionnerTest >> testAccessedStubParameter [
+	"non stub method accessing a stub attribute...."
+
+	| access |
+	self parameter: 'param' method: nil.
+	consumerModel newAccess
+		accessor: (consumerModel newMethodNamed: 'meth') ;
+		variable: (consumerModel entityNamed: 'param').
+
+	self assert: consumerModel size equals: 3.
+	self assert: resourceModel size equals: 1.
+
+	fusionner fusion.
+
+	self assert: consumerModel size equals: 2.
+	self assert: resourceModel size equals: 1.
+
+	self assert: (consumerModel entityNamed: 'meth') accesses size equals: 1.
+	access := (consumerModel entityNamed: 'meth') accesses anyOne.
+	self assert: access variable equals: (resourceModel entityNamed: 'param').
 
 ]
 
@@ -222,6 +259,33 @@ FamixJavaFusionnerTest >> testMethodWithStubDeclaredType [
 	self
 		assert: (resourceModel entityNamed: 'Blah') typedEntities anyOne 
 		equals: (consumerModel entityNamed: 'meth')
+]
+
+{ #category : #tests }
+FamixJavaFusionnerTest >> testParameterWithStubDeclaredType [
+
+	self class: 'Blah'.
+	(consumerModel newParameterNamed: 'param')
+		stub: false ;
+		declaredType: (consumerModel entityNamed: 'Blah').
+
+	self assert: consumerModel size equals: 2.
+	self assert: resourceModel size equals: 1.
+
+	fusionner fusion.
+
+	self assert: consumerModel size equals: 1.
+	self assert: resourceModel size equals: 1.
+
+	self assert: (consumerModel entityNamed: 'Blah') isNil.
+	self
+		assert: (consumerModel entityNamed: 'param') declaredType
+		equals: (resourceModel entityNamed: 'Blah').
+
+	self assert: (resourceModel entityNamed: 'Blah') typedEntities size equals: 1.
+	self
+		assert: (resourceModel entityNamed: 'Blah') typedEntities anyOne 
+		equals: (consumerModel entityNamed: 'param')
 ]
 
 { #category : #tests }
