@@ -12,12 +12,13 @@ Class {
 { #category : #running }
 FamixJavaFusionnerTest >> attribute: attributeName class: className [
 
-	(resourceModel newAttributeNamed: attributeName)
-		isStub: false ;
-		parentType: (resourceModel entityNamed: className).
-	(consumerModel newAttributeNamed: attributeName)
-		isStub: true ;
-		parentType: (consumerModel entityNamed: className).
+	| entity |
+	entity := resourceModel newAttributeNamed: attributeName.
+	entity isStub: false.
+	className ifNotNil: [ entity parentType: (resourceModel entityNamed: className) ].
+	entity := consumerModel newAttributeNamed: attributeName.
+	entity isStub: true.
+	className ifNotNil: [ entity parentType: (consumerModel entityNamed: className) ]
 
 ]
 
@@ -63,6 +64,57 @@ FamixJavaFusionnerTest >> setUp [
 	fusionner := FamixFusionnerJava new
 		resourceModel: resourceModel ;
 		consumerModel: consumerModel 
+]
+
+{ #category : #tests }
+FamixJavaFusionnerTest >> testAccessedStubAttribute [
+	"non stub method accessing a stub attribute"
+
+	| access |
+	self attribute: 'att' class: nil.
+	consumerModel newAccess
+		accessor: (consumerModel newMethodNamed: 'meth') ;
+		variable: (consumerModel entityNamed: 'att').
+
+	self assert: consumerModel size equals: 3.
+	self assert: resourceModel size equals: 1.
+
+	fusionner fusion.
+
+	self assert: consumerModel size equals: 2.
+	self assert: resourceModel size equals: 1.
+
+	self assert: (consumerModel entityNamed: 'meth') accesses size equals: 1.
+	access := (consumerModel entityNamed: 'meth') accesses anyOne.
+	self assert: access variable equals: (resourceModel entityNamed: 'att').
+
+]
+
+{ #category : #tests }
+FamixJavaFusionnerTest >> testAttributeWithStubDeclaredType [
+
+	self class: 'Blah'.
+	(consumerModel newAttributeNamed: 'att')
+		stub: false ;
+		declaredType: (consumerModel entityNamed: 'Blah').
+
+	self assert: consumerModel size equals: 2.
+	self assert: resourceModel size equals: 1.
+
+	fusionner fusion.
+
+	self assert: consumerModel size equals: 1.
+	self assert: resourceModel size equals: 1.
+
+	self assert: (consumerModel entityNamed: 'Blah') isNil.
+	self
+		assert: (consumerModel entityNamed: 'att') declaredType
+		equals: (resourceModel entityNamed: 'Blah').
+
+	self assert: (resourceModel entityNamed: 'Blah') typedEntities size equals: 1.
+	self
+		assert: (resourceModel entityNamed: 'Blah') typedEntities anyOne 
+		equals: (consumerModel entityNamed: 'att')
 ]
 
 { #category : #tests }

@@ -104,6 +104,15 @@ FamixFusionnerJava >> visitFamixJavaType: aFamixJavaType [
 ]
 
 { #category : #'visiting - traits' }
+FamixFusionnerJava >> visitFamixTAccess: aFamixTAccess [
+
+	self visitFamixTAssociation: aFamixTAccess.
+	"self acceptMeIfNotNil: aFamixTAccess accessor.
+	self acceptMeIfNotNil: aFamixTAccess variable."
+
+]
+
+{ #category : #'visiting - traits' }
 FamixFusionnerJava >> visitFamixTAssociation: aFamixTAssociation [
 	"Note 1: we arrived here while visiting the (stub) target entity
 	 Note 2: association don't have the #isStub property, but if the #source is a stub, then the association is
@@ -112,6 +121,14 @@ FamixFusionnerJava >> visitFamixTAssociation: aFamixTAssociation [
 	aFamixTAssociation source isStub
 		ifTrue: [ consumerModel remove: aFamixTAssociation ]
 		ifFalse: [ aFamixTAssociation target: resourceEntity ]
+]
+
+{ #category : #'visiting - traits' }
+FamixFusionnerJava >> visitFamixTAttribute: aFamixTAttribute [
+
+	self visitFamixTStructuralEntity: aFamixTAttribute.
+	"self acceptMeIfNotNil: aFamixTAttribute parentType."
+
 ]
 
 { #category : #'visiting - traits' }
