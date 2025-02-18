@@ -43,7 +43,8 @@ Class {
 		'tBound',
 		'wildcard',
 		'parameterConcretization',
-		'concretization'
+		'concretization',
+		'variable'
 	],
 	#classInstVars : [
 		'builder'
@@ -162,6 +163,7 @@ FamixJavaGenerator >> defineClasses [
 	primitiveType withTesting.
 	reference := self newClassNamed: #Reference.
 	type := self newClassNamed: #Type.
+	variable := self newAbstractClassNamed: #Variable.
 	unknownVariable := self newClassNamed: #UnknownVariable.
 
 	parametricClass := self newClassNamed: #ParametricClass.
@@ -197,18 +199,17 @@ FamixJavaGenerator >> defineHierarchy [
 	annotationType --|> #THasVisibility.
 	annotationType --|> #TImplementable.
 
-	annotationTypeAttribute --|> namedEntity.
+	annotationTypeAttribute --|> variable.
 	annotationTypeAttribute --|> #TAnnotationTypeAttribute.
 	annotationTypeAttribute --|> #TTypedAnnotationInstanceAttribute.
 	annotationTypeAttribute --|> #TWithComments.
 
-	attribute --|> namedEntity.
+	attribute --|> variable.
 	attribute --|> #TAttribute.
 	attribute --|> #TCanBeFinal.
 	attribute --|> #THasVisibility.
 	attribute --|> tCanBeVolatile.
 	attribute --|> tCanBeTransient.
-	attribute --|> #TInvocationsReceiver.
 	attribute --|> #TWithComments.
 	attribute --|> #TCanBeClassSide.
 
@@ -274,7 +275,7 @@ FamixJavaGenerator >> defineHierarchy [
 	enum --|> #TWithImports.
 	enum --|> #TImportable.
 
-	enumValue --|> namedEntity.
+	enumValue --|> variable.
 	enumValue --|> #TWithComments.
 	enumValue --|> #TEnumValue.
 
@@ -285,20 +286,21 @@ FamixJavaGenerator >> defineHierarchy [
 	exception --|> #TCanImplement.
 	exception --|> #TWithTypes.
 
-	implicitVariable --|> namedEntity.
+	implicitVariable --|> variable.
 	implicitVariable --|> #TImplicitVariable.
-	implicitVariable --|> #TInvocationsReceiver.
 
 	import --|> #TImport.
 
 	inheritance --|> #TInheritance.
 
 	invocation --|> #TInvocation.
+	
+	variable --|> namedEntity.
+	variable --|> #TInvocationsReceiver. 
 
-	localVariable --|> namedEntity.
+	localVariable --|> variable.
 	localVariable --|> #TLocalVariable.
 	localVariable --|> #TCanBeFinal.
-	localVariable --|> #TInvocationsReceiver.
 	localVariable --|> #TWithComments.
 
 	namedEntity --|> #TInvocationsReceiver.
@@ -312,7 +314,7 @@ FamixJavaGenerator >> defineHierarchy [
 	package --|> #TWithComments.
 	package --|> #TImportable.
 
-	parameter --|> namedEntity.
+	parameter --|> variable.
 	parameter --|> #TParameter.
 	parameter --|> #TCanBeFinal.
 	parameter --|> #TWithComments.
@@ -327,10 +329,8 @@ FamixJavaGenerator >> defineHierarchy [
 	type --|> containerEntity.
 	type --|> #TWithMethods.
 
-	unknownVariable --|> namedEntity.
+	unknownVariable --|> variable.
 	unknownVariable --|> #TUnknownVariable.
-	unknownVariable --|> #TInvocationsReceiver.
-
 
 	parametricClass --|> class.
 	parametricClass --|> #TParametricEntity.
