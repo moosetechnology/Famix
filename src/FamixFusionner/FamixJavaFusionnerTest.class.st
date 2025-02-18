@@ -289,6 +289,30 @@ FamixJavaFusionnerTest >> testParameterWithStubDeclaredType [
 ]
 
 { #category : #tests }
+FamixJavaFusionnerTest >> testReferencedStubClass [
+	"non stub method referencing a stub class"
+
+	| reference |
+	self class: 'Blah'.
+	consumerModel newReference
+		referencer: (consumerModel newMethodNamed: 'meth') ;
+		referredEntity: (consumerModel entityNamed: 'Blah').
+
+	self assert: consumerModel size equals: 3.
+	self assert: resourceModel size equals: 1.
+
+	fusionner fusion.
+
+	self assert: consumerModel size equals: 2.
+	self assert: resourceModel size equals: 1.
+
+	self assert: (consumerModel entityNamed: 'meth') outgoingReferences size equals: 1.
+	reference := (consumerModel entityNamed: 'meth') outgoingReferences anyOne.
+	self assert: reference referredEntity equals: (resourceModel entityNamed: 'Blah').
+
+]
+
+{ #category : #tests }
 FamixJavaFusionnerTest >> testStubClass [
 
 	self class: 'Blah'.

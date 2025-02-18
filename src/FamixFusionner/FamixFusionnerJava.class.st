@@ -184,6 +184,14 @@ FamixFusionnerJava >> visitFamixTInvocationsReceiver: aFamixTInvocationsReceiver
 ]
 
 { #category : #'visiting - traits' }
+FamixFusionnerJava >> visitFamixTLocalVariable: aFamixTLocalVariable [
+
+	self visitFamixTStructuralEntity: aFamixTLocalVariable.
+	"self acceptMeIfNotNil: aFamixTLocalVariable parentBehaviouralEntity."
+
+]
+
+{ #category : #'visiting - traits' }
 FamixFusionnerJava >> visitFamixTMethod: aFamixTMethod [
 
 	"self visitFamixTHasSignature: aFamixTMethod."
@@ -202,6 +210,23 @@ FamixFusionnerJava >> visitFamixTMethod: aFamixTMethod [
 
 { #category : #'visiting - traits' }
 FamixFusionnerJava >> visitFamixTPackageable: aFamixTPackageable [
+
+]
+
+{ #category : #'visiting - traits' }
+FamixFusionnerJava >> visitFamixTParameter: aFamixTParameter [
+
+	self visitFamixTStructuralEntity: aFamixTParameter.
+	"self acceptMeIfNotNil: aFamixTParameter parentBehaviouralEntity."
+
+]
+
+{ #category : #'visiting - traits' }
+FamixFusionnerJava >> visitFamixTReference: aFamixTReference [
+
+	self visitFamixTAssociation: aFamixTReference.
+	"self acceptMeIfNotNil: aFamixTReference referencer.
+	self acceptMeIfNotNil: aFamixTReference referredEntity."
 
 ]
 
