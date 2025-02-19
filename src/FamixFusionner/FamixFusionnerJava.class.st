@@ -242,6 +242,35 @@ FamixFusionnerJava >> visitFamixTReference: aFamixTReference [
 ]
 
 { #category : #'visiting - traits' }
+FamixFusionnerJava >> visitFamixTThrowable: aFamixTThrowable [
+	
+	aFamixTThrowable catchingEntities do: [ :catchingEntity |
+		catchingEntity isStub
+			ifFalse: [
+				catchingEntity caughtExceptions remove: aFamixTThrowable.
+				catchingEntity addCaughtException: resourceEntity.
+			]
+	].
+
+	aFamixTThrowable declaringEntities do: [ :declaringEntity |
+		declaringEntity isStub
+			ifFalse: [
+				declaringEntity declaredExceptions remove: aFamixTThrowable.
+				declaringEntity addDeclaredException: resourceEntity.
+			]
+	].
+
+	aFamixTThrowable throwingEntities do: [ :throwingEntity |
+		throwingEntity isStub
+			ifFalse: [
+				throwingEntity thrownExceptions remove: aFamixTThrowable.
+				throwingEntity addThrownException: resourceEntity.
+			]
+	].
+
+]
+
+{ #category : #'visiting - traits' }
 FamixFusionnerJava >> visitFamixTType: aFamixTType [
 
 	self visitFamixTCanBeStub: aFamixTType.
@@ -286,6 +315,19 @@ FamixFusionnerJava >> visitFamixTWithEnumValues: aFamixTWithEnumValues [
 	"don't visit parent/children relationships in fusionner (if parent or children are stub then entity is stub)"
 
 	"self visitList: aFamixTWithEnumValues enumValues."
+
+]
+
+{ #category : #'visiting - traits' }
+FamixFusionnerJava >> visitFamixTWithExceptions: aFamixTWithExceptions [
+	"not doing anything to avoid infinite recursion
+	 (visitFamixTWithExceptions -> visitFamixTThrowable -> visitFamixTWithExceptions...
+	It seems less likely than a non-stub TThrowable be used by a stub TWithExceptions"
+
+
+	"self visitList: aFamixTWithExceptions caughtExceptions.
+	self visitList: aFamixTWithExceptions declaredExceptions.
+	self visitList: aFamixTWithExceptions thrownExceptions."
 
 ]
 
