@@ -558,6 +558,31 @@ FamixJavaFusionnerTest >> testStubClassAndMethod [
 ]
 
 { #category : #tests }
+FamixJavaFusionnerTest >> testStubClassAndSuperClass [
+
+	self class: 'Blah'.
+	self class: 'SuperBlah'.
+	resourceModel newInheritance
+		superclass: (resourceModel entityNamed: 'SuperBlah') ;
+		subclass: (resourceModel entityNamed: 'Blah').
+	consumerModel newInheritance
+		superclass: (consumerModel entityNamed: 'SuperBlah') ;
+		subclass: (consumerModel entityNamed: 'Blah').
+
+	self assert: consumerModel size equals: 3.
+	self assert: resourceModel size equals: 3.
+
+	fusionner fusion.
+
+	self assert: consumerModel size equals: 0.
+	self assert: resourceModel size equals: 3.
+
+	self
+		assert: (resourceModel entityNamed: 'Blah') superclass
+		equals: (resourceModel entityNamed: 'SuperBlah')
+]
+
+{ #category : #tests }
 FamixJavaFusionnerTest >> testStubClassInvocationReceiver [
 	"note: need the sender of the invocation to verify that the invocation is not stub"
 
@@ -601,6 +626,33 @@ FamixJavaFusionnerTest >> testStubClassWithStubInheritance [
 
 	self assert: consumerModel size equals: 0.
 	self assert: resourceModel size equals: 3.
+]
+
+{ #category : #tests }
+FamixJavaFusionnerTest >> testStubExceptionWithStubSub [
+	"note: inheritance is visited twice for Exceptions (as Exception and as Class).
+	 If sub is a stub, inheritance link needs to be replaced also"
+
+	self exception: 'Blah'.
+	self exception: 'SuperBlah'.
+	resourceModel newInheritance
+		superclass: (resourceModel entityNamed: 'SuperBlah') ;
+		subclass: (resourceModel entityNamed: 'Blah').
+	consumerModel newInheritance
+		superclass: (consumerModel entityNamed: 'SuperBlah') ;
+		subclass: (consumerModel entityNamed: 'Blah').
+
+	self assert: consumerModel size equals: 3.
+	self assert: resourceModel size equals: 3.
+
+	fusionner fusion.
+
+	self assert: consumerModel size equals: 0.
+	self assert: resourceModel size equals: 3.
+
+	self
+		assert: (resourceModel entityNamed: 'Blah') superclass
+		equals: (resourceModel entityNamed: 'SuperBlah')
 ]
 
 { #category : #tests }

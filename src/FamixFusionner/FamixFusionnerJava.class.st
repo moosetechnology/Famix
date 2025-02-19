@@ -117,10 +117,16 @@ FamixFusionnerJava >> visitFamixTAccessible: aFamixTAccessible [
 FamixFusionnerJava >> visitFamixTAssociation: aFamixTAssociation [
 	"Note 1: we arrived here while visiting the (stub) target entity
 	 Note 2: association don't have the #isStub property, but if the #source is a stub, then the association is
-	 In that case, it should be removed from the consumerModel because it must exist in the resourceModel"
+	 In that case, it should be removed from the consumerModel because it must exist in the resourceModel
+	 And if we remove it, we should 'unlink' it from both entities in case they are visited again later
+	 (might happen for inheritance of FamixJavaExceptions)"
 
 	aFamixTAssociation source isStub
-		ifTrue: [ consumerModel remove: aFamixTAssociation ]
+		ifTrue: [
+			aFamixTAssociation source: nil.
+			aFamixTAssociation target: nil.
+			consumerModel remove: aFamixTAssociation
+		]
 		ifFalse: [ aFamixTAssociation target: resourceEntity ]
 ]
 
