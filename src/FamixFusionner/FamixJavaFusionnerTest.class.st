@@ -69,6 +69,14 @@ FamixJavaFusionnerTest >> method: methodName class: className [
 ]
 
 { #category : #running }
+FamixJavaFusionnerTest >> package: aName [
+
+	(resourceModel newPackageNamed: aName) isStub: false.
+	(consumerModel newPackageNamed: aName) isStub: true.
+
+]
+
+{ #category : #running }
 FamixJavaFusionnerTest >> parameter: parameterName method: methodName [
 
 	| entity |
