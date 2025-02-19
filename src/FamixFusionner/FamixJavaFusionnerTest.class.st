@@ -31,15 +31,7 @@ FamixJavaFusionnerTest >> class: aName [
 ]
 
 { #category : #running }
-FamixJavaFusionnerTest >> exception: aName [
-
-	(resourceModel newExceptionNamed: aName) isStub: false.
-	(consumerModel newExceptionNamed: aName) isStub: true.
-
-]
-
-{ #category : #running }
-FamixJavaFusionnerTest >> inheritanceFrom: subName to: superName [
+FamixJavaFusionnerTest >> class: subName inheritsFrom: superName [
 	"note: Associations don't have a #isStub property"
 
 	resourceModel newInheritance
@@ -48,6 +40,14 @@ FamixJavaFusionnerTest >> inheritanceFrom: subName to: superName [
 	consumerModel newInheritance
 		subclass: (consumerModel entityNamed: subName) ;
 		superclass: (consumerModel entityNamed: superName)
+]
+
+{ #category : #running }
+FamixJavaFusionnerTest >> exception: aName [
+
+	(resourceModel newExceptionNamed: aName) isStub: false.
+	(consumerModel newExceptionNamed: aName) isStub: true.
+
 ]
 
 { #category : #running }
@@ -205,22 +205,6 @@ FamixJavaFusionnerTest >> testAttributeWithStubDeclaredType [
 	self
 		assert: (resourceModel entityNamed: 'Blah') typedEntities anyOne 
 		equals: (consumerModel entityNamed: 'att')
-]
-
-{ #category : #tests }
-FamixJavaFusionnerTest >> testClassWithStubInheritance [
-
-	self class: 'Blah'.
-	self class: 'SuperBlah'.
-	self inheritanceFrom: 'Blah' to: 'SuperBlah'.
-
-	self assert: consumerModel size equals: 3.
-	self assert: resourceModel size equals: 3.
-	
-	fusionner fusion.
-
-	self assert: consumerModel size equals: 0.
-	self assert: resourceModel size equals: 3.
 ]
 
 { #category : #tests }
@@ -471,6 +455,22 @@ FamixJavaFusionnerTest >> testStubClassInvocationReceiver [
 		assert: (resourceModel entityNamed: 'Blah') receivingInvocations anyOne mooseModel
 		equals: consumerModel.
 
+]
+
+{ #category : #tests }
+FamixJavaFusionnerTest >> testStubClassWithStubInheritance [
+
+	self class: 'Blah'.
+	self class: 'SuperBlah'.
+	self class: 'Blah' inheritsFrom: 'SuperBlah'.
+
+	self assert: consumerModel size equals: 3.
+	self assert: resourceModel size equals: 3.
+	
+	fusionner fusion.
+
+	self assert: consumerModel size equals: 0.
+	self assert: resourceModel size equals: 3.
 ]
 
 { #category : #tests }

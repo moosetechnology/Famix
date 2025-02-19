@@ -357,7 +357,8 @@ FamixFusionnerJava >> visitFamixTWithImplicitVariables: aFamixTWithImplicitVaria
 
 { #category : #'visiting - traits' }
 FamixFusionnerJava >> visitFamixTWithInheritances: aFamixTWithInheritances [
-	"default implementation visits superInheritances, but we need subInheritances"
+	"default implementation visits superInheritances, but we need subInheritances
+	 (because it is more probable to have a stub super-class inherited by a non-stub class than the opposite)"
 
 	aFamixTWithInheritances subInheritances do: [ :inheritance | self visitFamixTAssociation: inheritance ]
 
