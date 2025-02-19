@@ -43,6 +43,22 @@ FamixJavaFusionnerTest >> class: subName inheritsFrom: superName [
 ]
 
 { #category : #running }
+FamixJavaFusionnerTest >> consumerClass: subName inheritsFrom: superName [
+
+	consumerModel newInheritance
+		superclass: (consumerModel entityNamed: superName) ;
+		subclass: (consumerModel newClassNamed: subName)
+
+]
+
+{ #category : #running }
+FamixJavaFusionnerTest >> consumerVariable: varName declaredType: typeName [
+
+	(consumerModel newLocalVariableNamed: varName)
+		declaredType: (consumerModel entityNamed: typeName).
+]
+
+{ #category : #running }
 FamixJavaFusionnerTest >> exception: aName [
 
 	(resourceModel newExceptionNamed: aName) isStub: false.
@@ -414,6 +430,66 @@ FamixJavaFusionnerTest >> testReferencedStubClass [
 	self assert: (consumerModel entityNamed: 'meth') outgoingReferences size equals: 1.
 	reference := (consumerModel entityNamed: 'meth') outgoingReferences anyOne.
 	self assert: reference referredEntity equals: (resourceModel entityNamed: 'Blah').
+
+]
+
+{ #category : #tests }
+FamixJavaFusionnerTest >> testSeveralClassesWithOneStubSuperClass [
+
+	self class: 'SuperBlah'.
+	self consumerClass: 'Blah1' inheritsFrom: 'SuperBlah'.
+	self consumerClass: 'Blah2' inheritsFrom: 'SuperBlah'.
+	self consumerClass: 'Blah3' inheritsFrom: 'SuperBlah'.
+	self consumerClass: 'Blah4' inheritsFrom: 'SuperBlah'.
+	self consumerClass: 'Blah5' inheritsFrom: 'SuperBlah'.
+
+	self assert: consumerModel size equals: 11.
+	self assert: resourceModel size equals: 1.
+
+	fusionner fusion.
+
+	self assert: consumerModel size equals: 10.
+	self assert: resourceModel size equals: 1.
+
+	self assert: (consumerModel entityNamed: 'SuperBlah') isNil.
+
+	self assert: (resourceModel entityNamed: 'SuperBlah') subInheritances size equals: 5.
+
+	#(Blah1 Blah2 Blah3 Blah4 Blah5) do: [ :subname |
+		self
+			assert: (consumerModel entityNamed: subname) superclass
+			equals: (resourceModel entityNamed: 'SuperBlah')
+	]
+
+]
+
+{ #category : #tests }
+FamixJavaFusionnerTest >> testSeveralVariableWithStubDeclaredType [
+
+	self class: 'Blah'.
+	self consumerVariable: 'var1' declaredType: 'Blah'.
+	self consumerVariable: 'var2' declaredType: 'Blah'.
+	self consumerVariable: 'var3' declaredType: 'Blah'.
+	self consumerVariable: 'var4' declaredType: 'Blah'.
+	self consumerVariable: 'var5' declaredType: 'Blah'.
+
+	self assert: consumerModel size equals: 6.
+	self assert: resourceModel size equals: 1.
+
+	fusionner fusion.
+
+	self assert: consumerModel size equals: 5.
+	self assert: resourceModel size equals: 1.
+
+	self assert: (consumerModel entityNamed: 'Blah') isNil.
+
+	self assert: (resourceModel entityNamed: 'Blah') typedEntities size equals: 5.
+
+	#(var1 var2 var3 var4 var5) do: [ :varname |
+		self
+			assert: (consumerModel entityNamed: varname) declaredType
+			equals: (resourceModel entityNamed: 'Blah')
+	]
 
 ]
 

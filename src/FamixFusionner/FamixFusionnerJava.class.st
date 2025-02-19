@@ -160,7 +160,7 @@ FamixFusionnerJava >> visitFamixTInvocable: aFamixTInvocable [
 	 see also #visitFamixTInvocationReceiver:"
 
 	
-	aFamixTInvocable incomingInvocations do: [ :invocation |
+	aFamixTInvocable incomingInvocations copy do: [ :invocation |
 		invocation sender isStub
 			ifTrue: [ consumerModel remove: invocation ]
 			ifFalse: [
@@ -185,7 +185,7 @@ FamixFusionnerJava >> visitFamixTInvocationsReceiver: aFamixTInvocationsReceiver
 	 see also #visitFamixTInvocable:"
 
 	
-	aFamixTInvocationsReceiver receivingInvocations do: [ :invocation |
+	aFamixTInvocationsReceiver receivingInvocations copy do: [ :invocation |
 		invocation sender isStub
 			ifTrue: [ consumerModel remove: invocation ]
 			ifFalse: [ invocation receiver: resourceEntity ]
@@ -253,7 +253,7 @@ FamixFusionnerJava >> visitFamixTReference: aFamixTReference [
 { #category : #'visiting - traits' }
 FamixFusionnerJava >> visitFamixTThrowable: aFamixTThrowable [
 	
-	aFamixTThrowable catchingEntities do: [ :catchingEntity |
+	aFamixTThrowable catchingEntities copy do: [ :catchingEntity |
 		catchingEntity isStub
 			ifFalse: [
 				catchingEntity caughtExceptions remove: aFamixTThrowable.
@@ -261,7 +261,7 @@ FamixFusionnerJava >> visitFamixTThrowable: aFamixTThrowable [
 			]
 	].
 
-	aFamixTThrowable declaringEntities do: [ :declaringEntity |
+	aFamixTThrowable declaringEntities copy do: [ :declaringEntity |
 		declaringEntity isStub
 			ifFalse: [
 				declaringEntity declaredExceptions remove: aFamixTThrowable.
@@ -269,7 +269,7 @@ FamixFusionnerJava >> visitFamixTThrowable: aFamixTThrowable [
 			]
 	].
 
-	aFamixTThrowable throwingEntities do: [ :throwingEntity |
+	aFamixTThrowable throwingEntities copy do: [ :throwingEntity |
 		throwingEntity isStub
 			ifFalse: [
 				throwingEntity thrownExceptions remove: aFamixTThrowable.
@@ -289,9 +289,8 @@ FamixFusionnerJava >> visitFamixTType: aFamixTType [
 	"self acceptMeIfNotNil: aFamixTType typeContainer.
 	self visitList: aFamixTType typedEntities."
 
-	aFamixTType typedEntities do: [ :typedEntity |
-		typedEntity declaredType: resourceEntity 
-	]
+	aFamixTType typedEntities copy 
+		do: [ :typedEntity | typedEntity declaredType: resourceEntity ]
 
 ]
 
@@ -369,7 +368,8 @@ FamixFusionnerJava >> visitFamixTWithInheritances: aFamixTWithInheritances [
 	"default implementation visits superInheritances, but we need subInheritances
 	 (because it is more probable to have a stub super-class inherited by a non-stub class than the opposite)"
 
-	aFamixTWithInheritances subInheritances do: [ :inheritance | self visitFamixTAssociation: inheritance ]
+	aFamixTWithInheritances subInheritances copy
+		do: [ :inheritance | self visitFamixTAssociation: inheritance ]
 
 ]
 
