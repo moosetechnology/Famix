@@ -6,7 +6,7 @@ Class {
 		'consumerModel',
 		'fusionner'
 	],
-	#category : #'FamixFusionner-Tests'
+	#category : #'Famix-Java-Fusionner-Tests'
 }
 
 { #category : #running }

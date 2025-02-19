@@ -26,7 +26,7 @@ Class {
 		'consumerModel',
 		'resourceEntity'
 	],
-	#category : #FamixFusionner
+	#category : #'Famix-Java-Fusionner'
 }
 
 { #category : #'visiting - traits' }
