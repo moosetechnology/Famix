@@ -51,6 +51,18 @@ FamixJavaFusionnerTest >> exception: aName [
 ]
 
 { #category : #running }
+FamixJavaFusionnerTest >> interface: aName [
+
+	resourceModel newInterface
+		name: aName ;
+		isStub: false.
+	consumerModel newInterface
+		name: aName ;
+		isStub: true.
+
+]
+
+{ #category : #running }
 FamixJavaFusionnerTest >> localVariable: variableName method: methodName [
 
 	| entity |
@@ -205,6 +217,24 @@ FamixJavaFusionnerTest >> testAttributeWithStubDeclaredType [
 	self
 		assert: (resourceModel entityNamed: 'Blah') typedEntities anyOne 
 		equals: (consumerModel entityNamed: 'att')
+]
+
+{ #category : #tests }
+FamixJavaFusionnerTest >> testClassImplementingStubInterface [
+
+	self interface: 'IBlah'.
+	consumerModel newClassNamed: 'Blah'.
+	consumerModel newImplementation
+		implementingClass: (consumerModel entityNamed: 'Blah') ;
+		interface: (consumerModel entityNamed: 'IBlah').
+
+	self assert: consumerModel size equals: 3.
+	self assert: resourceModel size equals: 1.
+	
+	fusionner fusion.
+
+	self assert: consumerModel size equals: 2.
+	self assert: resourceModel size equals: 1.
 ]
 
 { #category : #tests }

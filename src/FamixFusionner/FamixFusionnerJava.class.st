@@ -145,6 +145,15 @@ FamixFusionnerJava >> visitFamixTDefinedInModule: aFamixTDefinedInModule [
 ]
 
 { #category : #'visiting - traits' }
+FamixFusionnerJava >> visitFamixTImplementation: aFamixTImplementation [
+
+	self visitFamixTAssociation: aFamixTImplementation.
+	"self acceptMeIfNotNil: aFamixTImplementation implementingClass.
+	self acceptMeIfNotNil: aFamixTImplementation interface."
+
+]
+
+{ #category : #'visiting - traits' }
 FamixFusionnerJava >> visitFamixTInvocable: aFamixTInvocable [
 	"similar to #visitFamixTAssociation:
 	 but the #target of the invocation is a collection
