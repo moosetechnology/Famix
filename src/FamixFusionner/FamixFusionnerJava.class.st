@@ -94,30 +94,21 @@ FamixFusionnerJava >> resourceModel: anObject [
 ]
 
 { #category : #visiting }
-FamixFusionnerJava >> visitClass: aFamixJavaClass [
-
-	self visitFamixTClassMetrics: aFamixJavaClass.
-	self visitFamixTCanBeAbstract: aFamixJavaClass.
-	self visitFamixTCanBeClassSide: aFamixJavaClass.
-	self visitFamixTCanBeFinal: aFamixJavaClass.
-	self visitFamixTCanImplement: aFamixJavaClass.
-	self visitFamixTClass: aFamixJavaClass.
-	self visitFamixTClassMetrics: aFamixJavaClass.
-	self visitFamixTHasVisibility: aFamixJavaClass.
-	self visitFamixTImportable: aFamixJavaClass.
-	self visitFamixTLCOMMetrics: aFamixJavaClass.
-	self visitFamixTPackageable: aFamixJavaClass.
-	self visitFamixTWithImports: aFamixJavaClass.
-
-]
-
-{ #category : #visiting }
 FamixFusionnerJava >> visitFamixJavaType: aFamixJavaType [
 
 	self visitFamixJavaTBound: aFamixJavaType.
 	self visitFamixTConcreteParameterType: aFamixJavaType.
-	"self visitFamixTWithMethods: aFamixJavaType."
-	self visitFamixJavaContainerEntity: aFamixJavaType.
+	"self visitFamixTWithMethods: aFamixJavaType.
+	self visitFamixJavaContainerEntity: aFamixJavaType."
+
+]
+
+{ #category : #'visiting - traits' }
+FamixFusionnerJava >> visitFamixTAccess: aFamixTAccess [
+
+	self visitFamixTAssociation: aFamixTAccess.
+	"self acceptMeIfNotNil: aFamixTAccess accessor.
+	self acceptMeIfNotNil: aFamixTAccess variable."
 
 ]
 
@@ -130,6 +121,14 @@ FamixFusionnerJava >> visitFamixTAssociation: aFamixTAssociation [
 	aFamixTAssociation source isStub
 		ifTrue: [ consumerModel remove: aFamixTAssociation ]
 		ifFalse: [ aFamixTAssociation target: resourceEntity ]
+]
+
+{ #category : #'visiting - traits' }
+FamixFusionnerJava >> visitFamixTAttribute: aFamixTAttribute [
+
+	self visitFamixTStructuralEntity: aFamixTAttribute.
+	"self acceptMeIfNotNil: aFamixTAttribute parentType."
+
 ]
 
 { #category : #'visiting - traits' }
@@ -185,7 +184,49 @@ FamixFusionnerJava >> visitFamixTInvocationsReceiver: aFamixTInvocationsReceiver
 ]
 
 { #category : #'visiting - traits' }
+FamixFusionnerJava >> visitFamixTLocalVariable: aFamixTLocalVariable [
+
+	self visitFamixTStructuralEntity: aFamixTLocalVariable.
+	"self acceptMeIfNotNil: aFamixTLocalVariable parentBehaviouralEntity."
+
+]
+
+{ #category : #'visiting - traits' }
+FamixFusionnerJava >> visitFamixTMethod: aFamixTMethod [
+
+	"self visitFamixTHasSignature: aFamixTMethod."
+	self visitFamixTInvocable: aFamixTMethod.
+	"self visitFamixTMethodMetrics: aFamixTMethod.
+	self visitFamixTNamedEntity: aFamixTMethod."
+	self visitFamixTTypedEntity: aFamixTMethod.
+	"self visitFamixTWithImplicitVariables: aFamixTMethod.
+	self visitFamixTWithLocalVariables: aFamixTMethod.
+	self visitFamixTWithParameters: aFamixTMethod."
+	self visitFamixTWithStatements: aFamixTMethod.
+	"self visitTEntityMetaLevelDependency: aFamixTMethod.
+	self acceptMeIfNotNil: aFamixTMethod parentType."
+
+]
+
+{ #category : #'visiting - traits' }
 FamixFusionnerJava >> visitFamixTPackageable: aFamixTPackageable [
+
+]
+
+{ #category : #'visiting - traits' }
+FamixFusionnerJava >> visitFamixTParameter: aFamixTParameter [
+
+	self visitFamixTStructuralEntity: aFamixTParameter.
+	"self acceptMeIfNotNil: aFamixTParameter parentBehaviouralEntity."
+
+]
+
+{ #category : #'visiting - traits' }
+FamixFusionnerJava >> visitFamixTReference: aFamixTReference [
+
+	self visitFamixTAssociation: aFamixTReference.
+	"self acceptMeIfNotNil: aFamixTReference referencer.
+	self acceptMeIfNotNil: aFamixTReference referredEntity."
 
 ]
 
