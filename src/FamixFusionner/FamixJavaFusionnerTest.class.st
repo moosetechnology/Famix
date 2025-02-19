@@ -31,6 +31,14 @@ FamixJavaFusionnerTest >> class: aName [
 ]
 
 { #category : #running }
+FamixJavaFusionnerTest >> exception: aName [
+
+	(resourceModel newExceptionNamed: aName) isStub: false.
+	(consumerModel newExceptionNamed: aName) isStub: true.
+
+]
+
+{ #category : #running }
 FamixJavaFusionnerTest >> inheritanceFrom: subName to: superName [
 	"note: Associations don't have a #isStub property"
 
@@ -65,6 +73,14 @@ FamixJavaFusionnerTest >> method: methodName class: className [
 	entity := consumerModel newMethodNamed: methodName.
 	entity isStub: true.
 	className ifNotNil: [ entity parentType: (consumerModel entityNamed: className) ]
+
+]
+
+{ #category : #running }
+FamixJavaFusionnerTest >> package: aName [
+
+	(resourceModel newPackageNamed: aName) isStub: false.
+	(consumerModel newPackageNamed: aName) isStub: true.
 
 ]
 
@@ -232,6 +248,81 @@ FamixJavaFusionnerTest >> testLocalVariableWithStubDeclaredType [
 	self
 		assert: (resourceModel entityNamed: 'Blah') typedEntities anyOne 
 		equals: (consumerModel entityNamed: 'var')
+]
+
+{ #category : #tests }
+FamixJavaFusionnerTest >> testMethodCatchStubException [
+
+	| except |
+
+	self exception: 'Except'.
+	(consumerModel newMethodNamed: 'meth')
+		addCaughtException: (consumerModel entityNamed: 'Except').
+
+	self assert: consumerModel size equals: 2.
+	self assert: resourceModel size equals: 1.
+
+	fusionner fusion.
+
+	self assert: consumerModel size equals: 1.
+	self assert: resourceModel size equals: 1.
+
+	self assert: (consumerModel entityNamed: 'Except') isNil.
+
+	self assert: (consumerModel entityNamed: 'meth') caughtExceptions size equals: 1.
+	except := (consumerModel entityNamed: 'meth') caughtExceptions anyOne.
+
+	self assert: except equals: (resourceModel entityNamed: 'Except')
+]
+
+{ #category : #tests }
+FamixJavaFusionnerTest >> testMethodDeclareStubException [
+
+	| except |
+
+	self exception: 'Except'.
+	(consumerModel newMethodNamed: 'meth')
+		addDeclaredException: (consumerModel entityNamed: 'Except').
+
+	self assert: consumerModel size equals: 2.
+	self assert: resourceModel size equals: 1.
+
+	fusionner fusion.
+
+	self assert: consumerModel size equals: 1.
+	self assert: resourceModel size equals: 1.
+
+	self assert: (consumerModel entityNamed: 'Except') isNil.
+
+	self assert: (consumerModel entityNamed: 'meth') declaredExceptions size equals: 1.
+	except := (consumerModel entityNamed: 'meth') declaredExceptions anyOne.
+
+	self assert: except equals: (resourceModel entityNamed: 'Except')
+]
+
+{ #category : #tests }
+FamixJavaFusionnerTest >> testMethodThrowStubException [
+
+	| except |
+
+	self exception: 'Except'.
+	(consumerModel newMethodNamed: 'meth')
+		addThrownException: (consumerModel entityNamed: 'Except').
+
+	self assert: consumerModel size equals: 2.
+	self assert: resourceModel size equals: 1.
+
+	fusionner fusion.
+
+	self assert: consumerModel size equals: 1.
+	self assert: resourceModel size equals: 1.
+
+	self assert: (consumerModel entityNamed: 'Except') isNil.
+
+	self assert: (consumerModel entityNamed: 'meth') thrownExceptions size equals: 1.
+	except := (consumerModel entityNamed: 'meth') thrownExceptions anyOne.
+
+	self assert: except equals: (resourceModel entityNamed: 'Except')
 ]
 
 { #category : #tests }

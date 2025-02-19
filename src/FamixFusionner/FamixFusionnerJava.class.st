@@ -93,22 +93,20 @@ FamixFusionnerJava >> resourceModel: anObject [
 	resourceModel := anObject
 ]
 
-{ #category : #visiting }
-FamixFusionnerJava >> visitFamixJavaType: aFamixJavaType [
-
-	self visitFamixJavaTBound: aFamixJavaType.
-	self visitFamixTConcreteParameterType: aFamixJavaType.
-	"self visitFamixTWithMethods: aFamixJavaType.
-	self visitFamixJavaContainerEntity: aFamixJavaType."
-
-]
-
 { #category : #'visiting - traits' }
 FamixFusionnerJava >> visitFamixTAccess: aFamixTAccess [
 
 	self visitFamixTAssociation: aFamixTAccess.
 	"self acceptMeIfNotNil: aFamixTAccess accessor.
 	self acceptMeIfNotNil: aFamixTAccess variable."
+
+]
+
+{ #category : #'visiting - traits' }
+FamixFusionnerJava >> visitFamixTAnnotationInstanceAttribute: aFamixTAnnotationInstanceAttribute [
+
+	self visitTEntityMetaLevelDependency: aFamixTAnnotationInstanceAttribute.
+	"self acceptMeIfNotNil: aFamixTAnnotationInstanceAttribute parentAnnotationInstance."
 
 ]
 
@@ -132,14 +130,17 @@ FamixFusionnerJava >> visitFamixTAttribute: aFamixTAttribute [
 ]
 
 { #category : #'visiting - traits' }
-FamixFusionnerJava >> visitFamixTClass: aFamixTClass [
+FamixFusionnerJava >> visitFamixTCompilationUnit: aFamixTCompilationUnit [
 
-	self visitFamixTInvocationsReceiver: aFamixTClass.
-	self visitFamixTType: aFamixTClass.
-	"self visitFamixTWithAttributes: aFamixTClass.
-	self visitFamixTWithComments: aFamixTClass."
-	self visitFamixTWithInheritances: aFamixTClass.
-	"self visitFamixTWithMethods: aFamixTClass."
+	self visitFamixTFile: aFamixTCompilationUnit.
+	"self acceptMeIfNotNil: aFamixTCompilationUnit compilationUnitOwner."
+
+]
+
+{ #category : #'visiting - traits' }
+FamixFusionnerJava >> visitFamixTDefinedInModule: aFamixTDefinedInModule [
+
+	"self acceptMeIfNotNil: aFamixTDefinedInModule parentModule."
 
 ]
 
@@ -163,7 +164,7 @@ FamixFusionnerJava >> visitFamixTInvocable: aFamixTInvocable [
 
 { #category : #'visiting - traits' }
 FamixFusionnerJava >> visitFamixTInvocation: aFamixTInvocation [
-	"Should not be called, Invocations must be treated in #visitFamixTInvocable: and #visitFamixTInvocationsReceiver:"
+	"Should not be called, Invocations are treated in #visitFamixTInvocable: and #visitFamixTInvocationsReceiver:"
 
 	self shouldNotImplement 
 ]
@@ -209,6 +210,16 @@ FamixFusionnerJava >> visitFamixTMethod: aFamixTMethod [
 ]
 
 { #category : #'visiting - traits' }
+FamixFusionnerJava >> visitFamixTPackage: aFamixTPackage [
+
+	self visitFamixTCanBeStub: aFamixTPackage.
+	self visitFamixTNamedEntity: aFamixTPackage.
+	self visitTEntityMetaLevelDependency: aFamixTPackage.
+	"self visitList: aFamixTPackage childEntities."
+
+]
+
+{ #category : #'visiting - traits' }
 FamixFusionnerJava >> visitFamixTPackageable: aFamixTPackageable [
 
 ]
@@ -231,9 +242,43 @@ FamixFusionnerJava >> visitFamixTReference: aFamixTReference [
 ]
 
 { #category : #'visiting - traits' }
+FamixFusionnerJava >> visitFamixTThrowable: aFamixTThrowable [
+	
+	aFamixTThrowable catchingEntities do: [ :catchingEntity |
+		catchingEntity isStub
+			ifFalse: [
+				catchingEntity caughtExceptions remove: aFamixTThrowable.
+				catchingEntity addCaughtException: resourceEntity.
+			]
+	].
+
+	aFamixTThrowable declaringEntities do: [ :declaringEntity |
+		declaringEntity isStub
+			ifFalse: [
+				declaringEntity declaredExceptions remove: aFamixTThrowable.
+				declaringEntity addDeclaredException: resourceEntity.
+			]
+	].
+
+	aFamixTThrowable throwingEntities do: [ :throwingEntity |
+		throwingEntity isStub
+			ifFalse: [
+				throwingEntity thrownExceptions remove: aFamixTThrowable.
+				throwingEntity addThrownException: resourceEntity.
+			]
+	].
+
+]
+
+{ #category : #'visiting - traits' }
 FamixFusionnerJava >> visitFamixTType: aFamixTType [
 
+	self visitFamixTCanBeStub: aFamixTType.
+	self visitFamixTNamedEntity: aFamixTType.
 	self visitFamixTReferenceable: aFamixTType.
+	self visitTEntityMetaLevelDependency: aFamixTType.
+	"self acceptMeIfNotNil: aFamixTType typeContainer.
+	self visitList: aFamixTType typedEntities."
 
 	aFamixTType typedEntities do: [ :typedEntity |
 		typedEntity declaredType: resourceEntity 
@@ -242,9 +287,118 @@ FamixFusionnerJava >> visitFamixTType: aFamixTType [
 ]
 
 { #category : #'visiting - traits' }
+FamixFusionnerJava >> visitFamixTWithAttributes: aFamixTWithAttributes [
+	"don't visit parent/children relationships in fusionner (if parent or children are stub then entity is stub)"
+
+	"self visitList: aFamixTWithAttributes attributes."
+
+]
+
+{ #category : #'visiting - traits' }
+FamixFusionnerJava >> visitFamixTWithClasses: aFamixTWithClasses [
+	"don't visit parent/children relationships in fusionner (if parent or children are stub then entity is stub)"
+
+	"self visitFamixTWithTypes: aFamixTWithClasses."
+
+]
+
+{ #category : #'visiting - traits' }
+FamixFusionnerJava >> visitFamixTWithComments: aFamixTWithComments [
+	"don't visit parent/children relationships in fusionner (if parent or children are stub then entity is stub)"
+
+	"self visitList: aFamixTWithComments comments."
+
+]
+
+{ #category : #'visiting - traits' }
+FamixFusionnerJava >> visitFamixTWithEnumValues: aFamixTWithEnumValues [
+	"don't visit parent/children relationships in fusionner (if parent or children are stub then entity is stub)"
+
+	"self visitList: aFamixTWithEnumValues enumValues."
+
+]
+
+{ #category : #'visiting - traits' }
+FamixFusionnerJava >> visitFamixTWithExceptions: aFamixTWithExceptions [
+	"not doing anything to avoid infinite recursion
+	 (visitFamixTWithExceptions -> visitFamixTThrowable -> visitFamixTWithExceptions...
+	It seems less likely than a non-stub TThrowable be used by a stub TWithExceptions"
+
+
+	"self visitList: aFamixTWithExceptions caughtExceptions.
+	self visitList: aFamixTWithExceptions declaredExceptions.
+	self visitList: aFamixTWithExceptions thrownExceptions."
+
+]
+
+{ #category : #'visiting - traits' }
+FamixFusionnerJava >> visitFamixTWithFunctions: aFamixTWithFunctions [
+	"don't visit parent/children relationships in fusionner (if parent or children are stub then entity is stub)"
+
+	"self visitList: aFamixTWithFunctions functions."
+
+]
+
+{ #category : #'visiting - traits' }
+FamixFusionnerJava >> visitFamixTWithGlobalVariables: aFamixTWithGlobalVariables [
+	"don't visit parent/children relationships in fusionner (if parent or children are stub then entity is stub)"
+
+	"self visitList: aFamixTWithGlobalVariables globalVariables."
+
+]
+
+{ #category : #'visiting - traits' }
+FamixFusionnerJava >> visitFamixTWithImplicitVariables: aFamixTWithImplicitVariables [
+	"don't visit parent/children relationships in fusionner (if parent or children are stub then entity is stub)"
+
+	"self visitList: aFamixTWithImplicitVariables implicitVariables."
+
+]
+
+{ #category : #'visiting - traits' }
 FamixFusionnerJava >> visitFamixTWithInheritances: aFamixTWithInheritances [
 	"default implementation visits superInheritances, but we need subInheritances"
 
 	aFamixTWithInheritances subInheritances do: [ :inheritance | self visitFamixTAssociation: inheritance ]
+
+]
+
+{ #category : #'visiting - traits' }
+FamixFusionnerJava >> visitFamixTWithLambdas: aFamixTWithLambdas [
+	"don't visit parent/children relationships in fusionner (if parent or children are stub then entity is stub)"
+
+	"self visitList: aFamixTWithLambdas lambdas."
+
+]
+
+{ #category : #'visiting - traits' }
+FamixFusionnerJava >> visitFamixTWithLocalVariables: aFamixTWithLocalVariables [
+	"don't visit parent/children relationships in fusionner (if parent or children are stub then entity is stub)"
+
+	"self visitList: aFamixTWithLocalVariables localVariables."
+
+]
+
+{ #category : #'visiting - traits' }
+FamixFusionnerJava >> visitFamixTWithMethods: aFamixTWithMethods [
+	"don't visit parent/children relationships in fusionner (if parent or children are stub then entity is stub)"
+
+	"self visitList: aFamixTWithMethods methods."
+
+]
+
+{ #category : #'visiting - traits' }
+FamixFusionnerJava >> visitFamixTWithParameters: aFamixTWithParameters [
+	"don't visit parent/children relationships in fusionner (if parent or children are stub then entity is stub)"
+
+	"self visitList: aFamixTWithParameters parameters."
+
+]
+
+{ #category : #'visiting - traits' }
+FamixFusionnerJava >> visitFamixTWithTypes: aFamixTWithTypes [
+	"don't visit parent/children relationships in fusionner (if parent or children are stub then entity is stub)"
+
+	"self visitList: aFamixTWithTypes types."
 
 ]
