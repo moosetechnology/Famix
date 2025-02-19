@@ -48,7 +48,7 @@ FamixFusionnerJava >> findResource: stub [
 		entityNamed: stub mooseName
 		ifAbsent: [ nil ]
 		ifPresent: [ :resource |
-			(resource class = stub class)
+			(resource isStub not and: [resource class = stub class])
 				ifTrue: [ resource ]
 				ifFalse: [ nil ]
 		]

@@ -254,6 +254,30 @@ FamixJavaFusionnerTest >> testClassImplementingStubInterface [
 ]
 
 { #category : #tests }
+FamixJavaFusionnerTest >> testDoNotReplaceStubResourceEntity [
+
+	self class: 'Blah'.
+	(resourceModel entityNamed: 'Blah') stub: true.
+	self consumerVariable: 'var' declaredType: 'Blah'.
+
+	self assert: consumerModel size equals: 2.
+	self assert: resourceModel size equals: 1.
+
+	fusionner fusion.
+
+	self assert: consumerModel size equals: 2.
+	self assert: resourceModel size equals: 1.
+
+	self assert: (consumerModel entityNamed: 'Blah') isNotNil.
+	self
+		assert: (consumerModel entityNamed: 'var') declaredType
+		equals: (consumerModel entityNamed: 'Blah').
+
+	self assert: (resourceModel entityNamed: 'Blah') typedEntities size equals: 0.
+
+]
+
+{ #category : #tests }
 FamixJavaFusionnerTest >> testLocalVariableWithStubDeclaredType [
 
 	self class: 'Blah'.
