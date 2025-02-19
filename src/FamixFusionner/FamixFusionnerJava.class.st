@@ -164,7 +164,7 @@ FamixFusionnerJava >> visitFamixTInvocable: aFamixTInvocable [
 
 { #category : #'visiting - traits' }
 FamixFusionnerJava >> visitFamixTInvocation: aFamixTInvocation [
-	"Should not be called, Invocations must be treated in #visitFamixTInvocable: and #visitFamixTInvocationsReceiver:"
+	"Should not be called, Invocations are treated in #visitFamixTInvocable: and #visitFamixTInvocationsReceiver:"
 
 	self shouldNotImplement 
 ]
