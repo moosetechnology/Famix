@@ -36,13 +36,6 @@ FamixTComment classSide >> annotation [
 	^ self
 ]
 
-{ #category : #'instance creation' }
-FamixTComment classSide >> content: aString [
-	^ self new
-		content: aString;
-		yourself
-]
-
 { #category : #accessing }
 FamixTComment >> commentedEntity [
 	"Relation named: #commentedEntity type: #FamixTWithComments opposite: #comments"
