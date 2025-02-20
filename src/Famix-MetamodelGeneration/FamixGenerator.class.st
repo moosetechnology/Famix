@@ -1081,6 +1081,7 @@ FamixGenerator >> defineHierarchy [
 	tClassGroup --|> tTypeGroup.
 	
 	tComment  --|> #TEntityMetaLevelDependency.
+	tComment --|> #TSourceEntity.
 
 	tCompilationUnit --|> tFile.
 
@@ -1274,9 +1275,6 @@ FamixGenerator >> defineProperties [
 
 	(tHasSignature property: #signature type: #String) comment:
 		'Signature of the message being sent'.
-
-	(tComment property: #content type: #String) comment:
-		'Content of the comment as a String'.
 
 	(tCanBeStub property: #isStub type: #Boolean defaultValue: false)
 		comment:
