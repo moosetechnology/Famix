@@ -10,6 +10,15 @@ FamixTComment >> content [
 ]
 
 { #category : #'*Famix-Deprecated' }
+FamixTComment classSide >> content: aString [
+
+	self deprecated: 'You should create a comment and set the source using a source anchor.'.
+	^ self new
+		  content: aString;
+		  yourself
+]
+
+{ #category : #'*Famix-Deprecated' }
 FamixTComment >> content: anObject [
 
 	self deprecated: 'You should set a source anchor instead of setting the comment directly.'.
