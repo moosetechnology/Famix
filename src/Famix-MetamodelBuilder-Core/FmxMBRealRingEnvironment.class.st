@@ -168,7 +168,7 @@ FmxMBRealRingEnvironment >> recordMethodsAdoptionsOf: realClass to: anRGClass re
 	| generatedMethodsOfRealClass generatedMethodNamesOfRealClass |
 	generatedMethodsOfRealClass := realClass
 		ifNil: [ {} ]
-		ifNotNil: [ (Pragma allNamed: #generated in: realClass) collect: #method thenSelect: [ :method | "We reject methods comming from Traits" realClass localMethods includes: method ] ].
+		ifNotNil: [ (Pragma allNamed: #generated in: realClass) collect: #method thenReject: [ :m | m isFromTrait or: [ m isExtension ] ] ] .
 
 	generatedMethodNamesOfRealClass := generatedMethodsOfRealClass collect: #selector.
 

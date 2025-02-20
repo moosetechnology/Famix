@@ -54,7 +54,7 @@ Class {
 { #category : #meta }
 FamixJavaAttribute class >> annotation [
 
-	<FMClass: #Attribute super: #FamixJavaNamedEntity>
+	<FMClass: #Attribute super: #FamixJavaVariable>
 	<package: #'Famix-Java-Entities'>
 	<generated>
 	^ self

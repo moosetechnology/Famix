@@ -12,11 +12,6 @@
 |---|
 | `comments` | `FamixTWithComments` | `commentedEntity` | `FamixTComment` | List of comments for the entity|
 
-### Outgoing dependencies
-| Relation | Origin | Opposite | Type | Comment |
-|---|
-| `typing` | `FamixTTypedEntity` | `typedEntity` | `FamixTEntityTyping` | Association linking this entity to its declared type.|
-
 ### Incoming dependencies
 | Relation | Origin | Opposite | Type | Comment |
 |---|
@@ -25,6 +20,7 @@
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
+| `declaredType` | `FamixTTypedEntity` | `typedEntities` | `FamixTType` | Type of the entity, if any|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
 
 
@@ -40,7 +36,7 @@
 "
 Class {
 	#name : #FamixJavaParameter,
-	#superclass : #FamixJavaNamedEntity,
+	#superclass : #FamixJavaVariable,
 	#traits : 'FamixTCanBeFinal + FamixTParameter + FamixTWithComments',
 	#classTraits : 'FamixTCanBeFinal classTrait + FamixTParameter classTrait + FamixTWithComments classTrait',
 	#category : #'Famix-Java-Entities-Entities'
@@ -49,7 +45,7 @@ Class {
 { #category : #meta }
 FamixJavaParameter class >> annotation [
 
-	<FMClass: #Parameter super: #FamixJavaNamedEntity>
+	<FMClass: #Parameter super: #FamixJavaVariable>
 	<package: #'Famix-Java-Entities'>
 	<generated>
 	^ self

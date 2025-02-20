@@ -12,11 +12,6 @@
 |---|
 | `comments` | `FamixTWithComments` | `commentedEntity` | `FamixTComment` | List of comments for the entity|
 
-### Outgoing dependencies
-| Relation | Origin | Opposite | Type | Comment |
-|---|
-| `typing` | `FamixTTypedEntity` | `typedEntity` | `FamixTEntityTyping` | Association linking this entity to its declared type.|
-
 ### Incoming dependencies
 | Relation | Origin | Opposite | Type | Comment |
 |---|
@@ -25,6 +20,7 @@
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
+| `declaredType` | `FamixTTypedEntity` | `typedEntities` | `FamixTType` | Type of the entity, if any|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
 
 
@@ -39,7 +35,7 @@
 "
 Class {
 	#name : #FamixJavaEnumValue,
-	#superclass : #FamixJavaNamedEntity,
+	#superclass : #FamixJavaVariable,
 	#traits : 'FamixTEnumValue + FamixTWithComments',
 	#classTraits : 'FamixTEnumValue classTrait + FamixTWithComments classTrait',
 	#category : #'Famix-Java-Entities-Entities'
@@ -48,7 +44,7 @@ Class {
 { #category : #meta }
 FamixJavaEnumValue class >> annotation [
 
-	<FMClass: #EnumValue super: #FamixJavaNamedEntity>
+	<FMClass: #EnumValue super: #FamixJavaVariable>
 	<package: #'Famix-Java-Entities'>
 	<generated>
 	^ self
