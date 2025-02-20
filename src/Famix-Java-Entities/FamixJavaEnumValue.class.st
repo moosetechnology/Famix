@@ -35,7 +35,7 @@
 "
 Class {
 	#name : #FamixJavaEnumValue,
-	#superclass : #FamixJavaNamedEntity,
+	#superclass : #FamixJavaVariable,
 	#traits : 'FamixTEnumValue + FamixTWithComments',
 	#classTraits : 'FamixTEnumValue classTrait + FamixTWithComments classTrait',
 	#category : #'Famix-Java-Entities-Entities'
@@ -44,7 +44,7 @@ Class {
 { #category : #meta }
 FamixJavaEnumValue class >> annotation [
 
-	<FMClass: #EnumValue super: #FamixJavaNamedEntity>
+	<FMClass: #EnumValue super: #FamixJavaVariable>
 	<package: #'Famix-Java-Entities'>
 	<generated>
 	^ self

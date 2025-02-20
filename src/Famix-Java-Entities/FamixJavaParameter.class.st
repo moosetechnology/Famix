@@ -36,7 +36,7 @@
 "
 Class {
 	#name : #FamixJavaParameter,
-	#superclass : #FamixJavaNamedEntity,
+	#superclass : #FamixJavaVariable,
 	#traits : 'FamixTCanBeFinal + FamixTParameter + FamixTWithComments',
 	#classTraits : 'FamixTCanBeFinal classTrait + FamixTParameter classTrait + FamixTWithComments classTrait',
 	#category : #'Famix-Java-Entities-Entities'
@@ -45,7 +45,7 @@ Class {
 { #category : #meta }
 FamixJavaParameter class >> annotation [
 
-	<FMClass: #Parameter super: #FamixJavaNamedEntity>
+	<FMClass: #Parameter super: #FamixJavaVariable>
 	<package: #'Famix-Java-Entities'>
 	<generated>
 	^ self
