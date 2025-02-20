@@ -96,7 +96,6 @@ Class {
 		'tTypedEntity',
 		'tHasSignature',
 		'tWithGlobalVariables',
-		'tHasModifiers',
 		'tHasImmediateSource',
 		'tNamedEntity',
 		'tTypeGroup',
@@ -1224,9 +1223,6 @@ FamixGenerator >> defineProperties [
 	(tNamedEntity property: #name type: #String) comment:
 		'Basic name of the entity, not full reference.'.
 
-	(tHasModifiers property: #modifiers type: #String)
-		comment: 'Generic container for language dependent modifiers.';
-		multivalued.
 	(tHasVisibility property: #visibility type: #String) comment:
 		'Visibility of the entity'.
 
@@ -1898,7 +1894,6 @@ FamixGenerator >> defineTraits [
 
 	tHasImmediateSource := builder newTraitNamed: #THasImmediateSource comment: self commentForTHasImmediateSource.
 
-	tHasModifiers := builder newTraitNamed: #THasModifiers.
 	tHasVisibility := builder newTraitNamed: #THasVisibility.
 	tClassWithVisibility := builder newTraitNamed: #TClassWithVisibility.
 

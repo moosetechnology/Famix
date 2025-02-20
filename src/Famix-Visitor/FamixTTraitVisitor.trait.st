@@ -360,13 +360,6 @@ FamixTTraitVisitor >> visitFamixTHasKind: aFamixTHasKind [
 ]
 
 { #category : #'visiting - traits' }
-FamixTTraitVisitor >> visitFamixTHasModifiers: aFamixTHasModifiers [
-	<generated>
-
-
-]
-
-{ #category : #'visiting - traits' }
 FamixTTraitVisitor >> visitFamixTHasSignature: aFamixTHasSignature [
 	<generated>
 
