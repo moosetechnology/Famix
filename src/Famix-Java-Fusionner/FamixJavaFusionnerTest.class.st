@@ -6,7 +6,7 @@ Class {
 		'consumerModel',
 		'fusionner'
 	],
-	#category : #'FamixFusionner-Tests'
+	#category : #'Famix-Java-Fusionner-Tests'
 }
 
 { #category : #running }
@@ -31,15 +31,7 @@ FamixJavaFusionnerTest >> class: aName [
 ]
 
 { #category : #running }
-FamixJavaFusionnerTest >> exception: aName [
-
-	(resourceModel newExceptionNamed: aName) isStub: false.
-	(consumerModel newExceptionNamed: aName) isStub: true.
-
-]
-
-{ #category : #running }
-FamixJavaFusionnerTest >> inheritanceFrom: subName to: superName [
+FamixJavaFusionnerTest >> class: subName inheritsFrom: superName [
 	"note: Associations don't have a #isStub property"
 
 	resourceModel newInheritance
@@ -48,6 +40,42 @@ FamixJavaFusionnerTest >> inheritanceFrom: subName to: superName [
 	consumerModel newInheritance
 		subclass: (consumerModel entityNamed: subName) ;
 		superclass: (consumerModel entityNamed: superName)
+]
+
+{ #category : #running }
+FamixJavaFusionnerTest >> consumerClass: subName inheritsFrom: superName [
+
+	consumerModel newInheritance
+		superclass: (consumerModel entityNamed: superName) ;
+		subclass: (consumerModel newClassNamed: subName)
+
+]
+
+{ #category : #running }
+FamixJavaFusionnerTest >> consumerVariable: varName declaredType: typeName [
+
+	(consumerModel newLocalVariableNamed: varName)
+		declaredType: (consumerModel entityNamed: typeName).
+]
+
+{ #category : #running }
+FamixJavaFusionnerTest >> exception: aName [
+
+	(resourceModel newExceptionNamed: aName) isStub: false.
+	(consumerModel newExceptionNamed: aName) isStub: true.
+
+]
+
+{ #category : #running }
+FamixJavaFusionnerTest >> interface: aName [
+
+	resourceModel newInterface
+		name: aName ;
+		isStub: false.
+	consumerModel newInterface
+		name: aName ;
+		isStub: true.
+
 ]
 
 { #category : #running }
@@ -208,19 +236,45 @@ FamixJavaFusionnerTest >> testAttributeWithStubDeclaredType [
 ]
 
 { #category : #tests }
-FamixJavaFusionnerTest >> testClassWithStubInheritance [
+FamixJavaFusionnerTest >> testClassImplementingStubInterface [
 
-	self class: 'Blah'.
-	self class: 'SuperBlah'.
-	self inheritanceFrom: 'Blah' to: 'SuperBlah'.
+	self interface: 'IBlah'.
+	consumerModel newClassNamed: 'Blah'.
+	consumerModel newImplementation
+		implementingClass: (consumerModel entityNamed: 'Blah') ;
+		interface: (consumerModel entityNamed: 'IBlah').
 
 	self assert: consumerModel size equals: 3.
-	self assert: resourceModel size equals: 3.
+	self assert: resourceModel size equals: 1.
 	
 	fusionner fusion.
 
-	self assert: consumerModel size equals: 0.
-	self assert: resourceModel size equals: 3.
+	self assert: consumerModel size equals: 2.
+	self assert: resourceModel size equals: 1.
+]
+
+{ #category : #tests }
+FamixJavaFusionnerTest >> testDoNotReplaceStubResourceEntity [
+
+	self class: 'Blah'.
+	(resourceModel entityNamed: 'Blah') stub: true.
+	self consumerVariable: 'var' declaredType: 'Blah'.
+
+	self assert: consumerModel size equals: 2.
+	self assert: resourceModel size equals: 1.
+
+	fusionner fusion.
+
+	self assert: consumerModel size equals: 2.
+	self assert: resourceModel size equals: 1.
+
+	self assert: (consumerModel entityNamed: 'Blah') isNotNil.
+	self
+		assert: (consumerModel entityNamed: 'var') declaredType
+		equals: (consumerModel entityNamed: 'Blah').
+
+	self assert: (resourceModel entityNamed: 'Blah') typedEntities size equals: 0.
+
 ]
 
 { #category : #tests }
@@ -404,6 +458,66 @@ FamixJavaFusionnerTest >> testReferencedStubClass [
 ]
 
 { #category : #tests }
+FamixJavaFusionnerTest >> testSeveralClassesWithOneStubSuperClass [
+
+	self class: 'SuperBlah'.
+	self consumerClass: 'Blah1' inheritsFrom: 'SuperBlah'.
+	self consumerClass: 'Blah2' inheritsFrom: 'SuperBlah'.
+	self consumerClass: 'Blah3' inheritsFrom: 'SuperBlah'.
+	self consumerClass: 'Blah4' inheritsFrom: 'SuperBlah'.
+	self consumerClass: 'Blah5' inheritsFrom: 'SuperBlah'.
+
+	self assert: consumerModel size equals: 11.
+	self assert: resourceModel size equals: 1.
+
+	fusionner fusion.
+
+	self assert: consumerModel size equals: 10.
+	self assert: resourceModel size equals: 1.
+
+	self assert: (consumerModel entityNamed: 'SuperBlah') isNil.
+
+	self assert: (resourceModel entityNamed: 'SuperBlah') subInheritances size equals: 5.
+
+	#(Blah1 Blah2 Blah3 Blah4 Blah5) do: [ :subname |
+		self
+			assert: (consumerModel entityNamed: subname) superclass
+			equals: (resourceModel entityNamed: 'SuperBlah')
+	]
+
+]
+
+{ #category : #tests }
+FamixJavaFusionnerTest >> testSeveralVariableWithStubDeclaredType [
+
+	self class: 'Blah'.
+	self consumerVariable: 'var1' declaredType: 'Blah'.
+	self consumerVariable: 'var2' declaredType: 'Blah'.
+	self consumerVariable: 'var3' declaredType: 'Blah'.
+	self consumerVariable: 'var4' declaredType: 'Blah'.
+	self consumerVariable: 'var5' declaredType: 'Blah'.
+
+	self assert: consumerModel size equals: 6.
+	self assert: resourceModel size equals: 1.
+
+	fusionner fusion.
+
+	self assert: consumerModel size equals: 5.
+	self assert: resourceModel size equals: 1.
+
+	self assert: (consumerModel entityNamed: 'Blah') isNil.
+
+	self assert: (resourceModel entityNamed: 'Blah') typedEntities size equals: 5.
+
+	#(var1 var2 var3 var4 var5) do: [ :varname |
+		self
+			assert: (consumerModel entityNamed: varname) declaredType
+			equals: (resourceModel entityNamed: 'Blah')
+	]
+
+]
+
+{ #category : #tests }
 FamixJavaFusionnerTest >> testStubClass [
 
 	self class: 'Blah'.
@@ -444,6 +558,31 @@ FamixJavaFusionnerTest >> testStubClassAndMethod [
 ]
 
 { #category : #tests }
+FamixJavaFusionnerTest >> testStubClassAndSuperClass [
+
+	self class: 'Blah'.
+	self class: 'SuperBlah'.
+	resourceModel newInheritance
+		superclass: (resourceModel entityNamed: 'SuperBlah') ;
+		subclass: (resourceModel entityNamed: 'Blah').
+	consumerModel newInheritance
+		superclass: (consumerModel entityNamed: 'SuperBlah') ;
+		subclass: (consumerModel entityNamed: 'Blah').
+
+	self assert: consumerModel size equals: 3.
+	self assert: resourceModel size equals: 3.
+
+	fusionner fusion.
+
+	self assert: consumerModel size equals: 0.
+	self assert: resourceModel size equals: 3.
+
+	self
+		assert: (resourceModel entityNamed: 'Blah') superclass
+		equals: (resourceModel entityNamed: 'SuperBlah')
+]
+
+{ #category : #tests }
 FamixJavaFusionnerTest >> testStubClassInvocationReceiver [
 	"note: need the sender of the invocation to verify that the invocation is not stub"
 
@@ -471,6 +610,49 @@ FamixJavaFusionnerTest >> testStubClassInvocationReceiver [
 		assert: (resourceModel entityNamed: 'Blah') receivingInvocations anyOne mooseModel
 		equals: consumerModel.
 
+]
+
+{ #category : #tests }
+FamixJavaFusionnerTest >> testStubClassWithStubInheritance [
+
+	self class: 'Blah'.
+	self class: 'SuperBlah'.
+	self class: 'Blah' inheritsFrom: 'SuperBlah'.
+
+	self assert: consumerModel size equals: 3.
+	self assert: resourceModel size equals: 3.
+	
+	fusionner fusion.
+
+	self assert: consumerModel size equals: 0.
+	self assert: resourceModel size equals: 3.
+]
+
+{ #category : #tests }
+FamixJavaFusionnerTest >> testStubExceptionWithStubSub [
+	"note: inheritance is visited twice for Exceptions (as Exception and as Class).
+	 If sub is a stub, inheritance link needs to be replaced also"
+
+	self exception: 'Blah'.
+	self exception: 'SuperBlah'.
+	resourceModel newInheritance
+		superclass: (resourceModel entityNamed: 'SuperBlah') ;
+		subclass: (resourceModel entityNamed: 'Blah').
+	consumerModel newInheritance
+		superclass: (consumerModel entityNamed: 'SuperBlah') ;
+		subclass: (consumerModel entityNamed: 'Blah').
+
+	self assert: consumerModel size equals: 3.
+	self assert: resourceModel size equals: 3.
+
+	fusionner fusion.
+
+	self assert: consumerModel size equals: 0.
+	self assert: resourceModel size equals: 3.
+
+	self
+		assert: (resourceModel entityNamed: 'Blah') superclass
+		equals: (resourceModel entityNamed: 'SuperBlah')
 ]
 
 { #category : #tests }
