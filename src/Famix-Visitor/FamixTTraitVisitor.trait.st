@@ -27,6 +27,27 @@ FamixTTraitVisitor >> acceptMeIfNotNil: aFamixEntity [
 
 ]
 
+{ #category : #visiting }
+FamixTTraitVisitor >> visitFamixClassGroup: aFamixClassGroup [
+	<generated>
+
+
+]
+
+{ #category : #visiting }
+FamixTTraitVisitor >> visitFamixDeclaredTypeAutomationError: aFamixDeclaredTypeAutomationError [
+	<generated>
+
+
+]
+
+{ #category : #visiting }
+FamixTTraitVisitor >> visitFamixFileAnchorReader: aFamixFileAnchorReader [
+	<generated>
+
+
+]
+
 { #category : #'visiting - traits' }
 FamixTTraitVisitor >> visitFamixTAccess: aFamixTAccess [
 	<generated>
@@ -204,13 +225,22 @@ FamixTTraitVisitor >> visitFamixTConcreteParameterType: aFamixTConcreteParameter
 ]
 
 { #category : #'visiting - traits' }
+FamixTTraitVisitor >> visitFamixTConcreteType: aFamixTConcreteType [
+	<generated>
+
+	self visitList: aFamixTConcreteType genericEntities.
+	self visitList: aFamixTConcreteType outgoingConcretizations.
+
+]
+
+{ #category : #'visiting - traits' }
 FamixTTraitVisitor >> visitFamixTConcretization: aFamixTConcretization [
 	<generated>
 
 	self visitFamixTAssociation: aFamixTConcretization.
-	self visitList: aFamixTConcretization parameterConcretizations.
-	self acceptMeIfNotNil: aFamixTConcretization genericEntity.
-	self acceptMeIfNotNil: aFamixTConcretization concreteEntity.
+	self acceptMeIfNotNil: aFamixTConcretization concreteParameter.
+	self acceptMeIfNotNil: aFamixTConcretization genericParameter.
+	self acceptMeIfNotNil: aFamixTConcretization triggeringAssociation.
 
 ]
 
@@ -228,6 +258,16 @@ FamixTTraitVisitor >> visitFamixTDereferencedInvocation: aFamixTDereferencedInvo
 
 	self visitFamixTInvocation: aFamixTDereferencedInvocation.
 	self acceptMeIfNotNil: aFamixTDereferencedInvocation referencer.
+
+]
+
+{ #category : #'visiting - traits' }
+FamixTTraitVisitor >> visitFamixTEntityTyping: aFamixTEntityTyping [
+	<generated>
+
+	self visitFamixTAssociation: aFamixTEntityTyping.
+	self acceptMeIfNotNil: aFamixTEntityTyping declaredType.
+	self acceptMeIfNotNil: aFamixTEntityTyping typedEntity.
 
 ]
 
@@ -608,13 +648,18 @@ FamixTTraitVisitor >> visitFamixTParameterConcretization: aFamixTParameterConcre
 ]
 
 { #category : #'visiting - traits' }
+FamixTTraitVisitor >> visitFamixTParametricAssociation: aFamixTParametricAssociation [
+	<generated>
+
+	self visitList: aFamixTParametricAssociation concretization.
+
+]
+
+{ #category : #'visiting - traits' }
 FamixTTraitVisitor >> visitFamixTParametricEntity: aFamixTParametricEntity [
 	<generated>
 
-	self visitList: aFamixTParametricEntity concreteParameters.
-	self visitList: aFamixTParametricEntity concretizations.
-	self visitList: aFamixTParametricEntity genericParameters.
-	self acceptMeIfNotNil: aFamixTParametricEntity genericization.
+	self visitList: aFamixTParametricEntity typeParameters.
 
 ]
 
@@ -670,7 +715,7 @@ FamixTTraitVisitor >> visitFamixTRelativeSourceAnchor: aFamixTRelativeSourceAnch
 FamixTTraitVisitor >> visitFamixTShadowable: aFamixTShadowable [
 	<generated>
 
-	self visitList: aFamixTShadowable shadowingEntities.
+	self acceptMeIfNotNil: aFamixTShadowable shadowingEntities.
 
 ]
 
@@ -692,11 +737,9 @@ FamixTTraitVisitor >> visitFamixTSourceAnchor: aFamixTSourceAnchor [
 
 { #category : #'visiting - traits' }
 FamixTTraitVisitor >> visitFamixTSourceEntity: aFamixTSourceEntity [
-	"Probably not necessary to visit the sourceAnchors
-
 	<generated>
 
-	self acceptMeIfNotNil: aFamixTSourceEntity sourceAnchor."
+	self acceptMeIfNotNil: aFamixTSourceEntity sourceAnchor.
 
 ]
 
@@ -782,8 +825,8 @@ FamixTTraitVisitor >> visitFamixTType: aFamixTType [
 	self visitFamixTNamedEntity: aFamixTType.
 	self visitFamixTReferenceable: aFamixTType.
 	self visitTEntityMetaLevelDependency: aFamixTType.
+	self visitList: aFamixTType incomingTypings.
 	self acceptMeIfNotNil: aFamixTType typeContainer.
-	self visitList: aFamixTType typedEntities.
 
 ]
 
@@ -792,6 +835,14 @@ FamixTTraitVisitor >> visitFamixTTypeAlias: aFamixTTypeAlias [
 	<generated>
 
 	self acceptMeIfNotNil: aFamixTTypeAlias aliasedType.
+
+]
+
+{ #category : #'visiting - traits' }
+FamixTTraitVisitor >> visitFamixTTypeParameter: aFamixTTypeParameter [
+	<generated>
+
+	self visitList: aFamixTTypeParameter concretizations.
 
 ]
 
@@ -815,7 +866,7 @@ FamixTTraitVisitor >> visitFamixTTypedAnnotationInstanceAttribute: aFamixTTypedA
 FamixTTraitVisitor >> visitFamixTTypedEntity: aFamixTTypedEntity [
 	<generated>
 
-	self acceptMeIfNotNil: aFamixTTypedEntity declaredType.
+	self acceptMeIfNotNil: aFamixTTypedEntity typing.
 
 ]
 
