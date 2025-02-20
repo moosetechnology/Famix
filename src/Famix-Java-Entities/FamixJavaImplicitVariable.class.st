@@ -20,7 +20,6 @@
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `receivingInvocations` | `FamixTInvocationsReceiver` | `receiver` | `FamixTInvocation` | List of invocations performed on this entity (considered as the receiver)|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
 
 
@@ -35,9 +34,9 @@
 "
 Class {
 	#name : #FamixJavaImplicitVariable,
-	#superclass : #FamixJavaNamedEntity,
-	#traits : 'FamixTImplicitVariable + FamixTInvocationsReceiver',
-	#classTraits : 'FamixTImplicitVariable classTrait + FamixTInvocationsReceiver classTrait',
+	#superclass : #FamixJavaVariable,
+	#traits : 'FamixTImplicitVariable',
+	#classTraits : 'FamixTImplicitVariable classTrait',
 	#category : #'Famix-Java-Entities-Entities'
 }
 
