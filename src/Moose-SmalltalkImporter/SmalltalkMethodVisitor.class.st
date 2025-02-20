@@ -52,11 +52,16 @@ SmalltalkMethodVisitor >> createReferenceTo: aNamedEntity [
 SmalltalkMethodVisitor >> extractCommentsFromNode: aSequenceNode [
 
 	importer importingContext shouldImportComment ifTrue: [
-		aSequenceNode comments do: [ :comment |
-			importer addEntity: (self factory comment new
-					 content: (aSequenceNode source copyFrom: comment start to: comment stop) asString;
-					 commentedEntity: self methodEntity;
-					 yourself) ] ]
+		aSequenceNode comments do: [ :aComment |
+			| comment anchor |
+			comment := self factory comment new
+				           commentedEntity: self methodEntity;
+				           yourself.
+			anchor := self factory sourceTextAnchor new
+				          element: comment;
+				          source: (aSequenceNode source copyFrom: aComment start to: aComment stop) asString;
+				          yourself.
+			importer addEntity: comment ] ]
 ]
 
 { #category : #accessing }
