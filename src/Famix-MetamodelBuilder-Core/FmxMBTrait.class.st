@@ -13,7 +13,9 @@ FmxMBTrait >> acceptVisitor: aVisitor [
 
 { #category : #accessing }
 FmxMBTrait >> allTraitGeneralizations [
-	^ (self traitGeneralizations flatCollect: [ :each | {each} , each allTraitGeneralizations ]) asSet
+
+	^ (self traitGeneralizations flatCollect: [ :each |
+		   { each } , each allTraitGeneralizations ]) removeDuplicates
 ]
 
 { #category : #accessing }

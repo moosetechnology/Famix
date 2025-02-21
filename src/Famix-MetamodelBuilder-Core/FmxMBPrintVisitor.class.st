@@ -13,54 +13,76 @@ Class {
 	#category : #'Famix-MetamodelBuilder-Core-Visitors'
 }
 
+{ #category : #'as yet unclassified' }
+FmxMBPrintVisitor >> prepareForPropertiesIn: aClassOrTrait [
+
+	(aClassOrTrait properties isNotEmpty or: [
+		 aClassOrTrait relations isNotEmpty ]) ifFalse: [ ^ self ].
+
+	Transcript
+		cr;
+		tab;
+		tab
+]
+
+{ #category : #visiting }
+FmxMBPrintVisitor >> separateProperties [
+
+	Transcript
+		cr;
+		tab;
+		tab
+]
+
 { #category : #visiting }
 FmxMBPrintVisitor >> visitBuilder: aBuilder [
-	aBuilder logCr.
+
+	self trace: aBuilder generator class.
 	super visitBuilder: aBuilder
 ]
 
 { #category : #visiting }
 FmxMBPrintVisitor >> visitClass: aClass [
-	Transcript
-		tab;
-		nextPutAll: aClass name;
-		cr.
-	Transcript
-		tab;
-		nextPutAll: ' -|> '.
-	aClass classGeneralization ifNotNil: [ :generalization | Transcript nextPutAll: generalization name ].
-	aClass traitGeneralizations
-		ifNotEmpty: [ :generalizations | 
-			generalizations
-				do: [ :generalization | 
-					Transcript
-						nextPutAll: ', ';
-						nextPutAll: generalization name ] ].
-	Transcript cr.
+
+	self traceCrTab: ''.
+	aClass name trace.
+	self trace: ' -|> '.
+	(aClass classGeneralization
+		 ifNil: [ 'Entity' ]
+		 ifNotNil: [ :generalization | generalization name ]) trace.
+	aClass traitGeneralizations ifNotEmpty: [ :generalizations |
+		generalizations
+			do: [ :generalization | generalization name trace ]
+			separatedBy: [ ', ' trace ] ].
 
 	super visitClass: aClass
 ]
 
 { #category : #visiting }
 FmxMBPrintVisitor >> visitRelationSide: aRelationSide [
-	Transcript tab.
-	Transcript tab.
-	aRelationSide name logCr
+
+	self trace:
+		aRelationSide name , ' (' , aRelationSide oppositeType , ')'
 ]
 
 { #category : #visiting }
 FmxMBPrintVisitor >> visitTrait: aTrait [
-	Transcript
-		tab;
-		nextPutAll: aTrait name;
-		cr.
+
+	self traceCrTab: ''.
+	aTrait name trace.
+
+	aTrait traitGeneralizations ifNotEmpty: [ :generalizations |
+		self trace: ' -|> '.
+		generalizations
+			do: [ :generalization | generalization name trace ]
+			separatedBy: [ ', ' trace ] ].
 
 	super visitTrait: aTrait
 ]
 
 { #category : #visiting }
 FmxMBPrintVisitor >> visitTypedProperty: aTypedProperty [
-	Transcript tab.
-	Transcript tab.
-	aTypedProperty logCr
+
+	self trace:
+		aTypedProperty name , ' (' , aTypedProperty propertyType , ')'
 ]
