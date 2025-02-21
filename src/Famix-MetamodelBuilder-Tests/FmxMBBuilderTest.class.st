@@ -190,22 +190,6 @@ FmxMBBuilderTest >> testSortedClasses [
 { #category : #tests }
 FmxMBBuilderTest >> testSortedTraits [
 
-	"traits should be sorted by name and by their hierarchy"
-
-	| t1 t2 t3 |
-	
-	t1 := builder newTraitNamed: 'T1'.
-	t2 := builder newTraitNamed: 'T2'.
-	t3 := builder newTraitNamed: 'T3'.
-	
-	t3 <|-- t2.
-	
-	self assert: builder sortedTraits asArray equals: { t1. t3. t2 }
-]
-
-{ #category : #tests }
-FmxMBBuilderTest >> testSortedTratis [
-
 	| t1 t2 t3 |
 	
 	t2 := builder newTraitNamed: #T2.
@@ -215,6 +199,41 @@ FmxMBBuilderTest >> testSortedTratis [
 	self assertCollection: builder sortedTraits asArray equals: { t1. t2. t3 }.
 	
 	
+]
+
+{ #category : #tests }
+FmxMBBuilderTest >> testSortedTraitsWith1LevelUsage [
+	"traits should be sorted by name and by their useage level"
+
+	| t1 t2 t3 |
+	t1 := builder newTraitNamed: 'T1'.
+	t2 := builder newTraitNamed: 'T2'.
+	t3 := builder newTraitNamed: 'T3'.
+
+	t3 <|-- t2.
+
+	self assert: builder sortedTraits asArray equals: {
+			t1.
+			t3.
+			t2 }
+]
+
+{ #category : #tests }
+FmxMBBuilderTest >> testSortedTraitsWith2LevelUsage [
+	"traits should be sorted by name and by their useage level"
+
+	| t1 t2 t3 |
+	t1 := builder newTraitNamed: 'T1'.
+	t2 := builder newTraitNamed: 'T2'.
+	t3 := builder newTraitNamed: 'T3'.
+
+	t2 <|-- t1.
+	t3 <|-- t2.
+
+	self assert: builder sortedTraits asArray equals: {
+			t3.
+			t2.
+			t1 }
 ]
 
 { #category : #tests }
