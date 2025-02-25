@@ -21,7 +21,6 @@ Class {
 		'shouldGenerateFileImportHelpers',
 		'basicImportingContextSuperclassName',
 		'groupTag',
-		'shouldGenerateVisitor',
 		'packageNameForVisitor'
 	],
 	#category : #'Famix-MetamodelBuilder-Core-Basic'
@@ -150,7 +149,7 @@ FmxMBConfiguration >> initialize [
 
 	super initialize.
 
-	shouldGenerateFileImportHelpers := shouldGenerateVisitor := false.
+	shouldGenerateFileImportHelpers := false.
 
 	navigationForContainers := true.
 	navigationForNonContainers := false
@@ -208,20 +207,6 @@ FmxMBConfiguration >> packageNameForAnnotations: anObject [
 ]
 
 { #category : #accessing }
-FmxMBConfiguration >> packageNameForVisitor [
-
-	^ packageNameForVisitor ifNil: [
-		  packageNameForVisitor := (self packageName withoutSuffix:
-			                            '-Entities') , '-Visitor' ]
-]
-
-{ #category : #accessing }
-FmxMBConfiguration >> packageNameForVisitor: aPackageName [
-
-	packageNameForVisitor := aPackageName
-]
-
-{ #category : #accessing }
 FmxMBConfiguration >> prefix [
 	^ prefix ifNil: [ prefix := '' ]
 ]
@@ -241,18 +226,6 @@ FmxMBConfiguration >> shouldGenerateFileImportHelpers [
 FmxMBConfiguration >> shouldGenerateFileImportHelpers: aBoolean [
 
 	shouldGenerateFileImportHelpers := aBoolean
-]
-
-{ #category : #accessing }
-FmxMBConfiguration >> shouldGenerateVisitor [
-
-	^ shouldGenerateVisitor
-]
-
-{ #category : #accessing }
-FmxMBConfiguration >> shouldGenerateVisitor: aBoolean [
-
-	shouldGenerateVisitor := aBoolean
 ]
 
 { #category : #accessing }

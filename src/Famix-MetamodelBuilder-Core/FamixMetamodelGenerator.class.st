@@ -147,13 +147,6 @@ FamixMetamodelGenerator class >> packageNameForAnnotations [
 ]
 
 { #category : #accessing }
-FamixMetamodelGenerator class >> packageNameForVisitor [
-
-	<ignoreForCoverage>
-	^ self packageName
-]
-
-{ #category : #accessing }
 FamixMetamodelGenerator class >> prefix [
 
 	<ignoreForCoverage>
@@ -398,12 +391,6 @@ FamixMetamodelGenerator >> packageNameForAnnotations [
 
 	^ self class packageNameForAnnotations
 
-]
-
-{ #category : #definition }
-FamixMetamodelGenerator >> packageNameForVisitor [
-
-	^ self class packageNameForVisitor
 ]
 
 { #category : #definition }

@@ -1,45 +1,16 @@
 Class {
 	#name : #FamixVisitorBuilder,
-	#superclass : #FamixVisitorCodeGenerator,
+	#superclass : #FamixExtensionMetamodelBuilder,
+	#instVars : [
+		'visitorTrait'
+	],
 	#category : #'Famix-Visitor'
 }
 
-{ #category : #'instance creation' }
-FamixVisitorBuilder class >> for: aFmxMBVisitorTrait [
+{ #category : #default }
+FamixVisitorBuilder >> defaultConfigurationClass [
 
-	^ self new
-		  visitorTrait: aFmxMBVisitorTrait;
-		  yourself
-]
-
-{ #category : #'generating - visit' }
-FamixVisitorBuilder >> computeBehaviorsToVisitIn: aFmxMBBehavior [
-
-	| behaviorsToVisit |
-	behaviorsToVisit := aFmxMBBehavior allLocalTraits asOrderedCollection
-		                    sorted: #name ascending.
-
-	"Do not visit the traits that can be find higher in the hierarchy and in traits"
-	behaviorsToVisit := behaviorsToVisit reject: [ :fmxMBTrait |
-		                    aFmxMBBehavior traitsFromGeneralizations
-			                    includes: fmxMBTrait ].
-
-	"Visit superclass if it is not #FamixXYZEntity"
-	aFmxMBBehavior classGeneralization ifNotNil: [ :superclass |
-		superclass name = #Entity ifFalse: [
-			behaviorsToVisit add: superclass ] ].
-
-	^ behaviorsToVisit
-]
-
-{ #category : #generating }
-FamixVisitorBuilder >> generate [
-
-	(visitorTrait builder classes reject: #isModelClass)
-	, (visitorTrait builder traits reject: #isEntityCreatorTrait) do: [
-		:fmxMBBehavior |
-		self generateVisitMethodFor: fmxMBBehavior.
-		self generateAcceptMethodIn: fmxMBBehavior ]
+	^ FamixMBVisitorConfiguration
 ]
 
 { #category : #'generating - accept' }
@@ -55,6 +26,16 @@ FamixVisitorBuilder >> generateAcceptMethodIn: aFmxMBBehavior [
 		package: visitorTrait packageName
 ]
 
+{ #category : #generating }
+FamixVisitorBuilder >> generateMethods [
+
+	(visitorTrait builder classes reject: #isModelClass)
+	, (visitorTrait builder traits select: #isMetamodelTrait) do: [
+		:fmxMBBehavior |
+		self generateVisitMethodFor: fmxMBBehavior.
+		self generateAcceptMethodIn: fmxMBBehavior ]
+]
+
 { #category : #'generating - visit' }
 FamixVisitorBuilder >> generateVisitMethodFor: aFmxMBBehavior [
 
@@ -66,10 +47,31 @@ FamixVisitorBuilder >> generateVisitMethodFor: aFmxMBBehavior [
 		package: visitorTrait packageName
 ]
 
-{ #category : #accessing }
-FamixVisitorBuilder >> visitorTrait: aFmxMBVisitorTrait [
+{ #category : #'generating - trait' }
+FamixVisitorBuilder >> newVisitorTrait [
 
-	visitorTrait := aFmxMBVisitorTrait
+	visitorTrait := FmxMBVisitorTrait new.
+	visitorTrait builder: metamodelBuilder.
+
+	visitorTrait prefix: metamodelBuilder configuration prefix.
+	visitorTrait packageName: self configuration packageName.
+
+	metamodelBuilder traits add: visitorTrait.
+	visitorTrait generate
+]
+
+{ #category : #generating }
+FamixVisitorBuilder >> prepareGeneration [
+
+	self newVisitorTrait.
+	self generateMethods
+]
+
+{ #category : #generating }
+FamixVisitorBuilder >> registerPackages [
+
+	metamodelBuilder environment registerPackage:
+		self configuration packageName
 ]
 
 { #category : #'generating - visit' }
@@ -109,7 +111,7 @@ FamixVisitorBuilder >> writeVisitRelationsFor: aFmxMBBehavior on: aStream [
 { #category : #'generating - visit' }
 FamixVisitorBuilder >> writeVisitTraitsAndSuperclassFor: aFmxMBBehavior on: aStream [
 
-	(self computeBehaviorsToVisitIn: aFmxMBBehavior)
+	aFmxMBBehavior behaviorsToVisit
 		do: [ :behavior |
 			aStream
 				tab;

@@ -1,7 +1,7 @@
 Class {
 	#name : #FmxMBVisitorTrait,
 	#superclass : #FmxMBTrait,
-	#category : #'Famix-MetamodelBuilder-Core-Implementation'
+	#category : #'Famix-Visitor'
 }
 
 { #category : #accessing }
@@ -29,29 +29,31 @@ FmxMBVisitorTrait >> generate [
 
 	self generateAnnotationIn: aTrait superclass: nil.
 	self generateVisitEntityMethod.
-	self generateVisitCollectionMethod.
-	(FamixVisitorBuilder for: self) generate
+	self generateVisitCollectionMethod
 ]
 
 { #category : #'code generation' }
 FmxMBVisitorTrait >> generateVisitCollectionMethod [
 
+	self flag: #toRemove.
 	self realClass
 		compile: 'visitCollection: aCollection
 
 	<generated>
-	aCollection collect: [ :each | each accept: self ]'
+	^ aCollection collect: [ :each | each accept: self ]'
 		classified: #visiting
 ]
 
 { #category : #'code generation' }
 FmxMBVisitorTrait >> generateVisitEntityMethod [
 
+	self flag: #toRemove.
+
 	self realClass
 		compile: 'visitEntity: aFamixEntity
 
 	<generated>
-	aFamixEntity ifNotNil: [ aFamixEntity accept: self ]'
+	^ aFamixEntity ifNotNil: [ aFamixEntity accept: self ]'
 		classified: #visiting
 ]
 
@@ -61,4 +63,10 @@ FmxMBVisitorTrait >> initialize [
 	super initialize.
 	name := #Visitor.
 	tag := 'Trait'
+]
+
+{ #category : #testing }
+FmxMBVisitorTrait >> isMetamodelTrait [
+
+	^ false
 ]

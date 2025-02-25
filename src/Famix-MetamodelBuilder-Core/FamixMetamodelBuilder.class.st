@@ -55,7 +55,8 @@ Class {
 		'generator',
 		'testingSelectorsMapping',
 		'configuration',
-		'parentBuilder'
+		'parentBuilder',
+		'extensionBuilders'
 	],
 	#category : #'Famix-MetamodelBuilder-Core-Basic'
 }
@@ -83,6 +84,13 @@ FamixMetamodelBuilder >> addEntityCreatorTraitToModel: aClass [
 		 cls isAbstractClass not and: [ 
 			 cls isModelClass not and: [ cls isMetamodelClassGroup not ] ] ]) 
 		ifTrue: [ aClass addTraitGeneralization: self entityCreatorTrait ]
+]
+
+{ #category : #generating }
+FamixMetamodelBuilder >> addExtensionBuilder: aBuilder [
+
+	aBuilder metamodelBuilder: self.
+	extensionBuilders add: aBuilder
 ]
 
 { #category : #accessing }
@@ -256,20 +264,6 @@ FamixMetamodelBuilder >> generateRemotes [
 	self apply
 ]
 
-{ #category : #generating }
-FamixMetamodelBuilder >> generateVisitor [
-
-	| visitorTrait |
-	self configuration shouldGenerateVisitor ifFalse: [ ^ self ].
-
-	visitorTrait := FmxMBVisitorTrait new.
-	visitorTrait builder: self.
-	visitorTrait prefix: self configuration prefix.
-	visitorTrait packageName: self configuration packageNameForVisitor.
-	visitorTrait generate.
-	self traits add: visitorTrait
-]
-
 { #category : #accessing }
 FamixMetamodelBuilder >> generator [
 
@@ -337,7 +331,9 @@ FamixMetamodelBuilder >> initialize [
 	classes := OrderedCollection new.
 	traits := OrderedCollection new.
 	relations := OrderedCollection new.
-	testingSelectorsMapping := Dictionary new
+	testingSelectorsMapping := Dictionary new.
+
+	extensionBuilders := OrderedCollection new
 ]
 
 { #category : #initialization }
@@ -493,7 +489,13 @@ FamixMetamodelBuilder >> prepareBehaviorsGeneration [
 	self sortedClasses do: [ :each | each generate ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #generating }
+FamixMetamodelBuilder >> prepareExtensionGeneration [
+
+	extensionBuilders do: #prepareGeneration
+]
+
+{ #category : #generating }
 FamixMetamodelBuilder >> prepareGeneration [
 
 	self registerPackages.
@@ -509,7 +511,7 @@ FamixMetamodelBuilder >> prepareGeneration [
 
 	self behaviorsCount > 0 ifFalse: [ ^ self ].
 	self generateImportingContext.
-	self generateVisitor
+	self prepareExtensionGeneration
 ]
 
 { #category : #printing }
@@ -529,9 +531,7 @@ FamixMetamodelBuilder >> registerPackages [
 
 	self environment registerPackage: self configuration packageName.
 
-	self configuration shouldGenerateVisitor ifTrue: [
-		self environment registerPackage:
-			self configuration packageNameForVisitor ]
+	extensionBuilders do: #registerPackages
 ]
 
 { #category : #accessing }
@@ -657,12 +657,4 @@ FamixMetamodelBuilder >> withSubBuildersAddEntityCreatorTraitTo: aClass [
 	self addEntityCreatorTraitToModel: aClass.
 	self allSubBuilders do: [ :subBuilder | 
 		subBuilder addEntityCreatorTraitToModel: aClass ]
-]
-
-{ #category : #accessing }
-FamixMetamodelBuilder >> withVisitor [
-
-	self configuration
-		shouldGenerateVisitor: true;
-		packageNameForVisitor: generator packageNameForVisitor
 ]

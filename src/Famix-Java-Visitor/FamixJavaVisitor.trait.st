@@ -18,14 +18,14 @@ FamixJavaVisitor classSide >> annotation [
 FamixJavaVisitor >> visitCollection: aCollection [
 
 	<generated>
-	aCollection collect: [ :each | each accept: self ]
+	^ aCollection collect: [ :each | each accept: self ]
 ]
 
 { #category : #visiting }
 FamixJavaVisitor >> visitEntity: aFamixEntity [
 
 	<generated>
-	aFamixEntity ifNotNil: [ aFamixEntity accept: self ]
+	^ aFamixEntity ifNotNil: [ aFamixEntity accept: self ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -101,8 +101,8 @@ FamixJavaVisitor >> visitFamixJavaClass: aFamixJavaClass [
 	self visitFamixTCanBeFinal: aFamixJavaClass.
 	self visitFamixTCanImplement: aFamixJavaClass.
 	self visitFamixTClass: aFamixJavaClass.
-	self visitFamixJavaTClassMetrics: aFamixJavaClass.
 	self visitFamixTClassMetrics: aFamixJavaClass.
+	self visitFamixJavaTClassMetrics: aFamixJavaClass.
 	self visitFamixTHasVisibility: aFamixJavaClass.
 	self visitFamixTImportable: aFamixJavaClass.
 	self visitFamixTLCOMMetrics: aFamixJavaClass.
