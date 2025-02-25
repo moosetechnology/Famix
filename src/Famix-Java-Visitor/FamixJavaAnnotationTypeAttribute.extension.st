@@ -1,9 +1,8 @@
 Extension { #name : #FamixJavaAnnotationTypeAttribute }
 
-{ #category : #'*Famix-Java-Visitor' }
+{ #category : #'*Famix-Java-Visitor-visiting' }
 FamixJavaAnnotationTypeAttribute >> accept: aVisitor [
+
 	<generated>
-
-	^ aVisitor visitFamixJavaAnnotationTypeAttribute: self.
-
+	^ aVisitor visitFamixJavaAnnotationTypeAttribute: self
 ]

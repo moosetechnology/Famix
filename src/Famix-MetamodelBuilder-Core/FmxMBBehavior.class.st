@@ -69,6 +69,16 @@ FmxMBBehavior >> addTraitGeneralization: aTrait [
 	^ aTrait
 ]
 
+{ #category : #'as yet unclassified' }
+FmxMBBehavior >> addTraitsFromGeneralizationsIn: aCollection [
+
+	self traitGeneralizations do: [ :trait |
+		trait addTraitsFromGeneralizationsIn: aCollection ].
+	self classGeneralization do: [ :class |
+		class addTraitsFromGeneralizationsIn: aCollection ].
+	^ aCollection
+]
+
 { #category : #accessing }
 FmxMBBehavior >> allLocalTraits [
 	^ self traitGeneralizations
@@ -690,6 +700,20 @@ FmxMBBehavior >> testingSelectors: aCollection [
 FmxMBBehavior >> traitGeneralizations [
 
 	^ traitGeneralizations ifNil: [ traitGeneralizations := OrderedCollection new ]
+]
+
+{ #category : #'as yet unclassified' }
+FmxMBBehavior >> traitsFromGeneralizations [
+
+	| traitsFromGeneralizations |
+	traitsFromGeneralizations := Set new.
+
+	self traitGeneralizations do: [ :trait |
+		trait addTraitsFromGeneralizationsIn: traitsFromGeneralizations ].
+	self classGeneralization do: [ :class |
+		class addTraitsFromGeneralizationsIn: traitsFromGeneralizations ].
+
+	^ traitsFromGeneralizations
 ]
 
 { #category : #accessing }

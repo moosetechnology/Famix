@@ -1,9 +1,8 @@
 Extension { #name : #FamixJavaTCanBeVolatile }
 
-{ #category : #'*Famix-Java-Visitor' }
+{ #category : #'*Famix-Java-Visitor-visiting' }
 FamixJavaTCanBeVolatile >> accept: aVisitor [
+
 	<generated>
-
-	^ aVisitor visitFamixJavaTCanBeVolatile: self.
-
+	^ aVisitor visitFamixJavaTCanBeVolatile: self
 ]

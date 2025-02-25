@@ -59,6 +59,12 @@ FamixJavaGenerator class >> packageName [
 ]
 
 { #category : #accessing }
+FamixJavaGenerator class >> packageNameForVisitor [
+
+	^ #'Famix-Java-Visitor'
+]
+
+{ #category : #accessing }
 FamixJavaGenerator class >> prefix [
 
 	^ #'FamixJava'
@@ -414,5 +420,6 @@ FamixJavaGenerator >> newBuilder [
 
 	^ super newBuilder
 		  withFileImport;
+		  withVisitor;
 		  yourself
 ]

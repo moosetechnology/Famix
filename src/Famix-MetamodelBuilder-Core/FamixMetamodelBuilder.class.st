@@ -256,6 +256,20 @@ FamixMetamodelBuilder >> generateRemotes [
 	self apply
 ]
 
+{ #category : #generating }
+FamixMetamodelBuilder >> generateVisitor [
+
+	| visitorTrait |
+	self configuration shouldGenerateVisitor ifFalse: [ ^ self ].
+
+	visitorTrait := FmxMBVisitorTrait new.
+	visitorTrait builder: self.
+	visitorTrait prefix: self configuration prefix.
+	visitorTrait packageName: self configuration packageNameForVisitor.
+	visitorTrait generate.
+	self traits add: visitorTrait
+]
+
 { #category : #accessing }
 FamixMetamodelBuilder >> generator [
 
@@ -484,7 +498,6 @@ FamixMetamodelBuilder >> prepareGeneration [
 
 	self registerPackages.
 	self ensureEntityClassIsTheCommonSuperclass.
-
 	self shouldGenerateModel
 		ifTrue: [
 			| model |
@@ -494,7 +507,9 @@ FamixMetamodelBuilder >> prepareGeneration [
 			self entityCreatorTrait generateEntityCreationMethods ]
 		ifFalse: [ self prepareBehaviorsGeneration ].
 
-	self behaviorsCount > 0 ifTrue: [ self generateImportingContext ]
+	self behaviorsCount > 0 ifFalse: [ ^ self ].
+	self generateImportingContext.
+	self generateVisitor
 ]
 
 { #category : #printing }
@@ -512,7 +527,11 @@ FamixMetamodelBuilder >> printOn: aStream [
 { #category : #generating }
 FamixMetamodelBuilder >> registerPackages [
 
-	self environment registerPackage: self configuration packageName
+	self environment registerPackage: self configuration packageName.
+
+	self configuration shouldGenerateVisitor ifTrue: [
+		self environment registerPackage:
+			self configuration packageNameForVisitor ]
 ]
 
 { #category : #accessing }
@@ -638,4 +657,12 @@ FamixMetamodelBuilder >> withSubBuildersAddEntityCreatorTraitTo: aClass [
 	self addEntityCreatorTraitToModel: aClass.
 	self allSubBuilders do: [ :subBuilder | 
 		subBuilder addEntityCreatorTraitToModel: aClass ]
+]
+
+{ #category : #accessing }
+FamixMetamodelBuilder >> withVisitor [
+
+	self configuration
+		shouldGenerateVisitor: true;
+		packageNameForVisitor: generator packageNameForVisitor
 ]

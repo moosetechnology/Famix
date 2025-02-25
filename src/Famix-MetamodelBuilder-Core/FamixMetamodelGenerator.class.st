@@ -147,6 +147,13 @@ FamixMetamodelGenerator class >> packageNameForAnnotations [
 ]
 
 { #category : #accessing }
+FamixMetamodelGenerator class >> packageNameForVisitor [
+
+	<ignoreForCoverage>
+	^ self packageName
+]
+
+{ #category : #accessing }
 FamixMetamodelGenerator class >> prefix [
 
 	<ignoreForCoverage>
@@ -177,6 +184,7 @@ FamixMetamodelGenerator class >> withMooseModelDo: aBlock [
 
 { #category : #definition }
 FamixMetamodelGenerator >> adoptBuilder: aBuilder [
+
 	aBuilder configuration
 		prefix: self prefix;
 		packageName: self packageName;
@@ -247,6 +255,7 @@ FamixMetamodelGenerator >> cleaningStrategy: anObject [
 
 { #category : #definition }
 FamixMetamodelGenerator >> define [
+
 	self defineTraits.
 	self defineClasses.
 	self defineAssociations.
@@ -389,6 +398,12 @@ FamixMetamodelGenerator >> packageNameForAnnotations [
 
 	^ self class packageNameForAnnotations
 
+]
+
+{ #category : #definition }
+FamixMetamodelGenerator >> packageNameForVisitor [
+
+	^ self class packageNameForVisitor
 ]
 
 { #category : #definition }

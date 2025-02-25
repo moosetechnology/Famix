@@ -30,9 +30,9 @@ Class {
 	#name : #FamixVisitorCodeGenerator,
 	#superclass : #Object,
 	#instVars : [
-		'visitorClass',
 		'generateAccepts',
-		'package'
+		'package',
+		'visitorTrait'
 	],
 	#category : #'Famix-Visitor'
 }
@@ -48,7 +48,7 @@ FamixVisitorCodeGenerator >> asParameterName: aModelClass [
 FamixVisitorCodeGenerator >> compileVisitMethod: code for: aModelClass [
 	"visiting method are compiled in the visitorClass"
 
-	visitorClass compile: code classified: (aModelClass isTrait
+	visitorTrait compile: code classified: (aModelClass isTrait
 		ifTrue: [ 'visiting - traits' ]
 		ifFalse: [ 'visiting' ])
 ]
@@ -93,7 +93,7 @@ FamixVisitorCodeGenerator >> generateAcceptIfNotNilMethod [
 
 	^aFamixEntity ifNil: [ nil ] ifNotNil: [ aFamixEntity accept: self ]
 '
-		for: visitorClass 
+		for: visitorTrait 
 ]
 
 { #category : #'code generation' }
@@ -115,7 +115,7 @@ FamixVisitorCodeGenerator >> generateAcceptMethod: modelClass [
 		self generateVisitCall: modelClass receiver: '^ aVisitor' argument: 'self' on: stream
 	].
 
-	modelClass compile: code classified: '*' , visitorClass package name
+	modelClass compile: code classified: '*' , visitorTrait package name
 ]
 
 { #category : #run }
@@ -175,7 +175,7 @@ FamixVisitorCodeGenerator >> generateVisitListMethod [
 
 	^aCollection collect: [ :each | each accept: self ]
 '
-		for: visitorClass 
+		for: visitorTrait 
 ]
 
 { #category : #'code generation' }
@@ -299,7 +299,7 @@ FamixVisitorCodeGenerator >> package: aFamixPackage visitorClass: aVisitorClass 
 	 (do not generate for the Famix...Model class) "
 
 	self package: aFamixPackage.
-	visitorClass := aVisitorClass.
+	visitorTrait := aVisitorClass.
 
 	self generateVisitListMethod.
 	self generateAcceptIfNotNilMethod.
@@ -347,11 +347,11 @@ FamixVisitorCodeGenerator >> traitsToVisitFor: aModelClass [
 { #category : #accessing }
 FamixVisitorCodeGenerator >> visitorClass [
 
-	^ visitorClass
+	^ visitorTrait
 ]
 
 { #category : #accessing }
 FamixVisitorCodeGenerator >> visitorClass: anObject [
 
-	visitorClass := anObject
+	visitorTrait := anObject
 ]
