@@ -274,6 +274,7 @@ FamixJavaGenerator >> defineHierarchy [
 	enum --|> #TWithComments.
 	enum --|> #TWithImports.
 	enum --|> #TImportable.
+	enum --|> #TInvocationsReceiver.
 
 	enumValue --|> variable.
 	enumValue --|> #TWithComments.
