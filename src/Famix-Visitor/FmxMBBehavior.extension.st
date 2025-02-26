@@ -1,27 +1,30 @@
 Extension { #name : #FmxMBBehavior }
 
 { #category : #'*Famix-Visitor' }
+FmxMBBehavior >> addTraitsFromGeneralizationsIn: aCollection [
+
+	self traitGeneralizations do: [ :trait |
+		trait addTraitsFromGeneralizationsIn: aCollection ].
+
+	^ aCollection
+]
+
+{ #category : #'*Famix-Visitor' }
 FmxMBBehavior >> behaviorsToVisit [
+	"Do not visit the traits that can be found higher in the hierarchy and in traits"
 
-	| behaviorsToVisit |
-	behaviorsToVisit := self allLocalTraits asOrderedCollection sorted:
-		                    #name ascending.
-
-	"Do not visit the traits that can be find higher in the hierarchy and in traits"
-	behaviorsToVisit := behaviorsToVisit reject: [ :fmxMBTrait |
-		                    self traitsFromGeneralizations includes:
-			                    fmxMBTrait ].
-
-	"Visit superclass if it is not #FamixXYZEntity"
-	self classGeneralization ifNotNil: [ :superclass |
-		superclass name = #Entity ifFalse: [
-			behaviorsToVisit add: superclass ] ].
-
-	^ behaviorsToVisit
+	^ self allLocalTraits asOrderedCollection
+	  \ self traitsFromGeneralizations sorted: #fullName ascending
 ]
 
 { #category : #'*Famix-Visitor' }
 FmxMBBehavior >> traitsFromGeneralizations [
 
-	self subclassResponsibility
+	| traitsFromGeneralizations |
+	traitsFromGeneralizations := Set new.
+
+	self traitGeneralizations do: [ :trait |
+		trait addTraitsFromGeneralizationsIn: traitsFromGeneralizations ].
+
+	^ traitsFromGeneralizations
 ]

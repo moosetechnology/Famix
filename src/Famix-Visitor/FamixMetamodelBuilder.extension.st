@@ -1,13 +1,18 @@
 Extension { #name : #FamixMetamodelBuilder }
 
 { #category : #'*Famix-Visitor' }
-FamixMetamodelBuilder >> withVisitor [
+FamixMetamodelBuilder >> newVisitorTrait [
 
-	| visitorBuilder |
-	visitorBuilder := FamixVisitorBuilder new.
+	| visitorTrait |
+	self traits
+		detect: [ :each |
+		each fullName = (self configuration prefix , #TVisitor) ]
+		ifFound: [ FmxMBEntityAlreadyExists signal ].
 
-	self addExtensionBuilder: visitorBuilder.
+	visitorTrait := FmxMBVisitorTrait new.
+	visitorTrait builder: self.
+	visitorTrait prefix: self configuration prefix.
 
-	visitorBuilder configuration packageName:
-		generator packageNameForVisitor
+	extensionBehaviors add: visitorTrait.
+	^ visitorTrait
 ]

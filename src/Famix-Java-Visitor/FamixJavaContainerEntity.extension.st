@@ -1,6 +1,6 @@
 Extension { #name : #FamixJavaContainerEntity }
 
-{ #category : #'*Famix-Java-Visitor-visiting' }
+{ #category : #'*Famix-Java-Visitor' }
 FamixJavaContainerEntity >> accept: aVisitor [
 
 	<generated>

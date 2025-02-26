@@ -1,6 +1,6 @@
 Extension { #name : #FamixJavaTCanBeTransient }
 
-{ #category : #'*Famix-Java-Visitor-visiting' }
+{ #category : #'*Famix-Java-Visitor' }
 FamixJavaTCanBeTransient >> accept: aVisitor [
 
 	<generated>

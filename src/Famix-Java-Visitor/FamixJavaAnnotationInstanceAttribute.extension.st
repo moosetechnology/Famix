@@ -1,6 +1,6 @@
 Extension { #name : #FamixJavaAnnotationInstanceAttribute }
 
-{ #category : #'*Famix-Java-Visitor-visiting' }
+{ #category : #'*Famix-Java-Visitor' }
 FamixJavaAnnotationInstanceAttribute >> accept: aVisitor [
 
 	<generated>

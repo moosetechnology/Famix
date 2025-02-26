@@ -2,8 +2,7 @@ Extension { #name : #FamixTParameterConcretization }
 
 { #category : #'*Famix-Visitor' }
 FamixTParameterConcretization >> accept: aVisitor [
+
 	<generated>
-
-	^ aVisitor visitFamixTParameterConcretization: self.
-
+	^ aVisitor visitFamixTParameterConcretization: self
 ]

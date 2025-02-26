@@ -1,6 +1,6 @@
 Extension { #name : #FamixJavaTCanBeSynchronized }
 
-{ #category : #'*Famix-Java-Visitor-visiting' }
+{ #category : #'*Famix-Java-Visitor' }
 FamixJavaTCanBeSynchronized >> accept: aVisitor [
 
 	<generated>

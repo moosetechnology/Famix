@@ -1,6 +1,6 @@
 Extension { #name : #FamixJavaTWithInterfaces }
 
-{ #category : #'*Famix-Java-Visitor-visiting' }
+{ #category : #'*Famix-Java-Visitor' }
 FamixJavaTWithInterfaces >> accept: aVisitor [
 
 	<generated>

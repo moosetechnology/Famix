@@ -52,6 +52,12 @@ Class {
 	#category : #'Famix-Java-Generator'
 }
 
+{ #category : #'additional tools' }
+FamixJavaGenerator class >> metamodelToolGenerators [
+
+	^ { FamixVisitorGenerator }
+]
+
 { #category : #accessing }
 FamixJavaGenerator class >> packageName [
 
@@ -420,6 +426,5 @@ FamixJavaGenerator >> newBuilder [
 
 	^ super newBuilder
 		  withFileImport;
-		  withVisitor;
 		  yourself
 ]

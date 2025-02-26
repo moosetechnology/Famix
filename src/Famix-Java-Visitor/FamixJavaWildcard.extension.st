@@ -1,6 +1,6 @@
 Extension { #name : #FamixJavaWildcard }
 
-{ #category : #'*Famix-Java-Visitor-visiting' }
+{ #category : #'*Famix-Java-Visitor' }
 FamixJavaWildcard >> accept: aVisitor [
 
 	<generated>

@@ -1,6 +1,6 @@
 Extension { #name : #FamixJavaEnumValue }
 
-{ #category : #'*Famix-Java-Visitor-visiting' }
+{ #category : #'*Famix-Java-Visitor' }
 FamixJavaEnumValue >> accept: aVisitor [
 
 	<generated>

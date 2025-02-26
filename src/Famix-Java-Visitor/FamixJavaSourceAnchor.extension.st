@@ -1,6 +1,6 @@
 Extension { #name : #FamixJavaSourceAnchor }
 
-{ #category : #'*Famix-Java-Visitor-visiting' }
+{ #category : #'*Famix-Java-Visitor' }
 FamixJavaSourceAnchor >> accept: aVisitor [
 
 	<generated>

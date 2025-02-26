@@ -1,6 +1,6 @@
 Extension { #name : #FamixJavaParameterType }
 
-{ #category : #'*Famix-Java-Visitor-visiting' }
+{ #category : #'*Famix-Java-Visitor' }
 FamixJavaParameterType >> accept: aVisitor [
 
 	<generated>

@@ -1,6 +1,6 @@
 Extension { #name : #FamixJavaLocalVariable }
 
-{ #category : #'*Famix-Java-Visitor-visiting' }
+{ #category : #'*Famix-Java-Visitor' }
 FamixJavaLocalVariable >> accept: aVisitor [
 
 	<generated>

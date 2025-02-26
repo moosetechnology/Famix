@@ -56,7 +56,7 @@ Class {
 		'testingSelectorsMapping',
 		'configuration',
 		'parentBuilder',
-		'extensionBuilders'
+		'extensionBehaviors'
 	],
 	#category : #'Famix-MetamodelBuilder-Core-Basic'
 }
@@ -84,13 +84,6 @@ FamixMetamodelBuilder >> addEntityCreatorTraitToModel: aClass [
 		 cls isAbstractClass not and: [ 
 			 cls isModelClass not and: [ cls isMetamodelClassGroup not ] ] ]) 
 		ifTrue: [ aClass addTraitGeneralization: self entityCreatorTrait ]
-]
-
-{ #category : #generating }
-FamixMetamodelBuilder >> addExtensionBuilder: aBuilder [
-
-	aBuilder metamodelBuilder: self.
-	extensionBuilders add: aBuilder
 ]
 
 { #category : #accessing }
@@ -234,6 +227,12 @@ FamixMetamodelBuilder >> environment: anObject [
 	environment := anObject
 ]
 
+{ #category : #accessing }
+FamixMetamodelBuilder >> extensionBehaviors [
+
+	^ extensionBehaviors
+]
+
 { #category : #generating }
 FamixMetamodelBuilder >> generate [
 
@@ -330,10 +329,9 @@ FamixMetamodelBuilder >> initialize [
 
 	classes := OrderedCollection new.
 	traits := OrderedCollection new.
+	extensionBehaviors := OrderedCollection new.
 	relations := OrderedCollection new.
-	testingSelectorsMapping := Dictionary new.
-
-	extensionBuilders := OrderedCollection new
+	testingSelectorsMapping := Dictionary new
 ]
 
 { #category : #initialization }
@@ -486,13 +484,8 @@ FamixMetamodelBuilder >> prepareBehaviorsGeneration [
 	self classes do: [ :each |
 		self testingSelectorsMapping at: each put: each testingSelectors ].
 	self traits do: [ :each | each generate ].
-	self sortedClasses do: [ :each | each generate ]
-]
-
-{ #category : #generating }
-FamixMetamodelBuilder >> prepareExtensionGeneration [
-
-	extensionBuilders do: #prepareGeneration
+	self sortedClasses do: [ :each | each generate ].
+	self extensionBehaviors do: [ :each | each generate ]
 ]
 
 { #category : #generating }
@@ -510,8 +503,7 @@ FamixMetamodelBuilder >> prepareGeneration [
 		ifFalse: [ self prepareBehaviorsGeneration ].
 
 	self behaviorsCount > 0 ifFalse: [ ^ self ].
-	self generateImportingContext.
-	self prepareExtensionGeneration
+	self generateImportingContext
 ]
 
 { #category : #printing }
@@ -529,9 +521,7 @@ FamixMetamodelBuilder >> printOn: aStream [
 { #category : #generating }
 FamixMetamodelBuilder >> registerPackages [
 
-	self environment registerPackage: self configuration packageName.
-
-	extensionBuilders do: #registerPackages
+	self environment registerPackage: self configuration packageName
 ]
 
 { #category : #accessing }
@@ -608,7 +598,7 @@ FamixMetamodelBuilder >> testingSelectorsMapping [
 { #category : #initialization }
 FamixMetamodelBuilder >> traitNamed: aString [
 
-	^ self traits detect: [ :each | each name = aString ] ifNone: [ 
+	^ self traits detect: [ :each | each name = aString ] ifNone: [
 		  FamixMetamodelGeneratorUnknownTrait signal: 'Trait ' , aString
 			  ,
 			  ' not found in the metamodel. Please add it or refer to a submetamodel.' ]

@@ -5,6 +5,8 @@ ClassDescription >> needToAdaptToMethod: aRGMethod [
 
 	^ self
 		  compiledMethodAt: aRGMethod selector
-		  ifPresent: [ :realMethod | (aRGMethod sourceCode = realMethod sourceCode and: [ aRGMethod protocol = realMethod protocolName ]) not ]
+		  ifPresent: [ :realMethod |
+			  (aRGMethod sourceCode = realMethod sourceCode and: [
+				   aRGMethod protocol = realMethod protocolName ]) not ]
 		  ifAbsent: [ true ]
 ]

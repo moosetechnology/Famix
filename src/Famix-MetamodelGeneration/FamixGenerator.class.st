@@ -134,10 +134,22 @@ Class {
 	#category : #'Famix-MetamodelGeneration'
 }
 
+{ #category : #'as yet unclassified' }
+FamixGenerator class >> metamodelToolGenerators [
+
+	^ { FamixVisitorGenerator }
+]
+
 { #category : #accessing }
 FamixGenerator class >> packageName [
 
 	^ #'Famix-Traits'
+]
+
+{ #category : #accessing }
+FamixGenerator class >> packageNameForVisitor [
+
+	^ #'Famix-Visitor'
 ]
 
 { #category : #initialization }

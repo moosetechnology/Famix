@@ -1,6 +1,6 @@
 Extension { #name : #FamixJavaConcretization }
 
-{ #category : #'*Famix-Java-Visitor-visiting' }
+{ #category : #'*Famix-Java-Visitor' }
 FamixJavaConcretization >> accept: aVisitor [
 
 	<generated>
