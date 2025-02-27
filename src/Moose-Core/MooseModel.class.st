@@ -509,7 +509,7 @@ MooseModel >> importFromJSONStream: aStream [
 	^ self
 		  importFrom:
 		  (self class importFromJSON: aStream withMetamodel: self metamodel)
-		  named: (aStream localName removeSuffix: '.json')
+		  named: (aStream localName  withoutSuffix: '.json')
 ]
 
 { #category : #'import-export' }
@@ -520,7 +520,7 @@ MooseModel >> importFromJSONStream: aStream filteredBy: anImportingContext [
 				   importFromJSON: aStream
 				   withMetamodel: self metamodel
 				   filteredBy: anImportingContext)
-		  named: (aStream localName removeSuffix: '.json')
+		  named: (aStream localName withoutSuffix: '.json')
 ]
 
 { #category : #'import-export' }
@@ -553,7 +553,7 @@ MooseModel >> importFromMSEStream: aStream [
 	^ self
 		  importFrom:
 		  (self class importFrom: aStream withMetamodel: self metamodel)
-		  named: (aStream localName removeSuffix: '.mse')
+		  named: (aStream localName withoutSuffix: '.mse')
 ]
 
 { #category : #'import-export' }
@@ -564,7 +564,7 @@ MooseModel >> importFromMSEStream: aStream filteredBy: anImportingContext [
 				   importFrom: aStream
 				   withMetamodel: self metamodel
 				   filteredBy: anImportingContext)
-		  named: (aStream localName removeSuffix: '.mse')
+		  named: (aStream localName withoutSuffix: '.mse')
 ]
 
 { #category : #testing }
