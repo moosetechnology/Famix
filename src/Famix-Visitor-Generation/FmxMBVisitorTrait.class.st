@@ -1,6 +1,6 @@
 "
 I am responsible for the generation of a visitor trait when generating a Famix metamodel.
-See FamixVisitorBuilder.
+See `FamixVisitorGenerator`.
 "
 Class {
 	#name : #FmxMBVisitorTrait,
