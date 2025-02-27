@@ -987,3 +987,10 @@ FamixTVisitor >> visitFamixTWithTypes: aFamixTWithTypes [
 	<generated>
 	self visitCollection: aFamixTWithTypes types
 ]
+
+{ #category : #visiting }
+FamixTVisitor >> visitTEntityMetaLevelDependency: aFamixEntity [
+	"This method is not generated to avoid complexify the visitor generation"
+
+	
+]
