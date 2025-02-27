@@ -35,6 +35,7 @@ FamixTVisitor >> visitFamixTAccess: aFamixTAccess [
 
 	<generated>
 	self visitFamixTAssociation: aFamixTAccess.
+
 	self visitEntity: aFamixTAccess accessor.
 	self visitEntity: aFamixTAccess variable
 ]
@@ -51,6 +52,7 @@ FamixTVisitor >> visitFamixTAnnotationInstance: aFamixTAnnotationInstance [
 
 	<generated>
 	self visitTEntityMetaLevelDependency: aFamixTAnnotationInstance.
+
 	self visitEntity: aFamixTAnnotationInstance annotatedEntity
 ]
 
@@ -59,6 +61,7 @@ FamixTVisitor >> visitFamixTAnnotationInstanceAttribute: aFamixTAnnotationInstan
 
 	<generated>
 	self visitTEntityMetaLevelDependency: aFamixTAnnotationInstanceAttribute.
+
 	self visitEntity: aFamixTAnnotationInstanceAttribute parentAnnotationInstance
 ]
 
@@ -75,6 +78,7 @@ FamixTVisitor >> visitFamixTAnnotationTypeAttribute: aFamixTAnnotationTypeAttrib
 
 	<generated>
 	self visitFamixTAttribute: aFamixTAnnotationTypeAttribute.
+
 	self visitCollection: aFamixTAnnotationTypeAttribute annotationAttributeInstances
 ]
 
@@ -84,6 +88,7 @@ FamixTVisitor >> visitFamixTAssociation: aFamixTAssociation [
 	<generated>
 	self visitFamixTSourceEntity: aFamixTAssociation.
 	self visitTAssociationMetaLevelDependency: aFamixTAssociation.
+
 	self visitEntity: aFamixTAssociation previous.
 	self visitEntity: aFamixTAssociation next
 ]
@@ -93,6 +98,7 @@ FamixTVisitor >> visitFamixTAttribute: aFamixTAttribute [
 
 	<generated>
 	self visitFamixTStructuralEntity: aFamixTAttribute.
+
 	self visitEntity: aFamixTAttribute parentType
 ]
 
@@ -121,8 +127,7 @@ FamixTVisitor >> visitFamixTCanBeFinal: aFamixTCanBeFinal [
 FamixTVisitor >> visitFamixTCanBeStub: aFamixTCanBeStub [
 
 	<generated>
-	self visitFamixTSourceEntity: aFamixTCanBeStub.
-
+	self visitFamixTSourceEntity: aFamixTCanBeStub
 ]
 
 { #category : #visiting }
@@ -141,8 +146,7 @@ FamixTVisitor >> visitFamixTClass: aFamixTClass [
 	self visitFamixTWithAttributes: aFamixTClass.
 	self visitFamixTWithComments: aFamixTClass.
 	self visitFamixTWithInheritances: aFamixTClass.
-	self visitFamixTWithMethods: aFamixTClass.
-
+	self visitFamixTWithMethods: aFamixTClass
 ]
 
 { #category : #visiting }
@@ -157,16 +161,14 @@ FamixTVisitor >> visitFamixTClassWithVisibility: aFamixTClassWithVisibility [
 
 	<generated>
 	self visitFamixTClass: aFamixTClassWithVisibility.
-	self visitFamixTHasVisibility: aFamixTClassWithVisibility.
-
+	self visitFamixTHasVisibility: aFamixTClassWithVisibility
 ]
 
 { #category : #visiting }
 FamixTVisitor >> visitFamixTCohesionCouplingMetrics: aFamixTCohesionCouplingMetrics [
 
 	<generated>
-	self visitFamixTPackage: aFamixTCohesionCouplingMetrics.
-
+	self visitFamixTPackage: aFamixTCohesionCouplingMetrics
 ]
 
 { #category : #visiting }
@@ -175,6 +177,7 @@ FamixTVisitor >> visitFamixTComment: aFamixTComment [
 	<generated>
 	self visitFamixTSourceEntity: aFamixTComment.
 	self visitTEntityMetaLevelDependency: aFamixTComment.
+
 	self visitEntity: aFamixTComment commentedEntity
 ]
 
@@ -183,6 +186,7 @@ FamixTVisitor >> visitFamixTCompilationUnit: aFamixTCompilationUnit [
 
 	<generated>
 	self visitFamixTFile: aFamixTCompilationUnit.
+
 	self visitEntity: aFamixTCompilationUnit compilationUnitOwner
 ]
 
@@ -191,6 +195,7 @@ FamixTVisitor >> visitFamixTConcreteParameterType: aFamixTConcreteParameterType 
 
 	<generated>
 	self visitFamixTType: aFamixTConcreteParameterType.
+
 	self visitCollection: aFamixTConcreteParameterType concreteEntities.
 	self visitCollection: aFamixTConcreteParameterType generics
 ]
@@ -200,6 +205,7 @@ FamixTVisitor >> visitFamixTConcretization: aFamixTConcretization [
 
 	<generated>
 	self visitFamixTAssociation: aFamixTConcretization.
+
 	self visitCollection: aFamixTConcretization parameterConcretizations.
 	self visitEntity: aFamixTConcretization genericEntity.
 	self visitEntity: aFamixTConcretization concreteEntity
@@ -217,6 +223,7 @@ FamixTVisitor >> visitFamixTDereferencedInvocation: aFamixTDereferencedInvocatio
 
 	<generated>
 	self visitFamixTInvocation: aFamixTDereferencedInvocation.
+
 	self visitEntity: aFamixTDereferencedInvocation referencer
 ]
 
@@ -225,8 +232,7 @@ FamixTVisitor >> visitFamixTEnum: aFamixTEnum [
 
 	<generated>
 	self visitFamixTType: aFamixTEnum.
-	self visitFamixTWithEnumValues: aFamixTEnum.
-
+	self visitFamixTWithEnumValues: aFamixTEnum
 ]
 
 { #category : #visiting }
@@ -234,6 +240,7 @@ FamixTVisitor >> visitFamixTEnumValue: aFamixTEnumValue [
 
 	<generated>
 	self visitFamixTStructuralEntity: aFamixTEnumValue.
+
 	self visitEntity: aFamixTEnumValue parentEnum
 ]
 
@@ -242,8 +249,7 @@ FamixTVisitor >> visitFamixTException: aFamixTException [
 
 	<generated>
 	self visitFamixTClass: aFamixTException.
-	self visitFamixTThrowable: aFamixTException.
-
+	self visitFamixTThrowable: aFamixTException
 ]
 
 { #category : #visiting }
@@ -251,6 +257,7 @@ FamixTVisitor >> visitFamixTFile: aFamixTFile [
 
 	<generated>
 	self visitFamixTFileSystemEntity: aFamixTFile.
+
 	self visitCollection: aFamixTFile entities
 ]
 
@@ -266,6 +273,7 @@ FamixTVisitor >> visitFamixTFileInclude: aFamixTFileInclude [
 
 	<generated>
 	self visitFamixTAssociation: aFamixTFileInclude.
+
 	self visitEntity: aFamixTFileInclude source.
 	self visitEntity: aFamixTFileInclude target
 ]
@@ -274,8 +282,7 @@ FamixTVisitor >> visitFamixTFileInclude: aFamixTFileInclude [
 FamixTVisitor >> visitFamixTFileNavigation: aFamixTFileNavigation [
 
 	<generated>
-	self visitFamixTFileAnchor: aFamixTFileNavigation.
-
+	self visitFamixTFileAnchor: aFamixTFileNavigation
 ]
 
 { #category : #visiting }
@@ -290,6 +297,7 @@ FamixTVisitor >> visitFamixTFolder: aFamixTFolder [
 
 	<generated>
 	self visitFamixTFileSystemEntity: aFamixTFolder.
+
 	self visitCollection: aFamixTFolder childrenFileSystemEntities
 ]
 
@@ -305,6 +313,7 @@ FamixTVisitor >> visitFamixTFunction: aFamixTFunction [
 	self visitFamixTWithParameters: aFamixTFunction.
 	self visitFamixTWithStatements: aFamixTFunction.
 	self visitTEntityMetaLevelDependency: aFamixTFunction.
+
 	self visitEntity: aFamixTFunction functionOwner
 ]
 
@@ -313,6 +322,7 @@ FamixTVisitor >> visitFamixTGenericParameterType: aFamixTGenericParameterType [
 
 	<generated>
 	self visitFamixTType: aFamixTGenericParameterType.
+
 	self visitCollection: aFamixTGenericParameterType genericEntities.
 	self visitCollection: aFamixTGenericParameterType concretizations
 ]
@@ -322,6 +332,7 @@ FamixTVisitor >> visitFamixTGlobalVariable: aFamixTGlobalVariable [
 
 	<generated>
 	self visitFamixTStructuralEntity: aFamixTGlobalVariable.
+
 	self visitEntity: aFamixTGlobalVariable parentScope
 ]
 
@@ -329,8 +340,7 @@ FamixTVisitor >> visitFamixTGlobalVariable: aFamixTGlobalVariable [
 FamixTVisitor >> visitFamixTHasImmediateSource: aFamixTHasImmediateSource [
 
 	<generated>
-	self visitFamixTSourceAnchor: aFamixTHasImmediateSource.
-
+	self visitFamixTSourceAnchor: aFamixTHasImmediateSource
 ]
 
 { #category : #visiting }
@@ -359,6 +369,7 @@ FamixTVisitor >> visitFamixTHeader: aFamixTHeader [
 
 	<generated>
 	self visitFamixTFile: aFamixTHeader.
+
 	self visitEntity: aFamixTHeader headerOwner
 ]
 
@@ -374,6 +385,7 @@ FamixTVisitor >> visitFamixTImplementation: aFamixTImplementation [
 
 	<generated>
 	self visitFamixTAssociation: aFamixTImplementation.
+
 	self visitEntity: aFamixTImplementation implementingClass.
 	self visitEntity: aFamixTImplementation interface
 ]
@@ -383,6 +395,7 @@ FamixTVisitor >> visitFamixTImplicitVariable: aFamixTImplicitVariable [
 
 	<generated>
 	self visitFamixTStructuralEntity: aFamixTImplicitVariable.
+
 	self visitEntity: aFamixTImplicitVariable parentBehaviouralEntity
 ]
 
@@ -391,6 +404,7 @@ FamixTVisitor >> visitFamixTImport: aFamixTImport [
 
 	<generated>
 	self visitFamixTAssociation: aFamixTImport.
+
 	self visitEntity: aFamixTImport importingEntity.
 	self visitEntity: aFamixTImport importedEntity
 ]
@@ -406,8 +420,7 @@ FamixTVisitor >> visitFamixTImportable: aFamixTImportable [
 FamixTVisitor >> visitFamixTIndexedFileNavigation: aFamixTIndexedFileNavigation [
 
 	<generated>
-	self visitFamixTFileAnchor: aFamixTIndexedFileNavigation.
-
+	self visitFamixTFileAnchor: aFamixTIndexedFileNavigation
 ]
 
 { #category : #visiting }
@@ -415,6 +428,7 @@ FamixTVisitor >> visitFamixTInheritance: aFamixTInheritance [
 
 	<generated>
 	self visitFamixTAssociation: aFamixTInheritance.
+
 	self visitEntity: aFamixTInheritance subclass.
 	self visitEntity: aFamixTInheritance superclass
 ]
@@ -432,6 +446,7 @@ FamixTVisitor >> visitFamixTInvocation: aFamixTInvocation [
 	<generated>
 	self visitFamixTAssociation: aFamixTInvocation.
 	self visitFamixTHasSignature: aFamixTInvocation.
+
 	self visitCollection: aFamixTInvocation candidates.
 	self visitEntity: aFamixTInvocation sender.
 	self visitEntity: aFamixTInvocation receiver
@@ -461,6 +476,7 @@ FamixTVisitor >> visitFamixTLambda: aFamixTLambda [
 	self visitFamixTWithParameters: aFamixTLambda.
 	self visitFamixTWithStatements: aFamixTLambda.
 	self visitTEntityMetaLevelDependency: aFamixTLambda.
+
 	self visitEntity: aFamixTLambda lambdaContainer
 ]
 
@@ -469,6 +485,7 @@ FamixTVisitor >> visitFamixTLocalVariable: aFamixTLocalVariable [
 
 	<generated>
 	self visitFamixTStructuralEntity: aFamixTLocalVariable.
+
 	self visitEntity: aFamixTLocalVariable parentBehaviouralEntity
 ]
 
@@ -486,6 +503,7 @@ FamixTVisitor >> visitFamixTMethod: aFamixTMethod [
 	self visitFamixTWithParameters: aFamixTMethod.
 	self visitFamixTWithStatements: aFamixTMethod.
 	self visitTEntityMetaLevelDependency: aFamixTMethod.
+
 	self visitEntity: aFamixTMethod parentType
 ]
 
@@ -507,8 +525,7 @@ FamixTVisitor >> visitFamixTModule: aFamixTModule [
 FamixTVisitor >> visitFamixTMultipleFileAnchor: aFamixTMultipleFileAnchor [
 
 	<generated>
-	self visitFamixTSourceAnchor: aFamixTMultipleFileAnchor.
-
+	self visitFamixTSourceAnchor: aFamixTMultipleFileAnchor
 ]
 
 { #category : #visiting }
@@ -524,8 +541,7 @@ FamixTVisitor >> visitFamixTNamespace: aFamixTNamespace [
 	<generated>
 	self visitFamixTCanBeStub: aFamixTNamespace.
 	self visitFamixTNamedEntity: aFamixTNamespace.
-	self visitTEntityMetaLevelDependency: aFamixTNamespace.
-
+	self visitTEntityMetaLevelDependency: aFamixTNamespace
 ]
 
 { #category : #visiting }
@@ -535,6 +551,7 @@ FamixTVisitor >> visitFamixTPackage: aFamixTPackage [
 	self visitFamixTCanBeStub: aFamixTPackage.
 	self visitFamixTNamedEntity: aFamixTPackage.
 	self visitTEntityMetaLevelDependency: aFamixTPackage.
+
 	self visitCollection: aFamixTPackage childEntities
 ]
 
@@ -550,6 +567,7 @@ FamixTVisitor >> visitFamixTParameter: aFamixTParameter [
 
 	<generated>
 	self visitFamixTStructuralEntity: aFamixTParameter.
+
 	self visitEntity: aFamixTParameter parentBehaviouralEntity
 ]
 
@@ -558,6 +576,7 @@ FamixTVisitor >> visitFamixTParameterConcretization: aFamixTParameterConcretizat
 
 	<generated>
 	self visitFamixTAssociation: aFamixTParameterConcretization.
+
 	self visitCollection: aFamixTParameterConcretization concretizations.
 	self visitEntity: aFamixTParameterConcretization genericParameter.
 	self visitEntity: aFamixTParameterConcretization concreteParameter
@@ -591,8 +610,7 @@ FamixTVisitor >> visitFamixTPreprocessorIfdef: aFamixTPreprocessorIfdef [
 FamixTVisitor >> visitFamixTPrimitiveType: aFamixTPrimitiveType [
 
 	<generated>
-	self visitFamixTType: aFamixTPrimitiveType.
-
+	self visitFamixTType: aFamixTPrimitiveType
 ]
 
 { #category : #visiting }
@@ -600,6 +618,7 @@ FamixTVisitor >> visitFamixTReference: aFamixTReference [
 
 	<generated>
 	self visitFamixTAssociation: aFamixTReference.
+
 	self visitEntity: aFamixTReference referencer.
 	self visitEntity: aFamixTReference referredEntity
 ]
@@ -615,8 +634,7 @@ FamixTVisitor >> visitFamixTReferenceable: aFamixTReferenceable [
 FamixTVisitor >> visitFamixTRelativeSourceAnchor: aFamixTRelativeSourceAnchor [
 
 	<generated>
-	self visitFamixTSourceAnchor: aFamixTRelativeSourceAnchor.
-
+	self visitFamixTSourceAnchor: aFamixTRelativeSourceAnchor
 ]
 
 { #category : #visiting }
@@ -662,8 +680,7 @@ FamixTVisitor >> visitFamixTStructuralEntity: aFamixTStructuralEntity [
 	self visitFamixTCanBeStub: aFamixTStructuralEntity.
 	self visitFamixTNamedEntity: aFamixTStructuralEntity.
 	self visitFamixTTypedEntity: aFamixTStructuralEntity.
-	self visitTEntityMetaLevelDependency: aFamixTStructuralEntity.
-
+	self visitTEntityMetaLevelDependency: aFamixTStructuralEntity
 ]
 
 { #category : #visiting }
@@ -703,6 +720,7 @@ FamixTVisitor >> visitFamixTTraitUsage: aFamixTTraitUsage [
 
 	<generated>
 	self visitFamixTAssociation: aFamixTTraitUsage.
+
 	self visitEntity: aFamixTTraitUsage trait.
 	self visitEntity: aFamixTTraitUsage user
 ]
@@ -722,6 +740,7 @@ FamixTVisitor >> visitFamixTType: aFamixTType [
 	self visitFamixTNamedEntity: aFamixTType.
 	self visitFamixTReferenceable: aFamixTType.
 	self visitTEntityMetaLevelDependency: aFamixTType.
+
 	self visitEntity: aFamixTType typeContainer.
 	self visitCollection: aFamixTType typedEntities
 ]
@@ -758,8 +777,7 @@ FamixTVisitor >> visitFamixTTypedEntity: aFamixTTypedEntity [
 FamixTVisitor >> visitFamixTUnknownVariable: aFamixTUnknownVariable [
 
 	<generated>
-	self visitFamixTStructuralEntity: aFamixTUnknownVariable.
-
+	self visitFamixTStructuralEntity: aFamixTUnknownVariable
 ]
 
 { #category : #visiting }
@@ -801,8 +819,7 @@ FamixTVisitor >> visitFamixTWithAttributes: aFamixTWithAttributes [
 FamixTVisitor >> visitFamixTWithClasses: aFamixTWithClasses [
 
 	<generated>
-	self visitFamixTWithTypes: aFamixTWithClasses.
-
+	self visitFamixTWithTypes: aFamixTWithClasses
 ]
 
 { #category : #visiting }
@@ -956,8 +973,7 @@ FamixTVisitor >> visitFamixTWithStatements: aFamixTWithStatements [
 	self visitFamixTCanBeStub: aFamixTWithStatements.
 	self visitFamixTWithAccesses: aFamixTWithStatements.
 	self visitFamixTWithInvocations: aFamixTWithStatements.
-	self visitFamixTWithReferences: aFamixTWithStatements.
-
+	self visitFamixTWithReferences: aFamixTWithStatements
 ]
 
 { #category : #visiting }

@@ -112,6 +112,16 @@ FmxMBVisitorTrait >> initialize [
 ]
 
 { #category : #'generation - visit' }
+FmxMBVisitorTrait >> writeTransitionFor: aFmxMBBehavior on: aStream [
+
+	aFmxMBBehavior relations ifNotEmpty: [
+		aStream
+			<< $.;
+			cr;
+			cr ]
+]
+
+{ #category : #'generation - visit' }
 FmxMBVisitorTrait >> writeVisitMethodFor: aFmxMBBehavior on: aStream [
 
 	self writeVisitMethodHeaderFor: aFmxMBBehavior on: aStream.
@@ -148,11 +158,14 @@ FmxMBVisitorTrait >> writeVisitRelationsFor: aFmxMBBehavior on: aStream [
 { #category : #'generation - visit' }
 FmxMBVisitorTrait >> writeVisitTraitsAndSuperclassFor: aFmxMBBehavior on: aStream [
 
-	aFmxMBBehavior behaviorsToVisit do: [ :behavior |
-		aStream
-			tab;
-			<< ('self visit{1}: a{2}.
-' format: {
+	aFmxMBBehavior behaviorsToVisit
+		do: [ :behavior |
+			aStream << ('	self visit{1}: a{2}' format: {
 							 behavior fullName.
 							 aFmxMBBehavior fullName }) ]
+		separatedBy: [
+			aStream
+				<< '.';
+				cr ];
+		ifNotEmpty: [ self writeTransitionFor: aFmxMBBehavior on: aStream ]
 ]
