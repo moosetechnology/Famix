@@ -140,6 +140,7 @@ FamixJavaTVisitor >> visitFamixJavaEnum: aFamixJavaEnum [
 	self visitFamixTEnum: aFamixJavaEnum.
 	self visitFamixTHasVisibility: aFamixJavaEnum.
 	self visitFamixTImportable: aFamixJavaEnum.
+	self visitFamixTInvocationsReceiver: aFamixJavaEnum.
 	self visitFamixTWithAttributes: aFamixJavaEnum.
 	self visitFamixTWithComments: aFamixJavaEnum.
 	self visitFamixTWithImports: aFamixJavaEnum.
