@@ -20,8 +20,7 @@ Class {
 		'modelTag',
 		'shouldGenerateFileImportHelpers',
 		'basicImportingContextSuperclassName',
-		'groupTag',
-		'packageNameForVisitor'
+		'groupTag'
 	],
 	#category : #'Famix-MetamodelBuilder-Core-Basic'
 }
