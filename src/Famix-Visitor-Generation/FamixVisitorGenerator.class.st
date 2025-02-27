@@ -6,11 +6,10 @@ Class {
 	#name : #FamixVisitorGenerator,
 	#superclass : #Object,
 	#instVars : [
-		'visitorTrait',
 		'packageName',
 		'builder'
 	],
-	#category : #'Famix-Visitor-MetamodelBuilder-Extension'
+	#category : #'Famix-Visitor-Generation-MetamodelBuilder'
 }
 
 { #category : #'instance creation' }
@@ -31,12 +30,12 @@ FamixVisitorGenerator >> configureForGenerator: aFamixMetamodelGenerator [
 { #category : #generating }
 FamixVisitorGenerator >> define [
 
+	| visitorTrait |
 	visitorTrait := builder newVisitorTrait.
 	visitorTrait packageName: packageName.
 
-	builder configuration prefix = #Famix ifFalse: [
-		builder allSubBuilders do: [ :subBuilder |
-			subBuilder extensionBehaviors
-				detect: [ :each | each name = #TVisitor ]
-				ifFound: [ :famixTVistior | visitorTrait --|> famixTVistior ] ] ]
+	builder allSubBuilders do: [ :subBuilder |
+		subBuilder extensionBehaviors
+			detect: [ :each | each name = #TVisitor ]
+			ifFound: [ :famixTVistior | visitorTrait --|> famixTVistior ] ]
 ]

@@ -1,6 +1,6 @@
 Extension { #name : #FmxMBClass }
 
-{ #category : #'*Famix-Visitor' }
+{ #category : #'*Famix-Visitor-Generation' }
 FmxMBClass >> addTraitsFromGeneralizationsIn: aCollection [
 
 	super addTraitsFromGeneralizationsIn: aCollection.
@@ -11,7 +11,7 @@ FmxMBClass >> addTraitsFromGeneralizationsIn: aCollection [
 	^ aCollection
 ]
 
-{ #category : #'*Famix-Visitor' }
+{ #category : #'*Famix-Visitor-Generation' }
 FmxMBClass >> behaviorsToVisit [
 
 	| behaviorsToVisit |
@@ -25,7 +25,7 @@ FmxMBClass >> behaviorsToVisit [
 	^ behaviorsToVisit
 ]
 
-{ #category : #'*Famix-Visitor' }
+{ #category : #'*Famix-Visitor-Generation' }
 FmxMBClass >> traitsFromGeneralizations [
 
 	| traitsFromGeneralizations |

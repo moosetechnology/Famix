@@ -5,7 +5,7 @@ See FamixVisitorBuilder.
 Class {
 	#name : #FmxMBVisitorTrait,
 	#superclass : #FmxMBTrait,
-	#category : #'Famix-Visitor-MetamodelBuilder-Extension'
+	#category : #'Famix-Visitor-Generation-MetamodelBuilder'
 }
 
 { #category : #accessing }

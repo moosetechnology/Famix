@@ -134,7 +134,7 @@ Class {
 	#category : #'Famix-MetamodelGeneration'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #'additional tools' }
 FamixGenerator class >> metamodelToolGenerators [
 
 	^ { FamixVisitorGenerator }
@@ -152,7 +152,7 @@ FamixGenerator class >> packageNameForVisitor [
 	^ #'Famix-Visitor'
 ]
 
-{ #category : #initialization }
+{ #category : #accessing }
 FamixGenerator class >> prefix [
 
 	^ #Famix
