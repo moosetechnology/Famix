@@ -27,6 +27,20 @@ FamixTTraitVisitor >> acceptMeIfNotNil: aFamixEntity [
 
 ]
 
+{ #category : #visiting }
+FamixTTraitVisitor >> visitFamixClassGroup: aFamixClassGroup [
+	<generated>
+
+
+]
+
+{ #category : #visiting }
+FamixTTraitVisitor >> visitFamixFileAnchorReader: aFamixFileAnchorReader [
+	<generated>
+
+
+]
+
 { #category : #'visiting - traits' }
 FamixTTraitVisitor >> visitFamixTAccess: aFamixTAccess [
 	<generated>
@@ -51,6 +65,8 @@ FamixTTraitVisitor >> visitFamixTAnnotationInstance: aFamixTAnnotationInstance [
 
 	self visitTEntityMetaLevelDependency: aFamixTAnnotationInstance.
 	self acceptMeIfNotNil: aFamixTAnnotationInstance annotatedEntity.
+	self acceptMeIfNotNil: aFamixTAnnotationInstance annotationType.
+	self visitList: aFamixTAnnotationInstance attributes.
 
 ]
 
@@ -59,6 +75,7 @@ FamixTTraitVisitor >> visitFamixTAnnotationInstanceAttribute: aFamixTAnnotationI
 	<generated>
 
 	self visitTEntityMetaLevelDependency: aFamixTAnnotationInstanceAttribute.
+	self acceptMeIfNotNil: aFamixTAnnotationInstanceAttribute annotationTypeAttribute.
 	self acceptMeIfNotNil: aFamixTAnnotationInstanceAttribute parentAnnotationInstance.
 
 ]
@@ -179,6 +196,7 @@ FamixTTraitVisitor >> visitFamixTCohesionCouplingMetrics: aFamixTCohesionCouplin
 FamixTTraitVisitor >> visitFamixTComment: aFamixTComment [
 	<generated>
 
+	self visitFamixTSourceEntity: aFamixTComment.
 	self visitTEntityMetaLevelDependency: aFamixTComment.
 	self acceptMeIfNotNil: aFamixTComment commentedEntity.
 
@@ -296,6 +314,7 @@ FamixTTraitVisitor >> visitFamixTFileNavigation: aFamixTFileNavigation [
 FamixTTraitVisitor >> visitFamixTFileSystemEntity: aFamixTFileSystemEntity [
 	<generated>
 
+	self visitFamixTNamedEntity: aFamixTFileSystemEntity.
 	self acceptMeIfNotNil: aFamixTFileSystemEntity parentFolder.
 
 ]
@@ -414,8 +433,8 @@ FamixTTraitVisitor >> visitFamixTImport: aFamixTImport [
 	<generated>
 
 	self visitFamixTAssociation: aFamixTImport.
-	self acceptMeIfNotNil: aFamixTImport importingEntity.
 	self acceptMeIfNotNil: aFamixTImport importedEntity.
+	self acceptMeIfNotNil: aFamixTImport importingEntity.
 
 ]
 
@@ -685,11 +704,9 @@ FamixTTraitVisitor >> visitFamixTSourceAnchor: aFamixTSourceAnchor [
 
 { #category : #'visiting - traits' }
 FamixTTraitVisitor >> visitFamixTSourceEntity: aFamixTSourceEntity [
-	"Probably not necessary to visit the sourceAnchors
-
 	<generated>
 
-	self acceptMeIfNotNil: aFamixTSourceEntity sourceAnchor."
+	self acceptMeIfNotNil: aFamixTSourceEntity sourceAnchor.
 
 ]
 
@@ -963,7 +980,7 @@ FamixTTraitVisitor >> visitFamixTWithImplicitVariables: aFamixTWithImplicitVaria
 FamixTTraitVisitor >> visitFamixTWithImports: aFamixTWithImports [
 	<generated>
 
-	self visitList: aFamixTWithImports outgoingImports.
+	self visitList: aFamixTWithImports imports.
 
 ]
 
