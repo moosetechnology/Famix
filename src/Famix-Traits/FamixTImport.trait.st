@@ -30,7 +30,7 @@ Trait {
 	],
 	#traits : 'FamixTAssociation',
 	#classTraits : 'FamixTAssociation classTrait',
-	#category : #'Famix-Traits-Traits'
+	#category : #'Famix-Traits-Import'
 }
 
 { #category : #meta }

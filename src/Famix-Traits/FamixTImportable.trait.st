@@ -15,7 +15,7 @@ Trait {
 	#instVars : [
 		'#incomingImports => FMMany type: #FamixTImport opposite: #importedEntity'
 	],
-	#category : #'Famix-Traits-Traits'
+	#category : #'Famix-Traits-Import'
 }
 
 { #category : #meta }

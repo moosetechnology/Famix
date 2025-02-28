@@ -17,7 +17,7 @@ Trait {
 	#instVars : [
 		'#implementations => FMMany type: #FamixTImplementation opposite: #interface'
 	],
-	#category : #'Famix-Traits-Traits'
+	#category : #'Famix-Traits-Implementation'
 }
 
 { #category : #meta }

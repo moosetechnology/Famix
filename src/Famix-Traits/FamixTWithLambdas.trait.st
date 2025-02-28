@@ -17,7 +17,7 @@ Trait {
 	#instVars : [
 		'#lambdas => FMMany type: #FamixTLambda opposite: #lambdaContainer'
 	],
-	#category : #'Famix-Traits-Traits'
+	#category : #'Famix-Traits-Lambda'
 }
 
 { #category : #meta }

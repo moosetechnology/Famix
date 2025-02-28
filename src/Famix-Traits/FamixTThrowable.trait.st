@@ -21,7 +21,7 @@ Trait {
 		'#declaringEntities => FMMany type: #FamixTWithExceptions opposite: #declaredExceptions',
 		'#throwingEntities => FMMany type: #FamixTWithExceptions opposite: #thrownExceptions'
 	],
-	#category : #'Famix-Traits-Traits'
+	#category : #'Famix-Traits-Exception'
 }
 
 { #category : #meta }
