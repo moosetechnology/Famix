@@ -5,7 +5,7 @@
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `attributes` | `FamixTWithAnnotationInstanceAttributes` | `parentAnnotationInstance` | `FamixTAnnotationInstanceAttribute` | This corresponds to the actual values of the attributes in an AnnotationInstance|
+| `attributes` | `FamixTAnnotationInstance` | `parentAnnotationInstance` | `FamixTAnnotationInstanceAttribute` | This corresponds to the actual values of the attributes in an AnnotationInstance|
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
@@ -19,8 +19,8 @@
 Class {
 	#name : #FamixJavaAnnotationInstance,
 	#superclass : #FamixJavaSourcedEntity,
-	#traits : 'FamixTAnnotationInstance + FamixTTypedAnnotationInstance + FamixTWithAnnotationInstanceAttributes',
-	#classTraits : 'FamixTAnnotationInstance classTrait + FamixTTypedAnnotationInstance classTrait + FamixTWithAnnotationInstanceAttributes classTrait',
+	#traits : 'FamixTAnnotationInstance + FamixTTypedAnnotationInstance',
+	#classTraits : 'FamixTAnnotationInstance classTrait + FamixTTypedAnnotationInstance classTrait',
 	#category : #'Famix-Java-Entities-Entities'
 }
 

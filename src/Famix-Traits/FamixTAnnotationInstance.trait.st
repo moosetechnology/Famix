@@ -14,6 +14,11 @@ Instance Variables:
 ## Relations
 ======================
 
+### Children
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `attributes` | `FamixTAnnotationInstance` | `parentAnnotationInstance` | `FamixTAnnotationInstanceAttribute` | This corresponds to the actual values of the attributes in an AnnotationInstance|
+
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
@@ -25,7 +30,8 @@ Instance Variables:
 Trait {
 	#name : #FamixTAnnotationInstance,
 	#instVars : [
-		'#annotatedEntity => FMOne type: #FamixTWithAnnotationInstances opposite: #annotationInstances'
+		'#annotatedEntity => FMOne type: #FamixTWithAnnotationInstances opposite: #annotationInstances',
+		'#attributes => FMMany type: #FamixTAnnotationInstanceAttribute opposite: #parentAnnotationInstance'
 	],
 	#traits : 'TEntityMetaLevelDependency',
 	#classTraits : 'TEntityMetaLevelDependency classTrait',
@@ -48,6 +54,12 @@ FamixTAnnotationInstance classSide >> annotationFamixAnnotationInstanceGroup [
 	^ FamixAnnotationInstanceGroup
 ]
 
+{ #category : #adding }
+FamixTAnnotationInstance >> addAttribute: anObject [
+	<generated>
+	^ self attributes add: anObject
+]
+
 { #category : #accessing }
 FamixTAnnotationInstance >> annotatedEntity [
 	"Relation named: #annotatedEntity type: #FamixTWithAnnotationInstances opposite: #annotationInstances"
@@ -62,6 +74,23 @@ FamixTAnnotationInstance >> annotatedEntity: anObject [
 
 	<generated>
 	annotatedEntity := anObject
+]
+
+{ #category : #accessing }
+FamixTAnnotationInstance >> attributes [
+	"Relation named: #attributes type: #FamixTAnnotationInstanceAttribute opposite: #parentAnnotationInstance"
+
+	<generated>
+	<FMComment: 'This corresponds to the actual values of the attributes in an AnnotationInstance'>
+	<derived>
+	^ attributes
+]
+
+{ #category : #accessing }
+FamixTAnnotationInstance >> attributes: anObject [
+
+	<generated>
+	attributes value: anObject
 ]
 
 { #category : #printing }

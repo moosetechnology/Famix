@@ -183,7 +183,6 @@ FamixJavaGenerator >> defineHierarchy [
 
 	annotationInstance --|> sourcedEntity.
 	annotationInstance --|> #TAnnotationInstance.
-	annotationInstance --|> #TWithAnnotationInstanceAttributes.
 	annotationInstance --|> #TTypedAnnotationInstance.
 
 	annotationInstanceAttribute --|> sourcedEntity.

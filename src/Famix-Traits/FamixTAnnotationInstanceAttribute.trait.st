@@ -15,7 +15,7 @@ Instance Variables:
 ### Parents
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `parentAnnotationInstance` | `FamixTAnnotationInstanceAttribute` | `attributes` | `FamixTWithAnnotationInstanceAttributes` | The instance of the annotation in which the attribute is used.|
+| `parentAnnotationInstance` | `FamixTAnnotationInstanceAttribute` | `attributes` | `FamixTAnnotationInstance` | The instance of the annotation in which the attribute is used.|
 
 
 ## Properties
@@ -29,7 +29,7 @@ Instance Variables:
 Trait {
 	#name : #FamixTAnnotationInstanceAttribute,
 	#instVars : [
-		'#parentAnnotationInstance => FMOne type: #FamixTWithAnnotationInstanceAttributes opposite: #attributes',
+		'#parentAnnotationInstance => FMOne type: #FamixTAnnotationInstance opposite: #attributes',
 		'#value => FMProperty'
 	],
 	#traits : 'TEntityMetaLevelDependency',
@@ -48,7 +48,7 @@ FamixTAnnotationInstanceAttribute classSide >> annotation [
 
 { #category : #accessing }
 FamixTAnnotationInstanceAttribute >> parentAnnotationInstance [
-	"Relation named: #parentAnnotationInstance type: #FamixTWithAnnotationInstanceAttributes opposite: #attributes"
+	"Relation named: #parentAnnotationInstance type: #FamixTAnnotationInstance opposite: #attributes"
 
 	<generated>
 	<FMComment: 'The instance of the annotation in which the attribute is used.'>
