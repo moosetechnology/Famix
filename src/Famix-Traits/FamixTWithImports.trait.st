@@ -33,17 +33,6 @@ FamixTWithImports >> addImport: anObject [
 	^ self imports add: anObject
 ]
 
-{ #category : #'as yet unclassified' }
-FamixTWithImports >> addOutgoingImport: anObject [
-
-	self
-		deprecated: 'Use #addImport:'
-		transformWith:
-		'`@receiver addOutgoingImport: `@argument' -> '`@receiver addImport: `@argument'.
-
-	^ self addImport: anObject
-]
-
 { #category : #accessing }
 FamixTWithImports >> imports [
 	"Relation named: #imports type: #FamixTImport opposite: #importingEntity"
@@ -58,26 +47,4 @@ FamixTWithImports >> imports: anObject [
 
 	<generated>
 	imports value: anObject
-]
-
-{ #category : #'as yet unclassified' }
-FamixTWithImports >> outgoingImports [
-
-	self
-		deprecated: 'Use #imports'
-		transformWith:
-		'`@receiver outgoingImports' -> '`@receiver imports'.
-
-	^ self imports
-]
-
-{ #category : #'as yet unclassified' }
-FamixTWithImports >> outgoingImports: anObject [
-
-	self
-		deprecated: 'Use #imports:'
-		transformWith:
-		'`@receiver outgoingImports: `@argument' -> '`@receiver imports: `@argument'.
-
-	^ self imports: anObject
 ]
