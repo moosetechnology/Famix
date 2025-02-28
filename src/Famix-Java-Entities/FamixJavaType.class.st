@@ -164,14 +164,14 @@ FamixJavaType >> parentScope [
 
 { #category : #printing }
 FamixJavaType >> printOn: aStream [
+
 	self name ifNotNil: [ aStream nextPutAll: self name ].
-	self typeContainer
-		ifNotNil: [ :parent | 
-			aStream nextPutAll: ' in '.
-			parent mooseNameOn: aStream ].
+	self typeContainer ifNotNil: [ :parent |
+		aStream nextPutAll: ' in '.
+		parent mooseNameOn: aStream ].
 	aStream
 		nextPutAll: ' (';
-		nextPutAll: (self class name removePrefix: 'FamixJava');
+		nextPutAll: (self class name withoutPrefix: 'FamixJava');
 		nextPut: $)
 ]
 

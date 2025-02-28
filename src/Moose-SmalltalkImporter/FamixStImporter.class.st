@@ -94,20 +94,21 @@ FamixStImporter >> checkAbstractClass: class [
 ]
 
 { #category : #'private-entity-creation' }
-FamixStImporter >> createAnnotationType: aPragmaNode [ 
+FamixStImporter >> createAnnotationType: aPragmaNode [
+
 	| pragmaAnnotationType |
 	pragmaAnnotationType := annotationTypes
-		at: aPragmaNode selector
-		put: self factory annotationType new.
+		                        at: aPragmaNode selector
+		                        put: self factory annotationType new.
 	pragmaAnnotationType name: aPragmaNode selector.
 	aPragmaNode selector isUnary ifFalse: [
-		(aPragmaNode selector piecesCutWhere: [:a :b | a = $: ]) do: [ :each | 
+		(aPragmaNode selector piecesCutWhere: [ :a :b | a = $: ]) do: [
+			:each |
 			| attribute |
 			attribute := self factory annotationTypeAttribute new.
-			attribute name: (each removeSuffix: ':').
+			attribute name: (each withoutSuffix: ':').
 			attribute parentAnnotationType: pragmaAnnotationType.
-			self addEntity: attribute
-			] ].
+			self addEntity: attribute ] ].
 	^ pragmaAnnotationType
 ]
 
