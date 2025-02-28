@@ -1545,7 +1545,7 @@ FamixGenerator >> defineRelations [
 	((tTraitUsage property: #trait)
 			source).
 
-	((tTraitUser property: #outgoingTraitUsages))
+	((tTraitUser property: #traitUsages))
 		-*
 	((tTraitUsage property: #user)
 			target).
