@@ -16,7 +16,7 @@
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `instances` | `FamixTAnnotationType` | `annotationType` | `FamixTTypedAnnotationInstance` | Annotations of this type|
+| `instances` | `FamixTAnnotationType` | `annotationType` | `FamixTAnnotationInstance` | Annotations of this type|
 
 
 
