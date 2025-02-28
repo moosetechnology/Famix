@@ -15,7 +15,7 @@ Trait {
 	#instVars : [
 		'#declaredSourceLanguage => FMOne type: #FamixTSourceLanguage opposite: #sourcedEntities'
 	],
-	#category : #'Famix-Traits-Traits'
+	#category : #'Famix-Traits-SourceLanguage'
 }
 
 { #category : #meta }

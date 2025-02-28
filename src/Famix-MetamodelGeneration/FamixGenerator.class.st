@@ -55,10 +55,7 @@ Class {
 		'tTraitUsage',
 		'tType',
 		'tTypeAlias',
-		'tTypedAnnotationInstance',
-		'tTypedAnnotationInstanceAttribute',
 		'tWithAccesses',
-		'tWithAnnotationInstanceAttributes',
 		'tWithAnnotationInstances',
 		'tWithAnnotationTypes',
 		'tWithAttributes',
@@ -105,7 +102,6 @@ Class {
 		'tRelativeSourceAnchor',
 		'tEnum',
 		'tHasVisibility',
-		'tClassWithVisibility',
 		'tCanBeFinal',
 		'tCanBeAbstract',
 		'tClassMetrics',
@@ -853,12 +849,6 @@ FamixGenerator >> commentForTWithAccesses [
 ]
 
 { #category : #comments }
-FamixGenerator >> commentForTWithAnnotationInstanceAttributes [
-
-	^ ''
-]
-
-{ #category : #comments }
 FamixGenerator >> commentForTWithAnnotationInstances [
 
 	^ ''
@@ -1079,9 +1069,6 @@ FamixGenerator >> defineHierarchy [
 	tClass --|> tInvocationsReceiver.
 	tClass --|> tWithComments.
 
-	tClassWithVisibility --|> tClass.
-	tClassWithVisibility --|> tHasVisibility.
-
 	tClassGroup --|> tTypeGroup.
 	
 	tComment  --|> #TEntityMetaLevelDependency.
@@ -1096,6 +1083,7 @@ FamixGenerator >> defineHierarchy [
 
 	tException --|> tClass.
 
+	tFileSystemEntity --|> tNamedEntity.
 	tFile --|> tFileSystemEntity.
 
 	tFileInclude --|> tAssociation.
@@ -1306,13 +1294,13 @@ FamixGenerator >> defineRelations [
 			comment: 'The instance of the annotation in which the attribute is used.';
 			container)
 		*-
-	((tWithAnnotationInstanceAttributes property: #attributes)
+	((tAnnotationInstance property: #attributes)
 			comment: 'This corresponds to the actual values of the attributes in an AnnotationInstance').
 
 	((tAnnotationType property: #instances)
 			comment: 'Annotations of this type')
 		-*
-	((tTypedAnnotationInstance property: #annotationType)
+	((tAnnotationInstance property: #annotationType)
 			comment: 'Refers to the type of an annotation. (In some languages, Java and C#, an annotation as an explicit type). '";
 			container"). "TODO: resolve"
 
@@ -1326,7 +1314,7 @@ FamixGenerator >> defineRelations [
 	((tAnnotationTypeAttribute property: #annotationAttributeInstances)
 			comment: 'A collection of AnnotationInstanceAttribute which hold the usages of this attribute in actual AnnotationInstances')
 		-*
-	((tTypedAnnotationInstanceAttribute property: #annotationTypeAttribute)
+	((tAnnotationInstanceAttribute property: #annotationTypeAttribute)
 			comment: 'This corresponds to the type of the attribute in an AnnotationInstance').
 
 	((tAssociation property: #previous)
@@ -1455,7 +1443,7 @@ FamixGenerator >> defineRelations [
 	((tInvocationsReceiver property: #receivingInvocations)
 			comment: 'List of invocations performed on this entity (considered as the receiver)').
 
-	((tWithImports property: #outgoingImports)
+	((tWithImports property: #imports)
 			comment: '')
 		-*
 	((tImport property: #importingEntity)
@@ -1565,7 +1553,7 @@ FamixGenerator >> defineRelations [
 	((tTraitUsage property: #trait)
 			source).
 
-	((tTraitUser property: #outgoingTraitUsages))
+	((tTraitUser property: #traitUsages))
 		-*
 	((tTraitUsage property: #user)
 			target).
@@ -1822,12 +1810,6 @@ FamixGenerator >> defineTraits [
 
 	tTypeAlias := builder newTraitNamed: #TTypeAlias comment: self commentForTTypeAlias.
 
-	tTypedAnnotationInstance := builder newTraitNamed: #TTypedAnnotationInstance.
-	tTypedAnnotationInstance comment: self commentForTTypedAnnotationInstance.
-
-	tTypedAnnotationInstanceAttribute := builder newTraitNamed: #TTypedAnnotationInstanceAttribute.
-	tTypedAnnotationInstanceAttribute comment: self commentForTTypedAnnotationInstanceAttribute.
-
 	tTypedEntity := builder newTraitNamed: #TTypedEntity.
 	tTypedEntity comment: self commentForTTypedStructure.
 
@@ -1835,9 +1817,6 @@ FamixGenerator >> defineTraits [
 
 	tWithAccesses := builder newTraitNamed: #TWithAccesses.
 	tWithAccesses comment: self commentForTWithAccesses.
-
-	tWithAnnotationInstanceAttributes := builder newTraitNamed: #TWithAnnotationInstanceAttributes.
-	tWithAnnotationInstanceAttributes comment: self commentForTWithAnnotationInstanceAttributes.
 
 	tWithAnnotationInstances := builder newTraitNamed: #TWithAnnotationInstances.
 	tWithAnnotationInstances comment: self commentForTWithAnnotationInstances.
@@ -1907,7 +1886,6 @@ FamixGenerator >> defineTraits [
 	tHasImmediateSource := builder newTraitNamed: #THasImmediateSource comment: self commentForTHasImmediateSource.
 
 	tHasVisibility := builder newTraitNamed: #THasVisibility.
-	tClassWithVisibility := builder newTraitNamed: #TClassWithVisibility.
 
 	tWithStatements := builder newTraitNamed: #TWithStatements.
 	tWithStatements testingSelector: #isBehavioural.

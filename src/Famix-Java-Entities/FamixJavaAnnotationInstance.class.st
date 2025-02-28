@@ -5,13 +5,13 @@
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `attributes` | `FamixTWithAnnotationInstanceAttributes` | `parentAnnotationInstance` | `FamixTAnnotationInstanceAttribute` | This corresponds to the actual values of the attributes in an AnnotationInstance|
+| `attributes` | `FamixTAnnotationInstance` | `parentAnnotationInstance` | `FamixTAnnotationInstanceAttribute` | This corresponds to the actual values of the attributes in an AnnotationInstance|
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `annotatedEntity` | `FamixTAnnotationInstance` | `annotationInstances` | `FamixTWithAnnotationInstances` | The NamedEntity on which the annotation occurs.|
-| `annotationType` | `FamixTTypedAnnotationInstance` | `instances` | `FamixTAnnotationType` | Refers to the type of an annotation. (In some languages, Java and C#, an annotation as an explicit type). |
+| `annotationType` | `FamixTAnnotationInstance` | `instances` | `FamixTAnnotationType` | Refers to the type of an annotation. (In some languages, Java and C#, an annotation as an explicit type). |
 
 
 
@@ -19,8 +19,8 @@
 Class {
 	#name : #FamixJavaAnnotationInstance,
 	#superclass : #FamixJavaSourcedEntity,
-	#traits : 'FamixTAnnotationInstance + FamixTTypedAnnotationInstance + FamixTWithAnnotationInstanceAttributes',
-	#classTraits : 'FamixTAnnotationInstance classTrait + FamixTTypedAnnotationInstance classTrait + FamixTWithAnnotationInstanceAttributes classTrait',
+	#traits : 'FamixTAnnotationInstance',
+	#classTraits : 'FamixTAnnotationInstance classTrait',
 	#category : #'Famix-Java-Entities-Entities'
 }
 

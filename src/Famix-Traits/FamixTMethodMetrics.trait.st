@@ -1,6 +1,6 @@
 Trait {
 	#name : #FamixTMethodMetrics,
-	#category : #'Famix-Traits-Traits'
+	#category : #'Famix-Traits-Behavioral'
 }
 
 { #category : #meta }

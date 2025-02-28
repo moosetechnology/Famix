@@ -15,7 +15,7 @@ Trait {
 	#instVars : [
 		'#enumValues => FMMany type: #FamixTEnumValue opposite: #parentEnum'
 	],
-	#category : #'Famix-Traits-EnumValue'
+	#category : #'Famix-Traits-Enum'
 }
 
 { #category : #meta }

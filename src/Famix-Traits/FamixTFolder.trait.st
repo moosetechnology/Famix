@@ -15,6 +15,12 @@ It represents a folder in the file system. It can contain other files or folders
 | `childrenFileSystemEntities` | `FamixTFolder` | `parentFolder` | `FamixTFileSystemEntity` | List of entities contained in this folder.|
 
 
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+|---|
+| `name` | `String` | nil | Basic name of the entity, not full reference.|
 
 "
 Trait {

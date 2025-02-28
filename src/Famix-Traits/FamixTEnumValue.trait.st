@@ -47,7 +47,7 @@ Trait {
 	],
 	#traits : 'FamixTStructuralEntity',
 	#classTraits : 'FamixTStructuralEntity classTrait',
-	#category : #'Famix-Traits-EnumValue'
+	#category : #'Famix-Traits-Enum'
 }
 
 { #category : #meta }

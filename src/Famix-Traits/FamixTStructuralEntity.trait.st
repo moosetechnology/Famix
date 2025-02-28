@@ -29,7 +29,7 @@ Trait {
 	#name : #FamixTStructuralEntity,
 	#traits : 'FamixTAccessible + FamixTCanBeStub + FamixTNamedEntity + FamixTTypedEntity + TEntityMetaLevelDependency',
 	#classTraits : 'FamixTAccessible classTrait + FamixTCanBeStub classTrait + FamixTNamedEntity classTrait + FamixTTypedEntity classTrait + TEntityMetaLevelDependency classTrait',
-	#category : #'Famix-Traits-Traits'
+	#category : #'Famix-Traits-StructuralEntity'
 }
 
 { #category : #meta }

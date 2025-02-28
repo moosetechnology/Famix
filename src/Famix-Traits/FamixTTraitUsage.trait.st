@@ -10,7 +10,7 @@
 ### Association target
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `user` | `FamixTTraitUsage` | `outgoingTraitUsages` | `FamixTTraitUser` | |
+| `user` | `FamixTTraitUsage` | `traitUsages` | `FamixTTraitUser` | |
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
@@ -26,7 +26,7 @@ Trait {
 	#name : #FamixTTraitUsage,
 	#instVars : [
 		'#trait => FMOne type: #FamixTTrait opposite: #incomingTraitUsages',
-		'#user => FMOne type: #FamixTTraitUser opposite: #outgoingTraitUsages'
+		'#user => FMOne type: #FamixTTraitUser opposite: #traitUsages'
 	],
 	#traits : 'FamixTAssociation',
 	#classTraits : 'FamixTAssociation classTrait',
@@ -60,7 +60,7 @@ FamixTTraitUsage >> trait: anObject [
 
 { #category : #accessing }
 FamixTTraitUsage >> user [
-	"Relation named: #user type: #FamixTTraitUser opposite: #outgoingTraitUsages"
+	"Relation named: #user type: #FamixTTraitUser opposite: #traitUsages"
 
 	<generated>
 	<target>

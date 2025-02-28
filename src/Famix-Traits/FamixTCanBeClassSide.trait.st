@@ -12,7 +12,7 @@ Trait {
 	#instVars : [
 		'#isClassSide => FMProperty defaultValue: false'
 	],
-	#category : #'Famix-Traits-Traits'
+	#category : #'Famix-Traits-PrimitiveProperties'
 }
 
 { #category : #meta }
