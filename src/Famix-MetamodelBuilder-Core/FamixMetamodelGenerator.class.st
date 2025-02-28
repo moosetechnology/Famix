@@ -33,7 +33,8 @@ Class {
 	#instVars : [
 		'builder',
 		'cleaningStrategy',
-		'subBuildersMapByPrefix'
+		'subBuildersMapByPrefix',
+		'metamodelToolGenerators'
 	],
 	#category : #'Famix-MetamodelBuilder-Core-Basic'
 }
@@ -116,6 +117,13 @@ FamixMetamodelGenerator class >> isRealMetamodel [
 	^ self isAbstract not
 ]
 
+{ #category : #'additional tools' }
+FamixMetamodelGenerator class >> metamodelToolGenerators [
+	"Override to add FamixVisitorGenerator, etc"
+
+	^ {  }
+]
+
 { #category : #generation }
 FamixMetamodelGenerator class >> metamodelsToGenerate [
 	"We add the submetamodels before the MM that composes them because if we do it the other way around, it will cause problems when we regenerate everything because it will remove the glue added by the composed MM."
@@ -177,6 +185,7 @@ FamixMetamodelGenerator class >> withMooseModelDo: aBlock [
 
 { #category : #definition }
 FamixMetamodelGenerator >> adoptBuilder: aBuilder [
+
 	aBuilder configuration
 		prefix: self prefix;
 		packageName: self packageName;
@@ -247,12 +256,14 @@ FamixMetamodelGenerator >> cleaningStrategy: anObject [
 
 { #category : #definition }
 FamixMetamodelGenerator >> define [
+
 	self defineTraits.
 	self defineClasses.
 	self defineAssociations.
 	self defineHierarchy.
 	self defineProperties.
-	self defineRelations
+	self defineRelations.
+	self defineMetamodelTools.
 ]
 
 { #category : #definition }
@@ -268,6 +279,12 @@ FamixMetamodelGenerator >> defineClasses [
 
 { #category : #definition }
 FamixMetamodelGenerator >> defineHierarchy [
+]
+
+{ #category : #definition }
+FamixMetamodelGenerator >> defineMetamodelTools [
+
+	metamodelToolGenerators do: [ :generator | generator define ]
 ]
 
 { #category : #definition }
@@ -316,19 +333,24 @@ FamixMetamodelGenerator >> generatedPackage [
 FamixMetamodelGenerator >> initialize [
 
 	super initialize.
-	
+
 	self withoutCleaning.
-	
+
 	builder := self newBuilder.
 	self adoptBuilder: builder.
-	
-	subBuildersMapByPrefix := Dictionary newFrom: (self class submetamodels collect: [ :each | 
-		| subbuilder |
-		subbuilder := each builderWithDefinitions.
-		subbuilder parentBuilder: self builder.
-		builder environment: builder environment.		
-		each prefix -> subbuilder ]).
 
+	subBuildersMapByPrefix := Dictionary newFrom:
+		                          (self class submetamodels collect: [ :each |
+			                           | subbuilder |
+			                           subbuilder := each
+				                                         builderWithDefinitions.
+			                           subbuilder parentBuilder: self builder.
+			                           builder environment: builder environment.
+			                           each prefix -> subbuilder ]).
+
+	metamodelToolGenerators := self class metamodelToolGenerators
+		                           collect: [ :generatorClass |
+		                           generatorClass forGenerator: self ]
 ]
 
 { #category : #accessing }

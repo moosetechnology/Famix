@@ -130,13 +130,25 @@ Class {
 	#category : #'Famix-MetamodelGeneration'
 }
 
+{ #category : #'additional tools' }
+FamixGenerator class >> metamodelToolGenerators [
+
+	^ { FamixVisitorGenerator }
+]
+
 { #category : #accessing }
 FamixGenerator class >> packageName [
 
 	^ #'Famix-Traits'
 ]
 
-{ #category : #initialization }
+{ #category : #accessing }
+FamixGenerator class >> packageNameForVisitor [
+
+	^ #'Famix-Visitor'
+]
+
+{ #category : #accessing }
 FamixGenerator class >> prefix [
 
 	^ #Famix

@@ -38,8 +38,10 @@ FmxMBRealRingEnvironment >> collectChangesToApply [
 { #category : #installing }
 FmxMBRealRingEnvironment >> compile: aSource in: aClass classified: aProtocol package: aPackageName [
 
-	aClass compile: aSource classified: '*', aPackageName, '-', aProtocol.
-
+	| category |
+	category := '*' , aPackageName.
+	aProtocol ifNotEmpty: [ category := category , '-' , aProtocol ].
+	aClass compile: aSource classified: category
 ]
 
 { #category : #installing }
@@ -168,7 +170,7 @@ FmxMBRealRingEnvironment >> recordMethodsAdoptionsOf: realClass to: anRGClass re
 	| generatedMethodsOfRealClass generatedMethodNamesOfRealClass |
 	generatedMethodsOfRealClass := realClass
 		ifNil: [ {} ]
-		ifNotNil: [ (Pragma allNamed: #generated in: realClass) collect: #method thenReject: [ :m | m isFromTrait or: [ m isExtension ] ] ] .
+		ifNotNil: [ (Pragma allNamed: #generated in: realClass) collect: #method thenReject: [ :m | m isFromTrait  ] ] .
 
 	generatedMethodNamesOfRealClass := generatedMethodsOfRealClass collect: #selector.
 

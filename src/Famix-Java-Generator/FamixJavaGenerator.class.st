@@ -52,10 +52,22 @@ Class {
 	#category : #'Famix-Java-Generator'
 }
 
+{ #category : #'additional tools' }
+FamixJavaGenerator class >> metamodelToolGenerators [
+
+	^ { FamixVisitorGenerator }
+]
+
 { #category : #accessing }
 FamixJavaGenerator class >> packageName [
 
 	^ #'Famix-Java-Entities'
+]
+
+{ #category : #accessing }
+FamixJavaGenerator class >> packageNameForVisitor [
+
+	^ #'Famix-Java-Visitor'
 ]
 
 { #category : #accessing }

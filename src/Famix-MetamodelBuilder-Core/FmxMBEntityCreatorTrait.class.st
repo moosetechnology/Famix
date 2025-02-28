@@ -65,3 +65,9 @@ FmxMBEntityCreatorTrait >> isEntityCreatorTrait [
 
 	^ true
 ]
+
+{ #category : #testing }
+FmxMBEntityCreatorTrait >> isMetamodelTrait [
+
+	^ false
+]

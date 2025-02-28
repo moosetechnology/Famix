@@ -159,8 +159,9 @@ BaselineOfFamix >> packages: spec [
 		package: 'Moose-Query-Extensions' with: [ spec requires: #( 'Moose-Query' 'BasicTraits' ) ];
 		package: 'Famix-Traits' with: [ spec requires: #( 'Moose-Core' ) ];
 		package: 'Famix-Visitor' with: [ spec requires: #( 'Famix-Traits' ) ];
+		package: 'Famix-Visitor-Generation' with: [ spec requires: #( 'Famix-MetamodelBuilder-Core' ) ];
 		package: 'Famix-MetamodelBuilder-Core' with: [ spec requires: #( 'Moose-Core' 'SingularizePluralize' ) ];
-		package: 'Famix-MetamodelGeneration' with: [ spec requires: #( 'Famix-MetamodelBuilder-Core' ) ];
+		package: 'Famix-MetamodelGeneration' with: [ spec requires: #( 'Famix-MetamodelBuilder-Core' 'Famix-Visitor-Generation' ) ];
 		package: 'Famix-Visualizations' with: [ spec requires: #( 'Famix-Traits' 'Fame' 'Moose-Core' ) ];
 		package: 'Famix-BasicInfrastructure' with: [ spec requires: #( 'Famix-MetamodelGeneration' ) ];
 		package: 'Famix-Smalltalk-Utils' with: [ spec requires: #( 'Moose-Core' ) ];
@@ -173,7 +174,7 @@ BaselineOfFamix >> packages: spec [
 			spec requires:
 					#( 'Famix-PharoSmalltalk-Entities' 'Moose-SmalltalkImporter-Core-Tests' 'PackageBlueprintTestResources' 'Moose-TestResources-LCOM'
 					   'KGBTestResources' ) ];
-		package: 'Famix-Java-Generator' with: [ spec requires: #( 'Basic' ) ];
+		package: 'Famix-Java-Generator' with: [ spec requires: #( 'Basic' 'Famix-Visitor-Generation' ) ];
 		package: 'Famix-Java-Entities' with: [ spec requires: #( 'BasicTraits' ) ];
 		package: 'Famix-Java-Visitor' with: [ spec requires: #( 'Famix-Java-Entities' ) ];
 		package: 'Famix-Java-Fusionner' with: [ spec requires: #( 'Famix-Java-Visitor' ) ];
