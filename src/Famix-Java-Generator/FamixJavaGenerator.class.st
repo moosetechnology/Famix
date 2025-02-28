@@ -20,6 +20,7 @@ Class {
 		'method',
 		'package',
 		'parameter',
+		'parameterType',
 		'parametricClass',
 		'parametricInterface',
 		'parametricMethod',
@@ -41,13 +42,8 @@ Class {
 		'tBounded',
 		'tBound',
 		'wildcard',
+		'parameterConcretization',
 		'concretization',
-		'typeParameter',
-		'parametricInheritance',
-		'parametricImplementation',
-		'parametricInvocation',
-		'entityTyping',
-		'parametricEntityTyping',
 		'variable'
 	],
 	#classInstVars : [
@@ -56,10 +52,22 @@ Class {
 	#category : #'Famix-Java-Generator'
 }
 
+{ #category : #'additional tools' }
+FamixJavaGenerator class >> metamodelToolGenerators [
+
+	^ { FamixVisitorGenerator }
+]
+
 { #category : #accessing }
 FamixJavaGenerator class >> packageName [
 
 	^ #'Famix-Java-Entities'
+]
+
+{ #category : #accessing }
+FamixJavaGenerator class >> packageNameForVisitor [
+
+	^ #'Famix-Java-Visitor'
 ]
 
 { #category : #accessing }

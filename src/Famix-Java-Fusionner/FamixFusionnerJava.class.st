@@ -19,8 +19,8 @@ Not: This is not a real visitor, it uses trait `FamixJavaVisitor` for the double
 Class {
 	#name : #FamixFusionnerJava,
 	#superclass : #Object,
-	#traits : 'FamixJavaVisitor',
-	#classTraits : 'FamixJavaVisitor classTrait',
+	#traits : 'FamixJavaTVisitor',
+	#classTraits : 'FamixJavaTVisitor classTrait',
 	#instVars : [
 		'resourceModel',
 		'consumerModel',
@@ -28,15 +28,6 @@ Class {
 	],
 	#category : #'Famix-Java-Fusionner'
 }
-
-{ #category : #'visiting - traits' }
-FamixFusionnerJava >> acceptMeIfNotNil: aFamixEntity [
-	"This is not a real visitor, the #accept: methods are used for double-dispatch
-	 so no visting of entities relations"
-
-	"^aFamixEntity ifNil: [ nil ] ifNotNil: [ aFamixEntity accept: self ]"
-
-]
 
 { #category : #accessing }
 FamixFusionnerJava >> consumerModel [
@@ -100,6 +91,22 @@ FamixFusionnerJava >> resourceModel [
 FamixFusionnerJava >> resourceModel: anObject [
 
 	resourceModel := anObject
+]
+
+{ #category : #visiting }
+FamixFusionnerJava >> visitCollection: aCollection [
+	"This is not a real visitor, the #accept: methods are used for double-dispatch
+	 so no visting of entities relations - N.Anquetil - Initially comment for #visitList:"
+
+	
+]
+
+{ #category : #visiting }
+FamixFusionnerJava >> visitEntity: aFamixEntity [
+	"This is not a real visitor, the #accept: methods are used for double-dispatch
+	 so no visting of entities relations - N.Anquetil - Initially comment for #acceptMeIfNotNil:"
+
+	
 ]
 
 { #category : #'visiting - traits' }
@@ -235,7 +242,7 @@ FamixFusionnerJava >> visitFamixTType: aFamixTType [
 	self visitFamixTNamedEntity: aFamixTType.
 	self visitFamixTReferenceable: aFamixTType.
 	self visitTEntityMetaLevelDependency: aFamixTType.
-	self acceptMeIfNotNil: aFamixTType typeContainer.
+	self visitEntity: aFamixTType typeContainer.
 	"self visitList: aFamixTType typedEntities."
 
 	aFamixTType typedEntities copy 
@@ -251,14 +258,5 @@ FamixFusionnerJava >> visitFamixTWithInheritances: aFamixTWithInheritances [
 
 	aFamixTWithInheritances subInheritances copy
 		do: [ :inheritance | self visitFamixTAssociation: inheritance ]
-
-]
-
-{ #category : #'visiting - traits' }
-FamixFusionnerJava >> visitList: aCollection [
-	"This is not a real visitor, the #accept: methods are used for double-dispatch
-	 so no visting of entities relations"
-
-	"^aCollection collect: [ :each | each accept: self ]"
 
 ]

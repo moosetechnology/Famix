@@ -122,18 +122,23 @@ Class {
 		'tImport',
 		'tWithImports',
 		'tParametricEntity',
+		'tConcreteParameterType',
+		'tGenericParameterType',
 		'tThrowable',
+		'tConcretization',
+		'tParameterConcretization',
 		'tShadowable',
 		'tShadower',
-		'tCanBeStub',
-		'tParametricAssociation',
-		'tTypeParameter',
-		'tConcretization',
-		'tConcreteType',
-		'tEntityTyping'
+		'tCanBeStub'
 	],
 	#category : #'Famix-MetamodelGeneration'
 }
+
+{ #category : #'additional tools' }
+FamixGenerator class >> metamodelToolGenerators [
+
+	^ { FamixVisitorGenerator }
+]
 
 { #category : #accessing }
 FamixGenerator class >> packageName [
@@ -141,7 +146,13 @@ FamixGenerator class >> packageName [
 	^ #'Famix-Traits'
 ]
 
-{ #category : #initialization }
+{ #category : #accessing }
+FamixGenerator class >> packageNameForVisitor [
+
+	^ #'Famix-Visitor'
+]
+
+{ #category : #accessing }
 FamixGenerator class >> prefix [
 
 	^ #Famix

@@ -147,14 +147,11 @@ FmxMBConfiguration >> groupTag [
 FmxMBConfiguration >> initialize [
 
 	super initialize.
-	
+
 	shouldGenerateFileImportHelpers := false.
-	
+
 	navigationForContainers := true.
-	navigationForNonContainers := false.
-	
-	
-	
+	navigationForNonContainers := false
 ]
 
 { #category : #accessing }
