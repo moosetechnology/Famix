@@ -20,7 +20,6 @@ Class {
 		'method',
 		'package',
 		'parameter',
-		'parameterType',
 		'parametricClass',
 		'parametricInterface',
 		'parametricMethod',
@@ -42,8 +41,13 @@ Class {
 		'tBounded',
 		'tBound',
 		'wildcard',
-		'parameterConcretization',
 		'concretization',
+		'typeParameter',
+		'parametricInheritance',
+		'parametricImplementation',
+		'parametricInvocation',
+		'entityTyping',
+		'parametricEntityTyping',
 		'variable'
 	],
 	#classInstVars : [
@@ -293,6 +297,7 @@ FamixJavaGenerator >> defineHierarchy [
 	enum --|> #TWithImports.
 	enum --|> #TImportable.
 	enum --|> #TConcreteType.
+	enum --|> #TInvocationsReceiver.
 
 	enumValue --|> variable.
 	enumValue --|> #TWithComments.

@@ -122,14 +122,15 @@ Class {
 		'tImport',
 		'tWithImports',
 		'tParametricEntity',
-		'tConcreteParameterType',
-		'tGenericParameterType',
 		'tThrowable',
 		'tConcretization',
-		'tParameterConcretization',
 		'tShadowable',
 		'tShadower',
-		'tCanBeStub'
+		'tCanBeStub',
+		'tEntityTyping',
+		'tTypeParameter',
+		'tParametricAssociation',
+		'tConcreteType'
 	],
 	#category : #'Famix-MetamodelGeneration'
 }

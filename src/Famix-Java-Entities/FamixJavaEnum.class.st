@@ -34,6 +34,7 @@
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `genericEntities` | `FamixTConcreteType` | `typeParameters` | `FamixTParametricEntity` | Generic entities that have this type as type parameter.|
+| `receivingInvocations` | `FamixTInvocationsReceiver` | `receiver` | `FamixTInvocation` | List of invocations performed on this entity (considered as the receiver)|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
 
 
@@ -50,8 +51,8 @@
 Class {
 	#name : #FamixJavaEnum,
 	#superclass : #FamixJavaType,
-	#traits : 'FamixTConcreteType + FamixTEnum + FamixTHasVisibility + FamixTImportable + FamixTWithAttributes + FamixTWithComments + FamixTWithImports + FamixTWithInheritances + FamixTWithMethods',
-	#classTraits : 'FamixTConcreteType classTrait + FamixTEnum classTrait + FamixTHasVisibility classTrait + FamixTImportable classTrait + FamixTWithAttributes classTrait + FamixTWithComments classTrait + FamixTWithImports classTrait + FamixTWithInheritances classTrait + FamixTWithMethods classTrait',
+	#traits : 'FamixTConcreteType + FamixTEnum + FamixTHasVisibility + FamixTImportable + FamixTInvocationsReceiver + FamixTWithAttributes + FamixTWithComments + FamixTWithImports + FamixTWithInheritances + FamixTWithMethods',
+	#classTraits : 'FamixTConcreteType classTrait + FamixTEnum classTrait + FamixTHasVisibility classTrait + FamixTImportable classTrait + FamixTInvocationsReceiver classTrait + FamixTWithAttributes classTrait + FamixTWithComments classTrait + FamixTWithImports classTrait + FamixTWithInheritances classTrait + FamixTWithMethods classTrait',
 	#category : #'Famix-Java-Entities-Entities'
 }
 
