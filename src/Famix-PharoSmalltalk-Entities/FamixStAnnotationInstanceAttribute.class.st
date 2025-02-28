@@ -24,8 +24,8 @@
 Class {
 	#name : #FamixStAnnotationInstanceAttribute,
 	#superclass : #FamixStSourcedEntity,
-	#traits : 'FamixTAnnotationInstanceAttribute + FamixTTypedAnnotationInstanceAttribute',
-	#classTraits : 'FamixTAnnotationInstanceAttribute classTrait + FamixTTypedAnnotationInstanceAttribute classTrait',
+	#traits : 'FamixTAnnotationInstanceAttribute',
+	#classTraits : 'FamixTAnnotationInstanceAttribute classTrait',
 	#category : #'Famix-PharoSmalltalk-Entities-Entities'
 }
 

@@ -37,8 +37,8 @@
 Class {
 	#name : #FamixJavaAnnotationTypeAttribute,
 	#superclass : #FamixJavaVariable,
-	#traits : 'FamixTAnnotationTypeAttribute + FamixTTypedAnnotationInstanceAttribute + FamixTWithComments',
-	#classTraits : 'FamixTAnnotationTypeAttribute classTrait + FamixTTypedAnnotationInstanceAttribute classTrait + FamixTWithComments classTrait',
+	#traits : 'FamixTAnnotationTypeAttribute + FamixTWithComments',
+	#classTraits : 'FamixTAnnotationTypeAttribute classTrait + FamixTWithComments classTrait',
 	#category : #'Famix-Java-Entities-Entities'
 }
 
