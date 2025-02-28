@@ -102,7 +102,6 @@ Class {
 		'tRelativeSourceAnchor',
 		'tEnum',
 		'tHasVisibility',
-		'tClassWithVisibility',
 		'tCanBeFinal',
 		'tCanBeAbstract',
 		'tClassMetrics',
@@ -1058,9 +1057,6 @@ FamixGenerator >> defineHierarchy [
 	tClass --|> tInvocationsReceiver.
 	tClass --|> tWithComments.
 
-	tClassWithVisibility --|> tClass.
-	tClassWithVisibility --|> tHasVisibility.
-
 	tClassGroup --|> tTypeGroup.
 	
 	tComment  --|> #TEntityMetaLevelDependency.
@@ -1878,7 +1874,6 @@ FamixGenerator >> defineTraits [
 	tHasImmediateSource := builder newTraitNamed: #THasImmediateSource comment: self commentForTHasImmediateSource.
 
 	tHasVisibility := builder newTraitNamed: #THasVisibility.
-	tClassWithVisibility := builder newTraitNamed: #TClassWithVisibility.
 
 	tWithStatements := builder newTraitNamed: #TWithStatements.
 	tWithStatements testingSelector: #isBehavioural.
