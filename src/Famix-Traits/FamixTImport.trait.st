@@ -5,7 +5,7 @@
 ### Association source
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `importingEntity` | `FamixTImport` | `outgoingImports` | `FamixTWithImports` | Importing entity|
+| `importingEntity` | `FamixTImport` | `imports` | `FamixTWithImports` | Importing entity|
 
 ### Association target
 | Relation | Origin | Opposite | Type | Comment |
@@ -25,8 +25,8 @@
 Trait {
 	#name : #FamixTImport,
 	#instVars : [
-		'#importingEntity => FMOne type: #FamixTWithImports opposite: #outgoingImports',
-		'#importedEntity => FMOne type: #FamixTImportable opposite: #incomingImports'
+		'#importedEntity => FMOne type: #FamixTImportable opposite: #incomingImports',
+		'#importingEntity => FMOne type: #FamixTWithImports opposite: #imports'
 	],
 	#traits : 'FamixTAssociation',
 	#classTraits : 'FamixTAssociation classTrait',
@@ -61,7 +61,7 @@ FamixTImport >> importedEntity: anObject [
 
 { #category : #accessing }
 FamixTImport >> importingEntity [
-	"Relation named: #importingEntity type: #FamixTWithImports opposite: #outgoingImports"
+	"Relation named: #importingEntity type: #FamixTWithImports opposite: #imports"
 
 	<generated>
 	<FMComment: 'Importing entity'>
