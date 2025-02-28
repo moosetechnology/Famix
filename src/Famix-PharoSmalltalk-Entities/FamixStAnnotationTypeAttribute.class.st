@@ -32,7 +32,7 @@
 Class {
 	#name : #FamixStAnnotationTypeAttribute,
 	#superclass : #FamixStSourcedEntity,
-	#traits : 'FamixTAnnotationTypeAttribute + AnObsoleteFamixTTypedAnnotationInstanceAttribute + TEntityMetaLevelDependency',
+	#traits : 'FamixTAnnotationTypeAttribute + TEntityMetaLevelDependency',
 	#classTraits : 'FamixTAnnotationTypeAttribute classTrait + TEntityMetaLevelDependency classTrait',
 	#category : #'Famix-PharoSmalltalk-Entities-Entities'
 }
