@@ -58,7 +58,6 @@ Class {
 		'tTypedAnnotationInstance',
 		'tTypedAnnotationInstanceAttribute',
 		'tWithAccesses',
-		'tWithAnnotationInstanceAttributes',
 		'tWithAnnotationInstances',
 		'tWithAnnotationTypes',
 		'tWithAttributes',
@@ -841,12 +840,6 @@ FamixGenerator >> commentForTWithAccesses [
 ]
 
 { #category : #comments }
-FamixGenerator >> commentForTWithAnnotationInstanceAttributes [
-
-	^ ''
-]
-
-{ #category : #comments }
 FamixGenerator >> commentForTWithAnnotationInstances [
 
 	^ ''
@@ -1295,7 +1288,7 @@ FamixGenerator >> defineRelations [
 			comment: 'The instance of the annotation in which the attribute is used.';
 			container)
 		*-
-	((tWithAnnotationInstanceAttributes property: #attributes)
+	((tAnnotationInstance property: #attributes)
 			comment: 'This corresponds to the actual values of the attributes in an AnnotationInstance').
 
 	((tAnnotationType property: #instances)
@@ -1824,9 +1817,6 @@ FamixGenerator >> defineTraits [
 
 	tWithAccesses := builder newTraitNamed: #TWithAccesses.
 	tWithAccesses comment: self commentForTWithAccesses.
-
-	tWithAnnotationInstanceAttributes := builder newTraitNamed: #TWithAnnotationInstanceAttributes.
-	tWithAnnotationInstanceAttributes comment: self commentForTWithAnnotationInstanceAttributes.
 
 	tWithAnnotationInstances := builder newTraitNamed: #TWithAnnotationInstances.
 	tWithAnnotationInstances comment: self commentForTWithAnnotationInstances.
