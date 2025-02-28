@@ -30,8 +30,6 @@ FamixJavaTVisitor >> visitFamixJavaAnnotationInstance: aFamixJavaAnnotationInsta
 
 	<generated>
 	self visitFamixTAnnotationInstance: aFamixJavaAnnotationInstance.
-	self visitFamixTTypedAnnotationInstance: aFamixJavaAnnotationInstance.
-	self visitFamixTWithAnnotationInstanceAttributes: aFamixJavaAnnotationInstance.
 	self visitFamixJavaSourcedEntity: aFamixJavaAnnotationInstance
 ]
 
@@ -40,7 +38,6 @@ FamixJavaTVisitor >> visitFamixJavaAnnotationInstanceAttribute: aFamixJavaAnnota
 
 	<generated>
 	self visitFamixTAnnotationInstanceAttribute: aFamixJavaAnnotationInstanceAttribute.
-	self visitFamixTTypedAnnotationInstanceAttribute: aFamixJavaAnnotationInstanceAttribute.
 	self visitFamixJavaSourcedEntity: aFamixJavaAnnotationInstanceAttribute
 ]
 
@@ -63,7 +60,6 @@ FamixJavaTVisitor >> visitFamixJavaAnnotationTypeAttribute: aFamixJavaAnnotation
 
 	<generated>
 	self visitFamixTAnnotationTypeAttribute: aFamixJavaAnnotationTypeAttribute.
-	self visitFamixTTypedAnnotationInstanceAttribute: aFamixJavaAnnotationTypeAttribute.
 	self visitFamixTWithComments: aFamixJavaAnnotationTypeAttribute.
 	self visitFamixJavaVariable: aFamixJavaAnnotationTypeAttribute
 ]
