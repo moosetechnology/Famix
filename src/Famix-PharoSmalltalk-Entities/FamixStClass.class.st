@@ -109,9 +109,12 @@ FamixStClass >> extendedMethods [
 
 { #category : #accessing }
 FamixStClass >> instanceSide [
+
 	^ self isClassSide
-		ifTrue: [ self mooseModel allClasses entityNamed: (self mooseName removeSuffix: '_class') asSymbol ]
-		ifFalse: [ self ]
+		  ifTrue: [
+			  self mooseModel allClasses entityNamed:
+				  (self mooseName withoutSuffix: '_class') asSymbol ]
+		  ifFalse: [ self ]
 ]
 
 { #category : #testing }
