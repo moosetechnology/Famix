@@ -17,6 +17,11 @@ Instance Variables:
 |---|
 | `parentAnnotationInstance` | `FamixTAnnotationInstanceAttribute` | `attributes` | `FamixTAnnotationInstance` | The instance of the annotation in which the attribute is used.|
 
+### Other
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `annotationTypeAttribute` | `FamixTAnnotationInstanceAttribute` | `annotationAttributeInstances` | `FamixTAnnotationTypeAttribute` | This corresponds to the type of the attribute in an AnnotationInstance|
+
 
 ## Properties
 ======================
@@ -29,6 +34,7 @@ Instance Variables:
 Trait {
 	#name : #FamixTAnnotationInstanceAttribute,
 	#instVars : [
+		'#annotationTypeAttribute => FMOne type: #FamixTAnnotationTypeAttribute opposite: #annotationAttributeInstances',
 		'#parentAnnotationInstance => FMOne type: #FamixTAnnotationInstance opposite: #attributes',
 		'#value => FMProperty'
 	],
@@ -44,6 +50,22 @@ FamixTAnnotationInstanceAttribute classSide >> annotation [
 	<package: #'Famix-Traits'>
 	<generated>
 	^ self
+]
+
+{ #category : #accessing }
+FamixTAnnotationInstanceAttribute >> annotationTypeAttribute [
+	"Relation named: #annotationTypeAttribute type: #FamixTAnnotationTypeAttribute opposite: #annotationAttributeInstances"
+
+	<generated>
+	<FMComment: 'This corresponds to the type of the attribute in an AnnotationInstance'>
+	^ annotationTypeAttribute
+]
+
+{ #category : #accessing }
+FamixTAnnotationInstanceAttribute >> annotationTypeAttribute: anObject [
+
+	<generated>
+	annotationTypeAttribute := anObject
 ]
 
 { #category : #accessing }

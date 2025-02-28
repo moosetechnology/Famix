@@ -55,8 +55,6 @@ Class {
 		'tTraitUsage',
 		'tType',
 		'tTypeAlias',
-		'tTypedAnnotationInstance',
-		'tTypedAnnotationInstanceAttribute',
 		'tWithAccesses',
 		'tWithAnnotationInstances',
 		'tWithAnnotationTypes',
@@ -1294,7 +1292,7 @@ FamixGenerator >> defineRelations [
 	((tAnnotationType property: #instances)
 			comment: 'Annotations of this type')
 		-*
-	((tTypedAnnotationInstance property: #annotationType)
+	((tAnnotationInstance property: #annotationType)
 			comment: 'Refers to the type of an annotation. (In some languages, Java and C#, an annotation as an explicit type). '";
 			container"). "TODO: resolve"
 
@@ -1308,7 +1306,7 @@ FamixGenerator >> defineRelations [
 	((tAnnotationTypeAttribute property: #annotationAttributeInstances)
 			comment: 'A collection of AnnotationInstanceAttribute which hold the usages of this attribute in actual AnnotationInstances')
 		-*
-	((tTypedAnnotationInstanceAttribute property: #annotationTypeAttribute)
+	((tAnnotationInstanceAttribute property: #annotationTypeAttribute)
 			comment: 'This corresponds to the type of the attribute in an AnnotationInstance').
 
 	((tAssociation property: #previous)
@@ -1803,12 +1801,6 @@ FamixGenerator >> defineTraits [
 	tTypeGroup := tType withGroup.
 
 	tTypeAlias := builder newTraitNamed: #TTypeAlias comment: self commentForTTypeAlias.
-
-	tTypedAnnotationInstance := builder newTraitNamed: #TTypedAnnotationInstance.
-	tTypedAnnotationInstance comment: self commentForTTypedAnnotationInstance.
-
-	tTypedAnnotationInstanceAttribute := builder newTraitNamed: #TTypedAnnotationInstanceAttribute.
-	tTypedAnnotationInstanceAttribute comment: self commentForTTypedAnnotationInstanceAttribute.
 
 	tTypedEntity := builder newTraitNamed: #TTypedEntity.
 	tTypedEntity comment: self commentForTTypedStructure.
