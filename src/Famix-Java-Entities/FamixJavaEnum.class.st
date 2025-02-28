@@ -18,7 +18,7 @@
 ### Outgoing dependencies
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `outgoingImports` | `FamixTWithImports` | `importingEntity` | `FamixTImport` | |
+| `imports` | `FamixTWithImports` | `importingEntity` | `FamixTImport` | |
 | `superInheritances` | `FamixTWithInheritances` | `subclass` | `FamixTInheritance` | Superinheritance relationships, i.e. known superclasses of this type.|
 
 ### Incoming dependencies

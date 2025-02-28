@@ -5,7 +5,7 @@
 ### Outgoing dependencies
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `outgoingImports` | `FamixTWithImports` | `importingEntity` | `FamixTImport` | |
+| `imports` | `FamixTWithImports` | `importingEntity` | `FamixTImport` | |
 
 
 
@@ -13,7 +13,7 @@
 Trait {
 	#name : #FamixTWithImports,
 	#instVars : [
-		'#outgoingImports => FMMany type: #FamixTImport opposite: #importingEntity'
+		'#imports => FMMany type: #FamixTImport opposite: #importingEntity'
 	],
 	#category : #'Famix-Traits-Traits'
 }
@@ -28,23 +28,56 @@ FamixTWithImports classSide >> annotation [
 ]
 
 { #category : #adding }
-FamixTWithImports >> addOutgoingImport: anObject [
+FamixTWithImports >> addImport: anObject [
 	<generated>
-	^ self outgoingImports add: anObject
+	^ self imports add: anObject
+]
+
+{ #category : #'as yet unclassified' }
+FamixTWithImports >> addOutgoingImport: anObject [
+
+	self
+		deprecated: 'Use #addImport:'
+		transformWith:
+		'`@receiver addOutgoingImport: `@argument' -> '`@receiver addImport: `@argument'.
+
+	^ self addImport: anObject
 ]
 
 { #category : #accessing }
-FamixTWithImports >> outgoingImports [
-	"Relation named: #outgoingImports type: #FamixTImport opposite: #importingEntity"
+FamixTWithImports >> imports [
+	"Relation named: #imports type: #FamixTImport opposite: #importingEntity"
 
 	<generated>
 	<derived>
-	^ outgoingImports
+	^ imports
 ]
 
 { #category : #accessing }
-FamixTWithImports >> outgoingImports: anObject [
+FamixTWithImports >> imports: anObject [
 
 	<generated>
-	outgoingImports value: anObject
+	imports value: anObject
+]
+
+{ #category : #'as yet unclassified' }
+FamixTWithImports >> outgoingImports [
+
+	self
+		deprecated: 'Use #imports'
+		transformWith:
+		'`@receiver outgoingImports' -> '`@receiver imports'.
+
+	^ self imports
+]
+
+{ #category : #'as yet unclassified' }
+FamixTWithImports >> outgoingImports: anObject [
+
+	self
+		deprecated: 'Use #imports:'
+		transformWith:
+		'`@receiver outgoingImports: `@argument' -> '`@receiver imports: `@argument'.
+
+	^ self imports: anObject
 ]

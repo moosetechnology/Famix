@@ -1435,7 +1435,7 @@ FamixGenerator >> defineRelations [
 	((tInvocationsReceiver property: #receivingInvocations)
 			comment: 'List of invocations performed on this entity (considered as the receiver)').
 
-	((tWithImports property: #outgoingImports)
+	((tWithImports property: #imports)
 			comment: '')
 		-*
 	((tImport property: #importingEntity)
