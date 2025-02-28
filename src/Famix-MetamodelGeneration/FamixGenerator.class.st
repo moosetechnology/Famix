@@ -1084,6 +1084,7 @@ FamixGenerator >> defineHierarchy [
 
 	tException --|> tClass.
 
+	tFileSystemEntity --|> tNamedEntity.
 	tFile --|> tFileSystemEntity.
 
 	tFileInclude --|> tAssociation.
