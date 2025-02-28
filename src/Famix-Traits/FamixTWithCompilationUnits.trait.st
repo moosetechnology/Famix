@@ -15,7 +15,7 @@ Trait {
 	#instVars : [
 		'#compilationUnit => FMOne type: #FamixTCompilationUnit opposite: #compilationUnitOwner'
 	],
-	#category : #'Famix-Traits-Traits'
+	#category : #'Famix-Traits-CompilationUnit'
 }
 
 { #category : #meta }

@@ -27,7 +27,7 @@ Trait {
 	#name : #FamixTUnknownVariable,
 	#traits : 'FamixTStructuralEntity',
 	#classTraits : 'FamixTStructuralEntity classTrait',
-	#category : #'Famix-Traits-Traits'
+	#category : #'Famix-Traits-StructuralEntity'
 }
 
 { #category : #meta }
