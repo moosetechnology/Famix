@@ -1277,10 +1277,10 @@ FamixGenerator >> defineRelations [
 	((tWithAccesses property: #accesses)
 			comment: 'Accesses to variables made by this behaviour.').
 
-	((tAccess property: #variable)
-			comment: 'Variable accessed. to-side of the association';
+	((tAccess property: #candidates)
+			comment: 'Variables that cas be the accessed variable. to-side of the association. Most of the time it will be only one variable, but some languages might have candidates such as Python.';
 			target)
-		*-
+		*-*
 	((tAccessible property: #incomingAccesses)
 			comment: 'All Famix accesses pointing to this structural entity').
 

@@ -37,7 +37,7 @@ FamixTVisitor >> visitFamixTAccess: aFamixTAccess [
 	self visitFamixTAssociation: aFamixTAccess.
 
 	self visitEntity: aFamixTAccess accessor.
-	self visitEntity: aFamixTAccess variable
+	self visitCollection: aFamixTAccess candidates
 ]
 
 { #category : #visiting }

@@ -23,7 +23,7 @@ For each access in the source code, there is one famix access created even if it
 ### Association target
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `variable` | `FamixTAccess` | `incomingAccesses` | `FamixTAccessible` | Variable accessed. to-side of the association|
+| `candidates` | `FamixTAccess` | `incomingAccesses` | `FamixTAccessible` | Variables that cas be the accessed variable. to-side of the association. Most of the time it will be only one variable, but some languages might have candidates such as Python.|
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
@@ -45,8 +45,8 @@ Trait {
 	#name : #FamixTAccess,
 	#instVars : [
 		'#accessor => FMOne type: #FamixTWithAccesses opposite: #accesses',
-		'#isWrite => FMProperty defaultValue: false',
-		'#variable => FMOne type: #FamixTAccessible opposite: #incomingAccesses'
+		'#candidates => FMMany type: #FamixTAccessible opposite: #incomingAccesses',
+		'#isWrite => FMProperty defaultValue: false'
 	],
 	#traits : 'FamixTAssociation',
 	#classTraits : 'FamixTAssociation classTrait',
@@ -79,10 +79,46 @@ FamixTAccess >> accessor: anObject [
 	accessor := anObject
 ]
 
+{ #category : #adding }
+FamixTAccess >> addCandidate: anObject [
+	<generated>
+	^ self candidates add: anObject
+]
+
+{ #category : #accessing }
+FamixTAccess >> candidates [
+	"Relation named: #candidates type: #FamixTAccessible opposite: #incomingAccesses"
+
+	<generated>
+	<FMComment: 'Variables that cas be the accessed variable. to-side of the association. Most of the time it will be only one variable, but some languages might have candidates such as Python.'>
+	<derived>
+	<target>
+	^ candidates
+]
+
+{ #category : #accessing }
+FamixTAccess >> candidates: anObject [
+
+	<generated>
+	candidates value: anObject
+]
+
+{ #category : #printing }
+FamixTAccess >> displayFullStringOn: aStream [
+
+	self source displayFullStringOn: aStream.
+	aStream nextPutAll: ' -> '.
+	(self candidates size = 1
+		 ifTrue: [ self variable ]
+		 ifFalse: [ self candidates ]) displayStringOn: aStream
+]
+
 { #category : #printing }
 FamixTAccess >> displayStringOn: aStream [
 
-	variable displayStringOn: aStream.
+	(self candidates size = 1
+		 ifTrue: [ self variable ]
+		 ifFalse: [ self candidates ]) displayStringOn: aStream.
 	aStream << ' accessed in '.
 	accessor displayStringOn: aStream
 ]
@@ -131,18 +167,25 @@ FamixTAccess >> printOn: aStream [
 ]
 
 { #category : #accessing }
-FamixTAccess >> variable [
-	"Relation named: #variable type: #FamixTAccessible opposite: #incomingAccesses"
+FamixTAccess >> target: aTarget [
 
-	<generated>
-	<FMComment: 'Variable accessed. to-side of the association'>
-	<target>
-	^ variable
+	aTarget isCollection
+		ifTrue: [ self candidates: aTarget ]
+		ifFalse: [ self variable: aTarget ]
 ]
 
 { #category : #accessing }
-FamixTAccess >> variable: anObject [
+FamixTAccess >> variable [
+	"This method returns only one candidate if there is one, or raises an error if there is more or less than one candidate."
 
-	<generated>
-	variable := anObject
+	self candidates size = 1 ifFalse: [
+		self error: '1 candidate was expected but ' , self candidates size asString , ' candidates are present in this invocation.' ].
+
+	^ self candidates anyOne
+]
+
+{ #category : #accessing }
+FamixTAccess >> variable: anEntity [
+
+	^ self candidates: { anEntity }
 ]
