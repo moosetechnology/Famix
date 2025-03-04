@@ -17,8 +17,8 @@
 ### Outgoing dependencies
 | Relation | Origin | Opposite | Type | Comment |
 |---|
+| `imports` | `FamixTWithImports` | `importingEntity` | `FamixTImport` | |
 | `outgoingConcretizations` | `FamixTConcreteType` | `concreteParameter` | `FamixTConcretization` | Concretizations where this type is the concrete parameter.|
-| `outgoingImports` | `FamixTWithImports` | `importingEntity` | `FamixTImport` | |
 | `superInheritances` | `FamixTWithInheritances` | `subclass` | `FamixTInheritance` | Superinheritance relationships, i.e. known superclasses of this type.|
 
 ### Incoming dependencies

@@ -748,20 +748,6 @@ FamixTVisitor >> visitFamixTTypeParameter: aFamixTTypeParameter [
 ]
 
 { #category : #visiting }
-FamixTVisitor >> visitFamixTTypedAnnotationInstance: aFamixTTypedAnnotationInstance [
-
-	<generated>
-	self visitEntity: aFamixTTypedAnnotationInstance annotationType
-]
-
-{ #category : #visiting }
-FamixTVisitor >> visitFamixTTypedAnnotationInstanceAttribute: aFamixTTypedAnnotationInstanceAttribute [
-
-	<generated>
-	self visitEntity: aFamixTTypedAnnotationInstanceAttribute annotationTypeAttribute
-]
-
-{ #category : #visiting }
 FamixTVisitor >> visitFamixTTypedEntity: aFamixTTypedEntity [
 
 	<generated>
