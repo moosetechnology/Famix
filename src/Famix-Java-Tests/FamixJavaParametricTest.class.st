@@ -2,7 +2,7 @@ Class {
 	#name : #FamixJavaParametricTest,
 	#superclass : #TestCase,
 	#instVars : [
-		'parametricClass'
+		'model'
 	],
 	#category : #'Famix-Java-Tests'
 }
@@ -11,8 +11,7 @@ Class {
 FamixJavaParametricTest >> setUp [
 
 	super setUp.
-
-	parametricClass := FamixJavaParametricClass named: 'ParametricClass'
+	model := FamixJavaModel new
 ]
 
 { #category : #running }
@@ -60,9 +59,7 @@ FamixJavaParametricTest >> test3 [
 				(k := FamixJavaTypeParameter named: 'K').
 				(v := FamixJavaTypeParameter named: 'V') }.
 
-	FamixJavaConcretization new
-		concreteEntity: (FamixJavaParametricClass named: 'ClassA');
-		genericEntity: classA.
+
 
 	FamixJavaConcretization new
 		concreteParameter: (string := FamixJavaClass named: 'string');
@@ -79,20 +76,33 @@ FamixJavaParametricTest >> test3 [
 
 { #category : #running }
 FamixJavaParametricTest >> testConcreteAndGenericParameter [
-	"classA<V> --> classB extends classA<String>"
+	"ClassA<V>
+	ClassB extends classA<String>"
 
-	| parameter1 parameter2 |
-	parameter1 := FamixJavaType named: 'String'.
-	parameter2 := FamixJavaParameterType named: 'V'.
+	| string k classB classA |
+	string := model newClassNamed: 'String'.
+	k := model newTypeParameter
+		     name: 'V';
+		     yourself.
 
-	parametricClass concreteParameters: { parameter1 }.
-	parametricClass genericParameters: { parameter2 }.
+	classB := model newParametricClass
+		          name: 'ClassB';
+		          yourself.
+
+	classA := model newParametricClass name: 'ClassA'.
+	classA addTypeParameter: k.
+
+	model newParametricInheritance
+		subclass: classB;
+		superclass: classA;
+		addConcretization: (model newConcretization
+				 concreteParameter: string;
+				 genericParameter: k).
 	self
-		assertCollection: parametricClass concreteParameters
-		hasSameElements: { parameter1 }.
-	self
-		assertCollection: parametricClass genericParameters
-		hasSameElements: { parameter2 }
+		assertCollection: classA typeParameters
+		hasSameElements: { k }.
+
+	self deny: classB isGeneric
 ]
 
 { #category : #running }

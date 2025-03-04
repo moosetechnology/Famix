@@ -159,3 +159,9 @@ FamixTType >> typeContainerGroup [
 	<navigation: 'TypeContainer'>
 	^ MooseSpecializedGroup with: self typeContainer
 ]
+
+{ #category : #'as yet unclassified' }
+FamixTType >> typedEntities [
+
+	^ self incomingTypings collect: #source
+]
