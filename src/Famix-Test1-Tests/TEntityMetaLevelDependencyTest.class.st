@@ -82,12 +82,28 @@ TEntityMetaLevelDependencyTest >> testAllChildrenTypes [
 
 { #category : #tests }
 TEntityMetaLevelDependencyTest >> testAllIncomingAssociationTypes [
-	self assertCollection: c1 allIncomingAssociationTypes hasSameElements: {FamixTInheritance . FamixTInvocation . FamixTAccess . FamixTReference}
+
+	self
+		assertCollection: c1 allIncomingAssociationTypes
+		hasSameElements: {
+				FamixTInheritance.
+				FamixTInvocation.
+				FamixTAccess.
+				FamixTReference.
+				FamixTEntityTyping }
 ]
 
 { #category : #tests }
 TEntityMetaLevelDependencyTest >> testAllOutgoingAssociationTypes [
-	self assertCollection: c1 allOutgoingAssociationTypes hasSameElements: {FamixTInheritance . FamixTInvocation . FamixTAccess . FamixTReference}
+
+	self
+		assertCollection: c1 allOutgoingAssociationTypes
+		hasSameElements: {
+				FamixTInheritance.
+				FamixTInvocation.
+				FamixTAccess.
+				FamixTReference.
+				FamixTEntityTyping }
 ]
 
 { #category : #tests }
@@ -167,7 +183,15 @@ TEntityMetaLevelDependencyTest >> testChildrenSelectors [
 
 { #category : #tests }
 TEntityMetaLevelDependencyTest >> testIncomingAssociationTypes [
-	self assertCollection: c1 allIncomingAssociationTypes hasSameElements: {FamixTInheritance . FamixTInvocation . FamixTAccess . FamixTReference}
+
+	self
+		assertCollection: c1 allIncomingAssociationTypes
+		hasSameElements: {
+				FamixTInheritance.
+				FamixTInvocation.
+				FamixTAccess.
+				FamixTReference.
+				FamixTEntityTyping }
 ]
 
 { #category : #tests }
@@ -180,7 +204,15 @@ TEntityMetaLevelDependencyTest >> testNumberOfChildren [
 
 { #category : #tests }
 TEntityMetaLevelDependencyTest >> testOutgoingAssociationTypes [
-	self assertCollection: c1 allOutgoingAssociationTypes hasSameElements: {FamixTInheritance . FamixTInvocation . FamixTAccess . FamixTReference}
+
+	self
+		assertCollection: c1 allOutgoingAssociationTypes
+		hasSameElements: {
+				FamixTInheritance.
+				FamixTInvocation.
+				FamixTAccess.
+				FamixTReference.
+				FamixTEntityTyping }
 ]
 
 { #category : #tests }
