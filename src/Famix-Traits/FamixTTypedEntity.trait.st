@@ -32,7 +32,7 @@ FamixTTypedEntity >> declaredType [
 	"This method exists for compatibility reasons after reifying #declaredType with Type declaration.
 	It can be kept as a shortcut to build type declarations."
 
-	^ self typeDeclaration ifNotNil: [ self typeDeclaration declaredType ]
+	^ self typing ifNotNil: [ self typing declaredType ]
 ]
 
 { #category : #accessing }

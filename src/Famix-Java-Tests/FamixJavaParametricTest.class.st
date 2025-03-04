@@ -19,14 +19,14 @@ FamixJavaParametricTest >> setUp [
 FamixJavaParametricTest >> test1 [
 	"List<Object> testMethod(List<Object> list)"
 
-	| method parametre list |
+	| method parameter list |
 	method := FamixJavaParametricMethod named: 'testMethod'.
-	parametre := FamixJavaParameter named: 'list'.
+	parameter := FamixJavaParameter named: 'list'.
 	list := FamixJavaParametricClass named: 'List'.
 	list addConcreteParameter: (FamixJavaType named: 'Object').
-	parametre declaredType: list.
-	method addParameter: parametre.
-	method declaredType: list.
+	parameter typing: (FamixJavaEntityTyping new declaredType: list).
+	method addParameter: parameter.
+	method typing: (FamixJavaEntityTyping new declaredType: list).
 	method addConcreteParameter: list
 ]
 
@@ -37,7 +37,8 @@ FamixJavaParametricTest >> test2 [
 	| m p return |
 	m := FamixJavaParametricMethod named: 'genericMethod'.
 	p := FamixJavaParameter named: 't'.
-	p declaredType: (FamixJavaTypeParameter named: 'T').
+	p typing: (FamixJavaEntityTyping new declaredType:
+			 (FamixJavaTypeParameter named: 'T')).
 	m addParameter: p.
 	return := FamixJavaTypeParameter named: 'T'.
 	FamixJavaInheritance new

@@ -70,6 +70,12 @@ SmalltalkMetamodelFactory >> entity [
 ]
 
 { #category : #accessing }
+SmalltalkMetamodelFactory >> entityTyping [
+
+	^ self entityNamed: #EntityTyping
+]
+
+{ #category : #accessing }
 SmalltalkMetamodelFactory >> globalVariable [
 
 	^ self entityNamed: #GlobalVariable
