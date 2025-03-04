@@ -5,7 +5,7 @@
 ### Association source
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `importingEntity` | `FamixTImport` | `outgoingImports` | `FamixTWithImports` | Importing entity|
+| `importingEntity` | `FamixTImport` | `imports` | `FamixTWithImports` | Importing entity|
 
 ### Association target
 | Relation | Origin | Opposite | Type | Comment |

@@ -15,7 +15,12 @@ Instance Variables:
 ### Parents
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `parentAnnotationInstance` | `FamixTAnnotationInstanceAttribute` | `attributes` | `FamixTWithAnnotationInstanceAttributes` | The instance of the annotation in which the attribute is used.|
+| `parentAnnotationInstance` | `FamixTAnnotationInstanceAttribute` | `attributes` | `FamixTAnnotationInstance` | The instance of the annotation in which the attribute is used.|
+
+### Other
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `annotationTypeAttribute` | `FamixTAnnotationInstanceAttribute` | `annotationAttributeInstances` | `FamixTAnnotationTypeAttribute` | This corresponds to the type of the attribute in an AnnotationInstance|
 
 
 ## Properties
@@ -29,7 +34,8 @@ Instance Variables:
 Trait {
 	#name : #FamixTAnnotationInstanceAttribute,
 	#instVars : [
-		'#parentAnnotationInstance => FMOne type: #FamixTWithAnnotationInstanceAttributes opposite: #attributes',
+		'#annotationTypeAttribute => FMOne type: #FamixTAnnotationTypeAttribute opposite: #annotationAttributeInstances',
+		'#parentAnnotationInstance => FMOne type: #FamixTAnnotationInstance opposite: #attributes',
 		'#value => FMProperty'
 	],
 	#traits : 'TEntityMetaLevelDependency',
@@ -47,8 +53,24 @@ FamixTAnnotationInstanceAttribute classSide >> annotation [
 ]
 
 { #category : #accessing }
+FamixTAnnotationInstanceAttribute >> annotationTypeAttribute [
+	"Relation named: #annotationTypeAttribute type: #FamixTAnnotationTypeAttribute opposite: #annotationAttributeInstances"
+
+	<generated>
+	<FMComment: 'This corresponds to the type of the attribute in an AnnotationInstance'>
+	^ annotationTypeAttribute
+]
+
+{ #category : #accessing }
+FamixTAnnotationInstanceAttribute >> annotationTypeAttribute: anObject [
+
+	<generated>
+	annotationTypeAttribute := anObject
+]
+
+{ #category : #accessing }
 FamixTAnnotationInstanceAttribute >> parentAnnotationInstance [
-	"Relation named: #parentAnnotationInstance type: #FamixTWithAnnotationInstanceAttributes opposite: #attributes"
+	"Relation named: #parentAnnotationInstance type: #FamixTAnnotationInstance opposite: #attributes"
 
 	<generated>
 	<FMComment: 'The instance of the annotation in which the attribute is used.'>

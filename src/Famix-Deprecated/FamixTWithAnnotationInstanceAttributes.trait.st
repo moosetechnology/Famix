@@ -1,31 +1,10 @@
-"
-## Relations
-======================
-
-### Children
-| Relation | Origin | Opposite | Type | Comment |
-|---|
-| `attributes` | `FamixTWithAnnotationInstanceAttributes` | `parentAnnotationInstance` | `FamixTAnnotationInstanceAttribute` | This corresponds to the actual values of the attributes in an AnnotationInstance|
-
-
-
-"
 Trait {
 	#name : #FamixTWithAnnotationInstanceAttributes,
 	#instVars : [
 		'#attributes => FMMany type: #FamixTAnnotationInstanceAttribute opposite: #parentAnnotationInstance'
 	],
-	#category : #'Famix-Traits-AnnotationInstanceAttribute'
+	#category : #'Famix-Deprecated'
 }
-
-{ #category : #meta }
-FamixTWithAnnotationInstanceAttributes classSide >> annotation [
-
-	<FMClass: #TWithAnnotationInstanceAttributes super: #Object>
-	<package: #'Famix-Traits'>
-	<generated>
-	^ self
-]
 
 { #category : #accessing }
 FamixTWithAnnotationInstanceAttributes >> addAttribute: anAttribute [

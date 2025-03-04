@@ -15,17 +15,8 @@ Trait {
 	#instVars : [
 		'#annotationType => FMOne type: #FamixTAnnotationType opposite: #instances'
 	],
-	#category : #'Famix-Traits-AnnotationType'
+	#category : #'Famix-Deprecated'
 }
-
-{ #category : #meta }
-FamixTTypedAnnotationInstance classSide >> annotation [
-
-	<FMClass: #TTypedAnnotationInstance super: #Object>
-	<package: #'Famix-Traits'>
-	<generated>
-	^ self
-]
 
 { #category : #accessing }
 FamixTTypedAnnotationInstance >> annotationType [

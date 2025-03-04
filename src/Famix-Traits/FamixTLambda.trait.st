@@ -49,7 +49,7 @@ Trait {
 	],
 	#traits : 'FamixTHasSignature + FamixTInvocable + FamixTWithLocalVariables + FamixTWithParameters + FamixTWithStatements + TEntityMetaLevelDependency',
 	#classTraits : 'FamixTHasSignature classTrait + FamixTInvocable classTrait + FamixTWithLocalVariables classTrait + FamixTWithParameters classTrait + FamixTWithStatements classTrait + TEntityMetaLevelDependency classTrait',
-	#category : #'Famix-Traits-Traits'
+	#category : #'Famix-Traits-Lambda'
 }
 
 { #category : #meta }

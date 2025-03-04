@@ -40,7 +40,7 @@ Trait {
 	#instVars : [
 		'#shadowingEntities => FMOne type: #FamixTShadower opposite: #shadowedEntity'
 	],
-	#category : #'Famix-Traits-Traits'
+	#category : #'Famix-Traits-Shadowing'
 }
 
 { #category : #meta }

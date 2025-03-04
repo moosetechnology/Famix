@@ -32,7 +32,7 @@ Trait {
 	#name : #FamixTPrimitiveType,
 	#traits : 'FamixTType',
 	#classTraits : 'FamixTType classTrait',
-	#category : #'Famix-Traits-Traits'
+	#category : #'Famix-Traits-Type'
 }
 
 { #category : #meta }

@@ -23,7 +23,7 @@ Trait {
 	],
 	#traits : 'FamixTSourceEntity',
 	#classTraits : 'FamixTSourceEntity classTrait',
-	#category : #'Famix-Traits-Traits'
+	#category : #'Famix-Traits-PrimitiveProperties'
 }
 
 { #category : #meta }

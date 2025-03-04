@@ -53,7 +53,9 @@ FamixTVisitor >> visitFamixTAnnotationInstance: aFamixTAnnotationInstance [
 	<generated>
 	self visitTEntityMetaLevelDependency: aFamixTAnnotationInstance.
 
-	self visitEntity: aFamixTAnnotationInstance annotatedEntity
+	self visitEntity: aFamixTAnnotationInstance annotatedEntity.
+	self visitCollection: aFamixTAnnotationInstance attributes.
+	self visitEntity: aFamixTAnnotationInstance annotationType
 ]
 
 { #category : #visiting }
@@ -62,7 +64,8 @@ FamixTVisitor >> visitFamixTAnnotationInstanceAttribute: aFamixTAnnotationInstan
 	<generated>
 	self visitTEntityMetaLevelDependency: aFamixTAnnotationInstanceAttribute.
 
-	self visitEntity: aFamixTAnnotationInstanceAttribute parentAnnotationInstance
+	self visitEntity: aFamixTAnnotationInstanceAttribute parentAnnotationInstance.
+	self visitEntity: aFamixTAnnotationInstanceAttribute annotationTypeAttribute
 ]
 
 { #category : #visiting }
@@ -154,14 +157,6 @@ FamixTVisitor >> visitFamixTClassMetrics: aFamixTClassMetrics [
 
 	<generated>
 
-]
-
-{ #category : #visiting }
-FamixTVisitor >> visitFamixTClassWithVisibility: aFamixTClassWithVisibility [
-
-	<generated>
-	self visitFamixTClass: aFamixTClassWithVisibility.
-	self visitFamixTHasVisibility: aFamixTClassWithVisibility
 ]
 
 { #category : #visiting }
@@ -297,6 +292,8 @@ FamixTVisitor >> visitFamixTFileNavigation: aFamixTFileNavigation [
 FamixTVisitor >> visitFamixTFileSystemEntity: aFamixTFileSystemEntity [
 
 	<generated>
+	self visitFamixTNamedEntity: aFamixTFileSystemEntity.
+
 	self visitEntity: aFamixTFileSystemEntity parentFolder
 ]
 
@@ -720,7 +717,7 @@ FamixTVisitor >> visitFamixTTraitUsage: aFamixTTraitUsage [
 FamixTVisitor >> visitFamixTTraitUser: aFamixTTraitUser [
 
 	<generated>
-	self visitCollection: aFamixTTraitUser outgoingTraitUsages
+	self visitCollection: aFamixTTraitUser traitUsages
 ]
 
 { #category : #visiting }
@@ -783,13 +780,6 @@ FamixTVisitor >> visitFamixTWithAccesses: aFamixTWithAccesses [
 
 	<generated>
 	self visitCollection: aFamixTWithAccesses accesses
-]
-
-{ #category : #visiting }
-FamixTVisitor >> visitFamixTWithAnnotationInstanceAttributes: aFamixTWithAnnotationInstanceAttributes [
-
-	<generated>
-	self visitCollection: aFamixTWithAnnotationInstanceAttributes attributes
 ]
 
 { #category : #visiting }
@@ -904,7 +894,7 @@ FamixTVisitor >> visitFamixTWithImplicitVariables: aFamixTWithImplicitVariables 
 FamixTVisitor >> visitFamixTWithImports: aFamixTWithImports [
 
 	<generated>
-	self visitCollection: aFamixTWithImports outgoingImports
+	self visitCollection: aFamixTWithImports imports
 ]
 
 { #category : #visiting }
