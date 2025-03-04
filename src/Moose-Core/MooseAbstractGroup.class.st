@@ -324,14 +324,6 @@ MooseAbstractGroup >> detect: aBlock ifNone: anotherBlock [
 ]
 
 { #category : #enumerating }
-MooseAbstractGroup >> detect: aBlock ifOne: anotherBlock [
-
-	^ self entities
-		detect: aBlock
-		ifOne:  anotherBlock
-]
-
-{ #category : #enumerating }
 MooseAbstractGroup >> detectMax: aString [
 
 	^ self entities detectMax: aString
