@@ -428,6 +428,13 @@ MooseObject >> mooseNameOn: aStream [
 		ifNotNil: [ self name ifNil: [ aStream print: self mooseID ] ifNotNil: [ aStream nextPutAll: self name ] ]
 ]
 
+{ #category : #printing }
+MooseObject >> mooseNameWithDots [
+	"This method is used outside of Moose. This brings the question: Why use `::` and not `.`? We should discuss that in a moose meeting."
+
+	^ self mooseName ifNotNil: [ :mName | mName copyReplaceAll: '::' with: '.' ]
+]
+
 { #category : #accessing }
 MooseObject >> name [
 	^ self class undefinedName
