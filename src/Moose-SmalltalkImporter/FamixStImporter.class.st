@@ -64,7 +64,7 @@ FamixStImporter >> basicClassCreation: aClass [
 
 	| class anchor |
 	class := classes at: aClass put: self factory classEntity new.
-	class name: (aClass name asString replaceAll: Character space with: $_).
+	class name: (aClass name asString replaceAll: Character space with: $_) asSymbol.
 	class stub: true.
 	self importingContext shouldImportNamespace ifTrue: [ class typeContainer: (self ensureNamespace: aClass environment) ].
 	anchor := self factory anchor new
