@@ -132,7 +132,6 @@ FamixJavaQueryTest >> setUp [
 		yourself.
 
 	annotationInstance1 := FamixJavaAnnotationInstance new
-		stub: true;
 		annotationType: annotationType1;
 		annotatedEntity: at1;
 		yourself.
