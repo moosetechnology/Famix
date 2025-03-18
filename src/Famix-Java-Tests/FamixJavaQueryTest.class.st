@@ -138,7 +138,6 @@ FamixJavaQueryTest >> setUp [
 		yourself.
 
 	annotationInstanceAttribute1 := FamixJavaAnnotationInstanceAttribute new
-		stub: true;
 		parentAnnotationInstance: annotationInstance1;
 		value: 'instanceAttribute1Value';
 		yourself.
