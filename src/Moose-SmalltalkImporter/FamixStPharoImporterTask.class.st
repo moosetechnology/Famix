@@ -33,11 +33,11 @@ FamixStPharoImporterTask >> addClasses: col [
 ]
 
 { #category : #adding }
-FamixStPharoImporterTask >> addFromPackage: aRPackage [
+FamixStPharoImporterTask >> addFromPackage: aPackage [
 
 	"late-bound cache initialization for classes"
-	self addClasses: aRPackage definedClasses.
-	self addClassExtensions: aRPackage extensionMethods
+	self addClasses: aPackage definedClasses.
+	self addClassExtensions: aPackage extensionMethods
 	
 ]
 
