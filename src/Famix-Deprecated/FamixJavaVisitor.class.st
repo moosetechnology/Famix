@@ -3,8 +3,14 @@ Class {
 	#superclass : #Object,
 	#traits : 'FamixJavaTVisitor',
 	#classTraits : 'FamixJavaTVisitor classTrait',
-	#category : #'Famix-Java-Visitor'
+	#category : #'Famix-Deprecated'
 }
+
+{ #category : #meta }
+FamixJavaVisitor class >> annotation [
+
+	 
+]
 
 { #category : #testing }
 FamixJavaVisitor class >> isDeprecated [
