@@ -13,7 +13,7 @@ FamixTGlobalVariable represents a global variable in the source code.
 ### Incoming dependencies
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `incomingAccesses` | `FamixTAccessible` | `variable` | `FamixTAccess` | All Famix accesses pointing to this structural entity|
+| `incomingAccesses` | `FamixTAccessible` | `candidates` | `FamixTAccess` | All Famix accesses pointing to this structural entity|
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |

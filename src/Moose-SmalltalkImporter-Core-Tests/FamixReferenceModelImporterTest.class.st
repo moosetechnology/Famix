@@ -163,7 +163,7 @@ FamixReferenceModelImporterTest >> testAccessingGlobalVariableFromInstanceSide [
 FamixReferenceModelImporterTest >> testAccessingGlobalVariableHavingNamespaceNameFromInstanceSide [
 	| accessDefinition methodUniqueName |
 	methodUniqueName := (TheRoot >> #accessingGlobalVariableHavingNamespaceName) mooseName.
-	accessDefinition := (self model entityNamed: methodUniqueName) accesses select: [ :acc | acc target mooseName = #SmalltalkGlobalVariable ].
+	accessDefinition := (self model entityNamed: methodUniqueName) accesses select: [ :acc | acc variable mooseName = #SmalltalkGlobalVariable ].
 	self assert: accessDefinition size equals: 1
 ]
 
@@ -189,21 +189,22 @@ FamixReferenceModelImporterTest >> testAccessingLocalVariable [
 FamixReferenceModelImporterTest >> testAccessingNamespace2 [
 	| accessDefinition |
 	accessDefinition := (self model entityNamed: 'Smalltalk::TheRoot.accessingGlobalVariableHavingNamespaceName()') accesses
-		select: [ :acc | acc target mooseName = #SmalltalkGlobalVariable ].
+		select: [ :acc | acc variable mooseName = #SmalltalkGlobalVariable ].
 	self assert: accessDefinition size equals: 1
 ]
 
 { #category : #tests }
 FamixReferenceModelImporterTest >> testAccessingNamespaceAsGlobalVariable [
+
 	| accessDefinition method globalVariable |
 	"TheRoot>>accessingNamespace
 		Smalltalk"
 	globalVariable := self model entityNamed: #SmalltalkGlobalVariable.
-	method := self model entityNamed: (TheRoot >> #accessingNamespace) mooseName.	"since we have two methods accessing to Smalltalk 
+	method := self model entityNamed: (TheRoot >> #accessingNamespace) mooseName. "since we have two methods accessing to Smalltalk 
 	we have two accesses"
-	self assert: (self model allAccesses select: [ :acc | acc target name = #SmalltalkGlobalVariable ]) size equals: 2.
-	self assert: (self model allAccesses select: [ :ref | ref target = globalVariable ]) size equals: 2.
-	accessDefinition := self model allAccesses select: [ :ref | ref target = globalVariable and: [ ref source == method ] ].
+	self assert: (self model allAccesses select: [ :acc | acc variable name = #SmalltalkGlobalVariable ]) size equals: 2.
+	self assert: (self model allAccesses select: [ :ref | ref variable = globalVariable ]) size equals: 2.
+	accessDefinition := self model allAccesses select: [ :ref | ref variable = globalVariable and: [ ref source == method ] ].
 	self assert: accessDefinition size equals: 1
 ]
 

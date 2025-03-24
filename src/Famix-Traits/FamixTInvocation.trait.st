@@ -215,3 +215,11 @@ FamixTInvocation >> sender: anObject [
 	<generated>
 	sender := anObject
 ]
+
+{ #category : #accessing }
+FamixTInvocation >> target: aTarget [
+
+	aTarget isCollection
+		ifTrue: [ self candidates: aTarget ]
+		ifFalse: [ self invokedEntity: aTarget ]
+]

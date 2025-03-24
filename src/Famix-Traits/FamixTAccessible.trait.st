@@ -5,7 +5,7 @@
 ### Incoming dependencies
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `incomingAccesses` | `FamixTAccessible` | `variable` | `FamixTAccess` | All Famix accesses pointing to this structural entity|
+| `incomingAccesses` | `FamixTAccessible` | `candidates` | `FamixTAccess` | All Famix accesses pointing to this structural entity|
 
 
 
@@ -13,7 +13,7 @@
 Trait {
 	#name : #FamixTAccessible,
 	#instVars : [
-		'#incomingAccesses => FMMany type: #FamixTAccess opposite: #variable'
+		'#incomingAccesses => FMMany type: #FamixTAccess opposite: #candidates'
 	],
 	#category : #'Famix-Traits-Access'
 }
@@ -69,11 +69,10 @@ FamixTAccessible >> globalAccesses [
 
 { #category : #accessing }
 FamixTAccessible >> incomingAccesses [
-	"Relation named: #incomingAccesses type: #FamixTAccess opposite: #variable"
+	"Relation named: #incomingAccesses type: #FamixTAccess opposite: #candidates"
 
 	<generated>
 	<FMComment: 'All Famix accesses pointing to this structural entity'>
-	<derived>
 	^ incomingAccesses
 ]
 
