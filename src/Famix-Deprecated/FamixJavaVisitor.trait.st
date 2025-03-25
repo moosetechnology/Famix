@@ -1,19 +1,18 @@
-Class {
+Trait {
 	#name : #FamixJavaVisitor,
-	#superclass : #Object,
 	#traits : 'FamixJavaTVisitor',
 	#classTraits : 'FamixJavaTVisitor classTrait',
 	#category : #'Famix-Deprecated'
 }
 
 { #category : #meta }
-FamixJavaVisitor class >> annotation [
+FamixJavaVisitor classSide >> annotation [
 
-	 
+	
 ]
 
 { #category : #testing }
-FamixJavaVisitor class >> isDeprecated [
+FamixJavaVisitor classSide >> isDeprecated [
 	"Use FamixJavaTVisitor directly. 
 	
 	This class should be removed in Moose 13"
