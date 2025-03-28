@@ -18,6 +18,18 @@ FamixJavaClassTest >> testInheritanceAnnotationType [
 ]
 
 { #category : #tests }
+FamixJavaClassTest >> testInheritsFromTestCase [
+	| famixClass class1 testcase inh1 inh2 |
+	famixClass := FamixJavaClass new.
+	class1 := FamixJavaClass new.
+	testcase := FamixJavaClass named: 'TestCase'.
+	inh1 := FamixJavaInheritance new superclass: testcase ; subclass: class1.
+	inh2 := FamixJavaInheritance new superclass: class1 ; subclass: famixClass .
+	self assert: class1 inheritsFromTestCase.
+	self assert: famixClass inheritsFromTestCase.
+]
+
+{ #category : #tests }
 FamixJavaClassTest >> testIsClassSide [
 	| famixClass |
 	famixClass := FamixJavaClass new. 
