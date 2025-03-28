@@ -12,7 +12,7 @@ FamixSmalltalkNameResolverTest >> actualClass [
 { #category : #tests }
 FamixSmalltalkNameResolverTest >> testFamixFullClassNameForSmalltalkClass [
 	self assert: self class name equals: (self actualClass moosify: self class name) asSymbol.
-	self assert: self class class mooseName equals: ('Smalltalk::' , (self actualClass moosify: self class name) , self actualClass metaclassTag) asSymbol
+	self assert: self class class mooseName equals: ('Smalltalk.' , (self actualClass moosify: self class name) , self actualClass metaclassTag) asSymbol
 ]
 
 { #category : #tests }
