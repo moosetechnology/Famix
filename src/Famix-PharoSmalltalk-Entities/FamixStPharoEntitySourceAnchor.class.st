@@ -13,8 +13,6 @@
 Class {
 	#name : #FamixStPharoEntitySourceAnchor,
 	#superclass : #FamixStSourceAnchor,
-	#traits : 'FamixTSourceAnchor',
-	#classTraits : 'FamixTSourceAnchor classTrait',
 	#instVars : [
 		'#pharoEntity => WeakSlot'
 	],
