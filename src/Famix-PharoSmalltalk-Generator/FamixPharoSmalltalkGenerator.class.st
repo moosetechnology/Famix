@@ -147,7 +147,7 @@ FamixPharoSmalltalkGenerator >> defineHierarchy [
 	reference --|> #TReference.
 
 	pharoEntitySourceAnchor --|> sourceAnchor.
-	pharoEntitySourceAnchor --|> #TSourceAnchor.
+
 
 	unknownVariable --|> namedEntity.
 	unknownVariable --|> #TUnknownVariable.
