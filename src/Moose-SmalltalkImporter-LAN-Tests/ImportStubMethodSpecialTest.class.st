@@ -34,7 +34,7 @@ ImportStubMethodSpecialTest >> testStubMethodCreation [
 ImportStubMethodSpecialTest >> testStubParentsAreInMooseModel [
 
 	| method class |
-	method := model entityNamed: #'Smalltalk::False.ifTrue:(Object)'.
+	method := model entityNamed: #'Smalltalk.False.ifTrue:(Object)'.
 	self assert: method mooseModel isNotNil.
 	self assert: method isStub.
 

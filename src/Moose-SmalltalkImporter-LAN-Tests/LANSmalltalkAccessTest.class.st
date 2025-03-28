@@ -41,8 +41,8 @@ LANSmalltalkAccessTest >> testWhenMergingClassAndMetaclassAccessWorks [
 	self assert: (model entityNamed: (LANNode >> #accept:) mooseName) compiledMethod equals: LANNode >> #accept:.
 	self assert: (model entityNamed: LANNode mooseName) isInstanceSide.
 	self deny: (model entityNamed: (LANNode >> #accept:) mooseName) isClassSide.
-	self assert: (model entityNamed: #'Smalltalk::LANNode.new()') isClassSide.
+	self assert: (model entityNamed: #'Smalltalk.LANNode.new()') isClassSide.
 	self assert: (model entityNamed: (LANNode >> #accept:) mooseName) smalltalkClass equals: LANNode.
-	self assert: (model entityNamed: #'Smalltalk::LANNode.new()') smalltalkClass equals: LANNode class.
-	self assert: (model entityNamed: #'Smalltalk::LANNode.new()') compiledMethod equals: LANNode class >> #new
+	self assert: (model entityNamed: #'Smalltalk.LANNode.new()') smalltalkClass equals: LANNode class.
+	self assert: (model entityNamed: #'Smalltalk.LANNode.new()') compiledMethod equals: LANNode class >> #new
 ]
