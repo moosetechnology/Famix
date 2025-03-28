@@ -13,160 +13,160 @@ AbstractFamixNavigationTest class >> resources [
 AbstractFamixNavigationTest >> c10FullReferencerInSide [ 
 	 
 	^self model entityNamed: 
-			#'Model2FullReferee::M2P4C10FullReferencerInSide'
+			#'Model2FullReferee.M2P4C10FullReferencerInSide'
 ]
 
 { #category : #'helpers - classes' }
 AbstractFamixNavigationTest >> c11FullRefereeOutSide [ 
 	 
 	^self model entityNamed: 
-			#'Model2FullReferee::M2P5C11FullRefereeOutSide'
+			#'Model2FullReferee.M2P5C11FullRefereeOutSide'
 ]
 
 { #category : #'helpers - classes' }
 AbstractFamixNavigationTest >> c12FullReferencerInSide [ 
 	 
 	^self model entityNamed: 
-			#'Model2FullReferee::M2P6C12FullReferencerInSide'
+			#'Model2FullReferee.M2P6C12FullReferencerInSide'
 ]
 
 { #category : #'helpers - classes' }
 AbstractFamixNavigationTest >> c13FullRefereeInSideOutSide [ 
 	 
 	^self model entityNamed: 
-			#'Model2FullReferee::M2P6C13FullRefereeInSideOutSide'
+			#'Model2FullReferee.M2P6C13FullRefereeInSideOutSide'
 ]
 
 { #category : #'helpers - classes' }
 AbstractFamixNavigationTest >> c14ReferencerOutSideRefereeOutSide [ 
 	 
 	^self model entityNamed: 
-			#'Model3ReferencerReferee::M3P7C14ReferencerOutSideRefereeOutSide'
+			#'Model3ReferencerReferee.M3P7C14ReferencerOutSideRefereeOutSide'
 ]
 
 { #category : #'helpers - classes' }
 AbstractFamixNavigationTest >> c15FullReferencerOutSide [ 
 	 
 	^self model entityNamed: 
-			#'Model4FullReferencer::M4P8C15FullReferencerOutSide'
+			#'Model4FullReferencer.M4P8C15FullReferencerOutSide'
 ]
 
 { #category : #'helpers - classes' }
 AbstractFamixNavigationTest >> c16FullReferencerOutSideInSide [ 
 	 
 	^self model entityNamed: 
-			#'Model5InteractedReferencer::M5P9C16FullReferencerOutSideInSide'
+			#'Model5InteractedReferencer.M5P9C16FullReferencerOutSideInSide'
 ]
 
 { #category : #'helpers - classes' }
 AbstractFamixNavigationTest >> c17FullReferencerInSide [ 
 	 
 	^self model entityNamed: 
-			#'Model5InteractedReferencer::M5P10C17FullReferencerInSide'
+			#'Model5InteractedReferencer.M5P10C17FullReferencerInSide'
 ]
 
 { #category : #'helpers - classes' }
 AbstractFamixNavigationTest >> c18FullRefereeInSideOutSide [ 
 	 
 	^self model entityNamed: 
-			#'Model5InteractedReferencer::M5P10C18FullRefereeInSideOutSide'
+			#'Model5InteractedReferencer.M5P10C18FullRefereeInSideOutSide'
 ]
 
 { #category : #'helpers - classes' }
 AbstractFamixNavigationTest >> c19FullRefereeOutSide [ 
 	 
 	^self model entityNamed: 
-			#'Model6InteractedReferee::M6P11C19FullRefereeOutSide'
+			#'Model6InteractedReferee.M6P11C19FullRefereeOutSide'
 ]
 
 { #category : #'helpers - classes' }
 AbstractFamixNavigationTest >> c1FullReferencerOutSide [ 
 	 
 	^self model entityNamed: 
-			#'Model1InteractedReferencerReferee::M1P1C1FullReferencerOutSide'
+			#'Model1InteractedReferencerReferee.M1P1C1FullReferencerOutSide'
 ]
 
 { #category : #'helpers - classes' }
 AbstractFamixNavigationTest >> c20FullReferencerOutSide [ 
 	 
 	^self model entityNamed: 
-			#'Model6InteractedReferee::M6P12C20FullReferencerOutSide'
+			#'Model6InteractedReferee.M6P12C20FullReferencerOutSide'
 ]
 
 { #category : #'helpers - classes' }
 AbstractFamixNavigationTest >> c21FullReferencerOutSide [ 
 	 
 	^self model entityNamed: 
-			#'Model7FullInteracted::M7P13C21FullReferencerOutSide'
+			#'Model7FullInteracted.M7P13C21FullReferencerOutSide'
 ]
 
 { #category : #'helpers - classes' }
 AbstractFamixNavigationTest >> c22FullRefereeOutSide [ 
 	 
 	^self model entityNamed: 
-			#'Model7FullInteracted::M7P14C22FullRefereeOutSide'
+			#'Model7FullInteracted.M7P14C22FullRefereeOutSide'
 ]
 
 { #category : #'helpers - classes' }
 AbstractFamixNavigationTest >> c2ReferencerOutSideRefereeInSide [ 
 	 
 	^self model entityNamed: 
-			#'Model1InteractedReferencerReferee::M1P2C2ReferencerOutSideRefereeInSide'
+			#'Model1InteractedReferencerReferee.M1P2C2ReferencerOutSideRefereeInSide'
 ]
 
 { #category : #'helpers - classes' }
 AbstractFamixNavigationTest >> c3ReferencerInSideRefereeOutSide [ 
 	 
 	^self model entityNamed: 
-			#'Model1InteractedReferencerReferee::M1P2C3ReferencerInSideRefereeOutSide'
+			#'Model1InteractedReferencerReferee.M1P2C3ReferencerInSideRefereeOutSide'
 ]
 
 { #category : #'helpers - classes' }
 AbstractFamixNavigationTest >> c4FullRefereeInSide [ 
 	 
 	^self model entityNamed: 
-			#'Model1InteractedReferencerReferee::M1P2C4FullRefereeInSide'
+			#'Model1InteractedReferencerReferee.M1P2C4FullRefereeInSide'
 ]
 
 { #category : #'helpers - classes' }
 AbstractFamixNavigationTest >> c5ReferencerInSideRefereeInSide [ 
 	 
 	^self model entityNamed: 
-			#'Model1InteractedReferencerReferee::M1P3C5ReferencerInSideRefereeInSide'
+			#'Model1InteractedReferencerReferee.M1P3C5ReferencerInSideRefereeInSide'
 ]
 
 { #category : #'helpers - classes' }
 AbstractFamixNavigationTest >> c6FullReferencerInSideOutSide [ 
 	 
 	^self model entityNamed: 
-			#'Model1InteractedReferencerReferee::M1P3C6FullReferencerInSideOutSide'
+			#'Model1InteractedReferencerReferee.M1P3C6FullReferencerInSideOutSide'
 ]
 
 { #category : #'helpers - classes' }
 AbstractFamixNavigationTest >> c7FullRefereeInSide [ 
 	 
 	^self model entityNamed: 
-			#'Model1InteractedReferencerReferee::M1P3C7FullRefereeInSide'
+			#'Model1InteractedReferencerReferee.M1P3C7FullRefereeInSide'
 ]
 
 { #category : #'helpers - classes' }
 AbstractFamixNavigationTest >> c8FullReferencerInSide [ 
 	 
 	^self model entityNamed: 
-			#'Model1InteractedReferencerReferee::M1P3C8FullReferencerInSide'
+			#'Model1InteractedReferencerReferee.M1P3C8FullReferencerInSide'
 ]
 
 { #category : #'helpers - classes' }
 AbstractFamixNavigationTest >> c9FullRefereeInSide [ 
 	 
 	^self model entityNamed: 
-			#'Model2FullReferee::M2P4C9FullRefereeInSide'
+			#'Model2FullReferee.M2P4C9FullRefereeInSide'
 ]
 
 { #category : #'helpers - classes' }
 AbstractFamixNavigationTest >> cObject [ 
 	 
-	^self model entityNamed: #'Smalltalk::Object'
+	^self model entityNamed: #'Smalltalk.Object'
 ]
 
 { #category : #'helpers - utilites' }
@@ -181,14 +181,14 @@ AbstractFamixNavigationTest >> getMethod: methodNameString [
 AbstractFamixNavigationTest >> m1p2c2Mtd1 [  
 	 
 	^self model entityNamed: 
-			#'Model1InteractedReferencerReferee::M1P2C2ReferencerOutSideRefereeInSide.m1p2c2Mtd1()'
+			#'Model1InteractedReferencerReferee.M1P2C2ReferencerOutSideRefereeInSide.m1p2c2Mtd1()'
 ]
 
 { #category : #'helpers - classes' }
 AbstractFamixNavigationTest >> m1p2c2Mtd2 [ 
 	 
 	^self model entityNamed: 
-			#'Model1InteractedReferencerReferee::M1P2C2ReferencerOutSideRefereeInSide.m1p2c2Mtd2()'
+			#'Model1InteractedReferencerReferee.M1P2C2ReferencerOutSideRefereeInSide.m1p2c2Mtd2()'
 ]
 
 { #category : #'helpers - utilites' }

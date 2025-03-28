@@ -27,9 +27,9 @@ Class {
 
 { #category : #auxiliary }
 FamixModelExtractionTest >> assignAttributes [
-	nodeName := self model entityNamed: 'Smalltalk::LANNode.name'.
-	nextNode := self model entityNamed: 'Smalltalk::LANNode.nextNode'.
-	serverType := self model entityNamed: 'Smalltalk::LANOutputServer.serverType'
+	nodeName := self model entityNamed: 'Smalltalk.LANNode.name'.
+	nextNode := self model entityNamed: 'Smalltalk.LANNode.nextNode'.
+	serverType := self model entityNamed: 'Smalltalk.LANOutputServer.serverType'
 ]
 
 { #category : #auxiliary }
@@ -39,21 +39,21 @@ FamixModelExtractionTest >> assignClasses [
 
 { #category : #auxiliary }
 FamixModelExtractionTest >> assignMethods [
-	methodWithEmptyBodyNode := self model entityNamed: 'Smalltalk::LANNode.methodWithEmptyBody()'.
-	outputServer := self model entityNamed: 'Smalltalk::LANOutputServer.output:(Object)'.
-	acceptServer := self model entityNamed: 'Smalltalk::LANOutputServer.accept:(Object)'.
-	acceptNode := self model entityNamed: 'Smalltalk::LANNode.accept:(Object)'.
-	canOutputServer := self model entityNamed: 'Smalltalk::LANOutputServer.canOutput()'.
-	canOutputNode := self model entityNamed: 'Smalltalk::LANNode.canOutput()'.
-	nameNode := self model entityNamed: 'Smalltalk::LANNode.name()'.
-	nameNodeColon := self model entityNamed: 'Smalltalk::LANNode.name:(Object)'.
-	nextNodeMethod := self model entityNamed: 'Smalltalk::LANNode.nextNode()'.
-	nextNodeColon := self model entityNamed: 'Smalltalk::LANNode.nextNode:(Object)'.
-	initializeNode := self model entityNamed: 'Smalltalk::LANNode.initialize()'.
-	printOnNode := self model entityNamed: 'Smalltalk::LANNode.printOn:(Object)'.
-	sendNode := self model entityNamed: 'Smalltalk::LANNode.send:(Object)'.
-	canOriginateNode := self model entityNamed: 'Smalltalk::LANNode.canOriginate()'.
-	newNodeClass := self model entityNamed: 'Smalltalk::LANNode.new()'
+	methodWithEmptyBodyNode := self model entityNamed: 'Smalltalk.LANNode.methodWithEmptyBody()'.
+	outputServer := self model entityNamed: 'Smalltalk.LANOutputServer.output:(Object)'.
+	acceptServer := self model entityNamed: 'Smalltalk.LANOutputServer.accept:(Object)'.
+	acceptNode := self model entityNamed: 'Smalltalk.LANNode.accept:(Object)'.
+	canOutputServer := self model entityNamed: 'Smalltalk.LANOutputServer.canOutput()'.
+	canOutputNode := self model entityNamed: 'Smalltalk.LANNode.canOutput()'.
+	nameNode := self model entityNamed: 'Smalltalk.LANNode.name()'.
+	nameNodeColon := self model entityNamed: 'Smalltalk.LANNode.name:(Object)'.
+	nextNodeMethod := self model entityNamed: 'Smalltalk.LANNode.nextNode()'.
+	nextNodeColon := self model entityNamed: 'Smalltalk.LANNode.nextNode:(Object)'.
+	initializeNode := self model entityNamed: 'Smalltalk.LANNode.initialize()'.
+	printOnNode := self model entityNamed: 'Smalltalk.LANNode.printOn:(Object)'.
+	sendNode := self model entityNamed: 'Smalltalk.LANNode.send:(Object)'.
+	canOriginateNode := self model entityNamed: 'Smalltalk.LANNode.canOriginate()'.
+	newNodeClass := self model entityNamed: 'Smalltalk.LANNode.new()'
 ]
 
 { #category : #running }
@@ -243,7 +243,7 @@ FamixModelExtractionTest >> testModelDoesNotContainDuplicateSharedVars [
 { #category : #tests }
 FamixModelExtractionTest >> testNameAndUniqueNameForNotNamed [
 	| mseMethod |
-	mseMethod := self model entityNamed: 'Smalltalk::LANNode.printOn:(Object)'.
+	mseMethod := self model entityNamed: 'Smalltalk.LANNode.printOn:(Object)'.
 	self assert: (mseMethod outgoingInvocations anySatisfy: [:each | each signature = #'printString()'])
 ]
 

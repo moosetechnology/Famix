@@ -430,8 +430,7 @@ MooseObject >> mooseNameOn: aStream [
 
 { #category : #printing }
 MooseObject >> mooseNameWithDots [
-	"This method is used outside of Moose. This brings the question: Why use `::` and not `.`? We should discuss that in a moose meeting."
-
+	self deprecated: ':: has been replaced by . in mooseName. This method is now useless'.
 	^ self mooseName ifNotNil: [ :mName | mName copyReplaceAll: '::' with: '.' ]
 ]
 

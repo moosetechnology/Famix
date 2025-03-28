@@ -6,7 +6,7 @@ Class {
 
 { #category : #testing }
 LANFamixPropertiesTest >> lanInterfaceOriginateMethod [
-	^self model entityNamed: #'Smalltalk::LANInterface.originate()'
+	^self model entityNamed: #'Smalltalk.LANInterface.originate()'
 ]
 
 { #category : #testing }
@@ -17,8 +17,8 @@ LANFamixPropertiesTest >> nodeClass [
 { #category : #testing }
 LANFamixPropertiesTest >> testAttributeMetrics [
 	| attribute1 attribute2 |
-	attribute1 := self model entityNamed: #'Smalltalk::LANInterface.nextNode'.
-	attribute2 := self model entityNamed: #'Smalltalk::LANOutputServer.serverType'.
+	attribute1 := self model entityNamed: #'Smalltalk.LANInterface.nextNode'.
+	attribute2 := self model entityNamed: #'Smalltalk.LANOutputServer.serverType'.
 	self assert: (attribute1 propertyNamed: #numberOfAccesses) equals: 3.
 	self assert: attribute1 numberOfAccesses equals: 3.
 	self assert: (attribute1 propertyNamed: #hierarchyNestingLevel) equals: 1.
@@ -102,7 +102,7 @@ LANFamixPropertiesTest >> testClassInvocations [
 LANFamixPropertiesTest >> testClassIsAbstract [
 	^ self
 		assert:
-			(self model entityNamed: #'Smalltalk::LANAbstractDestinationAddress')
+			(self model entityNamed: #'Smalltalk.LANAbstractDestinationAddress')
 				isAbstract
 ]
 
@@ -156,7 +156,7 @@ LANFamixPropertiesTest >> testMethodAccesses [
 	self
 		assert: self lanInterfaceOriginateMethod numberOfAccesses
 		equals: (self lanInterfaceOriginateMethod propertyNamed: #numberOfAccesses).
-	self assert: (self model entityNamed: #'Smalltalk::LANInterface.originator()') numberOfAccesses equals: 3
+	self assert: (self model entityNamed: #'Smalltalk.LANInterface.originator()') numberOfAccesses equals: 3
 ]
 
 { #category : #testing }
@@ -177,14 +177,14 @@ LANFamixPropertiesTest >> testMethodHierarchyNesting [
 LANFamixPropertiesTest >> testMethodInvocations [
 	self assert: (self lanInterfaceOriginateMethod propertyNamed: #numberOfOutgoingInvocations) equals: 22.
 	self assert: self lanInterfaceOriginateMethod numberOfOutgoingInvocations equals: 22.
-	self assert: (self model entityNamed: #'Smalltalk::LANInterface.initialize()') numberOfOutgoingInvocations equals: 2
+	self assert: (self model entityNamed: #'Smalltalk.LANInterface.initialize()') numberOfOutgoingInvocations equals: 2
 ]
 
 { #category : #testing }
 LANFamixPropertiesTest >> testMethodInvocationsWithoutCascading [
-	self assert: (self model entityNamed: #'Smalltalk::LANInterface.remove()') numberOfOutgoingInvocations equals: 6.
+	self assert: (self model entityNamed: #'Smalltalk.LANInterface.remove()') numberOfOutgoingInvocations equals: 6.
 	self
-		assert: (self model entityNamed: #'Smalltalk::LANInterface.newWorkstation()') numberOfOutgoingInvocations
+		assert: (self model entityNamed: #'Smalltalk.LANInterface.newWorkstation()') numberOfOutgoingInvocations
 		equals: 4
 ]
 
@@ -227,38 +227,38 @@ LANFamixPropertiesTest >> testMethodSmalltalkStatements [
 { #category : #testing }
 LANFamixPropertiesTest >> testMethodTimeStamp [
 	| method |
-	method := self model entityNamed: #'Smalltalk::LANInterface.initialize()'.
+	method := self model entityNamed: #'Smalltalk.LANInterface.initialize()'.
 	self assert: (method propertyNamed: #timeStamp) equals: (LANInterface compiledMethodAt: #initialize) timeStamp.
-	method := self model entityNamed: #'Smalltalk::LANInterface.originate()'.
+	method := self model entityNamed: #'Smalltalk.LANInterface.originate()'.
 	self assert: (method propertyNamed: #timeStamp) equals: (LANInterface compiledMethodAt: #originate) timeStamp.
-	method := self model entityNamed: #'Smalltalk::LANInterface.nodeList()'.
+	method := self model entityNamed: #'Smalltalk.LANInterface.nodeList()'.
 	self assert: (method propertyNamed: #timeStamp) equals: (LANInterface compiledMethodAt: #nodeList) timeStamp.
-	method := self model entityNamed: #'Smalltalk::LANNode.canOriginate()'.
+	method := self model entityNamed: #'Smalltalk.LANNode.canOriginate()'.
 	self assert: (method propertyNamed: #timeStamp) equals: (LANNode compiledMethodAt: #canOriginate) timeStamp.
-	method := self model entityNamed: #'Smalltalk::LANNode.canOutput()'.
+	method := self model entityNamed: #'Smalltalk.LANNode.canOutput()'.
 	self assert: (method propertyNamed: #timeStamp) equals: (LANNode compiledMethodAt: #canOutput) timeStamp.
-	method := self model entityNamed: #'Smalltalk::LANNode.nextNode()'.
+	method := self model entityNamed: #'Smalltalk.LANNode.nextNode()'.
 	self assert: (method propertyNamed: #timeStamp) equals: (LANNode compiledMethodAt: #nextNode) timeStamp.
-	method := self model entityNamed: #'Smalltalk::LANFileServer.name()'.
+	method := self model entityNamed: #'Smalltalk.LANFileServer.name()'.
 	self assert: (method propertyNamed: #timeStamp) equals: (LANFileServer compiledMethodAt: #name) timeStamp.
-	method := self model entityNamed: #'Smalltalk::LANFileServer.setServerType()'.
+	method := self model entityNamed: #'Smalltalk.LANFileServer.setServerType()'.
 	self assert: (method propertyNamed: #timeStamp) equals: (LANFileServer compiledMethodAt: #setServerType) timeStamp
 ]
 
 { #category : #testing }
 LANFamixPropertiesTest >> testMethodsSimpleProperties [
 	| method |
-	method := self model entityNamed: #'Smalltalk::LANInterface.initialize()'.
+	method := self model entityNamed: #'Smalltalk.LANInterface.initialize()'.
 	self assert: method isInitializer.
 	self deny: method isInternalImplementation.
 	self deny: method isPureAccessor.
 
-	method := self model entityNamed: #'Smalltalk::LANInterface.originate()'.
+	method := self model entityNamed: #'Smalltalk.LANInterface.originate()'.
 	self deny: method isInitializer.
 	self deny: method isInternalImplementation.
 	self deny: method isPureAccessor.
 
-	method := self model entityNamed: #'Smalltalk::LANInterface.nodeList()'.
+	method := self model entityNamed: #'Smalltalk.LANInterface.nodeList()'.
 	self deny: method isInitializer.
 	self assert: method isInternalImplementation.
 	self deny: method isPureAccessor.
@@ -266,14 +266,14 @@ LANFamixPropertiesTest >> testMethodsSimpleProperties [
 
 { #category : #testing }
 LANFamixPropertiesTest >> testNoDuplicatesOfClassVariables [
-	self assert: ((self model entityNamed: #'Smalltalk::LANAbstractDestinationAddress') attributes contains: [ :each | each name = #MySharedVariable ]).
-	self assert: (self model entityNamed: #'Smalltalk::LANAbstractDestinationAddress') attributes first identicalTo: (self model entityNamed: #'Smalltalk::LANAbstractDestinationAddress') attributes last.
-	self assert: (self model entityNamed: #'Smalltalk::LANAbstractDestinationAddress') attributes size equals: 1
+	self assert: ((self model entityNamed: #'Smalltalk.LANAbstractDestinationAddress') attributes contains: [ :each | each name = #MySharedVariable ]).
+	self assert: (self model entityNamed: #'Smalltalk.LANAbstractDestinationAddress') attributes first identicalTo: (self model entityNamed: #'Smalltalk.LANAbstractDestinationAddress') attributes last.
+	self assert: (self model entityNamed: #'Smalltalk.LANAbstractDestinationAddress') attributes size equals: 1
 ]
 
 { #category : #testing }
 LANFamixPropertiesTest >> testOverriddenMethods [
-	self assert: (self model entityNamed: #Smalltalk::LANOutputServer) numberOfMethodsOverridden equals: 2
+	self assert: (self model entityNamed: #'Smalltalk.LANOutputServer') numberOfMethodsOverridden equals: 2
 ]
 
 { #category : #testing }
@@ -284,5 +284,5 @@ LANFamixPropertiesTest >> testPropertyNamed [
 
 { #category : #testing }
 LANFamixPropertiesTest >> workstationClass [
-	^self model entityNamed: #'Smalltalk::LANWorkStation'
+	^self model entityNamed: #'Smalltalk.LANWorkStation'
 ]

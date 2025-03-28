@@ -42,6 +42,6 @@ FamixStNavigationTestResource >> importModel [
 		namespace := namespaces at: index.
 		classArray do: [ :each |
 			| class |
-			class := model entityNamed: 'Smalltalk::' , each.
+			class := model entityNamed: 'Smalltalk.' , each.
 			class typeContainer: namespace ] ]
 ]
