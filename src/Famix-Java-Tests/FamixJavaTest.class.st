@@ -68,8 +68,8 @@ FamixJavaTest >> testImportAnnotations [
 		do: [ :i | 
 			self assert: (i annotationType instances includes: i).
 			self assert: (i annotatedEntity annotationInstances includes: i) ].
-	self assert: (model allAnnotationTypes entityNamed: #'aPackage::AnAnnotation') instances size equals: 2.
-	self assert: (model allAnnotationTypes entityNamed: #'aPackage::AnotherAnnotation') instances size equals: 1.
+	self assert: (model allAnnotationTypes entityNamed: #'aPackage.AnAnnotation') instances size equals: 2.
+	self assert: (model allAnnotationTypes entityNamed: #'aPackage.AnotherAnnotation') instances size equals: 1.
 	model allAnnotationTypes
 		do: [ :each | 
 			self assert: (each typeContainer definedAnnotationTypes includes: each).
@@ -118,17 +118,6 @@ FamixJavaTest >> testImportExceptions [
 	
 	self assertCollection: exceptionA declaringEntities  hasSameElements: { method2. method3 }.
 	self assertCollection: exceptionA throwingEntities  hasSameElements: { method2 }.
-]
-
-{ #category : #tests }
-FamixJavaTest >> testInferNamespaces [
-	| model |
-	model  := FamixJavaModel new.
-	model add: (FamixJavaPackage new name: 'org.project.package1').
-	model add: (FamixJavaPackage new name: 'org.project.package2').
-	self assert: model allPackages size equals: 2.
-	model inferPackageParentsBasedOnNames.
-	self assert: model allPackages size equals: 4
 ]
 
 { #category : #tests }

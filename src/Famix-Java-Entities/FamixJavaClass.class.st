@@ -205,7 +205,7 @@ FamixJavaClass >> mooseNameOn: aStream [
 		parent mooseNameOn: aStream.
 		self isInnerClass
 			ifTrue: [ aStream nextPut: $$ ]
-			ifFalse: [ aStream nextPutAll: '::' ] ].
+			ifFalse: [ aStream nextPutAll: '.' ] ].
 	self name ifNotNil: [ :n | aStream nextPutAll: n ]
 ]
 

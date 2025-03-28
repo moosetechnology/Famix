@@ -18,7 +18,7 @@ FamixInvocationNavigationTest >> testIsASureInvocation [
 { #category : #tests }
 FamixInvocationNavigationTest >> testIsSurelyInvokedBy [
 	| method |
-	method := self model allMethods entityNamed: #'Model5InteractedReferencer::M5P10C17FullReferencerInSide.m5p10c17Mtd1()'.
+	method := self model allMethods entityNamed: #'Model5InteractedReferencer.M5P10C17FullReferencerInSide.m5p10c17Mtd1()'.
 
 	self assert: ((self getMethod: 'm5p10c18InstCreation()') isSurelyInvokedBy: method).
 	self deny: ((self getMethod: 'm5p10c18Mtd1()') isSurelyInvokedBy: method)

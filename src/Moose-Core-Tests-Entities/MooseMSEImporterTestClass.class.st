@@ -64,6 +64,6 @@ MooseMSEImporterTestClass >> mooseNameOn: aStream [
 
 	self typeContainer ifNotNil: [ :parent | 
 		parent mooseNameOn: aStream.
-		aStream nextPutAll: '::' ].
+		aStream nextPutAll: '.' ].
 	self name ifNotNil: [ :n | aStream nextPutAll: n ]
 ]
