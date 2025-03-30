@@ -553,7 +553,7 @@ MooseObject >> resetMooseName [
 
 	(self hasUniqueMooseNameInModel and: [ self hasMooseModel ]) ifFalse: [ ^ false ].
 
-	self mooseModel resetMooseNameFor: self.
+	self privateClearMooseName.
 
 	^ true
 ]

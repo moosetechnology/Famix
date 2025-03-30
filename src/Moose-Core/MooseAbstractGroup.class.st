@@ -382,23 +382,27 @@ MooseAbstractGroup >> entitiesDo: aBlock [
 ]
 
 { #category : #'public interface' }
-MooseAbstractGroup >> entityNamed: aSymbol [ 
-	 
-	^self 
-		entityNamed: aSymbol 
-		ifAbsent: [nil]
+MooseAbstractGroup >> entityNamed: aSymbol [
+
+	^ self entityNamed: aSymbol ifAbsent: [ nil ]
 ]
 
 { #category : #'public interface' }
-MooseAbstractGroup >> entityNamed: aMooseName ifAbsent: aBlock [ 
-	^ self entityStorage at: aMooseName ifAbsent: aBlock
+MooseAbstractGroup >> entityNamed: aMooseName ifAbsent: aBlock [
+
+	^ self entities
+		  detect: [ :entity | entity hasUniqueMooseNameInModel and: [ entity mooseName = aMooseName ] ]
+		  ifNone: aBlock
 ]
 
 { #category : #'public interface' }
 MooseAbstractGroup >> entityNamed: aMooseName ifAbsent: aBlock ifPresent: anotherBlock [
+
 	| entity |
-	entity := self entityStorage at: aMooseName ifAbsent: [ nil ].
-	^ entity ifNil: [ aBlock value ] ifNotNil: [ anotherBlock value: entity ]
+	entity := self entityNamed: aMooseName ifAbsent: [ nil ].
+	^ entity
+		  ifNil: [ aBlock value ]
+		  ifNotNil: [ anotherBlock value: entity ]
 ]
 
 { #category : #'public interface' }
@@ -725,13 +729,6 @@ MooseAbstractGroup >> removeAll: aCollection [
 { #category : #'entity collection' }
 MooseAbstractGroup >> removeEntity: anEntity [
 	^ self entityStorage remove: anEntity
-]
-
-{ #category : #loading }
-MooseAbstractGroup >> resetMooseNameFor: anEntity [
-	self entityStorage resetMooseNameFor: anEntity.
-	" this is safe, but probably a bit overdone "
-	self flush
 ]
 
 { #category : #accessing }
