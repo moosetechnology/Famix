@@ -151,7 +151,6 @@ FamixPharoSmalltalkGenerator >> defineHierarchy [
 	entityTyping --|> #TEntityTyping. 
 
 	pharoEntitySourceAnchor --|> sourceAnchor.
-	pharoEntitySourceAnchor --|> #TSourceAnchor.
 
 	unknownVariable --|> namedEntity.
 	unknownVariable --|> #TUnknownVariable.
