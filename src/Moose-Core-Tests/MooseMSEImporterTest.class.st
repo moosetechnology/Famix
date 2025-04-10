@@ -138,7 +138,7 @@ MooseMSEImporterTest >> testSimple [
 	self
 		assert: (mooseModel allPackages collect: #name) asArray
 		equals: { 'aPackage'. 'aPackage' }.
-	classA := mooseModel entityNamed: #'aNamespace::ClassA'.
+	classA := mooseModel entityNamed: #'aNamespace.ClassA'.
 	self assert: classA isNotNil.
 	self
 		assert: classA typeContainer

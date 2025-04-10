@@ -283,6 +283,16 @@ TEntityMetaLevelDependency >> addAllParentsIn: aCollection [
 	^ aCollection
 ]
 
+{ #category : #private }
+TEntityMetaLevelDependency >> addRootParentsIn: aCollection [
+
+	self parentsDo: [ :each |
+		each isRoot
+			ifTrue: [ aCollection add: each ]
+			ifFalse: [ each addAllParentsIn: aCollection ] ].
+	^ aCollection
+]
+
 { #category : #scoping }
 TEntityMetaLevelDependency >> allAtAnyScope: aCollectionOfFamixClasses [
 	"I am used to return all the encountered entities (recursively) at matching one of the class scope given as parameter that are up in the containment tree of the metamodel"
@@ -961,6 +971,12 @@ TEntityMetaLevelDependency >> queryOutgoing: aFAMIXClassAssociation [
 	"
 
 	^ self query outgoing dependenciesOfType: aFAMIXClassAssociation
+]
+
+{ #category : #accessing }
+TEntityMetaLevelDependency >> rootParents [
+
+	^ self addRootParentsIn: OrderedCollection new
 ]
 
 { #category : #private }

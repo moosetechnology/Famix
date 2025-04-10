@@ -182,7 +182,6 @@ BaselineOfFamix >> packages: spec [
 		package: 'Moose-TestResources-LAN';
 		package: 'Moose-TestResources-LCOM';
 		package: 'Moose-Query-Test' with: [ spec requires: #( 'Moose-Query' 'Famix-Java-Entities' ) ];
-		package: 'FamixTestGenerator' with: [ spec requires: #( 'Famix-Tests' 'Fame' ) ];
 		package: 'Famix-Tests' with: [ spec requires: #( 'BasicTraits' 'Talents' ) ];
 		package: 'Moose-Core-Tests' with: [ spec requires: #( 'TestModels' 'Moose-Core-Tests-Entities' ) ];
 		package: 'Moose-Core-Tests-Entities' with: [ spec requires: #( 'Moose-Core' 'BasicTraits' ) ];

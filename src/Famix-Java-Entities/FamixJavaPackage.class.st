@@ -240,8 +240,7 @@ FamixJavaPackage >> mooseNameOn: stream [
 	parent ifNotNil: 
 		[ parent mooseNameOn: stream.
 		stream
-			nextPut: $:;
-			nextPut: $: ].
+			nextPut: $. ].
 	self name ifNotNil: [stream nextPutAll: self name]
 ]
 

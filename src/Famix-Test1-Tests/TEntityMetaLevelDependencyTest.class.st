@@ -233,6 +233,14 @@ TEntityMetaLevelDependencyTest >> testParents [
 ]
 
 { #category : #tests }
+TEntityMetaLevelDependencyTest >> testRootParents [
+
+	self assertCollection: c1 rootParents hasSameElements: {  }.
+	self assertCollection: c2 rootParents hasSameElements: {  }.
+	self assertCollection: m1 rootParents hasSameElements: { c1 }
+]
+
+{ #category : #tests }
 TEntityMetaLevelDependencyTest >> testWithScope [
 
 	self assertCollection: (c1 withScope: FamixTClass) hasSameElements: { c1 }.

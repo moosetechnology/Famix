@@ -133,9 +133,9 @@ MooseEntity >> detectDependenciesUsing: aDetector [
 
 { #category : #properties }
 MooseEntity >> handleFameProperty: aSymbol value: anObject [
-
+	"If my super method is able to handle the missing property, I'm doing nothing. Else I save the value in the properties of the entity."
 	| value |
-	super handleFameProperty: aSymbol value: anObject.
+	(super handleFameProperty: aSymbol value: anObject) ifTrue: [ ^ self ].
 	value := (anObject isCollection and: [ anObject size = 1 ])
 		         ifTrue: [ anObject anyOne ]
 		         ifFalse: [ anObject ].

@@ -428,6 +428,12 @@ MooseObject >> mooseNameOn: aStream [
 		ifNotNil: [ self name ifNil: [ aStream print: self mooseID ] ifNotNil: [ aStream nextPutAll: self name ] ]
 ]
 
+{ #category : #printing }
+MooseObject >> mooseNameWithDots [
+	self deprecated: ':: has been replaced by . in mooseName. This method is now useless'.
+	^ self mooseName ifNotNil: [ :mName | mName copyReplaceAll: '::' with: '.' ]
+]
+
 { #category : #accessing }
 MooseObject >> name [
 	^ self class undefinedName

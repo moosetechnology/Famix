@@ -21,7 +21,7 @@ LANImporterTest >> testAccessToPoolVariable [
 	self assert: group size equals: 1.
 	lanEditorAccess := group first.
 	self assert: lanEditorAccess accessor name equals: #accessPoolVariable.
-	self assert: lanEditorAccess accessor mooseName equals: #'Smalltalk::LANNode.accessPoolVariable()'
+	self assert: lanEditorAccess accessor mooseName equals: #'Smalltalk.LANNode.accessPoolVariable()'
 ]
 
 { #category : #tests }
@@ -40,10 +40,10 @@ LANImporterTest >> testAllImplicitVariablesAreStoredInTheModel [
 LANImporterTest >> testClassIsAbstract [ 
 	self
 		assert:
-			(self model entityNamed: #'Smalltalk::LANAbstractDestinationAddress')
+			(self model entityNamed: #'Smalltalk.LANAbstractDestinationAddress')
 				isAbstract.
 	self
-		deny: (self model entityNamed: #'Smalltalk::LANPacket') isAbstract
+		deny: (self model entityNamed: #'Smalltalk.LANPacket') isAbstract
 ]
 
 { #category : #tests }
@@ -56,7 +56,7 @@ LANImporterTest >> testClassNameAndUniqueName [
 	| mseClass |
 	mseClass := self model entityNamed: LANNode mooseName.
 	self assert: mseClass name equals: #LANNode.
-	self assert: mseClass mooseName equals: 'Smalltalk::LANNode'.
+	self assert: mseClass mooseName equals: 'Smalltalk.LANNode'.
 	self assert: mseClass mooseName equals: LANNode mooseName
 ]
 
@@ -134,22 +134,22 @@ LANImporterTest >> testHierarchyRoot [
 
 { #category : #tests }
 LANImporterTest >> testImportCategory [
-	self assert: (self model entityNamed: #'Smalltalk::LANInterface.cancel()') protocol equals: #actions.
-	self assert: (self model entityNamed: #'Smalltalk::LANInterface.addressee()') protocol equals: #aspects
+	self assert: (self model entityNamed: #'Smalltalk.LANInterface.cancel()') protocol equals: #actions.
+	self assert: (self model entityNamed: #'Smalltalk.LANInterface.addressee()') protocol equals: #aspects
 ]
 
 { #category : #tests }
 LANImporterTest >> testImportClassComments [
 	self denyEmpty: (self model allComments select: [ :each | each belongsTo isClass ]).
 	self denyEmpty: (self model allClasses reject: [ :each | each comments isEmpty ]).
-	self denyEmpty: (self model entityNamed: #'Smalltalk::LANInterface') comments
+	self denyEmpty: (self model entityNamed: #'Smalltalk.LANInterface') comments
 ]
 
 { #category : #tests }
 LANImporterTest >> testImportMethodComments [
 	self model allComments do: [ :eachComment | self assert: (self model entityNamed: eachComment belongsTo mooseName) isNotNil ].
-	self assert: (self model entityNamed: #'Smalltalk::LANInterface.accept()') comments size equals: 1.
-	self assert: (self model entityNamed: #'Smalltalk::LANInterface.originate()') comments size equals: 6
+	self assert: (self model entityNamed: #'Smalltalk.LANInterface.accept()') comments size equals: 1.
+	self assert: (self model entityNamed: #'Smalltalk.LANInterface.originate()') comments size equals: 6
 ]
 
 { #category : #tests }
@@ -179,17 +179,17 @@ LANImporterTest >> testInheritsFrom [
 	 
 	self 
 		assert: 
-			((self model entityNamed: #'Smalltalk::LANPrintServer') 
+			((self model entityNamed: #'Smalltalk.LANPrintServer') 
 				inheritsFrom: (self model entityNamed: LANNode mooseName)). 
 	self 
 		assert: 
-			((self model entityNamed: #'Smalltalk::LANPrintServer') 
+			((self model entityNamed: #'Smalltalk.LANPrintServer') 
 				inheritsFrom: 
-					(self model entityNamed: #'Smalltalk::LANOutputServer')). 
+					(self model entityNamed: #'Smalltalk.LANOutputServer')). 
 	self 
 		assert: 
-			((self model entityNamed: #'Smalltalk::LANPrintServer') 
-				inheritsFrom: (self model entityNamed: #'Smalltalk::Model'))
+			((self model entityNamed: #'Smalltalk.LANPrintServer') 
+				inheritsFrom: (self model entityNamed: #'Smalltalk.Model'))
 ]
 
 { #category : #tests }
@@ -214,11 +214,11 @@ LANImporterTest >> testLonely [
 LANImporterTest >> testMethodIsAbstract [
 	self
 		assert:
-			(self model entityNamed: #'Smalltalk::LANOutputServer.output:(Object)')
+			(self model entityNamed: #'Smalltalk.LANOutputServer.output:(Object)')
 				isAbstract.
 	self
 		deny:
-			(self model entityNamed: #'Smalltalk::LANWorkStation.canOriginate()')
+			(self model entityNamed: #'Smalltalk.LANWorkStation.canOriginate()')
 				isAbstract
 ]
 
@@ -239,9 +239,9 @@ LANImporterTest >> testMinimalStateofEntity [
 
 { #category : #tests }
 LANImporterTest >> testMooseName [
-	self assert: LANNode mooseName equals: #Smalltalk::LANNode.
-	self assert: 'Smalltalk::LANNode' mooseName equals: #Smalltalk::LANNode.
-	self assert: LANNode class mooseName equals: #Smalltalk::LANNode_class	"we could also  test here that all the famix entities  understand mooseName but for that we should create model so
+	self assert: LANNode mooseName equals: #'Smalltalk.LANNode'.
+	self assert: 'Smalltalk.LANNode' mooseName equals: #'Smalltalk.LANNode'.
+	self assert: LANNode class mooseName equals: 'Smalltalk.LANNode_class'	"we could also  test here that all the famix entities  understand mooseName but for that we should create model so
 	this is done in LANTest "
 ]
 
@@ -250,11 +250,11 @@ LANImporterTest >> testNameAndUniqueName [
 	| mseClass mseMethod mseAttribute mseGlobalVar mseImplicitVar mseLocalVariable mseFormalParameter transcriptName |
 	mseClass := self model entityNamed: LANNode mooseName.
 	self assert: mseClass name identicalTo: #LANNode.
-	self assert: mseClass mooseName identicalTo: #'Smalltalk::LANNode'.
+	self assert: mseClass mooseName identicalTo: #'Smalltalk.LANNode'.
 	self assert: mseClass mooseName identicalTo: LANNode mooseName.
-	mseMethod := self model entityNamed: #'Smalltalk::LANPacket.printOn:(Object)'.
+	mseMethod := self model entityNamed: #'Smalltalk.LANPacket.printOn:(Object)'.
 	self assert: mseMethod name identicalTo: #printOn:.
-	self assert: mseMethod mooseName identicalTo: #'Smalltalk::LANPacket.printOn:(Object)'.
+	self assert: mseMethod mooseName identicalTo: #'Smalltalk.LANPacket.printOn:(Object)'.
 	self assert: mseMethod signature identicalTo: #'printOn:(Object)'.
 	mseAttribute := self model entityNamed: (LANNode mooseNameOf: 'name') asSymbol.
 	self assert: mseAttribute mooseName identicalTo: (LANNode mooseNameOf: 'name').
@@ -269,9 +269,9 @@ LANImporterTest >> testNameAndUniqueName [
 	mseImplicitVar := self model entityNamed: LANNode mooseName , '.printOn:(Object).super'.
 	self assert: mseImplicitVar name identicalTo: #super.
 	self assert: mseImplicitVar mooseName identicalTo: (LANNode mooseName , '.printOn:(Object).super') asSymbol.
-	mseLocalVariable := self model entityNamed: #'Smalltalk::LANInterface.originate().packet'.
+	mseLocalVariable := self model entityNamed: #'Smalltalk.LANInterface.originate().packet'.
 	self assert: mseLocalVariable name identicalTo: #packet.
-	self assert: mseLocalVariable mooseName identicalTo: #'Smalltalk::LANInterface.originate().packet'.
+	self assert: mseLocalVariable mooseName identicalTo: #'Smalltalk.LANInterface.originate().packet'.
 	mseFormalParameter := self model entityNamed: (LANNode mooseNameOf: 'nextNode:(Object).aNode').
 	self assert: mseFormalParameter name identicalTo: #aNode.
 	self assert: mseFormalParameter mooseName identicalTo: (LANNode mooseNameOf: 'nextNode:(Object).aNode')	"self assert: mseFormalParameter position = 1"
@@ -313,7 +313,7 @@ LANImporterTest >> testPackageReification [
 { #category : #tests }
 LANImporterTest >> testPoolVariablesAreReified [
 	| poolVar |
-	poolVar := self model entityNamed: #'Smalltalk::LANPool.LANEditor'.
+	poolVar := self model entityNamed: #'Smalltalk.LANPool.LANEditor'.
 	self assert: poolVar parentType name equals: #LANPool
 ]
 
@@ -325,8 +325,8 @@ LANImporterTest >> testReferenceModelInEntities [
 { #category : #tests }
 LANImporterTest >> testStubClassesCreation [
 	self deny: (self model entityNamed: LANNode mooseName) isStub.
-	self assert: (self model entityNamed: #'Smalltalk::Object') isStub.
-	self deny: (self model entityNamed: #'Smalltalk::LANFileServer_class') isStub.
+	self assert: (self model entityNamed: #'Smalltalk.Object') isStub.
+	self deny: (self model entityNamed: #'Smalltalk.LANFileServer_class') isStub.
 	self assert: (self model allClasses reject: [ :each | each isStub ]) size equals: 22
 ]
 
@@ -338,5 +338,5 @@ LANImporterTest >> testSubClassHierarchy [
 
 { #category : #tests }
 LANImporterTest >> testSuperClassHierarchy [
-	self assert: (self model entityNamed: #Smalltalk::LANPrintServer) superclassHierarchy size equals: 5
+	self assert: (self model entityNamed: #'Smalltalk.LANPrintServer') superclassHierarchy size equals: 5
 ]
