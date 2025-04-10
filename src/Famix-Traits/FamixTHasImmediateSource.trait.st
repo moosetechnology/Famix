@@ -56,6 +56,16 @@ FamixTHasImmediateSource >> hasSource [
 	^ self source isEmptyOrNil not
 ]
 
+{ #category : #'*FamixReplication' }
+FamixTHasImmediateSource >> knowsEnd [
+	^ self source isNotEmpty
+]
+
+{ #category : #'*FamixReplication' }
+FamixTHasImmediateSource >> knowsStart [
+	^ self source isNotEmpty
+]
+
 { #category : #accessing }
 FamixTHasImmediateSource >> source [
 
