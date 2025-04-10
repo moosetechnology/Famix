@@ -379,6 +379,7 @@ FamixJavaGenerator >> defineHierarchy [
 
 	wildcard --|> type.
 	wildcard --|> tBounded.
+	wildcard --|> #TConcreteType
 ]
 
 { #category : #definition }

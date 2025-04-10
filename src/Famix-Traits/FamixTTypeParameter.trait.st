@@ -9,13 +9,19 @@ The generic type parameter associated to a ParametricEntity. Entities using this
 |---|
 | `concretizations` | `FamixTTypeParameter` | `genericParameter` | `FamixTConcretization` | Known concretizations of this type parameter.|
 
+### Other
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `genericEntity` | `FamixTTypeParameter` | `typeParameters` | `FamixTParametricEntity` | Generic entity that declare this type parameter.|
+
 
 
 "
 Trait {
 	#name : #FamixTTypeParameter,
 	#instVars : [
-		'#concretizations => FMMany type: #FamixTConcretization opposite: #genericParameter'
+		'#concretizations => FMMany type: #FamixTConcretization opposite: #genericParameter',
+		'#genericEntity => FMOne type: #FamixTParametricEntity opposite: #typeParameters'
 	],
 	#category : #'Famix-Traits-Traits'
 }
@@ -50,4 +56,20 @@ FamixTTypeParameter >> concretizations: anObject [
 
 	<generated>
 	concretizations value: anObject
+]
+
+{ #category : #accessing }
+FamixTTypeParameter >> genericEntity [
+	"Relation named: #genericEntity type: #FamixTParametricEntity opposite: #typeParameters"
+
+	<generated>
+	<FMComment: 'Generic entity that declare this type parameter.'>
+	^ genericEntity
+]
+
+{ #category : #accessing }
+FamixTTypeParameter >> genericEntity: anObject [
+
+	<generated>
+	genericEntity := anObject
 ]

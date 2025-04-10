@@ -9,18 +9,12 @@ A type that can be the source of a concretization. Entities using this trait sho
 |---|
 | `outgoingConcretizations` | `FamixTConcreteType` | `concreteParameter` | `FamixTConcretization` | Concretizations where this type is the concrete parameter.|
 
-### Other
-| Relation | Origin | Opposite | Type | Comment |
-|---|
-| `genericEntities` | `FamixTConcreteType` | `typeParameters` | `FamixTParametricEntity` | Generic entities that have this type as type parameter.|
-
 
 
 "
 Trait {
 	#name : #FamixTConcreteType,
 	#instVars : [
-		'#genericEntities => FMMany type: #FamixTParametricEntity opposite: #typeParameters',
 		'#outgoingConcretizations => FMMany type: #FamixTConcretization opposite: #concreteParameter'
 	],
 	#category : #'Famix-Traits-Traits'
@@ -36,31 +30,9 @@ FamixTConcreteType classSide >> annotation [
 ]
 
 { #category : #adding }
-FamixTConcreteType >> addGenericEntity: anObject [
-	<generated>
-	^ self genericEntities add: anObject
-]
-
-{ #category : #adding }
 FamixTConcreteType >> addOutgoingConcretization: anObject [
 	<generated>
 	^ self outgoingConcretizations add: anObject
-]
-
-{ #category : #accessing }
-FamixTConcreteType >> genericEntities [
-	"Relation named: #genericEntities type: #FamixTParametricEntity opposite: #typeParameters"
-
-	<generated>
-	<FMComment: 'Generic entities that have this type as type parameter.'>
-	^ genericEntities
-]
-
-{ #category : #accessing }
-FamixTConcreteType >> genericEntities: anObject [
-
-	<generated>
-	genericEntities value: anObject
 ]
 
 { #category : #accessing }

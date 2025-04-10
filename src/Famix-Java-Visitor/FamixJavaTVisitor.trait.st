@@ -491,5 +491,6 @@ FamixJavaTVisitor >> visitFamixJavaWildcard: aFamixJavaWildcard [
 
 	<generated>
 	self visitFamixJavaTBounded: aFamixJavaWildcard.
+	self visitFamixTConcreteType: aFamixJavaWildcard.
 	self visitFamixJavaType: aFamixJavaWildcard
 ]

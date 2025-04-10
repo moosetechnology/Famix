@@ -2,6 +2,11 @@
 ## Relations
 ======================
 
+### Outgoing dependencies
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `outgoingConcretizations` | `FamixTConcreteType` | `concreteParameter` | `FamixTConcretization` | Concretizations where this type is the concrete parameter.|
+
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
@@ -14,8 +19,8 @@
 Class {
 	#name : #FamixJavaWildcard,
 	#superclass : #FamixJavaType,
-	#traits : 'FamixJavaTBounded',
-	#classTraits : 'FamixJavaTBounded classTrait',
+	#traits : 'FamixJavaTBounded + FamixTConcreteType',
+	#classTraits : 'FamixJavaTBounded classTrait + FamixTConcreteType classTrait',
 	#category : #'Famix-Java-Entities-Entities'
 }
 
@@ -26,4 +31,11 @@ FamixJavaWildcard class >> annotation [
 	<package: #'Famix-Java-Entities'>
 	<generated>
 	^ self
+]
+
+{ #category : #'*Famix-Java-Visitor' }
+FamixJavaWildcard >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaWildcard: self
 ]

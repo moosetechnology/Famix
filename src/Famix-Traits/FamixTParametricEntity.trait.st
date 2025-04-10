@@ -14,7 +14,7 @@ Where Map<String,Collection> is the FamixTParametricEntity of anAttribute. Strin
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `typeParameters` | `FamixTParametricEntity` | `genericEntities` | `FamixTConcreteType` | The parameters of this parametric entity. They can be concrete classes or types or generic type parameters|
+| `typeParameters` | `FamixTParametricEntity` | `genericEntity` | `FamixTTypeParameter` | The parameters of this parametric entity. They can be concrete classes or types or generic type parameters|
 
 
 
@@ -22,7 +22,7 @@ Where Map<String,Collection> is the FamixTParametricEntity of anAttribute. Strin
 Trait {
 	#name : #FamixTParametricEntity,
 	#instVars : [
-		'#typeParameters => FMMany type: #FamixTConcreteType opposite: #genericEntities'
+		'#typeParameters => FMMany type: #FamixTTypeParameter opposite: #genericEntity'
 	],
 	#category : #'Famix-Traits-Traits'
 }
@@ -84,7 +84,7 @@ FamixTParametricEntity >> isParametricEntity [
 
 { #category : #accessing }
 FamixTParametricEntity >> typeParameters [
-	"Relation named: #typeParameters type: #FamixTConcreteType opposite: #genericEntities"
+	"Relation named: #typeParameters type: #FamixTTypeParameter opposite: #genericEntity"
 
 	<generated>
 	<FMComment: 'The parameters of this parametric entity. They can be concrete classes or types or generic type parameters'>

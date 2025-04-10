@@ -7,7 +7,7 @@ An association that is linked to a ParameterConcretization
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `concretization` | `FamixTParametricAssociation` | `triggeringAssociation` | `FamixTConcretization` | The parameter concretizations associated with this association.|
+| `concretizations` | `FamixTParametricAssociation` | `triggeringAssociation` | `FamixTConcretization` | The parameter concretizations associated with this association.|
 
 
 
@@ -15,7 +15,7 @@ An association that is linked to a ParameterConcretization
 Trait {
 	#name : #FamixTParametricAssociation,
 	#instVars : [
-		'#concretization => FMMany type: #FamixTConcretization opposite: #triggeringAssociation'
+		'#concretizations => FMMany type: #FamixTConcretization opposite: #triggeringAssociation'
 	],
 	#category : #'Famix-Traits-Traits'
 }
@@ -32,22 +32,22 @@ FamixTParametricAssociation classSide >> annotation [
 { #category : #adding }
 FamixTParametricAssociation >> addConcretization: anObject [
 	<generated>
-	^ self concretization add: anObject
+	^ self concretizations add: anObject
 ]
 
 { #category : #accessing }
-FamixTParametricAssociation >> concretization [
-	"Relation named: #concretization type: #FamixTConcretization opposite: #triggeringAssociation"
+FamixTParametricAssociation >> concretizations [
+	"Relation named: #concretizations type: #FamixTConcretization opposite: #triggeringAssociation"
 
 	<generated>
 	<FMComment: 'The parameter concretizations associated with this association.'>
 	<derived>
-	^ concretization
+	^ concretizations
 ]
 
 { #category : #accessing }
-FamixTParametricAssociation >> concretization: anObject [
+FamixTParametricAssociation >> concretizations: anObject [
 
 	<generated>
-	concretization value: anObject
+	concretizations value: anObject
 ]

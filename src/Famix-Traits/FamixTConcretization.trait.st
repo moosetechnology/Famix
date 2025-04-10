@@ -21,7 +21,7 @@ Relation between a concrete type and a generic type parameter.
 | `next` | `FamixTAssociation` | `previous` | `FamixTAssociation` | Next association in an ordered collection of associations. Currently not supported by the Moose importer|
 | `previous` | `FamixTAssociation` | `next` | `FamixTAssociation` | Previous association in an ordered collection of associations. Currently not supported by the Moose importer|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
-| `triggeringAssociation` | `FamixTConcretization` | `concretization` | `FamixTParametricAssociation` | The association that triggers this concretization.|
+| `triggeringAssociation` | `FamixTConcretization` | `concretizations` | `FamixTParametricAssociation` | The association that triggers this concretization.|
 
 
 
@@ -31,7 +31,7 @@ Trait {
 	#instVars : [
 		'#concreteParameter => FMOne type: #FamixTConcreteType opposite: #outgoingConcretizations',
 		'#genericParameter => FMOne type: #FamixTTypeParameter opposite: #concretizations',
-		'#triggeringAssociation => FMOne type: #FamixTParametricAssociation opposite: #concretization'
+		'#triggeringAssociation => FMOne type: #FamixTParametricAssociation opposite: #concretizations'
 	],
 	#traits : 'FamixTAssociation',
 	#classTraits : 'FamixTAssociation classTrait',
@@ -45,6 +45,13 @@ FamixTConcretization classSide >> annotation [
 	<package: #'Famix-Traits'>
 	<generated>
 	^ self
+]
+
+{ #category : #'*Famix-Visitor' }
+FamixTConcretization >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTConcretization: self
 ]
 
 { #category : #accessing }
@@ -83,7 +90,7 @@ FamixTConcretization >> genericParameter: anObject [
 
 { #category : #accessing }
 FamixTConcretization >> triggeringAssociation [
-	"Relation named: #triggeringAssociation type: #FamixTParametricAssociation opposite: #concretization"
+	"Relation named: #triggeringAssociation type: #FamixTParametricAssociation opposite: #concretizations"
 
 	<generated>
 	<FMComment: 'The association that triggers this concretization.'>
