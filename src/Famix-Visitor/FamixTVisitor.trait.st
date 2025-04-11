@@ -189,8 +189,7 @@ FamixTVisitor >> visitFamixTCompilationUnit: aFamixTCompilationUnit [
 FamixTVisitor >> visitFamixTConcreteType: aFamixTConcreteType [
 
 	<generated>
-	self visitCollection: aFamixTConcreteType outgoingConcretizations.
-	self visitCollection: aFamixTConcreteType genericEntities
+	self visitCollection: aFamixTConcreteType outgoingConcretizations
 ]
 
 { #category : #visiting }
@@ -570,7 +569,7 @@ FamixTVisitor >> visitFamixTParameter: aFamixTParameter [
 FamixTVisitor >> visitFamixTParametricAssociation: aFamixTParametricAssociation [
 
 	<generated>
-	self visitCollection: aFamixTParametricAssociation concretization
+	self visitCollection: aFamixTParametricAssociation concretizations
 ]
 
 { #category : #visiting }
@@ -744,7 +743,8 @@ FamixTVisitor >> visitFamixTTypeAlias: aFamixTTypeAlias [
 FamixTVisitor >> visitFamixTTypeParameter: aFamixTTypeParameter [
 
 	<generated>
-	self visitCollection: aFamixTTypeParameter concretizations
+	self visitCollection: aFamixTTypeParameter concretizations.
+	self visitEntity: aFamixTTypeParameter genericEntity
 ]
 
 { #category : #visiting }
