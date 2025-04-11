@@ -17,6 +17,7 @@
 ### Outgoing dependencies
 | Relation | Origin | Opposite | Type | Comment |
 |---|
+| `outgoingConcretizations` | `FamixTConcreteType` | `concreteParameter` | `FamixTConcretization` | Concretizations where this type is the concrete parameter.|
 | `superInheritances` | `FamixTWithInheritances` | `subclass` | `FamixTInheritance` | Superinheritance relationships, i.e. known superclasses of this type.|
 
 ### Incoming dependencies
@@ -42,8 +43,8 @@
 Class {
 	#name : #FamixJavaAnnotationType,
 	#superclass : #FamixJavaType,
-	#traits : 'FamixTAnnotationType + FamixTHasVisibility + FamixTImplementable + FamixTPackageable + FamixTWithAttributes + FamixTWithComments + FamixTWithInheritances',
-	#classTraits : 'FamixTAnnotationType classTrait + FamixTHasVisibility classTrait + FamixTImplementable classTrait + FamixTPackageable classTrait + FamixTWithAttributes classTrait + FamixTWithComments classTrait + FamixTWithInheritances classTrait',
+	#traits : 'FamixTAnnotationType + FamixTConcreteType + FamixTHasVisibility + FamixTImplementable + FamixTPackageable + FamixTWithAttributes + FamixTWithComments + FamixTWithInheritances',
+	#classTraits : 'FamixTAnnotationType classTrait + FamixTConcreteType classTrait + FamixTHasVisibility classTrait + FamixTImplementable classTrait + FamixTPackageable classTrait + FamixTWithAttributes classTrait + FamixTWithComments classTrait + FamixTWithInheritances classTrait',
 	#category : #'Famix-Java-Entities-Entities'
 }
 

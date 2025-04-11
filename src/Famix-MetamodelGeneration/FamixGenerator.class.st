@@ -118,14 +118,15 @@ Class {
 		'tImport',
 		'tWithImports',
 		'tParametricEntity',
-		'tConcreteParameterType',
-		'tGenericParameterType',
 		'tThrowable',
 		'tConcretization',
-		'tParameterConcretization',
 		'tShadowable',
 		'tShadower',
-		'tCanBeStub'
+		'tCanBeStub',
+		'tEntityTyping',
+		'tTypeParameter',
+		'tParametricAssociation',
+		'tConcreteType'
 	],
 	#category : #'Famix-MetamodelGeneration'
 }
@@ -316,9 +317,16 @@ FamixGenerator >> commentForTConcreteParameterType [
 ]
 
 { #category : #comments }
+FamixGenerator >> commentForTConcreteType [
+
+	^ 'A type that can be the source of a concretization. Entities using this trait should also use TType.'
+]
+
+{ #category : #comments }
 FamixGenerator >> commentForTConcretization [
 
-	^ ''
+	^ 'Relation between a concrete type and a generic type parameter.
+	This association is always triggered by another association, whose target is a parametric entity, whose generic parameter is the target of this concretization.'
 ]
 
 { #category : #comments }
@@ -415,12 +423,6 @@ FamixGenerator >> commentForTFolder [
 FamixGenerator >> commentForTFunction [
 
 	^ 'FamixTFunction represents a behavioural entity in a procedural language.'
-]
-
-{ #category : #comments }
-FamixGenerator >> commentForTGenericParameterType [
-
-	^ 'FamixTGenericParameterType represents generic parameters in an FamixJavaParametricEntity. This is an FamixJavaParameterType'
 ]
 
 { #category : #comments }
@@ -581,12 +583,6 @@ int addNumbers(int a, int b) {
 ]
 
 { #category : #comments }
-FamixGenerator >> commentForTParameterConcretization [
-
-	^ ''
-]
-
-{ #category : #comments }
 FamixGenerator >> commentForTParameterType [
 	^ 'ParameterType represents the symbolic type used in parameterizable classes. This is a FamixTType.
 
@@ -596,6 +592,12 @@ public class AClass<A,B,C> {
 }
 
 Where AClass is a ParameterizableClass. A, B and C are ParameterType of AClass.'
+]
+
+{ #category : #comments }
+FamixGenerator >> commentForTParametricAssociation [
+
+	^ 'An association that is linked to a ParameterConcretization'
 ]
 
 { #category : #comments }
@@ -822,6 +824,12 @@ FamixGenerator >> commentForTTypeAlias [
 
 Instance Variables:
 	aliasedType	<ProtoObject | PseudoContext>'
+]
+
+{ #category : #comments }
+FamixGenerator >> commentForTTypeParameter [
+
+	^ 'The generic type parameter associated to a ParametricEntity. Entities using this trait should also use TType.'
 ]
 
 { #category : #comments }
@@ -1162,7 +1170,7 @@ FamixGenerator >> defineHierarchy [
 	tStructuralEntity --|> tCanBeStub.
 	tStructuralEntity --|> tAccessible.
 	tStructuralEntity --|> tTypedEntity.
-	
+
 	tTraitUsage --|> tAssociation.
 
 	tType --|> tReferenceable.
@@ -1170,6 +1178,8 @@ FamixGenerator >> defineHierarchy [
 	tType --|> #TEntityMetaLevelDependency.
 	tType --|> tCanBeStub.
 
+	tEntityTyping --|> tAssociation.
+	
 	tUnknownVariable --|> tStructuralEntity.
 
 	tWithClasses --|> tWithTypes.
@@ -1179,15 +1189,49 @@ FamixGenerator >> defineHierarchy [
 	tWithStatements --|> tCanBeStub.
 	tWithStatements --|> tWithReferences.
 
-	tConcretization --|> tAssociation.
-	tParameterConcretization --|> tAssociation.
-
-	tConcreteParameterType --|> tType.
-	tGenericParameterType --|> tType.
+	tConcretization --|> tAssociation. 
 
 	tException --|> tThrowable.
 	
 	tCanBeStub --|> tSourceEntity
+]
+
+{ #category : #definition }
+FamixGenerator >> defineParametricRelations [
+	"A concretization is the relation between a concrete parameter of a (concrete or still generic) parametric entity and the generic parameter that is declared in a generic parametric entity.
+	We choose not to represent directly the relation between the concrete parametric entity and the generic one.
+	This choice is the result of several experimentations and debates.
+	We represent the concretization as always linked to another association that triggers the concretization.
+	The generic type parameter is target of the concretization AND linked to the parametric entity that is target of the triggering association."
+
+	"A concretization is always triggered by another association: Inheritance, Implementation, Type declaration, Invocation(?)"
+
+	((tParametricAssociation property: #concretizations) comment:
+		 'The parameter concretizations associated with this association.')
+	-* ((tConcretization property: #triggeringAssociation) comment:
+			 'The association that triggers this concretization.').
+
+	"Source of a concretization: the concrete parameter. 
+		The reasoning is: the generic entity exists without the concrete ones, so the concrete side should be source."
+	((tConcretization property: #concreteParameter)
+		 comment:
+			 'Concrete parameter linked to in this relationship. This can be a class or another type parameter.';
+		 source)
+	*- ((tConcreteType property: #outgoingConcretizations) comment:
+			 'Concretizations where this type is the concrete parameter.').
+
+	"Target of a concretization: the generic type parameter."
+	((tConcretization property: #genericParameter)
+		 comment: 'Generic parameter linked to in this relationship.';
+		 target) 
+	*- ((tTypeParameter property: #concretizations) comment:
+		 'Known concretizations of this type parameter.').
+
+	"The generic type parameter that is target of the concretization is defined in a parametric entity."
+	((tParametricEntity property: #typeParameters) comment:
+		 'The parameters of this parametric entity. They can be concrete classes or types or generic type parameters')
+	-* ((tTypeParameter property: #genericEntity) comment:
+			 'Generic entity that declare this type parameter.')
 ]
 
 { #category : #definition }
@@ -1572,13 +1616,19 @@ FamixGenerator >> defineRelations [
 	((tWithTypeAliases property: #typeAliases)
 			comment: 'Aliases').
 
-	((tTypedEntity property: #declaredType)
-			comment: 'Type of the entity, if any')
-		*-
-	((tType property: #typedEntities)
-			comment: 'Entities that have this type as declaredType').
+	((tTypedEntity property: #typing) comment:
+		 'Association linking this entity to its declared type.')
+		- ((tEntityTyping property: #typedEntity)
+			comment: 'Entity deckaring the type.';
+			source).
 
-		((tImplementation property: #implementingClass)
+	((tEntityTyping property: #declaredType)
+		 comment: 'Type of the entity.';
+		 target) 
+		*- ((tType property: #incomingTypings) 
+			comment: 'Relations to the entities that have this as type.').
+
+	((tImplementation property: #implementingClass)
 			comment: 'Class linked to in this relationship. from-side of the association';
 			source)
 		*-
@@ -1591,56 +1641,14 @@ FamixGenerator >> defineRelations [
 		*-
 	((tImplementable property: #implementations)
 			comment: 'Implementation relationships.').
-
-	(tConcretization property: #parameterConcretizations)
-		*-*
-	(tParameterConcretization property: #concretizations).
-
-	((tGenericParameterType property: #genericEntities)
-			comment: 'The generic entities that use me.')
-		*-*
-	((tParametricEntity property: #genericParameters)
-			comment: 'List of generic parameters.').
-
-	((tConcreteParameterType property: #concreteEntities)
-			comment: 'The concrete entities that use me.')
-		*-*
-	((tParametricEntity property: #concreteParameters)
-			comment: 'List of concrete parameters.').
-
-	((tParameterConcretization property: #genericParameter)
-			comment: 'Generic parameter linked to in this relationship. from-side of the association';
-			source)
-		*-
-	((tGenericParameterType property: #concretizations)
-			comment: 'Concretization relationships, i.e. known concretizations of this type.').
-
-	((tParameterConcretization property: #concreteParameter)
-			comment: 'Concrete parameter linked to in this relationship. to-side of the association';
-			target)
-		*-
-	((tConcreteParameterType property: #generics)
-			comment: 'Generic relationships, i.e. known genericParameter of this type.').
-
-	((tConcretization property: #genericEntity)
-			comment: 'Generic entity linked to in this relationship. from-side of the association';
-			source)
-		*-
-	((tParametricEntity property: #concretizations)
-			comment: 'Concretization relationships, i.e. the associations of known concrete entities of this type.').
-
-	((tConcretization property: #concreteEntity)
-			comment: 'Concrete entity linked to in this relationship. to-side of the association';
-			target)
-		-
-	((tParametricEntity property: #genericization)
-			comment: 'Generic entity relationship, i.e. the association to the generic entity of this type.').
 			
 	((tShadowable property: #shadowingEntities)
 		comment: 'Entities shadowing me in my defining scope.')
-		-*
+		-
 	((tShadower property: #shadowedEntity)
-		comment: 'Entity that is been shadowed by myself in my defining scope.')
+		comment: 'Entity that is been shadowed by myself in my defining scope.').
+		
+	self defineParametricRelations 
 ]
 
 { #category : #definition }
@@ -1812,6 +1820,8 @@ FamixGenerator >> defineTraits [
 
 	tTypedEntity := builder newTraitNamed: #TTypedEntity.
 	tTypedEntity comment: self commentForTTypedStructure.
+	
+	tEntityTyping := builder newTraitNamed: #TEntityTyping.
 
 	tUnknownVariable := builder newTraitNamed: #TUnknownVariable.
 
@@ -1901,17 +1911,14 @@ FamixGenerator >> defineTraits [
 	tCanImplement := builder newTraitNamed: #TCanImplement comment: self commentForTCanImplement.
 
 	tImplementation := builder newTraitNamed: #TImplementation.
-
+	
+	"Parametric entities"
 	tParametricEntity := builder newTraitNamed: #TParametricEntity comment: self commentForTParametricEntity.
 	tParametricEntity withTesting.
-
-	tConcreteParameterType := builder newTraitNamed: #TConcreteParameterType comment: self commentForTConcreteParameterType.
-
-	tGenericParameterType := builder newTraitNamed: #TGenericParameterType comment: self commentForTGenericParameterType.
-
+	tTypeParameter := builder newTraitNamed: #TTypeParameter comment: self commentForTTypeParameter.
+	tParametricAssociation := builder newTraitNamed: #TParametricAssociation comment: self commentForTParametricAssociation.
 	tConcretization := builder newTraitNamed: #TConcretization comment: self commentForTConcretization.
-
-	tParameterConcretization := builder newTraitNamed: #TParameterConcretization comment: self commentForTParameterConcretization.
+	tConcreteType := builder newTraitNamed: #TConcreteType comment: self commentForTConcreteType.
 
 	tThrowable := builder newTraitNamed: #TThrowable comment: self commentForTThrowable.
 	

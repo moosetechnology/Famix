@@ -54,8 +54,10 @@ FamixJavaFusionnerTest >> consumerClass: subName inheritsFrom: superName [
 { #category : #running }
 FamixJavaFusionnerTest >> consumerVariable: varName declaredType: typeName [
 
-	(consumerModel newLocalVariableNamed: varName)
-		declaredType: (consumerModel entityNamed: typeName).
+	(consumerModel newLocalVariableNamed: varName) typing:
+		(consumerModel newEntityTyping
+			 declaredType: (consumerModel entityNamed: typeName);
+			 yourself)
 ]
 
 { #category : #running }
@@ -213,15 +215,17 @@ FamixJavaFusionnerTest >> testAttributeWithStubDeclaredType [
 
 	self class: 'Blah'.
 	(consumerModel newAttributeNamed: 'att')
-		stub: false ;
-		declaredType: (consumerModel entityNamed: 'Blah').
+		stub: false;
+		typing: (consumerModel newEntityTyping
+				 declaredType: (consumerModel entityNamed: 'Blah');
+				 yourself).
 
-	self assert: consumerModel size equals: 2.
+	self assert: consumerModel size equals: 3.
 	self assert: resourceModel size equals: 1.
 
 	fusionner fusion.
 
-	self assert: consumerModel size equals: 1.
+	self assert: consumerModel size equals: 2.
 	self assert: resourceModel size equals: 1.
 
 	self assert: (consumerModel entityNamed: 'Blah') isNil.
@@ -229,9 +233,11 @@ FamixJavaFusionnerTest >> testAttributeWithStubDeclaredType [
 		assert: (consumerModel entityNamed: 'att') declaredType
 		equals: (resourceModel entityNamed: 'Blah').
 
-	self assert: (resourceModel entityNamed: 'Blah') typedEntities size equals: 1.
 	self
-		assert: (resourceModel entityNamed: 'Blah') typedEntities anyOne 
+		assert: (resourceModel entityNamed: 'Blah') typedEntities size
+		equals: 1.
+	self
+		assert: (resourceModel entityNamed: 'Blah') typedEntities anyOne
 		equals: (consumerModel entityNamed: 'att')
 ]
 
@@ -260,12 +266,12 @@ FamixJavaFusionnerTest >> testDoNotReplaceStubResourceEntity [
 	(resourceModel entityNamed: 'Blah') stub: true.
 	self consumerVariable: 'var' declaredType: 'Blah'.
 
-	self assert: consumerModel size equals: 2.
+	self assert: consumerModel size equals: 3.
 	self assert: resourceModel size equals: 1.
 
 	fusionner fusion.
 
-	self assert: consumerModel size equals: 2.
+	self assert: consumerModel size equals: 3.
 	self assert: resourceModel size equals: 1.
 
 	self assert: (consumerModel entityNamed: 'Blah') isNotNil.
@@ -282,15 +288,17 @@ FamixJavaFusionnerTest >> testLocalVariableWithStubDeclaredType [
 
 	self class: 'Blah'.
 	(consumerModel newLocalVariableNamed: 'var')
-		stub: false ;
-		declaredType: (consumerModel entityNamed: 'Blah').
+		stub: false;
+		typing: (consumerModel newEntityTyping
+				 declaredType: (consumerModel entityNamed: 'Blah');
+				 yourself).
 
-	self assert: consumerModel size equals: 2.
+	self assert: consumerModel size equals: 3.
 	self assert: resourceModel size equals: 1.
 
 	fusionner fusion.
 
-	self assert: consumerModel size equals: 1.
+	self assert: consumerModel size equals: 2.
 	self assert: resourceModel size equals: 1.
 
 	self assert: (consumerModel entityNamed: 'Blah') isNil.
@@ -298,9 +306,11 @@ FamixJavaFusionnerTest >> testLocalVariableWithStubDeclaredType [
 		assert: (consumerModel entityNamed: 'var') declaredType
 		equals: (resourceModel entityNamed: 'Blah').
 
-	self assert: (resourceModel entityNamed: 'Blah') typedEntities size equals: 1.
 	self
-		assert: (resourceModel entityNamed: 'Blah') typedEntities anyOne 
+		assert: (resourceModel entityNamed: 'Blah') typedEntities size
+		equals: 1.
+	self
+		assert: (resourceModel entityNamed: 'Blah') typedEntities anyOne
 		equals: (consumerModel entityNamed: 'var')
 ]
 
@@ -384,15 +394,17 @@ FamixJavaFusionnerTest >> testMethodWithStubDeclaredType [
 
 	self class: 'Blah'.
 	(consumerModel newMethodNamed: 'meth')
-		stub: false ;
-		declaredType: (consumerModel entityNamed: 'Blah').
+		stub: false;
+		typing: (consumerModel newEntityTyping
+				 declaredType: (consumerModel entityNamed: 'Blah');
+				 yourself).
 
-	self assert: consumerModel size equals: 2.
+	self assert: consumerModel size equals: 3.
 	self assert: resourceModel size equals: 1.
 
 	fusionner fusion.
 
-	self assert: consumerModel size equals: 1.
+	self assert: consumerModel size equals: 2.
 	self assert: resourceModel size equals: 1.
 
 	self assert: (consumerModel entityNamed: 'Blah') isNil.
@@ -400,9 +412,11 @@ FamixJavaFusionnerTest >> testMethodWithStubDeclaredType [
 		assert: (consumerModel entityNamed: 'meth') declaredType
 		equals: (resourceModel entityNamed: 'Blah').
 
-	self assert: (resourceModel entityNamed: 'Blah') typedEntities size equals: 1.
 	self
-		assert: (resourceModel entityNamed: 'Blah') typedEntities anyOne 
+		assert: (resourceModel entityNamed: 'Blah') typedEntities size
+		equals: 1.
+	self
+		assert: (resourceModel entityNamed: 'Blah') typedEntities anyOne
 		equals: (consumerModel entityNamed: 'meth')
 ]
 
@@ -411,15 +425,17 @@ FamixJavaFusionnerTest >> testParameterWithStubDeclaredType [
 
 	self class: 'Blah'.
 	(consumerModel newParameterNamed: 'param')
-		stub: false ;
-		declaredType: (consumerModel entityNamed: 'Blah').
+		stub: false;
+		typing: (consumerModel newEntityTyping
+				 declaredType: (consumerModel entityNamed: 'Blah');
+				 yourself).
 
-	self assert: consumerModel size equals: 2.
+	self assert: consumerModel size equals: 3.
 	self assert: resourceModel size equals: 1.
 
 	fusionner fusion.
 
-	self assert: consumerModel size equals: 1.
+	self assert: consumerModel size equals: 2.
 	self assert: resourceModel size equals: 1.
 
 	self assert: (consumerModel entityNamed: 'Blah') isNil.
@@ -427,9 +443,11 @@ FamixJavaFusionnerTest >> testParameterWithStubDeclaredType [
 		assert: (consumerModel entityNamed: 'param') declaredType
 		equals: (resourceModel entityNamed: 'Blah').
 
-	self assert: (resourceModel entityNamed: 'Blah') typedEntities size equals: 1.
 	self
-		assert: (resourceModel entityNamed: 'Blah') typedEntities anyOne 
+		assert: (resourceModel entityNamed: 'Blah') typedEntities size
+		equals: 1.
+	self
+		assert: (resourceModel entityNamed: 'Blah') typedEntities anyOne
 		equals: (consumerModel entityNamed: 'param')
 ]
 
@@ -497,12 +515,12 @@ FamixJavaFusionnerTest >> testSeveralVariableWithStubDeclaredType [
 	self consumerVariable: 'var4' declaredType: 'Blah'.
 	self consumerVariable: 'var5' declaredType: 'Blah'.
 
-	self assert: consumerModel size equals: 6.
+	self assert: consumerModel size equals: 11.
 	self assert: resourceModel size equals: 1.
 
 	fusionner fusion.
 
-	self assert: consumerModel size equals: 5.
+	self assert: consumerModel size equals: 10.
 	self assert: resourceModel size equals: 1.
 
 	self assert: (consumerModel entityNamed: 'Blah') isNil.
@@ -708,15 +726,17 @@ FamixJavaFusionnerTest >> testVariableWithStubDeclaredType [
 
 	self class: 'Blah'.
 	(consumerModel newLocalVariableNamed: 'var')
-		stub: false ;
-		declaredType: (consumerModel entityNamed: 'Blah').
+		stub: false;
+		typing: (consumerModel newEntityTyping
+				 declaredType: (consumerModel entityNamed: 'Blah');
+				 yourself).
 
-	self assert: consumerModel size equals: 2.
+	self assert: consumerModel size equals: 3.
 	self assert: resourceModel size equals: 1.
 
 	fusionner fusion.
 
-	self assert: consumerModel size equals: 1.
+	self assert: consumerModel size equals: 2.
 	self assert: resourceModel size equals: 1.
 
 	self assert: (consumerModel entityNamed: 'Blah') isNil.
@@ -724,9 +744,11 @@ FamixJavaFusionnerTest >> testVariableWithStubDeclaredType [
 		assert: (consumerModel entityNamed: 'var') declaredType
 		equals: (resourceModel entityNamed: 'Blah').
 
-	self assert: (resourceModel entityNamed: 'Blah') typedEntities size equals: 1.
 	self
-		assert: (resourceModel entityNamed: 'Blah') typedEntities anyOne 
+		assert: (resourceModel entityNamed: 'Blah') typedEntities size
+		equals: 1.
+	self
+		assert: (resourceModel entityNamed: 'Blah') typedEntities anyOne
 		equals: (consumerModel entityNamed: 'var')
 ]
 
@@ -735,17 +757,5 @@ FamixJavaFusionnerTest >> variable: aName [
 
 	(resourceModel newLocalVariableNamed: aName) isStub: false.
 	(consumerModel newLocalVariableNamed: aName) isStub: true.
-
-]
-
-{ #category : #running }
-FamixJavaFusionnerTest >> variable: varName declaredType: typeName [
-
-	(resourceModel newLocalVariableNamed: varName)
-		isStub: false ;
-		declaredType: (resourceModel entityNamed: typeName).
-	(consumerModel newLocalVariableNamed: varName)
-		isStub: true ;
-		declaredType: (consumerModel entityNamed: typeName).
 
 ]

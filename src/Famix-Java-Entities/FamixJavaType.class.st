@@ -15,16 +15,14 @@
 ### Incoming dependencies
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `generics` | `FamixTConcreteParameterType` | `concreteParameter` | `FamixTParameterConcretization` | Generic relationships, i.e. known genericParameter of this type.|
 | `incomingReferences` | `FamixTReferenceable` | `referredEntity` | `FamixTReference` | References to this entity by other entities.|
+| `incomingTypings` | `FamixTType` | `declaredType` | `FamixTEntityTyping` | Relations to the entities that have this as type.|
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `concreteEntities` | `FamixTConcreteParameterType` | `concreteParameters` | `FamixTParametricEntity` | The concrete entities that use me.|
 | `lowerBoundedWildcards` | `FamixJavaTBound` | `lowerBound` | `FamixJavaTBounded` | Wildcards lower bounded by this bound.|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
-| `typedEntities` | `FamixTType` | `declaredType` | `FamixTTypedEntity` | Entities that have this type as declaredType|
 | `upperBoundedWildcards` | `FamixJavaTBound` | `upperBound` | `FamixJavaTBounded` | Wildcards upper bounded by this bound.|
 
 
@@ -40,8 +38,8 @@
 Class {
 	#name : #FamixJavaType,
 	#superclass : #FamixJavaContainerEntity,
-	#traits : 'FamixJavaTBound + FamixTConcreteParameterType + FamixTWithMethods',
-	#classTraits : 'FamixJavaTBound classTrait + FamixTConcreteParameterType classTrait + FamixTWithMethods classTrait',
+	#traits : 'FamixJavaTBound + FamixTType + FamixTWithMethods',
+	#classTraits : 'FamixJavaTBound classTrait + FamixTType classTrait + FamixTWithMethods classTrait',
 	#category : #'Famix-Java-Entities-Entities'
 }
 

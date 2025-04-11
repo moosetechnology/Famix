@@ -9,7 +9,8 @@ Class {
 		'inheritance',
 		'package',
 		'namespace',
-		'primitiveType'
+		'primitiveType',
+		'entityTyping'
 	],
 	#category : #'Famix-TestGenerators'
 }
@@ -39,7 +40,8 @@ MooseMSEImporterTestGenerator >> defineClasses [
 	inheritance := builder newClassNamed: #Inheritance.
 	package := builder newClassNamed: #Package.
 	namespace := builder newClassNamed: #Namespace.
-	primitiveType := builder newClassNamed: #PrimitiveType
+	primitiveType := builder newClassNamed: #PrimitiveType.
+	entityTyping := builder newClassNamed: #EntityTyping
 ]
 
 { #category : #definition }
@@ -74,5 +76,7 @@ MooseMSEImporterTestGenerator >> defineHierarchy [
 		--|> #TNamespace;
 		--|> #TWithClasses.
 
-	primitiveType --|> #TPrimitiveType
+	primitiveType --|> #TPrimitiveType.
+
+	entityTyping --|> #TEntityTyping
 ]
