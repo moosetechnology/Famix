@@ -38,8 +38,8 @@ FamixJavaParametricTest >> test1 [
 	method typing: (model newParametricEntityTyping
 			 declaredType: genericListClass;
 			 addConcretization: (model newConcretization
-					  genericParameter: listTypeParameter;
-					  concreteParameter: stringClass;
+					  typeParameter: listTypeParameter;
+					  typeArgument: stringClass;
 					  yourself);
 			 yourself).
 
@@ -49,8 +49,8 @@ FamixJavaParametricTest >> test1 [
 	parameter typing: (model newParametricEntityTyping
 			 declaredType: genericListClass;
 			 addConcretization: (model newConcretization
-					  genericParameter: listTypeParameter;
-					  concreteParameter: stringClass;
+					  typeParameter: listTypeParameter;
+					  typeArgument: stringClass;
 					  yourself);
 			 yourself)
 ]
@@ -117,11 +117,11 @@ public class ClassB<V> extends ClassA<String, V> {
 		superclass: classB;
 		subclass: classB;
 		addConcretization: (model newConcretization
-				 genericParameter: k;
-				 concreteParameter: stringClass);
+				 typeParameter: k;
+				 typeArgument: stringClass);
 		addConcretization: (model newConcretization
-				 genericParameter: vFromClassA;
-				 concreteParameter: vFromClassB).
+				 typeParameter: vFromClassA;
+				 typeArgument: vFromClassB).
 
 	"Method"
 	method := model newMethodNamed: 'method'.
@@ -154,8 +154,8 @@ public ClassB extends classA<String>"
 		subclass: classB;
 		superclass: classA;
 		addConcretization: (model newConcretization
-				 concreteParameter: stringClass;
-				 genericParameter: v).
+				 typeArgument: stringClass;
+				 typeParameter: v).
 
 	self assertCollection: classA typeParameters hasSameElements: { v }.
 	self deny: classB isParametricEntity
@@ -181,14 +181,14 @@ FamixJavaParametricTest >> testConcretizationEntity [
 		superclass: genericList;
 		subclass: classB;
 		addConcretization: (model newConcretization
-				 genericParameter: e;
-				 concreteParameter: stringClass).
+				 typeParameter: e;
+				 typeArgument: stringClass).
 
 	self
 		assertCollection: genericList typeParameters
 		hasSameElements: { e }.
 	self
-		assertCollection: (e concretizations collect: #concreteParameter)
+		assertCollection: (e concretizations collect: #typeArgument)
 		hasSameElements: { stringClass }
 ]
 
@@ -217,10 +217,10 @@ public classB extends classA<String>"
 		superclass: classA;
 		subclass: classB;
 		addConcretization: (model newConcretization
-				 genericParameter: e;
-				 concreteParameter: stringClass;
+				 typeParameter: e;
+				 typeArgument: stringClass;
 				 yourself).
 	self
-		assertCollection: (e concretizations collect: #concreteParameter)
+		assertCollection: (e concretizations collect: #typeArgument)
 		hasSameElements: { stringClass }
 ]

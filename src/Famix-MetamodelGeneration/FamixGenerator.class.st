@@ -126,7 +126,7 @@ Class {
 		'tEntityTyping',
 		'tTypeParameter',
 		'tParametricAssociation',
-		'tConcreteType'
+		'tTypeArgument'
 	],
 	#category : #'Famix-MetamodelGeneration'
 }
@@ -314,12 +314,6 @@ FamixGenerator >> commentForTCompilationUnit [
 FamixGenerator >> commentForTConcreteParameterType [
 
 	^ 'FamixTConcreteParameterType represents the concretePamameters of an FamixTParametricEntity. it can be a class or a ParameterType that has one FamixTParameterConcretization'
-]
-
-{ #category : #comments }
-FamixGenerator >> commentForTConcreteType [
-
-	^ 'A type that can be the source of a concretization. Entities using this trait should also use TType.'
 ]
 
 { #category : #comments }
@@ -827,6 +821,12 @@ Instance Variables:
 ]
 
 { #category : #comments }
+FamixGenerator >> commentForTTypeArgument [
+
+	^ 'A type that can be the source of a concretization. Entities using this trait should also use TType.'
+]
+
+{ #category : #comments }
 FamixGenerator >> commentForTTypeParameter [
 
 	^ 'The generic type parameter associated to a ParametricEntity. Entities using this trait should also use TType.'
@@ -1198,13 +1198,13 @@ FamixGenerator >> defineHierarchy [
 
 { #category : #definition }
 FamixGenerator >> defineParametricRelations [
-	"A concretization is the relation between a concrete parameter of a (concrete or still generic) parametric entity and the generic parameter that is declared in a generic parametric entity.
+	"A concretization is the relation between the generic parameter that is declared in a generic parametric entity and the type argument that is concretizing it.
 	We choose not to represent directly the relation between the concrete parametric entity and the generic one.
 	This choice is the result of several experimentations and debates.
 	We represent the concretization as always linked to another association that triggers the concretization.
 	The generic type parameter is target of the concretization AND linked to the parametric entity that is target of the triggering association."
 
-	"A concretization is always triggered by another association: Inheritance, Implementation, Type declaration, Invocation(?)"
+	"A concretization is always triggered by another association: Inheritance, Implementation, Type declaration, Invocation"
 
 	((tParametricAssociation property: #concretizations) comment:
 		 'The parameter concretizations associated with this association.')
@@ -1213,25 +1213,25 @@ FamixGenerator >> defineParametricRelations [
 
 	"Source of a concretization: the concrete parameter. 
 		The reasoning is: the generic entity exists without the concrete ones, so the concrete side should be source."
-	((tConcretization property: #concreteParameter)
+	((tConcretization property: #typeArgument)
 		 comment:
-			 'Concrete parameter linked to in this relationship. This can be a class or another type parameter.';
+			 'The type argument that concretizes the type parameter';
 		 source)
-	*- ((tConcreteType property: #outgoingConcretizations) comment:
-			 'Concretizations where this type is the concrete parameter.').
+	*- ((tTypeArgument property: #outgoingConcretizations) comment:
+			 'Concretizations where this type is the type argument.').
 
 	"Target of a concretization: the generic type parameter."
-	((tConcretization property: #genericParameter)
-		 comment: 'Generic parameter linked to in this relationship.';
+	((tConcretization property: #typeParameter)
+		 comment: 'Type parameter linked to in this relationship.';
 		 target) 
 	*- ((tTypeParameter property: #concretizations) comment:
 		 'Known concretizations of this type parameter.').
 
 	"The generic type parameter that is target of the concretization is defined in a parametric entity."
 	((tParametricEntity property: #typeParameters) comment:
-		 'The parameters of this parametric entity. They can be concrete classes or types or generic type parameters')
+		 'The type parameters of this parametric entity. They can any type with the exception of primitive types')
 	-* ((tTypeParameter property: #genericEntity) comment:
-			 'Generic entity that declare this type parameter.')
+			 'Generic entity that declares this type parameter.')
 ]
 
 { #category : #definition }
@@ -1918,7 +1918,7 @@ FamixGenerator >> defineTraits [
 	tTypeParameter := builder newTraitNamed: #TTypeParameter comment: self commentForTTypeParameter.
 	tParametricAssociation := builder newTraitNamed: #TParametricAssociation comment: self commentForTParametricAssociation.
 	tConcretization := builder newTraitNamed: #TConcretization comment: self commentForTConcretization.
-	tConcreteType := builder newTraitNamed: #TConcreteType comment: self commentForTConcreteType.
+	tTypeArgument := builder newTraitNamed: #TTypeArgument comment: self commentForTTypeArgument.
 
 	tThrowable := builder newTraitNamed: #TThrowable comment: self commentForTThrowable.
 	
