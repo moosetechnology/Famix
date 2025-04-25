@@ -83,6 +83,11 @@ FamixTMethod >> firstOverridingMethods [
 	^ overridingMethods
 ]
 
+{ #category : #asserting }
+FamixTMethod >> isAccessor [
+	^ self isSetter or: [ self isGetter ]
+]
+
 { #category : #testing }
 FamixTMethod >> isDelegating [
 
