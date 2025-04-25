@@ -46,10 +46,10 @@ FamixJavaTVisitor >> visitFamixJavaAnnotationType: aFamixJavaAnnotationType [
 
 	<generated>
 	self visitFamixTAnnotationType: aFamixJavaAnnotationType.
-	self visitFamixTConcreteType: aFamixJavaAnnotationType.
 	self visitFamixTHasVisibility: aFamixJavaAnnotationType.
 	self visitFamixTImplementable: aFamixJavaAnnotationType.
 	self visitFamixTPackageable: aFamixJavaAnnotationType.
+	self visitFamixTTypeArgument: aFamixJavaAnnotationType.
 	self visitFamixTWithAttributes: aFamixJavaAnnotationType.
 	self visitFamixTWithComments: aFamixJavaAnnotationType.
 	self visitFamixTWithInheritances: aFamixJavaAnnotationType.
@@ -90,11 +90,11 @@ FamixJavaTVisitor >> visitFamixJavaClass: aFamixJavaClass [
 	self visitFamixTCanImplement: aFamixJavaClass.
 	self visitFamixTClass: aFamixJavaClass.
 	self visitFamixTClassMetrics: aFamixJavaClass.
-	self visitFamixTConcreteType: aFamixJavaClass.
 	self visitFamixTHasVisibility: aFamixJavaClass.
 	self visitFamixTImportable: aFamixJavaClass.
 	self visitFamixTLCOMMetrics: aFamixJavaClass.
 	self visitFamixTPackageable: aFamixJavaClass.
+	self visitFamixTTypeArgument: aFamixJavaClass.
 	self visitFamixTWithImports: aFamixJavaClass.
 	self visitFamixJavaType: aFamixJavaClass
 ]
@@ -142,11 +142,11 @@ FamixJavaTVisitor >> visitFamixJavaEntityTyping: aFamixJavaEntityTyping [
 FamixJavaTVisitor >> visitFamixJavaEnum: aFamixJavaEnum [
 
 	<generated>
-	self visitFamixTConcreteType: aFamixJavaEnum.
 	self visitFamixTEnum: aFamixJavaEnum.
 	self visitFamixTHasVisibility: aFamixJavaEnum.
 	self visitFamixTImportable: aFamixJavaEnum.
 	self visitFamixTInvocationsReceiver: aFamixJavaEnum.
+	self visitFamixTTypeArgument: aFamixJavaEnum.
 	self visitFamixTWithAttributes: aFamixJavaEnum.
 	self visitFamixTWithComments: aFamixJavaEnum.
 	self visitFamixTWithImports: aFamixJavaEnum.
@@ -219,12 +219,12 @@ FamixJavaTVisitor >> visitFamixJavaInterface: aFamixJavaInterface [
 	<generated>
 	self visitFamixTCanBeClassSide: aFamixJavaInterface.
 	self visitFamixTCanBeFinal: aFamixJavaInterface.
-	self visitFamixTConcreteType: aFamixJavaInterface.
 	self visitFamixTHasVisibility: aFamixJavaInterface.
 	self visitFamixTImplementable: aFamixJavaInterface.
 	self visitFamixTImportable: aFamixJavaInterface.
 	self visitFamixTInvocationsReceiver: aFamixJavaInterface.
 	self visitFamixTPackageable: aFamixJavaInterface.
+	self visitFamixTTypeArgument: aFamixJavaInterface.
 	self visitFamixTWithAttributes: aFamixJavaInterface.
 	self visitFamixTWithComments: aFamixJavaInterface.
 	self visitFamixTWithImports: aFamixJavaInterface.
@@ -464,8 +464,8 @@ FamixJavaTVisitor >> visitFamixJavaTypeParameter: aFamixJavaTypeParameter [
 
 	<generated>
 	self visitFamixJavaTBounded: aFamixJavaTypeParameter.
-	self visitFamixTConcreteType: aFamixJavaTypeParameter.
 	self visitFamixTThrowable: aFamixJavaTypeParameter.
+	self visitFamixTTypeArgument: aFamixJavaTypeParameter.
 	self visitFamixTTypeParameter: aFamixJavaTypeParameter.
 	self visitFamixJavaType: aFamixJavaTypeParameter
 ]
@@ -491,6 +491,6 @@ FamixJavaTVisitor >> visitFamixJavaWildcard: aFamixJavaWildcard [
 
 	<generated>
 	self visitFamixJavaTBounded: aFamixJavaWildcard.
-	self visitFamixTConcreteType: aFamixJavaWildcard.
+	self visitFamixTTypeArgument: aFamixJavaWildcard.
 	self visitFamixJavaType: aFamixJavaWildcard
 ]

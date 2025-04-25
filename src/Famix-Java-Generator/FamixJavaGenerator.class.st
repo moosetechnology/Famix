@@ -214,7 +214,7 @@ FamixJavaGenerator >> defineHierarchy [
 	annotationType --|> #TWithComments.
 	annotationType --|> #THasVisibility.
 	annotationType --|> #TImplementable.
-	annotationType --|> #TConcreteType.
+	annotationType --|> #TTypeArgument.
 
 	annotationTypeAttribute --|> variable.
 	annotationTypeAttribute --|> #TAnnotationTypeAttribute.
@@ -257,7 +257,7 @@ FamixJavaGenerator >> defineHierarchy [
 	class --|> #TWithImports.
 	class --|> #TImportable.
 	class --|> #TPackageable.
-	class --|> #TConcreteType.
+	class --|> #TTypeArgument.
 
 	interface --|> type.
 	interface --|> #TPackageable.
@@ -272,7 +272,7 @@ FamixJavaGenerator >> defineHierarchy [
 	interface --|> #TImplementable.
 	interface --|> #TWithImports.
 	interface --|> #TImportable.
-	interface --|> #TConcreteType.
+	interface --|> #TTypeArgument.
 
 	implementation --|> #TImplementation.
 
@@ -292,7 +292,7 @@ FamixJavaGenerator >> defineHierarchy [
 	enum --|> #TWithComments.
 	enum --|> #TWithImports.
 	enum --|> #TImportable.
-	enum --|> #TConcreteType.
+	enum --|> #TTypeArgument.
 	enum --|> #TInvocationsReceiver.
 
 	enumValue --|> variable.
@@ -374,12 +374,12 @@ FamixJavaGenerator >> defineHierarchy [
 	typeParameter --|> type.
 	typeParameter --|> #TTypeParameter.
 	typeParameter --|> tBounded.
-	typeParameter --|> #TConcreteType.
+	typeParameter --|> #TTypeArgument.
 	typeParameter --|> #TThrowable.
 
 	wildcard --|> type.
 	wildcard --|> tBounded.
-	wildcard --|> #TConcreteType
+	wildcard --|> #TTypeArgument
 ]
 
 { #category : #definition }

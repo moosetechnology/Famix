@@ -80,6 +80,7 @@ FamixTType >> entityHasIncomingTypeDeclarations [
 
 { #category : #accessing }
 FamixTType >> incomingTypings [
+	"Relation named: #incomingTypings type: #FamixTEntityTyping opposite: #declaredType"
 
 	<generated>
 	<FMComment: 'Relations to the entities that have this as type.'>

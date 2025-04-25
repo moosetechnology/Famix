@@ -8,12 +8,12 @@ Relation between a concrete type and a generic type parameter.
 ### Association source
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `concreteParameter` | `FamixTConcretization` | `outgoingConcretizations` | `FamixTConcreteType` | Concrete parameter linked to in this relationship. This can be a class or another type parameter.|
+| `typeArgument` | `FamixTConcretization` | `outgoingConcretizations` | `FamixTTypeArgument` | The type argument that concretizes the type parameter|
 
 ### Association target
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `genericParameter` | `FamixTConcretization` | `concretizations` | `FamixTTypeParameter` | Generic parameter linked to in this relationship.|
+| `typeParameter` | `FamixTConcretization` | `concretizations` | `FamixTTypeParameter` | Type parameter linked to in this relationship.|
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
@@ -29,9 +29,9 @@ Relation between a concrete type and a generic type parameter.
 Trait {
 	#name : #FamixTConcretization,
 	#instVars : [
-		'#concreteParameter => FMOne type: #FamixTConcreteType opposite: #outgoingConcretizations',
-		'#genericParameter => FMOne type: #FamixTTypeParameter opposite: #concretizations',
-		'#triggeringAssociation => FMOne type: #FamixTParametricAssociation opposite: #concretizations'
+		'#triggeringAssociation => FMOne type: #FamixTParametricAssociation opposite: #concretizations',
+		'#typeArgument => FMOne type: #FamixTTypeArgument opposite: #outgoingConcretizations',
+		'#typeParameter => FMOne type: #FamixTTypeParameter opposite: #concretizations'
 	],
 	#traits : 'FamixTAssociation',
 	#classTraits : 'FamixTAssociation classTrait',
@@ -55,40 +55,6 @@ FamixTConcretization >> accept: aVisitor [
 ]
 
 { #category : #accessing }
-FamixTConcretization >> concreteParameter [
-	"Relation named: #concreteParameter type: #FamixTConcreteType opposite: #outgoingConcretizations"
-
-	<generated>
-	<FMComment: 'Concrete parameter linked to in this relationship. This can be a class or another type parameter.'>
-	<source>
-	^ concreteParameter
-]
-
-{ #category : #accessing }
-FamixTConcretization >> concreteParameter: anObject [
-
-	<generated>
-	concreteParameter := anObject
-]
-
-{ #category : #accessing }
-FamixTConcretization >> genericParameter [
-	"Relation named: #genericParameter type: #FamixTTypeParameter opposite: #concretizations"
-
-	<generated>
-	<FMComment: 'Generic parameter linked to in this relationship.'>
-	<target>
-	^ genericParameter
-]
-
-{ #category : #accessing }
-FamixTConcretization >> genericParameter: anObject [
-
-	<generated>
-	genericParameter := anObject
-]
-
-{ #category : #accessing }
 FamixTConcretization >> triggeringAssociation [
 	"Relation named: #triggeringAssociation type: #FamixTParametricAssociation opposite: #concretizations"
 
@@ -102,4 +68,38 @@ FamixTConcretization >> triggeringAssociation: anObject [
 
 	<generated>
 	triggeringAssociation := anObject
+]
+
+{ #category : #accessing }
+FamixTConcretization >> typeArgument [
+	"Relation named: #typeArgument type: #FamixTTypeArgument opposite: #outgoingConcretizations"
+
+	<generated>
+	<FMComment: 'The type argument that concretizes the type parameter'>
+	<source>
+	^ typeArgument
+]
+
+{ #category : #accessing }
+FamixTConcretization >> typeArgument: anObject [
+
+	<generated>
+	typeArgument := anObject
+]
+
+{ #category : #accessing }
+FamixTConcretization >> typeParameter [
+	"Relation named: #typeParameter type: #FamixTTypeParameter opposite: #concretizations"
+
+	<generated>
+	<FMComment: 'Type parameter linked to in this relationship.'>
+	<target>
+	^ typeParameter
+]
+
+{ #category : #accessing }
+FamixTConcretization >> typeParameter: anObject [
+
+	<generated>
+	typeParameter := anObject
 ]

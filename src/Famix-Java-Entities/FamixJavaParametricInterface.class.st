@@ -5,7 +5,7 @@
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `typeParameters` | `FamixTParametricEntity` | `genericEntity` | `FamixTTypeParameter` | The parameters of this parametric entity. They can be concrete classes or types or generic type parameters|
+| `typeParameters` | `FamixTParametricEntity` | `genericEntity` | `FamixTTypeParameter` | The type parameters of this parametric entity. They can any type with the exception of primitive types|
 
 
 

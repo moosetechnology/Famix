@@ -5,7 +5,7 @@
 ### Outgoing dependencies
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `outgoingConcretizations` | `FamixTConcreteType` | `concreteParameter` | `FamixTConcretization` | Concretizations where this type is the concrete parameter.|
+| `outgoingConcretizations` | `FamixTTypeArgument` | `typeArgument` | `FamixTConcretization` | Concretizations where this type is the type argument.|
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
@@ -19,8 +19,8 @@
 Class {
 	#name : #FamixJavaWildcard,
 	#superclass : #FamixJavaType,
-	#traits : 'FamixJavaTBounded + FamixTConcreteType',
-	#classTraits : 'FamixJavaTBounded classTrait + FamixTConcreteType classTrait',
+	#traits : 'FamixJavaTBounded + FamixTTypeArgument',
+	#classTraits : 'FamixJavaTBounded classTrait + FamixTTypeArgument classTrait',
 	#category : #'Famix-Java-Entities-Entities'
 }
 
