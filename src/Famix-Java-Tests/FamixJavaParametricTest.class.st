@@ -39,7 +39,7 @@ FamixJavaParametricTest >> test1 [
 			 declaredType: genericListClass;
 			 addConcretization: (model newConcretization
 					  typeParameter: listTypeParameter;
-					  concreteParameter: stringClass;
+					  typeArgument: stringClass;
 					  yourself);
 			 yourself).
 
@@ -49,8 +49,8 @@ FamixJavaParametricTest >> test1 [
 	parameter typing: (model newParametricEntityTyping
 			 declaredType: genericListClass;
 			 addConcretization: (model newConcretization
-					  genericParameter: listTypeParameter;
-					  concreteParameter: stringClass;
+					  typeParameter: listTypeParameter;
+					  typeArgument: stringClass;
 					  yourself);
 			 yourself)
 ]
@@ -118,10 +118,10 @@ public class ClassB<V> extends ClassA<String, V> {
 		subclass: classB;
 		addConcretization: (model newConcretization
 				 typeParameter: k;
-				 concreteParameter: stringClass);
+				 typeArgument: stringClass);
 		addConcretization: (model newConcretization
-				 genericParameter: vFromClassA;
-				 concreteParameter: vFromClassB).
+				 typeParameter: vFromClassA;
+				 typeArgument: vFromClassB).
 
 	"Method"
 	method := model newMethodNamed: 'method'.
@@ -155,7 +155,7 @@ public ClassB extends classA<String>"
 		superclass: classA;
 		addConcretization: (model newConcretization
 				 typeArgument: stringClass;
-				 genericParameter: v).
+				 typeParameter: v).
 
 	self assertCollection: classA typeParameters hasSameElements: { v }.
 	self deny: classB isParametricEntity
