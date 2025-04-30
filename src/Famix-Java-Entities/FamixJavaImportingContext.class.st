@@ -233,6 +233,13 @@ FamixJavaImportingContext >> importParametricMethod [
 ]
 
 { #category : #importing }
+FamixJavaImportingContext >> importParametricReference [
+
+	<generated>
+	^ self importConcreteEntity: (self class fm3ClassNamed: #ParametricReference)
+]
+
+{ #category : #importing }
 FamixJavaImportingContext >> importPrimitiveType [
 
 	<generated>
@@ -503,6 +510,13 @@ FamixJavaImportingContext >> shouldImportParametricMethod [
 
 	<generated>
 	^ self shouldImport: #ParametricMethod
+]
+
+{ #category : #testing }
+FamixJavaImportingContext >> shouldImportParametricReference [
+
+	<generated>
+	^ self shouldImport: #ParametricReference
 ]
 
 { #category : #testing }

@@ -313,6 +313,13 @@ FamixJavaTEntityCreator >> newParametricMethod [
 ]
 
 { #category : #'entity creation' }
+FamixJavaTEntityCreator >> newParametricReference [
+
+	<generated>
+	^ self add: FamixJavaParametricReference new
+]
+
+{ #category : #'entity creation' }
 FamixJavaTEntityCreator >> newPrimitiveType [
 
 	<generated>

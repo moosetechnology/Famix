@@ -355,6 +355,14 @@ FamixJavaTVisitor >> visitFamixJavaParametricMethod: aFamixJavaParametricMethod 
 ]
 
 { #category : #visiting }
+FamixJavaTVisitor >> visitFamixJavaParametricReference: aFamixJavaParametricReference [
+
+	<generated>
+	self visitFamixTParametricAssociation: aFamixJavaParametricReference.
+	self visitFamixJavaReference: aFamixJavaParametricReference
+]
+
+{ #category : #visiting }
 FamixJavaTVisitor >> visitFamixJavaPrimitiveType: aFamixJavaPrimitiveType [
 
 	<generated>

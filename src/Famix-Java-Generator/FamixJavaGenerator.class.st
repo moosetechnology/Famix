@@ -48,7 +48,8 @@ Class {
 		'parametricInvocation',
 		'entityTyping',
 		'parametricEntityTyping',
-		'variable'
+		'variable',
+		'parametricReference'
 	],
 	#classInstVars : [
 		'builder'
@@ -190,6 +191,7 @@ FamixJavaGenerator >> defineClasses [
 	parametricImplementation := self newClassNamed: #ParametricImplementation.
 	parametricInvocation := self newClassNamed: #ParametricInvocation.
 	parametricEntityTyping := self newClassNamed: #ParametricEntityTyping.
+	parametricReference := self newClassNamed: #ParametricReference.
 	concretization := self newClassNamed: #Concretization.
 	wildcard := self newClassNamed: #Wildcard.
 ]
@@ -368,6 +370,8 @@ FamixJavaGenerator >> defineHierarchy [
 	parametricInvocation --|> #TParametricAssociation.
 	parametricEntityTyping --|> entityTyping.
 	parametricEntityTyping --|> #TParametricAssociation.
+	parametricReference --|> reference.
+	parametricReference --|> #TParametricAssociation.
 
 	concretization --|> #TConcretization.
 
