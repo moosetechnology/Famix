@@ -118,7 +118,7 @@ FmxMBVisitorTrait >> initialize [
 
 	super initialize.
 	name := #TVisitor.
-	tag := 'Trait'
+	tag := 'Visitor'
 ]
 
 { #category : #testing }
