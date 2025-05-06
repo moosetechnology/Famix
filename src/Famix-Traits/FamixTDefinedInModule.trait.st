@@ -27,6 +27,13 @@ FamixTDefinedInModule classSide >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixTDefinedInModule >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTDefinedInModule: self
+]
+
 { #category : #accessing }
 FamixTDefinedInModule >> parentModule [
 	"Relation named: #parentModule type: #FamixTModule opposite: #moduleEntities"

@@ -54,6 +54,13 @@ FamixJavaType class >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixJavaType >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaType: self
+]
+
 { #category : #'Famix-Extensions' }
 FamixJavaType >> allAnnotationTypes [
 	^ self allAnnotationInstances collectAsSet: #annotationType

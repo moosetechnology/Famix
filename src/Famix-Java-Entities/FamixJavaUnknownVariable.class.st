@@ -39,3 +39,10 @@ FamixJavaUnknownVariable class >> annotation [
 	<generated>
 	^ self
 ]
+
+{ #category : #visitor }
+FamixJavaUnknownVariable >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaUnknownVariable: self
+]

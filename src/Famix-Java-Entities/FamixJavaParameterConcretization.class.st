@@ -39,3 +39,10 @@ FamixJavaParameterConcretization class >> annotation [
 	<generated>
 	^ self
 ]
+
+{ #category : #visitor }
+FamixJavaParameterConcretization >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaParameterConcretization: self
+]

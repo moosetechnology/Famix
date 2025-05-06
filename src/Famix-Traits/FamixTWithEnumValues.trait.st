@@ -27,6 +27,13 @@ FamixTWithEnumValues classSide >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixTWithEnumValues >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTWithEnumValues: self
+]
+
 { #category : #accessing }
 FamixTWithEnumValues >> addEnumValue: anObject [
 	enumValues add: anObject

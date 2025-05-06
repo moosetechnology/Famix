@@ -52,6 +52,13 @@ FamixTPackage classSide >> annotationFamixPackageGroup [
 	^ FamixPackageGroup
 ]
 
+{ #category : #visitor }
+FamixTPackage >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTPackage: self
+]
+
 { #category : #accessing }
 FamixTPackage >> addChildEntity: anObject [
 	childEntities add: anObject

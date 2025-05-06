@@ -27,3 +27,10 @@ FamixJavaWildcard class >> annotation [
 	<generated>
 	^ self
 ]
+
+{ #category : #visitor }
+FamixJavaWildcard >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaWildcard: self
+]

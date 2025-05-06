@@ -61,6 +61,13 @@ FamixTLambda classSide >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixTLambda >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTLambda: self
+]
+
 { #category : #accessing }
 FamixTLambda >> lambdaContainer [
 	"Relation named: #lambdaContainer type: #FamixTWithLambdas opposite: #lambdas"

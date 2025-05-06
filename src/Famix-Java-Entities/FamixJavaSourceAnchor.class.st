@@ -34,3 +34,10 @@ FamixJavaSourceAnchor class >> isAbstract [
 	<generated>
 	^ self == FamixJavaSourceAnchor
 ]
+
+{ #category : #visitor }
+FamixJavaSourceAnchor >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaSourceAnchor: self
+]

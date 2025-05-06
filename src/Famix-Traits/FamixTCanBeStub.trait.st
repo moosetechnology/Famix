@@ -35,6 +35,13 @@ FamixTCanBeStub classSide >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixTCanBeStub >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTCanBeStub: self
+]
+
 { #category : #accessing }
 FamixTCanBeStub >> isStub [
 

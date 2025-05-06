@@ -27,6 +27,13 @@ FamixTWithParameters classSide >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixTWithParameters >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTWithParameters: self
+]
+
 { #category : #adding }
 FamixTWithParameters >> addParameter: aParameter [ 
 	parameters add: aParameter

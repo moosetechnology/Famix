@@ -33,6 +33,13 @@ FamixTWithInheritances classSide >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixTWithInheritances >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTWithInheritances: self
+]
+
 { #category : #accessing }
 FamixTWithInheritances >> addSubInheritance: anInheritance [ 
 	subInheritances add: anInheritance

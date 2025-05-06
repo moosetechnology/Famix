@@ -39,6 +39,13 @@ FamixTWithStatements classSide >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixTWithStatements >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTWithStatements: self
+]
+
 { #category : #metrics }
 FamixTWithStatements >> computeCyclomaticComplexity [
 	^ self notExistentMetricValue

@@ -39,6 +39,13 @@ FamixJavaReference class >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixJavaReference >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaReference: self
+]
+
 { #category : #printing }
 FamixJavaReference >> mooseNameOn: aStream [
 	"aStream nextPutAll: 'Reference'."

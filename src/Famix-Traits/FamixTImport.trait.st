@@ -42,6 +42,13 @@ FamixTImport classSide >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixTImport >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTImport: self
+]
+
 { #category : #accessing }
 FamixTImport >> importedEntity [
 	"Relation named: #importedEntity type: #FamixTImportable opposite: #incomingImports"

@@ -46,6 +46,13 @@ FamixJavaInvocation class >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixJavaInvocation >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaInvocation: self
+]
+
 { #category : #initialization }
 FamixJavaInvocation >> initialize [
 

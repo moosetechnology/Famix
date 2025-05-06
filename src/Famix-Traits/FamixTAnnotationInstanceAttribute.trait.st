@@ -52,6 +52,13 @@ FamixTAnnotationInstanceAttribute classSide >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixTAnnotationInstanceAttribute >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTAnnotationInstanceAttribute: self
+]
+
 { #category : #accessing }
 FamixTAnnotationInstanceAttribute >> annotationTypeAttribute [
 	"Relation named: #annotationTypeAttribute type: #FamixTAnnotationTypeAttribute opposite: #annotationAttributeInstances"

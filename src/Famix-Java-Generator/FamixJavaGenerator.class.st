@@ -66,8 +66,9 @@ FamixJavaGenerator class >> packageName [
 
 { #category : #accessing }
 FamixJavaGenerator class >> packageNameForVisitor [
+	"Generate visitor in the entities package. Discussed with N. Anquetil"
 
-	^ #'Famix-Java-Visitor'
+	^ self packageName
 ]
 
 { #category : #accessing }

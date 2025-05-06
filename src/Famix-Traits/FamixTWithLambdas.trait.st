@@ -29,6 +29,13 @@ FamixTWithLambdas classSide >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixTWithLambdas >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTWithLambdas: self
+]
+
 { #category : #adding }
 FamixTWithLambdas >> addLambda: anObject [
 	<generated>

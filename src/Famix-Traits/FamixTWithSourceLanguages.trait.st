@@ -27,6 +27,13 @@ FamixTWithSourceLanguages classSide >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixTWithSourceLanguages >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTWithSourceLanguages: self
+]
+
 { #category : #accessing }
 FamixTWithSourceLanguages >> declaredSourceLanguage [
 	"Relation named: #declaredSourceLanguage type: #FamixTSourceLanguage opposite: #sourcedEntities"

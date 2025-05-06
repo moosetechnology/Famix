@@ -45,6 +45,13 @@ FamixJavaImplicitVariable class >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixJavaImplicitVariable >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaImplicitVariable: self
+]
+
 { #category : #printing }
 FamixJavaImplicitVariable >> mooseNameOn: stream [ 
 	| parent |

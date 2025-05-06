@@ -27,6 +27,13 @@ FamixTAccessible classSide >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixTAccessible >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTAccessible: self
+]
+
 { #category : #accessing }
 FamixTAccessible >> accessingClasses [
 

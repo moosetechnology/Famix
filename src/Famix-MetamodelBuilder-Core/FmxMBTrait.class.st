@@ -106,6 +106,12 @@ FmxMBTrait >> isMetamodelTrait [
 	^ true
 ]
 
+{ #category : #testing }
+FmxMBTrait >> isVisitorTrait [
+
+	^ false
+]
+
 { #category : #'name conversion' }
 FmxMBTrait >> pluralPropertyName [
 	^ self pluralOf: self propertyName

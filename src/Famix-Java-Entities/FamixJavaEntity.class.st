@@ -28,6 +28,13 @@ FamixJavaEntity class >> metamodel [
 	^ FamixJavaModel metamodel
 ]
 
+{ #category : #visitor }
+FamixJavaEntity >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaEntity: self
+]
+
 { #category : #testing }
 FamixJavaEntity >> isAccess [
 

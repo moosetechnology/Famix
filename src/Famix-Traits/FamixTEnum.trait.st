@@ -60,3 +60,10 @@ FamixTEnum classSide >> annotation [
 	<generated>
 	^ self
 ]
+
+{ #category : #visitor }
+FamixTEnum >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTEnum: self
+]

@@ -49,6 +49,13 @@ FamixTFolder classSide >> annotationFamixFolderGroup [
 	^ FamixFolderGroup
 ]
 
+{ #category : #visitor }
+FamixTFolder >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTFolder: self
+]
+
 { #category : #adding }
 FamixTFolder >> addChildFileSystemEntity: aFileOrFolder [
 	self childrenFileSystemEntities add: aFileOrFolder

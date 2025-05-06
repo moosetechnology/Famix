@@ -38,6 +38,13 @@ FamixJavaAnnotationInstanceAttribute class >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixJavaAnnotationInstanceAttribute >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaAnnotationInstanceAttribute: self
+]
+
 { #category : #accessing }
 FamixJavaAnnotationInstanceAttribute >> name [
 	^ self annotationTypeAttribute ifNotNil: #name

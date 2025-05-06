@@ -49,3 +49,10 @@ FamixJavaEnumValue class >> annotation [
 	<generated>
 	^ self
 ]
+
+{ #category : #visitor }
+FamixJavaEnumValue >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaEnumValue: self
+]
