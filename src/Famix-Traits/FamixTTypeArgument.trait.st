@@ -17,7 +17,7 @@ Trait {
 	#instVars : [
 		'#outgoingConcretizations => FMMany type: #FamixTConcretization opposite: #typeArgument'
 	],
-	#category : #'Famix-Traits-Traits'
+	#category : #'Famix-Traits-Parametrics'
 }
 
 { #category : #meta }

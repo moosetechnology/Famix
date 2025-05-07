@@ -23,7 +23,7 @@ Trait {
 		'#concretizations => FMMany type: #FamixTConcretization opposite: #typeParameter',
 		'#genericEntity => FMOne type: #FamixTParametricEntity opposite: #typeParameters'
 	],
-	#category : #'Famix-Traits-Traits'
+	#category : #'Famix-Traits-Parametrics'
 }
 
 { #category : #meta }

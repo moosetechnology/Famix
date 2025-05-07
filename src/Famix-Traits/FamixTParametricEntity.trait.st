@@ -24,7 +24,7 @@ Trait {
 	#instVars : [
 		'#typeParameters => FMMany type: #FamixTTypeParameter opposite: #genericEntity'
 	],
-	#category : #'Famix-Traits-Traits'
+	#category : #'Famix-Traits-Parametrics'
 }
 
 { #category : #meta }
