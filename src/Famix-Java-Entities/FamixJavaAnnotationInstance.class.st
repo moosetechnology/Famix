@@ -33,6 +33,13 @@ FamixJavaAnnotationInstance class >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixJavaAnnotationInstance >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaAnnotationInstance: self
+]
+
 { #category : #printing }
 FamixJavaAnnotationInstance >> mooseNameOn: aStream [
 	self annotationType ifNotNil: [ :at | at mooseNameOn: aStream ].

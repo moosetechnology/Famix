@@ -27,6 +27,13 @@ FamixTTypedEntity classSide >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixTTypedEntity >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTTypedEntity: self
+]
+
 { #category : #accessing }
 FamixTTypedEntity >> declaredType [
 	"This method exists for compatibility reasons after reifying #declaredType with Type declaration.

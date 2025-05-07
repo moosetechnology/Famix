@@ -68,6 +68,13 @@ FamixJavaClass class >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixJavaClass >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaClass: self
+]
+
 { #category : #'Famix-Extensions-metrics-support' }
 FamixJavaClass >> accessedAttributes [
 	

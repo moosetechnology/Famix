@@ -27,6 +27,13 @@ FamixTTemplateUser classSide >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixTTemplateUser >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTTemplateUser: self
+]
+
 { #category : #accessing }
 FamixTTemplateUser >> template [
 	"Relation named: #template type: #FamixTTemplate opposite: #templateUsers"

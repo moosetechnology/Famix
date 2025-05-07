@@ -69,6 +69,13 @@ FamixTAnnotationTypeAttribute classSide >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixTAnnotationTypeAttribute >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTAnnotationTypeAttribute: self
+]
+
 { #category : #accessing }
 FamixTAnnotationTypeAttribute >> addAnnotationAttributeInstance: anObject [
 	annotationAttributeInstances add: anObject

@@ -89,10 +89,10 @@ BaselineOfFamix >> groups: spec [
 		  with: #( 'ReferenceTestResources' 'Moose-TestResources-LAN'
 			     'Moose-TestResources-LCOM' 'KGBTestResources'
 			     'PackageBlueprintTestResources' );
-		  group: 'BasicTraits' with: #( 'Famix-Traits' 'Famix-Visitor' );
+		  group: 'BasicTraits' with: #( 'Famix-Traits' );
 		  group: 'EntitiesJava' with: #( 'Famix-Java-Entities' );
 		  group: 'EntitiesJavaWithVisitor'
-		  with: #( 'EntitiesJava' 'Famix-Java-Visitor' );
+		  with: #( 'EntitiesJava' ); "This group is obsolete as visitor is now in the entities package"
 		  group: 'EntitiesJavaWithFusionner'
 		  with: #( 'Famix-Java-Fusionner' );
 		  group: 'ModelJava'
@@ -158,7 +158,6 @@ BaselineOfFamix >> packages: spec [
 		package: 'Moose-Core-Generator' with: [ spec requires: #( 'Famix-MetamodelBuilder-Core' ) ];
 		package: 'Moose-Query-Extensions' with: [ spec requires: #( 'Moose-Query' 'BasicTraits' ) ];
 		package: 'Famix-Traits' with: [ spec requires: #( 'Moose-Core' ) ];
-		package: 'Famix-Visitor' with: [ spec requires: #( 'Famix-Traits' ) ];
 		package: 'Famix-Visitor-Generation' with: [ spec requires: #( 'Famix-MetamodelBuilder-Core' ) ];
 		package: 'Famix-MetamodelBuilder-Core' with: [ spec requires: #( 'Moose-Core' 'SingularizePluralize' ) ];
 		package: 'Famix-MetamodelGeneration' with: [ spec requires: #( 'Famix-MetamodelBuilder-Core' 'Famix-Visitor-Generation' ) ];
@@ -176,8 +175,7 @@ BaselineOfFamix >> packages: spec [
 					   'KGBTestResources' ) ];
 		package: 'Famix-Java-Generator' with: [ spec requires: #( 'Basic' 'Famix-Visitor-Generation' ) ];
 		package: 'Famix-Java-Entities' with: [ spec requires: #( 'BasicTraits' ) ];
-		package: 'Famix-Java-Visitor' with: [ spec requires: #( 'Famix-Java-Entities' ) ];
-		package: 'Famix-Java-Fusionner' with: [ spec requires: #( 'Famix-Java-Visitor' ) ];
+		package: 'Famix-Java-Fusionner' with: [ spec requires: #( 'Famix-Java-Entities' ) ];
 		package: 'Famix-Java-Tests' with: [ spec requires: #( 'Famix-Java-Entities' 'Famix-Java-Generator' ) ];
 		package: 'Moose-TestResources-LAN';
 		package: 'Moose-TestResources-LCOM';

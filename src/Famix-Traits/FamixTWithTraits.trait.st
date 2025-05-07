@@ -27,6 +27,13 @@ FamixTWithTraits classSide >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixTWithTraits >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTWithTraits: self
+]
+
 { #category : #accessing }
 FamixTWithTraits >> addTrait: anObject [
 	traits add: anObject

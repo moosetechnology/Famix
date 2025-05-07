@@ -42,6 +42,13 @@ FamixTInheritance classSide >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixTInheritance >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTInheritance: self
+]
+
 { #category : #printing }
 FamixTInheritance >> displayStringOn: aStream [
 

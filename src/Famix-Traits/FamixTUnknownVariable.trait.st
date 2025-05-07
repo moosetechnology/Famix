@@ -42,3 +42,10 @@ FamixTUnknownVariable classSide >> annotation [
 	<generated>
 	^ self
 ]
+
+{ #category : #visitor }
+FamixTUnknownVariable >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTUnknownVariable: self
+]

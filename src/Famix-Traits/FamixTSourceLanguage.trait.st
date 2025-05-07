@@ -32,6 +32,13 @@ FamixTSourceLanguage classSide >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixTSourceLanguage >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTSourceLanguage: self
+]
+
 { #category : #adding }
 FamixTSourceLanguage >> addSourcedEntity: aSourcedEntity [
 	^ self sourcedEntities add: aSourcedEntity

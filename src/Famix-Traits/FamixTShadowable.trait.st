@@ -52,6 +52,13 @@ FamixTShadowable classSide >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixTShadowable >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTShadowable: self
+]
+
 { #category : #testing }
 FamixTShadowable >> isShadowable [
 

@@ -58,3 +58,10 @@ FamixJavaAttribute class >> annotation [
 	<generated>
 	^ self
 ]
+
+{ #category : #visitor }
+FamixJavaAttribute >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaAttribute: self
+]

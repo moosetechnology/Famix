@@ -71,6 +71,13 @@ FamixTClass classSide >> annotationFamixClassGroup [
 	^ FamixClassGroup
 ]
 
+{ #category : #visitor }
+FamixTClass >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTClass: self
+]
+
 { #category : #adding }
 FamixTClass >> addFirstMethodsOverriding: aMethod in: aCollection [
 

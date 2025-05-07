@@ -27,6 +27,13 @@ FamixTImportable classSide >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixTImportable >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTImportable: self
+]
+
 { #category : #adding }
 FamixTImportable >> addIncomingImport: anObject [
 	<generated>

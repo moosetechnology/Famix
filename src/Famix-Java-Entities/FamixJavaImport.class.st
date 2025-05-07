@@ -38,3 +38,10 @@ FamixJavaImport class >> annotation [
 	<generated>
 	^ self
 ]
+
+{ #category : #visitor }
+FamixJavaImport >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaImport: self
+]

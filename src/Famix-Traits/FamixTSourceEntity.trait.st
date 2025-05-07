@@ -29,6 +29,13 @@ FamixTSourceEntity classSide >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixTSourceEntity >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTSourceEntity: self
+]
+
 { #category : #accessing }
 FamixTSourceEntity >> allSourceAnchors [
 	^ self sourceAnchor

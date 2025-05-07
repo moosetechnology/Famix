@@ -27,6 +27,13 @@ FamixTInvocable classSide >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixTInvocable >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTInvocable: self
+]
+
 { #category : #adding }
 FamixTInvocable >> addIncomingInvocation: anInvocation [
 	incomingInvocations add: anInvocation

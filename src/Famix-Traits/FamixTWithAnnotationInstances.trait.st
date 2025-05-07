@@ -27,6 +27,13 @@ FamixTWithAnnotationInstances classSide >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixTWithAnnotationInstances >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTWithAnnotationInstances: self
+]
+
 { #category : #accessing }
 FamixTWithAnnotationInstances >> addAnnotationInstance: anAnnotationInstance [
 	annotationInstances add: anAnnotationInstance

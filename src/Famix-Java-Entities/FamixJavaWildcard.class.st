@@ -33,7 +33,7 @@ FamixJavaWildcard class >> annotation [
 	^ self
 ]
 
-{ #category : #'*Famix-Java-Visitor' }
+{ #category : #visitor }
 FamixJavaWildcard >> accept: aVisitor [
 
 	<generated>

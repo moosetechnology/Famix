@@ -29,6 +29,13 @@ FamixTImplementable classSide >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixTImplementable >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTImplementable: self
+]
+
 { #category : #adding }
 FamixTImplementable >> addImplementation: anObject [
 	<generated>

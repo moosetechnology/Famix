@@ -55,6 +55,13 @@ FamixJavaParameter class >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixJavaParameter >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaParameter: self
+]
+
 { #category : #printing }
 FamixJavaParameter >> mooseNameOn: stream [ 
 	| parent |

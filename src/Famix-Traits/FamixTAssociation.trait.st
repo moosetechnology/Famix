@@ -65,6 +65,13 @@ FamixTAssociation classSide >> source: anEntity target: anotherEntity model: aMo
 		yourself
 ]
 
+{ #category : #visitor }
+FamixTAssociation >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTAssociation: self
+]
+
 { #category : #accessing }
 FamixTAssociation >> allTargets [
 	"Since #target can return an entity or a collection, I ensure we always get a collection."

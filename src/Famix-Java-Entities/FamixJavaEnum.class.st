@@ -64,6 +64,13 @@ FamixJavaEnum class >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixJavaEnum >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaEnum: self
+]
+
 { #category : #private }
 FamixJavaEnum >> addMethodOverriding: aMethod in: aCollection [
 

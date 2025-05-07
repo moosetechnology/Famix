@@ -57,6 +57,6 @@ FamixVisitorGenerator >> define [
 
 	builder allSubBuilders do: [ :subBuilder |
 		subBuilder extensionBehaviors
-			detect: [ :each | each name = #TVisitor ]
+			detect: [ :each | each isVisitorTrait ]
 			ifFound: [ :famixTVistior | visitorTrait --|> famixTVistior ] ]
 ]

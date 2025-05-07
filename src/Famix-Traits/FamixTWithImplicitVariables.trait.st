@@ -27,6 +27,13 @@ FamixTWithImplicitVariables classSide >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixTWithImplicitVariables >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTWithImplicitVariables: self
+]
+
 { #category : #adding }
 FamixTWithImplicitVariables >> addImplicitVariable: anImplicitVariable [
 	implicitVariables add: anImplicitVariable

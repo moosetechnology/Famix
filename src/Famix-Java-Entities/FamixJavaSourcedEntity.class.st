@@ -35,6 +35,13 @@ FamixJavaSourcedEntity class >> isAbstract [
 	^ self == FamixJavaSourcedEntity
 ]
 
+{ #category : #visitor }
+FamixJavaSourcedEntity >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaSourcedEntity: self
+]
+
 { #category : #'Famix-SourceAnchor' }
 FamixJavaSourcedEntity >> fileAnchorPath: aString startLine: anInteger startColumn: anInteger2 endLine: anInteger3 endColumn: anInteger4 [
 	"I need to be called after the mooseModel is set."

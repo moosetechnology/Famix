@@ -118,15 +118,14 @@ Class {
 		'tImport',
 		'tWithImports',
 		'tParametricEntity',
+		'tConcreteParameterType',
+		'tGenericParameterType',
 		'tThrowable',
 		'tConcretization',
+		'tParameterConcretization',
 		'tShadowable',
 		'tShadower',
-		'tCanBeStub',
-		'tEntityTyping',
-		'tTypeParameter',
-		'tParametricAssociation',
-		'tTypeArgument'
+		'tCanBeStub'
 	],
 	#category : #'Famix-MetamodelGeneration'
 }
@@ -145,8 +144,9 @@ FamixGenerator class >> packageName [
 
 { #category : #accessing }
 FamixGenerator class >> packageNameForVisitor [
+	"Generate visitor in the entities package. Discussed with N. Anquetil"
 
-	^ #'Famix-Visitor'
+	^ self packageName
 ]
 
 { #category : #accessing }

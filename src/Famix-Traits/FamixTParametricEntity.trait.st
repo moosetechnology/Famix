@@ -36,6 +36,13 @@ FamixTParametricEntity classSide >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixTParametricEntity >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTParametricEntity: self
+]
+
 { #category : #adding }
 FamixTParametricEntity >> addTypeParameter: anObject [
 	<generated>

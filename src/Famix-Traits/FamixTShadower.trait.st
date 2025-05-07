@@ -52,6 +52,13 @@ FamixTShadower classSide >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixTShadower >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTShadower: self
+]
+
 { #category : #accessing }
 FamixTShadower >> shadowedEntity [
 	"Relation named: #shadowedEntity type: #FamixTShadowable opposite: #shadowingEntities"

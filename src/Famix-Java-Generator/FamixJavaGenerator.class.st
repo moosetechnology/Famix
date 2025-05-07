@@ -20,6 +20,7 @@ Class {
 		'method',
 		'package',
 		'parameter',
+		'parameterType',
 		'parametricClass',
 		'parametricInterface',
 		'parametricMethod',
@@ -41,15 +42,9 @@ Class {
 		'tBounded',
 		'tBound',
 		'wildcard',
+		'parameterConcretization',
 		'concretization',
-		'typeParameter',
-		'parametricInheritance',
-		'parametricImplementation',
-		'parametricInvocation',
-		'entityTyping',
-		'parametricEntityTyping',
-		'variable',
-		'parametricReference'
+		'variable'
 	],
 	#classInstVars : [
 		'builder'
@@ -71,8 +66,9 @@ FamixJavaGenerator class >> packageName [
 
 { #category : #accessing }
 FamixJavaGenerator class >> packageNameForVisitor [
+	"Generate visitor in the entities package. Discussed with N. Anquetil"
 
-	^ #'Famix-Java-Visitor'
+	^ self packageName
 ]
 
 { #category : #accessing }

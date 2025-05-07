@@ -61,6 +61,13 @@ FamixJavaInterface class >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixJavaInterface >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaInterface: self
+]
+
 { #category : #private }
 FamixJavaInterface >> addMethodOverriding: aMethod in: aCollection [
 

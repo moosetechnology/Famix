@@ -27,6 +27,13 @@ FamixTWithHeaders classSide >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixTWithHeaders >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTWithHeaders: self
+]
+
 { #category : #accessing }
 FamixTWithHeaders >> header [
 	"Relation named: #header type: #FamixTHeader opposite: #headerOwner"

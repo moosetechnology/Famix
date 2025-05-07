@@ -47,7 +47,7 @@ FamixTConcretization classSide >> annotation [
 	^ self
 ]
 
-{ #category : #'*Famix-Visitor' }
+{ #category : #visitor }
 FamixTConcretization >> accept: aVisitor [
 
 	<generated>

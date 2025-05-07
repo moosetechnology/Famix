@@ -33,6 +33,13 @@ FamixTTemplate classSide >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixTTemplate >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTTemplate: self
+]
+
 { #category : #accessing }
 FamixTTemplate >> addTemplateUser: anObject [
 
