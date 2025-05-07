@@ -36,14 +36,17 @@ FamixTTypedEntity >> accept: aVisitor [
 
 { #category : #accessing }
 FamixTTypedEntity >> declaredType [
-	"This method exists for compatibility reasons after reifying #declaredType with Type declaration.
-	It can be kept as a shortcut to build type declarations."
 
 	^ self typing ifNotNil: [ self typing declaredType ]
 ]
 
 { #category : #testing }
 FamixTTypedEntity >> entityHasOutgoingTypeDeclarations [
+
+	self
+		deprecated: 'Use #hasDeclaredType instead.'
+		transformWith: '`@receiver entityHasOutgoingTypeDeclarations'
+			-> '`@receiver hasDeclaredType'.
 
 	^ self hasDeclaredType
 ]
