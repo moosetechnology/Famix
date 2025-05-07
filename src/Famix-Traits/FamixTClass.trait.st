@@ -127,9 +127,7 @@ FamixTClass >> inheritedAttributes [
 	| inheritedAttrs |
 	inheritedAttrs := OrderedCollection new.
 	self allSuperclassesDo: [ :each |
-		inheritedAttrs addAll: (each isParametricEntity
-				 ifTrue: [ each genericEntity ]
-				 ifFalse: [ each ]) attributes ].
+		inheritedAttrs addAll: each attributes ].
 	^ inheritedAttrs
 ]
 

@@ -61,23 +61,27 @@ FamixTParametricEntity >> allTypeParameters [
 
 { #category : #accessing }
 FamixTParametricEntity >> genericEntity [
-	"Returns the generic entity that typically holds relevant information, such as the source anchor."
 
-	^ self genericization
-		  ifNil: [ self ]
-		  ifNotNil: [ :concretization | concretization genericEntity ]
+	self deprecated:
+		'Since we do not represent parameterized (i.e. "concrete") entities anymore, a parametric entity is always generic'.
+
+	^ self
 ]
 
 { #category : #accessing }
 FamixTParametricEntity >> isConcreteEntity [
-	"I am concrete if I concretize a generic entity."
 
-	^ self genericization isNotNil
+	self deprecated:
+		'Since we do not represent parameterized (i.e. "concrete") entities anymore, a parametric entity is always generic'.
+
+	^ false
 ]
 
 { #category : #accessing }
 FamixTParametricEntity >> isGenericEntity [
-	"I am generic if I don't concretize a generic entity."
+
+	self deprecated:
+		'Since we do not represent parameterized (i.e. "concrete") entities anymore, a parametric entity is always generic'.
 
 	^ self genericization isNil
 ]
@@ -108,10 +112,9 @@ FamixTParametricEntity >> typeParameters: anObject [
 
 { #category : #accessing }
 FamixTParametricEntity >> usesGenerics [
-	"Concrete parameters can still be generic, e.g. in Java:
-	<C> List<C> foo(C bar);
-	List<C> is a concretization of the generic interface List<T>, where C concretizes T, but is still generic."
 
-	self genericParameters ifNotEmpty: [ ^ true ].
-	^ self concreteParameters anySatisfy: [ :p | p isParameterType ]
+	self deprecated:
+		'Since we do not represent parameterized (i.e. "concrete") entities anymore, a parametric entity is always generic. It has at least one type parameter'.
+
+	^ true
 ]
