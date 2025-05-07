@@ -24,6 +24,13 @@ FamixTCanBeClassSide classSide >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixTCanBeClassSide >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTCanBeClassSide: self
+]
+
 { #category : #accessing }
 FamixTCanBeClassSide >> isClassSide [
 

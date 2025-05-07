@@ -52,6 +52,13 @@ FamixTConcreteParameterType classSide >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixTConcreteParameterType >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTConcreteParameterType: self
+]
+
 { #category : #adding }
 FamixTConcreteParameterType >> addConcreteEntity: anObject [
 	<generated>

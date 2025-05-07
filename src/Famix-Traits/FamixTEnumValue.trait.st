@@ -59,6 +59,13 @@ FamixTEnumValue classSide >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixTEnumValue >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTEnumValue: self
+]
+
 { #category : #testing }
 FamixTEnumValue >> isEnumValue [
 

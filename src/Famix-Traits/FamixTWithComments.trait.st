@@ -27,6 +27,13 @@ FamixTWithComments classSide >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixTWithComments >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTWithComments: self
+]
+
 { #category : #removing }
 FamixTWithComments >> addComment: aComment [
 	self flag: #todo.	"Cyril: Remove next check after some time. This is for a transition. 10 august 2019."

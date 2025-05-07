@@ -39,6 +39,13 @@ FamixTNamedEntity classSide >> named: aString model: aMooseModel [
 		yourself
 ]
 
+{ #category : #visitor }
+FamixTNamedEntity >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTNamedEntity: self
+]
+
 { #category : #printing }
 FamixTNamedEntity >> displayStringOn: aStream [
 

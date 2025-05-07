@@ -29,6 +29,13 @@ FamixTCanImplement classSide >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixTCanImplement >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTCanImplement: self
+]
+
 { #category : #adding }
 FamixTCanImplement >> addInterfaceImplementation: anObject [
 	<generated>

@@ -53,6 +53,13 @@ FamixTFileSystemEntity classSide >> systemFolderSeparatorString [
 	^ DiskStore delimiter asString 
 ]
 
+{ #category : #visitor }
+FamixTFileSystemEntity >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTFileSystemEntity: self
+]
+
 { #category : #accessing }
 FamixTFileSystemEntity >> fileReference [
 	^ FileSystem disk referenceTo: (self mooseName copyReplaceAll: self class famixFolderSeparatorString with: FileSystem disk delimiter asString)

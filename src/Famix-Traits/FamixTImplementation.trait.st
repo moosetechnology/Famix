@@ -42,6 +42,13 @@ FamixTImplementation classSide >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixTImplementation >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTImplementation: self
+]
+
 { #category : #accessing }
 FamixTImplementation >> implementingClass [
 	"Relation named: #implementingClass type: #FamixTCanImplement opposite: #interfaceImplementations"

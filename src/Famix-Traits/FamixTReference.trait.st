@@ -60,6 +60,13 @@ FamixTReference classSide >> source: source target: target [
 	^ self new source: source; target: target
 ]
 
+{ #category : #visitor }
+FamixTReference >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTReference: self
+]
+
 { #category : #testing }
 FamixTReference >> isReference [
 

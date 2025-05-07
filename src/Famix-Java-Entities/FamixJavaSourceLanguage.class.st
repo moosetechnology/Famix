@@ -27,6 +27,13 @@ FamixJavaSourceLanguage class >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixJavaSourceLanguage >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaSourceLanguage: self
+]
+
 { #category : #testing }
 FamixJavaSourceLanguage >> isC [ 
 	^ false

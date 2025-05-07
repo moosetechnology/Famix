@@ -26,6 +26,13 @@ FamixTHasSignature classSide >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixTHasSignature >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTHasSignature: self
+]
+
 { #category : #accessing }
 FamixTHasSignature >> signature [
 

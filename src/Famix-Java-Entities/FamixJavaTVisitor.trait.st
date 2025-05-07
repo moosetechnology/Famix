@@ -6,7 +6,7 @@ Trait {
 	#name : #FamixJavaTVisitor,
 	#traits : 'FamixTVisitor',
 	#classTraits : 'FamixTVisitor classTrait',
-	#category : #'Famix-Java-Visitor-Trait'
+	#category : #'Famix-Java-Entities-Visitor'
 }
 
 { #category : #meta }

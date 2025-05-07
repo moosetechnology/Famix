@@ -51,6 +51,13 @@ FamixJavaAnnotationTypeAttribute class >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixJavaAnnotationTypeAttribute >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaAnnotationTypeAttribute: self
+]
+
 { #category : #accessing }
 FamixJavaAnnotationTypeAttribute >> parentAnnotationType [
 	<FMProperty: #parentAnnotationType type: #FamixJavaAnnotationType> 

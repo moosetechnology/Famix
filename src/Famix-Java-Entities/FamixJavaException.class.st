@@ -65,3 +65,10 @@ FamixJavaException class >> annotation [
 	<generated>
 	^ self
 ]
+
+{ #category : #visitor }
+FamixJavaException >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaException: self
+]

@@ -27,6 +27,13 @@ FamixTWithMethods classSide >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixTWithMethods >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTWithMethods: self
+]
+
 { #category : #accessing }
 FamixTWithMethods >> addMethod: aMethod [
 	methods add: aMethod

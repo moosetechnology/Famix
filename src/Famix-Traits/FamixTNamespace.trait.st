@@ -46,6 +46,13 @@ FamixTNamespace classSide >> annotationFamixNamespaceGroup [
 	^ FamixNamespaceGroup
 ]
 
+{ #category : #visitor }
+FamixTNamespace >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTNamespace: self
+]
+
 { #category : #testing }
 FamixTNamespace >> isNamespace [
 

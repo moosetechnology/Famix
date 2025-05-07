@@ -32,6 +32,13 @@ FamixTTypeAlias classSide >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixTTypeAlias >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTTypeAlias: self
+]
+
 { #category : #accessing }
 FamixTTypeAlias >> aliasedType [
 	"Relation named: #aliasedType type: #FamixTWithTypeAliases opposite: #typeAliases"

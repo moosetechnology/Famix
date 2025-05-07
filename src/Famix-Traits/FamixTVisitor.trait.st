@@ -4,7 +4,7 @@ I am generated with the metamodel.
 "
 Trait {
 	#name : #FamixTVisitor,
-	#category : #'Famix-Visitor-Trait'
+	#category : #'Famix-Traits-Visitor'
 }
 
 { #category : #meta }

@@ -144,8 +144,9 @@ FamixGenerator class >> packageName [
 
 { #category : #accessing }
 FamixGenerator class >> packageNameForVisitor [
+	"Generate visitor in the entities package. Discussed with N. Anquetil"
 
-	^ #'Famix-Visitor'
+	^ self packageName
 ]
 
 { #category : #accessing }

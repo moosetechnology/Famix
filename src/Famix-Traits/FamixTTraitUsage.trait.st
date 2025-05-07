@@ -42,6 +42,13 @@ FamixTTraitUsage classSide >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixTTraitUsage >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTTraitUsage: self
+]
+
 { #category : #accessing }
 FamixTTraitUsage >> trait [
 	"Relation named: #trait type: #FamixTTrait opposite: #incomingTraitUsages"

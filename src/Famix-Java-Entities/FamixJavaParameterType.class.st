@@ -57,6 +57,13 @@ FamixJavaParameterType class >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixJavaParameterType >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaParameterType: self
+]
+
 { #category : #testing }
 FamixJavaParameterType >> isParameterType [
 	^ true

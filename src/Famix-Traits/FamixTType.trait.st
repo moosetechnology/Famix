@@ -61,6 +61,13 @@ FamixTType classSide >> annotationFamixTypeGroup [
 	^ FamixTypeGroup
 ]
 
+{ #category : #visitor }
+FamixTType >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTType: self
+]
+
 { #category : #adding }
 FamixTType >> addTypedEntity: anObject [
 	<generated>

@@ -59,6 +59,13 @@ FamixTParameter classSide >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixTParameter >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTParameter: self
+]
+
 { #category : #printing }
 FamixTParameter >> displayStringOn: aStream [
 

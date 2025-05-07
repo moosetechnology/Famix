@@ -8,6 +8,14 @@ Class {
 	#category : #'Famix-Visitor-Generation-MetamodelBuilder'
 }
 
+{ #category : #generating }
+FmxMBVisitorTrait >> acceptMethodProtocol [
+
+	^ self packageName == self builder configuration packageName
+		  ifTrue: [ #visitor ]
+		  ifFalse: [ '*' , self packageName ]
+]
+
 { #category : #accessing }
 FmxMBVisitorTrait >> comment [
 
@@ -49,7 +57,7 @@ FmxMBVisitorTrait >> generateAcceptMethodIn: aFmxMBBehavior [
 	<generated>
 	^ aVisitor visit{1}: self' format: { aFmxMBBehavior fullName })
 		in: aFmxMBBehavior realClass
-		classified: '*' , self packageName
+		classified: self acceptMethodProtocol
 ]
 
 { #category : #'generation - common' }
@@ -66,9 +74,11 @@ FmxMBVisitorTrait >> generateVisitAndAcceptMethods [
 
 	(builder classes reject: [ :fmxMBClass |
 		 fmxMBClass isModelClass or: [ fmxMBClass isMetamodelClassGroup ] ])
-	, (builder traits select: #isMetamodelTrait) do: [ :fmxMBBehavior |
-		self generateVisitMethodFor: fmxMBBehavior.
-		self generateAcceptMethodIn: fmxMBBehavior ]
+	, (builder traits select: [ :fmxTrait |
+			 fmxTrait isMetamodelTrait and: [ fmxTrait isVisitorTrait not ] ])
+		do: [ :fmxMBBehavior |
+			self generateVisitMethodFor: fmxMBBehavior.
+			self generateAcceptMethodIn: fmxMBBehavior ]
 ]
 
 { #category : #'generation - common' }
@@ -108,7 +118,13 @@ FmxMBVisitorTrait >> initialize [
 
 	super initialize.
 	name := #TVisitor.
-	tag := 'Trait'
+	tag := 'Visitor'
+]
+
+{ #category : #testing }
+FmxMBVisitorTrait >> isVisitorTrait [
+
+	^ true
 ]
 
 { #category : #'generation - visit' }

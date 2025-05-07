@@ -44,3 +44,10 @@ FamixJavaAccess class >> annotation [
 	<generated>
 	^ self
 ]
+
+{ #category : #visitor }
+FamixJavaAccess >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaAccess: self
+]

@@ -12,6 +12,13 @@ FamixTClassMetrics classSide >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixTClassMetrics >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTClassMetrics: self
+]
+
 { #category : #metrics }
 FamixTClassMetrics >> numberOfAttributesInherited [
 	<FMProperty: #numberOfAttributesInherited type: #Number>

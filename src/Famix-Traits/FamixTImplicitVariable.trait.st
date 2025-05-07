@@ -49,6 +49,13 @@ FamixTImplicitVariable classSide >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixTImplicitVariable >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTImplicitVariable: self
+]
+
 { #category : #testing }
 FamixTImplicitVariable >> isImplicitVariable [
 
