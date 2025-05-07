@@ -91,8 +91,6 @@ BaselineOfFamix >> groups: spec [
 			     'PackageBlueprintTestResources' );
 		  group: 'BasicTraits' with: #( 'Famix-Traits' );
 		  group: 'EntitiesJava' with: #( 'Famix-Java-Entities' );
-		  group: 'EntitiesJavaWithVisitor'
-		  with: #( 'EntitiesJava' ); "This group is obsolete as visitor is now in the entities package"
 		  group: 'EntitiesJavaWithFusionner'
 		  with: #( 'Famix-Java-Fusionner' );
 		  group: 'ModelJava'
