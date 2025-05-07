@@ -35,6 +35,13 @@ FamixTTypeParameter classSide >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixTTypeParameter >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTTypeParameter: self
+]
+
 { #category : #adding }
 FamixTTypeParameter >> addConcretization: anObject [
 	<generated>

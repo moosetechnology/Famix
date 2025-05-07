@@ -26,3 +26,10 @@ FamixJavaParametricReference class >> annotation [
 	<generated>
 	^ self
 ]
+
+{ #category : #visitor }
+FamixJavaParametricReference >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaParametricReference: self
+]

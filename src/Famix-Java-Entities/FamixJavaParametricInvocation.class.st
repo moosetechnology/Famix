@@ -26,3 +26,10 @@ FamixJavaParametricInvocation class >> annotation [
 	<generated>
 	^ self
 ]
+
+{ #category : #visitor }
+FamixJavaParametricInvocation >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaParametricInvocation: self
+]

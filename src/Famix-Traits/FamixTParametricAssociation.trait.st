@@ -29,6 +29,13 @@ FamixTParametricAssociation classSide >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixTParametricAssociation >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTParametricAssociation: self
+]
+
 { #category : #adding }
 FamixTParametricAssociation >> addConcretization: anObject [
 	<generated>

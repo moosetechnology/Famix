@@ -44,7 +44,14 @@ Class {
 		'wildcard',
 		'parameterConcretization',
 		'concretization',
-		'variable'
+		'variable',
+		'typeParameter',
+		'entityTyping',
+		'parametricInheritance',
+		'parametricImplementation',
+		'parametricInvocation',
+		'parametricEntityTyping',
+		'parametricReference'
 	],
 	#classInstVars : [
 		'builder'

@@ -26,3 +26,10 @@ FamixJavaParametricEntityTyping class >> annotation [
 	<generated>
 	^ self
 ]
+
+{ #category : #visitor }
+FamixJavaParametricEntityTyping >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaParametricEntityTyping: self
+]

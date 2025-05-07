@@ -38,3 +38,10 @@ FamixJavaEntityTyping class >> annotation [
 	<generated>
 	^ self
 ]
+
+{ #category : #visitor }
+FamixJavaEntityTyping >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaEntityTyping: self
+]

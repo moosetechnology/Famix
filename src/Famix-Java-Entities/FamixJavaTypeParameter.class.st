@@ -41,3 +41,10 @@ FamixJavaTypeParameter class >> annotation [
 	<generated>
 	^ self
 ]
+
+{ #category : #visitor }
+FamixJavaTypeParameter >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaTypeParameter: self
+]

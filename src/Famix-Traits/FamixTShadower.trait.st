@@ -65,7 +65,6 @@ FamixTShadower >> shadowedEntity [
 
 	<generated>
 	<FMComment: 'Entity that is been shadowed by myself in my defining scope.'>
-	<derived>
 	^ shadowedEntity
 ]
 

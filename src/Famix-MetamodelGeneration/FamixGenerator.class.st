@@ -125,7 +125,11 @@ Class {
 		'tParameterConcretization',
 		'tShadowable',
 		'tShadower',
-		'tCanBeStub'
+		'tCanBeStub',
+		'tEntityTyping',
+		'tParametricAssociation',
+		'tTypeArgument',
+		'tTypeParameter'
 	],
 	#category : #'Famix-MetamodelGeneration'
 }
@@ -1644,7 +1648,7 @@ FamixGenerator >> defineRelations [
 			
 	((tShadowable property: #shadowingEntities)
 		comment: 'Entities shadowing me in my defining scope.')
-		-
+		-*
 	((tShadower property: #shadowedEntity)
 		comment: 'Entity that is been shadowed by myself in my defining scope.').
 		
