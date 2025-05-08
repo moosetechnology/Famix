@@ -97,10 +97,11 @@ MooseMSEImporterTest >> testOnePrimitiveTypeAndMethod [
 
 	| mooseModel |
 	mooseModel := self readMSEStream: '(
-(Moose-Core-Tests-Entities.PrimitiveType (id: 1) (name ''int''))
-(Moose-Core-Tests-Entities.Class (id: 2) (name ''ClassA''))
-(Moose-Core-Tests-Entities.Method (id: 3) (name ''methodA'') (declaredType (ref: 1)) (parentType (ref: 2)))
-)' readStream.
+	(Moose-Core-Tests-Entities.Class (id: 1) (name ''classA''))
+	(Moose-Core-Tests-Entities.Method (id: 2)
+		(name ''methodA'') (parentType (ref: 1)) (typing (ref: 3)))
+	(Moose-Core-Tests-Entities.PrimitiveType (id: 4) (name ''int''))
+	(Moose-Core-Tests-Entities.EntityTyping (id: 3) (declaredType (ref: 4))))' readStream.
 	self
 		assert: (mooseModel allPrimitiveTypes collect: #name) first
 		equals: 'int'.
