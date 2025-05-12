@@ -1,6 +1,6 @@
 Trait {
 	#name : #FamixTMethodMetrics,
-	#category : #'Famix-Traits-Traits'
+	#category : #'Famix-Traits-Behavioral'
 }
 
 { #category : #meta }
@@ -10,6 +10,13 @@ FamixTMethodMetrics classSide >> annotation [
 	<package: #'Famix-Traits'>
 	<generated>
 	^ self
+]
+
+{ #category : #visitor }
+FamixTMethodMetrics >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTMethodMetrics: self
 ]
 
 { #category : #metrics }

@@ -95,6 +95,13 @@ MooseAbstractGroup >> allImplicitVariables [
 ]
 
 { #category : #'*Famix-Traits' }
+MooseAbstractGroup >> allImports [
+	
+	<navigation: 'All imports'>
+	^self allUsing: FamixTImport 
+]
+
+{ #category : #'*Famix-Traits' }
 MooseAbstractGroup >> allInheritanceDefinitions [
 	<navigation: 'All inheritances'>
 	^ self allUsing: FamixTInheritance
@@ -105,6 +112,13 @@ MooseAbstractGroup >> allInvocations [
 	
 	<navigation: 'All invocations'>
 	^self allUsing: FamixTInvocation 
+]
+
+{ #category : #'*Famix-Traits' }
+MooseAbstractGroup >> allLambdas [
+
+	<navigation: 'All lambdas'>
+	^ self allUsing: FamixTLambda
 ]
 
 { #category : #'*Famix-Traits' }
@@ -134,9 +148,29 @@ MooseAbstractGroup >> allModelClasses [
 ]
 
 { #category : #'*Famix-Traits' }
+MooseAbstractGroup >> allModelImports [
+
+	<navigation: 'All model imports'>
+	^ self cacheAt: 'All model imports' ifAbsentPut: [ MooseGroup withAll: (self allImports reject: [ :each | each isStub ]) withDescription: 'All model imports' ]
+]
+
+{ #category : #'*Famix-Traits' }
+MooseAbstractGroup >> allModelLambdas [
+
+	<navigation: 'All model lambdas'>
+	^ self cacheAt: 'All model lambdas' ifAbsentPut: [ MooseGroup withAll: (self allLambdas reject: [ :each | each isStub ]) withDescription: 'All model lambdas' ]
+]
+
+{ #category : #'*Famix-Traits' }
 MooseAbstractGroup >> allModelMethods [
 	<navigation: 'All model methods'>
 	^ self cacheAt: 'All model methods' ifAbsentPut: [ self allMethods reject: [ :each | each isStub ] ]
+]
+
+{ #category : #'*Famix-Traits' }
+MooseAbstractGroup >> allModelModules [
+	<navigation: 'All model modules'>
+	^ self cacheAt: 'All model modules' ifAbsentPut: [ MooseGroup withAll: (self allModules reject: #isStub) withDescription: 'All model modules' ]
 ]
 
 { #category : #'*Famix-Traits' }
@@ -171,6 +205,12 @@ MooseAbstractGroup >> allModelStructuralEntities [
 MooseAbstractGroup >> allModelTypes [
 	<navigation: 'All model types'>
 	^ self cacheAt: 'All model types' ifAbsentPut: [ (self allTypes reject: [ :each | each isStub ]) description: 'All model types' ]
+]
+
+{ #category : #'*Famix-Traits' }
+MooseAbstractGroup >> allModules [
+	<navigation: 'All modules'>
+	^ self allUsing: FamixTModule
 ]
 
 { #category : #'*Famix-Traits' }

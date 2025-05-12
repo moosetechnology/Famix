@@ -12,6 +12,13 @@ FamixTLCOMMetrics classSide >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixTLCOMMetrics >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTLCOMMetrics: self
+]
+
 { #category : #'Famix-Extensions-metrics-support' }
 FamixTLCOMMetrics >> calculateLCOM2 [
 	

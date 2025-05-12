@@ -21,7 +21,7 @@ Trait {
 		'#declaringEntities => FMMany type: #FamixTWithExceptions opposite: #declaredExceptions',
 		'#throwingEntities => FMMany type: #FamixTWithExceptions opposite: #thrownExceptions'
 	],
-	#category : #'Famix-Traits-Traits'
+	#category : #'Famix-Traits-Exception'
 }
 
 { #category : #meta }
@@ -31,6 +31,13 @@ FamixTThrowable classSide >> annotation [
 	<package: #'Famix-Traits'>
 	<generated>
 	^ self
+]
+
+{ #category : #visitor }
+FamixTThrowable >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTThrowable: self
 ]
 
 { #category : #adding }

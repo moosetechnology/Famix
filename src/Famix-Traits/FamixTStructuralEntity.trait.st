@@ -27,9 +27,9 @@ FamixTStructuralEntity is the abstract superclass for basic data structure in th
 "
 Trait {
 	#name : #FamixTStructuralEntity,
-	#traits : 'FamixTAccessible + FamixTNamedEntity + FamixTSourceEntity + FamixTTypedEntity + TEntityMetaLevelDependency',
-	#classTraits : 'FamixTAccessible classTrait + FamixTNamedEntity classTrait + FamixTSourceEntity classTrait + FamixTTypedEntity classTrait + TEntityMetaLevelDependency classTrait',
-	#category : #'Famix-Traits-Traits'
+	#traits : 'FamixTAccessible + FamixTCanBeStub + FamixTNamedEntity + FamixTTypedEntity + TEntityMetaLevelDependency',
+	#classTraits : 'FamixTAccessible classTrait + FamixTCanBeStub classTrait + FamixTNamedEntity classTrait + FamixTTypedEntity classTrait + TEntityMetaLevelDependency classTrait',
+	#category : #'Famix-Traits-StructuralEntity'
 }
 
 { #category : #meta }
@@ -39,6 +39,13 @@ FamixTStructuralEntity classSide >> annotation [
 	<package: #'Famix-Traits'>
 	<generated>
 	^ self
+]
+
+{ #category : #visitor }
+FamixTStructuralEntity >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTStructuralEntity: self
 ]
 
 { #category : #testing }

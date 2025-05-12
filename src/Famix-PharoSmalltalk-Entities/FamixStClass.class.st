@@ -23,7 +23,7 @@
 ### Incoming dependencies
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `incomingReferences` | `FamixTReferenceable` | `referredType` | `FamixTReference` | References to this entity by other entities.|
+| `incomingReferences` | `FamixTReferenceable` | `referredEntity` | `FamixTReference` | References to this entity by other entities.|
 | `subInheritances` | `FamixTWithInheritances` | `superclass` | `FamixTInheritance` | Subinheritance relationships, i.e. known subclasses of this type.|
 
 ### Other
@@ -109,9 +109,12 @@ FamixStClass >> extendedMethods [
 
 { #category : #accessing }
 FamixStClass >> instanceSide [
+
 	^ self isClassSide
-		ifTrue: [ self mooseModel allClasses entityNamed: (self mooseName removeSuffix: '_class') asSymbol ]
-		ifFalse: [ self ]
+		  ifTrue: [
+			  self mooseModel allClasses entityNamed:
+				  (self mooseName withoutSuffix: '_class') asSymbol ]
+		  ifFalse: [ self ]
 ]
 
 { #category : #testing }
@@ -145,6 +148,7 @@ FamixStClass >> isLonelyWithin: aClassGroup [
 
 { #category : #testing }
 FamixStClass >> isTestCase [
+
 	<FMProperty: #isTestCase type: #Boolean>
 	<derived>
 	<FMComment: 'True if the method is considered as a Java test'>

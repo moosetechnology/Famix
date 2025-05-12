@@ -31,7 +31,8 @@ Class {
 	#instVars : [
 		'byName',
 		'elements',
-		'byType'
+		'byType',
+		'species'
 	],
 	#category : #'Moose-Core'
 }
@@ -125,6 +126,7 @@ MooseGroupStorage >> initialize: capacity [
 
 	byType := IdentityDictionary new: 24.
 	byName := IdentityHashTable new: capacity.
+	species := OrderedCollection.
 	elements := self species new: capacity
 ]
 
@@ -204,7 +206,13 @@ MooseGroupStorage >> sort: aBlock [
 { #category : #private }
 MooseGroupStorage >> species [
 
-	^ OrderedCollection
+	^ species
+]
+
+{ #category : #private }
+MooseGroupStorage >> species: aCollectionClass [
+	species := aCollectionClass.
+	^ elements := self species withAll: elements
 ]
 
 { #category : #private }

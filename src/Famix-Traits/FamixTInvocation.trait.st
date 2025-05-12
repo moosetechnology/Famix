@@ -37,7 +37,6 @@ will produce one invocation association from current method to a variable anObje
 
 | Name | Type | Default value | Comment |
 |---|
-| `isStub` | `Boolean` | false | Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.|
 | `signature` | `String` | nil | Signature of the message being sent|
 
 "
@@ -67,6 +66,13 @@ FamixTInvocation classSide >> annotationFamixInvocationGroup [
 	<generated>
 	<mooseGroup>
 	^ FamixInvocationGroup
+]
+
+{ #category : #visitor }
+FamixTInvocation >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTInvocation: self
 ]
 
 { #category : #adding }
@@ -159,6 +165,22 @@ FamixTInvocation >> getReceivingFamixClass [
 			tmpReceiver isSuper ifTrue: [ 
 				^ belongsTo superclass ifNil: [ belongsTo ] ] ]
 		ifFalse: [ ^ tmpReceiver ]
+]
+
+{ #category : #accessing }
+FamixTInvocation >> invokedEntity [
+	"This method returns only one candidate if there is one, or raises an error if there is more or less than one candidate."
+
+	self candidates size = 1 ifFalse: [
+		self error: '1 candidate was expected but ' , self candidates size asString , ' candidates are present in this invocation.' ].
+
+	^ self candidates anyOne
+]
+
+{ #category : #accessing }
+FamixTInvocation >> invokedEntity: anEntity [
+
+	^ self candidates: { anEntity }
 ]
 
 { #category : #testing }

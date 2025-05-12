@@ -30,11 +30,25 @@ FamixTModule classSide >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixTModule >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTModule: self
+]
+
 { #category : #accessing }
 FamixTModule >> addModuleEntity: anObject [
 
 	moduleEntities add: anObject
 
+]
+
+{ #category : #testing }
+FamixTModule >> isModule [
+
+	<generated>
+	^ true
 ]
 
 { #category : #accessing }

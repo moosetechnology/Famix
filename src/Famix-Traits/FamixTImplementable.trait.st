@@ -17,7 +17,7 @@ Trait {
 	#instVars : [
 		'#implementations => FMMany type: #FamixTImplementation opposite: #interface'
 	],
-	#category : #'Famix-Traits-Traits'
+	#category : #'Famix-Traits-Implementation'
 }
 
 { #category : #meta }
@@ -27,6 +27,13 @@ FamixTImplementable classSide >> annotation [
 	<package: #'Famix-Traits'>
 	<generated>
 	^ self
+]
+
+{ #category : #visitor }
+FamixTImplementable >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTImplementable: self
 ]
 
 { #category : #adding }

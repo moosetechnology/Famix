@@ -16,7 +16,7 @@ A type can have multiple subtypes or supertypes. These are modelled by means of 
 ### Incoming dependencies
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `incomingReferences` | `FamixTReferenceable` | `referredType` | `FamixTReference` | References to this entity by other entities.|
+| `incomingReferences` | `FamixTReferenceable` | `referredEntity` | `FamixTReference` | References to this entity by other entities.|
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
@@ -40,8 +40,8 @@ Trait {
 		'#typeContainer => FMOne type: #FamixTWithTypes opposite: #types',
 		'#typedEntities => FMMany type: #FamixTTypedEntity opposite: #declaredType'
 	],
-	#traits : 'FamixTNamedEntity + FamixTReferenceable + FamixTSourceEntity + TEntityMetaLevelDependency',
-	#classTraits : 'FamixTNamedEntity classTrait + FamixTReferenceable classTrait + FamixTSourceEntity classTrait + TEntityMetaLevelDependency classTrait',
+	#traits : 'FamixTCanBeStub + FamixTNamedEntity + FamixTReferenceable + TEntityMetaLevelDependency',
+	#classTraits : 'FamixTCanBeStub classTrait + FamixTNamedEntity classTrait + FamixTReferenceable classTrait + TEntityMetaLevelDependency classTrait',
 	#category : #'Famix-Traits-Type'
 }
 
@@ -59,6 +59,13 @@ FamixTType classSide >> annotationFamixTypeGroup [
 	<generated>
 	<mooseGroup>
 	^ FamixTypeGroup
+]
+
+{ #category : #visitor }
+FamixTType >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTType: self
 ]
 
 { #category : #adding }
@@ -89,7 +96,7 @@ FamixTType >> mooseNameOn: aStream [
 	self typeContainer
 		ifNotNil: [ :parent |
 			parent mooseNameOn: aStream.
-			aStream nextPutAll: '::' ].
+			aStream nextPutAll: '.' ].
 	self name ifNotNil: [ :n | aStream nextPutAll: n ]
 ]
 

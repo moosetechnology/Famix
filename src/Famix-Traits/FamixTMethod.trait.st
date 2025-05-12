@@ -73,6 +73,13 @@ FamixTMethod classSide >> annotationFamixMethodGroup [
 	^ FamixMethodGroup
 ]
 
+{ #category : #visitor }
+FamixTMethod >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTMethod: self
+]
+
 { #category : #accessing }
 FamixTMethod >> firstOverridingMethods [
 
@@ -81,6 +88,11 @@ FamixTMethod >> firstOverridingMethods [
 
 	self parentType addFirstMethodsOverriding: self in: overridingMethods.
 	^ overridingMethods
+]
+
+{ #category : #asserting }
+FamixTMethod >> isAccessor [
+	^ self isSetter or: [ self isGetter ]
 ]
 
 { #category : #testing }

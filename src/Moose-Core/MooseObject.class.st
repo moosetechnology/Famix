@@ -240,15 +240,6 @@ MooseObject >> attributeAt: name put: value [
 ]
 
 { #category : #accessing }
-MooseObject >> bookmarkAs: aString [
-	"Adds myself in the cache of the mooseModel and mark it as a bookmark"
-	| group |
-	group := self asMooseGroup description: aString.
-	group isBookmarked: true.
-	^ self mooseModel add: group asBookmark: aString
-]
-
-{ #category : #accessing }
 MooseObject >> cacheAt: name ifAbsent: aBlock [
 	^ cache at: name ifAbsent: [ aBlock value ]
 ]
@@ -355,16 +346,6 @@ MooseObject >> inspectorToString [
 	^ String streamContents: [ :s | self displayStringOn: s ]
 ]
 
-{ #category : #accessing }
-MooseObject >> isBookmarked [
-	^ self propertyNamed: #isBookmarked ifNil: [false]
-]
-
-{ #category : #accessing }
-MooseObject >> isBookmarked: aBoolean [
-	self propertyNamed: #isBookmarked put: aBoolean
-]
-
 { #category : #testing }
 MooseObject >> isMooseModel [
 	^ false
@@ -445,6 +426,12 @@ MooseObject >> mooseNameOn: aStream [
 	self mooseID
 		ifNil: [ aStream nextPutAll: 'nil mooseID!!!' ]
 		ifNotNil: [ self name ifNil: [ aStream print: self mooseID ] ifNotNil: [ aStream nextPutAll: self name ] ]
+]
+
+{ #category : #printing }
+MooseObject >> mooseNameWithDots [
+	self deprecated: ':: has been replaced by . in mooseName. This method is now useless'.
+	^ self mooseName ifNotNil: [ :mName | mName copyReplaceAll: '::' with: '.' ]
 ]
 
 { #category : #accessing }

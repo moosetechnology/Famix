@@ -27,6 +27,13 @@ FamixTWithTypeAliases classSide >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixTWithTypeAliases >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTWithTypeAliases: self
+]
+
 { #category : #accessing }
 FamixTWithTypeAliases >> addTypeAlias: anObject [
 	typeAliases add: anObject

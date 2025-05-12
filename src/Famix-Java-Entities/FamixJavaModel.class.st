@@ -36,13 +36,13 @@ FamixJavaModel class >> importingContextClass [
 FamixJavaModel >> inferPackageParentsBasedOnNames [
 	<menuItem: 'Infer Namespace Parents Based on Names' category: 'Utilities'>
 	| parent parentNameSize currentPosition parentName package |
+	self deprecated: ':: has been replaced by . in mooseName. inferPackageParentsBasedOnNames is now useless'.
 	package := self allPackages.
 	MooseCustomTask new
 		with: [ :task | 
 			package
 				do: [ :each | 
 					currentPosition := 1.
-					each name: (each name copyReplaceAll: '.' with: '::').
 					[ currentPosition := each name indexOf: $: startingAt: currentPosition.
 					currentPosition isZero ]
 						whileFalse: [ parentName := (each name copyFrom: 1 to: currentPosition - 1) asSymbol.

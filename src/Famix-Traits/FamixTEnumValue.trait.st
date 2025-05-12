@@ -47,7 +47,7 @@ Trait {
 	],
 	#traits : 'FamixTStructuralEntity',
 	#classTraits : 'FamixTStructuralEntity classTrait',
-	#category : #'Famix-Traits-EnumValue'
+	#category : #'Famix-Traits-Enum'
 }
 
 { #category : #meta }
@@ -57,6 +57,13 @@ FamixTEnumValue classSide >> annotation [
 	<package: #'Famix-Traits'>
 	<generated>
 	^ self
+]
+
+{ #category : #visitor }
+FamixTEnumValue >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTEnumValue: self
 ]
 
 { #category : #testing }

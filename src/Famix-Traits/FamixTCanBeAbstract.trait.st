@@ -12,7 +12,7 @@ Trait {
 	#instVars : [
 		'#isAbstract => FMProperty defaultValue: false'
 	],
-	#category : #'Famix-Traits-Traits'
+	#category : #'Famix-Traits-PrimitiveProperties'
 }
 
 { #category : #meta }
@@ -22,6 +22,13 @@ FamixTCanBeAbstract classSide >> annotation [
 	<package: #'Famix-Traits'>
 	<generated>
 	^ self
+]
+
+{ #category : #visitor }
+FamixTCanBeAbstract >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTCanBeAbstract: self
 ]
 
 { #category : #accessing }

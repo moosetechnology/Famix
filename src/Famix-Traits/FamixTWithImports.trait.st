@@ -5,7 +5,7 @@
 ### Outgoing dependencies
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `outgoingImports` | `FamixTWithImports` | `importingEntity` | `FamixTImport` | |
+| `imports` | `FamixTWithImports` | `importingEntity` | `FamixTImport` | |
 
 
 
@@ -13,9 +13,9 @@
 Trait {
 	#name : #FamixTWithImports,
 	#instVars : [
-		'#outgoingImports => FMMany type: #FamixTImport opposite: #importingEntity'
+		'#imports => FMMany type: #FamixTImport opposite: #importingEntity'
 	],
-	#category : #'Famix-Traits-Traits'
+	#category : #'Famix-Traits-Import'
 }
 
 { #category : #meta }
@@ -27,24 +27,31 @@ FamixTWithImports classSide >> annotation [
 	^ self
 ]
 
-{ #category : #adding }
-FamixTWithImports >> addOutgoingImport: anObject [
+{ #category : #visitor }
+FamixTWithImports >> accept: aVisitor [
+
 	<generated>
-	^ self outgoingImports add: anObject
+	^ aVisitor visitFamixTWithImports: self
+]
+
+{ #category : #adding }
+FamixTWithImports >> addImport: anObject [
+	<generated>
+	^ self imports add: anObject
 ]
 
 { #category : #accessing }
-FamixTWithImports >> outgoingImports [
-	"Relation named: #outgoingImports type: #FamixTImport opposite: #importingEntity"
+FamixTWithImports >> imports [
+	"Relation named: #imports type: #FamixTImport opposite: #importingEntity"
 
 	<generated>
 	<derived>
-	^ outgoingImports
+	^ imports
 ]
 
 { #category : #accessing }
-FamixTWithImports >> outgoingImports: anObject [
+FamixTWithImports >> imports: anObject [
 
 	<generated>
-	outgoingImports value: anObject
+	imports value: anObject
 ]

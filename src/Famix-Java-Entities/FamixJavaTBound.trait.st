@@ -31,6 +31,13 @@ FamixJavaTBound classSide >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixJavaTBound >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaTBound: self
+]
+
 { #category : #adding }
 FamixJavaTBound >> addLowerBoundedWildcard: anObject [
 	<generated>

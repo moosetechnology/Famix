@@ -27,6 +27,13 @@ FamixTPackageable classSide >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixTPackageable >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTPackageable: self
+]
+
 { #category : #accessing }
 FamixTPackageable >> isExtension [
 	^ (self belongsTo atScope: FamixTPackage) ~= (self atScope: FamixTPackage)

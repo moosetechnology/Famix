@@ -15,7 +15,7 @@ Trait {
 	#instVars : [
 		'#declaredSourceLanguage => FMOne type: #FamixTSourceLanguage opposite: #sourcedEntities'
 	],
-	#category : #'Famix-Traits-Traits'
+	#category : #'Famix-Traits-SourceLanguage'
 }
 
 { #category : #meta }
@@ -25,6 +25,13 @@ FamixTWithSourceLanguages classSide >> annotation [
 	<package: #'Famix-Traits'>
 	<generated>
 	^ self
+]
+
+{ #category : #visitor }
+FamixTWithSourceLanguages >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTWithSourceLanguages: self
 ]
 
 { #category : #accessing }

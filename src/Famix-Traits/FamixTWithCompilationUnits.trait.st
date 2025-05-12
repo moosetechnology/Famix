@@ -15,7 +15,7 @@ Trait {
 	#instVars : [
 		'#compilationUnit => FMOne type: #FamixTCompilationUnit opposite: #compilationUnitOwner'
 	],
-	#category : #'Famix-Traits-Traits'
+	#category : #'Famix-Traits-CompilationUnit'
 }
 
 { #category : #meta }
@@ -25,6 +25,13 @@ FamixTWithCompilationUnits classSide >> annotation [
 	<package: #'Famix-Traits'>
 	<generated>
 	^ self
+]
+
+{ #category : #visitor }
+FamixTWithCompilationUnits >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTWithCompilationUnits: self
 ]
 
 { #category : #accessing }

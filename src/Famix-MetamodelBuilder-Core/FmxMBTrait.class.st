@@ -13,7 +13,9 @@ FmxMBTrait >> acceptVisitor: aVisitor [
 
 { #category : #accessing }
 FmxMBTrait >> allTraitGeneralizations [
-	^ (self traitGeneralizations flatCollect: [ :each | {each} , each allTraitGeneralizations ]) asSet
+
+	^ (self traitGeneralizations flatCollect: [ :each |
+		   { each } , each allTraitGeneralizations ]) removeDuplicates
 ]
 
 { #category : #accessing }
@@ -102,6 +104,12 @@ FmxMBTrait >> generateRemotes [
 FmxMBTrait >> isMetamodelTrait [
 
 	^ true
+]
+
+{ #category : #testing }
+FmxMBTrait >> isVisitorTrait [
+
+	^ false
 ]
 
 { #category : #'name conversion' }

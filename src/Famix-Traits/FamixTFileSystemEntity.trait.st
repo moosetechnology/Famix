@@ -8,6 +8,12 @@
 | `parentFolder` | `FamixTFileSystemEntity` | `childrenFileSystemEntities` | `FamixTFolder` | Folder entity containing this file.|
 
 
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+|---|
+| `name` | `String` | nil | Basic name of the entity, not full reference.|
 
 "
 Trait {
@@ -15,6 +21,8 @@ Trait {
 	#instVars : [
 		'#parentFolder => FMOne type: #FamixTFolder opposite: #childrenFileSystemEntities'
 	],
+	#traits : 'FamixTNamedEntity',
+	#classTraits : 'FamixTNamedEntity classTrait',
 	#category : #'Famix-Traits-File'
 }
 
@@ -43,6 +51,13 @@ FamixTFileSystemEntity classSide >> named: aName filedIn: aFolder [
 { #category : #constants }
 FamixTFileSystemEntity classSide >> systemFolderSeparatorString [
 	^ DiskStore delimiter asString 
+]
+
+{ #category : #visitor }
+FamixTFileSystemEntity >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTFileSystemEntity: self
 ]
 
 { #category : #accessing }

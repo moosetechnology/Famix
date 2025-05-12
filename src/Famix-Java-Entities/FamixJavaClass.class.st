@@ -18,15 +18,15 @@
 ### Outgoing dependencies
 | Relation | Origin | Opposite | Type | Comment |
 |---|
+| `imports` | `FamixTWithImports` | `importingEntity` | `FamixTImport` | |
 | `interfaceImplementations` | `FamixTCanImplement` | `implementingClass` | `FamixTImplementation` | Implementation relationships|
-| `outgoingImports` | `FamixTWithImports` | `importingEntity` | `FamixTImport` | |
 | `superInheritances` | `FamixTWithInheritances` | `subclass` | `FamixTInheritance` | Superinheritance relationships, i.e. known superclasses of this type.|
 
 ### Incoming dependencies
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `incomingImports` | `FamixTImportable` | `importedEntity` | `FamixTImport` | List of imports of this entity|
-| `incomingReferences` | `FamixTReferenceable` | `referredType` | `FamixTReference` | References to this entity by other entities.|
+| `incomingReferences` | `FamixTReferenceable` | `referredEntity` | `FamixTReference` | References to this entity by other entities.|
 | `subInheritances` | `FamixTWithInheritances` | `superclass` | `FamixTInheritance` | Subinheritance relationships, i.e. known subclasses of this type.|
 
 ### Other
@@ -67,6 +67,13 @@ FamixJavaClass class >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixJavaClass >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaClass: self
+]
+
 { #category : #'Famix-Extensions-metrics-support' }
 FamixJavaClass >> accessedAttributes [
 	
@@ -101,6 +108,13 @@ FamixJavaClass >> incomingAccesses [
 	^ self 
 		cacheAt: #incomingAccesses
 		ifAbsentPut: [ attributes flatCollect: [ :each | each incomingAccesses ] ]
+]
+
+{ #category : #testing }
+FamixJavaClass >> inheritsFromTestCase [
+	"In the past we checked for the one from junit, but Apache also have its own way to test with a superclass named TestCase."
+
+	^ self superclassHierarchy anySatisfy: [ :each | each name = #TestCase ]
 ]
 
 { #category : #testing }
@@ -154,6 +168,24 @@ FamixJavaClass >> isInheritedBy: anInheritance [
 	^anInheritance superclass == self
 ]
 
+{ #category : #testing }
+FamixJavaClass >> isJUnit4TestCase [
+
+	<FMProperty: #isJUnit4TestCase type: #Boolean>
+	<derived>
+	<FMComment: 'True if the method is considered as a Junit 4 Java test'>
+	^ self methods anySatisfy: [ :m | m isJUnit4Test ]
+]
+
+{ #category : #testing }
+FamixJavaClass >> isTestCase [
+
+	<FMProperty: #isTestCase type: #Boolean>
+	<derived>
+	<FMComment: 'True if the method is considered as a Java test'>
+	^ self inheritsFromTestCase or: [ self isJUnit4TestCase ]
+]
+
 { #category : #private }
 FamixJavaClass >> lookUpInInterfaces: aMethodSignature [
 
@@ -180,7 +212,7 @@ FamixJavaClass >> mooseNameOn: aStream [
 		parent mooseNameOn: aStream.
 		self isInnerClass
 			ifTrue: [ aStream nextPut: $$ ]
-			ifFalse: [ aStream nextPutAll: '::' ] ].
+			ifFalse: [ aStream nextPutAll: '.' ] ].
 	self name ifNotNil: [ :n | aStream nextPutAll: n ]
 ]
 

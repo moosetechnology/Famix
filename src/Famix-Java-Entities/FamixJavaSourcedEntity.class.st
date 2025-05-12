@@ -8,12 +8,6 @@
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
 
 
-## Properties
-======================
-
-| Name | Type | Default value | Comment |
-|---|
-| `isStub` | `Boolean` | false | Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.|
 
 "
 Class {
@@ -39,6 +33,13 @@ FamixJavaSourcedEntity class >> isAbstract [
 
 	<generated>
 	^ self == FamixJavaSourcedEntity
+]
+
+{ #category : #visitor }
+FamixJavaSourcedEntity >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaSourcedEntity: self
 ]
 
 { #category : #'Famix-SourceAnchor' }

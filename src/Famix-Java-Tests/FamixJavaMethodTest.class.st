@@ -209,16 +209,6 @@ FamixJavaMethodTest >> testIsSetter [
 ]
 
 { #category : #tests }
-FamixJavaMethodTest >> testIsStubWhenParentIsStub [
-	| aClass |
-	aClass := FamixJavaClass new.
-	method parentType: aClass.
-	aClass isStub: true.
-	self assert: aClass isStub.
-	self assert: method isStub
-]
-
-{ #category : #tests }
 FamixJavaMethodTest >> testOverriddenMethod [
 
 	| signature overriddenMethod localClass superclass |

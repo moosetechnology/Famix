@@ -17,7 +17,7 @@ FamixTGenericParameterType represents generic parameters in an FamixJavaParametr
 ### Incoming dependencies
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `incomingReferences` | `FamixTReferenceable` | `referredType` | `FamixTReference` | References to this entity by other entities.|
+| `incomingReferences` | `FamixTReferenceable` | `referredEntity` | `FamixTReference` | References to this entity by other entities.|
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
@@ -54,6 +54,13 @@ FamixTGenericParameterType classSide >> annotation [
 	<package: #'Famix-Traits'>
 	<generated>
 	^ self
+]
+
+{ #category : #visitor }
+FamixTGenericParameterType >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTGenericParameterType: self
 ]
 
 { #category : #adding }

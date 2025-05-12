@@ -50,6 +50,13 @@ FamixTIndexedFileNavigation classSide >> fileName: aString startPos: anInteger e
 		yourself
 ]
 
+{ #category : #visitor }
+FamixTIndexedFileNavigation >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTIndexedFileNavigation: self
+]
+
 { #category : #private }
 FamixTIndexedFileNavigation >> countNumberOfLinesRuturnsFrom: aStream from: start to: end [
 	"Here is a speedup version of the #lineCount method for the IndexedFileAnchors.

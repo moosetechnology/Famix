@@ -21,7 +21,6 @@
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `declaredType` | `FamixTTypedEntity` | `typedEntities` | `FamixTType` | Type of the entity, if any|
-| `receivingInvocations` | `FamixTInvocationsReceiver` | `receiver` | `FamixTInvocation` | List of invocations performed on this entity (considered as the receiver)|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
 
 
@@ -41,17 +40,24 @@
 "
 Class {
 	#name : #FamixJavaAttribute,
-	#superclass : #FamixJavaNamedEntity,
-	#traits : 'FamixJavaTCanBeTransient + FamixJavaTCanBeVolatile + FamixTAttribute + FamixTCanBeClassSide + FamixTCanBeFinal + FamixTHasVisibility + FamixTInvocationsReceiver + FamixTWithComments',
-	#classTraits : 'FamixJavaTCanBeTransient classTrait + FamixJavaTCanBeVolatile classTrait + FamixTAttribute classTrait + FamixTCanBeClassSide classTrait + FamixTCanBeFinal classTrait + FamixTHasVisibility classTrait + FamixTInvocationsReceiver classTrait + FamixTWithComments classTrait',
+	#superclass : #FamixJavaVariable,
+	#traits : 'FamixJavaTCanBeTransient + FamixJavaTCanBeVolatile + FamixTAttribute + FamixTCanBeClassSide + FamixTCanBeFinal + FamixTHasVisibility + FamixTWithComments',
+	#classTraits : 'FamixJavaTCanBeTransient classTrait + FamixJavaTCanBeVolatile classTrait + FamixTAttribute classTrait + FamixTCanBeClassSide classTrait + FamixTCanBeFinal classTrait + FamixTHasVisibility classTrait + FamixTWithComments classTrait',
 	#category : #'Famix-Java-Entities-Entities'
 }
 
 { #category : #meta }
 FamixJavaAttribute class >> annotation [
 
-	<FMClass: #Attribute super: #FamixJavaNamedEntity>
+	<FMClass: #Attribute super: #FamixJavaVariable>
 	<package: #'Famix-Java-Entities'>
 	<generated>
 	^ self
+]
+
+{ #category : #visitor }
+FamixJavaAttribute >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaAttribute: self
 ]

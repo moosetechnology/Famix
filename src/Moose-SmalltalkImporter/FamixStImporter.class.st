@@ -64,7 +64,7 @@ FamixStImporter >> basicClassCreation: aClass [
 
 	| class anchor |
 	class := classes at: aClass put: self factory classEntity new.
-	class name: (aClass name replaceAll: Character space with: $_).
+	class name: (aClass name asString replaceAll: Character space with: $_) asSymbol.
 	class stub: true.
 	self importingContext shouldImportNamespace ifTrue: [ class typeContainer: (self ensureNamespace: aClass environment) ].
 	anchor := self factory anchor new
@@ -94,20 +94,21 @@ FamixStImporter >> checkAbstractClass: class [
 ]
 
 { #category : #'private-entity-creation' }
-FamixStImporter >> createAnnotationType: aPragmaNode [ 
+FamixStImporter >> createAnnotationType: aPragmaNode [
+
 	| pragmaAnnotationType |
 	pragmaAnnotationType := annotationTypes
-		at: aPragmaNode selector
-		put: self factory annotationType new.
+		                        at: aPragmaNode selector
+		                        put: self factory annotationType new.
 	pragmaAnnotationType name: aPragmaNode selector.
 	aPragmaNode selector isUnary ifFalse: [
-		(aPragmaNode selector piecesCutWhere: [:a :b | a = $: ]) do: [ :each | 
+		(aPragmaNode selector piecesCutWhere: [ :a :b | a = $: ]) do: [
+			:each |
 			| attribute |
 			attribute := self factory annotationTypeAttribute new.
-			attribute name: (each removeSuffix: ':').
+			attribute name: (each withoutSuffix: ':').
 			attribute parentAnnotationType: pragmaAnnotationType.
-			self addEntity: attribute
-			] ].
+			self addEntity: attribute ] ].
 	^ pragmaAnnotationType
 ]
 
@@ -161,9 +162,13 @@ FamixStImporter >> createClass: aClass [
 
 	(self importingContext shouldImportComment and: [ aClass hasComment ]) ifTrue: [
 		(self importingContext shouldMergeClassAndMetaclass and: [ aClass isMeta ]) ifFalse: [
-			| comment |
+			| comment anchor |
 			comment := self addEntity: self factory comment new.
-			comment content: aClass comment asString.
+			anchor := self factory sourceTextAnchor new
+				          element: comment;
+				          source: aClass comment asString;
+				          yourself.
+			comment sourceAnchor: anchor.
 			comment commentedEntity: class ] ].
 
 	^ class

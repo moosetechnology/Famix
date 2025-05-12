@@ -43,7 +43,7 @@ FmxMBTypedProperty >> generateGetterIn: aClassOrTrait [
 	pragmaFormat := self defaultValue ifNil: [ '<FMProperty: #{1} type: #{2}>' ] 
 											   ifNotNil: [ '<FMProperty: #{1} type: #{2} defaultValue: {3}>' ]. 
 	propertyDefinition := pragmaFormat
-		format: { self name. self propertyType. self defaultValue }.
+		format: { self name. self propertyType. self defaultValue printString}.
 
 	commentDefinition := self comment
 		ifNotEmpty: [ '<FMComment: {1}>' format: { self comment printString } ].
@@ -58,7 +58,7 @@ FmxMBTypedProperty >> generateGetterIn: aClassOrTrait [
 			ifNotEmpty: [ s tab; nextPutAll: commentDefinition; cr].
 		s tab; nextPutAll: '^ '; nextPutAll: self name.
 		self defaultValue ifNotNil: [
-			s nextPutAll: (' ifNil: [ {1} := {2} ]' format: { self name. self defaultValue }) ] ].
+			s nextPutAll: (' ifNil: [ {1} := {2} ]' format: { self name. self defaultValue printString }) ] ].
 
 	self builder environment compile: methodSource in: aClassOrTrait classified: 'accessing'.	
 	

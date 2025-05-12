@@ -16,7 +16,7 @@
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `generics` | `FamixTConcreteParameterType` | `concreteParameter` | `FamixTParameterConcretization` | Generic relationships, i.e. known genericParameter of this type.|
-| `incomingReferences` | `FamixTReferenceable` | `referredType` | `FamixTReference` | References to this entity by other entities.|
+| `incomingReferences` | `FamixTReferenceable` | `referredEntity` | `FamixTReference` | References to this entity by other entities.|
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
@@ -52,6 +52,13 @@ FamixJavaType class >> annotation [
 	<package: #'Famix-Java-Entities'>
 	<generated>
 	^ self
+]
+
+{ #category : #visitor }
+FamixJavaType >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaType: self
 ]
 
 { #category : #'Famix-Extensions' }
@@ -125,19 +132,6 @@ FamixJavaType >> isInterface [
 ]
 
 { #category : #testing }
-FamixJavaType >> isJUnit3TestCase [
-	^ self superclassHierarchy anySatisfy: [:each | each mooseName =  #'junit::framework::TestCase']
-]
-
-{ #category : #testing }
-FamixJavaType >> isJUnit4TestCase [
-	<FMProperty: #isJUnit4TestCase type: #Boolean>
-	<derived>
-	<FMComment: 'True if the method is considered as a Junit 4 Java test'>
-	^ self methods anySatisfy: [ :m | m isJUnit4Test ]
-]
-
-{ #category : #testing }
 FamixJavaType >> isLonelyWithin: aClassGroup [
 	^ ( self subclassHierarchyGroup intersection: aClassGroup ) isEmpty and: [
 		( self superclassHierarchyGroup intersection: aClassGroup ) isEmpty ]
@@ -146,14 +140,6 @@ FamixJavaType >> isLonelyWithin: aClassGroup [
 { #category : #testing }
 FamixJavaType >> isParameterType [
 	^ false
-]
-
-{ #category : #testing }
-FamixJavaType >> isTestCase [
-	<FMProperty: #isTestCase type: #Boolean>
-	<derived>
-	<FMComment: 'True if the method is considered as a Java test'>
-	^ self isJUnit3TestCase or: [ self isJUnit4TestCase ] 
 ]
 
 { #category : #'Famix-Extensions-operations' }
@@ -185,14 +171,14 @@ FamixJavaType >> parentScope [
 
 { #category : #printing }
 FamixJavaType >> printOn: aStream [
+
 	self name ifNotNil: [ aStream nextPutAll: self name ].
-	self typeContainer
-		ifNotNil: [ :parent | 
-			aStream nextPutAll: ' in '.
-			parent mooseNameOn: aStream ].
+	self typeContainer ifNotNil: [ :parent |
+		aStream nextPutAll: ' in '.
+		parent mooseNameOn: aStream ].
 	aStream
 		nextPutAll: ' (';
-		nextPutAll: (self class name removePrefix: 'FamixJava');
+		nextPutAll: (self class name withoutPrefix: 'FamixJava');
 		nextPut: $)
 ]
 

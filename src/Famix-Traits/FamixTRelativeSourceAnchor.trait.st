@@ -55,6 +55,13 @@ FamixTRelativeSourceAnchor classSide >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixTRelativeSourceAnchor >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTRelativeSourceAnchor: self
+]
+
 { #category : #accessing }
 FamixTRelativeSourceAnchor >> completeText [
 	^ self relatedAnchor sourceText

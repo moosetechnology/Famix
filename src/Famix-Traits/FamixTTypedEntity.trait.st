@@ -27,6 +27,13 @@ FamixTTypedEntity classSide >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixTTypedEntity >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTTypedEntity: self
+]
+
 { #category : #accessing }
 FamixTTypedEntity >> declaredType [
 	"Relation named: #declaredType type: #FamixTType opposite: #typedEntities"

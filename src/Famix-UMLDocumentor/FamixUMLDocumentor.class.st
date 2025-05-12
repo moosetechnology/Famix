@@ -36,7 +36,8 @@ Class {
 		'umlModel',
 		'modelColors',
 		'onlyModelClasses',
-		'excludeModelClasses'
+		'excludeModelClasses',
+		'shouldGenerateProperties'
 	],
 	#category : #'Famix-UMLDocumentor-Generation'
 }
@@ -190,11 +191,11 @@ FamixUMLDocumentor >> generateInheritance: fmClass uml: umlClass [
 FamixUMLDocumentor >> generateProperties: aFMClass uml: umlClass [
 	"accept FM3Object as a primitive type (#isRoot = true)"
 
-	aFMClass properties do: [ :prop |
-		(prop type isPrimitive or: [  prop type isRoot ])
-			ifTrue: [umlClass addProperty: (FamixUMLProperty from: prop) ]
-	]
+	shouldGenerateProperties ifFalse: [ ^ self ].
 
+	aFMClass properties do: [ :prop |
+		(prop type isPrimitive or: [ prop type isRoot ]) ifTrue: [
+			umlClass addProperty: (FamixUMLProperty from: prop) ] ]
 ]
 
 { #category : #generating }
@@ -232,13 +233,15 @@ FamixUMLDocumentor >> generateSuperClasses: aFM3Class [
 
 { #category : #initialization }
 FamixUMLDocumentor >> initialize [
+
 	super initialize.
 
 	"3 seems like a good default maximum size for the models we want to document"
 	modelColors := OrderedCollection new: 3.
 	umlModel := Dictionary new.
-	excludeModelClasses := #().
+	excludeModelClasses := #(  ).
 	self beWithoutStubs.
+	shouldGenerateProperties := true
 ]
 
 { #category : #accessing }
@@ -270,6 +273,12 @@ FamixUMLDocumentor >> model: aModel color: aColor [
 FamixUMLDocumentor >> modelColors [
 
 	^ modelColors
+]
+
+{ #category : #api }
+FamixUMLDocumentor >> noProperties [
+
+	shouldGenerateProperties := false
 ]
 
 { #category : #api }

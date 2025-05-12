@@ -7,13 +7,12 @@
 |---|
 | `commentedEntity` | `FamixTComment` | `comments` | `FamixTWithComments` | Source code commented by the comment|
 
-
-## Properties
-======================
-
-| Name | Type | Default value | Comment |
+### Other
+| Relation | Origin | Opposite | Type | Comment |
 |---|
-| `content` | `String` | nil | Content of the comment as a String|
+| `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
+
+
 
 "
 Class {

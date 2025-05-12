@@ -15,7 +15,7 @@ Trait {
 	#instVars : [
 		'#incomingImports => FMMany type: #FamixTImport opposite: #importedEntity'
 	],
-	#category : #'Famix-Traits-Traits'
+	#category : #'Famix-Traits-Import'
 }
 
 { #category : #meta }
@@ -25,6 +25,13 @@ FamixTImportable classSide >> annotation [
 	<package: #'Famix-Traits'>
 	<generated>
 	^ self
+]
+
+{ #category : #visitor }
+FamixTImportable >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTImportable: self
 ]
 
 { #category : #adding }

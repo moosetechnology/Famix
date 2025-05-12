@@ -36,6 +36,13 @@ FamixJavaContainerEntity class >> isAbstract [
 	^ self == FamixJavaContainerEntity
 ]
 
+{ #category : #visitor }
+FamixJavaContainerEntity >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaContainerEntity: self
+]
+
 { #category : #adding }
 FamixJavaContainerEntity >> addClass: aClass [
 	
@@ -46,9 +53,4 @@ FamixJavaContainerEntity >> addClass: aClass [
 FamixJavaContainerEntity >> addInterface: anInterface [
 	
 	types add: anInterface
-]
-
-{ #category : #'Famix-Java' }
-FamixJavaContainerEntity >> mooseNameWithDots [
-	^ self mooseName ifNotNil: [ :mName |  '.' join: (mName substrings: '::') ]
 ]

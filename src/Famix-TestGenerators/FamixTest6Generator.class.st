@@ -42,5 +42,6 @@ FamixTest6Generator >> defineProperties [
 	super defineProperties.
 	bacon property: #isFood type: #Boolean defaultValue: true.
 	bacon property: #eggs type: #Number defaultValue: 12.
-	spam property: #isSomething type: #Boolean defaultValue: false
+	spam property: #isSomething type: #Boolean defaultValue: false.
+	bacon property: #brand type: #String defaultValue: ''
 ]

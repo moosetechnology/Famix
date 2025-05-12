@@ -12,6 +12,13 @@ FamixJavaTClassMetrics classSide >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixJavaTClassMetrics >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaTClassMetrics: self
+]
+
 { #category : #metrics }
 FamixJavaTClassMetrics >> numberOfAccessorMethods [
 	<FMProperty: #numberOfAccessorMethods type: #Number>

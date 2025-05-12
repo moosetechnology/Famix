@@ -70,8 +70,7 @@ FamixStNamespace >> mooseNameOn: aStream [
 	parent ifNotNil: 
 		[ parent mooseNameOn: aStream.
 		aStream
-			nextPut: $:;
-			nextPut: $: ].
+			nextPut: $. ].
 	self name ifNotNil: [aStream nextPutAll: self name]
 ]
 

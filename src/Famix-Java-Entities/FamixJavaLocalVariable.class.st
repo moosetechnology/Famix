@@ -21,7 +21,6 @@
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `declaredType` | `FamixTTypedEntity` | `typedEntities` | `FamixTType` | Type of the entity, if any|
-| `receivingInvocations` | `FamixTInvocationsReceiver` | `receiver` | `FamixTInvocation` | List of invocations performed on this entity (considered as the receiver)|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
 
 
@@ -37,19 +36,26 @@
 "
 Class {
 	#name : #FamixJavaLocalVariable,
-	#superclass : #FamixJavaNamedEntity,
-	#traits : 'FamixTCanBeFinal + FamixTInvocationsReceiver + FamixTLocalVariable + FamixTWithComments',
-	#classTraits : 'FamixTCanBeFinal classTrait + FamixTInvocationsReceiver classTrait + FamixTLocalVariable classTrait + FamixTWithComments classTrait',
+	#superclass : #FamixJavaVariable,
+	#traits : 'FamixTCanBeFinal + FamixTLocalVariable + FamixTWithComments',
+	#classTraits : 'FamixTCanBeFinal classTrait + FamixTLocalVariable classTrait + FamixTWithComments classTrait',
 	#category : #'Famix-Java-Entities-Entities'
 }
 
 { #category : #meta }
 FamixJavaLocalVariable class >> annotation [
 
-	<FMClass: #LocalVariable super: #FamixJavaNamedEntity>
+	<FMClass: #LocalVariable super: #FamixJavaVariable>
 	<package: #'Famix-Java-Entities'>
 	<generated>
 	^ self
+]
+
+{ #category : #visitor }
+FamixJavaLocalVariable >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaLocalVariable: self
 ]
 
 { #category : #printing }

@@ -71,6 +71,13 @@ FamixJavaMethod class >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixJavaMethod >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaMethod: self
+]
+
 { #category : #'Famix-Extensions-metrics-support' }
 FamixJavaMethod >> accessedAttributes [
 	
@@ -249,11 +256,6 @@ FamixJavaMethod >> isSetter [
 					  self declaredType isNotNil and: [
 						  self declaredType name = 'void' and: [
 							  self outgoingInvocations isEmpty ] ] ] ] ] ]
-]
-
-{ #category : #printing }
-FamixJavaMethod >> isStub [
-	^ super isStub or: [ self parentType isNotNil and: [ self parentType isStub ] ]
 ]
 
 { #category : #testing }

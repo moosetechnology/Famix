@@ -52,6 +52,13 @@ FamixTCohesionCouplingMetrics >> abstractness [
 	^ (nsClasses select: [:c | c isAbstract]) size / (nsClasses size)
 ]
 
+{ #category : #visitor }
+FamixTCohesionCouplingMetrics >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTCohesionCouplingMetrics: self
+]
+
 { #category : #metrics }
 FamixTCohesionCouplingMetrics >> afferentCoupling [
 	<FMProperty: #afferentCoupling type: #Number>

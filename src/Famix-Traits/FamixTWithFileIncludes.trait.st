@@ -29,6 +29,13 @@ FamixTWithFileIncludes classSide >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixTWithFileIncludes >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTWithFileIncludes: self
+]
+
 { #category : #accessing }
 FamixTWithFileIncludes >> addIncomingIncludeRelation: anObject [
 	incomingIncludeRelations add: anObject

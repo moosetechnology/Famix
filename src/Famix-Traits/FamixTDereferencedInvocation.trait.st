@@ -33,7 +33,6 @@ It has a referencer which is the pointer variable
 
 | Name | Type | Default value | Comment |
 |---|
-| `isStub` | `Boolean` | false | Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.|
 | `signature` | `String` | nil | Signature of the message being sent|
 
 "
@@ -54,6 +53,13 @@ FamixTDereferencedInvocation classSide >> annotation [
 	<package: #'Famix-Traits'>
 	<generated>
 	^ self
+]
+
+{ #category : #visitor }
+FamixTDereferencedInvocation >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTDereferencedInvocation: self
 ]
 
 { #category : #accessing }

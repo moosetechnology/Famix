@@ -147,7 +147,7 @@ LANMooseGroupTest >> testIncludesAllOf [
 
 { #category : #tests }
 LANMooseGroupTest >> testMax [
-	self assert: (self model allClasses detectMax: #numberOfMethods) equals: (self model entityNamed: #Smalltalk::LANInterface_class)
+	self assert: (self model allClasses detectMax: #numberOfMethods) equals: (self model entityNamed: #'Smalltalk.LANInterface_class')
 ]
 
 { #category : #tests }

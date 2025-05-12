@@ -49,6 +49,13 @@ FamixTLocalVariable classSide >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixTLocalVariable >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTLocalVariable: self
+]
+
 { #category : #printing }
 FamixTLocalVariable >> displayStringOn: aStream [
 

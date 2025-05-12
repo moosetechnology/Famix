@@ -97,31 +97,6 @@ MooseModel class >> factory [
 	^ FMMetamodelFactory forModel: self
 ]
 
-{ #category : #meta }
-MooseModel class >> generateClassesFrom: aCollection [
-	"I generate the implementation for some meta-described classes. aCollection need to contain the full set of meta-described classes so that the metamodel is complete. Warning, part of classes will be overwritten."
-
-	FMDefaultCodeGenerator new
-		visit: (FMMetaModelBuilder metamodelFrom: aCollection);
-		previewChanges
-]
-
-{ #category : #meta }
-MooseModel class >> generateClassesFrom: aCollection inPackage: aString [
-	"I generate the implementation for some meta-described classes. aCollection need to contain the full set of meta-described classes so that the metamodel is complete. aString is the name of the FM3 package for which elements should be generated. In other words, only elements belonging to FM3 package 'aString' will be generated, not all elements of the metamodel in aCollection.
-
-	This method is for incremental generation of metamodels, especially Famix extensions.
-	MooseModel generateClassesFrom: MooseModel metamodelClasses inPackage: 'NewExtension'
-	"
-
-	| generator fm3Package |
-	generator := FMDefaultCodeGenerator new.
-	fm3Package := (FMMetaModelBuilder metamodelFrom: aCollection) packageNamed: aString.
-	generator acceptFamePackage: fm3Package.
-	self flag: #classExtensionNotSupported.	"currently the generator does not handle extension to other packages - cf #acceptFamePackage:"
-	generator previewChanges
-]
-
 { #category : #'import-export' }
 MooseModel class >> importFrom: aStream [
 	^ self importFrom: aStream withMetamodel: self metamodel
@@ -256,16 +231,6 @@ MooseModel class >> importFromMSEStream: aStream filteredBy: anImportingContext 
 		  yourself
 ]
 
-{ #category : #'import-export' }
-MooseModel class >> importMetamodelFrom: aStream [
-	| mm generator |
-	mm := FMMetaModel new.
-	mm importStream: aStream.
-	generator := FMDefaultCodeGenerator new.
-	generator visit: mm.
-	generator previewChanges	"keep shift pressed to see the changes"
-]
-
 { #category : #meta }
 MooseModel class >> metamodel [
 
@@ -357,13 +322,6 @@ MooseModel >> add: anElement [
 ]
 
 { #category : #'entity collection' }
-MooseModel >> add: aBookmarkedGroup asBookmark: aString [
-	self cacheAt: aString put: aBookmarkedGroup.
-	self announcer announce: (MooseEntityAdded new entity: aBookmarkedGroup).
-	^ aBookmarkedGroup
-]
-
-{ #category : #'entity collection' }
 MooseModel >> addAll: entities [ 
 	 
 	entities do: [:each | self add: each]. 
@@ -383,12 +341,6 @@ MooseModel >> addNoAnnounce: anElement [
 MooseModel >> allBehaviouralsWithDeadCode [
 	<navigation: 'All behaviourals with dead code'>
 	^ self lookUpPropertyNamed: #allBehaviouralsWithDeadCode computedAs: [ self computeAllBehaviouralsWithDeadCode ]
-]
-
-{ #category : #accessing }
-MooseModel >> allBookmarks [
-	<navigation: 'All bookmarks'>
-	^ MooseGroup withAll: (self entityCache select: [ :group | group asMooseGroup isBookmarked ]) withDescription: 'Bookmarks'
 ]
 
 { #category : #accessing }
@@ -557,7 +509,7 @@ MooseModel >> importFromJSONStream: aStream [
 	^ self
 		  importFrom:
 		  (self class importFromJSON: aStream withMetamodel: self metamodel)
-		  named: (aStream localName removeSuffix: '.json')
+		  named: (aStream localName  withoutSuffix: '.json')
 ]
 
 { #category : #'import-export' }
@@ -568,7 +520,7 @@ MooseModel >> importFromJSONStream: aStream filteredBy: anImportingContext [
 				   importFromJSON: aStream
 				   withMetamodel: self metamodel
 				   filteredBy: anImportingContext)
-		  named: (aStream localName removeSuffix: '.json')
+		  named: (aStream localName withoutSuffix: '.json')
 ]
 
 { #category : #'import-export' }
@@ -601,7 +553,7 @@ MooseModel >> importFromMSEStream: aStream [
 	^ self
 		  importFrom:
 		  (self class importFrom: aStream withMetamodel: self metamodel)
-		  named: (aStream localName removeSuffix: '.mse')
+		  named: (aStream localName withoutSuffix: '.mse')
 ]
 
 { #category : #'import-export' }
@@ -612,7 +564,7 @@ MooseModel >> importFromMSEStream: aStream filteredBy: anImportingContext [
 				   importFrom: aStream
 				   withMetamodel: self metamodel
 				   filteredBy: anImportingContext)
-		  named: (aStream localName removeSuffix: '.mse')
+		  named: (aStream localName withoutSuffix: '.mse')
 ]
 
 { #category : #testing }
