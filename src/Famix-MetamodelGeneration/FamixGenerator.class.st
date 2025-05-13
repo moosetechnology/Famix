@@ -1921,6 +1921,7 @@ FamixGenerator >> defineTraits [
 	tParametricEntity withTesting.
 	tTypeParameter := builder newTraitNamed: #TTypeParameter comment: self commentForTTypeParameter.
 	tParametricAssociation := builder newTraitNamed: #TParametricAssociation comment: self commentForTParametricAssociation.
+	tParametricAssociation withTesting.
 	tConcretization := builder newTraitNamed: #TConcretization comment: self commentForTConcretization.
 	tTypeArgument := builder newTraitNamed: #TTypeArgument comment: self commentForTTypeArgument.
 
