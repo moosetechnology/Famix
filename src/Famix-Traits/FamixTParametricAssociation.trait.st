@@ -58,3 +58,10 @@ FamixTParametricAssociation >> concretizations: anObject [
 	<generated>
 	concretizations value: anObject
 ]
+
+{ #category : #testing }
+FamixTParametricAssociation >> isParametricAssociation [
+
+	<generated>
+	^ true
+]
