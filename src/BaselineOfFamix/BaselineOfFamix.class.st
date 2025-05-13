@@ -64,15 +64,15 @@ BaselineOfFamix >> dependencies: spec [
 
 { #category : #dependencies }
 BaselineOfFamix >> fame: spec [
-
 	"We load Fame development version for new Moose images."
+
 	"For retrocompatibility with Pharo 9 and older, the latest version is v1.1.6"
 
 	| version |
 	version := 'development'.
 	spec for: #( #'pharo8.x' #'pharo9.x' ) do: [ version := 'v1.1.6' ].
 
-	spec baseline: 'Fame' with: [ 
+	spec baseline: 'Fame' with: [
 		spec repository:
 			('github://moosetechnology/Fame:{1}/src' format: { version }) ]
 ]
@@ -208,6 +208,8 @@ BaselineOfFamix >> packages: spec [
 		package: 'Famix-Test7-Tests' with: [ spec requires: #( 'Famix-Test7-Entities' ) ];
 		package: 'Famix-Test8-Entities' with: [ spec requires: #( 'BasicTraits' ) ];
 		package: 'Famix-Test8-Tests' with: [ spec requires: #( 'Famix-Test8-Entities' ) ];
+		package: 'Famix-Test9-Tests';
+		package: 'Famix-Test10-Tests';
 		package: 'Famix-TestComposedSubmetamodel1-Entities' with: [ spec requires: #( 'BasicTraits' ) ];
 		package: 'Famix-TestComposedSubmetamodel2-Entities' with: [ spec requires: #( 'BasicTraits' ) ];
 		package: 'Famix-TestComposedMetamodel-Entities'
