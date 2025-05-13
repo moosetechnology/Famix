@@ -63,11 +63,19 @@ BaselineOfFamix >> dependencies: spec [
 ]
 
 { #category : #dependencies }
-BaselineOfFamix >> fame: spec [
+BaselineOfFamix >> fame: spec [ [
 
-	spec
-		baseline: 'Fame'
-		with: [ spec repository: 'github://moosetechnology/Fame:v1.1.8/src' ]
+	"We load Fame development version for new Moose images."
+	"For retrocompatibility with Pharo 9 and older, the latest version is v1.1.6"
+
+	| version |
+	version := 'development'.
+	spec for: #( #'pharo8.x' #'pharo9.x' ) do: [ version := 'v1.1.6' ].
+
+	spec baseline: 'Fame' with: [ 
+		spec repository:
+			('github://moosetechnology/Fame:{1}/src' format: { version }) ]
+]
 ]
 
 { #category : #baselines }
