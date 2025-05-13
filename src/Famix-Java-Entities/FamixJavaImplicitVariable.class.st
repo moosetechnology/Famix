@@ -16,7 +16,6 @@
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `declaredType` | `FamixTTypedEntity` | `typedEntities` | `FamixTType` | Type of the entity, if any|
-| `receivingInvocations` | `FamixTInvocationsReceiver` | `receiver` | `FamixTInvocation` | List of invocations performed on this entity (considered as the receiver)|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
 
 
@@ -31,19 +30,26 @@
 "
 Class {
 	#name : #FamixJavaImplicitVariable,
-	#superclass : #FamixJavaNamedEntity,
-	#traits : 'FamixTImplicitVariable + FamixTInvocationsReceiver',
-	#classTraits : 'FamixTImplicitVariable classTrait + FamixTInvocationsReceiver classTrait',
+	#superclass : #FamixJavaVariable,
+	#traits : 'FamixTImplicitVariable',
+	#classTraits : 'FamixTImplicitVariable classTrait',
 	#category : #'Famix-Java-Entities-Entities'
 }
 
 { #category : #meta }
 FamixJavaImplicitVariable class >> annotation [
 
-	<FMClass: #ImplicitVariable super: #FamixJavaNamedEntity>
+	<FMClass: #ImplicitVariable super: #FamixJavaVariable>
 	<package: #'Famix-Java-Entities'>
 	<generated>
 	^ self
+]
+
+{ #category : #visitor }
+FamixJavaImplicitVariable >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaImplicitVariable: self
 ]
 
 { #category : #printing }

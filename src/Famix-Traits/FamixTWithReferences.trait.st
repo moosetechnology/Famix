@@ -27,6 +27,13 @@ FamixTWithReferences classSide >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixTWithReferences >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTWithReferences: self
+]
+
 { #category : #accessing }
 FamixTWithReferences >> addOutgoingReference: aReference [ 
 	outgoingReferences add: aReference

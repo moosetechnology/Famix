@@ -170,7 +170,7 @@ FamixStMethod >> isCalledInternally [
 { #category : #'Famix-Extensions-metrics-support' }
 FamixStMethod >> isInitializer [
 	| protocolCond nameCond |
-	protocolCond := self protocol ifNotNil: [ '*initialize*' match: self protocol ] ifNil: [ false ].
+	protocolCond := self protocol ifNotNil: [ '*initializ*' match: self protocol ] ifNil: [ false ].
 	nameCond := self name ifNotNil: [ '*initialize*' match: self name ] ifNil: [ false ].
 	^ (protocolCond or: nameCond) or: [ self isConstructor ]  
 ]
@@ -183,14 +183,6 @@ FamixStMethod >> isInternalImplementation [
 
 	^ (self isInitializer not and: [ self isCalledInternally ])
 		and: [ self isPureAccessor not ]
-]
-
-{ #category : #'Famix-Extensions-metrics-support' }
-FamixStMethod >> isJUnit4Test [
-	<FMProperty: #isJUnit4Test type: #Boolean>
-	<derived>
-	<FMComment: 'True if the method is considered as a Junit 4 Java test'>
-	^ self isAnnotatedWith: 'Test'
 ]
 
 { #category : #testing }

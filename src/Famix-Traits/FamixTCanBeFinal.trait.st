@@ -12,7 +12,7 @@ Trait {
 	#instVars : [
 		'#isFinal => FMProperty defaultValue: false'
 	],
-	#category : #'Famix-Traits-Traits'
+	#category : #'Famix-Traits-PrimitiveProperties'
 }
 
 { #category : #meta }
@@ -22,6 +22,13 @@ FamixTCanBeFinal classSide >> annotation [
 	<package: #'Famix-Traits'>
 	<generated>
 	^ self
+]
+
+{ #category : #visitor }
+FamixTCanBeFinal >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTCanBeFinal: self
 ]
 
 { #category : #accessing }

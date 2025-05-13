@@ -28,7 +28,7 @@
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `instances` | `FamixTAnnotationType` | `annotationType` | `FamixTTypedAnnotationInstance` | Annotations of this type|
+| `instances` | `FamixTAnnotationType` | `annotationType` | `FamixTAnnotationInstance` | Annotations of this type|
 
 
 ## Properties
@@ -54,6 +54,13 @@ FamixJavaAnnotationType class >> annotation [
 	<package: #'Famix-Java-Entities'>
 	<generated>
 	^ self
+]
+
+{ #category : #visitor }
+FamixJavaAnnotationType >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaAnnotationType: self
 ]
 
 { #category : #'accessing-query' }

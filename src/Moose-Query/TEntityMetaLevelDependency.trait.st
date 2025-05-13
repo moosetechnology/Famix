@@ -283,6 +283,16 @@ TEntityMetaLevelDependency >> addAllParentsIn: aCollection [
 	^ aCollection
 ]
 
+{ #category : #private }
+TEntityMetaLevelDependency >> addRootParentsIn: aCollection [
+
+	self parentsDo: [ :each |
+		each isRoot
+			ifTrue: [ aCollection add: each ]
+			ifFalse: [ each addAllParentsIn: aCollection ] ].
+	^ aCollection
+]
+
 { #category : #scoping }
 TEntityMetaLevelDependency >> allAtAnyScope: aCollectionOfFamixClasses [
 	"I am used to return all the encountered entities (recursively) at matching one of the class scope given as parameter that are up in the containment tree of the metamodel"
@@ -498,15 +508,14 @@ TEntityMetaLevelDependency >> belongsTo: anEntity [
 
 { #category : #accessing }
 TEntityMetaLevelDependency >> children [
+
 	| res |
 	res := Set new.
-	self childrenSelectors do: [ :accessor | (self perform: accessor) ifNotNil: [ :r |
-		r ifNotNil: [
+	self childrenSelectors do: [ :accessor |
+		(self perform: accessor) ifNotNil: [ :r |
 			r isCollection
 				ifTrue: [ res addAll: r ]
-				ifFalse: [ res add: r ]
-		]
-	] ].
+				ifFalse: [ res add: r ] ] ].
 	^ res
 ]
 
@@ -708,12 +717,15 @@ TEntityMetaLevelDependency >> isQueryable [
 
 { #category : #testing }
 TEntityMetaLevelDependency >> isRoot [
+	"Old implementation: self parents isEmpty
+	This implementation is faster."
 
 	<FMProperty: #isRoot type: #Boolean>
 	<derived>
 	<FMComment:
 	'An entity is root if it has no parent in the model. This is useful for example to be able to build visualization where the displayed elements are the roots of the model and to let those elements be expanded to display their children.'>
-	^ self parents isEmpty
+	self parentsDo: [ :parent | ^ false ].
+	^ true
 ]
 
 { #category : #accessing }
@@ -959,6 +971,12 @@ TEntityMetaLevelDependency >> queryOutgoing: aFAMIXClassAssociation [
 	"
 
 	^ self query outgoing dependenciesOfType: aFAMIXClassAssociation
+]
+
+{ #category : #accessing }
+TEntityMetaLevelDependency >> rootParents [
+
+	^ self addRootParentsIn: OrderedCollection new
 ]
 
 { #category : #private }

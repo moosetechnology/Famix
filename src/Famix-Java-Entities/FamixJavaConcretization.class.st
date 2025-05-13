@@ -21,12 +21,6 @@
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
 
 
-## Properties
-======================
-
-| Name | Type | Default value | Comment |
-|---|
-| `isStub` | `Boolean` | false | Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.|
 
 "
 Class {
@@ -44,4 +38,11 @@ FamixJavaConcretization class >> annotation [
 	<package: #'Famix-Java-Entities'>
 	<generated>
 	^ self
+]
+
+{ #category : #visitor }
+FamixJavaConcretization >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaConcretization: self
 ]

@@ -324,14 +324,6 @@ MooseAbstractGroup >> detect: aBlock ifNone: anotherBlock [
 ]
 
 { #category : #enumerating }
-MooseAbstractGroup >> detect: aBlock ifOne: anotherBlock [
-
-	^ self entities
-		detect: aBlock
-		ifOne:  anotherBlock
-]
-
-{ #category : #enumerating }
 MooseAbstractGroup >> detectMax: aString [
 
 	^ self entities detectMax: aString
@@ -455,8 +447,9 @@ MooseAbstractGroup >> flatCollect: aBlock [
 ]
 
 { #category : #enumerating }
-MooseAbstractGroup >> flatCollectAsSet: aBlock [ 
-	^ (self entities flatCollectAsSet: aBlock) asMooseGroup
+MooseAbstractGroup >> flatCollectAsSet: aBlock [
+
+	^ self entities flatCollectAsSet: aBlock
 ]
 
 { #category : #flattening }
@@ -711,6 +704,12 @@ MooseAbstractGroup >> reject: rejectBlock thenCollect: collectBlock [
 	^ (self reject: rejectBlock) collect: collectBlock
 ]
 
+{ #category : #enumerating }
+MooseAbstractGroup >> reject: aBlockSelect thenDo: aBlockThenDo [
+
+	^ self entities reject: aBlockSelect thenDo: aBlockThenDo
+]
+
 { #category : #'adding/removing' }
 MooseAbstractGroup >> remove: anItem [ 
 	 
@@ -733,6 +732,12 @@ MooseAbstractGroup >> resetMooseNameFor: anEntity [
 	self entityStorage resetMooseNameFor: anEntity.
 	" this is safe, but probably a bit overdone "
 	self flush
+]
+
+{ #category : #accessing }
+MooseAbstractGroup >> rootEntities [
+
+	^ self propertyNamed: #rootEntities ifAbsentPut: [ self entities select: [ :entity | entity isQueryable and: [ entity isRoot ] ] ]
 ]
 
 { #category : #accessing }

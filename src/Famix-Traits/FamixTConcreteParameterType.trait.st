@@ -13,7 +13,7 @@ FamixTConcreteParameterType represents the concretePamameters of an FamixTParame
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `generics` | `FamixTConcreteParameterType` | `concreteParameter` | `FamixTParameterConcretization` | Generic relationships, i.e. known genericParameter of this type.|
-| `incomingReferences` | `FamixTReferenceable` | `referredType` | `FamixTReference` | References to this entity by other entities.|
+| `incomingReferences` | `FamixTReferenceable` | `referredEntity` | `FamixTReference` | References to this entity by other entities.|
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
@@ -50,6 +50,13 @@ FamixTConcreteParameterType classSide >> annotation [
 	<package: #'Famix-Traits'>
 	<generated>
 	^ self
+]
+
+{ #category : #visitor }
+FamixTConcreteParameterType >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTConcreteParameterType: self
 ]
 
 { #category : #adding }

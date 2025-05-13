@@ -28,7 +28,7 @@ A class is typically scoped in a namespace. To model nested or anonymous classes
 ### Incoming dependencies
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `incomingReferences` | `FamixTReferenceable` | `referredType` | `FamixTReference` | References to this entity by other entities.|
+| `incomingReferences` | `FamixTReferenceable` | `referredEntity` | `FamixTReference` | References to this entity by other entities.|
 | `subInheritances` | `FamixTWithInheritances` | `superclass` | `FamixTInheritance` | Subinheritance relationships, i.e. known subclasses of this type.|
 
 ### Other
@@ -71,6 +71,13 @@ FamixTClass classSide >> annotationFamixClassGroup [
 	^ FamixClassGroup
 ]
 
+{ #category : #visitor }
+FamixTClass >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTClass: self
+]
+
 { #category : #adding }
 FamixTClass >> addFirstMethodsOverriding: aMethod in: aCollection [
 
@@ -86,9 +93,9 @@ FamixTClass >> addMethodOverriding: aMethod in: aCollection [
 
 	self directSubclasses do: [ :subClass |
 		subClass methods
-			detect: [ :method |   method signature = aMethod signature ]
+			detect: [ :method | method signature = aMethod signature ]
 			ifFound: [ :overridingMethod | aCollection add: overridingMethod ].
-			subClass addMethodOverriding: aMethod in: aCollection  ]
+		subClass addMethodOverriding: aMethod in: aCollection ]
 ]
 
 { #category : #metrics }

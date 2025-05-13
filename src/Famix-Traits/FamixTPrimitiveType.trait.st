@@ -10,7 +10,7 @@
 ### Incoming dependencies
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `incomingReferences` | `FamixTReferenceable` | `referredType` | `FamixTReference` | References to this entity by other entities.|
+| `incomingReferences` | `FamixTReferenceable` | `referredEntity` | `FamixTReference` | References to this entity by other entities.|
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
@@ -32,7 +32,7 @@ Trait {
 	#name : #FamixTPrimitiveType,
 	#traits : 'FamixTType',
 	#classTraits : 'FamixTType classTrait',
-	#category : #'Famix-Traits-Traits'
+	#category : #'Famix-Traits-Type'
 }
 
 { #category : #meta }
@@ -42,6 +42,13 @@ FamixTPrimitiveType classSide >> annotation [
 	<package: #'Famix-Traits'>
 	<generated>
 	^ self
+]
+
+{ #category : #visitor }
+FamixTPrimitiveType >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTPrimitiveType: self
 ]
 
 { #category : #testing }

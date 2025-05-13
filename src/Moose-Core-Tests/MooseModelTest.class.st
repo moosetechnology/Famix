@@ -30,20 +30,6 @@ MooseModelTest >> testAddAnnouncement [
 ]
 
 { #category : #tests }
-MooseModelTest >> testAllBookmarks [
-	| entity1 entity2 entity3 |
-	entity1 := MooseEntity new.
-	entity2 := MooseEntity new.
-	entity3 := MooseEntity new.
-	group add: entity1.
-	group add: entity2.
-	group add: entity3.
-	entity1 bookmarkAs: 'one'.
-	entity2 bookmarkAs: 'two'.
-	self assert: group allBookmarks size equals: 2
-]
-
-{ #category : #tests }
 MooseModelTest >> testAsMSEString [
 	self assert: MooseModel new asMSEString equals: '()'.
 	self
@@ -54,18 +40,6 @@ MooseModelTest >> testAsMSEString [
 		equals:
 			'(
 	(Moose.Entity (id: 1)))'
-]
-
-{ #category : #tests }
-MooseModelTest >> testBookmarkAsRaisesAnnouncement [
-
-	| entity1 announcedEntity |
-	entity1 := MooseEntity new.
-	group add: entity1.
-	group announcer when: MooseEntityAdded do: [ :a | announcedEntity := a entity ] for: self.
-
-	entity1 bookmarkAs: 'one'.
-	self assert: announcedEntity isNotNil
 ]
 
 { #category : #tests }

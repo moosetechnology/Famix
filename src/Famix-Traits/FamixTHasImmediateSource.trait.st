@@ -51,9 +51,26 @@ FamixTHasImmediateSource classSide >> source: aString model: aMooseModel [
 		yourself
 ]
 
+{ #category : #visitor }
+FamixTHasImmediateSource >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTHasImmediateSource: self
+]
+
 { #category : #testing }
 FamixTHasImmediateSource >> hasSource [
 	^ self source isEmptyOrNil not
+]
+
+{ #category : #'*FamixReplication' }
+FamixTHasImmediateSource >> knowsEnd [
+	^ self source isNotEmpty
+]
+
+{ #category : #'*FamixReplication' }
+FamixTHasImmediateSource >> knowsStart [
+	^ self source isNotEmpty
 ]
 
 { #category : #accessing }

@@ -9,23 +9,21 @@ FamixTComment represents one instance of a comment (in the sense of programming 
 |---|
 | `commentedEntity` | `FamixTComment` | `comments` | `FamixTWithComments` | Source code commented by the comment|
 
-
-## Properties
-======================
-
-| Name | Type | Default value | Comment |
+### Other
+| Relation | Origin | Opposite | Type | Comment |
 |---|
-| `content` | `String` | nil | Content of the comment as a String|
+| `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
+
+
 
 "
 Trait {
 	#name : #FamixTComment,
 	#instVars : [
-		'#commentedEntity => FMOne type: #FamixTWithComments opposite: #comments',
-		'#content => FMProperty'
+		'#commentedEntity => FMOne type: #FamixTWithComments opposite: #comments'
 	],
-	#traits : 'TEntityMetaLevelDependency',
-	#classTraits : 'TEntityMetaLevelDependency classTrait',
+	#traits : 'FamixTSourceEntity + TEntityMetaLevelDependency',
+	#classTraits : 'FamixTSourceEntity classTrait + TEntityMetaLevelDependency classTrait',
 	#category : #'Famix-Traits-Comment'
 }
 
@@ -38,11 +36,11 @@ FamixTComment classSide >> annotation [
 	^ self
 ]
 
-{ #category : #'instance creation' }
-FamixTComment classSide >> content: aString [
-	^ self new
-		content: aString;
-		yourself
+{ #category : #visitor }
+FamixTComment >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTComment: self
 ]
 
 { #category : #accessing }
@@ -95,21 +93,6 @@ FamixTComment >> container: anObject [
 	self commentedEntity: anObject
 ]
 
-{ #category : #accessing }
-FamixTComment >> content [
-
-	<FMProperty: #content type: #String>
-	<generated>
-	<FMComment: 'Content of the comment as a String'>
-	^ content
-]
-
-{ #category : #accessing }
-FamixTComment >> content: anObject [
-	<generated>
-	content := anObject
-]
-
 { #category : #printing }
 FamixTComment >> displayStringOn: aStream [
 
@@ -125,12 +108,4 @@ FamixTComment >> printOn: aStream [
 	aStream nextPutAll: ' (comment on '.
 	self commentedEntity printOn: aStream.
 	aStream nextPut: $)
-]
-
-{ #category : #accessing }
-FamixTComment >> sourceText [
-	^ self content
-		ifNil: [ self sourceAnchor
-				ifNil: [ '' ]
-				ifNotNil: #sourceText ]
 ]

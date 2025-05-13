@@ -499,10 +499,10 @@ MooseAbstractGroupTest >> testWithoutStubs [
 
 	| stubEntity1 stubEntity2 |
 
-	stubEntity1 := MooseEntity new
+	stubEntity1 := FamixTest1Class new
 		               isStub: true;
 		               yourself.
-	stubEntity2 := MooseEntity new
+	stubEntity2 := FamixTest1Class new
 		               isStub: true;
 		               yourself.
 	group

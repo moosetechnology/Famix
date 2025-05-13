@@ -38,7 +38,6 @@ For each access in the source code, there is one famix access created even if it
 
 | Name | Type | Default value | Comment |
 |---|
-| `isStub` | `Boolean` | false | Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.|
 | `isWrite` | `Boolean` | false | Write access|
 
 "
@@ -46,7 +45,7 @@ Trait {
 	#name : #FamixTAccess,
 	#instVars : [
 		'#accessor => FMOne type: #FamixTWithAccesses opposite: #accesses',
-		'#isWrite => FMProperty',
+		'#isWrite => FMProperty defaultValue: false',
 		'#variable => FMOne type: #FamixTAccessible opposite: #incomingAccesses'
 	],
 	#traits : 'FamixTAssociation',
@@ -61,6 +60,13 @@ FamixTAccess classSide >> annotation [
 	<package: #'Famix-Traits'>
 	<generated>
 	^ self
+]
+
+{ #category : #visitor }
+FamixTAccess >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTAccess: self
 ]
 
 { #category : #accessing }

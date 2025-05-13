@@ -70,6 +70,13 @@ FamixJavaPackage >> abstractness [
 	^ (nsClasses select: [ :c | c isAbstract ]) size / nsClasses size
 ]
 
+{ #category : #visitor }
+FamixJavaPackage >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaPackage: self
+]
+
 { #category : #adding }
 FamixJavaPackage >> addChildNamedEntity: aNamedEntity [
 	childEntities add: aNamedEntity
@@ -208,6 +215,11 @@ FamixJavaPackage >> instability [
 	^ efferentCoupling / (efferentCoupling + afferentCoupling)
 ]
 
+{ #category : #testing }
+FamixJavaPackage >> isTopLevelPackage [
+	^ self topLevelPackage == self.
+]
+
 { #category : #'Famix-Extensions-metrics' }
 FamixJavaPackage >> martinCohesion [
 	"Computing cohesion as described by Robert C. Martin"
@@ -235,8 +247,7 @@ FamixJavaPackage >> mooseNameOn: stream [
 	parent ifNotNil: 
 		[ parent mooseNameOn: stream.
 		stream
-			nextPut: $:;
-			nextPut: $: ].
+			nextPut: $. ].
 	self name ifNotNil: [stream nextPutAll: self name]
 ]
 
@@ -294,4 +305,9 @@ FamixJavaPackage >> relativeImportanceForSystem [
 							]
 						ifFalse: [0]
 						]
+]
+
+{ #category : #testing }
+FamixJavaPackage >> topLevelPackage [
+	^ (self parentPackage isNotNil and: [ self parentPackage childEntities anySatisfy: #isType ] ) ifTrue: [ self parentPackage topLevelPackage ] ifFalse: [ self  ]
 ]

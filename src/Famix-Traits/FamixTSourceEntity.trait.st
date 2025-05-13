@@ -10,18 +10,11 @@ FamixTSourcedEntity models any fact in a program source and it is the superclass
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
 
 
-## Properties
-======================
-
-| Name | Type | Default value | Comment |
-|---|
-| `isStub` | `Boolean` | false | Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.|
 
 "
 Trait {
 	#name : #FamixTSourceEntity,
 	#instVars : [
-		'#isStub => FMProperty defaultValue: false',
 		'#sourceAnchor => FMOne type: #FamixTSourceAnchor opposite: #element'
 	],
 	#category : #'Famix-Traits-SourceAnchor'
@@ -34,6 +27,13 @@ FamixTSourceEntity classSide >> annotation [
 	<package: #'Famix-Traits'>
 	<generated>
 	^ self
+]
+
+{ #category : #visitor }
+FamixTSourceEntity >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTSourceEntity: self
 ]
 
 { #category : #accessing }
@@ -78,21 +78,6 @@ FamixTSourceEntity >> ensureMultiSourceAnchor [
 { #category : #testing }
 FamixTSourceEntity >> hasSourceAnchor [
 	^ self sourceAnchor isNotNil
-]
-
-{ #category : #accessing }
-FamixTSourceEntity >> isStub [
-
-	<FMProperty: #isStub type: #Boolean defaultValue: false>
-	<generated>
-	<FMComment: 'Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.'>
-	^ isStub ifNil: [ isStub := false ]
-]
-
-{ #category : #accessing }
-FamixTSourceEntity >> isStub: anObject [
-	<generated>
-	isStub := anObject
 ]
 
 { #category : #'source anchor' }

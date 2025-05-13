@@ -14,7 +14,7 @@ Trait {
 	#instVars : [
 		'#kind => FMProperty'
 	],
-	#category : #'Famix-Traits-Traits'
+	#category : #'Famix-Traits-PrimitiveProperties'
 }
 
 { #category : #meta }
@@ -24,6 +24,13 @@ FamixTHasKind classSide >> annotation [
 	<package: #'Famix-Traits'>
 	<generated>
 	^ self
+]
+
+{ #category : #visitor }
+FamixTHasKind >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTHasKind: self
 ]
 
 { #category : #accessing }

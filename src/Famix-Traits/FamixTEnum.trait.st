@@ -27,7 +27,7 @@ Instance Variables:
 ### Incoming dependencies
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `incomingReferences` | `FamixTReferenceable` | `referredType` | `FamixTReference` | References to this entity by other entities.|
+| `incomingReferences` | `FamixTReferenceable` | `referredEntity` | `FamixTReference` | References to this entity by other entities.|
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
@@ -49,7 +49,7 @@ Trait {
 	#name : #FamixTEnum,
 	#traits : 'FamixTType + FamixTWithEnumValues',
 	#classTraits : 'FamixTType classTrait + FamixTWithEnumValues classTrait',
-	#category : #'Famix-Traits-Traits'
+	#category : #'Famix-Traits-Enum'
 }
 
 { #category : #meta }
@@ -59,4 +59,11 @@ FamixTEnum classSide >> annotation [
 	<package: #'Famix-Traits'>
 	<generated>
 	^ self
+]
+
+{ #category : #visitor }
+FamixTEnum >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTEnum: self
 ]

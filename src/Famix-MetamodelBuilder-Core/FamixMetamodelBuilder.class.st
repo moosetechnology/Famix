@@ -55,7 +55,8 @@ Class {
 		'generator',
 		'testingSelectorsMapping',
 		'configuration',
-		'parentBuilder'
+		'parentBuilder',
+		'extensionBehaviors'
 	],
 	#category : #'Famix-MetamodelBuilder-Core-Basic'
 }
@@ -226,6 +227,12 @@ FamixMetamodelBuilder >> environment: anObject [
 	environment := anObject
 ]
 
+{ #category : #accessing }
+FamixMetamodelBuilder >> extensionBehaviors [
+
+	^ extensionBehaviors
+]
+
 { #category : #generating }
 FamixMetamodelBuilder >> generate [
 
@@ -322,6 +329,7 @@ FamixMetamodelBuilder >> initialize [
 
 	classes := OrderedCollection new.
 	traits := OrderedCollection new.
+	extensionBehaviors := OrderedCollection new.
 	relations := OrderedCollection new.
 	testingSelectorsMapping := Dictionary new
 ]
@@ -476,15 +484,15 @@ FamixMetamodelBuilder >> prepareBehaviorsGeneration [
 	self classes do: [ :each |
 		self testingSelectorsMapping at: each put: each testingSelectors ].
 	self traits do: [ :each | each generate ].
-	self sortedClasses do: [ :each | each generate ]
+	self sortedClasses do: [ :each | each generate ].
+	self extensionBehaviors do: [ :each | each generate ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #generating }
 FamixMetamodelBuilder >> prepareGeneration [
 
 	self registerPackages.
 	self ensureEntityClassIsTheCommonSuperclass.
-
 	self shouldGenerateModel
 		ifTrue: [
 			| model |
@@ -494,7 +502,8 @@ FamixMetamodelBuilder >> prepareGeneration [
 			self entityCreatorTrait generateEntityCreationMethods ]
 		ifFalse: [ self prepareBehaviorsGeneration ].
 
-	self behaviorsCount > 0 ifTrue: [ self generateImportingContext ]
+	self behaviorsCount > 0 ifFalse: [ ^ self ].
+	self generateImportingContext
 ]
 
 { #category : #printing }
@@ -589,7 +598,7 @@ FamixMetamodelBuilder >> testingSelectorsMapping [
 { #category : #initialization }
 FamixMetamodelBuilder >> traitNamed: aString [
 
-	^ self traits detect: [ :each | each name = aString ] ifNone: [ 
+	^ self traits detect: [ :each | each name = aString ] ifNone: [
 		  FamixMetamodelGeneratorUnknownTrait signal: 'Trait ' , aString
 			  ,
 			  ' not found in the metamodel. Please add it or refer to a submetamodel.' ]

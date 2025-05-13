@@ -27,7 +27,7 @@ Trait {
 	#name : #FamixTUnknownVariable,
 	#traits : 'FamixTStructuralEntity',
 	#classTraits : 'FamixTStructuralEntity classTrait',
-	#category : #'Famix-Traits-Traits'
+	#category : #'Famix-Traits-StructuralEntity'
 }
 
 { #category : #meta }
@@ -37,4 +37,11 @@ FamixTUnknownVariable classSide >> annotation [
 	<package: #'Famix-Traits'>
 	<generated>
 	^ self
+]
+
+{ #category : #visitor }
+FamixTUnknownVariable >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTUnknownVariable: self
 ]

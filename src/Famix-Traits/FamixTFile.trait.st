@@ -15,6 +15,12 @@ It represents a file in the file system.
 | `entities` | `FamixTFile` | `containerFiles` | `FamixTWithFiles` | List of entities defined in the file|
 
 
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+|---|
+| `name` | `String` | nil | Basic name of the entity, not full reference.|
 
 "
 Trait {
@@ -41,6 +47,13 @@ FamixTFile classSide >> annotationFamixFileGroup [
 	<generated>
 	<mooseGroup>
 	^ FamixFileGroup
+]
+
+{ #category : #visitor }
+FamixTFile >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTFile: self
 ]
 
 { #category : #accessing }

@@ -6,7 +6,6 @@
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `annotationInstances` | `FamixTWithAnnotationInstances` | `annotatedEntity` | `FamixTAnnotationInstance` | This property corresponds to the set of annotations associated to the entity|
-| `receivingInvocations` | `FamixTInvocationsReceiver` | `receiver` | `FamixTInvocation` | List of invocations performed on this entity (considered as the receiver)|
 
 
 ## Properties
@@ -20,8 +19,8 @@
 Class {
 	#name : #FamixJavaNamedEntity,
 	#superclass : #FamixJavaSourcedEntity,
-	#traits : 'FamixTInvocationsReceiver + FamixTNamedEntity + FamixTWithAnnotationInstances + TEntityMetaLevelDependency',
-	#classTraits : 'FamixTInvocationsReceiver classTrait + FamixTNamedEntity classTrait + FamixTWithAnnotationInstances classTrait + TEntityMetaLevelDependency classTrait',
+	#traits : 'FamixTNamedEntity + FamixTWithAnnotationInstances + TEntityMetaLevelDependency',
+	#classTraits : 'FamixTNamedEntity classTrait + FamixTWithAnnotationInstances classTrait + TEntityMetaLevelDependency classTrait',
 	#category : #'Famix-Java-Entities-Entities'
 }
 
@@ -42,6 +41,13 @@ FamixJavaNamedEntity class >> isAbstract [
 	^ self == FamixJavaNamedEntity
 ]
 
+{ #category : #visitor }
+FamixJavaNamedEntity >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaNamedEntity: self
+]
+
 { #category : #testing }
 FamixJavaNamedEntity >> isNamedEntity [
 
@@ -56,4 +62,9 @@ FamixJavaNamedEntity >> stubFormattedName [
 					string: self name
 					attribute: TextEmphasis italic ]
 		ifFalse: [ Text fromString: self name ] 
+]
+
+{ #category : #testing }
+FamixJavaNamedEntity >> topLevelPackage [ 
+	^ (self atScope: FamixTPackage) anyOne topLevelPackage 
 ]

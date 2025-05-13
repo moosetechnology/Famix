@@ -16,7 +16,7 @@ Instance Variables:
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `instances` | `FamixTAnnotationType` | `annotationType` | `FamixTTypedAnnotationInstance` | Annotations of this type|
+| `instances` | `FamixTAnnotationType` | `annotationType` | `FamixTAnnotationInstance` | Annotations of this type|
 
 
 
@@ -25,7 +25,7 @@ Trait {
 	#name : #FamixTAnnotationType,
 	#instVars : [
 		'#annotationTypesContainer => FMOne type: #FamixTWithAnnotationTypes opposite: #definedAnnotationTypes',
-		'#instances => FMMany type: #FamixTTypedAnnotationInstance opposite: #annotationType'
+		'#instances => FMMany type: #FamixTAnnotationInstance opposite: #annotationType'
 	],
 	#category : #'Famix-Traits-AnnotationType'
 }
@@ -44,6 +44,13 @@ FamixTAnnotationType classSide >> annotationFamixAnnotationTypeGroup [
 	<generated>
 	<mooseGroup>
 	^ FamixAnnotationTypeGroup
+]
+
+{ #category : #visitor }
+FamixTAnnotationType >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTAnnotationType: self
 ]
 
 { #category : #accessing }
@@ -85,7 +92,7 @@ FamixTAnnotationType >> displayStringOn: aStream [
 
 { #category : #accessing }
 FamixTAnnotationType >> instances [
-	"Relation named: #instances type: #FamixTTypedAnnotationInstance opposite: #annotationType"
+	"Relation named: #instances type: #FamixTAnnotationInstance opposite: #annotationType"
 
 	<generated>
 	<FMComment: 'Annotations of this type'>
@@ -106,7 +113,6 @@ FamixTAnnotationType >> mooseNameOn: aStream [
 		ifNotNil: [ :parent | 
 			parent mooseNameOn: aStream.
 			aStream
-				nextPut: $:;
-				nextPut: $: ].
+				nextPut: $. ].
 	self name ifNotNil: [ aStream nextPutAll: self name ]
 ]

@@ -22,7 +22,7 @@
 ### Incoming dependencies
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `incomingReferences` | `FamixTReferenceable` | `referredType` | `FamixTReference` | References to this entity by other entities.|
+| `incomingReferences` | `FamixTReferenceable` | `referredEntity` | `FamixTReference` | References to this entity by other entities.|
 | `subInheritances` | `FamixTWithInheritances` | `superclass` | `FamixTInheritance` | Subinheritance relationships, i.e. known subclasses of this type.|
 
 ### Other
@@ -64,6 +64,6 @@ MooseMSEImporterTestClass >> mooseNameOn: aStream [
 
 	self typeContainer ifNotNil: [ :parent | 
 		parent mooseNameOn: aStream.
-		aStream nextPutAll: '::' ].
+		aStream nextPutAll: '.' ].
 	self name ifNotNil: [ :n | aStream nextPutAll: n ]
 ]

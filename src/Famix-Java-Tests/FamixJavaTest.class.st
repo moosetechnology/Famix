@@ -1,8 +1,46 @@
 Class {
 	#name : #FamixJavaTest,
 	#superclass : #TestCase,
+	#instVars : [
+		'pkg1',
+		'pkg2',
+		'subPkg',
+		'subSubPkg',
+		'model',
+		'cls',
+		'meth',
+		'att',
+		'subPkg2',
+		'intf',
+		'cls2',
+		'meth2'
+	],
 	#category : #'Famix-Java-Tests'
 }
+
+{ #category : #running }
+FamixJavaTest >> setUp [
+
+	super setUp.
+	model := FamixJavaModel new.
+	pkg1 := FamixJavaPackage new name: 'package1'.
+	pkg2 := FamixJavaPackage new name: 'package2'.
+	subPkg := FamixJavaPackage new name: 'subpackage'.
+	subSubPkg := FamixJavaPackage new name: 'subsubpackage'.
+	subPkg2 := FamixJavaPackage new name: 'subpackage2'.
+	subSubPkg parentPackage: subPkg.
+	subPkg parentPackage: pkg1.
+	subPkg2 parentPackage: pkg2 .
+
+
+	cls := FamixJavaClass new name: 'Class1' ; parentPackage: subSubPkg .
+	cls2 := FamixJavaClass new name: 'Class2' ; parentPackage: subPkg .
+	meth := FamixJavaMethod new name: 'Method1' ; parentType: cls.
+	att := FamixJavaAttribute new name: 'Attribute1' ; parentType: cls.
+	intf := FamixJavaInterface new name: 'Interface1' ; parentPackage: subPkg2 .
+	meth2 := FamixJavaMethod new name: 'Method2' ; parentType: intf.
+	model addAll: { cls. meth. att . pkg1 . pkg2 . subPkg . subPkg2 . subSubPkg }. 
+]
 
 { #category : #tests }
 FamixJavaTest >> testImportAnnotations [
@@ -30,8 +68,8 @@ FamixJavaTest >> testImportAnnotations [
 		do: [ :i | 
 			self assert: (i annotationType instances includes: i).
 			self assert: (i annotatedEntity annotationInstances includes: i) ].
-	self assert: (model allAnnotationTypes entityNamed: #'aPackage::AnAnnotation') instances size equals: 2.
-	self assert: (model allAnnotationTypes entityNamed: #'aPackage::AnotherAnnotation') instances size equals: 1.
+	self assert: (model allAnnotationTypes entityNamed: #'aPackage.AnAnnotation') instances size equals: 2.
+	self assert: (model allAnnotationTypes entityNamed: #'aPackage.AnotherAnnotation') instances size equals: 1.
 	model allAnnotationTypes
 		do: [ :each | 
 			self assert: (each typeContainer definedAnnotationTypes includes: each).
@@ -83,17 +121,40 @@ FamixJavaTest >> testImportExceptions [
 ]
 
 { #category : #tests }
-FamixJavaTest >> testInferNamespaces [
-	| model |
-	model  := FamixJavaModel new.
-	model add: (FamixJavaPackage new name: 'org.project.package1').
-	model add: (FamixJavaPackage new name: 'org.project.package2').
-	self assert: model allPackages size equals: 2.
-	model inferPackageParentsBasedOnNames.
-	self assert: model allPackages size equals: 4
+FamixJavaTest >> testIsTopLevelPackage [
+
+	self assert: model allPackages size equals: 5.
+	self assert: pkg1 isTopLevelPackage.
+	self assert: pkg2 isTopLevelPackage.
+	self assert: subPkg isTopLevelPackage.
+	self assert: subPkg2 isTopLevelPackage.
+	self deny: subSubPkg isTopLevelPackage .
 ]
 
 { #category : #tests }
 FamixJavaTest >> testModelImportableFromFile [
 	self assert: FamixJavaModel canBeImportedFromFile
+]
+
+{ #category : #tests }
+FamixJavaTest >> testTopLevelPackage [
+
+	self assert: model allPackages size equals: 5.
+	self assert: pkg1 topLevelPackage equals: pkg1.
+	self assert: pkg2 topLevelPackage equals: pkg2.
+	self assert: subPkg topLevelPackage equals: subPkg .
+	self assert: subPkg2 topLevelPackage equals: subPkg2 .
+	self assert: subSubPkg topLevelPackage equals: subPkg .
+]
+
+{ #category : #tests }
+FamixJavaTest >> testTopLevelPackageForOtherEntities [
+
+	self assert: cls topLevelPackage equals: subPkg .
+	self assert: meth topLevelPackage equals: subPkg .
+	self assert: att topLevelPackage equals: subPkg .
+	self assert: cls2 topLevelPackage equals: subPkg .
+	self assert: intf topLevelPackage equals: subPkg2 .
+	self assert: meth2 topLevelPackage equals: subPkg2 .
+	
 ]

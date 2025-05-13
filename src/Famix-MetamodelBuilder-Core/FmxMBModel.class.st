@@ -101,7 +101,7 @@ FmxMBModel >> generateTestingMethodsIn: aClass [
 
 { #category : #testing }
 FmxMBModel >> isModelClass [
-	"The class prefix, Model"
+
 	^ true
 ]
 

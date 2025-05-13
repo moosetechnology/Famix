@@ -34,7 +34,7 @@ FamixStepwiseImporterTest >> testCheckFormalParameterIsCreated [
 		addClass: LANNode;
 		model: model;
 		run.
-	mseFormalParameter := model entityNamed: #'Smalltalk::LANNode.nextNode:(Object).aNode'.
+	mseFormalParameter := model entityNamed: #'Smalltalk.LANNode.nextNode:(Object).aNode'.
 	self assert: mseFormalParameter name equals: #aNode
 ]
 
@@ -53,7 +53,7 @@ FamixStepwiseImporterTest >> testCheckSelfIsCreated [
 		addClass: LANNode;
 		model: model;
 		run.
-	mseSelf := model entityNamed: #'Smalltalk::LANNode.send:(Object).self'.
+	mseSelf := model entityNamed: #'Smalltalk.LANNode.send:(Object).self'.
 	self assert: mseSelf name equals: 'self' "mseMethod :=  model entityNamed:  #'Smalltalk::Node.send:(Object)'." "apparently I cannot access #'Smalltalk::Node.send:(Object).self'" "self assert: (mseMethod outgoingAccesses byName: 'Smalltalk::Node.self' ifAbsent: [] ) notEmpty."
 ]
 
@@ -163,7 +163,7 @@ FamixStepwiseImporterTest >> testImportLANPackage [
 		yourself.
 	self denyEmpty: model allPackages.
 	package := model entityNamed: #'Moose-TestResources-LAN'.
-	class := model entityNamed: #'Smalltalk::LANNode'.
+	class := model entityNamed: #'Smalltalk.LANNode'.
 	self assert: class parentPackage identicalTo: package
 ]
 
@@ -212,7 +212,7 @@ FamixStepwiseImporterTest >> testImportMethodBody [
 	nextNodeMethod := famixClassNode methods detect: [ :fm | fm name == #nextNode ].
 	self assertEmpty: nextNodeMethod parameters.
 	self assert: nextNodeMethod signature identicalTo: #'nextNode()'.
-	self assert: nextNodeMethod mooseName identicalTo: #'Smalltalk::LANNode.nextNode()'.
+	self assert: nextNodeMethod mooseName identicalTo: #'Smalltalk.LANNode.nextNode()'.
 	nameMethod := famixClassNode methods detect: [ :fm | fm name == #name: ].
 	self assert: nameMethod parameters size equals: 1.
 	xFormalParameter := nameMethod parameters at: 1.

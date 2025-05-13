@@ -10,7 +10,7 @@
 ### Incoming dependencies
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `incomingReferences` | `FamixTReferenceable` | `referredType` | `FamixTReference` | References to this entity by other entities.|
+| `incomingReferences` | `FamixTReferenceable` | `referredEntity` | `FamixTReference` | References to this entity by other entities.|
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
@@ -43,6 +43,13 @@ FamixJavaPrimitiveType class >> annotation [
 	<package: #'Famix-Java-Entities'>
 	<generated>
 	^ self
+]
+
+{ #category : #visitor }
+FamixJavaPrimitiveType >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaPrimitiveType: self
 ]
 
 { #category : #testing }

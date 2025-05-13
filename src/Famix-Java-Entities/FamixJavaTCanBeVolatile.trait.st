@@ -33,6 +33,13 @@ FamixJavaTCanBeVolatile classSide >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixJavaTCanBeVolatile >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaTCanBeVolatile: self
+]
+
 { #category : #accessing }
 FamixJavaTCanBeVolatile >> isVolatile [
 

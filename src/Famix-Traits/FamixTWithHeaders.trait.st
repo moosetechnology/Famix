@@ -15,7 +15,7 @@ Trait {
 	#instVars : [
 		'#header => FMOne type: #FamixTHeader opposite: #headerOwner'
 	],
-	#category : #'Famix-Traits-Traits'
+	#category : #'Famix-Traits-Header'
 }
 
 { #category : #meta }
@@ -25,6 +25,13 @@ FamixTWithHeaders classSide >> annotation [
 	<package: #'Famix-Traits'>
 	<generated>
 	^ self
+]
+
+{ #category : #visitor }
+FamixTWithHeaders >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTWithHeaders: self
 ]
 
 { #category : #accessing }

@@ -264,33 +264,13 @@ MooseScripts class >> packageNamesFor: aPrefixString withTestPackages: aBoolean 
 	^ packageNames
 ]
 
-{ #category : #private }
-MooseScripts class >> packagesForConfigurationVersion: aConfiguration [
-	"self packagesForConfigurationVersion: (ConfigurationOfRPackage new project version: #stable)"
-
-	| version directive packages |
-	version := aConfiguration.
-	version ignoreImage: true.
-	directive := version record loadDirective.
-	packages := OrderedCollection new.
-	directive
-		versionDirectivesDo: [ :vrsnDirective | 
-			| spec |
-			spec := vrsnDirective spec.
-			(spec isNotNil and: [ spec project = aConfiguration spec project ])
-				ifTrue: [ vrsnDirective packagesDo: [ :pkgDirective | packages add: (self extractPackageNameOutOfMetacelloFile: pkgDirective file) ] ] ].
-	^ packages asSet reject: [ :each | each beginsWith: 'ConfigurationOf' ]
-]
-
 { #category : #'loading scripts' }
 MooseScripts class >> pharoPackageNames [
 	"self pharoPackageNames"
-	
-	| packages packageNames |
-	packages := (self packageOrganizer packages select:[:each | each class = RPackage])
-									  asSortedCollection: [:a :b | a name <= b name].
-	packageNames := packages collect: [:pak | pak name].
-	^ packageNames
+
+	^ (self packageOrganizer packageNames reject: [ :packageName |
+		   packageName = UndefinedPackage undefinedPackageName ]) sorted:
+		  #yourself ascending
 ]
 
 { #category : #notes }

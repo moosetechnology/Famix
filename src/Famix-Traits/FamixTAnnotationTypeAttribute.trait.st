@@ -32,7 +32,7 @@ Instance Variables:
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `annotationAttributeInstances` | `FamixTAnnotationTypeAttribute` | `annotationTypeAttribute` | `FamixTTypedAnnotationInstanceAttribute` | A collection of AnnotationInstanceAttribute which hold the usages of this attribute in actual AnnotationInstances|
+| `annotationAttributeInstances` | `FamixTAnnotationTypeAttribute` | `annotationTypeAttribute` | `FamixTAnnotationInstanceAttribute` | A collection of AnnotationInstanceAttribute which hold the usages of this attribute in actual AnnotationInstances|
 | `declaredType` | `FamixTTypedEntity` | `typedEntities` | `FamixTType` | Type of the entity, if any|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
 
@@ -49,7 +49,7 @@ Instance Variables:
 Trait {
 	#name : #FamixTAnnotationTypeAttribute,
 	#instVars : [
-		'#annotationAttributeInstances => FMMany type: #FamixTTypedAnnotationInstanceAttribute opposite: #annotationTypeAttribute'
+		'#annotationAttributeInstances => FMMany type: #FamixTAnnotationInstanceAttribute opposite: #annotationTypeAttribute'
 	],
 	#traits : 'FamixTAttribute',
 	#classTraits : 'FamixTAttribute classTrait',
@@ -65,6 +65,13 @@ FamixTAnnotationTypeAttribute classSide >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixTAnnotationTypeAttribute >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTAnnotationTypeAttribute: self
+]
+
 { #category : #accessing }
 FamixTAnnotationTypeAttribute >> addAnnotationAttributeInstance: anObject [
 	annotationAttributeInstances add: anObject
@@ -73,7 +80,7 @@ FamixTAnnotationTypeAttribute >> addAnnotationAttributeInstance: anObject [
 
 { #category : #accessing }
 FamixTAnnotationTypeAttribute >> annotationAttributeInstances [
-	"Relation named: #annotationAttributeInstances type: #FamixTTypedAnnotationInstanceAttribute opposite: #annotationTypeAttribute"
+	"Relation named: #annotationAttributeInstances type: #FamixTAnnotationInstanceAttribute opposite: #annotationTypeAttribute"
 
 	<generated>
 	<FMComment: 'A collection of AnnotationInstanceAttribute which hold the usages of this attribute in actual AnnotationInstances'>

@@ -10,7 +10,7 @@
 ### Association target
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `user` | `FamixTTraitUsage` | `outgoingTraitUsages` | `FamixTTraitUser` | |
+| `user` | `FamixTTraitUsage` | `traitUsages` | `FamixTTraitUser` | |
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
@@ -20,19 +20,13 @@
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
 
 
-## Properties
-======================
-
-| Name | Type | Default value | Comment |
-|---|
-| `isStub` | `Boolean` | false | Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.|
 
 "
 Trait {
 	#name : #FamixTTraitUsage,
 	#instVars : [
 		'#trait => FMOne type: #FamixTTrait opposite: #incomingTraitUsages',
-		'#user => FMOne type: #FamixTTraitUser opposite: #outgoingTraitUsages'
+		'#user => FMOne type: #FamixTTraitUser opposite: #traitUsages'
 	],
 	#traits : 'FamixTAssociation',
 	#classTraits : 'FamixTAssociation classTrait',
@@ -46,6 +40,13 @@ FamixTTraitUsage classSide >> annotation [
 	<package: #'Famix-Traits'>
 	<generated>
 	^ self
+]
+
+{ #category : #visitor }
+FamixTTraitUsage >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTTraitUsage: self
 ]
 
 { #category : #accessing }
@@ -66,7 +67,7 @@ FamixTTraitUsage >> trait: anObject [
 
 { #category : #accessing }
 FamixTTraitUsage >> user [
-	"Relation named: #user type: #FamixTTraitUser opposite: #outgoingTraitUsages"
+	"Relation named: #user type: #FamixTTraitUser opposite: #traitUsages"
 
 	<generated>
 	<target>

@@ -31,6 +31,13 @@ FamixTWithExceptions classSide >> annotation [
 	^ self
 ]
 
+{ #category : #visitor }
+FamixTWithExceptions >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTWithExceptions: self
+]
+
 { #category : #adding }
 FamixTWithExceptions >> addCaughtException: anObject [
 	<generated>

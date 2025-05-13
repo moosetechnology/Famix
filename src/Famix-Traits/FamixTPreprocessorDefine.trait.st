@@ -18,3 +18,10 @@ FamixTPreprocessorDefine classSide >> annotation [
 	<generated>
 	^ self
 ]
+
+{ #category : #visitor }
+FamixTPreprocessorDefine >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTPreprocessorDefine: self
+]

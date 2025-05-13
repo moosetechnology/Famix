@@ -16,6 +16,12 @@ I represent a compilation unit file. Typically a .c or .cpp file
 | `entities` | `FamixTFile` | `containerFiles` | `FamixTWithFiles` | List of entities defined in the file|
 
 
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+|---|
+| `name` | `String` | nil | Basic name of the entity, not full reference.|
 
 "
 Trait {
@@ -35,6 +41,13 @@ FamixTCompilationUnit classSide >> annotation [
 	<package: #'Famix-Traits'>
 	<generated>
 	^ self
+]
+
+{ #category : #visitor }
+FamixTCompilationUnit >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTCompilationUnit: self
 ]
 
 { #category : #accessing }

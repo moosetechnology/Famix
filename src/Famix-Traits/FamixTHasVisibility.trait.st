@@ -12,7 +12,7 @@ Trait {
 	#instVars : [
 		'#visibility => FMProperty'
 	],
-	#category : #'Famix-Traits-Traits'
+	#category : #'Famix-Traits-PrimitiveProperties'
 }
 
 { #category : #meta }
@@ -22,6 +22,13 @@ FamixTHasVisibility classSide >> annotation [
 	<package: #'Famix-Traits'>
 	<generated>
 	^ self
+]
+
+{ #category : #visitor }
+FamixTHasVisibility >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTHasVisibility: self
 ]
 
 { #category : #accessing }

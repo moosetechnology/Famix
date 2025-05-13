@@ -75,10 +75,24 @@ FamixTest1TEntityCreator >> newFileAnchor [
 ]
 
 { #category : #'entity creation' }
+FamixTest1TEntityCreator >> newFileNamed: aName [
+
+	<generated>
+	^ self add: (FamixTest1File named: aName)
+]
+
+{ #category : #'entity creation' }
 FamixTest1TEntityCreator >> newFolder [
 
 	<generated>
 	^ self add: FamixTest1Folder new
+]
+
+{ #category : #'entity creation' }
+FamixTest1TEntityCreator >> newFolderNamed: aName [
+
+	<generated>
+	^ self add: (FamixTest1Folder named: aName)
 ]
 
 { #category : #'entity creation' }

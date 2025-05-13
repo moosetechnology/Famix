@@ -25,8 +25,8 @@
 "
 Trait {
 	#name : #FamixTWithStatements,
-	#traits : 'FamixTSourceEntity + FamixTWithAccesses + FamixTWithInvocations + FamixTWithReferences',
-	#classTraits : 'FamixTSourceEntity classTrait + FamixTWithAccesses classTrait + FamixTWithInvocations classTrait + FamixTWithReferences classTrait',
+	#traits : 'FamixTCanBeStub + FamixTWithAccesses + FamixTWithInvocations + FamixTWithReferences',
+	#classTraits : 'FamixTCanBeStub classTrait + FamixTWithAccesses classTrait + FamixTWithInvocations classTrait + FamixTWithReferences classTrait',
 	#category : #'Famix-Traits-Behavioral'
 }
 
@@ -37,6 +37,13 @@ FamixTWithStatements classSide >> annotation [
 	<package: #'Famix-Traits'>
 	<generated>
 	^ self
+]
+
+{ #category : #visitor }
+FamixTWithStatements >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTWithStatements: self
 ]
 
 { #category : #metrics }
