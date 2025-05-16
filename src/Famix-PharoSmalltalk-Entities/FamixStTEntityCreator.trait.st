@@ -96,6 +96,13 @@ FamixStTEntityCreator >> newComment [
 ]
 
 { #category : #'entity creation' }
+FamixStTEntityCreator >> newEntityTyping [
+
+	<generated>
+	^ self add: FamixStEntityTyping new
+]
+
+{ #category : #'entity creation' }
 FamixStTEntityCreator >> newGlobalVariable [
 
 	<generated>

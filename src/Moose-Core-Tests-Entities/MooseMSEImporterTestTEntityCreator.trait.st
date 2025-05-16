@@ -54,6 +54,13 @@ MooseMSEImporterTestTEntityCreator >> newComment [
 ]
 
 { #category : #'entity creation' }
+MooseMSEImporterTestTEntityCreator >> newEntityTyping [
+
+	<generated>
+	^ self add: MooseMSEImporterTestEntityTyping new
+]
+
+{ #category : #'entity creation' }
 MooseMSEImporterTestTEntityCreator >> newInheritance [
 
 	<generated>

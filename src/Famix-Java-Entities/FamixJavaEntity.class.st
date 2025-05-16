@@ -148,6 +148,13 @@ FamixJavaEntity >> isPackage [
 ]
 
 { #category : #testing }
+FamixJavaEntity >> isParametricAssociation [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
 FamixJavaEntity >> isParametricEntity [
 
 	<generated>

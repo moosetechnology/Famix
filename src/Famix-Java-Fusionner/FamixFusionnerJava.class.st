@@ -245,9 +245,8 @@ FamixFusionnerJava >> visitFamixTType: aFamixTType [
 	self visitEntity: aFamixTType typeContainer.
 	"self visitList: aFamixTType typedEntities."
 
-	aFamixTType typedEntities copy 
-		do: [ :typedEntity | typedEntity declaredType: resourceEntity ]
-
+	aFamixTType incomingTypings copy
+		do: [ :typing | self visitFamixTAssociation: typing ]
 ]
 
 { #category : #'visiting - traits' }
