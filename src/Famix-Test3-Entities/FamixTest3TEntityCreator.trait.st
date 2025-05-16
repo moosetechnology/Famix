@@ -103,10 +103,24 @@ FamixTest3TEntityCreator >> newParametricClass [
 ]
 
 { #category : #'entity creation' }
+FamixTest3TEntityCreator >> newParametricClassNamed: aName [
+
+	<generated>
+	^ self add: (FamixTest3ParametricClass named: aName)
+]
+
+{ #category : #'entity creation' }
 FamixTest3TEntityCreator >> newPrimitiveType [
 
 	<generated>
 	^ self add: FamixTest3PrimitiveType new
+]
+
+{ #category : #'entity creation' }
+FamixTest3TEntityCreator >> newPrimitiveTypeNamed: aName [
+
+	<generated>
+	^ self add: (FamixTest3PrimitiveType named: aName)
 ]
 
 { #category : #'entity creation' }

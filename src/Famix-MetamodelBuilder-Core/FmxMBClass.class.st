@@ -34,6 +34,15 @@ FmxMBClass >> allLocalTraits [
 ]
 
 { #category : #accessing }
+FmxMBClass >> allTransitiveTraitsIncludingClassGeneralization [
+
+	| result |
+	result := super allTransitiveTraitsIncludingClassGeneralization.
+	self classGeneralization ifNotNil: [ :class | class ~= Object ifTrue: [ result addAll: class allTransitiveTraitsIncludingClassGeneralization ] ].
+	^ result
+]
+
+{ #category : #accessing }
 FmxMBClass >> classGeneralization [
 	^ classGeneralization
 ]

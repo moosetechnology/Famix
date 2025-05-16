@@ -61,6 +61,13 @@ FamixStTEntityCreator >> newAnnotationTypeAttributeNamed: aName [
 ]
 
 { #category : #'entity creation' }
+FamixStTEntityCreator >> newAnnotationTypeNamed: aName [
+
+	<generated>
+	^ self add: (FamixStAnnotationType named: aName)
+]
+
+{ #category : #'entity creation' }
 FamixStTEntityCreator >> newAttribute [
 
 	<generated>
