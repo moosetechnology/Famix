@@ -9,15 +9,15 @@ Class {
 }
 
 { #category : #generating }
-FmxMBEntityCreatorTrait >> generateEntityCreationMethodFor: cls [
+FmxMBEntityCreatorTrait >> generateEntityCreationMethodFor: aClass [
 
 	self builder environment
 		compile: ('new{1}
 
 	<generated>
 	^ self add: {2} new' format: { 
-					 cls name.
-					 cls fullName })
+					 aClass name.
+					 aClass fullName })
 		in: self realClass
 		classified: 'entity creation'
 ]
@@ -26,26 +26,23 @@ FmxMBEntityCreatorTrait >> generateEntityCreationMethodFor: cls [
 FmxMBEntityCreatorTrait >> generateEntityCreationMethods [
 
 	self builder classes
-		reject: [ :cls |
-			cls isAbstractClass or: [
-				cls isModelClass or: [ cls isMetamodelClassGroup ] ] ]
-		thenDo: [ :cls |
-			self generateEntityCreationMethodFor: cls.
-			(cls allTransitiveTraits anySatisfy: [ :trait |
-				 trait prefix = #Famix and: [ trait name = #TNamedEntity ] ])
-				ifTrue: [ self generateNamedEntityCreationMethodFor: cls ] ]
+		reject: [ :aClass | aClass isAbstractClass or: [ aClass isModelClass or: [ aClass isMetamodelClassGroup ] ] ]
+		thenDo: [ :class |
+				self generateEntityCreationMethodFor: class.
+				(class allTransitiveTraitsIncludingClassGeneralization anySatisfy: [ :trait | trait prefix = #Famix and: [ trait name = #TNamedEntity ] ]) ifTrue: [
+					self generateNamedEntityCreationMethodFor: class ] ]
 ]
 
 { #category : #generating }
-FmxMBEntityCreatorTrait >> generateNamedEntityCreationMethodFor: cls [
+FmxMBEntityCreatorTrait >> generateNamedEntityCreationMethodFor: aClass [
 
 	^ self builder environment
 		  compile: ('new{1}Named: aName
 
 	<generated>
 	^ self add: ({2} named: aName)' format: { 
-					   cls name.
-					   cls fullName })
+					   aClass name.
+					   aClass fullName })
 		  in: self realClass
 		  classified: 'entity creation'
 ]

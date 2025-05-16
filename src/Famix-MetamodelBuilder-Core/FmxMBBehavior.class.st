@@ -104,6 +104,12 @@ FmxMBBehavior >> allTransitiveTraits [
 	^ self addAllTransitiveTraitsIn: Set new
 ]
 
+{ #category : #accessing }
+FmxMBBehavior >> allTransitiveTraitsIncludingClassGeneralization [
+
+	^ self allTransitiveTraits
+]
+
 { #category : #converting }
 FmxMBBehavior >> asRelationSideNamed: aPropertyName [
 
