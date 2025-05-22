@@ -1,6 +1,6 @@
-Extension { #name : #RBPragmaNode }
+Extension { #name : #OCPragmaNode }
 
 { #category : #'*Famix-MetamodelBuilder-Tests' }
-RBPragmaNode >> removeFromTree [
+OCPragmaNode >> removeFromTree [
 	self parent removePragma: self
 ]
