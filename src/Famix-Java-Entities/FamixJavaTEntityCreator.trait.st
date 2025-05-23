@@ -285,6 +285,13 @@ FamixJavaTEntityCreator >> newParametricClass [
 ]
 
 { #category : #'entity creation' }
+FamixJavaTEntityCreator >> newParametricClassNamed: aName [
+
+	<generated>
+	^ self add: (FamixJavaParametricClass named: aName)
+]
+
+{ #category : #'entity creation' }
 FamixJavaTEntityCreator >> newParametricEntityTyping [
 
 	<generated>
@@ -306,24 +313,10 @@ FamixJavaTEntityCreator >> newParametricInheritance [
 ]
 
 { #category : #'entity creation' }
-FamixJavaTEntityCreator >> newParametricClassNamed: aName [
-
-	<generated>
-	^ self add: (FamixJavaParametricClass named: aName)
-]
-
-{ #category : #'entity creation' }
 FamixJavaTEntityCreator >> newParametricInterface [
 
 	<generated>
 	^ self add: FamixJavaParametricInterface new
-]
-
-{ #category : #'entity creation' }
-FamixJavaTEntityCreator >> newParametricInvocation [
-
-	<generated>
-	^ self add: FamixJavaParametricInvocation new
 ]
 
 { #category : #'entity creation' }
@@ -334,6 +327,13 @@ FamixJavaTEntityCreator >> newParametricInterfaceNamed: aName [
 ]
 
 { #category : #'entity creation' }
+FamixJavaTEntityCreator >> newParametricInvocation [
+
+	<generated>
+	^ self add: FamixJavaParametricInvocation new
+]
+
+{ #category : #'entity creation' }
 FamixJavaTEntityCreator >> newParametricMethod [
 
 	<generated>
@@ -341,17 +341,17 @@ FamixJavaTEntityCreator >> newParametricMethod [
 ]
 
 { #category : #'entity creation' }
-FamixJavaTEntityCreator >> newParametricReference [
-
-	<generated>
-	^ self add: FamixJavaParametricReference new
-]
-
-{ #category : #'entity creation' }
 FamixJavaTEntityCreator >> newParametricMethodNamed: aName [
 
 	<generated>
 	^ self add: (FamixJavaParametricMethod named: aName)
+]
+
+{ #category : #'entity creation' }
+FamixJavaTEntityCreator >> newParametricReference [
+
+	<generated>
+	^ self add: FamixJavaParametricReference new
 ]
 
 { #category : #'entity creation' }
@@ -408,6 +408,13 @@ FamixJavaTEntityCreator >> newTypeParameter [
 
 	<generated>
 	^ self add: FamixJavaTypeParameter new
+]
+
+{ #category : #'entity creation' }
+FamixJavaTEntityCreator >> newTypeParameterNamed: aName [
+
+	<generated>
+	^ self add: (FamixJavaTypeParameter named: aName)
 ]
 
 { #category : #'entity creation' }
