@@ -159,11 +159,13 @@ FamixJavaMethodTest >> testIsGetter [
 	self deny: method isGetter.
 
 	method name: 'getLogin'.
-	method declaredType: (FamixJavaClass named: 'String').
+	method typing: (FamixJavaEntityTyping new declaredType:
+			 (FamixJavaClass named: 'String')).
 	self assert: method isGetter.
 
 	method name: 'getLogin'.
-	method declaredType: (FamixJavaPrimitiveType named: 'void').
+	method typing: (FamixJavaEntityTyping new declaredType:
+			 (FamixJavaPrimitiveType named: 'void')).
 	self deny: method isGetter
 ]
 
@@ -171,15 +173,18 @@ FamixJavaMethodTest >> testIsGetter [
 FamixJavaMethodTest >> testIsGetterForBooleanAttribute [
 
 	method name: 'isActif'.
-	method declaredType: (FamixJavaPrimitiveType named: 'boolean').
+	method typing: (FamixJavaEntityTyping new declaredType:
+			 (FamixJavaPrimitiveType named: 'boolean')).
 	self assert: method isGetter.
 
 	method name: 'isActif'.
-	method declaredType: (FamixJavaClass named: 'Boolean').
+	method typing: (FamixJavaEntityTyping new declaredType:
+			 (FamixJavaClass named: 'Boolean')).
 	self assert: method isGetter.
 
 	method name: 'isActif'.
-	method declaredType: (FamixJavaClass named: 'String').
+	method typing: (FamixJavaEntityTyping new declaredType:
+			 (FamixJavaClass named: 'String')).
 	self deny: method isGetter
 ]
 
@@ -204,7 +209,8 @@ FamixJavaMethodTest >> testIsSetter [
 	method parameters: { FamixJavaParameter new }.
 	self deny: method isSetter.
 
-	method declaredType: (FamixJavaPrimitiveType named: 'void').
+	method typing: (FamixJavaEntityTyping new declaredType:
+			 (FamixJavaPrimitiveType named: 'void')).
 	self assert: method isSetter
 ]
 
@@ -291,13 +297,13 @@ FamixJavaMethodTest >> testOverride [
 		name: 'method';
 		signature: 'method()';
 		parentType: c1;
-		declaredType: c1;
+		typing: (FamixJavaEntityTyping new declaredType: c1);
 		yourself.
 	method
 		name: 'method';
 		signature: 'method()';
 		parentType: c2;
-		declaredType: c2.
+		typing: (FamixJavaEntityTyping new declaredType: c2).
 	c2
 		addSuperInheritance:
 			(FamixJavaInheritance new

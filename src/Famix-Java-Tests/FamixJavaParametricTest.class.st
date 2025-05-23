@@ -2,7 +2,10 @@ Class {
 	#name : #FamixJavaParametricTest,
 	#superclass : #TestCase,
 	#instVars : [
-		'parametricClass'
+		'model',
+		'stringClass',
+		'listTypeParameter',
+		'genericListClass'
 	],
 	#category : #'Famix-Java-Tests'
 }
@@ -11,194 +14,213 @@ Class {
 FamixJavaParametricTest >> setUp [
 
 	super setUp.
+	model := FamixJavaModel new.
 
-	parametricClass := FamixJavaParametricClass named: 'ParametricClass'
+	stringClass := model newClassNamed: 'String'.
+
+	listTypeParameter := model newTypeParameter
+		                     name: 'E';
+		                     yourself.
+	genericListClass := model newParametricClass
+		                    name: 'List';
+		                    addTypeParameter: listTypeParameter
 ]
 
 { #category : #running }
 FamixJavaParametricTest >> test1 [
-	"List<Object> testMethod(List<Object> list)"
+	"public List<String> testMethod(List<String> list)"
 
-	| method parametre list |
-	method := FamixJavaParametricMethod named: 'testMethod'.
-	parametre := FamixJavaParameter named: 'list'.
-	list := FamixJavaParametricClass named: 'List'.
-	list addConcreteParameter: (FamixJavaType named: 'Object').
-	parametre declaredType: list.
-	method addParameter: parametre.
-	method declaredType: list.
-	method addConcreteParameter: list
+	| method parameter |
+	method := model newParametricMethod
+		          name: 'testMethod';
+		          yourself.
+
+	method typing: (model newParametricEntityTyping
+			 declaredType: genericListClass;
+			 addConcretization: (model newConcretization
+					  typeParameter: listTypeParameter;
+					  typeArgument: stringClass;
+					  yourself);
+			 yourself).
+
+	parameter := model newParameterNamed: 'list'.
+	method addParameter: parameter.
+
+	parameter typing: (model newParametricEntityTyping
+			 declaredType: genericListClass;
+			 addConcretization: (model newConcretization
+					  typeParameter: listTypeParameter;
+					  typeArgument: stringClass;
+					  yourself);
+			 yourself)
 ]
 
 { #category : #running }
 FamixJavaParametricTest >> test2 [
-	"public <T extends Building> genericMethod(T t)"
+	"public <B extends Building> void genericMethod(B b)"
 
-	| m p return |
-	m := FamixJavaParametricMethod named: 'genericMethod'.
-	p := FamixJavaParameter named: 't'.
-	p declaredType: (FamixJavaParameterType named: 'T').
-	m addParameter: p.
-	return := FamixJavaParameterType named: 'T'.
-	FamixJavaInheritance new
-		subclass: return;
-		superclass: (FamixJavaClass named: 'Building').
-	m declaredType: return
+	| method parameter typeParameter |
+	method := model newMethod
+		     name: 'genericMethod';
+		     yourself.
+
+	typeParameter := model newTypeParameter
+		                 name: 'B';
+		                 upperBound:
+			                 (model newClassNamed: 'Building') yourself.
+
+	parameter := model newParameterNamed: 'b'.
+	method addParameter: parameter.
+
+	parameter typing: (model newEntityTyping
+			 declaredType: typeParameter;
+			 yourself)
 ]
 
 { #category : #running }
 FamixJavaParametricTest >> test3 [
-	"class ClassA<K, V> {}
-	class ClassB extends ClassA<String, V> {
-		private void method(Integer num, String s, V v) {}
-	}"
+	"
+public class ClassA<K, V> {}
 
-	| classA k v string |
-	(classA := FamixJavaParametricClass named: 'ClassA')
-		genericParameters: {
-				(k := FamixJavaParameterType named: 'K').
-				(v := FamixJavaParameterType named: 'V') }.
+public class ClassB<V> extends ClassA<String, V> {
 
-	FamixJavaConcretization new
-		concreteEntity: (FamixJavaParametricClass named: 'ClassA');
-		genericEntity: classA.
+		private void method(String s, V v) {}
 
-	FamixJavaParameterConcretization new
-		concreteParameter: (string := FamixJavaClass named: 'string');
-		genericParameter: k.
+}"
 
-	(FamixJavaParametricMethod named: 'method')
-		parameters: {
-				((FamixJavaParameter named: 'num') declaredType:
-						 (FamixJavaClass named: 'Integer')).
-				((FamixJavaParameter named: 's') declaredType: string).
-				((FamixJavaParameter named: 'v') declaredType: v) };
-		addGenericParameter: v
+	| classA k vFromClassA classB vFromClassB method |
+	"ClassA"
+	classA := model newParametricClass
+		          name: 'ClassA';
+		          yourself.
+	k := model newTypeParameter
+		     name: 'K';
+		     yourself.
+	vFromClassA := model newTypeParameter
+		               name: 'V';
+		               yourself.
+	classA typeParameters: {
+			k.
+			vFromClassA }.
+
+	"ClassB"
+	classB := model newParametricClass
+		          name: 'ClassB';
+		          yourself.
+	vFromClassB := model newTypeParameter
+		               name: 'V';
+		               yourself.
+	classB addTypeParameter: vFromClassB.
+
+	"Inheritance"
+	model newParametricInheritance
+		superclass: classB;
+		subclass: classB;
+		addConcretization: (model newConcretization
+				 typeParameter: k;
+				 typeArgument: stringClass);
+		addConcretization: (model newConcretization
+				 typeParameter: vFromClassA;
+				 typeArgument: vFromClassB).
+
+	"Method"
+	method := model newMethodNamed: 'method'.
+	method addParameter: ((model newParameterNamed: 's') typing:
+			 (model newEntityTyping declaredType: stringClass)).
+	method addParameter: ((model newParameterNamed: 'v') typing:
+			 (model newEntityTyping declaredType: vFromClassB))
 ]
 
 { #category : #running }
 FamixJavaParametricTest >> testConcreteAndGenericParameter [
-	"classA<V> --> classB extends classA<String>"
+	"
+public ClassA<V>
 
-	| parameter1 parameter2 |
-	parameter1 := FamixJavaType named: 'String'.
-	parameter2 := FamixJavaParameterType named: 'V'.
+public ClassB extends classA<String>"
 
-	parametricClass concreteParameters: { parameter1 }.
-	parametricClass genericParameters: { parameter2 }.
-	self
-		assertCollection: parametricClass concreteParameters
-		hasSameElements: { parameter1 }.
-	self
-		assertCollection: parametricClass genericParameters
-		hasSameElements: { parameter2 }
+	| classA classB v |
+	"ClassA"
+	classA := model newParametricClass name: 'ClassA'.
+	v := model newTypeParameter
+		     name: 'V';
+		     yourself.
+	classA addTypeParameter: v.
+
+	"ClassB"
+	classB := model newClassNamed: 'ClassB'.
+
+	"Inheritance"
+	model newParametricInheritance
+		subclass: classB;
+		superclass: classA;
+		addConcretization: (model newConcretization
+				 typeArgument: stringClass;
+				 typeParameter: v).
+
+	self assertCollection: classA typeParameters hasSameElements: { v }.
+	self deny: classB isParametricEntity
 ]
 
 { #category : #running }
 FamixJavaParametricTest >> testConcretizationEntity [
-	"List<T> --> classB extends List<String>"
+	"classB extends List<String>"
 
-	| listT listString |
-	listT := FamixJavaParametricClass named: 'ListT'.
-	listString := FamixJavaParametricClass named: 'ListString'.
-	FamixJavaConcretization new
-		concreteEntity: listString;
-		genericEntity: listT.
+	| genericList classB e |
+	genericList := model newParametricClass
+		               name: 'ListT';
+		               yourself.
+
+	classB := model newClassNamed: 'ClassB'.
+
+	e := model newTypeParameter
+		     name: 'E';
+		     genericEntity: genericList;
+		     yourself.
+
+	model newParametricInheritance
+		superclass: genericList;
+		subclass: classB;
+		addConcretization: (model newConcretization
+				 typeParameter: e;
+				 typeArgument: stringClass).
+
 	self
-		assertCollection: (listT concretizations collect: #concreteEntity)
-		hasSameElements: { listString }
+		assertCollection: genericList typeParameters
+		hasSameElements: { e }.
+	self
+		assertCollection: (e concretizations collect: #typeArgument)
+		hasSameElements: { stringClass }
 ]
 
 { #category : #running }
 FamixJavaParametricTest >> testConcretizationParameter [
-	"classA<parametric> --> classB extends classA<Generic>"
+	"
+public classA<E>
 
-	| parameterConcrete parameterGeneric |
-	parameterConcrete := FamixJavaType named: 'parametric'.
-	parameterGeneric := FamixJavaParameterType named: 'Generic'.
-	FamixJavaParameterConcretization new
-		concreteParameter: parameterConcrete;
-		genericParameter: parameterGeneric.
+public classB extends classA<String>"
+
+	| classA e classB |
+	"ClassA"
+	classA := model newParametricClass
+		          name: 'ClassA';
+		          yourself.
+	e := model newTypeParameter
+		     name: 'E';
+		     genericEntity: classA;
+		     yourself.
+
+	"ClassB"
+	classB := model newClassNamed: 'ClassB'.
+
+	"Inheritance"
+	model newParametricInheritance
+		superclass: classA;
+		subclass: classB;
+		addConcretization: (model newConcretization
+				 typeParameter: e;
+				 typeArgument: stringClass;
+				 yourself).
 	self
-		assertCollection:
-		(parameterGeneric concretizations collect: #concreteParameter)
-		hasSameElements: { parameterConcrete }
-]
-
-{ #category : #running }
-FamixJavaParametricTest >> testInheritanceClass [
-
-	| class1 class2 |
-	class1 := FamixJavaClass named: 'Class1'.
-	class2 := FamixJavaClass named: 'Class2'.
-
-	parametricClass addSubInheritance: (FamixJavaInheritance new
-			 subclass: class1;
-			 superclass: parametricClass).
-
-	class1 addSubInheritance: (FamixJavaInheritance new
-			 subclass: class2;
-			 superclass: class1).
-
-	self
-		assertCollection: parametricClass subclassHierarchy
-		hasSameElements: {
-				class1.
-				class2 }
-]
-
-{ #category : #running }
-FamixJavaParametricTest >> testInheritanceParameter [
-	"<subConcrete extends subGenerique> <subGeneric extends supGeneric>"
-
-	| supGeneric subGeneric subConcrete |
-	supGeneric := FamixJavaParameterType named: 'supGeneric'.
-	subGeneric := FamixJavaParameterType named: 'subGeneric'.
-	subConcrete := FamixJavaClass named: 'String'.
-
-	FamixJavaInheritance new
-		subclass: subGeneric;
-		superclass: supGeneric.
-	self
-		assertCollection: (supGeneric subInheritances collect: #subclass)
-		hasSameElements: { subGeneric }.
-	subConcrete addSuperInheritance: (FamixJavaInheritance new
-			 subclass: subConcrete;
-			 superclass: supGeneric).
-	self
-		assertCollection: (supGeneric subInheritances collect: #subclass)
-		hasSameElements: {
-				subGeneric.
-				subConcrete }
-]
-
-{ #category : #running }
-FamixJavaParametricTest >> testIsConcreteEntity [
-
-	self assert: parametricClass isGenericEntity.
-
-	FamixJavaConcretization new
-		genericEntity: FamixJavaParametricClass new;
-		concreteEntity: parametricClass.
-	self deny: parametricClass isGenericEntity
-]
-
-{ #category : #running }
-FamixJavaParametricTest >> testUsesGenerics [
-
-	| parameter1 parameter2 |
-	parameter1 := FamixJavaType named: 'String'.
-	parameter2 := FamixJavaParameterType named: 'V'.
-	self deny: parametricClass usesGenerics.
-
-	parametricClass addConcreteParameter: parameter1.
-	self deny: parametricClass usesGenerics.
-
-	parametricClass addGenericParameter: parameter2.
-	self assert: parametricClass usesGenerics.
-
-	"a concrete parameter can still be generic"
-	parametricClass genericParameters: {  }.
-	parametricClass addConcreteParameter: parameter2.
-	self assert: parametricClass usesGenerics
+		assertCollection: (e concretizations collect: #typeArgument)
+		hasSameElements: { stringClass }
 ]

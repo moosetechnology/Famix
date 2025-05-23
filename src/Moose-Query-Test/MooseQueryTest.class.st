@@ -72,14 +72,14 @@ MooseQueryTest >> setUp [
 		mooseModel: model.
 	var1 := (FamixJavaAttribute named: 'var1')
 		parentType: class2;
-		declaredType: class1;
+		typing: (FamixJavaEntityTyping new declaredType: class1);
 		mooseModel: model.
 	var2 := (FamixJavaAttribute named: 'var2')
 		parentType: class2;
 		mooseModel: model.
 	localVariable := (FamixJavaLocalVariable named: 'var3')
 		parentBehaviouralEntity: method2;
-		declaredType: class1;
+		typing: (FamixJavaEntityTyping new declaredType: class1);
 		mooseModel: model.
 	access := FamixJavaAccess new
 		accessor: method1;
@@ -172,8 +172,9 @@ MooseQueryTest >> testAllIncoming [
 
 { #category : #tests }
 MooseQueryTest >> testAllOutgoing [
-	self assert: method2 queryAllOutgoing size equals: 2.
-	self assert: class2 queryAllOutgoing size equals: 3
+
+	self assert: method2 queryAllOutgoing size equals: 3.
+	self assert: class2 queryAllOutgoing size equals: 5
 ]
 
 { #category : #tests }
@@ -438,7 +439,7 @@ MooseQueryTest >> testHasIncomingInvocation [
 MooseQueryTest >> testHasLocalIncoming [
 
 	self assert: method2 hasLocalIncoming.
-	self deny: class1 hasLocalIncoming.
+	self assert: class1 hasLocalIncoming.
 	self deny: package2 hasLocalIncoming
 ]
 
@@ -546,7 +547,7 @@ MooseQueryTest >> testIncomingAssociationTypes [
 				FamixTInheritance.
 				FamixTReference.
 				FamixTImport.
-				FamixTParameterConcretization }.
+				FamixTEntityTyping }.
 	self
 		assertCollection: method1 incomingAssociationTypes
 		hasSameElements: { 
@@ -604,16 +605,18 @@ MooseQueryTest >> testOutgoingAssociationTypes [
 
 	self
 		assertCollection: class1 outgoingAssociationTypes
-		hasSameElements: { 
+		hasSameElements: {
 				FamixTInheritance.
 				FamixTImplementation.
-				FamixTImport }.
+				FamixTImport.
+				FamixTConcretization }.
 	self
 		assertCollection: method1 outgoingAssociationTypes
-		hasSameElements: { 
+		hasSameElements: {
 				FamixTInvocation.
 				FamixTReference.
-				FamixTAccess }
+				FamixTAccess.
+				FamixTEntityTyping }
 ]
 
 { #category : #tests }

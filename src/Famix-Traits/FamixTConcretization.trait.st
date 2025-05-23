@@ -1,24 +1,27 @@
 "
+Relation between a concrete type and a generic type parameter.
+	This association is always triggered by another association, whose target is a parametric entity, whose generic parameter is the target of this concretization.
+
 ## Relations
 ======================
 
 ### Association source
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `genericEntity` | `FamixTConcretization` | `concretizations` | `FamixTParametricEntity` | Generic entity linked to in this relationship. from-side of the association|
+| `typeArgument` | `FamixTConcretization` | `outgoingConcretizations` | `FamixTTypeArgument` | The type argument that concretizes the type parameter|
 
 ### Association target
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `concreteEntity` | `FamixTConcretization` | `genericization` | `FamixTParametricEntity` | Concrete entity linked to in this relationship. to-side of the association|
+| `typeParameter` | `FamixTConcretization` | `concretizations` | `FamixTTypeParameter` | Type parameter linked to in this relationship.|
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `next` | `FamixTAssociation` | `previous` | `FamixTAssociation` | Next association in an ordered collection of associations. Currently not supported by the Moose importer|
-| `parameterConcretizations` | `FamixTConcretization` | `concretizations` | `FamixTParameterConcretization` | |
 | `previous` | `FamixTAssociation` | `next` | `FamixTAssociation` | Previous association in an ordered collection of associations. Currently not supported by the Moose importer|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
+| `triggeringAssociation` | `FamixTConcretization` | `concretizations` | `FamixTParametricAssociation` | The association that triggers this concretization.|
 
 
 
@@ -26,13 +29,13 @@
 Trait {
 	#name : #FamixTConcretization,
 	#instVars : [
-		'#parameterConcretizations => FMMany type: #FamixTParameterConcretization opposite: #concretizations',
-		'#genericEntity => FMOne type: #FamixTParametricEntity opposite: #concretizations',
-		'#concreteEntity => FMOne type: #FamixTParametricEntity opposite: #genericization'
+		'#triggeringAssociation => FMOne type: #FamixTParametricAssociation opposite: #concretizations',
+		'#typeArgument => FMOne type: #FamixTTypeArgument opposite: #outgoingConcretizations',
+		'#typeParameter => FMOne type: #FamixTTypeParameter opposite: #concretizations'
 	],
 	#traits : 'FamixTAssociation',
 	#classTraits : 'FamixTAssociation classTrait',
-	#category : #'Famix-Traits-Traits'
+	#category : #'Famix-Traits-Parametrics'
 }
 
 { #category : #meta }
@@ -51,58 +54,52 @@ FamixTConcretization >> accept: aVisitor [
 	^ aVisitor visitFamixTConcretization: self
 ]
 
-{ #category : #adding }
-FamixTConcretization >> addParameterConcretization: anObject [
+{ #category : #accessing }
+FamixTConcretization >> triggeringAssociation [
+	"Relation named: #triggeringAssociation type: #FamixTParametricAssociation opposite: #concretizations"
+
 	<generated>
-	^ self parameterConcretizations add: anObject
+	<FMComment: 'The association that triggers this concretization.'>
+	^ triggeringAssociation
 ]
 
 { #category : #accessing }
-FamixTConcretization >> concreteEntity [
-	"Relation named: #concreteEntity type: #FamixTParametricEntity opposite: #genericization"
+FamixTConcretization >> triggeringAssociation: anObject [
 
 	<generated>
-	<FMComment: 'Concrete entity linked to in this relationship. to-side of the association'>
-	<target>
-	^ concreteEntity
+	triggeringAssociation := anObject
 ]
 
 { #category : #accessing }
-FamixTConcretization >> concreteEntity: anObject [
+FamixTConcretization >> typeArgument [
+	"Relation named: #typeArgument type: #FamixTTypeArgument opposite: #outgoingConcretizations"
 
 	<generated>
-	concreteEntity := anObject
-]
-
-{ #category : #accessing }
-FamixTConcretization >> genericEntity [
-	"Relation named: #genericEntity type: #FamixTParametricEntity opposite: #concretizations"
-
-	<generated>
-	<FMComment: 'Generic entity linked to in this relationship. from-side of the association'>
+	<FMComment: 'The type argument that concretizes the type parameter'>
 	<source>
-	^ genericEntity
+	^ typeArgument
 ]
 
 { #category : #accessing }
-FamixTConcretization >> genericEntity: anObject [
+FamixTConcretization >> typeArgument: anObject [
 
 	<generated>
-	genericEntity := anObject
+	typeArgument := anObject
 ]
 
 { #category : #accessing }
-FamixTConcretization >> parameterConcretizations [
-	"Relation named: #parameterConcretizations type: #FamixTParameterConcretization opposite: #concretizations"
+FamixTConcretization >> typeParameter [
+	"Relation named: #typeParameter type: #FamixTTypeParameter opposite: #concretizations"
 
 	<generated>
-	<derived>
-	^ parameterConcretizations
+	<FMComment: 'Type parameter linked to in this relationship.'>
+	<target>
+	^ typeParameter
 ]
 
 { #category : #accessing }
-FamixTConcretization >> parameterConcretizations: anObject [
+FamixTConcretization >> typeParameter: anObject [
 
 	<generated>
-	parameterConcretizations value: anObject
+	typeParameter := anObject
 ]
