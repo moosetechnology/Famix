@@ -57,6 +57,13 @@ FamixTAttribute >> accept: aVisitor [
 	^ aVisitor visitFamixTAttribute: self
 ]
 
+{ #category : #private }
+FamixTAttribute >> accessorMethods [
+
+	^ (self incomingAccesses collectAsSet: [ :each | each source ])
+		  select: [ :each | each isGetter or: [ each isSetter ] ]
+]
+
 { #category : #metrics }
 FamixTAttribute >> hierarchyNestingLevel [
 	<FMProperty: #hierarchyNestingLevel type: #Number>
