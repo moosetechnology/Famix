@@ -87,6 +87,14 @@ FamixTAttribute >> isAttribute [
 	^ true
 ]
 
+{ #category : #testing }
+FamixTAttribute >> isDead [
+
+	"If it is only accessed by accessors and its accessors are not called"
+	^ (self incomingAccesses collectAsSet: #source) = self accessorMethods
+		  and: [ self accessorMethods allSatisfy: #isDead ]
+]
+
 { #category : #printing }
 FamixTAttribute >> mooseNameOn: aStream [
 	self parentType
