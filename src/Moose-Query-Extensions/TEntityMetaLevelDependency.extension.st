@@ -39,13 +39,3 @@ TEntityMetaLevelDependency >> queryOutgoingInheritances [
 TEntityMetaLevelDependency >> queryOutgoingReferences [
 	^ self queryOutgoing: FamixTReference
 ]
-
-{ #category : #'*Moose-Query-Extensions' }
-TEntityMetaLevelDependency >> querySureIncomingInvocations [
-	^ self queryAllIncomingInvocations select: [ :invo | invo isASureInvocation ]
-]
-
-{ #category : #'*Moose-Query-Extensions' }
-TEntityMetaLevelDependency >> querySureOutgoingInvocations [
-	^ self queryAllOutgoingInvocations select: [ :invo | invo isASureInvocation ]
-]
