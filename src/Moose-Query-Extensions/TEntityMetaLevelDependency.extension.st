@@ -89,35 +89,3 @@ TEntityMetaLevelDependency >> queryStaticOutgoingAssociations [
 		addAll: self queryOutgoingReferences;
 		yourself
 ]
-
-{ #category : #'*Moose-Query-Extensions' }
-TEntityMetaLevelDependency >> querySureIncomingAssociations [
-self
-		deprecated: 'Use #queryAllOutgoing instead'
-		transformWith:'``@object querySureIncomingAssociations' -> '``@object queryAllIncoming'.
-	^ self queryStaticIncomingAssociations
-		addAll: self querySureIncomingInvocations;
-		yourself
-]
-
-{ #category : #'*Moose-Query-Extensions' }
-TEntityMetaLevelDependency >> querySureIncomingInvocations [
-	^ self queryAllIncomingInvocations select: [ :invo | invo isASureInvocation ]
-]
-
-{ #category : #'*Moose-Query-Extensions' }
-TEntityMetaLevelDependency >> querySureOutgoingAssociations [
-
-	self
-		deprecated: 'Use #queryAllOutgoing instead'
-		transformWith: '``@object querySureOutgoingAssociations'
-			-> '``@object queryAllOutgoing'.
-	^ self queryAllOutgoing
-		  addAll: self querySureOutgoingInvocations;
-		  yourself
-]
-
-{ #category : #'*Moose-Query-Extensions' }
-TEntityMetaLevelDependency >> querySureOutgoingInvocations [
-	^ self queryAllOutgoingInvocations select: [ :invo | invo isASureInvocation ]
-]
