@@ -217,7 +217,7 @@ MooseGroupStorage >> species: aCollectionClass [
 
 { #category : #private }
 MooseGroupStorage >> updateCacheOnAddingOf: anElement [
-	(byType atOrOrederedCollection: anElement class) add: anElement.
+	(byType privateMooseStorageAt: anElement class) add: anElement.
 	anElement hasUniqueMooseNameInModel ifTrue: [ byName at: anElement mooseName put: anElement ].
 	^ anElement
 ]
