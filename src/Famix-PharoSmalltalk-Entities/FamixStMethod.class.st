@@ -207,24 +207,6 @@ FamixStMethod >> isOverriding [
 		anySatisfy: [ :each | each understands: self signature ]
 ]
 
-{ #category : #'Famix-Extensions-metrics-support' }
-FamixStMethod >> isSurelyInvokedBy: aFAMIXMethod [
-
-	| outgoingInvo |
-	((self isAbstract or: [ aFAMIXMethod isAbstract ]) or: [ 
-		 (outgoingInvo := aFAMIXMethod queryAllOutgoingInvocations) isEmpty ]) 
-		ifFalse: [ 
-			outgoingInvo do: [ :invo | 
-				(invo signature = self signature and: [ invo isASureInvocation ]) 
-					ifTrue: [ 
-						| invocationRVar |
-						invocationRVar := invo getReceivingFamixClass.
-						(invocationRVar isNotNil and: [ 
-							 (invocationRVar lookUp: self signature) = self ]) ifTrue: [ 
-							^ true ] ] ] ].
-	^ false
-]
-
 { #category : #'Famix-Extensions-private' }
 FamixStMethod >> numberOfAccesses [
 	<FMProperty: #numberOfAccesses type: #Number>

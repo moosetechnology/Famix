@@ -258,19 +258,6 @@ FamixJavaMethod >> isSetter [
 							  self outgoingInvocations isEmpty ] ] ] ] ] ]
 ]
 
-{ #category : #testing }
-FamixJavaMethod >> isSurelyInvokedBy: aFAMIXMethod [
-	| outgoingInvo |
-	((self isAbstract or: [ aFAMIXMethod isAbstract ]) or: [ (outgoingInvo := aFAMIXMethod queryAllOutgoingInvocations) isEmpty ])
-		ifFalse: [ outgoingInvo
-				do: [ :invo | 
-					(invo signature = self signature and: [ invo isASureInvocation ])
-						ifTrue: [ | invocationRVar |
-							invocationRVar := invo getReceivingFAMIXClass.
-							(invocationRVar isNotNil and: [ (invocationRVar lookUp: self signature) = self ]) ifTrue: [ ^ true ] ] ] ].
-	^ false
-]
-
 { #category : #accessing }
 FamixJavaMethod >> numberOfAccesses [
 	<FMProperty: #numberOfAccesses type: #Number>

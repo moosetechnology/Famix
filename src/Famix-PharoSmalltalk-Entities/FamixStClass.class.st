@@ -107,6 +107,14 @@ FamixStClass >> extendedMethods [
 	^ self methods select: #isExtension
 ]
 
+{ #category : #testing }
+FamixStClass >> inheritsFromTestCase [
+
+	self withSuperclassesDo: [ :each |
+		each name = 'TestCase' ifTrue: [ ^ true ] ].
+	^ false
+]
+
 { #category : #accessing }
 FamixStClass >> instanceSide [
 

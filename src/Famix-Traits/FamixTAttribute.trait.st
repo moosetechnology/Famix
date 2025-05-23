@@ -61,6 +61,13 @@ FamixTAttribute >> accept: aVisitor [
 	^ aVisitor visitFamixTAttribute: self
 ]
 
+{ #category : #private }
+FamixTAttribute >> accessorMethods [
+
+	^ (self incomingAccesses collectAsSet: [ :each | each source ])
+		  select: [ :each | each isGetter or: [ each isSetter ] ]
+]
+
 { #category : #metrics }
 FamixTAttribute >> hierarchyNestingLevel [
 	<FMProperty: #hierarchyNestingLevel type: #Number>
@@ -82,6 +89,14 @@ FamixTAttribute >> isAttribute [
 
 	<generated>
 	^ true
+]
+
+{ #category : #testing }
+FamixTAttribute >> isDead [
+
+	"If it is only accessed by accessors and its accessors are not called"
+	^ (self incomingAccesses collectAsSet: #source) = self accessorMethods
+		  and: [ self accessorMethods allSatisfy: #isDead ]
 ]
 
 { #category : #printing }
