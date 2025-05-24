@@ -1,6 +1,6 @@
 Class {
 	#name : #SmalltalkMethodVisitor,
-	#superclass : #RBProgramNodeVisitor,
+	#superclass : #OCProgramNodeVisitor,
 	#instVars : [
 		'theClass',
 		'importer',
