@@ -57,6 +57,15 @@ FamixTWithExceptions >> addThrownException: anObject [
 ]
 
 { #category : #accessing }
+FamixTWithExceptions >> allExceptions [
+
+	<derived>
+	<FMComment: 'The exceptions caught, declared or thrown by the method'>
+	^ (caughtExceptions , declaredExceptions , thrownExceptions)
+		  asMooseGroup
+]
+
+{ #category : #accessing }
 FamixTWithExceptions >> caughtExceptions [
 	"Relation named: #caughtExceptions type: #FamixTThrowable opposite: #catchingEntities"
 
