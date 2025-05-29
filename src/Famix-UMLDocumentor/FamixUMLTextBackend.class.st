@@ -27,7 +27,7 @@ FamixUMLTextBackend >> export: entities [
 	
 	^[outputStream close ; contents]
 	on: MessageNotUnderstood
-	do: [ "for ZnCharacterWriteStream do3s not answer to #contents :-("
+	do: [ "for ZnCharacterWriteStream which does not answer to #contents :-("
 		''
 	]
 ]
