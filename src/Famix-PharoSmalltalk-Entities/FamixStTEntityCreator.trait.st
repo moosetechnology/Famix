@@ -61,6 +61,13 @@ FamixStTEntityCreator >> newAnnotationTypeAttributeNamed: aName [
 ]
 
 { #category : #'entity creation' }
+FamixStTEntityCreator >> newAnnotationTypeNamed: aName [
+
+	<generated>
+	^ self add: (FamixStAnnotationType named: aName)
+]
+
+{ #category : #'entity creation' }
 FamixStTEntityCreator >> newAttribute [
 
 	<generated>
@@ -93,6 +100,13 @@ FamixStTEntityCreator >> newComment [
 
 	<generated>
 	^ self add: FamixStComment new
+]
+
+{ #category : #'entity creation' }
+FamixStTEntityCreator >> newEntityTyping [
+
+	<generated>
+	^ self add: FamixStEntityTyping new
 ]
 
 { #category : #'entity creation' }

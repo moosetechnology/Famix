@@ -61,6 +61,13 @@ FamixJavaTEntityCreator >> newAnnotationTypeAttributeNamed: aName [
 ]
 
 { #category : #'entity creation' }
+FamixJavaTEntityCreator >> newAnnotationTypeNamed: aName [
+
+	<generated>
+	^ self add: (FamixJavaAnnotationType named: aName)
+]
+
+{ #category : #'entity creation' }
 FamixJavaTEntityCreator >> newAttribute [
 
 	<generated>
@@ -100,6 +107,13 @@ FamixJavaTEntityCreator >> newConcretization [
 
 	<generated>
 	^ self add: FamixJavaConcretization new
+]
+
+{ #category : #'entity creation' }
+FamixJavaTEntityCreator >> newEntityTyping [
+
+	<generated>
+	^ self add: FamixJavaEntityTyping new
 ]
 
 { #category : #'entity creation' }
@@ -194,6 +208,13 @@ FamixJavaTEntityCreator >> newInterface [
 ]
 
 { #category : #'entity creation' }
+FamixJavaTEntityCreator >> newInterfaceNamed: aName [
+
+	<generated>
+	^ self add: (FamixJavaInterface named: aName)
+]
+
+{ #category : #'entity creation' }
 FamixJavaTEntityCreator >> newInvocation [
 
 	<generated>
@@ -250,31 +271,10 @@ FamixJavaTEntityCreator >> newParameter [
 ]
 
 { #category : #'entity creation' }
-FamixJavaTEntityCreator >> newParameterConcretization [
-
-	<generated>
-	^ self add: FamixJavaParameterConcretization new
-]
-
-{ #category : #'entity creation' }
 FamixJavaTEntityCreator >> newParameterNamed: aName [
 
 	<generated>
 	^ self add: (FamixJavaParameter named: aName)
-]
-
-{ #category : #'entity creation' }
-FamixJavaTEntityCreator >> newParameterType [
-
-	<generated>
-	^ self add: FamixJavaParameterType new
-]
-
-{ #category : #'entity creation' }
-FamixJavaTEntityCreator >> newParameterTypeNamed: aName [
-
-	<generated>
-	^ self add: (FamixJavaParameterType named: aName)
 ]
 
 { #category : #'entity creation' }
@@ -285,6 +285,34 @@ FamixJavaTEntityCreator >> newParametricClass [
 ]
 
 { #category : #'entity creation' }
+FamixJavaTEntityCreator >> newParametricClassNamed: aName [
+
+	<generated>
+	^ self add: (FamixJavaParametricClass named: aName)
+]
+
+{ #category : #'entity creation' }
+FamixJavaTEntityCreator >> newParametricEntityTyping [
+
+	<generated>
+	^ self add: FamixJavaParametricEntityTyping new
+]
+
+{ #category : #'entity creation' }
+FamixJavaTEntityCreator >> newParametricImplementation [
+
+	<generated>
+	^ self add: FamixJavaParametricImplementation new
+]
+
+{ #category : #'entity creation' }
+FamixJavaTEntityCreator >> newParametricInheritance [
+
+	<generated>
+	^ self add: FamixJavaParametricInheritance new
+]
+
+{ #category : #'entity creation' }
 FamixJavaTEntityCreator >> newParametricInterface [
 
 	<generated>
@@ -292,10 +320,38 @@ FamixJavaTEntityCreator >> newParametricInterface [
 ]
 
 { #category : #'entity creation' }
+FamixJavaTEntityCreator >> newParametricInterfaceNamed: aName [
+
+	<generated>
+	^ self add: (FamixJavaParametricInterface named: aName)
+]
+
+{ #category : #'entity creation' }
+FamixJavaTEntityCreator >> newParametricInvocation [
+
+	<generated>
+	^ self add: FamixJavaParametricInvocation new
+]
+
+{ #category : #'entity creation' }
 FamixJavaTEntityCreator >> newParametricMethod [
 
 	<generated>
 	^ self add: FamixJavaParametricMethod new
+]
+
+{ #category : #'entity creation' }
+FamixJavaTEntityCreator >> newParametricMethodNamed: aName [
+
+	<generated>
+	^ self add: (FamixJavaParametricMethod named: aName)
+]
+
+{ #category : #'entity creation' }
+FamixJavaTEntityCreator >> newParametricReference [
+
+	<generated>
+	^ self add: FamixJavaParametricReference new
 ]
 
 { #category : #'entity creation' }
@@ -348,6 +404,20 @@ FamixJavaTEntityCreator >> newTypeNamed: aName [
 ]
 
 { #category : #'entity creation' }
+FamixJavaTEntityCreator >> newTypeParameter [
+
+	<generated>
+	^ self add: FamixJavaTypeParameter new
+]
+
+{ #category : #'entity creation' }
+FamixJavaTEntityCreator >> newTypeParameterNamed: aName [
+
+	<generated>
+	^ self add: (FamixJavaTypeParameter named: aName)
+]
+
+{ #category : #'entity creation' }
 FamixJavaTEntityCreator >> newUnknownVariable [
 
 	<generated>
@@ -366,4 +436,11 @@ FamixJavaTEntityCreator >> newWildcard [
 
 	<generated>
 	^ self add: FamixJavaWildcard new
+]
+
+{ #category : #'entity creation' }
+FamixJavaTEntityCreator >> newWildcardNamed: aName [
+
+	<generated>
+	^ self add: (FamixJavaWildcard named: aName)
 ]

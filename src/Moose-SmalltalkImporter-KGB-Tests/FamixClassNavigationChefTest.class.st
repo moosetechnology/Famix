@@ -191,30 +191,6 @@ FamixClassNavigationChefTest >> testEachStaticOutgoingReferenceImpliesAStaticInc
 ]
 
 { #category : #'tests - references' }
-FamixClassNavigationChefTest >> testEachSureOutgoingReferenceImpliesASureIncomingReference [
-	| modelClasses |
-	modelClasses := self model allClasses.
-	self
-		assert:
-			(modelClasses
-				allSatisfy: [ :referencer | 
-					(referencer querySureOutgoingInvocations atScope: FamixTType)
-						allSatisfy: [ :referenced | (referenced querySureIncomingInvocations atScope: FamixTType) includes: referencer ] ]).
-	self
-		assert:
-			(modelClasses
-				allSatisfy: [ :referencer | 
-					(referencer querySureOutgoingInvocations atScope: FamixTPackage)
-						allSatisfy: [ :referenced | (referenced querySureIncomingInvocations atScope: FamixTType) includes: referencer ] ]).
-	self
-		assert:
-			(modelClasses
-				allSatisfy: [ :referencer | 
-					(referencer querySureOutgoingInvocations atScope: FamixTNamespace)
-						allSatisfy: [ :referenced | (referenced querySureIncomingInvocations atScope: FamixTType) includes: referencer ] ])
-]
-
-{ #category : #'tests - references' }
 FamixClassNavigationChefTest >> testIncomingReferencesAreEitherPotentialOrSureOrStatic [
 	| modelClasses |
 	modelClasses := self model allClasses.
@@ -887,13 +863,6 @@ FamixClassNavigationChefTest >> testStaticReferencingPackages [
 		hasSameElements: {self p3InteractedReferencer . self p7ReferencerReferee}
 ]
 
-{ #category : #'tests - sure invocations' }
-FamixClassNavigationChefTest >> testSureReferencedClasses [
-	self
-		assertCollection: (self c14ReferencerOutSideRefereeOutSide querySureOutgoingInvocations atScope: FamixTType)
-		hasSameElements: {self c13FullRefereeInSideOutSide . self c11FullRefereeOutSide}
-]
-
 { #category : #'tests - references' }
 FamixClassNavigationChefTest >> testSureReferencedClassesIncludeAllStaticReferencedClasses [
 
@@ -902,157 +871,12 @@ FamixClassNavigationChefTest >> testSureReferencedClassesIncludeAllStaticReferen
 				 (referencer queryAllOutgoing atScope: FamixTType) ])
 ]
 
-{ #category : #'tests - sure invocations' }
-FamixClassNavigationChefTest >> testSureReferencedClassesInto [
-	self
-		assertCollection: ((self c14ReferencerOutSideRefereeOutSide querySureOutgoingInvocations atScope: FamixTType) within: self p5FullReferee)
-		hasSameElements: {self c11FullRefereeOutSide}
-]
-
-{ #category : #'tests - sure invocations' }
-FamixClassNavigationChefTest >> testSureReferencedClassesIntoMyNamespace [
-	self
-		assertCollection: ((self c16FullReferencerOutSideInSide querySureOutgoingInvocations atScope: FamixTType) withinParentUsing: FamixTNamespace)
-		hasSameElements: {self c18FullRefereeInSideOutSide . self c18FullRefereeInSideOutSide}
-]
-
-{ #category : #'tests - sure invocations' }
-FamixClassNavigationChefTest >> testSureReferencedClassesIntoMyPackage [
-	self
-		assertCollection: ((self c10FullReferencerInSide querySureOutgoingInvocations atScope: FamixTType) withinParentUsing: FamixTPackage)
-		hasSameElements: {self c9FullRefereeInSide}
-]
-
-{ #category : #'tests - sure invocations' }
-FamixClassNavigationChefTest >> testSureReferencedClassesOutOfMyNamespace [
-	self
-		assertCollection: ((self c6FullReferencerInSideOutSide querySureOutgoingInvocations atScope: FamixTType) outOfParentUsing: FamixTNamespace)
-		hasSameElements: {self c11FullRefereeOutSide}
-]
-
-{ #category : #'tests - sure invocations' }
-FamixClassNavigationChefTest >> testSureReferencedMethods [
-	self assertCollection: self c6FullReferencerInSideOutSide querySureOutgoingInvocations opposites hasSameElements: {(self getMethod: 'm2p5c11InstCreation1()')}
-]
-
-{ #category : #'tests - sure invocations' }
-FamixClassNavigationChefTest >> testSureReferencedNamespaces [
-	self assertCollection: (self c6FullReferencerInSideOutSide querySureOutgoingInvocations atScope: FamixTNamespace) hasSameElements: {self n2FullReferee}
-]
-
-{ #category : #'tests - references' }
-FamixClassNavigationChefTest >> testSureReferencedNamespacesTest [
-	| modelClasses |
-	modelClasses := self model allClasses.
-	modelClasses
-		do:
-			[ :each | self assert: (each querySureOutgoingInvocations atScope: FamixTNamespace) size equals: (each querySureOutgoingInvocations atScope: FamixTNamespace) asSet size ].
-	modelClasses
-		do:
-			[ :each | self assert: (each querySureIncomingInvocations atScope: FamixTType) size equals: (each querySureIncomingInvocations atScope: FamixTType) asSet size ].
-	modelClasses
-		do:
-			[ :each | self assert: (each querySureIncomingInvocations atScope: FamixTNamespace) size equals: (each querySureIncomingInvocations atScope: FamixTNamespace) asSet size ]
-]
-
-{ #category : #'tests - sure invocations' }
-FamixClassNavigationChefTest >> testSureReferencedPackages [
-	self
-		assertCollection: (self c14ReferencerOutSideRefereeOutSide querySureOutgoingInvocations atScope: FamixTPackage)
-		hasSameElements: {self p6InteractedReferee . self p5FullReferee}
-]
-
-{ #category : #'tests - sure invocations' }
-FamixClassNavigationChefTest >> testSureReferencingClasses [
-	self
-		assertCollection: (self c14ReferencerOutSideRefereeOutSide querySureIncomingInvocations atScope: FamixTType)
-		hasSameElements: {self c2ReferencerOutSideRefereeInSide}.
-
-	self
-		assertCollection: (self c13FullRefereeInSideOutSide querySureIncomingInvocations atScope: FamixTType)
-		hasSameElements: {self c1FullReferencerOutSide . self c12FullReferencerInSide . self c14ReferencerOutSideRefereeOutSide . self c13FullRefereeInSideOutSide}
-]
-
 { #category : #'tests - references' }
 FamixClassNavigationChefTest >> testSureReferencingClassesIncludeAllStaticReferencingClasses [
 
 	self assert: (self model allClasses allSatisfy: [ :referencer | 
 			 (referencer queryAllIncoming atScope: FamixTType) includesAll:
 				 (referencer queryAllIncoming atScope: FamixTType) ])
-]
-
-{ #category : #'tests - sure invocations' }
-FamixClassNavigationChefTest >> testSureReferencingClassesInto [
-	self
-		assertCollection: ((self c14ReferencerOutSideRefereeOutSide querySureIncomingInvocations atScope: FamixTType) within: self p2InteractedReferencerReferee)
-		hasSameElements: {self c2ReferencerOutSideRefereeInSide}.
-	self
-		assertCollection: ((self c14ReferencerOutSideRefereeOutSide querySureIncomingInvocations atScope: FamixTType) within: self n1InteractedReferencerReferee)
-		hasSameElements: {self c2ReferencerOutSideRefereeInSide}.
-	self assertEmpty: ((self c3ReferencerInSideRefereeOutSide querySureIncomingInvocations atScope: FamixTType) within: self p1FullReferencer).
-	self
-		assertCollection: ((self c19FullRefereeOutSide querySureIncomingInvocations atScope: FamixTType) within: self n4FullReferencer)
-		hasSameElements: {self c15FullReferencerOutSide}
-]
-
-{ #category : #'tests - sure invocations' }
-FamixClassNavigationChefTest >> testSureReferencingClassesIntoMyNamespace [
-	self assertEmpty: ((self c14ReferencerOutSideRefereeOutSide querySureIncomingInvocations atScope: FamixTType) withinParentUsing: FamixTNamespace).
-
-	self
-		assertCollection: ((self c13FullRefereeInSideOutSide querySureIncomingInvocations atScope: FamixTType) withinParentUsing: FamixTNamespace)
-		hasSameElements: {self c12FullReferencerInSide . self c13FullRefereeInSideOutSide}
-]
-
-{ #category : #'tests - sure invocations' }
-FamixClassNavigationChefTest >> testSureReferencingClassesIntoMyPackage [
-	self assertEmpty: ((self c14ReferencerOutSideRefereeOutSide querySureIncomingInvocations atScope: FamixTType) withinParentUsing: FamixTPackage).
-
-	self
-		assertCollection: ((self c13FullRefereeInSideOutSide querySureIncomingInvocations atScope: FamixTType) withinParentUsing: FamixTPackage)
-		hasSameElements: {self c12FullReferencerInSide . self c13FullRefereeInSideOutSide}
-]
-
-{ #category : #'tests - sure invocations' }
-FamixClassNavigationChefTest >> testSureReferencingClassesOutOfMyNamespace [
-	self
-		assertCollection: ((self c14ReferencerOutSideRefereeOutSide querySureIncomingInvocations atScope: FamixTType) outOfParentUsing: FamixTNamespace)
-		hasSameElements: {self c2ReferencerOutSideRefereeInSide}.
-
-	self
-		assertCollection: ((self c19FullRefereeOutSide querySureIncomingInvocations atScope: FamixTType) outOfParentUsing: FamixTNamespace)
-		hasSameElements: {self c15FullReferencerOutSide . self c16FullReferencerOutSideInSide}
-]
-
-{ #category : #'tests - sure invocations' }
-FamixClassNavigationChefTest >> testSureReferencingClassesOutOfMyPackage [
-	self
-		assertCollection: ((self c14ReferencerOutSideRefereeOutSide querySureIncomingInvocations atScope: FamixTType) outOfParentUsing: FamixTPackage)
-		hasSameElements: {self c2ReferencerOutSideRefereeInSide}.
-
-	self
-		assertCollection: ((self c13FullRefereeInSideOutSide querySureIncomingInvocations atScope: FamixTType) outOfParentUsing: FamixTPackage)
-		hasSameElements: {self c1FullReferencerOutSide . self c14ReferencerOutSideRefereeOutSide}
-]
-
-{ #category : #'tests - sure invocations' }
-FamixClassNavigationChefTest >> testSureReferencingMethods [
-	self assertCollection: self c14ReferencerOutSideRefereeOutSide querySureIncomingInvocations opposites hasSameElements: {(self getMethod: 'm1p2c2Mtd1()')}
-]
-
-{ #category : #'tests - sure invocations' }
-FamixClassNavigationChefTest >> testSureReferencingNamespaces [
-	self
-		assertCollection: (self c19FullRefereeOutSide querySureIncomingInvocations atScope: FamixTNamespace)
-		hasSameElements: {self n4FullReferencer . self n5InteractedReferencer . self n6InteractedReferee}
-]
-
-{ #category : #'tests - sure invocations' }
-FamixClassNavigationChefTest >> testSureReferencingPackages [
-	self
-		assertCollection: (self c19FullRefereeOutSide querySureIncomingInvocations atScope: FamixTPackage)
-		hasSameElements:
-			{self pExtensions . self p8FullReferencer . self p9FullReferencer . self p11FullReferee . self p12FullReferencer}
 ]
 
 { #category : #'tests - incoming invocations' }

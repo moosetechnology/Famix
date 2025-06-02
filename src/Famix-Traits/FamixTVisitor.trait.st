@@ -186,24 +186,14 @@ FamixTVisitor >> visitFamixTCompilationUnit: aFamixTCompilationUnit [
 ]
 
 { #category : #visiting }
-FamixTVisitor >> visitFamixTConcreteParameterType: aFamixTConcreteParameterType [
-
-	<generated>
-	self visitFamixTType: aFamixTConcreteParameterType.
-
-	self visitCollection: aFamixTConcreteParameterType concreteEntities.
-	self visitCollection: aFamixTConcreteParameterType generics
-]
-
-{ #category : #visiting }
 FamixTVisitor >> visitFamixTConcretization: aFamixTConcretization [
 
 	<generated>
 	self visitFamixTAssociation: aFamixTConcretization.
 
-	self visitCollection: aFamixTConcretization parameterConcretizations.
-	self visitEntity: aFamixTConcretization genericEntity.
-	self visitEntity: aFamixTConcretization concreteEntity
+	self visitEntity: aFamixTConcretization triggeringAssociation.
+	self visitEntity: aFamixTConcretization typeArgument.
+	self visitEntity: aFamixTConcretization typeParameter
 ]
 
 { #category : #visiting }
@@ -220,6 +210,16 @@ FamixTVisitor >> visitFamixTDereferencedInvocation: aFamixTDereferencedInvocatio
 	self visitFamixTInvocation: aFamixTDereferencedInvocation.
 
 	self visitEntity: aFamixTDereferencedInvocation referencer
+]
+
+{ #category : #visiting }
+FamixTVisitor >> visitFamixTEntityTyping: aFamixTEntityTyping [
+
+	<generated>
+	self visitFamixTAssociation: aFamixTEntityTyping.
+
+	self visitEntity: aFamixTEntityTyping typedEntity.
+	self visitEntity: aFamixTEntityTyping declaredType
 ]
 
 { #category : #visiting }
@@ -312,16 +312,6 @@ FamixTVisitor >> visitFamixTFunction: aFamixTFunction [
 	self visitTEntityMetaLevelDependency: aFamixTFunction.
 
 	self visitEntity: aFamixTFunction functionOwner
-]
-
-{ #category : #visiting }
-FamixTVisitor >> visitFamixTGenericParameterType: aFamixTGenericParameterType [
-
-	<generated>
-	self visitFamixTType: aFamixTGenericParameterType.
-
-	self visitCollection: aFamixTGenericParameterType genericEntities.
-	self visitCollection: aFamixTGenericParameterType concretizations
 ]
 
 { #category : #visiting }
@@ -569,24 +559,17 @@ FamixTVisitor >> visitFamixTParameter: aFamixTParameter [
 ]
 
 { #category : #visiting }
-FamixTVisitor >> visitFamixTParameterConcretization: aFamixTParameterConcretization [
+FamixTVisitor >> visitFamixTParametricAssociation: aFamixTParametricAssociation [
 
 	<generated>
-	self visitFamixTAssociation: aFamixTParameterConcretization.
-
-	self visitCollection: aFamixTParameterConcretization concretizations.
-	self visitEntity: aFamixTParameterConcretization genericParameter.
-	self visitEntity: aFamixTParameterConcretization concreteParameter
+	self visitCollection: aFamixTParametricAssociation concretizations
 ]
 
 { #category : #visiting }
 FamixTVisitor >> visitFamixTParametricEntity: aFamixTParametricEntity [
 
 	<generated>
-	self visitCollection: aFamixTParametricEntity genericParameters.
-	self visitCollection: aFamixTParametricEntity concreteParameters.
-	self visitCollection: aFamixTParametricEntity concretizations.
-	self visitEntity: aFamixTParametricEntity genericization
+	self visitCollection: aFamixTParametricEntity typeParameters
 ]
 
 { #category : #visiting }
@@ -739,7 +722,7 @@ FamixTVisitor >> visitFamixTType: aFamixTType [
 	self visitTEntityMetaLevelDependency: aFamixTType.
 
 	self visitEntity: aFamixTType typeContainer.
-	self visitCollection: aFamixTType typedEntities
+	self visitCollection: aFamixTType incomingTypings
 ]
 
 { #category : #visiting }
@@ -750,10 +733,25 @@ FamixTVisitor >> visitFamixTTypeAlias: aFamixTTypeAlias [
 ]
 
 { #category : #visiting }
+FamixTVisitor >> visitFamixTTypeArgument: aFamixTTypeArgument [
+
+	<generated>
+	self visitCollection: aFamixTTypeArgument outgoingConcretizations
+]
+
+{ #category : #visiting }
+FamixTVisitor >> visitFamixTTypeParameter: aFamixTTypeParameter [
+
+	<generated>
+	self visitCollection: aFamixTTypeParameter concretizations.
+	self visitEntity: aFamixTTypeParameter genericEntity
+]
+
+{ #category : #visiting }
 FamixTVisitor >> visitFamixTTypedEntity: aFamixTTypedEntity [
 
 	<generated>
-	self visitEntity: aFamixTTypedEntity declaredType
+	self visitEntity: aFamixTTypedEntity typing
 ]
 
 { #category : #visiting }

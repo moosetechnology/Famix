@@ -10,6 +10,11 @@ FamixTAttribute represents a field of a class. It is an attribute of the parent 
 |---|
 | `parentType` | `FamixTAttribute` | `attributes` | `FamixTWithAttributes` | Type declaring the attribute. belongsTo implementation|
 
+### Outgoing dependencies
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `typing` | `FamixTTypedEntity` | `typedEntity` | `FamixTEntityTyping` | Association linking this entity to its declared type.|
+
 ### Incoming dependencies
 | Relation | Origin | Opposite | Type | Comment |
 |---|
@@ -18,7 +23,6 @@ FamixTAttribute represents a field of a class. It is an attribute of the parent 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `declaredType` | `FamixTTypedEntity` | `typedEntities` | `FamixTType` | Type of the entity, if any|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
 
 
@@ -57,6 +61,13 @@ FamixTAttribute >> accept: aVisitor [
 	^ aVisitor visitFamixTAttribute: self
 ]
 
+{ #category : #private }
+FamixTAttribute >> accessorMethods [
+
+	^ (self incomingAccesses collectAsSet: [ :each | each source ])
+		  select: [ :each | each isGetter or: [ each isSetter ] ]
+]
+
 { #category : #metrics }
 FamixTAttribute >> hierarchyNestingLevel [
 	<FMProperty: #hierarchyNestingLevel type: #Number>
@@ -78,6 +89,14 @@ FamixTAttribute >> isAttribute [
 
 	<generated>
 	^ true
+]
+
+{ #category : #testing }
+FamixTAttribute >> isDead [
+
+	"If it is only accessed by accessors and its accessors are not called"
+	^ (self incomingAccesses collectAsSet: #source) = self accessorMethods
+		  and: [ self accessorMethods allSatisfy: #isDead ]
 ]
 
 { #category : #printing }

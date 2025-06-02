@@ -116,6 +116,12 @@ MooseEntity >> allProvidersIn: aMooseGroup forModel: aMooseModel [
 	^ FamixDependenciesDetector computeProvidersOf: self from: aMooseGroup in: aMooseModel
 ]
 
+{ #category : #converting }
+MooseEntity >> asOrderedCollection [
+
+	^ OrderedCollection with: self
+]
+
 { #category : #dependencies }
 MooseEntity >> canRecursivelyBeItsParent [
 	^ false

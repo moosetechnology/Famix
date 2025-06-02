@@ -72,6 +72,13 @@ FamixStImportingContext >> importComment [
 ]
 
 { #category : #importing }
+FamixStImportingContext >> importEntityTyping [
+
+	<generated>
+	^ self importAssociation: (self class fm3ClassNamed: #EntityTyping)
+]
+
+{ #category : #importing }
 FamixStImportingContext >> importGlobalVariable [
 
 	<generated>
@@ -223,6 +230,13 @@ FamixStImportingContext >> shouldImportComment [
 
 	<generated>
 	^ self shouldImport: #Comment
+]
+
+{ #category : #testing }
+FamixStImportingContext >> shouldImportEntityTyping [
+
+	<generated>
+	^ self shouldImport: #EntityTyping
 ]
 
 { #category : #testing }

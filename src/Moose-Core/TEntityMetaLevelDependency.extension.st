@@ -13,9 +13,7 @@ TEntityMetaLevelDependency >> isDead [
 	<FMProperty: #isDead type: #Boolean>
 	<derived>
 	<FMComment: 'Is the entity dead (not invoked in the system)'>
-	^ self isContainerEntity
-		ifTrue: [ self allClients isEmpty ]
-		ifFalse: [ false ]
+	^ self allClients isEmpty.
 ]
 
 { #category : #'*Moose-Core' }

@@ -21,6 +21,7 @@
 | `accesses` | `FamixTWithAccesses` | `accessor` | `FamixTAccess` | Accesses to variables made by this behaviour.|
 | `outgoingInvocations` | `FamixTWithInvocations` | `sender` | `FamixTInvocation` | Outgoing invocations sent by this behaviour.|
 | `outgoingReferences` | `FamixTWithReferences` | `referencer` | `FamixTReference` | References from this entity to other entities.|
+| `typing` | `FamixTTypedEntity` | `typedEntity` | `FamixTEntityTyping` | Association linking this entity to its declared type.|
 
 ### Incoming dependencies
 | Relation | Origin | Opposite | Type | Comment |
@@ -33,7 +34,6 @@
 |---|
 | `caughtExceptions` | `FamixTWithExceptions` | `catchingEntities` | `FamixTThrowable` | The exceptions caught by the method|
 | `declaredExceptions` | `FamixTWithExceptions` | `declaringEntities` | `FamixTThrowable` | The exceptions declared by the method|
-| `declaredType` | `FamixTTypedEntity` | `typedEntities` | `FamixTType` | Type of the entity, if any|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
 | `thrownExceptions` | `FamixTWithExceptions` | `throwingEntities` | `FamixTThrowable` | The exceptions thrown by the method|
 
@@ -256,19 +256,6 @@ FamixJavaMethod >> isSetter [
 					  self declaredType isNotNil and: [
 						  self declaredType name = 'void' and: [
 							  self outgoingInvocations isEmpty ] ] ] ] ] ]
-]
-
-{ #category : #testing }
-FamixJavaMethod >> isSurelyInvokedBy: aFAMIXMethod [
-	| outgoingInvo |
-	((self isAbstract or: [ aFAMIXMethod isAbstract ]) or: [ (outgoingInvo := aFAMIXMethod queryAllOutgoingInvocations) isEmpty ])
-		ifFalse: [ outgoingInvo
-				do: [ :invo | 
-					(invo signature = self signature and: [ invo isASureInvocation ])
-						ifTrue: [ | invocationRVar |
-							invocationRVar := invo getReceivingFAMIXClass.
-							(invocationRVar isNotNil and: [ (invocationRVar lookUp: self signature) = self ]) ifTrue: [ ^ true ] ] ] ].
-	^ false
 ]
 
 { #category : #accessing }
