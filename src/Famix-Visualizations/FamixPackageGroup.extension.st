@@ -7,8 +7,8 @@ FamixPackageGroup >> complexity [
 ]
 
 { #category : #'*Famix-Visualizations' }
-FamixPackageGroup >> inspectorShowComplexity [
+FamixPackageGroup >> inspectionSystemComplexity: aBuilder [
 
 	<inspectorPresentationOrder: 10 title: 'Complexity'>
-	^ self complexity asInspectorPresenter
+	^ self complexity buildInspectorPresenter: aBuilder
 ]
