@@ -125,6 +125,20 @@ FamixTFileAnchor >> hasSource [
 	^ self sourcesAreReadable
 ]
 
+{ #category : #inspector }
+FamixTFileAnchor >> inspectionFullSource: aBuilder [
+
+	<inspectorPresentationOrder: 5 title: 'Full sourceText'>
+	^ aBuilder newCode
+		  withoutSyntaxHighlight;
+		  withLineNumbers;
+		  text: self completeText;
+		  addTextSegmentDecoration: (SpTextPresenterDecorator forHighlight
+				   interval: (self startPos to: self endPos + 1);
+				   yourself);
+		  beNotEditable
+]
+
 { #category : #testing }
 FamixTFileAnchor >> isContiguousWith: anotherFileAnchor [
 	"compute to see if two entities are contiguous (i.e one followed by the other on consective lines) in a file by looking at their indexed file anchors"
