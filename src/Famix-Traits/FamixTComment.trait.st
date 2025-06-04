@@ -67,32 +67,6 @@ FamixTComment >> commentedEntityGroup [
 	^ MooseSpecializedGroup with: self commentedEntity
 ]
 
-{ #category : #accessing }
-FamixTComment >> container [
-
-	"Marked as deprecated in January, 2023"
-
-	self
-		deprecated: 'Use #commentedEntity instead'
-		transformWith:
-		'`@receiver container' -> '`@receiver commentedEntity'.
-
-	^ self commentedEntity
-]
-
-{ #category : #accessing }
-FamixTComment >> container: anObject [
-
-	"Marked as deprecated in January, 2023"
-
-	self
-		deprecated: 'Use #commentedEntity: instead'
-		transformWith:
-		'`@receiver container: `@arg' -> '`@receiver commentedEntity: `@arg'.
-
-	self commentedEntity: anObject
-]
-
 { #category : #printing }
 FamixTComment >> displayStringOn: aStream [
 
