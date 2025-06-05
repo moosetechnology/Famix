@@ -70,6 +70,7 @@ BaselineOfFamix >> fame: spec [
 
 	| version |
 	version := 'development'.
+	spec for: #( #'pharo11.x' #'pharo10.x' ) do: [ version := 'v1.1.9' ].
 	spec for: #( #'pharo8.x' #'pharo9.x' ) do: [ version := 'v1.1.6' ].
 
 	spec baseline: 'Fame' with: [
