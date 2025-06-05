@@ -1,7 +1,7 @@
-Extension { #name : #SystemDictionary }
+Extension { #name : #SystemEnvironment }
 
 { #category : #'*Moose-SmalltalkImporter-Core-Tests' }
-SystemDictionary >> absoluteName [
+SystemEnvironment >> absoluteName [
 	"Answer an environment independent (and therefore truely unique) name."
 
 	^ 'Smalltalk'
