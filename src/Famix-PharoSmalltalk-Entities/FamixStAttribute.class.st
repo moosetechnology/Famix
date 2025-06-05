@@ -64,3 +64,9 @@ FamixStAttribute >> isSharedVariable [
 	<FMComment: 'True if the attribute is a shared variable'>
 	^ self attributeAt: #isSharedVariable ifAbsent: [ false ]
 ]
+
+{ #category : #testing }
+FamixStAttribute >> isSharedVariable: aBoolean [
+
+	^ self attributeAt: #isSharedVariable put: aBoolean
+]
