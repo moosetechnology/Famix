@@ -43,6 +43,13 @@ FamixTest2Entity >> isClass [
 ]
 
 { #category : #testing }
+FamixTest2Entity >> isComment [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
 FamixTest2Entity >> isInheritance [
 
 	<generated>

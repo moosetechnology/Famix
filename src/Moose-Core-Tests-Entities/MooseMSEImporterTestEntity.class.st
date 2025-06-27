@@ -57,6 +57,13 @@ MooseMSEImporterTestEntity >> isClass [
 ]
 
 { #category : #testing }
+MooseMSEImporterTestEntity >> isComment [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
 MooseMSEImporterTestEntity >> isInheritance [
 
 	<generated>

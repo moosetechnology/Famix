@@ -64,6 +64,13 @@ FamixTest3Entity >> isClass [
 ]
 
 { #category : #testing }
+FamixTest3Entity >> isComment [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
 FamixTest3Entity >> isInvocation [
 
 	<generated>

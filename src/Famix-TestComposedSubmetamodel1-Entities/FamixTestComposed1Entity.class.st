@@ -43,6 +43,13 @@ FamixTestComposed1Entity >> isClass [
 ]
 
 { #category : #testing }
+FamixTestComposed1Entity >> isComment [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
 FamixTestComposed1Entity >> isMethod [
 
 	<generated>
