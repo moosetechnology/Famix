@@ -14,7 +14,7 @@ Instance Variables:
 "
 Class {
 	#name : #RBVisitorForFamixMetrics,
-	#superclass : #RBProgramNodeVisitor,
+	#superclass : #OCProgramNodeVisitor,
 	#instVars : [
 		'numberOfMessageSends',
 		'numberOfStatements',
