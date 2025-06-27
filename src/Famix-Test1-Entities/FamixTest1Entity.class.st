@@ -57,6 +57,13 @@ FamixTest1Entity >> isClass [
 ]
 
 { #category : #testing }
+FamixTest1Entity >> isComment [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
 FamixTest1Entity >> isFileAnchor [
 
 	<generated>

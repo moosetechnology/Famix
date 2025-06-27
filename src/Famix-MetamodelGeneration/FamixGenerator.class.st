@@ -1686,6 +1686,7 @@ FamixGenerator >> defineTraits [
 	tCanBeClassSide := builder newTraitNamed: #TCanBeClassSide.
 
 	tComment := builder newTraitNamed: #TComment comment: self commentForTComment.
+	tComment withTesting.
 
 	tCompilationUnit := builder newTraitNamed: #TCompilationUnit comment: self commentForTCompilationUnit.
 

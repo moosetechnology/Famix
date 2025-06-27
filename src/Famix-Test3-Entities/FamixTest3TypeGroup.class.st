@@ -56,6 +56,13 @@ FamixTest3TypeGroup >> isClass [
 ]
 
 { #category : #testing }
+FamixTest3TypeGroup >> isComment [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
 FamixTest3TypeGroup >> isInvocation [
 
 	<generated>

@@ -64,6 +64,13 @@ FamixStEntity >> isClass [
 ]
 
 { #category : #testing }
+FamixStEntity >> isComment [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
 FamixStEntity >> isGlobalVariable [
 
 	<generated>
