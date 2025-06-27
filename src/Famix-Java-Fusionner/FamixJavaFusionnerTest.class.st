@@ -133,6 +133,7 @@ FamixJavaFusionnerTest >> setUp [
 
 	resourceModel := FamixJavaModel new name: 'resourceModel'.
 	consumerModel := FamixJavaModel new name: 'consumerModel'.
+	
 	fusionner := FamixFusionnerJava new
 		resourceModel: resourceModel ;
 		consumerModel: consumerModel 

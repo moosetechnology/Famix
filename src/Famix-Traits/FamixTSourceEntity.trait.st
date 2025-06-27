@@ -80,6 +80,17 @@ FamixTSourceEntity >> hasSourceAnchor [
 	^ self sourceAnchor isNotNil
 ]
 
+{ #category : #inspector }
+FamixTSourceEntity >> inspectionSource: aBuilder [
+
+	<inspectorPresentationOrder: 3 title: 'SourceText'>
+	^ aBuilder newCode
+		  withoutSyntaxHighlight;
+		  withLineNumbers;
+		  text: self sourceText;
+		  beNotEditable
+]
+
 { #category : #'source anchor' }
 FamixTSourceEntity >> multipleFileAnchorClass [
 	^ self mooseModel

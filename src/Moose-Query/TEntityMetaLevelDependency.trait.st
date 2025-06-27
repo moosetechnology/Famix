@@ -728,6 +728,23 @@ TEntityMetaLevelDependency >> isRoot [
 	^ true
 ]
 
+{ #category : #inspector }
+TEntityMetaLevelDependency >> miInspectionTree: aBuilder [
+
+	<inspectorPresentationOrder: 15 title: 'Tree'>
+	^ aBuilder newTreeTable
+		  addColumn: (SpCompositeTableColumn new
+				   addColumn: ((SpImageTableColumn evaluated: #mooseIcon)
+						    width: 20;
+						    yourself);
+				   addColumn: (SpStringTableColumn evaluated: #name);
+				   yourself);
+		  children: [ :aClass | aClass children ];
+		  beMultipleSelection;
+		  roots: { self };
+		  beResizable
+]
+
 { #category : #accessing }
 TEntityMetaLevelDependency >> numberOfChildren [
 	<FMProperty: #numberOfChildren type: #Number>

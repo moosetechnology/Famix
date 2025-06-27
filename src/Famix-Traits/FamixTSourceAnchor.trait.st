@@ -81,6 +81,17 @@ FamixTSourceAnchor >> hasSource [
 	^ self explicitRequirement
 ]
 
+{ #category : #inspector }
+FamixTSourceAnchor >> inspectionSource: aBuilder [
+
+	<inspectorPresentationOrder: 4 title: 'SourceText'>
+	^ aBuilder newCode
+		  withoutSyntaxHighlight;
+		  withLineNumbers;
+		  text: self sourceText;
+		  beNotEditable
+]
+
 { #category : #testing }
 FamixTSourceAnchor >> isFileAnchor [
 	^ false

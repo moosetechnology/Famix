@@ -7,8 +7,8 @@ FamixAnnotationTypeGroup >> annotationConstellation [
 ]
 
 { #category : #'*Famix-Visualizations' }
-FamixAnnotationTypeGroup >> inspectorShowAnnotationConstellation [
+FamixAnnotationTypeGroup >> inspectionAnnotationConstellation: aBuilder [
 
 	<inspectorPresentationOrder: 10 title: 'Annotation Constellation'>
-	^ self annotationConstellation asInspectorPresenter
+	^ self annotationConstellation buildInspectorPresenter: aBuilder
 ]
