@@ -74,6 +74,13 @@ FamixTComment >> displayStringOn: aStream [
 	self commentedEntity displayStringOn: aStream
 ]
 
+{ #category : #testing }
+FamixTComment >> isComment [
+
+	<generated>
+	^ true
+]
+
 { #category : #printing }
 FamixTComment >> printOn: aStream [
 
