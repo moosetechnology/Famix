@@ -29,6 +29,13 @@ FamixTest6Entity class >> metamodel [
 ]
 
 { #category : #testing }
+FamixTest6Entity >> isComment [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
 FamixTest6Entity >> isNamedEntity [
 
 	<generated>
