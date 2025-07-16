@@ -95,7 +95,11 @@ FamixMetamodelBuilder >> allSubBuilders [
 { #category : #accessing }
 FamixMetamodelBuilder >> apply [
 
-	self environment apply
+	self environment apply.
+
+	"This next line should not be here... 
+	This feature should fill a ring model that should be manipulate by the apply above to check if we need the code, to be able to clean it and other mechanisms. But we do not yet support to create extension methods like this and I don't have the time to implement it for now. So, breaking layers we generate the extensions after we generated everything else in the 'right' way."
+	self generateTestingMethodsOfRemoteEntities
 ]
 
 { #category : #accessing }
@@ -261,6 +265,24 @@ FamixMetamodelBuilder >> generateRemotes [
 	self classes do: [ :each | each generateRemotes ].
 
 	self apply
+]
+
+{ #category : #generating }
+FamixMetamodelBuilder >> generateTestingMethodsOfRemoteEntities [
+
+	| entitiesWithRemoteSuperclasses |
+	entitiesWithRemoteSuperclasses := self classes reject: [ :class | self classes includes: class classGeneralization ].
+
+	self testingSelectorsMapping keysAndValuesDo: [ :class :selectors |
+			selectors ifNotEmpty: [
+					(entitiesWithRemoteSuperclasses includes: class) ifTrue: [
+							(self shouldGeneratorTestingMethodsOf: class) ifTrue: [
+									selectors do: [ :selector |
+											(class classGeneralization realClass includesSelector: selector) ifFalse: [
+													self environment
+														compile: ('{1}\\	<generated>\	^ false' withCRs format: { selector })
+														in: class classGeneralization realClass
+														classified: '*' , self configuration packageName ] ] ] ] ] ]
 ]
 
 { #category : #accessing }
@@ -554,6 +576,15 @@ FamixMetamodelBuilder >> shouldGenerateModel [
 
 	^ self behaviorsCount > 0 or: [
 		  self relations isNotEmpty or: [ self subBuilders isNotEmpty ] ]
+]
+
+{ #category : #asserting }
+FamixMetamodelBuilder >> shouldGeneratorTestingMethodsOf: aClass [
+	"In case a testing selector is relatif to a Trait that is not used in the current MM, then we do not need to generate the testing selector."
+
+	aClass isMetamodelTrait ifFalse: [ ^ true ].
+
+	^ self classes anySatisfy: [ :class | class allTransitiveTraits includes: aClass ]
 ]
 
 { #category : #accessing }
