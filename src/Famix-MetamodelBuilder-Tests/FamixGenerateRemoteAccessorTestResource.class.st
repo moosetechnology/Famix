@@ -22,7 +22,7 @@ Class {
 		'entityA',
 		'entityB'
 	],
-	#category : #'Famix-MetamodelBuilder-Tests'
+	#category : #'Famix-MetamodelBuilder-Tests-Helpers'
 }
 
 { #category : #running }

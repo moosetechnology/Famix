@@ -1,7 +1,7 @@
 Class {
 	#name : #FmxMBBuilderRelationTest,
 	#superclass : #FmxMBTestCase,
-	#category : #'Famix-MetamodelBuilder-Tests'
+	#category : #'Famix-MetamodelBuilder-Tests-Tests'
 }
 
 { #category : #initialization }

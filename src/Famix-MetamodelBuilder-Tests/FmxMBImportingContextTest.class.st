@@ -10,7 +10,7 @@ Class {
 		'method',
 		'generatedContext'
 	],
-	#category : #'Famix-MetamodelBuilder-Tests'
+	#category : #'Famix-MetamodelBuilder-Tests-Tests'
 }
 
 { #category : #running }

@@ -7,7 +7,7 @@ Class {
 		'generatedAccess',
 		'generatedVariable'
 	],
-	#category : #'Famix-MetamodelBuilder-Tests'
+	#category : #'Famix-MetamodelBuilder-Tests-Tests'
 }
 
 { #category : #utilities }

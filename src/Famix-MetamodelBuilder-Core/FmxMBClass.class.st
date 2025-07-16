@@ -197,16 +197,15 @@ FmxMBClass >> generateRootMetamodelMethodIn: aClass [
 
 { #category : #'generating-methods' }
 FmxMBClass >> generateTestingMethodsIn: aClass [
-	self isRoot
-		ifTrue: [ builder testingSelectorsMapping
-				keysAndValuesDo: [ :concernedClass :selectors | 
-					"In case a testing selector is relatif to a Trait that is not used in the current MM, then we do not need to generate the testing selector."
-					(concernedClass isMetamodelTrait and: [ builder classes noneSatisfy: [ :class | class allTransitiveTraits includes: concernedClass ] ])
-						ifFalse: [ selectors
-								do: [ :sel | 
+
+	self isRoot ifTrue: [
+			builder testingSelectorsMapping keysAndValuesDo: [ :concernedClass :selectors |
+					(builder shouldGeneratorTestingMethodsOf: concernedClass) ifTrue: [
+							selectors do: [ :sel |
 									| selectorsFromTraits |
 									selectorsFromTraits := self traitGeneralizations flatCollect: #testingSelectors.
-									(selectorsFromTraits includes: sel) ifFalse: [ aClass instanceSide compile: ('{1}\\	<generated>\	^ false' withCRs format: {sel}) classified: #testing ] ] ] ] ].
+									(selectorsFromTraits includes: sel) ifFalse: [
+										aClass instanceSide compile: ('{1}\\	<generated>\	^ false' withCRs format: { sel }) classified: #testing ] ] ] ] ].
 
 	super generateTestingMethodsIn: aClass
 ]

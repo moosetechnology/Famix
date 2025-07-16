@@ -1,5 +1,5 @@
 Class {
 	#name : #FmxMBPropertyTest,
 	#superclass : #FmxMBTestCase,
-	#category : #'Famix-MetamodelBuilder-Tests'
+	#category : #'Famix-MetamodelBuilder-Tests-Tests'
 }
