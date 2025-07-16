@@ -278,11 +278,12 @@ FamixMetamodelBuilder >> generateTestingMethodsOfRemoteEntities [
 					(entitiesWithRemoteSuperclasses includes: class) ifTrue: [
 							(self shouldGeneratorTestingMethodsOf: class) ifTrue: [
 									selectors do: [ :selector |
-											(class classGeneralization realClass includesSelector: selector) ifFalse: [
-													self environment
-														compile: ('{1}\\	<generated>\	^ false' withCRs format: { selector })
-														in: class classGeneralization realClass
-														classified: '*' , self configuration packageName ] ] ] ] ] ]
+											class classGeneralization ifNotNil: [ :super |
+													(super realClass includesSelector: selector) ifFalse: [
+															self environment
+																compile: ('{1}\\	<generated>\	^ false' withCRs format: { selector })
+																in: class classGeneralization realClass
+																classified: '*' , self configuration packageName ] ] ] ] ] ] ]
 ]
 
 { #category : #accessing }
