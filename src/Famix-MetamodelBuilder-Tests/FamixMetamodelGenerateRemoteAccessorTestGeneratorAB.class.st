@@ -1,17 +1,12 @@
 Class {
 	#name : #FamixMetamodelGenerateRemoteAccessorTestGeneratorAB,
-	#superclass : #FamixMetamodelGenerator,
+	#superclass : #FamixTestGenerator,
 	#instVars : [
 		'entityA',
 		'entityB'
 	],
 	#category : #'Famix-MetamodelBuilder-Tests-GeneratorRessources'
 }
-
-{ #category : #testing }
-FamixMetamodelGenerateRemoteAccessorTestGeneratorAB class >> isRealMetamodel [
-	^ false
-]
 
 { #category : #accessing }
 FamixMetamodelGenerateRemoteAccessorTestGeneratorAB class >> packageName [

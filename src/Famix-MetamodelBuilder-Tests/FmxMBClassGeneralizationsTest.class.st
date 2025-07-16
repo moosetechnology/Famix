@@ -6,7 +6,7 @@ Class {
 		'behavior',
 		'class'
 	],
-	#category : #'Famix-MetamodelBuilder-Tests'
+	#category : #'Famix-MetamodelBuilder-Tests-Tests'
 }
 
 { #category : #running }
