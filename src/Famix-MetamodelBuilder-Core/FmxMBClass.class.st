@@ -243,6 +243,12 @@ FmxMBClass >> optionalPragma [
 		  ifFalse: [ super optionalPragma ]
 ]
 
+{ #category : #accessing }
+FmxMBClass >> remoteClassGeneratization [
+
+	^ self allClassGeneralizations detect: #isRemote ifNone: [ nil ]
+]
+
 { #category : #generalization }
 FmxMBClass >> subclassOf: aClass [
 	

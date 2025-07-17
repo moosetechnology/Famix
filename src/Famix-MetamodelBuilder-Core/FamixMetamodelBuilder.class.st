@@ -271,19 +271,33 @@ FamixMetamodelBuilder >> generateRemotes [
 FamixMetamodelBuilder >> generateTestingMethodsOfRemoteEntities [
 
 	| entitiesWithRemoteSuperclasses |
-	entitiesWithRemoteSuperclasses := self classes reject: [ :class | self classes includes: class classGeneralization ].
+	entitiesWithRemoteSuperclasses := self classes groupedBy: [ :class |
+		                                  class remoteClassGeneratization ].
 
-	self testingSelectorsMapping keysAndValuesDo: [ :class :selectors |
-			selectors ifNotEmpty: [
-					(entitiesWithRemoteSuperclasses includes: class) ifTrue: [
-							(self shouldGeneratorTestingMethodsOf: class) ifTrue: [
+
+	entitiesWithRemoteSuperclasses keysAndValuesDo: [
+			:remoteClass
+			:subclasses |
+			remoteClass ifNotNil: [
+					| subclassesAndTraits |
+					subclassesAndTraits := subclasses flatCollectAsSet: [ :subclass |
+						                       subclass allTransitiveTraits
+						                       , { subclass } ].
+
+					self testingSelectorsMapping keysAndValuesDo: [
+							:behavior
+							:selectors |
+							((self shouldGeneratorTestingMethodsOf: behavior) and: [
+								 subclassesAndTraits includes: behavior ]) ifTrue: [
 									selectors do: [ :selector |
-											class classGeneralization ifNotNil: [ :super |
-													(super realClass includesSelector: selector) ifFalse: [
-															self environment
-																compile: ('{1}\\	<generated>\	^ false' withCRs format: { selector })
-																in: class classGeneralization realClass
-																classified: '*' , self configuration packageName ] ] ] ] ] ] ]
+											(remoteClass realClass includesSelector: selector)
+												ifFalse: [
+														self environment
+															compile:
+															('{1}\\	<generated>\	^ false' withCRs format:
+																 { selector })
+															in: remoteClass realClass
+															classified: '*' , self configuration packageName ] ] ] ] ] ]
 ]
 
 { #category : #accessing }
