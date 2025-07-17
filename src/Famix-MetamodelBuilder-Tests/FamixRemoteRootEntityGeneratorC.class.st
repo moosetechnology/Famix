@@ -4,6 +4,7 @@ Class {
 	#instVars : [
 		'fmx',
 		'fmx2',
+		'fmx3',
 		'entityA',
 		'entityB'
 	],
@@ -37,8 +38,10 @@ FamixRemoteRootEntityGeneratorC >> defineClasses [
 	super defineClasses.
 	fmx := builder newClassNamed: #EntityC.
 	fmx withTesting.
-	fmx2 := builder newClassNamed: #EntityD.
+	fmx2 := builder newClassNamed: #EntityDSuper.
 	fmx2 withTesting.
+	fmx3 := builder newClassNamed: #EntityD.
+	fmx3 withTesting.
 	
 	entityA := self remoteEntity: #Entity withPrefix: #FmxRootEntityA.
 	entityB := self remoteEntity: #Entity withPrefix: #FmxRootEntityB.
@@ -50,5 +53,6 @@ FamixRemoteRootEntityGeneratorC >> defineHierarchy [
 	super defineHierarchy.
 
 	fmx --|> entityA.
-	fmx2 --|> entityB
+	fmx2 --|> entityB.
+	fmx3 --|> fmx2
 ]

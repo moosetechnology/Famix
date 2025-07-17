@@ -72,6 +72,7 @@ FamixGeneratorRootEntityTest >> testTestingMethodsOfGeneratorC [
 	self assert: ((self classNamed: #FmxRootEntityAEntity) includesSelector: #isEntityC).
 	self deny: ((self classNamed: #FmxRootEntityAEntity) includesSelector: #isEntityD).
 	self deny: ((self classNamed: #FmxRootEntityBEntity) includesSelector: #isEntityC).
+	"In this case, EntityD is not a direct subclass of EntityBEntity but it should still work"
 	self assert: ((self classNamed: #FmxRootEntityBEntity) includesSelector: #isEntityD).
 
 	self assert: ((self classNamed: #FmxRootEntityAEntity) >> #isEntityC) isExtension.
