@@ -244,9 +244,14 @@ FmxMBBehavior >> fullName [
 
 { #category : #accessing }
 FmxMBBehavior >> generalization: anObject [
+
+	self isRemote ifTrue: [ self error: 'It is not possible to add a generalization to a remote entity.' ].
 	^ anObject isSymbol
-		ifTrue: [ self addTraitGeneralization: (self builder getTraitNamed: anObject) ]
-		ifFalse: [ anObject isMetamodelTrait ifTrue: [ self addTraitGeneralization: anObject ] ifFalse: [ self classGeneralization: anObject ] ]
+		  ifTrue: [ self addTraitGeneralization: (self builder getTraitNamed: anObject) ]
+		  ifFalse: [
+				  anObject isMetamodelTrait
+					  ifTrue: [ self addTraitGeneralization: anObject ]
+					  ifFalse: [ self classGeneralization: anObject ] ]
 ]
 
 { #category : #generating }
