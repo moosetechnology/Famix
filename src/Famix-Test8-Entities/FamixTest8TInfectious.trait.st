@@ -11,14 +11,16 @@
 
 "
 Trait {
-	#name : #FamixTest8TInfectious,
+	#name : 'FamixTest8TInfectious',
 	#instVars : [
 		'#incomingInfections => FMMany type: #FamixTest8Infection opposite: #infectious'
 	],
-	#category : #'Famix-Test8-Entities-Traits'
+	#category : 'Famix-Test8-Entities-Traits',
+	#package : 'Famix-Test8-Entities',
+	#tag : 'Traits'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTest8TInfectious classSide >> annotation [
 
 	<FMClass: #TInfectious super: #Object>
@@ -27,13 +29,13 @@ FamixTest8TInfectious classSide >> annotation [
 	^ self
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTest8TInfectious >> addIncomingInfection: anObject [
 	<generated>
 	^ self incomingInfections add: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest8TInfectious >> incomingInfections [
 	"Relation named: #incomingInfections type: #FamixTest8Infection opposite: #infectious"
 
@@ -42,7 +44,7 @@ FamixTest8TInfectious >> incomingInfections [
 	^ incomingInfections
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest8TInfectious >> incomingInfections: anObject [
 
 	<generated>

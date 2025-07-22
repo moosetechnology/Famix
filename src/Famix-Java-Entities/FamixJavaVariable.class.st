@@ -11,14 +11,16 @@
 
 "
 Class {
-	#name : #FamixJavaVariable,
-	#superclass : #FamixJavaNamedEntity,
+	#name : 'FamixJavaVariable',
+	#superclass : 'FamixJavaNamedEntity',
 	#traits : 'FamixTInvocationsReceiver',
 	#classTraits : 'FamixTInvocationsReceiver classTrait',
-	#category : #'Famix-Java-Entities-Entities'
+	#category : 'Famix-Java-Entities-Entities',
+	#package : 'Famix-Java-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixJavaVariable class >> annotation [
 
 	<FMClass: #Variable super: #FamixJavaNamedEntity>
@@ -28,14 +30,14 @@ FamixJavaVariable class >> annotation [
 	^ self
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixJavaVariable class >> isAbstract [
 
 	<generated>
 	^ self == FamixJavaVariable
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FamixJavaVariable >> accept: aVisitor [
 
 	<generated>

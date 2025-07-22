@@ -11,14 +11,16 @@
 
 "
 Trait {
-	#name : #FamixTInvocationsReceiver,
+	#name : 'FamixTInvocationsReceiver',
 	#instVars : [
 		'#receivingInvocations => FMMany type: #FamixTInvocation opposite: #receiver'
 	],
-	#category : #'Famix-Traits-Invocation'
+	#category : 'Famix-Traits-Invocation',
+	#package : 'Famix-Traits',
+	#tag : 'Invocation'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTInvocationsReceiver classSide >> annotation [
 
 	<FMClass: #TInvocationsReceiver super: #Object>
@@ -27,19 +29,19 @@ FamixTInvocationsReceiver classSide >> annotation [
 	^ self
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FamixTInvocationsReceiver >> accept: aVisitor [
 
 	<generated>
 	^ aVisitor visitFamixTInvocationsReceiver: self
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTInvocationsReceiver >> addReceivingInvocation: anInvocation [
 	receivingInvocations add: anInvocation
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTInvocationsReceiver >> receivingInvocations [
 	"Relation named: #receivingInvocations type: #FamixTInvocation opposite: #receiver"
 
@@ -49,7 +51,7 @@ FamixTInvocationsReceiver >> receivingInvocations [
 	^ receivingInvocations
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTInvocationsReceiver >> receivingInvocations: anObject [
 
 	<generated>

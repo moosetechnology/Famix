@@ -11,14 +11,16 @@
 
 "
 Class {
-	#name : #FamixTest7SourceLanguage,
-	#superclass : #FamixTest7Entity,
+	#name : 'FamixTest7SourceLanguage',
+	#superclass : 'FamixTest7Entity',
 	#traits : 'FamixTSourceLanguage',
 	#classTraits : 'FamixTSourceLanguage classTrait',
-	#category : #'Famix-Test7-Entities-Entities'
+	#category : 'Famix-Test7-Entities-Entities',
+	#package : 'Famix-Test7-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTest7SourceLanguage class >> annotation [
 
 	<FMClass: #SourceLanguage super: #FamixTest7Entity>

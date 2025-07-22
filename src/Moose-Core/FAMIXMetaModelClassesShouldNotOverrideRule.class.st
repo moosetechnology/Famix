@@ -1,61 +1,62 @@
 Class {
-	#name : #FamixMetaModelClassesShouldNotOverrideRule,
-	#superclass : #ReAbstractRule,
+	#name : 'FamixMetaModelClassesShouldNotOverrideRule',
+	#superclass : 'ReAbstractRule',
 	#instVars : [
 		'metaModelClasses'
 	],
-	#category : #'Moose-Core'
+	#category : 'Moose-Core',
+	#package : 'Moose-Core'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixMetaModelClassesShouldNotOverrideRule class >> checksClass [
 
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetaModelClassesShouldNotOverrideRule class >> group [
 
 	^ 'Famix'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetaModelClassesShouldNotOverrideRule class >> rationale [
 
 	^ 'check if a metamodel class (MooseEntity and all its subclasses) override some methods that it should not override. Those methods are specified by FamixMetaModelClassesShouldNotOverrideRule >> selectorsThatShouldNotBeOverridden'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetaModelClassesShouldNotOverrideRule class >> ruleName [
 
 	^ 'A metamodel class override a method that it should not override'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetaModelClassesShouldNotOverrideRule class >> uniqueIdentifierName [
 	^ 'MetaModelClassShouldNotOverride'
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixMetaModelClassesShouldNotOverrideRule >> basicCheck: aClass [
 
 	(self metaModelClasses includes: aClass) ifTrue: [ self selectorsThatShouldNotBeOverridden do: [ :each | (aClass includesSelector: each) ifTrue: [ ^ true ] ] ].
 	^ false
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetaModelClassesShouldNotOverrideRule >> metaModelClasses [
 	"return all classes that have to be checked in this rule"
 	^ metaModelClasses ifNil: [metaModelClasses := MooseEntity allSubclasses].
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetaModelClassesShouldNotOverrideRule >> name [
 
 	^ 'Metamodel classes should not override #mooseName nor #printString'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetaModelClassesShouldNotOverrideRule >> selectorsThatShouldNotBeOverridden [
 
 	^ #(#mooseName #printString)

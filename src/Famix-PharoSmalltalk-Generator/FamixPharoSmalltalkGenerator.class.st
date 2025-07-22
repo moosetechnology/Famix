@@ -1,6 +1,6 @@
 Class {
-	#name : #FamixPharoSmalltalkGenerator,
-	#superclass : #FamixBasicInfrastructureGenerator,
+	#name : 'FamixPharoSmalltalkGenerator',
+	#superclass : 'FamixBasicInfrastructureGenerator',
 	#instVars : [
 		'access',
 		'annotationInstance',
@@ -23,22 +23,23 @@ Class {
 		'pharoEntitySourceAnchor',
 		'entityTyping'
 	],
-	#category : #'Famix-PharoSmalltalk-Generator'
+	#category : 'Famix-PharoSmalltalk-Generator',
+	#package : 'Famix-PharoSmalltalk-Generator'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixPharoSmalltalkGenerator class >> packageName [
 
 	^ #'Famix-PharoSmalltalk-Entities'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixPharoSmalltalkGenerator class >> prefix [
 
 	^ #'FamixSt'
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FamixPharoSmalltalkGenerator >> defineClasses [
 	super defineClasses.
 
@@ -65,7 +66,7 @@ FamixPharoSmalltalkGenerator >> defineClasses [
 
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FamixPharoSmalltalkGenerator >> defineHierarchy [
 
 	super defineHierarchy.
@@ -157,14 +158,14 @@ FamixPharoSmalltalkGenerator >> defineHierarchy [
 	unknownVariable --|> #TInvocationsReceiver
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixPharoSmalltalkGenerator >> defineProperties [
 	super defineProperties.
 	((method property: #protocol type: #String)
 		comment: 'Protocol of the method'). 
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FamixPharoSmalltalkGenerator >> newBuilder [
 
 	^ super newBuilder

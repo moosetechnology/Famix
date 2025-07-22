@@ -22,36 +22,38 @@ Internal Representation and Key Implementation Points.
 
 "
 Class {
-	#name : #MQRelationQuery,
-	#superclass : #MQAbstractQuery,
+	#name : 'MQRelationQuery',
+	#superclass : 'MQAbstractQuery',
 	#instVars : [
 		'relationStrategy'
 	],
-	#category : #'Moose-Query-Relations'
+	#category : 'Moose-Query-Relations',
+	#package : 'Moose-Query',
+	#tag : 'Relations'
 }
 
-{ #category : #execution }
+{ #category : 'execution' }
 MQRelationQuery >> execute [
 
 	^ ((relationStrategy selectPropertiesIn: receiver) collect: [ :property | 
 		   receiver perform: property implementingSelector ]) flattened
 ]
 
-{ #category : #DSL }
+{ #category : 'DSL' }
 MQRelationQuery >> named: aSymbol [
 
 	relationStrategy := MQRelationByNameStrategy name: aSymbol.
 	^ self execute
 ]
 
-{ #category : #DSL }
+{ #category : 'DSL' }
 MQRelationQuery >> ofAnyType [
 
 	relationStrategy := MQRelationAllTypesStrategy new.
 	^ self execute
 ]
 
-{ #category : #DSL }
+{ #category : 'DSL' }
 MQRelationQuery >> ofAnyType: aCollection [
 
 	relationStrategy := MQRelationMultipleTypesStrategy propertyTypes:
@@ -59,7 +61,7 @@ MQRelationQuery >> ofAnyType: aCollection [
 	^ self execute
 ]
 
-{ #category : #DSL }
+{ #category : 'DSL' }
 MQRelationQuery >> ofType: aPropertyType [
 
 	relationStrategy := MQRelationOneTypeStrategy propertyType: aPropertyType.

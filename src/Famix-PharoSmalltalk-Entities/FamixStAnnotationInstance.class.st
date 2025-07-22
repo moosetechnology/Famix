@@ -17,14 +17,16 @@
 
 "
 Class {
-	#name : #FamixStAnnotationInstance,
-	#superclass : #FamixStSourcedEntity,
+	#name : 'FamixStAnnotationInstance',
+	#superclass : 'FamixStSourcedEntity',
 	#traits : 'FamixTAnnotationInstance',
 	#classTraits : 'FamixTAnnotationInstance classTrait',
-	#category : #'Famix-PharoSmalltalk-Entities-Entities'
+	#category : 'Famix-PharoSmalltalk-Entities-Entities',
+	#package : 'Famix-PharoSmalltalk-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixStAnnotationInstance class >> annotation [
 
 	<FMClass: #AnnotationInstance super: #FamixStSourcedEntity>
@@ -33,7 +35,7 @@ FamixStAnnotationInstance class >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixStAnnotationInstance >> name [
 	^ String
 		streamContents: [ :stream | 

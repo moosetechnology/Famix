@@ -24,16 +24,18 @@ It represents a folder in the file system. It can contain other files or folders
 
 "
 Trait {
-	#name : #FamixTFolder,
+	#name : 'FamixTFolder',
 	#instVars : [
 		'#childrenFileSystemEntities => FMMany type: #FamixTFileSystemEntity opposite: #parentFolder'
 	],
 	#traits : 'FamixTFileSystemEntity',
 	#classTraits : 'FamixTFileSystemEntity classTrait',
-	#category : #'Famix-Traits-File'
+	#category : 'Famix-Traits-File',
+	#package : 'Famix-Traits',
+	#tag : 'File'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTFolder classSide >> annotation [
 
 	<FMClass: #TFolder super: #Object>
@@ -42,32 +44,32 @@ FamixTFolder classSide >> annotation [
 	^ self
 ]
 
-{ #category : #groups }
+{ #category : 'groups' }
 FamixTFolder classSide >> annotationFamixFolderGroup [
 	<generated>
 	<mooseGroup>
 	^ FamixFolderGroup
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FamixTFolder >> accept: aVisitor [
 
 	<generated>
 	^ aVisitor visitFamixTFolder: self
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTFolder >> addChildFileSystemEntity: aFileOrFolder [
 	self childrenFileSystemEntities add: aFileOrFolder
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTFolder >> addChildrenFileSystemEntity: anObject [
 	<generated>
 	^ self childrenFileSystemEntities add: anObject
 ]
 
-{ #category : #properties }
+{ #category : 'properties' }
 FamixTFolder >> allRecursiveFiles [
 	| result |
 	result := MooseGroup withAll: self files withDescription: 'All recursive files in ', self mooseName.
@@ -75,7 +77,7 @@ FamixTFolder >> allRecursiveFiles [
 	^result.
 ]
 
-{ #category : #properties }
+{ #category : 'properties' }
 FamixTFolder >> allRecursiveFolders [
 	| result |
 	result := MooseGroup withAll: self folders withDescription: 'All recursive folders in ', self mooseName.
@@ -83,7 +85,7 @@ FamixTFolder >> allRecursiveFolders [
 	^result.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTFolder >> childrenFileSystemEntities [
 	"Relation named: #childrenFileSystemEntities type: #FamixTFileSystemEntity opposite: #parentFolder"
 
@@ -93,41 +95,41 @@ FamixTFolder >> childrenFileSystemEntities [
 	^ childrenFileSystemEntities
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTFolder >> childrenFileSystemEntities: anObject [
 
 	<generated>
 	childrenFileSystemEntities value: anObject
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTFolder >> files [
 	^ self childrenFileSystemEntities reject: #isFolder
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTFolder >> filesGroup [
 	<navigation: 'Files'>
 	^FamixFileGroup withAll: self files withDescription: 'Files'
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTFolder >> folders [
 	^ self childrenFileSystemEntities select: #isFolder
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTFolder >> foldersGroup [
 	<navigation: 'Folders'>
 	^FamixFolderGroup withAll: self folders withDescription: 'Folders'
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTFolder >> isFolder [
 	^ true
 ]
 
-{ #category : #properties }
+{ #category : 'properties' }
 FamixTFolder >> numberOfEmptyLinesOfText [
 	<FMProperty: #numberOfEmptyLinesOfText type: #Number>
 	<FMComment: 'Number of empty lines of text'>
@@ -137,7 +139,7 @@ FamixTFolder >> numberOfEmptyLinesOfText [
 	]
 ]
 
-{ #category : #properties }
+{ #category : 'properties' }
 FamixTFolder >> numberOfFiles [
 	<FMProperty: #numberOfFiles type: #Number>
 	<FMComment: 'The number of files in a folder'>
@@ -147,7 +149,7 @@ FamixTFolder >> numberOfFiles [
 		computedAs: [self files size]
 ]
 
-{ #category : #properties }
+{ #category : 'properties' }
 FamixTFolder >> numberOfFolders [
 	<FMProperty: #numberOfFolders type: #Number>
 	<FMComment: 'The number of folders in a folder'>
@@ -157,7 +159,7 @@ FamixTFolder >> numberOfFolders [
 		computedAs: [self folders size]
 ]
 
-{ #category : #properties }
+{ #category : 'properties' }
 FamixTFolder >> totalNumberOfLinesOfText [
 	<FMProperty: #totalNumberOfLinesOfText type: #Number>
 	<FMComment: 'Number of lines of text'>
@@ -167,7 +169,7 @@ FamixTFolder >> totalNumberOfLinesOfText [
 		computedAs: [ self files , self folders sumNumbers: #totalNumberOfLinesOfText ]
 ]
 
-{ #category : #properties }
+{ #category : 'properties' }
 FamixTFolder >> withAllRecursiveFolders [
 	| result |
 	result := MooseGroup with: self withDescription: 'All recursive folders in ', self mooseName.

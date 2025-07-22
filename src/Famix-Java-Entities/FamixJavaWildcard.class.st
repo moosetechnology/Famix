@@ -17,14 +17,16 @@
 
 "
 Class {
-	#name : #FamixJavaWildcard,
-	#superclass : #FamixJavaType,
+	#name : 'FamixJavaWildcard',
+	#superclass : 'FamixJavaType',
 	#traits : 'FamixJavaTBounded + FamixTTypeArgument',
 	#classTraits : 'FamixJavaTBounded classTrait + FamixTTypeArgument classTrait',
-	#category : #'Famix-Java-Entities-Entities'
+	#category : 'Famix-Java-Entities-Entities',
+	#package : 'Famix-Java-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixJavaWildcard class >> annotation [
 
 	<FMClass: #Wildcard super: #FamixJavaType>
@@ -33,7 +35,7 @@ FamixJavaWildcard class >> annotation [
 	^ self
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FamixJavaWildcard >> accept: aVisitor [
 
 	<generated>

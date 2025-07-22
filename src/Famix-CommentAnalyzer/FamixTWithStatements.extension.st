@@ -1,11 +1,11 @@
-Extension { #name : #FamixTWithStatements }
+Extension { #name : 'FamixTWithStatements' }
 
-{ #category : #'*Famix-CommentAnalyzer' }
+{ #category : '*Famix-CommentAnalyzer' }
 FamixTWithStatements >> sourceCommentRateWithCleaning [
 	^ self cacheAt: #sourceCommentRateWithCleaning ifAbsentPut: [ self sourceCommentRateWithSelector: #numberOfUsefulCommentLines ]
 ]
 
-{ #category : #'*Famix-CommentAnalyzer' }
+{ #category : '*Famix-CommentAnalyzer' }
 FamixTWithStatements >> sourceCommentRateWithSelector: aSelector [
 	^ (self cyclomaticComplexity < 5 or: [ self numberOfLinesOfCode < 30 ])
 		ifTrue: [ 3 ]

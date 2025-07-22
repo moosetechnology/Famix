@@ -41,14 +41,16 @@
 
 "
 Class {
-	#name : #FamixJavaAnnotationType,
-	#superclass : #FamixJavaType,
+	#name : 'FamixJavaAnnotationType',
+	#superclass : 'FamixJavaType',
 	#traits : 'FamixTAnnotationType + FamixTHasVisibility + FamixTImplementable + FamixTPackageable + FamixTTypeArgument + FamixTWithAttributes + FamixTWithComments + FamixTWithInheritances',
 	#classTraits : 'FamixTAnnotationType classTrait + FamixTHasVisibility classTrait + FamixTImplementable classTrait + FamixTPackageable classTrait + FamixTTypeArgument classTrait + FamixTWithAttributes classTrait + FamixTWithComments classTrait + FamixTWithInheritances classTrait',
-	#category : #'Famix-Java-Entities-Entities'
+	#category : 'Famix-Java-Entities-Entities',
+	#package : 'Famix-Java-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixJavaAnnotationType class >> annotation [
 
 	<FMClass: #AnnotationType super: #FamixJavaType>
@@ -57,31 +59,31 @@ FamixJavaAnnotationType class >> annotation [
 	^ self
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FamixJavaAnnotationType >> accept: aVisitor [
 
 	<generated>
 	^ aVisitor visitFamixJavaAnnotationType: self
 ]
 
-{ #category : #'accessing-query' }
+{ #category : 'accessing-query' }
 FamixJavaAnnotationType >> annotatedEntities [
 	^ self instances collect: [:each | each annotatedEntity ]
 ]
 
-{ #category : #'accessing-query' }
+{ #category : 'accessing-query' }
 FamixJavaAnnotationType >> annotatedEntitiesGroup [
 	<navigation: 'Annotated entities'>
 	^ self annotatedEntities asMooseGroup
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixJavaAnnotationType >> typeContainer [
 
 	^ self annotationTypesContainer
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixJavaAnnotationType >> typeContainer: anObject [
 
 	^ self annotationTypesContainer: anObject

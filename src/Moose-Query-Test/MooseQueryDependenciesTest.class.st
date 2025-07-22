@@ -1,10 +1,11 @@
 Class {
-	#name : #MooseQueryDependenciesTest,
-	#superclass : #MooseQueryTest,
-	#category : #'Moose-Query-Test'
+	#name : 'MooseQueryDependenciesTest',
+	#superclass : 'MooseQueryTest',
+	#category : 'Moose-Query-Test',
+	#package : 'Moose-Query-Test'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryDependenciesTest >> testQueryOutgoingDependenciesOnAssociations [
 	self assert: method1 queryAllOutgoing size equals: 3.
 	self assert: (method1 queryAllOutgoing opposites includes: class2).

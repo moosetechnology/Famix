@@ -29,14 +29,16 @@
 
 "
 Class {
-	#name : #FamixStUnknownVariable,
-	#superclass : #FamixStNamedEntity,
+	#name : 'FamixStUnknownVariable',
+	#superclass : 'FamixStNamedEntity',
 	#traits : 'FamixTInvocationsReceiver + FamixTUnknownVariable',
 	#classTraits : 'FamixTInvocationsReceiver classTrait + FamixTUnknownVariable classTrait',
-	#category : #'Famix-PharoSmalltalk-Entities-Entities'
+	#category : 'Famix-PharoSmalltalk-Entities-Entities',
+	#package : 'Famix-PharoSmalltalk-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixStUnknownVariable class >> annotation [
 
 	<FMClass: #UnknownVariable super: #FamixStNamedEntity>

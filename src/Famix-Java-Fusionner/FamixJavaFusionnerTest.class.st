@@ -1,15 +1,17 @@
 Class {
-	#name : #FamixJavaFusionnerTest,
-	#superclass : #TestCase,
+	#name : 'FamixJavaFusionnerTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'resourceModel',
 		'consumerModel',
 		'fusionner'
 	],
-	#category : #'Famix-Java-Fusionner-Tests'
+	#category : 'Famix-Java-Fusionner-Tests',
+	#package : 'Famix-Java-Fusionner',
+	#tag : 'Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 FamixJavaFusionnerTest >> attribute: attributeName class: className [
 
 	| entity |
@@ -22,7 +24,7 @@ FamixJavaFusionnerTest >> attribute: attributeName class: className [
 
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixJavaFusionnerTest >> class: aName [
 
 	(resourceModel newClassNamed: aName) isStub: false.
@@ -30,7 +32,7 @@ FamixJavaFusionnerTest >> class: aName [
 
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixJavaFusionnerTest >> class: subName inheritsFrom: superName [
 	"note: Associations don't have a #isStub property"
 
@@ -42,7 +44,7 @@ FamixJavaFusionnerTest >> class: subName inheritsFrom: superName [
 		superclass: (consumerModel entityNamed: superName)
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixJavaFusionnerTest >> consumerClass: subName inheritsFrom: superName [
 
 	consumerModel newInheritance
@@ -51,7 +53,7 @@ FamixJavaFusionnerTest >> consumerClass: subName inheritsFrom: superName [
 
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixJavaFusionnerTest >> consumerVariable: varName declaredType: typeName [
 
 	(consumerModel newLocalVariableNamed: varName) typing:
@@ -60,7 +62,7 @@ FamixJavaFusionnerTest >> consumerVariable: varName declaredType: typeName [
 			 yourself)
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixJavaFusionnerTest >> exception: aName [
 
 	(resourceModel newExceptionNamed: aName) isStub: false.
@@ -68,7 +70,7 @@ FamixJavaFusionnerTest >> exception: aName [
 
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixJavaFusionnerTest >> interface: aName [
 
 	resourceModel newInterface
@@ -80,7 +82,7 @@ FamixJavaFusionnerTest >> interface: aName [
 
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixJavaFusionnerTest >> localVariable: variableName method: methodName [
 
 	| entity |
@@ -93,7 +95,7 @@ FamixJavaFusionnerTest >> localVariable: variableName method: methodName [
 
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixJavaFusionnerTest >> method: methodName class: className [
 
 	| entity |
@@ -106,7 +108,7 @@ FamixJavaFusionnerTest >> method: methodName class: className [
 
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixJavaFusionnerTest >> package: aName [
 
 	(resourceModel newPackageNamed: aName) isStub: false.
@@ -114,7 +116,7 @@ FamixJavaFusionnerTest >> package: aName [
 
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixJavaFusionnerTest >> parameter: parameterName method: methodName [
 
 	| entity |
@@ -127,7 +129,7 @@ FamixJavaFusionnerTest >> parameter: parameterName method: methodName [
 
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixJavaFusionnerTest >> setUp [
 	super setUp.
 
@@ -139,7 +141,7 @@ FamixJavaFusionnerTest >> setUp [
 		consumerModel: consumerModel 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaFusionnerTest >> testAccessedStubAttribute [
 	"non stub method accessing a stub attribute"
 
@@ -163,7 +165,7 @@ FamixJavaFusionnerTest >> testAccessedStubAttribute [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaFusionnerTest >> testAccessedStubLocalVariable [
 	"non stub method accessing a stub attribute...."
 
@@ -187,7 +189,7 @@ FamixJavaFusionnerTest >> testAccessedStubLocalVariable [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaFusionnerTest >> testAccessedStubParameter [
 	"non stub method accessing a stub attribute...."
 
@@ -211,7 +213,7 @@ FamixJavaFusionnerTest >> testAccessedStubParameter [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaFusionnerTest >> testAttributeWithStubDeclaredType [
 
 	self class: 'Blah'.
@@ -242,7 +244,7 @@ FamixJavaFusionnerTest >> testAttributeWithStubDeclaredType [
 		equals: (consumerModel entityNamed: 'att')
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaFusionnerTest >> testClassImplementingStubInterface [
 
 	self interface: 'IBlah'.
@@ -260,7 +262,7 @@ FamixJavaFusionnerTest >> testClassImplementingStubInterface [
 	self assert: resourceModel size equals: 1.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaFusionnerTest >> testDoNotReplaceStubResourceEntity [
 
 	self class: 'Blah'.
@@ -284,7 +286,7 @@ FamixJavaFusionnerTest >> testDoNotReplaceStubResourceEntity [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaFusionnerTest >> testLocalVariableWithStubDeclaredType [
 
 	self class: 'Blah'.
@@ -315,7 +317,7 @@ FamixJavaFusionnerTest >> testLocalVariableWithStubDeclaredType [
 		equals: (consumerModel entityNamed: 'var')
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaFusionnerTest >> testMethodCatchStubException [
 
 	| except |
@@ -340,7 +342,7 @@ FamixJavaFusionnerTest >> testMethodCatchStubException [
 	self assert: except equals: (resourceModel entityNamed: 'Except')
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaFusionnerTest >> testMethodDeclareStubException [
 
 	| except |
@@ -365,7 +367,7 @@ FamixJavaFusionnerTest >> testMethodDeclareStubException [
 	self assert: except equals: (resourceModel entityNamed: 'Except')
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaFusionnerTest >> testMethodThrowStubException [
 
 	| except |
@@ -390,7 +392,7 @@ FamixJavaFusionnerTest >> testMethodThrowStubException [
 	self assert: except equals: (resourceModel entityNamed: 'Except')
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaFusionnerTest >> testMethodWithStubDeclaredType [
 
 	self class: 'Blah'.
@@ -421,7 +423,7 @@ FamixJavaFusionnerTest >> testMethodWithStubDeclaredType [
 		equals: (consumerModel entityNamed: 'meth')
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaFusionnerTest >> testParameterWithStubDeclaredType [
 
 	self class: 'Blah'.
@@ -452,7 +454,7 @@ FamixJavaFusionnerTest >> testParameterWithStubDeclaredType [
 		equals: (consumerModel entityNamed: 'param')
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaFusionnerTest >> testReferencedStubClass [
 	"non stub method referencing a stub class"
 
@@ -476,7 +478,7 @@ FamixJavaFusionnerTest >> testReferencedStubClass [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaFusionnerTest >> testSeveralClassesWithOneStubSuperClass [
 
 	self class: 'SuperBlah'.
@@ -506,7 +508,7 @@ FamixJavaFusionnerTest >> testSeveralClassesWithOneStubSuperClass [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaFusionnerTest >> testSeveralVariableWithStubDeclaredType [
 
 	self class: 'Blah'.
@@ -536,7 +538,7 @@ FamixJavaFusionnerTest >> testSeveralVariableWithStubDeclaredType [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaFusionnerTest >> testStubClass [
 
 	self class: 'Blah'.
@@ -546,7 +548,7 @@ FamixJavaFusionnerTest >> testStubClass [
 	self assert: resourceModel size equals: 1.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaFusionnerTest >> testStubClassAndAttribute [
 
 	self class: 'Blah'.
@@ -561,7 +563,7 @@ FamixJavaFusionnerTest >> testStubClassAndAttribute [
 	self assert: resourceModel size equals: 2.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaFusionnerTest >> testStubClassAndMethod [
 
 	self class: 'Blah'.
@@ -576,7 +578,7 @@ FamixJavaFusionnerTest >> testStubClassAndMethod [
 	self assert: resourceModel size equals: 2.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaFusionnerTest >> testStubClassAndSuperClass [
 
 	self class: 'Blah'.
@@ -601,7 +603,7 @@ FamixJavaFusionnerTest >> testStubClassAndSuperClass [
 		equals: (resourceModel entityNamed: 'SuperBlah')
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaFusionnerTest >> testStubClassInvocationReceiver [
 	"note: need the sender of the invocation to verify that the invocation is not stub"
 
@@ -631,7 +633,7 @@ FamixJavaFusionnerTest >> testStubClassInvocationReceiver [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaFusionnerTest >> testStubClassWithStubInheritance [
 
 	self class: 'Blah'.
@@ -647,7 +649,7 @@ FamixJavaFusionnerTest >> testStubClassWithStubInheritance [
 	self assert: resourceModel size equals: 3.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaFusionnerTest >> testStubExceptionWithStubSub [
 	"note: inheritance is visited twice for Exceptions (as Exception and as Class).
 	 If sub is a stub, inheritance link needs to be replaced also"
@@ -674,7 +676,7 @@ FamixJavaFusionnerTest >> testStubExceptionWithStubSub [
 		equals: (resourceModel entityNamed: 'SuperBlah')
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaFusionnerTest >> testStubInvokedMethod [
 
 	| invoc |
@@ -698,7 +700,7 @@ FamixJavaFusionnerTest >> testStubInvokedMethod [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaFusionnerTest >> testStubSuperClass [
 	"non-stub class inheriting from stub class"
 
@@ -722,7 +724,7 @@ FamixJavaFusionnerTest >> testStubSuperClass [
 		equals: (resourceModel entityNamed: 'SuperBlah')
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaFusionnerTest >> testVariableWithStubDeclaredType [
 
 	self class: 'Blah'.
@@ -753,7 +755,7 @@ FamixJavaFusionnerTest >> testVariableWithStubDeclaredType [
 		equals: (consumerModel entityNamed: 'var')
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixJavaFusionnerTest >> variable: aName [
 
 	(resourceModel newLocalVariableNamed: aName) isStub: false.

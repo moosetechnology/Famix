@@ -29,14 +29,16 @@
 
 "
 Class {
-	#name : #FamixJavaAccess,
-	#superclass : #FamixJavaEntity,
+	#name : 'FamixJavaAccess',
+	#superclass : 'FamixJavaEntity',
 	#traits : 'FamixTAccess',
 	#classTraits : 'FamixTAccess classTrait',
-	#category : #'Famix-Java-Entities-Entities'
+	#category : 'Famix-Java-Entities-Entities',
+	#package : 'Famix-Java-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixJavaAccess class >> annotation [
 
 	<FMClass: #Access super: #FamixJavaEntity>
@@ -45,7 +47,7 @@ FamixJavaAccess class >> annotation [
 	^ self
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FamixJavaAccess >> accept: aVisitor [
 
 	<generated>

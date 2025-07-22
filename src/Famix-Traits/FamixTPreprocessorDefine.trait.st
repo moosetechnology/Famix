@@ -6,11 +6,13 @@ Knows the name of the macro defined
 
 "
 Trait {
-	#name : #FamixTPreprocessorDefine,
-	#category : #'Famix-Traits-Preprocessor'
+	#name : 'FamixTPreprocessorDefine',
+	#category : 'Famix-Traits-Preprocessor',
+	#package : 'Famix-Traits',
+	#tag : 'Preprocessor'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTPreprocessorDefine classSide >> annotation [
 
 	<FMClass: #TPreprocessorDefine super: #Object>
@@ -19,7 +21,7 @@ FamixTPreprocessorDefine classSide >> annotation [
 	^ self
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FamixTPreprocessorDefine >> accept: aVisitor [
 
 	<generated>

@@ -1,9 +1,11 @@
 Trait {
-	#name : #FamixJavaTClassMetrics,
-	#category : #'Famix-Java-Entities-Traits'
+	#name : 'FamixJavaTClassMetrics',
+	#category : 'Famix-Java-Entities-Traits',
+	#package : 'Famix-Java-Entities',
+	#tag : 'Traits'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixJavaTClassMetrics classSide >> annotation [
 
 	<FMClass: #TClassMetrics super: #Object>
@@ -12,14 +14,14 @@ FamixJavaTClassMetrics classSide >> annotation [
 	^ self
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FamixJavaTClassMetrics >> accept: aVisitor [
 
 	<generated>
 	^ aVisitor visitFamixJavaTClassMetrics: self
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixJavaTClassMetrics >> numberOfAccessorMethods [
 	<FMProperty: #numberOfAccessorMethods type: #Number>
 	<derived>
@@ -34,12 +36,12 @@ FamixJavaTClassMetrics >> numberOfAccessorMethods [
 			noa ]
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixJavaTClassMetrics >> numberOfAccessorMethods: aNumber [
 	self cacheAt: #numberOfAccessorMethods put: aNumber
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixJavaTClassMetrics >> numberOfConstructorMethods [
 	<FMProperty: #numberOfConstructorMethods type: #Number>
 	<derived>
@@ -58,12 +60,12 @@ FamixJavaTClassMetrics >> numberOfConstructorMethods [
 			nc ]
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixJavaTClassMetrics >> numberOfConstructorMethods: aNumber [
 	self cacheAt: #numberOfConstructorMethods put: aNumber
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixJavaTClassMetrics >> numberOfPrivateMethods [
 	<FMProperty: #numberOfPrivateMethods type: #Number>
 	<derived>
@@ -74,12 +76,12 @@ FamixJavaTClassMetrics >> numberOfPrivateMethods [
 		computedAs: [(self methods select: [:each | each isPrivate]) size]
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixJavaTClassMetrics >> numberOfPrivateMethods: aNumber [
 	self cacheAt: #numberOfPrivateMethods put: aNumber
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixJavaTClassMetrics >> numberOfProtectedMethods [
 	<FMProperty: #numberOfProtectedMethods type: #Number>
 	<derived>
@@ -90,12 +92,12 @@ FamixJavaTClassMetrics >> numberOfProtectedMethods [
 		computedAs: [(self methods select: [:each | each isProtected]) size]
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixJavaTClassMetrics >> numberOfProtectedMethods: aNumber [
 	self cacheAt: #numberOfProtectedMethods put: aNumber
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixJavaTClassMetrics >> numberOfPublicMethods [
 	<FMProperty: #numberOfPublicMethods type: #Number>
 	<derived>
@@ -106,7 +108,7 @@ FamixJavaTClassMetrics >> numberOfPublicMethods [
 		computedAs: [(self methods select: [:each | each isPublic]) size]
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixJavaTClassMetrics >> numberOfPublicMethods: aNumber [
 	self cacheAt: #numberOfPublicMethods put: aNumber
 ]

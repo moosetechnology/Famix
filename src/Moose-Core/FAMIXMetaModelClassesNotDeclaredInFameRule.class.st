@@ -3,38 +3,39 @@ Check if a metamodel class is properly declared using a <FMClass:super:> pragma.
 Additionally, this pragma should be in a #annotation class-side method, although this is not enforced. Default Moose tools are resilient with respect to metamodel descriptions, and accept as metamodel classes any subclass of MooseEntity. This rule enforces that all such classes are properly described in Fame, ensuring proper use by strict tools.
 "
 Class {
-	#name : #FamixMetaModelClassesNotDeclaredInFameRule,
-	#superclass : #ReAbstractRule,
+	#name : 'FamixMetaModelClassesNotDeclaredInFameRule',
+	#superclass : 'ReAbstractRule',
 	#instVars : [
 		'metaModelClasses'
 	],
-	#category : #'Moose-Core'
+	#category : 'Moose-Core',
+	#package : 'Moose-Core'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixMetaModelClassesNotDeclaredInFameRule class >> checksClass [
 
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetaModelClassesNotDeclaredInFameRule class >> group [
 
 	^ 'Famix'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetaModelClassesNotDeclaredInFameRule class >> ruleName [
 
 	^ 'A metamodel class is not properly Fame-described by a <FMClass:super:> pragma'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetaModelClassesNotDeclaredInFameRule class >> uniqueIdentifierName [
 	^ 'MetaModelClassesNotDeclaredInFame'
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixMetaModelClassesNotDeclaredInFameRule >> basicCheck: aClass [
 
 	| pragmas |
@@ -48,13 +49,13 @@ FamixMetaModelClassesNotDeclaredInFameRule >> basicCheck: aClass [
 	^ false
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetaModelClassesNotDeclaredInFameRule >> metaModelClasses [
 	"return all classes that have to be checked in this rule"
 	^ metaModelClasses ifNil: [metaModelClasses := MooseEntity withAllSubclasses].
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetaModelClassesNotDeclaredInFameRule >> name [
 
 	^ 'A metamodel class should be properly declared using a <FMClass:super:> pragma.'

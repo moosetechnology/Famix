@@ -23,17 +23,19 @@
 
 "
 Trait {
-	#name : #FamixTImport,
+	#name : 'FamixTImport',
 	#instVars : [
 		'#importedEntity => FMOne type: #FamixTImportable opposite: #incomingImports',
 		'#importingEntity => FMOne type: #FamixTWithImports opposite: #imports'
 	],
 	#traits : 'FamixTAssociation',
 	#classTraits : 'FamixTAssociation classTrait',
-	#category : #'Famix-Traits-Import'
+	#category : 'Famix-Traits-Import',
+	#package : 'Famix-Traits',
+	#tag : 'Import'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTImport classSide >> annotation [
 
 	<FMClass: #TImport super: #Object>
@@ -42,14 +44,14 @@ FamixTImport classSide >> annotation [
 	^ self
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FamixTImport >> accept: aVisitor [
 
 	<generated>
 	^ aVisitor visitFamixTImport: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTImport >> importedEntity [
 	"Relation named: #importedEntity type: #FamixTImportable opposite: #incomingImports"
 
@@ -59,14 +61,14 @@ FamixTImport >> importedEntity [
 	^ importedEntity
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTImport >> importedEntity: anObject [
 
 	<generated>
 	importedEntity := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTImport >> importingEntity [
 	"Relation named: #importingEntity type: #FamixTWithImports opposite: #imports"
 
@@ -76,7 +78,7 @@ FamixTImport >> importingEntity [
 	^ importingEntity
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTImport >> importingEntity: anObject [
 
 	<generated>

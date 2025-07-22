@@ -1,27 +1,29 @@
 Class {
-	#name : #FamixRemoteRootEntityGeneratorA,
-	#superclass : #FamixTestGenerator,
+	#name : 'FamixRemoteRootEntityGeneratorA',
+	#superclass : 'FamixTestGenerator',
 	#instVars : [
 		'fmx'
 	],
-	#category : #'Famix-MetamodelBuilder-Tests-GeneratorRessources'
+	#category : 'Famix-MetamodelBuilder-Tests-GeneratorRessources',
+	#package : 'Famix-MetamodelBuilder-Tests',
+	#tag : 'GeneratorRessources'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixRemoteRootEntityGeneratorA class >> packageName [
 
 	<ignoreForCoverage>
 	^ 'Famix-MetamodelBuilder-Tests-RootEntityA'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixRemoteRootEntityGeneratorA class >> prefix [
 
 	<ignoreForCoverage>
 	^ #FmxRootEntityA
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixRemoteRootEntityGeneratorA >> defineClasses [
 
 	super defineClasses.

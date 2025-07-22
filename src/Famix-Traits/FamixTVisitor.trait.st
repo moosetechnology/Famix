@@ -3,11 +3,13 @@ I am a visitor for FamixEntities.
 I am generated with the metamodel.
 "
 Trait {
-	#name : #FamixTVisitor,
-	#category : #'Famix-Traits-Visitor'
+	#name : 'FamixTVisitor',
+	#category : 'Famix-Traits-Visitor',
+	#package : 'Famix-Traits',
+	#tag : 'Visitor'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTVisitor classSide >> annotation [
 
 	<FMClass: #TVisitor super: #Object>
@@ -16,21 +18,21 @@ FamixTVisitor classSide >> annotation [
 	^ self
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitCollection: aCollection [
 
 	<generated>
 	^ aCollection collect: [ :each | each accept: self ]
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitEntity: aFamixEntity [
 
 	<generated>
 	^ aFamixEntity ifNotNil: [ aFamixEntity accept: self ]
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTAccess: aFamixTAccess [
 
 	<generated>
@@ -40,14 +42,14 @@ FamixTVisitor >> visitFamixTAccess: aFamixTAccess [
 	self visitEntity: aFamixTAccess variable
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTAccessible: aFamixTAccessible [
 
 	<generated>
 	self visitCollection: aFamixTAccessible incomingAccesses
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTAnnotationInstance: aFamixTAnnotationInstance [
 
 	<generated>
@@ -58,7 +60,7 @@ FamixTVisitor >> visitFamixTAnnotationInstance: aFamixTAnnotationInstance [
 	self visitEntity: aFamixTAnnotationInstance annotationType
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTAnnotationInstanceAttribute: aFamixTAnnotationInstanceAttribute [
 
 	<generated>
@@ -68,7 +70,7 @@ FamixTVisitor >> visitFamixTAnnotationInstanceAttribute: aFamixTAnnotationInstan
 	self visitEntity: aFamixTAnnotationInstanceAttribute annotationTypeAttribute
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTAnnotationType: aFamixTAnnotationType [
 
 	<generated>
@@ -76,7 +78,7 @@ FamixTVisitor >> visitFamixTAnnotationType: aFamixTAnnotationType [
 	self visitEntity: aFamixTAnnotationType annotationTypesContainer
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTAnnotationTypeAttribute: aFamixTAnnotationTypeAttribute [
 
 	<generated>
@@ -85,7 +87,7 @@ FamixTVisitor >> visitFamixTAnnotationTypeAttribute: aFamixTAnnotationTypeAttrib
 	self visitCollection: aFamixTAnnotationTypeAttribute annotationAttributeInstances
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTAssociation: aFamixTAssociation [
 
 	<generated>
@@ -96,7 +98,7 @@ FamixTVisitor >> visitFamixTAssociation: aFamixTAssociation [
 	self visitEntity: aFamixTAssociation next
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTAttribute: aFamixTAttribute [
 
 	<generated>
@@ -105,42 +107,42 @@ FamixTVisitor >> visitFamixTAttribute: aFamixTAttribute [
 	self visitEntity: aFamixTAttribute parentType
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTCanBeAbstract: aFamixTCanBeAbstract [
 
 	<generated>
 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTCanBeClassSide: aFamixTCanBeClassSide [
 
 	<generated>
 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTCanBeFinal: aFamixTCanBeFinal [
 
 	<generated>
 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTCanBeStub: aFamixTCanBeStub [
 
 	<generated>
 	self visitFamixTSourceEntity: aFamixTCanBeStub
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTCanImplement: aFamixTCanImplement [
 
 	<generated>
 	self visitCollection: aFamixTCanImplement interfaceImplementations
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTClass: aFamixTClass [
 
 	<generated>
@@ -152,21 +154,21 @@ FamixTVisitor >> visitFamixTClass: aFamixTClass [
 	self visitFamixTWithMethods: aFamixTClass
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTClassMetrics: aFamixTClassMetrics [
 
 	<generated>
 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTCohesionCouplingMetrics: aFamixTCohesionCouplingMetrics [
 
 	<generated>
 	self visitFamixTPackage: aFamixTCohesionCouplingMetrics
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTComment: aFamixTComment [
 
 	<generated>
@@ -176,7 +178,7 @@ FamixTVisitor >> visitFamixTComment: aFamixTComment [
 	self visitEntity: aFamixTComment commentedEntity
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTCompilationUnit: aFamixTCompilationUnit [
 
 	<generated>
@@ -185,7 +187,7 @@ FamixTVisitor >> visitFamixTCompilationUnit: aFamixTCompilationUnit [
 	self visitEntity: aFamixTCompilationUnit compilationUnitOwner
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTConcretization: aFamixTConcretization [
 
 	<generated>
@@ -196,14 +198,14 @@ FamixTVisitor >> visitFamixTConcretization: aFamixTConcretization [
 	self visitEntity: aFamixTConcretization typeParameter
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTDefinedInModule: aFamixTDefinedInModule [
 
 	<generated>
 	self visitEntity: aFamixTDefinedInModule parentModule
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTDereferencedInvocation: aFamixTDereferencedInvocation [
 
 	<generated>
@@ -212,7 +214,7 @@ FamixTVisitor >> visitFamixTDereferencedInvocation: aFamixTDereferencedInvocatio
 	self visitEntity: aFamixTDereferencedInvocation referencer
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTEntityTyping: aFamixTEntityTyping [
 
 	<generated>
@@ -222,7 +224,7 @@ FamixTVisitor >> visitFamixTEntityTyping: aFamixTEntityTyping [
 	self visitEntity: aFamixTEntityTyping declaredType
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTEnum: aFamixTEnum [
 
 	<generated>
@@ -230,7 +232,7 @@ FamixTVisitor >> visitFamixTEnum: aFamixTEnum [
 	self visitFamixTWithEnumValues: aFamixTEnum
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTEnumValue: aFamixTEnumValue [
 
 	<generated>
@@ -239,7 +241,7 @@ FamixTVisitor >> visitFamixTEnumValue: aFamixTEnumValue [
 	self visitEntity: aFamixTEnumValue parentEnum
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTException: aFamixTException [
 
 	<generated>
@@ -247,7 +249,7 @@ FamixTVisitor >> visitFamixTException: aFamixTException [
 	self visitFamixTThrowable: aFamixTException
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTFile: aFamixTFile [
 
 	<generated>
@@ -256,14 +258,14 @@ FamixTVisitor >> visitFamixTFile: aFamixTFile [
 	self visitCollection: aFamixTFile entities
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTFileAnchor: aFamixTFileAnchor [
 
 	<generated>
 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTFileInclude: aFamixTFileInclude [
 
 	<generated>
@@ -273,14 +275,14 @@ FamixTVisitor >> visitFamixTFileInclude: aFamixTFileInclude [
 	self visitEntity: aFamixTFileInclude target
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTFileNavigation: aFamixTFileNavigation [
 
 	<generated>
 	self visitFamixTFileAnchor: aFamixTFileNavigation
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTFileSystemEntity: aFamixTFileSystemEntity [
 
 	<generated>
@@ -289,7 +291,7 @@ FamixTVisitor >> visitFamixTFileSystemEntity: aFamixTFileSystemEntity [
 	self visitEntity: aFamixTFileSystemEntity parentFolder
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTFolder: aFamixTFolder [
 
 	<generated>
@@ -298,7 +300,7 @@ FamixTVisitor >> visitFamixTFolder: aFamixTFolder [
 	self visitCollection: aFamixTFolder childrenFileSystemEntities
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTFunction: aFamixTFunction [
 
 	<generated>
@@ -314,7 +316,7 @@ FamixTVisitor >> visitFamixTFunction: aFamixTFunction [
 	self visitEntity: aFamixTFunction functionOwner
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTGlobalVariable: aFamixTGlobalVariable [
 
 	<generated>
@@ -323,35 +325,35 @@ FamixTVisitor >> visitFamixTGlobalVariable: aFamixTGlobalVariable [
 	self visitEntity: aFamixTGlobalVariable parentScope
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTHasImmediateSource: aFamixTHasImmediateSource [
 
 	<generated>
 	self visitFamixTSourceAnchor: aFamixTHasImmediateSource
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTHasKind: aFamixTHasKind [
 
 	<generated>
 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTHasSignature: aFamixTHasSignature [
 
 	<generated>
 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTHasVisibility: aFamixTHasVisibility [
 
 	<generated>
 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTHeader: aFamixTHeader [
 
 	<generated>
@@ -360,14 +362,14 @@ FamixTVisitor >> visitFamixTHeader: aFamixTHeader [
 	self visitEntity: aFamixTHeader headerOwner
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTImplementable: aFamixTImplementable [
 
 	<generated>
 	self visitCollection: aFamixTImplementable implementations
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTImplementation: aFamixTImplementation [
 
 	<generated>
@@ -377,7 +379,7 @@ FamixTVisitor >> visitFamixTImplementation: aFamixTImplementation [
 	self visitEntity: aFamixTImplementation interface
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTImplicitVariable: aFamixTImplicitVariable [
 
 	<generated>
@@ -386,7 +388,7 @@ FamixTVisitor >> visitFamixTImplicitVariable: aFamixTImplicitVariable [
 	self visitEntity: aFamixTImplicitVariable parentBehaviouralEntity
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTImport: aFamixTImport [
 
 	<generated>
@@ -396,21 +398,21 @@ FamixTVisitor >> visitFamixTImport: aFamixTImport [
 	self visitEntity: aFamixTImport importedEntity
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTImportable: aFamixTImportable [
 
 	<generated>
 	self visitCollection: aFamixTImportable incomingImports
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTIndexedFileNavigation: aFamixTIndexedFileNavigation [
 
 	<generated>
 	self visitFamixTFileAnchor: aFamixTIndexedFileNavigation
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTInheritance: aFamixTInheritance [
 
 	<generated>
@@ -420,14 +422,14 @@ FamixTVisitor >> visitFamixTInheritance: aFamixTInheritance [
 	self visitEntity: aFamixTInheritance superclass
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTInvocable: aFamixTInvocable [
 
 	<generated>
 	self visitCollection: aFamixTInvocable incomingInvocations
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTInvocation: aFamixTInvocation [
 
 	<generated>
@@ -439,21 +441,21 @@ FamixTVisitor >> visitFamixTInvocation: aFamixTInvocation [
 	self visitEntity: aFamixTInvocation receiver
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTInvocationsReceiver: aFamixTInvocationsReceiver [
 
 	<generated>
 	self visitCollection: aFamixTInvocationsReceiver receivingInvocations
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTLCOMMetrics: aFamixTLCOMMetrics [
 
 	<generated>
 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTLambda: aFamixTLambda [
 
 	<generated>
@@ -467,7 +469,7 @@ FamixTVisitor >> visitFamixTLambda: aFamixTLambda [
 	self visitEntity: aFamixTLambda lambdaContainer
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTLocalVariable: aFamixTLocalVariable [
 
 	<generated>
@@ -476,7 +478,7 @@ FamixTVisitor >> visitFamixTLocalVariable: aFamixTLocalVariable [
 	self visitEntity: aFamixTLocalVariable parentBehaviouralEntity
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTMethod: aFamixTMethod [
 
 	<generated>
@@ -494,35 +496,35 @@ FamixTVisitor >> visitFamixTMethod: aFamixTMethod [
 	self visitEntity: aFamixTMethod parentType
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTMethodMetrics: aFamixTMethodMetrics [
 
 	<generated>
 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTModule: aFamixTModule [
 
 	<generated>
 	self visitCollection: aFamixTModule moduleEntities
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTMultipleFileAnchor: aFamixTMultipleFileAnchor [
 
 	<generated>
 	self visitFamixTSourceAnchor: aFamixTMultipleFileAnchor
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTNamedEntity: aFamixTNamedEntity [
 
 	<generated>
 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTNamespace: aFamixTNamespace [
 
 	<generated>
@@ -531,7 +533,7 @@ FamixTVisitor >> visitFamixTNamespace: aFamixTNamespace [
 	self visitTEntityMetaLevelDependency: aFamixTNamespace
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTPackage: aFamixTPackage [
 
 	<generated>
@@ -542,14 +544,14 @@ FamixTVisitor >> visitFamixTPackage: aFamixTPackage [
 	self visitCollection: aFamixTPackage childEntities
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTPackageable: aFamixTPackageable [
 
 	<generated>
 	self visitEntity: aFamixTPackageable parentPackage
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTParameter: aFamixTParameter [
 
 	<generated>
@@ -558,42 +560,42 @@ FamixTVisitor >> visitFamixTParameter: aFamixTParameter [
 	self visitEntity: aFamixTParameter parentBehaviouralEntity
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTParametricAssociation: aFamixTParametricAssociation [
 
 	<generated>
 	self visitCollection: aFamixTParametricAssociation concretizations
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTParametricEntity: aFamixTParametricEntity [
 
 	<generated>
 	self visitCollection: aFamixTParametricEntity typeParameters
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTPreprocessorDefine: aFamixTPreprocessorDefine [
 
 	<generated>
 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTPreprocessorIfdef: aFamixTPreprocessorIfdef [
 
 	<generated>
 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTPrimitiveType: aFamixTPrimitiveType [
 
 	<generated>
 	self visitFamixTType: aFamixTPrimitiveType
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTReference: aFamixTReference [
 
 	<generated>
@@ -603,56 +605,56 @@ FamixTVisitor >> visitFamixTReference: aFamixTReference [
 	self visitEntity: aFamixTReference referredEntity
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTReferenceable: aFamixTReferenceable [
 
 	<generated>
 	self visitCollection: aFamixTReferenceable incomingReferences
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTRelativeSourceAnchor: aFamixTRelativeSourceAnchor [
 
 	<generated>
 	self visitFamixTSourceAnchor: aFamixTRelativeSourceAnchor
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTShadowable: aFamixTShadowable [
 
 	<generated>
 	self visitCollection: aFamixTShadowable shadowingEntities
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTShadower: aFamixTShadower [
 
 	<generated>
 	self visitEntity: aFamixTShadower shadowedEntity
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTSourceAnchor: aFamixTSourceAnchor [
 
 	<generated>
 	self visitEntity: aFamixTSourceAnchor element
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTSourceEntity: aFamixTSourceEntity [
 
 	<generated>
 	self visitEntity: aFamixTSourceEntity sourceAnchor
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTSourceLanguage: aFamixTSourceLanguage [
 
 	<generated>
 	self visitCollection: aFamixTSourceLanguage sourcedEntities
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTStructuralEntity: aFamixTStructuralEntity [
 
 	<generated>
@@ -663,7 +665,7 @@ FamixTVisitor >> visitFamixTStructuralEntity: aFamixTStructuralEntity [
 	self visitTEntityMetaLevelDependency: aFamixTStructuralEntity
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTTemplate: aFamixTTemplate [
 
 	<generated>
@@ -671,14 +673,14 @@ FamixTVisitor >> visitFamixTTemplate: aFamixTTemplate [
 	self visitCollection: aFamixTTemplate templateUsers
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTTemplateUser: aFamixTTemplateUser [
 
 	<generated>
 	self visitEntity: aFamixTTemplateUser template
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTThrowable: aFamixTThrowable [
 
 	<generated>
@@ -687,7 +689,7 @@ FamixTVisitor >> visitFamixTThrowable: aFamixTThrowable [
 	self visitCollection: aFamixTThrowable throwingEntities
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTTrait: aFamixTTrait [
 
 	<generated>
@@ -695,7 +697,7 @@ FamixTVisitor >> visitFamixTTrait: aFamixTTrait [
 	self visitCollection: aFamixTTrait incomingTraitUsages
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTTraitUsage: aFamixTTraitUsage [
 
 	<generated>
@@ -705,14 +707,14 @@ FamixTVisitor >> visitFamixTTraitUsage: aFamixTTraitUsage [
 	self visitEntity: aFamixTTraitUsage user
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTTraitUser: aFamixTTraitUser [
 
 	<generated>
 	self visitCollection: aFamixTTraitUser traitUsages
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTType: aFamixTType [
 
 	<generated>
@@ -725,21 +727,21 @@ FamixTVisitor >> visitFamixTType: aFamixTType [
 	self visitCollection: aFamixTType incomingTypings
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTTypeAlias: aFamixTTypeAlias [
 
 	<generated>
 	self visitEntity: aFamixTTypeAlias aliasedType
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTTypeArgument: aFamixTTypeArgument [
 
 	<generated>
 	self visitCollection: aFamixTTypeArgument outgoingConcretizations
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTTypeParameter: aFamixTTypeParameter [
 
 	<generated>
@@ -747,84 +749,84 @@ FamixTVisitor >> visitFamixTTypeParameter: aFamixTTypeParameter [
 	self visitEntity: aFamixTTypeParameter genericEntity
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTTypedEntity: aFamixTTypedEntity [
 
 	<generated>
 	self visitEntity: aFamixTTypedEntity typing
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTUnknownVariable: aFamixTUnknownVariable [
 
 	<generated>
 	self visitFamixTStructuralEntity: aFamixTUnknownVariable
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTWithAccesses: aFamixTWithAccesses [
 
 	<generated>
 	self visitCollection: aFamixTWithAccesses accesses
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTWithAnnotationInstances: aFamixTWithAnnotationInstances [
 
 	<generated>
 	self visitCollection: aFamixTWithAnnotationInstances annotationInstances
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTWithAnnotationTypes: aFamixTWithAnnotationTypes [
 
 	<generated>
 	self visitCollection: aFamixTWithAnnotationTypes definedAnnotationTypes
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTWithAttributes: aFamixTWithAttributes [
 
 	<generated>
 	self visitCollection: aFamixTWithAttributes attributes
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTWithClasses: aFamixTWithClasses [
 
 	<generated>
 	self visitFamixTWithTypes: aFamixTWithClasses
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTWithComments: aFamixTWithComments [
 
 	<generated>
 	self visitCollection: aFamixTWithComments comments
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTWithCompilationUnits: aFamixTWithCompilationUnits [
 
 	<generated>
 	self visitEntity: aFamixTWithCompilationUnits compilationUnit
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTWithDereferencedInvocations: aFamixTWithDereferencedInvocations [
 
 	<generated>
 	self visitCollection: aFamixTWithDereferencedInvocations dereferencedInvocations
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTWithEnumValues: aFamixTWithEnumValues [
 
 	<generated>
 	self visitCollection: aFamixTWithEnumValues enumValues
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTWithExceptions: aFamixTWithExceptions [
 
 	<generated>
@@ -833,7 +835,7 @@ FamixTVisitor >> visitFamixTWithExceptions: aFamixTWithExceptions [
 	self visitCollection: aFamixTWithExceptions thrownExceptions
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTWithFileIncludes: aFamixTWithFileIncludes [
 
 	<generated>
@@ -841,49 +843,49 @@ FamixTVisitor >> visitFamixTWithFileIncludes: aFamixTWithFileIncludes [
 	self visitCollection: aFamixTWithFileIncludes incomingIncludeRelations
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTWithFiles: aFamixTWithFiles [
 
 	<generated>
 	self visitCollection: aFamixTWithFiles containerFiles
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTWithFunctions: aFamixTWithFunctions [
 
 	<generated>
 	self visitCollection: aFamixTWithFunctions functions
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTWithGlobalVariables: aFamixTWithGlobalVariables [
 
 	<generated>
 	self visitCollection: aFamixTWithGlobalVariables globalVariables
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTWithHeaders: aFamixTWithHeaders [
 
 	<generated>
 	self visitEntity: aFamixTWithHeaders header
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTWithImplicitVariables: aFamixTWithImplicitVariables [
 
 	<generated>
 	self visitCollection: aFamixTWithImplicitVariables implicitVariables
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTWithImports: aFamixTWithImports [
 
 	<generated>
 	self visitCollection: aFamixTWithImports imports
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTWithInheritances: aFamixTWithInheritances [
 
 	<generated>
@@ -891,56 +893,56 @@ FamixTVisitor >> visitFamixTWithInheritances: aFamixTWithInheritances [
 	self visitCollection: aFamixTWithInheritances subInheritances
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTWithInvocations: aFamixTWithInvocations [
 
 	<generated>
 	self visitCollection: aFamixTWithInvocations outgoingInvocations
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTWithLambdas: aFamixTWithLambdas [
 
 	<generated>
 	self visitCollection: aFamixTWithLambdas lambdas
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTWithLocalVariables: aFamixTWithLocalVariables [
 
 	<generated>
 	self visitCollection: aFamixTWithLocalVariables localVariables
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTWithMethods: aFamixTWithMethods [
 
 	<generated>
 	self visitCollection: aFamixTWithMethods methods
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTWithParameters: aFamixTWithParameters [
 
 	<generated>
 	self visitCollection: aFamixTWithParameters parameters
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTWithReferences: aFamixTWithReferences [
 
 	<generated>
 	self visitCollection: aFamixTWithReferences outgoingReferences
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTWithSourceLanguages: aFamixTWithSourceLanguages [
 
 	<generated>
 	self visitEntity: aFamixTWithSourceLanguages declaredSourceLanguage
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTWithStatements: aFamixTWithStatements [
 
 	<generated>
@@ -950,35 +952,35 @@ FamixTVisitor >> visitFamixTWithStatements: aFamixTWithStatements [
 	self visitFamixTWithReferences: aFamixTWithStatements
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTWithTemplates: aFamixTWithTemplates [
 
 	<generated>
 	self visitCollection: aFamixTWithTemplates templates
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTWithTraits: aFamixTWithTraits [
 
 	<generated>
 	self visitCollection: aFamixTWithTraits traits
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTWithTypeAliases: aFamixTWithTypeAliases [
 
 	<generated>
 	self visitCollection: aFamixTWithTypeAliases typeAliases
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTWithTypes: aFamixTWithTypes [
 
 	<generated>
 	self visitCollection: aFamixTWithTypes types
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixTVisitor >> visitTEntityMetaLevelDependency: aFamixEntity [
 	"This method is not generated to avoid complexify the visitor generation"
 

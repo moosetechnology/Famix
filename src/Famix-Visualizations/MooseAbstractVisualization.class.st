@@ -11,25 +11,27 @@ My subclasses should define a default title and icon, and can override #...Title
 I know my visualization canvas and provide an accessor for it.
 "
 Class {
-	#name : #MooseAbstractVisualization,
-	#superclass : #Object,
+	#name : 'MooseAbstractVisualization',
+	#superclass : 'Object',
 	#instVars : [
 		'canvas'
 	],
-	#category : #'Famix-Visualizations-Core'
+	#category : 'Famix-Visualizations-Core',
+	#package : 'Famix-Visualizations',
+	#tag : 'Core'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseAbstractVisualization class >> defaultTitle [
 	^ self subclassResponsibility
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseAbstractVisualization class >> icon [
 	^ self subclassResponsibility
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 MooseAbstractVisualization >> build [
 	self buildLegend.
 	canvas nodes
@@ -41,7 +43,7 @@ MooseAbstractVisualization >> build [
 						addAllFrom: (self mooseInterestingEntityForNode: node) mooseMenu ])
 ]
 
-{ #category : #display }
+{ #category : 'display' }
 MooseAbstractVisualization >> buildInspectorPresenter: aBuilder [
 
 	self build.
@@ -50,41 +52,41 @@ MooseAbstractVisualization >> buildInspectorPresenter: aBuilder [
 		  yourself
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 MooseAbstractVisualization >> buildLegend [
 	self subclassResponsibility
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseAbstractVisualization >> canvas [
 	^ canvas
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseAbstractVisualization >> canvas: aRSCanvas [
 
 	canvas := aRSCanvas
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MooseAbstractVisualization >> initialize [
 	super initialize.
 	canvas := RSCanvas new.
 	canvas @ RSCanvasController new noLegend
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 MooseAbstractVisualization >> mooseInterestingEntityForNode: node [
 	^ node model
 ]
 
-{ #category : #display }
+{ #category : 'display' }
 MooseAbstractVisualization >> open [
 	self build.
 	^ self canvas openWithTitle: self windowTitle
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseAbstractVisualization >> windowTitle [
 	^ self class defaultTitle
 ]

@@ -8,12 +8,14 @@ see FmxMBVisitor to see how to use me.
 
 "
 Class {
-	#name : #FmxMBPrintVisitor,
-	#superclass : #FmxMBWalkerVisitor,
-	#category : #'Famix-MetamodelBuilder-Core-Visitors'
+	#name : 'FmxMBPrintVisitor',
+	#superclass : 'FmxMBWalkerVisitor',
+	#category : 'Famix-MetamodelBuilder-Core-Visitors',
+	#package : 'Famix-MetamodelBuilder-Core',
+	#tag : 'Visitors'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 FmxMBPrintVisitor >> prepareForPropertiesIn: aClassOrTrait [
 
 	(aClassOrTrait properties isNotEmpty or: [
@@ -25,7 +27,7 @@ FmxMBPrintVisitor >> prepareForPropertiesIn: aClassOrTrait [
 		tab
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FmxMBPrintVisitor >> separateProperties [
 
 	Transcript
@@ -34,14 +36,14 @@ FmxMBPrintVisitor >> separateProperties [
 		tab
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FmxMBPrintVisitor >> visitBuilder: aBuilder [
 
 	self trace: aBuilder generator class.
 	super visitBuilder: aBuilder
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FmxMBPrintVisitor >> visitClass: aClass [
 
 	self traceCrTab: ''.
@@ -58,14 +60,14 @@ FmxMBPrintVisitor >> visitClass: aClass [
 	super visitClass: aClass
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FmxMBPrintVisitor >> visitRelationSide: aRelationSide [
 
 	self trace:
 		aRelationSide name , ' (' , aRelationSide oppositeType , ')'
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FmxMBPrintVisitor >> visitTrait: aTrait [
 
 	self traceCrTab: ''.
@@ -80,7 +82,7 @@ FmxMBPrintVisitor >> visitTrait: aTrait [
 	super visitTrait: aTrait
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FmxMBPrintVisitor >> visitTypedProperty: aTypedProperty [
 
 	self trace:

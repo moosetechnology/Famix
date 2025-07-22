@@ -43,14 +43,16 @@
 
 "
 Class {
-	#name : #FamixJavaAttribute,
-	#superclass : #FamixJavaVariable,
+	#name : 'FamixJavaAttribute',
+	#superclass : 'FamixJavaVariable',
 	#traits : 'FamixJavaTCanBeTransient + FamixJavaTCanBeVolatile + FamixTAttribute + FamixTCanBeClassSide + FamixTCanBeFinal + FamixTHasVisibility + FamixTWithComments',
 	#classTraits : 'FamixJavaTCanBeTransient classTrait + FamixJavaTCanBeVolatile classTrait + FamixTAttribute classTrait + FamixTCanBeClassSide classTrait + FamixTCanBeFinal classTrait + FamixTHasVisibility classTrait + FamixTWithComments classTrait',
-	#category : #'Famix-Java-Entities-Entities'
+	#category : 'Famix-Java-Entities-Entities',
+	#package : 'Famix-Java-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixJavaAttribute class >> annotation [
 
 	<FMClass: #Attribute super: #FamixJavaVariable>
@@ -59,7 +61,7 @@ FamixJavaAttribute class >> annotation [
 	^ self
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FamixJavaAttribute >> accept: aVisitor [
 
 	<generated>

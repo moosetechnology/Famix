@@ -10,15 +10,17 @@ API:
 - compositions -- used to represent class-use-trait relationships
 "
 Class {
-	#name : #FamixUMLRoassalDescriptor,
-	#superclass : #RSUMLClassDescriptor,
+	#name : 'FamixUMLRoassalDescriptor',
+	#superclass : 'RSUMLClassDescriptor',
 	#instVars : [
 		'umlModel'
 	],
-	#category : #'Famix-UMLDocumentor-Backend'
+	#category : 'Famix-UMLDocumentor-Backend',
+	#package : 'Famix-UMLDocumentor',
+	#tag : 'Backend'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixUMLRoassalDescriptor >> aggregations [
 
 	^(umlModel
@@ -36,7 +38,7 @@ FamixUMLRoassalDescriptor >> aggregations [
 			(self umlClassNamed: aggreg source) -> (self umlClassNamed: aggreg target) ])
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixUMLRoassalDescriptor >> compositions [
 
 	^(umlModel
@@ -46,7 +48,7 @@ FamixUMLRoassalDescriptor >> compositions [
 
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FamixUMLRoassalDescriptor >> initialize [ 
 
 	super initialize.
@@ -61,7 +63,7 @@ FamixUMLRoassalDescriptor >> initialize [
 		isAbstract: [ :famixUMLClass | famixUMLClass isStub ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FamixUMLRoassalDescriptor >> superClassOf: famixUMLClass [
 
 	^umlModel
@@ -72,7 +74,7 @@ FamixUMLRoassalDescriptor >> superClassOf: famixUMLClass [
 		ifNone: [ nil ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FamixUMLRoassalDescriptor >> umlClassNamed: aName [
 
 	^umlModel
@@ -82,13 +84,13 @@ FamixUMLRoassalDescriptor >> umlClassNamed: aName [
 		ifNone: [ nil ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixUMLRoassalDescriptor >> umlModel [
 
 	^ umlModel
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixUMLRoassalDescriptor >> umlModel: anObject [
 
 	umlModel := anObject

@@ -3,13 +3,15 @@ I am a visitor for FamixJavaEntities.
 I am generated with the metamodel.
 "
 Trait {
-	#name : #FamixJavaTVisitor,
+	#name : 'FamixJavaTVisitor',
 	#traits : 'FamixTVisitor',
 	#classTraits : 'FamixTVisitor classTrait',
-	#category : #'Famix-Java-Entities-Visitor'
+	#category : 'Famix-Java-Entities-Visitor',
+	#package : 'Famix-Java-Entities',
+	#tag : 'Visitor'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixJavaTVisitor classSide >> annotation [
 
 	<FMClass: #TVisitor super: #Object>
@@ -18,14 +20,14 @@ FamixJavaTVisitor classSide >> annotation [
 	^ self
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaAccess: aFamixJavaAccess [
 
 	<generated>
 	self visitFamixTAccess: aFamixJavaAccess
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaAnnotationInstance: aFamixJavaAnnotationInstance [
 
 	<generated>
@@ -33,7 +35,7 @@ FamixJavaTVisitor >> visitFamixJavaAnnotationInstance: aFamixJavaAnnotationInsta
 	self visitFamixJavaSourcedEntity: aFamixJavaAnnotationInstance
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaAnnotationInstanceAttribute: aFamixJavaAnnotationInstanceAttribute [
 
 	<generated>
@@ -41,7 +43,7 @@ FamixJavaTVisitor >> visitFamixJavaAnnotationInstanceAttribute: aFamixJavaAnnota
 	self visitFamixJavaSourcedEntity: aFamixJavaAnnotationInstanceAttribute
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaAnnotationType: aFamixJavaAnnotationType [
 
 	<generated>
@@ -56,7 +58,7 @@ FamixJavaTVisitor >> visitFamixJavaAnnotationType: aFamixJavaAnnotationType [
 	self visitFamixJavaType: aFamixJavaAnnotationType
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaAnnotationTypeAttribute: aFamixJavaAnnotationTypeAttribute [
 
 	<generated>
@@ -65,7 +67,7 @@ FamixJavaTVisitor >> visitFamixJavaAnnotationTypeAttribute: aFamixJavaAnnotation
 	self visitFamixJavaVariable: aFamixJavaAnnotationTypeAttribute
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaAttribute: aFamixJavaAttribute [
 
 	<generated>
@@ -79,7 +81,7 @@ FamixJavaTVisitor >> visitFamixJavaAttribute: aFamixJavaAttribute [
 	self visitFamixJavaVariable: aFamixJavaAttribute
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaClass: aFamixJavaClass [
 
 	<generated>
@@ -99,7 +101,7 @@ FamixJavaTVisitor >> visitFamixJavaClass: aFamixJavaClass [
 	self visitFamixJavaType: aFamixJavaClass
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaComment: aFamixJavaComment [
 
 	<generated>
@@ -107,14 +109,14 @@ FamixJavaTVisitor >> visitFamixJavaComment: aFamixJavaComment [
 	self visitFamixJavaSourcedEntity: aFamixJavaComment
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaConcretization: aFamixJavaConcretization [
 
 	<generated>
 	self visitFamixTConcretization: aFamixJavaConcretization
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaContainerEntity: aFamixJavaContainerEntity [
 
 	<generated>
@@ -124,21 +126,21 @@ FamixJavaTVisitor >> visitFamixJavaContainerEntity: aFamixJavaContainerEntity [
 	self visitFamixJavaNamedEntity: aFamixJavaContainerEntity
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaEntity: aFamixJavaEntity [
 
 	<generated>
 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaEntityTyping: aFamixJavaEntityTyping [
 
 	<generated>
 	self visitFamixTEntityTyping: aFamixJavaEntityTyping
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaEnum: aFamixJavaEnum [
 
 	<generated>
@@ -155,7 +157,7 @@ FamixJavaTVisitor >> visitFamixJavaEnum: aFamixJavaEnum [
 	self visitFamixJavaType: aFamixJavaEnum
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaEnumValue: aFamixJavaEnumValue [
 
 	<generated>
@@ -164,7 +166,7 @@ FamixJavaTVisitor >> visitFamixJavaEnumValue: aFamixJavaEnumValue [
 	self visitFamixJavaVariable: aFamixJavaEnumValue
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaException: aFamixJavaException [
 
 	<generated>
@@ -176,14 +178,14 @@ FamixJavaTVisitor >> visitFamixJavaException: aFamixJavaException [
 	self visitFamixJavaClass: aFamixJavaException
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaImplementation: aFamixJavaImplementation [
 
 	<generated>
 	self visitFamixTImplementation: aFamixJavaImplementation
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaImplicitVariable: aFamixJavaImplicitVariable [
 
 	<generated>
@@ -191,14 +193,14 @@ FamixJavaTVisitor >> visitFamixJavaImplicitVariable: aFamixJavaImplicitVariable 
 	self visitFamixJavaVariable: aFamixJavaImplicitVariable
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaImport: aFamixJavaImport [
 
 	<generated>
 	self visitFamixTImport: aFamixJavaImport
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaIndexedFileAnchor: aFamixJavaIndexedFileAnchor [
 
 	<generated>
@@ -206,14 +208,14 @@ FamixJavaTVisitor >> visitFamixJavaIndexedFileAnchor: aFamixJavaIndexedFileAncho
 	self visitFamixJavaSourceAnchor: aFamixJavaIndexedFileAnchor
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaInheritance: aFamixJavaInheritance [
 
 	<generated>
 	self visitFamixTInheritance: aFamixJavaInheritance
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaInterface: aFamixJavaInterface [
 
 	<generated>
@@ -233,14 +235,14 @@ FamixJavaTVisitor >> visitFamixJavaInterface: aFamixJavaInterface [
 	self visitFamixJavaType: aFamixJavaInterface
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaInvocation: aFamixJavaInvocation [
 
 	<generated>
 	self visitFamixTInvocation: aFamixJavaInvocation
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaLocalVariable: aFamixJavaLocalVariable [
 
 	<generated>
@@ -250,7 +252,7 @@ FamixJavaTVisitor >> visitFamixJavaLocalVariable: aFamixJavaLocalVariable [
 	self visitFamixJavaVariable: aFamixJavaLocalVariable
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaMethod: aFamixJavaMethod [
 
 	<generated>
@@ -267,7 +269,7 @@ FamixJavaTVisitor >> visitFamixJavaMethod: aFamixJavaMethod [
 	self visitFamixJavaContainerEntity: aFamixJavaMethod
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaNamedEntity: aFamixJavaNamedEntity [
 
 	<generated>
@@ -277,7 +279,7 @@ FamixJavaTVisitor >> visitFamixJavaNamedEntity: aFamixJavaNamedEntity [
 	self visitFamixJavaSourcedEntity: aFamixJavaNamedEntity
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaPackage: aFamixJavaPackage [
 
 	<generated>
@@ -288,7 +290,7 @@ FamixJavaTVisitor >> visitFamixJavaPackage: aFamixJavaPackage [
 	self visitFamixJavaContainerEntity: aFamixJavaPackage
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaParameter: aFamixJavaParameter [
 
 	<generated>
@@ -298,7 +300,7 @@ FamixJavaTVisitor >> visitFamixJavaParameter: aFamixJavaParameter [
 	self visitFamixJavaVariable: aFamixJavaParameter
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaParametricClass: aFamixJavaParametricClass [
 
 	<generated>
@@ -306,7 +308,7 @@ FamixJavaTVisitor >> visitFamixJavaParametricClass: aFamixJavaParametricClass [
 	self visitFamixJavaClass: aFamixJavaParametricClass
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaParametricEntityTyping: aFamixJavaParametricEntityTyping [
 
 	<generated>
@@ -314,7 +316,7 @@ FamixJavaTVisitor >> visitFamixJavaParametricEntityTyping: aFamixJavaParametricE
 	self visitFamixJavaEntityTyping: aFamixJavaParametricEntityTyping
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaParametricImplementation: aFamixJavaParametricImplementation [
 
 	<generated>
@@ -322,7 +324,7 @@ FamixJavaTVisitor >> visitFamixJavaParametricImplementation: aFamixJavaParametri
 	self visitFamixJavaImplementation: aFamixJavaParametricImplementation
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaParametricInheritance: aFamixJavaParametricInheritance [
 
 	<generated>
@@ -330,7 +332,7 @@ FamixJavaTVisitor >> visitFamixJavaParametricInheritance: aFamixJavaParametricIn
 	self visitFamixJavaInheritance: aFamixJavaParametricInheritance
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaParametricInterface: aFamixJavaParametricInterface [
 
 	<generated>
@@ -338,7 +340,7 @@ FamixJavaTVisitor >> visitFamixJavaParametricInterface: aFamixJavaParametricInte
 	self visitFamixJavaInterface: aFamixJavaParametricInterface
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaParametricInvocation: aFamixJavaParametricInvocation [
 
 	<generated>
@@ -346,7 +348,7 @@ FamixJavaTVisitor >> visitFamixJavaParametricInvocation: aFamixJavaParametricInv
 	self visitFamixJavaInvocation: aFamixJavaParametricInvocation
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaParametricMethod: aFamixJavaParametricMethod [
 
 	<generated>
@@ -354,7 +356,7 @@ FamixJavaTVisitor >> visitFamixJavaParametricMethod: aFamixJavaParametricMethod 
 	self visitFamixJavaMethod: aFamixJavaParametricMethod
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaParametricReference: aFamixJavaParametricReference [
 
 	<generated>
@@ -362,7 +364,7 @@ FamixJavaTVisitor >> visitFamixJavaParametricReference: aFamixJavaParametricRefe
 	self visitFamixJavaReference: aFamixJavaParametricReference
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaPrimitiveType: aFamixJavaPrimitiveType [
 
 	<generated>
@@ -370,28 +372,28 @@ FamixJavaTVisitor >> visitFamixJavaPrimitiveType: aFamixJavaPrimitiveType [
 	self visitFamixJavaType: aFamixJavaPrimitiveType
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaReference: aFamixJavaReference [
 
 	<generated>
 	self visitFamixTReference: aFamixJavaReference
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaSourceAnchor: aFamixJavaSourceAnchor [
 
 	<generated>
 	self visitFamixTSourceAnchor: aFamixJavaSourceAnchor
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaSourceLanguage: aFamixJavaSourceLanguage [
 
 	<generated>
 	self visitFamixTSourceLanguage: aFamixJavaSourceLanguage
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaSourceTextAnchor: aFamixJavaSourceTextAnchor [
 
 	<generated>
@@ -399,14 +401,14 @@ FamixJavaTVisitor >> visitFamixJavaSourceTextAnchor: aFamixJavaSourceTextAnchor 
 	self visitFamixJavaSourceAnchor: aFamixJavaSourceTextAnchor
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaSourcedEntity: aFamixJavaSourcedEntity [
 
 	<generated>
 	self visitFamixTSourceEntity: aFamixJavaSourcedEntity
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaTBound: aFamixJavaTBound [
 
 	<generated>
@@ -414,7 +416,7 @@ FamixJavaTVisitor >> visitFamixJavaTBound: aFamixJavaTBound [
 	self visitCollection: aFamixJavaTBound upperBoundedWildcards
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaTBounded: aFamixJavaTBounded [
 
 	<generated>
@@ -422,42 +424,42 @@ FamixJavaTVisitor >> visitFamixJavaTBounded: aFamixJavaTBounded [
 	self visitEntity: aFamixJavaTBounded upperBound
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaTCanBeSynchronized: aFamixJavaTCanBeSynchronized [
 
 	<generated>
 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaTCanBeTransient: aFamixJavaTCanBeTransient [
 
 	<generated>
 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaTCanBeVolatile: aFamixJavaTCanBeVolatile [
 
 	<generated>
 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaTClassMetrics: aFamixJavaTClassMetrics [
 
 	<generated>
 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaTWithInterfaces: aFamixJavaTWithInterfaces [
 
 	<generated>
 	self visitFamixTWithTypes: aFamixJavaTWithInterfaces
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaType: aFamixJavaType [
 
 	<generated>
@@ -467,7 +469,7 @@ FamixJavaTVisitor >> visitFamixJavaType: aFamixJavaType [
 	self visitFamixJavaContainerEntity: aFamixJavaType
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaTypeParameter: aFamixJavaTypeParameter [
 
 	<generated>
@@ -478,7 +480,7 @@ FamixJavaTVisitor >> visitFamixJavaTypeParameter: aFamixJavaTypeParameter [
 	self visitFamixJavaType: aFamixJavaTypeParameter
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaUnknownVariable: aFamixJavaUnknownVariable [
 
 	<generated>
@@ -486,7 +488,7 @@ FamixJavaTVisitor >> visitFamixJavaUnknownVariable: aFamixJavaUnknownVariable [
 	self visitFamixJavaVariable: aFamixJavaUnknownVariable
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaVariable: aFamixJavaVariable [
 
 	<generated>
@@ -494,7 +496,7 @@ FamixJavaTVisitor >> visitFamixJavaVariable: aFamixJavaVariable [
 	self visitFamixJavaNamedEntity: aFamixJavaVariable
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaWildcard: aFamixJavaWildcard [
 
 	<generated>

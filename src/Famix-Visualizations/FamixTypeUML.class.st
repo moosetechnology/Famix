@@ -2,45 +2,47 @@
 I show the UML representation of a FamixTType.
 "
 Class {
-	#name : #FamixTypeUML,
-	#superclass : #MooseAbstractVisualization,
+	#name : 'FamixTypeUML',
+	#superclass : 'MooseAbstractVisualization',
 	#instVars : [
 		'builder'
 	],
-	#category : #'Famix-Visualizations-Core'
+	#category : 'Famix-Visualizations-Core',
+	#package : 'Famix-Visualizations',
+	#tag : 'Core'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTypeUML class >> defaultTitle [
 	^ 'UML class diagram'
 ]
 
-{ #category : #public }
+{ #category : 'public' }
 FamixTypeUML class >> forType: aFamixType [
 	^ self new
 		famixType: aFamixType;
 		yourself
 ]
 
-{ #category : #public }
+{ #category : 'public' }
 FamixTypeUML class >> forTypeGroup: aFamixTypeGroup [
 	^ self new
 		famixTypeGroup: aFamixTypeGroup;
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTypeUML class >> icon [
 	^ MooseIcons mooseUml
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 FamixTypeUML >> build [
 	builder renderIn: self canvas.
 	super build
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 FamixTypeUML >> buildLegend [
 	| legend |
 	legend := RSLegend new.
@@ -50,17 +52,17 @@ FamixTypeUML >> buildLegend [
 	legend build
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTypeUML >> famixType: aFamixType [
 	builder classes: {aFamixType}
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTypeUML >> famixTypeGroup: aFamixTypeGroup [
 	builder classes: aFamixTypeGroup
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FamixTypeUML >> initialize [
 
 	super initialize.

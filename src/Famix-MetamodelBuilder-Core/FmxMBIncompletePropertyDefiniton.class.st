@@ -2,12 +2,14 @@
 FamixMetamodelBuilderIncompletePropertyDefiniton
 "
 Class {
-	#name : #FmxMBIncompletePropertyDefiniton,
-	#superclass : #Error,
-	#category : #'Famix-MetamodelBuilder-Core-Implementation'
+	#name : 'FmxMBIncompletePropertyDefiniton',
+	#superclass : 'Error',
+	#category : 'Famix-MetamodelBuilder-Core-Implementation',
+	#package : 'Famix-MetamodelBuilder-Core',
+	#tag : 'Implementation'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBIncompletePropertyDefiniton >> messageText [
 
 	<ignoreForCoverage>

@@ -1,12 +1,12 @@
-Extension { #name : #FamixAnnotationTypeGroup }
+Extension { #name : 'FamixAnnotationTypeGroup' }
 
-{ #category : #'*Famix-Visualizations' }
+{ #category : '*Famix-Visualizations' }
 FamixAnnotationTypeGroup >> annotationConstellation [
 
 	^ FamixAnnotationTypeGroupConstellation forAnnotationTypeGroup: self
 ]
 
-{ #category : #'*Famix-Visualizations' }
+{ #category : '*Famix-Visualizations' }
 FamixAnnotationTypeGroup >> inspectionAnnotationConstellation: aBuilder [
 
 	<inspectorPresentationOrder: 10 title: 'Annotation Constellation'>

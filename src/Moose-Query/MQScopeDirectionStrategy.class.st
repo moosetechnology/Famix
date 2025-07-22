@@ -6,27 +6,29 @@ I am a strategy used by the scoping queries to define the direction in the conta
 
 "
 Class {
-	#name : #MQScopeDirectionStrategy,
-	#superclass : #Object,
-	#category : #'Moose-Query-Scoping'
+	#name : 'MQScopeDirectionStrategy',
+	#superclass : 'Object',
+	#category : 'Moose-Query-Scoping',
+	#package : 'Moose-Query',
+	#tag : 'Scoping'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 MQScopeDirectionStrategy class >> isAbstract [
 	^ self = MQScopeDirectionStrategy
 ]
 
-{ #category : #query }
+{ #category : 'query' }
 MQScopeDirectionStrategy class >> scopeFor: anEntity query: aQuery [
 	^ aQuery scopeFor: anEntity direction: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MQScopeDirectionStrategy class >> selectorsFor: anEntity [
 	^ self subclassResponsibility
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MQScopeDirectionStrategy class >> strategies [
 	^ self allSubclasses reject: #isAbstract
 ]

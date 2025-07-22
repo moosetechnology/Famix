@@ -1,17 +1,18 @@
 Class {
-	#name : #LANFileServer,
-	#superclass : #LANOutputServer,
-	#category : #'Moose-TestResources-LAN'
+	#name : 'LANFileServer',
+	#superclass : 'LANOutputServer',
+	#category : 'Moose-TestResources-LAN',
+	#package : 'Moose-TestResources-LAN'
 }
 
-{ #category : #outputting }
+{ #category : 'outputting' }
 LANFileServer >> name [ 
 	"added for candidate invocations operator test" 
 	 
 	^super name
 ]
 
-{ #category : #outputting }
+{ #category : 'outputting' }
 LANFileServer >> output: thePacket [ 
 	"My subclasses have to use this method to define their outputting behavior" 
 	 
@@ -21,7 +22,7 @@ LANFileServer >> output: thePacket [
 			'LANFileServer ' , self name printString , ' saves ' , thePacket contents
 ]
 
-{ #category : #setting }
+{ #category : 'setting' }
 LANFileServer >> setServerType [ 
 	 
 	serverType := 'LANFileServer'

@@ -1,10 +1,12 @@
 Class {
-	#name : #FmxTraitsTestGenerateAccessorBEntity,
-	#superclass : #MooseEntity,
-	#category : #'Famix-MetamodelBuilder-TestsTraitsResources-B-Entities'
+	#name : 'FmxTraitsTestGenerateAccessorBEntity',
+	#superclass : 'MooseEntity',
+	#category : 'Famix-MetamodelBuilder-TestsTraitsResources-B-Entities',
+	#package : 'Famix-MetamodelBuilder-TestsTraitsResources-B',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FmxTraitsTestGenerateAccessorBEntity class >> annotation [
 
 	<FMClass: #Entity super: #MooseEntity>
@@ -13,7 +15,7 @@ FmxTraitsTestGenerateAccessorBEntity class >> annotation [
 	^self
 ]
 
-{ #category : #meta }
+{ #category : 'meta' }
 FmxTraitsTestGenerateAccessorBEntity class >> metamodel [
 
 	<generated>

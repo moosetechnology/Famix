@@ -17,8 +17,8 @@ Internal Representation and Key Implementation Points.
 	potentialDependencies:		<aCollection>				A collection containing all the potential dependencies in which we are looking for.
 "
 Class {
-	#name : #FamixDependenciesDetector,
-	#superclass : #Object,
+	#name : 'FamixDependenciesDetector',
+	#superclass : 'Object',
 	#instVars : [
 		'entity',
 		'directionStrategy',
@@ -26,10 +26,12 @@ Class {
 		'potentialDependencies',
 		'dependencies'
 	],
-	#category : #'Moose-Core-Dependencies'
+	#category : 'Moose-Core-Dependencies',
+	#package : 'Moose-Core',
+	#tag : 'Dependencies'
 }
 
-{ #category : #public }
+{ #category : 'public' }
 FamixDependenciesDetector class >> computeClientsOf: aMooseEntity from: aMooseGroup in: aMooseModel [
 	^ self new
 		directionStrategy: MQNavigationIncomingDirectionStrategy;
@@ -39,7 +41,7 @@ FamixDependenciesDetector class >> computeClientsOf: aMooseEntity from: aMooseGr
 		detectDependencies
 ]
 
-{ #category : #public }
+{ #category : 'public' }
 FamixDependenciesDetector class >> computeProvidersOf: aMooseEntity from: aMooseGroup in: aMooseModel [
 	^ self new
 		directionStrategy: MQNavigationOutgoingDirectionStrategy;
@@ -49,7 +51,7 @@ FamixDependenciesDetector class >> computeProvidersOf: aMooseEntity from: aMoose
 		detectDependencies
 ]
 
-{ #category : #'links-computation' }
+{ #category : 'links-computation' }
 FamixDependenciesDetector >> detectDependencies [
 	"this code will be further simplied in the later version. right now, committing it in this state to have a working version."
 
@@ -60,7 +62,7 @@ FamixDependenciesDetector >> detectDependencies [
 	^ dependencies
 ]
 
-{ #category : #'links-computation' }
+{ #category : 'links-computation' }
 FamixDependenciesDetector >> detectDependenciesAtAllScopesOfPossibleDependencies [
 	"Here we compute the dependencies of an entity and we try to find in the list of possible dependencies the closest fitting for the ones we found. 
 	
@@ -75,59 +77,59 @@ FamixDependenciesDetector >> detectDependenciesAtAllScopesOfPossibleDependencies
 				selectMatchingEntitiesFrom: (dep query ancestors recursively until: [ :e | (potentialDependencies includes: e) or: [ dependencies includes: e ] ]) ofAnyType ]
 ]
 
-{ #category : #'links-computation' }
+{ #category : 'links-computation' }
 FamixDependenciesDetector >> detectDependenciesFrom: aCollection [
 	"see if all possible levels of each entity in the moose group contain a link from me"
 
 	self selectMatchingEntitiesFrom: (aCollection select: [ :each | each isLinkedTo: self entity dependancyDirection: self directionStrategy in: self mooseModel ])
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixDependenciesDetector >> directionStrategy [
 	^ directionStrategy
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixDependenciesDetector >> directionStrategy: aDirectionStrategy [
 	directionStrategy := aDirectionStrategy
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixDependenciesDetector >> entity [
 	^ entity
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixDependenciesDetector >> entity: anEntity [
 	entity := anEntity
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixDependenciesDetector >> mooseModel [
 	^ mooseModel
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixDependenciesDetector >> mooseModel: aMooseModel [
 	mooseModel := aMooseModel
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixDependenciesDetector >> potentialDependencies [
 	^ potentialDependencies
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixDependenciesDetector >> potentialDependencies: aCollection [
 	potentialDependencies := aCollection asSet
 ]
 
-{ #category : #'links-computation' }
+{ #category : 'links-computation' }
 FamixDependenciesDetector >> removeFromPotentialDependencies: aCollection [
 	potentialDependencies removeAllFoundIn: aCollection
 ]
 
-{ #category : #'links-computation' }
+{ #category : 'links-computation' }
 FamixDependenciesDetector >> selectMatchingEntitiesFrom: aCollection [
 	| toAdd |
 	toAdd := aCollection intersection: potentialDependencies.

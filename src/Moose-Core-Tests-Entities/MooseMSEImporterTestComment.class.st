@@ -16,14 +16,16 @@
 
 "
 Class {
-	#name : #MooseMSEImporterTestComment,
-	#superclass : #MooseMSEImporterTestSourcedEntity,
+	#name : 'MooseMSEImporterTestComment',
+	#superclass : 'MooseMSEImporterTestSourcedEntity',
 	#traits : 'FamixTComment',
 	#classTraits : 'FamixTComment classTrait',
-	#category : #'Moose-Core-Tests-Entities-Entities'
+	#category : 'Moose-Core-Tests-Entities-Entities',
+	#package : 'Moose-Core-Tests-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 MooseMSEImporterTestComment class >> annotation [
 
 	<FMClass: #Comment super: #MooseMSEImporterTestSourcedEntity>

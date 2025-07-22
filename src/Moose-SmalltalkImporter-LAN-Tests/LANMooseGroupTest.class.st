@@ -1,22 +1,23 @@
 Class {
-	#name : #LANMooseGroupTest,
-	#superclass : #TestCase,
-	#category : #'Moose-SmalltalkImporter-LAN-Tests'
+	#name : 'LANMooseGroupTest',
+	#superclass : 'TestCase',
+	#category : 'Moose-SmalltalkImporter-LAN-Tests',
+	#package : 'Moose-SmalltalkImporter-LAN-Tests'
 }
 
-{ #category : #utilities }
+{ #category : 'utilities' }
 LANMooseGroupTest >> model [
 	" to debug and avoid caching behavior: LANPackageTestResource reset."
 
 	^ LANPackageTestResource current model
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 LANMooseGroupTest >> testAdd [
 	self assert: (self model allClasses copy , self model allMethods copy) size equals: self model allClasses size + self model allMethods size
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 LANMooseGroupTest >> testAllLikeSelectors [
 	self assert: self model allClasses size equals: self model allClasses allClasses size.
 	self assert: (self model allClasses , self model allMethods) allClasses size equals: self model allClasses size.
@@ -24,17 +25,17 @@ LANMooseGroupTest >> testAllLikeSelectors [
 	self assert: ((self model allClasses , self model allMethods) allClasses isKindOf: FamixTypeGroup)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 LANMooseGroupTest >> testAsArray [
 	self assert: (self model allClasses asArray isKindOf: Array)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 LANMooseGroupTest >> testAsOrderedCollection [
 	self assert: (self model allClasses asOrderedCollection isKindOf: OrderedCollection)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 LANMooseGroupTest >> testClassGroupType [
 	| group aCollection numberOfClasses |
 	aCollection := self model allClasses asOrderedCollection.
@@ -44,20 +45,20 @@ LANMooseGroupTest >> testClassGroupType [
 	self assert: self model allClasses size equals: numberOfClasses
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 LANMooseGroupTest >> testCollectGroupType [
 	| collectedClasses |
 	collectedClasses := (self model allMethods collect: #parentType) specialize.
 	self assert: (collectedClasses isKindOf: FamixTypeGroup)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 LANMooseGroupTest >> testEntityNamed [
 	self model allClasses do: [ :each | self assert: (self model allClasses entityNamed: each mooseName) isNotNil ].
 	self model allMethods do: [ :each | self assert: (self model allMethods entityNamed: each mooseName) isNotNil ]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 LANMooseGroupTest >> testEntityUniquelyNamed [
 	| classes |
 	classes := self model allClasses.
@@ -65,21 +66,21 @@ LANMooseGroupTest >> testEntityUniquelyNamed [
 	self assert: (classes entityNamed: classes last mooseName) identicalTo: classes last
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 LANMooseGroupTest >> testFlatCollect [
 	| allMethods |
 	allMethods := self model allClasses flatCollect: [ :each | each methods asMooseGroup ].
 	self assert: allMethods asSet equals: self model allMethods asSet
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 LANMooseGroupTest >> testFlatCollectType [
 	| allMethods |
 	allMethods := (self model allClasses flatCollect: #methods) specialize.
 	self assert: (allMethods isKindOf: FamixMethodGroup)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 LANMooseGroupTest >> testGroupInsideGroup [
 	| group1 classes methods group2 group3 numberOfClasses |
 	classes := self model allClasses copy.
@@ -93,7 +94,7 @@ LANMooseGroupTest >> testGroupInsideGroup [
 	self assert: self model allClasses size equals: numberOfClasses
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 LANMooseGroupTest >> testGroupType [
 	| group numberOfClasses numberOfMethods |
 	numberOfClasses := self model allClasses size.
@@ -114,7 +115,7 @@ LANMooseGroupTest >> testGroupType [
 	self assert: self model allMethods size equals: numberOfMethods
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 LANMooseGroupTest >> testHeterogeneousGroupType [
 	| group aCollection numberOfClasses numberOfMethods |
 	numberOfClasses := self model allClasses size.
@@ -135,43 +136,43 @@ LANMooseGroupTest >> testHeterogeneousGroupType [
 	self assert: self model allMethods size equals: numberOfMethods
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 LANMooseGroupTest >> testIncludes [
 	self assert:	(self model allClasses includes: self model allClasses first)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 LANMooseGroupTest >> testIncludesAllOf [
 	self assert: (self model allClasses includesAll: self model allClasses)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 LANMooseGroupTest >> testMax [
 	self assert: (self model allClasses detectMax: #numberOfMethods) equals: (self model entityNamed: #'Smalltalk.LANInterface_class')
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 LANMooseGroupTest >> testMinimumOfPropertyNamed [
 	| classes |
 	classes := self model allClasses.
 	self assert: (classes min: #numberOfMethods) equals: 0
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 LANMooseGroupTest >> testPrintOn [
 	| printOn |
 	printOn := String streamContents: [ :stream | self model allTypes printOn: stream ].
 	self assert: (printOn beginsWith: 'All famixttypes (' , self model allTypes size asString)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 LANMooseGroupTest >> testSelectEmptyGroupType [
 	| selected |
 	selected := self model allMethods select: [ :each | each parentType isStub ].
 	self assert: (selected isKindOf: MooseGroup)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 LANMooseGroupTest >> testSelectFirst [
 	| group |
 	group := self model allClasses.
@@ -179,14 +180,14 @@ LANMooseGroupTest >> testSelectFirst [
 	self assert: (group selectFirst: 5) size equals: 5.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 LANMooseGroupTest >> testSelectGroupType [
 	| selected |
 	selected := self model allMethods select: [ :each | each cyclomaticComplexity = 1 ].
 	self assert: (selected isKindOf: MooseGroup)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 LANMooseGroupTest >> testSum [
 	self assert: (self model allModelClasses sumNumbers: #numberOfAttributes) equals: 17
 ]

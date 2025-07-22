@@ -1,6 +1,6 @@
 Class {
-	#name : #FamixTestComposedMetamodelsBuilding,
-	#superclass : #TestCase,
+	#name : 'FamixTestComposedMetamodelsBuilding',
+	#superclass : 'TestCase',
 	#instVars : [
 		'builder1',
 		'builder2',
@@ -10,10 +10,11 @@ Class {
 		'binding',
 		'env'
 	],
-	#category : #'Famix-TestComposedMetamodel'
+	#category : 'Famix-TestComposedMetamodel',
+	#package : 'Famix-TestComposedMetamodel'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 FamixTestComposedMetamodelsBuilding >> setUp [
 	super setUp.
 
@@ -50,7 +51,7 @@ FamixTestComposedMetamodelsBuilding >> setUp [
 	methodNode isRemote: true
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTestComposedMetamodelsBuilding >> testOneRemoteToOneNonRemote [
 
 	| source generatedMethod |
@@ -76,7 +77,7 @@ FamixTestComposedMetamodelsBuilding >> testOneRemoteToOneNonRemote [
 	self assert: generatedMethod package name equals: #TstComposed.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTestComposedMetamodelsBuilding >> testOneRemoteToOneRemote [
 
 	| source generatedMethod |

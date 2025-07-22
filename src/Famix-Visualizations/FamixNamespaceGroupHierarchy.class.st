@@ -2,32 +2,34 @@
 I show namespaces names and their containment relations.
 "
 Class {
-	#name : #FamixNamespaceGroupHierarchy,
-	#superclass : #MooseAbstractVisualization,
+	#name : 'FamixNamespaceGroupHierarchy',
+	#superclass : 'MooseAbstractVisualization',
 	#instVars : [
 		'famixNamespaceGroup'
 	],
-	#category : #'Famix-Visualizations-Core'
+	#category : 'Famix-Visualizations-Core',
+	#package : 'Famix-Visualizations',
+	#tag : 'Core'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixNamespaceGroupHierarchy class >> defaultTitle [
 	^ 'Namespaces hierarchy'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixNamespaceGroupHierarchy class >> forNamespaceGroup: aFamixNamespaceGroup [
 	^ self new
 		famixNamespaceGroup: aFamixNamespaceGroup;
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixNamespaceGroupHierarchy class >> icon [
 	^ MooseIcons mooseSystemComplexity
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 FamixNamespaceGroupHierarchy >> build [
 	self buildNodes.
 	self connectNodes.
@@ -35,7 +37,7 @@ FamixNamespaceGroupHierarchy >> build [
 	super build
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 FamixNamespaceGroupHierarchy >> buildLegend [
 	| legend |
 	legend := RSLegend new.
@@ -46,7 +48,7 @@ FamixNamespaceGroupHierarchy >> buildLegend [
 	legend build
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 FamixNamespaceGroupHierarchy >> buildNodes [
 	canvas
 		addAll:
@@ -55,24 +57,24 @@ FamixNamespaceGroupHierarchy >> buildNodes [
 					[ :namespace | self shapeForNamespace: namespace ])
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 FamixNamespaceGroupHierarchy >> connectNodes [
 	RSEdgeBuilder line
 		shapes: canvas nodes;
 		connectToAll: [ :namespace | namespace atScope: FamixTNamespace ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixNamespaceGroupHierarchy >> famixNamespaceGroup: anObject [
 	famixNamespaceGroup := anObject
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 FamixNamespaceGroupHierarchy >> setLayout [
 	RSClusterLayout new on: canvas nodes
 ]
 
-{ #category : #shapes }
+{ #category : 'shapes' }
 FamixNamespaceGroupHierarchy >> shapeForNamespace: namespace [
 	^ RSLabel new
 		model: namespace;

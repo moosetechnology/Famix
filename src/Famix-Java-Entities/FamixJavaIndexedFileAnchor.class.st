@@ -12,14 +12,16 @@
 
 "
 Class {
-	#name : #FamixJavaIndexedFileAnchor,
-	#superclass : #FamixJavaSourceAnchor,
+	#name : 'FamixJavaIndexedFileAnchor',
+	#superclass : 'FamixJavaSourceAnchor',
 	#traits : 'FamixTIndexedFileNavigation',
 	#classTraits : 'FamixTIndexedFileNavigation classTrait',
-	#category : #'Famix-Java-Entities-Entities'
+	#category : 'Famix-Java-Entities-Entities',
+	#package : 'Famix-Java-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixJavaIndexedFileAnchor class >> annotation [
 
 	<FMClass: #IndexedFileAnchor super: #FamixJavaSourceAnchor>
@@ -28,7 +30,7 @@ FamixJavaIndexedFileAnchor class >> annotation [
 	^ self
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FamixJavaIndexedFileAnchor >> accept: aVisitor [
 
 	<generated>

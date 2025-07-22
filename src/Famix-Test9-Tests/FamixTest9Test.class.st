@@ -1,17 +1,18 @@
 Class {
-	#name : #FamixTest9Test,
-	#superclass : #TestCase,
-	#category : #'Famix-Test9-Tests'
+	#name : 'FamixTest9Test',
+	#superclass : 'TestCase',
+	#category : 'Famix-Test9-Tests',
+	#package : 'Famix-Test9-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 FamixTest9Test >> tearDown [
 
 	FamixTest9Generator deleteMetaModel.
 	super tearDown
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTest9Test >> testRegenerationWithSlightDifferencesFromScratchWorks [
 
 	"We generate the meta-model"
@@ -25,7 +26,7 @@ FamixTest9Test >> testRegenerationWithSlightDifferencesFromScratchWorks [
 	self assert: ((self class environment at: #FamixTest9MySuperclass) definesSlotNamed: #mySubclasses)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTest9Test >> testRegenerationWithSlightDifferencesRedefinesRelation [
 	"This is a smoke test checking that generation does not fail"
 

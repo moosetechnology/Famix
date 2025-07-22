@@ -1,10 +1,12 @@
 Class {
-	#name : #FamixGlobalVariableGroup,
-	#superclass : #MooseSpecializedGroup,
-	#category : #'Famix-Traits-Groups'
+	#name : 'FamixGlobalVariableGroup',
+	#superclass : 'MooseSpecializedGroup',
+	#category : 'Famix-Traits-Groups',
+	#package : 'Famix-Traits',
+	#tag : 'Groups'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixGlobalVariableGroup class >> annotation [
 
 	<FMClass: #GlobalVariableGroup super: #MooseSpecializedGroup>
@@ -13,38 +15,38 @@ FamixGlobalVariableGroup class >> annotation [
 	^ self
 ]
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixGlobalVariableGroup class >> metamodel [
 
 	<generated>
 	^ FamixModel metamodel
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixGlobalVariableGroup >> variableNamed: aVarName [
 	"Maybe mooseName should be used instead"
 	^ self detect: [:var | var name = aVarName ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixGlobalVariableGroup >> variableUnused [
 	^ self select: [:var | var incomingAccesses size = 0 ]
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FamixGlobalVariableGroup >> variableUnusedGroup [
 	<navigation: 'Variable unsued'>
 	^ self class withAll: self variableUnused  
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixGlobalVariableGroup >> variablesAccessedFromDifferentPackages [
 	^ self select: [:var | 
 		((var incomingAccesses collect: #accessor)
 			collect: #parentScope) asSet size > 1]
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FamixGlobalVariableGroup >> variablesAccessedFromDifferentPackagesGroup [
 	<navigation: 'Variables accessed from more than one package'>
 	^ self class withAll: self variablesAccessedFromDifferentPackages  

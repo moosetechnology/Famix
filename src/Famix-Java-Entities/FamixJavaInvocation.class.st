@@ -30,14 +30,16 @@
 
 "
 Class {
-	#name : #FamixJavaInvocation,
-	#superclass : #FamixJavaEntity,
+	#name : 'FamixJavaInvocation',
+	#superclass : 'FamixJavaEntity',
 	#traits : 'FamixTInvocation',
 	#classTraits : 'FamixTInvocation classTrait',
-	#category : #'Famix-Java-Entities-Entities'
+	#category : 'Famix-Java-Entities-Entities',
+	#package : 'Famix-Java-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixJavaInvocation class >> annotation [
 
 	<FMClass: #Invocation super: #FamixJavaEntity>
@@ -46,21 +48,21 @@ FamixJavaInvocation class >> annotation [
 	^ self
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FamixJavaInvocation >> accept: aVisitor [
 
 	<generated>
 	^ aVisitor visitFamixJavaInvocation: self
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FamixJavaInvocation >> initialize [
 
 	super initialize.
 	signature := 'nosignature'.
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixJavaInvocation >> isAPotentialInvocation [
 	"test if the sender is a potential invocation"
 	| invokedMtdSignature invoRVar invokedMtd |
@@ -83,7 +85,7 @@ FamixJavaInvocation >> isAPotentialInvocation [
 	
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixJavaInvocation >> isASureInvocation [
 	"Test if the receiver (an invocation) is sure (i.e. we know for sure the class of the invocation's receiver)"
 
@@ -92,7 +94,7 @@ FamixJavaInvocation >> isASureInvocation [
 	^ invoRVar isNotNil and: [ invoRVar class = FamixJavaClass or: [ invoRVar isImplicitVariable and: [ invoRVar isSelf or: [ invoRVar isSuper ] ] ] ]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixJavaInvocation >> printOn: aStream [
 	super printOn: aStream.
 	aStream nextPut: $#.
@@ -100,7 +102,7 @@ FamixJavaInvocation >> printOn: aStream [
 	aStream << ' (Invocation)'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixJavaInvocation >> receiverSourceCode [
 	^ self receiver sourceText
 ]

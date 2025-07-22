@@ -17,14 +17,16 @@
 
 "
 Class {
-	#name : #FamixTest8Virus,
-	#superclass : #FamixTest8Entity,
+	#name : 'FamixTest8Virus',
+	#superclass : 'FamixTest8Entity',
 	#traits : 'FamixTest8TInfectable',
 	#classTraits : 'FamixTest8TInfectable classTrait',
-	#category : #'Famix-Test8-Entities-Entities'
+	#category : 'Famix-Test8-Entities-Entities',
+	#package : 'Famix-Test8-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTest8Virus class >> annotation [
 
 	<FMClass: #Virus super: #FamixTest8Entity>

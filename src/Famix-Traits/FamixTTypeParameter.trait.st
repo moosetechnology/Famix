@@ -18,15 +18,17 @@ The generic type parameter associated to a ParametricEntity. Entities using this
 
 "
 Trait {
-	#name : #FamixTTypeParameter,
+	#name : 'FamixTTypeParameter',
 	#instVars : [
 		'#concretizations => FMMany type: #FamixTConcretization opposite: #typeParameter',
 		'#genericEntity => FMOne type: #FamixTParametricEntity opposite: #typeParameters'
 	],
-	#category : #'Famix-Traits-Parametrics'
+	#category : 'Famix-Traits-Parametrics',
+	#package : 'Famix-Traits',
+	#tag : 'Parametrics'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTTypeParameter classSide >> annotation [
 
 	<FMClass: #TTypeParameter super: #Object>
@@ -35,20 +37,20 @@ FamixTTypeParameter classSide >> annotation [
 	^ self
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FamixTTypeParameter >> accept: aVisitor [
 
 	<generated>
 	^ aVisitor visitFamixTTypeParameter: self
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTTypeParameter >> addConcretization: anObject [
 	<generated>
 	^ self concretizations add: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTTypeParameter >> concretizations [
 	"Relation named: #concretizations type: #FamixTConcretization opposite: #typeParameter"
 
@@ -58,14 +60,14 @@ FamixTTypeParameter >> concretizations [
 	^ concretizations
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTTypeParameter >> concretizations: anObject [
 
 	<generated>
 	concretizations value: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTTypeParameter >> genericEntity [
 	"Relation named: #genericEntity type: #FamixTParametricEntity opposite: #typeParameters"
 
@@ -74,7 +76,7 @@ FamixTTypeParameter >> genericEntity [
 	^ genericEntity
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTTypeParameter >> genericEntity: anObject [
 
 	<generated>

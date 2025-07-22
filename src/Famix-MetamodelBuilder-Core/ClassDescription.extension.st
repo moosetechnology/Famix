@@ -1,6 +1,6 @@
-Extension { #name : #ClassDescription }
+Extension { #name : 'ClassDescription' }
 
-{ #category : #'*Famix-MetamodelBuilder-Core' }
+{ #category : '*Famix-MetamodelBuilder-Core' }
 ClassDescription >> needToAdaptToMethod: aRGMethod [
 
 	^ self

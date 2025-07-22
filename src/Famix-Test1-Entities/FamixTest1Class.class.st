@@ -47,14 +47,16 @@ This a comment for the Class entity
 
 "
 Class {
-	#name : #FamixTest1Class,
-	#superclass : #FamixTest1NamedEntity,
+	#name : 'FamixTest1Class',
+	#superclass : 'FamixTest1NamedEntity',
 	#traits : 'FamixTClass + FamixTPackageable + FamixTSourceEntity + FamixTWithComments + FamixTWithSourceLanguages',
 	#classTraits : 'FamixTClass classTrait + FamixTPackageable classTrait + FamixTSourceEntity classTrait + FamixTWithComments classTrait + FamixTWithSourceLanguages classTrait',
-	#category : #'Famix-Test1-Entities-Entities'
+	#category : 'Famix-Test1-Entities-Entities',
+	#package : 'Famix-Test1-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTest1Class class >> annotation [
 
 	<FMClass: #Class super: #FamixTest1NamedEntity>

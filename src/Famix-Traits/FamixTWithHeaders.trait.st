@@ -11,14 +11,16 @@
 
 "
 Trait {
-	#name : #FamixTWithHeaders,
+	#name : 'FamixTWithHeaders',
 	#instVars : [
 		'#header => FMOne type: #FamixTHeader opposite: #headerOwner'
 	],
-	#category : #'Famix-Traits-Header'
+	#category : 'Famix-Traits-Header',
+	#package : 'Famix-Traits',
+	#tag : 'Header'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTWithHeaders classSide >> annotation [
 
 	<FMClass: #TWithHeaders super: #Object>
@@ -27,14 +29,14 @@ FamixTWithHeaders classSide >> annotation [
 	^ self
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FamixTWithHeaders >> accept: aVisitor [
 
 	<generated>
 	^ aVisitor visitFamixTWithHeaders: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithHeaders >> header [
 	"Relation named: #header type: #FamixTHeader opposite: #headerOwner"
 
@@ -44,7 +46,7 @@ FamixTWithHeaders >> header [
 	^ header
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithHeaders >> header: anObject [
 
 	<generated>

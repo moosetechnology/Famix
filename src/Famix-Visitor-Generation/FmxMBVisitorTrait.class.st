@@ -3,12 +3,14 @@ I am responsible for the generation of a visitor trait when generating a Famix m
 See `FamixVisitorGenerator`.
 "
 Class {
-	#name : #FmxMBVisitorTrait,
-	#superclass : #FmxMBTrait,
-	#category : #'Famix-Visitor-Generation-MetamodelBuilder'
+	#name : 'FmxMBVisitorTrait',
+	#superclass : 'FmxMBTrait',
+	#category : 'Famix-Visitor-Generation-MetamodelBuilder',
+	#package : 'Famix-Visitor-Generation',
+	#tag : 'MetamodelBuilder'
 }
 
-{ #category : #generating }
+{ #category : 'generating' }
 FmxMBVisitorTrait >> acceptMethodProtocol [
 
 	^ self packageName == self builder configuration packageName
@@ -16,14 +18,14 @@ FmxMBVisitorTrait >> acceptMethodProtocol [
 		  ifFalse: [ '*' , self packageName ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBVisitorTrait >> comment [
 
 	^ 'I am a visitor for {1}Entities. 
 I am generated with the metamodel.' format: { self prefix }
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FmxMBVisitorTrait >> generate [
 
 	| aTrait |
@@ -48,7 +50,7 @@ FmxMBVisitorTrait >> generate [
 	self generateVisitAndAcceptMethods.
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FmxMBVisitorTrait >> generateAcceptMethodIn: aFmxMBBehavior [
 
 	self builder environment
@@ -60,7 +62,7 @@ FmxMBVisitorTrait >> generateAcceptMethodIn: aFmxMBBehavior [
 		classified: self acceptMethodProtocol
 ]
 
-{ #category : #'generation - common' }
+{ #category : 'generation - common' }
 FmxMBVisitorTrait >> generateCommonMethodsIfNecessary [
 
 	self allLocalTraits ifNotEmpty: [ ^ self ].
@@ -69,7 +71,7 @@ FmxMBVisitorTrait >> generateCommonMethodsIfNecessary [
 	self generateVisitCollectionMethod
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FmxMBVisitorTrait >> generateVisitAndAcceptMethods [
 
 	(builder classes reject: [ :fmxMBClass |
@@ -81,7 +83,7 @@ FmxMBVisitorTrait >> generateVisitAndAcceptMethods [
 			self generateAcceptMethodIn: fmxMBBehavior ]
 ]
 
-{ #category : #'generation - common' }
+{ #category : 'generation - common' }
 FmxMBVisitorTrait >> generateVisitCollectionMethod [
 
 	self realClass
@@ -92,7 +94,7 @@ FmxMBVisitorTrait >> generateVisitCollectionMethod [
 		classified: #visiting
 ]
 
-{ #category : #'generation - common' }
+{ #category : 'generation - common' }
 FmxMBVisitorTrait >> generateVisitEntityMethod [
 
 	self realClass
@@ -103,7 +105,7 @@ FmxMBVisitorTrait >> generateVisitEntityMethod [
 		classified: #visiting
 ]
 
-{ #category : #'generation - visit' }
+{ #category : 'generation - visit' }
 FmxMBVisitorTrait >> generateVisitMethodFor: aFmxMBBehavior [
 
 	self builder environment
@@ -113,7 +115,7 @@ FmxMBVisitorTrait >> generateVisitMethodFor: aFmxMBBehavior [
 		classified: #visiting
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FmxMBVisitorTrait >> initialize [
 
 	super initialize.
@@ -121,13 +123,13 @@ FmxMBVisitorTrait >> initialize [
 	tag := 'Visitor'
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FmxMBVisitorTrait >> isVisitorTrait [
 
 	^ true
 ]
 
-{ #category : #'generation - visit' }
+{ #category : 'generation - visit' }
 FmxMBVisitorTrait >> writeTransitionFor: aFmxMBBehavior on: aStream [
 
 	aFmxMBBehavior relations ifNotEmpty: [
@@ -137,7 +139,7 @@ FmxMBVisitorTrait >> writeTransitionFor: aFmxMBBehavior on: aStream [
 			cr ]
 ]
 
-{ #category : #'generation - visit' }
+{ #category : 'generation - visit' }
 FmxMBVisitorTrait >> writeVisitMethodFor: aFmxMBBehavior on: aStream [
 
 	self writeVisitMethodHeaderFor: aFmxMBBehavior on: aStream.
@@ -145,7 +147,7 @@ FmxMBVisitorTrait >> writeVisitMethodFor: aFmxMBBehavior on: aStream [
 	self writeVisitRelationsFor: aFmxMBBehavior on: aStream
 ]
 
-{ #category : #'generation - visit' }
+{ #category : 'generation - visit' }
 FmxMBVisitorTrait >> writeVisitMethodHeaderFor: aFmxMBBehavior on: aStream [
 
 	aStream <<('visit{1}: a{1}
@@ -154,7 +156,7 @@ FmxMBVisitorTrait >> writeVisitMethodHeaderFor: aFmxMBBehavior on: aStream [
 ' format: { aFmxMBBehavior fullName })
 ]
 
-{ #category : #'generation - visit' }
+{ #category : 'generation - visit' }
 FmxMBVisitorTrait >> writeVisitRelationsFor: aFmxMBBehavior on: aStream [
 
 	aFmxMBBehavior relations
@@ -171,7 +173,7 @@ FmxMBVisitorTrait >> writeVisitRelationsFor: aFmxMBBehavior on: aStream [
 				cr ]
 ]
 
-{ #category : #'generation - visit' }
+{ #category : 'generation - visit' }
 FmxMBVisitorTrait >> writeVisitTraitsAndSuperclassFor: aFmxMBBehavior on: aStream [
 
 	aFmxMBBehavior behaviorsToVisit

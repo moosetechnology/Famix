@@ -4,15 +4,17 @@ A backend (exporter) for Mermaid ([https://mermaid.js.org/](https://mermaid.js.o
 Note: Mermaid reuses many things from the PlantUML syntax (or is it the other way around?)
 "
 Class {
-	#name : #FamixUMLMermaidBackend,
-	#superclass : #FamixUMLPlantUMLBackend,
+	#name : 'FamixUMLMermaidBackend',
+	#superclass : 'FamixUMLPlantUMLBackend',
 	#instVars : [
 		'allColors'
 	],
-	#category : #'Famix-UMLDocumentor-Backend'
+	#category : 'Famix-UMLDocumentor-Backend',
+	#package : 'Famix-UMLDocumentor',
+	#tag : 'Backend'
 }
 
-{ #category : #generating }
+{ #category : 'generating' }
 FamixUMLMermaidBackend >> generateClassFooter: aUMLClass [
 
 	"changes to PlantUML method:
@@ -24,7 +26,7 @@ FamixUMLMermaidBackend >> generateClassFooter: aUMLClass [
 
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FamixUMLMermaidBackend >> generateClassHeader: aUMLClass [
 	"changes to PlantUML method:
 	 - no output if there are no properties
@@ -40,7 +42,7 @@ FamixUMLMermaidBackend >> generateClassHeader: aUMLClass [
 
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FamixUMLMermaidBackend >> generateClasses: entities [
 	"changes to PlantUML method:
 	 create class themes for the colors"
@@ -53,7 +55,7 @@ FamixUMLMermaidBackend >> generateClasses: entities [
 
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FamixUMLMermaidBackend >> generateFooter [
 	"create the themes for class colors"
 
@@ -62,7 +64,7 @@ FamixUMLMermaidBackend >> generateFooter [
 
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FamixUMLMermaidBackend >> generateHeader [
 	outputStream
 		<< '---
@@ -75,7 +77,7 @@ classDiagram
 '
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FamixUMLMermaidBackend >> generateThemeDeclarations [
 
 	outputStream lf.
@@ -90,7 +92,7 @@ FamixUMLMermaidBackend >> generateThemeDeclarations [
 
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FamixUMLMermaidBackend >> generateThemeForClasses [
 
 	outputStream lf.
@@ -107,7 +109,7 @@ FamixUMLMermaidBackend >> generateThemeForClasses [
 	]
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FamixUMLMermaidBackend >> initiateClassThemes: classes [
 	"3 different colors in a diagram seems like a reasonnable default number"
 

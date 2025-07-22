@@ -41,7 +41,7 @@ will produce one invocation association from current method to a variable anObje
 
 "
 Trait {
-	#name : #FamixTInvocation,
+	#name : 'FamixTInvocation',
 	#instVars : [
 		'#candidates => FMMany type: #FamixTInvocable opposite: #incomingInvocations',
 		'#receiver => FMOne type: #FamixTInvocationsReceiver opposite: #receivingInvocations',
@@ -49,10 +49,12 @@ Trait {
 	],
 	#traits : 'FamixTAssociation + FamixTHasSignature',
 	#classTraits : 'FamixTAssociation classTrait + FamixTHasSignature classTrait',
-	#category : #'Famix-Traits-Invocation'
+	#category : 'Famix-Traits-Invocation',
+	#package : 'Famix-Traits',
+	#tag : 'Invocation'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTInvocation classSide >> annotation [
 
 	<FMClass: #TInvocation super: #Object>
@@ -61,31 +63,31 @@ FamixTInvocation classSide >> annotation [
 	^ self
 ]
 
-{ #category : #groups }
+{ #category : 'groups' }
 FamixTInvocation classSide >> annotationFamixInvocationGroup [
 	<generated>
 	<mooseGroup>
 	^ FamixInvocationGroup
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FamixTInvocation >> accept: aVisitor [
 
 	<generated>
 	^ aVisitor visitFamixTInvocation: self
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTInvocation >> addCandidate: aBehaviouralEntity [ 
 	candidates add: aBehaviouralEntity
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTInvocation >> anyCandidate [
 	^ self candidates ifEmpty: [ nil ] ifNotEmpty: [ self candidates at: 1 ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTInvocation >> candidates [
 	"Relation named: #candidates type: #FamixTInvocable opposite: #incomingInvocations"
 
@@ -95,14 +97,14 @@ FamixTInvocation >> candidates [
 	^ candidates
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTInvocation >> candidates: anObject [
 
 	<generated>
 	candidates value: anObject
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixTInvocation >> displayFullStringOn: aStream [
 
 	self sender
@@ -119,7 +121,7 @@ FamixTInvocation >> displayFullStringOn: aStream [
 		ifNil: [ aStream nextPutAll: ' ? ' ]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixTInvocation >> displayStringOn: aStream [
 
 	self sender
@@ -137,7 +139,7 @@ FamixTInvocation >> displayStringOn: aStream [
 		ifNil: [ aStream nextPutAll: ' ? ' ]
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 FamixTInvocation >> getReceivingFAMIXClass [
 
 	self
@@ -147,7 +149,7 @@ FamixTInvocation >> getReceivingFAMIXClass [
 	^ self getReceivingFamixClass
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 FamixTInvocation >> getReceivingFamixClass [
 
 	"Returns the Famix class of the receiver. If the receiver is a Famix class, this one is returned. 
@@ -167,7 +169,7 @@ FamixTInvocation >> getReceivingFamixClass [
 		ifFalse: [ ^ tmpReceiver ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTInvocation >> invokedEntity [
 	"This method returns only one candidate if there is one, or raises an error if there is more or less than one candidate."
 
@@ -177,20 +179,20 @@ FamixTInvocation >> invokedEntity [
 	^ self candidates anyOne
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTInvocation >> invokedEntity: anEntity [
 
 	^ self candidates: { anEntity }
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTInvocation >> isInvocation [
 
 	<generated>
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTInvocation >> receiver [
 	"Relation named: #receiver type: #FamixTInvocationsReceiver opposite: #receivingInvocations"
 
@@ -199,14 +201,14 @@ FamixTInvocation >> receiver [
 	^ receiver
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTInvocation >> receiver: anObject [
 
 	<generated>
 	receiver := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTInvocation >> sender [
 	"Relation named: #sender type: #FamixTWithInvocations opposite: #outgoingInvocations"
 
@@ -216,7 +218,7 @@ FamixTInvocation >> sender [
 	^ sender
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTInvocation >> sender: anObject [
 
 	<generated>

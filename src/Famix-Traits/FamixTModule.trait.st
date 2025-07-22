@@ -14,14 +14,16 @@ FamixTModule represents a that basically provides a simple scoping abstraction f
 
 "
 Trait {
-	#name : #FamixTModule,
+	#name : 'FamixTModule',
 	#instVars : [
 		'#moduleEntities => FMMany type: #FamixTDefinedInModule opposite: #parentModule'
 	],
-	#category : #'Famix-Traits-Module'
+	#category : 'Famix-Traits-Module',
+	#package : 'Famix-Traits',
+	#tag : 'Module'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTModule classSide >> annotation [
 
 	<FMClass: #TModule super: #Object>
@@ -30,28 +32,28 @@ FamixTModule classSide >> annotation [
 	^ self
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FamixTModule >> accept: aVisitor [
 
 	<generated>
 	^ aVisitor visitFamixTModule: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTModule >> addModuleEntity: anObject [
 
 	moduleEntities add: anObject
 
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTModule >> isModule [
 
 	<generated>
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTModule >> moduleEntities [
 	"Relation named: #moduleEntities type: #FamixTDefinedInModule opposite: #parentModule"
 
@@ -60,7 +62,7 @@ FamixTModule >> moduleEntities [
 	^ moduleEntities
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTModule >> moduleEntities: anObject [
 
 	<generated>

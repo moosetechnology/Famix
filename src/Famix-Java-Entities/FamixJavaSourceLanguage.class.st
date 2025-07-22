@@ -11,14 +11,16 @@
 
 "
 Class {
-	#name : #FamixJavaSourceLanguage,
-	#superclass : #FamixJavaEntity,
+	#name : 'FamixJavaSourceLanguage',
+	#superclass : 'FamixJavaEntity',
 	#traits : 'FamixTSourceLanguage',
 	#classTraits : 'FamixTSourceLanguage classTrait',
-	#category : #'Famix-Java-Entities-Entities'
+	#category : 'Famix-Java-Entities-Entities',
+	#package : 'Famix-Java-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixJavaSourceLanguage class >> annotation [
 
 	<FMClass: #SourceLanguage super: #FamixJavaEntity>
@@ -27,24 +29,24 @@ FamixJavaSourceLanguage class >> annotation [
 	^ self
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FamixJavaSourceLanguage >> accept: aVisitor [
 
 	<generated>
 	^ aVisitor visitFamixJavaSourceLanguage: self
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixJavaSourceLanguage >> isC [ 
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixJavaSourceLanguage >> isJava [
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixJavaSourceLanguage >> name [
 	
 	<FMProperty: #name type: #String> 

@@ -1,36 +1,37 @@
 Class {
-	#name : #MooseModelTestResource,
-	#superclass : #TestResource,
+	#name : 'MooseModelTestResource',
+	#superclass : 'TestResource',
 	#instVars : [
 		'model'
 	],
-	#category : #'Moose-Core-Tests'
+	#category : 'Moose-Core-Tests',
+	#package : 'Moose-Core-Tests'
 }
 
-{ #category : #setup }
+{ #category : 'setup' }
 MooseModelTestResource >> importModel [ 
 	 
 	self subclassResponsibility
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseModelTestResource >> model [ 
 	 
 	^model
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseModelTestResource >> modelClass [
 	^ MooseModel
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 MooseModelTestResource >> setUp [
 	model := self modelClass new.
 	self importModel
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 MooseModelTestResource >> tearDown [
 	model := nil.
 	super tearDown

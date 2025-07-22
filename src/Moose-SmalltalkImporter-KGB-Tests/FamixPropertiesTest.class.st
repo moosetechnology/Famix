@@ -1,10 +1,11 @@
 Class {
-	#name : #FamixPropertiesTest,
-	#superclass : #AbstractFamixNavigationTest,
-	#category : #'Moose-SmalltalkImporter-KGB-Tests'
+	#name : 'FamixPropertiesTest',
+	#superclass : 'AbstractFamixNavigationTest',
+	#category : 'Moose-SmalltalkImporter-KGB-Tests',
+	#package : 'Moose-SmalltalkImporter-KGB-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixPropertiesTest >> testMethodTimeStamp [
 	| method |
 	method := self model entityNamed: #'Model2FullReferee.M2P4C10FullReferencerInSide.m2p4c10Mtd1()'.

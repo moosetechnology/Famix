@@ -23,14 +23,16 @@
 
 "
 Class {
-	#name : #FamixStReference,
-	#superclass : #FamixStEntity,
+	#name : 'FamixStReference',
+	#superclass : 'FamixStEntity',
 	#traits : 'FamixTReference',
 	#classTraits : 'FamixTReference classTrait',
-	#category : #'Famix-PharoSmalltalk-Entities-Entities'
+	#category : 'Famix-PharoSmalltalk-Entities-Entities',
+	#package : 'Famix-PharoSmalltalk-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixStReference class >> annotation [
 
 	<FMClass: #Reference super: #FamixStEntity>

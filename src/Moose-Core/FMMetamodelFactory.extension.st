@@ -1,11 +1,11 @@
-Extension { #name : #FMMetamodelFactory }
+Extension { #name : 'FMMetamodelFactory' }
 
-{ #category : #'*Moose-Core' }
+{ #category : '*Moose-Core' }
 FMMetamodelFactory class >> allFactories [
 	^ self allSubclasses reject: #isAbstract
 ]
 
-{ #category : #'*Moose-Core' }
+{ #category : '*Moose-Core' }
 FMMetamodelFactory class >> defaultModel [
 	"If one of my subclass is linked to a specific model, I should return this model.
 	This is used to select the right factory for a model."
@@ -13,7 +13,7 @@ FMMetamodelFactory class >> defaultModel [
 	^ nil
 ]
 
-{ #category : #'*Moose-Core' }
+{ #category : '*Moose-Core' }
 FMMetamodelFactory class >> forModel: aModel [
 
 	^ (self allFactories
@@ -24,17 +24,17 @@ FMMetamodelFactory class >> forModel: aModel [
 		  yourself
 ]
 
-{ #category : #'*Moose-Core' }
+{ #category : '*Moose-Core' }
 FMMetamodelFactory >> forModel: aModel [
 	fm3Package := aModel mooseDescription package
 ]
 
-{ #category : #'*Moose-Core' }
+{ #category : '*Moose-Core' }
 FMMetamodelFactory class >> isDefaultFor: aModel [
 	^ self defaultModel = aModel
 ]
 
-{ #category : #'*Moose-Core' }
+{ #category : '*Moose-Core' }
 FMMetamodelFactory >> modelClass [
 
 	fm3Package ifNil: [ self error: 'The factory is not initialized.' ].

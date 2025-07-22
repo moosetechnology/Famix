@@ -1,13 +1,14 @@
 Class {
-	#name : #FmxImportingContextTest,
-	#superclass : #TestCase,
+	#name : 'FmxImportingContextTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'model'
 	],
-	#category : #'Famix-Test1-Tests'
+	#category : 'Famix-Test1-Tests',
+	#package : 'Famix-Test1-Tests'
 }
 
-{ #category : #resources }
+{ #category : 'resources' }
 FmxImportingContextTest >> modelMSE [
 	^ '(
 	(Famix-Test1-Entities.SourceTextAnchor (id: 1)
@@ -47,7 +48,7 @@ source2b''))
 		(numberOfLinesOfCode 2)))'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxImportingContextTest >> testImportingClasses [
 
 	self modelMSE readStreamDo: [ :s | 
@@ -62,7 +63,7 @@ FmxImportingContextTest >> testImportingClasses [
 	self assertEmpty: (model allUsing: FamixTHasImmediateSource)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxImportingContextTest >> testImportingClassesAndMethods [
 
 	self modelMSE readStreamDo: [ :s | 
@@ -78,7 +79,7 @@ FmxImportingContextTest >> testImportingClassesAndMethods [
 	self assertEmpty: (model allUsing: FamixTHasImmediateSource)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxImportingContextTest >> testImportingMethodsBringClassesAsRequirement [
 
 	self modelMSE readStreamDo: [ :s | 
@@ -93,7 +94,7 @@ FmxImportingContextTest >> testImportingMethodsBringClassesAsRequirement [
 	self assertEmpty: (model allUsing: FamixTHasImmediateSource)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxImportingContextTest >> testModelWithoutImportingContext [
 	self modelMSE readStreamDo: [ :s | model := FamixTest1Model importFromMSEStream: s ].
 	self assert: model entities size equals: 7.

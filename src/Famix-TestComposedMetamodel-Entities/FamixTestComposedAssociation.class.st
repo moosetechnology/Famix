@@ -23,14 +23,16 @@
 
 "
 Class {
-	#name : #FamixTestComposedAssociation,
-	#superclass : #FamixTestComposedStandardEntity,
+	#name : 'FamixTestComposedAssociation',
+	#superclass : 'FamixTestComposedStandardEntity',
 	#traits : 'FamixTAssociation + TAssociationMetaLevelDependency',
 	#classTraits : 'FamixTAssociation classTrait + TAssociationMetaLevelDependency classTrait',
-	#category : #'Famix-TestComposedMetamodel-Entities-Entities'
+	#category : 'Famix-TestComposedMetamodel-Entities-Entities',
+	#package : 'Famix-TestComposedMetamodel-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTestComposedAssociation class >> annotation [
 
 	<FMClass: #Association super: #FamixTestComposedStandardEntity>
@@ -39,7 +41,7 @@ FamixTestComposedAssociation class >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTestComposedAssociation >> c15 [
 	"Relation named: #c15 type: #FamixTestComposed1CustomEntity5 opposite: #associations"
 
@@ -49,14 +51,14 @@ FamixTestComposedAssociation >> c15 [
 	^ self attributeAt: #c15 ifAbsent: [ nil ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTestComposedAssociation >> c15: anObject [
 
 	<generated>
 	self attributeAt: #c15 put: (FMMultivalueLink on: self update: #associations from: self c15 to: anObject).
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTestComposedAssociation >> c25 [
 	"Relation named: #c25 type: #FamixTestComposed2CustomEntity5 opposite: #associations"
 
@@ -66,29 +68,29 @@ FamixTestComposedAssociation >> c25 [
 	^ self attributeAt: #c25 ifAbsent: [ nil ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTestComposedAssociation >> c25: anObject [
 
 	<generated>
 	self attributeAt: #c25 put: (FMMultivalueLink on: self update: #associations from: self c25 to: anObject).
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTestComposedAssociation >> source [
 	^ self c25
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTestComposedAssociation >> source: aSource [
 	^ self c25: aSource
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTestComposedAssociation >> target [
 	^ self c15
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTestComposedAssociation >> target: aTarget [
 	^ self c15: aTarget
 ]

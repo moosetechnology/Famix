@@ -1,40 +1,42 @@
 Trait {
-	#name : #FmxMBRelationSideTrait,
-	#category : #'Famix-MetamodelBuilder-Core-Traits'
+	#name : 'FmxMBRelationSideTrait',
+	#category : 'Famix-MetamodelBuilder-Core-Traits',
+	#package : 'Famix-MetamodelBuilder-Core',
+	#tag : 'Traits'
 }
 
-{ #category : #'relations - arrows' }
+{ #category : 'relations - arrows' }
 FmxMBRelationSideTrait >> *- aRelationSide [
 
 	^ self manyToOne: aRelationSide
 ]
 
-{ #category : #'relations - arrows' }
+{ #category : 'relations - arrows' }
 FmxMBRelationSideTrait >> *-* aRelationSide [
 
 	^ self manyToMany: aRelationSide
 ]
 
-{ #category : #'relations - arrows' }
+{ #category : 'relations - arrows' }
 FmxMBRelationSideTrait >> *-<> aRelationSide [
 
 	^ self manyBelongTo: aRelationSide
 	
 ]
 
-{ #category : #'relations - arrows' }
+{ #category : 'relations - arrows' }
 FmxMBRelationSideTrait >> - aRelationSide [
 
 	^ self oneToOne: aRelationSide
 ]
 
-{ #category : #'relations - arrows' }
+{ #category : 'relations - arrows' }
 FmxMBRelationSideTrait >> -* aRelationSide [
 
 	^ self oneToMany: aRelationSide
 ]
 
-{ #category : #'relations - arrows' }
+{ #category : 'relations - arrows' }
 FmxMBRelationSideTrait >> -<> aRelationSide [
 
 	^ self oneBelongsTo: aRelationSide
@@ -42,14 +44,14 @@ FmxMBRelationSideTrait >> -<> aRelationSide [
 	
 ]
 
-{ #category : #'relations - arrows' }
+{ #category : 'relations - arrows' }
 FmxMBRelationSideTrait >> <>- aRelationSide [
 
 	^ self containsOne: aRelationSide
 	
 ]
 
-{ #category : #'relations - arrows' }
+{ #category : 'relations - arrows' }
 FmxMBRelationSideTrait >> <>-* aRelationSide [
 
 	^ self containsMany: aRelationSide
@@ -58,7 +60,7 @@ FmxMBRelationSideTrait >> <>-* aRelationSide [
 	
 ]
 
-{ #category : #'relations - named' }
+{ #category : 'relations - named' }
 FmxMBRelationSideTrait >> asRelationSideNamed: aPropertyName [
 
 	<ignoreForCoverage>
@@ -66,7 +68,7 @@ FmxMBRelationSideTrait >> asRelationSideNamed: aPropertyName [
 	
 ]
 
-{ #category : #'relations - named containers' }
+{ #category : 'relations - named containers' }
 FmxMBRelationSideTrait >> containsMany: aRelationSide [
 
 	| aRelation |
@@ -80,7 +82,7 @@ FmxMBRelationSideTrait >> containsMany: aRelationSide [
 	
 ]
 
-{ #category : #'relations - named containers' }
+{ #category : 'relations - named containers' }
 FmxMBRelationSideTrait >> containsOne: aRelationSide [
 
 	| aRelation |
@@ -94,7 +96,7 @@ FmxMBRelationSideTrait >> containsOne: aRelationSide [
 	
 ]
 
-{ #category : #'relations - named containers' }
+{ #category : 'relations - named containers' }
 FmxMBRelationSideTrait >> manyBelongTo: aRelationSide [
 
 	| aRelation |
@@ -108,7 +110,7 @@ FmxMBRelationSideTrait >> manyBelongTo: aRelationSide [
 
 ]
 
-{ #category : #'relations - named' }
+{ #category : 'relations - named' }
 FmxMBRelationSideTrait >> manyToMany: aRelationSide [
 
 	| aRelation ownSide oppositeSide  |
@@ -132,7 +134,7 @@ FmxMBRelationSideTrait >> manyToMany: aRelationSide [
 	
 ]
 
-{ #category : #'relations - named' }
+{ #category : 'relations - named' }
 FmxMBRelationSideTrait >> manyToOne: aRelationSide [
 
 	| aRelation ownSide oppositeSide  |
@@ -155,7 +157,7 @@ FmxMBRelationSideTrait >> manyToOne: aRelationSide [
 	
 ]
 
-{ #category : #'relations - named containers' }
+{ #category : 'relations - named containers' }
 FmxMBRelationSideTrait >> oneBelongsTo: aRelationSide [
 
 	| aRelation |
@@ -169,7 +171,7 @@ FmxMBRelationSideTrait >> oneBelongsTo: aRelationSide [
 
 ]
 
-{ #category : #'relations - named' }
+{ #category : 'relations - named' }
 FmxMBRelationSideTrait >> oneToMany: aRelationSide [
 
 	| aRelation ownSide oppositeSide  |
@@ -191,7 +193,7 @@ FmxMBRelationSideTrait >> oneToMany: aRelationSide [
 	
 ]
 
-{ #category : #'relations - named' }
+{ #category : 'relations - named' }
 FmxMBRelationSideTrait >> oneToOne: aRelationSide [
 
 	| aRelation ownSide oppositeSide  |
@@ -213,19 +215,19 @@ FmxMBRelationSideTrait >> oneToOne: aRelationSide [
 	
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 FmxMBRelationSideTrait >> pluralPropertyName [
 
 	self explicitRequirement
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 FmxMBRelationSideTrait >> propertyName [
 
 	^ self explicitRequirement
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 FmxMBRelationSideTrait >> relationFrom: ownSide to: oppositeSide [
 
 	| aRelation |

@@ -1,6 +1,6 @@
-Extension { #name : #SystemEnvironment }
+Extension { #name : 'SystemEnvironment' }
 
-{ #category : #'*Famix-Smalltalk-Utils' }
+{ #category : '*Famix-Smalltalk-Utils' }
 SystemEnvironment >> mooseName [
 	
 	^ #Smalltalk 

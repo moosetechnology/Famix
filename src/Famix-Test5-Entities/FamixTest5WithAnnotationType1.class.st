@@ -11,14 +11,16 @@
 
 "
 Class {
-	#name : #FamixTest5WithAnnotationType1,
-	#superclass : #FamixTest5Entity,
+	#name : 'FamixTest5WithAnnotationType1',
+	#superclass : 'FamixTest5Entity',
 	#traits : 'FamixTWithAnnotationTypes',
 	#classTraits : 'FamixTWithAnnotationTypes classTrait',
-	#category : #'Famix-Test5-Entities-Entities'
+	#category : 'Famix-Test5-Entities-Entities',
+	#package : 'Famix-Test5-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTest5WithAnnotationType1 class >> annotation [
 
 	<FMClass: #WithAnnotationType1 super: #FamixTest5Entity>

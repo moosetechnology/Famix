@@ -11,15 +11,17 @@
 
 "
 Class {
-	#name : #FamixTest4Room,
-	#superclass : #FamixTest4Entity,
+	#name : 'FamixTest4Room',
+	#superclass : 'FamixTest4Entity',
 	#instVars : [
 		'#school => FMOne type: #FamixTest4School opposite: #rooms'
 	],
-	#category : #'Famix-Test4-Entities-Entities'
+	#category : 'Famix-Test4-Entities-Entities',
+	#package : 'Famix-Test4-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTest4Room class >> annotation [
 
 	<FMClass: #Room super: #FamixTest4Entity>
@@ -28,7 +30,7 @@ FamixTest4Room class >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest4Room >> school [
 	"Relation named: #school type: #FamixTest4School opposite: #rooms"
 
@@ -37,14 +39,14 @@ FamixTest4Room >> school [
 	^ school
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest4Room >> school: anObject [
 
 	<generated>
 	school := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FamixTest4Room >> schoolGroup [
 	<generated>
 	<navigation: 'School'>

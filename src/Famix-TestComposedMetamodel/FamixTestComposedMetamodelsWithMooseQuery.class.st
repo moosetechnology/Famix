@@ -1,16 +1,17 @@
 Class {
-	#name : #FamixTestComposedMetamodelsWithMooseQuery,
-	#superclass : #TestCase,
+	#name : 'FamixTestComposedMetamodelsWithMooseQuery',
+	#superclass : 'TestCase',
 	#instVars : [
 		'association',
 		'c15',
 		'c25',
 		'model'
 	],
-	#category : #'Famix-TestComposedMetamodel'
+	#category : 'Famix-TestComposedMetamodel',
+	#package : 'Famix-TestComposedMetamodel'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 FamixTestComposedMetamodelsWithMooseQuery >> setUp [
 	super setUp.
 
@@ -27,21 +28,21 @@ FamixTestComposedMetamodelsWithMooseQuery >> setUp [
 	model addAll: {association . c15 . c25}
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTestComposedMetamodelsWithMooseQuery >> testAllIncomingAssociationTypes [
 	self assertCollection: c15 allIncomingAssociationTypes hasSameElements: {FamixTestComposedAssociation}.
 
 	self assertEmpty: c25 allIncomingAssociationTypes
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTestComposedMetamodelsWithMooseQuery >> testAllOutgoingAssociationTypes [
 	self assertEmpty: c15 allOutgoingAssociationTypes.
 
 	self assertCollection: c25 allOutgoingAssociationTypes hasSameElements: {FamixTestComposedAssociation}
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTestComposedMetamodelsWithMooseQuery >> testQueries [
 	self assertCollection: (c15 queryAll: #in) hasSameElements: {association}.
 	self assertEmpty: (c25 queryAll: #in).
@@ -53,7 +54,7 @@ FamixTestComposedMetamodelsWithMooseQuery >> testQueries [
 	self assertCollection: (c25 queryAll: #out) opposites hasSameElements: {c15}
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTestComposedMetamodelsWithMooseQuery >> testSimpleAssociation [
 	self assert: association c15 equals: c15.
 	self assert: association c25 equals: c25

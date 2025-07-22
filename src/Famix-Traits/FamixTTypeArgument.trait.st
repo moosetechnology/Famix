@@ -13,14 +13,16 @@ A type that can be the source of a concretization. Entities using this trait sho
 
 "
 Trait {
-	#name : #FamixTTypeArgument,
+	#name : 'FamixTTypeArgument',
 	#instVars : [
 		'#outgoingConcretizations => FMMany type: #FamixTConcretization opposite: #typeArgument'
 	],
-	#category : #'Famix-Traits-Parametrics'
+	#category : 'Famix-Traits-Parametrics',
+	#package : 'Famix-Traits',
+	#tag : 'Parametrics'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTTypeArgument classSide >> annotation [
 
 	<FMClass: #TTypeArgument super: #Object>
@@ -29,20 +31,20 @@ FamixTTypeArgument classSide >> annotation [
 	^ self
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FamixTTypeArgument >> accept: aVisitor [
 
 	<generated>
 	^ aVisitor visitFamixTTypeArgument: self
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTTypeArgument >> addOutgoingConcretization: anObject [
 	<generated>
 	^ self outgoingConcretizations add: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTTypeArgument >> outgoingConcretizations [
 	"Relation named: #outgoingConcretizations type: #FamixTConcretization opposite: #typeArgument"
 
@@ -52,7 +54,7 @@ FamixTTypeArgument >> outgoingConcretizations [
 	^ outgoingConcretizations
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTTypeArgument >> outgoingConcretizations: anObject [
 
 	<generated>

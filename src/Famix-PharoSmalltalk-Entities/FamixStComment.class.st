@@ -16,14 +16,16 @@
 
 "
 Class {
-	#name : #FamixStComment,
-	#superclass : #FamixStSourcedEntity,
+	#name : 'FamixStComment',
+	#superclass : 'FamixStSourcedEntity',
 	#traits : 'FamixTComment',
 	#classTraits : 'FamixTComment classTrait',
-	#category : #'Famix-PharoSmalltalk-Entities-Entities'
+	#category : 'Famix-PharoSmalltalk-Entities-Entities',
+	#package : 'Famix-PharoSmalltalk-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixStComment class >> annotation [
 
 	<FMClass: #Comment super: #FamixStSourcedEntity>
@@ -32,7 +34,7 @@ FamixStComment class >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixStComment >> belongsTo [
 
 	^ self commentedEntity

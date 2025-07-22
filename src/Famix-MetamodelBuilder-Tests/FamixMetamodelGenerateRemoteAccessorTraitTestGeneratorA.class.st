@@ -1,27 +1,29 @@
 Class {
-	#name : #FamixMetamodelGenerateRemoteAccessorTraitTestGeneratorA,
-	#superclass : #FamixTestGenerator,
+	#name : 'FamixMetamodelGenerateRemoteAccessorTraitTestGeneratorA',
+	#superclass : 'FamixTestGenerator',
 	#instVars : [
 		'fmx'
 	],
-	#category : #'Famix-MetamodelBuilder-Tests-GeneratorRessources'
+	#category : 'Famix-MetamodelBuilder-Tests-GeneratorRessources',
+	#package : 'Famix-MetamodelBuilder-Tests',
+	#tag : 'GeneratorRessources'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetamodelGenerateRemoteAccessorTraitTestGeneratorA class >> packageName [
 
 	<ignoreForCoverage>
 	^ 'Famix-MetamodelBuilder-TestsTraitsResources-A'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetamodelGenerateRemoteAccessorTraitTestGeneratorA class >> prefix [
 
 <ignoreForCoverage>
 	^ #FmxTraitsTestGenerateAccessorA
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixMetamodelGenerateRemoteAccessorTraitTestGeneratorA >> defineTraits [
 	super defineTraits.
 	fmx := builder newTraitNamed: #TraitA

@@ -22,14 +22,16 @@
 
 "
 Class {
-	#name : #FamixStAnnotationInstanceAttribute,
-	#superclass : #FamixStSourcedEntity,
+	#name : 'FamixStAnnotationInstanceAttribute',
+	#superclass : 'FamixStSourcedEntity',
 	#traits : 'FamixTAnnotationInstanceAttribute',
 	#classTraits : 'FamixTAnnotationInstanceAttribute classTrait',
-	#category : #'Famix-PharoSmalltalk-Entities-Entities'
+	#category : 'Famix-PharoSmalltalk-Entities-Entities',
+	#package : 'Famix-PharoSmalltalk-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixStAnnotationInstanceAttribute class >> annotation [
 
 	<FMClass: #AnnotationInstanceAttribute super: #FamixStSourcedEntity>
@@ -38,7 +40,7 @@ FamixStAnnotationInstanceAttribute class >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixStAnnotationInstanceAttribute >> name [
 	^ self annotationTypeAttribute ifNotNil: #name
 ]

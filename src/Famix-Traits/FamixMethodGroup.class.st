@@ -1,10 +1,12 @@
 Class {
-	#name : #FamixMethodGroup,
-	#superclass : #MooseSpecializedGroup,
-	#category : #'Famix-Traits-Groups'
+	#name : 'FamixMethodGroup',
+	#superclass : 'MooseSpecializedGroup',
+	#category : 'Famix-Traits-Groups',
+	#package : 'Famix-Traits',
+	#tag : 'Groups'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixMethodGroup class >> annotation [
 
 	<FMClass: #MethodGroup super: #MooseSpecializedGroup>
@@ -13,29 +15,29 @@ FamixMethodGroup class >> annotation [
 	^ self
 ]
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixMethodGroup class >> metamodel [
 
 	<generated>
 	^ FamixModel metamodel
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FamixMethodGroup >> allClasses [
 	^ FamixTypeGroup withAll: (self entities flatCollectAsSet: [ :m | m atScope: FamixTClass ])
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FamixMethodGroup >> allMethods [
 	^ self
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FamixMethodGroup >> allPackages [
 	^ FamixPackageGroup withAll: (self entities flatCollectAsSet: [ :m | m atScope: FamixTPackage ])
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixMethodGroup >> averageNumberOfInvocations [
 	<FMProperty: #averageNumberOfInvocations type: #Number>
 	<FMComment: 'Average number of invocations per methods'>
@@ -45,7 +47,7 @@ FamixMethodGroup >> averageNumberOfInvocations [
 		computedAs: [self average: [:each | each numberOfOutgoingInvocations ]]
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixMethodGroup >> averageNumberOfLinesOfCode [
 	<FMProperty: #averageNumberOfLinesOfCode type: #Number>
 	<FMComment: 'Average number of lines of code per methods'>
@@ -55,7 +57,7 @@ FamixMethodGroup >> averageNumberOfLinesOfCode [
 		computedAs: [self average: [:each | each numberOfLinesOfCode ]]
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixMethodGroup >> averageNumberOfParameters [
 	<FMProperty: #averageNumberOfParameters type: #Number>
 	<FMComment: 'Average number of parameters per methods'>

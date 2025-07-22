@@ -1,6 +1,6 @@
 Class {
-	#name : #MooseMSEImporterTestGenerator,
-	#superclass : #FamixBasicInfrastructureGenerator,
+	#name : 'MooseMSEImporterTestGenerator',
+	#superclass : 'FamixBasicInfrastructureGenerator',
 	#instVars : [
 		'model',
 		'class',
@@ -12,22 +12,23 @@ Class {
 		'primitiveType',
 		'entityTyping'
 	],
-	#category : #'Famix-TestGenerators'
+	#category : 'Famix-TestGenerators',
+	#package : 'Famix-TestGenerators'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseMSEImporterTestGenerator class >> packageName [
 
 	^ #'Moose-Core-Tests-Entities'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseMSEImporterTestGenerator class >> prefix [
 
 	^ #'MooseMSEImporterTest'
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 MooseMSEImporterTestGenerator >> defineClasses [
 
 	super defineClasses.
@@ -44,7 +45,7 @@ MooseMSEImporterTestGenerator >> defineClasses [
 	entityTyping := builder newClassNamed: #EntityTyping
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 MooseMSEImporterTestGenerator >> defineHierarchy [
 
 	super defineHierarchy.

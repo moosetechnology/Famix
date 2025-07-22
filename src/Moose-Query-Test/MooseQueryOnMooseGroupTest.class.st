@@ -1,10 +1,11 @@
 Class {
-	#name : #MooseQueryOnMooseGroupTest,
-	#superclass : #MooseQueryTest,
-	#category : #'Moose-Query-Test'
+	#name : 'MooseQueryOnMooseGroupTest',
+	#superclass : 'MooseQueryTest',
+	#category : 'Moose-Query-Test',
+	#package : 'Moose-Query-Test'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryOnMooseGroupTest >> testAllOutgoing [
 	| methGroup classGroup |
 	methGroup := FamixMethodGroup withAll: (self model entities select: #isMethod).
@@ -13,7 +14,7 @@ MooseQueryOnMooseGroupTest >> testAllOutgoing [
 	self assert: classGroup queryAllOutgoing size equals: 9
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryOnMooseGroupTest >> testIncomingInvocation [
 	| methGroup classGroup|
 	methGroup := FamixMethodGroup withAll: (self model entities select: #isMethod).
@@ -24,7 +25,7 @@ MooseQueryOnMooseGroupTest >> testIncomingInvocation [
 	
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryOnMooseGroupTest >> testOutgoingInvocation [
 	| methGroup classGroup|
 	methGroup := FamixMethodGroup withAll: (self model entities select: #isMethod).

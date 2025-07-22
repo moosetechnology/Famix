@@ -17,14 +17,16 @@ public class SharedObject {
 
 "
 Trait {
-	#name : #FamixJavaTCanBeVolatile,
+	#name : 'FamixJavaTCanBeVolatile',
 	#instVars : [
 		'#isVolatile => FMProperty defaultValue: false'
 	],
-	#category : #'Famix-Java-Entities-Traits'
+	#category : 'Famix-Java-Entities-Traits',
+	#package : 'Famix-Java-Entities',
+	#tag : 'Traits'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixJavaTCanBeVolatile classSide >> annotation [
 
 	<FMClass: #TCanBeVolatile super: #Object>
@@ -33,14 +35,14 @@ FamixJavaTCanBeVolatile classSide >> annotation [
 	^ self
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FamixJavaTCanBeVolatile >> accept: aVisitor [
 
 	<generated>
 	^ aVisitor visitFamixJavaTCanBeVolatile: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixJavaTCanBeVolatile >> isVolatile [
 
 	<FMProperty: #isVolatile type: #Boolean defaultValue: false>
@@ -49,7 +51,7 @@ FamixJavaTCanBeVolatile >> isVolatile [
 	^ isVolatile ifNil: [ isVolatile := false ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixJavaTCanBeVolatile >> isVolatile: anObject [
 	<generated>
 	isVolatile := anObject

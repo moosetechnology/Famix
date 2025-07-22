@@ -45,16 +45,18 @@ int addNumbers(int a, int b) {
 
 "
 Trait {
-	#name : #FamixTParameter,
+	#name : 'FamixTParameter',
 	#instVars : [
 		'#parentBehaviouralEntity => FMOne type: #FamixTWithParameters opposite: #parameters'
 	],
 	#traits : 'FamixTStructuralEntity',
 	#classTraits : 'FamixTStructuralEntity classTrait',
-	#category : #'Famix-Traits-Parameter'
+	#category : 'Famix-Traits-Parameter',
+	#package : 'Famix-Traits',
+	#tag : 'Parameter'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTParameter classSide >> annotation [
 
 	<FMClass: #TParameter super: #Object>
@@ -63,14 +65,14 @@ FamixTParameter classSide >> annotation [
 	^ self
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FamixTParameter >> accept: aVisitor [
 
 	<generated>
 	^ aVisitor visitFamixTParameter: self
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixTParameter >> displayStringOn: aStream [
 
 	self name ifNotNil: [ :n | aStream << n << ' in ' ].
@@ -78,7 +80,7 @@ FamixTParameter >> displayStringOn: aStream [
 		pbe displayStringOn: aStream ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTParameter >> parentBehaviouralEntity [
 	"Relation named: #parentBehaviouralEntity type: #FamixTWithParameters opposite: #parameters"
 
@@ -88,7 +90,7 @@ FamixTParameter >> parentBehaviouralEntity [
 	^ parentBehaviouralEntity
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTParameter >> parentBehaviouralEntity: anObject [
 
 	parentBehaviouralEntity := anObject.
@@ -96,7 +98,7 @@ FamixTParameter >> parentBehaviouralEntity: anObject [
 
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FamixTParameter >> parentBehaviouralEntityGroup [
 	<generated>
 	<navigation: 'ParentBehaviouralEntity'>

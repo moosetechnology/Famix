@@ -29,14 +29,16 @@
 
 "
 Class {
-	#name : #FamixTest3Access,
-	#superclass : #FamixTest3Entity,
+	#name : 'FamixTest3Access',
+	#superclass : 'FamixTest3Entity',
 	#traits : 'FamixTAccess',
 	#classTraits : 'FamixTAccess classTrait',
-	#category : #'Famix-Test3-Entities-Entities'
+	#category : 'Famix-Test3-Entities-Entities',
+	#package : 'Famix-Test3-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTest3Access class >> annotation [
 
 	<FMClass: #Access super: #FamixTest3Entity>

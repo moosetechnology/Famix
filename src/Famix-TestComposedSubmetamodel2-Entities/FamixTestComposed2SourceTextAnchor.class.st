@@ -17,14 +17,16 @@
 
 "
 Class {
-	#name : #FamixTestComposed2SourceTextAnchor,
-	#superclass : #FamixTestComposed2SourceAnchor,
+	#name : 'FamixTestComposed2SourceTextAnchor',
+	#superclass : 'FamixTestComposed2SourceAnchor',
 	#traits : 'FamixTHasImmediateSource',
 	#classTraits : 'FamixTHasImmediateSource classTrait',
-	#category : #'Famix-TestComposedSubmetamodel2-Entities-Entities'
+	#category : 'Famix-TestComposedSubmetamodel2-Entities-Entities',
+	#package : 'Famix-TestComposedSubmetamodel2-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTestComposed2SourceTextAnchor class >> annotation [
 
 	<FMClass: #SourceTextAnchor super: #FamixTestComposed2SourceAnchor>

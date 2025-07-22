@@ -1,44 +1,45 @@
 Class {
-	#name : #FamixTest10Generator,
-	#superclass : #FamixBasicInfrastructureGenerator,
+	#name : 'FamixTest10Generator',
+	#superclass : 'FamixBasicInfrastructureGenerator',
 	#instVars : [
 		'myClass'
 	],
-	#category : #'Famix-TestGenerators'
+	#category : 'Famix-TestGenerators',
+	#package : 'Famix-TestGenerators'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest10Generator class >> packageName [
 
 	^ #'Famix-Test10-Entities'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest10Generator class >> prefix [
 
 	^ #'FamixTest10'
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTest10Generator class >> shouldBeUpToDateInLatestMoose [
 
 	"This generator is used dynamically by the tests"
 	^ false
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixTest10Generator >> defineClasses [
 
 	myClass := self builder newClassNamed: #MyClass
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixTest10Generator >> defineHierarchy [
 
 	"Do nothing"
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixTest10Generator >> defineRelations [
 
 	myClass property: #isTasty type: #Boolean

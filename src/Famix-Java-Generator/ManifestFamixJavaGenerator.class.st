@@ -2,12 +2,14 @@
 Please describe the package using the class comment of the included manifest class. The manifest class also includes other additional metadata for the package. These meta data are used by other tools such as the SmalllintManifestChecker and the critics Browser
 "
 Class {
-	#name : #ManifestFamixJavaGenerator,
-	#superclass : #PackageManifest,
-	#category : #'Famix-Java-Generator-Manifest'
+	#name : 'ManifestFamixJavaGenerator',
+	#superclass : 'PackageManifest',
+	#category : 'Famix-Java-Generator-Manifest',
+	#package : 'Famix-Java-Generator',
+	#tag : 'Manifest'
 }
 
-{ #category : #'code-critics' }
+{ #category : 'code-critics' }
 ManifestFamixJavaGenerator class >> ruleLongMethodsRuleV1FalsePositive [
 
 	<ignoreForCoverage>

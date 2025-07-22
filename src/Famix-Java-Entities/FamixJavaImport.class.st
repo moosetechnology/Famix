@@ -23,14 +23,16 @@
 
 "
 Class {
-	#name : #FamixJavaImport,
-	#superclass : #FamixJavaEntity,
+	#name : 'FamixJavaImport',
+	#superclass : 'FamixJavaEntity',
 	#traits : 'FamixTImport',
 	#classTraits : 'FamixTImport classTrait',
-	#category : #'Famix-Java-Entities-Entities'
+	#category : 'Famix-Java-Entities-Entities',
+	#package : 'Famix-Java-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixJavaImport class >> annotation [
 
 	<FMClass: #Import super: #FamixJavaEntity>
@@ -39,7 +41,7 @@ FamixJavaImport class >> annotation [
 	^ self
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FamixJavaImport >> accept: aVisitor [
 
 	<generated>

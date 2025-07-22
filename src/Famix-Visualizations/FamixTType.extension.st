@@ -1,6 +1,6 @@
-Extension { #name : #FamixTType }
+Extension { #name : 'FamixTType' }
 
-{ #category : #'*Famix-Visualizations' }
+{ #category : '*Famix-Visualizations' }
 FamixTType >> uml [
 
 	^ FamixTypeUML forType: self

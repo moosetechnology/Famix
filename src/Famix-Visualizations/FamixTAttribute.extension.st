@@ -1,6 +1,6 @@
-Extension { #name : #FamixTAttribute }
+Extension { #name : 'FamixTAttribute' }
 
-{ #category : #'*Famix-Visualizations' }
+{ #category : '*Famix-Visualizations' }
 FamixTAttribute >> shapeInBlueprint: aFamixTypeBlueprint [
 
 	^ aFamixTypeBlueprint shapeForAttribute: self

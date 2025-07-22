@@ -1,10 +1,12 @@
 Class {
-	#name : #FamixTestComposedEntity,
-	#superclass : #MooseEntity,
-	#category : #'Famix-TestComposedMetamodel-Entities-Entities'
+	#name : 'FamixTestComposedEntity',
+	#superclass : 'MooseEntity',
+	#category : 'Famix-TestComposedMetamodel-Entities-Entities',
+	#package : 'Famix-TestComposedMetamodel-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTestComposedEntity class >> annotation [
 
 	<FMClass: #Entity super: #MooseEntity>
@@ -14,21 +16,21 @@ FamixTestComposedEntity class >> annotation [
 	^ self
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTestComposedEntity class >> isAbstract [
 
 	<generated>
 	^ self == FamixTestComposedEntity
 ]
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTestComposedEntity class >> metamodel [
 
 	<generated>
 	^ FamixTestComposedModel metamodel
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTestComposedEntity >> isAssociation [
 
 	<generated>

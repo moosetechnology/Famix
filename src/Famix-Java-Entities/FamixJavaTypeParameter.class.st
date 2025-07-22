@@ -26,14 +26,16 @@
 
 "
 Class {
-	#name : #FamixJavaTypeParameter,
-	#superclass : #FamixJavaType,
+	#name : 'FamixJavaTypeParameter',
+	#superclass : 'FamixJavaType',
 	#traits : 'FamixJavaTBounded + FamixTThrowable + FamixTTypeArgument + FamixTTypeParameter',
 	#classTraits : 'FamixJavaTBounded classTrait + FamixTThrowable classTrait + FamixTTypeArgument classTrait + FamixTTypeParameter classTrait',
-	#category : #'Famix-Java-Entities-Entities'
+	#category : 'Famix-Java-Entities-Entities',
+	#package : 'Famix-Java-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixJavaTypeParameter class >> annotation [
 
 	<FMClass: #TypeParameter super: #FamixJavaType>
@@ -42,7 +44,7 @@ FamixJavaTypeParameter class >> annotation [
 	^ self
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FamixJavaTypeParameter >> accept: aVisitor [
 
 	<generated>

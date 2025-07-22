@@ -29,7 +29,7 @@ Instance Variables:
 
 "
 Trait {
-	#name : #FamixTAnnotationInstance,
+	#name : 'FamixTAnnotationInstance',
 	#instVars : [
 		'#annotatedEntity => FMOne type: #FamixTWithAnnotationInstances opposite: #annotationInstances',
 		'#annotationType => FMOne type: #FamixTAnnotationType opposite: #instances',
@@ -37,10 +37,12 @@ Trait {
 	],
 	#traits : 'TEntityMetaLevelDependency',
 	#classTraits : 'TEntityMetaLevelDependency classTrait',
-	#category : #'Famix-Traits-AnnotationInstance'
+	#category : 'Famix-Traits-AnnotationInstance',
+	#package : 'Famix-Traits',
+	#tag : 'AnnotationInstance'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTAnnotationInstance classSide >> annotation [
 
 	<FMClass: #TAnnotationInstance super: #Object>
@@ -49,27 +51,27 @@ FamixTAnnotationInstance classSide >> annotation [
 	^ self
 ]
 
-{ #category : #groups }
+{ #category : 'groups' }
 FamixTAnnotationInstance classSide >> annotationFamixAnnotationInstanceGroup [
 	<generated>
 	<mooseGroup>
 	^ FamixAnnotationInstanceGroup
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FamixTAnnotationInstance >> accept: aVisitor [
 
 	<generated>
 	^ aVisitor visitFamixTAnnotationInstance: self
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTAnnotationInstance >> addAttribute: anObject [
 	<generated>
 	^ self attributes add: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAnnotationInstance >> annotatedEntity [
 	"Relation named: #annotatedEntity type: #FamixTWithAnnotationInstances opposite: #annotationInstances"
 
@@ -78,14 +80,14 @@ FamixTAnnotationInstance >> annotatedEntity [
 	^ annotatedEntity
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAnnotationInstance >> annotatedEntity: anObject [
 
 	<generated>
 	annotatedEntity := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAnnotationInstance >> annotationType [
 	"Relation named: #annotationType type: #FamixTAnnotationType opposite: #instances"
 
@@ -94,14 +96,14 @@ FamixTAnnotationInstance >> annotationType [
 	^ annotationType
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAnnotationInstance >> annotationType: anObject [
 
 	<generated>
 	annotationType := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAnnotationInstance >> attributes [
 	"Relation named: #attributes type: #FamixTAnnotationInstanceAttribute opposite: #parentAnnotationInstance"
 
@@ -111,14 +113,14 @@ FamixTAnnotationInstance >> attributes [
 	^ attributes
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAnnotationInstance >> attributes: anObject [
 
 	<generated>
 	attributes value: anObject
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixTAnnotationInstance >> displayStringOn: aStream [
 
 	self annotationType displayStringOn: aStream.

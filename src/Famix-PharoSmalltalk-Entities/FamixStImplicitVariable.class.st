@@ -34,14 +34,16 @@
 
 "
 Class {
-	#name : #FamixStImplicitVariable,
-	#superclass : #FamixStNamedEntity,
+	#name : 'FamixStImplicitVariable',
+	#superclass : 'FamixStNamedEntity',
 	#traits : 'FamixTImplicitVariable + FamixTInvocationsReceiver',
 	#classTraits : 'FamixTImplicitVariable classTrait + FamixTInvocationsReceiver classTrait',
-	#category : #'Famix-PharoSmalltalk-Entities-Entities'
+	#category : 'Famix-PharoSmalltalk-Entities-Entities',
+	#package : 'Famix-PharoSmalltalk-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixStImplicitVariable class >> annotation [
 
 	<FMClass: #ImplicitVariable super: #FamixStNamedEntity>
@@ -50,12 +52,12 @@ FamixStImplicitVariable class >> annotation [
 	^ self
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixStImplicitVariable >> isSuper [
 	^ self name == #super
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixStImplicitVariable >> mooseNameOn: stream [ 
 	| parent |
 	parent := self parentBehaviouralEntity.

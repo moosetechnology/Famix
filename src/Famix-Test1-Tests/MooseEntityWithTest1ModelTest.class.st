@@ -1,22 +1,23 @@
 Class {
-	#name : #MooseEntityWithTest1ModelTest,
-	#superclass : #FamixTest1SimpleModelTest,
-	#category : #'Famix-Test1-Tests'
+	#name : 'MooseEntityWithTest1ModelTest',
+	#superclass : 'FamixTest1SimpleModelTest',
+	#category : 'Famix-Test1-Tests',
+	#package : 'Famix-Test1-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseEntityWithTest1ModelTest >> testIsContainerEntity [
 	self assert: c1 isContainerEntity.
 	self deny: a1 isContainerEntity
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseEntityWithTest1ModelTest >> testIsRoot [
 	self assert: c1 isRoot.
 	self deny: m1 isRoot
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseEntityWithTest1ModelTest >> testRootEntities [
 
 	self assertCollection: model rootEntities hasSameElements: {

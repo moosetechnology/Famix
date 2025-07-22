@@ -1,25 +1,26 @@
 Class {
-	#name : #FamixStepwiseImporterTest,
-	#superclass : #TestCase,
+	#name : 'FamixStepwiseImporterTest',
+	#superclass : 'TestCase',
 	#classInstVars : [
 		'aVariable'
 	],
-	#category : #'Moose-SmalltalkImporter-LAN-Tests'
+	#category : 'Moose-SmalltalkImporter-LAN-Tests',
+	#package : 'Moose-SmalltalkImporter-LAN-Tests'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixStepwiseImporterTest >> defaultTimeLimit [
 	^ 30 seconds
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 FamixStepwiseImporterTest >> newImportClassesTask [
 	^ FamixStImportClassesTask new
 		factory: FamixStModel factory;
 		yourself
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixStepwiseImporterTest >> testCheckFormalParameterIsCreated [
 
 	| mseFormalParameter model |
@@ -38,7 +39,7 @@ FamixStepwiseImporterTest >> testCheckFormalParameterIsCreated [
 	self assert: mseFormalParameter name equals: #aNode
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixStepwiseImporterTest >> testCheckSelfIsCreated [
 
 	| model mseSelf |
@@ -57,7 +58,7 @@ FamixStepwiseImporterTest >> testCheckSelfIsCreated [
 	self assert: mseSelf name equals: 'self' "mseMethod :=  model entityNamed:  #'Smalltalk::Node.send:(Object)'." "apparently I cannot access #'Smalltalk::Node.send:(Object).self'" "self assert: (mseMethod outgoingAccesses byName: 'Smalltalk::Node.self' ifAbsent: [] ) notEmpty."
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixStepwiseImporterTest >> testImportAttribute [
 
 	| importTask importer nodeClass |
@@ -75,7 +76,7 @@ FamixStepwiseImporterTest >> testImportAttribute [
 	self assert: nodeClass attributes size equals: 2
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixStepwiseImporterTest >> testImportAttributeAccesses [
 
 	| importTask importer nodeClass attr |
@@ -95,7 +96,7 @@ FamixStepwiseImporterTest >> testImportAttributeAccesses [
 	self denyEmpty: attr readAccesses
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixStepwiseImporterTest >> testImportClassAndAttributeAndMergeItsMetaclass [
 
 	| importTask importer nodeClass |
@@ -111,7 +112,7 @@ FamixStepwiseImporterTest >> testImportClassAndAttributeAndMergeItsMetaclass [
 	self assert: nodeClass attributes size equals: 2
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixStepwiseImporterTest >> testImportClassAndInheritance [
 
 	| importTask importer importedClasses |
@@ -129,7 +130,7 @@ FamixStepwiseImporterTest >> testImportClassAndInheritance [
 	self assert: (importedClasses at: LANNode) superclass name equals: #Model
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixStepwiseImporterTest >> testImportClassAndMethodAndMergeItsMetaclass [
 
 	| importTask importer importedMethods |
@@ -146,7 +147,7 @@ FamixStepwiseImporterTest >> testImportClassAndMethodAndMergeItsMetaclass [
 	self assert: (importedMethods first usesFamixTrait: FamixTMethod)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixStepwiseImporterTest >> testImportLANPackage [
 
 	| model class package |
@@ -167,7 +168,7 @@ FamixStepwiseImporterTest >> testImportLANPackage [
 	self assert: class parentPackage identicalTo: package
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixStepwiseImporterTest >> testImportMergingMetaclassDoesNotDuplicateComment [
 
 	| importTask importer comments |
@@ -186,7 +187,7 @@ FamixStepwiseImporterTest >> testImportMergingMetaclassDoesNotDuplicateComment [
 	self assert: comments anyOne commentedEntity equals: (importer classes at: LANInterface)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixStepwiseImporterTest >> testImportMethodBody [
 	"Check if when importing the arguments of the LAN example, methods body are imported as well"
 
@@ -219,7 +220,7 @@ FamixStepwiseImporterTest >> testImportMethodBody [
 	self assert: xFormalParameter name equals: #aSymbol "self assert: (xFormalParameter isFormalParameter)." "The x formal parameter is the first (and only) argument in the method name:" "Its position is therefore 0" "self assert: (xFormalParameter position isZero)."
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixStepwiseImporterTest >> testImportNamespace [
 
 	| model nap |
@@ -239,7 +240,7 @@ FamixStepwiseImporterTest >> testImportNamespace [
 	self assert: (nap usesFamixTrait: FamixTNamespace)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixStepwiseImporterTest >> testImportOneClassAndItsMetaclass [
 
 	| importTask importer importedClasses |
@@ -253,7 +254,7 @@ FamixStepwiseImporterTest >> testImportOneClassAndItsMetaclass [
 	self assert: ((importedClasses at: LANNode) usesFamixTrait: FamixTClass)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixStepwiseImporterTest >> testImportOneClassAndMergeItsMetaclass [
 
 	| importTask importer importedClasses |
@@ -270,7 +271,7 @@ FamixStepwiseImporterTest >> testImportOneClassAndMergeItsMetaclass [
 	self assert: ((importedClasses at: LANNode) usesFamixTrait: FamixTClass)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixStepwiseImporterTest >> testImportOneClassAndMethodAndMergeItsMetaclass [
 
 	| importTask importer importedMethods |
@@ -287,7 +288,7 @@ FamixStepwiseImporterTest >> testImportOneClassAndMethodAndMergeItsMetaclass [
 	self assert: (importedMethods first usesFamixTrait: FamixTMethod)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixStepwiseImporterTest >> testImportOneClassAndOneAttributeAndMergeItsMetaclass [
 
 	| importTask importer nodeClass |
@@ -303,7 +304,7 @@ FamixStepwiseImporterTest >> testImportOneClassAndOneAttributeAndMergeItsMetacla
 	self assert: nodeClass attributes size equals: 2
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixStepwiseImporterTest >> testImportWithoutMergingMetaclassDoesDuplicateComment [
 
 	| importTask importer comments |

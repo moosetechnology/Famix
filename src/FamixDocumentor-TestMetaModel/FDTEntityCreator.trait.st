@@ -5,11 +5,13 @@ It provides an API for creating entities and adding them to the model.
 
 "
 Trait {
-	#name : #FDTEntityCreator,
-	#category : #'FamixDocumentor-TestMetaModel-Model'
+	#name : 'FDTEntityCreator',
+	#category : 'FamixDocumentor-TestMetaModel-Model',
+	#package : 'FamixDocumentor-TestMetaModel',
+	#tag : 'Model'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FDTEntityCreator classSide >> annotation [
 
 	<FMClass: #TEntityCreator super: #Object>
@@ -18,14 +20,14 @@ FDTEntityCreator classSide >> annotation [
 	^ self
 ]
 
-{ #category : #'entity creation' }
+{ #category : 'entity creation' }
 FDTEntityCreator >> newClass1 [
 
 	<generated>
 	^ self add: FDClass1 new
 ]
 
-{ #category : #'entity creation' }
+{ #category : 'entity creation' }
 FDTEntityCreator >> newClass2 [
 
 	<generated>

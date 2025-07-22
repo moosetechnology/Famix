@@ -4,19 +4,21 @@ I export the model in PlantUML format.
 The result can be given to [PlantUML.com](https://plantuml.com) to generate a graphical representation of the class diagram
 "
 Class {
-	#name : #FamixUMLPlantUMLBackend,
-	#superclass : #FamixUMLTextBackend,
-	#category : #'Famix-UMLDocumentor-Backend'
+	#name : 'FamixUMLPlantUMLBackend',
+	#superclass : 'FamixUMLTextBackend',
+	#category : 'Famix-UMLDocumentor-Backend',
+	#package : 'Famix-UMLDocumentor',
+	#tag : 'Backend'
 }
 
-{ #category : #generating }
+{ #category : 'generating' }
 FamixUMLPlantUMLBackend >> classMarker: aUMLClass [
 	^aUMLClass isTrait
 	ifTrue: [ $T ]
 	ifFalse: [ $C ]
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FamixUMLPlantUMLBackend >> generateAssociation: association [
 
 	outputStream
@@ -34,7 +36,7 @@ FamixUMLPlantUMLBackend >> generateAssociation: association [
 		cr
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FamixUMLPlantUMLBackend >> generateAssociationSymbol: association [
 
 	(association aggregation = #source)
@@ -46,7 +48,7 @@ FamixUMLPlantUMLBackend >> generateAssociationSymbol: association [
 	outputStream << '--'
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FamixUMLPlantUMLBackend >> generateClassFooter: aUMLClass [
 
 	outputStream
@@ -54,7 +56,7 @@ FamixUMLPlantUMLBackend >> generateClassFooter: aUMLClass [
 		cr.
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FamixUMLPlantUMLBackend >> generateClassHeader: aUMLClass [
 
 	outputStream
@@ -72,14 +74,14 @@ FamixUMLPlantUMLBackend >> generateClassHeader: aUMLClass [
 
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FamixUMLPlantUMLBackend >> generateFooter [
 	outputStream
 		<< '@enduml' ;
 		cr
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FamixUMLPlantUMLBackend >> generateHeader [
 	outputStream
 		<< '@startuml
@@ -92,7 +94,7 @@ skinparam class {
 	cr
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FamixUMLPlantUMLBackend >> generateInheritance: inheritance [
 
 	outputStream
@@ -102,7 +104,7 @@ FamixUMLPlantUMLBackend >> generateInheritance: inheritance [
 		cr
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FamixUMLPlantUMLBackend >> generateProperty: property [
 
 	outputStream
@@ -113,7 +115,7 @@ FamixUMLPlantUMLBackend >> generateProperty: property [
 		cr
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FamixUMLPlantUMLBackend >> generateSourceRole: association [
 
 	(association sourceRole isNil and: [ association sourceCardinality = #one ])
@@ -127,7 +129,7 @@ FamixUMLPlantUMLBackend >> generateSourceRole: association [
 
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FamixUMLPlantUMLBackend >> generateTargetRole: association [
 
 	(association targetRole isNil and: [ association targetCardinality = #one ])
@@ -140,7 +142,7 @@ FamixUMLPlantUMLBackend >> generateTargetRole: association [
 	outputStream << '" '
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FamixUMLPlantUMLBackend >> generateUse: aUseLink [
 
 	outputStream

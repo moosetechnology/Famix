@@ -1,7 +1,8 @@
 Class {
-	#name : #FamixTestFunction,
-	#superclass : #MooseEntity,
+	#name : 'FamixTestFunction',
+	#superclass : 'MooseEntity',
 	#traits : 'FamixTFunction',
 	#classTraits : 'FamixTFunction classTrait',
-	#category : #'Famix-Tests'
+	#category : 'Famix-Tests',
+	#package : 'Famix-Tests'
 }

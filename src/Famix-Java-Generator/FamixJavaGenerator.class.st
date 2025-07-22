@@ -1,6 +1,6 @@
 Class {
-	#name : #FamixJavaGenerator,
-	#superclass : #FamixBasicInfrastructureGenerator,
+	#name : 'FamixJavaGenerator',
+	#superclass : 'FamixBasicInfrastructureGenerator',
 	#instVars : [
 		'access',
 		'annotationInstance',
@@ -56,47 +56,48 @@ Class {
 	#classInstVars : [
 		'builder'
 	],
-	#category : #'Famix-Java-Generator'
+	#category : 'Famix-Java-Generator',
+	#package : 'Famix-Java-Generator'
 }
 
-{ #category : #'additional tools' }
+{ #category : 'additional tools' }
 FamixJavaGenerator class >> metamodelToolGenerators [
 
 	^ { FamixVisitorGenerator }
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixJavaGenerator class >> packageName [
 
 	^ #'Famix-Java-Entities'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixJavaGenerator class >> packageNameForVisitor [
 	"Generate visitor in the entities package. Discussed with N. Anquetil"
 
 	^ self packageName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixJavaGenerator class >> prefix [
 
 	^ #'FamixJava'
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixJavaGenerator >> commentForTBound [
 
 	^ 'Represents a bound for a lower bounded and upper bounded wildcard.'
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixJavaGenerator >> commentForTBounded [
 
 	^ 'Represents a bounded wildcard, lower bounded with keyword super or upper bounded with keyword extends.'
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixJavaGenerator >> commentForTCanBeSynchronized [
 	^ 'I allow an entity to be synchronized
 ex:
@@ -112,7 +113,7 @@ public class SynchronizedCounter {
 ```'
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixJavaGenerator >> commentForTCanBeTransient [
 	^ 'I allow an entity to be transient
 ex:
@@ -124,7 +125,7 @@ public class Student implements Serializable{
 ```'
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixJavaGenerator >> commentForTCanBeVolatile [
 	^ 'I allow an entity to be volatible
 ex:
@@ -136,13 +137,13 @@ public class SharedObject {
 ```'
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixJavaGenerator >> commentForTInterface [
 	'I correspond to an interface'
 
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixJavaGenerator >> commentForTWithInterfaces [
 
 ^ 'I can contain interfaces (Packages, Methods, Classes...)'
@@ -150,7 +151,7 @@ FamixJavaGenerator >> commentForTWithInterfaces [
 	
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixJavaGenerator >> defineClasses [
 
 	super defineClasses.
@@ -199,7 +200,7 @@ FamixJavaGenerator >> defineClasses [
 	wildcard := self newClassNamed: #Wildcard.
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixJavaGenerator >> defineHierarchy [
 	super defineHierarchy.
 
@@ -389,7 +390,7 @@ FamixJavaGenerator >> defineHierarchy [
 	wildcard --|> #TTypeArgument
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixJavaGenerator >> defineProperties [
 	super defineProperties.
 
@@ -401,7 +402,7 @@ FamixJavaGenerator >> defineProperties [
 		comment: 'Entity can be declared synchronized').
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixJavaGenerator >> defineRelations [
 
 	super defineRelations.
@@ -417,7 +418,7 @@ FamixJavaGenerator >> defineRelations [
 			 'Wildcards upper bounded by this bound.')
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixJavaGenerator >> defineTraits [
 	super defineTraits.
 
@@ -439,7 +440,7 @@ FamixJavaGenerator >> defineTraits [
 	tBound := self newTraitNamed: #TBound comment: self commentForTBound.
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixJavaGenerator >> newBuilder [
 
 	^ super newBuilder

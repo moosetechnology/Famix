@@ -1,10 +1,12 @@
 Class {
-	#name : #MooseMSEImporterTestEntity,
-	#superclass : #MooseEntity,
-	#category : #'Moose-Core-Tests-Entities-Entities'
+	#name : 'MooseMSEImporterTestEntity',
+	#superclass : 'MooseEntity',
+	#category : 'Moose-Core-Tests-Entities-Entities',
+	#package : 'Moose-Core-Tests-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 MooseMSEImporterTestEntity class >> annotation [
 
 	<FMClass: #Entity super: #MooseEntity>
@@ -14,112 +16,112 @@ MooseMSEImporterTestEntity class >> annotation [
 	^ self
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MooseMSEImporterTestEntity class >> isAbstract [
 
 	<generated>
 	^ self == MooseMSEImporterTestEntity
 ]
 
-{ #category : #meta }
+{ #category : 'meta' }
 MooseMSEImporterTestEntity class >> metamodel [
 
 	<generated>
 	^ MooseMSEImporterTestModel metamodel
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MooseMSEImporterTestEntity >> isAssociation [
 
 	<generated>
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MooseMSEImporterTestEntity >> isAttribute [
 
 	<generated>
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MooseMSEImporterTestEntity >> isBehavioural [
 
 	<generated>
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MooseMSEImporterTestEntity >> isClass [
 
 	<generated>
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MooseMSEImporterTestEntity >> isComment [
 
 	<generated>
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MooseMSEImporterTestEntity >> isInheritance [
 
 	<generated>
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MooseMSEImporterTestEntity >> isMethod [
 
 	<generated>
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MooseMSEImporterTestEntity >> isNamedEntity [
 
 	<generated>
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MooseMSEImporterTestEntity >> isNamespace [
 
 	<generated>
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MooseMSEImporterTestEntity >> isPackage [
 
 	<generated>
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MooseMSEImporterTestEntity >> isPrimitiveType [
 
 	<generated>
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MooseMSEImporterTestEntity >> isQueryable [
 
 	<generated>
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MooseMSEImporterTestEntity >> isStructuralEntity [
 
 	<generated>
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MooseMSEImporterTestEntity >> isType [
 
 	<generated>

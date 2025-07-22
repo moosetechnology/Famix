@@ -23,14 +23,16 @@
 
 "
 Class {
-	#name : #FamixJavaInheritance,
-	#superclass : #FamixJavaEntity,
+	#name : 'FamixJavaInheritance',
+	#superclass : 'FamixJavaEntity',
 	#traits : 'FamixTInheritance',
 	#classTraits : 'FamixTInheritance classTrait',
-	#category : #'Famix-Java-Entities-Entities'
+	#category : 'Famix-Java-Entities-Entities',
+	#package : 'Famix-Java-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixJavaInheritance class >> annotation [
 
 	<FMClass: #Inheritance super: #FamixJavaEntity>
@@ -39,27 +41,27 @@ FamixJavaInheritance class >> annotation [
 	^ self
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FamixJavaInheritance >> accept: aVisitor [
 
 	<generated>
 	^ aVisitor visitFamixJavaInheritance: self
 ]
 
-{ #category : #'Moose-Hismo' }
+{ #category : 'Moose-Hismo' }
 FamixJavaInheritance >> historicalUniqueName [
 	
 	^(self subclass mooseName , '->' , self superclass mooseName) asSymbol
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixJavaInheritance >> mooseNameOn: aStream [
 	self subclass ifNotNil: [ aStream nextPutAll: self subclass name ].
 	aStream nextPutAll: ' -> '.
 	self superclass ifNotNil: [ aStream nextPutAll: self superclass name ]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixJavaInheritance >> printOn: aStream [
 	super printOn: aStream.
 	aStream nextPutAll: ' (Inheritance)'

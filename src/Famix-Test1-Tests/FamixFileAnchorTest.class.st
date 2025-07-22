@@ -1,15 +1,17 @@
 Class {
-	#name : #FamixFileAnchorTest,
-	#superclass : #FamixAbstractFileAnchorTest,
-	#category : #'Famix-Test1-Tests-SourceAnchor'
+	#name : 'FamixFileAnchorTest',
+	#superclass : 'FamixAbstractFileAnchorTest',
+	#category : 'Famix-Test1-Tests-SourceAnchor',
+	#package : 'Famix-Test1-Tests',
+	#tag : 'SourceAnchor'
 }
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 FamixFileAnchorTest >> actualClass [
 	^ FamixTest1FileAnchor
 ]
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 FamixFileAnchorTest >> anchorForClassTest [
 	| file anchor |
 	file := (FileSystem memory / 'test.java')
@@ -27,7 +29,7 @@ FamixFileAnchorTest >> anchorForClassTest [
 	^ anchor
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixFileAnchorTest >> testEmptySourceTextWhenNoEndAndStartLine [
 	| fileAnchor |
 	fileAnchor := self anchorForClassTest
@@ -39,7 +41,7 @@ FamixFileAnchorTest >> testEmptySourceTextWhenNoEndAndStartLine [
 	self assert: fileAnchor sourceText equals: self sourceCodeForTest
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixFileAnchorTest >> testEmptySourceTextWhenNoEndLine [
 	| fileAnchor |
 	fileAnchor := self anchorForClassTest
@@ -58,7 +60,7 @@ FamixFileAnchorTest >> testEmptySourceTextWhenNoEndLine [
 }'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixFileAnchorTest >> testEmptySourceTextWhenNoStartLine [
 	| fileAnchor |
 	fileAnchor := self anchorForClassTest
@@ -91,7 +93,7 @@ public class Dice9 implements Dice {
 	}'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixFileAnchorTest >> testMooseNameOn [
 	| fileAnchor |
 	fileAnchor := self actualClass new
@@ -102,7 +104,7 @@ FamixFileAnchorTest >> testMooseNameOn [
 	self assert: fileAnchor mooseName equals: 'file(1@nil-9@nil)'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixFileAnchorTest >> testMooseNameWithColumns [
 	| fileAnchor |
 	fileAnchor := self actualClass new
@@ -115,7 +117,7 @@ FamixFileAnchorTest >> testMooseNameWithColumns [
 	self assert: fileAnchor mooseName equals: 'file(1@2-3@4)'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixFileAnchorTest >> testSourceText [
 	| anchor |
 	anchor := self anchorForClassTest
@@ -132,7 +134,7 @@ FamixFileAnchorTest >> testSourceText [
 	}'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixFileAnchorTest >> testSourceTextConserveItsLineReturn [
 	| file anchor |
 	file := (FileSystem memory / 'test.java')
@@ -154,7 +156,7 @@ FamixFileAnchorTest >> testSourceTextConserveItsLineReturn [
 	}' copyReplaceAll: String cr with: String crlf)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixFileAnchorTest >> testSourceTextEndingOnNewLine [
 	| anchor |
 	anchor := self anchorForClassTest
@@ -179,7 +181,7 @@ FamixFileAnchorTest >> testSourceTextEndingOnNewLine [
 '
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixFileAnchorTest >> testSourceTextEndingOnTwoNewLine [
 	| anchor |
 	anchor := self anchorForClassTest
@@ -206,7 +208,7 @@ FamixFileAnchorTest >> testSourceTextEndingOnTwoNewLine [
 '
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixFileAnchorTest >> testSourceTextInOneLine [
 	| anchor |
 	anchor := self anchorForClassTest
@@ -221,7 +223,7 @@ FamixFileAnchorTest >> testSourceTextInOneLine [
 			'@see goosegame.Dice#throwDice'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixFileAnchorTest >> testSourceTextWithLf [
 	| file anchor |
 	file := (FileSystem memory / 'test.java')
@@ -243,7 +245,7 @@ FamixFileAnchorTest >> testSourceTextWithLf [
 	}' copyReplaceAll: String cr with: String lf)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixFileAnchorTest >> testSourceTextWithoutNoEndColumn [
 	| anchor |
 	anchor := self anchorForClassTest
@@ -260,7 +262,7 @@ FamixFileAnchorTest >> testSourceTextWithoutNoEndColumn [
 	}'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixFileAnchorTest >> testSourceTextWithoutNoStartColumn [
 	| anchor |
 	anchor := self anchorForClassTest

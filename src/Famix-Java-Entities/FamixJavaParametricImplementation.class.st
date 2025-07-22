@@ -11,14 +11,16 @@
 
 "
 Class {
-	#name : #FamixJavaParametricImplementation,
-	#superclass : #FamixJavaImplementation,
+	#name : 'FamixJavaParametricImplementation',
+	#superclass : 'FamixJavaImplementation',
 	#traits : 'FamixTParametricAssociation',
 	#classTraits : 'FamixTParametricAssociation classTrait',
-	#category : #'Famix-Java-Entities-Entities'
+	#category : 'Famix-Java-Entities-Entities',
+	#package : 'Famix-Java-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixJavaParametricImplementation class >> annotation [
 
 	<FMClass: #ParametricImplementation super: #FamixJavaImplementation>
@@ -27,7 +29,7 @@ FamixJavaParametricImplementation class >> annotation [
 	^ self
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FamixJavaParametricImplementation >> accept: aVisitor [
 
 	<generated>

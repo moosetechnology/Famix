@@ -1,12 +1,14 @@
 Class {
-	#name : #FDModel,
-	#superclass : #MooseModel,
+	#name : 'FDModel',
+	#superclass : 'MooseModel',
 	#traits : 'FDTEntityCreator',
 	#classTraits : 'FDTEntityCreator classTrait',
-	#category : #'FamixDocumentor-TestMetaModel-Model'
+	#category : 'FamixDocumentor-TestMetaModel-Model',
+	#package : 'FamixDocumentor-TestMetaModel',
+	#tag : 'Model'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FDModel class >> annotation [
 	<FMClass: #FDModel super: #MooseModel>
 	<package: #'FamixDocumentor-TestMetaModel'>

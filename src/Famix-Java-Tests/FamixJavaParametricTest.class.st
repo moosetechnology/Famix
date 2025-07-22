@@ -1,16 +1,17 @@
 Class {
-	#name : #FamixJavaParametricTest,
-	#superclass : #TestCase,
+	#name : 'FamixJavaParametricTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'model',
 		'stringClass',
 		'listTypeParameter',
 		'genericListClass'
 	],
-	#category : #'Famix-Java-Tests'
+	#category : 'Famix-Java-Tests',
+	#package : 'Famix-Java-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 FamixJavaParametricTest >> setUp [
 
 	super setUp.
@@ -26,7 +27,7 @@ FamixJavaParametricTest >> setUp [
 		                    addTypeParameter: listTypeParameter
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixJavaParametricTest >> test1 [
 	"public List<String> testMethod(List<String> list)"
 
@@ -55,7 +56,7 @@ FamixJavaParametricTest >> test1 [
 			 yourself)
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixJavaParametricTest >> test2 [
 	"public <B extends Building> void genericMethod(B b)"
 
@@ -77,7 +78,7 @@ FamixJavaParametricTest >> test2 [
 			 yourself)
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixJavaParametricTest >> test3 [
 	"
 public class ClassA<K, V> {}
@@ -131,7 +132,7 @@ public class ClassB<V> extends ClassA<String, V> {
 			 (model newEntityTyping declaredType: vFromClassB))
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixJavaParametricTest >> testConcreteAndGenericParameter [
 	"
 public ClassA<V>
@@ -161,7 +162,7 @@ public ClassB extends classA<String>"
 	self deny: classB isParametricEntity
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixJavaParametricTest >> testConcretizationEntity [
 	"classB extends List<String>"
 
@@ -192,7 +193,7 @@ FamixJavaParametricTest >> testConcretizationEntity [
 		hasSameElements: { stringClass }
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixJavaParametricTest >> testConcretizationParameter [
 	"
 public classA<E>

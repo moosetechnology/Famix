@@ -10,29 +10,31 @@ Public API and Key Messages
 - #selectAssociationsIn: 		Takes a collection of associations and returns only the one we are interested in for the query.
 "
 Class {
-	#name : #MQNavigationAssociationSelectionStrategy,
-	#superclass : #Object,
-	#category : #'Moose-Query-Navigating'
+	#name : 'MQNavigationAssociationSelectionStrategy',
+	#superclass : 'Object',
+	#category : 'Moose-Query-Navigating',
+	#package : 'Moose-Query',
+	#tag : 'Navigating'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 MQNavigationAssociationSelectionStrategy class >> isAbstract [
 	^ self = MQNavigationAssociationSelectionStrategy
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MQNavigationAssociationSelectionStrategy class >> strategies [
 	^ self allSubclasses reject: #isAbstract
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 MQNavigationAssociationSelectionStrategy >> selectAssociationsIn: aCollection [
 	"I return a collection of associations matching the kind of dependencies asked by the user in the query from the collection of associations I got in parameter."
 
 	^ self subclassResponsibility
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 MQNavigationAssociationSelectionStrategy >> storeOn: aStream [
 	aStream
 		nextPutAll: self class name;

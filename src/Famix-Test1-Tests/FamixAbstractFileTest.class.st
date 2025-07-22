@@ -1,25 +1,27 @@
 Class {
-	#name : #FamixAbstractFileTest,
-	#superclass : #TestCase,
-	#category : #'Famix-Test1-Tests-Files'
+	#name : 'FamixAbstractFileTest',
+	#superclass : 'TestCase',
+	#category : 'Famix-Test1-Tests-Files',
+	#package : 'Famix-Test1-Tests',
+	#tag : 'Files'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixAbstractFileTest class >> isAbstract [
 	^ self = FamixAbstractFileTest
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixAbstractFileTest class >> shouldInheritSelectors [
 	^ true
 ]
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 FamixAbstractFileTest >> actualClass [
 	^ self subclassResponsibility
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixAbstractFileTest >> testFullNameDoesNotRaiseError [
 	self
 		shouldnt: [ self actualClass new
@@ -32,7 +34,7 @@ FamixAbstractFileTest >> testFullNameDoesNotRaiseError [
 		raise: Error
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixAbstractFileTest >> testIsRoot [
 	| file |
 	file := self actualClass new.

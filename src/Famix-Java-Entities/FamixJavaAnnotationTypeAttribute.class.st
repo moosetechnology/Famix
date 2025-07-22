@@ -39,14 +39,16 @@
 
 "
 Class {
-	#name : #FamixJavaAnnotationTypeAttribute,
-	#superclass : #FamixJavaVariable,
+	#name : 'FamixJavaAnnotationTypeAttribute',
+	#superclass : 'FamixJavaVariable',
 	#traits : 'FamixTAnnotationTypeAttribute + FamixTWithComments',
 	#classTraits : 'FamixTAnnotationTypeAttribute classTrait + FamixTWithComments classTrait',
-	#category : #'Famix-Java-Entities-Entities'
+	#category : 'Famix-Java-Entities-Entities',
+	#package : 'Famix-Java-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixJavaAnnotationTypeAttribute class >> annotation [
 
 	<FMClass: #AnnotationTypeAttribute super: #FamixJavaVariable>
@@ -55,14 +57,14 @@ FamixJavaAnnotationTypeAttribute class >> annotation [
 	^ self
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FamixJavaAnnotationTypeAttribute >> accept: aVisitor [
 
 	<generated>
 	^ aVisitor visitFamixJavaAnnotationTypeAttribute: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixJavaAnnotationTypeAttribute >> parentAnnotationType [
 	<FMProperty: #parentAnnotationType type: #FamixJavaAnnotationType> 
 	<derived> 
@@ -71,7 +73,7 @@ FamixJavaAnnotationTypeAttribute >> parentAnnotationType [
 	^ self parentType
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixJavaAnnotationTypeAttribute >> parentAnnotationType: anAnnotationType [
 	self parentType: anAnnotationType
 ]

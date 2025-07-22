@@ -1,10 +1,11 @@
 Class {
-	#name : #FamixWithCommentsTest,
-	#superclass : #FamixTest1SimpleModelTest,
-	#category : #'Famix-Test1-Tests'
+	#name : 'FamixWithCommentsTest',
+	#superclass : 'FamixTest1SimpleModelTest',
+	#category : 'Famix-Test1-Tests',
+	#package : 'Famix-Test1-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixWithCommentsTest >> testComments [
 
 	| comment comment2 |
@@ -22,7 +23,7 @@ FamixWithCommentsTest >> testComments [
 	self assert: comment2 commentedEntity equals: c1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixWithCommentsTest >> testHasComments [
 	| comment |
 	comment := FamixTest1Comment new.
@@ -32,7 +33,7 @@ FamixWithCommentsTest >> testHasComments [
 	self assert: c1 hasComments
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixWithCommentsTest >> testPrivateAddComment [
 	| comment |
 	comment := FamixTest1Comment new.
@@ -41,7 +42,7 @@ FamixWithCommentsTest >> testPrivateAddComment [
 	self assertCollection: c1 comments hasSameElements: {comment}
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixWithCommentsTest >> testRemoveComment [
 	| comment |
 	comment := FamixTest1Comment new.

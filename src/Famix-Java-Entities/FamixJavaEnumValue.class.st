@@ -38,14 +38,16 @@
 
 "
 Class {
-	#name : #FamixJavaEnumValue,
-	#superclass : #FamixJavaVariable,
+	#name : 'FamixJavaEnumValue',
+	#superclass : 'FamixJavaVariable',
 	#traits : 'FamixTEnumValue + FamixTWithComments',
 	#classTraits : 'FamixTEnumValue classTrait + FamixTWithComments classTrait',
-	#category : #'Famix-Java-Entities-Entities'
+	#category : 'Famix-Java-Entities-Entities',
+	#package : 'Famix-Java-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixJavaEnumValue class >> annotation [
 
 	<FMClass: #EnumValue super: #FamixJavaVariable>
@@ -54,7 +56,7 @@ FamixJavaEnumValue class >> annotation [
 	^ self
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FamixJavaEnumValue >> accept: aVisitor [
 
 	<generated>

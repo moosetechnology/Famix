@@ -1,6 +1,6 @@
 Class {
-	#name : #FamixWithSourceLanguageTest,
-	#superclass : #TestCase,
+	#name : 'FamixWithSourceLanguageTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'model',
 		'm1',
@@ -8,10 +8,11 @@ Class {
 		'anchor',
 		'lang'
 	],
-	#category : #'Famix-Test1-Tests'
+	#category : 'Famix-Test1-Tests',
+	#package : 'Famix-Test1-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 FamixWithSourceLanguageTest >> setUp [
 
 	super setUp.
@@ -26,7 +27,7 @@ FamixWithSourceLanguageTest >> setUp [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixWithSourceLanguageTest >> testAddSourcedEntity [
 
 	lang addSourcedEntity: m1.
@@ -37,7 +38,7 @@ FamixWithSourceLanguageTest >> testAddSourcedEntity [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixWithSourceLanguageTest >> testDeclaredSourceLanguage [
 
 	self assert: m1 declaredSourceLanguage isNil.

@@ -1,26 +1,27 @@
 Class {
-	#name : #FamixTest6Generator,
-	#superclass : #FamixBasicInfrastructureGenerator,
+	#name : 'FamixTest6Generator',
+	#superclass : 'FamixBasicInfrastructureGenerator',
 	#instVars : [
 		'spam',
 		'bacon'
 	],
-	#category : #'Famix-TestGenerators'
+	#category : 'Famix-TestGenerators',
+	#package : 'Famix-TestGenerators'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest6Generator class >> packageName [
 
 	^ #'Famix-Test6-Entities'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest6Generator class >> prefix [
 
 	^ #'FamixTest6'
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixTest6Generator >> defineClasses [
 
 	super defineClasses.
@@ -28,7 +29,7 @@ FamixTest6Generator >> defineClasses [
 	bacon := builder newClassNamed: #Bacon
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixTest6Generator >> defineHierarchy [
 	super defineHierarchy.
 
@@ -36,7 +37,7 @@ FamixTest6Generator >> defineHierarchy [
 
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixTest6Generator >> defineProperties [
 
 	super defineProperties.

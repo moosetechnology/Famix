@@ -23,14 +23,16 @@
 
 "
 Class {
-	#name : #MooseMSEImporterTestEntityTyping,
-	#superclass : #MooseMSEImporterTestEntity,
+	#name : 'MooseMSEImporterTestEntityTyping',
+	#superclass : 'MooseMSEImporterTestEntity',
 	#traits : 'FamixTEntityTyping',
 	#classTraits : 'FamixTEntityTyping classTrait',
-	#category : #'Moose-Core-Tests-Entities-Entities'
+	#category : 'Moose-Core-Tests-Entities-Entities',
+	#package : 'Moose-Core-Tests-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 MooseMSEImporterTestEntityTyping class >> annotation [
 
 	<FMClass: #EntityTyping super: #MooseMSEImporterTestEntity>

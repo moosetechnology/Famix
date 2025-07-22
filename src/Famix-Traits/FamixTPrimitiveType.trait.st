@@ -29,13 +29,15 @@
 
 "
 Trait {
-	#name : #FamixTPrimitiveType,
+	#name : 'FamixTPrimitiveType',
 	#traits : 'FamixTType',
 	#classTraits : 'FamixTType classTrait',
-	#category : #'Famix-Traits-Type'
+	#category : 'Famix-Traits-Type',
+	#package : 'Famix-Traits',
+	#tag : 'Type'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTPrimitiveType classSide >> annotation [
 
 	<FMClass: #TPrimitiveType super: #Object>
@@ -44,14 +46,14 @@ FamixTPrimitiveType classSide >> annotation [
 	^ self
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FamixTPrimitiveType >> accept: aVisitor [
 
 	<generated>
 	^ aVisitor visitFamixTPrimitiveType: self
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTPrimitiveType >> isPrimitiveType [
 
 	<generated>

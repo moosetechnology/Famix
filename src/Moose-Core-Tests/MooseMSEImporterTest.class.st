@@ -1,16 +1,17 @@
 Class {
-	#name : #MooseMSEImporterTest,
-	#superclass : #TestCase,
-	#category : #'Moose-Core-Tests'
+	#name : 'MooseMSEImporterTest',
+	#superclass : 'TestCase',
+	#category : 'Moose-Core-Tests',
+	#package : 'Moose-Core-Tests'
 }
 
-{ #category : #util }
+{ #category : 'util' }
 MooseMSEImporterTest >> readMSEStream: aStream [
 
 	^ MooseMSEImporterTestModel new importFromMSEStream: aStream
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseMSEImporterTest >> testComplex [
 
 	| mooseModel |
@@ -36,7 +37,7 @@ MooseMSEImporterTest >> testComplex [
 		((mooseModel allClasses collect: #name) includes: 'ClassA')
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseMSEImporterTest >> testOneClass [
 
 	| mooseModel |
@@ -49,7 +50,7 @@ MooseMSEImporterTest >> testOneClass [
 		equals: 'ClassA'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseMSEImporterTest >> testOneClassAndOnePackage [
 
 	| mooseModel |
@@ -66,7 +67,7 @@ MooseMSEImporterTest >> testOneClassAndOnePackage [
 		equals: 'ClassA'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseMSEImporterTest >> testOnePackage [
 
 	| mooseModel |
@@ -79,7 +80,7 @@ MooseMSEImporterTest >> testOnePackage [
 		((mooseModel allPackages collect: #name) includes: 'PackageA')
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseMSEImporterTest >> testOnePrimitiveType [
 
 	| mooseModel |
@@ -92,7 +93,7 @@ MooseMSEImporterTest >> testOnePrimitiveType [
 		equals: 'int'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseMSEImporterTest >> testOnePrimitiveTypeAndMethod [
 
 	| mooseModel |
@@ -110,7 +111,7 @@ MooseMSEImporterTest >> testOnePrimitiveTypeAndMethod [
 		equals: mooseModel allPrimitiveTypes first
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseMSEImporterTest >> testPropertyWithNoSetter [
 
 	| mooseModel |
@@ -123,7 +124,7 @@ MooseMSEImporterTest >> testPropertyWithNoSetter [
 		equals: 42
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseMSEImporterTest >> testSimple [
 
 	| mooseSample mooseModel classA |
@@ -162,7 +163,7 @@ MooseMSEImporterTest >> testSimple [
 		raise: Error
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseMSEImporterTest >> testUndeclaredProperty [
 
 	| mooseModel |

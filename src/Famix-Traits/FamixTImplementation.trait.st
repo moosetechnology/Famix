@@ -23,17 +23,19 @@
 
 "
 Trait {
-	#name : #FamixTImplementation,
+	#name : 'FamixTImplementation',
 	#instVars : [
 		'#implementingClass => FMOne type: #FamixTCanImplement opposite: #interfaceImplementations',
 		'#interface => FMOne type: #FamixTImplementable opposite: #implementations'
 	],
 	#traits : 'FamixTAssociation',
 	#classTraits : 'FamixTAssociation classTrait',
-	#category : #'Famix-Traits-Implementation'
+	#category : 'Famix-Traits-Implementation',
+	#package : 'Famix-Traits',
+	#tag : 'Implementation'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTImplementation classSide >> annotation [
 
 	<FMClass: #TImplementation super: #Object>
@@ -42,14 +44,14 @@ FamixTImplementation classSide >> annotation [
 	^ self
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FamixTImplementation >> accept: aVisitor [
 
 	<generated>
 	^ aVisitor visitFamixTImplementation: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTImplementation >> implementingClass [
 	"Relation named: #implementingClass type: #FamixTCanImplement opposite: #interfaceImplementations"
 
@@ -59,14 +61,14 @@ FamixTImplementation >> implementingClass [
 	^ implementingClass
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTImplementation >> implementingClass: anObject [
 
 	<generated>
 	implementingClass := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTImplementation >> interface [
 	"Relation named: #interface type: #FamixTImplementable opposite: #implementations"
 
@@ -76,7 +78,7 @@ FamixTImplementation >> interface [
 	^ interface
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTImplementation >> interface: anObject [
 
 	<generated>

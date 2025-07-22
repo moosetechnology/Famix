@@ -1,9 +1,11 @@
 Trait {
-	#name : #FamixTMethodMetrics,
-	#category : #'Famix-Traits-Behavioral'
+	#name : 'FamixTMethodMetrics',
+	#category : 'Famix-Traits-Behavioral',
+	#package : 'Famix-Traits',
+	#tag : 'Behavioral'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTMethodMetrics classSide >> annotation [
 
 	<FMClass: #TMethodMetrics super: #Object>
@@ -12,26 +14,26 @@ FamixTMethodMetrics classSide >> annotation [
 	^ self
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FamixTMethodMetrics >> accept: aVisitor [
 
 	<generated>
 	^ aVisitor visitFamixTMethodMetrics: self
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTMethodMetrics >> cyclomaticComplexity [
 	<FMProperty: #cyclomaticComplexity type: #Number>
 	<FMComment: 'The number of linear-independent paths through a method.'>
 	^ self lookUpPropertyNamed: #cyclomaticComplexity computedAs: [ self computeCyclomaticComplexity ]
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTMethodMetrics >> cyclomaticComplexity: aNumber [
 	self cacheAt: #cyclomaticComplexity put: aNumber
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTMethodMetrics >> hierarchyNestingLevel [
 	<FMProperty: #hierarchyNestingLevel type: #Number>
 	<derived>
@@ -42,12 +44,12 @@ FamixTMethodMetrics >> hierarchyNestingLevel [
 		computedAs: [ self parentType hierarchyNestingLevel]
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTMethodMetrics >> hierarchyNestingLevel: aNumber [
 	self cacheAt: #hierarchyNestingLevel put: aNumber
 ]
 
-{ #category : #'Famix-Extensions-metrics-support' }
+{ #category : 'Famix-Extensions-metrics-support' }
 FamixTMethodMetrics >> numberOfAnnotationInstances [
 	<FMProperty: #numberOfAnnotationInstances type: #Number>
 	<derived>
@@ -58,7 +60,7 @@ FamixTMethodMetrics >> numberOfAnnotationInstances [
 		computedAs: [self annotationInstances size]
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTMethodMetrics >> numberOfAnnotationInstances: aNumber [
 	self cacheAt: #numberOfAnnotationInstances put: aNumber
 ]

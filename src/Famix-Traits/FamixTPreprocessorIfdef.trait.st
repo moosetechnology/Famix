@@ -6,11 +6,13 @@ Knows the name of the macro tested and whether it is ""negated"" (#ifndef) or no
 
 "
 Trait {
-	#name : #FamixTPreprocessorIfdef,
-	#category : #'Famix-Traits-Preprocessor'
+	#name : 'FamixTPreprocessorIfdef',
+	#category : 'Famix-Traits-Preprocessor',
+	#package : 'Famix-Traits',
+	#tag : 'Preprocessor'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTPreprocessorIfdef classSide >> annotation [
 
 	<FMClass: #TPreprocessorIfdef super: #Object>
@@ -19,7 +21,7 @@ FamixTPreprocessorIfdef classSide >> annotation [
 	^ self
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FamixTPreprocessorIfdef >> accept: aVisitor [
 
 	<generated>

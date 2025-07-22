@@ -33,14 +33,16 @@
 
 "
 Class {
-	#name : #FamixTest3Attribute,
-	#superclass : #FamixTest3Entity,
+	#name : 'FamixTest3Attribute',
+	#superclass : 'FamixTest3Entity',
 	#traits : 'FamixTAttribute',
 	#classTraits : 'FamixTAttribute classTrait',
-	#category : #'Famix-Test3-Entities-Entities'
+	#category : 'Famix-Test3-Entities-Entities',
+	#package : 'Famix-Test3-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTest3Attribute class >> annotation [
 
 	<FMClass: #Attribute super: #FamixTest3Entity>

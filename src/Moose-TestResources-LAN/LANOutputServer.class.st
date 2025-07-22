@@ -1,13 +1,14 @@
 Class {
-	#name : #LANOutputServer,
-	#superclass : #LANNode,
+	#name : 'LANOutputServer',
+	#superclass : 'LANNode',
 	#instVars : [
 		'serverType'
 	],
-	#category : #'Moose-TestResources-LAN'
+	#category : 'Moose-TestResources-LAN',
+	#package : 'Moose-TestResources-LAN'
 }
 
-{ #category : #'sending-receiving' }
+{ #category : 'sending-receiving' }
 LANOutputServer >> accept: thePacket [ 
 	"I first see if the packet is for me. If it is, I output it. Otherwise, I pass it on" 
 	 
@@ -16,13 +17,13 @@ LANOutputServer >> accept: thePacket [
 		ifFalse: [self send: thePacket]	"self name = thePacket addressee"
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 LANOutputServer >> canOutput [ 
 	 
 	^true
 ]
 
-{ #category : #outputting }
+{ #category : 'outputting' }
 LANOutputServer >> output: thePacket [ 
 	"My subclasses have to use this method to define their outputting behavior" 
 	 

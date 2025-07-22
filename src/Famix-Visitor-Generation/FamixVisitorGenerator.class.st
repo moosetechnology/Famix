@@ -24,16 +24,18 @@ Don't forget to commit the newly generated visitor package and to add it to your
 ```
 "
 Class {
-	#name : #FamixVisitorGenerator,
-	#superclass : #Object,
+	#name : 'FamixVisitorGenerator',
+	#superclass : 'Object',
 	#instVars : [
 		'packageName',
 		'builder'
 	],
-	#category : #'Famix-Visitor-Generation-MetamodelBuilder'
+	#category : 'Famix-Visitor-Generation-MetamodelBuilder',
+	#package : 'Famix-Visitor-Generation',
+	#tag : 'MetamodelBuilder'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 FamixVisitorGenerator class >> forGenerator: aFamixMetamodelGenerator [
 
 	^ self new
@@ -41,14 +43,14 @@ FamixVisitorGenerator class >> forGenerator: aFamixMetamodelGenerator [
 		  yourself
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FamixVisitorGenerator >> configureForGenerator: aFamixMetamodelGenerator [
 
 	builder := aFamixMetamodelGenerator builder.
 	packageName := aFamixMetamodelGenerator packageNameForVisitor
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FamixVisitorGenerator >> define [
 
 	| visitorTrait |

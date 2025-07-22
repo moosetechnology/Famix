@@ -1,10 +1,11 @@
 Class {
-	#name : #FamixTest6Test,
-	#superclass : #TestCase,
-	#category : #'Famix-Test6-Tests'
+	#name : 'FamixTest6Test',
+	#superclass : 'TestCase',
+	#category : 'Famix-Test6-Tests',
+	#package : 'Famix-Test6-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 FamixTest6Test >> testDefaultValueEmptyString [
 
 	| bacon brandProperty newBrand |
@@ -21,7 +22,7 @@ FamixTest6Test >> testDefaultValueEmptyString [
 	self assert: brandProperty defaultValue equals: ''
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixTest6Test >> testDefaultValueOnCreation [
 
 	| bacon brandProperty |
@@ -37,7 +38,7 @@ FamixTest6Test >> testDefaultValueOnCreation [
 	self assert: brandProperty defaultValue
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixTest6Test >> testDefaultValueOnCreation2 [
 
 	| bacon eggProperty |
@@ -53,7 +54,7 @@ FamixTest6Test >> testDefaultValueOnCreation2 [
 	self assert: eggProperty defaultValue equals: 12
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixTest6Test >> testDefaultValueOnCreationInheritance [
 
 	| spam eggProperty bacon |

@@ -3,23 +3,25 @@ Importer for JSON file
 
 "
 Class {
-	#name : #FamixJSONFileImporter,
-	#superclass : #FamixAbstractFileImporter,
-	#category : #'Moose-Importers-FromPersistedFiles'
+	#name : 'FamixJSONFileImporter',
+	#superclass : 'FamixAbstractFileImporter',
+	#category : 'Moose-Importers-FromPersistedFiles',
+	#package : 'Moose-Importers',
+	#tag : 'FromPersistedFiles'
 }
 
-{ #category : #executing }
+{ #category : 'executing' }
 FamixJSONFileImporter class >> fileExtension [
 	^'json'
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixJSONFileImporter >> run [
 	[ model importFromJSONStream: inputStream ]
 	ensure: [ inputStream close ]
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixJSONFileImporter >> runFilteredBy: anImportingContext [
 
 	[ model

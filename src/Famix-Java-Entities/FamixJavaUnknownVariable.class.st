@@ -28,14 +28,16 @@
 
 "
 Class {
-	#name : #FamixJavaUnknownVariable,
-	#superclass : #FamixJavaVariable,
+	#name : 'FamixJavaUnknownVariable',
+	#superclass : 'FamixJavaVariable',
 	#traits : 'FamixTUnknownVariable',
 	#classTraits : 'FamixTUnknownVariable classTrait',
-	#category : #'Famix-Java-Entities-Entities'
+	#category : 'Famix-Java-Entities-Entities',
+	#package : 'Famix-Java-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixJavaUnknownVariable class >> annotation [
 
 	<FMClass: #UnknownVariable super: #FamixJavaVariable>
@@ -44,7 +46,7 @@ FamixJavaUnknownVariable class >> annotation [
 	^ self
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FamixJavaUnknownVariable >> accept: aVisitor [
 
 	<generated>

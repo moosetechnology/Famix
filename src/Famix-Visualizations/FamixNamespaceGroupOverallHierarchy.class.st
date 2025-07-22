@@ -4,17 +4,19 @@ I show a group of namespaces and all the namespaces in their hierarchy.
 Namespaces in the group are shown in black, namespace that are not in the group are shown in gray.
 "
 Class {
-	#name : #FamixNamespaceGroupOverallHierarchy,
-	#superclass : #FamixNamespaceGroupHierarchy,
-	#category : #'Famix-Visualizations-Core'
+	#name : 'FamixNamespaceGroupOverallHierarchy',
+	#superclass : 'FamixNamespaceGroupHierarchy',
+	#category : 'Famix-Visualizations-Core',
+	#package : 'Famix-Visualizations',
+	#tag : 'Core'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixNamespaceGroupOverallHierarchy class >> defaultTitle [
 	^ 'Namespace group within overall hierarchy'
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 FamixNamespaceGroupOverallHierarchy >> buildLegend [
 	| legend |
 	legend := RSLegend new.
@@ -31,7 +33,7 @@ FamixNamespaceGroupOverallHierarchy >> buildLegend [
 	legend build
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 FamixNamespaceGroupOverallHierarchy >> buildNodes [
 	canvas
 		addAll:
@@ -40,17 +42,17 @@ FamixNamespaceGroupOverallHierarchy >> buildNodes [
 				collect: [ :namespace | self shapeForNamespace: namespace ])
 ]
 
-{ #category : #color }
+{ #category : 'color' }
 FamixNamespaceGroupOverallHierarchy >> colorForNamespaceInGroup [
 	^ Color black
 ]
 
-{ #category : #color }
+{ #category : 'color' }
 FamixNamespaceGroupOverallHierarchy >> colorForNamespaceOutsideGroup [
 	^ Color gray
 ]
 
-{ #category : #shapes }
+{ #category : 'shapes' }
 FamixNamespaceGroupOverallHierarchy >> shapeForNamespace: namespace [
 	^ (super shapeForNamespace: namespace)
 		color:

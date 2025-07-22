@@ -29,14 +29,16 @@
 
 "
 Class {
-	#name : #FamixJavaPrimitiveType,
-	#superclass : #FamixJavaType,
+	#name : 'FamixJavaPrimitiveType',
+	#superclass : 'FamixJavaType',
 	#traits : 'FamixTPrimitiveType',
 	#classTraits : 'FamixTPrimitiveType classTrait',
-	#category : #'Famix-Java-Entities-Entities'
+	#category : 'Famix-Java-Entities-Entities',
+	#package : 'Famix-Java-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixJavaPrimitiveType class >> annotation [
 
 	<FMClass: #PrimitiveType super: #FamixJavaType>
@@ -45,14 +47,14 @@ FamixJavaPrimitiveType class >> annotation [
 	^ self
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FamixJavaPrimitiveType >> accept: aVisitor [
 
 	<generated>
 	^ aVisitor visitFamixJavaPrimitiveType: self
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixJavaPrimitiveType >> isPrimitiveType [
 
 	<generated>

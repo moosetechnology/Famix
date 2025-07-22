@@ -44,14 +44,16 @@
 
 "
 Class {
-	#name : #MooseMSEImporterTestMethod,
-	#superclass : #MooseMSEImporterTestNamedEntity,
+	#name : 'MooseMSEImporterTestMethod',
+	#superclass : 'MooseMSEImporterTestNamedEntity',
 	#traits : 'FamixTMethod',
 	#classTraits : 'FamixTMethod classTrait',
-	#category : #'Moose-Core-Tests-Entities-Entities'
+	#category : 'Moose-Core-Tests-Entities-Entities',
+	#package : 'Moose-Core-Tests-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 MooseMSEImporterTestMethod class >> annotation [
 
 	<FMClass: #Method super: #MooseMSEImporterTestNamedEntity>

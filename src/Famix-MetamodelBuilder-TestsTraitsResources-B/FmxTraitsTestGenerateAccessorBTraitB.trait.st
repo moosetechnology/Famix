@@ -1,9 +1,11 @@
 Trait {
-	#name : #FmxTraitsTestGenerateAccessorBTraitB,
-	#category : #'Famix-MetamodelBuilder-TestsTraitsResources-B-Traits'
+	#name : 'FmxTraitsTestGenerateAccessorBTraitB',
+	#category : 'Famix-MetamodelBuilder-TestsTraitsResources-B-Traits',
+	#package : 'Famix-MetamodelBuilder-TestsTraitsResources-B',
+	#tag : 'Traits'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FmxTraitsTestGenerateAccessorBTraitB classSide >> annotation [
 
 	<FMClass: #TraitB super: #Object>
@@ -12,7 +14,7 @@ FmxTraitsTestGenerateAccessorBTraitB classSide >> annotation [
 	^self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxTraitsTestGenerateAccessorBTraitB >> relationToA [
 	"Relation named: #relationToA type: #FmxTraitsTestGenerateAccessorATraitA opposite: #relationToB"
 
@@ -22,7 +24,7 @@ FmxTraitsTestGenerateAccessorBTraitB >> relationToA [
 	^ self attributeAt: #relationToA ifAbsent: [ nil ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxTraitsTestGenerateAccessorBTraitB >> relationToA: anObject [
 
 	<generated>

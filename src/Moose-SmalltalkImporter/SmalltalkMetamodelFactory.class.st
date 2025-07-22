@@ -1,183 +1,184 @@
 Class {
-	#name : #SmalltalkMetamodelFactory,
-	#superclass : #FMMetamodelFactory,
-	#category : #'Moose-SmalltalkImporter'
+	#name : 'SmalltalkMetamodelFactory',
+	#superclass : 'FMMetamodelFactory',
+	#category : 'Moose-SmalltalkImporter',
+	#package : 'Moose-SmalltalkImporter'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SmalltalkMetamodelFactory class >> defaultModel [
 	^ FamixStModel
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SmalltalkMetamodelFactory >> access [
 
 	^ self entityNamed: #Access
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SmalltalkMetamodelFactory >> anchor [
 
 	^ self entityNamed: #PharoEntitySourceAnchor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SmalltalkMetamodelFactory >> annotationInstance [ 
 
 	^ self entityNamed: #AnnotationInstance
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SmalltalkMetamodelFactory >> annotationInstanceAttribute [
 
 	^ self entityNamed: #AnnotationInstanceAttribute
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SmalltalkMetamodelFactory >> annotationType [
 
 	^ self entityNamed: #AnnotationType
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SmalltalkMetamodelFactory >> annotationTypeAttribute [
 
 	^ self entityNamed: #AnnotationTypeAttribute
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SmalltalkMetamodelFactory >> attribute [
 
 	^ self entityNamed: #Attribute
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SmalltalkMetamodelFactory >> classEntity [
 
 	^ self entityNamed: #Class
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SmalltalkMetamodelFactory >> comment [
 
 	^ self entityNamed: #Comment
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SmalltalkMetamodelFactory >> entity [
 
 	^ self entityNamed: #Entity
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SmalltalkMetamodelFactory >> entityTyping [
 
 	^ self entityNamed: #EntityTyping
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SmalltalkMetamodelFactory >> globalVariable [
 
 	^ self entityNamed: #GlobalVariable
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SmalltalkMetamodelFactory >> implicitVariable [
 
 	^ self entityNamed: #ImplicitVariable
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SmalltalkMetamodelFactory >> inheritance [
 
 	^ self entityNamed: #Inheritance
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SmalltalkMetamodelFactory >> invocation [
 
 	^ self entityNamed: #Invocation
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SmalltalkMetamodelFactory >> localVariable [
 
 	^ self entityNamed: #LocalVariable
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SmalltalkMetamodelFactory >> method [
 
 	^ self entityNamed: #Method
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SmalltalkMetamodelFactory >> namedEntity [
 
 	^ self entityNamed: #NamedEntity
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SmalltalkMetamodelFactory >> namespace [
 
 	^ self entityNamed: #Namespace
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SmalltalkMetamodelFactory >> package [
 
 	^ self entityNamed: #Package
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SmalltalkMetamodelFactory >> parameter [
 
 	^ self entityNamed: #Parameter
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SmalltalkMetamodelFactory >> pharoAnchor [
 
 	^ self entityNamed: #PharoAnchor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SmalltalkMetamodelFactory >> reference [
 
 	^ self entityNamed: #Reference
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SmalltalkMetamodelFactory >> sourceAnchor [
 
 	^ self entityNamed: #SourceAnchor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SmalltalkMetamodelFactory >> sourceLanguage [
 
 	^ self entityNamed: #SourceLanguage
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SmalltalkMetamodelFactory >> sourceTextAnchor [
 
 	^ self entityNamed: #SourceTextAnchor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SmalltalkMetamodelFactory >> sourcedEntity [
 
 	^ self entityNamed: #SourcedEntity
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SmalltalkMetamodelFactory >> typeDeclaration [
 
 	^ self entityNamed: #TypeDeclaration
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SmalltalkMetamodelFactory >> unknownVariable [
 
 	^ self entityNamed: #UnknownVariable

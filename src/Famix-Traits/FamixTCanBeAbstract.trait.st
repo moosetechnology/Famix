@@ -8,14 +8,16 @@
 
 "
 Trait {
-	#name : #FamixTCanBeAbstract,
+	#name : 'FamixTCanBeAbstract',
 	#instVars : [
 		'#isAbstract => FMProperty defaultValue: false'
 	],
-	#category : #'Famix-Traits-PrimitiveProperties'
+	#category : 'Famix-Traits-PrimitiveProperties',
+	#package : 'Famix-Traits',
+	#tag : 'PrimitiveProperties'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTCanBeAbstract classSide >> annotation [
 
 	<FMClass: #TCanBeAbstract super: #Object>
@@ -24,14 +26,14 @@ FamixTCanBeAbstract classSide >> annotation [
 	^ self
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FamixTCanBeAbstract >> accept: aVisitor [
 
 	<generated>
 	^ aVisitor visitFamixTCanBeAbstract: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTCanBeAbstract >> isAbstract [
 
 	<FMProperty: #isAbstract type: #Boolean defaultValue: false>
@@ -40,7 +42,7 @@ FamixTCanBeAbstract >> isAbstract [
 	^ isAbstract ifNil: [ isAbstract := false ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTCanBeAbstract >> isAbstract: anObject [
 	<generated>
 	isAbstract := anObject

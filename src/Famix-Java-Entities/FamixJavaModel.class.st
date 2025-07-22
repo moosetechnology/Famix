@@ -1,38 +1,40 @@
 Class {
-	#name : #FamixJavaModel,
-	#superclass : #MooseModel,
+	#name : 'FamixJavaModel',
+	#superclass : 'MooseModel',
 	#traits : 'FamixJavaTEntityCreator',
 	#classTraits : 'FamixJavaTEntityCreator classTrait',
-	#category : #'Famix-Java-Entities-Model'
+	#category : 'Famix-Java-Entities-Model',
+	#package : 'Famix-Java-Entities',
+	#tag : 'Model'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixJavaModel class >> allSubmetamodelsPackagesNames [
 	<generated>
 	^ #(#'Moose-Query' #'Famix-Traits')
 ]
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixJavaModel class >> annotation [
 	<FMClass: #FamixJavaModel super: #MooseModel>
 	<package: #'Famix-Java-Entities'>
 	<generated>
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixJavaModel class >> canBeImportedFromFile [
 	<generated>
 	^true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixJavaModel class >> importingContextClass [
 
 	<generated>
 	^ FamixJavaImportingContext
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 FamixJavaModel >> inferPackageParentsBasedOnNames [
 	<menuItem: 'Infer Namespace Parents Based on Names' category: 'Utilities'>
 	| parent parentNameSize currentPosition parentName package |

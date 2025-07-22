@@ -35,14 +35,16 @@
 
 "
 Class {
-	#name : #FamixStAttribute,
-	#superclass : #FamixStNamedEntity,
+	#name : 'FamixStAttribute',
+	#superclass : 'FamixStNamedEntity',
 	#traits : 'FamixTAttribute + FamixTCanBeClassSide + FamixTInvocationsReceiver',
 	#classTraits : 'FamixTAttribute classTrait + FamixTCanBeClassSide classTrait + FamixTInvocationsReceiver classTrait',
-	#category : #'Famix-PharoSmalltalk-Entities-Entities'
+	#category : 'Famix-PharoSmalltalk-Entities-Entities',
+	#package : 'Famix-PharoSmalltalk-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixStAttribute class >> annotation [
 
 	<FMClass: #Attribute super: #FamixStNamedEntity>
@@ -51,13 +53,13 @@ FamixStAttribute class >> annotation [
 	^ self
 ]
 
-{ #category : #properties }
+{ #category : 'properties' }
 FamixStAttribute >> beSharedVariable [
 
 	^ self attributeAt: #isSharedVariable put: true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixStAttribute >> isSharedVariable [
 
 	<FMProperty: #isSharedVariable type: #Boolean>
@@ -65,7 +67,7 @@ FamixStAttribute >> isSharedVariable [
 	^ self attributeAt: #isSharedVariable ifAbsent: [ false ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixStAttribute >> isSharedVariable: aBoolean [
 
 	^ self attributeAt: #isSharedVariable put: aBoolean

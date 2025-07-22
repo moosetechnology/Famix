@@ -11,14 +11,16 @@
 
 "
 Trait {
-	#name : #FamixTWithMethods,
+	#name : 'FamixTWithMethods',
 	#instVars : [
 		'#methods => FMMany type: #FamixTMethod opposite: #parentType'
 	],
-	#category : #'Famix-Traits-Behavioral'
+	#category : 'Famix-Traits-Behavioral',
+	#package : 'Famix-Traits',
+	#tag : 'Behavioral'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTWithMethods classSide >> annotation [
 
 	<FMClass: #TWithMethods super: #Object>
@@ -27,26 +29,26 @@ FamixTWithMethods classSide >> annotation [
 	^ self
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FamixTWithMethods >> accept: aVisitor [
 
 	<generated>
 	^ aVisitor visitFamixTWithMethods: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithMethods >> addMethod: aMethod [
 	methods add: aMethod
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTWithMethods >> implements: aString [
 	"Was changed from match: for performances and because signature is case sensitive"
 
 	^ self methods anySatisfy: [ :each | aString = each signature ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithMethods >> methods [
 	"Relation named: #methods type: #FamixTMethod opposite: #parentType"
 
@@ -56,14 +58,14 @@ FamixTWithMethods >> methods [
 	^ methods
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithMethods >> methods: anObject [
 
 	<generated>
 	methods value: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithMethods >> methodsGroup [
 	<navigation: 'Methods'>
 	^MooseGroup
@@ -71,7 +73,7 @@ FamixTWithMethods >> methodsGroup [
 		withDescription: 'Methods from ' , self mooseName
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTWithMethods >> numberOfAbstractMethods [
 	<FMProperty: #numberOfAbstractMethods type: #Number>
 	<derived>
@@ -79,12 +81,12 @@ FamixTWithMethods >> numberOfAbstractMethods [
 	^ self lookUpPropertyNamed: #numberOfAbstractMethods computedAs: [ self methodsGroup count: [ :each | each isAbstract ] ]
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTWithMethods >> numberOfAbstractMethods: aNumber [
 	self cacheAt: #numberOfAbstractMethods put: aNumber
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithMethods >> numberOfMethods [
 	<FMProperty: #numberOfMethods type: #Number>
 	<derived>
@@ -95,12 +97,12 @@ FamixTWithMethods >> numberOfMethods [
 		computedAs: [self methods size]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithMethods >> numberOfMethods: aNumber [
 	self cacheAt: #numberOfMethods put: aNumber
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTWithMethods >> tightClassCohesion [
 	<FMProperty: #tightClassCohesion type: #Number>
 	<derived>
@@ -135,12 +137,12 @@ FamixTWithMethods >> tightClassCohesion [
 			tcc asFloat ]
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTWithMethods >> tightClassCohesion: aNumber [
 	self cacheAt: #tightClassCohesion put: aNumber
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTWithMethods >> weightedMethodCount [
 	<FMProperty: #weightedMethodCount type: #Number>
 	<derived>
@@ -151,7 +153,7 @@ FamixTWithMethods >> weightedMethodCount [
 		computedAs: [self methodsGroup sumNumbers: #cyclomaticComplexity]
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTWithMethods >> weightedMethodCount: aNumber [
 	self cacheAt: #weightedMethodCount put: aNumber
 ]

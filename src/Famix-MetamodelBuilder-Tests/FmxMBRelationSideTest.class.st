@@ -1,10 +1,12 @@
 Class {
-	#name : #FmxMBRelationSideTest,
-	#superclass : #FmxMBPropertyTest,
-	#category : #'Famix-MetamodelBuilder-Tests-Tests'
+	#name : 'FmxMBRelationSideTest',
+	#superclass : 'FmxMBPropertyTest',
+	#category : 'Famix-MetamodelBuilder-Tests-Tests',
+	#package : 'Famix-MetamodelBuilder-Tests',
+	#tag : 'Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBRelationSideTest >> testBasics [
 	"check trivial testing and accessing methods"
 
@@ -20,7 +22,7 @@ FmxMBRelationSideTest >> testBasics [
 	self assertEmpty: side comment
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBRelationSideTest >> testContainmentRelations [
 
 	| aClass aTrait relation |
@@ -54,7 +56,7 @@ FmxMBRelationSideTest >> testContainmentRelations [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBRelationSideTest >> testDirections [
 
 	"test setting of a type of the property"
@@ -74,7 +76,7 @@ FmxMBRelationSideTest >> testDirections [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBRelationSideTest >> testOppositeName [
 	| aClass aTrait relation |
 	
@@ -86,7 +88,7 @@ FmxMBRelationSideTest >> testOppositeName [
 	self assert: relation left oppositeName equals: 'aClass'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBRelationSideTest >> testOppositeType [
 	| aClass aTrait relation |
 	
@@ -98,7 +100,7 @@ FmxMBRelationSideTest >> testOppositeType [
 	self assert: relation left oppositeType equals: 'BananeATrait'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBRelationSideTest >> testOppositeTypeInRemoteBuilder [
 	| builder2 aClass aTrait relation |
 	builder configuration prefix: 'Banane'.
@@ -113,7 +115,7 @@ FmxMBRelationSideTest >> testOppositeTypeInRemoteBuilder [
 	self assert: relation left oppositeType equals: 'FurryATrait'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBRelationSideTest >> testProperties [
 
 	"simple tests of basic relation side properties"
@@ -171,7 +173,7 @@ FmxMBRelationSideTest >> testProperties [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBRelationSideTest >> testPropertyReservedName [
 	"simple tests of basic relation side properties"
 
@@ -182,7 +184,7 @@ FmxMBRelationSideTest >> testPropertyReservedName [
 	self should: [ side name: 'class' ] raise: FmxMBPropertyNameIsReserved
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBRelationSideTest >> testPropertyType [
 	"test if after changing of related trait of a relation side all will be consistent"
 
@@ -204,7 +206,7 @@ FmxMBRelationSideTest >> testPropertyType [
 	self assertCollection: tAccess sides asArray equals: {side}
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBRelationSideTest >> testReconnection [
 	"test if after changing of related trait of a relation side all will be consistent"
 
@@ -226,7 +228,7 @@ FmxMBRelationSideTest >> testReconnection [
 	self assertCollection: tAccess sides asArray equals: {side}
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBRelationSideTest >> testRelatedEntity [
 
 	"test setting of a type of the property"
@@ -243,7 +245,7 @@ FmxMBRelationSideTest >> testRelatedEntity [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBRelationSideTest >> testRelations [
 
 	| aClass aTrait relation |

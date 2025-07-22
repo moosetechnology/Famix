@@ -2,8 +2,8 @@
 This class specifies that the Smalltalk classes are identified using packages
 "
 Class {
-	#name : #FamixStPharoImporterTask,
-	#superclass : #MooseTask,
+	#name : 'FamixStPharoImporterTask',
+	#superclass : 'MooseTask',
 	#traits : 'FamixStTImportUtils',
 	#classTraits : 'FamixStTImportUtils classTrait',
 	#instVars : [
@@ -14,25 +14,27 @@ Class {
 		'candidateOperator',
 		'model'
 	],
-	#category : #'Moose-SmalltalkImporter-Importers'
+	#category : 'Moose-SmalltalkImporter-Importers',
+	#package : 'Moose-SmalltalkImporter',
+	#tag : 'Importers'
 }
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixStPharoImporterTask >> addClass: aClass [
 	classes add: aClass
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixStPharoImporterTask >> addClassExtensions: col [
 	classExtensions addAll: col
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixStPharoImporterTask >> addClasses: col [
 	classes addAll: col
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixStPharoImporterTask >> addFromPackage: aPackage [
 
 	"late-bound cache initialization for classes"
@@ -41,26 +43,26 @@ FamixStPharoImporterTask >> addFromPackage: aPackage [
 	
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixStPharoImporterTask >> addFromPackageNamed: aPackageName [
 
 	self addFromPackage: (self packageOrganizer packageNamed: aPackageName asSymbol)
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixStPharoImporterTask >> addFromPackagesMatching: aBlock [
 
 	self packageOrganizer packages do: [:each |
 		 (aBlock value: each) ifTrue: [self addFromPackage: each]]
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixStPharoImporterTask >> addFromPackagesNamed: aCollection [
 
 	aCollection do: [:each| self addFromPackageNamed: each]
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixStPharoImporterTask >> basicRun [
 
 	| importerTask importer |
@@ -79,25 +81,25 @@ FamixStPharoImporterTask >> basicRun [
 	^ self model
 ]
 
-{ #category : #'protected hooks' }
+{ #category : 'protected hooks' }
 FamixStPharoImporterTask >> candidateClass [
 
 	^ candidateClass ifNil: [ candidateClass := CandidateListOperator ]
 ]
 
-{ #category : #'protected hooks' }
+{ #category : 'protected hooks' }
 FamixStPharoImporterTask >> candidateClass: anObject [
 	"Normally you should not invoke such method. Use run and doNotRunCandidateOperator instead"
 	
 	candidateClass := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixStPharoImporterTask >> classExtensions [ 
 	^classExtensions 
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FamixStPharoImporterTask >> defaultImportingContext [
 	"does not import stub methods by default because it can create a lot of methods"
 
@@ -107,25 +109,25 @@ FamixStPharoImporterTask >> defaultImportingContext [
 	^ context
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixStPharoImporterTask >> description [
 
 	^ 'Importing <1p> packages from Smalltalk' expandMacrosWith: self packages size
 ]
 
-{ #category : #setting }
+{ #category : 'setting' }
 FamixStPharoImporterTask >> doNotRunCandidateOperator [
 
 	candidateOperator := false
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixStPharoImporterTask >> factory [
 
 	^ factory ifNil: [ factory := self model factory ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FamixStPharoImporterTask >> initialize [
 
 	super initialize.
@@ -136,25 +138,25 @@ FamixStPharoImporterTask >> initialize [
 	packages := OrderedCollection new.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixStPharoImporterTask >> length [ 
 	 
 	^0	"dummy value since we are a task holder"
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixStPharoImporterTask >> model [ 
 	 
 	^model ifNil: [model := MooseModel new name: self modelName; yourself]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixStPharoImporterTask >> model: mooseModel [ 
 	 
 	model := mooseModel
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixStPharoImporterTask >> modelName [
 
 	^'<1s> package<2#:s>' 
@@ -162,12 +164,12 @@ FamixStPharoImporterTask >> modelName [
 		with: self packages size
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixStPharoImporterTask >> packages [
 	^packages
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixStPharoImporterTask >> packagesString [ 
 	 
 	| stream | 
@@ -181,32 +183,32 @@ FamixStPharoImporterTask >> packagesString [
 	^stream contents
 ]
 
-{ #category : #setting }
+{ #category : 'setting' }
 FamixStPharoImporterTask >> runCandidateOperator [
 
 	candidateOperator := true
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixStPharoImporterTask >> runWithProgress [
 
 	self withProgress.
 	self run.
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixStPharoImporterTask >> updateModelName [ 
 	 
 	self model name: self modelName
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixStPharoImporterTask >> withProgress [
 
 	runSelector := #runWithProgress
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixStPharoImporterTask >> withoutProgress [
 
 	runSelector := #run

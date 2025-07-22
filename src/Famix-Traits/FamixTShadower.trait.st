@@ -36,14 +36,16 @@ The opposite of a shadower is a shadowable.
 
 "
 Trait {
-	#name : #FamixTShadower,
+	#name : 'FamixTShadower',
 	#instVars : [
 		'#shadowedEntity => FMOne type: #FamixTShadowable opposite: #shadowingEntities'
 	],
-	#category : #'Famix-Traits-Shadowing'
+	#category : 'Famix-Traits-Shadowing',
+	#package : 'Famix-Traits',
+	#tag : 'Shadowing'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTShadower classSide >> annotation [
 
 	<FMClass: #TShadower super: #Object>
@@ -52,14 +54,14 @@ FamixTShadower classSide >> annotation [
 	^ self
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FamixTShadower >> accept: aVisitor [
 
 	<generated>
 	^ aVisitor visitFamixTShadower: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTShadower >> shadowedEntity [
 	"Relation named: #shadowedEntity type: #FamixTShadowable opposite: #shadowingEntities"
 
@@ -68,7 +70,7 @@ FamixTShadower >> shadowedEntity [
 	^ shadowedEntity
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTShadower >> shadowedEntity: anObject [
 
 	<generated>

@@ -23,14 +23,16 @@
 
 "
 Class {
-	#name : #FamixJavaEntityTyping,
-	#superclass : #FamixJavaEntity,
+	#name : 'FamixJavaEntityTyping',
+	#superclass : 'FamixJavaEntity',
 	#traits : 'FamixTEntityTyping',
 	#classTraits : 'FamixTEntityTyping classTrait',
-	#category : #'Famix-Java-Entities-Entities'
+	#category : 'Famix-Java-Entities-Entities',
+	#package : 'Famix-Java-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixJavaEntityTyping class >> annotation [
 
 	<FMClass: #EntityTyping super: #FamixJavaEntity>
@@ -39,7 +41,7 @@ FamixJavaEntityTyping class >> annotation [
 	^ self
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FamixJavaEntityTyping >> accept: aVisitor [
 
 	<generated>

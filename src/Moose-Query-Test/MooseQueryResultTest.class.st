@@ -2,22 +2,23 @@
 A MooseQueryResultTest is a test class for testing the behavior of MooseQueryResult
 "
 Class {
-	#name : #MooseQueryResultTest,
-	#superclass : #TestCase,
-	#category : #'Moose-Query-Test'
+	#name : 'MooseQueryResultTest',
+	#superclass : 'TestCase',
+	#category : 'Moose-Query-Test',
+	#package : 'Moose-Query-Test'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 MooseQueryResultTest class >> isAbstract [
 	^ self = MooseQueryResultTest
 ]
 
-{ #category : #helper }
+{ #category : 'helper' }
 MooseQueryResultTest >> actualClass [
 	^ self subclassResponsibility
 ]
 
-{ #category : #helper }
+{ #category : 'helper' }
 MooseQueryResultTest >> newSimpleInstance [
 	^ self actualClass
 		on:
@@ -28,7 +29,7 @@ MooseQueryResultTest >> newSimpleInstance [
 		withAll: #(1 2 3)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryResultTest >> testCollect [
 	| group result |
 	group := self newSimpleInstance.
@@ -38,7 +39,7 @@ MooseQueryResultTest >> testCollect [
 	self deny: group identicalTo: result
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryResultTest >> testEquality [
 	| result1 result2 |
 	result1 := self newSimpleInstance.
@@ -47,7 +48,7 @@ MooseQueryResultTest >> testEquality [
 	self assert: result1 equals: result2
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryResultTest >> testReject [
 	| group result |
 	group := self newSimpleInstance.
@@ -58,7 +59,7 @@ MooseQueryResultTest >> testReject [
 	self deny: group identicalTo: result
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryResultTest >> testSelect [
 	| group result |
 	group := self newSimpleInstance.

@@ -13,14 +13,16 @@ An association that is linked to a ParameterConcretization
 
 "
 Trait {
-	#name : #FamixTParametricAssociation,
+	#name : 'FamixTParametricAssociation',
 	#instVars : [
 		'#concretizations => FMMany type: #FamixTConcretization opposite: #triggeringAssociation'
 	],
-	#category : #'Famix-Traits-Parametrics'
+	#category : 'Famix-Traits-Parametrics',
+	#package : 'Famix-Traits',
+	#tag : 'Parametrics'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTParametricAssociation classSide >> annotation [
 
 	<FMClass: #TParametricAssociation super: #Object>
@@ -29,20 +31,20 @@ FamixTParametricAssociation classSide >> annotation [
 	^ self
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FamixTParametricAssociation >> accept: aVisitor [
 
 	<generated>
 	^ aVisitor visitFamixTParametricAssociation: self
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTParametricAssociation >> addConcretization: anObject [
 	<generated>
 	^ self concretizations add: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTParametricAssociation >> concretizations [
 	"Relation named: #concretizations type: #FamixTConcretization opposite: #triggeringAssociation"
 
@@ -52,14 +54,14 @@ FamixTParametricAssociation >> concretizations [
 	^ concretizations
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTParametricAssociation >> concretizations: anObject [
 
 	<generated>
 	concretizations value: anObject
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTParametricAssociation >> isParametricAssociation [
 
 	<generated>

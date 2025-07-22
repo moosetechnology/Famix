@@ -1,15 +1,16 @@
 Class {
-	#name : #SmalltalkModelTestResource,
-	#superclass : #MooseModelTestResource,
-	#category : #'Moose-SmalltalkImporter-Core-Tests'
+	#name : 'SmalltalkModelTestResource',
+	#superclass : 'MooseModelTestResource',
+	#category : 'Moose-SmalltalkImporter-Core-Tests',
+	#package : 'Moose-SmalltalkImporter-Core-Tests'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 SmalltalkModelTestResource class >> isAbstract [
 	^ self = SmalltalkModelTestResource
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SmalltalkModelTestResource >> modelClass [
 	^ FamixStModel
 ]

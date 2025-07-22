@@ -1,6 +1,6 @@
 Class {
-	#name : #FamixTest3Generator,
-	#superclass : #FamixBasicInfrastructureGenerator,
+	#name : 'FamixTest3Generator',
+	#superclass : 'FamixBasicInfrastructureGenerator',
 	#instVars : [
 		'classEntity',
 		'primitiveType',
@@ -15,22 +15,23 @@ Class {
 		'package',
 		'parametricClass'
 	],
-	#category : #'Famix-TestGenerators'
+	#category : 'Famix-TestGenerators',
+	#package : 'Famix-TestGenerators'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest3Generator class >> packageName [
 
 	^ #'Famix-Test3-Entities'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest3Generator class >> prefix [
 
 	^ #'FamixTest3'
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixTest3Generator >> defineClasses [
 
 	super defineClasses.
@@ -49,7 +50,7 @@ FamixTest3Generator >> defineClasses [
 	parametricClass := builder newClassNamed: #ParametricClass.
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixTest3Generator >> defineHierarchy [
 
 	super defineHierarchy.
