@@ -1,13 +1,14 @@
 Class {
-	#name : #LANWorkStation,
-	#superclass : #LANNode,
+	#name : 'LANWorkStation',
+	#superclass : 'LANNode',
 	#instVars : [
 		'type'
 	],
-	#category : #'Moose-TestResources-LAN'
+	#category : 'Moose-TestResources-LAN',
+	#package : 'Moose-TestResources-LAN'
 }
 
-{ #category : #'sending-receiving' }
+{ #category : 'sending-receiving' }
 LANWorkStation >> accept: thePacket [ 
 	"accept the packet and see if I am the originator. If this is the case, take the packet out because the  
 	addressee is unknown. Print this on the Transcript" 
@@ -22,20 +23,20 @@ LANWorkStation >> accept: thePacket [
 		ifFalse: [self send: thePacket]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 LANWorkStation >> canOriginate [ 
 	 
 	^true
 ]
 
-{ #category : #outputting }
+{ #category : 'outputting' }
 LANWorkStation >> name [ 
 	"added for candidate invocations operator test" 
 	 
 	^super name
 ]
 
-{ #category : #'sending-receiving' }
+{ #category : 'sending-receiving' }
 LANWorkStation >> originate: thePacket [ 
 	"This is how packets get inserted into the network. This is a likely method to be rwritten to permit  
 	packets to be entered in various ways. Currently, I assume that someone alse creates the packet,  

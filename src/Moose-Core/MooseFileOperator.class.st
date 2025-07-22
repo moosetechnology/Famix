@@ -6,20 +6,21 @@ rootFolder has to be used to access the file during the basicRun execution.
 The method the subclasses should implement is basicRun.
 "
 Class {
-	#name : #MooseFileOperator,
-	#superclass : #MooseOperator,
+	#name : 'MooseFileOperator',
+	#superclass : 'MooseOperator',
 	#instVars : [
 		'rootFolder'
 	],
-	#category : #'Moose-Core'
+	#category : 'Moose-Core',
+	#package : 'Moose-Core'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 MooseFileOperator class >> runOn: aMooseModel [
 	^ self shouldNotImplement
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 MooseFileOperator class >> runOn: aMooseModel directory: aFolder [
 	^ self new
 		rootFolder: aFolder;
@@ -27,7 +28,7 @@ MooseFileOperator class >> runOn: aMooseModel directory: aFolder [
 		run
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 MooseFileOperator class >> runWithProgressOn: aMooseModel directory: aFolder [
 	^ self new
 		rootFolder: aFolder;
@@ -35,12 +36,12 @@ MooseFileOperator class >> runWithProgressOn: aMooseModel directory: aFolder [
 		runWithProgress
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseFileOperator >> rootFolder [
 	^ rootFolder
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseFileOperator >> rootFolder: aString [
 	rootFolder := aString
 ]

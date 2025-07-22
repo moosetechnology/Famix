@@ -1,27 +1,29 @@
 Class {
-	#name : #FmxMBModel,
-	#superclass : #FmxMBClass,
-	#category : #'Famix-MetamodelBuilder-Core-Implementation'
+	#name : 'FmxMBModel',
+	#superclass : 'FmxMBClass',
+	#category : 'Famix-MetamodelBuilder-Core-Implementation',
+	#package : 'Famix-MetamodelBuilder-Core',
+	#tag : 'Implementation'
 }
 
-{ #category : #'settings - default' }
+{ #category : 'settings - default' }
 FmxMBModel >> defaultSuperclass [
 	^ self builder environment basicModelSuperclass
 ]
 
-{ #category : #'settings - default' }
+{ #category : 'settings - default' }
 FmxMBModel >> defaultTag [
 	^ self builder configuration modelTag
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FmxMBModel >> generate [
 
 	super generate.
 	self generateModelMethods: self ensureRealClass
 ]
 
-{ #category : #'generating-methods' }
+{ #category : 'generating-methods' }
 FmxMBModel >> generateAnnotationMethodIn: aModelClass [
 
 	aModelClass classSide
@@ -34,7 +36,7 @@ FmxMBModel >> generateAnnotationMethodIn: aModelClass [
 		classified: 'meta'
 ]
 
-{ #category : #'generating-methods' }
+{ #category : 'generating-methods' }
 FmxMBModel >> generateFileImportMethodsIn: aModelClass [
 
 	self builder configuration shouldGenerateFileImportHelpers ifFalse: [ 
@@ -54,7 +56,7 @@ FmxMBModel >> generateFileImportMethodsIn: aModelClass [
 		classified: 'accessing'
 ]
 
-{ #category : #'generating-methods' }
+{ #category : 'generating-methods' }
 FmxMBModel >> generateModelMethods: aModelClass [
 
 	self generateAnnotationMethodIn: aModelClass.
@@ -62,7 +64,7 @@ FmxMBModel >> generateModelMethods: aModelClass [
 	self generateSubmetamodelsMethodIn: aModelClass
 ]
 
-{ #category : #'generating-methods' }
+{ #category : 'generating-methods' }
 FmxMBModel >> generateRootMetamodelMethodIn: aClass [
 
 	"no need to define the method #metamodel in the #Model entity
@@ -71,7 +73,7 @@ FmxMBModel >> generateRootMetamodelMethodIn: aClass [
 	
 ]
 
-{ #category : #'generating-methods' }
+{ #category : 'generating-methods' }
 FmxMBModel >> generateSubmetamodelsMethodIn: aModelClass [
 
 	self builder allSubBuilders ifNotEmpty: [ :subBuilders | 
@@ -90,7 +92,7 @@ FmxMBModel >> generateSubmetamodelsMethodIn: aModelClass [
 			classified: 'accessing' ]
 ]
 
-{ #category : #'generating-methods' }
+{ #category : 'generating-methods' }
 FmxMBModel >> generateTestingMethodsIn: aClass [
 
 	"No need to define the testing methods in the #Model entity
@@ -99,13 +101,13 @@ FmxMBModel >> generateTestingMethodsIn: aClass [
 	
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FmxMBModel >> isModelClass [
 
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBModel >> name [
 	^ super name ifNil: [ #'Model' ]
 ]

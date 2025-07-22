@@ -33,14 +33,16 @@
 
 "
 Class {
-	#name : #MooseMSEImporterTestAttribute,
-	#superclass : #MooseMSEImporterTestNamedEntity,
+	#name : 'MooseMSEImporterTestAttribute',
+	#superclass : 'MooseMSEImporterTestNamedEntity',
 	#traits : 'FamixTAttribute + FamixTSourceEntity',
 	#classTraits : 'FamixTAttribute classTrait + FamixTSourceEntity classTrait',
-	#category : #'Moose-Core-Tests-Entities-Entities'
+	#category : 'Moose-Core-Tests-Entities-Entities',
+	#package : 'Moose-Core-Tests-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 MooseMSEImporterTestAttribute class >> annotation [
 
 	<FMClass: #Attribute super: #MooseMSEImporterTestNamedEntity>

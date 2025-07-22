@@ -23,17 +23,19 @@
 
 "
 Trait {
-	#name : #FamixTInheritance,
+	#name : 'FamixTInheritance',
 	#instVars : [
 		'#subclass => FMOne type: #FamixTWithInheritances opposite: #superInheritances',
 		'#superclass => FMOne type: #FamixTWithInheritances opposite: #subInheritances'
 	],
 	#traits : 'FamixTAssociation',
 	#classTraits : 'FamixTAssociation classTrait',
-	#category : #'Famix-Traits-Inheritance'
+	#category : 'Famix-Traits-Inheritance',
+	#package : 'Famix-Traits',
+	#tag : 'Inheritance'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTInheritance classSide >> annotation [
 
 	<FMClass: #TInheritance super: #Object>
@@ -42,14 +44,14 @@ FamixTInheritance classSide >> annotation [
 	^ self
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FamixTInheritance >> accept: aVisitor [
 
 	<generated>
 	^ aVisitor visitFamixTInheritance: self
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixTInheritance >> displayStringOn: aStream [
 
 	self subclass displayStringOn: aStream.
@@ -57,14 +59,14 @@ FamixTInheritance >> displayStringOn: aStream [
 	self superclass displayStringOn: aStream
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTInheritance >> isInheritance [
 
 	<generated>
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTInheritance >> subclass [
 	"Relation named: #subclass type: #FamixTWithInheritances opposite: #superInheritances"
 
@@ -74,14 +76,14 @@ FamixTInheritance >> subclass [
 	^ subclass
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTInheritance >> subclass: anObject [
 
 	<generated>
 	subclass := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTInheritance >> superclass [
 	"Relation named: #superclass type: #FamixTWithInheritances opposite: #subInheritances"
 
@@ -91,7 +93,7 @@ FamixTInheritance >> superclass [
 	^ superclass
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTInheritance >> superclass: anObject [
 
 	<generated>

@@ -2,8 +2,8 @@
 Represents a property referencing another entity
 "
 Class {
-	#name : #FmxMBRelationSide,
-	#superclass : #FmxMBProperty,
+	#name : 'FmxMBRelationSide',
+	#superclass : 'FmxMBProperty',
 	#traits : 'FmxMBRelationSideTrait',
 	#classTraits : 'FmxMBRelationSideTrait classTrait',
 	#instVars : [
@@ -17,24 +17,26 @@ Class {
 		'target',
 		'generationStrategy'
 	],
-	#category : #'Famix-MetamodelBuilder-Core-Implementation'
+	#category : 'Famix-MetamodelBuilder-Core-Implementation',
+	#package : 'Famix-MetamodelBuilder-Core',
+	#tag : 'Implementation'
 }
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FmxMBRelationSide >> acceptVisitor: aVisitor [
 
 	<ignoreForCoverage>
 	^ aVisitor visitRelationSide: self.
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 FmxMBRelationSide >> asRelationSideNamed: aPropertyName [
 
 	"ignore the proposed name"
 	^ self 
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FmxMBRelationSide >> asSlot [
 	self hasRelation ifFalse: [ FmxMBIncompletePropertyDefiniton signal ].
 
@@ -45,51 +47,51 @@ FmxMBRelationSide >> asSlot [
 		opposite: self oppositeName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBRelationSide >> cardinality [
 	^ cardinality
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBRelationSide >> cardinality: anObject [
 	cardinality := anObject
 ]
 
-{ #category : #properties }
+{ #category : 'properties' }
 FmxMBRelationSide >> container [
 	
 	self withNavigationOf: self relation.
 	container := true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBRelationSide >> container: anObject [
 	container := anObject
 ]
 
-{ #category : #properties }
+{ #category : 'properties' }
 FmxMBRelationSide >> derived [
 	derived := true
 ]
 
-{ #category : #properties }
+{ #category : 'properties' }
 FmxMBRelationSide >> derived: anObject [
 	derived := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBRelationSide >> from [
 
 	^ self relation from
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FmxMBRelationSide >> generateGetterIn: aClassOrTrait [
 
 	^ generationStrategy generateGetterIn: aClassOrTrait for: self
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FmxMBRelationSide >> generateSetterIn: aClassOrTrait [
 
 	self generationStrategy generateSetterIn: aClassOrTrait for: self
@@ -97,22 +99,22 @@ FmxMBRelationSide >> generateSetterIn: aClassOrTrait [
 	
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBRelationSide >> generationStrategy [
 	^ generationStrategy
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBRelationSide >> generationStrategy: anObject [
 	generationStrategy := anObject
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FmxMBRelationSide >> hasRelation [
 	^ self relation isNotNil
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FmxMBRelationSide >> initialize [
 	super initialize.
 
@@ -125,107 +127,107 @@ FmxMBRelationSide >> initialize [
 	self makeStandard
 ]
 
-{ #category : #properties }
+{ #category : 'properties' }
 FmxMBRelationSide >> isContainer [
 
 	^ container
 ]
 
-{ #category : #properties }
+{ #category : 'properties' }
 FmxMBRelationSide >> isDerived [
 
 	^ derived
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FmxMBRelationSide >> isMany [
 
 	^ self cardinality = #many
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FmxMBRelationSide >> isOne [
 
 	^ self cardinality = #one
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FmxMBRelationSide >> isRelation [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FmxMBRelationSide >> isRemote [
 
 	^ self relatedClass isRemote
 ]
 
-{ #category : #properties }
+{ #category : 'properties' }
 FmxMBRelationSide >> isSource [
 
 	^ source
 ]
 
-{ #category : #properties }
+{ #category : 'properties' }
 FmxMBRelationSide >> isTarget [
 
 	^ target
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 FmxMBRelationSide >> makeNonremote [
 
 	self generationStrategy: (FmxMBNonRemoteRelationSideGenerationStrategy for: self)
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 FmxMBRelationSide >> makeRemote [
 
 	self generationStrategy: (FmxMBRemoteRelationSideGenerationStrategy for: self).
 	self isRemote: true.
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 FmxMBRelationSide >> makeStandard [
 
 	self generationStrategy: (FmxMBStandardRelationSideGenerationStrategy for: self)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBRelationSide >> many [
 
 	cardinality := #many
 ]
 
-{ #category : #properties }
+{ #category : 'properties' }
 FmxMBRelationSide >> noContainer [
 	
 	container := false
 ]
 
-{ #category : #properties }
+{ #category : 'properties' }
 FmxMBRelationSide >> notDerived [
 	
 	derived := false
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBRelationSide >> one [
 
 	cardinality := #one
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBRelationSide >> oppositeName [
 	^ self otherSide name asSymbol
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBRelationSide >> oppositeType [
 	^ (self otherSide builder configuration prefix , self otherSide relatedEntityName) asSymbol
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBRelationSide >> otherSide [
 	| aFromSide |
 	aFromSide := self relation from.
@@ -234,63 +236,63 @@ FmxMBRelationSide >> otherSide [
 		ifFalse: [ aFromSide ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 FmxMBRelationSide >> pluralPropertyName [
 
 	^ self propertyName
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FmxMBRelationSide >> producesSlot [
 
 	^ self generationStrategy producesSlot
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 FmxMBRelationSide >> propertyName [
 
 	^ self relatedClass propertyName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBRelationSide >> relatedClass [
 	^ relatedClass
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBRelationSide >> relatedClass: anObject [
 	relatedClass := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBRelationSide >> relatedEntity [
 
 	^ trait ifNil: [ relatedClass ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBRelationSide >> relatedEntityName [
 
 	^ self relatedEntity name
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBRelationSide >> relation [
 	^ relation
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBRelationSide >> relation: anObject [
 	relation := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBRelationSide >> remoteBuilderDo: aBlock [
 
 	self relatedEntity additionalProperties at: #remoteBuilder ifPresent: aBlock
 ]
 
-{ #category : #'name conversion' }
+{ #category : 'name conversion' }
 FmxMBRelationSide >> singularPropertyName [
 
 	| normalizedName uncapitalized aName |
@@ -309,47 +311,47 @@ FmxMBRelationSide >> singularPropertyName [
 
 ]
 
-{ #category : #properties }
+{ #category : 'properties' }
 FmxMBRelationSide >> source [
 
 	source := true.
 ]
 
-{ #category : #properties }
+{ #category : 'properties' }
 FmxMBRelationSide >> source: aBoolean [
 	source := aBoolean
 ]
 
-{ #category : #properties }
+{ #category : 'properties' }
 FmxMBRelationSide >> target [
 
 	target := true.
 ]
 
-{ #category : #properties }
+{ #category : 'properties' }
 FmxMBRelationSide >> target: anObject [
 	target := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBRelationSide >> to [
 
 	^ self relation to
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBRelationSide >> trait [
 	^ trait
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBRelationSide >> trait: anObject [
 	self relatedEntity ifNotNil: [ :aRelatedEntity | aRelatedEntity removeRelationSide: self ].
 	trait := anObject.
 	trait addRelationSide: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBRelationSide >> type [
 
 	^ (self builder configuration prefix , self relatedEntityName) asSymbol

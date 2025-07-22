@@ -1,6 +1,6 @@
-Extension { #name : #Class }
+Extension { #name : 'Class' }
 
-{ #category : #'*Famix-Smalltalk-Utils' }
+{ #category : '*Famix-Smalltalk-Utils' }
 Class >> mooseName [
 	"asnwer the full moose name"
 

@@ -5,37 +5,39 @@ My edges show hierarchy, containment, invocations and accesses.
 See #buildLegend.
 "
 Class {
-	#name : #FamixTypeGroupSystemAttraction,
-	#superclass : #MooseAbstractVisualization,
+	#name : 'FamixTypeGroupSystemAttraction',
+	#superclass : 'MooseAbstractVisualization',
 	#instVars : [
 		'famixTypeGroup'
 	],
-	#category : #'Famix-Visualizations-Core'
+	#category : 'Famix-Visualizations-Core',
+	#package : 'Famix-Visualizations',
+	#tag : 'Core'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTypeGroupSystemAttraction class >> defaultTitle [
 	^ 'System attraction'
 ]
 
-{ #category : #public }
+{ #category : 'public' }
 FamixTypeGroupSystemAttraction class >> forTypeGroup: aFamixTypeGroup [
 	^ self new
 		famixTypeGroup: aFamixTypeGroup;
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTypeGroupSystemAttraction class >> icon [
 	^ MooseIcons mooseCluster
 ]
 
-{ #category : #colors }
+{ #category : 'colors' }
 FamixTypeGroupSystemAttraction >> attributeColor [
 	^ Color r: 0.3 g: 0.3 b: 1.0
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 FamixTypeGroupSystemAttraction >> build [
 	| classesNodes methodsNodes attributesNodes |
 	classesNodes := self buildClassesNodes.
@@ -54,7 +56,7 @@ FamixTypeGroupSystemAttraction >> build [
 	super build
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 FamixTypeGroupSystemAttraction >> buildAttributesNodes [
 	| attributesNodes |
 	attributesNodes := famixTypeGroup
@@ -69,7 +71,7 @@ FamixTypeGroupSystemAttraction >> buildAttributesNodes [
 	^ attributesNodes
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 FamixTypeGroupSystemAttraction >> buildClassesNodes [
 	| classesNodes |
 	classesNodes := famixTypeGroup
@@ -82,7 +84,7 @@ FamixTypeGroupSystemAttraction >> buildClassesNodes [
 	^ classesNodes
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 FamixTypeGroupSystemAttraction >> buildLegend [
 	| legend |
 	legend := RSLegend new.
@@ -99,7 +101,7 @@ FamixTypeGroupSystemAttraction >> buildLegend [
 	legend build
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 FamixTypeGroupSystemAttraction >> buildMethodsNodes [
 	| methodsNodes |
 	methodsNodes := famixTypeGroup
@@ -113,12 +115,12 @@ FamixTypeGroupSystemAttraction >> buildMethodsNodes [
 	^ methodsNodes
 ]
 
-{ #category : #colors }
+{ #category : 'colors' }
 FamixTypeGroupSystemAttraction >> classColor [
 	^ Color black
 ]
 
-{ #category : #edges }
+{ #category : 'edges' }
 FamixTypeGroupSystemAttraction >> connectAccessesFrom: methodsNodes to: attributesNodes [
 	RSEdgeBuilder line
 		color: self attributeColor muchLighter;
@@ -127,7 +129,7 @@ FamixTypeGroupSystemAttraction >> connectAccessesFrom: methodsNodes to: attribut
 		connectToAll: #accessingMethods
 ]
 
-{ #category : #edges }
+{ #category : 'edges' }
 FamixTypeGroupSystemAttraction >> connectClasses: classesNodes [
 	RSEdgeBuilder line
 		color: self classColor;
@@ -135,7 +137,7 @@ FamixTypeGroupSystemAttraction >> connectClasses: classesNodes [
 		connectTo: #superclass
 ]
 
-{ #category : #edges }
+{ #category : 'edges' }
 FamixTypeGroupSystemAttraction >> connectClasses: classesNodes toAttributes: attributesNodes [
 	RSEdgeBuilder line
 		color: self classColor lighter;
@@ -144,7 +146,7 @@ FamixTypeGroupSystemAttraction >> connectClasses: classesNodes toAttributes: att
 		connectToAll: #attributes
 ]
 
-{ #category : #edges }
+{ #category : 'edges' }
 FamixTypeGroupSystemAttraction >> connectClasses: classesNodes toMethods: methodsNodes [
 	RSEdgeBuilder line
 		color: self classColor lighter;
@@ -153,7 +155,7 @@ FamixTypeGroupSystemAttraction >> connectClasses: classesNodes toMethods: method
 		connectToAll: #methods
 ]
 
-{ #category : #edges }
+{ #category : 'edges' }
 FamixTypeGroupSystemAttraction >> connectInvocations: methodsNodes [
 	RSLineBuilder line
 		borderColor: self methodColor muchLighter;
@@ -161,22 +163,22 @@ FamixTypeGroupSystemAttraction >> connectInvocations: methodsNodes [
 		connectToAll: #invokedMethods
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FamixTypeGroupSystemAttraction >> famixTypeGroup: aTypeGroup [
 	famixTypeGroup := aTypeGroup
 ]
 
-{ #category : #shapes }
+{ #category : 'shapes' }
 FamixTypeGroupSystemAttraction >> largeSizeScale [
 	^ NSScale linear range: {10 . 50}
 ]
 
-{ #category : #colors }
+{ #category : 'colors' }
 FamixTypeGroupSystemAttraction >> methodColor [
 	^ Color r: 1.0 g: 0.3 b: 0.3
 ]
 
-{ #category : #shapes }
+{ #category : 'shapes' }
 FamixTypeGroupSystemAttraction >> shapeForAttribute: anAttribute [
 	^ RSEllipse new
 		model: anAttribute;
@@ -190,7 +192,7 @@ FamixTypeGroupSystemAttraction >> shapeForAttribute: anAttribute [
 		yourself
 ]
 
-{ #category : #shapes }
+{ #category : 'shapes' }
 FamixTypeGroupSystemAttraction >> shapeForClass: aClass [
 	^ RSEllipse new
 		model: aClass;
@@ -200,7 +202,7 @@ FamixTypeGroupSystemAttraction >> shapeForClass: aClass [
 		yourself
 ]
 
-{ #category : #shapes }
+{ #category : 'shapes' }
 FamixTypeGroupSystemAttraction >> shapeForMethod: aMethod [
 	^ RSEllipse new
 		model: aMethod;
@@ -216,7 +218,7 @@ FamixTypeGroupSystemAttraction >> shapeForMethod: aMethod [
 		yourself
 ]
 
-{ #category : #shapes }
+{ #category : 'shapes' }
 FamixTypeGroupSystemAttraction >> smallSizeScale [
 	^ NSScale linear range: {5 . 10}
 ]

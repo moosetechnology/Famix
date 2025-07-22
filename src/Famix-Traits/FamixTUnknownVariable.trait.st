@@ -28,13 +28,15 @@
 
 "
 Trait {
-	#name : #FamixTUnknownVariable,
+	#name : 'FamixTUnknownVariable',
 	#traits : 'FamixTStructuralEntity',
 	#classTraits : 'FamixTStructuralEntity classTrait',
-	#category : #'Famix-Traits-StructuralEntity'
+	#category : 'Famix-Traits-StructuralEntity',
+	#package : 'Famix-Traits',
+	#tag : 'StructuralEntity'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTUnknownVariable classSide >> annotation [
 
 	<FMClass: #TUnknownVariable super: #Object>
@@ -43,7 +45,7 @@ FamixTUnknownVariable classSide >> annotation [
 	^ self
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FamixTUnknownVariable >> accept: aVisitor [
 
 	<generated>

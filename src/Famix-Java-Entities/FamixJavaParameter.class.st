@@ -39,14 +39,16 @@
 
 "
 Class {
-	#name : #FamixJavaParameter,
-	#superclass : #FamixJavaVariable,
+	#name : 'FamixJavaParameter',
+	#superclass : 'FamixJavaVariable',
 	#traits : 'FamixTCanBeFinal + FamixTParameter + FamixTWithComments',
 	#classTraits : 'FamixTCanBeFinal classTrait + FamixTParameter classTrait + FamixTWithComments classTrait',
-	#category : #'Famix-Java-Entities-Entities'
+	#category : 'Famix-Java-Entities-Entities',
+	#package : 'Famix-Java-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixJavaParameter class >> annotation [
 
 	<FMClass: #Parameter super: #FamixJavaVariable>
@@ -55,14 +57,14 @@ FamixJavaParameter class >> annotation [
 	^ self
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FamixJavaParameter >> accept: aVisitor [
 
 	<generated>
 	^ aVisitor visitFamixJavaParameter: self
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixJavaParameter >> mooseNameOn: stream [ 
 	| parent |
 	parent := self parentBehaviouralEntity.
@@ -72,12 +74,12 @@ FamixJavaParameter >> mooseNameOn: stream [
 	self name ifNotNil: [stream nextPutAll: self name]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixJavaParameter >> parentType [
 	^self parentBehaviouralEntity parentType
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixJavaParameter >> printOn: stream [ 
 	| parent |
 	self name ifNotNil: [ stream nextPutAll: self name ].

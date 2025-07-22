@@ -48,13 +48,15 @@ This is the abstract representation of an Exception. It is specific to Java. It 
 
 "
 Trait {
-	#name : #FamixTException,
+	#name : 'FamixTException',
 	#traits : 'FamixTClass + FamixTThrowable',
 	#classTraits : 'FamixTClass classTrait + FamixTThrowable classTrait',
-	#category : #'Famix-Traits-Exception'
+	#category : 'Famix-Traits-Exception',
+	#package : 'Famix-Traits',
+	#tag : 'Exception'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTException classSide >> annotation [
 
 	<FMClass: #TException super: #Object>
@@ -63,14 +65,14 @@ FamixTException classSide >> annotation [
 	^ self
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FamixTException >> accept: aVisitor [
 
 	<generated>
 	^ aVisitor visitFamixTException: self
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTException >> isException [
 
 	<generated>

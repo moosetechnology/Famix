@@ -1,15 +1,17 @@
 Class {
-	#name : #FamixIndexedFileAnchorTest,
-	#superclass : #FamixAbstractFileAnchorTest,
-	#category : #'Famix-Test1-Tests-SourceAnchor'
+	#name : 'FamixIndexedFileAnchorTest',
+	#superclass : 'FamixAbstractFileAnchorTest',
+	#category : 'Famix-Test1-Tests-SourceAnchor',
+	#package : 'Famix-Test1-Tests',
+	#tag : 'SourceAnchor'
 }
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 FamixIndexedFileAnchorTest >> actualClass [
 	^ FamixTest1IndexedFileAnchor
 ]
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 FamixIndexedFileAnchorTest >> anchorForClassTest [
 	| file anchor |
 	file := (FileSystem memory / 'test.java')
@@ -25,7 +27,7 @@ FamixIndexedFileAnchorTest >> anchorForClassTest [
 	^ anchor
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixIndexedFileAnchorTest >> testFullSourceText [
 	| anchor |
 	anchor := self anchorForClassTest
@@ -35,7 +37,7 @@ FamixIndexedFileAnchorTest >> testFullSourceText [
 	self assert: anchor sourceText equals: self sourceCodeForTest
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixIndexedFileAnchorTest >> testLineCountWithCRLF [
 	| file anchor |
 	(file := FileSystem memory / 'test.java')
@@ -49,7 +51,7 @@ FamixIndexedFileAnchorTest >> testLineCountWithCRLF [
 	self assert: anchor lineCount equals: 17
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixIndexedFileAnchorTest >> testLineCountWithoutEndPos [
 	| anchor |
 	anchor := self anchorForClassTest
@@ -58,7 +60,7 @@ FamixIndexedFileAnchorTest >> testLineCountWithoutEndPos [
 	self assert: anchor lineCount equals: 17
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixIndexedFileAnchorTest >> testLineCountWithoutStartPos [
 	| anchor |
 	anchor := self anchorForClassTest
@@ -68,7 +70,7 @@ FamixIndexedFileAnchorTest >> testLineCountWithoutStartPos [
 	self assert: anchor lineCount equals: 7
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixIndexedFileAnchorTest >> testSourceText [
 	| anchor |
 	anchor := self anchorForClassTest
@@ -81,7 +83,7 @@ FamixIndexedFileAnchorTest >> testSourceText [
 	}'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixIndexedFileAnchorTest >> testSourceTextWithoutEndPos [
 	| anchor |
 	anchor := self anchorForClassTest
@@ -99,7 +101,7 @@ FamixIndexedFileAnchorTest >> testSourceTextWithoutEndPos [
 }'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixIndexedFileAnchorTest >> testSourceTextWithoutStartAndEndPos [
 	| anchor |
 	anchor := self anchorForClassTest
@@ -110,7 +112,7 @@ FamixIndexedFileAnchorTest >> testSourceTextWithoutStartAndEndPos [
 	self assert: anchor sourceText equals: self sourceCodeForTest
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixIndexedFileAnchorTest >> testSourceTextWithoutStartPos [
 	| anchor |
 	anchor := self anchorForClassTest

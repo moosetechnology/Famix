@@ -9,18 +9,20 @@ We have 3 generators:
 The generator C will not have a FmxRootEntityCEntity and testing methods should go on FmxRootEntityAEntity and FmxRootEntityBEntity as extensions.
 "
 Class {
-	#name : #FamixGeneratorRootEntityTest,
-	#superclass : #TestCase,
-	#category : #'Famix-MetamodelBuilder-Tests-Tests'
+	#name : 'FamixGeneratorRootEntityTest',
+	#superclass : 'TestCase',
+	#category : 'Famix-MetamodelBuilder-Tests-Tests',
+	#package : 'Famix-MetamodelBuilder-Tests',
+	#tag : 'Tests'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixGeneratorRootEntityTest >> classNamed: aSymbol [
 
 	^ self class environment at: aSymbol ifAbsent: [ self fail: 'The class ' , aSymbol , ' does not exist in the system.' ]
 ]
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 FamixGeneratorRootEntityTest >> generators [
 
 	^ {
@@ -29,20 +31,20 @@ FamixGeneratorRootEntityTest >> generators [
 		  FamixRemoteRootEntityGeneratorC }
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixGeneratorRootEntityTest >> setUp [
 	super setUp.
 	self generators do: #generate
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixGeneratorRootEntityTest >> tearDown [
 
 	self generators do: [ :generator | self packageOrganizer removePackage: generator packageName ].
 	super tearDown
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixGeneratorRootEntityTest >> testEntityClasses [
 
 	self assert: (self classNamed: #FmxRootEntityAEntity) isNotNil.
@@ -52,7 +54,7 @@ FamixGeneratorRootEntityTest >> testEntityClasses [
 		ifPresent: [ self fail: 'We should not have an entity class for the Generator C because all concrete classes inherit from remote entities.' ]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixGeneratorRootEntityTest >> testTestingMethodsOfGeneratorAAndB [
 
 	self assert: ((self classNamed: #FmxRootEntityAEntity) includesSelector: #isEntityA).
@@ -66,7 +68,7 @@ FamixGeneratorRootEntityTest >> testTestingMethodsOfGeneratorAAndB [
 	self assert: (self classNamed: #FmxRootEntityBEntityB) new isEntityB
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixGeneratorRootEntityTest >> testTestingMethodsOfGeneratorC [
 
 	self assert: ((self classNamed: #FmxRootEntityAEntity) includesSelector: #isEntityC).

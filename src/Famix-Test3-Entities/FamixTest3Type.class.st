@@ -29,14 +29,16 @@
 
 "
 Class {
-	#name : #FamixTest3Type,
-	#superclass : #FamixTest3NamedEntity,
+	#name : 'FamixTest3Type',
+	#superclass : 'FamixTest3NamedEntity',
 	#traits : 'FamixTType',
 	#classTraits : 'FamixTType classTrait',
-	#category : #'Famix-Test3-Entities-Entities'
+	#category : 'Famix-Test3-Entities-Entities',
+	#package : 'Famix-Test3-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTest3Type class >> annotation [
 
 	<FMClass: #Type super: #FamixTest3NamedEntity>
@@ -45,7 +47,7 @@ FamixTest3Type class >> annotation [
 	^ self
 ]
 
-{ #category : #groups }
+{ #category : 'groups' }
 FamixTest3Type class >> annotationFamixTest3TypeGroup [
 	<generated>
 	<mooseGroup>

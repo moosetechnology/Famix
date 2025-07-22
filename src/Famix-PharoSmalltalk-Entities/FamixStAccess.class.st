@@ -29,14 +29,16 @@
 
 "
 Class {
-	#name : #FamixStAccess,
-	#superclass : #FamixStEntity,
+	#name : 'FamixStAccess',
+	#superclass : 'FamixStEntity',
 	#traits : 'FamixTAccess',
 	#classTraits : 'FamixTAccess classTrait',
-	#category : #'Famix-PharoSmalltalk-Entities-Entities'
+	#category : 'Famix-PharoSmalltalk-Entities-Entities',
+	#package : 'Famix-PharoSmalltalk-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixStAccess class >> annotation [
 
 	<FMClass: #Access super: #FamixStEntity>

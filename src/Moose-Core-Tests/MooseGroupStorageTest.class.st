@@ -2,12 +2,13 @@
 A MooseGroupStorageTest is a test class for testing the behavior of MooseGroupStorage
 "
 Class {
-	#name : #MooseGroupStorageTest,
-	#superclass : #TestCase,
-	#category : #'Moose-Core-Tests'
+	#name : 'MooseGroupStorageTest',
+	#superclass : 'TestCase',
+	#category : 'Moose-Core-Tests',
+	#package : 'Moose-Core-Tests'
 }
 
-{ #category : #test }
+{ #category : 'test' }
 MooseGroupStorageTest >> testSpecies [
 
 	| groupA anEntity |

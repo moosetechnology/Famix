@@ -11,14 +11,16 @@
 
 "
 Trait {
-	#name : #FamixTWithCompilationUnits,
+	#name : 'FamixTWithCompilationUnits',
 	#instVars : [
 		'#compilationUnit => FMOne type: #FamixTCompilationUnit opposite: #compilationUnitOwner'
 	],
-	#category : #'Famix-Traits-CompilationUnit'
+	#category : 'Famix-Traits-CompilationUnit',
+	#package : 'Famix-Traits',
+	#tag : 'CompilationUnit'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTWithCompilationUnits classSide >> annotation [
 
 	<FMClass: #TWithCompilationUnits super: #Object>
@@ -27,14 +29,14 @@ FamixTWithCompilationUnits classSide >> annotation [
 	^ self
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FamixTWithCompilationUnits >> accept: aVisitor [
 
 	<generated>
 	^ aVisitor visitFamixTWithCompilationUnits: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithCompilationUnits >> compilationUnit [
 	"Relation named: #compilationUnit type: #FamixTCompilationUnit opposite: #compilationUnitOwner"
 
@@ -43,7 +45,7 @@ FamixTWithCompilationUnits >> compilationUnit [
 	^ compilationUnit
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithCompilationUnits >> compilationUnit: anObject [
 
 	<generated>

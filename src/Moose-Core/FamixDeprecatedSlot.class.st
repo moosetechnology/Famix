@@ -21,32 +21,33 @@ Internal Representation and Key Implementation Points.
 
 "
 Class {
-	#name : #FamixDeprecatedSlot,
-	#superclass : #IndexedSlot,
+	#name : 'FamixDeprecatedSlot',
+	#superclass : 'IndexedSlot',
 	#instVars : [
 		'message'
 	],
-	#category : #'Moose-Core'
+	#category : 'Moose-Core',
+	#package : 'Moose-Core'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixDeprecatedSlot class >> message: aString [
 	^ self new
 		message: aString;
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixDeprecatedSlot >> message [
 	^ message
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixDeprecatedSlot >> message: anObject [
 	message := anObject
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixDeprecatedSlot >> printOn: aStream [
 	aStream
 		store: self name;
@@ -57,7 +58,7 @@ FamixDeprecatedSlot >> printOn: aStream [
 		store: self message
 ]
 
-{ #category : #'meta-object-protocol' }
+{ #category : 'meta-object-protocol' }
 FamixDeprecatedSlot >> read: anObject [
 
 	"In case this is ShiftClassInstaller then we are migrating the instances and we should not raise a deprecation"
@@ -70,7 +71,7 @@ FamixDeprecatedSlot >> read: anObject [
 	super read: anObject
 ]
 
-{ #category : #'meta-object-protocol' }
+{ #category : 'meta-object-protocol' }
 FamixDeprecatedSlot >> write: aValue to: anObject [
 
 	"In case this is ShiftClassInstaller then we are migrating the instances and we should not raise a deprecation"

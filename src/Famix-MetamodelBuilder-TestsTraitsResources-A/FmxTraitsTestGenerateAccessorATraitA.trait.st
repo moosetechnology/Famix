@@ -1,9 +1,11 @@
 Trait {
-	#name : #FmxTraitsTestGenerateAccessorATraitA,
-	#category : #'Famix-MetamodelBuilder-TestsTraitsResources-A-Traits'
+	#name : 'FmxTraitsTestGenerateAccessorATraitA',
+	#category : 'Famix-MetamodelBuilder-TestsTraitsResources-A-Traits',
+	#package : 'Famix-MetamodelBuilder-TestsTraitsResources-A',
+	#tag : 'Traits'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FmxTraitsTestGenerateAccessorATraitA classSide >> annotation [
 
 	<FMClass: #TraitA super: #Object>

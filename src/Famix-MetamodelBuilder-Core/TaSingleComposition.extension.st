@@ -1,6 +1,6 @@
-Extension { #name : #TaSingleComposition }
+Extension { #name : 'TaSingleComposition' }
 
-{ #category : #'*Famix-MetamodelBuilder-Core' }
+{ #category : '*Famix-MetamodelBuilder-Core' }
 TaSingleComposition >> members [ 
 	^ { self }
 ]

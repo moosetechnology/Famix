@@ -35,16 +35,18 @@ FamixTLocalVariable represents a local variable in the scope of a behavioural en
 
 "
 Trait {
-	#name : #FamixTLocalVariable,
+	#name : 'FamixTLocalVariable',
 	#instVars : [
 		'#parentBehaviouralEntity => FMOne type: #FamixTWithLocalVariables opposite: #localVariables'
 	],
 	#traits : 'FamixTStructuralEntity',
 	#classTraits : 'FamixTStructuralEntity classTrait',
-	#category : #'Famix-Traits-LocalVariable'
+	#category : 'Famix-Traits-LocalVariable',
+	#package : 'Famix-Traits',
+	#tag : 'LocalVariable'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTLocalVariable classSide >> annotation [
 
 	<FMClass: #TLocalVariable super: #Object>
@@ -53,14 +55,14 @@ FamixTLocalVariable classSide >> annotation [
 	^ self
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FamixTLocalVariable >> accept: aVisitor [
 
 	<generated>
 	^ aVisitor visitFamixTLocalVariable: self
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixTLocalVariable >> displayStringOn: aStream [
 
 	self name ifNotNil: [ :n | aStream << n << ' in ' ].
@@ -68,14 +70,14 @@ FamixTLocalVariable >> displayStringOn: aStream [
 		pbe displayStringOn: aStream ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTLocalVariable >> isLocalVariable [
 
 	<generated>
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTLocalVariable >> parentBehaviouralEntity [
 	"Relation named: #parentBehaviouralEntity type: #FamixTWithLocalVariables opposite: #localVariables"
 
@@ -85,7 +87,7 @@ FamixTLocalVariable >> parentBehaviouralEntity [
 	^ parentBehaviouralEntity
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTLocalVariable >> parentBehaviouralEntity: anObject [
 
 	parentBehaviouralEntity := anObject.
@@ -94,7 +96,7 @@ FamixTLocalVariable >> parentBehaviouralEntity: anObject [
 
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FamixTLocalVariable >> parentBehaviouralEntityGroup [
 	<generated>
 	<navigation: 'ParentBehaviouralEntity'>

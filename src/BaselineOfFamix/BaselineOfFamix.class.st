@@ -5,15 +5,16 @@ Description
 Baseline for the Famix project
 "
 Class {
-	#name : #BaselineOfFamix,
-	#superclass : #BaselineOf,
+	#name : 'BaselineOfFamix',
+	#superclass : 'BaselineOf',
 	#instVars : [
 		'repository'
 	],
-	#category : #BaselineOfFamix
+	#category : 'BaselineOfFamix',
+	#package : 'BaselineOfFamix'
 }
 
-{ #category : #baselines }
+{ #category : 'baselines' }
 BaselineOfFamix >> baseline: spec [
 	"In P12 the need of this hack got removed and now Metacello is able to give us the URL itself. Once P11 will not be maintained for Moose we can remove this check and the method #packageRepositoryURL we are overriding."
 
@@ -29,7 +30,7 @@ BaselineOfFamix >> baseline: spec [
 		self groups: spec ]
 ]
 
-{ #category : #dependencies }
+{ #category : 'dependencies' }
 BaselineOfFamix >> collectionExtensions: spec [
 	spec
 		baseline: 'CollectionExtensions'
@@ -38,7 +39,7 @@ BaselineOfFamix >> collectionExtensions: spec [
 				repository: 'github://pharo-contributions/CollectionExtensions:v1.x.x/src' ]
 ]
 
-{ #category : #dependencies }
+{ #category : 'dependencies' }
 BaselineOfFamix >> deepTraverser: spec [
 	spec
 		baseline: 'DeepTraverser'
@@ -47,7 +48,7 @@ BaselineOfFamix >> deepTraverser: spec [
 				repository: 'github://pharo-contributions/DeepTraverser:v1.x.x/src' ]
 ]
 
-{ #category : #baselines }
+{ #category : 'baselines' }
 BaselineOfFamix >> dependencies: spec [
 
 	self
@@ -62,7 +63,7 @@ BaselineOfFamix >> dependencies: spec [
 	self fame: spec
 ]
 
-{ #category : #dependencies }
+{ #category : 'dependencies' }
 BaselineOfFamix >> fame: spec [
 	"We load Fame development version for new Moose images."
 
@@ -77,7 +78,7 @@ BaselineOfFamix >> fame: spec [
 			('github://moosetechnology/Fame:{1}/src' format: { version }) ]
 ]
 
-{ #category : #baselines }
+{ #category : 'baselines' }
 BaselineOfFamix >> groups: spec [
 
 	^ spec
@@ -123,17 +124,17 @@ BaselineOfFamix >> groups: spec [
 			     'Moose-Importers-Tests' )
 ]
 
-{ #category : #dependencies }
+{ #category : 'dependencies' }
 BaselineOfFamix >> kgbTestResources: spec [
 	spec baseline: 'KGBTestResources' with: [ spec repository: 'github://moosetechnology/KGBTestResources:v1.x.x/src' ]
 ]
 
-{ #category : #dependencies }
+{ #category : 'dependencies' }
 BaselineOfFamix >> packageBlueprintTestResources: spec [
 	spec baseline: 'PackageBlueprintTestResources' with: [ spec repository: 'github://moosetechnology/PackageBlueprintTestResources:v1.x.x/src' ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BaselineOfFamix >> packageRepositoryURL [
 
 	^ super packageRepositoryURL ifEmpty: [ 
@@ -147,7 +148,7 @@ BaselineOfFamix >> packageRepositoryURL [
 			   ifNone: [ '' ]) ]
 ]
 
-{ #category : #baselines }
+{ #category : 'baselines' }
 BaselineOfFamix >> packages: spec [
 
 	spec
@@ -223,22 +224,22 @@ BaselineOfFamix >> packages: spec [
 		package: 'FamixDocumentor-TestMetaModel'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BaselineOfFamix >> projectClass [
 	^ MetacelloCypressBaselineProject
 ]
 
-{ #category : #dependencies }
+{ #category : 'dependencies' }
 BaselineOfFamix >> referenceTestResources: spec [
 	spec baseline: 'ReferenceTestResources' with: [ spec repository: 'github://moosetechnology/ReferenceTestResources:v3.x.x/src' ]
 ]
 
-{ #category : #dependencies }
+{ #category : 'dependencies' }
 BaselineOfFamix >> roelTyper: spec [
 	spec baseline: 'RoelTyper' with: [ spec repository: 'github://RMODINRIA/RoelTyper:v1.x.x/src' ]
 ]
 
-{ #category : #dependencies }
+{ #category : 'dependencies' }
 BaselineOfFamix >> singularizePluralize: spec [
 
 	spec baseline: 'SingularizePluralize' with: [ 
@@ -246,7 +247,7 @@ BaselineOfFamix >> singularizePluralize: spec [
 			'github://pharo-contributions/SingularizePluralize:v1.1/src' ]
 ]
 
-{ #category : #dependencies }
+{ #category : 'dependencies' }
 BaselineOfFamix >> talents: spec [
 
 	spec baseline: 'Talents' with: [

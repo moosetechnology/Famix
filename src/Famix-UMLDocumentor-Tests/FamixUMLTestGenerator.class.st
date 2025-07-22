@@ -2,8 +2,8 @@
 I am a Famix meta model generator to test the use of traits.
 "
 Class {
-	#name : #FamixUMLTestGenerator,
-	#superclass : #FamixMetamodelGenerator,
+	#name : 'FamixUMLTestGenerator',
+	#superclass : 'FamixMetamodelGenerator',
 	#instVars : [
 		't1',
 		't2',
@@ -12,22 +12,24 @@ Class {
 		'c1',
 		'c2'
 	],
-	#category : #'Famix-UMLDocumentor-Tests-FamixGenerator'
+	#category : 'Famix-UMLDocumentor-Tests-FamixGenerator',
+	#package : 'Famix-UMLDocumentor-Tests',
+	#tag : 'FamixGenerator'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixUMLTestGenerator class >> packageName [
 
 	^ #'FamixDocumentor-TestMetaModel'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixUMLTestGenerator class >> prefix [
 
 	^ #'FD'
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixUMLTestGenerator >> defineClasses [
 
 	super defineClasses.
@@ -36,7 +38,7 @@ FamixUMLTestGenerator >> defineClasses [
 	c2 := builder newClassNamed: #Class2.
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixUMLTestGenerator >> defineHierarchy [
 
 	super defineHierarchy.
@@ -49,7 +51,7 @@ FamixUMLTestGenerator >> defineHierarchy [
 	t4 --|> t2.
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixUMLTestGenerator >> defineProperties [
 
 	super defineProperties.
@@ -61,7 +63,7 @@ FamixUMLTestGenerator >> defineProperties [
 		comment: 'Another property in the trait'.
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixUMLTestGenerator >> defineRelations [
 
 	super defineRelations.
@@ -69,7 +71,7 @@ FamixUMLTestGenerator >> defineRelations [
 	(c1 property: #myTrait) *- t4
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixUMLTestGenerator >> defineTraits [
 
 	super defineTraits.

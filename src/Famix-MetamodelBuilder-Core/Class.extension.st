@@ -1,26 +1,26 @@
-Extension { #name : #Class }
+Extension { #name : 'Class' }
 
-{ #category : #'*Famix-MetamodelBuilder-Core' }
+{ #category : '*Famix-MetamodelBuilder-Core' }
 Class >> customTraitNames [
 	^ self traits reject: #isMetamodelEntity thenCollect: #name
 ]
 
-{ #category : #'*Famix-MetamodelBuilder-Core' }
+{ #category : '*Famix-MetamodelBuilder-Core' }
 Class >> generatedSlots [
 	^ self localSlots select: #isFameSlot
 ]
 
-{ #category : #'*Famix-MetamodelBuilder-Core' }
+{ #category : '*Famix-MetamodelBuilder-Core' }
 Class >> generatedTraitNames [
 	^ self generatedTraits collect: #name
 ]
 
-{ #category : #'*Famix-MetamodelBuilder-Core' }
+{ #category : '*Famix-MetamodelBuilder-Core' }
 Class >> generatedTraits [
 	^ self traits select: #isMetamodelEntity
 ]
 
-{ #category : #'*Famix-MetamodelBuilder-Core' }
+{ #category : '*Famix-MetamodelBuilder-Core' }
 Class >> needToAdaptTo: aRGClass [
 	| generatedTraitNames generatedTraitDefinitions |
 	generatedTraitNames := self generatedTraitNames.

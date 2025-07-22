@@ -50,14 +50,16 @@
 
 "
 Class {
-	#name : #FamixJavaException,
-	#superclass : #FamixJavaClass,
+	#name : 'FamixJavaException',
+	#superclass : 'FamixJavaClass',
 	#traits : 'FamixTCanImplement + FamixTException + FamixTHasVisibility + FamixTWithAnnotationInstances + FamixTWithTypes',
 	#classTraits : 'FamixTCanImplement classTrait + FamixTException classTrait + FamixTHasVisibility classTrait + FamixTWithAnnotationInstances classTrait + FamixTWithTypes classTrait',
-	#category : #'Famix-Java-Entities-Entities'
+	#category : 'Famix-Java-Entities-Entities',
+	#package : 'Famix-Java-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixJavaException class >> annotation [
 
 	<FMClass: #Exception super: #FamixJavaClass>
@@ -66,7 +68,7 @@ FamixJavaException class >> annotation [
 	^ self
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FamixJavaException >> accept: aVisitor [
 
 	<generated>

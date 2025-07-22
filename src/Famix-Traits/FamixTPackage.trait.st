@@ -27,16 +27,18 @@ Java extractors map Java packages to FamixTNamespaces. They can also mirror the 
 
 "
 Trait {
-	#name : #FamixTPackage,
+	#name : 'FamixTPackage',
 	#instVars : [
 		'#childEntities => FMMany type: #FamixTPackageable opposite: #parentPackage'
 	],
 	#traits : 'FamixTCanBeStub + FamixTNamedEntity + TEntityMetaLevelDependency',
 	#classTraits : 'FamixTCanBeStub classTrait + FamixTNamedEntity classTrait + TEntityMetaLevelDependency classTrait',
-	#category : #'Famix-Traits-Package'
+	#category : 'Famix-Traits-Package',
+	#package : 'Famix-Traits',
+	#tag : 'Package'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTPackage classSide >> annotation [
 
 	<FMClass: #TPackage super: #Object>
@@ -45,27 +47,27 @@ FamixTPackage classSide >> annotation [
 	^ self
 ]
 
-{ #category : #groups }
+{ #category : 'groups' }
 FamixTPackage classSide >> annotationFamixPackageGroup [
 	<generated>
 	<mooseGroup>
 	^ FamixPackageGroup
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FamixTPackage >> accept: aVisitor [
 
 	<generated>
 	^ aVisitor visitFamixTPackage: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTPackage >> addChildEntity: anObject [
 	childEntities add: anObject
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTPackage >> childEntities [
 	"Relation named: #childEntities type: #FamixTPackageable opposite: #parentPackage"
 
@@ -74,21 +76,21 @@ FamixTPackage >> childEntities [
 	^ childEntities
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTPackage >> childEntities: anObject [
 
 	<generated>
 	childEntities value: anObject
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTPackage >> isPackage [
 
 	<generated>
 	^ true
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTPackage >> weightedMethodCount [
 
 	<FMProperty: #weightedMethodCount type: #Number>

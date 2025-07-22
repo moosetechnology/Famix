@@ -25,16 +25,18 @@ I represent a header file. Typically a .h or .hpp
 
 "
 Trait {
-	#name : #FamixTHeader,
+	#name : 'FamixTHeader',
 	#instVars : [
 		'#headerOwner => FMOne type: #FamixTWithHeaders opposite: #header'
 	],
 	#traits : 'FamixTFile',
 	#classTraits : 'FamixTFile classTrait',
-	#category : #'Famix-Traits-Header'
+	#category : 'Famix-Traits-Header',
+	#package : 'Famix-Traits',
+	#tag : 'Header'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTHeader classSide >> annotation [
 
 	<FMClass: #THeader super: #Object>
@@ -43,14 +45,14 @@ FamixTHeader classSide >> annotation [
 	^ self
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FamixTHeader >> accept: aVisitor [
 
 	<generated>
 	^ aVisitor visitFamixTHeader: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTHeader >> headerOwner [
 	"Relation named: #headerOwner type: #FamixTWithHeaders opposite: #header"
 
@@ -59,14 +61,14 @@ FamixTHeader >> headerOwner [
 	^ headerOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTHeader >> headerOwner: anObject [
 
 	<generated>
 	headerOwner := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FamixTHeader >> headerOwnerGroup [
 	<generated>
 	<navigation: 'HeaderOwner'>

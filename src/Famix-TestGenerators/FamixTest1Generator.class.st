@@ -24,8 +24,8 @@ m sourceAnchor: sa1.
 model.
 "
 Class {
-	#name : #FamixTest1Generator,
-	#superclass : #FamixBasicInfrastructureGenerator,
+	#name : 'FamixTest1Generator',
+	#superclass : 'FamixBasicInfrastructureGenerator',
 	#instVars : [
 		'method',
 		'attribute',
@@ -39,22 +39,23 @@ Class {
 		'model',
 		'tCanBeClassSide'
 	],
-	#category : #'Famix-TestGenerators'
+	#category : 'Famix-TestGenerators',
+	#package : 'Famix-TestGenerators'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest1Generator class >> packageName [
 
 	^ #'Famix-Test1-Entities'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest1Generator class >> prefix [
 
 	^ #'FamixTest1'
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixTest1Generator >> defineClasses [
 	super defineClasses.
 
@@ -74,7 +75,7 @@ FamixTest1Generator >> defineClasses [
 	multipleFileAnchor := builder newClassNamed: #MultipleFileAnchor
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixTest1Generator >> defineHierarchy [
 	super defineHierarchy.
 
@@ -124,7 +125,7 @@ FamixTest1Generator >> defineHierarchy [
 		--|> #TWithSourceLanguages.
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixTest1Generator >> defineProperties [
 	super defineProperties.
 	model property: #modelHasProperties type: #Object.
@@ -132,14 +133,14 @@ FamixTest1Generator >> defineProperties [
 		comment: 'Entity can be declared class side i.e. static').	
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixTest1Generator >> defineTraits [ 
 
 	super defineTraits.
 	tCanBeClassSide := builder newTraitNamed: #TCanBeClassSide. 
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixTest1Generator >> newBuilder [
 
 	^ super newBuilder

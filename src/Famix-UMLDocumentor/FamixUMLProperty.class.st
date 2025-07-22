@@ -1,14 +1,16 @@
 Class {
-	#name : #FamixUMLProperty,
-	#superclass : #Object,
+	#name : 'FamixUMLProperty',
+	#superclass : 'Object',
 	#instVars : [
 		'name',
 		'type'
 	],
-	#category : #'Famix-UMLDocumentor-Model'
+	#category : 'Famix-UMLDocumentor-Model',
+	#package : 'Famix-UMLDocumentor',
+	#tag : 'Model'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 FamixUMLProperty class >> from: aFM3Property [
 	^self new
 		initializeFrom: aFM3Property ;
@@ -16,7 +18,7 @@ FamixUMLProperty class >> from: aFM3Property [
 
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FamixUMLProperty >> initializeFrom: aFM3Property [
 
 	self name: aFM3Property name.
@@ -24,25 +26,25 @@ FamixUMLProperty >> initializeFrom: aFM3Property [
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixUMLProperty >> name [
 
 	^ name
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixUMLProperty >> name: anObject [
 
 	name := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixUMLProperty >> type [
 
 	^ type
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixUMLProperty >> type: anObject [
 
 	type := anObject

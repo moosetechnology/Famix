@@ -1,32 +1,34 @@
 Class {
-	#name : #FamixSourceAnchorTest,
-	#superclass : #TestCase,
-	#category : #'Famix-Test1-Tests-SourceAnchor'
+	#name : 'FamixSourceAnchorTest',
+	#superclass : 'TestCase',
+	#category : 'Famix-Test1-Tests-SourceAnchor',
+	#package : 'Famix-Test1-Tests',
+	#tag : 'SourceAnchor'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixSourceAnchorTest class >> isAbstract [
 	^ self = FamixSourceAnchorTest
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixSourceAnchorTest class >> shouldInheritSelectors [
 	^ true
 ]
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 FamixSourceAnchorTest >> actualClass [
 	^ self subclassResponsibility
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixSourceAnchorTest >> testAllSourceAnchors [
 	| anchor |
 	anchor := self actualClass new.
 	self assertCollection: anchor allSourceAnchors hasSameElements: { anchor }
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixSourceAnchorTest >> testAllSourceAnchorsDo [
 	| anchor res |
 	anchor := self actualClass new.
@@ -35,7 +37,7 @@ FamixSourceAnchorTest >> testAllSourceAnchorsDo [
 	self assertCollection: res hasSameElements: {anchor}
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixSourceAnchorTest >> testEntity [
 	| anchor m1 m2 |
 	anchor := self actualClass new.
@@ -51,7 +53,7 @@ FamixSourceAnchorTest >> testEntity [
 	self assert: m2 sourceAnchor equals: anchor
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixSourceAnchorTest >> testImportFileAnchors [
 	| model aMethod |
 	model := FamixTest1Model new.
@@ -83,22 +85,22 @@ FamixSourceAnchorTest >> testImportFileAnchors [
 	self shouldnt: [ model allClasses collect: #numberOfLinesOfCode ] raise: Error
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixSourceAnchorTest >> testIsFileAnchor [
 	self deny: self actualClass new isFileAnchor
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixSourceAnchorTest >> testIsMultiple [
 	^ self deny: self actualClass new isMultiple
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixSourceAnchorTest >> testLineCount [
 	self assert: self actualClass new lineCount equals: self actualClass new notExistentMetricValue
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixSourceAnchorTest >> testSourceText [
 	"source text is empty by default"
 

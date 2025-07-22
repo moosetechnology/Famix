@@ -1,14 +1,15 @@
 Class {
-	#name : #FamixPharoMethodTest,
-	#superclass : #TestCase,
+	#name : 'FamixPharoMethodTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'method',
 		'signature'
 	],
-	#category : #'Famix-PharoSmalltalk-Tests'
+	#category : 'Famix-PharoSmalltalk-Tests',
+	#package : 'Famix-PharoSmalltalk-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 FamixPharoMethodTest >> setUp [
 
 	super setUp.
@@ -19,7 +20,7 @@ FamixPharoMethodTest >> setUp [
 	method signature: signature.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixPharoMethodTest >> testFirstOverridingMethods [
 
 	| overridingMethod otherOverridingMethod localClass subclass subSubclass |
@@ -47,7 +48,7 @@ FamixPharoMethodTest >> testFirstOverridingMethods [
 		hasSameElements: { overridingMethod }
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixPharoMethodTest >> testIsClassSide [
 	| method |
 	method := FamixStMethod new.
@@ -55,7 +56,7 @@ FamixPharoMethodTest >> testIsClassSide [
 	self assert: method isClassSide .
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixPharoMethodTest >> testOverriddenMethod [
 
 	| overriddenMethod localClass superclass |
@@ -75,7 +76,7 @@ FamixPharoMethodTest >> testOverriddenMethod [
 	self assert: method overriddenMethod equals: overriddenMethod
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixPharoMethodTest >> testOverriddenMethodOnlyOneLevel [
 
 	| overriddenMethod localClass superclass superSuperclass otherOverriddenMethod |
@@ -101,7 +102,7 @@ FamixPharoMethodTest >> testOverriddenMethodOnlyOneLevel [
 	self assert: method overriddenMethod equals: overriddenMethod
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixPharoMethodTest >> testOverridingMethods [
 
 	| overridingMethod c1 c2 |
@@ -123,7 +124,7 @@ FamixPharoMethodTest >> testOverridingMethods [
 		hasSameElements: { overridingMethod }
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixPharoMethodTest >> testSeveralOverridingMethods [
 
 	| signature overridingMethod otherOverridingMethod localClass subclass otherSubclass |

@@ -34,14 +34,16 @@
 
 "
 Class {
-	#name : #FamixStGlobalVariable,
-	#superclass : #FamixStNamedEntity,
+	#name : 'FamixStGlobalVariable',
+	#superclass : 'FamixStNamedEntity',
 	#traits : 'FamixTGlobalVariable + FamixTInvocationsReceiver',
 	#classTraits : 'FamixTGlobalVariable classTrait + FamixTInvocationsReceiver classTrait',
-	#category : #'Famix-PharoSmalltalk-Entities-Entities'
+	#category : 'Famix-PharoSmalltalk-Entities-Entities',
+	#package : 'Famix-PharoSmalltalk-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixStGlobalVariable class >> annotation [
 
 	<FMClass: #GlobalVariable super: #FamixStNamedEntity>

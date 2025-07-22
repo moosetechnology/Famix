@@ -1,6 +1,6 @@
 Class {
-	#name : #MooseModelGenerator,
-	#superclass : #FamixMetamodelGenerator,
+	#name : 'MooseModelGenerator',
+	#superclass : 'FamixMetamodelGenerator',
 	#instVars : [
 		'obj',
 		'abstractGroup',
@@ -9,24 +9,25 @@ Class {
 		'model',
 		'entity'
 	],
-	#category : #'Moose-Core-Generator'
+	#category : 'Moose-Core-Generator',
+	#package : 'Moose-Core-Generator'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseModelGenerator class >> packageName [
 
 	<ignoreForCoverage>
 	^ #'Moose-Core'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseModelGenerator class >> prefix [
 
 	<ignoreForCoverage>
 	^ #Moose
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 MooseModelGenerator >> defineClasses [
 
 	super defineClasses.
@@ -41,7 +42,7 @@ MooseModelGenerator >> defineClasses [
 	
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 MooseModelGenerator >> defineHierarchy [
 
 	super defineHierarchy.

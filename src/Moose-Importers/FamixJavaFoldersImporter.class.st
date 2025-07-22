@@ -21,8 +21,8 @@ FamixFolderJavaImporter importFolder: aFileReference
 In the future it might be nice to add ways to import projects of other languages.
 "
 Class {
-	#name : #FamixJavaFoldersImporter,
-	#superclass : #Object,
+	#name : 'FamixJavaFoldersImporter',
+	#superclass : 'Object',
 	#instVars : [
 		'folders',
 		'models'
@@ -30,22 +30,24 @@ Class {
 	#classVars : [
 		'VerveineJPath'
 	],
-	#category : #'Moose-Importers-ParseFolders'
+	#category : 'Moose-Importers-ParseFolders',
+	#package : 'Moose-Importers',
+	#tag : 'ParseFolders'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixJavaFoldersImporter class >> defaultVerveineJDirectory [
 
 	^ FileSystem workingDirectory / 'VerveineJ'
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 FamixJavaFoldersImporter class >> importAndInstallFolder: aFileReference [
 
 	^ self importAndInstallFolders: { aFileReference }
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 FamixJavaFoldersImporter class >> importAndInstallFolders: aCollection [
 	"I'll parse, import in a moose model and install the models  for each folder in the collection."
 
@@ -54,7 +56,7 @@ FamixJavaFoldersImporter class >> importAndInstallFolders: aCollection [
 		  importAndInstall
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 FamixJavaFoldersImporter class >> importFolders: aCollection [
 	"I'll parse and import in a moose model for each folder in the collection."
 
@@ -63,7 +65,7 @@ FamixJavaFoldersImporter class >> importFolders: aCollection [
 		  import
 ]
 
-{ #category : #settings }
+{ #category : 'settings' }
 FamixJavaFoldersImporter class >> importSettingsOn: aBuilder [
 
 	<systemsettings>
@@ -76,7 +78,7 @@ FamixJavaFoldersImporter class >> importSettingsOn: aBuilder [
 		target: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixJavaFoldersImporter class >> verveineJPath [
 	"We check that the path exists because the loading of the settings are setting it in the CI and we end up with a folder that is not the right one :("
 
@@ -85,13 +87,13 @@ FamixJavaFoldersImporter class >> verveineJPath [
 		  ifFalse: [ VerveineJPath := self defaultVerveineJDirectory ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixJavaFoldersImporter class >> verveineJPath: anObject [
 
 	VerveineJPath := anObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FamixJavaFoldersImporter >> ensureVerveineJ [
 
 	self verveineJScript ifAbsent: [
@@ -104,19 +106,19 @@ FamixJavaFoldersImporter >> ensureVerveineJ [
 		self verveineJScript ifAbsent: [ self error: 'Cannot download verveineJ.' ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixJavaFoldersImporter >> folders [
 
 	^ folders
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixJavaFoldersImporter >> folders: anObject [
 
 	folders := anObject
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 FamixJavaFoldersImporter >> generateJsonOfProjects [
 
 	folders
@@ -128,7 +130,7 @@ FamixJavaFoldersImporter >> generateJsonOfProjects [
 		displayingProgress: [ :folder | folder pathString ]
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 FamixJavaFoldersImporter >> import [
 
 	self ensureVerveineJ.
@@ -140,7 +142,7 @@ FamixJavaFoldersImporter >> import [
 	^ models
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 FamixJavaFoldersImporter >> importAndInstall [
 
 	self import.
@@ -150,7 +152,7 @@ FamixJavaFoldersImporter >> importAndInstall [
 	^ models
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 FamixJavaFoldersImporter >> importModels [
 
 	folders
@@ -171,32 +173,32 @@ FamixJavaFoldersImporter >> importModels [
 		displayingProgress: [ :folder | folder basename ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FamixJavaFoldersImporter >> initialize [
 
 	super initialize.
 	models := OrderedCollection new
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 FamixJavaFoldersImporter >> installModels [
 
 	models do: [ :model | model install ]
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 FamixJavaFoldersImporter >> jsonForFolder: folder [
 
 	^ folder basename , '.json'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixJavaFoldersImporter >> verveineJPath [
 
 	^ self class verveineJPath
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixJavaFoldersImporter >> verveineJScript [
 	"Manage windows later?"
 

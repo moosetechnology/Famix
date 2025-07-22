@@ -43,14 +43,16 @@
 
 "
 Class {
-	#name : #FamixTest7Class,
-	#superclass : #FamixTest7Entity,
+	#name : 'FamixTest7Class',
+	#superclass : 'FamixTest7Entity',
 	#traits : 'FamixTClass',
 	#classTraits : 'FamixTClass classTrait',
-	#category : #'Famix-Test7-Entities-Entities'
+	#category : 'Famix-Test7-Entities-Entities',
+	#package : 'Famix-Test7-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTest7Class class >> annotation [
 
 	<FMClass: #Class super: #FamixTest7Entity>

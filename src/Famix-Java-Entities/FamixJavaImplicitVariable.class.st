@@ -33,14 +33,16 @@
 
 "
 Class {
-	#name : #FamixJavaImplicitVariable,
-	#superclass : #FamixJavaVariable,
+	#name : 'FamixJavaImplicitVariable',
+	#superclass : 'FamixJavaVariable',
 	#traits : 'FamixTImplicitVariable',
 	#classTraits : 'FamixTImplicitVariable classTrait',
-	#category : #'Famix-Java-Entities-Entities'
+	#category : 'Famix-Java-Entities-Entities',
+	#package : 'Famix-Java-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixJavaImplicitVariable class >> annotation [
 
 	<FMClass: #ImplicitVariable super: #FamixJavaVariable>
@@ -49,14 +51,14 @@ FamixJavaImplicitVariable class >> annotation [
 	^ self
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FamixJavaImplicitVariable >> accept: aVisitor [
 
 	<generated>
 	^ aVisitor visitFamixJavaImplicitVariable: self
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixJavaImplicitVariable >> mooseNameOn: stream [ 
 	| parent |
 	parent := self parentBehaviouralEntity.
@@ -67,7 +69,7 @@ FamixJavaImplicitVariable >> mooseNameOn: stream [
 	self name ifNotNil: [ stream nextPutAll: self name ]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixJavaImplicitVariable >> printOn: aStream [ 
 	| parent |
 	parent := self parentBehaviouralEntity.

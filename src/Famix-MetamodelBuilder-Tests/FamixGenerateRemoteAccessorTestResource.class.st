@@ -16,31 +16,33 @@ Internal Representation and Key Implementation Points.
 
 "
 Class {
-	#name : #FamixGenerateRemoteAccessorTestResource,
-	#superclass : #TestResource,
+	#name : 'FamixGenerateRemoteAccessorTestResource',
+	#superclass : 'TestResource',
 	#instVars : [
 		'entityA',
 		'entityB'
 	],
-	#category : #'Famix-MetamodelBuilder-Tests-Helpers'
+	#category : 'Famix-MetamodelBuilder-Tests-Helpers',
+	#package : 'Famix-MetamodelBuilder-Tests',
+	#tag : 'Helpers'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 FamixGenerateRemoteAccessorTestResource >> classNamed: aSymbol [
 	^ self class environment at: aSymbol ifAbsent: [ self fail ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixGenerateRemoteAccessorTestResource >> entityA [
 	^ entityA
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixGenerateRemoteAccessorTestResource >> entityB [
 	^ entityB
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixGenerateRemoteAccessorTestResource >> setUp [
 
 	super setUp.
@@ -57,7 +59,7 @@ FamixGenerateRemoteAccessorTestResource >> setUp [
 			entityB }
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixGenerateRemoteAccessorTestResource >> tearDown [
 	[ 'Famix-MetamodelBuilder-TestsResources-A' asPackage removeFromSystem ]
 		on: NotFound

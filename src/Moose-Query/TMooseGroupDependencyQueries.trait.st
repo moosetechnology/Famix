@@ -4,36 +4,38 @@ This trait provides a common, paradigm agnostic vocabulary to query dependencies
 For more informations: https://moosequery.ferlicot.fr/
 "
 Trait {
-	#name : #TMooseGroupDependencyQueries,
-	#category : #'Moose-Query-Traits'
+	#name : 'TMooseGroupDependencyQueries',
+	#category : 'Moose-Query-Traits',
+	#package : 'Moose-Query',
+	#tag : 'Traits'
 }
 
-{ #category : #querying }
+{ #category : 'querying' }
 TMooseGroupDependencyQueries >> queryAllIncoming [
 	^ MooseIncomingQueryResult on: self withAll: (self entities flatCollect: [ :m | m queryAllIncoming ])
 ]
 
-{ #category : #querying }
+{ #category : 'querying' }
 TMooseGroupDependencyQueries >> queryAllOutgoing [
 	^ MooseOutgoingQueryResult on: self withAll: (self entities flatCollect: [ :m | m queryAllOutgoing ])
 ]
 
-{ #category : #querying }
+{ #category : 'querying' }
 TMooseGroupDependencyQueries >> queryIncoming: aFAMIXClassAssociation [
 	^ MooseIncomingQueryResult on: self withAll: (self entities flatCollect: [ :m | m queryIncoming: aFAMIXClassAssociation ])
 ]
 
-{ #category : #querying }
+{ #category : 'querying' }
 TMooseGroupDependencyQueries >> queryLocalIncoming: aFAMIXClassAssociation [
 	^ MooseIncomingQueryResult on: self withAll: (self entities flatCollect: [ :m | m queryLocalIncoming: aFAMIXClassAssociation ])
 ]
 
-{ #category : #querying }
+{ #category : 'querying' }
 TMooseGroupDependencyQueries >> queryLocalOutgoing: aFAMIXClassAssociation [
 	^ MooseOutgoingQueryResult on: self withAll: (self entities flatCollect: [ :m | m queryLocalOutgoing: aFAMIXClassAssociation ])
 ]
 
-{ #category : #querying }
+{ #category : 'querying' }
 TMooseGroupDependencyQueries >> queryOutgoing: aFAMIXClassAssociation [
 	^ MooseOutgoingQueryResult on: self withAll: (self entities flatCollect: [ :m | m queryOutgoing: aFAMIXClassAssociation ])
 ]

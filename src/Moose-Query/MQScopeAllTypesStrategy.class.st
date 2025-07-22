@@ -7,12 +7,14 @@ I am a strategy used by the scoping queries to define that the query should matc
 I am moslty here for performance reasons.
 "
 Class {
-	#name : #MQScopeAllTypesStrategy,
-	#superclass : #MQScopeAbstractStopStrategy,
-	#category : #'Moose-Query-Scoping'
+	#name : 'MQScopeAllTypesStrategy',
+	#superclass : 'MQScopeAbstractStopStrategy',
+	#category : 'Moose-Query-Scoping',
+	#package : 'Moose-Query',
+	#tag : 'Scoping'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 MQScopeAllTypesStrategy >> shouldBeSelected: anEntity [
 	^ true
 ]

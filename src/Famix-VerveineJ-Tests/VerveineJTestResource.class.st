@@ -1,22 +1,23 @@
 Class {
-	#name : #VerveineJTestResource,
-	#superclass : #MooseModelTestResource,
-	#category : #'Famix-VerveineJ-Tests'
+	#name : 'VerveineJTestResource',
+	#superclass : 'MooseModelTestResource',
+	#category : 'Famix-VerveineJ-Tests',
+	#package : 'Famix-VerveineJ-Tests'
 }
 
-{ #category : #hook }
+{ #category : 'hook' }
 VerveineJTestResource >> importModel [
 
 	model importFromMSEStream: self mse readStream
 ]
 
-{ #category : #setup }
+{ #category : 'setup' }
 VerveineJTestResource >> modelClass [
 
 	^ FamixJavaModel
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 VerveineJTestResource >> mse [
 
 	^ '(

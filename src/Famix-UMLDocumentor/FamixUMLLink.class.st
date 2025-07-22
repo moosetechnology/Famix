@@ -1,14 +1,16 @@
 Class {
-	#name : #FamixUMLLink,
-	#superclass : #Object,
+	#name : 'FamixUMLLink',
+	#superclass : 'Object',
 	#instVars : [
 		'source',
 		'target'
 	],
-	#category : #'Famix-UMLDocumentor-Model'
+	#category : 'Famix-UMLDocumentor-Model',
+	#package : 'Famix-UMLDocumentor',
+	#tag : 'Model'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 FamixUMLLink class >> from: aFMSource to: aFMTarget [
 
 	^self new
@@ -16,7 +18,7 @@ FamixUMLLink class >> from: aFMSource to: aFMTarget [
 		yourself
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FamixUMLLink >> initializeFrom: aFMSource to: aFMTarget [
 
 		self source: aFMSource name.
@@ -24,25 +26,25 @@ FamixUMLLink >> initializeFrom: aFMSource to: aFMTarget [
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixUMLLink >> source [
 
 	^ source
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixUMLLink >> source: anObject [
 
 	source := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixUMLLink >> target [
 
 	^ target
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixUMLLink >> target: anObject [
 
 	target := anObject

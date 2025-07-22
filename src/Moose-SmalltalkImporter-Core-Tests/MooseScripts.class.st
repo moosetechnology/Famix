@@ -1,10 +1,11 @@
 Class {
-	#name : #MooseScripts,
-	#superclass : #Object,
-	#category : #'Moose-SmalltalkImporter-Core-Tests'
+	#name : 'MooseScripts',
+	#superclass : 'Object',
+	#category : 'Moose-SmalltalkImporter-Core-Tests',
+	#package : 'Moose-SmalltalkImporter-Core-Tests'
 }
 
-{ #category : #'loading scripts' }
+{ #category : 'loading scripts' }
 MooseScripts class >> createLightModelForLAN [
 	"
 	Time millisecondsToRun: [self createLightModelForLAN]
@@ -31,7 +32,7 @@ MooseScripts class >> createLightModelForLAN [
 	model install
 ]
 
-{ #category : #'loading scripts' }
+{ #category : 'loading scripts' }
 MooseScripts class >> createLightModelForMorphic [
 	"
 	Time millisecondsToRun: [self createLightModelForMorphic]
@@ -59,7 +60,7 @@ MooseScripts class >> createLightModelForMorphic [
 	model install
 ]
 
-{ #category : #'loading scripts' }
+{ #category : 'loading scripts' }
 MooseScripts class >> createLightModelForNetwork [
 	"
 	Time millisecondsToRun: [self createLightModelForNetwork] 
@@ -89,7 +90,7 @@ MooseScripts class >> createLightModelForNetwork [
 	model install
 ]
 
-{ #category : #'loading scripts' }
+{ #category : 'loading scripts' }
 MooseScripts class >> createLightModelForPharo [
 	"
 	MessageTally spyOn: [self createLightModelForPharo]
@@ -118,7 +119,7 @@ MooseScripts class >> createLightModelForPharo [
 	model install
 ]
 
-{ #category : #'loading scripts' }
+{ #category : 'loading scripts' }
 MooseScripts class >> createMediumModelForNetwork [
 	"
 	Time millisecondsToRun: [self createMediumModelForNetwork] 
@@ -135,7 +136,7 @@ MooseScripts class >> createMediumModelForNetwork [
 	model install.
 ]
 
-{ #category : #'loading scripts' }
+{ #category : 'loading scripts' }
 MooseScripts class >> createModelForMorphic [
 	"
 	MessageTally spyOn: [self createModelForMorphic]
@@ -155,7 +156,7 @@ MooseScripts class >> createModelForMorphic [
 	model install.
 ]
 
-{ #category : #'loading scripts' }
+{ #category : 'loading scripts' }
 MooseScripts class >> createModelForNetwork [
 	"
 	MessageTally spyOn: [self createModelForNetwork]
@@ -178,7 +179,7 @@ MooseScripts class >> createModelForNetwork [
 	model install.
 ]
 
-{ #category : #'loading scripts' }
+{ #category : 'loading scripts' }
 MooseScripts class >> createModelForPharo [
 	"self createModelForPharo"
 	
@@ -192,7 +193,7 @@ MooseScripts class >> createModelForPharo [
 	model install.
 ]
 
-{ #category : #'loading scripts' }
+{ #category : 'loading scripts' }
 MooseScripts class >> createModelNamed: modelName with: aCollectionOfPackageNames [
 	
 	| model importer |
@@ -205,7 +206,7 @@ MooseScripts class >> createModelNamed: modelName with: aCollectionOfPackageName
 	^ model install.
 ]
 
-{ #category : #'loading scripts' }
+{ #category : 'loading scripts' }
 MooseScripts class >> createModelNamed: modelName withPackages: packages importer: importClass candidateClass: candidates mergeClassMetaClass: merge contextItems: context [
 
 	| mooseModel importer importingContext |
@@ -228,27 +229,27 @@ MooseScripts class >> createModelNamed: modelName withPackages: packages importe
 	mooseModel install.
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MooseScripts class >> extractPackageNameOutOfMetacelloFile: filename [
 	 ^ (filename includes: $.) 
 		ifTrue: [	filename copyUpToLast: $- ]
 		ifFalse: [ filename ]
 ]
 
-{ #category : #workspace }
+{ #category : 'workspace' }
 MooseScripts class >> fixFileAnchorsForCurrentSystemForType: aFileAnchorClass [ 
 	aFileAnchorClass allInstances do: [:each | 
 		each fileName: (each fileName copyReplaceAll: '\' with: FileSystem disk delimiter asString).
 		each fileName: (each fileName copyReplaceAll: '/' with: FileSystem disk delimiter asString). ]
 ]
 
-{ #category : #'loading scripts' }
+{ #category : 'loading scripts' }
 MooseScripts class >> packageNamesFor: aMatchingString [
 	
 	^ self packageNamesFor: aMatchingString withTestPackages: true
 ]
 
-{ #category : #'loading scripts' }
+{ #category : 'loading scripts' }
 MooseScripts class >> packageNamesFor: aPrefixString withTestPackages: aBoolean [
 	"Retrieve a list of packages based on a prefix. This method can filter (or not) test packages from the results provided they follow the Seaside convetion of <aPrefixString>-Tests*.
 	self packageNamesFor: 'Network*' withTestPackages: false.
@@ -264,7 +265,7 @@ MooseScripts class >> packageNamesFor: aPrefixString withTestPackages: aBoolean 
 	^ packageNames
 ]
 
-{ #category : #'loading scripts' }
+{ #category : 'loading scripts' }
 MooseScripts class >> pharoPackageNames [
 	"self pharoPackageNames"
 
@@ -273,6 +274,6 @@ MooseScripts class >> pharoPackageNames [
 		  #yourself ascending
 ]
 
-{ #category : #notes }
+{ #category : 'notes' }
 MooseScripts >> seeClassSide [
 ]

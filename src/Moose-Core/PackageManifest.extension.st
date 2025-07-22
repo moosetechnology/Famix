@@ -1,6 +1,6 @@
-Extension { #name : #PackageManifest }
+Extension { #name : 'PackageManifest' }
 
-{ #category : #'*Moose-Core' }
+{ #category : '*Moose-Core' }
 PackageManifest class >> shouldBeIncludedByDefaultInMetamodelsWith: aCollectionOfPackages [
 	"My subclasses returning true will be used during the creation of famix's meta models by default. 
 	

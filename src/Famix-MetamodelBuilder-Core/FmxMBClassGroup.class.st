@@ -1,29 +1,31 @@
 Class {
-	#name : #FmxMBClassGroup,
-	#superclass : #FmxMBClass,
+	#name : 'FmxMBClassGroup',
+	#superclass : 'FmxMBClass',
 	#instVars : [
 		'innerClass'
 	],
-	#category : #'Famix-MetamodelBuilder-Core-Implementation'
+	#category : 'Famix-MetamodelBuilder-Core-Implementation',
+	#package : 'Famix-MetamodelBuilder-Core',
+	#tag : 'Implementation'
 }
 
-{ #category : #'settings - default' }
+{ #category : 'settings - default' }
 FmxMBClassGroup >> defaultSuperclass [
 	^ self builder environment basicGroupSuperclass
 ]
 
-{ #category : #'settings - default' }
+{ #category : 'settings - default' }
 FmxMBClassGroup >> defaultTag [
 	^ self builder configuration groupTag
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FmxMBClassGroup >> generate [
 	super generate.
 	self generateMooseGroupAnnotationIn: innerClass ensureRealClass as: self fullName superclass: nil.
 ]
 
-{ #category : #'generating-methods' }
+{ #category : 'generating-methods' }
 FmxMBClassGroup >> generateMooseGroupAnnotationIn: aRealClass as: aName superclass: aSuperclass [
 
 	aRealClass classSide
@@ -34,22 +36,22 @@ FmxMBClassGroup >> generateMooseGroupAnnotationIn: aRealClass as: aName supercla
 		classified: 'groups'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBClassGroup >> innerClass [
 	^ innerClass
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBClassGroup >> innerClass: anObject [
 	innerClass := anObject
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FmxMBClassGroup >> isMetamodelClassGroup [
 	^ true
 ]
 
-{ #category : #'settings - default' }
+{ #category : 'settings - default' }
 FmxMBClassGroup >> name [
 	"I am override to avoid the presence of the T in the generated class"
 

@@ -1,10 +1,11 @@
 Class {
-	#name : #MooseSmalltalkImporterRoelTyperTest,
-	#superclass : #TestCase,
-	#category : #'Moose-SmalltalkImporter-Core-Tests'
+	#name : 'MooseSmalltalkImporterRoelTyperTest',
+	#superclass : 'TestCase',
+	#category : 'Moose-SmalltalkImporter-Core-Tests',
+	#package : 'Moose-SmalltalkImporter-Core-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseSmalltalkImporterRoelTyperTest >> testASTCore [
 	| model importer |
 	model := FamixStModel new.

@@ -1,6 +1,6 @@
-Extension { #name : #FamixTestComposed2CustomEntity5 }
+Extension { #name : 'FamixTestComposed2CustomEntity5' }
 
-{ #category : #'*Famix-TestComposedMetamodel-Entities-accessing' }
+{ #category : '*Famix-TestComposedMetamodel-Entities-accessing' }
 FamixTestComposed2CustomEntity5 >> associations [
 	"Relation named: #associations type: #FamixTestComposedAssociation opposite: #c25"
 
@@ -11,7 +11,7 @@ FamixTestComposed2CustomEntity5 >> associations [
 	^ self attributeAt: #associations ifAbsentPut: [ FMMultivalueLink on: self opposite: #c25: ]
 ]
 
-{ #category : #'*Famix-TestComposedMetamodel-Entities-accessing' }
+{ #category : '*Famix-TestComposedMetamodel-Entities-accessing' }
 FamixTestComposed2CustomEntity5 >> associations: anObject [
 
 	<generated>

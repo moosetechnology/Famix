@@ -1,15 +1,16 @@
 Class {
-	#name : #MoosePharoImporterTaskTest,
-	#superclass : #TestCase,
-	#category : #'Moose-SmalltalkImporter-Core-Tests'
+	#name : 'MoosePharoImporterTaskTest',
+	#superclass : 'TestCase',
+	#category : 'Moose-SmalltalkImporter-Core-Tests',
+	#package : 'Moose-SmalltalkImporter-Core-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 MoosePharoImporterTaskTest >> testDefaultModel [
 	self assert: (FamixStPharoImporterTask new model isKindOf: MooseModel)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MoosePharoImporterTaskTest >> testImportedModelHasSmalltalkMetamodel [
 	| model |
 	model := FamixStPharoImporterTask new

@@ -1,6 +1,6 @@
 Class {
-	#name : #FamixTest1SimpleModelTest,
-	#superclass : #TestCase,
+	#name : 'FamixTest1SimpleModelTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'model',
 		'anchor1',
@@ -16,15 +16,16 @@ Class {
 		'a1',
 		'anchorA1'
 	],
-	#category : #'Famix-Test1-Tests'
+	#category : 'Famix-Test1-Tests',
+	#package : 'Famix-Test1-Tests'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTest1SimpleModelTest class >> isAbstract [
 	^ self = FamixTest1SimpleModelTest
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixTest1SimpleModelTest >> setUp [
 	super setUp.
 

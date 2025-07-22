@@ -4,15 +4,17 @@ I output the model in a text form
 I can outpout in a stream or in a file
 "
 Class {
-	#name : #FamixUMLTextBackend,
-	#superclass : #FamixUMLAbstractBackend,
+	#name : 'FamixUMLTextBackend',
+	#superclass : 'FamixUMLAbstractBackend',
 	#instVars : [
 		'outputStream'
 	],
-	#category : #'Famix-UMLDocumentor-Backend'
+	#category : 'Famix-UMLDocumentor-Backend',
+	#package : 'Famix-UMLDocumentor',
+	#tag : 'Backend'
 }
 
-{ #category : #api }
+{ #category : 'api' }
 FamixUMLTextBackend >> export: entities [
 	"for readibility of results, entities are grouped according to their class"
 
@@ -32,14 +34,14 @@ FamixUMLTextBackend >> export: entities [
 	]
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FamixUMLTextBackend >> generateAssociation: association [
 
 	outputStream 
 		<< association asString
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FamixUMLTextBackend >> generateClass: aClass [
 
 	self generateClassHeader: aClass.
@@ -47,14 +49,14 @@ FamixUMLTextBackend >> generateClass: aClass [
 	self generateClassFooter: aClass.
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FamixUMLTextBackend >> generateClassFooter: aUMLClass [
 
 	outputStream
 		cr.
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FamixUMLTextBackend >> generateClassHeader: aClass [
 
 	outputStream
@@ -62,13 +64,13 @@ FamixUMLTextBackend >> generateClassHeader: aClass [
 		<< aClass name
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FamixUMLTextBackend >> generateClassProperties: aClass [
 
 	aClass properties do: [ :prop | self generateProperty: prop ].
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FamixUMLTextBackend >> generateClasses: entities [
 
 	entities do: [ :each |
@@ -77,17 +79,17 @@ FamixUMLTextBackend >> generateClasses: entities [
 	]
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FamixUMLTextBackend >> generateFooter [
 
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FamixUMLTextBackend >> generateHeader [
 
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FamixUMLTextBackend >> generateInheritance: inheritance [
 
 	outputStream
@@ -97,7 +99,7 @@ FamixUMLTextBackend >> generateInheritance: inheritance [
 		cr
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FamixUMLTextBackend >> generateInheritances: entities [
 
 	entities do: [ :each |
@@ -106,7 +108,7 @@ FamixUMLTextBackend >> generateInheritances: entities [
 	]
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FamixUMLTextBackend >> generateProperty: property [
 
 	outputStream
@@ -117,7 +119,7 @@ FamixUMLTextBackend >> generateProperty: property [
 		cr
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FamixUMLTextBackend >> generateRelations: entities [
 
 	entities do: [ :each |
@@ -126,7 +128,7 @@ FamixUMLTextBackend >> generateRelations: entities [
 	]
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FamixUMLTextBackend >> generateUse: aUseLink [
 
 	outputStream
@@ -136,7 +138,7 @@ FamixUMLTextBackend >> generateUse: aUseLink [
 		cr
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FamixUMLTextBackend >> generateUses: entities [
 
 	entities do: [ :each |
@@ -145,7 +147,7 @@ FamixUMLTextBackend >> generateUses: entities [
 	]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FamixUMLTextBackend >> initialize [
 
 	super initialize.
@@ -153,19 +155,19 @@ FamixUMLTextBackend >> initialize [
 	self outputStream: (WriteStream with: String new).
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixUMLTextBackend >> outputStream [
 
 	^ outputStream
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixUMLTextBackend >> outputStream: anObject [
 
 	outputStream := anObject
 ]
 
-{ #category : #api }
+{ #category : 'api' }
 FamixUMLTextBackend >> toFile: filename [
 
 	outputStream := filename asFileReference writeStream

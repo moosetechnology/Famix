@@ -29,8 +29,8 @@ The backends export the model in some specific format.
 - `FamixUMLRoassalBackend`: creates a Roassal representation of the model (work in progress)
 "
 Class {
-	#name : #FamixUMLDocumentor,
-	#superclass : #Object,
+	#name : 'FamixUMLDocumentor',
+	#superclass : 'Object',
 	#instVars : [
 		'withStub',
 		'umlModel',
@@ -39,22 +39,24 @@ Class {
 		'excludeModelClasses',
 		'shouldGenerateProperties'
 	],
-	#category : #'Famix-UMLDocumentor-Generation'
+	#category : 'Famix-UMLDocumentor-Generation',
+	#package : 'Famix-UMLDocumentor',
+	#tag : 'Generation'
 }
 
-{ #category : #api }
+{ #category : 'api' }
 FamixUMLDocumentor >> beWithStubs [
 
 	withStub := true
 ]
 
-{ #category : #api }
+{ #category : 'api' }
 FamixUMLDocumentor >> beWithoutStubs [
 
 	withStub := false
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 FamixUMLDocumentor >> classesForUML [
 	"if no classes specified, generate the entire meta-model"
 
@@ -69,7 +71,7 @@ FamixUMLDocumentor >> classesForUML [
 
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 FamixUMLDocumentor >> colorForEntity: aFMEntity [
 	"find the color of the meta-model associated with aFMEntity
 	 if is a stub, try to find another color"
@@ -87,32 +89,32 @@ FamixUMLDocumentor >> colorForEntity: aFMEntity [
 
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 FamixUMLDocumentor >> defaultColor: i [
 	"note: colors chosen from Color class>>#defaultColors3"
 
 	^Color perform: ( #(white lightYellow lightGreen veryPaleRed lightBlue lightMagenta lightOrange paleTan lightCyan lightBrown ) at: i )
 ]
 
-{ #category : #api }
+{ #category : 'api' }
 FamixUMLDocumentor >> excludeClasses: aCollection [
 
 	excludeModelClasses := aCollection
 ]
 
-{ #category : #api }
+{ #category : 'api' }
 FamixUMLDocumentor >> exportWith: aBackend [
 
 	^aBackend export: self umlEntities
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 FamixUMLDocumentor >> fm3: metamodel descriptionOf: aClass [
 
 	^metamodel descriptionOf: aClass ifAbsent: [ nil ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 FamixUMLDocumentor >> fm3DescriptionOf: anFM3Element [
 
 	modelColors do: [ :modelColor |
@@ -125,7 +127,7 @@ FamixUMLDocumentor >> fm3DescriptionOf: anFM3Element [
 	^nil
 ]
 
-{ #category : #api }
+{ #category : 'api' }
 FamixUMLDocumentor >> generate [
 
 	modelColors ifEmpty: [ Error signal: 'no meta-model(s) to work on' ].
@@ -137,7 +139,7 @@ FamixUMLDocumentor >> generate [
 	self umlClassesDo: [ :fmClass :umlClass | self generateRelations: fmClass uml: umlClass ].
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FamixUMLDocumentor >> generateClass: aFM3Class [
 
 	| umlClass |
@@ -157,7 +159,7 @@ FamixUMLDocumentor >> generateClass: aFM3Class [
 	
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FamixUMLDocumentor >> generateInheritance: umlLink sub: aFMSubClass super: aFMSuperClass [
 
 	(self shouldGenerateClass: aFMSubClass) ifFalse: [ ^ self ].
@@ -169,7 +171,7 @@ FamixUMLDocumentor >> generateInheritance: umlLink sub: aFMSubClass super: aFMSu
 		put: (umlLink from: aFMSubClass to: aFMSuperClass)
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FamixUMLDocumentor >> generateInheritance: fmClass uml: umlClass [
 
 	fmClass isFM3Trait
@@ -187,7 +189,7 @@ FamixUMLDocumentor >> generateInheritance: fmClass uml: umlClass [
 			super: (self fm3DescriptionOf: trait) ].
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FamixUMLDocumentor >> generateProperties: aFMClass uml: umlClass [
 	"accept FM3Object as a primitive type (#isRoot = true)"
 
@@ -198,7 +200,7 @@ FamixUMLDocumentor >> generateProperties: aFMClass uml: umlClass [
 			umlClass addProperty: (FamixUMLProperty from: prop) ] ]
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FamixUMLDocumentor >> generateRelation: aFMProperty from: fmClass [
 
 	| relatedClass |
@@ -213,7 +215,7 @@ FamixUMLDocumentor >> generateRelation: aFMProperty from: fmClass [
 
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FamixUMLDocumentor >> generateRelations: fmClass uml: umlClass [
 	"umlClass actually not needed, but kept for coherence with other method names"
 
@@ -221,7 +223,7 @@ FamixUMLDocumentor >> generateRelations: fmClass uml: umlClass [
 		self generateRelation: rel from: fmClass ].
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FamixUMLDocumentor >> generateSuperClasses: aFM3Class [
 	
 	aFM3Class isFM3Trait
@@ -231,7 +233,7 @@ FamixUMLDocumentor >> generateSuperClasses: aFM3Class [
 	do: [ :trait | self generateClass: (self fm3DescriptionOf: trait) ].
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FamixUMLDocumentor >> initialize [
 
 	super initialize.
@@ -244,18 +246,18 @@ FamixUMLDocumentor >> initialize [
 	shouldGenerateProperties := true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixUMLDocumentor >> isWithStub [
 
 	^withStub
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixUMLDocumentor >> model [
 	^ modelColors anyOne key
 ]
 
-{ #category : #api }
+{ #category : 'api' }
 FamixUMLDocumentor >> model: aModel [
 
 	| modelColor |
@@ -263,31 +265,31 @@ FamixUMLDocumentor >> model: aModel [
 	modelColors add: (aModel -> modelColor)
 ]
 
-{ #category : #api }
+{ #category : 'api' }
 FamixUMLDocumentor >> model: aModel color: aColor [
 
 	modelColors add: (aModel -> aColor)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixUMLDocumentor >> modelColors [
 
 	^ modelColors
 ]
 
-{ #category : #api }
+{ #category : 'api' }
 FamixUMLDocumentor >> noProperties [
 
 	shouldGenerateProperties := false
 ]
 
-{ #category : #api }
+{ #category : 'api' }
 FamixUMLDocumentor >> onlyClasses: aCollection [
 
 	onlyModelClasses := aCollection
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixUMLDocumentor >> shouldGenerateClass: aFMClass [
 	"should generate if user asked for stub (except for explicitly excluded classes)
 	 or if user asked for this class
@@ -299,7 +301,7 @@ FamixUMLDocumentor >> shouldGenerateClass: aFMClass [
 		  ifFalse: [ self userRequestedClass: aFMClass ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 FamixUMLDocumentor >> umlClassesDo: aBlock [
 	"aBlock takes 2 argument: fmClass and corresponding umlClass.
 	It is applied on all mathcing pairs in umlModel"
@@ -310,19 +312,19 @@ FamixUMLDocumentor >> umlClassesDo: aBlock [
 	]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixUMLDocumentor >> umlEntities [
 
 	^umlModel values
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixUMLDocumentor >> umlModelIncludes: aFM3Entity [
 
 	^umlModel at: aFM3Entity ifPresent: [true] ifAbsent: [false]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixUMLDocumentor >> umlModelIncludesRelation: aFMRelation [
 
 	(self umlModelIncludes: aFMRelation) ifTrue: [ ^true ].
@@ -332,7 +334,7 @@ FamixUMLDocumentor >> umlModelIncludesRelation: aFMRelation [
 	^(self umlModelIncludes: aFMRelation opposite)
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixUMLDocumentor >> userRequestedClass: aFMClass [
 	"requested by user if:
 	 - is not explicitly excluded

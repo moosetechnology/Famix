@@ -20,14 +20,16 @@ Where Map<String,Collection> is the FamixTParametricEntity of anAttribute. Strin
 
 "
 Trait {
-	#name : #FamixTParametricEntity,
+	#name : 'FamixTParametricEntity',
 	#instVars : [
 		'#typeParameters => FMMany type: #FamixTTypeParameter opposite: #genericEntity'
 	],
-	#category : #'Famix-Traits-Parametrics'
+	#category : 'Famix-Traits-Parametrics',
+	#package : 'Famix-Traits',
+	#tag : 'Parametrics'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTParametricEntity classSide >> annotation [
 
 	<FMClass: #TParametricEntity super: #Object>
@@ -36,20 +38,20 @@ FamixTParametricEntity classSide >> annotation [
 	^ self
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FamixTParametricEntity >> accept: aVisitor [
 
 	<generated>
 	^ aVisitor visitFamixTParametricEntity: self
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTParametricEntity >> addTypeParameter: anObject [
 	<generated>
 	^ self typeParameters add: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTParametricEntity >> allTypeParameters [
 
 	^ (OrderedCollection new:
@@ -59,7 +61,7 @@ FamixTParametricEntity >> allTypeParameters [
 		  yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTParametricEntity >> genericEntity [
 
 	self deprecated:
@@ -68,7 +70,7 @@ FamixTParametricEntity >> genericEntity [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTParametricEntity >> isConcreteEntity [
 
 	self deprecated:
@@ -77,7 +79,7 @@ FamixTParametricEntity >> isConcreteEntity [
 	^ false
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTParametricEntity >> isGenericEntity [
 
 	self deprecated:
@@ -86,14 +88,14 @@ FamixTParametricEntity >> isGenericEntity [
 	^ self genericization isNil
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTParametricEntity >> isParametricEntity [
 
 	<generated>
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTParametricEntity >> typeParameters [
 	"Relation named: #typeParameters type: #FamixTTypeParameter opposite: #genericEntity"
 
@@ -103,14 +105,14 @@ FamixTParametricEntity >> typeParameters [
 	^ typeParameters
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTParametricEntity >> typeParameters: anObject [
 
 	<generated>
 	typeParameters value: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTParametricEntity >> usesGenerics [
 
 	self deprecated:

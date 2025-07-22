@@ -13,8 +13,8 @@ Instance Variables:
 
 "
 Class {
-	#name : #RBVisitorForFamixMetrics,
-	#superclass : #OCProgramNodeVisitor,
+	#name : 'RBVisitorForFamixMetrics',
+	#superclass : 'OCProgramNodeVisitor',
 	#instVars : [
 		'numberOfMessageSends',
 		'numberOfStatements',
@@ -25,22 +25,23 @@ Class {
 		'methodEntity',
 		'cyclomaticNumber'
 	],
-	#category : #'Famix-Smalltalk-Utils'
+	#category : 'Famix-Smalltalk-Utils',
+	#package : 'Famix-Smalltalk-Utils'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 RBVisitorForFamixMetrics class >> for: aMethod [
 	^ self new
 		processMethod: aMethod;
 		yourself
 ]
 
-{ #category : #'private-accessing' }
+{ #category : 'private-accessing' }
 RBVisitorForFamixMetrics >> classNameFromMethod [
 	^ self methodEntity parentType name
 ]
 
-{ #category : #'private-accessing' }
+{ #category : 'private-accessing' }
 RBVisitorForFamixMetrics >> compiledMethod [
 	| realSTClass stClass |
 	stClass := FamixSmalltalkNameResolver smalltalkClassFromFamixClassName: self classNameFromMethod ifAbsent: [ nil ].
@@ -48,7 +49,7 @@ RBVisitorForFamixMetrics >> compiledMethod [
 	^ realSTClass compiledMethodAt: self methodEntity name ifAbsent: [  ]
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 RBVisitorForFamixMetrics >> computeCyclomaticNumber: sel [
 	"The following equations defined McCabe Cyclomatic Complexity:
 
@@ -71,7 +72,7 @@ RBVisitorForFamixMetrics >> computeCyclomaticNumber: sel [
 	(#(#ifTrue: #ifFalse: #ifTrue:ifFalse: #ifFalse:ifTrue: #whileTrue #whileTrue: #whileFalse #whileFalse:) includes: sel) ifTrue: [ booleanOperators := 0 ]
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 RBVisitorForFamixMetrics >> countConditionals: sel [
 	
 	(#(#ifTrue: #ifFalse: #ifTrue:ifFalse: #ifFalse:ifTrue: #whileTrue #whileTrue: #whileFalse #whileFalse:)
@@ -79,20 +80,20 @@ RBVisitorForFamixMetrics >> countConditionals: sel [
 		ifTrue: [self numberOfConditionals: self numberOfConditionals + 1]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 RBVisitorForFamixMetrics >> cyclomaticNumber [
 	
 	^cyclomaticNumber
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 RBVisitorForFamixMetrics >> initialize [
 	
 	super initialize.
 	self resetMetricValues
 ]
 
-{ #category : #'source access' }
+{ #category : 'source access' }
 RBVisitorForFamixMetrics >> methodBodyOn: aReadStream [
 	| aux |
 	numberOfLinesOfCode := aReadStream contents occurrencesOf: Character cr.
@@ -103,65 +104,65 @@ RBVisitorForFamixMetrics >> methodBodyOn: aReadStream [
 	numberOfLinesOfCode := numberOfLinesOfCode max: aux
 ]
 
-{ #category : #'private-accessing' }
+{ #category : 'private-accessing' }
 RBVisitorForFamixMetrics >> methodEntity [
 	^ methodEntity
 ]
 
-{ #category : #'private-accessing' }
+{ #category : 'private-accessing' }
 RBVisitorForFamixMetrics >> methodEntity: aMethodEntity [
 	methodEntity := aMethodEntity
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 RBVisitorForFamixMetrics >> numberOfConditionals [
 	
 	^numberOfConditionals
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 RBVisitorForFamixMetrics >> numberOfConditionals: anObject [
 	
 	numberOfConditionals := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 RBVisitorForFamixMetrics >> numberOfLinesOfCode [
 	
 	^numberOfLinesOfCode
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 RBVisitorForFamixMetrics >> numberOfLinesOfCode: anObject [
 	
 	numberOfLinesOfCode := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 RBVisitorForFamixMetrics >> numberOfMessageSends [
 	
 	^numberOfMessageSends
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 RBVisitorForFamixMetrics >> numberOfMessageSends: anObject [
 	
 	numberOfMessageSends := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 RBVisitorForFamixMetrics >> numberOfStatements [
 	
 	^numberOfStatements
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 RBVisitorForFamixMetrics >> numberOfStatements: anObject [
 	
 	numberOfStatements := anObject
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 RBVisitorForFamixMetrics >> processMethod: aMethodEntity [
 
 	self methodEntity: aMethodEntity.
@@ -171,7 +172,7 @@ RBVisitorForFamixMetrics >> processMethod: aMethodEntity [
 		self visitMethodNode: parseTree ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 RBVisitorForFamixMetrics >> resetMetricValues [
 	numberOfMessageSends := 0.
 	numberOfStatements := 0.
@@ -180,19 +181,19 @@ RBVisitorForFamixMetrics >> resetMetricValues [
 	cyclomaticNumber := 1
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 RBVisitorForFamixMetrics >> visitBlockNode: aBlockNode [
 	super visitBlockNode: aBlockNode.
 	numberOfStatements := numberOfStatements + aBlockNode body size
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 RBVisitorForFamixMetrics >> visitCascadeNode: aCascadeNode [
 	numberOfStatements := numberOfStatements + aCascadeNode messages size.
 	^ super visitCascadeNode: aCascadeNode
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 RBVisitorForFamixMetrics >> visitMessageNode: aMessageNode [
 
 	| receiver selector |
@@ -204,7 +205,7 @@ RBVisitorForFamixMetrics >> visitMessageNode: aMessageNode [
 	self computeCyclomaticNumber: selector
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 RBVisitorForFamixMetrics >> visitMethodNode: aMethodNode [
 	
 	" I do not know where this block came from"
@@ -214,7 +215,7 @@ RBVisitorForFamixMetrics >> visitMethodNode: aMethodNode [
 	^ super visitMethodNode: aMethodNode
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 RBVisitorForFamixMetrics >> visitSequenceNode: aSequenceNode [
 	super visitSequenceNode: aSequenceNode.
 	numberOfStatements := numberOfStatements + aSequenceNode statements size

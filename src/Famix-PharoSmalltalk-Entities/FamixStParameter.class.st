@@ -34,14 +34,16 @@
 
 "
 Class {
-	#name : #FamixStParameter,
-	#superclass : #FamixStNamedEntity,
+	#name : 'FamixStParameter',
+	#superclass : 'FamixStNamedEntity',
 	#traits : 'FamixTInvocationsReceiver + FamixTParameter',
 	#classTraits : 'FamixTInvocationsReceiver classTrait + FamixTParameter classTrait',
-	#category : #'Famix-PharoSmalltalk-Entities-Entities'
+	#category : 'Famix-PharoSmalltalk-Entities-Entities',
+	#package : 'Famix-PharoSmalltalk-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixStParameter class >> annotation [
 
 	<FMClass: #Parameter super: #FamixStNamedEntity>
@@ -50,7 +52,7 @@ FamixStParameter class >> annotation [
 	^ self
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixStParameter >> mooseNameOn: stream [ 
 	| parent |
 	parent := self parentBehaviouralEntity.

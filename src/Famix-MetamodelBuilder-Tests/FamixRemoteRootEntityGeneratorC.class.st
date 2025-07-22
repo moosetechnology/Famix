@@ -1,6 +1,6 @@
 Class {
-	#name : #FamixRemoteRootEntityGeneratorC,
-	#superclass : #FamixTestGenerator,
+	#name : 'FamixRemoteRootEntityGeneratorC',
+	#superclass : 'FamixTestGenerator',
 	#instVars : [
 		'fmx',
 		'fmx2',
@@ -8,24 +8,26 @@ Class {
 		'entityA',
 		'entityB'
 	],
-	#category : #'Famix-MetamodelBuilder-Tests-GeneratorRessources'
+	#category : 'Famix-MetamodelBuilder-Tests-GeneratorRessources',
+	#package : 'Famix-MetamodelBuilder-Tests',
+	#tag : 'GeneratorRessources'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixRemoteRootEntityGeneratorC class >> packageName [
 
 	<ignoreForCoverage>
 	^ 'Famix-MetamodelBuilder-Tests-RootEntityC'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixRemoteRootEntityGeneratorC class >> prefix [
 
 	<ignoreForCoverage>
 	^ #FmxRootEntityC
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixRemoteRootEntityGeneratorC class >> submetamodels [
 
 	^ {
@@ -33,7 +35,7 @@ FamixRemoteRootEntityGeneratorC class >> submetamodels [
 		  FamixRemoteRootEntityGeneratorB }
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixRemoteRootEntityGeneratorC >> defineClasses [
 	super defineClasses.
 	fmx := builder newClassNamed: #EntityC.
@@ -47,7 +49,7 @@ FamixRemoteRootEntityGeneratorC >> defineClasses [
 	entityB := self remoteEntity: #Entity withPrefix: #FmxRootEntityB.
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixRemoteRootEntityGeneratorC >> defineHierarchy [
 
 	super defineHierarchy.

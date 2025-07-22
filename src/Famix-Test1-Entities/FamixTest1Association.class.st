@@ -13,14 +13,16 @@
 
 "
 Class {
-	#name : #FamixTest1Association,
-	#superclass : #FamixTest1Entity,
+	#name : 'FamixTest1Association',
+	#superclass : 'FamixTest1Entity',
 	#traits : 'FamixTAssociation',
 	#classTraits : 'FamixTAssociation classTrait',
-	#category : #'Famix-Test1-Entities-Entities'
+	#category : 'Famix-Test1-Entities-Entities',
+	#package : 'Famix-Test1-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTest1Association class >> annotation [
 
 	<FMClass: #Association super: #FamixTest1Entity>
@@ -29,12 +31,12 @@ FamixTest1Association class >> annotation [
 	^ self
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 FamixTest1Association >> source [
 	^ nil
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTest1Association >> target [
 	^ nil
 ]

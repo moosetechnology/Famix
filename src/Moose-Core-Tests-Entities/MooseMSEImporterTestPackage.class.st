@@ -29,14 +29,16 @@
 
 "
 Class {
-	#name : #MooseMSEImporterTestPackage,
-	#superclass : #MooseMSEImporterTestNamedEntity,
+	#name : 'MooseMSEImporterTestPackage',
+	#superclass : 'MooseMSEImporterTestNamedEntity',
 	#traits : 'FamixTPackage + FamixTPackageable + FamixTWithClasses',
 	#classTraits : 'FamixTPackage classTrait + FamixTPackageable classTrait + FamixTWithClasses classTrait',
-	#category : #'Moose-Core-Tests-Entities-Entities'
+	#category : 'Moose-Core-Tests-Entities-Entities',
+	#package : 'Moose-Core-Tests-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 MooseMSEImporterTestPackage class >> annotation [
 
 	<FMClass: #Package super: #MooseMSEImporterTestNamedEntity>

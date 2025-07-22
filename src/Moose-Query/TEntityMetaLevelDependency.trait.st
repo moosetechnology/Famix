@@ -57,39 +57,41 @@ Examples
 
 "
 Trait {
-	#name : #TEntityMetaLevelDependency,
-	#category : #'Moose-Query-Traits'
+	#name : 'TEntityMetaLevelDependency',
+	#category : 'Moose-Query-Traits',
+	#package : 'Moose-Query',
+	#tag : 'Traits'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TEntityMetaLevelDependency classSide >> allChildrenTypesIn: aMetamodel [
 
 	^ aMetamodel additionalProperty: #allChildrenTypes for: self ifAbsentPut: [ self privateAllChildrenTypesIn: aMetamodel ]
 	
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TEntityMetaLevelDependency classSide >> allIncomingAssociationTypesIn: aMetamodel [
 
 	^ aMetamodel additionalProperty: #allIncomingAssociationTypes for: self ifAbsentPut: [ self privateAllIncomingAssociationTypesIn: aMetamodel ]
 	
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TEntityMetaLevelDependency classSide >> allOutgoingAssociationTypesIn: aMetamodel [
 
 	^ aMetamodel additionalProperty: #allOutgoingAssociationTypes for: self ifAbsentPut: [ self privateAllOutgoingAssociationTypesIn: aMetamodel ]
 	
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TEntityMetaLevelDependency classSide >> allParentTypesIn: aMetamodel [
 
 	^ aMetamodel additionalProperty: #allParentTypes for: self ifAbsentPut: [ self privateAllParentTypesIn: aMetamodel ]
 	
 ]
 
-{ #category : #meta }
+{ #category : 'meta' }
 TEntityMetaLevelDependency classSide >> annotation [
 
 	<FMClass: #TEntityMetaLevelDependency super: #Object>
@@ -98,61 +100,61 @@ TEntityMetaLevelDependency classSide >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TEntityMetaLevelDependency classSide >> childrenSelectorsIn: aMetamodel [
 
 	^ aMetamodel additionalProperty: #childrenSelectors for: self ifAbsentPut: [ self privateChildrenSelectorsIn: aMetamodel ]
 	
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TEntityMetaLevelDependency classSide >> childrenTypesIn: aMetamodel [
 	^ aMetamodel additionalProperty: #childrenTypes for: self ifAbsentPut: [ self privateChildrenTypesIn: aMetamodel ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TEntityMetaLevelDependency classSide >> incomingAssociationTypesIn: aMetamodel [
 
 	^ aMetamodel additionalProperty: #incomingAssociationTypes for: self ifAbsentPut: [ self privateIncomingAssociationTypesIn: aMetamodel ]
 	
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TEntityMetaLevelDependency classSide >> incomingMSEPropertiesIn: aMetamodel [
 	"computes all properties that are target of association for self (a class) belonging to aMetamodel"
 
 	^ aMetamodel additionalProperty: #incomingMSEProperties for: self ifAbsentPut: [ self privateIncomingMSEPropertiesIn: aMetamodel ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TEntityMetaLevelDependency classSide >> outgoingAssociationTypesIn: aMetamodel [
 
 	^ aMetamodel additionalProperty: #outgoingAssociationTypes for: self ifAbsentPut: [ self privateOutgoingAssociationTypesIn: aMetamodel ]
 	
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TEntityMetaLevelDependency classSide >> outgoingMSEPropertiesIn: aMetamodel [
 
 	^ aMetamodel additionalProperty: #outgoingMSEProperties for: self ifAbsentPut: [ self privateOutgoingMSEPropertiesIn: aMetamodel ]
 	
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TEntityMetaLevelDependency classSide >> parentSelectorsIn: aMetamodel [
 
 	^ aMetamodel additionalProperty: #parentSelectors for: self ifAbsentPut: [ self privateParentSelectorsIn: aMetamodel ]
 	
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TEntityMetaLevelDependency classSide >> parentTypesIn: aMetamodel [
 
 	^ aMetamodel additionalProperty: #parentTypes for: self ifAbsentPut: [ self privateParentTypesIn: aMetamodel ]
 	
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 TEntityMetaLevelDependency classSide >> privateAllChildrenTypesIn: aMetamodel [
 	"Instead of checking if we are using TEntityMetaLevolDependency it would be better to implement #childrenTypesIn: on Trait, but it is currently impossible because all methods whose selector is present in Trait, Class, Behavior are not copied to users. If we denife the method on Trait then the one of TEntityMetaLevelDependency will not be present in the users."
 
@@ -161,7 +163,7 @@ TEntityMetaLevelDependency classSide >> privateAllChildrenTypesIn: aMetamodel [
 		as: Set) asOrderedCollection
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 TEntityMetaLevelDependency classSide >> privateAllIncomingAssociationTypesIn: aMetamodel [
    ^ (((self allChildrenTypesIn: aMetamodel) flatCollectAsSet: [:each | each implementingClassesIn: aMetamodel ])
 		flatCollectAsSet: [ :each | each incomingAssociationTypesIn: aMetamodel])
@@ -169,7 +171,7 @@ TEntityMetaLevelDependency classSide >> privateAllIncomingAssociationTypesIn: aM
        yourself
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 TEntityMetaLevelDependency classSide >> privateAllOutgoingAssociationTypesIn: aMetamodel [
    ^ (((self allChildrenTypesIn: aMetamodel) flatCollectAsSet: [:each | each implementingClassesIn: aMetamodel ])
 		flatCollectAsSet: [ :each | each outgoingAssociationTypesIn: aMetamodel])
@@ -177,7 +179,7 @@ TEntityMetaLevelDependency classSide >> privateAllOutgoingAssociationTypesIn: aM
        yourself
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 TEntityMetaLevelDependency classSide >> privateAllParentTypesIn: aMetamodel [
 	"Instead of checking if we are using TEntityMetaLevolDependency it would be better to implement #parentTypesIn: on Trait, but it is currently impossible because all methods whose selector is present in Trait, Class, Behavior are not copied to users. If we denife the method on Trait then the one of TEntityMetaLevelDependency will not be present in the users."
 
@@ -186,12 +188,12 @@ TEntityMetaLevelDependency classSide >> privateAllParentTypesIn: aMetamodel [
 		as: Set) asOrderedCollection
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 TEntityMetaLevelDependency classSide >> privateChildrenSelectorsIn: aMetamodel [
 	^ (self allDeclaredPropertiesIn: aMetamodel) select: #isChildrenProperty thenCollect: #implementingSelector
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 TEntityMetaLevelDependency classSide >> privateChildrenTypesIn: aMetamodel [
 	| childrenImplementingClasses childrenUsers |
 	childrenImplementingClasses := ((self allDeclaredPropertiesIn: aMetamodel) select: #isChildrenProperty) collect: #implementingType.
@@ -201,7 +203,7 @@ TEntityMetaLevelDependency classSide >> privateChildrenTypesIn: aMetamodel [
 	^ (childrenImplementingClasses , childrenUsers flatCollect: #withAllSubclasses as: Set) asArray	"<== This could later be #removeDuplicates but it is currently broken on arrays. See https://github.com/pharo-project/pharo/issues/4850"
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 TEntityMetaLevelDependency classSide >> privateIncomingAssociationTypesIn: aMetamodel [
 	"Collects all reified associations for which self class is target.
 	 
@@ -211,7 +213,7 @@ TEntityMetaLevelDependency classSide >> privateIncomingAssociationTypesIn: aMeta
 	^ ((self allDeclaredPropertiesIn: aMetamodel) select: [ :p | p hasOpposite and: [ p opposite isTarget and: [ p isSource not ] ] ]) collect: #implementingType
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 TEntityMetaLevelDependency classSide >> privateIncomingMSEPropertiesIn: aMetamodel [
 
 	"Collects all fame properties defining an incoming dependency to self.
@@ -224,7 +226,7 @@ TEntityMetaLevelDependency classSide >> privateIncomingMSEPropertiesIn: aMetamod
 		  p hasOpposite and: [ p opposite isTarget and: [ p isSource not ] ] ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 TEntityMetaLevelDependency classSide >> privateOutgoingAssociationTypesIn: aMetamodel [
 	"Collects all reified associations for which self class is source.
 	 
@@ -234,7 +236,7 @@ TEntityMetaLevelDependency classSide >> privateOutgoingAssociationTypesIn: aMeta
 	^ ((self allDeclaredPropertiesIn: aMetamodel) select: [ :p | p hasOpposite and: [ p opposite isSource and: [ p isTarget not ] ] ]) collect: #implementingType
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 TEntityMetaLevelDependency classSide >> privateOutgoingMSEPropertiesIn: aMetamodel [
 
 	"Collects all fame properties defining a outgoing dependency to self.
@@ -247,12 +249,12 @@ TEntityMetaLevelDependency classSide >> privateOutgoingMSEPropertiesIn: aMetamod
 		  p hasOpposite and: [ p opposite isSource and: [ p isTarget not ] ] ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 TEntityMetaLevelDependency classSide >> privateParentSelectorsIn: aMetamodel [
 	^ (self allDeclaredPropertiesIn: aMetamodel) select: #isContainer thenCollect: #implementingSelector
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 TEntityMetaLevelDependency classSide >> privateParentTypesIn: aMetamodel [
 	| containerImplementingClasses containerUsers |
 	containerImplementingClasses := (self allDeclaredPropertiesIn: aMetamodel)
@@ -265,7 +267,7 @@ TEntityMetaLevelDependency classSide >> privateParentTypesIn: aMetamodel [
 	^ (containerImplementingClasses , containerUsers flatCollect: #withAllSubclasses as: Set) asArray	"<== This could later be #removeDuplicates but it is currently broken on arrays. See https://github.com/pharo-project/pharo/issues/4850"
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 TEntityMetaLevelDependency >> addAllChildrenIn: aCollection [
 	self children
 		do: [ :each | 
@@ -274,7 +276,7 @@ TEntityMetaLevelDependency >> addAllChildrenIn: aCollection [
 	^ aCollection
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 TEntityMetaLevelDependency >> addAllParentsIn: aCollection [
 	self
 		parentsDo: [ :each | 
@@ -283,7 +285,7 @@ TEntityMetaLevelDependency >> addAllParentsIn: aCollection [
 	^ aCollection
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 TEntityMetaLevelDependency >> addRootParentsIn: aCollection [
 
 	self parentsDo: [ :each |
@@ -293,14 +295,14 @@ TEntityMetaLevelDependency >> addRootParentsIn: aCollection [
 	^ aCollection
 ]
 
-{ #category : #scoping }
+{ #category : 'scoping' }
 TEntityMetaLevelDependency >> allAtAnyScope: aCollectionOfFamixClasses [
 	"I am used to return all the encountered entities (recursively) at matching one of the class scope given as parameter that are up in the containment tree of the metamodel"
 
 	^ self query ancestors recursively ofAnyType: aCollectionOfFamixClasses
 ]
 
-{ #category : #scoping }
+{ #category : 'scoping' }
 TEntityMetaLevelDependency >> allAtAnyScope: aCollectionOfFamixClasses until: rejectBlock [
 	"I am used to return all the encountered entities (recursively) at matching one of the class scope given as parameter that are up in the containment tree of the metamodel.
 	I stop the recursion when the rejectBlock is true"
@@ -308,14 +310,14 @@ TEntityMetaLevelDependency >> allAtAnyScope: aCollectionOfFamixClasses until: re
 	^ (self query ancestors recursively until: rejectBlock) ofAnyType: aCollectionOfFamixClasses
 ]
 
-{ #category : #scoping }
+{ #category : 'scoping' }
 TEntityMetaLevelDependency >> allAtScope: aClassFAMIX [
 	"I am used to return all the entities at a given famix class scope that are up in the containment tree of the metamodel on multiple levels."
 
 	^ self query ancestors recursively ofType: aClassFAMIX
 ]
 
-{ #category : #scoping }
+{ #category : 'scoping' }
 TEntityMetaLevelDependency >> allAtScope: aClassFAMIX until: rejectBlock [
 	"I am used to return all the entities at a given famix class scope that are up in the containment tree of the metamodel on multiple levels.
 	I stop the recursion when the rejectBlock is true."
@@ -323,29 +325,29 @@ TEntityMetaLevelDependency >> allAtScope: aClassFAMIX until: rejectBlock [
 	^ (self query ancestors recursively until: rejectBlock) ofType: aClassFAMIX
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TEntityMetaLevelDependency >> allChildren [
 	"Returns all the children and sub-children of an entity, i.e my children and those of my children, and those of the children of my children, etc"
 
 	^ self addAllChildrenIn: OrderedCollection new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TEntityMetaLevelDependency >> allChildrenTypes [
 	^ self class allChildrenTypesIn: self metamodel
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TEntityMetaLevelDependency >> allClients [
 	^ self lookUpPropertyNamed: #allClients computedAs: [( self queryAllIncoming withoutSelfLoops collect: #source ) flattened ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TEntityMetaLevelDependency >> allClientsAtMyScope [
 	^ self lookUpPropertyNamed: #allClientsAtMyScope computedAs: [ self allClientsAtScope: self class ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TEntityMetaLevelDependency >> allClientsAtScope: aClass [
 "Attention, this method returns only the clients at the requested scope. The other clients non matching the scope are not return. Like this we are sure that all the return entities are at the requested scope"
 	^ self queryAllIncoming withoutSelfLoops
@@ -353,54 +355,54 @@ TEntityMetaLevelDependency >> allClientsAtScope: aClass [
 		
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TEntityMetaLevelDependency >> allIncomingAssociationTypes [
 
 	^ self class allIncomingAssociationTypesIn: self metamodel 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TEntityMetaLevelDependency >> allOutgoingAssociationTypes [
 	^ self class allOutgoingAssociationTypesIn: self metamodel
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TEntityMetaLevelDependency >> allParentTypes [
 	^ self class allParentTypesIn: self metamodel
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TEntityMetaLevelDependency >> allParents [
 	"Returns all the parents and sup-parents of an entity, i.e my parents and those of my parents, and those of the parents of my parents, etc"
 
 	^ self addAllParentsIn: OrderedCollection new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TEntityMetaLevelDependency >> allProviders [
 ^ self lookUpPropertyNamed: #allProviders computedAs: [ (self queryAllOutgoing  withoutSelfLoops collect: #target) flattened ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TEntityMetaLevelDependency >> allProvidersAtMyScope [
 	^ self lookUpPropertyNamed: #allProvidersAtMyScope computedAs: [ self allProvidersAtScope: self class ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TEntityMetaLevelDependency >> allProvidersAtScope: aClass [
 "Attention, this method returns only the providers at the requested scope. The other providers non matching the scope are not return. Like this we are sure that all the return entities are at the requested scope"
 	^ self queryAllOutgoing withoutSelfLoops
 		atScope: aClass
 ]
 
-{ #category : #scoping }
+{ #category : 'scoping' }
 TEntityMetaLevelDependency >> allToAnyScope: aCollectionOfFamixClasses [
 	"I am used to return all the encountered entities (recursively) at matching one of the class scope given as parameter that are down in the containment tree of the metamodel"
 
 	^ self query descendants recursively ofAnyType: aCollectionOfFamixClasses
 ]
 
-{ #category : #scoping }
+{ #category : 'scoping' }
 TEntityMetaLevelDependency >> allToAnyScope: aCollectionOfFamixClasses until: rejectBlock [
 	"I am used to return all the encountered entities (recursively) at matching one of the class scope given as parameter that are down in the containment tree of the metamodel
 	I stop the recursion when the rejectBlock is true"
@@ -408,14 +410,14 @@ TEntityMetaLevelDependency >> allToAnyScope: aCollectionOfFamixClasses until: re
 	^ (self query descendants recursively until: rejectBlock) ofAnyType: aCollectionOfFamixClasses
 ]
 
-{ #category : #scoping }
+{ #category : 'scoping' }
 TEntityMetaLevelDependency >> allToScope: aClassFAMIX [
 	"I am used to return all the entities at a given famix class scope that are down in the containment tree of the metamodel on multiple levels."
 
 	^ self query descendants recursively ofType: aClassFAMIX
 ]
 
-{ #category : #scoping }
+{ #category : 'scoping' }
 TEntityMetaLevelDependency >> allToScope: aClassFAMIX until: rejectBlock [
 	"I am used to return all the entities at a given famix class scope that are down in the containment tree of the metamodel on multiple levels.
 	I stop the recursion when the rejectBlock is true"
@@ -423,14 +425,14 @@ TEntityMetaLevelDependency >> allToScope: aClassFAMIX until: rejectBlock [
 	^ (self query descendants recursively until: rejectBlock) ofType: aClassFAMIX
 ]
 
-{ #category : #scoping }
+{ #category : 'scoping' }
 TEntityMetaLevelDependency >> allWithAnyScope: aCollectionOfFamixClasses [
 	"I am used to return all the entities (recursively) matching one of the class scope that are up or down in the containment tree of the metamodel"
 
 	^ self query lineage recursively ofAnyType: aCollectionOfFamixClasses
 ]
 
-{ #category : #scoping }
+{ #category : 'scoping' }
 TEntityMetaLevelDependency >> allWithAnyScope: aCollectionOfFamixClasses until: rejectBlock [
 	"I am used to return all the entities (recursively) matching one of the class scope that are up or down in the containment tree of the metamodel.
 	I stop the recursion when the rejectBlock is true"
@@ -438,14 +440,14 @@ TEntityMetaLevelDependency >> allWithAnyScope: aCollectionOfFamixClasses until: 
 	^ (self query lineage recursively until: rejectBlock) ofAnyType: aCollectionOfFamixClasses
 ]
 
-{ #category : #scoping }
+{ #category : 'scoping' }
 TEntityMetaLevelDependency >> allWithScope: aClassFAMIX [
 	"I am used to return all the entities at a given famix class scope that are up or down in the containment tree of the metamodel on multiple levels."
 
 	^ self query lineage recursively ofType: aClassFAMIX
 ]
 
-{ #category : #scoping }
+{ #category : 'scoping' }
 TEntityMetaLevelDependency >> allWithScope: aClassFAMIX until: rejectBlock [
 	"I am used to return all the entities at a given famix class scope that are up or down in the containment tree of the metamodel on multiple levels.
 	I stop the recursion when the rejectBlock is true"
@@ -453,14 +455,14 @@ TEntityMetaLevelDependency >> allWithScope: aClassFAMIX until: rejectBlock [
 	^ (self query lineage recursively until: rejectBlock) ofType: aClassFAMIX
 ]
 
-{ #category : #scoping }
+{ #category : 'scoping' }
 TEntityMetaLevelDependency >> atAnyScope: aCollectionOfFamixClasses [
 	"I am used to return all the first encountered entities matching one of the class scope given as parameter that are up in the containment tree of the metamodel"
 
 	^ self query ancestors ofAnyType: aCollectionOfFamixClasses
 ]
 
-{ #category : #scoping }
+{ #category : 'scoping' }
 TEntityMetaLevelDependency >> atAnyScope: aCollectionOfFamixClasses until: rejectBlock [
 	"I am used to return all the first encountered entities matching one of the class scope given as parameter that are up in the containment tree of the metamodel.
 	I stop the recursion when the rejectBlock is true"
@@ -468,14 +470,14 @@ TEntityMetaLevelDependency >> atAnyScope: aCollectionOfFamixClasses until: rejec
 	^ (self query ancestors until: rejectBlock) ofAnyType: aCollectionOfFamixClasses
 ]
 
-{ #category : #scoping }
+{ #category : 'scoping' }
 TEntityMetaLevelDependency >> atScope: aClassFAMIX [
 	"I am used to return all the first encountered entities at a given famix class scope that are up in the containment tree of the metamodel"
 
 	^ self query ancestors ofType: aClassFAMIX
 ]
 
-{ #category : #scoping }
+{ #category : 'scoping' }
 TEntityMetaLevelDependency >> atScope: aClassFAMIX until: rejectBlock [
 	"I am used to return all the first encountered entities at a given famix class scope that are up in the containment tree of the metamodel.
 	I stop the recursion when the rejectBlock is true"
@@ -483,14 +485,14 @@ TEntityMetaLevelDependency >> atScope: aClassFAMIX until: rejectBlock [
 	^ (self query ancestors until: rejectBlock) ofType: aClassFAMIX
 ]
 
-{ #category : #scoping }
+{ #category : 'scoping' }
 TEntityMetaLevelDependency >> atScopeWithProperty: aPropertySelector [
 	"I am used to return the first encountered entity that are up in the containment tree of the metamodel satisfying the property selector"
 
 	^ self query ancestors withProperty: aPropertySelector
 ]
 
-{ #category : #deprecated }
+{ #category : 'deprecated' }
 TEntityMetaLevelDependency >> belongsTo [
 	"Return the primary container of the entity if it exist"
 
@@ -501,12 +503,12 @@ TEntityMetaLevelDependency >> belongsTo [
 	^ self parents ifNotEmpty: #anyOne ifEmpty: [ nil ]
 ]
 
-{ #category : #deprecated }
+{ #category : 'deprecated' }
 TEntityMetaLevelDependency >> belongsTo: anEntity [
 	self deprecated: 'belongsTo will be removed in the future. Use the explicit setter for the property you''re trying to set instead. Such has #parentScope, #typeContainer, ...'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TEntityMetaLevelDependency >> children [
 
 	| res |
@@ -519,17 +521,17 @@ TEntityMetaLevelDependency >> children [
 	^ res
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TEntityMetaLevelDependency >> childrenSelectors [
 	^ self class childrenSelectorsIn: self metamodel
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TEntityMetaLevelDependency >> childrenTypes [
 	^ self class childrenTypesIn: self metamodel
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TEntityMetaLevelDependency >> fanIn [
 	<FMProperty: #fanIn type: #Number>
 	<derived>
@@ -537,7 +539,7 @@ TEntityMetaLevelDependency >> fanIn [
 	^ self allClients size
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TEntityMetaLevelDependency >> fanOut [
 	<FMProperty: #fanOut type: #Number>
 	<derived>
@@ -545,7 +547,7 @@ TEntityMetaLevelDependency >> fanOut [
 	^ self allProviders size
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 TEntityMetaLevelDependency >> has: anInOutSymbol [
 	"Check the incoming or outgoing associations of the receiver or its children.
 
@@ -559,7 +561,7 @@ TEntityMetaLevelDependency >> has: anInOutSymbol [
 	^ (self query navigation: anInOutSymbol) has dependencies
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 TEntityMetaLevelDependency >> has: anInOutSymbol with: aFAMIXClassAssociation [
 	"Query all the incoming or outgoing associations of the FAMIXClassAssociation class for the receiver and its children.
 
@@ -573,7 +575,7 @@ TEntityMetaLevelDependency >> has: anInOutSymbol with: aFAMIXClassAssociation [
 	^ (self query navigation: anInOutSymbol) has dependenciesOfType: aFAMIXClassAssociation
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 TEntityMetaLevelDependency >> hasIncoming [
 	"Checks for incoming associations of the receiver and its children.
 
@@ -585,7 +587,7 @@ TEntityMetaLevelDependency >> hasIncoming [
 	^ self query has incoming dependencies
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 TEntityMetaLevelDependency >> hasIncoming: aFAMIXClassAssociation [
 	"Checks for incoming associations of the FAMIXClassAssociation class for the receiver and its children.
 	
@@ -597,7 +599,7 @@ TEntityMetaLevelDependency >> hasIncoming: aFAMIXClassAssociation [
 	^ self query has incoming dependenciesOfType: aFAMIXClassAssociation
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 TEntityMetaLevelDependency >> hasLocal: anInOutSymbol [
 	"Check the incoming or outgoing associations of the receiver.
 
@@ -611,7 +613,7 @@ TEntityMetaLevelDependency >> hasLocal: anInOutSymbol [
 	^ (self query navigation: anInOutSymbol) has local dependencies
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 TEntityMetaLevelDependency >> hasLocalIncoming [
 	"Check the incoming or outgoing associations of the receiver.
 
@@ -623,7 +625,7 @@ TEntityMetaLevelDependency >> hasLocalIncoming [
 	^ self query has local incoming dependencies
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 TEntityMetaLevelDependency >> hasLocalIncoming: aFAMIXClassAssociation [
 	"Checks for incoming associations of the FAMIXClassAssociation class for the receiver
 	
@@ -635,7 +637,7 @@ TEntityMetaLevelDependency >> hasLocalIncoming: aFAMIXClassAssociation [
 	^ self query has local incoming dependenciesOfType: aFAMIXClassAssociation
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 TEntityMetaLevelDependency >> hasLocalOutgoing [
 	"Checks for outgoing associations of the receiver.
 	
@@ -647,7 +649,7 @@ TEntityMetaLevelDependency >> hasLocalOutgoing [
 	^ self query has local outgoing dependencies
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 TEntityMetaLevelDependency >> hasLocalOutgoing: aFAMIXClassAssociation [
 	"Checks for outgoing associations of the FAMIXClassAssociation class for the receiver.
 	
@@ -659,7 +661,7 @@ TEntityMetaLevelDependency >> hasLocalOutgoing: aFAMIXClassAssociation [
 	^ self query has local outgoing dependenciesOfType: aFAMIXClassAssociation
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 TEntityMetaLevelDependency >> hasOutgoing [
 	"Checks for outgoing associations of the receiver and its children.
 
@@ -671,7 +673,7 @@ TEntityMetaLevelDependency >> hasOutgoing [
 	^ self query has outgoing dependencies
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 TEntityMetaLevelDependency >> hasOutgoing: aFAMIXClassAssociation [
 	"Checks for outgoing associations of the FAMIXClassAssociation class for the receiver and its children.
 	
@@ -683,17 +685,17 @@ TEntityMetaLevelDependency >> hasOutgoing: aFAMIXClassAssociation [
 	^ self query has outgoing dependenciesOfType: aFAMIXClassAssociation
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TEntityMetaLevelDependency >> incomingAssociationTypes [
 	^ self class incomingAssociationTypesIn: self metamodel
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TEntityMetaLevelDependency >> incomingMSEProperties [
 	^ self class incomingMSEPropertiesIn: self metamodel
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 TEntityMetaLevelDependency >> isIncludedIn: anEntity parentSelectorsCache: parentSelectorsCache [
 	"We use a cache for the parents selector for performances reasons. It might be really long to perform the #withoutSelfLoops thus we need to speed it up a maximum.
 	
@@ -708,14 +710,14 @@ TEntityMetaLevelDependency >> isIncludedIn: anEntity parentSelectorsCache: paren
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 TEntityMetaLevelDependency >> isQueryable [
 
 	<generated>
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 TEntityMetaLevelDependency >> isRoot [
 	"Old implementation: self parents isEmpty
 	This implementation is faster."
@@ -728,7 +730,7 @@ TEntityMetaLevelDependency >> isRoot [
 	^ true
 ]
 
-{ #category : #inspector }
+{ #category : 'inspector' }
 TEntityMetaLevelDependency >> miInspectionTree: aBuilder [
 
 	<inspectorPresentationOrder: 15 title: 'Tree'>
@@ -745,7 +747,7 @@ TEntityMetaLevelDependency >> miInspectionTree: aBuilder [
 		  beResizable
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TEntityMetaLevelDependency >> numberOfChildren [
 	<FMProperty: #numberOfChildren type: #Number>
 	<FMComment: 'Number of direct children entities in the containment tree.'>
@@ -753,7 +755,7 @@ TEntityMetaLevelDependency >> numberOfChildren [
 	^ self isContainerEntity ifTrue: [ self children size ] ifFalse: [ 0 ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TEntityMetaLevelDependency >> numberOfExternalClients [
 	<FMProperty: #numberOfExternalClients type: #Number>
 	<derived>
@@ -763,7 +765,7 @@ TEntityMetaLevelDependency >> numberOfExternalClients [
 		computedAs: [ (self allClients reject: [ :entity | entity allParents includesAny: self parents ]) size ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TEntityMetaLevelDependency >> numberOfExternalProviders [
 	<FMProperty: #numberOfExternalProviders type: #Number>
 	<derived>
@@ -773,7 +775,7 @@ TEntityMetaLevelDependency >> numberOfExternalProviders [
 		computedAs: [ (self allProviders reject: [ :entity | entity allParents includesAny: self parents ]) size ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TEntityMetaLevelDependency >> numberOfInternalClients [
 	<FMProperty: #numberOfInternalClients type: #Number>
 	<derived>
@@ -783,7 +785,7 @@ TEntityMetaLevelDependency >> numberOfInternalClients [
 		computedAs: [ (self allClients select: [ :entity | entity allParents includesAny: self parents ]) size ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TEntityMetaLevelDependency >> numberOfInternalProviders [
 	<FMProperty: #numberOfInternalProviders type: #Number>
 	<derived>
@@ -793,28 +795,28 @@ TEntityMetaLevelDependency >> numberOfInternalProviders [
 		computedAs: [ (self allProviders select: [ :entity | entity allParents includesAny: self parents ]) size ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TEntityMetaLevelDependency >> outgoingAssociationTypes [
 	^ self class outgoingAssociationTypesIn: self metamodel
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TEntityMetaLevelDependency >> outgoingMSEProperties [
 	"finds all properties from entities of 'self class' to other entities"
 	^ self class outgoingMSEPropertiesIn: self metamodel
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TEntityMetaLevelDependency >> parentSelectors [
 	^ self class parentSelectorsIn: self metamodel
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TEntityMetaLevelDependency >> parentTypes [
 	^ self class parentTypesIn: self metamodel
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TEntityMetaLevelDependency >> parents [
 	| res |
 	res := Set new.
@@ -822,17 +824,17 @@ TEntityMetaLevelDependency >> parents [
 	^ res
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TEntityMetaLevelDependency >> parentsDo: aBlock [
 	self parentSelectors do: [ :accessor | (self perform: accessor) ifNotNil: [ :r | aBlock value: r ] ]
 ]
 
-{ #category : #query }
+{ #category : 'query' }
 TEntityMetaLevelDependency >> query [
 	^ MooseQuery receiver: self
 ]
 
-{ #category : #'query dependencies' }
+{ #category : 'query dependencies' }
 TEntityMetaLevelDependency >> query: anInOutSymbol with: aFAMIXClassAssociation [
 	"Query all the incoming or outgoing associations of the FAMIXClassAssociation class for the receiver and its children.
 
@@ -846,7 +848,7 @@ TEntityMetaLevelDependency >> query: anInOutSymbol with: aFAMIXClassAssociation 
 	^ (self query navigation: anInOutSymbol) dependenciesOfType: aFAMIXClassAssociation
 ]
 
-{ #category : #'query dependencies' }
+{ #category : 'query dependencies' }
 TEntityMetaLevelDependency >> queryAll: anInOutSymbol [
 	"Query all the incoming or outgoing associations of the receiver or its children.
 
@@ -860,7 +862,7 @@ TEntityMetaLevelDependency >> queryAll: anInOutSymbol [
 	^ (self query navigation: anInOutSymbol) dependencies
 ]
 
-{ #category : #'query dependencies' }
+{ #category : 'query dependencies' }
 TEntityMetaLevelDependency >> queryAllIncoming [
 	"Query all the incoming associations of the receiver and its children.
 
@@ -872,7 +874,7 @@ TEntityMetaLevelDependency >> queryAllIncoming [
 	^ self query incoming dependencies
 ]
 
-{ #category : #'query dependencies' }
+{ #category : 'query dependencies' }
 TEntityMetaLevelDependency >> queryAllLocal: anInOutSymbol [
 	"Query all the incoming or outgoing associations of the receiver.
 	This method differ from #queryAll: in the fact that it will not check the associations of the reicever's children.
@@ -887,7 +889,7 @@ TEntityMetaLevelDependency >> queryAllLocal: anInOutSymbol [
 	^ (self query navigation: anInOutSymbol) local dependencies
 ]
 
-{ #category : #'query dependencies' }
+{ #category : 'query dependencies' }
 TEntityMetaLevelDependency >> queryAllLocalIncoming [
 	"Query all the incoming associations of the receiver.
 	This method differ from #queryAllIncoming in the fact that it will not check the associations of the reicever's children.
@@ -900,7 +902,7 @@ TEntityMetaLevelDependency >> queryAllLocalIncoming [
 	^ self query incoming local dependencies
 ]
 
-{ #category : #'query dependencies' }
+{ #category : 'query dependencies' }
 TEntityMetaLevelDependency >> queryAllLocalOutgoing [
 	"Query all the outgoing associations of the receiver.
 	This method differ from #queryAllOutgoing in the fact that it will not check the associations of the reicever's children.
@@ -913,7 +915,7 @@ TEntityMetaLevelDependency >> queryAllLocalOutgoing [
 	^ self query outgoing local dependencies
 ]
 
-{ #category : #'query dependencies' }
+{ #category : 'query dependencies' }
 TEntityMetaLevelDependency >> queryAllOutgoing [
 	"Query all the outgoing associations of the receiver and its children.
 
@@ -925,7 +927,7 @@ TEntityMetaLevelDependency >> queryAllOutgoing [
 	^ self query outgoing dependencies
 ]
 
-{ #category : #'query dependencies' }
+{ #category : 'query dependencies' }
 TEntityMetaLevelDependency >> queryIncoming: aFAMIXClassAssociation [
 	"Query all the incoming associations of the FAMIXClassAssociation class for the receiver and its children.
 
@@ -937,7 +939,7 @@ TEntityMetaLevelDependency >> queryIncoming: aFAMIXClassAssociation [
 	^ self query incoming dependenciesOfType: aFAMIXClassAssociation
 ]
 
-{ #category : #'query dependencies' }
+{ #category : 'query dependencies' }
 TEntityMetaLevelDependency >> queryLocal: anInOutSymbol with: aFAMIXClassAssociation [
 	"Query all the incoming or outgoing associations of the FAMIXClassAssociation class for the receiver.
 	This method differ from #query:with: in the fact that it will not check the associations of the reicever's children.
@@ -952,7 +954,7 @@ TEntityMetaLevelDependency >> queryLocal: anInOutSymbol with: aFAMIXClassAssocia
 	^ (self query navigation: anInOutSymbol) local dependenciesOfType: aFAMIXClassAssociation
 ]
 
-{ #category : #'query dependencies' }
+{ #category : 'query dependencies' }
 TEntityMetaLevelDependency >> queryLocalIncoming: aFAMIXClassAssociation [
 	"Query all the incoming associations of the FAMIXClassAssociation class for the receiver.
 	This method differ from #queryIncoming: in the fact that it will not check the associations of the reicever's children.
@@ -965,7 +967,7 @@ TEntityMetaLevelDependency >> queryLocalIncoming: aFAMIXClassAssociation [
 	^ self query incoming local dependenciesOfType: aFAMIXClassAssociation
 ]
 
-{ #category : #'query dependencies' }
+{ #category : 'query dependencies' }
 TEntityMetaLevelDependency >> queryLocalOutgoing: aFAMIXClassAssociation [
 	"Query all the outgoing associations of the FAMIXClassAssociation class for the receiver.
 	This method differ from #queryOutgoing: in the fact that it will not check the associations of the reicever's children.
@@ -978,7 +980,7 @@ TEntityMetaLevelDependency >> queryLocalOutgoing: aFAMIXClassAssociation [
 	^ self query outgoing local dependenciesOfType: aFAMIXClassAssociation
 ]
 
-{ #category : #'query dependencies' }
+{ #category : 'query dependencies' }
 TEntityMetaLevelDependency >> queryOutgoing: aFAMIXClassAssociation [
 	"Query all the outgoing associations of the FAMIXClassAssociation class for the receiver and its children.
 	
@@ -990,18 +992,18 @@ TEntityMetaLevelDependency >> queryOutgoing: aFAMIXClassAssociation [
 	^ self query outgoing dependenciesOfType: aFAMIXClassAssociation
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TEntityMetaLevelDependency >> rootParents [
 
 	^ self addRootParentsIn: OrderedCollection new
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 TEntityMetaLevelDependency >> scopeForQuery: aQuery direction: aDirection [
 	aDirection scopeFor: self query: aQuery
 ]
 
-{ #category : #'query dependencies' }
+{ #category : 'query dependencies' }
 TEntityMetaLevelDependency >> sourceThrough: aFAMIXClassAssociation [
 	"Collect the source of the FAMIXClassAssociation class for the receiver and its children.
 	
@@ -1013,7 +1015,7 @@ TEntityMetaLevelDependency >> sourceThrough: aFAMIXClassAssociation [
 	^ self query incoming objects dependenciesOfType: aFAMIXClassAssociation
 ]
 
-{ #category : #'query dependencies' }
+{ #category : 'query dependencies' }
 TEntityMetaLevelDependency >> targetThrough: aFAMIXClassAssociation [
 	"Collect the target of the FAMIXClassAssociation class for the receiver and its children.
 	
@@ -1025,7 +1027,7 @@ TEntityMetaLevelDependency >> targetThrough: aFAMIXClassAssociation [
 	^ self query outgoing objects dependenciesOfType: aFAMIXClassAssociation
 ]
 
-{ #category : #'query dependencies' }
+{ #category : 'query dependencies' }
 TEntityMetaLevelDependency >> throughAllFrom [
 	"Query all the incoming associations of the receiver and its children.
 
@@ -1037,7 +1039,7 @@ TEntityMetaLevelDependency >> throughAllFrom [
 	^ self query incoming objects dependencies
 ]
 
-{ #category : #'query dependencies' }
+{ #category : 'query dependencies' }
 TEntityMetaLevelDependency >> throughAllTo [
 	"Collect all the targets of the receiver and its children.
 	
@@ -1049,14 +1051,14 @@ TEntityMetaLevelDependency >> throughAllTo [
 	^ self query outgoing objects dependencies
 ]
 
-{ #category : #scoping }
+{ #category : 'scoping' }
 TEntityMetaLevelDependency >> toAnyScope: aCollectionOfFamixClasses [
 	"I am used to return all the first encountered entities matching one of the class scope given as parameter that are down in the containment tree of the metamodel"
 
 	^ self query descendants ofAnyType: aCollectionOfFamixClasses
 ]
 
-{ #category : #scoping }
+{ #category : 'scoping' }
 TEntityMetaLevelDependency >> toAnyScope: aCollectionOfFamixClasses until: rejectBlock [
 	"I am used to return all the first encountered entities matching one of the class scope given as parameter that are down in the containment tree of the metamodel.
 	I stop the recursion when the rejectBlock is true"
@@ -1064,14 +1066,14 @@ TEntityMetaLevelDependency >> toAnyScope: aCollectionOfFamixClasses until: rejec
 	^ (self query descendants until: rejectBlock) ofAnyType: aCollectionOfFamixClasses
 ]
 
-{ #category : #scoping }
+{ #category : 'scoping' }
 TEntityMetaLevelDependency >> toScope: aClassFAMIX [
 	"I am used to return all the first encountered  entities at a given famix class scope that are down in the containment tree of the metamodel"
 
 	^ self query descendants ofType: aClassFAMIX
 ]
 
-{ #category : #scoping }
+{ #category : 'scoping' }
 TEntityMetaLevelDependency >> toScope: aClassFAMIX until: rejectBlock [
 	"I am used to return all the first encountered  entities at a given famix class scope that are down in the containment tree of the metamodel.
 	I stop the recursion when the rejectBlock is true"
@@ -1079,7 +1081,7 @@ TEntityMetaLevelDependency >> toScope: aClassFAMIX until: rejectBlock [
 	^ (self query descendants until: rejectBlock) ofType: aClassFAMIX
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TEntityMetaLevelDependency >> withAllChildren [
 	"I return a collection including me and all my children in the containement DAG."
 
@@ -1088,7 +1090,7 @@ TEntityMetaLevelDependency >> withAllChildren [
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TEntityMetaLevelDependency >> withAllParents [
 	"I return a collection including me and all my parents in the containement DAG."
 
@@ -1097,14 +1099,14 @@ TEntityMetaLevelDependency >> withAllParents [
 		yourself
 ]
 
-{ #category : #scoping }
+{ #category : 'scoping' }
 TEntityMetaLevelDependency >> withAnyScope: aCollectionOfFamixClasses [
 	"I am used to return all the first encountered entities matching one of the class scope that are up or down in the containment tree of the metamodel"
 
 	^ self query lineage ofAnyType: aCollectionOfFamixClasses
 ]
 
-{ #category : #scoping }
+{ #category : 'scoping' }
 TEntityMetaLevelDependency >> withAnyScope: aCollectionOfFamixClasses until: rejectBlock [
 	"I am used to return all the first encountered entities matching one of the class scope that are up or down in the containment tree of the metamodel.
 	I stop the recursion when the rejectBlock is true"
@@ -1112,14 +1114,14 @@ TEntityMetaLevelDependency >> withAnyScope: aCollectionOfFamixClasses until: rej
 	^ (self query lineage until: rejectBlock) ofAnyType: aCollectionOfFamixClasses
 ]
 
-{ #category : #scoping }
+{ #category : 'scoping' }
 TEntityMetaLevelDependency >> withScope: aClassFAMIX [
 	"I am used to return all the first encountered  entities at a given famix class scope that are up or down in the containment tree of the metamodel"
 
 	^ self query lineage ofType: aClassFAMIX
 ]
 
-{ #category : #scoping }
+{ #category : 'scoping' }
 TEntityMetaLevelDependency >> withScope: aClassFAMIX until: rejectBlock [
 	"I am used to return all the first encountered  entities at a given famix class scope that are up or down in the containment tree of the metamodel.
 	I stop the recursion when the rejectBlock is true"

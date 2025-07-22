@@ -1,6 +1,6 @@
 Class {
-	#name : #LANNode,
-	#superclass : #Model,
+	#name : 'LANNode',
+	#superclass : 'Model',
 	#instVars : [
 		'name',
 		'nextNode'
@@ -8,16 +8,17 @@ Class {
 	#pools : [
 		'LANPool'
 	],
-	#category : #'Moose-TestResources-LAN'
+	#category : 'Moose-TestResources-LAN',
+	#package : 'Moose-TestResources-LAN'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 LANNode class >> new [ 
 	 
 	^super new initialize
 ]
 
-{ #category : #'sending-receiving' }
+{ #category : 'sending-receiving' }
 LANNode >> accept: thePacket [ 
 	"Having received the packet, send it on. This is the default behavior." 
 	"My subclasses will probably override this method to do something special" 
@@ -25,25 +26,25 @@ LANNode >> accept: thePacket [
 	self send: thePacket
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LANNode >> accessPoolVariable [
 
 	^ LANEditor
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 LANNode >> canOriginate [ 
 	 
 	^false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 LANNode >> canOutput [ 
 	 
 	^false
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 LANNode >> initialize [ 
 	"This is the default initialize method that is always called when new instances are created. My  
 	subclasses will likely override this method to be initialized." 
@@ -52,21 +53,21 @@ LANNode >> initialize [
 	self name: #Unnamed
 ]
 
-{ #category : #'moose testing' }
+{ #category : 'moose testing' }
 LANNode >> methodWithEmptyBody [ 
 	"this method is necessary for Moose tests" 
 	 
 	
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LANNode >> name [ 
 	"returns the name of the node" 
 	 
 	^name
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LANNode >> name: aSymbol [ 
 	"sets the name of the node (a Symbol)" 
 	 
@@ -74,14 +75,14 @@ LANNode >> name: aSymbol [
 	self changed: #name
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LANNode >> nextNode [ 
 	"return the next node of the receiver" 
 	 
 	^nextNode
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LANNode >> nextNode: aNode [ 
 	"set the next node of the receiver to be aNode" 
 	 
@@ -89,7 +90,7 @@ LANNode >> nextNode: aNode [
 	self changed: #nextNode
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 LANNode >> printOn: aStream [
 	"print a textual representation of myself on the argument, aStream"
 
@@ -98,7 +99,7 @@ LANNode >> printOn: aStream [
 	self nextNode ifNotNil: [ aStream nextPutAll: ', pointing to ' , self nextNode name printString ]
 ]
 
-{ #category : #'sending-receiving' }
+{ #category : 'sending-receiving' }
 LANNode >> send: thePacket [ 
 	"Display debug information in the Transcript, then send the packet to the node which whom I  
 	communicate" 

@@ -3,12 +3,14 @@ The generated trait will be only used by the model.
 It implements factory methods to create new entities and add them in the model.
 "
 Class {
-	#name : #FmxMBEntityCreatorTrait,
-	#superclass : #FmxMBTrait,
-	#category : #'Famix-MetamodelBuilder-Core-Implementation'
+	#name : 'FmxMBEntityCreatorTrait',
+	#superclass : 'FmxMBTrait',
+	#category : 'Famix-MetamodelBuilder-Core-Implementation',
+	#package : 'Famix-MetamodelBuilder-Core',
+	#tag : 'Implementation'
 }
 
-{ #category : #generating }
+{ #category : 'generating' }
 FmxMBEntityCreatorTrait >> generateEntityCreationMethodFor: aClass [
 
 	self builder environment
@@ -22,7 +24,7 @@ FmxMBEntityCreatorTrait >> generateEntityCreationMethodFor: aClass [
 		classified: 'entity creation'
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FmxMBEntityCreatorTrait >> generateEntityCreationMethods [
 
 	self builder classes
@@ -33,7 +35,7 @@ FmxMBEntityCreatorTrait >> generateEntityCreationMethods [
 					self generateNamedEntityCreationMethodFor: class ] ]
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FmxMBEntityCreatorTrait >> generateNamedEntityCreationMethodFor: aClass [
 
 	^ self builder environment
@@ -47,7 +49,7 @@ FmxMBEntityCreatorTrait >> generateNamedEntityCreationMethodFor: aClass [
 		  classified: 'entity creation'
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FmxMBEntityCreatorTrait >> initialize [
 
 	super initialize.
@@ -57,13 +59,13 @@ It provides an API for creating entities and adding them to the model.'.
 	tag := 'Model'
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FmxMBEntityCreatorTrait >> isEntityCreatorTrait [
 
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FmxMBEntityCreatorTrait >> isMetamodelTrait [
 
 	^ false

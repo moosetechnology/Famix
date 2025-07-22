@@ -24,14 +24,16 @@
 
 "
 Class {
-	#name : #FamixJavaConcretization,
-	#superclass : #FamixJavaEntity,
+	#name : 'FamixJavaConcretization',
+	#superclass : 'FamixJavaEntity',
 	#traits : 'FamixTConcretization',
 	#classTraits : 'FamixTConcretization classTrait',
-	#category : #'Famix-Java-Entities-Entities'
+	#category : 'Famix-Java-Entities-Entities',
+	#package : 'Famix-Java-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixJavaConcretization class >> annotation [
 
 	<FMClass: #Concretization super: #FamixJavaEntity>
@@ -40,7 +42,7 @@ FamixJavaConcretization class >> annotation [
 	^ self
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FamixJavaConcretization >> accept: aVisitor [
 
 	<generated>

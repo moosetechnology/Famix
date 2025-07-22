@@ -43,14 +43,16 @@
 
 "
 Class {
-	#name : #MooseMSEImporterTestClass,
-	#superclass : #MooseMSEImporterTestNamedEntity,
+	#name : 'MooseMSEImporterTestClass',
+	#superclass : 'MooseMSEImporterTestNamedEntity',
 	#traits : 'FamixTClass + FamixTSourceEntity',
 	#classTraits : 'FamixTClass classTrait + FamixTSourceEntity classTrait',
-	#category : #'Moose-Core-Tests-Entities-Entities'
+	#category : 'Moose-Core-Tests-Entities-Entities',
+	#package : 'Moose-Core-Tests-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 MooseMSEImporterTestClass class >> annotation [
 
 	<FMClass: #Class super: #MooseMSEImporterTestNamedEntity>
@@ -59,7 +61,7 @@ MooseMSEImporterTestClass class >> annotation [
 	^ self
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 MooseMSEImporterTestClass >> mooseNameOn: aStream [
 
 	self typeContainer ifNotNil: [ :parent | 

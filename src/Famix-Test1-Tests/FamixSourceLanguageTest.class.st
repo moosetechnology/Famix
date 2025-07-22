@@ -1,6 +1,6 @@
 Class {
-	#name : #FamixSourceLanguageTest,
-	#superclass : #TestCase,
+	#name : 'FamixSourceLanguageTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'model',
 		'm1',
@@ -8,10 +8,11 @@ Class {
 		'anchor',
 		'lang'
 	],
-	#category : #'Famix-Test1-Tests'
+	#category : 'Famix-Test1-Tests',
+	#package : 'Famix-Test1-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 FamixSourceLanguageTest >> setUp [
 
 	super setUp.
@@ -26,7 +27,7 @@ FamixSourceLanguageTest >> setUp [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixSourceLanguageTest >> testAddSourcedEntity [
 
 	lang addSourcedEntity: m1.
@@ -37,7 +38,7 @@ FamixSourceLanguageTest >> testAddSourcedEntity [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixSourceLanguageTest >> testIsAttached [
 
 	self deny: lang isAttached.
@@ -45,13 +46,13 @@ FamixSourceLanguageTest >> testIsAttached [
 	self assert: lang isAttached.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixSourceLanguageTest >> testIsFile [
 
 	self deny: lang isAttached.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixSourceLanguageTest >> testSourcedEntities [
 	self assertEmpty: lang sourcedEntities.
 	lang addSourcedEntity: m1.

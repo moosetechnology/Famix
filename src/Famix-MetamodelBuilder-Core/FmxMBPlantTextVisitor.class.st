@@ -12,8 +12,8 @@ v contents
 
 "
 Class {
-	#name : #FmxMBPlantTextVisitor,
-	#superclass : #FmxMBVisitor,
+	#name : 'FmxMBPlantTextVisitor',
+	#superclass : 'FmxMBVisitor',
 	#instVars : [
 		'stream',
 		'relations',
@@ -25,20 +25,22 @@ Class {
 		'traitsWithUsers',
 		'withAllTraits'
 	],
-	#category : #'Famix-MetamodelBuilder-Core-Visitors'
+	#category : 'Famix-MetamodelBuilder-Core-Visitors',
+	#package : 'Famix-MetamodelBuilder-Core',
+	#tag : 'Visitors'
 }
 
-{ #category : #private }
+{ #category : 'private' }
 FmxMBPlantTextVisitor >> behaviorNameOrNilFor: aBehavior [
 	^ behaviors associations detect: [ :each | each value includes: aBehavior ] ifFound: [ :foundAssociation | foundAssociation key ] ifNone: [ nil ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBPlantTextVisitor >> behaviors [
 	^ behaviors
 ]
 
-{ #category : #checking }
+{ #category : 'checking' }
 FmxMBPlantTextVisitor >> checkTrait: aTrait [
 
 	^ aTrait willGenerate and: [ 
@@ -47,30 +49,30 @@ FmxMBPlantTextVisitor >> checkTrait: aTrait [
 				   each traitGeneralizations ]) includes: aTrait ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBPlantTextVisitor >> contents [
 
 	^ stream contents
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 FmxMBPlantTextVisitor >> ensureBehaviorNameFor: aBehavior [
 
 	^ (self behaviorNameOrNilFor: aBehavior)
 		ifNil: [ self registerNewBehavior: aBehavior ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBPlantTextVisitor >> gatherTraits [
 	^ gatherTraits
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBPlantTextVisitor >> gatherTraits: anObject [
 	gatherTraits := anObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FmxMBPlantTextVisitor >> initialize [
 	super initialize.
 
@@ -85,7 +87,7 @@ FmxMBPlantTextVisitor >> initialize [
 	withAllTraits := false.
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 FmxMBPlantTextVisitor >> mergeTrait: aTrait withBehaviorNamed: aBehaviorName [
 
 	(behaviors at: aBehaviorName) add: aTrait.
@@ -94,17 +96,17 @@ FmxMBPlantTextVisitor >> mergeTrait: aTrait withBehaviorNamed: aBehaviorName [
 	
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBPlantTextVisitor >> mergeTraits [
 	^ mergeTraits
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBPlantTextVisitor >> mergeTraits: anObject [
 	mergeTraits := anObject
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 FmxMBPlantTextVisitor >> onlySingleUserOf: aTrait [
 	^ ((aTrait builder classes select: #willGenerate)
 		count: [ :aClass | 
@@ -113,7 +115,7 @@ FmxMBPlantTextVisitor >> onlySingleUserOf: aTrait [
 			traits size = 1 and: [ traits anyOne = aTrait ] ]) = 1
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 FmxMBPlantTextVisitor >> recordGeneralizationsForClass: aClass mergingTraits: mergesTrait [
 
 	aClass classGeneralization ifNotNil: [ :generalization | 
@@ -124,7 +126,7 @@ FmxMBPlantTextVisitor >> recordGeneralizationsForClass: aClass mergingTraits: me
 				generalizationDefinitions add: generalization -> aClass ] ] ]
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FmxMBPlantTextVisitor >> recordGeneralizationsForTrait: aTrait [
 
 		aTrait traitGeneralizations do: [ :generalization |
@@ -133,7 +135,7 @@ FmxMBPlantTextVisitor >> recordGeneralizationsForTrait: aTrait [
 	
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 FmxMBPlantTextVisitor >> registerNewBehavior: aBehavior [
 
 	| key |
@@ -145,13 +147,13 @@ FmxMBPlantTextVisitor >> registerNewBehavior: aBehavior [
 	
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 FmxMBPlantTextVisitor >> selectTraitsWithUsersFrom: aBuilder [
 
 	^ traitsWithUsers := aBuilder classes flatCollect: [:each | each traitGeneralizations] as: Set
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FmxMBPlantTextVisitor >> visitBuilder: aBuilder [
 
 	stream
@@ -181,7 +183,7 @@ FmxMBPlantTextVisitor >> visitBuilder: aBuilder [
 		cr
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FmxMBPlantTextVisitor >> visitClass: aClass [
 
 	| mergesTrait | 
@@ -198,14 +200,14 @@ FmxMBPlantTextVisitor >> visitClass: aClass [
 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FmxMBPlantTextVisitor >> visitRelationSide: aRelationSide [
 
 	relations add: aRelationSide relation.
 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FmxMBPlantTextVisitor >> visitTrait: aTrait [
 
 	| behaviorKey |
@@ -224,7 +226,7 @@ FmxMBPlantTextVisitor >> visitTrait: aTrait [
 	self writeTraitEnd.
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FmxMBPlantTextVisitor >> visitTypedProperty: aTypedProperty [
 
 	stream 
@@ -236,17 +238,17 @@ FmxMBPlantTextVisitor >> visitTypedProperty: aTypedProperty [
 		cr. 
 ]
 
-{ #category : #'public - configuration' }
+{ #category : 'public - configuration' }
 FmxMBPlantTextVisitor >> withAllTraits [
 	withAllTraits := true.
 ]
 
-{ #category : #'public - configuration' }
+{ #category : 'public - configuration' }
 FmxMBPlantTextVisitor >> withoutAllTraits [
 	withAllTraits := false.
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 FmxMBPlantTextVisitor >> writeClass: aClass mergingTraits: mergesTraits [
 
 	| behaviorKey displayedName |
@@ -284,7 +286,7 @@ FmxMBPlantTextVisitor >> writeClass: aClass mergingTraits: mergesTraits [
 	
 ]
 
-{ #category : #relations }
+{ #category : 'relations' }
 FmxMBPlantTextVisitor >> writeGeneralizations [
 
 	generalizationDefinitions do: [ :each | 
@@ -297,7 +299,7 @@ FmxMBPlantTextVisitor >> writeGeneralizations [
 	stream cr
 ]
 
-{ #category : #relations }
+{ #category : 'relations' }
 FmxMBPlantTextVisitor >> writeRelations [
 
 	| isContainer |
@@ -338,7 +340,7 @@ FmxMBPlantTextVisitor >> writeRelations [
 	
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 FmxMBPlantTextVisitor >> writeSingleUseOf: aTrait [
 	| savedStream |
 		savedStream := stream.
@@ -349,7 +351,7 @@ FmxMBPlantTextVisitor >> writeSingleUseOf: aTrait [
 		^ self
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 FmxMBPlantTextVisitor >> writeTraitBeginningOf: aTrait with: aBehaviorKey [
 	stream
 		nextPutAll: 'class ';
@@ -360,7 +362,7 @@ FmxMBPlantTextVisitor >> writeTraitBeginningOf: aTrait with: aBehaviorKey [
 		cr.
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 FmxMBPlantTextVisitor >> writeTraitEnd [
 	stream
 		nextPutAll: '}';

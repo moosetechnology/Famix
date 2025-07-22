@@ -34,14 +34,16 @@
 
 "
 Class {
-	#name : #FamixStAnnotationTypeAttribute,
-	#superclass : #FamixStSourcedEntity,
+	#name : 'FamixStAnnotationTypeAttribute',
+	#superclass : 'FamixStSourcedEntity',
 	#traits : 'FamixTAnnotationTypeAttribute + TEntityMetaLevelDependency',
 	#classTraits : 'FamixTAnnotationTypeAttribute classTrait + TEntityMetaLevelDependency classTrait',
-	#category : #'Famix-PharoSmalltalk-Entities-Entities'
+	#category : 'Famix-PharoSmalltalk-Entities-Entities',
+	#package : 'Famix-PharoSmalltalk-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixStAnnotationTypeAttribute class >> annotation [
 
 	<FMClass: #AnnotationTypeAttribute super: #FamixStSourcedEntity>
@@ -50,7 +52,7 @@ FamixStAnnotationTypeAttribute class >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixStAnnotationTypeAttribute >> parentAnnotationType [
 	<FMProperty: #parentAnnotationType type: #FamixStAnnotationType> <derived> 
 	<FMComment: 'This is an alias pointing to the AnnotationType that defines this attribute'>
@@ -58,7 +60,7 @@ FamixStAnnotationTypeAttribute >> parentAnnotationType [
 	^ self parentType
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixStAnnotationTypeAttribute >> parentAnnotationType: anAnnotationType [
 	self parentType: anAnnotationType
 ]

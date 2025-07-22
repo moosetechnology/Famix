@@ -1,1 +1,1 @@
-Package { #name : #'Moose-SmalltalkImporter' }
+Package { #name : 'Moose-SmalltalkImporter' }

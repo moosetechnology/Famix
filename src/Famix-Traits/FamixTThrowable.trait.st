@@ -15,16 +15,18 @@ TThrowable represents all types of possible exceptions.
 
 "
 Trait {
-	#name : #FamixTThrowable,
+	#name : 'FamixTThrowable',
 	#instVars : [
 		'#catchingEntities => FMMany type: #FamixTWithExceptions opposite: #caughtExceptions',
 		'#declaringEntities => FMMany type: #FamixTWithExceptions opposite: #declaredExceptions',
 		'#throwingEntities => FMMany type: #FamixTWithExceptions opposite: #thrownExceptions'
 	],
-	#category : #'Famix-Traits-Exception'
+	#category : 'Famix-Traits-Exception',
+	#package : 'Famix-Traits',
+	#tag : 'Exception'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTThrowable classSide >> annotation [
 
 	<FMClass: #TThrowable super: #Object>
@@ -33,32 +35,32 @@ FamixTThrowable classSide >> annotation [
 	^ self
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FamixTThrowable >> accept: aVisitor [
 
 	<generated>
 	^ aVisitor visitFamixTThrowable: self
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTThrowable >> addCatchingEntity: anObject [
 	<generated>
 	^ self catchingEntities add: anObject
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTThrowable >> addDeclaringEntity: anObject [
 	<generated>
 	^ self declaringEntities add: anObject
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTThrowable >> addThrowingEntity: anObject [
 	<generated>
 	^ self throwingEntities add: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTThrowable >> catchingEntities [
 	"Relation named: #catchingEntities type: #FamixTWithExceptions opposite: #caughtExceptions"
 
@@ -67,14 +69,14 @@ FamixTThrowable >> catchingEntities [
 	^ catchingEntities
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTThrowable >> catchingEntities: anObject [
 
 	<generated>
 	catchingEntities value: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTThrowable >> declaringEntities [
 	"Relation named: #declaringEntities type: #FamixTWithExceptions opposite: #declaredExceptions"
 
@@ -83,14 +85,14 @@ FamixTThrowable >> declaringEntities [
 	^ declaringEntities
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTThrowable >> declaringEntities: anObject [
 
 	<generated>
 	declaringEntities value: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTThrowable >> throwingEntities [
 	"Relation named: #throwingEntities type: #FamixTWithExceptions opposite: #thrownExceptions"
 
@@ -99,7 +101,7 @@ FamixTThrowable >> throwingEntities [
 	^ throwingEntities
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTThrowable >> throwingEntities: anObject [
 
 	<generated>

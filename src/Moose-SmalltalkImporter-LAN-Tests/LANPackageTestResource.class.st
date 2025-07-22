@@ -1,10 +1,11 @@
 Class {
-	#name : #LANPackageTestResource,
-	#superclass : #SmalltalkModelTestResource,
-	#category : #'Moose-SmalltalkImporter-LAN-Tests'
+	#name : 'LANPackageTestResource',
+	#superclass : 'SmalltalkModelTestResource',
+	#category : 'Moose-SmalltalkImporter-LAN-Tests',
+	#package : 'Moose-SmalltalkImporter-LAN-Tests'
 }
 
-{ #category : #hook }
+{ #category : 'hook' }
 LANPackageTestResource >> importModel [
 
 	FamixStPharoImporterTask new

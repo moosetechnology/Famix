@@ -22,14 +22,16 @@
 
 "
 Class {
-	#name : #FamixJavaAnnotationInstanceAttribute,
-	#superclass : #FamixJavaSourcedEntity,
+	#name : 'FamixJavaAnnotationInstanceAttribute',
+	#superclass : 'FamixJavaSourcedEntity',
 	#traits : 'FamixTAnnotationInstanceAttribute',
 	#classTraits : 'FamixTAnnotationInstanceAttribute classTrait',
-	#category : #'Famix-Java-Entities-Entities'
+	#category : 'Famix-Java-Entities-Entities',
+	#package : 'Famix-Java-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixJavaAnnotationInstanceAttribute class >> annotation [
 
 	<FMClass: #AnnotationInstanceAttribute super: #FamixJavaSourcedEntity>
@@ -38,14 +40,14 @@ FamixJavaAnnotationInstanceAttribute class >> annotation [
 	^ self
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FamixJavaAnnotationInstanceAttribute >> accept: aVisitor [
 
 	<generated>
 	^ aVisitor visitFamixJavaAnnotationInstanceAttribute: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixJavaAnnotationInstanceAttribute >> name [
 	^ self annotationTypeAttribute ifNotNil: #name
 ]

@@ -8,14 +8,16 @@
 
 "
 Class {
-	#name : #MooseMSEImporterTestNamedEntity,
-	#superclass : #MooseMSEImporterTestEntity,
+	#name : 'MooseMSEImporterTestNamedEntity',
+	#superclass : 'MooseMSEImporterTestEntity',
 	#traits : 'FamixTNamedEntity',
 	#classTraits : 'FamixTNamedEntity classTrait',
-	#category : #'Moose-Core-Tests-Entities-Entities'
+	#category : 'Moose-Core-Tests-Entities-Entities',
+	#package : 'Moose-Core-Tests-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 MooseMSEImporterTestNamedEntity class >> annotation [
 
 	<FMClass: #NamedEntity super: #MooseMSEImporterTestEntity>
@@ -25,14 +27,14 @@ MooseMSEImporterTestNamedEntity class >> annotation [
 	^ self
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MooseMSEImporterTestNamedEntity class >> isAbstract [
 
 	<generated>
 	^ self == MooseMSEImporterTestNamedEntity
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MooseMSEImporterTestNamedEntity >> isNamedEntity [
 
 	<generated>

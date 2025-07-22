@@ -1,27 +1,29 @@
 Class {
-	#name : #FamixMetamodelGenerateRemoteAccessorTestGeneratorB,
-	#superclass : #FamixTestGenerator,
+	#name : 'FamixMetamodelGenerateRemoteAccessorTestGeneratorB',
+	#superclass : 'FamixTestGenerator',
 	#instVars : [
 		'fmx'
 	],
-	#category : #'Famix-MetamodelBuilder-Tests-GeneratorRessources'
+	#category : 'Famix-MetamodelBuilder-Tests-GeneratorRessources',
+	#package : 'Famix-MetamodelBuilder-Tests',
+	#tag : 'GeneratorRessources'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetamodelGenerateRemoteAccessorTestGeneratorB class >> packageName [
 
 	<ignoreForCoverage>
 	^ 'Famix-MetamodelBuilder-TestsResources-B'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetamodelGenerateRemoteAccessorTestGeneratorB class >> prefix [
 
 <ignoreForCoverage>
 	^ #FmxTestGenerateAccessorB
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixMetamodelGenerateRemoteAccessorTestGeneratorB >> defineClasses [
 	super defineClasses.
 	fmx := builder newClassNamed: #EntityB

@@ -1,13 +1,14 @@
 Class {
-	#name : #FamixTest5Test,
-	#superclass : #TestCase,
+	#name : 'FamixTest5Test',
+	#superclass : 'TestCase',
 	#instVars : [
 		'model'
 	],
-	#category : #'Famix-Test5-Tests'
+	#category : 'Famix-Test5-Tests',
+	#package : 'Famix-Test5-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 FamixTest5Test >> setUp [
 	super setUp.
 
@@ -15,7 +16,7 @@ FamixTest5Test >> setUp [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTest5Test >> testApplyOnOppositeOn [
 	| ctype ttype cwith twith|
 	ctype := model metamodel elementNamed: 'Famix-Test5-Entities.AnnotationType2'.
@@ -27,7 +28,7 @@ FamixTest5Test >> testApplyOnOppositeOn [
 	self assert: (cwith traits includes: twith)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTest5Test >> testApplyOnOppositeTraitOn [
 	| ctype ttype cwith twith|
 	ctype := model metamodel elementNamed: 'Famix-Test5-Entities.AnnotationType1'.

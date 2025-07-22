@@ -23,14 +23,16 @@
 
 "
 Class {
-	#name : #FamixStEntityTyping,
-	#superclass : #FamixStEntity,
+	#name : 'FamixStEntityTyping',
+	#superclass : 'FamixStEntity',
 	#traits : 'FamixTEntityTyping',
 	#classTraits : 'FamixTEntityTyping classTrait',
-	#category : #'Famix-PharoSmalltalk-Entities-Entities'
+	#category : 'Famix-PharoSmalltalk-Entities-Entities',
+	#package : 'Famix-PharoSmalltalk-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixStEntityTyping class >> annotation [
 
 	<FMClass: #EntityTyping super: #FamixStEntity>

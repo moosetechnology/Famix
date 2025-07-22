@@ -1,6 +1,6 @@
 Class {
-	#name : #FamixUMLAssociation,
-	#superclass : #FamixUMLLink,
+	#name : 'FamixUMLAssociation',
+	#superclass : 'FamixUMLLink',
 	#instVars : [
 		'sourceCardinality',
 		'sourceRole',
@@ -8,10 +8,12 @@ Class {
 		'targetCardinality',
 		'aggregation'
 	],
-	#category : #'Famix-UMLDocumentor-Model'
+	#category : 'Famix-UMLDocumentor-Model',
+	#package : 'Famix-UMLDocumentor',
+	#tag : 'Model'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 FamixUMLAssociation class >> from: aFM3Prop [
 	^self new
 		initializeFrom: aFM3Prop ;
@@ -19,13 +21,13 @@ FamixUMLAssociation class >> from: aFM3Prop [
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixUMLAssociation >> aggregation [
 
 	^ aggregation
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixUMLAssociation >> aggregation: aSymbol [
 	"#off, #source, or #target"
 
@@ -33,13 +35,13 @@ FamixUMLAssociation >> aggregation: aSymbol [
 	aggregation := aSymbol
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixUMLAssociation >> checkCardinalitySymbol: aSymbol [
 
 	self assert: ((aSymbol = #one) or: [ aSymbol = #multi ])
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FamixUMLAssociation >> initialize [ 
 	super initialize.
 	
@@ -49,7 +51,7 @@ FamixUMLAssociation >> initialize [
 	aggregation := #off
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FamixUMLAssociation >> initializeFrom: aFM3Prop [
 
 	self source: aFM3Prop mmClass name.
@@ -69,14 +71,14 @@ FamixUMLAssociation >> initializeFrom: aFM3Prop [
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixUMLAssociation >> sourceCardinality [
 	"#one or #multiple"
 
 	^ sourceCardinality
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixUMLAssociation >> sourceCardinality: aSymbol [
 	"#one or #multi"
 
@@ -84,26 +86,26 @@ FamixUMLAssociation >> sourceCardinality: aSymbol [
 	sourceCardinality := aSymbol
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixUMLAssociation >> sourceRole [
 
 	^ sourceRole
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixUMLAssociation >> sourceRole: anObject [
 
 	sourceRole := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixUMLAssociation >> targetCardinality [
 	"#one or #multiple"
 
 	^ targetCardinality
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixUMLAssociation >> targetCardinality: aSymbol [
 	"#one or #multi"
 
@@ -111,13 +113,13 @@ FamixUMLAssociation >> targetCardinality: aSymbol [
 	targetCardinality := aSymbol
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixUMLAssociation >> targetRole [
 
 	^ targetRole
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixUMLAssociation >> targetRole: anObject [
 
 	targetRole := anObject

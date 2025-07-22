@@ -1,33 +1,34 @@
 Class {
-	#name : #FamixSmalltalkNameResolverTest,
-	#superclass : #TestCase,
-	#category : #'Famix-Smalltalk-Utils-Tests'
+	#name : 'FamixSmalltalkNameResolverTest',
+	#superclass : 'TestCase',
+	#category : 'Famix-Smalltalk-Utils-Tests',
+	#package : 'Famix-Smalltalk-Utils-Tests'
 }
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 FamixSmalltalkNameResolverTest >> actualClass [
 	^ FamixSmalltalkNameResolver
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixSmalltalkNameResolverTest >> testFamixFullClassNameForSmalltalkClass [
 	self assert: self class name equals: (self actualClass moosify: self class name) asSymbol.
 	self assert: self class class mooseName equals: ('Smalltalk.' , (self actualClass moosify: self class name) , self actualClass metaclassTag) asSymbol
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixSmalltalkNameResolverTest >> testFindClassNamed [
 	self assert: (self actualClass findClassNamedOrNilFromFullName: #Object) equals: Object.
 	self assert: (self actualClass findClassNamedOrNilFromFullName: #ObjectAbsent) isNil
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixSmalltalkNameResolverTest >> testFindClassNamedOrNil [
 	self assert: (self actualClass findClassNamedOrNilFromFullName: Model name) equals: Model.
 	self assert: (self actualClass findClassNamedOrNilFromFullName: (self actualClass name , self actualClass metaclassTag) asSymbol) isNil
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixSmalltalkNameResolverTest >> testGroupedBy [
 	| res |
 	res := #(1 2 3 4 5) groupedBy: [ :each | each odd ].
@@ -35,13 +36,13 @@ FamixSmalltalkNameResolverTest >> testGroupedBy [
 	self assert: (res at: false) equals: #(2 4)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixSmalltalkNameResolverTest >> testResolvingName [
 	self assert: (self actualClass smalltalkClassFromFamixClassName: #Object ifAbsent: [  ]) equals: Object.
 	self assert: (self actualClass smalltalkClassFromFamixClassName: #FooBarZorkAbsent ifAbsent: [ 10 ]) identicalTo: 10
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixSmalltalkNameResolverTest >> testSmalltalkNameFromFamixName [
 
 	self

@@ -1,14 +1,16 @@
 Class {
-	#name : #AbstractCandidateListOperator,
-	#superclass : #MooseOperator,
+	#name : 'AbstractCandidateListOperator',
+	#superclass : 'MooseOperator',
 	#instVars : [
 		'groups',
 		'importer'
 	],
-	#category : #'Moose-SmalltalkImporter-Operators'
+	#category : 'Moose-SmalltalkImporter-Operators',
+	#package : 'Moose-SmalltalkImporter',
+	#tag : 'Operators'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 AbstractCandidateListOperator class >> runOn: aMooseModel importer: anImporter [
 	 
 	^(self on: aMooseModel) 
@@ -16,7 +18,7 @@ AbstractCandidateListOperator class >> runOn: aMooseModel importer: anImporter [
 		run
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 AbstractCandidateListOperator >> allCandidatesFor: invocation [ 
 	 
 	^Array 
@@ -26,7 +28,7 @@ AbstractCandidateListOperator >> allCandidatesFor: invocation [
 				ifAbsent: #())
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 AbstractCandidateListOperator >> basicRun [ 
 	 
 	model allInvocations 
@@ -37,13 +39,13 @@ AbstractCandidateListOperator >> basicRun [
 			self increment]
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 AbstractCandidateListOperator >> computeCandidateListFor: anInvocation [ 
 	"this method will dispatch the work according anInvogroups  reveiver type. Each subclass implements a different strategy according what you want to import: maybe you don't want to import any candidates, maybe only for receivers enough simple to compute easily the list ('self', 'super', a Class) , ..."
 	^ self subclassResponsibility 
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 AbstractCandidateListOperator >> computeCandidateListFor: anInvocation withBaseClass: aClass [
 	aClass
 		ifNotNil: [ | candidate |
@@ -51,7 +53,7 @@ AbstractCandidateListOperator >> computeCandidateListFor: anInvocation withBaseC
 			(candidate isNotNil and: [ candidate isAbstract not ]) ifTrue: [ anInvocation candidates: (Array with: candidate) ] ]
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 AbstractCandidateListOperator >> computeCandidateListFor: anInvocation withReceivingClass: aClass [
 	| candidate candidates |
 	aClass
@@ -62,7 +64,7 @@ AbstractCandidateListOperator >> computeCandidateListFor: anInvocation withRecei
 			anInvocation candidates: candidates ]
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 AbstractCandidateListOperator >> computeInstanceVariableCandidateListFor: anInvocation [
 	| roelTyperResult allCandidates classContainingInvocation instVarSymbol |
 	classContainingInvocation := Smalltalk at: anInvocation receiver belongsTo name.
@@ -81,7 +83,7 @@ AbstractCandidateListOperator >> computeInstanceVariableCandidateListFor: anInvo
 	^ roelTyperResult
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 AbstractCandidateListOperator >> computeTemporaryVariableCandidateListFor: anInvocation [
 	"For now, I am call by noone because I am a work in progress."
 
@@ -105,30 +107,30 @@ AbstractCandidateListOperator >> computeTemporaryVariableCandidateListFor: anInv
 	^ types
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AbstractCandidateListOperator >> description [ 
 	 
 	^'Computing candidate list for <1p> invocations'
 		expandMacrosWith: model allInvocations size
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AbstractCandidateListOperator >> importer [
 	^ importer
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AbstractCandidateListOperator >> importer: anObject [
 	importer := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AbstractCandidateListOperator >> length [ 
 	 
 	^model allInvocations size
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 AbstractCandidateListOperator >> setUp [ 
 	
 	"dont call 'model allMethods' here because it sorts the group and we dont care at this level"

@@ -10,12 +10,14 @@ testRunner selectSubclasses.
 testRunner collectCoverageFor: (methods collect: #asRingDefinition)
 "
 Class {
-	#name : #FmxMBBuilderTest,
-	#superclass : #FmxMBTestCase,
-	#category : #'Famix-MetamodelBuilder-Tests-Tests'
+	#name : 'FmxMBBuilderTest',
+	#superclass : 'FmxMBTestCase',
+	#category : 'Famix-MetamodelBuilder-Tests-Tests',
+	#package : 'Famix-MetamodelBuilder-Tests',
+	#tag : 'Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBBuilderTest >> testChildBuildersGeneration [
 	| parentBuilder childBuilder environment |
 	parentBuilder := FamixMetamodelBuilder forTesting.
@@ -37,7 +39,7 @@ FmxMBBuilderTest >> testChildBuildersGeneration [
 	self assert: (environment ask behaviorNamed: #TstChildEntity) isNil
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBBuilderTest >> testChildBuildersShareTheSameEnvironment [
 
 	| parentBuilder childBuilder |
@@ -50,7 +52,7 @@ FmxMBBuilderTest >> testChildBuildersShareTheSameEnvironment [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBBuilderTest >> testClassNamed [
 
 	| c1 |
@@ -61,7 +63,7 @@ FmxMBBuilderTest >> testClassNamed [
 	self assert: (builder classNamed: #C2) isNil.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBBuilderTest >> testEnsureClassNamed [
 
 	| c1 |
@@ -73,7 +75,7 @@ FmxMBBuilderTest >> testEnsureClassNamed [
 	
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBBuilderTest >> testEnsureLocalTraitNamed [
 
 	| t0 t1 |
@@ -85,7 +87,7 @@ FmxMBBuilderTest >> testEnsureLocalTraitNamed [
 	self assert: (builder ensureLocalTraitNamed: #T1) equals: t1.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBBuilderTest >> testEnsureLocalTraitNamedExisting [
 
 	| aTrait |
@@ -97,7 +99,7 @@ FmxMBBuilderTest >> testEnsureLocalTraitNamedExisting [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBBuilderTest >> testMultipleClassesCreation [
 
 	"it should not be possible to create two classes with the same name"
@@ -107,7 +109,7 @@ FmxMBBuilderTest >> testMultipleClassesCreation [
 	
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBBuilderTest >> testMultipleTraitsCreation [
 
 	"it should not be possible to create two traits with the same name"
@@ -117,7 +119,7 @@ FmxMBBuilderTest >> testMultipleTraitsCreation [
 	
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBBuilderTest >> testNewClassNamedComment [
 
 	| c1 aClass |
@@ -131,7 +133,7 @@ FmxMBBuilderTest >> testNewClassNamedComment [
 	self assert: (c1 comment content beginsWith: 'comment')
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBBuilderTest >> testNewTraitNamedComment [
 
 	| t1 aTrait |
@@ -145,7 +147,7 @@ FmxMBBuilderTest >> testNewTraitNamedComment [
 	self assert: (t1 comment content beginsWith: 'comment')
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBBuilderTest >> testParentBuilder [
 
 	| parentBuilder childBuilder |
@@ -161,7 +163,7 @@ FmxMBBuilderTest >> testParentBuilder [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBBuilderTest >> testSafeAnnotationPackageName [
 
 	builder configuration packageName: 'Package'.
@@ -171,7 +173,7 @@ FmxMBBuilderTest >> testSafeAnnotationPackageName [
 	self assert: builder safeAnnotationPackageName equals: '#''Package-Core'''.	
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBBuilderTest >> testSortedClasses [
 
 	"test class sorting by their hierarchy"
@@ -187,7 +189,7 @@ FmxMBBuilderTest >> testSortedClasses [
 	self assert: builder sortedClasses asArray equals: { c3. c1. c2 }
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBBuilderTest >> testSortedTraits [
 
 	| t1 t2 t3 |
@@ -201,7 +203,7 @@ FmxMBBuilderTest >> testSortedTraits [
 	
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBBuilderTest >> testSortedTraitsWith1LevelUsage [
 	"traits should be sorted by name and by their useage level"
 
@@ -218,7 +220,7 @@ FmxMBBuilderTest >> testSortedTraitsWith1LevelUsage [
 			t2 }
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBBuilderTest >> testSortedTraitsWith2LevelUsage [
 	"traits should be sorted by name and by their useage level"
 
@@ -236,7 +238,7 @@ FmxMBBuilderTest >> testSortedTraitsWith2LevelUsage [
 			t1 }
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBBuilderTest >> testTraitNamed [
 	self should: [ builder traitNamed: #T1 ] raise: FamixMetamodelGeneratorUnknownTrait.
 	builder ensureClassNamed: #C1.

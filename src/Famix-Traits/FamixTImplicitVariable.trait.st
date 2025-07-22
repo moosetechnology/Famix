@@ -35,16 +35,18 @@ FamixTImplicitVariable represents a variable defined by the compiler in a contex
 
 "
 Trait {
-	#name : #FamixTImplicitVariable,
+	#name : 'FamixTImplicitVariable',
 	#instVars : [
 		'#parentBehaviouralEntity => FMOne type: #FamixTWithImplicitVariables opposite: #implicitVariables'
 	],
 	#traits : 'FamixTStructuralEntity',
 	#classTraits : 'FamixTStructuralEntity classTrait',
-	#category : #'Famix-Traits-ImplicitVariable'
+	#category : 'Famix-Traits-ImplicitVariable',
+	#package : 'Famix-Traits',
+	#tag : 'ImplicitVariable'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTImplicitVariable classSide >> annotation [
 
 	<FMClass: #TImplicitVariable super: #Object>
@@ -53,27 +55,27 @@ FamixTImplicitVariable classSide >> annotation [
 	^ self
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FamixTImplicitVariable >> accept: aVisitor [
 
 	<generated>
 	^ aVisitor visitFamixTImplicitVariable: self
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTImplicitVariable >> isImplicitVariable [
 
 	<generated>
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTImplicitVariable >> isSelf [
 
 	^ self name = 'self'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTImplicitVariable >> parentBehaviouralEntity [
 	"Relation named: #parentBehaviouralEntity type: #FamixTWithImplicitVariables opposite: #implicitVariables"
 
@@ -83,7 +85,7 @@ FamixTImplicitVariable >> parentBehaviouralEntity [
 	^ parentBehaviouralEntity
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTImplicitVariable >> parentBehaviouralEntity: anObject [
 
 	parentBehaviouralEntity := anObject.
@@ -92,7 +94,7 @@ FamixTImplicitVariable >> parentBehaviouralEntity: anObject [
 
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FamixTImplicitVariable >> parentBehaviouralEntityGroup [
 	<generated>
 	<navigation: 'ParentBehaviouralEntity'>

@@ -1,16 +1,16 @@
-Extension { #name : #Collection }
+Extension { #name : 'Collection' }
 
-{ #category : #'*Moose-Core' }
+{ #category : '*Moose-Core' }
 Collection >> asMooseGroup [
 	^ MooseGroup withAll: self
 ]
 
-{ #category : #'*Moose-Core' }
+{ #category : '*Moose-Core' }
 Collection >> asMooseSpecializedGroup [
 	^ MooseSpecializedGroup withAll: self
 ]
 
-{ #category : #'*Moose-Core' }
+{ #category : '*Moose-Core' }
 Collection >> commonSuperclass [
 	"Answer the most specific common super class of the receiver's
 	elements, returns Object on empty collections."

@@ -1,18 +1,19 @@
 Class {
-	#name : #FamixCAAnalyzerTest,
-	#superclass : #TestCase,
+	#name : 'FamixCAAnalyzerTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'class'
 	],
-	#category : #'Famix-CommentAnalyzer-Tests'
+	#category : 'Famix-CommentAnalyzer-Tests',
+	#package : 'Famix-CommentAnalyzer-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 FamixCAAnalyzerTest >> commentsDetector [
 	^ FamixCACommentedCodeDetector with: FamixTest1SourceLanguage new
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixCAAnalyzerTest >> setUp [
 	super setUp.
 	class := (FamixTest1Class named: 'class' model: (FamixTest1Model sourceLanguage: FamixTest1SourceLanguage new))
@@ -20,28 +21,28 @@ FamixCAAnalyzerTest >> setUp [
 		yourself
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixCAAnalyzerTest >> testCommentedCode [
 	self
 		assert: (self commentsDetector isCommentedCodeLine: '//uint8 wrongPinMsg[]    = "  tarjeta bloque";		// message_pp[5][32]')
 		description: 'It should not be a meaningful line because this is commented code'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixCAAnalyzerTest >> testCommentedCode2 [
 	self
 		assert: (self commentsDetector isCommentedCodeLine: '//DEBUG(("Buffer=%s", szDisplScrollBuff));')
 		description: 'It should not be a meaningful line because this is commented code'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixCAAnalyzerTest >> testFalsePositiveComment [
 	self
 		deny: (self commentsDetector isCommentedCodeLine: '// The parameter funcId is only used in Telium because if cancelling the AID selection must send the message to)')
 		description: 'It is not commented code'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixCAAnalyzerTest >> testLinesUsefulInComment [
 	class comments first
 		content:
@@ -50,7 +51,7 @@ FamixCAAnalyzerTest >> testLinesUsefulInComment [
 	self assert: class numberOfUsefulCommentLines equals: 2
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixCAAnalyzerTest >> testLinesUsefulInComment2 [
 	class comments first
 		content:

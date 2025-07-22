@@ -36,17 +36,19 @@ Note that FamixTReference was defined between two FamixTContainerEntity entities
 
 "
 Trait {
-	#name : #FamixTReference,
+	#name : 'FamixTReference',
 	#instVars : [
 		'#referencer => FMOne type: #FamixTWithReferences opposite: #outgoingReferences',
 		'#referredEntity => FMOne type: #FamixTReferenceable opposite: #incomingReferences'
 	],
 	#traits : 'FamixTAssociation',
 	#classTraits : 'FamixTAssociation classTrait',
-	#category : #'Famix-Traits-Reference'
+	#category : 'Famix-Traits-Reference',
+	#package : 'Famix-Traits',
+	#tag : 'Reference'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTReference classSide >> annotation [
 
 	<FMClass: #TReference super: #Object>
@@ -55,26 +57,26 @@ FamixTReference classSide >> annotation [
 	^ self
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 FamixTReference classSide >> source: source target: target [
 	^ self new source: source; target: target
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FamixTReference >> accept: aVisitor [
 
 	<generated>
 	^ aVisitor visitFamixTReference: self
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTReference >> isReference [
 
 	<generated>
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTReference >> referencer [
 	"Relation named: #referencer type: #FamixTWithReferences opposite: #outgoingReferences"
 
@@ -84,14 +86,14 @@ FamixTReference >> referencer [
 	^ referencer
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTReference >> referencer: anObject [
 
 	<generated>
 	referencer := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTReference >> referredEntity [
 	"Relation named: #referredEntity type: #FamixTReferenceable opposite: #incomingReferences"
 
@@ -101,7 +103,7 @@ FamixTReference >> referredEntity [
 	^ referredEntity
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTReference >> referredEntity: anObject [
 
 	<generated>

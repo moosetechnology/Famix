@@ -2,17 +2,18 @@
 I am test runed on FamixTest3 model to be able to tests features were you need a real model.
 "
 Class {
-	#name : #FamixTest3ModelTest,
-	#superclass : #MooseModelTest,
-	#category : #'Moose-Core-Tests'
+	#name : 'FamixTest3ModelTest',
+	#superclass : 'MooseModelTest',
+	#category : 'Moose-Core-Tests',
+	#package : 'Moose-Core-Tests'
 }
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 FamixTest3ModelTest >> actualClass [
 	^ FamixTest3Model
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTest3ModelTest >> testExport [
 
 	self
@@ -28,7 +29,7 @@ FamixTest3ModelTest >> testExport [
 		(numberOfLinesOfCode 0)))'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTest3ModelTest >> testPrintOn [
 
 	self assert: group printString equals: 'a FamixTest3Model #noname(0)'.
@@ -42,7 +43,7 @@ FamixTest3ModelTest >> testPrintOn [
 		equals: 'a FMMetaModel'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTest3ModelTest >> testRootUniqueness [
 	self skip. "This should be fixed later. https://github.com/moosetechnology/Moose/issues/1809"
 	super testRootUniqueness

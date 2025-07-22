@@ -17,15 +17,17 @@ Internal Representation and Key Implementation Points.
 
 "
 Class {
-	#name : #FmxMethodRemovals,
-	#superclass : #FmxLazyClassChange,
+	#name : 'FmxMethodRemovals',
+	#superclass : 'FmxLazyClassChange',
 	#instVars : [
 		'selectors'
 	],
-	#category : #'Famix-MetamodelBuilder-Core-Changes'
+	#category : 'Famix-MetamodelBuilder-Core-Changes',
+	#package : 'Famix-MetamodelBuilder-Core',
+	#tag : 'Changes'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 FmxMethodRemovals class >> className: aSymbol isClassSide: aBoolean selectors: aCollection [
 	^ self new
 		className: aSymbol;
@@ -34,25 +36,25 @@ FmxMethodRemovals class >> className: aSymbol isClassSide: aBoolean selectors: a
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMethodRemovals >> apply [
 	| class |
 	class := self realClass.
 	self selectors do: [ :selector | class removeSelector: selector ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FmxMethodRemovals >> isRemoval [
 
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMethodRemovals >> selectors [
 	^ selectors
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMethodRemovals >> selectors: anObject [
 	selectors := anObject
 ]

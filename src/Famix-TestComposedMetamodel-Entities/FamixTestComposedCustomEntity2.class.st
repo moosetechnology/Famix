@@ -12,12 +12,14 @@
 
 "
 Class {
-	#name : #FamixTestComposedCustomEntity2,
-	#superclass : #FamixTestComposedEntity,
-	#category : #'Famix-TestComposedMetamodel-Entities-Entities'
+	#name : 'FamixTestComposedCustomEntity2',
+	#superclass : 'FamixTestComposedEntity',
+	#category : 'Famix-TestComposedMetamodel-Entities-Entities',
+	#package : 'Famix-TestComposedMetamodel-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTestComposedCustomEntity2 class >> annotation [
 
 	<FMClass: #CustomEntity2 super: #FamixTestComposedEntity>
@@ -26,19 +28,19 @@ FamixTestComposedCustomEntity2 class >> annotation [
 	^ self
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTestComposedCustomEntity2 >> addC22: anObject [
 	<generated>
 	^ self c22s add: anObject
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTestComposedCustomEntity2 >> addCustomEntities2: anObject [
 	<generated>
 	^ self customEntities2 add: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTestComposedCustomEntity2 >> c22s [
 	"Relation named: #c22s type: #FamixTestComposed2CustomEntity2 opposite: #c2"
 
@@ -48,14 +50,14 @@ FamixTestComposedCustomEntity2 >> c22s [
 	^ self attributeAt: #c22s ifAbsentPut: [ FMMultivalueLink on: self opposite: #c2: ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTestComposedCustomEntity2 >> c22s: anObject [
 
 	<generated>
 	self c22s value: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTestComposedCustomEntity2 >> customEntities2 [
 	"Relation named: #customEntities2 type: #FamixTestComposed1CustomEntity2 opposite: #customEntity2"
 
@@ -65,7 +67,7 @@ FamixTestComposedCustomEntity2 >> customEntities2 [
 	^ self attributeAt: #customEntities2 ifAbsentPut: [ FMMultivalueLink on: self opposite: #customEntity2: ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTestComposedCustomEntity2 >> customEntities2: anObject [
 
 	<generated>

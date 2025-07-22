@@ -1,10 +1,11 @@
 Class {
-	#name : #FamixTest10Test,
-	#superclass : #TestCase,
-	#category : #'Famix-Test10-Tests'
+	#name : 'FamixTest10Test',
+	#superclass : 'TestCase',
+	#category : 'Famix-Test10-Tests',
+	#package : 'Famix-Test10-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 FamixTest10Test >> tearDown [
 
 	FamixTest10Generator packageName asPackageIfAbsent: [
@@ -13,7 +14,7 @@ FamixTest10Test >> tearDown [
 	super tearDown
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTest10Test >> testRegenerationWithSlightDifferenceFromScratchWorks [
 
 	FamixTest10Generator generate.
@@ -29,7 +30,7 @@ FamixTest10Test >> testRegenerationWithSlightDifferenceFromScratchWorks [
 		equals: true
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTest10Test >> testRegenerationWithSlightDifferenceRedefinesSlotDefaultValue [
 
 	FamixTest10Generator generate.

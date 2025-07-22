@@ -1,10 +1,12 @@
 Class {
-	#name : #FamixNamespaceNavigationChefTest,
-	#superclass : #AbstractFamixNavigationTest,
-	#category : #'Moose-SmalltalkImporter-KGB-Tests-MooseChef'
+	#name : 'FamixNamespaceNavigationChefTest',
+	#superclass : 'AbstractFamixNavigationTest',
+	#category : 'Moose-SmalltalkImporter-KGB-Tests-MooseChef',
+	#package : 'Moose-SmalltalkImporter-KGB-Tests',
+	#tag : 'MooseChef'
 }
 
-{ #category : #'tests - clients' }
+{ #category : 'tests - clients' }
 FamixNamespaceNavigationChefTest >> testClientClasses [
 	self
 		assertCollection: (self n2FullReferee queryAllIncoming atScope: FamixTType)
@@ -14,21 +16,21 @@ FamixNamespaceNavigationChefTest >> testClientClasses [
 			self c9FullRefereeInSide }
 ]
 
-{ #category : #'tests - clients' }
+{ #category : 'tests - clients' }
 FamixNamespaceNavigationChefTest >> testClientClassesInto [
 	self
 		assertCollection: ((self n2FullReferee allClientsAtScope: FamixTType) within: self n3ReferencerReferee)
 		hasSameElements: {self c14ReferencerOutSideRefereeOutSide}
 ]
 
-{ #category : #'tests - clients' }
+{ #category : 'tests - clients' }
 FamixNamespaceNavigationChefTest >> testClientNamespaces [
 	self
 		assertCollection: (self n2FullReferee queryAllIncoming atScope: FamixTNamespace)
 		hasSameElements: {self n1InteractedReferencerReferee . self n3ReferencerReferee . self n2FullReferee}
 ]
 
-{ #category : #'tests - references' }
+{ #category : 'tests - references' }
 FamixNamespaceNavigationChefTest >> testEachOutgoingReferenceImpliesAnIncomingReference [
 	| modelNamespaces |
 	modelNamespaces := self model allNamespaces.
@@ -46,7 +48,7 @@ FamixNamespaceNavigationChefTest >> testEachOutgoingReferenceImpliesAnIncomingRe
 						allSatisfy: [ :referenced | (referenced queryAllIncomingInvocations atScope: FamixTNamespace) includes: referencer ] ])
 ]
 
-{ #category : #'tests - inheritance' }
+{ #category : 'tests - inheritance' }
 FamixNamespaceNavigationChefTest >> testInheritedByClasses [
 	self
 		assertCollection: (self n2FullReferee queryIncomingInheritances atScope: FamixTType)
@@ -56,21 +58,21 @@ FamixNamespaceNavigationChefTest >> testInheritedByClasses [
 		hasSameElements: {self c11FullRefereeOutSide . self c3ReferencerInSideRefereeOutSide}
 ]
 
-{ #category : #'tests - inheritance' }
+{ #category : 'tests - inheritance' }
 FamixNamespaceNavigationChefTest >> testInheritedByClassesInto [
 	self
 		assertCollection: ((self n2FullReferee queryIncomingInheritances atScope: FamixTType) within: self n1InteractedReferencerReferee)
 		hasSameElements: {self c3ReferencerInSideRefereeOutSide}
 ]
 
-{ #category : #'tests - inheritance' }
+{ #category : 'tests - inheritance' }
 FamixNamespaceNavigationChefTest >> testInheritedByNamespaces [
 	self
 		assertCollection: (self n2FullReferee queryIncomingInheritances atScope: FamixTNamespace)
 		hasSameElements: {self n1InteractedReferencerReferee . self n2FullReferee}
 ]
 
-{ #category : #'tests - inheritance' }
+{ #category : 'tests - inheritance' }
 FamixNamespaceNavigationChefTest >> testInheritedClasses [
 	self
 		assertCollection: (self n1InteractedReferencerReferee queryOutgoingInheritances atScope: FamixTType)
@@ -80,21 +82,21 @@ FamixNamespaceNavigationChefTest >> testInheritedClasses [
 		hasSameElements: {self c6FullReferencerInSideOutSide . self c11FullRefereeOutSide . self cObject}
 ]
 
-{ #category : #'tests - inheritance' }
+{ #category : 'tests - inheritance' }
 FamixNamespaceNavigationChefTest >> testInheritedClassesInto [
 	self
 		assertCollection: ((self n1InteractedReferencerReferee queryOutgoingInheritances atScope: FamixTType) within: self n2FullReferee)
 		hasSameElements: {self c11FullRefereeOutSide}
 ]
 
-{ #category : #'tests - inheritance' }
+{ #category : 'tests - inheritance' }
 FamixNamespaceNavigationChefTest >> testInheritedNamespaces [
 	self
 		assertCollection: (self n1InteractedReferencerReferee queryOutgoingInheritances atScope: FamixTNamespace)
 		hasSameElements: {self n2FullReferee . self nSmalltalkCore . self n1InteractedReferencerReferee}
 ]
 
-{ #category : #'tests - providers' }
+{ #category : 'tests - providers' }
 FamixNamespaceNavigationChefTest >> testProviderClasses [
 	self
 		assertCollection: (self n1InteractedReferencerReferee queryAllOutgoing atScope: FamixTType)
@@ -104,7 +106,7 @@ FamixNamespaceNavigationChefTest >> testProviderClasses [
 			self c1FullReferencerOutSide . self c5ReferencerInSideRefereeInSide}
 ]
 
-{ #category : #'tests - providers' }
+{ #category : 'tests - providers' }
 FamixNamespaceNavigationChefTest >> testProviderClassesInto [
 	| invos refs inh |
 	self
@@ -124,7 +126,7 @@ FamixNamespaceNavigationChefTest >> testProviderClassesInto [
 				hasSameElements: {self c11FullRefereeOutSide . self c13FullRefereeInSideOutSide}
 ]
 
-{ #category : #'tests - providers' }
+{ #category : 'tests - providers' }
 FamixNamespaceNavigationChefTest >> testProviderClassesOutOf [
 	| invos refs inh acc |
 	self
@@ -151,14 +153,14 @@ FamixNamespaceNavigationChefTest >> testProviderClassesOutOf [
 			self c4FullRefereeInSide . self c1FullReferencerOutSide}
 ]
 
-{ #category : #'tests - providers' }
+{ #category : 'tests - providers' }
 FamixNamespaceNavigationChefTest >> testProviderNamespaces [
 	self
 		assertCollection: (self n1InteractedReferencerReferee queryAllOutgoing atScope: FamixTNamespace)
 		hasSameElements: {self n2FullReferee . self n3ReferencerReferee . self nSmalltalkCore . self n1InteractedReferencerReferee}
 ]
 
-{ #category : #'tests - outgoing invocations' }
+{ #category : 'tests - outgoing invocations' }
 FamixNamespaceNavigationChefTest >> testReferencedClasses [
 	self
 		assertCollection: (self n1InteractedReferencerReferee queryAllOutgoingInvocations atScope: FamixTType)
@@ -168,21 +170,21 @@ FamixNamespaceNavigationChefTest >> testReferencedClasses [
 			self c1FullReferencerOutSide}
 ]
 
-{ #category : #'tests - outgoing invocations' }
+{ #category : 'tests - outgoing invocations' }
 FamixNamespaceNavigationChefTest >> testReferencedClassesInto [
 	self
 		assertCollection: ((self n1InteractedReferencerReferee queryAllOutgoingInvocations atScope: FamixTType) within: self n2FullReferee)
 		hasSameElements: {self c11FullRefereeOutSide . self c13FullRefereeInSideOutSide}
 ]
 
-{ #category : #'tests - outgoing invocations' }
+{ #category : 'tests - outgoing invocations' }
 FamixNamespaceNavigationChefTest >> testReferencedNamespaces [
 	self
 		assertCollection: (self n1InteractedReferencerReferee queryAllOutgoingInvocations atScope: FamixTNamespace)
 		hasSameElements: {self n2FullReferee . self n3ReferencerReferee . self n1InteractedReferencerReferee}
 ]
 
-{ #category : #'tests - incoming invocations' }
+{ #category : 'tests - incoming invocations' }
 FamixNamespaceNavigationChefTest >> testReferencingClasses [
 	self
 		assertCollection: (self n2FullReferee queryAllIncomingInvocations atScope: FamixTType)
@@ -191,14 +193,14 @@ FamixNamespaceNavigationChefTest >> testReferencingClasses [
 			self c13FullRefereeInSideOutSide . self c10FullReferencerInSide . self c11FullRefereeOutSide}
 ]
 
-{ #category : #'tests - incoming invocations' }
+{ #category : 'tests - incoming invocations' }
 FamixNamespaceNavigationChefTest >> testReferencingClassesInto [
 	self
 		assertCollection: ((self n2FullReferee queryAllIncomingInvocations atScope: FamixTType) within: self n3ReferencerReferee)
 		hasSameElements: {self c14ReferencerOutSideRefereeOutSide}
 ]
 
-{ #category : #'tests - incoming invocations' }
+{ #category : 'tests - incoming invocations' }
 FamixNamespaceNavigationChefTest >> testReferencingNamespaces [
 	self
 		assertCollection: (self n2FullReferee queryAllIncomingInvocations atScope: FamixTNamespace)

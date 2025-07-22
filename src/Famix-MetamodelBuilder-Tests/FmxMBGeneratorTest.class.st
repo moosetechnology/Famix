@@ -1,17 +1,19 @@
 Class {
-	#name : #FmxMBGeneratorTest,
-	#superclass : #FmxMBTestCase,
-	#category : #'Famix-MetamodelBuilder-Tests-Tests'
+	#name : 'FmxMBGeneratorTest',
+	#superclass : 'FmxMBTestCase',
+	#category : 'Famix-MetamodelBuilder-Tests-Tests',
+	#package : 'Famix-MetamodelBuilder-Tests',
+	#tag : 'Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBGeneratorTest >> testBuilderWithDefinitions [
 	builder := FamixTest1Generator builderWithDefinitions.
 	builder prepareGeneration.
 	self assert: (builder classNamed: #Entity) isNotNil
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBGeneratorTest >> testGenerateMooseModelSubclass [
 
 	FamixTest1Generator new generate.
@@ -19,7 +21,7 @@ FmxMBGeneratorTest >> testGenerateMooseModelSubclass [
 	self assert: ('Famix-Test1-Entities' asPackage definedClasses anySatisfy: [ :c | c name = 'FamixTest1Model'])
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBGeneratorTest >> testGeneratedClassesDoNotOverrideMethodsWithGeneratedPragmaToAddVersionWithTheSameAST [
 	| duplicatedMethods |
 	duplicatedMethods := SystemNavigation default allClasses iterator
@@ -33,7 +35,7 @@ FmxMBGeneratorTest >> testGeneratedClassesDoNotOverrideMethodsWithGeneratedPragm
 	self assertEmpty: duplicatedMethods
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBGeneratorTest >> testGeneratorsAreUpToDate [
 
 	FamixMetamodelGenerator generatorsToKeepUpToDate do: [ :mm |
@@ -45,20 +47,20 @@ FmxMBGeneratorTest >> testGeneratorsAreUpToDate [
 			, changes printString ] ]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBGeneratorTest >> testMooseModelSubclassHasMetaModel [
 	self assert: FamixTest1Model metamodel isNotNil.
 	self deny: MooseModel metamodel equals: FamixTest1Model metamodel
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBGeneratorTest >> testResetMetamodel [
 	| metamodel |
 	metamodel := FamixTest1Model resetMetamodel.
 	self assert: (metamodel elementNamed: 'Famix-Test1-Entities.Entity' ifAbsent: [ nil ]) isNotNil
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBGeneratorTest >> testResetMetamodelSetNewMetamodelToInstances [
 	| model oldMetamodel metamodel |
 	model := FamixTest1Model new.
@@ -69,7 +71,7 @@ FmxMBGeneratorTest >> testResetMetamodelSetNewMetamodelToInstances [
 	self assert: model metamodel identicalTo: metamodel
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBGeneratorTest >> testSubmetamodles [
 	self assertEmpty: FamixMetamodelGenerator submetamodels
 ]

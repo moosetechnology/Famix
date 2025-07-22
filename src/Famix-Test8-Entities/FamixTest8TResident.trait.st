@@ -11,14 +11,16 @@
 
 "
 Trait {
-	#name : #FamixTest8TResident,
+	#name : 'FamixTest8TResident',
 	#instVars : [
 		'#outgoingResidences => FMMany type: #FamixTest8Residence opposite: #resident'
 	],
-	#category : #'Famix-Test8-Entities-Traits'
+	#category : 'Famix-Test8-Entities-Traits',
+	#package : 'Famix-Test8-Entities',
+	#tag : 'Traits'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTest8TResident classSide >> annotation [
 
 	<FMClass: #TResident super: #Object>
@@ -27,13 +29,13 @@ FamixTest8TResident classSide >> annotation [
 	^ self
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTest8TResident >> addOutgoingResidence: anObject [
 	<generated>
 	^ self outgoingResidences add: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest8TResident >> outgoingResidences [
 	"Relation named: #outgoingResidences type: #FamixTest8Residence opposite: #resident"
 
@@ -42,7 +44,7 @@ FamixTest8TResident >> outgoingResidences [
 	^ outgoingResidences
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest8TResident >> outgoingResidences: anObject [
 
 	<generated>

@@ -1,13 +1,14 @@
 Class {
-	#name : #MooseIcons,
-	#superclass : #Object,
+	#name : 'MooseIcons',
+	#superclass : 'Object',
 	#classInstVars : [
 		'icons'
 	],
-	#category : #'Moose-Core'
+	#category : 'Moose-Core',
+	#package : 'Moose-Core'
 }
 
-{ #category : #utilities }
+{ #category : 'utilities' }
 MooseIcons class >> buildCache [
 
 	(Pragma allNamed: #mooseIcon in: self class) do: [ :pragma | 
@@ -16,7 +17,7 @@ MooseIcons class >> buildCache [
 	Smalltalk ui icons icons addAll: self icons
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> famixAnnotationInstance [
 
 	<mooseIcon>
@@ -72,7 +73,7 @@ MooseIcons class >> famixAnnotationInstance [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> famixAnnotationInstanceGroup [
 
 	<mooseIcon>
@@ -130,7 +131,7 @@ MooseIcons class >> famixAnnotationInstanceGroup [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> famixAnnotationType [
 
 	<mooseIcon>
@@ -161,7 +162,7 @@ MooseIcons class >> famixAnnotationType [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> famixAnnotationTypeGroup [
 
 	<mooseIcon>
@@ -219,7 +220,7 @@ MooseIcons class >> famixAnnotationTypeGroup [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> famixAttribute [
 
 	<mooseIcon>
@@ -250,7 +251,7 @@ MooseIcons class >> famixAttribute [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> famixAttributeGroup [
 
 	<mooseIcon>
@@ -308,7 +309,7 @@ MooseIcons class >> famixAttributeGroup [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> famixClass [
 
 	<mooseIcon>
@@ -364,7 +365,7 @@ MooseIcons class >> famixClass [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> famixClassGroup [
 
 	<mooseIcon>
@@ -422,7 +423,7 @@ MooseIcons class >> famixClassGroup [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> famixFunction [
 
 	<mooseIcon>
@@ -453,7 +454,7 @@ MooseIcons class >> famixFunction [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> famixFunctionGroup [
 
 	<mooseIcon>
@@ -511,7 +512,7 @@ MooseIcons class >> famixFunctionGroup [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> famixInterface [
 
 	<mooseIcon>
@@ -542,7 +543,7 @@ MooseIcons class >> famixInterface [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> famixInterfaceGroup [
 
 	<mooseIcon>
@@ -600,7 +601,7 @@ MooseIcons class >> famixInterfaceGroup [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> famixMethod [
 
 	<mooseIcon>
@@ -631,7 +632,7 @@ MooseIcons class >> famixMethod [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> famixMethodGroup [
 
 	<mooseIcon>
@@ -671,7 +672,7 @@ MooseIcons class >> famixMethodGroup [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> famixNamespace [
 
 	<mooseIcon>
@@ -702,7 +703,7 @@ MooseIcons class >> famixNamespace [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> famixNamespaceGroup [
 
 	<mooseIcon>
@@ -742,7 +743,7 @@ MooseIcons class >> famixNamespaceGroup [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> famixPackage [
 
 	<mooseIcon>
@@ -773,7 +774,7 @@ MooseIcons class >> famixPackage [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> famixPackageGroup [
 
 	<mooseIcon>
@@ -813,7 +814,7 @@ MooseIcons class >> famixPackageGroup [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> famixTagBookmark [
 
 	<mooseIcon>
@@ -869,7 +870,7 @@ MooseIcons class >> famixTagBookmark [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> famixTagLabel [
 
 	<mooseIcon>
@@ -925,13 +926,13 @@ MooseIcons class >> famixTagLabel [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #utilities }
+{ #category : 'utilities' }
 MooseIcons class >> icons [
 
 	^ icons ifNil: [ icons := Dictionary new ]
 ]
 
-{ #category : #import }
+{ #category : 'import' }
 MooseIcons class >> importIcons: iconCollection fromFolder: aString inClass: aClass category: aCategory [
 	iconCollection
 		do: [:each |
@@ -946,7 +947,7 @@ MooseIcons class >> importIcons: iconCollection fromFolder: aString inClass: aCl
 			aClass compile: method classified: aCategory ]
 ]
 
-{ #category : #import }
+{ #category : 'import' }
 MooseIcons class >> importMooseFinderIcons [
 	"self importMooseFinderIcons"
 	| wantedIcons |
@@ -1008,7 +1009,7 @@ MooseIcons class >> importMooseFinderIcons [
 	self importIcons: wantedIcons fromFolder: 'icons' inClass: self class category: '*moose-finder'
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> mooseAccept [
 
 	<mooseIcon>
@@ -1063,7 +1064,7 @@ MooseIcons class >> mooseAccept [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> mooseAdd [
 
 	<mooseIcon>
@@ -1118,7 +1119,7 @@ MooseIcons class >> mooseAdd [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> mooseAddAbove [
 
 	<mooseIcon>
@@ -1182,7 +1183,7 @@ MooseIcons class >> mooseAddAbove [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> mooseAddBellow [
 
 	<mooseIcon>
@@ -1246,7 +1247,7 @@ MooseIcons class >> mooseAddBellow [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> mooseAst [
 
 	<mooseIcon>
@@ -1299,7 +1300,7 @@ MooseIcons class >> mooseAst [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> mooseBars [
 
 	<mooseIcon>
@@ -1356,7 +1357,7 @@ MooseIcons class >> mooseBars [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> mooseBlueprint [
 
 	<mooseIcon>
@@ -1416,7 +1417,7 @@ MooseIcons class >> mooseBlueprint [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> mooseCancel [
 
 	<mooseIcon>
@@ -1472,7 +1473,7 @@ MooseIcons class >> mooseCancel [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> mooseCircularTreeMap [
 
 	<mooseIcon>
@@ -1517,7 +1518,7 @@ MooseIcons class >> mooseCircularTreeMap [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> mooseCluster [
 
 	<mooseIcon>
@@ -1555,7 +1556,7 @@ MooseIcons class >> mooseCluster [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> mooseCycles [
 
 	<mooseIcon>
@@ -1611,7 +1612,7 @@ MooseIcons class >> mooseCycles [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> mooseDSM [
 
 	<mooseIcon>
@@ -1668,7 +1669,7 @@ MooseIcons class >> mooseDSM [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> mooseDependencies [
 
 	<mooseIcon>
@@ -1724,7 +1725,7 @@ MooseIcons class >> mooseDependencies [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> mooseDown [
 
 	<mooseIcon>
@@ -1788,7 +1789,7 @@ MooseIcons class >> mooseDown [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> mooseDragAndDrop [
 
 	<mooseIcon>
@@ -1821,7 +1822,7 @@ MooseIcons class >> mooseDragAndDrop [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> mooseEditor [
 
 	<mooseIcon>
@@ -1876,7 +1877,7 @@ MooseIcons class >> mooseEditor [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> mooseEg [
 
 	<mooseIcon>
@@ -1911,7 +1912,7 @@ MooseIcons class >> mooseEg [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> mooseEvaluator [
 
 	<mooseIcon>
@@ -1942,7 +1943,7 @@ MooseIcons class >> mooseEvaluator [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> mooseExportJson [
 
 	<mooseIcon>
@@ -1975,7 +1976,7 @@ MooseIcons class >> mooseExportJson [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> mooseExportMse [
 
 	<mooseIcon>
@@ -2039,7 +2040,7 @@ MooseIcons class >> mooseExportMse [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> mooseExportSmalltalk [
 
 	<mooseIcon>
@@ -2103,7 +2104,7 @@ MooseIcons class >> mooseExportSmalltalk [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> mooseFame [
 
 	<mooseIcon>
@@ -2145,7 +2146,7 @@ MooseIcons class >> mooseFame [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> mooseFilter [
 
 	<mooseIcon>
@@ -2189,7 +2190,7 @@ MooseIcons class >> mooseFilter [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> mooseFolder [
 
 	<mooseIcon>
@@ -2218,7 +2219,7 @@ MooseIcons class >> mooseFolder [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> mooseHorizontalBars [
 
 	<mooseIcon>
@@ -2248,7 +2249,7 @@ MooseIcons class >> mooseHorizontalBars [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> mooseIcon [
 
 	<mooseIcon>
@@ -2294,7 +2295,7 @@ MooseIcons class >> mooseIcon [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> mooseImportFile [
 
 	<mooseIcon>
@@ -2358,7 +2359,7 @@ MooseIcons class >> mooseImportFile [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> mooseImportFuel [
 
 	<mooseIcon>
@@ -2414,7 +2415,7 @@ MooseIcons class >> mooseImportFuel [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> mooseImportJson [
 
 	<mooseIcon>
@@ -2478,7 +2479,7 @@ MooseIcons class >> mooseImportJson [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> mooseImportMse [
 
 	<mooseIcon>
@@ -2536,7 +2537,7 @@ MooseIcons class >> mooseImportMse [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> mooseImportSmalltalk [
 
 	<mooseIcon>
@@ -2600,7 +2601,7 @@ MooseIcons class >> mooseImportSmalltalk [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> mooseIncoming [
 
 	<mooseIcon>
@@ -2656,7 +2657,7 @@ MooseIcons class >> mooseIncoming [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> mooseList [
 
 	<mooseIcon>
@@ -2693,7 +2694,7 @@ MooseIcons class >> mooseList [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> mooseMetamodelEntity [
 
 	<mooseIcon>
@@ -2724,7 +2725,7 @@ MooseIcons class >> mooseMetamodelEntity [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> mooseMetamodelGroup [
 
 	<mooseIcon>
@@ -2764,7 +2765,7 @@ MooseIcons class >> mooseMetamodelGroup [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> mooseMethodsBrowser [
 
 	<mooseIcon>
@@ -2821,7 +2822,7 @@ MooseIcons class >> mooseMethodsBrowser [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> mooseNavigation [
 
 	<mooseIcon>
@@ -2877,7 +2878,7 @@ MooseIcons class >> mooseNavigation [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> mooseOutgoing [
 
 	<mooseIcon>
@@ -2933,7 +2934,7 @@ MooseIcons class >> mooseOutgoing [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> mooseProperties [
 
 	<mooseIcon>
@@ -2969,7 +2970,7 @@ MooseIcons class >> mooseProperties [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> mooseRemove [
 
 	<mooseIcon>
@@ -3024,7 +3025,7 @@ MooseIcons class >> mooseRemove [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> mooseScatterplot [
 
 	<mooseIcon>
@@ -3080,7 +3081,7 @@ MooseIcons class >> mooseScatterplot [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> mooseSourceText [
 
 	<mooseIcon>
@@ -3136,7 +3137,7 @@ MooseIcons class >> mooseSourceText [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> mooseSourceTextPartial [
 
 	<mooseIcon>
@@ -3191,7 +3192,7 @@ MooseIcons class >> mooseSourceTextPartial [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> mooseSourceTextSelected [
 
 	<mooseIcon>
@@ -3229,7 +3230,7 @@ MooseIcons class >> mooseSourceTextSelected [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> mooseSystemComplexity [
 
 	<mooseIcon>
@@ -3285,7 +3286,7 @@ MooseIcons class >> mooseSystemComplexity [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> mooseTrash [
 
 	<mooseIcon>
@@ -3349,7 +3350,7 @@ MooseIcons class >> mooseTrash [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> mooseTree [
 
 	<mooseIcon>
@@ -3405,7 +3406,7 @@ MooseIcons class >> mooseTree [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> mooseTreeMap [
 
 	<mooseIcon>
@@ -3437,7 +3438,7 @@ MooseIcons class >> mooseTreeMap [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> mooseUml [
 
 	<mooseIcon>
@@ -3468,7 +3469,7 @@ MooseIcons class >> mooseUml [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> mooseUp [
 
 	<mooseIcon>
@@ -3532,7 +3533,7 @@ MooseIcons class >> mooseUp [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> mooseView [
 
 	<mooseIcon>
@@ -3569,7 +3570,7 @@ MooseIcons class >> mooseView [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #'icon creation' }
+{ #category : 'icon creation' }
 MooseIcons class >> mooseXml [
 
 	<mooseIcon>
@@ -3623,14 +3624,14 @@ MooseIcons class >> mooseXml [
 			  offset: 0 @ 0 ]
 ]
 
-{ #category : #utilities }
+{ #category : 'utilities' }
 MooseIcons class >> resetIcons [
 
 	<script>
 	icons := nil
 ]
 
-{ #category : #utilities }
+{ #category : 'utilities' }
 MooseIcons class >> showIcons [
 
 	<script>

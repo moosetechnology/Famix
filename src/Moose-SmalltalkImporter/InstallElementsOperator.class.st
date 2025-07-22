@@ -11,15 +11,16 @@ container
 
 "
 Class {
-	#name : #InstallElementsOperator,
-	#superclass : #MooseOperator,
+	#name : 'InstallElementsOperator',
+	#superclass : 'MooseOperator',
 	#instVars : [
 		'container'
 	],
-	#category : #'Moose-SmalltalkImporter'
+	#category : 'Moose-SmalltalkImporter',
+	#package : 'Moose-SmalltalkImporter'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 InstallElementsOperator class >> with: elements on: aMooseModel [ 
 	 
 	^ (self on: aMooseModel) 
@@ -28,7 +29,7 @@ InstallElementsOperator class >> with: elements on: aMooseModel [
 
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 InstallElementsOperator class >> with: elements runOn: aMooseModel [ 
 	 
 	^(self on: aMooseModel) 
@@ -36,7 +37,7 @@ InstallElementsOperator class >> with: elements runOn: aMooseModel [
 		run
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 InstallElementsOperator >> basicRun [
 
 	self container do: [ :each |
@@ -44,26 +45,26 @@ InstallElementsOperator >> basicRun [
 		self increment ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 InstallElementsOperator >> container [
 
 	^ container
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 InstallElementsOperator >> container: anObject [ 
 	 
 	container := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 InstallElementsOperator >> description [
 
 	^ 'Installing <1p> entities in Moose model' expandMacrosWith:
 		  self container size
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 InstallElementsOperator >> length [
 
 	^ self container size

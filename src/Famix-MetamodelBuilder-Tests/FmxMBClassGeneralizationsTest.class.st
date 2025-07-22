@@ -1,15 +1,17 @@
 Class {
-	#name : #FmxMBClassGeneralizationsTest,
-	#superclass : #FmxMBTestCase,
+	#name : 'FmxMBClassGeneralizationsTest',
+	#superclass : 'FmxMBTestCase',
 	#instVars : [
 		'named',
 		'behavior',
 		'class'
 	],
-	#category : #'Famix-MetamodelBuilder-Tests-Tests'
+	#category : 'Famix-MetamodelBuilder-Tests-Tests',
+	#package : 'Famix-MetamodelBuilder-Tests',
+	#tag : 'Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 FmxMBClassGeneralizationsTest >> checkGeneralizationWithAnnotations [
 
 	"check if TstClass is correctly created as a subclass of TstBehavior"
@@ -29,14 +31,14 @@ FmxMBClassGeneralizationsTest >> checkGeneralizationWithAnnotations [
 
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FmxMBClassGeneralizationsTest >> checkHierarchy [
 	self assertEmpty: named allClassGeneralizations.
 	self assertCollection: behavior allClassGeneralizations hasSameElements: {named}.
 	self assertCollection: class allClassGeneralizations hasSameElements: {named . behavior}
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FmxMBClassGeneralizationsTest >> setUp [
 
 	super setUp.
@@ -47,7 +49,7 @@ FmxMBClassGeneralizationsTest >> setUp [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBClassGeneralizationsTest >> testAllClassGeneralizations [
 	
 	named <|-- behavior.
@@ -56,7 +58,7 @@ FmxMBClassGeneralizationsTest >> testAllClassGeneralizations [
 	self checkHierarchy.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBClassGeneralizationsTest >> testAllClassGeneralizationsInChain [
 	
 	named <|-- behavior <|-- class.
@@ -64,7 +66,7 @@ FmxMBClassGeneralizationsTest >> testAllClassGeneralizationsInChain [
 	self checkHierarchy.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBClassGeneralizationsTest >> testAllClassGeneralizationsInChainInverted [
 	
 	class --|> behavior --|> named.
@@ -72,7 +74,7 @@ FmxMBClassGeneralizationsTest >> testAllClassGeneralizationsInChainInverted [
 	self checkHierarchy.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBClassGeneralizationsTest >> testClassOppositeGeneralization [
 
 	behavior <|-- class.
@@ -80,7 +82,7 @@ FmxMBClassGeneralizationsTest >> testClassOppositeGeneralization [
 	self checkGeneralizationWithAnnotations
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBClassGeneralizationsTest >> testGeneralization [
 
 	class --|> behavior.
@@ -88,7 +90,7 @@ FmxMBClassGeneralizationsTest >> testGeneralization [
 	self checkGeneralizationWithAnnotations
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBClassGeneralizationsTest >> testSubclassOf [
 	
 	behavior subclassOf: named. 

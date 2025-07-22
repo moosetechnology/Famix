@@ -1,10 +1,12 @@
 Class {
-	#name : #FmxMBRelationTest,
-	#superclass : #FmxMBPropertyTest,
-	#category : #'Famix-MetamodelBuilder-Tests-Tests'
+	#name : 'FmxMBRelationTest',
+	#superclass : 'FmxMBPropertyTest',
+	#category : 'Famix-MetamodelBuilder-Tests-Tests',
+	#package : 'Famix-MetamodelBuilder-Tests',
+	#tag : 'Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBRelationTest >> testCardinalityString [
 	
 	| tClass tMethod relation |
@@ -19,7 +21,7 @@ FmxMBRelationTest >> testCardinalityString [
 	self assert: relation cardinalityString equals: '*..*'.	
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBRelationTest >> testShortCardinalityString [
 
 	| tClass tMethod relation |

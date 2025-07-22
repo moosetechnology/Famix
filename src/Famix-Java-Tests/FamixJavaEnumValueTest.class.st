@@ -1,10 +1,11 @@
 Class {
-	#name : #FamixJavaEnumValueTest,
-	#superclass : #TestCase,
-	#category : #'Famix-Java-Tests'
+	#name : 'FamixJavaEnumValueTest',
+	#superclass : 'TestCase',
+	#category : 'Famix-Java-Tests',
+	#package : 'Famix-Java-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaEnumValueTest >> testParentEnum [
 	| enum value |
 	enum := FamixJavaEnum new.

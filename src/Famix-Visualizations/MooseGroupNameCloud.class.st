@@ -4,32 +4,34 @@ I show keywords in a Moose group entities names.
 Those keywords are ordered by number of entities in which name they are present.
 "
 Class {
-	#name : #MooseGroupNameCloud,
-	#superclass : #MooseAbstractVisualization,
+	#name : 'MooseGroupNameCloud',
+	#superclass : 'MooseAbstractVisualization',
 	#instVars : [
 		'mooseGroup'
 	],
-	#category : #'Famix-Visualizations-Core'
+	#category : 'Famix-Visualizations-Core',
+	#package : 'Famix-Visualizations',
+	#tag : 'Core'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseGroupNameCloud class >> defaultTitle [
 	^ 'Name cloud'
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MooseGroupNameCloud class >> forMooseGroup: aMooseGroup [
 	^ self new
 		mooseGroup: aMooseGroup;
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseGroupNameCloud class >> icon [
 	^ Smalltalk ui theme iconNamed: #glamorousCloud
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 MooseGroupNameCloud >> build [
 	self buildLabels.
 	self normalizeLabels.
@@ -37,7 +39,7 @@ MooseGroupNameCloud >> build [
 	super build
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 MooseGroupNameCloud >> buildLabels [
 	canvas
 		addAll:
@@ -49,7 +51,7 @@ MooseGroupNameCloud >> buildLabels [
 						popupText: each value size asString ])
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 MooseGroupNameCloud >> buildLegend [
 	| legend |
 	legend := RSLegend new.
@@ -60,7 +62,7 @@ MooseGroupNameCloud >> buildLegend [
 	legend build
 ]
 
-{ #category : #keywords }
+{ #category : 'keywords' }
 MooseGroupNameCloud >> entityAndItsKeywords: anEntity [
 	| keywords |
 	keywords := (anEntity name substrings: self class separators)
@@ -72,7 +74,7 @@ MooseGroupNameCloud >> entityAndItsKeywords: anEntity [
 		thenCollect: [ :keyword | keyword -> anEntity ]
 ]
 
-{ #category : #keywords }
+{ #category : 'keywords' }
 MooseGroupNameCloud >> keywordsInGroupEntitiesNames [
 	^ ((mooseGroup
 		flatCollect: [ :entity | self entityAndItsKeywords: entity ])
@@ -81,24 +83,24 @@ MooseGroupNameCloud >> keywordsInGroupEntitiesNames [
 		sortDescending: [ :keyWordAndEntities | keyWordAndEntities value size ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseGroupNameCloud >> mooseGroup: anObject [
 	mooseGroup := anObject
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 MooseGroupNameCloud >> mooseInterestingEntityForNode: node [
 	^ node model value asMooseGroup specialize
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 MooseGroupNameCloud >> normalizeLabels [
 	RSNormalizer fontSize
 		shapes: canvas nodes;
 		normalize: [ :each | each value size ]
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 MooseGroupNameCloud >> setLayout [
 	RSFlowLayout new
 		alignMiddle;

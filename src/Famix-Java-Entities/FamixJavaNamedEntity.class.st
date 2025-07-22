@@ -17,14 +17,16 @@
 
 "
 Class {
-	#name : #FamixJavaNamedEntity,
-	#superclass : #FamixJavaSourcedEntity,
+	#name : 'FamixJavaNamedEntity',
+	#superclass : 'FamixJavaSourcedEntity',
 	#traits : 'FamixTNamedEntity + FamixTWithAnnotationInstances + TEntityMetaLevelDependency',
 	#classTraits : 'FamixTNamedEntity classTrait + FamixTWithAnnotationInstances classTrait + TEntityMetaLevelDependency classTrait',
-	#category : #'Famix-Java-Entities-Entities'
+	#category : 'Famix-Java-Entities-Entities',
+	#package : 'Famix-Java-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixJavaNamedEntity class >> annotation [
 
 	<FMClass: #NamedEntity super: #FamixJavaSourcedEntity>
@@ -34,28 +36,28 @@ FamixJavaNamedEntity class >> annotation [
 	^ self
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixJavaNamedEntity class >> isAbstract [
 
 	<generated>
 	^ self == FamixJavaNamedEntity
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FamixJavaNamedEntity >> accept: aVisitor [
 
 	<generated>
 	^ aVisitor visitFamixJavaNamedEntity: self
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixJavaNamedEntity >> isNamedEntity [
 
 	<generated>
 	^ true
 ]
 
-{ #category : #'Famix-Extensions' }
+{ #category : 'Famix-Extensions' }
 FamixJavaNamedEntity >> stubFormattedName [
 	 ^ self isStub 
 		ifTrue: [ Text 
@@ -64,7 +66,7 @@ FamixJavaNamedEntity >> stubFormattedName [
 		ifFalse: [ Text fromString: self name ] 
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixJavaNamedEntity >> topLevelPackage [ 
 	^ (self atScope: FamixTPackage) anyOne topLevelPackage 
 ]

@@ -48,14 +48,16 @@
 
 "
 Class {
-	#name : #FamixJavaEnum,
-	#superclass : #FamixJavaType,
+	#name : 'FamixJavaEnum',
+	#superclass : 'FamixJavaType',
 	#traits : 'FamixTEnum + FamixTHasVisibility + FamixTImportable + FamixTInvocationsReceiver + FamixTTypeArgument + FamixTWithAttributes + FamixTWithComments + FamixTWithImports + FamixTWithInheritances + FamixTWithMethods',
 	#classTraits : 'FamixTEnum classTrait + FamixTHasVisibility classTrait + FamixTImportable classTrait + FamixTInvocationsReceiver classTrait + FamixTTypeArgument classTrait + FamixTWithAttributes classTrait + FamixTWithComments classTrait + FamixTWithImports classTrait + FamixTWithInheritances classTrait + FamixTWithMethods classTrait',
-	#category : #'Famix-Java-Entities-Entities'
+	#category : 'Famix-Java-Entities-Entities',
+	#package : 'Famix-Java-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixJavaEnum class >> annotation [
 
 	<FMClass: #Enum super: #FamixJavaType>
@@ -64,14 +66,14 @@ FamixJavaEnum class >> annotation [
 	^ self
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FamixJavaEnum >> accept: aVisitor [
 
 	<generated>
 	^ aVisitor visitFamixJavaEnum: self
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 FamixJavaEnum >> addMethodOverriding: aMethod in: aCollection [
 
 	self directSubclasses do: [ :subClass |
@@ -81,12 +83,12 @@ FamixJavaEnum >> addMethodOverriding: aMethod in: aCollection [
 		subClass addMethodOverriding: aMethod in: aCollection ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixJavaEnum >> values [
 	^ self enumValues
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixJavaEnum >> values: anObject [
 	self enumValues: anObject
 ]

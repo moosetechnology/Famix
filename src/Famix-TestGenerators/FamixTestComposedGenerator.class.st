@@ -1,6 +1,6 @@
 Class {
-	#name : #FamixTestComposedGenerator,
-	#superclass : #FamixMetamodelGenerator,
+	#name : 'FamixTestComposedGenerator',
+	#superclass : 'FamixMetamodelGenerator',
 	#instVars : [
 		'association',
 		'customEntity1',
@@ -9,28 +9,29 @@ Class {
 		'customEntity4',
 		'standardEntity'
 	],
-	#category : #'Famix-TestGenerators'
+	#category : 'Famix-TestGenerators',
+	#package : 'Famix-TestGenerators'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTestComposedGenerator class >> packageName [ 
 
 	^ 'Famix-TestComposedMetamodel-Entities'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTestComposedGenerator class >> prefix [
 
 	^ #FamixTestComposed
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTestComposedGenerator class >> submetamodels [
 
 	^ { FamixTestComposedSubmetamodel1Generator. FamixTestComposedSubmetamodel2Generator }
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixTestComposedGenerator >> define [
 	| test1Method test1Custom1 test1Custom2 test1Custom3 test1Custom4 test2Custom1 test2Custom2 test2Custom3 test2Custom4 test1Custom5 test2Custom5 |
 	super define.

@@ -17,14 +17,16 @@
 
 "
 Class {
-	#name : #FamixJavaSourceTextAnchor,
-	#superclass : #FamixJavaSourceAnchor,
+	#name : 'FamixJavaSourceTextAnchor',
+	#superclass : 'FamixJavaSourceAnchor',
 	#traits : 'FamixTHasImmediateSource',
 	#classTraits : 'FamixTHasImmediateSource classTrait',
-	#category : #'Famix-Java-Entities-Entities'
+	#category : 'Famix-Java-Entities-Entities',
+	#package : 'Famix-Java-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixJavaSourceTextAnchor class >> annotation [
 
 	<FMClass: #SourceTextAnchor super: #FamixJavaSourceAnchor>
@@ -33,7 +35,7 @@ FamixJavaSourceTextAnchor class >> annotation [
 	^ self
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FamixJavaSourceTextAnchor >> accept: aVisitor [
 
 	<generated>

@@ -7,22 +7,24 @@ Responsabilities:
 
 "
 Class {
-	#name : #FamixAbstractFileImporter,
-	#superclass : #Object,
+	#name : 'FamixAbstractFileImporter',
+	#superclass : 'Object',
 	#instVars : [
 		'model',
 		'inputStream'
 	],
-	#category : #'Moose-Importers-FromPersistedFiles'
+	#category : 'Moose-Importers-FromPersistedFiles',
+	#package : 'Moose-Importers',
+	#tag : 'FromPersistedFiles'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixAbstractFileImporter class >> acceptFile: aFileReference [
 	"this FileImporter can deal with the given FileReference"
 	^(aFileReference extension = self fileExtension)
 ]
 
-{ #category : #'model detection' }
+{ #category : 'model detection' }
 FamixAbstractFileImporter class >> canImport: inputSample importer: importer metaModel: tmpModel [
 
 	"try import with the metamodel
@@ -44,13 +46,13 @@ FamixAbstractFileImporter class >> canImport: inputSample importer: importer met
 	^ true
 ]
 
-{ #category : #executing }
+{ #category : 'executing' }
 FamixAbstractFileImporter class >> fileExtension [
 	"file extension for the files that the fileImporter can accept"
 	^nil
 ]
 
-{ #category : #'model detection' }
+{ #category : 'model detection' }
 FamixAbstractFileImporter class >> findPossibleModelClassIn: aCollectionOfModels forFile: aFile [
 	"I get provided with a collection of Moose models and a file containing a model I can parse and I'll return the first model that does not crash when trying to import the model in it."
 
@@ -63,14 +65,14 @@ FamixAbstractFileImporter class >> findPossibleModelClassIn: aCollectionOfModels
 		  ifNone: [ Error signal: 'No metamodel to import file' ]
 ]
 
-{ #category : #executing }
+{ #category : 'executing' }
 FamixAbstractFileImporter class >> importerFor: aFileReference [
 	^self withAllSubclasses
 		detect: [ :clazz | clazz acceptFile: aFileReference ]
 		ifNone: [ nil ]
 ]
 
-{ #category : #'model detection' }
+{ #category : 'model detection' }
 FamixAbstractFileImporter class >> inputSampleFrom: aFile [
 
 	^ aFile readStreamDo: [ :inputStream |
@@ -84,48 +86,48 @@ FamixAbstractFileImporter class >> inputSampleFrom: aFile [
 						    ifFalse: [ "json" $} ])) ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixAbstractFileImporter class >> inputSampleLength [
 
 	^ 1000
 ]
 
-{ #category : #executing }
+{ #category : 'executing' }
 FamixAbstractFileImporter class >> knownExtensions [
 	^self withAllSubclasses
 		collect: [ :clazz | clazz fileExtension ]
 		thenReject: [ :ext | ext isNil ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixAbstractFileImporter >> inputFile: aFileReference [
 
 	inputStream := aFileReference readStream
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixAbstractFileImporter >> inputStream: aStream [
 	inputStream := aStream
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixAbstractFileImporter >> model [
 
 	^ model
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixAbstractFileImporter >> model: anObject [
 
 	model := anObject
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixAbstractFileImporter >> run [
 	self subclassResponsibility 
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixAbstractFileImporter >> runFilteredBy: anImportingContext [
 
 	self subclassResponsibility

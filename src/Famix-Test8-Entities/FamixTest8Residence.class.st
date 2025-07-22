@@ -23,18 +23,20 @@
 
 "
 Class {
-	#name : #FamixTest8Residence,
-	#superclass : #FamixTest8Entity,
+	#name : 'FamixTest8Residence',
+	#superclass : 'FamixTest8Entity',
 	#traits : 'FamixTAssociation',
 	#classTraits : 'FamixTAssociation classTrait',
 	#instVars : [
 		'#resident => FMOne type: #FamixTest8TResident opposite: #outgoingResidences',
 		'#biotope => FMOne type: #FamixTest8TBiotope opposite: #incomingResidences'
 	],
-	#category : #'Famix-Test8-Entities-Entities'
+	#category : 'Famix-Test8-Entities-Entities',
+	#package : 'Famix-Test8-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTest8Residence class >> annotation [
 
 	<FMClass: #Residence super: #FamixTest8Entity>
@@ -43,7 +45,7 @@ FamixTest8Residence class >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest8Residence >> biotope [
 	"Relation named: #biotope type: #FamixTest8TBiotope opposite: #incomingResidences"
 
@@ -52,14 +54,14 @@ FamixTest8Residence >> biotope [
 	^ biotope
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest8Residence >> biotope: anObject [
 
 	<generated>
 	biotope := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest8Residence >> resident [
 	"Relation named: #resident type: #FamixTest8TResident opposite: #outgoingResidences"
 
@@ -68,7 +70,7 @@ FamixTest8Residence >> resident [
 	^ resident
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest8Residence >> resident: anObject [
 
 	<generated>

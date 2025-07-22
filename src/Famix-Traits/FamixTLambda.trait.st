@@ -43,16 +43,18 @@ FamixTLabmda represents a behavioural entity that does not have a name. It can b
 
 "
 Trait {
-	#name : #FamixTLambda,
+	#name : 'FamixTLambda',
 	#instVars : [
 		'#lambdaContainer => FMOne type: #FamixTWithLambdas opposite: #lambdas'
 	],
 	#traits : 'FamixTHasSignature + FamixTInvocable + FamixTWithLocalVariables + FamixTWithParameters + FamixTWithStatements + TEntityMetaLevelDependency',
 	#classTraits : 'FamixTHasSignature classTrait + FamixTInvocable classTrait + FamixTWithLocalVariables classTrait + FamixTWithParameters classTrait + FamixTWithStatements classTrait + TEntityMetaLevelDependency classTrait',
-	#category : #'Famix-Traits-Lambda'
+	#category : 'Famix-Traits-Lambda',
+	#package : 'Famix-Traits',
+	#tag : 'Lambda'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTLambda classSide >> annotation [
 
 	<FMClass: #TLambda super: #Object>
@@ -61,14 +63,14 @@ FamixTLambda classSide >> annotation [
 	^ self
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FamixTLambda >> accept: aVisitor [
 
 	<generated>
 	^ aVisitor visitFamixTLambda: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTLambda >> lambdaContainer [
 	"Relation named: #lambdaContainer type: #FamixTWithLambdas opposite: #lambdas"
 
@@ -78,14 +80,14 @@ FamixTLambda >> lambdaContainer [
 	^ lambdaContainer
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTLambda >> lambdaContainer: anObject [
 
 	<generated>
 	lambdaContainer := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FamixTLambda >> lambdaContainerGroup [
 	<generated>
 	<navigation: 'LambdaContainer'>

@@ -11,14 +11,16 @@
 
 "
 Class {
-	#name : #FamixTest3ParametricClass,
-	#superclass : #FamixTest3Class,
+	#name : 'FamixTest3ParametricClass',
+	#superclass : 'FamixTest3Class',
 	#traits : 'FamixTParametricEntity',
 	#classTraits : 'FamixTParametricEntity classTrait',
-	#category : #'Famix-Test3-Entities-Entities'
+	#category : 'Famix-Test3-Entities-Entities',
+	#package : 'Famix-Test3-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTest3ParametricClass class >> annotation [
 
 	<FMClass: #ParametricClass super: #FamixTest3Class>

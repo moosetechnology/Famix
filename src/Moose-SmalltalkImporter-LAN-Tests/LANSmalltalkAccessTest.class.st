@@ -1,10 +1,11 @@
 Class {
-	#name : #LANSmalltalkAccessTest,
-	#superclass : #TestCase,
-	#category : #'Moose-SmalltalkImporter-LAN-Tests'
+	#name : 'LANSmalltalkAccessTest',
+	#superclass : 'TestCase',
+	#category : 'Moose-SmalltalkImporter-LAN-Tests',
+	#package : 'Moose-SmalltalkImporter-LAN-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 LANSmalltalkAccessTest >> testWhenDistinguishingClassAndMetaclassAccessWorks [
 	"this test tests that we can access smalltalk class and compiledMethod from famix when the class and metaclasses are not merged"
 
@@ -26,7 +27,7 @@ LANSmalltalkAccessTest >> testWhenDistinguishingClassAndMetaclassAccessWorks [
 	self assert: (model entityNamed: (LANNode class >> #new) mooseName) smalltalkClass equals: LANNode class
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 LANSmalltalkAccessTest >> testWhenMergingClassAndMetaclassAccessWorks [
 	"this test tests that we can access smalltalk class and compiledMethod from famix when the class and metaclasses are  merged"
 

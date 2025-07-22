@@ -43,14 +43,16 @@
 
 "
 Class {
-	#name : #FamixTestComposed2Class,
-	#superclass : #FamixTestComposed2NamedEntity,
+	#name : 'FamixTestComposed2Class',
+	#superclass : 'FamixTestComposed2NamedEntity',
 	#traits : 'FamixTClass',
 	#classTraits : 'FamixTClass classTrait',
-	#category : #'Famix-TestComposedSubmetamodel2-Entities-Entities'
+	#category : 'Famix-TestComposedSubmetamodel2-Entities-Entities',
+	#package : 'Famix-TestComposedSubmetamodel2-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTestComposed2Class class >> annotation [
 
 	<FMClass: #Class super: #FamixTestComposed2NamedEntity>

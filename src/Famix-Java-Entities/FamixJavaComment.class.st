@@ -16,14 +16,16 @@
 
 "
 Class {
-	#name : #FamixJavaComment,
-	#superclass : #FamixJavaSourcedEntity,
+	#name : 'FamixJavaComment',
+	#superclass : 'FamixJavaSourcedEntity',
 	#traits : 'FamixTComment',
 	#classTraits : 'FamixTComment classTrait',
-	#category : #'Famix-Java-Entities-Entities'
+	#category : 'Famix-Java-Entities-Entities',
+	#package : 'Famix-Java-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixJavaComment class >> annotation [
 
 	<FMClass: #Comment super: #FamixJavaSourcedEntity>
@@ -32,19 +34,19 @@ FamixJavaComment class >> annotation [
 	^ self
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FamixJavaComment >> accept: aVisitor [
 
 	<generated>
 	^ aVisitor visitFamixJavaComment: self
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 FamixJavaComment >> asFamixJavaComment [
 	^ self
 ]
 
-{ #category : #deprecated }
+{ #category : 'deprecated' }
 FamixJavaComment >> belongsTo [
 	
 	^ self container

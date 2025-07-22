@@ -1,6 +1,6 @@
 Class {
-	#name : #FamixJavaQueryTest,
-	#superclass : #TestCase,
+	#name : 'FamixJavaQueryTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'model',
 		'p1',
@@ -21,20 +21,21 @@ Class {
 		'annotationInstance1',
 		'annotationInstanceAttribute1'
 	],
-	#category : #'Famix-Java-Tests'
+	#category : 'Famix-Java-Tests',
+	#package : 'Famix-Java-Tests'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixJavaQueryTest >> model [
 	^ model
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixJavaQueryTest >> model: anObject [
 	model := anObject
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixJavaQueryTest >> setUp [
 
 	super setUp.
@@ -164,12 +165,12 @@ FamixJavaQueryTest >> setUp [
 				 annotationInstanceAttribute1 })
 ]
 
-{ #category : #'tests - class' }
+{ #category : 'tests - class' }
 FamixJavaQueryTest >> testFamixJavaAnnotationInstanceAttributeCanHaveIncoming [
 	self assert: annotationInstanceAttribute1 incomingMSEProperties isCollection
 ]
 
-{ #category : #'tests - class' }
+{ #category : 'tests - class' }
 FamixJavaQueryTest >> testFamixJavaAnnotationInstanceAttributeCanHaveOutgoing [
 	self assert: annotationInstanceAttribute1 outgoingMSEProperties isCollection
 ]

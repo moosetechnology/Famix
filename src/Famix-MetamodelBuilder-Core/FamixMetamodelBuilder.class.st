@@ -45,8 +45,8 @@ rel := builder newRelation
 
 "
 Class {
-	#name : #FamixMetamodelBuilder,
-	#superclass : #Object,
+	#name : 'FamixMetamodelBuilder',
+	#superclass : 'Object',
 	#instVars : [
 		'environment',
 		'classes',
@@ -58,10 +58,12 @@ Class {
 		'parentBuilder',
 		'extensionBehaviors'
 	],
-	#category : #'Famix-MetamodelBuilder-Core-Basic'
+	#category : 'Famix-MetamodelBuilder-Core-Basic',
+	#package : 'Famix-MetamodelBuilder-Core',
+	#tag : 'Basic'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 FamixMetamodelBuilder class >> forGenerator: aGenerator [
 
 	<ignoreForCoverage>
@@ -70,14 +72,14 @@ FamixMetamodelBuilder class >> forGenerator: aGenerator [
 		yourself.
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FamixMetamodelBuilder >> acceptVisitor: aVisitor [
 
 	<ignoreForCoverage>
 	^ aVisitor visitBuilder: self
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FamixMetamodelBuilder >> addEntityCreatorTraitToModel: aClass [
 
 	(self classes anySatisfy: [ :cls | 
@@ -86,13 +88,13 @@ FamixMetamodelBuilder >> addEntityCreatorTraitToModel: aClass [
 		ifTrue: [ aClass addTraitGeneralization: self entityCreatorTrait ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetamodelBuilder >> allSubBuilders [
 
 	^ self generator ifNil: [ Set new ] ifNotNil: #allSubBuilders
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetamodelBuilder >> apply [
 
 	self environment apply.
@@ -102,7 +104,7 @@ FamixMetamodelBuilder >> apply [
 	self generateTestingMethodsOfRemoteEntities
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetamodelBuilder >> association: anAssociationName [
 
 	| association |
@@ -113,26 +115,26 @@ FamixMetamodelBuilder >> association: anAssociationName [
 	^ association
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetamodelBuilder >> baseImportingContextName [
 
 	^ #FamixImportingContext
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetamodelBuilder >> behaviorsCount [
 
 	^ self traits size + self classes size
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FamixMetamodelBuilder >> changesToApply [
 
 	self prepareGeneration.
 	^ self environment changesToApply
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FamixMetamodelBuilder >> classNamed: aClassName [
 
 	"empty block returns nil anyway"
@@ -144,26 +146,26 @@ FamixMetamodelBuilder >> classNamed: aClassName [
 		  ifNone: [ nil ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetamodelBuilder >> classes [
 
 	^ classes
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetamodelBuilder >> configuration [
 
 	^ configuration
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetamodelBuilder >> configuration: anObject [
 
 	<ignoreForCoverage>
 	configuration := anObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FamixMetamodelBuilder >> ensureAbstractClassNamed: aString [
 
 	^ self classes
@@ -175,7 +177,7 @@ FamixMetamodelBuilder >> ensureAbstractClassNamed: aString [
 		  ifNone: [ self newAbstractClassNamed: aString ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FamixMetamodelBuilder >> ensureClassNamed: aString [
 
 	^ self classes
@@ -183,7 +185,7 @@ FamixMetamodelBuilder >> ensureClassNamed: aString [
 		  ifNone: [ self newClassNamed: aString ]
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FamixMetamodelBuilder >> ensureEntityClassIsTheCommonSuperclass [
 
 	"All classes should have a common superclass called Entity. Here we ensure it is created and used."
@@ -195,7 +197,7 @@ FamixMetamodelBuilder >> ensureEntityClassIsTheCommonSuperclass [
 	> NullAddableObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FamixMetamodelBuilder >> ensureLocalTraitNamed: aString [
 
 	<ignoreForMutations: #( ReplaceAndWithEqvMutantOperator )>
@@ -206,7 +208,7 @@ FamixMetamodelBuilder >> ensureLocalTraitNamed: aString [
 		  ifNone: [ self unsafeNewTraitNamed: aString ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FamixMetamodelBuilder >> entityCreatorTrait [
 
 	^ self traits
@@ -219,32 +221,32 @@ FamixMetamodelBuilder >> entityCreatorTrait [
 					   yourself) ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetamodelBuilder >> environment [
 
 	^ environment
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetamodelBuilder >> environment: anObject [
 
 	environment := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetamodelBuilder >> extensionBehaviors [
 
 	^ extensionBehaviors
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FamixMetamodelBuilder >> generate [
 
 	self prepareGeneration.
 	self apply
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FamixMetamodelBuilder >> generateImportingContext [
 
 	| aClass |
@@ -258,7 +260,7 @@ FamixMetamodelBuilder >> generateImportingContext [
 	aClass generate
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FamixMetamodelBuilder >> generateRemotes [
 
 	self traits do: [ :each | each generateRemotes ].
@@ -267,7 +269,7 @@ FamixMetamodelBuilder >> generateRemotes [
 	self apply
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FamixMetamodelBuilder >> generateTestingMethodsOfRemoteEntities [
 
 	| entitiesWithRemoteSuperclasses |
@@ -300,21 +302,21 @@ FamixMetamodelBuilder >> generateTestingMethodsOfRemoteEntities [
 															classified: '*' , self configuration packageName ] ] ] ] ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetamodelBuilder >> generator [
 
 	<ignoreForCoverage>
 	^ generator
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetamodelBuilder >> generator: aGenerator [
 
 	<ignoreForCoverage>
 	generator := aGenerator
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FamixMetamodelBuilder >> getTraitNamed: aSymbol [
 	"Check if I contain a trait of this name. If yes, return it. 
 	If no, check if one of my subMM has a trait of this name. If one is found, return it. If more is found raise an error. If non is found, create a new trait of this name and return it."
@@ -340,7 +342,7 @@ In order to fix the issue you should use #remoteTrait:withPrefix: in your genera
 	^ self traitNamed: aSymbol
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FamixMetamodelBuilder >> groupOf: aClass [
 
 	| group |
@@ -350,13 +352,13 @@ FamixMetamodelBuilder >> groupOf: aClass [
 	^ group
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetamodelBuilder >> importingContextName [
 
 	^ (self configuration prefix , 'ImportingContext') asSymbol
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FamixMetamodelBuilder >> initialize [
 
 	super initialize.
@@ -371,7 +373,7 @@ FamixMetamodelBuilder >> initialize [
 	testingSelectorsMapping := Dictionary new
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FamixMetamodelBuilder >> model [
 
 	| aClass |
@@ -389,7 +391,7 @@ FamixMetamodelBuilder >> model [
 	^ aClass
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FamixMetamodelBuilder >> newAbstractClassNamed: aClassName [
 
 	(self classes select: [ :each | each name = aClassName ]) 
@@ -401,7 +403,7 @@ FamixMetamodelBuilder >> newAbstractClassNamed: aClassName [
 		  yourself
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FamixMetamodelBuilder >> newClass [
 
 	| aClass |
@@ -413,7 +415,7 @@ FamixMetamodelBuilder >> newClass [
 	^ aClass
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FamixMetamodelBuilder >> newClassGroup [
 
 	| aClass |
@@ -425,7 +427,7 @@ FamixMetamodelBuilder >> newClassGroup [
 	^ aClass
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FamixMetamodelBuilder >> newClassGroupNamed: aClassName [
 
 	(self classes select: [ :each | each name = aClassName ]) 
@@ -434,7 +436,7 @@ FamixMetamodelBuilder >> newClassGroupNamed: aClassName [
 	^ self newClassGroup name: aClassName
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FamixMetamodelBuilder >> newClassNamed: aClassName [
 
 	(self classes select: [ :each | each name = aClassName ]) 
@@ -443,7 +445,7 @@ FamixMetamodelBuilder >> newClassNamed: aClassName [
 	^ self newClass name: aClassName
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FamixMetamodelBuilder >> newClassNamed: aClassName comment: aString [
 
 	^ (self newClassNamed: aClassName)
@@ -451,7 +453,7 @@ FamixMetamodelBuilder >> newClassNamed: aClassName comment: aString [
 		  yourself
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FamixMetamodelBuilder >> newRelation [
 
 	| aRelation |
@@ -461,7 +463,7 @@ FamixMetamodelBuilder >> newRelation [
 	^ aRelation
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FamixMetamodelBuilder >> newTrait [
 
 	| aTrait |
@@ -473,7 +475,7 @@ FamixMetamodelBuilder >> newTrait [
 	^ aTrait
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FamixMetamodelBuilder >> newTraitNamed: aTraitName [
 
 	(self traits select: [ :each | 
@@ -483,7 +485,7 @@ FamixMetamodelBuilder >> newTraitNamed: aTraitName [
 	^ self unsafeNewTraitNamed: aTraitName
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FamixMetamodelBuilder >> newTraitNamed: aClassName comment: aString [
 
 	^ (self newTraitNamed: aClassName)
@@ -491,21 +493,21 @@ FamixMetamodelBuilder >> newTraitNamed: aClassName comment: aString [
 		  yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetamodelBuilder >> parentBuilder [
 
 	<ignoreForCoverage>
 	^ parentBuilder
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetamodelBuilder >> parentBuilder: anObject [
 
 	parentBuilder := anObject.
 	self environment: parentBuilder environment
 ]
 
-{ #category : #'tests support' }
+{ #category : 'tests support' }
 FamixMetamodelBuilder >> parentBuilderPackageName [
 
 	"needed to know the package where extension methods of the composed metamodels should be placed"
@@ -513,7 +515,7 @@ FamixMetamodelBuilder >> parentBuilderPackageName [
 	^ (parentBuilder ifNil: [ self ]) configuration packageName
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FamixMetamodelBuilder >> prepareBehaviorsGeneration [
 
 	self traitsWithSubBuildersTraits do: [ :each |
@@ -525,7 +527,7 @@ FamixMetamodelBuilder >> prepareBehaviorsGeneration [
 	self extensionBehaviors do: [ :each | each generate ]
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FamixMetamodelBuilder >> prepareGeneration [
 
 	self registerPackages.
@@ -543,7 +545,7 @@ FamixMetamodelBuilder >> prepareGeneration [
 	self generateImportingContext
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixMetamodelBuilder >> printOn: aStream [
 
 	super printOn: aStream.
@@ -555,45 +557,45 @@ FamixMetamodelBuilder >> printOn: aStream [
 			nextPut: $) ]
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FamixMetamodelBuilder >> registerPackages [
 
 	self environment registerPackage: self configuration packageName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetamodelBuilder >> relations [
 
 	^ relations
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetamodelBuilder >> relations: anObject [
 
 	<ignoreForCoverage>
 	relations := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetamodelBuilder >> reservedKeywords [
 
 	^ { #class }
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetamodelBuilder >> safeAnnotationPackageName [
 
 	^ self configuration packageNameForAnnotations asSymbol printString
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FamixMetamodelBuilder >> shouldGenerateModel [
 
 	^ self behaviorsCount > 0 or: [
 		  self relations isNotEmpty or: [ self subBuilders isNotEmpty ] ]
 ]
 
-{ #category : #asserting }
+{ #category : 'asserting' }
 FamixMetamodelBuilder >> shouldGeneratorTestingMethodsOf: aClass [
 	"In case a testing selector is relatif to a Trait that is not used in the current MM, then we do not need to generate the testing selector."
 
@@ -602,7 +604,7 @@ FamixMetamodelBuilder >> shouldGeneratorTestingMethodsOf: aClass [
 	^ self classes anySatisfy: [ :class | class allTransitiveTraits includes: aClass ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetamodelBuilder >> sortedClasses [
 
 	<ignoreForMutations: #( ReplaceLessOrEqualWithLessMutantOperator )>
@@ -613,7 +615,7 @@ FamixMetamodelBuilder >> sortedClasses [
 			  ifFalse: [ class allClassGeneralizations size ] ] ascending
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetamodelBuilder >> sortedTraits [
 
 	<ignoreForMutations:
@@ -623,25 +625,25 @@ FamixMetamodelBuilder >> sortedTraits [
 			  and: [ a name <= b name ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetamodelBuilder >> subBuilders [
 
 	^ self generator ifNil: [ #(  ) ] ifNotNil: #subBuilders
 ]
 
-{ #category : #'tests support' }
+{ #category : 'tests support' }
 FamixMetamodelBuilder >> testingEnvironment [
 
 	^ self environment ringEnvironment
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetamodelBuilder >> testingSelectorsMapping [
 
 	^ testingSelectorsMapping
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FamixMetamodelBuilder >> traitNamed: aString [
 
 	^ self traits detect: [ :each | each name = aString ] ifNone: [
@@ -650,13 +652,13 @@ FamixMetamodelBuilder >> traitNamed: aString [
 			  ' not found in the metamodel. Please add it or refer to a submetamodel.' ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetamodelBuilder >> traits [
 
 	^ traits
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetamodelBuilder >> traitsWithSubBuildersTraits [
 
 	^ (self allSubBuilders flatCollect: #traits)
@@ -664,20 +666,20 @@ FamixMetamodelBuilder >> traitsWithSubBuildersTraits [
 		  yourself
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FamixMetamodelBuilder >> unsafeNewTraitNamed: aTraitName [
 
 	^ self newTrait name: aTraitName.
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetamodelBuilder >> withFileImport [
 
 	self configuration shouldGenerateFileImportHelpers: true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetamodelBuilder >> withImportingContext [
 
 	self
@@ -687,7 +689,7 @@ FamixMetamodelBuilder >> withImportingContext [
 	self withFileImport
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FamixMetamodelBuilder >> withSubBuildersAddEntityCreatorTraitTo: aClass [
 
 	self addEntityCreatorTraitToModel: aClass.

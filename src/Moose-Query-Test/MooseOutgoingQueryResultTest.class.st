@@ -1,20 +1,21 @@
 Class {
-	#name : #MooseOutgoingQueryResultTest,
-	#superclass : #MooseQueryResultTest,
-	#category : #'Moose-Query-Test'
+	#name : 'MooseOutgoingQueryResultTest',
+	#superclass : 'MooseQueryResultTest',
+	#category : 'Moose-Query-Test',
+	#package : 'Moose-Query-Test'
 }
 
-{ #category : #asserting }
+{ #category : 'asserting' }
 MooseOutgoingQueryResultTest class >> shouldInheritSelectors [
 	^ true
 ]
 
-{ #category : #helper }
+{ #category : 'helper' }
 MooseOutgoingQueryResultTest >> actualClass [
 	^ MooseOutgoingQueryResult
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseOutgoingQueryResultTest >> testWithoutSelfLoops [
 	| model package1 package2 class1 class2 |
 	model := FamixJavaModel new.

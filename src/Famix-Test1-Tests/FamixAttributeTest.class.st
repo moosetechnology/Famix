@@ -1,10 +1,11 @@
 Class {
-	#name : #FamixAttributeTest,
-	#superclass : #FamixTest1SimpleModelTest,
-	#category : #'Famix-Test1-Tests'
+	#name : 'FamixAttributeTest',
+	#superclass : 'FamixTest1SimpleModelTest',
+	#category : 'Famix-Test1-Tests',
+	#package : 'Famix-Test1-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixAttributeTest >> testIsClassSide [
 
 	a1 isClassSide: true.

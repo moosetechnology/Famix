@@ -11,14 +11,16 @@
 
 "
 Class {
-	#name : #FamixStSourcedEntity,
-	#superclass : #FamixStEntity,
+	#name : 'FamixStSourcedEntity',
+	#superclass : 'FamixStEntity',
 	#traits : 'FamixTSourceEntity',
 	#classTraits : 'FamixTSourceEntity classTrait',
-	#category : #'Famix-PharoSmalltalk-Entities-Entities'
+	#category : 'Famix-PharoSmalltalk-Entities-Entities',
+	#package : 'Famix-PharoSmalltalk-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixStSourcedEntity class >> annotation [
 
 	<FMClass: #SourcedEntity super: #FamixStEntity>
@@ -28,7 +30,7 @@ FamixStSourcedEntity class >> annotation [
 	^ self
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixStSourcedEntity class >> isAbstract [
 
 	<generated>

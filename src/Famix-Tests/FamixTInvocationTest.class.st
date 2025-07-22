@@ -1,13 +1,14 @@
 Class {
-	#name : #FamixTInvocationTest,
-	#superclass : #TestCase,
+	#name : 'FamixTInvocationTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'invocation'
 	],
-	#category : #'Famix-Tests'
+	#category : 'Famix-Tests',
+	#package : 'Famix-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 FamixTInvocationTest >> setUp [
 
 	super setUp.
@@ -18,7 +19,7 @@ FamixTInvocationTest >> setUp [
 	invocation initialize
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixTInvocationTest >> testInvokedEntity [
 
 	| function |
@@ -33,7 +34,7 @@ FamixTInvocationTest >> testInvokedEntity [
 	self assert: invocation invokedEntity equals: function
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixTInvocationTest >> testInvokedEntitySetter [
 
 	| function |
@@ -48,7 +49,7 @@ FamixTInvocationTest >> testInvokedEntitySetter [
 	self assert: invocation invokedEntity equals: function
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixTInvocationTest >> testInvokedEntityWithMoreThan1Candidate [
 
 	| function1 function2 |
@@ -70,7 +71,7 @@ FamixTInvocationTest >> testInvokedEntityWithMoreThan1Candidate [
 	self should: [ invocation invokedEntity ] raise: Error
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixTInvocationTest >> testInvokedEntityWithNoCandidate [
 
 	self assertEmpty: invocation candidates.

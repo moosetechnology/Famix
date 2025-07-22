@@ -13,16 +13,18 @@
 
 "
 Trait {
-	#name : #FamixTWithExceptions,
+	#name : 'FamixTWithExceptions',
 	#instVars : [
 		'#caughtExceptions => FMMany type: #FamixTThrowable opposite: #catchingEntities',
 		'#declaredExceptions => FMMany type: #FamixTThrowable opposite: #declaringEntities',
 		'#thrownExceptions => FMMany type: #FamixTThrowable opposite: #throwingEntities'
 	],
-	#category : #'Famix-Traits-Exception'
+	#category : 'Famix-Traits-Exception',
+	#package : 'Famix-Traits',
+	#tag : 'Exception'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTWithExceptions classSide >> annotation [
 
 	<FMClass: #TWithExceptions super: #Object>
@@ -31,32 +33,32 @@ FamixTWithExceptions classSide >> annotation [
 	^ self
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FamixTWithExceptions >> accept: aVisitor [
 
 	<generated>
 	^ aVisitor visitFamixTWithExceptions: self
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTWithExceptions >> addCaughtException: anObject [
 	<generated>
 	^ self caughtExceptions add: anObject
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTWithExceptions >> addDeclaredException: anObject [
 	<generated>
 	^ self declaredExceptions add: anObject
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTWithExceptions >> addThrownException: anObject [
 	<generated>
 	^ self thrownExceptions add: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithExceptions >> allExceptions [
 
 	<derived>
@@ -65,7 +67,7 @@ FamixTWithExceptions >> allExceptions [
 		  asMooseGroup
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithExceptions >> caughtExceptions [
 	"Relation named: #caughtExceptions type: #FamixTThrowable opposite: #catchingEntities"
 
@@ -74,14 +76,14 @@ FamixTWithExceptions >> caughtExceptions [
 	^ caughtExceptions
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithExceptions >> caughtExceptions: anObject [
 
 	<generated>
 	caughtExceptions value: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithExceptions >> declaredExceptions [
 	"Relation named: #declaredExceptions type: #FamixTThrowable opposite: #declaringEntities"
 
@@ -90,14 +92,14 @@ FamixTWithExceptions >> declaredExceptions [
 	^ declaredExceptions
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithExceptions >> declaredExceptions: anObject [
 
 	<generated>
 	declaredExceptions value: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithExceptions >> thrownExceptions [
 	"Relation named: #thrownExceptions type: #FamixTThrowable opposite: #throwingEntities"
 
@@ -106,7 +108,7 @@ FamixTWithExceptions >> thrownExceptions [
 	^ thrownExceptions
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithExceptions >> thrownExceptions: anObject [
 
 	<generated>

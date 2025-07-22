@@ -1,18 +1,20 @@
 Class {
-	#name : #FamixTest3Model,
-	#superclass : #MooseModel,
+	#name : 'FamixTest3Model',
+	#superclass : 'MooseModel',
 	#traits : 'FamixTest3TEntityCreator',
 	#classTraits : 'FamixTest3TEntityCreator classTrait',
-	#category : #'Famix-Test3-Entities-Model'
+	#category : 'Famix-Test3-Entities-Model',
+	#package : 'Famix-Test3-Entities',
+	#tag : 'Model'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest3Model class >> allSubmetamodelsPackagesNames [
 	<generated>
 	^ #(#'Moose-Query' #'Famix-Traits')
 ]
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTest3Model class >> annotation [
 	<FMClass: #FamixTest3Model super: #MooseModel>
 	<package: #'Famix-Test3-Entities'>

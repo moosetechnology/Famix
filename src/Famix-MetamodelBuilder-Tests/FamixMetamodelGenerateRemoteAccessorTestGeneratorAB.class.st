@@ -1,40 +1,42 @@
 Class {
-	#name : #FamixMetamodelGenerateRemoteAccessorTestGeneratorAB,
-	#superclass : #FamixTestGenerator,
+	#name : 'FamixMetamodelGenerateRemoteAccessorTestGeneratorAB',
+	#superclass : 'FamixTestGenerator',
 	#instVars : [
 		'entityA',
 		'entityB'
 	],
-	#category : #'Famix-MetamodelBuilder-Tests-GeneratorRessources'
+	#category : 'Famix-MetamodelBuilder-Tests-GeneratorRessources',
+	#package : 'Famix-MetamodelBuilder-Tests',
+	#tag : 'GeneratorRessources'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetamodelGenerateRemoteAccessorTestGeneratorAB class >> packageName [
 
 	<ignoreForCoverage>
 	^ 'Famix-MetamodelBuilder-TestsResources-AB'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetamodelGenerateRemoteAccessorTestGeneratorAB class >> prefix [
 
 <ignoreForCoverage>
 	^ #FmxTestGenerateAccessorAB
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetamodelGenerateRemoteAccessorTestGeneratorAB class >> submetamodels [
 	^ {FamixMetamodelGenerateRemoteAccessorTestGeneratorA . FamixMetamodelGenerateRemoteAccessorTestGeneratorB}
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixMetamodelGenerateRemoteAccessorTestGeneratorAB >> defineClasses [
 	super defineClasses.
 	entityA := self remoteEntity: #EntityA withPrefix: #FmxTestGenerateAccessorA.
 	entityB := self remoteEntity: #EntityB withPrefix: #FmxTestGenerateAccessorB
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixMetamodelGenerateRemoteAccessorTestGeneratorAB >> defineRelations [
 	super defineRelations.
 	(entityA property: #relationToB) - (entityB property: #relationToA).

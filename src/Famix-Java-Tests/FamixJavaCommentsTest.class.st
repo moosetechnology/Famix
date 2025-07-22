@@ -1,10 +1,11 @@
 Class {
-	#name : #FamixJavaCommentsTest,
-	#superclass : #TestCase,
-	#category : #'Famix-Java-Tests'
+	#name : 'FamixJavaCommentsTest',
+	#superclass : 'TestCase',
+	#category : 'Famix-Java-Tests',
+	#package : 'Famix-Java-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaCommentsTest >> testClassWithComment [
 
 	| javaClass |
@@ -13,7 +14,7 @@ FamixJavaCommentsTest >> testClassWithComment [
 	self assert: javaClass numberOfComments equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaCommentsTest >> testClassWithCommentAndMethodsWithComments [
 
 	| javaClass |

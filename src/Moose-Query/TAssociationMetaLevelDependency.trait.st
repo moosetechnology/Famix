@@ -4,11 +4,13 @@ This trait provides a common, paradigm agnostic vocabulary to query dependencies
 For more informations: https://moosequery.ferlicot.fr/
 "
 Trait {
-	#name : #TAssociationMetaLevelDependency,
-	#category : #'Moose-Query-Traits'
+	#name : 'TAssociationMetaLevelDependency',
+	#category : 'Moose-Query-Traits',
+	#package : 'Moose-Query',
+	#tag : 'Traits'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 TAssociationMetaLevelDependency classSide >> annotation [
 
 	<FMClass: #TAssociationMetaLevelDependency super: #Object>
@@ -17,13 +19,13 @@ TAssociationMetaLevelDependency classSide >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TAssociationMetaLevelDependency classSide >> privateSourceSelectorIn: aMetamodel [
 
 	^ ((self allComplexPropertiesIn: aMetamodel) detect: #isSource) implementingSelector
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 TAssociationMetaLevelDependency classSide >> privateSourceTypesIn: aMetamodel [
 	"I return the classes that could be my source"
 
@@ -32,13 +34,13 @@ TAssociationMetaLevelDependency classSide >> privateSourceTypesIn: aMetamodel [
 		thenCollect: #implementingType
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TAssociationMetaLevelDependency classSide >> privateTargetSelectorIn: aMetamodel [
 
 	^ ((self allComplexPropertiesIn: aMetamodel) detect: #isTarget) implementingSelector
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 TAssociationMetaLevelDependency classSide >> privateTargetTypesIn: aMetamodel [
 	"I return the classes that could be my target"
 
@@ -47,50 +49,50 @@ TAssociationMetaLevelDependency classSide >> privateTargetTypesIn: aMetamodel [
 		thenCollect: #implementingType
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TAssociationMetaLevelDependency classSide >> sourceSelectorIn: aMetamodel [
 
 	^ aMetamodel additionalProperty: #sourceSelector for: self ifAbsentPut: [ self privateSourceSelectorIn: aMetamodel ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TAssociationMetaLevelDependency classSide >> sourceTypesIn: aMetamodel [
 
 	^ aMetamodel additionalProperty: #sourceTypes for: self ifAbsentPut: [ self privateSourceTypesIn: aMetamodel ]
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TAssociationMetaLevelDependency classSide >> targetSelectorIn: aMetamodel [
 
 	^ aMetamodel additionalProperty: #targetSelector for: self ifAbsentPut: [ self privateTargetSelectorIn: aMetamodel ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TAssociationMetaLevelDependency classSide >> targetTypesIn: aMetamodel [
 
 	^ aMetamodel additionalProperty: #targetTypes for: self ifAbsentPut: [ self privateTargetTypesIn: aMetamodel ]
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TAssociationMetaLevelDependency >> sourceSelector [
 
 	^ self class sourceSelectorIn: self metamodel
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TAssociationMetaLevelDependency >> sourceTypes [
 	^ self class sourceTypesIn: self metamodel
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TAssociationMetaLevelDependency >> targetSelector [
 
 	^ self class targetSelectorIn: self metamodel
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TAssociationMetaLevelDependency >> targetTypes [
 	^ self class targetTypesIn: self metamodel
 ]
