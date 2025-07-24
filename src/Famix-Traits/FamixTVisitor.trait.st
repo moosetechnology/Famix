@@ -179,15 +179,6 @@ FamixTVisitor >> visitFamixTComment: aFamixTComment [
 ]
 
 { #category : 'visiting' }
-FamixTVisitor >> visitFamixTCompilationUnit: aFamixTCompilationUnit [
-
-	<generated>
-	self visitFamixTFile: aFamixTCompilationUnit.
-
-	self visitEntity: aFamixTCompilationUnit compilationUnitOwner
-]
-
-{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTConcretization: aFamixTConcretization [
 
 	<generated>
@@ -351,15 +342,6 @@ FamixTVisitor >> visitFamixTHasVisibility: aFamixTHasVisibility [
 
 	<generated>
 
-]
-
-{ #category : 'visiting' }
-FamixTVisitor >> visitFamixTHeader: aFamixTHeader [
-
-	<generated>
-	self visitFamixTFile: aFamixTHeader.
-
-	self visitEntity: aFamixTHeader headerOwner
 ]
 
 { #category : 'visiting' }
@@ -572,20 +554,6 @@ FamixTVisitor >> visitFamixTParametricEntity: aFamixTParametricEntity [
 
 	<generated>
 	self visitCollection: aFamixTParametricEntity typeParameters
-]
-
-{ #category : 'visiting' }
-FamixTVisitor >> visitFamixTPreprocessorDefine: aFamixTPreprocessorDefine [
-
-	<generated>
-
-]
-
-{ #category : 'visiting' }
-FamixTVisitor >> visitFamixTPreprocessorIfdef: aFamixTPreprocessorIfdef [
-
-	<generated>
-
 ]
 
 { #category : 'visiting' }
@@ -806,13 +774,6 @@ FamixTVisitor >> visitFamixTWithComments: aFamixTWithComments [
 ]
 
 { #category : 'visiting' }
-FamixTVisitor >> visitFamixTWithCompilationUnits: aFamixTWithCompilationUnits [
-
-	<generated>
-	self visitEntity: aFamixTWithCompilationUnits compilationUnit
-]
-
-{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTWithDereferencedInvocations: aFamixTWithDereferencedInvocations [
 
 	<generated>
@@ -862,13 +823,6 @@ FamixTVisitor >> visitFamixTWithGlobalVariables: aFamixTWithGlobalVariables [
 
 	<generated>
 	self visitCollection: aFamixTWithGlobalVariables globalVariables
-]
-
-{ #category : 'visiting' }
-FamixTVisitor >> visitFamixTWithHeaders: aFamixTWithHeaders [
-
-	<generated>
-	self visitEntity: aFamixTWithHeaders header
 ]
 
 { #category : 'visiting' }

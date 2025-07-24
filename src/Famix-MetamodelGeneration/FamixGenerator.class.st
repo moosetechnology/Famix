@@ -18,7 +18,6 @@ Class {
 		'tAssociation',
 		'tAttribute',
 		'tComment',
-		'tCompilationUnit',
 		'tDereferencedInvocation',
 		'tEnumValue',
 		'tException',
@@ -27,7 +26,6 @@ Class {
 		'tFileInclude',
 		'tFunction',
 		'tGlobalVariable',
-		'tHeader',
 		'tImplicitVariable',
 		'tInheritance',
 		'tInvocable',
@@ -41,8 +39,6 @@ Class {
 		'tPackage',
 		'tPackageable',
 		'tParameter',
-		'tPreprocessorDefine',
-		'tPreprocessorIfdef',
 		'tReference',
 		'tReferenceable',
 		'tSourceAnchor',
@@ -108,8 +104,6 @@ Class {
 		'tMethodMetrics',
 		'tHasKind',
 		'tWithSourceLanguages',
-		'tWithCompilationUnits',
-		'tWithHeaders',
 		'tCanBeClassSide',
 		'tImplementable',
 		'tCanImplement',
@@ -310,12 +304,6 @@ FamixGenerator >> commentForTComment [
 ]
 
 { #category : 'comments' }
-FamixGenerator >> commentForTCompilationUnit [
-
-	^ 'I represent a compilation unit file. Typically a .c or .cpp file'
-]
-
-{ #category : 'comments' }
 FamixGenerator >> commentForTConcreteParameterType [
 
 	^ 'FamixTConcreteParameterType represents the concretePamameters of an FamixTParametricEntity. it can be a class or a ParameterType that has one FamixTParameterConcretization'
@@ -447,12 +435,6 @@ FamixGenerator >> commentForTHasKind [
 FamixGenerator >> commentForTHasSignature [
 
 	^ 'The signature of any behavioural entity'
-]
-
-{ #category : 'comments' }
-FamixGenerator >> commentForTHeader [
-
-	^ 'I represent a header file. Typically a .h or .hpp'
 ]
 
 { #category : 'comments' }
@@ -610,22 +592,6 @@ public Map<String,Collection> anAttribute;
 ...
 
 Where Map<String,Collection> is the FamixTParametricEntity of anAttribute. String and Collection are concrete parameters. Map is the parametricClass.'
-]
-
-{ #category : 'comments' }
-FamixGenerator >> commentForTPreprocessorDefine [
-
-	^ 'Represent a preprocessor #define statement
-
-Knows the name of the macro defined'
-]
-
-{ #category : 'comments' }
-FamixGenerator >> commentForTPreprocessorIfdef [
-
-	^ 'Represent a preprocessor #ifdef/#ifndef statement
-
-Knows the name of the macro tested and whether it is "negated" (#ifndef) or not (#ifdef)'
 ]
 
 { #category : 'comments' }
@@ -898,12 +864,6 @@ FamixGenerator >> commentForTWithComments [
 ]
 
 { #category : 'comments' }
-FamixGenerator >> commentForTWithCompilationUnit [
-
-	^ ''
-]
-
-{ #category : 'comments' }
 FamixGenerator >> commentForTWithDeclaredExceptions [
 
 	^ ''
@@ -949,12 +909,6 @@ FamixGenerator >> commentForTWithFunctions [
 FamixGenerator >> commentForTWithGlobalVariables [
 
 	^ 'A container having Global variables'
-]
-
-{ #category : 'comments' }
-FamixGenerator >> commentForTWithHeader [
-
-	^ ''
 ]
 
 { #category : 'comments' }
@@ -1087,8 +1041,6 @@ FamixGenerator >> defineHierarchy [
 	tComment  --|> #TEntityMetaLevelDependency.
 	tComment --|> #TSourceEntity.
 
-	tCompilationUnit --|> tFile.
-
 	tDereferencedInvocation --|> tInvocation.
 
 	tEnum --|> tWithEnumValues.
@@ -1117,8 +1069,6 @@ FamixGenerator >> defineHierarchy [
 	tGlobalVariable --|> tStructuralEntity.
 
 	tHasImmediateSource --|> tSourceAnchor.
-
-	tHeader --|> tFile.
 
 	tIndexedFileNavigation --|> tFileAnchor.
 
@@ -1391,12 +1341,6 @@ FamixGenerator >> defineRelations [
 	((tWithComments property: #comments)
 			comment: 'List of comments for the entity').
 
-	((tCompilationUnit property: #compilationUnitOwner)
-			comment: 'The compilation unit that defines this module';
-			container)
-		-
-	((tWithCompilationUnits property: #compilationUnit)).
-
 	((tThrowable property: #declaringEntities))
 		*-*
 	((tWithExceptions property: #declaredExceptions)
@@ -1459,11 +1403,6 @@ FamixGenerator >> defineRelations [
 		*-
 	((tWithGlobalVariables property: #globalVariables)
 			comment: 'Global variables defined in the scope, if any.').
-
-	((tHeader property: #headerOwner) container )
-		-
-	((tWithHeaders property: #header)
-			comment: 'The header file that defines this module').
 
 	((tImplicitVariable property: #parentBehaviouralEntity)
 			comment: 'The behaviour containing this implicit variable. belongsTo implementation';
@@ -1689,8 +1628,6 @@ FamixGenerator >> defineTraits [
 	tComment := builder newTraitNamed: #TComment comment: self commentForTComment.
 	tComment withTesting.
 
-	tCompilationUnit := builder newTraitNamed: #TCompilationUnit comment: self commentForTCompilationUnit.
-
 	tClass := builder newTraitNamed: #TClass comment: self commentForTClass.
 	tClass withTesting.
 
@@ -1733,8 +1670,6 @@ FamixGenerator >> defineTraits [
 	tGlobalVariable withTesting.
 
 	tWithGlobalVariables := builder newTraitNamed: #TWithGlobalVariables comment: self commentForTWithGlobalVariables.
-
-	tHeader := builder newTraitNamed: #THeader comment: self commentForTHeader.
 
 	tImplicitVariable := builder newTraitNamed: #TImplicitVariable comment: self commentForTImplicitVariable.
 	tImplicitVariable withTesting.
@@ -1784,10 +1719,6 @@ FamixGenerator >> defineTraits [
 	tPackageable := builder newTraitNamed: #TPackageable comment: self commentForTPackageable.
 
 	tParameter := builder newTraitNamed: #TParameter comment: self commentForTParameter.
-
-	tPreprocessorDefine := builder newTraitNamed: #TPreprocessorDefine comment: self commentForTPreprocessorDefine.
-
-	tPreprocessorIfdef := builder newTraitNamed: #TPreprocessorIfdef comment: self commentForTPreprocessorIfdef.
 
 	tPrimitiveType := builder newTraitNamed: #TPrimitiveType.
 	tPrimitiveType withTesting.
@@ -1849,9 +1780,6 @@ FamixGenerator >> defineTraits [
 	tWithComments := builder newTraitNamed: #TWithComments.
 	tWithComments comment: self commentForTWithComments.
 
-	tWithCompilationUnits := builder newTraitNamed: #TWithCompilationUnits.
-	tWithCompilationUnits comment: self commentForTWithCompilationUnit.
-
 	tWithDereferencedInvocations := builder newTraitNamed: #TWithDereferencedInvocations.
 	tWithDereferencedInvocations comment: self commentForTWithDereferencedInvocations.
 
@@ -1866,8 +1794,6 @@ FamixGenerator >> defineTraits [
 	tWithFiles := builder newTraitNamed: #TWithFiles comment: self commentForTWithFiles.
 
 	tWithFunctions := builder newTraitNamed: #TWithFunctions comment: self commentForTWithFunctions.
-
-	tWithHeaders := builder newTraitNamed: #TWithHeaders comment: self commentForTWithHeader.
 
 	tWithImplicitVariables := builder newTraitNamed: #TWithImplicitVariables comment: self commentForTWithImplicitVariables.
 
