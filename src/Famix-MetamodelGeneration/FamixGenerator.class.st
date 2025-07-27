@@ -123,7 +123,9 @@ Class {
 		'tEntityTyping',
 		'tParametricAssociation',
 		'tTypeArgument',
-		'tTypeParameter'
+		'tTypeParameter',
+		'tCompilationUnit',
+		'tWithCompilationUnits'
 	],
 	#category : 'Famix-MetamodelGeneration',
 	#package : 'Famix-MetamodelGeneration'
@@ -301,6 +303,12 @@ A class is typically scoped in a namespace. To model nested or anonymous classes
 FamixGenerator >> commentForTComment [
 
 	^ 'FamixTComment represents one instance of a comment (in the sense of programming language comments) for any Famix sourced entity. The commented sourced entity is called the container in the FamixT model.'
+]
+
+{ #category : 'comments' }
+FamixGenerator >> commentForTCompilationUnit [
+
+	^ 'I represent a compilation unit file'
 ]
 
 { #category : 'comments' }
@@ -1009,7 +1017,9 @@ FamixGenerator >> commentForTWithTypes [
 
 { #category : 'definition' }
 FamixGenerator >> defineHierarchy [
+
 	super defineHierarchy.
+
 	tAccess --|> tAssociation.
 
 	tImplementation --|> tAssociation.
@@ -1040,6 +1050,8 @@ FamixGenerator >> defineHierarchy [
 	
 	tComment  --|> #TEntityMetaLevelDependency.
 	tComment --|> #TSourceEntity.
+
+	tCompilationUnit --|> tFile.
 
 	tDereferencedInvocation --|> tInvocation.
 
@@ -1328,6 +1340,12 @@ FamixGenerator >> defineRelations [
 		*-
 	((tWithAttributes property: #attributes)
 			comment: 'List of attributes declared by this type.').
+
+	((tCompilationUnit property: #compilationUnitOwner)
+			comment: 'The compilation unit that defines this module';
+			container)
+		-
+	((tWithCompilationUnits property: #compilationUnit)).
 
 	((tThrowable property: #catchingEntities))
 		*-*
@@ -1631,6 +1649,8 @@ FamixGenerator >> defineTraits [
 	tClass := builder newTraitNamed: #TClass comment: self commentForTClass.
 	tClass withTesting.
 
+	tCompilationUnit := builder newTraitNamed: #TCompilationUnit comment: self commentForTCompilationUnit.
+
 	tClassMetrics := builder newTraitNamed: #TClassMetrics.
 
 	tClassGroup := tClass withGroup.
@@ -1779,6 +1799,8 @@ FamixGenerator >> defineTraits [
 
 	tWithComments := builder newTraitNamed: #TWithComments.
 	tWithComments comment: self commentForTWithComments.
+
+	tWithCompilationUnits := builder newTraitNamed: #TWithCompilationUnits.
 
 	tWithDereferencedInvocations := builder newTraitNamed: #TWithDereferencedInvocations.
 	tWithDereferencedInvocations comment: self commentForTWithDereferencedInvocations.

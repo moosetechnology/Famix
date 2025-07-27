@@ -179,6 +179,15 @@ FamixTVisitor >> visitFamixTComment: aFamixTComment [
 ]
 
 { #category : 'visiting' }
+FamixTVisitor >> visitFamixTCompilationUnit: aFamixTCompilationUnit [
+
+	<generated>
+	self visitFamixTFile: aFamixTCompilationUnit.
+
+	self visitEntity: aFamixTCompilationUnit compilationUnitOwner
+]
+
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTConcretization: aFamixTConcretization [
 
 	<generated>
@@ -771,6 +780,13 @@ FamixTVisitor >> visitFamixTWithComments: aFamixTWithComments [
 
 	<generated>
 	self visitCollection: aFamixTWithComments comments
+]
+
+{ #category : 'visiting' }
+FamixTVisitor >> visitFamixTWithCompilationUnits: aFamixTWithCompilationUnits [
+
+	<generated>
+	self visitEntity: aFamixTWithCompilationUnits compilationUnit
 ]
 
 { #category : 'visiting' }
