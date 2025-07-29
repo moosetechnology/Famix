@@ -730,13 +730,6 @@ MooseAbstractGroup >> removeEntity: anEntity [
 	^ self entityStorage remove: anEntity
 ]
 
-{ #category : 'loading' }
-MooseAbstractGroup >> resetMooseNameFor: anEntity [
-	self entityStorage resetMooseNameFor: anEntity.
-	" this is safe, but probably a bit overdone "
-	self flush
-]
-
 { #category : 'accessing' }
 MooseAbstractGroup >> rootEntities [
 

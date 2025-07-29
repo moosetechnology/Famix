@@ -29,7 +29,6 @@ Class {
 	#superclass : 'Collection',
 	#type : 'variable',
 	#instVars : [
-		'byName',
 		'elements',
 		'byType',
 		'species'
@@ -78,18 +77,6 @@ MooseGroupStorage >> allEntityTypes [
 	^ byType keys
 ]
 
-{ #category : 'accessing' }
-MooseGroupStorage >> at: uniqueName [ 
-	 
-	^self 
-		at: uniqueName asSymbol
-		ifAbsent: [nil]
-]
-
-{ #category : 'accessing' }
-MooseGroupStorage >> at: uniqueName ifAbsent: exceptionBlock [ 
-	^byName at: uniqueName asSymbol ifAbsent: exceptionBlock
-]
 
 { #category : 'iterators' }
 MooseGroupStorage >> basicIterator [
@@ -126,7 +113,6 @@ MooseGroupStorage >> includesID: mooseID [
 MooseGroupStorage >> initialize: capacity [
 
 	byType := IdentityDictionary new: 24.
-	byName := IdentityHashTable new: capacity.
 	species := OrderedCollection.
 	elements := self species new: capacity
 ]
@@ -140,7 +126,6 @@ MooseGroupStorage >> iterator [
 MooseGroupStorage >> postCopy [  
 	super postCopy.
 	elements := elements copy.
-	byName := byName copy.
 	byType := byType copy
 ]
 
@@ -168,17 +153,6 @@ MooseGroupStorage >> remove: anElement ifAbsent: exceptionBlock [
 MooseGroupStorage >> removeAll [ 
 	 
 	self initialize: 10000
-]
-
-{ #category : 'private' }
-MooseGroupStorage >> resetMooseNameFor: anEntity [
-
-	anEntity hasUniqueMooseNameInModel
-		ifTrue: [
-			byName removeKey: anEntity mooseName asSymbol ifAbsent: [  ].
-			anEntity privateClearMooseName.
-			byName at: anEntity mooseName asSymbol put: anEntity ]
-		ifFalse: [ anEntity privateClearMooseName ]
 ]
 
 { #category : 'enumerating' }
@@ -218,23 +192,14 @@ MooseGroupStorage >> species: aCollectionClass [
 
 { #category : 'private' }
 MooseGroupStorage >> updateCacheOnAddingOf: anElement [
+
 	(byType privateMooseStorageAt: anElement class) add: anElement.
-	anElement hasUniqueMooseNameInModel ifTrue: [ byName at: anElement mooseName put: anElement ].
 	^ anElement
 ]
 
 { #category : 'private' }
 MooseGroupStorage >> updateCacheOnRemovalOf: anElement [
-	byType at: anElement class ifPresent: [ :group |
-		group remove: anElement ifAbsent: [ self error: 'Internal storage inconsistency' ] ].
 
-	anElement hasUniqueMooseNameInModel ifFalse: [ ^ anElement ].
-
-	byName
-		at: anElement mooseName
-		ifAbsent: [ "In theory, objects are registered under their mooseName,
-            however some objects are still registered by their name
-            if #resetMooseName was not used when needed" self resetMooseNameFor: anElement ].
-	byName removeKey: anElement mooseName ifAbsent: [ self error: 'Internal storage inconsistency' ].
+	byType at: anElement class ifPresent: [ :group | group remove: anElement ifAbsent: [ self error: 'Internal storage inconsistency' ] ].
 	^ anElement
 ]
