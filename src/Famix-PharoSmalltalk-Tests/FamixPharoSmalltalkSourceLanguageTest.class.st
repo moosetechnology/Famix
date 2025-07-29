@@ -1,10 +1,11 @@
 Class {
-	#name : #FamixPharoSmalltalkSourceLanguageTest,
-	#superclass : #TestCase,
-	#category : #'Famix-PharoSmalltalk-Tests'
+	#name : 'FamixPharoSmalltalkSourceLanguageTest',
+	#superclass : 'TestCase',
+	#category : 'Famix-PharoSmalltalk-Tests',
+	#package : 'Famix-PharoSmalltalk-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixPharoSmalltalkSourceLanguageTest >> testIsPharo [
 	| model |
 	model := FamixStModel new.
@@ -19,12 +20,12 @@ FamixPharoSmalltalkSourceLanguageTest >> testIsPharo [
 	self assert: model sourceLanguage isPharo
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixPharoSmalltalkSourceLanguageTest >> testIsUnknown [
 	self deny: FamixStSourceLanguage new isUnknown
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixPharoSmalltalkSourceLanguageTest >> testName [
 	self assert: FamixStSourceLanguage new name equals: 'Pharo'
 ]

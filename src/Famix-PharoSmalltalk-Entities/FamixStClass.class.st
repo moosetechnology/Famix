@@ -23,7 +23,8 @@
 ### Incoming dependencies
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `incomingReferences` | `FamixTReferenceable` | `referredType` | `FamixTReference` | References to this entity by other entities.|
+| `incomingReferences` | `FamixTReferenceable` | `referredEntity` | `FamixTReference` | References to this entity by other entities.|
+| `incomingTypings` | `FamixTType` | `declaredType` | `FamixTEntityTyping` | Relations to the entities that have this as type.|
 | `subInheritances` | `FamixTWithInheritances` | `superclass` | `FamixTInheritance` | Subinheritance relationships, i.e. known subclasses of this type.|
 
 ### Other
@@ -31,7 +32,6 @@
 |---|
 | `receivingInvocations` | `FamixTInvocationsReceiver` | `receiver` | `FamixTInvocation` | List of invocations performed on this entity (considered as the receiver)|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
-| `typedEntities` | `FamixTType` | `declaredType` | `FamixTTypedEntity` | Entities that have this type as declaredType|
 
 
 ## Properties
@@ -45,14 +45,16 @@
 
 "
 Class {
-	#name : #FamixStClass,
-	#superclass : #FamixStNamedEntity,
+	#name : 'FamixStClass',
+	#superclass : 'FamixStNamedEntity',
 	#traits : 'FamixTCanBeAbstract + FamixTClass + FamixTClassMetrics + FamixTPackageable',
 	#classTraits : 'FamixTCanBeAbstract classTrait + FamixTClass classTrait + FamixTClassMetrics classTrait + FamixTPackageable classTrait',
-	#category : #'Famix-PharoSmalltalk-Entities-Entities'
+	#category : 'Famix-PharoSmalltalk-Entities-Entities',
+	#package : 'Famix-PharoSmalltalk-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixStClass class >> annotation [
 
 	<FMClass: #Class super: #FamixStNamedEntity>
@@ -61,7 +63,7 @@ FamixStClass class >> annotation [
 	^ self
 ]
 
-{ #category : #'Famix-Extensions-metrics-support' }
+{ #category : 'Famix-Extensions-metrics-support' }
 FamixStClass >> accessedAttributes [
 	
 	"Returns my attributes accessed by my methods. If the same attribute is accessed 
@@ -71,21 +73,21 @@ FamixStClass >> accessedAttributes [
 	^ self methodsWithoutSutbsAndConstructors asOrderedCollection flatCollect: [ :method | method accessedAttributes ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixStClass >> allRecursiveTypes [
 	"We cannot have children types in Smalltalk but this method is useful to compute some metrics."
 
 	^ #(  )
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixStClass >> classSide [
 	^ self isClassSide
 		ifFalse: [ self mooseModel allClasses entityNamed: (self mooseName , '_class') asSymbol ]
 		ifTrue: [ self ]
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixStClass >> computeNumberOfLinesOfCode [
 	"The source anchor only contains the definition while the source text return the full tonel export. So we count the lines of the full tonel export"
 
@@ -94,12 +96,12 @@ FamixStClass >> computeNumberOfLinesOfCode [
 		ifEmpty: [ self notExistentMetricValue ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixStClass >> extendedInPackages [
 	^ self extendedMethods flatCollectAsSet: [ :m | m atScope: FamixTPackage ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixStClass >> extendedMethods [
 	<FMProperty: #extendedMethods type: #FamixStMethod>
 	<FMComment: 'Methods which are class extensions in this class.'>
@@ -107,20 +109,31 @@ FamixStClass >> extendedMethods [
 	^ self methods select: #isExtension
 ]
 
-{ #category : #accessing }
-FamixStClass >> instanceSide [
-	^ self isClassSide
-		ifTrue: [ self mooseModel allClasses entityNamed: (self mooseName removeSuffix: '_class') asSymbol ]
-		ifFalse: [ self ]
+{ #category : 'testing' }
+FamixStClass >> inheritsFromTestCase [
+
+	self withSuperclassesDo: [ :each |
+		each name = 'TestCase' ifTrue: [ ^ true ] ].
+	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'accessing' }
+FamixStClass >> instanceSide [
+
+	^ self isClassSide
+		  ifTrue: [
+			  self mooseModel allClasses entityNamed:
+				  (self mooseName withoutSuffix: '_class') asSymbol ]
+		  ifFalse: [ self ]
+]
+
+{ #category : 'testing' }
 FamixStClass >> isAnonymousClass [
 	self flag: #todo.	"We need to check how to do that in Pharo smalltalk because I think some of the conditions are for Java"
 	^ self typeContainer isNotNil and: [ self typeContainer isMethod or: [ self name isAllDigits or: [ '*_anonymous_*' match: self name ] ] ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixStClass >> isClassSide [
 	"Kind of a hack. Uses the FAMIX2 Smalltalk naming convention that every Smalltalk
 	 metaclass has _class appended to the classname of the class it is a metaclass of."
@@ -128,23 +141,24 @@ FamixStClass >> isClassSide [
 	^ '*_class' match: self name
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixStClass >> isExtended [
 	^ self methods anySatisfy: #isExtension
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixStClass >> isInstanceSide [
 	^ self isClassSide not
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixStClass >> isLonelyWithin: aClassGroup [
 	^ (self subclassHierarchyGroup intersection: aClassGroup) isEmpty and: [ (self superclassHierarchyGroup intersection: aClassGroup) isEmpty ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixStClass >> isTestCase [
+
 	<FMProperty: #isTestCase type: #Boolean>
 	<derived>
 	<FMComment: 'True if the method is considered as a Java test'>
@@ -152,7 +166,7 @@ FamixStClass >> isTestCase [
 	^ false
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixStClass >> localMethods [
 	<FMProperty: #extendedMethods type: #FamixStMethod>
 	<FMComment: 'Methods which are local methods of the class and not extensions in this class.'>
@@ -160,20 +174,20 @@ FamixStClass >> localMethods [
 	^ self methods reject: #isExtension
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixStClass >> lookUp: signature [
 	self withSuperclassesDo: [ :class | class methods detect: [ :method | method signature = signature ] ifFound: [ :found | ^ found ] ].
 	^ nil
 ]
 
-{ #category : #'Famix-Implementation' }
+{ #category : 'Famix-Implementation' }
 FamixStClass >> methodsWithoutSutbsAndConstructors [
 	"Removing stub and contructor methods. Used to support the calculation of LCOM."
 
 	^ (self methods select: [ :each | each isStub not and: [ each isConstructor not ] ]) asSet
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixStClass >> numberOfMessageSends [
 	<FMProperty: #numberOfMessageSends type: #Number>
 	<derived>
@@ -184,12 +198,12 @@ FamixStClass >> numberOfMessageSends [
 		computedAs: [self methodsGroup sumNumbers: #numberOfMessageSends]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 FamixStClass >> numberOfMessageSends: aNumber [
 	self cacheAt: #numberOfMessageSends put: aNumber
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixStClass >> numberOfMethodProtocols [
 	<FMProperty: #numberOfMethodProtocols type: #Number>
 	<derived>
@@ -197,19 +211,19 @@ FamixStClass >> numberOfMethodProtocols [
 	^ self lookUpPropertyNamed: #numberOfMethodProtocols computedAs: [ ((self methods collect: [ :each | each protocol ]) reject: #isNil) asSet size ]
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixStClass >> numberOfMethodProtocols: aNumber [
 	self cacheAt: #numberOfMethodProtocols put: aNumber
 ]
 
-{ #category : #'Famix-Implementation' }
+{ #category : 'Famix-Implementation' }
 FamixStClass >> smalltalkClass [
 	"Returns the associated smalltalk class if it exist in the system."
 
 	^ FamixSmalltalkNameResolver smalltalkClassFromFamixClassName: self name ifAbsent: [ nil ]
 ]
 
-{ #category : #'Famix-Implementation' }
+{ #category : 'Famix-Implementation' }
 FamixStClass >> sourceText [
 
 	self flag: 'This code should be delegated to the anchor'.

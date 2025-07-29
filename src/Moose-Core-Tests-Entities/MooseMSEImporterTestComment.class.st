@@ -7,24 +7,25 @@
 |---|
 | `commentedEntity` | `FamixTComment` | `comments` | `FamixTWithComments` | Source code commented by the comment|
 
-
-## Properties
-======================
-
-| Name | Type | Default value | Comment |
+### Other
+| Relation | Origin | Opposite | Type | Comment |
 |---|
-| `content` | `String` | nil | Content of the comment as a String|
+| `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
+
+
 
 "
 Class {
-	#name : #MooseMSEImporterTestComment,
-	#superclass : #MooseMSEImporterTestSourcedEntity,
+	#name : 'MooseMSEImporterTestComment',
+	#superclass : 'MooseMSEImporterTestSourcedEntity',
 	#traits : 'FamixTComment',
 	#classTraits : 'FamixTComment classTrait',
-	#category : #'Moose-Core-Tests-Entities-Entities'
+	#category : 'Moose-Core-Tests-Entities-Entities',
+	#package : 'Moose-Core-Tests-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 MooseMSEImporterTestComment class >> annotation [
 
 	<FMClass: #Comment super: #MooseMSEImporterTestSourcedEntity>

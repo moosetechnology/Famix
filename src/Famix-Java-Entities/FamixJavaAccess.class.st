@@ -25,23 +25,31 @@
 
 | Name | Type | Default value | Comment |
 |---|
-| `isStub` | `Boolean` | false | Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.|
 | `isWrite` | `Boolean` | false | Write access|
 
 "
 Class {
-	#name : #FamixJavaAccess,
-	#superclass : #FamixJavaEntity,
+	#name : 'FamixJavaAccess',
+	#superclass : 'FamixJavaEntity',
 	#traits : 'FamixTAccess',
 	#classTraits : 'FamixTAccess classTrait',
-	#category : #'Famix-Java-Entities-Entities'
+	#category : 'Famix-Java-Entities-Entities',
+	#package : 'Famix-Java-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixJavaAccess class >> annotation [
 
 	<FMClass: #Access super: #FamixJavaEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
 	^ self
+]
+
+{ #category : 'visitor' }
+FamixJavaAccess >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaAccess: self
 ]

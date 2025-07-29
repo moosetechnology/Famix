@@ -5,7 +5,7 @@
 ### Association source
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `importingEntity` | `FamixTImport` | `outgoingImports` | `FamixTWithImports` | Importing entity|
+| `importingEntity` | `FamixTImport` | `imports` | `FamixTWithImports` | Importing entity|
 
 ### Association target
 | Relation | Origin | Opposite | Type | Comment |
@@ -20,26 +20,22 @@
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
 
 
-## Properties
-======================
-
-| Name | Type | Default value | Comment |
-|---|
-| `isStub` | `Boolean` | false | Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.|
 
 "
 Trait {
-	#name : #FamixTImport,
+	#name : 'FamixTImport',
 	#instVars : [
-		'#importingEntity => FMOne type: #FamixTWithImports opposite: #outgoingImports',
-		'#importedEntity => FMOne type: #FamixTImportable opposite: #incomingImports'
+		'#importedEntity => FMOne type: #FamixTImportable opposite: #incomingImports',
+		'#importingEntity => FMOne type: #FamixTWithImports opposite: #imports'
 	],
 	#traits : 'FamixTAssociation',
 	#classTraits : 'FamixTAssociation classTrait',
-	#category : #'Famix-Traits-Traits'
+	#category : 'Famix-Traits-Import',
+	#package : 'Famix-Traits',
+	#tag : 'Import'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTImport classSide >> annotation [
 
 	<FMClass: #TImport super: #Object>
@@ -48,7 +44,14 @@ FamixTImport classSide >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'visitor' }
+FamixTImport >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTImport: self
+]
+
+{ #category : 'accessing' }
 FamixTImport >> importedEntity [
 	"Relation named: #importedEntity type: #FamixTImportable opposite: #incomingImports"
 
@@ -58,16 +61,16 @@ FamixTImport >> importedEntity [
 	^ importedEntity
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTImport >> importedEntity: anObject [
 
 	<generated>
 	importedEntity := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTImport >> importingEntity [
-	"Relation named: #importingEntity type: #FamixTWithImports opposite: #outgoingImports"
+	"Relation named: #importingEntity type: #FamixTWithImports opposite: #imports"
 
 	<generated>
 	<FMComment: 'Importing entity'>
@@ -75,7 +78,7 @@ FamixTImport >> importingEntity [
 	^ importingEntity
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTImport >> importingEntity: anObject [
 
 	<generated>

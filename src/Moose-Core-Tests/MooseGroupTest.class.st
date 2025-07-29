@@ -1,27 +1,28 @@
 Class {
-	#name : #MooseGroupTest,
-	#superclass : #MooseAbstractGroupTest,
-	#category : #'Moose-Core-Tests'
+	#name : 'MooseGroupTest',
+	#superclass : 'MooseAbstractGroupTest',
+	#category : 'Moose-Core-Tests',
+	#package : 'Moose-Core-Tests'
 }
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 MooseGroupTest >> actualClass [
 	^ MooseGroup
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseGroupTest >> testAsMooseGroup [
 	group := #(1 2 3) asMooseGroup.
 	self assert: (group isKindOf: MooseGroup).
 	self assert: group size equals: 3
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseGroupTest >> testAsMooseGroupDoNotCopy [
 	self assert: group asMooseGroup identicalTo: group
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseGroupTest >> testAsMooseGroupWithClasses [
 	"Non regression test of issue https://github.com/moosetechnology/Moose/issues/1486"
 
@@ -30,12 +31,12 @@ MooseGroupTest >> testAsMooseGroupWithClasses [
 	self assert: group anyOne equals: Object
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseGroupTest >> testDefaultStorageIterator [
 	self assert: group entityStorage iterator class equals: IteratorWithCollectionAPI
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseGroupTest >> testDistribution [
 	| referenceGroupOfGroups |
 	referenceGroupOfGroups := self actualClass new.
@@ -50,7 +51,7 @@ MooseGroupTest >> testDistribution [
 	self assert: (group distributionOverAGroupOfGroups: referenceGroupOfGroups) equals: 2 / 3 + (2 / 5)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseGroupTest >> testDistributionAndEncapsulation [
 	| referenceGroupOfGroups |
 	referenceGroupOfGroups := self actualClass new.
@@ -69,7 +70,7 @@ MooseGroupTest >> testDistributionAndEncapsulation [
 	self assert: (group encapsulationOfAGroupOfGroups: referenceGroupOfGroups) equals: 4 / 12 + (4 / 20)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseGroupTest >> testEntityNamedIfAbsentPutWithCorrectEntityAsParameter [
 	| testClass |
 	testClass := FamixTest1Class new.
@@ -79,7 +80,7 @@ MooseGroupTest >> testEntityNamedIfAbsentPutWithCorrectEntityAsParameter [
 		identicalTo: testClass
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseGroupTest >> testEntityNamedIfAbsentPutWithIncorrectEntityAsParameter [
 	| testClass |
 	testClass := FamixTest1Class new.
@@ -90,12 +91,12 @@ MooseGroupTest >> testEntityNamedIfAbsentPutWithIncorrectEntityAsParameter [
 		raise: Error
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseGroupTest >> testExplicitEmptyCreation [
 	self assert: ((FamixTypeGroup withAll: #()) isKindOf: FamixTypeGroup)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseGroupTest >> testInitialization [
 	| group1 group2 |
 	group1 := self actualClass with: 1.
@@ -105,7 +106,7 @@ MooseGroupTest >> testInitialization [
 	self assert: group1 description equals: 'Group'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseGroupTest >> testIsOfType [
 	| mGroup entity object |
 	mGroup := MooseGroup new.
@@ -118,7 +119,7 @@ MooseGroupTest >> testIsOfType [
 	self deny: (mGroup isOfType: MooseEntity)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseGroupTest >> testNumberOfPackages [
 
 	self assert: group numberOfPackages equals: 0.
@@ -131,7 +132,7 @@ MooseGroupTest >> testNumberOfPackages [
 	self assert: group numberOfPackages equals: 0
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseGroupTest >> testObjectAsMooseGroup [
 	group := 42 asMooseGroup.
 	self assert: (group isKindOf: MooseGroup).
@@ -139,7 +140,7 @@ MooseGroupTest >> testObjectAsMooseGroup [
 	self assert: group first equals: 42
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseGroupTest >> testSort [
 
 	| newGroup |
@@ -153,7 +154,7 @@ MooseGroupTest >> testSort [
 	self assert: newGroup fourth equals: 4
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseGroupTest >> testSorted [
 
 	| newGroup |

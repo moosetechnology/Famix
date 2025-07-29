@@ -1,16 +1,17 @@
 Class {
-	#name : #FamixWithImmediateSourceTest,
-	#superclass : #TestCase,
+	#name : 'FamixWithImmediateSourceTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'model',
 		'm1',
 		'm2',
 		'anchor'
 	],
-	#category : #'Famix-Test1-Tests'
+	#category : 'Famix-Test1-Tests',
+	#package : 'Famix-Test1-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 FamixWithImmediateSourceTest >> setUp [
 
 	super setUp.
@@ -26,19 +27,19 @@ FamixWithImmediateSourceTest >> setUp [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixWithImmediateSourceTest >> testIsFileAnchor [
 	self deny: anchor isFileAnchor
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixWithImmediateSourceTest >> testSource [
 
 	anchor source: 'a code'.
 	self assert: anchor source equals: 'a code'.	
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixWithImmediateSourceTest >> testSourceText [
 
 	self assert: anchor sourceText isNil.

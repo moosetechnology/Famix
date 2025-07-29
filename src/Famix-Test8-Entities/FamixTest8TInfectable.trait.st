@@ -17,15 +17,17 @@
 
 "
 Trait {
-	#name : #FamixTest8TInfectable,
+	#name : 'FamixTest8TInfectable',
 	#instVars : [
 		'#outgoingInfections => FMMany type: #FamixTest8Infection opposite: #infectable',
 		'#pathogenicity => FMProperty'
 	],
-	#category : #'Famix-Test8-Entities-Traits'
+	#category : 'Famix-Test8-Entities-Traits',
+	#package : 'Famix-Test8-Entities',
+	#tag : 'Traits'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTest8TInfectable classSide >> annotation [
 
 	<FMClass: #TInfectable super: #Object>
@@ -34,13 +36,13 @@ FamixTest8TInfectable classSide >> annotation [
 	^ self
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTest8TInfectable >> addOutgoingInfection: anObject [
 	<generated>
 	^ self outgoingInfections add: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest8TInfectable >> outgoingInfections [
 	"Relation named: #outgoingInfections type: #FamixTest8Infection opposite: #infectable"
 
@@ -49,14 +51,14 @@ FamixTest8TInfectable >> outgoingInfections [
 	^ outgoingInfections
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest8TInfectable >> outgoingInfections: anObject [
 
 	<generated>
 	outgoingInfections value: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest8TInfectable >> pathogenicity [
 
 	<FMProperty: #pathogenicity type: #Number>
@@ -64,7 +66,7 @@ FamixTest8TInfectable >> pathogenicity [
 	^ pathogenicity
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest8TInfectable >> pathogenicity: anObject [
 	<generated>
 	pathogenicity := anObject

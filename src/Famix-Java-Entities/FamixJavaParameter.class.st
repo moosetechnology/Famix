@@ -12,6 +12,11 @@
 |---|
 | `comments` | `FamixTWithComments` | `commentedEntity` | `FamixTComment` | List of comments for the entity|
 
+### Outgoing dependencies
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `typing` | `FamixTTypedEntity` | `typedEntity` | `FamixTEntityTyping` | Association linking this entity to its declared type.|
+
 ### Incoming dependencies
 | Relation | Origin | Opposite | Type | Comment |
 |---|
@@ -20,7 +25,6 @@
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `declaredType` | `FamixTTypedEntity` | `typedEntities` | `FamixTType` | Type of the entity, if any|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
 
 
@@ -35,23 +39,32 @@
 
 "
 Class {
-	#name : #FamixJavaParameter,
-	#superclass : #FamixJavaNamedEntity,
+	#name : 'FamixJavaParameter',
+	#superclass : 'FamixJavaVariable',
 	#traits : 'FamixTCanBeFinal + FamixTParameter + FamixTWithComments',
 	#classTraits : 'FamixTCanBeFinal classTrait + FamixTParameter classTrait + FamixTWithComments classTrait',
-	#category : #'Famix-Java-Entities-Entities'
+	#category : 'Famix-Java-Entities-Entities',
+	#package : 'Famix-Java-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixJavaParameter class >> annotation [
 
-	<FMClass: #Parameter super: #FamixJavaNamedEntity>
+	<FMClass: #Parameter super: #FamixJavaVariable>
 	<package: #'Famix-Java-Entities'>
 	<generated>
 	^ self
 ]
 
-{ #category : #printing }
+{ #category : 'visitor' }
+FamixJavaParameter >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaParameter: self
+]
+
+{ #category : 'printing' }
 FamixJavaParameter >> mooseNameOn: stream [ 
 	| parent |
 	parent := self parentBehaviouralEntity.
@@ -61,12 +74,12 @@ FamixJavaParameter >> mooseNameOn: stream [
 	self name ifNotNil: [stream nextPutAll: self name]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixJavaParameter >> parentType [
 	^self parentBehaviouralEntity parentType
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixJavaParameter >> printOn: stream [ 
 	| parent |
 	self name ifNotNil: [ stream nextPutAll: self name ].

@@ -1,10 +1,12 @@
 Class {
-	#name : #FamixNamespaceGroup,
-	#superclass : #MooseSpecializedGroup,
-	#category : #'Famix-Traits-Groups'
+	#name : 'FamixNamespaceGroup',
+	#superclass : 'MooseSpecializedGroup',
+	#category : 'Famix-Traits-Groups',
+	#package : 'Famix-Traits',
+	#tag : 'Groups'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixNamespaceGroup class >> annotation [
 
 	<FMClass: #NamespaceGroup super: #MooseSpecializedGroup>
@@ -13,7 +15,7 @@ FamixNamespaceGroup class >> annotation [
 	^ self
 ]
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixNamespaceGroup class >> metamodel [
 
 	<generated>

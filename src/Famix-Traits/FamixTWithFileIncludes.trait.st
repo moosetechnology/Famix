@@ -12,15 +12,17 @@
 
 "
 Trait {
-	#name : #FamixTWithFileIncludes,
+	#name : 'FamixTWithFileIncludes',
 	#instVars : [
 		'#incomingIncludeRelations => FMMany type: #FamixTFileInclude opposite: #target',
 		'#outgoingIncludeRelations => FMMany type: #FamixTFileInclude opposite: #source'
 	],
-	#category : #'Famix-Traits-FileInclude'
+	#category : 'Famix-Traits-FileInclude',
+	#package : 'Famix-Traits',
+	#tag : 'FileInclude'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTWithFileIncludes classSide >> annotation [
 
 	<FMClass: #TWithFileIncludes super: #Object>
@@ -29,19 +31,26 @@ FamixTWithFileIncludes classSide >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'visitor' }
+FamixTWithFileIncludes >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTWithFileIncludes: self
+]
+
+{ #category : 'accessing' }
 FamixTWithFileIncludes >> addIncomingIncludeRelation: anObject [
 	incomingIncludeRelations add: anObject
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithFileIncludes >> addOutgoingIncludeRelation: anObject [
 	outgoingIncludeRelations add: anObject
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithFileIncludes >> incomingIncludeRelations [
 	"Relation named: #incomingIncludeRelations type: #FamixTFileInclude opposite: #target"
 
@@ -51,14 +60,14 @@ FamixTWithFileIncludes >> incomingIncludeRelations [
 	^ incomingIncludeRelations
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithFileIncludes >> incomingIncludeRelations: anObject [
 
 	<generated>
 	incomingIncludeRelations value: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithFileIncludes >> outgoingIncludeRelations [
 	"Relation named: #outgoingIncludeRelations type: #FamixTFileInclude opposite: #source"
 
@@ -68,7 +77,7 @@ FamixTWithFileIncludes >> outgoingIncludeRelations [
 	^ outgoingIncludeRelations
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithFileIncludes >> outgoingIncludeRelations: anObject [
 
 	<generated>

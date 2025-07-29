@@ -9,35 +9,37 @@ Types are represented as boxes for which:
 Inheritance relations are show as edges.
 "
 Class {
-	#name : #FamixTypeGroupSystemComplexity,
-	#superclass : #MooseAbstractVisualization,
+	#name : 'FamixTypeGroupSystemComplexity',
+	#superclass : 'MooseAbstractVisualization',
 	#instVars : [
 		'famixTypeGroup',
 		'widthBlock',
 		'colorBlock',
 		'heightBlock'
 	],
-	#category : #'Famix-Visualizations-Core'
+	#category : 'Famix-Visualizations-Core',
+	#package : 'Famix-Visualizations',
+	#tag : 'Core'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTypeGroupSystemComplexity class >> defaultTitle [
 	^ 'System complexity'
 ]
 
-{ #category : #public }
+{ #category : 'public' }
 FamixTypeGroupSystemComplexity class >> forTypeGroup: aFamixTypeGroup [
 	^ self new
 		famixTypeGroup: aFamixTypeGroup;
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTypeGroupSystemComplexity class >> icon [
 	^ MooseIcons mooseSystemComplexity
 ]
 
-{ #category : #shapes }
+{ #category : 'shapes' }
 FamixTypeGroupSystemComplexity >> basicShape [
 	^ RSBox new
 		borderColor: Color lightGray;
@@ -45,7 +47,7 @@ FamixTypeGroupSystemComplexity >> basicShape [
 		yourself
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 FamixTypeGroupSystemComplexity >> build [
 	self buildNodes.
 	self buildEgdes.
@@ -53,7 +55,7 @@ FamixTypeGroupSystemComplexity >> build [
 	super build
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 FamixTypeGroupSystemComplexity >> buildEgdes [
 	RSEdgeBuilder line
 		shapes: canvas nodes;
@@ -62,7 +64,7 @@ FamixTypeGroupSystemComplexity >> buildEgdes [
 	canvas pushBackEdges
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 FamixTypeGroupSystemComplexity >> buildLegend [
 	| legend |
 	legend := RSLegend new.
@@ -83,7 +85,7 @@ FamixTypeGroupSystemComplexity >> buildLegend [
 	legend build
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 FamixTypeGroupSystemComplexity >> buildNodes [
 	canvas
 		addAll:
@@ -95,41 +97,41 @@ FamixTypeGroupSystemComplexity >> buildNodes [
 	self normalizeNodes
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTypeGroupSystemComplexity >> colorBlock [
 	^ colorBlock
 		ifNil: [ colorBlock := [ :type | type numberOfLinesOfCode ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTypeGroupSystemComplexity >> colorBlock: anObject [
 	colorBlock := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTypeGroupSystemComplexity >> famixTypeGroup: aTypeGroup [
 	famixTypeGroup := aTypeGroup
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTypeGroupSystemComplexity >> heightBlock [
 	^ heightBlock
 		ifNil: [ heightBlock := [ :type | type numberOfMethods ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTypeGroupSystemComplexity >> heightBlock: anObject [
 	heightBlock := anObject
 ]
 
-{ #category : #normalizing }
+{ #category : 'normalizing' }
 FamixTypeGroupSystemComplexity >> normalizeNodes [
 	self normalizeNodesHeight.
 	self normalizeNodesWidth.
 	self normalizeNodesColor
 ]
 
-{ #category : #normalizing }
+{ #category : 'normalizing' }
 FamixTypeGroupSystemComplexity >> normalizeNodesColor [
 	RSNormalizer color
 		from: Color white;
@@ -138,7 +140,7 @@ FamixTypeGroupSystemComplexity >> normalizeNodesColor [
 		normalize: self colorBlock
 ]
 
-{ #category : #normalizing }
+{ #category : 'normalizing' }
 FamixTypeGroupSystemComplexity >> normalizeNodesHeight [
 	RSNormalizer height
 		shapes: canvas nodes;
@@ -146,7 +148,7 @@ FamixTypeGroupSystemComplexity >> normalizeNodesHeight [
 		normalize: self heightBlock
 ]
 
-{ #category : #normalizing }
+{ #category : 'normalizing' }
 FamixTypeGroupSystemComplexity >> normalizeNodesWidth [
 
 	RSNormalizer width
@@ -155,23 +157,23 @@ FamixTypeGroupSystemComplexity >> normalizeNodesWidth [
 		normalize: self widthBlock
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 FamixTypeGroupSystemComplexity >> setLayout [
 	RSDominanceTreeLayout new on: canvas shapes edges: canvas edges
 ]
 
-{ #category : #normalizing }
+{ #category : 'normalizing' }
 FamixTypeGroupSystemComplexity >> shapesSizeScale [
 	^ NSScale linear range: {5 . 100}
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTypeGroupSystemComplexity >> widthBlock [
 	^ widthBlock
 		ifNil: [ widthBlock := [ :type | type numberOfAttributes ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTypeGroupSystemComplexity >> widthBlock: anObject [
 	widthBlock := anObject
 ]

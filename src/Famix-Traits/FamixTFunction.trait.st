@@ -21,6 +21,7 @@ FamixTFunction represents a behavioural entity in a procedural language.
 | `accesses` | `FamixTWithAccesses` | `accessor` | `FamixTAccess` | Accesses to variables made by this behaviour.|
 | `outgoingInvocations` | `FamixTWithInvocations` | `sender` | `FamixTInvocation` | Outgoing invocations sent by this behaviour.|
 | `outgoingReferences` | `FamixTWithReferences` | `referencer` | `FamixTReference` | References from this entity to other entities.|
+| `typing` | `FamixTTypedEntity` | `typedEntity` | `FamixTEntityTyping` | Association linking this entity to its declared type.|
 
 ### Incoming dependencies
 | Relation | Origin | Opposite | Type | Comment |
@@ -30,7 +31,6 @@ FamixTFunction represents a behavioural entity in a procedural language.
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `declaredType` | `FamixTTypedEntity` | `typedEntities` | `FamixTType` | Type of the entity, if any|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
 
 
@@ -45,16 +45,18 @@ FamixTFunction represents a behavioural entity in a procedural language.
 
 "
 Trait {
-	#name : #FamixTFunction,
+	#name : 'FamixTFunction',
 	#instVars : [
 		'#functionOwner => FMOne type: #FamixTWithFunctions opposite: #functions'
 	],
 	#traits : 'FamixTHasSignature + FamixTInvocable + FamixTNamedEntity + FamixTTypedEntity + FamixTWithLocalVariables + FamixTWithParameters + FamixTWithStatements + TEntityMetaLevelDependency',
 	#classTraits : 'FamixTHasSignature classTrait + FamixTInvocable classTrait + FamixTNamedEntity classTrait + FamixTTypedEntity classTrait + FamixTWithLocalVariables classTrait + FamixTWithParameters classTrait + FamixTWithStatements classTrait + TEntityMetaLevelDependency classTrait',
-	#category : #'Famix-Traits-Behavioral'
+	#category : 'Famix-Traits-Behavioral',
+	#package : 'Famix-Traits',
+	#tag : 'Behavioral'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTFunction classSide >> annotation [
 
 	<FMClass: #TFunction super: #Object>
@@ -63,7 +65,14 @@ FamixTFunction classSide >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'visitor' }
+FamixTFunction >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTFunction: self
+]
+
+{ #category : 'accessing' }
 FamixTFunction >> functionOwner [
 	"Relation named: #functionOwner type: #FamixTWithFunctions opposite: #functions"
 
@@ -73,7 +82,7 @@ FamixTFunction >> functionOwner [
 	^ functionOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTFunction >> functionOwner: anObject [
 
 	functionOwner := anObject.
@@ -81,21 +90,21 @@ FamixTFunction >> functionOwner: anObject [
 
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FamixTFunction >> functionOwnerGroup [
 	<generated>
 	<navigation: 'FunctionOwner'>
 	^ MooseSpecializedGroup with: self functionOwner
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTFunction >> isFunction [
 
 	<generated>
 	^ true
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixTFunction >> mooseNameOn: stream [
 	| parent |
 	parent := self functionOwner.

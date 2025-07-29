@@ -18,7 +18,7 @@
 
 "
 Trait {
-	#name : #FDTrait4,
+	#name : 'FDTrait4',
 	#instVars : [
 		'#class1 => FMMany type: #FDClass1 opposite: #myTrait',
 		'#otherProp => FMProperty',
@@ -26,10 +26,12 @@ Trait {
 	],
 	#traits : 'FDTrait2',
 	#classTraits : 'FDTrait2 classTrait',
-	#category : #'FamixDocumentor-TestMetaModel-Traits'
+	#category : 'FamixDocumentor-TestMetaModel-Traits',
+	#package : 'FamixDocumentor-TestMetaModel',
+	#tag : 'Traits'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FDTrait4 classSide >> annotation [
 
 	<FMClass: #Trait4 super: #Object>
@@ -38,13 +40,13 @@ FDTrait4 classSide >> annotation [
 	^ self
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FDTrait4 >> addClass1: anObject [
 	<generated>
 	^ self class1 add: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FDTrait4 >> class1 [
 	"Relation named: #class1 type: #FDClass1 opposite: #myTrait"
 
@@ -53,14 +55,14 @@ FDTrait4 >> class1 [
 	^ class1
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FDTrait4 >> class1: anObject [
 
 	<generated>
 	class1 value: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FDTrait4 >> otherProp [
 
 	<FMProperty: #otherProp type: #Object>
@@ -69,13 +71,13 @@ FDTrait4 >> otherProp [
 	^ otherProp
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FDTrait4 >> otherProp: anObject [
 	<generated>
 	otherProp := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FDTrait4 >> someProp [
 
 	<FMProperty: #someProp type: #String>
@@ -84,7 +86,7 @@ FDTrait4 >> someProp [
 	^ someProp
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FDTrait4 >> someProp: anObject [
 	<generated>
 	someProp := anObject

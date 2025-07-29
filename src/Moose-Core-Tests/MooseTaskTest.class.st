@@ -1,16 +1,17 @@
 Class {
-	#name : #MooseTaskTest,
-	#superclass : #TestCase,
-	#category : #'Moose-Core-Tests'
+	#name : 'MooseTaskTest',
+	#superclass : 'TestCase',
+	#category : 'Moose-Core-Tests',
+	#package : 'Moose-Core-Tests'
 }
 
-{ #category : #util }
+{ #category : 'util' }
 MooseTaskTest >> getAllWindows [
 	^ World submorphs select: #isSystemWindow
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseTaskTest >> testRunWithProfiler [
 
 	| task windows |

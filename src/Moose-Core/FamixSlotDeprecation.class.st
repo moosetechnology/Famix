@@ -1,10 +1,11 @@
 Class {
-	#name : #FamixSlotDeprecation,
-	#superclass : #Deprecation,
-	#category : #'Moose-Core'
+	#name : 'FamixSlotDeprecation',
+	#superclass : 'Deprecation',
+	#category : 'Moose-Core',
+	#package : 'Moose-Core'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixSlotDeprecation >> messageText [
 	^ String
 		streamContents: [ :str | 

@@ -1,6 +1,6 @@
 Class {
-	#name : #MooseSampleData,
-	#superclass : #TestResource,
+	#name : 'MooseSampleData',
+	#superclass : 'TestResource',
 	#instVars : [
 		'moosemodel1',
 		'moosemodel2',
@@ -8,10 +8,11 @@ Class {
 		'moosemodel4',
 		'moosemodel5'
 	],
-	#category : #'Moose-Core-Tests'
+	#category : 'Moose-Core-Tests',
+	#package : 'Moose-Core-Tests'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MooseSampleData >> initialize [
 	super initialize.
 	moosemodel1 := (self readMSEString: self modelVersion1) name: #'Simple model 1'.
@@ -21,7 +22,7 @@ MooseSampleData >> initialize [
 	moosemodel5 := (self readMSEString: self modelVersion5) name: #'Simple model 5'
 ]
 
-{ #category : #data }
+{ #category : 'data' }
 MooseSampleData >> modelVersion1 [
 
 	^ '(
@@ -40,7 +41,7 @@ MooseSampleData >> modelVersion1 [
 )'
 ]
 
-{ #category : #data }
+{ #category : 'data' }
 MooseSampleData >> modelVersion2 [
 
 	^ '(
@@ -71,7 +72,7 @@ MooseSampleData >> modelVersion2 [
 )'
 ]
 
-{ #category : #data }
+{ #category : 'data' }
 MooseSampleData >> modelVersion3 [
 
 	^ '(
@@ -105,7 +106,7 @@ MooseSampleData >> modelVersion3 [
 	(Moose-Core-Tests-Entities.Package (id: 202) (name ''anotherPackage'')))'
 ]
 
-{ #category : #data }
+{ #category : 'data' }
 MooseSampleData >> modelVersion4 [
 
 	^ '(
@@ -144,7 +145,7 @@ MooseSampleData >> modelVersion4 [
 )'
 ]
 
-{ #category : #data }
+{ #category : 'data' }
 MooseSampleData >> modelVersion5 [
 
 	^ '(
@@ -179,39 +180,39 @@ MooseSampleData >> modelVersion5 [
 )'
 ]
 
-{ #category : #util }
+{ #category : 'util' }
 MooseSampleData >> readMSEString: aString [
 
 	^ MooseMSEImporterTestModel new importFromMSEStream:
 		  aString readStream
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 MooseSampleData >> setUp [
 	self initialize
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseSampleData >> simpleModel1 [
 	^moosemodel1
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseSampleData >> simpleModel2 [
 	^moosemodel2
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseSampleData >> simpleModel3 [
 	^moosemodel3
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseSampleData >> simpleModel4 [
 	^moosemodel4
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseSampleData >> simpleModel5 [
 	^moosemodel5
 ]

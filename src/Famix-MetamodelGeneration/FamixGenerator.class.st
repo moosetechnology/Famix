@@ -6,8 +6,8 @@ FamixCompatibilityGenerator resetMetamodel.
 
 "
 Class {
-	#name : #FamixGenerator,
-	#superclass : #FamixMetamodelGenerator,
+	#name : 'FamixGenerator',
+	#superclass : 'FamixMetamodelGenerator',
 	#instVars : [
 		'tAccess',
 		'tAccessible',
@@ -18,7 +18,6 @@ Class {
 		'tAssociation',
 		'tAttribute',
 		'tComment',
-		'tCompilationUnit',
 		'tDereferencedInvocation',
 		'tEnumValue',
 		'tException',
@@ -27,12 +26,12 @@ Class {
 		'tFileInclude',
 		'tFunction',
 		'tGlobalVariable',
-		'tHeader',
 		'tImplicitVariable',
 		'tInheritance',
 		'tInvocable',
 		'tInvocation',
 		'tInvocationsReceiver',
+		'tLambda',
 		'tLocalVariable',
 		'tMethod',
 		'tModule',
@@ -40,8 +39,6 @@ Class {
 		'tPackage',
 		'tPackageable',
 		'tParameter',
-		'tPreprocessorDefine',
-		'tPreprocessorIfdef',
 		'tReference',
 		'tReferenceable',
 		'tSourceAnchor',
@@ -54,10 +51,7 @@ Class {
 		'tTraitUsage',
 		'tType',
 		'tTypeAlias',
-		'tTypedAnnotationInstance',
-		'tTypedAnnotationInstanceAttribute',
 		'tWithAccesses',
-		'tWithAnnotationInstanceAttributes',
 		'tWithAnnotationInstances',
 		'tWithAnnotationTypes',
 		'tWithAttributes',
@@ -70,6 +64,7 @@ Class {
 		'tWithImplicitVariables',
 		'tWithInheritances',
 		'tWithInvocations',
+		'tWithLambdas',
 		'tWithLocalVariables',
 		'tWithMethods',
 		'tDefinedInModule',
@@ -94,7 +89,6 @@ Class {
 		'tTypedEntity',
 		'tHasSignature',
 		'tWithGlobalVariables',
-		'tHasModifiers',
 		'tHasImmediateSource',
 		'tNamedEntity',
 		'tTypeGroup',
@@ -104,15 +98,12 @@ Class {
 		'tRelativeSourceAnchor',
 		'tEnum',
 		'tHasVisibility',
-		'tClassWithVisibility',
 		'tCanBeFinal',
 		'tCanBeAbstract',
 		'tClassMetrics',
 		'tMethodMetrics',
 		'tHasKind',
 		'tWithSourceLanguages',
-		'tWithCompilationUnits',
-		'tWithHeaders',
 		'tCanBeClassSide',
 		'tImplementable',
 		'tCanImplement',
@@ -125,29 +116,52 @@ Class {
 		'tGenericParameterType',
 		'tThrowable',
 		'tConcretization',
-		'tParameterConcretization'
+		'tParameterConcretization',
+		'tShadowable',
+		'tShadower',
+		'tCanBeStub',
+		'tEntityTyping',
+		'tParametricAssociation',
+		'tTypeArgument',
+		'tTypeParameter',
+		'tCompilationUnit',
+		'tWithCompilationUnits'
 	],
-	#category : #'Famix-MetamodelGeneration'
+	#category : 'Famix-MetamodelGeneration',
+	#package : 'Famix-MetamodelGeneration'
 }
 
-{ #category : #accessing }
+{ #category : 'additional tools' }
+FamixGenerator class >> metamodelToolGenerators [
+
+	^ { FamixVisitorGenerator }
+]
+
+{ #category : 'accessing' }
 FamixGenerator class >> packageName [
 
 	^ #'Famix-Traits'
 ]
 
-{ #category : #initialization }
+{ #category : 'accessing' }
+FamixGenerator class >> packageNameForVisitor [
+	"Generate visitor in the entities package. Discussed with N. Anquetil"
+
+	^ self packageName
+]
+
+{ #category : 'accessing' }
 FamixGenerator class >> prefix [
 
 	^ #Famix
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixGenerator class >> submetamodels [
 	^ {FamixMooseQueryGenerator}
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTAccess [
 
 	^ 'FamixTAccess represents an access to a variable by a behavioural entity (for example, a function or a method). 
@@ -164,13 +178,13 @@ Furthermore it can be tagged as read or write using isWrite: aBoolean.
 For each access in the source code, there is one famix access created even if it is from the same behavioral entity towards the same variable.'
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTAccessible [
 
 	^ ''
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTAnnotationInstance [
 
 	^ 'AnnotationInstance is an instance of an AnnotationType. It links an AnnotationType to an actual entity.
@@ -186,7 +200,7 @@ Instance Variables:
 	annotationType		<FamixTAnnotationType>'
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTAnnotationInstanceAttribute [
 
 	^ 'This models the actual value of an attribute in an AnnotationInstance.
@@ -200,7 +214,7 @@ Instance Variables:
 	value	<Object>'
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTAnnotationType [
 
 	^ 'FamixTAnnotationType represents the type of an annotation. In some languages, Java and C#, an annotation as an explicit type. An AnnotationType can have a container in which it resides.
@@ -210,7 +224,7 @@ Instance Variables:
 	container	<FamixTContainerEntity>'
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTAnnotationTypeAttribute [
 
 	^ 'This models the attribute defined in a Java AnnotationType. In Java, annotation type attributes have specific syntax and use.
@@ -231,7 +245,7 @@ Instance Variables:
 	annotationAttributeInstances	<(FMMultivalueLink of: FamixTAnnotationInstanceAttribute)>'
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTAssociation [
 
 	^ 'FamixTAssociation is an abstract superclass for relationships between Famix named entities. It defines a polymorphic API refined by subclasses: essentially from, to, next and previous.
@@ -253,14 +267,14 @@ will produce two invocation associations first from method a to method b, and se
 '
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTAttribute [
 
 	^ 'FamixTAttribute represents a field of a class. It is an attribute of the parent type.
 '
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTCanImplement [
 
 ^'I can be the source of an implementation (cf a class implementing an Interface)'
@@ -269,13 +283,13 @@ FamixGenerator >> commentForTCanImplement [
 	
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTCaughtException [
 
 	^ 'This is an exception that is explicitly handled by a method. For example, in Java it is an exception that appears in a catch statement.'
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTClass [
 
 	^ 'FamixTClass represents an entity which can build new instances. A FamixTClass is a FamixTType, therefore it is involved in super/sub types relationships (depending on the language) and it holds attributes, methods.
@@ -285,43 +299,44 @@ FamixT does not model explicitly interfaces, but a FamixTClass can represent a J
 A class is typically scoped in a namespace. To model nested or anonymous classes, extractors can set the container of classes to classes or methods, respectively.'
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTComment [
 
 	^ 'FamixTComment represents one instance of a comment (in the sense of programming language comments) for any Famix sourced entity. The commented sourced entity is called the container in the FamixT model.'
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTCompilationUnit [
 
-	^ 'I represent a compilation unit file. Typically a .c or .cpp file'
+	^ 'I represent a compilation unit file'
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTConcreteParameterType [
 
 	^ 'FamixTConcreteParameterType represents the concretePamameters of an FamixTParametricEntity. it can be a class or a ParameterType that has one FamixTParameterConcretization'
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTConcretization [
 
-	^ ''
+	^ 'Relation between a concrete type and a generic type parameter.
+	This association is always triggered by another association, whose target is a parametric entity, whose generic parameter is the target of this concretization.'
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTDeclaredException [
 
 	^ 'This is an exception explicitly declared as being thrown by a method.'
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTDefinedInModule [
 
 	^ ''
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTDereferencedInvocation [
 
 	^ 'Represents an invocation which function is contained in a pointer.
@@ -331,7 +346,7 @@ The function itself is typically unknown (referenced by the pointer).
 It has a referencer which is the pointer variable'
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTEnum [
 
 	^ 'This models an enum.
@@ -347,7 +362,7 @@ Instance Variables:
 	values	<(MultivalueLink of: FamixTEnumValue)>'
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTEnumValue [
 
 	^ 'It models the values defined in an FamixTEnum. These are attributes of enums with default values.
@@ -363,86 +378,74 @@ Instance Variables:
 	parentEnum	<(MultivalueLink of: FamixTEnum)>'
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTException [
 
 	^ 'This is the abstract representation of an Exception. It is specific to Java. It points to an exceptionClass. The class of a FamixTException is a normal FamixTClass.'
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTFile [
 
 	^ 'It represents a file in the file system.'
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTFileAnchor [
 
 	^ 'This offers a source anchor that connects a sourced entity to a file through a relative path stored in the fileName. In addition, the source can be further specified with a startLine and an endLine number in the file.'
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTFileInclude [
 
 	^ ''
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTFileNavigation [
 
 	^ ''
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTFolder [
 
 	^ 'It represents a folder in the file system. It can contain other files or folders.'
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTFunction [
 
 	^ 'FamixTFunction represents a behavioural entity in a procedural language.'
 ]
 
-{ #category : #comments }
-FamixGenerator >> commentForTGenericParameterType [
-
-	^ 'FamixTGenericParameterType represents generic parameters in an FamixJavaParametricEntity. This is an FamixJavaParameterType'
-]
-
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTGlobalVariable [
 
 	^ 'FamixTGlobalVariable represents a global variable in the source code.
 '
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTHasImmediateSource [
 
 	^ 'An immediate source is the source code of the entity stored directly into its sourceAnchor instead of accessing it (for example in a file) through its sourceAnchor'
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTHasKind [
 
 	^ 'This is an indicator that a method is a setter, getter, constant, or constructor'
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTHasSignature [
 
 	^ 'The signature of any behavioural entity'
 ]
 
-{ #category : #comments }
-FamixGenerator >> commentForTHeader [
-
-	^ 'I represent a header file. Typically a .h or .hpp'
-]
-
-{ #category : #definition }
+{ #category : 'comments' }
 FamixGenerator >> commentForTImplementable [
 
 ^'I can be the target of an implementation cf Interface '
@@ -451,31 +454,31 @@ FamixGenerator >> commentForTImplementable [
 	
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTImplicitVariable [
 
 	^ 'FamixTImplicitVariable represents a variable defined by the compiler in a context, such as self, super, thisContext.'
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTIndexedFileNavigation [
 
 	^ ''
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTInheritance [
 
 	^ ''
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTInvocable [
 
 	^ ''
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTInvocation [
 
 	^ 'FamixTInvocation represents the invocation of a message (signature) on a receiver by a behavioural entity. 
@@ -490,19 +493,25 @@ will produce one invocation association from current method to a variable anObje
 '
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTInvocationsReceiver [
 
 	^ ''
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
+FamixGenerator >> commentForTLambda [
+
+	^ 'FamixTLabmda represents a behavioural entity that does not have a name. It can be used to represent lambdas, closures, blocks...'
+]
+
+{ #category : 'comments' }
 FamixGenerator >> commentForTLocalVariable [
 
 	^ 'FamixTLocalVariable represents a local variable in the scope of a behavioural entity.'
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTMethod [
 
 	^ 'FamixTMethod represents a behaviour in an object-oriented language.
@@ -510,20 +519,20 @@ FamixGenerator >> commentForTMethod [
 A FamixTMethod is always contained in a parentType.'
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTModule [
 
 	^ 'FamixTModule represents a that basically provides a simple scoping abstraction for a .C/.CPP/.H files.
 '
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTNamed [
 
 	^ ''
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTNamespace [
 
 	^ 'FamixTNamespace represents a namespace from the source language. Namespaces have semantic meaning in the language so they influence the unique name of the entity.
@@ -533,7 +542,7 @@ A namespace denotes an entity that has meaning from a language point of view. Fo
 When an entity is placed inside a namespace, the fully qualified name (mooseName) is affected.'
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTPackage [
 
 	^ 'FamixTPackage represents a package in the source language, meaning that it provides a means to group entities without any baring on lexical scoping. 
@@ -541,13 +550,13 @@ FamixGenerator >> commentForTPackage [
 Java extractors map Java packages to FamixTNamespaces. They can also mirror the same information in terms of FamixTPackage instances.'
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTPackageable [
 
 	^ ''
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTParameter [
 	^ 'A Parameter represents one parameter in a behavioral (method, function, lamdba...) declaration.
 	
@@ -562,13 +571,7 @@ int addNumbers(int a, int b) {
 '
 ]
 
-{ #category : #comments }
-FamixGenerator >> commentForTParameterConcretization [
-
-	^ ''
-]
-
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTParameterType [
 	^ 'ParameterType represents the symbolic type used in parameterizable classes. This is a FamixTType.
 
@@ -580,7 +583,13 @@ public class AClass<A,B,C> {
 Where AClass is a ParameterizableClass. A, B and C are ParameterType of AClass.'
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
+FamixGenerator >> commentForTParametricAssociation [
+
+	^ 'An association that is linked to a ParameterConcretization'
+]
+
+{ #category : 'comments' }
 FamixGenerator >> commentForTParametricEntity [
 
 	^ 'FamixTParametricEntity represents a type with parameters. It can be an parametricClass, parametricMethod, parametricInterface.
@@ -593,28 +602,13 @@ public Map<String,Collection> anAttribute;
 Where Map<String,Collection> is the FamixTParametricEntity of anAttribute. String and Collection are concrete parameters. Map is the parametricClass.'
 ]
 
-{ #category : #comments }
-FamixGenerator >> commentForTPreprocessorDefine [
-
-	^ 'Represent a preprocessor #define statement
-
-Knows the name of the macro defined'
-]
-
-{ #category : #comments }
-FamixGenerator >> commentForTPreprocessorIfdef [
-
-	^ 'Represent a preprocessor #ifdef/#ifndef statement
-
-Knows the name of the macro tested and whether it is "negated" (#ifndef) or not (#ifdef)'
-]
-
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTReference [
 
-	^ 'A FamixTReference entity is created whenever one manipulates a class name as a variable. For example:
-(i) if the class is passed as a parameter to a method, or
-(ii) if a static method is invoked on a class.
+	^ 'A FamixTReference entity is created whenever one manipulates an entity as a variable. For example:
+- if a class is passed as a parameter to a method, or
+- if a static method is invoked on a class.
+- if a method is referenced as a method and not as method invocation
 
 For example, in the following Java code
 method a()
@@ -625,13 +619,23 @@ There is only one reference which is created when the static method aStaticMetho
 Note that FamixTReference was defined between two FamixTContainerEntity entities. So, it used to represent dependencies between container entities that are computed from the dependencies of contained entities. For example, references between two packages can be computed from dependencies between classes of the packages.'
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTReferenceable [
 
-	^ ''
+	^ 'A Referenceable is an entity that can be the target of a Reference.
+	
+It is usually a type but depending on the language it can be other things such as methods, functions, and even modules or packages in the case of Python.
+
+History:
+In the past the opposite of Referenceable was `#referredType` but we extended it to any kind of entity.
+The reason is that in Python we can reference methods, functions, class, modules, packages, lambdas... Or in Java we can reference methods.
+We found 3 solutions to manage this:
+- Extend Reference to cover all kind of references: Selected solution
+- Add a "PythonQuoteAssociation" for all other references than the ones targeting the types: This was not selected since it seems incoherente to have everything in an association except types
+- Add an association for each kind of targets: This was not selected because it seemed too much work for little gain'
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTRelativeSourceAnchor [
 
 	^ 'Description
@@ -651,18 +655,76 @@ Internal Representation and Key Implementation Points.
 '
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
+FamixGenerator >> commentForTShadowable [
+
+	^ 'An entity that is shadowable is an entity that can be redefined and the new implementation with the same name takes precedence over the old one when calling it by its name later. 
+	
+	For example in Python it is possible to have this:
+	
+	```python
+def return3():
+    return 3
+
+print(return3())
+
+from moduleAtRoot8 import functionReturningSomething as return3
+
+print(return3())
+
+def return3():
+    return 3
+
+print(return3())
+```
+
+In this case, return3 is shadowed twice. Once by the alias of an import and a second time by another function.
+
+The opposite of a shadowable is a shadower.
+'
+]
+
+{ #category : 'comments' }
+FamixGenerator >> commentForTShadower [
+
+	^ 'An entity that is a shadower is an entity that can redefine another entity and the new implementation with the same name takes precedence over the old one when calling it by its name later. 
+	
+	For example in Python it is possible to have this:
+	
+	```python
+def return3():
+    return 3
+
+print(return3())
+
+from moduleAtRoot8 import functionReturningSomething as return3
+
+print(return3())
+
+def return3():
+    return 3
+
+print(return3())
+```
+
+In this case, return3 is shadowed twice. Once by the alias of an import and a second time by another function.
+
+The opposite of a shadower is a shadowable.
+'
+]
+
+{ #category : 'comments' }
 FamixGenerator >> commentForTSourceAnchor [
 
 	^ 'FamixTSourceAnchor is an abstract class representing a pointer to a source. The source can be identified in multiple ways as specified by the subclasses.  The famix entity that this class is a source pointer for, is accessible via element property.'
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTSourceEntity [
 	^ 'FamixTSourcedEntity models any fact in a program source and it is the superclass (root class) of all source code entities and their relationships. It is a FamixTEntity and it can hold comments, a source anchor and a source language.'
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTSourceLanguage [
 
 	^ 'FamixTSourceLanguage represents the programming language in which an entity is written. It is used for dispatching entity actions for specific languages. For example, formatting a source text will be performed according to the language. A project may have multiple languages. 
@@ -671,54 +733,54 @@ A source language has a name and entities that are written in this language.
 One can create a default source language for a project by not associating any entities to it. In this case, all entities that do not have specific source langauge, belong to the default source language. One can attach entities to a sourceLanguage using addSourceEntity:.'
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTStructuralEntity [
 	^ 'FamixTStructuralEntity is the abstract superclass for basic data structure in the source code. A structural entity has a declaredType that points to the type of the variable.'
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTSub [
 
 	^ ''
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTSuper [
 
 	^ ''
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTTemplate [
 
 	^ ''
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTTemplateUser [
 
 	^ ''
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTThrowable [
 
 ^ 'TThrowable represents all types of possible exceptions.'
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTThrownException [
 
 	^ 'This is an exception explicitly thrown by a method.'
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTTrait [
 
 	^ 'FamixTTrait models a trait as it can be found in Pharo or PHP.'
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTType [
 
 	^ 'FamixTType is a generic class representing a type. It has several specializations for specific kinds of types, the typical one being FamixTClass.
@@ -728,7 +790,7 @@ The container is typically a namespace (instance of FamixTNamespace), but may al
 A type can have multiple subtypes or supertypes. These are modelled by means of FamixTInheritance instances.'
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTTypeAlias [
 
 	^ 'This entity models a typedef in C.
@@ -737,225 +799,227 @@ Instance Variables:
 	aliasedType	<ProtoObject | PseudoContext>'
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
+FamixGenerator >> commentForTTypeArgument [
+
+	^ 'A type that can be the source of a concretization. Entities using this trait should also use TType.'
+]
+
+{ #category : 'comments' }
+FamixGenerator >> commentForTTypeParameter [
+
+	^ 'The generic type parameter associated to a ParametricEntity. Entities using this trait should also use TType.'
+]
+
+{ #category : 'comments' }
 FamixGenerator >> commentForTTypedAnnotationInstance [
 
 	^ ''
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTTypedAnnotationInstanceAttribute [
 
 	^ ''
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTTypedStructure [
 
 	^ ''
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTWithAccesses [
 
 	^ ''
 ]
 
-{ #category : #comments }
-FamixGenerator >> commentForTWithAnnotationInstanceAttributes [
-
-	^ ''
-]
-
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTWithAnnotationInstances [
 
 	^ ''
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTWithAnnotationTypes [
 
 	^ ''
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTWithAttributes [
 
 	^ ''
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTWithCaughtExceptions [
 
 	^ ''
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTWithClasses [
 
 	^ ''
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTWithComments [
 
 	^ ''
 ]
 
-{ #category : #comments }
-FamixGenerator >> commentForTWithCompilationUnit [
-
-	^ ''
-]
-
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTWithDeclaredExceptions [
 
 	^ ''
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTWithDereferencedInvocations [
 
 	^ ''
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTWithEnumValues [
 
 	^ ''
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTWithExceptions [
 
 	^ ''
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTWithFileIncludes [
 
 	^ ''
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTWithFiles [
 
 	^ ''
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTWithFunctions [
 
 	^ ''
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTWithGlobalVariables [
 
 	^ 'A container having Global variables'
 ]
 
-{ #category : #comments }
-FamixGenerator >> commentForTWithHeader [
-
-	^ ''
-]
-
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTWithImplicitVariables [
 
 	^ ''
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTWithInheritances [
 
 	^ ''
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTWithInvocations [
 
 	^ ''
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
+FamixGenerator >> commentForTWithLambdas [
+
+	^ 'I represent an entity that can owned lambda expressions.'
+]
+
+{ #category : 'comments' }
 FamixGenerator >> commentForTWithLocalVariables [
 
 	^ ''
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTWithMethods [
 
 	^ ''
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTWithPackages [
 
 	^ ''
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTWithParameters [
 
 	^ ''
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTWithReferences [
 
 	^ ''
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTWithSourceLanguage [
 
 	^ ''
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTWithTemplates [
 
 	^ ''
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTWithThrownExceptions [
 
 	^ ''
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTWithTraits [
 
 	^ ''
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTWithTypeAliases [
 
 	^ ''
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTWithTypedStructures [
 
 	^ ''
 ]
 
-{ #category : #comments }
+{ #category : 'comments' }
 FamixGenerator >> commentForTWithTypes [
 
 	^ ''
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixGenerator >> defineHierarchy [
+
 	super defineHierarchy.
+
 	tAccess --|> tAssociation.
 
 	tImplementation --|> tAssociation.
@@ -982,12 +1046,10 @@ FamixGenerator >> defineHierarchy [
 	tClass --|> tInvocationsReceiver.
 	tClass --|> tWithComments.
 
-	tClassWithVisibility --|> tClass.
-	tClassWithVisibility --|> tHasVisibility.
-
 	tClassGroup --|> tTypeGroup.
 	
 	tComment  --|> #TEntityMetaLevelDependency.
+	tComment --|> #TSourceEntity.
 
 	tCompilationUnit --|> tFile.
 
@@ -998,6 +1060,7 @@ FamixGenerator >> defineHierarchy [
 
 	tException --|> tClass.
 
+	tFileSystemEntity --|> tNamedEntity.
 	tFile --|> tFileSystemEntity.
 
 	tFileInclude --|> tAssociation.
@@ -1019,8 +1082,6 @@ FamixGenerator >> defineHierarchy [
 
 	tHasImmediateSource --|> tSourceAnchor.
 
-	tHeader --|> tFile.
-
 	tIndexedFileNavigation --|> tFileAnchor.
 
 	tInheritance --|> tAssociation.
@@ -1031,6 +1092,13 @@ FamixGenerator >> defineHierarchy [
 	tInvocation --|> tHasSignature.
 
 	tImplicitVariable --|> tStructuralEntity.
+	
+	tLambda --|> tWithParameters.
+	tLambda --|> tHasSignature.
+	tLambda --|> tWithStatements.
+	tLambda --|> tWithLocalVariables.
+	tLambda --|> tInvocable.
+	tLambda --|> #TEntityMetaLevelDependency.
 
 	tLocalVariable --|> tStructuralEntity.
 
@@ -1050,11 +1118,11 @@ FamixGenerator >> defineHierarchy [
 
 	tNamespace --|> tNamedEntity.
 	tNamespace --|> #TEntityMetaLevelDependency.
-	tNamespace --|> tSourceEntity.
+	tNamespace --|> tCanBeStub.
 
 	tPackage --|> tNamedEntity.
 	tPackage --|> #TEntityMetaLevelDependency.
-	tPackage --|> tSourceEntity.
+	tPackage --|> tCanBeStub.
 
 	tParameter --|> tStructuralEntity.
 
@@ -1066,39 +1134,74 @@ FamixGenerator >> defineHierarchy [
 
 	tStructuralEntity --|> tNamedEntity.
 	tStructuralEntity --|> #TEntityMetaLevelDependency.
-	tStructuralEntity --|> tSourceEntity.
+	tStructuralEntity --|> tCanBeStub.
 	tStructuralEntity --|> tAccessible.
 	tStructuralEntity --|> tTypedEntity.
-
-	"tSourceEntity --|> tWithSourceLanguage."
-	"tSourceEntity --|> tWithComments."
 
 	tTraitUsage --|> tAssociation.
 
 	tType --|> tReferenceable.
 	tType --|> tNamedEntity.
 	tType --|> #TEntityMetaLevelDependency.
-	tType --|> tSourceEntity.
+	tType --|> tCanBeStub.
 
+	tEntityTyping --|> tAssociation.
+	
 	tUnknownVariable --|> tStructuralEntity.
 
 	tWithClasses --|> tWithTypes.
 
 	tWithStatements --|> tWithAccesses.
 	tWithStatements --|> tWithInvocations.
-	tWithStatements --|> tSourceEntity.
+	tWithStatements --|> tCanBeStub.
 	tWithStatements --|> tWithReferences.
 
-	tConcretization --|> tAssociation.
-	tParameterConcretization --|> tAssociation.
-
-	tConcreteParameterType --|> tType.
-	tGenericParameterType --|> tType.
+	tConcretization --|> tAssociation. 
 
 	tException --|> tThrowable.
+	
+	tCanBeStub --|> tSourceEntity
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
+FamixGenerator >> defineParametricRelations [
+	"A concretization is the relation between the generic parameter that is declared in a generic parametric entity and the type argument that is concretizing it.
+	We choose not to represent directly the relation between the concrete parametric entity and the generic one.
+	This choice is the result of several experimentations and debates.
+	We represent the concretization as always linked to another association that triggers the concretization.
+	The generic type parameter is target of the concretization AND linked to the parametric entity that is target of the triggering association."
+
+	"A concretization is always triggered by another association: Inheritance, Implementation, Type declaration, Invocation"
+
+	((tParametricAssociation property: #concretizations) comment:
+		 'The parameter concretizations associated with this association.')
+	-* ((tConcretization property: #triggeringAssociation) comment:
+			 'The association that triggers this concretization.').
+
+	"Source of a concretization: the concrete parameter. 
+		The reasoning is: the generic entity exists without the concrete ones, so the concrete side should be source."
+	((tConcretization property: #typeArgument)
+		 comment:
+			 'The type argument that concretizes the type parameter';
+		 source)
+	*- ((tTypeArgument property: #outgoingConcretizations) comment:
+			 'Concretizations where this type is the type argument.').
+
+	"Target of a concretization: the generic type parameter."
+	((tConcretization property: #typeParameter)
+		 comment: 'Type parameter linked to in this relationship.';
+		 target) 
+	*- ((tTypeParameter property: #concretizations) comment:
+		 'Known concretizations of this type parameter.').
+
+	"The generic type parameter that is target of the concretization is defined in a parametric entity."
+	((tParametricEntity property: #typeParameters) comment:
+		 'The type parameters of this parametric entity. They can any type with the exception of primitive types')
+	-* ((tTypeParameter property: #genericEntity) comment:
+			 'Generic entity that declares this type parameter.')
+]
+
+{ #category : 'definition' }
 FamixGenerator >> defineProperties [
 
 	super defineProperties.
@@ -1131,9 +1234,6 @@ FamixGenerator >> defineProperties [
 	(tNamedEntity property: #name type: #String) comment:
 		'Basic name of the entity, not full reference.'.
 
-	(tHasModifiers property: #modifiers type: #String)
-		comment: 'Generic container for language dependent modifiers.';
-		multivalued.
 	(tHasVisibility property: #visibility type: #String) comment:
 		'Visibility of the entity'.
 
@@ -1143,10 +1243,7 @@ FamixGenerator >> defineProperties [
 	(tHasSignature property: #signature type: #String) comment:
 		'Signature of the message being sent'.
 
-	(tComment property: #content type: #String) comment:
-		'Content of the comment as a String'.
-
-	(tSourceEntity property: #isStub type: #Boolean defaultValue: false)
+	(tCanBeStub property: #isStub type: #Boolean defaultValue: false)
 		comment:
 		'Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.'.
 
@@ -1181,7 +1278,7 @@ FamixGenerator >> defineProperties [
 		'Stop position in the source'.
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixGenerator >> defineRelations [
 
 	((tAccess property: #accessor)
@@ -1208,13 +1305,13 @@ FamixGenerator >> defineRelations [
 			comment: 'The instance of the annotation in which the attribute is used.';
 			container)
 		*-
-	((tWithAnnotationInstanceAttributes property: #attributes)
+	((tAnnotationInstance property: #attributes)
 			comment: 'This corresponds to the actual values of the attributes in an AnnotationInstance').
 
 	((tAnnotationType property: #instances)
 			comment: 'Annotations of this type')
 		-*
-	((tTypedAnnotationInstance property: #annotationType)
+	((tAnnotationInstance property: #annotationType)
 			comment: 'Refers to the type of an annotation. (In some languages, Java and C#, an annotation as an explicit type). '";
 			container"). "TODO: resolve"
 
@@ -1228,7 +1325,7 @@ FamixGenerator >> defineRelations [
 	((tAnnotationTypeAttribute property: #annotationAttributeInstances)
 			comment: 'A collection of AnnotationInstanceAttribute which hold the usages of this attribute in actual AnnotationInstances')
 		-*
-	((tTypedAnnotationInstanceAttribute property: #annotationTypeAttribute)
+	((tAnnotationInstanceAttribute property: #annotationTypeAttribute)
 			comment: 'This corresponds to the type of the attribute in an AnnotationInstance').
 
 	((tAssociation property: #previous)
@@ -1244,6 +1341,12 @@ FamixGenerator >> defineRelations [
 	((tWithAttributes property: #attributes)
 			comment: 'List of attributes declared by this type.').
 
+	((tCompilationUnit property: #compilationUnitOwner)
+			comment: 'The compilation unit that defines this module';
+			container)
+		-
+	((tWithCompilationUnits property: #compilationUnit)).
+
 	((tThrowable property: #catchingEntities))
 		*-*
 	((tWithExceptions property: #caughtExceptions)
@@ -1255,12 +1358,6 @@ FamixGenerator >> defineRelations [
 		*-
 	((tWithComments property: #comments)
 			comment: 'List of comments for the entity').
-
-	((tCompilationUnit property: #compilationUnitOwner)
-			comment: 'The compilation unit that defines this module';
-			container)
-		-
-	((tWithCompilationUnits property: #compilationUnit)).
 
 	((tThrowable property: #declaringEntities))
 		*-*
@@ -1311,17 +1408,19 @@ FamixGenerator >> defineRelations [
 	((tWithFunctions property: #functions)
 			comment: 'Functions defined in the container, if any.').
 
+	((tLambda property: #lambdaContainer)
+			comment: 'The container defining the lambda expression. The lambda is placed in a container, because certain languages can nest lambdas in lambdas.';
+			container)
+		*-
+	((tWithLambdas property: #lambdas)
+			comment: 'Lambdas defined in the container, if any.').
+
 	((tGlobalVariable property: #parentScope)
 			comment: 'Scope declaring the global variable. belongsTo implementation';
 			container)
 		*-
 	((tWithGlobalVariables property: #globalVariables)
 			comment: 'Global variables defined in the scope, if any.').
-
-	((tHeader property: #headerOwner) container )
-		-
-	((tWithHeaders property: #header)
-			comment: 'The header file that defines this module').
 
 	((tImplicitVariable property: #parentBehaviouralEntity)
 			comment: 'The behaviour containing this implicit variable. belongsTo implementation';
@@ -1350,7 +1449,7 @@ FamixGenerator >> defineRelations [
 	((tInvocationsReceiver property: #receivingInvocations)
 			comment: 'List of invocations performed on this entity (considered as the receiver)').
 
-	((tWithImports property: #outgoingImports)
+	((tWithImports property: #imports)
 			comment: '')
 		-*
 	((tImport property: #importingEntity)
@@ -1405,7 +1504,7 @@ FamixGenerator >> defineRelations [
 	((tWithReferences property: #outgoingReferences)
 			comment: 'References from this entity to other entities.').
 
-	((tReference property: #referredType)
+	((tReference property: #referredEntity)
 			comment: 'Target entity referenced. to-side of the association';
 			target)
 		*-
@@ -1460,7 +1559,7 @@ FamixGenerator >> defineRelations [
 	((tTraitUsage property: #trait)
 			source).
 
-	((tTraitUser property: #outgoingTraitUsages))
+	((tTraitUser property: #traitUsages))
 		-*
 	((tTraitUsage property: #user)
 			target).
@@ -1479,13 +1578,19 @@ FamixGenerator >> defineRelations [
 	((tWithTypeAliases property: #typeAliases)
 			comment: 'Aliases').
 
-	((tTypedEntity property: #declaredType)
-			comment: 'Type of the entity, if any')
-		*-
-	((tType property: #typedEntities)
-			comment: 'Entities that have this type as declaredType').
+	((tTypedEntity property: #typing) comment:
+		 'Association linking this entity to its declared type.')
+		- ((tEntityTyping property: #typedEntity)
+			comment: 'Entity deckaring the type.';
+			source).
 
-		((tImplementation property: #implementingClass)
+	((tEntityTyping property: #declaredType)
+		 comment: 'Type of the entity.';
+		 target) 
+		*- ((tType property: #incomingTypings) 
+			comment: 'Relations to the entities that have this as type.').
+
+	((tImplementation property: #implementingClass)
 			comment: 'Class linked to in this relationship. from-side of the association';
 			source)
 		*-
@@ -1498,285 +1603,187 @@ FamixGenerator >> defineRelations [
 		*-
 	((tImplementable property: #implementations)
 			comment: 'Implementation relationships.').
-
-	(tConcretization property: #parameterConcretizations)
-		*-*
-	(tParameterConcretization property: #concretizations).
-
-	((tGenericParameterType property: #genericEntities)
-			comment: 'The generic entities that use me.')
-		*-*
-	((tParametricEntity property: #genericParameters)
-			comment: 'List of generic parameters.').
-
-	((tConcreteParameterType property: #concreteEntities)
-			comment: 'The concrete entities that use me.')
-		*-*
-	((tParametricEntity property: #concreteParameters)
-			comment: 'List of concrete parameters.').
-
-	((tParameterConcretization property: #genericParameter)
-			comment: 'Generic parameter linked to in this relationship. from-side of the association';
-			source)
-		*-
-	((tGenericParameterType property: #concretizations)
-			comment: 'Concretization relationships, i.e. known concretizations of this type.').
-
-	((tParameterConcretization property: #concreteParameter)
-			comment: 'Concrete parameter linked to in this relationship. to-side of the association';
-			target)
-		*-
-	((tConcreteParameterType property: #generics)
-			comment: 'Generic relationships, i.e. known genericParameter of this type.').
-
-	((tConcretization property: #genericEntity)
-			comment: 'Generic entity linked to in this relationship. from-side of the association';
-			source)
-		*-
-	((tParametricEntity property: #concretizations)
-			comment: 'Concretization relationships, i.e. the associations of known concrete entities of this type.').
-
-	((tConcretization property: #concreteEntity)
-			comment: 'Concrete entity linked to in this relationship. to-side of the association';
-			target)
-		-
-	((tParametricEntity property: #genericization)
-			comment: 'Generic entity relationship, i.e. the association to the generic entity of this type.').
+			
+	((tShadowable property: #shadowingEntities)
+		comment: 'Entities shadowing me in my defining scope.')
+		-*
+	((tShadower property: #shadowedEntity)
+		comment: 'Entity that is been shadowed by myself in my defining scope.').
+		
+	self defineParametricRelations 
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixGenerator >> defineTraits [
 	super defineTraits.
 
 	tCanBeAbstract := builder newTraitNamed: #TCanBeAbstract.
 	tCanBeFinal := builder newTraitNamed: #TCanBeFinal.
 
-	tAccess := builder newTraitNamed: #TAccess.
-	tAccess comment: self commentForTAccess.
+	tAccess := builder newTraitNamed: #TAccess comment: self commentForTAccess.
 	tAccess withTesting.
 
-	tAccessible := builder newTraitNamed: #TAccessible.
-	tAccessible comment: self commentForTAccessible.
+	tAccessible := builder newTraitNamed: #TAccessible comment: self commentForTAccessible.
 
-	tAnnotationInstance := builder newTraitNamed: #TAnnotationInstance.
-	tAnnotationInstance comment: self commentForTAnnotationInstance.
+	tAnnotationInstance := builder newTraitNamed: #TAnnotationInstance comment: self commentForTAnnotationInstance.
 	tAnnotationInstance withGroup.
 
-	tAnnotationInstanceAttribute := builder newTraitNamed: #TAnnotationInstanceAttribute.
-	tAnnotationInstanceAttribute comment: self commentForTAnnotationInstanceAttribute.
+	tAnnotationInstanceAttribute := builder newTraitNamed: #TAnnotationInstanceAttribute comment: self commentForTAnnotationInstanceAttribute.
 
-	tAnnotationType := builder newTraitNamed: #TAnnotationType.
-	tAnnotationType comment: self commentForTAnnotationType.
+	tAnnotationType := builder newTraitNamed: #TAnnotationType comment: self commentForTAnnotationType.
 	tAnnotationType withGroup.
 
-	tAnnotationTypeAttribute := builder newTraitNamed: #TAnnotationTypeAttribute.
-	tAnnotationTypeAttribute comment: self commentForTAnnotationTypeAttribute.
+	tAnnotationTypeAttribute := builder newTraitNamed: #TAnnotationTypeAttribute comment: self commentForTAnnotationTypeAttribute.
 
-	tAssociation := builder newTraitNamed: #TAssociation.
-	tAssociation comment: self commentForTAssociation.
+	tAssociation := builder newTraitNamed: #TAssociation comment: self commentForTAssociation.
 	tAssociation withTesting.
 
-	tAttribute := builder newTraitNamed: #TAttribute.
-	tAttribute comment: self commentForTAttribute.
+	tAttribute := builder newTraitNamed: #TAttribute comment: self commentForTAttribute.
 	tAttribute withTesting.
 
 	tCanBeClassSide := builder newTraitNamed: #TCanBeClassSide.
 
-	tComment := builder newTraitNamed: #TComment.
-	tComment comment: self commentForTComment.
+	tComment := builder newTraitNamed: #TComment comment: self commentForTComment.
+	tComment withTesting.
 
-	tCompilationUnit := builder newTraitNamed: #TCompilationUnit.
-	tCompilationUnit comment: self commentForTCompilationUnit.
-
-	tClass := builder newTraitNamed: #TClass.
-	tClass comment: self commentForTClass.
+	tClass := builder newTraitNamed: #TClass comment: self commentForTClass.
 	tClass withTesting.
+
+	tCompilationUnit := builder newTraitNamed: #TCompilationUnit comment: self commentForTCompilationUnit.
 
 	tClassMetrics := builder newTraitNamed: #TClassMetrics.
 
 	tClassGroup := tClass withGroup.
 
-	tDereferencedInvocation := builder newTraitNamed: #TDereferencedInvocation.
-	tDereferencedInvocation comment: self commentForTDereferencedInvocation.
+	tDereferencedInvocation := builder newTraitNamed: #TDereferencedInvocation comment: self commentForTDereferencedInvocation.
 
-	tEnumValue := builder newTraitNamed: #TEnumValue.
-	tEnumValue comment: self commentForTEnumValue.
+	tEnumValue := builder newTraitNamed: #TEnumValue comment: self commentForTEnumValue.
 	tEnumValue withTesting.
 
-	tEnum := builder newTraitNamed: #TEnum.
-	tEnum comment: self commentForTEnum.
+	tEnum := builder newTraitNamed: #TEnum comment: self commentForTEnum.
 
-	tException := builder newTraitNamed: #TException.
-	tException comment: self commentForTException.
+	tException := builder newTraitNamed: #TException comment: self commentForTException.
 	tException withTesting.
 
-	tFile := builder newTraitNamed: #TFile.
-	tFile comment: self commentForTFile.
+	tFile := builder newTraitNamed: #TFile comment: self commentForTFile.
 	tFile withGroup.
 
-	tFolder := builder newTraitNamed: #TFolder.
-	tFolder comment: self commentForTFolder.
+	tFolder := builder newTraitNamed: #TFolder comment: self commentForTFolder.
 	tFolder withGroup.
 
 	tFileSystemEntity := builder newTraitNamed: #TFileSystemEntity.
 
-	tFileAnchor := builder newTraitNamed: #TFileAnchor.
-	tFileAnchor comment: self commentForTFileAnchor.
+	tFileAnchor := builder newTraitNamed: #TFileAnchor comment: self commentForTFileAnchor.
 	tFileAnchor withTesting.
 
-	tFileNavigation := builder newTraitNamed: #TFileNavigation.
-	tFileNavigation comment: self commentForTFileNavigation.
+	tFileNavigation := builder newTraitNamed: #TFileNavigation comment: self commentForTFileNavigation.
 
-	tIndexedFileNavigation := builder newTraitNamed: #TIndexedFileNavigation.
-	tIndexedFileNavigation comment: self commentForTIndexedFileNavigation.
+	tIndexedFileNavigation := builder newTraitNamed: #TIndexedFileNavigation comment: self commentForTIndexedFileNavigation.
 
-	tFileInclude := builder newTraitNamed: #TFileInclude.
-	tFileInclude comment: self commentForTFileInclude.
+	tFileInclude := builder newTraitNamed: #TFileInclude comment: self commentForTFileInclude.
 
-	tFunction := builder newTraitNamed: #TFunction.
-	tFunction comment: self commentForTFunction.
+	tFunction := builder newTraitNamed: #TFunction comment: self commentForTFunction.
 	tFunction withTesting.
 
-	tGlobalVariable := builder newTraitNamed: #TGlobalVariable.
-	tGlobalVariable comment: self commentForTGlobalVariable.
+	tGlobalVariable := builder newTraitNamed: #TGlobalVariable comment: self commentForTGlobalVariable.
 	tGlobalVariable withGroup.
 	tGlobalVariable withTesting.
 
-	tWithGlobalVariables := builder newTraitNamed: #TWithGlobalVariables.
-	tWithGlobalVariables comment: self commentForTWithGlobalVariables.
+	tWithGlobalVariables := builder newTraitNamed: #TWithGlobalVariables comment: self commentForTWithGlobalVariables.
 
-	tHeader := builder newTraitNamed: #THeader.
-	tHeader comment: self commentForTHeader.
-
-	tImplicitVariable := builder newTraitNamed: #TImplicitVariable.
-	tImplicitVariable comment: self commentForTImplicitVariable.
+	tImplicitVariable := builder newTraitNamed: #TImplicitVariable comment: self commentForTImplicitVariable.
 	tImplicitVariable withTesting.
 
 	tImport := builder newTraitNamed: #TImport.
 	tImportable := builder newTraitNamed: #TImportable.
 	tWithImports := builder newTraitNamed: #TWithImports.
 
-	tInheritance := builder newTraitNamed: #TInheritance.
-	tInheritance comment: self commentForTInheritance.
+	tInheritance := builder newTraitNamed: #TInheritance comment: self commentForTInheritance.
 	tInheritance withTesting.
 
-	tInvocable := builder newTraitNamed: #TInvocable.
-	tInvocable comment: self commentForTInvocable.
+	tInvocable := builder newTraitNamed: #TInvocable comment: self commentForTInvocable.
 
-	tInvocation := builder newTraitNamed: #TInvocation.
-	tInvocation comment: self commentForTInvocation.
+	tInvocation := builder newTraitNamed: #TInvocation comment: self commentForTInvocation.
 	tInvocation withTesting.
 	tInvocation withGroup.
 
 	tInvocationsReceiver := builder newTraitNamed: #TInvocationsReceiver.
 	tInvocationsReceiver comment: self commentForTInvocationsReceiver.
+	
+	tLambda := builder newTraitNamed: #TLambda comment: self commentForTLambda.
 
-	tLocalVariable := builder newTraitNamed: #TLocalVariable.
-	tLocalVariable comment: self commentForTLocalVariable.
+	tLocalVariable := builder newTraitNamed: #TLocalVariable comment: self commentForTLocalVariable.
 	tLocalVariable withTesting.
 
-	tMethod := builder newTraitNamed: #TMethod.
-	tMethod comment: self commentForTMethod.
+	tMethod := builder newTraitNamed: #TMethod comment: self commentForTMethod.
 	tMethod withTesting.
 	tMethod withGroup.
 
 	tMethodMetrics := builder newTraitNamed: #TMethodMetrics.
 
-	tHasKind := builder newTraitNamed: #THasKind.
-	tHasKind comment: self commentForTHasKind.
+	tHasKind := builder newTraitNamed: #THasKind comment: self commentForTHasKind.
 
-	tModule := builder newTraitNamed: #TModule.
-	tModule comment: self commentForTModule.
+	tModule := builder newTraitNamed: #TModule comment: self commentForTModule.
 	tModule withTesting.
 
-	tNamedEntity := builder newTraitNamed: #TNamedEntity.
-	tNamedEntity comment: self commentForTNamed.
+	tNamedEntity := builder newTraitNamed: #TNamedEntity comment: self commentForTNamed.
 
-	tNamespace := builder newTraitNamed: #TNamespace.
-	tNamespace comment: self commentForTNamespace.
+	tNamespace := builder newTraitNamed: #TNamespace comment: self commentForTNamespace.
 	tNamespace withTesting.
 	tNamespace withGroup.
 
-	tPackage := builder newTraitNamed: #TPackage.
-	tPackage comment: self commentForTPackage.
+	tPackage := builder newTraitNamed: #TPackage comment: self commentForTPackage.
 	tPackage withTesting.
 	tPackage withGroup.
 
-	tPackageable := builder newTraitNamed: #TPackageable.
-	tPackageable comment: self commentForTPackageable.
+	tPackageable := builder newTraitNamed: #TPackageable comment: self commentForTPackageable.
 
-	tParameter := builder newTraitNamed: #TParameter.
-	tParameter comment: self commentForTParameter.
-
-	tPreprocessorDefine := builder newTraitNamed: #TPreprocessorDefine.
-	tPreprocessorDefine comment: self commentForTPreprocessorDefine.
-
-	tPreprocessorIfdef := builder newTraitNamed: #TPreprocessorIfdef.
-	tPreprocessorIfdef comment: self commentForTPreprocessorIfdef.
+	tParameter := builder newTraitNamed: #TParameter comment: self commentForTParameter.
 
 	tPrimitiveType := builder newTraitNamed: #TPrimitiveType.
 	tPrimitiveType withTesting.
 
-	tReference := builder newTraitNamed: #TReference.
-	tReference comment: self commentForTReference.
+	tReference := builder newTraitNamed: #TReference comment: self commentForTReference.
 	tReference withTesting.
 
-	tReferenceable := builder newTraitNamed: #TReferenceable.
-	tReferenceable comment: self commentForTReferenceable.
+	tReferenceable := builder newTraitNamed: #TReferenceable comment: self commentForTReferenceable.
 
-	tRelativeSourceAnchor := builder newTraitNamed: #TRelativeSourceAnchor.
-	tRelativeSourceAnchor comment: self commentForTRelativeSourceAnchor.
+	tRelativeSourceAnchor := builder newTraitNamed: #TRelativeSourceAnchor comment: self commentForTRelativeSourceAnchor.
 
-	tSourceAnchor := builder newTraitNamed: #TSourceAnchor.
-	tSourceAnchor comment: self commentForTSourceAnchor.
+	tSourceAnchor := builder newTraitNamed: #TSourceAnchor comment: self commentForTSourceAnchor.
 
-	tSourceEntity := builder newTraitNamed: #TSourceEntity.
-	tSourceEntity comment: self commentForTSourceEntity.
+	tSourceEntity := builder newTraitNamed: #TSourceEntity comment: self commentForTSourceEntity.
 
-	tSourceLanguage := builder newTraitNamed: #TSourceLanguage.
-	tSourceLanguage comment: self commentForTSourceLanguage.
+	tSourceLanguage := builder newTraitNamed: #TSourceLanguage comment: self commentForTSourceLanguage.
 
-	tStructuralEntity := builder newTraitNamed: #TStructuralEntity.
-	tStructuralEntity comment: self commentForTStructuralEntity.
+	tStructuralEntity := builder newTraitNamed: #TStructuralEntity comment: self commentForTStructuralEntity.
 	tStructuralEntity withTesting.
 
-	tTemplate := builder newTraitNamed: #TTemplate.
-	tTemplate comment: self commentForTTemplate.
+	tTemplate := builder newTraitNamed: #TTemplate comment: self commentForTTemplate.
 
-	tTemplateUser := builder newTraitNamed: #TTemplateUser.
-	tTemplateUser comment: self commentForTTemplateUser.
+	tTemplateUser := builder newTraitNamed: #TTemplateUser comment: self commentForTTemplateUser.
 
-	tTrait := builder newTraitNamed: #TTrait.
-	tTrait comment: self commentForTTrait.
+	tTrait := builder newTraitNamed: #TTrait comment: self commentForTTrait.
 
 	tTraitUsage := builder newTraitNamed: #TTraitUsage.
 
 	tTraitUser := builder newTraitNamed: #TTraitUser.
 
-	tType := builder newTraitNamed: #TType.
-	tType comment: self commentForTType.
+	tType := builder newTraitNamed: #TType comment: self commentForTType.
 	tType withTesting.
 	tTypeGroup := tType withGroup.
 
-	tTypeAlias := builder newTraitNamed: #TTypeAlias.
-	tTypeAlias comment: self commentForTTypeAlias.
-
-	tTypedAnnotationInstance := builder newTraitNamed: #TTypedAnnotationInstance.
-	tTypedAnnotationInstance comment: self commentForTTypedAnnotationInstance.
-
-	tTypedAnnotationInstanceAttribute := builder newTraitNamed: #TTypedAnnotationInstanceAttribute.
-	tTypedAnnotationInstanceAttribute comment: self commentForTTypedAnnotationInstanceAttribute.
+	tTypeAlias := builder newTraitNamed: #TTypeAlias comment: self commentForTTypeAlias.
 
 	tTypedEntity := builder newTraitNamed: #TTypedEntity.
 	tTypedEntity comment: self commentForTTypedStructure.
+	
+	tEntityTyping := builder newTraitNamed: #TEntityTyping.
 
 	tUnknownVariable := builder newTraitNamed: #TUnknownVariable.
 
 	tWithAccesses := builder newTraitNamed: #TWithAccesses.
 	tWithAccesses comment: self commentForTWithAccesses.
-
-	tWithAnnotationInstanceAttributes := builder newTraitNamed: #TWithAnnotationInstanceAttributes.
-	tWithAnnotationInstanceAttributes comment: self commentForTWithAnnotationInstanceAttributes.
 
 	tWithAnnotationInstances := builder newTraitNamed: #TWithAnnotationInstances.
 	tWithAnnotationInstances comment: self commentForTWithAnnotationInstances.
@@ -1794,7 +1801,6 @@ FamixGenerator >> defineTraits [
 	tWithComments comment: self commentForTWithComments.
 
 	tWithCompilationUnits := builder newTraitNamed: #TWithCompilationUnits.
-	tWithCompilationUnits comment: self commentForTWithCompilationUnit.
 
 	tWithDereferencedInvocations := builder newTraitNamed: #TWithDereferencedInvocations.
 	tWithDereferencedInvocations comment: self commentForTWithDereferencedInvocations.
@@ -1805,66 +1811,45 @@ FamixGenerator >> defineTraits [
 	tWithExceptions := builder newTraitNamed: #TWithExceptions.
 	tWithExceptions comment: self commentForTWithExceptions.
 
-	tWithFileIncludes := builder newTraitNamed: #TWithFileIncludes.
-	tWithFileIncludes comment: self commentForTWithFileIncludes.
+	tWithFileIncludes := builder newTraitNamed: #TWithFileIncludes comment: self commentForTWithFileIncludes.
 
-	tWithFiles := builder newTraitNamed: #TWithFiles.
-	tWithFiles comment: self commentForTWithFiles.
+	tWithFiles := builder newTraitNamed: #TWithFiles comment: self commentForTWithFiles.
 
-	tWithFunctions := builder newTraitNamed: #TWithFunctions.
-	tWithFunctions comment: self commentForTWithFunctions.
+	tWithFunctions := builder newTraitNamed: #TWithFunctions comment: self commentForTWithFunctions.
 
-	tWithHeaders := builder newTraitNamed: #TWithHeaders.
-	tWithHeaders comment: self commentForTWithHeader.
+	tWithImplicitVariables := builder newTraitNamed: #TWithImplicitVariables comment: self commentForTWithImplicitVariables.
 
-	tWithImplicitVariables := builder newTraitNamed: #TWithImplicitVariables.
-	tWithImplicitVariables comment: self commentForTWithImplicitVariables.
+	tWithInheritances := builder newTraitNamed: #TWithInheritances comment: self commentForTWithInheritances.
 
-	tWithInheritances := builder newTraitNamed: #TWithInheritances.
-	tWithInheritances comment: self commentForTWithInheritances.
+	tWithInvocations := builder newTraitNamed: #TWithInvocations comment: self commentForTWithInvocations.
+	
+	tWithLambdas := builder newTraitNamed: #TWithLambdas comment: self commentForTWithLambdas.
 
-	tWithInvocations := builder newTraitNamed: #TWithInvocations.
-	tWithInvocations comment: self commentForTWithInvocations.
+	tWithLocalVariables := builder newTraitNamed: #TWithLocalVariables comment: self commentForTWithLocalVariables.
 
-	tWithLocalVariables := builder newTraitNamed: #TWithLocalVariables.
-	tWithLocalVariables comment: self commentForTWithLocalVariables.
+	tWithMethods := builder newTraitNamed: #TWithMethods comment: self commentForTWithMethods.
 
-	tWithMethods := builder newTraitNamed: #TWithMethods.
-	tWithMethods comment: self commentForTWithMethods.
+	tDefinedInModule := builder newTraitNamed: #TDefinedInModule comment: self commentForTDefinedInModule.
 
-	tDefinedInModule := builder newTraitNamed: #TDefinedInModule.
-	tDefinedInModule comment: self commentForTDefinedInModule.
+	tWithParameters := builder newTraitNamed: #TWithParameters comment: self commentForTWithParameters.
 
-	tWithParameters := builder newTraitNamed: #TWithParameters.
-	tWithParameters comment: self commentForTWithParameters.
+	tWithReferences := builder newTraitNamed: #TWithReferences comment: self commentForTWithReferences.
 
-	tWithReferences := builder newTraitNamed: #TWithReferences.
-	tWithReferences comment: self commentForTWithReferences.
+	tHasSignature := builder newTraitNamed: #THasSignature comment: self commentForTHasSignature.
 
-	tHasSignature := builder newTraitNamed: #THasSignature.
-	tHasSignature comment: self commentForTHasSignature.
+	tWithSourceLanguages := builder newTraitNamed: #TWithSourceLanguages comment: self commentForTWithSourceLanguage.
 
-	tWithSourceLanguages := builder newTraitNamed: #TWithSourceLanguages.
-	tWithSourceLanguages comment: self commentForTWithSourceLanguage.
+	tWithTemplates := builder newTraitNamed: #TWithTemplates comment: self commentForTWithTemplates.
 
-	tWithTemplates := builder newTraitNamed: #TWithTemplates.
-	tWithTemplates comment: self commentForTWithTemplates.
+	tWithTraits := builder newTraitNamed: #TWithTraits comment: self commentForTWithTraits.
 
-	tWithTraits := builder newTraitNamed: #TWithTraits.
-	tWithTraits comment: self commentForTWithTraits.
+	tWithTypeAliases := builder newTraitNamed: #TWithTypeAliases comment: self commentForTWithTypeAliases.
 
-	tWithTypeAliases := builder newTraitNamed: #TWithTypeAliases.
-	tWithTypeAliases comment: self commentForTWithTypeAliases.
+	tWithTypes := builder newTraitNamed: #TWithTypes comment: self commentForTWithTypes.
 
-	tWithTypes := builder newTraitNamed: #TWithTypes.
-	tWithTypes comment: self commentForTWithTypes.
+	tHasImmediateSource := builder newTraitNamed: #THasImmediateSource comment: self commentForTHasImmediateSource.
 
-	tHasImmediateSource := builder newTraitNamed: #THasImmediateSource.
-	tHasImmediateSource comment: self commentForTHasImmediateSource.
-
-	tHasModifiers := builder newTraitNamed: #THasModifiers.
 	tHasVisibility := builder newTraitNamed: #THasVisibility.
-	tClassWithVisibility := builder newTraitNamed: #TClassWithVisibility.
 
 	tWithStatements := builder newTraitNamed: #TWithStatements.
 	tWithStatements testingSelector: #isBehavioural.
@@ -1875,30 +1860,27 @@ FamixGenerator >> defineTraits [
 
 	tLCOMMetrics := builder newTraitNamed: #TLCOMMetrics.
 
-	tImplementable := builder newTraitNamed: #TImplementable.
-	tImplementable comment: self commentForTImplementable.
+	tImplementable := builder newTraitNamed: #TImplementable comment: self commentForTImplementable.
 
-	tCanImplement := builder newTraitNamed: #TCanImplement.
-	tCanImplement comment: self commentForTCanImplement.
+	tCanImplement := builder newTraitNamed: #TCanImplement comment: self commentForTCanImplement.
 
 	tImplementation := builder newTraitNamed: #TImplementation.
-
-	tParametricEntity := builder newTraitNamed: #TParametricEntity.
-	tParametricEntity comment: self commentForTParametricEntity.
+	
+	"Parametric entities"
+	tParametricEntity := builder newTraitNamed: #TParametricEntity comment: self commentForTParametricEntity.
 	tParametricEntity withTesting.
+	tTypeParameter := builder newTraitNamed: #TTypeParameter comment: self commentForTTypeParameter.
+	tParametricAssociation := builder newTraitNamed: #TParametricAssociation comment: self commentForTParametricAssociation.
+	tParametricAssociation withTesting.
+	tConcretization := builder newTraitNamed: #TConcretization comment: self commentForTConcretization.
+	tTypeArgument := builder newTraitNamed: #TTypeArgument comment: self commentForTTypeArgument.
 
-	tConcreteParameterType := builder newTraitNamed: #TConcreteParameterType.
-	tConcreteParameterType comment: self commentForTConcreteParameterType.
+	tThrowable := builder newTraitNamed: #TThrowable comment: self commentForTThrowable.
+	
+	tShadowable := builder newTraitNamed: #TShadowable comment: self commentForTShadowable.
+	tShadowable withTesting.
 
-	tGenericParameterType := builder newTraitNamed: #TGenericParameterType.
-	tGenericParameterType comment: self commentForTGenericParameterType.
-
-	tConcretization := builder newTraitNamed: #TConcretization.
-	tConcretization comment: self commentForTConcretization.
-
-	tParameterConcretization := builder newTraitNamed: #TParameterConcretization.
-	tParameterConcretization comment: self commentForTParameterConcretization.
-
-	tThrowable := builder newTraitNamed: #TThrowable.
-	tThrowable comment: self commentForTThrowable.
+	tShadower := builder newTraitNamed: #TShadower comment: self commentForTShadower.
+	
+	tCanBeStub := builder newTraitNamed: #TCanBeStub.
 ]

@@ -16,16 +16,18 @@
 
 "
 Class {
-	#name : #FamixTest4Teacher,
-	#superclass : #FamixTest4Person,
+	#name : 'FamixTest4Teacher',
+	#superclass : 'FamixTest4Person',
 	#instVars : [
 		'#school => FMOne type: #FamixTest4School opposite: #teachers',
 		'#students => FMMany type: #FamixTest4Student opposite: #teachers'
 	],
-	#category : #'Famix-Test4-Entities-Entities'
+	#category : 'Famix-Test4-Entities-Entities',
+	#package : 'Famix-Test4-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTest4Teacher class >> annotation [
 
 	<FMClass: #Teacher super: #FamixTest4Person>
@@ -34,13 +36,13 @@ FamixTest4Teacher class >> annotation [
 	^ self
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTest4Teacher >> addStudent: anObject [
 	<generated>
 	^ self students add: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest4Teacher >> school [
 	"Relation named: #school type: #FamixTest4School opposite: #teachers"
 
@@ -49,21 +51,21 @@ FamixTest4Teacher >> school [
 	^ school
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest4Teacher >> school: anObject [
 
 	<generated>
 	school := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FamixTest4Teacher >> schoolGroup [
 	<generated>
 	<navigation: 'School'>
 	^ MooseSpecializedGroup with: self school
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest4Teacher >> students [
 	"Relation named: #students type: #FamixTest4Student opposite: #teachers"
 
@@ -71,14 +73,14 @@ FamixTest4Teacher >> students [
 	^ students
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest4Teacher >> students: anObject [
 
 	<generated>
 	students value: anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FamixTest4Teacher >> studentsGroup [
 	<generated>
 	<navigation: 'Students'>

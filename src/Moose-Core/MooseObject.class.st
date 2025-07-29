@@ -49,8 +49,8 @@ Cached properties/result is just a cache associating anything to a symbol. This 
 
 "
 Class {
-	#name : #MooseObject,
-	#superclass : #Object,
+	#name : 'MooseObject',
+	#superclass : 'Object',
 	#instVars : [
 		'mooseID',
 		'mooseName',
@@ -63,17 +63,18 @@ Class {
 	#classInstVars : [
 		'cache'
 	],
-	#category : #'Moose-Core'
+	#category : 'Moose-Core',
+	#package : 'Moose-Core'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 MooseObject class >> allDeclaredProperties [
 	"All properties described in the metamodel"
 
 	^ self mooseDescription allProperties
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseObject class >> allPropertySelectors [
 	"Return a dictionary with all properties of this kind of entity, including metamodel properties, metrics, and navigation groups. Keys are abstract names of properties, values are implementing selectors"
 
@@ -84,19 +85,19 @@ MooseObject class >> allPropertySelectors [
 	^ props
 ]
 
-{ #category : #meta }
+{ #category : 'meta' }
 MooseObject class >> annotation [
 	<FMClass: #Object super: #Object>
 	<package: #Moose>
 	<abstract>
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseObject class >> cache [
 	^ cache ifNil: [ self initializeCache ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MooseObject class >> freshID [
 	"Answer a fresh ID, which is unique within Moose."
 
@@ -110,7 +111,7 @@ MooseObject class >> freshID [
 	^ MooseID
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseObject class >> initializeCache [
 	"Usually we use #at:ifAbsentPut: to declare new properties, but in MooseQuery to reduce too much the perfs to instantiate the block as second argument. Thus, we initialize this info direction at the cache creation and use a simple #at: instead"
 
@@ -120,22 +121,22 @@ MooseObject class >> initializeCache [
 		yourself
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MooseObject class >> isAbstract [
 	^ self = MooseObject
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MooseObject class >> isOfType: aClassFAMIX [
 	^ self superclassesAndFamixTraits includes: aClassFAMIX
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseObject class >> navigationPragmas [
 	^ Pragma allNamed: #navigation: from: self to: MooseObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseObject class >> relatedGroupType [
 	" The entities can specify what is the prefered type of MooseGroup they want to be stored in.
 	They do that using a class side method with uniqueName that contains pragma <mooseGroup>. 
@@ -155,47 +156,47 @@ MooseObject class >> relatedGroupType [
 	^ self perform: selectedMethod selector
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MooseObject class >> resetIDGeneration [ 
 	"Resets the internal ID generation." 
 	 
 	MooseID := nil
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MooseObject class >> resetMooseEntityCache [
 	cache := nil
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MooseObject class >> setMooseID: anInteger [
 	"This method is used in the unit test"
 	
 	MooseID := anInteger 
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MooseObject class >> superclassesAndFamixTraits [
 	^ self cache directAt: #superclassesAndFamixTraits
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseObject class >> undefinedName [
 
 	^ #noname
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MooseObject class >> usedStatefulTraits [
 	^ self cache directAt: #usedStatefulTraits
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseObject >> allCachedValues [
 	^ cache values
 ]
 
-{ #category : #'meta information' }
+{ #category : 'meta information' }
 MooseObject >> allDeclaredProperties [
 	"Do not use the class side version
 
@@ -204,114 +205,114 @@ And, the metadescription might be different in the instance and in the class sid
 	^ self mooseDescription allProperties
 ]
 
-{ #category : #'meta information' }
+{ #category : 'meta information' }
 MooseObject >> allPropertySelectors [
 	^ self class allPropertySelectors
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MooseObject >> announcer [
 	^ self attributeAt: #announcer ifAbsentPut: [ Announcer new ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MooseObject >> announcer: anAnnouncer [
 	^ self attributeAt: #announcer put: anAnnouncer
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseObject >> attributeAt: name ifAbsent: aBlock [
 	1 to: entityAttributes size do: [ :n | name == (entityAttributes at: n) key ifTrue: [ ^ (entityAttributes at: n) value ] ].
 	^ aBlock value
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseObject >> attributeAt: name ifAbsentPut: aBlock [
 	1 to: entityAttributes size do: [ :n | name == (entityAttributes at: n) key ifTrue: [ ^ (entityAttributes at: n) value ] ].
 	entityAttributes := entityAttributes copyWith: name -> aBlock value.
 	^ entityAttributes last value
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseObject >> attributeAt: name put: value [
 	1 to: entityAttributes size do: [ :n | name == (entityAttributes at: n) key ifTrue: [ ^ (entityAttributes at: n) value: value ] ].
 	entityAttributes := entityAttributes copyWith: name -> value.
 	^ entityAttributes last value
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseObject >> cacheAt: name ifAbsent: aBlock [
 	^ cache at: name ifAbsent: [ aBlock value ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseObject >> cacheAt: name ifAbsent: absentBlock ifPresent: presentBlock [
 	^ cache at: name ifPresent: presentBlock ifAbsent: absentBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseObject >> cacheAt: name ifAbsentPut: aBlock [
 	^ cache at: name ifAbsentPut: aBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseObject >> cacheAt: name ifPresent: aBlock [
 	^ cache at: name ifPresent: [ :value | aBlock cull: value ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseObject >> cacheAt: name ifPresent: presentBlock ifAbsentPut: aBlock [
 	^ cache at: name ifPresent: presentBlock ifAbsentPut: aBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseObject >> cacheAt: name put: value [
 	^ cache at: name put: value
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseObject >> description [
 	^ self attributeAt: #privateDescription ifAbsent: [ self mooseName , ' (' , self mooseDescription name , ')' ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseObject >> description: text [
 	self attributeAt: #privateDescription put: text
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 MooseObject >> displayFullString [
 	"Return a name corresponding to the moose name but also for the associations instead of returning #noname"
 
 	^ String streamContents: [ :stream | self displayFullStringOn: stream ]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 MooseObject >> displayFullStringOn: aStream [
 	self mooseNameOn: aStream
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 MooseObject >> displayStringOn: aStream [
 	self mooseNameOn: aStream
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseObject >> entityAttributes [
 	^ entityAttributes
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseObject >> entityCache [
 	^ cache
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MooseObject >> flush [
 	cache initialize
 ]
 
-{ #category : #groups }
+{ #category : 'groups' }
 MooseObject >> groupFor: aSelector [
 	"Return a group containing elements corresponding to aSelector"
 
@@ -322,17 +323,17 @@ MooseObject >> groupFor: aSelector [
 		withDescription: aSelector asString capitalized , ' in ' , self mooseName
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MooseObject >> hasMooseModel [
 	^ self mooseModel isNotNil
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MooseObject >> includesKey: selector [
 	^ cache includesKey: selector
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MooseObject >> initialize [
 	super initialize.
 
@@ -340,38 +341,38 @@ MooseObject >> initialize [
 	self resetPrivateState
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 MooseObject >> inspectorToString [
 
 	^ String streamContents: [ :s | self displayStringOn: s ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MooseObject >> isMooseModel [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MooseObject >> isMooseObject [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MooseObject >> isOfType: aClassFAMIX [
 	^ self class isOfType: aClassFAMIX
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseObject >> localMooseModel [
 	^ self mooseModel
 ]
 
-{ #category : #properties }
+{ #category : 'properties' }
 MooseObject >> lookUpPropertyNamed: selector computedAs: aBlock [
 	^ self cacheAt: selector ifAbsentPut: aBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseObject >> metamodel [
 	^ self mooseModel
 		ifNil: [ super metamodel ]
@@ -379,14 +380,48 @@ MooseObject >> metamodel [
 
 ]
 
-{ #category : #accessing }
+{ #category : 'inspector' }
+MooseObject >> miInspectionFame: aBuilder [
+
+	<inspectorPresentationOrder: 3 title: 'Fame'>
+	^ aBuilder newTable
+		  items: self mooseDescription allComplexProperties;
+		  sortingBlock: #fullName ascending;
+		  addColumn:
+			  (SpStringTableColumn
+				   title: 'Name'
+				   evaluated: [ :item | item name ]) beSortable;
+		  addColumn: (SpStringTableColumn
+				   title: 'Type'
+				   evaluated: [ :item | item type name ]) beSortable;
+		  addColumn:
+			  (SpStringTableColumn title: 'Opposite' evaluated: [ :item |
+					   item opposite
+						   ifNil: [ '' ]
+						   ifNotNil: [ :opposite | opposite name ] ]) beSortable;
+		  addColumn: (SpStringTableColumn
+				   title: 'Derived?'
+				   evaluated: [ :item | item isDerived ]) beSortable;
+		  addColumn: (SpStringTableColumn
+				   title: 'Container?'
+				   evaluated: [ :item | item isContainer ]) beSortable;
+		  addColumn: (SpStringTableColumn
+				   title: 'IsTarget?'
+				   evaluated: [ :item | item isTarget ]) beSortable;
+		  addColumn: (SpStringTableColumn
+				   title: 'IsSource?'
+				   evaluated: [ :item | item isSource ]) beSortable;
+		  beResizable
+]
+
+{ #category : 'accessing' }
 MooseObject >> mooseDescription [
 	^ self mooseModel
 		ifNil: [ super mooseDescription ]
 		ifNotNil: [ :model | model mooseDescriptionFor: self class ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseObject >> mooseID [
 	"Returns an unique identifier of this entity.  This method is mandatory, and must 
 	return	 an Integer that uniquely identifies this entity within the entire Moose environment.
@@ -397,7 +432,7 @@ MooseObject >> mooseID [
 	^ mooseID
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 MooseObject >> mooseName [
 	"The return value must not be nil, and must never change.
 	The implementation should be fast, as this key may be used
@@ -419,7 +454,7 @@ MooseObject >> mooseName [
 			mooseName := stream contents asSymbol ]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 MooseObject >> mooseNameOn: aStream [
 	"Hook to customize the rendered text of an entity. Do not specialize mooseName, but change/specialize this method if necessary."
 
@@ -428,28 +463,34 @@ MooseObject >> mooseNameOn: aStream [
 		ifNotNil: [ self name ifNil: [ aStream print: self mooseID ] ifNotNil: [ aStream nextPutAll: self name ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'printing' }
+MooseObject >> mooseNameWithDots [
+	self deprecated: ':: has been replaced by . in mooseName. This method is now useless'.
+	^ self mooseName ifNotNil: [ :mName | mName copyReplaceAll: '::' with: '.' ]
+]
+
+{ #category : 'accessing' }
 MooseObject >> name [
 	^ self class undefinedName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseObject >> navigationPragmas [
 	^ self class navigationPragmas
 ]
 
-{ #category : #'meta information' }
+{ #category : 'meta information' }
 MooseObject >> navigationSelectors [
 	^ self navigationPragmas collect: #methodSelector
 ]
 
-{ #category : #properties }
+{ #category : 'properties' }
 MooseObject >> notExistentMetricValue [
 	
 	^-1
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 MooseObject >> printOn: aStream [
 	super printOn: aStream.
 	aStream
@@ -460,19 +501,19 @@ MooseObject >> printOn: aStream [
 				do: [ 'Error printing the object' ])
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MooseObject >> privateClearMooseName [
 	" this method causes the cache to fail if called directly. Use resetMooseName instead. "
 
 	mooseName := nil
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MooseObject >> privateSetMooseModel: aMooseModel [
 	"Do nothing in Object"
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MooseObject >> properties [ 
 	 
 	"for read only uses, i.e. don't change the returned value"
@@ -480,14 +521,14 @@ MooseObject >> properties [
 	^self allCachedValues
 ]
 
-{ #category : #properties }
+{ #category : 'properties' }
 MooseObject >> propertyNamed: propertyName [ 
 	"Returns the value of the property named propertyName, raises an error if the property does not exist"
 
 	^ self propertyNamed: propertyName ifAbsent: [ NotFound signalFor: 'Property named ', propertyName  ]
 ]
 
-{ #category : #properties }
+{ #category : 'properties' }
 MooseObject >> propertyNamed: propertyName ifAbsent: aBlock [
 	"Return the value of the property named propertyName, evaluate aBlock if the property does not exist"
 
@@ -498,12 +539,12 @@ MooseObject >> propertyNamed: propertyName ifAbsent: aBlock [
 				do: [ :ex | nil ]) ifNil: [ aBlock value ] ]
 ]
 
-{ #category : #properties }
+{ #category : 'properties' }
 MooseObject >> propertyNamed: name ifAbsentPut: value [
 	^ self cacheAt: name ifAbsentPut: value
 ]
 
-{ #category : #properties }
+{ #category : 'properties' }
 MooseObject >> propertyNamed: propertyName ifNil: aBlock [
 	"Return the value of the property named propertyName, evaluate aBlock if the property does not exist"
 
@@ -514,12 +555,12 @@ MooseObject >> propertyNamed: propertyName ifNil: aBlock [
 				do: [ :ex | nil ]) ifNil: [ aBlock value ] ]
 ]
 
-{ #category : #properties }
+{ #category : 'properties' }
 MooseObject >> propertyNamed: name put: value [
 	^ self cacheAt: name put: value
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseObject >> removeAttribute: aSymbol [
 	| each |
 	1 to: entityAttributes size do: [ :n | 
@@ -529,19 +570,19 @@ MooseObject >> removeAttribute: aSymbol [
 	^ false
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseObject >> removeCache: name [
 	cache removeKey: name ifAbsent: [  ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseObject >> removeFromModel [
 	^ self mooseModel
 		ifNil: [ self ]
 		ifNotNil: [ :model | model removeEntity: self ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MooseObject >> resetMooseName [
 	"If needed I reset my moose name in the MooseModel. I return true if my MooseName was updated and false if it was not."
 
@@ -552,13 +593,13 @@ MooseObject >> resetMooseName [
 	^ true
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MooseObject >> resetPrivateState [
 	entityAttributes := #().
 	cache := SmallDictionary new
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MooseObject >> suspendAllAnnouncementsDuring: aBlock [
 	| currentAnnouncer |	
 	currentAnnouncer := self announcer.

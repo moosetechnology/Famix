@@ -1,15 +1,16 @@
 Class {
-	#name : #MooseEntityTest,
-	#superclass : #MooseObjectTest,
-	#category : #'Moose-Core-Tests'
+	#name : 'MooseEntityTest',
+	#superclass : 'MooseObjectTest',
+	#category : 'Moose-Core-Tests',
+	#package : 'Moose-Core-Tests'
 }
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 MooseEntityTest >> actualClass [
 	^ MooseEntity
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseEntityTest >> testAnnotation [
 	| methodProperty |
 	self actualClass allSubclassesDo: [ :cls | self assert: cls annotation identicalTo: cls ].
@@ -20,17 +21,7 @@ MooseEntityTest >> testAnnotation [
 	self assert: (methodProperty includesKey: #abstract)
 ]
 
-{ #category : #tests }
-MooseEntityTest >> testIsStub [
-	self deny: self actualClass new isStub.
-	self
-		assert:
-			(self actualClass new
-				attributeAt: #privateIsStub put: true;
-				yourself) isStub
-]
-
-{ #category : #tests }
+{ #category : 'tests' }
 MooseEntityTest >> testLocalMooseModel [
 	| element model |
 	element := self actualClass new.
@@ -45,7 +36,7 @@ MooseEntityTest >> testLocalMooseModel [
 	self assert: model localMooseModel identicalTo: model
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseEntityTest >> testMooseModel [
 	| element model |
 	element := self actualClass new.
@@ -55,7 +46,7 @@ MooseEntityTest >> testMooseModel [
 	self assert: element mooseModel identicalTo: model
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseEntityTest >> testMooseModelAccessor [
 	| entity model |
 	entity := self actualClass new.
@@ -69,7 +60,7 @@ MooseEntityTest >> testMooseModelAccessor [
 	self denyEmpty: model
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseEntityTest >> testPrintOn [
 	| entity printString |
 	entity := self actualClass new.
@@ -78,7 +69,7 @@ MooseEntityTest >> testPrintOn [
 	self assert: (printString beginsWith: 'a MooseEntity ')
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseEntityTest >> testPrivateSetMooseModel [
 	| entity model |
 	entity := self actualClass new.

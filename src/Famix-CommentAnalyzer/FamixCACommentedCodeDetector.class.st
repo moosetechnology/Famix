@@ -4,25 +4,26 @@ A generic object that allows us to detect commented code. It knows how to clean 
 I am able to detect commented code lines by using a notation system. If a line contains special characters or keywords I will increase his notation and after a certain limit I consider it as commented code. 
 "
 Class {
-	#name : #FamixCACommentedCodeDetector,
-	#superclass : #Object,
+	#name : 'FamixCACommentedCodeDetector',
+	#superclass : 'Object',
 	#instVars : [
 		'language'
 	],
-	#category : #'Famix-CommentAnalyzer'
+	#category : 'Famix-CommentAnalyzer',
+	#package : 'Famix-CommentAnalyzer'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 FamixCACommentedCodeDetector class >> with: aSourceLanguage [
 	^ self new language: aSourceLanguage
 ]
 
-{ #category : #public }
+{ #category : 'public' }
 FamixCACommentedCodeDetector >> commentedCodeLinesIn: aFAMIXComment [
 	^ aFAMIXComment lines select: [ :each | self isCommentedCodeLine: each ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 FamixCACommentedCodeDetector >> isCommentedCodeLine: aLine [
 	| sumKeyWords cleanedLine sumSpecialChars |
 	"We start by removing comments markers."
@@ -45,22 +46,22 @@ FamixCACommentedCodeDetector >> isCommentedCodeLine: aLine [
 	^ sumKeyWords + sumSpecialChars >= 1
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixCACommentedCodeDetector >> language [
 	^ language
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixCACommentedCodeDetector >> language: aSourceLanguage [
 	language := aSourceLanguage
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixCACommentedCodeDetector >> languageKeywords [
 	^ self language languageKeywords
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixCACommentedCodeDetector >> printOn: aStream [
 	super printOn: aStream.
 	aStream
@@ -69,12 +70,12 @@ FamixCACommentedCodeDetector >> printOn: aStream [
 		nextPut: $]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 FamixCACommentedCodeDetector >> removeCommentMarkers: aLine [
 	^ self language commentMarkers inject: aLine into: [ :res :marker | res copyReplaceAll: marker with: '' ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 FamixCACommentedCodeDetector >> specialChars [
 	^ #('(' ')' '=' '+' '-' '#' '$' '%' '&' '\' '|' '[' ']' '{' '}' '"' '_' ';')
 ]

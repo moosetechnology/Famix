@@ -13,42 +13,44 @@ Internal Representation and Key Implementation Points.
 
 "
 Class {
-	#name : #MQAbstractQuery,
-	#superclass : #Object,
+	#name : 'MQAbstractQuery',
+	#superclass : 'Object',
 	#instVars : [
 		'result',
 		'receiver'
 	],
-	#category : #'Moose-Query-Core'
+	#category : 'Moose-Query-Core',
+	#package : 'Moose-Query',
+	#tag : 'Core'
 }
 
-{ #category : #execution }
+{ #category : 'execution' }
 MQAbstractQuery >> execute [
 	self subclassResponsibility
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MQAbstractQuery >> initialize [
 	super initialize.
 	result := Set new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MQAbstractQuery >> receiver [
 	^ receiver
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MQAbstractQuery >> receiver: anObject [
 	receiver := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MQAbstractQuery >> result [
 	^ result
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MQAbstractQuery >> result: anObject [
 	result := anObject
 ]

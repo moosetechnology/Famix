@@ -1,10 +1,12 @@
 Class {
-	#name : #FmxMBNavigationGroupTest,
-	#superclass : #FmxMBTestCase,
-	#category : #'Famix-MetamodelBuilder-Tests'
+	#name : 'FmxMBNavigationGroupTest',
+	#superclass : 'FmxMBTestCase',
+	#category : 'Famix-MetamodelBuilder-Tests-Tests',
+	#package : 'Famix-MetamodelBuilder-Tests',
+	#tag : 'Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBNavigationGroupTest >> testEmptyRelationGroups [
 
 	| entity |
@@ -17,7 +19,7 @@ FmxMBNavigationGroupTest >> testEmptyRelationGroups [
 	
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBNavigationGroupTest >> testRelationGroupsForTraits [
 	| tClass tMethod class method relation |
 	builder configuration navigationForContainers.

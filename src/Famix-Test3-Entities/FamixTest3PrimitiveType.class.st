@@ -10,20 +10,22 @@
 ### Incoming dependencies
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `incomingReferences` | `FamixTReferenceable` | `referredType` | `FamixTReference` | References to this entity by other entities.|
+| `incomingReferences` | `FamixTReferenceable` | `referredEntity` | `FamixTReference` | References to this entity by other entities.|
 
 
 
 "
 Class {
-	#name : #FamixTest3PrimitiveType,
-	#superclass : #FamixTest3Type,
+	#name : 'FamixTest3PrimitiveType',
+	#superclass : 'FamixTest3Type',
 	#traits : 'FamixTReferenceable + FamixTWithTypes',
 	#classTraits : 'FamixTReferenceable classTrait + FamixTWithTypes classTrait',
-	#category : #'Famix-Test3-Entities-Entities'
+	#category : 'Famix-Test3-Entities-Entities',
+	#package : 'Famix-Test3-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTest3PrimitiveType class >> annotation [
 
 	<FMClass: #PrimitiveType super: #FamixTest3Type>

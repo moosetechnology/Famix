@@ -1,10 +1,11 @@
 Class {
-	#name : #FamixJavaAttributeTest,
-	#superclass : #TestCase,
-	#category : #'Famix-Java-Tests'
+	#name : 'FamixJavaAttributeTest',
+	#superclass : 'TestCase',
+	#category : 'Famix-Java-Tests',
+	#package : 'Famix-Java-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaAttributeTest >> testAttributeVisibility [
 	| attribute |
 	attribute := FamixJavaAttribute new.

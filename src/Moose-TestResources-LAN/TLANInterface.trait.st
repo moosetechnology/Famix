@@ -1,9 +1,10 @@
 Trait {
-	#name : #TLANInterface,
-	#category : #'Moose-TestResources-LAN'
+	#name : 'TLANInterface',
+	#category : 'Moose-TestResources-LAN',
+	#package : 'Moose-TestResources-LAN'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 TLANInterface >> originate [ 
 	 
 	| dialogModel dialogBuilder returnVal packet dialogOriginator dialogAddressee dialogContents | 

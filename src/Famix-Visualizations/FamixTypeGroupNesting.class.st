@@ -6,32 +6,34 @@ I show all model packages and the classes they contain.
 I highlight the types in the FamixTypeGroup.
 "
 Class {
-	#name : #FamixTypeGroupNesting,
-	#superclass : #MooseAbstractVisualization,
+	#name : 'FamixTypeGroupNesting',
+	#superclass : 'MooseAbstractVisualization',
 	#instVars : [
 		'famixTypeGroup'
 	],
-	#category : #'Famix-Visualizations-Core'
+	#category : 'Famix-Visualizations-Core',
+	#package : 'Famix-Visualizations',
+	#tag : 'Core'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTypeGroupNesting class >> defaultTitle [
 	^ 'Nesting'
 ]
 
-{ #category : #public }
+{ #category : 'public' }
 FamixTypeGroupNesting class >> forTypeGroup: aFamixTypeGroup [
 	^ self new
 		famixTypeGroup: aFamixTypeGroup;
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTypeGroupNesting class >> icon [
 	^ MooseIcons mooseTreeMap
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 FamixTypeGroupNesting >> build [
 	canvas
 		addAll: (self modelPackages collect: [ :c | self packageShapeFor: c ]).
@@ -41,7 +43,7 @@ FamixTypeGroupNesting >> build [
 	super build
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 FamixTypeGroupNesting >> buildLegend [
 	| legend |
 	legend := RSLegend new.
@@ -53,7 +55,7 @@ FamixTypeGroupNesting >> buildLegend [
 	legend build
 ]
 
-{ #category : #shapes }
+{ #category : 'shapes' }
 FamixTypeGroupNesting >> classShapeFor: aClass [
 	^ RSBox new
 		model: aClass;
@@ -67,7 +69,7 @@ FamixTypeGroupNesting >> classShapeFor: aClass [
 		yourself
 ]
 
-{ #category : #shapes }
+{ #category : 'shapes' }
 FamixTypeGroupNesting >> entitiesIn: aContainer [
 	^ (((aContainer toScope: FamixTPackage) copyWithout: aContainer)
 		collect: [ :c | self entitiesIn: c ])
@@ -77,12 +79,12 @@ FamixTypeGroupNesting >> entitiesIn: aContainer [
 				thenCollect: [ :c | self classShapeFor: c ])
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTypeGroupNesting >> famixTypeGroup: aFamixTypeGroup [
 	famixTypeGroup := aFamixTypeGroup
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTypeGroupNesting >> modelPackages [
 	^ famixTypeGroup mooseModel allPackages
 		select: [ :container | 
@@ -90,7 +92,7 @@ FamixTypeGroupNesting >> modelPackages [
 				and: [ (container toScope: FamixTType) anySatisfy: [ :c | c isStub not ] ] ]
 ]
 
-{ #category : #shapes }
+{ #category : 'shapes' }
 FamixTypeGroupNesting >> packageShapeFor: aContainer [
 	| composite |
 	composite := RSComposite new

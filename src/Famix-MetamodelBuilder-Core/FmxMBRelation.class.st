@@ -2,27 +2,29 @@
 FamixMetamodelBuilderRelation
 "
 Class {
-	#name : #FmxMBRelation,
-	#superclass : #Object,
+	#name : 'FmxMBRelation',
+	#superclass : 'Object',
 	#instVars : [
 		'side',
 		'oppositeSide',
 		'builder'
 	],
-	#category : #'Famix-MetamodelBuilder-Core-Implementation'
+	#category : 'Famix-MetamodelBuilder-Core-Implementation',
+	#package : 'Famix-MetamodelBuilder-Core',
+	#tag : 'Implementation'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBRelation >> builder [
 	^ builder
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBRelation >> builder: anObject [
 	builder := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBRelation >> cardinalityString [
 	^ String
 		streamContents: [ :s | 
@@ -31,13 +33,13 @@ FmxMBRelation >> cardinalityString [
 			self from isMany ifTrue: [ s nextPutAll: '*' ] ifFalse: [ s nextPutAll: '1' ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBRelation >> from [
 
 	^ side 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBRelation >> from: aBlock [
 
 	side := (FmxMBRelationSide new
@@ -47,57 +49,57 @@ FmxMBRelation >> from: aBlock [
 	aBlock cull: side.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBRelation >> left [
 
 	^ side 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBRelation >> oppositeRelation [
 
 	^ self copy swapSides
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBRelation >> oppositeSide [
 	^ oppositeSide
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBRelation >> oppositeSide: anObject [
 	oppositeSide := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBRelation >> right [
 
 	^ oppositeSide 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBRelation >> shortCardinalityString [
 	^ self from isMany ifTrue: [ '*' ] ifFalse: [ '' ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBRelation >> side [
 
 	^ side
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBRelation >> side: anObject [
 	side := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBRelation >> sides [
 
 	^ { side. oppositeSide }
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBRelation >> swapSides [
 
 	| temp |
@@ -106,13 +108,13 @@ FmxMBRelation >> swapSides [
 	side := temp
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBRelation >> to [
 
 	^ oppositeSide 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBRelation >> to: aBlock [
 
 	oppositeSide := (FmxMBRelationSide new
@@ -122,14 +124,14 @@ FmxMBRelation >> to: aBlock [
 	aBlock cull: oppositeSide.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBRelation >> withNavigation [
 
 	self sides do: [ :aSide |
 		aSide withNavigationOf: self ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBRelation >> withoutNavigation [
 
 	self sides do: [ :aSide |

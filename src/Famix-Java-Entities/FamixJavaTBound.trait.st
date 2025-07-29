@@ -14,15 +14,17 @@ Represents a bound for a lower bounded and upper bounded wildcard.
 
 "
 Trait {
-	#name : #FamixJavaTBound,
+	#name : 'FamixJavaTBound',
 	#instVars : [
 		'#lowerBoundedWildcards => FMMany type: #FamixJavaTBounded opposite: #lowerBound',
 		'#upperBoundedWildcards => FMMany type: #FamixJavaTBounded opposite: #upperBound'
 	],
-	#category : #'Famix-Java-Entities-Traits'
+	#category : 'Famix-Java-Entities-Traits',
+	#package : 'Famix-Java-Entities',
+	#tag : 'Traits'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixJavaTBound classSide >> annotation [
 
 	<FMClass: #TBound super: #Object>
@@ -31,19 +33,26 @@ FamixJavaTBound classSide >> annotation [
 	^ self
 ]
 
-{ #category : #adding }
+{ #category : 'visitor' }
+FamixJavaTBound >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaTBound: self
+]
+
+{ #category : 'adding' }
 FamixJavaTBound >> addLowerBoundedWildcard: anObject [
 	<generated>
 	^ self lowerBoundedWildcards add: anObject
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixJavaTBound >> addUpperBoundedWildcard: anObject [
 	<generated>
 	^ self upperBoundedWildcards add: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixJavaTBound >> lowerBoundedWildcards [
 	"Relation named: #lowerBoundedWildcards type: #FamixJavaTBounded opposite: #lowerBound"
 
@@ -53,14 +62,14 @@ FamixJavaTBound >> lowerBoundedWildcards [
 	^ lowerBoundedWildcards
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixJavaTBound >> lowerBoundedWildcards: anObject [
 
 	<generated>
 	lowerBoundedWildcards value: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixJavaTBound >> upperBoundedWildcards [
 	"Relation named: #upperBoundedWildcards type: #FamixJavaTBounded opposite: #upperBound"
 
@@ -70,7 +79,7 @@ FamixJavaTBound >> upperBoundedWildcards [
 	^ upperBoundedWildcards
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixJavaTBound >> upperBoundedWildcards: anObject [
 
 	<generated>

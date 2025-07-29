@@ -1,6 +1,6 @@
 Class {
-	#name : #FamixPharoSmalltalkGenerator,
-	#superclass : #FamixBasicInfrastructureGenerator,
+	#name : 'FamixPharoSmalltalkGenerator',
+	#superclass : 'FamixBasicInfrastructureGenerator',
 	#instVars : [
 		'access',
 		'annotationInstance',
@@ -20,24 +20,26 @@ Class {
 		'parameter',
 		'reference',
 		'unknownVariable',
-		'pharoEntitySourceAnchor'
+		'pharoEntitySourceAnchor',
+		'entityTyping'
 	],
-	#category : #'Famix-PharoSmalltalk-Generator'
+	#category : 'Famix-PharoSmalltalk-Generator',
+	#package : 'Famix-PharoSmalltalk-Generator'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixPharoSmalltalkGenerator class >> packageName [
 
 	^ #'Famix-PharoSmalltalk-Entities'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixPharoSmalltalkGenerator class >> prefix [
 
 	^ #'FamixSt'
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FamixPharoSmalltalkGenerator >> defineClasses [
 	super defineClasses.
 
@@ -59,11 +61,12 @@ FamixPharoSmalltalkGenerator >> defineClasses [
 	package := self newClassNamed: #Package.
 	parameter := self newClassNamed: #Parameter.
 	reference := self newClassNamed: #Reference.
+	entityTyping := self newClassNamed: #EntityTyping.
 	unknownVariable := self newClassNamed: #UnknownVariable.
 
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FamixPharoSmalltalkGenerator >> defineHierarchy [
 
 	super defineHierarchy.
@@ -72,12 +75,9 @@ FamixPharoSmalltalkGenerator >> defineHierarchy [
 
 	annotationInstance --|> sourcedEntity.
 	annotationInstance --|> #TAnnotationInstance.
-	annotationInstance --|> #TWithAnnotationInstanceAttributes.
-	annotationInstance --|> #TTypedAnnotationInstance.
 
 	annotationInstanceAttribute --|> sourcedEntity.
 	annotationInstanceAttribute --|> #TAnnotationInstanceAttribute.
-	annotationInstanceAttribute --|> #TTypedAnnotationInstanceAttribute.
 
 	annotationType --|> namedEntity.
 	annotationType --|> #TEntityMetaLevelDependency.
@@ -89,7 +89,6 @@ FamixPharoSmalltalkGenerator >> defineHierarchy [
 	annotationTypeAttribute --|> #TEntityMetaLevelDependency.
 	annotationTypeAttribute --|> sourcedEntity.
 	annotationTypeAttribute --|> #TAnnotationTypeAttribute.
-	annotationTypeAttribute --|> #TTypedAnnotationInstanceAttribute.
 
 	attribute --|> namedEntity.
 	attribute --|> #TAttribute.
@@ -149,23 +148,24 @@ FamixPharoSmalltalkGenerator >> defineHierarchy [
 	parameter --|> #TInvocationsReceiver.
 
 	reference --|> #TReference.
+	
+	entityTyping --|> #TEntityTyping. 
 
 	pharoEntitySourceAnchor --|> sourceAnchor.
-	pharoEntitySourceAnchor --|> #TSourceAnchor.
 
 	unknownVariable --|> namedEntity.
 	unknownVariable --|> #TUnknownVariable.
 	unknownVariable --|> #TInvocationsReceiver
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixPharoSmalltalkGenerator >> defineProperties [
 	super defineProperties.
 	((method property: #protocol type: #String)
 		comment: 'Protocol of the method'). 
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FamixPharoSmalltalkGenerator >> newBuilder [
 
 	^ super newBuilder

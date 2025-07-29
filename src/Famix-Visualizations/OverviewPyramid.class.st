@@ -7,8 +7,8 @@ See also an example on class side.
 More documentation here: https://www.simpleorientedarchitecture.com/overview-pyramid-metrics-ndepend/
 "
 Class {
-	#name : #OverviewPyramid,
-	#superclass : #MooseAbstractVisualization,
+	#name : 'OverviewPyramid',
+	#superclass : 'MooseAbstractVisualization',
 	#instVars : [
 		'metrics',
 		'treesholdsToUse',
@@ -20,15 +20,17 @@ Class {
 		'MoosePyramidResults',
 		'SmalltalkTreesholds'
 	],
-	#category : #'Famix-Visualizations-Overview-Pyramid'
+	#category : 'Famix-Visualizations-Overview-Pyramid',
+	#package : 'Famix-Visualizations',
+	#tag : 'Overview-Pyramid'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OverviewPyramid class >> defaultTitle [
 	^ 'Overview pyramid'
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 OverviewPyramid class >> example [
 
 	<script>
@@ -37,19 +39,19 @@ OverviewPyramid class >> example [
 	(self forMooseModel: MooseModel root allModels anyOne) open
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 OverviewPyramid class >> forMooseModel: aMooseModel [
 	^ self new
 		mooseModel: aMooseModel;
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OverviewPyramid class >> icon [
 	^ Smalltalk ui theme iconNamed: #smallLanguage
 ]
 
-{ #category : #'class initialization' }
+{ #category : 'class initialization' }
 OverviewPyramid class >> initialize [
 	"self initialize"
 	self initializeJavaTreesholds.
@@ -68,7 +70,7 @@ OverviewPyramid class >> initialize [
 		yourself.
 ]
 
-{ #category : #'class initialization' }
+{ #category : 'class initialization' }
 OverviewPyramid class >> initializeCPPTreesholds [
 
 	CPPTreesholds := Dictionary new
@@ -85,7 +87,7 @@ OverviewPyramid class >> initializeCPPTreesholds [
 
 ]
 
-{ #category : #'class initialization' }
+{ #category : 'class initialization' }
 OverviewPyramid class >> initializeJavaTreesholds [
 
 	JavaTreesholds := Dictionary new
@@ -101,7 +103,7 @@ OverviewPyramid class >> initializeJavaTreesholds [
 
 ]
 
-{ #category : #'class initialization' }
+{ #category : 'class initialization' }
 OverviewPyramid class >> initializeSmalltalkTreesholds [
 
 	SmalltalkTreesholds := Dictionary new
@@ -117,7 +119,7 @@ OverviewPyramid class >> initializeSmalltalkTreesholds [
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OverviewPyramid class >> treesholdForModel: aMooseModel [
 
 	"return the treeshold to use for aMooseModel (it can be Java, smalltalk, cpp treeshold according the source language of the model)"
@@ -127,7 +129,7 @@ OverviewPyramid class >> treesholdForModel: aMooseModel [
 		  ifFalse: [ JavaTreesholds ]
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 OverviewPyramid >> build [
 	self buildBricks.
 	canvas addAll: bricks.
@@ -136,7 +138,7 @@ OverviewPyramid >> build [
 		on: canvas shapes
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 OverviewPyramid >> buildAHH [
 	bricks
 		add:
@@ -156,7 +158,7 @@ Tell us how deep the class hierarchies are';
 				brick)
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 OverviewPyramid >> buildANDC [
 	bricks
 		add:
@@ -177,7 +179,7 @@ are refined by means of inheritance';
 				brick)
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 OverviewPyramid >> buildBricks [
 	self buildEmptyBricks: 4.
 	self buildANDC.
@@ -197,7 +199,7 @@ OverviewPyramid >> buildBricks [
 	self buildNumberOfCalledClasses
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 OverviewPyramid >> buildCyclomaticComplexity [
 	bricks
 		add:
@@ -214,19 +216,19 @@ OverviewPyramid >> buildCyclomaticComplexity [
 				brick)
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 OverviewPyramid >> buildEmptyBricks: aNumber [
 	aNumber
 		timesRepeat: [ bricks add: PyramidBrickFactory empty brick ]
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 OverviewPyramid >> buildEmptySizeAndComplexityBricks: aNumber [
 	aNumber
 		timesRepeat: [ bricks add: PyramidBrickFactory sizeAndComplexity brick ]
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 OverviewPyramid >> buildLegend [
 	| legend |
 	legend := RSLegend new.
@@ -236,7 +238,7 @@ OverviewPyramid >> buildLegend [
 	legend build
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 OverviewPyramid >> buildNumberOfCalledClasses [
 	bricks
 		add:
@@ -253,7 +255,7 @@ OverviewPyramid >> buildNumberOfCalledClasses [
 				brick)
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 OverviewPyramid >> buildNumberOfCalls [
 	bricks
 		add:
@@ -273,7 +275,7 @@ Tell us how many other operations are called on average from each operation';
 				brick)
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 OverviewPyramid >> buildNumberOfClasses [
 	bricks
 		add:
@@ -300,7 +302,7 @@ Reveals how operations are distributed among classes';
 				brick)
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 OverviewPyramid >> buildNumberOfInvocations [
 	bricks
 		add:
@@ -326,7 +328,7 @@ Indicator of how much the coupling involves many classes';
 				brick)
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 OverviewPyramid >> buildNumberOfLOC [
 	bricks
 		add:
@@ -353,7 +355,7 @@ Characterizes how much conditional complexity we are to expect in operations';
 				brick)
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 OverviewPyramid >> buildNumberOfMethods [
 	bricks
 		add:
@@ -380,7 +382,7 @@ Indication of how well the code is distributed among operations';
 				brick)
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 OverviewPyramid >> buildNumberOfPackages [
 	bricks
 		add:
@@ -406,7 +408,7 @@ Indicates if packages tend to be coarse grained or fine grained';
 				brick)
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 OverviewPyramid >> colorForMetric: aSymbol withValue: aNumber [
 
 	| treesholds lowDifference averageDifference hightDifference |
@@ -433,47 +435,47 @@ OverviewPyramid >> colorForMetric: aSymbol withValue: aNumber [
 		ifTrue: [ ^ Color red darker ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 OverviewPyramid >> initialize [
 	super initialize.
 	bricks := RSGroup new
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 OverviewPyramid >> mooseModel: aMooseModel [
 	metrics := aMooseModel overviewPyramidMetrics.
 	self treesholdsToUse: (self class treesholdForModel: aMooseModel)
 ]
 
-{ #category : #opening }
+{ #category : 'opening' }
 OverviewPyramid >> open [
 	^ super open extent: 620 @ 250
 ]
 
-{ #category : #treeshold }
+{ #category : 'treeshold' }
 OverviewPyramid >> treesholdsToUse [
 
 	^ treesholdsToUse
 ]
 
-{ #category : #treeshold }
+{ #category : 'treeshold' }
 OverviewPyramid >> treesholdsToUse: aDictionary [
 
 	treesholdsToUse := aDictionary
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 OverviewPyramid >> truncatedStringForFraction: aFraction [
 	^ (metrics truncatedFloatForFraction: aFraction) asString
 ]
 
-{ #category : #treeshold }
+{ #category : 'treeshold' }
 OverviewPyramid >> useCPPTreesholds [
 
 	self treesholdsToUse: CPPTreesholds
 ]
 
-{ #category : #treeshold }
+{ #category : 'treeshold' }
 OverviewPyramid >> useJavaTreesholds [
 
 	self treesholdsToUse: JavaTreesholds

@@ -1,15 +1,16 @@
 Class {
-	#name : #MooseModelDescriptionTest,
-	#superclass : #TestCase,
-	#category : #'Moose-Core-Tests'
+	#name : 'MooseModelDescriptionTest',
+	#superclass : 'TestCase',
+	#category : 'Moose-Core-Tests',
+	#package : 'Moose-Core-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 MooseModelDescriptionTest >> msePropertyPragmaFor: aMethod [
 	^ aMethod pragmas detect: [ :p | p selector = #FMProperty:type:opposite: ] ifNone: [ nil ]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseModelDescriptionTest >> notTested_AllPropertyCommented [
 	| allProps |
 	"MSE properties with opposite"
@@ -21,12 +22,12 @@ MooseModelDescriptionTest >> notTested_AllPropertyCommented [
 	self assertEmpty: (allProps select: [ :m | m pragmas noneSatisfy: [ :p | p keyword = #FMComment: ] ])
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseModelDescriptionTest >> testAsMooseDescription [
 	self assert: FamixTest1Class asMooseDescription isFM3Class
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseModelDescriptionTest >> testAsMooseDescriptionAttributes [
 	| classDescription typeDescription |
 	classDescription := FamixTest3Class asMooseDescription.
@@ -35,7 +36,7 @@ MooseModelDescriptionTest >> testAsMooseDescriptionAttributes [
 	self assert: (classDescription allProperties anySatisfy: [ :each | each name = #methods ])
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseModelDescriptionTest >> testOppositeOfOppositePropertyIsMyself [
 	| allSelector dictOpposite |
 
@@ -55,7 +56,7 @@ MooseModelDescriptionTest >> testOppositeOfOppositePropertyIsMyself [
 						]) 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseModelDescriptionTest >> testOppositePropertyExist [
 
 	| allSelector |

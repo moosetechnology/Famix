@@ -1,10 +1,11 @@
 Class {
-	#name : #MooseSmalltalkImporterFamixClassTest,
-	#superclass : #TestCase,
-	#category : #'Moose-SmalltalkImporter-Core-Tests'
+	#name : 'MooseSmalltalkImporterFamixClassTest',
+	#superclass : 'TestCase',
+	#category : 'Moose-SmalltalkImporter-Core-Tests',
+	#package : 'Moose-SmalltalkImporter-Core-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseSmalltalkImporterFamixClassTest >> testIsTestCase [
 
 	| mooseModel |

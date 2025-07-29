@@ -1,19 +1,20 @@
 Class {
-	#name : #FamixJavaMethodTest,
-	#superclass : #TestCase,
+	#name : 'FamixJavaMethodTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'method'
 	],
-	#category : #'Famix-Java-Tests'
+	#category : 'Famix-Java-Tests',
+	#package : 'Famix-Java-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 FamixJavaMethodTest >> setUp [
 	super setUp.
 	method := FamixJavaMethod new
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaMethodTest >> testAllOverridingMethods [
 
 	| signature overridingMethod otherOverridingMethod localClass subclass subSubclass |
@@ -44,7 +45,7 @@ FamixJavaMethodTest >> testAllOverridingMethods [
 				otherOverridingMethod }
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaMethodTest >> testAllOverridingMethodsInInterface [
 
 	| signature overridingMethod otherOverridingMethod i subclass subSubclass |
@@ -73,7 +74,7 @@ FamixJavaMethodTest >> testAllOverridingMethodsInInterface [
 			otherOverridingMethod }
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaMethodTest >> testAllOverridingMethodsInInterfaceWithExtendingInterface [
 
 	| signature overridingMethod otherOverridingMethod i subclass subSubclass i2 |
@@ -112,12 +113,12 @@ FamixJavaMethodTest >> testAllOverridingMethodsInInterfaceWithExtendingInterface
 			otherOverridingMethod }
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaMethodTest >> testDefaultIsStub [
 	self deny: method isStub
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaMethodTest >> testFirstOverridingMethods [
 
 	| signature overridingMethod otherOverridingMethod localClass subclass subSubclass |
@@ -146,44 +147,49 @@ FamixJavaMethodTest >> testFirstOverridingMethods [
 		hasSameElements: { overridingMethod }
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaMethodTest >> testIsClassSide [
 	
 	method isClassSide: true.
 	self assert: method isClassSide .
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaMethodTest >> testIsGetter [
 
 	self deny: method isGetter.
 
 	method name: 'getLogin'.
-	method declaredType: (FamixJavaClass named: 'String').
+	method typing: (FamixJavaEntityTyping new declaredType:
+			 (FamixJavaClass named: 'String')).
 	self assert: method isGetter.
 
 	method name: 'getLogin'.
-	method declaredType: (FamixJavaPrimitiveType named: 'void').
+	method typing: (FamixJavaEntityTyping new declaredType:
+			 (FamixJavaPrimitiveType named: 'void')).
 	self deny: method isGetter
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaMethodTest >> testIsGetterForBooleanAttribute [
 
 	method name: 'isActif'.
-	method declaredType: (FamixJavaPrimitiveType named: 'boolean').
+	method typing: (FamixJavaEntityTyping new declaredType:
+			 (FamixJavaPrimitiveType named: 'boolean')).
 	self assert: method isGetter.
 
 	method name: 'isActif'.
-	method declaredType: (FamixJavaClass named: 'Boolean').
+	method typing: (FamixJavaEntityTyping new declaredType:
+			 (FamixJavaClass named: 'Boolean')).
 	self assert: method isGetter.
 
 	method name: 'isActif'.
-	method declaredType: (FamixJavaClass named: 'String').
+	method typing: (FamixJavaEntityTyping new declaredType:
+			 (FamixJavaClass named: 'String')).
 	self deny: method isGetter
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaMethodTest >> testIsNotStubWhenParentIsNotStub [
 	| aClass |
 	aClass := FamixJavaClass new.
@@ -193,7 +199,7 @@ FamixJavaMethodTest >> testIsNotStubWhenParentIsNotStub [
 	self deny: method isStub
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaMethodTest >> testIsSetter [
 
 	self deny: method isSetter.
@@ -204,21 +210,12 @@ FamixJavaMethodTest >> testIsSetter [
 	method parameters: { FamixJavaParameter new }.
 	self deny: method isSetter.
 
-	method declaredType: (FamixJavaPrimitiveType named: 'void').
+	method typing: (FamixJavaEntityTyping new declaredType:
+			 (FamixJavaPrimitiveType named: 'void')).
 	self assert: method isSetter
 ]
 
-{ #category : #tests }
-FamixJavaMethodTest >> testIsStubWhenParentIsStub [
-	| aClass |
-	aClass := FamixJavaClass new.
-	method parentType: aClass.
-	aClass isStub: true.
-	self assert: aClass isStub.
-	self assert: method isStub
-]
-
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaMethodTest >> testOverriddenMethod [
 
 	| signature overriddenMethod localClass superclass |
@@ -239,7 +236,7 @@ FamixJavaMethodTest >> testOverriddenMethod [
 	self assert: method overriddenMethod equals: overriddenMethod
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaMethodTest >> testOverriddenMethodFromInterface [
 
 	| signature interfaceOverriddenMethod localClass interface |
@@ -260,7 +257,7 @@ FamixJavaMethodTest >> testOverriddenMethodFromInterface [
 	self assert: method overriddenMethod equals: interfaceOverriddenMethod
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaMethodTest >> testOverriddenMethodOnlyOneLevel [
 
 	| signature overriddenMethod localClass superclass superSuperclass otherOverriddenMethod |
@@ -287,7 +284,7 @@ FamixJavaMethodTest >> testOverriddenMethodOnlyOneLevel [
 	self assert: method overriddenMethod equals: overriddenMethod
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaMethodTest >> testOverride [
 	| overriddenMethod c1 c2 package |
 	package := FamixJavaPackage new.
@@ -301,13 +298,13 @@ FamixJavaMethodTest >> testOverride [
 		name: 'method';
 		signature: 'method()';
 		parentType: c1;
-		declaredType: c1;
+		typing: (FamixJavaEntityTyping new declaredType: c1);
 		yourself.
 	method
 		name: 'method';
 		signature: 'method()';
 		parentType: c2;
-		declaredType: c2.
+		typing: (FamixJavaEntityTyping new declaredType: c2).
 	c2
 		addSuperInheritance:
 			(FamixJavaInheritance new
@@ -317,7 +314,7 @@ FamixJavaMethodTest >> testOverride [
 	self assert: overriddenMethod isOverridden
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaMethodTest >> testOverridingMethods [
 
 	| signature overridingMethod c1 c2 |
@@ -340,7 +337,7 @@ FamixJavaMethodTest >> testOverridingMethods [
 		hasSameElements: { overridingMethod }
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaMethodTest >> testOverridingMethodsInInterface [
 
 	| signature overridingMethod i c |
@@ -363,7 +360,7 @@ FamixJavaMethodTest >> testOverridingMethodsInInterface [
 		hasSameElements: { overridingMethod }
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaMethodTest >> testOverridingMethodsInterfaceExtendsInterface [
 
 	| signature overridingMethod i i2 overridingMethod2 i3 |
@@ -392,13 +389,13 @@ FamixJavaMethodTest >> testOverridingMethodsInterfaceExtendsInterface [
 			overridingMethod2 }
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaMethodTest >> testSettingIsStub [
 	method isStub: true.
 	self assert: method isStub
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaMethodTest >> testSeveralOverridingMethods [
 
 	| signature overridingMethod otherOverridingMethod localClass subclass otherSubclass |

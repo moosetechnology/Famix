@@ -1,14 +1,15 @@
 Class {
-	#name : #SmalltalkScope,
-	#superclass : #Object,
+	#name : 'SmalltalkScope',
+	#superclass : 'Object',
 	#instVars : [
 		'dictionary',
 		'parent'
 	],
-	#category : #'Moose-SmalltalkImporter'
+	#category : 'Moose-SmalltalkImporter',
+	#package : 'Moose-SmalltalkImporter'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 SmalltalkScope class >> extend: aScope [ 
 	 
 	^(self new) 
@@ -16,42 +17,42 @@ SmalltalkScope class >> extend: aScope [
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SmalltalkScope >> at: name bind: object [ 
 	^dictionary at: name put: object
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SmalltalkScope >> at: name ifAbsent: aBlock [ 
 	^dictionary at: name ifAbsent: aBlock
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 SmalltalkScope >> do: aBlock [ 
 	 
 	dictionary do: aBlock
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 SmalltalkScope >> initialize [ 
 
 	super initialize. 
 	dictionary := Dictionary new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SmalltalkScope >> parent [ 
 	 
 	^parent
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SmalltalkScope >> parent: anObject [ 
 	 
 	parent := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SmalltalkScope >> resolve: name ifAbsent: aBlock [
 	^ dictionary
 		at: name
@@ -60,13 +61,13 @@ SmalltalkScope >> resolve: name ifAbsent: aBlock [
 				ifNotNil: [ parent resolve: name ifAbsent: aBlock ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SmalltalkScope >> size [ 
 	 
 	^dictionary size
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SmalltalkScope >> values [ 
 	 
 	^dictionary values

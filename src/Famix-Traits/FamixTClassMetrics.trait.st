@@ -1,9 +1,11 @@
 Trait {
-	#name : #FamixTClassMetrics,
-	#category : #'Famix-Traits-Class'
+	#name : 'FamixTClassMetrics',
+	#category : 'Famix-Traits-Class',
+	#package : 'Famix-Traits',
+	#tag : 'Class'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTClassMetrics classSide >> annotation [
 
 	<FMClass: #TClassMetrics super: #Object>
@@ -12,7 +14,14 @@ FamixTClassMetrics classSide >> annotation [
 	^ self
 ]
 
-{ #category : #metrics }
+{ #category : 'visitor' }
+FamixTClassMetrics >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTClassMetrics: self
+]
+
+{ #category : 'metrics' }
 FamixTClassMetrics >> numberOfAttributesInherited [
 	<FMProperty: #numberOfAttributesInherited type: #Number>
 	<derived>
@@ -23,12 +32,12 @@ FamixTClassMetrics >> numberOfAttributesInherited [
 		computedAs: [self inheritedAttributes size]
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTClassMetrics >> numberOfAttributesInherited: aNumber [
 	self cacheAt: #numberOfAttributesInherited put: aNumber
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTClassMetrics >> numberOfLocallyDefinedMethods [
 
 	<FMProperty: #numberOfLocallyDefinedMethods type: #Number>
@@ -40,13 +49,13 @@ FamixTClassMetrics >> numberOfLocallyDefinedMethods [
 		  computedAs: [ self addedMethods size ]
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTClassMetrics >> numberOfLocallyDefinedMethods: aNumber [
 
 	self cacheAt: #numberOfLocallyDefinedMethods put: aNumber
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTClassMetrics >> numberOfMethodsAdded [
 
 	self
@@ -56,7 +65,7 @@ FamixTClassMetrics >> numberOfMethodsAdded [
 	^ self numberOfLocallyDefinedMethods
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTClassMetrics >> numberOfMethodsAdded: aNumber [
 
 	self
@@ -66,7 +75,7 @@ FamixTClassMetrics >> numberOfMethodsAdded: aNumber [
 	^ self numberOfLocallyDefinedMethods: aNumber
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTClassMetrics >> numberOfMethodsInHierarchy [
 	<FMProperty: #numberOfMethodsInHierarchy type: #Number>
 	<derived>
@@ -79,12 +88,12 @@ FamixTClassMetrics >> numberOfMethodsInHierarchy [
 	^totNom
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTClassMetrics >> numberOfMethodsInHierarchy: aNumber [
 	self cacheAt: #numberOfMethodsInHierarchy put: aNumber
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTClassMetrics >> numberOfMethodsInherited [
 	<FMProperty: #numberOfMethodsInherited type: #Number>
 	<derived>
@@ -95,12 +104,12 @@ FamixTClassMetrics >> numberOfMethodsInherited [
 		computedAs: [self inheritedMethods size]
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTClassMetrics >> numberOfMethodsInherited: aNumber [
 	self cacheAt: #numberOfMethodsInherited put: aNumber
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTClassMetrics >> numberOfMethodsOverridden [
 
 	<FMProperty: #numberOfMethodsOverridden type: #Number>
@@ -113,12 +122,12 @@ FamixTClassMetrics >> numberOfMethodsOverridden [
 		  self numberOfMethods - self numberOfLocallyDefinedMethods ]
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTClassMetrics >> numberOfMethodsOverridden: aNumber [
 	self cacheAt: #numberOfMethodsOverridden put: aNumber
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTClassMetrics >> totalNumberOfSubclasses [
 	<FMProperty: #totalNumberOfSubclasses type: #Number>
 	<derived>
@@ -126,7 +135,7 @@ FamixTClassMetrics >> totalNumberOfSubclasses [
 	^ self lookUpPropertyNamed: #totalNumberOfSubclasses computedAs: [ self subclassHierarchyGroup size ]
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTClassMetrics >> totalNumberOfSubclasses: aNumber [
 	self cacheAt: #totalNumberOfSubclasses put: aNumber
 ]

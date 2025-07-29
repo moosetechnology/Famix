@@ -2,32 +2,34 @@
 self new open
 "
 Class {
-	#name : #MooseFameView,
-	#superclass : #Object,
-	#category : #'Famix-Visualizations-Fame'
+	#name : 'MooseFameView',
+	#superclass : 'Object',
+	#category : 'Famix-Visualizations-Fame',
+	#package : 'Famix-Visualizations',
+	#tag : 'Fame'
 }
 
-{ #category : #default }
+{ #category : 'default' }
 MooseFameView class >> defaultTitle [
 
 	^ 'Fame UML'
 ]
 
-{ #category : #opening }
+{ #category : 'opening' }
 MooseFameView class >> fameCore [
 
 	<script>
 	self new openOn: MooseModel metamodel
 ]
 
-{ #category : #opening }
+{ #category : 'opening' }
 MooseFameView class >> metaMetaModel [
 
 	<script>
 	self new openOn: FMMetaMetaModel default
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MooseFameView >> buildForClasses: classes [
 
 	| builder |
@@ -45,19 +47,19 @@ MooseFameView >> buildForClasses: classes [
 	^ builder canvas
 ]
 
-{ #category : #opening }
+{ #category : 'opening' }
 MooseFameView >> openOn: aMetamodel [
 
 	^ self openOn: aMetamodel titled: self class defaultTitle
 ]
 
-{ #category : #opening }
+{ #category : 'opening' }
 MooseFameView >> openOn: aMetamodel titled: aString [
 
 	^ (self buildForClasses: aMetamodel classes) openWithTitle: aString
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MooseFameView >> propertyLabel: aFM3Property [
 
 	^ String streamContents: [ :str |

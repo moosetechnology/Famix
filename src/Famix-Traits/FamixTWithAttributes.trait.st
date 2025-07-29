@@ -11,14 +11,16 @@
 
 "
 Trait {
-	#name : #FamixTWithAttributes,
+	#name : 'FamixTWithAttributes',
 	#instVars : [
 		'#attributes => FMMany type: #FamixTAttribute opposite: #parentType'
 	],
-	#category : #'Famix-Traits-Attribute'
+	#category : 'Famix-Traits-Attribute',
+	#package : 'Famix-Traits',
+	#tag : 'Attribute'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTWithAttributes classSide >> annotation [
 
 	<FMClass: #TWithAttributes super: #Object>
@@ -27,12 +29,19 @@ FamixTWithAttributes classSide >> annotation [
 	^ self
 ]
 
-{ #category : #adding }
+{ #category : 'visitor' }
+FamixTWithAttributes >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTWithAttributes: self
+]
+
+{ #category : 'adding' }
 FamixTWithAttributes >> addAttribute: anAttribute [
 	attributes add: anAttribute
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithAttributes >> attributes [
 	"Relation named: #attributes type: #FamixTAttribute opposite: #parentType"
 
@@ -42,14 +51,14 @@ FamixTWithAttributes >> attributes [
 	^ attributes
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithAttributes >> attributes: anObject [
 
 	<generated>
 	attributes value: anObject
 ]
 
-{ #category : #'Famix-Extensions' }
+{ #category : 'Famix-Extensions' }
 FamixTWithAttributes >> numberOfAttributes [
 	<FMProperty: #numberOfAttributes type: #Number>
 	<derived>
@@ -60,7 +69,7 @@ FamixTWithAttributes >> numberOfAttributes [
 		computedAs: [self attributes size]
 ]
 
-{ #category : #'Famix-Extensions' }
+{ #category : 'Famix-Extensions' }
 FamixTWithAttributes >> numberOfAttributes: aNumber [
 	self cacheAt: #numberOfAttributes put: aNumber
 ]

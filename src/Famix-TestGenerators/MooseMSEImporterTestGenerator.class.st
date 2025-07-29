@@ -1,6 +1,6 @@
 Class {
-	#name : #MooseMSEImporterTestGenerator,
-	#superclass : #FamixBasicInfrastructureGenerator,
+	#name : 'MooseMSEImporterTestGenerator',
+	#superclass : 'FamixBasicInfrastructureGenerator',
 	#instVars : [
 		'model',
 		'class',
@@ -9,24 +9,26 @@ Class {
 		'inheritance',
 		'package',
 		'namespace',
-		'primitiveType'
+		'primitiveType',
+		'entityTyping'
 	],
-	#category : #'Famix-TestGenerators'
+	#category : 'Famix-TestGenerators',
+	#package : 'Famix-TestGenerators'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseMSEImporterTestGenerator class >> packageName [
 
 	^ #'Moose-Core-Tests-Entities'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseMSEImporterTestGenerator class >> prefix [
 
 	^ #'MooseMSEImporterTest'
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 MooseMSEImporterTestGenerator >> defineClasses [
 
 	super defineClasses.
@@ -39,10 +41,11 @@ MooseMSEImporterTestGenerator >> defineClasses [
 	inheritance := builder newClassNamed: #Inheritance.
 	package := builder newClassNamed: #Package.
 	namespace := builder newClassNamed: #Namespace.
-	primitiveType := builder newClassNamed: #PrimitiveType
+	primitiveType := builder newClassNamed: #PrimitiveType.
+	entityTyping := builder newClassNamed: #EntityTyping
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 MooseMSEImporterTestGenerator >> defineHierarchy [
 
 	super defineHierarchy.
@@ -74,5 +77,7 @@ MooseMSEImporterTestGenerator >> defineHierarchy [
 		--|> #TNamespace;
 		--|> #TWithClasses.
 
-	primitiveType --|> #TPrimitiveType
+	primitiveType --|> #TPrimitiveType.
+
+	entityTyping --|> #TEntityTyping
 ]

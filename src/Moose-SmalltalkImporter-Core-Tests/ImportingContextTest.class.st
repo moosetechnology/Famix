@@ -1,10 +1,11 @@
 Class {
-	#name : #ImportingContextTest,
-	#superclass : #TestCase,
-	#category : #'Moose-SmalltalkImporter-Core-Tests'
+	#name : 'ImportingContextTest',
+	#superclass : 'TestCase',
+	#category : 'Moose-SmalltalkImporter-Core-Tests',
+	#package : 'Moose-SmalltalkImporter-Core-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 ImportingContextTest >> testAllDependentsOf [
 
 	| res1 res2 |
@@ -19,7 +20,7 @@ ImportingContextTest >> testAllDependentsOf [
 	self assert: (res2 includes: FamixStImporterContext importingImplicitVariable)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 ImportingContextTest >> testShouldComputeTypeOfAttributes [
 	| context |
 
@@ -29,7 +30,7 @@ ImportingContextTest >> testShouldComputeTypeOfAttributes [
 	self assert: (context shouldComputeTypeOfAttributes).
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 ImportingContextTest >> testShouldImportAllTheRest [
 
 	| context |
@@ -42,7 +43,7 @@ ImportingContextTest >> testShouldImportAllTheRest [
 	self assert: context shouldImportClass
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 ImportingContextTest >> testShouldImportClasses [
 
 	| context |
@@ -51,7 +52,7 @@ ImportingContextTest >> testShouldImportClasses [
 	self assert: context shouldImportClass
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 ImportingContextTest >> testShouldImportClassesForInheritance [
 	"when I extract inheritance I should also extract the dependents of inheritance, here class
 	please see that this test is generic and that we can change the dependencies between 
@@ -64,7 +65,7 @@ ImportingContextTest >> testShouldImportClassesForInheritance [
 		do: [:each | self assert: (context shouldImport: each)]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 ImportingContextTest >> testShouldImportClassesForMethod [
 
 	| context |
@@ -73,7 +74,7 @@ ImportingContextTest >> testShouldImportClassesForMethod [
 	self assert: context shouldImportClass
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 ImportingContextTest >> testShouldImportMethodBody [
 	
 	| context |
@@ -82,7 +83,7 @@ ImportingContextTest >> testShouldImportMethodBody [
 	self assert: (context shouldImportMethodBody).
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 ImportingContextTest >> testShouldImportMethodBody2 [
 	
 	| context |
@@ -92,7 +93,7 @@ ImportingContextTest >> testShouldImportMethodBody2 [
 	self assert: (context shouldImportMethodBody).
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 ImportingContextTest >> testShouldImportMethodBodyBasedOnMaximum [
 	
 	| context |

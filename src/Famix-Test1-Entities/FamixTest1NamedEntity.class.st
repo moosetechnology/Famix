@@ -8,14 +8,16 @@
 
 "
 Class {
-	#name : #FamixTest1NamedEntity,
-	#superclass : #FamixTest1Entity,
+	#name : 'FamixTest1NamedEntity',
+	#superclass : 'FamixTest1Entity',
 	#traits : 'FamixTNamedEntity',
 	#classTraits : 'FamixTNamedEntity classTrait',
-	#category : #'Famix-Test1-Entities-Entities'
+	#category : 'Famix-Test1-Entities-Entities',
+	#package : 'Famix-Test1-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTest1NamedEntity class >> annotation [
 
 	<FMClass: #NamedEntity super: #FamixTest1Entity>
@@ -25,14 +27,14 @@ FamixTest1NamedEntity class >> annotation [
 	^ self
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTest1NamedEntity class >> isAbstract [
 
 	<generated>
 	^ self == FamixTest1NamedEntity
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTest1NamedEntity >> isNamedEntity [
 
 	<generated>

@@ -11,14 +11,16 @@
 
 "
 Trait {
-	#name : #FamixTWithSourceLanguages,
+	#name : 'FamixTWithSourceLanguages',
 	#instVars : [
 		'#declaredSourceLanguage => FMOne type: #FamixTSourceLanguage opposite: #sourcedEntities'
 	],
-	#category : #'Famix-Traits-Traits'
+	#category : 'Famix-Traits-SourceLanguage',
+	#package : 'Famix-Traits',
+	#tag : 'SourceLanguage'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTWithSourceLanguages classSide >> annotation [
 
 	<FMClass: #TWithSourceLanguages super: #Object>
@@ -27,7 +29,14 @@ FamixTWithSourceLanguages classSide >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'visitor' }
+FamixTWithSourceLanguages >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTWithSourceLanguages: self
+]
+
+{ #category : 'accessing' }
 FamixTWithSourceLanguages >> declaredSourceLanguage [
 	"Relation named: #declaredSourceLanguage type: #FamixTSourceLanguage opposite: #sourcedEntities"
 
@@ -36,24 +45,24 @@ FamixTWithSourceLanguages >> declaredSourceLanguage [
 	^ declaredSourceLanguage
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithSourceLanguages >> declaredSourceLanguage: anObject [
 
 	<generated>
 	declaredSourceLanguage := anObject
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTWithSourceLanguages >> isUnknown [
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithSourceLanguages >> sourceLanguage [
 	^ self sourceLanguageOr: self unknowSourceLanguageClass
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 FamixTWithSourceLanguages >> sourceLanguageOr: unknownSourceLanguageClass [
 	^ self declaredSourceLanguage ifNil: [
 		self mooseModel 
@@ -61,7 +70,7 @@ FamixTWithSourceLanguages >> sourceLanguageOr: unknownSourceLanguageClass [
 			ifNotNil: #sourceLanguage ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 FamixTWithSourceLanguages >> unknowSourceLanguageClass [
 	^ (self mooseDescription package
 		classNamed: 'UnknownSourceLanguage'

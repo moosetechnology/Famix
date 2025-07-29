@@ -1,20 +1,22 @@
 Class {
-	#name : #MQScopeShouldBeSeclectedReturnNotBooleanValueError,
-	#superclass : #Error,
+	#name : 'MQScopeShouldBeSeclectedReturnNotBooleanValueError',
+	#superclass : 'Error',
 	#instVars : [
 		'stopStrategy'
 	],
-	#category : #'Moose-Query-Exceptions'
+	#category : 'Moose-Query-Exceptions',
+	#package : 'Moose-Query',
+	#tag : 'Exceptions'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MQScopeShouldBeSeclectedReturnNotBooleanValueError class >> stopStrategySignal: aStopStrategy [
 	self new
 		stopStrategy: aStopStrategy;
 		signal
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MQScopeShouldBeSeclectedReturnNotBooleanValueError >> messageText [
 	^ String
 		streamContents: [ :streamContents | 
@@ -23,12 +25,12 @@ MQScopeShouldBeSeclectedReturnNotBooleanValueError >> messageText [
 			streamContents nextPutAll: ' does not return a boolean' ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MQScopeShouldBeSeclectedReturnNotBooleanValueError >> stopStrategy [
 	^ stopStrategy
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MQScopeShouldBeSeclectedReturnNotBooleanValueError >> stopStrategy: anObject [
 	stopStrategy := anObject
 ]

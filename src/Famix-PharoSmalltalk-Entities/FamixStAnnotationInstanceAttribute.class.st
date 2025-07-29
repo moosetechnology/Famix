@@ -5,12 +5,12 @@
 ### Parents
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `parentAnnotationInstance` | `FamixTAnnotationInstanceAttribute` | `attributes` | `FamixTWithAnnotationInstanceAttributes` | The instance of the annotation in which the attribute is used.|
+| `parentAnnotationInstance` | `FamixTAnnotationInstanceAttribute` | `attributes` | `FamixTAnnotationInstance` | The instance of the annotation in which the attribute is used.|
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `annotationTypeAttribute` | `FamixTTypedAnnotationInstanceAttribute` | `annotationAttributeInstances` | `FamixTAnnotationTypeAttribute` | This corresponds to the type of the attribute in an AnnotationInstance|
+| `annotationTypeAttribute` | `FamixTAnnotationInstanceAttribute` | `annotationAttributeInstances` | `FamixTAnnotationTypeAttribute` | This corresponds to the type of the attribute in an AnnotationInstance|
 
 
 ## Properties
@@ -22,14 +22,16 @@
 
 "
 Class {
-	#name : #FamixStAnnotationInstanceAttribute,
-	#superclass : #FamixStSourcedEntity,
-	#traits : 'FamixTAnnotationInstanceAttribute + FamixTTypedAnnotationInstanceAttribute',
-	#classTraits : 'FamixTAnnotationInstanceAttribute classTrait + FamixTTypedAnnotationInstanceAttribute classTrait',
-	#category : #'Famix-PharoSmalltalk-Entities-Entities'
+	#name : 'FamixStAnnotationInstanceAttribute',
+	#superclass : 'FamixStSourcedEntity',
+	#traits : 'FamixTAnnotationInstanceAttribute',
+	#classTraits : 'FamixTAnnotationInstanceAttribute classTrait',
+	#category : 'Famix-PharoSmalltalk-Entities-Entities',
+	#package : 'Famix-PharoSmalltalk-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixStAnnotationInstanceAttribute class >> annotation [
 
 	<FMClass: #AnnotationInstanceAttribute super: #FamixStSourcedEntity>
@@ -38,7 +40,7 @@ FamixStAnnotationInstanceAttribute class >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixStAnnotationInstanceAttribute >> name [
 	^ self annotationTypeAttribute ifNotNil: #name
 ]

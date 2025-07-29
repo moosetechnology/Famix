@@ -3,46 +3,47 @@ MooseTask is an abstract class that define the basic protocol for a Task. Basica
 It can also specify setUp and tearDown actions
 "
 Class {
-	#name : #MooseTask,
-	#superclass : #Object,
+	#name : 'MooseTask',
+	#superclass : 'Object',
 	#instVars : [
 		'progBar',
 		'nb'
 	],
-	#category : #'Moose-Core'
+	#category : 'Moose-Core',
+	#package : 'Moose-Core'
 }
 
-{ #category : #private }
+{ #category : 'private' }
 MooseTask >> basicRun [ 
 	 
 	^self subclassResponsibility
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseTask >> description [ 
 	 
 	^self subclassResponsibility
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MooseTask >> increment [ 
 	 
 	progBar ifNotNil: [	nb := nb + 1. progBar value: nb]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseTask >> length [ 
 	 
 	^self subclassResponsibility
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 MooseTask >> profile [ 
 	 
 	^ TimeProfiler spyOn: [self run]
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 MooseTask >> run [ 
 	 
 	| result | 
@@ -51,21 +52,21 @@ MooseTask >> run [
 	^result
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 MooseTask >> runSelector: aSelector [
 	"Hack to let tasks decide whether to run or runWithProgress (see CompositeTask)"
 	
 	^ self perform: aSelector
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 MooseTask >> runWithProfiler [ 
 	Smalltalk isInteractive 
 		ifTrue: [self profile]
 		ifFalse: [self run]
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 MooseTask >> runWithProgress [ 
 	 
 	| result | 
@@ -80,13 +81,13 @@ MooseTask >> runWithProgress [
 	^result
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MooseTask >> setUp [ 
 	 
 	
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MooseTask >> tearDown [ 
 	 
 	

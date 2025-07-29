@@ -1,28 +1,30 @@
 Trait {
-	#name : #TFamixTest,
+	#name : 'TFamixTest',
 	#instVars : [
 		'entity',
 		'model'
 	],
-	#category : #'Famix-Tests-Traits'
+	#category : 'Famix-Tests-Traits',
+	#package : 'Famix-Tests',
+	#tag : 'Traits'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TFamixTest >> entity [
 	^ entity
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TFamixTest >> entity: anObject [
 	entity := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TFamixTest >> model [
 	^ model
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TFamixTest >> model: anObject [
 	model := anObject
 ]

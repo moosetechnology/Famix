@@ -10,20 +10,22 @@
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `instances` | `FamixTAnnotationType` | `annotationType` | `FamixTTypedAnnotationInstance` | Annotations of this type|
+| `instances` | `FamixTAnnotationType` | `annotationType` | `FamixTAnnotationInstance` | Annotations of this type|
 
 
 
 "
 Class {
-	#name : #FamixTest5AnnotationType1,
-	#superclass : #FamixTest5Entity,
+	#name : 'FamixTest5AnnotationType1',
+	#superclass : 'FamixTest5Entity',
 	#traits : 'FamixTAnnotationType',
 	#classTraits : 'FamixTAnnotationType classTrait',
-	#category : #'Famix-Test5-Entities-Entities'
+	#category : 'Famix-Test5-Entities-Entities',
+	#package : 'Famix-Test5-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTest5AnnotationType1 class >> annotation [
 
 	<FMClass: #AnnotationType1 super: #FamixTest5Entity>

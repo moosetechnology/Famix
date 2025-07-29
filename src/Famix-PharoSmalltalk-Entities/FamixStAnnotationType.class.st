@@ -16,20 +16,22 @@
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `instances` | `FamixTAnnotationType` | `annotationType` | `FamixTTypedAnnotationInstance` | Annotations of this type|
+| `instances` | `FamixTAnnotationType` | `annotationType` | `FamixTAnnotationInstance` | Annotations of this type|
 
 
 
 "
 Class {
-	#name : #FamixStAnnotationType,
-	#superclass : #FamixStNamedEntity,
+	#name : 'FamixStAnnotationType',
+	#superclass : 'FamixStNamedEntity',
 	#traits : 'FamixTAnnotationType + FamixTPackageable + FamixTWithAttributes + TEntityMetaLevelDependency',
 	#classTraits : 'FamixTAnnotationType classTrait + FamixTPackageable classTrait + FamixTWithAttributes classTrait + TEntityMetaLevelDependency classTrait',
-	#category : #'Famix-PharoSmalltalk-Entities-Entities'
+	#category : 'Famix-PharoSmalltalk-Entities-Entities',
+	#package : 'Famix-PharoSmalltalk-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixStAnnotationType class >> annotation [
 
 	<FMClass: #AnnotationType super: #FamixStNamedEntity>
@@ -38,12 +40,12 @@ FamixStAnnotationType class >> annotation [
 	^ self
 ]
 
-{ #category : #compatibility }
+{ #category : 'compatibility' }
 FamixStAnnotationType >> directSubclasses [
 	^ OrderedCollection new
 ]
 
-{ #category : #compatibility }
+{ #category : 'compatibility' }
 FamixStAnnotationType >> hierarchyNestingLevel [ 
 
 	^ 1

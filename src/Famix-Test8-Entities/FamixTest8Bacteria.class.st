@@ -17,14 +17,16 @@
 
 "
 Class {
-	#name : #FamixTest8Bacteria,
-	#superclass : #FamixTest8LivingBeing,
+	#name : 'FamixTest8Bacteria',
+	#superclass : 'FamixTest8LivingBeing',
 	#traits : 'FamixTest8TInfectable',
 	#classTraits : 'FamixTest8TInfectable classTrait',
-	#category : #'Famix-Test8-Entities-Entities'
+	#category : 'Famix-Test8-Entities-Entities',
+	#package : 'Famix-Test8-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTest8Bacteria class >> annotation [
 
 	<FMClass: #Bacteria super: #FamixTest8LivingBeing>

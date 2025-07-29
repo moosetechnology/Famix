@@ -13,17 +13,25 @@
 | `entities` | `FamixTFile` | `containerFiles` | `FamixTWithFiles` | List of entities defined in the file|
 
 
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+|---|
+| `name` | `String` | nil | Basic name of the entity, not full reference.|
 
 "
 Class {
-	#name : #FamixTest1File,
-	#superclass : #FamixTest1NamedEntity,
+	#name : 'FamixTest1File',
+	#superclass : 'FamixTest1NamedEntity',
 	#traits : 'FamixTFile',
 	#classTraits : 'FamixTFile classTrait',
-	#category : #'Famix-Test1-Entities-Entities'
+	#category : 'Famix-Test1-Entities-Entities',
+	#package : 'Famix-Test1-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTest1File class >> annotation [
 
 	<FMClass: #File super: #FamixTest1NamedEntity>

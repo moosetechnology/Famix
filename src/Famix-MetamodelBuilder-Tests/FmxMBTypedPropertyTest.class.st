@@ -1,10 +1,12 @@
 Class {
-	#name : #FmxMBTypedPropertyTest,
-	#superclass : #FmxMBPropertyTest,
-	#category : #'Famix-MetamodelBuilder-Tests'
+	#name : 'FmxMBTypedPropertyTest',
+	#superclass : 'FmxMBPropertyTest',
+	#category : 'Famix-MetamodelBuilder-Tests-Tests',
+	#package : 'Famix-MetamodelBuilder-Tests',
+	#tag : 'Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBTypedPropertyTest >> testDoubleQuotesInPropertyComment [
 
 	"test a case when the property comment contains doubled quotes"
@@ -25,7 +27,7 @@ FmxMBTypedPropertyTest >> testDoubleQuotesInPropertyComment [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBTypedPropertyTest >> testMultivalued [
 
 	"test if typed properties can be multivalued"

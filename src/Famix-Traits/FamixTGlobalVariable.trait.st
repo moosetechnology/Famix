@@ -10,6 +10,11 @@ FamixTGlobalVariable represents a global variable in the source code.
 |---|
 | `parentScope` | `FamixTGlobalVariable` | `globalVariables` | `FamixTWithGlobalVariables` | Scope declaring the global variable. belongsTo implementation|
 
+### Outgoing dependencies
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `typing` | `FamixTTypedEntity` | `typedEntity` | `FamixTEntityTyping` | Association linking this entity to its declared type.|
+
 ### Incoming dependencies
 | Relation | Origin | Opposite | Type | Comment |
 |---|
@@ -18,7 +23,6 @@ FamixTGlobalVariable represents a global variable in the source code.
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `declaredType` | `FamixTTypedEntity` | `typedEntities` | `FamixTType` | Type of the entity, if any|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
 
 
@@ -32,16 +36,18 @@ FamixTGlobalVariable represents a global variable in the source code.
 
 "
 Trait {
-	#name : #FamixTGlobalVariable,
+	#name : 'FamixTGlobalVariable',
 	#instVars : [
 		'#parentScope => FMOne type: #FamixTWithGlobalVariables opposite: #globalVariables'
 	],
 	#traits : 'FamixTStructuralEntity',
 	#classTraits : 'FamixTStructuralEntity classTrait',
-	#category : #'Famix-Traits-GlobalVariable'
+	#category : 'Famix-Traits-GlobalVariable',
+	#package : 'Famix-Traits',
+	#tag : 'GlobalVariable'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTGlobalVariable classSide >> annotation [
 
 	<FMClass: #TGlobalVariable super: #Object>
@@ -50,21 +56,28 @@ FamixTGlobalVariable classSide >> annotation [
 	^ self
 ]
 
-{ #category : #groups }
+{ #category : 'groups' }
 FamixTGlobalVariable classSide >> annotationFamixGlobalVariableGroup [
 	<generated>
 	<mooseGroup>
 	^ FamixGlobalVariableGroup
 ]
 
-{ #category : #testing }
+{ #category : 'visitor' }
+FamixTGlobalVariable >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTGlobalVariable: self
+]
+
+{ #category : 'testing' }
 FamixTGlobalVariable >> isGlobalVariable [
 
 	<generated>
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTGlobalVariable >> parentScope [
 	"Relation named: #parentScope type: #FamixTWithGlobalVariables opposite: #globalVariables"
 
@@ -74,14 +87,14 @@ FamixTGlobalVariable >> parentScope [
 	^ parentScope
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTGlobalVariable >> parentScope: anObject [
 
 	<generated>
 	parentScope := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FamixTGlobalVariable >> parentScopeGroup [
 	<generated>
 	<navigation: 'ParentScope'>

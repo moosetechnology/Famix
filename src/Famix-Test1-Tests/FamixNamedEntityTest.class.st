@@ -1,17 +1,18 @@
 Class {
-	#name : #FamixNamedEntityTest,
-	#superclass : #FamixTest1SimpleModelTest,
-	#category : #'Famix-Test1-Tests'
+	#name : 'FamixNamedEntityTest',
+	#superclass : 'FamixTest1SimpleModelTest',
+	#category : 'Famix-Test1-Tests',
+	#package : 'Famix-Test1-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixNamedEntityTest >> testHasUniqueMooseNameInModel [
 
 	self assert: c1 hasUniqueMooseNameInModel.	
 	self assert: c2 hasUniqueMooseNameInModel.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixNamedEntityTest >> testMooseNameOn [
 
 	| newEntity |
@@ -24,7 +25,7 @@ FamixNamedEntityTest >> testMooseNameOn [
 	self assert: (String streamContents: [ :s | newEntity mooseNameOn: s ]) equals: 'NewEntity'.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixNamedEntityTest >> testName [
 
 	self assert: c1 name equals: 'Class1'.
@@ -33,7 +34,7 @@ FamixNamedEntityTest >> testName [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixNamedEntityTest >> testNameResetsNameOfChildren [
 
 	self assert: m1 mooseName equals: 'Class1.method1'.
@@ -43,7 +44,7 @@ FamixNamedEntityTest >> testNameResetsNameOfChildren [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixNamedEntityTest >> testResetMooseName [
 
 	"more or less a smoke test"

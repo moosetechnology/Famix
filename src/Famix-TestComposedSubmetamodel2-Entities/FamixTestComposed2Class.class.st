@@ -22,7 +22,8 @@
 ### Incoming dependencies
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `incomingReferences` | `FamixTReferenceable` | `referredType` | `FamixTReference` | References to this entity by other entities.|
+| `incomingReferences` | `FamixTReferenceable` | `referredEntity` | `FamixTReference` | References to this entity by other entities.|
+| `incomingTypings` | `FamixTType` | `declaredType` | `FamixTEntityTyping` | Relations to the entities that have this as type.|
 | `subInheritances` | `FamixTWithInheritances` | `superclass` | `FamixTInheritance` | Subinheritance relationships, i.e. known subclasses of this type.|
 
 ### Other
@@ -30,7 +31,6 @@
 |---|
 | `receivingInvocations` | `FamixTInvocationsReceiver` | `receiver` | `FamixTInvocation` | List of invocations performed on this entity (considered as the receiver)|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
-| `typedEntities` | `FamixTType` | `declaredType` | `FamixTTypedEntity` | Entities that have this type as declaredType|
 
 
 ## Properties
@@ -43,14 +43,16 @@
 
 "
 Class {
-	#name : #FamixTestComposed2Class,
-	#superclass : #FamixTestComposed2NamedEntity,
+	#name : 'FamixTestComposed2Class',
+	#superclass : 'FamixTestComposed2NamedEntity',
 	#traits : 'FamixTClass',
 	#classTraits : 'FamixTClass classTrait',
-	#category : #'Famix-TestComposedSubmetamodel2-Entities-Entities'
+	#category : 'Famix-TestComposedSubmetamodel2-Entities-Entities',
+	#package : 'Famix-TestComposedSubmetamodel2-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTestComposed2Class class >> annotation [
 
 	<FMClass: #Class super: #FamixTestComposed2NamedEntity>

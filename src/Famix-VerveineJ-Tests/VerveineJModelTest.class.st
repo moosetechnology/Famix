@@ -1,40 +1,41 @@
 Class {
-	#name : #VerveineJModelTest,
-	#superclass : #TestCase,
+	#name : 'VerveineJModelTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'model'
 	],
-	#category : #'Famix-VerveineJ-Tests'
+	#category : 'Famix-VerveineJ-Tests',
+	#package : 'Famix-VerveineJ-Tests'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 VerveineJModelTest class >> resources [
 	^ {VerveineJTestResource}
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 VerveineJModelTest >> setUp [
 
 	super setUp.
 	model := VerveineJTestResource current model
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 VerveineJModelTest >> testCyclomaticComplexity [
-	self assert: (model allMethods entityNamed: #'moose::lan::server::PrintServer.output(Packet)') cyclomaticComplexity equals: 2
+	self assert: (model allMethods entityNamed: #'moose.lan.server.PrintServer.output(Packet)') cyclomaticComplexity equals: 2
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 VerveineJModelTest >> testNumberOfLinesOfCode [
-	self assert: (model allMethods entityNamed: #'moose::lan::server::PrintServer.output(Packet)') numberOfLinesOfCode equals: 9
+	self assert: (model allMethods entityNamed: #'moose.lan.server.PrintServer.output(Packet)') numberOfLinesOfCode equals: 9
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 VerveineJModelTest >> testNumberOfStatements [
 
 	self
 		assert: (model allMethods entityNamed:
-				 #'moose::lan::server::PrintServer.output(Packet)')
+				 #'moose.lan.server.PrintServer.output(Packet)')
 				numberOfStatements
 		equals: MooseUnavailableMetric
 ]

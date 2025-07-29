@@ -1,6 +1,6 @@
 Class {
-	#name : #FamixJavaTest,
-	#superclass : #TestCase,
+	#name : 'FamixJavaTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'pkg1',
 		'pkg2',
@@ -15,10 +15,11 @@ Class {
 		'cls2',
 		'meth2'
 	],
-	#category : #'Famix-Java-Tests'
+	#category : 'Famix-Java-Tests',
+	#package : 'Famix-Java-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 FamixJavaTest >> setUp [
 
 	super setUp.
@@ -42,7 +43,7 @@ FamixJavaTest >> setUp [
 	model addAll: { cls. meth. att . pkg1 . pkg2 . subPkg . subPkg2 . subSubPkg }. 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaTest >> testImportAnnotations [
 	| model |
 	model := FamixJavaModel new.
@@ -68,15 +69,15 @@ FamixJavaTest >> testImportAnnotations [
 		do: [ :i | 
 			self assert: (i annotationType instances includes: i).
 			self assert: (i annotatedEntity annotationInstances includes: i) ].
-	self assert: (model allAnnotationTypes entityNamed: #'aPackage::AnAnnotation') instances size equals: 2.
-	self assert: (model allAnnotationTypes entityNamed: #'aPackage::AnotherAnnotation') instances size equals: 1.
+	self assert: (model allAnnotationTypes entityNamed: #'aPackage.AnAnnotation') instances size equals: 2.
+	self assert: (model allAnnotationTypes entityNamed: #'aPackage.AnotherAnnotation') instances size equals: 1.
 	model allAnnotationTypes
 		do: [ :each | 
 			self assert: (each typeContainer definedAnnotationTypes includes: each).
 			self assert: each typeContainer identicalTo: each belongsTo ]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaTest >> testImportExceptions [
 	| model method1 method2 method3 exceptionA exceptionB |
 	model := FamixJavaModel new.
@@ -120,18 +121,7 @@ FamixJavaTest >> testImportExceptions [
 	self assertCollection: exceptionA throwingEntities  hasSameElements: { method2 }.
 ]
 
-{ #category : #tests }
-FamixJavaTest >> testInferNamespaces [
-	| model |
-	model  := FamixJavaModel new.
-	model add: (FamixJavaPackage new name: 'org.project.package1').
-	model add: (FamixJavaPackage new name: 'org.project.package2').
-	self assert: model allPackages size equals: 2.
-	model inferPackageParentsBasedOnNames.
-	self assert: model allPackages size equals: 4
-]
-
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaTest >> testIsTopLevelPackage [
 
 	self assert: model allPackages size equals: 5.
@@ -142,12 +132,12 @@ FamixJavaTest >> testIsTopLevelPackage [
 	self deny: subSubPkg isTopLevelPackage .
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaTest >> testModelImportableFromFile [
 	self assert: FamixJavaModel canBeImportedFromFile
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaTest >> testTopLevelPackage [
 
 	self assert: model allPackages size equals: 5.
@@ -158,7 +148,7 @@ FamixJavaTest >> testTopLevelPackage [
 	self assert: subSubPkg topLevelPackage equals: subPkg .
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaTest >> testTopLevelPackageForOtherEntities [
 
 	self assert: cls topLevelPackage equals: subPkg .

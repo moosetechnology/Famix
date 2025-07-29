@@ -5,14 +5,16 @@ Description
 Result of a navigation query for the incoming associations of an entity.
 "
 Class {
-	#name : #MooseIncomingQueryResult,
-	#superclass : #MooseQueryResult,
+	#name : 'MooseIncomingQueryResult',
+	#superclass : 'MooseQueryResult',
 	#traits : 'TDependencyQueryResult',
 	#classTraits : 'TDependencyQueryResult classTrait',
-	#category : #'Moose-Query-Navigating'
+	#category : 'Moose-Query-Navigating',
+	#package : 'Moose-Query',
+	#tag : 'Navigating'
 }
 
-{ #category : #private }
+{ #category : 'private' }
 MooseIncomingQueryResult >> opposite: aDependency [
 	^ aDependency source
 ]

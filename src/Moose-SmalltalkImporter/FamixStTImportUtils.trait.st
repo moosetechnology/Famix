@@ -4,45 +4,47 @@ I am a trait used by the smalltalk importers adding some utilities to avoid dupl
 I save a collection of classes. I hold a factory to create FamixStEntities. And I hold an importing context to know which kind of entities I should create.
 "
 Trait {
-	#name : #FamixStTImportUtils,
+	#name : 'FamixStTImportUtils',
 	#instVars : [
 		'importingContext',
 		'factory',
 		'classes'
 	],
-	#category : #'Moose-SmalltalkImporter-Importers'
+	#category : 'Moose-SmalltalkImporter-Importers',
+	#package : 'Moose-SmalltalkImporter',
+	#tag : 'Importers'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixStTImportUtils >> classes [
 
 	^ classes
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixStTImportUtils >> defaultImportingContext [
 	^ FamixStImporterContext new importMaximum
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixStTImportUtils >> factory [
 
 	^ factory
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixStTImportUtils >> factory: anObject [
 
 	factory := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixStTImportUtils >> importingContext [
 
 	^ importingContext ifNil: [ importingContext := self defaultImportingContext ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixStTImportUtils >> importingContext: anObject [
 
 	importingContext := anObject

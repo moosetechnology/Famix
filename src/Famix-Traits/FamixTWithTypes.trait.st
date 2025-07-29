@@ -11,14 +11,16 @@
 
 "
 Trait {
-	#name : #FamixTWithTypes,
+	#name : 'FamixTWithTypes',
 	#instVars : [
 		'#types => FMMany type: #FamixTType opposite: #typeContainer'
 	],
-	#category : #'Famix-Traits-Type'
+	#category : 'Famix-Traits-Type',
+	#package : 'Famix-Traits',
+	#tag : 'Type'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTWithTypes classSide >> annotation [
 
 	<FMClass: #TWithTypes super: #Object>
@@ -27,12 +29,19 @@ FamixTWithTypes classSide >> annotation [
 	^ self
 ]
 
-{ #category : #adding }
+{ #category : 'visitor' }
+FamixTWithTypes >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTWithTypes: self
+]
+
+{ #category : 'adding' }
 FamixTWithTypes >> addType: aType [ 
 	types add: aType
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithTypes >> allRecursiveTypes [
 	"Retrieves all nested types recursively"
 	
@@ -42,7 +51,7 @@ FamixTWithTypes >> allRecursiveTypes [
 	^ result
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithTypes >> allRecursiveTypesDo: aBlock [
 	"Traverses all nested types recursively"
 
@@ -51,7 +60,7 @@ FamixTWithTypes >> allRecursiveTypesDo: aBlock [
 		each allRecursiveTypesDo: aBlock ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithTypes >> types [
 	"Relation named: #types type: #FamixTType opposite: #typeContainer"
 
@@ -62,7 +71,7 @@ FamixTWithTypes >> types [
 	^ types
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithTypes >> types: anObject [
 
 	<generated>

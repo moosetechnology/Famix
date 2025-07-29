@@ -24,6 +24,7 @@ A FamixTMethod is always contained in a parentType.
 | `accesses` | `FamixTWithAccesses` | `accessor` | `FamixTAccess` | Accesses to variables made by this behaviour.|
 | `outgoingInvocations` | `FamixTWithInvocations` | `sender` | `FamixTInvocation` | Outgoing invocations sent by this behaviour.|
 | `outgoingReferences` | `FamixTWithReferences` | `referencer` | `FamixTReference` | References from this entity to other entities.|
+| `typing` | `FamixTTypedEntity` | `typedEntity` | `FamixTEntityTyping` | Association linking this entity to its declared type.|
 
 ### Incoming dependencies
 | Relation | Origin | Opposite | Type | Comment |
@@ -33,7 +34,6 @@ A FamixTMethod is always contained in a parentType.
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `declaredType` | `FamixTTypedEntity` | `typedEntities` | `FamixTType` | Type of the entity, if any|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
 
 
@@ -48,16 +48,18 @@ A FamixTMethod is always contained in a parentType.
 
 "
 Trait {
-	#name : #FamixTMethod,
+	#name : 'FamixTMethod',
 	#instVars : [
 		'#parentType => FMOne type: #FamixTWithMethods opposite: #methods'
 	],
 	#traits : 'FamixTHasSignature + FamixTInvocable + FamixTMethodMetrics + FamixTNamedEntity + FamixTTypedEntity + FamixTWithImplicitVariables + FamixTWithLocalVariables + FamixTWithParameters + FamixTWithStatements + TEntityMetaLevelDependency',
 	#classTraits : 'FamixTHasSignature classTrait + FamixTInvocable classTrait + FamixTMethodMetrics classTrait + FamixTNamedEntity classTrait + FamixTTypedEntity classTrait + FamixTWithImplicitVariables classTrait + FamixTWithLocalVariables classTrait + FamixTWithParameters classTrait + FamixTWithStatements classTrait + TEntityMetaLevelDependency classTrait',
-	#category : #'Famix-Traits-Behavioral'
+	#category : 'Famix-Traits-Behavioral',
+	#package : 'Famix-Traits',
+	#tag : 'Behavioral'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTMethod classSide >> annotation [
 
 	<FMClass: #TMethod super: #Object>
@@ -66,14 +68,21 @@ FamixTMethod classSide >> annotation [
 	^ self
 ]
 
-{ #category : #groups }
+{ #category : 'groups' }
 FamixTMethod classSide >> annotationFamixMethodGroup [
 	<generated>
 	<mooseGroup>
 	^ FamixMethodGroup
 ]
 
-{ #category : #accessing }
+{ #category : 'visitor' }
+FamixTMethod >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTMethod: self
+]
+
+{ #category : 'accessing' }
 FamixTMethod >> firstOverridingMethods [
 
 	| overridingMethods |
@@ -83,7 +92,12 @@ FamixTMethod >> firstOverridingMethods [
 	^ overridingMethods
 ]
 
-{ #category : #testing }
+{ #category : 'asserting' }
+FamixTMethod >> isAccessor [
+	^ self isSetter or: [ self isGetter ]
+]
+
+{ #category : 'testing' }
 FamixTMethod >> isDelegating [
 
 	^ (self outgoingInvocations flatCollect: #target) anySatisfy: [ :each | 
@@ -91,7 +105,7 @@ FamixTMethod >> isDelegating [
 			  (each isInSameClassAs: self) not ] ] 
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTMethod >> isExtending [
 
 	^ (self outgoingInvocations reject: [ :each | each receiver isNil ]) 
@@ -100,20 +114,20 @@ FamixTMethod >> isExtending [
 				  (each candidates collect: #signature) includes: self signature ] ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTMethod >> isInSameClassAs: aMethod [
 
 	^ aMethod parentType == self parentType
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTMethod >> isMethod [
 
 	<generated>
 	^ true
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixTMethod >> mooseNameOn: stream [
 	self parentType
 		ifNotNil: [ :parent | 
@@ -124,7 +138,7 @@ FamixTMethod >> mooseNameOn: stream [
 		ifNil: [ self name ifNotNil: [ :aName | stream nextPutAll: aName ] ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTMethod >> overridingMethods [
 
 	| overridingMethods |
@@ -134,7 +148,7 @@ FamixTMethod >> overridingMethods [
 	^ overridingMethods
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTMethod >> parentType [
 	"Relation named: #parentType type: #FamixTWithMethods opposite: #methods"
 
@@ -144,7 +158,7 @@ FamixTMethod >> parentType [
 	^ parentType
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTMethod >> parentType: anObject [
 
 	parentType := anObject.
@@ -152,14 +166,14 @@ FamixTMethod >> parentType: anObject [
 
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FamixTMethod >> parentTypeGroup [
 	<generated>
 	<navigation: 'ParentType'>
 	^ MooseSpecializedGroup with: self parentType
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTMethod >> parentTypeIsStub [
 
 	^ self parentType ifNotNil: [ :e | e isStub ] ifNil: [ true ]

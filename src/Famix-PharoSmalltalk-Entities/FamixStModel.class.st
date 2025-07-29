@@ -1,31 +1,33 @@
 Class {
-	#name : #FamixStModel,
-	#superclass : #MooseModel,
+	#name : 'FamixStModel',
+	#superclass : 'MooseModel',
 	#traits : 'FamixStTEntityCreator',
 	#classTraits : 'FamixStTEntityCreator classTrait',
-	#category : #'Famix-PharoSmalltalk-Entities-Model'
+	#category : 'Famix-PharoSmalltalk-Entities-Model',
+	#package : 'Famix-PharoSmalltalk-Entities',
+	#tag : 'Model'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixStModel class >> allSubmetamodelsPackagesNames [
 	<generated>
 	^ #(#'Moose-Query' #'Famix-Traits')
 ]
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixStModel class >> annotation [
 	<FMClass: #FamixStModel super: #MooseModel>
 	<package: #'Famix-PharoSmalltalk-Entities'>
 	<generated>
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixStModel class >> canBeImportedFromFile [
 	<generated>
 	^true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixStModel class >> importingContextClass [
 
 	<generated>

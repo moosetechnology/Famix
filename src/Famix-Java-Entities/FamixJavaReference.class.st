@@ -10,7 +10,7 @@
 ### Association target
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `referredType` | `FamixTReference` | `incomingReferences` | `FamixTReferenceable` | Target entity referenced. to-side of the association|
+| `referredEntity` | `FamixTReference` | `incomingReferences` | `FamixTReferenceable` | Target entity referenced. to-side of the association|
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
@@ -20,23 +20,19 @@
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
 
 
-## Properties
-======================
-
-| Name | Type | Default value | Comment |
-|---|
-| `isStub` | `Boolean` | false | Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.|
 
 "
 Class {
-	#name : #FamixJavaReference,
-	#superclass : #FamixJavaEntity,
+	#name : 'FamixJavaReference',
+	#superclass : 'FamixJavaEntity',
 	#traits : 'FamixTReference',
 	#classTraits : 'FamixTReference classTrait',
-	#category : #'Famix-Java-Entities-Entities'
+	#category : 'Famix-Java-Entities-Entities',
+	#package : 'Famix-Java-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixJavaReference class >> annotation [
 
 	<FMClass: #Reference super: #FamixJavaEntity>
@@ -45,7 +41,14 @@ FamixJavaReference class >> annotation [
 	^ self
 ]
 
-{ #category : #printing }
+{ #category : 'visitor' }
+FamixJavaReference >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaReference: self
+]
+
+{ #category : 'printing' }
 FamixJavaReference >> mooseNameOn: aStream [
 	"aStream nextPutAll: 'Reference'."
 
@@ -54,7 +57,7 @@ FamixJavaReference >> mooseNameOn: aStream [
 	self target ifNotNil: [ aStream nextPutAll: self target name ]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixJavaReference >> printOn: aStream [
 	super printOn: aStream.
 	aStream nextPutAll: ' (Reference)'

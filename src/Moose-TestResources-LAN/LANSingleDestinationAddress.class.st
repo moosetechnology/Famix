@@ -1,37 +1,38 @@
 Class {
-	#name : #LANSingleDestinationAddress,
-	#superclass : #LANAbstractDestinationAddress,
+	#name : 'LANSingleDestinationAddress',
+	#superclass : 'LANAbstractDestinationAddress',
 	#instVars : [
 		'id'
 	],
-	#category : #'Moose-TestResources-LAN'
+	#category : 'Moose-TestResources-LAN',
+	#package : 'Moose-TestResources-LAN'
 }
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 LANSingleDestinationAddress >> equalsMultiple: aSingleNodeAddress [ 
 	 
 	^self halt
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 LANSingleDestinationAddress >> equalsSingle: aSingleNodeAddress [ 
 	 
 	^self id = aSingleNodeAddress id
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LANSingleDestinationAddress >> id [ 
 	 
 	^id
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LANSingleDestinationAddress >> id: aSymbol [ 
 	 
 	id := aSymbol
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 LANSingleDestinationAddress >> isDestinationFor: aNodeAddress [ 
 	 
 	^aNodeAddress equalsSingle: self

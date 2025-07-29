@@ -11,14 +11,16 @@
 
 "
 Trait {
-	#name : #FamixTest8TBiotope,
+	#name : 'FamixTest8TBiotope',
 	#instVars : [
 		'#incomingResidences => FMMany type: #FamixTest8Residence opposite: #biotope'
 	],
-	#category : #'Famix-Test8-Entities-Traits'
+	#category : 'Famix-Test8-Entities-Traits',
+	#package : 'Famix-Test8-Entities',
+	#tag : 'Traits'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTest8TBiotope classSide >> annotation [
 
 	<FMClass: #TBiotope super: #Object>
@@ -27,13 +29,13 @@ FamixTest8TBiotope classSide >> annotation [
 	^ self
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTest8TBiotope >> addIncomingResidence: anObject [
 	<generated>
 	^ self incomingResidences add: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest8TBiotope >> incomingResidences [
 	"Relation named: #incomingResidences type: #FamixTest8Residence opposite: #biotope"
 
@@ -42,7 +44,7 @@ FamixTest8TBiotope >> incomingResidences [
 	^ incomingResidences
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest8TBiotope >> incomingResidences: anObject [
 
 	<generated>

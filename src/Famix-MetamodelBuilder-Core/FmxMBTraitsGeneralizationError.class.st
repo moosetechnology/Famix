@@ -1,10 +1,12 @@
 Class {
-	#name : #FmxMBTraitsGeneralizationError,
-	#superclass : #Error,
-	#category : #'Famix-MetamodelBuilder-Core-Implementation'
+	#name : 'FmxMBTraitsGeneralizationError',
+	#superclass : 'Error',
+	#category : 'Famix-MetamodelBuilder-Core-Implementation',
+	#package : 'Famix-MetamodelBuilder-Core',
+	#tag : 'Implementation'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBTraitsGeneralizationError >> messageText [
 
 	<ignoreForCoverage>

@@ -2,32 +2,34 @@
 I show annotationTypes and the entities annotated with their instances.
 "
 Class {
-	#name : #FamixAnnotationTypeGroupConstellation,
-	#superclass : #MooseAbstractVisualization,
+	#name : 'FamixAnnotationTypeGroupConstellation',
+	#superclass : 'MooseAbstractVisualization',
 	#instVars : [
 		'famixAnnotationTypeGroup'
 	],
-	#category : #'Famix-Visualizations-Core'
+	#category : 'Famix-Visualizations-Core',
+	#package : 'Famix-Visualizations',
+	#tag : 'Core'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixAnnotationTypeGroupConstellation class >> defaultTitle [
 	^ 'Annotations constellation'
 ]
 
-{ #category : #public }
+{ #category : 'public' }
 FamixAnnotationTypeGroupConstellation class >> forAnnotationTypeGroup: aFamixAnnotationTypeGroup [
 	^ self new
 		famixAnnotationTypeGroup: aFamixAnnotationTypeGroup;
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixAnnotationTypeGroupConstellation class >> icon [
 	^ MooseIcons mooseDependencies
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 FamixAnnotationTypeGroupConstellation >> build [
 	| containerNodes annotationLabels |
 	containerNodes := self buildAnnotationContainerNodes.
@@ -38,7 +40,7 @@ FamixAnnotationTypeGroupConstellation >> build [
 	super build
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 FamixAnnotationTypeGroupConstellation >> buildAnnotationContainerNodes [
 	| annotationContainers nodes |
 	annotationContainers := famixAnnotationTypeGroup
@@ -50,7 +52,7 @@ FamixAnnotationTypeGroupConstellation >> buildAnnotationContainerNodes [
 	^ nodes
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 FamixAnnotationTypeGroupConstellation >> buildAnnotationTypeLabels [
 	| labels |
 	labels := famixAnnotationTypeGroup
@@ -60,7 +62,7 @@ FamixAnnotationTypeGroupConstellation >> buildAnnotationTypeLabels [
 	^ labels
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 FamixAnnotationTypeGroupConstellation >> buildLegend [
 	| legend |
 	legend := RSLegend new.
@@ -73,7 +75,7 @@ FamixAnnotationTypeGroupConstellation >> buildLegend [
 	legend build
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 FamixAnnotationTypeGroupConstellation >> connectLabels: annotationLabels toNodes: containerNodes [
 	RSLineBuilder line
 		fromShapes: annotationLabels;
@@ -83,12 +85,12 @@ FamixAnnotationTypeGroupConstellation >> connectLabels: annotationLabels toNodes
 				[ :annotationType | annotationType instances collect: #annotatedEntity ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FamixAnnotationTypeGroupConstellation >> famixAnnotationTypeGroup: aFamixAnnotationTypeGroup [
 	famixAnnotationTypeGroup := aFamixAnnotationTypeGroup
 ]
 
-{ #category : #shapes }
+{ #category : 'shapes' }
 FamixAnnotationTypeGroupConstellation >> labelForAnnotationType: annotationType [
 	^ (RSLabel text: annotationType name model: annotationType)
 		draggable;
@@ -96,12 +98,12 @@ FamixAnnotationTypeGroupConstellation >> labelForAnnotationType: annotationType 
 		yourself
 ]
 
-{ #category : #shapes }
+{ #category : 'shapes' }
 FamixAnnotationTypeGroupConstellation >> nodeColor [
 	^ Color lightGray
 ]
 
-{ #category : #shapes }
+{ #category : 'shapes' }
 FamixAnnotationTypeGroupConstellation >> nodeForAnnotatedEntity: entity [
 	^ RSCircle new
 		model: entity;

@@ -1,29 +1,30 @@
 Class {
-	#name : #MoosePharoImporterTaskOnLANTest,
-	#superclass : #TestCase,
-	#category : #'Moose-SmalltalkImporter-LAN-Tests'
+	#name : 'MoosePharoImporterTaskOnLANTest',
+	#superclass : 'TestCase',
+	#category : 'Moose-SmalltalkImporter-LAN-Tests',
+	#package : 'Moose-SmalltalkImporter-LAN-Tests'
 }
 
-{ #category : #'testing collecting classes' }
+{ #category : 'testing collecting classes' }
 MoosePharoImporterTaskOnLANTest >> numberOfClassesIn: packageNames [
 
 	^ ((self packageOrganizer packages select: [ :package | packageNames anySatisfy: [ :packageName | packageName match: package name ] ]) flatCollect: [ :package |
 		   package definedClasses ]) size
 ]
 
-{ #category : #'testing collecting classes' }
+{ #category : 'testing collecting classes' }
 MoosePharoImporterTaskOnLANTest >> testFromPackageNamed [
 
 	self assert: ((FamixStPharoImporterTask new addFromPackageNamed: #'Moose-TestResources-LAN') classes includes: LANNode)
 ]
 
-{ #category : #'testing collecting classes' }
+{ #category : 'testing collecting classes' }
 MoosePharoImporterTaskOnLANTest >> testFromPackagesMatching [
 
 	self assert: ((FamixStPharoImporterTask new addFromPackagesMatching: [ :each | each name = #'Moose-TestResources-LAN' ]) classes includes: LANNode)
 ]
 
-{ #category : #'testing collecting classes' }
+{ #category : 'testing collecting classes' }
 MoosePharoImporterTaskOnLANTest >> testFromPackagesMatching2 [
 
 	self
@@ -31,7 +32,7 @@ MoosePharoImporterTaskOnLANTest >> testFromPackagesMatching2 [
 		equals: (self numberOfClassesIn: #( 'Moose-TestResources-LA*' ))
 ]
 
-{ #category : #'test importing' }
+{ #category : 'test importing' }
 MoosePharoImporterTaskOnLANTest >> testImportClassUsingAddCategory [
 
 	| model |
@@ -43,7 +44,7 @@ MoosePharoImporterTaskOnLANTest >> testImportClassUsingAddCategory [
 	self assert: model allClasses size equals: (self numberOfClassesIn: #( 'Moose-TestResources-LAN' )) * 2
 ]
 
-{ #category : #'test importing' }
+{ #category : 'test importing' }
 MoosePharoImporterTaskOnLANTest >> testImportClassUsingAddClass [
 
 	| model |
@@ -55,7 +56,7 @@ MoosePharoImporterTaskOnLANTest >> testImportClassUsingAddClass [
 	self assert: model allClasses size equals: LANNode subclasses size + 1 * 2
 ]
 
-{ #category : #'test importing' }
+{ #category : 'test importing' }
 MoosePharoImporterTaskOnLANTest >> testImportClassUsingAddPackage [
 
 	| model |
@@ -67,7 +68,7 @@ MoosePharoImporterTaskOnLANTest >> testImportClassUsingAddPackage [
 	self assert: model allClasses size equals: 2 * (self packageOrganizer packageNamed: #'Moose-TestResources-LAN') definedClasses size
 ]
 
-{ #category : #'test importing' }
+{ #category : 'test importing' }
 MoosePharoImporterTaskOnLANTest >> testImportClassUsingAddPackageNamed [
 
 	| model |

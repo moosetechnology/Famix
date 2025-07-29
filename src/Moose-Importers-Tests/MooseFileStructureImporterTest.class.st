@@ -1,42 +1,43 @@
 Class {
-	#name : #MooseFileStructureImporterTest,
-	#superclass : #TestCase,
+	#name : 'MooseFileStructureImporterTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'model',
 		'toDelete'
 	],
-	#category : #'Moose-Importers-Tests'
+	#category : 'Moose-Importers-Tests',
+	#package : 'Moose-Importers-Tests'
 }
 
-{ #category : #setup }
+{ #category : 'setup' }
 MooseFileStructureImporterTest >> createDirectory: aString [
 	self toDelete addFirst: aString.
 	^ (self filesystem ensureCreateDirectory: (self filesystem pathFromString: aString))
 ]
 
-{ #category : #setup }
+{ #category : 'setup' }
 MooseFileStructureImporterTest >> createEmptyFileNamed: aString [
 	self toDelete addFirst: aString.
 	aString asFileReference ensureCreateFile
 ]
 
-{ #category : #setup }
+{ #category : 'setup' }
 MooseFileStructureImporterTest >> createFileNamed: aString content: aBlock [
 	self toDelete addFirst: aString.
 	aString asFileReference writeStreamDo: aBlock
 ]
 
-{ #category : #setup }
+{ #category : 'setup' }
 MooseFileStructureImporterTest >> filesystem [
 	^ FileSystem disk
 ]
 
-{ #category : #setup }
+{ #category : 'setup' }
 MooseFileStructureImporterTest >> foldersString [
 	^ 'folders/'
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 MooseFileStructureImporterTest >> setUp [
 	super setUp.
 	toDelete := OrderedCollection new.
@@ -68,23 +69,23 @@ MooseFileStructureImporterTest >> setUp [
 		completeImport: (OrderedCollection with: 'folders')
 ]
 
-{ #category : #setup }
+{ #category : 'setup' }
 MooseFileStructureImporterTest >> subFolderAString [
 	^ 'folders/subfolderA/'
 ]
 
-{ #category : #setup }
+{ #category : 'setup' }
 MooseFileStructureImporterTest >> subFolderBString [
 	^ 'folders/subfolderB/'
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 MooseFileStructureImporterTest >> tearDown [
 	toDelete do: [ :each | self filesystem delete: each ].
 	super tearDown
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MooseFileStructureImporterTest >> testCRLFSupportForFile [
 	| file |
 	file := FamixTest1File new.
@@ -102,7 +103,7 @@ MooseFileStructureImporterTest >> testCRLFSupportForFile [
 	self assert: file totalNumberOfLinesOfText equals: 4
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MooseFileStructureImporterTest >> testCRSupportForFile [
 	| file |
 	file := FamixTest1File new.
@@ -120,7 +121,7 @@ MooseFileStructureImporterTest >> testCRSupportForFile [
 	self assert: file totalNumberOfLinesOfText equals: 4
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MooseFileStructureImporterTest >> testFiles [
 	| files file |
 	files := model allFiles.
@@ -151,7 +152,7 @@ MooseFileStructureImporterTest >> testFiles [
 	self assert: (file propertyNamed: #numberOfBytes) < 16
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MooseFileStructureImporterTest >> testFolders [
 	| folders folder |
 	folders := model allFolders.
@@ -166,7 +167,7 @@ MooseFileStructureImporterTest >> testFolders [
 	^ model
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MooseFileStructureImporterTest >> testLFSupportForFile [
 	| file |
 	file := FamixTest1File new.
@@ -184,7 +185,7 @@ MooseFileStructureImporterTest >> testLFSupportForFile [
 	self assert: file totalNumberOfLinesOfText equals: 4
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MooseFileStructureImporterTest >> testMetrics [
 	| file |
 	file := FamixTest1File new.
@@ -195,7 +196,7 @@ MooseFileStructureImporterTest >> testMetrics [
 	self assert: file totalNumberOfLinesOfText isZero
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MooseFileStructureImporterTest >> testMixedCRLFSupportForFile [
 	| file |
 	file := FamixTest1File new.
@@ -213,7 +214,7 @@ MooseFileStructureImporterTest >> testMixedCRLFSupportForFile [
 	self assert: file totalNumberOfLinesOfText equals: 4
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MooseFileStructureImporterTest >> testNestedFiles [
 	| folders |
 	folders := model allFolders.
@@ -221,14 +222,14 @@ MooseFileStructureImporterTest >> testNestedFiles [
 	(folders entityNamed: #folders) folders do: [ :each | self assert: each files size equals: 1 ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MooseFileStructureImporterTest >> testSourceText [
 	| files |
 	files := model allFiles.
 	self denyEmpty: (files entityNamed: #'folders/fileWith9Chars2Lines') sourceText
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseFileStructureImporterTest >> toDelete [
 	^ toDelete ifNil: [toDelete := OrderedCollection new]
 ]

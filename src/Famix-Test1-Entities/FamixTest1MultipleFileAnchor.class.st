@@ -17,14 +17,16 @@
 
 "
 Class {
-	#name : #FamixTest1MultipleFileAnchor,
-	#superclass : #FamixTest1SourceAnchor,
+	#name : 'FamixTest1MultipleFileAnchor',
+	#superclass : 'FamixTest1SourceAnchor',
 	#traits : 'FamixTMultipleFileAnchor',
 	#classTraits : 'FamixTMultipleFileAnchor classTrait',
-	#category : #'Famix-Test1-Entities-Entities'
+	#category : 'Famix-Test1-Entities-Entities',
+	#package : 'Famix-Test1-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTest1MultipleFileAnchor class >> annotation [
 
 	<FMClass: #MultipleFileAnchor super: #FamixTest1SourceAnchor>

@@ -25,35 +25,36 @@ I am using an identity hash table to save the names because it is optimized for 
 
 "
 Class {
-	#name : #MooseGroupStorage,
-	#superclass : #Collection,
-	#type : #variable,
+	#name : 'MooseGroupStorage',
+	#superclass : 'Collection',
+	#type : 'variable',
 	#instVars : [
 		'elements',
 		'byType',
 		'species'
 	],
-	#category : #'Moose-Core'
+	#category : 'Moose-Core',
+	#package : 'Moose-Core'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MooseGroupStorage class >> empty [
 	^ MooseGroupStorage new
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MooseGroupStorage class >> new [ 
 	 
 	^self basicNew initialize: 1000
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MooseGroupStorage class >> new: capacity [ 
 	 
 	^self basicNew initialize: capacity
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MooseGroupStorage class >> withAll: aCollection [ 
 	" Answer a new instance of this class, 
 	whose elements are the elements of aCollection. " 
@@ -64,24 +65,25 @@ MooseGroupStorage class >> withAll: aCollection [
 	^newCollection
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 MooseGroupStorage >> add: anElement [ 
 	self privateAdd: anElement.
 	self updateCacheOnAddingOf: anElement.
 	^anElement
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 MooseGroupStorage >> allEntityTypes [
 	^ byType keys
 ]
 
-{ #category : #iterators }
+
+{ #category : 'iterators' }
 MooseGroupStorage >> basicIterator [
 	^ self elements basicIterator
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 MooseGroupStorage >> collect: aBlock [ 
 	 
 	| newCollection | 
@@ -90,24 +92,24 @@ MooseGroupStorage >> collect: aBlock [
 	^newCollection
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 MooseGroupStorage >> do: aBlock [ 
 	 
 	elements do: aBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseGroupStorage >> elements [ 
 	^ elements
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MooseGroupStorage >> includesID: mooseID [ 
 	 
 	^self anySatisfy: [:each | mooseID == each mooseID]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MooseGroupStorage >> initialize: capacity [
 
 	byType := IdentityDictionary new: 24.
@@ -115,25 +117,24 @@ MooseGroupStorage >> initialize: capacity [
 	elements := self species new: capacity
 ]
 
-{ #category : #iterators }
+{ #category : 'iterators' }
 MooseGroupStorage >> iterator [
 	^ self elements iterator
 ]
 
-{ #category : #copying }
-MooseGroupStorage >> postCopy [
-
+{ #category : 'copying' }
+MooseGroupStorage >> postCopy [  
 	super postCopy.
 	elements := elements copy.
 	byType := byType copy
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 MooseGroupStorage >> privateAdd: anElement [
 	^elements add: anElement
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 MooseGroupStorage >> remove: anElement [ 
 	 
 	^self 
@@ -141,20 +142,20 @@ MooseGroupStorage >> remove: anElement [
 		ifAbsent: [anElement]
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 MooseGroupStorage >> remove: anElement ifAbsent: exceptionBlock [
 	self updateCacheOnRemovalOf: anElement.
 	elements remove: anElement.
 	^ anElement
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 MooseGroupStorage >> removeAll [ 
 	 
 	self initialize: 10000
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 MooseGroupStorage >> selectAllWithType: aSmalltalkType [
 	^ byType
 		at: aSmalltalkType
@@ -166,37 +167,38 @@ MooseGroupStorage >> selectAllWithType: aSmalltalkType [
 			OrderedCollection withAll: result ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseGroupStorage >> size [ 
 	^ elements size
 ]
 
-{ #category : #sorting }
+{ #category : 'sorting' }
 MooseGroupStorage >> sort: aBlock [
 
 	self elements sort: aBlock
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MooseGroupStorage >> species [
 
 	^ species
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MooseGroupStorage >> species: aCollectionClass [
 	species := aCollectionClass.
 	^ elements := self species withAll: elements
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MooseGroupStorage >> updateCacheOnAddingOf: anElement [
 
 	(byType atOrOrederedCollection: anElement class) add: anElement.
+  
 	^ anElement
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MooseGroupStorage >> updateCacheOnRemovalOf: anElement [
 
 	byType at: anElement class ifPresent: [ :group | group remove: anElement ifAbsent: [ self error: 'Internal storage inconsistency' ] ].

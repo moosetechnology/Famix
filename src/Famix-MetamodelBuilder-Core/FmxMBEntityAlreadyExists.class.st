@@ -1,10 +1,12 @@
 Class {
-	#name : #FmxMBEntityAlreadyExists,
-	#superclass : #Error,
-	#category : #'Famix-MetamodelBuilder-Core-Implementation'
+	#name : 'FmxMBEntityAlreadyExists',
+	#superclass : 'Error',
+	#category : 'Famix-MetamodelBuilder-Core-Implementation',
+	#package : 'Famix-MetamodelBuilder-Core',
+	#tag : 'Implementation'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBEntityAlreadyExists >> messageText [
 
 	<ignoreForCoverage>

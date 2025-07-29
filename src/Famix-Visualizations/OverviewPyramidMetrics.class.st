@@ -1,6 +1,6 @@
 Class {
-	#name : #OverviewPyramidMetrics,
-	#superclass : #Object,
+	#name : 'OverviewPyramidMetrics',
+	#superclass : 'Object',
 	#instVars : [
 		'nop',
 		'noc',
@@ -12,29 +12,31 @@ Class {
 		'andc',
 		'ahh'
 	],
-	#category : #'Famix-Visualizations-Overview-Pyramid'
+	#category : 'Famix-Visualizations-Overview-Pyramid',
+	#package : 'Famix-Visualizations',
+	#tag : 'Overview-Pyramid'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 OverviewPyramidMetrics class >> on: aMooseModel [
 
 	^ super new model: aMooseModel
 ]
 
-{ #category : #'accessing - metrics' }
+{ #category : 'accessing - metrics' }
 OverviewPyramidMetrics >> ahh [
 	"Average Hierarchy Height. tell us how deep the class hierarchies are"
 
 	^ ahh
 ]
 
-{ #category : #'accessing - metrics' }
+{ #category : 'accessing - metrics' }
 OverviewPyramidMetrics >> andc [
 	"Average number of derived classes. First sign of how extensively abstractions are refined by means of inheritance"
 	^ andc
 ]
 
-{ #category : #'accessing - metrics ratio' }
+{ #category : 'accessing - metrics ratio' }
 OverviewPyramidMetrics >> callNom [
 	" Coupling intensity (CALLS/Operation). Tell us how many other operations are called on average from each operation"
 	^ self nom isZero 
@@ -43,19 +45,19 @@ OverviewPyramidMetrics >> callNom [
 			self truncatedFloatForFraction: (self calls/ self nom) ]
 ]
 
-{ #category : #'accessing - metrics' }
+{ #category : 'accessing - metrics' }
 OverviewPyramidMetrics >> calls [
 
 	^ calls
 ]
 
-{ #category : #'accessing - metrics' }
+{ #category : 'accessing - metrics' }
 OverviewPyramidMetrics >> cyclo [
 
 	^ cyclo
 ]
 
-{ #category : #'accessing - metrics ratio' }
+{ #category : 'accessing - metrics ratio' }
 OverviewPyramidMetrics >> cycloLoc [
 
 	"Intrinsic operation complexity (CYCLO/Code Line). Characterizes how much conditional complexity we are to expect in operations"
@@ -64,13 +66,13 @@ OverviewPyramidMetrics >> cycloLoc [
 		ifFalse: [ self truncatedFloatForFraction: (self cyclo/ self loc) ]
 ]
 
-{ #category : #'accessing - metrics' }
+{ #category : 'accessing - metrics' }
 OverviewPyramidMetrics >> fanout [
 
 	^ fanout
 ]
 
-{ #category : #'accessing - metrics ratio' }
+{ #category : 'accessing - metrics ratio' }
 OverviewPyramidMetrics >> fanoutCalls [
 	"Coupling dispersion (FANOUT/Operation Call). Indicator of how much the coupling involves many classes "
 	
@@ -80,13 +82,13 @@ OverviewPyramidMetrics >> fanoutCalls [
 			self truncatedFloatForFraction: (self fanout / self calls) ]
 ]
 
-{ #category : #'accessing - metrics' }
+{ #category : 'accessing - metrics' }
 OverviewPyramidMetrics >> loc [
 
 	^ loc
 ]
 
-{ #category : #'accessing - metrics ratio' }
+{ #category : 'accessing - metrics ratio' }
 OverviewPyramidMetrics >> locNom [
 
 	"Operation Structuring (LOC/Operation). Indication of how well the code is distributed among operations"
@@ -96,7 +98,7 @@ OverviewPyramidMetrics >> locNom [
 			self truncatedFloatForFraction: (self loc/self nom) ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 OverviewPyramidMetrics >> model: aMooseModel [
 	| allModelMethods allModelClasses |
 	MooseCustomTask
@@ -127,13 +129,13 @@ OverviewPyramidMetrics >> model: aMooseModel [
 		length: 11
 ]
 
-{ #category : #'accessing - metrics' }
+{ #category : 'accessing - metrics' }
 OverviewPyramidMetrics >> noc [ 
 
 	^ noc
 ]
 
-{ #category : #'accessing - metrics ratio' }
+{ #category : 'accessing - metrics ratio' }
 OverviewPyramidMetrics >> nocNop [
 	"High-level Structuring (NOC/Package). Indicates if packages tend to be coarse grained or fine grained"
 	
@@ -142,13 +144,13 @@ OverviewPyramidMetrics >> nocNop [
 		ifFalse: [ self truncatedFloatForFraction: (self noc / self nop) ]
 ]
 
-{ #category : #'accessing - metrics' }
+{ #category : 'accessing - metrics' }
 OverviewPyramidMetrics >> nom [ 
 
 	^ nom
 ]
 
-{ #category : #'accessing - metrics ratio' }
+{ #category : 'accessing - metrics ratio' }
 OverviewPyramidMetrics >> nomNoc [
 	"Class structuring (NOM/Class). Reveals how operations are dirstributed among classes"
 	
@@ -158,13 +160,13 @@ OverviewPyramidMetrics >> nomNoc [
 			self truncatedFloatForFraction: (self nom / self noc) ]
 ]
 
-{ #category : #'accessing - metrics' }
+{ #category : 'accessing - metrics' }
 OverviewPyramidMetrics >> nop [
 
 	^ nop
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 OverviewPyramidMetrics >> truncatedFloatForFraction: aFraction [
 	^ (((aFraction * 100) truncated) / 100 ) asFloat 
 ]

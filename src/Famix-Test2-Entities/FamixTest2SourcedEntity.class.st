@@ -8,23 +8,19 @@
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
 
 
-## Properties
-======================
-
-| Name | Type | Default value | Comment |
-|---|
-| `isStub` | `Boolean` | false | Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.|
 
 "
 Class {
-	#name : #FamixTest2SourcedEntity,
-	#superclass : #FamixTest2Entity,
+	#name : 'FamixTest2SourcedEntity',
+	#superclass : 'FamixTest2Entity',
 	#traits : 'FamixTSourceEntity',
 	#classTraits : 'FamixTSourceEntity classTrait',
-	#category : #'Famix-Test2-Entities-Entities'
+	#category : 'Famix-Test2-Entities-Entities',
+	#package : 'Famix-Test2-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTest2SourcedEntity class >> annotation [
 
 	<FMClass: #SourcedEntity super: #FamixTest2Entity>
@@ -34,7 +30,7 @@ FamixTest2SourcedEntity class >> annotation [
 	^ self
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTest2SourcedEntity class >> isAbstract [
 
 	<generated>

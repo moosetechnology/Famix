@@ -1,21 +1,22 @@
 Class {
-	#name : #FamixTest3GroupTest,
-	#superclass : #FamixTest3SimpleModelTest,
-	#category : #'Famix-Test3-Tests'
+	#name : 'FamixTest3GroupTest',
+	#superclass : 'FamixTest3SimpleModelTest',
+	#category : 'Famix-Test3-Tests',
+	#package : 'Famix-Test3-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTest3GroupTest >> testClassGroupSuperclassIsTypeGroup [
 	self assert: self classGroup superclass equals: self typeGroup
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTest3GroupTest >> testGroupsAreGenerated [
 	self assert: (self class environment includesKey: #FamixTest3TypeGroup).
 	self assert: (self class environment includesKey: #FamixTest3ClassGroup)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTest3GroupTest >> testMooseSpecializedGroupAllWith [
 	self assert: (model allUsing: FamixTClass) specialize class equals: self classGroup
 ]

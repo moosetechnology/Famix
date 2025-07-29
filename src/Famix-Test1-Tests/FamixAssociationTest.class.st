@@ -1,6 +1,6 @@
 Class {
-	#name : #FamixAssociationTest,
-	#superclass : #TestCase,
+	#name : 'FamixAssociationTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'model',
 		'c1',
@@ -8,10 +8,11 @@ Class {
 		'anchor1',
 		'association1'
 	],
-	#category : #'Famix-Test1-Tests'
+	#category : 'Famix-Test1-Tests',
+	#package : 'Famix-Test1-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 FamixAssociationTest >> setUp [
 	super setUp.
 
@@ -24,7 +25,7 @@ FamixAssociationTest >> setUp [
 	model addAll: {c1 . m1 . anchor1 . association1}
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixAssociationTest >> testIsAssociation [
 
 	self assert: association1 isAssociation.

@@ -1,6 +1,6 @@
-Extension { #name : #CompiledMethod }
+Extension { #name : 'CompiledMethod' }
 
-{ #category : #'*Moose-SmalltalkImporter' }
+{ #category : '*Moose-SmalltalkImporter' }
 CompiledMethod >> mooseName [
 
 	^ String streamContents: [ :str |
@@ -11,7 +11,7 @@ CompiledMethod >> mooseName [
 		  self signatureFromSmalltalkSelectorOn: str ]
 ]
 
-{ #category : #'*Moose-SmalltalkImporter' }
+{ #category : '*Moose-SmalltalkImporter' }
 CompiledMethod >> signature [
 
 	^ (String streamContents: [ :aStream |
@@ -19,7 +19,7 @@ CompiledMethod >> signature [
 		   self signatureFromSmalltalkSelectorOn: aStream ]) asSymbol
 ]
 
-{ #category : #'*Moose-SmalltalkImporter' }
+{ #category : '*Moose-SmalltalkImporter' }
 CompiledMethod >> signatureFromSmalltalkSelectorOn: aStream [
 
 	| sym numArgs |

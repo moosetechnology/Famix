@@ -7,24 +7,25 @@
 |---|
 | `commentedEntity` | `FamixTComment` | `comments` | `FamixTWithComments` | Source code commented by the comment|
 
-
-## Properties
-======================
-
-| Name | Type | Default value | Comment |
+### Other
+| Relation | Origin | Opposite | Type | Comment |
 |---|
-| `content` | `String` | nil | Content of the comment as a String|
+| `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
+
+
 
 "
 Class {
-	#name : #FamixTestComposed2Comment,
-	#superclass : #FamixTestComposed2SourcedEntity,
+	#name : 'FamixTestComposed2Comment',
+	#superclass : 'FamixTestComposed2SourcedEntity',
 	#traits : 'FamixTComment',
 	#classTraits : 'FamixTComment classTrait',
-	#category : #'Famix-TestComposedSubmetamodel2-Entities-Entities'
+	#category : 'Famix-TestComposedSubmetamodel2-Entities-Entities',
+	#package : 'Famix-TestComposedSubmetamodel2-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTestComposed2Comment class >> annotation [
 
 	<FMClass: #Comment super: #FamixTestComposed2SourcedEntity>

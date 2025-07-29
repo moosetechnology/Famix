@@ -8,14 +8,16 @@
 
 "
 Trait {
-	#name : #FamixTCanBeFinal,
+	#name : 'FamixTCanBeFinal',
 	#instVars : [
 		'#isFinal => FMProperty defaultValue: false'
 	],
-	#category : #'Famix-Traits-Traits'
+	#category : 'Famix-Traits-PrimitiveProperties',
+	#package : 'Famix-Traits',
+	#tag : 'PrimitiveProperties'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTCanBeFinal classSide >> annotation [
 
 	<FMClass: #TCanBeFinal super: #Object>
@@ -24,7 +26,14 @@ FamixTCanBeFinal classSide >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'visitor' }
+FamixTCanBeFinal >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTCanBeFinal: self
+]
+
+{ #category : 'accessing' }
 FamixTCanBeFinal >> isFinal [
 
 	<FMProperty: #isFinal type: #Boolean defaultValue: false>
@@ -33,7 +42,7 @@ FamixTCanBeFinal >> isFinal [
 	^ isFinal ifNil: [ isFinal := false ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTCanBeFinal >> isFinal: anObject [
 	<generated>
 	isFinal := anObject

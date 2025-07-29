@@ -24,7 +24,8 @@ This is the abstract representation of an Exception. It is specific to Java. It 
 ### Incoming dependencies
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `incomingReferences` | `FamixTReferenceable` | `referredType` | `FamixTReference` | References to this entity by other entities.|
+| `incomingReferences` | `FamixTReferenceable` | `referredEntity` | `FamixTReference` | References to this entity by other entities.|
+| `incomingTypings` | `FamixTType` | `declaredType` | `FamixTEntityTyping` | Relations to the entities that have this as type.|
 | `subInheritances` | `FamixTWithInheritances` | `superclass` | `FamixTInheritance` | Subinheritance relationships, i.e. known subclasses of this type.|
 
 ### Other
@@ -35,7 +36,6 @@ This is the abstract representation of an Exception. It is specific to Java. It 
 | `receivingInvocations` | `FamixTInvocationsReceiver` | `receiver` | `FamixTInvocation` | List of invocations performed on this entity (considered as the receiver)|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
 | `throwingEntities` | `FamixTThrowable` | `thrownExceptions` | `FamixTWithExceptions` | |
-| `typedEntities` | `FamixTType` | `declaredType` | `FamixTTypedEntity` | Entities that have this type as declaredType|
 
 
 ## Properties
@@ -48,13 +48,15 @@ This is the abstract representation of an Exception. It is specific to Java. It 
 
 "
 Trait {
-	#name : #FamixTException,
+	#name : 'FamixTException',
 	#traits : 'FamixTClass + FamixTThrowable',
 	#classTraits : 'FamixTClass classTrait + FamixTThrowable classTrait',
-	#category : #'Famix-Traits-Exception'
+	#category : 'Famix-Traits-Exception',
+	#package : 'Famix-Traits',
+	#tag : 'Exception'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTException classSide >> annotation [
 
 	<FMClass: #TException super: #Object>
@@ -63,7 +65,14 @@ FamixTException classSide >> annotation [
 	^ self
 ]
 
-{ #category : #testing }
+{ #category : 'visitor' }
+FamixTException >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTException: self
+]
+
+{ #category : 'testing' }
 FamixTException >> isException [
 
 	<generated>

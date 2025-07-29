@@ -2,12 +2,14 @@
 MooseObjectQueryResult hold the result of queries that return objects (e.g. opposite) as opposed by associations
 "
 Class {
-	#name : #MooseObjectQueryResult,
-	#superclass : #MooseQueryResult,
-	#category : #'Moose-Query-Navigating'
+	#name : 'MooseObjectQueryResult',
+	#superclass : 'MooseQueryResult',
+	#category : 'Moose-Query-Navigating',
+	#package : 'Moose-Query',
+	#tag : 'Navigating'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MooseObjectQueryResult class >> withAll: aCollection [
 	"Create a new collection containing all the elements from aCollection."
 
@@ -16,7 +18,7 @@ MooseObjectQueryResult class >> withAll: aCollection [
 		yourself
 ]
 
-{ #category : #filtering }
+{ #category : 'filtering' }
 MooseObjectQueryResult >> executeScopeQuery: aQuery [
 
 	self storage do: [ :entity | 
@@ -24,24 +26,24 @@ MooseObjectQueryResult >> executeScopeQuery: aQuery [
 	^ self newObjectResultWith: aQuery result
 ]
 
-{ #category : #evaluating }
+{ #category : 'evaluating' }
 MooseObjectQueryResult >> outOf: aFAMIXEntity [
 	^ self newObjectResultWith: (storage reject: [ :obj | (obj allAtScope: aFAMIXEntity class) includes: aFAMIXEntity ])
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MooseObjectQueryResult >> relationsNamed: aSymbol [
 
 	^ self newObjectResultWith: (self storage flatCollect: [ :entity | 
 			   entity query relations named: aSymbol ])
 ]
 
-{ #category : #evaluating }
+{ #category : 'evaluating' }
 MooseObjectQueryResult >> within: aFAMIXEntity [
 	^ self newObjectResultWith: (storage select: [ :obj | (obj allAtScope: aFAMIXEntity class) includes: aFAMIXEntity ])
 ]
 
-{ #category : #filtering }
+{ #category : 'filtering' }
 MooseObjectQueryResult >> withoutSelfLoops [
 	"exclude objects that match the receiver (modulo the scope)"
 

@@ -24,13 +24,15 @@
 
 "
 Trait {
-	#name : #FamixTWithStatements,
-	#traits : 'FamixTSourceEntity + FamixTWithAccesses + FamixTWithInvocations + FamixTWithReferences',
-	#classTraits : 'FamixTSourceEntity classTrait + FamixTWithAccesses classTrait + FamixTWithInvocations classTrait + FamixTWithReferences classTrait',
-	#category : #'Famix-Traits-Behavioral'
+	#name : 'FamixTWithStatements',
+	#traits : 'FamixTCanBeStub + FamixTWithAccesses + FamixTWithInvocations + FamixTWithReferences',
+	#classTraits : 'FamixTCanBeStub classTrait + FamixTWithAccesses classTrait + FamixTWithInvocations classTrait + FamixTWithReferences classTrait',
+	#category : 'Famix-Traits-Behavioral',
+	#package : 'Famix-Traits',
+	#tag : 'Behavioral'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTWithStatements classSide >> annotation [
 
 	<FMClass: #TWithStatements super: #Object>
@@ -39,19 +41,26 @@ FamixTWithStatements classSide >> annotation [
 	^ self
 ]
 
-{ #category : #metrics }
+{ #category : 'visitor' }
+FamixTWithStatements >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTWithStatements: self
+]
+
+{ #category : 'metrics' }
 FamixTWithStatements >> computeCyclomaticComplexity [
 	^ self notExistentMetricValue
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTWithStatements >> isBehavioural [
 
 	<generated>
 	^ true
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 FamixTWithStatements >> numberOfLinesOfDeadCode [
 
 	self deprecated:
@@ -61,7 +70,7 @@ FamixTWithStatements >> numberOfLinesOfDeadCode [
 		  computedAs: [ self deadChildren sumNumbers: #numberOfLinesOfCode ]
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTWithStatements >> numberOfStatements [
 	<FMProperty: #numberOfStatements type: #Number>
 	<derived>
@@ -69,12 +78,12 @@ FamixTWithStatements >> numberOfStatements [
 	^ self lookUpPropertyNamed: #numberOfStatements computedAs: [ MooseUnavailableMetric ]
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTWithStatements >> numberOfStatements: aNumber [
 	self cacheAt: #numberOfStatements put: aNumber
 ]
 
-{ #category : #asserting }
+{ #category : 'asserting' }
 FamixTWithStatements >> shouldCountChildrenForLinesOfCodeIfNoSourceAnchor [
 	^ false
 ]

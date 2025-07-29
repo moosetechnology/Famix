@@ -6,32 +6,34 @@ The opposites of these properties are shown in gray, as well as their type.
 In light blue is shown the relation between each property and its opposite.
 "
 Class {
-	#name : #FameClassConnections,
-	#superclass : #MooseAbstractVisualization,
+	#name : 'FameClassConnections',
+	#superclass : 'MooseAbstractVisualization',
 	#instVars : [
 		'fameClass'
 	],
-	#category : #'Famix-Visualizations-Fame'
+	#category : 'Famix-Visualizations-Fame',
+	#package : 'Famix-Visualizations',
+	#tag : 'Fame'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FameClassConnections class >> defaultTitle [
 	^ 'Connections'
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 FameClassConnections class >> forFameClass: aFM3Class [
 	^ self new
 		fameClass: aFM3Class;
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FameClassConnections class >> icon [
 	^ MooseIcons mooseDependencies
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 FameClassConnections >> build [
 	| classNode complexPropertyTypes complexProperties oppositeProperties |
 	classNode := self buildClassNode.
@@ -51,7 +53,7 @@ FameClassConnections >> build [
 	super build
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 FameClassConnections >> buildClassNode [
 	| classNode |
 	classNode := (self nodeFor: fameClass)
@@ -62,7 +64,7 @@ FameClassConnections >> buildClassNode [
 	^ classNode
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 FameClassConnections >> buildLegend [
 	| legend |
 	legend := RSLegend new.
@@ -81,7 +83,7 @@ FameClassConnections >> buildLegend [
 	legend build
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 FameClassConnections >> buildOppositeClassesNodes [
 	| nodes |
 	nodes := (((fameClass complexProperties collect: #type) \ {fameClass})
@@ -95,7 +97,7 @@ FameClassConnections >> buildOppositeClassesNodes [
 	^ nodes
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 FameClassConnections >> buildOppositePropertiesNodes [
 	| nodes |
 	nodes := (fameClass complexProperties
@@ -109,7 +111,7 @@ FameClassConnections >> buildOppositePropertiesNodes [
 	^ nodes
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 FameClassConnections >> buildPropertiesNodes [
 	| nodes |
 	nodes := fameClass complexProperties
@@ -121,7 +123,7 @@ FameClassConnections >> buildPropertiesNodes [
 	^ nodes
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 FameClassConnections >> connectClassNode: classNode toProperties: complexProperties [
 	RSEdgeBuilder line
 		color: self highlightColor;
@@ -130,7 +132,7 @@ FameClassConnections >> connectClassNode: classNode toProperties: complexPropert
 		connectToAll: #complexProperties
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 FameClassConnections >> connectOpposites: oppositeProperties toClass: classNode orOtherType: complexPropertyTypes [
 	RSEdgeBuilder line
 		color: self oppositeColor;
@@ -139,7 +141,7 @@ FameClassConnections >> connectOpposites: oppositeProperties toClass: classNode 
 		connectTo: #mmClass
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 FameClassConnections >> connectProperties: complexProperties toOpposites: oppositeProperties [
 	RSEdgeBuilder line
 		color: (self highlightColor alpha: 0.5);
@@ -148,17 +150,17 @@ FameClassConnections >> connectProperties: complexProperties toOpposites: opposi
 		connectTo: #opposite
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FameClassConnections >> fameClass: aFM3Class [
 	fameClass := aFM3Class
 ]
 
-{ #category : #shapes }
+{ #category : 'shapes' }
 FameClassConnections >> highlightColor [
 	^ Color blue
 ]
 
-{ #category : #shapes }
+{ #category : 'shapes' }
 FameClassConnections >> nodeFor: aModel [
 	^ RSCircle new
 		model: aModel;
@@ -167,12 +169,12 @@ FameClassConnections >> nodeFor: aModel [
 		yourself
 ]
 
-{ #category : #shapes }
+{ #category : 'shapes' }
 FameClassConnections >> oppositeColor [
 	^ Color lightGray
 ]
 
-{ #category : #shapes }
+{ #category : 'shapes' }
 FameClassConnections >> typeNodeSize [
 	^ 20
 ]

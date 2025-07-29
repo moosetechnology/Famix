@@ -1,34 +1,35 @@
 Class {
-	#name : #MooseAbstractGroupTest,
-	#superclass : #TestCase,
+	#name : 'MooseAbstractGroupTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'group'
 	],
-	#category : #'Moose-Core-Tests'
+	#category : 'Moose-Core-Tests',
+	#package : 'Moose-Core-Tests'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 MooseAbstractGroupTest class >> isAbstract [
 	^ self = MooseAbstractGroupTest
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MooseAbstractGroupTest class >> shouldInheritSelectors [
 	^ true
 ]
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 MooseAbstractGroupTest >> actualClass [
 	^ MooseAbstractGroup
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 MooseAbstractGroupTest >> setUp [
 	super setUp.
 	group := self actualClass new
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseAbstractGroupTest >> testAdd [
 	| entity |
 	entity := MooseEntity new.
@@ -37,7 +38,7 @@ MooseAbstractGroupTest >> testAdd [
 	self assert: group first identicalTo: entity
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseAbstractGroupTest >> testAddLast [
 	| attribute class method |
 	group addLast: (class := FamixTest1Class new).
@@ -54,7 +55,7 @@ MooseAbstractGroupTest >> testAddLast [
 	self assert: (group at: 3) identicalTo: attribute
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseAbstractGroupTest >> testAllMatching [
 	group addAll: {FamixTest3Class new . FamixTest3Type new}.
 	self assert: (group allMatching: FamixTClass) size equals: 1.
@@ -64,7 +65,7 @@ MooseAbstractGroupTest >> testAllMatching [
 	self assertEmpty: (group allMatching: Object)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseAbstractGroupTest >> testAllSatisfy [
 	3 timesRepeat: [ group add: MooseEntity new ].
 
@@ -72,7 +73,7 @@ MooseAbstractGroupTest >> testAllSatisfy [
 	self deny: (group allSatisfy: [ :c | c = 10 ])
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseAbstractGroupTest >> testAllUsing [
 	group addAll: {FamixTest3Class new . FamixTest3Type new . FamixTest3ParametricClass new}.
 	self should: [ group allUsing: FamixTest3Type ] raise: MooseAllUsingOnClass.
@@ -80,7 +81,7 @@ MooseAbstractGroupTest >> testAllUsing [
 	self assert: (group allUsing: FamixTType) size equals: 3.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseAbstractGroupTest >> testAllWithSubTypesOf [
 	group addAll: {FamixTest3Class new . FamixTest3Type new}.
 	self assert: (group allWithSubTypesOf: FamixTest3Type) size equals: 2.
@@ -88,7 +89,7 @@ MooseAbstractGroupTest >> testAllWithSubTypesOf [
 	self assert: (group allWithSubTypesOf: MooseEntity) size equals: 2
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseAbstractGroupTest >> testAllWithSubTypesOfAny [
 	group
 		addAll:
@@ -103,7 +104,7 @@ MooseAbstractGroupTest >> testAllWithSubTypesOfAny [
 		equals: 3
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseAbstractGroupTest >> testAllWithSubTypesOfThenAllWithType [
 	group addAll: {FamixTest3Class new . FamixTest3Type new}.
 	self assert: (group allWithSubTypesOf: FamixTest3Type) size equals: 2.
@@ -111,7 +112,7 @@ MooseAbstractGroupTest >> testAllWithSubTypesOfThenAllWithType [
 	self assert: (group allWithType: FamixTest3Class) size equals: 1.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseAbstractGroupTest >> testAllWithType [
 	group addAll: {FamixTest3Class new . FamixTest3Type new}.
 	self assert: (group allWithType: FamixTest3Class) size equals: 1.
@@ -120,7 +121,7 @@ MooseAbstractGroupTest >> testAllWithType [
 	self assertEmpty: (group allWithType: Object)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseAbstractGroupTest >> testAllWithTypeThenAllWithSubTypesOf [
 	group addAll: {FamixTest3Class new . FamixTest3Type new}.
 	self assert: (group allWithType: FamixTest3Type) size equals: 1.
@@ -129,7 +130,7 @@ MooseAbstractGroupTest >> testAllWithTypeThenAllWithSubTypesOf [
 	
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseAbstractGroupTest >> testAnySatisfy [
 	3 timesRepeat: [ group add: MooseEntity new ].
 
@@ -137,7 +138,7 @@ MooseAbstractGroupTest >> testAnySatisfy [
 	self deny: (group anySatisfy: [ :c | c = 10 ])
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseAbstractGroupTest >> testAverage [
 	| classA classB |
 	classA := FamixTest3Class new
@@ -151,13 +152,13 @@ MooseAbstractGroupTest >> testAverage [
 	self assert: (group average: #numberOfMethods) equals: 1.5
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseAbstractGroupTest >> testCollect [
 	#('A' 'B' 'C') do: [ :each | group add: (FamixTest3Method named: each) ].
 	self assertCollection: (group collect: #name) hasSameElements: #('A' 'B' 'C')
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseAbstractGroupTest >> testContains [
 	3 timesRepeat: [ group add: MooseEntity new ].
 
@@ -165,7 +166,7 @@ MooseAbstractGroupTest >> testContains [
 	self deny: (group contains: [ :c | c = 10 ])
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseAbstractGroupTest >> testCopy [
 	| copy |
 	group := self actualClass with: FamixTest3Method new.
@@ -179,12 +180,12 @@ MooseAbstractGroupTest >> testCopy [
 	self assert: group size equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseAbstractGroupTest >> testCount [
 	self assert: (self twoClasses count: [ :el | el class == FamixTest1Class ]) equals: 2
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseAbstractGroupTest >> testDetect [
 	| b |
 	group add: (FamixTest3Method named: 'A').
@@ -193,7 +194,7 @@ MooseAbstractGroupTest >> testDetect [
 	self assert: (group detect: [ :el | el name = 'B' ]) identicalTo: b
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseAbstractGroupTest >> testDifference [
 	| group2 el1 el2 el3 el4 |
 	group add: (el1 := MooseEntity new).
@@ -210,13 +211,13 @@ MooseAbstractGroupTest >> testDifference [
 	self assertCollection: (group difference: group2) hasSameElements: {el2 . el3}
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseAbstractGroupTest >> testDifferenceWithRealCollection [
 	group addAll: #(1 2 3).
 	self assertCollection: (group difference: #(2)) hasSameElements: #(1 3)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseAbstractGroupTest >> testDoSeparatedBy [
 	| t el1 el2 el3 |
 	t := OrderedCollection new.
@@ -227,7 +228,7 @@ MooseAbstractGroupTest >> testDoSeparatedBy [
 	self assertCollection: t hasSameElements: {el1 . 10 . el2 . 10 . el3}
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseAbstractGroupTest >> testDoWithIndex [
 	| t el1 el2 el3 |
 	group add: (el1 := MooseEntity new).
@@ -238,7 +239,7 @@ MooseAbstractGroupTest >> testDoWithIndex [
 	self assertCollection: t hasSameElements: {{el1 . 1} . {el2 . 2} . {el3 . 3}}
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseAbstractGroupTest >> testEntitiesDo [
 	| t el1 el2 el3 |
 	group add: (el1 := MooseEntity new).
@@ -249,7 +250,7 @@ MooseAbstractGroupTest >> testEntitiesDo [
 	self assertCollection: t hasSameElements: {el1 . el2 . el3}
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseAbstractGroupTest >> testEntityNamedIfAbsentIfPresent [
 	| result class |
 	group add: (class := FamixTest3Class named: 'A').
@@ -259,7 +260,7 @@ MooseAbstractGroupTest >> testEntityNamedIfAbsentIfPresent [
 	self assert: result equals: class mooseName
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseAbstractGroupTest >> testEnumeration [
 	| el1 el2 el3 |
 	group add: (el1 := MooseEntity new).
@@ -275,7 +276,7 @@ MooseAbstractGroupTest >> testEnumeration [
 	self assert: group third identicalTo: (group at: 3)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseAbstractGroupTest >> testFirst [
 	| el1 el2 el3 |
 	group add: (el1 := MooseEntity new).
@@ -288,7 +289,7 @@ MooseAbstractGroupTest >> testFirst [
 	self should: [ group first: 5 ] raise: Error
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseAbstractGroupTest >> testGroupSize [
 	| classes |
 	classes := self twoClasses.
@@ -297,7 +298,7 @@ MooseAbstractGroupTest >> testGroupSize [
 	self assert: group size equals: 2
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseAbstractGroupTest >> testGroupedBy [
 	| v |
 	group addAll: ((1 to: 5) collect: [ :i | FamixTest3Class named: i asString ]).
@@ -311,14 +312,14 @@ MooseAbstractGroupTest >> testGroupedBy [
 	self assertCollection: ((v at: false) collect: #name) hasSameElements: #('2' '4')
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseAbstractGroupTest >> testIfEmpty [
 	self assert: (group ifEmpty: [ true ]).
 	group add: MooseEntity new.
 	self assert: (group ifEmpty: [  ]) identicalTo: group
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseAbstractGroupTest >> testIndexOf [
 	| el1 el2 el3 |
 	group add: (el1 := MooseEntity new).
@@ -330,7 +331,7 @@ MooseAbstractGroupTest >> testIndexOf [
 	self assert: (group indexOf: el3) equals: 4
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseAbstractGroupTest >> testIntersection [
 	| group2 el1 el2 el3 |
 	group add: (el1 := MooseEntity new).
@@ -347,19 +348,19 @@ MooseAbstractGroupTest >> testIntersection [
 	self assertCollection: (group intersection: group2) hasSameElements: {el1}
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseAbstractGroupTest >> testIntersectionWithRealCollection [
 	group addAll: #(1 2 3).
 	self assertCollection: (group intersection: #(2 3 4)) hasSameElements: #(2 3).
 	self assertCollection: (#(2 3 4) intersection: group) hasSameElements: #(2 3)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseAbstractGroupTest >> testIsCollection [
 	self assert: group isCollection
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseAbstractGroupTest >> testLast [
 	| el1 el2 el3 |
 	group add: (el1 := MooseEntity new).
@@ -372,7 +373,7 @@ MooseAbstractGroupTest >> testLast [
 	self should: [ group last: 5 ] raise: Error
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseAbstractGroupTest >> testNumberOfEntityUsing [
 	group addAll: {FamixTest3Class new . FamixTest3Type new}.
 	self should: [ group numberOfEntityUsing: FamixTest3Type ] raise: MooseAllUsingOnClass.
@@ -380,12 +381,12 @@ MooseAbstractGroupTest >> testNumberOfEntityUsing [
 	self assert: (group numberOfEntityUsing: FamixTType) equals: 2
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseAbstractGroupTest >> testNumberOfPackages [
 	self assert: group numberOfPackages equals: 0
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseAbstractGroupTest >> testOccurenceOf [
 	| el1 el2 |
 	group add: (el1 := MooseEntity new).
@@ -397,14 +398,14 @@ MooseAbstractGroupTest >> testOccurenceOf [
 	self assert: (group occurrencesOf: MooseEntity new) isZero
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseAbstractGroupTest >> testPropertyNamed [
 	self should: [group propertyNamed: #UNKNOWN] raise: NotFound.
 	group propertyNamed: 'UNKNOWN' put: 10.
 	self assert: (group propertyNamed: #UNKNOWN) equals: 10
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseAbstractGroupTest >> testReadStream [
 	| el1 el2 el3 stream |
 	group add: (el1 := MooseEntity new).
@@ -420,7 +421,7 @@ MooseAbstractGroupTest >> testReadStream [
 	self assert: stream next identicalTo: el3
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseAbstractGroupTest >> testReject [
 	| el1 el2 el3 v |
 	group add: (el1 := MooseEntity new).
@@ -430,7 +431,7 @@ MooseAbstractGroupTest >> testReject [
 	self assertCollection: v hasSameElements: {el2 . el3}
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseAbstractGroupTest >> testRemoveAll [
 	| el1 el2 el3 |
 	group add: (el1 := MooseEntity new).
@@ -441,7 +442,7 @@ MooseAbstractGroupTest >> testRemoveAll [
 	self assertEmpty: group
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseAbstractGroupTest >> testRemoveAll2 [
 	| el1 el2 el3 |
 	group add: (el1 := MooseEntity new).
@@ -453,7 +454,7 @@ MooseAbstractGroupTest >> testRemoveAll2 [
 	self assertCollection: group entities hasSameElements: {el1}
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseAbstractGroupTest >> testSelect [
 	| el1 v |
 	group add: (el1 := MooseEntity new).
@@ -464,7 +465,7 @@ MooseAbstractGroupTest >> testSelect [
 	self assert: v first identicalTo: el1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseAbstractGroupTest >> testUnion [
 	| group2 el1 el2 el3 el4 |
 	group add: (el1 := MooseEntity new).
@@ -476,14 +477,14 @@ MooseAbstractGroupTest >> testUnion [
 	self assert: (group2 union: group) ~= (group union: group2)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseAbstractGroupTest >> testUnionWithRealCollection [
 	group addAll: #(1 2 3).
 	self assertCollection: (group union: #(2 3 4)) hasSameElements: #(1 2 3 4).
 	self assertCollection: (#(2 3 4) union: group) hasSameElements: #(1 2 3 4)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseAbstractGroupTest >> testWithIndexDo [
 	| t el1 el2 el3 |
 	group add: (el1 := MooseEntity new).
@@ -494,15 +495,15 @@ MooseAbstractGroupTest >> testWithIndexDo [
 	self assertCollection: t hasSameElements: {{el1 . 1} . {el2 . 2} . {el3 . 3}}
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseAbstractGroupTest >> testWithoutStubs [
 
 	| stubEntity1 stubEntity2 |
 
-	stubEntity1 := MooseEntity new
+	stubEntity1 := FamixTest1Class new
 		               isStub: true;
 		               yourself.
-	stubEntity2 := MooseEntity new
+	stubEntity2 := FamixTest1Class new
 		               isStub: true;
 		               yourself.
 	group
@@ -517,7 +518,7 @@ MooseAbstractGroupTest >> testWithoutStubs [
 	group withoutStubs do: [ :entity | self deny: entity isStub ]
 ]
 
-{ #category : #utilities }
+{ #category : 'utilities' }
 MooseAbstractGroupTest >> twoClasses [
 	| classA classB |
 	classA := FamixTest1Class new.

@@ -6,15 +6,17 @@ I represent a the removal of slots from a class when updating an already generat
 
 "
 Class {
-	#name : #FmxSlotRemovals,
-	#superclass : #FmxCodeChange,
+	#name : 'FmxSlotRemovals',
+	#superclass : 'FmxCodeChange',
 	#instVars : [
 		'slots'
 	],
-	#category : #'Famix-MetamodelBuilder-Core-Changes'
+	#category : 'Famix-MetamodelBuilder-Core-Changes',
+	#package : 'Famix-MetamodelBuilder-Core',
+	#tag : 'Changes'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 FmxSlotRemovals class >> slots: aCollection [
 
 	^ self new
@@ -22,25 +24,25 @@ FmxSlotRemovals class >> slots: aCollection [
 		  yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxSlotRemovals >> apply [
 
 	slots do: [ :e | e owningClass removeInstVarNamed: e name  ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FmxSlotRemovals >> isRemoval [
 
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxSlotRemovals >> slots [
 
 	^ slots
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxSlotRemovals >> slots: anObject [
 
 	slots := anObject

@@ -11,14 +11,16 @@
 
 "
 Class {
-	#name : #MooseMSEImporterTestSourceLanguage,
-	#superclass : #MooseMSEImporterTestEntity,
+	#name : 'MooseMSEImporterTestSourceLanguage',
+	#superclass : 'MooseMSEImporterTestEntity',
 	#traits : 'FamixTSourceLanguage',
 	#classTraits : 'FamixTSourceLanguage classTrait',
-	#category : #'Moose-Core-Tests-Entities-Entities'
+	#category : 'Moose-Core-Tests-Entities-Entities',
+	#package : 'Moose-Core-Tests-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 MooseMSEImporterTestSourceLanguage class >> annotation [
 
 	<FMClass: #SourceLanguage super: #MooseMSEImporterTestEntity>

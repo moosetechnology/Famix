@@ -1,25 +1,27 @@
 Class {
-	#name : #FmxMBRelationSideGenerationStrategy,
-	#superclass : #Object,
+	#name : 'FmxMBRelationSideGenerationStrategy',
+	#superclass : 'Object',
 	#instVars : [
 		'relationSide'
 	],
-	#category : #'Famix-MetamodelBuilder-Core-Implementation'
+	#category : 'Famix-MetamodelBuilder-Core-Implementation',
+	#package : 'Famix-MetamodelBuilder-Core',
+	#tag : 'Implementation'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 FmxMBRelationSideGenerationStrategy class >> for: aRelationSide [
 
 	^ self new relationSide: aRelationSide
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBRelationSideGenerationStrategy >> category [ 
 	
 	^ 'accessing'
 ]
 
-{ #category : #generation }
+{ #category : 'generation' }
 FmxMBRelationSideGenerationStrategy >> compileMethod: methodSource for: aRelationSide in: aClassOrTrait [
 
 	aRelationSide builder environment
@@ -28,13 +30,13 @@ FmxMBRelationSideGenerationStrategy >> compileMethod: methodSource for: aRelatio
 		classified: self category
 ]
 
-{ #category : #generation }
+{ #category : 'generation' }
 FmxMBRelationSideGenerationStrategy >> generateGetterCoreIn: aClassOrTrait on: aStream for: aRelationSide [
 
 	^ self subclassResponsibility
 ]
 
-{ #category : #generation }
+{ #category : 'generation' }
 FmxMBRelationSideGenerationStrategy >> generateGetterIn: aClassOrTrait for: aRelationSide [
 
 	| methodSource commentDefinition |
@@ -96,13 +98,13 @@ FmxMBRelationSideGenerationStrategy >> generateGetterIn: aClassOrTrait for: aRel
 	self compileMethod: methodSource for: aRelationSide in: aClassOrTrait
 ]
 
-{ #category : #generation }
+{ #category : 'generation' }
 FmxMBRelationSideGenerationStrategy >> generateSetterCoreIn: aClassOrTrait on: aStream for: aRelationSide [
 
 	^ self subclassResponsibility
 ]
 
-{ #category : #generation }
+{ #category : 'generation' }
 FmxMBRelationSideGenerationStrategy >> generateSetterIn: aClassOrTrait for: aRelationSide [
 
 	| methodSource |
@@ -122,13 +124,13 @@ FmxMBRelationSideGenerationStrategy >> generateSetterIn: aClassOrTrait for: aRel
 	self compileMethod: methodSource for: aRelationSide in: aClassOrTrait
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBRelationSideGenerationStrategy >> relationSide [
 
 	^ relationSide
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBRelationSideGenerationStrategy >> relationSide: anObject [
 
 	relationSide := anObject

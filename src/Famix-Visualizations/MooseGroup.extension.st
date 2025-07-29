@@ -1,6 +1,6 @@
-Extension { #name : #MooseGroup }
+Extension { #name : 'MooseGroup' }
 
-{ #category : #'*Famix-Visualizations' }
+{ #category : '*Famix-Visualizations' }
 MooseGroup >> nameCloud [
 
 	^ MooseGroupNameCloud forMooseGroup: self

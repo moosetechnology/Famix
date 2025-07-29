@@ -1,10 +1,11 @@
 Class {
-	#name : #FamixStNavigationTestResource,
-	#superclass : #SmalltalkModelTestResource,
-	#category : #'Moose-SmalltalkImporter-KGB-Tests'
+	#name : 'FamixStNavigationTestResource',
+	#superclass : 'SmalltalkModelTestResource',
+	#category : 'Moose-SmalltalkImporter-KGB-Tests',
+	#package : 'Moose-SmalltalkImporter-KGB-Tests'
 }
 
-{ #category : #utilites }
+{ #category : 'utilites' }
 FamixStNavigationTestResource >> getMethod: methodNameString from: aFAMIXClass [ 
 	 
 	| mooseName | 
@@ -13,7 +14,7 @@ FamixStNavigationTestResource >> getMethod: methodNameString from: aFAMIXClass [
 	^self model entityNamed: mooseName
 ]
 
-{ #category : #setup }
+{ #category : 'setup' }
 FamixStNavigationTestResource >> importModel [
 
 	| importer classes namespaces |
@@ -42,6 +43,6 @@ FamixStNavigationTestResource >> importModel [
 		namespace := namespaces at: index.
 		classArray do: [ :each |
 			| class |
-			class := model entityNamed: 'Smalltalk::' , each.
+			class := model entityNamed: 'Smalltalk.' , each.
 			class typeContainer: namespace ] ]
 ]

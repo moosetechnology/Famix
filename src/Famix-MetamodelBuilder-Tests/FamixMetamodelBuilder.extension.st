@@ -1,6 +1,6 @@
-Extension { #name : #FamixMetamodelBuilder }
+Extension { #name : 'FamixMetamodelBuilder' }
 
-{ #category : #'*Famix-MetamodelBuilder-Tests' }
+{ #category : '*Famix-MetamodelBuilder-Tests' }
 FamixMetamodelBuilder >> beForTesting [
 
 	<ignoreForCoverage>
@@ -11,7 +11,7 @@ FamixMetamodelBuilder >> beForTesting [
 	^ self
 ]
 
-{ #category : #'*Famix-MetamodelBuilder-Tests' }
+{ #category : '*Famix-MetamodelBuilder-Tests' }
 FamixMetamodelBuilder class >> forTesting [
 
 	| aBuilder |

@@ -12,26 +12,22 @@
 | `target` | `FamixTFileInclude` | `incomingIncludeRelations` | `FamixTWithFileIncludes` | The file that is included|
 
 
-## Properties
-======================
-
-| Name | Type | Default value | Comment |
-|---|
-| `isStub` | `Boolean` | false | Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.|
 
 "
 Trait {
-	#name : #FamixTFileInclude,
+	#name : 'FamixTFileInclude',
 	#instVars : [
 		'#source => FMOne type: #FamixTWithFileIncludes opposite: #outgoingIncludeRelations',
 		'#target => FMOne type: #FamixTWithFileIncludes opposite: #incomingIncludeRelations'
 	],
 	#traits : 'FamixTAssociation',
 	#classTraits : 'FamixTAssociation classTrait',
-	#category : #'Famix-Traits-FileInclude'
+	#category : 'Famix-Traits-FileInclude',
+	#package : 'Famix-Traits',
+	#tag : 'FileInclude'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTFileInclude classSide >> annotation [
 
 	<FMClass: #TFileInclude super: #Object>
@@ -40,7 +36,14 @@ FamixTFileInclude classSide >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'visitor' }
+FamixTFileInclude >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTFileInclude: self
+]
+
+{ #category : 'accessing' }
 FamixTFileInclude >> source [
 	"Relation named: #source type: #FamixTWithFileIncludes opposite: #outgoingIncludeRelations"
 
@@ -49,14 +52,14 @@ FamixTFileInclude >> source [
 	^ source
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTFileInclude >> source: anObject [
 
 	<generated>
 	source := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTFileInclude >> target [
 	"Relation named: #target type: #FamixTWithFileIncludes opposite: #incomingIncludeRelations"
 
@@ -65,7 +68,7 @@ FamixTFileInclude >> target [
 	^ target
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTFileInclude >> target: anObject [
 
 	<generated>

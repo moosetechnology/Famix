@@ -1,15 +1,17 @@
 Class {
-	#name : #FamixFileTest,
-	#superclass : #FamixAbstractFileTest,
-	#category : #'Famix-Test1-Tests-Files'
+	#name : 'FamixFileTest',
+	#superclass : 'FamixAbstractFileTest',
+	#category : 'Famix-Test1-Tests-Files',
+	#package : 'Famix-Test1-Tests',
+	#tag : 'Files'
 }
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 FamixFileTest >> actualClass [
 	^ FamixTest1File
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixFileTest >> testNumberOfBytes [
 	| sourceFile file |
 	sourceFile := FileSystem memory / 'test.txt'.
@@ -22,7 +24,7 @@ FamixFileTest >> testNumberOfBytes [
 	self assert: file numberOfBytes equals: 27
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixFileTest >> testNumberOfCharacters [
 	| sourceFile file |
 	sourceFile := FileSystem memory / 'test.txt'.
@@ -35,7 +37,7 @@ FamixFileTest >> testNumberOfCharacters [
 	self assert: file numberOfCharacters equals: 32
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixFileTest >> testNumberOfCharactersWithCRLF [
 	| sourceFile file |
 	sourceFile := FileSystem memory / 'test.txt'.
@@ -48,7 +50,7 @@ FamixFileTest >> testNumberOfCharactersWithCRLF [
 	self assert: file numberOfCharacters equals: 38
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixFileTest >> testNumberOfCharactersWithLineReturns [
 	| sourceFile file |
 	sourceFile := FileSystem memory / 'test.txt'.
@@ -67,7 +69,7 @@ characters.' ].
 	self assert: file numberOfCharacters equals: 32
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixFileTest >> testNumberOfEmptyLinesOfText [
 	| sourceFile file |
 	sourceFile := FileSystem memory / 'test.txt'.
@@ -90,7 +92,7 @@ test.' ].
 	self assert: file numberOfEmptyLinesOfText equals: 3
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixFileTest >> testNumberOfEmptyLinesOfTextWithCRLF [
 	| sourceFile file |
 	sourceFile := FileSystem memory / 'test.txt'.
@@ -103,7 +105,7 @@ FamixFileTest >> testNumberOfEmptyLinesOfTextWithCRLF [
 	self assert: file numberOfEmptyLinesOfText equals: 3
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixFileTest >> testNumberOfEmptyLinesOfTextWithoutEmptyLine [
 	| sourceFile file |
 	sourceFile := FileSystem memory / 'test.txt'.

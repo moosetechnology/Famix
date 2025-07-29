@@ -1,10 +1,11 @@
 Class {
-	#name : #FamixPharoAttributeTest,
-	#superclass : #TestCase,
-	#category : #'Famix-PharoSmalltalk-Tests'
+	#name : 'FamixPharoAttributeTest',
+	#superclass : 'TestCase',
+	#category : 'Famix-PharoSmalltalk-Tests',
+	#package : 'Famix-PharoSmalltalk-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixPharoAttributeTest >> testIsClassSide [
 
 	| attribute |
@@ -13,7 +14,7 @@ FamixPharoAttributeTest >> testIsClassSide [
 	self assert: attribute isClassSide
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixPharoAttributeTest >> testSharedVariableArePersisted [
 
 	| attribute |

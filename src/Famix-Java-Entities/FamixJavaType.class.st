@@ -15,16 +15,14 @@
 ### Incoming dependencies
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `generics` | `FamixTConcreteParameterType` | `concreteParameter` | `FamixTParameterConcretization` | Generic relationships, i.e. known genericParameter of this type.|
-| `incomingReferences` | `FamixTReferenceable` | `referredType` | `FamixTReference` | References to this entity by other entities.|
+| `incomingReferences` | `FamixTReferenceable` | `referredEntity` | `FamixTReference` | References to this entity by other entities.|
+| `incomingTypings` | `FamixTType` | `declaredType` | `FamixTEntityTyping` | Relations to the entities that have this as type.|
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `concreteEntities` | `FamixTConcreteParameterType` | `concreteParameters` | `FamixTParametricEntity` | The concrete entities that use me.|
 | `lowerBoundedWildcards` | `FamixJavaTBound` | `lowerBound` | `FamixJavaTBounded` | Wildcards lower bounded by this bound.|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
-| `typedEntities` | `FamixTType` | `declaredType` | `FamixTTypedEntity` | Entities that have this type as declaredType|
 | `upperBoundedWildcards` | `FamixJavaTBound` | `upperBound` | `FamixJavaTBounded` | Wildcards upper bounded by this bound.|
 
 
@@ -38,14 +36,16 @@
 
 "
 Class {
-	#name : #FamixJavaType,
-	#superclass : #FamixJavaContainerEntity,
-	#traits : 'FamixJavaTBound + FamixTConcreteParameterType + FamixTWithMethods',
-	#classTraits : 'FamixJavaTBound classTrait + FamixTConcreteParameterType classTrait + FamixTWithMethods classTrait',
-	#category : #'Famix-Java-Entities-Entities'
+	#name : 'FamixJavaType',
+	#superclass : 'FamixJavaContainerEntity',
+	#traits : 'FamixJavaTBound + FamixTType + FamixTWithMethods',
+	#classTraits : 'FamixJavaTBound classTrait + FamixTType classTrait + FamixTWithMethods classTrait',
+	#category : 'Famix-Java-Entities-Entities',
+	#package : 'Famix-Java-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixJavaType class >> annotation [
 
 	<FMClass: #Type super: #FamixJavaContainerEntity>
@@ -54,12 +54,19 @@ FamixJavaType class >> annotation [
 	^ self
 ]
 
-{ #category : #'Famix-Extensions' }
+{ #category : 'visitor' }
+FamixJavaType >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaType: self
+]
+
+{ #category : 'Famix-Extensions' }
 FamixJavaType >> allAnnotationTypes [
 	^ self allAnnotationInstances collectAsSet: #annotationType
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixJavaType >> anySuperclass [
 "Mircea: this used to return interfaces too. fixed now. 
 	also added superclass that does the same thing"
@@ -71,19 +78,19 @@ FamixJavaType >> anySuperclass [
 	^ nil
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixJavaType >> hasMethodWithSignature: aStringOrSymbol [
 	| symbol |
 	symbol := aStringOrSymbol asSymbol.
 	^self methods anySatisfy: [:each | each signature asSymbol = symbol]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixJavaType >> hasMethodsAnnotatedWith: aString [
 	^ self methods anySatisfy: [ :each | each isAnnotatedWith: aString ]
 ]
 
-{ #category : #'Famix-Implementation' }
+{ #category : 'Famix-Implementation' }
 FamixJavaType >> implementationOf: signature [
 	self withSuperclassesDo: [ :class | | found |
 			found := class methods
@@ -93,13 +100,13 @@ FamixJavaType >> implementationOf: signature [
 	^ nil
 ]
 
-{ #category : #'Famix-Java' }
+{ #category : 'Famix-Java' }
 FamixJavaType >> implementedInterfaces [
 
 	^ self directSuperclasses select: #isInterface
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixJavaType >> isAnonymousClass [
 
 	^ self typeContainer isNotNil and: [ 
@@ -107,7 +114,7 @@ FamixJavaType >> isAnonymousClass [
 			  self name isAllDigits or: [ '*_anonymous_*' match: self name ] ] ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixJavaType >> isInnerClass [
 
 	<FMProperty: #isInnerClass type: #Boolean>
@@ -119,44 +126,23 @@ FamixJavaType >> isInnerClass [
 		  ifNil: [ false ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixJavaType >> isInterface [
 	^ false
 ]
 
-{ #category : #testing }
-FamixJavaType >> isJUnit3TestCase [
-	^ self superclassHierarchy anySatisfy: [:each | each mooseName =  #'junit::framework::TestCase']
-]
-
-{ #category : #testing }
-FamixJavaType >> isJUnit4TestCase [
-	<FMProperty: #isJUnit4TestCase type: #Boolean>
-	<derived>
-	<FMComment: 'True if the method is considered as a Junit 4 Java test'>
-	^ self methods anySatisfy: [ :m | m isJUnit4Test ]
-]
-
-{ #category : #testing }
+{ #category : 'testing' }
 FamixJavaType >> isLonelyWithin: aClassGroup [
 	^ ( self subclassHierarchyGroup intersection: aClassGroup ) isEmpty and: [
 		( self superclassHierarchyGroup intersection: aClassGroup ) isEmpty ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixJavaType >> isParameterType [
 	^ false
 ]
 
-{ #category : #testing }
-FamixJavaType >> isTestCase [
-	<FMProperty: #isTestCase type: #Boolean>
-	<derived>
-	<FMComment: 'True if the method is considered as a Java test'>
-	^ self isJUnit3TestCase or: [ self isJUnit4TestCase ] 
-]
-
-{ #category : #'Famix-Extensions-operations' }
+{ #category : 'Famix-Extensions-operations' }
 FamixJavaType >> lookUp: aMethodSignature [
 	"Returns the first method that has as signature #aMethodSignature. 
 	The search starts from the receiver's methods and traveses the inherited methods from the receiver's superclasses heirarchy.
@@ -176,27 +162,27 @@ FamixJavaType >> lookUp: aMethodSignature [
 	^ searchedM
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixJavaType >> parentScope [
 	"Polymorphic alias to mimic GlobalVariable#parentScope and similar"
 
 	^ self typeContainer
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixJavaType >> printOn: aStream [
+
 	self name ifNotNil: [ aStream nextPutAll: self name ].
-	self typeContainer
-		ifNotNil: [ :parent | 
-			aStream nextPutAll: ' in '.
-			parent mooseNameOn: aStream ].
+	self typeContainer ifNotNil: [ :parent |
+		aStream nextPutAll: ' in '.
+		parent mooseNameOn: aStream ].
 	aStream
 		nextPutAll: ' (';
-		nextPutAll: (self class name removePrefix: 'FamixJava');
+		nextPutAll: (self class name withoutPrefix: 'FamixJava');
 		nextPut: $)
 ]
 
-{ #category : #'Famix-Implementation' }
+{ #category : 'Famix-Implementation' }
 FamixJavaType >> withSuperclassHierarchyGroup [
 	<navigation: 'With all superclasses'>
 	^ MooseGroup

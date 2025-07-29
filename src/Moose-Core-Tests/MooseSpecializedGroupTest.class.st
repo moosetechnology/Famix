@@ -1,15 +1,16 @@
 Class {
-	#name : #MooseSpecializedGroupTest,
-	#superclass : #MooseGroupTest,
-	#category : #'Moose-Core-Tests'
+	#name : 'MooseSpecializedGroupTest',
+	#superclass : 'MooseGroupTest',
+	#category : 'Moose-Core-Tests',
+	#package : 'Moose-Core-Tests'
 }
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 MooseSpecializedGroupTest >> actualClass [
 	^ MooseSpecializedGroup
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseSpecializedGroupTest >> testAllModelMethod [
 	| model |
 	model := self twoClasses.

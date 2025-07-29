@@ -11,14 +11,16 @@
 
 "
 Trait {
-	#name : #FamixTTemplateUser,
+	#name : 'FamixTTemplateUser',
 	#instVars : [
 		'#template => FMOne type: #FamixTTemplate opposite: #templateUsers'
 	],
-	#category : #'Famix-Traits-Template'
+	#category : 'Famix-Traits-Template',
+	#package : 'Famix-Traits',
+	#tag : 'Template'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTTemplateUser classSide >> annotation [
 
 	<FMClass: #TTemplateUser super: #Object>
@@ -27,7 +29,14 @@ FamixTTemplateUser classSide >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'visitor' }
+FamixTTemplateUser >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTTemplateUser: self
+]
+
+{ #category : 'accessing' }
 FamixTTemplateUser >> template [
 	"Relation named: #template type: #FamixTTemplate opposite: #templateUsers"
 
@@ -35,7 +44,7 @@ FamixTTemplateUser >> template [
 	^ template
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTTemplateUser >> template: anObject [
 
 	<generated>

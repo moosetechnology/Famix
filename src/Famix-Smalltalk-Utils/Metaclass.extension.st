@@ -1,6 +1,6 @@
-Extension { #name : #Metaclass }
+Extension { #name : 'Metaclass' }
 
-{ #category : #'*Famix-Smalltalk-Utils' }
+{ #category : '*Famix-Smalltalk-Utils' }
 Metaclass >> mooseName [
-	^ ('Smalltalk::' , self soleInstance name , '_class') asSymbol
+	^ ('Smalltalk.' , self soleInstance name , '_class') asSymbol
 ]

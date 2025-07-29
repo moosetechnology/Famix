@@ -25,19 +25,20 @@
 
 | Name | Type | Default value | Comment |
 |---|
-| `isStub` | `Boolean` | false | Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.|
 | `isWrite` | `Boolean` | false | Write access|
 
 "
 Class {
-	#name : #FamixStAccess,
-	#superclass : #FamixStEntity,
+	#name : 'FamixStAccess',
+	#superclass : 'FamixStEntity',
 	#traits : 'FamixTAccess',
 	#classTraits : 'FamixTAccess classTrait',
-	#category : #'Famix-PharoSmalltalk-Entities-Entities'
+	#category : 'Famix-PharoSmalltalk-Entities-Entities',
+	#package : 'Famix-PharoSmalltalk-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixStAccess class >> annotation [
 
 	<FMClass: #Access super: #FamixStEntity>

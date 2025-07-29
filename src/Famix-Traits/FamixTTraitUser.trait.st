@@ -5,20 +5,22 @@
 ### Incoming dependencies
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `outgoingTraitUsages` | `FamixTTraitUser` | `user` | `FamixTTraitUsage` | |
+| `traitUsages` | `FamixTTraitUser` | `user` | `FamixTTraitUsage` | |
 
 
 
 "
 Trait {
-	#name : #FamixTTraitUser,
+	#name : 'FamixTTraitUser',
 	#instVars : [
-		'#outgoingTraitUsages => FMMany type: #FamixTTraitUsage opposite: #user'
+		'#traitUsages => FMMany type: #FamixTTraitUsage opposite: #user'
 	],
-	#category : #'Famix-Traits-Traits'
+	#category : 'Famix-Traits-Trait',
+	#package : 'Famix-Traits',
+	#tag : 'Trait'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTTraitUser classSide >> annotation [
 
 	<FMClass: #TTraitUser super: #Object>
@@ -27,25 +29,31 @@ FamixTTraitUser classSide >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
-FamixTTraitUser >> addOutgoingTraitUsage: anObject [
+{ #category : 'visitor' }
+FamixTTraitUser >> accept: aVisitor [
 
-	outgoingTraitUsages add: anObject
-
+	<generated>
+	^ aVisitor visitFamixTTraitUser: self
 ]
 
-{ #category : #accessing }
-FamixTTraitUser >> outgoingTraitUsages [
-	"Relation named: #outgoingTraitUsages type: #FamixTTraitUsage opposite: #user"
+{ #category : 'adding' }
+FamixTTraitUser >> addTraitUsage: anObject [
+	<generated>
+	^ self traitUsages add: anObject
+]
+
+{ #category : 'accessing' }
+FamixTTraitUser >> traitUsages [
+	"Relation named: #traitUsages type: #FamixTTraitUsage opposite: #user"
 
 	<generated>
 	<derived>
-	^ outgoingTraitUsages
+	^ traitUsages
 ]
 
-{ #category : #accessing }
-FamixTTraitUser >> outgoingTraitUsages: anObject [
+{ #category : 'accessing' }
+FamixTTraitUser >> traitUsages: anObject [
 
 	<generated>
-	outgoingTraitUsages value: anObject
+	traitUsages value: anObject
 ]

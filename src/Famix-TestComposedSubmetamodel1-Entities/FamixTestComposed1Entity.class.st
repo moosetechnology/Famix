@@ -1,10 +1,12 @@
 Class {
-	#name : #FamixTestComposed1Entity,
-	#superclass : #MooseEntity,
-	#category : #'Famix-TestComposedSubmetamodel1-Entities-Entities'
+	#name : 'FamixTestComposed1Entity',
+	#superclass : 'MooseEntity',
+	#category : 'Famix-TestComposedSubmetamodel1-Entities-Entities',
+	#package : 'Famix-TestComposedSubmetamodel1-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTestComposed1Entity class >> annotation [
 
 	<FMClass: #Entity super: #MooseEntity>
@@ -14,56 +16,63 @@ FamixTestComposed1Entity class >> annotation [
 	^ self
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTestComposed1Entity class >> isAbstract [
 
 	<generated>
 	^ self == FamixTestComposed1Entity
 ]
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTestComposed1Entity class >> metamodel [
 
 	<generated>
 	^ FamixTestComposed1Model metamodel
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTestComposed1Entity >> isBehavioural [
 
 	<generated>
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTestComposed1Entity >> isClass [
 
 	<generated>
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
+FamixTestComposed1Entity >> isComment [
+
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
 FamixTestComposed1Entity >> isMethod [
 
 	<generated>
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTestComposed1Entity >> isNamedEntity [
 
 	<generated>
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTestComposed1Entity >> isQueryable [
 
 	<generated>
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTestComposed1Entity >> isType [
 
 	<generated>

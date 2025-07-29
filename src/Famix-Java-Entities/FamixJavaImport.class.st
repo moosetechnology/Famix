@@ -5,7 +5,7 @@
 ### Association source
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `importingEntity` | `FamixTImport` | `outgoingImports` | `FamixTWithImports` | Importing entity|
+| `importingEntity` | `FamixTImport` | `imports` | `FamixTWithImports` | Importing entity|
 
 ### Association target
 | Relation | Origin | Opposite | Type | Comment |
@@ -20,27 +20,30 @@
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
 
 
-## Properties
-======================
-
-| Name | Type | Default value | Comment |
-|---|
-| `isStub` | `Boolean` | false | Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.|
 
 "
 Class {
-	#name : #FamixJavaImport,
-	#superclass : #FamixJavaEntity,
+	#name : 'FamixJavaImport',
+	#superclass : 'FamixJavaEntity',
 	#traits : 'FamixTImport',
 	#classTraits : 'FamixTImport classTrait',
-	#category : #'Famix-Java-Entities-Entities'
+	#category : 'Famix-Java-Entities-Entities',
+	#package : 'Famix-Java-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixJavaImport class >> annotation [
 
 	<FMClass: #Import super: #FamixJavaEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
 	^ self
+]
+
+{ #category : 'visitor' }
+FamixJavaImport >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaImport: self
 ]

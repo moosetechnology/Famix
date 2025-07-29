@@ -1,16 +1,17 @@
 Class {
-	#name : #MooseMSEImporterTest,
-	#superclass : #TestCase,
-	#category : #'Moose-Core-Tests'
+	#name : 'MooseMSEImporterTest',
+	#superclass : 'TestCase',
+	#category : 'Moose-Core-Tests',
+	#package : 'Moose-Core-Tests'
 }
 
-{ #category : #util }
+{ #category : 'util' }
 MooseMSEImporterTest >> readMSEStream: aStream [
 
 	^ MooseMSEImporterTestModel new importFromMSEStream: aStream
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseMSEImporterTest >> testComplex [
 
 	| mooseModel |
@@ -36,7 +37,7 @@ MooseMSEImporterTest >> testComplex [
 		((mooseModel allClasses collect: #name) includes: 'ClassA')
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseMSEImporterTest >> testOneClass [
 
 	| mooseModel |
@@ -49,7 +50,7 @@ MooseMSEImporterTest >> testOneClass [
 		equals: 'ClassA'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseMSEImporterTest >> testOneClassAndOnePackage [
 
 	| mooseModel |
@@ -66,7 +67,7 @@ MooseMSEImporterTest >> testOneClassAndOnePackage [
 		equals: 'ClassA'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseMSEImporterTest >> testOnePackage [
 
 	| mooseModel |
@@ -79,7 +80,7 @@ MooseMSEImporterTest >> testOnePackage [
 		((mooseModel allPackages collect: #name) includes: 'PackageA')
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseMSEImporterTest >> testOnePrimitiveType [
 
 	| mooseModel |
@@ -92,15 +93,16 @@ MooseMSEImporterTest >> testOnePrimitiveType [
 		equals: 'int'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseMSEImporterTest >> testOnePrimitiveTypeAndMethod [
 
 	| mooseModel |
 	mooseModel := self readMSEStream: '(
-(Moose-Core-Tests-Entities.PrimitiveType (id: 1) (name ''int''))
-(Moose-Core-Tests-Entities.Class (id: 2) (name ''ClassA''))
-(Moose-Core-Tests-Entities.Method (id: 3) (name ''methodA'') (declaredType (ref: 1)) (parentType (ref: 2)))
-)' readStream.
+	(Moose-Core-Tests-Entities.Class (id: 1) (name ''classA''))
+	(Moose-Core-Tests-Entities.Method (id: 2)
+		(name ''methodA'') (parentType (ref: 1)) (typing (ref: 3)))
+	(Moose-Core-Tests-Entities.PrimitiveType (id: 4) (name ''int''))
+	(Moose-Core-Tests-Entities.EntityTyping (id: 3) (declaredType (ref: 4))))' readStream.
 	self
 		assert: (mooseModel allPrimitiveTypes collect: #name) first
 		equals: 'int'.
@@ -109,7 +111,7 @@ MooseMSEImporterTest >> testOnePrimitiveTypeAndMethod [
 		equals: mooseModel allPrimitiveTypes first
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseMSEImporterTest >> testPropertyWithNoSetter [
 
 	| mooseModel |
@@ -122,7 +124,7 @@ MooseMSEImporterTest >> testPropertyWithNoSetter [
 		equals: 42
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseMSEImporterTest >> testSimple [
 
 	| mooseSample mooseModel classA |
@@ -137,7 +139,7 @@ MooseMSEImporterTest >> testSimple [
 	self
 		assert: (mooseModel allPackages collect: #name) asArray
 		equals: { 'aPackage'. 'aPackage' }.
-	classA := mooseModel entityNamed: #'aNamespace::ClassA'.
+	classA := mooseModel entityNamed: #'aNamespace.ClassA'.
 	self assert: classA isNotNil.
 	self
 		assert: classA typeContainer
@@ -161,7 +163,7 @@ MooseMSEImporterTest >> testSimple [
 		raise: Error
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseMSEImporterTest >> testUndeclaredProperty [
 
 	| mooseModel |

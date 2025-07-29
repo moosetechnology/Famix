@@ -5,26 +5,28 @@
 ### Children
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `attributes` | `FamixTWithAnnotationInstanceAttributes` | `parentAnnotationInstance` | `FamixTAnnotationInstanceAttribute` | This corresponds to the actual values of the attributes in an AnnotationInstance|
+| `attributes` | `FamixTAnnotationInstance` | `parentAnnotationInstance` | `FamixTAnnotationInstanceAttribute` | This corresponds to the actual values of the attributes in an AnnotationInstance|
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `annotatedEntity` | `FamixTAnnotationInstance` | `annotationInstances` | `FamixTWithAnnotationInstances` | The NamedEntity on which the annotation occurs.|
-| `annotationType` | `FamixTTypedAnnotationInstance` | `instances` | `FamixTAnnotationType` | Refers to the type of an annotation. (In some languages, Java and C#, an annotation as an explicit type). |
+| `annotationType` | `FamixTAnnotationInstance` | `instances` | `FamixTAnnotationType` | Refers to the type of an annotation. (In some languages, Java and C#, an annotation as an explicit type). |
 
 
 
 "
 Class {
-	#name : #FamixStAnnotationInstance,
-	#superclass : #FamixStSourcedEntity,
-	#traits : 'FamixTAnnotationInstance + FamixTTypedAnnotationInstance + FamixTWithAnnotationInstanceAttributes',
-	#classTraits : 'FamixTAnnotationInstance classTrait + FamixTTypedAnnotationInstance classTrait + FamixTWithAnnotationInstanceAttributes classTrait',
-	#category : #'Famix-PharoSmalltalk-Entities-Entities'
+	#name : 'FamixStAnnotationInstance',
+	#superclass : 'FamixStSourcedEntity',
+	#traits : 'FamixTAnnotationInstance',
+	#classTraits : 'FamixTAnnotationInstance classTrait',
+	#category : 'Famix-PharoSmalltalk-Entities-Entities',
+	#package : 'Famix-PharoSmalltalk-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixStAnnotationInstance class >> annotation [
 
 	<FMClass: #AnnotationInstance super: #FamixStSourcedEntity>
@@ -33,7 +35,7 @@ FamixStAnnotationInstance class >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixStAnnotationInstance >> name [
 	^ String
 		streamContents: [ :stream | 

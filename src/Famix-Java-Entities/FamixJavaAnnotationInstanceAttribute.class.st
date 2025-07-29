@@ -5,12 +5,12 @@
 ### Parents
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `parentAnnotationInstance` | `FamixTAnnotationInstanceAttribute` | `attributes` | `FamixTWithAnnotationInstanceAttributes` | The instance of the annotation in which the attribute is used.|
+| `parentAnnotationInstance` | `FamixTAnnotationInstanceAttribute` | `attributes` | `FamixTAnnotationInstance` | The instance of the annotation in which the attribute is used.|
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `annotationTypeAttribute` | `FamixTTypedAnnotationInstanceAttribute` | `annotationAttributeInstances` | `FamixTAnnotationTypeAttribute` | This corresponds to the type of the attribute in an AnnotationInstance|
+| `annotationTypeAttribute` | `FamixTAnnotationInstanceAttribute` | `annotationAttributeInstances` | `FamixTAnnotationTypeAttribute` | This corresponds to the type of the attribute in an AnnotationInstance|
 
 
 ## Properties
@@ -22,14 +22,16 @@
 
 "
 Class {
-	#name : #FamixJavaAnnotationInstanceAttribute,
-	#superclass : #FamixJavaSourcedEntity,
-	#traits : 'FamixTAnnotationInstanceAttribute + FamixTTypedAnnotationInstanceAttribute',
-	#classTraits : 'FamixTAnnotationInstanceAttribute classTrait + FamixTTypedAnnotationInstanceAttribute classTrait',
-	#category : #'Famix-Java-Entities-Entities'
+	#name : 'FamixJavaAnnotationInstanceAttribute',
+	#superclass : 'FamixJavaSourcedEntity',
+	#traits : 'FamixTAnnotationInstanceAttribute',
+	#classTraits : 'FamixTAnnotationInstanceAttribute classTrait',
+	#category : 'Famix-Java-Entities-Entities',
+	#package : 'Famix-Java-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixJavaAnnotationInstanceAttribute class >> annotation [
 
 	<FMClass: #AnnotationInstanceAttribute super: #FamixJavaSourcedEntity>
@@ -38,7 +40,14 @@ FamixJavaAnnotationInstanceAttribute class >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'visitor' }
+FamixJavaAnnotationInstanceAttribute >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaAnnotationInstanceAttribute: self
+]
+
+{ #category : 'accessing' }
 FamixJavaAnnotationInstanceAttribute >> name [
 	^ self annotationTypeAttribute ifNotNil: #name
 ]

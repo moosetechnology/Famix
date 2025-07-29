@@ -8,37 +8,39 @@ This could be managed via a MooseQUeryNavigationMultipleAssociationsStrategy but
 
 "
 Class {
-	#name : #MQNavigationSpecificAssociationsStrategy,
-	#superclass : #MQNavigationAssociationSelectionStrategy,
+	#name : 'MQNavigationSpecificAssociationsStrategy',
+	#superclass : 'MQNavigationAssociationSelectionStrategy',
 	#instVars : [
 		'associations'
 	],
-	#category : #'Moose-Query-Navigating'
+	#category : 'Moose-Query-Navigating',
+	#package : 'Moose-Query',
+	#tag : 'Navigating'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MQNavigationSpecificAssociationsStrategy class >> associations: aCollection [
 	^ self new
 		associations: aCollection;
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MQNavigationSpecificAssociationsStrategy >> associations [
 	^ associations
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MQNavigationSpecificAssociationsStrategy >> associations: anObject [
 	associations := anObject
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 MQNavigationSpecificAssociationsStrategy >> selectAssociationsIn: aCollection [
 	^ aCollection select: [ :each | associations anySatisfy: [ :association | each isOfType: association ] ]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 MQNavigationSpecificAssociationsStrategy >> storeOn: aStream [
 	aStream
 		nextPut: $(;

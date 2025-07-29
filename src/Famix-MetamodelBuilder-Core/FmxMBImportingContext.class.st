@@ -12,24 +12,26 @@ newBuilder
 ```
 "
 Class {
-	#name : #FmxMBImportingContext,
-	#superclass : #FmxMBBehavior,
-	#category : #'Famix-MetamodelBuilder-Core-Implementation'
+	#name : 'FmxMBImportingContext',
+	#superclass : 'FmxMBBehavior',
+	#category : 'Famix-MetamodelBuilder-Core-Implementation',
+	#package : 'Famix-MetamodelBuilder-Core',
+	#tag : 'Implementation'
 }
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FmxMBImportingContext >> acceptVisitor: aVisitor [
 
 	^ aVisitor visitImportingContext: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBImportingContext >> classGeneralization [
 
 	^ self builder environment basicImportingContextSuperclass
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBImportingContext >> comment [
 
 	^ 'This class is used to choose the entities to be imported when loading a model from file.
@@ -37,13 +39,13 @@ It is used by `MiImportingContextPresenter` in a `MiImportModelFromFileDialog` t
 		  format: { self builder configuration prefix }
 ]
 
-{ #category : #'settings - default' }
+{ #category : 'settings - default' }
 FmxMBImportingContext >> defaultSuperclass [
 
 	^ self builder environment basicImportingContextSuperclass
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FmxMBImportingContext >> generate [
 
 	| aClass superclass |
@@ -70,7 +72,7 @@ FmxMBImportingContext >> generate [
 	self generateMethodsIn: aClass
 ]
 
-{ #category : #'generating-methods' }
+{ #category : 'generating-methods' }
 FmxMBImportingContext >> generateImportAssociation: aFmxMBAssociationClass in: aClass [
 
 	aClass
@@ -82,7 +84,7 @@ FmxMBImportingContext >> generateImportAssociation: aFmxMBAssociationClass in: a
 		classified: 'importing'
 ]
 
-{ #category : #'generating-methods' }
+{ #category : 'generating-methods' }
 FmxMBImportingContext >> generateImportConcreteEntity: aFmxMBClass in: aClass [
 
 	aClass
@@ -94,7 +96,7 @@ FmxMBImportingContext >> generateImportConcreteEntity: aFmxMBClass in: aClass [
 		classified: 'importing'
 ]
 
-{ #category : #'generating-methods' }
+{ #category : 'generating-methods' }
 FmxMBImportingContext >> generateImportIn: aClass [
 
 	self builder classes do: [ :each | 
@@ -109,7 +111,7 @@ FmxMBImportingContext >> generateImportIn: aClass [
 				ifNone: [ self generateImportConcreteEntity: each in: aClass ] ] ]
 ]
 
-{ #category : #'generating-methods' }
+{ #category : 'generating-methods' }
 FmxMBImportingContext >> generateImportingContextMetamodelIn: aClass [
 
 	aClass classSide
@@ -120,7 +122,7 @@ FmxMBImportingContext >> generateImportingContextMetamodelIn: aClass [
 		classified: 'accessing'
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FmxMBImportingContext >> generateMethodsIn: aClass [
 
 	self generateImportingContextMetamodelIn: aClass.
@@ -128,7 +130,7 @@ FmxMBImportingContext >> generateMethodsIn: aClass [
 	self generateImportIn: aClass
 ]
 
-{ #category : #'generating-methods' }
+{ #category : 'generating-methods' }
 FmxMBImportingContext >> generateShouldImportIn: aClass [
 
 	self builder classes do: [ :each | 
@@ -143,7 +145,7 @@ FmxMBImportingContext >> generateShouldImportIn: aClass [
 				classified: 'testing' ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBImportingContext >> name [
 
 	^ 'ImportingContext'

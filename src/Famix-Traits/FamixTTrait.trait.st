@@ -18,15 +18,17 @@ FamixTTrait models a trait as it can be found in Pharo or PHP.
 
 "
 Trait {
-	#name : #FamixTTrait,
+	#name : 'FamixTTrait',
 	#instVars : [
 		'#incomingTraitUsages => FMMany type: #FamixTTraitUsage opposite: #trait',
 		'#traitOwner => FMOne type: #FamixTWithTraits opposite: #traits'
 	],
-	#category : #'Famix-Traits-Trait'
+	#category : 'Famix-Traits-Trait',
+	#package : 'Famix-Traits',
+	#tag : 'Trait'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTTrait classSide >> annotation [
 
 	<FMClass: #TTrait super: #Object>
@@ -35,14 +37,21 @@ FamixTTrait classSide >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'visitor' }
+FamixTTrait >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTTrait: self
+]
+
+{ #category : 'accessing' }
 FamixTTrait >> addIncomingTraitUsage: anObject [
 
 	incomingTraitUsages add: anObject
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTTrait >> incomingTraitUsages [
 	"Relation named: #incomingTraitUsages type: #FamixTTraitUsage opposite: #trait"
 
@@ -51,14 +60,14 @@ FamixTTrait >> incomingTraitUsages [
 	^ incomingTraitUsages
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTTrait >> incomingTraitUsages: anObject [
 
 	<generated>
 	incomingTraitUsages value: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTTrait >> traitOwner [
 	"Relation named: #traitOwner type: #FamixTWithTraits opposite: #traits"
 
@@ -67,14 +76,14 @@ FamixTTrait >> traitOwner [
 	^ traitOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTTrait >> traitOwner: anObject [
 
 	<generated>
 	traitOwner := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FamixTTrait >> traitOwnerGroup [
 	<generated>
 	<navigation: 'TraitOwner'>

@@ -15,7 +15,12 @@ Instance Variables:
 ### Parents
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `parentAnnotationInstance` | `FamixTAnnotationInstanceAttribute` | `attributes` | `FamixTWithAnnotationInstanceAttributes` | The instance of the annotation in which the attribute is used.|
+| `parentAnnotationInstance` | `FamixTAnnotationInstanceAttribute` | `attributes` | `FamixTAnnotationInstance` | The instance of the annotation in which the attribute is used.|
+
+### Other
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `annotationTypeAttribute` | `FamixTAnnotationInstanceAttribute` | `annotationAttributeInstances` | `FamixTAnnotationTypeAttribute` | This corresponds to the type of the attribute in an AnnotationInstance|
 
 
 ## Properties
@@ -27,17 +32,20 @@ Instance Variables:
 
 "
 Trait {
-	#name : #FamixTAnnotationInstanceAttribute,
+	#name : 'FamixTAnnotationInstanceAttribute',
 	#instVars : [
-		'#parentAnnotationInstance => FMOne type: #FamixTWithAnnotationInstanceAttributes opposite: #attributes',
+		'#annotationTypeAttribute => FMOne type: #FamixTAnnotationTypeAttribute opposite: #annotationAttributeInstances',
+		'#parentAnnotationInstance => FMOne type: #FamixTAnnotationInstance opposite: #attributes',
 		'#value => FMProperty'
 	],
 	#traits : 'TEntityMetaLevelDependency',
 	#classTraits : 'TEntityMetaLevelDependency classTrait',
-	#category : #'Famix-Traits-AnnotationInstanceAttribute'
+	#category : 'Famix-Traits-AnnotationInstanceAttribute',
+	#package : 'Famix-Traits',
+	#tag : 'AnnotationInstanceAttribute'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTAnnotationInstanceAttribute classSide >> annotation [
 
 	<FMClass: #TAnnotationInstanceAttribute super: #Object>
@@ -46,9 +54,32 @@ FamixTAnnotationInstanceAttribute classSide >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'visitor' }
+FamixTAnnotationInstanceAttribute >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTAnnotationInstanceAttribute: self
+]
+
+{ #category : 'accessing' }
+FamixTAnnotationInstanceAttribute >> annotationTypeAttribute [
+	"Relation named: #annotationTypeAttribute type: #FamixTAnnotationTypeAttribute opposite: #annotationAttributeInstances"
+
+	<generated>
+	<FMComment: 'This corresponds to the type of the attribute in an AnnotationInstance'>
+	^ annotationTypeAttribute
+]
+
+{ #category : 'accessing' }
+FamixTAnnotationInstanceAttribute >> annotationTypeAttribute: anObject [
+
+	<generated>
+	annotationTypeAttribute := anObject
+]
+
+{ #category : 'accessing' }
 FamixTAnnotationInstanceAttribute >> parentAnnotationInstance [
-	"Relation named: #parentAnnotationInstance type: #FamixTWithAnnotationInstanceAttributes opposite: #attributes"
+	"Relation named: #parentAnnotationInstance type: #FamixTAnnotationInstance opposite: #attributes"
 
 	<generated>
 	<FMComment: 'The instance of the annotation in which the attribute is used.'>
@@ -56,21 +87,21 @@ FamixTAnnotationInstanceAttribute >> parentAnnotationInstance [
 	^ parentAnnotationInstance
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAnnotationInstanceAttribute >> parentAnnotationInstance: anObject [
 
 	<generated>
 	parentAnnotationInstance := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FamixTAnnotationInstanceAttribute >> parentAnnotationInstanceGroup [
 	<generated>
 	<navigation: 'ParentAnnotationInstance'>
 	^ MooseSpecializedGroup with: self parentAnnotationInstance
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAnnotationInstanceAttribute >> value [
 
 	<FMProperty: #value type: #String>
@@ -79,7 +110,7 @@ FamixTAnnotationInstanceAttribute >> value [
 	^ value
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAnnotationInstanceAttribute >> value: anObject [
 	<generated>
 	value := anObject

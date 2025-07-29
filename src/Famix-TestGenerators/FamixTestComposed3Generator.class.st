@@ -1,22 +1,23 @@
 Class {
-	#name : #FamixTestComposed3Generator,
-	#superclass : #FamixMetamodelGenerator,
-	#category : #'Famix-TestGenerators'
+	#name : 'FamixTestComposed3Generator',
+	#superclass : 'FamixMetamodelGenerator',
+	#category : 'Famix-TestGenerators',
+	#package : 'Famix-TestGenerators'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTestComposed3Generator class >> packageName [ 
 
 	^ 'Famix-TestComposed3Metamodel-Entities'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTestComposed3Generator class >> prefix [
 
 	^ #FamixTestComposed3
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTestComposed3Generator class >> submetamodels [
 
 	^ { FamixTestComposedComposedGenerator }

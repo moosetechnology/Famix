@@ -1,63 +1,64 @@
 Class {
-	#name : #FamixTest3SimpleModelTest,
-	#superclass : #TestCase,
+	#name : 'FamixTest3SimpleModelTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'model'
 	],
-	#category : #'Famix-Test3-Tests'
+	#category : 'Famix-Test3-Tests',
+	#package : 'Famix-Test3-Tests'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTest3SimpleModelTest class >> isAbstract [
 	^ self = FamixTest3SimpleModelTest
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest3SimpleModelTest >> c1 [
 	^ model entityNamed: #Class1
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest3SimpleModelTest >> c2 [
 	^ model entityNamed: #Class2
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTest3SimpleModelTest >> classGroup [
 	^ self class environment at: #FamixTest3ClassGroup
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest3SimpleModelTest >> inv1 [
 	^ (model allUsing: FamixTInvocation) anyOne
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest3SimpleModelTest >> m1 [
 	^ model entityNamed: 'Class1.m1'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest3SimpleModelTest >> m2 [
 	^ model entityNamed: 'Class2.m2'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest3SimpleModelTest >> pt1 [
 	^ model entityNamed: #int
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest3SimpleModelTest >> pt2 [
 	^ model entityNamed: #float
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest3SimpleModelTest >> ref1 [
 	^ (model allUsing: FamixTReference) detect: [ :ref | ref source = self m1 and: [ ref target = self pt1 ] ]
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixTest3SimpleModelTest >> setUp [
 	| c1 c2 m1 m2 pt1 |
 	super setUp.
@@ -81,7 +82,7 @@ FamixTest3SimpleModelTest >> setUp [
 	m2 parentType: c2
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTest3SimpleModelTest >> typeGroup [
 	^ self class environment at: #FamixTest3TypeGroup
 ]

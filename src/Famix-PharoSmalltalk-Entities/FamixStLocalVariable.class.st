@@ -7,6 +7,11 @@
 |---|
 | `parentBehaviouralEntity` | `FamixTLocalVariable` | `localVariables` | `FamixTWithLocalVariables` | Behavioural entity declaring this local variable. belongsTo implementation|
 
+### Outgoing dependencies
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `typing` | `FamixTTypedEntity` | `typedEntity` | `FamixTEntityTyping` | Association linking this entity to its declared type.|
+
 ### Incoming dependencies
 | Relation | Origin | Opposite | Type | Comment |
 |---|
@@ -15,7 +20,6 @@
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `declaredType` | `FamixTTypedEntity` | `typedEntities` | `FamixTType` | Type of the entity, if any|
 | `receivingInvocations` | `FamixTInvocationsReceiver` | `receiver` | `FamixTInvocation` | List of invocations performed on this entity (considered as the receiver)|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
 
@@ -30,14 +34,16 @@
 
 "
 Class {
-	#name : #FamixStLocalVariable,
-	#superclass : #FamixStNamedEntity,
+	#name : 'FamixStLocalVariable',
+	#superclass : 'FamixStNamedEntity',
 	#traits : 'FamixTInvocationsReceiver + FamixTLocalVariable',
 	#classTraits : 'FamixTInvocationsReceiver classTrait + FamixTLocalVariable classTrait',
-	#category : #'Famix-PharoSmalltalk-Entities-Entities'
+	#category : 'Famix-PharoSmalltalk-Entities-Entities',
+	#package : 'Famix-PharoSmalltalk-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixStLocalVariable class >> annotation [
 
 	<FMClass: #LocalVariable super: #FamixStNamedEntity>
@@ -46,7 +52,7 @@ FamixStLocalVariable class >> annotation [
 	^ self
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixStLocalVariable >> mooseNameOn: stream [ 
 	| parent |
 	parent := self parentBehaviouralEntity.

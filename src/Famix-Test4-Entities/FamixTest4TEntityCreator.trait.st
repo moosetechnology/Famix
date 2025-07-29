@@ -5,11 +5,13 @@ It provides an API for creating entities and adding them to the model.
 
 "
 Trait {
-	#name : #FamixTest4TEntityCreator,
-	#category : #'Famix-Test4-Entities-Model'
+	#name : 'FamixTest4TEntityCreator',
+	#category : 'Famix-Test4-Entities-Model',
+	#package : 'Famix-Test4-Entities',
+	#tag : 'Model'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTest4TEntityCreator classSide >> annotation [
 
 	<FMClass: #TEntityCreator super: #Object>
@@ -18,56 +20,56 @@ FamixTest4TEntityCreator classSide >> annotation [
 	^ self
 ]
 
-{ #category : #'entity creation' }
+{ #category : 'entity creation' }
 FamixTest4TEntityCreator >> newBook [
 
 	<generated>
 	^ self add: FamixTest4Book new
 ]
 
-{ #category : #'entity creation' }
+{ #category : 'entity creation' }
 FamixTest4TEntityCreator >> newCafeteria [
 
 	<generated>
 	^ self add: FamixTest4Cafeteria new
 ]
 
-{ #category : #'entity creation' }
+{ #category : 'entity creation' }
 FamixTest4TEntityCreator >> newClassroom [
 
 	<generated>
 	^ self add: FamixTest4Classroom new
 ]
 
-{ #category : #'entity creation' }
+{ #category : 'entity creation' }
 FamixTest4TEntityCreator >> newPrincipal [
 
 	<generated>
 	^ self add: FamixTest4Principal new
 ]
 
-{ #category : #'entity creation' }
+{ #category : 'entity creation' }
 FamixTest4TEntityCreator >> newRoom [
 
 	<generated>
 	^ self add: FamixTest4Room new
 ]
 
-{ #category : #'entity creation' }
+{ #category : 'entity creation' }
 FamixTest4TEntityCreator >> newSchool [
 
 	<generated>
 	^ self add: FamixTest4School new
 ]
 
-{ #category : #'entity creation' }
+{ #category : 'entity creation' }
 FamixTest4TEntityCreator >> newStudent [
 
 	<generated>
 	^ self add: FamixTest4Student new
 ]
 
-{ #category : #'entity creation' }
+{ #category : 'entity creation' }
 FamixTest4TEntityCreator >> newTeacher [
 
 	<generated>

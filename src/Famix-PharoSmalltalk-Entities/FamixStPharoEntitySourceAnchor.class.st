@@ -11,17 +11,17 @@
 
 "
 Class {
-	#name : #FamixStPharoEntitySourceAnchor,
-	#superclass : #FamixStSourceAnchor,
-	#traits : 'FamixTSourceAnchor',
-	#classTraits : 'FamixTSourceAnchor classTrait',
+	#name : 'FamixStPharoEntitySourceAnchor',
+	#superclass : 'FamixStSourceAnchor',
 	#instVars : [
 		'#pharoEntity => WeakSlot'
 	],
-	#category : #'Famix-PharoSmalltalk-Entities-Entities'
+	#category : 'Famix-PharoSmalltalk-Entities-Entities',
+	#package : 'Famix-PharoSmalltalk-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixStPharoEntitySourceAnchor class >> annotation [
 
 	<FMClass: #PharoEntitySourceAnchor super: #FamixStSourceAnchor>
@@ -30,22 +30,22 @@ FamixStPharoEntitySourceAnchor class >> annotation [
 	^ self
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FamixStPharoEntitySourceAnchor >> initialize [
 	super initialize.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixStPharoEntitySourceAnchor >> pharoEntity [
 	^ pharoEntity
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixStPharoEntitySourceAnchor >> pharoEntity: anObject [
 	pharoEntity := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixStPharoEntitySourceAnchor >> sourceText [
 
 	^ self pharoEntity ifNotNil: #definitionString

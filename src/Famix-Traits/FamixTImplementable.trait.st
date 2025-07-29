@@ -13,14 +13,16 @@ I can be the target of an implementation cf Interface
 
 "
 Trait {
-	#name : #FamixTImplementable,
+	#name : 'FamixTImplementable',
 	#instVars : [
 		'#implementations => FMMany type: #FamixTImplementation opposite: #interface'
 	],
-	#category : #'Famix-Traits-Traits'
+	#category : 'Famix-Traits-Implementation',
+	#package : 'Famix-Traits',
+	#tag : 'Implementation'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTImplementable classSide >> annotation [
 
 	<FMClass: #TImplementable super: #Object>
@@ -29,13 +31,20 @@ FamixTImplementable classSide >> annotation [
 	^ self
 ]
 
-{ #category : #adding }
+{ #category : 'visitor' }
+FamixTImplementable >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTImplementable: self
+]
+
+{ #category : 'adding' }
 FamixTImplementable >> addImplementation: anObject [
 	<generated>
 	^ self implementations add: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTImplementable >> implementations [
 	"Relation named: #implementations type: #FamixTImplementation opposite: #interface"
 
@@ -45,7 +54,7 @@ FamixTImplementable >> implementations [
 	^ implementations
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTImplementable >> implementations: anObject [
 
 	<generated>
