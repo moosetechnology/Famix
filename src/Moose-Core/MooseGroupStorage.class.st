@@ -193,8 +193,7 @@ MooseGroupStorage >> species: aCollectionClass [
 { #category : 'private' }
 MooseGroupStorage >> updateCacheOnAddingOf: anElement [
 
-	(byType atOrOrederedCollection: anElement class) add: anElement.
-  
+	(byType privateMooseStorageAt: anElement class) add: anElement.
 	^ anElement
 ]
 
@@ -202,6 +201,5 @@ MooseGroupStorage >> updateCacheOnAddingOf: anElement [
 MooseGroupStorage >> updateCacheOnRemovalOf: anElement [
 
 	byType at: anElement class ifPresent: [ :group | group remove: anElement ifAbsent: [ self error: 'Internal storage inconsistency' ] ].
-
 	^ anElement
 ]
