@@ -383,23 +383,25 @@ MooseAbstractGroup >> entitiesDo: aBlock [
 ]
 
 { #category : 'public interface' }
-MooseAbstractGroup >> entityNamed: aSymbol [ 
-	 
-	^self 
-		entityNamed: aSymbol 
-		ifAbsent: [nil]
+MooseAbstractGroup >> entityNamed: aSymbol [
+
+	^ self entityNamed: aSymbol ifAbsent: [ nil ]
 ]
 
 { #category : 'public interface' }
-MooseAbstractGroup >> entityNamed: aMooseName ifAbsent: aBlock [ 
-	^ self entityStorage at: aMooseName ifAbsent: aBlock
+MooseAbstractGroup >> entityNamed: aMooseName ifAbsent: aBlock [
+
+	^ self entities
+		  detect: [ :entity | entity hasUniqueMooseNameInModel and: [ entity mooseName = aMooseName ] ]
+		  ifNone: aBlock
 ]
 
 { #category : 'public interface' }
 MooseAbstractGroup >> entityNamed: aMooseName ifAbsent: aBlock ifPresent: anotherBlock [
+
 	| entity |
-	entity := self entityStorage at: aMooseName ifAbsent: [ nil ].
-	^ entity ifNil: [ aBlock value ] ifNotNil: [ anotherBlock value: entity ]
+	entity := self entityNamed: aMooseName ifAbsent: [ ^ aBlock value ].
+	^ anotherBlock value: entity
 ]
 
 { #category : 'public interface' }
