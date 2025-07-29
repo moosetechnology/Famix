@@ -1,33 +1,33 @@
-Extension { #name : #Behavior }
+Extension { #name : 'Behavior' }
 
-{ #category : #'*Moose-Core' }
+{ #category : '*Moose-Core' }
 Behavior >> allUsers [
 	^ #()
 ]
 
-{ #category : #'*Moose-Core' }
+{ #category : '*Moose-Core' }
 Behavior >> mooseInheritsFrom: aClass [
 	(self inheritsFrom: aClass) ifTrue: [ ^ true ].
 
 	^ self usedStatefulTraits includes: aClass
 ]
 
-{ #category : #'*Moose-Core' }
+{ #category : '*Moose-Core' }
 Behavior >> relatedGroupType [
 	^ MooseSpecializedGroup
 ]
 
-{ #category : #'*Moose-Core' }
+{ #category : '*Moose-Core' }
 Behavior >> resetMooseEntityCache [
 	"Do nothing here"
 ]
 
-{ #category : #'*Moose-Core' }
+{ #category : '*Moose-Core' }
 Behavior >> usedStatefulTraits [
 	^ self withAllSuperclasses flatCollect: [ :class | class allGeneratedTraits ] as: Set
 ]
 
-{ #category : #'*Moose-Core' }
+{ #category : '*Moose-Core' }
 Behavior >> usesFamixTrait: aTrait [
 	^ self usedStatefulTraits includes: aTrait
 ]

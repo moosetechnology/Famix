@@ -1,1 +1,1 @@
-Package { #name : #'Famix-MetamodelBuilder-Core' }
+Package { #name : 'Famix-MetamodelBuilder-Core' }

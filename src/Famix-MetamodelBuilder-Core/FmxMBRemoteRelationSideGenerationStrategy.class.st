@@ -1,10 +1,12 @@
 Class {
-	#name : #FmxMBRemoteRelationSideGenerationStrategy,
-	#superclass : #FmxMBNonRemoteRelationSideGenerationStrategy,
-	#category : #'Famix-MetamodelBuilder-Core-Implementation'
+	#name : 'FmxMBRemoteRelationSideGenerationStrategy',
+	#superclass : 'FmxMBNonRemoteRelationSideGenerationStrategy',
+	#category : 'Famix-MetamodelBuilder-Core-Implementation',
+	#package : 'Famix-MetamodelBuilder-Core',
+	#tag : 'Implementation'
 }
 
-{ #category : #generation }
+{ #category : 'generation' }
 FmxMBRemoteRelationSideGenerationStrategy >> compileMethod: methodSource for: aRelationSide in: aClassOrTrait [
 
 	aRelationSide builder environment

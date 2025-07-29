@@ -1,12 +1,26 @@
+"
+## Relations
+======================
+
+### Other
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
+
+
+
+"
 Class {
-	#name : #FamixTestComposed2SourcedEntity,
-	#superclass : #FamixTestComposed2Entity,
+	#name : 'FamixTestComposed2SourcedEntity',
+	#superclass : 'FamixTestComposed2Entity',
 	#traits : 'FamixTSourceEntity',
 	#classTraits : 'FamixTSourceEntity classTrait',
-	#category : #'Famix-TestComposedSubmetamodel2-Entities-Entities'
+	#category : 'Famix-TestComposedSubmetamodel2-Entities-Entities',
+	#package : 'Famix-TestComposedSubmetamodel2-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTestComposed2SourcedEntity class >> annotation [
 
 	<FMClass: #SourcedEntity super: #FamixTestComposed2Entity>
@@ -16,7 +30,7 @@ FamixTestComposed2SourcedEntity class >> annotation [
 	^ self
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTestComposed2SourcedEntity class >> isAbstract [
 
 	<generated>

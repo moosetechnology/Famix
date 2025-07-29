@@ -9,12 +9,14 @@ a CandidateListOperatorAcceptingAnyKindOfReceiver compute a list of possible typ
 should normally accept any kind of receiver, but all type are not yet supported or implemented.
 "
 Class {
-	#name : #CandidateListOperatorAcceptingAnyKindOfReceiver,
-	#superclass : #AbstractCandidateListOperator,
-	#category : #'Moose-SmalltalkImporter'
+	#name : 'CandidateListOperatorAcceptingAnyKindOfReceiver',
+	#superclass : 'AbstractCandidateListOperator',
+	#category : 'Moose-SmalltalkImporter-Operators',
+	#package : 'Moose-SmalltalkImporter',
+	#tag : 'Operators'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 CandidateListOperatorAcceptingAnyKindOfReceiver >> computeCandidateListFor: anInvocation [
 	anInvocation receiver
 		ifNotNil: [ :receiver | 

@@ -1,10 +1,12 @@
 Class {
-	#name : #FamixInvocationGroup,
-	#superclass : #MooseSpecializedGroup,
-	#category : #'Famix-Traits-Groups'
+	#name : 'FamixInvocationGroup',
+	#superclass : 'MooseSpecializedGroup',
+	#category : 'Famix-Traits-Groups',
+	#package : 'Famix-Traits',
+	#tag : 'Groups'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixInvocationGroup class >> annotation [
 
 	<FMClass: #InvocationGroup super: #MooseSpecializedGroup>
@@ -13,7 +15,7 @@ FamixInvocationGroup class >> annotation [
 	^ self
 ]
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixInvocationGroup class >> metamodel [
 
 	<generated>

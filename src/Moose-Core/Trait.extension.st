@@ -1,16 +1,16 @@
-Extension { #name : #Trait }
+Extension { #name : 'Trait' }
 
-{ #category : #'*Moose-Core' }
+{ #category : '*Moose-Core' }
 Trait >> allMatchingSelfIn: aMooseModel [ 
 	^ aMooseModel allUsing: self
 ]
 
-{ #category : #'*Moose-Core' }
+{ #category : '*Moose-Core' }
 Trait >> allUsers [
 	^ self users asOrderedCollection , (self users asOrderedCollection select: #isTrait thenCollect: #allUsers)
 ]
 
-{ #category : #'*Moose-Core' }
+{ #category : '*Moose-Core' }
 Trait >> withMooseSubclasses [
 
 	^ (self users flatCollect: [ :each | each withAllSubclasses ]) asSet

@@ -1,52 +1,56 @@
 Class {
-	#name : #FmxMBTrait,
-	#superclass : #FmxMBBehavior,
-	#category : #'Famix-MetamodelBuilder-Core-Implementation'
+	#name : 'FmxMBTrait',
+	#superclass : 'FmxMBBehavior',
+	#category : 'Famix-MetamodelBuilder-Core-Implementation',
+	#package : 'Famix-MetamodelBuilder-Core',
+	#tag : 'Implementation'
 }
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FmxMBTrait >> acceptVisitor: aVisitor [
 
 	<ignoreForCoverage>
 	^ aVisitor visitTrait: self.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBTrait >> allTraitGeneralizations [
-	^ (self traitGeneralizations flatCollect: [ :each | {each} , each allTraitGeneralizations ]) asSet
+
+	^ (self traitGeneralizations flatCollect: [ :each |
+		   { each } , each allTraitGeneralizations ]) removeDuplicates
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBTrait >> classGeneralization [
 
 	^ self builder environment basicTrait
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBTrait >> classGeneralization: anObject [
 	FmxMBTraitsGeneralizationError signal
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBTrait >> defaultSuperclass [
 	
 	^ self builder environment basicTrait
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBTrait >> defaultSuperclassName [
 	"In case of Traits we want the annotation to point Object as superclass."
 
 	^ 'Object'
 ]
 
-{ #category : #'settings-default' }
+{ #category : 'settings-default' }
 FmxMBTrait >> defaultTag [
 
 	^ self builder configuration traitTag
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FmxMBTrait >> generate [
 
 	| aTrait traitName |
@@ -62,7 +66,7 @@ FmxMBTrait >> generate [
 		          overwrite: true.
 
 	aTrait tagWith: self tag.
-	self builder environment setComment: self comment for: aTrait.
+	self builder environment setComment: self commentWithRelations for: aTrait.
 
 	self realClass: aTrait.
 
@@ -77,7 +81,7 @@ FmxMBTrait >> generate [
 	self generateAddToCollectionFor: aTrait
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FmxMBTrait >> generateRemoteAccessors [
 	(self properties select: [ :prop | 
          prop isRemote and: [ 
@@ -85,7 +89,7 @@ FmxMBTrait >> generateRemoteAccessors [
         :each | each generateAccessorsIn: self realClass ]
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FmxMBTrait >> generateRemotes [
 	| aTrait traitName |
 	
@@ -98,23 +102,29 @@ FmxMBTrait >> generateRemotes [
 	self generateRemoteAccessors
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FmxMBTrait >> isMetamodelTrait [
 
 	^ true
 ]
 
-{ #category : #'name conversion' }
+{ #category : 'testing' }
+FmxMBTrait >> isVisitorTrait [
+
+	^ false
+]
+
+{ #category : 'name conversion' }
 FmxMBTrait >> pluralPropertyName [
 	^ self pluralOf: self propertyName
 ]
 
-{ #category : #'name conversion' }
+{ #category : 'name conversion' }
 FmxMBTrait >> propertyName [
 	^ (self name withoutPrefix: 'T') uncapitalized
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBTrait >> removeRelationSide: aRelationSide [
 
 	properties remove: aRelationSide ifAbsent: [ ].

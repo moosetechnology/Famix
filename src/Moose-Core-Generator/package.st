@@ -1,1 +1,1 @@
-Package { #name : #'Moose-Core-Generator' }
+Package { #name : 'Moose-Core-Generator' }

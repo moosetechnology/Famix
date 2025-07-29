@@ -1,7 +1,8 @@
 "
-A FamixTReference entity is created whenever one manipulates a class name as a variable. For example:
-(i) if the class is passed as a parameter to a method, or
-(ii) if a static method is invoked on a class.
+A FamixTReference entity is created whenever one manipulates an entity as a variable. For example:
+- if a class is passed as a parameter to a method, or
+- if a static method is invoked on a class.
+- if a method is referenced as a method and not as method invocation
 
 For example, in the following Java code
 method a()
@@ -10,19 +11,44 @@ There is only one reference which is created when the static method aStaticMetho
 
 
 Note that FamixTReference was defined between two FamixTContainerEntity entities. So, it used to represent dependencies between container entities that are computed from the dependencies of contained entities. For example, references between two packages can be computed from dependencies between classes of the packages.
+
+## Relations
+======================
+
+### Association source
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `referencer` | `FamixTReference` | `outgoingReferences` | `FamixTWithReferences` | Source entity making the reference. from-side of the association|
+
+### Association target
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `referredEntity` | `FamixTReference` | `incomingReferences` | `FamixTReferenceable` | Target entity referenced. to-side of the association|
+
+### Other
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `next` | `FamixTAssociation` | `previous` | `FamixTAssociation` | Next association in an ordered collection of associations. Currently not supported by the Moose importer|
+| `previous` | `FamixTAssociation` | `next` | `FamixTAssociation` | Previous association in an ordered collection of associations. Currently not supported by the Moose importer|
+| `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
+
+
+
 "
 Trait {
-	#name : #FamixTReference,
+	#name : 'FamixTReference',
 	#instVars : [
 		'#referencer => FMOne type: #FamixTWithReferences opposite: #outgoingReferences',
-		'#referredType => FMOne type: #FamixTReferenceable opposite: #incomingReferences'
+		'#referredEntity => FMOne type: #FamixTReferenceable opposite: #incomingReferences'
 	],
 	#traits : 'FamixTAssociation',
 	#classTraits : 'FamixTAssociation classTrait',
-	#category : #'Famix-Traits-Reference'
+	#category : 'Famix-Traits-Reference',
+	#package : 'Famix-Traits',
+	#tag : 'Reference'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTReference classSide >> annotation [
 
 	<FMClass: #TReference super: #Object>
@@ -31,19 +57,26 @@ FamixTReference classSide >> annotation [
 	^ self
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 FamixTReference classSide >> source: source target: target [
 	^ self new source: source; target: target
 ]
 
-{ #category : #testing }
+{ #category : 'visitor' }
+FamixTReference >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTReference: self
+]
+
+{ #category : 'testing' }
 FamixTReference >> isReference [
 
 	<generated>
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTReference >> referencer [
 	"Relation named: #referencer type: #FamixTWithReferences opposite: #outgoingReferences"
 
@@ -53,26 +86,26 @@ FamixTReference >> referencer [
 	^ referencer
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTReference >> referencer: anObject [
 
 	<generated>
 	referencer := anObject
 ]
 
-{ #category : #accessing }
-FamixTReference >> referredType [
-	"Relation named: #referredType type: #FamixTReferenceable opposite: #incomingReferences"
+{ #category : 'accessing' }
+FamixTReference >> referredEntity [
+	"Relation named: #referredEntity type: #FamixTReferenceable opposite: #incomingReferences"
 
 	<generated>
 	<FMComment: 'Target entity referenced. to-side of the association'>
 	<target>
-	^ referredType
+	^ referredEntity
 ]
 
-{ #category : #accessing }
-FamixTReference >> referredType: anObject [
+{ #category : 'accessing' }
+FamixTReference >> referredEntity: anObject [
 
 	<generated>
-	referredType := anObject
+	referredEntity := anObject
 ]

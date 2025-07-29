@@ -1,6 +1,6 @@
 Class {
-	#name : #FamixTest7Test,
-	#superclass : #TestCase,
+	#name : 'FamixTest7Test',
+	#superclass : 'TestCase',
 	#instVars : [
 		'model',
 		'c1',
@@ -20,10 +20,11 @@ Class {
 		'm9',
 		'm11'
 	],
-	#category : #'Famix-Test7-Tests'
+	#category : 'Famix-Test7-Tests',
+	#package : 'Famix-Test7-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 FamixTest7Test >> setUp [
 
 	super setUp.
@@ -85,7 +86,7 @@ FamixTest7Test >> setUp [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTest7Test >> testAddedMethods [
 
 	self assertCollection: c1 addedMethods hasSameElements: c1 methods.
@@ -93,7 +94,7 @@ FamixTest7Test >> testAddedMethods [
 	self assertCollection: c3 addedMethods hasSameElements: { m6. m7 }
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTest7Test >> testAllHierarchyMethods [
 
 	self assert: c1 allHierarchyMethods isEmpty .
@@ -101,7 +102,7 @@ FamixTest7Test >> testAllHierarchyMethods [
 	self assertCollection: c3 allHierarchyMethods hasSameElements: c1 methods , c2 methods
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTest7Test >> testAllMethods [
 
 	self assertCollection: c1 allMethods hasSameElements: c1 methods.
@@ -109,7 +110,7 @@ FamixTest7Test >> testAllMethods [
 	self assertCollection: c3 allMethods hasSameElements: { m4. m6. m7. m10. m3. m5. m11 }
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixTest7Test >> testClassNumberOfMethods [
 
 	self assert: c1 methods size equals: 4.
@@ -117,7 +118,7 @@ FamixTest7Test >> testClassNumberOfMethods [
 	self assert: c3 methods size equals: 4.
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixTest7Test >> testInheritedMethods [
 
 	self assert: c1 inheritedMethods size equals: 0.
@@ -125,7 +126,7 @@ FamixTest7Test >> testInheritedMethods [
 	self assertCollection: c3 inheritedMethods hasSameElements: { m3. m5. m11 }
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTest7Test >> testOverriddenMethods [
 
 	self assert: c1 overriddenMethods isEmpty .

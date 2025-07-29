@@ -11,28 +11,51 @@ visitClass: aClass
 	aclass doMoreStuff.
 "
 Class {
-	#name : #FmxMBWalkerVisitor,
-	#superclass : #FmxMBVisitor,
-	#category : #'Famix-MetamodelBuilder-Core-Visitors'
+	#name : 'FmxMBWalkerVisitor',
+	#superclass : 'FmxMBVisitor',
+	#category : 'Famix-MetamodelBuilder-Core-Visitors',
+	#package : 'Famix-MetamodelBuilder-Core',
+	#tag : 'Visitors'
 }
 
-{ #category : #visiting }
-FmxMBWalkerVisitor >> visitBuilder: aBuilder [
-	"Visit every Traits, and classes after that."
-	aBuilder sortedTraits do: [ :each | each acceptVisitor: self ].
-	aBuilder sortedClasses do: [ :each | each acceptVisitor: self ].	
+{ #category : 'visiting' }
+FmxMBWalkerVisitor >> prepareForPropertiesIn: aClassOrTrait [
+	"Nothing to do by default"
+
+	
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
+FmxMBWalkerVisitor >> separateProperties [
+	"Nothing to do by default"
+
+	
+]
+
+{ #category : 'visiting' }
+FmxMBWalkerVisitor >> visitBuilder: aBuilder [
+	"Visit every Traits, and classes after that."
+
+	aBuilder sortedTraits do: [ :each | each acceptVisitor: self ].
+	aBuilder sortedClasses do: [ :each | each acceptVisitor: self ]
+]
+
+{ #category : 'visiting' }
 FmxMBWalkerVisitor >> visitClass: aClass [
 	"Visit all properties of aClass"
 
-	aClass properties do: [ :each | each acceptVisitor: self ].
-
+	self prepareForPropertiesIn: aClass.
+	aClass properties
+		do: [ :each | each acceptVisitor: self ]
+		separatedBy: [ self separateProperties ]
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FmxMBWalkerVisitor >> visitTrait: aTrait [
-	"visit aTrait leaves"
-	aTrait properties do: [ :each | each acceptVisitor: self ].
+	"visit all properties of aTrait"
+
+	self prepareForPropertiesIn: aTrait.
+	aTrait properties
+		do: [ :each | each acceptVisitor: self ]
+		separatedBy: [ self separateProperties ]
 ]

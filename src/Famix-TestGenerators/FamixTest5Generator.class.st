@@ -1,33 +1,34 @@
 Class {
-	#name : #FamixTest5Generator,
-	#superclass : #FamixMetamodelGenerator,
+	#name : 'FamixTest5Generator',
+	#superclass : 'FamixMetamodelGenerator',
 	#instVars : [
 		'annotationType1',
 		'withAnnotationType1',
 		'annotationType2',
 		'withAnnotationType2'
 	],
-	#category : #'Famix-TestGenerators'
+	#category : 'Famix-TestGenerators',
+	#package : 'Famix-TestGenerators'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest5Generator class >> packageName [
 
 	^ #'Famix-Test5-Entities'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest5Generator class >> prefix [
 
 	^ #'FamixTest5'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest5Generator class >> submetamodels [
 	^ {  FamixGenerator }
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixTest5Generator >> defineClasses [
 
 	super defineClasses.
@@ -40,7 +41,7 @@ FamixTest5Generator >> defineClasses [
 
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixTest5Generator >> defineRelations [
 
 	super defineRelations.

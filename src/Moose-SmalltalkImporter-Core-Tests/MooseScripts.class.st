@@ -1,10 +1,11 @@
 Class {
-	#name : #MooseScripts,
-	#superclass : #Object,
-	#category : #'Moose-SmalltalkImporter-Core-Tests'
+	#name : 'MooseScripts',
+	#superclass : 'Object',
+	#category : 'Moose-SmalltalkImporter-Core-Tests',
+	#package : 'Moose-SmalltalkImporter-Core-Tests'
 }
 
-{ #category : #'loading scripts' }
+{ #category : 'loading scripts' }
 MooseScripts class >> createLightModelForLAN [
 	"
 	Time millisecondsToRun: [self createLightModelForLAN]
@@ -15,13 +16,15 @@ MooseScripts class >> createLightModelForLAN [
 	| model |
 	model := FamixStModel new.
 	model name: 'lightLAN'.
-	MoosePharoImporterTask new
-		importingContext:
-			(MooseImportingContext new
-				importClassMethodInheritanceAttribute;
-				importPackage;
-				mergeClassAndMetaclass;
-				yourself);
+	FamixStPharoImporterTask new
+		importingContext: (FamixStImporterContext new
+				 importClass;
+				 importMethod;
+				 importInheritance;
+				 importAttribute;
+				 importPackage;
+				 mergeClassAndMetaclass;
+				 yourself);
 		doNotRunCandidateOperator;
 		model: model;
 		addFromPackagesNamed: (self packageNamesFor: 'Moose-LAN*');
@@ -29,7 +32,7 @@ MooseScripts class >> createLightModelForLAN [
 	model install
 ]
 
-{ #category : #'loading scripts' }
+{ #category : 'loading scripts' }
 MooseScripts class >> createLightModelForMorphic [
 	"
 	Time millisecondsToRun: [self createLightModelForMorphic]
@@ -41,13 +44,15 @@ MooseScripts class >> createLightModelForMorphic [
 	| model |
 	model := FamixStModel new.
 	model name: 'lightMorphic'.
-	MoosePharoImporterTask new
-		importingContext:
-			(MooseImportingContext new
-				importClassMethodInheritanceAttribute;
-				importPackage;
-				mergeClassAndMetaclass;
-				yourself);
+	FamixStPharoImporterTask new
+		importingContext: (FamixStImporterContext new
+				 importClass;
+				 importMethod;
+				 importInheritance;
+				 importAttribute;
+				 importPackage;
+				 mergeClassAndMetaclass;
+				 yourself);
 		doNotRunCandidateOperator;
 		model: model;
 		addFromPackagesNamed: (self packageNamesFor: 'Morphic*');
@@ -55,7 +60,7 @@ MooseScripts class >> createLightModelForMorphic [
 	model install
 ]
 
-{ #category : #'loading scripts' }
+{ #category : 'loading scripts' }
 MooseScripts class >> createLightModelForNetwork [
 	"
 	Time millisecondsToRun: [self createLightModelForNetwork] 
@@ -69,13 +74,15 @@ MooseScripts class >> createLightModelForNetwork [
 	| model |
 	model := FamixStModel new.
 	model name: 'lightNetwork'.
-	MoosePharoImporterTask new
-		importingContext:
-			(MooseImportingContext new
-				importClassMethodInheritanceAttribute;
-				importPackage;
-				mergeClassAndMetaclass;
-				yourself);
+	FamixStPharoImporterTask new
+		importingContext: (FamixStImporterContext new
+				 importClass;
+				 importMethod;
+				 importInheritance;
+				 importAttribute;
+				 importPackage;
+				 mergeClassAndMetaclass;
+				 yourself);
 		doNotRunCandidateOperator;
 		model: model;
 		addFromPackagesNamed: (self packageNamesFor: 'Network*');
@@ -83,7 +90,7 @@ MooseScripts class >> createLightModelForNetwork [
 	model install
 ]
 
-{ #category : #'loading scripts' }
+{ #category : 'loading scripts' }
 MooseScripts class >> createLightModelForPharo [
 	"
 	MessageTally spyOn: [self createLightModelForPharo]
@@ -96,13 +103,15 @@ MooseScripts class >> createLightModelForPharo [
 	| model |
 	model := FamixStModel new.
 	model name: 'lightPharo'.
-	MoosePharoImporterTask new
-		importingContext:
-			(MooseImportingContext new
-				importClassMethodInheritanceAttribute;
-				importPackage;
-				mergeClassAndMetaclass;
-				yourself);
+	FamixStPharoImporterTask new
+		importingContext: (FamixStImporterContext new
+				 importClass;
+				 importMethod;
+				 importInheritance;
+				 importAttribute;
+				 importPackage;
+				 mergeClassAndMetaclass;
+				 yourself);
 		doNotRunCandidateOperator;
 		model: model;
 		addFromPackagesNamed: self pharoPackageNames;
@@ -110,7 +119,7 @@ MooseScripts class >> createLightModelForPharo [
 	model install
 ]
 
-{ #category : #'loading scripts' }
+{ #category : 'loading scripts' }
 MooseScripts class >> createMediumModelForNetwork [
 	"
 	Time millisecondsToRun: [self createMediumModelForNetwork] 
@@ -120,14 +129,14 @@ MooseScripts class >> createMediumModelForNetwork [
 	| model importer |
 	model := FamixStModel new.
 	model name: 'mediumNetwork'.
-	importer := MoosePharoImporterTask new.
+	importer := FamixStPharoImporterTask new.
 	importer importingContext mergeClassAndMetaclass.
 	importer doNotRunCandidateOperator.
 	importer model: model; addFromPackagesNamed: (self packageNamesFor: 'Network*'); runWithProgress.
 	model install.
 ]
 
-{ #category : #'loading scripts' }
+{ #category : 'loading scripts' }
 MooseScripts class >> createModelForMorphic [
 	"
 	MessageTally spyOn: [self createModelForMorphic]
@@ -140,14 +149,14 @@ MooseScripts class >> createModelForMorphic [
 	| model importer |
 	model := FamixStModel new.
 	model name: 'Morphic'.
-	importer := MoosePharoImporterTask new.
+	importer := FamixStPharoImporterTask new.
 	importer importingContext mergeClassAndMetaclass.
 	importer runCandidateOperator.
 	importer model: model; addFromPackagesNamed: (self packageNamesFor: 'Morphic*'); runWithProgress.
 	model install.
 ]
 
-{ #category : #'loading scripts' }
+{ #category : 'loading scripts' }
 MooseScripts class >> createModelForNetwork [
 	"
 	MessageTally spyOn: [self createModelForNetwork]
@@ -163,41 +172,41 @@ MooseScripts class >> createModelForNetwork [
 	| model importer |
 	model := FamixStModel new.
 	model name: 'Network'.
-	importer := MoosePharoImporterTask new.
+	importer := FamixStPharoImporterTask new.
 	importer importingContext mergeClassAndMetaclass.
 	importer runCandidateOperator.
 	importer model: model; addFromPackagesNamed: (self packageNamesFor: 'Network*') ; runWithProgress.
 	model install.
 ]
 
-{ #category : #'loading scripts' }
+{ #category : 'loading scripts' }
 MooseScripts class >> createModelForPharo [
 	"self createModelForPharo"
 	
 	| model importer |
 	model := FamixStModel new.
 	model name: 'Pharo'.
-	importer := MoosePharoImporterTask new.
+	importer := FamixStPharoImporterTask new.
 	importer importingContext mergeClassAndMetaclass.
 	importer runCandidateOperator.
 	importer model: model; addFromPackagesNamed: self pharoPackageNames; runWithProgress.
 	model install.
 ]
 
-{ #category : #'loading scripts' }
+{ #category : 'loading scripts' }
 MooseScripts class >> createModelNamed: modelName with: aCollectionOfPackageNames [
 	
 	| model importer |
 	model := FamixStModel new.
 	model name: modelName.
-	importer := MoosePharoImporterTask new.
+	importer := FamixStPharoImporterTask new.
 	importer importingContext mergeClassAndMetaclass.
 	importer runCandidateOperator.
 	importer model: model; addFromPackagesNamed: aCollectionOfPackageNames; runWithProgress.
 	^ model install.
 ]
 
-{ #category : #'loading scripts' }
+{ #category : 'loading scripts' }
 MooseScripts class >> createModelNamed: modelName withPackages: packages importer: importClass candidateClass: candidates mergeClassMetaClass: merge contextItems: context [
 
 	| mooseModel importer importingContext |
@@ -205,7 +214,7 @@ MooseScripts class >> createModelNamed: modelName withPackages: packages importe
 	mooseModel := FamixStModel new.
 	mooseModel name: modelName.
 	
-	importingContext := MooseImportingContext new.
+	importingContext := FamixStImporterContext new.
 	(context select: [:anAssoc | anAssoc value = true] thenCollect: [:each | each key]) do: [ :each | importingContext perform: (#import , each) asSymbol ].
 	merge ifTrue: [ importingContext mergeClassAndMetaclass ].
 	
@@ -220,72 +229,51 @@ MooseScripts class >> createModelNamed: modelName withPackages: packages importe
 	mooseModel install.
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MooseScripts class >> extractPackageNameOutOfMetacelloFile: filename [
 	 ^ (filename includes: $.) 
 		ifTrue: [	filename copyUpToLast: $- ]
 		ifFalse: [ filename ]
 ]
 
-{ #category : #workspace }
+{ #category : 'workspace' }
 MooseScripts class >> fixFileAnchorsForCurrentSystemForType: aFileAnchorClass [ 
 	aFileAnchorClass allInstances do: [:each | 
 		each fileName: (each fileName copyReplaceAll: '\' with: FileSystem disk delimiter asString).
 		each fileName: (each fileName copyReplaceAll: '/' with: FileSystem disk delimiter asString). ]
 ]
 
-{ #category : #'loading scripts' }
+{ #category : 'loading scripts' }
 MooseScripts class >> packageNamesFor: aMatchingString [
 	
 	^ self packageNamesFor: aMatchingString withTestPackages: true
 ]
 
-{ #category : #'loading scripts' }
+{ #category : 'loading scripts' }
 MooseScripts class >> packageNamesFor: aPrefixString withTestPackages: aBoolean [
 	"Retrieve a list of packages based on a prefix. This method can filter (or not) test packages from the results provided they follow the Seaside convetion of <aPrefixString>-Tests*.
 	self packageNamesFor: 'Network*' withTestPackages: false.
 	self packageNamesFor: 'Network*' withTestPackages: true
 	"
-	
+
 	| packages packageNames aTestPrefixString |
-	RPackage organizer unregisterPackageNamed: aPrefixString. 
-	packages := RPackage organizer packages select: [:each | aPrefixString match: each name ].
-	packageNames := packages collect: [:pak | pak name].
+	packages := self packageOrganizer packages select: [ :each | aPrefixString match: each name ].
+	packageNames := packages collect: [ :pak | pak name ].
 	aBoolean ifFalse: [
-		aTestPrefixString := aPrefixString, 'Tests*'.
-		packageNames := packageNames reject: [ :pakName | aTestPrefixString match: pakName] ].
+		aTestPrefixString := aPrefixString , 'Tests*'.
+		packageNames := packageNames reject: [ :pakName | aTestPrefixString match: pakName ] ].
 	^ packageNames
 ]
 
-{ #category : #private }
-MooseScripts class >> packagesForConfigurationVersion: aConfiguration [
-	"self packagesForConfigurationVersion: (ConfigurationOfRPackage new project version: #stable)"
-
-	| version directive packages |
-	version := aConfiguration.
-	version ignoreImage: true.
-	directive := version record loadDirective.
-	packages := OrderedCollection new.
-	directive
-		versionDirectivesDo: [ :vrsnDirective | 
-			| spec |
-			spec := vrsnDirective spec.
-			(spec isNotNil and: [ spec project = aConfiguration spec project ])
-				ifTrue: [ vrsnDirective packagesDo: [ :pkgDirective | packages add: (self extractPackageNameOutOfMetacelloFile: pkgDirective file) ] ] ].
-	^ packages asSet reject: [ :each | each beginsWith: 'ConfigurationOf' ]
-]
-
-{ #category : #'loading scripts' }
+{ #category : 'loading scripts' }
 MooseScripts class >> pharoPackageNames [
 	"self pharoPackageNames"
-	
-	| packages packageNames |
-	packages := (RPackage organizer packages select:[:each | each class = RPackage])
-									  asSortedCollection: [:a :b | a name <= b name].
-	packageNames := packages collect: [:pak | pak name].
-	^ packageNames
+
+	^ (self packageOrganizer packageNames reject: [ :packageName |
+		   packageName = UndefinedPackage undefinedPackageName ]) sorted:
+		  #yourself ascending
 ]
 
-{ #category : #notes }
+{ #category : 'notes' }
 MooseScripts >> seeClassSide [
 ]

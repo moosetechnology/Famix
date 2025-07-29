@@ -1,5 +1,20 @@
+"
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+|---|
+| `correspondingFile` | `FamixTFile` | nil | File associated to this source anchor|
+| `encoding` | `String` | nil | A string representing the encoding of a file|
+| `endColumn` | `Number` | nil | Number of the end column|
+| `endLine` | `Number` | nil | Number of the end line|
+| `fileName` | `String` | nil | Name of the source file|
+| `startColumn` | `Number` | nil | Number of the start column|
+| `startLine` | `Number` | nil | Number of the start line|
+
+"
 Trait {
-	#name : #FamixTFileNavigation,
+	#name : 'FamixTFileNavigation',
 	#instVars : [
 		'#endColumn => FMProperty',
 		'#endLine => FMProperty',
@@ -8,10 +23,12 @@ Trait {
 	],
 	#traits : 'FamixTFileAnchor',
 	#classTraits : 'FamixTFileAnchor classTrait',
-	#category : #'Famix-Traits-SourceAnchor'
+	#category : 'Famix-Traits-SourceAnchor',
+	#package : 'Famix-Traits',
+	#tag : 'SourceAnchor'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTFileNavigation classSide >> annotation [
 
 	<FMClass: #TFileNavigation super: #Object>
@@ -20,7 +37,7 @@ FamixTFileNavigation classSide >> annotation [
 	^ self
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 FamixTFileNavigation classSide >> fileName: aString startLine: anInteger startColumn: anInteger2 endLine: anInteger3 endColumn: anInteger4 [
 	^ self 
 		fileName: aString
@@ -31,7 +48,7 @@ FamixTFileNavigation classSide >> fileName: aString startLine: anInteger startCo
 		model: nil
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 FamixTFileNavigation classSide >> fileName: aString startLine: anInteger startColumn: anInteger2 endLine: anInteger3 endColumn: anInteger4 model: aMooseModel [
 	^ self new
 		mooseModel: aMooseModel;
@@ -43,7 +60,14 @@ FamixTFileNavigation classSide >> fileName: aString startLine: anInteger startCo
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'visitor' }
+FamixTFileNavigation >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTFileNavigation: self
+]
+
+{ #category : 'accessing' }
 FamixTFileNavigation >> endColumn [
 
 	<FMProperty: #endColumn type: #Number>
@@ -52,13 +76,13 @@ FamixTFileNavigation >> endColumn [
 	^ endColumn
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTFileNavigation >> endColumn: anObject [
 	<generated>
 	endColumn := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTFileNavigation >> endLine [
 
 	<FMProperty: #endLine type: #Number>
@@ -67,13 +91,13 @@ FamixTFileNavigation >> endLine [
 	^ endLine
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTFileNavigation >> endLine: anObject [
 	<generated>
 	endLine := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTFileNavigation >> endPos [
 	^ [ self
 		lookUpPropertyNamed: #endPos
@@ -84,7 +108,7 @@ FamixTFileNavigation >> endPos [
 		do: [ :err | 0 ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTFileNavigation >> endsBefore: aFileAnchor [
 	(self endLine isNil or: [ aFileAnchor endLine isNil ]) ifTrue: [ ^ false ].
 
@@ -93,7 +117,7 @@ FamixTFileNavigation >> endsBefore: aFileAnchor [
 	^ self endLine < aFileAnchor endLine or: [ self endLine = aFileAnchor endLine and: [ self endColumn <= aFileAnchor endColumn ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTFileNavigation >> interval [
 	| start end index |
 	index := 0.
@@ -107,14 +131,14 @@ FamixTFileNavigation >> interval [
 	^ start to: end
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTFileNavigation >> isWithin: aFileAnchor [
 	"test whether aSourceAnchor is contained within receiver"
 
 	^ self fileName = aFileAnchor fileName and: [ (self startsAfter: aFileAnchor) and: [ self endsBefore: aFileAnchor ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTFileNavigation >> lineCount [
 	(endLine isNotNil and: [ startLine isNotNil ]) ifTrue: [ ^ endLine - startLine + 1 ].
 
@@ -124,7 +148,7 @@ FamixTFileNavigation >> lineCount [
 		ifFalse: [ self notExistentMetricValue ]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixTFileNavigation >> mooseNameOn: aStream [
 	aStream
 		nextPutAll: self fileName asString;
@@ -139,7 +163,7 @@ FamixTFileNavigation >> mooseNameOn: aStream [
 		nextPut: $)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTFileNavigation >> sourceText [
 	(self startLine isNil and: [ self endLine isNil ]) ifTrue: [ ^ self completeText ].
 	
@@ -155,7 +179,7 @@ FamixTFileNavigation >> sourceText [
 							s ] ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTFileNavigation >> startColumn [
 
 	<FMProperty: #startColumn type: #Number>
@@ -164,13 +188,13 @@ FamixTFileNavigation >> startColumn [
 	^ startColumn
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTFileNavigation >> startColumn: anObject [
 	<generated>
 	startColumn := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTFileNavigation >> startLine [
 
 	<FMProperty: #startLine type: #Number>
@@ -179,13 +203,13 @@ FamixTFileNavigation >> startLine [
 	^ startLine
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTFileNavigation >> startLine: anObject [
 	<generated>
 	startLine := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTFileNavigation >> startPos [
 	^ self
 		lookUpPropertyNamed: #startPos
@@ -196,7 +220,7 @@ FamixTFileNavigation >> startPos [
 						ifNotNil: [ :start | start - 1 ])) last + (self startColumn ifNil: [ 0 ]) ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTFileNavigation >> startsAfter: aFileAnchor [
 	 ^ aFileAnchor startBeforeFileAnchor: self
 ]

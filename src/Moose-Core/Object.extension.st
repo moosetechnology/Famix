@@ -1,6 +1,15 @@
-Extension { #name : #Object }
+Extension { #name : 'Object' }
 
-{ #category : #'*Moose-Core' }
+{ #category : '*Moose-Core' }
+Object >> allComplexPropertiesIn: aMetamodel [
+	"All complex properties described in the metamodel.
+	A complex property is a property whose type is not a primitive."
+
+	aMetamodel ifNil: [ ^ OrderedCollection new ].
+	^ aMetamodel descriptionOf: self class instanceSide ifPresent: #allComplexProperties ifAbsent: [ OrderedCollection new ]
+]
+
+{ #category : '*Moose-Core' }
 Object >> allDeclaredPropertiesIn: aMetamodel [
 	"All properties described in the metamodel"
 
@@ -8,45 +17,51 @@ Object >> allDeclaredPropertiesIn: aMetamodel [
 	^ aMetamodel descriptionOf: self class instanceSide ifPresent: #allProperties ifAbsent: [ OrderedCollection new ]
 ]
 
-{ #category : #'*moose-core' }
+{ #category : '*moose-core' }
 Object >> asMooseGroup [ 
 	^ MooseGroup with: self
 ]
 
-{ #category : #'*moose-core' }
+{ #category : '*moose-core' }
 Object >> asMooseSpecializedGroup [
+
 	^ MooseSpecializedGroup with: self
 ]
 
-{ #category : #'*moose-core' }
+{ #category : '*moose-core' }
 Object >> hasUniqueMooseNameInModel [
 	^false
 ]
 
-{ #category : #'*Moose-Core' }
+{ #category : '*Moose-Core' }
 Object >> isMooseEntity [
 	^ false 
 ]
 
-{ #category : #'*Moose-Core' }
+{ #category : '*Moose-Core' }
+Object >> isMooseObject [
+	^ false
+]
+
+{ #category : '*Moose-Core' }
 Object class >> isOfType: aClassFAMIX [
 	^ false
 ]
 
-{ #category : #'*moose-core' }
+{ #category : '*moose-core' }
 Object >> mooseDescription [
 
 	^ self class asMooseDescription 
 ]
 
-{ #category : #'*moose-core' }
+{ #category : '*moose-core' }
 Object >> mooseDisplayString [
 	^ self
 		deprecated: 'Please use #gtDisplayString instead'
 		transformWith: '`@receiver mooseDisplayString' -> '`@receiver gtDisplayString'.
 ]
 
-{ #category : #'*moose-core' }
+{ #category : '*moose-core' }
 Object >> mooseDisplayStringOn: aStream [
 	self
 		deprecated: 'Please use gtDisplayOn: instead'
@@ -54,7 +69,7 @@ Object >> mooseDisplayStringOn: aStream [
 	^ self printOn: aStream
 ]
 
-{ #category : #'*moose-core' }
+{ #category : '*moose-core' }
 Object >> mooseMenu [
 	| menu pragmas submenus |
 	menu := MenuMorph new.
@@ -93,7 +108,7 @@ Object >> mooseMenu [
 	^ menu
 ]
 
-{ #category : #'*Moose-Core' }
+{ #category : '*Moose-Core' }
 Object >> mooseMenuMorph [
 	| menu pragmas submenus |
 	menu := MenuMorph new.
@@ -132,17 +147,17 @@ Object >> mooseMenuMorph [
 	^ menu
 ]
 
-{ #category : #'*Moose-Core' }
+{ #category : '*Moose-Core' }
 Object >> mooseModel [
 	^ nil
 ]
 
-{ #category : #'*moose-core' }
+{ #category : '*moose-core' }
 Object >> mooseName [
 	^ self printString asSymbol
 ]
 
-{ #category : #'*Moose-Core' }
+{ #category : '*Moose-Core' }
 Object >> usesFamixTrait: aTrait [
 
 	^ self class usesFamixTrait: aTrait

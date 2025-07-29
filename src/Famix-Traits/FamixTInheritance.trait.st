@@ -1,15 +1,41 @@
+"
+## Relations
+======================
+
+### Association source
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `subclass` | `FamixTInheritance` | `superInheritances` | `FamixTWithInheritances` | Subclass linked to in this relationship. from-side of the association|
+
+### Association target
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `superclass` | `FamixTInheritance` | `subInheritances` | `FamixTWithInheritances` | Superclass linked to in this relationship. to-side of the association|
+
+### Other
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `next` | `FamixTAssociation` | `previous` | `FamixTAssociation` | Next association in an ordered collection of associations. Currently not supported by the Moose importer|
+| `previous` | `FamixTAssociation` | `next` | `FamixTAssociation` | Previous association in an ordered collection of associations. Currently not supported by the Moose importer|
+| `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
+
+
+
+"
 Trait {
-	#name : #FamixTInheritance,
+	#name : 'FamixTInheritance',
 	#instVars : [
 		'#subclass => FMOne type: #FamixTWithInheritances opposite: #superInheritances',
 		'#superclass => FMOne type: #FamixTWithInheritances opposite: #subInheritances'
 	],
 	#traits : 'FamixTAssociation',
 	#classTraits : 'FamixTAssociation classTrait',
-	#category : #'Famix-Traits-Inheritance'
+	#category : 'Famix-Traits-Inheritance',
+	#package : 'Famix-Traits',
+	#tag : 'Inheritance'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTInheritance classSide >> annotation [
 
 	<FMClass: #TInheritance super: #Object>
@@ -18,7 +44,14 @@ FamixTInheritance classSide >> annotation [
 	^ self
 ]
 
-{ #category : #printing }
+{ #category : 'visitor' }
+FamixTInheritance >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTInheritance: self
+]
+
+{ #category : 'printing' }
 FamixTInheritance >> displayStringOn: aStream [
 
 	self subclass displayStringOn: aStream.
@@ -26,14 +59,14 @@ FamixTInheritance >> displayStringOn: aStream [
 	self superclass displayStringOn: aStream
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTInheritance >> isInheritance [
 
 	<generated>
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTInheritance >> subclass [
 	"Relation named: #subclass type: #FamixTWithInheritances opposite: #superInheritances"
 
@@ -43,14 +76,14 @@ FamixTInheritance >> subclass [
 	^ subclass
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTInheritance >> subclass: anObject [
 
 	<generated>
 	subclass := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTInheritance >> superclass [
 	"Relation named: #superclass type: #FamixTWithInheritances opposite: #subInheritances"
 
@@ -60,7 +93,7 @@ FamixTInheritance >> superclass [
 	^ superclass
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTInheritance >> superclass: anObject [
 
 	<generated>

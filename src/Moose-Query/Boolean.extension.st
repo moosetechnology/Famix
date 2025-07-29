@@ -1,6 +1,6 @@
-Extension { #name : #Boolean }
+Extension { #name : 'Boolean' }
 
-{ #category : #'*Moose-Query' }
+{ #category : '*Moose-Query' }
 Boolean >> ifNotBoolean: aBlock [
 	^ self
 ]

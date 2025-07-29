@@ -1,12 +1,26 @@
+"
+## Relations
+======================
+
+### Parents
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `parentModule` | `FamixTDefinedInModule` | `moduleEntities` | `FamixTModule` | Module that contains the definition of this entity|
+
+
+
+"
 Trait {
-	#name : #FamixTDefinedInModule,
+	#name : 'FamixTDefinedInModule',
 	#instVars : [
 		'#parentModule => FMOne type: #FamixTModule opposite: #moduleEntities'
 	],
-	#category : #'Famix-Traits-Module'
+	#category : 'Famix-Traits-Module',
+	#package : 'Famix-Traits',
+	#tag : 'Module'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTDefinedInModule classSide >> annotation [
 
 	<FMClass: #TDefinedInModule super: #Object>
@@ -15,7 +29,14 @@ FamixTDefinedInModule classSide >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'visitor' }
+FamixTDefinedInModule >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTDefinedInModule: self
+]
+
+{ #category : 'accessing' }
 FamixTDefinedInModule >> parentModule [
 	"Relation named: #parentModule type: #FamixTModule opposite: #moduleEntities"
 
@@ -25,14 +46,14 @@ FamixTDefinedInModule >> parentModule [
 	^ parentModule
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTDefinedInModule >> parentModule: anObject [
 
 	<generated>
 	parentModule := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FamixTDefinedInModule >> parentModuleGroup [
 	<generated>
 	<navigation: 'ParentModule'>

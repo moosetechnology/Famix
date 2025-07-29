@@ -1,12 +1,26 @@
+"
+## Relations
+======================
+
+### Children
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `templates` | `FamixTWithTemplates` | `templateOwner` | `FamixTTemplate` | |
+
+
+
+"
 Trait {
-	#name : #FamixTWithTemplates,
+	#name : 'FamixTWithTemplates',
 	#instVars : [
 		'#templates => FMMany type: #FamixTTemplate opposite: #templateOwner'
 	],
-	#category : #'Famix-Traits-Template'
+	#category : 'Famix-Traits-Template',
+	#package : 'Famix-Traits',
+	#tag : 'Template'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTWithTemplates classSide >> annotation [
 
 	<FMClass: #TWithTemplates super: #Object>
@@ -15,13 +29,20 @@ FamixTWithTemplates classSide >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'visitor' }
+FamixTWithTemplates >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTWithTemplates: self
+]
+
+{ #category : 'accessing' }
 FamixTWithTemplates >> addTemplate: anObject [
 	templates add: anObject
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithTemplates >> templates [
 	"Relation named: #templates type: #FamixTTemplate opposite: #templateOwner"
 
@@ -30,7 +51,7 @@ FamixTWithTemplates >> templates [
 	^ templates
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithTemplates >> templates: anObject [
 
 	<generated>

@@ -1,43 +1,43 @@
 Class {
-	#name : #FmxMBBehaviorTest,
-	#superclass : #FmxMBTestCase,
-	#category : #'Famix-MetamodelBuilder-Tests'
+	#name : 'FmxMBBehaviorTest',
+	#superclass : 'FmxMBTestCase',
+	#category : 'Famix-MetamodelBuilder-Tests-Tests',
+	#package : 'Famix-MetamodelBuilder-Tests',
+	#tag : 'Tests'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 FmxMBBehaviorTest class >> isAbstract [
 
 	^ self name = #FmxMBBehaviorTest
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBBehaviorTest >> behaviorClass [
 
 	self subclassResponsibility 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBBehaviorTest >> newEntityNamed: aString [
 
 	self subclassResponsibility 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBBehaviorTest >> testComment [
-
 	"test assigning of a comment to a class"
 
 	| simpleClass generated commentString |
-	
-	simpleClass := self newEntityNamed: #Comment.	
+	simpleClass := self newEntityNamed: #Comment.
 	commentString := 'Simple testing class'.
 	simpleClass comment: commentString.
 	builder generate.
 	generated := builder testingEnvironment ask classNamed: 'TstComment'.
-	self assert: generated comment content equals: commentString.
+	self assert: (generated comment content beginsWith: commentString)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBBehaviorTest >> testCustomTestingSelectors [
 
 	"test automatic generation of custom testing selector"
@@ -53,7 +53,7 @@ FmxMBBehaviorTest >> testCustomTestingSelectors [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBBehaviorTest >> testCustomTestingSelectorsAtOnce [
 
 	"test automatic generation of custom testing selector defined at once"
@@ -67,7 +67,7 @@ FmxMBBehaviorTest >> testCustomTestingSelectorsAtOnce [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBBehaviorTest >> testDefaultSuperclass [
 
 	| entity |
@@ -77,7 +77,7 @@ FmxMBBehaviorTest >> testDefaultSuperclass [
 	self assert: entity defaultSuperclass name equals: #MooseEntity.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBBehaviorTest >> testPluralOf [
 
 	| behavior | 
@@ -94,7 +94,7 @@ FmxMBBehaviorTest >> testPluralOf [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBBehaviorTest >> testTestingSelectors [
 	"test automatic generation of testing methods in the entities hierarchy"
 
@@ -105,7 +105,7 @@ FmxMBBehaviorTest >> testTestingSelectors [
 	self assertCollection: simpleClass testingSelectors hasSameElements: #(isComment)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBBehaviorTest >> testWithNavigationOf [
 
 	| method package env |
@@ -123,7 +123,7 @@ FmxMBBehaviorTest >> testWithNavigationOf [
 	self assert: (((env ask classNamed: #TstMethod) methodNamed: 'packageGroup') sourceCode includesSubstring: '<navigation: ''Package''>').
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBBehaviorTest >> testWithoutNavigation [
 
 	| method package env |

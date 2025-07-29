@@ -1,9 +1,12 @@
-Extension { #name : #ClassDescription }
+Extension { #name : 'ClassDescription' }
 
-{ #category : #'*Famix-MetamodelBuilder-Core' }
+{ #category : '*Famix-MetamodelBuilder-Core' }
 ClassDescription >> needToAdaptToMethod: aRGMethod [
+
 	^ self
-		compiledMethodAt: aRGMethod selector
-		ifPresent: [ :realMethod | (aRGMethod sourceCode = realMethod sourceCode and: [ aRGMethod protocol = realMethod protocol ]) not ]
-		ifAbsent: [ true ]
+		  compiledMethodAt: aRGMethod selector
+		  ifPresent: [ :realMethod |
+			  (aRGMethod sourceCode = realMethod sourceCode and: [
+				   aRGMethod protocol = realMethod protocolName ]) not ]
+		  ifAbsent: [ true ]
 ]

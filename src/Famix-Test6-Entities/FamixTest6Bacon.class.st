@@ -1,14 +1,28 @@
+"
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+|---|
+| `brand` | `String` | '' | |
+| `eggs` | `Number` | 12 | |
+| `isFood` | `Boolean` | true | |
+
+"
 Class {
-	#name : #FamixTest6Bacon,
-	#superclass : #FamixTest6Entity,
+	#name : 'FamixTest6Bacon',
+	#superclass : 'FamixTest6Entity',
 	#instVars : [
-		'#isFood => FMProperty defaultValue: true',
-		'#eggs => FMProperty defaultValue: 12'
+		'#brand => FMProperty defaultValue: \'\'',
+		'#eggs => FMProperty defaultValue: 12',
+		'#isFood => FMProperty defaultValue: true'
 	],
-	#category : #'Famix-Test6-Entities-Entities'
+	#category : 'Famix-Test6-Entities-Entities',
+	#package : 'Famix-Test6-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTest6Bacon class >> annotation [
 
 	<FMClass: #Bacon super: #FamixTest6Entity>
@@ -17,7 +31,21 @@ FamixTest6Bacon class >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
+FamixTest6Bacon >> brand [
+
+	<FMProperty: #brand type: #String defaultValue: ''>
+	<generated>
+	^ brand ifNil: [ brand := '' ]
+]
+
+{ #category : 'accessing' }
+FamixTest6Bacon >> brand: anObject [
+	<generated>
+	brand := anObject
+]
+
+{ #category : 'accessing' }
 FamixTest6Bacon >> eggs [
 
 	<FMProperty: #eggs type: #Number defaultValue: 12>
@@ -25,13 +53,13 @@ FamixTest6Bacon >> eggs [
 	^ eggs ifNil: [ eggs := 12 ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest6Bacon >> eggs: anObject [
 	<generated>
 	eggs := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest6Bacon >> isFood [
 
 	<FMProperty: #isFood type: #Boolean defaultValue: true>
@@ -39,7 +67,7 @@ FamixTest6Bacon >> isFood [
 	^ isFood ifNil: [ isFood := true ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest6Bacon >> isFood: anObject [
 	<generated>
 	isFood := anObject

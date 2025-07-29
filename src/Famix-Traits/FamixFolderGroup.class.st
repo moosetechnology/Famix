@@ -1,10 +1,12 @@
 Class {
-	#name : #FamixFolderGroup,
-	#superclass : #MooseSpecializedGroup,
-	#category : #'Famix-Traits-Groups'
+	#name : 'FamixFolderGroup',
+	#superclass : 'MooseSpecializedGroup',
+	#category : 'Famix-Traits-Groups',
+	#package : 'Famix-Traits',
+	#tag : 'Groups'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixFolderGroup class >> annotation [
 
 	<FMClass: #FolderGroup super: #MooseSpecializedGroup>
@@ -13,14 +15,14 @@ FamixFolderGroup class >> annotation [
 	^ self
 ]
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixFolderGroup class >> metamodel [
 
 	<generated>
 	^ FamixModel metamodel
 ]
 
-{ #category : #'accessing - dynamic' }
+{ #category : 'accessing - dynamic' }
 FamixFolderGroup >> allFiles [
 	| files |
 	files := OrderedCollection new.

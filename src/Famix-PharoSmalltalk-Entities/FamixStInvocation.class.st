@@ -1,12 +1,45 @@
+"
+## Relations
+======================
+
+### Association source
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `sender` | `FamixTInvocation` | `outgoingInvocations` | `FamixTWithInvocations` | Behavioural entity making the call. from-side of the association|
+
+### Association target
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `candidates` | `FamixTInvocation` | `incomingInvocations` | `FamixTInvocable` | List of candidate behavioural entities for receiving the invocation|
+
+### Other
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `next` | `FamixTAssociation` | `previous` | `FamixTAssociation` | Next association in an ordered collection of associations. Currently not supported by the Moose importer|
+| `previous` | `FamixTAssociation` | `next` | `FamixTAssociation` | Previous association in an ordered collection of associations. Currently not supported by the Moose importer|
+| `receiver` | `FamixTInvocation` | `receivingInvocations` | `FamixTInvocationsReceiver` | Named entity (variable, class...) receiving the invocation. to-side of the association|
+| `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
+
+
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+|---|
+| `signature` | `String` | nil | Signature of the message being sent|
+
+"
 Class {
-	#name : #FamixStInvocation,
-	#superclass : #FamixStEntity,
+	#name : 'FamixStInvocation',
+	#superclass : 'FamixStEntity',
 	#traits : 'FamixTInvocation',
 	#classTraits : 'FamixTInvocation classTrait',
-	#category : #'Famix-PharoSmalltalk-Entities-Entities'
+	#category : 'Famix-PharoSmalltalk-Entities-Entities',
+	#package : 'Famix-PharoSmalltalk-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixStInvocation class >> annotation [
 
 	<FMClass: #Invocation super: #FamixStEntity>
@@ -15,14 +48,14 @@ FamixStInvocation class >> annotation [
 	^ self
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FamixStInvocation >> initialize [
 
 	super initialize.
 	signature := 'nosignature'.
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 FamixStInvocation >> isASureInvocation [
 	"Test if the receiver (an invocation) is sure (i.e. we know for sure the class of the invocation's receiver)"
 

@@ -1,16 +1,28 @@
 "
 FamixTSourcedEntity models any fact in a program source and it is the superclass (root class) of all source code entities and their relationships. It is a FamixTEntity and it can hold comments, a source anchor and a source language.
+
+## Relations
+======================
+
+### Other
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
+
+
+
 "
 Trait {
-	#name : #FamixTSourceEntity,
+	#name : 'FamixTSourceEntity',
 	#instVars : [
-		'#isStub => FMProperty',
 		'#sourceAnchor => FMOne type: #FamixTSourceAnchor opposite: #element'
 	],
-	#category : #'Famix-Traits-SourceAnchor'
+	#category : 'Famix-Traits-SourceAnchor',
+	#package : 'Famix-Traits',
+	#tag : 'SourceAnchor'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTSourceEntity classSide >> annotation [
 
 	<FMClass: #TSourceEntity super: #Object>
@@ -19,19 +31,26 @@ FamixTSourceEntity classSide >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'visitor' }
+FamixTSourceEntity >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTSourceEntity: self
+]
+
+{ #category : 'accessing' }
 FamixTSourceEntity >> allSourceAnchors [
 	^ self sourceAnchor
 		ifNil: [ {} ]
 		ifNotNil: #allSourceAnchors
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 FamixTSourceEntity >> allSourceAnchorsDo: aBlock [
 	^ self sourceAnchor ifNotNil: [ :sa | sa allSourceAnchorsDo: aBlock ]
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTSourceEntity >> computeNumberOfLinesOfCode [
 	self hasSourceAnchor ifTrue: [ ^ self sourceAnchor lineCount ].
 	self sourceText = '' ifFalse: [ ^ self sourceText lineCount ].
@@ -41,12 +60,12 @@ FamixTSourceEntity >> computeNumberOfLinesOfCode [
 	^ self children sumNumbers: #numberOfLinesOfCode
 ]
 
-{ #category : #'source anchor' }
+{ #category : 'source anchor' }
 FamixTSourceEntity >> defineMultiSourceAnchorWithPath: aPath [
 	 self ensureMultiSourceAnchor addFileAnchorWithPath: aPath
 ]
 
-{ #category : #'source anchor' }
+{ #category : 'source anchor' }
 FamixTSourceEntity >> ensureMultiSourceAnchor [
 	^ self sourceAnchor
 		ifNil: [ self
@@ -58,26 +77,23 @@ FamixTSourceEntity >> ensureMultiSourceAnchor [
 				sourceAnchor ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTSourceEntity >> hasSourceAnchor [
 	^ self sourceAnchor isNotNil
 ]
 
-{ #category : #accessing }
-FamixTSourceEntity >> isStub [
+{ #category : 'inspector' }
+FamixTSourceEntity >> inspectionSource: aBuilder [
 
-	<FMProperty: #isStub type: #Boolean>
-	<FMComment: 'Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.'>
-	^ isStub ifNil: [ false ]
+	<inspectorPresentationOrder: 3 title: 'SourceText'>
+	^ aBuilder newCode
+		  withoutSyntaxHighlight;
+		  withLineNumbers;
+		  text: self sourceText;
+		  beNotEditable
 ]
 
-{ #category : #accessing }
-FamixTSourceEntity >> isStub: anObject [
-	<generated>
-	isStub := anObject
-]
-
-{ #category : #'source anchor' }
+{ #category : 'source anchor' }
 FamixTSourceEntity >> multipleFileAnchorClass [
 	^ self mooseModel
 		ifNil: [ self error: 'The model need to be set for this feature to work.' ]
@@ -87,24 +103,24 @@ FamixTSourceEntity >> multipleFileAnchorClass [
 				ifAbsent: [ self error: 'This metamodel does not includes the full concept of MultipleFileAnchor needed.' ] ]
 ]
 
-{ #category : #properties }
+{ #category : 'properties' }
 FamixTSourceEntity >> notExistentMetricValue [
 	^ self explicitRequirement
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTSourceEntity >> numberOfLinesOfCode [
 	<FMProperty: #numberOfLinesOfCode type: #Number>
 	<FMComment: 'The number of lines of code in a method.'>
 	^ self lookUpPropertyNamed: #numberOfLinesOfCode computedAs: [ self computeNumberOfLinesOfCode ]
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTSourceEntity >> numberOfLinesOfCode: aNumber [
 	self cacheAt: #numberOfLinesOfCode put: aNumber
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTSourceEntity >> numberOfLinesOfCodeWithMoreThanOneCharacter [
 	<FMProperty: #numberOfLinesOfCodeWithMoreThanOneCharacter type: #Number>
 	<derived>
@@ -120,12 +136,12 @@ FamixTSourceEntity >> numberOfLinesOfCodeWithMoreThanOneCharacter [
 		computedAs: [ (self sourceText lines select: [ :line | line trimBoth size > 1 ]) size ]
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTSourceEntity >> shouldCountChildrenForLinesOfCodeIfNoSourceAnchor [
 	^ self isContainerEntity
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTSourceEntity >> sourceAnchor [
 	"Relation named: #sourceAnchor type: #FamixTSourceAnchor opposite: #element"
 
@@ -135,14 +151,14 @@ FamixTSourceEntity >> sourceAnchor [
 	^ sourceAnchor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTSourceEntity >> sourceAnchor: anObject [
 
 	<generated>
 	sourceAnchor := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTSourceEntity >> sourceText [
 	<FMProperty: #sourceText type: #String>
 	<derived>

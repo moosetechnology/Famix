@@ -1,13 +1,27 @@
+"
+## Relations
+======================
+
+### Parents
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `school` | `FamixTest4Principal` | `principal` | `FamixTest4School` | |
+
+
+
+"
 Class {
-	#name : #FamixTest4Principal,
-	#superclass : #FamixTest4Person,
+	#name : 'FamixTest4Principal',
+	#superclass : 'FamixTest4Person',
 	#instVars : [
 		'#school => FMOne type: #FamixTest4School opposite: #principal'
 	],
-	#category : #'Famix-Test4-Entities-Entities'
+	#category : 'Famix-Test4-Entities-Entities',
+	#package : 'Famix-Test4-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTest4Principal class >> annotation [
 
 	<FMClass: #Principal super: #FamixTest4Person>
@@ -16,7 +30,7 @@ FamixTest4Principal class >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest4Principal >> school [
 	"Relation named: #school type: #FamixTest4School opposite: #principal"
 
@@ -25,14 +39,14 @@ FamixTest4Principal >> school [
 	^ school
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest4Principal >> school: anObject [
 
 	<generated>
 	school := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FamixTest4Principal >> schoolGroup [
 	<generated>
 	<navigation: 'School'>

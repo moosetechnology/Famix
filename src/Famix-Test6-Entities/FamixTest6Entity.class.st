@@ -1,10 +1,12 @@
 Class {
-	#name : #FamixTest6Entity,
-	#superclass : #MooseEntity,
-	#category : #'Famix-Test6-Entities-Entities'
+	#name : 'FamixTest6Entity',
+	#superclass : 'MooseEntity',
+	#category : 'Famix-Test6-Entities-Entities',
+	#package : 'Famix-Test6-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTest6Entity class >> annotation [
 
 	<FMClass: #Entity super: #MooseEntity>
@@ -14,16 +16,37 @@ FamixTest6Entity class >> annotation [
 	^ self
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTest6Entity class >> isAbstract [
 
 	<generated>
 	^ self == FamixTest6Entity
 ]
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTest6Entity class >> metamodel [
 
 	<generated>
 	^ FamixTest6Model metamodel
+]
+
+{ #category : 'testing' }
+FamixTest6Entity >> isComment [
+
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
+FamixTest6Entity >> isNamedEntity [
+
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
+FamixTest6Entity >> isQueryable [
+
+	<generated>
+	^ false
 ]

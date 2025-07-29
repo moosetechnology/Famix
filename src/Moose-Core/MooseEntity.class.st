@@ -26,15 +26,16 @@ YourEntity>>yourExtendingAttribute
 	Each entity belongs to one and only one model, if an entity has not yet been added to a model or if an entity has been removed from a model the mooseModel is undefined, that is it may be nil.
 "
 Class {
-	#name : #MooseEntity,
-	#superclass : #MooseObject,
+	#name : 'MooseEntity',
+	#superclass : 'MooseObject',
 	#instVars : [
 		'mooseModel'
 	],
-	#category : #'Moose-Core'
+	#category : 'Moose-Core',
+	#package : 'Moose-Core'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 MooseEntity class >> annotation [
 	<FMClass: #Entity super: #MooseObject>
 	<package: #Moose>
@@ -42,18 +43,18 @@ MooseEntity class >> annotation [
 	
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseEntity class >> implementingClassesIn: aMetamodel [
 
 	^ { self }
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MooseEntity class >> isAbstract [
 	^ self = MooseEntity
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MooseEntity class >> isContainerEntityIn: aMetamodel [
 	^ aMetamodel
 		additionalProperty: #isContainerEntity
@@ -61,26 +62,26 @@ MooseEntity class >> isContainerEntityIn: aMetamodel [
 		ifAbsentPut: [ (self allDeclaredPropertiesIn: aMetamodel) anySatisfy: #isChildrenProperty ]
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MooseEntity class >> model: aMooseModel [
 	^ self new
 		mooseModel: aMooseModel;
 		yourself
 ]
 
-{ #category : #dependencies }
+{ #category : 'dependencies' }
 MooseEntity >> addAllChildrenDependenciesThrough: aDirectionStrategy in: aCollection [
 	aCollection addAll: (aDirectionStrategy dependenciesAtReceiverScopeOf: self).
 	self children do: [ :each | each addAllChildrenDependenciesThrough: aDirectionStrategy in: aCollection ].
 	^ aCollection
 ]
 
-{ #category : #dependencies }
+{ #category : 'dependencies' }
 MooseEntity >> allChildrenDependenciesThrough: aDirectionStrategy [
 	^ self addAllChildrenDependenciesThrough: aDirectionStrategy in: OrderedCollection new
 ]
 
-{ #category : #dependencies }
+{ #category : 'dependencies' }
 MooseEntity >> allClientsIn: aMooseGroup [
 	"Detect all the clients who are present in the Moose group. 
 	For example, if I have a method as client that is not present in this group, but its parent class is present, I'll select it. But in case the method is present, I'll select the method.
@@ -89,7 +90,7 @@ MooseEntity >> allClientsIn: aMooseGroup [
 	^ self allClientsIn: aMooseGroup forModel: self mooseModel
 ]
 
-{ #category : #dependencies }
+{ #category : 'dependencies' }
 MooseEntity >> allClientsIn: aMooseGroup forModel: aMooseModel [
 	"Detect all the clients who are present in the Moose group for a given model (this is useful when using tags).
 	For example, if I have a method as client that is not present in this group, but its parent class is present, I'll select it. But in case the method is present, I'll select the method.
@@ -98,7 +99,7 @@ MooseEntity >> allClientsIn: aMooseGroup forModel: aMooseModel [
 	^ FamixDependenciesDetector computeClientsOf: self from: aMooseGroup in: aMooseModel
 ]
 
-{ #category : #dependencies }
+{ #category : 'dependencies' }
 MooseEntity >> allProvidersIn: aMooseGroup [
 	"Detect all the providers who are present in the Moose group. 
 	For example, if I have a method as client that is not present in this group, but its parent class is present, I'll select it. But in case the method is present, I'll select the method.
@@ -107,7 +108,7 @@ MooseEntity >> allProvidersIn: aMooseGroup [
 	^ self allProvidersIn: aMooseGroup forModel: self mooseModel
 ]
 
-{ #category : #dependencies }
+{ #category : 'dependencies' }
 MooseEntity >> allProvidersIn: aMooseGroup forModel: aMooseModel [
 	"Detect all the providers who are present in the Moose group for a given model (this is useful when using tags).
 	For example, if I have a method as client that is not present in this group, but its parent class is present, I'll select it. But in case the method is present, I'll select the method.
@@ -116,12 +117,18 @@ MooseEntity >> allProvidersIn: aMooseGroup forModel: aMooseModel [
 	^ FamixDependenciesDetector computeProvidersOf: self from: aMooseGroup in: aMooseModel
 ]
 
-{ #category : #dependencies }
+{ #category : 'converting' }
+MooseEntity >> asOrderedCollection [
+
+	^ OrderedCollection with: self
+]
+
+{ #category : 'dependencies' }
 MooseEntity >> canRecursivelyBeItsParent [
 	^ false
 ]
 
-{ #category : #dependencies }
+{ #category : 'dependencies' }
 MooseEntity >> detectDependenciesUsing: aDetector [
 	| recursiveEntity |
 	recursiveEntity := aDetector potentialDependencies select: #canRecursivelyBeItsParent.
@@ -131,29 +138,29 @@ MooseEntity >> detectDependenciesUsing: aDetector [
 		detectDependenciesAtAllScopesOfPossibleDependencies
 ]
 
-{ #category : #properties }
+{ #category : 'properties' }
 MooseEntity >> handleFameProperty: aSymbol value: anObject [
-
+	"If my super method is able to handle the missing property, I'm doing nothing. Else I save the value in the properties of the entity."
 	| value |
-	super handleFameProperty: aSymbol value: anObject.
+	(super handleFameProperty: aSymbol value: anObject) ifTrue: [ ^ self ].
 	value := (anObject isCollection and: [ anObject size = 1 ])
 		         ifTrue: [ anObject anyOne ]
 		         ifFalse: [ anObject ].
 	self propertyNamed: aSymbol put: value
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MooseEntity >> initialize [
 	super initialize.
 	self class initializeSlots: self
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MooseEntity >> isContainerEntity [
 	^ self class isContainerEntityIn: self metamodel
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MooseEntity >> isDead [
 	"Only container entities and behaviourals can be dead"
 
@@ -163,12 +170,12 @@ MooseEntity >> isDead [
 	^ false
 ]
 
-{ #category : #dependencies }
+{ #category : 'dependencies' }
 MooseEntity >> isInListOfPossibleLinks: aCollection forModel: aMooseModel [
 	^ aCollection includes: self
 ]
 
-{ #category : #dependencies }
+{ #category : 'dependencies' }
 MooseEntity >> isLinkedTo: anEntity dependancyDirection: aDirectionStrategy in: aMooseModel [
 	"find if the specified entities is to linked to this entity at all possible levels in the direction specified by the strategy. All possible levels self, all children and all parents. It is important to see in the all parents because an entity can contain itself"
 
@@ -179,47 +186,45 @@ MooseEntity >> isLinkedTo: anEntity dependancyDirection: aDirectionStrategy in: 
 	^ anEntity isInListOfPossibleLinks: allLinksWithParents forModel: aMooseModel
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MooseEntity >> isMooseEntity [
 	^ true
 ]
 
-{ #category : #testing }
-MooseEntity >> isRoot [
-	"Return true if the entity is not contained in any other entity."
+{ #category : 'testing' }
+MooseEntity >> isQueryable [
+	"This should probably be removed in the future but is here for compatibility.
+	Could be removed in Moose 12."
 
-	^ self parents isEmpty
+	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MooseEntity >> isStub [
-	^ self attributeAt: #privateIsStub ifAbsent: [ false ]
+	"I'll be overriden in TCanBeStub if the applies."
+
+	^ false
 ]
 
-{ #category : #testing }
-MooseEntity >> isStub: boolean [
-	^ self attributeAt: #privateIsStub put: boolean
-]
-
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseEntity >> mooseModel [
 	"Answers the model containing the current entity"
 
 	^ mooseModel
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseEntity >> mooseModel: aMooseModel [
 	aMooseModel add: self.
 	self privateSetMooseModel: aMooseModel
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MooseEntity >> privateSetMooseModel: aMooseModel [
 	mooseModel := aMooseModel
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MooseEntity >> stub: aBoolean [
 
 	self isStub: aBoolean

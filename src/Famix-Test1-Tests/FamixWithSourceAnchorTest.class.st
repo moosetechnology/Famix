@@ -1,22 +1,23 @@
 Class {
-	#name : #FamixWithSourceAnchorTest,
-	#superclass : #FamixTest1SimpleModelTest,
-	#category : #'Famix-Test1-Tests'
+	#name : 'FamixWithSourceAnchorTest',
+	#superclass : 'FamixTest1SimpleModelTest',
+	#category : 'Famix-Test1-Tests',
+	#package : 'Famix-Test1-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 FamixWithSourceAnchorTest >> setUp [
 	super setUp.
 	m3 sourceAnchor: nil.
 	anchor2 source: 'abc\ab\a\ a  \ ab \abc\ab' withCRs
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixWithSourceAnchorTest >> testAllSourceAnchors [
 	self assertCollection: m1 allSourceAnchors hasSameElements: {anchor1}
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixWithSourceAnchorTest >> testAllSourceAnchorsDo [
 	| res multipleFileAnchor |
 	multipleFileAnchor := FamixTest1MultipleFileAnchor model: model.
@@ -32,7 +33,7 @@ FamixWithSourceAnchorTest >> testAllSourceAnchorsDo [
 	res do: [ :each | self assert: each isFileAnchor ]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixWithSourceAnchorTest >> testAllSourceAnchorsWithMultipleFileAnchor [
 	| multipleFileAnchor |
 	self assertEmpty: m3 allSourceAnchors.
@@ -45,14 +46,14 @@ FamixWithSourceAnchorTest >> testAllSourceAnchorsWithMultipleFileAnchor [
 	self assert: m3 allSourceAnchors size equals: 3
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixWithSourceAnchorTest >> testHasSourceAnchor [
 
 	self assert: m1 hasSourceAnchor.
 	self deny: m3 hasSourceAnchor.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixWithSourceAnchorTest >> testNumberOfLinesOfCodeWithMoreThanOneCharacter [
 	
 	self assert: m1 numberOfLinesOfCodeWithMoreThanOneCharacter equals: 2.
@@ -66,7 +67,7 @@ FamixWithSourceAnchorTest >> testNumberOfLinesOfCodeWithMoreThanOneCharacter [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixWithSourceAnchorTest >> testSourceAnchor [
 
 	self assert: m1 sourceAnchor equals: anchor1.
@@ -77,7 +78,7 @@ FamixWithSourceAnchorTest >> testSourceAnchor [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixWithSourceAnchorTest >> testSourceText [
 
 	self assert: m3 sourceText equals: ''.
@@ -85,7 +86,7 @@ FamixWithSourceAnchorTest >> testSourceText [
 	
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixWithSourceAnchorTest >> testSourceTextForStub [
 
 	self assert: m1 sourceText equals: 'method1\source1' withCRs.

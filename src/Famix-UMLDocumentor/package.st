@@ -1,1 +1,1 @@
-Package { #name : #'Famix-UMLDocumentor' }
+Package { #name : 'Famix-UMLDocumentor' }

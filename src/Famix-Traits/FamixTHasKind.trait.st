@@ -1,15 +1,25 @@
 "
 This is an indicator that a method is a setter, getter, constant, or constructor
+
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+|---|
+| `kind` | `String` | nil | Tag indicating a setter, getter, constant, constructor method|
+
 "
 Trait {
-	#name : #FamixTHasKind,
+	#name : 'FamixTHasKind',
 	#instVars : [
 		'#kind => FMProperty'
 	],
-	#category : #'Famix-Traits-Traits'
+	#category : 'Famix-Traits-PrimitiveProperties',
+	#package : 'Famix-Traits',
+	#tag : 'PrimitiveProperties'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTHasKind classSide >> annotation [
 
 	<FMClass: #THasKind super: #Object>
@@ -18,31 +28,38 @@ FamixTHasKind classSide >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'visitor' }
+FamixTHasKind >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTHasKind: self
+]
+
+{ #category : 'accessing' }
 FamixTHasKind >> beConstant [
 
 	self kind: #constant
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTHasKind >> beConstructor [
 
 	self kind: #constructor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTHasKind >> beGetter [
 
 	self kind: #getter
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTHasKind >> beSetter [
 
 	self kind: #setter
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTHasKind >> isConstant [
 
 	<FMProperty: #isConstant type: #Boolean>
@@ -51,7 +68,7 @@ FamixTHasKind >> isConstant [
 	^ #constant = self kind
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTHasKind >> isConstructor [
 
 	<FMProperty: #isConstructor type: #Boolean>
@@ -61,7 +78,7 @@ FamixTHasKind >> isConstructor [
 		  self cacheAt: #isConstructor ifAbsent: [ false ] ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTHasKind >> isConstructor: aBoolean [
 
 	aBoolean
@@ -69,7 +86,7 @@ FamixTHasKind >> isConstructor: aBoolean [
 		ifFalse: [ self isConstructor ifTrue: [ self kind: nil ] ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTHasKind >> isGetter [
 
 	<FMProperty: #isGetter type: #Boolean>
@@ -78,7 +95,7 @@ FamixTHasKind >> isGetter [
 	^ #getter = self kind
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTHasKind >> isPureAccessor [
 
 	^ self isGetter or: [ 
@@ -86,7 +103,7 @@ FamixTHasKind >> isPureAccessor [
 			  self cacheAt: #isPureAccessor ifAbsent: [ false ] ] ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTHasKind >> isSetter [
 
 	<FMProperty: #isSetter type: #Boolean>
@@ -95,7 +112,7 @@ FamixTHasKind >> isSetter [
 	^ #setter = self kind
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTHasKind >> kind [
 
 	<FMProperty: #kind type: #String>
@@ -104,7 +121,7 @@ FamixTHasKind >> kind [
 	^ kind
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTHasKind >> kind: anObject [
 	<generated>
 	kind := anObject

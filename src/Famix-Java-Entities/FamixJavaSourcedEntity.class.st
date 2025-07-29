@@ -1,12 +1,26 @@
+"
+## Relations
+======================
+
+### Other
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
+
+
+
+"
 Class {
-	#name : #FamixJavaSourcedEntity,
-	#superclass : #FamixJavaEntity,
+	#name : 'FamixJavaSourcedEntity',
+	#superclass : 'FamixJavaEntity',
 	#traits : 'FamixTSourceEntity',
 	#classTraits : 'FamixTSourceEntity classTrait',
-	#category : #'Famix-Java-Entities-Entities'
+	#category : 'Famix-Java-Entities-Entities',
+	#package : 'Famix-Java-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixJavaSourcedEntity class >> annotation [
 
 	<FMClass: #SourcedEntity super: #FamixJavaEntity>
@@ -16,14 +30,21 @@ FamixJavaSourcedEntity class >> annotation [
 	^ self
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixJavaSourcedEntity class >> isAbstract [
 
 	<generated>
 	^ self == FamixJavaSourcedEntity
 ]
 
-{ #category : #'Famix-SourceAnchor' }
+{ #category : 'visitor' }
+FamixJavaSourcedEntity >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaSourcedEntity: self
+]
+
+{ #category : 'Famix-SourceAnchor' }
 FamixJavaSourcedEntity >> fileAnchorPath: aString startLine: anInteger startColumn: anInteger2 endLine: anInteger3 endColumn: anInteger4 [
 	"I need to be called after the mooseModel is set."
 
@@ -38,7 +59,7 @@ FamixJavaSourcedEntity >> fileAnchorPath: aString startLine: anInteger startColu
 				model: self mooseModel)
 ]
 
-{ #category : #'Famix-SourceAnchor' }
+{ #category : 'Famix-SourceAnchor' }
 FamixJavaSourcedEntity >> fileAnchorPath: aString startPos: anInteger endPos: anotherInteger [
 	"I need to be called after the mooseModel is set."
 
@@ -51,7 +72,7 @@ FamixJavaSourcedEntity >> fileAnchorPath: aString startPos: anInteger endPos: an
 				model: self mooseModel)
 ]
 
-{ #category : #'Famix-Extensions' }
+{ #category : 'Famix-Extensions' }
 FamixJavaSourcedEntity >> numberOfJavaNullChecks [
 	<FMProperty: #numberOfJavaNullChecks type: #Number> <derived>
 	^self
@@ -62,7 +83,7 @@ FamixJavaSourcedEntity >> numberOfJavaNullChecks [
 			(self sourceText allRegexMatches: ( '|' join: nullCheckTextPatterns)) size ]
 ]
 
-{ #category : #'Famix-Extensions' }
+{ #category : 'Famix-Extensions' }
 FamixJavaSourcedEntity >> structuralChildren [ 
 	^ #()
 ]

@@ -1,12 +1,40 @@
+"
+## Relations
+======================
+
+### Children
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `childEntities` | `FamixTPackage` | `parentPackage` | `FamixTPackageable` | |
+| `globalVariables` | `FamixTWithGlobalVariables` | `parentScope` | `FamixTGlobalVariable` | Global variables defined in the scope, if any.|
+| `types` | `FamixTWithTypes` | `typeContainer` | `FamixTType` | Types contained (declared) in this entity, if any. #types is declared in ContainerEntity because different kinds of container can embed types. Types are usually contained in a Famix.Namespace. But types can also be contained in a Famix.Class or Famix.Method (in Java with inner classes for example). Famix.Function can also contain some types such as structs.|
+
+### Other
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
+
+
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+|---|
+| `isStub` | `Boolean` | false | Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.|
+| `name` | `String` | nil | Basic name of the entity, not full reference.|
+
+"
 Class {
-	#name : #FamixStPackage,
-	#superclass : #FamixStNamedEntity,
+	#name : 'FamixStPackage',
+	#superclass : 'FamixStNamedEntity',
 	#traits : 'FamixTCohesionCouplingMetrics + FamixTPackage + FamixTWithClasses + FamixTWithGlobalVariables',
 	#classTraits : 'FamixTCohesionCouplingMetrics classTrait + FamixTPackage classTrait + FamixTWithClasses classTrait + FamixTWithGlobalVariables classTrait',
-	#category : #'Famix-PharoSmalltalk-Entities-Entities'
+	#category : 'Famix-PharoSmalltalk-Entities-Entities',
+	#package : 'Famix-PharoSmalltalk-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixStPackage class >> annotation [
 
 	<FMClass: #Package super: #FamixStNamedEntity>
@@ -15,7 +43,7 @@ FamixStPackage class >> annotation [
 	^ self
 ]
 
-{ #category : #'Famix-Extensions-metrics' }
+{ #category : 'Famix-Extensions-metrics' }
 FamixStPackage >> abstractness [
 	"Abstractness is the ratio between the number of abstract classes and the total number of classes in a package, in the range [0, 1]. 0 means the package is fully concrete, 1 it is fully abstract."
 	<FMProperty: #abstractness type: #Number>
@@ -29,45 +57,45 @@ FamixStPackage >> abstractness [
 	^ (nsClasses select: [:c | c isAbstract]) size / (nsClasses size)
 ]
 
-{ #category : #'Famix-Extensions' }
+{ #category : 'Famix-Extensions' }
 FamixStPackage >> allClasses [
 	^self classes union: self extensionClasses
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixStPackage >> classes [
 	^ self cacheAt: #classes ifAbsentPut: [ self childEntities select: [ :child | child isClass ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixStPackage >> extendedClasses [
 	"select all classes extended in this package"
 
 	^ self cacheAt: #extendedClasses ifAbsentPut: [ self classes select: [ :c | c isExtended ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixStPackage >> extensionClasses [
 	"select all classes extended by this package"
 
 	^ self cacheAt: #extensionClasses ifAbsentPut: [ self extensionMethods collectAsSet: [ :method | method parentType ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixStPackage >> extensionMethods [
 	"select all class extensions made by this package"
 
 	^ self cacheAt: #extensionMethods ifAbsentPut: [ self childEntities select: [ :child | child isMethod ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixStPackage >> localClasses [
 	"select all local classes. Just an alias"
 
 	^ self classes
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixStPackage >> localClassesGroup [
 	<navigation: 'Local classes'>
 
@@ -76,32 +104,32 @@ FamixStPackage >> localClassesGroup [
 		withDescription: 'Local classes'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixStPackage >> localMethods [
 	"select all local methods"
 
 	^ self cacheAt: #localMethods ifAbsentPut: [ self classes flatCollect: [ :c | c localMethods ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixStPackage >> methods [
 	^ self localMethods union: self extensionMethods
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixStPackage >> numberOfClientPackages [
 	<FMProperty: #numberOfClientPackages type: #Number>
 	<FMComment: 'The number of packages which depend on this package'>
 	<derived>
-	^ self lookUpPropertyNamed: #numberOfClientPackages computedAs: [ self allClients size ]
+	^ self lookUpPropertyNamed: #numberOfClientPackages computedAs: [ self allClientsAtMyScope size ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixStPackage >> numberOfClientPackages: aNumber [
 	self cacheAt: #numberOfClientPackages put: aNumber
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixStPackage >> relativeImportanceForSystem [
 	<FMProperty: #relativeImportanceForSystem type: #Number>
 	<derived>

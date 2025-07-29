@@ -1,10 +1,11 @@
 Class {
-	#name : #FamixJavaInterfaceTest,
-	#superclass : #TestCase,
-	#category : #'Famix-Java-Tests'
+	#name : 'FamixJavaInterfaceTest',
+	#superclass : 'TestCase',
+	#category : 'Famix-Java-Tests',
+	#package : 'Famix-Java-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaInterfaceTest >> testClassContainInterface [
 
 	| interface class |
@@ -18,7 +19,7 @@ FamixJavaInterfaceTest >> testClassContainInterface [
 		hasSameElements: { interface }
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaInterfaceTest >> testImplementation [
 
 
@@ -36,7 +37,7 @@ FamixJavaInterfaceTest >> testImplementation [
 	
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaInterfaceTest >> testInterfaceContainInterface [
 
 	| interface int2 |
@@ -50,7 +51,7 @@ FamixJavaInterfaceTest >> testInterfaceContainInterface [
 		hasSameElements: { interface }
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaInterfaceTest >> testMultipleInheritance [
 
 	| interface supInt1 supInt2 inh1 inh2 |

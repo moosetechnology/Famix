@@ -1,18 +1,18 @@
 Class {
-	#name : #MooseSmalltalkImporterFamixClassTest,
-	#superclass : #TestCase,
-	#category : #'Moose-SmalltalkImporter-Core-Tests'
+	#name : 'MooseSmalltalkImporterFamixClassTest',
+	#superclass : 'TestCase',
+	#category : 'Moose-SmalltalkImporter-Core-Tests',
+	#package : 'Moose-SmalltalkImporter-Core-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseSmalltalkImporterFamixClassTest >> testIsTestCase [
+
 	| mooseModel |
 	mooseModel := FamixStModel new.
-	MoosePharoImporterTask new
-		importerClass: SmalltalkImporter;
+	FamixStPharoImporterTask new
 		model: mooseModel;
 		addClasses: (OrderedCollection with: self class);
-		run;
-		yourself.
+		run.
 	self assert: (mooseModel allModelClasses select: #isInstanceSide) first isTestCase
 ]

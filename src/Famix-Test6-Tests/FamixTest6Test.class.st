@@ -1,26 +1,44 @@
 Class {
-	#name : #FamixTest6Test,
-	#superclass : #TestCase,
-	#category : #'Famix-Test6-Tests'
+	#name : 'FamixTest6Test',
+	#superclass : 'TestCase',
+	#category : 'Famix-Test6-Tests',
+	#package : 'Famix-Test6-Tests'
 }
 
-{ #category : #running }
-FamixTest6Test >> testDefaultValueOnCreation [
+{ #category : 'running' }
+FamixTest6Test >> testDefaultValueEmptyString [
 
-	| bacon foodProperty |
-	
+	| bacon brandProperty newBrand |
 	bacon := FamixTest6Bacon new.
-	foodProperty := (bacon mooseDescription properties select: [ :each | each name = #isFood ]) at: 1.
-	
-	self assert: bacon isFood equals: true.
-	self assert: foodProperty defaultValue equals: true.
-	
-	bacon isFood: false.
-	self assert: bacon isFood equals: false.
-	self assert: foodProperty defaultValue equals: true.
+	brandProperty := bacon mooseDescription properties detect: [ :each |
+		                 each name = #brand ].
+
+	self assert: bacon brand equals: ''.
+	self assert: brandProperty defaultValue equals: ''.
+
+	newBrand := 'WonderfulBacon'.
+	bacon brand: newBrand.
+	self assert: bacon brand equals: newBrand.
+	self assert: brandProperty defaultValue equals: ''
 ]
 
-{ #category : #running }
+{ #category : 'running' }
+FamixTest6Test >> testDefaultValueOnCreation [
+
+	| bacon brandProperty |
+	bacon := FamixTest6Bacon new.
+	brandProperty := (bacon mooseDescription properties select: [ :each |
+		                  each name = #isFood ]) at: 1.
+
+	self assert: bacon isFood.
+	self assert: brandProperty defaultValue.
+
+	bacon isFood: false.
+	self deny: bacon isFood.
+	self assert: brandProperty defaultValue
+]
+
+{ #category : 'running' }
 FamixTest6Test >> testDefaultValueOnCreation2 [
 
 	| bacon eggProperty |
@@ -36,7 +54,7 @@ FamixTest6Test >> testDefaultValueOnCreation2 [
 	self assert: eggProperty defaultValue equals: 12
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixTest6Test >> testDefaultValueOnCreationInheritance [
 
 	| spam eggProperty bacon |

@@ -14,47 +14,59 @@ Internal Representation and Key Implementation Points.
 
 "
 Class {
-	#name : #FmxLazyClassChange,
-	#superclass : #FmxCodeChange,
+	#name : 'FmxLazyClassChange',
+	#superclass : 'FmxCodeChange',
 	#instVars : [
 		'className',
 		'isClassSide'
 	],
-	#category : #'Famix-MetamodelBuilder-Core-Changes'
+	#category : 'Famix-MetamodelBuilder-Core-Changes',
+	#package : 'Famix-MetamodelBuilder-Core',
+	#tag : 'Changes'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 FmxLazyClassChange class >> isAbstract [
 	^ self = FmxLazyClassChange
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxLazyClassChange >> className [
 	^ className
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxLazyClassChange >> className: anObject [
 	className := anObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FmxLazyClassChange >> initialize [
 	super initialize.
 	isClassSide := false
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxLazyClassChange >> isClassSide [
 	^ isClassSide
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxLazyClassChange >> isClassSide: anObject [
 	isClassSide := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'printing' }
+FmxLazyClassChange >> printOn: aStream [
+
+	super printOn: aStream.
+	aStream
+		nextPut: $(;
+		nextPutAll: (className ifNil: [ #unamed ]);
+		nextPut: $)
+]
+
+{ #category : 'accessing' }
 FmxLazyClassChange >> realClass [
 	| class |
 	class := self class environment at: self className.

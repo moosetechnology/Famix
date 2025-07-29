@@ -1,19 +1,22 @@
 Class {
-	#name : #FmxMBGeneratorCleaningStrategyTest,
-	#superclass : #FmxMBTestCase,
+	#name : 'FmxMBGeneratorCleaningStrategyTest',
+	#superclass : 'FmxMBTestCase',
 	#instVars : [
 		'generator'
 	],
-	#category : #'Famix-MetamodelBuilder-Tests'
+	#category : 'Famix-MetamodelBuilder-Tests-Tests',
+	#package : 'Famix-MetamodelBuilder-Tests',
+	#tag : 'Tests'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBGeneratorCleaningStrategyTest class >> defaultTimeLimit [
 	^ 20 seconds
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FmxMBGeneratorCleaningStrategyTest >> generateClasses [
+
 	| generatedClassToRemove generatedTraitToRemove |
 	FamixMetamodelCleaningStrategiesTestGenerator new generate.
 
@@ -25,28 +28,24 @@ FmxMBGeneratorCleaningStrategyTest >> generateClasses [
 
 	self class environment
 		at: #FmxTestCleaningStrategyFmxTestEntity
-		ifPresent: [ :class | 
+		ifPresent: [ :class |
 			class
-				compile:
-					'banana
+				compile: 'banana
 
 	^ 42'
 				classified: #monkey.
 			class class
-				compile:
-					'tree
+				compile: 'tree
 
 	^ #Christopher'
 				classified: #monkey.
 			class
-				compile:
-					'generatedBanana
+				compile: 'generatedBanana
 	<generated>
 	^ #Christopher'
 				classified: #monkey.
 			class
-				compile:
-					'potatoExtendedMethod
+				compile: 'potatoExtendedMethod
 
 	^ 42'
 				classified: #* , self class package name.
@@ -54,24 +53,25 @@ FmxMBGeneratorCleaningStrategyTest >> generateClasses [
 			class addInstVarNamed: 'bananaTree'.
 			class addClassVarNamed: 'Fuhrmanator'.
 			class class addInstVarNamed: 'grandFrais'.
-			(class slotNamed: #fursonas) inClass: #FmxTestCleaningStrategyFmxTestEntity	"Here we change the type of the slot to ensure it is regenerated correctly" ]
+			(class slotNamed: #fursonas) inClass: #FmxTestCleaningStrategyFmxTestEntity "Here we change the type of the slot to ensure it is regenerated correctly" ]
 		ifAbsent: [ self fail ].
-	Object
-		subclass: #FmxCleanerTestAddedClass
-		slots: {}
-		classVariables: {}
-		package: self packageName.
-	Trait named: #TFmxCleanerTestAddedTrait uses: {} package: self packageName.
+	self class classInstaller make: [ :aBuilder |
+		aBuilder
+			name: #FmxCleanerTestAddedClass;
+			package: self packageName ].
+	self class classInstaller make: [ :aBuilder |
+		aBuilder
+			beTrait;
+			name: #TFmxCleanerTestAddedTrait;
+			package: self packageName ].
 
 	"We add a class with Famix pragma to ensure it is deleted after the generation."
-	generatedClassToRemove := MooseEntity
-		subclass: #FmxCleanerTestAddedClassFromFamix
-		slots: {}
-		classVariables: {}
-		package: self packageName.
-	generatedClassToRemove class
-		compile:
-			'annotation
+	generatedClassToRemove := self class classInstaller make: [ :aBuilder |
+		                          aBuilder
+			                          superclass: MooseEntity;
+			                          name: #FmxCleanerTestAddedClassFromFamix;
+			                          package: self packageName ].
+	generatedClassToRemove class compile: 'annotation
 
 	<FMClass: #AddedClassFromFamix super: #MooseEntity>
 	<package: #'',  self packageName , ''>
@@ -79,14 +79,12 @@ FmxMBGeneratorCleaningStrategyTest >> generateClasses [
 	^self'.
 
 	"We add a Trait with Famix pragma to ensure it is deleted after the generation."
-	generatedTraitToRemove := Trait
-		named: #FmxCleanerTestTAddedClassFromFamix
-		uses: {}
-		slots: {}
-		package: self packageName.
-	generatedTraitToRemove class
-		compile:
-			'annotation
+	generatedTraitToRemove := self class classInstaller make: [ :aBuilder |
+		                          aBuilder
+			                          beTrait;
+			                          name: #FmxCleanerTestTAddedClassFromFamix;
+			                          package: self packageName ].
+	generatedTraitToRemove class compile: 'annotation
 
 	<FMClass: #TAddedClassFromFamix super: #Trait>
 	<package: #'',  self packageName , ''>
@@ -96,35 +94,38 @@ FmxMBGeneratorCleaningStrategyTest >> generateClasses [
 	"We change the superclass of this class to ensure regeneration will update it. Check non regression for: https://github.com/moosetechnology/Moose/issues/1668"
 	self class environment
 		at: #FmxTestCleaningStrategyFmxTestEntityWithDifferentSuperclass
-		ifPresent: [ :class | 
-			MooseEntity
-				subclass: #FmxTestCleaningStrategyFmxTestEntityWithDifferentSuperclass
-				slots: {}
-				classVariables: {}
-				package: 'Famix-MetamodelBuilder-TestsResources-Entities' ]
+		ifPresent: [ :class |
+			self class classInstaller make: [ :aBuilder |
+				aBuilder
+					superclass: MooseEntity;
+					name: #FmxTestCleaningStrategyFmxTestEntityWithDifferentSuperclass;
+					package: 'Famix-MetamodelBuilder-TestsResources-Entities' ] ]
 		ifAbsent: [ self fail ].
 	self class compile: 'extensionsMethodForTest' classified: '*' , generator packageName
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FmxMBGeneratorCleaningStrategyTest >> packageName [
 	^ 'Famix-MetamodelBuilder-TestsResources'
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FmxMBGeneratorCleaningStrategyTest >> setUp [
 	super setUp.
 	generator := FamixMetamodelCleaningStrategiesTestGenerator new.
 	self generateClasses
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FmxMBGeneratorCleaningStrategyTest >> tearDown [
-	[ self packageName asPackage removeFromSystem ] on: NotFound  do: [ ].
-	super tearDown.
+
+	[ self packageName asPackage removeFromSystem ]
+		on: NotFound
+		do: [  ].
+	super tearDown
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBGeneratorCleaningStrategyTest >> testGenerateNoCleaningCleaning [
 	generator withoutCleaning cleaningStrategy cleanBeforeGeneration: generator.
 	self class environment
@@ -134,7 +135,7 @@ FmxMBGeneratorCleaningStrategyTest >> testGenerateNoCleaningCleaning [
 			self assert: (class localMethods anySatisfy: [ :method | method selector = #banana ]).
 			self assert: (class localMethods anySatisfy: [ :method | method selector = #generatedBanana ]).
 			self assert: (class localMethods anySatisfy: [ :method | method selector = #potatoExtendedMethod ]).
-			self assert: (class localMethods detect: [ :method | method selector = #potatoExtendedMethod ]) protocol equals: #* , self class package name.
+			self assert: (class localMethods detect: [ :method | method selector = #potatoExtendedMethod ]) protocolName equals: #* , self class package name.
 			self assert: (class traitComposition allTraits anySatisfy: [ :trait | trait name = #FamixTestExternalTraits ]).
 			self assert: (class hasInstVarNamed: #bananaTree).
 			self assert: (class hasClassVarNamed: #Fuhrmanator).
@@ -176,7 +177,7 @@ FmxMBGeneratorCleaningStrategyTest >> testGenerateNoCleaningCleaning [
 		ifAbsent: [ self fail ]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBGeneratorCleaningStrategyTest >> testGenerateNoCleaningGeneration [
 	generator generateWithoutCleaning.
 
@@ -184,13 +185,13 @@ FmxMBGeneratorCleaningStrategyTest >> testGenerateNoCleaningGeneration [
 		at: #FmxTestCleaningStrategyFmxTestEntity
 		ifPresent: [ :class | 
 			self assert: (class class localMethods anySatisfy: [ :method | method selector = #tree ]).
-			self assert: (class class localMethods detect: [ :method | method selector = #tree ]) protocol equals: 'monkey'.
+			self assert: (class class localMethods detect: [ :method | method selector = #tree ]) protocolName equals: 'monkey'.
 			self assert: (class localMethods anySatisfy: [ :method | method selector = #banana ]).
-			self assert: (class localMethods detect: [ :method | method selector = #banana ]) protocol equals: 'monkey'.
+			self assert: (class localMethods detect: [ :method | method selector = #banana ]) protocolName equals: 'monkey'.
 			"Generated methods that were removed from the generator should be removed after a new generation."
 			self deny: (class localMethods anySatisfy: [ :method | method selector = #generatedBanana ]).
 			self assert: (class localMethods anySatisfy: [ :method | method selector = #potatoExtendedMethod ]).
-			self assert: (class localMethods detect: [ :method | method selector = #potatoExtendedMethod ]) protocol equals: #* , self class package name.
+			self assert: (class localMethods detect: [ :method | method selector = #potatoExtendedMethod ]) protocolName equals: #* , self class package name.
 			self assert: (class traitComposition allTraits anySatisfy: [ :trait | trait name = #FamixTestExternalTraits ]).
 			self assert: (class hasInstVarNamed: #bananaTree).
 			self assert: (class hasClassVarNamed: #Fuhrmanator).
@@ -221,7 +222,7 @@ FmxMBGeneratorCleaningStrategyTest >> testGenerateNoCleaningGeneration [
 	self class environment at: #TFmxCleanerTestAddedTrait ifPresent: [ :class | self assert: class package name equals: self packageName ] ifAbsent: [ self fail ]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBGeneratorCleaningStrategyTest >> testGenerateTotalCleaningCleaning [
 	generator withCleaning cleaningStrategy cleanBeforeGeneration: generator.
 	self should: [ self class environment at: #FmxTestCleaningStrategyFmxTestEntity ] raise: KeyNotFound.
@@ -235,7 +236,7 @@ FmxMBGeneratorCleaningStrategyTest >> testGenerateTotalCleaningCleaning [
 	self assert: (self class methodDict at: #extensionsMethodForTest ifPresent: [ false ] ifAbsent: [ true ])
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBGeneratorCleaningStrategyTest >> testGenerateTotalCleaningGeneration [
 	generator generateWithCleaning.
 

@@ -1,12 +1,26 @@
+"
+## Relations
+======================
+
+### Other
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `annotationInstances` | `FamixTWithAnnotationInstances` | `annotatedEntity` | `FamixTAnnotationInstance` | This property corresponds to the set of annotations associated to the entity|
+
+
+
+"
 Trait {
-	#name : #FamixTWithAnnotationInstances,
+	#name : 'FamixTWithAnnotationInstances',
 	#instVars : [
 		'#annotationInstances => FMMany type: #FamixTAnnotationInstance opposite: #annotatedEntity'
 	],
-	#category : #'Famix-Traits-AnnotationInstance'
+	#category : 'Famix-Traits-AnnotationInstance',
+	#package : 'Famix-Traits',
+	#tag : 'AnnotationInstance'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTWithAnnotationInstances classSide >> annotation [
 
 	<FMClass: #TWithAnnotationInstances super: #Object>
@@ -15,12 +29,19 @@ FamixTWithAnnotationInstances classSide >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'visitor' }
+FamixTWithAnnotationInstances >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTWithAnnotationInstances: self
+]
+
+{ #category : 'accessing' }
 FamixTWithAnnotationInstances >> addAnnotationInstance: anAnnotationInstance [
 	annotationInstances add: anAnnotationInstance
 ]
 
-{ #category : #'Famix-Java' }
+{ #category : 'Famix-Java' }
 FamixTWithAnnotationInstances >> allAnnotationInstances [
 	| result |
 	result := OrderedCollection new.
@@ -29,21 +50,21 @@ FamixTWithAnnotationInstances >> allAnnotationInstances [
 	^ result 
 ]
 
-{ #category : #'Famix-Java' }
+{ #category : 'Famix-Java' }
 FamixTWithAnnotationInstances >> annotationInstanceNamed: anAnnotationName [
 	^ self 
 		annotationInstanceNamed: anAnnotationName 
 		ifAbsent: [ ]
 ]
 
-{ #category : #'Famix-Java' }
+{ #category : 'Famix-Java' }
 FamixTWithAnnotationInstances >> annotationInstanceNamed: anAnnotationName ifAbsent: aBlock [
 	^ self annotationInstances 
 		detect: [ :each | each annotationType name asSymbol = anAnnotationName asSymbol ]
 		ifNone: aBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithAnnotationInstances >> annotationInstances [
 	"Relation named: #annotationInstances type: #FamixTAnnotationInstance opposite: #annotatedEntity"
 
@@ -53,30 +74,30 @@ FamixTWithAnnotationInstances >> annotationInstances [
 	^ annotationInstances
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithAnnotationInstances >> annotationInstances: anObject [
 
 	<generated>
 	annotationInstances value: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithAnnotationInstances >> annotationTypes [
 	^ self annotationInstances collectAsSet: [:each | each annotationType ]
 
 ]
 
-{ #category : #'Famix-Java' }
+{ #category : 'Famix-Java' }
 FamixTWithAnnotationInstances >> isAnnotated [
 	^ self annotationInstances isNotEmpty
 ]
 
-{ #category : #'Famix-Java' }
+{ #category : 'Famix-Java' }
 FamixTWithAnnotationInstances >> isAnnotatedWith: anAnnotationName [
 	^ self annotationInstances contains: [ :each | each annotationType name asSymbol = anAnnotationName asSymbol ]
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTWithAnnotationInstances >> numberOfAnnotationInstances [
 	<FMProperty: #numberOfAnnotationInstances type: #Number>
 	<derived>
@@ -88,7 +109,7 @@ FamixTWithAnnotationInstances >> numberOfAnnotationInstances [
 			self annotationInstances size + (self children inject: 0 into: [:sum :each | sum + each numberOfAnnotationInstances])]
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTWithAnnotationInstances >> numberOfAnnotationInstances: aNumber [
 	self cacheAt: #numberOfAnnotationInstances put: aNumber
 ]

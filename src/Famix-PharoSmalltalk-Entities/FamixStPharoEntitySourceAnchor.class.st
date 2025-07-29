@@ -1,30 +1,27 @@
 "
-Description
---------------------
+## Relations
+======================
 
-A Pharo entity source anchor is an anchor poiting to a Pharo entity to get the source code.
+### Other
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `element` | `FamixTSourceAnchor` | `sourceAnchor` | `FamixTSourceEntity` | Enable the accessibility to the famix entity that this class is a source pointer for|
 
-It uses a WeakSlot to let the entity be garbage collected in case we unload the code.
- 
-Internal Representation and Key Implementation Points.
---------------------
 
-    Instance Variables
-	pharoEntity:		<aClassOrCompiledMethod>		The Pharo class or compiled method holding the source code.
 
 "
 Class {
-	#name : #FamixStPharoEntitySourceAnchor,
-	#superclass : #FamixStSourceAnchor,
-	#traits : 'FamixTSourceAnchor',
-	#classTraits : 'FamixTSourceAnchor classTrait',
+	#name : 'FamixStPharoEntitySourceAnchor',
+	#superclass : 'FamixStSourceAnchor',
 	#instVars : [
 		'#pharoEntity => WeakSlot'
 	],
-	#category : #'Famix-PharoSmalltalk-Entities-Entities'
+	#category : 'Famix-PharoSmalltalk-Entities-Entities',
+	#package : 'Famix-PharoSmalltalk-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixStPharoEntitySourceAnchor class >> annotation [
 
 	<FMClass: #PharoEntitySourceAnchor super: #FamixStSourceAnchor>
@@ -33,22 +30,22 @@ FamixStPharoEntitySourceAnchor class >> annotation [
 	^ self
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FamixStPharoEntitySourceAnchor >> initialize [
 	super initialize.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixStPharoEntitySourceAnchor >> pharoEntity [
 	^ pharoEntity
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixStPharoEntitySourceAnchor >> pharoEntity: anObject [
 	pharoEntity := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixStPharoEntitySourceAnchor >> sourceText [
 
 	^ self pharoEntity ifNotNil: #definitionString

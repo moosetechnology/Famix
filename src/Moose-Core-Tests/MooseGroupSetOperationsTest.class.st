@@ -1,14 +1,15 @@
 Class {
-	#name : #MooseGroupSetOperationsTest,
-	#superclass : #TestCase,
+	#name : 'MooseGroupSetOperationsTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'group1',
 		'group2'
 	],
-	#category : #'Moose-Core-Tests'
+	#category : 'Moose-Core-Tests',
+	#package : 'Moose-Core-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 MooseGroupSetOperationsTest >> setUp [
 	
 	super setUp.
@@ -16,7 +17,7 @@ MooseGroupSetOperationsTest >> setUp [
 	group2 := MooseGroup withAll: #(4 5 6 7 8)
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MooseGroupSetOperationsTest >> testDifference [
 	| result |
 	result := group1 difference: group2.
@@ -31,7 +32,7 @@ MooseGroupSetOperationsTest >> testDifference [
 	self assert: (result includes: 8)
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MooseGroupSetOperationsTest >> testDifferenceAlias [
 	| result |
 	result := group1 \ group2.
@@ -46,7 +47,7 @@ MooseGroupSetOperationsTest >> testDifferenceAlias [
 	self assert: (result includes: 8)
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MooseGroupSetOperationsTest >> testIntersect [
 	| resultat |
 	resultat := group1 intersection: group2.
@@ -55,7 +56,7 @@ MooseGroupSetOperationsTest >> testIntersect [
 	self assert: (resultat entities includes: 5)
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MooseGroupSetOperationsTest >> testResultClass [
 	
 	| result |
@@ -63,7 +64,7 @@ MooseGroupSetOperationsTest >> testResultClass [
 	self assert: (result isKindOf: MooseGroup)
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MooseGroupSetOperationsTest >> testUnion [
 	| result |
 	result := group1 union: group2.

@@ -4,16 +4,17 @@ MooseOperator is a task that will act on a model. As any other task, its subclas
 
 "
 Class {
-	#name : #MooseOperator,
-	#superclass : #MooseTask,
+	#name : 'MooseOperator',
+	#superclass : 'MooseTask',
 	#instVars : [
 		'model',
 		'args'
 	],
-	#category : #'Moose-Core'
+	#category : 'Moose-Core',
+	#package : 'Moose-Core'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MooseOperator class >> on: aMooseModel [ 
 	 
 	^(self new) 
@@ -21,56 +22,56 @@ MooseOperator class >> on: aMooseModel [
 		yourself
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 MooseOperator class >> runOn: aMooseModel [ 
 	 
 	^(self on: aMooseModel) run
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 MooseOperator class >> runOn: aMooseModel withArgs: args [
 	 
 	^(self on: aMooseModel) args: args; run
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 MooseOperator class >> runWithProgressOn: aMooseModel [
 	^ (self on: aMooseModel) runWithProgress
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseOperator >> argAt: aString [
 	^ self args at: aString
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseOperator >> argAt: aString ifAbsent: anAbsentBlock [
 	^ self args at: aString ifAbsent: anAbsentBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseOperator >> args [
 	^ args 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseOperator >> args: anObject [
 	args := anObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MooseOperator >> initialize [
 	super initialize.
 	args := Dictionary new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseOperator >> model [ 
 	 
 	^model
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseOperator >> model: aMooseModel [ 
 	 
 	^model := aMooseModel

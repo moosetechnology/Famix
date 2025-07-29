@@ -1,8 +1,9 @@
 Class {
-	#name : #LANPool,
-	#superclass : #SharedPool,
+	#name : 'LANPool',
+	#superclass : 'SharedPool',
 	#classVars : [
 		'LANEditor'
 	],
-	#category : #'Moose-TestResources-LAN'
+	#category : 'Moose-TestResources-LAN',
+	#package : 'Moose-TestResources-LAN'
 }

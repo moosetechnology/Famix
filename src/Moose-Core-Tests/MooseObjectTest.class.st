@@ -1,20 +1,21 @@
 Class {
-	#name : #MooseObjectTest,
-	#superclass : #TestCase,
-	#category : #'Moose-Core-Tests'
+	#name : 'MooseObjectTest',
+	#superclass : 'TestCase',
+	#category : 'Moose-Core-Tests',
+	#package : 'Moose-Core-Tests'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 MooseObjectTest class >> shouldInheritSelectors [
 	^ true
 ]
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 MooseObjectTest >> actualClass [
 	^ MooseObject
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseObjectTest >> testAllMooseDisplayOn [
 
 	| t ins |
@@ -27,7 +28,7 @@ MooseObjectTest >> testAllMooseDisplayOn [
 			equals: t ]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseObjectTest >> testAllMooseNameOn [
 	| t ins |
 	self actualClass allSubclasses
@@ -37,7 +38,7 @@ MooseObjectTest >> testAllMooseNameOn [
 			self assert: (String streamContents: [ :s | ins mooseNameOn: s ]) equals: t ]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseObjectTest >> testAllPrintOn [
 	| t ins |
 	self withConcreteSubclasses
@@ -48,7 +49,7 @@ MooseObjectTest >> testAllPrintOn [
 			self assert: (String streamContents: [ :s | ins printOn: s ]) equals: t ]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseObjectTest >> testAllPrinting [
 	| entity |
 	self withConcreteSubclasses
@@ -57,7 +58,7 @@ MooseObjectTest >> testAllPrinting [
 			self assert: (String streamContents: [ :s | entity printOn: s ]) equals: entity printString ]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseObjectTest >> testGroupFor [
 	| entity1 entity2 model classGroup methodGroup |
 	entity1 := FamixTest1Class new.
@@ -72,18 +73,18 @@ MooseObjectTest >> testGroupFor [
 	self assertEmpty: methodGroup
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseObjectTest >> testId [
 	self actualClass setMooseID: SmallInteger maxVal - 2.
 	self should: [ 10 timesRepeat: [ self actualClass freshID ] ] raise: Notification
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseObjectTest >> testMooseName [
 	self assert: Smalltalk mooseName equals: #Smalltalk
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseObjectTest >> testPrintOnWithError [
 	| entity printString |
 	entity := self actualClass new.
@@ -92,14 +93,14 @@ MooseObjectTest >> testPrintOnWithError [
 	self assert: (printString endsWith: 'Error printing the object''')
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseObjectTest >> testResetIDGeneration [
 	self actualClass freshID.
 	self actualClass resetIDGeneration.
 	self assert: self actualClass freshID equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseObjectTest >> withConcreteSubclasses [
 	^ self actualClass withAllSubclasses reject: #isAbstract
 ]

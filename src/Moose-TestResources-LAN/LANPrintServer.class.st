@@ -1,10 +1,11 @@
 Class {
-	#name : #LANPrintServer,
-	#superclass : #LANOutputServer,
-	#category : #'Moose-TestResources-LAN'
+	#name : 'LANPrintServer',
+	#superclass : 'LANOutputServer',
+	#category : 'Moose-TestResources-LAN',
+	#package : 'Moose-TestResources-LAN'
 }
 
-{ #category : #outputting }
+{ #category : 'outputting' }
 LANPrintServer >> output: thePacket [ 
 	"My subclasses have to use this method to define their outputting behavior" 
 	 

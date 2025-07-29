@@ -1,6 +1,6 @@
 Class {
-	#name : #FamixPharoSmalltalkGenerator,
-	#superclass : #FamixBasicInfrastructureGenerator,
+	#name : 'FamixPharoSmalltalkGenerator',
+	#superclass : 'FamixBasicInfrastructureGenerator',
 	#instVars : [
 		'access',
 		'annotationInstance',
@@ -20,50 +20,53 @@ Class {
 		'parameter',
 		'reference',
 		'unknownVariable',
-		'pharoEntitySourceAnchor'
+		'pharoEntitySourceAnchor',
+		'entityTyping'
 	],
-	#category : #'Famix-PharoSmalltalk-Generator'
+	#category : 'Famix-PharoSmalltalk-Generator',
+	#package : 'Famix-PharoSmalltalk-Generator'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixPharoSmalltalkGenerator class >> packageName [
 
 	^ #'Famix-PharoSmalltalk-Entities'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixPharoSmalltalkGenerator class >> prefix [
 
 	^ #'FamixSt'
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FamixPharoSmalltalkGenerator >> defineClasses [
 	super defineClasses.
 
-	access := builder newClassNamed: #Access.
-	annotationInstance := builder newClassNamed: #AnnotationInstance.
-	annotationInstanceAttribute := builder newClassNamed: #AnnotationInstanceAttribute.
-	annotationType := builder newClassNamed: #AnnotationType.
-	annotationTypeAttribute := builder newClassNamed: #AnnotationTypeAttribute.
-	attribute := builder newClassNamed: #Attribute.
-	class := builder newClassNamed: #Class.
-	globalVariable := builder newClassNamed: #GlobalVariable.
-	implicitVariable := builder newClassNamed: #ImplicitVariable.
-	inheritance := builder newClassNamed: #Inheritance.
-	invocation := builder newClassNamed: #Invocation.
-	localVariable := builder newClassNamed: #LocalVariable.
-	pharoEntitySourceAnchor := builder newClassNamed: #PharoEntitySourceAnchor.
-	method := builder newClassNamed: #Method.
-	namespace := builder newClassNamed: #Namespace.
-	package := builder newClassNamed: #Package.
-	parameter := builder newClassNamed: #Parameter.
-	reference := builder newClassNamed: #Reference.
-	unknownVariable := builder newClassNamed: #UnknownVariable.
+	access := self newClassNamed: #Access.
+	annotationInstance := self newClassNamed: #AnnotationInstance.
+	annotationInstanceAttribute := self newClassNamed: #AnnotationInstanceAttribute.
+	annotationType := self newClassNamed: #AnnotationType.
+	annotationTypeAttribute := self newClassNamed: #AnnotationTypeAttribute.
+	attribute := self newClassNamed: #Attribute.
+	class := self newClassNamed: #Class.
+	globalVariable := self newClassNamed: #GlobalVariable.
+	implicitVariable := self newClassNamed: #ImplicitVariable.
+	inheritance := self newClassNamed: #Inheritance.
+	invocation := self newClassNamed: #Invocation.
+	localVariable := self newClassNamed: #LocalVariable.
+	pharoEntitySourceAnchor := self newClassNamed: #PharoEntitySourceAnchor.
+	method := self newClassNamed: #Method.
+	namespace := self newClassNamed: #Namespace.
+	package := self newClassNamed: #Package.
+	parameter := self newClassNamed: #Parameter.
+	reference := self newClassNamed: #Reference.
+	entityTyping := self newClassNamed: #EntityTyping.
+	unknownVariable := self newClassNamed: #UnknownVariable.
 
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FamixPharoSmalltalkGenerator >> defineHierarchy [
 
 	super defineHierarchy.
@@ -72,12 +75,9 @@ FamixPharoSmalltalkGenerator >> defineHierarchy [
 
 	annotationInstance --|> sourcedEntity.
 	annotationInstance --|> #TAnnotationInstance.
-	annotationInstance --|> #TWithAnnotationInstanceAttributes.
-	annotationInstance --|> #TTypedAnnotationInstance.
 
 	annotationInstanceAttribute --|> sourcedEntity.
 	annotationInstanceAttribute --|> #TAnnotationInstanceAttribute.
-	annotationInstanceAttribute --|> #TTypedAnnotationInstanceAttribute.
 
 	annotationType --|> namedEntity.
 	annotationType --|> #TEntityMetaLevelDependency.
@@ -89,7 +89,6 @@ FamixPharoSmalltalkGenerator >> defineHierarchy [
 	annotationTypeAttribute --|> #TEntityMetaLevelDependency.
 	annotationTypeAttribute --|> sourcedEntity.
 	annotationTypeAttribute --|> #TAnnotationTypeAttribute.
-	annotationTypeAttribute --|> #TTypedAnnotationInstanceAttribute.
 
 	attribute --|> namedEntity.
 	attribute --|> #TAttribute.
@@ -97,12 +96,10 @@ FamixPharoSmalltalkGenerator >> defineHierarchy [
 	attribute --|> #TCanBeClassSide.
 
 	class --|> namedEntity.
-	self flag:
-		'WithTypes should not be necessary but needed in tests like FamixMetricsTest>>testAfferentCouplingFamixClassGroup'.
-	class --|> #TWithTypes.
 	class --|> #TClass.
 	class --|> #TCanBeAbstract.
 	class --|> #TClassMetrics.
+	class --|> #TPackageable.
 
 	globalVariable --|> namedEntity.
 	globalVariable --|> #TGlobalVariable.
@@ -150,23 +147,24 @@ FamixPharoSmalltalkGenerator >> defineHierarchy [
 	parameter --|> #TInvocationsReceiver.
 
 	reference --|> #TReference.
+	
+	entityTyping --|> #TEntityTyping. 
 
 	pharoEntitySourceAnchor --|> sourceAnchor.
-	pharoEntitySourceAnchor --|> #TSourceAnchor.
 
 	unknownVariable --|> namedEntity.
 	unknownVariable --|> #TUnknownVariable.
 	unknownVariable --|> #TInvocationsReceiver
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixPharoSmalltalkGenerator >> defineProperties [
 	super defineProperties.
 	((method property: #protocol type: #String)
 		comment: 'Protocol of the method'). 
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FamixPharoSmalltalkGenerator >> newBuilder [
 
 	^ super newBuilder

@@ -1,13 +1,24 @@
+"
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+|---|
+| `name` | `String` | nil | |
+
+"
 Class {
-	#name : #FamixTest4Entity,
-	#superclass : #MooseEntity,
+	#name : 'FamixTest4Entity',
+	#superclass : 'MooseEntity',
 	#instVars : [
 		'#name => FMProperty'
 	],
-	#category : #'Famix-Test4-Entities-Entities'
+	#category : 'Famix-Test4-Entities-Entities',
+	#package : 'Famix-Test4-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTest4Entity class >> annotation [
 
 	<FMClass: #Entity super: #MooseEntity>
@@ -17,21 +28,21 @@ FamixTest4Entity class >> annotation [
 	^ self
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTest4Entity class >> isAbstract [
 
 	<generated>
 	^ self == FamixTest4Entity
 ]
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTest4Entity class >> metamodel [
 
 	<generated>
 	^ FamixTest4Model metamodel
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest4Entity >> name [
 
 	<FMProperty: #name type: #String>
@@ -39,7 +50,7 @@ FamixTest4Entity >> name [
 	^ name
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest4Entity >> name: anObject [
 	<generated>
 	name := anObject

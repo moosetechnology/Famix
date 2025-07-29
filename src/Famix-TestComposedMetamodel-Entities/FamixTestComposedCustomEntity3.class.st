@@ -1,10 +1,25 @@
+"
+## Relations
+======================
+
+### Other
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `c23` | `FamixTestComposedCustomEntity3` | `c3s` | `FamixTestComposed2CustomEntity3` | |
+| `customEntity3` | `FamixTestComposedCustomEntity3` | `customEntities3` | `FamixTestComposed1CustomEntity3` | |
+
+
+
+"
 Class {
-	#name : #FamixTestComposedCustomEntity3,
-	#superclass : #FamixTestComposedEntity,
-	#category : #'Famix-TestComposedMetamodel-Entities-Entities'
+	#name : 'FamixTestComposedCustomEntity3',
+	#superclass : 'FamixTestComposedEntity',
+	#category : 'Famix-TestComposedMetamodel-Entities-Entities',
+	#package : 'Famix-TestComposedMetamodel-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTestComposedCustomEntity3 class >> annotation [
 
 	<FMClass: #CustomEntity3 super: #FamixTestComposedEntity>
@@ -13,7 +28,7 @@ FamixTestComposedCustomEntity3 class >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTestComposedCustomEntity3 >> c23 [
 	"Relation named: #c23 type: #FamixTestComposed2CustomEntity3 opposite: #c3s"
 
@@ -22,14 +37,14 @@ FamixTestComposedCustomEntity3 >> c23 [
 	^ self attributeAt: #c23 ifAbsent: [ nil ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTestComposedCustomEntity3 >> c23: anObject [
 
 	<generated>
 	self attributeAt: #c23 put: (FMMultivalueLink on: self update: #c3s from: self c23 to: anObject).
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTestComposedCustomEntity3 >> customEntity3 [
 	"Relation named: #customEntity3 type: #FamixTestComposed1CustomEntity3 opposite: #customEntities3"
 
@@ -38,7 +53,7 @@ FamixTestComposedCustomEntity3 >> customEntity3 [
 	^ self attributeAt: #customEntity3 ifAbsent: [ nil ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTestComposedCustomEntity3 >> customEntity3: anObject [
 
 	<generated>

@@ -1,29 +1,29 @@
 Class {
-	#name : #LANAbstractImportTest,
-	#superclass : #TestCase,
-	#category : #'Moose-SmalltalkImporter-LAN-Tests'
+	#name : 'LANAbstractImportTest',
+	#superclass : 'TestCase',
+	#category : 'Moose-SmalltalkImporter-LAN-Tests',
+	#package : 'Moose-SmalltalkImporter-LAN-Tests'
 }
 
-{ #category : #resources }
+{ #category : 'resources' }
 LANAbstractImportTest class >> resources [
 	^ Array with: LANPackageTestResource
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 LANAbstractImportTest >> model [
 	" to debug and avoid caching behavior: LANPackageTestResource reset."
 	^ LANPackageTestResource current model
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 LANAbstractImportTest >> testClasses [
-	"self debug: #testClasses"
 
 	self model metamodel.
 	self denyEmpty: (self model allUsing: FamixTClass)
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 LANAbstractImportTest >> totalNumberOfAttributesFor: aClass [
 
 	^ aClass allInstVarNames size + aClass allClassVarNames size

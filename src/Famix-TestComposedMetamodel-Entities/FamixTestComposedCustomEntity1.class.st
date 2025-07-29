@@ -1,10 +1,29 @@
+"
+## Relations
+======================
+
+### Children
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `customEntity1` | `FamixTestComposedCustomEntity1` | `customEntity1` | `FamixTestComposed1CustomEntity1` | |
+
+### Other
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `c21` | `FamixTestComposedCustomEntity1` | `c1` | `FamixTestComposed2CustomEntity1` | |
+
+
+
+"
 Class {
-	#name : #FamixTestComposedCustomEntity1,
-	#superclass : #FamixTestComposedEntity,
-	#category : #'Famix-TestComposedMetamodel-Entities-Entities'
+	#name : 'FamixTestComposedCustomEntity1',
+	#superclass : 'FamixTestComposedEntity',
+	#category : 'Famix-TestComposedMetamodel-Entities-Entities',
+	#package : 'Famix-TestComposedMetamodel-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTestComposedCustomEntity1 class >> annotation [
 
 	<FMClass: #CustomEntity1 super: #FamixTestComposedEntity>
@@ -13,7 +32,7 @@ FamixTestComposedCustomEntity1 class >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTestComposedCustomEntity1 >> c21 [
 	"Relation named: #c21 type: #FamixTestComposed2CustomEntity1 opposite: #c1"
 
@@ -22,7 +41,7 @@ FamixTestComposedCustomEntity1 >> c21 [
 	^ self attributeAt: #c21 ifAbsent: [ nil ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTestComposedCustomEntity1 >> c21: anObject [
 
 	<generated>
@@ -36,7 +55,7 @@ FamixTestComposedCustomEntity1 >> c21: anObject [
 		anObject c1: self ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTestComposedCustomEntity1 >> customEntity1 [
 	"Relation named: #customEntity1 type: #FamixTestComposed1CustomEntity1 opposite: #customEntity1"
 
@@ -45,7 +64,7 @@ FamixTestComposedCustomEntity1 >> customEntity1 [
 	^ self attributeAt: #customEntity1 ifAbsent: [ nil ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTestComposedCustomEntity1 >> customEntity1: anObject [
 
 	<generated>
@@ -59,7 +78,7 @@ FamixTestComposedCustomEntity1 >> customEntity1: anObject [
 		anObject customEntity1: self ]
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FamixTestComposedCustomEntity1 >> customEntity1Group [
 	<generated>
 	<navigation: 'CustomEntity1'>

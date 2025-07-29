@@ -10,18 +10,53 @@ int addNumbers(int a, int b) {
 }
 ```
 
+
+## Relations
+======================
+
+### Parents
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `parentBehaviouralEntity` | `FamixTParameter` | `parameters` | `FamixTWithParameters` | Behavioural entity containing this parameter. belongsTo implementation|
+
+### Outgoing dependencies
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `typing` | `FamixTTypedEntity` | `typedEntity` | `FamixTEntityTyping` | Association linking this entity to its declared type.|
+
+### Incoming dependencies
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `incomingAccesses` | `FamixTAccessible` | `variable` | `FamixTAccess` | All Famix accesses pointing to this structural entity|
+
+### Other
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
+
+
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+|---|
+| `isStub` | `Boolean` | false | Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.|
+| `name` | `String` | nil | Basic name of the entity, not full reference.|
+
 "
 Trait {
-	#name : #FamixTParameter,
+	#name : 'FamixTParameter',
 	#instVars : [
 		'#parentBehaviouralEntity => FMOne type: #FamixTWithParameters opposite: #parameters'
 	],
 	#traits : 'FamixTStructuralEntity',
 	#classTraits : 'FamixTStructuralEntity classTrait',
-	#category : #'Famix-Traits-Parameter'
+	#category : 'Famix-Traits-Parameter',
+	#package : 'Famix-Traits',
+	#tag : 'Parameter'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTParameter classSide >> annotation [
 
 	<FMClass: #TParameter super: #Object>
@@ -30,7 +65,14 @@ FamixTParameter classSide >> annotation [
 	^ self
 ]
 
-{ #category : #printing }
+{ #category : 'visitor' }
+FamixTParameter >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTParameter: self
+]
+
+{ #category : 'printing' }
 FamixTParameter >> displayStringOn: aStream [
 
 	self name ifNotNil: [ :n | aStream << n << ' in ' ].
@@ -38,7 +80,7 @@ FamixTParameter >> displayStringOn: aStream [
 		pbe displayStringOn: aStream ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTParameter >> parentBehaviouralEntity [
 	"Relation named: #parentBehaviouralEntity type: #FamixTWithParameters opposite: #parameters"
 
@@ -48,7 +90,7 @@ FamixTParameter >> parentBehaviouralEntity [
 	^ parentBehaviouralEntity
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTParameter >> parentBehaviouralEntity: anObject [
 
 	parentBehaviouralEntity := anObject.
@@ -56,7 +98,7 @@ FamixTParameter >> parentBehaviouralEntity: anObject [
 
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FamixTParameter >> parentBehaviouralEntityGroup [
 	<generated>
 	<navigation: 'ParentBehaviouralEntity'>

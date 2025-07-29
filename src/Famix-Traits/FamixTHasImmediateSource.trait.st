@@ -1,17 +1,36 @@
 "
 An immediate source is the source code of the entity stored directly into its sourceAnchor instead of accessing it (for example in a file) through its sourceAnchor
+
+## Relations
+======================
+
+### Other
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `element` | `FamixTSourceAnchor` | `sourceAnchor` | `FamixTSourceEntity` | Enable the accessibility to the famix entity that this class is a source pointer for|
+
+
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+|---|
+| `source` | `String` | nil | Actual source code of the source entity|
+
 "
 Trait {
-	#name : #FamixTHasImmediateSource,
+	#name : 'FamixTHasImmediateSource',
 	#instVars : [
 		'#source => FMProperty'
 	],
 	#traits : 'FamixTSourceAnchor',
 	#classTraits : 'FamixTSourceAnchor classTrait',
-	#category : #'Famix-Traits-SourceAnchor'
+	#category : 'Famix-Traits-SourceAnchor',
+	#package : 'Famix-Traits',
+	#tag : 'SourceAnchor'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTHasImmediateSource classSide >> annotation [
 
 	<FMClass: #THasImmediateSource super: #Object>
@@ -20,26 +39,33 @@ FamixTHasImmediateSource classSide >> annotation [
 	^ self
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 FamixTHasImmediateSource classSide >> source: aString [
 	^ self new
 		source: aString;
 		yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 FamixTHasImmediateSource classSide >> source: aString model: aMooseModel [
 	^ (self source: aString)
 		mooseModel: aMooseModel;
 		yourself
 ]
 
-{ #category : #testing }
+{ #category : 'visitor' }
+FamixTHasImmediateSource >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTHasImmediateSource: self
+]
+
+{ #category : 'testing' }
 FamixTHasImmediateSource >> hasSource [
 	^ self source isEmptyOrNil not
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTHasImmediateSource >> source [
 
 	<FMProperty: #source type: #String>
@@ -48,13 +74,13 @@ FamixTHasImmediateSource >> source [
 	^ source
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTHasImmediateSource >> source: anObject [
 	<generated>
 	source := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTHasImmediateSource >> sourceText [
 
 	^ self source

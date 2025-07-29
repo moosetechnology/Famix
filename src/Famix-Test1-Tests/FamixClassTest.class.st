@@ -1,10 +1,11 @@
 Class {
-	#name : #FamixClassTest,
-	#superclass : #FamixTest1SimpleModelTest,
-	#category : #'Famix-Test1-Tests'
+	#name : 'FamixClassTest',
+	#superclass : 'FamixTest1SimpleModelTest',
+	#category : 'Famix-Test1-Tests',
+	#package : 'Famix-Test1-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixClassTest >> testComments [
 
 	| comment comment2 |
@@ -22,7 +23,7 @@ FamixClassTest >> testComments [
 	self assert: comment2 commentedEntity equals: c1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixClassTest >> testHasComments [
 	| comment |
 	comment := FamixTest1Comment new.
@@ -32,7 +33,7 @@ FamixClassTest >> testHasComments [
 	self assert: c1 hasComments
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixClassTest >> testIsClass [
 
 	self assert: c1 isClass. 	
@@ -43,7 +44,7 @@ FamixClassTest >> testIsClass [
 	self deny: anchor2 isClass.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixClassTest >> testIsTestCase [
 
 	self deny: c1 isTestCase.
@@ -53,7 +54,7 @@ FamixClassTest >> testIsTestCase [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixClassTest >> testPrivateAddComment [
 	| comment |
 	comment := FamixTest1Comment new.
@@ -62,7 +63,7 @@ FamixClassTest >> testPrivateAddComment [
 	self assertCollection: c1 comments hasSameElements: {comment}
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixClassTest >> testRemoveComment [
 	| comment |
 	comment := FamixTest1Comment new.
@@ -72,7 +73,7 @@ FamixClassTest >> testRemoveComment [
 	self assertEmpty: c1 comments
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixClassTest >> testWeightOfAClass [
 
 	self assert: c1 weightOfAClass equals: model notExistentMetricValue.

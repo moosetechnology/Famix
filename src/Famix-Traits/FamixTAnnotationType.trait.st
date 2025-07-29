@@ -4,17 +4,35 @@ FamixTAnnotationType represents the type of an annotation. In some languages, Ja
 Instance Variables:
 	instances	<(FMMultivalueLink of: FamixTAnnotationInstance)>
 	container	<FamixTContainerEntity>
+
+## Relations
+======================
+
+### Parents
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `annotationTypesContainer` | `FamixTAnnotationType` | `definedAnnotationTypes` | `FamixTWithAnnotationTypes` | Container in which an AnnotationType may reside|
+
+### Other
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `instances` | `FamixTAnnotationType` | `annotationType` | `FamixTAnnotationInstance` | Annotations of this type|
+
+
+
 "
 Trait {
-	#name : #FamixTAnnotationType,
+	#name : 'FamixTAnnotationType',
 	#instVars : [
 		'#annotationTypesContainer => FMOne type: #FamixTWithAnnotationTypes opposite: #definedAnnotationTypes',
-		'#instances => FMMany type: #FamixTTypedAnnotationInstance opposite: #annotationType'
+		'#instances => FMMany type: #FamixTAnnotationInstance opposite: #annotationType'
 	],
-	#category : #'Famix-Traits-AnnotationType'
+	#category : 'Famix-Traits-AnnotationType',
+	#package : 'Famix-Traits',
+	#tag : 'AnnotationType'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTAnnotationType classSide >> annotation [
 
 	<FMClass: #TAnnotationType super: #Object>
@@ -23,21 +41,28 @@ FamixTAnnotationType classSide >> annotation [
 	^ self
 ]
 
-{ #category : #groups }
+{ #category : 'groups' }
 FamixTAnnotationType classSide >> annotationFamixAnnotationTypeGroup [
 	<generated>
 	<mooseGroup>
 	^ FamixAnnotationTypeGroup
 ]
 
-{ #category : #accessing }
+{ #category : 'visitor' }
+FamixTAnnotationType >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTAnnotationType: self
+]
+
+{ #category : 'accessing' }
 FamixTAnnotationType >> addInstance: anObject [
 
 	instances add: anObject
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAnnotationType >> annotationTypesContainer [
 	"Relation named: #annotationTypesContainer type: #FamixTWithAnnotationTypes opposite: #definedAnnotationTypes"
 
@@ -47,29 +72,29 @@ FamixTAnnotationType >> annotationTypesContainer [
 	^ annotationTypesContainer
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAnnotationType >> annotationTypesContainer: anObject [
 
 	<generated>
 	annotationTypesContainer := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FamixTAnnotationType >> annotationTypesContainerGroup [
 	<generated>
 	<navigation: 'AnnotationTypesContainer'>
 	^ MooseSpecializedGroup with: self annotationTypesContainer
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixTAnnotationType >> displayStringOn: aStream [
 
 	self name ifNotNil: [ :n | aStream << '@' << n ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAnnotationType >> instances [
-	"Relation named: #instances type: #FamixTTypedAnnotationInstance opposite: #annotationType"
+	"Relation named: #instances type: #FamixTAnnotationInstance opposite: #annotationType"
 
 	<generated>
 	<FMComment: 'Annotations of this type'>
@@ -77,20 +102,19 @@ FamixTAnnotationType >> instances [
 	^ instances
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAnnotationType >> instances: anObject [
 
 	<generated>
 	instances value: anObject
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixTAnnotationType >> mooseNameOn: aStream [
 	self annotationTypesContainer
 		ifNotNil: [ :parent | 
 			parent mooseNameOn: aStream.
 			aStream
-				nextPut: $:;
-				nextPut: $: ].
+				nextPut: $. ].
 	self name ifNotNil: [ aStream nextPutAll: self name ]
 ]

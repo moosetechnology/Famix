@@ -1,13 +1,15 @@
 Class {
-	#name : #FamixUMLPlantUMLBackendTest,
-	#superclass : #TestCase,
+	#name : 'FamixUMLPlantUMLBackendTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'backend'
 	],
-	#category : #'Famix-UMLDocumentor-Tests-Generation'
+	#category : 'Famix-UMLDocumentor-Tests-Generation',
+	#package : 'Famix-UMLDocumentor-Tests',
+	#tag : 'Generation'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 FamixUMLPlantUMLBackendTest >> classNamed: aString [
 
 	^FamixUMLClass new
@@ -16,7 +18,7 @@ FamixUMLPlantUMLBackendTest >> classNamed: aString [
 		yourself
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixUMLPlantUMLBackendTest >> link: aLink from: className to: superClassName [
 
 	^aLink new
@@ -25,7 +27,7 @@ FamixUMLPlantUMLBackendTest >> link: aLink from: className to: superClassName [
 		yourself
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixUMLPlantUMLBackendTest >> property: aName type: aString [
 
 	^FamixUMLProperty new
@@ -34,14 +36,14 @@ FamixUMLPlantUMLBackendTest >> property: aName type: aString [
 		yourself
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixUMLPlantUMLBackendTest >> setUp [
 	super setUp.
 
 	backend := FamixUMLPlantUMLBackend new
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixUMLPlantUMLBackendTest >> testGenerateAggregationSource [
 
 	| umlLink |
@@ -55,7 +57,7 @@ FamixUMLPlantUMLBackendTest >> testGenerateAggregationSource [
 '
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixUMLPlantUMLBackendTest >> testGenerateAggregationTarget [
 
 	| umlLink |
@@ -69,7 +71,7 @@ FamixUMLPlantUMLBackendTest >> testGenerateAggregationTarget [
 '
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixUMLPlantUMLBackendTest >> testGenerateAssociationCardinality [
 
 	| umlLink |
@@ -84,7 +86,7 @@ FamixUMLPlantUMLBackendTest >> testGenerateAssociationCardinality [
 '
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixUMLPlantUMLBackendTest >> testGenerateAssociationRole [
 	"note: association role is not supposed to be empty.
 	this test is not realistic in this sense"
@@ -101,7 +103,7 @@ FamixUMLPlantUMLBackendTest >> testGenerateAssociationRole [
 '
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixUMLPlantUMLBackendTest >> testGenerateAssociationSimple [
 	"note: association role is not supposed to be empty.
 	this test is not realistic in this sense"
@@ -116,7 +118,7 @@ FamixUMLPlantUMLBackendTest >> testGenerateAssociationSimple [
 '
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixUMLPlantUMLBackendTest >> testGenerateClass [
 	| umlClass |
 	umlClass := self classNamed: 'AClass'.
@@ -124,12 +126,12 @@ FamixUMLPlantUMLBackendTest >> testGenerateClass [
 	backend generateClass: umlClass.
 
 	self assert: backend outputStream contents equals:
-'class AClass <<(C,#FFFFFF)>> #FFFFFF {
+'class AClass <<(C,white)>> #FFFFFF {
 }
 '
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixUMLPlantUMLBackendTest >> testGenerateClassProperties [
 	| umlClass |
 	umlClass := (self classNamed: 'AClass').
@@ -141,14 +143,14 @@ FamixUMLPlantUMLBackendTest >> testGenerateClassProperties [
 	backend generateClass: umlClass.
 
 	self assert: backend outputStream contents equals:
-'class AClass <<(C,#FFFFFF)>> #FFFFFF {
+'class AClass <<(C,white)>> #FFFFFF {
   integer prop1
   whatever prop2
 }
 '
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixUMLPlantUMLBackendTest >> testGenerateClassStub [
 	| umlClass |
 	umlClass := (self classNamed: 'AClass').
@@ -157,12 +159,12 @@ FamixUMLPlantUMLBackendTest >> testGenerateClassStub [
 	backend generateClass: umlClass.
 
 	self assert: backend outputStream contents equals:
-'class AClass <<(C,#FFFFFF)External>> #FFFFFF {
+'class AClass <<(C,white)External>> #FFFFFF {
 }
 '
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixUMLPlantUMLBackendTest >> testGenerateInheritance [
 	| umlLink |
 	umlLink := self link: FamixUMLInheritance from: 'AClass' to: 'ASuperclass'.
@@ -174,7 +176,7 @@ FamixUMLPlantUMLBackendTest >> testGenerateInheritance [
 '
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixUMLPlantUMLBackendTest >> testGenerateUse [
 	| umlLink |
 	umlLink := self link: FamixUMLUse from: 'AClass' to: 'Trait'.

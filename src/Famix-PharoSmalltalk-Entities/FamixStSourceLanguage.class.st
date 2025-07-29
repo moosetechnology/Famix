@@ -1,12 +1,26 @@
+"
+## Relations
+======================
+
+### Other
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `sourcedEntities` | `FamixTSourceLanguage` | `declaredSourceLanguage` | `FamixTWithSourceLanguages` | References to the entities saying explicitly that are written in this language.|
+
+
+
+"
 Class {
-	#name : #FamixStSourceLanguage,
-	#superclass : #FamixStEntity,
+	#name : 'FamixStSourceLanguage',
+	#superclass : 'FamixStEntity',
 	#traits : 'FamixTSourceLanguage',
 	#classTraits : 'FamixTSourceLanguage classTrait',
-	#category : #'Famix-PharoSmalltalk-Entities-Entities'
+	#category : 'Famix-PharoSmalltalk-Entities-Entities',
+	#package : 'Famix-PharoSmalltalk-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixStSourceLanguage class >> annotation [
 
 	<FMClass: #SourceLanguage super: #FamixStEntity>
@@ -15,17 +29,17 @@ FamixStSourceLanguage class >> annotation [
 	^ self
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixStSourceLanguage >> isPharo [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixStSourceLanguage >> isSmalltalk [
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixStSourceLanguage >> name [
 	<FMProperty: #name type: #String>
 	<derived>

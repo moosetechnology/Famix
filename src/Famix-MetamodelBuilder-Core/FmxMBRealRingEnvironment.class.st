@@ -1,25 +1,31 @@
 Class {
-	#name : #FmxMBRealRingEnvironment,
-	#superclass : #FmxMBRingEnvironment,
+	#name : 'FmxMBRealRingEnvironment',
+	#superclass : 'FmxMBRingEnvironment',
 	#instVars : [
 		'changesToApply'
 	],
-	#category : #'Famix-MetamodelBuilder-Core-Implementation'
+	#category : 'Famix-MetamodelBuilder-Core-Implementation',
+	#package : 'Famix-MetamodelBuilder-Core',
+	#tag : 'Implementation'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBRealRingEnvironment >> apply [
+
 	self collectChangesToApply.
-	changesToApply do: #apply
+	changesToApply select: [ :e | e isRemoval ] thenDo: #apply.
+	changesToApply select: [ :e | e isRemoval not ] thenDo: #apply
 ]
 
-{ #category : #installing }
-FmxMBRealRingEnvironment >> classVariablesStringFor: realClass [
+{ #category : 'testing' }
+FmxMBRealRingEnvironment >> changesToApply [
+	"Return the list of changes to apply if a regeneration would cause changes in the system."
 
-	^ '{', ((realClass classVarNames collect: [ :each | '#', each ]) joinUsing: ' '), '}'
+	self collectChangesToApply.
+	^ changesToApply
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBRealRingEnvironment >> collectChangesToApply [
 	| resolvedClasses resolvedPackages |
 	changesToApply := OrderedCollection new.
@@ -31,86 +37,112 @@ FmxMBRealRingEnvironment >> collectChangesToApply [
 	self recordRemovalOfGeneratedEntitiesIn: resolvedPackages notPresentIn: resolvedClasses
 ]
 
-{ #category : #installing }
+{ #category : 'installing' }
 FmxMBRealRingEnvironment >> compile: aSource in: aClass classified: aProtocol package: aPackageName [
 
-	aClass compile: aSource classified: '*', aPackageName, '-', aProtocol.
-
+	| category |
+	category := '*' , aPackageName.
+	aProtocol ifNotEmpty: [ category := category , '-' , aProtocol ].
+	aClass compile: aSource classified: category
 ]
 
-{ #category : #installing }
-FmxMBRealRingEnvironment >> recordAdoptionOfClassDefinitionFrom: realClass to: anRGClass [
+{ #category : 'installing' }
+FmxMBRealRingEnvironment >> recordAdoptionOfClassDefinitionFrom: currentClass to: anRGClassModel [
 
-	| customSlots customSlotNames slotDefinitions slotsString definition traitsString |
+	| currentCustomSlots currentCustomSlotNames modelSlotDefinitions currentGeneratedSlots modelGeneratedSlots slotRemovals |
+	(currentClass needToAdaptTo: anRGClassModel) ifFalse: [ ^ self ].
 
-	(realClass needToAdaptTo: anRGClass) ifFalse: [ ^ self ].
+	"We are updating a class installed in the system (currentClass) to a new representation defined in the model (anRGClass).
+	This has to be done in order to allow updating the class at run time"
 
-	customSlots := realClass localSlots copyWithoutAll:
-		               realClass generatedSlots.
-	customSlotNames := customSlots collect: #name.
-	slotDefinitions := ((anRGClass slots reject: [ :each | 
-		                     customSlotNames includes: each name ]) 
-		                    collect: #definitionString) asOrderedCollection.
-	slotDefinitions addAll: (customSlots collect: #definitionString).
-	slotDefinitions := slotDefinitions sorted.
+	currentGeneratedSlots := currentClass generatedSlots.
+	currentCustomSlots := currentClass localSlots copyWithoutAll:
+		                      currentGeneratedSlots.
+	currentCustomSlotNames := currentCustomSlots collect: #name.
 
-	slotsString := '{' , (slotDefinitions joinUsing: '. ') , '}'.
-	traitsString := self traitStringFrom: realClass to: anRGClass.
-	definition := anRGClass isTrait
-		              ifFalse: [ 
-			              '{superclass} subclass: #{className} 
-		uses: {traits} 
-		slots: {slots} 
-		classVariables: {classVariables}
-		poolDictionaries: ''{poolDictionaries}''
-		category: ''{category}''' format: (Dictionary newFrom: { 
-						               (#superclass -> anRGClass superclass name).
-						               (#className -> anRGClass name).
-						               (#layout -> realClass classLayout class name).
-						               (#traits -> traitsString).
-						               (#slots -> slotsString).
-						               (#classVariables
-						                -> (self classVariablesStringFor: realClass)).
-						               (#poolDictionaries -> realClass sharedPoolsString).
-						               (#category -> realClass category) }) ]
-		              ifTrue: [ 
-			              '{superclass} named: #{className} 
-		uses: {traits} 
-		slots: {slots} 
-		category: ''{category}''' format: (Dictionary newFrom: { 
-						               (#superclass -> anRGClass superclass name).
-						               (#className -> anRGClass name).
-						               (#traits -> traitsString).
-						               (#slots -> slotsString).
-						               (#category -> realClass category) }) ].
+	modelGeneratedSlots := anRGClassModel slots reject: [ :each |
+		                       currentCustomSlotNames includes: each name ].
 
-	changesToApply add: (FmxClassAddition definition: definition)
+	modelSlotDefinitions := (modelGeneratedSlots collect:
+		                         #definitionString) asOrderedCollection.
+	modelSlotDefinitions addAll:
+		(currentCustomSlots collect: #definitionString).
+	modelSlotDefinitions := modelSlotDefinitions sorted.
+
+	slotRemovals := currentGeneratedSlots reject: [ :e |
+		                modelGeneratedSlots anySatisfy: [ :current |
+			                current name = e name ] ].
+
+	slotRemovals ifNotEmpty: [
+		changesToApply add: (FmxSlotRemovals slots: slotRemovals) ].
+
+	self
+		recordClassAdditionFromClass: anRGClassModel
+		traits: (self traitStringFrom: currentClass to: anRGClassModel)
+		slots: '{' , (modelSlotDefinitions joinUsing: '. ') , '}'
+		classSlots:
+			'{' , ((currentClass class localSlots collect: #definitionString)
+				 joinUsing: ' . ') , '}'
+		sharedVariables:
+			'{'
+			, ((currentClass classVarNames collect: [ :each | '#' , each ])
+					 joinUsing: ' ') , '}'
+		package: currentClass package name
+		tag: currentClass packageTag name
 ]
 
-{ #category : #installing }
-FmxMBRealRingEnvironment >> recordClassChangesFor: anRGClass [
+{ #category : 'installing' }
+FmxMBRealRingEnvironment >> recordClassAdditionFromClass: aRGClass traits: traitsString slots: slotsString classSlots: classSlotsString sharedVariables: sharedVariablesString package: packageName tag: tagName [
+
+	self flag: #todo. "When P12 will be the minimal version used we should use the ShiftClassBuilder instead of manipulation a string. This would make the code a lot easier and we would not rely on compiler evaluation of strings to generate the classes."
+	changesToApply add: (FmxClassAddition creationCode: ('Smalltalk classInstaller
+	make: [ :builder |
+		builder 
+			{superclassOrTraitDeclaration};
+			name: {className};
+			traits: {traits};
+			slots: {slots};
+			classSlots: {classSlots};
+			sharedVariables: {classVariables};
+			package: {package};
+			tag: {tag}
+		 ]' format: (Dictionary newFrom: {
+						   (#superclassOrTraitDeclaration -> (aRGClass isTrait
+							     ifTrue: [ 'beTrait' ]
+							     ifFalse: [ 'superclass: ' , aRGClass superclass name ])).
+						   (#className -> aRGClass name asSymbol printString).
+						   (#traits -> traitsString).
+						   (#slots -> slotsString).
+						   (#classSlots -> classSlotsString).
+						   (#classVariables -> sharedVariablesString).
+						   (#package -> packageName printString).
+						   (#tag -> tagName printString) })))
+]
+
+{ #category : 'installing' }
+FmxMBRealRingEnvironment >> recordClassChangesFor: aRGClass [
 
 	| realClass |
-	realClass := self class environment classNamed: anRGClass name.
+	realClass := self class environment classNamed: aRGClass name.
 	realClass
-		ifNil: [ 
-			changesToApply add:
-				(FmxClassAddition definition: anRGClass definition) ]
-		ifNotNil: [ 
-		self recordAdoptionOfClassDefinitionFrom: realClass to: anRGClass ].
-	self recordClassCommentChangeOf: realClass to: anRGClass.
-	self
-		recordMethodsAdoptionsOf: realClass
-		to: anRGClass
-		realClassName: anRGClass name.
-	self
-		recordMethodsAdoptionsOf: (realClass ifNotNil: #class)
-		to: anRGClass classSide
-		realClassName: anRGClass name
+		ifNil: [
+			self
+				recordClassAdditionFromClass: aRGClass
+				traits: aRGClass traitCompositionString
+				slots: aRGClass slotDefinitionString
+				classSlots: '{}'
+				sharedVariables: '{}'
+				package: aRGClass package name
+				tag: aRGClass tags anyOne ]
+		ifNotNil: [ self recordAdoptionOfClassDefinitionFrom: realClass to: aRGClass ].
+	self recordClassCommentChangeOf: realClass to: aRGClass.
+	self recordMethodsAdoptionsOf: realClass to: aRGClass realClassName: aRGClass name.
+	self recordMethodsAdoptionsOf: (realClass ifNotNil: [ realClass class ]) to: aRGClass classSide realClassName: aRGClass name
 ]
 
-{ #category : #installing }
+{ #category : 'installing' }
 FmxMBRealRingEnvironment >> recordClassCommentChangeOf: realClass to: anRGClass [
+
 	| newComment |
 	newComment := anRGClass comment content.
 	(realClass isNotNil and: [ newComment = realClass comment ]) ifTrue: [ ^ self ].
@@ -118,7 +150,7 @@ FmxMBRealRingEnvironment >> recordClassCommentChangeOf: realClass to: anRGClass 
 	newComment isEmptyOrNil ifFalse: [ changesToApply add: (FmxClassCommentUpdate className: anRGClass name comment: newComment) ]
 ]
 
-{ #category : #installing }
+{ #category : 'installing' }
 FmxMBRealRingEnvironment >> recordClassesChangesFor: resolvedClasses [
 	| sorted notSorted toMove |
 	resolvedClasses ifEmpty: [ ^ self ].
@@ -135,12 +167,12 @@ FmxMBRealRingEnvironment >> recordClassesChangesFor: resolvedClasses [
 	sorted do: [ :each | self recordClassChangesFor: each ]
 ]
 
-{ #category : #installing }
+{ #category : 'installing' }
 FmxMBRealRingEnvironment >> recordMethodsAdoptionsOf: realClass to: anRGClass realClassName: aClassName [
 	| generatedMethodsOfRealClass generatedMethodNamesOfRealClass |
 	generatedMethodsOfRealClass := realClass
 		ifNil: [ {} ]
-		ifNotNil: [ (Pragma allNamed: #generated in: realClass) collect: #method thenSelect: [ :method | "We reject methods comming from Traits" realClass localMethods includes: method ] ].
+		ifNotNil: [ (Pragma allNamed: #generated in: realClass) collect: #method thenReject: [ :m | m isFromTrait  ] ] .
 
 	generatedMethodNamesOfRealClass := generatedMethodsOfRealClass collect: #selector.
 
@@ -161,14 +193,15 @@ FmxMBRealRingEnvironment >> recordMethodsAdoptionsOf: realClass to: anRGClass re
 		ifNotEmpty: [ :methods | changesToApply add: (FmxMethodUpdates className: aClassName isClassSide: anRGClass isClassSide rgMethods: methods) ]
 ]
 
-{ #category : #installing }
+{ #category : 'installing' }
 FmxMBRealRingEnvironment >> recordPackagesChangesFor: resolvedPackages [
+
 	resolvedPackages
-		select: [ :each | (RPackageOrganizer default includesPackageNamed: each name) not ]
+		reject: [ :each | self packageOrganizer hasPackage: each name ]
 		thenDo: [ :each | changesToApply add: (FmxPackageAddition named: each name) ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBRealRingEnvironment >> recordRemovalOfGeneratedEntitiesIn: resolvedPackages notPresentIn: resolvedClasses [
 	"Since the last generation it is possible some behaviorals were removed from the generator. In that case we should remove them. We will remove all classes and traits of Famix that are not part of the current generator."
 
@@ -180,15 +213,7 @@ FmxMBRealRingEnvironment >> recordRemovalOfGeneratedEntitiesIn: resolvedPackages
 					[ package definedClasses select: #isMetamodelEntity thenDo: [ :class | resolvedClasses detect: [ :rgClass | rgClass name = class name ] ifNone: [ changesToApply add: (FmxClassRemoval class: class) ] ] ] ]
 ]
 
-{ #category : #testing }
-FmxMBRealRingEnvironment >> regenerationIsNeeded [
-	"Return true if a regeneration would cause changes in the system."
-
-	self collectChangesToApply.
-	^ changesToApply isNotEmpty
-]
-
-{ #category : #installing }
+{ #category : 'installing' }
 FmxMBRealRingEnvironment >> traitStringFrom: realClass to: aRGClass [
 
 	"We need to collect the generated traits + the custom traits added by the user."

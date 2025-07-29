@@ -1,14 +1,34 @@
+"
+## Relations
+======================
+
+### Other
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `element` | `FamixTSourceAnchor` | `sourceAnchor` | `FamixTSourceEntity` | Enable the accessibility to the famix entity that this class is a source pointer for|
+
+
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+|---|
+| `fileAnchors` | `FamixTFileAnchor` | nil | All source code definition files|
+
+"
 Trait {
-	#name : #FamixTMultipleFileAnchor,
+	#name : 'FamixTMultipleFileAnchor',
 	#instVars : [
 		'#fileAnchors => FMProperty'
 	],
 	#traits : 'FamixTSourceAnchor',
 	#classTraits : 'FamixTSourceAnchor classTrait',
-	#category : #'Famix-Traits-SourceAnchor'
+	#category : 'Famix-Traits-SourceAnchor',
+	#package : 'Famix-Traits',
+	#tag : 'SourceAnchor'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTMultipleFileAnchor classSide >> annotation [
 
 	<FMClass: #TMultipleFileAnchor super: #Object>
@@ -17,41 +37,48 @@ FamixTMultipleFileAnchor classSide >> annotation [
 	^ self
 ]
 
-{ #category : #adding }
+{ #category : 'visitor' }
+FamixTMultipleFileAnchor >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTMultipleFileAnchor: self
+]
+
+{ #category : 'adding' }
 FamixTMultipleFileAnchor >> addFileAnchorWithPath: aPath [
 	self fileAnchors
 		detect: [ :each | each fileName = aPath ]
 		ifNone: [ self createAnchorWithPath: aPath ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTMultipleFileAnchor >> addSourceAnchor: aSourceAnchor [
 	self fileAnchors add: aSourceAnchor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTMultipleFileAnchor >> addToFile: entity [
 	^ self fileAnchors do: [ :each | each addToFile: entity ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTMultipleFileAnchor >> allSourceAnchors [
 	^ self fileAnchors
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 FamixTMultipleFileAnchor >> allSourceAnchorsDo: aBlock [
 	^ self allSourceAnchors do: [ :sa | sa allSourceAnchorsDo: aBlock ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTMultipleFileAnchor >> containerFiles [
 	^ self
 		propertyNamed: #containerFiles
 		ifAbsentPut: [ self fileAnchors collect: #correspondingFile thenReject: #isNil ]
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTMultipleFileAnchor >> createAnchorWithPath: aPath [
 	self
 		addSourceAnchor:
@@ -61,7 +88,7 @@ FamixTMultipleFileAnchor >> createAnchorWithPath: aPath [
 				yourself)
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTMultipleFileAnchor >> fileAnchorClass [
 	^ self mooseModel
 		ifNil: [ self error: 'The model need to be set for this feature to work.' ]
@@ -71,7 +98,7 @@ FamixTMultipleFileAnchor >> fileAnchorClass [
 				ifAbsent: [ self error: 'This metamodel does not includes the full concept of file anchor needed.' ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTMultipleFileAnchor >> fileAnchors [
 	<FMProperty: #fileAnchors type: #FamixTFileAnchor>
 	<multivalued>
@@ -79,37 +106,37 @@ FamixTMultipleFileAnchor >> fileAnchors [
 	^ fileAnchors ifNil: [ fileAnchors := OrderedCollection new ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTMultipleFileAnchor >> fileAnchors: anObject [
 	<generated>
 	fileAnchors := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTMultipleFileAnchor >> fileName [
 	"for compatibility with FAMIXFileAnchor, guard condition not needed: it has atleast one file anchor"
 
 	^ self fileAnchors anyOne fileName
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTMultipleFileAnchor >> hasSource [
 	^ self fileAnchors anySatisfy: #hasSource
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTMultipleFileAnchor >> isMultiple [
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTMultipleFileAnchor >> lineCount [
 	^ self fileAnchors
 		ifEmpty: [ self notExistentMetricValue ]
 		ifNotEmpty: [ :files | files sum: #lineCount ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 FamixTMultipleFileAnchor >> multipleFilesSourceSeparator: aFileAnchor [
 	^String streamContents: [ :stream |
 		stream
@@ -120,7 +147,7 @@ FamixTMultipleFileAnchor >> multipleFilesSourceSeparator: aFileAnchor [
 			cr ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTMultipleFileAnchor >> sourceText [
 	^self fileAnchors size > 1
 	ifFalse: [ self fileAnchors anyOne sourceText ]

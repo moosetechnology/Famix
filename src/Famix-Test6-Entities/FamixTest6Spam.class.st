@@ -1,13 +1,24 @@
+"
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+|---|
+| `isSomething` | `Boolean` | false | |
+
+"
 Class {
-	#name : #FamixTest6Spam,
-	#superclass : #FamixTest6Bacon,
+	#name : 'FamixTest6Spam',
+	#superclass : 'FamixTest6Bacon',
 	#instVars : [
 		'#isSomething => FMProperty defaultValue: false'
 	],
-	#category : #'Famix-Test6-Entities-Entities'
+	#category : 'Famix-Test6-Entities-Entities',
+	#package : 'Famix-Test6-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTest6Spam class >> annotation [
 
 	<FMClass: #Spam super: #FamixTest6Bacon>
@@ -16,7 +27,7 @@ FamixTest6Spam class >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest6Spam >> isSomething [
 
 	<FMProperty: #isSomething type: #Boolean defaultValue: false>
@@ -24,7 +35,7 @@ FamixTest6Spam >> isSomething [
 	^ isSomething ifNil: [ isSomething := false ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest6Spam >> isSomething: anObject [
 	<generated>
 	isSomething := anObject

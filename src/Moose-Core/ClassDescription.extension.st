@@ -1,6 +1,6 @@
-Extension { #name : #ClassDescription }
+Extension { #name : 'ClassDescription' }
 
-{ #category : #'*Moose-Core' }
+{ #category : '*Moose-Core' }
 ClassDescription >> asMooseDescription [
 
 	"

@@ -27,7 +27,9 @@ Internal Representation and Key Implementation Points.
 
 "
 Class {
-	#name : #FmxMethodUpdates,
-	#superclass : #FmxMethodAdditions,
-	#category : #'Famix-MetamodelBuilder-Core-Changes'
+	#name : 'FmxMethodUpdates',
+	#superclass : 'FmxMethodAdditions',
+	#category : 'Famix-MetamodelBuilder-Core-Changes',
+	#package : 'Famix-MetamodelBuilder-Core',
+	#tag : 'Changes'
 }

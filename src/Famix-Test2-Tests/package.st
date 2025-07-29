@@ -1,1 +1,1 @@
-Package { #name : #'Famix-Test2-Tests' }
+Package { #name : 'Famix-Test2-Tests' }

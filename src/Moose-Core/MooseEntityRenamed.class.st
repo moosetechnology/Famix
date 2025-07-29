@@ -1,18 +1,19 @@
 Class {
-	#name : #MooseEntityRenamed,
-	#superclass : #MooseEntityAnnouncement,
+	#name : 'MooseEntityRenamed',
+	#superclass : 'MooseEntityAnnouncement',
 	#instVars : [
 		'oldName'
 	],
-	#category : #'Moose-Core'
+	#category : 'Moose-Core',
+	#package : 'Moose-Core'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseEntityRenamed >> oldName [
 	^ oldName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseEntityRenamed >> oldName: anObject [
 	oldName := anObject
 ]

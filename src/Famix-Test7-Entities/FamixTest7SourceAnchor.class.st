@@ -1,12 +1,26 @@
+"
+## Relations
+======================
+
+### Other
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `element` | `FamixTSourceAnchor` | `sourceAnchor` | `FamixTSourceEntity` | Enable the accessibility to the famix entity that this class is a source pointer for|
+
+
+
+"
 Class {
-	#name : #FamixTest7SourceAnchor,
-	#superclass : #FamixTest7Entity,
+	#name : 'FamixTest7SourceAnchor',
+	#superclass : 'FamixTest7Entity',
 	#traits : 'FamixTSourceAnchor',
 	#classTraits : 'FamixTSourceAnchor classTrait',
-	#category : #'Famix-Test7-Entities-Entities'
+	#category : 'Famix-Test7-Entities-Entities',
+	#package : 'Famix-Test7-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTest7SourceAnchor class >> annotation [
 
 	<FMClass: #SourceAnchor super: #FamixTest7Entity>
@@ -16,7 +30,7 @@ FamixTest7SourceAnchor class >> annotation [
 	^ self
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTest7SourceAnchor class >> isAbstract [
 
 	<generated>

@@ -1,6 +1,6 @@
 Class {
-	#name : #FamixMetamodelCleaningStrategiesTestGenerator,
-	#superclass : #FamixMetamodelGenerator,
+	#name : 'FamixMetamodelCleaningStrategiesTestGenerator',
+	#superclass : 'FamixTestGenerator',
 	#instVars : [
 		'fmx',
 		'tOneTrait',
@@ -8,29 +8,26 @@ Class {
 		'fmx3',
 		'tTwoTrait'
 	],
-	#category : #'Famix-MetamodelBuilder-Tests-Helpers'
+	#category : 'Famix-MetamodelBuilder-Tests-Helpers',
+	#package : 'Famix-MetamodelBuilder-Tests',
+	#tag : 'Helpers'
 }
 
-{ #category : #testing }
-FamixMetamodelCleaningStrategiesTestGenerator class >> isRealMetamodel [
-	^ false
-]
-
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetamodelCleaningStrategiesTestGenerator class >> packageName [
 
 	<ignoreForCoverage>
 	^ 'Famix-MetamodelBuilder-TestsResources'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetamodelCleaningStrategiesTestGenerator class >> prefix [
 
 	<ignoreForCoverage>
 	^ #FmxTestCleaningStrategy
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixMetamodelCleaningStrategiesTestGenerator >> defineClasses [
 	super defineClasses.
 	fmx := builder newClassNamed: #FmxTestEntity.
@@ -38,7 +35,7 @@ FamixMetamodelCleaningStrategiesTestGenerator >> defineClasses [
 	fmx3 := builder newClassNamed: #FmxTestEntityWithTraitPrecedenceToRemove
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixMetamodelCleaningStrategiesTestGenerator >> defineHierarchy [
 	super defineHierarchy.
 	
@@ -50,20 +47,20 @@ FamixMetamodelCleaningStrategiesTestGenerator >> defineHierarchy [
 	fmx3 --|> tTwoTrait
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixMetamodelCleaningStrategiesTestGenerator >> defineProperties [
 	super defineProperties.
 	fmx property: #property type: #String
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixMetamodelCleaningStrategiesTestGenerator >> defineRelations [
 	super defineRelations.
 	fmx <>- fmx.
 	(fmx2 property: #furry) *- (fmx property: #fursonas) 
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixMetamodelCleaningStrategiesTestGenerator >> defineTraits [
 	super defineTraits.
 	tOneTrait := builder newTraitNamed: #TATrait.

@@ -2,22 +2,24 @@
 A FamixUMLDocumentorTest is a test class for testing the behavior of FamixUMLDocumentor
 "
 Class {
-	#name : #FamixUMLDocumentorTest,
-	#superclass : #TestCase,
+	#name : 'FamixUMLDocumentorTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'documentor'
 	],
-	#category : #'Famix-UMLDocumentor-Tests-Generation'
+	#category : 'Famix-UMLDocumentor-Tests-Generation',
+	#package : 'Famix-UMLDocumentor-Tests',
+	#tag : 'Generation'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 FamixUMLDocumentorTest >> setUp [
 	super setUp.
 
 	documentor := FamixUMLDocumentor new
 ]
 
-{ #category : #'tests - generation' }
+{ #category : 'tests - generation' }
 FamixUMLDocumentorTest >> testBeWithStub [
 
 	| entity |
@@ -42,7 +44,7 @@ FamixUMLDocumentorTest >> testBeWithStub [
 
 ]
 
-{ #category : #'tests - generation' }
+{ #category : 'tests - generation' }
 FamixUMLDocumentorTest >> testBeWithoutStub [
 
 	| umlClass |
@@ -59,7 +61,7 @@ FamixUMLDocumentorTest >> testBeWithoutStub [
 	self assert: umlClass name equals: 'Trait2'
 ]
 
-{ #category : #'tests - model' }
+{ #category : 'tests - model' }
 FamixUMLDocumentorTest >> testColorForEntity [
 
 	documentor
@@ -75,7 +77,7 @@ FamixUMLDocumentorTest >> testColorForEntity [
 		equals: (documentor modelColors second value).
 ]
 
-{ #category : #'tests - generation' }
+{ #category : 'tests - generation' }
 FamixUMLDocumentorTest >> testExcludeClasses [
 
 	documentor
@@ -91,7 +93,7 @@ FamixUMLDocumentorTest >> testExcludeClasses [
 
 ]
 
-{ #category : #'tests - generation' }
+{ #category : 'tests - generation' }
 FamixUMLDocumentorTest >> testExcludeClassesWithStub [
 
 	documentor
@@ -108,7 +110,7 @@ FamixUMLDocumentorTest >> testExcludeClassesWithStub [
 
 ]
 
-{ #category : #'tests - generation' }
+{ #category : 'tests - generation' }
 FamixUMLDocumentorTest >> testGenerateClass [
 
 	| fmClass umlClass |
@@ -127,7 +129,7 @@ FamixUMLDocumentorTest >> testGenerateClass [
 	self deny: umlClass isTrait
 ]
 
-{ #category : #'tests - generation' }
+{ #category : 'tests - generation' }
 FamixUMLDocumentorTest >> testGenerateEntireModel [
 
 	documentor
@@ -138,10 +140,10 @@ FamixUMLDocumentorTest >> testGenerateEntireModel [
 
 ]
 
-{ #category : #'tests - generation' }
+{ #category : 'tests - generation' }
 FamixUMLDocumentorTest >> testGeneratePropertyOf [
 
-	| fmClass umlEntity |
+	| fmClass umlClass umlProp |
 
 	documentor
 		model: FDModel ;
@@ -150,19 +152,23 @@ FamixUMLDocumentorTest >> testGeneratePropertyOf [
 	documentor generateClass: fmClass.
 
 	self assert: documentor umlEntities size equals: 1.
-	umlEntity := documentor umlEntities anyOne.
+	umlClass := documentor umlEntities anyOne.
 
-	documentor generateProperties: fmClass uml: umlEntity.
+	documentor generateProperties: fmClass uml: umlClass.
 
-	self assert: umlEntity properties size equals: 1.
+	self assert: umlClass properties size equals: 2.
 
-	umlEntity := umlEntity properties anyOne.
-	self assert: umlEntity name equals: 'someProp'.
-	self assert: umlEntity type equals: 'String'.
+	umlProp := umlClass properties detect: [:p | p name = 'someProp' ] ifNone: [ nil ].
+	self assert: umlProp isNotNil.
+	self assert: umlProp type equals: 'String'.
+
+	umlProp := umlClass properties detect: [:p | p name = 'otherProp' ] ifNone: [ nil ].
+	self assert: umlProp isNotNil.
+	self assert: umlProp type equals: 'Object'.
 
 ]
 
-{ #category : #'tests - generation' }
+{ #category : 'tests - generation' }
 FamixUMLDocumentorTest >> testGenerateRelationNotWithoutStub [
 	"don't generate a relation with a stub if we are WithoutStub"
 
@@ -177,7 +183,7 @@ FamixUMLDocumentorTest >> testGenerateRelationNotWithoutStub [
 	self assert: documentor umlEntities anyOne name equals: 'Trait4'
 ]
 
-{ #category : #'tests - generation' }
+{ #category : 'tests - generation' }
 FamixUMLDocumentorTest >> testGenerateRelationOf [
 
 	| rel fmClass1 umlClass1 |
@@ -212,7 +218,7 @@ FamixUMLDocumentorTest >> testGenerateRelationOf [
 
 ]
 
-{ #category : #'tests - generation' }
+{ #category : 'tests - generation' }
 FamixUMLDocumentorTest >> testGenerateRelationSourceStub [
 	"not sure which source/target is stub, but the idea is to test both sides"
 
@@ -254,7 +260,7 @@ FamixUMLDocumentorTest >> testGenerateRelationSourceStub [
 
 ]
 
-{ #category : #'tests - generation' }
+{ #category : 'tests - generation' }
 FamixUMLDocumentorTest >> testGenerateRelationSourceTargetStubs [
 
 	| rel fmClass1 umlClass1 umlClass2 |
@@ -295,7 +301,7 @@ FamixUMLDocumentorTest >> testGenerateRelationSourceTargetStubs [
 
 ]
 
-{ #category : #'tests - generation' }
+{ #category : 'tests - generation' }
 FamixUMLDocumentorTest >> testGenerateRelationTargetStub [
 	"not sure which source/target is stub, but the idea is to test both sides"
 
@@ -337,7 +343,7 @@ FamixUMLDocumentorTest >> testGenerateRelationTargetStub [
 
 ]
 
-{ #category : #'tests - generation' }
+{ #category : 'tests - generation' }
 FamixUMLDocumentorTest >> testGenerateTrait [
 
 	| umlClass |
@@ -355,7 +361,7 @@ FamixUMLDocumentorTest >> testGenerateTrait [
 	self assert: umlClass isTrait
 ]
 
-{ #category : #'tests - generation' }
+{ #category : 'tests - generation' }
 FamixUMLDocumentorTest >> testGenerateUMLInheritance [
 
 	| fmClass2 umlClass2 inh |
@@ -381,7 +387,7 @@ FamixUMLDocumentorTest >> testGenerateUMLInheritance [
 	self assert: inh target equals: 'Class1'.
 ]
 
-{ #category : #'tests - generation' }
+{ #category : 'tests - generation' }
 FamixUMLDocumentorTest >> testGenerateUMLUse [
 
 	| fmClass1 umlClass1 use |
@@ -407,7 +413,7 @@ FamixUMLDocumentorTest >> testGenerateUMLUse [
 	self assert: use target equals: 'Trait3'.
 ]
 
-{ #category : #'tests - model' }
+{ #category : 'tests - model' }
 FamixUMLDocumentorTest >> testIsStubClass [
 
 	documentor
@@ -420,7 +426,7 @@ FamixUMLDocumentorTest >> testIsStubClass [
 	self deny: (documentor userRequestedClass: (documentor fm3DescriptionOf: FDTrait2)).
 ]
 
-{ #category : #'tests - model' }
+{ #category : 'tests - model' }
 FamixUMLDocumentorTest >> testModel [
 
 	self assert: documentor modelColors size equals: 0.
@@ -432,7 +438,7 @@ FamixUMLDocumentorTest >> testModel [
 	self assert: documentor modelColors anyOne value equals: Color white.
 ]
 
-{ #category : #'tests - model' }
+{ #category : 'tests - model' }
 FamixUMLDocumentorTest >> testModelColor [
 
 	documentor model: #aModel color: Color red.
@@ -440,7 +446,7 @@ FamixUMLDocumentorTest >> testModelColor [
 	self assert: documentor modelColors anyOne value equals: Color red.
 ]
 
-{ #category : #'tests - model' }
+{ #category : 'tests - model' }
 FamixUMLDocumentorTest >> testSeveralModels [
 
 	self assert: documentor modelColors size equals: 0.

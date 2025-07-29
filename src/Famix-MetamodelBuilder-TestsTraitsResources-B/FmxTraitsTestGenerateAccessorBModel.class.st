@@ -1,16 +1,18 @@
 Class {
-	#name : #FmxTraitsTestGenerateAccessorBModel,
-	#superclass : #MooseModel,
-	#category : #'Famix-MetamodelBuilder-TestsTraitsResources-B-Model'
+	#name : 'FmxTraitsTestGenerateAccessorBModel',
+	#superclass : 'MooseModel',
+	#category : 'Famix-MetamodelBuilder-TestsTraitsResources-B-Model',
+	#package : 'Famix-MetamodelBuilder-TestsTraitsResources-B',
+	#tag : 'Model'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxTraitsTestGenerateAccessorBModel class >> allSubmetamodelsPackagesNames [
 	<generated>
 	^ #('Famix-MetamodelBuilder-TestsTraitsResources-A')
 ]
 
-{ #category : #meta }
+{ #category : 'meta' }
 FmxTraitsTestGenerateAccessorBModel class >> annotation [
 	<FMClass: #FmxTraitsTestGenerateAccessorBModel super: #MooseModel>
 	<package: #'Famix-MetamodelBuilder-TestsTraitsResources-B'>

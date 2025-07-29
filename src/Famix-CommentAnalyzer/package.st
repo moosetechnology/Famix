@@ -1,1 +1,1 @@
-Package { #name : #'Famix-CommentAnalyzer' }
+Package { #name : 'Famix-CommentAnalyzer' }

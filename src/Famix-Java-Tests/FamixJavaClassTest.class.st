@@ -1,10 +1,11 @@
 Class {
-	#name : #FamixJavaClassTest,
-	#superclass : #TestCase,
-	#category : #'Famix-Java-Tests'
+	#name : 'FamixJavaClassTest',
+	#superclass : 'TestCase',
+	#category : 'Famix-Java-Tests',
+	#package : 'Famix-Java-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaClassTest >> testInheritanceAnnotationType [
 	| testAnnotation testAnnotationSub inheritance |
 	testAnnotation := FamixJavaAnnotationType new name: 'Test'.
@@ -17,7 +18,19 @@ FamixJavaClassTest >> testInheritanceAnnotationType [
 	self assert: testAnnotationSub superclass equals: testAnnotation.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
+FamixJavaClassTest >> testInheritsFromTestCase [
+	| famixClass class1 testcase inh1 inh2 |
+	famixClass := FamixJavaClass new.
+	class1 := FamixJavaClass new.
+	testcase := FamixJavaClass named: 'TestCase'.
+	inh1 := FamixJavaInheritance new superclass: testcase ; subclass: class1.
+	inh2 := FamixJavaInheritance new superclass: class1 ; subclass: famixClass .
+	self assert: class1 inheritsFromTestCase.
+	self assert: famixClass inheritsFromTestCase.
+]
+
+{ #category : 'tests' }
 FamixJavaClassTest >> testIsClassSide [
 	| famixClass |
 	famixClass := FamixJavaClass new. 
@@ -25,7 +38,7 @@ FamixJavaClassTest >> testIsClassSide [
 	self assert: famixClass isClassSide
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaClassTest >> testIsJUnit40TestCase [
 	| testAnnotation testAnnotationInstance famixClass famixMethod |
 	testAnnotation := FamixJavaAnnotationType new name: 'Test'.
@@ -37,7 +50,7 @@ FamixJavaClassTest >> testIsJUnit40TestCase [
 	self assert: famixClass isJUnit4TestCase
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaClassTest >> testNumberOfAccessorMethods [
 
 	| model c1 m1 |
@@ -52,7 +65,7 @@ FamixJavaClassTest >> testNumberOfAccessorMethods [
 	self assert: c1 numberOfAccessorMethods equals: 100
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaClassTest >> testNumberOfConstructorMethods [
 
 	| m1 c1 model |

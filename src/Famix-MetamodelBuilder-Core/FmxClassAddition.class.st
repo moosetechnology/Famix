@@ -20,32 +20,35 @@ Internal Representation and Key Implementation Points.
 
 "
 Class {
-	#name : #FmxClassAddition,
-	#superclass : #FmxCodeChange,
+	#name : 'FmxClassAddition',
+	#superclass : 'FmxCodeChange',
 	#instVars : [
-		'definition'
+		'creationCode'
 	],
-	#category : #'Famix-MetamodelBuilder-Core-Changes'
+	#category : 'Famix-MetamodelBuilder-Core-Changes',
+	#package : 'Famix-MetamodelBuilder-Core',
+	#tag : 'Changes'
 }
 
-{ #category : #'instance creation' }
-FmxClassAddition class >> definition: aString [
+{ #category : 'instance creation' }
+FmxClassAddition class >> creationCode: aString [
 	^ self new
-		definition: aString;
+		creationCode: aString;
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxClassAddition >> apply [
-	self class compiler evaluate: self definition
+
+	self class compiler evaluate: self creationCode
 ]
 
-{ #category : #accessing }
-FmxClassAddition >> definition [
-	^ definition
+{ #category : 'accessing' }
+FmxClassAddition >> creationCode [
+	^ creationCode
 ]
 
-{ #category : #accessing }
-FmxClassAddition >> definition: anObject [
-	definition := anObject
+{ #category : 'accessing' }
+FmxClassAddition >> creationCode: anObject [
+	creationCode := anObject
 ]

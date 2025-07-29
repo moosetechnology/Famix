@@ -1,12 +1,23 @@
+"
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+|---|
+| `isClassSide` | `Boolean` | nil | Entity can be declared class side i.e. static|
+
+"
 Trait {
-	#name : #FamixTest1TCanBeClassSide,
+	#name : 'FamixTest1TCanBeClassSide',
 	#instVars : [
 		'#isClassSide => FMProperty'
 	],
-	#category : #'Famix-Test1-Entities-Traits'
+	#category : 'Famix-Test1-Entities-Traits',
+	#package : 'Famix-Test1-Entities',
+	#tag : 'Traits'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTest1TCanBeClassSide classSide >> annotation [
 
 	<FMClass: #TCanBeClassSide super: #Object>
@@ -15,7 +26,7 @@ FamixTest1TCanBeClassSide classSide >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest1TCanBeClassSide >> isClassSide [
 
 	<FMProperty: #isClassSide type: #Boolean>
@@ -24,7 +35,7 @@ FamixTest1TCanBeClassSide >> isClassSide [
 	^ isClassSide
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest1TCanBeClassSide >> isClassSide: anObject [
 	<generated>
 	isClassSide := anObject

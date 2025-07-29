@@ -1,12 +1,26 @@
+"
+## Relations
+======================
+
+### Outgoing dependencies
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `outgoingReferences` | `FamixTWithReferences` | `referencer` | `FamixTReference` | References from this entity to other entities.|
+
+
+
+"
 Trait {
-	#name : #FamixTWithReferences,
+	#name : 'FamixTWithReferences',
 	#instVars : [
 		'#outgoingReferences => FMMany type: #FamixTReference opposite: #referencer'
 	],
-	#category : #'Famix-Traits-Reference'
+	#category : 'Famix-Traits-Reference',
+	#package : 'Famix-Traits',
+	#tag : 'Reference'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTWithReferences classSide >> annotation [
 
 	<FMClass: #TWithReferences super: #Object>
@@ -15,12 +29,19 @@ FamixTWithReferences classSide >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'visitor' }
+FamixTWithReferences >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTWithReferences: self
+]
+
+{ #category : 'accessing' }
 FamixTWithReferences >> addOutgoingReference: aReference [ 
 	outgoingReferences add: aReference
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithReferences >> outgoingReferences [
 	"Relation named: #outgoingReferences type: #FamixTReference opposite: #referencer"
 
@@ -30,7 +51,7 @@ FamixTWithReferences >> outgoingReferences [
 	^ outgoingReferences
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithReferences >> outgoingReferences: anObject [
 
 	<generated>

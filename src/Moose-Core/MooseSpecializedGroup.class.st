@@ -6,20 +6,22 @@ For example, a XYZGroup handles a group of XYZ entities. Thus, ""MooseSpecialize
 The goal of this abstraction is to provide a home for behavior that is specific to groups of entities. For example, a visualization that makes sense for a group of XYZ entities will become a method in the XYZGroup class.
 "
 Class {
-	#name : #MooseSpecializedGroup,
-	#superclass : #MooseGroup,
-	#category : #'Moose-Core'
+	#name : 'MooseSpecializedGroup',
+	#superclass : 'MooseGroup',
+	#category : 'Moose-Core',
+	#package : 'Moose-Core'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 MooseSpecializedGroup class >> annotation [
 	<FMClass: #SpecializedGroup super: #MooseGroup>
 	<package: #Moose>
 
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MooseSpecializedGroup class >> withAll: collection [
+
 	^ (self = MooseSpecializedGroup
 		ifTrue: [ collection commonSuperclass relatedGroupType ]
 		ifFalse: [ self ]) new
@@ -27,58 +29,58 @@ MooseSpecializedGroup class >> withAll: collection [
 		yourself
 ]
 
-{ #category : #'adding/removing' }
+{ #category : 'adding/removing' }
 MooseSpecializedGroup >> add: anElement [
 	super add: anElement.
 	self updateTypeAccordingToEntities.
 	^ anElement
 ]
 
-{ #category : #'adding/removing' }
+{ #category : 'adding/removing' }
 MooseSpecializedGroup >> addAll: aCollection [
 	super addAll: aCollection.
 	self updateTypeAccordingToEntities
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 MooseSpecializedGroup >> asMooseSpecializedGroup [
 
 	^ self
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MooseSpecializedGroup >> changeTypeToDefaultType [
 	self changeTypeTo: MooseSpecializedGroup
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MooseSpecializedGroup >> commonEntitiesClass [
 	^ self entityStorage commonSuperclass
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MooseSpecializedGroup >> initializeWithAll: aCollection [
 	super addAll: aCollection
 ]
 
-{ #category : #'adding/removing' }
+{ #category : 'adding/removing' }
 MooseSpecializedGroup >> remove: anEntity [
 	super remove: anEntity.
 	self updateTypeAccordingToEntities
 ]
 
-{ #category : #'adding/removing' }
+{ #category : 'adding/removing' }
 MooseSpecializedGroup >> removeAll: aCollection [
 	super removeAll: aCollection.
 	self updateTypeAccordingToEntities
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MooseSpecializedGroup >> species [
 	^ MooseSpecializedGroup
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MooseSpecializedGroup >> updateTypeAccordingToEntities [
 
 	| common wantedType class |

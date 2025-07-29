@@ -1,6 +1,6 @@
 Class {
-	#name : #MooseQueryTest,
-	#superclass : #TestCase,
+	#name : 'MooseQueryTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'model',
 		'class1',
@@ -27,15 +27,16 @@ Class {
 		'localVariable',
 		'anchor'
 	],
-	#category : #'Moose-Query-Test'
+	#category : 'Moose-Query-Test',
+	#package : 'Moose-Query-Test'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseQueryTest >> model [
 	^ model
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 MooseQueryTest >> setUp [
 	super setUp.
 	model := FamixJavaModel new.
@@ -72,14 +73,14 @@ MooseQueryTest >> setUp [
 		mooseModel: model.
 	var1 := (FamixJavaAttribute named: 'var1')
 		parentType: class2;
-		declaredType: class1;
+		typing: (FamixJavaEntityTyping new declaredType: class1);
 		mooseModel: model.
 	var2 := (FamixJavaAttribute named: 'var2')
 		parentType: class2;
 		mooseModel: model.
 	localVariable := (FamixJavaLocalVariable named: 'var3')
 		parentBehaviouralEntity: method2;
-		declaredType: class1;
+		typing: (FamixJavaEntityTyping new declaredType: class1);
 		mooseModel: model.
 	access := FamixJavaAccess new
 		accessor: method1;
@@ -107,7 +108,7 @@ MooseQueryTest >> setUp [
 	ref1 := FamixJavaReference source: method1 target: class2 model: model
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testAllAtAnyScope [
 	self assertCollection: (class1 allAtAnyScope: {FamixJavaClass}) hasSameElements: {class1}.
 	self assertCollection: (class1 allAtAnyScope: {FamixJavaPackage}) hasSameElements: {package1}.
@@ -120,7 +121,7 @@ MooseQueryTest >> testAllAtAnyScope [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testAllAtAnyScopeUntil [
 	self assertCollection: (class1 allAtAnyScope: {FamixJavaPackage} until: [:famixEntity | famixEntity isOfType: FamixJavaClass ]) hasSameElements: {}.
 	self assertCollection: (class1 allAtAnyScope: {FamixJavaClass . FamixJavaPackage} until: [:famixEntity | famixEntity isOfType: FamixJavaClass ]) hasSameElements: {class1}.
@@ -129,7 +130,7 @@ MooseQueryTest >> testAllAtAnyScopeUntil [
 	self assertCollection: (class1 allAtAnyScope: {FamixTClass . FamixTPackage}until: [:famixEntity | famixEntity isOfType: FamixTClass ]) hasSameElements: {class1}.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testAllAtScope [
 	| package3 |
 	self assertCollection: (class1 allAtScope: FamixTClass) hasSameElements: {class1}.
@@ -143,7 +144,7 @@ MooseQueryTest >> testAllAtScope [
 	self assertCollection: (class1 allAtScope: FamixTPackage) hasSameElements: {package1 . package3}
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testAllAtScopeUntil [
 	| package3 |
 	self assertCollection: (class1 allAtScope: FamixTClass until: [ :famixEntity | famixEntity isOfType: FamixTClass ]) hasSameElements: {class1}.
@@ -157,26 +158,27 @@ MooseQueryTest >> testAllAtScopeUntil [
 	self assertCollection: (class1 allAtScope: FamixTPackage until: [ :famixEntity | famixEntity name = 'package1' ]) hasSameElements: {package1}
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testAllChildren [
 	self assert: package2 allChildren size equals: 6.
 	self assert: class2 allChildren size equals: 5.
 	self assert: method2 allChildren size equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testAllIncoming [
 	self assert: method2 queryAllIncoming size equals: 3.
 	self assert: class2 queryAllIncoming size equals: 7
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testAllOutgoing [
-	self assert: method2 queryAllOutgoing size equals: 2.
-	self assert: class2 queryAllOutgoing size equals: 3
+
+	self assert: method2 queryAllOutgoing size equals: 3.
+	self assert: class2 queryAllOutgoing size equals: 5
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testAllParents [
 	self assert: package2 allParents size equals: 0.
 	self assert: class2 allParents size equals: 1.
@@ -184,7 +186,7 @@ MooseQueryTest >> testAllParents [
 	self assert: var2 allParents size equals: 2
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testAllToAnyScope [
 	self assertCollection: (class2 allToAnyScope: {FamixJavaMethod . FamixJavaAttribute}) hasSameElements: {method2 . method3  . var1 . var2}.
 	self assertCollection: (class2 allToAnyScope: {FamixJavaMethod . FamixJavaLocalVariable}) hasSameElements: {method2 . method3 . localVariable}.
@@ -193,13 +195,13 @@ MooseQueryTest >> testAllToAnyScope [
 	self assertCollection: (method1 allToAnyScope: {FamixJavaClass . FamixJavaPackage}) hasSameElements: {}
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testAllToAnyScopeUntil [
 	self assertCollection: (class2 allToAnyScope: {FamixJavaMethod . FamixJavaLocalVariable} until: [:entity | entity isOfType: FamixJavaMethod ]) hasSameElements: {method2 . method3 }.
 	self assertCollection: (class2 allToAnyScope: {FamixJavaMethod . FamixTStructuralEntity} until: [:entity | entity isOfType: FamixJavaMethod ]) hasSameElements: {method2 . method3 . var1 . var2 }.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testAllToScope [
 	| class3 |
 	self assertCollection: (class1 allToScope: FamixTMethod) hasSameElements: {method1}.
@@ -214,7 +216,7 @@ MooseQueryTest >> testAllToScope [
 	self assertCollection: (package1 allToScope: FamixTClass) hasSameElements: {class1 . class3}
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testAllToScopeUntil [
 	self assertCollection: (class2 allToScope: FamixTStructuralEntity until: [ :entity | entity isOfType: FamixTMethod ]) hasSameElements: {var1 . var2}.
 	self assertCollection: (package1 allToScope: FamixTClass until: [ :entity | entity isOfType: FamixTPackage ]) hasSameElements: {}.
@@ -227,7 +229,7 @@ MooseQueryTest >> testAllToScopeUntil [
 	self assertCollection: (package1 allToScope: FamixTClass until: [ :entity | entity name = 'class1' ]) hasSameElements: {class1}
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testAllWithAnyScope [
 	self assertCollection: (class2 allWithAnyScope: {FamixTMethod . FamixTAttribute}) hasSameElements: {method2 . method3 . var1 . var2 }.
 	self assertCollection: (class2 allWithAnyScope: {FamixTClass . FamixTPackage}) hasSameElements: {class2. package2}.
@@ -235,7 +237,7 @@ MooseQueryTest >> testAllWithAnyScope [
 	self assertCollection: (class2 allWithAnyScope: {FamixTMethod . FamixTStructuralEntity . FamixTPackage}) hasSameElements: {method2 . method3 . var1 . var2 . package2 . localVariable}
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testAllWithAnyScopeUntil [
 	self assertCollection: (class2 allWithAnyScope: {FamixTMethod . FamixTAttribute} until: [:el | el isOfType: FamixTClass]) hasSameElements: {}.
 	self assertCollection: (class2 allWithAnyScope: {FamixTClass . FamixTPackage} until: [:el | el isOfType: FamixTClass]) hasSameElements: {class2}.
@@ -243,7 +245,7 @@ MooseQueryTest >> testAllWithAnyScopeUntil [
 	self assertCollection: (class2 allWithAnyScope: {FamixTMethod . FamixTStructuralEntity . FamixTPackage} until: [:el | el isOfType: FamixTMethod]) hasSameElements: {method2 . method3 . var1 . var2 . package2 }
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testAllWithScope [
 	| package3 class3 |
 	self assertCollection: (class1 allWithScope: FamixTMethod) hasSameElements: {method1}.
@@ -264,7 +266,7 @@ MooseQueryTest >> testAllWithScope [
 	self assertCollection: (class1 allWithScope: FamixTPackage) hasSameElements: {package1 . package3}
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testAllWithScopeUntil [
 	| package3 class3 |
 	self assertCollection: (class1 allWithScope: FamixTMethod until: [ :el | el isOfType: FamixTMethod ]) hasSameElements: {method1}.
@@ -287,7 +289,7 @@ MooseQueryTest >> testAllWithScopeUntil [
 	self assertCollection: (class1 allWithScope: FamixTPackage until: [ :el | el name = 'package3' ]) hasSameElements: {package1 . package3}
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testAtAnyScope [
 	self assertCollection: (class1 atAnyScope: {FamixJavaClass}) hasSameElements: {class1}.
 	self assertCollection: (class1 atAnyScope: {FamixJavaPackage}) hasSameElements: {package1}.
@@ -299,7 +301,7 @@ MooseQueryTest >> testAtAnyScope [
 	self assertCollection: (class1 atAnyScope: {FamixTMethod}) hasSameElements: {}.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testAtAnyScopeUntil [
 	self assertCollection: (class1 atAnyScope: {FamixJavaPackage} until: [ :entity | entity isOfType: FamixTPackage ]) hasSameElements: {package1}.
 	self assertCollection: (class1 atAnyScope: {FamixJavaPackage} until: [ :entity | entity isOfType: FamixTClass ]) hasSameElements: {}.
@@ -311,21 +313,21 @@ MooseQueryTest >> testAtAnyScopeUntil [
 	
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testAtScope [
 	self assertCollection: (class1 atScope: FamixJavaClass) hasSameElements: {class1}.
 	self assertCollection: (class1 atScope: FamixTType) hasSameElements: {class1}.
 	self assertCollection: (class1 atScope: FamixTPackage) hasSameElements: {package1}
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testAtScopeUntil [
 	self assertCollection: (class1 atScope: FamixJavaClass until: [:el | el isOfType: FamixTClass ]) hasSameElements: {class1}.
 	self assertCollection: (class1 atScope: FamixTPackage until: [:el | el isOfType: FamixTClass ]) hasSameElements: {}.
 	self assertCollection: (class1 atScope: FamixTPackage until: [:el | el isOfType: FamixTPackage ]) hasSameElements: {package1}.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testAtScopeWithBlockReturnNotBoolean [
 	self
 		should: [ class1 atScopeWithProperty: [ :e | e numberOfMethods ] ]
@@ -335,7 +337,7 @@ MooseQueryTest >> testAtScopeWithBlockReturnNotBoolean [
 		raise: MQScopeShouldBeSeclectedReturnNotBooleanValueError
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testAtScopeWithProperty [
 	self assertCollection: (class1 atScopeWithProperty: #hasSourceAnchor) hasSameElements: {class1}.
 	self assertCollection: (method1 atScopeWithProperty: #hasSourceAnchor) hasSameElements: {class1}.
@@ -343,7 +345,7 @@ MooseQueryTest >> testAtScopeWithProperty [
 	self assertCollection: (method2 atScopeWithProperty: #hasSourceAnchor) hasSameElements: {}.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testAtScopeWithPropertyAsBlock [
 	self assertCollection: (class1 atScopeWithProperty: [:e | e hasSourceAnchor] ) hasSameElements: {class1}.
 	self assertCollection: (method1 atScopeWithProperty: [:e | e hasSourceAnchor]) hasSameElements: {class1}.
@@ -351,27 +353,29 @@ MooseQueryTest >> testAtScopeWithPropertyAsBlock [
 	self assertCollection: (method2 atScopeWithProperty: [:e | e hasSourceAnchor]) hasSameElements: {}.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testAtScopeWithPropertyAsBlockHandleError [
 	self assertCollection: (class1 atScopeWithProperty: [:e | e size ] ) hasSameElements: {}.
 	self assertCollection: (method1 atScopeWithProperty: [:e | e size ]) hasSameElements: {}
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testAtScopeWithPropertyHandleError [
 	self assertCollection: (class1 atScopeWithProperty: #hasBlaBla) hasSameElements: {  }
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testAtScopeWithPropertyOnlyUnderstandByParent [
-	class1 isInterface: true.
-	self assertCollection: (class1 atScopeWithProperty: #isInterface) hasSameElements: {class1}.
-	self assertCollection: (method1 atScopeWithProperty: #isInterface) hasSameElements: {class1}.
+	| interface1 methodInt1 |
+	interface1 := (FamixJavaInterface named: 'interface1').
+	methodInt1 := (FamixJavaMethod named: 'methodInt1') parentType: interface1.
+	self assertCollection: (interface1 atScopeWithProperty: #isInterface) hasSameElements: {interface1}.
+	self assertCollection: (methodInt1 atScopeWithProperty: #isInterface) hasSameElements: {interface1}.
 	self assertCollection: (class2 atScopeWithProperty: #isInterface) hasSameElements: {}.
 	self assertCollection: (method2 atScopeWithProperty: #isInterface) hasSameElements: {}.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testAtScopeWithPropertyReturnNotBoolean [
 	self
 		should: [ class1 atScopeWithProperty: #numberOfMethods ]
@@ -381,7 +385,7 @@ MooseQueryTest >> testAtScopeWithPropertyReturnNotBoolean [
 		raise: MQScopeShouldBeSeclectedReturnNotBooleanValueError
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testChildren [
 	self assert: package2 children size equals: 1.
 	self assert: package2 children anyOne equals: class2.
@@ -389,14 +393,14 @@ MooseQueryTest >> testChildren [
 	self assert: class1 children anyOne equals: method1.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testChildrenSelectors [
 	self
 		assertCollection: class1 childrenSelectors
-		hasSameElements: #(#types #attributes #methods #definedAnnotationTypes)
+		hasSameElements: #(#types #attributes #methods #definedAnnotationTypes #comments)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testExplicitDirectionQueryEquivalentToQueryWithDirectionSymbol [
 	"queryIncoming: is equivalent to query: #in with:"
 
@@ -415,14 +419,14 @@ MooseQueryTest >> testExplicitDirectionQueryEquivalentToQueryWithDirectionSymbol
 		equals: (class2 query: #out with: FamixJavaInvocation)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testHasIncoming [
 
 	self assert: (method2 hasIncoming).
 	self assert: (class2 hasIncoming).
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testHasIncomingInvocation [
 	"queryIncoming: is equivalent to query: #in with:"
 
@@ -432,15 +436,15 @@ MooseQueryTest >> testHasIncomingInvocation [
 	self assert: (class2 has: #in with: FamixTInvocation).
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testHasLocalIncoming [
 
 	self assert: method2 hasLocalIncoming.
-	self deny: class1 hasLocalIncoming.
+	self assert: class1 hasLocalIncoming.
 	self deny: package2 hasLocalIncoming
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testHasLocalIncomingInvocation [
 
 	self assert: (method2 hasLocalIncoming: FamixTInvocation).
@@ -448,14 +452,14 @@ MooseQueryTest >> testHasLocalIncomingInvocation [
 	self deny: (package2 hasLocalIncoming: FamixTInvocation).
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testHasLocalOutgoing [
 	self assert: method2 hasLocalOutgoing.
 	self deny: class2 hasLocalOutgoing.
 	self deny: package2 hasLocalOutgoing
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testHasLocalOutgoingInvocation [
 
 	self assert: (method2 hasLocalOutgoing: FamixTInvocation).
@@ -463,14 +467,14 @@ MooseQueryTest >> testHasLocalOutgoingInvocation [
 	self deny: (package2 hasLocalOutgoing: FamixTInvocation).
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testHasNotIncoming [
 	self deny: isolatedMethod hasIncoming.
 	self deny: isolatedClass hasIncoming.
 	self deny: isolatedPackage hasIncoming
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testHasNotIncomingInvocation [
 	"hasIncoming: is equivalent to has: #in with:"
 
@@ -482,28 +486,28 @@ MooseQueryTest >> testHasNotIncomingInvocation [
 	self deny: (isolatedPackage has: #in with: FamixTInvocation)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testHasNotLocalIncoming [
 	self deny: isolatedMethod hasLocalIncoming.
 	self deny: isolatedClass hasLocalIncoming.
 	self deny: isolatedPackage hasLocalIncoming
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testHasNotLocalOutgoing [
 	self deny: isolatedMethod hasLocalOutgoing.
 	self deny: isolatedClass hasLocalOutgoing.
 	self deny: isolatedPackage hasLocalOutgoing
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testHasNotOutgoing [
 	self deny: isolatedMethod hasOutgoing.
 	self deny: isolatedClass hasOutgoing.
 	self deny: isolatedPackage hasOutgoing
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testHasNotOutgoingInvocation [
 	"hasOutgoing: is equivalent to has: #out with:"
 
@@ -515,14 +519,14 @@ MooseQueryTest >> testHasNotOutgoingInvocation [
 	self deny: (isolatedPackage has: #out with: FamixTInvocation)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testHasOutgoing [
 
 	self assert: (method2 hasOutgoing).
 	self assert: (class2 hasOutgoing).
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testHasOutgoingInvocation [
 	"queryOutgoing: is equivalent to query: #out with:"
 
@@ -532,7 +536,7 @@ MooseQueryTest >> testHasOutgoingInvocation [
 	self assert: (class2 has: #out with: FamixTInvocation)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testIncomingAssociationTypes [
 
 	self
@@ -543,7 +547,8 @@ MooseQueryTest >> testIncomingAssociationTypes [
 		hasSameElements: { 
 				FamixTInheritance.
 				FamixTReference.
-				FamixTImport }.
+				FamixTImport.
+				FamixTEntityTyping }.
 	self
 		assertCollection: method1 incomingAssociationTypes
 		hasSameElements: { 
@@ -551,7 +556,7 @@ MooseQueryTest >> testIncomingAssociationTypes [
 				FamixTImport }
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testIncomingInvocation [
 	"queryIncoming: is equivalent to query: #in with:"
 
@@ -561,7 +566,7 @@ MooseQueryTest >> testIncomingInvocation [
 	self assert: (class2 query: #in with: FamixTInvocation) size equals: 3
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testIncomingInvocationAtScope [
 	self
 		assert: ((method2 queryIncoming: FamixTInvocation) atScope: FamixJavaPackage) size
@@ -571,12 +576,12 @@ MooseQueryTest >> testIncomingInvocationAtScope [
 		equals: 2
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testObjectsQueryResultsKind [
 	self assert: (method2 query incoming objects dependencies isKindOf: MooseObjectQueryResult)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testOutgoingAccessAtScope [
 	self assert: ((method1 queryOutgoing: FamixTAccess) atScope: FamixJavaPackage) size equals: 1.
 	self
@@ -584,7 +589,7 @@ MooseQueryTest >> testOutgoingAccessAtScope [
 		equals: package2
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testOutgoingAccessesWithANamespaceInANamespace [
 	"queryOutgoing: is equivalent to query: #out with:"
 
@@ -596,24 +601,26 @@ MooseQueryTest >> testOutgoingAccessesWithANamespaceInANamespace [
 	self assert: (packageContainer query: #out with: FamixTAccess) size equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testOutgoingAssociationTypes [
 
 	self
 		assertCollection: class1 outgoingAssociationTypes
-		hasSameElements: { 
+		hasSameElements: {
 				FamixTInheritance.
 				FamixTImplementation.
-				FamixTImport }.
+				FamixTImport.
+				FamixTConcretization }.
 	self
 		assertCollection: method1 outgoingAssociationTypes
-		hasSameElements: { 
+		hasSameElements: {
 				FamixTInvocation.
 				FamixTReference.
-				FamixTAccess }
+				FamixTAccess.
+				FamixTEntityTyping }
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testOutgoingInvocation [
 "queryOutgoing: is equivalent to query: #out with:"
 	self assert: (method1 queryOutgoing: FamixTInvocation) size equals: 1.
@@ -622,7 +629,7 @@ MooseQueryTest >> testOutgoingInvocation [
 	self assert: (class2 query: #out with: FamixTInvocation) size equals: 2.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testOutgoingInvocationAtScope [
 
 	self assert: ((method2 queryOutgoing: FamixTInvocation) atScope: FamixJavaPackage) size equals: 1.
@@ -630,13 +637,13 @@ MooseQueryTest >> testOutgoingInvocationAtScope [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testOutgoingInvocationWithin [
 	self assert: ((method1 queryOutgoing: FamixTInvocation) within: class2) size equals: 1.
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testParents [
 	self assert: class2 parents size equals: 1.
 	self assert: class2 parents anyOne equals: package2.
@@ -644,19 +651,19 @@ MooseQueryTest >> testParents [
 	self assert: method1 parents anyOne equals: class1.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testQueryWith [
 "queryIncoming: is equivalent to query: #in with:"
 	self assert: (package1 query: #out with: FamixTInvocation) size equals: 1.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testSourceThroughAll [
 	self assertCollection: method2 throughAllFrom storage flattened hasSameElements: {method2 . method1 . method3}.
 	self assertCollection: class2 throughAllFrom storage flattened hasSameElements: {method2 . method1 . method3 . class1}
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testSourceThroughInvocation [
 
 	self
@@ -681,7 +688,7 @@ MooseQueryTest >> testSourceThroughInvocation [
 				method3 }
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testTargetThroughInvocation [
 
 	self
@@ -698,19 +705,19 @@ MooseQueryTest >> testTargetThroughInvocation [
 		hasSameElements: { method2 }
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testThrougAllIncoming [
 	self assert: method2 queryAllIncoming size equals: 3.
 	self assert: class2 queryAllIncoming size equals: 7
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testThroughAllFrom [
 	self assert: method2 queryAllIncoming size equals: 3.
 	self assert: class2 queryAllIncoming size equals: 7
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testToAnyScope [
 	self assertCollection: (class2 toAnyScope: {FamixJavaMethod . FamixJavaAttribute}) hasSameElements: {method2 . method3 . var1 . var2}.
 	self assertCollection: (class2 toAnyScope: {FamixJavaMethod . FamixTStructuralEntity}) hasSameElements: {method2 . method3 . var1 . var2}.
@@ -718,7 +725,7 @@ MooseQueryTest >> testToAnyScope [
 	self assertCollection: (method1 toAnyScope: {FamixJavaClass . FamixJavaPackage}) hasSameElements: {}
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testToAnyScopeUntil [
 	self assertCollection: (class2 toAnyScope: {FamixJavaMethod . FamixJavaAttribute} until: [ :el | el isOfType: FamixTMethod ]) hasSameElements: {method2 . method3 . var1 . var2}.
 	self assertCollection: (class2 toAnyScope: {FamixJavaMethod . FamixJavaAttribute} until: [ :el | el isOfType: FamixTClass ]) hasSameElements: {}.
@@ -728,7 +735,7 @@ MooseQueryTest >> testToAnyScopeUntil [
 	self assertCollection: (class2 toAnyScope: {FamixJavaClass . FamixTLocalVariable} until: [ :el | el isOfType: FamixTMethod ]) hasSameElements: {class2}.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testToScope [
 	self assertCollection: (class1 toScope: FamixJavaMethod) hasSameElements: {method1}.
 	self assertCollection: (class2 toScope: FamixJavaAttribute) hasSameElements: {var1 . var2}.
@@ -736,7 +743,7 @@ MooseQueryTest >> testToScope [
 	self assertCollection: (package1 toScope: FamixJavaMethod) hasSameElements: {method1}
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testToScopeUntil [
 	self assertCollection: (class1 toScope: FamixJavaMethod until: [ :el | el isOfType: FamixTClass ]) hasSameElements: {}.
 	self assertCollection: (class1 toScope: FamixJavaMethod until: [ :el | el isOfType: FamixTMethod ]) hasSameElements: {method1}.
@@ -747,14 +754,14 @@ MooseQueryTest >> testToScopeUntil [
 	self assertCollection: (class2 toScope: FamixTStructuralEntity until: [ :el | el isOfType: FamixTStructuralEntity ]) hasSameElements: {var1. var2. localVariable}.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testWithAllChildren [
 	self assert: package2 withAllChildren size equals: 7.
 	self assert: class2 withAllChildren size equals: 6.
 	self assert: method2 withAllChildren size equals: 2
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testWithAllParents [
 	self assert: package2 withAllParents size equals: 1.
 	self assert: class2 withAllParents size equals: 2.
@@ -762,7 +769,7 @@ MooseQueryTest >> testWithAllParents [
 	self assert: var2 withAllParents size equals: 3
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testWithAnyScope [
 	self assertCollection: (class2 withAnyScope: {FamixTMethod . FamixTAttribute}) hasSameElements: {method2 . method3 . var1 . var2 }.
 	self assertCollection: (class2 withAnyScope: {FamixTClass . FamixTPackage}) hasSameElements: {class2}.
@@ -770,12 +777,12 @@ MooseQueryTest >> testWithAnyScope [
 	self assertCollection: (class2 withAnyScope: {FamixTMethod . FamixTStructuralEntity . FamixTPackage}) hasSameElements: {method2 . method3 . var1 . var2 . package2}
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testWithAnyScopeUntil [
 	self assertCollection: (class1 withAnyScope: {FamixTMethod . FamixTStructuralEntity . FamixTPackage} until: [:el | el isOfType: FamixTClass ]) hasSameElements: {}
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testWithScope [
 	self assertCollection: (class1 withScope: FamixTMethod) hasSameElements: {method1}.
 	self assertCollection: (class2 toScope: FamixTAttribute) hasSameElements: {var1 . var2}.
@@ -785,7 +792,7 @@ MooseQueryTest >> testWithScope [
 	self assertCollection: (class1 withScope: FamixTPackage) hasSameElements: {package1}
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testWithScopeUntil [
 	self assertCollection: (class1 withScope: FamixTMethod until: [ :el | el isOfType: FamixTMethod ]) hasSameElements: {method1}.
 	self assertCollection: (class1 withScope: FamixTMethod until: [ :el | el isOfType: FamixTClass ]) hasSameElements: {}.
@@ -797,7 +804,7 @@ MooseQueryTest >> testWithScopeUntil [
 	self assertCollection: (class1 withScope: FamixTPackage until: [:el | el isOfType: FamixTClass]) hasSameElements: {}.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseQueryTest >> testWithSpecializedAssociation [
 	"The goal of this test is to check that MooseQuery is also able to query specialized associations."
 

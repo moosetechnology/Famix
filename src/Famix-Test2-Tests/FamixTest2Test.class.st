@@ -1,6 +1,6 @@
 Class {
-	#name : #FamixTest2Test,
-	#superclass : #TestCase,
+	#name : 'FamixTest2Test',
+	#superclass : 'TestCase',
 	#instVars : [
 		'model',
 		'c1',
@@ -14,10 +14,11 @@ Class {
 		'i4',
 		'i5'
 	],
-	#category : #'Famix-Test2-Tests'
+	#category : 'Famix-Test2-Tests',
+	#package : 'Famix-Test2-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 FamixTest2Test >> setUp [
 
 	super setUp.
@@ -47,7 +48,7 @@ FamixTest2Test >> setUp [
 	i5 superclass: c3; subclass: c5.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTest2Test >> testInheritances [
 
 	self assertCollection: (c1 subInheritances collect: #subclass) hasSameElements: { c2. c3 }.
@@ -56,12 +57,12 @@ FamixTest2Test >> testInheritances [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTest2Test >> testModelGeneratedNotExplicitely [
 	self assert: (self class environment classNamed: 'FamixTest2Model') isNotNil
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTest2Test >> testModelNotImportableFromFile [
 	self deny: FamixTest2Model canBeImportedFromFile
 ]

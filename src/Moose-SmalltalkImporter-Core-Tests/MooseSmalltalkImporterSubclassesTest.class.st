@@ -1,49 +1,51 @@
 Class {
-	#name : #MooseSmalltalkImporterSubclassesTest,
-	#superclass : #TestCase,
+	#name : 'MooseSmalltalkImporterSubclassesTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'model',
 		'pharoImporterTask'
 	],
-	#category : #'Moose-SmalltalkImporter-Core-Tests'
+	#category : 'Moose-SmalltalkImporter-Core-Tests',
+	#package : 'Moose-SmalltalkImporter-Core-Tests'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseSmalltalkImporterSubclassesTest >> model [
 	^ model
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseSmalltalkImporterSubclassesTest >> model: anObject [
 	model := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseSmalltalkImporterSubclassesTest >> pharoImporterTask [
 	^ pharoImporterTask
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseSmalltalkImporterSubclassesTest >> pharoImporterTask: anObject [
 	pharoImporterTask := anObject
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 MooseSmalltalkImporterSubclassesTest >> setUp [
+
 	super setUp.
-	model := FamixStModel new.	
+	model := FamixStModel new.
 	model name: 'Test'.
-	pharoImporterTask := MoosePharoImporterTask new
-		importerClass: SmalltalkImporter;
-		doNotRunCandidateOperator; 
-		importingContext: (MooseImportingContext new 
-										importPackage;
-										importInheritance;
-										importAccess;
-										mergeClassAndMetaclass ; yourself).
+	pharoImporterTask := FamixStPharoImporterTask new
+		                     doNotRunCandidateOperator;
+		                     importingContext: (FamixStImporterContext new
+				                      importPackage;
+				                      importInheritance;
+				                      importAccess;
+				                      mergeClassAndMetaclass;
+				                      yourself)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseSmalltalkImporterSubclassesTest >> testDoNotImportSubClasses [
 
 	self pharoImporterTask
@@ -59,7 +61,7 @@ MooseSmalltalkImporterSubclassesTest >> testDoNotImportSubClasses [
 		((model allClasses collect: #name) includes: 'SubRootModelTwo')
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseSmalltalkImporterSubclassesTest >> testImportSubClasses [
 
 	self pharoImporterTask

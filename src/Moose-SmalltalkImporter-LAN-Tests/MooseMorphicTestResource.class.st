@@ -1,13 +1,14 @@
 Class {
-	#name : #MooseMorphicTestResource,
-	#superclass : #SmalltalkModelTestResource,
-	#category : #'Moose-SmalltalkImporter-LAN-Tests'
+	#name : 'MooseMorphicTestResource',
+	#superclass : 'SmalltalkModelTestResource',
+	#category : 'Moose-SmalltalkImporter-LAN-Tests',
+	#package : 'Moose-SmalltalkImporter-LAN-Tests'
 }
 
-{ #category : #setup }
+{ #category : 'setup' }
 MooseMorphicTestResource >> importModel [
 	| importer |
-	importer := MoosePharoImporterTask new.
+	importer := FamixStPharoImporterTask new.
 	importer importingContext mergeClassAndMetaclass.
 	importer
 		runCandidateOperator;

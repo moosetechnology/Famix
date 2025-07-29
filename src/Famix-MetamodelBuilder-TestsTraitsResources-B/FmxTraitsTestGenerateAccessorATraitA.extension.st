@@ -1,6 +1,6 @@
-Extension { #name : #FmxTraitsTestGenerateAccessorATraitA }
+Extension { #name : 'FmxTraitsTestGenerateAccessorATraitA' }
 
-{ #category : #'*Famix-MetamodelBuilder-TestsTraitsResources-B-accessing' }
+{ #category : '*Famix-MetamodelBuilder-TestsTraitsResources-B-accessing' }
 FmxTraitsTestGenerateAccessorATraitA >> relationToB [
 	"Relation named: #relationToB type: #FmxTraitsTestGenerateAccessorBTraitB opposite: #relationToA"
 
@@ -10,7 +10,7 @@ FmxTraitsTestGenerateAccessorATraitA >> relationToB [
 	^ self attributeAt: #relationToB ifAbsent: [ nil ]
 ]
 
-{ #category : #'*Famix-MetamodelBuilder-TestsTraitsResources-B-accessing' }
+{ #category : '*Famix-MetamodelBuilder-TestsTraitsResources-B-accessing' }
 FmxTraitsTestGenerateAccessorATraitA >> relationToB: anObject [
 
 	<generated>

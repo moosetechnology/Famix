@@ -1,10 +1,12 @@
 Class {
-	#name : #FamixTestComposed2CustomEntity2,
-	#superclass : #FamixTestComposed2Entity,
-	#category : #'Famix-TestComposedSubmetamodel2-Entities-Entities'
+	#name : 'FamixTestComposed2CustomEntity2',
+	#superclass : 'FamixTestComposed2Entity',
+	#category : 'Famix-TestComposedSubmetamodel2-Entities-Entities',
+	#package : 'Famix-TestComposedSubmetamodel2-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTestComposed2CustomEntity2 class >> annotation [
 
 	<FMClass: #CustomEntity2 super: #FamixTestComposed2Entity>

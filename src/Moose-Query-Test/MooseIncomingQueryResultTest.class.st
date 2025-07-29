@@ -1,15 +1,16 @@
 Class {
-	#name : #MooseIncomingQueryResultTest,
-	#superclass : #MooseQueryResultTest,
-	#category : #'Moose-Query-Test'
+	#name : 'MooseIncomingQueryResultTest',
+	#superclass : 'MooseQueryResultTest',
+	#category : 'Moose-Query-Test',
+	#package : 'Moose-Query-Test'
 }
 
-{ #category : #asserting }
+{ #category : 'asserting' }
 MooseIncomingQueryResultTest class >> shouldInheritSelectors [
 	^ true
 ]
 
-{ #category : #helper }
+{ #category : 'helper' }
 MooseIncomingQueryResultTest >> actualClass [
 	^ MooseIncomingQueryResult
 ]

@@ -1,22 +1,24 @@
 Class {
-	#name : #FamixAbstractFileAnchorTest,
-	#superclass : #FamixSourceAnchorTest,
-	#category : #'Famix-Test1-Tests-SourceAnchor'
+	#name : 'FamixAbstractFileAnchorTest',
+	#superclass : 'FamixSourceAnchorTest',
+	#category : 'Famix-Test1-Tests-SourceAnchor',
+	#package : 'Famix-Test1-Tests',
+	#tag : 'SourceAnchor'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixAbstractFileAnchorTest class >> isAbstract [
 	^ self = FamixAbstractFileAnchorTest
 ]
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 FamixAbstractFileAnchorTest >> anchorForClassTest [
 	"I should return a file anchor of a class for some tests as testLineCount."
 
 	^ self subclassResponsibility
 ]
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 FamixAbstractFileAnchorTest >> sourceCodeForTest [
 "We do not care that it is Java or not, we just need code. This test is on FamixTest1Anchor"
 	^ 'package goosegame.dice;
@@ -42,14 +44,14 @@ public class Dice9 implements Dice {
 }'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixAbstractFileAnchorTest >> testFileNameHasOnlySlashes [
 	self 
 		assert: (self actualClass new fileName: 'a\b/c\d/ef') fileName
 		equals: 'a/b/c/d/ef'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixAbstractFileAnchorTest >> testHasSource [
 	| anchor |
 	anchor := self anchorForClassTest.
@@ -59,12 +61,12 @@ FamixAbstractFileAnchorTest >> testHasSource [
 	self deny: anchor hasSource
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixAbstractFileAnchorTest >> testIsFileAnchor [
 	self assert: self actualClass new isFileAnchor
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixAbstractFileAnchorTest >> testLineCount [
 	| file anchor |
 	(file := FileSystem memory / 'test.txt')
@@ -75,7 +77,7 @@ FamixAbstractFileAnchorTest >> testLineCount [
 	self assert: anchor lineCount equals: 17
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixAbstractFileAnchorTest >> testLineCountWithCRLF [
 	| file anchor |
 	(file := FileSystem memory / 'test.txt')
@@ -86,7 +88,7 @@ FamixAbstractFileAnchorTest >> testLineCountWithCRLF [
 	self assert: anchor lineCount equals: 17
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixAbstractFileAnchorTest >> testSourceText [
 	^ self subclassResponsibility
 ]

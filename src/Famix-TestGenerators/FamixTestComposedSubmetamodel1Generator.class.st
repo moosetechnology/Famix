@@ -1,6 +1,6 @@
 Class {
-	#name : #FamixTestComposedSubmetamodel1Generator,
-	#superclass : #FamixBasicInfrastructureGenerator,
+	#name : 'FamixTestComposedSubmetamodel1Generator',
+	#superclass : 'FamixBasicInfrastructureGenerator',
 	#instVars : [
 		'classEntity',
 		'method',
@@ -10,10 +10,11 @@ Class {
 		'customEntity4',
 		'customEntity5'
 	],
-	#category : #'Famix-TestGenerators'
+	#category : 'Famix-TestGenerators',
+	#package : 'Famix-TestGenerators'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTestComposedSubmetamodel1Generator class >> packageName [ 
 
 	^ 'Famix-TestComposedSubmetamodel1-Entities'
@@ -21,13 +22,13 @@ FamixTestComposedSubmetamodel1Generator class >> packageName [
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTestComposedSubmetamodel1Generator class >> prefix [
 
 	^ #FamixTestComposed1
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixTestComposedSubmetamodel1Generator >> defineClasses [
 	super defineClasses.
 
@@ -40,7 +41,7 @@ FamixTestComposedSubmetamodel1Generator >> defineClasses [
 	customEntity5 := builder newClassNamed: #CustomEntity5
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixTestComposedSubmetamodel1Generator >> defineHierarchy [
 	super defineHierarchy.
 

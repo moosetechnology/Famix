@@ -2,40 +2,42 @@
 Represents a property containing a ""primitive"" type: String, Number, Boolean
 "
 Class {
-	#name : #FmxMBTypedProperty,
-	#superclass : #FmxMBProperty,
+	#name : 'FmxMBTypedProperty',
+	#superclass : 'FmxMBProperty',
 	#instVars : [
 		'propertyType',
 		'multivalued',
 		'defaultValue'
 	],
-	#category : #'Famix-MetamodelBuilder-Core-Implementation'
+	#category : 'Famix-MetamodelBuilder-Core-Implementation',
+	#package : 'Famix-MetamodelBuilder-Core',
+	#tag : 'Implementation'
 }
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 FmxMBTypedProperty >> acceptVisitor: aVisitor [
 
 	^ aVisitor visitTypedProperty: self.
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FmxMBTypedProperty >> asSlot [
 	self propertyType ifNil: [ FmxMBIncompletePropertyDefiniton signal ].
 
 	^ self builder environment slotNamed: self name asSymbol defaultValue: self defaultValue 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBTypedProperty >> defaultValue [
 	^ defaultValue
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBTypedProperty >> defaultValue: aValue [
 	defaultValue := aValue
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FmxMBTypedProperty >> generateGetterIn: aClassOrTrait [
 
 	| methodSource propertyDefinition commentDefinition pragmaFormat |
@@ -43,7 +45,7 @@ FmxMBTypedProperty >> generateGetterIn: aClassOrTrait [
 	pragmaFormat := self defaultValue ifNil: [ '<FMProperty: #{1} type: #{2}>' ] 
 											   ifNotNil: [ '<FMProperty: #{1} type: #{2} defaultValue: {3}>' ]. 
 	propertyDefinition := pragmaFormat
-		format: { self name. self propertyType. self defaultValue }.
+		format: { self name. self propertyType. self defaultValue printString}.
 
 	commentDefinition := self comment
 		ifNotEmpty: [ '<FMComment: {1}>' format: { self comment printString } ].
@@ -58,7 +60,7 @@ FmxMBTypedProperty >> generateGetterIn: aClassOrTrait [
 			ifNotEmpty: [ s tab; nextPutAll: commentDefinition; cr].
 		s tab; nextPutAll: '^ '; nextPutAll: self name.
 		self defaultValue ifNotNil: [
-			s nextPutAll: (' ifNil: [ {1} := {2} ]' format: { self name. self defaultValue }) ] ].
+			s nextPutAll: (' ifNil: [ {1} := {2} ]' format: { self name. self defaultValue printString }) ] ].
 
 	self builder environment compile: methodSource in: aClassOrTrait classified: 'accessing'.	
 	
@@ -66,7 +68,7 @@ FmxMBTypedProperty >> generateGetterIn: aClassOrTrait [
 	
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FmxMBTypedProperty >> generateSetterIn: aClassOrTrait [
 	self builder environment
 		compile:
@@ -77,39 +79,39 @@ FmxMBTypedProperty >> generateSetterIn: aClassOrTrait [
 		classified: 'accessing'
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FmxMBTypedProperty >> hasDefaultValue [
 	^ defaultValue isNotNil
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FmxMBTypedProperty >> initialize [
 	super initialize.
 	multivalued := false
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBTypedProperty >> isMultivalued [
 
 	^ multivalued
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBTypedProperty >> multivalued [
 	multivalued := true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBTypedProperty >> multivalued: anObject [
 	multivalued := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBTypedProperty >> propertyType [
 	^ propertyType
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBTypedProperty >> propertyType: anObject [
 	propertyType := anObject
 ]

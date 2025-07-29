@@ -2,15 +2,16 @@
 I am a test resource building a FamixStModel with the package blueprint test resource entities.
 "
 Class {
-	#name : #PackageBlueprintTestResource,
-	#superclass : #SmalltalkModelTestResource,
-	#category : #'Famix-PharoSmalltalk-Tests'
+	#name : 'PackageBlueprintTestResource',
+	#superclass : 'SmalltalkModelTestResource',
+	#category : 'Famix-PharoSmalltalk-Tests',
+	#package : 'Famix-PharoSmalltalk-Tests'
 }
 
-{ #category : #setup }
+{ #category : 'setup' }
 PackageBlueprintTestResource >> importModel [
-	MoosePharoImporterTask new
-		importerClass: SmalltalkImporter;
+
+	FamixStPharoImporterTask new
 		model: model;
 		addFromPackageNamed: #'Moose-TestResources-PackageBlueprint-P1';
 		addFromPackageNamed: #'Moose-TestResources-PackageBlueprint-P2';

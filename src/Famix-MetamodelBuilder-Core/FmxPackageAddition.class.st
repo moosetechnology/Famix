@@ -16,33 +16,46 @@ Internal Representation and Key Implementation Points.
 	packageName:		<aString>		Name of the package to create.
 "
 Class {
-	#name : #FmxPackageAddition,
-	#superclass : #FmxCodeChange,
+	#name : 'FmxPackageAddition',
+	#superclass : 'FmxCodeChange',
 	#instVars : [
 		'packageName'
 	],
-	#category : #'Famix-MetamodelBuilder-Core-Changes'
+	#category : 'Famix-MetamodelBuilder-Core-Changes',
+	#package : 'Famix-MetamodelBuilder-Core',
+	#tag : 'Changes'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 FmxPackageAddition class >> named: aName [
 	^ self new
 		packageName: aName;
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxPackageAddition >> apply [
-	RPackageOrganizer default createPackageNamed: self packageName
+
+	self packageOrganizer ensurePackage: self packageName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxPackageAddition >> packageName [ 
 
 	^ packageName
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FmxPackageAddition >> packageName: aPackageName [
 	packageName := aPackageName
+]
+
+{ #category : 'printing' }
+FmxPackageAddition >> printOn: aStream [
+
+	super printOn: aStream.
+	aStream
+		nextPut: $(;
+		nextPutAll: (packageName ifNil: [ #unamed ]);
+		nextPut: $)
 ]

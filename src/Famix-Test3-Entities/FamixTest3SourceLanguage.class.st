@@ -1,12 +1,26 @@
+"
+## Relations
+======================
+
+### Other
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `sourcedEntities` | `FamixTSourceLanguage` | `declaredSourceLanguage` | `FamixTWithSourceLanguages` | References to the entities saying explicitly that are written in this language.|
+
+
+
+"
 Class {
-	#name : #FamixTest3SourceLanguage,
-	#superclass : #FamixTest3Entity,
+	#name : 'FamixTest3SourceLanguage',
+	#superclass : 'FamixTest3Entity',
 	#traits : 'FamixTSourceLanguage',
 	#classTraits : 'FamixTSourceLanguage classTrait',
-	#category : #'Famix-Test3-Entities-Entities'
+	#category : 'Famix-Test3-Entities-Entities',
+	#package : 'Famix-Test3-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTest3SourceLanguage class >> annotation [
 
 	<FMClass: #SourceLanguage super: #FamixTest3Entity>

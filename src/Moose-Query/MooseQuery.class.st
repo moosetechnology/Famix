@@ -122,22 +122,24 @@ More examples:
 
 "
 Class {
-	#name : #MooseQuery,
-	#superclass : #Object,
+	#name : 'MooseQuery',
+	#superclass : 'Object',
 	#instVars : [
 		'receiver'
 	],
-	#category : #'Moose-Query-Core'
+	#category : 'Moose-Query-Core',
+	#package : 'Moose-Query',
+	#tag : 'Core'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MooseQuery class >> receiver: anEntity [
 	^ self new
 		receiver: anEntity;
 		yourself
 ]
 
-{ #category : #scoping }
+{ #category : 'scoping' }
 MooseQuery >> ancestors [
 	^ MQScopeQuery new
 		receiver: receiver;
@@ -145,7 +147,7 @@ MooseQuery >> ancestors [
 		yourself
 ]
 
-{ #category : #scoping }
+{ #category : 'scoping' }
 MooseQuery >> descendants [
 	^ MQScopeQuery new
 		receiver: receiver;
@@ -153,7 +155,7 @@ MooseQuery >> descendants [
 		yourself
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 MooseQuery >> has [
 	^ MQNavigationQuery new
 		receiver: receiver;
@@ -161,14 +163,14 @@ MooseQuery >> has [
 		yourself
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 MooseQuery >> incoming [
 	^ (MQNavigationQuery directionStrategy: MQNavigationIncomingDirectionStrategy)
 		receiver: receiver;
 		yourself
 ]
 
-{ #category : #scoping }
+{ #category : 'scoping' }
 MooseQuery >> lineage [
 	^ MQScopeQuery new
 		receiver: receiver;
@@ -176,31 +178,31 @@ MooseQuery >> lineage [
 		yourself
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 MooseQuery >> navigation: aSymbol [
 	^ (MQNavigationQuery direction: aSymbol)
 		receiver: receiver;
 		yourself
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 MooseQuery >> outgoing [
 	^ (MQNavigationQuery directionStrategy: MQNavigationOutgoingDirectionStrategy)
 		receiver: receiver;
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseQuery >> receiver [
 	^ receiver
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseQuery >> receiver: anObject [
 	receiver := anObject
 ]
 
-{ #category : #relations }
+{ #category : 'relations' }
 MooseQuery >> relations [
 
 	^ MQRelationQuery new

@@ -1,12 +1,32 @@
+"
+## Relations
+======================
+
+### Other
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `receivingInvocations` | `FamixTInvocationsReceiver` | `receiver` | `FamixTInvocation` | List of invocations performed on this entity (considered as the receiver)|
+
+
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+|---|
+| `name` | `String` | nil | Basic name of the entity, not full reference.|
+
+"
 Class {
-	#name : #FamixStNamedEntity,
-	#superclass : #FamixStSourcedEntity,
+	#name : 'FamixStNamedEntity',
+	#superclass : 'FamixStSourcedEntity',
 	#traits : 'FamixTInvocationsReceiver + FamixTNamedEntity + TEntityMetaLevelDependency',
 	#classTraits : 'FamixTInvocationsReceiver classTrait + FamixTNamedEntity classTrait + TEntityMetaLevelDependency classTrait',
-	#category : #'Famix-PharoSmalltalk-Entities-Entities'
+	#category : 'Famix-PharoSmalltalk-Entities-Entities',
+	#package : 'Famix-PharoSmalltalk-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixStNamedEntity class >> annotation [
 
 	<FMClass: #NamedEntity super: #FamixStSourcedEntity>
@@ -16,14 +36,21 @@ FamixStNamedEntity class >> annotation [
 	^ self
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixStNamedEntity class >> isAbstract [
 
 	<generated>
 	^ self == FamixStNamedEntity
 ]
 
-{ #category : #'Famix-Extensions' }
+{ #category : 'testing' }
+FamixStNamedEntity >> isNamedEntity [
+
+	<generated>
+	^ true
+]
+
+{ #category : 'Famix-Extensions' }
 FamixStNamedEntity >> stubFormattedName [
 	 ^ self isStub 
 		ifTrue: [ Text 

@@ -1,6 +1,6 @@
-Extension { #name : #SmallDictionary }
+Extension { #name : 'SmallDictionary' }
 
-{ #category : #'*Moose-Core' }
+{ #category : '*Moose-Core' }
 SmallDictionary >> directAt: key [
 	"I exist only for performance reasons. I avoid to create a #ifAbsent: block. In moose query we call this so much that the creation cost of the block and its garbage collection is too high :("
 

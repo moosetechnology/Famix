@@ -1,6 +1,6 @@
 Class {
-	#name : #FmxMBImportingContextTest,
-	#superclass : #FmxMBTestCase,
+	#name : 'FmxMBImportingContextTest',
+	#superclass : 'FmxMBTestCase',
 	#instVars : [
 		'access',
 		'variable',
@@ -10,10 +10,12 @@ Class {
 		'method',
 		'generatedContext'
 	],
-	#category : #'Famix-MetamodelBuilder-Tests'
+	#category : 'Famix-MetamodelBuilder-Tests-Tests',
+	#package : 'Famix-MetamodelBuilder-Tests',
+	#tag : 'Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 FmxMBImportingContextTest >> setUp [
 
 	super setUp.
@@ -37,7 +39,7 @@ FmxMBImportingContextTest >> setUp [
 		                    #TstImportingContext
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBImportingContextTest >> testDefineImport [
 
 	| localMethod |
@@ -48,13 +50,13 @@ FmxMBImportingContextTest >> testDefineImport [
 			 'self importConcreteEntity: (self class fm3ClassNamed: #Method')
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBImportingContextTest >> testGeneratedContextClass [
 	self assert: generatedContext isNotNil.
 	self assert: generatedContext superclass name equals: #FamixImportingContext
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBImportingContextTest >> testNotGenerated [
 
 	builder := FamixMetamodelBuilder forTesting.
@@ -70,7 +72,7 @@ FmxMBImportingContextTest >> testNotGenerated [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBImportingContextTest >> testNotGeneratedForEmptyBuilder [
 
 	builder := FamixMetamodelBuilder forTesting.
@@ -83,7 +85,7 @@ FmxMBImportingContextTest >> testNotGeneratedForEmptyBuilder [
 	self assert: generatedContext isNil
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBImportingContextTest >> testShouldImport [
 
 	| localMethod |

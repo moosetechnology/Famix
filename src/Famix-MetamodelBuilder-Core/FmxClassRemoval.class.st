@@ -17,32 +17,52 @@ Internal Representation and Key Implementation Points.
 
 "
 Class {
-	#name : #FmxClassRemoval,
-	#superclass : #FmxCodeChange,
+	#name : 'FmxClassRemoval',
+	#superclass : 'FmxCodeChange',
 	#instVars : [
 		'class'
 	],
-	#category : #'Famix-MetamodelBuilder-Core-Changes'
+	#category : 'Famix-MetamodelBuilder-Core-Changes',
+	#package : 'Famix-MetamodelBuilder-Core',
+	#tag : 'Changes'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 FmxClassRemoval class >> class: aClass [
 	^ self new
 		classToRemove: aClass;
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxClassRemoval >> apply [
 	self classToRemove removeFromSystem
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxClassRemoval >> classToRemove [
 	^ class
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxClassRemoval >> classToRemove: anObject [
 	class := anObject
+]
+
+{ #category : 'testing' }
+FmxClassRemoval >> isRemoval [
+
+	^ true
+]
+
+{ #category : 'printing' }
+FmxClassRemoval >> printOn: aStream [
+
+	super printOn: aStream.
+	aStream
+		nextPut: $(;
+		nextPutAll: (class
+				 ifNotNil: [ class name ]
+				 ifNil: [ #unamed ]);
+		nextPut: $)
 ]

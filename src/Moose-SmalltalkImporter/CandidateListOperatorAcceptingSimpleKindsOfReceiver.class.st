@@ -6,12 +6,14 @@ a CandidateListOperatorAcceptingSimpleKindsOfReceiver compute a list of possible
 - the receiver is 'super'
 "
 Class {
-	#name : #CandidateListOperatorAcceptingSimpleKindsOfReceiver,
-	#superclass : #AbstractCandidateListOperator,
-	#category : #'Moose-SmalltalkImporter'
+	#name : 'CandidateListOperatorAcceptingSimpleKindsOfReceiver',
+	#superclass : 'AbstractCandidateListOperator',
+	#category : 'Moose-SmalltalkImporter-Operators',
+	#package : 'Moose-SmalltalkImporter',
+	#tag : 'Operators'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 CandidateListOperatorAcceptingSimpleKindsOfReceiver >> computeCandidateListFor: anInvocation [
 	anInvocation receiver
 		ifNotNil: [ :receiver | 

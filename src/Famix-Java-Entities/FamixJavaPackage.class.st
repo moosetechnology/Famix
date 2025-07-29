@@ -1,12 +1,49 @@
+"
+## Relations
+======================
+
+### Parents
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `parentPackage` | `FamixTPackageable` | `childEntities` | `FamixTPackage` | Package containing the entity in the code structure (if applicable)|
+
+### Children
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `childEntities` | `FamixTPackage` | `parentPackage` | `FamixTPackageable` | |
+| `comments` | `FamixTWithComments` | `commentedEntity` | `FamixTComment` | List of comments for the entity|
+
+### Incoming dependencies
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `incomingImports` | `FamixTImportable` | `importedEntity` | `FamixTImport` | List of imports of this entity|
+
+### Other
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
+
+
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+|---|
+| `isStub` | `Boolean` | false | Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.|
+| `name` | `String` | nil | Basic name of the entity, not full reference.|
+
+"
 Class {
-	#name : #FamixJavaPackage,
-	#superclass : #FamixJavaContainerEntity,
+	#name : 'FamixJavaPackage',
+	#superclass : 'FamixJavaContainerEntity',
 	#traits : 'FamixTImportable + FamixTPackage + FamixTPackageable + FamixTWithComments',
 	#classTraits : 'FamixTImportable classTrait + FamixTPackage classTrait + FamixTPackageable classTrait + FamixTWithComments classTrait',
-	#category : #'Famix-Java-Entities-Entities'
+	#category : 'Famix-Java-Entities-Entities',
+	#package : 'Famix-Java-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixJavaPackage class >> annotation [
 
 	<FMClass: #Package super: #FamixJavaContainerEntity>
@@ -15,13 +52,13 @@ FamixJavaPackage class >> annotation [
 	^ self
 ]
 
-{ #category : #'Famix-Implementation' }
+{ #category : 'Famix-Implementation' }
 FamixJavaPackage >> abstractClasses [
 
 	^ self classes select: [:c | c isAbstract]
 ]
 
-{ #category : #'Famix-Extensions-metrics' }
+{ #category : 'Famix-Extensions-metrics' }
 FamixJavaPackage >> abstractness [
 	"Abstractness is the ratio between the number of abstract classes and the total number of classes in a package, in the range [0, 1]. 0 means the package is fully concrete, 1 it is fully abstract."
 
@@ -35,12 +72,19 @@ FamixJavaPackage >> abstractness [
 	^ (nsClasses select: [ :c | c isAbstract ]) size / nsClasses size
 ]
 
-{ #category : #adding }
+{ #category : 'visitor' }
+FamixJavaPackage >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaPackage: self
+]
+
+{ #category : 'adding' }
 FamixJavaPackage >> addChildNamedEntity: aNamedEntity [
 	childEntities add: aNamedEntity
 ]
 
-{ #category : #'Famix-Extensions-metrics' }
+{ #category : 'Famix-Extensions-metrics' }
 FamixJavaPackage >> afferentCoupling [
 	"Afferent coupling for a package is the number of classes that depend upon this package"
 
@@ -50,13 +94,13 @@ FamixJavaPackage >> afferentCoupling [
 	^ ((self queryAllIncoming atScope: FamixTType) outOfParentUsing: FamixTPackage) size
 ]
 
-{ #category : #'Famix-Extensions' }
+{ #category : 'Famix-Extensions' }
 FamixJavaPackage >> allClasses [
 	self flag: #check. "Maybe we should just have #classes later..."
 	^ self classes
 ]
 
-{ #category : #'Famix-Extensions-metrics' }
+{ #category : 'Famix-Extensions-metrics' }
 FamixJavaPackage >> bunchCohesion [
 	"Computing cohesion (Bunch formula)"
 
@@ -71,7 +115,7 @@ FamixJavaPackage >> bunchCohesion [
 	^ intraConnectivities / myClasses size squared asFloat
 ]
 
-{ #category : #'Famix-Extensions-metrics' }
+{ #category : 'Famix-Extensions-metrics' }
 FamixJavaPackage >> bunchCouplingWith: aPackage [
 	"Computing coupling (Bunch formula) between receiver and aPackage"
 
@@ -91,7 +135,7 @@ FamixJavaPackage >> bunchCouplingWith: aPackage [
 	^ interConnectivities / (2 * myClasses size * otherClasses size) asFloat
 ]
 
-{ #category : #'Famix-Extensions-metrics' }
+{ #category : 'Famix-Extensions-metrics' }
 FamixJavaPackage >> bunchCouplingWithAll [
 	"Computing coupling (Bunch formula) between receiver and all packages"
 
@@ -110,22 +154,22 @@ FamixJavaPackage >> bunchCouplingWithAll [
 	^ interConnectivities / (2 * myClasses size * (allClasses size - myClasses size)) asFloat
 ]
 
-{ #category : #'Famix-Extensions' }
+{ #category : 'Famix-Extensions' }
 FamixJavaPackage >> childrenOfMyKind [
 	^ self childEntities allWithSubTypesOf: self class
 ]
 
-{ #category : #'Famix-Extensions-accessing' }
+{ #category : 'Famix-Extensions-accessing' }
 FamixJavaPackage >> containedEntities [
 	^ super containedEntities union: self childEntities
 ]
 
-{ #category : #'Famix-Extensions-accessing' }
+{ #category : 'Famix-Extensions-accessing' }
 FamixJavaPackage >> containedEntities: collection [
 	self definedClasses: collection.
 ]
 
-{ #category : #'Famix-Extensions-metrics' }
+{ #category : 'Famix-Extensions-metrics' }
 FamixJavaPackage >> distance [
 	"D = A + I - 1. A package should be balanced between abstractness and instability, i.e., somewhere between abstract and stable or concrete and unstable. This rule defines the main sequence by the equation A + I - 1 = 0. D is the distance to the main sequence."
 	<FMProperty: #distance type: #Number>
@@ -142,7 +186,7 @@ FamixJavaPackage >> distance [
 	
 ]
 
-{ #category : #'Famix-Extensions-metrics' }
+{ #category : 'Famix-Extensions-metrics' }
 FamixJavaPackage >> efferentCoupling [
 	"Efferent coupling for a package is the number of classes it depends upon"
 
@@ -152,7 +196,7 @@ FamixJavaPackage >> efferentCoupling [
 	^ ((self queryAllOutgoing outOfParentUsing: FamixTPackage) atScope: FamixTType) size
 ]
 
-{ #category : #'Famix-Extensions-metrics' }
+{ #category : 'Famix-Extensions-metrics' }
 FamixJavaPackage >> instability [
 	"I =	Ce(P)/(Ce(P)+Ca(P)), in the range [0, 1]. 0 means package is maximally stable (i.e., no dependency to other packages and can not change without big consequences), 1 means it is unstable."
 
@@ -168,7 +212,12 @@ FamixJavaPackage >> instability [
 	^ efferentCoupling / (efferentCoupling + afferentCoupling)
 ]
 
-{ #category : #'Famix-Extensions-metrics' }
+{ #category : 'testing' }
+FamixJavaPackage >> isTopLevelPackage [
+	^ self topLevelPackage == self.
+]
+
+{ #category : 'Famix-Extensions-metrics' }
 FamixJavaPackage >> martinCohesion [
 	"Computing cohesion as described by Robert C. Martin"
 
@@ -183,37 +232,36 @@ FamixJavaPackage >> martinCohesion [
 	^ ((intraConnectivities + 1) / myClasses size) asFloat
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixJavaPackage >> methods [
 	^ self cacheAt: #methods ifAbsentPut: [ self classes flatCollect: #methods ]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixJavaPackage >> mooseNameOn: stream [
 	| parent |
 	parent := self belongsTo.
 	parent ifNotNil: 
 		[ parent mooseNameOn: stream.
 		stream
-			nextPut: $:;
-			nextPut: $: ].
+			nextPut: $. ].
 	self name ifNotNil: [stream nextPutAll: self name]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixJavaPackage >> numberOfClientPackages [
 	<FMProperty: #numberOfClientPackages type: #Number>
 	<FMComment: 'The number of packages which depend on this package'>
 	<derived>
-	^ self lookUpPropertyNamed: #numberOfClientPackages computedAs: [ self allClients size ]
+	^ self lookUpPropertyNamed: #numberOfClientPackages computedAs: [ self allClientsAtMyScope size ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixJavaPackage >> numberOfClientPackages: aNumber [
 	self cacheAt: #numberOfClientPackages put: aNumber
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixJavaPackage >> numberOfMethods [
 	<FMProperty: #numberOfMethods type: #Number>
 	<FMComment: 'The number of methods in a package'>
@@ -223,12 +271,12 @@ FamixJavaPackage >> numberOfMethods [
 		computedAs: [ self types inject: 0 into: [ :sum :each | sum + each numberOfMethods ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixJavaPackage >> numberOfMethods: aNumber [
 	self cacheAt: #numberOfMethods put: aNumber
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixJavaPackage >> printOn: aStream [ 
 	| parent |
 	parent := self parentPackage.
@@ -240,7 +288,7 @@ FamixJavaPackage >> printOn: aStream [
 	aStream nextPutAll: ' (Package)'
 ]
 
-{ #category : #'Famix-Extensions-metrics' }
+{ #category : 'Famix-Extensions-metrics' }
 FamixJavaPackage >> relativeImportanceForSystem [
 	<FMProperty: #relativeImportanceForSystem type: #Number>
 	<derived>
@@ -254,4 +302,9 @@ FamixJavaPackage >> relativeImportanceForSystem [
 							]
 						ifFalse: [0]
 						]
+]
+
+{ #category : 'testing' }
+FamixJavaPackage >> topLevelPackage [
+	^ (self parentPackage isNotNil and: [ self parentPackage childEntities anySatisfy: #isType ] ) ifTrue: [ self parentPackage topLevelPackage ] ifFalse: [ self  ]
 ]

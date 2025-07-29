@@ -9,12 +9,14 @@ a CandidateListOperatorAcceptingBasicAndVariableReceivers  compute a list of pos
 
 "
 Class {
-	#name : #CandidateListOperatorAcceptingBasicAndVariableReceivers,
-	#superclass : #AbstractCandidateListOperator,
-	#category : #'Moose-SmalltalkImporter'
+	#name : 'CandidateListOperatorAcceptingBasicAndVariableReceivers',
+	#superclass : 'AbstractCandidateListOperator',
+	#category : 'Moose-SmalltalkImporter-Operators',
+	#package : 'Moose-SmalltalkImporter',
+	#tag : 'Operators'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 CandidateListOperatorAcceptingBasicAndVariableReceivers >> computeCandidateListFor: anInvocation [
 	anInvocation receiver
 		ifNotNil: [ :receiver | 

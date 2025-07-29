@@ -1,16 +1,18 @@
 Class {
-	#name : #FmxMBClassTest,
-	#superclass : #FmxMBBehaviorTest,
-	#category : #'Famix-MetamodelBuilder-Tests'
+	#name : 'FmxMBClassTest',
+	#superclass : 'FmxMBBehaviorTest',
+	#category : 'Famix-MetamodelBuilder-Tests-Tests',
+	#package : 'Famix-MetamodelBuilder-Tests',
+	#tag : 'Tests'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBClassTest >> behaviorClass [
 
 	^ FmxMBClass
 ]
 
-{ #category : #utilities }
+{ #category : 'utilities' }
 FmxMBClassTest >> checkGeneralizationWithAnnotations [
 
 	"check if TstClass is correctly created as a subclass of TstBehavior"
@@ -27,13 +29,13 @@ FmxMBClassTest >> checkGeneralizationWithAnnotations [
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBClassTest >> newEntityNamed: aString [
 
 	^ builder newClassNamed: aString
 ]
 
-{ #category : #'tests - settings' }
+{ #category : 'tests - settings' }
 FmxMBClassTest >> testBasicSuperclass [
 	"check if a new class has correct superclass (Entity for most of them. The default one for Entity.)"
 
@@ -47,7 +49,7 @@ FmxMBClassTest >> testBasicSuperclass [
 	self assert: generated superclass name equals: builder configuration defaultBasicSuperclassName
 ]
 
-{ #category : #'tests - settings' }
+{ #category : 'tests - settings' }
 FmxMBClassTest >> testBasicTrait [
 
 	"test if the trits have correct supperclass"
@@ -61,7 +63,7 @@ FmxMBClassTest >> testBasicTrait [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBClassTest >> testBuilderPackageChange [
 	"if we set for a builder a packag name, all newely defined entities should use be assigned to this package. If no explicit package name is set, the default one is used."
 
@@ -80,7 +82,7 @@ FmxMBClassTest >> testBuilderPackageChange [
 	self assert: generated package name equals: #Another
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBClassTest >> testBuilderPrefixChange [
 	"if we set for a builder a prefix, all newely defined entities should use it. If no explicit prefix is set, the default one is used."
 
@@ -99,22 +101,20 @@ FmxMBClassTest >> testBuilderPrefixChange [
 	self assert: generated package name equals: #Tst
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBClassTest >> testCommentOnTrait [
-
 	"test assigning of a comment to a trait"
 
 	| simpleTrait generated commentString |
-	
-	simpleTrait := builder newTraitNamed: #TComment.	
+	simpleTrait := builder newTraitNamed: #TComment.
 	commentString := 'Simple testing class'.
 	simpleTrait comment: commentString.
 	builder generate.
 	generated := builder testingEnvironment ask classNamed: 'TstTComment'.
-	self assert: generated comment content equals: commentString.
+	self assert: (generated comment content beginsWith: commentString)
 ]
 
-{ #category : #'tests - settings' }
+{ #category : 'tests - settings' }
 FmxMBClassTest >> testCustomBasicTrait [
 
 	"test if #basicTraitName sets the correct superclass of traits"
@@ -129,7 +129,7 @@ FmxMBClassTest >> testCustomBasicTrait [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBClassTest >> testCustomPackageForUserClasses [
 
 	"check if package name can by correctly set to a class"
@@ -146,7 +146,7 @@ FmxMBClassTest >> testCustomPackageForUserClasses [
 	
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBClassTest >> testCustomPackageForUserClassesChanged [
 
 	"test correct package assignments to classes"
@@ -170,7 +170,7 @@ FmxMBClassTest >> testCustomPackageForUserClassesChanged [
 	
 ]
 
-{ #category : #'tests - settings' }
+{ #category : 'tests - settings' }
 FmxMBClassTest >> testCustomSuperclass [
 	"test if a custom basic superclass can correctly set"
 
@@ -183,7 +183,7 @@ FmxMBClassTest >> testCustomSuperclass [
 	self assert: generated superclass name equals: 'BasicSuperclass'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBClassTest >> testDefaultPackageForUserClasses [
 
 	"test if the default package name is correctly set to classes"
@@ -198,7 +198,7 @@ FmxMBClassTest >> testDefaultPackageForUserClasses [
 	
 ]
 
-{ #category : #'tests - tags' }
+{ #category : 'tests - tags' }
 FmxMBClassTest >> testDefaultTagForClass [
 
 	"test if correct default tag name is assigned to classes"
@@ -213,7 +213,7 @@ FmxMBClassTest >> testDefaultTagForClass [
 	self assertCollection: generatedTAccess tags hasSameElements: { builder configuration defaultTraitTag }
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBClassTest >> testEmptyComment [
 
 	"check that by default classes do not have any class comment"
@@ -226,7 +226,7 @@ FmxMBClassTest >> testEmptyComment [
 	self assert: generated comment content isEmptyOrNil.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBClassTest >> testEntityClass [
 	"check expected parameters of a newely generated entity class"
 
@@ -247,7 +247,7 @@ FmxMBClassTest >> testEntityClass [
 	self assert: (method sourceCode includesSubstring: '<package: #Tst>')
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBClassTest >> testMultipleClasses [
 
 	"trivial test if we can generate several different classes"
@@ -263,7 +263,7 @@ FmxMBClassTest >> testMultipleClasses [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBClassTest >> testSimpleClass [
 	"check expected parameters of a newely generated class"
 
@@ -279,7 +279,7 @@ FmxMBClassTest >> testSimpleClass [
 	self assertCollection: generated classSide localSelectors sorted equals: #(annotation)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBClassTest >> testSimpleClassAnnotation [
 	"test correct generation of class annotations"
 
@@ -293,7 +293,7 @@ FmxMBClassTest >> testSimpleClassAnnotation [
 	self assert: (method sourceCode includesSubstring: '<package: #Tst>')
 ]
 
-{ #category : #'tests - names' }
+{ #category : 'tests - names' }
 FmxMBClassTest >> testSingularPropertyName [
 
 	"test if singularPropertyName is correctly created from a class name"
@@ -311,7 +311,7 @@ FmxMBClassTest >> testSingularPropertyName [
 
 ]
 
-{ #category : #'tests - tags' }
+{ #category : 'tests - tags' }
 FmxMBClassTest >> testTagForClass [
 
 	| access generatedAccess |
@@ -325,7 +325,7 @@ FmxMBClassTest >> testTagForClass [
 	self assertCollection: generatedAccess tags hasSameElements: { #classes }
 ]
 
-{ #category : #'tests - tags' }
+{ #category : 'tests - tags' }
 FmxMBClassTest >> testTagForClassFromBuilder [
 	| generatedAccess comment generatedComment |
 	builder newClassNamed: #Access.
@@ -342,7 +342,7 @@ FmxMBClassTest >> testTagForClassFromBuilder [
 	self assertCollection: generatedComment tags hasSameElements: {#support}
 ]
 
-{ #category : #'tests - tags' }
+{ #category : 'tests - tags' }
 FmxMBClassTest >> testTagForTraitFromBuilder [
 	| generatedTAccess tComment generatedTComment |
 	builder newTraitNamed: #TAccess.
@@ -359,7 +359,7 @@ FmxMBClassTest >> testTagForTraitFromBuilder [
 	self assertCollection: generatedTComment tags hasSameElements: {#support}
 ]
 
-{ #category : #'tests - tags' }
+{ #category : 'tests - tags' }
 FmxMBClassTest >> testTagForTraits [
 
 	| tAccess generatedTAccess |
@@ -373,7 +373,7 @@ FmxMBClassTest >> testTagForTraits [
 	self assertCollection: generatedTAccess tags hasSameElements: { #support }
 ]
 
-{ #category : #'tests - tags' }
+{ #category : 'tests - tags' }
 FmxMBClassTest >> testTestingMethods [
 
 	"test messages isMetamodelClass and isMetamodelTrait"

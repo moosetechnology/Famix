@@ -1,12 +1,26 @@
+"
+## Relations
+======================
+
+### Other
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `element` | `FamixTSourceAnchor` | `sourceAnchor` | `FamixTSourceEntity` | Enable the accessibility to the famix entity that this class is a source pointer for|
+
+
+
+"
 Class {
-	#name : #MooseMSEImporterTestSourceAnchor,
-	#superclass : #MooseMSEImporterTestEntity,
+	#name : 'MooseMSEImporterTestSourceAnchor',
+	#superclass : 'MooseMSEImporterTestEntity',
 	#traits : 'FamixTSourceAnchor',
 	#classTraits : 'FamixTSourceAnchor classTrait',
-	#category : #'Moose-Core-Tests-Entities-Entities'
+	#category : 'Moose-Core-Tests-Entities-Entities',
+	#package : 'Moose-Core-Tests-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 MooseMSEImporterTestSourceAnchor class >> annotation [
 
 	<FMClass: #SourceAnchor super: #MooseMSEImporterTestEntity>
@@ -16,7 +30,7 @@ MooseMSEImporterTestSourceAnchor class >> annotation [
 	^ self
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MooseMSEImporterTestSourceAnchor class >> isAbstract [
 
 	<generated>

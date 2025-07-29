@@ -1,12 +1,31 @@
+"
+## Relations
+======================
+
+### Parents
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `commentedEntity` | `FamixTComment` | `comments` | `FamixTWithComments` | Source code commented by the comment|
+
+### Other
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
+
+
+
+"
 Class {
-	#name : #FamixJavaComment,
-	#superclass : #FamixJavaSourcedEntity,
+	#name : 'FamixJavaComment',
+	#superclass : 'FamixJavaSourcedEntity',
 	#traits : 'FamixTComment',
 	#classTraits : 'FamixTComment classTrait',
-	#category : #'Famix-Java-Entities-Entities'
+	#category : 'Famix-Java-Entities-Entities',
+	#package : 'Famix-Java-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixJavaComment class >> annotation [
 
 	<FMClass: #Comment super: #FamixJavaSourcedEntity>
@@ -15,12 +34,19 @@ FamixJavaComment class >> annotation [
 	^ self
 ]
 
-{ #category : #converting }
+{ #category : 'visitor' }
+FamixJavaComment >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaComment: self
+]
+
+{ #category : 'converting' }
 FamixJavaComment >> asFamixJavaComment [
 	^ self
 ]
 
-{ #category : #deprecated }
+{ #category : 'deprecated' }
 FamixJavaComment >> belongsTo [
 	
 	^ self container

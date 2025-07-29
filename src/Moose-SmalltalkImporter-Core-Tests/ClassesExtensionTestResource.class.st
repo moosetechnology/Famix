@@ -1,11 +1,12 @@
 Class {
-	#name : #ClassesExtensionTestResource,
-	#superclass : #MooseModelTestResource,
-	#category : #'Moose-SmalltalkImporter-Core-Tests'
+	#name : 'ClassesExtensionTestResource',
+	#superclass : 'MooseModelTestResource',
+	#category : 'Moose-SmalltalkImporter-Core-Tests',
+	#package : 'Moose-SmalltalkImporter-Core-Tests'
 }
 
-{ #category : #hook }
+{ #category : 'hook' }
 ClassesExtensionTestResource >> importModel [
 
-	SmalltalkImporter new model: model; addPackageNamed: 'ReferenceModel' ; run.
+	FamixStImporter new model: model; addPackageNamed: 'ReferenceModel' ; run.
 ]

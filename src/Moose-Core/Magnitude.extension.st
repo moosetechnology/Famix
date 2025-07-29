@@ -1,6 +1,6 @@
-Extension { #name : #Magnitude }
+Extension { #name : 'Magnitude' }
 
-{ #category : #'*Moose-Core' }
+{ #category : '*Moose-Core' }
 Magnitude >> addUnavailableMetric: aClass [
 	^ aClass
 ]

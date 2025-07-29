@@ -1,10 +1,12 @@
 Class {
-	#name : #FmxMBStandardRelationSideGenerationStrategy,
-	#superclass : #FmxMBRelationSideGenerationStrategy,
-	#category : #'Famix-MetamodelBuilder-Core-Implementation'
+	#name : 'FmxMBStandardRelationSideGenerationStrategy',
+	#superclass : 'FmxMBRelationSideGenerationStrategy',
+	#category : 'Famix-MetamodelBuilder-Core-Implementation',
+	#package : 'Famix-MetamodelBuilder-Core',
+	#tag : 'Implementation'
 }
 
-{ #category : #generation }
+{ #category : 'generation' }
 FmxMBStandardRelationSideGenerationStrategy >> generateGetterCoreIn: aClassOrTrait on: aStream for: aRelationSide [
 
 	aStream
@@ -13,7 +15,7 @@ FmxMBStandardRelationSideGenerationStrategy >> generateGetterCoreIn: aClassOrTra
 		nextPutAll: aRelationSide name
 ]
 
-{ #category : #generation }
+{ #category : 'generation' }
 FmxMBStandardRelationSideGenerationStrategy >> generateSetterCoreIn: aClassOrTrait on: aStream for: aRelationSide [
 
 	aStream
@@ -24,7 +26,7 @@ FmxMBStandardRelationSideGenerationStrategy >> generateSetterCoreIn: aClassOrTra
 		ifFalse: [ aStream nextPutAll: ' value: anObject' ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FmxMBStandardRelationSideGenerationStrategy >> producesSlot [
 
 	^ true

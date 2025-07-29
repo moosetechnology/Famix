@@ -1,16 +1,29 @@
 "
 FamixTModule represents a that basically provides a simple scoping abstraction for a .C/.CPP/.H files.
 
+
+## Relations
+======================
+
+### Children
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `moduleEntities` | `FamixTModule` | `parentModule` | `FamixTDefinedInModule` | |
+
+
+
 "
 Trait {
-	#name : #FamixTModule,
+	#name : 'FamixTModule',
 	#instVars : [
 		'#moduleEntities => FMMany type: #FamixTDefinedInModule opposite: #parentModule'
 	],
-	#category : #'Famix-Traits-Module'
+	#category : 'Famix-Traits-Module',
+	#package : 'Famix-Traits',
+	#tag : 'Module'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTModule classSide >> annotation [
 
 	<FMClass: #TModule super: #Object>
@@ -19,14 +32,28 @@ FamixTModule classSide >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'visitor' }
+FamixTModule >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTModule: self
+]
+
+{ #category : 'accessing' }
 FamixTModule >> addModuleEntity: anObject [
 
 	moduleEntities add: anObject
 
 ]
 
-{ #category : #accessing }
+{ #category : 'testing' }
+FamixTModule >> isModule [
+
+	<generated>
+	^ true
+]
+
+{ #category : 'accessing' }
 FamixTModule >> moduleEntities [
 	"Relation named: #moduleEntities type: #FamixTDefinedInModule opposite: #parentModule"
 
@@ -35,7 +62,7 @@ FamixTModule >> moduleEntities [
 	^ moduleEntities
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTModule >> moduleEntities: anObject [
 
 	<generated>

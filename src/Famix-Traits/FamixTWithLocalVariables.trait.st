@@ -1,12 +1,26 @@
+"
+## Relations
+======================
+
+### Children
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `localVariables` | `FamixTWithLocalVariables` | `parentBehaviouralEntity` | `FamixTLocalVariable` | Variables locally defined by this behaviour.|
+
+
+
+"
 Trait {
-	#name : #FamixTWithLocalVariables,
+	#name : 'FamixTWithLocalVariables',
 	#instVars : [
 		'#localVariables => FMMany type: #FamixTLocalVariable opposite: #parentBehaviouralEntity'
 	],
-	#category : #'Famix-Traits-LocalVariable'
+	#category : 'Famix-Traits-LocalVariable',
+	#package : 'Famix-Traits',
+	#tag : 'LocalVariable'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTWithLocalVariables classSide >> annotation [
 
 	<FMClass: #TWithLocalVariables super: #Object>
@@ -15,12 +29,19 @@ FamixTWithLocalVariables classSide >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'visitor' }
+FamixTWithLocalVariables >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTWithLocalVariables: self
+]
+
+{ #category : 'accessing' }
 FamixTWithLocalVariables >> addLocalVariable: aLocalVariable [
 	localVariables add: aLocalVariable
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithLocalVariables >> localVariables [
 	"Relation named: #localVariables type: #FamixTLocalVariable opposite: #parentBehaviouralEntity"
 
@@ -30,7 +51,7 @@ FamixTWithLocalVariables >> localVariables [
 	^ localVariables
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithLocalVariables >> localVariables: anObject [
 
 	<generated>

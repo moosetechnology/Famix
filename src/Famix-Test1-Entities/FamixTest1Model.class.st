@@ -1,31 +1,41 @@
 "
 This is a the comment of the model class
+
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+|---|
+| `modelHasProperties` | `Object` | nil | |
+
 "
 Class {
-	#name : #FamixTest1Model,
-	#superclass : #MooseModel,
+	#name : 'FamixTest1Model',
+	#superclass : 'MooseModel',
 	#traits : 'FamixTest1TEntityCreator',
 	#classTraits : 'FamixTest1TEntityCreator classTrait',
 	#instVars : [
 		'#modelHasProperties => FMProperty'
 	],
-	#category : #'Famix-Test1-Entities-Model'
+	#category : 'Famix-Test1-Entities-Model',
+	#package : 'Famix-Test1-Entities',
+	#tag : 'Model'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest1Model class >> allSubmetamodelsPackagesNames [
 	<generated>
 	^ #(#'Moose-Query' #'Famix-Traits')
 ]
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTest1Model class >> annotation [
 	<FMClass: #FamixTest1Model super: #MooseModel>
 	<package: #'Famix-Test1-Entities'>
 	<generated>
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTest1Model class >> canBeImportedFromFile [
 
 	"Please keep this method even if it is the same as in superclass.
@@ -34,14 +44,14 @@ FamixTest1Model class >> canBeImportedFromFile [
 	^ false
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest1Model class >> importingContextClass [
 
 	<generated>
 	^ FamixTest1ImportingContext
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest1Model >> modelHasProperties [
 
 	<FMProperty: #modelHasProperties type: #Object>
@@ -49,7 +59,7 @@ FamixTest1Model >> modelHasProperties [
 	^ modelHasProperties
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest1Model >> modelHasProperties: anObject [
 	<generated>
 	modelHasProperties := anObject

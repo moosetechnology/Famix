@@ -1,12 +1,26 @@
+"
+## Relations
+======================
+
+### Other
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `dereferencedInvocations` | `FamixTWithDereferencedInvocations` | `referencer` | `FamixTDereferencedInvocation` | List of invocations performed on BehaviouralEntities referenced by this entity|
+
+
+
+"
 Trait {
-	#name : #FamixTWithDereferencedInvocations,
+	#name : 'FamixTWithDereferencedInvocations',
 	#instVars : [
 		'#dereferencedInvocations => FMMany type: #FamixTDereferencedInvocation opposite: #referencer'
 	],
-	#category : #'Famix-Traits-DereferencedInvocation'
+	#category : 'Famix-Traits-DereferencedInvocation',
+	#package : 'Famix-Traits',
+	#tag : 'DereferencedInvocation'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTWithDereferencedInvocations classSide >> annotation [
 
 	<FMClass: #TWithDereferencedInvocations super: #Object>
@@ -15,12 +29,19 @@ FamixTWithDereferencedInvocations classSide >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'visitor' }
+FamixTWithDereferencedInvocations >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTWithDereferencedInvocations: self
+]
+
+{ #category : 'accessing' }
 FamixTWithDereferencedInvocations >> addDereferencedInvocation: aDeferencedInvocation [
 	dereferencedInvocations add: aDeferencedInvocation 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithDereferencedInvocations >> dereferencedInvocations [
 	"Relation named: #dereferencedInvocations type: #FamixTDereferencedInvocation opposite: #referencer"
 
@@ -30,7 +51,7 @@ FamixTWithDereferencedInvocations >> dereferencedInvocations [
 	^ dereferencedInvocations
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithDereferencedInvocations >> dereferencedInvocations: anObject [
 
 	<generated>

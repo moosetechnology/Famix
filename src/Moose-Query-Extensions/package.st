@@ -1,1 +1,1 @@
-Package { #name : #'Moose-Query-Extensions' }
+Package { #name : 'Moose-Query-Extensions' }

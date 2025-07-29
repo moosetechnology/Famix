@@ -15,18 +15,54 @@ When using an annotation, an annotation instance is created that points back to 
 Instance Variables:
 	parentAnnotationType	<FamixTAnnotationType>
 	annotationAttributeInstances	<(FMMultivalueLink of: FamixTAnnotationInstanceAttribute)>
+
+## Relations
+======================
+
+### Parents
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `parentType` | `FamixTAttribute` | `attributes` | `FamixTWithAttributes` | Type declaring the attribute. belongsTo implementation|
+
+### Outgoing dependencies
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `typing` | `FamixTTypedEntity` | `typedEntity` | `FamixTEntityTyping` | Association linking this entity to its declared type.|
+
+### Incoming dependencies
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `incomingAccesses` | `FamixTAccessible` | `variable` | `FamixTAccess` | All Famix accesses pointing to this structural entity|
+
+### Other
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `annotationAttributeInstances` | `FamixTAnnotationTypeAttribute` | `annotationTypeAttribute` | `FamixTAnnotationInstanceAttribute` | A collection of AnnotationInstanceAttribute which hold the usages of this attribute in actual AnnotationInstances|
+| `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
+
+
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+|---|
+| `isStub` | `Boolean` | false | Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.|
+| `name` | `String` | nil | Basic name of the entity, not full reference.|
+
 "
 Trait {
-	#name : #FamixTAnnotationTypeAttribute,
+	#name : 'FamixTAnnotationTypeAttribute',
 	#instVars : [
-		'#annotationAttributeInstances => FMMany type: #FamixTTypedAnnotationInstanceAttribute opposite: #annotationTypeAttribute'
+		'#annotationAttributeInstances => FMMany type: #FamixTAnnotationInstanceAttribute opposite: #annotationTypeAttribute'
 	],
 	#traits : 'FamixTAttribute',
 	#classTraits : 'FamixTAttribute classTrait',
-	#category : #'Famix-Traits-AnnotationTypeAttribute'
+	#category : 'Famix-Traits-AnnotationTypeAttribute',
+	#package : 'Famix-Traits',
+	#tag : 'AnnotationTypeAttribute'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTAnnotationTypeAttribute classSide >> annotation [
 
 	<FMClass: #TAnnotationTypeAttribute super: #Object>
@@ -35,15 +71,22 @@ FamixTAnnotationTypeAttribute classSide >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'visitor' }
+FamixTAnnotationTypeAttribute >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTAnnotationTypeAttribute: self
+]
+
+{ #category : 'accessing' }
 FamixTAnnotationTypeAttribute >> addAnnotationAttributeInstance: anObject [
 	annotationAttributeInstances add: anObject
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAnnotationTypeAttribute >> annotationAttributeInstances [
-	"Relation named: #annotationAttributeInstances type: #FamixTTypedAnnotationInstanceAttribute opposite: #annotationTypeAttribute"
+	"Relation named: #annotationAttributeInstances type: #FamixTAnnotationInstanceAttribute opposite: #annotationTypeAttribute"
 
 	<generated>
 	<FMComment: 'A collection of AnnotationInstanceAttribute which hold the usages of this attribute in actual AnnotationInstances'>
@@ -51,7 +94,7 @@ FamixTAnnotationTypeAttribute >> annotationAttributeInstances [
 	^ annotationAttributeInstances
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAnnotationTypeAttribute >> annotationAttributeInstances: anObject [
 
 	<generated>

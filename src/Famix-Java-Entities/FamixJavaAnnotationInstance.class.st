@@ -1,12 +1,32 @@
+"
+## Relations
+======================
+
+### Children
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `attributes` | `FamixTAnnotationInstance` | `parentAnnotationInstance` | `FamixTAnnotationInstanceAttribute` | This corresponds to the actual values of the attributes in an AnnotationInstance|
+
+### Other
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `annotatedEntity` | `FamixTAnnotationInstance` | `annotationInstances` | `FamixTWithAnnotationInstances` | The NamedEntity on which the annotation occurs.|
+| `annotationType` | `FamixTAnnotationInstance` | `instances` | `FamixTAnnotationType` | Refers to the type of an annotation. (In some languages, Java and C#, an annotation as an explicit type). |
+
+
+
+"
 Class {
-	#name : #FamixJavaAnnotationInstance,
-	#superclass : #FamixJavaSourcedEntity,
-	#traits : 'FamixTAnnotationInstance + FamixTTypedAnnotationInstance + FamixTWithAnnotationInstanceAttributes',
-	#classTraits : 'FamixTAnnotationInstance classTrait + FamixTTypedAnnotationInstance classTrait + FamixTWithAnnotationInstanceAttributes classTrait',
-	#category : #'Famix-Java-Entities-Entities'
+	#name : 'FamixJavaAnnotationInstance',
+	#superclass : 'FamixJavaSourcedEntity',
+	#traits : 'FamixTAnnotationInstance',
+	#classTraits : 'FamixTAnnotationInstance classTrait',
+	#category : 'Famix-Java-Entities-Entities',
+	#package : 'Famix-Java-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixJavaAnnotationInstance class >> annotation [
 
 	<FMClass: #AnnotationInstance super: #FamixJavaSourcedEntity>
@@ -15,7 +35,14 @@ FamixJavaAnnotationInstance class >> annotation [
 	^ self
 ]
 
-{ #category : #printing }
+{ #category : 'visitor' }
+FamixJavaAnnotationInstance >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaAnnotationInstance: self
+]
+
+{ #category : 'printing' }
 FamixJavaAnnotationInstance >> mooseNameOn: aStream [
 	self annotationType ifNotNil: [ :at | at mooseNameOn: aStream ].
 	aStream nextPut: $(.
@@ -25,7 +52,7 @@ FamixJavaAnnotationInstance >> mooseNameOn: aStream [
 	self annotatedEntity ifNotNil: [ :ae | ae mooseNameOn: aStream ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixJavaAnnotationInstance >> name [
 	^ String
 		streamContents: [ :stream | 

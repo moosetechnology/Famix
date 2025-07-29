@@ -1,6 +1,6 @@
-Extension { #name : #TaCompositionElement }
+Extension { #name : 'TaCompositionElement' }
 
-{ #category : #'*Famix-MetamodelBuilder-Core' }
+{ #category : '*Famix-MetamodelBuilder-Core' }
 TaCompositionElement >> rootMembers [
 	^ {self}
 ]

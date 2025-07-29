@@ -1,6 +1,6 @@
 Class {
-	#name : #FamixTest3Generator,
-	#superclass : #FamixBasicInfrastructureGenerator,
+	#name : 'FamixTest3Generator',
+	#superclass : 'FamixBasicInfrastructureGenerator',
 	#instVars : [
 		'classEntity',
 		'primitiveType',
@@ -12,24 +12,26 @@ Class {
 		'typeGroup',
 		'attribute',
 		'access',
-		'package'
+		'package',
+		'parametricClass'
 	],
-	#category : #'Famix-TestGenerators'
+	#category : 'Famix-TestGenerators',
+	#package : 'Famix-TestGenerators'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest3Generator class >> packageName [
 
 	^ #'Famix-Test3-Entities'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest3Generator class >> prefix [
 
 	^ #'FamixTest3'
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixTest3Generator >> defineClasses [
 
 	super defineClasses.
@@ -45,11 +47,10 @@ FamixTest3Generator >> defineClasses [
 	primitiveType := builder newClassNamed: #PrimitiveType.
 	reference := builder newClassNamed: #Reference.
 	invocation := builder newClassNamed: #Invocation.
-
-
+	parametricClass := builder newClassNamed: #ParametricClass.
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixTest3Generator >> defineHierarchy [
 
 	super defineHierarchy.
@@ -57,26 +58,30 @@ FamixTest3Generator >> defineHierarchy [
 	access --|> #TAccess.
 
 	attribute --|> #TAttribute.
-	
+
 	type --|> namedEntity.
 	type --|> #TType.
 
 	classEntity --|> type.
 	classEntity --|> #TClass.
+	classEntity --|> #TPackageable.
+
+	parametricClass --|> classEntity.
+	parametricClass --|> #TParametricEntity.
 
 	method --|> namedEntity.
 	method --|> #TMethod.
-	
+
 	package --|> #TPackage.
-	
+
 	primitiveType --|> type.
 	primitiveType --|> #TWithTypes.
 	primitiveType --|> #TReferenceable.
 
 	reference --|> #TReference.
-	
+
 	invocation --|> #TInvocation.
-	
+
 	"groups"
-	classEntitygroup --|> typeGroup.
+	classEntitygroup --|> typeGroup
 ]

@@ -2,15 +2,16 @@
 I am a test resource building a FamixStModel with the LCOM test resource entities.
 "
 Class {
-	#name : #LCOMTestResource,
-	#superclass : #SmalltalkModelTestResource,
-	#category : #'Famix-PharoSmalltalk-Tests'
+	#name : 'LCOMTestResource',
+	#superclass : 'SmalltalkModelTestResource',
+	#category : 'Famix-PharoSmalltalk-Tests',
+	#package : 'Famix-PharoSmalltalk-Tests'
 }
 
-{ #category : #setup }
+{ #category : 'setup' }
 LCOMTestResource >> importModel [
-	MoosePharoImporterTask new
-		importerClass: SmalltalkImporter;
+
+	FamixStPharoImporterTask new
 		model: model;
 		addFromPackageNamed: #'Moose-TestResources-LCOM';
 		run

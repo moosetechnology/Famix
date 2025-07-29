@@ -1,18 +1,19 @@
 Class {
-	#name : #MooseEntityAnnouncement,
-	#superclass : #Announcement,
+	#name : 'MooseEntityAnnouncement',
+	#superclass : 'Announcement',
 	#instVars : [
 		'entity'
 	],
-	#category : #'Moose-Core'
+	#category : 'Moose-Core',
+	#package : 'Moose-Core'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseEntityAnnouncement >> entity [
 	^ entity
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseEntityAnnouncement >> entity: anObject [
 	entity := anObject
 ]

@@ -1,17 +1,42 @@
 "
-I represent a compilation unit file. Typically a .c or .cpp file
+I represent a compilation unit file
+
+## Relations
+======================
+
+### Parents
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `compilationUnitOwner` | `FamixTCompilationUnit` | `compilationUnit` | `FamixTWithCompilationUnits` | The compilation unit that defines this module|
+| `parentFolder` | `FamixTFileSystemEntity` | `childrenFileSystemEntities` | `FamixTFolder` | Folder entity containing this file.|
+
+### Other
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `entities` | `FamixTFile` | `containerFiles` | `FamixTWithFiles` | List of entities defined in the file|
+
+
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+|---|
+| `name` | `String` | nil | Basic name of the entity, not full reference.|
+
 "
 Trait {
-	#name : #FamixTCompilationUnit,
+	#name : 'FamixTCompilationUnit',
 	#instVars : [
 		'#compilationUnitOwner => FMOne type: #FamixTWithCompilationUnits opposite: #compilationUnit'
 	],
 	#traits : 'FamixTFile',
 	#classTraits : 'FamixTFile classTrait',
-	#category : #'Famix-Traits-CompilationUnit'
+	#category : 'Famix-Traits-Traits',
+	#package : 'Famix-Traits',
+	#tag : 'Traits'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTCompilationUnit classSide >> annotation [
 
 	<FMClass: #TCompilationUnit super: #Object>
@@ -20,7 +45,14 @@ FamixTCompilationUnit classSide >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'visitor' }
+FamixTCompilationUnit >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTCompilationUnit: self
+]
+
+{ #category : 'accessing' }
 FamixTCompilationUnit >> compilationUnitOwner [
 	"Relation named: #compilationUnitOwner type: #FamixTWithCompilationUnits opposite: #compilationUnit"
 
@@ -30,14 +62,14 @@ FamixTCompilationUnit >> compilationUnitOwner [
 	^ compilationUnitOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTCompilationUnit >> compilationUnitOwner: anObject [
 
 	<generated>
 	compilationUnitOwner := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FamixTCompilationUnit >> compilationUnitOwnerGroup [
 	<generated>
 	<navigation: 'CompilationUnitOwner'>

@@ -28,46 +28,48 @@ Internal Representation and Key Implementation Points.
 
 "
 Class {
-	#name : #MQScopeQuery,
-	#superclass : #MQAbstractQuery,
+	#name : 'MQScopeQuery',
+	#superclass : 'MQAbstractQuery',
 	#instVars : [
 		'until',
 		'isRecursive',
 		'direction',
 		'stopStrategy'
 	],
-	#category : #'Moose-Query-Scoping'
+	#category : 'Moose-Query-Scoping',
+	#package : 'Moose-Query',
+	#tag : 'Scoping'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MQScopeQuery class >> recursivelyScope: aFamixType direction: aClass [
 	^ (self scope: aFamixType direction: aClass)
 		beRecursive;
 		yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MQScopeQuery class >> recursivelyScope: aFamixType direction: aClass until: aValuable [
 	^ (self recursivelyScope: aFamixType direction: aClass)
 		until: aValuable;
 		yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MQScopeQuery class >> recursivelyScopes: aCollectionOfType direction: aClass [
 	^ (self scopes: aCollectionOfType direction: aClass)
 		beRecursive;
 		yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MQScopeQuery class >> recursivelyScopes: aCollectionOfType direction: aClass until: aValuable [
 	^ (self scopes: aCollectionOfType direction: aClass until: aValuable)
 		beRecursive;
 		yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MQScopeQuery class >> scope: aFamixType direction: aClass [
 	^ self new
 		stopStrategy: (MQScopeTypeStrategy scope: aFamixType);
@@ -75,14 +77,14 @@ MQScopeQuery class >> scope: aFamixType direction: aClass [
 		yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MQScopeQuery class >> scope: aFamixType direction: aClass until: aValuable [
 	^ (self scope: aFamixType direction: aClass)
 		until: aValuable;
 		yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MQScopeQuery class >> scopes: aCollectionOfType direction: aClass [
 	^ self new
 		stopStrategy: (MQScopeAnyTypeStrategy scopes: aCollectionOfType);
@@ -90,79 +92,79 @@ MQScopeQuery class >> scopes: aCollectionOfType direction: aClass [
 		yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MQScopeQuery class >> scopes: aCollectionOfType direction: aClass until: aValuable [
 	^ (self scopes: aCollectionOfType direction: aClass)
 		until: aValuable;
 		yourself
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 MQScopeQuery >> add: anEntity [
 	self result add: anEntity
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MQScopeQuery >> beRecursive [
 	isRecursive := true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MQScopeQuery >> direction [
 	^ direction
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MQScopeQuery >> direction: anObject [
 	direction := anObject
 ]
 
-{ #category : #execution }
+{ #category : 'execution' }
 MQScopeQuery >> execute [
 	^ direction scopeFor: receiver query: self
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MQScopeQuery >> initialize [
 	super initialize.
 	isRecursive := false.
 	until := [ :each | false ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MQScopeQuery >> isRecursive [
 	^ isRecursive
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MQScopeQuery >> isRecursive: anObject [
 	isRecursive := anObject
 ]
 
-{ #category : #DSL }
+{ #category : 'DSL' }
 MQScopeQuery >> ofAnyType [
 	stopStrategy := MQScopeAllTypesStrategy new.
 	^ self execute
 ]
 
-{ #category : #DSL }
+{ #category : 'DSL' }
 MQScopeQuery >> ofAnyType: aCollection [
 	stopStrategy := MQScopeAnyTypeStrategy scopes: aCollection.
 	^ self execute
 ]
 
-{ #category : #DSL }
+{ #category : 'DSL' }
 MQScopeQuery >> ofType: aFamixType [
 	stopStrategy := MQScopeTypeStrategy scope: aFamixType.
 	^ self execute
 ]
 
-{ #category : #DSL }
+{ #category : 'DSL' }
 MQScopeQuery >> recursively [
 	isRecursive := true
 ]
 
-{ #category : #execution }
+{ #category : 'execution' }
 MQScopeQuery >> scopeFor: anEntity direction: aDirection [
 
 	| selectors |
@@ -180,32 +182,32 @@ MQScopeQuery >> scopeFor: anEntity direction: aDirection [
 	^ self result
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MQScopeQuery >> shouldStopOn: anEntity [
 	^ self until value: anEntity
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MQScopeQuery >> stopStrategy [
 	^ stopStrategy
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MQScopeQuery >> stopStrategy: anObject [
 	stopStrategy := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MQScopeQuery >> until [
 	^ until
 ]
 
-{ #category : #DSL }
+{ #category : 'DSL' }
 MQScopeQuery >> until: anObject [
 	until := anObject
 ]
 
-{ #category : #DSL }
+{ #category : 'DSL' }
 MQScopeQuery >> withProperty: aSymbol [
 	stopStrategy := MQScopePropertyStrategy property: aSymbol. 
 	^ self execute

@@ -11,20 +11,51 @@ aFamixTAttribute (x) can be accessed using the message variable (and to).
 Furthermore it can be tagged as read or write using isWrite: aBoolean.
 
 For each access in the source code, there is one famix access created even if it is from the same behavioral entity towards the same variable.
+
+## Relations
+======================
+
+### Association source
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `accessor` | `FamixTAccess` | `accesses` | `FamixTWithAccesses` | Behavioural entity making the access to the variable. from-side of the association|
+
+### Association target
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `variable` | `FamixTAccess` | `incomingAccesses` | `FamixTAccessible` | Variable accessed. to-side of the association|
+
+### Other
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `next` | `FamixTAssociation` | `previous` | `FamixTAssociation` | Next association in an ordered collection of associations. Currently not supported by the Moose importer|
+| `previous` | `FamixTAssociation` | `next` | `FamixTAssociation` | Previous association in an ordered collection of associations. Currently not supported by the Moose importer|
+| `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
+
+
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+|---|
+| `isWrite` | `Boolean` | false | Write access|
+
 "
 Trait {
-	#name : #FamixTAccess,
+	#name : 'FamixTAccess',
 	#instVars : [
 		'#accessor => FMOne type: #FamixTWithAccesses opposite: #accesses',
-		'#isWrite => FMProperty',
+		'#isWrite => FMProperty defaultValue: false',
 		'#variable => FMOne type: #FamixTAccessible opposite: #incomingAccesses'
 	],
 	#traits : 'FamixTAssociation',
 	#classTraits : 'FamixTAssociation classTrait',
-	#category : #'Famix-Traits-Access'
+	#category : 'Famix-Traits-Access',
+	#package : 'Famix-Traits',
+	#tag : 'Access'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTAccess classSide >> annotation [
 
 	<FMClass: #TAccess super: #Object>
@@ -33,7 +64,14 @@ FamixTAccess classSide >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'visitor' }
+FamixTAccess >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTAccess: self
+]
+
+{ #category : 'accessing' }
 FamixTAccess >> accessor [
 	"Relation named: #accessor type: #FamixTWithAccesses opposite: #accesses"
 
@@ -43,14 +81,14 @@ FamixTAccess >> accessor [
 	^ accessor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAccess >> accessor: anObject [
 
 	<generated>
 	accessor := anObject
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixTAccess >> displayStringOn: aStream [
 
 	variable displayStringOn: aStream.
@@ -58,14 +96,14 @@ FamixTAccess >> displayStringOn: aStream [
 	accessor displayStringOn: aStream
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTAccess >> isAccess [
 
 	<generated>
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAccess >> isRead [
 	<FMProperty: #isRead type: #Boolean>
 	<derived>
@@ -73,7 +111,7 @@ FamixTAccess >> isRead [
 	^ isWrite ifNil: [ false ] ifNotNil: [ isWrite not ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAccess >> isReadWriteUnknown [
 	<FMProperty: #isReadWriteUnknown type: #Boolean> <derived>
 	<FMComment: ''>
@@ -81,7 +119,7 @@ FamixTAccess >> isReadWriteUnknown [
 	^ isWrite isNil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAccess >> isWrite [
 
 	<FMProperty: #isWrite type: #Boolean>
@@ -89,19 +127,19 @@ FamixTAccess >> isWrite [
 	^ isWrite ifNil: [ false ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAccess >> isWrite: anObject [
 	<generated>
 	isWrite := anObject
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixTAccess >> printOn: aStream [
 	super printOn: aStream.
 	aStream nextPutAll: ' (Access)'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAccess >> variable [
 	"Relation named: #variable type: #FamixTAccessible opposite: #incomingAccesses"
 
@@ -111,7 +149,7 @@ FamixTAccess >> variable [
 	^ variable
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAccess >> variable: anObject [
 
 	<generated>

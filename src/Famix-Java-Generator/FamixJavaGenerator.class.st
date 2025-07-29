@@ -1,6 +1,6 @@
 Class {
-	#name : #FamixJavaGenerator,
-	#superclass : #FamixBasicInfrastructureGenerator,
+	#name : 'FamixJavaGenerator',
+	#superclass : 'FamixBasicInfrastructureGenerator',
 	#instVars : [
 		'access',
 		'annotationInstance',
@@ -21,12 +21,13 @@ Class {
 		'package',
 		'parameter',
 		'parameterType',
-		'parameterizableClass',
+		'parametricClass',
+		'parametricInterface',
+		'parametricMethod',
 		'primitiveType',
 		'reference',
 		'type',
 		'unknownVariable',
-		'parameterizedType',
 		'indexedFileAnchor',
 		'tCanBeVolatile',
 		'tCanBeTransient',
@@ -37,26 +38,66 @@ Class {
 		'tImplementable',
 		'tCanImplement',
 		'tWithInterfaces',
-		'parameterizableInterface',
-		'parameterizableException',
-		'import'
+		'import',
+		'tBounded',
+		'tBound',
+		'wildcard',
+		'parameterConcretization',
+		'concretization',
+		'variable',
+		'typeParameter',
+		'entityTyping',
+		'parametricInheritance',
+		'parametricImplementation',
+		'parametricInvocation',
+		'parametricEntityTyping',
+		'parametricReference'
 	],
-	#category : #'Famix-Java-Generator'
+	#classInstVars : [
+		'builder'
+	],
+	#category : 'Famix-Java-Generator',
+	#package : 'Famix-Java-Generator'
 }
 
-{ #category : #accessing }
+{ #category : 'additional tools' }
+FamixJavaGenerator class >> metamodelToolGenerators [
+
+	^ { FamixVisitorGenerator }
+]
+
+{ #category : 'accessing' }
 FamixJavaGenerator class >> packageName [
 
 	^ #'Famix-Java-Entities'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
+FamixJavaGenerator class >> packageNameForVisitor [
+	"Generate visitor in the entities package. Discussed with N. Anquetil"
+
+	^ self packageName
+]
+
+{ #category : 'accessing' }
 FamixJavaGenerator class >> prefix [
 
 	^ #'FamixJava'
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
+FamixJavaGenerator >> commentForTBound [
+
+	^ 'Represents a bound for a lower bounded and upper bounded wildcard.'
+]
+
+{ #category : 'definition' }
+FamixJavaGenerator >> commentForTBounded [
+
+	^ 'Represents a bounded wildcard, lower bounded with keyword super or upper bounded with keyword extends.'
+]
+
+{ #category : 'definition' }
 FamixJavaGenerator >> commentForTCanBeSynchronized [
 	^ 'I allow an entity to be synchronized
 ex:
@@ -72,7 +113,7 @@ public class SynchronizedCounter {
 ```'
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixJavaGenerator >> commentForTCanBeTransient [
 	^ 'I allow an entity to be transient
 ex:
@@ -84,7 +125,7 @@ public class Student implements Serializable{
 ```'
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixJavaGenerator >> commentForTCanBeVolatile [
 	^ 'I allow an entity to be volatible
 ex:
@@ -96,13 +137,13 @@ public class SharedObject {
 ```'
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixJavaGenerator >> commentForTInterface [
 	'I correspond to an interface'
 
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixJavaGenerator >> commentForTWithInterfaces [
 
 ^ 'I can contain interfaces (Packages, Methods, Classes...)'
@@ -110,62 +151,56 @@ FamixJavaGenerator >> commentForTWithInterfaces [
 	
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixJavaGenerator >> defineClasses [
+
 	super defineClasses.
 
-	access := builder newClassNamed: #Access.
-	annotationInstance := builder newClassNamed: #AnnotationInstance.
-	annotationInstanceAttribute := builder newClassNamed: #AnnotationInstanceAttribute.
-	annotationType := builder newClassNamed: #AnnotationType.
-	annotationTypeAttribute := builder newClassNamed: #AnnotationTypeAttribute.
-	attribute := builder newClassNamed: #Attribute.
-	class := builder newClassNamed: #Class.
-	interface := builder newClassNamed: #Interface.
+	access := self newClassNamed: #Access.
+	annotationInstance := self newClassNamed: #AnnotationInstance.
+	annotationInstanceAttribute := self newClassNamed: #AnnotationInstanceAttribute.
+	annotationType := self newClassNamed: #AnnotationType.
+	annotationTypeAttribute := self newClassNamed: #AnnotationTypeAttribute.
+	attribute := self newClassNamed: #Attribute.
+	class := self newClassNamed: #Class.
+	interface := self newClassNamed: #Interface.
 	interface withTesting.
-	implementation := builder newClassNamed: #Implementation.
-	containerEntity := builder newAbstractClassNamed: #ContainerEntity.
-	enum := builder newClassNamed: #Enum.
-	enumValue := builder newClassNamed: #EnumValue.
-	exception := builder newClassNamed: #Exception.
-	implicitVariable := builder newClassNamed: #ImplicitVariable.
-	import := builder newClassNamed: #Import.
-	indexedFileAnchor := builder newClassNamed: #IndexedFileAnchor.
-	inheritance := builder newClassNamed: #Inheritance.
-	invocation := builder newClassNamed: #Invocation.
-	localVariable := builder newClassNamed: #LocalVariable.
-	method := builder newClassNamed: #Method.
-	package := builder newClassNamed: #Package.
-	parameter := builder newClassNamed: #Parameter.
-	parameterType := builder newClassNamed: #ParameterType.
-	parameterizableClass := builder newClassNamed: #ParameterizableClass.
-	parameterizableException := builder newClassNamed: #ParameterizableException.
-	parameterizableInterface := builder newClassNamed: #ParameterizableInterface.
-	parameterizedType := builder newClassNamed: #ParameterizedType.
-	primitiveType := builder newClassNamed: #PrimitiveType.
-	reference := builder newClassNamed: #Reference.
-	type := builder newClassNamed: #Type.
-	unknownVariable := builder newClassNamed: #UnknownVariable.
+	implementation := self newClassNamed: #Implementation.
+	containerEntity := self newAbstractClassNamed: #ContainerEntity.
+	enum := self newClassNamed: #Enum.
+	enumValue := self newClassNamed: #EnumValue.
+	exception := self newClassNamed: #Exception.
+	implicitVariable := self newClassNamed: #ImplicitVariable.
+	import := self newClassNamed: #Import.
+	indexedFileAnchor := self newClassNamed: #IndexedFileAnchor.
+	inheritance := self newClassNamed: #Inheritance.
+	invocation := self newClassNamed: #Invocation.
+	localVariable := self newClassNamed: #LocalVariable.
+	method := self newClassNamed: #Method.
+	package := self newClassNamed: #Package.
+	parameter := self newClassNamed: #Parameter.
+	typeParameter := self newClassNamed: #TypeParameter.
+	primitiveType := self newClassNamed: #PrimitiveType.
 	primitiveType withTesting.
+	reference := self newClassNamed: #Reference.
+	type := self newClassNamed: #Type.
+	entityTyping := self newClassNamed: #EntityTyping.
+	variable := self newAbstractClassNamed: #Variable.
+	unknownVariable := self newClassNamed: #UnknownVariable.
 
-	self defineComments
+	parametricClass := self newClassNamed: #ParametricClass.
+	parametricMethod := self newClassNamed: #ParametricMethod.
+	parametricInterface := self newClassNamed: #ParametricInterface.
+	parametricInheritance := self newClassNamed: #ParametricInheritance.
+	parametricImplementation := self newClassNamed: #ParametricImplementation.
+	parametricInvocation := self newClassNamed: #ParametricInvocation.
+	parametricEntityTyping := self newClassNamed: #ParametricEntityTyping.
+	parametricReference := self newClassNamed: #ParametricReference.
+	concretization := self newClassNamed: #Concretization.
+	wildcard := self newClassNamed: #Wildcard.
 ]
 
-{ #category : #definition }
-FamixJavaGenerator >> defineComments [
-	(builder ensureClassNamed: #Entity)
-		comment:
-			'file := ''ArgoUML-0-34.mse'' asFileReference readStream.
-
-repo := MooseModel importFrom: file withMetamodel: FamixJavaModel metamodel.
-
-model := MooseModel new.
-model silentlyAddAll: repo elements.
-model entityStorage forRuntime.
-model'
-]
-
-{ #category : #definition }
+{ #category : 'definition' }
 FamixJavaGenerator >> defineHierarchy [
 	super defineHierarchy.
 
@@ -173,12 +208,9 @@ FamixJavaGenerator >> defineHierarchy [
 
 	annotationInstance --|> sourcedEntity.
 	annotationInstance --|> #TAnnotationInstance.
-	annotationInstance --|> #TWithAnnotationInstanceAttributes.
-	annotationInstance --|> #TTypedAnnotationInstance.
 
 	annotationInstanceAttribute --|> sourcedEntity.
 	annotationInstanceAttribute --|> #TAnnotationInstanceAttribute.
-	annotationInstanceAttribute --|> #TTypedAnnotationInstanceAttribute.
 
 	annotationType --|> type.
 	annotationType --|> #TAnnotationType.
@@ -188,22 +220,21 @@ FamixJavaGenerator >> defineHierarchy [
 	annotationType --|> #TWithComments.
 	annotationType --|> #THasVisibility.
 	annotationType --|> #TImplementable.
+	annotationType --|> #TTypeArgument.
 
-	annotationTypeAttribute --|> namedEntity.
+	annotationTypeAttribute --|> variable.
 	annotationTypeAttribute --|> #TAnnotationTypeAttribute.
-	annotationTypeAttribute --|> #TTypedAnnotationInstanceAttribute.
 	annotationTypeAttribute --|> #TWithComments.
 
-	attribute --|> namedEntity.
+	attribute --|> variable.
 	attribute --|> #TAttribute.
 	attribute --|> #TCanBeFinal.
 	attribute --|> #THasVisibility.
 	attribute --|> tCanBeVolatile.
 	attribute --|> tCanBeTransient.
-	attribute --|> #TInvocationsReceiver.
 	attribute --|> #TWithComments.
 	attribute --|> #TCanBeClassSide.
-	
+
 	indexedFileAnchor --|> sourceAnchor.
 	indexedFileAnchor --|> #TIndexedFileNavigation.
 
@@ -225,13 +256,15 @@ FamixJavaGenerator >> defineHierarchy [
 	class --|> #TCanBeAbstract.
 	class --|> #TCanBeFinal.
 	class --|> #THasVisibility.
-	class --|> #TCanBeClassSide. 
+	class --|> #TCanBeClassSide.
 	class --|> #TClassMetrics.
-	class --|> tJavaClassMetrics.	
+	class --|> tJavaClassMetrics.
 	class --|> #TCanImplement.
 	class --|> #TWithImports.
 	class --|> #TImportable.
-		
+	class --|> #TPackageable.
+	class --|> #TTypeArgument.
+
 	interface --|> type.
 	interface --|> #TPackageable.
 	interface --|> #TWithMethods.
@@ -240,19 +273,20 @@ FamixJavaGenerator >> defineHierarchy [
 	interface --|> #TInvocationsReceiver.
 	interface --|> #TCanBeFinal.
 	interface --|> #THasVisibility.
-	interface --|> #TCanBeClassSide. 
+	interface --|> #TCanBeClassSide.
 	interface --|> #TWithComments.
 	interface --|> #TImplementable.
 	interface --|> #TWithImports.
 	interface --|> #TImportable.
-	
+	interface --|> #TTypeArgument.
+
 	implementation --|> #TImplementation.
 
 	containerEntity --|> namedEntity.
 	containerEntity --|> tWithInterfaces.
 	containerEntity --|> #TWithClasses.
 	containerEntity --|> #TWithAnnotationTypes.
-	
+
 	tWithInterfaces --|> #TWithTypes.
 
 	enum --|> type.
@@ -264,8 +298,10 @@ FamixJavaGenerator >> defineHierarchy [
 	enum --|> #TWithComments.
 	enum --|> #TWithImports.
 	enum --|> #TImportable.
+	enum --|> #TTypeArgument.
+	enum --|> #TInvocationsReceiver.
 
-	enumValue --|> namedEntity.
+	enumValue --|> variable.
 	enumValue --|> #TWithComments.
 	enumValue --|> #TEnumValue.
 
@@ -275,24 +311,24 @@ FamixJavaGenerator >> defineHierarchy [
 	exception --|> #THasVisibility.
 	exception --|> #TCanImplement.
 	exception --|> #TWithTypes.
-	
-	implicitVariable --|> namedEntity.
+
+	implicitVariable --|> variable.
 	implicitVariable --|> #TImplicitVariable.
-	implicitVariable --|> #TInvocationsReceiver.
 
 	import --|> #TImport.
-	
+
 	inheritance --|> #TInheritance.
 
 	invocation --|> #TInvocation.
+	
+	variable --|> namedEntity.
+	variable --|> #TInvocationsReceiver. 
 
-	localVariable --|> namedEntity.
+	localVariable --|> variable.
 	localVariable --|> #TLocalVariable.
 	localVariable --|> #TCanBeFinal.
-	localVariable --|> #TInvocationsReceiver.
 	localVariable --|> #TWithComments.
 
-	namedEntity --|> #TInvocationsReceiver.
 	namedEntity --|> #TWithAnnotationInstances.
 	namedEntity --|> #TEntityMetaLevelDependency.
 	namedEntity --|> sourcedEntity.
@@ -303,98 +339,108 @@ FamixJavaGenerator >> defineHierarchy [
 	package --|> #TWithComments.
 	package --|> #TImportable.
 
-	parameter --|> namedEntity.
+	parameter --|> variable.
 	parameter --|> #TParameter.
 	parameter --|> #TCanBeFinal.
 	parameter --|> #TWithComments.
-
-	parameterType --|> type.
-	parameterType --|> #TParameterType.
-
-	parameterizableClass --|> class.
-	parameterizableClass --|> #TWithParameterizedTypes.
-	
-	parameterizableException --|> exception.
-	parameterizableException --|> #TWithParameterizedTypes.
-	
-	parameterizableInterface --|> interface.
-	parameterizableInterface --|> #TWithParameterizedTypes.
-
-	parameterizedType --|> type.
-	parameterizedType --|> #TParameterizedType.
-	parameterizedType --|> #TWithParameterizedTypeUsers.
-	parameterizedType --|> #TWithInheritances.
-	parameterizedType --|> #TCanImplement.
-	parameterizedType --|> #TImplementable.
 
 	primitiveType --|> type.
 	primitiveType --|> #TPrimitiveType.
 
 	reference --|> #TReference.
 
-	type --|> containerEntity.
 	type --|> #TType.
-	type --|> #TParameterizedTypeUser.
+	type --|> containerEntity.
 	type --|> #TWithMethods.
+	type --|> tBound.
 
-	unknownVariable --|> namedEntity.
+	entityTyping --|> #TEntityTyping.
+
+	unknownVariable --|> variable.
 	unknownVariable --|> #TUnknownVariable.
-	unknownVariable --|> #TInvocationsReceiver.
+
+	parametricClass --|> class.
+	parametricClass --|> #TParametricEntity.
+	parametricMethod --|> method.
+	parametricMethod --|> #TParametricEntity.
+	parametricInterface --|> interface.
+	parametricInterface --|> #TParametricEntity.
 	
+	parametricInheritance --|> inheritance.
+	parametricInheritance --|> #TParametricAssociation.
+	parametricImplementation --|> implementation.
+	parametricImplementation --|> #TParametricAssociation.
+	parametricInvocation --|> invocation.
+	parametricInvocation --|> #TParametricAssociation.
+	parametricEntityTyping --|> entityTyping.
+	parametricEntityTyping --|> #TParametricAssociation.
+	parametricReference --|> reference.
+	parametricReference --|> #TParametricAssociation.
 
+	concretization --|> #TConcretization.
 
+	typeParameter --|> type.
+	typeParameter --|> #TTypeParameter.
+	typeParameter --|> tBounded.
+	typeParameter --|> #TTypeArgument.
+	typeParameter --|> #TThrowable.
+
+	wildcard --|> type.
+	wildcard --|> tBounded.
+	wildcard --|> #TTypeArgument
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixJavaGenerator >> defineProperties [
-
 	super defineProperties.
 
-	(tCanBeVolatile
-		 property: #isVolatile
-		 type: #Boolean
-		 defaultValue: false) comment: 'Entity can be declared volatile'.
-	(tCanBeTransient
-		 property: #isTransient
-		 type: #Boolean
-		 defaultValue: false) comment: 'Entity can be declared transient'.
-	(tCanBeSynchronized
-		 property: #isSynchronized
-		 type: #Boolean
-		 defaultValue: false) comment: 'Entity can be declared synchronized'
+	((tCanBeVolatile property: #isVolatile type: #Boolean defaultValue: false)
+		comment: 'Entity can be declared volatile').
+	((tCanBeTransient property: #isTransient type: #Boolean defaultValue: false)
+		comment: 'Entity can be declared transient' ).
+	((tCanBeSynchronized property: #isSynchronized type: #Boolean defaultValue: false)
+		comment: 'Entity can be declared synchronized').
 ]
 
-{ #category : #definition }
-FamixJavaGenerator >> defineRelations [ 
+{ #category : 'definition' }
+FamixJavaGenerator >> defineRelations [
 
+	super defineRelations.
+
+	((tBounded property: #lowerBound) comment:
+		 'Lower bound on wildcard, specified by super keyword.')
+	*- ((tBound property: #lowerBoundedWildcards) comment:
+			 'Wildcards lower bounded by this bound.').
+
+	((tBounded property: #upperBound) comment:
+		 'Upper bound on wildcard, specified by extends keyword.')
+	*- ((tBound property: #upperBoundedWildcards) comment:
+			 'Wildcards upper bounded by this bound.')
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixJavaGenerator >> defineTraits [
-
 	super defineTraits.
-	tCanBeVolatile := builder
-		                  newTraitNamed: #TCanBeVolatile
-		                  comment: self commentForTCanBeVolatile.
-	tCanBeTransient := builder
-		                   newTraitNamed: #TCanBeTransient
-		                   comment: self commentForTCanBeTransient.
-	tCanBeSynchronized := builder
-		                      newTraitNamed: #TCanBeSynchronized
-		                      comment: self commentForTCanBeSynchronized.
-	
 
-		
-	tWithInterfaces := builder newTraitNamed: #TWithInterfaces.
+	tCanBeVolatile := self newTraitNamed: #TCanBeVolatile.
+	tCanBeVolatile comment: self commentForTCanBeVolatile.
+
+	tCanBeTransient := self newTraitNamed: #TCanBeTransient.
+	tCanBeTransient comment: self commentForTCanBeTransient.
+
+	tCanBeSynchronized := self newTraitNamed: #TCanBeSynchronized.
+	tCanBeSynchronized comment: self commentForTCanBeSynchronized.
+
+	tWithInterfaces := self newTraitNamed: #TWithInterfaces.
 	tWithInterfaces comment: self commentForTWithInterfaces.
 
-	tJavaClassMetrics := builder newTraitNamed: #TClassMetrics.
-	
+	tJavaClassMetrics := self newTraitNamed: #TClassMetrics.
 
-	
+	tBounded := self newTraitNamed: #TBounded comment: self commentForTBounded.
+	tBound := self newTraitNamed: #TBound comment: self commentForTBound.
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixJavaGenerator >> newBuilder [
 
 	^ super newBuilder

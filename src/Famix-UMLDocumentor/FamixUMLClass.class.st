@@ -3,8 +3,8 @@ I represent a Famix class or trait belonging to a UML model
 
 "
 Class {
-	#name : #FamixUMLClass,
-	#superclass : #Object,
+	#name : 'FamixUMLClass',
+	#superclass : 'Object',
 	#instVars : [
 		'name',
 		'color',
@@ -12,46 +12,48 @@ Class {
 		'properties',
 		'isTrait'
 	],
-	#category : #'Famix-UMLDocumentor-Model'
+	#category : 'Famix-UMLDocumentor-Model',
+	#package : 'Famix-UMLDocumentor',
+	#tag : 'Model'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 FamixUMLClass class >> from: aFM3Class [
 	^self new
 		initializeFrom: aFM3Class ;
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixUMLClass >> addProperty: anObject [
 
 	properties add: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixUMLClass >> beStub [
 	isStub := true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixUMLClass >> beTrait [
 
 	isTrait := true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixUMLClass >> color [
 
 	^ color
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixUMLClass >> color: anObject [
 
 	color := anObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FamixUMLClass >> initialize [
 
 	super initialize.
@@ -63,7 +65,7 @@ FamixUMLClass >> initialize [
 	properties := OrderedCollection new
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FamixUMLClass >> initializeFrom: aFM3Class [
 
 	self name: aFM3Class name.
@@ -72,47 +74,47 @@ FamixUMLClass >> initializeFrom: aFM3Class [
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixUMLClass >> isStub [
 	^isStub
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixUMLClass >> isStub: aBoolean [
 	isStub := aBoolean 
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixUMLClass >> isTrait [
 
 	^ isTrait
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixUMLClass >> isTrait: aBoolean [
 
 	isTrait := aBoolean 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixUMLClass >> name [
 
 	^ name
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixUMLClass >> name: anObject [
 
 	name := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixUMLClass >> properties [
 
 	^ properties
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixUMLClass >> properties: anObject [
 
 	properties := anObject

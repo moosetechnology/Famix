@@ -1,12 +1,26 @@
+"
+## Relations
+======================
+
+### Children
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `types` | `FamixTWithTypes` | `typeContainer` | `FamixTType` | Types contained (declared) in this entity, if any. #types is declared in ContainerEntity because different kinds of container can embed types. Types are usually contained in a Famix.Namespace. But types can also be contained in a Famix.Class or Famix.Method (in Java with inner classes for example). Famix.Function can also contain some types such as structs.|
+
+
+
+"
 Trait {
-	#name : #FamixTWithTypes,
+	#name : 'FamixTWithTypes',
 	#instVars : [
 		'#types => FMMany type: #FamixTType opposite: #typeContainer'
 	],
-	#category : #'Famix-Traits-Type'
+	#category : 'Famix-Traits-Type',
+	#package : 'Famix-Traits',
+	#tag : 'Type'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTWithTypes classSide >> annotation [
 
 	<FMClass: #TWithTypes super: #Object>
@@ -15,12 +29,19 @@ FamixTWithTypes classSide >> annotation [
 	^ self
 ]
 
-{ #category : #adding }
+{ #category : 'visitor' }
+FamixTWithTypes >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTWithTypes: self
+]
+
+{ #category : 'adding' }
 FamixTWithTypes >> addType: aType [ 
 	types add: aType
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithTypes >> allRecursiveTypes [
 	"Retrieves all nested types recursively"
 	
@@ -30,7 +51,7 @@ FamixTWithTypes >> allRecursiveTypes [
 	^ result
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithTypes >> allRecursiveTypesDo: aBlock [
 	"Traverses all nested types recursively"
 
@@ -39,7 +60,7 @@ FamixTWithTypes >> allRecursiveTypesDo: aBlock [
 		each allRecursiveTypesDo: aBlock ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithTypes >> types [
 	"Relation named: #types type: #FamixTType opposite: #typeContainer"
 
@@ -50,7 +71,7 @@ FamixTWithTypes >> types [
 	^ types
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithTypes >> types: anObject [
 
 	<generated>

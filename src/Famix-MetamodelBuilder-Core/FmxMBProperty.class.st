@@ -1,62 +1,70 @@
 Class {
-	#name : #FmxMBProperty,
-	#superclass : #FmxMBEntity,
-	#category : #'Famix-MetamodelBuilder-Core-Implementation'
+	#name : 'FmxMBProperty',
+	#superclass : 'FmxMBEntity',
+	#category : 'Famix-MetamodelBuilder-Core-Implementation',
+	#package : 'Famix-MetamodelBuilder-Core',
+	#tag : 'Implementation'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 FmxMBProperty class >> isAbstract [
 	^ self = FmxMBProperty
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBProperty >> asSlot [
 
 	<ignoreForCoverage>
 	self subclassResponsibility
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FmxMBProperty >> generateAccessorsIn: aClassOrTrait [
 	self generateGetterIn: aClassOrTrait.
 	self generateSetterIn: aClassOrTrait
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FmxMBProperty >> generateGetterIn: aClassOrTrait [
 	<ignoreForCoverage>
 	self subclassResponsibility
 ]
 
-{ #category : #generating }
+{ #category : 'generating' }
 FmxMBProperty >> generateSetterIn: aClassOrTrait [
 	<ignoreForCoverage>
 	self subclassResponsibility
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FmxMBProperty >> hasDefaultValue [
 	^ false
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FmxMBProperty >> initialize [
 	super initialize.
 	comment := ''
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FmxMBProperty >> isContainer [
 	^ false
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
+FmxMBProperty >> isRelation [
+
+	^ false
+]
+
+{ #category : 'accessing' }
 FmxMBProperty >> name: aString [
 	(self builder reservedKeywords includes: aString) ifTrue: [ FmxMBPropertyNameIsReserved signal ].
 	name := aString
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FmxMBProperty >> printOn: aStream [
 	<ignoreForCoverage>
 	super printOn: aStream.
@@ -68,7 +76,7 @@ FmxMBProperty >> printOn: aStream [
 				nextPut: $) ]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FmxMBProperty >> producesSlot [
 	^ true
 ]

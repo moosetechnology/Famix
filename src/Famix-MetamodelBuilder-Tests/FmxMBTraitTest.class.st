@@ -1,22 +1,24 @@
 Class {
-	#name : #FmxMBTraitTest,
-	#superclass : #FmxMBBehaviorTest,
-	#category : #'Famix-MetamodelBuilder-Tests'
+	#name : 'FmxMBTraitTest',
+	#superclass : 'FmxMBBehaviorTest',
+	#category : 'Famix-MetamodelBuilder-Tests-Tests',
+	#package : 'Famix-MetamodelBuilder-Tests',
+	#tag : 'Tests'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBTraitTest >> behaviorClass [
 
 	^ FmxMBTrait
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBTraitTest >> newEntityNamed: aString [
 
 	^ builder newTraitNamed: aString
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBTraitTest >> testAutogereatedContainsMany [
 
 	| access variable generatedTAccess generatedTVariable |
@@ -39,7 +41,7 @@ FmxMBTraitTest >> testAutogereatedContainsMany [
 	self assert: ((generatedTAccess methodNamed: #variable) sourceCode includesSubstring: '<container>').
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBTraitTest >> testAutogereatedContainsOne [
 
 	| access variable generatedTAccess generatedTVariable |
@@ -63,7 +65,7 @@ FmxMBTraitTest >> testAutogereatedContainsOne [
 	self deny: ((generatedTVariable methodNamed: #access) sourceCode includesSubstring: '<container>').
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBTraitTest >> testAutogereatedManyBelongTo [
 
 	| access variable generatedTAccess generatedTVariable |
@@ -86,7 +88,7 @@ FmxMBTraitTest >> testAutogereatedManyBelongTo [
 	self assert: ((generatedTAccess methodNamed: #variable) sourceCode includesSubstring: '<container>').
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBTraitTest >> testAutogereatedManyToMany [
 
 	| access variable generatedTAccess generatedTVariable |
@@ -110,7 +112,7 @@ FmxMBTraitTest >> testAutogereatedManyToMany [
 	self deny: ((generatedTVariable methodNamed: #accesses) sourceCode includesSubstring: '<container>').
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBTraitTest >> testAutogereatedManyToOne [
 
 	| access variable generatedTAccess generatedTVariable |
@@ -133,7 +135,7 @@ FmxMBTraitTest >> testAutogereatedManyToOne [
 	self deny: ((generatedTAccess methodNamed: #variable) sourceCode includesSubstring: '<container>').
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBTraitTest >> testAutogereatedOneBelongsTo [
 
 	| access variable generatedTAccess generatedTVariable |
@@ -157,7 +159,7 @@ FmxMBTraitTest >> testAutogereatedOneBelongsTo [
 	self assert: ((generatedTVariable methodNamed: #access) sourceCode includesSubstring: '<container>').
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBTraitTest >> testAutogereatedOneToMany [
 
 	| access variable generatedTAccess generatedTVariable |
@@ -180,7 +182,7 @@ FmxMBTraitTest >> testAutogereatedOneToMany [
 	self deny: ((generatedTAccess methodNamed: #variable) sourceCode includesSubstring: '<container>').
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBTraitTest >> testAutogereatedOneToOne [
 
 	| access variable generatedTAccess generatedTVariable |
@@ -204,7 +206,7 @@ FmxMBTraitTest >> testAutogereatedOneToOne [
 	self deny: ((generatedTVariable methodNamed: #access) sourceCode includesSubstring: '<container>').
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBTraitTest >> testCustomPackageForUserClasses [
 	| generated |
 	builder configuration packageName: 'Custom'.
@@ -215,7 +217,7 @@ FmxMBTraitTest >> testCustomPackageForUserClasses [
 	self assert: generated package name equals: #Custom
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBTraitTest >> testCustomPackageForUserClassesChanged [
 	| generated generatedAccess |
 	builder configuration packageName: 'Custom'.
@@ -232,7 +234,7 @@ FmxMBTraitTest >> testCustomPackageForUserClassesChanged [
 	self assert: generatedAccess package name equals: #Custom2
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBTraitTest >> testDefaultPackageForUserClasses [
 	| userClass |
 	builder newTraitNamed: #TComment.
@@ -242,7 +244,7 @@ FmxMBTraitTest >> testDefaultPackageForUserClasses [
 	self assert: userClass package name equals: #Tst
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBTraitTest >> testGenerateRemotesGeneratesRelations [
 	| traitA traitB classA classB instanceOfA instanceOfB | 
 	traitA := FmxTraitsTestGenerateAccessorBModel metamodel elementNamed: 'Famix-MetamodelBuilder-TestsTraitsResources-A.TraitA'.
@@ -263,7 +265,7 @@ FmxMBTraitTest >> testGenerateRemotesGeneratesRelations [
 	self assert: instanceOfB relationToA equals: instanceOfA.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBTraitTest >> testMultipleTraits [
 
 	builder newTraitNamed: #TComment.	
@@ -277,7 +279,7 @@ FmxMBTraitTest >> testMultipleTraits [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBTraitTest >> testSimpleClassAnnotation [
 
 	| generated method |
@@ -294,7 +296,7 @@ FmxMBTraitTest >> testSimpleClassAnnotation [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBTraitTest >> testSimpleTrait [
 	| generated |
 	builder newTraitNamed: #TComment.
@@ -308,7 +310,7 @@ FmxMBTraitTest >> testSimpleTrait [
 	self assertCollection: generated classSide localSelectors sorted equals: #(annotation)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBTraitTest >> testTestingMethods [
 
 	"test messages isMetamodelClass and isMetamodelTrait"
@@ -323,7 +325,7 @@ FmxMBTraitTest >> testTestingMethods [
 	
 ]
 
-{ #category : #'tests - names' }
+{ #category : 'tests - names' }
 FmxMBTraitTest >> testTraitGeneralization [
 
 	| aTrait aClass |
@@ -334,7 +336,7 @@ FmxMBTraitTest >> testTraitGeneralization [
 	self should: [aTrait --|> aClass] raise: FmxMBTraitsGeneralizationError
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBTraitTest >> testTraitTestingSelectors [
 	"test automatic generation of testing methods in the entities hierarchy"
 
@@ -345,7 +347,7 @@ FmxMBTraitTest >> testTraitTestingSelectors [
 	self assertCollection: simpleClass testingSelectors hasSameElements: #(isComment)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBTraitTest >> testUses [
 	| behavior tBehavior generatedBehavior generatedTBehavior |
 	behavior := builder newClassNamed: #Behavior.

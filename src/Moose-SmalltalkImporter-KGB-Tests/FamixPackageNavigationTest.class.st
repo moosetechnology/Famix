@@ -1,10 +1,11 @@
 Class {
-	#name : #FamixPackageNavigationTest,
-	#superclass : #AbstractFamixNavigationTest,
-	#category : #'Moose-SmalltalkImporter-KGB-Tests'
+	#name : 'FamixPackageNavigationTest',
+	#superclass : 'AbstractFamixNavigationTest',
+	#category : 'Moose-SmalltalkImporter-KGB-Tests',
+	#package : 'Moose-SmalltalkImporter-KGB-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixPackageNavigationTest >> testClientClasses [
 	self
 		assertCollection: (self p5FullReferee allClientsAtScope: FamixTType)
@@ -12,21 +13,21 @@ FamixPackageNavigationTest >> testClientClasses [
 			{self c1FullReferencerOutSide . self c14ReferencerOutSideRefereeOutSide . self c6FullReferencerInSideOutSide . self c3ReferencerInSideRefereeOutSide}
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixPackageNavigationTest >> testClientPackages [
 	self
-		assertCollection: self p5FullReferee allClients
+		assertCollection: self p5FullReferee allClientsAtMyScope
 		hasSameElements: {self p1FullReferencer . self p2InteractedReferencerReferee . self p7ReferencerReferee . self p3InteractedReferencer}
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixPackageNavigationTest >> testProviderClasses [
 	self
 		assertCollection: (self p8FullReferencer allProvidersAtScope: FamixTType)
 		hasSameElements: {self c18FullRefereeInSideOutSide . self c19FullRefereeOutSide . self c14ReferencerOutSideRefereeOutSide}
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixPackageNavigationTest >> testProviderPackages [
 	self
 		assertCollection: (self p8FullReferencer allProvidersAtScope: FamixTPackage)

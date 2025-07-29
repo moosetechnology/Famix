@@ -1,12 +1,23 @@
+"
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+|---|
+| `name` | `String` | nil | Basic name of the entity, not full reference.|
+
+"
 Class {
-	#name : #FamixTestComposed2NamedEntity,
-	#superclass : #FamixTestComposed2Entity,
+	#name : 'FamixTestComposed2NamedEntity',
+	#superclass : 'FamixTestComposed2Entity',
 	#traits : 'FamixTNamedEntity',
 	#classTraits : 'FamixTNamedEntity classTrait',
-	#category : #'Famix-TestComposedSubmetamodel2-Entities-Entities'
+	#category : 'Famix-TestComposedSubmetamodel2-Entities-Entities',
+	#package : 'Famix-TestComposedSubmetamodel2-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTestComposed2NamedEntity class >> annotation [
 
 	<FMClass: #NamedEntity super: #FamixTestComposed2Entity>
@@ -16,9 +27,16 @@ FamixTestComposed2NamedEntity class >> annotation [
 	^ self
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTestComposed2NamedEntity class >> isAbstract [
 
 	<generated>
 	^ self == FamixTestComposed2NamedEntity
+]
+
+{ #category : 'testing' }
+FamixTestComposed2NamedEntity >> isNamedEntity [
+
+	<generated>
+	^ true
 ]

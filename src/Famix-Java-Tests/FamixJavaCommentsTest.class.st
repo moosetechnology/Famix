@@ -1,10 +1,11 @@
 Class {
-	#name : #FamixJavaCommentsTest,
-	#superclass : #TestCase,
-	#category : #'Famix-Java-Tests'
+	#name : 'FamixJavaCommentsTest',
+	#superclass : 'TestCase',
+	#category : 'Famix-Java-Tests',
+	#package : 'Famix-Java-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaCommentsTest >> testClassWithComment [
 
 	| javaClass |
@@ -13,7 +14,7 @@ FamixJavaCommentsTest >> testClassWithComment [
 	self assert: javaClass numberOfComments equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaCommentsTest >> testClassWithCommentAndMethodsWithComments [
 
 	| javaClass |
@@ -25,5 +26,5 @@ FamixJavaCommentsTest >> testClassWithCommentAndMethodsWithComments [
 	FamixJavaComment new commentedEntity: (FamixJavaMethod new
 			 parentType: javaClass;
 			 yourself).
-	self assert: javaClass numberOfComments equals: 3 "one in the class, one on each of the 2 methods"
+	self assert: javaClass numberOfComments equals: 1 "Comments of children are not taken into account."
 ]

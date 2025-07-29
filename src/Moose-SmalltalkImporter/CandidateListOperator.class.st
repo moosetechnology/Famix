@@ -6,24 +6,27 @@ a CandidateListOperator compute a list of possible type for a FamixInvocation's 
 - the receiver is 'super'
 "
 Class {
-	#name : #CandidateListOperator,
-	#superclass : #AbstractCandidateListOperator,
-	#category : #'Moose-SmalltalkImporter'
+	#name : 'CandidateListOperator',
+	#superclass : 'AbstractCandidateListOperator',
+	#category : 'Moose-SmalltalkImporter-Operators',
+	#package : 'Moose-SmalltalkImporter',
+	#tag : 'Operators'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 CandidateListOperator >> allCandidatesFor: invocation [
 
-	^ Array withAll: (groups at: invocation signature ifAbsent: [ 
+	^ Array withAll: (groups at: invocation signature ifAbsent: [
 			   | stubs |
-			   stubs := self importer ensureSmalltalkStubMethodsFor:
-				            invocation signature.
+			   stubs := self importer ensureSmalltalkStubMethodsFor: invocation signature.
 			   groups at: invocation signature put: stubs.
-			   stubs do: [ :each | model add: each ].
+			   stubs do: [ :each |
+				   model add: each.
+				   each allParents do: [ :parent | parent mooseModel = model ifFalse: [ model add: parent ] ] ].
 			   stubs ])
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 CandidateListOperator >> computeCandidateListFor: anInvocation [
 
 	anInvocation receiver ifNotNil: [ :receiver | 
@@ -42,7 +45,7 @@ CandidateListOperator >> computeCandidateListFor: anInvocation [
 	anInvocation candidates: (self allCandidatesFor: anInvocation)
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 CandidateListOperator >> computeCandidateListFor: anInvocation withReceivingClass: aClass [
 	| candidate candidates |
 	aClass
@@ -59,7 +62,7 @@ CandidateListOperator >> computeCandidateListFor: anInvocation withReceivingClas
 		]
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 CandidateListOperator >> computeInstanceVariableCandidateListFor: anInvocation [
 	| roelTyperResult allCandidates classContainingInvocation instVarSymbol |
 	classContainingInvocation := Smalltalk at: anInvocation receiver belongsTo name.
@@ -78,7 +81,7 @@ CandidateListOperator >> computeInstanceVariableCandidateListFor: anInvocation [
 	^ roelTyperResult
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 CandidateListOperator >> computeTemporaryVariableCandidateListFor: anInvocation [
 	| aClass |
 	self flag: #todo. "Cyril: This code can never be executed but there is a different implementation in the super class. We should look into this."
@@ -88,7 +91,7 @@ CandidateListOperator >> computeTemporaryVariableCandidateListFor: anInvocation 
 			(candidate isNotNil and: [ candidate isAbstract not ]) ifTrue: [ anInvocation candidates: (Array with: candidate) ] ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 CandidateListOperator >> containerOf: anInstVarName startingAt: aClass [
 	"When we see that the receiver of an Invocation is an Instance Variable, this instance variable may be defined in the class containing the invocation or maybe in one of the superclass.
 	Here we return the class defining this instance variable."
@@ -98,7 +101,7 @@ CandidateListOperator >> containerOf: anInstVarName startingAt: aClass [
 		ifFalse: [ self containerOf: anInstVarName startingAt: aClass ]
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 CandidateListOperator >> setUp [ 
 	
 	"dont call 'model allMethods' here because it sorts the group and we dont care at this level"

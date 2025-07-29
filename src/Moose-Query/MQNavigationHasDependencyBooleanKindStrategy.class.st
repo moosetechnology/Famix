@@ -5,22 +5,24 @@ Description
 I am a stategy (Strategy Design Pattern) used in Navigation queries to define that queries should return a boolean indicating if the entity has dependencies or not.
 "
 Class {
-	#name : #MQNavigationHasDependencyBooleanKindStrategy,
-	#superclass : #MQNavigationResultKindStrategy,
-	#category : #'Moose-Query-Navigating'
+	#name : 'MQNavigationHasDependencyBooleanKindStrategy',
+	#superclass : 'MQNavigationResultKindStrategy',
+	#category : 'Moose-Query-Navigating',
+	#package : 'Moose-Query',
+	#tag : 'Navigating'
 }
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 MQNavigationHasDependencyBooleanKindStrategy class >> collectResultFrom: aCollection query: aQuery [
 	^ self shouldNotImplement
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 MQNavigationHasDependencyBooleanKindStrategy class >> execute: aQuery [
 	^ aQuery executeHasQuery
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 MQNavigationHasDependencyBooleanKindStrategy class >> queryResultKindFor: aQuery [
 	^ self shouldNotImplement
 ]
