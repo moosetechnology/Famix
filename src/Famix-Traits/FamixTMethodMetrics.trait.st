@@ -48,19 +48,3 @@ FamixTMethodMetrics >> hierarchyNestingLevel [
 FamixTMethodMetrics >> hierarchyNestingLevel: aNumber [
 	self cacheAt: #hierarchyNestingLevel put: aNumber
 ]
-
-{ #category : 'Famix-Extensions-metrics-support' }
-FamixTMethodMetrics >> numberOfAnnotationInstances [
-	<FMProperty: #numberOfAnnotationInstances type: #Number>
-	<derived>
-	<FMComment: 'The number of annotation instances defined in the method'>
-
-	^self
-		lookUpPropertyNamed: #numberOfAnnotationInstances
-		computedAs: [self annotationInstances size]
-]
-
-{ #category : 'metrics' }
-FamixTMethodMetrics >> numberOfAnnotationInstances: aNumber [
-	self cacheAt: #numberOfAnnotationInstances put: aNumber
-]
