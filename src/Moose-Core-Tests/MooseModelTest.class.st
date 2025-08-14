@@ -31,6 +31,22 @@ MooseModelTest >> testAddAnnouncement [
 ]
 
 { #category : 'tests' }
+MooseModelTest >> testAsJSONString [
+
+	self assert: MooseModel new asJSONString equals: '[
+]'.
+	self
+		assert: (MooseModel new
+				 add: MooseEntity new;
+				 asJSONString)
+		equals: '[{
+	"FM3":"Moose.Entity",
+	"id":1
+	}
+]'
+]
+
+{ #category : 'tests' }
 MooseModelTest >> testAsMSEString [
 	self assert: MooseModel new asMSEString equals: '()'.
 	self

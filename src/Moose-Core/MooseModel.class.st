@@ -350,6 +350,12 @@ MooseModel >> allRootContainers [
 ]
 
 { #category : 'import-export' }
+MooseModel >> asJSONString [
+
+	^ String streamContents: [ :stream | self exportToJSONStream: stream ]
+]
+
+{ #category : 'import-export' }
 MooseModel >> asMSEString [
 
 	^ String streamContents: [ :stream | self exportToMSEStream: stream ]
