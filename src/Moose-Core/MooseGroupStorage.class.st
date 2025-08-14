@@ -77,7 +77,6 @@ MooseGroupStorage >> allEntityTypes [
 	^ byType keys
 ]
 
-
 { #category : 'iterators' }
 MooseGroupStorage >> basicIterator [
 	^ self elements basicIterator
