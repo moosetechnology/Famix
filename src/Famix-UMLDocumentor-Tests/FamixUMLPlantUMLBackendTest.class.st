@@ -1,44 +1,13 @@
 Class {
 	#name : #FamixUMLPlantUMLBackendTest,
-	#superclass : #TestCase,
-	#instVars : [
-		'backend'
-	],
+	#superclass : #FamixUMLAbstractBackendTest,
 	#category : #'Famix-UMLDocumentor-Tests-Generation'
 }
 
 { #category : #running }
-FamixUMLPlantUMLBackendTest >> classNamed: aString [
+FamixUMLPlantUMLBackendTest >> newBackend [
 
-	^FamixUMLClass new
-		name: aString ;
-		color: Color white ;
-		yourself
-]
-
-{ #category : #running }
-FamixUMLPlantUMLBackendTest >> link: aLink from: className to: superClassName [
-
-	^aLink new
-		source: className ;
-		target: superClassName ;
-		yourself
-]
-
-{ #category : #running }
-FamixUMLPlantUMLBackendTest >> property: aName type: aString [
-
-	^FamixUMLProperty new
-		name: aName ;
-		type: aString ;
-		yourself
-]
-
-{ #category : #running }
-FamixUMLPlantUMLBackendTest >> setUp [
-	super setUp.
-
-	backend := FamixUMLPlantUMLBackend new
+	^FamixUMLPlantUMLBackend new
 ]
 
 { #category : #tests }
@@ -148,7 +117,7 @@ FamixUMLPlantUMLBackendTest >> testGenerateClassProperties [
 '
 ]
 
-{ #category : #tests }
+{ #category : #'as yet unclassified' }
 FamixUMLPlantUMLBackendTest >> testGenerateClassStub [
 	| umlClass |
 	umlClass := (self classNamed: 'AClass').
