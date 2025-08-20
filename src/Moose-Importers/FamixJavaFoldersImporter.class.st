@@ -2,8 +2,8 @@
 I am a class that will take as input a collection of folders containing java code and I'll parse the projects with VerveineJ and import the resulting models.
 
 For VerveineJ, for now I can get it in two way:
-- Through a setting to target an existing VerveineJ folder
-- By downloading the latest version of VerveineJ
+- Through a setting to target an existing VerveineJ jar
+- By downloading the latest version of VerveineJ jar
 
 This is brittle because the version of VerveineJ might not be compatible with the famix version currently in the image. We should think of a way to improve this.
 
@@ -15,7 +15,7 @@ FamixJavaFoldersImporter importFolder: aFileReference.
 
 ""or""
 
-FamixFolderJavaImporter importFolder: aFileReference
+FamixFolderJavaImporter importAndInstallFolder: aFileReference
 ```
 
 In the future it might be nice to add ways to import projects of other languages.
@@ -28,18 +28,12 @@ Class {
 		'models'
 	],
 	#classVars : [
-		'VerveineJPath'
+		'VerveineJJar'
 	],
 	#category : 'Moose-Importers-ParseFolders',
 	#package : 'Moose-Importers',
 	#tag : 'ParseFolders'
 }
-
-{ #category : 'accessing' }
-FamixJavaFoldersImporter class >> defaultVerveineJDirectory [
-
-	^ FileSystem workingDirectory / 'VerveineJ'
-]
 
 { #category : 'actions' }
 FamixJavaFoldersImporter class >> importAndInstallFolder: aFileReference [
@@ -57,6 +51,12 @@ FamixJavaFoldersImporter class >> importAndInstallFolders: aCollection [
 ]
 
 { #category : 'actions' }
+FamixJavaFoldersImporter class >> importFolder: aFolder [
+
+	^ self importFolders: { aFolder }
+]
+
+{ #category : 'actions' }
 FamixJavaFoldersImporter class >> importFolders: aCollection [
 	"I'll parse and import in a moose model for each folder in the collection."
 
@@ -69,41 +69,77 @@ FamixJavaFoldersImporter class >> importFolders: aCollection [
 FamixJavaFoldersImporter class >> importSettingsOn: aBuilder [
 
 	<systemsettings>
-	(aBuilder setting: #verveineJPath)
+	(aBuilder setting: #verveineJJarPath)
 		parent: #moose;
 		type: #FilePathEncoder;
-		default: self verveineJPath;
-		label: 'VerveineJ path for FamixJavaFolderImporter';
+		default: self verveineJJarPath;
+		label: 'VerveineJ jar path for FamixJavaFolderImporter';
 		description: 'If you wish to use your own version of verveineJ through FamixJavaFolderImporter you can specify your own path to it..';
 		target: self
 ]
 
-{ #category : 'accessing' }
-FamixJavaFoldersImporter class >> verveineJPath [
-	"We check that the path exists because the loading of the settings are setting it in the CI and we end up with a folder that is not the right one :("
+{ #category : 'class initialization' }
+FamixJavaFoldersImporter class >> reset [
 
-	^ (VerveineJPath isNotNil and: [ VerveineJPath exists ])
-		  ifTrue: [ VerveineJPath ]
-		  ifFalse: [ VerveineJPath := self defaultVerveineJDirectory ]
+	<script>
+	VerveineJJar := nil
 ]
 
 { #category : 'accessing' }
-FamixJavaFoldersImporter class >> verveineJPath: anObject [
+FamixJavaFoldersImporter class >> verveineJJar [
 
-	VerveineJPath := anObject
+	^ VerveineJJar
+]
+
+{ #category : 'accessing' }
+FamixJavaFoldersImporter class >> verveineJJar: aFile [
+
+	VerveineJJar := aFile
+]
+
+{ #category : 'accessing' }
+FamixJavaFoldersImporter class >> verveineJJarPath [
+	"We check that the path exists because the loading of the settings are setting it in the CI and we end up with a folder that is not the right one :("
+
+	^ (VerveineJJar isNotNil and: [ VerveineJJar exists ])
+		  ifTrue: [ VerveineJJar pathString ]
+		  ifFalse: [ '' ]
+]
+
+{ #category : 'accessing' }
+FamixJavaFoldersImporter class >> verveineJJarPath: anObject [
+
+	anObject asFileReference
+		ifExists: [ :file |
+				file extension = 'jar' ifFalse: [ ^ self inform: 'Only a jar should be passed as argument.' ].
+				VerveineJJar := file ]
+		ifAbsent: [ ^ self inform: 'The file does not exist' ]
 ]
 
 { #category : 'initialization' }
 FamixJavaFoldersImporter >> ensureVerveineJ [
 
-	self verveineJScript ifAbsent: [
-		"For now we take the latest VerveineJ. Probably we could have a better way to download VerveinJ by selecting a version that is compatible with the current Famix. But I don't know how to do that for now."
-		IceGitClone new
-			location: self verveineJPath;
-			url: 'https://github.com/moosetechnology/VerveineJ.git';
-			execute.
+	| json asset downloadUrl |
+	self shouldDownloadVerveineJ ifFalse: [ ^ self ].
 
-		self verveineJScript ifAbsent: [ self error: 'Cannot download verveineJ.' ] ]
+	json := ZnClient new
+		        url: 'https://api.github.com/repos/moosetechnology/VerveineJ/releases/latest';
+		        accept: ZnMimeType applicationJson;
+		        get;
+		        contents.
+	asset := ((NeoJSONReader fromString: json) at: #assets)
+		         detect: [ :each | (each at: #name) beginsWith: 'VerveineJ-' ]
+		         ifNone: [ nil ].
+	downloadUrl := asset at: #browser_download_url.
+	(FileLocator workingDirectory / (asset at: #name)) ensureDelete.
+	ZnClient new
+		url: downloadUrl;
+		downloadTo: FileLocator workingDirectory;
+		close.
+
+	self class verveineJJar: (FileLocator workingDirectory / (asset at: #name)) asFileReference.
+
+	self shouldDownloadVerveineJ ifTrue: [ self error: 'Cannot download verveineJ.' ]
 ]
 
 { #category : 'accessing' }
@@ -123,8 +159,8 @@ FamixJavaFoldersImporter >> generateJsonOfProjects [
 
 	folders
 		do: [ :folder |
-			LibC runCommand: ('{1} -o {2} -format json {3}' format: {
-						 self verveineJScript pathString asComment.
+			LibC runCommand: ('java -jar {1} -o {2} -format json {3}' format: {
+						 self verveineJJar pathString asComment.
 						 (self jsonForFolder: folder).
 						 folder pathString asComment }) ]
 		displayingProgress: [ :folder | folder pathString ]
@@ -192,15 +228,18 @@ FamixJavaFoldersImporter >> jsonForFolder: folder [
 	^ folder basename , '.json'
 ]
 
-{ #category : 'accessing' }
-FamixJavaFoldersImporter >> verveineJPath [
+{ #category : 'testing' }
+FamixJavaFoldersImporter >> shouldDownloadVerveineJ [
 
-	^ self class verveineJPath
+	self verveineJJar ifNil: [ ^ true ].
+
+	self verveineJJar ifAbsent: [ ^ true ].
+
+	^ self verveineJJar extension ~= 'jar'
 ]
 
 { #category : 'accessing' }
-FamixJavaFoldersImporter >> verveineJScript [
-	"Manage windows later?"
+FamixJavaFoldersImporter >> verveineJJar [
 
-	^ self verveineJPath / 'verveinej.sh'
+	^ self class verveineJJar
 ]
