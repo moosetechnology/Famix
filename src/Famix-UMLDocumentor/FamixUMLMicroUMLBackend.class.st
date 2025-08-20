@@ -85,6 +85,27 @@ FamixUMLMicroUMLBackend >> generateUse: aUseLink [
 		superclass: aUseLink target"
 ]
 
+{ #category : #initialization }
+FamixUMLMicroUMLBackend >> initialize [
+
+	super initialize.
+
+	(PackageOrganizer default hasPackage: 'MicroUML-AST')
+		ifFalse: [
+			SpConfirmDialog new
+				title: 'Missing MicroUML';
+				label: 'FamixUMLMicroUMLBackend requires the MicroUML project.
+Would you like to load it (from GitHub)?';
+				acceptLabel: 'Load';
+				cancelLabel: 'Cancel';
+				onAccept: [ Metacello new
+					baseline: 'MicroUML' ;
+					repository: 'github://olekscode/MicroUML:main' ;
+					load ];
+				openDialog
+		]
+]
+
 { #category : #generating }
 FamixUMLMicroUMLBackend >> microUmlClassDiagram [
 
