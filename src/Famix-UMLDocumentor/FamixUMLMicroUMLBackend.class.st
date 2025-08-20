@@ -9,11 +9,24 @@ Class {
 	#category : #'Famix-UMLDocumentor-Backend'
 }
 
+{ #category : #accessing }
+FamixUMLMicroUMLBackend >> canvas [
+
+	^ canvas
+]
+
+{ #category : #api }
+FamixUMLMicroUMLBackend >> clearMicroUmlModel [
+
+	microUmlClasses := Dictionary new.
+	microUmlAssociations := OrderedCollection new.
+
+]
+
 { #category : #api }
 FamixUMLMicroUMLBackend >> export: entities [
 
-	microUmlClasses := Dictionary new: (entities count: [ :each | each class = FamixUMLClass ]).
-	microUmlAssociations := OrderedCollection new: (entities count: [ :each | each class = FamixUMLAssociation ]).
+	self clearMicroUmlModel.
 
 	super export: entities.
 
@@ -90,6 +103,8 @@ FamixUMLMicroUMLBackend >> initialize [
 
 	super initialize.
 
+	self clearMicroUmlModel.
+
 	(PackageOrganizer default hasPackage: 'MicroUML-AST')
 		ifFalse: [
 			SpConfirmDialog new
@@ -106,6 +121,12 @@ Would you like to load it (from GitHub)?';
 		]
 ]
 
+{ #category : #'private - testing' }
+FamixUMLMicroUMLBackend >> microUmlAssociations [
+
+	^ microUmlAssociations
+]
+
 { #category : #generating }
 FamixUMLMicroUMLBackend >> microUmlClassDiagram [
 
@@ -113,4 +134,10 @@ FamixUMLMicroUMLBackend >> microUmlClassDiagram [
 		classes: microUmlClasses values ;
 		associations: microUmlAssociations ;
 		yourself
+]
+
+{ #category : #'private - testing' }
+FamixUMLMicroUMLBackend >> microUmlClasses [
+
+	^ microUmlClasses
 ]
