@@ -14,14 +14,10 @@ Class {
 
 { #category : #api }
 FamixUMLTextBackend >> export: entities [
-	"for readibility of results, entities are grouped according to their class"
 
 	self generateHeader.
 
-	self generateClasses: entities.
-	self generateInheritances: entities.
-	self generateUses: entities.
-	self generateRelations: entities.
+	super export: entities.
 
 	self generateFooter.
 	
@@ -34,7 +30,7 @@ FamixUMLTextBackend >> export: entities [
 
 { #category : #generating }
 FamixUMLTextBackend >> generateAssociation: association [
-
+1halt.
 	outputStream 
 		<< association asString
 ]
@@ -43,8 +39,19 @@ FamixUMLTextBackend >> generateAssociation: association [
 FamixUMLTextBackend >> generateClass: aClass [
 
 	self generateClassHeader: aClass.
-	self generateClassProperties: aClass.
+	super generateClass: aClass.
 	self generateClassFooter: aClass.
+]
+
+{ #category : #generating }
+FamixUMLTextBackend >> generateClass: aClass property: property [
+
+	outputStream
+		<< '  ' ;
+		<< property type ;
+		<< ' : ' ;
+		<< property name ;
+		cr
 ]
 
 { #category : #generating }
@@ -60,21 +67,6 @@ FamixUMLTextBackend >> generateClassHeader: aClass [
 	outputStream
 		<< 'aUMLClass: ' ;
 		<< aClass name
-]
-
-{ #category : #generating }
-FamixUMLTextBackend >> generateClassProperties: aClass [
-
-	aClass properties do: [ :prop | self generateProperty: prop ].
-]
-
-{ #category : #generating }
-FamixUMLTextBackend >> generateClasses: entities [
-
-	entities do: [ :each |
-		(each class = FamixUMLClass)
-		ifTrue: [ self generateClass: each ]
-	]
 ]
 
 { #category : #generating }
@@ -98,35 +90,6 @@ FamixUMLTextBackend >> generateInheritance: inheritance [
 ]
 
 { #category : #generating }
-FamixUMLTextBackend >> generateInheritances: entities [
-
-	entities do: [ :each |
-		(each class = FamixUMLInheritance)
-		ifTrue: [ self generateInheritance: each ]
-	]
-]
-
-{ #category : #generating }
-FamixUMLTextBackend >> generateProperty: property [
-
-	outputStream
-		<< '  ' ;
-		<< property type name ;
-		<< ' : ' ;
-		<< property name ;
-		cr
-]
-
-{ #category : #generating }
-FamixUMLTextBackend >> generateRelations: entities [
-
-	entities do: [ :each |
-		(each class = FamixUMLAssociation)
-		ifTrue: [ self generateAssociation: each ]
-	]
-]
-
-{ #category : #generating }
 FamixUMLTextBackend >> generateUse: aUseLink [
 
 	outputStream
@@ -134,15 +97,6 @@ FamixUMLTextBackend >> generateUse: aUseLink [
 		<< ' uses-trait: ' ;
 		<< aUseLink target ;
 		cr
-]
-
-{ #category : #generating }
-FamixUMLTextBackend >> generateUses: entities [
-
-	entities do: [ :each |
-		(each class = FamixUMLUse)
-		ifTrue: [ self generateUse: each ]
-	]
 ]
 
 { #category : #initialization }

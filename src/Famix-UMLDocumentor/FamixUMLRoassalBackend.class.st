@@ -30,3 +30,27 @@ FamixUMLRoassalBackend >> export: famixUMLEntities [
 	canvas := builder canvas.
 	^canvas
 ]
+
+{ #category : #generating }
+FamixUMLRoassalBackend >> generateAssociation: association [
+
+	self shouldNotImplement 
+]
+
+{ #category : #generating }
+FamixUMLRoassalBackend >> generateClass: aClass property: property [
+
+	self shouldNotImplement 
+]
+
+{ #category : #generating }
+FamixUMLRoassalBackend >> generateInheritance: inheritance [
+
+	self shouldNotImplement 
+]
+
+{ #category : #generating }
+FamixUMLRoassalBackend >> generateUse: aUseLink [
+
+	self shouldNotImplement 
+]

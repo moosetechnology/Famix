@@ -47,6 +47,17 @@ FamixUMLPlantUMLBackend >> generateAssociationSymbol: association [
 ]
 
 { #category : #generating }
+FamixUMLPlantUMLBackend >> generateClass: aClass property: property [
+
+	outputStream
+		<< '  ' ;
+		<< property type ;
+		<< ' ' ;
+		<< property name ;
+		cr
+]
+
+{ #category : #generating }
 FamixUMLPlantUMLBackend >> generateClassFooter: aUMLClass [
 
 	outputStream
@@ -99,17 +110,6 @@ FamixUMLPlantUMLBackend >> generateInheritance: inheritance [
 		nextPutAll: inheritance target ;
 		nextPutAll: ' <|-- ' ;
 		nextPutAll: inheritance source ;
-		cr
-]
-
-{ #category : #generating }
-FamixUMLPlantUMLBackend >> generateProperty: property [
-
-	outputStream
-		<< '  ' ;
-		<< property type ;
-		<< ' ' ;
-		<< property name ;
 		cr
 ]
 
