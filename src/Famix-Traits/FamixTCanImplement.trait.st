@@ -49,7 +49,7 @@ FamixTCanImplement >> allImplementedInterfacesDo: aBlock [
 
 	self interfaceImplementations do: [ :implementation |
 			aBlock value: implementation interface.
-			implementation interface allImplementedInterfacesDo: aBlock ]
+			implementation interface allSuperclassesDo: aBlock ]
 ]
 
 { #category : 'accessing' }
