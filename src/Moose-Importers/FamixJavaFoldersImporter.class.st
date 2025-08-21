@@ -127,9 +127,11 @@ FamixJavaFoldersImporter >> ensureVerveineJ [
 		        accept: ZnMimeType applicationJson;
 		        get;
 		        contents.
-	asset := ((NeoJSONReader fromString: json) at: #assets)
+
+	asset := ((NeoJSONReader fromString: json) at: #assets ifAbsent: [ self error: 'No asset present in the received JSON:' , json ])
 		         detect: [ :each | (each at: #name) beginsWith: 'VerveineJ-' ]
-		         ifNone: [ nil ].
+		         ifNone: [ self error: 'No asset named VerveineJ present in the received JSON:' , json ].
+
 	downloadUrl := asset at: #browser_download_url.
 	(FileLocator workingDirectory / (asset at: #name)) ensureDelete.
 	ZnClient new
