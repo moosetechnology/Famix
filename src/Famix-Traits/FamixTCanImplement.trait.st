@@ -44,6 +44,14 @@ FamixTCanImplement >> addInterfaceImplementation: anObject [
 	^ self interfaceImplementations add: anObject
 ]
 
+{ #category : 'enumerating' }
+FamixTCanImplement >> allImplementedInterfacesDo: aBlock [
+
+	self interfaceImplementations do: [ :implementation |
+			aBlock value: implementation interface.
+			implementation interface allSuperclassesDo: aBlock ]
+]
+
 { #category : 'accessing' }
 FamixTCanImplement >> directImplementedInterfaces [
 
