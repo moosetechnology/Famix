@@ -62,6 +62,22 @@ FamixTImplicitVariable >> accept: aVisitor [
 	^ aVisitor visitFamixTImplicitVariable: self
 ]
 
+{ #category : 'accessing' }
+FamixTImplicitVariable >> declaredType [
+	"If we have a declared type, we return it. Else, we check if the implicit variable is self or super to determine the declared type."
+
+	self typing ifNotNil: [ :t | t declaredType ifNotNil: [ :type | ^ type ] ].
+
+	[
+		self isSelf ifTrue: [ ^ (self query ancestors ofType: FamixTClass) anyOne ].
+
+		self isSuper ifTrue: [ ^ (self query ancestors ofType: FamixTClass) anyOne superclass ] ]
+		on: Error
+		do: [ "Nothing. If we cannot determine the type, just return nil." ].
+
+	^ nil
+]
+
 { #category : 'testing' }
 FamixTImplicitVariable >> isImplicitVariable [
 
@@ -72,7 +88,13 @@ FamixTImplicitVariable >> isImplicitVariable [
 { #category : 'testing' }
 FamixTImplicitVariable >> isSelf [
 
-	^ self name = 'self'
+	^ self shouldBeImplemented
+]
+
+{ #category : 'testing' }
+FamixTImplicitVariable >> isSuper [
+
+	^ self name = 'super'
 ]
 
 { #category : 'accessing' }
