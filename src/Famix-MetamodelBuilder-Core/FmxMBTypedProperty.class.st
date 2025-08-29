@@ -58,7 +58,15 @@ FmxMBTypedProperty >> generateGetterIn: aClassOrTrait [
 			 s tab; nextPutAll: '<multivalued>'; cr. ].
 		commentDefinition  
 			ifNotEmpty: [ s tab; nextPutAll: commentDefinition; cr].
-		s tab; nextPutAll: '^ '; nextPutAll: self name.
+		s tab; nextPutAll: '^ '.
+		
+		self isRemote
+			ifTrue: [ s nextPutAll: 'self attributeAt: #'; 
+				nextPutAll: self name;
+				nextPutAll: ' ifAbsent: [ nil ]' ]
+			ifFalse: [ s nextPutAll: self name ].
+		
+		
 		self defaultValue ifNotNil: [
 			s nextPutAll: (' ifNil: [ {1} := {2} ]' format: { self name. self defaultValue printString }) ] ].
 
@@ -70,13 +78,25 @@ FmxMBTypedProperty >> generateGetterIn: aClassOrTrait [
 
 { #category : 'generating' }
 FmxMBTypedProperty >> generateSetterIn: aClassOrTrait [
-	self builder environment
-		compile:
-			('{1}: anObject
+
+	| methodToFormat |
+	methodToFormat := String streamContents: [ :stream |
+			                  stream nextPutAll: '{1}: anObject
 	<generated>
-	{1} := anObject' format: {self name})
+	'.
+			                  self isRemote
+				                  ifTrue: [
+				                  stream nextPutAll:
+					                  'self attributeAt: #{1} put: anObject' ]
+				                  ifFalse: [ stream nextPutAll: '{1} := anObject' ] ].
+	self builder environment
+		compile: (methodToFormat format: { self name })
 		in: aClassOrTrait
 		classified: 'accessing'
+
+	"'{1}: anObject
+	<generated>
+	{1} := anObject'"
 ]
 
 { #category : 'generating' }
