@@ -52,14 +52,18 @@ FmxMBGeneratorRemotePropertiesTest >> testRemotePropertyIsInCorrectPackage [
 	getterMethod := (FamixGenerateRemotePropertiesTestResource current
 		                 classNamed: #FmxTestGeneratePropertiesXEntityX)
 	                >> #testProperty.
-	self assert: getterMethod package name
-		= FamixMetamodelGenerateRemotePropertiesTestGeneratorXProperties
+	self
+		assert: getterMethod package name
+		equals:
+			FamixMetamodelGenerateRemotePropertiesTestGeneratorXProperties
 				packageName.
 
 	setterMethod := (FamixGenerateRemotePropertiesTestResource current
 		                 classNamed: #FmxTestGeneratePropertiesXEntityX)
 	                >> #testProperty:.
-	self assert: setterMethod package name
-		= FamixMetamodelGenerateRemotePropertiesTestGeneratorXProperties
+	self
+		assert: setterMethod package name
+		equals:
+			FamixMetamodelGenerateRemotePropertiesTestGeneratorXProperties
 				packageName
 ]
