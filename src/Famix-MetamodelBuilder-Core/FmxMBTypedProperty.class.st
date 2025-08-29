@@ -70,7 +70,11 @@ FmxMBTypedProperty >> generateGetterIn: aClassOrTrait [
 		self defaultValue ifNotNil: [
 			s nextPutAll: (' ifNil: [ {1} := {2} ]' format: { self name. self defaultValue printString }) ] ].
 
-	self builder environment compile: methodSource in: aClassOrTrait classified: 'accessing'.	
+	self builder environment
+		compile: methodSource
+		in: aClassOrTrait
+		classified: 'accessing'
+		package: self builder parentBuilderPackageName
 	
 
 	
@@ -93,6 +97,7 @@ FmxMBTypedProperty >> generateSetterIn: aClassOrTrait [
 		compile: (methodToFormat format: { self name })
 		in: aClassOrTrait
 		classified: 'accessing'
+		package: self builder parentBuilderPackageName
 
 	"'{1}: anObject
 	<generated>

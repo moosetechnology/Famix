@@ -44,3 +44,22 @@ FmxMBGeneratorRemotePropertiesTest >> testDefaultNilPropertyOfEntityA [
 
 	self assert: entityA testProperty equals: nil
 ]
+
+{ #category : 'tests' }
+FmxMBGeneratorRemotePropertiesTest >> testRemotePropertyIsInCorrectPackage [
+
+	| getterMethod setterMethod |
+	getterMethod := (FamixGenerateRemotePropertiesTestResource current
+		                 classNamed: #FmxTestGeneratePropertiesXEntityX)
+	                >> #testProperty.
+	self assert: getterMethod package name
+		= FamixMetamodelGenerateRemotePropertiesTestGeneratorXProperties
+				packageName.
+
+	setterMethod := (FamixGenerateRemotePropertiesTestResource current
+		                 classNamed: #FmxTestGeneratePropertiesXEntityX)
+	                >> #testProperty:.
+	self assert: setterMethod package name
+		= FamixMetamodelGenerateRemotePropertiesTestGeneratorXProperties
+				packageName
+]
