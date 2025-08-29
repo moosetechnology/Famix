@@ -15,16 +15,16 @@ FamixGenerateRemotePropertiesTestResource >> classNamed: aSymbol [
 FamixGenerateRemotePropertiesTestResource >> setUp [
 
 	super setUp.
-	FamixMetamodelGenerateRemoteAccessorTestGeneratorA generate.
-	FamixMetamodelGenerateRemoteAccessorTestGeneratorAProperties generate
+	FamixMetamodelGenerateRemotePropertiesTestGeneratorX generate.
+	FamixMetamodelGenerateRemotePropertiesTestGeneratorXProperties generate
 ]
 
 { #category : 'running' }
 FamixGenerateRemotePropertiesTestResource >> tearDown [
-	[ 'Famix-MetamodelBuilder-TestsResources-A' asPackage removeFromSystem ]
+	[ 'Famix-MetamodelBuilder-TestsResources-X' asPackage removeFromSystem ]
 		on: NotFound
 		do: [  ].
-	[ FamixMetamodelGenerateRemoteAccessorTestGeneratorAProperties packageName asPackage removeFromSystem ]
+	[ FamixMetamodelGenerateRemotePropertiesTestGeneratorXProperties packageName asPackage removeFromSystem ]
 		on: NotFound
 		do: [  ].
 ]

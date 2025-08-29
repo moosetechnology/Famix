@@ -20,7 +20,7 @@ FmxMBGeneratorRemotePropertiesTest >> setUp [
 
 	super setUp.
 	entityA := (FamixGenerateRemotePropertiesTestResource current
-		            classNamed: #FmxTestGenerateAccessorAEntityA) new
+		            classNamed: #FmxTestGeneratePropertiesXEntityX) new
 ]
 
 { #category : 'tests' }
