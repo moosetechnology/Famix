@@ -741,7 +741,7 @@ TEntityMetaLevelDependency >> miInspectionTree: aBuilder [
 						    yourself);
 				   addColumn: (SpStringTableColumn evaluated: #name);
 				   yourself);
-		  children: [ :aClass | aClass children ];
+		  children: [ :aClass | aClass children asArray ];
 		  beMultipleSelection;
 		  roots: { self };
 		  beResizable
