@@ -1,9 +1,6 @@
 Class {
 	#name : 'FamixGenerateRemotePropertiesTestResource',
 	#superclass : 'TestResource',
-	#instVars : [
-		'entityA'
-	],
 	#category : 'Famix-MetamodelBuilder-Tests-Helpers',
 	#package : 'Famix-MetamodelBuilder-Tests',
 	#tag : 'Helpers'
@@ -15,22 +12,11 @@ FamixGenerateRemotePropertiesTestResource >> classNamed: aSymbol [
 ]
 
 { #category : 'running' }
-FamixGenerateRemotePropertiesTestResource >> entityA [
-	^ entityA
-]
-
-{ #category : 'running' }
 FamixGenerateRemotePropertiesTestResource >> setUp [
 
 	super setUp.
 	FamixMetamodelGenerateRemoteAccessorTestGeneratorA generate.
-	FamixMetamodelGenerateRemoteAccessorTestGeneratorAProperties generate.
-
-	"The following entities are created by the generators
-	Do not remove them (or change the all the tests)"
-	entityA := (self classNamed: #FmxTestGenerateAccessorAEntityA) new.
-	(self classNamed: #FmxTestGenerateAccessorAModel) new addAll: {
-			entityA. }
+	FamixMetamodelGenerateRemoteAccessorTestGeneratorAProperties generate
 ]
 
 { #category : 'running' }
