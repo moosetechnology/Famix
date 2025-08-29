@@ -69,12 +69,22 @@ FmxMBTypedProperty >> generateGetterIn: aClassOrTrait [
 		
 		self defaultValue ifNotNil: [
 			s nextPutAll: (' ifNil: [ {1} := {2} ]' format: { self name. self defaultValue printString }) ] ].
-
-	self builder environment
-		compile: methodSource
-		in: aClassOrTrait
-		classified: 'accessing'
-		package: self builder parentBuilderPackageName
+	
+	"cannot merge both builder of the accessing disapear for non remote entity"
+	self isRemote
+			ifTrue: [ 
+				self builder environment
+					compile: methodSource
+					in: aClassOrTrait
+					classified: 'accessing'
+					package: self builder parentBuilderPackageName
+			]
+			ifFalse: [
+				self builder environment
+					compile: methodSource
+					in: aClassOrTrait
+					classified: 'accessing' ]
+		
 	
 
 	
@@ -93,15 +103,21 @@ FmxMBTypedProperty >> generateSetterIn: aClassOrTrait [
 				                  stream nextPutAll:
 					                  'self attributeAt: #{1} put: anObject' ]
 				                  ifFalse: [ stream nextPutAll: '{1} := anObject' ] ].
-	self builder environment
-		compile: (methodToFormat format: { self name })
-		in: aClassOrTrait
-		classified: 'accessing'
-		package: self builder parentBuilderPackageName
 
-	"'{1}: anObject
-	<generated>
-	{1} := anObject'"
+	"cannot merge both builder of the accessing disapear for non remote entity"
+	self isRemote
+			ifTrue: [ 
+				self builder environment
+					compile: (methodToFormat format: { self name })
+					in: aClassOrTrait
+					classified: 'accessing'
+					package: self builder parentBuilderPackageName
+			]
+			ifFalse: [
+				self builder environment
+					compile: (methodToFormat format: { self name })
+					in: aClassOrTrait
+					classified: 'accessing' ]
 ]
 
 { #category : 'generating' }
