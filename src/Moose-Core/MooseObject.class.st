@@ -221,22 +221,37 @@ MooseObject >> announcer: anAnnouncer [
 ]
 
 { #category : 'accessing' }
+MooseObject >> attributeAt: name [
+
+	^ self attributeAt: name ifAbsent: [ NotFound signalFor: 'Property named ' , name ]
+]
+
+{ #category : 'accessing' }
 MooseObject >> attributeAt: name ifAbsent: aBlock [
-	1 to: entityAttributes size do: [ :n | name == (entityAttributes at: n) key ifTrue: [ ^ (entityAttributes at: n) value ] ].
+
+	| aName |
+	aName := name asSymbol.
+	1 to: entityAttributes size do: [ :n | aName == (entityAttributes at: n) key ifTrue: [ ^ (entityAttributes at: n) value ] ].
 	^ aBlock value
 ]
 
 { #category : 'accessing' }
 MooseObject >> attributeAt: name ifAbsentPut: aBlock [
-	1 to: entityAttributes size do: [ :n | name == (entityAttributes at: n) key ifTrue: [ ^ (entityAttributes at: n) value ] ].
-	entityAttributes := entityAttributes copyWith: name -> aBlock value.
+
+	| aName |
+	aName := name asSymbol.
+	1 to: entityAttributes size do: [ :n | aName == (entityAttributes at: n) key ifTrue: [ ^ (entityAttributes at: n) value ] ].
+	entityAttributes := entityAttributes copyWith: aName -> aBlock value.
 	^ entityAttributes last value
 ]
 
 { #category : 'accessing' }
 MooseObject >> attributeAt: name put: value [
-	1 to: entityAttributes size do: [ :n | name == (entityAttributes at: n) key ifTrue: [ ^ (entityAttributes at: n) value: value ] ].
-	entityAttributes := entityAttributes copyWith: name -> value.
+
+	| aName |
+	aName := name asSymbol.
+	1 to: entityAttributes size do: [ :n | aName == (entityAttributes at: n) key ifTrue: [ ^ (entityAttributes at: n) value: value ] ].
+	entityAttributes := entityAttributes copyWith: aName -> value.
 	^ entityAttributes last value
 ]
 
@@ -522,21 +537,10 @@ MooseObject >> properties [
 ]
 
 { #category : 'properties' }
-MooseObject >> propertyNamed: propertyName [ 
+MooseObject >> propertyNamed: propertyName [
 	"Returns the value of the property named propertyName, raises an error if the property does not exist"
 
-	^ self propertyNamed: propertyName ifAbsent: [ NotFound signalFor: 'Property named ', propertyName  ]
-]
-
-{ #category : 'properties' }
-MooseObject >> propertyNamed: propertyName ifAbsent: aBlock [
-	"Return the value of the property named propertyName, evaluate aBlock if the property does not exist"
-
-	^ self
-		cacheAt: propertyName asSymbol
-		ifAbsent: [ ([ self mmGetProperty: (self mooseDescription propertyNamed: propertyName) ]
-				on: Error
-				do: [ :ex | nil ]) ifNil: [ aBlock value ] ]
+	^ self cacheAt: propertyName ifAbsent: [ NotFound signalFor: 'Property named ' , propertyName ]
 ]
 
 { #category : 'properties' }
