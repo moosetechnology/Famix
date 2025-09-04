@@ -121,6 +121,12 @@ FamixTMethod >> isInSameClassAs: aMethod [
 ]
 
 { #category : 'testing' }
+FamixTMethod >> isInitializer [
+
+	^ self shouldBeImplemented
+]
+
+{ #category : 'testing' }
 FamixTMethod >> isMethod [
 
 	<generated>

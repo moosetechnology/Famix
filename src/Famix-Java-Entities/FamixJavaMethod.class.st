@@ -214,6 +214,18 @@ FamixJavaMethod >> isImplementing [
 ]
 
 { #category : 'testing' }
+FamixJavaMethod >> isInitializer [
+
+	^ self isConstructor or: [ self isInstanciationInitializer ]
+]
+
+{ #category : 'testing' }
+FamixJavaMethod >> isInstanciationInitializer [
+
+	^ '<Initializer>' = self name
+]
+
+{ #category : 'testing' }
 FamixJavaMethod >> isJUnit4Test [
 	<FMProperty: #isJUnit4Test type: #Boolean>
 	<derived>
