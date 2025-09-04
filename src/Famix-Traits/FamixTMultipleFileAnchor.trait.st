@@ -73,9 +73,11 @@ FamixTMultipleFileAnchor >> allSourceAnchorsDo: aBlock [
 
 { #category : 'accessing' }
 FamixTMultipleFileAnchor >> containerFiles [
-	^ self
-		propertyNamed: #containerFiles
-		ifAbsentPut: [ self fileAnchors collect: #correspondingFile thenReject: #isNil ]
+
+	^ self cacheAt: #containerFiles ifAbsentPut: [
+			  self fileAnchors
+				  collect: #correspondingFile
+				  thenReject: #isNil ]
 ]
 
 { #category : 'adding' }

@@ -540,11 +540,6 @@ MooseObject >> propertyNamed: propertyName ifAbsent: aBlock [
 ]
 
 { #category : 'properties' }
-MooseObject >> propertyNamed: name ifAbsentPut: value [
-	^ self cacheAt: name ifAbsentPut: value
-]
-
-{ #category : 'properties' }
 MooseObject >> propertyNamed: propertyName ifNil: aBlock [
 	"Return the value of the property named propertyName, evaluate aBlock if the property does not exist"
 
