@@ -210,5 +210,6 @@ MooseGroup >> species [
 
 { #category : 'properties' }
 MooseGroup >> sumOfPropertyNamed: aPropertyName [
-	^ self inject: 0 into: [ :sum :each | sum + (each propertyNamed: aPropertyName ifNil: [ 0 ]) ]
+
+	^ self inject: 0 into: [ :sum :each | sum + (each cacheAt: aPropertyName ifAbsent: [ 0 ]) ]
 ]

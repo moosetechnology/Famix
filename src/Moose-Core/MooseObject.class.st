@@ -543,17 +543,6 @@ MooseObject >> propertyNamed: propertyName [
 	^ self cacheAt: propertyName ifAbsent: [ NotFound signalFor: 'Property named ' , propertyName ]
 ]
 
-{ #category : 'properties' }
-MooseObject >> propertyNamed: propertyName ifNil: aBlock [
-	"Return the value of the property named propertyName, evaluate aBlock if the property does not exist"
-
-	^ self
-		cacheAt: propertyName asSymbol
-		ifAbsent: [ ([ self mmGetProperty: (self mooseDescription propertyNamed: propertyName) ]
-				on: Error
-				do: [ :ex | nil ]) ifNil: [ aBlock value ] ]
-]
-
 { #category : 'accessing' }
 MooseObject >> removeAttribute: aSymbol [
 	| each |
