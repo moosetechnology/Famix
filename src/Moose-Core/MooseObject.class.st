@@ -555,11 +555,6 @@ MooseObject >> propertyNamed: propertyName ifNil: aBlock [
 				do: [ :ex | nil ]) ifNil: [ aBlock value ] ]
 ]
 
-{ #category : 'properties' }
-MooseObject >> propertyNamed: name put: value [
-	^ self cacheAt: name put: value
-]
-
 { #category : 'accessing' }
 MooseObject >> removeAttribute: aSymbol [
 	| each |

@@ -172,7 +172,8 @@ FamixTFile >> sourceText [
 
 { #category : 'accessing' }
 FamixTFile >> sourceText: aString [
-	^ self propertyNamed: #sourceText put: aString
+
+	^ self cacheAt: #sourceText put: aString
 ]
 
 { #category : 'properties' }
