@@ -72,15 +72,15 @@ FamixTWithStatements >> numberOfLinesOfDeadCode [
 
 { #category : 'metrics' }
 FamixTWithStatements >> numberOfStatements [
+
 	<FMProperty: #numberOfStatements type: #Number>
-	<derived>
 	<FMComment: 'The number of statements in a class'>
-	^ self lookUpPropertyNamed: #numberOfStatements computedAs: [ MooseUnavailableMetric ]
+	^ self attributeAt: #numberOfStatements ifAbsent: [ MooseUnavailableMetric ]
 ]
 
 { #category : 'metrics' }
 FamixTWithStatements >> numberOfStatements: aNumber [
-	self cacheAt: #numberOfStatements put: aNumber
+	self attributeAt: #numberOfStatements put: aNumber
 ]
 
 { #category : 'asserting' }
