@@ -143,7 +143,7 @@ MQNavigationQuery >> hasLocalFor: anEntity [
 
 	| properties |
 	"Instead of #to:do: we could just use #do: but this implementation is much faster. Maybe sista will remove the needs of the todo later."
-	1 to: (properties := directionStrategy msePropertiesOf: anEntity) size do: [ :ind | 
+	1 to: (properties := directionStrategy famePropertiesOf: anEntity) size do: [ :ind | 
 		(anEntity perform: (properties at: ind) name)
 			ifNotNil: [ :coll | (associationSelectionStrategy selectAssociationsIn: coll asCollection) ifNotEmpty: [ ^ true ] ] ].
 	^ false
@@ -207,7 +207,7 @@ MQNavigationQuery >> queryLocalFor: anEntity [
 	| properties |
 	"Instead of #to:do: we could just use #do: but this implementation is much faster. Maybe sista will remove the needs of the todo later."
 	1 to:
-		(properties := directionStrategy msePropertiesOf: anEntity) size do: [ 
+		(properties := directionStrategy famePropertiesOf: anEntity) size do: [ 
 		:ind | 
 		(anEntity perform: (properties at: ind) name) ifNotNil: [ :coll | 
 			result addAll: (resultKindStrategy
