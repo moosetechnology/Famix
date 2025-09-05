@@ -71,7 +71,6 @@ LANFamixPropertiesTest >> testClassCategories [
 LANFamixPropertiesTest >> testClassComments [
 
 	self model allClasses do: [ :each | self assert: each numberOfComments >= 0 ].
-	self assert: (self nodeClass propertyNamed: #numberOfComments) equals: 0.
 	self assert: self nodeClass numberOfComments equals: 0
 ]
 
@@ -79,7 +78,6 @@ LANFamixPropertiesTest >> testClassComments [
 LANFamixPropertiesTest >> testClassHierarchy [
 
 	self assert: self nodeClass numberOfSubclasses equals: 2.
-	self assert: self nodeClass numberOfSubclasses equals: (self nodeClass propertyNamed: #numberOfSubclasses).
 	self assert: self nodeClass totalNumberOfSubclasses equals: 4.
 	self assert: self nodeClass hierarchyNestingLevel equals: 1
 ]
@@ -102,14 +100,8 @@ LANFamixPropertiesTest >> testClassIsAbstract [
 LANFamixPropertiesTest >> testClassLinesOfCode [
 	"2020/05/06 - Cyril - I updated the value for the number of lines of code because before we were using only the sum of methods while now we use the tonel export that contains also the class definition."
 
-	| numberOfLines |
-	"In P12 the Tonel format changed and there is one more line exported."
-	numberOfLines := SystemVersion current major < 12
-		                 ifTrue: [ 112 ]
-		                 ifFalse: [ 113 ].
 	self model allClasses do: [ :each | self assert: each numberOfLinesOfCode >= 0 ].
-	self assert: (self nodeClass propertyNamed: #numberOfLinesOfCode) equals: numberOfLines.
-	self assert: self nodeClass numberOfLinesOfCode equals: numberOfLines
+	self assert: self nodeClass numberOfLinesOfCode equals: 113
 ]
 
 { #category : 'testing' }
@@ -139,10 +131,8 @@ LANFamixPropertiesTest >> testHasComments [
 
 { #category : 'testing' }
 LANFamixPropertiesTest >> testMethodAccesses [
+
 	self assert: self lanInterfaceOriginateMethod numberOfAccesses equals: 22.
-	self
-		assert: self lanInterfaceOriginateMethod numberOfAccesses
-		equals: (self lanInterfaceOriginateMethod propertyNamed: #numberOfAccesses).
 	self assert: (self model entityNamed: #'Smalltalk.LANInterface.originator()') numberOfAccesses equals: 3
 ]
 
@@ -150,7 +140,6 @@ LANFamixPropertiesTest >> testMethodAccesses [
 LANFamixPropertiesTest >> testMethodComments [
 
 	self model allMethods do: [ :each | self assert: each numberOfComments >= 0 ].
-	self assert: (self lanInterfaceOriginateMethod propertyNamed: #numberOfComments) equals: 6.
 	self assert: self lanInterfaceOriginateMethod numberOfComments equals: 6
 ]
 
@@ -201,8 +190,8 @@ LANFamixPropertiesTest >> testMethodSmalltalkMessageSends [
 
 { #category : 'testing' }
 LANFamixPropertiesTest >> testMethodSmalltalkParameters [
-	self assert: self lanInterfaceOriginateMethod numberOfParameters equals: 0.
-	self assert: (self lanInterfaceOriginateMethod propertyNamed: #numberOfParameters) equals: 0
+
+	self assert: self lanInterfaceOriginateMethod numberOfParameters equals: 0
 ]
 
 { #category : 'testing' }
@@ -262,12 +251,6 @@ LANFamixPropertiesTest >> testNoDuplicatesOfClassVariables [
 { #category : 'testing' }
 LANFamixPropertiesTest >> testOverriddenMethods [
 	self assert: (self model entityNamed: #'Smalltalk.LANOutputServer') numberOfMethodsOverridden equals: 2
-]
-
-{ #category : 'testing' }
-LANFamixPropertiesTest >> testPropertyNamed [
-	self assert: (self nodeClass propertyNamed: #numberOfAttributes) equals: 2.
-	self assert: self nodeClass numberOfAttributes equals: 2
 ]
 
 { #category : 'testing' }
