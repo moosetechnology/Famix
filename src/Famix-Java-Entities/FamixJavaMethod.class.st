@@ -283,21 +283,6 @@ FamixJavaMethod >> numberOfAccesses [
 		computedAs: [ self accesses size ]
 ]
 
-{ #category : 'Famix-Extensions-private' }
-FamixJavaMethod >> numberOfConditionals [
-	<FMProperty: #numberOfConditionals type: #Number>
-	<FMComment: 'The number of conditionals in a method'>
-	^ self
-		lookUpPropertyNamed: #numberOfConditionals
-		computedAs: [ 
-			self notExistentMetricValue ] 
-]
-
-{ #category : 'Famix-Extensions-private' }
-FamixJavaMethod >> numberOfConditionals: aNumber [
-	self cacheAt: #numberOfConditionals put: aNumber
-]
-
 { #category : 'Famix-Extensions' }
 FamixJavaMethod >> numberOfInvokedMethods [
 	<FMProperty: #numberOfInvokedMethods type: #Number>
