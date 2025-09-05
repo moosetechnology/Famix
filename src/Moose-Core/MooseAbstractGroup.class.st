@@ -595,6 +595,12 @@ MooseAbstractGroup >> isEmpty [
 ]
 
 { #category : 'testing' }
+MooseAbstractGroup >> isEmptyOrNil [
+
+	^ self entityStorage isEmptyOrNil
+]
+
+{ #category : 'testing' }
 MooseAbstractGroup >> isNotEmpty [
 	"Answer whether the receiver contains any elements."
 
