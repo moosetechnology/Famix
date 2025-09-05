@@ -206,16 +206,15 @@ FamixTClass >> overriddenMethods [
 
 { #category : 'metrics' }
 FamixTClass >> weightOfAClass [
+
 	<FMProperty: #weightOfAClass type: #Number>
+	<FMComment: 'Weight of a class'>
 	<derived>
-	<FMComment: 'Weight of a class'>	
-			
-	^self
-		lookUpPropertyNamed: #weightOfAClass
-		computedAs: [self notExistentMetricValue]
+	^ self attributeAt: #weightOfAClass ifAbsent: [ self notExistentMetricValue ]
 ]
 
 { #category : 'metrics' }
 FamixTClass >> weightOfAClass: aNumber [
-	self cacheAt: #weightOfAClass put: aNumber
+
+	self attributeAt: #weightOfAClass put: aNumber
 ]
