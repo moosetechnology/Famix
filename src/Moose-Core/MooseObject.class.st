@@ -530,14 +530,6 @@ MooseObject >> privateSetMooseModel: aMooseModel [
 	"Do nothing in Object"
 ]
 
-{ #category : 'private' }
-MooseObject >> properties [ 
-	 
-	"for read only uses, i.e. don't change the returned value"
-	
-	^self allCachedValues
-]
-
 { #category : 'accessing' }
 MooseObject >> removeAttribute: aSymbol [
 	| each |

@@ -10,6 +10,13 @@ MooseObject >> lookUpPropertyNamed: selector computedAs: aBlock [
 ]
 
 { #category : '*Famix-Deprecated' }
+MooseObject >> properties [
+
+	self deprecated: 'Use #allCachedValues' transformWith: '`@rcv properties' -> '`@rcv allCachedValues'.
+	^ self allCachedValues
+]
+
+{ #category : '*Famix-Deprecated' }
 MooseObject >> propertyNamed: propertyName [
 	"Returns the value of the property named propertyName, raises an error if the property does not exist"
 
