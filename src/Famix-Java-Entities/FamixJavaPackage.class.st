@@ -255,12 +255,11 @@ FamixJavaPackage >> mooseNameOn: stream [
 
 { #category : 'accessing' }
 FamixJavaPackage >> numberOfMethods [
+
 	<FMProperty: #numberOfMethods type: #Number>
 	<FMComment: 'The number of methods in a package'>
 	<derived>
-	^ self
-		lookUpPropertyNamed: #numberOfMethods
-		computedAs: [ self types inject: 0 into: [ :sum :each | sum + each numberOfMethods ] ]
+	^ self cacheAt: #numberOfMethods ifAbsentPut: [ self types inject: 0 into: [ :sum :each | sum + each numberOfMethods ] ]
 ]
 
 { #category : 'accessing' }

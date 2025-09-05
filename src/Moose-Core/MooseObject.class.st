@@ -382,11 +382,6 @@ MooseObject >> localMooseModel [
 	^ self mooseModel
 ]
 
-{ #category : 'properties' }
-MooseObject >> lookUpPropertyNamed: selector computedAs: aBlock [
-	^ self cacheAt: selector ifAbsentPut: aBlock
-]
-
 { #category : 'accessing' }
 MooseObject >> metamodel [
 	^ self mooseModel

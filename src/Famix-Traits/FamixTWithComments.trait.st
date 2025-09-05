@@ -73,8 +73,9 @@ FamixTWithComments >> numberOfComments [
 
 	<FMProperty: #numberOfComments type: #Number>
 	<derived>
-	<FMComment: 'The number of comments in the entity. Does not count comments of children entities (for example, for a class, I will count the comments associated to the class and not the methods or arguments.'>
-	^ self lookUpPropertyNamed: #numberOfComments computedAs: [ self comments size ]
+	<FMComment:
+	'The number of comments in the entity. Does not count comments of children entities (for example, for a class, I will count the comments associated to the class and not the methods or arguments.'>
+	^ self cacheAt: #numberOfComments ifAbsent: [ self comments size ]
 ]
 
 { #category : 'accessing' }

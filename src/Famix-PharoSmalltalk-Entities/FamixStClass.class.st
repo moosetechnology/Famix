@@ -189,13 +189,11 @@ FamixStClass >> methodsWithoutSutbsAndConstructors [
 
 { #category : 'metrics' }
 FamixStClass >> numberOfMessageSends [
+
 	<FMProperty: #numberOfMessageSends type: #Number>
 	<derived>
 	<FMComment: 'The number of message sends from a class'>
-	
-	^self
-		lookUpPropertyNamed: #numberOfMessageSends
-		computedAs: [self methodsGroup sumNumbers: #numberOfMessageSends]
+	^ self cacheAt: #numberOfMessageSends ifAbsent: [ self methodsGroup sumNumbers: #numberOfMessageSends ]
 ]
 
 { #category : 'as yet unclassified' }
@@ -205,10 +203,11 @@ FamixStClass >> numberOfMessageSends: aNumber [
 
 { #category : 'metrics' }
 FamixStClass >> numberOfMethodProtocols [
+
 	<FMProperty: #numberOfMethodProtocols type: #Number>
 	<derived>
 	<FMComment: 'The number of method protocols in a class'>
-	^ self lookUpPropertyNamed: #numberOfMethodProtocols computedAs: [ ((self methods collect: [ :each | each protocol ]) reject: #isNil) asSet size ]
+	^ self cacheAt: #numberOfMethodProtocols ifAbsent: [ ((self methods collect: [ :each | each protocol ]) reject: #isNil) asSet size ]
 ]
 
 { #category : 'metrics' }

@@ -84,17 +84,18 @@ FamixTWithInheritances >> directSuperclasses [
 
 { #category : 'metrics' }
 FamixTWithInheritances >> hierarchyNestingLevel [
+
 	<FMProperty: #hierarchyNestingLevel type: #Number>
 	<derived>
 	<FMComment: 'The nesting of a class inside the hierarchy'>
-	^ self
-		lookUpPropertyNamed: #hierarchyNestingLevel
-		computedAs: [ | currentMaxDepth |
-			(self directSuperclasses isEmpty or: [ self isStub ])
-				ifTrue: [ 0 ]
-				ifFalse: [ currentMaxDepth := 0.
-					self allSuperclassesDo: [ :aClass | currentMaxDepth := currentMaxDepth max: aClass hierarchyNestingLevel ].
-					currentMaxDepth + 1 ] ]
+	^ self cacheAt: #hierarchyNestingLevel ifAbsent: [
+			  | currentMaxDepth |
+			  (self directSuperclasses isEmpty or: [ self isStub ])
+				  ifTrue: [ 0 ]
+				  ifFalse: [
+						  currentMaxDepth := 0.
+						  self allSuperclassesDo: [ :aClass | currentMaxDepth := currentMaxDepth max: aClass hierarchyNestingLevel ].
+						  currentMaxDepth + 1 ] ]
 ]
 
 { #category : 'metrics' }
@@ -133,10 +134,11 @@ FamixTWithInheritances >> numberOfDirectSubclasses: aNumber [
 
 { #category : 'metrics' }
 FamixTWithInheritances >> numberOfSubclasses [
+
 	<FMProperty: #numberOfSubclasses type: #Number>
 	<derived>
 	<FMComment: 'The number of subclasses of a class'>
-	^ self lookUpPropertyNamed: #numberOfSubclasses computedAs: [ self subInheritances size ]
+	^ self cacheAt: #numberOfSubclasses ifAbsent: [ self subInheritances size ]
 ]
 
 { #category : 'metrics' }

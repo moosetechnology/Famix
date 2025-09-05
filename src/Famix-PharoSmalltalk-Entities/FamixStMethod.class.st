@@ -213,13 +213,11 @@ FamixStMethod >> isOverriding [
 
 { #category : 'Famix-Extensions-private' }
 FamixStMethod >> numberOfAccesses [
+
 	<FMProperty: #numberOfAccesses type: #Number>
 	<derived>
 	<FMComment: 'The number of accesses from a method'>
-	
-	^ self 
-		lookUpPropertyNamed: #numberOfAccesses
-		computedAs: [ self accesses size ]
+	^ self cacheAt: #numberOfAccesses ifAbsent: [ self accesses size ]
 ]
 
 { #category : 'metrics' }
@@ -227,17 +225,16 @@ FamixStMethod >> numberOfConditionals [
 
 	<FMProperty: #numberOfConditionals type: #Number>
 	<FMComment: 'The number of conditionals in a method'>
-	^ self lookUpPropertyNamed: #numberOfConditionals computedAs: [ self computeNumberOfConditionals ]
+	^ self cacheAt: #numberOfConditionals ifAbsentPut: [ self computeNumberOfConditionals ]
 ]
 
 { #category : 'Famix-Extensions-private' }
 FamixStMethod >> numberOfMessageSends [
+
 	<FMProperty: #numberOfMessageSends type: #Number>
 	<derived>
 	<FMComment: 'The number of message from a method'>
-	^ self
-		lookUpPropertyNamed: #numberOfMessageSends
-		computedAs: [ self computeNumberOfMessageSends ]
+	^ self cacheAt: #numberOfMessageSends ifAbsent: [ self computeNumberOfMessageSends ]
 ]
 
 { #category : 'Famix-Extensions-private' }
@@ -247,11 +244,10 @@ FamixStMethod >> numberOfMessageSends: aNumber [
 
 { #category : 'Famix-Extensions-private' }
 FamixStMethod >> numberOfStatements [
+
 	<FMProperty: #numberOfStatements type: #Number>
 	<FMComment: 'The number of statements in a method'>
-	^ self
-		lookUpPropertyNamed: #numberOfStatements
-		computedAs: [ self computeNumberOfStatements ]
+	^ self cacheAt: #numberOfStatements ifAbsent: [ self computeNumberOfStatements ]
 ]
 
 { #category : 'protocol' }

@@ -274,13 +274,11 @@ FamixJavaMethod >> isSetter [
 
 { #category : 'accessing' }
 FamixJavaMethod >> numberOfAccesses [
+
 	<FMProperty: #numberOfAccesses type: #Number>
 	<derived>
 	<FMComment: 'The number of accesses from a method'>
-	
-	^ self 
-		lookUpPropertyNamed: #numberOfAccesses
-		computedAs: [ self accesses size ]
+	^ self cacheAt: #numberOfAccesses ifAbsentPut: [ self accesses size ]
 ]
 
 { #category : 'Famix-Extensions' }

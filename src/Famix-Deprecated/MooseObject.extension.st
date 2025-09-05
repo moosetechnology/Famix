@@ -1,6 +1,15 @@
 Extension { #name : 'MooseObject' }
 
 { #category : '*Famix-Deprecated' }
+MooseObject >> lookUpPropertyNamed: selector computedAs: aBlock [
+
+	self
+		deprecated: 'Use #cacheAt:ifAbsent: instead.'
+		transformWith: '`@rcv lookUpPropertyNamed: `@arg1 computedAs: `@arg2' -> '`@rcv cacheAt: `@arg1 ifAbsent: `@arg2'.
+	^ self cacheAt: selector ifAbsentPut: aBlock
+]
+
+{ #category : '*Famix-Deprecated' }
 MooseObject >> propertyNamed: propertyName ifAbsent: aBlock [
 	"Return the value of the property named propertyName, evaluate aBlock if the property does not exist"
 
