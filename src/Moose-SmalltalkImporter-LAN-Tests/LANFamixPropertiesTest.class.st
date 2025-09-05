@@ -17,20 +17,15 @@ LANFamixPropertiesTest >> nodeClass [
 
 { #category : 'testing' }
 LANFamixPropertiesTest >> testAttributeMetrics [
+
 	| attribute1 attribute2 |
 	attribute1 := self model entityNamed: #'Smalltalk.LANInterface.nextNode'.
 	attribute2 := self model entityNamed: #'Smalltalk.LANOutputServer.serverType'.
-	self assert: (attribute1 propertyNamed: #numberOfAccesses) equals: 3.
 	self assert: attribute1 numberOfAccesses equals: 3.
-	self assert: (attribute1 propertyNamed: #hierarchyNestingLevel) equals: 1.
 	self assert: attribute1 hierarchyNestingLevel equals: 1.
-	self assert: (attribute1 propertyNamed: #numberOfAccessingClasses) equals: 1.
 	self assert: attribute1 numberOfAccessingClasses equals: 1.
-	self assert: (attribute1 propertyNamed: #numberOfLocalAccesses) equals: 3.
 	self assert: attribute1 numberOfLocalAccesses equals: 3.
-	self assert: (attribute1 propertyNamed: #numberOfAccessingMethods) equals: 1.
 	self assert: attribute1 numberOfAccessingMethods equals: 1.
-	self assert: (attribute2 propertyNamed: #numberOfGlobalAccesses) equals: 1.
 	self assert: attribute2 numberOfGlobalAccesses equals: 1
 ]
 
@@ -62,18 +57,13 @@ LANFamixPropertiesTest >> testClassAllProperties [
 LANFamixPropertiesTest >> testClassAttributes [
 
 	self assert: self nodeClass numberOfAttributes equals: 2.
-	"In P12 DependentFileds class var gor removed from Object. Remove this condition once P12 will be the minimal version used for this project."
-	self assert: self nodeClass numberOfAttributesInherited equals: (SystemVersion current major < 12
-			 ifTrue: [ 3 ]
-			 ifFalse: [ 2 ]).
-	self assert: (self workstationClass propertyNamed: #numberOfAttributesInherited) equals: (self totalNumberOfAttributesFor: LANWorkStation superclass).
+	self assert: self nodeClass numberOfAttributesInherited equals: 2.
 	self assert: self workstationClass numberOfAttributesInherited equals: (self totalNumberOfAttributesFor: LANWorkStation superclass)
 ]
 
 { #category : 'testing' }
 LANFamixPropertiesTest >> testClassCategories [
-"1halt."
-	self assert: (self nodeClass propertyNamed: #numberOfMethodProtocols) equals: 6.
+
 	self assert: self nodeClass numberOfMethodProtocols equals: 6
 ]
 
@@ -87,7 +77,8 @@ LANFamixPropertiesTest >> testClassComments [
 
 { #category : 'testing' }
 LANFamixPropertiesTest >> testClassHierarchy [
-	self assert: (self nodeClass propertyNamed: #numberOfSubclasses) equals: 2.
+
+	self assert: self nodeClass numberOfSubclasses equals: 2.
 	self assert: self nodeClass numberOfSubclasses equals: (self nodeClass propertyNamed: #numberOfSubclasses).
 	self assert: self nodeClass totalNumberOfSubclasses equals: 4.
 	self assert: self nodeClass hierarchyNestingLevel equals: 1
@@ -95,7 +86,7 @@ LANFamixPropertiesTest >> testClassHierarchy [
 
 { #category : 'testing' }
 LANFamixPropertiesTest >> testClassInvocations [
-	self assert: (self nodeClass propertyNamed: #numberOfMessageSends) equals: 27.
+
 	self assert: self nodeClass numberOfMessageSends equals: 27
 ]
 
@@ -123,22 +114,17 @@ LANFamixPropertiesTest >> testClassLinesOfCode [
 
 { #category : 'testing' }
 LANFamixPropertiesTest >> testClassMethods [
+
 	self assert: self nodeClass numberOfMethods equals: 12.
-	self assert: (self nodeClass propertyNamed: #numberOfMethodsInherited) equals: 0.
-	self assert: (self nodeClass propertyNamed: #numberOfMethodsOverridden) equals: 0.
+	self assert: self nodeClass numberOfMethodsInherited equals: 0.
+	self assert: self nodeClass numberOfMethodsOverridden equals: 0.
+	self assert: self nodeClass numberOfLocallyDefinedMethods equals: self nodeClass numberOfMethods.
+	self assert: self workstationClass numberOfMethodsInherited equals: 9.
+	self assert: self workstationClass numberOfLocallyDefinedMethods equals: 1.
+	self assert: self workstationClass numberOfMethodsOverridden equals: 3.
 	self
-		assert: (self nodeClass propertyNamed: #numberOfLocallyDefinedMethods)
-		equals: (self nodeClass propertyNamed: #numberOfMethods).
-	self
-		assert: (self workstationClass propertyNamed: #numberOfMethodsInherited)
-		equals: 9.
-	self assert: (self workstationClass propertyNamed: #numberOfLocallyDefinedMethods) equals: 1.
-	self assert: (self workstationClass propertyNamed: #numberOfMethodsOverridden) equals: 3.
-	self
-		assert:
-			(self workstationClass propertyNamed: #numberOfLocallyDefinedMethods)
-				+ (self workstationClass propertyNamed: #numberOfMethodsOverridden)
-		equals: (self workstationClass propertyNamed: #numberOfMethods)
+		assert: self workstationClass numberOfLocallyDefinedMethods + self workstationClass numberOfMethodsOverridden
+		equals: self workstationClass numberOfMethods
 ]
 
 { #category : 'testing' }
@@ -170,13 +156,13 @@ LANFamixPropertiesTest >> testMethodComments [
 
 { #category : 'testing' }
 LANFamixPropertiesTest >> testMethodHierarchyNesting [
-	self assert: (self lanInterfaceOriginateMethod propertyNamed: #hierarchyNestingLevel) equals: 1.
+
 	self assert: self lanInterfaceOriginateMethod hierarchyNestingLevel equals: 1
 ]
 
 { #category : 'testing' }
 LANFamixPropertiesTest >> testMethodInvocations [
-	self assert: (self lanInterfaceOriginateMethod propertyNamed: #numberOfOutgoingInvocations) equals: 22.
+
 	self assert: self lanInterfaceOriginateMethod numberOfOutgoingInvocations equals: 22.
 	self assert: (self model entityNamed: #'Smalltalk.LANInterface.initialize()') numberOfOutgoingInvocations equals: 2
 ]
@@ -191,25 +177,25 @@ LANFamixPropertiesTest >> testMethodInvocationsWithoutCascading [
 
 { #category : 'testing' }
 LANFamixPropertiesTest >> testMethodLOC [
-	self assert: (self lanInterfaceOriginateMethod propertyNamed: #numberOfLinesOfCode) equals: 22.
+
 	self assert: self lanInterfaceOriginateMethod numberOfLinesOfCode equals: 22
 ]
 
 { #category : 'testing' }
 LANFamixPropertiesTest >> testMethodSmalltalkConditionals [
-	self assert: (self lanInterfaceOriginateMethod propertyNamed: #numberOfConditionals) equals: 1.
+
 	self assert: self lanInterfaceOriginateMethod numberOfConditionals equals: 1
 ]
 
 { #category : 'testing' }
 LANFamixPropertiesTest >> testMethodSmalltalkCyclomaticComplexity [
-	self assert: (self lanInterfaceOriginateMethod propertyNamed: #cyclomaticComplexity) equals: 2.
+
 	self assert: self lanInterfaceOriginateMethod cyclomaticComplexity equals: 2
 ]
 
 { #category : 'testing' }
 LANFamixPropertiesTest >> testMethodSmalltalkMessageSends [
-	self assert: (self lanInterfaceOriginateMethod propertyNamed: #numberOfMessageSends) equals: 22.
+
 	self assert: self lanInterfaceOriginateMethod numberOfMessageSends equals: 22
 ]
 
@@ -221,29 +207,30 @@ LANFamixPropertiesTest >> testMethodSmalltalkParameters [
 
 { #category : 'testing' }
 LANFamixPropertiesTest >> testMethodSmalltalkStatements [
-	self assert: (self lanInterfaceOriginateMethod propertyNamed: #numberOfStatements) equals: 15.
+
 	self assert: self lanInterfaceOriginateMethod numberOfStatements equals: 15
 ]
 
 { #category : 'testing' }
 LANFamixPropertiesTest >> testMethodTimeStamp [
+
 	| method |
 	method := self model entityNamed: #'Smalltalk.LANInterface.initialize()'.
-	self assert: (method propertyNamed: #timeStamp) equals: (LANInterface compiledMethodAt: #initialize) timeStamp.
+	self assert: method timeStamp equals: (LANInterface compiledMethodAt: #initialize) timeStamp.
 	method := self model entityNamed: #'Smalltalk.LANInterface.originate()'.
-	self assert: (method propertyNamed: #timeStamp) equals: (LANInterface compiledMethodAt: #originate) timeStamp.
+	self assert: method timeStamp equals: (LANInterface compiledMethodAt: #originate) timeStamp.
 	method := self model entityNamed: #'Smalltalk.LANInterface.nodeList()'.
-	self assert: (method propertyNamed: #timeStamp) equals: (LANInterface compiledMethodAt: #nodeList) timeStamp.
+	self assert: method timeStamp equals: (LANInterface compiledMethodAt: #nodeList) timeStamp.
 	method := self model entityNamed: #'Smalltalk.LANNode.canOriginate()'.
-	self assert: (method propertyNamed: #timeStamp) equals: (LANNode compiledMethodAt: #canOriginate) timeStamp.
+	self assert: method timeStamp equals: (LANNode compiledMethodAt: #canOriginate) timeStamp.
 	method := self model entityNamed: #'Smalltalk.LANNode.canOutput()'.
-	self assert: (method propertyNamed: #timeStamp) equals: (LANNode compiledMethodAt: #canOutput) timeStamp.
+	self assert: method timeStamp equals: (LANNode compiledMethodAt: #canOutput) timeStamp.
 	method := self model entityNamed: #'Smalltalk.LANNode.nextNode()'.
-	self assert: (method propertyNamed: #timeStamp) equals: (LANNode compiledMethodAt: #nextNode) timeStamp.
+	self assert: method timeStamp equals: (LANNode compiledMethodAt: #nextNode) timeStamp.
 	method := self model entityNamed: #'Smalltalk.LANFileServer.name()'.
-	self assert: (method propertyNamed: #timeStamp) equals: (LANFileServer compiledMethodAt: #name) timeStamp.
+	self assert: method timeStamp equals: (LANFileServer compiledMethodAt: #name) timeStamp.
 	method := self model entityNamed: #'Smalltalk.LANFileServer.setServerType()'.
-	self assert: (method propertyNamed: #timeStamp) equals: (LANFileServer compiledMethodAt: #setServerType) timeStamp
+	self assert: method timeStamp equals: (LANFileServer compiledMethodAt: #setServerType) timeStamp
 ]
 
 { #category : 'testing' }
