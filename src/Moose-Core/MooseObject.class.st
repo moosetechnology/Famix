@@ -255,6 +255,13 @@ MooseObject >> attributeAt: name put: value [
 	^ entityAttributes last value
 ]
 
+{ #category : 'properties' }
+MooseObject >> cacheAt: name [
+	"Returns the value of the property named propertyName, raises an error if the property does not exist"
+
+	^ self cacheAt: name ifAbsent: [ NotFound signalFor: 'Property named ' , name ]
+]
+
 { #category : 'accessing' }
 MooseObject >> cacheAt: name ifAbsent: aBlock [
 	^ cache at: name ifAbsent: [ aBlock value ]
@@ -529,13 +536,6 @@ MooseObject >> properties [
 	"for read only uses, i.e. don't change the returned value"
 	
 	^self allCachedValues
-]
-
-{ #category : 'properties' }
-MooseObject >> propertyNamed: propertyName [
-	"Returns the value of the property named propertyName, raises an error if the property does not exist"
-
-	^ self cacheAt: propertyName ifAbsent: [ NotFound signalFor: 'Property named ' , propertyName ]
 ]
 
 { #category : 'accessing' }
