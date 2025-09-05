@@ -1,13 +1,14 @@
 Class {
-	#name : #FamixTFunctionTest,
-	#superclass : #TestCase,
+	#name : 'FamixTFunctionTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'function'
 	],
-	#category : #'Famix-Tests'
+	#category : 'Famix-Tests',
+	#package : 'Famix-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 FamixTFunctionTest >> setUp [
 
 	super setUp.
@@ -16,13 +17,13 @@ FamixTFunctionTest >> setUp [
 		            yourself
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTFunctionTest >> testMooseNameOfFunctionHasName [
 	function name: 'funct1'.
 	self assert: (function mooseName includesSubstring: 'funct1')
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTFunctionTest >> testMooseNameOfFunctionHasSignature [
 	function signature: 'a random signature'.
 	self assert: (function mooseName includesSubstring: 'a random signature')

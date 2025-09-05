@@ -20,6 +20,7 @@
 |---|
 | `imports` | `FamixTWithImports` | `importingEntity` | `FamixTImport` | |
 | `interfaceImplementations` | `FamixTCanImplement` | `implementingClass` | `FamixTImplementation` | Implementation relationships|
+| `outgoingConcretizations` | `FamixTTypeArgument` | `typeArgument` | `FamixTConcretization` | Concretizations where this type is the type argument.|
 | `superInheritances` | `FamixTWithInheritances` | `subclass` | `FamixTInheritance` | Superinheritance relationships, i.e. known superclasses of this type.|
 
 ### Incoming dependencies
@@ -27,6 +28,7 @@
 |---|
 | `incomingImports` | `FamixTImportable` | `importedEntity` | `FamixTImport` | List of imports of this entity|
 | `incomingReferences` | `FamixTReferenceable` | `referredEntity` | `FamixTReference` | References to this entity by other entities.|
+| `incomingTypings` | `FamixTType` | `declaredType` | `FamixTEntityTyping` | Relations to the entities that have this as type.|
 | `subInheritances` | `FamixTWithInheritances` | `superclass` | `FamixTInheritance` | Subinheritance relationships, i.e. known subclasses of this type.|
 
 ### Other
@@ -34,7 +36,6 @@
 |---|
 | `receivingInvocations` | `FamixTInvocationsReceiver` | `receiver` | `FamixTInvocation` | List of invocations performed on this entity (considered as the receiver)|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
-| `typedEntities` | `FamixTType` | `declaredType` | `FamixTTypedEntity` | Entities that have this type as declaredType|
 
 
 ## Properties
@@ -51,14 +52,16 @@
 
 "
 Class {
-	#name : #FamixJavaClass,
-	#superclass : #FamixJavaType,
-	#traits : 'FamixJavaTClassMetrics + FamixTCanBeAbstract + FamixTCanBeClassSide + FamixTCanBeFinal + FamixTCanImplement + FamixTClass + FamixTClassMetrics + FamixTHasVisibility + FamixTImportable + FamixTLCOMMetrics + FamixTPackageable + FamixTWithImports',
-	#classTraits : 'FamixJavaTClassMetrics classTrait + FamixTCanBeAbstract classTrait + FamixTCanBeClassSide classTrait + FamixTCanBeFinal classTrait + FamixTCanImplement classTrait + FamixTClass classTrait + FamixTClassMetrics classTrait + FamixTHasVisibility classTrait + FamixTImportable classTrait + FamixTLCOMMetrics classTrait + FamixTPackageable classTrait + FamixTWithImports classTrait',
-	#category : #'Famix-Java-Entities-Entities'
+	#name : 'FamixJavaClass',
+	#superclass : 'FamixJavaType',
+	#traits : 'FamixJavaTClassMetrics + FamixTCanBeAbstract + FamixTCanBeClassSide + FamixTCanBeFinal + FamixTCanImplement + FamixTClass + FamixTClassMetrics + FamixTHasVisibility + FamixTImportable + FamixTLCOMMetrics + FamixTPackageable + FamixTTypeArgument + FamixTWithImports',
+	#classTraits : 'FamixJavaTClassMetrics classTrait + FamixTCanBeAbstract classTrait + FamixTCanBeClassSide classTrait + FamixTCanBeFinal classTrait + FamixTCanImplement classTrait + FamixTClass classTrait + FamixTClassMetrics classTrait + FamixTHasVisibility classTrait + FamixTImportable classTrait + FamixTLCOMMetrics classTrait + FamixTPackageable classTrait + FamixTTypeArgument classTrait + FamixTWithImports classTrait',
+	#category : 'Famix-Java-Entities-Entities',
+	#package : 'Famix-Java-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixJavaClass class >> annotation [
 
 	<FMClass: #Class super: #FamixJavaType>
@@ -67,7 +70,14 @@ FamixJavaClass class >> annotation [
 	^ self
 ]
 
-{ #category : #'Famix-Extensions-metrics-support' }
+{ #category : 'visitor' }
+FamixJavaClass >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaClass: self
+]
+
+{ #category : 'Famix-Extensions-metrics-support' }
 FamixJavaClass >> accessedAttributes [
 	
 	"Returns my attributes accessed by my methods. If the same attribute is accessed 
@@ -77,7 +87,7 @@ FamixJavaClass >> accessedAttributes [
 	^ self methodsWithoutSutbsAndConstructors asOrderedCollection flatCollect: [ :method | method accessedAttributes ]
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 FamixJavaClass >> allImplementedInterfacesHierarchy [
 
 	| allImplementedInterfaces |
@@ -89,42 +99,42 @@ FamixJavaClass >> allImplementedInterfacesHierarchy [
 	^ allImplementedInterfaces
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 FamixJavaClass >> allImplementedInterfacesHierarchyDo: aBlock [
 
 	self directImplementedInterfaces do: [ :directInterface |
 		directInterface withSuperclassesDo: aBlock ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixJavaClass >> incomingAccesses [
 	^ self 
 		cacheAt: #incomingAccesses
 		ifAbsentPut: [ attributes flatCollect: [ :each | each incomingAccesses ] ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixJavaClass >> inheritsFromTestCase [
 	"In the past we checked for the one from junit, but Apache also have its own way to test with a superclass named TestCase."
 
 	^ self superclassHierarchy anySatisfy: [ :each | each name = #TestCase ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixJavaClass >> isADirectSubclassOf: aClass [
 	^ aClass class = FamixJavaClass
 		ifTrue: [ aClass directSubclasses includes: self ]
 		ifFalse: [ false ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixJavaClass >> isADirectSuperclassOf: aClass [
 	^ aClass class = FamixJavaClass
 		ifTrue: [ aClass superclass = self ]
 		ifFalse: [ false ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixJavaClass >> isASubclassOf: aClass [ 
 	 
 	^aClass class = FamixJavaClass 
@@ -132,7 +142,7 @@ FamixJavaClass >> isASubclassOf: aClass [
 		ifFalse: [false]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixJavaClass >> isASuperclassOf: aClass [ 
 	 
 	^aClass class = FamixJavaClass 
@@ -140,13 +150,13 @@ FamixJavaClass >> isASuperclassOf: aClass [
 		ifFalse: [false]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixJavaClass >> isAccessedBy: anAccess [ 
 	 
 	^anAccess accesses == self
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixJavaClass >> isIgnored [
 
 	"If the class is a test class, it can be annotated with Ignore, all the tests of contained are bypassed"
@@ -155,13 +165,13 @@ FamixJavaClass >> isIgnored [
 	^ self isAnnotatedWith: 'Ignore'
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixJavaClass >> isInheritedBy: anInheritance [ 
 	 
 	^anInheritance superclass == self
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixJavaClass >> isJUnit4TestCase [
 
 	<FMProperty: #isJUnit4TestCase type: #Boolean>
@@ -170,7 +180,7 @@ FamixJavaClass >> isJUnit4TestCase [
 	^ self methods anySatisfy: [ :m | m isJUnit4Test ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixJavaClass >> isTestCase [
 
 	<FMProperty: #isTestCase type: #Boolean>
@@ -179,7 +189,7 @@ FamixJavaClass >> isTestCase [
 	^ self inheritsFromTestCase or: [ self isJUnit4TestCase ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 FamixJavaClass >> lookUpInInterfaces: aMethodSignature [
 
 	self allImplementedInterfacesHierarchyDo: [ :interface |
@@ -189,7 +199,7 @@ FamixJavaClass >> lookUpInInterfaces: aMethodSignature [
 		  superclass lookUpInInterfaces: aMethodSignature ]
 ]
 
-{ #category : #'Famix-Extensions-metrics-support' }
+{ #category : 'Famix-Extensions-metrics-support' }
 FamixJavaClass >> methodsWithoutSutbsAndConstructors [
 
 	"Removing stub and contructor methods. Used to support the calculation of LCOM."
@@ -198,18 +208,18 @@ FamixJavaClass >> methodsWithoutSutbsAndConstructors [
 		each isStub not and: [each isConstructor not]]) asSet
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixJavaClass >> mooseNameOn: aStream [
 
 	self typeContainer ifNotNil: [ :parent |
 		parent mooseNameOn: aStream.
 		self isInnerClass
 			ifTrue: [ aStream nextPut: $$ ]
-			ifFalse: [ aStream nextPutAll: '::' ] ].
+			ifFalse: [ aStream nextPutAll: '.' ] ].
 	self name ifNotNil: [ :n | aStream nextPutAll: n ]
 ]
 
-{ #category : #'Famix-Extensions' }
+{ #category : 'Famix-Extensions' }
 FamixJavaClass >> structuralChildren [
 	^ (OrderedCollection withAll: self methods), self attributes
 ]

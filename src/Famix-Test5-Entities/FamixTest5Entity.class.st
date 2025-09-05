@@ -1,10 +1,12 @@
 Class {
-	#name : #FamixTest5Entity,
-	#superclass : #MooseEntity,
-	#category : #'Famix-Test5-Entities-Entities'
+	#name : 'FamixTest5Entity',
+	#superclass : 'MooseEntity',
+	#category : 'Famix-Test5-Entities-Entities',
+	#package : 'Famix-Test5-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTest5Entity class >> annotation [
 
 	<FMClass: #Entity super: #MooseEntity>
@@ -14,14 +16,14 @@ FamixTest5Entity class >> annotation [
 	^ self
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTest5Entity class >> isAbstract [
 
 	<generated>
 	^ self == FamixTest5Entity
 ]
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTest5Entity class >> metamodel [
 
 	<generated>

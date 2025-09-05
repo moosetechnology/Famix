@@ -36,14 +36,16 @@ The opposite of a shadowable is a shadower.
 
 "
 Trait {
-	#name : #FamixTShadowable,
+	#name : 'FamixTShadowable',
 	#instVars : [
 		'#shadowingEntities => FMMany type: #FamixTShadower opposite: #shadowedEntity'
 	],
-	#category : #'Famix-Traits-Shadowing'
+	#category : 'Famix-Traits-Shadowing',
+	#package : 'Famix-Traits',
+	#tag : 'Shadowing'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTShadowable classSide >> annotation [
 
 	<FMClass: #TShadowable super: #Object>
@@ -52,26 +54,33 @@ FamixTShadowable classSide >> annotation [
 	^ self
 ]
 
-{ #category : #adding }
+{ #category : 'visitor' }
+FamixTShadowable >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTShadowable: self
+]
+
+{ #category : 'adding' }
 FamixTShadowable >> addShadowingEntity: anObject [
 	<generated>
 	^ self shadowingEntities add: anObject
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTShadowable >> isShadowable [
 
 	<generated>
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTShadowable >> isShadowed [
 
 	^ self shadowingEntities isNotEmpty
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTShadowable >> shadowingEntities [
 	"Relation named: #shadowingEntities type: #FamixTShadower opposite: #shadowedEntity"
 
@@ -81,7 +90,7 @@ FamixTShadowable >> shadowingEntities [
 	^ shadowingEntities
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTShadowable >> shadowingEntities: anObject [
 
 	<generated>

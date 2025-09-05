@@ -4,6 +4,11 @@ FamixTStructuralEntity is the abstract superclass for basic data structure in th
 ## Relations
 ======================
 
+### Outgoing dependencies
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `typing` | `FamixTTypedEntity` | `typedEntity` | `FamixTEntityTyping` | Association linking this entity to its declared type.|
+
 ### Incoming dependencies
 | Relation | Origin | Opposite | Type | Comment |
 |---|
@@ -12,7 +17,6 @@ FamixTStructuralEntity is the abstract superclass for basic data structure in th
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `declaredType` | `FamixTTypedEntity` | `typedEntities` | `FamixTType` | Type of the entity, if any|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
 
 
@@ -26,13 +30,15 @@ FamixTStructuralEntity is the abstract superclass for basic data structure in th
 
 "
 Trait {
-	#name : #FamixTStructuralEntity,
+	#name : 'FamixTStructuralEntity',
 	#traits : 'FamixTAccessible + FamixTCanBeStub + FamixTNamedEntity + FamixTTypedEntity + TEntityMetaLevelDependency',
 	#classTraits : 'FamixTAccessible classTrait + FamixTCanBeStub classTrait + FamixTNamedEntity classTrait + FamixTTypedEntity classTrait + TEntityMetaLevelDependency classTrait',
-	#category : #'Famix-Traits-StructuralEntity'
+	#category : 'Famix-Traits-StructuralEntity',
+	#package : 'Famix-Traits',
+	#tag : 'StructuralEntity'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTStructuralEntity classSide >> annotation [
 
 	<FMClass: #TStructuralEntity super: #Object>
@@ -41,7 +47,14 @@ FamixTStructuralEntity classSide >> annotation [
 	^ self
 ]
 
-{ #category : #testing }
+{ #category : 'visitor' }
+FamixTStructuralEntity >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTStructuralEntity: self
+]
+
+{ #category : 'testing' }
 FamixTStructuralEntity >> isStructuralEntity [
 
 	<generated>

@@ -30,14 +30,16 @@
 
 "
 Class {
-	#name : #FamixJavaInvocation,
-	#superclass : #FamixJavaEntity,
+	#name : 'FamixJavaInvocation',
+	#superclass : 'FamixJavaEntity',
 	#traits : 'FamixTInvocation',
 	#classTraits : 'FamixTInvocation classTrait',
-	#category : #'Famix-Java-Entities-Entities'
+	#category : 'Famix-Java-Entities-Entities',
+	#package : 'Famix-Java-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixJavaInvocation class >> annotation [
 
 	<FMClass: #Invocation super: #FamixJavaEntity>
@@ -46,46 +48,21 @@ FamixJavaInvocation class >> annotation [
 	^ self
 ]
 
-{ #category : #initialization }
+{ #category : 'visitor' }
+FamixJavaInvocation >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaInvocation: self
+]
+
+{ #category : 'initialization' }
 FamixJavaInvocation >> initialize [
 
 	super initialize.
 	signature := 'nosignature'.
 ]
 
-{ #category : #testing }
-FamixJavaInvocation >> isAPotentialInvocation [
-	"test if the sender is a potential invocation"
-	| invokedMtdSignature invoRVar invokedMtd |
-	invokedMtdSignature := self signature.
-	invokedMtdSignature ifNil:[^false].
-	invoRVar := self receiver.
-			
-	invoRVar ifNil:[^true].
-	
-	(invoRVar isImplicitVariable or: [invoRVar class = FamixJavaClass]) ifFalse:[^true].
-	
-	(invoRVar isImplicitVariable 
-	 and: [(invoRVar isSelf or: [invoRVar isSuper]) not]) ifTrue:[^true].
-		 
-	(invoRVar isImplicitVariable 
-	 	and: [(invokedMtd := self getReceivingFAMIXClass lookUp: invokedMtdSignature) isNil 
-					or: [invokedMtd isAbstract]]) ifTrue:[^true].
-
-	^false
-	
-]
-
-{ #category : #testing }
-FamixJavaInvocation >> isASureInvocation [
-	"Test if the receiver (an invocation) is sure (i.e. we know for sure the class of the invocation's receiver)"
-
-	| invoRVar |
-	invoRVar := self receiver.
-	^ invoRVar isNotNil and: [ invoRVar class = FamixJavaClass or: [ invoRVar isImplicitVariable and: [ invoRVar isSelf or: [ invoRVar isSuper ] ] ] ]
-]
-
-{ #category : #printing }
+{ #category : 'printing' }
 FamixJavaInvocation >> printOn: aStream [
 	super printOn: aStream.
 	aStream nextPut: $#.
@@ -93,7 +70,7 @@ FamixJavaInvocation >> printOn: aStream [
 	aStream << ' (Invocation)'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixJavaInvocation >> receiverSourceCode [
 	^ self receiver sourceText
 ]

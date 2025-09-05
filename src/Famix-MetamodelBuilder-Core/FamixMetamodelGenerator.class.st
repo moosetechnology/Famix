@@ -28,18 +28,20 @@ You can also redefine #submetamodels
 to use entities from another generator
 "
 Class {
-	#name : #FamixMetamodelGenerator,
-	#superclass : #Object,
+	#name : 'FamixMetamodelGenerator',
+	#superclass : 'Object',
 	#instVars : [
 		'builder',
 		'cleaningStrategy',
 		'subBuildersMapByPrefix',
 		'metamodelToolGenerators'
 	],
-	#category : #'Famix-MetamodelBuilder-Core-Basic'
+	#category : 'Famix-MetamodelBuilder-Core-Basic',
+	#package : 'Famix-MetamodelBuilder-Core',
+	#tag : 'Basic'
 }
 
-{ #category : #generation }
+{ #category : 'generation' }
 FamixMetamodelGenerator class >> addSubmetamodelsToGenerateFrom: aCollection to: metamodels [
 	aCollection
 		select: #isComposed
@@ -48,18 +50,18 @@ FamixMetamodelGenerator class >> addSubmetamodelsToGenerateFrom: aCollection to:
 			self addSubmetamodelsToGenerateFrom: mm submetamodels to: metamodels ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetamodelGenerator class >> builderWithDefinitions [
 
 	^ self new define builder
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetamodelGenerator class >> composedMetaModels [
 	^ self allSubclasses select: [ :mm | mm isAbstract not and: [ mm isComposed ] ]
 ]
 
-{ #category : #generation }
+{ #category : 'generation' }
 FamixMetamodelGenerator class >> deleteMetaModel [
 	<script>
 	<ignoreForCoverage>
@@ -69,62 +71,67 @@ FamixMetamodelGenerator class >> deleteMetaModel [
 	self packageName asPackage removeFromSystem
 ]
 
-{ #category : #generation }
+{ #category : 'generation' }
 FamixMetamodelGenerator class >> generate [
 	<script>
 	<ignoreForCoverage>
 	self new generate
 ]
 
-{ #category : #generation }
+{ #category : 'generation' }
 FamixMetamodelGenerator class >> generateAllMetamodels [
+
 	<script>
-	FMRelationSlot allSubInstancesDo: #initialize.
-	self metamodelsToGenerate
-		do: [ :mm | mm generate ]
-		displayingProgress: [ :mm | 'Regenerate ' , mm name ]
+	self generateAllMetamodelsSuchAs: [ :generator | true ]
 ]
 
-{ #category : #generation }
+{ #category : 'generation' }
+FamixMetamodelGenerator class >> generateAllMetamodelsSuchAs: aBlock [
+
+	FMRelationSlot allSubInstancesDo: #initialize.
+	(self metamodelsToGenerate select: aBlock) do: [ :mm | mm generate ] displayingProgress: [ :mm | 'Regenerate ' , mm name ]
+]
+
+{ #category : 'generation' }
 FamixMetamodelGenerator class >> generatorsToKeepUpToDate [
 	^ self individualGenerators select: #shouldBeUpToDateInLatestMoose
 ]
 
-{ #category : #generation }
+{ #category : 'generation' }
 FamixMetamodelGenerator class >> individualGenerators [
 	^ self allSubclasses select: [ :c | c isRealMetamodel and: [ c isPartOfComposedMetaModel not ] ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixMetamodelGenerator class >> isAbstract [
 	^ self = FamixMetamodelGenerator
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixMetamodelGenerator class >> isComposed [
 	^ self submetamodels isNotEmpty
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixMetamodelGenerator class >> isPartOfComposedMetaModel [
 	^ FamixMetamodelGenerator composedMetaModels anySatisfy: [ :mm | mm submetamodels includes: self ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixMetamodelGenerator class >> isRealMetamodel [
 	"I should return false for MMs that are used for tests and that should not be generated all the time."
 
 	^ self isAbstract not
 ]
 
-{ #category : #'additional tools' }
+{ #category : 'additional tools' }
 FamixMetamodelGenerator class >> metamodelToolGenerators [
 	"Override to add FamixVisitorGenerator, etc"
 
 	^ {  }
 ]
 
-{ #category : #generation }
+{ #category : 'generation' }
 FamixMetamodelGenerator class >> metamodelsToGenerate [
 	"We add the submetamodels before the MM that composes them because if we do it the other way around, it will cause problems when we regenerate everything because it will remove the glue added by the composed MM."
 
@@ -134,56 +141,56 @@ FamixMetamodelGenerator class >> metamodelsToGenerate [
 	^ metamodels
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetamodelGenerator class >> mooseModelName [
 	self prefix ifEmpty: [ ^ nil ].
 	^ (self prefix , 'Model') asSymbol
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetamodelGenerator class >> packageName [
 
 	<ignoreForCoverage>
 	self subclassResponsibility
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetamodelGenerator class >> packageNameForAnnotations [
 
 	<ignoreForCoverage>
 	^ self packageName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetamodelGenerator class >> prefix [
 
 	<ignoreForCoverage>
 	^ self packageName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetamodelGenerator class >> resetMetamodels [
 	<script>
 	MooseModel resetMetamodels
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixMetamodelGenerator class >> shouldBeUpToDateInLatestMoose [
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetamodelGenerator class >> submetamodels [ 
 
 	^ OrderedCollection new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetamodelGenerator class >> withMooseModelDo: aBlock [
 	^ self environment at: self mooseModelName ifPresent: [ :class | aBlock value: class ]
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixMetamodelGenerator >> adoptBuilder: aBuilder [
 
 	aBuilder configuration
@@ -192,7 +199,7 @@ FamixMetamodelGenerator >> adoptBuilder: aBuilder [
 		packageNameForAnnotations: self packageNameForAnnotations
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetamodelGenerator >> allSubBuilders [
 	| result |
 	result := self subBuilders asSet.
@@ -203,7 +210,7 @@ FamixMetamodelGenerator >> allSubBuilders [
 	^ result
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixMetamodelGenerator >> apply: aTrait on: aGeneratedClass oppositeOn: anotherGeneratedClass [
 	"A shorter version of #apply:on:oppositeTrait:on:
 	Only works if aTrait has excatly 1 opposite (slot)"
@@ -215,7 +222,7 @@ FamixMetamodelGenerator >> apply: aTrait on: aGeneratedClass oppositeOn: another
 	self apply: aTrait on: aGeneratedClass oppositeTrait: oppositeTrait on: anotherGeneratedClass
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixMetamodelGenerator >> apply: aTrait on: aGeneratedClass oppositeTrait: anotherTrait on: anotherGeneratedClass [
 	"This is a syntactic sugar mehtod to help using traits that work by pair like #TWithMethods and #TMethods.
 	To use it, start by defining two classes:
@@ -228,33 +235,33 @@ FamixMetamodelGenerator >> apply: aTrait on: aGeneratedClass oppositeTrait: anot
 	anotherGeneratedClass --|> anotherTrait 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetamodelGenerator >> builder [
 	^ builder
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetamodelGenerator >> builder: anObject [
 	builder := anObject
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixMetamodelGenerator >> changesToApply [
 	self define.
 	^ self builder changesToApply
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetamodelGenerator >> cleaningStrategy [
 	^ cleaningStrategy
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetamodelGenerator >> cleaningStrategy: anObject [
 	cleaningStrategy := anObject
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixMetamodelGenerator >> define [
 
 	self defineTraits.
@@ -266,40 +273,40 @@ FamixMetamodelGenerator >> define [
 	self defineMetamodelTools.
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixMetamodelGenerator >> defineAssociations [
 	"See example in FamixTest8Generator>>#defineAssociations"
 
 	
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixMetamodelGenerator >> defineClasses [
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixMetamodelGenerator >> defineHierarchy [
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixMetamodelGenerator >> defineMetamodelTools [
 
 	metamodelToolGenerators do: [ :generator | generator define ]
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixMetamodelGenerator >> defineProperties [
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixMetamodelGenerator >> defineRelations [
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixMetamodelGenerator >> defineTraits [
 ]
 
-{ #category : #generation }
+{ #category : 'generation' }
 FamixMetamodelGenerator >> generate [
 	"Next step to improve the cleaning is to add a report. For example if we cannot migrate a method since its class was removed from the MM, we should get notified with a report object."
 
@@ -312,24 +319,24 @@ FamixMetamodelGenerator >> generate [
 	self class withMooseModelDo: #resetMetamodel
 ]
 
-{ #category : #generation }
+{ #category : 'generation' }
 FamixMetamodelGenerator >> generateWithCleaning [
 	self withCleaning.
 	self generate
 ]
 
-{ #category : #generation }
+{ #category : 'generation' }
 FamixMetamodelGenerator >> generateWithoutCleaning [
 	self withoutCleaning.
 	self generate
 ]
 
-{ #category : #generation }
+{ #category : 'generation' }
 FamixMetamodelGenerator >> generatedPackage [
 	^ self packageName asPackageIfAbsent: [ nil ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FamixMetamodelGenerator >> initialize [
 
 	super initialize.
@@ -353,73 +360,73 @@ FamixMetamodelGenerator >> initialize [
 		                           generatorClass forGenerator: self ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetamodelGenerator >> mooseModelName [
 	^ self class mooseModelName
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixMetamodelGenerator >> newAbstractClassNamed: aClassName [
 
 	^ builder newAbstractClassNamed: aClassName
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixMetamodelGenerator >> newAbstractClassNamed: aClassName comment: aComment [
 
 	^ builder newAbstractClassNamed: aClassName comment: aComment
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixMetamodelGenerator >> newBuilder [
 	^ FamixMetamodelBuilder forGenerator: self
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixMetamodelGenerator >> newClassNamed: aClassName [
 
 	^ builder newClassNamed: aClassName
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixMetamodelGenerator >> newClassNamed: aClassName comment: aComment [
 
 	^ builder newClassNamed: aClassName comment: aComment
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixMetamodelGenerator >> newTraitNamed: aTraitName [
 
 	^ builder newTraitNamed: aTraitName
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixMetamodelGenerator >> newTraitNamed: aClassName comment: aString [
 
 	^ builder newTraitNamed: aClassName comment: aString
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixMetamodelGenerator >> packageName [
 
 	^ self class packageName
 
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixMetamodelGenerator >> packageNameForAnnotations [
 
 	^ self class packageNameForAnnotations
 
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixMetamodelGenerator >> prefix [
 
 	^ self class prefix
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixMetamodelGenerator >> remoteEntity: anEntityName withPrefix: aPrefixName [
 	^ ((subBuildersMapByPrefix at: aPrefixName) ensureClassNamed: anEntityName)
 		isRemote: true;
@@ -427,7 +434,7 @@ FamixMetamodelGenerator >> remoteEntity: anEntityName withPrefix: aPrefixName [
 		yourself
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixMetamodelGenerator >> remoteTrait: anEntityName withPrefix: aPrefixName [
 	^ ((subBuildersMapByPrefix at: aPrefixName) traitNamed: anEntityName)
 		isRemote: true;
@@ -435,17 +442,17 @@ FamixMetamodelGenerator >> remoteTrait: anEntityName withPrefix: aPrefixName [
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetamodelGenerator >> subBuilders [
 	^ subBuildersMapByPrefix values
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixMetamodelGenerator >> withCleaning [
 	self cleaningStrategy: FamixMetamodelGeneratorTotalCleaningStrategy new
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixMetamodelGenerator >> withoutCleaning [
 	self cleaningStrategy: FamixMetamodelGeneratorNoCleaningStrategy new
 ]

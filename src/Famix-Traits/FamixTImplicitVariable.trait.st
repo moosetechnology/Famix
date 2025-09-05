@@ -9,6 +9,11 @@ FamixTImplicitVariable represents a variable defined by the compiler in a contex
 |---|
 | `parentBehaviouralEntity` | `FamixTImplicitVariable` | `implicitVariables` | `FamixTWithImplicitVariables` | The behaviour containing this implicit variable. belongsTo implementation|
 
+### Outgoing dependencies
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `typing` | `FamixTTypedEntity` | `typedEntity` | `FamixTEntityTyping` | Association linking this entity to its declared type.|
+
 ### Incoming dependencies
 | Relation | Origin | Opposite | Type | Comment |
 |---|
@@ -17,7 +22,6 @@ FamixTImplicitVariable represents a variable defined by the compiler in a contex
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `declaredType` | `FamixTTypedEntity` | `typedEntities` | `FamixTType` | Type of the entity, if any|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
 
 
@@ -31,16 +35,18 @@ FamixTImplicitVariable represents a variable defined by the compiler in a contex
 
 "
 Trait {
-	#name : #FamixTImplicitVariable,
+	#name : 'FamixTImplicitVariable',
 	#instVars : [
 		'#parentBehaviouralEntity => FMOne type: #FamixTWithImplicitVariables opposite: #implicitVariables'
 	],
 	#traits : 'FamixTStructuralEntity',
 	#classTraits : 'FamixTStructuralEntity classTrait',
-	#category : #'Famix-Traits-ImplicitVariable'
+	#category : 'Famix-Traits-ImplicitVariable',
+	#package : 'Famix-Traits',
+	#tag : 'ImplicitVariable'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTImplicitVariable classSide >> annotation [
 
 	<FMClass: #TImplicitVariable super: #Object>
@@ -49,20 +55,49 @@ FamixTImplicitVariable classSide >> annotation [
 	^ self
 ]
 
-{ #category : #testing }
+{ #category : 'visitor' }
+FamixTImplicitVariable >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTImplicitVariable: self
+]
+
+{ #category : 'accessing' }
+FamixTImplicitVariable >> declaredType [
+	"If we have a declared type, we return it. Else, we check if the implicit variable is self or super to determine the declared type."
+
+	self typing ifNotNil: [ :t | t declaredType ifNotNil: [ :type | ^ type ] ].
+
+	[
+		self isSelf ifTrue: [ ^ (self query ancestors ofType: FamixTClass) anyOne ].
+
+		self isSuper ifTrue: [ ^ (self query ancestors ofType: FamixTClass) anyOne superclass ] ]
+		on: Error
+		do: [ "Nothing. If we cannot determine the type, just return nil." ].
+
+	^ nil
+]
+
+{ #category : 'testing' }
 FamixTImplicitVariable >> isImplicitVariable [
 
 	<generated>
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTImplicitVariable >> isSelf [
 
-	^ self name = 'self'
+	^ self shouldBeImplemented
 ]
 
-{ #category : #accessing }
+{ #category : 'testing' }
+FamixTImplicitVariable >> isSuper [
+
+	^ self name = 'super'
+]
+
+{ #category : 'accessing' }
 FamixTImplicitVariable >> parentBehaviouralEntity [
 	"Relation named: #parentBehaviouralEntity type: #FamixTWithImplicitVariables opposite: #implicitVariables"
 
@@ -72,7 +107,7 @@ FamixTImplicitVariable >> parentBehaviouralEntity [
 	^ parentBehaviouralEntity
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTImplicitVariable >> parentBehaviouralEntity: anObject [
 
 	parentBehaviouralEntity := anObject.
@@ -81,7 +116,7 @@ FamixTImplicitVariable >> parentBehaviouralEntity: anObject [
 
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FamixTImplicitVariable >> parentBehaviouralEntityGroup [
 	<generated>
 	<navigation: 'ParentBehaviouralEntity'>

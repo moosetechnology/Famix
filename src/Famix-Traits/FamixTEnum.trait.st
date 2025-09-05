@@ -28,12 +28,12 @@ Instance Variables:
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `incomingReferences` | `FamixTReferenceable` | `referredEntity` | `FamixTReference` | References to this entity by other entities.|
+| `incomingTypings` | `FamixTType` | `declaredType` | `FamixTEntityTyping` | Relations to the entities that have this as type.|
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
-| `typedEntities` | `FamixTType` | `declaredType` | `FamixTTypedEntity` | Entities that have this type as declaredType|
 
 
 ## Properties
@@ -46,17 +46,26 @@ Instance Variables:
 
 "
 Trait {
-	#name : #FamixTEnum,
+	#name : 'FamixTEnum',
 	#traits : 'FamixTType + FamixTWithEnumValues',
 	#classTraits : 'FamixTType classTrait + FamixTWithEnumValues classTrait',
-	#category : #'Famix-Traits-Enum'
+	#category : 'Famix-Traits-Enum',
+	#package : 'Famix-Traits',
+	#tag : 'Enum'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTEnum classSide >> annotation [
 
 	<FMClass: #TEnum super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
 	^ self
+]
+
+{ #category : 'visitor' }
+FamixTEnum >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTEnum: self
 ]

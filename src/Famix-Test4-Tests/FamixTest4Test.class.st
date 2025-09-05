@@ -1,6 +1,6 @@
 Class {
-	#name : #FamixTest4Test,
-	#superclass : #TestCase,
+	#name : 'FamixTest4Test',
+	#superclass : 'TestCase',
 	#instVars : [
 		'model',
 		'school',
@@ -16,10 +16,11 @@ Class {
 		'teacher1',
 		'teacher2'
 	],
-	#category : #'Famix-Test4-Tests'
+	#category : 'Famix-Test4-Tests',
+	#package : 'Famix-Test4-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 FamixTest4Test >> setUp [
 	super setUp.
 
@@ -55,14 +56,14 @@ FamixTest4Test >> setUp [
 	book2 person: principal
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTest4Test >> testAbstractClasses [
 
 	self assert: FamixTest4Entity isAbstract.
 	self assert: FamixTest4Person isAbstract
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTest4Test >> testEqualityStudent [
 
 	| sameStudent |
@@ -74,7 +75,7 @@ FamixTest4Test >> testEqualityStudent [
 	self assert: student2 equals: sameStudent
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTest4Test >> testRelations [
 	self assert: (principal books includes: book2).
 	self assert: (student1 books includes: book1).

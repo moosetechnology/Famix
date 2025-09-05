@@ -18,6 +18,7 @@
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `imports` | `FamixTWithImports` | `importingEntity` | `FamixTImport` | |
+| `outgoingConcretizations` | `FamixTTypeArgument` | `typeArgument` | `FamixTConcretization` | Concretizations where this type is the type argument.|
 | `superInheritances` | `FamixTWithInheritances` | `subclass` | `FamixTInheritance` | Superinheritance relationships, i.e. known superclasses of this type.|
 
 ### Incoming dependencies
@@ -44,14 +45,16 @@
 
 "
 Class {
-	#name : #FamixJavaInterface,
-	#superclass : #FamixJavaType,
-	#traits : 'FamixTCanBeClassSide + FamixTCanBeFinal + FamixTHasVisibility + FamixTImplementable + FamixTImportable + FamixTInvocationsReceiver + FamixTPackageable + FamixTWithAttributes + FamixTWithComments + FamixTWithImports + FamixTWithInheritances + FamixTWithMethods',
-	#classTraits : 'FamixTCanBeClassSide classTrait + FamixTCanBeFinal classTrait + FamixTHasVisibility classTrait + FamixTImplementable classTrait + FamixTImportable classTrait + FamixTInvocationsReceiver classTrait + FamixTPackageable classTrait + FamixTWithAttributes classTrait + FamixTWithComments classTrait + FamixTWithImports classTrait + FamixTWithInheritances classTrait + FamixTWithMethods classTrait',
-	#category : #'Famix-Java-Entities-Entities'
+	#name : 'FamixJavaInterface',
+	#superclass : 'FamixJavaType',
+	#traits : 'FamixTCanBeClassSide + FamixTCanBeFinal + FamixTHasVisibility + FamixTImplementable + FamixTImportable + FamixTInvocationsReceiver + FamixTPackageable + FamixTTypeArgument + FamixTWithAttributes + FamixTWithComments + FamixTWithImports + FamixTWithInheritances + FamixTWithMethods',
+	#classTraits : 'FamixTCanBeClassSide classTrait + FamixTCanBeFinal classTrait + FamixTHasVisibility classTrait + FamixTImplementable classTrait + FamixTImportable classTrait + FamixTInvocationsReceiver classTrait + FamixTPackageable classTrait + FamixTTypeArgument classTrait + FamixTWithAttributes classTrait + FamixTWithComments classTrait + FamixTWithImports classTrait + FamixTWithInheritances classTrait + FamixTWithMethods classTrait',
+	#category : 'Famix-Java-Entities-Entities',
+	#package : 'Famix-Java-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixJavaInterface class >> annotation [
 
 	<FMClass: #Interface super: #FamixJavaType>
@@ -60,7 +63,14 @@ FamixJavaInterface class >> annotation [
 	^ self
 ]
 
-{ #category : #private }
+{ #category : 'visitor' }
+FamixJavaInterface >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaInterface: self
+]
+
+{ #category : 'private' }
 FamixJavaInterface >> addMethodOverriding: aMethod in: aCollection [
 
 	self implementations do: [ :implementation |
@@ -79,7 +89,7 @@ FamixJavaInterface >> addMethodOverriding: aMethod in: aCollection [
 		subInterface addMethodOverriding: aMethod in: aCollection ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixJavaInterface >> isInterface [
 
 	<generated>

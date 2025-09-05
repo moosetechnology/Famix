@@ -5,27 +5,30 @@ Description
 I am a strategy managing the behavior of the Moose Queries depending on directions in the case where the query require the incomings associations.
 "
 Class {
-	#name : #MQNavigationIncomingDirectionStrategy,
-	#superclass : #MQNavigationDirectionStrategy,
-	#category : #'Moose-Query-Navigating'
+	#name : 'MQNavigationIncomingDirectionStrategy',
+	#superclass : 'MQNavigationDirectionStrategy',
+	#category : 'Moose-Query-Navigating',
+	#package : 'Moose-Query',
+	#tag : 'Navigating'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MQNavigationIncomingDirectionStrategy class >> determinatingSymbol [
 	^ #in
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MQNavigationIncomingDirectionStrategy class >> entityFor: anAssociation [
 	^ anAssociation source
 ]
 
-{ #category : #accessing }
-MQNavigationIncomingDirectionStrategy class >> msePropertiesOf: anEntity [
-	^ anEntity incomingMSEProperties
+{ #category : 'accessing' }
+MQNavigationIncomingDirectionStrategy class >> famePropertiesOf: anEntity [
+
+	^ anEntity incomingFameProperties
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MQNavigationIncomingDirectionStrategy class >> queryResultClass [
 	^ MooseIncomingQueryResult
 ]

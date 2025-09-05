@@ -1,6 +1,6 @@
 Class {
-	#name : #FamixTest8Generator,
-	#superclass : #FamixBasicInfrastructureGenerator,
+	#name : 'FamixTest8Generator',
+	#superclass : 'FamixBasicInfrastructureGenerator',
 	#instVars : [
 		'livingBeing',
 		'animal',
@@ -15,28 +15,29 @@ Class {
 		'residence',
 		'infection'
 	],
-	#category : #'Famix-TestGenerators'
+	#category : 'Famix-TestGenerators',
+	#package : 'Famix-TestGenerators'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest8Generator class >> packageName [
 
 	^ #'Famix-Test8-Entities'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest8Generator class >> prefix [
 
 	^ #'FamixTest8'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest8Generator class >> submetamodels [
 
 	^ { FamixGenerator }
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixTest8Generator >> defineAssociations [
 
 	residence := (self builder association: #Residence)
@@ -50,7 +51,7 @@ FamixTest8Generator >> defineAssociations [
 		             yourself
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixTest8Generator >> defineClasses [
 
 	livingBeing := self builder newClassNamed: #LivingBeing.
@@ -61,7 +62,7 @@ FamixTest8Generator >> defineClasses [
 	biotope := self builder newClassNamed: #Biotope
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixTest8Generator >> defineHierarchy [
 
 	animal --|> livingBeing.
@@ -80,7 +81,7 @@ FamixTest8Generator >> defineHierarchy [
 	virus --|> tInfectious
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixTest8Generator >> defineProperties [
 
 	infection property: #isInvasive type: #Boolean defaultValue: false.
@@ -88,7 +89,7 @@ FamixTest8Generator >> defineProperties [
 	tInfectious property: #pathogenicity type: #Number
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixTest8Generator >> defineTraits [
 
 	tResident := self builder newTraitNamed: #TResident.

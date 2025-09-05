@@ -1,1 +1,1 @@
-Package { #name : #'Famix-Visualizations' }
+Package { #name : 'Famix-Visualizations' }

@@ -16,14 +16,16 @@
 
 "
 Class {
-	#name : #FamixTest3Comment,
-	#superclass : #FamixTest3SourcedEntity,
+	#name : 'FamixTest3Comment',
+	#superclass : 'FamixTest3SourcedEntity',
 	#traits : 'FamixTComment',
 	#classTraits : 'FamixTComment classTrait',
-	#category : #'Famix-Test3-Entities-Entities'
+	#category : 'Famix-Test3-Entities-Entities',
+	#package : 'Famix-Test3-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTest3Comment class >> annotation [
 
 	<FMClass: #Comment super: #FamixTest3SourcedEntity>

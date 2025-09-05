@@ -1,27 +1,28 @@
 Class {
-	#name : #FamixTest7Generator,
-	#superclass : #FamixBasicInfrastructureGenerator,
+	#name : 'FamixTest7Generator',
+	#superclass : 'FamixBasicInfrastructureGenerator',
 	#instVars : [
 		'classEntity',
 		'method',
 		'inheritance'
 	],
-	#category : #'Famix-TestGenerators'
+	#category : 'Famix-TestGenerators',
+	#package : 'Famix-TestGenerators'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest7Generator class >> packageName [
 
 	^ #'Famix-Test7-Entities'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest7Generator class >> prefix [
 
 	^ #'FamixTest7'
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixTest7Generator >> defineClasses [
 
 	super defineClasses.
@@ -31,7 +32,7 @@ FamixTest7Generator >> defineClasses [
 
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixTest7Generator >> defineHierarchy [
 
 	super defineHierarchy.

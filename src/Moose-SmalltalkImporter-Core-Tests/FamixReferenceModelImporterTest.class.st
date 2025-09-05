@@ -1,24 +1,25 @@
 Class {
-	#name : #FamixReferenceModelImporterTest,
-	#superclass : #TestCase,
+	#name : 'FamixReferenceModelImporterTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'referenceModelTheRootName',
 		'referenceModelSubRootLevelOneName'
 	],
-	#category : #'Moose-SmalltalkImporter-Core-Tests'
+	#category : 'Moose-SmalltalkImporter-Core-Tests',
+	#package : 'Moose-SmalltalkImporter-Core-Tests'
 }
 
-{ #category : #resources }
+{ #category : 'resources' }
 FamixReferenceModelImporterTest class >> resources [
 	^ Array with: FamixReferenceModelNamespaceTestResource
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 FamixReferenceModelImporterTest >> model [
 	^self class resources first current model
 ]
 
-{ #category : #'reference model access' }
+{ #category : 'reference model access' }
 FamixReferenceModelImporterTest >> privateTestAccessingVar: aVarName from: aMethodName shouldBeRead: aBoolean hasAccessesSize: anInteger [
 
 	| methodName var access |
@@ -35,7 +36,7 @@ FamixReferenceModelImporterTest >> privateTestAccessingVar: aVarName from: aMeth
 	self deny: access isWrite equals: aBoolean
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixReferenceModelImporterTest >> setUp [
 
 	super setUp.
@@ -43,7 +44,7 @@ FamixReferenceModelImporterTest >> setUp [
 	referenceModelTheRootName := TheRoot mooseName
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testAbstractMethodAnnotation [
 
 	| definingClassName method methodName fmClass |
@@ -65,16 +66,16 @@ FamixReferenceModelImporterTest >> testAbstractMethodAnnotation [
 	self assert: fmClass isAbstract
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testAccessReadOnly [
 	self
-		privateTestAccessingVar: #'Smalltalk::TheRoot.x'
-		from: #'Smalltalk::TheRoot.x()'
+		privateTestAccessingVar: #'Smalltalk.TheRoot.x'
+		from: #'Smalltalk.TheRoot.x()'
 		shouldBeRead: true
 		hasAccessesSize: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testAccessSharedVariableFromTheClassSide [
 	| classVarUniqueName accessDefinition methodUniqueName |
 	methodUniqueName := (TheRoot class >> #accessSharedVariableFromTheClassSide) mooseName.
@@ -84,18 +85,18 @@ FamixReferenceModelImporterTest >> testAccessSharedVariableFromTheClassSide [
 	self assert: (accessDefinition at: 1) isWrite
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testAccessSharedVariableFromTheInstanceSide [
 	| accessDefinition |
 	accessDefinition := self model allAccesses
 		select: [ :acc | 
-			acc variable mooseName = 'Smalltalk::TheRoot.TheRootSharedVariable'
+			acc variable mooseName = 'Smalltalk.TheRoot.TheRootSharedVariable'
 				and: [ acc accessor mooseName = (TheRoot >> #accessSharedVariableFromTheInstanceSide) mooseName ] ].
 	self assert: accessDefinition size equals: 1.
 	self assert: (accessDefinition at: 1) isWrite
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testAccessSharedVariableOfSuperclassClassSide [
 	| instVarUniqueName accessDefinition methodUniqueName |
 	methodUniqueName := (SubRootLevelOne class >> #accessSharedVariableOfSuperClassClassSide) mooseName.
@@ -105,7 +106,7 @@ FamixReferenceModelImporterTest >> testAccessSharedVariableOfSuperclassClassSide
 	self assert: (accessDefinition at: 1) isWrite
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testAccessSharedVariableOfSuperclassClassSide2 [
 
 	| instVarUniqueName accessDefinition methodUniqueName |
@@ -117,41 +118,41 @@ FamixReferenceModelImporterTest >> testAccessSharedVariableOfSuperclassClassSide
 	self assert: (accessDefinition at: 1) isWrite
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testAccessSharedVariableOfSuperclassInstanceSide [
 	|  accessDefinition |
 	accessDefinition := self model allAccesses
 		select: [ :acc | 
-			acc variable mooseName = 'Smalltalk::TheRoot.TheRootSharedVariable'
+			acc variable mooseName = 'Smalltalk.TheRoot.TheRootSharedVariable'
 				and: [ acc accessor mooseName = (SubRootLevelOne >> #accessSharedVariableOfSuperclassInstanceSide) mooseName ] ].
 	self assert: accessDefinition size equals: 1.
 	self assert: (accessDefinition at: 1) isWrite
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testAccessWriteOnly [
 	self
-		privateTestAccessingVar: #'Smalltalk::TheRoot.x'
-		from: #'Smalltalk::TheRoot.x:(Object)'
+		privateTestAccessingVar: #'Smalltalk.TheRoot.x'
+		from: #'Smalltalk.TheRoot.x:(Object)'
 		shouldBeRead: false
 		hasAccessesSize: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testAccessingFormalParameter [
 	self
-		privateTestAccessingVar: #'Smalltalk::TheRoot.accessingArgument:(Object).anArgument'
-		from: #'Smalltalk::TheRoot.accessingArgument:(Object)'
+		privateTestAccessingVar: #'Smalltalk.TheRoot.accessingArgument:(Object).anArgument'
+		from: #'Smalltalk.TheRoot.accessingArgument:(Object)'
 		shouldBeRead: true
 		hasAccessesSize: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testAccessingGlobalVariableFromInstanceSide [
 	| declaredType |
 	self
 		privateTestAccessingVar: #Transcript
-		from: #'Smalltalk::TheRoot.accessingGlobalVariableFromInstanceSide()'
+		from: #'Smalltalk.TheRoot.accessingGlobalVariableFromInstanceSide()'
 		shouldBeRead: true
 		hasAccessesSize: 1.
 	declaredType := (self model allGlobalVariables entityNamed: #Transcript) declaredType.
@@ -159,7 +160,7 @@ FamixReferenceModelImporterTest >> testAccessingGlobalVariableFromInstanceSide [
 	self assert: (declaredType usesFamixTrait: FamixTType)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testAccessingGlobalVariableHavingNamespaceNameFromInstanceSide [
 	| accessDefinition methodUniqueName |
 	methodUniqueName := (TheRoot >> #accessingGlobalVariableHavingNamespaceName) mooseName.
@@ -167,33 +168,33 @@ FamixReferenceModelImporterTest >> testAccessingGlobalVariableHavingNamespaceNam
 	self assert: accessDefinition size equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testAccessingImportedClassWithinReturnVariable [
 	| method var accesses |
-	method := self model entityNamed: #'Smalltalk::TheRoot.returningImportedClass()'.
-	var := self model entityNamed: #'Smalltalk::TheRoot'.
+	method := self model entityNamed: #'Smalltalk.TheRoot.returningImportedClass()'.
+	var := self model entityNamed: #'Smalltalk.TheRoot'.
 	accesses := self model allReferences select: [ :each | each source = method and: [ each target = var ] ].
 	self assert: accesses size equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testAccessingLocalVariable [
 	self
-		privateTestAccessingVar: #'Smalltalk::TheRoot.assigningLocalVariable().tmp'
-		from: #'Smalltalk::TheRoot.assigningLocalVariable()'
+		privateTestAccessingVar: #'Smalltalk.TheRoot.assigningLocalVariable().tmp'
+		from: #'Smalltalk.TheRoot.assigningLocalVariable()'
 		shouldBeRead: false
 		hasAccessesSize: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testAccessingNamespace2 [
 	| accessDefinition |
-	accessDefinition := (self model entityNamed: 'Smalltalk::TheRoot.accessingGlobalVariableHavingNamespaceName()') accesses
-		select: [ :acc | acc variable mooseName = #SmalltalkGlobalVariable ].
+	accessDefinition := (self model entityNamed: 'Smalltalk.TheRoot.accessingGlobalVariableHavingNamespaceName()') accesses
+		select: [ :acc | acc target mooseName = #SmalltalkGlobalVariable ].
 	self assert: accessDefinition size equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testAccessingNamespaceAsGlobalVariable [
 
 	| accessDefinition method globalVariable |
@@ -208,7 +209,7 @@ FamixReferenceModelImporterTest >> testAccessingNamespaceAsGlobalVariable [
 	self assert: accessDefinition size equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testAccessingStubClassWithinReturnVariable [
 	| accessDefinition methodUniqueName classUniqueName |
 	classUniqueName := String mooseName.
@@ -217,7 +218,7 @@ FamixReferenceModelImporterTest >> testAccessingStubClassWithinReturnVariable [
 	self assert: accessDefinition size equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testAnnotationInstanceAttributes [
 	| unaryAnnType withParameterAnnType |
 	unaryAnnType := self model allAnnotationTypes detect: [ :each | each name = #aPragma ].
@@ -229,14 +230,14 @@ FamixReferenceModelImporterTest >> testAnnotationInstanceAttributes [
 	self assert: withParameterAnnType instances first attributes last annotationTypeAttribute name equals: #parameter
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testAnnotationInstanceAttributesInModel [
 	self model allAnnotationInstances do: [:each | 
 		each attributes do: [:attr | 
 			self assert: attr mooseModel equals: self model ]]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testAnnotationInstances [
 	| unaryAnnType withParameterAnnType |
 	self assert: self model allAnnotationInstances size equals: 4.
@@ -246,7 +247,7 @@ FamixReferenceModelImporterTest >> testAnnotationInstances [
 	self assert: withParameterAnnType instances size equals: 2
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testAnnotationInstancesConnectedToMethods [
 	| method |
 	method := self model allMethods entityNamed: (TheRoot >> #pragmaWithUnaryName) mooseName.
@@ -261,7 +262,7 @@ FamixReferenceModelImporterTest >> testAnnotationInstancesConnectedToMethods [
 	self assert: method annotationInstances last annotatedEntity equals: method
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testAnnotationTypeAttributes [
 	| unaryAnnType withParameterAnnType |
 	unaryAnnType := self model allAnnotationTypes detect: [ :each | each name = #aPragma ].
@@ -270,14 +271,14 @@ FamixReferenceModelImporterTest >> testAnnotationTypeAttributes [
 	self assert: withParameterAnnType attributes size equals: 2
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testAnnotationTypeAttributesInModel [
 	self model allAnnotationTypes do: [:each | 
 		each attributes do: [:attr | 
 			self assert: attr mooseModel equals: self model ]]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testAnnotationTypes [
 	self assert: self model allAnnotationTypes size equals: 3.
 	self assert: (self model allAnnotationTypes anySatisfy: [ :each | each name = #aPragma ]).
@@ -285,15 +286,15 @@ FamixReferenceModelImporterTest >> testAnnotationTypes [
 	self assert: (self model allAnnotationTypes anySatisfy: [ :each | each name = #aPragma:parameter: ])
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testClassAnnotation [
 	| definingClassName famixClass |
-	definingClassName := #'Smalltalk::SubRootLevelOne' mooseName.
+	definingClassName := #'Smalltalk.SubRootLevelOne' mooseName.
 	famixClass := self model entityNamed: definingClassName.
 	self assert: famixClass parentPackage name equals: #'Moose-TestResources-Reference-Core'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testClassClassAnnotation [
 	"Should work for metaclasse too"
 
@@ -303,14 +304,14 @@ FamixReferenceModelImporterTest >> testClassClassAnnotation [
 	self assert: famixClass parentPackage name equals: #'Moose-TestResources-Reference-Core'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testClassMetaclassInstanceVariableAndShared [
 	| insVar theRoot insMetaclassVar shared theRootMeta |
-	insVar := self model entityNamed: #'Smalltalk::TheRoot.z'.
-	insMetaclassVar := self model entityNamed: #'Smalltalk::TheRoot_class.mz'.
-	shared := self model entityNamed: #'Smalltalk::TheRoot.TheRootSharedVariable'.
-	theRoot := self model entityNamed: #'Smalltalk::TheRoot'.
-	theRootMeta := self model entityNamed: #'Smalltalk::TheRoot_class'.
+	insVar := self model entityNamed: #'Smalltalk.TheRoot.z'.
+	insMetaclassVar := self model entityNamed: #'Smalltalk.TheRoot_class.mz'.
+	shared := self model entityNamed: #'Smalltalk.TheRoot.TheRootSharedVariable'.
+	theRoot := self model entityNamed: #'Smalltalk.TheRoot'.
+	theRootMeta := self model entityNamed: #'Smalltalk.TheRoot_class'.
 	self deny: insVar isClassSide.
 	self assert: insMetaclassVar isClassSide.
 	self assert: shared isClassSide.
@@ -322,14 +323,14 @@ FamixReferenceModelImporterTest >> testClassMetaclassInstanceVariableAndShared [
 	self deny: insMetaclassVar isSharedVariable
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testClassMethodAnnotation [
 	| method |
-	method := self model entityNamed: 'Smalltalk::SubRootLevelOne_class.accessSharedVariableOfSuperClassClassSide()'.
+	method := self model entityNamed: 'Smalltalk.SubRootLevelOne_class.accessSharedVariableOfSuperClassClassSide()'.
 	self assert: method protocol equals: #'accessing superclassinstance on class side'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testClassReferenceFromTheInstanceSide [
 	"TheRoot>>accessingClass
 
@@ -342,12 +343,12 @@ FamixReferenceModelImporterTest >> testClassReferenceFromTheInstanceSide [
 	self assert: refs size equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testClassReferencesByFullNameReified [
 	self assert: (self model entityNamed: TestCase class mooseName) isNotNil
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testClassSelfSend [
 	| invocations calleeMethodName callingMethodUniqueName |
 	"We want to represent
@@ -362,17 +363,17 @@ FamixReferenceModelImporterTest >> testClassSelfSend [
 			invocation signature = (FamixSmalltalkNameResolver signatureFromSmalltalkSelectorOn: calleeMethodName)
 				and: [ invocation sender mooseName = callingMethodUniqueName ] ].
 	self assert: invocations size equals: 1.
-	self assert: invocations first receiver mooseName equals: #'Smalltalk::Object_class'
+	self assert: invocations first receiver mooseName equals: #'Smalltalk.Object_class'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testConflictingInstanceVarNames [
 	| insVar theRoot insMetaclassVar shared theRootMeta |
-	insVar := self model entityNamed: #'Smalltalk::TheRoot.instanceAndClassPotentiallyConflictingName'.
-	insMetaclassVar := self model entityNamed: #'Smalltalk::TheRoot_class.instanceAndClassPotentiallyConflictingName'.
-	shared := self model entityNamed: #'Smalltalk::TheRoot.TheRootSharedVariable'.
-	theRoot := self model entityNamed: #'Smalltalk::TheRoot'.
-	theRootMeta := self model entityNamed: #'Smalltalk::TheRoot_class'.
+	insVar := self model entityNamed: #'Smalltalk.TheRoot.instanceAndClassPotentiallyConflictingName'.
+	insMetaclassVar := self model entityNamed: #'Smalltalk.TheRoot_class.instanceAndClassPotentiallyConflictingName'.
+	shared := self model entityNamed: #'Smalltalk.TheRoot.TheRootSharedVariable'.
+	theRoot := self model entityNamed: #'Smalltalk.TheRoot'.
+	theRootMeta := self model entityNamed: #'Smalltalk.TheRoot_class'.
 	self deny: insVar isClassSide.
 	self assert: insMetaclassVar isClassSide.
 	self assert: shared isClassSide.
@@ -381,7 +382,7 @@ FamixReferenceModelImporterTest >> testConflictingInstanceVarNames [
 	self assert: shared belongsTo equals: theRoot
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testConstantMethodAnnotation [
 	| methodUniqueName method |
 	methodUniqueName := (TheRoot >> #constantReturningMethod) mooseName.
@@ -393,7 +394,7 @@ FamixReferenceModelImporterTest >> testConstantMethodAnnotation [
 	self assert: method isConstant
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testDisplayFullString [
 	"Smoke test for #displayFullString"
 
@@ -402,7 +403,7 @@ FamixReferenceModelImporterTest >> testDisplayFullString [
 	self assertEmpty: ((self model entities select: [ :entity | entity isAssociation ]) select: [ :asso | asso displayFullString = #noname ])
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testExtendedClasses [
 	| subRootModelTwo p1 p2 subRootModelThree extensionMethod |
 	p1 := self model entityNamed: #'Moose-TestResources-Reference-PackageOne'.
@@ -417,7 +418,7 @@ FamixReferenceModelImporterTest >> testExtendedClasses [
 	self deny: subRootModelThree isExtended
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testExtendedPackage [
 	| extendedClass extendedPackage |
 	extendedPackage := self model entityNamed: #'Moose-TestResources-Reference-PackageOne'.
@@ -429,7 +430,7 @@ FamixReferenceModelImporterTest >> testExtendedPackage [
 	self assert: extendedPackage localMethods size equals: 2
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testExtensionClasses [
 	| p1 p2 extensionClasses c3 c2 |
 	p1 := self model entityNamed: #'Moose-TestResources-Reference-PackageOne'.
@@ -444,7 +445,7 @@ FamixReferenceModelImporterTest >> testExtensionClasses [
 	self assert: (extensionClasses includes: c2)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testExtensionMethod [
 	| p2 extensionMethod |
 	p2 := self model entityNamed: #'Moose-TestResources-Reference-PackageTwo'.
@@ -454,7 +455,7 @@ FamixReferenceModelImporterTest >> testExtensionMethod [
 	self assert: (extensionMethod atScope: FamixTPackage) ~~ (extensionMethod belongsTo atScope: FamixTPackage)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testExtensionPackage [
 	| normalClass extendedClass extensionPackage externalExtendedClass |
 	extensionPackage := self model allPackages entityNamed: #'Moose-TestResources-Reference-PackageTwo'.
@@ -476,7 +477,7 @@ FamixReferenceModelImporterTest >> testExtensionPackage [
 	self assert: (extensionPackage extensionMethods includes: (self model entityNamed: (SubRootModelTwo >> #extendedMethodOne) mooseName))
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testExtensions [
 	| normalClass extendedClass |
 	extendedClass := self model entityNamed: SubRootModelTwo mooseName.
@@ -492,7 +493,7 @@ FamixReferenceModelImporterTest >> testExtensions [
 	self assert: ((normalClass methods flatCollect: [ :m | m atScope: FamixTPackage ]) allSatisfy: [ :each | each name = #'Moose-TestResources-Reference-PackageTwo' ])
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testExternalExtension [
 	| extensionPackage externalExtendedClass |
 	extensionPackage := self model entityNamed: #'Moose-TestResources-Reference-PackageTwo'.
@@ -503,14 +504,14 @@ FamixReferenceModelImporterTest >> testExternalExtension [
 	self assert: (extensionPackage extensionMethods includes: (self model entityNamed: (ExternalReferenceClass >> #externalClassExtensionForTest) mooseName))
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testFormalParameterReified [
 	| formalParameterName |
-	formalParameterName := #'Smalltalk::TheRoot.accessingArgument:(Object).anArgument'.
+	formalParameterName := #'Smalltalk.TheRoot.accessingArgument:(Object).anArgument'.
 	self assert: (self model entityNamed: formalParameterName) isNotNil
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testGetterMethod [
 	| methodUniqueName method |
 	methodUniqueName := (TheRoot >> #x) mooseName.
@@ -522,41 +523,41 @@ FamixReferenceModelImporterTest >> testGetterMethod [
 	self assert: method isGetter
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testGlobalVariableReified [
 	| globalVariable |
 	globalVariable := self model entityNamed: #Transcript.
 	self assert: globalVariable isNotNil
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testImplicitVariableReified [
-	self assert: (self model entityNamed: 'Smalltalk::TheRoot.singleSelfSend().self') isNotNil
+	self assert: (self model entityNamed: 'Smalltalk.TheRoot.singleSelfSend().self') isNotNil
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testInstVariableAccessInDefiningClass [
 	self
-		privateTestAccessingVar: #'Smalltalk::SubRootLevelOne.k'
-		from: #'Smalltalk::SubRootLevelOne.accessSuperclassInstVar()'
+		privateTestAccessingVar: #'Smalltalk.SubRootLevelOne.k'
+		from: #'Smalltalk.SubRootLevelOne.accessSuperclassInstVar()'
 		shouldBeRead: false
 		hasAccessesSize: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testInstVariableAccessInDefiningMetaclass [
 	self
-		privateTestAccessingVar: #'Smalltalk::TheRoot_class.mx'
-		from: #'Smalltalk::TheRoot_class.accessInstanceVariable()'
+		privateTestAccessingVar: #'Smalltalk.TheRoot_class.mx'
+		from: #'Smalltalk.TheRoot_class.accessInstanceVariable()'
 		shouldBeRead: false
 		hasAccessesSize: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testInstVariableAccessInSuperClass [
 	self
 		privateTestAccessingVar: (TheRoot mooseNameOf: #x)
-		from: #'Smalltalk::SubRootLevelOne.accessSuperclassInstVar()'
+		from: #'Smalltalk.SubRootLevelOne.accessSuperclassInstVar()'
 		shouldBeRead: true
 		hasAccessesSize: 1.
 
@@ -567,7 +568,7 @@ FamixReferenceModelImporterTest >> testInstVariableAccessInSuperClass [
 		hasAccessesSize: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testInstVariableAccessTwiceTheSameVariable [
 	self
 		privateTestAccessingVar: SubRootLevelOne @ #k
@@ -576,41 +577,41 @@ FamixReferenceModelImporterTest >> testInstVariableAccessTwiceTheSameVariable [
 		hasAccessesSize: 2
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testInstanceVariableReified [
 	| instVar |
-	instVar := self model entityNamed: 'Smalltalk::SubRootLevelOne.k'.
+	instVar := self model entityNamed: 'Smalltalk.SubRootLevelOne.k'.
 	self deny: instVar isClassSide
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testLocalVariableReified [
-	self assert: (self model entityNamed: 'Smalltalk::TheRoot.assigningLocalVariable().tmp') isNotNil
+	self assert: (self model entityNamed: 'Smalltalk.TheRoot.assigningLocalVariable().tmp') isNotNil
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testMetaclassAttributeIsClassSide [
 	| attribute theRoot |
-	attribute := self model entityNamed: #'Smalltalk::TheRoot_class.mz'.
-	theRoot := self model entityNamed: #'Smalltalk::TheRoot_class'.
+	attribute := self model entityNamed: #'Smalltalk.TheRoot_class.mz'.
+	theRoot := self model entityNamed: #'Smalltalk.TheRoot_class'.
 	self assert: attribute isClassSide.
 	self assert: attribute belongsTo equals: theRoot
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testMethodAnnotation [
 	| method |
-	method := self model entityNamed: 'Smalltalk::SubRootLevelOne.accessSuperclassInstVar()' ifAbsent: [ nil ].
+	method := self model entityNamed: 'Smalltalk.SubRootLevelOne.accessSuperclassInstVar()' ifAbsent: [ nil ].
 	self assert: method name equals: #accessSuperclassInstVar.
 	self assert: method protocol equals: #accessingSuperclassInstVar
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testMethodReification [
 
 	| method |
 	method := self model entityNamed:
-		          'Smalltalk::SubRootLevelOne.accessSuperclassInstVar()'.
+		          'Smalltalk.SubRootLevelOne.accessSuperclassInstVar()'.
 	self assert: method isNotNil.
 	self
 		assert: method belongsTo
@@ -623,53 +624,53 @@ FamixReferenceModelImporterTest >> testMethodReification [
 				 #accessSuperclassInstVar)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testOutOfModelInheritedInstanceVariableReified [
 	| instVar |
-	instVar := self model entityNamed: 'Smalltalk::Model.dependents'.
+	instVar := self model entityNamed: 'Smalltalk.Model.dependents'.
 	self deny: instVar isClassSide.
 	self assert: instVar belongsTo mooseName equals: Model mooseName
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testReadAndWrite [
 	| accessDefinition |
 	accessDefinition := self model allAccesses
-		select: [ :acc | acc variable mooseName = 'Smalltalk::SubRootLevelOne.k' and: [ acc accessor mooseName = (SubRootLevelOne >> #accessTwiceTheSameVariableReadAndWrite) mooseName ] ].
+		select: [ :acc | acc variable mooseName = 'Smalltalk.SubRootLevelOne.k' and: [ acc accessor mooseName = (SubRootLevelOne >> #accessTwiceTheSameVariableReadAndWrite) mooseName ] ].
 	self assert: accessDefinition size equals: 2.
 	self assert: (accessDefinition at: 1) isRead | (accessDefinition at: 1) isWrite.
 	self assert: (accessDefinition at: 2) isRead | (accessDefinition at: 2) isWrite
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testReferenceBindingReified [
 	| famixClass |
 	famixClass := self model entityNamed: TestCase class mooseName.
 	self assert: famixClass isNotNil
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testSelfAccessInDefiningClass [
 	"TheRoot>>singleSelfSend
 		self accessSharedVariableFromTheInstanceSide"
 
 	self
-		privateTestAccessingVar: #'Smalltalk::TheRoot.singleSelfSend().self'
-		from: #'Smalltalk::TheRoot.singleSelfSend()'
+		privateTestAccessingVar: #'Smalltalk.TheRoot.singleSelfSend().self'
+		from: #'Smalltalk.TheRoot.singleSelfSend()'
 		shouldBeRead: true
 		hasAccessesSize: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testSelfAccessInDefiningClassOnClassSide [
 	self
-		privateTestAccessingVar: #'Smalltalk::TheRoot_class.singleSelfSendOnClassSide().self'
-		from: #'Smalltalk::TheRoot_class.singleSelfSendOnClassSide()'
+		privateTestAccessingVar: #'Smalltalk.TheRoot_class.singleSelfSendOnClassSide().self'
+		from: #'Smalltalk.TheRoot_class.singleSelfSendOnClassSide()'
 		shouldBeRead: true
 		hasAccessesSize: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testSetterMethod [
 
 	| methodUniqueName method |
@@ -688,16 +689,16 @@ FamixReferenceModelImporterTest >> testSetterMethod [
 	self assert: method isSetter
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testSharedVariableReification [
 	| shared |
-	shared := self model entityNamed: #'Smalltalk::TheRoot.TheRootSharedVariable'.
+	shared := self model entityNamed: #'Smalltalk.TheRoot.TheRootSharedVariable'.
 	self assert: shared isClassSide.
 	self assert: shared isSharedVariable.
 	self assert: shared belongsTo equals: (self model entityNamed: TheRoot mooseName)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testSingleSelfSend [
 	| invocations calleeMethodName callingMethodUniqueName |
 	"We want to make sure that we represent well that 
@@ -713,7 +714,7 @@ FamixReferenceModelImporterTest >> testSingleSelfSend [
 	self assert: invocations size equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testSingleSelfSendOnClassSide [
 	| invocations calleeMethodName callingMethodUniqueName |
 	"Want to represent
@@ -726,10 +727,10 @@ FamixReferenceModelImporterTest >> testSingleSelfSendOnClassSide [
 			invocation signature = (FamixSmalltalkNameResolver signatureFromSmalltalkSelectorOn: calleeMethodName)
 				and: [ invocation sender mooseName = callingMethodUniqueName ] ].
 	self assert: invocations size equals: 1.
-	self assert: invocations first receiver mooseName equals: #'Smalltalk::TheRoot_class.singleSelfSendOnClassSide().self'
+	self assert: invocations first receiver mooseName equals: #'Smalltalk.TheRoot_class.singleSelfSendOnClassSide().self'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testSingleSelfSendWithReturn [
 	| invocations calleeMethodName callingMethodUniqueName |
 	"We want to make sure that we represent well
@@ -745,15 +746,15 @@ FamixReferenceModelImporterTest >> testSingleSelfSendWithReturn [
 	self assert: invocations size equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testStubInstanceVariableReified [
 	| instVar |
-	instVar := self model entityNamed: 'Smalltalk::Model.dependents'.
+	instVar := self model entityNamed: 'Smalltalk.Model.dependents'.
 	self deny: instVar isNil.
 	self assert: instVar isStub
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testStubSharedVariableAccess [
 	"We want to test OtherRootFromClass>>accessingStubSharedVariable"
 
@@ -764,17 +765,17 @@ FamixReferenceModelImporterTest >> testStubSharedVariableAccess [
 	self assert: accessDefinition size equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testStubSharedVariableReified [
 	| classVar |
-	classVar := self model entityNamed: 'Smalltalk::Behavior.ClassProperties'.
+	classVar := self model entityNamed: 'Smalltalk.Behavior.ClassProperties'.
 	self deny: classVar isNil.
 	self assert: classVar isStub.
 	self assert: classVar isSharedVariable.
 	self assert: classVar belongsTo equals: (self model entityNamed: Behavior mooseName)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testSubRootLevelOneInheritsFromTheRoot [
 	| referenceModelSubRootLevelOne |
 	referenceModelSubRootLevelOne := self model entityNamed: referenceModelSubRootLevelOneName.
@@ -785,7 +786,7 @@ FamixReferenceModelImporterTest >> testSubRootLevelOneInheritsFromTheRoot [
 	self assertEmpty: referenceModelSubRootLevelOne subInheritances
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testTheRootInheritsFromUIModel [
 	| referenceModelTheRoot |
 	referenceModelTheRoot := self model entityNamed: referenceModelTheRootName.
@@ -795,22 +796,22 @@ FamixReferenceModelImporterTest >> testTheRootInheritsFromUIModel [
 	self assert: ((referenceModelTheRoot subInheritances collect: [ :each | each subclass name ]) includes: SubRootLevelOne name)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testUnknownVariableAccess [
 
 	self
 		privateTestAccessingVar: #undeclaredStubInstVar
-		from: #'Smalltalk::TheRoot.accessingUnknowVariable()'
+		from: #'Smalltalk.TheRoot.accessingUnknowVariable()'
 		shouldBeRead: true
 		hasAccessesSize: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testUnknownVariableReified [
 	self deny: (self model entityNamed: #undeclaredStubInstVar) isNil
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testUsedClassReified [
 	| className famixClass |
 	className := Object mooseName.
@@ -819,7 +820,7 @@ FamixReferenceModelImporterTest >> testUsedClassReified [
 	self assert: famixClass isStub
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixReferenceModelImporterTest >> testUsedClassReifiedWithinReturn [
 	| className famixClass |
 	className := String class mooseName.

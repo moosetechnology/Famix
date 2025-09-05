@@ -19,6 +19,7 @@
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `imports` | `FamixTWithImports` | `importingEntity` | `FamixTImport` | |
+| `outgoingConcretizations` | `FamixTTypeArgument` | `typeArgument` | `FamixTConcretization` | Concretizations where this type is the type argument.|
 | `superInheritances` | `FamixTWithInheritances` | `subclass` | `FamixTInheritance` | Superinheritance relationships, i.e. known superclasses of this type.|
 
 ### Incoming dependencies
@@ -26,6 +27,7 @@
 |---|
 | `incomingImports` | `FamixTImportable` | `importedEntity` | `FamixTImport` | List of imports of this entity|
 | `incomingReferences` | `FamixTReferenceable` | `referredEntity` | `FamixTReference` | References to this entity by other entities.|
+| `incomingTypings` | `FamixTType` | `declaredType` | `FamixTEntityTyping` | Relations to the entities that have this as type.|
 | `subInheritances` | `FamixTWithInheritances` | `superclass` | `FamixTInheritance` | Subinheritance relationships, i.e. known subclasses of this type.|
 
 ### Other
@@ -33,7 +35,6 @@
 |---|
 | `receivingInvocations` | `FamixTInvocationsReceiver` | `receiver` | `FamixTInvocation` | List of invocations performed on this entity (considered as the receiver)|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
-| `typedEntities` | `FamixTType` | `declaredType` | `FamixTTypedEntity` | Entities that have this type as declaredType|
 
 
 ## Properties
@@ -47,14 +48,16 @@
 
 "
 Class {
-	#name : #FamixJavaEnum,
-	#superclass : #FamixJavaType,
-	#traits : 'FamixTEnum + FamixTHasVisibility + FamixTImportable + FamixTInvocationsReceiver + FamixTWithAttributes + FamixTWithComments + FamixTWithImports + FamixTWithInheritances + FamixTWithMethods',
-	#classTraits : 'FamixTEnum classTrait + FamixTHasVisibility classTrait + FamixTImportable classTrait + FamixTInvocationsReceiver classTrait + FamixTWithAttributes classTrait + FamixTWithComments classTrait + FamixTWithImports classTrait + FamixTWithInheritances classTrait + FamixTWithMethods classTrait',
-	#category : #'Famix-Java-Entities-Entities'
+	#name : 'FamixJavaEnum',
+	#superclass : 'FamixJavaType',
+	#traits : 'FamixTEnum + FamixTHasVisibility + FamixTImportable + FamixTInvocationsReceiver + FamixTTypeArgument + FamixTWithAttributes + FamixTWithComments + FamixTWithImports + FamixTWithInheritances + FamixTWithMethods',
+	#classTraits : 'FamixTEnum classTrait + FamixTHasVisibility classTrait + FamixTImportable classTrait + FamixTInvocationsReceiver classTrait + FamixTTypeArgument classTrait + FamixTWithAttributes classTrait + FamixTWithComments classTrait + FamixTWithImports classTrait + FamixTWithInheritances classTrait + FamixTWithMethods classTrait',
+	#category : 'Famix-Java-Entities-Entities',
+	#package : 'Famix-Java-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixJavaEnum class >> annotation [
 
 	<FMClass: #Enum super: #FamixJavaType>
@@ -63,7 +66,14 @@ FamixJavaEnum class >> annotation [
 	^ self
 ]
 
-{ #category : #private }
+{ #category : 'visitor' }
+FamixJavaEnum >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaEnum: self
+]
+
+{ #category : 'private' }
 FamixJavaEnum >> addMethodOverriding: aMethod in: aCollection [
 
 	self directSubclasses do: [ :subClass |
@@ -73,12 +83,12 @@ FamixJavaEnum >> addMethodOverriding: aMethod in: aCollection [
 		subClass addMethodOverriding: aMethod in: aCollection ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixJavaEnum >> values [
 	^ self enumValues
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixJavaEnum >> values: anObject [
 	self enumValues: anObject
 ]

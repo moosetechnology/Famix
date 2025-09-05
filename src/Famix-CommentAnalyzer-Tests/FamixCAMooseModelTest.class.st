@@ -1,14 +1,15 @@
 Class {
-	#name : #FamixCAMooseModelTest,
-	#superclass : #TestCase,
+	#name : 'FamixCAMooseModelTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'model',
 		'method'
 	],
-	#category : #'Famix-CommentAnalyzer-Tests'
+	#category : 'Famix-CommentAnalyzer-Tests',
+	#package : 'Famix-CommentAnalyzer-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 FamixCAMooseModelTest >> mockCommentObjects [
 	^ #('// Inside emvG_szDataTag buffer in temporal situation
   // Length the request data into emvG_szDataTag buffer in temporal situation' '//memset ( ( char * ) szBuffSndRAD, 0x00, MAX_BUFFER_SND_LEN );
@@ -16,7 +17,7 @@ FamixCAMooseModelTest >> mockCommentObjects [
 		collect: [ :content | FamixTest1Comment content: content ]
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixCAMooseModelTest >> setUp [
 	super setUp.
 	model := FamixTest1Model sourceLanguage: FamixTest1SourceLanguage new.
@@ -45,19 +46,19 @@ FamixCAMooseModelTest >> setUp [
 	model detectCommentedCode
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixCAMooseModelTest >> testCleanedSCRBehavioral [
 	"test SCR without cleaning"
 
 	self assert: method sourceCommentRateWithCleaning equals: 2 / 5
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixCAMooseModelTest >> testCommentedCode [
 	self assert: (method comments select: #isCode) size equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixCAMooseModelTest >> testComputedSCRContainer [
 	"test with default values for containers"
 
@@ -65,7 +66,7 @@ FamixCAMooseModelTest >> testComputedSCRContainer [
 	self assert: model allClasses first sourceCommentRateWithoutCleaning equals: 7.0
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixCAMooseModelTest >> testDefaultSCRContainer [
 	"test with default values for containers"
 
@@ -73,12 +74,12 @@ FamixCAMooseModelTest >> testDefaultSCRContainer [
 	self assert: FamixTest1Class new sourceCommentRateWithCleaning equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixCAMooseModelTest >> testNumberOfUsefulComments [
 	self assert: method usefulComments size equals: 3
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixCAMooseModelTest >> testRawSCRBehavioral [
 	"test SCR without cleaning"
 

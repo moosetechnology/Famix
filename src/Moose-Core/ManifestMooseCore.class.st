@@ -1,35 +1,37 @@
 Class {
-	#name : #ManifestMooseCore,
-	#superclass : #PackageManifest,
+	#name : 'ManifestMooseCore',
+	#superclass : 'PackageManifest',
 	#classVars : [
 		'ShouldTuneGCParameters'
 	],
-	#category : #'Moose-Core-Manifest'
+	#category : 'Moose-Core-Manifest',
+	#package : 'Moose-Core',
+	#tag : 'Manifest'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 ManifestMooseCore class >> initialize [
 	ShouldTuneGCParameters := true.
 	SessionManager default registerUserClassNamed: self name.
 	self startUp: true
 ]
 
-{ #category : #asserting }
+{ #category : 'asserting' }
 ManifestMooseCore class >> shouldBeIncludedByDefaultInMetamodelsWith: aCollectionOfPackages [
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ManifestMooseCore class >> shouldTuneGCParameters [
 	^ ShouldTuneGCParameters
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ManifestMooseCore class >> shouldTuneGCParameters: anObject [
 	ShouldTuneGCParameters := anObject
 ]
 
-{ #category : #'system startup' }
+{ #category : 'system startup' }
 ManifestMooseCore class >> startUp: isImageStarting [
 	(isImageStarting & self shouldTuneGCParameters)
 		ifTrue: [

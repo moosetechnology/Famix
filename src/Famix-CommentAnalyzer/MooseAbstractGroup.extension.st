@@ -1,6 +1,6 @@
-Extension { #name : #MooseAbstractGroup }
+Extension { #name : 'MooseAbstractGroup' }
 
-{ #category : #'*Famix-CommentAnalyzer' }
+{ #category : '*Famix-CommentAnalyzer' }
 MooseAbstractGroup >> detectCommentedCode [
 	FamixCAAnalyzer findCommentedCodeIn: self
 ]

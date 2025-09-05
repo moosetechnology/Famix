@@ -1,16 +1,17 @@
 Class {
-	#name : #SmalltalkMethodVisitor,
-	#superclass : #RBProgramNodeVisitor,
+	#name : 'SmalltalkMethodVisitor',
+	#superclass : 'OCProgramNodeVisitor',
 	#instVars : [
 		'theClass',
 		'importer',
 		'methodScope',
 		'famixMethod'
 	],
-	#category : #'Moose-SmalltalkImporter'
+	#category : 'Moose-SmalltalkImporter',
+	#package : 'Moose-SmalltalkImporter'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 SmalltalkMethodVisitor class >> on: importer [
 
 	^ self new
@@ -18,12 +19,12 @@ SmalltalkMethodVisitor class >> on: importer [
 		  yourself
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 SmalltalkMethodVisitor >> CIVString [
 	^ FamixStImporter CIVString
 ]
 
-{ #category : #'method-classifying' }
+{ #category : 'method-classifying' }
 SmalltalkMethodVisitor >> classifyMethodNode: aMethodNode [ 
 	 
 	self matchGetter: aMethodNode. 
@@ -32,7 +33,7 @@ SmalltalkMethodVisitor >> classifyMethodNode: aMethodNode [
 	self matchConstant: aMethodNode
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 SmalltalkMethodVisitor >> createAccessTo: aNamedEntity writing: isWriteAccess [
 
 	^ self factory access new
@@ -42,13 +43,13 @@ SmalltalkMethodVisitor >> createAccessTo: aNamedEntity writing: isWriteAccess [
 		  yourself
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 SmalltalkMethodVisitor >> createReferenceTo: aNamedEntity [
 
 	^ self factory reference source: self methodEntity target: (self resolveInstanceSide: aNamedEntity)
 ]
 
-{ #category : #'method-classifying' }
+{ #category : 'method-classifying' }
 SmalltalkMethodVisitor >> extractCommentsFromNode: aSequenceNode [
 
 	importer importingContext shouldImportComment ifTrue: [
@@ -64,25 +65,25 @@ SmalltalkMethodVisitor >> extractCommentsFromNode: aSequenceNode [
 			importer addEntity: comment ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SmalltalkMethodVisitor >> factory [
 
 	^ self importer factory
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SmalltalkMethodVisitor >> importer [ 
 	 
 	^importer
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SmalltalkMethodVisitor >> importer: anObject [ 
 	 
 	importer := anObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 SmalltalkMethodVisitor >> initializeForMethod: aMethod inClass: aClass [
 	theClass := aClass.
 	famixMethod := aMethod.
@@ -90,7 +91,7 @@ SmalltalkMethodVisitor >> initializeForMethod: aMethod inClass: aClass [
 
 ]
 
-{ #category : #'method-classifying' }
+{ #category : 'method-classifying' }
 SmalltalkMethodVisitor >> matchConstant: aMethodNode [
 
 	aMethodNode body isSequence ifTrue: [
@@ -98,7 +99,7 @@ SmalltalkMethodVisitor >> matchConstant: aMethodNode [
 			statements last isReturn ifTrue: [ statements last value isLiteralNode ifTrue: [ famixMethod beConstant ] ] ] ]
 ]
 
-{ #category : #'method-classifying' }
+{ #category : 'method-classifying' }
 SmalltalkMethodVisitor >> matchConstructor: aMethodNode [
 
 	famixMethod protocol ifNotNil: [ 
@@ -106,7 +107,7 @@ SmalltalkMethodVisitor >> matchConstructor: aMethodNode [
 			ifTrue: [ famixMethod beConstructor ] ]
 ]
 
-{ #category : #'method-classifying' }
+{ #category : 'method-classifying' }
 SmalltalkMethodVisitor >> matchGetter: aMethodNode [
 
 	aMethodNode arguments ifNotEmpty: [ ^ self ].
@@ -120,7 +121,7 @@ SmalltalkMethodVisitor >> matchGetter: aMethodNode [
 						attribute class = self importer factory attribute ifTrue: [ famixMethod beGetter ] ] ] ] ] ]
 ]
 
-{ #category : #'method-classifying' }
+{ #category : 'method-classifying' }
 SmalltalkMethodVisitor >> matchSetter: aMethodNode [
 
 	| assignment |
@@ -135,19 +136,19 @@ SmalltalkMethodVisitor >> matchSetter: aMethodNode [
 							assignment value isVariable ifTrue: [ assignment value name = aMethodNode arguments first name ifTrue: [ famixMethod beSetter ] ] ] ] ] ] ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SmalltalkMethodVisitor >> methodEntity [ 
 	 
 	^famixMethod
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 SmalltalkMethodVisitor >> parseTreeForSource: methodSourceString [
 
 	^ RBParser parseMethod: methodSourceString onError: [ :aString :pos | ^ nil ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 SmalltalkMethodVisitor >> resolve: name [
 	"Return a famix entity that correspond to the reference 'name' contained in a source code. It does the lookup according to the Smalltalk semantics"
 
@@ -169,7 +170,7 @@ SmalltalkMethodVisitor >> resolve: name [
 	^ importer ensureGlobalVariable: name asSymbol value: object
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 SmalltalkMethodVisitor >> resolveInstanceSide: aNamedEntity [
 	"We ensure that a reference to a metaclass is considered as a reference to the class itself"
 
@@ -182,7 +183,7 @@ SmalltalkMethodVisitor >> resolveInstanceSide: aNamedEntity [
 		  ifFalse: [ aNamedEntity ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SmalltalkMethodVisitor >> runWith: aCompiledMethod and: anEntity [
 
 	| parseTree |
@@ -195,7 +196,7 @@ SmalltalkMethodVisitor >> runWith: aCompiledMethod and: anEntity [
 		self visitMethodNode: parseTree "sourceCodeAt:" ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SmalltalkMethodVisitor >> runWithSource: sourceAsString and: aFamixMethod [
 	| parseTree |
 	self initializeForMethod: aFamixMethod inClass: aFamixMethod parentType.
@@ -204,7 +205,7 @@ SmalltalkMethodVisitor >> runWithSource: sourceAsString and: aFamixMethod [
 	parseTree ifNotNil: [self visitMethodNode: parseTree]	"sourceCodeAt:"
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 SmalltalkMethodVisitor >> visitAssignmentNode: anAssignmentNode [
 
 	| access |
@@ -218,7 +219,7 @@ SmalltalkMethodVisitor >> visitAssignmentNode: anAssignmentNode [
 	self visitNode: anAssignmentNode value
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 SmalltalkMethodVisitor >> visitBlockNode: aBlockNode [
 
 	| local |
@@ -233,13 +234,13 @@ SmalltalkMethodVisitor >> visitBlockNode: aBlockNode [
 	self visitNode: aBlockNode body
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 SmalltalkMethodVisitor >> visitCascadeNode: aCascadeNode [
 	aCascadeNode messages ifNotEmpty: [ :messages | messages do: [ :each | self visitNode: each ] ].
 	self extractCommentsFromNode: aCascadeNode
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 SmalltalkMethodVisitor >> visitMessageNode: aMessageNode [
 
 	| invocation |
@@ -263,7 +264,7 @@ SmalltalkMethodVisitor >> visitMessageNode: aMessageNode [
 	self extractCommentsFromNode: aMessageNode
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 SmalltalkMethodVisitor >> visitMethodNode: aMethodNode [
 
 	importer importingContext shouldImportArgument ifTrue: [
@@ -282,7 +283,7 @@ SmalltalkMethodVisitor >> visitMethodNode: aMethodNode [
 	self classifyMethodNode: aMethodNode
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 SmalltalkMethodVisitor >> visitPragmaNode: aPragmaNode [
 
 	| annotationInstance annotationType |
@@ -300,14 +301,14 @@ SmalltalkMethodVisitor >> visitPragmaNode: aPragmaNode [
 		self importer addEntity: attribute ]
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 SmalltalkMethodVisitor >> visitReturnNode: aReturnNode [ 
 	 
 	self visitNode: aReturnNode value. 
 	self extractCommentsFromNode: aReturnNode
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 SmalltalkMethodVisitor >> visitSequenceNode: aSequenceNode [
 	"self visitArguments: aSequenceNode temporaries."
 
@@ -323,7 +324,7 @@ SmalltalkMethodVisitor >> visitSequenceNode: aSequenceNode [
 	aSequenceNode statements do: [ :each | self visitNode: each ]
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 SmalltalkMethodVisitor >> visitVariableNode: aVariableNode [
 
 	importer importingContext shouldImportAccess ifTrue: [

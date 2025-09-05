@@ -1,62 +1,64 @@
 Class {
-	#name : #FmxMBRingEnvironment,
-	#superclass : #FmxMBEnvironment,
+	#name : 'FmxMBRingEnvironment',
+	#superclass : 'FmxMBEnvironment',
 	#instVars : [
 		'ringEnvironment'
 	],
-	#category : #'Famix-MetamodelBuilder-Core-Implementation'
+	#category : 'Famix-MetamodelBuilder-Core-Implementation',
+	#package : 'Famix-MetamodelBuilder-Core',
+	#tag : 'Implementation'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBRingEnvironment >> apply [
 
 	"do nothing"
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBRingEnvironment >> basicGroupSuperclass [
 
 	^ self ringEnvironment ensureClassNamed: self builder configuration basicGroupSuperclassName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBRingEnvironment >> basicImportingContextSuperclass [
 
 	^ self ringEnvironment ensureClassNamed:
 		  self builder configuration basicImportingContextSuperclassName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBRingEnvironment >> basicModelSuperclass [
 
 	^ self ringEnvironment ensureClassNamed: self builder configuration basicModelSuperclassName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBRingEnvironment >> basicSuperclass [
 
 	^ self ringEnvironment ensureClassNamed: self builder configuration basicSuperclassName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBRingEnvironment >> basicTrait [
 
 	^ self ringEnvironment ensureClassNamed: self builder configuration basicTraitName
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FmxMBRingEnvironment >> classNamed: aClassName [
 
 	^ self ringEnvironment ask behaviorNamed: aClassName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBRingEnvironment >> compile: aSource in: aClass classified: aProtocol [
 
 	aClass compile: aSource classified: aProtocol.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBRingEnvironment >> compile: aSource in: aClass classified: aProtocol package: aPackageName [
 
 	| selector |
@@ -65,7 +67,7 @@ FmxMBRingEnvironment >> compile: aSource in: aClass classified: aProtocol packag
 	(aClass methodNamed: selector) package: (aClass environment ensurePackageNamed: aPackageName).
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FmxMBRingEnvironment >> createClassNamed: aClassName superclass: aSuperclass traitNames: traitNames slots: slots in: packageName overwrite: shouldOverwrite [
 
 	| aClass existingClass composition |
@@ -110,7 +112,7 @@ FmxMBRingEnvironment >> createClassNamed: aClassName superclass: aSuperclass tra
 	^ aClass
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FmxMBRingEnvironment >> createTraitNamed: traitName uses: traitNames slots: slots in: packageName overwrite: shouldOverwrite [
 
 	| aPackage aTrait existingClass composition |
@@ -153,13 +155,13 @@ FmxMBRingEnvironment >> createTraitNamed: traitName uses: traitNames slots: slot
 	^ aTrait
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FmxMBRingEnvironment >> hasBehaviorNamed: aClassName [
 
 	^ self ringEnvironment ask includesClassNamed: aClassName
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FmxMBRingEnvironment >> initialize [
 
 	super initialize.
@@ -173,30 +175,30 @@ FmxMBRingEnvironment >> initialize [
 	ringEnvironment ensureClassNamed: #MooseSpecializedGroup.
 ]
 
-{ #category : #'public registration' }
+{ #category : 'public registration' }
 FmxMBRingEnvironment >> registerPackage: aPackageName [
 
 	^ self ringEnvironment ensurePackageNamed: aPackageName.
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBRingEnvironment >> ringEnvironment [
 	^ ringEnvironment
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FmxMBRingEnvironment >> setComment: aString for: aClass [
 
 	aClass comment content: aString
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FmxMBRingEnvironment >> slotNamed: slotName [
 	^ (RGUnknownSlot named: slotName asSymbol) expression: #FMProperty
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FmxMBRingEnvironment >> slotNamed: slotName cardinality: cardinality type: type opposite: oppositeName [
 
 	| cardinalityClassName |
@@ -210,7 +212,7 @@ FmxMBRingEnvironment >> slotNamed: slotName cardinality: cardinality type: type 
 			format: { cardinalityClassName. type. oppositeName}) 
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FmxMBRingEnvironment >> slotNamed: slotName defaultValue: aValue [
 
 	aValue ifNil: [ ^ self slotNamed: slotName ].

@@ -1,1 +1,1 @@
-Package { #name : #'Moose-TestResources-LAN' }
+Package { #name : 'Moose-TestResources-LAN' }

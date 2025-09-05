@@ -5,15 +5,16 @@ Description
 Baseline for the Famix project
 "
 Class {
-	#name : #BaselineOfFamix,
-	#superclass : #BaselineOf,
+	#name : 'BaselineOfFamix',
+	#superclass : 'BaselineOf',
 	#instVars : [
 		'repository'
 	],
-	#category : #BaselineOfFamix
+	#category : 'BaselineOfFamix',
+	#package : 'BaselineOfFamix'
 }
 
-{ #category : #baselines }
+{ #category : 'baselines' }
 BaselineOfFamix >> baseline: spec [
 	"In P12 the need of this hack got removed and now Metacello is able to give us the URL itself. Once P11 will not be maintained for Moose we can remove this check and the method #packageRepositoryURL we are overriding."
 
@@ -29,7 +30,7 @@ BaselineOfFamix >> baseline: spec [
 		self groups: spec ]
 ]
 
-{ #category : #dependencies }
+{ #category : 'dependencies' }
 BaselineOfFamix >> collectionExtensions: spec [
 	spec
 		baseline: 'CollectionExtensions'
@@ -38,7 +39,7 @@ BaselineOfFamix >> collectionExtensions: spec [
 				repository: 'github://pharo-contributions/CollectionExtensions:v1.x.x/src' ]
 ]
 
-{ #category : #dependencies }
+{ #category : 'dependencies' }
 BaselineOfFamix >> deepTraverser: spec [
 	spec
 		baseline: 'DeepTraverser'
@@ -47,7 +48,7 @@ BaselineOfFamix >> deepTraverser: spec [
 				repository: 'github://pharo-contributions/DeepTraverser:v1.x.x/src' ]
 ]
 
-{ #category : #baselines }
+{ #category : 'baselines' }
 BaselineOfFamix >> dependencies: spec [
 
 	self
@@ -62,22 +63,22 @@ BaselineOfFamix >> dependencies: spec [
 	self fame: spec
 ]
 
-{ #category : #dependencies }
+{ #category : 'dependencies' }
 BaselineOfFamix >> fame: spec [
-
 	"We load Fame development version for new Moose images."
+
 	"For retrocompatibility with Pharo 9 and older, the latest version is v1.1.6"
 
 	| version |
 	version := 'development'.
 	spec for: #( #'pharo8.x' #'pharo9.x' ) do: [ version := 'v1.1.6' ].
 
-	spec baseline: 'Fame' with: [ 
+	spec baseline: 'Fame' with: [
 		spec repository:
 			('github://moosetechnology/Fame:{1}/src' format: { version }) ]
 ]
 
-{ #category : #baselines }
+{ #category : 'baselines' }
 BaselineOfFamix >> groups: spec [
 
 	^ spec
@@ -89,10 +90,8 @@ BaselineOfFamix >> groups: spec [
 		  with: #( 'ReferenceTestResources' 'Moose-TestResources-LAN'
 			     'Moose-TestResources-LCOM' 'KGBTestResources'
 			     'PackageBlueprintTestResources' );
-		  group: 'BasicTraits' with: #( 'Famix-Traits' 'Famix-Visitor' );
+		  group: 'BasicTraits' with: #( 'Famix-Traits' );
 		  group: 'EntitiesJava' with: #( 'Famix-Java-Entities' );
-		  group: 'EntitiesJavaWithVisitor'
-		  with: #( 'EntitiesJava' 'Famix-Java-Visitor' );
 		  group: 'EntitiesJavaWithFusionner'
 		  with: #( 'Famix-Java-Fusionner' );
 		  group: 'ModelJava'
@@ -125,17 +124,17 @@ BaselineOfFamix >> groups: spec [
 			     'Moose-Importers-Tests' )
 ]
 
-{ #category : #dependencies }
+{ #category : 'dependencies' }
 BaselineOfFamix >> kgbTestResources: spec [
 	spec baseline: 'KGBTestResources' with: [ spec repository: 'github://moosetechnology/KGBTestResources:v1.x.x/src' ]
 ]
 
-{ #category : #dependencies }
+{ #category : 'dependencies' }
 BaselineOfFamix >> packageBlueprintTestResources: spec [
 	spec baseline: 'PackageBlueprintTestResources' with: [ spec repository: 'github://moosetechnology/PackageBlueprintTestResources:v1.x.x/src' ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BaselineOfFamix >> packageRepositoryURL [
 
 	^ super packageRepositoryURL ifEmpty: [ 
@@ -149,7 +148,7 @@ BaselineOfFamix >> packageRepositoryURL [
 			   ifNone: [ '' ]) ]
 ]
 
-{ #category : #baselines }
+{ #category : 'baselines' }
 BaselineOfFamix >> packages: spec [
 
 	spec
@@ -158,7 +157,6 @@ BaselineOfFamix >> packages: spec [
 		package: 'Moose-Core-Generator' with: [ spec requires: #( 'Famix-MetamodelBuilder-Core' ) ];
 		package: 'Moose-Query-Extensions' with: [ spec requires: #( 'Moose-Query' 'BasicTraits' ) ];
 		package: 'Famix-Traits' with: [ spec requires: #( 'Moose-Core' ) ];
-		package: 'Famix-Visitor' with: [ spec requires: #( 'Famix-Traits' ) ];
 		package: 'Famix-Visitor-Generation' with: [ spec requires: #( 'Famix-MetamodelBuilder-Core' ) ];
 		package: 'Famix-MetamodelBuilder-Core' with: [ spec requires: #( 'Moose-Core' 'SingularizePluralize' ) ];
 		package: 'Famix-MetamodelGeneration' with: [ spec requires: #( 'Famix-MetamodelBuilder-Core' 'Famix-Visitor-Generation' ) ];
@@ -176,13 +174,11 @@ BaselineOfFamix >> packages: spec [
 					   'KGBTestResources' ) ];
 		package: 'Famix-Java-Generator' with: [ spec requires: #( 'Basic' 'Famix-Visitor-Generation' ) ];
 		package: 'Famix-Java-Entities' with: [ spec requires: #( 'BasicTraits' ) ];
-		package: 'Famix-Java-Visitor' with: [ spec requires: #( 'Famix-Java-Entities' ) ];
-		package: 'Famix-Java-Fusionner' with: [ spec requires: #( 'Famix-Java-Visitor' ) ];
+		package: 'Famix-Java-Fusionner' with: [ spec requires: #( 'Famix-Java-Entities' ) ];
 		package: 'Famix-Java-Tests' with: [ spec requires: #( 'Famix-Java-Entities' 'Famix-Java-Generator' ) ];
 		package: 'Moose-TestResources-LAN';
 		package: 'Moose-TestResources-LCOM';
 		package: 'Moose-Query-Test' with: [ spec requires: #( 'Moose-Query' 'Famix-Java-Entities' ) ];
-		package: 'FamixTestGenerator' with: [ spec requires: #( 'Famix-Tests' 'Fame' ) ];
 		package: 'Famix-Tests' with: [ spec requires: #( 'BasicTraits' 'Talents' ) ];
 		package: 'Moose-Core-Tests' with: [ spec requires: #( 'TestModels' 'Moose-Core-Tests-Entities' ) ];
 		package: 'Moose-Core-Tests-Entities' with: [ spec requires: #( 'Moose-Core' 'BasicTraits' ) ];
@@ -213,6 +209,8 @@ BaselineOfFamix >> packages: spec [
 		package: 'Famix-Test7-Tests' with: [ spec requires: #( 'Famix-Test7-Entities' ) ];
 		package: 'Famix-Test8-Entities' with: [ spec requires: #( 'BasicTraits' ) ];
 		package: 'Famix-Test8-Tests' with: [ spec requires: #( 'Famix-Test8-Entities' ) ];
+		package: 'Famix-Test9-Tests';
+		package: 'Famix-Test10-Tests';
 		package: 'Famix-TestComposedSubmetamodel1-Entities' with: [ spec requires: #( 'BasicTraits' ) ];
 		package: 'Famix-TestComposedSubmetamodel2-Entities' with: [ spec requires: #( 'BasicTraits' ) ];
 		package: 'Famix-TestComposedMetamodel-Entities'
@@ -226,22 +224,22 @@ BaselineOfFamix >> packages: spec [
 		package: 'FamixDocumentor-TestMetaModel'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BaselineOfFamix >> projectClass [
 	^ MetacelloCypressBaselineProject
 ]
 
-{ #category : #dependencies }
+{ #category : 'dependencies' }
 BaselineOfFamix >> referenceTestResources: spec [
 	spec baseline: 'ReferenceTestResources' with: [ spec repository: 'github://moosetechnology/ReferenceTestResources:v3.x.x/src' ]
 ]
 
-{ #category : #dependencies }
+{ #category : 'dependencies' }
 BaselineOfFamix >> roelTyper: spec [
 	spec baseline: 'RoelTyper' with: [ spec repository: 'github://RMODINRIA/RoelTyper:v1.x.x/src' ]
 ]
 
-{ #category : #dependencies }
+{ #category : 'dependencies' }
 BaselineOfFamix >> singularizePluralize: spec [
 
 	spec baseline: 'SingularizePluralize' with: [ 
@@ -249,7 +247,7 @@ BaselineOfFamix >> singularizePluralize: spec [
 			'github://pharo-contributions/SingularizePluralize:v1.1/src' ]
 ]
 
-{ #category : #dependencies }
+{ #category : 'dependencies' }
 BaselineOfFamix >> talents: spec [
 
 	spec baseline: 'Talents' with: [

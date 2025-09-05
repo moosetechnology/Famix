@@ -5,30 +5,32 @@ It has a list of classeNames to output with their relationships.
 Other classes/relationships will be ignored, including relationships between ""wanted"" and ""unwanted"" classes
 "
 Class {
-	#name : #FmxMBPlantTextVisitorPartial,
-	#superclass : #FmxMBPlantTextVisitor,
+	#name : 'FmxMBPlantTextVisitorPartial',
+	#superclass : 'FmxMBPlantTextVisitor',
 	#instVars : [
 		'classeNames'
 	],
-	#category : #'Famix-MetamodelBuilder-Core-Visitors'
+	#category : 'Famix-MetamodelBuilder-Core-Visitors',
+	#package : 'Famix-MetamodelBuilder-Core',
+	#tag : 'Visitors'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBPlantTextVisitorPartial >> classeNames [
 	^classeNames
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBPlantTextVisitorPartial >> classeNames: aCollection [
 	classeNames := aCollection 
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FmxMBPlantTextVisitorPartial >> isWantedClass: aClass [
 	^self classeNames anySatisfy: [ :c | c asSymbol = aClass name ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FmxMBPlantTextVisitorPartial >> isWantedRelation: aRelationSide [
 	^aRelationSide relation sides allSatisfy: [ :side |
 		side relatedClass notNil and: 
@@ -37,13 +39,13 @@ FmxMBPlantTextVisitorPartial >> isWantedRelation: aRelationSide [
 
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FmxMBPlantTextVisitorPartial >> visitClass: aClass [
 	(self isWantedClass: aClass) ifFalse: [ ^ self ].
 	super visitClass: aClass
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FmxMBPlantTextVisitorPartial >> visitRelationSide: aRelationSide [
 	(self isWantedRelation: aRelationSide)
 	ifFalse: [ ^ self ].
@@ -51,7 +53,7 @@ FmxMBPlantTextVisitorPartial >> visitRelationSide: aRelationSide [
 
 ]
 
-{ #category : #relations }
+{ #category : 'relations' }
 FmxMBPlantTextVisitorPartial >> writeGeneralizations [
 	generalizationDefinitions :=
 		generalizationDefinitions select: [ :gen |

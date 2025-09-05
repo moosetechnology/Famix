@@ -11,12 +11,12 @@
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `incomingReferences` | `FamixTReferenceable` | `referredEntity` | `FamixTReference` | References to this entity by other entities.|
+| `incomingTypings` | `FamixTType` | `declaredType` | `FamixTEntityTyping` | Relations to the entities that have this as type.|
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
-| `typedEntities` | `FamixTType` | `declaredType` | `FamixTTypedEntity` | Entities that have this type as declaredType|
 
 
 ## Properties
@@ -29,14 +29,16 @@
 
 "
 Class {
-	#name : #MooseMSEImporterTestPrimitiveType,
-	#superclass : #MooseMSEImporterTestEntity,
+	#name : 'MooseMSEImporterTestPrimitiveType',
+	#superclass : 'MooseMSEImporterTestEntity',
 	#traits : 'FamixTPrimitiveType',
 	#classTraits : 'FamixTPrimitiveType classTrait',
-	#category : #'Moose-Core-Tests-Entities-Entities'
+	#category : 'Moose-Core-Tests-Entities-Entities',
+	#package : 'Moose-Core-Tests-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 MooseMSEImporterTestPrimitiveType class >> annotation [
 
 	<FMClass: #PrimitiveType super: #MooseMSEImporterTestEntity>

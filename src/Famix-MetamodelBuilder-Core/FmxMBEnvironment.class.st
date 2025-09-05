@@ -2,15 +2,17 @@
 FamixMetamodelBuilderEnvironment
 "
 Class {
-	#name : #FmxMBEnvironment,
-	#superclass : #Object,
+	#name : 'FmxMBEnvironment',
+	#superclass : 'Object',
 	#instVars : [
 		'builder'
 	],
-	#category : #'Famix-MetamodelBuilder-Core-Implementation'
+	#category : 'Famix-MetamodelBuilder-Core-Implementation',
+	#package : 'Famix-MetamodelBuilder-Core',
+	#tag : 'Implementation'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 FmxMBEnvironment class >> for: aBuilder [
 
 	^ self new 
@@ -18,19 +20,19 @@ FmxMBEnvironment class >> for: aBuilder [
 		yourself.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBEnvironment >> apply [
 
 	<ignoreForCoverage>
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBEnvironment >> builder [
 	^ builder
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBEnvironment >> builder: anObject [
 	builder := anObject
 ]

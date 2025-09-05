@@ -27,15 +27,17 @@ Internal Representation and Key Implementation Points.
 
 "
 Class {
-	#name : #FmxMethodAdditions,
-	#superclass : #FmxLazyClassChange,
+	#name : 'FmxMethodAdditions',
+	#superclass : 'FmxLazyClassChange',
 	#instVars : [
 		'rgMethods'
 	],
-	#category : #'Famix-MetamodelBuilder-Core-Changes'
+	#category : 'Famix-MetamodelBuilder-Core-Changes',
+	#package : 'Famix-MetamodelBuilder-Core',
+	#tag : 'Changes'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 FmxMethodAdditions class >> className: aSymbol isClassSide: aBoolean rgMethods: aCollection [
 	^ self new
 		className: aSymbol;
@@ -44,14 +46,14 @@ FmxMethodAdditions class >> className: aSymbol isClassSide: aBoolean rgMethods: 
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMethodAdditions >> apply [
 	| class |
 	class := self realClass.
 	self rgMethods do: [ :method | self compile: method into: class ]
 ]
 
-{ #category : #compiling }
+{ #category : 'compiling' }
 FmxMethodAdditions >> compile: aRGMethod into: realClass [
 
 	^ realClass
@@ -59,12 +61,12 @@ FmxMethodAdditions >> compile: aRGMethod into: realClass [
 		  classified: aRGMethod protocol
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMethodAdditions >> rgMethods [
 	^ rgMethods
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMethodAdditions >> rgMethods: anObject [
 	rgMethods := anObject
 ]

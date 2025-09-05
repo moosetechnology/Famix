@@ -7,6 +7,11 @@
 |---|
 | `parentType` | `FamixTAttribute` | `attributes` | `FamixTWithAttributes` | Type declaring the attribute. belongsTo implementation|
 
+### Outgoing dependencies
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `typing` | `FamixTTypedEntity` | `typedEntity` | `FamixTEntityTyping` | Association linking this entity to its declared type.|
+
 ### Incoming dependencies
 | Relation | Origin | Opposite | Type | Comment |
 |---|
@@ -15,7 +20,6 @@
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `declaredType` | `FamixTTypedEntity` | `typedEntities` | `FamixTType` | Type of the entity, if any|
 | `receivingInvocations` | `FamixTInvocationsReceiver` | `receiver` | `FamixTInvocation` | List of invocations performed on this entity (considered as the receiver)|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
 
@@ -31,14 +35,16 @@
 
 "
 Class {
-	#name : #FamixStAttribute,
-	#superclass : #FamixStNamedEntity,
+	#name : 'FamixStAttribute',
+	#superclass : 'FamixStNamedEntity',
 	#traits : 'FamixTAttribute + FamixTCanBeClassSide + FamixTInvocationsReceiver',
 	#classTraits : 'FamixTAttribute classTrait + FamixTCanBeClassSide classTrait + FamixTInvocationsReceiver classTrait',
-	#category : #'Famix-PharoSmalltalk-Entities-Entities'
+	#category : 'Famix-PharoSmalltalk-Entities-Entities',
+	#package : 'Famix-PharoSmalltalk-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixStAttribute class >> annotation [
 
 	<FMClass: #Attribute super: #FamixStNamedEntity>
@@ -47,16 +53,22 @@ FamixStAttribute class >> annotation [
 	^ self
 ]
 
-{ #category : #properties }
+{ #category : 'properties' }
 FamixStAttribute >> beSharedVariable [
 
 	^ self attributeAt: #isSharedVariable put: true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixStAttribute >> isSharedVariable [
 
 	<FMProperty: #isSharedVariable type: #Boolean>
 	<FMComment: 'True if the attribute is a shared variable'>
 	^ self attributeAt: #isSharedVariable ifAbsent: [ false ]
+]
+
+{ #category : 'testing' }
+FamixStAttribute >> isSharedVariable: aBoolean [
+
+	^ self attributeAt: #isSharedVariable put: aBoolean
 ]

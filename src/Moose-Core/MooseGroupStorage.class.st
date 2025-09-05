@@ -25,36 +25,36 @@ I am using an identity hash table to save the names because it is optimized for 
 
 "
 Class {
-	#name : #MooseGroupStorage,
-	#superclass : #Collection,
-	#type : #variable,
+	#name : 'MooseGroupStorage',
+	#superclass : 'Collection',
+	#type : 'variable',
 	#instVars : [
-		'byName',
 		'elements',
 		'byType',
 		'species'
 	],
-	#category : #'Moose-Core'
+	#category : 'Moose-Core',
+	#package : 'Moose-Core'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MooseGroupStorage class >> empty [
 	^ MooseGroupStorage new
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MooseGroupStorage class >> new [ 
 	 
 	^self basicNew initialize: 1000
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MooseGroupStorage class >> new: capacity [ 
 	 
 	^self basicNew initialize: capacity
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MooseGroupStorage class >> withAll: aCollection [ 
 	" Answer a new instance of this class, 
 	whose elements are the elements of aCollection. " 
@@ -65,37 +65,24 @@ MooseGroupStorage class >> withAll: aCollection [
 	^newCollection
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 MooseGroupStorage >> add: anElement [ 
 	self privateAdd: anElement.
 	self updateCacheOnAddingOf: anElement.
 	^anElement
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 MooseGroupStorage >> allEntityTypes [
 	^ byType keys
 ]
 
-{ #category : #accessing }
-MooseGroupStorage >> at: uniqueName [ 
-	 
-	^self 
-		at: uniqueName asSymbol
-		ifAbsent: [nil]
-]
-
-{ #category : #accessing }
-MooseGroupStorage >> at: uniqueName ifAbsent: exceptionBlock [ 
-	^byName at: uniqueName asSymbol ifAbsent: exceptionBlock
-]
-
-{ #category : #iterators }
+{ #category : 'iterators' }
 MooseGroupStorage >> basicIterator [
 	^ self elements basicIterator
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 MooseGroupStorage >> collect: aBlock [ 
 	 
 	| newCollection | 
@@ -104,51 +91,49 @@ MooseGroupStorage >> collect: aBlock [
 	^newCollection
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 MooseGroupStorage >> do: aBlock [ 
 	 
 	elements do: aBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseGroupStorage >> elements [ 
 	^ elements
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MooseGroupStorage >> includesID: mooseID [ 
 	 
 	^self anySatisfy: [:each | mooseID == each mooseID]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MooseGroupStorage >> initialize: capacity [
 
 	byType := IdentityDictionary new: 24.
-	byName := IdentityHashTable new: capacity.
 	species := OrderedCollection.
 	elements := self species new: capacity
 ]
 
-{ #category : #iterators }
+{ #category : 'iterators' }
 MooseGroupStorage >> iterator [
 	^ self elements iterator
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 MooseGroupStorage >> postCopy [  
 	super postCopy.
 	elements := elements copy.
-	byName := byName copy.
 	byType := byType copy
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 MooseGroupStorage >> privateAdd: anElement [
 	^elements add: anElement
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 MooseGroupStorage >> remove: anElement [ 
 	 
 	^self 
@@ -156,31 +141,20 @@ MooseGroupStorage >> remove: anElement [
 		ifAbsent: [anElement]
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 MooseGroupStorage >> remove: anElement ifAbsent: exceptionBlock [
 	self updateCacheOnRemovalOf: anElement.
 	elements remove: anElement.
 	^ anElement
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 MooseGroupStorage >> removeAll [ 
 	 
 	self initialize: 10000
 ]
 
-{ #category : #private }
-MooseGroupStorage >> resetMooseNameFor: anEntity [
-
-	anEntity hasUniqueMooseNameInModel
-		ifTrue: [
-			byName removeKey: anEntity mooseName asSymbol ifAbsent: [  ].
-			anEntity privateClearMooseName.
-			byName at: anEntity mooseName asSymbol put: anEntity ]
-		ifFalse: [ anEntity privateClearMooseName ]
-]
-
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 MooseGroupStorage >> selectAllWithType: aSmalltalkType [
 	^ byType
 		at: aSmalltalkType
@@ -192,48 +166,39 @@ MooseGroupStorage >> selectAllWithType: aSmalltalkType [
 			OrderedCollection withAll: result ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseGroupStorage >> size [ 
 	^ elements size
 ]
 
-{ #category : #sorting }
+{ #category : 'sorting' }
 MooseGroupStorage >> sort: aBlock [
 
 	self elements sort: aBlock
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MooseGroupStorage >> species [
 
 	^ species
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MooseGroupStorage >> species: aCollectionClass [
 	species := aCollectionClass.
 	^ elements := self species withAll: elements
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MooseGroupStorage >> updateCacheOnAddingOf: anElement [
-	(byType atOrOrederedCollection: anElement class) add: anElement.
-	anElement hasUniqueMooseNameInModel ifTrue: [ byName at: anElement mooseName put: anElement ].
+
+	(byType privateMooseStorageAt: anElement class) add: anElement.
 	^ anElement
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MooseGroupStorage >> updateCacheOnRemovalOf: anElement [
-	byType at: anElement class ifPresent: [ :group |
-		group remove: anElement ifAbsent: [ self error: 'Internal storage inconsistency' ] ].
 
-	anElement hasUniqueMooseNameInModel ifFalse: [ ^ anElement ].
-
-	byName
-		at: anElement mooseName
-		ifAbsent: [ "In theory, objects are registered under their mooseName,
-            however some objects are still registered by their name
-            if #resetMooseName was not used when needed" self resetMooseNameFor: anElement ].
-	byName removeKey: anElement mooseName ifAbsent: [ self error: 'Internal storage inconsistency' ].
+	byType at: anElement class ifPresent: [ :group | group remove: anElement ifAbsent: [ self error: 'Internal storage inconsistency' ] ].
 	^ anElement
 ]

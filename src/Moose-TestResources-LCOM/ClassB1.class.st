@@ -1,26 +1,27 @@
 Class {
-	#name : #ClassB1,
-	#superclass : #Object,
+	#name : 'ClassB1',
+	#superclass : 'Object',
 	#instVars : [
 		'a1',
 		'a2'
 	],
-	#category : #'Moose-TestResources-LCOM'
+	#category : 'Moose-TestResources-LCOM',
+	#package : 'Moose-TestResources-LCOM'
 }
 
-{ #category : #stub }
+{ #category : 'stub' }
 ClassB1 >> m1 [
 	a1.
 	a2
 ]
 
-{ #category : #stub }
+{ #category : 'stub' }
 ClassB1 >> m2 [
 	a1.
 	a2
 ]
 
-{ #category : #stub }
+{ #category : 'stub' }
 ClassB1 >> m3 [
 	a1
 ]

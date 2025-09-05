@@ -1,11 +1,11 @@
-Extension { #name : #MooseModel }
+Extension { #name : 'MooseModel' }
 
-{ #category : #'*Famix-CommentAnalyzer' }
+{ #category : '*Famix-CommentAnalyzer' }
 MooseModel >> commentedCodeRate [
 	^ self allModelBehaviourals average: #commentedCodeCommentsPercentage
 ]
 
-{ #category : #'*Famix-CommentAnalyzer' }
+{ #category : '*Famix-CommentAnalyzer' }
 MooseModel >> documentationRate [
 	^ self
 		lookUpPropertyNamed: #documentationRate

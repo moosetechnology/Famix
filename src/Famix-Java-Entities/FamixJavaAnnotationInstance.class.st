@@ -17,14 +17,16 @@
 
 "
 Class {
-	#name : #FamixJavaAnnotationInstance,
-	#superclass : #FamixJavaSourcedEntity,
+	#name : 'FamixJavaAnnotationInstance',
+	#superclass : 'FamixJavaSourcedEntity',
 	#traits : 'FamixTAnnotationInstance',
 	#classTraits : 'FamixTAnnotationInstance classTrait',
-	#category : #'Famix-Java-Entities-Entities'
+	#category : 'Famix-Java-Entities-Entities',
+	#package : 'Famix-Java-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixJavaAnnotationInstance class >> annotation [
 
 	<FMClass: #AnnotationInstance super: #FamixJavaSourcedEntity>
@@ -33,7 +35,14 @@ FamixJavaAnnotationInstance class >> annotation [
 	^ self
 ]
 
-{ #category : #printing }
+{ #category : 'visitor' }
+FamixJavaAnnotationInstance >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaAnnotationInstance: self
+]
+
+{ #category : 'printing' }
 FamixJavaAnnotationInstance >> mooseNameOn: aStream [
 	self annotationType ifNotNil: [ :at | at mooseNameOn: aStream ].
 	aStream nextPut: $(.
@@ -43,7 +52,7 @@ FamixJavaAnnotationInstance >> mooseNameOn: aStream [
 	self annotatedEntity ifNotNil: [ :ae | ae mooseNameOn: aStream ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixJavaAnnotationInstance >> name [
 	^ String
 		streamContents: [ :stream | 

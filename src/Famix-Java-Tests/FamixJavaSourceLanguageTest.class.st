@@ -1,10 +1,11 @@
 Class {
-	#name : #FamixJavaSourceLanguageTest,
-	#superclass : #TestCase,
-	#category : #'Famix-Java-Tests'
+	#name : 'FamixJavaSourceLanguageTest',
+	#superclass : 'TestCase',
+	#category : 'Famix-Java-Tests',
+	#package : 'Famix-Java-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaSourceLanguageTest >> testIsJava [
 	| model |
 	model := FamixJavaModel new.
@@ -19,12 +20,12 @@ FamixJavaSourceLanguageTest >> testIsJava [
 	self assert: model sourceLanguage isJava
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaSourceLanguageTest >> testIsUnknown [
 	self deny: FamixJavaSourceLanguage new isUnknown
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaSourceLanguageTest >> testName [
 	self assert: FamixJavaSourceLanguage new name equals: 'Java'
 ]

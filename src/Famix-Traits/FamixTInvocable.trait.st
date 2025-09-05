@@ -11,14 +11,16 @@
 
 "
 Trait {
-	#name : #FamixTInvocable,
+	#name : 'FamixTInvocable',
 	#instVars : [
 		'#incomingInvocations => FMMany type: #FamixTInvocation opposite: #candidates'
 	],
-	#category : #'Famix-Traits-Invocation'
+	#category : 'Famix-Traits-Invocation',
+	#package : 'Famix-Traits',
+	#tag : 'Invocation'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTInvocable classSide >> annotation [
 
 	<FMClass: #TInvocable super: #Object>
@@ -27,12 +29,19 @@ FamixTInvocable classSide >> annotation [
 	^ self
 ]
 
-{ #category : #adding }
+{ #category : 'visitor' }
+FamixTInvocable >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTInvocable: self
+]
+
+{ #category : 'adding' }
 FamixTInvocable >> addIncomingInvocation: anInvocation [
 	incomingInvocations add: anInvocation
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTInvocable >> incomingInvocations [
 	"Relation named: #incomingInvocations type: #FamixTInvocation opposite: #candidates"
 
@@ -42,7 +51,7 @@ FamixTInvocable >> incomingInvocations [
 	^ incomingInvocations
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTInvocable >> incomingInvocations: anObject [
 
 	<generated>

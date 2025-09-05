@@ -14,22 +14,24 @@ Public API and Key Messages
 - #apply 		Will apply the change to the current system
 "
 Class {
-	#name : #FmxCodeChange,
-	#superclass : #Object,
-	#category : #'Famix-MetamodelBuilder-Core-Changes'
+	#name : 'FmxCodeChange',
+	#superclass : 'Object',
+	#category : 'Famix-MetamodelBuilder-Core-Changes',
+	#package : 'Famix-MetamodelBuilder-Core',
+	#tag : 'Changes'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 FmxCodeChange class >> isAbstract [
 	^ self = FmxCodeChange
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxCodeChange >> apply [
 	self subclassResponsibility
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FmxCodeChange >> isRemoval [
 
 	^ false

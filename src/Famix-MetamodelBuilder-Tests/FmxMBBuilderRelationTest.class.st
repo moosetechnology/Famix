@@ -1,10 +1,12 @@
 Class {
-	#name : #FmxMBBuilderRelationTest,
-	#superclass : #FmxMBTestCase,
-	#category : #'Famix-MetamodelBuilder-Tests'
+	#name : 'FmxMBBuilderRelationTest',
+	#superclass : 'FmxMBTestCase',
+	#category : 'Famix-MetamodelBuilder-Tests-Tests',
+	#package : 'Famix-MetamodelBuilder-Tests',
+	#tag : 'Tests'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FmxMBBuilderRelationTest >> checkArrow: aBinarySelector from: cardinality1 to: cardinality2 containerFrom: containerFrom containerTo: containerTo forTraits: aBoolean [
 	| tClass tComment generatedTClass generatedTComment hasContainer |
 	tComment := aBoolean
@@ -43,14 +45,14 @@ FmxMBBuilderRelationTest >> checkArrow: aBinarySelector from: cardinality1 to: c
 		ifFalse: [ self deny: hasContainer ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FmxMBBuilderRelationTest >> resetBuilder [
 
 	builder := FamixMetamodelBuilder forTesting.
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBBuilderRelationTest >> testClassRelations [
 
 	self checkArrow: #- from: 'FMOne' to: 'FMOne' containerFrom: false containerTo: false forTraits: false.
@@ -73,7 +75,7 @@ FmxMBBuilderRelationTest >> testClassRelations [
 	
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBBuilderRelationTest >> testManyToManyTraitsRelation [
 
 	| tClass1 tClass2 generatedClass1 generatedClass2 |
@@ -102,7 +104,7 @@ FmxMBBuilderRelationTest >> testManyToManyTraitsRelation [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBBuilderRelationTest >> testManyToOneTraitsRelation [
 
 	| tClass1 tClass2 generatedClass1 generatedClass2 |
@@ -131,7 +133,7 @@ FmxMBBuilderRelationTest >> testManyToOneTraitsRelation [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBBuilderRelationTest >> testOneToManyTraitsRelation [
 
 	| tClass1 tClass2 generatedClass1 generatedClass2 |
@@ -160,7 +162,7 @@ FmxMBBuilderRelationTest >> testOneToManyTraitsRelation [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBBuilderRelationTest >> testOneToOneTraitsRelation [
 
 	| tClass tComment generatedTClass generatedTComment |
@@ -189,7 +191,7 @@ FmxMBBuilderRelationTest >> testOneToOneTraitsRelation [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBBuilderRelationTest >> testTraitRelations [
 
 	self checkArrow: #- from: 'FMOne' to: 'FMOne' containerFrom: false containerTo: false forTraits: true.

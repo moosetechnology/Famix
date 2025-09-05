@@ -1,16 +1,18 @@
 Class {
-	#name : #FamixModel,
-	#superclass : #MooseModel,
-	#category : #'Famix-Traits-Model'
+	#name : 'FamixModel',
+	#superclass : 'MooseModel',
+	#category : 'Famix-Traits-Model',
+	#package : 'Famix-Traits',
+	#tag : 'Model'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixModel class >> allSubmetamodelsPackagesNames [
 	<generated>
 	^ #(#'Moose-Query')
 ]
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixModel class >> annotation [
 	<FMClass: #FamixModel super: #MooseModel>
 	<package: #'Famix-Traits'>

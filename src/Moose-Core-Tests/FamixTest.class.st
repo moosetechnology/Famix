@@ -1,10 +1,11 @@
 Class {
-	#name : #FamixTest,
-	#superclass : #TestCase,
-	#category : #'Moose-Core-Tests'
+	#name : 'FamixTest',
+	#superclass : 'TestCase',
+	#category : 'Moose-Core-Tests',
+	#package : 'Moose-Core-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTest >> classWithUnknownAttribute [
 
 	^ '
@@ -27,7 +28,7 @@ FamixTest >> classWithUnknownAttribute [
 )'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTest >> oneClassAndOneMethod [
 	
 	^'
@@ -45,7 +46,7 @@ FamixTest >> oneClassAndOneMethod [
 	'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTest >> testMSEImport [
 	| importer model |
 	importer := (FMImporter model: (FMModel withMetamodel: FamixTest3Model metamodel))
@@ -58,7 +59,7 @@ FamixTest >> testMSEImport [
 	self assert: model allMethods size equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTest >> testRobustMSEImport [
 
 	| importer model |
@@ -78,7 +79,7 @@ FamixTest >> testRobustMSEImport [
 	self assert: model allReferences size equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTest >> testSlot [
 	| fClass fMethod |
 	fClass := FamixTest3Class new.
@@ -87,7 +88,7 @@ FamixTest >> testSlot [
 	self assert: (fClass methods at: 1) equals: fMethod
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTest >> testSourcesAnchorsAreNotDuplicatedAfterExport [
 	| model tempFile importedModel |
 	model := FamixTest3Model new name: 'Perdu'.

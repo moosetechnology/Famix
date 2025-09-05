@@ -1,6 +1,6 @@
-Extension { #name : #Class }
+Extension { #name : 'Class' }
 
-{ #category : #'*Moose-Core' }
+{ #category : '*Moose-Core' }
 Class >> allMatchingSelfIn: aMooseModel [ 
 	^ aMooseModel allWithType: self
 ]

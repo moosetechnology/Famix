@@ -12,6 +12,11 @@
 |---|
 | `comments` | `FamixTWithComments` | `commentedEntity` | `FamixTComment` | List of comments for the entity|
 
+### Outgoing dependencies
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `typing` | `FamixTTypedEntity` | `typedEntity` | `FamixTEntityTyping` | Association linking this entity to its declared type.|
+
 ### Incoming dependencies
 | Relation | Origin | Opposite | Type | Comment |
 |---|
@@ -20,7 +25,6 @@
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `declaredType` | `FamixTTypedEntity` | `typedEntities` | `FamixTType` | Type of the entity, if any|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
 
 
@@ -35,14 +39,16 @@
 
 "
 Class {
-	#name : #FamixJavaLocalVariable,
-	#superclass : #FamixJavaVariable,
+	#name : 'FamixJavaLocalVariable',
+	#superclass : 'FamixJavaVariable',
 	#traits : 'FamixTCanBeFinal + FamixTLocalVariable + FamixTWithComments',
 	#classTraits : 'FamixTCanBeFinal classTrait + FamixTLocalVariable classTrait + FamixTWithComments classTrait',
-	#category : #'Famix-Java-Entities-Entities'
+	#category : 'Famix-Java-Entities-Entities',
+	#package : 'Famix-Java-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixJavaLocalVariable class >> annotation [
 
 	<FMClass: #LocalVariable super: #FamixJavaVariable>
@@ -51,7 +57,14 @@ FamixJavaLocalVariable class >> annotation [
 	^ self
 ]
 
-{ #category : #printing }
+{ #category : 'visitor' }
+FamixJavaLocalVariable >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaLocalVariable: self
+]
+
+{ #category : 'printing' }
 FamixJavaLocalVariable >> mooseNameOn: stream [ 
 	| parent |
 	parent := self parentBehaviouralEntity.
@@ -61,7 +74,7 @@ FamixJavaLocalVariable >> mooseNameOn: stream [
 	self name ifNotNil: [stream nextPutAll: self name]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixJavaLocalVariable >> printOn: stream [ 
 	| parent |
 	self name ifNotNil: [ stream nextPutAll: self name ].

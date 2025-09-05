@@ -2,6 +2,11 @@
 ## Relations
 ======================
 
+### Outgoing dependencies
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `typing` | `FamixTTypedEntity` | `typedEntity` | `FamixTEntityTyping` | Association linking this entity to its declared type.|
+
 ### Incoming dependencies
 | Relation | Origin | Opposite | Type | Comment |
 |---|
@@ -10,7 +15,6 @@
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `declaredType` | `FamixTTypedEntity` | `typedEntities` | `FamixTType` | Type of the entity, if any|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
 
 
@@ -24,17 +28,26 @@
 
 "
 Trait {
-	#name : #FamixTUnknownVariable,
+	#name : 'FamixTUnknownVariable',
 	#traits : 'FamixTStructuralEntity',
 	#classTraits : 'FamixTStructuralEntity classTrait',
-	#category : #'Famix-Traits-StructuralEntity'
+	#category : 'Famix-Traits-StructuralEntity',
+	#package : 'Famix-Traits',
+	#tag : 'StructuralEntity'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTUnknownVariable classSide >> annotation [
 
 	<FMClass: #TUnknownVariable super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
 	^ self
+]
+
+{ #category : 'visitor' }
+FamixTUnknownVariable >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTUnknownVariable: self
 ]

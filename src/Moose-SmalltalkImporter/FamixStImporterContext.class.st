@@ -19,8 +19,8 @@ My class side implements a semantically coherent graph of dependency.
 
 "
 Class {
-	#name : #FamixStImporterContext,
-	#superclass : #Object,
+	#name : 'FamixStImporterContext',
+	#superclass : 'Object',
 	#instVars : [
 		'entityKindsToBeExtracted',
 		'mergeClassAndMetaclass',
@@ -30,10 +30,11 @@ Class {
 	#classInstVars : [
 		'entityDependencies'
 	],
-	#category : #'Moose-SmalltalkImporter'
+	#category : 'Moose-SmalltalkImporter',
+	#package : 'Moose-SmalltalkImporter'
 }
 
-{ #category : #initialize }
+{ #category : 'initialize' }
 FamixStImporterContext class >> defineEntityDependencies [
 
 	<script>
@@ -59,103 +60,103 @@ FamixStImporterContext class >> defineEntityDependencies [
 		at: self importingStubMethod put: (Set with: self importingMethod with: self importingStubMethod)
 ]
 
-{ #category : #initialize }
+{ #category : 'initialize' }
 FamixStImporterContext class >> entityDependencies [
 	
 	^entityDependencies
 ]
 
-{ #category : #initialize }
+{ #category : 'initialize' }
 FamixStImporterContext class >> entityDependencies: aDictionary [
 	
 	entityDependencies := aDictionary
 ]
 
-{ #category : #'basic representation' }
+{ #category : 'basic representation' }
 FamixStImporterContext class >> importingAccess [
 	
 	^#Access
 ]
 
-{ #category : #'basic representation' }
+{ #category : 'basic representation' }
 FamixStImporterContext class >> importingArgument [
 	
 	^#Argument
 ]
 
-{ #category : #'basic representation' }
+{ #category : 'basic representation' }
 FamixStImporterContext class >> importingAttribute [
 	
 	^#Attribute
 ]
 
-{ #category : #'basic representation' }
+{ #category : 'basic representation' }
 FamixStImporterContext class >> importingClass [
 	
 	^#Class
 ]
 
-{ #category : #'basic representation' }
+{ #category : 'basic representation' }
 FamixStImporterContext class >> importingClassExtension [
 	
 	^#ClassExtension
 ]
 
-{ #category : #'basic representation' }
+{ #category : 'basic representation' }
 FamixStImporterContext class >> importingComment [
 	
 	^#Comment
 ]
 
-{ #category : #'basic representation' }
+{ #category : 'basic representation' }
 FamixStImporterContext class >> importingImplicitVariable [
 	
 	^#ImplicitVariable
 ]
 
-{ #category : #'basic representation' }
+{ #category : 'basic representation' }
 FamixStImporterContext class >> importingInheritance [
 	
 	^#Inheritance
 ]
 
-{ #category : #'basic representation' }
+{ #category : 'basic representation' }
 FamixStImporterContext class >> importingInvocation [
 	
 	^#Invocation
 ]
 
-{ #category : #'basic representation' }
+{ #category : 'basic representation' }
 FamixStImporterContext class >> importingLocalVariable [
 	
 	^#LocalVariable
 ]
 
-{ #category : #'basic representation' }
+{ #category : 'basic representation' }
 FamixStImporterContext class >> importingMethod [
 	
 	^#Method
 ]
 
-{ #category : #'basic representation' }
+{ #category : 'basic representation' }
 FamixStImporterContext class >> importingNamespace [
 	
 	^#Namespace
 ]
 
-{ #category : #'basic representation' }
+{ #category : 'basic representation' }
 FamixStImporterContext class >> importingPackage [
 	
 	^#Package
 ]
 
-{ #category : #'basic representation' }
+{ #category : 'basic representation' }
 FamixStImporterContext class >> importingStubMethod [
 	
 	^#StubMethod
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FamixStImporterContext class >> initialize [
 	"self initialize"
 	
@@ -163,13 +164,13 @@ FamixStImporterContext class >> initialize [
 	self defineEntityDependencies
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixStImporterContext >> allDependentsOf: aKey [
 
 	^ self allDependentsOf: aKey alreadyIn: Set new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixStImporterContext >> allDependentsOf: aKey alreadyIn: aSet [
 
 	(self class entityDependencies at: aKey) do: [ :each |
@@ -179,152 +180,152 @@ FamixStImporterContext >> allDependentsOf: aKey alreadyIn: aSet [
 	^ aSet
 ]
 
-{ #category : #'import options' }
+{ #category : 'import options' }
 FamixStImporterContext >> computeTypeOfAttributes [
 
 	"use this method to tell the importer that it should compute the type of attributes (using RoelType). By default this not the case, because computing types can take some time "
 	computeAttributeTypes := true.
 ]
 
-{ #category : #'import options' }
+{ #category : 'import options' }
 FamixStImporterContext >> distinguishClassAndMetaclass [
 	
 	mergeClassAndMetaclass := false
 ]
 
-{ #category : #'import options' }
+{ #category : 'import options' }
 FamixStImporterContext >> doNotComputeTypeOfAttributes [
 
 	computeAttributeTypes := false.
 ]
 
-{ #category : #'import options' }
+{ #category : 'import options' }
 FamixStImporterContext >> doNotImportSubclasses [
 	
 	importSubclasses := false
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixStImporterContext >> entityKindsToBeExtracted [
 	
 	^entityKindsToBeExtracted
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixStImporterContext >> entityKindsToBeExtracted: anObject [
 	
 	entityKindsToBeExtracted := anObject
 ]
 
-{ #category : #'importing-filters' }
+{ #category : 'importing-filters' }
 FamixStImporterContext >> importAccess [
 	"in fact you check the dependents of the dependents"
 
 	self entityKindsToBeExtracted addAll: (self allDependentsOf: self class importingAccess)
 ]
 
-{ #category : #'importing-filters' }
+{ #category : 'importing-filters' }
 FamixStImporterContext >> importArgument [
 
 	self entityKindsToBeExtracted addAll: (self allDependentsOf: self class importingArgument)
 ]
 
-{ #category : #'importing-filters' }
+{ #category : 'importing-filters' }
 FamixStImporterContext >> importAttribute [
 	"in fact you check the dependents of the dependents"
 
 	self entityKindsToBeExtracted addAll: (self allDependentsOf: self class importingAttribute)
 ]
 
-{ #category : #'importing-filters' }
+{ #category : 'importing-filters' }
 FamixStImporterContext >> importClass [
 	"in fact you check the dependents of the dependents"
 
 	self entityKindsToBeExtracted addAll: (self allDependentsOf: self class importingClass)
 ]
 
-{ #category : #'importing-filters' }
+{ #category : 'importing-filters' }
 FamixStImporterContext >> importClassExtension [
 
 	self entityKindsToBeExtracted addAll: (self allDependentsOf: self class importingClassExtension)
 ]
 
-{ #category : #'importing-filters' }
+{ #category : 'importing-filters' }
 FamixStImporterContext >> importComment [
 	"in fact you check the dependents of the dependents"
 
 	self entityKindsToBeExtracted addAll: (self allDependentsOf: self class importingComment)
 ]
 
-{ #category : #'importing-filters' }
+{ #category : 'importing-filters' }
 FamixStImporterContext >> importImplicitVariable [
 	"in fact you check the dependents of the dependents"
 
 	self entityKindsToBeExtracted addAll: (self allDependentsOf: self class importingImplicitVariable)
 ]
 
-{ #category : #'importing-filters' }
+{ #category : 'importing-filters' }
 FamixStImporterContext >> importInheritance [
 	"in fact you check the dependents of the dependents"
 
 	self entityKindsToBeExtracted addAll: (self allDependentsOf: self class importingInheritance)
 ]
 
-{ #category : #'importing-filters' }
+{ #category : 'importing-filters' }
 FamixStImporterContext >> importInvocation [
 	"in fact you check the dependents of the dependents"
 
 	self entityKindsToBeExtracted addAll: (self allDependentsOf: self class importingInvocation)
 ]
 
-{ #category : #'importing-filters' }
+{ #category : 'importing-filters' }
 FamixStImporterContext >> importLocalVariable [
 	"in fact you check the dependents of the dependents"
 
 	self entityKindsToBeExtracted addAll: (self allDependentsOf: self class importingLocalVariable)
 ]
 
-{ #category : #'importing-filters' }
+{ #category : 'importing-filters' }
 FamixStImporterContext >> importMaximum [
 	
 	self entityKindsToBeExtracted: self maximum
 ]
 
-{ #category : #'importing-filters' }
+{ #category : 'importing-filters' }
 FamixStImporterContext >> importMethod [
 	"in fact you check the dependents of the dependents"
 
 	self entityKindsToBeExtracted addAll: (self allDependentsOf: self class importingMethod)
 ]
 
-{ #category : #'importing-filters' }
+{ #category : 'importing-filters' }
 FamixStImporterContext >> importNamespace [
 	"just import a package and nothing else"
 
 	self entityKindsToBeExtracted addAll: (self allDependentsOf: self class importingNamespace)
 ]
 
-{ #category : #'importing-filters' }
+{ #category : 'importing-filters' }
 FamixStImporterContext >> importPackage [
 	"just import a package and nothing else"
 
 	self entityKindsToBeExtracted addAll: (self allDependentsOf: self class importingPackage)
 ]
 
-{ #category : #'importing-filters' }
+{ #category : 'importing-filters' }
 FamixStImporterContext >> importStubMethod [
 	"Kind of a hack to import stub-methods in smalltalk"
 
 	self entityKindsToBeExtracted addAll: (self allDependentsOf: self class importingStubMethod)
 ]
 
-{ #category : #'import options' }
+{ #category : 'import options' }
 FamixStImporterContext >> importSubclasses [
 	"When a class is created, we automatically import all its subclasses"
 	importSubclasses := true
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FamixStImporterContext >> initialize [
 
 	super initialize.
@@ -335,7 +336,7 @@ FamixStImporterContext >> initialize [
 	importSubclasses := true
 ]
 
-{ #category : #'importing-filters' }
+{ #category : 'importing-filters' }
 FamixStImporterContext >> maximum [
 
 	| all |
@@ -344,13 +345,13 @@ FamixStImporterContext >> maximum [
 	^ all
 ]
 
-{ #category : #'import options' }
+{ #category : 'import options' }
 FamixStImporterContext >> mergeClassAndMetaclass [
 	
 	mergeClassAndMetaclass := true
 ]
 
-{ #category : #'importing queries' }
+{ #category : 'importing queries' }
 FamixStImporterContext >> shouldComputeTypeOfAttributes [
 	"return true if the importer has to compute the type of attributes. False if not. "
 	self flag: 'why does it not use #shouldImport: ?'.
@@ -358,79 +359,79 @@ FamixStImporterContext >> shouldComputeTypeOfAttributes [
 	^ computeAttributeTypes
 ]
 
-{ #category : #'importing queries' }
+{ #category : 'importing queries' }
 FamixStImporterContext >> shouldImport: aSymbol [
 	
 	^self entityKindsToBeExtracted includes: aSymbol
 ]
 
-{ #category : #'importing queries' }
+{ #category : 'importing queries' }
 FamixStImporterContext >> shouldImportAccess [
 	
 	^self shouldImport: self class importingAccess
 ]
 
-{ #category : #'importing queries' }
+{ #category : 'importing queries' }
 FamixStImporterContext >> shouldImportArgument [
 	
 	^self shouldImport: self class importingArgument
 ]
 
-{ #category : #'importing queries' }
+{ #category : 'importing queries' }
 FamixStImporterContext >> shouldImportAttribute [
 	
 	^self shouldImport: self class importingAttribute
 ]
 
-{ #category : #'importing queries' }
+{ #category : 'importing queries' }
 FamixStImporterContext >> shouldImportClass [
 	
 	^self shouldImport: self class importingClass
 ]
 
-{ #category : #'importing queries' }
+{ #category : 'importing queries' }
 FamixStImporterContext >> shouldImportClassExtension [
 	
 	^self shouldImport: self class importingClassExtension
 ]
 
-{ #category : #'importing queries' }
+{ #category : 'importing queries' }
 FamixStImporterContext >> shouldImportComment [
 	
 	^self shouldImport: self class importingComment
 ]
 
-{ #category : #'importing queries' }
+{ #category : 'importing queries' }
 FamixStImporterContext >> shouldImportImplicitVariable [
 	
 	^self shouldImport: self class importingImplicitVariable
 ]
 
-{ #category : #'importing queries' }
+{ #category : 'importing queries' }
 FamixStImporterContext >> shouldImportInheritance [
 	
 	^self shouldImport: self class importingInheritance
 ]
 
-{ #category : #'importing queries' }
+{ #category : 'importing queries' }
 FamixStImporterContext >> shouldImportInvocation [
 	
 	^self shouldImport: self class importingInvocation
 ]
 
-{ #category : #'importing queries' }
+{ #category : 'importing queries' }
 FamixStImporterContext >> shouldImportLocalVariable [
 	
 	^self shouldImport: self class importingLocalVariable
 ]
 
-{ #category : #'importing queries' }
+{ #category : 'importing queries' }
 FamixStImporterContext >> shouldImportMethod [
 	
 	^self shouldImport: self class importingMethod
 ]
 
-{ #category : #'importing queries' }
+{ #category : 'importing queries' }
 FamixStImporterContext >> shouldImportMethodBody [
 	
 	^self shouldImportAccess
@@ -441,32 +442,32 @@ FamixStImporterContext >> shouldImportMethodBody [
 						or: [self shouldImportInvocation or: [self shouldImportArgument]]]]
 ]
 
-{ #category : #'importing queries' }
+{ #category : 'importing queries' }
 FamixStImporterContext >> shouldImportNamespace [
 	
 	^self shouldImport: self class importingNamespace
 ]
 
-{ #category : #'importing queries' }
+{ #category : 'importing queries' }
 FamixStImporterContext >> shouldImportPackage [
 	
 	^self shouldImport: self class importingPackage
 ]
 
-{ #category : #'importing queries' }
+{ #category : 'importing queries' }
 FamixStImporterContext >> shouldImportSmalltalkStubMethod [
 	
 	^self shouldImport: self class importingStubMethod
 ]
 
-{ #category : #'importing queries' }
+{ #category : 'importing queries' }
 FamixStImporterContext >> shouldImportSubclasses [
 	self flag: 'why does it not use #shouldImport: ?'.
 
 	^importSubclasses
 ]
 
-{ #category : #'importing queries' }
+{ #category : 'importing queries' }
 FamixStImporterContext >> shouldMergeClassAndMetaclass [
 	self flag: 'why does it not use #shouldImport: ?'.
 

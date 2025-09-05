@@ -1,10 +1,12 @@
 Class {
-	#name : #FmxMBConfigurationTest,
-	#superclass : #FmxMBTestCase,
-	#category : #'Famix-MetamodelBuilder-Tests'
+	#name : 'FmxMBConfigurationTest',
+	#superclass : 'FmxMBTestCase',
+	#category : 'Famix-MetamodelBuilder-Tests-Tests',
+	#package : 'Famix-MetamodelBuilder-Tests',
+	#tag : 'Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBConfigurationTest >> testConfiguration [
 	| config |
 	config := builder configuration.

@@ -1,1 +1,1 @@
-Package { #name : #'Famix-MetamodelGeneration' }
+Package { #name : 'Famix-MetamodelGeneration' }

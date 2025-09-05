@@ -5,15 +5,17 @@ Description
 I am a strategy used by the relation queries to define that the query should match a specific kind of relations.
 "
 Class {
-	#name : #MQRelationOneTypeStrategy,
-	#superclass : #MQAbstractRelationStrategy,
+	#name : 'MQRelationOneTypeStrategy',
+	#superclass : 'MQAbstractRelationStrategy',
 	#instVars : [
 		'propertyType'
 	],
-	#category : #'Moose-Query-Relations'
+	#category : 'Moose-Query-Relations',
+	#package : 'Moose-Query',
+	#tag : 'Relations'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MQRelationOneTypeStrategy class >> propertyType: aPropertyType [
 
 	^ self new
@@ -21,13 +23,13 @@ MQRelationOneTypeStrategy class >> propertyType: aPropertyType [
 		  yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MQRelationOneTypeStrategy >> propertyType: anObject [
 
 	propertyType := anObject
 ]
 
-{ #category : #selection }
+{ #category : 'selection' }
 MQRelationOneTypeStrategy >> selectPropertiesIn: anEntity [
 
 	^ anEntity mooseDescription allRelationProperties select: [ :relation | 

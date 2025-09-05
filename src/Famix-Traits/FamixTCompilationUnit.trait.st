@@ -1,5 +1,5 @@
 "
-I represent a compilation unit file. Typically a .c or .cpp file
+I represent a compilation unit file
 
 ## Relations
 ======================
@@ -25,16 +25,18 @@ I represent a compilation unit file. Typically a .c or .cpp file
 
 "
 Trait {
-	#name : #FamixTCompilationUnit,
+	#name : 'FamixTCompilationUnit',
 	#instVars : [
 		'#compilationUnitOwner => FMOne type: #FamixTWithCompilationUnits opposite: #compilationUnit'
 	],
 	#traits : 'FamixTFile',
 	#classTraits : 'FamixTFile classTrait',
-	#category : #'Famix-Traits-CompilationUnit'
+	#category : 'Famix-Traits-Traits',
+	#package : 'Famix-Traits',
+	#tag : 'Traits'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTCompilationUnit classSide >> annotation [
 
 	<FMClass: #TCompilationUnit super: #Object>
@@ -43,7 +45,14 @@ FamixTCompilationUnit classSide >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'visitor' }
+FamixTCompilationUnit >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTCompilationUnit: self
+]
+
+{ #category : 'accessing' }
 FamixTCompilationUnit >> compilationUnitOwner [
 	"Relation named: #compilationUnitOwner type: #FamixTWithCompilationUnits opposite: #compilationUnit"
 
@@ -53,14 +62,14 @@ FamixTCompilationUnit >> compilationUnitOwner [
 	^ compilationUnitOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTCompilationUnit >> compilationUnitOwner: anObject [
 
 	<generated>
 	compilationUnitOwner := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FamixTCompilationUnit >> compilationUnitOwnerGroup [
 	<generated>
 	<navigation: 'CompilationUnitOwner'>

@@ -7,17 +7,18 @@ The main API is then
 
 "
 Class {
-	#name : #MooseCustomTask,
-	#superclass : #MooseTask,
+	#name : 'MooseCustomTask',
+	#superclass : 'MooseTask',
 	#instVars : [
 		'computation',
 		'description',
 		'length'
 	],
-	#category : #'Moose-Core'
+	#category : 'Moose-Core',
+	#package : 'Moose-Core'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MooseCustomTask class >> runWithProgress: aBlock description: aDescription length: aNumber [
 	^ self new 
 		with: aBlock description: aDescription length: aNumber; 
@@ -25,22 +26,22 @@ MooseCustomTask class >> runWithProgress: aBlock description: aDescription lengt
 		yourself
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MooseCustomTask >> basicRun [
 	computation value: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseCustomTask >> description [
 	^ description
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseCustomTask >> length [
 	^ length
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MooseCustomTask >> with: aBlock description: aDescription length: aNumber [
 	computation := aBlock.
 	description := aDescription.

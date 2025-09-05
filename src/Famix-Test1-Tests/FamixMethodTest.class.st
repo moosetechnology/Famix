@@ -1,15 +1,16 @@
 Class {
-	#name : #FamixMethodTest,
-	#superclass : #FamixTest1SimpleModelTest,
-	#category : #'Famix-Test1-Tests'
+	#name : 'FamixMethodTest',
+	#superclass : 'FamixTest1SimpleModelTest',
+	#category : 'Famix-Test1-Tests',
+	#package : 'Famix-Test1-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixMethodTest >> testBelongsTo [
 	self assert: m1 belongsTo equals: c1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixMethodTest >> testComputeNumberOfLinesOfCode [
 
 	| withoutSource |
@@ -21,7 +22,7 @@ FamixMethodTest >> testComputeNumberOfLinesOfCode [
 	self assert: withoutSource computeNumberOfLinesOfCode equals: model notExistentMetricValue
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixMethodTest >> testCyclomaticComplexity [
 
 	self assert: m1 cyclomaticComplexity equals: model notExistentMetricValue.
@@ -30,7 +31,7 @@ FamixMethodTest >> testCyclomaticComplexity [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixMethodTest >> testIsClass [
 
 	self assert: c1 isClass. 	
@@ -41,7 +42,7 @@ FamixMethodTest >> testIsClass [
 	self deny: anchor2 isClass.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixMethodTest >> testIsClassSide [
 
 	m1 isClassSide: true.
@@ -49,7 +50,7 @@ FamixMethodTest >> testIsClassSide [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixMethodTest >> testIsConstant [
 
 	self deny: m1 isConstant.
@@ -58,7 +59,7 @@ FamixMethodTest >> testIsConstant [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixMethodTest >> testIsConstructor [
 
 	self deny: m1 isConstructor.
@@ -67,7 +68,7 @@ FamixMethodTest >> testIsConstructor [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixMethodTest >> testIsGetter [
 
 	self deny: m1 isGetter.
@@ -76,14 +77,14 @@ FamixMethodTest >> testIsGetter [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixMethodTest >> testIsMethod [
 
 	self assert: m1 isMethod.
 	self deny: c1 isMethod.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixMethodTest >> testIsPureAccessor [
 
 	self deny: m1 isPureAccessor.
@@ -94,7 +95,7 @@ FamixMethodTest >> testIsPureAccessor [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixMethodTest >> testIsSetter [
 
 	self deny: m1 isSetter.
@@ -103,7 +104,7 @@ FamixMethodTest >> testIsSetter [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixMethodTest >> testKind [
 
 	m1 beConstant.
@@ -111,7 +112,7 @@ FamixMethodTest >> testKind [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixMethodTest >> testNumberOfLinesOfCode [
 
 	self assert: m1 numberOfLinesOfCode equals: 2.
@@ -123,14 +124,14 @@ FamixMethodTest >> testNumberOfLinesOfCode [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixMethodTest >> testParentType [
 
 	self assertCollection: m1 parentType equals: c1.
 	self assertCollection: m2 parentType equals: c2.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixMethodTest >> testParentTypeIsStub [
 
 	self deny: m1 parentTypeIsStub.
@@ -139,7 +140,7 @@ FamixMethodTest >> testParentTypeIsStub [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixMethodTest >> testRelations [
 
 	self assertCollection: c1 methods hasSameElements:  { m1 }.	

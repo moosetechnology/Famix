@@ -11,14 +11,16 @@
 
 "
 Trait {
-	#name : #FamixTPackageable,
+	#name : 'FamixTPackageable',
 	#instVars : [
 		'#parentPackage => FMOne type: #FamixTPackage opposite: #childEntities'
 	],
-	#category : #'Famix-Traits-Package'
+	#category : 'Famix-Traits-Package',
+	#package : 'Famix-Traits',
+	#tag : 'Package'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTPackageable classSide >> annotation [
 
 	<FMClass: #TPackageable super: #Object>
@@ -27,12 +29,19 @@ FamixTPackageable classSide >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'visitor' }
+FamixTPackageable >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTPackageable: self
+]
+
+{ #category : 'accessing' }
 FamixTPackageable >> isExtension [
 	^ (self belongsTo atScope: FamixTPackage) ~= (self atScope: FamixTPackage)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTPackageable >> parentPackage [
 	"Relation named: #parentPackage type: #FamixTPackage opposite: #childEntities"
 
@@ -42,14 +51,14 @@ FamixTPackageable >> parentPackage [
 	^ parentPackage
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTPackageable >> parentPackage: anObject [
 
 	<generated>
 	parentPackage := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FamixTPackageable >> parentPackageGroup [
 	<generated>
 	<navigation: 'ParentPackage'>

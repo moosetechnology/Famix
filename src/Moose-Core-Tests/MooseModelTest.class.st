@@ -2,23 +2,24 @@
 Just a test about mooseModel root and so on.
 "
 Class {
-	#name : #MooseModelTest,
-	#superclass : #MooseAbstractGroupTest,
-	#category : #'Moose-Core-Tests'
+	#name : 'MooseModelTest',
+	#superclass : 'MooseAbstractGroupTest',
+	#category : 'Moose-Core-Tests',
+	#package : 'Moose-Core-Tests'
 }
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 MooseModelTest >> actualClass [
 	^ MooseModel
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseModelTest >> testAdd [
 	super testAdd.
 	self assert: group first mooseModel identicalTo: group
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseModelTest >> testAddAnnouncement [
 
 	| entity announcedEntity |
@@ -29,7 +30,23 @@ MooseModelTest >> testAddAnnouncement [
 	self assert: announcedEntity identicalTo: entity
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
+MooseModelTest >> testAsJSONString [
+
+	self assert: MooseModel new asJSONString equals: '[
+]'.
+	self
+		assert: (MooseModel new
+				 add: MooseEntity new;
+				 asJSONString)
+		equals: '[{
+	"FM3":"Moose.Entity",
+	"id":1
+	}
+]'
+]
+
+{ #category : 'tests' }
 MooseModelTest >> testAsMSEString [
 	self assert: MooseModel new asMSEString equals: '()'.
 	self
@@ -42,14 +59,14 @@ MooseModelTest >> testAsMSEString [
 	(Moose.Entity (id: 1)))'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseModelTest >> testCacheInvalidationAfterAdd [
 	self assertEmpty: group allClasses.
 	group add: FamixTest3Class new.
 	self assert: group allClasses size equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseModelTest >> testCacheInvalidationAfterMultipleAddRemove [
 	| classA classB |
 	classA := FamixTest3Class named: 'ClassA'.
@@ -68,7 +85,7 @@ MooseModelTest >> testCacheInvalidationAfterMultipleAddRemove [
 	self assertEmpty: group allClasses
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseModelTest >> testCacheInvalidationAfterRemove [
 	| class |
 	class := FamixTest3Class named: 'AClass'.
@@ -78,7 +95,7 @@ MooseModelTest >> testCacheInvalidationAfterRemove [
 	self assertEmpty: group allClasses
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseModelTest >> testDifferenceWithRealCollection [
 	"A MooseModel should only contains Moose entities."
 
@@ -88,14 +105,14 @@ MooseModelTest >> testDifferenceWithRealCollection [
 		raise: Error
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseModelTest >> testExportMetamodelToMSEStream [
 
 	self denyEmpty:
 		(String streamContents: [ :s | group exportMetamodelToMSEStream: s ])
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseModelTest >> testIntersectionWithRealCollection [
 	"A MooseModel should only contains Moose entities."
 
@@ -105,7 +122,7 @@ MooseModelTest >> testIntersectionWithRealCollection [
 		raise: Error
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseModelTest >> testPrintOn [
 	self assert: group printString equals: 'a MooseModel #noname(0)'.
 	group name: 'hello'.
@@ -116,7 +133,7 @@ MooseModelTest >> testPrintOn [
 	self assert: self actualClass metamodel printString equals: 'a FMMetaModel'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseModelTest >> testReferenceModel [
 	| parentModel |
 	parentModel := self actualClass with: group.
@@ -124,7 +141,7 @@ MooseModelTest >> testReferenceModel [
 	self assert: group mooseModel identicalTo: parentModel
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseModelTest >> testRemoveAllEntity [
 	| mooseModel entity1 entity2 |
 	mooseModel := self actualClass new.
@@ -138,7 +155,7 @@ MooseModelTest >> testRemoveAllEntity [
 	self assert: entity2 mooseModel isNil
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseModelTest >> testRemoveAnnouncement [
 
 	| entity announcedEntity |
@@ -150,7 +167,7 @@ MooseModelTest >> testRemoveAnnouncement [
 	self assert: announcedEntity identicalTo: entity
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseModelTest >> testRemoveEntity [
 	| mooseModel entity |
 	mooseModel := self actualClass new.
@@ -161,7 +178,7 @@ MooseModelTest >> testRemoveEntity [
 	self assert: entity mooseModel isNil
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseModelTest >> testRemoveFromModel [
 	| parentModel |
 	parentModel := self actualClass with: group.
@@ -170,7 +187,7 @@ MooseModelTest >> testRemoveFromModel [
 	self assertEmpty: parentModel
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseModelTest >> testRemoveModelNamedFromRoot [
 
 	| group2 parentModel res |
@@ -190,7 +207,7 @@ MooseModelTest >> testRemoveModelNamedFromRoot [
 	self assert: parentModel size equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseModelTest >> testRenamedAnnouncement [
 
 	| oldName |
@@ -201,17 +218,17 @@ MooseModelTest >> testRenamedAnnouncement [
 	self assert: oldName equals: #somename
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseModelTest >> testRootFolder [
 	self assert: group rootFolder equals: Smalltalk imageDirectory asFileReference / 'src' / group name
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseModelTest >> testRootUniqueness [
 	self assert: self actualClass root identicalTo: MooseModel root
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseModelTest >> testUnionWithRealCollection [
 	self
 		should: [ group addAll: #(1 2 3).

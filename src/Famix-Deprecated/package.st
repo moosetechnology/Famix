@@ -1,1 +1,1 @@
-Package { #name : #'Famix-Deprecated' }
+Package { #name : 'Famix-Deprecated' }

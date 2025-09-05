@@ -1,10 +1,11 @@
 Class {
-	#name : #FamixJavaEnumTest,
-	#superclass : #TestCase,
-	#category : #'Famix-Java-Tests'
+	#name : 'FamixJavaEnumTest',
+	#superclass : 'TestCase',
+	#category : 'Famix-Java-Tests',
+	#package : 'Famix-Java-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaEnumTest >> testOverridingMethods [
 
 	| method signature overridingMethod c1 c2 |
@@ -28,7 +29,7 @@ FamixJavaEnumTest >> testOverridingMethods [
 		hasSameElements: { overridingMethod }
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixJavaEnumTest >> testValues [
 	| enum value |
 	enum := FamixJavaEnum new.

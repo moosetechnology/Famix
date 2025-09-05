@@ -1,6 +1,6 @@
-Extension { #name : #String }
+Extension { #name : 'String' }
 
-{ #category : #'*Famix-Java-Entities' }
+{ #category : '*Famix-Java-Entities' }
 String >> asFamixJavaComment [
 	^ FamixJavaComment content: self
 ]

@@ -1,6 +1,6 @@
-Extension { #name : #FamixMetamodelBuilder }
+Extension { #name : 'FamixMetamodelBuilder' }
 
-{ #category : #'*Famix-Visitor-Generation' }
+{ #category : '*Famix-Visitor-Generation' }
 FamixMetamodelBuilder >> newVisitorTrait [
 
 	| visitorTrait |

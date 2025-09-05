@@ -23,18 +23,27 @@
 
 "
 Class {
-	#name : #FamixJavaImplementation,
-	#superclass : #FamixJavaEntity,
+	#name : 'FamixJavaImplementation',
+	#superclass : 'FamixJavaEntity',
 	#traits : 'FamixTImplementation',
 	#classTraits : 'FamixTImplementation classTrait',
-	#category : #'Famix-Java-Entities-Entities'
+	#category : 'Famix-Java-Entities-Entities',
+	#package : 'Famix-Java-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixJavaImplementation class >> annotation [
 
 	<FMClass: #Implementation super: #FamixJavaEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
 	^ self
+]
+
+{ #category : 'visitor' }
+FamixJavaImplementation >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaImplementation: self
 ]

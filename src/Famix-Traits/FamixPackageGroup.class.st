@@ -1,10 +1,12 @@
 Class {
-	#name : #FamixPackageGroup,
-	#superclass : #MooseSpecializedGroup,
-	#category : #'Famix-Traits-Groups'
+	#name : 'FamixPackageGroup',
+	#superclass : 'MooseSpecializedGroup',
+	#category : 'Famix-Traits-Groups',
+	#package : 'Famix-Traits',
+	#tag : 'Groups'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixPackageGroup class >> annotation [
 
 	<FMClass: #PackageGroup super: #MooseSpecializedGroup>
@@ -13,24 +15,24 @@ FamixPackageGroup class >> annotation [
 	^ self
 ]
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixPackageGroup class >> metamodel [
 
 	<generated>
 	^ FamixModel metamodel
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FamixPackageGroup >> allClasses [
 	^ self flatCollect: [ :p | p localClasses ]
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FamixPackageGroup >> allMethods [
 	^ self flatCollect: [ :p | p methods ]
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FamixPackageGroup >> allPackages [
 	^ self
 ]

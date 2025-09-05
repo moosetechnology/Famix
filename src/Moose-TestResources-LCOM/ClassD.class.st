@@ -1,17 +1,18 @@
 Class {
-	#name : #ClassD,
-	#superclass : #Object,
-	#category : #'Moose-TestResources-LCOM'
+	#name : 'ClassD',
+	#superclass : 'Object',
+	#category : 'Moose-TestResources-LCOM',
+	#package : 'Moose-TestResources-LCOM'
 }
 
-{ #category : #stub }
+{ #category : 'stub' }
 ClassD >> m1 [
 ]
 
-{ #category : #stub }
+{ #category : 'stub' }
 ClassD >> m2 [
 ]
 
-{ #category : #stub }
+{ #category : 'stub' }
 ClassD >> m3 [
 ]

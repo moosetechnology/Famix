@@ -1,6 +1,6 @@
-Extension { #name : #String }
+Extension { #name : 'String' }
 
-{ #category : #'*Famix-MetamodelBuilder-Core' }
+{ #category : '*Famix-MetamodelBuilder-Core' }
 String >> splitOnLastNumber [
 
 	"'123abc456' splitOnLastNumber >>> #('123abc' '456')"

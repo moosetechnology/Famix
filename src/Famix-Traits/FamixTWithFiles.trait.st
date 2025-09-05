@@ -11,14 +11,16 @@
 
 "
 Trait {
-	#name : #FamixTWithFiles,
+	#name : 'FamixTWithFiles',
 	#instVars : [
 		'#containerFiles => FMMany type: #FamixTFile opposite: #entities'
 	],
-	#category : #'Famix-Traits-File'
+	#category : 'Famix-Traits-File',
+	#package : 'Famix-Traits',
+	#tag : 'File'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTWithFiles classSide >> annotation [
 
 	<FMClass: #TWithFiles super: #Object>
@@ -27,13 +29,20 @@ FamixTWithFiles classSide >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'visitor' }
+FamixTWithFiles >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTWithFiles: self
+]
+
+{ #category : 'accessing' }
 FamixTWithFiles >> addContainerFile: anObject [
 	containerFiles add: anObject
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithFiles >> containerFiles [
 	"Relation named: #containerFiles type: #FamixTFile opposite: #entities"
 
@@ -42,7 +51,7 @@ FamixTWithFiles >> containerFiles [
 	^ containerFiles
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithFiles >> containerFiles: anObject [
 
 	<generated>

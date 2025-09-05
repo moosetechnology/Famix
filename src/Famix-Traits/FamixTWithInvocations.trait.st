@@ -11,14 +11,16 @@
 
 "
 Trait {
-	#name : #FamixTWithInvocations,
+	#name : 'FamixTWithInvocations',
 	#instVars : [
 		'#outgoingInvocations => FMMany type: #FamixTInvocation opposite: #sender'
 	],
-	#category : #'Famix-Traits-Invocation'
+	#category : 'Famix-Traits-Invocation',
+	#package : 'Famix-Traits',
+	#tag : 'Invocation'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTWithInvocations classSide >> annotation [
 
 	<FMClass: #TWithInvocations super: #Object>
@@ -27,23 +29,28 @@ FamixTWithInvocations classSide >> annotation [
 	^ self
 ]
 
-{ #category : #adding }
+{ #category : 'visitor' }
+FamixTWithInvocations >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTWithInvocations: self
+]
+
+{ #category : 'adding' }
 FamixTWithInvocations >> addOutgoingInvocation: anInvocation [
 	outgoingInvocations add: anInvocation
 ]
 
-{ #category : #'Famix-Extensions-private' }
+{ #category : 'Famix-Extensions-private' }
 FamixTWithInvocations >> numberOfOutgoingInvocations [
 
 	<FMProperty: #numberOfOutgoingInvocations type: #Number>
 	<derived>
 	<FMComment: 'The number of invocations in a method'>
-	^ self
-		  lookUpPropertyNamed: #numberOfOutgoingInvocations
-		  computedAs: [ self outgoingInvocations size ]
+	^ self cacheAt: #numberOfOutgoingInvocations ifAbsent: [ self outgoingInvocations size ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithInvocations >> outgoingInvocations [
 	"Relation named: #outgoingInvocations type: #FamixTInvocation opposite: #sender"
 
@@ -53,14 +60,14 @@ FamixTWithInvocations >> outgoingInvocations [
 	^ outgoingInvocations
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithInvocations >> outgoingInvocations: anObject [
 
 	<generated>
 	outgoingInvocations value: anObject
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTWithInvocations >> outgoingInvocationsGroup [
 	<navigation: 'Outgoing invocations'>
 	^ self cacheAt:

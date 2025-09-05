@@ -1,15 +1,16 @@
 Class {
-	#name : #FamixSmalltalkNameResolver,
-	#superclass : #Object,
-	#category : #'Famix-Smalltalk-Utils'
+	#name : 'FamixSmalltalkNameResolver',
+	#superclass : 'Object',
+	#category : 'Famix-Smalltalk-Utils',
+	#package : 'Famix-Smalltalk-Utils'
 }
 
-{ #category : #'naming conventions' }
+{ #category : 'naming conventions' }
 FamixSmalltalkNameResolver class >> famixNamespaceSeparator [
 	^ '::'
 ]
 
-{ #category : #'getting classes' }
+{ #category : 'getting classes' }
 FamixSmalltalkNameResolver class >> findClassNamedOrNilFromFullName: stClassFullNameSymbol [
 	"returns the class whose name is aClassFullNameSymbol. 
 	aClassFullNameSymbol should smalltalk and not moose related.and should not represent a metaclass"
@@ -17,19 +18,19 @@ FamixSmalltalkNameResolver class >> findClassNamedOrNilFromFullName: stClassFull
 	^ self class environment at: stClassFullNameSymbol asSymbol ifAbsent: [ nil ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 FamixSmalltalkNameResolver class >> metaclassTag [
 	"The meta class tag used in FAMIX2."
 
 	^ '_class'
 ]
 
-{ #category : #'naming conventions' }
+{ #category : 'naming conventions' }
 FamixSmalltalkNameResolver class >> moosify: aString [
 	^ aString copyReplaceAll: self smalltalkNamespaceSeparator with: self famixNamespaceSeparator
 ]
 
-{ #category : #naming }
+{ #category : 'naming' }
 FamixSmalltalkNameResolver class >> signatureFromSmalltalkSelectorOn: aName [
 	"self signatureFromSmalltalkSelector: #new"
 
@@ -54,7 +55,7 @@ FamixSmalltalkNameResolver class >> signatureFromSmalltalkSelectorOn: aName [
 	^ ws contents asSymbol
 ]
 
-{ #category : #'naming conventions' }
+{ #category : 'naming conventions' }
 FamixSmalltalkNameResolver class >> smalltalkClassFromFamixClassName: aFamixStName ifAbsent: aBlock [
 
 	"Given the FamixSt name of a class (meta class or not): return that Smalltalk class."
@@ -76,7 +77,7 @@ FamixSmalltalkNameResolver class >> smalltalkClassFromFamixClassName: aFamixStNa
 				  ifFalse: [ res ] ]
 ]
 
-{ #category : #'naming conventions' }
+{ #category : 'naming conventions' }
 FamixSmalltalkNameResolver class >> smalltalkClassNameFromFamixClassName: aFamixStName [
 
 	"Given the FamixSt name of a class (meta class or not): return the Smalltalk name."
@@ -101,12 +102,12 @@ FamixSmalltalkNameResolver class >> smalltalkClassNameFromFamixClassName: aFamix
 		  (aFamixStName copyFrom: index to: aFamixStName size) asSymbol ]
 ]
 
-{ #category : #'naming conventions' }
+{ #category : 'naming conventions' }
 FamixSmalltalkNameResolver class >> smalltalkNamespaceSeparator [
 	^ '.'
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 FamixSmalltalkNameResolver class >> stMetaclassTag [
 	"The meta class tag used in SmalltLK."
 

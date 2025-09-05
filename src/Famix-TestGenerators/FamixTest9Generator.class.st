@@ -1,46 +1,47 @@
 Class {
-	#name : #FamixTest9Generator,
-	#superclass : #FamixBasicInfrastructureGenerator,
+	#name : 'FamixTest9Generator',
+	#superclass : 'FamixBasicInfrastructureGenerator',
 	#instVars : [
 		'superclass',
 		'subclass'
 	],
-	#category : #'Famix-TestGenerators'
+	#category : 'Famix-TestGenerators',
+	#package : 'Famix-TestGenerators'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest9Generator class >> packageName [
 
 	^ #'Famix-Test9-Entities'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest9Generator class >> prefix [
 
 	^ #'FamixTest9'
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTest9Generator class >> shouldBeUpToDateInLatestMoose [
 
 	"This generator is used dynamically by the tests"
 	^ false
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixTest9Generator >> defineClasses [
 
 	superclass := self builder newClassNamed: #MySuperclass.
 	subclass := self builder newClassNamed: #MySubclass
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixTest9Generator >> defineHierarchy [
 
 	subclass --|> superclass
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixTest9Generator >> defineRelations [
 
 	subclass *- subclass

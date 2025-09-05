@@ -1,10 +1,12 @@
 Class {
-	#name : #FmxMBPropertyNameIsReserved,
-	#superclass : #Error,
-	#category : #'Famix-MetamodelBuilder-Core-Implementation'
+	#name : 'FmxMBPropertyNameIsReserved',
+	#superclass : 'Error',
+	#category : 'Famix-MetamodelBuilder-Core-Implementation',
+	#package : 'Famix-MetamodelBuilder-Core',
+	#tag : 'Implementation'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBPropertyNameIsReserved >> messageText [
 	<ignoreForCoverage>
 	^ String

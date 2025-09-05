@@ -27,16 +27,18 @@ Java extractors map Java packages to FamixTNamespaces. They can also mirror the 
 
 "
 Trait {
-	#name : #FamixTPackage,
+	#name : 'FamixTPackage',
 	#instVars : [
 		'#childEntities => FMMany type: #FamixTPackageable opposite: #parentPackage'
 	],
 	#traits : 'FamixTCanBeStub + FamixTNamedEntity + TEntityMetaLevelDependency',
 	#classTraits : 'FamixTCanBeStub classTrait + FamixTNamedEntity classTrait + TEntityMetaLevelDependency classTrait',
-	#category : #'Famix-Traits-Package'
+	#category : 'Famix-Traits-Package',
+	#package : 'Famix-Traits',
+	#tag : 'Package'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTPackage classSide >> annotation [
 
 	<FMClass: #TPackage super: #Object>
@@ -45,20 +47,27 @@ FamixTPackage classSide >> annotation [
 	^ self
 ]
 
-{ #category : #groups }
+{ #category : 'groups' }
 FamixTPackage classSide >> annotationFamixPackageGroup [
 	<generated>
 	<mooseGroup>
 	^ FamixPackageGroup
 ]
 
-{ #category : #accessing }
+{ #category : 'visitor' }
+FamixTPackage >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTPackage: self
+]
+
+{ #category : 'accessing' }
 FamixTPackage >> addChildEntity: anObject [
 	childEntities add: anObject
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTPackage >> childEntities [
 	"Relation named: #childEntities type: #FamixTPackageable opposite: #parentPackage"
 
@@ -67,28 +76,46 @@ FamixTPackage >> childEntities [
 	^ childEntities
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTPackage >> childEntities: anObject [
 
 	<generated>
 	childEntities value: anObject
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTPackage >> isPackage [
 
 	<generated>
 	^ true
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
+FamixTPackage >> numberOfClientPackages [
+
+	<FMProperty: #numberOfClientPackages type: #Number>
+	<FMComment: 'The number of packages which depend on this package'>
+	<derived>
+	^ self cacheAt: #numberOfClientPackages ifAbsentPut: [ self allClientsAtMyScope size ]
+]
+
+{ #category : 'metrics' }
+FamixTPackage >> relativeImportanceForSystem [
+
+	<FMProperty: #relativeImportanceForSystem type: #Number>
+	<FMComment: 'The number of client packages normalized by the total number of packages'>
+	<derived>
+	^ self cacheAt: #relativeImportanceForSystem ifAbsentPut: [
+			  self mooseModel allModelPackages size > 1
+				  ifTrue: [ self numberOfClientPackages / (self mooseModel allModelPackages size - 1) ]
+				  ifFalse: [ 0 ] ]
+]
+
+{ #category : 'metrics' }
 FamixTPackage >> weightedMethodCount [
 
 	<FMProperty: #weightedMethodCount type: #Number>
 	<FMComment: 'The sum of the complexity in a package'>
 	<derived>
-	^ self
-		  lookUpPropertyNamed: #WMC
-		  computedAs: [ 
-		  (self toScope: FamixTWithMethods) sum: #weightedMethodCount ]
+	^ self cacheAt: #WMC ifAbsentPut: [ (self toScope: FamixTWithMethods) sum: #weightedMethodCount ]
 ]

@@ -11,14 +11,16 @@
 
 "
 Trait {
-	#name : #FamixTWithImports,
+	#name : 'FamixTWithImports',
 	#instVars : [
 		'#imports => FMMany type: #FamixTImport opposite: #importingEntity'
 	],
-	#category : #'Famix-Traits-Import'
+	#category : 'Famix-Traits-Import',
+	#package : 'Famix-Traits',
+	#tag : 'Import'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTWithImports classSide >> annotation [
 
 	<FMClass: #TWithImports super: #Object>
@@ -27,13 +29,20 @@ FamixTWithImports classSide >> annotation [
 	^ self
 ]
 
-{ #category : #adding }
+{ #category : 'visitor' }
+FamixTWithImports >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTWithImports: self
+]
+
+{ #category : 'adding' }
 FamixTWithImports >> addImport: anObject [
 	<generated>
 	^ self imports add: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithImports >> imports [
 	"Relation named: #imports type: #FamixTImport opposite: #importingEntity"
 
@@ -42,7 +51,7 @@ FamixTWithImports >> imports [
 	^ imports
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithImports >> imports: anObject [
 
 	<generated>

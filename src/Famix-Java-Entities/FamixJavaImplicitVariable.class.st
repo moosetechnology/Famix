@@ -7,6 +7,11 @@
 |---|
 | `parentBehaviouralEntity` | `FamixTImplicitVariable` | `implicitVariables` | `FamixTWithImplicitVariables` | The behaviour containing this implicit variable. belongsTo implementation|
 
+### Outgoing dependencies
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `typing` | `FamixTTypedEntity` | `typedEntity` | `FamixTEntityTyping` | Association linking this entity to its declared type.|
+
 ### Incoming dependencies
 | Relation | Origin | Opposite | Type | Comment |
 |---|
@@ -15,7 +20,6 @@
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `declaredType` | `FamixTTypedEntity` | `typedEntities` | `FamixTType` | Type of the entity, if any|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
 
 
@@ -29,14 +33,16 @@
 
 "
 Class {
-	#name : #FamixJavaImplicitVariable,
-	#superclass : #FamixJavaVariable,
+	#name : 'FamixJavaImplicitVariable',
+	#superclass : 'FamixJavaVariable',
 	#traits : 'FamixTImplicitVariable',
 	#classTraits : 'FamixTImplicitVariable classTrait',
-	#category : #'Famix-Java-Entities-Entities'
+	#category : 'Famix-Java-Entities-Entities',
+	#package : 'Famix-Java-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixJavaImplicitVariable class >> annotation [
 
 	<FMClass: #ImplicitVariable super: #FamixJavaVariable>
@@ -45,7 +51,20 @@ FamixJavaImplicitVariable class >> annotation [
 	^ self
 ]
 
-{ #category : #printing }
+{ #category : 'visitor' }
+FamixJavaImplicitVariable >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaImplicitVariable: self
+]
+
+{ #category : 'testing' }
+FamixJavaImplicitVariable >> isSelf [
+
+	^ self name = 'this'
+]
+
+{ #category : 'printing' }
 FamixJavaImplicitVariable >> mooseNameOn: stream [ 
 	| parent |
 	parent := self parentBehaviouralEntity.
@@ -56,7 +75,7 @@ FamixJavaImplicitVariable >> mooseNameOn: stream [
 	self name ifNotNil: [ stream nextPutAll: self name ]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixJavaImplicitVariable >> printOn: aStream [ 
 	| parent |
 	parent := self parentBehaviouralEntity.

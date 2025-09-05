@@ -1,15 +1,16 @@
 Class {
-	#name : #MooseScriptsTest,
-	#superclass : #TestCase,
-	#category : #'Moose-SmalltalkImporter-Core-Tests'
+	#name : 'MooseScriptsTest',
+	#superclass : 'TestCase',
+	#category : 'Moose-SmalltalkImporter-Core-Tests',
+	#package : 'Moose-SmalltalkImporter-Core-Tests'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseScriptsTest class >> defaultTimeLimit [
 	^ 1 minute
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MooseScriptsTest >> testCreateLightModels [
 	| models lanModel |
 	#(#createLightModelForLAN #createLightModelForMorphic #createLightModelForNetwork)

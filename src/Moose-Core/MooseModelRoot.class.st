@@ -4,31 +4,32 @@ Moose model root is a simple singleton container.
 We use this third class for holding a MooseModel instance because we want **all** the instances (and subinstances) of MooseModel to be registered in there.
 "
 Class {
-	#name : #MooseModelRoot,
-	#superclass : #Object,
+	#name : 'MooseModelRoot',
+	#superclass : 'Object',
 	#classInstVars : [
 		'root'
 	],
-	#category : #'Moose-Core'
+	#category : 'Moose-Core',
+	#package : 'Moose-Core'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseModelRoot class >> installRoot: aRoot [
 	root := aRoot
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseModelRoot class >> installedRoot [
 	^ root
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseModelRoot class >> resetRoot [
 	<script>
 	self installRoot: nil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MooseModelRoot class >> root [
 	^ self installedRoot
 		ifNil: [ self

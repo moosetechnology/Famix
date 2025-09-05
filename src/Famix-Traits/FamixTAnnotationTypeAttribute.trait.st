@@ -24,6 +24,11 @@ Instance Variables:
 |---|
 | `parentType` | `FamixTAttribute` | `attributes` | `FamixTWithAttributes` | Type declaring the attribute. belongsTo implementation|
 
+### Outgoing dependencies
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `typing` | `FamixTTypedEntity` | `typedEntity` | `FamixTEntityTyping` | Association linking this entity to its declared type.|
+
 ### Incoming dependencies
 | Relation | Origin | Opposite | Type | Comment |
 |---|
@@ -33,7 +38,6 @@ Instance Variables:
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `annotationAttributeInstances` | `FamixTAnnotationTypeAttribute` | `annotationTypeAttribute` | `FamixTAnnotationInstanceAttribute` | A collection of AnnotationInstanceAttribute which hold the usages of this attribute in actual AnnotationInstances|
-| `declaredType` | `FamixTTypedEntity` | `typedEntities` | `FamixTType` | Type of the entity, if any|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
 
 
@@ -47,16 +51,18 @@ Instance Variables:
 
 "
 Trait {
-	#name : #FamixTAnnotationTypeAttribute,
+	#name : 'FamixTAnnotationTypeAttribute',
 	#instVars : [
 		'#annotationAttributeInstances => FMMany type: #FamixTAnnotationInstanceAttribute opposite: #annotationTypeAttribute'
 	],
 	#traits : 'FamixTAttribute',
 	#classTraits : 'FamixTAttribute classTrait',
-	#category : #'Famix-Traits-AnnotationTypeAttribute'
+	#category : 'Famix-Traits-AnnotationTypeAttribute',
+	#package : 'Famix-Traits',
+	#tag : 'AnnotationTypeAttribute'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTAnnotationTypeAttribute classSide >> annotation [
 
 	<FMClass: #TAnnotationTypeAttribute super: #Object>
@@ -65,13 +71,20 @@ FamixTAnnotationTypeAttribute classSide >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'visitor' }
+FamixTAnnotationTypeAttribute >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTAnnotationTypeAttribute: self
+]
+
+{ #category : 'accessing' }
 FamixTAnnotationTypeAttribute >> addAnnotationAttributeInstance: anObject [
 	annotationAttributeInstances add: anObject
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAnnotationTypeAttribute >> annotationAttributeInstances [
 	"Relation named: #annotationAttributeInstances type: #FamixTAnnotationInstanceAttribute opposite: #annotationTypeAttribute"
 
@@ -81,7 +94,7 @@ FamixTAnnotationTypeAttribute >> annotationAttributeInstances [
 	^ annotationAttributeInstances
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAnnotationTypeAttribute >> annotationAttributeInstances: anObject [
 
 	<generated>

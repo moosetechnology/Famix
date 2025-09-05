@@ -1,6 +1,6 @@
 Class {
-	#name : #FmxMBEntity,
-	#superclass : #Object,
+	#name : 'FmxMBEntity',
+	#superclass : 'Object',
 	#instVars : [
 		'name',
 		'comment',
@@ -10,41 +10,43 @@ Class {
 		'additionalProperties',
 		'isRemote'
 	],
-	#category : #'Famix-MetamodelBuilder-Core-Implementation'
+	#category : 'Famix-MetamodelBuilder-Core-Implementation',
+	#package : 'Famix-MetamodelBuilder-Core',
+	#tag : 'Implementation'
 }
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FmxMBEntity >> acceptVisitor: aVisitor [
 	^ self subclassResponsibility
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBEntity >> additionalProperties [
 
 	^ additionalProperties 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBEntity >> builder [
 	^ builder
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBEntity >> builder: anObject [
 	builder := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBEntity >> comment [
 	^ comment
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBEntity >> comment: anObject [
 	comment := anObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FmxMBEntity >> initialize [
 
 	super initialize.	
@@ -56,61 +58,61 @@ FmxMBEntity >> initialize [
 	isRemote := false.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBEntity >> isRemote [ 
 
 	^ isRemote
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBEntity >> isRemote: anObject [
 	isRemote := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBEntity >> name [
 	^ name
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBEntity >> name: anObject [
 	name := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBEntity >> navigationGroups [
 	^ navigationGroups
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBEntity >> navigationGroups: anObject [
 	<ignoreForCoverage>
 	navigationGroups := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBEntity >> remoteBuilder [
 
 	^ self additionalProperties at: #remoteBuilder ifAbsent: [ nil ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBEntity >> remoteBuilder: aRemoteBuilder [
 
 	self additionalProperties at: #remoteBuilder put: aRemoteBuilder
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBEntity >> willGenerate [
 	^ willGenerate
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBEntity >> willGenerate: anObject [
 	willGenerate := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FmxMBEntity >> withNavigationOf: aRelation [
 
 	self navigationGroups add: (FmxMBNavigationGroup new 
@@ -120,7 +122,7 @@ FmxMBEntity >> withNavigationOf: aRelation [
 		yourself).
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FmxMBEntity >> withoutNavigation [
 	navigationGroups := Set new.
 ]

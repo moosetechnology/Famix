@@ -11,12 +11,12 @@
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `incomingReferences` | `FamixTReferenceable` | `referredEntity` | `FamixTReference` | References to this entity by other entities.|
+| `incomingTypings` | `FamixTType` | `declaredType` | `FamixTEntityTyping` | Relations to the entities that have this as type.|
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
-| `typedEntities` | `FamixTType` | `declaredType` | `FamixTTypedEntity` | Entities that have this type as declaredType|
 
 
 ## Properties
@@ -29,14 +29,16 @@
 
 "
 Class {
-	#name : #FamixTest3Type,
-	#superclass : #FamixTest3NamedEntity,
+	#name : 'FamixTest3Type',
+	#superclass : 'FamixTest3NamedEntity',
 	#traits : 'FamixTType',
 	#classTraits : 'FamixTType classTrait',
-	#category : #'Famix-Test3-Entities-Entities'
+	#category : 'Famix-Test3-Entities-Entities',
+	#package : 'Famix-Test3-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTest3Type class >> annotation [
 
 	<FMClass: #Type super: #FamixTest3NamedEntity>
@@ -45,7 +47,7 @@ FamixTest3Type class >> annotation [
 	^ self
 ]
 
-{ #category : #groups }
+{ #category : 'groups' }
 FamixTest3Type class >> annotationFamixTest3TypeGroup [
 	<generated>
 	<mooseGroup>

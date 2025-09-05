@@ -1,10 +1,12 @@
 Class {
-	#name : #FmxMBRelationSidesCombinationsTest,
-	#superclass : #FmxMBTestCase,
-	#category : #'Famix-MetamodelBuilder-Tests'
+	#name : 'FmxMBRelationSidesCombinationsTest',
+	#superclass : 'FmxMBTestCase',
+	#category : 'Famix-MetamodelBuilder-Tests-Tests',
+	#package : 'Famix-MetamodelBuilder-Tests',
+	#tag : 'Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBRelationSidesCombinationsTest >> testClassToClass [
 
 	"test simple relation between class and class"
@@ -31,7 +33,7 @@ FmxMBRelationSidesCombinationsTest >> testClassToClass [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBRelationSidesCombinationsTest >> testClassToTrait [
 
 	"test simple relation between class and trait"
@@ -55,7 +57,7 @@ FmxMBRelationSidesCombinationsTest >> testClassToTrait [
 		equals: 'FMOne type: #TstNamed opposite: #access'.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBRelationSidesCombinationsTest >> testTraitToClass [
 
 	"test simple relation between class and trait"
@@ -79,7 +81,7 @@ FmxMBRelationSidesCombinationsTest >> testTraitToClass [
 		equals: 'FMOne type: #TstTNamedEntity opposite: #access'.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBRelationSidesCombinationsTest >> testTraitToTrait [
 
 	"test simple relation between trait and trait"

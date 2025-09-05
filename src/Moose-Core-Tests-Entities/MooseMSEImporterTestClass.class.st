@@ -23,6 +23,7 @@
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `incomingReferences` | `FamixTReferenceable` | `referredEntity` | `FamixTReference` | References to this entity by other entities.|
+| `incomingTypings` | `FamixTType` | `declaredType` | `FamixTEntityTyping` | Relations to the entities that have this as type.|
 | `subInheritances` | `FamixTWithInheritances` | `superclass` | `FamixTInheritance` | Subinheritance relationships, i.e. known subclasses of this type.|
 
 ### Other
@@ -30,7 +31,6 @@
 |---|
 | `receivingInvocations` | `FamixTInvocationsReceiver` | `receiver` | `FamixTInvocation` | List of invocations performed on this entity (considered as the receiver)|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
-| `typedEntities` | `FamixTType` | `declaredType` | `FamixTTypedEntity` | Entities that have this type as declaredType|
 
 
 ## Properties
@@ -43,14 +43,16 @@
 
 "
 Class {
-	#name : #MooseMSEImporterTestClass,
-	#superclass : #MooseMSEImporterTestNamedEntity,
+	#name : 'MooseMSEImporterTestClass',
+	#superclass : 'MooseMSEImporterTestNamedEntity',
 	#traits : 'FamixTClass + FamixTSourceEntity',
 	#classTraits : 'FamixTClass classTrait + FamixTSourceEntity classTrait',
-	#category : #'Moose-Core-Tests-Entities-Entities'
+	#category : 'Moose-Core-Tests-Entities-Entities',
+	#package : 'Moose-Core-Tests-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 MooseMSEImporterTestClass class >> annotation [
 
 	<FMClass: #Class super: #MooseMSEImporterTestNamedEntity>
@@ -59,11 +61,11 @@ MooseMSEImporterTestClass class >> annotation [
 	^ self
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 MooseMSEImporterTestClass >> mooseNameOn: aStream [
 
 	self typeContainer ifNotNil: [ :parent | 
 		parent mooseNameOn: aStream.
-		aStream nextPutAll: '::' ].
+		aStream nextPutAll: '.' ].
 	self name ifNotNil: [ :n | aStream nextPutAll: n ]
 ]

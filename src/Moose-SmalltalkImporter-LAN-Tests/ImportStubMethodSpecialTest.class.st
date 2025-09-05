@@ -2,15 +2,16 @@
 A special ctest class for importing stub methods, because by defualt they are not imported and therefore, we need to have a special setup here
 "
 Class {
-	#name : #ImportStubMethodSpecialTest,
-	#superclass : #TestCase,
+	#name : 'ImportStubMethodSpecialTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'model'
 	],
-	#category : #'Moose-SmalltalkImporter-LAN-Tests'
+	#category : 'Moose-SmalltalkImporter-LAN-Tests',
+	#package : 'Moose-SmalltalkImporter-LAN-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 ImportStubMethodSpecialTest >> setUp [
 
 	| importingTask |
@@ -24,17 +25,17 @@ ImportStubMethodSpecialTest >> setUp [
 	model := importingTask model
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 ImportStubMethodSpecialTest >> testStubMethodCreation [
 	self denyEmpty: (model allMethods select: #isStub).
 	self denyEmpty: model allModelMethods
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 ImportStubMethodSpecialTest >> testStubParentsAreInMooseModel [
 
 	| method class |
-	method := model entityNamed: #'Smalltalk::False.ifTrue:(Object)'.
+	method := model entityNamed: #'Smalltalk.False.ifTrue:(Object)'.
 	self assert: method mooseModel isNotNil.
 	self assert: method isStub.
 

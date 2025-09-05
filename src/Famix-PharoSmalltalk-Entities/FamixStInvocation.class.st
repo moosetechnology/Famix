@@ -30,14 +30,16 @@
 
 "
 Class {
-	#name : #FamixStInvocation,
-	#superclass : #FamixStEntity,
+	#name : 'FamixStInvocation',
+	#superclass : 'FamixStEntity',
 	#traits : 'FamixTInvocation',
 	#classTraits : 'FamixTInvocation classTrait',
-	#category : #'Famix-PharoSmalltalk-Entities-Entities'
+	#category : 'Famix-PharoSmalltalk-Entities-Entities',
+	#package : 'Famix-PharoSmalltalk-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixStInvocation class >> annotation [
 
 	<FMClass: #Invocation super: #FamixStEntity>
@@ -46,18 +48,9 @@ FamixStInvocation class >> annotation [
 	^ self
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FamixStInvocation >> initialize [
 
 	super initialize.
 	signature := 'nosignature'.
-]
-
-{ #category : #'instance creation' }
-FamixStInvocation >> isASureInvocation [
-	"Test if the receiver (an invocation) is sure (i.e. we know for sure the class of the invocation's receiver)"
-
-	| invoRVar |
-	invoRVar := self receiver.
-	^ invoRVar isNotNil and: [ invoRVar class = FamixStClass or: [ invoRVar isImplicitVariable and: [ invoRVar isSelf or: [ invoRVar isSuper ] ] ] ]
 ]

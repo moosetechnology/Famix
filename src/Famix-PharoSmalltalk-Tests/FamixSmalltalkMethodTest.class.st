@@ -1,6 +1,6 @@
 Class {
-	#name : #FamixSmalltalkMethodTest,
-	#superclass : #TestCase,
+	#name : 'FamixSmalltalkMethodTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'model',
 		'c1',
@@ -14,10 +14,11 @@ Class {
 		'anchor3',
 		'package'
 	],
-	#category : #'Famix-PharoSmalltalk-Tests'
+	#category : 'Famix-PharoSmalltalk-Tests',
+	#package : 'Famix-PharoSmalltalk-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 FamixSmalltalkMethodTest >> setUp [
 	super setUp.
 
@@ -43,7 +44,7 @@ FamixSmalltalkMethodTest >> setUp [
 	m3 sourceAnchor: anchor3
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixSmalltalkMethodTest >> testMetricsForStubMethods [
 	| stubMethod notExistingMetricValue |
 	stubMethod := FamixStMethod new
@@ -64,7 +65,7 @@ FamixSmalltalkMethodTest >> testMetricsForStubMethods [
 		equals: notExistingMetricValue
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixSmalltalkMethodTest >> testNumberOfMethodProtocols [
 
 	m1 protocol: #accessing.
@@ -74,7 +75,7 @@ FamixSmalltalkMethodTest >> testNumberOfMethodProtocols [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixSmalltalkMethodTest >> testOverride [
 	| newM1 |
 	newM1 := FamixStMethod named: 'method1'.
@@ -88,7 +89,7 @@ FamixSmalltalkMethodTest >> testOverride [
 	self assert: m1 isOverridden
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixSmalltalkMethodTest >> testProtocol [
 
 	self assert: m1 protocol isNil.

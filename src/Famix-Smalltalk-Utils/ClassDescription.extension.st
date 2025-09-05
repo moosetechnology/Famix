@@ -1,6 +1,6 @@
-Extension { #name : #ClassDescription }
+Extension { #name : 'ClassDescription' }
 
-{ #category : #'*Famix-Smalltalk-Utils' }
+{ #category : '*Famix-Smalltalk-Utils' }
 ClassDescription >> @ aSymbol [
 	"TheRoot@#TheRootSharedVariable"
 

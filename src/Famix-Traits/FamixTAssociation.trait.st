@@ -31,17 +31,19 @@ will produce two invocation associations first from method a to method b, and se
 
 "
 Trait {
-	#name : #FamixTAssociation,
+	#name : 'FamixTAssociation',
 	#instVars : [
 		'#next => FMOne type: #FamixTAssociation opposite: #previous',
 		'#previous => FMOne type: #FamixTAssociation opposite: #next'
 	],
 	#traits : 'FamixTSourceEntity + TAssociationMetaLevelDependency',
 	#classTraits : 'FamixTSourceEntity classTrait + TAssociationMetaLevelDependency classTrait',
-	#category : #'Famix-Traits-Association'
+	#category : 'Famix-Traits-Association',
+	#package : 'Famix-Traits',
+	#tag : 'Association'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTAssociation classSide >> annotation [
 
 	<FMClass: #TAssociation super: #Object>
@@ -50,7 +52,7 @@ FamixTAssociation classSide >> annotation [
 	^ self
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 FamixTAssociation classSide >> source: anEntity target: anotherEntity [
 	^ self new
 		source: anEntity;
@@ -58,14 +60,21 @@ FamixTAssociation classSide >> source: anEntity target: anotherEntity [
 		yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 FamixTAssociation classSide >> source: anEntity target: anotherEntity model: aMooseModel [
 	^ (self source: anEntity target: anotherEntity)
 		mooseModel: aMooseModel;
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'visitor' }
+FamixTAssociation >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTAssociation: self
+]
+
+{ #category : 'accessing' }
 FamixTAssociation >> allTargets [
 	"Since #target can return an entity or a collection, I ensure we always get a collection."
 
@@ -76,17 +85,17 @@ FamixTAssociation >> allTargets [
 		  ifFalse: [ OrderedCollection with: tempTarget ]
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 FamixTAssociation >> asAssociationFrom: anEntity [
 	^ self
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 FamixTAssociation >> asAssociationTo: anEntity [
 	^ self
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixTAssociation >> displayFullStringOn: aStream [
 
 	self source displayFullStringOn: aStream.
@@ -94,7 +103,7 @@ FamixTAssociation >> displayFullStringOn: aStream [
 	self target displayFullStringOn: aStream
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixTAssociation >> displayStringOn: aStream [
 
 	self source displayStringOn: aStream.
@@ -102,14 +111,14 @@ FamixTAssociation >> displayStringOn: aStream [
 	self target displayStringOn: aStream
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTAssociation >> isAssociation [
 
 	<generated>
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAssociation >> next [
 	"Relation named: #next type: #FamixTAssociation opposite: #previous"
 
@@ -119,14 +128,14 @@ FamixTAssociation >> next [
 	^ next
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAssociation >> next: anObject [
 
 	<generated>
 	next := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAssociation >> previous [
 	"Relation named: #previous type: #FamixTAssociation opposite: #next"
 
@@ -135,29 +144,29 @@ FamixTAssociation >> previous [
 	^ previous
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAssociation >> previous: anObject [
 
 	<generated>
 	previous := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAssociation >> source [
 	^ self sourceSelector value: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAssociation >> source: aSource [
 	self perform: (self sourceSelector , ':') with: aSource
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAssociation >> target [
 	^ self targetSelector value: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAssociation >> target: aTarget [
 	self perform: (self targetSelector , ':') with: aTarget
 ]

@@ -23,14 +23,16 @@
 
 "
 Class {
-	#name : #FamixTest3Package,
-	#superclass : #FamixTest3Entity,
+	#name : 'FamixTest3Package',
+	#superclass : 'FamixTest3Entity',
 	#traits : 'FamixTPackage',
 	#classTraits : 'FamixTPackage classTrait',
-	#category : #'Famix-Test3-Entities-Entities'
+	#category : 'Famix-Test3-Entities-Entities',
+	#package : 'Famix-Test3-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTest3Package class >> annotation [
 
 	<FMClass: #Package super: #FamixTest3Entity>

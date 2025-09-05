@@ -1,10 +1,12 @@
 Class {
-	#name : #FamixStEntity,
-	#superclass : #MooseEntity,
-	#category : #'Famix-PharoSmalltalk-Entities-Entities'
+	#name : 'FamixStEntity',
+	#superclass : 'MooseEntity',
+	#category : 'Famix-PharoSmalltalk-Entities-Entities',
+	#package : 'Famix-PharoSmalltalk-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixStEntity class >> annotation [
 
 	<FMClass: #Entity super: #MooseEntity>
@@ -14,151 +16,158 @@ FamixStEntity class >> annotation [
 	^ self
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixStEntity class >> isAbstract [
 
 	<generated>
 	^ self == FamixStEntity
 ]
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixStEntity class >> metamodel [
 
 	<generated>
 	^ FamixStModel metamodel
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixStEntity >> isAccess [
 
 	<generated>
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixStEntity >> isAssociation [
 
 	<generated>
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixStEntity >> isAttribute [
 
 	<generated>
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixStEntity >> isBehavioural [
 
 	<generated>
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixStEntity >> isClass [
 
 	<generated>
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
+FamixStEntity >> isComment [
+
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
 FamixStEntity >> isGlobalVariable [
 
 	<generated>
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixStEntity >> isImplicitVariable [
 
 	<generated>
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixStEntity >> isInheritance [
 
 	<generated>
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixStEntity >> isInvocation [
 
 	<generated>
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixStEntity >> isLocalVariable [
 
 	<generated>
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixStEntity >> isMethod [
 
 	<generated>
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixStEntity >> isNamedEntity [
 
 	<generated>
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixStEntity >> isNamespace [
 
 	<generated>
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixStEntity >> isPackage [
 
 	<generated>
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixStEntity >> isParametricEntity [
 
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixStEntity >> isQueryable [
 
 	<generated>
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixStEntity >> isReference [
 
 	<generated>
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixStEntity >> isSharedVariable [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixStEntity >> isStructuralEntity [
 
 	<generated>
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixStEntity >> isType [
 
 	<generated>

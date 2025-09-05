@@ -11,14 +11,16 @@
 
 "
 Trait {
-	#name : #FamixTWithImplicitVariables,
+	#name : 'FamixTWithImplicitVariables',
 	#instVars : [
 		'#implicitVariables => FMMany type: #FamixTImplicitVariable opposite: #parentBehaviouralEntity'
 	],
-	#category : #'Famix-Traits-ImplicitVariable'
+	#category : 'Famix-Traits-ImplicitVariable',
+	#package : 'Famix-Traits',
+	#tag : 'ImplicitVariable'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTWithImplicitVariables classSide >> annotation [
 
 	<FMClass: #TWithImplicitVariables super: #Object>
@@ -27,12 +29,19 @@ FamixTWithImplicitVariables classSide >> annotation [
 	^ self
 ]
 
-{ #category : #adding }
+{ #category : 'visitor' }
+FamixTWithImplicitVariables >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTWithImplicitVariables: self
+]
+
+{ #category : 'adding' }
 FamixTWithImplicitVariables >> addImplicitVariable: anImplicitVariable [
 	implicitVariables add: anImplicitVariable
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithImplicitVariables >> implicitVariables [
 	"Relation named: #implicitVariables type: #FamixTImplicitVariable opposite: #parentBehaviouralEntity"
 
@@ -42,7 +51,7 @@ FamixTWithImplicitVariables >> implicitVariables [
 	^ implicitVariables
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithImplicitVariables >> implicitVariables: anObject [
 
 	<generated>

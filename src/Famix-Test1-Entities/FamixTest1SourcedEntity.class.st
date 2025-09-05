@@ -13,14 +13,16 @@
 
 "
 Class {
-	#name : #FamixTest1SourcedEntity,
-	#superclass : #FamixTest1Entity,
+	#name : 'FamixTest1SourcedEntity',
+	#superclass : 'FamixTest1Entity',
 	#traits : 'FamixTSourceEntity + FamixTWithFiles + FamixTWithSourceLanguages',
 	#classTraits : 'FamixTSourceEntity classTrait + FamixTWithFiles classTrait + FamixTWithSourceLanguages classTrait',
-	#category : #'Famix-Test1-Entities-Entities'
+	#category : 'Famix-Test1-Entities-Entities',
+	#package : 'Famix-Test1-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTest1SourcedEntity class >> annotation [
 
 	<FMClass: #SourcedEntity super: #FamixTest1Entity>
@@ -30,7 +32,7 @@ FamixTest1SourcedEntity class >> annotation [
 	^ self
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTest1SourcedEntity class >> isAbstract [
 
 	<generated>

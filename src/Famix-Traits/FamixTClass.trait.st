@@ -29,6 +29,7 @@ A class is typically scoped in a namespace. To model nested or anonymous classes
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `incomingReferences` | `FamixTReferenceable` | `referredEntity` | `FamixTReference` | References to this entity by other entities.|
+| `incomingTypings` | `FamixTType` | `declaredType` | `FamixTEntityTyping` | Relations to the entities that have this as type.|
 | `subInheritances` | `FamixTWithInheritances` | `superclass` | `FamixTInheritance` | Subinheritance relationships, i.e. known subclasses of this type.|
 
 ### Other
@@ -36,7 +37,6 @@ A class is typically scoped in a namespace. To model nested or anonymous classes
 |---|
 | `receivingInvocations` | `FamixTInvocationsReceiver` | `receiver` | `FamixTInvocation` | List of invocations performed on this entity (considered as the receiver)|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
-| `typedEntities` | `FamixTType` | `declaredType` | `FamixTTypedEntity` | Entities that have this type as declaredType|
 
 
 ## Properties
@@ -49,13 +49,15 @@ A class is typically scoped in a namespace. To model nested or anonymous classes
 
 "
 Trait {
-	#name : #FamixTClass,
+	#name : 'FamixTClass',
 	#traits : 'FamixTInvocationsReceiver + (FamixTType - {#queryStaticIncomingAssociations. #queryStaticOutgoingAssociations}) + FamixTWithAttributes + FamixTWithComments + FamixTWithInheritances + FamixTWithMethods',
 	#classTraits : 'FamixTInvocationsReceiver classTrait + FamixTType classTrait + FamixTWithAttributes classTrait + FamixTWithComments classTrait + FamixTWithInheritances classTrait + FamixTWithMethods classTrait',
-	#category : #'Famix-Traits-Class'
+	#category : 'Famix-Traits-Class',
+	#package : 'Famix-Traits',
+	#tag : 'Class'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTClass classSide >> annotation [
 
 	<FMClass: #TClass super: #Object>
@@ -64,14 +66,21 @@ FamixTClass classSide >> annotation [
 	^ self
 ]
 
-{ #category : #groups }
+{ #category : 'groups' }
 FamixTClass classSide >> annotationFamixClassGroup [
 	<generated>
 	<mooseGroup>
 	^ FamixClassGroup
 ]
 
-{ #category : #adding }
+{ #category : 'visitor' }
+FamixTClass >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTClass: self
+]
+
+{ #category : 'adding' }
 FamixTClass >> addFirstMethodsOverriding: aMethod in: aCollection [
 
 	self directSubclasses do: [ :subClass |
@@ -81,7 +90,7 @@ FamixTClass >> addFirstMethodsOverriding: aMethod in: aCollection [
 			ifNone: [ subClass addMethodOverriding: aMethod in: aCollection ] ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 FamixTClass >> addMethodOverriding: aMethod in: aCollection [
 
 	self directSubclasses do: [ :subClass |
@@ -91,14 +100,14 @@ FamixTClass >> addMethodOverriding: aMethod in: aCollection [
 		subClass addMethodOverriding: aMethod in: aCollection ]
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTClass >> addedMethods [
 	| allHierarchyMethodSignatures |
 	allHierarchyMethodSignatures := self allHierarchyMethods collect: #signature.
 	^ self methods reject: [ :each | allHierarchyMethodSignatures includes: each signature ]
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 FamixTClass >> allHierarchyMethods [
 
 	| allHierarchyMethods |
@@ -108,25 +117,23 @@ FamixTClass >> allHierarchyMethods [
 	^ allHierarchyMethods
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 FamixTClass >> allMethods [
 
 	^ self methods , self inheritedMethods 
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 FamixTClass >> inheritedAttributes [
 
 	| inheritedAttrs |
 	inheritedAttrs := OrderedCollection new.
 	self allSuperclassesDo: [ :each |
-		inheritedAttrs addAll: (each isParametricEntity
-				 ifTrue: [ each genericEntity ]
-				 ifFalse: [ each ]) attributes ].
+		inheritedAttrs addAll: each attributes ].
 	^ inheritedAttrs
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 FamixTClass >> inheritedMethods [
 
 	| inheritedMethods |
@@ -141,7 +148,7 @@ FamixTClass >> inheritedMethods [
 	^ inheritedMethods
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 FamixTClass >> inheritedSignatures [
 
 	| inheritedSignatures |
@@ -152,7 +159,7 @@ FamixTClass >> inheritedSignatures [
 	^ inheritedSignatures
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 FamixTClass >> inheritedSignaturesToMethod [
 
 	| inheritedSignaturesToMethod |
@@ -165,20 +172,20 @@ FamixTClass >> inheritedSignaturesToMethod [
 	^ inheritedSignaturesToMethod
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTClass >> isClass [
 
 	<generated>
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTClass >> isObjectClass [
 
 	^ self name = 'Object'
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTClass >> isTestCase [
 	<FMProperty: #isTestCase type: #Boolean>
 	<FMComment: 'True if the method is considered as a test'>
@@ -186,29 +193,28 @@ FamixTClass >> isTestCase [
 	^ self attributeAt: #isTestCase ifAbsent: [ false ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTClass >> isTestCase: aBoolean [
 	^ self attributeAt: #isTestCase put: true
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 FamixTClass >> overriddenMethods [
 
 	^ self methods select: [ :m | self allHierarchyMethods anySatisfy: [ :superMethod | superMethod signature = m signature ] ].
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTClass >> weightOfAClass [
+
 	<FMProperty: #weightOfAClass type: #Number>
+	<FMComment: 'Weight of a class'>
 	<derived>
-	<FMComment: 'Weight of a class'>	
-			
-	^self
-		lookUpPropertyNamed: #weightOfAClass
-		computedAs: [self notExistentMetricValue]
+	^ self attributeAt: #weightOfAClass ifAbsent: [ self notExistentMetricValue ]
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTClass >> weightOfAClass: aNumber [
-	self cacheAt: #weightOfAClass put: aNumber
+
+	self attributeAt: #weightOfAClass put: aNumber
 ]

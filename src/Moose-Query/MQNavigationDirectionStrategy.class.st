@@ -14,48 +14,50 @@ Example
 	MooseQueryAbstractDirectionStrategy fromSymbol: #in
 "
 Class {
-	#name : #MQNavigationDirectionStrategy,
-	#superclass : #Object,
-	#category : #'Moose-Query-Navigating'
+	#name : 'MQNavigationDirectionStrategy',
+	#superclass : 'Object',
+	#category : 'Moose-Query-Navigating',
+	#package : 'Moose-Query',
+	#tag : 'Navigating'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MQNavigationDirectionStrategy class >> determinatingSymbol [
 	"I should return a Symbol representing a direction. For example an Incoming direction will have #in as determinating symbol."
 
 	^ self subclassResponsibility
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MQNavigationDirectionStrategy class >> entityFor: anAssociation [
 	"I should return a a side of the association depending on the direction. For example an Incoming direction will return the source of the associations."
 
 	^ self subclassResponsibility
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'accessing' }
+MQNavigationDirectionStrategy class >> famePropertiesOf: anEntity [
+	^ self subclassResponsibility
+]
+
+{ #category : 'instance creation' }
 MQNavigationDirectionStrategy class >> fromSymbol: aSymbol [
 	"I return the right strategy from a Symbol representing a direction"
 
 	^ self allSubclasses detect: [ :each | each determinatingSymbol = aSymbol ] ifNone: [ self error: 'The symbol passed to the query should be either #in or #out. Here we got ' , aSymbol asString ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MQNavigationDirectionStrategy class >> isAbstract [
 	^ self = MQNavigationDirectionStrategy
 ]
 
-{ #category : #accessing }
-MQNavigationDirectionStrategy class >> msePropertiesOf: anEntity [
-	^ self subclassResponsibility
-]
-
-{ #category : #accessing }
+{ #category : 'accessing' }
 MQNavigationDirectionStrategy class >> queryResultClass [
 	^ self subclassResponsibility
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MQNavigationDirectionStrategy class >> strategies [
 	^ self allSubclasses reject: #isAbstract
 ]

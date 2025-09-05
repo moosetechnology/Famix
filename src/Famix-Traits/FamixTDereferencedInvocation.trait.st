@@ -37,16 +37,18 @@ It has a referencer which is the pointer variable
 
 "
 Trait {
-	#name : #FamixTDereferencedInvocation,
+	#name : 'FamixTDereferencedInvocation',
 	#instVars : [
 		'#referencer => FMOne type: #FamixTWithDereferencedInvocations opposite: #dereferencedInvocations'
 	],
 	#traits : 'FamixTInvocation',
 	#classTraits : 'FamixTInvocation classTrait',
-	#category : #'Famix-Traits-DereferencedInvocation'
+	#category : 'Famix-Traits-DereferencedInvocation',
+	#package : 'Famix-Traits',
+	#tag : 'DereferencedInvocation'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTDereferencedInvocation classSide >> annotation [
 
 	<FMClass: #TDereferencedInvocation super: #Object>
@@ -55,7 +57,14 @@ FamixTDereferencedInvocation classSide >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'visitor' }
+FamixTDereferencedInvocation >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTDereferencedInvocation: self
+]
+
+{ #category : 'accessing' }
 FamixTDereferencedInvocation >> referencer [
 	"Relation named: #referencer type: #FamixTWithDereferencedInvocations opposite: #dereferencedInvocations"
 
@@ -64,7 +73,7 @@ FamixTDereferencedInvocation >> referencer [
 	^ referencer
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTDereferencedInvocation >> referencer: anObject [
 
 	<generated>

@@ -1,40 +1,37 @@
 Class {
-	#name : #FamixMetamodelGenerateRemoteAccessorTraitTestGeneratorB,
-	#superclass : #FamixMetamodelGenerator,
+	#name : 'FamixMetamodelGenerateRemoteAccessorTraitTestGeneratorB',
+	#superclass : 'FamixTestGenerator',
 	#instVars : [
 		'traitB',
 		'traitA',
 		'classA',
 		'classB'
 	],
-	#category : #'Famix-MetamodelBuilder-Tests-GeneratorRessources'
+	#category : 'Famix-MetamodelBuilder-Tests-GeneratorRessources',
+	#package : 'Famix-MetamodelBuilder-Tests',
+	#tag : 'GeneratorRessources'
 }
 
-{ #category : #testing }
-FamixMetamodelGenerateRemoteAccessorTraitTestGeneratorB class >> isRealMetamodel [
-	^ false
-]
-
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetamodelGenerateRemoteAccessorTraitTestGeneratorB class >> packageName [
 
 	<ignoreForCoverage>
 	^ 'Famix-MetamodelBuilder-TestsTraitsResources-B'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetamodelGenerateRemoteAccessorTraitTestGeneratorB class >> prefix [
 
 <ignoreForCoverage>
 	^ #FmxTraitsTestGenerateAccessorB
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMetamodelGenerateRemoteAccessorTraitTestGeneratorB class >> submetamodels [
 	^ { FamixMetamodelGenerateRemoteAccessorTraitTestGeneratorA }
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixMetamodelGenerateRemoteAccessorTraitTestGeneratorB >> defineClasses [
 	super defineClasses.
 	
@@ -42,7 +39,7 @@ FamixMetamodelGenerateRemoteAccessorTraitTestGeneratorB >> defineClasses [
 	classB := builder newClassNamed: #ClassB.
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixMetamodelGenerateRemoteAccessorTraitTestGeneratorB >> defineHierarchy [
 	super defineHierarchy.
 	
@@ -50,14 +47,14 @@ FamixMetamodelGenerateRemoteAccessorTraitTestGeneratorB >> defineHierarchy [
 	classB --|> traitB.
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixMetamodelGenerateRemoteAccessorTraitTestGeneratorB >> defineRelations [
 	super defineRelations.
 
 	(traitA property: #relationToB) - (traitB property: #relationToA).
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixMetamodelGenerateRemoteAccessorTraitTestGeneratorB >> defineTraits [
 	super defineTraits.
 	traitB := builder newTraitNamed: #TraitB.

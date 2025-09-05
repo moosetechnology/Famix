@@ -11,14 +11,16 @@
 
 "
 Trait {
-	#name : #FamixTWithComments,
+	#name : 'FamixTWithComments',
 	#instVars : [
 		'#comments => FMMany type: #FamixTComment opposite: #commentedEntity'
 	],
-	#category : #'Famix-Traits-Comment'
+	#category : 'Famix-Traits-Comment',
+	#package : 'Famix-Traits',
+	#tag : 'Comment'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTWithComments classSide >> annotation [
 
 	<FMClass: #TWithComments super: #Object>
@@ -27,14 +29,21 @@ FamixTWithComments classSide >> annotation [
 	^ self
 ]
 
-{ #category : #removing }
+{ #category : 'visitor' }
+FamixTWithComments >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTWithComments: self
+]
+
+{ #category : 'removing' }
 FamixTWithComments >> addComment: aComment [
 	self flag: #todo.	"Cyril: Remove next check after some time. This is for a transition. 10 august 2019."
 	aComment isString ifTrue: [ self error: 'It is not possible to add a string as a comment anymore. Please create a comment entity to add.' ].
 	self comments add: aComment
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithComments >> comments [
 	"Relation named: #comments type: #FamixTComment opposite: #commentedEntity"
 
@@ -44,14 +53,14 @@ FamixTWithComments >> comments [
 	^ comments
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithComments >> comments: anObject [
 
 	<generated>
 	comments value: anObject
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTWithComments >> hasComments [
 	<FMProperty: #hasComments type: #Boolean>
 	<derived>
@@ -59,21 +68,22 @@ FamixTWithComments >> hasComments [
 	^ self comments isNotEmpty
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithComments >> numberOfComments [
 
 	<FMProperty: #numberOfComments type: #Number>
 	<derived>
-	<FMComment: 'The number of comments in the entity. Does not count comments of children entities (for example, for a class, I will count the comments associated to the class and not the methods or arguments.'>
-	^ self lookUpPropertyNamed: #numberOfComments computedAs: [ self comments size ]
+	<FMComment:
+	'The number of comments in the entity. Does not count comments of children entities (for example, for a class, I will count the comments associated to the class and not the methods or arguments.'>
+	^ self cacheAt: #numberOfComments ifAbsent: [ self comments size ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithComments >> numberOfComments: aNumber [
 	self cacheAt: #numberOfComments put: aNumber
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 FamixTWithComments >> removeComment: aComment [
 	self comments remove: aComment
 ]

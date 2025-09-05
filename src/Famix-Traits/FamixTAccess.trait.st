@@ -42,7 +42,7 @@ For each access in the source code, there is one famix access created even if it
 
 "
 Trait {
-	#name : #FamixTAccess,
+	#name : 'FamixTAccess',
 	#instVars : [
 		'#accessor => FMOne type: #FamixTWithAccesses opposite: #accesses',
 		'#candidates => FMMany type: #FamixTAccessible opposite: #incomingAccesses',
@@ -50,10 +50,12 @@ Trait {
 	],
 	#traits : 'FamixTAssociation',
 	#classTraits : 'FamixTAssociation classTrait',
-	#category : #'Famix-Traits-Access'
+	#category : 'Famix-Traits-Access',
+	#package : 'Famix-Traits',
+	#tag : 'Access'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTAccess classSide >> annotation [
 
 	<FMClass: #TAccess super: #Object>
@@ -62,7 +64,14 @@ FamixTAccess classSide >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'visitor' }
+FamixTAccess >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTAccess: self
+]
+
+{ #category : 'accessing' }
 FamixTAccess >> accessor [
 	"Relation named: #accessor type: #FamixTWithAccesses opposite: #accesses"
 
@@ -72,7 +81,7 @@ FamixTAccess >> accessor [
 	^ accessor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAccess >> accessor: anObject [
 
 	<generated>
@@ -123,14 +132,14 @@ FamixTAccess >> displayStringOn: aStream [
 	accessor displayStringOn: aStream
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTAccess >> isAccess [
 
 	<generated>
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAccess >> isRead [
 	<FMProperty: #isRead type: #Boolean>
 	<derived>
@@ -138,7 +147,7 @@ FamixTAccess >> isRead [
 	^ isWrite ifNil: [ false ] ifNotNil: [ isWrite not ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAccess >> isReadWriteUnknown [
 	<FMProperty: #isReadWriteUnknown type: #Boolean> <derived>
 	<FMComment: ''>
@@ -146,7 +155,7 @@ FamixTAccess >> isReadWriteUnknown [
 	^ isWrite isNil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAccess >> isWrite [
 
 	<FMProperty: #isWrite type: #Boolean>
@@ -154,13 +163,13 @@ FamixTAccess >> isWrite [
 	^ isWrite ifNil: [ false ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAccess >> isWrite: anObject [
 	<generated>
 	isWrite := anObject
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixTAccess >> printOn: aStream [
 	super printOn: aStream.
 	aStream nextPutAll: ' (Access)'

@@ -13,14 +13,16 @@ I can be the source of an implementation (cf a class implementing an Interface)
 
 "
 Trait {
-	#name : #FamixTCanImplement,
+	#name : 'FamixTCanImplement',
 	#instVars : [
 		'#interfaceImplementations => FMMany type: #FamixTImplementation opposite: #implementingClass'
 	],
-	#category : #'Famix-Traits-Implementation'
+	#category : 'Famix-Traits-Implementation',
+	#package : 'Famix-Traits',
+	#tag : 'Implementation'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTCanImplement classSide >> annotation [
 
 	<FMClass: #TCanImplement super: #Object>
@@ -29,20 +31,35 @@ FamixTCanImplement classSide >> annotation [
 	^ self
 ]
 
-{ #category : #adding }
+{ #category : 'visitor' }
+FamixTCanImplement >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTCanImplement: self
+]
+
+{ #category : 'adding' }
 FamixTCanImplement >> addInterfaceImplementation: anObject [
 	<generated>
 	^ self interfaceImplementations add: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'enumerating' }
+FamixTCanImplement >> allImplementedInterfacesDo: aBlock [
+
+	self interfaceImplementations do: [ :implementation |
+			aBlock value: implementation interface.
+			implementation interface allSuperclassesDo: aBlock ]
+]
+
+{ #category : 'accessing' }
 FamixTCanImplement >> directImplementedInterfaces [
 
 	^ self interfaceImplementations collect: [ :implementation |
 		  implementation interface ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTCanImplement >> interfaceImplementations [
 	"Relation named: #interfaceImplementations type: #FamixTImplementation opposite: #implementingClass"
 
@@ -52,7 +69,7 @@ FamixTCanImplement >> interfaceImplementations [
 	^ interfaceImplementations
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTCanImplement >> interfaceImplementations: anObject [
 
 	<generated>

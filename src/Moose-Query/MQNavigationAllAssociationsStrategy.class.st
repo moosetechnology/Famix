@@ -6,12 +6,14 @@ I am a stategy (Strategy Design Pattern) used in Navigation queries to define th
 
 "
 Class {
-	#name : #MQNavigationAllAssociationsStrategy,
-	#superclass : #MQNavigationAssociationSelectionStrategy,
-	#category : #'Moose-Query-Navigating'
+	#name : 'MQNavigationAllAssociationsStrategy',
+	#superclass : 'MQNavigationAssociationSelectionStrategy',
+	#category : 'Moose-Query-Navigating',
+	#package : 'Moose-Query',
+	#tag : 'Navigating'
 }
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 MQNavigationAllAssociationsStrategy >> selectAssociationsIn: aCollection [
 	^ aCollection
 ]

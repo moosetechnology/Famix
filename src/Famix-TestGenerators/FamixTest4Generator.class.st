@@ -1,6 +1,6 @@
 Class {
-	#name : #FamixTest4Generator,
-	#superclass : #FamixMetamodelGenerator,
+	#name : 'FamixTest4Generator',
+	#superclass : 'FamixMetamodelGenerator',
 	#instVars : [
 		'book',
 		'person',
@@ -17,22 +17,23 @@ Class {
 		'computer',
 		'desk'
 	],
-	#category : #'Famix-TestGenerators'
+	#category : 'Famix-TestGenerators',
+	#package : 'Famix-TestGenerators'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest4Generator class >> packageName [
 
 	^ #'Famix-Test4-Entities'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest4Generator class >> prefix [
 
 	^ #'FamixTest4'
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixTest4Generator >> adoptBuilder: aBuilder [
 
 	super adoptBuilder: aBuilder.
@@ -40,7 +41,7 @@ FamixTest4Generator >> adoptBuilder: aBuilder [
 	aBuilder configuration navigationForNonContainers: true.
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixTest4Generator >> defineClasses [
 
 	super defineClasses.
@@ -56,7 +57,7 @@ FamixTest4Generator >> defineClasses [
 	cafeteria := builder newClassNamed: #Cafeteria
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixTest4Generator >> defineHierarchy [
 	super defineHierarchy.
 
@@ -67,7 +68,7 @@ FamixTest4Generator >> defineHierarchy [
 	cafeteria --|> room
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixTest4Generator >> defineProperties [
 
 	super defineProperties.
@@ -83,7 +84,7 @@ FamixTest4Generator >> defineProperties [
 	book withEqualityCheckOn: { #id }
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixTest4Generator >> defineRelations [
 
 	super defineRelations.

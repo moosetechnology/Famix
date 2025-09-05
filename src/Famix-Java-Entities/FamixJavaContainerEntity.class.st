@@ -12,14 +12,16 @@
 
 "
 Class {
-	#name : #FamixJavaContainerEntity,
-	#superclass : #FamixJavaNamedEntity,
+	#name : 'FamixJavaContainerEntity',
+	#superclass : 'FamixJavaNamedEntity',
 	#traits : 'FamixJavaTWithInterfaces + FamixTWithAnnotationTypes + FamixTWithClasses',
 	#classTraits : 'FamixJavaTWithInterfaces classTrait + FamixTWithAnnotationTypes classTrait + FamixTWithClasses classTrait',
-	#category : #'Famix-Java-Entities-Entities'
+	#category : 'Famix-Java-Entities-Entities',
+	#package : 'Famix-Java-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixJavaContainerEntity class >> annotation [
 
 	<FMClass: #ContainerEntity super: #FamixJavaNamedEntity>
@@ -29,20 +31,27 @@ FamixJavaContainerEntity class >> annotation [
 	^ self
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixJavaContainerEntity class >> isAbstract [
 
 	<generated>
 	^ self == FamixJavaContainerEntity
 ]
 
-{ #category : #adding }
+{ #category : 'visitor' }
+FamixJavaContainerEntity >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaContainerEntity: self
+]
+
+{ #category : 'adding' }
 FamixJavaContainerEntity >> addClass: aClass [
 	
 	types add: aClass
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixJavaContainerEntity >> addInterface: anInterface [
 	
 	types add: anInterface

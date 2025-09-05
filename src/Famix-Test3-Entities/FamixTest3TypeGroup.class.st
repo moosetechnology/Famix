@@ -1,10 +1,12 @@
 Class {
-	#name : #FamixTest3TypeGroup,
-	#superclass : #MooseSpecializedGroup,
-	#category : #'Famix-Test3-Entities-Entities'
+	#name : 'FamixTest3TypeGroup',
+	#superclass : 'MooseSpecializedGroup',
+	#category : 'Famix-Test3-Entities-Entities',
+	#package : 'Famix-Test3-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTest3TypeGroup class >> annotation [
 
 	<FMClass: #TypeGroup super: #MooseSpecializedGroup>
@@ -13,105 +15,112 @@ FamixTest3TypeGroup class >> annotation [
 	^ self
 ]
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTest3TypeGroup class >> metamodel [
 
 	<generated>
 	^ FamixTest3Model metamodel
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTest3TypeGroup >> isAccess [
 
 	<generated>
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTest3TypeGroup >> isAssociation [
 
 	<generated>
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTest3TypeGroup >> isAttribute [
 
 	<generated>
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTest3TypeGroup >> isBehavioural [
 
 	<generated>
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTest3TypeGroup >> isClass [
 
 	<generated>
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
+FamixTest3TypeGroup >> isComment [
+
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
 FamixTest3TypeGroup >> isInvocation [
 
 	<generated>
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTest3TypeGroup >> isMethod [
 
 	<generated>
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTest3TypeGroup >> isNamedEntity [
 
 	<generated>
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTest3TypeGroup >> isPackage [
 
 	<generated>
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTest3TypeGroup >> isParametricEntity [
 
 	<generated>
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTest3TypeGroup >> isQueryable [
 
 	<generated>
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTest3TypeGroup >> isReference [
 
 	<generated>
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTest3TypeGroup >> isStructuralEntity [
 
 	<generated>
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTest3TypeGroup >> isType [
 
 	<generated>

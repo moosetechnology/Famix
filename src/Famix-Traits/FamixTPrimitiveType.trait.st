@@ -11,12 +11,12 @@
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `incomingReferences` | `FamixTReferenceable` | `referredEntity` | `FamixTReference` | References to this entity by other entities.|
+| `incomingTypings` | `FamixTType` | `declaredType` | `FamixTEntityTyping` | Relations to the entities that have this as type.|
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
-| `typedEntities` | `FamixTType` | `declaredType` | `FamixTTypedEntity` | Entities that have this type as declaredType|
 
 
 ## Properties
@@ -29,13 +29,15 @@
 
 "
 Trait {
-	#name : #FamixTPrimitiveType,
+	#name : 'FamixTPrimitiveType',
 	#traits : 'FamixTType',
 	#classTraits : 'FamixTType classTrait',
-	#category : #'Famix-Traits-Type'
+	#category : 'Famix-Traits-Type',
+	#package : 'Famix-Traits',
+	#tag : 'Type'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTPrimitiveType classSide >> annotation [
 
 	<FMClass: #TPrimitiveType super: #Object>
@@ -44,7 +46,14 @@ FamixTPrimitiveType classSide >> annotation [
 	^ self
 ]
 
-{ #category : #testing }
+{ #category : 'visitor' }
+FamixTPrimitiveType >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTPrimitiveType: self
+]
+
+{ #category : 'testing' }
 FamixTPrimitiveType >> isPrimitiveType [
 
 	<generated>

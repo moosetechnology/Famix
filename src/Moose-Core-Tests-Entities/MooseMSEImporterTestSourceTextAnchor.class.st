@@ -17,14 +17,16 @@
 
 "
 Class {
-	#name : #MooseMSEImporterTestSourceTextAnchor,
-	#superclass : #MooseMSEImporterTestSourceAnchor,
+	#name : 'MooseMSEImporterTestSourceTextAnchor',
+	#superclass : 'MooseMSEImporterTestSourceAnchor',
 	#traits : 'FamixTHasImmediateSource',
 	#classTraits : 'FamixTHasImmediateSource classTrait',
-	#category : #'Moose-Core-Tests-Entities-Entities'
+	#category : 'Moose-Core-Tests-Entities-Entities',
+	#package : 'Moose-Core-Tests-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 MooseMSEImporterTestSourceTextAnchor class >> annotation [
 
 	<FMClass: #SourceTextAnchor super: #MooseMSEImporterTestSourceAnchor>

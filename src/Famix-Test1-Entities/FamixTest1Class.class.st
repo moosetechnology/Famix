@@ -26,6 +26,7 @@ This a comment for the Class entity
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `incomingReferences` | `FamixTReferenceable` | `referredEntity` | `FamixTReference` | References to this entity by other entities.|
+| `incomingTypings` | `FamixTType` | `declaredType` | `FamixTEntityTyping` | Relations to the entities that have this as type.|
 | `subInheritances` | `FamixTWithInheritances` | `superclass` | `FamixTInheritance` | Subinheritance relationships, i.e. known subclasses of this type.|
 
 ### Other
@@ -34,7 +35,6 @@ This a comment for the Class entity
 | `declaredSourceLanguage` | `FamixTWithSourceLanguages` | `sourcedEntities` | `FamixTSourceLanguage` | The declared SourceLanguage for the source code of this entity|
 | `receivingInvocations` | `FamixTInvocationsReceiver` | `receiver` | `FamixTInvocation` | List of invocations performed on this entity (considered as the receiver)|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
-| `typedEntities` | `FamixTType` | `declaredType` | `FamixTTypedEntity` | Entities that have this type as declaredType|
 
 
 ## Properties
@@ -47,14 +47,16 @@ This a comment for the Class entity
 
 "
 Class {
-	#name : #FamixTest1Class,
-	#superclass : #FamixTest1NamedEntity,
+	#name : 'FamixTest1Class',
+	#superclass : 'FamixTest1NamedEntity',
 	#traits : 'FamixTClass + FamixTPackageable + FamixTSourceEntity + FamixTWithComments + FamixTWithSourceLanguages',
 	#classTraits : 'FamixTClass classTrait + FamixTPackageable classTrait + FamixTSourceEntity classTrait + FamixTWithComments classTrait + FamixTWithSourceLanguages classTrait',
-	#category : #'Famix-Test1-Entities-Entities'
+	#category : 'Famix-Test1-Entities-Entities',
+	#package : 'Famix-Test1-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTest1Class class >> annotation [
 
 	<FMClass: #Class super: #FamixTest1NamedEntity>

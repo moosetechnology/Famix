@@ -23,6 +23,7 @@
 | `accesses` | `FamixTWithAccesses` | `accessor` | `FamixTAccess` | Accesses to variables made by this behaviour.|
 | `outgoingInvocations` | `FamixTWithInvocations` | `sender` | `FamixTInvocation` | Outgoing invocations sent by this behaviour.|
 | `outgoingReferences` | `FamixTWithReferences` | `referencer` | `FamixTReference` | References from this entity to other entities.|
+| `typing` | `FamixTTypedEntity` | `typedEntity` | `FamixTEntityTyping` | Association linking this entity to its declared type.|
 
 ### Incoming dependencies
 | Relation | Origin | Opposite | Type | Comment |
@@ -33,7 +34,6 @@
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `annotationInstances` | `FamixTWithAnnotationInstances` | `annotatedEntity` | `FamixTAnnotationInstance` | This property corresponds to the set of annotations associated to the entity|
-| `declaredType` | `FamixTTypedEntity` | `typedEntities` | `FamixTType` | Type of the entity, if any|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
 
 
@@ -52,17 +52,19 @@
 
 "
 Class {
-	#name : #FamixStMethod,
-	#superclass : #FamixStNamedEntity,
+	#name : 'FamixStMethod',
+	#superclass : 'FamixStNamedEntity',
 	#traits : 'FamixTCanBeAbstract + FamixTCanBeClassSide + FamixTHasKind + FamixTMethod + FamixTPackageable + FamixTWithAnnotationInstances + FamixTWithAnnotationTypes + FamixTWithComments',
 	#classTraits : 'FamixTCanBeAbstract classTrait + FamixTCanBeClassSide classTrait + FamixTHasKind classTrait + FamixTMethod classTrait + FamixTPackageable classTrait + FamixTWithAnnotationInstances classTrait + FamixTWithAnnotationTypes classTrait + FamixTWithComments classTrait',
 	#instVars : [
 		'#protocol => FMProperty'
 	],
-	#category : #'Famix-PharoSmalltalk-Entities-Entities'
+	#category : 'Famix-PharoSmalltalk-Entities-Entities',
+	#package : 'Famix-PharoSmalltalk-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixStMethod class >> annotation [
 
 	<FMClass: #Method super: #FamixStNamedEntity>
@@ -71,7 +73,7 @@ FamixStMethod class >> annotation [
 	^ self
 ]
 
-{ #category : #'Famix-Extensions-metrics-support' }
+{ #category : 'Famix-Extensions-metrics-support' }
 FamixStMethod >> accessedAttributes [
 	
 	"Returns the set of attributes of my class accessed by me (method). 
@@ -80,7 +82,7 @@ FamixStMethod >> accessedAttributes [
 	^ (self queryOutgoingAccesses opposites withinParentUsing: FamixTClass) asSet select: #isAttribute
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixStMethod >> category [
 	<FMProperty: #category type: #String>
 	<FMComment: 'Category of the method'>
@@ -88,7 +90,7 @@ FamixStMethod >> category [
 	^ self attributeAt: #category ifAbsentPut: [ nil ]
 ]
 
-{ #category : #'Famix-Extensions-metrics-support' }
+{ #category : 'Famix-Extensions-metrics-support' }
 FamixStMethod >> category: aString [
 
 	self attributeAt: #category put: aString
@@ -96,7 +98,7 @@ FamixStMethod >> category: aString [
 	
 ]
 
-{ #category : #'Famix-Extensions-metrics-support' }
+{ #category : 'Famix-Extensions-metrics-support' }
 FamixStMethod >> compiledMethod [
 	"Return the compiled method associated to the receiver or nil"
 	
@@ -105,7 +107,7 @@ FamixStMethod >> compiledMethod [
 	
 ]
 
-{ #category : #'Famix-Extensions-private' }
+{ #category : 'Famix-Extensions-private' }
 FamixStMethod >> computeCyclomaticComplexity [
 
 	^ (self isStub or: [ self smalltalkClass isNil ])
@@ -113,28 +115,28 @@ FamixStMethod >> computeCyclomaticComplexity [
 		ifFalse: [ (RBVisitorForFamixMetrics for: self) cyclomaticNumber ]
 ]
 
-{ #category : #'Famix-Extensions-private' }
+{ #category : 'Famix-Extensions-private' }
 FamixStMethod >> computeNumberOfConditionals [
 	^ self isStub
 		ifTrue: [ self notExistentMetricValue ]
 		ifFalse: [ (RBVisitorForFamixMetrics for: self) numberOfConditionals ]
 ]
 
-{ #category : #'Famix-Extensions-private' }
+{ #category : 'Famix-Extensions-private' }
 FamixStMethod >> computeNumberOfMessageSends [
 	^ self isStub
 		ifTrue: [ self notExistentMetricValue ]
 		ifFalse: [ (RBVisitorForFamixMetrics for: self) numberOfMessageSends ]
 ]
 
-{ #category : #'Famix-Extensions-private' }
+{ #category : 'Famix-Extensions-private' }
 FamixStMethod >> computeNumberOfStatements [
 	^ self isStub
 		ifTrue: [ self notExistentMetricValue ]
 		ifFalse: [ (RBVisitorForFamixMetrics for: self) numberOfStatements ]
 ]
 
-{ #category : #'Famix-Extensions-private' }
+{ #category : 'Famix-Extensions-private' }
 FamixStMethod >> hasEmptyBody [
 	"Copied from FAMIX2.
 	 The closest we can get in FAMIX2 to determine if a body is empty is to check if the method
@@ -147,12 +149,12 @@ FamixStMethod >> hasEmptyBody [
 	^ self numberOfAccesses = 0 and: [ self numberOfOutgoingInvocations = 0 ]
 ]
 
-{ #category : #'Famix-Extensions' }
+{ #category : 'Famix-Extensions' }
 FamixStMethod >> invokedBehaviours [
 	^ self queryAllOutgoingInvocations opposites
 ]
 
-{ #category : #'Famix-Extensions' }
+{ #category : 'Famix-Extensions' }
 FamixStMethod >> invokedMethods [
 	<FMProperty: #invokedMethods type: #FamixStMethod> <derived> <multivalued>
 	<FMComment: 'The methods invoked by the receiver'>
@@ -160,22 +162,24 @@ FamixStMethod >> invokedMethods [
 	^ self invokedBehaviours select: [ :each | each isMethod ]
 ]
 
-{ #category : #'Famix-Extensions-metrics-support' }
+{ #category : 'Famix-Extensions-metrics-support' }
 FamixStMethod >> isCalledInternally [
 	^self incomingInvocations
 		anySatisfy:
 			[:each | each sender isMethod and: [each sender belongsTo == self belongsTo]]
 ]
 
-{ #category : #'Famix-Extensions-metrics-support' }
+{ #category : 'Famix-Extensions-metrics-support' }
 FamixStMethod >> isInitializer [
-	| protocolCond nameCond |
-	protocolCond := self protocol ifNotNil: [ '*initialize*' match: self protocol ] ifNil: [ false ].
-	nameCond := self name ifNotNil: [ '*initialize*' match: self name ] ifNil: [ false ].
-	^ (protocolCond or: nameCond) or: [ self isConstructor ]  
+
+	self protocol ifNotNil: [ :proto | ('*initializ*' match: proto) ifTrue: [ ^ true ] ].
+	
+	self name ifNotNil: [ :na | ('*initialize*' match: na) ifTrue: [ ^ true ] ].
+	
+	^ self isConstructor
 ]
 
-{ #category : #'Famix-Extensions-metrics-support' }
+{ #category : 'Famix-Extensions-metrics-support' }
 FamixStMethod >> isInternalImplementation [
 	<FMProperty: #isInternalImplementation type: #Boolean>
 	<derived>
@@ -185,7 +189,7 @@ FamixStMethod >> isInternalImplementation [
 		and: [ self isPureAccessor not ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixStMethod >> isOverridden [
 	"If we have a stub and we don't have the container, we can't have the information"
 
@@ -198,7 +202,7 @@ FamixStMethod >> isOverridden [
 		anySatisfy: [ :each | each implements: self signature ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixStMethod >> isOverriding [
 	<FMProperty: #isOverriding type: #Boolean>
 	<derived>
@@ -207,87 +211,59 @@ FamixStMethod >> isOverriding [
 		anySatisfy: [ :each | each understands: self signature ]
 ]
 
-{ #category : #'Famix-Extensions-metrics-support' }
-FamixStMethod >> isSurelyInvokedBy: aFAMIXMethod [
-
-	| outgoingInvo |
-	((self isAbstract or: [ aFAMIXMethod isAbstract ]) or: [ 
-		 (outgoingInvo := aFAMIXMethod queryAllOutgoingInvocations) isEmpty ]) 
-		ifFalse: [ 
-			outgoingInvo do: [ :invo | 
-				(invo signature = self signature and: [ invo isASureInvocation ]) 
-					ifTrue: [ 
-						| invocationRVar |
-						invocationRVar := invo getReceivingFamixClass.
-						(invocationRVar isNotNil and: [ 
-							 (invocationRVar lookUp: self signature) = self ]) ifTrue: [ 
-							^ true ] ] ] ].
-	^ false
-]
-
-{ #category : #'Famix-Extensions-private' }
+{ #category : 'Famix-Extensions-private' }
 FamixStMethod >> numberOfAccesses [
+
 	<FMProperty: #numberOfAccesses type: #Number>
 	<derived>
 	<FMComment: 'The number of accesses from a method'>
-	
-	^ self 
-		lookUpPropertyNamed: #numberOfAccesses
-		computedAs: [ self accesses size ]
+	^ self cacheAt: #numberOfAccesses ifAbsent: [ self accesses size ]
 ]
 
-{ #category : #'Famix-Extensions-private' }
+{ #category : 'metrics' }
 FamixStMethod >> numberOfConditionals [
+
 	<FMProperty: #numberOfConditionals type: #Number>
 	<FMComment: 'The number of conditionals in a method'>
-	^ self
-		lookUpPropertyNamed: #numberOfConditionals
-		computedAs: [ self computeNumberOfConditionals ]
+	^ self cacheAt: #numberOfConditionals ifAbsentPut: [ self computeNumberOfConditionals ]
 ]
 
-{ #category : #'Famix-Extensions-private' }
-FamixStMethod >> numberOfConditionals: aNumber [
-	self cacheAt: #numberOfConditionals put: aNumber
-]
-
-{ #category : #'Famix-Extensions-private' }
+{ #category : 'Famix-Extensions-private' }
 FamixStMethod >> numberOfMessageSends [
+
 	<FMProperty: #numberOfMessageSends type: #Number>
 	<derived>
 	<FMComment: 'The number of message from a method'>
-	^ self
-		lookUpPropertyNamed: #numberOfMessageSends
-		computedAs: [ self computeNumberOfMessageSends ]
+	^ self cacheAt: #numberOfMessageSends ifAbsent: [ self computeNumberOfMessageSends ]
 ]
 
-{ #category : #'Famix-Extensions-private' }
+{ #category : 'Famix-Extensions-private' }
 FamixStMethod >> numberOfMessageSends: aNumber [
 	self cacheAt: #numberOfMessageSends put: aNumber
 ]
 
-{ #category : #'Famix-Extensions-private' }
+{ #category : 'Famix-Extensions-private' }
 FamixStMethod >> numberOfStatements [
+
 	<FMProperty: #numberOfStatements type: #Number>
 	<FMComment: 'The number of statements in a method'>
-	^ self
-		lookUpPropertyNamed: #numberOfStatements
-		computedAs: [ self computeNumberOfStatements ]
+	^ self cacheAt: #numberOfStatements ifAbsent: [ self computeNumberOfStatements ]
 ]
 
-{ #category : #protocol }
+{ #category : 'protocol' }
 FamixStMethod >> overriddenMethod [
 "currently does not take into account traits"
 	^ (self parentType superclass ifNotNil: [ :superclass |
 		   superclass lookUp: self signature ]) 
 ]
 
-{ #category : #'Famix-Extensions-metrics-support' }
+{ #category : 'Famix-Extensions-metrics-support' }
 FamixStMethod >> printProtocol [
 
 	^ '" ' , self protocol , ' "' , String cr
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixStMethod >> protocol [
 
 	<FMProperty: #protocol type: #String>
@@ -296,13 +272,13 @@ FamixStMethod >> protocol [
 	^ protocol
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixStMethod >> protocol: anObject [
 	<generated>
 	protocol := anObject
 ]
 
-{ #category : #'Famix-Extensions-metrics-support' }
+{ #category : 'Famix-Extensions-metrics-support' }
 FamixStMethod >> smalltalkClass [ 
 	"Return the smalltalk class associated with the receiver. Note that it may be different than doing self parentType because the class and metaclass can be merged."
 	
@@ -313,7 +289,7 @@ FamixStMethod >> smalltalkClass [
 							ifFalse: [self parentType smalltalkClass]]
 ]
 
-{ #category : #'Famix-Extensions-metrics-support' }
+{ #category : 'Famix-Extensions-metrics-support' }
 FamixStMethod >> sourceText [
 
 	self flag: 'This code should be delegated to the anchor'.
@@ -322,7 +298,7 @@ FamixStMethod >> sourceText [
 		  do: [ "probably class is not in the system" super sourceText ]
 ]
 
-{ #category : #'Famix-Extensions-metrics-support' }
+{ #category : 'Famix-Extensions-metrics-support' }
 FamixStMethod >> timeStamp [
 	<FMProperty: #timeStamp type: #String>
 	<FMComment: 'TimeStamp of the method with author and time of the last change'>
@@ -330,7 +306,7 @@ FamixStMethod >> timeStamp [
 	^ self attributeAt: #timeStamp ifAbsentPut: [ '' ]
 ]
 
-{ #category : #'Famix-Extensions-metrics-support' }
+{ #category : 'Famix-Extensions-metrics-support' }
 FamixStMethod >> timeStamp: aTimeStamp [
 
 	self attributeAt: #timeStamp put: aTimeStamp

@@ -1,6 +1,6 @@
-Extension { #name : #RGBehavior }
+Extension { #name : 'RGBehavior' }
 
-{ #category : #'*Famix-MetamodelBuilder-Core' }
+{ #category : '*Famix-MetamodelBuilder-Core' }
 RGBehavior >> dependsOn: anotherBehavior [
 
 	(self allSuperclasses includes: anotherBehavior) ifTrue: [ ^ true ].
@@ -10,7 +10,7 @@ RGBehavior >> dependsOn: anotherBehavior [
 	^ false	
 ]
 
-{ #category : #'*Famix-MetamodelBuilder-Core' }
+{ #category : '*Famix-MetamodelBuilder-Core' }
 RGBehavior >> traitsDefinitions [
 	| methodsToRemoveMap |
 	methodsToRemoveMap := self propertyNamed: #methodsToRemoveFromTraitComposition ifAbsent: [ Dictionary new ].

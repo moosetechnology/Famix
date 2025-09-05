@@ -1,12 +1,14 @@
 Class {
-	#name : #FmxTraitsTestGenerateAccessorBClassB,
-	#superclass : #FmxTraitsTestGenerateAccessorBEntity,
+	#name : 'FmxTraitsTestGenerateAccessorBClassB',
+	#superclass : 'FmxTraitsTestGenerateAccessorBEntity',
 	#traits : 'FmxTraitsTestGenerateAccessorBTraitB',
 	#classTraits : 'FmxTraitsTestGenerateAccessorBTraitB classTrait',
-	#category : #'Famix-MetamodelBuilder-TestsTraitsResources-B-Entities'
+	#category : 'Famix-MetamodelBuilder-TestsTraitsResources-B-Entities',
+	#package : 'Famix-MetamodelBuilder-TestsTraitsResources-B',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FmxTraitsTestGenerateAccessorBClassB class >> annotation [
 
 	<FMClass: #ClassB super: #FmxTraitsTestGenerateAccessorBEntity>

@@ -1,10 +1,12 @@
 Class {
-	#name : #FamixClassGroup,
-	#superclass : #FamixTypeGroup,
-	#category : #'Famix-Traits-Groups'
+	#name : 'FamixClassGroup',
+	#superclass : 'FamixTypeGroup',
+	#category : 'Famix-Traits-Groups',
+	#package : 'Famix-Traits',
+	#tag : 'Groups'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixClassGroup class >> annotation [
 
 	<FMClass: #ClassGroup super: #FamixTypeGroup>

@@ -1,18 +1,20 @@
 Class {
-	#name : #FmxMBGeneratorCleaningStrategyTest,
-	#superclass : #FmxMBTestCase,
+	#name : 'FmxMBGeneratorCleaningStrategyTest',
+	#superclass : 'FmxMBTestCase',
 	#instVars : [
 		'generator'
 	],
-	#category : #'Famix-MetamodelBuilder-Tests'
+	#category : 'Famix-MetamodelBuilder-Tests-Tests',
+	#package : 'Famix-MetamodelBuilder-Tests',
+	#tag : 'Tests'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FmxMBGeneratorCleaningStrategyTest class >> defaultTimeLimit [
 	^ 20 seconds
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FmxMBGeneratorCleaningStrategyTest >> generateClasses [
 
 	| generatedClassToRemove generatedTraitToRemove |
@@ -102,19 +104,19 @@ FmxMBGeneratorCleaningStrategyTest >> generateClasses [
 	self class compile: 'extensionsMethodForTest' classified: '*' , generator packageName
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FmxMBGeneratorCleaningStrategyTest >> packageName [
 	^ 'Famix-MetamodelBuilder-TestsResources'
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FmxMBGeneratorCleaningStrategyTest >> setUp [
 	super setUp.
 	generator := FamixMetamodelCleaningStrategiesTestGenerator new.
 	self generateClasses
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FmxMBGeneratorCleaningStrategyTest >> tearDown [
 
 	[ self packageName asPackage removeFromSystem ]
@@ -123,7 +125,7 @@ FmxMBGeneratorCleaningStrategyTest >> tearDown [
 	super tearDown
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBGeneratorCleaningStrategyTest >> testGenerateNoCleaningCleaning [
 	generator withoutCleaning cleaningStrategy cleanBeforeGeneration: generator.
 	self class environment
@@ -175,7 +177,7 @@ FmxMBGeneratorCleaningStrategyTest >> testGenerateNoCleaningCleaning [
 		ifAbsent: [ self fail ]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBGeneratorCleaningStrategyTest >> testGenerateNoCleaningGeneration [
 	generator generateWithoutCleaning.
 
@@ -220,7 +222,7 @@ FmxMBGeneratorCleaningStrategyTest >> testGenerateNoCleaningGeneration [
 	self class environment at: #TFmxCleanerTestAddedTrait ifPresent: [ :class | self assert: class package name equals: self packageName ] ifAbsent: [ self fail ]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBGeneratorCleaningStrategyTest >> testGenerateTotalCleaningCleaning [
 	generator withCleaning cleaningStrategy cleanBeforeGeneration: generator.
 	self should: [ self class environment at: #FmxTestCleaningStrategyFmxTestEntity ] raise: KeyNotFound.
@@ -234,7 +236,7 @@ FmxMBGeneratorCleaningStrategyTest >> testGenerateTotalCleaningCleaning [
 	self assert: (self class methodDict at: #extensionsMethodForTest ifPresent: [ false ] ifAbsent: [ true ])
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FmxMBGeneratorCleaningStrategyTest >> testGenerateTotalCleaningGeneration [
 	generator generateWithCleaning.
 

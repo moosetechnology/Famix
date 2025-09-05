@@ -16,29 +16,31 @@ v := aFmxMBVisitorClass new.
 b acceptVisitor: v.
 "
 Class {
-	#name : #FmxMBVisitor,
-	#superclass : #Object,
-	#category : #'Famix-MetamodelBuilder-Core-Visitors'
+	#name : 'FmxMBVisitor',
+	#superclass : 'Object',
+	#category : 'Famix-MetamodelBuilder-Core-Visitors',
+	#package : 'Famix-MetamodelBuilder-Core',
+	#tag : 'Visitors'
 }
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FmxMBVisitor >> visitBuilder: aBuilder [
 
 	
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FmxMBVisitor >> visitClass: aClass [
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FmxMBVisitor >> visitRelationSide: aRelationSide [
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FmxMBVisitor >> visitTrait: aTrait [
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 FmxMBVisitor >> visitTypedProperty: aTypedProperty [
 ]

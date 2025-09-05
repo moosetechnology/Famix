@@ -1,13 +1,15 @@
 Class {
-	#name : #MQRelationByNameStrategy,
-	#superclass : #MQAbstractRelationStrategy,
+	#name : 'MQRelationByNameStrategy',
+	#superclass : 'MQAbstractRelationStrategy',
 	#instVars : [
 		'name'
 	],
-	#category : #'Moose-Query-Relations'
+	#category : 'Moose-Query-Relations',
+	#package : 'Moose-Query',
+	#tag : 'Relations'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MQRelationByNameStrategy class >> name: aSymbol [
 
 	^ self new
@@ -15,19 +17,19 @@ MQRelationByNameStrategy class >> name: aSymbol [
 		  yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MQRelationByNameStrategy >> name [
 
 	^ name
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MQRelationByNameStrategy >> name: anObject [
 
 	name := anObject
 ]
 
-{ #category : #selection }
+{ #category : 'selection' }
 MQRelationByNameStrategy >> selectPropertiesIn: anEntity [
 
 	^ anEntity mooseDescription allRelationProperties select: [ :relation | 

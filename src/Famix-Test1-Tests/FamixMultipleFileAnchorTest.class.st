@@ -1,18 +1,20 @@
 Class {
-	#name : #FamixMultipleFileAnchorTest,
-	#superclass : #FamixSourceAnchorTest,
+	#name : 'FamixMultipleFileAnchorTest',
+	#superclass : 'FamixSourceAnchorTest',
 	#instVars : [
 		'multipleFileAnchor'
 	],
-	#category : #'Famix-Test1-Tests-SourceAnchor'
+	#category : 'Famix-Test1-Tests-SourceAnchor',
+	#package : 'Famix-Test1-Tests',
+	#tag : 'SourceAnchor'
 }
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 FamixMultipleFileAnchorTest >> actualClass [
 	^ FamixTest1MultipleFileAnchor
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FamixMultipleFileAnchorTest >> setUp [
 	super setUp.
 	multipleFileAnchor := self actualClass model: FamixTest1Model new.
@@ -20,7 +22,7 @@ FamixMultipleFileAnchorTest >> setUp [
 	multipleFileAnchor addFileAnchorWithPath: 'aFileName2'.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixMultipleFileAnchorTest >> testAdditionOfFiles [
 	self assert: multipleFileAnchor fileAnchors size equals: 2.
 	self assert: multipleFileAnchor sourceText lines size equals: 4.
@@ -34,13 +36,13 @@ FamixMultipleFileAnchorTest >> testAdditionOfFiles [
 	self assert: multipleFileAnchor sourceText lines size equals: 8
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixMultipleFileAnchorTest >> testAllSourceAnchors [
 	self assert: multipleFileAnchor allSourceAnchors size equals: 2.
 	multipleFileAnchor allSourceAnchors do: [ :each | self assert: each isFileAnchor ]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixMultipleFileAnchorTest >> testAllSourceAnchorsDo [
 	| res |
 	res := OrderedCollection new.
@@ -50,7 +52,7 @@ FamixMultipleFileAnchorTest >> testAllSourceAnchorsDo [
 	res do: [ :each | self assert: each isFileAnchor ]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixMultipleFileAnchorTest >> testContainerFiles [
 	| anchor |
 	anchor := self actualClass new
@@ -73,7 +75,7 @@ FamixMultipleFileAnchorTest >> testContainerFiles [
 	(anchor containerFiles collect: #name) do: [ :fileName | self assert: (#('test' 'test2') includes: fileName) ]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixMultipleFileAnchorTest >> testContainerFilesWithoutFileReferenced [
 	"This test was added because before if a multiple source anchor does not have the corresponding files we got array of nils"
 
@@ -85,12 +87,12 @@ FamixMultipleFileAnchorTest >> testContainerFilesWithoutFileReferenced [
 	self assertEmpty: anchor containerFiles
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixMultipleFileAnchorTest >> testIsMultiple [
 	^ self assert: self actualClass new isMultiple
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixMultipleFileAnchorTest >> testMultipleSourceAnchorEntity [
 	| class |
 	class := FamixTest1Class new
@@ -99,7 +101,7 @@ FamixMultipleFileAnchorTest >> testMultipleSourceAnchorEntity [
 	self assert: class sourceAnchor fileAnchors size equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixMultipleFileAnchorTest >> testSimilarFileAnchors [
 	"Try to add again the same source anchors."
 
@@ -107,13 +109,13 @@ FamixMultipleFileAnchorTest >> testSimilarFileAnchors [
 	self assert: multipleFileAnchor fileAnchors size equals: 2
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixMultipleFileAnchorTest >> testSourceText [
 
 	self assert: (multipleFileAnchor sourceText includesSubstring: ' ~~~ aFileName1 ~~~ ')
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixMultipleFileAnchorTest >> testWritingAndReadingInMSE [
 	| tempFile importedModel |
 	tempFile := (FileSystem memory / 'files-test.mse')

@@ -11,34 +11,36 @@ Public API and Key Messages
 
 "
 Class {
-	#name : #MQNavigationResultKindStrategy,
-	#superclass : #Object,
-	#category : #'Moose-Query-Navigating'
+	#name : 'MQNavigationResultKindStrategy',
+	#superclass : 'Object',
+	#category : 'Moose-Query-Navigating',
+	#package : 'Moose-Query',
+	#tag : 'Navigating'
 }
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 MQNavigationResultKindStrategy class >> collectResultFrom: aCollection query: aQuery [
 	"I should retrun the entities to add to the query result depending on the collection of association I receive."
 
 	^ self subclassResponsibility
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 MQNavigationResultKindStrategy class >> execute: aQuery [
 	^ aQuery executeQueryForQueryResult: (self queryResultKindFor: aQuery)
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MQNavigationResultKindStrategy class >> isAbstract [
 	^ self = MQNavigationResultKindStrategy
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 MQNavigationResultKindStrategy class >> queryResultKindFor: aQuery [
 	^ self subclassResponsibility
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MQNavigationResultKindStrategy class >> strategies [
 	^ self allSubclasses reject: #isAbstract
 ]

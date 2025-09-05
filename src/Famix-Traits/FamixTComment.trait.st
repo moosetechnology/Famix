@@ -18,16 +18,18 @@ FamixTComment represents one instance of a comment (in the sense of programming 
 
 "
 Trait {
-	#name : #FamixTComment,
+	#name : 'FamixTComment',
 	#instVars : [
 		'#commentedEntity => FMOne type: #FamixTWithComments opposite: #comments'
 	],
 	#traits : 'FamixTSourceEntity + TEntityMetaLevelDependency',
 	#classTraits : 'FamixTSourceEntity classTrait + TEntityMetaLevelDependency classTrait',
-	#category : #'Famix-Traits-Comment'
+	#category : 'Famix-Traits-Comment',
+	#package : 'Famix-Traits',
+	#tag : 'Comment'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTComment classSide >> annotation [
 
 	<FMClass: #TComment super: #Object>
@@ -36,7 +38,14 @@ FamixTComment classSide >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'visitor' }
+FamixTComment >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTComment: self
+]
+
+{ #category : 'accessing' }
 FamixTComment >> commentedEntity [
 	"Relation named: #commentedEntity type: #FamixTWithComments opposite: #comments"
 
@@ -46,54 +55,35 @@ FamixTComment >> commentedEntity [
 	^ commentedEntity
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTComment >> commentedEntity: anObject [
 
 	<generated>
 	commentedEntity := anObject
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FamixTComment >> commentedEntityGroup [
 	<generated>
 	<navigation: 'CommentedEntity'>
 	^ MooseSpecializedGroup with: self commentedEntity
 ]
 
-{ #category : #accessing }
-FamixTComment >> container [
-
-	"Marked as deprecated in January, 2023"
-
-	self
-		deprecated: 'Use #commentedEntity instead'
-		transformWith:
-		'`@receiver container' -> '`@receiver commentedEntity'.
-
-	^ self commentedEntity
-]
-
-{ #category : #accessing }
-FamixTComment >> container: anObject [
-
-	"Marked as deprecated in January, 2023"
-
-	self
-		deprecated: 'Use #commentedEntity: instead'
-		transformWith:
-		'`@receiver container: `@arg' -> '`@receiver commentedEntity: `@arg'.
-
-	self commentedEntity: anObject
-]
-
-{ #category : #printing }
+{ #category : 'printing' }
 FamixTComment >> displayStringOn: aStream [
 
 	aStream << 'comment on '.
 	self commentedEntity displayStringOn: aStream
 ]
 
-{ #category : #printing }
+{ #category : 'testing' }
+FamixTComment >> isComment [
+
+	<generated>
+	^ true
+]
+
+{ #category : 'printing' }
 FamixTComment >> printOn: aStream [
 
 	self sourceText ifNotNil: [ :sourceText | 

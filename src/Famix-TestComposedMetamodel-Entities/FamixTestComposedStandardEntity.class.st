@@ -11,12 +11,14 @@
 
 "
 Class {
-	#name : #FamixTestComposedStandardEntity,
-	#superclass : #FamixTestComposedEntity,
-	#category : #'Famix-TestComposedMetamodel-Entities-Entities'
+	#name : 'FamixTestComposedStandardEntity',
+	#superclass : 'FamixTestComposedEntity',
+	#category : 'Famix-TestComposedMetamodel-Entities-Entities',
+	#package : 'Famix-TestComposedMetamodel-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTestComposedStandardEntity class >> annotation [
 
 	<FMClass: #StandardEntity super: #FamixTestComposedEntity>
@@ -25,7 +27,7 @@ FamixTestComposedStandardEntity class >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTestComposedStandardEntity >> method [
 	"Relation named: #method type: #FamixTestComposed1Method opposite: #standardEntity"
 
@@ -34,7 +36,7 @@ FamixTestComposedStandardEntity >> method [
 	^ self attributeAt: #method ifAbsent: [ nil ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTestComposedStandardEntity >> method: anObject [
 
 	<generated>

@@ -1,6 +1,6 @@
 Class {
-	#name : #FamixBasicInfrastructureGenerator,
-	#superclass : #FamixMetamodelGenerator,
+	#name : 'FamixBasicInfrastructureGenerator',
+	#superclass : 'FamixMetamodelGenerator',
 	#instVars : [
 		'#entity => FamixDeprecatedSlot message: \'This variable should not be used anymore. XXXEntity is now the default root and you don\'\'t need to declare you inherit from it. If you wish to add property to it, get the class with `self ensureClassNamed: #Entity`.\'',
 		'#sourceAnchor',
@@ -10,20 +10,21 @@ Class {
 		'#namedEntity',
 		'#sourceTextAnchor'
 	],
-	#category : #'Famix-BasicInfrastructure'
+	#category : 'Famix-BasicInfrastructure',
+	#package : 'Famix-BasicInfrastructure'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixBasicInfrastructureGenerator class >> isAbstract [
 	^ self = FamixBasicInfrastructureGenerator
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixBasicInfrastructureGenerator class >> submetamodels [
 	^ {FamixGenerator}
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixBasicInfrastructureGenerator >> defineClasses [
 	super defineClasses.
 
@@ -36,7 +37,7 @@ FamixBasicInfrastructureGenerator >> defineClasses [
 	sourceTextAnchor := builder newClassNamed: #SourceTextAnchor
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixBasicInfrastructureGenerator >> defineHierarchy [
 
 	sourceAnchor --|> #TSourceAnchor.

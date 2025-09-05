@@ -1,10 +1,12 @@
 Class {
-	#name : #FamixTest8Entity,
-	#superclass : #MooseEntity,
-	#category : #'Famix-Test8-Entities-Entities'
+	#name : 'FamixTest8Entity',
+	#superclass : 'MooseEntity',
+	#category : 'Famix-Test8-Entities-Entities',
+	#package : 'Famix-Test8-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTest8Entity class >> annotation [
 
 	<FMClass: #Entity super: #MooseEntity>
@@ -14,21 +16,21 @@ FamixTest8Entity class >> annotation [
 	^ self
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTest8Entity class >> isAbstract [
 
 	<generated>
 	^ self == FamixTest8Entity
 ]
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTest8Entity class >> metamodel [
 
 	<generated>
 	^ FamixTest8Model metamodel
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTest8Entity >> isAssociation [
 
 	<generated>

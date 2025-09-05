@@ -11,14 +11,16 @@
 
 "
 Trait {
-	#name : #FamixTAccessible,
+	#name : 'FamixTAccessible',
 	#instVars : [
 		'#incomingAccesses => FMMany type: #FamixTAccess opposite: #candidates'
 	],
-	#category : #'Famix-Traits-Access'
+	#category : 'Famix-Traits-Access',
+	#package : 'Famix-Traits',
+	#tag : 'Access'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTAccessible classSide >> annotation [
 
 	<FMClass: #TAccessible super: #Object>
@@ -27,20 +29,27 @@ FamixTAccessible classSide >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'visitor' }
+FamixTAccessible >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixTAccessible: self
+]
+
+{ #category : 'accessing' }
 FamixTAccessible >> accessingClasses [
 
 	^(self accessingMethods collectAsSet: [:each | each belongsTo]) asOrderedCollection
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAccessible >> accessingMethods [
 
 	^ self incomingAccesses collectAsSet: [:anAccess | anAccess accessor].
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAccessible >> accessors [
 	<FMProperty: #accessors type: #FamixTWithAccesses>
 	<multivalued>
@@ -48,12 +57,12 @@ FamixTAccessible >> accessors [
 	^ (self incomingAccesses collectAsSet: [ :each | each accessor ]) asMooseGroup
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTAccessible >> addIncomingAccess: anAccess [
 	incomingAccesses add: anAccess
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAccessible >> globalAccesses [
 	| attrclass globalAccesses |
 	attrclass := self belongsTo.
@@ -67,7 +76,7 @@ FamixTAccessible >> globalAccesses [
 	^globalAccesses
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAccessible >> incomingAccesses [
 	"Relation named: #incomingAccesses type: #FamixTAccess opposite: #candidates"
 
@@ -76,14 +85,14 @@ FamixTAccessible >> incomingAccesses [
 	^ incomingAccesses
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAccessible >> incomingAccesses: anObject [
 
 	<generated>
 	incomingAccesses value: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAccessible >> localAccesses [
 	| attrclass localAccesses |
 	attrclass := self belongsTo.
@@ -97,62 +106,52 @@ FamixTAccessible >> localAccesses [
 	^localAccesses
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAccessible >> numberOfAccesses [
+
 	<FMProperty: #numberOfAccesses type: #Number>
 	<derived>
 	<FMComment: 'The number of accesses of an attribute.'>
-
-	^self
-		lookUpPropertyNamed: #numberOfAccesses
-		computedAs: [self incomingAccesses size]
+	^ self cacheAt: #numberOfAccesses ifAbsent: [ self incomingAccesses size ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAccessible >> numberOfAccessingClasses [
+
 	<FMProperty: #numberOfAccessingClasses type: #Number>
 	<derived>
 	<FMComment: 'The number of classes from which at least one method accesses an attribute.'>
-
-	^self
-		lookUpPropertyNamed: #numberOfAccessingClasses
-		computedAs: [self accessingClasses size]
+	^ self cacheAt: #numberOfAccessingClasses ifAbsent: [ self accessingClasses size ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAccessible >> numberOfAccessingMethods [
+
 	<FMProperty: #numberOfAccessingMethods type: #Number>
 	<derived>
-	<FMComment: 'The number of methods accessing an attribute.'>				
-	
-	^self
-		lookUpPropertyNamed: #numberOfAccessingMethods
-		computedAs: [self accessingMethods size]
+	<FMComment: 'The number of methods accessing an attribute.'>
+	^ self cacheAt: #numberOfAccessingMethods ifAbsent: [ self accessingMethods size ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAccessible >> numberOfGlobalAccesses [
+
 	<FMProperty: #numberOfGlobalAccesses type: #Number>
 	<derived>
-	<FMComment: 'The number of accesses to an attribute from outside the class defining the attribute.'>	
-
-	^self
-		lookUpPropertyNamed: #numberOfGlobalAccesses
-		computedAs: [self globalAccesses size]
+	<FMComment: 'The number of accesses to an attribute from outside the class defining the attribute.'>
+	^ self cacheAt: #numberOfGlobalAccesses ifAbsent: [ self globalAccesses size ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAccessible >> numberOfLocalAccesses [
+
 	<FMProperty: #numberOfLocalAccesses type: #Number>
 	<derived>
 	<FMComment: 'The number of accesses to an attribute from inside the class defining the attribute.'>
-		
-	^self
-		lookUpPropertyNamed: #numberOfLocalAccesses
-		computedAs: [self localAccesses size]
+	^ self cacheAt: #numberOfLocalAccesses ifAbsent: [ self localAccesses size ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAccessible >> readAccesses [
 	
 	^self incomingAccesses select: [:each | each isRead]

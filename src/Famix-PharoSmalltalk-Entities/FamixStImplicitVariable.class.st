@@ -7,6 +7,11 @@
 |---|
 | `parentBehaviouralEntity` | `FamixTImplicitVariable` | `implicitVariables` | `FamixTWithImplicitVariables` | The behaviour containing this implicit variable. belongsTo implementation|
 
+### Outgoing dependencies
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `typing` | `FamixTTypedEntity` | `typedEntity` | `FamixTEntityTyping` | Association linking this entity to its declared type.|
+
 ### Incoming dependencies
 | Relation | Origin | Opposite | Type | Comment |
 |---|
@@ -15,7 +20,6 @@
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `declaredType` | `FamixTTypedEntity` | `typedEntities` | `FamixTType` | Type of the entity, if any|
 | `receivingInvocations` | `FamixTInvocationsReceiver` | `receiver` | `FamixTInvocation` | List of invocations performed on this entity (considered as the receiver)|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
 
@@ -30,14 +34,16 @@
 
 "
 Class {
-	#name : #FamixStImplicitVariable,
-	#superclass : #FamixStNamedEntity,
+	#name : 'FamixStImplicitVariable',
+	#superclass : 'FamixStNamedEntity',
 	#traits : 'FamixTImplicitVariable + FamixTInvocationsReceiver',
 	#classTraits : 'FamixTImplicitVariable classTrait + FamixTInvocationsReceiver classTrait',
-	#category : #'Famix-PharoSmalltalk-Entities-Entities'
+	#category : 'Famix-PharoSmalltalk-Entities-Entities',
+	#package : 'Famix-PharoSmalltalk-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixStImplicitVariable class >> annotation [
 
 	<FMClass: #ImplicitVariable super: #FamixStNamedEntity>
@@ -46,12 +52,13 @@ FamixStImplicitVariable class >> annotation [
 	^ self
 ]
 
-{ #category : #testing }
-FamixStImplicitVariable >> isSuper [
-	^ self name == #super
+{ #category : 'testing' }
+FamixStImplicitVariable >> isSelf [
+
+	^ self name = 'self'
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixStImplicitVariable >> mooseNameOn: stream [ 
 	| parent |
 	parent := self parentBehaviouralEntity.

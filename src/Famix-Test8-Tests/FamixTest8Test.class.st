@@ -1,13 +1,14 @@
 Class {
-	#name : #FamixTest8Test,
-	#superclass : #TestCase,
+	#name : 'FamixTest8Test',
+	#superclass : 'TestCase',
 	#instVars : [
 		'associationFM3Class'
 	],
-	#category : #'Famix-Test8-Tests'
+	#category : 'Famix-Test8-Tests',
+	#package : 'Famix-Test8-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 FamixTest8Test >> setUp [
 
 	super setUp.
@@ -15,13 +16,13 @@ FamixTest8Test >> setUp [
 	associationFM3Class := FamixTest8Infection mooseDescription
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTest8Test >> testAssociationsAreClasses [
 
 	self assert: associationFM3Class isFM3Class
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTest8Test >> testAssociationsHaveSourceAndTarget [
 
 	self assert: (associationFM3Class allProperties anySatisfy: #isSource).
@@ -29,7 +30,7 @@ FamixTest8Test >> testAssociationsHaveSourceAndTarget [
 	self assert: (associationFM3Class allProperties anySatisfy: #isTarget)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixTest8Test >> testAssociationsProperties [
 
 	self

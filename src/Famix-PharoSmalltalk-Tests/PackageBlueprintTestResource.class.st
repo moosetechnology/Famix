@@ -2,12 +2,13 @@
 I am a test resource building a FamixStModel with the package blueprint test resource entities.
 "
 Class {
-	#name : #PackageBlueprintTestResource,
-	#superclass : #SmalltalkModelTestResource,
-	#category : #'Famix-PharoSmalltalk-Tests'
+	#name : 'PackageBlueprintTestResource',
+	#superclass : 'SmalltalkModelTestResource',
+	#category : 'Famix-PharoSmalltalk-Tests',
+	#package : 'Famix-PharoSmalltalk-Tests'
 }
 
-{ #category : #setup }
+{ #category : 'setup' }
 PackageBlueprintTestResource >> importModel [
 
 	FamixStPharoImporterTask new

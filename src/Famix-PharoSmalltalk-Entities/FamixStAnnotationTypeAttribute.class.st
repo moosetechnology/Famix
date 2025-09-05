@@ -7,6 +7,11 @@
 |---|
 | `parentType` | `FamixTAttribute` | `attributes` | `FamixTWithAttributes` | Type declaring the attribute. belongsTo implementation|
 
+### Outgoing dependencies
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `typing` | `FamixTTypedEntity` | `typedEntity` | `FamixTEntityTyping` | Association linking this entity to its declared type.|
+
 ### Incoming dependencies
 | Relation | Origin | Opposite | Type | Comment |
 |---|
@@ -16,7 +21,6 @@
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `annotationAttributeInstances` | `FamixTAnnotationTypeAttribute` | `annotationTypeAttribute` | `FamixTAnnotationInstanceAttribute` | A collection of AnnotationInstanceAttribute which hold the usages of this attribute in actual AnnotationInstances|
-| `declaredType` | `FamixTTypedEntity` | `typedEntities` | `FamixTType` | Type of the entity, if any|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
 
 
@@ -30,14 +34,16 @@
 
 "
 Class {
-	#name : #FamixStAnnotationTypeAttribute,
-	#superclass : #FamixStSourcedEntity,
+	#name : 'FamixStAnnotationTypeAttribute',
+	#superclass : 'FamixStSourcedEntity',
 	#traits : 'FamixTAnnotationTypeAttribute + TEntityMetaLevelDependency',
 	#classTraits : 'FamixTAnnotationTypeAttribute classTrait + TEntityMetaLevelDependency classTrait',
-	#category : #'Famix-PharoSmalltalk-Entities-Entities'
+	#category : 'Famix-PharoSmalltalk-Entities-Entities',
+	#package : 'Famix-PharoSmalltalk-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixStAnnotationTypeAttribute class >> annotation [
 
 	<FMClass: #AnnotationTypeAttribute super: #FamixStSourcedEntity>
@@ -46,7 +52,7 @@ FamixStAnnotationTypeAttribute class >> annotation [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixStAnnotationTypeAttribute >> parentAnnotationType [
 	<FMProperty: #parentAnnotationType type: #FamixStAnnotationType> <derived> 
 	<FMComment: 'This is an alias pointing to the AnnotationType that defines this attribute'>
@@ -54,7 +60,7 @@ FamixStAnnotationTypeAttribute >> parentAnnotationType [
 	^ self parentType
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixStAnnotationTypeAttribute >> parentAnnotationType: anAnnotationType [
 	self parentType: anAnnotationType
 ]

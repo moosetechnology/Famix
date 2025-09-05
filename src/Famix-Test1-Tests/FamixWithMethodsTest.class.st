@@ -1,10 +1,11 @@
 Class {
-	#name : #FamixWithMethodsTest,
-	#superclass : #FamixTest1SimpleModelTest,
-	#category : #'Famix-Test1-Tests'
+	#name : 'FamixWithMethodsTest',
+	#superclass : 'FamixTest1SimpleModelTest',
+	#category : 'Famix-Test1-Tests',
+	#package : 'Famix-Test1-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 FamixWithMethodsTest >> setUp [
 	super setUp.
 	c1
@@ -12,7 +13,7 @@ FamixWithMethodsTest >> setUp [
 		attributes: #()
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixWithMethodsTest >> testAddMethod [
 	
 	| newMethod | 
@@ -23,7 +24,7 @@ FamixWithMethodsTest >> testAddMethod [
 	self assert: (c1 methods includes: newMethod).
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixWithMethodsTest >> testMethods [
 	
 	| newMethod1 newMethod2 | 
@@ -39,7 +40,7 @@ FamixWithMethodsTest >> testMethods [
 	
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixWithMethodsTest >> testMethodsGroup [
 	
 	| group | 
@@ -48,7 +49,7 @@ FamixWithMethodsTest >> testMethodsGroup [
 	self assertCollection: group entities hasSameElements: { m1 }.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixWithMethodsTest >> testNumberOfLinesOfCode [
 
 	self assert: c1 numberOfLinesOfCode equals: 2.
@@ -57,7 +58,7 @@ FamixWithMethodsTest >> testNumberOfLinesOfCode [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixWithMethodsTest >> testNumberOfMethods [
 
 	self assert: c1 numberOfMethods equals: 1.
@@ -69,7 +70,7 @@ FamixWithMethodsTest >> testNumberOfMethods [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixWithMethodsTest >> testRelations [
 
 	self assertCollection: c1 methods hasSameElements:  { m1 }.	
@@ -78,7 +79,7 @@ FamixWithMethodsTest >> testRelations [
 	self assertCollection: m2 parentType equals: c2.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FamixWithMethodsTest >> testWeightedMethodCount [
 
 	self assert: c1 weightedMethodCount equals: model notExistentMetricValue

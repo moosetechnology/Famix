@@ -11,14 +11,16 @@
 
 "
 Class {
-	#name : #FamixTestComposed1SourcedEntity,
-	#superclass : #FamixTestComposed1Entity,
+	#name : 'FamixTestComposed1SourcedEntity',
+	#superclass : 'FamixTestComposed1Entity',
 	#traits : 'FamixTSourceEntity',
 	#classTraits : 'FamixTSourceEntity classTrait',
-	#category : #'Famix-TestComposedSubmetamodel1-Entities-Entities'
+	#category : 'Famix-TestComposedSubmetamodel1-Entities-Entities',
+	#package : 'Famix-TestComposedSubmetamodel1-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTestComposed1SourcedEntity class >> annotation [
 
 	<FMClass: #SourcedEntity super: #FamixTestComposed1Entity>
@@ -28,7 +30,7 @@ FamixTestComposed1SourcedEntity class >> annotation [
 	^ self
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTestComposed1SourcedEntity class >> isAbstract [
 
 	<generated>

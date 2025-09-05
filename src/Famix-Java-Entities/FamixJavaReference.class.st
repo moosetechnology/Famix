@@ -23,14 +23,16 @@
 
 "
 Class {
-	#name : #FamixJavaReference,
-	#superclass : #FamixJavaEntity,
+	#name : 'FamixJavaReference',
+	#superclass : 'FamixJavaEntity',
 	#traits : 'FamixTReference',
 	#classTraits : 'FamixTReference classTrait',
-	#category : #'Famix-Java-Entities-Entities'
+	#category : 'Famix-Java-Entities-Entities',
+	#package : 'Famix-Java-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixJavaReference class >> annotation [
 
 	<FMClass: #Reference super: #FamixJavaEntity>
@@ -39,7 +41,14 @@ FamixJavaReference class >> annotation [
 	^ self
 ]
 
-{ #category : #printing }
+{ #category : 'visitor' }
+FamixJavaReference >> accept: aVisitor [
+
+	<generated>
+	^ aVisitor visitFamixJavaReference: self
+]
+
+{ #category : 'printing' }
 FamixJavaReference >> mooseNameOn: aStream [
 	"aStream nextPutAll: 'Reference'."
 
@@ -48,7 +57,7 @@ FamixJavaReference >> mooseNameOn: aStream [
 	self target ifNotNil: [ aStream nextPutAll: self target name ]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixJavaReference >> printOn: aStream [
 	super printOn: aStream.
 	aStream nextPutAll: ' (Reference)'
