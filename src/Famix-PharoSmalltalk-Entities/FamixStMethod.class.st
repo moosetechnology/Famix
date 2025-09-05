@@ -222,18 +222,12 @@ FamixStMethod >> numberOfAccesses [
 		computedAs: [ self accesses size ]
 ]
 
-{ #category : 'Famix-Extensions-private' }
+{ #category : 'metrics' }
 FamixStMethod >> numberOfConditionals [
+
 	<FMProperty: #numberOfConditionals type: #Number>
 	<FMComment: 'The number of conditionals in a method'>
-	^ self
-		lookUpPropertyNamed: #numberOfConditionals
-		computedAs: [ self computeNumberOfConditionals ]
-]
-
-{ #category : 'Famix-Extensions-private' }
-FamixStMethod >> numberOfConditionals: aNumber [
-	self cacheAt: #numberOfConditionals put: aNumber
+	^ self lookUpPropertyNamed: #numberOfConditionals computedAs: [ self computeNumberOfConditionals ]
 ]
 
 { #category : 'Famix-Extensions-private' }

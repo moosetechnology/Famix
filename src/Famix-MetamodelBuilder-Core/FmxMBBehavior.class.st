@@ -509,12 +509,14 @@ FmxMBBehavior >> property: propertyName [
 
 { #category : 'accessing' }
 FmxMBBehavior >> property: propertyName type: aTypeName [
+
 	| aSide |
 	aSide := FmxMBTypedProperty new
-		builder: self builder;
-		name: propertyName;
-		propertyType: aTypeName asSymbol;
-		yourself.
+		         builder: self builder;
+		         name: propertyName;
+		         isRemote: self isRemote;
+		         propertyType: aTypeName asSymbol;
+		         yourself.
 
 	self properties add: aSide.
 
@@ -522,14 +524,16 @@ FmxMBBehavior >> property: propertyName type: aTypeName [
 ]
 
 { #category : 'accessing' }
-FmxMBBehavior >> property: propertyName type: aTypeName defaultValue: aValue [ 
+FmxMBBehavior >> property: propertyName type: aTypeName defaultValue: aValue [
+
 	| aSide |
 	aSide := FmxMBTypedProperty new
-		builder: self builder;
-		name: propertyName;
-		propertyType: aTypeName asSymbol;
-		defaultValue: aValue;
-		yourself.
+		         builder: self builder;
+		         name: propertyName;
+		         isRemote: self isRemote;
+		         propertyType: aTypeName asSymbol;
+		         defaultValue: aValue;
+		         yourself.
 
 	self properties add: aSide.
 

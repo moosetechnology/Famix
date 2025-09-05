@@ -139,36 +139,6 @@ FamixTInvocation >> displayStringOn: aStream [
 		ifNil: [ aStream nextPutAll: ' ? ' ]
 ]
 
-{ #category : 'instance creation' }
-FamixTInvocation >> getReceivingFAMIXClass [
-
-	self
-		deprecated: 'Please use getReceivingFamixClass instead'
-		transformWith: '`@receiver getReceivingFAMIXClass'
-			-> '`@receiver getReceivingFamixClass'.
-	^ self getReceivingFamixClass
-]
-
-{ #category : 'instance creation' }
-FamixTInvocation >> getReceivingFamixClass [
-
-	"Returns the Famix class of the receiver. If the receiver is a Famix class, this one is returned. 
-	If it is self or super, the corresponding Famix class is returned. 
-	The receiver may not be nil"
-
-	| tmpReceiver |
-	tmpReceiver := self receiver.
-
-	tmpReceiver isImplicitVariable
-		ifTrue: [ 
-			| belongsTo |
-			belongsTo := tmpReceiver belongsTo parentType.
-			tmpReceiver isSelf ifTrue: [ ^ belongsTo ].
-			tmpReceiver isSuper ifTrue: [ 
-				^ belongsTo superclass ifNil: [ belongsTo ] ] ]
-		ifFalse: [ ^ tmpReceiver ]
-]
-
 { #category : 'accessing' }
 FamixTInvocation >> invokedEntity [
 	"This method returns only one candidate if there is one, or raises an error if there is more or less than one candidate."

@@ -58,6 +58,12 @@ FamixJavaImplicitVariable >> accept: aVisitor [
 	^ aVisitor visitFamixJavaImplicitVariable: self
 ]
 
+{ #category : 'testing' }
+FamixJavaImplicitVariable >> isSelf [
+
+	^ self name = 'this'
+]
+
 { #category : 'printing' }
 FamixJavaImplicitVariable >> mooseNameOn: stream [ 
 	| parent |
