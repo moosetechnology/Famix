@@ -144,6 +144,20 @@ FamixTMethod >> mooseNameOn: stream [
 		ifNil: [ self name ifNotNil: [ :aName | stream nextPutAll: aName ] ]
 ]
 
+{ #category : 'metrics' }
+FamixTMethod >> numberOfConditionals [
+
+	<FMProperty: #numberOfConditionals type: #Number>
+	<FMComment: 'The number of conditionals in a method'>
+	^ self attributeAt: #numberOfConditionals ifAbsent: [ self notExistentMetricValue ]
+]
+
+{ #category : 'metrics' }
+FamixTMethod >> numberOfConditionals: aNumber [
+
+	self attributeAt: #numberOfConditionals put: aNumber
+]
+
 { #category : 'testing' }
 FamixTMethod >> overridingMethods [
 
