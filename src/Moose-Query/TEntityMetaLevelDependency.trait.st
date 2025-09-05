@@ -120,10 +120,10 @@ TEntityMetaLevelDependency classSide >> incomingAssociationTypesIn: aMetamodel [
 ]
 
 { #category : 'accessing' }
-TEntityMetaLevelDependency classSide >> incomingMSEPropertiesIn: aMetamodel [
+TEntityMetaLevelDependency classSide >> incomingFamePropertiesIn: aMetamodel [
 	"computes all properties that are target of association for self (a class) belonging to aMetamodel"
 
-	^ aMetamodel additionalProperty: #incomingMSEProperties for: self ifAbsentPut: [ self privateIncomingMSEPropertiesIn: aMetamodel ]
+	^ aMetamodel additionalProperty: #incomingFameProperties for: self ifAbsentPut: [ self privateIncomingFamePropertiesIn: aMetamodel ]
 ]
 
 { #category : 'accessing' }
@@ -134,9 +134,9 @@ TEntityMetaLevelDependency classSide >> outgoingAssociationTypesIn: aMetamodel [
 ]
 
 { #category : 'accessing' }
-TEntityMetaLevelDependency classSide >> outgoingMSEPropertiesIn: aMetamodel [
+TEntityMetaLevelDependency classSide >> outgoingFamePropertiesIn: aMetamodel [
 
-	^ aMetamodel additionalProperty: #outgoingMSEProperties for: self ifAbsentPut: [ self privateOutgoingMSEPropertiesIn: aMetamodel ]
+	^ aMetamodel additionalProperty: #outgoingFameProperties for: self ifAbsentPut: [ self privateOutgoingFamePropertiesIn: aMetamodel ]
 	
 ]
 
@@ -214,16 +214,14 @@ TEntityMetaLevelDependency classSide >> privateIncomingAssociationTypesIn: aMeta
 ]
 
 { #category : 'private' }
-TEntityMetaLevelDependency classSide >> privateIncomingMSEPropertiesIn: aMetamodel [
-
+TEntityMetaLevelDependency classSide >> privateIncomingFamePropertiesIn: aMetamodel [
 	"Collects all fame properties defining an incoming dependency to self.
 	
 	An incoming dependency is reified by an association.	
 	My property has an opposite, that is the property of the association. This property is target.
 	Since the direction of the relation is defined in the association, my property is not source, nor target."
 
-	^ (self allDeclaredPropertiesIn: aMetamodel) select: [ :p | 
-		  p hasOpposite and: [ p opposite isTarget and: [ p isSource not ] ] ]
+	^ (self allDeclaredPropertiesIn: aMetamodel) select: [ :p | p hasOpposite and: [ p opposite isTarget and: [ p isSource not ] ] ]
 ]
 
 { #category : 'private' }
@@ -237,16 +235,14 @@ TEntityMetaLevelDependency classSide >> privateOutgoingAssociationTypesIn: aMeta
 ]
 
 { #category : 'private' }
-TEntityMetaLevelDependency classSide >> privateOutgoingMSEPropertiesIn: aMetamodel [
-
+TEntityMetaLevelDependency classSide >> privateOutgoingFamePropertiesIn: aMetamodel [
 	"Collects all fame properties defining a outgoing dependency to self.
 	
 	An outgoing dependency is reified by an association.	
 	My property has an opposite, that is the property of the association. This property is source.
 	Since the direction of the relation is defined in the association, my property is not source, nor target."
 
-	^ (self allDeclaredPropertiesIn: aMetamodel) select: [ :p | 
-		  p hasOpposite and: [ p opposite isSource and: [ p isTarget not ] ] ]
+	^ (self allDeclaredPropertiesIn: aMetamodel) select: [ :p | p hasOpposite and: [ p opposite isSource and: [ p isTarget not ] ] ]
 ]
 
 { #category : 'private' }
@@ -695,8 +691,8 @@ TEntityMetaLevelDependency >> incomingAssociationTypes [
 ]
 
 { #category : 'accessing' }
-TEntityMetaLevelDependency >> incomingMSEProperties [
-	^ self class incomingMSEPropertiesIn: self metamodel
+TEntityMetaLevelDependency >> incomingFameProperties [
+	^ self class incomingFamePropertiesIn: self metamodel
 ]
 
 { #category : 'testing' }
@@ -801,9 +797,10 @@ TEntityMetaLevelDependency >> outgoingAssociationTypes [
 ]
 
 { #category : 'accessing' }
-TEntityMetaLevelDependency >> outgoingMSEProperties [
+TEntityMetaLevelDependency >> outgoingFameProperties [
 	"finds all properties from entities of 'self class' to other entities"
-	^ self class outgoingMSEPropertiesIn: self metamodel
+
+	^ self class outgoingFamePropertiesIn: self metamodel
 ]
 
 { #category : 'accessing' }

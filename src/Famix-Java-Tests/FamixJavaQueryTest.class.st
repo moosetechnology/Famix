@@ -172,5 +172,6 @@ FamixJavaQueryTest >> testFamixJavaAnnotationInstanceAttributeCanHaveIncoming [
 
 { #category : 'tests - class' }
 FamixJavaQueryTest >> testFamixJavaAnnotationInstanceAttributeCanHaveOutgoing [
-	self assert: annotationInstanceAttribute1 outgoingMSEProperties isCollection
+
+	self assert: annotationInstanceAttribute1 outgoingFameProperties isCollection
 ]

@@ -23,8 +23,9 @@ MQNavigationIncomingDirectionStrategy class >> entityFor: anAssociation [
 ]
 
 { #category : 'accessing' }
-MQNavigationIncomingDirectionStrategy class >> msePropertiesOf: anEntity [
-	^ anEntity incomingMSEProperties
+MQNavigationIncomingDirectionStrategy class >> famePropertiesOf: anEntity [
+
+	^ anEntity incomingFameProperties
 ]
 
 { #category : 'accessing' }
