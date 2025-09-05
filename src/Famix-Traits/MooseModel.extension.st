@@ -28,6 +28,7 @@ MooseModel >> numberOfClassesPerPackage [
 
 	<FMProperty: #numberOfClassesPerPackage type: #Number>
 	<FMComment: 'The number of methods per package in the model'>
+	<derived>
 	^ self cacheAt: #numberOfClassesPerPackage ifAbsentPut: [ self numberOfMethods / self numberOfClasses ]
 ]
 
@@ -36,6 +37,7 @@ MooseModel >> numberOfLinesOfCodePerMethod [
 
 	<FMProperty: #numberOfLinesOfCodePerMethod type: #Number>
 	<FMComment: 'The number of lines of code per method in the model'>
+	<derived>
 	^ self cacheAt: #numberOfLinesOfCodePerMethod ifAbsentPut: [ self numberOfLinesOfCode / self numberOfMethods ]
 ]
 
@@ -44,6 +46,7 @@ MooseModel >> numberOfLinesOfCodePerPackage [
 
 	<FMProperty: #numberOfLinesOfCodePerPackage type: #Number>
 	<FMComment: 'The number of lines of code per package in the model'>
+	<derived>
 	^ self cacheAt: #numberOfLinesOfCodePerPackage ifAbsentPut: [ self numberOfLinesOfCode / self numberOfPackages ]
 ]
 
@@ -52,6 +55,7 @@ MooseModel >> numberOfMethods [
 
 	<FMProperty: #numberOfMethods type: #Number>
 	<FMComment: 'The number of methods'>
+	<derived>
 	^ self cacheAt: #numberOfMethods ifAbsentPut: [ self allMethods size ]
 ]
 
@@ -60,6 +64,7 @@ MooseModel >> numberOfMethodsPerPackage [
 
 	<FMProperty: #numberOfClassesPerPackage type: #Number>
 	<FMComment: 'The number of methods per package in the model'>
+	<derived>
 	^ self cacheAt: #numberOfMethodsPerPackage ifAbsentPut: [ self numberOfMethods / self numberOfPackages ]
 ]
 
@@ -68,6 +73,7 @@ MooseModel >> numberOfModelClasses [
 
 	<FMProperty: #numberOfModelClasses type: #Number>
 	<FMComment: 'The number of classes in the model'>
+	<derived>
 	^ self cacheAt: #numberOfModelClasses ifAbsentPut: [ self allModelClasses size ]
 ]
 
@@ -76,6 +82,7 @@ MooseModel >> numberOfModelMethods [
 
 	<FMProperty: #numberOfModelMethods type: #Number>
 	<FMComment: 'The number of methods in the model'>
+	<derived>
 	^ self cacheAt: #numberOfModelMethods ifAbsentPut: [ self allModelMethods size ]
 ]
 
