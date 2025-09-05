@@ -86,6 +86,7 @@ FamixTypeGroup >> averageNumberOfAttributes [
 
 	<FMProperty: #averageNumberOfAttributes type: #Number>
 	<FMComment: 'Average number of attributes per class'>
+	<derived>
 	^ self cacheAt: #averageNumberOfAttributes ifAbsentPut: [ (self average: [ :each | each numberOfAttributes ]) asFloat ]
 ]
 
@@ -94,6 +95,7 @@ FamixTypeGroup >> averageNumberOfLinesOfCode [
 
 	<FMProperty: #averageNumberOfMethods type: #Number>
 	<FMComment: 'Average number of methods per class'>
+	<derived>
 	^ self cacheAt: #averageNumberOfMethods ifAbsentPut: [ (self average: [ :each | each numberOfLinesOfCode ]) asFloat ]
 ]
 
@@ -102,6 +104,7 @@ FamixTypeGroup >> averageNumberOfMethods [
 
 	<FMProperty: #averageNumberOfMethods type: #Number>
 	<FMComment: 'Average number of methods per class'>
+	<derived>
 	^ self cacheAt: #averageNumberOfMethods ifAbsentPut: [ (self average: [ :each | each numberOfMethods ]) asFloat ]
 ]
 
@@ -110,6 +113,7 @@ FamixTypeGroup >> averageNumberOfStatements [
 
 	<FMProperty: #averageNumberOfStatements type: #Number>
 	<FMComment: 'Average number of statements per class'>
+	<derived>
 	^ self cacheAt: #averageNumberOfStatements ifAbsentPut: [ (self average: [ :each | each numberOfStatements ]) asFloat ]
 ]
 

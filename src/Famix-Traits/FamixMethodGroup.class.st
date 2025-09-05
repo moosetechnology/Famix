@@ -42,6 +42,7 @@ FamixMethodGroup >> averageNumberOfInvocations [
 
 	<FMProperty: #averageNumberOfInvocations type: #Number>
 	<FMComment: 'Average number of invocations per methods'>
+	<derived>
 	^ self cacheAt: #averageNumberOfInvocations ifAbsentPut: [ self average: [ :each | each numberOfOutgoingInvocations ] ]
 ]
 
@@ -50,6 +51,7 @@ FamixMethodGroup >> averageNumberOfLinesOfCode [
 
 	<FMProperty: #averageNumberOfLinesOfCode type: #Number>
 	<FMComment: 'Average number of lines of code per methods'>
+	<derived>
 	^ self cacheAt: #averageNumberOfLinesOfCode ifAbsentPut: [ self average: [ :each | each numberOfLinesOfCode ] ]
 ]
 
@@ -58,5 +60,6 @@ FamixMethodGroup >> averageNumberOfParameters [
 
 	<FMProperty: #averageNumberOfParameters type: #Number>
 	<FMComment: 'Average number of parameters per methods'>
+	<derived>
 	^ self cacheAt: #averageNumberOfParameters ifAbsentPut: [ self average: [ :each | each numberOfParameters ] ]
 ]

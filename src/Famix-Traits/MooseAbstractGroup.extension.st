@@ -330,7 +330,9 @@ MooseAbstractGroup >> numberOfLinesOfCode [
 
 { #category : '*Famix-Traits' }
 MooseAbstractGroup >> numberOfPackages [
+
 	<FMProperty: #numberOfPackages type: #Number>
 	<FMComment: 'Total number of packages'>
+	<derived>
 	^ self cacheAt: #numberOfPackages ifAbsentPut: [ self numberOfEntityUsing: FamixTPackage ]
 ]
