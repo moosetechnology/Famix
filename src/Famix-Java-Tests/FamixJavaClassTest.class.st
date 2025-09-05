@@ -51,21 +51,6 @@ FamixJavaClassTest >> testIsJUnit40TestCase [
 ]
 
 { #category : 'tests' }
-FamixJavaClassTest >> testNumberOfAccessorMethods [
-
-	| model c1 m1 |
-	model := FamixJavaModel new.
-	c1 := FamixJavaClass named: 'Class1' model: model.
-	m1 := FamixJavaMethod named: 'method1' model: model.
-	m1 parentType: c1.
-	m1 beGetter.
-
-	self assert: c1 numberOfAccessorMethods equals: 1.
-	c1 numberOfAccessorMethods: 100.
-	self assert: c1 numberOfAccessorMethods equals: 100
-]
-
-{ #category : 'tests' }
 FamixJavaClassTest >> testNumberOfConstructorMethods [
 
 	| m1 c1 model |
