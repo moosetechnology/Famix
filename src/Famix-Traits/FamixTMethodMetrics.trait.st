@@ -23,9 +23,10 @@ FamixTMethodMetrics >> accept: aVisitor [
 
 { #category : 'metrics' }
 FamixTMethodMetrics >> cyclomaticComplexity [
+
 	<FMProperty: #cyclomaticComplexity type: #Number>
 	<FMComment: 'The number of linear-independent paths through a method.'>
-	^ self lookUpPropertyNamed: #cyclomaticComplexity computedAs: [ self computeCyclomaticComplexity ]
+	^ self cacheAt: #cyclomaticComplexity ifAbsent: [ self computeCyclomaticComplexity ]
 ]
 
 { #category : 'metrics' }
@@ -35,13 +36,11 @@ FamixTMethodMetrics >> cyclomaticComplexity: aNumber [
 
 { #category : 'metrics' }
 FamixTMethodMetrics >> hierarchyNestingLevel [
+
 	<FMProperty: #hierarchyNestingLevel type: #Number>
 	<derived>
 	<FMComment: 'The nesting level in the hierarchy'>
-	
-	^self
-		lookUpPropertyNamed: #hierarchyNestingLevel
-		computedAs: [ self parentType hierarchyNestingLevel]
+	^ self cacheAt: #hierarchyNestingLevel ifAbsent: [ self parentType hierarchyNestingLevel ]
 ]
 
 { #category : 'metrics' }

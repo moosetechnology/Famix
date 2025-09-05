@@ -72,13 +72,11 @@ FamixTAttribute >> accessorMethods [
 
 { #category : 'metrics' }
 FamixTAttribute >> hierarchyNestingLevel [
+
 	<FMProperty: #hierarchyNestingLevel type: #Number>
 	<derived>
 	<FMComment: 'Attribute hierarchy nesting level'>
-		
-	^self
-		lookUpPropertyNamed: #hierarchyNestingLevel
-		computedAs: [self parentType hierarchyNestingLevel]
+	^ self cacheAt: #hierarchyNestingLevel ifAbsent: [ self parentType hierarchyNestingLevel ]
 ]
 
 { #category : 'metrics' }

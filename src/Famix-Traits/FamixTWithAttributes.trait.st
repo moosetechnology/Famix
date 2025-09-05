@@ -60,13 +60,11 @@ FamixTWithAttributes >> attributes: anObject [
 
 { #category : 'Famix-Extensions' }
 FamixTWithAttributes >> numberOfAttributes [
+
 	<FMProperty: #numberOfAttributes type: #Number>
 	<derived>
 	<FMComment: 'The number of attributes in the class'>
-	
-	^self
-		lookUpPropertyNamed: #numberOfAttributes
-		computedAs: [self attributes size]
+	^ self cacheAt: #numberOfAttributes ifAbsent: [ self attributes size ]
 ]
 
 { #category : 'Famix-Extensions' }

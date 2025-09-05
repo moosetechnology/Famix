@@ -123,11 +123,8 @@ FamixTType >> mooseNameOn: aStream [
 { #category : 'metrics' }
 FamixTType >> numberOfAccessesToForeignData [
 
-	self deprecated:
-		'This method will be removed in the nex version of Moose'.
-	^ self
-		  lookUpPropertyNamed: #numberOfAccessesToForeignData
-		  computedAs: [ self notExistentMetricValue ]
+	self deprecated: 'This method will be removed in the nex version of Moose'.
+	^ self cacheAt: #numberOfAccessesToForeignData ifAbsentPut: [ self notExistentMetricValue ]
 ]
 
 { #category : 'metrics' }

@@ -340,8 +340,9 @@ MooseModel >> addNoAnnounce: anElement [
 
 { #category : 'dead code' }
 MooseModel >> allBehaviouralsWithDeadCode [
+
 	<navigation: 'All behaviourals with dead code'>
-	^ self lookUpPropertyNamed: #allBehaviouralsWithDeadCode computedAs: [ self computeAllBehaviouralsWithDeadCode ]
+	^ self cacheAt: #allBehaviouralsWithDeadCode ifAbsent: [ self computeAllBehaviouralsWithDeadCode ]
 ]
 
 { #category : 'accessing' }
@@ -389,9 +390,8 @@ MooseModel >> computeNumberOfLinesOfCode [
 
 { #category : 'dead code' }
 MooseModel >> deadCodeRate [
-	^ self
-		lookUpPropertyNamed: #deadCodeRate
-		computedAs: [ self allBehaviouralsWithDeadCode size / self allModelBehaviourals size ]
+
+	^ self cacheAt: #deadCodeRate ifAbsentPut: [ self allBehaviouralsWithDeadCode size / self allModelBehaviourals size ]
 ]
 
 { #category : 'import-export' }
@@ -718,28 +718,26 @@ MooseModel >> name: aStringOrSymbol [
 
 { #category : 'metrics' }
 MooseModel >> numberOfClasses [
+
 	<FMProperty: #numberOfClasses type: #Number>
 	<FMComment: 'The number of classes'>
-	
-	^self
-		lookUpPropertyNamed: #numberOfClasses
-		computedAs: [ self allClasses size ]
+	^ self cacheAt: #numberOfClasses ifAbsentPut: [ self allClasses size ]
 ]
 
 { #category : 'metrics' }
 MooseModel >> numberOfLinesOfCode [
+
 	<FMProperty: #numberOfLinesOfCode type: #Number>
 	<FMComment: 'The number of lines of code of the project.'>
-	^ self lookUpPropertyNamed: #numberOfLinesOfCode computedAs: [ self computeNumberOfLinesOfCode ]
+	^ self cacheAt: #numberOfLinesOfCode ifAbsentPut: [ self computeNumberOfLinesOfCode ]
 ]
 
 { #category : 'metrics' }
 MooseModel >> numberOfLinesOfCodePerClass [
+
 	<FMProperty: #numberOfLinesOfCodePerClass type: #Number>
 	<FMComment: 'The number of lines of code per class in the model'>
-	^ self
-		lookUpPropertyNamed: #numberOfLinesOfCodePerClass
-		computedAs: [ self numberOfLinesOfCode / self numberOfClasses ]
+	^ self cacheAt: #numberOfLinesOfCodePerClass ifAbsentPut: [ self numberOfLinesOfCode / self numberOfClasses ]
 ]
 
 { #category : 'accessing' }

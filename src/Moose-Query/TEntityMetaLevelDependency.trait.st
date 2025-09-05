@@ -339,12 +339,14 @@ TEntityMetaLevelDependency >> allChildrenTypes [
 
 { #category : 'accessing' }
 TEntityMetaLevelDependency >> allClients [
-	^ self lookUpPropertyNamed: #allClients computedAs: [( self queryAllIncoming withoutSelfLoops collect: #source ) flattened ]
+
+	^ self cacheAt: #allClients ifAbsent: [ (self queryAllIncoming withoutSelfLoops collect: #source) flattened ]
 ]
 
 { #category : 'accessing' }
 TEntityMetaLevelDependency >> allClientsAtMyScope [
-	^ self lookUpPropertyNamed: #allClientsAtMyScope computedAs: [ self allClientsAtScope: self class ]
+
+	^ self cacheAt: #allClientsAtMyScope ifAbsent: [ self allClientsAtScope: self class ]
 ]
 
 { #category : 'accessing' }
@@ -380,12 +382,14 @@ TEntityMetaLevelDependency >> allParents [
 
 { #category : 'accessing' }
 TEntityMetaLevelDependency >> allProviders [
-^ self lookUpPropertyNamed: #allProviders computedAs: [ (self queryAllOutgoing  withoutSelfLoops collect: #target) flattened ]
+
+	^ self cacheAt: #allProviders ifAbsentPut: [ (self queryAllOutgoing withoutSelfLoops collect: #target) flattened ]
 ]
 
 { #category : 'accessing' }
 TEntityMetaLevelDependency >> allProvidersAtMyScope [
-	^ self lookUpPropertyNamed: #allProvidersAtMyScope computedAs: [ self allProvidersAtScope: self class ]
+
+	^ self cacheAt: #allProvidersAtMyScope ifAbsent: [ self allProvidersAtScope: self class ]
 ]
 
 { #category : 'accessing' }
@@ -757,42 +761,38 @@ TEntityMetaLevelDependency >> numberOfChildren [
 
 { #category : 'accessing' }
 TEntityMetaLevelDependency >> numberOfExternalClients [
+
 	<FMProperty: #numberOfExternalClients type: #Number>
 	<derived>
 	<FMComment: 'Number of call from myself to outside my container.'>
-	^ self
-		lookUpPropertyNamed: #numberOfExternalClients
-		computedAs: [ (self allClients reject: [ :entity | entity allParents includesAny: self parents ]) size ]
+	^ self cacheAt: #numberOfExternalClients ifAbsentPut: [ (self allClients reject: [ :entity | entity allParents includesAny: self parents ]) size ]
 ]
 
 { #category : 'accessing' }
 TEntityMetaLevelDependency >> numberOfExternalProviders [
+
 	<FMProperty: #numberOfExternalProviders type: #Number>
 	<derived>
 	<FMComment: 'Number of call to myself from outside my container.'>
-	^ self
-		lookUpPropertyNamed: #numberOfExternalProviders
-		computedAs: [ (self allProviders reject: [ :entity | entity allParents includesAny: self parents ]) size ]
+	^ self cacheAt: #numberOfExternalProviders ifAbsentPut: [ (self allProviders reject: [ :entity | entity allParents includesAny: self parents ]) size ]
 ]
 
 { #category : 'accessing' }
 TEntityMetaLevelDependency >> numberOfInternalClients [
+
 	<FMProperty: #numberOfInternalClients type: #Number>
 	<derived>
 	<FMComment: 'Number of call from myself to entities of my container.'>
-	^ self
-		lookUpPropertyNamed: #numberOfInternalClients
-		computedAs: [ (self allClients select: [ :entity | entity allParents includesAny: self parents ]) size ]
+	^ self cacheAt: #numberOfInternalClients ifAbsentPut: [ (self allClients select: [ :entity | entity allParents includesAny: self parents ]) size ]
 ]
 
 { #category : 'accessing' }
 TEntityMetaLevelDependency >> numberOfInternalProviders [
+
 	<FMProperty: #numberOfInternalProviders type: #Number>
 	<derived>
 	<FMComment: 'Number of call to myself from entities from my container.'>
-	^ self
-		lookUpPropertyNamed: #numberOfInternalProviders
-		computedAs: [ (self allProviders select: [ :entity | entity allParents includesAny: self parents ]) size ]
+	^ self cacheAt: #numberOfInternalProviders ifAbsentPut: [ (self allProviders select: [ :entity | entity allParents includesAny: self parents ]) size ]
 ]
 
 { #category : 'accessing' }
