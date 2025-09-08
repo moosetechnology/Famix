@@ -223,7 +223,7 @@ FamixJavaMethod >> isInitializationBlock [
 { #category : 'testing' }
 FamixJavaMethod >> isInitializer [
 
-	^ self isConstructor or: [ self isInstanciationInitializer ]
+	^ self isConstructor or: [ self isInitializationBlock  ]
 ]
 
 { #category : 'testing' }
