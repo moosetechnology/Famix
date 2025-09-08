@@ -214,15 +214,16 @@ FamixJavaMethod >> isImplementing [
 ]
 
 { #category : 'testing' }
-FamixJavaMethod >> isInitializer [
+FamixJavaMethod >> isInitializationBlock [
+	"Return true if I represent an initialization block. I can either be static or not. You can use #isClassSide to find out."
 
-	^ self isConstructor or: [ self isInstanciationInitializer ]
+	^ '<Initializer>' = self name
 ]
 
 { #category : 'testing' }
-FamixJavaMethod >> isInstanciationInitializer [
+FamixJavaMethod >> isInitializer [
 
-	^ '<Initializer>' = self name
+	^ self isConstructor or: [ self isInitializationBlock  ]
 ]
 
 { #category : 'testing' }
