@@ -577,3 +577,12 @@ MooseObject >> suspendAllAnnouncementsDuring: aBlock [
 		aBlock value ]
 			ensure: [ self announcer: currentAnnouncer ]
 ]
+
+{ #category : 'accessing' }
+MooseObject >> valueOfFameProperty: aFMProperty [
+	"Takes a FMProperty and return its value for the current entity. If the entity cannot return it, return nil."
+
+	^ [ self perform: aFMProperty implementingSelector ]
+		  on: Error
+		  do: [ nil ]
+]
