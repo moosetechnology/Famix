@@ -93,6 +93,12 @@ FamixTSourceEntity >> inspectionSource: aBuilder [
 		  beNotEditable
 ]
 
+{ #category : 'inspector' }
+FamixTSourceEntity >> inspectionSourceContext: aContext [
+
+	aContext active: self sourceText isNotEmpty
+]
+
 { #category : 'source anchor' }
 FamixTSourceEntity >> multipleFileAnchorClass [
 	^ self mooseModel
