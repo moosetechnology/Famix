@@ -227,6 +227,12 @@ FamixJavaMethod >> isInitializer [
 ]
 
 { #category : 'testing' }
+FamixJavaMethod >> isInstanceInitializationBlock [
+
+	^ self isInitializationBlock and: [ self isClassSide not ]
+]
+
+{ #category : 'testing' }
 FamixJavaMethod >> isJUnit4Test [
 	<FMProperty: #isJUnit4Test type: #Boolean>
 	<derived>
@@ -271,6 +277,12 @@ FamixJavaMethod >> isSetter [
 					  self declaredType isNotNil and: [
 						  self declaredType name = 'void' and: [
 							  self outgoingInvocations isEmpty ] ] ] ] ] ]
+]
+
+{ #category : 'testing' }
+FamixJavaMethod >> isStaticInitializationBlock [
+
+	^ self isInitializationBlock and: [ self isClassSide ]
 ]
 
 { #category : 'accessing' }
