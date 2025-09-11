@@ -190,7 +190,6 @@ FamixTClass >> isTestCase [
 
 	<FMProperty: #isTestCase type: #Boolean>
 	<FMComment: 'True if the method is considered as a test'>
-	<derived>
 	^ self attributeAt: #isTestCase ifAbsent: [ false ]
 ]
 
