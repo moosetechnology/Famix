@@ -61,7 +61,7 @@ FamixTImplementable >> implementations: anObject [
 	implementations value: anObject
 ]
 
-{ #category : 'private' }
+{ #category : 'accessing' }
 FamixTImplementable >> implementors [
 
 	^ self implementations collect: #implementingClass
