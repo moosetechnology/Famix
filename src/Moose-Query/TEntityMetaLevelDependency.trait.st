@@ -512,7 +512,7 @@ TEntityMetaLevelDependency >> belongsTo: anEntity [
 TEntityMetaLevelDependency >> children [
 
 	| res |
-	res := Set new.
+	res := OrderedCollection new.
 	self childrenSelectors do: [ :accessor |
 		(self perform: accessor) ifNotNil: [ :r |
 			r isCollection
