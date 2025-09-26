@@ -816,7 +816,7 @@ TEntityMetaLevelDependency >> parentTypes [
 { #category : 'accessing' }
 TEntityMetaLevelDependency >> parents [
 	| res |
-	res := Set new.
+	res := OrderedCollection new.
 	self parentsDo: [ :parent | res add: parent ].
 	^ res
 ]
