@@ -20,12 +20,11 @@ Then they are composed of 3 parts:
 Scope queries
 --------------------
 
-Scope queries have 3 different messages to initialize them:
+Scope queries have 2 different messages to initialize them:
 
 ```st
 	method query ancestors.	""Launches a scope up query""
 	method query descendants. 	""Launches a scope down query""
-	method query lineage.		""Launches a scope up and down query""
 ```
 
 Then the query has different parameters:
@@ -55,9 +54,6 @@ More examples:
 
 	method query descendants recursively ofType: FamixTNamespace.
 	(method query descendants recursively until: #isClass) ofAnyType: {FamixTNamespace . FamixTClass}.
-
-	method query lineage recursively ofType: FamixTNamespace.
-	(method query lineage recursively until: #isClass) ofAnyType: {FamixTNamespace . FamixTClass}.
 ```
 
 Navigation queries
@@ -167,14 +163,6 @@ MooseQuery >> has [
 MooseQuery >> incoming [
 	^ (MQNavigationQuery directionStrategy: MQNavigationIncomingDirectionStrategy)
 		receiver: receiver;
-		yourself
-]
-
-{ #category : 'scoping' }
-MooseQuery >> lineage [
-	^ MQScopeQuery new
-		receiver: receiver;
-		direction: MQScopeAllStrategy;
 		yourself
 ]
 

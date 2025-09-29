@@ -77,16 +77,6 @@ MooseQueryResult >> allToScope: aClassFamix [
 ]
 
 { #category : 'filtering' }
-MooseQueryResult >> allWithAnyScope: aCollectionOfFamixClasses [
-	^ self executeScopeQuery: (MQScopeQuery recursivelyScopes: aCollectionOfFamixClasses direction: MQScopeAllStrategy)
-]
-
-{ #category : 'filtering' }
-MooseQueryResult >> allWithScope: aClassFamix [
-	^ self executeScopeQuery: (MQScopeQuery recursivelyScope: aClassFamix direction: MQScopeAllStrategy)
-]
-
-{ #category : 'filtering' }
 MooseQueryResult >> atAnyScope: aCollectionOfFamixClasses [
 	^ self executeScopeQuery: (MQScopeQuery scopes: aCollectionOfFamixClasses direction: MQScopeUpStrategy)
 ]
@@ -228,16 +218,6 @@ MooseQueryResult >> union: aCollection [
 	set := self asSet addAll: aCollection; yourself.
 	
 	 ^ self class on: (self receiver) withAll: set
-]
-
-{ #category : 'filtering' }
-MooseQueryResult >> withAnyScope: aCollectionOfFamixClasses [
-	^ self executeScopeQuery: (MQScopeQuery scopes: aCollectionOfFamixClasses direction: MQScopeAllStrategy)
-]
-
-{ #category : 'filtering' }
-MooseQueryResult >> withScope: aClassFamix [
-	^ self executeScopeQuery: (MQScopeQuery scope: aClassFamix direction: MQScopeAllStrategy)
 ]
 
 { #category : 'filtering' }

@@ -140,28 +140,6 @@ TEntityMetaLevelDependencyTest >> testAllToScope [
 ]
 
 { #category : 'tests' }
-TEntityMetaLevelDependencyTest >> testAllWithScope [
-
-	self assertCollection: (c1 allWithScope: FamixTClass) hasSameElements: { c1 }.
-	"self assertCollection: (c1 allWithScope: FamixTest1Class) hasSameElements: { c1 }." "issue 28"
-
-	self assertCollection: (c1 allWithScope: FamixTMethod) hasSameElements: { m1 }.
-	"self assertCollection: (c1 allWithScope: FamixTest1Method) hasSameElements: { m1 }." "issue 28"
-
-	self assertCollection: (c2 allWithScope: FamixTMethod) hasSameElements: { m2. m3 }.
-	"self assertCollection: (c2 allWithScope: FamixTest1Method) hasSameElements: { m2. m3 }." "issue 28"
-
-	self assertCollection: (c1 allWithScope: FamixTSourceAnchor) hasSameElements: { }.
-	self assertCollection: (c1 allWithScope: FamixTest1SourceTextAnchor) hasSameElements: { }.
-	self assertCollection: (c2 allWithScope: FamixTSourceAnchor) hasSameElements: { }.
-	self assertCollection: (c2 allWithScope: FamixTest1SourceTextAnchor) hasSameElements: { }.
-
-	self assertCollection: (m1 allWithScope: FamixTClass) hasSameElements: { c1 }.
-	"self assertCollection: (m1 allWithScope: FamixTest1Class) hasSameElements: { }." "issue 28"
-
-]
-
-{ #category : 'tests' }
 TEntityMetaLevelDependencyTest >> testBelongsTo [
 	self assert: m1 belongsTo equals: c1
 ]
@@ -239,26 +217,4 @@ TEntityMetaLevelDependencyTest >> testRootParents [
 	self assertCollection: c1 rootParents hasSameElements: {  }.
 	self assertCollection: c2 rootParents hasSameElements: {  }.
 	self assertCollection: m1 rootParents hasSameElements: { c1 }
-]
-
-{ #category : 'tests' }
-TEntityMetaLevelDependencyTest >> testWithScope [
-
-	self assertCollection: (c1 withScope: FamixTClass) hasSameElements: { c1 }.
-	self assertCollection: (c1 withScope: FamixTest1Class) hasSameElements: { c1 }.
-
-	self assertCollection: (c1 withScope: FamixTMethod) hasSameElements: { m1 }.
-	self assertCollection: (c1 withScope: FamixTest1Method) hasSameElements: { m1 }.
-
-	self assertCollection: (c2 withScope: FamixTMethod) hasSameElements: { m2. m3 }.
-	self assertCollection: (c2 withScope: FamixTest1Method) hasSameElements: { m2. m3 }.
-
-	self assertCollection: (c1 withScope: FamixTSourceAnchor) hasSameElements: { }.
-	self assertCollection: (c1 withScope: FamixTest1SourceTextAnchor) hasSameElements: { }.
-	self assertCollection: (c2 withScope: FamixTSourceAnchor) hasSameElements: { }.
-	self assertCollection: (c2 withScope: FamixTest1SourceTextAnchor) hasSameElements: { }.
-
-	self assertCollection: (m1 withScope: FamixTWithMethods) hasSameElements: { c1 }.
-	self assertCollection: (m1 withScope: FamixTest1Class) hasSameElements: { c1 }.
-
 ]
