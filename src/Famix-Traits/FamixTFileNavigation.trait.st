@@ -99,13 +99,14 @@ FamixTFileNavigation >> endLine: anObject [
 
 { #category : 'accessing' }
 FamixTFileNavigation >> endPos [
-	^ [ self
-		lookUpPropertyNamed: #endPos
-		computedAs: [ | text |
-			((text := self completeText) intervalOfLine: self endLine - 1) last
-				+ (self endColumn ifNil: [ (text lines at: self endLine) size	"In case I do not have any endcolumn." ]) ] ]
-		on: SubscriptOutOfBounds
-		do: [ :err | 0 ]
+
+	^ [
+		  self cacheAt: #endPos ifAbsentPut: [
+				  | text |
+				  ((text := self completeText) intervalOfLine: self endLine - 1) last
+				  + (self endColumn ifNil: [ (text lines at: self endLine) size "In case I do not have any endcolumn." ]) ] ]
+		  on: SubscriptOutOfBounds
+		  do: [ :err | 0 ]
 ]
 
 { #category : 'testing' }
@@ -211,13 +212,11 @@ FamixTFileNavigation >> startLine: anObject [
 
 { #category : 'accessing' }
 FamixTFileNavigation >> startPos [
-	^ self
-		lookUpPropertyNamed: #startPos
-		computedAs: [ (self completeText
-				intervalOfLine:
-					(self startLine
-						ifNil: [ 1 ]
-						ifNotNil: [ :start | start - 1 ])) last + (self startColumn ifNil: [ 0 ]) ]
+
+	^ self cacheAt: #startPos ifAbsentPut: [
+			  (self completeText intervalOfLine: (self startLine
+					    ifNil: [ 1 ]
+					    ifNotNil: [ :start | start - 1 ])) last + (self startColumn ifNil: [ 0 ]) ]
 ]
 
 { #category : 'testing' }

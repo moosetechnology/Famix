@@ -115,32 +115,3 @@ FamixStPackage >> localMethods [
 FamixStPackage >> methods [
 	^ self localMethods union: self extensionMethods
 ]
-
-{ #category : 'accessing' }
-FamixStPackage >> numberOfClientPackages [
-	<FMProperty: #numberOfClientPackages type: #Number>
-	<FMComment: 'The number of packages which depend on this package'>
-	<derived>
-	^ self lookUpPropertyNamed: #numberOfClientPackages computedAs: [ self allClientsAtMyScope size ]
-]
-
-{ #category : 'accessing' }
-FamixStPackage >> numberOfClientPackages: aNumber [
-	self cacheAt: #numberOfClientPackages put: aNumber
-]
-
-{ #category : 'accessing' }
-FamixStPackage >> relativeImportanceForSystem [
-	<FMProperty: #relativeImportanceForSystem type: #Number>
-	<derived>
-	<FMComment: 'The number of client packages normalized by the total number of packages'>
-	
-	^ self lookUpPropertyNamed: #relativeImportanceForSystem
-				 computedAs: [
-					(self mooseModel allModelPackages size > 1)
-						ifTrue:[
-							self numberOfClientPackages / (self mooseModel allModelPackages size - 1)
-							]
-						ifFalse: [0]
-						]
-]

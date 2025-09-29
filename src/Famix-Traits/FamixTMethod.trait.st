@@ -121,6 +121,12 @@ FamixTMethod >> isInSameClassAs: aMethod [
 ]
 
 { #category : 'testing' }
+FamixTMethod >> isInitializer [
+
+	^ self shouldBeImplemented
+]
+
+{ #category : 'testing' }
 FamixTMethod >> isMethod [
 
 	<generated>
@@ -136,6 +142,20 @@ FamixTMethod >> mooseNameOn: stream [
 	self signature
 		ifNotNil: [ :aSignature | stream nextPutAll: aSignature ]
 		ifNil: [ self name ifNotNil: [ :aName | stream nextPutAll: aName ] ]
+]
+
+{ #category : 'metrics' }
+FamixTMethod >> numberOfConditionals [
+
+	<FMProperty: #numberOfConditionals type: #Number>
+	<FMComment: 'The number of conditionals in a method'>
+	^ self attributeAt: #numberOfConditionals ifAbsent: [ self notExistentMetricValue ]
+]
+
+{ #category : 'metrics' }
+FamixTMethod >> numberOfConditionals: aNumber [
+
+	self attributeAt: #numberOfConditionals put: aNumber
 ]
 
 { #category : 'testing' }

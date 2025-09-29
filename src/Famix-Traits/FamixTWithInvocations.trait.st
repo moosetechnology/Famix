@@ -47,9 +47,7 @@ FamixTWithInvocations >> numberOfOutgoingInvocations [
 	<FMProperty: #numberOfOutgoingInvocations type: #Number>
 	<derived>
 	<FMComment: 'The number of invocations in a method'>
-	^ self
-		  lookUpPropertyNamed: #numberOfOutgoingInvocations
-		  computedAs: [ self outgoingInvocations size ]
+	^ self cacheAt: #numberOfOutgoingInvocations ifAbsent: [ self outgoingInvocations size ]
 ]
 
 { #category : 'accessing' }

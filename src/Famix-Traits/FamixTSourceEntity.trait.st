@@ -93,6 +93,12 @@ FamixTSourceEntity >> inspectionSource: aBuilder [
 		  beNotEditable
 ]
 
+{ #category : 'inspector' }
+FamixTSourceEntity >> inspectionSourceContext: aContext [
+
+	aContext active: self sourceText isNotEmpty
+]
+
 { #category : 'source anchor' }
 FamixTSourceEntity >> multipleFileAnchorClass [
 	^ self mooseModel
@@ -110,9 +116,10 @@ FamixTSourceEntity >> notExistentMetricValue [
 
 { #category : 'metrics' }
 FamixTSourceEntity >> numberOfLinesOfCode [
+
 	<FMProperty: #numberOfLinesOfCode type: #Number>
 	<FMComment: 'The number of lines of code in a method.'>
-	^ self lookUpPropertyNamed: #numberOfLinesOfCode computedAs: [ self computeNumberOfLinesOfCode ]
+	^ self cacheAt: #numberOfLinesOfCode ifAbsent: [ self computeNumberOfLinesOfCode ]
 ]
 
 { #category : 'metrics' }
@@ -122,18 +129,16 @@ FamixTSourceEntity >> numberOfLinesOfCode: aNumber [
 
 { #category : 'metrics' }
 FamixTSourceEntity >> numberOfLinesOfCodeWithMoreThanOneCharacter [
+
 	<FMProperty: #numberOfLinesOfCodeWithMoreThanOneCharacter type: #Number>
 	<derived>
-	<FMComment:
-		'This metric is essentially similar to the numberOfLinesOfCode one, 
+	<FMComment: 'This metric is essentially similar to the numberOfLinesOfCode one, 
 	the difference being that it only counts the lines with more than one non-whitespace characters.
 	This metric is particularly useful for comparing the density of other metrics on a line of code.
 	For example, depending on the formatting style chosen a Java curly brace, or a Smalltalk block 
 	can appear inline or on a separate line. For normalization purposes, these commonly appearing 
 	cases can be ruled out through the present metric.'>
-	^ self
-		lookUpPropertyNamed: #numberOfLinesOfCodeWithMoreThanOneCharacter
-		computedAs: [ (self sourceText lines select: [ :line | line trimBoth size > 1 ]) size ]
+	^ self cacheAt: #numberOfLinesOfCodeWithMoreThanOneCharacter ifAbsentPut: [ (self sourceText lines select: [ :line | line trimBoth size > 1 ]) size ]
 ]
 
 { #category : 'metrics' }

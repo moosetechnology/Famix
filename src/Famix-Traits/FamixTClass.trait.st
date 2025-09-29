@@ -187,15 +187,16 @@ FamixTClass >> isObjectClass [
 
 { #category : 'testing' }
 FamixTClass >> isTestCase [
+
 	<FMProperty: #isTestCase type: #Boolean>
 	<FMComment: 'True if the method is considered as a test'>
-	<derived>
 	^ self attributeAt: #isTestCase ifAbsent: [ false ]
 ]
 
 { #category : 'testing' }
 FamixTClass >> isTestCase: aBoolean [
-	^ self attributeAt: #isTestCase put: true
+
+	^ self attributeAt: #isTestCase put: aBoolean
 ]
 
 { #category : 'enumerating' }
@@ -206,16 +207,15 @@ FamixTClass >> overriddenMethods [
 
 { #category : 'metrics' }
 FamixTClass >> weightOfAClass [
+
 	<FMProperty: #weightOfAClass type: #Number>
+	<FMComment: 'Weight of a class'>
 	<derived>
-	<FMComment: 'Weight of a class'>	
-			
-	^self
-		lookUpPropertyNamed: #weightOfAClass
-		computedAs: [self notExistentMetricValue]
+	^ self attributeAt: #weightOfAClass ifAbsent: [ self notExistentMetricValue ]
 ]
 
 { #category : 'metrics' }
 FamixTClass >> weightOfAClass: aNumber [
-	self cacheAt: #weightOfAClass put: aNumber
+
+	self attributeAt: #weightOfAClass put: aNumber
 ]

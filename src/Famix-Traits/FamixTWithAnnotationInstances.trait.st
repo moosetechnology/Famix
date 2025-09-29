@@ -103,7 +103,7 @@ FamixTWithAnnotationInstances >> numberOfAnnotationInstances [
 	<FMProperty: #numberOfAnnotationInstances type: #Number>
 	<derived>
 	<FMComment: 'The number of annotation instances defined in the class or in any of its methods'>
-	^ self lookUpPropertyNamed: #numberOfAnnotationInstances computedAs: [
+	^ self cacheAt: #numberOfAnnotationInstances ifAbsentPut: [
 			  self annotationInstances size + (self children inject: 0 into: [ :sum :each |
 					   (each isOfType: FamixTWithAnnotationInstances)
 						   ifTrue: [ sum + each numberOfAnnotationInstances ]

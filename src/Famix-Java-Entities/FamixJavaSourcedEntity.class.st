@@ -73,17 +73,6 @@ FamixJavaSourcedEntity >> fileAnchorPath: aString startPos: anInteger endPos: an
 ]
 
 { #category : 'Famix-Extensions' }
-FamixJavaSourcedEntity >> numberOfJavaNullChecks [
-	<FMProperty: #numberOfJavaNullChecks type: #Number> <derived>
-	^self
-		lookUpPropertyNamed: #numberOfJavaNullChecks
-		computedAs: [
-			| nullCheckTextPatterns |
-			nullCheckTextPatterns := #('== null' '!= null' 'null ==' 'null !=').
-			(self sourceText allRegexMatches: ( '|' join: nullCheckTextPatterns)) size ]
-]
-
-{ #category : 'Famix-Extensions' }
 FamixJavaSourcedEntity >> structuralChildren [ 
 	^ #()
 ]

@@ -71,8 +71,9 @@ MooseAbstractGroup >> addLast: anEntity [
 
 { #category : 'accessing' }
 MooseAbstractGroup >> allContainers [
+
 	<navigation: 'All containers'>
-	^ self lookUpPropertyNamed: #allContainers computedAs: [ self entities select: #isContainerEntity ]
+	^ self cacheAt: #allContainers ifAbsent: [ self entities select: #isContainerEntity ]
 ]
 
 { #category : 'groups' }
@@ -84,8 +85,9 @@ MooseAbstractGroup >> allMatching: aClassOrTrait [
 
 { #category : 'accessing' }
 MooseAbstractGroup >> allModelContainers [
+
 	<navigation: 'All model containers'>
-	^ self lookUpPropertyNamed: #allModelContainers computedAs: [ self computeAllModelContainers ]
+	^ self cacheAt: #allModelContainers ifAbsent: [ self computeAllModelContainers ]
 ]
 
 { #category : 'groups' }
@@ -595,6 +597,12 @@ MooseAbstractGroup >> isEmpty [
 ]
 
 { #category : 'testing' }
+MooseAbstractGroup >> isEmptyOrNil [
+
+	^ self entityStorage isEmptyOrNil
+]
+
+{ #category : 'testing' }
 MooseAbstractGroup >> isNotEmpty [
 	"Answer whether the receiver contains any elements."
 
@@ -733,7 +741,7 @@ MooseAbstractGroup >> removeEntity: anEntity [
 { #category : 'accessing' }
 MooseAbstractGroup >> rootEntities [
 
-	^ self propertyNamed: #rootEntities ifAbsentPut: [ self entities select: [ :entity | entity isQueryable and: [ entity isRoot ] ] ]
+	^ self cacheAt: #rootEntities ifAbsentPut: [ self entities select: [ :entity | entity isQueryable and: [ entity isRoot ] ] ]
 ]
 
 { #category : 'accessing' }

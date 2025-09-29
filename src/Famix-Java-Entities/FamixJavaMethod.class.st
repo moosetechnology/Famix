@@ -214,6 +214,25 @@ FamixJavaMethod >> isImplementing [
 ]
 
 { #category : 'testing' }
+FamixJavaMethod >> isInitializationBlock [
+	"Return true if I represent an initialization block. I can either be static or not. You can use #isClassSide to find out."
+
+	^ '<Initializer>' = self name
+]
+
+{ #category : 'testing' }
+FamixJavaMethod >> isInitializer [
+
+	^ self isConstructor or: [ self isInitializationBlock  ]
+]
+
+{ #category : 'testing' }
+FamixJavaMethod >> isInstanceInitializationBlock [
+
+	^ self isInitializationBlock and: [ self isClassSide not ]
+]
+
+{ #category : 'testing' }
 FamixJavaMethod >> isJUnit4Test [
 	<FMProperty: #isJUnit4Test type: #Boolean>
 	<derived>
@@ -260,30 +279,19 @@ FamixJavaMethod >> isSetter [
 							  self outgoingInvocations isEmpty ] ] ] ] ] ]
 ]
 
+{ #category : 'testing' }
+FamixJavaMethod >> isStaticInitializationBlock [
+
+	^ self isInitializationBlock and: [ self isClassSide ]
+]
+
 { #category : 'accessing' }
 FamixJavaMethod >> numberOfAccesses [
+
 	<FMProperty: #numberOfAccesses type: #Number>
 	<derived>
 	<FMComment: 'The number of accesses from a method'>
-	
-	^ self 
-		lookUpPropertyNamed: #numberOfAccesses
-		computedAs: [ self accesses size ]
-]
-
-{ #category : 'Famix-Extensions-private' }
-FamixJavaMethod >> numberOfConditionals [
-	<FMProperty: #numberOfConditionals type: #Number>
-	<FMComment: 'The number of conditionals in a method'>
-	^ self
-		lookUpPropertyNamed: #numberOfConditionals
-		computedAs: [ 
-			self notExistentMetricValue ] 
-]
-
-{ #category : 'Famix-Extensions-private' }
-FamixJavaMethod >> numberOfConditionals: aNumber [
-	self cacheAt: #numberOfConditionals put: aNumber
+	^ self cacheAt: #numberOfAccesses ifAbsentPut: [ self accesses size ]
 ]
 
 { #category : 'Famix-Extensions' }

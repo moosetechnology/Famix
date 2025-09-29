@@ -254,26 +254,12 @@ FamixJavaPackage >> mooseNameOn: stream [
 ]
 
 { #category : 'accessing' }
-FamixJavaPackage >> numberOfClientPackages [
-	<FMProperty: #numberOfClientPackages type: #Number>
-	<FMComment: 'The number of packages which depend on this package'>
-	<derived>
-	^ self lookUpPropertyNamed: #numberOfClientPackages computedAs: [ self allClientsAtMyScope size ]
-]
-
-{ #category : 'accessing' }
-FamixJavaPackage >> numberOfClientPackages: aNumber [
-	self cacheAt: #numberOfClientPackages put: aNumber
-]
-
-{ #category : 'accessing' }
 FamixJavaPackage >> numberOfMethods [
+
 	<FMProperty: #numberOfMethods type: #Number>
 	<FMComment: 'The number of methods in a package'>
 	<derived>
-	^ self
-		lookUpPropertyNamed: #numberOfMethods
-		computedAs: [ self types inject: 0 into: [ :sum :each | sum + each numberOfMethods ] ]
+	^ self cacheAt: #numberOfMethods ifAbsentPut: [ self types inject: 0 into: [ :sum :each | sum + each numberOfMethods ] ]
 ]
 
 { #category : 'accessing' }
@@ -291,22 +277,6 @@ FamixJavaPackage >> printOn: aStream [
 			nextPut: $. ].
 	self name ifNotNil: [ aStream nextPutAll: self name ].
 	aStream nextPutAll: ' (Package)'
-]
-
-{ #category : 'Famix-Extensions-metrics' }
-FamixJavaPackage >> relativeImportanceForSystem [
-	<FMProperty: #relativeImportanceForSystem type: #Number>
-	<derived>
-	<FMComment: 'The number of client packages normalized by the total number of packages'>
-	
-	^ self lookUpPropertyNamed: #relativeImportanceForSystem
-				 computedAs: [
-					(self mooseModel allModelPackages size > 1)
-						ifTrue:[
-							self numberOfClientPackages / (self mooseModel allModelPackages size - 1)
-							]
-						ifFalse: [0]
-						]
 ]
 
 { #category : 'testing' }

@@ -137,8 +137,9 @@ MooseAbstractGroup >> allMethods [
 
 { #category : '*Famix-Traits' }
 MooseAbstractGroup >> allModelBehaviourals [
+
 	<navigation: 'All model behavioural entities'>
-	^ self lookUpPropertyNamed: #allModelBehaviourals computedAs: [ self computeAllModelBehaviourals ]
+	^ self cacheAt: #allModelBehaviourals ifAbsent: [ self computeAllModelBehaviourals ]
 ]
 
 { #category : '*Famix-Traits' }
@@ -197,8 +198,9 @@ MooseAbstractGroup >> allModelPureClasses [
 
 { #category : '*Famix-Traits' }
 MooseAbstractGroup >> allModelStructuralEntities [
+
 	<navigation: 'All model structural entities'>
-	^ self lookUpPropertyNamed: #allModelStructuralEntities computedAs: [ self computeAllModelStructuralEntities ]
+	^ self cacheAt: #allModelStructuralEntities ifAbsent: [ self computeAllModelStructuralEntities ]
 ]
 
 { #category : '*Famix-Traits' }
@@ -320,16 +322,17 @@ MooseAbstractGroup >> numberOfEntities [
 
 { #category : '*Famix-Traits' }
 MooseAbstractGroup >> numberOfLinesOfCode [
+
 	<FMProperty: #numberOfLinesOfCode type: #Number>
 	<FMComment: 'The number of classes in the model'>
-	^ self
-		lookUpPropertyNamed: #numberOfLinesOfCode
-		computedAs: [ self allMethods sum: #numberOfLinesOfCode ]
+	^ self cacheAt: #numberOfLinesOfCode ifAbsentPut: [ self allMethods sum: #numberOfLinesOfCode ]
 ]
 
 { #category : '*Famix-Traits' }
 MooseAbstractGroup >> numberOfPackages [
+
 	<FMProperty: #numberOfPackages type: #Number>
 	<FMComment: 'Total number of packages'>
+	<derived>
 	^ self cacheAt: #numberOfPackages ifAbsentPut: [ self numberOfEntityUsing: FamixTPackage ]
 ]

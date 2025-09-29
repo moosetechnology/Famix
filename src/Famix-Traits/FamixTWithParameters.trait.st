@@ -43,10 +43,11 @@ FamixTWithParameters >> addParameter: aParameter [
 
 { #category : 'accessing' }
 FamixTWithParameters >> numberOfParameters [
+
 	<FMProperty: #numberOfParameters type: #Number>
 	<FMComment: 'The number of parameters in a method'>
 	<derived>
-	^ self lookUpPropertyNamed: #numberOfParameters computedAs: [ self parameters size ]
+	^ self cacheAt: #numberOfParameters ifAbsent: [ self parameters size ]
 ]
 
 { #category : 'accessing' }

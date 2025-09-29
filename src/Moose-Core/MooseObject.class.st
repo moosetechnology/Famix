@@ -221,23 +221,45 @@ MooseObject >> announcer: anAnnouncer [
 ]
 
 { #category : 'accessing' }
+MooseObject >> attributeAt: name [
+
+	^ self attributeAt: name ifAbsent: [ NotFound signalFor: 'Property named ' , name ]
+]
+
+{ #category : 'accessing' }
 MooseObject >> attributeAt: name ifAbsent: aBlock [
-	1 to: entityAttributes size do: [ :n | name == (entityAttributes at: n) key ifTrue: [ ^ (entityAttributes at: n) value ] ].
+
+	| aName |
+	aName := name asSymbol.
+	1 to: entityAttributes size do: [ :n | aName == (entityAttributes at: n) key ifTrue: [ ^ (entityAttributes at: n) value ] ].
 	^ aBlock value
 ]
 
 { #category : 'accessing' }
 MooseObject >> attributeAt: name ifAbsentPut: aBlock [
-	1 to: entityAttributes size do: [ :n | name == (entityAttributes at: n) key ifTrue: [ ^ (entityAttributes at: n) value ] ].
-	entityAttributes := entityAttributes copyWith: name -> aBlock value.
+
+	| aName |
+	aName := name asSymbol.
+	1 to: entityAttributes size do: [ :n | aName == (entityAttributes at: n) key ifTrue: [ ^ (entityAttributes at: n) value ] ].
+	entityAttributes := entityAttributes copyWith: aName -> aBlock value.
 	^ entityAttributes last value
 ]
 
 { #category : 'accessing' }
 MooseObject >> attributeAt: name put: value [
-	1 to: entityAttributes size do: [ :n | name == (entityAttributes at: n) key ifTrue: [ ^ (entityAttributes at: n) value: value ] ].
-	entityAttributes := entityAttributes copyWith: name -> value.
+
+	| aName |
+	aName := name asSymbol.
+	1 to: entityAttributes size do: [ :n | aName == (entityAttributes at: n) key ifTrue: [ ^ (entityAttributes at: n) value: value ] ].
+	entityAttributes := entityAttributes copyWith: aName -> value.
 	^ entityAttributes last value
+]
+
+{ #category : 'properties' }
+MooseObject >> cacheAt: name [
+	"Returns the value of the property named propertyName, raises an error if the property does not exist"
+
+	^ self cacheAt: name ifAbsent: [ NotFound signalFor: 'Property named ' , name ]
 ]
 
 { #category : 'accessing' }
@@ -365,11 +387,6 @@ MooseObject >> isOfType: aClassFAMIX [
 { #category : 'accessing' }
 MooseObject >> localMooseModel [
 	^ self mooseModel
-]
-
-{ #category : 'properties' }
-MooseObject >> lookUpPropertyNamed: selector computedAs: aBlock [
-	^ self cacheAt: selector ifAbsentPut: aBlock
 ]
 
 { #category : 'accessing' }
@@ -513,53 +530,6 @@ MooseObject >> privateSetMooseModel: aMooseModel [
 	"Do nothing in Object"
 ]
 
-{ #category : 'private' }
-MooseObject >> properties [ 
-	 
-	"for read only uses, i.e. don't change the returned value"
-	
-	^self allCachedValues
-]
-
-{ #category : 'properties' }
-MooseObject >> propertyNamed: propertyName [ 
-	"Returns the value of the property named propertyName, raises an error if the property does not exist"
-
-	^ self propertyNamed: propertyName ifAbsent: [ NotFound signalFor: 'Property named ', propertyName  ]
-]
-
-{ #category : 'properties' }
-MooseObject >> propertyNamed: propertyName ifAbsent: aBlock [
-	"Return the value of the property named propertyName, evaluate aBlock if the property does not exist"
-
-	^ self
-		cacheAt: propertyName asSymbol
-		ifAbsent: [ ([ self mmGetProperty: (self mooseDescription propertyNamed: propertyName) ]
-				on: Error
-				do: [ :ex | nil ]) ifNil: [ aBlock value ] ]
-]
-
-{ #category : 'properties' }
-MooseObject >> propertyNamed: name ifAbsentPut: value [
-	^ self cacheAt: name ifAbsentPut: value
-]
-
-{ #category : 'properties' }
-MooseObject >> propertyNamed: propertyName ifNil: aBlock [
-	"Return the value of the property named propertyName, evaluate aBlock if the property does not exist"
-
-	^ self
-		cacheAt: propertyName asSymbol
-		ifAbsent: [ ([ self mmGetProperty: (self mooseDescription propertyNamed: propertyName) ]
-				on: Error
-				do: [ :ex | nil ]) ifNil: [ aBlock value ] ]
-]
-
-{ #category : 'properties' }
-MooseObject >> propertyNamed: name put: value [
-	^ self cacheAt: name put: value
-]
-
 { #category : 'accessing' }
 MooseObject >> removeAttribute: aSymbol [
 	| each |
@@ -606,4 +576,13 @@ MooseObject >> suspendAllAnnouncementsDuring: aBlock [
 	[ 	self announcer: Announcer new.
 		aBlock value ]
 			ensure: [ self announcer: currentAnnouncer ]
+]
+
+{ #category : 'accessing' }
+MooseObject >> valueOfFameProperty: aFMProperty [
+	"Takes a FMProperty and return its value for the current entity. If the entity cannot return it, return nil."
+
+	^ [ self perform: aFMProperty implementingSelector ]
+		  on: Error
+		  do: [ nil ]
 ]

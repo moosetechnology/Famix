@@ -171,10 +171,12 @@ FamixStMethod >> isCalledInternally [
 
 { #category : 'Famix-Extensions-metrics-support' }
 FamixStMethod >> isInitializer [
-	| protocolCond nameCond |
-	protocolCond := self protocol ifNotNil: [ '*initializ*' match: self protocol ] ifNil: [ false ].
-	nameCond := self name ifNotNil: [ '*initialize*' match: self name ] ifNil: [ false ].
-	^ (protocolCond or: nameCond) or: [ self isConstructor ]  
+
+	self protocol ifNotNil: [ :proto | ('*initializ*' match: proto) ifTrue: [ ^ true ] ].
+	
+	self name ifNotNil: [ :na | ('*initialize*' match: na) ifTrue: [ ^ true ] ].
+	
+	^ self isConstructor
 ]
 
 { #category : 'Famix-Extensions-metrics-support' }
@@ -211,37 +213,28 @@ FamixStMethod >> isOverriding [
 
 { #category : 'Famix-Extensions-private' }
 FamixStMethod >> numberOfAccesses [
+
 	<FMProperty: #numberOfAccesses type: #Number>
 	<derived>
 	<FMComment: 'The number of accesses from a method'>
-	
-	^ self 
-		lookUpPropertyNamed: #numberOfAccesses
-		computedAs: [ self accesses size ]
+	^ self cacheAt: #numberOfAccesses ifAbsent: [ self accesses size ]
 ]
 
-{ #category : 'Famix-Extensions-private' }
+{ #category : 'metrics' }
 FamixStMethod >> numberOfConditionals [
+
 	<FMProperty: #numberOfConditionals type: #Number>
 	<FMComment: 'The number of conditionals in a method'>
-	^ self
-		lookUpPropertyNamed: #numberOfConditionals
-		computedAs: [ self computeNumberOfConditionals ]
-]
-
-{ #category : 'Famix-Extensions-private' }
-FamixStMethod >> numberOfConditionals: aNumber [
-	self cacheAt: #numberOfConditionals put: aNumber
+	^ self cacheAt: #numberOfConditionals ifAbsentPut: [ self computeNumberOfConditionals ]
 ]
 
 { #category : 'Famix-Extensions-private' }
 FamixStMethod >> numberOfMessageSends [
+
 	<FMProperty: #numberOfMessageSends type: #Number>
 	<derived>
 	<FMComment: 'The number of message from a method'>
-	^ self
-		lookUpPropertyNamed: #numberOfMessageSends
-		computedAs: [ self computeNumberOfMessageSends ]
+	^ self cacheAt: #numberOfMessageSends ifAbsent: [ self computeNumberOfMessageSends ]
 ]
 
 { #category : 'Famix-Extensions-private' }
@@ -251,11 +244,10 @@ FamixStMethod >> numberOfMessageSends: aNumber [
 
 { #category : 'Famix-Extensions-private' }
 FamixStMethod >> numberOfStatements [
+
 	<FMProperty: #numberOfStatements type: #Number>
 	<FMComment: 'The number of statements in a method'>
-	^ self
-		lookUpPropertyNamed: #numberOfStatements
-		computedAs: [ self computeNumberOfStatements ]
+	^ self cacheAt: #numberOfStatements ifAbsent: [ self computeNumberOfStatements ]
 ]
 
 { #category : 'protocol' }
