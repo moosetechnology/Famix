@@ -26,14 +26,6 @@ TDependencyQueryResult >> atScope: aClassFamix withNonMatchingEntitiesDo: aBlock
 	^ self newObjectResultWith: res asSet
 ]
 
-{ #category : 'private' }
-TDependencyQueryResult >> elementAtReceiverScope: dep [
-	"returns scope (parents and children) of opposite element matching the scope of the receiver.
-	For example, would return the class of an invoked method if query is called on a class."
-
-	^ (self opposite: dep) withScope: self receiver
-]
-
 { #category : 'filtering' }
 TDependencyQueryResult >> executeScopeQuery: aQuery [
 	self storage do: [ :dep | (self opposite: dep) scopeForQuery: aQuery direction: aQuery direction ].
