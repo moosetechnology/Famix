@@ -295,7 +295,7 @@ TEntityMetaLevelDependency >> addRootParentsIn: aCollection [
 TEntityMetaLevelDependency >> allAtAnyScope: aCollectionOfFamixClasses [
 	"I am used to return all the encountered entities (recursively) at matching one of the class scope given as parameter that are up in the containment tree of the metamodel"
 
-	^ self query ancestors recursively ofAnyType: aCollectionOfFamixClasses
+	^ self query containers recursively ofAnyType: aCollectionOfFamixClasses
 ]
 
 { #category : 'scoping' }
@@ -303,14 +303,14 @@ TEntityMetaLevelDependency >> allAtAnyScope: aCollectionOfFamixClasses until: re
 	"I am used to return all the encountered entities (recursively) at matching one of the class scope given as parameter that are up in the containment tree of the metamodel.
 	I stop the recursion when the rejectBlock is true"
 
-	^ (self query ancestors recursively until: rejectBlock) ofAnyType: aCollectionOfFamixClasses
+	^ (self query containers recursively until: rejectBlock) ofAnyType: aCollectionOfFamixClasses
 ]
 
 { #category : 'scoping' }
 TEntityMetaLevelDependency >> allAtScope: aClassFAMIX [
 	"I am used to return all the entities at a given famix class scope that are up in the containment tree of the metamodel on multiple levels."
 
-	^ self query ancestors recursively ofType: aClassFAMIX
+	^ self query containers recursively ofType: aClassFAMIX
 ]
 
 { #category : 'scoping' }
@@ -318,7 +318,7 @@ TEntityMetaLevelDependency >> allAtScope: aClassFAMIX until: rejectBlock [
 	"I am used to return all the entities at a given famix class scope that are up in the containment tree of the metamodel on multiple levels.
 	I stop the recursion when the rejectBlock is true."
 
-	^ (self query ancestors recursively until: rejectBlock) ofType: aClassFAMIX
+	^ (self query containers recursively until: rejectBlock) ofType: aClassFAMIX
 ]
 
 { #category : 'accessing' }
@@ -399,7 +399,7 @@ TEntityMetaLevelDependency >> allProvidersAtScope: aClass [
 TEntityMetaLevelDependency >> allToAnyScope: aCollectionOfFamixClasses [
 	"I am used to return all the encountered entities (recursively) at matching one of the class scope given as parameter that are down in the containment tree of the metamodel"
 
-	^ self query descendants recursively ofAnyType: aCollectionOfFamixClasses
+	^ self query containedEntities recursively ofAnyType: aCollectionOfFamixClasses
 ]
 
 { #category : 'scoping' }
@@ -407,14 +407,14 @@ TEntityMetaLevelDependency >> allToAnyScope: aCollectionOfFamixClasses until: re
 	"I am used to return all the encountered entities (recursively) at matching one of the class scope given as parameter that are down in the containment tree of the metamodel
 	I stop the recursion when the rejectBlock is true"
 
-	^ (self query descendants recursively until: rejectBlock) ofAnyType: aCollectionOfFamixClasses
+	^ (self query containedEntities recursively until: rejectBlock) ofAnyType: aCollectionOfFamixClasses
 ]
 
 { #category : 'scoping' }
 TEntityMetaLevelDependency >> allToScope: aClassFAMIX [
 	"I am used to return all the entities at a given famix class scope that are down in the containment tree of the metamodel on multiple levels."
 
-	^ self query descendants recursively ofType: aClassFAMIX
+	^ self query containedEntities recursively ofType: aClassFAMIX
 ]
 
 { #category : 'scoping' }
@@ -422,14 +422,14 @@ TEntityMetaLevelDependency >> allToScope: aClassFAMIX until: rejectBlock [
 	"I am used to return all the entities at a given famix class scope that are down in the containment tree of the metamodel on multiple levels.
 	I stop the recursion when the rejectBlock is true"
 
-	^ (self query descendants recursively until: rejectBlock) ofType: aClassFAMIX
+	^ (self query containedEntities recursively until: rejectBlock) ofType: aClassFAMIX
 ]
 
 { #category : 'scoping' }
 TEntityMetaLevelDependency >> atAnyScope: aCollectionOfFamixClasses [
 	"I am used to return all the first encountered entities matching one of the class scope given as parameter that are up in the containment tree of the metamodel"
 
-	^ self query ancestors ofAnyType: aCollectionOfFamixClasses
+	^ self query containers ofAnyType: aCollectionOfFamixClasses
 ]
 
 { #category : 'scoping' }
@@ -437,14 +437,14 @@ TEntityMetaLevelDependency >> atAnyScope: aCollectionOfFamixClasses until: rejec
 	"I am used to return all the first encountered entities matching one of the class scope given as parameter that are up in the containment tree of the metamodel.
 	I stop the recursion when the rejectBlock is true"
 
-	^ (self query ancestors until: rejectBlock) ofAnyType: aCollectionOfFamixClasses
+	^ (self query containers until: rejectBlock) ofAnyType: aCollectionOfFamixClasses
 ]
 
 { #category : 'scoping' }
 TEntityMetaLevelDependency >> atScope: aClassFAMIX [
 	"I am used to return all the first encountered entities at a given famix class scope that are up in the containment tree of the metamodel"
 
-	^ self query ancestors ofType: aClassFAMIX
+	^ self query containers ofType: aClassFAMIX
 ]
 
 { #category : 'scoping' }
@@ -452,14 +452,14 @@ TEntityMetaLevelDependency >> atScope: aClassFAMIX until: rejectBlock [
 	"I am used to return all the first encountered entities at a given famix class scope that are up in the containment tree of the metamodel.
 	I stop the recursion when the rejectBlock is true"
 
-	^ (self query ancestors until: rejectBlock) ofType: aClassFAMIX
+	^ (self query containers until: rejectBlock) ofType: aClassFAMIX
 ]
 
 { #category : 'scoping' }
 TEntityMetaLevelDependency >> atScopeWithProperty: aPropertySelector [
 	"I am used to return the first encountered entity that are up in the containment tree of the metamodel satisfying the property selector"
 
-	^ self query ancestors withProperty: aPropertySelector
+	^ self query containers withProperty: aPropertySelector
 ]
 
 { #category : 'deprecated' }
@@ -1022,7 +1022,7 @@ TEntityMetaLevelDependency >> throughAllTo [
 TEntityMetaLevelDependency >> toAnyScope: aCollectionOfFamixClasses [
 	"I am used to return all the first encountered entities matching one of the class scope given as parameter that are down in the containment tree of the metamodel"
 
-	^ self query descendants ofAnyType: aCollectionOfFamixClasses
+	^ self query containedEntities ofAnyType: aCollectionOfFamixClasses
 ]
 
 { #category : 'scoping' }
@@ -1030,14 +1030,14 @@ TEntityMetaLevelDependency >> toAnyScope: aCollectionOfFamixClasses until: rejec
 	"I am used to return all the first encountered entities matching one of the class scope given as parameter that are down in the containment tree of the metamodel.
 	I stop the recursion when the rejectBlock is true"
 
-	^ (self query descendants until: rejectBlock) ofAnyType: aCollectionOfFamixClasses
+	^ (self query containedEntities until: rejectBlock) ofAnyType: aCollectionOfFamixClasses
 ]
 
 { #category : 'scoping' }
 TEntityMetaLevelDependency >> toScope: aClassFAMIX [
 	"I am used to return all the first encountered  entities at a given famix class scope that are down in the containment tree of the metamodel"
 
-	^ self query descendants ofType: aClassFAMIX
+	^ self query containedEntities ofType: aClassFAMIX
 ]
 
 { #category : 'scoping' }
@@ -1045,7 +1045,7 @@ TEntityMetaLevelDependency >> toScope: aClassFAMIX until: rejectBlock [
 	"I am used to return all the first encountered  entities at a given famix class scope that are down in the containment tree of the metamodel.
 	I stop the recursion when the rejectBlock is true"
 
-	^ (self query descendants until: rejectBlock) ofType: aClassFAMIX
+	^ (self query containedEntities until: rejectBlock) ofType: aClassFAMIX
 ]
 
 { #category : 'accessing' }

@@ -23,23 +23,23 @@ Scope queries
 Scope queries have 2 different messages to initialize them:
 
 ```st
-	method query ancestors.	""Launches a scope up query""
-	method query descendants. 	""Launches a scope down query""
+	method query containers.	""Query the containers of the receiver""
+	method query containedEntities. 	""Query the contained entities of the receiver""
 ```
 
 Then the query has different parameters:
 
 ```st
-	method query ancestors recursively. ""With #recursively, the scope query will not stop at the first result found but proceed in checking for more results higher and lower in the containment DAG. Withtout the option, we stop at the first ancestors/descendents we find.""
-	method query ancestors until: #isClass. ""With #until: it is possible to add a stop condition to the scope query.""
+	method query containers recursively. ""With #recursively, the scope query will not stop at the first result found but proceed in checking for more results higher and lower in the containment DAG. Withtout the option, we stop at the first containers/descendents we find.""
+	method query containers until: #isClass. ""With #until: it is possible to add a stop condition to the scope query.""
 ```
 
 Last, you can have a parameter that will finish to configure and execute the query:
 
 ```st
-	method query ancestors ofType: FamixTClass. ""ofType: will select the ancestors/descendents matching the kind in parameter.""
-	method query ancestors ofAnyType: { FamixTClass . FamixTNamespace }. ""ofAnyTypes: will select the ancestors/descendents matching any kind in parameter.""
-	method query ancestors ofAnyType. ""Select all ancestors independently of the type.""
+	method query containers ofType: FamixTClass. ""ofType: will select the containers/containedEntities matching the kind in parameter.""
+	method query containers ofAnyType: { FamixTClass . FamixTNamespace }. ""ofAnyTypes: will select the containers/containedEntities matching any kind in parameter.""
+	method query containers ofAnyType. ""Select all containers independently of the type.""
 ```
 
 More examples:
@@ -47,13 +47,13 @@ More examples:
 ```st
 	method := model allModelMethods anyOne.
 
-	method query ancestors ofType: FamixTNamespace.
-	method query ancestors recursively ofType: FamixTNamespace.
-	method query ancestors recursively ofAnyType: {FamixTNamespace . FamixTClass}.
-	(method query ancestors recursively until: #isClass) ofAnyType: {FamixTNamespace . FamixTClass}.
+	method query containers ofType: FamixTNamespace.
+	method query containers recursively ofType: FamixTNamespace.
+	method query containers recursively ofAnyType: {FamixTNamespace . FamixTClass}.
+	(method query containers recursively until: #isClass) ofAnyType: {FamixTNamespace . FamixTClass}.
 
-	method query descendants recursively ofType: FamixTNamespace.
-	(method query descendants recursively until: #isClass) ofAnyType: {FamixTNamespace . FamixTClass}.
+	method query containedEntities recursively ofType: FamixTNamespace.
+	(method query containedEntities recursively until: #isClass) ofAnyType: {FamixTNamespace . FamixTClass}.
 ```
 
 Navigation queries
@@ -92,9 +92,9 @@ By default the queries will return a collection of associations (if the paramete
 Last, you can have a parameter that will finish to configure and execute the query:
 
 ```st
-	method query ancestors dependencies. ""Will select all kinds of dependencies.""
-	method query ancestors dependenciesOfType: FamixTReference. ""Will select the dependencies of the type passed has parameter.""
-	method query ancestors dependenciesOfAnyType: { FamixTReference . FamixTInvocation }. ""Will select the dependencies whose types are present in the collection of types in parameter.""
+	method query incoming dependencies. ""Will select all kinds of dependencies.""
+	method query incoming dependenciesOfType: FamixTReference. ""Will select the dependencies of the type passed has parameter.""
+	method query incoming dependenciesOfAnyType: { FamixTReference . FamixTInvocation }. ""Will select the dependencies whose types are present in the collection of types in parameter.""
 ```
 
 More examples:
@@ -136,19 +136,21 @@ MooseQuery class >> receiver: anEntity [
 ]
 
 { #category : 'scoping' }
-MooseQuery >> ancestors [
+MooseQuery >> containedEntities [
+
 	^ MQScopeQuery new
-		receiver: receiver;
-		direction: MQScopeUpStrategy;
-		yourself
+		  receiver: receiver;
+		  direction: MQScopeContainedEntitiesStrategy;
+		  yourself
 ]
 
 { #category : 'scoping' }
-MooseQuery >> descendants [
+MooseQuery >> containers [
+
 	^ MQScopeQuery new
-		receiver: receiver;
-		direction: MQScopeDownStrategy;
-		yourself
+		  receiver: receiver;
+		  direction: MQScopeContainersStrategy;
+		  yourself
 ]
 
 { #category : 'navigation' }

@@ -58,32 +58,32 @@ MooseQueryResult >> add: newObject [
 
 { #category : 'filtering' }
 MooseQueryResult >> allAtAnyScope: aCollectionOfFamixClasses [
-	^ self executeScopeQuery: (MQScopeQuery recursivelyScopes: aCollectionOfFamixClasses direction: MQScopeUpStrategy)
+	^ self executeScopeQuery: (MQScopeQuery recursivelyScopes: aCollectionOfFamixClasses direction: MQScopeContainersStrategy)
 ]
 
 { #category : 'filtering' }
 MooseQueryResult >> allAtScope: aClassFamix [
-	^ self executeScopeQuery: (MQScopeQuery recursivelyScope: aClassFamix direction: MQScopeUpStrategy)
+	^ self executeScopeQuery: (MQScopeQuery recursivelyScope: aClassFamix direction: MQScopeContainersStrategy)
 ]
 
 { #category : 'filtering' }
 MooseQueryResult >> allToAnyScope: aCollectionOfFamixClasses [
-	^ self executeScopeQuery: (MQScopeQuery recursivelyScopes: aCollectionOfFamixClasses direction: MQScopeDownStrategy)
+	^ self executeScopeQuery: (MQScopeQuery recursivelyScopes: aCollectionOfFamixClasses direction: MQScopeContainedEntitiesStrategy)
 ]
 
 { #category : 'filtering' }
 MooseQueryResult >> allToScope: aClassFamix [
-	^ self executeScopeQuery: (MQScopeQuery recursivelyScope: aClassFamix direction: MQScopeDownStrategy)
+	^ self executeScopeQuery: (MQScopeQuery recursivelyScope: aClassFamix direction: MQScopeContainedEntitiesStrategy)
 ]
 
 { #category : 'filtering' }
 MooseQueryResult >> atAnyScope: aCollectionOfFamixClasses [
-	^ self executeScopeQuery: (MQScopeQuery scopes: aCollectionOfFamixClasses direction: MQScopeUpStrategy)
+	^ self executeScopeQuery: (MQScopeQuery scopes: aCollectionOfFamixClasses direction: MQScopeContainersStrategy)
 ]
 
 { #category : 'filtering' }
 MooseQueryResult >> atScope: aClassFamix [
-	^ self executeScopeQuery: (MQScopeQuery scope: aClassFamix direction: MQScopeUpStrategy)
+	^ self executeScopeQuery: (MQScopeQuery scope: aClassFamix direction: MQScopeContainersStrategy)
 ]
 
 { #category : 'enumerating' }
@@ -202,12 +202,12 @@ MooseQueryResult >> storage: aCollection [
 
 { #category : 'filtering' }
 MooseQueryResult >> toAnyScope: aCollectionOfFamixClasses [
-	^ self executeScopeQuery: (MQScopeQuery scopes: aCollectionOfFamixClasses direction: MQScopeDownStrategy)
+	^ self executeScopeQuery: (MQScopeQuery scopes: aCollectionOfFamixClasses direction: MQScopeContainedEntitiesStrategy)
 ]
 
 { #category : 'filtering' }
 MooseQueryResult >> toScope: aClassFamix [
-	^ self executeScopeQuery: (MQScopeQuery scope: aClassFamix direction: MQScopeDownStrategy)
+	^ self executeScopeQuery: (MQScopeQuery scope: aClassFamix direction: MQScopeContainedEntitiesStrategy)
 ]
 
 { #category : 'enumerating' }
