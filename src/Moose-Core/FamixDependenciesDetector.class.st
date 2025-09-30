@@ -74,7 +74,7 @@ FamixDependenciesDetector >> detectDependenciesAtAllScopesOfPossibleDependencies
 		flatCollect: [:each | each isCollection ifTrue: [ each ] ifFalse: [ { each } ]])
 		do: [ :dep | 
 			self
-				selectMatchingEntitiesFrom: (dep query ancestors recursively until: [ :e | (potentialDependencies includes: e) or: [ dependencies includes: e ] ]) ofAnyType ]
+				selectMatchingEntitiesFrom: (dep query containers recursively until: [ :e | (potentialDependencies includes: e) or: [ dependencies includes: e ] ]) ofAnyType ]
 ]
 
 { #category : 'links-computation' }
