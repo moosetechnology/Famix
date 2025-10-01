@@ -71,6 +71,13 @@ TEntityMetaLevelDependency classSide >> allChildrenTypesIn: aMetamodel [
 ]
 
 { #category : 'accessing' }
+TEntityMetaLevelDependency classSide >> allContainerTypesIn: aMetamodel [
+
+	^ aMetamodel additionalProperty: #allContainerTypes for: self ifAbsentPut: [ self privateAllContainerTypesIn: aMetamodel ]
+	
+]
+
+{ #category : 'accessing' }
 TEntityMetaLevelDependency classSide >> allIncomingAssociationTypesIn: aMetamodel [
 
 	^ aMetamodel additionalProperty: #allIncomingAssociationTypes for: self ifAbsentPut: [ self privateAllIncomingAssociationTypesIn: aMetamodel ]
@@ -81,13 +88,6 @@ TEntityMetaLevelDependency classSide >> allIncomingAssociationTypesIn: aMetamode
 TEntityMetaLevelDependency classSide >> allOutgoingAssociationTypesIn: aMetamodel [
 
 	^ aMetamodel additionalProperty: #allOutgoingAssociationTypes for: self ifAbsentPut: [ self privateAllOutgoingAssociationTypesIn: aMetamodel ]
-	
-]
-
-{ #category : 'accessing' }
-TEntityMetaLevelDependency classSide >> allParentTypesIn: aMetamodel [
-
-	^ aMetamodel additionalProperty: #allParentTypes for: self ifAbsentPut: [ self privateAllContainerTypesIn: aMetamodel ]
 	
 ]
 
@@ -356,6 +356,19 @@ TEntityMetaLevelDependency >> allClientsAtScope: aClass [
 ]
 
 { #category : 'accessing' }
+TEntityMetaLevelDependency >> allContainerTypes [
+
+	^ self class allContainerTypesIn: self metamodel
+]
+
+{ #category : 'accessing' }
+TEntityMetaLevelDependency >> allContainers [
+	"Returns all the containers and sup-containers of an entity, i.e my containers and those of my containers, and those of the containers of my containers, etc"
+
+	^ self addAllContainersIn: OrderedCollection new
+]
+
+{ #category : 'accessing' }
 TEntityMetaLevelDependency >> allIncomingAssociationTypes [
 
 	^ self class allIncomingAssociationTypesIn: self metamodel 
@@ -364,18 +377,6 @@ TEntityMetaLevelDependency >> allIncomingAssociationTypes [
 { #category : 'accessing' }
 TEntityMetaLevelDependency >> allOutgoingAssociationTypes [
 	^ self class allOutgoingAssociationTypesIn: self metamodel
-]
-
-{ #category : 'accessing' }
-TEntityMetaLevelDependency >> allParentTypes [
-	^ self class allParentTypesIn: self metamodel
-]
-
-{ #category : 'accessing' }
-TEntityMetaLevelDependency >> allParents [
-	"Returns all the parents and sup-parents of an entity, i.e my parents and those of my parents, and those of the parents of my parents, etc"
-
-	^ self addAllContainersIn: OrderedCollection new
 ]
 
 { #category : 'accessing' }
@@ -475,11 +476,6 @@ TEntityMetaLevelDependency >> belongsTo [
 	^ self containers
 		  ifNotEmpty: #anyOne
 		  ifEmpty: [ nil ]
-]
-
-{ #category : 'deprecated' }
-TEntityMetaLevelDependency >> belongsTo: anEntity [
-	self deprecated: 'belongsTo will be removed in the future. Use the explicit setter for the property you''re trying to set instead. Such has #parentScope, #typeContainer, ...'
 ]
 
 { #category : 'accessing' }
@@ -761,7 +757,7 @@ TEntityMetaLevelDependency >> numberOfExternalClients [
 	<FMProperty: #numberOfExternalClients type: #Number>
 	<derived>
 	<FMComment: 'Number of call from myself to outside my container.'>
-	^ self cacheAt: #numberOfExternalClients ifAbsentPut: [ (self allClients reject: [ :entity | entity allParents includesAny: self containers ]) size ]
+	^ self cacheAt: #numberOfExternalClients ifAbsentPut: [ (self allClients reject: [ :entity | entity allContainers includesAny: self containers ]) size ]
 ]
 
 { #category : 'accessing' }
@@ -770,7 +766,7 @@ TEntityMetaLevelDependency >> numberOfExternalProviders [
 	<FMProperty: #numberOfExternalProviders type: #Number>
 	<derived>
 	<FMComment: 'Number of call to myself from outside my container.'>
-	^ self cacheAt: #numberOfExternalProviders ifAbsentPut: [ (self allProviders reject: [ :entity | entity allParents includesAny: self containers ]) size ]
+	^ self cacheAt: #numberOfExternalProviders ifAbsentPut: [ (self allProviders reject: [ :entity | entity allContainers includesAny: self containers ]) size ]
 ]
 
 { #category : 'accessing' }
@@ -779,7 +775,7 @@ TEntityMetaLevelDependency >> numberOfInternalClients [
 	<FMProperty: #numberOfInternalClients type: #Number>
 	<derived>
 	<FMComment: 'Number of call from myself to entities of my container.'>
-	^ self cacheAt: #numberOfInternalClients ifAbsentPut: [ (self allClients select: [ :entity | entity allParents includesAny: self containers ]) size ]
+	^ self cacheAt: #numberOfInternalClients ifAbsentPut: [ (self allClients select: [ :entity | entity allContainers includesAny: self containers ]) size ]
 ]
 
 { #category : 'accessing' }
@@ -788,7 +784,7 @@ TEntityMetaLevelDependency >> numberOfInternalProviders [
 	<FMProperty: #numberOfInternalProviders type: #Number>
 	<derived>
 	<FMComment: 'Number of call to myself from entities from my container.'>
-	^ self cacheAt: #numberOfInternalProviders ifAbsentPut: [ (self allProviders select: [ :entity | entity allParents includesAny: self containers ]) size ]
+	^ self cacheAt: #numberOfInternalProviders ifAbsentPut: [ (self allProviders select: [ :entity | entity allContainers includesAny: self containers ]) size ]
 ]
 
 { #category : 'accessing' }
@@ -1065,10 +1061,10 @@ TEntityMetaLevelDependency >> withAllChildren [
 ]
 
 { #category : 'accessing' }
-TEntityMetaLevelDependency >> withAllParents [
-	"I return a collection including me and all my parents in the containement DAG."
+TEntityMetaLevelDependency >> withAllContainers [
+	"I return a collection including me and all my containers in the containement DAG."
 
-	^ self allParents
-		add: self;
-		yourself
+	^ self allContainers
+		  add: self;
+		  yourself
 ]

@@ -166,6 +166,15 @@ MooseQueryTest >> testAllChildren [
 ]
 
 { #category : 'tests' }
+MooseQueryTest >> testAllContainers [
+
+	self assert: package2 allContainers size equals: 0.
+	self assert: class2 allContainers size equals: 1.
+	self assert: method2 allContainers size equals: 2.
+	self assert: var2 allContainers size equals: 2
+]
+
+{ #category : 'tests' }
 MooseQueryTest >> testAllIncoming [
 	self assert: method2 queryAllIncoming size equals: 3.
 	self assert: class2 queryAllIncoming size equals: 7
@@ -176,14 +185,6 @@ MooseQueryTest >> testAllOutgoing [
 
 	self assert: method2 queryAllOutgoing size equals: 3.
 	self assert: class2 queryAllOutgoing size equals: 5
-]
-
-{ #category : 'tests' }
-MooseQueryTest >> testAllParents [
-	self assert: package2 allParents size equals: 0.
-	self assert: class2 allParents size equals: 1.
-	self assert: method2 allParents size equals: 2.
-	self assert: var2 allParents size equals: 2
 ]
 
 { #category : 'tests' }
@@ -703,11 +704,12 @@ MooseQueryTest >> testWithAllChildren [
 ]
 
 { #category : 'tests' }
-MooseQueryTest >> testWithAllParents [
-	self assert: package2 withAllParents size equals: 1.
-	self assert: class2 withAllParents size equals: 2.
-	self assert: method2 withAllParents size equals: 3.
-	self assert: var2 withAllParents size equals: 3
+MooseQueryTest >> testWithAllContainers [
+
+	self assert: package2 withAllContainers size equals: 1.
+	self assert: class2 withAllContainers size equals: 2.
+	self assert: method2 withAllContainers size equals: 3.
+	self assert: var2 withAllContainers size equals: 3
 ]
 
 { #category : 'tests' }

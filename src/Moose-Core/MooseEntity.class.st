@@ -182,7 +182,7 @@ MooseEntity >> isLinkedTo: anEntity dependancyDirection: aDirectionStrategy in: 
 
 	| allLinksWithParents |
 	allLinksWithParents := self allChildrenDependenciesThrough: aDirectionStrategy.
-	allLinksWithParents addAll: (allLinksWithParents flatCollect: #allParents).
+	allLinksWithParents addAll: (allLinksWithParents flatCollect: #allContainers).
 
 	^ anEntity isInListOfPossibleLinks: allLinksWithParents forModel: aMooseModel
 ]

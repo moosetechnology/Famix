@@ -1,6 +1,27 @@
 Extension { #name : 'TEntityMetaLevelDependency' }
 
 { #category : '*Famix-Deprecated' }
+TEntityMetaLevelDependency >> allParentTypes [
+
+	self deprecated: 'Use allContainerTypes instead' transformWith: '`@rcv allParentTypes' -> '`@rcv allContainerTypes'.
+	^ self allContainerTypes
+]
+
+{ #category : '*Famix-Deprecated' }
+TEntityMetaLevelDependency classSide >> allParentTypesIn: aMetamodel [
+
+	self deprecated: 'Use #allContainerTypesIn: instead' transformWith: '`@rcv allParentTypesIn: `@arg' -> '`@rcv allContainerTypesIn: `@arg'.
+	^ self allContainerTypesIn: aMetamodel
+]
+
+{ #category : '*Famix-Deprecated' }
+TEntityMetaLevelDependency >> allParents [
+
+	self deprecated: 'Use #allContainers instead' transformWith: '`@rcv allParents' -> '`@rcv allContainers'.
+	^ self allContainers
+]
+
+{ #category : '*Famix-Deprecated' }
 TEntityMetaLevelDependency >> allWithAnyScope: aCollectionOfFamixClasses [
 	"I am used to return all the entities (recursively) matching one of the class scope that are up or down in the containment tree of the metamodel"
 
@@ -32,6 +53,11 @@ TEntityMetaLevelDependency >> allWithScope: aClassFAMIX until: rejectBlock [
 
 	self deprecated: 'This query taking parents and children has been deprecated. You should use a scope up or a scope down instead.'.
 	^ (self query lineage recursively until: rejectBlock) ofType: aClassFAMIX
+]
+
+{ #category : '*Famix-Deprecated' }
+TEntityMetaLevelDependency >> belongsTo: anEntity [
+	self deprecated: 'belongsTo will be removed in the future. Use the explicit setter for the property you''re trying to set instead. Such has #parentScope, #typeContainer, ...'
 ]
 
 { #category : '*Famix-Deprecated' }
@@ -96,6 +122,13 @@ TEntityMetaLevelDependency >> rootParents [
 
 	self deprecated: 'Use #rootContainers instead' transformWith: '`@rcv rootParents' -> '`@rcv rootContainers'.
 	^ self rootContainers
+]
+
+{ #category : '*Famix-Deprecated' }
+TEntityMetaLevelDependency >> withAllParents [
+
+	self deprecated: 'Use withAllContainers instead.' transformWith: '`@rcv withAllParents' -> '`@rcv withAllContainers'.
+	^ self withAllContainers
 ]
 
 { #category : '*Famix-Deprecated' }

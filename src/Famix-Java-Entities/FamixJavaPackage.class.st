@@ -91,7 +91,7 @@ FamixJavaPackage >> afferentCoupling [
 	<FMProperty: #afferentCoupling type: #Number>
 	<derived>
 	<FMComment: 'Afferent Coupling of a package'>
-	^ ((self queryAllIncoming atScope: FamixTType) outOfParentUsing: FamixTPackage) size
+	^ ((self queryAllIncoming atScope: FamixTType) outOfContainerUsing: FamixTPackage) size
 ]
 
 { #category : 'Famix-Extensions' }
@@ -111,7 +111,7 @@ FamixJavaPackage >> bunchCohesion [
 	myClasses := self classes.
 	myClasses := myClasses union: (myClasses flatCollect: [ :c | c allRecursiveTypes ]).
 	myClasses size == 0 ifTrue: [ ^ nil ].
-	intraConnectivities := (myClasses collect: [ :c | (c queryAllOutgoing atScope: FamixTType) withinParentUsing: FamixTPackage ]) inject: 0 into: [ :subTotal :each | subTotal + each size ].
+	intraConnectivities := (myClasses collect: [ :c | (c queryAllOutgoing atScope: FamixTType) withinContainerUsing: FamixTPackage ]) inject: 0 into: [ :subTotal :each | subTotal + each size ].
 	^ intraConnectivities / myClasses size squared asFloat
 ]
 
@@ -146,11 +146,11 @@ FamixJavaPackage >> bunchCouplingWithAll [
 	myClasses ifEmpty: [ ^ nil ].
 
 	"All outgoing dependencies"
-	interConnectivities := (myClasses collect: [ :c | (c queryAllOutgoing atScope: FamixTType) outOfParentUsing: FamixTPackage ]) inject: 0 into: [ :subTotal :each | subTotal + each size ].
+	interConnectivities := (myClasses collect: [ :c | (c queryAllOutgoing atScope: FamixTType) outOfContainerUsing: FamixTPackage ]) inject: 0 into: [ :subTotal :each | subTotal + each size ].
 
 	"Plus all incoming dependencies"
 	interConnectivities := interConnectivities
-		+ ((myClasses collect: [ :c | (c queryAllIncoming atScope: FamixTType) outOfParentUsing: FamixTPackage ]) inject: 0 into: [ :subTotal :each | subTotal + each size ]).
+		+ ((myClasses collect: [ :c | (c queryAllIncoming atScope: FamixTType) outOfContainerUsing: FamixTPackage ]) inject: 0 into: [ :subTotal :each | subTotal + each size ]).
 	^ interConnectivities / (2 * myClasses size * (allClasses size - myClasses size)) asFloat
 ]
 
@@ -198,7 +198,7 @@ FamixJavaPackage >> efferentCoupling [
 	<FMProperty: #efferentCoupling type: #Number>
 	<derived>
 	<FMComment: 'Efferent Coupling of a package'>
-	^ ((self queryAllOutgoing outOfParentUsing: FamixTPackage) atScope: FamixTType) size
+	^ ((self queryAllOutgoing outOfContainerUsing: FamixTPackage) atScope: FamixTType) size
 ]
 
 { #category : 'Famix-Extensions-metrics' }
@@ -233,7 +233,7 @@ FamixJavaPackage >> martinCohesion [
 	myClasses := self classes.
 	myClasses := myClasses union: (myClasses flatCollect: [ :c | c allRecursiveTypes ]).
 	myClasses size == 0 ifTrue: [ ^ nil ].
-	intraConnectivities := (myClasses collect: [ :c | (c queryAllOutgoing atScope: FamixTType) withoutSelfLoops withinParentUsing: FamixTPackage ]) inject: 0 into: [ :subTotal :each | subTotal + each size ].
+	intraConnectivities := (myClasses collect: [ :c | (c queryAllOutgoing atScope: FamixTType) withoutSelfLoops withinContainerUsing: FamixTPackage ]) inject: 0 into: [ :subTotal :each | subTotal + each size ].
 	^ ((intraConnectivities + 1) / myClasses size) asFloat
 ]
 
