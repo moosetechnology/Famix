@@ -77,6 +77,16 @@ TEntityMetaLevelDependency >> allWithScope: aClassFAMIX until: rejectBlock [
 ]
 
 { #category : '*Famix-Deprecated' }
+TEntityMetaLevelDependency >> atScope: aClassFAMIX until: rejectBlock [
+
+	self
+		deprecated: 'This method will be removed because it is syntactic sugar that is not really used. Let the transformation work the change.'
+		transformWith: '`@rcv atScope: `@arg1 until: `@arg2' -> '(`@rcv query containers until: `@arg2) ofType: `@arg1'.
+
+	^ (self query containers until: rejectBlock) ofType: aClassFAMIX
+]
+
+{ #category : '*Famix-Deprecated' }
 TEntityMetaLevelDependency >> belongsTo: anEntity [
 	self deprecated: 'belongsTo will be removed in the future. Use the explicit setter for the property you''re trying to set instead. Such has #parentScope, #typeContainer, ...'
 ]

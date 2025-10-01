@@ -452,14 +452,6 @@ TEntityMetaLevelDependency >> atScope: aClassFAMIX [
 ]
 
 { #category : 'scoping' }
-TEntityMetaLevelDependency >> atScope: aClassFAMIX until: rejectBlock [
-	"I am used to return all the first encountered entities at a given famix class scope that are up in the containment tree of the metamodel.
-	I stop the recursion when the rejectBlock is true"
-
-	^ (self query containers until: rejectBlock) ofType: aClassFAMIX
-]
-
-{ #category : 'scoping' }
 TEntityMetaLevelDependency >> atScopeWithProperty: aPropertySelector [
 	"I am used to return the first encountered entity that are up in the containment tree of the metamodel satisfying the property selector"
 

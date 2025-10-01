@@ -263,13 +263,6 @@ MooseQueryTest >> testAtScope [
 ]
 
 { #category : 'tests' }
-MooseQueryTest >> testAtScopeUntil [
-	self assertCollection: (class1 atScope: FamixJavaClass until: [:el | el isOfType: FamixTClass ]) hasSameElements: {class1}.
-	self assertCollection: (class1 atScope: FamixTPackage until: [:el | el isOfType: FamixTClass ]) hasSameElements: {}.
-	self assertCollection: (class1 atScope: FamixTPackage until: [:el | el isOfType: FamixTPackage ]) hasSameElements: {package1}.
-]
-
-{ #category : 'tests' }
 MooseQueryTest >> testAtScopeWithBlockReturnNotBoolean [
 	self
 		should: [ class1 atScopeWithProperty: [ :e | e numberOfMethods ] ]
@@ -349,6 +342,14 @@ MooseQueryTest >> testContainers [
 	self assert: class2 containers anyOne equals: package2.
 	self assert: method1 containers size equals: 1.
 	self assert: method1 containers anyOne equals: class1
+]
+
+{ #category : 'tests' }
+MooseQueryTest >> testContainersOfTypeUntil [
+
+	self assertCollection: ((class1 query containers until: [ :el | el isOfType: FamixTClass ]) ofType: FamixJavaClass) hasSameElements: { class1 }.
+	self assertCollection: ((class1 query containers until: [ :el | el isOfType: FamixTClass ]) ofType: FamixTPackage) hasSameElements: {  }.
+	self assertCollection: ((class1 query containers until: [ :el | el isOfType: FamixTPackage ]) ofType: FamixTPackage) hasSameElements: { package1 }
 ]
 
 { #category : 'tests' }
