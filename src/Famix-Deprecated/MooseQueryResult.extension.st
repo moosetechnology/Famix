@@ -1,6 +1,20 @@
 Extension { #name : 'MooseQueryResult' }
 
 { #category : '*Famix-Deprecated' }
+MooseQueryResult >> allAtScope: aType [
+
+	self deprecated: 'Use #allContainersOfType: instead' transformWith: '`@rcv allAtScope: `@arg' -> '`@rcv allContainersOfType: `@arg'.
+	^ self allContainersOfType: aType
+]
+
+{ #category : '*Famix-Deprecated' }
+MooseQueryResult >> allToScope: aType [
+
+	self deprecated: 'Use #allContainedEntitiesOfType: instead' transformWith: '`@rcv allToScope: `@arg' -> '`@rcv allContainedEntitiesOfType: `@arg'.
+	^ self allContainedEntitiesOfType: aType
+]
+
+{ #category : '*Famix-Deprecated' }
 MooseQueryResult >> allWithAnyScope: aCollectionOfFamixClasses [
 
 	self deprecated: 'This query taking parents and children has been deprecated. You should use a scope up or a scope down instead.'.

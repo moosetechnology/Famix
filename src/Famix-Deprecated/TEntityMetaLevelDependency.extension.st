@@ -19,6 +19,13 @@ TEntityMetaLevelDependency >> allAtAnyScope: aCollectionOfFamixClasses until: re
 ]
 
 { #category : '*Famix-Deprecated' }
+TEntityMetaLevelDependency >> allAtScope: aType [
+
+	self deprecated: 'Use #allContainersOfType: instead' transformWith: '`@rcv allAtScope: `@arg' -> '`@rcv allContainersOfType: `@arg'.
+	^ self allContainersOfType: aType
+]
+
+{ #category : '*Famix-Deprecated' }
 TEntityMetaLevelDependency >> allAtScope: aClassFAMIX until: rejectBlock [
 
 	self
@@ -86,6 +93,13 @@ TEntityMetaLevelDependency >> allToAnyScope: aCollectionOfFamixClasses until: re
 		deprecated: 'This method will be removed because it is syntactic sugar that is not really used. Let the transformation work the change.'
 		transformWith: '`@rcv allToAnyScope: `@arg1 until: `@arg2' -> '(`@rcv query containedEntities recursively until: `@arg2) ofAnyType: `@arg1'.
 	^ (self query containedEntities recursively until: rejectBlock) ofAnyType: aCollectionOfFamixClasses
+]
+
+{ #category : '*Famix-Deprecated' }
+TEntityMetaLevelDependency >> allToScope: aType [
+
+	self deprecated: 'Use #allContainedEntitiesOfType: instead' transformWith: '`@rcv allToScope: `@arg' -> '`@rcv allContainedEntitiesOfType: `@arg'.
+	^ self allContainedEntitiesOfType: aType
 ]
 
 { #category : '*Famix-Deprecated' }

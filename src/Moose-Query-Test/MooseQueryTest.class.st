@@ -109,20 +109,6 @@ MooseQueryTest >> setUp [
 ]
 
 { #category : 'tests' }
-MooseQueryTest >> testAllAtScope [
-	| package3 |
-	self assertCollection: (class1 allAtScope: FamixTClass) hasSameElements: {class1}.
-	self assertCollection: (class1 allAtScope: FamixTType) hasSameElements: {class1}.
-	self assertCollection: (class1 allAtScope: FamixTPackage) hasSameElements: {package1}.
-
-	package3 := FamixJavaPackage new
-		name: 'package3';
-		mooseModel: model.
-	package1 parentPackage: package3.
-	self assertCollection: (class1 allAtScope: FamixTPackage) hasSameElements: {package1 . package3}
-]
-
-{ #category : 'tests' }
 MooseQueryTest >> testAllContainedEntities [
 
 	self assert: package2 allContainedEntities size equals: 6.
@@ -197,6 +183,31 @@ MooseQueryTest >> testAllContainedEntitiesOfAnyTypeUntil [
 ]
 
 { #category : 'tests' }
+MooseQueryTest >> testAllContainedEntitiesOfType [
+
+	| class3 |
+	self assertCollection: (class1 allContainedEntitiesOfType: FamixTMethod) hasSameElements: { method1 }.
+	self assertCollection: (class2 allContainedEntitiesOfType: FamixTAttribute) hasSameElements: {
+			var1.
+			var2 }.
+	self assertCollection: (class2 allContainedEntitiesOfType: FamixTStructuralEntity) hasSameElements: {
+			var1.
+			var2.
+			localVariable }.
+	self assertCollection: (package1 allContainedEntitiesOfType: FamixTClass) hasSameElements: { class1 }.
+	class3 := FamixJavaClass new
+		          name: 'class3';
+		          typeContainer: class1;
+		          mooseModel: model.
+	self assertCollection: (class1 allContainedEntitiesOfType: FamixTClass) hasSameElements: {
+			class1.
+			class3 }.
+	self assertCollection: (package1 allContainedEntitiesOfType: FamixTClass) hasSameElements: {
+			class1.
+			class3 }
+]
+
+{ #category : 'tests' }
 MooseQueryTest >> testAllContainers [
 
 	self assert: package2 allContainers size equals: 0.
@@ -250,6 +261,23 @@ MooseQueryTest >> testAllContainersOfAnyTypeUntil [
 					 FamixTClass.
 					 FamixTPackage })
 		hasSameElements: { class1 }
+]
+
+{ #category : 'tests' }
+MooseQueryTest >> testAllContainersOfType [
+
+	| package3 |
+	self assertCollection: (class1 allContainersOfType: FamixTClass) hasSameElements: { class1 }.
+	self assertCollection: (class1 allContainersOfType: FamixTType) hasSameElements: { class1 }.
+	self assertCollection: (class1 allContainersOfType: FamixTPackage) hasSameElements: { package1 }.
+
+	package3 := FamixJavaPackage new
+		            name: 'package3';
+		            mooseModel: model.
+	package1 parentPackage: package3.
+	self assertCollection: (class1 allContainersOfType: FamixTPackage) hasSameElements: {
+			package1.
+			package3 }
 ]
 
 { #category : 'tests' }
@@ -312,21 +340,6 @@ MooseQueryTest >> testAllOutgoing [
 
 	self assert: method2 queryAllOutgoing size equals: 3.
 	self assert: class2 queryAllOutgoing size equals: 5
-]
-
-{ #category : 'tests' }
-MooseQueryTest >> testAllToScope [
-	| class3 |
-	self assertCollection: (class1 allToScope: FamixTMethod) hasSameElements: {method1}.
-	self assertCollection: (class2 allToScope: FamixTAttribute) hasSameElements: {var1 . var2}.
-	self assertCollection: (class2 allToScope: FamixTStructuralEntity) hasSameElements: {var1 . var2 . localVariable}.
-	self assertCollection: (package1 allToScope: FamixTClass) hasSameElements: {class1}.
-	class3 := FamixJavaClass new
-		name: 'class3';
-		typeContainer: class1;
-		mooseModel: model.
-	self assertCollection: (class1 allToScope: FamixTClass) hasSameElements: {class1 . class3}.
-	self assertCollection: (package1 allToScope: FamixTClass) hasSameElements: {class1 . class3}
 ]
 
 { #category : 'tests' }

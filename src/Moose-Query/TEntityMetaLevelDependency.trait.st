@@ -293,13 +293,6 @@ TEntityMetaLevelDependency >> addRootContainersIn: aCollection [
 	^ aCollection
 ]
 
-{ #category : 'scoping' }
-TEntityMetaLevelDependency >> allAtScope: aType [
-	"I am used to return all the entities at a given famix class scope that are up in the containment tree of the metamodel on multiple levels."
-
-	^ self query containers recursively ofType: aType
-]
-
 { #category : 'accessing' }
 TEntityMetaLevelDependency >> allClients [
 
@@ -326,6 +319,13 @@ TEntityMetaLevelDependency >> allContainedEntities [
 	^ self addAllContainedEntitiesIn: OrderedCollection new
 ]
 
+{ #category : 'scoping' }
+TEntityMetaLevelDependency >> allContainedEntitiesOfType: aType [
+	"I am used to return all the entities at a given famix class scope that are down in the containment tree of the metamodel on multiple levels."
+
+	^ self query containedEntities recursively ofType: aType
+]
+
 { #category : 'accessing' }
 TEntityMetaLevelDependency >> allContainedEntityTypes [
 
@@ -343,6 +343,13 @@ TEntityMetaLevelDependency >> allContainers [
 	"Returns all the containers and sup-containers of an entity, i.e my containers and those of my containers, and those of the containers of my containers, etc"
 
 	^ self addAllContainersIn: OrderedCollection new
+]
+
+{ #category : 'scoping' }
+TEntityMetaLevelDependency >> allContainersOfType: aType [
+	"I am used to return all the entities at a given famix class scope that are up in the containment tree of the metamodel on multiple levels."
+
+	^ self query containers recursively ofType: aType
 ]
 
 { #category : 'accessing' }
@@ -373,13 +380,6 @@ TEntityMetaLevelDependency >> allProvidersAtScope: aClass [
 	"Attention, this method returns only the providers at the requested scope. The other providers non matching the scope are not return. Like this we are sure that all the return entities are at the requested scope"
 
 	^ self queryAllOutgoing withoutSelfLoops containersOfType: aClass
-]
-
-{ #category : 'scoping' }
-TEntityMetaLevelDependency >> allToScope: aType [
-	"I am used to return all the entities at a given famix class scope that are down in the containment tree of the metamodel on multiple levels."
-
-	^ self query containedEntities recursively ofType: aType
 ]
 
 { #category : 'deprecated' }

@@ -57,13 +57,15 @@ MooseQueryResult >> add: newObject [
 ]
 
 { #category : 'filtering' }
-MooseQueryResult >> allAtScope: aClassFamix [
-	^ self executeScopeQuery: (MQScopeQuery recursivelyScope: aClassFamix direction: MQScopeContainersStrategy)
+MooseQueryResult >> allContainedEntitiesOfType: aType [
+
+	^ self executeScopeQuery: (MQScopeQuery recursivelyScope: aType direction: MQScopeContainedEntitiesStrategy)
 ]
 
 { #category : 'filtering' }
-MooseQueryResult >> allToScope: aClassFamix [
-	^ self executeScopeQuery: (MQScopeQuery recursivelyScope: aClassFamix direction: MQScopeContainedEntitiesStrategy)
+MooseQueryResult >> allContainersOfType: aType [
+
+	^ self executeScopeQuery: (MQScopeQuery recursivelyScope: aType direction: MQScopeContainersStrategy)
 ]
 
 { #category : 'enumerating' }

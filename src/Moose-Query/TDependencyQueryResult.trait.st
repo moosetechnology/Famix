@@ -56,11 +56,13 @@ TDependencyQueryResult >> opposites [
 
 { #category : 'filtering' }
 TDependencyQueryResult >> outOf: aFamixEntity [
-	^ self
-		rejectDependencies: [ :dep || opposite |
-			opposite := self opposite: dep.
-			(opposite isCollection ifTrue: [ opposite ] ifFalse: [ { opposite } ])
-				anySatisfy: [ :entity | (entity allAtScope: aFamixEntity class) includes: aFamixEntity ] ]
+
+	^ self rejectDependencies: [ :dep |
+			  | opposite |
+			  opposite := self opposite: dep.
+			  (opposite isCollection
+				   ifTrue: [ opposite ]
+				   ifFalse: [ { opposite } ]) anySatisfy: [ :entity | (entity allContainersOfType: aFamixEntity class) includes: aFamixEntity ] ]
 ]
 
 { #category : 'private' }
@@ -101,16 +103,14 @@ TDependencyQueryResult >> targetsAtScope: aTraitOrClass [
 TDependencyQueryResult >> within: aFamixEntity [
 
 	| withinBlock |
-	withinBlock := [ :entity |
-	               (entity allAtScope: aFamixEntity class) includes:
-		               aFamixEntity ].
+	withinBlock := [ :entity | (entity allContainersOfType: aFamixEntity class) includes: aFamixEntity ].
 
 	^ self selectDependencies: [ :dep |
-		  | opposite |
-		  opposite := self opposite: dep.
-		  opposite isCollection
-			  ifFalse: [ withinBlock value: opposite ]
-			  ifTrue: [ opposite anySatisfy: withinBlock ] ]
+			  | opposite |
+			  opposite := self opposite: dep.
+			  opposite isCollection
+				  ifFalse: [ withinBlock value: opposite ]
+				  ifTrue: [ opposite anySatisfy: withinBlock ] ]
 ]
 
 { #category : 'filtering' }
