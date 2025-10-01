@@ -123,15 +123,12 @@ MQNavigationQuery >> hasFor: anEntity [
 
 	| selectors |
 	(self hasLocalFor: anEntity) ifTrue: [ ^ true ].
-	
-	shouldCollectChildrenDependencies ifFalse: [ ^ false ].
-	
-	"Instead of #to:do: we could just use #do: but this implementation is much faster. Maybe sista will remove the needs of the todo later."
-	1 to: (selectors := anEntity childrenSelectors) size do: [ :index | 
-		(anEntity perform: (selectors at: index))
-			ifNotNil: [ :children | 
-				| coll |
-				1 to: (coll := children asCollection) size do: [ :i | (self hasFor: (coll at: i)) ifTrue: [ ^ true ] ] ] ].
+
+	shouldCollectChildrenDependencies ifFalse: [ ^ false ]. "Instead of #to:do: we could just use #do: but this implementation is much faster. Maybe sista will remove the needs of the todo later."
+	1 to: (selectors := anEntity containedEntitySelectors) size do: [ :index |
+			(anEntity perform: (selectors at: index)) ifNotNil: [ :children |
+					| coll |
+					1 to: (coll := children asCollection) size do: [ :i | (self hasFor: (coll at: i)) ifTrue: [ ^ true ] ] ] ].
 	^ false
 ]
 
@@ -187,14 +184,11 @@ MQNavigationQuery >> queryFor: anEntity [
 	| selectors |
 	self queryLocalFor: anEntity.
 
-	shouldCollectChildrenDependencies ifFalse: [ ^ self ].
-
-	"Instead of #to:do: we could just use #do: but this implementation is much faster. Maybe sista will remove the needs of the todo later."
-	1 to: (selectors := anEntity childrenSelectors) size do: [ :index | 
-		(anEntity perform: (selectors at: index))
-			ifNotNil: [ :children | 
-				| coll |
-				1 to: (coll := OrderedCollection withAll: children) size do: [ :i | self queryFor: (coll at: i) ] ] ]
+	shouldCollectChildrenDependencies ifFalse: [ ^ self ]. "Instead of #to:do: we could just use #do: but this implementation is much faster. Maybe sista will remove the needs of the todo later."
+	1 to: (selectors := anEntity containedEntitySelectors) size do: [ :index |
+			(anEntity perform: (selectors at: index)) ifNotNil: [ :children |
+					| coll |
+					1 to: (coll := OrderedCollection withAll: children) size do: [ :i | self queryFor: (coll at: i) ] ] ]
 ]
 
 { #category : 'execution' }

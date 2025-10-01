@@ -66,15 +66,24 @@ FamixTest3MooseQueryTest >> testAtScopeWithNonMatchingEntitiesDo [
 ]
 
 { #category : 'tests' }
-FamixTest3MooseQueryTest >> testChildrenTypes [
+FamixTest3MooseQueryTest >> testContainedEntityTypes [
 
-	self assertCollection: self c1 childrenTypes hasSameElements: {
+	self assertCollection: self c1 containedEntityTypes hasSameElements: {
 			FamixTAttribute.
 			FamixTMethod.
 			FamixTest3Attribute.
 			FamixTest3Method.
 			FamixTComment.
 			FamixTest3Comment }
+]
+
+{ #category : 'tests' }
+FamixTest3MooseQueryTest >> testContainerTypes [
+
+	self assertCollection: self m1 containerTypes hasSameElements: {
+			FamixTWithMethods.
+			FamixTest3Class.
+			FamixTest3ParametricClass }
 ]
 
 { #category : 'tests' }
@@ -122,11 +131,6 @@ FamixTest3MooseQueryTest >> testNumberOfInternalProviders [
 	
 	self assertCollection: self m1 allProviders hasSameElements: {self c1 . self pt1. m3}.
 	self assert: self m1 numberOfInternalProviders equals: 1.
-]
-
-{ #category : 'tests' }
-FamixTest3MooseQueryTest >> testParentTypes [
-	self assertCollection: self m1 parentTypes hasSameElements: {FamixTWithMethods . FamixTest3Class . FamixTest3ParametricClass}
 ]
 
 { #category : 'tests' }

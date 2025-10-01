@@ -6,20 +6,20 @@ Class {
 }
 
 { #category : 'tests' }
-TEntityMetaLevelDependencyTest >> testAddAllChildrenIn [
+TEntityMetaLevelDependencyTest >> testAddAllContainedEntitiesIn [
 	| aCollection |
 	aCollection := Set new.
-	c1 addAllChildrenIn: aCollection.
+	c1 addAllContainedEntitiesIn: aCollection.
 	self assertCollection: aCollection hasSameElements: {m1 . a1}
 ]
 
 { #category : 'tests' }
-TEntityMetaLevelDependencyTest >> testAddAllParentsIn [
+TEntityMetaLevelDependencyTest >> testAddAllContainersIn [
 
 	| aCollection |
 	
 	aCollection := Set new.
-	m1 addAllParentsIn: aCollection.
+	m1 addAllContainersIn: aCollection.
 	self assertCollection: aCollection hasSameElements: { c1 }.
 ]
 
@@ -44,16 +44,21 @@ TEntityMetaLevelDependencyTest >> testAllAtScope [
 ]
 
 { #category : 'tests' }
-TEntityMetaLevelDependencyTest >> testAllChildren [
-	self assertCollection: c1 allChildren hasSameElements: {m1 . a1}.
-	self assertCollection: c2 allChildren hasSameElements: {m2 . m3}.
-	self assertCollection: m1 allChildren hasSameElements: {}
+TEntityMetaLevelDependencyTest >> testAllContainedEntities [
+
+	self assertCollection: c1 allContainedEntities hasSameElements: {
+			m1.
+			a1 }.
+	self assertCollection: c2 allContainedEntities hasSameElements: {
+			m2.
+			m3 }.
+	self assertCollection: m1 allContainedEntities hasSameElements: {  }
 ]
 
 { #category : 'tests' }
-TEntityMetaLevelDependencyTest >> testAllChildrenTypes [
+TEntityMetaLevelDependencyTest >> testAllContainedEntityTypes [
 
-	self assertCollection: c1 allChildrenTypes hasSameElements: {
+	self assertCollection: c1 allContainedEntityTypes hasSameElements: {
 			FamixTParameter.
 			FamixTImplicitVariable.
 			FamixTest1Attribute.
@@ -63,7 +68,7 @@ TEntityMetaLevelDependencyTest >> testAllChildrenTypes [
 			FamixTMethod.
 			FamixTComment.
 			FamixTest1Comment }.
-	self assertCollection: c2 allChildrenTypes hasSameElements: {
+	self assertCollection: c2 allContainedEntityTypes hasSameElements: {
 			FamixTParameter.
 			FamixTImplicitVariable.
 			FamixTest1Attribute.
@@ -73,12 +78,33 @@ TEntityMetaLevelDependencyTest >> testAllChildrenTypes [
 			FamixTMethod.
 			FamixTComment.
 			FamixTest1Comment }.
-	self assertCollection: m1 allChildrenTypes hasSameElements: {
+	self assertCollection: m1 allContainedEntityTypes hasSameElements: {
 			FamixTImplicitVariable.
 			FamixTParameter.
 			FamixTLocalVariable.
 			FamixTComment.
 			FamixTest1Comment }
+]
+
+{ #category : 'tests' }
+TEntityMetaLevelDependencyTest >> testAllContainerTypes [
+
+	self assertCollection: c1 allContainerTypes hasSameElements: {
+			FamixTWithTypes.
+			FamixTPackage }.
+	self assertCollection: m1 allContainerTypes hasSameElements: {
+			FamixTest1Class.
+			FamixTWithMethods.
+			FamixTWithTypes.
+			FamixTPackage }
+]
+
+{ #category : 'tests' }
+TEntityMetaLevelDependencyTest >> testAllContainers [
+
+	self assertCollection: c1 allContainers hasSameElements: {  }.
+	self assertCollection: c2 allContainers hasSameElements: {  }.
+	self assertCollection: m1 allContainers hasSameElements: { c1 }
 ]
 
 { #category : 'tests' }
@@ -108,19 +134,6 @@ TEntityMetaLevelDependencyTest >> testAllOutgoingAssociationTypes [
 ]
 
 { #category : 'tests' }
-TEntityMetaLevelDependencyTest >> testAllParentTypes [
-	self assertCollection: c1 allParentTypes hasSameElements: {FamixTWithTypes . FamixTPackage}.
-	self assertCollection: m1 allParentTypes hasSameElements: {FamixTest1Class . FamixTWithMethods . FamixTWithTypes . FamixTPackage}
-]
-
-{ #category : 'tests' }
-TEntityMetaLevelDependencyTest >> testAllParents [
-	self assertCollection: c1 allParents hasSameElements: {}.
-	self assertCollection: c2 allParents hasSameElements: {}.
-	self assertCollection: m1 allParents hasSameElements: {c1}
-]
-
-{ #category : 'tests' }
 TEntityMetaLevelDependencyTest >> testAllToScope [
 
 	self assertCollection: (c1 allToScope: FamixTClass) hasSameElements: { c1 }.
@@ -145,19 +158,46 @@ TEntityMetaLevelDependencyTest >> testBelongsTo [
 ]
 
 { #category : 'tests' }
-TEntityMetaLevelDependencyTest >> testChildren [
+TEntityMetaLevelDependencyTest >> testContainedEntities [
 
-	self assertCollection: m1 children hasSameElements: { }.
-	self assertCollection: c1 children hasSameElements: { m1. a1 }.
-	self assertCollection: c2 children hasSameElements: { m2. m3 }.
+	self assertCollection: m1 containedEntities hasSameElements: {  }.
+	self assertCollection: c1 containedEntities hasSameElements: {
+			m1.
+			a1 }.
+	self assertCollection: c2 containedEntities hasSameElements: {
+			m2.
+			m3 }
 ]
 
 { #category : 'tests' }
-TEntityMetaLevelDependencyTest >> testChildrenSelectors [
+TEntityMetaLevelDependencyTest >> testContainedEntitySelectors [
 
-	self assertCollection: m1 childrenSelectors hasSameElements: { #parameters. #localVariables. #implicitVariables. #comments }.
-	self assertCollection: c1 childrenSelectors hasSameElements: { #methods. #attributes. #comments }.
-	self assertCollection: c2 childrenSelectors hasSameElements: { #methods. #attributes. #comments }
+	self assertCollection: m1 containedEntitySelectors hasSameElements: { #parameters. #localVariables. #implicitVariables. #comments }.
+	self assertCollection: c1 containedEntitySelectors hasSameElements: { #methods. #attributes. #comments }.
+	self assertCollection: c2 containedEntitySelectors hasSameElements: { #methods. #attributes. #comments }
+]
+
+{ #category : 'tests' }
+TEntityMetaLevelDependencyTest >> testContainerTypes [
+
+	self assertCollection: m1 containerTypes hasSameElements: {
+			FamixTest1Class.
+			FamixTWithMethods }.
+	self assertCollection: c1 containerTypes hasSameElements: {
+			FamixTWithTypes.
+			FamixTPackage }
+]
+
+{ #category : 'tests' }
+TEntityMetaLevelDependencyTest >> testContainers [
+
+	| newMethod |
+	self assertCollection: m1 containers hasSameElements: { c1 }.
+	self assertCollection: m2 containers hasSameElements: { c2 }.
+	self assertCollection: m3 containers hasSameElements: { c2 }.
+
+	newMethod := FamixTest1Method new.
+	self assertEmpty: newMethod containers
 ]
 
 { #category : 'tests' }
@@ -174,11 +214,12 @@ TEntityMetaLevelDependencyTest >> testIncomingAssociationTypes [
 ]
 
 { #category : 'tests' }
-TEntityMetaLevelDependencyTest >> testNumberOfChildren [
-	self assert: c1 numberOfChildren equals: 2.
-	self assert: c2 numberOfChildren equals: 2.
-	self assert: m1 numberOfChildren equals: 0.
-	self assert: a1 numberOfChildren equals: 0
+TEntityMetaLevelDependencyTest >> testNumberOfContainedEntities [
+
+	self assert: c1 numberOfContainedEntities equals: 2.
+	self assert: c2 numberOfContainedEntities equals: 2.
+	self assert: m1 numberOfContainedEntities equals: 0.
+	self assert: a1 numberOfContainedEntities equals: 0
 ]
 
 { #category : 'tests' }
@@ -195,26 +236,9 @@ TEntityMetaLevelDependencyTest >> testOutgoingAssociationTypes [
 ]
 
 { #category : 'tests' }
-TEntityMetaLevelDependencyTest >> testParentTypes [
-	self assertCollection: m1 parentTypes hasSameElements: {FamixTest1Class . FamixTWithMethods}.
-	self assertCollection: c1 parentTypes hasSameElements: {FamixTWithTypes . FamixTPackage}
-]
+TEntityMetaLevelDependencyTest >> testRootContainers [
 
-{ #category : 'tests' }
-TEntityMetaLevelDependencyTest >> testParents [
-	| newMethod |
-	self assertCollection: m1 parents hasSameElements: {c1}.
-	self assertCollection: m2 parents hasSameElements: {c2}.
-	self assertCollection: m3 parents hasSameElements: {c2}.
-
-	newMethod := FamixTest1Method new.
-	self assertEmpty: newMethod parents
-]
-
-{ #category : 'tests' }
-TEntityMetaLevelDependencyTest >> testRootParents [
-
-	self assertCollection: c1 rootParents hasSameElements: {  }.
-	self assertCollection: c2 rootParents hasSameElements: {  }.
-	self assertCollection: m1 rootParents hasSameElements: { c1 }
+	self assertCollection: c1 rootContainers hasSameElements: {  }.
+	self assertCollection: c2 rootContainers hasSameElements: {  }.
+	self assertCollection: m1 rootContainers hasSameElements: { c1 }
 ]

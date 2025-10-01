@@ -57,7 +57,7 @@ FamixTSourceEntity >> computeNumberOfLinesOfCode [
 
 	(self isStub not and: [ self shouldCountChildrenForLinesOfCodeIfNoSourceAnchor ]) ifFalse: [ ^ self notExistentMetricValue ].
 
-	^ self children sumNumbers: #numberOfLinesOfCode
+	^ self containedEntities sumNumbers: #numberOfLinesOfCode
 ]
 
 { #category : 'source anchor' }

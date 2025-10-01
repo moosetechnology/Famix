@@ -145,7 +145,7 @@ MooseQueryResult >> outOf: aFAMIXEntity [
 ]
 
 { #category : 'filtering' }
-MooseQueryResult >> outOfParentUsing: aFamixTrait [
+MooseQueryResult >> outOfContainerUsing: aFamixTrait [
 	^ self outOf: (self receiver atScope: aFamixTrait) anyOne
 ]
 
@@ -228,7 +228,7 @@ MooseQueryResult >> within: aFAMIXEntity [
 ]
 
 { #category : 'filtering' }
-MooseQueryResult >> withinParentUsing: aFamixTrait [
+MooseQueryResult >> withinContainerUsing: aFamixTrait [
 	^ self within: (self receiver atScope: aFamixTrait) anyOne
 ]
 

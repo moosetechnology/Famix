@@ -159,10 +159,20 @@ MooseQueryTest >> testAllAtScopeUntil [
 ]
 
 { #category : 'tests' }
-MooseQueryTest >> testAllChildren [
-	self assert: package2 allChildren size equals: 6.
-	self assert: class2 allChildren size equals: 5.
-	self assert: method2 allChildren size equals: 1
+MooseQueryTest >> testAllContainedEntities [
+
+	self assert: package2 allContainedEntities size equals: 6.
+	self assert: class2 allContainedEntities size equals: 5.
+	self assert: method2 allContainedEntities size equals: 1
+]
+
+{ #category : 'tests' }
+MooseQueryTest >> testAllContainers [
+
+	self assert: package2 allContainers size equals: 0.
+	self assert: class2 allContainers size equals: 1.
+	self assert: method2 allContainers size equals: 2.
+	self assert: var2 allContainers size equals: 2
 ]
 
 { #category : 'tests' }
@@ -176,14 +186,6 @@ MooseQueryTest >> testAllOutgoing [
 
 	self assert: method2 queryAllOutgoing size equals: 3.
 	self assert: class2 queryAllOutgoing size equals: 5
-]
-
-{ #category : 'tests' }
-MooseQueryTest >> testAllParents [
-	self assert: package2 allParents size equals: 0.
-	self assert: class2 allParents size equals: 1.
-	self assert: method2 allParents size equals: 2.
-	self assert: var2 allParents size equals: 2
 ]
 
 { #category : 'tests' }
@@ -326,18 +328,27 @@ MooseQueryTest >> testAtScopeWithPropertyReturnNotBoolean [
 ]
 
 { #category : 'tests' }
-MooseQueryTest >> testChildren [
-	self assert: package2 children size equals: 1.
-	self assert: package2 children anyOne equals: class2.
+MooseQueryTest >> testContainedEntities [
+
+	self assert: package2 containedEntities size equals: 1.
+	self assert: package2 containedEntities anyOne equals: class2.
 	self assert: class1 children size equals: 1.
-	self assert: class1 children anyOne equals: method1.
+	self assert: class1 children anyOne equals: method1
 ]
 
 { #category : 'tests' }
-MooseQueryTest >> testChildrenSelectors [
-	self
-		assertCollection: class1 childrenSelectors
-		hasSameElements: #(#types #attributes #methods #definedAnnotationTypes #comments)
+MooseQueryTest >> testContainedEntitySelectors [
+
+	self assertCollection: class1 containedEntitySelectors hasSameElements: #( #types #attributes #methods #definedAnnotationTypes #comments )
+]
+
+{ #category : 'tests' }
+MooseQueryTest >> testContainers [
+
+	self assert: class2 containers size equals: 1.
+	self assert: class2 containers anyOne equals: package2.
+	self assert: method1 containers size equals: 1.
+	self assert: method1 containers anyOne equals: class1
 ]
 
 { #category : 'tests' }
@@ -584,14 +595,6 @@ MooseQueryTest >> testOutgoingInvocationWithin [
 ]
 
 { #category : 'tests' }
-MooseQueryTest >> testParents [
-	self assert: class2 parents size equals: 1.
-	self assert: class2 parents anyOne equals: package2.
-	self assert: method1 parents size equals: 1.
-	self assert: method1 parents anyOne equals: class1.
-]
-
-{ #category : 'tests' }
 MooseQueryTest >> testQueryWith [
 "queryIncoming: is equivalent to query: #in with:"
 	self assert: (package1 query: #out with: FamixTInvocation) size equals: 1.
@@ -695,18 +698,20 @@ MooseQueryTest >> testToScopeUntil [
 ]
 
 { #category : 'tests' }
-MooseQueryTest >> testWithAllChildren [
-	self assert: package2 withAllChildren size equals: 7.
-	self assert: class2 withAllChildren size equals: 6.
-	self assert: method2 withAllChildren size equals: 2
+MooseQueryTest >> testWithAllContainedEntities [
+
+	self assert: package2 withAllContainedEntities size equals: 7.
+	self assert: class2 withAllContainedEntities size equals: 6.
+	self assert: method2 withAllContainedEntities size equals: 2
 ]
 
 { #category : 'tests' }
-MooseQueryTest >> testWithAllParents [
-	self assert: package2 withAllParents size equals: 1.
-	self assert: class2 withAllParents size equals: 2.
-	self assert: method2 withAllParents size equals: 3.
-	self assert: var2 withAllParents size equals: 3
+MooseQueryTest >> testWithAllContainers [
+
+	self assert: package2 withAllContainers size equals: 1.
+	self assert: class2 withAllContainers size equals: 2.
+	self assert: method2 withAllContainers size equals: 3.
+	self assert: var2 withAllContainers size equals: 3
 ]
 
 { #category : 'tests' }

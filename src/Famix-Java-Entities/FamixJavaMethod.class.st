@@ -86,7 +86,7 @@ FamixJavaMethod >> accessedAttributes [
 	"Returns the set of attributes of my class accessed by me (method). 
 	Used to support the calculation of LCOM"
 	
-	^ (self queryOutgoingAccesses opposites withinParentUsing: FamixTClass) asSet select: #isAttribute
+	^ (self queryOutgoingAccesses opposites withinContainerUsing: FamixTClass) asSet select: #isAttribute
 ]
 
 { #category : 'Famix-Extensions' }

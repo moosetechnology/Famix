@@ -14,5 +14,6 @@ Class {
 
 { #category : 'accessing' }
 MQScopeContainersStrategy class >> selectorsFor: anEntity [
-	^ anEntity parentSelectors
+
+	^ anEntity containerSelectors
 ]
