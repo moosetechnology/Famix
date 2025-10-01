@@ -160,9 +160,10 @@ MooseQueryTest >> testAllAtScopeUntil [
 
 { #category : 'tests' }
 MooseQueryTest >> testAllContainedEntities [
-	self assert: package2 allChildren size equals: 6.
-	self assert: class2 allChildren size equals: 5.
-	self assert: method2 allChildren size equals: 1
+
+	self assert: package2 allContainedEntities size equals: 6.
+	self assert: class2 allContainedEntities size equals: 5.
+	self assert: method2 allContainedEntities size equals: 1
 ]
 
 { #category : 'tests' }
@@ -328,10 +329,11 @@ MooseQueryTest >> testAtScopeWithPropertyReturnNotBoolean [
 
 { #category : 'tests' }
 MooseQueryTest >> testContainedEntities [
-	self assert: package2 children size equals: 1.
-	self assert: package2 children anyOne equals: class2.
+
+	self assert: package2 containedEntities size equals: 1.
+	self assert: package2 containedEntities anyOne equals: class2.
 	self assert: class1 children size equals: 1.
-	self assert: class1 children anyOne equals: method1.
+	self assert: class1 children anyOne equals: method1
 ]
 
 { #category : 'tests' }
@@ -696,10 +698,11 @@ MooseQueryTest >> testToScopeUntil [
 ]
 
 { #category : 'tests' }
-MooseQueryTest >> testWithAllChildren [
-	self assert: package2 withAllChildren size equals: 7.
-	self assert: class2 withAllChildren size equals: 6.
-	self assert: method2 withAllChildren size equals: 2
+MooseQueryTest >> testWithAllContainedEntities [
+
+	self assert: package2 withAllContainedEntities size equals: 7.
+	self assert: class2 withAllContainedEntities size equals: 6.
+	self assert: method2 withAllContainedEntities size equals: 2
 ]
 
 { #category : 'tests' }

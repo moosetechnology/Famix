@@ -1,6 +1,27 @@
 Extension { #name : 'TEntityMetaLevelDependency' }
 
 { #category : '*Famix-Deprecated' }
+TEntityMetaLevelDependency >> allChildren [
+
+	self deprecated: 'Use #allContainedEntities instead' transformWith: '`@rcv allChildren' -> '`@rcv allContainedEntities'.
+	^ self allContainedEntities
+]
+
+{ #category : '*Famix-Deprecated' }
+TEntityMetaLevelDependency >> allChildrenTypes [
+
+	self deprecated: 'Use #allContainedEntityTypes instead' transformWith: '`@rcv allChildrenTypes' -> '`@rcv allContainedEntityTypes'.
+	^ self allContainedEntityTypes
+]
+
+{ #category : '*Famix-Deprecated' }
+TEntityMetaLevelDependency classSide >> allChildrenTypesIn: aMetamodel [
+
+	self deprecated: 'Use #allContainedEntityTypesIn: instead' transformWith: '`@rcv allChildrenTypesIn: `@arg' -> '`@rcv allContainedEntityTypesIn: `@arg'.
+	^ self allContainedEntityTypesIn: aMetamodel
+]
+
+{ #category : '*Famix-Deprecated' }
 TEntityMetaLevelDependency >> allParentTypes [
 
 	self deprecated: 'Use allContainerTypes instead' transformWith: '`@rcv allParentTypes' -> '`@rcv allContainerTypes'.
@@ -103,6 +124,13 @@ TEntityMetaLevelDependency >> incomingMSEProperties [
 ]
 
 { #category : '*Famix-Deprecated' }
+TEntityMetaLevelDependency >> numberOfChildren [
+
+	self deprecated: 'Use #numberOfContainedEntities instead' transformWith: '`@rcv numberOfChildren' -> '`@rcv numberOfContainedEntities'.
+	^ self numberOfContainedEntities
+]
+
+{ #category : '*Famix-Deprecated' }
 TEntityMetaLevelDependency >> outgoingMSEProperties [
 	"finds all properties from entities of 'self class' to other entities"
 
@@ -157,6 +185,13 @@ TEntityMetaLevelDependency >> rootParents [
 
 	self deprecated: 'Use #rootContainers instead' transformWith: '`@rcv rootParents' -> '`@rcv rootContainers'.
 	^ self rootContainers
+]
+
+{ #category : '*Famix-Deprecated' }
+TEntityMetaLevelDependency >> withAllChildren [
+
+	self deprecated: 'Use #withAllContainedEntities instead' transformWith: '`@rcv withAllChildren' -> '`@rcv withAllContainedEntities'.
+	^ self withAllContainedEntities
 ]
 
 { #category : '*Famix-Deprecated' }

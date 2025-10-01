@@ -64,10 +64,9 @@ Trait {
 }
 
 { #category : 'accessing' }
-TEntityMetaLevelDependency classSide >> allChildrenTypesIn: aMetamodel [
+TEntityMetaLevelDependency classSide >> allContainedEntityTypesIn: aMetamodel [
 
-	^ aMetamodel additionalProperty: #allChildrenTypes for: self ifAbsentPut: [ self privateAllContainedEntityTypesIn: aMetamodel ]
-	
+	^ aMetamodel additionalProperty: #allContainedEntitiesTypes for: self ifAbsentPut: [ self privateAllContainedEntityTypesIn: aMetamodel ]
 ]
 
 { #category : 'accessing' }
@@ -175,18 +174,20 @@ TEntityMetaLevelDependency classSide >> privateAllContainerTypesIn: aMetamodel [
 
 { #category : 'private' }
 TEntityMetaLevelDependency classSide >> privateAllIncomingAssociationTypesIn: aMetamodel [
-   ^ (((self allChildrenTypesIn: aMetamodel) flatCollectAsSet: [:each | each implementingClassesIn: aMetamodel ])
-		flatCollectAsSet: [ :each | each incomingAssociationTypesIn: aMetamodel])
-       addAll: (self incomingAssociationTypesIn: aMetamodel);
-       yourself
+
+	^ (((self allContainedEntityTypesIn: aMetamodel) flatCollectAsSet: [ :each | each implementingClassesIn: aMetamodel ]) flatCollectAsSet: [ :each |
+			   each incomingAssociationTypesIn: aMetamodel ])
+		  addAll: (self incomingAssociationTypesIn: aMetamodel);
+		  yourself
 ]
 
 { #category : 'private' }
 TEntityMetaLevelDependency classSide >> privateAllOutgoingAssociationTypesIn: aMetamodel [
-   ^ (((self allChildrenTypesIn: aMetamodel) flatCollectAsSet: [:each | each implementingClassesIn: aMetamodel ])
-		flatCollectAsSet: [ :each | each outgoingAssociationTypesIn: aMetamodel])
-       addAll: (self outgoingAssociationTypesIn: aMetamodel);
-       yourself
+
+	^ (((self allContainedEntityTypesIn: aMetamodel) flatCollectAsSet: [ :each | each implementingClassesIn: aMetamodel ]) flatCollectAsSet: [ :each |
+			   each outgoingAssociationTypesIn: aMetamodel ])
+		  addAll: (self outgoingAssociationTypesIn: aMetamodel);
+		  yourself
 ]
 
 { #category : 'private' }
@@ -266,8 +267,8 @@ TEntityMetaLevelDependency classSide >> privateOutgoingFamePropertiesIn: aMetamo
 
 { #category : 'private' }
 TEntityMetaLevelDependency >> addAllContainedEntitiesIn: aCollection [
-	self children
-		do: [ :each | 
+
+	self containedEntities do: [ :each |
 			aCollection add: each.
 			each addAllContainedEntitiesIn: aCollection ].
 	^ aCollection
@@ -323,18 +324,6 @@ TEntityMetaLevelDependency >> allAtScope: aClassFAMIX until: rejectBlock [
 ]
 
 { #category : 'accessing' }
-TEntityMetaLevelDependency >> allChildren [
-	"Returns all the children and sub-children of an entity, i.e my children and those of my children, and those of the children of my children, etc"
-
-	^ self addAllContainedEntitiesIn: OrderedCollection new
-]
-
-{ #category : 'accessing' }
-TEntityMetaLevelDependency >> allChildrenTypes [
-	^ self class allChildrenTypesIn: self metamodel
-]
-
-{ #category : 'accessing' }
 TEntityMetaLevelDependency >> allClients [
 
 	^ self cacheAt: #allClients ifAbsent: [ (self queryAllIncoming withoutSelfLoops collect: #source) flattened ]
@@ -352,6 +341,19 @@ TEntityMetaLevelDependency >> allClientsAtScope: aClass [
 	^ self queryAllIncoming withoutSelfLoops
 		atScope: aClass
 		
+]
+
+{ #category : 'accessing' }
+TEntityMetaLevelDependency >> allContainedEntities [
+	"Returns all the children and sub-children of an entity, i.e my children and those of my children, and those of the children of my children, etc"
+
+	^ self addAllContainedEntitiesIn: OrderedCollection new
+]
+
+{ #category : 'accessing' }
+TEntityMetaLevelDependency >> allContainedEntityTypes [
+
+	^ self class allContainedEntityTypesIn: self metamodel
 ]
 
 { #category : 'accessing' }
@@ -745,11 +747,14 @@ TEntityMetaLevelDependency >> miInspectionTree: aBuilder [
 ]
 
 { #category : 'accessing' }
-TEntityMetaLevelDependency >> numberOfChildren [
-	<FMProperty: #numberOfChildren type: #Number>
-	<FMComment: 'Number of direct children entities in the containment tree.'>
+TEntityMetaLevelDependency >> numberOfContainedEntities [
+
+	<FMProperty: #numberOfContainedEntities type: #Number>
+	<FMComment: 'Number of direct contained entities in the containment tree.'>
 	<derived>
-	^ self isContainerEntity ifTrue: [ self children size ] ifFalse: [ 0 ]
+	^ self isContainerEntity
+		  ifTrue: [ self containedEntities size ]
+		  ifFalse: [ 0 ]
 ]
 
 { #category : 'accessing' }
@@ -1053,12 +1058,12 @@ TEntityMetaLevelDependency >> toScope: aClassFAMIX until: rejectBlock [
 ]
 
 { #category : 'accessing' }
-TEntityMetaLevelDependency >> withAllChildren [
+TEntityMetaLevelDependency >> withAllContainedEntities [
 	"I return a collection including me and all my children in the containement DAG."
 
-	^ self allChildren
-		add: self;
-		yourself
+	^ self allContainedEntities
+		  add: self;
+		  yourself
 ]
 
 { #category : 'accessing' }

@@ -45,15 +45,20 @@ TEntityMetaLevelDependencyTest >> testAllAtScope [
 
 { #category : 'tests' }
 TEntityMetaLevelDependencyTest >> testAllContainedEntities [
-	self assertCollection: c1 allChildren hasSameElements: {m1 . a1}.
-	self assertCollection: c2 allChildren hasSameElements: {m2 . m3}.
-	self assertCollection: m1 allChildren hasSameElements: {}
+
+	self assertCollection: c1 allContainedEntities hasSameElements: {
+			m1.
+			a1 }.
+	self assertCollection: c2 allContainedEntities hasSameElements: {
+			m2.
+			m3 }.
+	self assertCollection: m1 allContainedEntities hasSameElements: {  }
 ]
 
 { #category : 'tests' }
 TEntityMetaLevelDependencyTest >> testAllContainedEntityTypes [
 
-	self assertCollection: c1 allChildrenTypes hasSameElements: {
+	self assertCollection: c1 allContainedEntityTypes hasSameElements: {
 			FamixTParameter.
 			FamixTImplicitVariable.
 			FamixTest1Attribute.
@@ -63,7 +68,7 @@ TEntityMetaLevelDependencyTest >> testAllContainedEntityTypes [
 			FamixTMethod.
 			FamixTComment.
 			FamixTest1Comment }.
-	self assertCollection: c2 allChildrenTypes hasSameElements: {
+	self assertCollection: c2 allContainedEntityTypes hasSameElements: {
 			FamixTParameter.
 			FamixTImplicitVariable.
 			FamixTest1Attribute.
@@ -73,7 +78,7 @@ TEntityMetaLevelDependencyTest >> testAllContainedEntityTypes [
 			FamixTMethod.
 			FamixTComment.
 			FamixTest1Comment }.
-	self assertCollection: m1 allChildrenTypes hasSameElements: {
+	self assertCollection: m1 allContainedEntityTypes hasSameElements: {
 			FamixTImplicitVariable.
 			FamixTParameter.
 			FamixTLocalVariable.
@@ -210,10 +215,11 @@ TEntityMetaLevelDependencyTest >> testIncomingAssociationTypes [
 
 { #category : 'tests' }
 TEntityMetaLevelDependencyTest >> testNumberOfContainedEntities [
-	self assert: c1 numberOfChildren equals: 2.
-	self assert: c2 numberOfChildren equals: 2.
-	self assert: m1 numberOfChildren equals: 0.
-	self assert: a1 numberOfChildren equals: 0
+
+	self assert: c1 numberOfContainedEntities equals: 2.
+	self assert: c2 numberOfContainedEntities equals: 2.
+	self assert: m1 numberOfContainedEntities equals: 0.
+	self assert: a1 numberOfContainedEntities equals: 0
 ]
 
 { #category : 'tests' }
