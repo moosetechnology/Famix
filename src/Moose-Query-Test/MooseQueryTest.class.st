@@ -415,6 +415,20 @@ MooseQueryTest >> testContainedEntitiesOfAnyTypeUntil [
 ]
 
 { #category : 'tests' }
+MooseQueryTest >> testContainedEntitiesOfType [
+
+	self assertCollection: (class1 containedEntitiesOfType: FamixJavaMethod) hasSameElements: { method1 }.
+	self assertCollection: (class2 containedEntitiesOfType: FamixJavaAttribute) hasSameElements: {
+			var1.
+			var2 }.
+	self assertCollection: (class2 containedEntitiesOfType: FamixTStructuralEntity) hasSameElements: {
+			var1.
+			var2.
+			localVariable }.
+	self assertCollection: (package1 containedEntitiesOfType: FamixJavaMethod) hasSameElements: { method1 }
+]
+
+{ #category : 'tests' }
 MooseQueryTest >> testContainedEntitiesOfTypeUntil [
 
 	self assertCollection: ((class1 query containedEntities until: [ :el | el isOfType: FamixTClass ]) ofType: FamixJavaMethod) hasSameElements: {  }.
@@ -813,14 +827,6 @@ MooseQueryTest >> testThrougAllIncoming [
 MooseQueryTest >> testThroughAllFrom [
 	self assert: method2 queryAllIncoming size equals: 3.
 	self assert: class2 queryAllIncoming size equals: 7
-]
-
-{ #category : 'tests' }
-MooseQueryTest >> testToScope [
-	self assertCollection: (class1 toScope: FamixJavaMethod) hasSameElements: {method1}.
-	self assertCollection: (class2 toScope: FamixJavaAttribute) hasSameElements: {var1 . var2}.
-	self assertCollection: (class2 toScope: FamixTStructuralEntity) hasSameElements: {var1 . var2. localVariable}.
-	self assertCollection: (package1 toScope: FamixJavaMethod) hasSameElements: {method1}
 ]
 
 { #category : 'tests' }

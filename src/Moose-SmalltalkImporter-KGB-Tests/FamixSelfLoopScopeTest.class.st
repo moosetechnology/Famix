@@ -62,7 +62,7 @@ FamixSelfLoopScopeTest >> testFamixMethodPackageScope [
 { #category : 'tests - namespace' }
 FamixSelfLoopScopeTest >> testFamixNamespaceClassScope [
 
-	self assert: ((self n1InteractedReferencerReferee toScope: FamixTClass) includes: self c2ReferencerOutSideRefereeInSide).
+	self assert: ((self n1InteractedReferencerReferee containedEntitiesOfType: FamixTClass) includes: self c2ReferencerOutSideRefereeInSide).
 	self deny: ((self n1InteractedReferencerReferee containersOfType: FamixTClass) includes: self c20FullReferencerOutSide)
 ]
 
@@ -76,7 +76,7 @@ FamixSelfLoopScopeTest >> testFamixNamespaceNamespaceScope [
 { #category : 'tests - package' }
 FamixSelfLoopScopeTest >> testFamixPackageClassScope [
 
-	self assert: ((self p5FullReferee toScope: FamixTClass) includes: self c11FullRefereeOutSide).
+	self assert: ((self p5FullReferee containedEntitiesOfType: FamixTClass) includes: self c11FullRefereeOutSide).
 	self deny: ((self p5FullReferee containersOfType: FamixTClass) includes: self c5ReferencerInSideRefereeInSide)
 ]
 

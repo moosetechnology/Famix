@@ -308,6 +308,13 @@ TEntityMetaLevelDependency >> toAnyScope: aCollectionOfFamixClasses until: rejec
 ]
 
 { #category : '*Famix-Deprecated' }
+TEntityMetaLevelDependency >> toScope: aType [
+
+	self deprecated: 'Use #containedEntitiesOfType: instead' transformWith: '`@rcv toScope: `@arg' -> '`@rcv containedEntitiesOfType: `@arg'.
+	^ self containedEntitiesOfType: aType
+]
+
+{ #category : '*Famix-Deprecated' }
 TEntityMetaLevelDependency >> toScope: aClassFAMIX until: rejectBlock [
 
 	self

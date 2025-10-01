@@ -408,6 +408,13 @@ TEntityMetaLevelDependency >> containedEntities [
 	^ res
 ]
 
+{ #category : 'scoping' }
+TEntityMetaLevelDependency >> containedEntitiesOfType: aType [
+	"I am used to return all the first encountered  entities at a given famix class scope that are down in the containment tree of the metamodel"
+
+	^ self query containedEntities ofType: aType
+]
+
 { #category : 'accessing' }
 TEntityMetaLevelDependency >> containedEntitySelectors [
 
@@ -948,13 +955,6 @@ TEntityMetaLevelDependency >> throughAllTo [
 	"
 
 	^ self query outgoing objects dependencies
-]
-
-{ #category : 'scoping' }
-TEntityMetaLevelDependency >> toScope: aType [
-	"I am used to return all the first encountered  entities at a given famix class scope that are down in the containment tree of the metamodel"
-
-	^ self query containedEntities ofType: aType
 ]
 
 { #category : 'accessing' }

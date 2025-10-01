@@ -29,6 +29,13 @@ MooseQueryResult >> outOfParentUsing: aFamixTrait [
 ]
 
 { #category : '*Famix-Deprecated' }
+MooseQueryResult >> toScope: aType [
+
+	self deprecated: 'Use #containedEntitiesOfType: instead' transformWith: '`@rcv toScope: `@arg' -> '`@rcv containedEntitiesOfType: `@arg'.
+	^ self containedEntitiesOfType: aType
+]
+
+{ #category : '*Famix-Deprecated' }
 MooseQueryResult >> withAnyScope: aCollectionOfFamixClasses [
 
 	self deprecated: 'This query taking parents and children has been deprecated. You should use a scope up or a scope down instead.'.
