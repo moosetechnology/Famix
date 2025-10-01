@@ -66,7 +66,7 @@ Trait {
 { #category : 'accessing' }
 TEntityMetaLevelDependency classSide >> allChildrenTypesIn: aMetamodel [
 
-	^ aMetamodel additionalProperty: #allChildrenTypes for: self ifAbsentPut: [ self privateAllChildrenTypesIn: aMetamodel ]
+	^ aMetamodel additionalProperty: #allChildrenTypes for: self ifAbsentPut: [ self privateAllContainedEntityTypesIn: aMetamodel ]
 	
 ]
 
@@ -87,7 +87,7 @@ TEntityMetaLevelDependency classSide >> allOutgoingAssociationTypesIn: aMetamode
 { #category : 'accessing' }
 TEntityMetaLevelDependency classSide >> allParentTypesIn: aMetamodel [
 
-	^ aMetamodel additionalProperty: #allParentTypes for: self ifAbsentPut: [ self privateAllParentTypesIn: aMetamodel ]
+	^ aMetamodel additionalProperty: #allParentTypes for: self ifAbsentPut: [ self privateAllContainerTypesIn: aMetamodel ]
 	
 ]
 
@@ -103,13 +103,13 @@ TEntityMetaLevelDependency classSide >> annotation [
 { #category : 'accessing' }
 TEntityMetaLevelDependency classSide >> childrenSelectorsIn: aMetamodel [
 
-	^ aMetamodel additionalProperty: #childrenSelectors for: self ifAbsentPut: [ self privateChildrenSelectorsIn: aMetamodel ]
+	^ aMetamodel additionalProperty: #childrenSelectors for: self ifAbsentPut: [ self privateContainedEntitySelectorsIn: aMetamodel ]
 	
 ]
 
 { #category : 'accessing' }
 TEntityMetaLevelDependency classSide >> childrenTypesIn: aMetamodel [
-	^ aMetamodel additionalProperty: #childrenTypes for: self ifAbsentPut: [ self privateChildrenTypesIn: aMetamodel ]
+	^ aMetamodel additionalProperty: #childrenTypes for: self ifAbsentPut: [ self privateContainedEntityTypesIn: aMetamodel ]
 ]
 
 { #category : 'accessing' }
@@ -143,23 +143,32 @@ TEntityMetaLevelDependency classSide >> outgoingFamePropertiesIn: aMetamodel [
 { #category : 'accessing' }
 TEntityMetaLevelDependency classSide >> parentSelectorsIn: aMetamodel [
 
-	^ aMetamodel additionalProperty: #parentSelectors for: self ifAbsentPut: [ self privateParentSelectorsIn: aMetamodel ]
+	^ aMetamodel additionalProperty: #parentSelectors for: self ifAbsentPut: [ self privateContainerSelectorsIn: aMetamodel ]
 	
 ]
 
 { #category : 'accessing' }
 TEntityMetaLevelDependency classSide >> parentTypesIn: aMetamodel [
 
-	^ aMetamodel additionalProperty: #parentTypes for: self ifAbsentPut: [ self privateParentTypesIn: aMetamodel ]
+	^ aMetamodel additionalProperty: #parentTypes for: self ifAbsentPut: [ self privateContainerTypesIn: aMetamodel ]
 	
 ]
 
 { #category : 'private' }
-TEntityMetaLevelDependency classSide >> privateAllChildrenTypesIn: aMetamodel [
+TEntityMetaLevelDependency classSide >> privateAllContainedEntityTypesIn: aMetamodel [
 	"Instead of checking if we are using TEntityMetaLevolDependency it would be better to implement #childrenTypesIn: on Trait, but it is currently impossible because all methods whose selector is present in Trait, Class, Behavior are not copied to users. If we denife the method on Trait then the one of TEntityMetaLevelDependency will not be present in the users."
 
 	^ ((self childrenTypesIn: aMetamodel)
 		withDeepCollect: [ :each | (each usesFamixTrait: TEntityMetaLevelDependency) ifTrue: [ each childrenTypesIn: aMetamodel ] ifFalse: [ #() ] ]
+		as: Set) asOrderedCollection
+]
+
+{ #category : 'private' }
+TEntityMetaLevelDependency classSide >> privateAllContainerTypesIn: aMetamodel [
+	"Instead of checking if we are using TEntityMetaLevolDependency it would be better to implement #parentTypesIn: on Trait, but it is currently impossible because all methods whose selector is present in Trait, Class, Behavior are not copied to users. If we denife the method on Trait then the one of TEntityMetaLevelDependency will not be present in the users."
+
+	^ ((self parentTypesIn: aMetamodel)
+		withDeepCollect: [ :each | (each usesFamixTrait: TEntityMetaLevelDependency) ifTrue: [ each parentTypesIn: aMetamodel ] ifFalse: [ #() ] ]
 		as: Set) asOrderedCollection
 ]
 
@@ -180,27 +189,36 @@ TEntityMetaLevelDependency classSide >> privateAllOutgoingAssociationTypesIn: aM
 ]
 
 { #category : 'private' }
-TEntityMetaLevelDependency classSide >> privateAllParentTypesIn: aMetamodel [
-	"Instead of checking if we are using TEntityMetaLevolDependency it would be better to implement #parentTypesIn: on Trait, but it is currently impossible because all methods whose selector is present in Trait, Class, Behavior are not copied to users. If we denife the method on Trait then the one of TEntityMetaLevelDependency will not be present in the users."
-
-	^ ((self parentTypesIn: aMetamodel)
-		withDeepCollect: [ :each | (each usesFamixTrait: TEntityMetaLevelDependency) ifTrue: [ each parentTypesIn: aMetamodel ] ifFalse: [ #() ] ]
-		as: Set) asOrderedCollection
-]
-
-{ #category : 'private' }
-TEntityMetaLevelDependency classSide >> privateChildrenSelectorsIn: aMetamodel [
+TEntityMetaLevelDependency classSide >> privateContainedEntitySelectorsIn: aMetamodel [
 	^ (self allDeclaredPropertiesIn: aMetamodel) select: #isChildrenProperty thenCollect: #implementingSelector
 ]
 
 { #category : 'private' }
-TEntityMetaLevelDependency classSide >> privateChildrenTypesIn: aMetamodel [
+TEntityMetaLevelDependency classSide >> privateContainedEntityTypesIn: aMetamodel [
 	| childrenImplementingClasses childrenUsers |
 	childrenImplementingClasses := ((self allDeclaredPropertiesIn: aMetamodel) select: #isChildrenProperty) collect: #implementingType.
 
 	childrenUsers := aMetamodel concreteImplementingClasses select: [ :e | e allGeneratedTraits includesAny: childrenImplementingClasses ].
 
 	^ (childrenImplementingClasses , childrenUsers flatCollect: #withAllSubclasses as: Set) asArray	"<== This could later be #removeDuplicates but it is currently broken on arrays. See https://github.com/pharo-project/pharo/issues/4850"
+]
+
+{ #category : 'private' }
+TEntityMetaLevelDependency classSide >> privateContainerSelectorsIn: aMetamodel [
+	^ (self allDeclaredPropertiesIn: aMetamodel) select: #isContainer thenCollect: #implementingSelector
+]
+
+{ #category : 'private' }
+TEntityMetaLevelDependency classSide >> privateContainerTypesIn: aMetamodel [
+	| containerImplementingClasses containerUsers |
+	containerImplementingClasses := (self allDeclaredPropertiesIn: aMetamodel)
+		select: #isContainer
+		thenCollect: #implementingType.
+
+	containerUsers := (aMetamodel concreteImplementingClasses select: [ :e | e allGeneratedTraits includesAny: containerImplementingClasses ])
+		flatCollect: #withAllSubclasses.
+
+	^ (containerImplementingClasses , containerUsers flatCollect: #withAllSubclasses as: Set) asArray	"<== This could later be #removeDuplicates but it is currently broken on arrays. See https://github.com/pharo-project/pharo/issues/4850"
 ]
 
 { #category : 'private' }
@@ -243,24 +261,6 @@ TEntityMetaLevelDependency classSide >> privateOutgoingFamePropertiesIn: aMetamo
 	Since the direction of the relation is defined in the association, my property is not source, nor target."
 
 	^ (self allDeclaredPropertiesIn: aMetamodel) select: [ :p | p hasOpposite and: [ p opposite isSource and: [ p isTarget not ] ] ]
-]
-
-{ #category : 'private' }
-TEntityMetaLevelDependency classSide >> privateParentSelectorsIn: aMetamodel [
-	^ (self allDeclaredPropertiesIn: aMetamodel) select: #isContainer thenCollect: #implementingSelector
-]
-
-{ #category : 'private' }
-TEntityMetaLevelDependency classSide >> privateParentTypesIn: aMetamodel [
-	| containerImplementingClasses containerUsers |
-	containerImplementingClasses := (self allDeclaredPropertiesIn: aMetamodel)
-		select: #isContainer
-		thenCollect: #implementingType.
-
-	containerUsers := (aMetamodel concreteImplementingClasses select: [ :e | e allGeneratedTraits includesAny: containerImplementingClasses ])
-		flatCollect: #withAllSubclasses.
-
-	^ (containerImplementingClasses , containerUsers flatCollect: #withAllSubclasses as: Set) asArray	"<== This could later be #removeDuplicates but it is currently broken on arrays. See https://github.com/pharo-project/pharo/issues/4850"
 ]
 
 { #category : 'private' }
