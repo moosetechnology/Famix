@@ -113,6 +113,19 @@ TEntityMetaLevelDependency classSide >> childrenTypesIn: aMetamodel [
 ]
 
 { #category : 'accessing' }
+TEntityMetaLevelDependency classSide >> containerSelectorsIn: aMetamodel [
+
+	^ aMetamodel additionalProperty: #containerSelectors for: self ifAbsentPut: [ self privateContainerSelectorsIn: aMetamodel ]
+]
+
+{ #category : 'accessing' }
+TEntityMetaLevelDependency classSide >> containerTypesIn: aMetamodel [
+
+	^ aMetamodel additionalProperty: #containerTypes for: self ifAbsentPut: [ self privateContainerTypesIn: aMetamodel ]
+	
+]
+
+{ #category : 'accessing' }
 TEntityMetaLevelDependency classSide >> incomingAssociationTypesIn: aMetamodel [
 
 	^ aMetamodel additionalProperty: #incomingAssociationTypes for: self ifAbsentPut: [ self privateIncomingAssociationTypesIn: aMetamodel ]
@@ -137,20 +150,6 @@ TEntityMetaLevelDependency classSide >> outgoingAssociationTypesIn: aMetamodel [
 TEntityMetaLevelDependency classSide >> outgoingFamePropertiesIn: aMetamodel [
 
 	^ aMetamodel additionalProperty: #outgoingFameProperties for: self ifAbsentPut: [ self privateOutgoingFamePropertiesIn: aMetamodel ]
-	
-]
-
-{ #category : 'accessing' }
-TEntityMetaLevelDependency classSide >> parentSelectorsIn: aMetamodel [
-
-	^ aMetamodel additionalProperty: #parentSelectors for: self ifAbsentPut: [ self privateContainerSelectorsIn: aMetamodel ]
-	
-]
-
-{ #category : 'accessing' }
-TEntityMetaLevelDependency classSide >> parentTypesIn: aMetamodel [
-
-	^ aMetamodel additionalProperty: #parentTypes for: self ifAbsentPut: [ self privateContainerTypesIn: aMetamodel ]
 	
 ]
 
@@ -502,6 +501,18 @@ TEntityMetaLevelDependency >> childrenTypes [
 ]
 
 { #category : 'accessing' }
+TEntityMetaLevelDependency >> containerSelectors [
+
+	^ self class containerSelectorsIn: self metamodel
+]
+
+{ #category : 'accessing' }
+TEntityMetaLevelDependency >> containerTypes [
+
+	^ self class containerTypesIn: self metamodel
+]
+
+{ #category : 'accessing' }
 TEntityMetaLevelDependency >> fanIn [
 	<FMProperty: #fanIn type: #Number>
 	<derived>
@@ -666,16 +677,15 @@ TEntityMetaLevelDependency >> incomingFameProperties [
 ]
 
 { #category : 'testing' }
-TEntityMetaLevelDependency >> isIncludedIn: anEntity parentSelectorsCache: parentSelectorsCache [
-	"We use a cache for the parents selector for performances reasons. It might be really long to perform the #withoutSelfLoops thus we need to speed it up a maximum.
+TEntityMetaLevelDependency >> isIncludedIn: anEntity containerSelectorsCache: containerSelectorsCache [
+	"We use a cache for the container selectors for performances reasons. It might be really long to perform the #withoutSelfLoops thus we need to speed it up a maximum.
 	
 	[ (model allUsing: TEntityMetaLevelDependency) collect: [ :e | e  queryIncomingDependencies withoutSelfLoops ] ] timeToRun."
 
 	| selectors |
-	self = anEntity ifTrue: [ ^ true ].
-
-	"Instead of #to:do: we could just use #do: but this implementation is much faster. Maybe sista will remove the needs of the todo later."
-	1 to: (selectors := parentSelectorsCache at: self class ifAbsentPut: [ self parentSelectors ]) size do: [ :ind | ((self perform: (selectors at: ind)) isIncludedIn: anEntity parentSelectorsCache: parentSelectorsCache) ifTrue: [ ^ true ] ].
+	self = anEntity ifTrue: [ ^ true ]. "Instead of #to:do: we could just use #do: but this implementation is much faster. Maybe sista will remove the needs of the todo later."
+	1 to: (selectors := containerSelectorsCache at: self class ifAbsentPut: [ self containerSelectors ]) size do: [ :ind |
+	((self perform: (selectors at: ind)) isIncludedIn: anEntity containerSelectorsCache: containerSelectorsCache) ifTrue: [ ^ true ] ].
 
 	^ false
 ]
@@ -774,16 +784,6 @@ TEntityMetaLevelDependency >> outgoingFameProperties [
 ]
 
 { #category : 'accessing' }
-TEntityMetaLevelDependency >> parentSelectors [
-	^ self class parentSelectorsIn: self metamodel
-]
-
-{ #category : 'accessing' }
-TEntityMetaLevelDependency >> parentTypes [
-	^ self class parentTypesIn: self metamodel
-]
-
-{ #category : 'accessing' }
 TEntityMetaLevelDependency >> parents [
 	| res |
 	res := OrderedCollection new.
@@ -793,7 +793,8 @@ TEntityMetaLevelDependency >> parents [
 
 { #category : 'accessing' }
 TEntityMetaLevelDependency >> parentsDo: aBlock [
-	self parentSelectors do: [ :accessor | (self perform: accessor) ifNotNil: [ :r | aBlock value: r ] ]
+
+	self containerSelectors do: [ :accessor | (self perform: accessor) ifNotNil: [ :r | aBlock value: r ] ]
 ]
 
 { #category : 'query' }

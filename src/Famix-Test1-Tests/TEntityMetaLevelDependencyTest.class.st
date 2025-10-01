@@ -161,6 +161,17 @@ TEntityMetaLevelDependencyTest >> testChildrenSelectors [
 ]
 
 { #category : 'tests' }
+TEntityMetaLevelDependencyTest >> testContainerTypes [
+
+	self assertCollection: m1 containerTypes hasSameElements: {
+			FamixTest1Class.
+			FamixTWithMethods }.
+	self assertCollection: c1 containerTypes hasSameElements: {
+			FamixTWithTypes.
+			FamixTPackage }
+]
+
+{ #category : 'tests' }
 TEntityMetaLevelDependencyTest >> testIncomingAssociationTypes [
 
 	self
@@ -192,12 +203,6 @@ TEntityMetaLevelDependencyTest >> testOutgoingAssociationTypes [
 				FamixTAccess.
 				FamixTReference.
 				FamixTEntityTyping }
-]
-
-{ #category : 'tests' }
-TEntityMetaLevelDependencyTest >> testParentTypes [
-	self assertCollection: m1 parentTypes hasSameElements: {FamixTest1Class . FamixTWithMethods}.
-	self assertCollection: c1 parentTypes hasSameElements: {FamixTWithTypes . FamixTPackage}
 ]
 
 { #category : 'tests' }

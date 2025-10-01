@@ -50,6 +50,34 @@ TEntityMetaLevelDependency >> outgoingMSEProperties [
 ]
 
 { #category : '*Famix-Deprecated' }
+TEntityMetaLevelDependency >> parentSelectors [
+
+	self deprecated: 'Use #containerSelectors instead' transformWith: '`@rcv parentSelectors' -> '`@rcv containerSelectors'.
+	^ self containerSelectors
+]
+
+{ #category : '*Famix-Deprecated' }
+TEntityMetaLevelDependency classSide >> parentSelectorsIn: aMetamodel [
+
+	self deprecated: 'Use #containerSelectorsIn: instead' transformWith: '`@rcv parentSelectorsIn: `@arg' -> '`@rcv containerSelectorsIn: `@arg'.
+	^ self containerSelectorsIn: aMetamodel
+]
+
+{ #category : '*Famix-Deprecated' }
+TEntityMetaLevelDependency >> parentTypes [
+
+	self deprecated: 'Use #containerTypes instead.' transformWith: '`@rcv parentTypes' -> '`@rcv containerTypes'.
+	^ self containerTypes
+]
+
+{ #category : '*Famix-Deprecated' }
+TEntityMetaLevelDependency classSide >> parentTypesIn: aMetamodel [
+
+	self deprecated: 'Use #containerTypesIn: instead.' transformWith: '`@rcv parentTypesIn: `@arg' -> '`@rcv containerTypesIn: `@arg'.
+	^ self containerTypesIn: aMetamodel
+]
+
+{ #category : '*Famix-Deprecated' }
 TEntityMetaLevelDependency >> withAnyScope: aCollectionOfFamixClasses [
 	"I am used to return all the first encountered entities matching one of the class scope that are up or down in the containment tree of the metamodel"
 

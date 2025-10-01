@@ -78,6 +78,15 @@ FamixTest3MooseQueryTest >> testChildrenTypes [
 ]
 
 { #category : 'tests' }
+FamixTest3MooseQueryTest >> testContainerTypes [
+
+	self assertCollection: self m1 containerTypes hasSameElements: {
+			FamixTWithMethods.
+			FamixTest3Class.
+			FamixTest3ParametricClass }
+]
+
+{ #category : 'tests' }
 FamixTest3MooseQueryTest >> testIncomingReferences [
 	self assertCollection: self pt1 incomingReferences hasSameElements: {self ref1}
 ]
@@ -122,11 +131,6 @@ FamixTest3MooseQueryTest >> testNumberOfInternalProviders [
 	
 	self assertCollection: self m1 allProviders hasSameElements: {self c1 . self pt1. m3}.
 	self assert: self m1 numberOfInternalProviders equals: 1.
-]
-
-{ #category : 'tests' }
-FamixTest3MooseQueryTest >> testParentTypes [
-	self assertCollection: self m1 parentTypes hasSameElements: {FamixTWithMethods . FamixTest3Class . FamixTest3ParametricClass}
 ]
 
 { #category : 'tests' }
