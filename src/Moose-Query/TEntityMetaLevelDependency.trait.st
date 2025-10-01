@@ -478,7 +478,7 @@ TEntityMetaLevelDependency >> belongsTo [
 ]
 
 { #category : 'accessing' }
-TEntityMetaLevelDependency >> children [
+TEntityMetaLevelDependency >> containedEntities [
 
 	| res |
 	res := OrderedCollection new.

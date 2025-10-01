@@ -155,9 +155,13 @@ TEntityMetaLevelDependencyTest >> testBelongsTo [
 { #category : 'tests' }
 TEntityMetaLevelDependencyTest >> testContainedEntities [
 
-	self assertCollection: m1 children hasSameElements: { }.
-	self assertCollection: c1 children hasSameElements: { m1. a1 }.
-	self assertCollection: c2 children hasSameElements: { m2. m3 }.
+	self assertCollection: m1 containedEntities hasSameElements: {  }.
+	self assertCollection: c1 containedEntities hasSameElements: {
+			m1.
+			a1 }.
+	self assertCollection: c2 containedEntities hasSameElements: {
+			m2.
+			m3 }
 ]
 
 { #category : 'tests' }

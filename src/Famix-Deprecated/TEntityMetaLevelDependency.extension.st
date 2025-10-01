@@ -61,6 +61,13 @@ TEntityMetaLevelDependency >> belongsTo: anEntity [
 ]
 
 { #category : '*Famix-Deprecated' }
+TEntityMetaLevelDependency >> children [
+
+	self deprecated: 'Use #containedEntities instead' transformWith: '`@rcv children' -> '`@rcv containedEntities'.
+	^ self containedEntities
+]
+
+{ #category : '*Famix-Deprecated' }
 TEntityMetaLevelDependency >> childrenSelectors [
 
 	self deprecated: 'Use #containedEntitySelectors instead' transformWith: '`@rcv childrenSelectors' -> '`@rcv containedEntitySelectors'.

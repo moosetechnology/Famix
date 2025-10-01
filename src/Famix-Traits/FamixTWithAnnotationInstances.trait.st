@@ -104,7 +104,7 @@ FamixTWithAnnotationInstances >> numberOfAnnotationInstances [
 	<derived>
 	<FMComment: 'The number of annotation instances defined in the class or in any of its methods'>
 	^ self cacheAt: #numberOfAnnotationInstances ifAbsentPut: [
-			  self annotationInstances size + (self children inject: 0 into: [ :sum :each |
+			  self annotationInstances size + (self containedEntities inject: 0 into: [ :sum :each |
 					   (each isOfType: FamixTWithAnnotationInstances)
 						   ifTrue: [ sum + each numberOfAnnotationInstances ]
 						   ifFalse: [ sum ] ]) ]
