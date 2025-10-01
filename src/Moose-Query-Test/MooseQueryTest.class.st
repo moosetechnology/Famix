@@ -159,7 +159,7 @@ MooseQueryTest >> testAllAtScopeUntil [
 ]
 
 { #category : 'tests' }
-MooseQueryTest >> testAllChildren [
+MooseQueryTest >> testAllContainedEntities [
 	self assert: package2 allChildren size equals: 6.
 	self assert: class2 allChildren size equals: 5.
 	self assert: method2 allChildren size equals: 1
@@ -327,7 +327,7 @@ MooseQueryTest >> testAtScopeWithPropertyReturnNotBoolean [
 ]
 
 { #category : 'tests' }
-MooseQueryTest >> testChildren [
+MooseQueryTest >> testContainedEntities [
 	self assert: package2 children size equals: 1.
 	self assert: package2 children anyOne equals: class2.
 	self assert: class1 children size equals: 1.
@@ -335,10 +335,9 @@ MooseQueryTest >> testChildren [
 ]
 
 { #category : 'tests' }
-MooseQueryTest >> testChildrenSelectors [
-	self
-		assertCollection: class1 childrenSelectors
-		hasSameElements: #(#types #attributes #methods #definedAnnotationTypes #comments)
+MooseQueryTest >> testContainedEntitySelectors [
+
+	self assertCollection: class1 containedEntitySelectors hasSameElements: #( #types #attributes #methods #definedAnnotationTypes #comments )
 ]
 
 { #category : 'tests' }

@@ -6,10 +6,10 @@ Class {
 }
 
 { #category : 'tests' }
-TEntityMetaLevelDependencyTest >> testAddAllChildrenIn [
+TEntityMetaLevelDependencyTest >> testAddAllContainedEntitiesIn [
 	| aCollection |
 	aCollection := Set new.
-	c1 addAllChildrenIn: aCollection.
+	c1 addAllContainedEntitiesIn: aCollection.
 	self assertCollection: aCollection hasSameElements: {m1 . a1}
 ]
 
@@ -44,14 +44,14 @@ TEntityMetaLevelDependencyTest >> testAllAtScope [
 ]
 
 { #category : 'tests' }
-TEntityMetaLevelDependencyTest >> testAllChildren [
+TEntityMetaLevelDependencyTest >> testAllContainedEntities [
 	self assertCollection: c1 allChildren hasSameElements: {m1 . a1}.
 	self assertCollection: c2 allChildren hasSameElements: {m2 . m3}.
 	self assertCollection: m1 allChildren hasSameElements: {}
 ]
 
 { #category : 'tests' }
-TEntityMetaLevelDependencyTest >> testAllChildrenTypes [
+TEntityMetaLevelDependencyTest >> testAllContainedEntityTypes [
 
 	self assertCollection: c1 allChildrenTypes hasSameElements: {
 			FamixTParameter.
@@ -153,7 +153,7 @@ TEntityMetaLevelDependencyTest >> testBelongsTo [
 ]
 
 { #category : 'tests' }
-TEntityMetaLevelDependencyTest >> testChildren [
+TEntityMetaLevelDependencyTest >> testContainedEntities [
 
 	self assertCollection: m1 children hasSameElements: { }.
 	self assertCollection: c1 children hasSameElements: { m1. a1 }.
@@ -161,11 +161,11 @@ TEntityMetaLevelDependencyTest >> testChildren [
 ]
 
 { #category : 'tests' }
-TEntityMetaLevelDependencyTest >> testChildrenSelectors [
+TEntityMetaLevelDependencyTest >> testContainedEntitySelectors [
 
-	self assertCollection: m1 childrenSelectors hasSameElements: { #parameters. #localVariables. #implicitVariables. #comments }.
-	self assertCollection: c1 childrenSelectors hasSameElements: { #methods. #attributes. #comments }.
-	self assertCollection: c2 childrenSelectors hasSameElements: { #methods. #attributes. #comments }
+	self assertCollection: m1 containedEntitySelectors hasSameElements: { #parameters. #localVariables. #implicitVariables. #comments }.
+	self assertCollection: c1 containedEntitySelectors hasSameElements: { #methods. #attributes. #comments }.
+	self assertCollection: c2 containedEntitySelectors hasSameElements: { #methods. #attributes. #comments }
 ]
 
 { #category : 'tests' }
@@ -205,7 +205,7 @@ TEntityMetaLevelDependencyTest >> testIncomingAssociationTypes [
 ]
 
 { #category : 'tests' }
-TEntityMetaLevelDependencyTest >> testNumberOfChildren [
+TEntityMetaLevelDependencyTest >> testNumberOfContainedEntities [
 	self assert: c1 numberOfChildren equals: 2.
 	self assert: c2 numberOfChildren equals: 2.
 	self assert: m1 numberOfChildren equals: 0.

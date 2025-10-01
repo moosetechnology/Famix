@@ -61,6 +61,34 @@ TEntityMetaLevelDependency >> belongsTo: anEntity [
 ]
 
 { #category : '*Famix-Deprecated' }
+TEntityMetaLevelDependency >> childrenSelectors [
+
+	self deprecated: 'Use #containedEntitySelectors instead' transformWith: '`@rcv childrenSelectors' -> '`@rcv containedEntitySelectors'.
+	^ self containedEntitySelectors
+]
+
+{ #category : '*Famix-Deprecated' }
+TEntityMetaLevelDependency classSide >> childrenSelectorsIn: aMetamodel [
+
+	self deprecated: 'Use #containedEntitySelectorsIn: instead' transformWith: '`@rcv childrenSelectorsIn: `@arg' -> '`@rcv containedEntitySelectorsIn: `@arg'.
+	^ self containedEntitySelectorsIn: aMetamodel
+]
+
+{ #category : '*Famix-Deprecated' }
+TEntityMetaLevelDependency >> childrenTypes [
+
+	self deprecated: 'Use #containedEntityTypes instead' transformWith: '`@rcv childrenTypes' -> '`@rcv containedEntityTypes'.
+	^ self containedEntityTypes
+]
+
+{ #category : '*Famix-Deprecated' }
+TEntityMetaLevelDependency classSide >> childrenTypesIn: aMetamodel [
+
+	self deprecated: 'Use #containedEntityTypesIn: instead.' transformWith: '`@rcv childrenTypesIn: `@arg' -> '`@rcv containedEntityTypesIn: `@arg'.
+	^ self containedEntityTypesIn: aMetamodel
+]
+
+{ #category : '*Famix-Deprecated' }
 TEntityMetaLevelDependency >> incomingMSEProperties [
 
 	self deprecated: 'Use #incomingFameProperties instead.' transformWith: '`@rcv incomingMSEProperties' -> '`@rcv incomingFameProperties'.

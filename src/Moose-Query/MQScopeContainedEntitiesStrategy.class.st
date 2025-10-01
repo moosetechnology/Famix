@@ -14,5 +14,6 @@ Class {
 
 { #category : 'accessing' }
 MQScopeContainedEntitiesStrategy class >> selectorsFor: anEntity [
-	^ anEntity childrenSelectors
+
+	^ anEntity containedEntitySelectors
 ]

@@ -101,15 +101,14 @@ TEntityMetaLevelDependency classSide >> annotation [
 ]
 
 { #category : 'accessing' }
-TEntityMetaLevelDependency classSide >> childrenSelectorsIn: aMetamodel [
+TEntityMetaLevelDependency classSide >> containedEntitySelectorsIn: aMetamodel [
 
-	^ aMetamodel additionalProperty: #childrenSelectors for: self ifAbsentPut: [ self privateContainedEntitySelectorsIn: aMetamodel ]
-	
+	^ aMetamodel additionalProperty: #containedEntitySelectors for: self ifAbsentPut: [ self privateContainedEntitySelectorsIn: aMetamodel ]
 ]
 
 { #category : 'accessing' }
-TEntityMetaLevelDependency classSide >> childrenTypesIn: aMetamodel [
-	^ aMetamodel additionalProperty: #childrenTypes for: self ifAbsentPut: [ self privateContainedEntityTypesIn: aMetamodel ]
+TEntityMetaLevelDependency classSide >> containedEntityTypesIn: aMetamodel [
+	^ aMetamodel additionalProperty: #containedEntityTypes for: self ifAbsentPut: [ self privateContainedEntityTypesIn: aMetamodel ]
 ]
 
 { #category : 'accessing' }
@@ -157,8 +156,8 @@ TEntityMetaLevelDependency classSide >> outgoingFamePropertiesIn: aMetamodel [
 TEntityMetaLevelDependency classSide >> privateAllContainedEntityTypesIn: aMetamodel [
 	"Instead of checking if we are using TEntityMetaLevolDependency it would be better to implement #childrenTypesIn: on Trait, but it is currently impossible because all methods whose selector is present in Trait, Class, Behavior are not copied to users. If we denife the method on Trait then the one of TEntityMetaLevelDependency will not be present in the users."
 
-	^ ((self childrenTypesIn: aMetamodel)
-		withDeepCollect: [ :each | (each usesFamixTrait: TEntityMetaLevelDependency) ifTrue: [ each childrenTypesIn: aMetamodel ] ifFalse: [ #() ] ]
+	^ ((self containedEntityTypesIn: aMetamodel)
+		withDeepCollect: [ :each | (each usesFamixTrait: TEntityMetaLevelDependency) ifTrue: [ each containedEntityTypesIn: aMetamodel ] ifFalse: [ #() ] ]
 		as: Set) asOrderedCollection
 ]
 
@@ -266,11 +265,11 @@ TEntityMetaLevelDependency classSide >> privateOutgoingFamePropertiesIn: aMetamo
 ]
 
 { #category : 'private' }
-TEntityMetaLevelDependency >> addAllChildrenIn: aCollection [
+TEntityMetaLevelDependency >> addAllContainedEntitiesIn: aCollection [
 	self children
 		do: [ :each | 
 			aCollection add: each.
-			each addAllChildrenIn: aCollection ].
+			each addAllContainedEntitiesIn: aCollection ].
 	^ aCollection
 ]
 
@@ -327,7 +326,7 @@ TEntityMetaLevelDependency >> allAtScope: aClassFAMIX until: rejectBlock [
 TEntityMetaLevelDependency >> allChildren [
 	"Returns all the children and sub-children of an entity, i.e my children and those of my children, and those of the children of my children, etc"
 
-	^ self addAllChildrenIn: OrderedCollection new
+	^ self addAllContainedEntitiesIn: OrderedCollection new
 ]
 
 { #category : 'accessing' }
@@ -483,22 +482,24 @@ TEntityMetaLevelDependency >> children [
 
 	| res |
 	res := OrderedCollection new.
-	self childrenSelectors do: [ :accessor |
-		(self perform: accessor) ifNotNil: [ :r |
-			r isCollection
-				ifTrue: [ res addAll: r ]
-				ifFalse: [ res add: r ] ] ].
+	self containedEntitySelectors do: [ :accessor |
+			(self perform: accessor) ifNotNil: [ :r |
+					r isCollection
+						ifTrue: [ res addAll: r ]
+						ifFalse: [ res add: r ] ] ].
 	^ res
 ]
 
 { #category : 'accessing' }
-TEntityMetaLevelDependency >> childrenSelectors [
-	^ self class childrenSelectorsIn: self metamodel
+TEntityMetaLevelDependency >> containedEntitySelectors [
+
+	^ self class containedEntitySelectorsIn: self metamodel
 ]
 
 { #category : 'accessing' }
-TEntityMetaLevelDependency >> childrenTypes [
-	^ self class childrenTypesIn: self metamodel
+TEntityMetaLevelDependency >> containedEntityTypes [
+
+	^ self class containedEntityTypesIn: self metamodel
 ]
 
 { #category : 'accessing' }
