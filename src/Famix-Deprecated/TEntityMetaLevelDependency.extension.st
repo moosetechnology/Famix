@@ -152,6 +152,14 @@ TEntityMetaLevelDependency >> atAnyScope: aCollectionOfFamixClasses until: rejec
 ]
 
 { #category : '*Famix-Deprecated' }
+TEntityMetaLevelDependency >> atScope: aType [
+	"I am used to return all the first encountered entities at a given famix class scope that are up in the containment tree of the metamodel"
+
+	self deprecated: 'Use #containersOfType: instead' transformWith: '`@rcv atScope: `@arg' -> '`@rcv containersOfType: `@arg'.
+	^ self containersOfType: aType
+]
+
+{ #category : '*Famix-Deprecated' }
 TEntityMetaLevelDependency >> atScope: aClassFAMIX until: rejectBlock [
 
 	self

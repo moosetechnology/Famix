@@ -38,7 +38,8 @@ FamixTPackageable >> accept: aVisitor [
 
 { #category : 'accessing' }
 FamixTPackageable >> isExtension [
-	^ (self belongsTo atScope: FamixTPackage) ~= (self atScope: FamixTPackage)
+
+	^ (self belongsTo containersOfType: FamixTPackage) ~= (self containersOfType: FamixTPackage)
 ]
 
 { #category : 'accessing' }

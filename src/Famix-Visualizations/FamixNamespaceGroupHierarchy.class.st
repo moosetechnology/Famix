@@ -59,9 +59,10 @@ FamixNamespaceGroupHierarchy >> buildNodes [
 
 { #category : 'building' }
 FamixNamespaceGroupHierarchy >> connectNodes [
+
 	RSEdgeBuilder line
 		shapes: canvas nodes;
-		connectToAll: [ :namespace | namespace atScope: FamixTNamespace ]
+		connectToAll: [ :namespace | namespace containersOfType: FamixTNamespace ]
 ]
 
 { #category : 'accessing' }

@@ -87,10 +87,10 @@ FamixPackageGroupComplexity >> buildNodes [
 
 { #category : 'building' }
 FamixPackageGroupComplexity >> connectNodes [
+
 	RSEdgeBuilder line
 		shapes: canvas nodes;
-		connectToAll:
-				[ :package | package queryIncomingInheritances atScope: FamixTPackage ].
+		connectToAll: [ :package | package queryIncomingInheritances containersOfType: FamixTPackage ].
 	canvas pushBackEdges
 ]
 

@@ -17,27 +17,28 @@ MooseObjectQueryResultTest >> actualClass [
 
 { #category : 'tests' }
 MooseObjectQueryResultTest >> testWithoutSelfLoops [
-| model package1 package2 class1 class2 |
+
+	| model package1 package2 class1 class2 |
 	model := FamixJavaModel new.
 	package1 := (FamixJavaPackage named: 'package1')
-		mooseModel: model;
-		yourself.
+		            mooseModel: model;
+		            yourself.
 	package2 := (FamixJavaPackage named: 'package2')
-		mooseModel: model;
-		parentPackage: package1;
-		yourself.
+		            mooseModel: model;
+		            parentPackage: package1;
+		            yourself.
 	class1 := (FamixJavaClass named: 'class1')
-		mooseModel: model;
-		typeContainer: package2;
-		yourself.
+		          mooseModel: model;
+		          typeContainer: package2;
+		          yourself.
 	class2 := (FamixJavaClass named: 'class2')
-		mooseModel: model;
-		typeContainer: package2;
-		yourself.
+		          mooseModel: model;
+		          typeContainer: package2;
+		          yourself.
 	FamixJavaInheritance new
 		mooseModel: model;
 		superclass: class1;
 		subclass: class2.
-	self assert: ((package1 queryOutgoing: FamixJavaInheritance) atScope: FamixTClass) size equals: 1.
-	self assertEmpty: ((package1 queryOutgoing: FamixJavaInheritance) atScope: FamixTClass) withoutSelfLoops
+	self assert: ((package1 queryOutgoing: FamixJavaInheritance) containersOfType: FamixTClass) size equals: 1.
+	self assertEmpty: ((package1 queryOutgoing: FamixJavaInheritance) containersOfType: FamixTClass) withoutSelfLoops
 ]

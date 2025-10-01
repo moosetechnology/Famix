@@ -82,7 +82,8 @@ TDependencyQueryResult >> sources [
 
 { #category : 'accessing' }
 TDependencyQueryResult >> sourcesAtScope: aFamixTraitOrClass [
-	^ self sources flatCollectAsSet: [ :e | e atScope: aFamixTraitOrClass ]
+
+	^ self sources flatCollectAsSet: [ :e | e containersOfType: aFamixTraitOrClass ]
 ]
 
 { #category : 'accessing' }
@@ -92,7 +93,8 @@ TDependencyQueryResult >> targets [
 
 { #category : 'accessing' }
 TDependencyQueryResult >> targetsAtScope: aTraitOrClass [
-	^ self targets flatCollectAsSet: [ :e | e atScope: aTraitOrClass ]
+
+	^ self targets flatCollectAsSet: [ :e | e containersOfType: aTraitOrClass ]
 ]
 
 { #category : 'filtering' }

@@ -15,6 +15,13 @@ MooseQueryResult >> allWithScope: aClassFamix [
 ]
 
 { #category : '*Famix-Deprecated' }
+MooseQueryResult >> atScope: aType [
+
+	self deprecated: 'Use #containersOfType: instead' transformWith: '`@rcv atScope: `@arg' -> '`@rcv containersOfType: `@arg'.
+	^ self containersOfType: aType
+]
+
+{ #category : '*Famix-Deprecated' }
 MooseQueryResult >> outOfParentUsing: aFamixTrait [
 
 	self deprecated: 'Use #outOfContainerUsing: instead' transformWith: '`@rcv outOfParentUsing: `@arg' -> '`@rcv outOfContainerUsing: `@arg'.

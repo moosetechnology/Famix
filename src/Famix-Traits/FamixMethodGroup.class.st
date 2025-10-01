@@ -24,7 +24,8 @@ FamixMethodGroup class >> metamodel [
 
 { #category : 'navigation' }
 FamixMethodGroup >> allClasses [
-	^ FamixTypeGroup withAll: (self entities flatCollectAsSet: [ :m | m atScope: FamixTClass ])
+
+	^ FamixTypeGroup withAll: (self entities flatCollectAsSet: [ :m | m containersOfType: FamixTClass ])
 ]
 
 { #category : 'navigation' }
@@ -34,7 +35,8 @@ FamixMethodGroup >> allMethods [
 
 { #category : 'navigation' }
 FamixMethodGroup >> allPackages [
-	^ FamixPackageGroup withAll: (self entities flatCollectAsSet: [ :m | m atScope: FamixTPackage ])
+
+	^ FamixPackageGroup withAll: (self entities flatCollectAsSet: [ :m | m containersOfType: FamixTPackage ])
 ]
 
 { #category : 'metrics' }

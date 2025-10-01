@@ -294,10 +294,10 @@ TEntityMetaLevelDependency >> addRootContainersIn: aCollection [
 ]
 
 { #category : 'scoping' }
-TEntityMetaLevelDependency >> allAtScope: aClassFAMIX [
+TEntityMetaLevelDependency >> allAtScope: aType [
 	"I am used to return all the entities at a given famix class scope that are up in the containment tree of the metamodel on multiple levels."
 
-	^ self query containers recursively ofType: aClassFAMIX
+	^ self query containers recursively ofType: aType
 ]
 
 { #category : 'accessing' }
@@ -314,10 +314,9 @@ TEntityMetaLevelDependency >> allClientsAtMyScope [
 
 { #category : 'accessing' }
 TEntityMetaLevelDependency >> allClientsAtScope: aClass [
-"Attention, this method returns only the clients at the requested scope. The other clients non matching the scope are not return. Like this we are sure that all the return entities are at the requested scope"
-	^ self queryAllIncoming withoutSelfLoops
-		atScope: aClass
-		
+	"Attention, this method returns only the clients at the requested scope. The other clients non matching the scope are not return. Like this we are sure that all the return entities are at the requested scope"
+
+	^ self queryAllIncoming withoutSelfLoops containersOfType: aClass
 ]
 
 { #category : 'accessing' }
@@ -371,23 +370,16 @@ TEntityMetaLevelDependency >> allProvidersAtMyScope [
 
 { #category : 'accessing' }
 TEntityMetaLevelDependency >> allProvidersAtScope: aClass [
-"Attention, this method returns only the providers at the requested scope. The other providers non matching the scope are not return. Like this we are sure that all the return entities are at the requested scope"
-	^ self queryAllOutgoing withoutSelfLoops
-		atScope: aClass
+	"Attention, this method returns only the providers at the requested scope. The other providers non matching the scope are not return. Like this we are sure that all the return entities are at the requested scope"
+
+	^ self queryAllOutgoing withoutSelfLoops containersOfType: aClass
 ]
 
 { #category : 'scoping' }
-TEntityMetaLevelDependency >> allToScope: aClassFAMIX [
+TEntityMetaLevelDependency >> allToScope: aType [
 	"I am used to return all the entities at a given famix class scope that are down in the containment tree of the metamodel on multiple levels."
 
-	^ self query containedEntities recursively ofType: aClassFAMIX
-]
-
-{ #category : 'scoping' }
-TEntityMetaLevelDependency >> atScope: aClassFAMIX [
-	"I am used to return all the first encountered entities at a given famix class scope that are up in the containment tree of the metamodel"
-
-	^ self query containers ofType: aClassFAMIX
+	^ self query containedEntities recursively ofType: aType
 ]
 
 { #category : 'deprecated' }
@@ -453,6 +445,13 @@ TEntityMetaLevelDependency >> containers [
 TEntityMetaLevelDependency >> containersDo: aBlock [
 
 	self containerSelectors do: [ :accessor | (self perform: accessor) ifNotNil: [ :r | aBlock value: r ] ]
+]
+
+{ #category : 'scoping' }
+TEntityMetaLevelDependency >> containersOfType: aType [
+	"I am used to return all the first encountered entities at a given famix class scope that are up in the containment tree of the metamodel"
+
+	^ self query containers ofType: aType
 ]
 
 { #category : 'accessing' }
@@ -952,10 +951,10 @@ TEntityMetaLevelDependency >> throughAllTo [
 ]
 
 { #category : 'scoping' }
-TEntityMetaLevelDependency >> toScope: aClassFAMIX [
+TEntityMetaLevelDependency >> toScope: aType [
 	"I am used to return all the first encountered  entities at a given famix class scope that are down in the containment tree of the metamodel"
 
-	^ self query containedEntities ofType: aClassFAMIX
+	^ self query containedEntities ofType: aType
 ]
 
 { #category : 'accessing' }

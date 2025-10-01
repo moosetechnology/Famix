@@ -330,13 +330,6 @@ MooseQueryTest >> testAllToScope [
 ]
 
 { #category : 'tests' }
-MooseQueryTest >> testAtScope [
-	self assertCollection: (class1 atScope: FamixJavaClass) hasSameElements: {class1}.
-	self assertCollection: (class1 atScope: FamixTType) hasSameElements: {class1}.
-	self assertCollection: (class1 atScope: FamixTPackage) hasSameElements: {package1}
-]
-
-{ #category : 'tests' }
 MooseQueryTest >> testContainedEntities [
 
 	self assert: package2 containedEntities size equals: 1.
@@ -478,6 +471,14 @@ MooseQueryTest >> testContainersOfAnyType [
 					 FamixTPackage })
 		hasSameElements: { class1 }.
 	self assertCollection: (class1 query containers ofAnyType: { FamixTMethod }) hasSameElements: {  }
+]
+
+{ #category : 'tests' }
+MooseQueryTest >> testContainersOfType [
+
+	self assertCollection: (class1 containersOfType: FamixJavaClass) hasSameElements: { class1 }.
+	self assertCollection: (class1 containersOfType: FamixTType) hasSameElements: { class1 }.
+	self assertCollection: (class1 containersOfType: FamixTPackage) hasSameElements: { package1 }
 ]
 
 { #category : 'tests' }
@@ -678,12 +679,9 @@ MooseQueryTest >> testIncomingInvocation [
 
 { #category : 'tests' }
 MooseQueryTest >> testIncomingInvocationAtScope [
-	self
-		assert: ((method2 queryIncoming: FamixTInvocation) atScope: FamixJavaPackage) size
-		equals: 2.
-	self
-		assert: ((class2 queryIncoming: FamixTInvocation) atScope: FamixJavaPackage) size
-		equals: 2
+
+	self assert: ((method2 queryIncoming: FamixTInvocation) containersOfType: FamixJavaPackage) size equals: 2.
+	self assert: ((class2 queryIncoming: FamixTInvocation) containersOfType: FamixJavaPackage) size equals: 2
 ]
 
 { #category : 'tests' }
@@ -693,10 +691,9 @@ MooseQueryTest >> testObjectsQueryResultsKind [
 
 { #category : 'tests' }
 MooseQueryTest >> testOutgoingAccessAtScope [
-	self assert: ((method1 queryOutgoing: FamixTAccess) atScope: FamixJavaPackage) size equals: 1.
-	self
-		assert: ((method1 queryOutgoing: FamixTAccess) atScope: FamixJavaPackage) storage first
-		equals: package2
+
+	self assert: ((method1 queryOutgoing: FamixTAccess) containersOfType: FamixJavaPackage) size equals: 1.
+	self assert: ((method1 queryOutgoing: FamixTAccess) containersOfType: FamixJavaPackage) storage first equals: package2
 ]
 
 { #category : 'tests' }
@@ -742,9 +739,8 @@ MooseQueryTest >> testOutgoingInvocation [
 { #category : 'tests' }
 MooseQueryTest >> testOutgoingInvocationAtScope [
 
-	self assert: ((method2 queryOutgoing: FamixTInvocation) atScope: FamixJavaPackage) size equals: 1.
-	self assert: ((class2 queryOutgoing: FamixTInvocation) atScope: FamixJavaPackage) size equals: 1.
-
+	self assert: ((method2 queryOutgoing: FamixTInvocation) containersOfType: FamixJavaPackage) size equals: 1.
+	self assert: ((class2 queryOutgoing: FamixTInvocation) containersOfType: FamixJavaPackage) size equals: 1
 ]
 
 { #category : 'tests' }

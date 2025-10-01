@@ -45,18 +45,21 @@ FamixTest3MooseQueryTest >> testAllProvidersAtScope [
 ]
 
 { #category : 'tests' }
-FamixTest3MooseQueryTest >> testAtScope [
-	self assertCollection: (self m1 atScope: FamixTClass) hasSameElements: {self c1}.
-	self assertCollection: (self m1 atScope: FamixTest3Class) hasSameElements: {self c1}
-]
-
-{ #category : 'tests' }
 FamixTest3MooseQueryTest >> testAtScopeOnQueryResult [
-	| mooseQueryResult |
-	mooseQueryResult := MooseObjectQueryResult on: self c1 withAll: {self m1 . self m2 . self pt1 . self pt2}.
 
-	self assertCollection: (mooseQueryResult atScope: FamixTClass) hasSameElements: {self c1 . self c2}.
-	self assertCollection: (mooseQueryResult atScope: FamixTest3Class) hasSameElements: {self c1 . self c2}
+	| mooseQueryResult |
+	mooseQueryResult := MooseObjectQueryResult on: self c1 withAll: {
+			                    self m1.
+			                    self m2.
+			                    self pt1.
+			                    self pt2 }.
+
+	self assertCollection: (mooseQueryResult containersOfType: FamixTClass) hasSameElements: {
+			self c1.
+			self c2 }.
+	self assertCollection: (mooseQueryResult containersOfType: FamixTest3Class) hasSameElements: {
+			self c1.
+			self c2 }
 ]
 
 { #category : 'tests' }
@@ -84,6 +87,13 @@ FamixTest3MooseQueryTest >> testContainerTypes [
 			FamixTWithMethods.
 			FamixTest3Class.
 			FamixTest3ParametricClass }
+]
+
+{ #category : 'tests' }
+FamixTest3MooseQueryTest >> testContainersOfType [
+
+	self assertCollection: (self m1 containersOfType: FamixTClass) hasSameElements: { self c1 }.
+	self assertCollection: (self m1 containersOfType: FamixTest3Class) hasSameElements: { self c1 }
 ]
 
 { #category : 'tests' }
