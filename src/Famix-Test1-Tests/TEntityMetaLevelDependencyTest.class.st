@@ -14,12 +14,12 @@ TEntityMetaLevelDependencyTest >> testAddAllChildrenIn [
 ]
 
 { #category : 'tests' }
-TEntityMetaLevelDependencyTest >> testAddAllParentsIn [
+TEntityMetaLevelDependencyTest >> testAddAllContainersIn [
 
 	| aCollection |
 	
 	aCollection := Set new.
-	m1 addAllParentsIn: aCollection.
+	m1 addAllContainersIn: aCollection.
 	self assertCollection: aCollection hasSameElements: { c1 }.
 ]
 
@@ -172,6 +172,18 @@ TEntityMetaLevelDependencyTest >> testContainerTypes [
 ]
 
 { #category : 'tests' }
+TEntityMetaLevelDependencyTest >> testContainers [
+
+	| newMethod |
+	self assertCollection: m1 containers hasSameElements: { c1 }.
+	self assertCollection: m2 containers hasSameElements: { c2 }.
+	self assertCollection: m3 containers hasSameElements: { c2 }.
+
+	newMethod := FamixTest1Method new.
+	self assertEmpty: newMethod containers
+]
+
+{ #category : 'tests' }
 TEntityMetaLevelDependencyTest >> testIncomingAssociationTypes [
 
 	self
@@ -206,20 +218,9 @@ TEntityMetaLevelDependencyTest >> testOutgoingAssociationTypes [
 ]
 
 { #category : 'tests' }
-TEntityMetaLevelDependencyTest >> testParents [
-	| newMethod |
-	self assertCollection: m1 parents hasSameElements: {c1}.
-	self assertCollection: m2 parents hasSameElements: {c2}.
-	self assertCollection: m3 parents hasSameElements: {c2}.
+TEntityMetaLevelDependencyTest >> testRootContainers [
 
-	newMethod := FamixTest1Method new.
-	self assertEmpty: newMethod parents
-]
-
-{ #category : 'tests' }
-TEntityMetaLevelDependencyTest >> testRootParents [
-
-	self assertCollection: c1 rootParents hasSameElements: {  }.
-	self assertCollection: c2 rootParents hasSameElements: {  }.
-	self assertCollection: m1 rootParents hasSameElements: { c1 }
+	self assertCollection: c1 rootContainers hasSameElements: {  }.
+	self assertCollection: c2 rootContainers hasSameElements: {  }.
+	self assertCollection: m1 rootContainers hasSameElements: { c1 }
 ]

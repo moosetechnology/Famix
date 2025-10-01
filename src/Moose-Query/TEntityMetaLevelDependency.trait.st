@@ -166,9 +166,12 @@ TEntityMetaLevelDependency classSide >> privateAllContainedEntityTypesIn: aMetam
 TEntityMetaLevelDependency classSide >> privateAllContainerTypesIn: aMetamodel [
 	"Instead of checking if we are using TEntityMetaLevolDependency it would be better to implement #parentTypesIn: on Trait, but it is currently impossible because all methods whose selector is present in Trait, Class, Behavior are not copied to users. If we denife the method on Trait then the one of TEntityMetaLevelDependency will not be present in the users."
 
-	^ ((self parentTypesIn: aMetamodel)
-		withDeepCollect: [ :each | (each usesFamixTrait: TEntityMetaLevelDependency) ifTrue: [ each parentTypesIn: aMetamodel ] ifFalse: [ #() ] ]
-		as: Set) asOrderedCollection
+	^ ((self containerTypesIn: aMetamodel)
+		   withDeepCollect: [ :each |
+				   (each usesFamixTrait: TEntityMetaLevelDependency)
+					   ifTrue: [ each containerTypesIn: aMetamodel ]
+					   ifFalse: [ #(  ) ] ]
+		   as: Set) asOrderedCollection
 ]
 
 { #category : 'private' }
@@ -272,21 +275,21 @@ TEntityMetaLevelDependency >> addAllChildrenIn: aCollection [
 ]
 
 { #category : 'private' }
-TEntityMetaLevelDependency >> addAllParentsIn: aCollection [
-	self
-		parentsDo: [ :each | 
-			aCollection add: each.
-			each addAllParentsIn: aCollection ].
+TEntityMetaLevelDependency >> addAllContainersIn: aCollection [
+
+	self containersDo: [ :container |
+			aCollection add: container.
+			container addAllContainersIn: aCollection ].
 	^ aCollection
 ]
 
 { #category : 'private' }
-TEntityMetaLevelDependency >> addRootParentsIn: aCollection [
+TEntityMetaLevelDependency >> addRootContainersIn: aCollection [
 
-	self parentsDo: [ :each |
-		each isRoot
-			ifTrue: [ aCollection add: each ]
-			ifFalse: [ each addAllParentsIn: aCollection ] ].
+	self containersDo: [ :container |
+			container isRoot
+				ifTrue: [ aCollection add: container ]
+				ifFalse: [ container addAllContainersIn: aCollection ] ].
 	^ aCollection
 ]
 
@@ -372,7 +375,7 @@ TEntityMetaLevelDependency >> allParentTypes [
 TEntityMetaLevelDependency >> allParents [
 	"Returns all the parents and sup-parents of an entity, i.e my parents and those of my parents, and those of the parents of my parents, etc"
 
-	^ self addAllParentsIn: OrderedCollection new
+	^ self addAllContainersIn: OrderedCollection new
 ]
 
 { #category : 'accessing' }
@@ -469,7 +472,9 @@ TEntityMetaLevelDependency >> belongsTo [
 	It does not make sense to have a 'primary' container since the models do not have a containment tree but a containment DAG. 
 	This method will be deprecated in the future when we will rewrite the users to use #parents."
 
-	^ self parents ifNotEmpty: #anyOne ifEmpty: [ nil ]
+	^ self containers
+		  ifNotEmpty: #anyOne
+		  ifEmpty: [ nil ]
 ]
 
 { #category : 'deprecated' }
@@ -510,6 +515,21 @@ TEntityMetaLevelDependency >> containerSelectors [
 TEntityMetaLevelDependency >> containerTypes [
 
 	^ self class containerTypesIn: self metamodel
+]
+
+{ #category : 'accessing' }
+TEntityMetaLevelDependency >> containers [
+
+	| res |
+	res := OrderedCollection new.
+	self containersDo: [ :parent | res add: parent ].
+	^ res
+]
+
+{ #category : 'accessing' }
+TEntityMetaLevelDependency >> containersDo: aBlock [
+
+	self containerSelectors do: [ :accessor | (self perform: accessor) ifNotNil: [ :r | aBlock value: r ] ]
 ]
 
 { #category : 'accessing' }
@@ -706,7 +726,7 @@ TEntityMetaLevelDependency >> isRoot [
 	<derived>
 	<FMComment:
 	'An entity is root if it has no parent in the model. This is useful for example to be able to build visualization where the displayed elements are the roots of the model and to let those elements be expanded to display their children.'>
-	self parentsDo: [ :parent | ^ false ].
+	self containersDo: [ :parent | ^ false ].
 	^ true
 ]
 
@@ -741,7 +761,7 @@ TEntityMetaLevelDependency >> numberOfExternalClients [
 	<FMProperty: #numberOfExternalClients type: #Number>
 	<derived>
 	<FMComment: 'Number of call from myself to outside my container.'>
-	^ self cacheAt: #numberOfExternalClients ifAbsentPut: [ (self allClients reject: [ :entity | entity allParents includesAny: self parents ]) size ]
+	^ self cacheAt: #numberOfExternalClients ifAbsentPut: [ (self allClients reject: [ :entity | entity allParents includesAny: self containers ]) size ]
 ]
 
 { #category : 'accessing' }
@@ -750,7 +770,7 @@ TEntityMetaLevelDependency >> numberOfExternalProviders [
 	<FMProperty: #numberOfExternalProviders type: #Number>
 	<derived>
 	<FMComment: 'Number of call to myself from outside my container.'>
-	^ self cacheAt: #numberOfExternalProviders ifAbsentPut: [ (self allProviders reject: [ :entity | entity allParents includesAny: self parents ]) size ]
+	^ self cacheAt: #numberOfExternalProviders ifAbsentPut: [ (self allProviders reject: [ :entity | entity allParents includesAny: self containers ]) size ]
 ]
 
 { #category : 'accessing' }
@@ -759,7 +779,7 @@ TEntityMetaLevelDependency >> numberOfInternalClients [
 	<FMProperty: #numberOfInternalClients type: #Number>
 	<derived>
 	<FMComment: 'Number of call from myself to entities of my container.'>
-	^ self cacheAt: #numberOfInternalClients ifAbsentPut: [ (self allClients select: [ :entity | entity allParents includesAny: self parents ]) size ]
+	^ self cacheAt: #numberOfInternalClients ifAbsentPut: [ (self allClients select: [ :entity | entity allParents includesAny: self containers ]) size ]
 ]
 
 { #category : 'accessing' }
@@ -768,7 +788,7 @@ TEntityMetaLevelDependency >> numberOfInternalProviders [
 	<FMProperty: #numberOfInternalProviders type: #Number>
 	<derived>
 	<FMComment: 'Number of call to myself from entities from my container.'>
-	^ self cacheAt: #numberOfInternalProviders ifAbsentPut: [ (self allProviders select: [ :entity | entity allParents includesAny: self parents ]) size ]
+	^ self cacheAt: #numberOfInternalProviders ifAbsentPut: [ (self allProviders select: [ :entity | entity allParents includesAny: self containers ]) size ]
 ]
 
 { #category : 'accessing' }
@@ -781,20 +801,6 @@ TEntityMetaLevelDependency >> outgoingFameProperties [
 	"finds all properties from entities of 'self class' to other entities"
 
 	^ self class outgoingFamePropertiesIn: self metamodel
-]
-
-{ #category : 'accessing' }
-TEntityMetaLevelDependency >> parents [
-	| res |
-	res := OrderedCollection new.
-	self parentsDo: [ :parent | res add: parent ].
-	^ res
-]
-
-{ #category : 'accessing' }
-TEntityMetaLevelDependency >> parentsDo: aBlock [
-
-	self containerSelectors do: [ :accessor | (self perform: accessor) ifNotNil: [ :r | aBlock value: r ] ]
 ]
 
 { #category : 'query' }
@@ -961,9 +967,9 @@ TEntityMetaLevelDependency >> queryOutgoing: aFAMIXClassAssociation [
 ]
 
 { #category : 'accessing' }
-TEntityMetaLevelDependency >> rootParents [
+TEntityMetaLevelDependency >> rootContainers [
 
-	^ self addRootParentsIn: OrderedCollection new
+	^ self addRootContainersIn: OrderedCollection new
 ]
 
 { #category : 'private' }

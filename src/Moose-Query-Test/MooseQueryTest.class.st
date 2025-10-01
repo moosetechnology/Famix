@@ -341,6 +341,15 @@ MooseQueryTest >> testChildrenSelectors [
 ]
 
 { #category : 'tests' }
+MooseQueryTest >> testContainers [
+
+	self assert: class2 containers size equals: 1.
+	self assert: class2 containers anyOne equals: package2.
+	self assert: method1 containers size equals: 1.
+	self assert: method1 containers anyOne equals: class1
+]
+
+{ #category : 'tests' }
 MooseQueryTest >> testExplicitDirectionQueryEquivalentToQueryWithDirectionSymbol [
 	"queryIncoming: is equivalent to query: #in with:"
 
@@ -581,14 +590,6 @@ MooseQueryTest >> testOutgoingInvocationAtScope [
 MooseQueryTest >> testOutgoingInvocationWithin [
 	self assert: ((method1 queryOutgoing: FamixTInvocation) within: class2) size equals: 1.
 
-]
-
-{ #category : 'tests' }
-MooseQueryTest >> testParents [
-	self assert: class2 parents size equals: 1.
-	self assert: class2 parents anyOne equals: package2.
-	self assert: method1 parents size equals: 1.
-	self assert: method1 parents anyOne equals: class1.
 ]
 
 { #category : 'tests' }

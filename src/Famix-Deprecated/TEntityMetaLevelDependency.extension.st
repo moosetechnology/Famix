@@ -78,6 +78,27 @@ TEntityMetaLevelDependency classSide >> parentTypesIn: aMetamodel [
 ]
 
 { #category : '*Famix-Deprecated' }
+TEntityMetaLevelDependency >> parents [
+
+	self deprecated: 'Use #containers instead' transformWith: '`@rcv parents' -> '`@rcv containers'.
+	^ self containers
+]
+
+{ #category : '*Famix-Deprecated' }
+TEntityMetaLevelDependency >> parentsDo: aBlock [
+
+	self deprecated: 'Use #containersDo: instead' transformWith: '`@rcv parentsDo: `@arg' -> '`@rcv containersDo: `@arg'.
+	self containersDo: aBlock
+]
+
+{ #category : '*Famix-Deprecated' }
+TEntityMetaLevelDependency >> rootParents [
+
+	self deprecated: 'Use #rootContainers instead' transformWith: '`@rcv rootParents' -> '`@rcv rootContainers'.
+	^ self rootContainers
+]
+
+{ #category : '*Famix-Deprecated' }
 TEntityMetaLevelDependency >> withAnyScope: aCollectionOfFamixClasses [
 	"I am used to return all the first encountered entities matching one of the class scope that are up or down in the containment tree of the metamodel"
 

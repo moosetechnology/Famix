@@ -47,11 +47,11 @@ MooseObjectQueryResult >> within: aFAMIXEntity [
 MooseObjectQueryResult >> withoutSelfLoops [
 	"exclude objects that match the receiver (modulo the scope)"
 
-	"We use a cache for the parents selector for performances reasons. It might be really long to perform the #withoutSelfLoops thus we need to speed it up a maximum.
+	"We use a cache for the container selectors for performances reasons. It might be really long to perform the #withoutSelfLoops thus we need to speed it up a maximum.
 	
 	[ (model allUsing: TEntityMetaLevelDependency) collect: [ :e | e  queryIncomingDependencies withoutSelfLoops ] ] timeToRun."
 
 	| parentSelectorsCache |
 	parentSelectorsCache := SmallDictionary new.
-	^ self reject: [ :obj | obj isIncludedIn: self receiver parentSelectorsCache: parentSelectorsCache ]
+	^ self reject: [ :obj | obj isIncludedIn: self receiver containerSelectorsCache: parentSelectorsCache ]
 ]

@@ -115,12 +115,12 @@ TDependencyQueryResult >> within: aFamixEntity [
 TDependencyQueryResult >> withoutSelfLoops [
 	"exclude dependencies which loop back to the receiver"
 
-	"We use a cache for the parents selector for performances reasons. It might be really long to perform the #withoutSelfLoops thus we need to speed it up a maximum.
+	"We use a cache for the container selectors for performances reasons. It might be really long to perform the #withoutSelfLoops thus we need to speed it up a maximum.
 	
 	[ (model allUsing: TEntityMetaLevelDependency) collect: [ :e | e  queryIncomingDependencies withoutSelfLoops ] ] timeToRun."
 
 	| parentSelectorsCache |
 	parentSelectorsCache := SmallDictionary new.
 	^ self reject: [ :dep |
-		(self opposite: dep) isIncludedIn: self receiver parentSelectorsCache: parentSelectorsCache ]
+		(self opposite: dep) isIncludedIn: self receiver containerSelectorsCache: parentSelectorsCache ]
 ]
