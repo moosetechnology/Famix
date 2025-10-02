@@ -109,11 +109,6 @@ FamixTSourceEntity >> multipleFileAnchorClass [
 				ifAbsent: [ self error: 'This metamodel does not includes the full concept of MultipleFileAnchor needed.' ] ]
 ]
 
-{ #category : 'properties' }
-FamixTSourceEntity >> notExistentMetricValue [
-	^ self explicitRequirement
-]
-
 { #category : 'metrics' }
 FamixTSourceEntity >> numberOfLinesOfCode [
 
