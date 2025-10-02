@@ -6,12 +6,10 @@ This trait provides a common, paradigm agnostic vocabulary to query dependencies
 
 It includes some generic way to query an entity via its associations. The API offer the possibility to query an entity with three parameters:
 - The direction of the navigation (Incoming/Outgoing -- in/out)
-- The kind of association (FAMIXAcces, FAMIXReference, all...)
+- The kind of association (FamixTAcces, FamixTReference, all...)
 - The scope of the query (The receiver, the receiver and its children)
 
-The actual core of the algorithms are in MooseQueryCalculator class.
-
-Most  of the generic methods takes a symbol to describe the direction. This symbol will be used to find a MooseQueryAbstactDirectionStrategy to configure a MooseQueryCalculator.
+The actual core of the algorithms are in `MooseQuery` class.
 
 For more informations: https://moosequery.ferlicot.fr/
 
@@ -293,36 +291,6 @@ TEntityMetaLevelDependency >> addRootContainersIn: aCollection [
 	^ aCollection
 ]
 
-{ #category : 'scoping' }
-TEntityMetaLevelDependency >> allAtAnyScope: aCollectionOfFamixClasses [
-	"I am used to return all the encountered entities (recursively) at matching one of the class scope given as parameter that are up in the containment tree of the metamodel"
-
-	^ self query containers recursively ofAnyType: aCollectionOfFamixClasses
-]
-
-{ #category : 'scoping' }
-TEntityMetaLevelDependency >> allAtAnyScope: aCollectionOfFamixClasses until: rejectBlock [
-	"I am used to return all the encountered entities (recursively) at matching one of the class scope given as parameter that are up in the containment tree of the metamodel.
-	I stop the recursion when the rejectBlock is true"
-
-	^ (self query containers recursively until: rejectBlock) ofAnyType: aCollectionOfFamixClasses
-]
-
-{ #category : 'scoping' }
-TEntityMetaLevelDependency >> allAtScope: aClassFAMIX [
-	"I am used to return all the entities at a given famix class scope that are up in the containment tree of the metamodel on multiple levels."
-
-	^ self query containers recursively ofType: aClassFAMIX
-]
-
-{ #category : 'scoping' }
-TEntityMetaLevelDependency >> allAtScope: aClassFAMIX until: rejectBlock [
-	"I am used to return all the entities at a given famix class scope that are up in the containment tree of the metamodel on multiple levels.
-	I stop the recursion when the rejectBlock is true."
-
-	^ (self query containers recursively until: rejectBlock) ofType: aClassFAMIX
-]
-
 { #category : 'accessing' }
 TEntityMetaLevelDependency >> allClients [
 
@@ -337,45 +305,58 @@ TEntityMetaLevelDependency >> allClientsAtMyScope [
 
 { #category : 'accessing' }
 TEntityMetaLevelDependency >> allClientsAtScope: aClass [
-"Attention, this method returns only the clients at the requested scope. The other clients non matching the scope are not return. Like this we are sure that all the return entities are at the requested scope"
-	^ self queryAllIncoming withoutSelfLoops
-		atScope: aClass
-		
+	"Attention, this method returns only the clients at the requested scope. The other clients non matching the scope are not return. Like this we are sure that all the return entities are at the requested scope"
+
+	^ self queryAllIncoming withoutSelfLoops containersOfType: aClass
 ]
 
-{ #category : 'accessing' }
+{ #category : 'query - scoping' }
 TEntityMetaLevelDependency >> allContainedEntities [
 	"Returns all the children and sub-children of an entity, i.e my children and those of my children, and those of the children of my children, etc"
 
 	^ self addAllContainedEntitiesIn: OrderedCollection new
 ]
 
-{ #category : 'accessing' }
+{ #category : 'query - scoping' }
+TEntityMetaLevelDependency >> allContainedEntitiesOfType: aType [
+	"I am used to return all the entities at a given famix class scope that are down in the containment tree of the metamodel on multiple levels."
+
+	^ self query containedEntities recursively ofType: aType
+]
+
+{ #category : 'query - scoping' }
 TEntityMetaLevelDependency >> allContainedEntityTypes [
 
 	^ self class allContainedEntityTypesIn: self metamodel
 ]
 
-{ #category : 'accessing' }
+{ #category : 'query - scoping' }
 TEntityMetaLevelDependency >> allContainerTypes [
 
 	^ self class allContainerTypesIn: self metamodel
 ]
 
-{ #category : 'accessing' }
+{ #category : 'query - scoping' }
 TEntityMetaLevelDependency >> allContainers [
 	"Returns all the containers and sup-containers of an entity, i.e my containers and those of my containers, and those of the containers of my containers, etc"
 
 	^ self addAllContainersIn: OrderedCollection new
 ]
 
-{ #category : 'accessing' }
+{ #category : 'query - scoping' }
+TEntityMetaLevelDependency >> allContainersOfType: aType [
+	"I am used to return all the entities at a given famix class scope that are up in the containment tree of the metamodel on multiple levels."
+
+	^ self query containers recursively ofType: aType
+]
+
+{ #category : 'private' }
 TEntityMetaLevelDependency >> allIncomingAssociationTypes [
 
 	^ self class allIncomingAssociationTypesIn: self metamodel 
 ]
 
-{ #category : 'accessing' }
+{ #category : 'private' }
 TEntityMetaLevelDependency >> allOutgoingAssociationTypes [
 	^ self class allOutgoingAssociationTypesIn: self metamodel
 ]
@@ -394,76 +375,9 @@ TEntityMetaLevelDependency >> allProvidersAtMyScope [
 
 { #category : 'accessing' }
 TEntityMetaLevelDependency >> allProvidersAtScope: aClass [
-"Attention, this method returns only the providers at the requested scope. The other providers non matching the scope are not return. Like this we are sure that all the return entities are at the requested scope"
-	^ self queryAllOutgoing withoutSelfLoops
-		atScope: aClass
-]
+	"Attention, this method returns only the providers at the requested scope. The other providers non matching the scope are not return. Like this we are sure that all the return entities are at the requested scope"
 
-{ #category : 'scoping' }
-TEntityMetaLevelDependency >> allToAnyScope: aCollectionOfFamixClasses [
-	"I am used to return all the encountered entities (recursively) at matching one of the class scope given as parameter that are down in the containment tree of the metamodel"
-
-	^ self query containedEntities recursively ofAnyType: aCollectionOfFamixClasses
-]
-
-{ #category : 'scoping' }
-TEntityMetaLevelDependency >> allToAnyScope: aCollectionOfFamixClasses until: rejectBlock [
-	"I am used to return all the encountered entities (recursively) at matching one of the class scope given as parameter that are down in the containment tree of the metamodel
-	I stop the recursion when the rejectBlock is true"
-
-	^ (self query containedEntities recursively until: rejectBlock) ofAnyType: aCollectionOfFamixClasses
-]
-
-{ #category : 'scoping' }
-TEntityMetaLevelDependency >> allToScope: aClassFAMIX [
-	"I am used to return all the entities at a given famix class scope that are down in the containment tree of the metamodel on multiple levels."
-
-	^ self query containedEntities recursively ofType: aClassFAMIX
-]
-
-{ #category : 'scoping' }
-TEntityMetaLevelDependency >> allToScope: aClassFAMIX until: rejectBlock [
-	"I am used to return all the entities at a given famix class scope that are down in the containment tree of the metamodel on multiple levels.
-	I stop the recursion when the rejectBlock is true"
-
-	^ (self query containedEntities recursively until: rejectBlock) ofType: aClassFAMIX
-]
-
-{ #category : 'scoping' }
-TEntityMetaLevelDependency >> atAnyScope: aCollectionOfFamixClasses [
-	"I am used to return all the first encountered entities matching one of the class scope given as parameter that are up in the containment tree of the metamodel"
-
-	^ self query containers ofAnyType: aCollectionOfFamixClasses
-]
-
-{ #category : 'scoping' }
-TEntityMetaLevelDependency >> atAnyScope: aCollectionOfFamixClasses until: rejectBlock [
-	"I am used to return all the first encountered entities matching one of the class scope given as parameter that are up in the containment tree of the metamodel.
-	I stop the recursion when the rejectBlock is true"
-
-	^ (self query containers until: rejectBlock) ofAnyType: aCollectionOfFamixClasses
-]
-
-{ #category : 'scoping' }
-TEntityMetaLevelDependency >> atScope: aClassFAMIX [
-	"I am used to return all the first encountered entities at a given famix class scope that are up in the containment tree of the metamodel"
-
-	^ self query containers ofType: aClassFAMIX
-]
-
-{ #category : 'scoping' }
-TEntityMetaLevelDependency >> atScope: aClassFAMIX until: rejectBlock [
-	"I am used to return all the first encountered entities at a given famix class scope that are up in the containment tree of the metamodel.
-	I stop the recursion when the rejectBlock is true"
-
-	^ (self query containers until: rejectBlock) ofType: aClassFAMIX
-]
-
-{ #category : 'scoping' }
-TEntityMetaLevelDependency >> atScopeWithProperty: aPropertySelector [
-	"I am used to return the first encountered entity that are up in the containment tree of the metamodel satisfying the property selector"
-
-	^ self query containers withProperty: aPropertySelector
+	^ self queryAllOutgoing withoutSelfLoops containersOfType: aClass
 ]
 
 { #category : 'deprecated' }
@@ -479,7 +393,7 @@ TEntityMetaLevelDependency >> belongsTo [
 		  ifEmpty: [ nil ]
 ]
 
-{ #category : 'accessing' }
+{ #category : 'query - scoping' }
 TEntityMetaLevelDependency >> containedEntities [
 
 	| res |
@@ -492,31 +406,38 @@ TEntityMetaLevelDependency >> containedEntities [
 	^ res
 ]
 
-{ #category : 'accessing' }
+{ #category : 'query - scoping' }
+TEntityMetaLevelDependency >> containedEntitiesOfType: aType [
+	"I am used to return all the first encountered  entities at a given famix class scope that are down in the containment tree of the metamodel"
+
+	^ self query containedEntities ofType: aType
+]
+
+{ #category : 'private' }
 TEntityMetaLevelDependency >> containedEntitySelectors [
 
 	^ self class containedEntitySelectorsIn: self metamodel
 ]
 
-{ #category : 'accessing' }
+{ #category : 'private' }
 TEntityMetaLevelDependency >> containedEntityTypes [
 
 	^ self class containedEntityTypesIn: self metamodel
 ]
 
-{ #category : 'accessing' }
+{ #category : 'private' }
 TEntityMetaLevelDependency >> containerSelectors [
 
 	^ self class containerSelectorsIn: self metamodel
 ]
 
-{ #category : 'accessing' }
+{ #category : 'private' }
 TEntityMetaLevelDependency >> containerTypes [
 
 	^ self class containerTypesIn: self metamodel
 ]
 
-{ #category : 'accessing' }
+{ #category : 'query - scoping' }
 TEntityMetaLevelDependency >> containers [
 
 	| res |
@@ -525,10 +446,17 @@ TEntityMetaLevelDependency >> containers [
 	^ res
 ]
 
-{ #category : 'accessing' }
+{ #category : 'query - scoping' }
 TEntityMetaLevelDependency >> containersDo: aBlock [
 
 	self containerSelectors do: [ :accessor | (self perform: accessor) ifNotNil: [ :r | aBlock value: r ] ]
+]
+
+{ #category : 'query - scoping' }
+TEntityMetaLevelDependency >> containersOfType: aType [
+	"I am used to return all the first encountered entities at a given famix class scope that are up in the containment tree of the metamodel"
+
+	^ self query containers ofType: aType
 ]
 
 { #category : 'accessing' }
@@ -685,12 +613,12 @@ TEntityMetaLevelDependency >> hasOutgoing: aFAMIXClassAssociation [
 	^ self query has outgoing dependenciesOfType: aFAMIXClassAssociation
 ]
 
-{ #category : 'accessing' }
+{ #category : 'private' }
 TEntityMetaLevelDependency >> incomingAssociationTypes [
 	^ self class incomingAssociationTypesIn: self metamodel
 ]
 
-{ #category : 'accessing' }
+{ #category : 'private' }
 TEntityMetaLevelDependency >> incomingFameProperties [
 	^ self class incomingFamePropertiesIn: self metamodel
 ]
@@ -746,7 +674,7 @@ TEntityMetaLevelDependency >> miInspectionTree: aBuilder [
 		  beResizable
 ]
 
-{ #category : 'accessing' }
+{ #category : 'metrics' }
 TEntityMetaLevelDependency >> numberOfContainedEntities [
 
 	<FMProperty: #numberOfContainedEntities type: #Number>
@@ -757,7 +685,7 @@ TEntityMetaLevelDependency >> numberOfContainedEntities [
 		  ifFalse: [ 0 ]
 ]
 
-{ #category : 'accessing' }
+{ #category : 'metrics' }
 TEntityMetaLevelDependency >> numberOfExternalClients [
 
 	<FMProperty: #numberOfExternalClients type: #Number>
@@ -766,7 +694,7 @@ TEntityMetaLevelDependency >> numberOfExternalClients [
 	^ self cacheAt: #numberOfExternalClients ifAbsentPut: [ (self allClients reject: [ :entity | entity allContainers includesAny: self containers ]) size ]
 ]
 
-{ #category : 'accessing' }
+{ #category : 'metrics' }
 TEntityMetaLevelDependency >> numberOfExternalProviders [
 
 	<FMProperty: #numberOfExternalProviders type: #Number>
@@ -775,7 +703,7 @@ TEntityMetaLevelDependency >> numberOfExternalProviders [
 	^ self cacheAt: #numberOfExternalProviders ifAbsentPut: [ (self allProviders reject: [ :entity | entity allContainers includesAny: self containers ]) size ]
 ]
 
-{ #category : 'accessing' }
+{ #category : 'metrics' }
 TEntityMetaLevelDependency >> numberOfInternalClients [
 
 	<FMProperty: #numberOfInternalClients type: #Number>
@@ -784,7 +712,7 @@ TEntityMetaLevelDependency >> numberOfInternalClients [
 	^ self cacheAt: #numberOfInternalClients ifAbsentPut: [ (self allClients select: [ :entity | entity allContainers includesAny: self containers ]) size ]
 ]
 
-{ #category : 'accessing' }
+{ #category : 'metrics' }
 TEntityMetaLevelDependency >> numberOfInternalProviders [
 
 	<FMProperty: #numberOfInternalProviders type: #Number>
@@ -793,24 +721,24 @@ TEntityMetaLevelDependency >> numberOfInternalProviders [
 	^ self cacheAt: #numberOfInternalProviders ifAbsentPut: [ (self allProviders select: [ :entity | entity allContainers includesAny: self containers ]) size ]
 ]
 
-{ #category : 'accessing' }
+{ #category : 'private' }
 TEntityMetaLevelDependency >> outgoingAssociationTypes [
 	^ self class outgoingAssociationTypesIn: self metamodel
 ]
 
-{ #category : 'accessing' }
+{ #category : 'private' }
 TEntityMetaLevelDependency >> outgoingFameProperties [
 	"finds all properties from entities of 'self class' to other entities"
 
 	^ self class outgoingFamePropertiesIn: self metamodel
 ]
 
-{ #category : 'query' }
+{ #category : 'accessing' }
 TEntityMetaLevelDependency >> query [
 	^ MooseQuery receiver: self
 ]
 
-{ #category : 'query dependencies' }
+{ #category : 'query - navigations' }
 TEntityMetaLevelDependency >> query: anInOutSymbol with: aFAMIXClassAssociation [
 	"Query all the incoming or outgoing associations of the FAMIXClassAssociation class for the receiver and its children.
 
@@ -824,7 +752,7 @@ TEntityMetaLevelDependency >> query: anInOutSymbol with: aFAMIXClassAssociation 
 	^ (self query navigation: anInOutSymbol) dependenciesOfType: aFAMIXClassAssociation
 ]
 
-{ #category : 'query dependencies' }
+{ #category : 'query - navigations' }
 TEntityMetaLevelDependency >> queryAll: anInOutSymbol [
 	"Query all the incoming or outgoing associations of the receiver or its children.
 
@@ -838,7 +766,7 @@ TEntityMetaLevelDependency >> queryAll: anInOutSymbol [
 	^ (self query navigation: anInOutSymbol) dependencies
 ]
 
-{ #category : 'query dependencies' }
+{ #category : 'query - navigations' }
 TEntityMetaLevelDependency >> queryAllIncoming [
 	"Query all the incoming associations of the receiver and its children.
 
@@ -850,7 +778,7 @@ TEntityMetaLevelDependency >> queryAllIncoming [
 	^ self query incoming dependencies
 ]
 
-{ #category : 'query dependencies' }
+{ #category : 'query - navigations' }
 TEntityMetaLevelDependency >> queryAllLocal: anInOutSymbol [
 	"Query all the incoming or outgoing associations of the receiver.
 	This method differ from #queryAll: in the fact that it will not check the associations of the reicever's children.
@@ -865,7 +793,7 @@ TEntityMetaLevelDependency >> queryAllLocal: anInOutSymbol [
 	^ (self query navigation: anInOutSymbol) local dependencies
 ]
 
-{ #category : 'query dependencies' }
+{ #category : 'query - navigations' }
 TEntityMetaLevelDependency >> queryAllLocalIncoming [
 	"Query all the incoming associations of the receiver.
 	This method differ from #queryAllIncoming in the fact that it will not check the associations of the reicever's children.
@@ -878,7 +806,7 @@ TEntityMetaLevelDependency >> queryAllLocalIncoming [
 	^ self query incoming local dependencies
 ]
 
-{ #category : 'query dependencies' }
+{ #category : 'query - navigations' }
 TEntityMetaLevelDependency >> queryAllLocalOutgoing [
 	"Query all the outgoing associations of the receiver.
 	This method differ from #queryAllOutgoing in the fact that it will not check the associations of the reicever's children.
@@ -891,7 +819,7 @@ TEntityMetaLevelDependency >> queryAllLocalOutgoing [
 	^ self query outgoing local dependencies
 ]
 
-{ #category : 'query dependencies' }
+{ #category : 'query - navigations' }
 TEntityMetaLevelDependency >> queryAllOutgoing [
 	"Query all the outgoing associations of the receiver and its children.
 
@@ -903,7 +831,7 @@ TEntityMetaLevelDependency >> queryAllOutgoing [
 	^ self query outgoing dependencies
 ]
 
-{ #category : 'query dependencies' }
+{ #category : 'query - navigations' }
 TEntityMetaLevelDependency >> queryIncoming: aFAMIXClassAssociation [
 	"Query all the incoming associations of the FAMIXClassAssociation class for the receiver and its children.
 
@@ -915,7 +843,7 @@ TEntityMetaLevelDependency >> queryIncoming: aFAMIXClassAssociation [
 	^ self query incoming dependenciesOfType: aFAMIXClassAssociation
 ]
 
-{ #category : 'query dependencies' }
+{ #category : 'query - navigations' }
 TEntityMetaLevelDependency >> queryLocal: anInOutSymbol with: aFAMIXClassAssociation [
 	"Query all the incoming or outgoing associations of the FAMIXClassAssociation class for the receiver.
 	This method differ from #query:with: in the fact that it will not check the associations of the reicever's children.
@@ -930,7 +858,7 @@ TEntityMetaLevelDependency >> queryLocal: anInOutSymbol with: aFAMIXClassAssocia
 	^ (self query navigation: anInOutSymbol) local dependenciesOfType: aFAMIXClassAssociation
 ]
 
-{ #category : 'query dependencies' }
+{ #category : 'query - navigations' }
 TEntityMetaLevelDependency >> queryLocalIncoming: aFAMIXClassAssociation [
 	"Query all the incoming associations of the FAMIXClassAssociation class for the receiver.
 	This method differ from #queryIncoming: in the fact that it will not check the associations of the reicever's children.
@@ -943,7 +871,7 @@ TEntityMetaLevelDependency >> queryLocalIncoming: aFAMIXClassAssociation [
 	^ self query incoming local dependenciesOfType: aFAMIXClassAssociation
 ]
 
-{ #category : 'query dependencies' }
+{ #category : 'query - navigations' }
 TEntityMetaLevelDependency >> queryLocalOutgoing: aFAMIXClassAssociation [
 	"Query all the outgoing associations of the FAMIXClassAssociation class for the receiver.
 	This method differ from #queryOutgoing: in the fact that it will not check the associations of the reicever's children.
@@ -956,7 +884,7 @@ TEntityMetaLevelDependency >> queryLocalOutgoing: aFAMIXClassAssociation [
 	^ self query outgoing local dependenciesOfType: aFAMIXClassAssociation
 ]
 
-{ #category : 'query dependencies' }
+{ #category : 'query - navigations' }
 TEntityMetaLevelDependency >> queryOutgoing: aFAMIXClassAssociation [
 	"Query all the outgoing associations of the FAMIXClassAssociation class for the receiver and its children.
 	
@@ -979,7 +907,7 @@ TEntityMetaLevelDependency >> scopeForQuery: aQuery direction: aDirection [
 	aDirection scopeFor: self query: aQuery
 ]
 
-{ #category : 'query dependencies' }
+{ #category : 'query - navigations' }
 TEntityMetaLevelDependency >> sourceThrough: aFAMIXClassAssociation [
 	"Collect the source of the FAMIXClassAssociation class for the receiver and its children.
 	
@@ -991,7 +919,7 @@ TEntityMetaLevelDependency >> sourceThrough: aFAMIXClassAssociation [
 	^ self query incoming objects dependenciesOfType: aFAMIXClassAssociation
 ]
 
-{ #category : 'query dependencies' }
+{ #category : 'query - navigations' }
 TEntityMetaLevelDependency >> targetThrough: aFAMIXClassAssociation [
 	"Collect the target of the FAMIXClassAssociation class for the receiver and its children.
 	
@@ -1003,7 +931,7 @@ TEntityMetaLevelDependency >> targetThrough: aFAMIXClassAssociation [
 	^ self query outgoing objects dependenciesOfType: aFAMIXClassAssociation
 ]
 
-{ #category : 'query dependencies' }
+{ #category : 'query - navigations' }
 TEntityMetaLevelDependency >> throughAllFrom [
 	"Query all the incoming associations of the receiver and its children.
 
@@ -1015,7 +943,7 @@ TEntityMetaLevelDependency >> throughAllFrom [
 	^ self query incoming objects dependencies
 ]
 
-{ #category : 'query dependencies' }
+{ #category : 'query - navigations' }
 TEntityMetaLevelDependency >> throughAllTo [
 	"Collect all the targets of the receiver and its children.
 	
@@ -1027,37 +955,7 @@ TEntityMetaLevelDependency >> throughAllTo [
 	^ self query outgoing objects dependencies
 ]
 
-{ #category : 'scoping' }
-TEntityMetaLevelDependency >> toAnyScope: aCollectionOfFamixClasses [
-	"I am used to return all the first encountered entities matching one of the class scope given as parameter that are down in the containment tree of the metamodel"
-
-	^ self query containedEntities ofAnyType: aCollectionOfFamixClasses
-]
-
-{ #category : 'scoping' }
-TEntityMetaLevelDependency >> toAnyScope: aCollectionOfFamixClasses until: rejectBlock [
-	"I am used to return all the first encountered entities matching one of the class scope given as parameter that are down in the containment tree of the metamodel.
-	I stop the recursion when the rejectBlock is true"
-
-	^ (self query containedEntities until: rejectBlock) ofAnyType: aCollectionOfFamixClasses
-]
-
-{ #category : 'scoping' }
-TEntityMetaLevelDependency >> toScope: aClassFAMIX [
-	"I am used to return all the first encountered  entities at a given famix class scope that are down in the containment tree of the metamodel"
-
-	^ self query containedEntities ofType: aClassFAMIX
-]
-
-{ #category : 'scoping' }
-TEntityMetaLevelDependency >> toScope: aClassFAMIX until: rejectBlock [
-	"I am used to return all the first encountered  entities at a given famix class scope that are down in the containment tree of the metamodel.
-	I stop the recursion when the rejectBlock is true"
-
-	^ (self query containedEntities until: rejectBlock) ofType: aClassFAMIX
-]
-
-{ #category : 'accessing' }
+{ #category : 'query - scoping' }
 TEntityMetaLevelDependency >> withAllContainedEntities [
 	"I return a collection including me and all my children in the containement DAG."
 
@@ -1066,7 +964,7 @@ TEntityMetaLevelDependency >> withAllContainedEntities [
 		  yourself
 ]
 
-{ #category : 'accessing' }
+{ #category : 'query - scoping' }
 TEntityMetaLevelDependency >> withAllContainers [
 	"I return a collection including me and all my containers in the containement DAG."
 

@@ -47,19 +47,15 @@ CandidateListOperator >> computeCandidateListFor: anInvocation [
 
 { #category : 'running' }
 CandidateListOperator >> computeCandidateListFor: anInvocation withReceivingClass: aClass [
+
 	| candidate candidates |
-	aClass
-		ifNotNil: [ candidates := self allCandidatesFor: anInvocation.
-			candidates := candidates
-				select: [ :each |
-					(each atScope: FamixTClass)
-						ifEmpty: [ false ]
-						ifNotEmpty: [:owningClasses | owningClasses anyOne inheritsFrom: aClass] ].
+	aClass ifNotNil: [
+			candidates := self allCandidatesFor: anInvocation.
+			candidates := candidates select: [ :each |
+				              (each containersOfType: FamixTClass) ifEmpty: [ false ] ifNotEmpty: [ :owningClasses | owningClasses anyOne inheritsFrom: aClass ] ].
 			candidate := aClass lookUp: anInvocation signature.
-			(candidate isNotNil and: [ candidate isAbstract not ])
-				ifTrue: [ candidates := candidates copyWith: candidate ].
-			anInvocation candidates: candidates
-		]
+			(candidate isNotNil and: [ candidate isAbstract not ]) ifTrue: [ candidates := candidates copyWith: candidate ].
+			anInvocation candidates: candidates ]
 ]
 
 { #category : 'running' }

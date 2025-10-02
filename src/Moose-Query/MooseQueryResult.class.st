@@ -57,33 +57,15 @@ MooseQueryResult >> add: newObject [
 ]
 
 { #category : 'filtering' }
-MooseQueryResult >> allAtAnyScope: aCollectionOfFamixClasses [
-	^ self executeScopeQuery: (MQScopeQuery recursivelyScopes: aCollectionOfFamixClasses direction: MQScopeContainersStrategy)
+MooseQueryResult >> allContainedEntitiesOfType: aType [
+
+	^ self executeScopeQuery: (MQScopeQuery recursivelyScope: aType direction: MQScopeContainedEntitiesStrategy)
 ]
 
 { #category : 'filtering' }
-MooseQueryResult >> allAtScope: aClassFamix [
-	^ self executeScopeQuery: (MQScopeQuery recursivelyScope: aClassFamix direction: MQScopeContainersStrategy)
-]
+MooseQueryResult >> allContainersOfType: aType [
 
-{ #category : 'filtering' }
-MooseQueryResult >> allToAnyScope: aCollectionOfFamixClasses [
-	^ self executeScopeQuery: (MQScopeQuery recursivelyScopes: aCollectionOfFamixClasses direction: MQScopeContainedEntitiesStrategy)
-]
-
-{ #category : 'filtering' }
-MooseQueryResult >> allToScope: aClassFamix [
-	^ self executeScopeQuery: (MQScopeQuery recursivelyScope: aClassFamix direction: MQScopeContainedEntitiesStrategy)
-]
-
-{ #category : 'filtering' }
-MooseQueryResult >> atAnyScope: aCollectionOfFamixClasses [
-	^ self executeScopeQuery: (MQScopeQuery scopes: aCollectionOfFamixClasses direction: MQScopeContainersStrategy)
-]
-
-{ #category : 'filtering' }
-MooseQueryResult >> atScope: aClassFamix [
-	^ self executeScopeQuery: (MQScopeQuery scope: aClassFamix direction: MQScopeContainersStrategy)
+	^ self executeScopeQuery: (MQScopeQuery recursivelyScope: aType direction: MQScopeContainersStrategy)
 ]
 
 { #category : 'enumerating' }
@@ -91,6 +73,18 @@ MooseQueryResult >> collect: aBlock [
 	^ (super collect: aBlock)
 		receiver: self receiver;
 		yourself
+]
+
+{ #category : 'filtering' }
+MooseQueryResult >> containedEntitiesOfType: aType [
+
+	^ self executeScopeQuery: (MQScopeQuery scope: aType direction: MQScopeContainedEntitiesStrategy)
+]
+
+{ #category : 'filtering' }
+MooseQueryResult >> containersOfType: aType [
+
+	^ self executeScopeQuery: (MQScopeQuery scope: aType direction: MQScopeContainersStrategy)
 ]
 
 { #category : 'enumerating' }
@@ -146,7 +140,8 @@ MooseQueryResult >> outOf: aFAMIXEntity [
 
 { #category : 'filtering' }
 MooseQueryResult >> outOfContainerUsing: aFamixTrait [
-	^ self outOf: (self receiver atScope: aFamixTrait) anyOne
+
+	^ self outOf: (self receiver containersOfType: aFamixTrait) anyOne
 ]
 
 { #category : 'accessing' }
@@ -200,16 +195,6 @@ MooseQueryResult >> storage: aCollection [
 	storage := aCollection
 ]
 
-{ #category : 'filtering' }
-MooseQueryResult >> toAnyScope: aCollectionOfFamixClasses [
-	^ self executeScopeQuery: (MQScopeQuery scopes: aCollectionOfFamixClasses direction: MQScopeContainedEntitiesStrategy)
-]
-
-{ #category : 'filtering' }
-MooseQueryResult >> toScope: aClassFamix [
-	^ self executeScopeQuery: (MQScopeQuery scope: aClassFamix direction: MQScopeContainedEntitiesStrategy)
-]
-
 { #category : 'enumerating' }
 MooseQueryResult >> union: aCollection [
 
@@ -229,7 +214,8 @@ MooseQueryResult >> within: aFAMIXEntity [
 
 { #category : 'filtering' }
 MooseQueryResult >> withinContainerUsing: aFamixTrait [
-	^ self within: (self receiver atScope: aFamixTrait) anyOne
+
+	^ self within: (self receiver containersOfType: aFamixTrait) anyOne
 ]
 
 { #category : 'accessing' }

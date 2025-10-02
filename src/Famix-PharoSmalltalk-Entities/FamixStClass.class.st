@@ -98,7 +98,8 @@ FamixStClass >> computeNumberOfLinesOfCode [
 
 { #category : 'accessing' }
 FamixStClass >> extendedInPackages [
-	^ self extendedMethods flatCollectAsSet: [ :m | m atScope: FamixTPackage ]
+
+	^ self extendedMethods flatCollectAsSet: [ :m | m containersOfType: FamixTPackage ]
 ]
 
 { #category : 'accessing' }

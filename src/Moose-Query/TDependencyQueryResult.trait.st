@@ -56,11 +56,13 @@ TDependencyQueryResult >> opposites [
 
 { #category : 'filtering' }
 TDependencyQueryResult >> outOf: aFamixEntity [
-	^ self
-		rejectDependencies: [ :dep || opposite |
-			opposite := self opposite: dep.
-			(opposite isCollection ifTrue: [ opposite ] ifFalse: [ { opposite } ])
-				anySatisfy: [ :entity | (entity allAtScope: aFamixEntity class) includes: aFamixEntity ] ]
+
+	^ self rejectDependencies: [ :dep |
+			  | opposite |
+			  opposite := self opposite: dep.
+			  (opposite isCollection
+				   ifTrue: [ opposite ]
+				   ifFalse: [ { opposite } ]) anySatisfy: [ :entity | (entity allContainersOfType: aFamixEntity class) includes: aFamixEntity ] ]
 ]
 
 { #category : 'private' }
@@ -82,7 +84,8 @@ TDependencyQueryResult >> sources [
 
 { #category : 'accessing' }
 TDependencyQueryResult >> sourcesAtScope: aFamixTraitOrClass [
-	^ self sources flatCollectAsSet: [ :e | e atScope: aFamixTraitOrClass ]
+
+	^ self sources flatCollectAsSet: [ :e | e containersOfType: aFamixTraitOrClass ]
 ]
 
 { #category : 'accessing' }
@@ -92,23 +95,22 @@ TDependencyQueryResult >> targets [
 
 { #category : 'accessing' }
 TDependencyQueryResult >> targetsAtScope: aTraitOrClass [
-	^ self targets flatCollectAsSet: [ :e | e atScope: aTraitOrClass ]
+
+	^ self targets flatCollectAsSet: [ :e | e containersOfType: aTraitOrClass ]
 ]
 
 { #category : 'filtering' }
 TDependencyQueryResult >> within: aFamixEntity [
 
 	| withinBlock |
-	withinBlock := [ :entity |
-	               (entity allAtScope: aFamixEntity class) includes:
-		               aFamixEntity ].
+	withinBlock := [ :entity | (entity allContainersOfType: aFamixEntity class) includes: aFamixEntity ].
 
 	^ self selectDependencies: [ :dep |
-		  | opposite |
-		  opposite := self opposite: dep.
-		  opposite isCollection
-			  ifFalse: [ withinBlock value: opposite ]
-			  ifTrue: [ opposite anySatisfy: withinBlock ] ]
+			  | opposite |
+			  opposite := self opposite: dep.
+			  opposite isCollection
+				  ifFalse: [ withinBlock value: opposite ]
+				  ifTrue: [ opposite anySatisfy: withinBlock ] ]
 ]
 
 { #category : 'filtering' }
