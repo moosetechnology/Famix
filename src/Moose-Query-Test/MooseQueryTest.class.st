@@ -784,50 +784,44 @@ MooseQueryTest >> testQueryWith [
 
 { #category : 'tests' }
 MooseQueryTest >> testSourceThroughAll [
-	self assertCollection: method2 throughAllFrom storage flattened hasSameElements: {method2 . method1 . method3}.
-	self assertCollection: class2 throughAllFrom storage flattened hasSameElements: {method2 . method1 . method3 . class1}
+
+	self assertCollection: method2 query incoming objects dependencies hasSameElements: {
+			method2.
+			method1.
+			method3 }.
+	self assertCollection: class2 query incoming objects dependencies hasSameElements: {
+			method2.
+			method1.
+			method3.
+			class1 }
 ]
 
 { #category : 'tests' }
 MooseQueryTest >> testSourceThroughInvocation [
 
-	self
-		assertCollection:
-		(method2 sourceThrough: FamixTInvocation) storage flattened
-		hasSameElements: { 
-				method2.
-				method1.
-				method3 }.
+	self assertCollection: (method2 query incoming objects dependenciesOfType: FamixTInvocation) hasSameElements: {
+			method2.
+			method1.
+			method3 }.
 
 	self
-		assertCollection: (method2 sourceThrough: FamixTInvocation)
-		hasSameElements:
-		((method2 queryIncoming: FamixTInvocation) collect: #source).
+		assertCollection: (method2 query incoming objects dependenciesOfType: FamixTInvocation)
+		hasSameElements: ((method2 queryIncoming: FamixTInvocation) collect: #source).
 
-	self
-		assertCollection:
-		(class2 sourceThrough: FamixTInvocation) storage flattened
-		hasSameElements: { 
-				method2.
-				method1.
-				method3 }
+	self assertCollection: (class2 query incoming objects dependenciesOfType: FamixTInvocation) storage flattened hasSameElements: {
+			method2.
+			method1.
+			method3 }
 ]
 
 { #category : 'tests' }
 MooseQueryTest >> testTargetThroughInvocation [
 
+	self assertCollection: (method1 query outgoing objects dependenciesOfType: FamixTInvocation) hasSameElements: { method2 }.
 	self
-		assertCollection:
-		(method1 targetThrough: FamixTInvocation) storage flattened
-		hasSameElements: { method2 }.
-	self
-		assertCollection: (method1 targetThrough: FamixTInvocation)
-		hasSameElements:
-		((method1 queryOutgoing: FamixTInvocation) flatCollect: #target).
-	self
-		assertCollection:
-		(class2 targetThrough: FamixTInvocation) storage flattened
-		hasSameElements: { method2 }
+		assertCollection: (method1 query outgoing objects dependenciesOfType: FamixTInvocation)
+		hasSameElements: ((method1 queryOutgoing: FamixTInvocation) flatCollect: #target).
+	self assertCollection: (class2 query outgoing objects dependenciesOfType: FamixTInvocation) hasSameElements: { method2 }
 ]
 
 { #category : 'tests' }

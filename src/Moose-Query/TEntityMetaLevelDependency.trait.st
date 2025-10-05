@@ -739,17 +739,17 @@ TEntityMetaLevelDependency >> query [
 ]
 
 { #category : 'query - navigations' }
-TEntityMetaLevelDependency >> query: anInOutSymbol with: aFAMIXClassAssociation [
-	"Query all the incoming or outgoing associations of the FAMIXClassAssociation class for the receiver and its children.
+TEntityMetaLevelDependency >> query: anInOutSymbol with: aType [
+	"Query all the incoming or outgoing associations of aType class for the receiver and its children.
 
 	Example:
-		aFAMIXClass query: #in with: FAMIXInheritance.
-			--> Will return a MooseIncomingQueryResult containing the FAMIXInheritance associations having aFAMIXClass or its children as target
-		aFAMIXMethod query: #out with: FAMIXAccess.
-			--> Will return a MooseOutgoingQueryResult containing the FAMIXAccess associations having aFAMIXMethod or its children as source
+		aClass query: #in with: FamixTInheritance.
+			--> Will return a MooseIncomingQueryResult containing the FamixTInheritance associations having aClass or its children as target
+		aMethod query: #out with: FamixTAccess.
+			--> Will return a MooseOutgoingQueryResult containing the FamixTAccess associations having aMethod or its children as source
 	"
 
-	^ (self query navigation: anInOutSymbol) dependenciesOfType: aFAMIXClassAssociation
+	^ (self query navigation: anInOutSymbol) dependenciesOfType: aType
 ]
 
 { #category : 'query - navigations' }
@@ -757,10 +757,10 @@ TEntityMetaLevelDependency >> queryAll: anInOutSymbol [
 	"Query all the incoming or outgoing associations of the receiver or its children.
 
 	Example:
-		aFAMIXClass queryAll: #in.
-			--> Will return a MooseIncomingQueryResult containing the FAMIXAssociation having aFAMIXClass or its children as target
-		aFAMIXMethod queryAll: #out.
-			--> Will return a MooseOutgoingQueryResult containing the FAMIXAssociation having aFAMIXMethod or its children as source
+		aClass queryAll: #in.
+			--> Will return a MooseIncomingQueryResult containing the associations having aClass or its children as target
+		aMethod queryAll: #out.
+			--> Will return a MooseOutgoingQueryResult containing the associations having aMethod or its children as source
 	"
 
 	^ (self query navigation: anInOutSymbol) dependencies
@@ -771,8 +771,8 @@ TEntityMetaLevelDependency >> queryAllIncoming [
 	"Query all the incoming associations of the receiver and its children.
 
 	Example:
-		aFAMIXClass queryAllIncoming.
-			--> Will return a MooseIncomingQueryResult containing the FAMIXAssociation having aFAMIXClass or its children as target
+		aClass queryAllIncoming.
+			--> Will return a MooseIncomingQueryResult containing the associations having aClass or its children as target
 	"
 
 	^ self query incoming dependencies
@@ -784,10 +784,10 @@ TEntityMetaLevelDependency >> queryAllLocal: anInOutSymbol [
 	This method differ from #queryAll: in the fact that it will not check the associations of the reicever's children.
 
 	Example:
-		aFAMIXClass queryAllLocal: #in.
-			--> Will return a MooseIncomingQueryResult containing the FAMIXAssociation having aFAMIXClass as target
-		aFAMIXMethod queryAllLocal: #out.
-			--> Will return a MooseOutgoingQueryResult containing the FAMIXAssociation having aFAMIXMethod as source
+		aClass queryAllLocal: #in.
+			--> Will return a MooseIncomingQueryResult containing the associations having aClass as target
+		aMethod queryAllLocal: #out.
+			--> Will return a MooseOutgoingQueryResult containing the associations having aMethod as source
 	"
 
 	^ (self query navigation: anInOutSymbol) local dependencies
@@ -799,8 +799,8 @@ TEntityMetaLevelDependency >> queryAllLocalIncoming [
 	This method differ from #queryAllIncoming in the fact that it will not check the associations of the reicever's children.
 
 	Example:
-		aFAMIXClass queryAllLocalIncoming.
-			--> Will return a MooseIncomingQueryResult containing the FAMIXAssociation having aFAMIXClass as target
+		aClass queryAllLocalIncoming.
+			--> Will return a MooseIncomingQueryResult containing the associations having aClass as target
 	"
 
 	^ self query incoming local dependencies
@@ -812,8 +812,8 @@ TEntityMetaLevelDependency >> queryAllLocalOutgoing [
 	This method differ from #queryAllOutgoing in the fact that it will not check the associations of the reicever's children.
 
 	Example:
-		aFAMIXClass queryAllLocalOutgoing.
-			--> Will return a MooseOutgoingQueryResult containing the FAMIXAssociation having aFAMIXClass as source
+		aClass queryAllLocalOutgoing.
+			--> Will return a MooseOutgoingQueryResult containing the associations having aClass as source
 	"
 
 	^ self query outgoing local dependencies
@@ -824,76 +824,76 @@ TEntityMetaLevelDependency >> queryAllOutgoing [
 	"Query all the outgoing associations of the receiver and its children.
 
 	Example:
-		aFAMIXClass queryAllOutgoing.
-			--> Will return a MooseOutgoingQueryResult containing the FAMIXAssociation having aFAMIXClass or its children as source
+		aClass queryAllOutgoing.
+			--> Will return a MooseOutgoingQueryResult containing the associations having aClass or its children as source
 	"
 
 	^ self query outgoing dependencies
 ]
 
 { #category : 'query - navigations' }
-TEntityMetaLevelDependency >> queryIncoming: aFAMIXClassAssociation [
+TEntityMetaLevelDependency >> queryIncoming: aType [
 	"Query all the incoming associations of the FAMIXClassAssociation class for the receiver and its children.
 
 	Example:
-		aFAMIXClass queryIncoming: FAMIXInheritance.
-			--> Will return a MooseIncomingQueryResult containing the FAMIXInheritance associations having aFAMIXClass or its children as target
+		aClass queryIncoming: FamixTInheritance.
+			--> Will return a MooseIncomingQueryResult containing the FamixTInheritance associations having aClass or its children as target
 	"
 
-	^ self query incoming dependenciesOfType: aFAMIXClassAssociation
+	^ self query incoming dependenciesOfType: aType
 ]
 
 { #category : 'query - navigations' }
-TEntityMetaLevelDependency >> queryLocal: anInOutSymbol with: aFAMIXClassAssociation [
+TEntityMetaLevelDependency >> queryLocal: anInOutSymbol with: aType [
 	"Query all the incoming or outgoing associations of the FAMIXClassAssociation class for the receiver.
 	This method differ from #query:with: in the fact that it will not check the associations of the reicever's children.
 
 	Example:
-		aFAMIXClass queryLocal: #in with: FAMIXInheritance.
-			--> Will return a MooseIncomingQueryResult containing the FAMIXInheritance associations having aFAMIXClass as target
-		aFAMIXMethod queryLocal: #out with: FAMIXAccess.
-			--> Will return a MooseOutgoingQueryResult containing the FAMIXAccess associations having aFAMIXMethod as source
+		aClass queryLocal: #in with: FamixTInheritance.
+			--> Will return a MooseIncomingQueryResult containing the FamixTInheritance associations having aClass as target
+		aMethod queryLocal: #out with: FamixTAccess.
+			--> Will return a MooseOutgoingQueryResult containing the FamixTAccess associations having aMethod as source
 	"
 
-	^ (self query navigation: anInOutSymbol) local dependenciesOfType: aFAMIXClassAssociation
+	^ (self query navigation: anInOutSymbol) local dependenciesOfType: aType
 ]
 
 { #category : 'query - navigations' }
-TEntityMetaLevelDependency >> queryLocalIncoming: aFAMIXClassAssociation [
+TEntityMetaLevelDependency >> queryLocalIncoming: aType [
 	"Query all the incoming associations of the FAMIXClassAssociation class for the receiver.
 	This method differ from #queryIncoming: in the fact that it will not check the associations of the reicever's children.
 
 	Example:
-		aFAMIXClass queryLocalIncoming: FAMIXInheritance.
-			--> Will return a MooseIncomingQueryResult containing the FAMIXInheritance associations having aFAMIXClass as target
+		aClass queryLocalIncoming: FamixTInheritance.
+			--> Will return a MooseIncomingQueryResult containing the FamixTInheritance associations having aClass as target
 	"
 
-	^ self query incoming local dependenciesOfType: aFAMIXClassAssociation
+	^ self query incoming local dependenciesOfType: aType
 ]
 
 { #category : 'query - navigations' }
-TEntityMetaLevelDependency >> queryLocalOutgoing: aFAMIXClassAssociation [
+TEntityMetaLevelDependency >> queryLocalOutgoing: aType [
 	"Query all the outgoing associations of the FAMIXClassAssociation class for the receiver.
 	This method differ from #queryOutgoing: in the fact that it will not check the associations of the reicever's children.
 	
 	Example:
-		aFAMIXClass queryLocalOutgoing: FAMIXInheritance.
-			--> Will return a MooseOutgoingQueryResult containing the FAMIXInheritance associations having aFAMIXClass as source
+		aClass queryLocalOutgoing: FamixTInheritance.
+			--> Will return a MooseOutgoingQueryResult containing the FamixTInheritance associations having aClass as source
 	"
 
-	^ self query outgoing local dependenciesOfType: aFAMIXClassAssociation
+	^ self query outgoing local dependenciesOfType: aType
 ]
 
 { #category : 'query - navigations' }
-TEntityMetaLevelDependency >> queryOutgoing: aFAMIXClassAssociation [
+TEntityMetaLevelDependency >> queryOutgoing: aType [
 	"Query all the outgoing associations of the FAMIXClassAssociation class for the receiver and its children.
 	
 	Example:
-		aFAMIXClass queryOutgoing: FAMIXInheritance.
-			--> Will return a MooseOutgoingQueryResult containing the FAMIXInheritance associations having aFAMIXClass or its children as source
+		aClass queryOutgoing: FamixTInheritance.
+			--> Will return a MooseOutgoingQueryResult containing the FamixTInheritance associations having aClass or its children as source
 	"
 
-	^ self query outgoing dependenciesOfType: aFAMIXClassAssociation
+	^ self query outgoing dependenciesOfType: aType
 ]
 
 { #category : 'accessing' }
@@ -905,54 +905,6 @@ TEntityMetaLevelDependency >> rootContainers [
 { #category : 'private' }
 TEntityMetaLevelDependency >> scopeForQuery: aQuery direction: aDirection [
 	aDirection scopeFor: self query: aQuery
-]
-
-{ #category : 'query - navigations' }
-TEntityMetaLevelDependency >> sourceThrough: aFAMIXClassAssociation [
-	"Collect the source of the FAMIXClassAssociation class for the receiver and its children.
-	
-	Example:
-		aFAMIXClass sourceThrough: FAMIXReference.
-			--> Will return a MooseIncomingQueryResult containing the methods having aFAMIXClass or its children as source
-	"
-
-	^ self query incoming objects dependenciesOfType: aFAMIXClassAssociation
-]
-
-{ #category : 'query - navigations' }
-TEntityMetaLevelDependency >> targetThrough: aFAMIXClassAssociation [
-	"Collect the target of the FAMIXClassAssociation class for the receiver and its children.
-	
-	Example:
-		aFAMIXMethod targetThrough: FAMIXReference.
-			--> Will return a MooseOutgoingQueryResult containing the class having aFAMIXClass or its children as target
-	"
-
-	^ self query outgoing objects dependenciesOfType: aFAMIXClassAssociation
-]
-
-{ #category : 'query - navigations' }
-TEntityMetaLevelDependency >> throughAllFrom [
-	"Query all the incoming associations of the receiver and its children.
-
-	Example:
-		aFAMIXClass throughAllFrom.
-			--> Will return a MooseIncomingQueryResult containing all the FAMIXAssociations having aFAMIXClass or its children as target
-	"
-
-	^ self query incoming objects dependencies
-]
-
-{ #category : 'query - navigations' }
-TEntityMetaLevelDependency >> throughAllTo [
-	"Collect all the targets of the receiver and its children.
-	
-	Example:
-		aFAMIXMethod throughAllTo.
-			--> Will return a MooseOutgoingQueryResult containing the class having aFAMIXClass or its children as source
-	"
-
-	^ self query outgoing objects dependencies
 ]
 
 { #category : 'query - scoping' }

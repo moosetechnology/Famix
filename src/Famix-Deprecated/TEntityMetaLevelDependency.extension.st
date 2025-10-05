@@ -304,6 +304,46 @@ TEntityMetaLevelDependency >> rootParents [
 ]
 
 { #category : '*Famix-Deprecated' }
+TEntityMetaLevelDependency >> sourceThrough: aType [
+
+	self
+		deprecated: 'This method will be removed because it is syntactic sugar that is not really used. Let the transformation work the change.'
+		transformWith: '`@rcv sourceThrough: `@arg' -> '`@rcv query incoming objects dependenciesOfType: `@arg'.
+
+	^ self query incoming objects dependenciesOfType: aType
+]
+
+{ #category : '*Famix-Deprecated' }
+TEntityMetaLevelDependency >> targetThrough: aType [
+
+	self
+		deprecated: 'This method will be removed because it is syntactic sugar that is not really used. Let the transformation work the change.'
+		transformWith: '`@rcv targetThrough: `@arg' -> '`@rcv query outgoing objects dependenciesOfType: `@arg'.
+
+	^ self query outgoing objects dependenciesOfType: aType
+]
+
+{ #category : '*Famix-Deprecated' }
+TEntityMetaLevelDependency >> throughAllFrom [
+
+	self
+		deprecated: 'This method will be removed because it is syntactic sugar that is not really used. Let the transformation work the change.'
+		transformWith: '`@rcv throughAllFrom' -> '`@rcv query incoming objects dependencies'.
+
+	^ self query incoming objects dependencies
+]
+
+{ #category : '*Famix-Deprecated' }
+TEntityMetaLevelDependency >> throughAllTo [
+
+	self
+		deprecated: 'This method will be removed because it is syntactic sugar that is not really used. Let the transformation work the change.'
+		transformWith: '`@rcv throughAllTo' -> '`@rcv query outgoing objects dependencies'.
+
+	^ self query outgoing objects dependencies
+]
+
+{ #category : '*Famix-Deprecated' }
 TEntityMetaLevelDependency >> toAnyScope: aCollectionOfFamixClasses [
 
 	self
