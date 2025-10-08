@@ -72,7 +72,7 @@ FamixTWithStatements >> numberOfStatements [
 
 	<FMProperty: #numberOfStatements type: #Number>
 	<FMComment: 'The number of statements in a class'>
-	^ self attributeAt: #numberOfStatements ifAbsent: [ MooseUnavailableMetric ]
+	^ self attributeAt: #numberOfStatements ifAbsent: [ self notExistentMetricValue ]
 ]
 
 { #category : 'metrics' }
