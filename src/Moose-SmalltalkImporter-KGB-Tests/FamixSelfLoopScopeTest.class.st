@@ -11,8 +11,9 @@ FamixSelfLoopScopeTest >> testFamixClassClassScope [
 
 	self assert: ((self c12FullReferencerInSide containersOfType: FamixTClass) includes: self c12FullReferencerInSide).
 	self deny: ((self c12FullReferencerInSide containersOfType: FamixTClass) includes: self c13FullRefereeInSideOutSide).
-	self assert: ((self c1FullReferencerOutSide queryAllIncomingInvocations containersOfType: FamixTClass) includes: self c1FullReferencerOutSide).
-	self deny: ((self c1FullReferencerOutSide queryAllIncomingInvocations containersOfType: FamixTClass) withoutSelfLoops includes: self c1FullReferencerOutSide)
+	self assert: (((self c1FullReferencerOutSide queryIncoming: FamixTInvocation) containersOfType: FamixTClass) includes: self c1FullReferencerOutSide).
+	self deny:
+		(((self c1FullReferencerOutSide queryIncoming: FamixTInvocation) containersOfType: FamixTClass) withoutSelfLoops includes: self c1FullReferencerOutSide)
 ]
 
 { #category : 'tests - class' }

@@ -297,6 +297,78 @@ TEntityMetaLevelDependency >> parentsDo: aBlock [
 ]
 
 { #category : '*Famix-Deprecated' }
+TEntityMetaLevelDependency >> queryAllIncomingInvocations [
+
+	self
+		deprecated: 'This method should be replaced by a usage of #queryIncoming:'
+		transformWith: '`@rcv queryAllIncomingInvocations' -> '`@rcv queryIncoming: FamixTInvocation'.
+	^ self queryIncoming: FamixTInvocation
+]
+
+{ #category : '*Famix-Deprecated' }
+TEntityMetaLevelDependency >> queryAllOutgoingInvocations [
+
+	self
+		deprecated: 'This method should be replaced by a usage of #queryOutgoing:'
+		transformWith: '`@rcv queryAllOutgoingInvocations' -> '`@rcv queryOutgoing: FamixTInvocation'.
+	^ self queryOutgoing: FamixTInvocation
+]
+
+{ #category : '*Famix-Deprecated' }
+TEntityMetaLevelDependency >> queryIncomingAccesses [
+
+	self
+		deprecated: 'This method should be replaced by a usage of #queryIncoming:'
+		transformWith: '`@rcv queryIncomingAccesses' -> '`@rcv queryIncoming: FamixTAccess'.
+	^ self queryIncoming: FamixTAccess
+]
+
+{ #category : '*Famix-Deprecated' }
+TEntityMetaLevelDependency >> queryIncomingInheritances [
+
+	self
+		deprecated: 'This method should be replaced by a usage of #queryIncoming:'
+		transformWith: '`@rcv queryIncomingInheritances' -> '`@rcv queryIncoming: FamixTInheritance'.
+	^ self queryIncoming: FamixTInheritance
+]
+
+{ #category : '*Famix-Deprecated' }
+TEntityMetaLevelDependency >> queryIncomingReferences [
+
+	self
+		deprecated: 'This method should be replaced by a usage of #queryIncoming:'
+		transformWith: '`@rcv queryIncomingReferences' -> '`@rcv queryIncoming: FamixTReference'.
+	^ self queryIncoming: FamixTReference
+]
+
+{ #category : '*Famix-Deprecated' }
+TEntityMetaLevelDependency >> queryOutgoingAccesses [
+
+	self
+		deprecated: 'This method should be replaced by a usage of #queryOutgoing:'
+		transformWith: '`@rcv queryOutgoingAccesses' -> '`@rcv queryOutgoing: FamixTAccess'.
+	^ self queryOutgoing: FamixTAccess
+]
+
+{ #category : '*Famix-Deprecated' }
+TEntityMetaLevelDependency >> queryOutgoingInheritances [
+
+	self
+		deprecated: 'This method should be replaced by a usage of #queryOutgoing:'
+		transformWith: '`@rcv queryOutgoingInheritances' -> '`@rcv queryOutgoing: FamixTInheritance'.
+	^ self queryOutgoing: FamixTInheritance
+]
+
+{ #category : '*Famix-Deprecated' }
+TEntityMetaLevelDependency >> queryOutgoingReferences [
+
+	self
+		deprecated: 'This method should be replaced by a usage of #queryOutgoing:'
+		transformWith: '`@rcv queryOutgoingReferences' -> '`@rcv queryOutgoing: FamixTReference'.
+	^ self queryOutgoing: FamixTReference
+]
+
+{ #category : '*Famix-Deprecated' }
 TEntityMetaLevelDependency >> rootParents [
 
 	self deprecated: 'Use #rootContainers instead' transformWith: '`@rcv rootParents' -> '`@rcv rootContainers'.

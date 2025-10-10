@@ -75,11 +75,10 @@ FamixStMethod class >> annotation [
 
 { #category : 'Famix-Extensions-metrics-support' }
 FamixStMethod >> accessedAttributes [
-	
 	"Returns the set of attributes of my class accessed by me (method). 
 	Used to support the calculation of LCOM"
-	
-	^ (self queryOutgoingAccesses opposites withinContainerUsing: FamixTClass) asSet select: #isAttribute
+
+	^ ((self queryOutgoing: FamixTAccess) opposites withinContainerUsing: FamixTClass) asSet select: #isAttribute
 ]
 
 { #category : 'accessing' }
@@ -151,7 +150,8 @@ FamixStMethod >> hasEmptyBody [
 
 { #category : 'Famix-Extensions' }
 FamixStMethod >> invokedBehaviours [
-	^ self queryAllOutgoingInvocations opposites
+
+	^ (self queryOutgoing: FamixTInvocation) opposites
 ]
 
 { #category : 'Famix-Extensions' }
