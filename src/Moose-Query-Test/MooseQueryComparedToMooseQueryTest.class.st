@@ -7,24 +7,21 @@ Class {
 
 { #category : 'tests' }
 MooseQueryComparedToMooseQueryTest >> testIncomingAccesses [
+
 	self
 		assert: (package2 queryIncoming: FamixTAccess) asSet
-		equals: (MooseIncomingQueryResult on: package2 withAll: (package2 classes flatCollect: [ :c | c queryIncomingAccesses ])) asSet.
+		equals: (MooseIncomingQueryResult on: package2 withAll: (package2 classes flatCollect: [ :c | c queryIncoming: FamixTAccess ])) asSet.
 	self
 		assert: (package1 queryIncoming: FamixTAccess) asSet
-		equals: (MooseIncomingQueryResult on: package1 withAll: (package1 classes flatCollect: [ :c | c queryIncomingAccesses ])) asSet.
+		equals: (MooseIncomingQueryResult on: package1 withAll: (package1 classes flatCollect: [ :c | c queryIncoming: FamixTAccess ])) asSet.
 	self
 		assert: (class2 queryIncoming: FamixTAccess) asSet
 		equals: (MooseIncomingQueryResult on: class2 withAll: (class2 attributes flatCollect: [ :each | each incomingAccesses ])) asSet.
 	self
 		assert: (method2 queryIncoming: FamixJavaAccess) asSet
-		equals:
-			(MooseIncomingQueryResult
-				on: method2
-				withAll:
-					((method2 parameters flatCollect: #incomingAccesses) asOrderedCollection
-						addAll: (method2 localVariables flatCollect: #incomingAccesses);
-						yourself)) asSet.
+		equals: (MooseIncomingQueryResult on: method2 withAll: ((method2 parameters flatCollect: #incomingAccesses) asOrderedCollection
+					  addAll: (method2 localVariables flatCollect: #incomingAccesses);
+					  yourself)) asSet.
 	self assert: (localVariable queryIncoming: FamixJavaAccess) asSet equals: localVariable incomingAccesses asSet
 ]
 
