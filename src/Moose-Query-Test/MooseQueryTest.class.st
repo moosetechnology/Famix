@@ -347,8 +347,8 @@ MooseQueryTest >> testContainedEntities [
 
 	self assert: package2 containedEntities size equals: 1.
 	self assert: package2 containedEntities anyOne equals: class2.
-	self assert: class1 children size equals: 1.
-	self assert: class1 children anyOne equals: method1
+	self assert: class1 containedEntities size equals: 1.
+	self assert: class1 containedEntities anyOne equals: method1
 ]
 
 { #category : 'tests' }
