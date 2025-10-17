@@ -757,6 +757,12 @@ MooseAbstractGroup >> select: aBlock [
 ]
 
 { #category : 'enumerating' }
+MooseAbstractGroup >> select: aSelectBlock thenCollect: aCollectBlock [
+
+	^ self entities select: aSelectBlock thenCollect: aCollectBlock
+]
+
+{ #category : 'enumerating' }
 MooseAbstractGroup >> select: aBlockSelect thenDo: aBlockThenDo [
 
 	^ self entities select: aBlockSelect thenDo: aBlockThenDo

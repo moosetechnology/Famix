@@ -111,9 +111,9 @@ FamixJavaFoldersImporter class >> verveineJJarPath: anObject [
 
 	anObject asFileReference
 		ifExists: [ :file |
-				file extension = 'jar' ifFalse: [ ^ self inform: 'Only a jar should be passed as argument.' ].
+				file extension = 'jar' ifFalse: [ ^ SpApplication defaultApplication inform: 'Only a jar should be passed as argument.' ].
 				VerveineJJar := file ]
-		ifAbsent: [ ^ self inform: 'The file does not exist' ]
+		ifAbsent: [ ^ SpApplication defaultApplication inform: 'The file does not exist' ]
 ]
 
 { #category : 'initialization' }
