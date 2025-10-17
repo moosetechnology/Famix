@@ -59,6 +59,25 @@ MooseObjectTest >> testAllPrinting [
 ]
 
 { #category : 'tests' }
+MooseObjectTest >> testAttributeAtPut [
+
+	| mooseObject attributeValue |
+	mooseObject := self actualClass new.
+	attributeValue := 'An attribute'.
+
+	"Putting the value in the attribute collection returns the value"
+	self
+		assert:
+		(mooseObject attributeAt: #testAttribute put: attributeValue)
+		equals: attributeValue.
+
+	"The value has been put in the attribute collection"
+	self
+		assert: (mooseObject attributeAt: #testAttribute)
+		equals: attributeValue
+]
+
+{ #category : 'tests' }
 MooseObjectTest >> testGroupFor [
 	| entity1 entity2 model classGroup methodGroup |
 	entity1 := FamixTest1Class new.

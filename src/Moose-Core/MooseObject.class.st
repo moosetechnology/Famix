@@ -231,7 +231,9 @@ MooseObject >> attributeAt: name ifAbsent: aBlock [
 
 	| aName |
 	aName := name asSymbol.
-	1 to: entityAttributes size do: [ :n | aName == (entityAttributes at: n) key ifTrue: [ ^ (entityAttributes at: n) value ] ].
+	1 to: entityAttributes size do: [ :n |
+			aName == (entityAttributes at: n) key ifTrue: [
+				^ (entityAttributes at: n) value ] ].
 	^ aBlock value
 ]
 
@@ -240,7 +242,9 @@ MooseObject >> attributeAt: name ifAbsentPut: aBlock [
 
 	| aName |
 	aName := name asSymbol.
-	1 to: entityAttributes size do: [ :n | aName == (entityAttributes at: n) key ifTrue: [ ^ (entityAttributes at: n) value ] ].
+	1 to: entityAttributes size do: [ :n |
+			aName == (entityAttributes at: n) key ifTrue: [
+				^ (entityAttributes at: n) value ] ].
 	entityAttributes := entityAttributes copyWith: aName -> aBlock value.
 	^ entityAttributes last value
 ]
@@ -250,7 +254,9 @@ MooseObject >> attributeAt: name put: value [
 
 	| aName |
 	aName := name asSymbol.
-	1 to: entityAttributes size do: [ :n | aName == (entityAttributes at: n) key ifTrue: [ ^ (entityAttributes at: n) value: value ] ].
+	1 to: entityAttributes size do: [ :n |
+			aName == (entityAttributes at: n) key ifTrue: [
+				^ ((entityAttributes at: n) value: value) value ] ].
 	entityAttributes := entityAttributes copyWith: aName -> value.
 	^ entityAttributes last value
 ]

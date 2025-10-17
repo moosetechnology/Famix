@@ -71,8 +71,13 @@ MooseEntity class >> model: aMooseModel [
 
 { #category : 'dependencies' }
 MooseEntity >> addAllChildrenDependenciesThrough: aDirectionStrategy in: aCollection [
-	aCollection addAll: (aDirectionStrategy dependenciesAtReceiverScopeOf: self).
-	self children do: [ :each | each addAllChildrenDependenciesThrough: aDirectionStrategy in: aCollection ].
+
+	aCollection addAll:
+		(aDirectionStrategy dependenciesAtReceiverScopeOf: self).
+	self containedEntities do: [ :each |
+			each
+				addAllChildrenDependenciesThrough: aDirectionStrategy
+				in: aCollection ].
 	^ aCollection
 ]
 
