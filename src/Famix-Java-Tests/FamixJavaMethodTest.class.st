@@ -190,6 +190,40 @@ FamixJavaMethodTest >> testIsGetterForBooleanAttribute [
 ]
 
 { #category : 'tests' }
+FamixJavaMethodTest >> testIsMethodDefinition [
+
+	| class |
+	class := FamixJavaClass new.
+	method := FamixJavaMethod new.
+	method parentType: class.
+
+	self assert: method isMethodDefinition.
+	
+	"Abstract method should not be considered as defined."
+	class := FamixJavaClass new.
+	method := FamixJavaMethod new.
+	method parentType: class.
+	method isAbstract: true.
+
+	self deny: method isMethodDefinition.
+	
+	"Method from interfaces should not be considered as defined."
+	class := FamixJavaInterface new.
+	method := FamixJavaMethod new.
+	method parentType: class.
+
+	self deny: method isMethodDefinition.
+	
+	"Method from interfaces with #default keyword should be considered as defined."
+	class := FamixJavaInterface new.
+	method := FamixJavaMethod new.
+	method parentType: class.
+	method kind: #default.
+
+	self assert: method isMethodDefinition.
+]
+
+{ #category : 'tests' }
 FamixJavaMethodTest >> testIsNotStubWhenParentIsNotStub [
 	| aClass |
 	aClass := FamixJavaClass new.

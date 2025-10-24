@@ -252,8 +252,12 @@ FamixJavaMethod >> isJUnit4Test [
 
 { #category : 'testing' }
 FamixJavaMethod >> isMethodDefinition [
+	"I am here to know if a method is a method declaration or a method definition. 
+	
+	Not all methods are defined. Abstract methods and most methods from interfaces are not defined."
 
-	"I method can be a declaration only in an interface"
+	self isAbstract ifTrue: [ ^false ].
+
 	self parentType isInterface ifFalse: [ ^ true ].
 	
 	"If the parent is an interface, we have a definition if the method has the #default keyword"
