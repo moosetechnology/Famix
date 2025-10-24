@@ -82,7 +82,7 @@ BaselineOfFamix >> fame: spec [
 BaselineOfFamix >> groups: spec [
 
 	^ spec
-		  group: 'Core' with: #( 'Famix-Traits' 'Moose-Query-Extensions' );
+		  group: 'Core' with: #('Moose-Query' 'BasicTraits' );
 		  group: 'Minimal' with: #( 'Moose-Core' );
 		  group: 'Basic'
 		  with: #( 'Famix-BasicInfrastructure' 'Famix-MetamodelGeneration' 'Moose-Core-Generator' );
@@ -155,7 +155,6 @@ BaselineOfFamix >> packages: spec [
 		package: 'Moose-Query' with: [ spec requires: #( 'Fame' 'DeepTraverser' 'CollectionExtensions' ) ];
 		package: 'Moose-Core' with: [ spec requires: #( 'Fame' 'Moose-Query' ) ];
 		package: 'Moose-Core-Generator' with: [ spec requires: #( 'Famix-MetamodelBuilder-Core' ) ];
-		package: 'Moose-Query-Extensions' with: [ spec requires: #( 'Moose-Query' 'BasicTraits' ) ];
 		package: 'Famix-Traits' with: [ spec requires: #( 'Moose-Core' ) ];
 		package: 'Famix-Visitor-Generation' with: [ spec requires: #( 'Famix-MetamodelBuilder-Core' ) ];
 		package: 'Famix-MetamodelBuilder-Core' with: [ spec requires: #( 'Moose-Core' 'SingularizePluralize' ) ];

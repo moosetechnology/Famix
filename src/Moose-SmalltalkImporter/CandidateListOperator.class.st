@@ -17,13 +17,15 @@ Class {
 CandidateListOperator >> allCandidatesFor: invocation [
 
 	^ Array withAll: (groups at: invocation signature ifAbsent: [
-			   | stubs |
-			   stubs := self importer ensureSmalltalkStubMethodsFor: invocation signature.
-			   groups at: invocation signature put: stubs.
-			   stubs do: [ :each |
-				   model add: each.
-				   each allParents do: [ :parent | parent mooseModel = model ifFalse: [ model add: parent ] ] ].
-			   stubs ])
+				   | stubs |
+				   stubs := self importer ensureSmalltalkStubMethodsFor:
+					            invocation signature.
+				   groups at: invocation signature put: stubs.
+				   stubs do: [ :each |
+						   model add: each.
+						   each allContainers do: [ :parent |
+							   parent mooseModel = model ifFalse: [ model add: parent ] ] ].
+				   stubs ])
 ]
 
 { #category : 'running' }
@@ -47,19 +49,15 @@ CandidateListOperator >> computeCandidateListFor: anInvocation [
 
 { #category : 'running' }
 CandidateListOperator >> computeCandidateListFor: anInvocation withReceivingClass: aClass [
+
 	| candidate candidates |
-	aClass
-		ifNotNil: [ candidates := self allCandidatesFor: anInvocation.
-			candidates := candidates
-				select: [ :each |
-					(each atScope: FamixTClass)
-						ifEmpty: [ false ]
-						ifNotEmpty: [:owningClasses | owningClasses anyOne inheritsFrom: aClass] ].
+	aClass ifNotNil: [
+			candidates := self allCandidatesFor: anInvocation.
+			candidates := candidates select: [ :each |
+				              (each containersOfType: FamixTClass) ifEmpty: [ false ] ifNotEmpty: [ :owningClasses | owningClasses anyOne inheritsFrom: aClass ] ].
 			candidate := aClass lookUp: anInvocation signature.
-			(candidate isNotNil and: [ candidate isAbstract not ])
-				ifTrue: [ candidates := candidates copyWith: candidate ].
-			anInvocation candidates: candidates
-		]
+			(candidate isNotNil and: [ candidate isAbstract not ]) ifTrue: [ candidates := candidates copyWith: candidate ].
+			anInvocation candidates: candidates ]
 ]
 
 { #category : 'running' }

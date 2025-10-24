@@ -21,8 +21,8 @@ Trait {
 	#instVars : [
 		'#parentFolder => FMOne type: #FamixTFolder opposite: #childrenFileSystemEntities'
 	],
-	#traits : 'FamixTNamedEntity',
-	#classTraits : 'FamixTNamedEntity classTrait',
+	#traits : 'FamixTNamedEntity + TEntityMetaLevelDependency',
+	#classTraits : 'FamixTNamedEntity classTrait + TEntityMetaLevelDependency classTrait',
 	#category : 'Famix-Traits-File',
 	#package : 'Famix-Traits',
 	#tag : 'File'

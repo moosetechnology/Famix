@@ -405,13 +405,14 @@ FamixReferenceModelImporterTest >> testDisplayFullString [
 
 { #category : 'tests' }
 FamixReferenceModelImporterTest >> testExtendedClasses [
+
 	| subRootModelTwo p1 p2 subRootModelThree extensionMethod |
 	p1 := self model entityNamed: #'Moose-TestResources-Reference-PackageOne'.
 	p2 := self model entityNamed: #'Moose-TestResources-Reference-PackageTwo'.
 	subRootModelTwo := self model entityNamed: SubRootModelTwo mooseName.
 	subRootModelThree := self model entityNamed: SubRootModelThree mooseName.
 	extensionMethod := self model entityNamed: (SubRootModelTwo >> #extendedMethodOne) mooseName.
-	self assertCollection: (subRootModelTwo atScope: FamixTPackage) hasSameElements: {p1}.
+	self assertCollection: (subRootModelTwo containersOfType: FamixTPackage) hasSameElements: { p1 }.
 	self assert: subRootModelTwo isExtended.
 	self assert: (subRootModelTwo extendedInPackages includes: p2).
 	self assert: (subRootModelTwo extendedMethods includes: extensionMethod).
@@ -447,12 +448,13 @@ FamixReferenceModelImporterTest >> testExtensionClasses [
 
 { #category : 'tests' }
 FamixReferenceModelImporterTest >> testExtensionMethod [
+
 	| p2 extensionMethod |
 	p2 := self model entityNamed: #'Moose-TestResources-Reference-PackageTwo'.
 	extensionMethod := self model entityNamed: (SubRootModelTwo >> #extendedMethodOne) mooseName.
 	self assert: extensionMethod isExtension.
-	self assert: ((extensionMethod atScope: FamixTPackage) includes: p2).
-	self assert: (extensionMethod atScope: FamixTPackage) ~~ (extensionMethod belongsTo atScope: FamixTPackage)
+	self assert: ((extensionMethod containersOfType: FamixTPackage) includes: p2).
+	self assert: (extensionMethod containersOfType: FamixTPackage) ~~ (extensionMethod belongsTo containersOfType: FamixTPackage)
 ]
 
 { #category : 'tests' }
@@ -479,18 +481,22 @@ FamixReferenceModelImporterTest >> testExtensionPackage [
 
 { #category : 'tests' }
 FamixReferenceModelImporterTest >> testExtensions [
+
 	| normalClass extendedClass |
 	extendedClass := self model entityNamed: SubRootModelTwo mooseName.
 	normalClass := self model entityNamed: SubRootModelThree mooseName.
 	self assert: extendedClass isExtended.
-	self assert: (extendedClass atScope: FamixTPackage) anyOne name equals: #'Moose-TestResources-Reference-PackageOne'.
-	self assert: (extendedClass methods flatCollect: [ :m | m atScope: FamixTPackage ]) asSet size equals: 2.
-	self assert: ((extendedClass methods flatCollect: [ :m | m atScope: FamixTPackage ]) asSet anySatisfy: [ :each | each name = #'Moose-TestResources-Reference-PackageOne' ]).
-	self assert: ((extendedClass methods flatCollect: [ :m | m atScope: FamixTPackage ]) asSet anySatisfy: [ :each | each name = #'Moose-TestResources-Reference-PackageTwo' ]).
+	self assert: (extendedClass containersOfType: FamixTPackage) anyOne name equals: #'Moose-TestResources-Reference-PackageOne'.
+	self assert: (extendedClass methods flatCollect: [ :m | m containersOfType: FamixTPackage ]) asSet size equals: 2.
+	self assert: ((extendedClass methods flatCollect: [ :m | m containersOfType: FamixTPackage ]) asSet anySatisfy: [ :each |
+			 each name = #'Moose-TestResources-Reference-PackageOne' ]).
+	self assert: ((extendedClass methods flatCollect: [ :m | m containersOfType: FamixTPackage ]) asSet anySatisfy: [ :each |
+			 each name = #'Moose-TestResources-Reference-PackageTwo' ]).
 	self deny: normalClass isExtended.
-	self assert: (normalClass atScope: FamixTPackage) anyOne name equals: #'Moose-TestResources-Reference-PackageTwo'.
-	self assert: (normalClass methods flatCollect: [ :m | m atScope: FamixTPackage ]) asSet size equals: 1.
-	self assert: ((normalClass methods flatCollect: [ :m | m atScope: FamixTPackage ]) allSatisfy: [ :each | each name = #'Moose-TestResources-Reference-PackageTwo' ])
+	self assert: (normalClass containersOfType: FamixTPackage) anyOne name equals: #'Moose-TestResources-Reference-PackageTwo'.
+	self assert: (normalClass methods flatCollect: [ :m | m containersOfType: FamixTPackage ]) asSet size equals: 1.
+	self assert:
+		((normalClass methods flatCollect: [ :m | m containersOfType: FamixTPackage ]) allSatisfy: [ :each | each name = #'Moose-TestResources-Reference-PackageTwo' ])
 ]
 
 { #category : 'tests' }

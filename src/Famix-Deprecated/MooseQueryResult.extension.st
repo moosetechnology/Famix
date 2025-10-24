@@ -1,0 +1,71 @@
+Extension { #name : 'MooseQueryResult' }
+
+{ #category : '*Famix-Deprecated' }
+MooseQueryResult >> allAtScope: aType [
+
+	self deprecated: 'Use #allContainersOfType: instead' transformWith: '`@rcv allAtScope: `@arg' -> '`@rcv allContainersOfType: `@arg'.
+	^ self allContainersOfType: aType
+]
+
+{ #category : '*Famix-Deprecated' }
+MooseQueryResult >> allToScope: aType [
+
+	self deprecated: 'Use #allContainedEntitiesOfType: instead' transformWith: '`@rcv allToScope: `@arg' -> '`@rcv allContainedEntitiesOfType: `@arg'.
+	^ self allContainedEntitiesOfType: aType
+]
+
+{ #category : '*Famix-Deprecated' }
+MooseQueryResult >> allWithAnyScope: aCollectionOfFamixClasses [
+
+	self deprecated: 'This query taking parents and children has been deprecated. You should use a scope up or a scope down instead.'.
+	^ self executeScopeQuery: (MQScopeQuery recursivelyScopes: aCollectionOfFamixClasses direction: MQScopeAllStrategy)
+]
+
+{ #category : '*Famix-Deprecated' }
+MooseQueryResult >> allWithScope: aClassFamix [
+
+	self deprecated: 'This query taking parents and children has been deprecated. You should use a scope up or a scope down instead.'.
+	^ self executeScopeQuery: (MQScopeQuery recursivelyScope: aClassFamix direction: MQScopeAllStrategy)
+]
+
+{ #category : '*Famix-Deprecated' }
+MooseQueryResult >> atScope: aType [
+
+	self deprecated: 'Use #containersOfType: instead' transformWith: '`@rcv atScope: `@arg' -> '`@rcv containersOfType: `@arg'.
+	^ self containersOfType: aType
+]
+
+{ #category : '*Famix-Deprecated' }
+MooseQueryResult >> outOfParentUsing: aFamixTrait [
+
+	self deprecated: 'Use #outOfContainerUsing: instead' transformWith: '`@rcv outOfParentUsing: `@arg' -> '`@rcv outOfContainerUsing: `@arg'.
+	^ self outOfContainerUsing: aFamixTrait
+]
+
+{ #category : '*Famix-Deprecated' }
+MooseQueryResult >> toScope: aType [
+
+	self deprecated: 'Use #containedEntitiesOfType: instead' transformWith: '`@rcv toScope: `@arg' -> '`@rcv containedEntitiesOfType: `@arg'.
+	^ self containedEntitiesOfType: aType
+]
+
+{ #category : '*Famix-Deprecated' }
+MooseQueryResult >> withAnyScope: aCollectionOfFamixClasses [
+
+	self deprecated: 'This query taking parents and children has been deprecated. You should use a scope up or a scope down instead.'.
+	^ self executeScopeQuery: (MQScopeQuery scopes: aCollectionOfFamixClasses direction: MQScopeAllStrategy)
+]
+
+{ #category : '*Famix-Deprecated' }
+MooseQueryResult >> withScope: aClassFamix [
+
+	self deprecated: 'This query taking parents and children has been deprecated. You should use a scope up or a scope down instead.'.
+	^ self executeScopeQuery: (MQScopeQuery scope: aClassFamix direction: MQScopeAllStrategy)
+]
+
+{ #category : '*Famix-Deprecated' }
+MooseQueryResult >> withinParentUsing: aFamixTrait [
+
+	self deprecated: 'Use #withinContainerUsing: instead.' transformWith: '`@rcv withinParentUsing: `@arg' -> '`@rcv withinContainerUsing: `@arg'.
+	^ self withinContainerUsing: aFamixTrait
+]

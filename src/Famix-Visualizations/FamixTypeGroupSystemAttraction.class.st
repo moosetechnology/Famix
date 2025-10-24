@@ -204,18 +204,16 @@ FamixTypeGroupSystemAttraction >> shapeForClass: aClass [
 
 { #category : 'shapes' }
 FamixTypeGroupSystemAttraction >> shapeForMethod: aMethod [
+
 	^ RSEllipse new
-		model: aMethod;
-		popup;
-		draggable;
-		color: self methodColor;
-		@
-			(RSHighlightable
-				showEdges: [ :method | 
-					method queryAllOutgoingInvocations opposites
-						, method queryAllIncomingInvocations opposites ]
-				using: (RSLine new color: self methodColor darker));
-		yourself
+		  model: aMethod;
+		  popup;
+		  draggable;
+		  color: self methodColor;
+		  @ (RSHighlightable
+				   showEdges: [ :method | (method queryOutgoing: FamixTInvocation) opposites , (method queryIncoming: FamixTInvocation) opposites ]
+				   using: (RSLine new color: self methodColor darker));
+		  yourself
 ]
 
 { #category : 'shapes' }

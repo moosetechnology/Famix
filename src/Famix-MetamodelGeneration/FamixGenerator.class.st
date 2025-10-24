@@ -1042,13 +1042,16 @@ FamixGenerator >> defineHierarchy [
 	tClass --|> tWithMethods.
 	tClass --|> tWithInheritances.
 	tClass --|> tWithAttributes.
-	tClass inheritsFromTrait: tType without: { #queryStaticIncomingAssociations. #queryStaticOutgoingAssociations }.
+	tClass
+		inheritsFromTrait: tType
+		without:
+		{ #queryStaticIncomingAssociations. #queryStaticOutgoingAssociations }.
 	tClass --|> tInvocationsReceiver.
 	tClass --|> tWithComments.
 
 	tClassGroup --|> tTypeGroup.
-	
-	tComment  --|> #TEntityMetaLevelDependency.
+
+	tComment --|> #TEntityMetaLevelDependency.
 	tComment --|> #TSourceEntity.
 
 	tCompilationUnit --|> tFile.
@@ -1061,6 +1064,7 @@ FamixGenerator >> defineHierarchy [
 	tException --|> tClass.
 
 	tFileSystemEntity --|> tNamedEntity.
+	tFileSystemEntity --|> #TEntityMetaLevelDependency.
 	tFile --|> tFileSystemEntity.
 
 	tFileInclude --|> tAssociation.
@@ -1092,7 +1096,7 @@ FamixGenerator >> defineHierarchy [
 	tInvocation --|> tHasSignature.
 
 	tImplicitVariable --|> tStructuralEntity.
-	
+
 	tLambda --|> tWithParameters.
 	tLambda --|> tHasSignature.
 	tLambda --|> tWithStatements.
@@ -1146,7 +1150,7 @@ FamixGenerator >> defineHierarchy [
 	tType --|> tCanBeStub.
 
 	tEntityTyping --|> tAssociation.
-	
+
 	tUnknownVariable --|> tStructuralEntity.
 
 	tWithClasses --|> tWithTypes.
@@ -1156,10 +1160,10 @@ FamixGenerator >> defineHierarchy [
 	tWithStatements --|> tCanBeStub.
 	tWithStatements --|> tWithReferences.
 
-	tConcretization --|> tAssociation. 
+	tConcretization --|> tAssociation.
 
 	tException --|> tThrowable.
-	
+
 	tCanBeStub --|> tSourceEntity
 ]
 

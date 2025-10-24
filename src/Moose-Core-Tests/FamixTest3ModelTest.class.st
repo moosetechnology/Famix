@@ -26,6 +26,7 @@ FamixTest3ModelTest >> testExport [
 	(Famix-Test3-Entities.Class (id: 1)
 		(name ''Foo'')
 		(isStub false)
+		(isTestCase false)
 		(numberOfLinesOfCode 0)))'
 ]
 

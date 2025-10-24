@@ -1,0 +1,19 @@
+"
+Description
+--------------------
+
+I am a strategy used by the scoping queries to define that the query should look down in the containment DAG. We will consider the contained entities of the receiver of the query.
+"
+Class {
+	#name : 'MQScopeContainedEntitiesStrategy',
+	#superclass : 'MQScopeDirectionStrategy',
+	#category : 'Moose-Query-Scoping',
+	#package : 'Moose-Query',
+	#tag : 'Scoping'
+}
+
+{ #category : 'accessing' }
+MQScopeContainedEntitiesStrategy class >> selectorsFor: anEntity [
+
+	^ anEntity containedEntitySelectors
+]

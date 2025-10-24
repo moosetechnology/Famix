@@ -71,8 +71,13 @@ MooseEntity class >> model: aMooseModel [
 
 { #category : 'dependencies' }
 MooseEntity >> addAllChildrenDependenciesThrough: aDirectionStrategy in: aCollection [
-	aCollection addAll: (aDirectionStrategy dependenciesAtReceiverScopeOf: self).
-	self children do: [ :each | each addAllChildrenDependenciesThrough: aDirectionStrategy in: aCollection ].
+
+	aCollection addAll:
+		(aDirectionStrategy dependenciesAtReceiverScopeOf: self).
+	self containedEntities do: [ :each |
+			each
+				addAllChildrenDependenciesThrough: aDirectionStrategy
+				in: aCollection ].
 	^ aCollection
 ]
 
@@ -182,7 +187,7 @@ MooseEntity >> isLinkedTo: anEntity dependancyDirection: aDirectionStrategy in: 
 
 	| allLinksWithParents |
 	allLinksWithParents := self allChildrenDependenciesThrough: aDirectionStrategy.
-	allLinksWithParents addAll: (allLinksWithParents flatCollect: #allParents).
+	allLinksWithParents addAll: (allLinksWithParents flatCollect: #allContainers).
 
 	^ anEntity isInListOfPossibleLinks: allLinksWithParents forModel: aMooseModel
 ]

@@ -2,8 +2,11 @@ Extension { #name : 'TEntityMetaLevelDependency' }
 
 { #category : '*Moose-Core' }
 TEntityMetaLevelDependency >> deadChildren [
-	self isContainerEntity ifFalse: [ self error: 'Only entitier containing other entities can call this method.' ].
-	^ self children select: #isDead
+
+	self isContainerEntity ifFalse: [
+			self error:
+				'Only entitier containing other entities can call this method.' ].
+	^ self containedEntities select: #isDead
 ]
 
 { #category : '*Moose-Core' }

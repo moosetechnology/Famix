@@ -59,6 +59,25 @@ MooseObjectTest >> testAllPrinting [
 ]
 
 { #category : 'tests' }
+MooseObjectTest >> testAttributeAtPut [
+
+	| mooseObject attributeValue |
+	mooseObject := self actualClass new.
+	attributeValue := 'An attribute'.
+
+	"Putting the value in the attribute collection returns the value"
+	self
+		assert:
+		(mooseObject attributeAt: #testAttribute put: attributeValue)
+		equals: attributeValue.
+
+	"The value has been put in the attribute collection"
+	self
+		assert: (mooseObject attributeAt: #testAttribute)
+		equals: attributeValue
+]
+
+{ #category : 'tests' }
 MooseObjectTest >> testGroupFor [
 	| entity1 entity2 model classGroup methodGroup |
 	entity1 := FamixTest1Class new.
@@ -98,6 +117,27 @@ MooseObjectTest >> testResetIDGeneration [
 	self actualClass freshID.
 	self actualClass resetIDGeneration.
 	self assert: self actualClass freshID equals: 1
+]
+
+{ #category : 'tests' }
+MooseObjectTest >> testValueOfFameProperty [
+
+	| entity property |
+	entity := FamixTest1Method named: 'Test'.
+	property := entity mooseDescription propertyNamed: #name.
+
+	self assert: (entity valueOfFameProperty: property) equals: 'Test'
+]
+
+{ #category : 'tests' }
+MooseObjectTest >> testValueOfFamePropertyWithWrongProperty [
+
+	| entity property |
+	entity := FamixTest1Method named: 'Test'.
+	property := FamixTest1Attribute mooseDescription propertyNamed: #numberOfAccesses.
+
+	"This property does not exist on a method so it should return nil with the current implementation"
+	self assert: (entity valueOfFameProperty: property) isNil
 ]
 
 { #category : 'tests' }

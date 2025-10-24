@@ -67,6 +67,7 @@ FamixJavaNamedEntity >> stubFormattedName [
 ]
 
 { #category : 'testing' }
-FamixJavaNamedEntity >> topLevelPackage [ 
-	^ (self atScope: FamixTPackage) anyOne topLevelPackage 
+FamixJavaNamedEntity >> topLevelPackage [
+
+	^ (self containersOfType: FamixTPackage) anyOne topLevelPackage
 ]

@@ -287,6 +287,7 @@ FamixTVisitor >> visitFamixTFileSystemEntity: aFamixTFileSystemEntity [
 
 	<generated>
 	self visitFamixTNamedEntity: aFamixTFileSystemEntity.
+	self visitTEntityMetaLevelDependency: aFamixTFileSystemEntity.
 
 	self visitEntity: aFamixTFileSystemEntity parentFolder
 ]

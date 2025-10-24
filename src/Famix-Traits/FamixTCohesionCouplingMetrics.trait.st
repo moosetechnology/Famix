@@ -63,11 +63,14 @@ FamixTCohesionCouplingMetrics >> accept: aVisitor [
 
 { #category : 'metrics' }
 FamixTCohesionCouplingMetrics >> afferentCoupling [
+
 	<FMProperty: #afferentCoupling type: #Number>
 	<derived>
-	<FMComment:
-		'Afferent Coupling of a namespace Afferent is the number of classes that depend upon this namespace'>
-	^ (((self queryAllIncoming outOfParentUsing: FamixTPackage) atScope: FamixTType) collect: [ :e | e isClassSide ifTrue: [ e instanceSide ] ifFalse: [ e ] ]) asSet  size
+	<FMComment: 'Afferent Coupling of a namespace Afferent is the number of classes that depend upon this namespace'>
+	^ (((self queryAllIncoming outOfContainerUsing: FamixTPackage) containersOfType: FamixTType) collect: [ :e |
+			   e isClassSide
+				   ifTrue: [ e instanceSide ]
+				   ifFalse: [ e ] ]) asSet size
 ]
 
 { #category : 'metrics' }
@@ -93,8 +96,10 @@ FamixTCohesionCouplingMetrics >> efferentCoupling [
 	<FMProperty: #efferentCoupling type: #Number>
 	<derived>
 	<FMComment: 'Efferent Coupling of a package'>
-
-	^ (((self queryAllOutgoing outOfParentUsing: FamixTPackage) atScope: FamixTType) collect: [ :e | e isClassSide ifTrue: [ e instanceSide ] ifFalse: [ e ] ] ) asSet size
+	^ (((self queryAllOutgoing outOfContainerUsing: FamixTPackage) containersOfType: FamixTType) collect: [ :e |
+			   e isClassSide
+				   ifTrue: [ e instanceSide ]
+				   ifFalse: [ e ] ]) asSet size
 ]
 
 { #category : 'metrics' }
@@ -123,10 +128,9 @@ FamixTCohesionCouplingMetrics >> martinCohesion [
 	| intraConnectivities myClasses |
 	myClasses := self childEntities select: #isClass.
 	myClasses := (myClasses union: (myClasses flatCollect: [ :c | c allRecursiveTypes ])) select: [ :c | c isInstanceSide ].
-	myClasses size == 0
-		ifTrue: [ ^ nil ].
-	intraConnectivities := (myClasses collect: [ :c | (c queryAllOutgoing atScope: FamixTType) withoutSelfLoops withinParentUsing: FamixTNamespace ])
-		inject: 0
-		into: [ :subTotal :each | subTotal + (each select: [ :c | c isInstanceSide ]) size ].
-	^ ((intraConnectivities + 1) / myClasses size) asFloat
+	myClasses size == 0 ifTrue: [ ^ nil ].
+	intraConnectivities := (myClasses collect: [ :c | (c queryAllOutgoing containersOfType: FamixTType) withoutSelfLoops withinContainerUsing: FamixTNamespace ])
+		                       inject: 0
+		                       into: [ :subTotal :each | subTotal + (each select: [ :c | c isInstanceSide ]) size ].
+	^ (intraConnectivities + 1 / myClasses size) asFloat
 ]

@@ -16,7 +16,7 @@ TDependencyQueryResult >> atScope: aClassFamix withNonMatchingEntitiesDo: aBlock
 
 	| res opposite coll query |
 	res := OrderedCollection new.
-	query := MQScopeQuery scope: aClassFamix direction: MQScopeUpStrategy.
+	query := MQScopeQuery scope: aClassFamix direction: MQScopeContainersStrategy.
 	self storage
 		do: [ :dep | 
 			coll := OrderedCollection new.
@@ -24,14 +24,6 @@ TDependencyQueryResult >> atScope: aClassFamix withNonMatchingEntitiesDo: aBlock
 			(opposite := self opposite: dep) scopeForQuery: query direction: query direction.
 			coll ifEmpty: [ aBlock cull: opposite cull: res ] ifNotEmpty: [ :results | res addAll: results ] ].
 	^ self newObjectResultWith: res asSet
-]
-
-{ #category : 'private' }
-TDependencyQueryResult >> elementAtReceiverScope: dep [
-	"returns scope (parents and children) of opposite element matching the scope of the receiver.
-	For example, would return the class of an invoked method if query is called on a class."
-
-	^ (self opposite: dep) withScope: self receiver
 ]
 
 { #category : 'filtering' }
@@ -64,11 +56,13 @@ TDependencyQueryResult >> opposites [
 
 { #category : 'filtering' }
 TDependencyQueryResult >> outOf: aFamixEntity [
-	^ self
-		rejectDependencies: [ :dep || opposite |
-			opposite := self opposite: dep.
-			(opposite isCollection ifTrue: [ opposite ] ifFalse: [ { opposite } ])
-				anySatisfy: [ :entity | (entity allAtScope: aFamixEntity class) includes: aFamixEntity ] ]
+
+	^ self rejectDependencies: [ :dep |
+			  | opposite |
+			  opposite := self opposite: dep.
+			  (opposite isCollection
+				   ifTrue: [ opposite ]
+				   ifFalse: [ { opposite } ]) anySatisfy: [ :entity | (entity allContainersOfType: aFamixEntity class) includes: aFamixEntity ] ]
 ]
 
 { #category : 'private' }
@@ -90,7 +84,8 @@ TDependencyQueryResult >> sources [
 
 { #category : 'accessing' }
 TDependencyQueryResult >> sourcesAtScope: aFamixTraitOrClass [
-	^ self sources flatCollectAsSet: [ :e | e atScope: aFamixTraitOrClass ]
+
+	^ self sources flatCollectAsSet: [ :e | e containersOfType: aFamixTraitOrClass ]
 ]
 
 { #category : 'accessing' }
@@ -100,35 +95,34 @@ TDependencyQueryResult >> targets [
 
 { #category : 'accessing' }
 TDependencyQueryResult >> targetsAtScope: aTraitOrClass [
-	^ self targets flatCollectAsSet: [ :e | e atScope: aTraitOrClass ]
+
+	^ self targets flatCollectAsSet: [ :e | e containersOfType: aTraitOrClass ]
 ]
 
 { #category : 'filtering' }
 TDependencyQueryResult >> within: aFamixEntity [
 
 	| withinBlock |
-	withinBlock := [ :entity |
-	               (entity allAtScope: aFamixEntity class) includes:
-		               aFamixEntity ].
+	withinBlock := [ :entity | (entity allContainersOfType: aFamixEntity class) includes: aFamixEntity ].
 
 	^ self selectDependencies: [ :dep |
-		  | opposite |
-		  opposite := self opposite: dep.
-		  opposite isCollection
-			  ifFalse: [ withinBlock value: opposite ]
-			  ifTrue: [ opposite anySatisfy: withinBlock ] ]
+			  | opposite |
+			  opposite := self opposite: dep.
+			  opposite isCollection
+				  ifFalse: [ withinBlock value: opposite ]
+				  ifTrue: [ opposite anySatisfy: withinBlock ] ]
 ]
 
 { #category : 'filtering' }
 TDependencyQueryResult >> withoutSelfLoops [
 	"exclude dependencies which loop back to the receiver"
 
-	"We use a cache for the parents selector for performances reasons. It might be really long to perform the #withoutSelfLoops thus we need to speed it up a maximum.
+	"We use a cache for the container selectors for performances reasons. It might be really long to perform the #withoutSelfLoops thus we need to speed it up a maximum.
 	
 	[ (model allUsing: TEntityMetaLevelDependency) collect: [ :e | e  queryIncomingDependencies withoutSelfLoops ] ] timeToRun."
 
 	| parentSelectorsCache |
 	parentSelectorsCache := SmallDictionary new.
 	^ self reject: [ :dep |
-		(self opposite: dep) isIncludedIn: self receiver parentSelectorsCache: parentSelectorsCache ]
+		(self opposite: dep) isIncludedIn: self receiver containerSelectorsCache: parentSelectorsCache ]
 ]

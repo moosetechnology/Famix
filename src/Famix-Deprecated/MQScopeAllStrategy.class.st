@@ -7,15 +7,27 @@ I am a strategy used by the scoping queries to define that the query should look
 Class {
 	#name : 'MQScopeAllStrategy',
 	#superclass : 'MQScopeDirectionStrategy',
-	#category : 'Moose-Query-Scoping',
-	#package : 'Moose-Query',
-	#tag : 'Scoping'
+	#category : 'Famix-Deprecated',
+	#package : 'Famix-Deprecated'
 }
+
+{ #category : 'testing' }
+MQScopeAllStrategy class >> isAbstract [
+	"Returning true to remove it from the query browser."
+
+	^ true
+]
+
+{ #category : 'testing' }
+MQScopeAllStrategy class >> isDeprecated [
+
+	^ true
+]
 
 { #category : 'query' }
 MQScopeAllStrategy class >> scopeFor: anEntity query: aQuery [
-	MQScopeUpStrategy scopeFor: anEntity query: aQuery.
-	MQScopeDownStrategy scopeFor: anEntity query: aQuery.
+	MQScopeContainersStrategy scopeFor: anEntity query: aQuery.
+	MQScopeContainedEntitiesStrategy scopeFor: anEntity query: aQuery.
 	^ aQuery result
 ]
 

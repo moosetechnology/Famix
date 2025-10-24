@@ -57,7 +57,7 @@ FamixTSourceEntity >> computeNumberOfLinesOfCode [
 
 	(self isStub not and: [ self shouldCountChildrenForLinesOfCodeIfNoSourceAnchor ]) ifFalse: [ ^ self notExistentMetricValue ].
 
-	^ self children sumNumbers: #numberOfLinesOfCode
+	^ self containedEntities sumNumbers: #numberOfLinesOfCode
 ]
 
 { #category : 'source anchor' }
@@ -93,6 +93,12 @@ FamixTSourceEntity >> inspectionSource: aBuilder [
 		  beNotEditable
 ]
 
+{ #category : 'inspector' }
+FamixTSourceEntity >> inspectionSourceContext: aContext [
+
+	aContext active: self sourceText isNotEmpty
+]
+
 { #category : 'source anchor' }
 FamixTSourceEntity >> multipleFileAnchorClass [
 	^ self mooseModel
@@ -101,11 +107,6 @@ FamixTSourceEntity >> multipleFileAnchorClass [
 			model factory
 				entityNamed: #MultipleFileAnchor
 				ifAbsent: [ self error: 'This metamodel does not includes the full concept of MultipleFileAnchor needed.' ] ]
-]
-
-{ #category : 'properties' }
-FamixTSourceEntity >> notExistentMetricValue [
-	^ self explicitRequirement
 ]
 
 { #category : 'metrics' }

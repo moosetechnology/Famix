@@ -82,11 +82,10 @@ FamixJavaMethod >> accept: aVisitor [
 
 { #category : 'Famix-Extensions-metrics-support' }
 FamixJavaMethod >> accessedAttributes [
-	
 	"Returns the set of attributes of my class accessed by me (method). 
 	Used to support the calculation of LCOM"
-	
-	^ (self queryOutgoingAccesses opposites withinParentUsing: FamixTClass) asSet select: #isAttribute
+
+	^ ((self queryOutgoing: FamixTAccess) opposites withinContainerUsing: FamixTClass) asSet select: #isAttribute
 ]
 
 { #category : 'Famix-Extensions' }
@@ -127,7 +126,8 @@ FamixJavaMethod >> innerClassesImplementingMethods [
 
 { #category : 'Famix-Extensions' }
 FamixJavaMethod >> invokedBehaviours [
-	^ self queryAllOutgoingInvocations opposites
+
+	^ (self queryOutgoing: FamixTInvocation) opposites
 ]
 
 { #category : 'Famix-Extensions' }
@@ -140,7 +140,8 @@ FamixJavaMethod >> invokedMethods [
 
 { #category : 'Famix-Extensions' }
 FamixJavaMethod >> invokingBehaviours [
-	^ self queryAllIncomingInvocations opposites
+
+	^ (self queryIncoming: FamixTInvocation) opposites
 ]
 
 { #category : 'Famix-Extensions' }
@@ -214,15 +215,22 @@ FamixJavaMethod >> isImplementing [
 ]
 
 { #category : 'testing' }
-FamixJavaMethod >> isInitializer [
+FamixJavaMethod >> isInitializationBlock [
+	"Return true if I represent an initialization block. I can either be static or not. You can use #isClassSide to find out."
 
-	^ self isConstructor or: [ self isInstanciationInitializer ]
+	^ '<Initializer>' = self name
 ]
 
 { #category : 'testing' }
-FamixJavaMethod >> isInstanciationInitializer [
+FamixJavaMethod >> isInitializer [
 
-	^ '<Initializer>' = self name
+	^ self isConstructor or: [ self isInitializationBlock  ]
+]
+
+{ #category : 'testing' }
+FamixJavaMethod >> isInstanceInitializationBlock [
+
+	^ self isInitializationBlock and: [ self isClassSide not ]
 ]
 
 { #category : 'testing' }
@@ -270,6 +278,12 @@ FamixJavaMethod >> isSetter [
 					  self declaredType isNotNil and: [
 						  self declaredType name = 'void' and: [
 							  self outgoingInvocations isEmpty ] ] ] ] ] ]
+]
+
+{ #category : 'testing' }
+FamixJavaMethod >> isStaticInitializationBlock [
+
+	^ self isInitializationBlock and: [ self isClassSide ]
 ]
 
 { #category : 'accessing' }

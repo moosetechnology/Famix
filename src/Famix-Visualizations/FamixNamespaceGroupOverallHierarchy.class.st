@@ -35,11 +35,12 @@ FamixNamespaceGroupOverallHierarchy >> buildLegend [
 
 { #category : 'building' }
 FamixNamespaceGroupOverallHierarchy >> buildNodes [
+
 	canvas
-		addAll:
-			((famixNamespaceGroup
-				flatCollectAsSet: [ :namespace | namespace allWithScope: FamixTNamespace ])
-				collect: [ :namespace | self shapeForNamespace: namespace ])
+		addAll: ((famixNamespaceGroup flatCollectAsSet: [ :namespace | namespace allContainersOfType: FamixTNamespace ]) collect: [ :namespace |
+					 self shapeForNamespace: namespace ]);
+		addAll: ((famixNamespaceGroup flatCollectAsSet: [ :namespace | namespace allContainedEntitiesOfType: FamixTNamespace ]) collect: [ :namespace |
+					 self shapeForNamespace: namespace ])
 ]
 
 { #category : 'color' }

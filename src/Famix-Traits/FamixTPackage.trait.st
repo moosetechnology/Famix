@@ -117,5 +117,5 @@ FamixTPackage >> weightedMethodCount [
 	<FMProperty: #weightedMethodCount type: #Number>
 	<FMComment: 'The sum of the complexity in a package'>
 	<derived>
-	^ self cacheAt: #WMC ifAbsentPut: [ (self toScope: FamixTWithMethods) sum: #weightedMethodCount ]
+	^ self cacheAt: #WMC ifAbsentPut: [ (self containedEntitiesOfType: FamixTWithMethods) sum: #weightedMethodCount ]
 ]

@@ -78,7 +78,11 @@ FamixTType >> addIncomingTyping: anObject [
 
 { #category : 'deprecated' }
 FamixTType >> belongsTo [
-	^ self parentPackage ifNil: [ self parents ifNotEmpty: #anyOne ifEmpty: [ nil ] ]
+
+	^ self parentPackage ifNil: [
+			  self containers
+				  ifNotEmpty: #anyOne
+				  ifEmpty: [ nil ] ]
 ]
 
 { #category : 'testing' }

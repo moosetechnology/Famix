@@ -187,15 +187,16 @@ FamixTClass >> isObjectClass [
 
 { #category : 'testing' }
 FamixTClass >> isTestCase [
+
 	<FMProperty: #isTestCase type: #Boolean>
 	<FMComment: 'True if the method is considered as a test'>
-	<derived>
 	^ self attributeAt: #isTestCase ifAbsent: [ false ]
 ]
 
 { #category : 'testing' }
 FamixTClass >> isTestCase: aBoolean [
-	^ self attributeAt: #isTestCase put: true
+
+	^ self attributeAt: #isTestCase put: aBoolean
 ]
 
 { #category : 'enumerating' }

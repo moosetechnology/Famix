@@ -69,9 +69,9 @@ FamixTImplicitVariable >> declaredType [
 	self typing ifNotNil: [ :t | t declaredType ifNotNil: [ :type | ^ type ] ].
 
 	[
-		self isSelf ifTrue: [ ^ (self query ancestors ofType: FamixTClass) anyOne ].
+		self isSelf ifTrue: [ ^ (self query containers ofType: FamixTClass) anyOne ].
 
-		self isSuper ifTrue: [ ^ (self query ancestors ofType: FamixTClass) anyOne superclass ] ]
+		self isSuper ifTrue: [ ^ (self query containers ofType: FamixTClass) anyOne superclass ] ]
 		on: Error
 		do: [ "Nothing. If we cannot determine the type, just return nil." ].
 

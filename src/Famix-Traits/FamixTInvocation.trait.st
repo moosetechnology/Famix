@@ -162,6 +162,22 @@ FamixTInvocation >> isInvocation [
 	^ true
 ]
 
+{ #category : 'testing' }
+FamixTInvocation >> isSelfInvocation [
+
+	self receiver ifNil: [ ^ false ].
+
+	^ self receiver isImplicitVariable and: [ self receiver isSelf ]
+]
+
+{ #category : 'testing' }
+FamixTInvocation >> isSuperInvocation [
+
+	self receiver ifNil: [ ^ false ].
+
+	^ self receiver isImplicitVariable and: [ self receiver isSuper ]
+]
+
 { #category : 'accessing' }
 FamixTInvocation >> receiver [
 	"Relation named: #receiver type: #FamixTInvocationsReceiver opposite: #receivingInvocations"
