@@ -190,7 +190,7 @@ FamixReferenceModelImporterTest >> testAccessingLocalVariable [
 FamixReferenceModelImporterTest >> testAccessingNamespace2 [
 	| accessDefinition |
 	accessDefinition := (self model entityNamed: 'Smalltalk.TheRoot.accessingGlobalVariableHavingNamespaceName()') accesses
-		select: [ :acc | acc target mooseName = #SmalltalkGlobalVariable ].
+		select: [ :acc | acc variable mooseName = #SmalltalkGlobalVariable ].
 	self assert: accessDefinition size equals: 1
 ]
 
