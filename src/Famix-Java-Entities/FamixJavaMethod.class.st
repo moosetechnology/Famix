@@ -168,6 +168,15 @@ FamixJavaMethod >> isClassInitializer [
 ]
 
 { #category : 'testing' }
+FamixJavaMethod >> isDefault [
+
+	<FMProperty: #isDefault type: #Boolean>
+	<derived>
+	<FMComment: 'True if the method has the default modifier. This means it is a method from an interface with a default implementation.'>
+	^ #default = self kind
+]
+
+{ #category : 'testing' }
 FamixJavaMethod >> isDetectedGetter [
 
 	self deprecated: 'This is legacy and is not used. January 2023'.
@@ -239,6 +248,20 @@ FamixJavaMethod >> isJUnit4Test [
 	<derived>
 	<FMComment: 'True if the method is considered as a Junit 4 Java test'>
 	^ self isAnnotatedWith: 'Test'
+]
+
+{ #category : 'testing' }
+FamixJavaMethod >> isMethodDefinition [
+	"I am here to know if a method is a method declaration or a method definition. 
+	
+	Not all methods are defined. Abstract methods and most methods from interfaces are not defined."
+
+	self isAbstract ifTrue: [ ^false ].
+
+	self parentType isInterface ifFalse: [ ^ true ].
+	
+	"If the parent is an interface, we have a definition if the method has the #default keyword"
+	^ self isDefault
 ]
 
 { #category : 'testing' }
