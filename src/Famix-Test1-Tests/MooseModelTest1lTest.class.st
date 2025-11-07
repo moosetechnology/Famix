@@ -22,22 +22,43 @@ MooseModelTest1lTest >> setUp [
 
 { #category : 'tests' }
 MooseModelTest1lTest >> testAllBehaviourals [
-	self assertCollection: model allBehaviourals hasSameElements: {m1 . m2 . m3}
+
+	self assertCollection: model allBehaviourals hasSameElements: {
+			constructor.
+			m1.
+			m2.
+			m3 }
 ]
 
 { #category : 'tests' }
 MooseModelTest1lTest >> testAllContainers [
-	self assertCollection: model allContainers hasSameElements: { c1. c2. m1. m2. m3 }
+
+	self assertCollection: model allContainers hasSameElements: {
+			c1.
+			c2.
+			constructor.
+			m1.
+			m2.
+			m3 }
 ]
 
 { #category : 'tests' }
 MooseModelTest1lTest >> testAllModelBehaviourals [
-	self assertCollection: model allModelBehaviourals hasSameElements: {m1 . m2}
+
+	self assertCollection: model allModelBehaviourals hasSameElements: {
+			constructor.
+			m1.
+			m2 }
 ]
 
 { #category : 'tests' }
 MooseModelTest1lTest >> testAllModelContainers [
-	self assertCollection: model allModelContainers hasSameElements: {c1 . m1 . m2}
+
+	self assertCollection: model allModelContainers hasSameElements: {
+			c1.
+			constructor.
+			m1.
+			m2 }
 ]
 
 { #category : 'tests' }

@@ -144,6 +144,13 @@ FamixJavaImportingContext >> importInheritance [
 ]
 
 { #category : 'importing' }
+FamixJavaImportingContext >> importInitializer [
+
+	<generated>
+	^ self importConcreteEntity: (self class fm3ClassNamed: #Initializer)
+]
+
+{ #category : 'importing' }
 FamixJavaImportingContext >> importInterface [
 
 	<generated>
@@ -421,6 +428,13 @@ FamixJavaImportingContext >> shouldImportInheritance [
 
 	<generated>
 	^ self shouldImport: #Inheritance
+]
+
+{ #category : 'testing' }
+FamixJavaImportingContext >> shouldImportInitializer [
+
+	<generated>
+	^ self shouldImport: #Initializer
 ]
 
 { #category : 'testing' }

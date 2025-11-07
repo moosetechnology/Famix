@@ -51,7 +51,8 @@ Class {
 		'parametricImplementation',
 		'parametricInvocation',
 		'parametricEntityTyping',
-		'parametricReference'
+		'parametricReference',
+		'initializer'
 	],
 	#classInstVars : [
 		'builder'
@@ -177,6 +178,7 @@ FamixJavaGenerator >> defineClasses [
 	invocation := self newClassNamed: #Invocation.
 	localVariable := self newClassNamed: #LocalVariable.
 	method := self newClassNamed: #Method.
+	initializer := self newClassNamed: #Initializer.
 	package := self newClassNamed: #Package.
 	parameter := self newClassNamed: #Parameter.
 	typeParameter := self newClassNamed: #TypeParameter.
@@ -249,7 +251,9 @@ FamixJavaGenerator >> defineHierarchy [
 	method --|> tCanBeSynchronized.
 	method --|> #TCanBeClassSide.
 	method --|> #TImportable.
-
+	
+	initializer --|> method.
+	
 	class --|> type.
 	class --|> #TClass.
 	class --|> #TLCOMMetrics.
@@ -392,14 +396,28 @@ FamixJavaGenerator >> defineHierarchy [
 
 { #category : 'definition' }
 FamixJavaGenerator >> defineProperties [
+
 	super defineProperties.
 
-	((tCanBeVolatile property: #isVolatile type: #Boolean defaultValue: false)
-		comment: 'Entity can be declared volatile').
-	((tCanBeTransient property: #isTransient type: #Boolean defaultValue: false)
-		comment: 'Entity can be declared transient' ).
-	((tCanBeSynchronized property: #isSynchronized type: #Boolean defaultValue: false)
-		comment: 'Entity can be declared synchronized').
+	(tCanBeVolatile
+		 property: #isVolatile
+		 type: #Boolean
+		 defaultValue: false) comment: 'Entity can be declared volatile'.
+	(tCanBeTransient
+		 property: #isTransient
+		 type: #Boolean
+		 defaultValue: false) comment: 'Entity can be declared transient'.
+	(tCanBeSynchronized
+		 property: #isSynchronized
+		 type: #Boolean
+		 defaultValue: false) comment: 'Entity can be declared synchronized'.
+
+	(initializer
+		 property: #isInstanciationBlock
+		 type: #Boolean
+		 defaultValue: false) comment:
+		'If true, the entity is an instantiation block.
+If false, the entity represents the definition of the attributes of a class'
 ]
 
 { #category : 'definition' }
@@ -437,7 +455,7 @@ FamixJavaGenerator >> defineTraits [
 	tJavaClassMetrics := self newTraitNamed: #TClassMetrics.
 
 	tBounded := self newTraitNamed: #TBounded comment: self commentForTBounded.
-	tBound := self newTraitNamed: #TBound comment: self commentForTBound.
+	tBound := self newTraitNamed: #TBound comment: self commentForTBound
 ]
 
 { #category : 'definition' }

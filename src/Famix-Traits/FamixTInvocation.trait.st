@@ -211,7 +211,7 @@ FamixTInvocation >> sender: anObject [
 	sender := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTInvocation >> target: aTarget [
 
 	aTarget isCollection

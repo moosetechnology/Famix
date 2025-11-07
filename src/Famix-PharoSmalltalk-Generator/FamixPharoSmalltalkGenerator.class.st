@@ -123,6 +123,7 @@ FamixPharoSmalltalkGenerator >> defineHierarchy [
 	method --|> #TCanBeAbstract.
 	method --|> #THasKind.
 	method --|> #TWithComments.
+	method --|> #TWithComments.
 	method --|> #TWithAnnotationInstances.
 	method --|> #TCanBeClassSide.
 	method --|> #TPackageable.

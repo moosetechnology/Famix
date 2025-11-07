@@ -1216,6 +1216,7 @@ FamixGenerator >> defineProperties [
 		 defaultValue: false) comment: 'Entity can be declared abstract'.
 	(tCanBeFinal property: #isFinal type: #Boolean defaultValue: false)
 		comment: 'Entity can be declared final'.
+
 	(tCanBeClassSide
 		 property: #isClassSide
 		 type: #Boolean
@@ -1242,7 +1243,7 @@ FamixGenerator >> defineProperties [
 		'Visibility of the entity'.
 
 	(tHasKind property: #kind type: #String) comment:
-		'Tag indicating a setter, getter, constant, constructor method'.
+		'Tag indicating a setter, getter, constant method'.
 
 	(tHasSignature property: #signature type: #String) comment:
 		'Signature of the message being sent'.
@@ -1279,7 +1280,7 @@ FamixGenerator >> defineProperties [
 	(tRelativeSourceAnchor property: #startPos type: #Number) comment:
 		'Start position in the source'.
 	(tRelativeSourceAnchor property: #endPos type: #Number) comment:
-		'Stop position in the source'.
+		'Stop position in the source'
 ]
 
 { #category : 'definition' }

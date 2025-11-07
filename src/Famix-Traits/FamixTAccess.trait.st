@@ -88,13 +88,13 @@ FamixTAccess >> accessor: anObject [
 	accessor := anObject
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTAccess >> addCandidate: anObject [
 	<generated>
 	^ self candidates add: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAccess >> candidates [
 	"Relation named: #candidates type: #FamixTAccessible opposite: #incomingAccesses"
 
@@ -105,14 +105,14 @@ FamixTAccess >> candidates [
 	^ candidates
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAccess >> candidates: anObject [
 
 	<generated>
 	candidates value: anObject
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixTAccess >> displayFullStringOn: aStream [
 
 	self source displayFullStringOn: aStream.
@@ -122,7 +122,7 @@ FamixTAccess >> displayFullStringOn: aStream [
 		 ifFalse: [ self candidates ]) displayStringOn: aStream
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixTAccess >> displayStringOn: aStream [
 
 	(self candidates size = 1
@@ -175,7 +175,7 @@ FamixTAccess >> printOn: aStream [
 	aStream nextPutAll: ' (Access)'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAccess >> target: aTarget [
 
 	aTarget isCollection
@@ -183,7 +183,7 @@ FamixTAccess >> target: aTarget [
 		ifFalse: [ self variable: aTarget ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAccess >> variable [
 	"This method returns only one candidate if there is one, or raises an error if there is more or less than one candidate."
 
@@ -193,7 +193,7 @@ FamixTAccess >> variable [
 	^ self candidates anyOne
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAccess >> variable: anEntity [
 
 	^ self candidates: { anEntity }

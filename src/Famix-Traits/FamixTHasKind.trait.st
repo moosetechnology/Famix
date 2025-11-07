@@ -6,7 +6,7 @@ This is an indicator that a method is a setter, getter, constant, or constructor
 
 | Name | Type | Default value | Comment |
 |---|
-| `kind` | `String` | nil | Tag indicating a setter, getter, constant, constructor method|
+| `kind` | `String` | nil | Tag indicating a setter, getter, constant method|
 
 "
 Trait {
@@ -44,6 +44,11 @@ FamixTHasKind >> beConstant [
 { #category : 'accessing' }
 FamixTHasKind >> beConstructor [
 
+	self deprecated:
+		'#isConctructor is now a property of FamixTCanBeConstructor.
+Please make sure your entity uses this trait and overrides #isConstructor instead.
+#isConstructor should compute if the entity is constructor based on language-specific criteria'.
+
 	self kind: #constructor
 ]
 
@@ -71,15 +76,22 @@ FamixTHasKind >> isConstant [
 { #category : 'testing' }
 FamixTHasKind >> isConstructor [
 
-	<FMProperty: #isConstructor type: #Boolean>
-	<derived>
-	<FMComment: 'True if the method is a constructor of the class'>
-	^ #constructor = self kind or: [ 
+	self deprecated:
+		'#isConctructor is now a property of FamixTMethod directly.
+Please make sure your Method entity overrides #isConstructor.
+It should compute if the method is a constructor based on language-specific criteria'.
+
+	^ #constructor = self kind or: [
 		  self cacheAt: #isConstructor ifAbsent: [ false ] ]
 ]
 
 { #category : 'testing' }
 FamixTHasKind >> isConstructor: aBoolean [
+
+	self deprecated:
+		'#isConctructor is now a property of FamixTCanBeConstructor.
+Please make sure your entity uses this trait and overrides #isConstructor instead.
+#isConstructor should compute if the entity is constructor based on language-specific criteria'.
 
 	aBoolean
 		ifTrue: [ self beConstructor ]
@@ -117,7 +129,7 @@ FamixTHasKind >> kind [
 
 	<FMProperty: #kind type: #String>
 	<generated>
-	<FMComment: 'Tag indicating a setter, getter, constant, constructor method'>
+	<FMComment: 'Tag indicating a setter, getter, constant method'>
 	^ kind
 ]
 

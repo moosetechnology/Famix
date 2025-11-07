@@ -27,11 +27,10 @@ FamixJavaTClassMetrics >> numberOfConstructorMethods [
 	<FMProperty: #numberOfConstructorMethods type: #Number>
 	<derived>
 	<FMComment: 'The number of constructor methods in a class'>
-	^ self cacheAt: #numberOfConstructorMethods ifAbsent: [
-			  | nc |
-			  nc := 0.
-			  self methods do: [ :method | method isConstructor ifNotNil: [ method isConstructor ifTrue: [ nc := 1 ] ] ].
-			  nc ]
+	^ self
+		  cacheAt: #numberOfConstructorMethods
+		  ifAbsent: [
+		  self methods count: [ :method | method isConstructor ] ]
 ]
 
 { #category : 'metrics' }

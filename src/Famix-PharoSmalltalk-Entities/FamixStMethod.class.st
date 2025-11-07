@@ -45,7 +45,7 @@
 | `isAbstract` | `Boolean` | false | Entity can be declared abstract|
 | `isClassSide` | `Boolean` | false | Entity can be declared class side i.e. static|
 | `isStub` | `Boolean` | false | Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.|
-| `kind` | `String` | nil | Tag indicating a setter, getter, constant, constructor method|
+| `kind` | `String` | nil | Tag indicating a setter, getter, constant method|
 | `name` | `String` | nil | Basic name of the entity, not full reference.|
 | `protocol` | `String` | nil | Protocol of the method|
 | `signature` | `String` | nil | Signature of the message being sent|
@@ -169,13 +169,25 @@ FamixStMethod >> isCalledInternally [
 			[:each | each sender isMethod and: [each sender belongsTo == self belongsTo]]
 ]
 
+{ #category : 'trait protocol conflict' }
+FamixStMethod >> isConstructor [
+
+	<FMProperty: #isConstructor type: #Boolean>
+	<FMComment: 'Is the method a constructor for its class?'>
+	<derived>
+	^ self protocol notNil and: [
+		  '*instance*creation*' match: self protocol asLowercase ]
+]
+
 { #category : 'Famix-Extensions-metrics-support' }
 FamixStMethod >> isInitializer [
 
-	self protocol ifNotNil: [ :proto | ('*initializ*' match: proto) ifTrue: [ ^ true ] ].
-	
-	self name ifNotNil: [ :na | ('*initialize*' match: na) ifTrue: [ ^ true ] ].
-	
+	self protocol ifNotNil: [ :p |
+		('*initializ*' match: p) ifTrue: [ ^ true ] ].
+
+	self name ifNotNil: [ :n |
+		('*initialize*' match: n) ifTrue: [ ^ true ] ].
+
 	^ self isConstructor
 ]
 

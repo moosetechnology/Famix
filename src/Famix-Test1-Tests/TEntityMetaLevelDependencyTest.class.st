@@ -7,10 +7,14 @@ Class {
 
 { #category : 'tests' }
 TEntityMetaLevelDependencyTest >> testAddAllContainedEntitiesIn [
+
 	| aCollection |
 	aCollection := Set new.
 	c1 addAllContainedEntitiesIn: aCollection.
-	self assertCollection: aCollection hasSameElements: {m1 . a1}
+	self assertCollection: aCollection hasSameElements: {
+			constructor.
+			m1.
+			a1 }
 ]
 
 { #category : 'tests' }
@@ -27,6 +31,7 @@ TEntityMetaLevelDependencyTest >> testAddAllContainersIn [
 TEntityMetaLevelDependencyTest >> testAllContainedEntities [
 
 	self assertCollection: c1 allContainedEntities hasSameElements: {
+			constructor.
 			m1.
 			a1 }.
 	self assertCollection: c2 allContainedEntities hasSameElements: {
@@ -41,15 +46,11 @@ TEntityMetaLevelDependencyTest >> testAllContainedEntitiesOfType [
 	self assertCollection: (c1 allContainedEntitiesOfType: FamixTClass) hasSameElements: { c1 }.
 	self assertCollection: (c1 allContainedEntitiesOfType: FamixTest1Class) hasSameElements: { c1 }.
 
-	self assertCollection: (c1 allContainedEntitiesOfType: FamixTMethod) hasSameElements: { m1 }.
-	self assertCollection: (c1 allContainedEntitiesOfType: FamixTest1Method) hasSameElements: { m1 }.
+	self assertCollection: (c1 allContainedEntitiesOfType: FamixTMethod) hasSameElements: { constructor. m1 }.
+	self assertCollection: (c1 allContainedEntitiesOfType: FamixTest1Method) hasSameElements: { constructor. m1 }.
 
-	self assertCollection: (c2 allContainedEntitiesOfType: FamixTMethod) hasSameElements: {
-			m2.
-			m3 }.
-	self assertCollection: (c2 allContainedEntitiesOfType: FamixTest1Method) hasSameElements: {
-			m2.
-			m3 }.
+	self assertCollection: (c2 allContainedEntitiesOfType: FamixTMethod) hasSameElements: { m2. m3 }.
+	self assertCollection: (c2 allContainedEntitiesOfType: FamixTest1Method) hasSameElements: { m2. m3 }.
 
 	self assertCollection: (c1 allContainedEntitiesOfType: FamixTSourceAnchor) hasSameElements: {  }.
 	self assertCollection: (c2 allContainedEntitiesOfType: FamixTest1SourceAnchor) hasSameElements: {  }.
@@ -163,6 +164,7 @@ TEntityMetaLevelDependencyTest >> testContainedEntities [
 
 	self assertCollection: m1 containedEntities hasSameElements: {  }.
 	self assertCollection: c1 containedEntities hasSameElements: {
+			constructor.
 			m1.
 			a1 }.
 	self assertCollection: c2 containedEntities hasSameElements: {
@@ -217,7 +219,7 @@ TEntityMetaLevelDependencyTest >> testIncomingAssociationTypes [
 { #category : 'tests' }
 TEntityMetaLevelDependencyTest >> testNumberOfContainedEntities [
 
-	self assert: c1 numberOfContainedEntities equals: 2.
+	self assert: c1 numberOfContainedEntities equals: 3.
 	self assert: c2 numberOfContainedEntities equals: 2.
 	self assert: m1 numberOfContainedEntities equals: 0.
 	self assert: a1 numberOfContainedEntities equals: 0

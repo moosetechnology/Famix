@@ -203,6 +203,20 @@ FamixJavaTEntityCreator >> newInheritance [
 ]
 
 { #category : 'entity creation' }
+FamixJavaTEntityCreator >> newInitializer [
+
+	<generated>
+	^ self add: FamixJavaInitializer new
+]
+
+{ #category : 'entity creation' }
+FamixJavaTEntityCreator >> newInitializerNamed: aName [
+
+	<generated>
+	^ self add: (FamixJavaInitializer named: aName)
+]
+
+{ #category : 'entity creation' }
 FamixJavaTEntityCreator >> newInterface [
 
 	<generated>
