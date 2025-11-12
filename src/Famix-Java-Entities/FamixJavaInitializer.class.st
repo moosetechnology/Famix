@@ -4,14 +4,14 @@
 
 | Name | Type | Default value | Comment |
 |---|
-| `isInstanciationBlock` | `Boolean` | false | If true, the entity is an instantiation block. If false, the entity represents the definition of the attributes of a class|
+| `isInitializationBlock` | `Boolean` | false | If true, the entity is an initialization block. If false, the entity represents the definition of the attributes of a class|
 
 "
 Class {
 	#name : 'FamixJavaInitializer',
 	#superclass : 'FamixJavaMethod',
 	#instVars : [
-		'#isInstanciationBlock => FMProperty defaultValue: false'
+		'#isInitializationBlock => FMProperty defaultValue: false'
 	],
 	#category : 'Famix-Java-Entities-Entities',
 	#package : 'Famix-Java-Entities',
@@ -43,6 +43,22 @@ FamixJavaInitializer >> isConstructor [
 	^ self name = self parentType name and: [ self typing isNil ]
 ]
 
+{ #category : 'accessing' }
+FamixJavaInitializer >> isInitializationBlock [
+
+	<FMProperty: #isInitializationBlock type: #Boolean defaultValue: false>
+	<generated>
+	<FMComment: 'If true, the entity is an initialization block.
+If false, the entity represents the definition of the attributes of a class'>
+	^ isInitializationBlock ifNil: [ isInitializationBlock := false ]
+]
+
+{ #category : 'accessing' }
+FamixJavaInitializer >> isInitializationBlock: anObject [
+	<generated>
+	isInitializationBlock := anObject
+]
+
 { #category : 'testing' }
 FamixJavaInitializer >> isInitializer [
 
@@ -50,26 +66,10 @@ FamixJavaInitializer >> isInitializer [
 ]
 
 { #category : 'accessing' }
-FamixJavaInitializer >> isInstanciationBlock [
-
-	<FMProperty: #isInstanciationBlock type: #Boolean defaultValue: false>
-	<generated>
-	<FMComment: 'If true, the entity is an instantiation block.
-If false, the entity represents the definition of the attributes of a class'>
-	^ isInstanciationBlock ifNil: [ isInstanciationBlock := false ]
-]
-
-{ #category : 'accessing' }
-FamixJavaInitializer >> isInstanciationBlock: anObject [
-	<generated>
-	isInstanciationBlock := anObject
-]
-
-{ #category : 'accessing' }
 FamixJavaInitializer >> name [
 
-	<FMProperty: #name type: #String defaultValue: '<Initializer>'>
-	<FMComment: 'Basic name of the entity, not full reference.'>
+	"<FMProperty: #name type: #String defaultValue: '<Initializer>'>
+	<FMComment: 'Basic name of the entity, not full reference.'>"
 	^ name ifNil: [ name := '<Initializer>' ]
 ]
 

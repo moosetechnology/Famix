@@ -413,10 +413,10 @@ FamixJavaGenerator >> defineProperties [
 		 defaultValue: false) comment: 'Entity can be declared synchronized'.
 
 	(initializer
-		 property: #isInstanciationBlock
+		 property: #isInitializationBlock
 		 type: #Boolean
 		 defaultValue: false) comment:
-		'If true, the entity is an instantiation block.
+		'If true, the entity is an initialization block.
 If false, the entity represents the definition of the attributes of a class'
 ]
 
