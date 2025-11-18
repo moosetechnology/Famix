@@ -372,7 +372,6 @@ MooseModel >> cacheMooseGroups [
 		runWithProgress: [ :bar | 
 			selectors
 				do: [ :sel | 
-					1halt.
 					self perform: sel.
 					bar increment ] ]
 		description: ('Caching <1p> groups in Moose model' expandMacrosWith: selectors size)
