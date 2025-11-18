@@ -398,17 +398,18 @@ TEntityMetaLevelDependency >> containedEntities [
 
 	| res |
 	res := OrderedCollection new.
-	self containedEntitiesDo: [ :r |
-			r isCollection
-				ifTrue: [ res addAll: r ]
-				ifFalse: [ res add: r ] ].
+	self containedEntitiesDo: [ :r | res add: r ].
 	^ res
 ]
 
 { #category : 'query - scoping' }
 TEntityMetaLevelDependency >> containedEntitiesDo: aBlock [
 
-	self containedEntitySelectors do: [ :accessor | (self perform: accessor) ifNotNil: [ :r | aBlock value: r ] ]
+	self containedEntitySelectors do: [ :accessor |
+			(self perform: accessor) ifNotNil: [ :result |
+					result isCollection
+						ifTrue: [ result do: [ :entity | aBlock value: entity ] ]
+						ifFalse: [ aBlock value: result ] ] ]
 ]
 
 { #category : 'query - scoping' }
