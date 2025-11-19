@@ -109,6 +109,26 @@ MooseModel class >> importFrom: aStream filteredBy: anImportingContext [
 ]
 
 { #category : 'import-export' }
+MooseModel class >> importFrom: aStream parser: aClass withMetamodel: aMetamodel customizingImporterWith: aBlock [
+	"I import a MSE with its metamodel and return a FMModel from it. It is possible to customize the importer via a block"
+
+	| model importer areWarningsEnabled |
+	model := FMModel withMetamodel: aMetamodel.
+	importer := aBlock value: ((FMImporter model: model) autorizeDandlingReferencesAtEnd
+			             parser: aClass;
+			             stream: aStream;
+			             yourself). "We are currently updating the meta models and most parsers are not up to date.
+	We disable warnings to avoid all deprecation warnings during the transition phase."
+	areWarningsEnabled := Deprecation raiseWarning.
+	[
+		Deprecation raiseWarning: false.
+		importer run ] ensure: [ Deprecation raiseWarning: areWarningsEnabled ].
+
+	model updateCache.
+	^ model
+]
+
+{ #category : 'import-export' }
 MooseModel class >> importFrom: aStream withMetamodel: aMetamodel [
 	"Here we build with the default importer"
 
@@ -117,25 +137,12 @@ MooseModel class >> importFrom: aStream withMetamodel: aMetamodel [
 
 { #category : 'import-export' }
 MooseModel class >> importFrom: aStream withMetamodel: aMetamodel customizingImporterWith: aBlock [
-	"I import a MSE with its metamodel and return a FMModel from it. It is possible to customize the importer via a block"
 
-	| model importer areWarningsEnabled |
-	model := FMModel withMetamodel: aMetamodel.
-	importer := aBlock
-		value:
-			((FMImporter model: model) autorizeDandlingReferencesAtEnd
-				stream: aStream;
-				yourself).
-
-	"We are currently updating the meta models and most parsers are not up to date.
-	We disable warnings to avoid all deprecation warnings during the transition phase."
-	areWarningsEnabled := Deprecation raiseWarning.
-	[ Deprecation raiseWarning: false.
-	importer run ]
-		ensure: [ Deprecation raiseWarning: areWarningsEnabled ].
-
-	model updateCache.
-	^ model
+	^ self
+		  importFrom: aStream
+		  parser: FMMSEParser
+		  withMetamodel: aMetamodel
+		  customizingImporterWith: aBlock
 ]
 
 { #category : 'import-export' }
@@ -181,24 +188,11 @@ MooseModel class >> importFromJSON: aStream withMetamodel: aMetamodel [
 MooseModel class >> importFromJSON: aStream withMetamodel: aMetamodel customizingImporterWith: aBlock [
 	"I import a MSE with its metamodel and return a FMModel from it. It is possible to customize the importer via a block"
 
-	| model importer areWarningsEnabled |
-	model := FMModel withMetamodel: aMetamodel.
-	importer := aBlock
-		value:
-			((FMImporter model: model) autorizeDandlingReferencesAtEnd
-				parser: FMJSONParser;
-				stream: aStream;
-				yourself).
-
-	"We are currently updating the meta models and most parsers are not up to date.
-	We disable warnings to avoid all deprecation warnings during the transition phase."
-	areWarningsEnabled := Deprecation raiseWarning.
-	[ Deprecation raiseWarning: false.
-	importer run ]
-		ensure: [ Deprecation raiseWarning: areWarningsEnabled ].
-
-	model updateCache.
-	^ model
+	^ self
+		  importFrom: aStream
+		  parser: FMJSONParser
+		  withMetamodel: aMetamodel
+		  customizingImporterWith: aBlock
 ]
 
 { #category : 'import-export' }
@@ -483,7 +477,8 @@ MooseModel >> flushPrivateState [
 MooseModel >> importFrom: aFMModel named: aString [
 
 	self silentlyAddAll: aFMModel elements.
-	self name: aString
+	self name: aString.
+	self postImportHook
 ]
 
 { #category : 'import-export' }
@@ -738,6 +733,11 @@ MooseModel >> numberOfLinesOfCodePerClass [
 	<FMProperty: #numberOfLinesOfCodePerClass type: #Number>
 	<FMComment: 'The number of lines of code per class in the model'>
 	^ self cacheAt: #numberOfLinesOfCodePerClass ifAbsentPut: [ self numberOfLinesOfCode / self numberOfClasses ]
+]
+
+{ #category : 'import-export' }
+MooseModel >> postImportHook [
+	"Noop"
 ]
 
 { #category : 'accessing' }

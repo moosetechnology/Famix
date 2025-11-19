@@ -74,3 +74,24 @@ FamixJavaModel >> inferPackageParentsBasedOnNames [
 		runWithProgress.
 	^ self allNamespaces
 ]
+
+{ #category : 'import-export' }
+FamixJavaModel >> postImportHook [
+	"If we are parsing a JDK we can end up with a class Object inheriting from Object because of a VerveineJ bug and this is a workaround.
+	
+	See https://github.com/moosetechnology/VerveineJ/issues/168"
+
+	| problematicInheritances |
+	problematicInheritances := self allInheritanceDefinitions select: [ :inheritance | inheritance subclass == inheritance superclass ].
+
+	problematicInheritances do: [ :inheritance |
+			inheritance subclass mooseName = #'java.lang.Object' ifFalse: [
+					^ self error:
+						  'This imported model contains inheritances targetting themselves which will crash Moose tools. This is a bug that should be reported on VerveineJ.' ].
+			inheritance sourceAnchor ifNotNil: [ :anchor | self remove: anchor ].
+			inheritance
+				subclass: nil;
+				superclass: nil;
+				sourceAnchor: nil.
+			self remove: inheritance ]
+]
