@@ -59,6 +59,26 @@ FamixTIndexedFileNavigation >> accept: aVisitor [
 	^ aVisitor visitFamixTIndexedFileNavigation: self
 ]
 
+{ #category : 'matching' }
+FamixTIndexedFileNavigation >> beginsWith: aString [
+	"I return true if the source text I represent begins with the string as parameter.\
+	For example, in Python I can check if a comment begins with a triple double quote to know if it is a docstring"
+	
+	| start |
+	"We could do `self sourceText beginsWith: aStrin` but this would take more time since we would need to read the full source text."
+	self sourcesAreReadable ifFalse: [ self error: 'The root folder is not set to the valid file reference.' ].
+
+	start := startPos ifNil: [ 1 ].
+
+	^ self fileReference binaryReadStreamDo: [ :in |
+			  | stream |
+			  stream := ZnCharacterReadStream on: in encoding: self encoding.
+			  aString size > (start + (endPos ifNil: [ in size + 1 ])) ifTrue: [ ^ false "String is bigger than the sourceText" ].
+
+			  stream position: start - 1.
+			  (stream next: aString size) = aString ]
+]
+
 { #category : 'private' }
 FamixTIndexedFileNavigation >> countNumberOfLinesRuturnsFrom: aStream from: start to: end [
 	"Here is a speedup version of the #lineCount method for the IndexedFileAnchors.
