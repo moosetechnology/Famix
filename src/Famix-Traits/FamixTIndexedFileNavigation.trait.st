@@ -147,7 +147,7 @@ FamixTIndexedFileNavigation >> sourceText [
 		binaryReadStreamDo: [ :in | 
 			| stream |
 			stream := ZnCharacterReadStream on: in encoding: self encoding.
-			1 to: start - 1 do: [ :i | stream next ].
+			stream position:  start - 1.
 			stream next: (endPos ifNil: [ in size + 1 ]) - start + 1 ]
 ]
 
