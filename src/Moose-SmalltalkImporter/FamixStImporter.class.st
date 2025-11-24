@@ -44,20 +44,28 @@ FamixStImporter >> addEntity: value [
 FamixStImporter >> allElements [
 
 	| stream |
+	'Beginning #allElements' traceCr.
 	stream := (OrderedCollection new: self size) writeStream.
+	'============= 1 ===========' traceCr.
 	others traceCr.
 	stream nextPutAll: others.
+	'============= 2 ===========' traceCr.
 	methods values traceCr.
 	stream nextPutAll: methods values.
+	'============= 3 ===========' traceCr.
 	self famixClasses traceCr.
 	stream nextPutAll: self famixClasses.
+	'============= 4 ===========' traceCr.
 	namespaces values traceCr.
 	stream nextPutAll: namespaces values.
+	'============= 5 ===========' traceCr.
 	packages values traceCr.
 	stream nextPutAll: packages values.
+	'============= 6 ===========' traceCr.
 	globals values traceCr.
 	stream nextPutAll: globals values.
 	scopes do: [ :each |
+			'============= Scope ===========' traceCr.
 			each values traceCr.
 			stream nextPutAll: each values ].
 	^ stream contents
