@@ -41,18 +41,26 @@ FamixStImporter >> addEntity: value [
 ]
 
 { #category : 'enumerating' }
-FamixStImporter >> allElements [ 
-	 
-	| stream | 
-	stream := (OrderedCollection new: self size) writeStream. 
-	stream nextPutAll: others. 
-	stream nextPutAll: methods values. 
-	stream nextPutAll: self famixClasses. 
-	stream nextPutAll: namespaces values. 
-	stream nextPutAll: packages values. 
-	stream nextPutAll: globals values. 
-	scopes do: [:each | stream nextPutAll: each values]. 
-	^stream contents
+FamixStImporter >> allElements [
+
+	| stream |
+	stream := (OrderedCollection new: self size) writeStream.
+	others traceCr.
+	stream nextPutAll: others.
+	methods values traceCr.
+	stream nextPutAll: methods values.
+	self famixClasses traceCr.
+	stream nextPutAll: self famixClasses.
+	namespaces values traceCr.
+	stream nextPutAll: namespaces values.
+	packages values traceCr.
+	stream nextPutAll: packages values.
+	globals values traceCr.
+	stream nextPutAll: globals values.
+	scopes do: [ :each |
+			each values traceCr.
+			stream nextPutAll: each values ].
+	^ stream contents
 ]
 
 { #category : 'private utils' }
