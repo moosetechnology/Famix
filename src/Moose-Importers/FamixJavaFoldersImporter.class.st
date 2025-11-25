@@ -38,7 +38,7 @@ Class {
 { #category : 'actions' }
 FamixJavaFoldersImporter class >> importAndInstallFolder: aFileReference [
 
-	^ self importAndInstallFolders: { aFileReference }
+	^ (self importAndInstallFolders: { aFileReference }) anyOne
 ]
 
 { #category : 'actions' }
@@ -53,7 +53,7 @@ FamixJavaFoldersImporter class >> importAndInstallFolders: aCollection [
 { #category : 'actions' }
 FamixJavaFoldersImporter class >> importFolder: aFolder [
 
-	^ self importFolders: { aFolder }
+	^ (self importFolders: { aFolder }) anyOne
 ]
 
 { #category : 'actions' }
