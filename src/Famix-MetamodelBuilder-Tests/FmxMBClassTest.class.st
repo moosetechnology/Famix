@@ -46,21 +46,18 @@ FmxMBClassTest >> testBasicSuperclass [
 	self assert: generated superclass name equals: #TstEntity.
 
 	generated := builder testingEnvironment ask classNamed: 'TstEntity'.
-	self assert: generated superclass name equals: builder configuration defaultBasicSuperclassName
+	self assert: generated superclass name equals: #MooseEntity
 ]
 
 { #category : 'tests - settings' }
 FmxMBClassTest >> testBasicTrait [
-
 	"test if the trits have correct supperclass"
 
 	| generated |
-	
-	builder newTraitNamed: #TComment.	
+	builder newTraitNamed: #TComment.
 	builder generate.
 	generated := builder testingEnvironment ask classNamed: 'TstTComment'.
-	self assert: generated superclass name equals: builder configuration defaultBasicTraitName.
-
+	self assert: generated superclass name equals: #Trait
 ]
 
 { #category : 'tests' }
@@ -170,19 +167,6 @@ FmxMBClassTest >> testCustomPackageForUserClassesChanged [
 	
 ]
 
-{ #category : 'tests - settings' }
-FmxMBClassTest >> testCustomSuperclass [
-	"test if a custom basic superclass can correctly set"
-
-	| generated |
-	builder configuration basicSuperclassName: #BasicSuperclass.
-
-	builder newClassNamed: #Entity.
-	builder generate.
-	generated := builder testingEnvironment ask classNamed: 'TstEntity'.
-	self assert: generated superclass name equals: 'BasicSuperclass'
-]
-
 { #category : 'tests' }
 FmxMBClassTest >> testDefaultPackageForUserClasses [
 
@@ -200,17 +184,14 @@ FmxMBClassTest >> testDefaultPackageForUserClasses [
 
 { #category : 'tests - tags' }
 FmxMBClassTest >> testDefaultTagForClass [
-
 	"test if correct default tag name is assigned to classes"
 
 	| generatedTAccess |
-
-	builder newTraitNamed: #TAccess.	
-
+	builder newTraitNamed: #TAccess.
 	builder generate.
-		
+
 	generatedTAccess := builder testingEnvironment ask classNamed: #TstTAccess.
-	self assertCollection: generatedTAccess tags hasSameElements: { builder configuration defaultTraitTag }
+	self assertCollection: generatedTAccess tags hasSameElements: { #Traits }
 ]
 
 { #category : 'tests' }
@@ -330,33 +311,30 @@ FmxMBClassTest >> testTagForClassFromBuilder [
 	| generatedAccess comment generatedComment |
 	builder newClassNamed: #Access.
 	comment := builder newClassNamed: #Comment.
-
-	builder configuration classTag: #classes.
 	comment tag: #support.
 
 	builder generate.
 
 	generatedAccess := builder testingEnvironment ask classNamed: #TstAccess.
 	generatedComment := builder testingEnvironment ask classNamed: #TstComment.
-	self assertCollection: generatedAccess tags hasSameElements: {#classes}.
+	self assertCollection: generatedAccess tags hasSameElements: {#Entities}.
 	self assertCollection: generatedComment tags hasSameElements: {#support}
 ]
 
 { #category : 'tests - tags' }
 FmxMBClassTest >> testTagForTraitFromBuilder [
+
 	| generatedTAccess tComment generatedTComment |
 	builder newTraitNamed: #TAccess.
 	tComment := builder newTraitNamed: #TComment.
-
-	builder configuration traitTag: #classes.
 	tComment tag: #support.
 
 	builder generate.
 
 	generatedTAccess := builder testingEnvironment ask classNamed: #TstTAccess.
 	generatedTComment := builder testingEnvironment ask classNamed: #TstTComment.
-	self assertCollection: generatedTAccess tags hasSameElements: {#classes}.
-	self assertCollection: generatedTComment tags hasSameElements: {#support}
+	self assertCollection: generatedTAccess tags hasSameElements: { #Traits }.
+	self assertCollection: generatedTComment tags hasSameElements: { #support }
 ]
 
 { #category : 'tests - tags' }

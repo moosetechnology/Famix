@@ -27,32 +27,31 @@ FmxMBRingEnvironment >> apply [
 { #category : 'accessing' }
 FmxMBRingEnvironment >> basicGroupSuperclass [
 
-	^ self ringEnvironment ensureClassNamed: self builder configuration basicGroupSuperclassName
+	^ self ringEnvironment ensureClassNamed: #MooseSpecializedGroup
 ]
 
 { #category : 'accessing' }
 FmxMBRingEnvironment >> basicImportingContextSuperclass [
 
-	^ self ringEnvironment ensureClassNamed:
-		  self builder configuration basicImportingContextSuperclassName
+	^ self ringEnvironment ensureClassNamed: #FamixImportingContext
 ]
 
 { #category : 'accessing' }
 FmxMBRingEnvironment >> basicModelSuperclass [
 
-	^ self ringEnvironment ensureClassNamed: self builder configuration basicModelSuperclassName
+	^ self ringEnvironment ensureClassNamed: #MooseModel
 ]
 
 { #category : 'accessing' }
 FmxMBRingEnvironment >> basicSuperclass [
 
-	^ self ringEnvironment ensureClassNamed: self builder configuration basicSuperclassName
+	^ self ringEnvironment ensureClassNamed: #MooseEntity
 ]
 
 { #category : 'accessing' }
 FmxMBRingEnvironment >> basicTrait [
 
-	^ self ringEnvironment ensureClassNamed: self builder configuration basicTraitName
+	^ self ringEnvironment ensureClassNamed: #Trait
 ]
 
 { #category : 'accessing' }

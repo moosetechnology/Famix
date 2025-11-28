@@ -228,7 +228,8 @@ FmxMBBehavior >> defaultSuperclassName [
 
 { #category : 'settings - default' }
 FmxMBBehavior >> defaultTag [
-	^ self builder configuration classTag
+
+	^ #Entities
 ]
 
 { #category : 'generating' }

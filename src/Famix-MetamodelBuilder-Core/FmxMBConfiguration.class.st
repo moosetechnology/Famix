@@ -8,142 +8,14 @@ Class {
 		'prefix',
 		'packageName',
 		'packageNameForAnnotations',
-		'classTag',
-		'traitTag',
-		'basicSuperclassName',
-		'basicTraitName',
 		'navigationForContainers',
 		'navigationForNonContainers',
-		'mooseModelName',
-		'basicGroupSuperclassName',
-		'basicModelSuperclassName',
-		'modelTag',
-		'shouldGenerateFileImportHelpers',
-		'basicImportingContextSuperclassName',
-		'groupTag'
+		'shouldGenerateFileImportHelpers'
 	],
 	#category : 'Famix-MetamodelBuilder-Core-Basic',
 	#package : 'Famix-MetamodelBuilder-Core',
 	#tag : 'Basic'
 }
-
-{ #category : 'accessing' }
-FmxMBConfiguration >> basicGroupSuperclassName [
-
-	^ basicGroupSuperclassName ifNil: [ basicGroupSuperclassName := self defaultBasicGroupSuperclassName ]
-]
-
-{ #category : 'accessing' }
-FmxMBConfiguration >> basicGroupSuperclassName: anObject [
-	basicGroupSuperclassName := anObject
-]
-
-{ #category : 'accessing' }
-FmxMBConfiguration >> basicImportingContextSuperclassName [
-
-	^ basicImportingContextSuperclassName ifNil: [ 
-		  basicImportingContextSuperclassName := self
-			                                         defaultBasicImportingContextSuperclassName ]
-]
-
-{ #category : 'accessing' }
-FmxMBConfiguration >> basicModelSuperclassName [
-
-	^ basicModelSuperclassName ifNil: [ basicModelSuperclassName := self defaultBasicModelSuperclassName ]
-]
-
-{ #category : 'accessing' }
-FmxMBConfiguration >> basicSuperclassName [
-
-	^ basicSuperclassName ifNil: [ basicSuperclassName := self defaultBasicSuperclassName ]
-]
-
-{ #category : 'accessing' }
-FmxMBConfiguration >> basicSuperclassName: anObject [
-	basicSuperclassName := anObject
-]
-
-{ #category : 'accessing' }
-FmxMBConfiguration >> basicTraitName [
-
-	^ basicTraitName ifNil: [ basicTraitName := self defaultBasicTraitName ]
-]
-
-{ #category : 'accessing' }
-FmxMBConfiguration >> basicTraitName: anObject [
-	basicTraitName := anObject
-]
-
-{ #category : 'accessing' }
-FmxMBConfiguration >> classTag [
-
-	^ classTag ifNil: [ classTag := self defaultClassTag ]
-]
-
-{ #category : 'accessing' }
-FmxMBConfiguration >> classTag: anObject [
-	classTag := anObject
-]
-
-{ #category : 'settings - default' }
-FmxMBConfiguration >> defaultBasicGroupSuperclassName [
-
-	^ #MooseSpecializedGroup
-]
-
-{ #category : 'settings - default' }
-FmxMBConfiguration >> defaultBasicImportingContextSuperclassName [
-
-	^ #FamixImportingContext
-]
-
-{ #category : 'settings - default' }
-FmxMBConfiguration >> defaultBasicModelSuperclassName [
-
-	^ #MooseModel
-]
-
-{ #category : 'settings - default' }
-FmxMBConfiguration >> defaultBasicSuperclassName [
-
-	^ #MooseEntity
-]
-
-{ #category : 'settings - default' }
-FmxMBConfiguration >> defaultBasicTraitName [
-
-	^ #Trait
-]
-
-{ #category : 'settings - default' }
-FmxMBConfiguration >> defaultClassTag [
-
-	^ #Entities
-]
-
-{ #category : 'settings - default' }
-FmxMBConfiguration >> defaultGroupTag [
-
-	^ #Groups
-]
-
-{ #category : 'settings - default' }
-FmxMBConfiguration >> defaultModelTag [
-
-	^ #Model
-]
-
-{ #category : 'settings - default' }
-FmxMBConfiguration >> defaultTraitTag [
-
-	^ #Traits
-]
-
-{ #category : 'accessing' }
-FmxMBConfiguration >> groupTag [
-
-	^ groupTag ifNil: [ groupTag := self defaultGroupTag ]
-]
 
 { #category : 'initialization' }
 FmxMBConfiguration >> initialize [
@@ -154,12 +26,6 @@ FmxMBConfiguration >> initialize [
 
 	navigationForContainers := true.
 	navigationForNonContainers := false
-]
-
-{ #category : 'accessing' }
-FmxMBConfiguration >> modelTag [
-
-	^ modelTag ifNil: [ modelTag := self defaultModelTag ]
 ]
 
 { #category : 'accessing' }
@@ -227,15 +93,4 @@ FmxMBConfiguration >> shouldGenerateFileImportHelpers [
 FmxMBConfiguration >> shouldGenerateFileImportHelpers: aBoolean [
 
 	shouldGenerateFileImportHelpers := aBoolean
-]
-
-{ #category : 'accessing' }
-FmxMBConfiguration >> traitTag [
-
-	^ traitTag ifNil: [ traitTag := self defaultTraitTag ]
-]
-
-{ #category : 'accessing' }
-FmxMBConfiguration >> traitTag: anObject [
-	traitTag := anObject
 ]
