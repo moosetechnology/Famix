@@ -47,7 +47,7 @@ FmxMBTrait >> defaultSuperclassName [
 { #category : 'settings-default' }
 FmxMBTrait >> defaultTag [
 
-	^ self builder configuration traitTag
+	^ #Traits
 ]
 
 { #category : 'generating' }

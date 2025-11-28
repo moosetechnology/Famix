@@ -16,7 +16,8 @@ FmxMBClassGroup >> defaultSuperclass [
 
 { #category : 'settings - default' }
 FmxMBClassGroup >> defaultTag [
-	^ self builder configuration groupTag
+
+	^ #Groups
 ]
 
 { #category : 'generating' }

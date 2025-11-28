@@ -74,17 +74,6 @@ MooseObject class >> allDeclaredProperties [
 	^ self mooseDescription allProperties
 ]
 
-{ #category : 'accessing' }
-MooseObject class >> allPropertySelectors [
-	"Return a dictionary with all properties of this kind of entity, including metamodel properties, metrics, and navigation groups. Keys are abstract names of properties, values are implementing selectors"
-
-	| props |
-	props := IdentityDictionary new.
-	self allDeclaredProperties do: [ :prop | props at: prop name put: prop implementingSelector ].
-	self navigationPragmas do: [ :p | props at: p selector put: p selector ].
-	^ props
-]
-
 { #category : 'meta' }
 MooseObject class >> annotation [
 	<FMClass: #Object super: #Object>
@@ -203,11 +192,6 @@ MooseObject >> allDeclaredProperties [
 This method allows us to look for its properties in the metadescription.
 And, the metadescription might be different in the instance and in the class side since we can define for each instance its metamodel (with more or less properties)"
 	^ self mooseDescription allProperties
-]
-
-{ #category : 'meta information' }
-MooseObject >> allPropertySelectors [
-	^ self class allPropertySelectors
 ]
 
 { #category : 'private' }

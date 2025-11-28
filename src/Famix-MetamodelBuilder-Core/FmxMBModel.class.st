@@ -13,7 +13,8 @@ FmxMBModel >> defaultSuperclass [
 
 { #category : 'settings - default' }
 FmxMBModel >> defaultTag [
-	^ self builder configuration modelTag
+
+	^ #Model
 ]
 
 { #category : 'generating' }
