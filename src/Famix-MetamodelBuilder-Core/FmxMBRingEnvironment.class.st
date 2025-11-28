@@ -1,13 +1,22 @@
 Class {
 	#name : 'FmxMBRingEnvironment',
-	#superclass : 'FmxMBEnvironment',
+	#superclass : 'Object',
 	#instVars : [
-		'ringEnvironment'
+		'ringEnvironment',
+		'builder'
 	],
 	#category : 'Famix-MetamodelBuilder-Core-Implementation',
 	#package : 'Famix-MetamodelBuilder-Core',
 	#tag : 'Implementation'
 }
+
+{ #category : 'instance creation' }
+FmxMBRingEnvironment class >> for: aBuilder [
+
+	^ self new 
+		builder: aBuilder;
+		yourself.
+]
 
 { #category : 'accessing' }
 FmxMBRingEnvironment >> apply [
@@ -44,6 +53,16 @@ FmxMBRingEnvironment >> basicSuperclass [
 FmxMBRingEnvironment >> basicTrait [
 
 	^ self ringEnvironment ensureClassNamed: self builder configuration basicTraitName
+]
+
+{ #category : 'accessing' }
+FmxMBRingEnvironment >> builder [
+	^ builder
+]
+
+{ #category : 'accessing' }
+FmxMBRingEnvironment >> builder: anObject [
+	builder := anObject
 ]
 
 { #category : 'initialization' }
