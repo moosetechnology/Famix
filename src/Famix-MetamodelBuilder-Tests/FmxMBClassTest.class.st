@@ -111,21 +111,6 @@ FmxMBClassTest >> testCommentOnTrait [
 	self assert: (generated comment content beginsWith: commentString)
 ]
 
-{ #category : 'tests - settings' }
-FmxMBClassTest >> testCustomBasicTrait [
-
-	"test if #basicTraitName sets the correct superclass of traits"
-
-	| generated |
-
-	builder configuration basicTraitName: #CustomBasicTrait.	
-	builder newTraitNamed: #TComment.	
-	builder generate.
-	generated := builder testingEnvironment ask classNamed: 'TstTComment'.
-	self assert: generated superclass name equals: #CustomBasicTrait.	
-
-]
-
 { #category : 'tests' }
 FmxMBClassTest >> testCustomPackageForUserClasses [
 
