@@ -45,7 +45,20 @@ FamixTCanImplement >> addInterfaceImplementation: anObject [
 ]
 
 { #category : 'enumerating' }
+FamixTCanImplement >> allImplementedInterfaces [
+	"runs aBlock on all implemented interfaces and the interfaces they inherit"
+
+	| implementedInterfaces |
+	implementedInterfaces := OrderedCollection new.
+
+	self allImplementedInterfacesDo: [ :interface | implementedInterfaces add: interface ].
+
+	^implementedInterfaces 
+]
+
+{ #category : 'enumerating' }
 FamixTCanImplement >> allImplementedInterfacesDo: aBlock [
+	"runs aBlock on all implemented interfaces and the interfaces they inherit"
 
 	self interfaceImplementations do: [ :implementation |
 			aBlock value: implementation interface.

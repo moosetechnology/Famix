@@ -170,11 +170,7 @@ FamixJavaTVisitor >> visitFamixJavaEnumValue: aFamixJavaEnumValue [
 FamixJavaTVisitor >> visitFamixJavaException: aFamixJavaException [
 
 	<generated>
-	self visitFamixTCanImplement: aFamixJavaException.
 	self visitFamixTException: aFamixJavaException.
-	self visitFamixTHasVisibility: aFamixJavaException.
-	self visitFamixTWithAnnotationInstances: aFamixJavaException.
-	self visitFamixTWithTypes: aFamixJavaException.
 	self visitFamixJavaClass: aFamixJavaException
 ]
 

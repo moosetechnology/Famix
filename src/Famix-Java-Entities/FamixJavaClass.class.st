@@ -101,9 +101,12 @@ FamixJavaClass >> allImplementedInterfacesHierarchy [
 
 { #category : 'enumerating' }
 FamixJavaClass >> allImplementedInterfacesHierarchyDo: aBlock [
+	"runs aBlock on all implemented interfaces (and their inherited super-interfaces) by the receiver or any of its super-classes
+	 Therefore goes up the interface inheritance hierarchy and the class inheritance hierarchy"
 
-	self directImplementedInterfaces do: [ :directInterface |
-		directInterface withSuperclassesDo: aBlock ]
+	self allImplementedInterfacesDo: aBlock.
+	
+	self allSuperclassesDo: [ :superClass | superClass allImplementedInterfacesHierarchyDo: aBlock ]
 ]
 
 { #category : 'accessing' }
@@ -191,6 +194,7 @@ FamixJavaClass >> isTestCase [
 
 { #category : 'private' }
 FamixJavaClass >> lookUpInInterfaces: aMethodSignature [
+	"search for a method signature in the implemented interfaces or the inherited methods"
 
 	self allImplementedInterfacesHierarchyDo: [ :interface |
 		(interface lookUp: aMethodSignature) ifNotNil: [ :method | ^ method ] ].
