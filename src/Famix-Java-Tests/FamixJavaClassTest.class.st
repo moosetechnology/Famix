@@ -6,6 +6,57 @@ Class {
 }
 
 { #category : 'tests' }
+FamixJavaClassTest >> testAllImplementedInterfaces [
+
+	| interface supInt1 supInt2 clazz |
+	
+	interface := FamixJavaInterface new.
+	supInt1 := FamixJavaInterface new.
+	supInt2 := FamixJavaInterface new.
+	FamixJavaInheritance new
+		subclass: interface ;
+		superclass: supInt1.
+	FamixJavaInheritance new
+		subclass: interface ;
+		superclass: supInt2.
+	clazz := FamixJavaClass new.
+	FamixJavaImplementation new
+		implementingClass: clazz ;
+		interface: interface.
+
+	self assertCollection: clazz allImplementedInterfaces hasSameElements: { interface . supInt1 . supInt2 }
+	
+]
+
+{ #category : 'tests' }
+FamixJavaClassTest >> testAllImplementedInterfacesHierarchy [
+
+	| interface1 supInt1 interface2 clazz superClass |
+	
+	interface1 := FamixJavaInterface new.
+	supInt1 := FamixJavaInterface new.
+	interface2 := FamixJavaInterface new.
+	FamixJavaInheritance new
+		subclass: interface1 ;
+		superclass: supInt1.
+	
+	clazz := FamixJavaClass new.
+	superClass := FamixJavaClass new.
+	FamixJavaInheritance new
+		subclass: clazz ;
+		superclass: superClass.
+	FamixJavaImplementation new
+		implementingClass: clazz ;
+		interface: interface1.
+	FamixJavaImplementation new
+		implementingClass: superClass ;
+		interface: interface2.
+
+	self assertCollection: clazz allImplementedInterfacesHierarchy hasSameElements: { interface1 . supInt1 . interface2 }
+	
+]
+
+{ #category : 'tests' }
 FamixJavaClassTest >> testInheritanceAnnotationType [
 	| testAnnotation testAnnotationSub inheritance |
 	testAnnotation := FamixJavaAnnotationType new name: 'Test'.
