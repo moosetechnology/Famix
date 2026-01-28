@@ -81,6 +81,8 @@ FamixUMLLatexTableBackend >> generateUse: aUseLink [
 FamixUMLLatexTableBackend >> lineFor: aName [
 	"If the line is not found, we create a new empty one that may serve as a Null Object pattern"
 
+	allLines ifNil: [ ^FamixUMLLatexLine new ].
+
 	^allLines
 		detect: [ :each | each name = aName ]
 		ifNone: [ FamixUMLLatexLine new ]
