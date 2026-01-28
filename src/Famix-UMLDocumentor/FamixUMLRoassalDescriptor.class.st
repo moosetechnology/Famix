@@ -37,6 +37,16 @@ FamixUMLRoassalDescriptor >> aggregations [
 ]
 
 { #category : #accessing }
+FamixUMLRoassalDescriptor >> associations [ 
+
+	^(umlModel
+		select: [ :umlEntity | umlEntity class = FamixUMLAssociation and: [ umlEntity aggregation = #off ]]
+		thenCollect: [ :use |
+			(self umlClassNamed: use target) -> (self umlClassNamed: use source) ])
+
+]
+
+{ #category : #accessing }
 FamixUMLRoassalDescriptor >> compositions [
 
 	^(umlModel
