@@ -221,6 +221,14 @@ FamixJavaMethodTest >> testIsMethodDefinition [
 	method kind: #default.
 
 	self assert: method isMethodDefinition.
+	
+	"Method from interfaces with #static keyword should be considered as defined."
+	class := FamixJavaInterface new.
+	method := FamixJavaMethod new.
+	method parentType: class.
+	method isClassSide: true.
+
+	self assert: method isMethodDefinition.
 ]
 
 { #category : 'tests' }
