@@ -8,6 +8,7 @@ Collection >> isIncludedIn: anEntity containerSelectorsCache: aCollection [
 ]
 
 { #category : '*Moose-Query' }
-Collection >> scopeForQuery: aQuery direction: aDirection [
-	1 to: self size do: [ :ind | aDirection scopeFor: (self at: ind) query: aQuery ]
+Collection >> scopeForQuery: aQuery [
+
+	^ aQuery scopeFor: self
 ]

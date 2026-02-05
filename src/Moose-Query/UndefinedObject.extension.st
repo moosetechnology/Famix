@@ -8,6 +8,7 @@ UndefinedObject >> isIncludedIn: aFAMIXLocalVariable containerSelectorsCache: aC
 ]
 
 { #category : '*Moose-Query' }
-UndefinedObject >> scopeForQuery: aQuery direction: aDirection [
+UndefinedObject >> scopeForQuery: aQuery [
+
 	
 ]

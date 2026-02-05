@@ -909,8 +909,9 @@ TEntityMetaLevelDependency >> rootContainers [
 ]
 
 { #category : 'private' }
-TEntityMetaLevelDependency >> scopeForQuery: aQuery direction: aDirection [
-	aDirection scopeFor: self query: aQuery
+TEntityMetaLevelDependency >> scopeForQuery: aQuery [
+
+	^ aQuery scopeFor: { self }
 ]
 
 { #category : 'query - scoping' }
