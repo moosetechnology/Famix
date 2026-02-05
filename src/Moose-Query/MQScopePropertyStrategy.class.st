@@ -47,10 +47,12 @@ MQScopePropertyStrategy >> property: anObject [
 ]
 
 { #category : 'accessing' }
-MQScopePropertyStrategy >> shouldBeSelected: anEntity [
-	^ ([ self property value: anEntity  ]
-		on: Error
-		do: [ false ]) ifNotBoolean: [ MQScopeShouldBeSeclectedReturnNotBooleanValueError stopStrategySignal: self  ]
+MQScopePropertyStrategy >> selectMatchingElements: aCollection [
+
+	^ aCollection select: [ :anEntity |
+			  ([ self property value: anEntity ]
+				   on: Error
+				   do: [ false ]) ifNotBoolean: [ MQScopeShouldBeSeclectedReturnNotBooleanValueError stopStrategySignal: self ] ]
 ]
 
 { #category : 'accessing' }

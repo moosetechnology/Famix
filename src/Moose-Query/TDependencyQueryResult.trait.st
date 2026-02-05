@@ -21,14 +21,14 @@ TDependencyQueryResult >> atScope: aClassFamix withNonMatchingEntitiesDo: aBlock
 		do: [ :dep | 
 			coll := OrderedCollection new.
 			query result: coll.
-			(opposite := self opposite: dep) scopeForQuery: query direction: query direction.
+			(opposite := self opposite: dep) scopeForQuery: query.
 			coll ifEmpty: [ aBlock cull: opposite cull: res ] ifNotEmpty: [ :results | res addAll: results ] ].
 	^ self newObjectResultWith: res asSet
 ]
 
 { #category : 'filtering' }
 TDependencyQueryResult >> executeScopeQuery: aQuery [
-	self storage do: [ :dep | (self opposite: dep) scopeForQuery: aQuery direction: aQuery direction ].
+	self storage do: [ :dep | (self opposite: dep) scopeForQuery: aQuery ].
 	^ self newObjectResultWith: aQuery result
 ]
 

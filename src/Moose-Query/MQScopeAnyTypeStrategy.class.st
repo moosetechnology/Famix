@@ -47,8 +47,15 @@ MQScopeAnyTypeStrategy >> scopes: anObject [
 ]
 
 { #category : 'testing' }
-MQScopeAnyTypeStrategy >> shouldBeSelected: anEntity [
-	^ scopes anySatisfy: [ :aType | anEntity isOfType: aType ]
+MQScopeAnyTypeStrategy >> selectMatchingElements: aCollection [
+	"We know that the collection has at least 1 element and that all entities are instances of the same class.
+	
+	This could be simpler but this code needs to be the fastest possible."
+
+	| class |
+	class := (aCollection at: 1) class.
+	1 to: scopes size do: [ :index | (class isOfType: (scopes at: index)) ifTrue: [ ^ aCollection ] ].
+	^ Array empty
 ]
 
 { #category : 'printing' }
