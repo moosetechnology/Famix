@@ -42,6 +42,13 @@ FamixTest1TEntityCreator >> newAttributeNamed: aName [
 ]
 
 { #category : 'entity creation' }
+FamixTest1TEntityCreator >> newBytesFileAnchor [
+
+	<generated>
+	^ self add: FamixTest1BytesFileAnchor new
+]
+
+{ #category : 'entity creation' }
 FamixTest1TEntityCreator >> newClass [
 
 	<generated>
