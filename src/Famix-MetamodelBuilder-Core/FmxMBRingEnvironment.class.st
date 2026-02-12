@@ -1,13 +1,22 @@
 Class {
 	#name : 'FmxMBRingEnvironment',
-	#superclass : 'FmxMBEnvironment',
+	#superclass : 'Object',
 	#instVars : [
-		'ringEnvironment'
+		'ringEnvironment',
+		'builder'
 	],
 	#category : 'Famix-MetamodelBuilder-Core-Implementation',
 	#package : 'Famix-MetamodelBuilder-Core',
 	#tag : 'Implementation'
 }
+
+{ #category : 'instance creation' }
+FmxMBRingEnvironment class >> for: aBuilder [
+
+	^ self new 
+		builder: aBuilder;
+		yourself.
+]
 
 { #category : 'accessing' }
 FmxMBRingEnvironment >> apply [
@@ -18,32 +27,41 @@ FmxMBRingEnvironment >> apply [
 { #category : 'accessing' }
 FmxMBRingEnvironment >> basicGroupSuperclass [
 
-	^ self ringEnvironment ensureClassNamed: self builder configuration basicGroupSuperclassName
+	^ self ringEnvironment ensureClassNamed: #MooseSpecializedGroup
 ]
 
 { #category : 'accessing' }
 FmxMBRingEnvironment >> basicImportingContextSuperclass [
 
-	^ self ringEnvironment ensureClassNamed:
-		  self builder configuration basicImportingContextSuperclassName
+	^ self ringEnvironment ensureClassNamed: #FamixImportingContext
 ]
 
 { #category : 'accessing' }
 FmxMBRingEnvironment >> basicModelSuperclass [
 
-	^ self ringEnvironment ensureClassNamed: self builder configuration basicModelSuperclassName
+	^ self ringEnvironment ensureClassNamed: #MooseModel
 ]
 
 { #category : 'accessing' }
 FmxMBRingEnvironment >> basicSuperclass [
 
-	^ self ringEnvironment ensureClassNamed: self builder configuration basicSuperclassName
+	^ self ringEnvironment ensureClassNamed: #MooseEntity
 ]
 
 { #category : 'accessing' }
 FmxMBRingEnvironment >> basicTrait [
 
-	^ self ringEnvironment ensureClassNamed: self builder configuration basicTraitName
+	^ self ringEnvironment ensureClassNamed: #Trait
+]
+
+{ #category : 'accessing' }
+FmxMBRingEnvironment >> builder [
+	^ builder
+]
+
+{ #category : 'accessing' }
+FmxMBRingEnvironment >> builder: anObject [
+	builder := anObject
 ]
 
 { #category : 'initialization' }

@@ -125,7 +125,8 @@ Class {
 		'tTypeArgument',
 		'tTypeParameter',
 		'tCompilationUnit',
-		'tWithCompilationUnits'
+		'tWithCompilationUnits',
+		'tBytesFileAnchor'
 	],
 	#category : 'Famix-MetamodelGeneration',
 	#package : 'Famix-MetamodelGeneration'
@@ -272,6 +273,12 @@ FamixGenerator >> commentForTAttribute [
 
 	^ 'FamixTAttribute represents a field of a class. It is an attribute of the parent type.
 '
+]
+
+{ #category : 'comments' }
+FamixGenerator >> commentForTBytesFileAnchor [
+
+	^ 'I am a file anchor that saves the position of the source code in the file using the start byte and end byte in the file. I will need to detect the encoder of the file and decode the bytes in between the positions to read the source text.'
 ]
 
 { #category : 'comments' }
@@ -1037,6 +1044,8 @@ FamixGenerator >> defineHierarchy [
 
 	tAnnotationTypeAttribute --|> tAttribute.
 
+	tBytesFileAnchor --|> tFileAnchor.
+	
 	tCohesionCouplingMetrics --|> tPackage.
 
 	tClass --|> tWithMethods.
@@ -1645,6 +1654,8 @@ FamixGenerator >> defineTraits [
 
 	tAttribute := builder newTraitNamed: #TAttribute comment: self commentForTAttribute.
 	tAttribute withTesting.
+	
+	tBytesFileAnchor := builder newTraitNamed: #TBytesFileAnchor comment: self commentForTBytesFileAnchor.
 
 	tCanBeClassSide := builder newTraitNamed: #TCanBeClassSide.
 

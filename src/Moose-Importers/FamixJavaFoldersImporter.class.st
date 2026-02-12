@@ -18,6 +18,15 @@ FamixJavaFoldersImporter importFolder: aFileReference.
 FamixFolderJavaImporter importAndInstallFolder: aFileReference
 ```
 
+In case we are parsing a folder containing the JDK, we need to tell it to VerveineJ because it needs a special option. For example if I want to parse the JDK of Java 7 we can execute:
+
+```st
+FamixFolderJavaImporter  new
+	folders: { aFileReference };
+	jdkVersion: '1.7';
+	import
+```
+
 In the future it might be nice to add ways to import projects of other languages.
 "
 Class {
@@ -25,7 +34,8 @@ Class {
 	#superclass : 'Object',
 	#instVars : [
 		'folders',
-		'models'
+		'models',
+		'jdkVersion'
 	],
 	#classVars : [
 		'VerveineJJar'
@@ -38,7 +48,7 @@ Class {
 { #category : 'actions' }
 FamixJavaFoldersImporter class >> importAndInstallFolder: aFileReference [
 
-	^ self importAndInstallFolders: { aFileReference }
+	^ (self importAndInstallFolders: { aFileReference }) anyOne
 ]
 
 { #category : 'actions' }
@@ -53,7 +63,7 @@ FamixJavaFoldersImporter class >> importAndInstallFolders: aCollection [
 { #category : 'actions' }
 FamixJavaFoldersImporter class >> importFolder: aFolder [
 
-	^ self importFolders: { aFolder }
+	^ (self importFolders: { aFolder }) anyOne
 ]
 
 { #category : 'actions' }
@@ -161,10 +171,13 @@ FamixJavaFoldersImporter >> generateJsonOfProjects [
 
 	folders
 		do: [ :folder |
-			LibC runCommand: ('java -jar {1} -o {2} -format json {3}' format: {
-						 self verveineJJar pathString asComment.
-						 (self jsonForFolder: folder).
-						 folder pathString asComment }) ]
+				LibC runCommand: ('java -jar {1} -o {2}  {3} -format json {4}' format: {
+							 self verveineJJar pathString asComment.
+							 (self jsonForFolder: folder).
+							 (self jdkVersion
+								  ifNil: [ '' ]
+								  ifNotNil: [ '-jdkMode -' , jdkVersion ]).
+							 folder pathString asComment }) ]
 		displayingProgress: [ :folder | folder pathString ]
 ]
 
@@ -222,6 +235,19 @@ FamixJavaFoldersImporter >> initialize [
 FamixJavaFoldersImporter >> installModels [
 
 	models do: [ :model | model install ]
+]
+
+{ #category : 'accessing' }
+FamixJavaFoldersImporter >> jdkVersion [
+
+	^ jdkVersion
+]
+
+{ #category : 'accessing' }
+FamixJavaFoldersImporter >> jdkVersion: aString [
+	"If we are parsing the JDK we need to add an explicit argument to verveineJ with the jdk version. This parameter needs to be a string such as `1.7` to parse some java 7."
+
+	jdkVersion := aString
 ]
 
 { #category : 'actions' }

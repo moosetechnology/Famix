@@ -61,40 +61,18 @@ Class {
 		'MooseID'
 	],
 	#classInstVars : [
-		'cache'
+		'usedStatefulTrait',
+		'superclassesAndFamixTraits'
 	],
 	#category : 'Moose-Core',
 	#package : 'Moose-Core'
 }
 
 { #category : 'meta' }
-MooseObject class >> allDeclaredProperties [
-	"All properties described in the metamodel"
-
-	^ self mooseDescription allProperties
-]
-
-{ #category : 'accessing' }
-MooseObject class >> allPropertySelectors [
-	"Return a dictionary with all properties of this kind of entity, including metamodel properties, metrics, and navigation groups. Keys are abstract names of properties, values are implementing selectors"
-
-	| props |
-	props := IdentityDictionary new.
-	self allDeclaredProperties do: [ :prop | props at: prop name put: prop implementingSelector ].
-	self navigationPragmas do: [ :p | props at: p selector put: p selector ].
-	^ props
-]
-
-{ #category : 'meta' }
 MooseObject class >> annotation [
 	<FMClass: #Object super: #Object>
 	<package: #Moose>
 	<abstract>
-]
-
-{ #category : 'accessing' }
-MooseObject class >> cache [
-	^ cache ifNil: [ self initializeCache ]
 ]
 
 { #category : 'private' }
@@ -111,16 +89,6 @@ MooseObject class >> freshID [
 	^ MooseID
 ]
 
-{ #category : 'accessing' }
-MooseObject class >> initializeCache [
-	"Usually we use #at:ifAbsentPut: to declare new properties, but in MooseQuery to reduce too much the perfs to instantiate the block as second argument. Thus, we initialize this info direction at the cache creation and use a simple #at: instead"
-
-	^ cache := SmallDictionary new
-		at: #usedStatefulTraits put: super usedStatefulTraits;
-		at: #superclassesAndFamixTraits put: super usedStatefulTraits , self withAllSuperclasses;
-		yourself
-]
-
 { #category : 'testing' }
 MooseObject class >> isAbstract [
 	^ self = MooseObject
@@ -128,6 +96,10 @@ MooseObject class >> isAbstract [
 
 { #category : 'testing' }
 MooseObject class >> isOfType: aClassFAMIX [
+	"Checking the class first because it is faster and in a lot of cases we check the real class."
+
+	self == aClassFAMIX ifTrue: [ ^ true ].
+
 	^ self superclassesAndFamixTraits includes: aClassFAMIX
 ]
 
@@ -165,7 +137,23 @@ MooseObject class >> resetIDGeneration [
 
 { #category : 'initialization' }
 MooseObject class >> resetMooseEntityCache [
-	cache := nil
+	"Some implmentations notes:
+
+	The #isOfType: method of Moose can be called billions of times in a short amount of time by Moose query and needs to be the fastest possible. Since it rely on the #superclassesAndFamixTraits cache, we need to optimize it in the best of our capacity.
+	Optimizations:
+	- We avoid lazy initialization to avoid the extra #ifNil: message send
+	- We use IdentitySet to have the fastest #includes: possible
+	- We collect superclasses only up to MooseEntity subclasses to avoid slowing the Set with Object, ProtoObject, ...
+	- We now have a separate cache for traits and superclasses + traits so that we avoid an extra dictionary access (in the past it was a Dictionary"
+
+	| traits classes |
+	super resetMooseEntityCache.
+	traits := super usedStatefulTraits as: IdentitySet.
+	classes := self withAllSuperclasses \ MooseEntity withAllSuperclasses as: IdentitySet.
+	superclassesAndFamixTraits := classes
+		                              addAll: traits;
+		                              yourself.
+	usedStatefulTrait := traits
 ]
 
 { #category : 'private' }
@@ -175,9 +163,10 @@ MooseObject class >> setMooseID: anInteger [
 	MooseID := anInteger 
 ]
 
-{ #category : 'testing' }
+{ #category : 'accessing' }
 MooseObject class >> superclassesAndFamixTraits [
-	^ self cache directAt: #superclassesAndFamixTraits
+
+	^ superclassesAndFamixTraits
 ]
 
 { #category : 'accessing' }
@@ -188,7 +177,8 @@ MooseObject class >> undefinedName [
 
 { #category : 'testing' }
 MooseObject class >> usedStatefulTraits [
-	^ self cache directAt: #usedStatefulTraits
+
+	^ usedStatefulTrait
 ]
 
 { #category : 'accessing' }
@@ -203,11 +193,6 @@ MooseObject >> allDeclaredProperties [
 This method allows us to look for its properties in the metadescription.
 And, the metadescription might be different in the instance and in the class side since we can define for each instance its metamodel (with more or less properties)"
 	^ self mooseDescription allProperties
-]
-
-{ #category : 'meta information' }
-MooseObject >> allPropertySelectors [
-	^ self class allPropertySelectors
 ]
 
 { #category : 'private' }

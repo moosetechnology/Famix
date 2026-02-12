@@ -32,6 +32,13 @@ FamixTest1ImportingContext >> importAttribute [
 ]
 
 { #category : 'importing' }
+FamixTest1ImportingContext >> importBytesFileAnchor [
+
+	<generated>
+	^ self importConcreteEntity: (self class fm3ClassNamed: #BytesFileAnchor)
+]
+
+{ #category : 'importing' }
 FamixTest1ImportingContext >> importClass [
 
 	<generated>
@@ -113,6 +120,13 @@ FamixTest1ImportingContext >> shouldImportAttribute [
 
 	<generated>
 	^ self shouldImport: #Attribute
+]
+
+{ #category : 'testing' }
+FamixTest1ImportingContext >> shouldImportBytesFileAnchor [
+
+	<generated>
+	^ self shouldImport: #BytesFileAnchor
 ]
 
 { #category : 'testing' }

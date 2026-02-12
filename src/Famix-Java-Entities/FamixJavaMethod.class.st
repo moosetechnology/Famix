@@ -269,8 +269,8 @@ FamixJavaMethod >> isMethodDefinition [
 
 	self parentType isInterface ifFalse: [ ^ true ].
 	
-	"If the parent is an interface, we have a definition if the method has the #default keyword"
-	^ self isDefault
+	"If the parent is an interface, we have a definition if the method has the #default or #static keyword"
+	^ self isDefault or: [ self isClassSide ]
 ]
 
 { #category : 'testing' }

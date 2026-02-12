@@ -26,9 +26,8 @@ MQScopeAllStrategy class >> isDeprecated [
 
 { #category : 'query' }
 MQScopeAllStrategy class >> scopeFor: anEntity query: aQuery [
-	MQScopeContainersStrategy scopeFor: anEntity query: aQuery.
-	MQScopeContainedEntitiesStrategy scopeFor: anEntity query: aQuery.
-	^ aQuery result
+
+	self deprecated: 'This feature is removed.'
 ]
 
 { #category : 'accessing' }

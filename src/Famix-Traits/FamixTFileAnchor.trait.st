@@ -181,6 +181,12 @@ FamixTFileAnchor >> rootFolder [
 	^ self mooseModel rootFolder
 ]
 
+{ #category : 'accessing' }
+FamixTFileAnchor >> sourceText [
+
+	^ self explicitRequirement
+]
+
 { #category : 'testing' }
 FamixTFileAnchor >> sourcesAreReadable [
 	^ self fileReference
@@ -190,7 +196,7 @@ FamixTFileAnchor >> sourcesAreReadable [
 
 { #category : 'accessing' }
 FamixTFileAnchor >> startLine [
-	^ self explicitRequirement
+	^ self cacheAt: #startLine ifAbsentPut: [ self completeText lineNumberCorrespondingToIndex: self startPos ]
 ]
 
 { #category : 'accessing' }
