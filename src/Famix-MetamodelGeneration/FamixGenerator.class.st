@@ -1218,6 +1218,9 @@ FamixGenerator >> defineParametricRelations [
 FamixGenerator >> defineProperties [
 
 	super defineProperties.
+	
+	(tBytesFileAnchor property: #startByte type: #Number) comment: 'Start position in the source in number of bytes'.
+	(tBytesFileAnchor property: #endByte type: #Number) comment: 'Stop position in the source in number of bytes'.
 
 	(tCanBeAbstract
 		 property: #isAbstract
@@ -1225,58 +1228,38 @@ FamixGenerator >> defineProperties [
 		 defaultValue: false) comment: 'Entity can be declared abstract'.
 	(tCanBeFinal property: #isFinal type: #Boolean defaultValue: false)
 		comment: 'Entity can be declared final'.
-
 	(tCanBeClassSide
 		 property: #isClassSide
 		 type: #Boolean
-		 defaultValue: false) comment:
-		'Entity can be declared class side i.e. static'.
+		 defaultValue: false) comment: 'Entity can be declared class side i.e. static'.
 
-	(tFileAnchor property: #correspondingFile type: #FamixTFile)
-		comment: 'File associated to this source anchor'.
-	(tFileAnchor property: #encoding type: #String) comment:
-		'A string representing the encoding of a file'.
-	(tFileAnchor property: #fileName type: #String) comment:
-		'Name of the source file'.
+	(tFileAnchor property: #correspondingFile type: #FamixTFile) comment: 'File associated to this source anchor'.
+	(tFileAnchor property: #encoding type: #String) comment: 'A string representing the encoding of a file'.
+	(tFileAnchor property: #fileName type: #String) comment: 'Name of the source file'.
 
-	(tAccess property: #isWrite type: #Boolean defaultValue: false)
-		comment: 'Write access'.
+	(tAccess property: #isWrite type: #Boolean defaultValue: false) comment: 'Write access'.
 
-	(tAnnotationInstanceAttribute property: #value type: #String)
-		comment: 'Actual value of the attribute used in an annotation'.
+	(tAnnotationInstanceAttribute property: #value type: #String) comment: 'Actual value of the attribute used in an annotation'.
 
-	(tNamedEntity property: #name type: #String) comment:
-		'Basic name of the entity, not full reference.'.
+	(tNamedEntity property: #name type: #String) comment: 'Basic name of the entity, not full reference.'.
 
-	(tHasVisibility property: #visibility type: #String) comment:
-		'Visibility of the entity'.
+	(tHasVisibility property: #visibility type: #String) comment: 'Visibility of the entity'.
 
-	(tHasKind property: #kind type: #String) comment:
-		'Tag indicating a setter, getter, constant method'.
+	(tHasKind property: #kind type: #String) comment: 'Tag indicating a setter, getter, constant method'.
 
-	(tHasSignature property: #signature type: #String) comment:
-		'Signature of the message being sent'.
+	(tHasSignature property: #signature type: #String) comment: 'Signature of the message being sent'.
 
-	(tCanBeStub property: #isStub type: #Boolean defaultValue: false)
-		comment:
-		'Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.'.
+	(tCanBeStub property: #isStub type: #Boolean defaultValue: false) comment: 'Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.'.
 
-	(tFileNavigation property: #startLine type: #Number) comment:
-		'Number of the start line'.
-	(tFileNavigation property: #endLine type: #Number) comment:
-		'Number of the end line'.
-	(tFileNavigation property: #startColumn type: #Number) comment:
-		'Number of the start column'.
-	(tFileNavigation property: #endColumn type: #Number) comment:
-		'Number of the end column'.
+	(tFileNavigation property: #startLine type: #Number) comment: 'Number of the start line'.
+	(tFileNavigation property: #endLine type: #Number) comment: 'Number of the end line'.
+	(tFileNavigation property: #startColumn type: #Number) comment: 'Number of the start column'.
+	(tFileNavigation property: #endColumn type: #Number) comment: 'Number of the end column'.
 
-	(tIndexedFileNavigation property: #startPos type: #Number) comment:
-		'Start position in the source'.
-	(tIndexedFileNavigation property: #endPos type: #Number) comment:
-		'Stop position in the source'.
+	(tIndexedFileNavigation property: #startPos type: #Number) comment: 'Start position in the source'.
+	(tIndexedFileNavigation property: #endPos type: #Number) comment: 'Stop position in the source'.
 
-	(tHasImmediateSource property: #source type: #String) comment:
-		'Actual source code of the source entity'.
+	(tHasImmediateSource property: #source type: #String) comment: 'Actual source code of the source entity'.
 
 	(tMultipleFileAnchor property: #fileAnchors type: #FamixTFileAnchor)
 		comment: 'All source code definition files';
@@ -1286,10 +1269,8 @@ FamixGenerator >> defineProperties [
 		 property: #relatedAnchor
 		 type: #FamixTSourceAnchor) comment:
 		'Source anchor to which I am relative.'.
-	(tRelativeSourceAnchor property: #startPos type: #Number) comment:
-		'Start position in the source'.
-	(tRelativeSourceAnchor property: #endPos type: #Number) comment:
-		'Stop position in the source'
+	(tRelativeSourceAnchor property: #startPos type: #Number) comment: 'Start position in the source'.
+	(tRelativeSourceAnchor property: #endPos type: #Number) comment: 'Stop position in the source'.
 ]
 
 { #category : 'definition' }

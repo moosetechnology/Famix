@@ -40,7 +40,8 @@ FamixJavaInitializer >> isConstructor [
 	<FMProperty: #isConstructor type: #Boolean>
 	<FMComment: 'Is the method a constructor for its class?'>
 	<derived>
-	^ self name = self parentType name and: [ self typing isNil ]
+	^ self name = self parentType name and: [
+		  self typing isNil or: [ self declaredType name = 'void' ] ]
 ]
 
 { #category : 'accessing' }

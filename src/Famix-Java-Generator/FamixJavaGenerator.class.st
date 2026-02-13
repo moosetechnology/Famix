@@ -253,7 +253,7 @@ FamixJavaGenerator >> defineHierarchy [
 	method --|> #TImportable.
 	
 	initializer --|> method.
-	
+
 	class --|> type.
 	class --|> #TClass.
 	class --|> #TLCOMMetrics.
@@ -311,10 +311,6 @@ FamixJavaGenerator >> defineHierarchy [
 
 	exception --|> class.
 	exception --|> #TException.
-	exception --|> #TWithAnnotationInstances.
-	exception --|> #THasVisibility.
-	exception --|> #TCanImplement.
-	exception --|> #TWithTypes.
 
 	implicitVariable --|> variable.
 	implicitVariable --|> #TImplicitVariable.
