@@ -31,6 +31,13 @@ FamixTestComposed1Entity class >> metamodel [
 ]
 
 { #category : 'testing' }
+FamixTestComposed1Entity >> canBeStub [
+
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
 FamixTestComposed1Entity >> isBehavioural [
 
 	<generated>

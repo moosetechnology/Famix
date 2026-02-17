@@ -1880,4 +1880,5 @@ FamixGenerator >> defineTraits [
 	tShadower := builder newTraitNamed: #TShadower comment: self commentForTShadower.
 	
 	tCanBeStub := builder newTraitNamed: #TCanBeStub.
+	tCanBeStub testingSelector: #canBeStub
 ]
