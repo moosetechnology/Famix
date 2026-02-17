@@ -44,6 +44,12 @@ FamixTCanBeStub >> accept: aVisitor [
 	^ aVisitor visitFamixTCanBeStub: self
 ]
 
+{ #category : 'testing' }
+FamixTCanBeStub >> canBeStub [
+	"testing method to speed up this check"
+	^ true
+]
+
 { #category : 'accessing' }
 FamixTCanBeStub >> isStub [
 

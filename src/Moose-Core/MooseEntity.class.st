@@ -128,6 +128,12 @@ MooseEntity >> asOrderedCollection [
 	^ OrderedCollection with: self
 ]
 
+{ #category : 'testing' }
+MooseEntity >> canBeStub [
+	"false by default, only true for FamixTCanBeStub traits owner"
+	^ false
+]
+
 { #category : 'dependencies' }
 MooseEntity >> canRecursivelyBeItsParent [
 	^ false
