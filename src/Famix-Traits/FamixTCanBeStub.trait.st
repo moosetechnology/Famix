@@ -46,7 +46,8 @@ FamixTCanBeStub >> accept: aVisitor [
 
 { #category : 'testing' }
 FamixTCanBeStub >> canBeStub [
-	"testing method to speed up this check"
+
+	<generated>
 	^ true
 ]
 
