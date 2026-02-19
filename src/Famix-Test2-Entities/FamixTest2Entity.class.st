@@ -31,6 +31,13 @@ FamixTest2Entity class >> metamodel [
 ]
 
 { #category : 'testing' }
+FamixTest2Entity >> canBeStub [
+
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
 FamixTest2Entity >> isAssociation [
 
 	<generated>

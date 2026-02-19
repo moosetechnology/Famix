@@ -23,6 +23,13 @@ FamixTest3TypeGroup class >> metamodel [
 ]
 
 { #category : 'testing' }
+FamixTest3TypeGroup >> canBeStub [
+
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
 FamixTest3TypeGroup >> isAccess [
 
 	<generated>

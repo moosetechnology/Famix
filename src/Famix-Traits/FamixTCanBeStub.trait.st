@@ -44,6 +44,13 @@ FamixTCanBeStub >> accept: aVisitor [
 	^ aVisitor visitFamixTCanBeStub: self
 ]
 
+{ #category : 'testing' }
+FamixTCanBeStub >> canBeStub [
+
+	<generated>
+	^ true
+]
+
 { #category : 'accessing' }
 FamixTCanBeStub >> isStub [
 
