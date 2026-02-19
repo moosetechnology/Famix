@@ -31,6 +31,13 @@ MooseMSEImporterTestEntity class >> metamodel [
 ]
 
 { #category : 'testing' }
+MooseMSEImporterTestEntity >> canBeStub [
+
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
 MooseMSEImporterTestEntity >> isAssociation [
 
 	<generated>

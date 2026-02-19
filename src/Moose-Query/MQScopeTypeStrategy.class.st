@@ -47,8 +47,11 @@ MQScopeTypeStrategy >> scope: anObject [
 ]
 
 { #category : 'testing' }
-MQScopeTypeStrategy >> shouldBeSelected: anEntity [
-	^ anEntity isOfType: scope
+MQScopeTypeStrategy >> selectMatchingElements: aCollection [
+
+	^ (aCollection first isOfType: scope)
+		  ifTrue: [ aCollection ]
+		  ifFalse: [ Array empty ]
 ]
 
 { #category : 'printing' }

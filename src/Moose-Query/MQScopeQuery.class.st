@@ -121,14 +121,15 @@ MQScopeQuery >> direction: anObject [
 
 { #category : 'execution' }
 MQScopeQuery >> execute [
-	^ direction scopeFor: receiver query: self
+
+	^ self scopeFor: { receiver }
 ]
 
 { #category : 'initialization' }
 MQScopeQuery >> initialize [
+
 	super initialize.
-	isRecursive := false.
-	until := [ :each | false ]
+	isRecursive := false
 ]
 
 { #category : 'accessing' }
@@ -139,6 +140,16 @@ MQScopeQuery >> isRecursive [
 { #category : 'accessing' }
 MQScopeQuery >> isRecursive: anObject [
 	isRecursive := anObject
+]
+
+{ #category : 'execution' }
+MQScopeQuery >> isUniform: aCollection [
+
+	| class |
+	class := (aCollection at: 1) class.
+	1 to: aCollection size do: [ :index | (aCollection at: index) class = class ifFalse: [ ^ false ] ].
+
+	^ true
 ]
 
 { #category : 'DSL' }
@@ -165,26 +176,43 @@ MQScopeQuery >> recursively [
 ]
 
 { #category : 'execution' }
-MQScopeQuery >> scopeFor: anEntity direction: aDirection [
+MQScopeQuery >> scopeFor: aCollection [
+	"We leave if the collection is empty to not check that everywhere.
+	
+	We split the collection to group them by class to optimize what follows."
 
-	| selectors |
-	(self stopStrategy shouldBeSelected: anEntity) ifTrue: [ 
-		self add: anEntity.
-		self isRecursive ifFalse: [ ^ self result ] ].
+	aCollection ifEmpty: [ ^ self result ].
 
-	"The content of this block could be much more readable with #do: but we do this solution for performances... We need this method to be really really performant."
-	(self shouldStopOn: anEntity) ifFalse: [ 
-		1 to: (selectors := aDirection selectorsFor: anEntity) size do: [ 
-			:ind | 
-			(anEntity perform: (selectors at: ind))
-				scopeForQuery: self
-				direction: aDirection ] ].
+	(self isUniform: aCollection) ifTrue: [ ^ self scopeForUniformElements: aCollection ].
+
+	(aCollection groupedBy: #class) valuesDo: [ :entities | self scopeForUniformElements: entities ].
+
 	^ self result
 ]
 
-{ #category : 'testing' }
-MQScopeQuery >> shouldStopOn: anEntity [
-	^ self until value: anEntity
+{ #category : 'execution' }
+MQScopeQuery >> scopeForUniformElements: aCollection [
+	"The code could be simpler but it is like this for performance reasons! Do not touch it lightly please."
+
+	| selectors nextElements |
+	(self stopStrategy selectMatchingElements: aCollection) ifEmpty: [ nextElements := aCollection ] ifNotEmpty: [ :selected |
+			self result addAll: selected.
+			nextElements := self isRecursive
+				              ifTrue: [ aCollection ]
+				              ifFalse: [
+						              aCollection size = selected size "If we are not recursive and we select the full result we can quit."
+							              ifTrue: [ ^ self result ]
+							              ifFalse: [ aCollection \ selected ] ] ].
+
+	until ifNotNil: [ nextElements := nextElements reject: [ :entity | until value: entity ] ].
+
+	nextElements ifEmpty: [ ^ self result ].
+
+	selectors := direction selectorsFor: nextElements first.
+
+	nextElements do: [ :anEntity | "The content of this block could be much more readable with #do: but we do this solution for performances... We need this method to be really really performant."
+		1 to: selectors size do: [ :ind | (anEntity perform: (selectors at: ind)) scopeForQuery: self ] ].
+	^ self result
 ]
 
 { #category : 'accessing' }

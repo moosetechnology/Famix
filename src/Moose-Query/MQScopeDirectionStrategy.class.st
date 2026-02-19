@@ -18,11 +18,6 @@ MQScopeDirectionStrategy class >> isAbstract [
 	^ self = MQScopeDirectionStrategy
 ]
 
-{ #category : 'query' }
-MQScopeDirectionStrategy class >> scopeFor: anEntity query: aQuery [
-	^ aQuery scopeFor: anEntity direction: self
-]
-
 { #category : 'accessing' }
 MQScopeDirectionStrategy class >> selectorsFor: anEntity [
 	^ self subclassResponsibility

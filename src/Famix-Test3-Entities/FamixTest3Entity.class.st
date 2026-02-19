@@ -31,6 +31,13 @@ FamixTest3Entity class >> metamodel [
 ]
 
 { #category : 'testing' }
+FamixTest3Entity >> canBeStub [
+
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
 FamixTest3Entity >> isAccess [
 
 	<generated>

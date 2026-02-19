@@ -38,6 +38,13 @@ FamixJavaEntity >> accept: aVisitor [
 ]
 
 { #category : 'testing' }
+FamixJavaEntity >> canBeStub [
+
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
 FamixJavaEntity >> isAccess [
 
 	<generated>

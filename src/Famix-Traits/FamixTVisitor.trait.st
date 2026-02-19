@@ -108,6 +108,13 @@ FamixTVisitor >> visitFamixTAttribute: aFamixTAttribute [
 ]
 
 { #category : 'visiting' }
+FamixTVisitor >> visitFamixTBytesFileAnchor: aFamixTBytesFileAnchor [
+
+	<generated>
+	self visitFamixTFileAnchor: aFamixTBytesFileAnchor
+]
+
+{ #category : 'visiting' }
 FamixTVisitor >> visitFamixTCanBeAbstract: aFamixTCanBeAbstract [
 
 	<generated>
