@@ -1245,7 +1245,7 @@ FamixGenerator >> defineProperties [
 
 	(tHasVisibility property: #visibility type: #String) comment: 'Visibility of the entity'.
 
-	(tHasKind property: #kind type: #String) comment: 'Tag indicating a setter, getter, constant, constructor method'.
+	(tHasKind property: #kind type: #String) comment: 'Tag indicating a setter, getter, constant method'.
 
 	(tHasSignature property: #signature type: #String) comment: 'Signature of the message being sent'.
 

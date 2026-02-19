@@ -42,7 +42,7 @@
 |---|
 | `isClassSide` | `Boolean` | nil | Entity can be declared class side i.e. static|
 | `isStub` | `Boolean` | false | Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.|
-| `kind` | `String` | nil | Tag indicating a setter, getter, constant, constructor method|
+| `kind` | `String` | nil | Tag indicating a setter, getter, constant method|
 | `name` | `String` | nil | Basic name of the entity, not full reference.|
 | `signature` | `String` | nil | Signature of the message being sent|
 
@@ -64,4 +64,13 @@ FamixTest1Method class >> annotation [
 	<package: #'Famix-Test1-Entities'>
 	<generated>
 	^ self
+]
+
+{ #category : 'testing' }
+FamixTest1Method >> isConstructor [
+
+	<FMProperty: #isConstructor type: #Boolean>
+	<FMComment: 'Is the method a constructor for its class?'>
+	<derived>
+	^ self name = self parentType name and: [ self typing isNil ]
 ]

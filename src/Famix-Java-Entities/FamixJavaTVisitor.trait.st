@@ -212,6 +212,13 @@ FamixJavaTVisitor >> visitFamixJavaInheritance: aFamixJavaInheritance [
 ]
 
 { #category : 'visiting' }
+FamixJavaTVisitor >> visitFamixJavaInitializer: aFamixJavaInitializer [
+
+	<generated>
+	self visitFamixJavaMethod: aFamixJavaInitializer
+]
+
+{ #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaInterface: aFamixJavaInterface [
 
 	<generated>

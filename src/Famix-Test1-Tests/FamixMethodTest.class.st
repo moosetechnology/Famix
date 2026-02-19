@@ -63,9 +63,7 @@ FamixMethodTest >> testIsConstant [
 FamixMethodTest >> testIsConstructor [
 
 	self deny: m1 isConstructor.
-	m1 isConstructor: true.
-	self assert: m1 isConstructor.
-
+	self assert: constructor isConstructor
 ]
 
 { #category : 'tests' }
@@ -143,7 +141,7 @@ FamixMethodTest >> testParentTypeIsStub [
 { #category : 'tests' }
 FamixMethodTest >> testRelations [
 
-	self assertCollection: c1 methods hasSameElements:  { m1 }.	
+	self assertCollection: c1 methods hasSameElements:  { constructor. m1 }.	
 	self assertCollection: c2 methods hasSameElements:  { m2. m3 }.
 	self assertCollection: m1 parentType equals: c1.
 	self assertCollection: m2 parentType equals: c2.

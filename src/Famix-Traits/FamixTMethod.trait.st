@@ -98,6 +98,15 @@ FamixTMethod >> isAccessor [
 ]
 
 { #category : 'testing' }
+FamixTMethod >> isConstructor [
+
+	<FMProperty: #isConstructor type: #Boolean>
+	<FMComment: 'Is the method a constructor for its class?'>
+	<derived>
+	^ self shouldBeImplemented
+]
+
+{ #category : 'testing' }
 FamixTMethod >> isDelegating [
 
 	^ (self outgoingInvocations flatCollect: #target) anySatisfy: [ :each | 

@@ -48,7 +48,7 @@
 | `isFinal` | `Boolean` | false | Entity can be declared final|
 | `isStub` | `Boolean` | false | Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.|
 | `isSynchronized` | `Boolean` | false | Entity can be declared synchronized|
-| `kind` | `String` | nil | Tag indicating a setter, getter, constant, constructor method|
+| `kind` | `String` | nil | Tag indicating a setter, getter, constant method|
 | `name` | `String` | nil | Basic name of the entity, not full reference.|
 | `signature` | `String` | nil | Signature of the message being sent|
 | `visibility` | `String` | nil | Visibility of the entity|
@@ -167,6 +167,15 @@ FamixJavaMethod >> isClassInitializer [
 	^ #initializer = self kind or: [ self cacheAt: #isClassInitializer ifAbsent: [ false ] ]
 ]
 
+{ #category : 'trait protocol conflict' }
+FamixJavaMethod >> isConstructor [
+
+	<FMProperty: #isConstructor type: #Boolean>
+	<FMComment: 'Is the method a constructor for its class?'>
+	<derived>
+	^ false
+]
+
 { #category : 'testing' }
 FamixJavaMethod >> isDefault [
 
@@ -233,7 +242,7 @@ FamixJavaMethod >> isInitializationBlock [
 { #category : 'testing' }
 FamixJavaMethod >> isInitializer [
 
-	^ self isConstructor or: [ self isInitializationBlock  ]
+	^ false
 ]
 
 { #category : 'testing' }

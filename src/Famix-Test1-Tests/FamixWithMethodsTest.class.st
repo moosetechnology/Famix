@@ -42,11 +42,12 @@ FamixWithMethodsTest >> testMethods [
 
 { #category : 'tests' }
 FamixWithMethodsTest >> testMethodsGroup [
-	
-	| group | 
-	
+
+	| group |
 	group := c1 methodsGroup.
-	self assertCollection: group entities hasSameElements: { m1 }.
+	self assertCollection: group entities hasSameElements: {
+			m1.
+			constructor }
 ]
 
 { #category : 'tests' }
@@ -61,7 +62,7 @@ FamixWithMethodsTest >> testNumberOfLinesOfCode [
 { #category : 'tests' }
 FamixWithMethodsTest >> testNumberOfMethods [
 
-	self assert: c1 numberOfMethods equals: 1.
+	self assert: c1 numberOfMethods equals: 2. "m1 + constructor"
 	self assert: c2 numberOfMethods equals: 2.
 
 	"explicit count"
@@ -73,8 +74,8 @@ FamixWithMethodsTest >> testNumberOfMethods [
 { #category : 'tests' }
 FamixWithMethodsTest >> testRelations [
 
-	self assertCollection: c1 methods hasSameElements:  { m1 }.	
-	self assertCollection: c2 methods hasSameElements:  { m2. m3 }.
+	self assertCollection: c1 methods hasSameElements: { m1. constructor }.
+	self assertCollection: c2 methods hasSameElements: { m2. m3 }.
 	self assertCollection: m1 parentType equals: c1.
 	self assertCollection: m2 parentType equals: c2.
 ]
@@ -82,5 +83,7 @@ FamixWithMethodsTest >> testRelations [
 { #category : 'tests' }
 FamixWithMethodsTest >> testWeightedMethodCount [
 
-	self assert: c1 weightedMethodCount equals: model notExistentMetricValue
+	self
+		assert: c1 weightedMethodCount
+		equals: model notExistentMetricValue * c1 numberOfMethods
 ]

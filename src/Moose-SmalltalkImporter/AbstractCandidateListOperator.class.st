@@ -47,6 +47,7 @@ AbstractCandidateListOperator >> computeCandidateListFor: anInvocation [
 
 { #category : 'running' }
 AbstractCandidateListOperator >> computeCandidateListFor: anInvocation withBaseClass: aClass [
+	
 	aClass
 		ifNotNil: [ | candidate |
 			candidate := aClass lookUp: anInvocation signature.
