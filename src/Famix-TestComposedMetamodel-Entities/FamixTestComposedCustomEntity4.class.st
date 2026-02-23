@@ -47,6 +47,7 @@ FamixTestComposedCustomEntity4 >> c24s [
 	<generated>
 	<derived>
 	<FMProperty: #c24s type: #FamixTestComposed2CustomEntity4 opposite: #c4s>
+	<multivalued>
 	^ self attributeAt: #c24s ifAbsentPut: [ FMMultiMultivalueLink on: self opposite: #c4s ]
 ]
 
@@ -64,6 +65,7 @@ FamixTestComposedCustomEntity4 >> customEntities4 [
 	<generated>
 	<derived>
 	<FMProperty: #customEntities4 type: #FamixTestComposed1CustomEntity4 opposite: #customEntities4>
+	<multivalued>
 	^ self attributeAt: #customEntities4 ifAbsentPut: [ FMMultiMultivalueLink on: self opposite: #customEntities4 ]
 ]
 

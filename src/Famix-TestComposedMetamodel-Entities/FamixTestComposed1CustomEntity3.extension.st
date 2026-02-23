@@ -24,6 +24,7 @@ FamixTestComposed1CustomEntity3 >> customEntities3 [
 	<generated>
 	<derived>
 	<FMProperty: #customEntities3 type: #FamixTestComposedCustomEntity3 opposite: #customEntity3>
+	<multivalued>
 	<package: #'Famix-TestComposedMetamodel-Entities'>
 	^ self attributeAt: #customEntities3 ifAbsentPut: [ FMMultivalueLink on: self opposite: #customEntity3: ]
 ]
