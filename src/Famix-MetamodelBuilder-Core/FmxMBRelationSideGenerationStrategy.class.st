@@ -40,6 +40,7 @@ FmxMBRelationSideGenerationStrategy >> generateGetterCoreIn: aClassOrTrait on: a
 FmxMBRelationSideGenerationStrategy >> generateGetterIn: aClassOrTrait for: aRelationSide [
 
 	| methodSource commentDefinition |
+
 	commentDefinition := aRelationSide comment ifNotEmpty: [ :comment | 
 		                     '<FMComment: {1}>' format:
 			                     { comment printString } ].
