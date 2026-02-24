@@ -35,7 +35,8 @@ Class {
 	#instVars : [
 		'folders',
 		'models',
-		'jdkVersion'
+		'jdkVersion',
+		'autoClasspath'
 	],
 	#classVars : [
 		'VerveineJJar'
@@ -126,6 +127,18 @@ FamixJavaFoldersImporter class >> verveineJJarPath: anObject [
 		ifAbsent: [ ^ SpApplication defaultApplication inform: 'The file does not exist' ]
 ]
 
+{ #category : 'accessing' }
+FamixJavaFoldersImporter >> autoClasspath [
+
+	^ autoClasspath
+]
+
+{ #category : 'accessing' }
+FamixJavaFoldersImporter >> autoClasspath: anObject [
+	"If we are parsing source code relying on external libraries, adding a path which leads to a directory holding the libraries packaged as JAR creates stubs with the correct qualified names"
+	autoClasspath := anObject
+]
+
 { #category : 'initialization' }
 FamixJavaFoldersImporter >> ensureVerveineJ [
 
@@ -171,12 +184,15 @@ FamixJavaFoldersImporter >> generateJsonOfProjects [
 
 	folders
 		do: [ :folder |
-				LibC runCommand: ('java -jar {1} -o {2}  {3} -format json {4}' format: {
+				LibC runCommand: ('java -jar {1} -o {2}  {3} -format json {4} {5}' format: {
 							 self verveineJJar pathString asComment.
 							 (self jsonForFolder: folder).
 							 (self jdkVersion
 								  ifNil: [ '' ]
 								  ifNotNil: [ '-jdkMode -' , jdkVersion ]).
+							(self autoClasspath 
+								  ifNil: [ '' ]
+								  ifNotNil: [ '-autocp ' , autoClasspath pathString asComment ]).
 							 folder pathString asComment }) ]
 		displayingProgress: [ :folder | folder pathString ]
 ]
