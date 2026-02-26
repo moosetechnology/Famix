@@ -1,6 +1,8 @@
 Class {
 	#name : 'FamixTest5Entity',
 	#superclass : 'MooseEntity',
+	#traits : 'FamixTest5TEntity',
+	#classTraits : 'FamixTest5TEntity classTrait',
 	#category : 'Famix-Test5-Entities-Entities',
 	#package : 'Famix-Test5-Entities',
 	#tag : 'Entities'

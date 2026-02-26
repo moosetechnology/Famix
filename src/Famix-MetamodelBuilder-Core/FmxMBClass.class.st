@@ -202,7 +202,7 @@ FmxMBClass >> generateTestingMethodsIn: aClass [
 
 	self isRoot ifTrue: [
 			builder testingSelectorsMapping keysAndValuesDo: [ :concernedClass :selectors |
-					(builder shouldGeneratorTestingMethodsOf: concernedClass) ifTrue: [
+					(builder shouldGeneratorTestingMethodsOf: concernedClass in: self) ifTrue: [
 							selectors do: [ :sel |
 									| selectorsFromTraits |
 									selectorsFromTraits := self traitGeneralizations flatCollect: #testingSelectors.
