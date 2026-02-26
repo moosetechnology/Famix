@@ -45,6 +45,13 @@ FamixJavaEntity >> canBeStub [
 ]
 
 { #category : 'testing' }
+FamixJavaEntity >> hasImmediateSource [
+
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
 FamixJavaEntity >> isAccess [
 
 	<generated>

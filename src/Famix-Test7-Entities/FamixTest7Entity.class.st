@@ -38,6 +38,13 @@ FamixTest7Entity >> canBeStub [
 ]
 
 { #category : 'testing' }
+FamixTest7Entity >> hasImmediateSource [
+
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
 FamixTest7Entity >> isAssociation [
 
 	<generated>

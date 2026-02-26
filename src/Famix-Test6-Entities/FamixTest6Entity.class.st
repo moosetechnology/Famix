@@ -31,6 +31,13 @@ FamixTest6Entity class >> metamodel [
 ]
 
 { #category : 'testing' }
+FamixTest6Entity >> hasImmediateSource [
+
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
 FamixTest6Entity >> isComment [
 
 	<generated>

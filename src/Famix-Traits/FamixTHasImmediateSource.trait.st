@@ -61,6 +61,13 @@ FamixTHasImmediateSource >> accept: aVisitor [
 ]
 
 { #category : 'testing' }
+FamixTHasImmediateSource >> hasImmediateSource [
+
+	<generated>
+	^ true
+]
+
+{ #category : 'testing' }
 FamixTHasImmediateSource >> hasSource [
 	^ self source isEmptyOrNil not
 ]
