@@ -38,6 +38,13 @@ FamixTestComposed1Entity >> canBeStub [
 ]
 
 { #category : 'testing' }
+FamixTestComposed1Entity >> hasImmediateSource [
+
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
 FamixTestComposed1Entity >> isBehavioural [
 
 	<generated>

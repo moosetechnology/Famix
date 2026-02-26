@@ -30,6 +30,13 @@ FamixTest3TypeGroup >> canBeStub [
 ]
 
 { #category : 'testing' }
+FamixTest3TypeGroup >> hasImmediateSource [
+
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
 FamixTest3TypeGroup >> isAccess [
 
 	<generated>

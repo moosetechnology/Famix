@@ -38,6 +38,13 @@ FamixStEntity >> canBeStub [
 ]
 
 { #category : 'testing' }
+FamixStEntity >> hasImmediateSource [
+
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
 FamixStEntity >> isAccess [
 
 	<generated>
