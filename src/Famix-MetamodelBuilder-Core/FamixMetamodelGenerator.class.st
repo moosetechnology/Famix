@@ -428,18 +428,26 @@ FamixMetamodelGenerator >> prefix [
 
 { #category : 'definition' }
 FamixMetamodelGenerator >> remoteEntity: anEntityName withPrefix: aPrefixName [
-	^ ((subBuildersMapByPrefix at: aPrefixName) ensureClassNamed: anEntityName)
-		isRemote: true;
-		remoteBuilder: builder;
-		yourself
+
+	| subBuilder |
+	subBuilder := subBuildersMapByPrefix at: aPrefixName ifAbsent: [ NotFound signalFor: aPrefixName in: subBuildersMapByPrefix keys ].
+
+	^ ((subBuilder classNamed: anEntityName) ifNil: [ NotFound signalFor: anEntityName in: subBuilder classes ])
+		  isRemote: true;
+		  remoteBuilder: builder;
+		  yourself
 ]
 
 { #category : 'definition' }
 FamixMetamodelGenerator >> remoteTrait: anEntityName withPrefix: aPrefixName [
-	^ ((subBuildersMapByPrefix at: aPrefixName) traitNamed: anEntityName)
-		isRemote: true;
-		remoteBuilder: builder;
-		yourself
+
+	| subBuilder |
+	subBuilder := subBuildersMapByPrefix at: aPrefixName ifAbsent: [ NotFound signalFor: aPrefixName in: subBuildersMapByPrefix keys ].
+
+	^ ((subBuilder traitNamed: anEntityName) ifNil: [ NotFound signalFor: anEntityName in: subBuilder traits ])
+		  isRemote: true;
+		  remoteBuilder: builder;
+		  yourself
 ]
 
 { #category : 'accessing' }
