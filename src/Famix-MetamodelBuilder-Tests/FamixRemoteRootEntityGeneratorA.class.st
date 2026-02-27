@@ -2,7 +2,8 @@ Class {
 	#name : 'FamixRemoteRootEntityGeneratorA',
 	#superclass : 'FamixTestGenerator',
 	#instVars : [
-		'fmx'
+		'fmx',
+		'entity'
 	],
 	#category : 'Famix-MetamodelBuilder-Tests-GeneratorRessources',
 	#package : 'Famix-MetamodelBuilder-Tests',
@@ -27,6 +28,14 @@ FamixRemoteRootEntityGeneratorA class >> prefix [
 FamixRemoteRootEntityGeneratorA >> defineClasses [
 
 	super defineClasses.
+	entity := builder newClassNamed: #Entity.
 	fmx := builder newClassNamed: #EntityA.
 	fmx withTesting
+]
+
+{ #category : 'definition' }
+FamixRemoteRootEntityGeneratorA >> defineHierarchy [
+
+	super defineHierarchy.
+	fmx --|> entity
 ]
