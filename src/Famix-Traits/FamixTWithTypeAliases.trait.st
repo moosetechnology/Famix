@@ -36,14 +36,8 @@ FamixTWithTypeAliases >> accept: aVisitor [
 	^ aVisitor visitFamixTWithTypeAliases: self
 ]
 
-{ #category : 'accessing' }
-FamixTWithTypeAliases >> addTypeAlias: anObject [
-	typeAliases add: anObject
-
-]
-
 { #category : 'adding' }
-FamixTWithTypeAliases >> addTypeAliase: anObject [
+FamixTWithTypeAliases >> addTypeAlias: anObject [
 	<generated>
 	^ self typeAliases add: anObject
 ]
