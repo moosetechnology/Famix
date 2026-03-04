@@ -243,7 +243,7 @@ BaselineOfFamix >> singularizePluralize: spec [
 
 	spec baseline: 'SingularizePluralize' with: [ 
 		spec repository:
-			'github://pharo-contributions/SingularizePluralize:v1.1/src' ]
+			'github://pharo-contributions/SingularizePluralize:v1.2/src' ]
 ]
 
 { #category : 'dependencies' }
