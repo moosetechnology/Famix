@@ -117,12 +117,6 @@ FamixJavaMethod >> innerClassesImplementingMethods [
 ]
 
 { #category : 'Famix-Extensions' }
-FamixJavaMethod >> invokedBehaviours [
-
-	^ (self queryOutgoing: FamixTInvocation) opposites
-]
-
-{ #category : 'Famix-Extensions' }
 FamixJavaMethod >> invokedMethods [
 	<FMProperty: #invokedMethods type: #FamixJavaMethod> <derived> <multivalued>
 	<FMComment: 'The methods invoked by the receiver'>

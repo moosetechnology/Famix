@@ -100,6 +100,12 @@ FamixTMethod >> firstOverridingMethods [
 	^ overridingMethods
 ]
 
+{ #category : 'Famix-Extensions' }
+FamixTMethod >> invokedBehaviours [
+
+	^ (self queryOutgoing: FamixTInvocation) opposites
+]
+
 { #category : 'asserting' }
 FamixTMethod >> isAccessor [
 	^ self isSetter or: [ self isGetter ]

@@ -141,12 +141,6 @@ FamixStMethod >> hasEmptyBody [
 ]
 
 { #category : 'Famix-Extensions' }
-FamixStMethod >> invokedBehaviours [
-
-	^ (self queryOutgoing: FamixTInvocation) opposites
-]
-
-{ #category : 'Famix-Extensions' }
 FamixStMethod >> invokedMethods [
 	<FMProperty: #invokedMethods type: #FamixStMethod> <derived> <multivalued>
 	<FMComment: 'The methods invoked by the receiver'>
