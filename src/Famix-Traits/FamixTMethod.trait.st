@@ -82,6 +82,14 @@ FamixTMethod >> accept: aVisitor [
 	^ aVisitor visitFamixTMethod: self
 ]
 
+{ #category : 'Famix-Extensions-metrics-support' }
+FamixTMethod >> accessedAttributes [
+	"Returns the set of attributes of my class accessed by me (method). 
+	Used to support the calculation of LCOM"
+
+	^ ((self queryOutgoing: FamixTAccess) opposites withinContainerUsing: FamixTClass) asSet select: #isAttribute
+]
+
 { #category : 'accessing' }
 FamixTMethod >> firstOverridingMethods [
 
@@ -90,6 +98,12 @@ FamixTMethod >> firstOverridingMethods [
 
 	self parentType addFirstMethodsOverriding: self in: overridingMethods.
 	^ overridingMethods
+]
+
+{ #category : 'Famix-Extensions' }
+FamixTMethod >> invokedBehaviours [
+
+	^ (self queryOutgoing: FamixTInvocation) opposites
 ]
 
 { #category : 'asserting' }

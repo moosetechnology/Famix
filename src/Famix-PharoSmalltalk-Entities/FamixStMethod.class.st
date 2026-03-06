@@ -73,14 +73,6 @@ FamixStMethod class >> annotation [
 	^ self
 ]
 
-{ #category : 'Famix-Extensions-metrics-support' }
-FamixStMethod >> accessedAttributes [
-	"Returns the set of attributes of my class accessed by me (method). 
-	Used to support the calculation of LCOM"
-
-	^ ((self queryOutgoing: FamixTAccess) opposites withinContainerUsing: FamixTClass) asSet select: #isAttribute
-]
-
 { #category : 'accessing' }
 FamixStMethod >> category [
 	<FMProperty: #category type: #String>
@@ -146,12 +138,6 @@ FamixStMethod >> hasEmptyBody [
 	empty method in this scheme (which is questionable)."
 	"note that the presence of statements should be checked too for that..."
 	^ self numberOfAccesses = 0 and: [ self numberOfOutgoingInvocations = 0 ]
-]
-
-{ #category : 'Famix-Extensions' }
-FamixStMethod >> invokedBehaviours [
-
-	^ (self queryOutgoing: FamixTInvocation) opposites
 ]
 
 { #category : 'Famix-Extensions' }
