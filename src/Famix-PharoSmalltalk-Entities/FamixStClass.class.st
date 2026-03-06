@@ -63,16 +63,6 @@ FamixStClass class >> annotation [
 	^ self
 ]
 
-{ #category : 'Famix-Extensions-metrics-support' }
-FamixStClass >> accessedAttributes [
-	
-	"Returns my attributes accessed by my methods. If the same attribute is accessed 
-	by two different methods it is counted twice.
-	Used to support the calculation of LCOM"
-	
-	^ self methodsWithoutSutbsAndConstructors asOrderedCollection flatCollect: [ :method | method accessedAttributes ]
-]
-
 { #category : 'accessing' }
 FamixStClass >> allRecursiveTypes [
 	"We cannot have children types in Smalltalk but this method is useful to compute some metrics."

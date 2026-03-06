@@ -80,14 +80,6 @@ FamixJavaMethod >> accept: aVisitor [
 	^ aVisitor visitFamixJavaMethod: self
 ]
 
-{ #category : 'Famix-Extensions-metrics-support' }
-FamixJavaMethod >> accessedAttributes [
-	"Returns the set of attributes of my class accessed by me (method). 
-	Used to support the calculation of LCOM"
-
-	^ ((self queryOutgoing: FamixTAccess) opposites withinContainerUsing: FamixTClass) asSet select: #isAttribute
-]
-
 { #category : 'Famix-Extensions' }
 FamixJavaMethod >> clientBehaviours [
 	<FMProperty: #clientBehaviours type: #FamixJavaMethod> <multivalued> <derived>

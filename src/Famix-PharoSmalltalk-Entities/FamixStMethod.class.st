@@ -73,14 +73,6 @@ FamixStMethod class >> annotation [
 	^ self
 ]
 
-{ #category : 'Famix-Extensions-metrics-support' }
-FamixStMethod >> accessedAttributes [
-	"Returns the set of attributes of my class accessed by me (method). 
-	Used to support the calculation of LCOM"
-
-	^ ((self queryOutgoing: FamixTAccess) opposites withinContainerUsing: FamixTClass) asSet select: #isAttribute
-]
-
 { #category : 'accessing' }
 FamixStMethod >> category [
 	<FMProperty: #category type: #String>
