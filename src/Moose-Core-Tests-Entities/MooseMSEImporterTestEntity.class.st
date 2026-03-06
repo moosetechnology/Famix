@@ -38,6 +38,13 @@ MooseMSEImporterTestEntity >> canBeStub [
 ]
 
 { #category : 'testing' }
+MooseMSEImporterTestEntity >> hasImmediateSource [
+
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
 MooseMSEImporterTestEntity >> isAssociation [
 
 	<generated>

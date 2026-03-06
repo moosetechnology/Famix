@@ -289,7 +289,7 @@ FamixMetamodelBuilder >> generateTestingMethodsOfRemoteEntities [
 					self testingSelectorsMapping keysAndValuesDo: [
 							:behavior
 							:selectors |
-							((self shouldGeneratorTestingMethodsOf: behavior) and: [
+							((self shouldGeneratorTestingMethodsOf: behavior in: remoteClass) and: [
 								 subclassesAndTraits includes: behavior ]) ifTrue: [
 									selectors do: [ :selector |
 											(remoteClass realClass includesSelector: selector)
@@ -596,11 +596,14 @@ FamixMetamodelBuilder >> shouldGenerateModel [
 ]
 
 { #category : 'asserting' }
-FamixMetamodelBuilder >> shouldGeneratorTestingMethodsOf: aClass [
+FamixMetamodelBuilder >> shouldGeneratorTestingMethodsOf: aClass in: targetClass [
 	"In case a testing selector is relatif to a Trait that is not used in the current MM, then we do not need to generate the testing selector."
 
 	aClass isMetamodelTrait ifFalse: [ ^ true ].
-
+	
+	"If the target class contains the trait, then it should not generate a testing method returning false, else it will override the method returning true."
+	(targetClass allTransitiveTraits includes: aClass) ifTrue: [ ^ false ].
+	
 	^ self classes anySatisfy: [ :class | class allTransitiveTraits includes: aClass ]
 ]
 

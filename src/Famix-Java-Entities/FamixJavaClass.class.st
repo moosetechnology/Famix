@@ -77,16 +77,6 @@ FamixJavaClass >> accept: aVisitor [
 	^ aVisitor visitFamixJavaClass: self
 ]
 
-{ #category : 'Famix-Extensions-metrics-support' }
-FamixJavaClass >> accessedAttributes [
-	
-	"Returns my attributes accessed by my methods. If the same attribute is accessed 
-	by two different methods it is counted twice.
-	Used to support the calculation of LCOM"
-	
-	^ self methodsWithoutSutbsAndConstructors asOrderedCollection flatCollect: [ :method | method accessedAttributes ]
-]
-
 { #category : 'enumerating' }
 FamixJavaClass >> allImplementedInterfacesHierarchy [
 

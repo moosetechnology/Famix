@@ -61,6 +61,16 @@ FmxMethodAdditions >> compile: aRGMethod into: realClass [
 		  classified: aRGMethod protocol
 ]
 
+{ #category : 'printing' }
+FmxMethodAdditions >> printOn: aStream [
+
+	super printOn: aStream.
+
+	aStream nextPutAll: '['.
+	rgMethods do: [ :method | aStream print: method ] separatedBy: [ aStream nextPutAll: ', ' ].
+	aStream nextPutAll: ']'
+]
+
 { #category : 'accessing' }
 FmxMethodAdditions >> rgMethods [
 	^ rgMethods

@@ -39,3 +39,10 @@ FamixTest5Test >> testApplyOnOppositeTraitOn [
 	self assert: (ctype traits includes: ttype).
 	self assert: (cwith traits includes: twith)
 ]
+
+{ #category : 'tests' }
+FamixTest5Test >> testTestingMethodsAreRight [
+	"Regression test: https://github.com/moosetechnology/Famix/issues/1090"
+	
+	self assert: FamixTest5AnnotationType1 new isQueryable 
+]

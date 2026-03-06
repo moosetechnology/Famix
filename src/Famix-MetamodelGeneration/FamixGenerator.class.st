@@ -1845,6 +1845,7 @@ FamixGenerator >> defineTraits [
 	tWithTypes := builder newTraitNamed: #TWithTypes comment: self commentForTWithTypes.
 
 	tHasImmediateSource := builder newTraitNamed: #THasImmediateSource comment: self commentForTHasImmediateSource.
+	tHasImmediateSource testingSelector: #hasImmediateSource.
 
 	tHasVisibility := builder newTraitNamed: #THasVisibility.
 
