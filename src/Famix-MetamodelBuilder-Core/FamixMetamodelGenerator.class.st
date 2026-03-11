@@ -88,7 +88,6 @@ FamixMetamodelGenerator class >> generateAllMetamodels [
 { #category : 'generation' }
 FamixMetamodelGenerator class >> generateAllMetamodelsSuchAs: aBlock [
 
-	FMRelationSlot allSubInstancesDo: #initialize.
 	(self metamodelsToGenerate select: aBlock) do: [ :mm | mm generate ] displayingProgress: [ :mm | 'Regenerate ' , mm name ]
 ]
 
