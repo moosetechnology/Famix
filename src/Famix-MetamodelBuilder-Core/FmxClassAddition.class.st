@@ -38,6 +38,13 @@ FmxClassAddition class >> creationCode: aString [
 ]
 
 { #category : 'accessing' }
+FmxClassAddition class >> priority [
+	"Class addition/update happens before we update and add methods."
+
+	^ 4
+]
+
+{ #category : 'accessing' }
 FmxClassAddition >> apply [
 
 	self class compiler evaluate: self creationCode

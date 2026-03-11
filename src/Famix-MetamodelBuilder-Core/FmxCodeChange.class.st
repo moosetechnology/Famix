@@ -27,12 +27,19 @@ FmxCodeChange class >> isAbstract [
 ]
 
 { #category : 'accessing' }
+FmxCodeChange class >> priority [
+	"My subclass can override me and put a smaller number to be applied before other changes.."
+
+	^ 10
+]
+
+{ #category : 'accessing' }
 FmxCodeChange >> apply [
 	self subclassResponsibility
 ]
 
-{ #category : 'testing' }
-FmxCodeChange >> isRemoval [
+{ #category : 'accessing' }
+FmxCodeChange >> priority [
 
-	^ false
+	^ self class priority
 ]

@@ -34,6 +34,13 @@ FmxPackageAddition class >> named: aName [
 ]
 
 { #category : 'accessing' }
+FmxPackageAddition class >> priority [
+	"This is what has the less impact of all."
+
+	^ 0
+]
+
+{ #category : 'accessing' }
 FmxPackageAddition >> apply [
 
 	self packageOrganizer ensurePackage: self packageName

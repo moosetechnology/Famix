@@ -35,6 +35,13 @@ FmxClassRemoval class >> class: aClass [
 ]
 
 { #category : 'accessing' }
+FmxClassRemoval class >> priority [
+	"Class removal happens after method and slot removals."
+
+	^ 3
+]
+
+{ #category : 'accessing' }
 FmxClassRemoval >> apply [
 	self classToRemove removeFromSystem
 ]
@@ -47,12 +54,6 @@ FmxClassRemoval >> classToRemove [
 { #category : 'accessing' }
 FmxClassRemoval >> classToRemove: anObject [
 	class := anObject
-]
-
-{ #category : 'testing' }
-FmxClassRemoval >> isRemoval [
-
-	^ true
 ]
 
 { #category : 'printing' }
