@@ -37,16 +37,17 @@ FmxMethodRemovals class >> className: aSymbol isClassSide: aBoolean selectors: a
 ]
 
 { #category : 'accessing' }
+FmxMethodRemovals class >> priority [
+	"I should be what happens first. We remove the methods before the slots to avoid undeclared."
+
+	^ 1
+]
+
+{ #category : 'accessing' }
 FmxMethodRemovals >> apply [
 	| class |
 	class := self realClass.
 	self selectors do: [ :selector | class removeSelector: selector ]
-]
-
-{ #category : 'testing' }
-FmxMethodRemovals >> isRemoval [
-
-	^ true
 ]
 
 { #category : 'accessing' }

@@ -16,7 +16,14 @@ Class {
 	#tag : 'Changes'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
+FmxSlotRemovals class >> priority [
+	"Slots are romevd after methods. They should happen before class addition or update, else we could have duplicated slots."
+
+	^ 2
+]
+
+{ #category : 'instance creation' }
 FmxSlotRemovals class >> slots: aCollection [
 
 	^ self new
@@ -28,12 +35,6 @@ FmxSlotRemovals class >> slots: aCollection [
 FmxSlotRemovals >> apply [
 
 	slots do: [ :e | e owningClass removeInstVarNamed: e name  ]
-]
-
-{ #category : 'testing' }
-FmxSlotRemovals >> isRemoval [
-
-	^ true
 ]
 
 { #category : 'accessing' }

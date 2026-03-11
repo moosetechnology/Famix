@@ -13,8 +13,8 @@ Class {
 FmxMBRealRingEnvironment >> apply [
 
 	self collectChangesToApply.
-	changesToApply select: [ :e | e isRemoval ] thenDo: #apply.
-	changesToApply select: [ :e | e isRemoval not ] thenDo: #apply
+	"Sort the changes before applying them"
+	(changesToApply sorted: #priority ascending) do: [ :change | change apply ]
 ]
 
 { #category : 'testing' }
