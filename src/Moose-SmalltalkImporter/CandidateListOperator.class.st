@@ -83,16 +83,6 @@ CandidateListOperator >> computeInstanceVariableCandidateListFor: anInvocation [
 	^ roelTyperResult
 ]
 
-{ #category : 'running' }
-CandidateListOperator >> computeTemporaryVariableCandidateListFor: anInvocation [
-	| aClass |
-	self flag: #todo. "Cyril: This code can never be executed but there is a different implementation in the super class. We should look into this."
-	aClass
-		ifNotNil: [ | candidate |
-			candidate := aClass lookUp: anInvocation signature.
-			(candidate isNotNil and: [ candidate isAbstract not ]) ifTrue: [ anInvocation candidates: (Array with: candidate) ] ]
-]
-
 { #category : 'private' }
 CandidateListOperator >> containerOf: anInstVarName startingAt: aClass [
 	"When we see that the receiver of an Invocation is an Instance Variable, this instance variable may be defined in the class containing the invocation or maybe in one of the superclass.

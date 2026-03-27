@@ -84,30 +84,6 @@ AbstractCandidateListOperator >> computeInstanceVariableCandidateListFor: anInvo
 	^ roelTyperResult
 ]
 
-{ #category : 'running' }
-AbstractCandidateListOperator >> computeTemporaryVariableCandidateListFor: anInvocation [
-	"For now, I am call by noone because I am a work in progress."
-
-	| roelTyperResult allCandidates classContainingInvocation tmpVarSymbol methodSelector compiledMethod key types |
-	classContainingInvocation := Smalltalk at: anInvocation receiver belongsTo belongsTo name.
-	tmpVarSymbol := anInvocation receiver name.
-	methodSelector := anInvocation receiver belongsTo name.
-	compiledMethod := classContainingInvocation methodDict at: methodSelector.
-	roelTyperResult := TypeCollector typeTmpsIn: compiledMethod ofClass: classContainingInvocation.
-	key := roelTyperResult keys detect: [ :each | each = tmpVarSymbol asString ].
-	types := (roelTyperResult at: key) types.
-
-	allCandidates := self allCandidatesFor: anInvocation.
-
-	types
-		ifEmpty: [ anInvocation candidates: (self allCandidatesFor: anInvocation) ]
-		ifNotEmpty: [ allCandidates := allCandidates select: [ :each | types includes: each belongsTo name ].
-			anInvocation candidates: allCandidates ].
-
-
-	^ types
-]
-
 { #category : 'accessing' }
 AbstractCandidateListOperator >> description [ 
 	 
