@@ -3,7 +3,9 @@ Class {
 	#superclass : 'TestCase',
 	#instVars : [
 		'method',
-		'signature'
+		'signature',
+		'constructor',
+		'm1'
 	],
 	#category : 'Famix-PharoSmalltalk-Tests',
 	#package : 'Famix-PharoSmalltalk-Tests'
@@ -18,6 +20,10 @@ FamixPharoMethodTest >> setUp [
 	method := FamixStMethod new.
 	signature := 'pharoMethod'.
 	method signature: signature.
+	constructor := FamixStMethod new.
+	constructor protocol: 'instance_creation'. 
+	m1 := FamixStMethod new.
+	m1 protocol: 'myProtocol'. 
 ]
 
 { #category : 'tests' }
@@ -54,6 +60,13 @@ FamixPharoMethodTest >> testIsClassSide [
 	method := FamixStMethod new.
 	method isClassSide: true.
 	self assert: method isClassSide .
+]
+
+{ #category : 'tests' }
+FamixPharoMethodTest >> testIsConstructor [
+	self deny: method isConstructor.
+	self deny: m1 isConstructor.
+	self assert: constructor isConstructor
 ]
 
 { #category : 'tests' }

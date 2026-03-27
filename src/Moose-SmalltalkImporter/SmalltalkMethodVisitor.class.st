@@ -29,7 +29,6 @@ SmalltalkMethodVisitor >> classifyMethodNode: aMethodNode [
 	 
 	self matchGetter: aMethodNode. 
 	self matchSetter: aMethodNode. 
-	self matchConstructor: aMethodNode. 
 	self matchConstant: aMethodNode
 ]
 
@@ -101,7 +100,8 @@ SmalltalkMethodVisitor >> matchConstant: aMethodNode [
 
 { #category : 'method-classifying' }
 SmalltalkMethodVisitor >> matchConstructor: aMethodNode [
-
+self deprecated:
+		'#beConstructor is deprecated it was the setter for isConctructor. There is no more setter for this property that is computed in Pharo. Consequently matchConstructor is also deprecated'.
 	famixMethod protocol ifNotNil: [ 
 		('*instance*creation*' match: famixMethod protocol asLowercase) 
 			ifTrue: [ famixMethod beConstructor ] ]
