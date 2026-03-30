@@ -372,6 +372,7 @@ FamixJavaTVisitor >> visitFamixJavaPrimitiveType: aFamixJavaPrimitiveType [
 
 	<generated>
 	self visitFamixTPrimitiveType: aFamixJavaPrimitiveType.
+	self visitFamixTTypeArgument: aFamixJavaPrimitiveType.
 	self visitFamixJavaType: aFamixJavaPrimitiveType
 ]
 

@@ -346,6 +346,7 @@ FamixJavaGenerator >> defineHierarchy [
 
 	primitiveType --|> type.
 	primitiveType --|> #TPrimitiveType.
+	primitiveType --|> #TTypeArgument.
 
 	reference --|> #TReference.
 
