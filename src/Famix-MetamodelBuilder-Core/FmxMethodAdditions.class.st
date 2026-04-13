@@ -1,36 +1,24 @@
 "
-Description
---------------------
+## Description
 
 I represent a change that would create add methods to a class during a Famix generation.
 
-Examples
---------------------
+## Examples
 
-	method := RGMethod new
-		sourceCode: 'initialize
-		<generated>
-		super initialize.
-		self toto: true;
-		protocol: #initialization;
-		name: #initialize;
-		yourself.
-
-	FmxMethodAdditions className: FmxMethodAddition isClassSide: false rgMethods: {method}
-	
+```st
+	FmxMethodAdditions className: FmxMethodAddition isClassSide: false methodsAndProtocols: (Dictionary with: 'accessing' -> { 'y ^y' . 'x ^x'}}
+```
  
-Internal Representation and Key Implementation Points.
---------------------
+## Internal Representation and Key Implementation Points
 
     Instance Variables
-	rgMethods:		<aCollectionOfRGMethods>		A collection of ring methods to add to a class.
-
+	methodsAndProtocols:		<aDicitonary>		A dictionary matching a protocol with source code to generate as methods in the protocol
 "
 Class {
 	#name : 'FmxMethodAdditions',
 	#superclass : 'FmxLazyClassChange',
 	#instVars : [
-		'rgMethods'
+		'methodsAndProtocols'
 	],
 	#category : 'Famix-MetamodelBuilder-Core-Changes',
 	#package : 'Famix-MetamodelBuilder-Core',
@@ -38,27 +26,38 @@ Class {
 }
 
 { #category : 'instance creation' }
-FmxMethodAdditions class >> className: aSymbol isClassSide: aBoolean rgMethods: aCollection [
+FmxMethodAdditions class >> className: aSymbol isClassSide: aBoolean methodsAndProtocols: aCollection [
 	^ self new
 		className: aSymbol;
 		isClassSide: aBoolean;
-		rgMethods: aCollection;
+		methodsAndProtocols: aCollection;
 		yourself
+]
+
+{ #category : 'adding' }
+FmxMethodAdditions >> addCode: sourceCode protocol: protocol [
+
+	(methodsAndProtocols at: protocol ifAbsentPut: [ OrderedCollection new ]) add: sourceCode
 ]
 
 { #category : 'accessing' }
 FmxMethodAdditions >> apply [
+
 	| class |
 	class := self realClass.
-	self rgMethods do: [ :method | self compile: method into: class ]
+	methodsAndProtocols keysAndValuesDo: [ :protocol :codes | codes do: [ :code | class compile: code classified: protocol ] ]
 ]
 
-{ #category : 'compiling' }
-FmxMethodAdditions >> compile: aRGMethod into: realClass [
+{ #category : 'initialization' }
+FmxMethodAdditions >> initialize [
+	super initialize.
+	methodsAndProtocols := Dictionary new
+]
 
-	^ realClass
-		  compile: aRGMethod sourceCode
-		  classified: aRGMethod protocol
+{ #category : 'accessing' }
+FmxMethodAdditions >> methodsAndProtocols: aCollection [
+
+	methodsAndProtocols := aCollection
 ]
 
 { #category : 'printing' }
@@ -66,17 +65,8 @@ FmxMethodAdditions >> printOn: aStream [
 
 	super printOn: aStream.
 
-	aStream nextPutAll: '['.
-	rgMethods do: [ :method | aStream print: method ] separatedBy: [ aStream nextPutAll: ', ' ].
-	aStream nextPutAll: ']'
-]
-
-{ #category : 'accessing' }
-FmxMethodAdditions >> rgMethods [
-	^ rgMethods
-]
-
-{ #category : 'accessing' }
-FmxMethodAdditions >> rgMethods: anObject [
-	rgMethods := anObject
+	aStream
+		nextPutAll: '[';
+		print: methodsAndProtocols;
+		nextPutAll: ']'
 ]

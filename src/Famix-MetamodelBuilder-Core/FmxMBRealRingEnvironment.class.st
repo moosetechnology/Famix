@@ -28,7 +28,6 @@ FmxMBRealRingEnvironment >> changesToApply [
 { #category : 'accessing' }
 FmxMBRealRingEnvironment >> collectChangesToApply [
 	| resolvedClasses resolvedPackages |
-	changesToApply := OrderedCollection new.
 	resolvedPackages := ringEnvironment ask packages select: [ :each | each isRingResolved ].
 	resolvedClasses := ringEnvironment ask behaviors select: [ :each | each isRingResolved and: [ each superclass isRingResolved ] ].
 
@@ -44,6 +43,13 @@ FmxMBRealRingEnvironment >> compile: aSource in: aClass classified: aProtocol pa
 	category := '*' , aPackageName.
 	aProtocol ifNotEmpty: [ category := category , '-' , aProtocol ].
 	aClass compile: aSource classified: category
+]
+
+{ #category : 'initialization' }
+FmxMBRealRingEnvironment >> initialize [
+
+	super initialize.
+	changesToApply := OrderedCollection new
 ]
 
 { #category : 'installing' }
@@ -184,13 +190,14 @@ FmxMBRealRingEnvironment >> recordMethodsAdoptionsOf: realClass to: anRGClass re
 	((anRGClass localSelectors difference: generatedMethodNamesOfRealClass)
 		select: [ :selectorOfMethodToAdd | realClass ifNil: [ true ] ifNotNil: [ (realClass localSelectors includes: selectorOfMethodToAdd) not ] ]
 		thenCollect: [ :selectorOfMethodToAdd | anRGClass methodNamed: selectorOfMethodToAdd ])
-		ifNotEmpty: [ :methods | changesToApply add: (FmxMethodAdditions className: aClassName isClassSide: anRGClass isClassSide rgMethods: methods) ].
+		ifNotEmpty: [ :methods | 
+			changesToApply add: (FmxMethodAdditions className: aClassName isClassSide: anRGClass isClassSide methodsAndProtocols: ((methods groupedBy: #protocol) collect: [ :ms | ms collect: #sourceCode ])) ].
 
 	"Finally, update methods needing updates"
 	((generatedMethodNamesOfRealClass intersection: anRGClass localSelectors)
 		collect: [ :selectorOfMethodToUpdate | anRGClass methodNamed: selectorOfMethodToUpdate ]
 		thenSelect: [ :method | realClass needToAdaptToMethod: method ])
-		ifNotEmpty: [ :methods | changesToApply add: (FmxMethodUpdates className: aClassName isClassSide: anRGClass isClassSide rgMethods: methods) ]
+		ifNotEmpty: [ :methods | changesToApply add: (FmxMethodUpdates className: aClassName isClassSide: anRGClass isClassSide methodsAndProtocols: ((methods groupedBy: #protocol) collect: [ :ms | ms collect: #sourceCode ])) ]
 ]
 
 { #category : 'installing' }
