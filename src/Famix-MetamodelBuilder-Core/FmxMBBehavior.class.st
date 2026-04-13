@@ -285,19 +285,15 @@ FmxMBBehavior >> generateAddToCollectionFor: aClass [
 ]
 
 { #category : 'generating' }
-FmxMBBehavior >> generateAnnotationIn: aRealClass superclass: aSuperclass [
+FmxMBBehavior >> generateAnnotationIn: aRealClass [
 
 	| aSuperclassName |
-	aSuperclassName := aSuperclass
-		                   ifNotNil: [ aSuperclass name ]
-		                   ifNil: [ 
-			                   self classGeneralization
-			                   = self defaultSuperclass
-				                   ifTrue: [ self defaultSuperclassName ]
-				                   ifFalse: [ 
-					                   self classGeneralization
-						                   ifNil: [ self defaultSuperclassName ]
-						                   ifNotNil: [ :cg | cg realClass name ] ] ].
+	aSuperclassName := self classGeneralization = self defaultSuperclass
+		                   ifTrue: [ self defaultSuperclassName ]
+		                   ifFalse: [
+				                   self classGeneralization
+					                   ifNil: [ self defaultSuperclassName ]
+					                   ifNotNil: [ :cg | cg realClass name ] ].
 
 	aRealClass classSide
 		compile: ('annotation
@@ -305,7 +301,7 @@ FmxMBBehavior >> generateAnnotationIn: aRealClass superclass: aSuperclass [
 	<FMClass: #{1} super: #{2}>
 	<package: {3}>
 	<generated>{4}
-	^ self' format: { 
+	^ self' format: {
 					 self name.
 					 aSuperclassName.
 					 self builder safeAnnotationPackageName.

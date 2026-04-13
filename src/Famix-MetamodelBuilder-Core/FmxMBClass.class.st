@@ -59,18 +59,16 @@ FmxMBClass >> classGeneralization: anObject [
 { #category : 'generating' }
 FmxMBClass >> generate [
 
-	| aClass aSuperclass aClassName |
+	| aClass superclassName |
 	self willGenerate ifFalse: [ ^ self ].
 
-	aClassName := self fullName.
-
-	aSuperclass := self classGeneralization
-		               ifNil: [ self defaultSuperclass ]
-		               ifNotNil: [ self classGeneralization realClass ].
+	superclassName := self classGeneralization
+		               ifNil: [ self defaultSuperclassName ]
+		               ifNotNil: [ :class | class realClass name ].
 
 	aClass := self builder environment
-		          createClassNamed: aClassName asSymbol
-		          superclass: aSuperclass name
+		          createClassNamed: self fullName asSymbol
+		          superclass: superclassName
 		          traitNames: self allTraitNames
 		          slots: self slotDefinitions
 		          in: self packageName.
@@ -81,7 +79,7 @@ FmxMBClass >> generate [
 	self realClass: aClass.
 
 	self generateAccessors.
-	self generateAnnotationIn: aClass superclass: nil.
+	self generateAnnotationIn: aClass.
 	self generateIsAbstractMethodIfNecessaryIn: aClass.
 
 	self generateTestingMethodsIn: aClass.

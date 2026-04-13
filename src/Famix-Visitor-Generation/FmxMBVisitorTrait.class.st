@@ -44,7 +44,7 @@ FmxMBVisitorTrait >> generate [
 	aTrait tagWith: self tag.
 	self realClass: aTrait.
 
-	self generateAnnotationIn: aTrait superclass: nil.
+	self generateAnnotationIn: aTrait.
 	self generateCommonMethodsIfNecessary.
 	self generateVisitAndAcceptMethods.
 ]

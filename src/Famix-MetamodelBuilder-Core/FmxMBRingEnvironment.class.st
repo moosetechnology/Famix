@@ -89,8 +89,7 @@ FmxMBRingEnvironment >> compile: aSource in: aClass classified: aProtocol packag
 FmxMBRingEnvironment >> createClassNamed: className superclass: superclassName traitNames: traitNames slots: slots in: packageName [
 
 	| aClass existingClass composition |
-	existingClass := self ringEnvironment ask behaviorNamed:
-		                 className asSymbol.
+	existingClass := self ringEnvironment ask behaviorNamed: className.
 
 	aClass := self ringEnvironment ensureClassNamed: className.
 	aClass superclass: (self ringEnvironment ensureClassNamed: superclassName).

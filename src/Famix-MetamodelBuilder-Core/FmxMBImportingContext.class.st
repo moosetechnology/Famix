@@ -52,12 +52,12 @@ FmxMBImportingContext >> generate [
 	self willGenerate ifFalse: [ ^ self ].
 
 	superclass := self classGeneralization
-		              ifNil: [ self defaultSuperclass ]
-		              ifNotNil: [ self classGeneralization ].
+		              ifNil: [ self defaultSuperclassName ]
+		              ifNotNil: #name.
 
 	aClass := self builder environment
 		          createClassNamed: self fullName asSymbol
-		          superclass: superclass name
+		          superclass: superclass
 		          traitNames: self allTraitNames
 		          slots: self slotDefinitions
 		          in: self packageName.
