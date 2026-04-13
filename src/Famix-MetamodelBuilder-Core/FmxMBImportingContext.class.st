@@ -57,11 +57,10 @@ FmxMBImportingContext >> generate [
 
 	aClass := self builder environment
 		          createClassNamed: self fullName asSymbol
-		          superclass: superclass
+		          superclass: superclass name
 		          traitNames: self allTraitNames
 		          slots: self slotDefinitions
-		          in: self packageName
-		          overwrite: true.
+		          in: self packageName.
 
 	aClass tagWith: self tag.
 

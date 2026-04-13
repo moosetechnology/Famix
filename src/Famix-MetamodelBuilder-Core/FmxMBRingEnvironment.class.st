@@ -86,18 +86,14 @@ FmxMBRingEnvironment >> compile: aSource in: aClass classified: aProtocol packag
 ]
 
 { #category : 'initialization' }
-FmxMBRingEnvironment >> createClassNamed: aClassName superclass: aSuperclass traitNames: traitNames slots: slots in: packageName overwrite: shouldOverwrite [
+FmxMBRingEnvironment >> createClassNamed: className superclass: superclassName traitNames: traitNames slots: slots in: packageName [
 
 	| aClass existingClass composition |
 	existingClass := self ringEnvironment ask behaviorNamed:
-		                 aClassName asSymbol.
+		                 className asSymbol.
 
-	(existingClass isNotNil and: [ shouldOverwrite not ]) ifTrue: [ 
-		^ existingClass ].
-
-	aClass := self ringEnvironment ensureClassNamed: aClassName.
-	aClass superclass:
-		(self ringEnvironment ensureClassNamed: aSuperclass name).
+	aClass := self ringEnvironment ensureClassNamed: className.
+	aClass superclass: (self ringEnvironment ensureClassNamed: superclassName).
 
 	composition := RGTraitComposition parent: aClass.
 	aClass traitComposition: composition.
@@ -126,18 +122,15 @@ FmxMBRingEnvironment >> createClassNamed: aClassName superclass: aSuperclass tra
 		aClass layout addSlot: slot.
 		slot propertyNamed: #isGenerated put: true ].
 
-
 	^ aClass
 ]
 
 { #category : 'initialization' }
-FmxMBRingEnvironment >> createTraitNamed: traitName uses: traitNames slots: slots in: packageName overwrite: shouldOverwrite [
+FmxMBRingEnvironment >> createTraitNamed: traitName uses: traitNames slots: slots in: packageName [
 
 	| aPackage aTrait existingClass composition |
 	existingClass := self ringEnvironment ask behaviorNamed:
 		                 traitName asSymbol.
-	(existingClass isNotNil and: [ shouldOverwrite not ]) ifTrue: [ 
-		^ existingClass ].
 
 	aPackage := self ringEnvironment ensurePackageNamed: packageName.
 

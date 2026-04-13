@@ -70,11 +70,10 @@ FmxMBClass >> generate [
 
 	aClass := self builder environment
 		          createClassNamed: aClassName asSymbol
-		          superclass: aSuperclass
+		          superclass: aSuperclass name
 		          traitNames: self allTraitNames
 		          slots: self slotDefinitions
-		          in: self packageName
-		          overwrite: true.
+		          in: self packageName.
 
 	aClass tagWith: self tag.
 	aClass comment content: self commentWithRelations.
