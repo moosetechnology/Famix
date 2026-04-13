@@ -77,7 +77,7 @@ FmxMBClass >> generate [
 		          overwrite: true.
 
 	aClass tagWith: self tag.
-	self builder environment setComment: self commentWithRelations for: aClass.
+	aClass comment content: self commentWithRelations.
 
 	self realClass: aClass.
 

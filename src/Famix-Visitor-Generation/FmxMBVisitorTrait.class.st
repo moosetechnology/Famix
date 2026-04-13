@@ -40,7 +40,7 @@ FmxMBVisitorTrait >> generate [
 		          in: self packageName
 		          overwrite: true.
 
-	self builder environment setComment: self comment for: aTrait.
+	aTrait comment content: self comment.
 
 	aTrait tagWith: self tag.
 	self realClass: aTrait.

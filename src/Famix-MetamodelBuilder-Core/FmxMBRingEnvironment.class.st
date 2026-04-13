@@ -206,12 +206,6 @@ FmxMBRingEnvironment >> ringEnvironment [
 ]
 
 { #category : 'initialization' }
-FmxMBRingEnvironment >> setComment: aString for: aClass [
-
-	aClass comment content: aString
-]
-
-{ #category : 'initialization' }
 FmxMBRingEnvironment >> slotNamed: slotName [
 	^ (RGUnknownSlot named: slotName asSymbol) expression: #FMProperty
 ]

@@ -66,7 +66,7 @@ FmxMBTrait >> generate [
 		          overwrite: true.
 
 	aTrait tagWith: self tag.
-	self builder environment setComment: self commentWithRelations for: aTrait.
+	aTrait comment content: self commentWithRelations.
 
 	self realClass: aTrait.
 

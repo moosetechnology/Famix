@@ -65,7 +65,7 @@ FmxMBImportingContext >> generate [
 
 	aClass tagWith: self tag.
 
-	self builder environment setComment: self comment for: aClass.
+	aClass comment content: self comment.
 
 	self realClass: aClass.
 
