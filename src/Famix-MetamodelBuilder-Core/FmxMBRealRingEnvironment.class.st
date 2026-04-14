@@ -23,6 +23,7 @@ FmxMBRealRingEnvironment class >> for: aBuilder [
 FmxMBRealRingEnvironment >> addChange: aFamixChange [
 
 	aFamixChange isRequired ifFalse: [ ^ self ].
+
 	changesToApply add: aFamixChange
 ]
 

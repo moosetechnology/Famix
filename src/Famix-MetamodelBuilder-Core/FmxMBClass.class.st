@@ -167,7 +167,15 @@ FmxMBClass >> generateIsAbstractMethodIfNecessaryIn: aClass [
 	^ self == {1}' format: { aClass name asString })
 				in: aClass name
 				classSide: true
-				protocol: 'testing' ]
+				protocol: 'testing'.
+
+			self flag: #todo. "This code should never make it in the dev branch of Famix."
+			aClass classSide
+				compile: ('isAbstract
+
+	<generated>
+	^ self == {1}' format: { aClass name asString })
+				classified: 'testing' ]
 ]
 
 { #category : 'generating' }
