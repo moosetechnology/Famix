@@ -59,6 +59,12 @@ FmxMBBehavior >> addMethod: code in: class classSide: boolean protocol: protocol
 		 ifFalse: [ class ]) compile: code classified: protocol
 ]
 
+{ #category : 'generating' }
+FmxMBBehavior >> addMethod: code in: class protocol: protocol [
+
+	^ self addMethod: code in: class classSide: false protocol: protocol
+]
+
 { #category : 'accessing' }
 FmxMBBehavior >> addRelation: aRelation with: anotherClass [
 
@@ -299,7 +305,6 @@ FmxMBBehavior >> generateAddToCollectionFor: aClass [
 										 sideName capitalized asSingular.
 										 sideName })
 							in: aClass
-							classSide: false
 							protocol: #adding ] ]
 ]
 
@@ -307,6 +312,7 @@ FmxMBBehavior >> generateAddToCollectionFor: aClass [
 FmxMBBehavior >> generateAnnotationIn: aRealClass [
 
 	| aSuperclassName |
+	self flag: #todo. "Simplify"
 	aSuperclassName := self classGeneralization = self defaultSuperclass
 		                   ifTrue: [ self defaultSuperclassName ]
 		                   ifFalse: [
@@ -314,8 +320,8 @@ FmxMBBehavior >> generateAnnotationIn: aRealClass [
 					                   ifNil: [ self defaultSuperclassName ]
 					                   ifNotNil: [ :cg | cg realClass name ] ].
 
-	aRealClass classSide
-		compile: ('annotation
+	self
+		addMethod: ('annotation
 
 	<FMClass: #{1} super: #{2}>
 	<package: {3}>
@@ -325,7 +331,9 @@ FmxMBBehavior >> generateAnnotationIn: aRealClass [
 					 aSuperclassName.
 					 self builder safeAnnotationPackageName.
 					 self optionalPragma })
-		classified: 'meta'
+		in: aRealClass
+		classSide: true
+		protocol: #meta
 ]
 
 { #category : 'generating' }
@@ -344,26 +352,24 @@ FmxMBBehavior >> generateMethodsToRemoveFromTraitCompositionFor: aBehavioral [
 FmxMBBehavior >> generateNavigationGroupsFor: aClass [
 
 	self allNavigationGroups do: [ :aNavigationGroup |
-			| sideName |
+			| sideName code |
 			sideName := aNavigationGroup entity name.
-			self
-				addMethod: ((aNavigationGroup entity isMany
-						  ifTrue: [
-								  '{1}
+			code := (aNavigationGroup entity isMany
+				         ifTrue: [
+						         '{1}
 	<generated>
 	<navigation: ''{2}''>
 	^ MooseSpecializedGroup withAll: self {3} asSet' ]
-						  ifFalse: [
-								  '{1}
+				         ifFalse: [
+						         '{1}
 	<generated>
 	<navigation: ''{2}''>
 	^ MooseSpecializedGroup with: self {3}' ]) format: {
-							 (sideName , 'Group').
-							 sideName capitalized.
-							 sideName })
-				in: aClass
-				classSide: false
-				protocol: #navigation ]
+					        (sideName , 'Group').
+					        sideName capitalized.
+					        sideName }.
+
+			self addMethod: code in: aClass protocol: #navigation ]
 ]
 
 { #category : 'generating' }
@@ -386,11 +392,7 @@ FmxMBBehavior >> generateRemoteAccessors [
 { #category : 'generating' }
 FmxMBBehavior >> generateTestingMethodsIn: aClass [
 
-	self testingSelectors do: [ :aSelector |
-		aClass instanceSide compile: ('{1}\\	<generated>\	^ true' withCRs format: { aSelector }) 
-		classified: #testing. ]
-
-
+	self testingSelectors do: [ :aSelector | self addMethod: (aSelector , '\\	<generated>\	^ true') withCRs in: aClass protocol: #testing ]
 ]
 
 { #category : 'generalization' }

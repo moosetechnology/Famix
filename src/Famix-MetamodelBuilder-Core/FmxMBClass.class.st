@@ -126,11 +126,7 @@ FmxMBClass >> generateEqualsMethodFor: aClass [
 										        << (propertiesForEqualityCheck at: idx) ].
 							        2 to: propertiesForEqualityCheck size do: [ :idx | stream << '] ' ] ] ].
 
-			self
-				addMethod: code
-				in: aClass
-				classSide: false
-				protocol: #comparing ]
+			self addMethod: code in: aClass protocol: #comparing ]
 ]
 
 { #category : 'generating-methods' }
@@ -155,11 +151,7 @@ FmxMBClass >> generateHashMethodFor: aClass [
 										        << (propertiesForEqualityCheck at: idx);
 										        << ' hash ' ] ] ].
 
-			self
-				addMethod: code
-				in: aClass
-				classSide: false
-				protocol: #comparing ]
+			self addMethod: code in: aClass protocol: #comparing ]
 ]
 
 { #category : 'generating' }
@@ -213,12 +205,7 @@ FmxMBClass >> generateTestingMethodsIn: aClass [
 							selectors do: [ :sel |
 									| selectorsFromTraits |
 									selectorsFromTraits := self traitGeneralizations flatCollect: #testingSelectors.
-									(selectorsFromTraits includes: sel) ifFalse: [
-											self
-												addMethod: (sel , '\\	<generated>\	^ false') withCRs
-												in: aClass
-												classSide: false
-												protocol: #testing ] ] ] ] ].
+									(selectorsFromTraits includes: sel) ifFalse: [ self addMethod: (sel , '\\	<generated>\	^ false') withCRs in: aClass protocol: #testing ] ] ] ] ].
 
 	super generateTestingMethodsIn: aClass
 ]
