@@ -18,6 +18,22 @@ FmxMBClass >> acceptVisitor: aVisitor [
 	^ aVisitor visitClass: self.
 ]
 
+{ #category : 'generating' }
+FmxMBClass >> addMethod: code in: class classSide: boolean protocol: protocol [
+
+	self flag: #todo. "Demeter"
+	self builder environment
+		addMethod: code
+		in: class name
+		classSide: boolean
+		protocol: protocol.
+
+	self flag: #todo. "This code should never make it in the dev branch of Famix. Also we should provide the class name directly"
+	(boolean
+		 ifTrue: [ class classSide ]
+		 ifFalse: [ class ]) compile: code classified: protocol
+]
+
 { #category : 'accessing' }
 FmxMBClass >> allClassGeneralizations [
 	| result c g |
@@ -126,15 +142,11 @@ FmxMBClass >> generateEqualsMethodFor: aClass [
 										        << (propertiesForEqualityCheck at: idx) ].
 							        2 to: propertiesForEqualityCheck size do: [ :idx | stream << '] ' ] ] ].
 
-			self flag: #todo. "Demeter"
-			self builder environment
+			self
 				addMethod: code
-				in: aClass name
+				in: aClass
 				classSide: false
-				protocol: 'comparing'.
-
-			self flag: #todo. "This code should never make it in the dev branch of Famix."
-			self builder environment compile: code in: aClass instanceSide classified: #comparing ]
+				protocol: #comparing ]
 ]
 
 { #category : 'generating-methods' }
@@ -159,38 +171,25 @@ FmxMBClass >> generateHashMethodFor: aClass [
 										        << (propertiesForEqualityCheck at: idx);
 										        << ' hash ' ] ] ].
 
-			self flag: #todo. "Demeter"
-			self builder environment
+			self
 				addMethod: code
-				in: aClass name
+				in: aClass
 				classSide: false
-				protocol: 'comparing'.
-
-			self flag: #todo. "This code should never make it in the dev branch of Famix."
-			self builder environment compile: code in: aClass instanceSide classified: #comparing ]
+				protocol: #comparing ]
 ]
 
 { #category : 'generating' }
 FmxMBClass >> generateIsAbstractMethodIfNecessaryIn: aClass [
 
 	self isAbstractClass ifTrue: [
-			self flag: #todo. "Demeter"
-			self builder environment
+			self
 				addMethod: ('isAbstract
 
 	<generated>
 	^ self == {1}' format: { aClass name asString })
-				in: aClass name
+				in: aClass
 				classSide: true
-				protocol: 'testing'.
-
-			self flag: #todo. "This code should never make it in the dev branch of Famix."
-			aClass classSide
-				compile: ('isAbstract
-
-	<generated>
-	^ self == {1}' format: { aClass name asString })
-				classified: 'testing' ]
+				protocol: #testing ]
 ]
 
 { #category : 'generating' }
