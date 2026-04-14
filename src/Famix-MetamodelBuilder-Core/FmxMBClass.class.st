@@ -99,60 +99,75 @@ FmxMBClass >> generate [
 FmxMBClass >> generateEqualsMethodFor: aClass [
 
 	propertiesForEqualityCheck ifNotNil: [
-		| variableName |
-		variableName := 'a' , aClass name.
-		self builder environment
-			compile: (String streamContents: [ :stream |
-					 stream << '= '.
-					 stream << variableName.
-					 stream << '
+			| code |
+			code := String streamContents: [ :stream |
+					        | variableName |
+					        variableName := 'a' , aClass name.
+					        stream << '= '.
+					        stream << variableName.
+					        stream << '
 
 	<generated>
 	^ '.
-					 stream
-						 << variableName;
-						 << ' ';
-						 << propertiesForEqualityCheck first;
-						 << ' = self ';
-						 << propertiesForEqualityCheck first.
-					 propertiesForEqualityCheck size > 1 ifTrue: [
-						 2 to: propertiesForEqualityCheck size do: [ :idx |
-							 stream << ' and: [ '.
-							 stream
-								 << variableName;
-								 << ' ';
-								 << (propertiesForEqualityCheck at: idx);
-								 << ' = self ';
-								 << (propertiesForEqualityCheck at: idx) ].
-						 2 to: propertiesForEqualityCheck size do: [ :idx |
-						 stream << '] ' ] ] ])
-			in: aClass instanceSide
-			classified: #comparing ]
+					        stream
+						        << variableName;
+						        << ' ';
+						        << propertiesForEqualityCheck first;
+						        << ' = self ';
+						        << propertiesForEqualityCheck first.
+					        propertiesForEqualityCheck size > 1 ifTrue: [
+							        2 to: propertiesForEqualityCheck size do: [ :idx |
+									        stream << ' and: [ '.
+									        stream
+										        << variableName;
+										        << ' ';
+										        << (propertiesForEqualityCheck at: idx);
+										        << ' = self ';
+										        << (propertiesForEqualityCheck at: idx) ].
+							        2 to: propertiesForEqualityCheck size do: [ :idx | stream << '] ' ] ] ].
+
+			self flag: #todo. "Demeter"
+			self builder environment
+				addMethod: code
+				in: aClass name
+				classSide: false
+				protocol: 'comparing'.
+
+			self flag: #todo. "This code should never make it in the dev branch of Famix."
+			self builder environment compile: code in: aClass instanceSide classified: #comparing ]
 ]
 
 { #category : 'generating-methods' }
 FmxMBClass >> generateHashMethodFor: aClass [
 
 	propertiesForEqualityCheck ifNotNil: [
-		self builder environment
-			compile: (String streamContents: [ :stream |
-					 stream << 'hash'.
-					 stream << '
+			| code |
+			code := String streamContents: [ :stream |
+					        stream << 'hash'.
+					        stream << '
 
 	<generated>
 	^ '.
-					 stream
-						 << 'self ';
-						 << propertiesForEqualityCheck first;
-						 << ' hash '.
-					 propertiesForEqualityCheck size > 1 ifTrue: [
-						 2 to: propertiesForEqualityCheck size do: [ :idx |
-							 stream
-								 << 'bitXor: self ';
-								 << (propertiesForEqualityCheck at: idx);
-								 << ' hash ' ] ] ])
-			in: aClass instanceSide
-			classified: #comparing ]
+					        stream
+						        << 'self ';
+						        << propertiesForEqualityCheck first;
+						        << ' hash '.
+					        propertiesForEqualityCheck size > 1 ifTrue: [
+							        2 to: propertiesForEqualityCheck size do: [ :idx |
+									        stream
+										        << 'bitXor: self ';
+										        << (propertiesForEqualityCheck at: idx);
+										        << ' hash ' ] ] ].
+
+			self flag: #todo. "Demeter"
+			self builder environment
+				addMethod: code
+				in: aClass name
+				classSide: false
+				protocol: 'comparing'.
+
+			self flag: #todo. "This code should never make it in the dev branch of Famix."
+			self builder environment compile: code in: aClass instanceSide classified: #comparing ]
 ]
 
 { #category : 'generating' }
