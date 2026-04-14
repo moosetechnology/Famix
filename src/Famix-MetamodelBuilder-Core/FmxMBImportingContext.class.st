@@ -74,25 +74,25 @@ FmxMBImportingContext >> generate [
 { #category : 'generating-methods' }
 FmxMBImportingContext >> generateImportAssociation: aFmxMBAssociationClass in: aClass [
 
-	aClass
-		compile: ('import{1}
+	self
+		addMethod: ('import{1}
 
 	<generated>
-	^ self importAssociation: (self class fm3ClassNamed: #{1})' format:
-				 { aFmxMBAssociationClass name })
-		classified: 'importing'
+	^ self importAssociation: (self class fm3ClassNamed: #{1})' format: { aFmxMBAssociationClass name })
+		in: aClass
+		protocol: #importing
 ]
 
 { #category : 'generating-methods' }
 FmxMBImportingContext >> generateImportConcreteEntity: aFmxMBClass in: aClass [
 
-	aClass
-		compile: ('import{1}
+	self
+		addMethod: ('import{1}
 
 	<generated>
-	^ self importConcreteEntity: (self class fm3ClassNamed: #{1})' 
-				 format: { aFmxMBClass name })
-		classified: 'importing'
+	^ self importConcreteEntity: (self class fm3ClassNamed: #{1})' format: { aFmxMBClass name })
+		in: aClass
+		protocol: #importing
 ]
 
 { #category : 'generating-methods' }
@@ -113,12 +113,14 @@ FmxMBImportingContext >> generateImportIn: aClass [
 { #category : 'generating-methods' }
 FmxMBImportingContext >> generateImportingContextMetamodelIn: aClass [
 
-	aClass classSide
-		compile: ('importedMetamodel
+	self
+		addMethod: ('importedMetamodel
 
 	<generated>
 	^ {1}Model metamodel' format: { self prefix })
-		classified: 'accessing'
+		in: aClass
+		classSide: true
+		protocol: #accessing
 ]
 
 { #category : 'generating' }
@@ -132,16 +134,16 @@ FmxMBImportingContext >> generateMethodsIn: aClass [
 { #category : 'generating-methods' }
 FmxMBImportingContext >> generateShouldImportIn: aClass [
 
-	self builder classes do: [ :each | 
-		"No need to generate methods for model and groups."
-		(each isModelClass or: [ 
-			 each isMetamodelClassGroup or: [ each isAbstractClass ] ]) ifFalse: [ 
-			aClass
-				compile: ('shouldImport{1}
+	self builder classes do: [ :each |
+			"No need to generate methods for model and groups."
+			(each isModelClass or: [ each isMetamodelClassGroup or: [ each isAbstractClass ] ]) ifFalse: [
+					self
+						addMethod: ('shouldImport{1}
 
 	<generated>
 	^ self shouldImport: #{1}' format: { each name })
-				classified: 'testing' ] ]
+						in: aClass
+						protocol: #testing ] ]
 ]
 
 { #category : 'accessing' }

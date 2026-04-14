@@ -12,16 +12,16 @@ Class {
 
 { #category : 'generating' }
 FmxMBEntityCreatorTrait >> generateEntityCreationMethodFor: aClass [
-
-	self builder environment
-		compile: ('new{1}
+	self flag: #todo. "Do we need the real class? Isn't it the parameter?"
+	self
+		addMethod: ('new{1}
 
 	<generated>
-	^ self add: {2} new' format: { 
+	^ self add: {2} new' format: {
 					 aClass name.
 					 aClass fullName })
 		in: self realClass
-		classified: 'entity creation'
+		protocol: #'entity creation'
 ]
 
 { #category : 'generating' }
@@ -38,15 +38,16 @@ FmxMBEntityCreatorTrait >> generateEntityCreationMethods [
 { #category : 'generating' }
 FmxMBEntityCreatorTrait >> generateNamedEntityCreationMethodFor: aClass [
 
-	^ self builder environment
-		  compile: ('new{1}Named: aName
+	self flag: #todo. "Do we need the real class? Isn't it the parameter?"
+	self
+		addMethod: ('new{1}Named: aName
 
 	<generated>
-	^ self add: ({2} named: aName)' format: { 
-					   aClass name.
-					   aClass fullName })
-		  in: self realClass
-		  classified: 'entity creation'
+	^ self add: ({2} named: aName)' format: {
+					 aClass name.
+					 aClass fullName })
+		in: self realClass
+		protocol: #'entity creation'
 ]
 
 { #category : 'initialization' }

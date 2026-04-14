@@ -81,20 +81,24 @@ FmxMBModel >> generateRootMetamodelMethodIn: aClass [
 { #category : 'generating-methods' }
 FmxMBModel >> generateSubmetamodelsMethodIn: aModelClass [
 
-	self builder allSubBuilders ifNotEmpty: [ :subBuilders | 
-		aModelClass classSide
-			compile: ('allSubmetamodelsPackagesNames
+	self builder allSubBuilders ifNotEmpty: [ :subBuilders |
+			| code |
+			code := String streamContents: [ :stream |
+					        | packages |
+					        stream nextPutAll: 'allSubmetamodelsPackagesNames
 	<generated>
-	^ #({1})' format: { (String streamContents: [ :stream | 
-						  | packages |
-						  packages := (subBuilders collect: [ :subBuilder | 
-							               subBuilder configuration packageName ])
-							              asOrderedCollection.
-						  packages sort: #yourself descending.
-						  packages
-							  do: [ :package | stream print: package ]
-							  separatedBy: [ stream space ] ]) })
-			classified: 'accessing' ]
+	^ #('.
+
+					        packages := (subBuilders collect: [ :subBuilder | subBuilder configuration packageName ]) asOrderedCollection sorted: #yourself descending.
+					        packages do: [ :package | stream print: package ] separatedBy: [ stream space ].
+
+					        stream nextPut: $) ].
+
+			self
+				addMethod: code
+				in: aModelClass
+				classSide: true
+				protocol: #accessing ]
 ]
 
 { #category : 'generating-methods' }

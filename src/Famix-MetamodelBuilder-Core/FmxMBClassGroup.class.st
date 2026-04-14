@@ -29,12 +29,14 @@ FmxMBClassGroup >> generate [
 { #category : 'generating-methods' }
 FmxMBClassGroup >> generateMooseGroupAnnotationIn: aRealClass as: aName superclass: aSuperclass [
 
-	aRealClass classSide
-		compile: ('annotation{1}
+	self
+		addMethod: ('annotation{1}
 	<generated>
 	<mooseGroup>
 	^ {1}' format: { aName })
-		classified: 'groups'
+		in: aRealClass
+		classSide: true
+		protocol: #groups
 ]
 
 { #category : 'accessing' }
