@@ -25,7 +25,7 @@ FmxMBModel >> generate [
 ]
 
 { #category : 'generating-methods' }
-FmxMBModel >> generateAnnotationMethodIn: aModelClass [
+FmxMBModel >> generateAnnotationIn: aModelClass [
 
 	aModelClass classSide
 		compile: ('annotation
@@ -60,7 +60,6 @@ FmxMBModel >> generateFileImportMethodsIn: aModelClass [
 { #category : 'generating-methods' }
 FmxMBModel >> generateModelMethods: aModelClass [
 
-	self generateAnnotationMethodIn: aModelClass.
 	self generateFileImportMethodsIn: aModelClass.
 	self generateSubmetamodelsMethodIn: aModelClass
 ]
