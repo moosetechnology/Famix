@@ -78,6 +78,12 @@ FmxMBRingEnvironment >> builder: anObject [
 	builder := anObject
 ]
 
+{ #category : 'cleaning' }
+FmxMBRingEnvironment >> changesOfType: aClass [
+
+	^ changesToApply select: [ :change | change isKindOf: aClass ]
+]
+
 { #category : 'testing' }
 FmxMBRingEnvironment >> changesToApply [
 	"Return the list of changes to apply if a regeneration would cause changes in the system."
@@ -98,10 +104,9 @@ FmxMBRingEnvironment >> collectChangesToApply [
 	resolvedPackages := ringEnvironment ask packages select: [ :each | each isRingResolved ].
 	resolvedClasses := ringEnvironment ask behaviors select: [ :each | each isRingResolved and: [ each superclass isRingResolved ] ].
 
-	self recordPackagesChangesFor: resolvedPackages.
 	self recordClassesChangesFor: resolvedClasses.
 	self recordRemovalOfGeneratedEntitiesIn: resolvedPackages notPresentIn: resolvedClasses.
-	
+
 	"Reject changes that would not change anything on the current system."
 	changesToApply := changesToApply select: [ :change | change isRequired ].
 ]
@@ -133,29 +138,23 @@ FmxMBRingEnvironment >> createClassNamed: className superclass: superclassName t
 	composition := RGTraitComposition parent: aClass.
 	aClass traitComposition: composition.
 
-	traitNames do: [ :each | 
-		composition addTransformation:
-			(self ringEnvironment ensureTraitNamed: each) ].
+	traitNames do: [ :each | composition addTransformation: (self ringEnvironment ensureTraitNamed: each) ].
 
-	aClass package:
-		(self ringEnvironment ensurePackageNamed: packageName).
+	self flag: #todo. "Should not make it in dev branch of Moose. The ring package creation should be removed."
+	self ensurePackageNamed: packageName.
+	aClass package: (self ringEnvironment ensurePackageNamed: packageName).
 	aClass layout makeResolved.
 
-	slots do: [ :slotInBadEnvironment | 
-		| slot |
-		slot := slotInBadEnvironment needsFullDefinition
-			        ifTrue: [ 
-				        (RGUnknownSlot
-					         named: slotInBadEnvironment name
-					         parent: aClass layout)
-					        expression: slotInBadEnvironment expression;
-					        yourself ]
-			        ifFalse: [ 
-				        RGInstanceVariableSlot
-					        named: slotInBadEnvironment name
-					        parent: aClass layout ].
-		aClass layout addSlot: slot.
-		slot propertyNamed: #isGenerated put: true ].
+	slots do: [ :slotInBadEnvironment |
+			| slot |
+			slot := slotInBadEnvironment needsFullDefinition
+				        ifTrue: [
+						        (RGUnknownSlot named: slotInBadEnvironment name parent: aClass layout)
+							        expression: slotInBadEnvironment expression;
+							        yourself ]
+				        ifFalse: [ RGInstanceVariableSlot named: slotInBadEnvironment name parent: aClass layout ].
+			aClass layout addSlot: slot.
+			slot propertyNamed: #isGenerated put: true ].
 
 	^ aClass
 ]
@@ -199,6 +198,14 @@ FmxMBRingEnvironment >> createTraitNamed: traitName uses: traitNames slots: slot
 		slot propertyNamed: #isGenerated put: true ].
 
 	^ aTrait
+]
+
+{ #category : 'private' }
+FmxMBRingEnvironment >> ensurePackageNamed: packageName [
+
+	((self changesOfType: FmxPackageAddition) anySatisfy: [ :change | change packageName = packageName ]) ifTrue: [ ^ self ].
+
+	changesToApply add: (FmxPackageAddition named: packageName)
 ]
 
 { #category : 'testing' }
@@ -366,14 +373,6 @@ FmxMBRingEnvironment >> recordMethodsAdoptionsOf: realClass to: anRGClass realCl
 		collect: [ :selectorOfMethodToUpdate | anRGClass methodNamed: selectorOfMethodToUpdate ]
 		thenSelect: [ :method | realClass needToAdaptToMethod: method ])
 		ifNotEmpty: [ :methods | methods do: [ :method | self addMethod: method sourceCode in: aClassName classSide: anRGClass isClassSide protocol: method protocol ] ]
-]
-
-{ #category : 'installing' }
-FmxMBRingEnvironment >> recordPackagesChangesFor: resolvedPackages [
-
-	resolvedPackages
-		reject: [ :each | self packageOrganizer hasPackage: each name ]
-		thenDo: [ :each | changesToApply add: (FmxPackageAddition named: each name) ]
 ]
 
 { #category : 'accessing' }

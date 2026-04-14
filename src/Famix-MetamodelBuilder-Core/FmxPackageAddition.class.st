@@ -46,6 +46,12 @@ FmxPackageAddition >> apply [
 	self packageOrganizer ensurePackage: self packageName
 ]
 
+{ #category : 'testing' }
+FmxPackageAddition >> isRequired [
+
+	^ (self packageOrganizer hasPackage: self packageName) not
+]
+
 { #category : 'accessing' }
 FmxPackageAddition >> packageName [ 
 
