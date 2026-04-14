@@ -19,18 +19,10 @@ FmxMBRealRingEnvironment class >> for: aBuilder [
 		yourself.
 ]
 
-{ #category : 'adding' }
-FmxMBRealRingEnvironment >> addChange: aFamixChange [
-
-	aFamixChange isRequired ifFalse: [ ^ self ].
-
-	changesToApply add: aFamixChange
-]
-
 { #category : 'installing' }
 FmxMBRealRingEnvironment >> addMethod: sourceCode in: aClassName classSide: aBoolean protocol: protocol [
 
-	self addChange: (FmxMethodAddition
+	changesToApply add: (FmxMethodAddition
 			 className: aClassName
 			 isClassSide: aBoolean
 			 sourceCode: sourceCode
@@ -42,6 +34,7 @@ FmxMBRealRingEnvironment >> apply [
 
 	self collectChangesToApply.
 	"Sort the changes before applying them"
+	
 	(changesToApply sorted: #priority ascending) do: [ :change | change apply ]
 ]
 
@@ -107,7 +100,10 @@ FmxMBRealRingEnvironment >> collectChangesToApply [
 
 	self recordPackagesChangesFor: resolvedPackages.
 	self recordClassesChangesFor: resolvedClasses.
-	self recordRemovalOfGeneratedEntitiesIn: resolvedPackages notPresentIn: resolvedClasses
+	self recordRemovalOfGeneratedEntitiesIn: resolvedPackages notPresentIn: resolvedClasses.
+	
+	"Reject changes that would not change anything on the current system."
+	changesToApply := changesToApply select: [ :change | change isRequired ].
 ]
 
 { #category : 'installing' }
