@@ -363,7 +363,7 @@ FamixMetamodelBuilder >> importingContextName [
 FamixMetamodelBuilder >> initialize [
 
 	super initialize.
-	environment := FmxMBRealRingEnvironment for: self.
+	environment := FmxMBRingEnvironment for: self.
 
 	configuration := FmxMBConfiguration new.
 

@@ -1,6 +1,6 @@
 Class {
 	#name : 'FmxMBStubEnvironment',
-	#superclass : 'FmxMBRealRingEnvironment',
+	#superclass : 'FmxMBRingEnvironment',
 	#category : 'Famix-MetamodelBuilder-Tests-Helpers',
 	#package : 'Famix-MetamodelBuilder-Tests',
 	#tag : 'Helpers'

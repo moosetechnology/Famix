@@ -1,5 +1,5 @@
 Class {
-	#name : 'FmxMBRealRingEnvironment',
+	#name : 'FmxMBRingEnvironment',
 	#superclass : 'Object',
 	#instVars : [
 		'changesToApply',
@@ -12,7 +12,7 @@ Class {
 }
 
 { #category : 'instance creation' }
-FmxMBRealRingEnvironment class >> for: aBuilder [
+FmxMBRingEnvironment class >> for: aBuilder [
 
 	^ self new 
 		builder: aBuilder;
@@ -20,7 +20,7 @@ FmxMBRealRingEnvironment class >> for: aBuilder [
 ]
 
 { #category : 'installing' }
-FmxMBRealRingEnvironment >> addMethod: sourceCode in: aClassName classSide: aBoolean protocol: protocol [
+FmxMBRingEnvironment >> addMethod: sourceCode in: aClassName classSide: aBoolean protocol: protocol [
 
 	changesToApply add: (FmxMethodAddition
 			 className: aClassName
@@ -30,7 +30,7 @@ FmxMBRealRingEnvironment >> addMethod: sourceCode in: aClassName classSide: aBoo
 ]
 
 { #category : 'installing' }
-FmxMBRealRingEnvironment >> apply [
+FmxMBRingEnvironment >> apply [
 
 	self collectChangesToApply.
 	"Sort the changes before applying them"
@@ -39,47 +39,47 @@ FmxMBRealRingEnvironment >> apply [
 ]
 
 { #category : 'accessing' }
-FmxMBRealRingEnvironment >> basicGroupSuperclass [
+FmxMBRingEnvironment >> basicGroupSuperclass [
 
 	^ self ringEnvironment ensureClassNamed: #MooseSpecializedGroup
 ]
 
 { #category : 'accessing' }
-FmxMBRealRingEnvironment >> basicImportingContextSuperclass [
+FmxMBRingEnvironment >> basicImportingContextSuperclass [
 
 	^ self ringEnvironment ensureClassNamed: #FamixImportingContext
 ]
 
 { #category : 'accessing' }
-FmxMBRealRingEnvironment >> basicModelSuperclass [
+FmxMBRingEnvironment >> basicModelSuperclass [
 
 	^ self ringEnvironment ensureClassNamed: #MooseModel
 ]
 
 { #category : 'accessing' }
-FmxMBRealRingEnvironment >> basicSuperclass [
+FmxMBRingEnvironment >> basicSuperclass [
 
 	^ self ringEnvironment ensureClassNamed: #MooseEntity
 ]
 
 { #category : 'accessing' }
-FmxMBRealRingEnvironment >> basicTrait [
+FmxMBRingEnvironment >> basicTrait [
 
 	^ self ringEnvironment ensureClassNamed: #Trait
 ]
 
 { #category : 'accessing' }
-FmxMBRealRingEnvironment >> builder [
+FmxMBRingEnvironment >> builder [
 	^ builder
 ]
 
 { #category : 'accessing' }
-FmxMBRealRingEnvironment >> builder: anObject [
+FmxMBRingEnvironment >> builder: anObject [
 	builder := anObject
 ]
 
 { #category : 'testing' }
-FmxMBRealRingEnvironment >> changesToApply [
+FmxMBRingEnvironment >> changesToApply [
 	"Return the list of changes to apply if a regeneration would cause changes in the system."
 
 	self collectChangesToApply.
@@ -87,13 +87,13 @@ FmxMBRealRingEnvironment >> changesToApply [
 ]
 
 { #category : 'accessing' }
-FmxMBRealRingEnvironment >> classNamed: aClassName [
+FmxMBRingEnvironment >> classNamed: aClassName [
 
 	^ self ringEnvironment ask behaviorNamed: aClassName
 ]
 
 { #category : 'installing' }
-FmxMBRealRingEnvironment >> collectChangesToApply [
+FmxMBRingEnvironment >> collectChangesToApply [
 	| resolvedClasses resolvedPackages |
 	resolvedPackages := ringEnvironment ask packages select: [ :each | each isRingResolved ].
 	resolvedClasses := ringEnvironment ask behaviors select: [ :each | each isRingResolved and: [ each superclass isRingResolved ] ].
@@ -107,13 +107,13 @@ FmxMBRealRingEnvironment >> collectChangesToApply [
 ]
 
 { #category : 'installing' }
-FmxMBRealRingEnvironment >> compile: aSource in: aClass classified: aProtocol [
+FmxMBRingEnvironment >> compile: aSource in: aClass classified: aProtocol [
 
 	aClass compile: aSource classified: aProtocol.
 ]
 
 { #category : 'installing' }
-FmxMBRealRingEnvironment >> compile: aSource in: aClass classified: aProtocol package: aPackageName [
+FmxMBRingEnvironment >> compile: aSource in: aClass classified: aProtocol package: aPackageName [
 
 	| category |
 	category := '*' , aPackageName.
@@ -122,7 +122,7 @@ FmxMBRealRingEnvironment >> compile: aSource in: aClass classified: aProtocol pa
 ]
 
 { #category : 'as yet unclassified' }
-FmxMBRealRingEnvironment >> createClassNamed: className superclass: superclassName traitNames: traitNames slots: slots in: packageName [
+FmxMBRingEnvironment >> createClassNamed: className superclass: superclassName traitNames: traitNames slots: slots in: packageName [
 
 	| aClass existingClass composition |
 	existingClass := self ringEnvironment ask behaviorNamed: className.
@@ -161,7 +161,7 @@ FmxMBRealRingEnvironment >> createClassNamed: className superclass: superclassNa
 ]
 
 { #category : 'as yet unclassified' }
-FmxMBRealRingEnvironment >> createTraitNamed: traitName uses: traitNames slots: slots in: packageName [
+FmxMBRingEnvironment >> createTraitNamed: traitName uses: traitNames slots: slots in: packageName [
 
 	| aPackage aTrait existingClass composition |
 	existingClass := self ringEnvironment ask behaviorNamed:
@@ -202,13 +202,13 @@ FmxMBRealRingEnvironment >> createTraitNamed: traitName uses: traitNames slots: 
 ]
 
 { #category : 'testing' }
-FmxMBRealRingEnvironment >> hasBehaviorNamed: aClassName [
+FmxMBRingEnvironment >> hasBehaviorNamed: aClassName [
 
 	^ self ringEnvironment ask includesClassNamed: aClassName
 ]
 
 { #category : 'initialization' }
-FmxMBRealRingEnvironment >> initialize [
+FmxMBRingEnvironment >> initialize [
 
 	super initialize.
 	changesToApply := OrderedCollection new.
@@ -222,7 +222,7 @@ FmxMBRealRingEnvironment >> initialize [
 ]
 
 { #category : 'installing' }
-FmxMBRealRingEnvironment >> recordAdoptionOfClassDefinitionFrom: currentClass to: anRGClassModel [
+FmxMBRingEnvironment >> recordAdoptionOfClassDefinitionFrom: currentClass to: anRGClassModel [
 
 	| currentCustomSlots currentCustomSlotNames modelSlotDefinitions currentGeneratedSlots modelGeneratedSlots slotRemovals |
 	(currentClass needToAdaptTo: anRGClassModel) ifFalse: [ ^ self ].
@@ -267,7 +267,7 @@ FmxMBRealRingEnvironment >> recordAdoptionOfClassDefinitionFrom: currentClass to
 ]
 
 { #category : 'installing' }
-FmxMBRealRingEnvironment >> recordClassAdditionFromClass: aRGClass traits: traitsString slots: slotsString classSlots: classSlotsString sharedVariables: sharedVariablesString package: packageName tag: tagName [
+FmxMBRingEnvironment >> recordClassAdditionFromClass: aRGClass traits: traitsString slots: slotsString classSlots: classSlotsString sharedVariables: sharedVariablesString package: packageName tag: tagName [
 
 	self flag: #todo. "When P12 will be the minimal version used we should use the ShiftClassBuilder instead of manipulation a string. This would make the code a lot easier and we would not rely on compiler evaluation of strings to generate the classes."
 	changesToApply add: (FmxClassAddition creationCode: ('Smalltalk classInstaller
@@ -295,7 +295,7 @@ FmxMBRealRingEnvironment >> recordClassAdditionFromClass: aRGClass traits: trait
 ]
 
 { #category : 'installing' }
-FmxMBRealRingEnvironment >> recordClassChangesFor: aRGClass [
+FmxMBRingEnvironment >> recordClassChangesFor: aRGClass [
 
 	| realClass |
 	realClass := self class environment classNamed: aRGClass name.
@@ -316,7 +316,7 @@ FmxMBRealRingEnvironment >> recordClassChangesFor: aRGClass [
 ]
 
 { #category : 'installing' }
-FmxMBRealRingEnvironment >> recordClassCommentChangeOf: realClass to: anRGClass [
+FmxMBRingEnvironment >> recordClassCommentChangeOf: realClass to: anRGClass [
 
 	| newComment |
 	newComment := anRGClass comment content.
@@ -326,7 +326,7 @@ FmxMBRealRingEnvironment >> recordClassCommentChangeOf: realClass to: anRGClass 
 ]
 
 { #category : 'installing' }
-FmxMBRealRingEnvironment >> recordClassesChangesFor: resolvedClasses [
+FmxMBRingEnvironment >> recordClassesChangesFor: resolvedClasses [
 	| sorted notSorted toMove |
 	resolvedClasses ifEmpty: [ ^ self ].
 	
@@ -343,7 +343,7 @@ FmxMBRealRingEnvironment >> recordClassesChangesFor: resolvedClasses [
 ]
 
 { #category : 'installing' }
-FmxMBRealRingEnvironment >> recordMethodsAdoptionsOf: realClass to: anRGClass realClassName: aClassName [
+FmxMBRingEnvironment >> recordMethodsAdoptionsOf: realClass to: anRGClass realClassName: aClassName [
 	| generatedMethodsOfRealClass generatedMethodNamesOfRealClass |
 	generatedMethodsOfRealClass := realClass
 		ifNil: [ {} ]
@@ -369,7 +369,7 @@ FmxMBRealRingEnvironment >> recordMethodsAdoptionsOf: realClass to: anRGClass re
 ]
 
 { #category : 'installing' }
-FmxMBRealRingEnvironment >> recordPackagesChangesFor: resolvedPackages [
+FmxMBRingEnvironment >> recordPackagesChangesFor: resolvedPackages [
 
 	resolvedPackages
 		reject: [ :each | self packageOrganizer hasPackage: each name ]
@@ -377,7 +377,7 @@ FmxMBRealRingEnvironment >> recordPackagesChangesFor: resolvedPackages [
 ]
 
 { #category : 'accessing' }
-FmxMBRealRingEnvironment >> recordRemovalOfGeneratedEntitiesIn: resolvedPackages notPresentIn: resolvedClasses [
+FmxMBRingEnvironment >> recordRemovalOfGeneratedEntitiesIn: resolvedPackages notPresentIn: resolvedClasses [
 	"Since the last generation it is possible some behaviorals were removed from the generator. In that case we should remove them. We will remove all classes and traits of Famix that are not part of the current generator."
 
 	resolvedPackages
@@ -389,24 +389,24 @@ FmxMBRealRingEnvironment >> recordRemovalOfGeneratedEntitiesIn: resolvedPackages
 ]
 
 { #category : 'public registration' }
-FmxMBRealRingEnvironment >> registerPackage: aPackageName [
+FmxMBRingEnvironment >> registerPackage: aPackageName [
 
 	^ self ringEnvironment ensurePackageNamed: aPackageName.
 
 ]
 
 { #category : 'accessing' }
-FmxMBRealRingEnvironment >> ringEnvironment [
+FmxMBRingEnvironment >> ringEnvironment [
 	^ ringEnvironment
 ]
 
 { #category : 'accessing' }
-FmxMBRealRingEnvironment >> slotNamed: slotName [
+FmxMBRingEnvironment >> slotNamed: slotName [
 	^ (RGUnknownSlot named: slotName asSymbol) expression: #FMProperty
 ]
 
 { #category : 'accessing' }
-FmxMBRealRingEnvironment >> slotNamed: slotName cardinality: cardinality type: type opposite: oppositeName [
+FmxMBRingEnvironment >> slotNamed: slotName cardinality: cardinality type: type opposite: oppositeName [
 
 	| cardinalityClassName |
 	
@@ -420,7 +420,7 @@ FmxMBRealRingEnvironment >> slotNamed: slotName cardinality: cardinality type: t
 ]
 
 { #category : 'accessing' }
-FmxMBRealRingEnvironment >> slotNamed: slotName defaultValue: aValue [
+FmxMBRingEnvironment >> slotNamed: slotName defaultValue: aValue [
 
 	aValue ifNil: [ ^ self slotNamed: slotName ].
 	^ (RGUnknownSlot named: slotName asSymbol) expression:
@@ -428,7 +428,7 @@ FmxMBRealRingEnvironment >> slotNamed: slotName defaultValue: aValue [
 ]
 
 { #category : 'installing' }
-FmxMBRealRingEnvironment >> traitStringFrom: realClass to: aRGClass [
+FmxMBRingEnvironment >> traitStringFrom: realClass to: aRGClass [
 
 	"We need to collect the generated traits + the custom traits added by the user."
 
