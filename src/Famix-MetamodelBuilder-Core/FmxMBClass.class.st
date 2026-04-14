@@ -18,22 +18,6 @@ FmxMBClass >> acceptVisitor: aVisitor [
 	^ aVisitor visitClass: self.
 ]
 
-{ #category : 'generating' }
-FmxMBClass >> addMethod: code in: class classSide: boolean protocol: protocol [
-
-	self flag: #todo. "Demeter"
-	self builder environment
-		addMethod: code
-		in: class name
-		classSide: boolean
-		protocol: protocol.
-
-	self flag: #todo. "This code should never make it in the dev branch of Famix. Also we should provide the class name directly"
-	(boolean
-		 ifTrue: [ class classSide ]
-		 ifFalse: [ class ]) compile: code classified: protocol
-]
-
 { #category : 'accessing' }
 FmxMBClass >> allClassGeneralizations [
 	| result c g |
@@ -206,17 +190,18 @@ FmxMBClass >> generateRemotes [
 
 { #category : 'generating-methods' }
 FmxMBClass >> generateRootMetamodelMethodIn: aClass [
+
 	self isRoot ifFalse: [ ^ self ].
 
-	self builder model
-		ifNotNil: [ :model | 
-			aClass classSide
-				compile:
-					('metamodel
+	self builder model ifNotNil: [ :model |
+			self
+				addMethod: ('metamodel
 
 	<generated>
-	^ {1} metamodel' format: {model fullName})
-				classified: 'meta' ]
+	^ {1} metamodel' format: { model fullName })
+				in: aClass
+				classSide: true
+				protocol: #meta ]
 ]
 
 { #category : 'generating-methods' }
@@ -229,7 +214,11 @@ FmxMBClass >> generateTestingMethodsIn: aClass [
 									| selectorsFromTraits |
 									selectorsFromTraits := self traitGeneralizations flatCollect: #testingSelectors.
 									(selectorsFromTraits includes: sel) ifFalse: [
-										aClass instanceSide compile: ('{1}\\	<generated>\	^ false' withCRs format: { sel }) classified: #testing ] ] ] ] ].
+											self
+												addMethod: (sel , '\\	<generated>\	^ false') withCRs
+												in: aClass
+												classSide: false
+												protocol: #testing ] ] ] ] ].
 
 	super generateTestingMethodsIn: aClass
 ]

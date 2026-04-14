@@ -43,6 +43,22 @@ FmxMBBehavior >> addAllTransitiveTraitsIn: aCollection [
 	^ aCollection
 ]
 
+{ #category : 'generating' }
+FmxMBBehavior >> addMethod: code in: class classSide: boolean protocol: protocol [
+
+	self flag: #todo. "Demeter"
+	self builder environment
+		addMethod: code
+		in: class name
+		classSide: boolean
+		protocol: protocol.
+
+	self flag: #todo. "This code should never make it in the dev branch of Famix. Also we should provide the class name directly"
+	(boolean
+		 ifTrue: [ class classSide ]
+		 ifFalse: [ class ]) compile: code classified: protocol
+]
+
 { #category : 'accessing' }
 FmxMBBehavior >> addRelation: aRelation with: anotherClass [
 
@@ -269,19 +285,22 @@ FmxMBBehavior >> generateAccessors [
 
 { #category : 'generating' }
 FmxMBBehavior >> generateAddToCollectionFor: aClass [
+
 	self relations
 		collect: #side
-		thenDo: [ :side | 
-			side isMany
-				ifTrue: [ | sideName |
-					sideName := side name.
-					self builder environment
-						compile:
-							('add{1}: anObject
+		thenDo: [ :side |
+				side isMany ifTrue: [
+						| sideName |
+						sideName := side name.
+						self
+							addMethod: ('add{1}: anObject
 	<generated>
-	^ self {2} add: anObject' format: {sideName capitalized asSingular . sideName})
-						in: aClass instanceSide
-						classified: #adding ] ]
+	^ self {2} add: anObject' format: {
+										 sideName capitalized asSingular.
+										 sideName })
+							in: aClass
+							classSide: false
+							protocol: #adding ] ]
 ]
 
 { #category : 'generating' }
@@ -323,24 +342,28 @@ FmxMBBehavior >> generateMethodsToRemoveFromTraitCompositionFor: aBehavioral [
 
 { #category : 'generating' }
 FmxMBBehavior >> generateNavigationGroupsFor: aClass [
-	self allNavigationGroups
-		do: [ :aNavigationGroup | 
+
+	self allNavigationGroups do: [ :aNavigationGroup |
 			| sideName |
 			sideName := aNavigationGroup entity name.
-
-			self builder environment
-				compile:
-					((aNavigationGroup entity isMany
-						ifTrue: [ '{1}
+			self
+				addMethod: ((aNavigationGroup entity isMany
+						  ifTrue: [
+								  '{1}
 	<generated>
 	<navigation: ''{2}''>
 	^ MooseSpecializedGroup withAll: self {3} asSet' ]
-						ifFalse: [ '{1}
+						  ifFalse: [
+								  '{1}
 	<generated>
 	<navigation: ''{2}''>
-	^ MooseSpecializedGroup with: self {3}' ]) format: {(sideName , 'Group') . sideName capitalized . sideName})
-				in: aClass instanceSide
-				classified: #navigation ]
+	^ MooseSpecializedGroup with: self {3}' ]) format: {
+							 (sideName , 'Group').
+							 sideName capitalized.
+							 sideName })
+				in: aClass
+				classSide: false
+				protocol: #navigation ]
 ]
 
 { #category : 'generating' }
