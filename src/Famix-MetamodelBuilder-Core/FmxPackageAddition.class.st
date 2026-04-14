@@ -49,7 +49,7 @@ FmxPackageAddition >> apply [
 { #category : 'testing' }
 FmxPackageAddition >> isRequired [
 
-	^ (self packageOrganizer hasPackage: self packageName) not
+	^ self systemPackage isNil
 ]
 
 { #category : 'accessing' }
@@ -71,4 +71,10 @@ FmxPackageAddition >> printOn: aStream [
 		nextPut: $(;
 		nextPutAll: (packageName ifNil: [ #unamed ]);
 		nextPut: $)
+]
+
+{ #category : 'accessing' }
+FmxPackageAddition >> systemPackage [
+
+	^ self packageOrganizer packageNamed: self packageName ifAbsent: [ nil ]
 ]

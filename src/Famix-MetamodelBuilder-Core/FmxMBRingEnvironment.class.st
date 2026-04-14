@@ -100,12 +100,11 @@ FmxMBRingEnvironment >> classNamed: aClassName [
 
 { #category : 'installing' }
 FmxMBRingEnvironment >> collectChangesToApply [
-	| resolvedClasses resolvedPackages |
-	resolvedPackages := ringEnvironment ask packages select: [ :each | each isRingResolved ].
+	| resolvedClasses |
 	resolvedClasses := ringEnvironment ask behaviors select: [ :each | each isRingResolved and: [ each superclass isRingResolved ] ].
 
 	self recordClassesChangesFor: resolvedClasses.
-	self recordRemovalOfGeneratedEntitiesIn: resolvedPackages notPresentIn: resolvedClasses.
+	self recordRemovalOfGeneratedEntitiesNotPresentIn: resolvedClasses.
 
 	"Reject changes that would not change anything on the current system."
 	changesToApply := changesToApply select: [ :change | change isRequired ].
@@ -376,15 +375,19 @@ FmxMBRingEnvironment >> recordMethodsAdoptionsOf: realClass to: anRGClass realCl
 ]
 
 { #category : 'accessing' }
-FmxMBRingEnvironment >> recordRemovalOfGeneratedEntitiesIn: resolvedPackages notPresentIn: resolvedClasses [
+FmxMBRingEnvironment >> recordRemovalOfGeneratedEntitiesNotPresentIn: resolvedClasses [
 	"Since the last generation it is possible some behaviorals were removed from the generator. In that case we should remove them. We will remove all classes and traits of Famix that are not part of the current generator."
 
-	resolvedPackages
-		collect: [ :e | e name asPackageIfAbsent: [ nil ] ]
-		thenDo: [ :package | 
-			package
-				ifNotNil:
-					[ package definedClasses select: #isMetamodelEntity thenDo: [ :class | resolvedClasses detect: [ :rgClass | rgClass name = class name ] ifNone: [ changesToApply add: (FmxClassRemoval class: class) ] ] ] ]
+	(self changesOfType: FmxPackageAddition)
+		collect: #systemPackage
+		thenDo: [ :package |
+				package ifNotNil: [
+						package definedClasses
+							select: #isMetamodelEntity
+							thenDo: [ :class |
+									resolvedClasses
+										detect: [ :rgClass | rgClass name = class name ]
+										ifNone: [ changesToApply add: (FmxClassRemoval class: class) ] ] ] ]
 ]
 
 { #category : 'public registration' }
