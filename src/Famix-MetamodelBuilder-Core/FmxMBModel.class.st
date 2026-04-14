@@ -27,14 +27,16 @@ FmxMBModel >> generate [
 { #category : 'generating-methods' }
 FmxMBModel >> generateAnnotationIn: aModelClass [
 
-	aModelClass classSide
-		compile: ('annotation
+	self
+		addMethod: ('annotation
 	<FMClass: #{1} super: #MooseModel>
 	<package: {2}>
-	<generated>' format: { 
+	<generated>' format: {
 					 self fullName.
 					 self builder safeAnnotationPackageName })
-		classified: 'meta'
+		in: aModelClass
+		classSide: true
+		protocol: #meta
 ]
 
 { #category : 'generating-methods' }

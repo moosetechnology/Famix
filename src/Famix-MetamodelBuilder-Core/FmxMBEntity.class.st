@@ -76,6 +76,7 @@ FmxMBEntity >> name [
 
 { #category : 'accessing' }
 FmxMBEntity >> name: anObject [
+
 	name := anObject
 ]
 
