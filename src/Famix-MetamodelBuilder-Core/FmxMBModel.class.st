@@ -42,21 +42,24 @@ FmxMBModel >> generateAnnotationIn: aModelClass [
 { #category : 'generating-methods' }
 FmxMBModel >> generateFileImportMethodsIn: aModelClass [
 
-	self builder configuration shouldGenerateFileImportHelpers ifFalse: [ 
-		^ self ].
+	self builder configuration shouldGenerateFileImportHelpers ifFalse: [ ^ self ].
 
-	aModelClass classSide
-		compile: 'canBeImportedFromFile
+	self
+		addMethod: 'canBeImportedFromFile
 	<generated>
 	^true'
-		classified: 'testing'.
+		in: aModelClass
+		classSide: true
+		protocol: #testing.
 
-	aModelClass classSide
-		compile: ('importingContextClass
+	self
+		addMethod: ('importingContextClass
 
 	<generated>
 	^ {1}' format: { self builder importingContextName })
-		classified: 'accessing'
+		in: aModelClass
+		classSide: true
+		protocol: #accessing
 ]
 
 { #category : 'generating-methods' }

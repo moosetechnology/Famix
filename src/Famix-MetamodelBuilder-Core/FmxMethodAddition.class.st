@@ -44,10 +44,12 @@ FmxMethodAddition >> isRequired [
 	^ self realClass
 		  ifNil: [ true ]
 		  ifNotNil: [ :class |
-				  class methods
-					  detect: [ :method | method sourceCode = sourceCode ]
-					  ifFound: [ :method | (method protocolName = protocol) not ]
-					  ifNone: [ true ] ]
+				  class
+					  compiledMethodAt: (self class compiler
+							   permitUndeclared: true;
+							   compile: sourceCode) selector
+					  ifPresent: [ :method | (method hasPragmaNamed: #generated) and: (method sourceCode ~= sourceCode or: [ (method protocolName = protocol) not ]) ]
+					  ifAbsent: [ true ] ]
 ]
 
 { #category : 'printing' }
