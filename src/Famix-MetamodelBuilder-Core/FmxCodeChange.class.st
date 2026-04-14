@@ -38,6 +38,12 @@ FmxCodeChange >> apply [
 	self subclassResponsibility
 ]
 
+{ #category : 'testing' }
+FmxCodeChange >> isRequired [
+
+	^ true
+]
+
 { #category : 'accessing' }
 FmxCodeChange >> priority [
 

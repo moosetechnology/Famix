@@ -38,6 +38,18 @@ FmxMethodAddition >> apply [
 	self realClass compile: sourceCode classified: protocol
 ]
 
+{ #category : 'testing' }
+FmxMethodAddition >> isRequired [
+
+	^ self realClass
+		  ifNil: [ true ]
+		  ifNotNil: [ :class |
+				  class methods
+					  detect: [ :method | method sourceCode = sourceCode ]
+					  ifFound: [ :method | (method protocolName = protocol) not ]
+					  ifNone: [ true ] ]
+]
+
 { #category : 'printing' }
 FmxMethodAddition >> printOn: aStream [
 

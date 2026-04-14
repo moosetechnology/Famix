@@ -158,13 +158,16 @@ FmxMBClass >> generateHashMethodFor: aClass [
 { #category : 'generating' }
 FmxMBClass >> generateIsAbstractMethodIfNecessaryIn: aClass [
 
-	self isAbstractClass ifTrue: [ 
-		aClass classSide
-			compile: ('isAbstract
+	self isAbstractClass ifTrue: [
+			self flag: #todo. "Demeter"
+			self builder environment
+				addMethod: ('isAbstract
 
 	<generated>
 	^ self == {1}' format: { aClass name asString })
-			classified: 'testing' ]
+				in: aClass name
+				classSide: true
+				protocol: 'testing' ]
 ]
 
 { #category : 'generating' }

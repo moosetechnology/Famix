@@ -19,7 +19,7 @@ FamixTestComposedMetamodelsBuilding >> setUp [
 	super setUp.
 
 	composedBuilder := FamixMetamodelBuilder new.
-	env := FmxMBRingEnvironment for: composedBuilder.
+	env := FmxMBStubEnvironment for: composedBuilder.
 	composedBuilder environment: env.
 	composedBuilder configuration
 		prefix: 'TstComposed';

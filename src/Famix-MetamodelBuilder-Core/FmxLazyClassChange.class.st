@@ -69,6 +69,6 @@ FmxLazyClassChange >> printOn: aStream [
 { #category : 'accessing' }
 FmxLazyClassChange >> realClass [
 	| class |
-	class := self class environment at: self className.
+	class := self class environment at: self className ifAbsent: [ ^ nil ].
 	^ self isClassSide ifTrue: [ class class ] ifFalse: [ class ]
 ]
