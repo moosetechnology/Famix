@@ -273,29 +273,24 @@ FmxMBRingEnvironment >> recordAdoptionOfClassDefinitionFrom: currentClass to: an
 { #category : 'installing' }
 FmxMBRingEnvironment >> recordClassAdditionFromClass: aRGClass traits: traitsString slots: slotsString classSlots: classSlotsString sharedVariables: sharedVariablesString package: packageName tag: tagName [
 
-	self flag: #todo. "When P12 will be the minimal version used we should use the ShiftClassBuilder instead of manipulation a string. This would make the code a lot easier and we would not rely on compiler evaluation of strings to generate the classes."
-	changesToApply add: (FmxClassAddition creationCode: ('Smalltalk classInstaller
-	make: [ :builder |
-		builder 
-			{superclassOrTraitDeclaration};
-			name: {className};
-			traits: {traits};
-			slots: {slots};
-			classSlots: {classSlots};
-			sharedVariables: {classVariables};
-			package: {package};
-			tag: {tag}
-		 ]' format: (Dictionary newFrom: {
-						   (#superclassOrTraitDeclaration -> (aRGClass isTrait
-							     ifTrue: [ 'beTrait' ]
-							     ifFalse: [ 'superclass: ' , aRGClass superclass name ])).
-						   (#className -> aRGClass name asSymbol printString).
-						   (#traits -> traitsString).
-						   (#slots -> slotsString).
-						   (#classSlots -> classSlotsString).
-						   (#classVariables -> sharedVariablesString).
-						   (#package -> packageName printString).
-						   (#tag -> tagName printString) })))
+	| change |
+	change := aRGClass isTrait
+		          ifTrue: [ FmxTraitAddition new ]
+		          ifFalse: [
+				          FmxClassAddition new
+					          superclass: aRGClass superclass name;
+					          yourself ].
+
+	change
+		name: aRGClass name;
+		traits: traitsString;
+		slots: slotsString;
+		classSlots: classSlotsString;
+		sharedVariables: sharedVariablesString;
+		package: packageName;
+		tag: tagName.
+
+	changesToApply add: change
 ]
 
 { #category : 'installing' }

@@ -60,11 +60,9 @@ FmxMBImportingContext >> generate [
 		          superclass: superclass
 		          traitNames: self allTraitNames
 		          slots: self slotDefinitions
-		          in: self packageName.
-
-	aClass tagWith: self tag.
-
-	aClass comment content: self comment.
+		          in: self packageName
+		          tag: self tag
+		          comment: self comment.
 
 	self realClass: aClass.
 

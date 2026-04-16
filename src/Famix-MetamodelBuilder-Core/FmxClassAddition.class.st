@@ -23,7 +23,14 @@ Class {
 	#name : 'FmxClassAddition',
 	#superclass : 'FmxCodeChange',
 	#instVars : [
-		'creationCode'
+		'name',
+		'superclass',
+		'traits',
+		'slots',
+		'classSlots',
+		'sharedVariables',
+		'package',
+		'tag'
 	],
 	#category : 'Famix-MetamodelBuilder-Core-Changes',
 	#package : 'Famix-MetamodelBuilder-Core',
@@ -47,15 +54,62 @@ FmxClassAddition class >> priority [
 { #category : 'accessing' }
 FmxClassAddition >> apply [
 
-	self class compiler evaluate: self creationCode
+	Smalltalk classInstaller make: [ :builder |
+			self flag: #todo. "Check if we can avoid the compilier evaluation"
+			self initialize: builder.
+			builder
+				superclassName: superclass;
+				name: name;
+				traits: (self class compiler evaluate: traits);
+				slots: (self class compiler evaluate: slots);
+				classSlots: (self class compiler evaluate: classSlots);
+				sharedVariables: (self class compiler evaluate: sharedVariables);
+				package: package;
+				tag: tag ]
 ]
 
 { #category : 'accessing' }
-FmxClassAddition >> creationCode [
-	^ creationCode
+FmxClassAddition >> classSlots: anObject [
+	classSlots := anObject
 ]
 
 { #category : 'accessing' }
-FmxClassAddition >> creationCode: anObject [
-	creationCode := anObject
+FmxClassAddition >> initialize: builder [
+
+	builder superclassName: superclass
+]
+
+{ #category : 'accessing' }
+FmxClassAddition >> name: anObject [
+	name := anObject
+]
+
+{ #category : 'accessing' }
+FmxClassAddition >> package: anObject [
+	package := anObject
+]
+
+{ #category : 'accessing' }
+FmxClassAddition >> sharedVariables: anObject [
+	sharedVariables := anObject
+]
+
+{ #category : 'accessing' }
+FmxClassAddition >> slots: anObject [
+	slots := anObject
+]
+
+{ #category : 'accessing' }
+FmxClassAddition >> superclass: anObject [
+	superclass := anObject
+]
+
+{ #category : 'accessing' }
+FmxClassAddition >> tag: anObject [
+	tag := anObject
+]
+
+{ #category : 'accessing' }
+FmxClassAddition >> traits: anObject [
+	traits := anObject
 ]
