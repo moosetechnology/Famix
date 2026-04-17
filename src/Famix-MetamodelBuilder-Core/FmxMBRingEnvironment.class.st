@@ -131,6 +131,25 @@ FmxMBRingEnvironment >> createClassNamed: className superclass: superclassName t
 	| aClass existingClass composition |
 	existingClass := self ringEnvironment ask behaviorNamed: className.
 
+	"existingClass
+		ifNil: [
+				| change |
+				change := FmxClassAddition new.
+				self flag: #todo. ""Finish""
+				change
+					name: className;
+					superclass: superclassName;
+					package: packageName;
+					tag: tag.
+
+				self flag: #todo. ""Manage precedence + factorize code""
+				traitNames ifNotEmpty: [ change traits: '{' , ($+ join: traitNames) , '}' ].
+				self flag: #todo. ""Kill ring in slot usages.""
+				slots ifNotEmpty: [ change slots: '{' , ('. ' join: (slots collect: #definitionString)) , '}' ].
+				changesToApply add: change ]
+		ifNotNil: [ self flag: #todo ]."
+
+
 	aClass := self ringEnvironment ensureClassNamed: className.
 	aClass superclass: (self ringEnvironment ensureClassNamed: superclassName).
 
@@ -167,18 +186,20 @@ FmxMBRingEnvironment >> createTraitNamed: traitName uses: traitNames slots: slot
 	| aPackage aTrait existingClass composition |
 	existingClass := self ringEnvironment ask behaviorNamed: traitName asSymbol.
 
-"	existingClass
+	"existingClass
 		ifNil: [
 				| change |
 				change := FmxTraitAddition new.
-				self flag: #todo.
+				self flag: #todo. ""Finish""
 				change
 					name: traitName;
 					package: packageName;
 					tag: tag.
 
-				traitNames ifNotEmpty: [ change traits: self halt ].
-				slots ifNotEmpty: [ change slots: self halt ].
+				self flag: #todo. ""Manage precedence + factorize code""
+				traitNames ifNotEmpty: [ change traits: '{' , ($+ join: traitNames) , '}' ].
+				self flag: #todo. ""Kill ring in slot usages.""
+				slots ifNotEmpty: [ change slots: '{' , ('. ' join: (slots collect: #definitionString)) , '}' ].
 				changesToApply add: change ]
 		ifNotNil: [ self flag: #todo ]."
 
@@ -207,8 +228,8 @@ FmxMBRingEnvironment >> createTraitNamed: traitName uses: traitNames slots: slot
 			slot propertyNamed: #isGenerated put: true ].
 
 	aTrait tagWith: tag.
-	
-		comment ifNotEmpty: [ changesToApply add: (FmxClassCommentUpdate className: traitName comment: comment) ].
+
+	comment ifNotEmpty: [ changesToApply add: (FmxClassCommentUpdate className: traitName comment: comment) ].
 
 	^ aTrait
 ]
