@@ -2,9 +2,9 @@ Class {
 	#name : 'FmxMBRingEnvironment',
 	#superclass : 'Object',
 	#instVars : [
-		'changesToApply',
 		'ringEnvironment',
-		'builder'
+		'builder',
+		'changesToApply'
 	],
 	#category : 'Famix-MetamodelBuilder-Core-Implementation',
 	#package : 'Famix-MetamodelBuilder-Core',
