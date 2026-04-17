@@ -154,9 +154,9 @@ FmxMBRingEnvironment >> createClassNamed: className superclass: superclassName t
 				        ifFalse: [ RGInstanceVariableSlot named: slotInBadEnvironment name parent: aClass layout ].
 			aClass layout addSlot: slot.
 			slot propertyNamed: #isGenerated put: true ].
-		
+
 	aClass tagWith: tag.
-	aClass comment content: comment.
+	comment ifNotEmpty: [ changesToApply add: (FmxClassCommentUpdate className: className comment: comment) ].
 
 	^ aClass
 ]
@@ -166,6 +166,21 @@ FmxMBRingEnvironment >> createTraitNamed: traitName uses: traitNames slots: slot
 
 	| aPackage aTrait existingClass composition |
 	existingClass := self ringEnvironment ask behaviorNamed: traitName asSymbol.
+
+"	existingClass
+		ifNil: [
+				| change |
+				change := FmxTraitAddition new.
+				self flag: #todo.
+				change
+					name: traitName;
+					package: packageName;
+					tag: tag.
+
+				traitNames ifNotEmpty: [ change traits: self halt ].
+				slots ifNotEmpty: [ change slots: self halt ].
+				changesToApply add: change ]
+		ifNotNil: [ self flag: #todo ]."
 
 	aPackage := self ringEnvironment ensurePackageNamed: packageName.
 
@@ -192,7 +207,8 @@ FmxMBRingEnvironment >> createTraitNamed: traitName uses: traitNames slots: slot
 			slot propertyNamed: #isGenerated put: true ].
 
 	aTrait tagWith: tag.
-	aTrait comment content: comment.
+	
+		comment ifNotEmpty: [ changesToApply add: (FmxClassCommentUpdate className: traitName comment: comment) ].
 
 	^ aTrait
 ]
@@ -299,19 +315,8 @@ FmxMBRingEnvironment >> recordClassChangesFor: aRGClass [
 					package: aRGClass package name
 					tag: aRGClass tags anyOne ]
 		ifNotNil: [ self recordAdoptionOfClassDefinitionFrom: realClass to: aRGClass ].
-	self recordClassCommentChangeOf: realClass to: aRGClass.
 	self recordMethodsAdoptionsOf: realClass to: aRGClass realClassName: aRGClass name.
 	self recordMethodsAdoptionsOf: (realClass ifNotNil: [ realClass class ]) to: aRGClass classSide realClassName: aRGClass name
-]
-
-{ #category : 'installing' }
-FmxMBRingEnvironment >> recordClassCommentChangeOf: realClass to: anRGClass [
-
-	| newComment |
-	newComment := anRGClass comment content.
-	(realClass isNotNil and: [ newComment = realClass comment ]) ifTrue: [ ^ self ].
-
-	newComment isEmptyOrNil ifFalse: [ changesToApply add: (FmxClassCommentUpdate className: anRGClass name comment: newComment) ]
 ]
 
 { #category : 'installing' }

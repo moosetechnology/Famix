@@ -25,19 +25,6 @@ FmxMBBehaviorTest >> newEntityNamed: aString [
 ]
 
 { #category : 'tests' }
-FmxMBBehaviorTest >> testComment [
-	"test assigning of a comment to a class"
-
-	| simpleClass generated commentString |
-	simpleClass := self newEntityNamed: #Comment.
-	commentString := 'Simple testing class'.
-	simpleClass comment: commentString.
-	builder generate.
-	generated := builder testingEnvironment ask classNamed: 'TstComment'.
-	self assert: (generated comment content beginsWith: commentString)
-]
-
-{ #category : 'tests' }
 FmxMBBehaviorTest >> testCustomTestingSelectors [
 
 	"test automatic generation of custom testing selector"

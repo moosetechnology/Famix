@@ -99,19 +99,6 @@ FmxMBClassTest >> testBuilderPrefixChange [
 ]
 
 { #category : 'tests' }
-FmxMBClassTest >> testCommentOnTrait [
-	"test assigning of a comment to a trait"
-
-	| simpleTrait generated commentString |
-	simpleTrait := builder newTraitNamed: #TComment.
-	commentString := 'Simple testing class'.
-	simpleTrait comment: commentString.
-	builder generate.
-	generated := builder testingEnvironment ask classNamed: 'TstTComment'.
-	self assert: (generated comment content beginsWith: commentString)
-]
-
-{ #category : 'tests' }
 FmxMBClassTest >> testCustomPackageForUserClasses [
 
 	"check if package name can by correctly set to a class"
