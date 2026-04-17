@@ -27,8 +27,6 @@ Class {
 		'superclass',
 		'traits',
 		'slots',
-		'classSlots',
-		'sharedVariables',
 		'package',
 		'tag'
 	],
@@ -54,29 +52,33 @@ FmxClassAddition class >> priority [
 { #category : 'accessing' }
 FmxClassAddition >> apply [
 
-	Smalltalk classInstaller make: [ :builder |
-			self flag: #todo. "Check if we can avoid the compilier evaluation"
-			self initialize: builder.
-			builder
-				superclassName: superclass;
-				name: name;
-				traits: (self class compiler evaluate: traits);
-				slots: (self class compiler evaluate: slots);
-				classSlots: (self class compiler evaluate: classSlots);
-				sharedVariables: (self class compiler evaluate: sharedVariables);
-				package: package;
-				tag: tag ]
-]
+	| makeBlock |
+	makeBlock := [ :builder |
+		             self flag: #todo. "Check if we can avoid the compilier evaluation"
+		             self initialize: builder.
+		             builder
+			             name: name;
+			             package: package;
+			             tag: tag.
 
-{ #category : 'accessing' }
-FmxClassAddition >> classSlots: anObject [
-	classSlots := anObject
+		             traits ifNotNil: [ builder traits: (self class compiler evaluate: traits) ].
+		             slots ifNotNil: [ builder slots: (self class compiler evaluate: slots) ] ].
+
+	"If the class already exist we update it to not remove the class slots and shared variables."
+	self class environment
+		at: name
+		ifPresent: [ :class | self class classInstaller update: class to: makeBlock ]
+		ifAbsent: [ self class classInstaller make: makeBlock ]
 ]
 
 { #category : 'accessing' }
 FmxClassAddition >> initialize: builder [
 
-	builder superclassName: superclass
+	self flag: #todo. "Traits should not have a superclass name."
+	self flag: #todo. "Remove the nil setting once this will be fixed: https://github.com/pharo-project/pharo/issues/19572"
+	builder
+		superclass: nil;
+		superclassName: superclass
 ]
 
 { #category : 'accessing' }
@@ -87,11 +89,6 @@ FmxClassAddition >> name: anObject [
 { #category : 'accessing' }
 FmxClassAddition >> package: anObject [
 	package := anObject
-]
-
-{ #category : 'accessing' }
-FmxClassAddition >> sharedVariables: anObject [
-	sharedVariables := anObject
 ]
 
 { #category : 'accessing' }

@@ -259,19 +259,12 @@ FmxMBRingEnvironment >> recordAdoptionOfClassDefinitionFrom: currentClass to: an
 		recordClassAdditionFromClass: anRGClassModel
 		traits: (self traitStringFrom: currentClass to: anRGClassModel)
 		slots: '{' , (modelSlotDefinitions joinUsing: '. ') , '}'
-		classSlots:
-			'{' , ((currentClass class localSlots collect: #definitionString)
-				 joinUsing: ' . ') , '}'
-		sharedVariables:
-			'{'
-			, ((currentClass classVarNames collect: [ :each | '#' , each ])
-					 joinUsing: ' ') , '}'
 		package: currentClass package name
 		tag: currentClass packageTag name
 ]
 
 { #category : 'installing' }
-FmxMBRingEnvironment >> recordClassAdditionFromClass: aRGClass traits: traitsString slots: slotsString classSlots: classSlotsString sharedVariables: sharedVariablesString package: packageName tag: tagName [
+FmxMBRingEnvironment >> recordClassAdditionFromClass: aRGClass traits: traitsString slots: slotsString package: packageName tag: tagName [
 
 	| change |
 	change := aRGClass isTrait
@@ -285,8 +278,6 @@ FmxMBRingEnvironment >> recordClassAdditionFromClass: aRGClass traits: traitsStr
 		name: aRGClass name;
 		traits: traitsString;
 		slots: slotsString;
-		classSlots: classSlotsString;
-		sharedVariables: sharedVariablesString;
 		package: packageName;
 		tag: tagName.
 
@@ -297,17 +288,16 @@ FmxMBRingEnvironment >> recordClassAdditionFromClass: aRGClass traits: traitsStr
 FmxMBRingEnvironment >> recordClassChangesFor: aRGClass [
 
 	| realClass |
+	self flag: #todo. "Kill ring."
 	realClass := self class environment classNamed: aRGClass name.
 	realClass
-		ifNil: [
-			self
-				recordClassAdditionFromClass: aRGClass
-				traits: aRGClass traitCompositionString
-				slots: aRGClass slotDefinitionString
-				classSlots: '{}'
-				sharedVariables: '{}'
-				package: aRGClass package name
-				tag: aRGClass tags anyOne ]
+		ifNil: [ "1 halt."
+				self
+					recordClassAdditionFromClass: aRGClass
+					traits: aRGClass traitCompositionString
+					slots: aRGClass slotDefinitionString
+					package: aRGClass package name
+					tag: aRGClass tags anyOne ]
 		ifNotNil: [ self recordAdoptionOfClassDefinitionFrom: realClass to: aRGClass ].
 	self recordClassCommentChangeOf: realClass to: aRGClass.
 	self recordMethodsAdoptionsOf: realClass to: aRGClass realClassName: aRGClass name.
