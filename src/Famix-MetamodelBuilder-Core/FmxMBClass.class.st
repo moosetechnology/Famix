@@ -73,8 +73,7 @@ FmxMBClass >> generate [
 		          superclass: aSuperclass
 		          traitNames: self allTraitNames
 		          slots: self slotDefinitions
-		          in: self packageName
-		          overwrite: true.
+		          in: self packageName.
 
 	aClass tagWith: self tag.
 	self builder environment setComment: self commentWithRelations for: aClass.
@@ -82,7 +81,7 @@ FmxMBClass >> generate [
 	self realClass: aClass.
 
 	self generateAccessors.
-	self generateAnnotationIn: aClass superclass: nil.
+	self generateAnnotationIn: aClass.
 	self generateIsAbstractMethodIfNecessaryIn: aClass.
 
 	self generateTestingMethodsIn: aClass.
