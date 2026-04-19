@@ -86,14 +86,11 @@ FmxMBRingEnvironment >> compile: aSource in: aClass classified: aProtocol packag
 ]
 
 { #category : 'initialization' }
-FmxMBRingEnvironment >> createClassNamed: aClassName superclass: aSuperclass traitNames: traitNames slots: slots in: packageName overwrite: shouldOverwrite [
+FmxMBRingEnvironment >> createClassNamed: aClassName superclass: aSuperclass traitNames: traitNames slots: slots in: packageName [
 
 	| aClass existingClass composition |
 	existingClass := self ringEnvironment ask behaviorNamed:
 		                 aClassName asSymbol.
-
-	(existingClass isNotNil and: [ shouldOverwrite not ]) ifTrue: [ 
-		^ existingClass ].
 
 	aClass := self ringEnvironment ensureClassNamed: aClassName.
 	aClass superclass:
@@ -131,13 +128,10 @@ FmxMBRingEnvironment >> createClassNamed: aClassName superclass: aSuperclass tra
 ]
 
 { #category : 'initialization' }
-FmxMBRingEnvironment >> createTraitNamed: traitName uses: traitNames slots: slots in: packageName overwrite: shouldOverwrite [
+FmxMBRingEnvironment >> createTraitNamed: traitName uses: traitNames slots: slots in: packageName [
 
 	| aPackage aTrait existingClass composition |
-	existingClass := self ringEnvironment ask behaviorNamed:
-		                 traitName asSymbol.
-	(existingClass isNotNil and: [ shouldOverwrite not ]) ifTrue: [ 
-		^ existingClass ].
+	existingClass := self ringEnvironment ask behaviorNamed: traitName asSymbol.
 
 	aPackage := self ringEnvironment ensurePackageNamed: packageName.
 

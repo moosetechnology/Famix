@@ -37,8 +37,7 @@ FmxMBVisitorTrait >> generate [
 		          createTraitNamed: self fullName asSymbol
 		          uses: self allTraitNames
 		          slots: self slotDefinitions
-		          in: self packageName
-		          overwrite: true.
+		          in: self packageName.
 
 	self builder environment setComment: self comment for: aTrait.
 
