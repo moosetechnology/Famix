@@ -9,6 +9,16 @@ Class {
 	#tag : 'Implementation'
 }
 
+{ #category : 'adding' }
+FmxMBRealRingEnvironment >> addMethod: sourceCode in: aClassName classSide: aBoolean protocol: protocol [
+
+	changesToApply add: (FmxMethodAddition
+			 className: aClassName
+			 isClassSide: aBoolean
+			 sourceCode: sourceCode
+			 protocol: protocol)
+]
+
 { #category : 'accessing' }
 FmxMBRealRingEnvironment >> apply [
 
@@ -184,13 +194,13 @@ FmxMBRealRingEnvironment >> recordMethodsAdoptionsOf: realClass to: anRGClass re
 	((anRGClass localSelectors difference: generatedMethodNamesOfRealClass)
 		select: [ :selectorOfMethodToAdd | realClass ifNil: [ true ] ifNotNil: [ (realClass localSelectors includes: selectorOfMethodToAdd) not ] ]
 		thenCollect: [ :selectorOfMethodToAdd | anRGClass methodNamed: selectorOfMethodToAdd ])
-		ifNotEmpty: [ :methods | changesToApply add: (FmxMethodAdditions className: aClassName isClassSide: anRGClass isClassSide rgMethods: methods) ].
+		ifNotEmpty: [ :methods | methods do: [ :method | self addMethod: method sourceCode in: aClassName classSide: anRGClass isClassSide protocol: method protocol ] ].
 
 	"Finally, update methods needing updates"
 	((generatedMethodNamesOfRealClass intersection: anRGClass localSelectors)
 		collect: [ :selectorOfMethodToUpdate | anRGClass methodNamed: selectorOfMethodToUpdate ]
 		thenSelect: [ :method | realClass needToAdaptToMethod: method ])
-		ifNotEmpty: [ :methods | changesToApply add: (FmxMethodUpdates className: aClassName isClassSide: anRGClass isClassSide rgMethods: methods) ]
+		ifNotEmpty: [ :methods |methods do: [ :method | self addMethod: method sourceCode in: aClassName classSide: anRGClass isClassSide protocol: method protocol ] ]
 ]
 
 { #category : 'installing' }
