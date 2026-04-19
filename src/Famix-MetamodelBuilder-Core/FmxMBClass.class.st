@@ -81,7 +81,7 @@ FmxMBClass >> generate [
 	self realClass: aClass.
 
 	self generateAccessors.
-	self generateAnnotationIn: aClass superclass: nil.
+	self generateAnnotationIn: aClass.
 	self generateIsAbstractMethodIfNecessaryIn: aClass.
 
 	self generateTestingMethodsIn: aClass.
