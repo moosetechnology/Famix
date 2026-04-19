@@ -90,43 +90,29 @@ FmxMBRealRingEnvironment >> recordAdoptionOfClassDefinitionFrom: currentClass to
 		recordClassAdditionFromClass: anRGClassModel
 		traits: (self traitStringFrom: currentClass to: anRGClassModel)
 		slots: '{' , (modelSlotDefinitions joinUsing: '. ') , '}'
-		classSlots:
-			'{' , ((currentClass class localSlots collect: #definitionString)
-				 joinUsing: ' . ') , '}'
-		sharedVariables:
-			'{'
-			, ((currentClass classVarNames collect: [ :each | '#' , each ])
-					 joinUsing: ' ') , '}'
 		package: currentClass package name
 		tag: currentClass packageTag name
 ]
 
 { #category : 'installing' }
-FmxMBRealRingEnvironment >> recordClassAdditionFromClass: aRGClass traits: traitsString slots: slotsString classSlots: classSlotsString sharedVariables: sharedVariablesString package: packageName tag: tagName [
+FmxMBRealRingEnvironment >> recordClassAdditionFromClass: aRGClass traits: traitsString slots: slotsString package: packageName tag: tagName [
 
-	self flag: #todo. "When P12 will be the minimal version used we should use the ShiftClassBuilder instead of manipulation a string. This would make the code a lot easier and we would not rely on compiler evaluation of strings to generate the classes."
-	changesToApply add: (FmxClassAddition creationCode: ('Smalltalk classInstaller
-	make: [ :builder |
-		builder 
-			{superclassOrTraitDeclaration};
-			name: {className};
-			traits: {traits};
-			slots: {slots};
-			classSlots: {classSlots};
-			sharedVariables: {classVariables};
-			package: {package};
-			tag: {tag}
-		 ]' format: (Dictionary newFrom: {
-						   (#superclassOrTraitDeclaration -> (aRGClass isTrait
-							     ifTrue: [ 'beTrait' ]
-							     ifFalse: [ 'superclass: ' , aRGClass superclass name ])).
-						   (#className -> aRGClass name asSymbol printString).
-						   (#traits -> traitsString).
-						   (#slots -> slotsString).
-						   (#classSlots -> classSlotsString).
-						   (#classVariables -> sharedVariablesString).
-						   (#package -> packageName printString).
-						   (#tag -> tagName printString) })))
+	| change |
+	change := aRGClass isTrait
+		          ifTrue: [ FmxTraitAddition new ]
+		          ifFalse: [
+				          FmxClassAddition new
+					          superclass: aRGClass superclass name;
+					          yourself ].
+
+	change
+		name: aRGClass name;
+		traits: traitsString;
+		slots: slotsString;
+		package: packageName;
+		tag: tagName.
+
+	changesToApply add: change
 ]
 
 { #category : 'installing' }
@@ -136,14 +122,12 @@ FmxMBRealRingEnvironment >> recordClassChangesFor: aRGClass [
 	realClass := self class environment classNamed: aRGClass name.
 	realClass
 		ifNil: [
-			self
-				recordClassAdditionFromClass: aRGClass
-				traits: aRGClass traitCompositionString
-				slots: aRGClass slotDefinitionString
-				classSlots: '{}'
-				sharedVariables: '{}'
-				package: aRGClass package name
-				tag: aRGClass tags anyOne ]
+				self
+					recordClassAdditionFromClass: aRGClass
+					traits: (aRGClass traits ifEmpty: [ nil ] ifNotEmpty: [ aRGClass traitCompositionString ])
+					slots: (aRGClass slots ifEmpty: [ nil ] ifNotEmpty: [ aRGClass slotDefinitionString ])
+					package: aRGClass package name
+					tag: aRGClass tags anyOne ]
 		ifNotNil: [ self recordAdoptionOfClassDefinitionFrom: realClass to: aRGClass ].
 	self recordClassCommentChangeOf: realClass to: aRGClass.
 	self recordMethodsAdoptionsOf: realClass to: aRGClass realClassName: aRGClass name.
