@@ -45,7 +45,19 @@ FmxCodeChange >> isRequired [
 ]
 
 { #category : 'accessing' }
+FmxCodeChange >> followingChangesIn: changes [
+	"I should filter the changes in parameter to select changes that should be built after me."
+
+	^ changes select: [ :change | self priority < change priority ]
+]
+
+{ #category : 'accessing' }
 FmxCodeChange >> priority [
 
 	^ self class priority
+]
+
+{ #category : 'sorting' }
+FmxCodeChange >> threeWayCompareTo: anotherObject [
+	^ self printString threeWayCompareTo: anotherObject printString
 ]

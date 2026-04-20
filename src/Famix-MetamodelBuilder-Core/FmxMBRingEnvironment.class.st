@@ -33,10 +33,15 @@ FmxMBRingEnvironment >> addMethod: sourceCode in: aClassName classSide: aBoolean
 { #category : 'installing' }
 FmxMBRingEnvironment >> apply [
 
+	| dependencies |
 	self collectChangesToApply.
-	"Sort the changes before applying them"
-	
-	(changesToApply sorted: #priority ascending) do: [ :change | change apply ]
+
+	"Now we have a list of changes to apply. Some changes needs to by applied before others (for example, we need to create a classe to compile its methods or compile superclasses before their subclasses or traits before their users)."
+	dependencies := changesToApply inject: Dictionary new into: [ :dictionary :change |
+			                dictionary
+				                at: change put: (change followingChangesIn: (changesToApply copyWithout: change));
+				                yourself ].
+	(AITopologicalSorting sort: changesToApply followingIncomingProperty: [ :change | dependencies at: change ]) do: #apply
 ]
 
 { #category : 'accessing' }
@@ -342,19 +347,10 @@ FmxMBRingEnvironment >> recordClassChangesFor: aRGClass [
 
 { #category : 'installing' }
 FmxMBRingEnvironment >> recordClassesChangesFor: resolvedClasses [
-	| sorted notSorted toMove |
+
 	resolvedClasses ifEmpty: [ ^ self ].
-	
-	notSorted := resolvedClasses asOrderedCollection.
 
-	sorted := OrderedCollection new.
-	[ toMove := notSorted select: [ :each | notSorted noneSatisfy: [ :toCompare | each dependsOn: toCompare ] ].
-	toMove ifEmpty: [ self error: 'Classes cycling dependency' ].
-	sorted addAll: toMove.
-	notSorted removeAll: toMove.
-	notSorted isEmpty ] whileFalse.
-
-	sorted do: [ :each | self recordClassChangesFor: each ]
+	resolvedClasses do: [ :each | self recordClassChangesFor: each ]
 ]
 
 { #category : 'installing' }
