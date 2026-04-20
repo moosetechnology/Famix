@@ -534,8 +534,8 @@ FamixMetamodelBuilder >> prepareGeneration [
 				model := self model.
 				self withSubBuildersAddEntityCreatorTraitTo: model.
 				self prepareBehaviorsGeneration.
-				self entityCreatorTrait generateEntityCreationMethods.
-				self generateImportingContext ]
+				self generateImportingContext.
+				self entityCreatorTrait generateEntityCreationMethods ]
 		ifFalse: [ self prepareBehaviorsGeneration ]
 ]
 
