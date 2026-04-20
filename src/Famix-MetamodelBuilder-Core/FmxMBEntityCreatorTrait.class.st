@@ -27,12 +27,10 @@ FmxMBEntityCreatorTrait >> generateEntityCreationMethodFor: aClass [
 { #category : 'generating' }
 FmxMBEntityCreatorTrait >> generateEntityCreationMethods [
 
-	self builder classes
-		reject: [ :aClass | aClass isAbstractClass or: [ aClass isModelClass or: [ aClass isMetamodelClassGroup ] ] ]
-		thenDo: [ :class |
-				self generateEntityCreationMethodFor: class.
-				(class allTransitiveTraitsIncludingClassGeneralization anySatisfy: [ :trait | trait prefix = #Famix and: [ trait name = #TNamedEntity ] ]) ifTrue: [
-					self generateNamedEntityCreationMethodFor: class ] ]
+	self builder concreteClasses do: [ :class |
+			self generateEntityCreationMethodFor: class.
+			(class allTransitiveTraitsIncludingClassGeneralization anySatisfy: [ :trait | trait prefix = #Famix and: [ trait name = #TNamedEntity ] ]) ifTrue: [
+				self generateNamedEntityCreationMethodFor: class ] ]
 ]
 
 { #category : 'generating' }

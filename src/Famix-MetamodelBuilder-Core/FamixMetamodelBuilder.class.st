@@ -82,10 +82,7 @@ FamixMetamodelBuilder >> acceptVisitor: aVisitor [
 { #category : 'initialization' }
 FamixMetamodelBuilder >> addEntityCreatorTraitToModel: aClass [
 
-	(self classes anySatisfy: [ :cls | 
-		 cls isAbstractClass not and: [ 
-			 cls isModelClass not and: [ cls isMetamodelClassGroup not ] ] ]) 
-		ifTrue: [ aClass addTraitGeneralization: self entityCreatorTrait ]
+	self concreteClasses ifNotEmpty: [ aClass addTraitGeneralization: self entityCreatorTrait ]
 ]
 
 { #category : 'accessing' }
@@ -150,6 +147,12 @@ FamixMetamodelBuilder >> classNamed: aClassName [
 FamixMetamodelBuilder >> classes [
 
 	^ classes
+]
+
+{ #category : 'accessing' }
+FamixMetamodelBuilder >> concreteClasses [
+
+	^ self classes reject: [ :class | class isAbstractClass or: [ class isModelClass or: [ class isMetamodelClassGroup ] ] ]
 ]
 
 { #category : 'accessing' }
