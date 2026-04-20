@@ -2,6 +2,7 @@ Class {
 	#name : 'FmxMBRingEnvironment',
 	#superclass : 'Object',
 	#instVars : [
+		'changesToApply',
 		'ringEnvironment',
 		'builder',
 		'changesToApply'
@@ -125,13 +126,8 @@ FmxMBRingEnvironment >> compile: aSource in: aClass classified: aProtocol packag
 	aClass compile: aSource classified: category
 ]
 
-<<<<<<< HEAD
-{ #category : 'as yet unclassified' }
+{ #category : 'installing' }
 FmxMBRingEnvironment >> createClassNamed: className superclass: superclassName traitNames: traitNames slots: slots in: packageName tag: tag comment: comment [
-=======
-{ #category : 'initialization' }
-FmxMBRingEnvironment >> createClassNamed: aClassName superclass: aSuperclass traitNames: traitNames slots: slots in: packageName tag: tag comment: comment [
->>>>>>> development
 
 	| aClass existingClass composition |
 	existingClass := self ringEnvironment ask behaviorNamed: className.
@@ -334,10 +330,9 @@ FmxMBRingEnvironment >> recordClassChangesFor: aRGClass [
 	realClass := self class environment classNamed: aRGClass name.
 	realClass
 		ifNil: [ "1 halt."
-				self
 					recordClassAdditionFromClass: aRGClass
-					traits: aRGClass traitCompositionString
-					slots: aRGClass slotDefinitionString
+					traits: (aRGClass traits ifEmpty: [ nil ] ifNotEmpty: [ aRGClass traitCompositionString ])
+					slots: (aRGClass slots ifEmpty: [ nil ] ifNotEmpty: [ aRGClass slotDefinitionString ])
 					package: aRGClass package name
 					tag: aRGClass tags anyOne ]
 		ifNotNil: [ self recordAdoptionOfClassDefinitionFrom: realClass to: aRGClass ].
@@ -416,11 +411,7 @@ FmxMBRingEnvironment >> ringEnvironment [
 	^ ringEnvironment
 ]
 
-<<<<<<< HEAD
 { #category : 'accessing' }
-=======
-{ #category : 'initialization' }
->>>>>>> development
 FmxMBRingEnvironment >> slotNamed: slotName [
 	^ (RGUnknownSlot named: slotName asSymbol) expression: #FMProperty
 ]
