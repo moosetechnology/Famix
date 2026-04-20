@@ -56,7 +56,8 @@ Class {
 		'testingSelectorsMapping',
 		'configuration',
 		'parentBuilder',
-		'extensionBehaviors'
+		'extensionBehaviors',
+		'withoutBuilder'
 	],
 	#category : 'Famix-MetamodelBuilder-Core-Basic',
 	#package : 'Famix-MetamodelBuilder-Core',
@@ -82,7 +83,7 @@ FamixMetamodelBuilder >> acceptVisitor: aVisitor [
 { #category : 'initialization' }
 FamixMetamodelBuilder >> addEntityCreatorTraitToModel: aClass [
 
-	self concreteClasses ifNotEmpty: [ aClass addTraitGeneralization: self entityCreatorTrait ]
+	self shouldGenerateModel ifTrue: [ aClass addTraitGeneralization: self entityCreatorTrait ]
 ]
 
 { #category : 'accessing' }
@@ -116,12 +117,6 @@ FamixMetamodelBuilder >> association: anAssociationName [
 FamixMetamodelBuilder >> baseImportingContextName [
 
 	^ #FamixImportingContext
-]
-
-{ #category : 'accessing' }
-FamixMetamodelBuilder >> behaviorsCount [
-
-	^ self traits size + self classes size
 ]
 
 { #category : 'generating' }
@@ -373,7 +368,8 @@ FamixMetamodelBuilder >> initialize [
 	traits := OrderedCollection new.
 	extensionBehaviors := OrderedCollection new.
 	relations := OrderedCollection new.
-	testingSelectorsMapping := Dictionary new
+	testingSelectorsMapping := Dictionary new.
+	withoutBuilder := false
 ]
 
 { #category : 'initialization' }
@@ -382,9 +378,6 @@ FamixMetamodelBuilder >> model [
 	| aClass |
 	"can only have one model by generator, so return the model class if already created"
 	self classes detect: #isModelClass ifFound: [ :found | ^ found ].
-
-	self configuration prefix ifEmpty: [ 
-		^ nil "In case of empty prefix, it would generate a classe name Model which is not possible in Pharo. Thus we prevent this case." ].
 
 	aClass := FmxMBModel new.
 	aClass builder: self.
@@ -592,8 +585,12 @@ FamixMetamodelBuilder >> safeAnnotationPackageName [
 { #category : 'generating' }
 FamixMetamodelBuilder >> shouldGenerateModel [
 
-	^ self behaviorsCount > 0 or: [
-		  self relations isNotEmpty or: [ self subBuilders isNotEmpty ] ]
+	withoutBuilder ifTrue: [ ^ false ].
+
+	"In case of empty prefix, it would generate a classe name Model which is not possible in Pharo. Thus we prevent this case."
+	self configuration prefix ifEmpty: [ ^ false ].
+
+	^ self concreteClasses isNotEmpty or: [ self subBuilders anySatisfy: #shouldGenerateModel ]
 ]
 
 { #category : 'asserting' }
@@ -699,4 +696,10 @@ FamixMetamodelBuilder >> withSubBuildersAddEntityCreatorTraitTo: aClass [
 	self addEntityCreatorTraitToModel: aClass.
 	self allSubBuilders do: [ :subBuilder | 
 		subBuilder addEntityCreatorTraitToModel: aClass ]
+]
+
+{ #category : 'accessing' }
+FamixMetamodelBuilder >> withoutModel [
+
+	withoutBuilder := true
 ]
