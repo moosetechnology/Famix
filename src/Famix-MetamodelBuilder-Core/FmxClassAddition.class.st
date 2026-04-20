@@ -35,13 +35,6 @@ Class {
 	#tag : 'Changes'
 }
 
-{ #category : 'instance creation' }
-FmxClassAddition class >> creationCode: aString [
-	^ self new
-		creationCode: aString;
-		yourself
-]
-
 { #category : 'accessing' }
 FmxClassAddition class >> priority [
 	"Class addition/update happens before we update and add methods."
@@ -54,7 +47,6 @@ FmxClassAddition >> apply [
 
 	| makeBlock |
 	makeBlock := [ :builder |
-		             self flag: #todo. "Check if we can avoid the compilier evaluation"
 		             self initialize: builder.
 		             builder
 			             name: name;
@@ -74,11 +66,7 @@ FmxClassAddition >> apply [
 { #category : 'accessing' }
 FmxClassAddition >> initialize: builder [
 
-	self flag: #todo. "Traits should not have a superclass name."
-	self flag: #todo. "Remove the nil setting once this will be fixed: https://github.com/pharo-project/pharo/issues/19572"
-	builder
-		superclass: nil;
-		superclassName: superclass
+	builder superclass: (self class environment at: superclass)
 ]
 
 { #category : 'accessing' }
