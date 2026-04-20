@@ -6,14 +6,6 @@ Class {
 	#tag : 'Helpers'
 }
 
-{ #category : 'instance creation' }
-FmxMBStubEnvironment class >> for: aBuilder [
-
-	^ self new 
-		builder: aBuilder;
-		yourself.
-]
-
 { #category : 'accessing' }
 FmxMBStubEnvironment >> apply [
 

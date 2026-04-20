@@ -11,6 +11,14 @@ Class {
 	#tag : 'Implementation'
 }
 
+{ #category : 'instance creation' }
+FmxMBRingEnvironment class >> for: aBuilder [
+
+	^ self new 
+		builder: aBuilder;
+		yourself.
+]
+
 { #category : 'adding' }
 FmxMBRingEnvironment >> addMethod: sourceCode in: aClassName classSide: aBoolean protocol: protocol [
 
