@@ -379,9 +379,6 @@ FamixMetamodelBuilder >> model [
 	"can only have one model by generator, so return the model class if already created"
 	self classes detect: #isModelClass ifFound: [ :found | ^ found ].
 
-	self configuration prefix ifEmpty: [ 
-		^ nil "In case of empty prefix, it would generate a classe name Model which is not possible in Pharo. Thus we prevent this case." ].
-
 	aClass := FmxMBModel new.
 	aClass builder: self.
 	aClass prefix: self configuration prefix.
