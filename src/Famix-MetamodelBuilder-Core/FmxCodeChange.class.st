@@ -38,17 +38,17 @@ FmxCodeChange >> apply [
 	self subclassResponsibility
 ]
 
-{ #category : 'testing' }
-FmxCodeChange >> isRequired [
-
-	^ true
-]
-
 { #category : 'accessing' }
 FmxCodeChange >> followingChangesIn: changes [
 	"I should filter the changes in parameter to select changes that should be built after me."
 
 	^ changes select: [ :change | self priority < change priority ]
+]
+
+{ #category : 'testing' }
+FmxCodeChange >> isRequired [
+
+	^ true
 ]
 
 { #category : 'accessing' }

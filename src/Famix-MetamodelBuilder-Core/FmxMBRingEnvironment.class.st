@@ -4,8 +4,7 @@ Class {
 	#instVars : [
 		'changesToApply',
 		'ringEnvironment',
-		'builder',
-		'changesToApply'
+		'builder'
 	],
 	#category : 'Famix-MetamodelBuilder-Core-Implementation',
 	#package : 'Famix-MetamodelBuilder-Core',
@@ -109,7 +108,7 @@ FmxMBRingEnvironment >> collectChangesToApply [
 	| resolvedClasses |
 	resolvedClasses := ringEnvironment ask behaviors select: [ :each | each isRingResolved and: [ each superclass isRingResolved ] ].
 
-	self recordClassesChangesFor: resolvedClasses.
+	resolvedClasses do: [ :each | self recordClassChangesFor: each ].
 	self recordRemovalOfGeneratedEntitiesNotPresentIn: resolvedClasses.
 
 	"Reject changes that would not change anything on the current system."
@@ -335,6 +334,7 @@ FmxMBRingEnvironment >> recordClassChangesFor: aRGClass [
 	realClass := self class environment classNamed: aRGClass name.
 	realClass
 		ifNil: [ "1 halt."
+				self
 					recordClassAdditionFromClass: aRGClass
 					traits: (aRGClass traits ifEmpty: [ nil ] ifNotEmpty: [ aRGClass traitCompositionString ])
 					slots: (aRGClass slots ifEmpty: [ nil ] ifNotEmpty: [ aRGClass slotDefinitionString ])
@@ -343,14 +343,6 @@ FmxMBRingEnvironment >> recordClassChangesFor: aRGClass [
 		ifNotNil: [ self recordAdoptionOfClassDefinitionFrom: realClass to: aRGClass ].
 	self recordMethodsAdoptionsOf: realClass to: aRGClass realClassName: aRGClass name.
 	self recordMethodsAdoptionsOf: (realClass ifNotNil: [ realClass class ]) to: aRGClass classSide realClassName: aRGClass name
-]
-
-{ #category : 'installing' }
-FmxMBRingEnvironment >> recordClassesChangesFor: resolvedClasses [
-
-	resolvedClasses ifEmpty: [ ^ self ].
-
-	resolvedClasses do: [ :each | self recordClassChangesFor: each ]
 ]
 
 { #category : 'installing' }
