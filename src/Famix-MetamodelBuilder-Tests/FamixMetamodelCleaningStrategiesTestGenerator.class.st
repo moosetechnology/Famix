@@ -29,6 +29,7 @@ FamixMetamodelCleaningStrategiesTestGenerator class >> prefix [
 
 { #category : 'definition' }
 FamixMetamodelCleaningStrategiesTestGenerator >> defineClasses [
+
 	super defineClasses.
 	fmx := builder newClassNamed: #FmxTestEntity.
 	fmx comment: 'Comment'.

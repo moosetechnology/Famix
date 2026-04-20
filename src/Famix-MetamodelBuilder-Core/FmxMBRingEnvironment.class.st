@@ -125,8 +125,13 @@ FmxMBRingEnvironment >> compile: aSource in: aClass classified: aProtocol packag
 	aClass compile: aSource classified: category
 ]
 
+<<<<<<< HEAD
 { #category : 'as yet unclassified' }
 FmxMBRingEnvironment >> createClassNamed: className superclass: superclassName traitNames: traitNames slots: slots in: packageName tag: tag comment: comment [
+=======
+{ #category : 'initialization' }
+FmxMBRingEnvironment >> createClassNamed: aClassName superclass: aSuperclass traitNames: traitNames slots: slots in: packageName tag: tag comment: comment [
+>>>>>>> development
 
 	| aClass existingClass composition |
 	existingClass := self ringEnvironment ask behaviorNamed: className.
@@ -180,7 +185,7 @@ FmxMBRingEnvironment >> createClassNamed: className superclass: superclassName t
 	^ aClass
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'initialization' }
 FmxMBRingEnvironment >> createTraitNamed: traitName uses: traitNames slots: slots in: packageName tag: tag comment: comment [
 
 	| aPackage aTrait existingClass composition |
@@ -411,7 +416,11 @@ FmxMBRingEnvironment >> ringEnvironment [
 	^ ringEnvironment
 ]
 
+<<<<<<< HEAD
 { #category : 'accessing' }
+=======
+{ #category : 'initialization' }
+>>>>>>> development
 FmxMBRingEnvironment >> slotNamed: slotName [
 	^ (RGUnknownSlot named: slotName asSymbol) expression: #FMProperty
 ]
