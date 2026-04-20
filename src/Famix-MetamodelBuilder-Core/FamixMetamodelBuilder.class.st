@@ -83,10 +83,7 @@ FamixMetamodelBuilder >> acceptVisitor: aVisitor [
 { #category : 'initialization' }
 FamixMetamodelBuilder >> addEntityCreatorTraitToModel: aClass [
 
-	(self classes anySatisfy: [ :cls | 
-		 cls isAbstractClass not and: [ 
-			 cls isModelClass not and: [ cls isMetamodelClassGroup not ] ] ]) 
-		ifTrue: [ aClass addTraitGeneralization: self entityCreatorTrait ]
+	self shouldGenerateModel ifTrue: [ aClass addTraitGeneralization: self entityCreatorTrait ]
 ]
 
 { #category : 'accessing' }
@@ -122,12 +119,6 @@ FamixMetamodelBuilder >> baseImportingContextName [
 	^ #FamixImportingContext
 ]
 
-{ #category : 'accessing' }
-FamixMetamodelBuilder >> behaviorsCount [
-
-	^ self traits size + self classes size
-]
-
 { #category : 'generating' }
 FamixMetamodelBuilder >> changesToApply [
 
@@ -151,6 +142,12 @@ FamixMetamodelBuilder >> classNamed: aClassName [
 FamixMetamodelBuilder >> classes [
 
 	^ classes
+]
+
+{ #category : 'accessing' }
+FamixMetamodelBuilder >> concreteClasses [
+
+	^ self classes reject: [ :class | class isAbstractClass or: [ class isModelClass or: [ class isMetamodelClassGroup ] ] ]
 ]
 
 { #category : 'accessing' }
@@ -382,9 +379,6 @@ FamixMetamodelBuilder >> model [
 	"can only have one model by generator, so return the model class if already created"
 	self classes detect: #isModelClass ifFound: [ :found | ^ found ].
 
-	self configuration prefix ifEmpty: [ 
-		^ nil "In case of empty prefix, it would generate a classe name Model which is not possible in Pharo. Thus we prevent this case." ].
-
 	aClass := FmxMBModel new.
 	aClass builder: self.
 	aClass prefix: self configuration prefix.
@@ -536,15 +530,13 @@ FamixMetamodelBuilder >> prepareGeneration [
 	self ensureEntityClassIsTheCommonSuperclass.
 	self shouldGenerateModel
 		ifTrue: [
-			| model |
-			model := self model.
-			self withSubBuildersAddEntityCreatorTraitTo: model.
-			self prepareBehaviorsGeneration.
-			self entityCreatorTrait generateEntityCreationMethods ]
-		ifFalse: [ self prepareBehaviorsGeneration ].
-
-	self behaviorsCount > 0 ifFalse: [ ^ self ].
-	self generateImportingContext
+				| model |
+				model := self model.
+				self withSubBuildersAddEntityCreatorTraitTo: model.
+				self prepareBehaviorsGeneration.
+				self generateImportingContext.
+				self entityCreatorTrait generateEntityCreationMethods ]
+		ifFalse: [ self prepareBehaviorsGeneration ]
 ]
 
 { #category : 'printing' }
@@ -595,8 +587,10 @@ FamixMetamodelBuilder >> shouldGenerateModel [
 
 	withoutBuilder ifTrue: [ ^ false ].
 
-	^ self behaviorsCount > 0 or: [
-		  self relations isNotEmpty or: [ self subBuilders isNotEmpty ] ]
+	"In case of empty prefix, it would generate a classe name Model which is not possible in Pharo. Thus we prevent this case."
+	self configuration prefix ifEmpty: [ ^ false ].
+
+	^ self concreteClasses isNotEmpty or: [ self subBuilders anySatisfy: #shouldGenerateModel ]
 ]
 
 { #category : 'asserting' }
