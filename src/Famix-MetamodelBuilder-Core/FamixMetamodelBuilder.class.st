@@ -537,15 +537,13 @@ FamixMetamodelBuilder >> prepareGeneration [
 	self ensureEntityClassIsTheCommonSuperclass.
 	self shouldGenerateModel
 		ifTrue: [
-			| model |
-			model := self model.
-			self withSubBuildersAddEntityCreatorTraitTo: model.
-			self prepareBehaviorsGeneration.
-			self entityCreatorTrait generateEntityCreationMethods ]
-		ifFalse: [ self prepareBehaviorsGeneration ].
-
-	self behaviorsCount > 0 ifFalse: [ ^ self ].
-	self generateImportingContext
+				| model |
+				model := self model.
+				self withSubBuildersAddEntityCreatorTraitTo: model.
+				self prepareBehaviorsGeneration.
+				self generateImportingContext.
+				self entityCreatorTrait generateEntityCreationMethods ]
+		ifFalse: [ self prepareBehaviorsGeneration ]
 ]
 
 { #category : 'printing' }
