@@ -73,10 +73,9 @@ FmxMBClass >> generate [
 		          superclass: aSuperclass
 		          traitNames: self allTraitNames
 		          slots: self slotDefinitions
-		          in: self packageName.
-
-	aClass tagWith: self tag.
-	self builder environment setComment: self commentWithRelations for: aClass.
+		          in: self packageName
+		          tag: self tag
+		          comment: self commentWithRelations.
 
 	self realClass: aClass.
 
@@ -92,9 +91,9 @@ FmxMBClass >> generate [
 
 	self generateNavigationGroupsFor: aClass.
 	self generateAddToCollectionFor: aClass.
-	
+
 	self generateEqualsMethodFor: aClass.
-	self generateHashMethodFor: aClass.
+	self generateHashMethodFor: aClass
 ]
 
 { #category : 'generating-methods' }
