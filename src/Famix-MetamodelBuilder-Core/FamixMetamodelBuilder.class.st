@@ -590,7 +590,7 @@ FamixMetamodelBuilder >> shouldGenerateModel [
 	"In case of empty prefix, it would generate a classe name Model which is not possible in Pharo. Thus we prevent this case."
 	self configuration prefix ifEmpty: [ ^ false ].
 
-	^ self concreteClasses isNotEmpty
+	^ self concreteClasses isNotEmpty or: [ self subBuilders anySatisfy: #shouldGenerateModel ]
 ]
 
 { #category : 'asserting' }
