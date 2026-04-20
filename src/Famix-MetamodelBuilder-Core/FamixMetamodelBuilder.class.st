@@ -56,7 +56,8 @@ Class {
 		'testingSelectorsMapping',
 		'configuration',
 		'parentBuilder',
-		'extensionBehaviors'
+		'extensionBehaviors',
+		'withoutBuilder'
 	],
 	#category : 'Famix-MetamodelBuilder-Core-Basic',
 	#package : 'Famix-MetamodelBuilder-Core',
@@ -370,7 +371,8 @@ FamixMetamodelBuilder >> initialize [
 	traits := OrderedCollection new.
 	extensionBehaviors := OrderedCollection new.
 	relations := OrderedCollection new.
-	testingSelectorsMapping := Dictionary new
+	testingSelectorsMapping := Dictionary new.
+	withoutBuilder := false
 ]
 
 { #category : 'initialization' }
@@ -591,8 +593,8 @@ FamixMetamodelBuilder >> safeAnnotationPackageName [
 { #category : 'generating' }
 FamixMetamodelBuilder >> shouldGenerateModel [
 
-	^ self behaviorsCount > 0 or: [
-		  self relations isNotEmpty or: [ self subBuilders isNotEmpty ] ]
+	withoutBuilder ifTrue: [ ^ false ].
+	^ self behaviorsCount > 0 or: [ self relations isNotEmpty or: [ self subBuilders isNotEmpty ] ]
 ]
 
 { #category : 'asserting' }
@@ -698,4 +700,10 @@ FamixMetamodelBuilder >> withSubBuildersAddEntityCreatorTraitTo: aClass [
 	self addEntityCreatorTraitToModel: aClass.
 	self allSubBuilders do: [ :subBuilder | 
 		subBuilder addEntityCreatorTraitToModel: aClass ]
+]
+
+{ #category : 'accessing' }
+FamixMetamodelBuilder >> withoutModel [
+
+	withoutBuilder := true
 ]

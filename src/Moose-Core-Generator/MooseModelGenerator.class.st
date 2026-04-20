@@ -55,3 +55,11 @@ MooseModelGenerator >> defineHierarchy [
 
 	
 ]
+
+{ #category : 'definition' }
+MooseModelGenerator >> newBuilder [
+
+	^ super newBuilder
+		  withoutModel;
+		  yourself
+]
