@@ -53,7 +53,8 @@ FmxMBGeneratorCleaningStrategyTest >> generateClasses [
 			class addInstVarNamed: 'bananaTree'.
 			class addClassVarNamed: 'Fuhrmanator'.
 			class class addInstVarNamed: 'grandFrais'.
-			(class slotNamed: #fursonas) inClass: #FmxTestCleaningStrategyFmxTestEntity "Here we change the type of the slot to ensure it is regenerated correctly" ]
+			(class slotNamed: #fursonas) inClass: #FmxTestCleaningStrategyFmxTestEntity. "Here we change the type of the slot to ensure it is regenerated correctly"
+			class comment: 'Test' ]
 		ifAbsent: [ self fail ].
 	self class classInstaller make: [ :aBuilder |
 		aBuilder
@@ -141,7 +142,8 @@ FmxMBGeneratorCleaningStrategyTest >> testGenerateNoCleaningCleaning [
 			self assert: (class hasClassVarNamed: #Fuhrmanator).
 			self assert: (class class hasInstVarNamed: #grandFrais).
 			self assert: (class hasInstVarNamed: #fursonas).
-			self assert: (class slotNamed: #fursonas) definitionString equals: '#fursonas => FMMany type: #FmxTestCleaningStrategyFmxTestEntity opposite: #furry' ]
+			self assert: (class slotNamed: #fursonas) definitionString equals: '#fursonas => FMMany type: #FmxTestCleaningStrategyFmxTestEntity opposite: #furry'.
+			self assert: class comment equals: 'Test' ]
 		ifAbsent: [ self fail ].
 
 	"Before the generation the precedence we added should still be here."
@@ -197,7 +199,8 @@ FmxMBGeneratorCleaningStrategyTest >> testGenerateNoCleaningGeneration [
 			self assert: (class hasClassVarNamed: #Fuhrmanator).
 			self assert: (class class hasInstVarNamed: #grandFrais).
 			self assert: (class hasInstVarNamed: #fursonas).
-			self assert: (class slotNamed: #fursonas) definitionString equals: '#fursonas => FMMany type: #FmxTestCleaningStrategyFmxTestEntityWithDifferentSuperclass opposite: #furry' ]
+			self assert: (class slotNamed: #fursonas) definitionString equals: '#fursonas => FMMany type: #FmxTestCleaningStrategyFmxTestEntityWithDifferentSuperclass opposite: #furry'.
+			self assert: (class comment beginsWith: 'Comment') ]
 		ifAbsent: [ self fail ].
 		
 	"The generation should remove the precedence that is not present anymore"
@@ -252,7 +255,8 @@ FmxMBGeneratorCleaningStrategyTest >> testGenerateTotalCleaningGeneration [
 			self deny: (class hasClassVarNamed: #Fuhrmanator).
 			self deny: (class class hasInstVarNamed: #grandFrais).
 			self assert: (class hasInstVarNamed: #fursonas).
-			self assert: (class slotNamed: #fursonas) definitionString equals: '#fursonas => FMMany type: #FmxTestCleaningStrategyFmxTestEntityWithDifferentSuperclass opposite: #furry' ]
+			self assert: (class slotNamed: #fursonas) definitionString equals: '#fursonas => FMMany type: #FmxTestCleaningStrategyFmxTestEntityWithDifferentSuperclass opposite: #furry'.
+			self assert: (class comment beginsWith: 'Comment') ]
 		ifAbsent: [ self fail ].
 
 	"The generation should remove the precedence that is not present anymore"

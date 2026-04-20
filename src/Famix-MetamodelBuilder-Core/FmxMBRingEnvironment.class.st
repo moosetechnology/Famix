@@ -86,7 +86,7 @@ FmxMBRingEnvironment >> compile: aSource in: aClass classified: aProtocol packag
 ]
 
 { #category : 'initialization' }
-FmxMBRingEnvironment >> createClassNamed: aClassName superclass: aSuperclass traitNames: traitNames slots: slots in: packageName [
+FmxMBRingEnvironment >> createClassNamed: aClassName superclass: aSuperclass traitNames: traitNames slots: slots in: packageName tag: tag comment: comment [
 
 	| aClass existingClass composition |
 	existingClass := self ringEnvironment ask behaviorNamed:
@@ -122,13 +122,15 @@ FmxMBRingEnvironment >> createClassNamed: aClassName superclass: aSuperclass tra
 					        parent: aClass layout ].
 		aClass layout addSlot: slot.
 		slot propertyNamed: #isGenerated put: true ].
-
+	
+	aClass tagWith: tag.
+	comment ifNotEmpty: [ aClass comment content: comment ].
 
 	^ aClass
 ]
 
 { #category : 'initialization' }
-FmxMBRingEnvironment >> createTraitNamed: traitName uses: traitNames slots: slots in: packageName [
+FmxMBRingEnvironment >> createTraitNamed: traitName uses: traitNames slots: slots in: packageName tag: tag comment: comment [
 
 	| aPackage aTrait existingClass composition |
 	existingClass := self ringEnvironment ask behaviorNamed: traitName asSymbol.
@@ -163,6 +165,9 @@ FmxMBRingEnvironment >> createTraitNamed: traitName uses: traitNames slots: slot
 					        parent: aTrait layout ].
 		aTrait layout addSlot: slot.
 		slot propertyNamed: #isGenerated put: true ].
+	
+	aTrait tagWith: tag.
+	comment ifNotEmpty: [ aTrait comment content: comment ].
 
 	^ aTrait
 ]
@@ -197,12 +202,6 @@ FmxMBRingEnvironment >> registerPackage: aPackageName [
 { #category : 'accessing' }
 FmxMBRingEnvironment >> ringEnvironment [
 	^ ringEnvironment
-]
-
-{ #category : 'initialization' }
-FmxMBRingEnvironment >> setComment: aString for: aClass [
-
-	aClass comment content: aString
 ]
 
 { #category : 'initialization' }

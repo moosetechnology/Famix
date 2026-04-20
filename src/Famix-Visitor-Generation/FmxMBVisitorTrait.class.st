@@ -37,16 +37,15 @@ FmxMBVisitorTrait >> generate [
 		          createTraitNamed: self fullName asSymbol
 		          uses: self allTraitNames
 		          slots: self slotDefinitions
-		          in: self packageName.
+		          in: self packageName
+		          tag: self tag
+		          comment: self comment.
 
-	self builder environment setComment: self comment for: aTrait.
-
-	aTrait tagWith: self tag.
 	self realClass: aTrait.
 
 	self generateAnnotationIn: aTrait.
 	self generateCommonMethodsIfNecessary.
-	self generateVisitAndAcceptMethods.
+	self generateVisitAndAcceptMethods
 ]
 
 { #category : 'generating' }
