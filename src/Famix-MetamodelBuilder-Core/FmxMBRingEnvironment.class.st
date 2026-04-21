@@ -191,22 +191,23 @@ FmxMBRingEnvironment >> createTraitNamed: traitName uses: traitNames slots: slot
 	| aPackage aTrait existingClass composition |
 	existingClass := self ringEnvironment ask behaviorNamed: traitName asSymbol.
 
-	"existingClass
-		ifNil: [
+	self class environment
+		at: traitName
+		ifPresent: [ :realClass | self flag: #todo ]
+		ifAbsent: [
 				| change |
 				change := FmxTraitAddition new.
-				self flag: #todo. ""Finish""
+				self flag: #todo. "Finish"
 				change
 					name: traitName;
 					package: packageName;
 					tag: tag.
 
-				self flag: #todo. ""Manage precedence + factorize code""
+				self flag: #todo. "Manage precedence + factorize code"
 				traitNames ifNotEmpty: [ change traits: '{' , ($+ join: traitNames) , '}' ].
-				self flag: #todo. ""Kill ring in slot usages.""
+				self flag: #todo. "Kill ring in slot usages."
 				slots ifNotEmpty: [ change slots: '{' , ('. ' join: (slots collect: #definitionString)) , '}' ].
-				changesToApply add: change ]
-		ifNotNil: [ self flag: #todo ]."
+				changesToApply add: change ].
 
 	aPackage := self ringEnvironment ensurePackageNamed: packageName.
 
@@ -334,12 +335,13 @@ FmxMBRingEnvironment >> recordClassChangesFor: aRGClass [
 	realClass := self class environment classNamed: aRGClass name.
 	realClass
 		ifNil: [ "1 halt."
-				self
-					recordClassAdditionFromClass: aRGClass
-					traits: (aRGClass traits ifEmpty: [ nil ] ifNotEmpty: [ aRGClass traitCompositionString ])
-					slots: (aRGClass slots ifEmpty: [ nil ] ifNotEmpty: [ aRGClass slotDefinitionString ])
-					package: aRGClass package name
-					tag: aRGClass tags anyOne ]
+				aRGClass isTrait ifFalse: [
+						self
+							recordClassAdditionFromClass: aRGClass
+							traits: (aRGClass traits ifEmpty: [ nil ] ifNotEmpty: [ aRGClass traitCompositionString ])
+							slots: (aRGClass slots ifEmpty: [ nil ] ifNotEmpty: [ aRGClass slotDefinitionString ])
+							package: aRGClass package name
+							tag: aRGClass tags anyOne ] ]
 		ifNotNil: [ self recordAdoptionOfClassDefinitionFrom: realClass to: aRGClass ].
 	self recordMethodsAdoptionsOf: realClass to: aRGClass realClassName: aRGClass name.
 	self recordMethodsAdoptionsOf: (realClass ifNotNil: [ realClass class ]) to: aRGClass classSide realClassName: aRGClass name
