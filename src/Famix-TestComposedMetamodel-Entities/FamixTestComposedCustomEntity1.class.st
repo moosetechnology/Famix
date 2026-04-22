@@ -77,3 +77,10 @@ FamixTestComposedCustomEntity1 >> customEntity1: anObject [
 		self attributeAt: #customEntity1 put: anObject.
 		anObject customEntity1: self ]
 ]
+
+{ #category : 'navigation' }
+FamixTestComposedCustomEntity1 >> customEntity1Group [
+	<generated>
+	<navigation: 'CustomEntity1'>
+	^ MooseSpecializedGroup with: self customEntity1
+]

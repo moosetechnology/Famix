@@ -59,7 +59,8 @@ FmxMBRelationSide >> cardinality: anObject [
 
 { #category : 'properties' }
 FmxMBRelationSide >> container [
-	
+	"This method should not be called directly by the user. This is reserved to be used internaly in the builder."
+
 	self withNavigationOf: self relation.
 	container := true
 ]

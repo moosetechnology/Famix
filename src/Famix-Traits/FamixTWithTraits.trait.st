@@ -57,3 +57,10 @@ FamixTWithTraits >> traits: anObject [
 	<generated>
 	traits value: anObject
 ]
+
+{ #category : 'navigation' }
+FamixTWithTraits >> traitsGroup [
+	<generated>
+	<navigation: 'Traits'>
+	^ MooseSpecializedGroup withAll: self traits asSet
+]

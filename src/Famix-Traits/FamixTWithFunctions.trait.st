@@ -58,3 +58,10 @@ FamixTWithFunctions >> functions: anObject [
 	<generated>
 	functions value: anObject
 ]
+
+{ #category : 'navigation' }
+FamixTWithFunctions >> functionsGroup [
+	<generated>
+	<navigation: 'Functions'>
+	^ MooseSpecializedGroup withAll: self functions asSet
+]
