@@ -13,14 +13,6 @@ FmxMBConfigurationTest >> testConfiguration [
 
 	self assert: config isNotNil.
 
-	self assert: config navigationForContainers.
-	config navigationForContainers: false.
-	self deny: config navigationForContainers.
-
-	self deny: config navigationForNonContainers.
-	config navigationForNonContainers: true.
-	self assert: config navigationForNonContainers.
-
 	self deny: config shouldGenerateFileImportHelpers.
 	config shouldGenerateFileImportHelpers: true.
 	self assert: config shouldGenerateFileImportHelpers

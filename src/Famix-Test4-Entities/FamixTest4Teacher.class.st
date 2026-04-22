@@ -79,10 +79,3 @@ FamixTest4Teacher >> students: anObject [
 	<generated>
 	students value: anObject
 ]
-
-{ #category : 'navigation' }
-FamixTest4Teacher >> studentsGroup [
-	<generated>
-	<navigation: 'Students'>
-	^ MooseSpecializedGroup withAll: self students asSet
-]
