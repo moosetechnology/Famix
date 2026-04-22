@@ -22,7 +22,6 @@ FmxMBNavigationGroupTest >> testEmptyRelationGroups [
 { #category : 'tests' }
 FmxMBNavigationGroupTest >> testRelationGroupsForTraits [
 	| tClass tMethod class method relation |
-	builder configuration navigationForContainers.
 
 	tClass := builder newTraitNamed: #TClass.
 	tMethod := builder newTraitNamed: #TMethod.
