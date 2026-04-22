@@ -60,6 +60,13 @@ FamixTWithComments >> comments: anObject [
 	comments value: anObject
 ]
 
+{ #category : 'navigation' }
+FamixTWithComments >> commentsGroup [
+	<generated>
+	<navigation: 'Comments'>
+	^ MooseSpecializedGroup withAll: self comments asSet
+]
+
 { #category : 'testing' }
 FamixTWithComments >> hasComments [
 	<FMProperty: #hasComments type: #Boolean>

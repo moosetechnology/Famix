@@ -83,6 +83,13 @@ FamixTPackage >> childEntities: anObject [
 	childEntities value: anObject
 ]
 
+{ #category : 'navigation' }
+FamixTPackage >> childEntitiesGroup [
+	<generated>
+	<navigation: 'ChildEntities'>
+	^ MooseSpecializedGroup withAll: self childEntities asSet
+]
+
 { #category : 'testing' }
 FamixTPackage >> isPackage [
 

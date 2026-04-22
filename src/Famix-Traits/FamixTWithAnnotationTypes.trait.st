@@ -58,3 +58,10 @@ FamixTWithAnnotationTypes >> definedAnnotationTypes: anObject [
 	<generated>
 	definedAnnotationTypes value: anObject
 ]
+
+{ #category : 'navigation' }
+FamixTWithAnnotationTypes >> definedAnnotationTypesGroup [
+	<generated>
+	<navigation: 'DefinedAnnotationTypes'>
+	^ MooseSpecializedGroup withAll: self definedAnnotationTypes asSet
+]

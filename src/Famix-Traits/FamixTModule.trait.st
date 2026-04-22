@@ -68,3 +68,10 @@ FamixTModule >> moduleEntities: anObject [
 	<generated>
 	moduleEntities value: anObject
 ]
+
+{ #category : 'navigation' }
+FamixTModule >> moduleEntitiesGroup [
+	<generated>
+	<navigation: 'ModuleEntities'>
+	^ MooseSpecializedGroup withAll: self moduleEntities asSet
+]

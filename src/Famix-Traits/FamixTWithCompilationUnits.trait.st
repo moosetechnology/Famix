@@ -51,3 +51,10 @@ FamixTWithCompilationUnits >> compilationUnit: anObject [
 	<generated>
 	compilationUnit := anObject
 ]
+
+{ #category : 'navigation' }
+FamixTWithCompilationUnits >> compilationUnitGroup [
+	<generated>
+	<navigation: 'CompilationUnit'>
+	^ MooseSpecializedGroup with: self compilationUnit
+]

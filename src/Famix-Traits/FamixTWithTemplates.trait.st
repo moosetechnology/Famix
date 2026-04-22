@@ -57,3 +57,10 @@ FamixTWithTemplates >> templates: anObject [
 	<generated>
 	templates value: anObject
 ]
+
+{ #category : 'navigation' }
+FamixTWithTemplates >> templatesGroup [
+	<generated>
+	<navigation: 'Templates'>
+	^ MooseSpecializedGroup withAll: self templates asSet
+]
