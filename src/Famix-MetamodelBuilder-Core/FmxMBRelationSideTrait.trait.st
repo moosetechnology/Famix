@@ -72,39 +72,27 @@ FmxMBRelationSideTrait >> asRelationSideNamed: aPropertyName [
 FmxMBRelationSideTrait >> containsMany: aRelationSide [
 
 	| aRelation |
-	
 	aRelation := self oneToMany: aRelationSide.
 	aRelation right container.
-	aRelation withNavigation.
-			
 	^ aRelation
-	
 ]
 
 { #category : 'relations - named containers' }
 FmxMBRelationSideTrait >> containsOne: aRelationSide [
 
 	| aRelation |
-	
 	aRelation := self oneToOne: aRelationSide.
 	aRelation right container.
-	aRelation withNavigation.
-			
 	^ aRelation
-	
 ]
 
 { #category : 'relations - named containers' }
 FmxMBRelationSideTrait >> manyBelongTo: aRelationSide [
 
 	| aRelation |
-	
 	aRelation := self manyToOne: aRelationSide.
 	aRelation left container.
-	aRelation withNavigation.
-			
 	^ aRelation
-
 ]
 
 { #category : 'relations - named' }
@@ -154,13 +142,9 @@ FmxMBRelationSideTrait >> manyToOne: aRelationSide [
 FmxMBRelationSideTrait >> oneBelongsTo: aRelationSide [
 
 	| aRelation |
-	
 	aRelation := self oneToOne: aRelationSide.
 	aRelation left container.
-	aRelation withNavigation.
-			
 	^ aRelation
-
 ]
 
 { #category : 'relations - named' }
