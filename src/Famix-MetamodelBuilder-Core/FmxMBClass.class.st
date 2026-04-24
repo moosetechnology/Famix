@@ -87,7 +87,6 @@ FmxMBClass >> generate [
 	self generateMethodsToRemoveFromTraitCompositionFor: aClass.
 	self generatePrecedenceInTraitComposition: aClass.
 
-	self generateNavigationGroupsFor: aClass.
 	self generateAddToCollectionFor: aClass.
 
 	self generateEqualsMethodFor: aClass.

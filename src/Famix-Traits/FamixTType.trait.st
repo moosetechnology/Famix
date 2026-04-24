@@ -163,13 +163,6 @@ FamixTType >> typeContainer: anObject [
 
 ]
 
-{ #category : 'navigation' }
-FamixTType >> typeContainerGroup [
-	<generated>
-	<navigation: 'TypeContainer'>
-	^ MooseSpecializedGroup with: self typeContainer
-]
-
 { #category : 'as yet unclassified' }
 FamixTType >> typedEntities [
 

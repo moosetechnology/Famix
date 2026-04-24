@@ -141,13 +141,6 @@ FamixTFileSystemEntity >> parentFolder: anObject [
 	self resetMooseName
 ]
 
-{ #category : 'navigation' }
-FamixTFileSystemEntity >> parentFolderGroup [
-	<generated>
-	<navigation: 'ParentFolder'>
-	^ MooseSpecializedGroup with: self parentFolder
-]
-
 { #category : 'accessing' }
 FamixTFileSystemEntity >> totalNumberOfLinesOfText [
 	^ self explicitRequirement

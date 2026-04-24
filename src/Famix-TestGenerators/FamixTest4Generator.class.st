@@ -86,6 +86,5 @@ FamixTest4Generator >> defineRelations [
 	student *-<> school.
 	teacher *-<> school.
 	student *-* teacher.
-	(school <>-* room) withNavigation.
-	
+	school <>-* room
 ]

@@ -45,10 +45,3 @@ FamixTest4Room >> school: anObject [
 	<generated>
 	school := anObject
 ]
-
-{ #category : 'navigation' }
-FamixTest4Room >> schoolGroup [
-	<generated>
-	<navigation: 'School'>
-	^ MooseSpecializedGroup with: self school
-]

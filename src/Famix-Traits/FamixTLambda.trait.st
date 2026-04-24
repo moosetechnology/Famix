@@ -86,10 +86,3 @@ FamixTLambda >> lambdaContainer: anObject [
 	<generated>
 	lambdaContainer := anObject
 ]
-
-{ #category : 'navigation' }
-FamixTLambda >> lambdaContainerGroup [
-	<generated>
-	<navigation: 'LambdaContainer'>
-	^ MooseSpecializedGroup with: self lambdaContainer
-]

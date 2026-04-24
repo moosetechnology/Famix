@@ -99,11 +99,6 @@ FmxMBBehavior >> allLocalTraits [
 ]
 
 { #category : 'accessing' }
-FmxMBBehavior >> allNavigationGroups [
-	^ self navigationGroups , (self relations flatCollect: [ :relation | relation side navigationGroups ])
-]
-
-{ #category : 'accessing' }
 FmxMBBehavior >> allProperties [
 	"Return my properties and the properties from my traits."
 
@@ -346,30 +341,6 @@ FmxMBBehavior >> generateMethodsToRemoveFromTraitCompositionFor: aBehavioral [
 			aBehavioral
 				propertyNamed: #methodsToRemoveFromTraitComposition
 				put: methodsDictionary ]
-]
-
-{ #category : 'generating' }
-FmxMBBehavior >> generateNavigationGroupsFor: aClass [
-
-	self allNavigationGroups do: [ :aNavigationGroup |
-			| sideName code |
-			sideName := aNavigationGroup entity name.
-			code := (aNavigationGroup entity isMany
-				         ifTrue: [
-						         '{1}
-	<generated>
-	<navigation: ''{2}''>
-	^ MooseSpecializedGroup withAll: self {3} asSet' ]
-				         ifFalse: [
-						         '{1}
-	<generated>
-	<navigation: ''{2}''>
-	^ MooseSpecializedGroup with: self {3}' ]) format: {
-					        (sideName , 'Group').
-					        sideName capitalized.
-					        sideName }.
-
-			self addMethod: code in: aClass protocol: #navigation ]
 ]
 
 { #category : 'generating' }
