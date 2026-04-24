@@ -82,10 +82,3 @@ FamixTTrait >> traitOwner: anObject [
 	<generated>
 	traitOwner := anObject
 ]
-
-{ #category : 'navigation' }
-FamixTTrait >> traitOwnerGroup [
-	<generated>
-	<navigation: 'TraitOwner'>
-	^ MooseSpecializedGroup with: self traitOwner
-]

@@ -58,13 +58,6 @@ FamixTest4Teacher >> school: anObject [
 	school := anObject
 ]
 
-{ #category : 'navigation' }
-FamixTest4Teacher >> schoolGroup [
-	<generated>
-	<navigation: 'School'>
-	^ MooseSpecializedGroup with: self school
-]
-
 { #category : 'accessing' }
 FamixTest4Teacher >> students [
 	"Relation named: #students type: #FamixTest4Student opposite: #teachers"

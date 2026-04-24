@@ -95,10 +95,3 @@ FamixTLocalVariable >> parentBehaviouralEntity: anObject [
 	
 
 ]
-
-{ #category : 'navigation' }
-FamixTLocalVariable >> parentBehaviouralEntityGroup [
-	<generated>
-	<navigation: 'ParentBehaviouralEntity'>
-	^ MooseSpecializedGroup with: self parentBehaviouralEntity
-]

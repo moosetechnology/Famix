@@ -58,10 +58,3 @@ FamixTPackageable >> parentPackage: anObject [
 	<generated>
 	parentPackage := anObject
 ]
-
-{ #category : 'navigation' }
-FamixTPackageable >> parentPackageGroup [
-	<generated>
-	<navigation: 'ParentPackage'>
-	^ MooseSpecializedGroup with: self parentPackage
-]

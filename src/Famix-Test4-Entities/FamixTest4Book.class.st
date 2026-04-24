@@ -80,10 +80,3 @@ FamixTest4Book >> person: anObject [
 	<generated>
 	person := anObject
 ]
-
-{ #category : 'navigation' }
-FamixTest4Book >> personGroup [
-	<generated>
-	<navigation: 'Person'>
-	^ MooseSpecializedGroup with: self person
-]
