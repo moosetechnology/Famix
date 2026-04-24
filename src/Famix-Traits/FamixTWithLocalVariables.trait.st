@@ -57,3 +57,10 @@ FamixTWithLocalVariables >> localVariables: anObject [
 	<generated>
 	localVariables value: anObject
 ]
+
+{ #category : 'navigation' }
+FamixTWithLocalVariables >> localVariablesGroup [
+	<generated>
+	<navigation: 'LocalVariables'>
+	^ MooseSpecializedGroup withAll: self localVariables asSet
+]

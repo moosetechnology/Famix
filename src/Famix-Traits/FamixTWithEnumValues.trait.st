@@ -57,3 +57,10 @@ FamixTWithEnumValues >> enumValues: anObject [
 	<generated>
 	enumValues value: anObject
 ]
+
+{ #category : 'navigation' }
+FamixTWithEnumValues >> enumValuesGroup [
+	<generated>
+	<navigation: 'EnumValues'>
+	^ MooseSpecializedGroup withAll: self enumValues asSet
+]

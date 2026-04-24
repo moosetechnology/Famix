@@ -71,3 +71,10 @@ FamixTWithParameters >> parameters: anObject [
 	<generated>
 	parameters value: anObject
 ]
+
+{ #category : 'navigation' }
+FamixTWithParameters >> parametersGroup [
+	<generated>
+	<navigation: 'Parameters'>
+	^ MooseSpecializedGroup withAll: self parameters asSet
+]

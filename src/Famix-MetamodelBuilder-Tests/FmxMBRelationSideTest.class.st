@@ -125,12 +125,11 @@ FmxMBRelationSideTest >> testProperties [
 	side := FmxMBRelationSide new.
 
 	self deny: side isContainer.
-	side container.
+	side container: true.
 	self assert: side isContainer.
 	side container: false.
 	self deny: side isContainer.
-	side container.
-	self assert: side isContainer.
+	side container: true.
 	side noContainer.
 	self deny: side isContainer.
 

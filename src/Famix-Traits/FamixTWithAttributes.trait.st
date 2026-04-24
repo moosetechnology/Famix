@@ -58,6 +58,13 @@ FamixTWithAttributes >> attributes: anObject [
 	attributes value: anObject
 ]
 
+{ #category : 'navigation' }
+FamixTWithAttributes >> attributesGroup [
+	<generated>
+	<navigation: 'Attributes'>
+	^ MooseSpecializedGroup withAll: self attributes asSet
+]
+
 { #category : 'Famix-Extensions' }
 FamixTWithAttributes >> numberOfAttributes [
 

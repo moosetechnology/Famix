@@ -60,3 +60,10 @@ FamixTWithLambdas >> lambdas: anObject [
 	<generated>
 	lambdas value: anObject
 ]
+
+{ #category : 'navigation' }
+FamixTWithLambdas >> lambdasGroup [
+	<generated>
+	<navigation: 'Lambdas'>
+	^ MooseSpecializedGroup withAll: self lambdas asSet
+]

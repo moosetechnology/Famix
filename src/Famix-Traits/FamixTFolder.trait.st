@@ -102,6 +102,13 @@ FamixTFolder >> childrenFileSystemEntities: anObject [
 	childrenFileSystemEntities value: anObject
 ]
 
+{ #category : 'navigation' }
+FamixTFolder >> childrenFileSystemEntitiesGroup [
+	<generated>
+	<navigation: 'ChildrenFileSystemEntities'>
+	^ MooseSpecializedGroup withAll: self childrenFileSystemEntities asSet
+]
+
 { #category : 'adding' }
 FamixTFolder >> files [
 	^ self childrenFileSystemEntities reject: #isFolder
