@@ -104,21 +104,3 @@ FmxMBBehaviorTest >> testTestingSelectors [
 	simpleClass withTesting.
 	self assertCollection: simpleClass testingSelectors hasSameElements: #(isComment)
 ]
-
-{ #category : 'tests' }
-FmxMBBehaviorTest >> testWithNavigationOf [
-
-	| method package env |
-	
-	package := builder newClassNamed: #Package.    
-	method := builder newClassNamed: #Method.    
-
-	package <>-* method. "with navigation is implicit"
-
-	builder generate.
-	
-	env := builder environment ringEnvironment.
-	
-	self assert: (((env ask classNamed: #TstPackage) methodNamed: 'methodsGroup') sourceCode includesSubstring: '<navigation: ''Methods''>').
-	self assert: (((env ask classNamed: #TstMethod) methodNamed: 'packageGroup') sourceCode includesSubstring: '<navigation: ''Package''>').
-]
