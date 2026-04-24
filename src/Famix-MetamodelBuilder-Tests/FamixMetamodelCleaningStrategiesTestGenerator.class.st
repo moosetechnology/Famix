@@ -31,10 +31,10 @@ FamixMetamodelCleaningStrategiesTestGenerator class >> prefix [
 FamixMetamodelCleaningStrategiesTestGenerator >> defineClasses [
 
 	super defineClasses.
-	fmx := builder newClassNamed: #FmxTestEntity.
+	fmx := builder newClassNamed: #Entity.
 	fmx comment: 'Comment'.
-	fmx2 := builder newClassNamed: #FmxTestEntityWithDifferentSuperclass.
-	fmx3 := builder newClassNamed: #FmxTestEntityWithTraitPrecedenceToRemove
+	fmx2 := builder newClassNamed: #WithDifferentSuperclass.
+	fmx3 := builder newClassNamed: #WithTraitPrecedenceToRemove
 ]
 
 { #category : 'definition' }
