@@ -207,7 +207,7 @@ FmxMBRingEnvironment >> createTraitNamed: traitName uses: traitNames slots: slot
 				traitNames ifNotEmpty: [ change traits: '{' , ($+ join: traitNames) , '}' ].
 				self flag: #todo. "Kill ring in slot usages."
 				slots ifNotEmpty: [ change slots: '{' , ('. ' join: (slots collect: #definitionString)) , '}' ].
-				changesToApply add: change ].
+				"changesToApply add: change" ].
 
 	aPackage := self ringEnvironment ensurePackageNamed: packageName.
 
@@ -272,38 +272,37 @@ FmxMBRingEnvironment >> initialize [
 FmxMBRingEnvironment >> recordAdoptionOfClassDefinitionFrom: currentClass to: anRGClassModel [
 
 	| currentCustomSlots currentCustomSlotNames modelSlotDefinitions currentGeneratedSlots modelGeneratedSlots slotRemovals |
-	(currentClass needToAdaptTo: anRGClassModel) ifFalse: [ ^ self ].
+	(currentClass isNil or: [ currentClass needToAdaptTo: anRGClassModel ]) ifFalse: [ ^ self ].
 
 	"We are updating a class installed in the system (currentClass) to a new representation defined in the model (anRGClass).
 	This has to be done in order to allow updating the class at run time"
 
-	currentGeneratedSlots := currentClass generatedSlots.
-	currentCustomSlots := currentClass localSlots copyWithoutAll:
-		                      currentGeneratedSlots.
+	currentGeneratedSlots := currentClass
+		                         ifNil: [ #(  ) ]
+		                         ifNotNil: #generatedSlots.
+	currentCustomSlots := currentClass
+		                      ifNil: [ #(  ) ]
+		                      ifNotNil: [ :class | class localSlots copyWithoutAll: currentGeneratedSlots ].
 	currentCustomSlotNames := currentCustomSlots collect: #name.
 
-	modelGeneratedSlots := anRGClassModel slots reject: [ :each |
-		                       currentCustomSlotNames includes: each name ].
+	modelGeneratedSlots := anRGClassModel slots reject: [ :each | currentCustomSlotNames includes: each name ].
 
-	modelSlotDefinitions := (modelGeneratedSlots collect:
-		                         #definitionString) asOrderedCollection.
-	modelSlotDefinitions addAll:
-		(currentCustomSlots collect: #definitionString).
+	modelSlotDefinitions := (modelGeneratedSlots collect: #definitionString) asOrderedCollection.
+	modelSlotDefinitions addAll: (currentCustomSlots collect: #definitionString).
 	modelSlotDefinitions := modelSlotDefinitions sorted.
 
-	slotRemovals := currentGeneratedSlots reject: [ :e |
-		                modelGeneratedSlots anySatisfy: [ :current |
-			                current name = e name ] ].
+	slotRemovals := currentGeneratedSlots reject: [ :e | modelGeneratedSlots anySatisfy: [ :current | current name = e name ] ].
 
-	slotRemovals ifNotEmpty: [
-		changesToApply add: (FmxSlotRemovals slots: slotRemovals) ].
+	slotRemovals ifNotEmpty: [ changesToApply add: (FmxSlotRemovals slots: slotRemovals) ].
 
 	self
 		recordClassAdditionFromClass: anRGClassModel
 		traits: (self traitStringFrom: currentClass to: anRGClassModel)
 		slots: '{' , (modelSlotDefinitions joinUsing: '. ') , '}'
-		package: currentClass package name
-		tag: currentClass packageTag name
+		package: (currentClass ifNil: [ anRGClassModel ]) package name
+		tag: (currentClass
+				 ifNil: [ anRGClassModel packageTag ]
+				 ifNotNil: [ :class | class packageTag name ])
 ]
 
 { #category : 'installing' }
@@ -333,16 +332,7 @@ FmxMBRingEnvironment >> recordClassChangesFor: aRGClass [
 	| realClass |
 	self flag: #todo. "Kill ring."
 	realClass := self class environment classNamed: aRGClass name.
-	realClass
-		ifNil: [ "1 halt."
-				aRGClass isTrait ifFalse: [
-						self
-							recordClassAdditionFromClass: aRGClass
-							traits: (aRGClass traits ifEmpty: [ nil ] ifNotEmpty: [ aRGClass traitCompositionString ])
-							slots: (aRGClass slots ifEmpty: [ nil ] ifNotEmpty: [ aRGClass slotDefinitionString ])
-							package: aRGClass package name
-							tag: aRGClass tags anyOne ] ]
-		ifNotNil: [ self recordAdoptionOfClassDefinitionFrom: realClass to: aRGClass ].
+	self recordAdoptionOfClassDefinitionFrom: realClass to: aRGClass.
 	self recordMethodsAdoptionsOf: realClass to: aRGClass realClassName: aRGClass name.
 	self recordMethodsAdoptionsOf: (realClass ifNotNil: [ realClass class ]) to: aRGClass classSide realClassName: aRGClass name
 ]
@@ -430,37 +420,30 @@ FmxMBRingEnvironment >> slotNamed: slotName defaultValue: aValue [
 
 { #category : 'installing' }
 FmxMBRingEnvironment >> traitStringFrom: realClass to: aRGClass [
-
 	"We need to collect the generated traits + the custom traits added by the user."
 
 	| customTraitNames traitsDefinitions traitCompositionString precedingTrait |
-	customTraitNames := (realClass traitComposition rootMembers select: [ 
-		                     :e | 
-		                     realClass customTraitNames includes: e name ]) 
-		                    collect: #traitCompositionExpression.
+	customTraitNames := ((realClass
+		                      ifNil: [ #(  ) ]
+		                      ifNotNil: [ :class | class traitComposition rootMembers ]) select: [ :e |
+			                     realClass
+				                     ifNil: [ false ]
+				                     ifNotNil: [ :class | class customTraitNames includes: e name ] ]) collect: #traitCompositionExpression.
+
 	traitsDefinitions := aRGClass traitsDefinitions
 		                     ifEmpty: [ {  } ]
-		                     ifNotEmpty: [ :rgDefinitions | 
-			                     { rgDefinitions anyOne }
-			                     ,
-			                     (rgDefinitions allButFirst collect: [ :e | 
-				                      '(' , e , ')' ]) ].
+		                     ifNotEmpty: [ :rgDefinitions | { rgDefinitions anyOne } , (rgDefinitions allButFirst collect: [ :e | '(' , e , ')' ]) ].
 	traitsDefinitions := traitsDefinitions , customTraitNames.
 
-	traitCompositionString := traitsDefinitions
-		                          ifEmpty: [ ^ '{ }' ]
-		                          ifNotEmpty: [ 
-		                          traitsDefinitions joinUsing: ' + ' ].
+	traitCompositionString := traitsDefinitions ifEmpty: [ ^ '{ }' ] ifNotEmpty: [ traitsDefinitions joinUsing: ' + ' ].
 
-	precedingTrait := aRGClass
-		                  propertyNamed: #precedingTrait
-		                  ifAbsent: [ ^ traitCompositionString ].
+	precedingTrait := aRGClass propertyNamed: #precedingTrait ifAbsent: [ ^ traitCompositionString ].
 
-	^ String streamContents: [ :s | 
-		  s
-			  nextPutAll: '(( ';
-			  nextPutAll: traitCompositionString;
-			  nextPutAll: ' ) withPrecedenceOf: ';
-			  nextPutAll: precedingTrait;
-			  nextPutAll: ' )' ]
+	^ String streamContents: [ :s |
+			  s
+				  nextPutAll: '(( ';
+				  nextPutAll: traitCompositionString;
+				  nextPutAll: ' ) withPrecedenceOf: ';
+				  nextPutAll: precedingTrait;
+				  nextPutAll: ' )' ]
 ]
