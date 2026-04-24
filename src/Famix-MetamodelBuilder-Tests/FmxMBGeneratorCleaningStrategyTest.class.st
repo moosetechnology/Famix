@@ -207,6 +207,14 @@ FmxMBGeneratorCleaningStrategyTest >> testGenerateNoCleaningGeneration [
 	self class environment
 		at: #FmxTestCleaningStrategyWithTraitPrecedenceToRemove
 		ifPresent: [ :class | self deny: class traitComposition isPrecedingSequence ]
+		ifAbsent: [ self fail ].		
+
+	"After the generation, we should have a method removal and a trait precedence."
+	self class environment
+		at: #FmxTestCleaningStrategyWithTraitOptions
+		ifPresent: [ :class |
+				self assert: class traitComposition isPrecedingSequence.
+				self assert: (class traitComposition members anySatisfy: #isTraitExclusion) ]
 		ifAbsent: [ self fail ].
 
 	"After the generation, the superclass should be updated to be the one described in the generator."
@@ -263,6 +271,14 @@ FmxMBGeneratorCleaningStrategyTest >> testGenerateTotalCleaningGeneration [
 	self class environment
 		at: #FmxTestCleaningStrategyWithTraitPrecedenceToRemove
 		ifPresent: [ :class | self deny: class traitComposition isPrecedingSequence ]
+		ifAbsent: [ self fail ].
+		
+	"After the generation, we should have a method removal and a trait precedence."
+	self class environment
+		at: #FmxTestCleaningStrategyWithTraitOptions
+		ifPresent: [ :class |
+				self assert: class traitComposition isPrecedingSequence.
+				self assert: (class traitComposition members anySatisfy: #isTraitExclusion) ]
 		ifAbsent: [ self fail ].
 
 	"After the generation, the superclass should be updated."

@@ -6,7 +6,8 @@ Class {
 		'tOneTrait',
 		'fmx2',
 		'fmx3',
-		'tTwoTrait'
+		'tTwoTrait',
+		'fmx4'
 	],
 	#category : 'Famix-MetamodelBuilder-Tests-Helpers',
 	#package : 'Famix-MetamodelBuilder-Tests',
@@ -34,19 +35,25 @@ FamixMetamodelCleaningStrategiesTestGenerator >> defineClasses [
 	fmx := builder newClassNamed: #Entity.
 	fmx comment: 'Comment'.
 	fmx2 := builder newClassNamed: #WithDifferentSuperclass.
-	fmx3 := builder newClassNamed: #WithTraitPrecedenceToRemove
+	fmx3 := builder newClassNamed: #WithTraitPrecedenceToRemove.
+	fmx4 := builder newClassNamed: #WithTraitOptions
 ]
 
 { #category : 'definition' }
 FamixMetamodelCleaningStrategiesTestGenerator >> defineHierarchy [
+
 	super defineHierarchy.
-	
+
 	fmx --|> tOneTrait.
-	
+
 	fmx2 --|> fmx.
-	
+
 	fmx3 --|> tOneTrait.
-	fmx3 --|> tTwoTrait
+	fmx3 --|> tTwoTrait.
+
+	fmx4 inheritsFromTrait: tOneTrait without: #( a b ).
+	fmx4 --|> tTwoTrait.
+	fmx4 withPrecedenceOf: tTwoTrait
 ]
 
 { #category : 'definition' }
