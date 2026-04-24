@@ -6,7 +6,6 @@ Class {
 		'comment',
 		'builder',
 		'willGenerate',
-		'navigationGroups',
 		'additionalProperties',
 		'isRemote'
 	],
@@ -53,7 +52,6 @@ FmxMBEntity >> initialize [
 
 	comment := String new.
 	willGenerate := true.
-	navigationGroups := Set new.
 	additionalProperties := Dictionary new.
 	isRemote := false.
 ]
@@ -80,17 +78,6 @@ FmxMBEntity >> name: anObject [
 ]
 
 { #category : 'accessing' }
-FmxMBEntity >> navigationGroups [
-	^ navigationGroups
-]
-
-{ #category : 'accessing' }
-FmxMBEntity >> navigationGroups: anObject [
-	<ignoreForCoverage>
-	navigationGroups := anObject
-]
-
-{ #category : 'accessing' }
 FmxMBEntity >> remoteBuilder [
 
 	^ self additionalProperties at: #remoteBuilder ifAbsent: [ nil ]
@@ -110,19 +97,4 @@ FmxMBEntity >> willGenerate [
 { #category : 'accessing' }
 FmxMBEntity >> willGenerate: anObject [
 	willGenerate := anObject
-]
-
-{ #category : 'navigation' }
-FmxMBEntity >> withNavigationOf: aRelation [
-
-	self navigationGroups add: (FmxMBNavigationGroup new 
-		name: self name;
-		entity: self;
-		relation: aRelation;
-		yourself).
-]
-
-{ #category : 'navigation' }
-FmxMBEntity >> withoutNavigation [
-	navigationGroups := Set new.
 ]

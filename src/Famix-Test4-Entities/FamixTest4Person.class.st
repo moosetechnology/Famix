@@ -92,13 +92,6 @@ FamixTest4Person >> books: anObject [
 	books value: anObject
 ]
 
-{ #category : 'navigation' }
-FamixTest4Person >> booksGroup [
-	<generated>
-	<navigation: 'Books'>
-	^ MooseSpecializedGroup withAll: self books asSet
-]
-
 { #category : 'accessing' }
 FamixTest4Person >> firstName [
 

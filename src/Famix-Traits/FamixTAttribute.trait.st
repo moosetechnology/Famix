@@ -126,13 +126,6 @@ FamixTAttribute >> parentType: anObject [
 
 ]
 
-{ #category : 'navigation' }
-FamixTAttribute >> parentTypeGroup [
-	<generated>
-	<navigation: 'ParentType'>
-	^ MooseSpecializedGroup with: self parentType
-]
-
 { #category : 'printing' }
 FamixTAttribute >> printOn: aStream [
 	self parentType

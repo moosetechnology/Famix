@@ -77,10 +77,3 @@ FamixTWithTypes >> types: anObject [
 	<generated>
 	types value: anObject
 ]
-
-{ #category : 'navigation' }
-FamixTWithTypes >> typesGroup [
-	<generated>
-	<navigation: 'Types'>
-	^ MooseSpecializedGroup withAll: self types asSet
-]

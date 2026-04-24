@@ -79,13 +79,6 @@ FamixTAnnotationType >> annotationTypesContainer: anObject [
 	annotationTypesContainer := anObject
 ]
 
-{ #category : 'navigation' }
-FamixTAnnotationType >> annotationTypesContainerGroup [
-	<generated>
-	<navigation: 'AnnotationTypesContainer'>
-	^ MooseSpecializedGroup with: self annotationTypesContainer
-]
-
 { #category : 'printing' }
 FamixTAnnotationType >> displayStringOn: aStream [
 

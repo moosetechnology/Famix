@@ -120,13 +120,6 @@ FamixTAnnotationInstance >> attributes: anObject [
 	attributes value: anObject
 ]
 
-{ #category : 'navigation' }
-FamixTAnnotationInstance >> attributesGroup [
-	<generated>
-	<navigation: 'Attributes'>
-	^ MooseSpecializedGroup withAll: self attributes asSet
-]
-
 { #category : 'printing' }
 FamixTAnnotationInstance >> displayStringOn: aStream [
 

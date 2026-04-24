@@ -62,13 +62,6 @@ FamixTComment >> commentedEntity: anObject [
 	commentedEntity := anObject
 ]
 
-{ #category : 'navigation' }
-FamixTComment >> commentedEntityGroup [
-	<generated>
-	<navigation: 'CommentedEntity'>
-	^ MooseSpecializedGroup with: self commentedEntity
-]
-
 { #category : 'printing' }
 FamixTComment >> displayStringOn: aStream [
 

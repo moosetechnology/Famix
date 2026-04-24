@@ -123,17 +123,3 @@ FmxMBRelation >> to: aBlock [
 		yourself).
 	aBlock cull: oppositeSide.
 ]
-
-{ #category : 'accessing' }
-FmxMBRelation >> withNavigation [
-
-	self sides do: [ :aSide |
-		aSide withNavigationOf: self ]
-]
-
-{ #category : 'accessing' }
-FmxMBRelation >> withoutNavigation [
-
-	self sides do: [ :aSide |
-		aSide withoutNavigation ]
-]

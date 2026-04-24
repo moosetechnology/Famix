@@ -60,10 +60,3 @@ FamixTWithGlobalVariables >> globalVariables: anObject [
 	<generated>
 	globalVariables value: anObject
 ]
-
-{ #category : 'navigation' }
-FamixTWithGlobalVariables >> globalVariablesGroup [
-	<generated>
-	<navigation: 'GlobalVariables'>
-	^ MooseSpecializedGroup withAll: self globalVariables asSet
-]

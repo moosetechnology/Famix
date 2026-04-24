@@ -57,10 +57,3 @@ FamixTWithImplicitVariables >> implicitVariables: anObject [
 	<generated>
 	implicitVariables value: anObject
 ]
-
-{ #category : 'navigation' }
-FamixTWithImplicitVariables >> implicitVariablesGroup [
-	<generated>
-	<navigation: 'ImplicitVariables'>
-	^ MooseSpecializedGroup withAll: self implicitVariables asSet
-]

@@ -97,10 +97,3 @@ FamixTParameter >> parentBehaviouralEntity: anObject [
 	self resetMooseName.
 
 ]
-
-{ #category : 'navigation' }
-FamixTParameter >> parentBehaviouralEntityGroup [
-	<generated>
-	<navigation: 'ParentBehaviouralEntity'>
-	^ MooseSpecializedGroup with: self parentBehaviouralEntity
-]
