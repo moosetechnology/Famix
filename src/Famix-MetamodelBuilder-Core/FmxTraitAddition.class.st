@@ -33,5 +33,5 @@ FmxTraitAddition >> usesTrait: aString [
 
 	traits ifNil: [ ^ false ].
 
-	traits includesSubstring: aString
+	^ traits includesSubstring: aString
 ]

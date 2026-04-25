@@ -131,10 +131,19 @@ FmxMBRingEnvironment >> compile: aSource in: aClass classified: aProtocol packag
 ]
 
 { #category : 'installing' }
-FmxMBRingEnvironment >> createClassNamed: className superclass: superclassName traitNames: traitNames slots: slots in: packageName tag: tag comment: comment [
+FmxMBRingEnvironment >> createClassNamed: className superclass: superclassName traitNames: traitNames slots: slots in: defaultPackage tag: defaultTag comment: comment [
 
-	| aClass existingClass composition |
+	| aClass existingClass composition realClass packageName tag |
 	existingClass := self ringEnvironment ask behaviorNamed: className.
+
+	realClass := self class environment at: className ifAbsent: [ nil ].
+
+	packageName := realClass
+		               ifNil: [ defaultPackage ]
+		               ifNotNil: [ realClass package name ].
+	tag := realClass
+		       ifNil: [ defaultTag ]
+		       ifNotNil: [ realClass packageTag name ].
 
 	"existingClass
 		ifNil: [
@@ -186,14 +195,19 @@ FmxMBRingEnvironment >> createClassNamed: className superclass: superclassName t
 ]
 
 { #category : 'initialization' }
-FmxMBRingEnvironment >> createTraitNamed: traitName uses: traitNames slots: slots in: packageName tag: tag comment: comment [
+FmxMBRingEnvironment >> createTraitNamed: traitName uses: traitNames slots: slots in: defaultPackage tag: defaultTag comment: comment [
 
-	| aPackage aTrait existingClass composition |
-	existingClass := self ringEnvironment ask behaviorNamed: traitName asSymbol.
+	| aPackage aTrait existingRGClass composition packageName tag realClass |
+	existingRGClass := self ringEnvironment ask behaviorNamed: traitName asSymbol.
+
+	realClass := self class environment at: traitName ifAbsent: [ nil ].
+	
+	packageName := realClass ifNil: [ defaultPackage ] ifNotNil: [ realClass package name ].
+	tag := realClass ifNil: [ defaultTag ] ifNotNil: [ realClass packageTag name ]. 
 
 	self class environment
 		at: traitName
-		ifPresent: [ :realClass | self flag: #todo ]
+		ifPresent: [ :class | self flag: #todo ]
 		ifAbsent: [
 				| change |
 				change := FmxTraitAddition new.
@@ -206,7 +220,7 @@ FmxMBRingEnvironment >> createTraitNamed: traitName uses: traitNames slots: slot
 				self flag: #todo. "Manage precedence + factorize code"
 				traitNames ifNotEmpty: [ change traits: '{' , ($+ join: traitNames) , '}' ].
 				self flag: #todo. "Kill ring in slot usages."
-				slots ifNotEmpty: [ change slots: '{' , ('. ' join: (slots collect: #definitionString)) , '}' ].
+				slots ifNotEmpty: [ change slots: '{' , ('. ' join: (slots collect: #definitionString)) , '}' ]
 				"changesToApply add: change" ].
 
 	aPackage := self ringEnvironment ensurePackageNamed: packageName.
@@ -219,6 +233,8 @@ FmxMBRingEnvironment >> createTraitNamed: traitName uses: traitNames slots: slot
 
 	traitNames do: [ :each | composition addTransformation: (self ringEnvironment ensureTraitNamed: each) ].
 
+	self flag: #todo. "Should not make it in dev branch of Moose. The ring package creation should be removed."
+	self ensurePackageNamed: packageName.
 	aTrait package: aPackage.
 	aTrait layout makeResolved.
 
@@ -299,10 +315,8 @@ FmxMBRingEnvironment >> recordAdoptionOfClassDefinitionFrom: currentClass to: an
 		recordClassAdditionFromClass: anRGClassModel
 		traits: (self traitStringFrom: currentClass to: anRGClassModel)
 		slots: '{' , (modelSlotDefinitions joinUsing: '. ') , '}'
-		package: (currentClass ifNil: [ anRGClassModel ]) package name
-		tag: (currentClass
-				 ifNil: [ anRGClassModel packageTag ]
-				 ifNotNil: [ :class | class packageTag name ])
+		package: anRGClassModel package name
+		tag: anRGClassModel packageTag
 ]
 
 { #category : 'installing' }
