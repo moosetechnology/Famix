@@ -32,11 +32,15 @@ FmxMBRelationSide >> acceptVisitor: aVisitor [
 { #category : 'generating' }
 FmxMBRelationSide >> asRGSlot [
 
-	^ self builder environment
-		  slotNamed: self name asSymbol
-		  cardinality: self cardinality
-		  type: self oppositeType
-		  opposite: self oppositeName
+	| cardinalityClassName |
+	cardinalityClassName := cardinality = #one
+		                        ifTrue: [ #FMOne ]
+		                        ifFalse: [ #FMMany ].
+
+	^ (RGUnknownSlot named: self name asSymbol) expression: ('{1} type: #{2} opposite: #{3}' format: {
+				   cardinalityClassName.
+				   self oppositeType.
+				   self oppositeName })
 ]
 
 { #category : 'converting' }

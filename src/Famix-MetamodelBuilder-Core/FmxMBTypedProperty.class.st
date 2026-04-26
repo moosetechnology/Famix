@@ -23,7 +23,9 @@ FmxMBTypedProperty >> acceptVisitor: aVisitor [
 { #category : 'generating' }
 FmxMBTypedProperty >> asRGSlot [
 
-	^ self builder environment slotNamed: self name asSymbol defaultValue: self defaultValue
+	^ (RGUnknownSlot named: self name asSymbol) expression: (self defaultValue
+			   ifNil: [ #FMProperty ]
+			   ifNotNil: [ :value | 'FMProperty defaultValue: ' , value printString ])
 ]
 
 { #category : 'accessing' }

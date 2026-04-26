@@ -408,33 +408,6 @@ FmxMBRingEnvironment >> ringEnvironment [
 	^ ringEnvironment
 ]
 
-{ #category : 'accessing' }
-FmxMBRingEnvironment >> slotNamed: slotName [
-	^ (RGUnknownSlot named: slotName asSymbol) expression: #FMProperty
-]
-
-{ #category : 'accessing' }
-FmxMBRingEnvironment >> slotNamed: slotName cardinality: cardinality type: type opposite: oppositeName [
-
-	| cardinalityClassName |
-	
-	cardinalityClassName := cardinality = #one
-		ifTrue: [ #FMOne ]
-		ifFalse: [ #FMMany ].
-		
-	^ (RGUnknownSlot named: slotName asSymbol)
-		 expression: ('{1} type: #{2} opposite: #{3}' 
-			format: { cardinalityClassName. type. oppositeName}) 
-]
-
-{ #category : 'accessing' }
-FmxMBRingEnvironment >> slotNamed: slotName defaultValue: aValue [
-
-	aValue ifNil: [ ^ self slotNamed: slotName ].
-	^ (RGUnknownSlot named: slotName asSymbol) expression:
-		  ('FMProperty defaultValue: {1}' format: { aValue printString })
-]
-
 { #category : 'initialization' }
 FmxMBRingEnvironment >> slotsFrom: properties [
 
