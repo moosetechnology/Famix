@@ -145,6 +145,7 @@ FmxMBRingEnvironment >> createClassNamed: className superclass: superclassName t
 		       ifNil: [ defaultTag ]
 		       ifNotNil: [ realClass packageTag name ].
 		
+	self validateProperties: properties.
 	slots := self slotsFrom: properties.
 
 	"existingClass
@@ -207,6 +208,7 @@ FmxMBRingEnvironment >> createTraitNamed: traitName uses: traitNames properties:
 	packageName := realClass ifNil: [ defaultPackage ] ifNotNil: [ realClass package name ].
 	tag := realClass ifNil: [ defaultTag ] ifNotNil: [ realClass packageTag name ]. 
 	
+	self validateProperties: properties.
 	slots := self slotsFrom: properties.
 
 	self class environment
@@ -436,16 +438,10 @@ FmxMBRingEnvironment >> slotNamed: slotName defaultValue: aValue [
 { #category : 'initialization' }
 FmxMBRingEnvironment >> slotsFrom: properties [
 
-	| slotGroups |
 	self flag: #todo. "To kill with Ring usage."
-	slotGroups := (properties
-		               select: #producesSlot
-		               thenCollect: [ :property | property asSlot ]) groupedBy: #name.
-
-	"check that all slots with the same name have the same properties"
-	slotGroups valuesDo: [ :similarSlots | self assert: (similarSlots collect: #name) asSet size = 1 ].
-
-	^ slotGroups values collect: [ :each | each anyOne ]
+	^ properties
+		  select: #producesSlot
+		  thenCollect: [ :property | property asRGSlot ]
 ]
 
 { #category : 'installing' }
@@ -476,4 +472,15 @@ FmxMBRingEnvironment >> traitStringFrom: realClass to: aRGClass [
 				  nextPutAll: ' ) withPrecedenceOf: ';
 				  nextPutAll: precedingTrait;
 				  nextPutAll: ' )' ]
+]
+
+{ #category : 'installing' }
+FmxMBRingEnvironment >> validateProperties: properties [
+
+	| names |
+	names := properties collect: #name.
+	self assert: names size = names asSet size description: 'Two properties of the same class cannot have the same names.'.
+	properties
+		select: #producesSlot
+		thenDo: [ :property | property validate ]
 ]

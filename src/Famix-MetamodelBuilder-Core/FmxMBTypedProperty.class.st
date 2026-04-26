@@ -21,10 +21,9 @@ FmxMBTypedProperty >> acceptVisitor: aVisitor [
 ]
 
 { #category : 'generating' }
-FmxMBTypedProperty >> asSlot [
-	self propertyType ifNil: [ FmxMBIncompletePropertyDefiniton signal ].
+FmxMBTypedProperty >> asRGSlot [
 
-	^ self builder environment slotNamed: self name asSymbol defaultValue: self defaultValue 
+	^ self builder environment slotNamed: self name asSymbol defaultValue: self defaultValue
 ]
 
 { #category : 'accessing' }
@@ -155,4 +154,10 @@ FmxMBTypedProperty >> propertyType [
 { #category : 'accessing' }
 FmxMBTypedProperty >> propertyType: anObject [
 	propertyType := anObject
+]
+
+{ #category : 'generating' }
+FmxMBTypedProperty >> validate [
+
+	self propertyType ifNil: [ FmxMBIncompletePropertyDefiniton signal ]
 ]

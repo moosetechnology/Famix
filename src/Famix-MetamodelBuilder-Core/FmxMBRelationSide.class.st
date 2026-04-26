@@ -29,22 +29,21 @@ FmxMBRelationSide >> acceptVisitor: aVisitor [
 	^ aVisitor visitRelationSide: self.
 ]
 
+{ #category : 'generating' }
+FmxMBRelationSide >> asRGSlot [
+
+	^ self builder environment
+		  slotNamed: self name asSymbol
+		  cardinality: self cardinality
+		  type: self oppositeType
+		  opposite: self oppositeName
+]
+
 { #category : 'converting' }
 FmxMBRelationSide >> asRelationSideNamed: aPropertyName [
 
 	"ignore the proposed name"
 	^ self 
-]
-
-{ #category : 'generating' }
-FmxMBRelationSide >> asSlot [
-	self hasRelation ifFalse: [ FmxMBIncompletePropertyDefiniton signal ].
-
-	^ self builder environment
-		slotNamed: self name asSymbol
-		cardinality: self cardinality
-		type: self oppositeType
-		opposite: self oppositeName
 ]
 
 { #category : 'accessing' }
@@ -354,4 +353,10 @@ FmxMBRelationSide >> trait: anObject [
 FmxMBRelationSide >> type [
 
 	^ (self builder configuration prefix , self relatedEntityName) asSymbol
+]
+
+{ #category : 'generating' }
+FmxMBRelationSide >> validate [
+
+	self hasRelation ifFalse: [ FmxMBIncompletePropertyDefiniton signal ]
 ]

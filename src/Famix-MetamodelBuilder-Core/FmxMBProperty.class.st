@@ -12,7 +12,7 @@ FmxMBProperty class >> isAbstract [
 ]
 
 { #category : 'accessing' }
-FmxMBProperty >> asSlot [
+FmxMBProperty >> asRGSlot [
 
 	<ignoreForCoverage>
 	self subclassResponsibility
@@ -79,4 +79,10 @@ FmxMBProperty >> printOn: aStream [
 { #category : 'printing' }
 FmxMBProperty >> producesSlot [
 	^ true
+]
+
+{ #category : 'validation' }
+FmxMBProperty >> validate [
+
+	self subclassResponsibility
 ]
