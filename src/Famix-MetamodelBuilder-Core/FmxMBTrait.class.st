@@ -61,7 +61,7 @@ FmxMBTrait >> generate [
 	aTrait := self builder environment
 		          createTraitNamed: traitName asSymbol
 		          uses: self allTraitNames
-		          slots: self slotDefinitions
+		          properties: self properties
 		          in: self packageName
 		          tag: self tag
 		          comment: self commentWithRelations.

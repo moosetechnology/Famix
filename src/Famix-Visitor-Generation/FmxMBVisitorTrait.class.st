@@ -36,7 +36,7 @@ FmxMBVisitorTrait >> generate [
 	aTrait := self builder environment
 		          createTraitNamed: self fullName asSymbol
 		          uses: self allTraitNames
-		          slots: self slotDefinitions
+		          properties: self properties
 		          in: self packageName
 		          tag: self tag
 		          comment: self comment.

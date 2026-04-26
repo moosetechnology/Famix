@@ -131,9 +131,9 @@ FmxMBRingEnvironment >> compile: aSource in: aClass classified: aProtocol packag
 ]
 
 { #category : 'installing' }
-FmxMBRingEnvironment >> createClassNamed: className superclass: superclassName traitNames: traitNames slots: slots in: defaultPackage tag: defaultTag comment: comment [
+FmxMBRingEnvironment >> createClassNamed: className superclass: superclassName traitNames: traitNames properties: properties in: defaultPackage tag: defaultTag comment: comment [
 
-	| aClass existingClass composition realClass packageName tag |
+	| slots aClass existingClass composition realClass packageName tag |
 	existingClass := self ringEnvironment ask behaviorNamed: className.
 
 	realClass := self class environment at: className ifAbsent: [ nil ].
@@ -144,6 +144,8 @@ FmxMBRingEnvironment >> createClassNamed: className superclass: superclassName t
 	tag := realClass
 		       ifNil: [ defaultTag ]
 		       ifNotNil: [ realClass packageTag name ].
+		
+	slots := self slotsFrom: properties.
 
 	"existingClass
 		ifNil: [
@@ -195,15 +197,17 @@ FmxMBRingEnvironment >> createClassNamed: className superclass: superclassName t
 ]
 
 { #category : 'initialization' }
-FmxMBRingEnvironment >> createTraitNamed: traitName uses: traitNames slots: slots in: defaultPackage tag: defaultTag comment: comment [
+FmxMBRingEnvironment >> createTraitNamed: traitName uses: traitNames properties: properties in: defaultPackage tag: defaultTag comment: comment [
 
-	| aPackage aTrait existingRGClass composition packageName tag realClass |
+	| aTrait existingRGClass composition packageName tag realClass slots |
 	existingRGClass := self ringEnvironment ask behaviorNamed: traitName asSymbol.
 
 	realClass := self class environment at: traitName ifAbsent: [ nil ].
 	
 	packageName := realClass ifNil: [ defaultPackage ] ifNotNil: [ realClass package name ].
 	tag := realClass ifNil: [ defaultTag ] ifNotNil: [ realClass packageTag name ]. 
+	
+	slots := self slotsFrom: properties.
 
 	self class environment
 		at: traitName
@@ -223,9 +227,7 @@ FmxMBRingEnvironment >> createTraitNamed: traitName uses: traitNames slots: slot
 				slots ifNotEmpty: [ change slots: '{' , ('. ' join: (slots collect: #definitionString)) , '}' ]
 				"changesToApply add: change" ].
 
-	aPackage := self ringEnvironment ensurePackageNamed: packageName.
-
-	aTrait := ringEnvironment ensureTraitNamed: traitName.
+	aTrait := self ringEnvironment ensureTraitNamed: traitName.
 	aTrait superclass: self basicTrait.
 
 	composition := RGTraitComposition parent: aTrait.
@@ -235,7 +237,7 @@ FmxMBRingEnvironment >> createTraitNamed: traitName uses: traitNames slots: slot
 
 	self flag: #todo. "Should not make it in dev branch of Moose. The ring package creation should be removed."
 	self ensurePackageNamed: packageName.
-	aTrait package: aPackage.
+	aTrait package: (self ringEnvironment ensurePackageNamed: packageName).
 	aTrait layout makeResolved.
 
 	slots do: [ :slotInBadEnvironment |
@@ -250,7 +252,6 @@ FmxMBRingEnvironment >> createTraitNamed: traitName uses: traitNames slots: slot
 			slot propertyNamed: #isGenerated put: true ].
 
 	aTrait tagWith: tag.
-
 	comment ifNotEmpty: [ changesToApply add: (FmxClassCommentUpdate className: traitName comment: comment) ].
 
 	^ aTrait
@@ -430,6 +431,21 @@ FmxMBRingEnvironment >> slotNamed: slotName defaultValue: aValue [
 	aValue ifNil: [ ^ self slotNamed: slotName ].
 	^ (RGUnknownSlot named: slotName asSymbol) expression:
 		  ('FMProperty defaultValue: {1}' format: { aValue printString })
+]
+
+{ #category : 'initialization' }
+FmxMBRingEnvironment >> slotsFrom: properties [
+
+	| slotGroups |
+	self flag: #todo. "To kill with Ring usage."
+	slotGroups := (properties
+		               select: #producesSlot
+		               thenCollect: [ :property | property asSlot ]) groupedBy: #name.
+
+	"check that all slots with the same name have the same properties"
+	slotGroups valuesDo: [ :similarSlots | self assert: (similarSlots collect: #name) asSet size = 1 ].
+
+	^ slotGroups values collect: [ :each | each anyOne ]
 ]
 
 { #category : 'installing' }

@@ -59,7 +59,7 @@ FmxMBImportingContext >> generate [
 		          createClassNamed: self fullName asSymbol
 		          superclass: superclass
 		          traitNames: self allTraitNames
-		          slots: self slotDefinitions
+		          properties: self properties
 		          in: self packageName
 		          tag: self tag
 		          comment: self comment.

@@ -70,7 +70,7 @@ FmxMBClass >> generate [
 		          createClassNamed: self fullName asSymbol
 		          superclass: superclassName
 		          traitNames: self allTraitNames
-		          slots: self slotDefinitions
+		          properties: self properties
 		          in: self packageName
 		          tag: self tag
 		          comment: self commentWithRelations.
