@@ -290,29 +290,29 @@ FmxMBRingEnvironment >> initialize [
 { #category : 'installing' }
 FmxMBRingEnvironment >> recordAdoptionOfClassDefinitionFrom: currentClass to: anRGClassModel [
 
-	| currentCustomSlots currentCustomSlotNames modelSlotDefinitions currentGeneratedSlots modelGeneratedSlots slotRemovals |
+	| modelSlotDefinitions |
 	(currentClass isNil or: [ currentClass needToAdaptTo: anRGClassModel ]) ifFalse: [ ^ self ].
 
 	"We are updating a class installed in the system (currentClass) to a new representation defined in the model (anRGClass).
 	This has to be done in order to allow updating the class at run time"
 
-	currentGeneratedSlots := currentClass
-		                         ifNil: [ #(  ) ]
-		                         ifNotNil: #generatedSlots.
-	currentCustomSlots := currentClass
-		                      ifNil: [ #(  ) ]
-		                      ifNotNil: [ :class | class localSlots copyWithoutAll: currentGeneratedSlots ].
-	currentCustomSlotNames := currentCustomSlots collect: #name.
+	modelSlotDefinitions := currentClass
+		                        ifNil: [ modelSlotDefinitions := (anRGClassModel slots collect: #definitionString) asOrderedCollection sorted ]
+		                        ifNotNil: [
+				                        | currentCustomSlots currentCustomSlotNames currentGeneratedSlots modelGeneratedSlots |
+				                        currentGeneratedSlots := currentClass generatedSlots.
+				                        currentCustomSlots := currentClass localSlots copyWithoutAll: currentGeneratedSlots.
+				                        currentCustomSlotNames := currentCustomSlots collect: #name.
 
-	modelGeneratedSlots := anRGClassModel slots reject: [ :each | currentCustomSlotNames includes: each name ].
+				                        modelGeneratedSlots := anRGClassModel slots reject: [ :each | currentCustomSlotNames includes: each name ].
 
-	modelSlotDefinitions := (modelGeneratedSlots collect: #definitionString) asOrderedCollection.
-	modelSlotDefinitions addAll: (currentCustomSlots collect: #definitionString).
-	modelSlotDefinitions := modelSlotDefinitions sorted.
+				                        modelSlotDefinitions := (modelGeneratedSlots collect: #definitionString) asOrderedCollection.
+				                        modelSlotDefinitions addAll: (currentCustomSlots collect: #definitionString).
 
-	slotRemovals := currentGeneratedSlots reject: [ :e | modelGeneratedSlots anySatisfy: [ :current | current name = e name ] ].
+				                        (currentGeneratedSlots reject: [ :e | modelGeneratedSlots anySatisfy: [ :current | current name = e name ] ]) ifNotEmpty: [
+					                        :slotRemovals | changesToApply add: (FmxSlotRemovals slots: slotRemovals) ].
 
-	slotRemovals ifNotEmpty: [ changesToApply add: (FmxSlotRemovals slots: slotRemovals) ].
+				                        modelSlotDefinitions sorted ].
 
 	self
 		recordClassAdditionFromClass: anRGClassModel
