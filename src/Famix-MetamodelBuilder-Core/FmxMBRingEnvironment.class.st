@@ -435,10 +435,8 @@ FmxMBRingEnvironment >> traitStringFrom: realClass to: aRGClass [
 	| customTraitNames traitsDefinitions traitCompositionString precedingTrait |
 	customTraitNames := ((realClass
 		                      ifNil: [ #(  ) ]
-		                      ifNotNil: [ :class | class traitComposition rootMembers ]) select: [ :e |
-			                     realClass
-				                     ifNil: [ false ]
-				                     ifNotNil: [ :class | class customTraitNames includes: e name ] ]) collect: #traitCompositionExpression.
+		                      ifNotNil: [ :class | class traitComposition rootMembers ]) select: [ :e | realClass customTraitNames includes: e name ]) collect:
+		                    #traitCompositionExpression.
 
 	traitsDefinitions := aRGClass traitsDefinitions
 		                     ifEmpty: [ {  } ]
