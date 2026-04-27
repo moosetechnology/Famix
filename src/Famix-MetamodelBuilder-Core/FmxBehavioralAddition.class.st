@@ -25,7 +25,7 @@ FmxBehavioralAddition >> apply [
 			             tag: tag.
 
 		             traits ifNotNil: [ builder traits: (self class compiler evaluate: traits) ].
-		             slots ifNotNil: [ builder slots: (self class compiler evaluate: slots) ] ].
+		             slots ifNotNil: [ builder slots: (self class compiler evaluate: '{' , (slots joinUsing: '. ') , '}') ] ].
 
 	"If the class already exist we update it to not remove the class slots and shared variables."
 	self class environment
@@ -40,6 +40,28 @@ FmxBehavioralAddition >> initialize: aBuilder [
 	self subclassResponsibility
 ]
 
+{ #category : 'testing' }
+FmxBehavioralAddition >> isRequired [
+
+	^ self realClass
+		  ifNil: [ true ]
+		  ifNotNil: [ :realClass |
+				  realClass localSlots ifEmpty: [ self slots ifNotNil: [ ^ true ] ] ifNotEmpty: [ :currentSlots |
+						  self slots size = currentSlots size ifFalse: [ ^ true ].
+						  (self slots allSatisfy: [ :slotDefinition | currentSlots anySatisfy: [ :slot | slot definitionString = slotDefinition ] ]) ifFalse: [ ^ true ] ].
+
+				  realClass traitComposition isEmpty
+					  ifTrue: [ self traits ifNotNil: [ ^ true ] ]
+					  ifFalse: [
+							  (OpalCompiler new
+								   failBlock: [ ^ true ];
+								   source: self traits;
+								   evaluate) asTraitComposition = realClass traitComposition ifFalse: [ ^ true ] ].
+
+				  realClass package name = self package ifFalse: [ ^ true ].
+				  realClass packageTag name ~= self tag ]
+]
+
 { #category : 'accessing' }
 FmxBehavioralAddition >> name [
 	^ name
@@ -48,6 +70,11 @@ FmxBehavioralAddition >> name [
 { #category : 'accessing' }
 FmxBehavioralAddition >> name: anObject [
 	name := anObject
+]
+
+{ #category : 'accessing' }
+FmxBehavioralAddition >> package [
+	^ package
 ]
 
 { #category : 'accessing' }
@@ -67,13 +94,34 @@ FmxBehavioralAddition >> printOn: aStream [
 ]
 
 { #category : 'accessing' }
+FmxBehavioralAddition >> realClass [
+
+	^ self class environment at: self name ifAbsent: [ nil ]
+]
+
+{ #category : 'accessing' }
+FmxBehavioralAddition >> slots [
+	^ slots
+]
+
+{ #category : 'accessing' }
 FmxBehavioralAddition >> slots: anObject [
 	slots := anObject
 ]
 
 { #category : 'accessing' }
+FmxBehavioralAddition >> tag [
+	^ tag
+]
+
+{ #category : 'accessing' }
 FmxBehavioralAddition >> tag: anObject [
 	tag := anObject
+]
+
+{ #category : 'accessing' }
+FmxBehavioralAddition >> traits [
+	^ traits
 ]
 
 { #category : 'accessing' }

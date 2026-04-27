@@ -75,7 +75,7 @@ FmxMBRingEnvironment >> basicTrait [
 ]
 
 { #category : 'initialization' }
-FmxMBRingEnvironment >> buildSlotsDefinitionFor: properties existingClass: currentClass [
+FmxMBRingEnvironment >> buildSlotsDefinitionsFor: properties existingClass: currentClass [
 
 	| modelSlotDefinitions |
 	currentClass
@@ -84,8 +84,8 @@ FmxMBRingEnvironment >> buildSlotsDefinitionFor: properties existingClass: curre
 				| currentCustomSlots |
 				currentCustomSlots := currentClass localSlots copyWithoutAll: currentClass generatedSlots.
 
-				(currentClass generatedSlots reject: [ :generatedSlot | properties anySatisfy: [ :property | property name = generatedSlot name ] ])
-					ifNotEmpty: [ :slotRemovals | changesToApply add: (FmxSlotRemovals slots: slotRemovals) ].
+				(currentClass generatedSlots reject: [ :generatedSlot | properties anySatisfy: [ :property | property name = generatedSlot name ] ]) ifNotEmpty: [
+					:slotRemovals | changesToApply add: (FmxSlotRemovals slots: slotRemovals) ].
 
 				modelSlotDefinitions := properties
 					                        reject: [ :property | currentCustomSlots anySatisfy: [ :slot | slot name = property name ] ]
@@ -93,7 +93,8 @@ FmxMBRingEnvironment >> buildSlotsDefinitionFor: properties existingClass: curre
 
 				modelSlotDefinitions addAll: (currentCustomSlots collect: #definitionString) ].
 
-	^ '{' , (modelSlotDefinitions sorted joinUsing: '. ') , '}'
+	modelSlotDefinitions ifEmpty: [ ^ nil ].
+	^ modelSlotDefinitions sorted
 ]
 
 { #category : 'accessing' }
@@ -182,8 +183,8 @@ FmxMBRingEnvironment >> createClassNamed: className superclass: superclassName t
 
 	traitDefinitions ifNotEmpty: [ change traits: (self traitStringFrom: traitDefinitions precedingTrait: precedingTrait existingClass: realClass) ].
 
-	properties ifNotEmpty: [ change slots: (self buildSlotsDefinitionFor: properties existingClass: realClass) ].
-	"changesToApply add: change."
+	change slots: (self buildSlotsDefinitionsFor: properties existingClass: realClass).
+	changesToApply add: change.
 	"==========================="
 
 	aClass := self ringEnvironment ensureClassNamed: className.
@@ -243,8 +244,8 @@ FmxMBRingEnvironment >> createTraitNamed: traitName  traitDefinitions: traitDefi
 
 	traitDefinitions ifNotEmpty: [ change traits: (self traitStringFrom: traitDefinitions precedingTrait: precedingTrait existingClass: realClass) ].
 	
-	properties ifNotEmpty: [ change slots: (self buildSlotsDefinitionFor: properties existingClass: realClass) ].
-	"changesToApply add: change."
+	properties ifNotEmpty: [ change slots: (self buildSlotsDefinitionsFor: properties existingClass: realClass) ].
+	changesToApply add: change.
 	"==========================="
 
 	aTrait := self ringEnvironment ensureTraitNamed: traitName.
@@ -335,7 +336,7 @@ FmxMBRingEnvironment >> recordAdoptionOfClassDefinitionFrom: currentClass to: an
 	self
 		recordClassAdditionFromClass: anRGClassModel
 		traits: (self traitStringFrom: currentClass to: anRGClassModel)
-		slots: '{' , (modelSlotDefinitions joinUsing: '. ') , '}'
+		slots: modelSlotDefinitions
 		package: anRGClassModel package name
 		tag: anRGClassModel packageTag
 ]
@@ -367,7 +368,7 @@ FmxMBRingEnvironment >> recordClassChangesFor: aRGClass [
 	| realClass |
 	self flag: #todo. "Kill ring."
 	realClass := self class environment classNamed: aRGClass name.
-	self recordAdoptionOfClassDefinitionFrom: realClass to: aRGClass.
+"	self recordAdoptionOfClassDefinitionFrom: realClass to: aRGClass."
 	self recordMethodsAdoptionsOf: realClass to: aRGClass realClassName: aRGClass name.
 	self recordMethodsAdoptionsOf: (realClass ifNotNil: [ realClass class ]) to: aRGClass classSide realClassName: aRGClass name
 ]

@@ -28,6 +28,14 @@ FmxTraitAddition >> initialize: builder [
 ]
 
 { #category : 'testing' }
+FmxTraitAddition >> isRequired [
+
+	super isRequired ifTrue: [ ^ true ].
+
+	^ self realClass isTrait not
+]
+
+{ #category : 'testing' }
 FmxTraitAddition >> usesTrait: aString [
 	"Return true if I use the trait named as the parameter."
 

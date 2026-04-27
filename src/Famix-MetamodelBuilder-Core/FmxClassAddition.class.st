@@ -53,6 +53,16 @@ FmxClassAddition >> initialize: builder [
 	builder superclass: (self class environment at: superclass)
 ]
 
+{ #category : 'testing' }
+FmxClassAddition >> isRequired [
+
+	| realClass |
+	super isRequired ifTrue: [ ^ true ].
+
+	(realClass := self realClass) isTrait ifTrue: [ ^ true ].
+	^ self superclass ~= realClass superclass name
+]
+
 { #category : 'accessing' }
 FmxClassAddition >> superclass [
 	^ superclass
