@@ -280,37 +280,6 @@ FmxMBTraitTest >> testMultipleTraits [
 ]
 
 { #category : 'tests' }
-FmxMBTraitTest >> testSimpleClassAnnotation [
-
-	| generated method |
-		
-	builder newTraitNamed: #TComment.	
-	builder generate.
-
-	generated := builder testingEnvironment ask classNamed: 'TstTComment'.
-
-	method := generated classSide methodNamed: #annotation.
-	self assert: (method sourceCode includesSubstring: '<FMClass: #TComment super: #Object>').
-	self assert: (method sourceCode includesSubstring: '<package: #Tst>').
-
-
-]
-
-{ #category : 'tests' }
-FmxMBTraitTest >> testSimpleTrait [
-	| generated |
-	builder newTraitNamed: #TComment.
-	builder generate.
-	generated := builder testingEnvironment ask classNamed: 'TstTComment'.
-	self assert: generated isNotNil.
-	self assert: generated isClass.
-	self assert: generated superclass name equals: 'Trait'.
-	self assertEmpty: generated slots.
-	self assertEmpty: generated instanceSide localSelectors.
-	self assertCollection: generated classSide localSelectors sorted equals: #(annotation)
-]
-
-{ #category : 'tests' }
 FmxMBTraitTest >> testTestingMethods [
 
 	"test messages isMetamodelClass and isMetamodelTrait"

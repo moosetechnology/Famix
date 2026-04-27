@@ -43,6 +43,22 @@ FmxMBBehavior >> addAllTransitiveTraitsIn: aCollection [
 	^ aCollection
 ]
 
+{ #category : 'adding' }
+FmxMBBehavior >> addMethod: code classSide: boolean protocol: protocol [
+
+	self
+		addMethod: code
+		in: self fullName
+		classSide: boolean
+		protocol: protocol
+]
+
+{ #category : 'adding' }
+FmxMBBehavior >> addMethod: code protocol: protocol [
+
+	^ self addMethod: code in: self fullName protocol: protocol
+]
+
 { #category : 'accessing' }
 FmxMBBehavior >> addRelation: aRelation with: anotherClass [
 

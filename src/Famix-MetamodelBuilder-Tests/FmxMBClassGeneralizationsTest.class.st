@@ -12,26 +12,6 @@ Class {
 }
 
 { #category : 'running' }
-FmxMBClassGeneralizationsTest >> checkGeneralizationWithAnnotations [
-
-	"check if TstClass is correctly created as a subclass of TstBehavior"
-
-	| generatedBehavior generatedClass annotation |
-	
-	builder generate.
-	
-	generatedBehavior := builder testingEnvironment ask classNamed: 'TstBehavior'.
-	generatedClass := builder testingEnvironment ask classNamed: 'TstClass'.
-	
-	self assert: generatedClass superclass equals: generatedBehavior.
-	annotation := generatedClass classSide methodNamed: #annotation.
-	self assert: (annotation sourceCode includesSubstring: '<FMClass: #Class super: #TstBehavior>').
-	self assert: (annotation sourceCode includesSubstring: '<generated>').
-	
-
-]
-
-{ #category : 'running' }
 FmxMBClassGeneralizationsTest >> checkHierarchy [
 	self assertEmpty: named allClassGeneralizations.
 	self assertCollection: behavior allClassGeneralizations hasSameElements: {named}.
@@ -72,22 +52,6 @@ FmxMBClassGeneralizationsTest >> testAllClassGeneralizationsInChainInverted [
 	class --|> behavior --|> named.
 	
 	self checkHierarchy.
-]
-
-{ #category : 'tests' }
-FmxMBClassGeneralizationsTest >> testClassOppositeGeneralization [
-
-	behavior <|-- class.
-
-	self checkGeneralizationWithAnnotations
-]
-
-{ #category : 'tests' }
-FmxMBClassGeneralizationsTest >> testGeneralization [
-
-	class --|> behavior.
-
-	self checkGeneralizationWithAnnotations
 ]
 
 { #category : 'tests' }

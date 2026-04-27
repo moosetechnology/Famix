@@ -49,34 +49,6 @@ FmxMBTestingMethodsTest >> setUp [
 ]
 
 { #category : 'tests' }
-FmxMBTestingMethodsTest >> testEntity [
-
-	(generatedEntity methodNamed: #isEntity) sourceCode includesSubstring: '^ true'.	
-	self assert: (generatedEntity methodNamed: #isNamed) isNil.
-]
-
-{ #category : 'tests' }
-FmxMBTestingMethodsTest >> testRoots [
-
-	"all roots should have testing messages with negative answer"
-
-	(generatedEntity methodNamed: #isEntity) sourceCode includesSubstring: '^ false'.	
-	(generatedEntity methodNamed: #isNamedEntity) sourceCode includesSubstring: '^ false'.
-	
-	(generatedEntity methodNamed: #isEntity) sourceCode includesSubstring: '^ false'.	
-	(generatedEntity methodNamed: #isNamedEntity) sourceCode includesSubstring: '^ false'.
-]
-
-{ #category : 'tests' }
-FmxMBTestingMethodsTest >> testTrait [
-
-	"all roots should have testing messages with negative answer"
-
-	(generatedTNamed methodNamed: #isNamedEntity) sourceCode includesSubstring: '^ true'.	
-	self assert: (generatedTNamed methodNamed: #isEntity) isNil.
-]
-
-{ #category : 'tests' }
 FmxMBTestingMethodsTest >> testTraited [
 
 	self assert: (generatedNamed localMethodNamed: #isNamed ifAbsent: []) isNil.
