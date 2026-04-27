@@ -40,6 +40,7 @@ FmxMBRingEnvironment >> apply [
 			                dictionary
 				                at: change put: (change followingChangesIn: (changesToApply copyWithout: change));
 				                yourself ].
+	(changesToApply select: [ :c | c isKindOf: FmxBehavioralAddition ]) groupedBy: #name.
 	(AITopologicalSorting sort: changesToApply followingIncomingProperty: [ :change | dependencies at: change ]) do: #apply
 ]
 
@@ -71,6 +72,28 @@ FmxMBRingEnvironment >> basicSuperclass [
 FmxMBRingEnvironment >> basicTrait [
 
 	^ self ringEnvironment ensureClassNamed: #Trait
+]
+
+{ #category : 'initialization' }
+FmxMBRingEnvironment >> buildSlotsDefinitionFor: properties existingClass: currentClass [
+
+	| modelSlotDefinitions |
+	currentClass
+		ifNil: [ modelSlotDefinitions := properties collect: [ :property | property slotDefinition ] ]
+		ifNotNil: [
+				| currentCustomSlots |
+				currentCustomSlots := currentClass localSlots copyWithoutAll: currentClass generatedSlots.
+
+				(currentClass generatedSlots reject: [ :generatedSlot | properties anySatisfy: [ :property | property name = generatedSlot name ] ])
+					ifNotEmpty: [ :slotRemovals | changesToApply add: (FmxSlotRemovals slots: slotRemovals) ].
+
+				modelSlotDefinitions := properties
+					                        reject: [ :property | currentCustomSlots anySatisfy: [ :slot | slot name = property name ] ]
+					                        thenCollect: [ :property | property slotDefinition ].
+
+				modelSlotDefinitions addAll: (currentCustomSlots collect: #definitionString) ].
+
+	^ '{' , (modelSlotDefinitions sorted joinUsing: '. ') , '}'
 ]
 
 { #category : 'accessing' }
@@ -133,7 +156,7 @@ FmxMBRingEnvironment >> compile: aSource in: aClass classified: aProtocol packag
 { #category : 'installing' }
 FmxMBRingEnvironment >> createClassNamed: className superclass: superclassName traitNames: traitNames properties: properties in: defaultPackage tag: defaultTag comment: comment [
 
-	| slots aClass existingClass composition realClass packageName tag |
+	| slots aClass existingClass composition realClass packageName tag change |
 	existingClass := self ringEnvironment ask behaviorNamed: className.
 
 	realClass := self class environment at: className ifAbsent: [ nil ].
@@ -144,28 +167,25 @@ FmxMBRingEnvironment >> createClassNamed: className superclass: superclassName t
 	tag := realClass
 		       ifNil: [ defaultTag ]
 		       ifNotNil: [ realClass packageTag name ].
-		
+
 	self validateProperties: properties.
-	slots := self slotsFrom: properties.
+	slots := properties collect: [ :property | property asRGSlot ].
 
-	"existingClass
-		ifNil: [
-				| change |
-				change := FmxClassAddition new.
-				self flag: #todo. ""Finish""
-				change
-					name: className;
-					superclass: superclassName;
-					package: packageName;
-					tag: tag.
 
-				self flag: #todo. ""Manage precedence + factorize code""
-				traitNames ifNotEmpty: [ change traits: '{' , ($+ join: traitNames) , '}' ].
-				self flag: #todo. ""Kill ring in slot usages.""
-				slots ifNotEmpty: [ change slots: '{' , ('. ' join: (slots collect: #definitionString)) , '}' ].
-				changesToApply add: change ]
-		ifNotNil: [ self flag: #todo ]."
+	"==========================="
+	change := FmxClassAddition new.
+	change
+		name: className;
+		superclass: superclassName;
+		package: packageName;
+		tag: tag.
 
+	self flag: #todo. "Manage precedence + factorize code"
+	traitNames ifNotEmpty: [ change traits: '{' , ($+ join: traitNames) , '}' ].
+
+	properties ifNotEmpty: [ change slots: (self buildSlotsDefinitionFor: properties existingClass: (self class environment at: className ifAbsent: [ nil ])) ].
+	"changesToApply add: change."
+	"==========================="
 
 	aClass := self ringEnvironment ensureClassNamed: className.
 	aClass superclass: (self ringEnvironment ensureClassNamed: superclassName).
@@ -200,34 +220,34 @@ FmxMBRingEnvironment >> createClassNamed: className superclass: superclassName t
 { #category : 'initialization' }
 FmxMBRingEnvironment >> createTraitNamed: traitName uses: traitNames properties: properties in: defaultPackage tag: defaultTag comment: comment [
 
-	| aTrait existingRGClass composition packageName tag realClass slots |
+	| aTrait existingRGClass composition packageName tag realClass slots change |
 	existingRGClass := self ringEnvironment ask behaviorNamed: traitName asSymbol.
 
 	realClass := self class environment at: traitName ifAbsent: [ nil ].
-	
-	packageName := realClass ifNil: [ defaultPackage ] ifNotNil: [ realClass package name ].
-	tag := realClass ifNil: [ defaultTag ] ifNotNil: [ realClass packageTag name ]. 
-	
+
+	packageName := realClass
+		               ifNil: [ defaultPackage ]
+		               ifNotNil: [ realClass package name ].
+	tag := realClass
+		       ifNil: [ defaultTag ]
+		       ifNotNil: [ realClass packageTag name ].
+
 	self validateProperties: properties.
-	slots := self slotsFrom: properties.
+	slots := properties collect: [ :property | property asRGSlot ].
 
-	self class environment
-		at: traitName
-		ifPresent: [ :class | self flag: #todo ]
-		ifAbsent: [
-				| change |
-				change := FmxTraitAddition new.
-				self flag: #todo. "Finish"
-				change
-					name: traitName;
-					package: packageName;
-					tag: tag.
+	"==========================="
+	change := FmxTraitAddition new.
+	change
+		name: traitName;
+		package: packageName;
+		tag: tag.
 
-				self flag: #todo. "Manage precedence + factorize code"
-				traitNames ifNotEmpty: [ change traits: '{' , ($+ join: traitNames) , '}' ].
-				self flag: #todo. "Kill ring in slot usages."
-				slots ifNotEmpty: [ change slots: '{' , ('. ' join: (slots collect: #definitionString)) , '}' ]
-				"changesToApply add: change" ].
+	self flag: #todo. "Manage precedence + factorize code"
+	traitNames ifNotEmpty: [ change traits: '{' , ($+ join: traitNames) , '}' ].
+	
+	properties ifNotEmpty: [ change slots: (self buildSlotsDefinitionFor: properties existingClass: (self class environment at: traitName ifAbsent: [ nil ])) ].
+	"changesToApply add: change."
+	"==========================="
 
 	aTrait := self ringEnvironment ensureTraitNamed: traitName.
 	aTrait superclass: self basicTrait.
@@ -408,15 +428,6 @@ FmxMBRingEnvironment >> ringEnvironment [
 	^ ringEnvironment
 ]
 
-{ #category : 'initialization' }
-FmxMBRingEnvironment >> slotsFrom: properties [
-
-	self flag: #todo. "To kill with Ring usage."
-	^ properties
-		  select: #producesSlot
-		  thenCollect: [ :property | property asRGSlot ]
-]
-
 { #category : 'installing' }
 FmxMBRingEnvironment >> traitStringFrom: realClass to: aRGClass [
 	"We need to collect the generated traits + the custom traits added by the user."
@@ -453,7 +464,5 @@ FmxMBRingEnvironment >> validateProperties: properties [
 	| names |
 	names := properties collect: #name.
 	self assert: names size = names asSet size description: 'Two properties of the same class cannot have the same names.'.
-	properties
-		select: #producesSlot
-		thenDo: [ :property | property validate ]
+	properties do: [ :property | property validate ]
 ]

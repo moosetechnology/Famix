@@ -313,6 +313,14 @@ FmxMBRelationSide >> singularPropertyName [
 
 ]
 
+{ #category : 'generating' }
+FmxMBRelationSide >> slotExpression [
+
+	^ (cardinality = #one
+		   ifTrue: [ 'FMOne' ]
+		   ifFalse: [ 'FMMany' ]) , ' type: #' , self oppositeType , ' opposite: #' , self oppositeName
+]
+
 { #category : 'properties' }
 FmxMBRelationSide >> source [
 

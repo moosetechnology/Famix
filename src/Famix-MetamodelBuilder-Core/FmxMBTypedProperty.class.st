@@ -159,6 +159,14 @@ FmxMBTypedProperty >> propertyType: anObject [
 ]
 
 { #category : 'generating' }
+FmxMBTypedProperty >> slotExpression [
+
+	^ self defaultValue
+		  ifNil: [ 'FMProperty' ]
+		  ifNotNil: [ :value | 'FMProperty defaultValue: ' , value printString ]
+]
+
+{ #category : 'generating' }
 FmxMBTypedProperty >> validate [
 
 	self propertyType ifNil: [ FmxMBIncompletePropertyDefiniton signal ]

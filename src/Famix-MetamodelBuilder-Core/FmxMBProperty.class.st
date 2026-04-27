@@ -81,6 +81,18 @@ FmxMBProperty >> producesSlot [
 	^ true
 ]
 
+{ #category : 'accessing' }
+FmxMBProperty >> slotDefinition [
+
+	^ '#' , self name , ' => ' , self slotExpression
+]
+
+{ #category : 'accessing' }
+FmxMBProperty >> slotExpression [
+
+	self subclassResponsibility
+]
+
 { #category : 'validation' }
 FmxMBProperty >> validate [
 
