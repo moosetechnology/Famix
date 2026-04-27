@@ -36,7 +36,7 @@ FmxMBRelationSideGenerationStrategy >> compileMethod: methodSource for: aRelatio
 ]
 
 { #category : 'generation' }
-FmxMBRelationSideGenerationStrategy >> generateGetterCoreIn: aClassOrTrait on: aStream for: aRelationSide [
+FmxMBRelationSideGenerationStrategy >> generateGetterCoreOn: aStream for: aRelationSide [
 
 	^ self subclassResponsibility
 ]
@@ -45,67 +45,61 @@ FmxMBRelationSideGenerationStrategy >> generateGetterCoreIn: aClassOrTrait on: a
 FmxMBRelationSideGenerationStrategy >> generateGetterIn: aClassOrTrait for: aRelationSide [
 
 	| methodSource commentDefinition |
+	commentDefinition := aRelationSide comment ifNotEmpty: [ :comment | '<FMComment: {1}>' format: { comment printString } ].
 
-	commentDefinition := aRelationSide comment ifNotEmpty: [ :comment | 
-		                     '<FMComment: {1}>' format:
-			                     { comment printString } ].
+	methodSource := String streamContents: [ :s |
+			                s
+				                nextPutAll: aRelationSide name;
+				                cr.
+			                aRelationSide hasRelation ifTrue: [
+					                s
+						                tab;
+						                nextPutAll: '"Relation named: #';
+						                nextPutAll: relationSide name;
+						                nextPutAll: ' type: #';
+						                nextPutAll: relationSide oppositeType;
+						                nextPutAll: ' opposite: #';
+						                nextPutAll: relationSide oppositeName;
+						                nextPutAll: '"';
+						                cr;
+						                cr ].
+			                s
+				                tab;
+				                nextPutAll: '<generated>';
+				                cr.
+			                commentDefinition ifNotEmpty: [
+					                s
+						                tab;
+						                nextPutAll: commentDefinition;
+						                cr ].
+			                aRelationSide isContainer ifTrue: [
+					                s
+						                tab;
+						                nextPutAll: '<container>';
+						                cr ].
+			                aRelationSide isDerived ifTrue: [
+					                s
+						                tab;
+						                nextPutAll: '<derived>';
+						                cr ].
+			                aRelationSide isSource ifTrue: [
+					                s
+						                tab;
+						                nextPutAll: '<source>';
+						                cr ].
+			                aRelationSide isTarget ifTrue: [
+					                s
+						                tab;
+						                nextPutAll: '<target>';
+						                cr ].
 
-	methodSource := String streamContents: [ :s | 
-		                s
-			                nextPutAll: aRelationSide name;
-			                cr.
-		                aRelationSide hasRelation ifTrue: [ 
-			                s
-				                tab;
-				                nextPutAll: '"Relation named: #';
-				                nextPutAll: relationSide name;
-				                nextPutAll: ' type: #';
-				                nextPutAll: relationSide oppositeType;
-				                nextPutAll: ' opposite: #';
-				                nextPutAll: relationSide oppositeName;
-				                nextPutAll: '"';
-				                cr;
-				                cr ].
-		                s
-			                tab;
-			                nextPutAll: '<generated>';
-			                cr.
-		                commentDefinition ifNotEmpty: [ 
-			                s
-				                tab;
-				                nextPutAll: commentDefinition;
-				                cr ].
-		                aRelationSide isContainer ifTrue: [ 
-			                s
-				                tab;
-				                nextPutAll: '<container>';
-				                cr ].
-		                aRelationSide isDerived ifTrue: [ 
-			                s
-				                tab;
-				                nextPutAll: '<derived>';
-				                cr ].
-		                aRelationSide isSource ifTrue: [ 
-			                s
-				                tab;
-				                nextPutAll: '<source>';
-				                cr ].
-		                aRelationSide isTarget ifTrue: [ 
-			                s
-				                tab;
-				                nextPutAll: '<target>';
-				                cr ].
-
-		                self
-			                generateGetterCoreIn: aClassOrTrait
-			                on: s
-			                for: aRelationSide ].
+			                self generateGetterCoreOn: s for: aRelationSide ].
 
 	self compileMethod: methodSource for: aRelationSide in: aClassOrTrait
 ]
 
 { #category : 'generation' }
-FmxMBRelationSideGenerationStrategy >> generateSetterCoreIn: aClassOrTrait on: aStream for: aRelationSide [
+FmxMBRelationSideGenerationStrategy >> generateSetterCoreOn: aStream for: aRelationSide [
 
 	^ self subclassResponsibility
 ]
@@ -114,18 +108,17 @@ FmxMBRelationSideGenerationStrategy >> generateSetterCoreIn: aClassOrTrait on: a
 FmxMBRelationSideGenerationStrategy >> generateSetterIn: aClassOrTrait for: aRelationSide [
 
 	| methodSource |
-	methodSource := String
-		streamContents: [ :s | 
-			s
-				nextPutAll: aRelationSide name;
-				nextPutAll: ': anObject';
-				cr;
-				cr.
-			s
-				tab;
-				nextPutAll: '<generated>';
-				cr.
-			self generateSetterCoreIn: aClassOrTrait on: s for: aRelationSide ].
+	methodSource := String streamContents: [ :s |
+			                s
+				                nextPutAll: aRelationSide name;
+				                nextPutAll: ': anObject';
+				                cr;
+				                cr.
+			                s
+				                tab;
+				                nextPutAll: '<generated>';
+				                cr.
+			                self generateSetterCoreOn: s for: aRelationSide ].
 
 	self compileMethod: methodSource for: aRelationSide in: aClassOrTrait
 ]

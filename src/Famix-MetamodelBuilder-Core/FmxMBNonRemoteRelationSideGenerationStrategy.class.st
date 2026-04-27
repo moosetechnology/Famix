@@ -7,7 +7,7 @@ Class {
 }
 
 { #category : 'generation' }
-FmxMBNonRemoteRelationSideGenerationStrategy >> generateGetterCoreIn: aClassOrTrait on: aStream for: aRelationSide [
+FmxMBNonRemoteRelationSideGenerationStrategy >> generateGetterCoreOn: aStream for: aRelationSide [
 
 	aStream
 		tab;
@@ -45,7 +45,7 @@ FmxMBNonRemoteRelationSideGenerationStrategy >> generateGetterCoreIn: aClassOrTr
 ]
 
 { #category : 'generation' }
-FmxMBNonRemoteRelationSideGenerationStrategy >> generateSetterCoreIn: aClassOrTrait on: aStream for: aRelationSide [
+FmxMBNonRemoteRelationSideGenerationStrategy >> generateSetterCoreOn: aStream for: aRelationSide [
 
 	(aRelationSide isOne and: [ aRelationSide otherSide isOne ]) ifTrue: [ 
 		aStream

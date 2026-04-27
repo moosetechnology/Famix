@@ -7,7 +7,7 @@ Class {
 }
 
 { #category : 'generation' }
-FmxMBStandardRelationSideGenerationStrategy >> generateGetterCoreIn: aClassOrTrait on: aStream for: aRelationSide [
+FmxMBStandardRelationSideGenerationStrategy >> generateGetterCoreOn: aStream for: aRelationSide [
 
 	aStream
 		tab;
@@ -16,7 +16,7 @@ FmxMBStandardRelationSideGenerationStrategy >> generateGetterCoreIn: aClassOrTra
 ]
 
 { #category : 'generation' }
-FmxMBStandardRelationSideGenerationStrategy >> generateSetterCoreIn: aClassOrTrait on: aStream for: aRelationSide [
+FmxMBStandardRelationSideGenerationStrategy >> generateSetterCoreOn: aStream for: aRelationSide [
 
 	aStream
 		tab;
