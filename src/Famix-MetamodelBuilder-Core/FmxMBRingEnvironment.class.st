@@ -40,7 +40,6 @@ FmxMBRingEnvironment >> apply [
 			                dictionary
 				                at: change put: (change followingChangesIn: (changesToApply copyWithout: change));
 				                yourself ].
-	(changesToApply select: [ :c | c isKindOf: FmxBehavioralAddition ]) groupedBy: #name.
 	(AITopologicalSorting sort: changesToApply followingIncomingProperty: [ :change | dependencies at: change ]) do: #apply
 ]
 

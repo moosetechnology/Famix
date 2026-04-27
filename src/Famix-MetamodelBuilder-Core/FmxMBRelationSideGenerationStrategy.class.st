@@ -24,10 +24,15 @@ FmxMBRelationSideGenerationStrategy >> category [
 { #category : 'generation' }
 FmxMBRelationSideGenerationStrategy >> compileMethod: methodSource for: aRelationSide in: aClassOrTrait [
 
+	self flag: #todo. "Should be linked to the FmxMBBehavior and not duplicate the code"
 	aRelationSide builder environment
-		compile: methodSource
-		in: aClassOrTrait
-		classified: self category
+		addMethod: methodSource
+		in: aClassOrTrait name
+		classSide: false
+		protocol: self category.
+
+	self flag: #todo. "This code should never make it in the dev branch of Famix. Also we should provide the class name directly"
+	aClassOrTrait compile: methodSource classified: self category
 ]
 
 { #category : 'generation' }
