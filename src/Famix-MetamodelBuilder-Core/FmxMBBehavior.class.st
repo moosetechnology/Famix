@@ -293,7 +293,7 @@ FmxMBBehavior >> generateAccessors [
 ]
 
 { #category : 'generating' }
-FmxMBBehavior >> generateAddToCollectionFor: aClass [
+FmxMBBehavior >> generateAddToCollection [
 
 	self relations
 		collect: #side
@@ -307,7 +307,6 @@ FmxMBBehavior >> generateAddToCollectionFor: aClass [
 	^ self {2} add: anObject' format: {
 										 sideName capitalized asSingular.
 										 sideName })
-							in: aClass
 							protocol: #adding ] ]
 ]
 
@@ -369,9 +368,9 @@ FmxMBBehavior >> generateRemoteAccessors [
 ]
 
 { #category : 'generating' }
-FmxMBBehavior >> generateTestingMethodsIn: aClass [
+FmxMBBehavior >> generateTestingMethods [
 
-	self testingSelectors do: [ :aSelector | self addMethod: (aSelector , '\\	<generated>\	^ true') withCRs in: aClass protocol: #testing ]
+	self testingSelectors do: [ :aSelector | self addMethod: (aSelector , '\\	<generated>\	^ true') withCRs protocol: #testing ]
 ]
 
 { #category : 'generalization' }

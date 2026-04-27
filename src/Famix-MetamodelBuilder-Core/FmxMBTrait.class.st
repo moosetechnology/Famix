@@ -73,11 +73,11 @@ FmxMBTrait >> generate [
 	self generateAccessors.
 	self generateAnnotationIn: aTrait.
 
-	self generateTestingMethodsIn: aTrait.
+	self generateTestingMethods.
 	self generateMethodsToRemoveFromTraitCompositionFor: aTrait.
 	self generatePrecedenceInTraitComposition: aTrait.
 
-	self generateAddToCollectionFor: aTrait
+	self generateAddToCollection
 ]
 
 { #category : 'generating' }

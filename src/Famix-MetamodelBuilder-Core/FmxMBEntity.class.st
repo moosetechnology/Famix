@@ -22,10 +22,15 @@ FmxMBEntity >> acceptVisitor: aVisitor [
 { #category : 'generating' }
 FmxMBEntity >> addMethod: code in: class classSide: boolean protocol: protocol [
 
+	| className |
+	self flag: #todo. "We should only take a string as parameter."
+	className := class isString
+		             ifTrue: [ class ]
+		             ifFalse: [ class name ].
 	self flag: #todo. "Demeter"
 	self builder environment
 		addMethod: code
-		in: class name
+		in: className
 		classSide: boolean
 		protocol: protocol
 ]

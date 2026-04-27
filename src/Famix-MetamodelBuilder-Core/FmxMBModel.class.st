@@ -21,7 +21,9 @@ FmxMBModel >> defaultTag [
 FmxMBModel >> generate [
 
 	super generate.
-	self generateModelMethods: self ensureRealClass
+	self
+		generateFileImportMethods;
+		generateSubmetamodelsMethod
 ]
 
 { #category : 'generating-methods' }
@@ -40,7 +42,7 @@ FmxMBModel >> generateAnnotationIn: aModelClass [
 ]
 
 { #category : 'generating-methods' }
-FmxMBModel >> generateFileImportMethodsIn: aModelClass [
+FmxMBModel >> generateFileImportMethods [
 
 	self builder configuration shouldGenerateFileImportHelpers ifFalse: [ ^ self ].
 
@@ -48,7 +50,6 @@ FmxMBModel >> generateFileImportMethodsIn: aModelClass [
 		addMethod: 'canBeImportedFromFile
 	<generated>
 	^true'
-		in: aModelClass
 		classSide: true
 		protocol: #testing.
 
@@ -57,20 +58,12 @@ FmxMBModel >> generateFileImportMethodsIn: aModelClass [
 
 	<generated>
 	^ {1}' format: { self builder importingContextName })
-		in: aModelClass
 		classSide: true
 		protocol: #accessing
 ]
 
 { #category : 'generating-methods' }
-FmxMBModel >> generateModelMethods: aModelClass [
-
-	self generateFileImportMethodsIn: aModelClass.
-	self generateSubmetamodelsMethodIn: aModelClass
-]
-
-{ #category : 'generating-methods' }
-FmxMBModel >> generateRootMetamodelMethodIn: aClass [
+FmxMBModel >> generateMetamodelMethod [
 
 	"no need to define the method #metamodel in the #Model entity
 	because it is already the #Model entity that hold the metamodel"
@@ -79,7 +72,7 @@ FmxMBModel >> generateRootMetamodelMethodIn: aClass [
 ]
 
 { #category : 'generating-methods' }
-FmxMBModel >> generateSubmetamodelsMethodIn: aModelClass [
+FmxMBModel >> generateSubmetamodelsMethod [
 
 	self builder allSubBuilders ifNotEmpty: [ :subBuilders |
 			| code |
@@ -94,15 +87,11 @@ FmxMBModel >> generateSubmetamodelsMethodIn: aModelClass [
 
 					        stream nextPut: $) ].
 
-			self
-				addMethod: code
-				in: aModelClass
-				classSide: true
-				protocol: #accessing ]
+			self addMethod: code classSide: true protocol: #accessing ]
 ]
 
 { #category : 'generating-methods' }
-FmxMBModel >> generateTestingMethodsIn: aClass [
+FmxMBModel >> generateTestingMethods [
 
 	"No need to define the testing methods in the #Model entity
 	because we already have a test that check that the entity is a Model"

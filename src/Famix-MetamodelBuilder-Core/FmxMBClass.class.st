@@ -83,13 +83,13 @@ FmxMBClass >> generate [
 	self generateAnnotationIn: aClass.
 	self generateIsAbstractMethodIfNecessaryIn: aClass.
 
-	self generateTestingMethodsIn: aClass.
-	self generateRootMetamodelMethodIn: aClass.
+	self generateTestingMethods.
+	self generateMetamodelMethod.
 
 	self generateMethodsToRemoveFromTraitCompositionFor: aClass.
 	self generatePrecedenceInTraitComposition: aClass.
 
-	self generateAddToCollectionFor: aClass.
+	self generateAddToCollection.
 
 	self generateEqualsMethodFor: aClass.
 	self generateHashMethodFor: aClass
@@ -168,6 +168,21 @@ FmxMBClass >> generateIsAbstractMethodIfNecessaryIn: aClass [
 				protocol: #testing ]
 ]
 
+{ #category : 'generating-methods' }
+FmxMBClass >> generateMetamodelMethod [
+
+	self isRoot ifFalse: [ ^ self ].
+
+	self builder model ifNotNil: [ :model |
+			self
+				addMethod: ('metamodel
+
+	<generated>
+	^ {1} metamodel' format: { model fullName })
+				classSide: true
+				protocol: #meta ]
+]
+
 { #category : 'generating' }
 FmxMBClass >> generateRemotes [
 	| aClass aClassName |
@@ -181,23 +196,7 @@ FmxMBClass >> generateRemotes [
 ]
 
 { #category : 'generating-methods' }
-FmxMBClass >> generateRootMetamodelMethodIn: aClass [
-
-	self isRoot ifFalse: [ ^ self ].
-
-	self builder model ifNotNil: [ :model |
-			self
-				addMethod: ('metamodel
-
-	<generated>
-	^ {1} metamodel' format: { model fullName })
-				in: aClass
-				classSide: true
-				protocol: #meta ]
-]
-
-{ #category : 'generating-methods' }
-FmxMBClass >> generateTestingMethodsIn: aClass [
+FmxMBClass >> generateTestingMethods [
 
 	self isRoot ifTrue: [
 			| selectorsToGenerate |
@@ -206,9 +205,9 @@ FmxMBClass >> generateTestingMethodsIn: aClass [
 				(builder shouldGeneratorTestingMethodsOf: concernedClass in: self) ifTrue: [ selectorsToGenerate addAll: selectors ] ].
 
 			(selectorsToGenerate difference: (self traitGeneralizations flatCollect: #testingSelectors)) do: [ :sel |
-				self addMethod: (sel , '\\	<generated>\	^ false') withCRs in: aClass protocol: #testing ] ].
+				self addMethod: (sel , '\\	<generated>\	^ false') withCRs protocol: #testing ] ].
 
-	super generateTestingMethodsIn: aClass
+	super generateTestingMethods
 ]
 
 { #category : 'testing' }
