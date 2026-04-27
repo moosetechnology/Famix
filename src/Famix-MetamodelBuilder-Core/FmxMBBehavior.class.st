@@ -311,7 +311,7 @@ FmxMBBehavior >> generateAddToCollection [
 ]
 
 { #category : 'generating' }
-FmxMBBehavior >> generateAnnotationIn: aRealClass [
+FmxMBBehavior >> generateAnnotation [
 
 	| aSuperclassName |
 	self flag: #todo. "Simplify"
@@ -333,7 +333,6 @@ FmxMBBehavior >> generateAnnotationIn: aRealClass [
 					 aSuperclassName.
 					 self builder safeAnnotationPackageName.
 					 self optionalPragma })
-		in: aRealClass
 		classSide: true
 		protocol: #meta
 ]

@@ -27,7 +27,7 @@ FmxMBModel >> generate [
 ]
 
 { #category : 'generating-methods' }
-FmxMBModel >> generateAnnotationIn: aModelClass [
+FmxMBModel >> generateAnnotation [
 
 	self
 		addMethod: ('annotation
@@ -36,7 +36,6 @@ FmxMBModel >> generateAnnotationIn: aModelClass [
 	<generated>' format: {
 					 self fullName.
 					 self builder safeAnnotationPackageName })
-		in: aModelClass
 		classSide: true
 		protocol: #meta
 ]

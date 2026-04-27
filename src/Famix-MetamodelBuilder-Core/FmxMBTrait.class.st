@@ -71,7 +71,7 @@ FmxMBTrait >> generate [
 	self realClass: aTrait.
 
 	self generateAccessors.
-	self generateAnnotationIn: aTrait.
+	self generateAnnotation.
 
 	self generateTestingMethods.
 	self generateMethodsToRemoveFromTraitCompositionFor: aTrait.

@@ -22,10 +22,6 @@ FmxMBRingEnvironment class >> for: aBuilder [
 { #category : 'installing' }
 FmxMBRingEnvironment >> addMethod: sourceCode in: aClassName classSide: aBoolean protocol: protocol [
 
-	self
-		assert: ((self changesOfType: FmxBehavioralAddition) anySatisfy: [ :change | change name = aClassName ])
-		description: 'Method additions should be done on classes to generate.'.
-
 	changesToApply add: (FmxMethodAddition
 			 className: aClassName
 			 isClassSide: aBoolean
