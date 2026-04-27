@@ -308,37 +308,24 @@ FmxMBRingEnvironment >> initialize [
 { #category : 'installing' }
 FmxMBRingEnvironment >> recordClassChangesFor: aRGClass [
 
-	| realClass |
-	self flag: #todo. "Kill ring."
-	realClass := self class environment classNamed: aRGClass name.
-	self recordMethodsAdoptionsOf: realClass to: aRGClass realClassName: aRGClass name.
-	self recordMethodsAdoptionsOf: (realClass ifNotNil: [ realClass class ]) to: aRGClass classSide realClassName: aRGClass name
+	self class environment at: aRGClass name asSymbol ifPresent: [ :realClass |
+			self recordMethodRemovalsOf: realClass to: aRGClass realClassName: aRGClass name.
+			self recordMethodRemovalsOf: (realClass ifNotNil: [ realClass class ]) to: aRGClass classSide realClassName: aRGClass name ]
 ]
 
 { #category : 'installing' }
-FmxMBRingEnvironment >> recordMethodsAdoptionsOf: realClass to: anRGClass realClassName: aClassName [
+FmxMBRingEnvironment >> recordMethodRemovalsOf: realClass to: anRGClass realClassName: aClassName [
+
 	| generatedMethodsOfRealClass generatedMethodNamesOfRealClass |
-	generatedMethodsOfRealClass := realClass
-		ifNil: [ {} ]
-		ifNotNil: [ (Pragma allNamed: #generated in: realClass) collect: #method thenReject: [ :m | m isFromTrait  ] ] .
+	generatedMethodsOfRealClass := (Pragma allNamed: #generated in: realClass)
+		                               collect: #method
+		                               thenReject: [ :m | m isFromTrait ].
 
 	generatedMethodNamesOfRealClass := generatedMethodsOfRealClass collect: #selector.
 
 	"First we removed the generated methods should not be here anymore"
-	(generatedMethodNamesOfRealClass difference: anRGClass localSelectors)
-		ifNotEmpty: [ :selectorsOfRemovedGeneratedMethod | changesToApply add: (FmxMethodRemovals className: aClassName isClassSide: anRGClass isClassSide selectors: selectorsOfRemovedGeneratedMethod) ].
-
-	"Add new generated methods"
-	((anRGClass localSelectors difference: generatedMethodNamesOfRealClass)
-		select: [ :selectorOfMethodToAdd | realClass ifNil: [ true ] ifNotNil: [ (realClass localSelectors includes: selectorOfMethodToAdd) not ] ]
-		thenCollect: [ :selectorOfMethodToAdd | anRGClass methodNamed: selectorOfMethodToAdd ])
-		ifNotEmpty: [ :methods | methods do: [ :method | self addMethod: method sourceCode in: aClassName classSide: anRGClass isClassSide protocol: method protocol ] ].
-
-	"Finally, update methods needing updates"
-	((generatedMethodNamesOfRealClass intersection: anRGClass localSelectors)
-		collect: [ :selectorOfMethodToUpdate | anRGClass methodNamed: selectorOfMethodToUpdate ]
-		thenSelect: [ :method | realClass needToAdaptToMethod: method ])
-		ifNotEmpty: [ :methods | methods do: [ :method | self addMethod: method sourceCode in: aClassName classSide: anRGClass isClassSide protocol: method protocol ] ]
+	(generatedMethodNamesOfRealClass difference: anRGClass localSelectors) ifNotEmpty: [ :selectorsOfRemovedGeneratedMethod |
+		changesToApply add: (FmxMethodRemovals className: aClassName isClassSide: anRGClass isClassSide selectors: selectorsOfRemovedGeneratedMethod) ]
 ]
 
 { #category : 'accessing' }
