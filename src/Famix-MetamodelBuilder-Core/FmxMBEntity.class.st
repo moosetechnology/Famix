@@ -19,6 +19,28 @@ FmxMBEntity >> acceptVisitor: aVisitor [
 	^ self subclassResponsibility
 ]
 
+{ #category : 'generating' }
+FmxMBEntity >> addMethod: code in: class classSide: boolean protocol: protocol [
+
+	self flag: #todo. "Demeter"
+	self builder environment
+		addMethod: code
+		in: class name
+		classSide: boolean
+		protocol: protocol.
+
+	self flag: #todo. "This code should never make it in the dev branch of Famix. Also we should provide the class name directly"
+	(boolean
+		 ifTrue: [ class classSide ]
+		 ifFalse: [ class ]) compile: code classified: protocol
+]
+
+{ #category : 'generating' }
+FmxMBEntity >> addMethod: code in: class protocol: protocol [
+
+	^ self addMethod: code in: class classSide: false protocol: protocol
+]
+
 { #category : 'accessing' }
 FmxMBEntity >> additionalProperties [
 

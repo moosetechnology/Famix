@@ -141,7 +141,7 @@ FmxMBRingEnvironment >> collectChangesToApply [
 { #category : 'installing' }
 FmxMBRingEnvironment >> compile: aSource in: aClass classified: aProtocol [
 
-	aClass compile: aSource classified: aProtocol.
+	aClass compile: aSource classified: aProtocol
 ]
 
 { #category : 'installing' }
@@ -309,23 +309,28 @@ FmxMBRingEnvironment >> initialize [
 FmxMBRingEnvironment >> recordClassChangesFor: aRGClass [
 
 	self class environment at: aRGClass name asSymbol ifPresent: [ :realClass |
-			self recordMethodRemovalsOf: realClass to: aRGClass realClassName: aRGClass name.
-			self recordMethodRemovalsOf: (realClass ifNotNil: [ realClass class ]) to: aRGClass classSide realClassName: aRGClass name ]
+			self recordMethodRemovalsOf: realClass to: aRGClass.
+			self recordMethodRemovalsOf: realClass class to: aRGClass classSide ]
 ]
 
 { #category : 'installing' }
-FmxMBRingEnvironment >> recordMethodRemovalsOf: realClass to: anRGClass realClassName: aClassName [
+FmxMBRingEnvironment >> recordMethodRemovalsOf: realClass to: anRGClass [
 
-	| generatedMethodsOfRealClass generatedMethodNamesOfRealClass |
+	| generatedMethodsOfRealClass generatedMethodNamesOfRealClass selectorsToGenerate |
 	generatedMethodsOfRealClass := (Pragma allNamed: #generated in: realClass)
 		                               collect: #method
 		                               thenReject: [ :m | m isFromTrait ].
 
 	generatedMethodNamesOfRealClass := generatedMethodsOfRealClass collect: #selector.
 
+	selectorsToGenerate := ((self changesOfType: FmxMethodAddition) select: [ :change |
+		                        change className = realClass instanceSide name and: [ change isClassSide = realClass isClassSide ] ]) collect: #selector.
+
+	"selectorsToGenerate size = anRGClass localSelectors size ifFalse: [ self halt ]."
+
 	"First we removed the generated methods should not be here anymore"
 	(generatedMethodNamesOfRealClass difference: anRGClass localSelectors) ifNotEmpty: [ :selectorsOfRemovedGeneratedMethod |
-		changesToApply add: (FmxMethodRemovals className: aClassName isClassSide: anRGClass isClassSide selectors: selectorsOfRemovedGeneratedMethod) ]
+		changesToApply add: (FmxMethodRemovals className: realClass name isClassSide: realClass isClassSide selectors: selectorsOfRemovedGeneratedMethod) ]
 ]
 
 { #category : 'accessing' }

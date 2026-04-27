@@ -14,7 +14,8 @@ Class {
 	#superclass : 'FmxLazyClassChange',
 	#instVars : [
 		'protocol',
-		'sourceCode'
+		'sourceCode',
+		'selector'
 	],
 	#category : 'Famix-MetamodelBuilder-Core-Changes',
 	#package : 'Famix-MetamodelBuilder-Core',
@@ -45,9 +46,7 @@ FmxMethodAddition >> isRequired [
 		  ifNil: [ true ]
 		  ifNotNil: [ :class |
 				  class
-					  compiledMethodAt: (self class compiler
-							   permitUndeclared: true;
-							   compile: sourceCode) selector
+					  compiledMethodAt: self selector
 					  ifPresent: [ :method | (method hasPragmaNamed: #generated) and: (method sourceCode ~= sourceCode or: [ (method protocolName = protocol) not ]) ]
 					  ifAbsent: [ true ] ]
 ]
@@ -75,6 +74,16 @@ FmxMethodAddition >> protocol [
 FmxMethodAddition >> protocol: anObject [
 
 	protocol := anObject
+]
+
+{ #category : 'testing' }
+FmxMethodAddition >> selector [
+	"Cached"
+
+	^ selector ifNil: [
+			  selector := (self class compiler
+				               permitUndeclared: true;
+				               compile: sourceCode) selector ]
 ]
 
 { #category : 'accessing' }

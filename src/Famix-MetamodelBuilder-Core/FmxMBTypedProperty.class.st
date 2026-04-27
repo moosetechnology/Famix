@@ -42,53 +42,67 @@ FmxMBTypedProperty >> defaultValue: aValue [
 FmxMBTypedProperty >> generateGetterIn: aClassOrTrait [
 
 	| methodSource propertyDefinition commentDefinition pragmaFormat |
+	pragmaFormat := self defaultValue
+		                ifNil: [ '<FMProperty: #{1} type: #{2}>' ]
+		                ifNotNil: [ '<FMProperty: #{1} type: #{2} defaultValue: {3}>' ].
+	propertyDefinition := pragmaFormat format: {
+			                      self name.
+			                      self propertyType.
+			                      self defaultValue printString }.
 
-	pragmaFormat := self defaultValue ifNil: [ '<FMProperty: #{1} type: #{2}>' ] 
-											   ifNotNil: [ '<FMProperty: #{1} type: #{2} defaultValue: {3}>' ]. 
-	propertyDefinition := pragmaFormat
-		format: { self name. self propertyType. self defaultValue printString}.
-
-	commentDefinition := self comment
-		ifNotEmpty: [ '<FMComment: {1}>' format: { self comment printString } ].
+	commentDefinition := self comment ifNotEmpty: [ '<FMComment: {1}>' format: { self comment printString } ].
 
 	methodSource := String streamContents: [ :s |
-		s nextPutAll: self name; cr; cr.
-		s tab; nextPutAll: propertyDefinition; cr.
-		s tab; nextPutAll: '<generated>'; cr.
-		self isMultivalued ifTrue: [ 
-			 s tab; nextPutAll: '<multivalued>'; cr. ].
-		commentDefinition  
-			ifNotEmpty: [ s tab; nextPutAll: commentDefinition; cr].
-		s tab; nextPutAll: '^ '.
-		
-		self isRemote
-			ifTrue: [ s nextPutAll: 'self attributeAt: #'; 
-				nextPutAll: self name;
-				nextPutAll: ' ifAbsent: [ nil ]' ]
-			ifFalse: [ s nextPutAll: self name ].
-		
-		
-		self defaultValue ifNotNil: [
-			s nextPutAll: (' ifNil: [ {1} := {2} ]' format: { self name. self defaultValue printString }) ] ].
-	
+			                s
+				                nextPutAll: self name;
+				                cr;
+				                cr.
+			                s
+				                tab;
+				                nextPutAll: propertyDefinition;
+				                cr.
+			                s
+				                tab;
+				                nextPutAll: '<generated>';
+				                cr.
+			                self isMultivalued ifTrue: [
+					                s
+						                tab;
+						                nextPutAll: '<multivalued>';
+						                cr ].
+			                commentDefinition ifNotEmpty: [
+					                s
+						                tab;
+						                nextPutAll: commentDefinition;
+						                cr ].
+			                s
+				                tab;
+				                nextPutAll: '^ '.
+
+			                self isRemote
+				                ifTrue: [
+						                s
+							                nextPutAll: 'self attributeAt: #';
+							                nextPutAll: self name;
+							                nextPutAll: ' ifAbsent: [ nil ]' ]
+				                ifFalse: [ s nextPutAll: self name ].
+
+
+			                self defaultValue ifNotNil: [
+					                s nextPutAll: (' ifNil: [ {1} := {2} ]' format: {
+								                 self name.
+								                 self defaultValue printString }) ] ].
+
 	"cannot merge both builder of the accessing disapear for non remote entity"
 	self isRemote
-			ifTrue: [ 
+		ifTrue: [
+				self flag: #todo. "This breaks generation layers and should be kill"
 				self builder environment
 					compile: methodSource
 					in: aClassOrTrait
 					classified: 'accessing'
-					package: self builder parentBuilderPackageName
-			]
-			ifFalse: [
-				self builder environment
-					compile: methodSource
-					in: aClassOrTrait
-					classified: 'accessing' ]
-		
-	
-
-	
+					package: self builder parentBuilderPackageName ]
+		ifFalse: [ self addMethod: methodSource in: aClassOrTrait protocol: #accessing ]
 ]
 
 { #category : 'generating' }
@@ -100,25 +114,19 @@ FmxMBTypedProperty >> generateSetterIn: aClassOrTrait [
 	<generated>
 	'.
 			                  self isRemote
-				                  ifTrue: [
-				                  stream nextPutAll:
-					                  'self attributeAt: #{1} put: anObject' ]
+				                  ifTrue: [ stream nextPutAll: 'self attributeAt: #{1} put: anObject' ]
 				                  ifFalse: [ stream nextPutAll: '{1} := anObject' ] ].
 
 	"cannot merge both builder of the accessing disapear for non remote entity"
 	self isRemote
-			ifTrue: [ 
+		ifTrue: [
+				self flag: #todo. "This breaks generation layers and should be kill"
 				self builder environment
 					compile: (methodToFormat format: { self name })
 					in: aClassOrTrait
 					classified: 'accessing'
-					package: self builder parentBuilderPackageName
-			]
-			ifFalse: [
-				self builder environment
-					compile: (methodToFormat format: { self name })
-					in: aClassOrTrait
-					classified: 'accessing' ]
+					package: self builder parentBuilderPackageName ]
+		ifFalse: [ self addMethod: (methodToFormat format: { self name }) in: aClassOrTrait protocol: 'accessing' ]
 ]
 
 { #category : 'generating' }
