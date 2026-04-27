@@ -12,7 +12,7 @@ Class {
 
 { #category : 'generating' }
 FmxMBEntityCreatorTrait >> generateEntityCreationMethodFor: aClass [
-	self flag: #todo. "Do we need the real class? Isn't it the parameter?"
+
 	self
 		addMethod: ('new{1}
 
@@ -20,7 +20,6 @@ FmxMBEntityCreatorTrait >> generateEntityCreationMethodFor: aClass [
 	^ self add: {2} new' format: {
 					 aClass name.
 					 aClass fullName })
-		in: self realClass
 		protocol: #'entity creation'
 ]
 
@@ -36,7 +35,6 @@ FmxMBEntityCreatorTrait >> generateEntityCreationMethods [
 { #category : 'generating' }
 FmxMBEntityCreatorTrait >> generateNamedEntityCreationMethodFor: aClass [
 
-	self flag: #todo. "Do we need the real class? Isn't it the parameter?"
 	self
 		addMethod: ('new{1}Named: aName
 
@@ -44,7 +42,6 @@ FmxMBEntityCreatorTrait >> generateNamedEntityCreationMethodFor: aClass [
 	^ self add: ({2} named: aName)' format: {
 					 aClass name.
 					 aClass fullName })
-		in: self realClass
 		protocol: #'entity creation'
 ]
 

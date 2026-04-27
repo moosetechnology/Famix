@@ -68,81 +68,66 @@ FmxMBImportingContext >> generate [
 
 	self realClass: aClass.
 
-	self generateMethodsIn: aClass
+	self generateImportingContextMetamodel.
+	self generateShouldImport.
+	self generateImport
 ]
 
 { #category : 'generating-methods' }
-FmxMBImportingContext >> generateImportAssociation: aFmxMBAssociationClass in: aClass [
+FmxMBImportingContext >> generateImport [
+
+	self builder classes do: [ :each | "No need to generate methods for model and groups."
+			(each isModelClass or: [ each isMetamodelClassGroup or: [ each isAbstractClass ] ]) ifFalse: [ "Associations and other entities are managed differently by the importing context"
+					each allTransitiveTraits
+						detect: [ :trait | trait name = #TAssociation ]
+						ifFound: [ self generateImportAssociation: each ]
+						ifNone: [ self generateImportConcreteEntity: each ] ] ]
+]
+
+{ #category : 'generating-methods' }
+FmxMBImportingContext >> generateImportAssociation: aFmxMBAssociationClass [
 
 	self
 		addMethod: ('import{1}
 
 	<generated>
 	^ self importAssociation: (self class fm3ClassNamed: #{1})' format: { aFmxMBAssociationClass name })
-		in: aClass
 		protocol: #importing
 ]
 
 { #category : 'generating-methods' }
-FmxMBImportingContext >> generateImportConcreteEntity: aFmxMBClass in: aClass [
+FmxMBImportingContext >> generateImportConcreteEntity: aFmxMBClass [
 
 	self
 		addMethod: ('import{1}
 
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #{1})' format: { aFmxMBClass name })
-		in: aClass
 		protocol: #importing
 ]
 
 { #category : 'generating-methods' }
-FmxMBImportingContext >> generateImportIn: aClass [
-
-	self builder classes do: [ :each | 
-		"No need to generate methods for model and groups."
-		(each isModelClass or: [ 
-			 each isMetamodelClassGroup or: [ each isAbstractClass ] ]) ifFalse: [ 
-			
-			"Associations and other entities are managed differently by the importing context"
-			each allTransitiveTraits
-				detect: [ :trait | trait name = #TAssociation ]
-				ifFound: [ self generateImportAssociation: each in: aClass ]
-				ifNone: [ self generateImportConcreteEntity: each in: aClass ] ] ]
-]
-
-{ #category : 'generating-methods' }
-FmxMBImportingContext >> generateImportingContextMetamodelIn: aClass [
+FmxMBImportingContext >> generateImportingContextMetamodel [
 
 	self
 		addMethod: ('importedMetamodel
 
 	<generated>
 	^ {1}Model metamodel' format: { self prefix })
-		in: aClass
 		classSide: true
 		protocol: #accessing
 ]
 
-{ #category : 'generating' }
-FmxMBImportingContext >> generateMethodsIn: aClass [
-
-	self generateImportingContextMetamodelIn: aClass.
-	self generateShouldImportIn: aClass.
-	self generateImportIn: aClass
-]
-
 { #category : 'generating-methods' }
-FmxMBImportingContext >> generateShouldImportIn: aClass [
+FmxMBImportingContext >> generateShouldImport [
 
-	self builder classes do: [ :each |
-			"No need to generate methods for model and groups."
+	self builder classes do: [ :each | "No need to generate methods for model and groups."
 			(each isModelClass or: [ each isMetamodelClassGroup or: [ each isAbstractClass ] ]) ifFalse: [
 					self
 						addMethod: ('shouldImport{1}
 
 	<generated>
 	^ self shouldImport: #{1}' format: { each name })
-						in: aClass
 						protocol: #testing ] ]
 ]
 
