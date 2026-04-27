@@ -113,6 +113,20 @@ FmxMBBehavior >> allRelations [
 ]
 
 { #category : 'accessing' }
+FmxMBBehavior >> allTraitDefinitions [
+
+	^ self allLocalTraits ifEmpty: [ #(  ) ] ifNotEmpty: [ :traits |
+			  | methodsToRemove |
+			  methodsToRemove := self additionalProperties at: #methodsToRemoveFromTraitComposition ifAbsent: [ Dictionary new ].
+
+			  (traits collect: [ :trait |
+					   methodsToRemove
+						   at: trait fullName
+						   ifPresent: [ :methods | trait fullName , ' - {' , ('. ' join: (methods collect: #printString)) , '}' ]
+						   ifAbsent: [ trait fullName ] ]) sorted ]
+]
+
+{ #category : 'accessing' }
 FmxMBBehavior >> allTraitNames [
 	^ (self allLocalTraits collect: #fullName) sorted
 ]

@@ -69,7 +69,9 @@ FmxMBClass >> generate [
 	aClass := self builder environment
 		          createClassNamed: self fullName asSymbol
 		          superclass: superclassName
+		          traitDefinitions: self allTraitDefinitions
 		          traitNames: self allTraitNames
+		          precedingTrait: (self additionalProperties at: #precedingTrait ifAbsent: [ nil ])
 		          properties: (self properties select: #producesSlot)
 		          in: self packageName
 		          tag: self tag

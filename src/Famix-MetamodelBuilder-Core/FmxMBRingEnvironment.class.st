@@ -154,7 +154,7 @@ FmxMBRingEnvironment >> compile: aSource in: aClass classified: aProtocol packag
 ]
 
 { #category : 'installing' }
-FmxMBRingEnvironment >> createClassNamed: className superclass: superclassName traitNames: traitNames properties: properties in: defaultPackage tag: defaultTag comment: comment [
+FmxMBRingEnvironment >> createClassNamed: className superclass: superclassName traitDefinitions: traitDefinitions traitNames: traitNames precedingTrait: precedingTrait properties: properties in: defaultPackage tag: defaultTag comment: comment [
 
 	| slots aClass existingClass composition realClass packageName tag change |
 	existingClass := self ringEnvironment ask behaviorNamed: className.
@@ -180,10 +180,9 @@ FmxMBRingEnvironment >> createClassNamed: className superclass: superclassName t
 		package: packageName;
 		tag: tag.
 
-	self flag: #todo. "Manage precedence + factorize code"
-	traitNames ifNotEmpty: [ change traits: '{' , ($+ join: traitNames) , '}' ].
+	traitDefinitions ifNotEmpty: [ change traits: (self traitStringFrom: traitDefinitions precedingTrait: precedingTrait existingClass: realClass) ].
 
-	properties ifNotEmpty: [ change slots: (self buildSlotsDefinitionFor: properties existingClass: (self class environment at: className ifAbsent: [ nil ])) ].
+	properties ifNotEmpty: [ change slots: (self buildSlotsDefinitionFor: properties existingClass: realClass) ].
 	"changesToApply add: change."
 	"==========================="
 
@@ -218,7 +217,7 @@ FmxMBRingEnvironment >> createClassNamed: className superclass: superclassName t
 ]
 
 { #category : 'initialization' }
-FmxMBRingEnvironment >> createTraitNamed: traitName uses: traitNames properties: properties in: defaultPackage tag: defaultTag comment: comment [
+FmxMBRingEnvironment >> createTraitNamed: traitName  traitDefinitions: traitDefinitions uses: traitNames precedingTrait: precedingTrait  properties: properties in: defaultPackage tag: defaultTag comment: comment [
 
 	| aTrait existingRGClass composition packageName tag realClass slots change |
 	existingRGClass := self ringEnvironment ask behaviorNamed: traitName asSymbol.
@@ -242,10 +241,9 @@ FmxMBRingEnvironment >> createTraitNamed: traitName uses: traitNames properties:
 		package: packageName;
 		tag: tag.
 
-	self flag: #todo. "Manage precedence + factorize code"
-	traitNames ifNotEmpty: [ change traits: '{' , ($+ join: traitNames) , '}' ].
+	traitDefinitions ifNotEmpty: [ change traits: (self traitStringFrom: traitDefinitions precedingTrait: precedingTrait existingClass: realClass) ].
 	
-	properties ifNotEmpty: [ change slots: (self buildSlotsDefinitionFor: properties existingClass: (self class environment at: traitName ifAbsent: [ nil ])) ].
+	properties ifNotEmpty: [ change slots: (self buildSlotsDefinitionFor: properties existingClass: realClass) ].
 	"changesToApply add: change."
 	"==========================="
 
@@ -429,6 +427,29 @@ FmxMBRingEnvironment >> ringEnvironment [
 ]
 
 { #category : 'installing' }
+FmxMBRingEnvironment >> traitStringFrom: traitDefinitions precedingTrait: precedingTrait existingClass: realClass [
+	"We need to collect the generated traits + the custom traits added by the user."
+
+	| customTraitNames traitCompositionString |
+	customTraitNames := ((realClass
+		                      ifNil: [ #(  ) ]
+		                      ifNotNil: [ :class | class traitComposition rootMembers ]) select: [ :e | realClass customTraitNames includes: e name ]) collect:
+		                    #traitCompositionExpression.
+	"manage methods to remove."
+	traitCompositionString := traitDefinitions , customTraitNames ifEmpty: [ ^ '{ }' ] ifNotEmpty: [ :definitions | definitions joinUsing: ' + ' ].
+
+	precedingTrait ifNil: [ ^ traitCompositionString ].
+
+	^ String streamContents: [ :s |
+			  s
+				  nextPutAll: '(';
+				  nextPutAll: traitCompositionString;
+				  nextPutAll: ' withPrecedenceOf: ';
+				  nextPutAll: precedingTrait;
+				  nextPutAll: ')' ]
+]
+
+{ #category : 'installing' }
 FmxMBRingEnvironment >> traitStringFrom: realClass to: aRGClass [
 	"We need to collect the generated traits + the custom traits added by the user."
 
@@ -449,11 +470,11 @@ FmxMBRingEnvironment >> traitStringFrom: realClass to: aRGClass [
 
 	^ String streamContents: [ :s |
 			  s
-				  nextPutAll: '(( ';
+				  nextPutAll: '(';
 				  nextPutAll: traitCompositionString;
-				  nextPutAll: ' ) withPrecedenceOf: ';
+				  nextPutAll: ' withPrecedenceOf: ';
 				  nextPutAll: precedingTrait;
-				  nextPutAll: ' )' ]
+				  nextPutAll: ')' ]
 ]
 
 { #category : 'installing' }
