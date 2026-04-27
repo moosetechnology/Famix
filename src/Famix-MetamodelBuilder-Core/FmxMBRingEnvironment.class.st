@@ -22,6 +22,10 @@ FmxMBRingEnvironment class >> for: aBuilder [
 { #category : 'installing' }
 FmxMBRingEnvironment >> addMethod: sourceCode in: aClassName classSide: aBoolean protocol: protocol [
 
+	self
+		assert: ((self changesOfType: FmxBehavioralAddition) anySatisfy: [ :change | change name = aClassName ])
+		description: 'Method additions should be done on classes to generate.'.
+
 	changesToApply add: (FmxMethodAddition
 			 className: aClassName
 			 isClassSide: aBoolean
@@ -34,13 +38,13 @@ FmxMBRingEnvironment >> apply [
 
 	| dependencies |
 	self collectChangesToApply.
-
 	"Now we have a list of changes to apply. Some changes needs to by applied before others (for example, we need to create a classe to compile its methods or compile superclasses before their subclasses or traits before their users)."
 	dependencies := changesToApply inject: Dictionary new into: [ :dictionary :change |
 			                dictionary
 				                at: change put: (change followingChangesIn: (changesToApply copyWithout: change));
 				                yourself ].
-	(AITopologicalSorting sort: changesToApply followingIncomingProperty: [ :change | dependencies at: change ]) do: #apply
+	(AITopologicalSorting sort: changesToApply followingIncomingProperty: [ :change | dependencies at: change ]) do: #apply.
+	changesToApply := OrderedCollection new
 ]
 
 { #category : 'accessing' }
@@ -128,14 +132,19 @@ FmxMBRingEnvironment >> classNamed: aClassName [
 
 { #category : 'installing' }
 FmxMBRingEnvironment >> collectChangesToApply [
-	| resolvedClasses |
-	resolvedClasses := ringEnvironment ask behaviors select: [ :each | each isRingResolved and: [ each superclass isRingResolved ] ].
 
-	resolvedClasses do: [ :each | self recordClassChangesFor: each ].
-	self recordRemovalOfGeneratedEntitiesNotPresentIn: resolvedClasses.
+	| classesToGenerate |
+	classesToGenerate := (self changesOfType: FmxBehavioralAddition) collectAsSet: #name.
+
+	classesToGenerate do: [ :className |
+			self class environment at: className asSymbol ifPresent: [ :realClass |
+					self recordMethodRemovalsOf: realClass.
+					self recordMethodRemovalsOf: realClass class ] ].
+
+	self recordRemovalOfGeneratedPackagesAndClasses.
 
 	"Reject changes that would not change anything on the current system."
-	changesToApply := changesToApply select: [ :change | change isRequired ].
+	changesToApply := changesToApply select: [ :change | change isRequired ]
 ]
 
 { #category : 'installing' }
@@ -306,15 +315,7 @@ FmxMBRingEnvironment >> initialize [
 ]
 
 { #category : 'installing' }
-FmxMBRingEnvironment >> recordClassChangesFor: aRGClass [
-
-	self class environment at: aRGClass name asSymbol ifPresent: [ :realClass |
-			self recordMethodRemovalsOf: realClass to: aRGClass.
-			self recordMethodRemovalsOf: realClass class to: aRGClass classSide ]
-]
-
-{ #category : 'installing' }
-FmxMBRingEnvironment >> recordMethodRemovalsOf: realClass to: anRGClass [
+FmxMBRingEnvironment >> recordMethodRemovalsOf: realClass [
 
 	| generatedMethodsOfRealClass generatedMethodNamesOfRealClass selectorsToGenerate |
 	generatedMethodsOfRealClass := (Pragma allNamed: #generated in: realClass)
@@ -326,10 +327,8 @@ FmxMBRingEnvironment >> recordMethodRemovalsOf: realClass to: anRGClass [
 	selectorsToGenerate := ((self changesOfType: FmxMethodAddition) select: [ :change |
 		                        change className = realClass instanceSide name and: [ change isClassSide = realClass isClassSide ] ]) collect: #selector.
 
-	"selectorsToGenerate size = anRGClass localSelectors size ifFalse: [ self halt ]."
-
 	"First we removed the generated methods should not be here anymore"
-	(generatedMethodNamesOfRealClass difference: anRGClass localSelectors) ifNotEmpty: [ :selectorsOfRemovedGeneratedMethod |
+	(generatedMethodNamesOfRealClass difference: selectorsToGenerate) ifNotEmpty: [ :selectorsOfRemovedGeneratedMethod |
 		changesToApply add: (FmxMethodRemovals className: realClass name isClassSide: realClass isClassSide selectors: selectorsOfRemovedGeneratedMethod) ]
 ]
 
@@ -347,6 +346,22 @@ FmxMBRingEnvironment >> recordRemovalOfGeneratedEntitiesNotPresentIn: resolvedCl
 									resolvedClasses
 										detect: [ :rgClass | rgClass name = class name ]
 										ifNone: [ changesToApply add: (FmxClassRemoval class: class) ] ] ] ]
+]
+
+{ #category : 'accessing' }
+FmxMBRingEnvironment >> recordRemovalOfGeneratedPackagesAndClasses [
+	"Since the last generation it is possible some behaviorals were removed from the generator. In that case we should remove them. We will remove all classes and traits of Famix that are not part of the current generator."
+
+	| classesToGenerate |
+	classesToGenerate := (self changesOfType: FmxBehavioralAddition) collectAsSet: #name.
+
+	(self changesOfType: FmxPackageAddition)
+		collect: #systemPackage
+		thenDo: [ :package |
+				package ifNotNil: [
+						package definedClasses
+							select: #isMetamodelEntity
+							thenDo: [ :class | (classesToGenerate includes: class name) ifFalse: [ changesToApply add: (FmxClassRemoval class: class) ] ] ] ]
 ]
 
 { #category : 'public registration' }

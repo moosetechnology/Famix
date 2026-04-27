@@ -47,12 +47,14 @@ FmxBehavioralAddition >> isRequired [
 		  ifNil: [ true ]
 		  ifNotNil: [ :realClass |
 				  realClass localSlots ifEmpty: [ self slots ifNotNil: [ ^ true ] ] ifNotEmpty: [ :currentSlots |
+						  self slots ifNil: [ ^ true ].
 						  self slots size = currentSlots size ifFalse: [ ^ true ].
 						  (self slots allSatisfy: [ :slotDefinition | currentSlots anySatisfy: [ :slot | slot definitionString = slotDefinition ] ]) ifFalse: [ ^ true ] ].
 
 				  realClass traitComposition isEmpty
 					  ifTrue: [ self traits ifNotNil: [ ^ true ] ]
 					  ifFalse: [
+							  self traits ifNil: [ ^ true ].
 							  (OpalCompiler new
 								   failBlock: [ ^ true ];
 								   source: self traits;

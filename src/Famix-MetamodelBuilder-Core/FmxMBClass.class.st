@@ -200,12 +200,13 @@ FmxMBClass >> generateRootMetamodelMethodIn: aClass [
 FmxMBClass >> generateTestingMethodsIn: aClass [
 
 	self isRoot ifTrue: [
+			| selectorsToGenerate |
+			selectorsToGenerate := Set new.
 			builder testingSelectorsMapping keysAndValuesDo: [ :concernedClass :selectors |
-					(builder shouldGeneratorTestingMethodsOf: concernedClass in: self) ifTrue: [
-							selectors do: [ :sel |
-									| selectorsFromTraits |
-									selectorsFromTraits := self traitGeneralizations flatCollect: #testingSelectors.
-									(selectorsFromTraits includes: sel) ifFalse: [ self addMethod: (sel , '\\	<generated>\	^ false') withCRs in: aClass protocol: #testing ] ] ] ] ].
+				(builder shouldGeneratorTestingMethodsOf: concernedClass in: self) ifTrue: [ selectorsToGenerate addAll: selectors ] ].
+
+			(selectorsToGenerate difference: (self traitGeneralizations flatCollect: #testingSelectors)) do: [ :sel |
+				self addMethod: (sel , '\\	<generated>\	^ false') withCRs in: aClass protocol: #testing ] ].
 
 	super generateTestingMethodsIn: aClass
 ]

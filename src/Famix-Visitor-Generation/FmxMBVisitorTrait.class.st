@@ -53,13 +53,13 @@ FmxMBVisitorTrait >> generate [
 { #category : 'generating' }
 FmxMBVisitorTrait >> generateAcceptMethodIn: aFmxMBBehavior [
 
-	self builder environment
-		compile: ('accept: aVisitor
+	self
+		addMethod: ('accept: aVisitor
 
 	<generated>
 	^ aVisitor visit{1}: self' format: { aFmxMBBehavior fullName })
 		in: aFmxMBBehavior realClass
-		classified: self acceptMethodProtocol
+		protocol: self acceptMethodProtocol
 ]
 
 { #category : 'generation - common' }
@@ -86,33 +86,31 @@ FmxMBVisitorTrait >> generateVisitAndAcceptMethods [
 { #category : 'generation - common' }
 FmxMBVisitorTrait >> generateVisitCollectionMethod [
 
-	self realClass
-		compile: 'visitCollection: aCollection
+	self
+		addMethod: 'visitCollection: aCollection
 
 	<generated>
 	^ aCollection collect: [ :each | each accept: self ]'
-		classified: #visiting
+		in: self realClass
+		protocol: #visiting
 ]
 
 { #category : 'generation - common' }
 FmxMBVisitorTrait >> generateVisitEntityMethod [
 
-	self realClass
-		compile: 'visitEntity: aFamixEntity
+	self
+		addMethod: 'visitEntity: aFamixEntity
 
 	<generated>
 	^ aFamixEntity ifNotNil: [ aFamixEntity accept: self ]'
-		classified: #visiting
+		in: self realClass
+		protocol: #visiting
 ]
 
 { #category : 'generation - visit' }
 FmxMBVisitorTrait >> generateVisitMethodFor: aFmxMBBehavior [
 
-	self builder environment
-		compile: (String streamContents: [ :s |
-				 self writeVisitMethodFor: aFmxMBBehavior on: s ])
-		in: self realClass
-		classified: #visiting
+	self addMethod: (String streamContents: [ :s | self writeVisitMethodFor: aFmxMBBehavior on: s ]) in: self realClass protocol: #visiting
 ]
 
 { #category : 'initialization' }
