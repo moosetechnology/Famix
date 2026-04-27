@@ -74,8 +74,6 @@ FmxMBTrait >> generate [
 	self generateAnnotation.
 
 	self generateTestingMethods.
-	self generateMethodsToRemoveFromTraitCompositionFor: aTrait.
-	self generatePrecedenceInTraitComposition: aTrait.
 
 	self generateAddToCollection
 ]

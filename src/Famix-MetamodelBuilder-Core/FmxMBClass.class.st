@@ -81,13 +81,10 @@ FmxMBClass >> generate [
 
 	self generateAccessors.
 	self generateAnnotation.
-	self generateIsAbstractMethodIfNecessaryIn: aClass.
+	self generateIsAbstractMethodIfNecessary.
 
 	self generateTestingMethods.
 	self generateMetamodelMethod.
-
-	self generateMethodsToRemoveFromTraitCompositionFor: aClass.
-	self generatePrecedenceInTraitComposition: aClass.
 
 	self generateAddToCollection.
 
@@ -155,15 +152,14 @@ FmxMBClass >> generateHashMethodFor: aClass [
 ]
 
 { #category : 'generating' }
-FmxMBClass >> generateIsAbstractMethodIfNecessaryIn: aClass [
+FmxMBClass >> generateIsAbstractMethodIfNecessary [
 
 	self isAbstractClass ifTrue: [
 			self
 				addMethod: ('isAbstract
 
 	<generated>
-	^ self == {1}' format: { aClass name asString })
-				in: aClass
+	^ self == {1}' format: { self fullName })
 				classSide: true
 				protocol: #testing ]
 ]
