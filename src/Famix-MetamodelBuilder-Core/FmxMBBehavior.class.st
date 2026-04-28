@@ -60,7 +60,7 @@ FmxMBBehavior >> addMethod: code in: class classSide: boolean protocol: protocol
 	self flag: #todo. "We should only take a string as parameter."
 	className := class isString
 		             ifTrue: [ class ]
-		             ifFalse: [ class name ].
+		             ifFalse: [1halt. class name ].
 	self flag: #todo. "Demeter"
 	self builder environment
 		addMethod: code
@@ -69,16 +69,10 @@ FmxMBBehavior >> addMethod: code in: class classSide: boolean protocol: protocol
 		protocol: protocol
 ]
 
-{ #category : 'generating' }
-FmxMBBehavior >> addMethod: code in: class protocol: protocol [
-
-	^ self addMethod: code in: class classSide: false protocol: protocol
-]
-
 { #category : 'adding' }
 FmxMBBehavior >> addMethod: code protocol: protocol [
 
-	^ self addMethod: code in: self fullName protocol: protocol
+	^ self addMethod: code classSide: false protocol: protocol
 ]
 
 { #category : 'accessing' }

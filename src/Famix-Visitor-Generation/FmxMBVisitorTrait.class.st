@@ -52,12 +52,11 @@ FmxMBVisitorTrait >> generate [
 { #category : 'generating' }
 FmxMBVisitorTrait >> generateAcceptMethodIn: aFmxMBBehavior [
 
-	self
+	aFmxMBBehavior
 		addMethod: ('accept: aVisitor
 
 	<generated>
 	^ aVisitor visit{1}: self' format: { aFmxMBBehavior fullName })
-		in: aFmxMBBehavior realClass
 		protocol: self acceptMethodProtocol
 ]
 
@@ -90,7 +89,6 @@ FmxMBVisitorTrait >> generateVisitCollectionMethod [
 
 	<generated>
 	^ aCollection collect: [ :each | each accept: self ]'
-		in: self realClass
 		protocol: #visiting
 ]
 
@@ -102,14 +100,13 @@ FmxMBVisitorTrait >> generateVisitEntityMethod [
 
 	<generated>
 	^ aFamixEntity ifNotNil: [ aFamixEntity accept: self ]'
-		in: self realClass
 		protocol: #visiting
 ]
 
 { #category : 'generation - visit' }
 FmxMBVisitorTrait >> generateVisitMethodFor: aFmxMBBehavior [
 
-	self addMethod: (String streamContents: [ :s | self writeVisitMethodFor: aFmxMBBehavior on: s ]) in: self realClass protocol: #visiting
+	self addMethod: (String streamContents: [ :s | self writeVisitMethodFor: aFmxMBBehavior on: s ]) protocol: #visiting
 ]
 
 { #category : 'initialization' }
