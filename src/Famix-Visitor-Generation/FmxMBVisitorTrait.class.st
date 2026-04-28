@@ -29,7 +29,6 @@ I am generated with the metamodel.' format: { self prefix }
 FmxMBVisitorTrait >> generate [
 
 	| aTrait |
-	self willGenerate ifFalse: [ ^ self ].
 
 	self builder environment registerPackage: self packageName.
 

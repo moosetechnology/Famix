@@ -18,7 +18,6 @@ FmxMBRelationSideTest >> testBasics [
 	self deny: side isDerived.
 	self deny: side isTarget.
 	self deny: side isSource.
-	self assert: side willGenerate.
 	self assertEmpty: side comment
 ]
 

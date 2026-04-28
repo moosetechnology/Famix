@@ -87,18 +87,18 @@ FmxMBClass >> generate [
 
 	self generateAddToCollection.
 
-	self generateEqualsMethodFor: aClass.
-	self generateHashMethodFor: aClass
+	self generateEqualsMethod.
+	self generateHashMethod
 ]
 
 { #category : 'generating-methods' }
-FmxMBClass >> generateEqualsMethodFor: aClass [
+FmxMBClass >> generateEqualsMethod [
 
 	propertiesForEqualityCheck ifNotNil: [
 			| code |
 			code := String streamContents: [ :stream |
 					        | variableName |
-					        variableName := 'a' , aClass name.
+					        variableName := 'a' , self fullName.
 					        stream << '= '.
 					        stream << variableName.
 					        stream << '
@@ -122,11 +122,11 @@ FmxMBClass >> generateEqualsMethodFor: aClass [
 										        << (propertiesForEqualityCheck at: idx) ].
 							        2 to: propertiesForEqualityCheck size do: [ :idx | stream << '] ' ] ] ].
 
-			self addMethod: code in: aClass protocol: #comparing ]
+			self addMethod: code protocol: #comparing ]
 ]
 
 { #category : 'generating-methods' }
-FmxMBClass >> generateHashMethodFor: aClass [
+FmxMBClass >> generateHashMethod [
 
 	propertiesForEqualityCheck ifNotNil: [
 			| code |
@@ -147,7 +147,7 @@ FmxMBClass >> generateHashMethodFor: aClass [
 										        << (propertiesForEqualityCheck at: idx);
 										        << ' hash ' ] ] ].
 
-			self addMethod: code in: aClass protocol: #comparing ]
+			self addMethod: code protocol: #comparing ]
 ]
 
 { #category : 'generating' }
