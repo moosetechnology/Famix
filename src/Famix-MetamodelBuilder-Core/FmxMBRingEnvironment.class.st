@@ -144,9 +144,9 @@ FmxMBRingEnvironment >> collectChangesToApply [
 ]
 
 { #category : 'installing' }
-FmxMBRingEnvironment >> createClassNamed: className superclass: superclassName traitDefinitions: traitDefinitions traitNames: traitNames precedingTrait: precedingTrait properties: properties in: defaultPackage tag: defaultTag comment: comment [
+FmxMBRingEnvironment >> createClassNamed: className superclass: superclassName traitDefinitions: traitDefinitions precedingTrait: precedingTrait properties: properties in: defaultPackage tag: defaultTag comment: comment [
 
-	| slots aClass existingClass composition realClass packageName tag change |
+	| slots existingClass realClass packageName tag change |
 	existingClass := self ringEnvironment ask behaviorNamed: className.
 
 	realClass := self class environment at: className ifAbsent: [ nil ].
@@ -161,8 +161,6 @@ FmxMBRingEnvironment >> createClassNamed: className superclass: superclassName t
 	self validateProperties: properties.
 	slots := properties collect: [ :property | property asRGSlot ].
 
-
-	"==========================="
 	change := FmxClassAddition new.
 	change
 		name: className;
@@ -174,44 +172,16 @@ FmxMBRingEnvironment >> createClassNamed: className superclass: superclassName t
 
 	change slots: (self buildSlotsDefinitionsFor: properties existingClass: realClass).
 	changesToApply add: change.
-	"==========================="
 
-	aClass := self ringEnvironment ensureClassNamed: className.
-	aClass superclass: (self ringEnvironment ensureClassNamed: superclassName).
-
-	composition := RGTraitComposition parent: aClass.
-	aClass traitComposition: composition.
-
-	traitNames do: [ :each | composition addTransformation: (self ringEnvironment ensureTraitNamed: each) ].
-
-	self flag: #todo. "Should not make it in dev branch of Moose. The ring package creation should be removed."
 	self ensurePackageNamed: packageName.
-	aClass package: (self ringEnvironment ensurePackageNamed: packageName).
-	aClass layout makeResolved.
 
-	slots do: [ :slotInBadEnvironment |
-			| slot |
-			slot := slotInBadEnvironment needsFullDefinition
-				        ifTrue: [
-						        (RGUnknownSlot named: slotInBadEnvironment name parent: aClass layout)
-							        expression: slotInBadEnvironment expression;
-							        yourself ]
-				        ifFalse: [ RGInstanceVariableSlot named: slotInBadEnvironment name parent: aClass layout ].
-			aClass layout addSlot: slot.
-			slot propertyNamed: #isGenerated put: true ].
-
-	aClass tagWith: tag.
-	comment ifNotEmpty: [ changesToApply add: (FmxClassCommentUpdate className: className comment: comment) ].
-
-	^ aClass
+	comment ifNotEmpty: [ changesToApply add: (FmxClassCommentUpdate className: className comment: comment) ]
 ]
 
 { #category : 'initialization' }
-FmxMBRingEnvironment >> createTraitNamed: traitName  traitDefinitions: traitDefinitions uses: traitNames precedingTrait: precedingTrait  properties: properties in: defaultPackage tag: defaultTag comment: comment [
+FmxMBRingEnvironment >> createTraitNamed: traitName traitDefinitions: traitDefinitions precedingTrait: precedingTrait properties: properties in: defaultPackage tag: defaultTag comment: comment [
 
-	| aTrait existingRGClass composition packageName tag realClass slots change |
-	existingRGClass := self ringEnvironment ask behaviorNamed: traitName asSymbol.
-
+	| packageName tag realClass slots change |
 	realClass := self class environment at: traitName ifAbsent: [ nil ].
 
 	packageName := realClass
@@ -224,7 +194,6 @@ FmxMBRingEnvironment >> createTraitNamed: traitName  traitDefinitions: traitDefi
 	self validateProperties: properties.
 	slots := properties collect: [ :property | property asRGSlot ].
 
-	"==========================="
 	change := FmxTraitAddition new.
 	change
 		name: traitName;
@@ -232,39 +201,13 @@ FmxMBRingEnvironment >> createTraitNamed: traitName  traitDefinitions: traitDefi
 		tag: tag.
 
 	traitDefinitions ifNotEmpty: [ change traits: (self traitStringFrom: traitDefinitions precedingTrait: precedingTrait existingClass: realClass) ].
-	
+
 	properties ifNotEmpty: [ change slots: (self buildSlotsDefinitionsFor: properties existingClass: realClass) ].
 	changesToApply add: change.
-	"==========================="
 
-	aTrait := self ringEnvironment ensureTraitNamed: traitName.
-	aTrait superclass: self basicTrait.
-
-	composition := RGTraitComposition parent: aTrait.
-	aTrait traitComposition: composition.
-
-	traitNames do: [ :each | composition addTransformation: (self ringEnvironment ensureTraitNamed: each) ].
-
-	self flag: #todo. "Should not make it in dev branch of Moose. The ring package creation should be removed."
 	self ensurePackageNamed: packageName.
-	aTrait package: (self ringEnvironment ensurePackageNamed: packageName).
-	aTrait layout makeResolved.
 
-	slots do: [ :slotInBadEnvironment |
-			| slot |
-			slot := slotInBadEnvironment needsFullDefinition
-				        ifTrue: [
-						        (RGUnknownSlot named: slotInBadEnvironment name parent: aTrait layout)
-							        expression: slotInBadEnvironment expression;
-							        yourself ]
-				        ifFalse: [ RGInstanceVariableSlot named: slotInBadEnvironment name parent: aTrait layout ].
-			aTrait layout addSlot: slot.
-			slot propertyNamed: #isGenerated put: true ].
-
-	aTrait tagWith: tag.
-	comment ifNotEmpty: [ changesToApply add: (FmxClassCommentUpdate className: traitName comment: comment) ].
-
-	^ aTrait
+	comment ifNotEmpty: [ changesToApply add: (FmxClassCommentUpdate className: traitName comment: comment) ]
 ]
 
 { #category : 'private' }
@@ -345,15 +288,9 @@ FmxMBRingEnvironment >> recordRemovalOfGeneratedPackagesAndClasses [
 							thenDo: [ :class | (classesToGenerate includes: class name) ifFalse: [ changesToApply add: (FmxClassRemoval class: class) ] ] ] ]
 ]
 
-{ #category : 'public registration' }
-FmxMBRingEnvironment >> registerPackage: aPackageName [
-
-	^ self ringEnvironment ensurePackageNamed: aPackageName.
-
-]
-
 { #category : 'accessing' }
 FmxMBRingEnvironment >> ringEnvironment [
+
 	^ ringEnvironment
 ]
 

@@ -57,7 +57,6 @@ FmxMBImportingContext >> generate [
 		createClassNamed: self fullName asSymbol
 		superclass: superclass
 		traitDefinitions: self allTraitDefinitions
-		traitNames: self allTraitNames
 		precedingTrait: (self additionalProperties at: #precedingTrait ifAbsent: [ nil ])
 		properties: (self properties select: #producesSlot)
 		in: self packageName

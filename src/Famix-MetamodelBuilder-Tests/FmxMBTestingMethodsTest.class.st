@@ -54,10 +54,3 @@ FmxMBTestingMethodsTest >> testTraited [
 	self assert: (generatedNamed localMethodNamed: #isNamed ifAbsent: []) isNil.
 	self assert: (generatedNamed localMethodNamed: #isEntity ifAbsent: []) isNil.
 ]
-
-{ #category : 'tests' }
-FmxMBTestingMethodsTest >> testTraitedRoot [
-	"a testing method should not be generated if it is provided by a trait"
-
-	self assert: (generatedTraitedRoot localMethodNamed: #isNamed ifAbsent: [ nil ]) isNil
-]

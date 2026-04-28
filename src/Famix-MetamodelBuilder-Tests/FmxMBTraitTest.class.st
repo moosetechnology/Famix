@@ -19,44 +19,6 @@ FmxMBTraitTest >> newEntityNamed: aString [
 ]
 
 { #category : 'tests' }
-FmxMBTraitTest >> testCustomPackageForUserClasses [
-	| generated |
-	builder configuration packageName: 'Custom'.
-	builder newTraitNamed: #TComment.
-	builder generate.
-	generated := builder testingEnvironment ask classNamed: 'TstTComment'.
-
-	self assert: generated package name equals: #Custom
-]
-
-{ #category : 'tests' }
-FmxMBTraitTest >> testCustomPackageForUserClassesChanged [
-	| generated generatedAccess |
-	builder configuration packageName: 'Custom'.
-	builder newTraitNamed: #TComment.
-
-	builder configuration packageName: 'Custom2'.
-	builder newTraitNamed: #TAccess.
-
-	builder generate.
-	generated := builder testingEnvironment ask classNamed: 'TstTComment'.
-	generatedAccess := builder testingEnvironment ask classNamed: 'TstTAccess'.
-
-	self assert: generated package name equals: #Custom.
-	self assert: generatedAccess package name equals: #Custom2
-]
-
-{ #category : 'tests' }
-FmxMBTraitTest >> testDefaultPackageForUserClasses [
-	| userClass |
-	builder newTraitNamed: #TComment.
-	builder generate.
-	userClass := builder testingEnvironment ask classNamed: 'TstTComment'.
-
-	self assert: userClass package name equals: #Tst
-]
-
-{ #category : 'tests' }
 FmxMBTraitTest >> testGenerateRemotesGeneratesRelations [
 	| traitA traitB classA classB instanceOfA instanceOfB | 
 	traitA := FmxTraitsTestGenerateAccessorBModel metamodel elementNamed: 'Famix-MetamodelBuilder-TestsTraitsResources-A.TraitA'.

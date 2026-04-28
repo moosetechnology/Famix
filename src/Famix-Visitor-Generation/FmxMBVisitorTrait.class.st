@@ -28,12 +28,9 @@ I am generated with the metamodel.' format: { self prefix }
 { #category : 'generating' }
 FmxMBVisitorTrait >> generate [
 
-	self builder environment registerPackage: self packageName.
-
 	self builder environment
 		createTraitNamed: self fullName asSymbol
 		traitDefinitions: self allTraitDefinitions
-		uses: self allTraitNames
 		precedingTrait: (self additionalProperties at: #precedingTrait ifAbsent: [ nil ])
 		properties: (self properties select: #producesSlot)
 		in: self packageName

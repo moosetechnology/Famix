@@ -49,17 +49,6 @@ FmxMBClassTest >> testBasicSuperclass [
 	self assert: generated superclass name equals: #MooseEntity
 ]
 
-{ #category : 'tests - settings' }
-FmxMBClassTest >> testBasicTrait [
-	"test if the trits have correct supperclass"
-
-	| generated |
-	builder newTraitNamed: #TComment.
-	builder generate.
-	generated := builder testingEnvironment ask classNamed: 'TstTComment'.
-	self assert: generated superclass name equals: #Trait
-]
-
 { #category : 'tests' }
 FmxMBClassTest >> testBuilderPackageChange [
 	"if we set for a builder a packag name, all newely defined entities should use be assigned to this package. If no explicit package name is set, the default one is used."
@@ -154,18 +143,6 @@ FmxMBClassTest >> testDefaultPackageForUserClasses [
 	
 ]
 
-{ #category : 'tests - tags' }
-FmxMBClassTest >> testDefaultTagForClass [
-	"test if correct default tag name is assigned to classes"
-
-	| generatedTAccess |
-	builder newTraitNamed: #TAccess.
-	builder generate.
-
-	generatedTAccess := builder testingEnvironment ask classNamed: #TstTAccess.
-	self assertCollection: generatedTAccess tags hasSameElements: { #Traits }
-]
-
 { #category : 'tests' }
 FmxMBClassTest >> testEmptyComment [
 
@@ -240,36 +217,6 @@ FmxMBClassTest >> testTagForClassFromBuilder [
 	generatedComment := builder testingEnvironment ask classNamed: #TstComment.
 	self assertCollection: generatedAccess tags hasSameElements: {#Entities}.
 	self assertCollection: generatedComment tags hasSameElements: {#support}
-]
-
-{ #category : 'tests - tags' }
-FmxMBClassTest >> testTagForTraitFromBuilder [
-
-	| generatedTAccess tComment generatedTComment |
-	builder newTraitNamed: #TAccess.
-	tComment := builder newTraitNamed: #TComment.
-	tComment tag: #support.
-
-	builder generate.
-
-	generatedTAccess := builder testingEnvironment ask classNamed: #TstTAccess.
-	generatedTComment := builder testingEnvironment ask classNamed: #TstTComment.
-	self assertCollection: generatedTAccess tags hasSameElements: { #Traits }.
-	self assertCollection: generatedTComment tags hasSameElements: { #support }
-]
-
-{ #category : 'tests - tags' }
-FmxMBClassTest >> testTagForTraits [
-
-	| tAccess generatedTAccess |
-
-	tAccess := builder newTraitNamed: #TAccess.	
-	tAccess tag: #support.
-
-	builder generate.
-		
-	generatedTAccess := builder testingEnvironment ask classNamed: #TstTAccess.
-	self assertCollection: generatedTAccess tags hasSameElements: { #support }
 ]
 
 { #category : 'tests - tags' }

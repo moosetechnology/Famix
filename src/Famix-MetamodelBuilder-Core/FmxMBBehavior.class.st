@@ -121,11 +121,6 @@ FmxMBBehavior >> allTraitDefinitions [
 ]
 
 { #category : 'accessing' }
-FmxMBBehavior >> allTraitNames [
-	^ (self allLocalTraits collect: #fullName) sorted
-]
-
-{ #category : 'accessing' }
 FmxMBBehavior >> allTransitiveTraits [
 
 	^ self addAllTransitiveTraitsIn: Set new

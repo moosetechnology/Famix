@@ -511,7 +511,7 @@ FamixMetamodelBuilder >> prepareBehaviorsGeneration [
 { #category : 'generating' }
 FamixMetamodelBuilder >> prepareGeneration [
 
-	self registerPackages.
+	self environment ensurePackageNamed: self configuration packageName.
 	self ensureEntityClassIsTheCommonSuperclass.
 	self shouldGenerateModel
 		ifTrue: [
@@ -534,12 +534,6 @@ FamixMetamodelBuilder >> printOn: aStream [
 			nextPut: $(;
 			print: g class;
 			nextPut: $) ]
-]
-
-{ #category : 'generating' }
-FamixMetamodelBuilder >> registerPackages [
-
-	self environment registerPackage: self configuration packageName
 ]
 
 { #category : 'accessing' }

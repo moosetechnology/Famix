@@ -56,7 +56,6 @@ FmxMBTrait >> generate [
 	self builder environment
 		createTraitNamed: self fullName
 		traitDefinitions: self allTraitDefinitions
-		uses: self allTraitNames
 		precedingTrait: (self additionalProperties at: #precedingTrait ifAbsent: [ nil ])
 		properties: (self properties select: #producesSlot)
 		in: self packageName
