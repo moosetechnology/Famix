@@ -257,14 +257,6 @@ FmxMBBehavior >> defaultTag [
 	^ #Entities
 ]
 
-{ #category : 'generating' }
-FmxMBBehavior >> ensureRealClass [
-	^ realClass
-		ifNil: [ self generate.
-			self willGenerate: false.
-			self realClass ]
-]
-
 { #category : 'accessing' }
 FmxMBBehavior >> fullName [
 	^ (self prefix , self name) asSymbol

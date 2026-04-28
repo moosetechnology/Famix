@@ -54,8 +54,6 @@ FmxMBTrait >> defaultTag [
 FmxMBTrait >> generate [
 
 	| aTrait traitName |
-	self willGenerate ifFalse: [ ^ self ].
-
 	traitName := self fullName.
 
 	aTrait := self builder environment

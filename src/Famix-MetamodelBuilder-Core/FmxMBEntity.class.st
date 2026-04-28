@@ -5,7 +5,6 @@ Class {
 		'name',
 		'comment',
 		'builder',
-		'willGenerate',
 		'additionalProperties',
 		'isRemote'
 	],
@@ -73,7 +72,6 @@ FmxMBEntity >> initialize [
 	super initialize.	
 
 	comment := String new.
-	willGenerate := true.
 	additionalProperties := Dictionary new.
 	isRemote := false.
 ]
@@ -110,14 +108,4 @@ FmxMBEntity >> remoteBuilder [
 FmxMBEntity >> remoteBuilder: aRemoteBuilder [
 
 	self additionalProperties at: #remoteBuilder put: aRemoteBuilder
-]
-
-{ #category : 'accessing' }
-FmxMBEntity >> willGenerate [
-	^ willGenerate
-]
-
-{ #category : 'accessing' }
-FmxMBEntity >> willGenerate: anObject [
-	willGenerate := anObject
 ]

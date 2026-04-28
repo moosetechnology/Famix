@@ -60,7 +60,6 @@ FmxMBClass >> classGeneralization: anObject [
 FmxMBClass >> generate [
 
 	| aClass superclassName |
-	self willGenerate ifFalse: [ ^ self ].
 
 	superclassName := self classGeneralization
 		                  ifNil: [ self defaultSuperclassName ]

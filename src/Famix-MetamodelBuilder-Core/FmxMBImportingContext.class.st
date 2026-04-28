@@ -49,7 +49,6 @@ FmxMBImportingContext >> defaultSuperclass [
 FmxMBImportingContext >> generate [
 
 	| aClass superclass |
-	self willGenerate ifFalse: [ ^ self ].
 
 	superclass := self classGeneralization
 		              ifNil: [ self defaultSuperclassName ]

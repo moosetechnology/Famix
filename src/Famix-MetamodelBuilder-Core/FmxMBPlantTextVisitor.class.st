@@ -43,10 +43,7 @@ FmxMBPlantTextVisitor >> behaviors [
 { #category : 'checking' }
 FmxMBPlantTextVisitor >> checkTrait: aTrait [
 
-	^ aTrait willGenerate and: [ 
-		  (traitsWithUsers includes: aTrait) and: [ 
-			  (aTrait builder classes flatCollect: [ :each | 
-				   each traitGeneralizations ]) includes: aTrait ] ]
+	^ (traitsWithUsers includes: aTrait) and: [ (aTrait builder classes flatCollect: [ :each | each traitGeneralizations ]) includes: aTrait ]
 ]
 
 { #category : 'accessing' }
@@ -108,11 +105,11 @@ FmxMBPlantTextVisitor >> mergeTraits: anObject [
 
 { #category : 'private' }
 FmxMBPlantTextVisitor >> onlySingleUserOf: aTrait [
-	^ ((aTrait builder classes select: #willGenerate)
-		count: [ :aClass | 
-			| traits |
-			traits := aClass traitGeneralizations.
-			traits size = 1 and: [ traits anyOne = aTrait ] ]) = 1
+
+	^ (aTrait builder classes count: [ :aClass |
+			   | traits |
+			   traits := aClass traitGeneralizations.
+			   traits size = 1 and: [ traits anyOne = aTrait ] ]) = 1
 ]
 
 { #category : 'private' }
@@ -163,17 +160,16 @@ FmxMBPlantTextVisitor >> visitBuilder: aBuilder [
 		nextPutAll: 'hide empty members';
 		cr;
 		cr.
-	self gatherTraits ifTrue: [ 
-		stream
-			nextPutAll: 'together {';
-			cr ].
+	self gatherTraits ifTrue: [
+			stream
+				nextPutAll: 'together {';
+				cr ].
 	self selectTraitsWithUsersFrom: aBuilder.
-	(aBuilder traits select: #willGenerate) do: [ :each | 
-		each acceptVisitor: self ].
-	self gatherTraits ifTrue: [ 
-		stream
-			nextPutAll: '}';
-			cr ].
+	aBuilder traits do: [ :each | each acceptVisitor: self ].
+	self gatherTraits ifTrue: [
+			stream
+				nextPutAll: '}';
+				cr ].
 	aBuilder sortedClasses do: [ :each | each acceptVisitor: self ].
 	self writeGeneralizations.
 	self writeRelations.
@@ -187,9 +183,6 @@ FmxMBPlantTextVisitor >> visitBuilder: aBuilder [
 FmxMBPlantTextVisitor >> visitClass: aClass [
 
 	| mergesTrait | 
-
-	aClass willGenerate ifFalse: [ ^ self ].
-
 	mergesTrait := self mergeTraits 
 		and: [ aClass traitGeneralizations size = 1 
 		and: [ self onlySingleUserOf: aClass traitGeneralizations first ]].
@@ -289,13 +282,12 @@ FmxMBPlantTextVisitor >> writeClass: aClass mergingTraits: mergesTraits [
 { #category : 'relations' }
 FmxMBPlantTextVisitor >> writeGeneralizations [
 
-	generalizationDefinitions do: [ :each | 
-		(each key willGenerate and: [ each value willGenerate ]) ifTrue: [ 
+	generalizationDefinitions do: [ :each |
 			stream
 				nextPutAll: (self ensureBehaviorNameFor: each key);
 				nextPutAll: ' <|-- ';
 				nextPutAll: (self ensureBehaviorNameFor: each value);
-				cr ] ].
+				cr ].
 	stream cr
 ]
 
