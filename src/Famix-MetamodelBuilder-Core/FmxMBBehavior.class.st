@@ -113,11 +113,11 @@ FmxMBBehavior >> allTraitDefinitions [
 			  | methodsToRemove |
 			  methodsToRemove := self additionalProperties at: #methodsToRemoveFromTraitComposition ifAbsent: [ Dictionary new ].
 
-			  (traits collect: [ :trait |
-					   methodsToRemove
-						   at: trait fullName
-						   ifPresent: [ :methods | trait fullName , ' - {' , ('. ' join: (methods collect: #printString)) , '}' ]
-						   ifAbsent: [ trait fullName ] ]) sorted ]
+			  (traits sorted: #fullName ascending) collect: [ :trait |
+					  methodsToRemove
+						  at: trait fullName
+						  ifPresent: [ :methods | '(' , trait fullName , ' - {' , ('. ' join: (methods collect: #printString)) , '})' ]
+						  ifAbsent: [ trait fullName ] ] ]
 ]
 
 { #category : 'accessing' }
