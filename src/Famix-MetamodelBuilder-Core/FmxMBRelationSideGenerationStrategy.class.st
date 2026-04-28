@@ -29,10 +29,7 @@ FmxMBRelationSideGenerationStrategy >> compileMethod: methodSource for: aRelatio
 		addMethod: methodSource
 		in: aClassOrTrait name
 		classSide: false
-		protocol: self category.
-
-	self flag: #todo. "This code should never make it in the dev branch of Famix. Also we should provide the class name directly"
-	aClassOrTrait compile: methodSource classified: self category
+		protocol: self category
 ]
 
 { #category : 'generation' }
