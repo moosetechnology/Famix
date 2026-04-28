@@ -90,8 +90,21 @@ FmxBehavioralAddition >> printOn: aStream [
 	super printOn: aStream.
 
 	aStream
-		nextPutAll: '[';
-		nextPutAll: (name ifNil: [ 'unnumed' ]);
+		nextPutAll: '[ name: ';
+		nextPutAll: (name ifNil: [ 'unnumed' ]).
+	slots ifNotNil: [
+			aStream
+				nextPutAll: ' slots: ';
+				print: slots ].
+	traits ifNotNil: [
+			aStream
+				nextPutAll: ' uses:  ';
+				print: traits ].
+	aStream
+		nextPutAll: ' package: ';
+		nextPutAll: package;
+		nextPutAll: ' tag: ';
+		nextPutAll: tag;
 		nextPutAll: ']'
 ]
 
