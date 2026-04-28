@@ -6,8 +6,8 @@ Class {
 	#tag : 'Implementation'
 }
 
-{ #category : 'generation' }
-FmxMBRemoteRelationSideGenerationStrategy >> compileMethod: methodSource for: aRelationSide in: aClassOrTrait [
+{ #category : 'accessing' }
+FmxMBRemoteRelationSideGenerationStrategy >> protocol [
 
-	aRelationSide addMethod: methodSource in: aClassOrTrait name protocol: '*' , self relationSide builder parentBuilderPackageName
+	^ '*' , self relationSide builder parentBuilderPackageName
 ]

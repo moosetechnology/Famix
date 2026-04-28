@@ -88,15 +88,15 @@ FmxMBRelationSide >> from [
 ]
 
 { #category : 'generating' }
-FmxMBRelationSide >> generateGetterIn: aClassOrTrait [
+FmxMBRelationSide >> generateGetterIn: aFmxBehavioral [
 
-	^ generationStrategy generateGetterIn: aClassOrTrait for: self
+	^ generationStrategy generateGetterIn: aFmxBehavioral for: self
 ]
 
 { #category : 'generating' }
-FmxMBRelationSide >> generateSetterIn: aClassOrTrait [
+FmxMBRelationSide >> generateSetterIn: aFmxBehavioral [
 
-	self generationStrategy generateSetterIn: aClassOrTrait for: self
+	self generationStrategy generateSetterIn: aFmxBehavioral for: self
 
 	
 ]

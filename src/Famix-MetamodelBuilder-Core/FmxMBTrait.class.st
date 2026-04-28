@@ -80,7 +80,7 @@ FmxMBTrait >> generate [
 FmxMBTrait >> generateRemoteAccessors [
 
 	(self properties select: [ :prop | prop isRemote and: [ (self realClass localSelectors includes: prop name) not ] ]) do: [ :each |
-		each generateAccessorsIn: self realClass ]
+		each generateAccessorsIn: self ]
 ]
 
 { #category : 'generating' }

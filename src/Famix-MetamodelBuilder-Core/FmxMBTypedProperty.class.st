@@ -39,7 +39,7 @@ FmxMBTypedProperty >> defaultValue: aValue [
 ]
 
 { #category : 'generating' }
-FmxMBTypedProperty >> generateGetterIn: aClassOrTrait [
+FmxMBTypedProperty >> generateGetterIn: aFmxBehavioral [
 
 	| methodSource propertyDefinition commentDefinition pragmaFormat |
 	pragmaFormat := self defaultValue
@@ -93,13 +93,13 @@ FmxMBTypedProperty >> generateGetterIn: aClassOrTrait [
 								                 self name.
 								                 self defaultValue printString }) ] ].
 
-	self addMethod: methodSource in: aClassOrTrait protocol: (self isRemote
+	aFmxBehavioral addMethod: methodSource protocol: (self isRemote
 			 ifTrue: [ '*' , self builder parentBuilderPackageName ]
 			 ifFalse: [ #accessing ])
 ]
 
 { #category : 'generating' }
-FmxMBTypedProperty >> generateSetterIn: aClassOrTrait [
+FmxMBTypedProperty >> generateSetterIn: aFmxBehavioral [
 
 	| methodToFormat |
 	methodToFormat := String streamContents: [ :stream |
@@ -110,7 +110,7 @@ FmxMBTypedProperty >> generateSetterIn: aClassOrTrait [
 				                  ifTrue: [ stream nextPutAll: 'self attributeAt: #{1} put: anObject' ]
 				                  ifFalse: [ stream nextPutAll: '{1} := anObject' ] ].
 
-	self addMethod: (methodToFormat format: { self name }) in: aClassOrTrait protocol: (self isRemote
+	aFmxBehavioral addMethod: (methodToFormat format: { self name }) protocol: (self isRemote
 			 ifTrue: [ '*' , self builder parentBuilderPackageName ]
 			 ifFalse: [ 'accessing' ])
 ]

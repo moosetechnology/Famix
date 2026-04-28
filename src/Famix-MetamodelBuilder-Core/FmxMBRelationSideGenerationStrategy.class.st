@@ -15,23 +15,6 @@ FmxMBRelationSideGenerationStrategy class >> for: aRelationSide [
 	^ self new relationSide: aRelationSide
 ]
 
-{ #category : 'accessing' }
-FmxMBRelationSideGenerationStrategy >> category [ 
-	
-	^ 'accessing'
-]
-
-{ #category : 'generation' }
-FmxMBRelationSideGenerationStrategy >> compileMethod: methodSource for: aRelationSide in: aClassOrTrait [
-
-	self flag: #todo. "Should be linked to the FmxMBBehavior and not duplicate the code"
-	aRelationSide builder environment
-		addMethod: methodSource
-		in: aClassOrTrait name
-		classSide: false
-		protocol: self category
-]
-
 { #category : 'generation' }
 FmxMBRelationSideGenerationStrategy >> generateGetterCoreOn: aStream for: aRelationSide [
 
@@ -39,7 +22,7 @@ FmxMBRelationSideGenerationStrategy >> generateGetterCoreOn: aStream for: aRelat
 ]
 
 { #category : 'generation' }
-FmxMBRelationSideGenerationStrategy >> generateGetterIn: aClassOrTrait for: aRelationSide [
+FmxMBRelationSideGenerationStrategy >> generateGetterIn: aFmxBehavioral for: aRelationSide [
 
 	| methodSource commentDefinition |
 	commentDefinition := aRelationSide comment ifNotEmpty: [ :comment | '<FMComment: {1}>' format: { comment printString } ].
@@ -92,7 +75,7 @@ FmxMBRelationSideGenerationStrategy >> generateGetterIn: aClassOrTrait for: aRel
 
 			                self generateGetterCoreOn: s for: aRelationSide ].
 
-	self compileMethod: methodSource for: aRelationSide in: aClassOrTrait
+	aFmxBehavioral addMethod: methodSource protocol: self protocol
 ]
 
 { #category : 'generation' }
@@ -102,7 +85,7 @@ FmxMBRelationSideGenerationStrategy >> generateSetterCoreOn: aStream for: aRelat
 ]
 
 { #category : 'generation' }
-FmxMBRelationSideGenerationStrategy >> generateSetterIn: aClassOrTrait for: aRelationSide [
+FmxMBRelationSideGenerationStrategy >> generateSetterIn: aFmxBehavioral for: aRelationSide [
 
 	| methodSource |
 	methodSource := String streamContents: [ :s |
@@ -117,7 +100,13 @@ FmxMBRelationSideGenerationStrategy >> generateSetterIn: aClassOrTrait for: aRel
 				                cr.
 			                self generateSetterCoreOn: s for: aRelationSide ].
 
-	self compileMethod: methodSource for: aRelationSide in: aClassOrTrait
+	aFmxBehavioral addMethod: methodSource protocol: self protocol
+]
+
+{ #category : 'accessing' }
+FmxMBRelationSideGenerationStrategy >> protocol [ 
+	
+	^ #accessing
 ]
 
 { #category : 'accessing' }

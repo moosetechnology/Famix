@@ -19,19 +19,19 @@ FmxMBProperty >> asRGSlot [
 ]
 
 { #category : 'generating' }
-FmxMBProperty >> generateAccessorsIn: aClassOrTrait [
-	self generateGetterIn: aClassOrTrait.
-	self generateSetterIn: aClassOrTrait
+FmxMBProperty >> generateAccessorsIn: aFmxBehavioral [
+	self generateGetterIn: aFmxBehavioral.
+	self generateSetterIn: aFmxBehavioral
 ]
 
 { #category : 'generating' }
-FmxMBProperty >> generateGetterIn: aClassOrTrait [
+FmxMBProperty >> generateGetterIn: aFmxBehavioral [
 	<ignoreForCoverage>
 	self subclassResponsibility
 ]
 
 { #category : 'generating' }
-FmxMBProperty >> generateSetterIn: aClassOrTrait [
+FmxMBProperty >> generateSetterIn: aFmxBehavioral [
 	<ignoreForCoverage>
 	self subclassResponsibility
 ]

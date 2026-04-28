@@ -53,6 +53,28 @@ FmxMBBehavior >> addMethod: code classSide: boolean protocol: protocol [
 		protocol: protocol
 ]
 
+{ #category : 'generating' }
+FmxMBBehavior >> addMethod: code in: class classSide: boolean protocol: protocol [
+
+	| className |
+	self flag: #todo. "We should only take a string as parameter."
+	className := class isString
+		             ifTrue: [ class ]
+		             ifFalse: [ class name ].
+	self flag: #todo. "Demeter"
+	self builder environment
+		addMethod: code
+		in: className
+		classSide: boolean
+		protocol: protocol
+]
+
+{ #category : 'generating' }
+FmxMBBehavior >> addMethod: code in: class protocol: protocol [
+
+	^ self addMethod: code in: class classSide: false protocol: protocol
+]
+
 { #category : 'adding' }
 FmxMBBehavior >> addMethod: code protocol: protocol [
 
@@ -281,7 +303,7 @@ FmxMBBehavior >> generate [
 
 { #category : 'generating' }
 FmxMBBehavior >> generateAccessors [
-	self properties do: [ :each | each generateAccessorsIn: self realClass ]
+	self properties do: [ :each | each generateAccessorsIn: self ]
 ]
 
 { #category : 'generating' }
@@ -331,7 +353,8 @@ FmxMBBehavior >> generateAnnotation [
 
 { #category : 'generating' }
 FmxMBBehavior >> generateRemoteAccessors [
-	(self properties select: #isRemote) do: [ :each | each generateAccessorsIn: self realClass ]
+
+	(self properties select: #isRemote) do: [ :each | each generateAccessorsIn: self ]
 ]
 
 { #category : 'generating' }

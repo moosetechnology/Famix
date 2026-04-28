@@ -18,28 +18,6 @@ FmxMBEntity >> acceptVisitor: aVisitor [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'generating' }
-FmxMBEntity >> addMethod: code in: class classSide: boolean protocol: protocol [
-
-	| className |
-	self flag: #todo. "We should only take a string as parameter."
-	className := class isString
-		             ifTrue: [ class ]
-		             ifFalse: [ class name ].
-	self flag: #todo. "Demeter"
-	self builder environment
-		addMethod: code
-		in: className
-		classSide: boolean
-		protocol: protocol
-]
-
-{ #category : 'generating' }
-FmxMBEntity >> addMethod: code in: class protocol: protocol [
-
-	^ self addMethod: code in: class classSide: false protocol: protocol
-]
-
 { #category : 'accessing' }
 FmxMBEntity >> additionalProperties [
 
