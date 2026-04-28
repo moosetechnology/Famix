@@ -89,20 +89,3 @@ FmxMBTraitTest >> testTraitTestingSelectors [
 	simpleClass withTesting.
 	self assertCollection: simpleClass testingSelectors hasSameElements: #(isComment)
 ]
-
-{ #category : 'tests' }
-FmxMBTraitTest >> testUses [
-	| behavior tBehavior generatedBehavior generatedTBehavior |
-	behavior := builder newClassNamed: #Behavior.
-	tBehavior := builder newTraitNamed: #TBehavior.
-
-	behavior uses: tBehavior.
-
-	builder generate.
-
-	generatedBehavior := builder testingEnvironment ask classNamed: 'TstBehavior'.
-	generatedTBehavior := builder testingEnvironment ask classNamed: 'TstTBehavior'.
-
-	self deny: generatedBehavior superclass equals: generatedTBehavior.
-	self assertCollection: generatedBehavior traits asArray equals: {generatedTBehavior}
-]

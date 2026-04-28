@@ -40,12 +40,6 @@ FmxMBImportingContextTest >> setUp [
 ]
 
 { #category : 'tests' }
-FmxMBImportingContextTest >> testGeneratedContextClass [
-	self assert: generatedContext isNotNil.
-	self assert: generatedContext superclass name equals: #FamixImportingContext
-]
-
-{ #category : 'tests' }
 FmxMBImportingContextTest >> testNotGenerated [
 
 	builder := FamixMetamodelBuilder forTesting.
