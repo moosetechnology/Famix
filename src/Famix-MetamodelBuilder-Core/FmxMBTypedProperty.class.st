@@ -95,13 +95,7 @@ FmxMBTypedProperty >> generateGetterIn: aClassOrTrait [
 
 	"cannot merge both builder of the accessing disapear for non remote entity"
 	self isRemote
-		ifTrue: [
-				self flag: #todo. "This breaks generation layers and should be kill"
-				self builder environment
-					compile: methodSource
-					in: aClassOrTrait
-					classified: 'accessing'
-					package: self builder parentBuilderPackageName ]
+		ifTrue: [ self addMethod: methodSource in: aClassOrTrait protocol: '*' , self builder parentBuilderPackageName ]
 		ifFalse: [ self addMethod: methodSource in: aClassOrTrait protocol: #accessing ]
 ]
 
@@ -119,13 +113,7 @@ FmxMBTypedProperty >> generateSetterIn: aClassOrTrait [
 
 	"cannot merge both builder of the accessing disapear for non remote entity"
 	self isRemote
-		ifTrue: [
-				self flag: #todo. "This breaks generation layers and should be kill"
-				self builder environment
-					compile: (methodToFormat format: { self name })
-					in: aClassOrTrait
-					classified: 'accessing'
-					package: self builder parentBuilderPackageName ]
+		ifTrue: [ self addMethod: (methodToFormat format: { self name }) in: aClassOrTrait protocol: '*' , self builder parentBuilderPackageName ]
 		ifFalse: [ self addMethod: (methodToFormat format: { self name }) in: aClassOrTrait protocol: 'accessing' ]
 ]
 

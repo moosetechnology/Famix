@@ -9,9 +9,5 @@ Class {
 { #category : 'generation' }
 FmxMBRemoteRelationSideGenerationStrategy >> compileMethod: methodSource for: aRelationSide in: aClassOrTrait [
 
-	aRelationSide builder environment
-		compile: methodSource
-		in: aClassOrTrait
-		classified: self category
-		package: self relationSide builder parentBuilderPackageName
+	aRelationSide addMethod: methodSource in: aClassOrTrait name protocol: '*' , self relationSide builder parentBuilderPackageName
 ]

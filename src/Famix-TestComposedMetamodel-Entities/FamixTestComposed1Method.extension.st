@@ -1,6 +1,6 @@
 Extension { #name : 'FamixTestComposed1Method' }
 
-{ #category : '*Famix-TestComposedMetamodel-Entities-accessing' }
+{ #category : '*Famix-TestComposedMetamodel-Entities' }
 FamixTestComposed1Method >> standardEntity [
 	"Relation named: #standardEntity type: #FamixTestComposedStandardEntity opposite: #method"
 
@@ -11,7 +11,7 @@ FamixTestComposed1Method >> standardEntity [
 	^ self attributeAt: #standardEntity ifAbsent: [ nil ]
 ]
 
-{ #category : '*Famix-TestComposedMetamodel-Entities-accessing' }
+{ #category : '*Famix-TestComposedMetamodel-Entities' }
 FamixTestComposed1Method >> standardEntity: anObject [
 
 	<generated>

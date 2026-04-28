@@ -11,12 +11,3 @@ FmxMBStubEnvironment >> apply [
 
 	"do nothing"
 ]
-
-{ #category : 'accessing' }
-FmxMBStubEnvironment >> compile: aSource in: aClass classified: aProtocol package: aPackageName [
-
-	| selector |
-	
-	selector := aClass compile: aSource classified: aProtocol.
-	(aClass methodNamed: selector) package: (aClass environment ensurePackageNamed: aPackageName).
-]

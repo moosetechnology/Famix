@@ -271,33 +271,19 @@ FamixMetamodelBuilder >> generateRemotes [
 FamixMetamodelBuilder >> generateTestingMethodsOfRemoteEntities [
 
 	| entitiesWithRemoteSuperclasses |
-	entitiesWithRemoteSuperclasses := self classes groupedBy: [ :class |
-		                                  class remoteClassGeneratization ].
+	entitiesWithRemoteSuperclasses := self classes groupedBy: [ :class | class remoteClassGeneratization ].
 
 
-	entitiesWithRemoteSuperclasses keysAndValuesDo: [
-			:remoteClass
-			:subclasses |
+	entitiesWithRemoteSuperclasses keysAndValuesDo: [ :remoteClass :subclasses |
 			remoteClass ifNotNil: [
 					| subclassesAndTraits |
-					subclassesAndTraits := subclasses flatCollectAsSet: [ :subclass |
-						                       subclass allTransitiveTraits
-						                       , { subclass } ].
+					subclassesAndTraits := subclasses flatCollectAsSet: [ :subclass | subclass allTransitiveTraits , { subclass } ].
 
-					self testingSelectorsMapping keysAndValuesDo: [
-							:behavior
-							:selectors |
-							((self shouldGeneratorTestingMethodsOf: behavior in: remoteClass) and: [
-								 subclassesAndTraits includes: behavior ]) ifTrue: [
+					self testingSelectorsMapping keysAndValuesDo: [ :behavior :selectors |
+							((self shouldGeneratorTestingMethodsOf: behavior in: remoteClass) and: [ subclassesAndTraits includes: behavior ]) ifTrue: [
 									selectors do: [ :selector |
-											(remoteClass realClass includesSelector: selector)
-												ifFalse: [
-														self environment
-															compile:
-															('{1}\\	<generated>\	^ false' withCRs format:
-																 { selector })
-															in: remoteClass realClass
-															classified: '*' , self configuration packageName ] ] ] ] ] ]
+											(remoteClass realClass includesSelector: selector) ifFalse: [
+												remoteClass addMethod: ('{1}\\	<generated>\	^ false' withCRs format: { selector }) protocol: '*' , self configuration packageName ] ] ] ] ] ]
 ]
 
 { #category : 'accessing' }

@@ -144,21 +144,6 @@ FmxMBRingEnvironment >> collectChangesToApply [
 ]
 
 { #category : 'installing' }
-FmxMBRingEnvironment >> compile: aSource in: aClass classified: aProtocol [
-
-	aClass compile: aSource classified: aProtocol
-]
-
-{ #category : 'installing' }
-FmxMBRingEnvironment >> compile: aSource in: aClass classified: aProtocol package: aPackageName [
-
-	| category |
-	category := '*' , aPackageName.
-	aProtocol ifNotEmpty: [ category := category , '-' , aProtocol ].
-	aClass compile: aSource classified: category
-]
-
-{ #category : 'installing' }
 FmxMBRingEnvironment >> createClassNamed: className superclass: superclassName traitDefinitions: traitDefinitions traitNames: traitNames precedingTrait: precedingTrait properties: properties in: defaultPackage tag: defaultTag comment: comment [
 
 	| slots aClass existingClass composition realClass packageName tag change |
