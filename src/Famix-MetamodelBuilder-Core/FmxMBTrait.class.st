@@ -53,20 +53,15 @@ FmxMBTrait >> defaultTag [
 { #category : 'generating' }
 FmxMBTrait >> generate [
 
-	| aTrait traitName |
-	traitName := self fullName.
-
-	aTrait := self builder environment
-		          createTraitNamed: traitName asSymbol
-		          traitDefinitions: self allTraitDefinitions
-		          uses: self allTraitNames
-		          precedingTrait: (self additionalProperties at: #precedingTrait ifAbsent: [ nil ])
-		          properties: (self properties select: #producesSlot)
-		          in: self packageName
-		          tag: self tag
-		          comment: self commentWithRelations.
-
-	self realClass: aTrait.
+	self builder environment
+		createTraitNamed: self fullName
+		traitDefinitions: self allTraitDefinitions
+		uses: self allTraitNames
+		precedingTrait: (self additionalProperties at: #precedingTrait ifAbsent: [ nil ])
+		properties: (self properties select: #producesSlot)
+		in: self packageName
+		tag: self tag
+		comment: self commentWithRelations.
 
 	self generateAccessors.
 	self generateAnnotation.
@@ -79,12 +74,8 @@ FmxMBTrait >> generate [
 { #category : 'generating' }
 FmxMBTrait >> generateRemotes [
 
-	| aTrait traitName |
-	traitName := self fullName.
-
-	aTrait := self class environment at: traitName asSymbol ifAbsent: [ ^ self ].
-
-	self realClass: aTrait.
+	| aTrait |
+	aTrait := self class environment at: self fullName ifAbsent: [ ^ self ].
 
 	(self properties select: [ :prop | prop isRemote and: [ (aTrait localSelectors includes: prop name) not ] ]) do: [ :each | each generateAccessorsIn: self ]
 ]

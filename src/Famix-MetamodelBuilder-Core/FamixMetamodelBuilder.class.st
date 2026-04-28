@@ -95,11 +95,7 @@ FamixMetamodelBuilder >> allSubBuilders [
 { #category : 'accessing' }
 FamixMetamodelBuilder >> apply [
 
-	self environment apply.
-
-	"This next line should not be here... 
-	This feature should fill a ring model that should be manipulate by the apply above to check if we need the code, to be able to clean it and other mechanisms. But we do not yet support to create extension methods like this and I don't have the time to implement it for now. So, breaking layers we generate the extensions after we generated everything else in the 'right' way."
-	self generateTestingMethodsOfRemoteEntities
+	self environment apply
 ]
 
 { #category : 'accessing' }
@@ -282,8 +278,12 @@ FamixMetamodelBuilder >> generateTestingMethodsOfRemoteEntities [
 					self testingSelectorsMapping keysAndValuesDo: [ :behavior :selectors |
 							((self shouldGeneratorTestingMethodsOf: behavior in: remoteClass) and: [ subclassesAndTraits includes: behavior ]) ifTrue: [
 									selectors do: [ :selector |
-											(remoteClass realClass includesSelector: selector) ifFalse: [
-												remoteClass addMethod: ('{1}\\	<generated>\	^ false' withCRs format: { selector }) protocol: '*' , self configuration packageName ] ] ] ] ] ]
+											self class environment
+												at: remoteClass fullName
+												ifPresent: [ :class |
+														(class includesSelector: selector) ifFalse: [
+															remoteClass addMethod: ('{1}\\	<generated>\	^ false' withCRs format: { selector }) protocol: '*' , self configuration packageName ] ]
+												ifAbsent: [ self error: 'The class ' , remoteClass fullName , ' was not found in the system to generate a remote testing method.' ] ] ] ] ] ]
 ]
 
 { #category : 'accessing' }
@@ -500,13 +500,12 @@ FamixMetamodelBuilder >> parentBuilderPackageName [
 { #category : 'generating' }
 FamixMetamodelBuilder >> prepareBehaviorsGeneration [
 
-	self traitsWithSubBuildersTraits do: [ :each |
-		self testingSelectorsMapping at: each put: each testingSelectors ].
-	self classes do: [ :each |
-		self testingSelectorsMapping at: each put: each testingSelectors ].
+	self traitsWithSubBuildersTraits do: [ :each | self testingSelectorsMapping at: each put: each testingSelectors ].
+	self classes do: [ :each | self testingSelectorsMapping at: each put: each testingSelectors ].
 	self traits do: [ :each | each generate ].
 	self sortedClasses do: [ :each | each generate ].
-	self extensionBehaviors do: [ :each | each generate ]
+	self extensionBehaviors do: [ :each | each generate ].
+	self generateTestingMethodsOfRemoteEntities
 ]
 
 { #category : 'generating' }

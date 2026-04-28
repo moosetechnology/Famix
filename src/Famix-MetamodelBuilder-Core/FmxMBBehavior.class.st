@@ -5,7 +5,6 @@ Class {
 	#classTraits : 'FmxMBRelationSideTrait classTrait',
 	#instVars : [
 		'relations',
-		'realClass',
 		'properties',
 		'tag',
 		'prefix',
@@ -307,13 +306,9 @@ FmxMBBehavior >> generateAddToCollection [
 FmxMBBehavior >> generateAnnotation [
 
 	| aSuperclassName |
-	self flag: #todo. "Simplify"
-	aSuperclassName := self classGeneralization = self defaultSuperclass
+	aSuperclassName := (self classGeneralization = self defaultSuperclass or: [ self classGeneralization isNil ])
 		                   ifTrue: [ self defaultSuperclassName ]
-		                   ifFalse: [
-				                   self classGeneralization
-					                   ifNil: [ self defaultSuperclassName ]
-					                   ifNotNil: [ :cg | cg realClass name ] ].
+		                   ifFalse: [ self classGeneralization fullName ].
 
 	self
 		addMethod: ('annotation
@@ -506,17 +501,6 @@ FmxMBBehavior >> property: propertyName type: aTypeName defaultValue: aValue [
 { #category : 'private' }
 FmxMBBehavior >> propertyName [
 	^ self name uncapitalized
-]
-
-{ #category : 'accessing' }
-FmxMBBehavior >> realClass [
-
-	^ realClass ifNil: [ self class environment at: self fullName  ]
-]
-
-{ #category : 'accessing' }
-FmxMBBehavior >> realClass: anObject [
-	realClass := anObject
 ]
 
 { #category : 'accessing' }

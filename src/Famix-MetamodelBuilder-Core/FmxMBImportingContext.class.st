@@ -48,24 +48,21 @@ FmxMBImportingContext >> defaultSuperclass [
 { #category : 'generating' }
 FmxMBImportingContext >> generate [
 
-	| aClass superclass |
-
+	| superclass |
 	superclass := self classGeneralization
 		              ifNil: [ self defaultSuperclassName ]
 		              ifNotNil: #name.
 
-	aClass := self builder environment
-		          createClassNamed: self fullName asSymbol
-		          superclass: superclass
-		          traitDefinitions: self allTraitDefinitions
-		          traitNames: self allTraitNames
-		          precedingTrait: (self additionalProperties at: #precedingTrait ifAbsent: [ nil ])
-		          properties: (self properties select: #producesSlot)
-		          in: self packageName
-		          tag: self tag
-		          comment: self comment.
-
-	self realClass: aClass.
+	self builder environment
+		createClassNamed: self fullName asSymbol
+		superclass: superclass
+		traitDefinitions: self allTraitDefinitions
+		traitNames: self allTraitNames
+		precedingTrait: (self additionalProperties at: #precedingTrait ifAbsent: [ nil ])
+		properties: (self properties select: #producesSlot)
+		in: self packageName
+		tag: self tag
+		comment: self comment.
 
 	self generateImportingContextMetamodel.
 	self generateShouldImport.

@@ -28,21 +28,17 @@ I am generated with the metamodel.' format: { self prefix }
 { #category : 'generating' }
 FmxMBVisitorTrait >> generate [
 
-	| aTrait |
-
 	self builder environment registerPackage: self packageName.
 
-	aTrait := self builder environment
-		          createTraitNamed: self fullName asSymbol
-		          traitDefinitions: self allTraitDefinitions
-		          uses: self allTraitNames
-		          precedingTrait: (self additionalProperties at: #precedingTrait ifAbsent: [ nil ])
-		          properties: (self properties select: #producesSlot)
-		          in: self packageName
-		          tag: self tag
-		          comment: self comment.
-
-	self realClass: aTrait.
+	self builder environment
+		createTraitNamed: self fullName asSymbol
+		traitDefinitions: self allTraitDefinitions
+		uses: self allTraitNames
+		precedingTrait: (self additionalProperties at: #precedingTrait ifAbsent: [ nil ])
+		properties: (self properties select: #producesSlot)
+		in: self packageName
+		tag: self tag
+		comment: self comment.
 
 	self generateAnnotation.
 	self generateCommonMethodsIfNecessary.

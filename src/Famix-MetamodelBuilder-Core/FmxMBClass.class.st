@@ -59,24 +59,21 @@ FmxMBClass >> classGeneralization: anObject [
 { #category : 'generating' }
 FmxMBClass >> generate [
 
-	| aClass superclassName |
-
+	| superclassName |
 	superclassName := self classGeneralization
 		                  ifNil: [ self defaultSuperclassName ]
-		                  ifNotNil: [ :class | class realClass name ].
+		                  ifNotNil: #fullName.
 
-	aClass := self builder environment
-		          createClassNamed: self fullName asSymbol
-		          superclass: superclassName
-		          traitDefinitions: self allTraitDefinitions
-		          traitNames: self allTraitNames
-		          precedingTrait: (self additionalProperties at: #precedingTrait ifAbsent: [ nil ])
-		          properties: (self properties select: #producesSlot)
-		          in: self packageName
-		          tag: self tag
-		          comment: self commentWithRelations.
-
-	self realClass: aClass.
+	self builder environment
+		createClassNamed: self fullName asSymbol
+		superclass: superclassName
+		traitDefinitions: self allTraitDefinitions
+		traitNames: self allTraitNames
+		precedingTrait: (self additionalProperties at: #precedingTrait ifAbsent: [ nil ])
+		properties: (self properties select: #producesSlot)
+		in: self packageName
+		tag: self tag
+		comment: self commentWithRelations.
 
 	self generateAccessors.
 	self generateAnnotation.
@@ -181,12 +178,7 @@ FmxMBClass >> generateMetamodelMethod [
 { #category : 'generating' }
 FmxMBClass >> generateRemotes [
 
-	| aClass aClassName |
-	aClassName := self fullName.
-
-	aClass := self class environment at: aClassName asSymbol ifAbsent: [ self builder environment classNamed: aClassName asSymbol ].
-
-	self realClass: aClass.
+	self class environment at: self fullName ifAbsent: [ ^ self ].
 
 	(self properties select: #isRemote) do: [ :each | each generateAccessorsIn: self ]
 ]
