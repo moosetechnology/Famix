@@ -3,7 +3,6 @@ Class {
 	#superclass : 'Object',
 	#instVars : [
 		'changesToApply',
-		'ringEnvironment',
 		'builder'
 	],
 	#category : 'Famix-MetamodelBuilder-Core-Implementation',
@@ -41,18 +40,6 @@ FmxMBRingEnvironment >> apply [
 				                yourself ].
 	(AITopologicalSorting sort: changesToApply followingIncomingProperty: [ :change | dependencies at: change ]) do: #apply.
 	changesToApply := OrderedCollection new
-]
-
-{ #category : 'accessing' }
-FmxMBRingEnvironment >> basicGroupSuperclass [
-
-	^ self ringEnvironment ensureClassNamed: #MooseSpecializedGroup
-]
-
-{ #category : 'accessing' }
-FmxMBRingEnvironment >> basicTrait [
-
-	^ self ringEnvironment ensureClassNamed: #Trait
 ]
 
 { #category : 'initialization' }
@@ -102,12 +89,6 @@ FmxMBRingEnvironment >> changesToApply [
 	^ changesToApply
 ]
 
-{ #category : 'accessing' }
-FmxMBRingEnvironment >> classNamed: aClassName [
-
-	^ self ringEnvironment ask behaviorNamed: aClassName
-]
-
 { #category : 'installing' }
 FmxMBRingEnvironment >> collectChangesToApply [
 
@@ -128,9 +109,7 @@ FmxMBRingEnvironment >> collectChangesToApply [
 { #category : 'installing' }
 FmxMBRingEnvironment >> createClassNamed: className superclass: superclassName traitDefinitions: traitDefinitions precedingTrait: precedingTrait properties: properties in: defaultPackage tag: defaultTag comment: comment [
 
-	| slots existingClass realClass packageName tag change |
-	existingClass := self ringEnvironment ask behaviorNamed: className.
-
+	| realClass packageName tag change |
 	realClass := self class environment at: className ifAbsent: [ nil ].
 
 	packageName := realClass
@@ -139,9 +118,6 @@ FmxMBRingEnvironment >> createClassNamed: className superclass: superclassName t
 	tag := realClass
 		       ifNil: [ defaultTag ]
 		       ifNotNil: [ realClass packageTag name ].
-
-	self validateProperties: properties.
-	slots := properties collect: [ :property | property asRGSlot ].
 
 	change := FmxClassAddition new.
 	change
@@ -152,6 +128,7 @@ FmxMBRingEnvironment >> createClassNamed: className superclass: superclassName t
 
 	traitDefinitions ifNotEmpty: [ change traits: (self traitStringFrom: traitDefinitions precedingTrait: precedingTrait existingClass: realClass) ].
 
+	self validateProperties: properties.
 	change slots: (self buildSlotsDefinitionsFor: properties existingClass: realClass).
 	changesToApply add: change.
 
@@ -163,7 +140,7 @@ FmxMBRingEnvironment >> createClassNamed: className superclass: superclassName t
 { #category : 'initialization' }
 FmxMBRingEnvironment >> createTraitNamed: traitName traitDefinitions: traitDefinitions precedingTrait: precedingTrait properties: properties in: defaultPackage tag: defaultTag comment: comment [
 
-	| packageName tag realClass slots change |
+	| packageName tag realClass change |
 	realClass := self class environment at: traitName ifAbsent: [ nil ].
 
 	packageName := realClass
@@ -173,9 +150,6 @@ FmxMBRingEnvironment >> createTraitNamed: traitName traitDefinitions: traitDefin
 		       ifNil: [ defaultTag ]
 		       ifNotNil: [ realClass packageTag name ].
 
-	self validateProperties: properties.
-	slots := properties collect: [ :property | property asRGSlot ].
-
 	change := FmxTraitAddition new.
 	change
 		name: traitName;
@@ -184,7 +158,9 @@ FmxMBRingEnvironment >> createTraitNamed: traitName traitDefinitions: traitDefin
 
 	traitDefinitions ifNotEmpty: [ change traits: (self traitStringFrom: traitDefinitions precedingTrait: precedingTrait existingClass: realClass) ].
 
-	properties ifNotEmpty: [ change slots: (self buildSlotsDefinitionsFor: properties existingClass: realClass) ].
+	properties ifNotEmpty: [
+			self validateProperties: properties.
+			change slots: (self buildSlotsDefinitionsFor: properties existingClass: realClass) ].
 	changesToApply add: change.
 
 	self ensurePackageNamed: packageName.
@@ -200,24 +176,11 @@ FmxMBRingEnvironment >> ensurePackageNamed: packageName [
 	changesToApply add: (FmxPackageAddition named: packageName)
 ]
 
-{ #category : 'testing' }
-FmxMBRingEnvironment >> hasBehaviorNamed: aClassName [
-
-	^ self ringEnvironment ask includesClassNamed: aClassName
-]
-
 { #category : 'initialization' }
 FmxMBRingEnvironment >> initialize [
 
 	super initialize.
-	changesToApply := OrderedCollection new.
-	ringEnvironment := RGEnvironment new.
-	ringEnvironment version: 7.
-	ringEnvironment ensureClassNamed: #FMOne.
-	ringEnvironment ensureClassNamed: #FMMany.		
-	ringEnvironment ensureClassNamed: #FMMultivalueLink.
-	ringEnvironment ensureClassNamed: #FMMultiMultivalueLink.
-	ringEnvironment ensureClassNamed: #MooseSpecializedGroup.
+	changesToApply := OrderedCollection new
 ]
 
 { #category : 'installing' }
@@ -268,12 +231,6 @@ FmxMBRingEnvironment >> recordRemovalOfGeneratedPackagesAndClasses [
 						package definedClasses
 							select: #isMetamodelEntity
 							thenDo: [ :class | (classesToGenerate includes: class name) ifFalse: [ changesToApply add: (FmxClassRemoval class: class) ] ] ] ]
-]
-
-{ #category : 'accessing' }
-FmxMBRingEnvironment >> ringEnvironment [
-
-	^ ringEnvironment
 ]
 
 { #category : 'installing' }

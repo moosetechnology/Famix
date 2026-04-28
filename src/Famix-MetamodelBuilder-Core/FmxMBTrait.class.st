@@ -23,7 +23,7 @@ FmxMBTrait >> allTraitGeneralizations [
 { #category : 'accessing' }
 FmxMBTrait >> classGeneralization [
 
-	^ self builder environment basicTrait
+	^ Trait
 ]
 
 { #category : 'accessing' }
@@ -33,8 +33,8 @@ FmxMBTrait >> classGeneralization: anObject [
 
 { #category : 'accessing' }
 FmxMBTrait >> defaultSuperclass [
-	
-	^ self builder environment basicTrait
+
+	^ self classGeneralization
 ]
 
 { #category : 'accessing' }

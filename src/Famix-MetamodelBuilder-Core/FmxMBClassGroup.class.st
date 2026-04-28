@@ -11,7 +11,8 @@ Class {
 
 { #category : 'settings - default' }
 FmxMBClassGroup >> defaultSuperclass [
-	^ self builder environment basicGroupSuperclass
+
+	^ MooseSpecializedGroup
 ]
 
 { #category : 'settings - default' }

@@ -611,12 +611,6 @@ FamixMetamodelBuilder >> subBuilders [
 	^ self generator ifNil: [ #(  ) ] ifNotNil: #subBuilders
 ]
 
-{ #category : 'tests support' }
-FamixMetamodelBuilder >> testingEnvironment [
-
-	^ self environment ringEnvironment
-]
-
 { #category : 'accessing' }
 FamixMetamodelBuilder >> testingSelectorsMapping [
 

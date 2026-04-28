@@ -40,20 +40,6 @@ FmxMBTraitTest >> testGenerateRemotesGeneratesRelations [
 ]
 
 { #category : 'tests' }
-FmxMBTraitTest >> testMultipleTraits [
-
-	builder newTraitNamed: #TComment.	
-	builder newTraitNamed: #TMethod.
-	builder newTraitNamed: #TPackage.
-
-	builder generate.
-	builder testingEnvironment ask classNamed: 'TstTComment'.
-	builder testingEnvironment ask classNamed: 'TstTMethod'.
-	builder testingEnvironment ask classNamed: 'TstTPackage'.
-
-]
-
-{ #category : 'tests' }
 FmxMBTraitTest >> testTestingMethods [
 
 	"test messages isMetamodelClass and isMetamodelTrait"

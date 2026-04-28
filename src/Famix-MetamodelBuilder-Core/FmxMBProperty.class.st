@@ -11,13 +11,6 @@ FmxMBProperty class >> isAbstract [
 	^ self = FmxMBProperty
 ]
 
-{ #category : 'accessing' }
-FmxMBProperty >> asRGSlot [
-
-	<ignoreForCoverage>
-	self subclassResponsibility
-]
-
 { #category : 'generating' }
 FmxMBProperty >> generateAccessorsIn: aFmxBehavioral [
 	self generateGetterIn: aFmxBehavioral.
