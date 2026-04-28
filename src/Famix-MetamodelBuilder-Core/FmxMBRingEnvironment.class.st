@@ -50,24 +50,6 @@ FmxMBRingEnvironment >> basicGroupSuperclass [
 ]
 
 { #category : 'accessing' }
-FmxMBRingEnvironment >> basicImportingContextSuperclass [
-
-	^ self ringEnvironment ensureClassNamed: #FamixImportingContext
-]
-
-{ #category : 'accessing' }
-FmxMBRingEnvironment >> basicModelSuperclass [
-
-	^ self ringEnvironment ensureClassNamed: #MooseModel
-]
-
-{ #category : 'accessing' }
-FmxMBRingEnvironment >> basicSuperclass [
-
-	^ self ringEnvironment ensureClassNamed: #MooseEntity
-]
-
-{ #category : 'accessing' }
 FmxMBRingEnvironment >> basicTrait [
 
 	^ self ringEnvironment ensureClassNamed: #Trait

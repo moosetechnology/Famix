@@ -8,7 +8,7 @@ Class {
 
 { #category : 'settings - default' }
 FmxMBModel >> defaultSuperclass [
-	^ self builder environment basicModelSuperclass
+	^ MooseModel
 ]
 
 { #category : 'settings - default' }

@@ -238,7 +238,8 @@ FmxMBBehavior >> commentWithRelations [
 
 { #category : 'settings - default' }
 FmxMBBehavior >> defaultSuperclass [
-	^ self builder environment basicSuperclass
+
+	^ MooseEntity
 ]
 
 { #category : 'generating' }
@@ -301,7 +302,7 @@ FmxMBBehavior >> generateAddToCollection [
 FmxMBBehavior >> generateAnnotation [
 
 	| aSuperclassName |
-	aSuperclassName := (self classGeneralization = self defaultSuperclass or: [ self classGeneralization isNil ])
+	aSuperclassName := (self classGeneralization isNil or: [ self classGeneralization = self defaultSuperclass ])
 		                   ifTrue: [ self defaultSuperclassName ]
 		                   ifFalse: [ self classGeneralization fullName ].
 

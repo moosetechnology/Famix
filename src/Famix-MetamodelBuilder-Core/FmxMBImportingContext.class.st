@@ -28,7 +28,7 @@ FmxMBImportingContext >> acceptVisitor: aVisitor [
 { #category : 'accessing' }
 FmxMBImportingContext >> classGeneralization [
 
-	^ self builder environment basicImportingContextSuperclass
+	^ FamixImportingContext
 ]
 
 { #category : 'accessing' }
@@ -42,7 +42,7 @@ It is used by `MiImportingContextPresenter` in a `MiImportModelFromFileDialog` t
 { #category : 'settings - default' }
 FmxMBImportingContext >> defaultSuperclass [
 
-	^ self builder environment basicImportingContextSuperclass
+	^ self classGeneralization
 ]
 
 { #category : 'generating' }
