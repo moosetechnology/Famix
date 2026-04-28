@@ -46,25 +46,10 @@ FmxMBBehavior >> addAllTransitiveTraitsIn: aCollection [
 { #category : 'adding' }
 FmxMBBehavior >> addMethod: code classSide: boolean protocol: protocol [
 
-	self
-		addMethod: code
-		in: self fullName
-		classSide: boolean
-		protocol: protocol
-]
-
-{ #category : 'generating' }
-FmxMBBehavior >> addMethod: code in: class classSide: boolean protocol: protocol [
-
-	| className |
-	self flag: #todo. "We should only take a string as parameter."
-	className := class isString
-		             ifTrue: [ class ]
-		             ifFalse: [1halt. class name ].
 	self flag: #todo. "Demeter"
 	self builder environment
 		addMethod: code
-		in: className
+		in: self fullName
 		classSide: boolean
 		protocol: protocol
 ]
@@ -343,12 +328,6 @@ FmxMBBehavior >> generateAnnotation [
 					 self optionalPragma })
 		classSide: true
 		protocol: #meta
-]
-
-{ #category : 'generating' }
-FmxMBBehavior >> generateRemoteAccessors [
-
-	(self properties select: #isRemote) do: [ :each | each generateAccessorsIn: self ]
 ]
 
 { #category : 'generating' }

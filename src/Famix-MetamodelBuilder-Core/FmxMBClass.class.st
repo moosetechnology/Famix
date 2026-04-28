@@ -180,6 +180,7 @@ FmxMBClass >> generateMetamodelMethod [
 
 { #category : 'generating' }
 FmxMBClass >> generateRemotes [
+
 	| aClass aClassName |
 	aClassName := self fullName.
 
@@ -187,7 +188,7 @@ FmxMBClass >> generateRemotes [
 
 	self realClass: aClass.
 
-	self generateRemoteAccessors
+	(self properties select: #isRemote) do: [ :each | each generateAccessorsIn: self ]
 ]
 
 { #category : 'generating-methods' }

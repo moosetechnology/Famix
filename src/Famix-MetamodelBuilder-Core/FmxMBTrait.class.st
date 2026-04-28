@@ -77,23 +77,16 @@ FmxMBTrait >> generate [
 ]
 
 { #category : 'generating' }
-FmxMBTrait >> generateRemoteAccessors [
-
-	(self properties select: [ :prop | prop isRemote and: [ (self realClass localSelectors includes: prop name) not ] ]) do: [ :each |
-		each generateAccessorsIn: self ]
-]
-
-{ #category : 'generating' }
 FmxMBTrait >> generateRemotes [
+
 	| aTrait traitName |
-	
 	traitName := self fullName.
 
-	aTrait := self class environment at: traitName asSymbol ifAbsent: [ builder environment classNamed: traitName asSymbol ].
+	aTrait := self class environment at: traitName asSymbol ifAbsent: [ ^ self ].
 
 	self realClass: aTrait.
-	
-	self generateRemoteAccessors
+
+	(self properties select: [ :prop | prop isRemote and: [ (aTrait localSelectors includes: prop name) not ] ]) do: [ :each | each generateAccessorsIn: self ]
 ]
 
 { #category : 'testing' }
