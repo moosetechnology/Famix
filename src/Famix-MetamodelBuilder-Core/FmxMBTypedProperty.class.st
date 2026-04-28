@@ -93,10 +93,9 @@ FmxMBTypedProperty >> generateGetterIn: aClassOrTrait [
 								                 self name.
 								                 self defaultValue printString }) ] ].
 
-	"cannot merge both builder of the accessing disapear for non remote entity"
-	self isRemote
-		ifTrue: [ self addMethod: methodSource in: aClassOrTrait protocol: '*' , self builder parentBuilderPackageName ]
-		ifFalse: [ self addMethod: methodSource in: aClassOrTrait protocol: #accessing ]
+	self addMethod: methodSource in: aClassOrTrait protocol: (self isRemote
+			 ifTrue: [ '*' , self builder parentBuilderPackageName ]
+			 ifFalse: [ #accessing ])
 ]
 
 { #category : 'generating' }
@@ -111,10 +110,9 @@ FmxMBTypedProperty >> generateSetterIn: aClassOrTrait [
 				                  ifTrue: [ stream nextPutAll: 'self attributeAt: #{1} put: anObject' ]
 				                  ifFalse: [ stream nextPutAll: '{1} := anObject' ] ].
 
-	"cannot merge both builder of the accessing disapear for non remote entity"
-	self isRemote
-		ifTrue: [ self addMethod: (methodToFormat format: { self name }) in: aClassOrTrait protocol: '*' , self builder parentBuilderPackageName ]
-		ifFalse: [ self addMethod: (methodToFormat format: { self name }) in: aClassOrTrait protocol: 'accessing' ]
+	self addMethod: (methodToFormat format: { self name }) in: aClassOrTrait protocol: (self isRemote
+			 ifTrue: [ '*' , self builder parentBuilderPackageName ]
+			 ifFalse: [ 'accessing' ])
 ]
 
 { #category : 'generating' }
