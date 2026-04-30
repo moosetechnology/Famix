@@ -6,8 +6,7 @@ Class {
 	#superclass : 'Object',
 	#instVars : [
 		'side',
-		'oppositeSide',
-		'builder'
+		'oppositeSide'
 	],
 	#category : 'Famix-MetamodelBuilder-Core-Implementation',
 	#package : 'Famix-MetamodelBuilder-Core',
@@ -15,29 +14,9 @@ Class {
 }
 
 { #category : 'accessing' }
-FmxMBRelation >> builder [
-	^ builder
-]
-
-{ #category : 'accessing' }
-FmxMBRelation >> builder: anObject [
-	builder := anObject
-]
-
-{ #category : 'accessing' }
 FmxMBRelation >> from [
 
 	^ side 
-]
-
-{ #category : 'accessing' }
-FmxMBRelation >> from: aBlock [
-
-	side := (FmxMBRelationSide new
-		relation: self;
-		builder: self builder;
-		yourself).
-	aBlock cull: side.
 ]
 
 { #category : 'accessing' }
@@ -103,14 +82,4 @@ FmxMBRelation >> swapSides [
 FmxMBRelation >> to [
 
 	^ oppositeSide 
-]
-
-{ #category : 'accessing' }
-FmxMBRelation >> to: aBlock [
-
-	oppositeSide := (FmxMBRelationSide new
-		relation: self;
-		builder: self builder;
-		yourself).
-	aBlock cull: oppositeSide.
 ]

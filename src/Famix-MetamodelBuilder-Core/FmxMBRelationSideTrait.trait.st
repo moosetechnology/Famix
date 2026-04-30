@@ -203,19 +203,15 @@ FmxMBRelationSideTrait >> propertyName [
 FmxMBRelationSideTrait >> relationFrom: ownSide to: oppositeSide [
 
 	| aRelation |
-	
-	aRelation := self builder newRelation
-		side: ownSide;
-		oppositeSide: oppositeSide;
-		builder: self builder;
-		yourself.	
-		
-	ownSide relation: aRelation.	
+	aRelation := FmxMBRelation new
+		             side: ownSide;
+		             oppositeSide: oppositeSide;
+		             yourself.
+
+	ownSide relation: aRelation.
 	oppositeSide relation: aRelation.
 
-	ownSide relatedClass ifNotNil: [ 
-		ownSide relatedClass addRelation: aRelation with: oppositeSide relatedEntity ].
-		
-	^ aRelation
+	ownSide relatedClass ifNotNil: [ ownSide relatedClass addRelation: aRelation with: oppositeSide relatedEntity ].
 
+	^ aRelation
 ]

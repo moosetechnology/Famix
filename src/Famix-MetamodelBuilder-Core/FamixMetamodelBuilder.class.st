@@ -434,15 +434,6 @@ FamixMetamodelBuilder >> newClassNamed: aClassName comment: aString [
 ]
 
 { #category : 'initialization' }
-FamixMetamodelBuilder >> newRelation [
-
-	| aRelation |
-	aRelation := FmxMBRelation new.
-	aRelation builder: self.
-	^ aRelation
-]
-
-{ #category : 'initialization' }
 FamixMetamodelBuilder >> newTrait [
 
 	| aTrait |
