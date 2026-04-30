@@ -25,15 +25,6 @@ FmxMBRelation >> builder: anObject [
 ]
 
 { #category : 'accessing' }
-FmxMBRelation >> cardinalityString [
-	^ String
-		streamContents: [ :s | 
-			self to isMany ifTrue: [ s nextPutAll: '*' ] ifFalse: [ s nextPutAll: '1' ].
-			s nextPutAll: '..'.
-			self from isMany ifTrue: [ s nextPutAll: '*' ] ifFalse: [ s nextPutAll: '1' ] ]
-]
-
-{ #category : 'accessing' }
 FmxMBRelation >> from [
 
 	^ side 

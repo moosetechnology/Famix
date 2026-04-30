@@ -51,7 +51,6 @@ Class {
 		'environment',
 		'classes',
 		'traits',
-		'relations',
 		'generator',
 		'testingSelectorsMapping',
 		'configuration',
@@ -353,7 +352,6 @@ FamixMetamodelBuilder >> initialize [
 	classes := OrderedCollection new.
 	traits := OrderedCollection new.
 	extensionBehaviors := OrderedCollection new.
-	relations := OrderedCollection new.
 	testingSelectorsMapping := Dictionary new.
 	withoutBuilder := false
 ]
@@ -441,7 +439,6 @@ FamixMetamodelBuilder >> newRelation [
 	| aRelation |
 	aRelation := FmxMBRelation new.
 	aRelation builder: self.
-	self relations add: aRelation.
 	^ aRelation
 ]
 
@@ -534,19 +531,6 @@ FamixMetamodelBuilder >> printOn: aStream [
 			nextPut: $(;
 			print: g class;
 			nextPut: $) ]
-]
-
-{ #category : 'accessing' }
-FamixMetamodelBuilder >> relations [
-
-	^ relations
-]
-
-{ #category : 'accessing' }
-FamixMetamodelBuilder >> relations: anObject [
-
-	<ignoreForCoverage>
-	relations := anObject
 ]
 
 { #category : 'accessing' }

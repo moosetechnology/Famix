@@ -209,10 +209,6 @@ FmxMBRelationSideTrait >> relationFrom: ownSide to: oppositeSide [
 		oppositeSide: oppositeSide;
 		builder: self builder;
 		yourself.	
-
-	ownSide remoteBuilderDo: [ :aRemoteBuilder |
-		aRemoteBuilder = self builder 
-			ifFalse: [ aRemoteBuilder relations add: aRelation ] ].
 		
 	ownSide relation: aRelation.	
 	oppositeSide relation: aRelation.
