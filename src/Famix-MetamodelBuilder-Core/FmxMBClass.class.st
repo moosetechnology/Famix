@@ -247,7 +247,7 @@ FmxMBClass >> traitsFromRelations [
 	"returns traits defined by relations"
 
 	^ (self relations
-		   collect: [ :each | each trait ]
+		   collect: #trait
 		   thenSelect: #isNotNil) asSet
 ]
 

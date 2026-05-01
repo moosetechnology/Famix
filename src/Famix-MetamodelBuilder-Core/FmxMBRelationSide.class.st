@@ -97,11 +97,6 @@ FmxMBRelationSide >> generationStrategy: anObject [
 	generationStrategy := anObject
 ]
 
-{ #category : 'testing' }
-FmxMBRelationSide >> hasRelation [
-	^ self relation isNotNil
-]
-
 { #category : 'initialization' }
 FmxMBRelationSide >> initialize [
 	super initialize.
@@ -357,5 +352,5 @@ FmxMBRelationSide >> type [
 { #category : 'generating' }
 FmxMBRelationSide >> validate [
 
-	self hasRelation ifFalse: [ FmxMBIncompletePropertyDefiniton signal ]
+	
 ]

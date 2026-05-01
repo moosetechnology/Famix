@@ -30,19 +30,17 @@ FmxMBRelationSideGenerationStrategy >> generateGetterIn: aFmxBehavioral for: aRe
 	methodSource := String streamContents: [ :s |
 			                s
 				                nextPutAll: aRelationSide name;
+				                cr;
+				                tab;
+				                nextPutAll: '"Relation named: #';
+				                nextPutAll: relationSide name;
+				                nextPutAll: ' type: #';
+				                nextPutAll: relationSide oppositeType;
+				                nextPutAll: ' opposite: #';
+				                nextPutAll: relationSide oppositeName;
+				                nextPutAll: '"';
+				                cr;
 				                cr.
-			                aRelationSide hasRelation ifTrue: [
-					                s
-						                tab;
-						                nextPutAll: '"Relation named: #';
-						                nextPutAll: relationSide name;
-						                nextPutAll: ' type: #';
-						                nextPutAll: relationSide oppositeType;
-						                nextPutAll: ' opposite: #';
-						                nextPutAll: relationSide oppositeName;
-						                nextPutAll: '"';
-						                cr;
-						                cr ].
 			                s
 				                tab;
 				                nextPutAll: '<generated>';

@@ -217,7 +217,7 @@ FamixMetamodelGenerator >> apply: aTrait on: aGeneratedClass oppositeOn: another
 
 	((builder getTraitNamed: aTrait) propertiesAndRelations size = 1) ifFalse: [ self error: '#apply:on:oppositeOn: only accept traits with a unique opposite' ].
 
-	oppositeTrait := (builder getTraitNamed: aTrait) propertiesAndRelations anyOne relation side relatedClass name.	
+	oppositeTrait := (builder getTraitNamed: aTrait) propertiesAndRelations anyOne relatedClass name.	
 	self apply: aTrait on: aGeneratedClass oppositeTrait: oppositeTrait on: anotherGeneratedClass
 ]
 
