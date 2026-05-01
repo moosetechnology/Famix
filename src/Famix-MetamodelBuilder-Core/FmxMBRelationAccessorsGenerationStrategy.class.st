@@ -9,9 +9,9 @@ Class {
 	#classInstVars : [
 		'defaultInstance'
 	],
-	#category : 'Famix-MetamodelBuilder-Core-Implementation',
+	#category : 'Famix-MetamodelBuilder-Core-Generation',
 	#package : 'Famix-MetamodelBuilder-Core',
-	#tag : 'Implementation'
+	#tag : 'Generation'
 }
 
 { #category : 'accessing' }
@@ -105,6 +105,12 @@ FmxMBRelationAccessorsGenerationStrategy >> generateSetterIn: aFmxBehavioral for
 			                self generateSetterCoreOn: s for: aRelationSide ].
 
 	aFmxBehavioral addMethod: methodSource protocol: (self protocolFor: aRelationSide)
+]
+
+{ #category : 'testing' }
+FmxMBRelationAccessorsGenerationStrategy >> producesSlot [
+
+	^ false
 ]
 
 { #category : 'accessing' }

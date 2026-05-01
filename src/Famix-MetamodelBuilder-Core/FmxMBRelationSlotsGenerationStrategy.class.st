@@ -6,9 +6,9 @@ This is useful when both sides of the relation are non remote.
 Class {
 	#name : 'FmxMBRelationSlotsGenerationStrategy',
 	#superclass : 'FmxMBRelationAccessorsGenerationStrategy',
-	#category : 'Famix-MetamodelBuilder-Core-Implementation',
+	#category : 'Famix-MetamodelBuilder-Core-Generation',
 	#package : 'Famix-MetamodelBuilder-Core',
-	#tag : 'Implementation'
+	#tag : 'Generation'
 }
 
 { #category : 'generation' }

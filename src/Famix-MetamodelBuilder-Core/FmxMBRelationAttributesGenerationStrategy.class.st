@@ -6,9 +6,9 @@ This is used when one of the side of the relation is remote.
 Class {
 	#name : 'FmxMBRelationAttributesGenerationStrategy',
 	#superclass : 'FmxMBRelationAccessorsGenerationStrategy',
-	#category : 'Famix-MetamodelBuilder-Core-Implementation',
+	#category : 'Famix-MetamodelBuilder-Core-Generation',
 	#package : 'Famix-MetamodelBuilder-Core',
-	#tag : 'Implementation'
+	#tag : 'Generation'
 }
 
 { #category : 'generation' }
@@ -106,10 +106,4 @@ FmxMBRelationAttributesGenerationStrategy >> generateSetterCoreOn: aStream for: 
 						 format: { 
 								 aRelationSide name.
 								 aRelationSide oppositeSide name }) ]
-]
-
-{ #category : 'testing' }
-FmxMBRelationAttributesGenerationStrategy >> producesSlot [
-
-	^ false
 ]
