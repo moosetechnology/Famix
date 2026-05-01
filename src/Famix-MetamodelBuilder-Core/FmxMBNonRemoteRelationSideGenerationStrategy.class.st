@@ -37,17 +37,17 @@ FmxMBNonRemoteRelationSideGenerationStrategy >> generateGetterCoreOn: aStream fo
 
 	aRelationSide isOne ifTrue: [ aStream nextPutAll: ' ifAbsent: [ nil ]' ].
 
-	(aRelationSide otherSide isOne and: [ aRelationSide isMany ]) ifTrue: [
-		aStream nextPutAll: (' ifAbsentPut: [ FMMultivalueLink on: self opposite: #{1}: ]' format: { aRelationSide otherSide name }) ].
+	(aRelationSide oppositeSide isOne and: [ aRelationSide isMany ]) ifTrue: [
+		aStream nextPutAll: (' ifAbsentPut: [ FMMultivalueLink on: self opposite: #{1}: ]' format: { aRelationSide oppositeSide name }) ].
 
-	(aRelationSide isMany and: [ aRelationSide otherSide isMany ]) ifTrue: [
-		aStream nextPutAll: (' ifAbsentPut: [ FMMultiMultivalueLink on: self opposite: #{1} ]' format: { aRelationSide otherSide name }) ]
+	(aRelationSide isMany and: [ aRelationSide oppositeSide isMany ]) ifTrue: [
+		aStream nextPutAll: (' ifAbsentPut: [ FMMultiMultivalueLink on: self opposite: #{1} ]' format: { aRelationSide oppositeSide name }) ]
 ]
 
 { #category : 'generation' }
 FmxMBNonRemoteRelationSideGenerationStrategy >> generateSetterCoreOn: aStream for: aRelationSide [
 
-	(aRelationSide isOne and: [ aRelationSide otherSide isOne ]) ifTrue: [ 
+	(aRelationSide isOne and: [ aRelationSide oppositeSide isOne ]) ifTrue: [ 
 		aStream
 			tab;
 			nextPutAll:
@@ -70,11 +70,11 @@ FmxMBNonRemoteRelationSideGenerationStrategy >> generateSetterCoreOn: aStream fo
 			tab;
 			tab;
 			nextPutAll:
-				('otherSide {1}: nil ]' format: { aRelationSide otherSide name });
+				('otherSide {1}: nil ]' format: { aRelationSide oppositeSide name });
 			cr;
 			tab;
 			nextPutAll:
-				('ifNotNil: [ ' format: { aRelationSide otherSide name });
+				('ifNotNil: [ ' format: { aRelationSide oppositeSide name });
 			cr;
 			tab;
 			tab;
@@ -84,7 +84,7 @@ FmxMBNonRemoteRelationSideGenerationStrategy >> generateSetterCoreOn: aStream fo
 			tab;
 			tab;
 			nextPutAll:
-				('anObject {1}: self ]' format: { aRelationSide otherSide name }) ].
+				('anObject {1}: self ]' format: { aRelationSide oppositeSide name }) ].
 
 	aRelationSide isMany ifTrue: [ 
 		aStream
@@ -92,7 +92,7 @@ FmxMBNonRemoteRelationSideGenerationStrategy >> generateSetterCoreOn: aStream fo
 			nextPutAll:
 				('self {1} value: anObject' format: { aRelationSide name }) ].
 
-	(aRelationSide otherSide isMany and: [ aRelationSide isOne ]) 
+	(aRelationSide oppositeSide isMany and: [ aRelationSide isOne ]) 
 		ifTrue: [ 
 			aStream
 				tab;
@@ -100,7 +100,7 @@ FmxMBNonRemoteRelationSideGenerationStrategy >> generateSetterCoreOn: aStream fo
 					('self attributeAt: #{1} put: (FMMultivalueLink on: self update: #{2} from: self {1} to: anObject).' 
 						 format: { 
 								 aRelationSide name.
-								 aRelationSide otherSide name }) ]
+								 aRelationSide oppositeSide name }) ]
 ]
 
 { #category : 'testing' }

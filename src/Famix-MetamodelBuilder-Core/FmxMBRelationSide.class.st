@@ -207,27 +207,22 @@ FmxMBRelationSide >> one [
 
 { #category : 'accessing' }
 FmxMBRelationSide >> oppositeName [
-	^ self otherSide name asSymbol
+	^ self oppositeSide name asSymbol
 ]
 
 { #category : 'accessing' }
 FmxMBRelationSide >> oppositeSide [
 
-	^ self otherSide
+	| aFromSide |
+	aFromSide := self relation from.
+	^ aFromSide == self
+		  ifTrue: [ self relation to ]
+		  ifFalse: [ aFromSide ]
 ]
 
 { #category : 'accessing' }
 FmxMBRelationSide >> oppositeType [
-	^ (self otherSide builder configuration prefix , self otherSide relatedEntityName) asSymbol
-]
-
-{ #category : 'accessing' }
-FmxMBRelationSide >> otherSide [
-	| aFromSide |
-	aFromSide := self relation from.
-	^ aFromSide == self
-		ifTrue: [ self relation to ]
-		ifFalse: [ aFromSide ]
+	^ (self oppositeSide builder configuration prefix , self oppositeSide relatedEntityName) asSymbol
 ]
 
 { #category : 'private' }
