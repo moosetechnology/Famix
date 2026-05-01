@@ -1,19 +1,34 @@
+"
+I am a strategy used during the generation of the Famix code to handle the way to generate accessors for a relation.
+
+I am an abstract class. Check my subclasses for more information
+"
 Class {
-	#name : 'FmxMBRelationSideGenerationStrategy',
+	#name : 'FmxMBRelationAccessorsGenerationStrategy',
 	#superclass : 'Object',
+	#classInstVars : [
+		'defaultInstance'
+	],
 	#category : 'Famix-MetamodelBuilder-Core-Implementation',
 	#package : 'Famix-MetamodelBuilder-Core',
 	#tag : 'Implementation'
 }
 
+{ #category : 'accessing' }
+FmxMBRelationAccessorsGenerationStrategy class >> defaultInstance [
+	"Keeping a default instance since I have no state"
+
+	^ defaultInstance ifNil: [ defaultInstance := self new ]
+]
+
 { #category : 'generation' }
-FmxMBRelationSideGenerationStrategy >> generateGetterCoreOn: aStream for: aRelationSide [
+FmxMBRelationAccessorsGenerationStrategy >> generateGetterCoreOn: aStream for: aRelationSide [
 
 	^ self subclassResponsibility
 ]
 
 { #category : 'generation' }
-FmxMBRelationSideGenerationStrategy >> generateGetterIn: aFmxBehavioral for: aRelationSide [
+FmxMBRelationAccessorsGenerationStrategy >> generateGetterIn: aFmxBehavioral for: aRelationSide [
 
 	| methodSource commentDefinition |
 	commentDefinition := aRelationSide comment ifNotEmpty: [ :comment | '<FMComment: {1}>' format: { comment printString } ].
@@ -68,13 +83,13 @@ FmxMBRelationSideGenerationStrategy >> generateGetterIn: aFmxBehavioral for: aRe
 ]
 
 { #category : 'generation' }
-FmxMBRelationSideGenerationStrategy >> generateSetterCoreOn: aStream for: aRelationSide [
+FmxMBRelationAccessorsGenerationStrategy >> generateSetterCoreOn: aStream for: aRelationSide [
 
 	^ self subclassResponsibility
 ]
 
 { #category : 'generation' }
-FmxMBRelationSideGenerationStrategy >> generateSetterIn: aFmxBehavioral for: aRelationSide [
+FmxMBRelationAccessorsGenerationStrategy >> generateSetterIn: aFmxBehavioral for: aRelationSide [
 
 	| methodSource |
 	methodSource := String streamContents: [ :s |
@@ -93,7 +108,9 @@ FmxMBRelationSideGenerationStrategy >> generateSetterIn: aFmxBehavioral for: aRe
 ]
 
 { #category : 'accessing' }
-FmxMBRelationSideGenerationStrategy >> protocolFor: aRelation [
+FmxMBRelationAccessorsGenerationStrategy >> protocolFor: aRelation [
 
-	^ #accessing
+	^ aRelation isRemote
+		  ifTrue: [ '*' , aRelation builder parentBuilderPackageName ]
+		  ifFalse: [ #accessing ]
 ]

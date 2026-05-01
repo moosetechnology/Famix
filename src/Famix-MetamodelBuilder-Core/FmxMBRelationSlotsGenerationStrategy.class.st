@@ -1,13 +1,18 @@
+"
+I will generate accessors accessing a slot for a relation.
+
+This is useful when both sides of the relation are non remote.
+"
 Class {
-	#name : 'FmxMBStandardRelationSideGenerationStrategy',
-	#superclass : 'FmxMBRelationSideGenerationStrategy',
+	#name : 'FmxMBRelationSlotsGenerationStrategy',
+	#superclass : 'FmxMBRelationAccessorsGenerationStrategy',
 	#category : 'Famix-MetamodelBuilder-Core-Implementation',
 	#package : 'Famix-MetamodelBuilder-Core',
 	#tag : 'Implementation'
 }
 
 { #category : 'generation' }
-FmxMBStandardRelationSideGenerationStrategy >> generateGetterCoreOn: aStream for: aRelationSide [
+FmxMBRelationSlotsGenerationStrategy >> generateGetterCoreOn: aStream for: aRelationSide [
 
 	aStream
 		tab;
@@ -16,7 +21,7 @@ FmxMBStandardRelationSideGenerationStrategy >> generateGetterCoreOn: aStream for
 ]
 
 { #category : 'generation' }
-FmxMBStandardRelationSideGenerationStrategy >> generateSetterCoreOn: aStream for: aRelationSide [
+FmxMBRelationSlotsGenerationStrategy >> generateSetterCoreOn: aStream for: aRelationSide [
 
 	aStream
 		tab;
@@ -27,7 +32,7 @@ FmxMBStandardRelationSideGenerationStrategy >> generateSetterCoreOn: aStream for
 ]
 
 { #category : 'testing' }
-FmxMBStandardRelationSideGenerationStrategy >> producesSlot [
+FmxMBRelationSlotsGenerationStrategy >> producesSlot [
 
 	^ true
 ]

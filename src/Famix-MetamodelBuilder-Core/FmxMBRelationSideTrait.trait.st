@@ -107,8 +107,6 @@ FmxMBRelationSideTrait >> manyToMany: aRelationSide [
 
 	self isRemote ifTrue: [ ownSide makeRemote ].
 	aRelationSide isRemote ifTrue: [ oppositeSide makeRemote ].
-	(self isRemote and: [ aRelationSide isRemote not ]) ifTrue: [ oppositeSide makeNonremote ].
-	(self isRemote not and: [ aRelationSide isRemote ]) ifTrue: [ ownSide makeNonremote ].
 
 	^ ownSide
 ]
@@ -125,8 +123,6 @@ FmxMBRelationSideTrait >> manyToOne: aRelationSide [
 
 	self isRemote ifTrue: [ ownSide makeRemote ].
 	aRelationSide isRemote ifTrue: [ oppositeSide makeRemote ].
-	(self isRemote and: [ aRelationSide isRemote not ]) ifTrue: [ oppositeSide makeNonremote ].
-	(self isRemote not and: [ aRelationSide isRemote ]) ifTrue: [ ownSide makeNonremote ].
 
 	^ ownSide
 ]
@@ -151,8 +147,6 @@ FmxMBRelationSideTrait >> oneToMany: aRelationSide [
 
 	self isRemote ifTrue: [ ownSide makeRemote ].
 	aRelationSide isRemote ifTrue: [ oppositeSide makeRemote ].
-	(self isRemote and: [ aRelationSide isRemote not ]) ifTrue: [ oppositeSide makeNonremote ].
-	(self isRemote not and: [ aRelationSide isRemote ]) ifTrue: [ ownSide makeNonremote ].
 
 	^ ownSide
 ]
@@ -168,8 +162,6 @@ FmxMBRelationSideTrait >> oneToOne: aRelationSide [
 
 	self isRemote ifTrue: [ ownSide makeRemote ].
 	aRelationSide isRemote ifTrue: [ oppositeSide makeRemote ].
-	(self isRemote and: [ aRelationSide isRemote not ]) ifTrue: [ oppositeSide makeNonremote ].
-	(self isRemote not and: [ aRelationSide isRemote ]) ifTrue: [ ownSide makeNonremote ].
 
 	^ ownSide
 ]

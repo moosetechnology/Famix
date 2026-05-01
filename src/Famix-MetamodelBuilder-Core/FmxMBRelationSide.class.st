@@ -14,7 +14,6 @@ Class {
 		'derived',
 		'source',
 		'target',
-		'generationStrategy',
 		'oppositeSide'
 	],
 	#category : 'Famix-MetamodelBuilder-Core-Implementation',
@@ -83,12 +82,10 @@ FmxMBRelationSide >> generateSetterIn: aFmxBehavioral [
 
 { #category : 'accessing' }
 FmxMBRelationSide >> generationStrategy [
-	^ generationStrategy
-]
 
-{ #category : 'accessing' }
-FmxMBRelationSide >> generationStrategy: anObject [
-	generationStrategy := anObject
+	^ (self producesSlot
+		   ifTrue: [ FmxMBRelationSlotsGenerationStrategy ]
+		   ifFalse: [ FmxMBRelationAttributesGenerationStrategy ]) defaultInstance
 ]
 
 { #category : 'initialization' }
@@ -99,9 +96,7 @@ FmxMBRelationSide >> initialize [
 	container := false.
 	derived := false.
 	target := false.
-	source := false.
-
-	self makeStandard
+	source := false
 ]
 
 { #category : 'properties' }
@@ -152,22 +147,9 @@ FmxMBRelationSide >> isTarget [
 ]
 
 { #category : 'converting' }
-FmxMBRelationSide >> makeNonremote [
-
-	self generationStrategy: FmxMBNonRemoteRelationSideGenerationStrategy new
-]
-
-{ #category : 'converting' }
 FmxMBRelationSide >> makeRemote [
 
-	self generationStrategy: FmxMBRemoteRelationSideGenerationStrategy new.
 	self isRemote: true
-]
-
-{ #category : 'converting' }
-FmxMBRelationSide >> makeStandard [
-
-	self generationStrategy: FmxMBStandardRelationSideGenerationStrategy new
 ]
 
 { #category : 'accessing' }

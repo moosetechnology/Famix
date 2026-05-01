@@ -1,13 +1,18 @@
+"
+I will generate accessors using the Moose concept of attributes to access a relation.
+
+This is used when one of the side of the relation is remote.
+"
 Class {
-	#name : 'FmxMBNonRemoteRelationSideGenerationStrategy',
-	#superclass : 'FmxMBRelationSideGenerationStrategy',
+	#name : 'FmxMBRelationAttributesGenerationStrategy',
+	#superclass : 'FmxMBRelationAccessorsGenerationStrategy',
 	#category : 'Famix-MetamodelBuilder-Core-Implementation',
 	#package : 'Famix-MetamodelBuilder-Core',
 	#tag : 'Implementation'
 }
 
 { #category : 'generation' }
-FmxMBNonRemoteRelationSideGenerationStrategy >> generateGetterCoreOn: aStream for: aRelationSide [
+FmxMBRelationAttributesGenerationStrategy >> generateGetterCoreOn: aStream for: aRelationSide [
 
 	aStream
 		tab;
@@ -45,7 +50,7 @@ FmxMBNonRemoteRelationSideGenerationStrategy >> generateGetterCoreOn: aStream fo
 ]
 
 { #category : 'generation' }
-FmxMBNonRemoteRelationSideGenerationStrategy >> generateSetterCoreOn: aStream for: aRelationSide [
+FmxMBRelationAttributesGenerationStrategy >> generateSetterCoreOn: aStream for: aRelationSide [
 
 	(aRelationSide isOne and: [ aRelationSide oppositeSide isOne ]) ifTrue: [ 
 		aStream
@@ -104,7 +109,7 @@ FmxMBNonRemoteRelationSideGenerationStrategy >> generateSetterCoreOn: aStream fo
 ]
 
 { #category : 'testing' }
-FmxMBNonRemoteRelationSideGenerationStrategy >> producesSlot [
+FmxMBRelationAttributesGenerationStrategy >> producesSlot [
 
 	^ false
 ]
