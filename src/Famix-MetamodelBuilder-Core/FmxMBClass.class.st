@@ -246,7 +246,9 @@ FmxMBClass >> subclassOf: aClass [
 FmxMBClass >> traitsFromRelations [
 	"returns traits defined by relations"
 
-	^ (self relations collect: [ :each | each side trait ] thenSelect: #isNotNil) asSet
+	^ (self relations
+		   collect: [ :each | each trait ]
+		   thenSelect: #isNotNil) asSet
 ]
 
 { #category : 'generalization' }

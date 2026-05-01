@@ -211,7 +211,5 @@ FmxMBRelationSideTrait >> relationFrom: ownSide to: oppositeSide [
 	ownSide relation: aRelation.
 	oppositeSide relation: aRelation.
 
-	ownSide relatedClass ifNotNil: [ ownSide relatedClass addRelation: aRelation with: oppositeSide relatedEntity ].
-
 	^ aRelation
 ]

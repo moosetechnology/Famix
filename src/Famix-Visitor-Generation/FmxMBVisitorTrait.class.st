@@ -148,16 +148,16 @@ FmxMBVisitorTrait >> writeVisitRelationsFor: aFmxMBBehavior on: aStream [
 
 	aFmxMBBehavior relations
 		do: [ :relation |
-			aStream << ('	self visit{1}: a{2} {3}' format: {
-					 (relation side isOne
-						  ifTrue: [ 'Entity' ]
-						  ifFalse: [ 'Collection' ]).
-					 aFmxMBBehavior fullName.
-					 relation side name }) ]
+				aStream << ('	self visit{1}: a{2} {3}' format: {
+						 (relation isOne
+							  ifTrue: [ 'Entity' ]
+							  ifFalse: [ 'Collection' ]).
+						 aFmxMBBehavior fullName.
+						 relation name }) ]
 		separatedBy: [
-			aStream
-				<< $.;
-				cr ]
+				aStream
+					<< $.;
+					cr ]
 ]
 
 { #category : 'generation - visit' }

@@ -4,7 +4,6 @@ Class {
 	#traits : 'FmxMBRelationSideTrait',
 	#classTraits : 'FmxMBRelationSideTrait classTrait',
 	#instVars : [
-		'relations',
 		'tag',
 		'prefix',
 		'packageName',
@@ -57,15 +56,6 @@ FmxMBBehavior >> addMethod: code classSide: boolean protocol: protocol [
 FmxMBBehavior >> addMethod: code protocol: protocol [
 
 	^ self addMethod: code classSide: false protocol: protocol
-]
-
-{ #category : 'accessing' }
-FmxMBBehavior >> addRelation: aRelation with: anotherClass [
-
-	self relations add: aRelation.
-	anotherClass relations add: aRelation oppositeRelation
-	
-	
 ]
 
 { #category : 'accessing' }
@@ -287,19 +277,17 @@ FmxMBBehavior >> generateAccessors [
 { #category : 'generating' }
 FmxMBBehavior >> generateAddToCollection [
 
-	self relations
-		collect: #side
-		thenDo: [ :side |
-				side isMany ifTrue: [
-						| sideName |
-						sideName := side name.
-						self
-							addMethod: ('add{1}: anObject
+	self relations do: [ :side |
+			side isMany ifTrue: [
+					| sideName |
+					sideName := side name.
+					self
+						addMethod: ('add{1}: anObject
 	<generated>
 	^ self {2} add: anObject' format: {
-										 sideName capitalized asSingular.
-										 sideName })
-							protocol: #adding ] ]
+									 sideName capitalized asSingular.
+									 sideName })
+						protocol: #adding ] ]
 ]
 
 { #category : 'generating' }
@@ -344,8 +332,8 @@ FmxMBBehavior >> inheritsFromTrait: aTrait without: aCollection [
 
 { #category : 'initialization' }
 FmxMBBehavior >> initialize [
+
 	super initialize.
-	relations := OrderedCollection new.
 	propertiesAndRelations := OrderedCollection new.
 	prefix := ''.
 	packageName := ''.
@@ -518,7 +506,8 @@ FmxMBBehavior >> relatedEntityName [
 
 { #category : 'accessing' }
 FmxMBBehavior >> relations [
-	^ relations
+
+	^ self propertiesAndRelations select: #isRelation
 ]
 
 { #category : 'accessing' }
