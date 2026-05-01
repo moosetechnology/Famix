@@ -150,58 +150,43 @@ FmxMBBehavior >> commentWithRelations [
 	"It is sometimes hard to find our way through all the methods and relations of a moose entity. To help, I add information in the class comments about the different kind of relations in the model."
 
 	^ String streamContents: [ :aStream |
-			  aStream nextPutAll: self comment.
 			  self comment ifNotEmpty: [
 					  aStream
+						  nextPutAll: self comment;
 						  cr;
 						  cr ].
-			  self allRelations ifNotEmpty: [ :rels |
+			  self allRelations ifNotEmpty: [ :relations |
 					  aStream
 						  nextPutAll: '## Relations
 ======================';
 						  cr;
 						  cr.
-					  OrderedDictionary new
-						  at: 'Parents' put: [ :relation | relation isContainer ];
-						  at: 'Children' put: [ :relation | relation oppositeSide isContainer ];
-						  at: 'Outgoing dependencies' put: [ :relation | relation oppositeSide isSource ];
-						  at: 'Incoming dependencies' put: [ :relation | relation oppositeSide isTarget ];
-						  at: 'Association source' put: [ :relation | relation isSource ];
-						  at: 'Association target' put: [ :relation | relation isTarget ];
-						  at: 'Other' put: [ :relation |
-								  relation isTarget not and: [
-											  relation isSource not and: [
-													  relation isContainer not and: [
-															  relation oppositeSide isTarget not and: [ relation oppositeSide isSource not and: [ relation oppositeSide isContainer not ] ] ] ] ] ];
-						  keysAndValuesDo: [ :relationKind :selectionBlock |
-								  (rels select: selectionBlock) ifNotEmpty: [ :parents |
+					  self relationSectionsToCommentMap keysAndValuesDo: [ :sectionTitle :selectionBlock |
+							  (relations select: selectionBlock) ifNotEmpty: [ :selectedRelations |
+									  aStream
+										  nextPutAll: '### ';
+										  nextPutAll: sectionTitle;
+										  cr;
+										  nextPutAll: '| Relation | Origin | Opposite | Type | Comment |';
+										  cr;
+										  nextPutAll: '|---|';
+										  cr.
+									  (selectedRelations sorted: #name ascending) do: [ :relation |
 											  aStream
-												  nextPutAll: '### ';
-												  nextPutAll: relationKind;
-												  cr;
-												  nextPutAll: '| Relation | Origin | Opposite | Type | Comment |';
-												  cr;
-												  nextPutAll: '|---|';
-												  cr.
-											  (parents sorted: [ :parent | parent generationStrategy relationSide name ] ascending) do: [ :parent |
-													  | strategy |
-													  strategy := parent generationStrategy.
+												  nextPutAll: '| `';
+												  nextPutAll: relation name;
+												  nextPutAll: '` | `';
+												  nextPutAll: relation type;
+												  nextPutAll: '` | `';
+												  nextPutAll: relation oppositeName;
+												  nextPutAll: '` | `';
+												  nextPutAll: relation oppositeType;
+												  nextPutAll: '` | ';
+												  nextPutAll: (relation comment copyWithRegex: (String with: Character cr with: $+) matchesReplacedWith: ' ');
+												  nextPut: $|;
+												  cr ].
 
-													  aStream
-														  nextPutAll: '| `';
-														  nextPutAll: strategy relationSide name;
-														  nextPutAll: '` | `';
-														  nextPutAll: strategy relationSide type;
-														  nextPutAll: '` | `';
-														  nextPutAll: strategy relationSide oppositeName;
-														  nextPutAll: '` | `';
-														  nextPutAll: strategy relationSide oppositeType;
-														  nextPutAll: '` | ';
-														  nextPutAll: (strategy relationSide comment copyWithRegex: (String with: Character cr with: $+) matchesReplacedWith: ' ');
-														  nextPut: $|;
-														  cr ].
-
-											  aStream cr ] ].
+									  aStream cr ] ].
 					  aStream cr ].
 
 			  self allProperties ifNotEmpty: [ :props |
@@ -502,6 +487,25 @@ FmxMBBehavior >> propertyName [
 FmxMBBehavior >> relatedEntityName [
 
 	^ self name
+]
+
+{ #category : 'accessing' }
+FmxMBBehavior >> relationSectionsToCommentMap [
+	"When generating a class comment, we group the relations by kind. This method builds a dictionary to declare the sections to comment and declare how to select the relations inside."
+
+	^ OrderedDictionary new
+		  at: 'Parents' put: [ :relation | relation isContainer ];
+		  at: 'Children' put: [ :relation | relation oppositeSide isContainer ];
+		  at: 'Outgoing dependencies' put: [ :relation | relation oppositeSide isSource ];
+		  at: 'Incoming dependencies' put: [ :relation | relation oppositeSide isTarget ];
+		  at: 'Association source' put: [ :relation | relation isSource ];
+		  at: 'Association target' put: [ :relation | relation isTarget ];
+		  at: 'Other' put: [ :relation |
+				  relation isTarget not and: [
+							  relation isSource not and: [
+									  relation isContainer not and: [
+											  relation oppositeSide isTarget not and: [ relation oppositeSide isSource not and: [ relation oppositeSide isContainer not ] ] ] ] ] ];
+		  yourself
 ]
 
 { #category : 'accessing' }
