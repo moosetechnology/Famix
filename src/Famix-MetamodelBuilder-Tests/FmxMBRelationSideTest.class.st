@@ -25,78 +25,56 @@ FmxMBRelationSideTest >> testBasics [
 FmxMBRelationSideTest >> testContainmentRelations [
 
 	| aClass aTrait relation |
-	
 	aClass := builder newClassNamed: #AClass.
 	aTrait := builder newTraitNamed: #ATrait.
-	
+
 	relation := aClass <>- aTrait.
-	self assert: relation left isOne.
-	self assert: relation right isOne.
-	self deny: relation left isContainer.
-	self assert: relation right isContainer.
+	self assert: relation isOne.
+	self assert: relation oppositeSide isOne.
+	self deny: relation isContainer.
+	self assert: relation oppositeSide isContainer.
 
 	relation := aClass -<> aTrait.
-	self assert: relation left isOne.
-	self assert: relation right isOne.
-	self assert: relation left isContainer.
-	self deny: relation right isContainer.
+	self assert: relation isOne.
+	self assert: relation oppositeSide isOne.
+	self assert: relation isContainer.
+	self deny: relation oppositeSide isContainer.
 
 	relation := aClass <>-* aTrait.
-	self assert: relation left isMany.
-	self assert: relation right isOne.
-	self deny: relation left isContainer.
-	self assert: relation right isContainer.
+	self assert: relation isMany.
+	self assert: relation oppositeSide isOne.
+	self deny: relation isContainer.
+	self assert: relation oppositeSide isContainer.
 
 	relation := aClass *-<> aTrait.
-	self assert: relation left isOne.
-	self assert: relation right isMany.
-	self assert: relation left isContainer.
-	self deny: relation right isContainer.
-
-]
-
-{ #category : 'tests' }
-FmxMBRelationSideTest >> testDirections [
-
-	"test setting of a type of the property"
-
-	| aClass aTrait relation |
-	
-	aClass := builder newClassNamed: #AClass.
-	aTrait := builder newTraitNamed: #ATrait.
-	
-	relation := aClass - aTrait.
-	
-	self assert: relation left from equals: relation left.
-	self assert: relation right from equals: relation left.
-
-	self assert: relation left to equals: relation right.
-	self assert: relation right to equals: relation right.
-
+	self assert: relation isOne.
+	self assert: relation oppositeSide isMany.
+	self assert: relation isContainer.
+	self deny: relation oppositeSide isContainer
 ]
 
 { #category : 'tests' }
 FmxMBRelationSideTest >> testOppositeName [
+
 	| aClass aTrait relation |
-	
 	builder configuration prefix: 'Banane'.
 	aClass := builder newClassNamed: #AClass.
 	aTrait := builder newTraitNamed: #ATrait.
-	
+
 	relation := aClass <>- aTrait.
-	self assert: relation left oppositeName equals: 'aClass'
+	self assert: relation oppositeName equals: 'aClass'
 ]
 
 { #category : 'tests' }
 FmxMBRelationSideTest >> testOppositeType [
+
 	| aClass aTrait relation |
-	
 	builder configuration prefix: 'Banane'.
 	aClass := builder newClassNamed: #AClass.
 	aTrait := builder newTraitNamed: #ATrait.
-	
+
 	relation := aClass <>- aTrait.
-	self assert: relation left oppositeType equals: 'BananeATrait'
+	self assert: relation oppositeType equals: 'BananeATrait'
 ]
 
 { #category : 'tests' }
@@ -111,7 +89,7 @@ FmxMBRelationSideTest >> testOppositeTypeInRemoteBuilder [
 	aTrait := builder2 newTraitNamed: #ATrait.
 	
 	relation := aClass <>- aTrait.
-	self assert: relation left oppositeType equals: 'FurryATrait'
+	self assert: relation oppositeType equals: 'FurryATrait'
 ]
 
 { #category : 'tests' }
@@ -228,47 +206,58 @@ FmxMBRelationSideTest >> testReconnection [
 
 { #category : 'tests' }
 FmxMBRelationSideTest >> testRelatedEntity [
-
 	"test setting of a type of the property"
 
 	| aClass aTrait relation |
-	
 	aClass := builder newClassNamed: #AClass.
 	aTrait := builder newTraitNamed: #ATrait.
-	
-	relation := aClass - aTrait.
-	
-	self assert: relation left relatedEntity equals: aClass.
-	self assert: relation right relatedEntity equals: aTrait.
 
+	relation := aClass - aTrait.
+
+	self assert: relation relatedEntity equals: aClass.
+	self assert: relation oppositeSide relatedEntity equals: aTrait
 ]
 
 { #category : 'tests' }
 FmxMBRelationSideTest >> testRelations [
 
 	| aClass aTrait relation |
-	
 	aClass := builder newClassNamed: #AClass.
 	aTrait := builder newTraitNamed: #ATrait.
-	
+
 	relation := aClass - aTrait.
-	self assert: relation left isOne.
-	self assert: relation right isOne.
-	self deny: (relation left isContainer | relation left isContainer).
+	self assert: relation isOne.
+	self assert: relation oppositeSide isOne.
+	self deny: relation isContainer | relation oppositeSide isContainer.
 
 	relation := aClass -* aTrait.
-	self assert: relation left isMany.
-	self assert: relation right isOne.
-	self deny: (relation left isContainer | relation left isContainer).
-	
-	relation := aClass *- aTrait.
-	self assert: relation left isOne.
-	self assert: relation right isMany.
-	self deny: (relation left isContainer | relation left isContainer).
-	
-	relation := aClass *-* aTrait.
-	self assert: relation left isMany.
-	self assert: relation right isMany.
-	self deny: (relation left isContainer | relation left isContainer).
+	self assert: relation isMany.
+	self assert: relation oppositeSide isOne.
+	self deny: relation isContainer | relation oppositeSide isContainer.
 
+	relation := aClass *- aTrait.
+	self assert: relation isOne.
+	self assert: relation oppositeSide isMany.
+	self deny: relation isContainer | relation oppositeSide isContainer.
+
+	relation := aClass *-* aTrait.
+	self assert: relation isMany.
+	self assert: relation oppositeSide isMany.
+	self deny: relation isContainer | relation oppositeSide isContainer
+]
+
+{ #category : 'tests' }
+FmxMBRelationSideTest >> testShortCardinalityString [
+
+	| tClass tMethod relation |
+	
+	tClass := builder newTraitNamed: #TClass.
+	tMethod := builder newTraitNamed: #TMethod.
+	
+	relation := (tClass <>-* (tMethod property: #methodClass)).
+	self assert: relation shortCardinalityString equals: '*'.
+	relation := (tClass - (tMethod property: #methodClass)).
+	self assert: relation shortCardinalityString equals: ''.
+	relation := (tClass *-* tMethod).
+	self assert: relation shortCardinalityString equals: '*'.	
 ]

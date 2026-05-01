@@ -196,8 +196,7 @@ FmxMBPlantTextVisitor >> visitClass: aClass [
 { #category : 'visiting' }
 FmxMBPlantTextVisitor >> visitRelationSide: aRelationSide [
 
-	relations add: aRelationSide relation.
-
+	relations add: aRelationSide
 ]
 
 { #category : 'visiting' }
@@ -245,40 +244,38 @@ FmxMBPlantTextVisitor >> withoutAllTraits [
 FmxMBPlantTextVisitor >> writeClass: aClass mergingTraits: mergesTraits [
 
 	| behaviorKey displayedName |
+
 	displayedName := aClass name.
 
 	mergesTraits
-		ifTrue: [
-				(self behaviorNameOrNilFor: aClass traitGeneralizations first)
-					ifNil: [
-							behaviorKey := self ensureBehaviorNameFor: aClass.
-							self mergeTrait: aClass traitGeneralizations first withBehaviorNamed: behaviorKey ]
-					ifNotNil: [ :key |
-							behaviorKey := key.
-							self mergeTrait: aClass withBehaviorNamed: behaviorKey ].
+	ifTrue: [ 
+		(self behaviorNameOrNilFor:	aClass traitGeneralizations first)
+				ifNil: [ behaviorKey := self ensureBehaviorNameFor: aClass.
+					self mergeTrait: aClass traitGeneralizations first withBehaviorNamed: behaviorKey. ]
+				ifNotNil: [ :key |
+					behaviorKey := key.
+					self mergeTrait: aClass withBehaviorNamed: behaviorKey. ].
+	
+		displayedName := displayedName, ' / ', aClass traitGeneralizations first name ]
+	ifFalse: [ behaviorKey := self ensureBehaviorNameFor: aClass].
 
-				displayedName := displayedName , ' / ' , aClass traitGeneralizations first name ]
-		ifFalse: [ behaviorKey := self ensureBehaviorNameFor: aClass ].
-
-	stream
+	stream 
 		nextPutAll: 'class ';
 		nextPutAll: behaviorKey;
 		nextPutAll: ' as "';
 		nextPutAll: displayedName;
-		nextPutAll: '" {';
-		cr.
+		nextPutAll: '" {'; cr.
 
 	aClass propertiesAndRelations do: [ :each | each acceptVisitor: self ].
+	
+	mergesTraits	ifTrue: [ 
+		| defs |
+		defs := typedProperties select: [ :each | each key = aClass traitGeneralizations first ].
+		defs do: [ :assoc | 
+			stream nextPutAll: assoc value ] ].
 
-	mergesTraits ifTrue: [
-			| defs |
-			defs := typedProperties select: [ :each | each key = aClass traitGeneralizations first ].
-			defs do: [ :assoc | stream nextPutAll: assoc value ] ].
-
-	stream
-		nextPutAll: '}';
-		cr;
-		cr
+	stream nextPutAll: '}'; cr; cr.
+	
 ]
 
 { #category : 'relations' }
@@ -297,41 +294,37 @@ FmxMBPlantTextVisitor >> writeGeneralizations [
 FmxMBPlantTextVisitor >> writeRelations [
 
 	| isContainer |
+	relations do: [ :relation |
+			stream
+				nextPutAll: (self ensureBehaviorNameFor: relation relatedEntity);
+				nextPutAll: ' "';
+				nextPutAll: relation oppositeSide name;
+				space;
+				nextPutAll: relation oppositeSide shortCardinalityString;
+				space;
+				nextPutAll: '"'.
 
-	relations do: [ :relation | 
-		stream 
-			nextPutAll: (self ensureBehaviorNameFor: relation from relatedEntity);
-			nextPutAll:  ' "';
-			nextPutAll: relation to name; 
-			space; 
-			nextPutAll: relation oppositeRelation shortCardinalityString; 
-			space; 
-			nextPutAll: '"'.
-		
-		isContainer := relation from isContainer or: [ relation to isContainer ].
-		
-		stream space.
-		relation to isContainer 
-			ifTrue: [ stream nextPutAll: 'o' ].
+			isContainer := relation isContainer or: [ relation oppositeSide isContainer ].
 
-		isContainer 
-			ifTrue: [ stream nextPutAll: '-[#red]-'. ]
-			ifFalse: [ stream nextPutAll: '-[#black]-'. ].
-		
-		relation from isContainer 
-			ifTrue: [ stream nextPutAll: 'o' ].
-		stream space.
-		
-		stream 
-			nextPutAll: '"';
-			nextPutAll: relation from name;
-			space; 
-			nextPutAll: relation shortCardinalityString;
-			space;
-			nextPutAll: '" ';
-			nextPutAll: (self ensureBehaviorNameFor: relation to relatedEntity); 
-			cr]
-	
+			stream space.
+			relation oppositeSide isContainer ifTrue: [ stream nextPutAll: 'o' ].
+
+			isContainer
+				ifTrue: [ stream nextPutAll: '-[#red]-' ]
+				ifFalse: [ stream nextPutAll: '-[#black]-' ].
+
+			relation isContainer ifTrue: [ stream nextPutAll: 'o' ].
+			stream space.
+
+			stream
+				nextPutAll: '"';
+				nextPutAll: relation name;
+				space;
+				nextPutAll: relation shortCardinalityString;
+				space;
+				nextPutAll: '" ';
+				nextPutAll: (self ensureBehaviorNameFor: relation oppositeSide relatedEntity);
+				cr ]
 ]
 
 { #category : 'writing' }

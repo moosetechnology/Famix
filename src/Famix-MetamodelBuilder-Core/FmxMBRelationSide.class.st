@@ -10,12 +10,12 @@ Class {
 		'cardinality',
 		'trait',
 		'container',
-		'relation',
 		'relatedClass',
 		'derived',
 		'source',
 		'target',
-		'generationStrategy'
+		'generationStrategy',
+		'oppositeSide'
 	],
 	#category : 'Famix-MetamodelBuilder-Core-Implementation',
 	#package : 'Famix-MetamodelBuilder-Core',
@@ -65,12 +65,6 @@ FmxMBRelationSide >> derived [
 { #category : 'properties' }
 FmxMBRelationSide >> derived: anObject [
 	derived := anObject
-]
-
-{ #category : 'accessing' }
-FmxMBRelationSide >> from [
-
-	^ self relation from
 ]
 
 { #category : 'generating' }
@@ -201,18 +195,27 @@ FmxMBRelationSide >> one [
 ]
 
 { #category : 'accessing' }
+FmxMBRelationSide >> oppositeClass [
+
+	^ oppositeSide relatedEntity
+]
+
+{ #category : 'accessing' }
 FmxMBRelationSide >> oppositeName [
 	^ self oppositeSide name asSymbol
 ]
 
 { #category : 'accessing' }
 FmxMBRelationSide >> oppositeSide [
+	^ oppositeSide
+]
 
-	| aFromSide |
-	aFromSide := self relation from.
-	^ aFromSide == self
-		  ifTrue: [ self relation to ]
-		  ifFalse: [ aFromSide ]
+{ #category : 'accessing' }
+FmxMBRelationSide >> oppositeSide: anObject [
+	"We keep an opposite relation bidirectional"
+
+	oppositeSide := anObject.
+	anObject oppositeSide = self ifFalse: [ anObject oppositeSide: self ]
 ]
 
 { #category : 'accessing' }
@@ -261,19 +264,25 @@ FmxMBRelationSide >> relatedEntityName [
 ]
 
 { #category : 'accessing' }
-FmxMBRelationSide >> relation [
-	^ relation
-]
-
-{ #category : 'accessing' }
-FmxMBRelationSide >> relation: anObject [
-	relation := anObject
-]
-
-{ #category : 'accessing' }
 FmxMBRelationSide >> remoteBuilderDo: aBlock [
 
 	self relatedEntity additionalProperties at: #remoteBuilder ifPresent: aBlock
+]
+
+{ #category : 'accessing' }
+FmxMBRelationSide >> shortCardinalityString [
+
+	^ self isMany
+		  ifTrue: [ '*' ]
+		  ifFalse: [ '' ]
+]
+
+{ #category : 'accessing' }
+FmxMBRelationSide >> sides [
+
+	^ {
+		  self.
+		  self oppositeSide }
 ]
 
 { #category : 'name conversion' }
@@ -326,12 +335,6 @@ FmxMBRelationSide >> target: anObject [
 ]
 
 { #category : 'accessing' }
-FmxMBRelationSide >> to [
-
-	^ self relation to
-]
-
-{ #category : 'accessing' }
 FmxMBRelationSide >> trait [
 	^ trait
 ]
@@ -351,6 +354,7 @@ FmxMBRelationSide >> type [
 
 { #category : 'generating' }
 FmxMBRelationSide >> validate [
+	"Nothing to validate here"
 
 	
 ]
