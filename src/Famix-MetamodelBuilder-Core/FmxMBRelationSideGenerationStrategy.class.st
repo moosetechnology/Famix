@@ -1,19 +1,10 @@
 Class {
 	#name : 'FmxMBRelationSideGenerationStrategy',
 	#superclass : 'Object',
-	#instVars : [
-		'relationSide'
-	],
 	#category : 'Famix-MetamodelBuilder-Core-Implementation',
 	#package : 'Famix-MetamodelBuilder-Core',
 	#tag : 'Implementation'
 }
-
-{ #category : 'instance creation' }
-FmxMBRelationSideGenerationStrategy class >> for: aRelationSide [
-
-	^ self new relationSide: aRelationSide
-]
 
 { #category : 'generation' }
 FmxMBRelationSideGenerationStrategy >> generateGetterCoreOn: aStream for: aRelationSide [
@@ -33,11 +24,11 @@ FmxMBRelationSideGenerationStrategy >> generateGetterIn: aFmxBehavioral for: aRe
 				                cr;
 				                tab;
 				                nextPutAll: '"Relation named: #';
-				                nextPutAll: relationSide name;
+				                nextPutAll: aRelationSide name;
 				                nextPutAll: ' type: #';
-				                nextPutAll: relationSide oppositeType;
+				                nextPutAll: aRelationSide oppositeType;
 				                nextPutAll: ' opposite: #';
-				                nextPutAll: relationSide oppositeName;
+				                nextPutAll: aRelationSide oppositeName;
 				                nextPutAll: '"';
 				                cr;
 				                cr.
@@ -73,7 +64,7 @@ FmxMBRelationSideGenerationStrategy >> generateGetterIn: aFmxBehavioral for: aRe
 
 			                self generateGetterCoreOn: s for: aRelationSide ].
 
-	aFmxBehavioral addMethod: methodSource protocol: self protocol
+	aFmxBehavioral addMethod: methodSource protocol: (self protocolFor: aRelationSide)
 ]
 
 { #category : 'generation' }
@@ -98,23 +89,11 @@ FmxMBRelationSideGenerationStrategy >> generateSetterIn: aFmxBehavioral for: aRe
 				                cr.
 			                self generateSetterCoreOn: s for: aRelationSide ].
 
-	aFmxBehavioral addMethod: methodSource protocol: self protocol
+	aFmxBehavioral addMethod: methodSource protocol: (self protocolFor: aRelationSide)
 ]
 
 { #category : 'accessing' }
-FmxMBRelationSideGenerationStrategy >> protocol [ 
-	
+FmxMBRelationSideGenerationStrategy >> protocolFor: aRelation [
+
 	^ #accessing
-]
-
-{ #category : 'accessing' }
-FmxMBRelationSideGenerationStrategy >> relationSide [
-
-	^ relationSide
-]
-
-{ #category : 'accessing' }
-FmxMBRelationSideGenerationStrategy >> relationSide: anObject [
-
-	relationSide := anObject
 ]

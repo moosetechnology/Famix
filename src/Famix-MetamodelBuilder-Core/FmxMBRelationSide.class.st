@@ -70,7 +70,7 @@ FmxMBRelationSide >> derived: anObject [
 { #category : 'generating' }
 FmxMBRelationSide >> generateGetterIn: aFmxBehavioral [
 
-	^ generationStrategy generateGetterIn: aFmxBehavioral for: self
+	^ self generationStrategy generateGetterIn: aFmxBehavioral for: self
 ]
 
 { #category : 'generating' }
@@ -154,20 +154,20 @@ FmxMBRelationSide >> isTarget [
 { #category : 'converting' }
 FmxMBRelationSide >> makeNonremote [
 
-	self generationStrategy: (FmxMBNonRemoteRelationSideGenerationStrategy for: self)
+	self generationStrategy: FmxMBNonRemoteRelationSideGenerationStrategy new
 ]
 
 { #category : 'converting' }
 FmxMBRelationSide >> makeRemote [
 
-	self generationStrategy: (FmxMBRemoteRelationSideGenerationStrategy for: self).
-	self isRemote: true.
+	self generationStrategy: FmxMBRemoteRelationSideGenerationStrategy new.
+	self isRemote: true
 ]
 
 { #category : 'converting' }
 FmxMBRelationSide >> makeStandard [
 
-	self generationStrategy: (FmxMBStandardRelationSideGenerationStrategy for: self)
+	self generationStrategy: FmxMBStandardRelationSideGenerationStrategy new
 ]
 
 { #category : 'accessing' }
@@ -231,8 +231,11 @@ FmxMBRelationSide >> pluralPropertyName [
 
 { #category : 'printing' }
 FmxMBRelationSide >> producesSlot [
+	"I produce a slot if one of the side is remote. Else we will use the attribute mecanism"
 
-	^ self generationStrategy producesSlot
+	self relatedClass isRemote ifTrue: [ ^ false ].
+
+	^ self oppositeClass isRemote not
 ]
 
 { #category : 'private' }

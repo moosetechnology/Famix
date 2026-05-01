@@ -7,7 +7,7 @@ Class {
 }
 
 { #category : 'accessing' }
-FmxMBRemoteRelationSideGenerationStrategy >> protocol [
+FmxMBRemoteRelationSideGenerationStrategy >> protocolFor: aRelation [
 
-	^ '*' , self relationSide builder parentBuilderPackageName
+	^ '*' , aRelation builder parentBuilderPackageName
 ]
