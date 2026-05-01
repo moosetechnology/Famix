@@ -215,9 +215,9 @@ FamixMetamodelGenerator >> apply: aTrait on: aGeneratedClass oppositeOn: another
 	Only works if aTrait has excatly 1 opposite (slot)"
 	| oppositeTrait |
 
-	((builder getTraitNamed: aTrait) properties size = 1) ifFalse: [ self error: '#apply:on:oppositeOn: only accept traits with a unique opposite' ].
+	((builder getTraitNamed: aTrait) propertiesAndRelations size = 1) ifFalse: [ self error: '#apply:on:oppositeOn: only accept traits with a unique opposite' ].
 
-	oppositeTrait := (builder getTraitNamed: aTrait) properties anyOne relation side relatedClass name.	
+	oppositeTrait := (builder getTraitNamed: aTrait) propertiesAndRelations anyOne relation side relatedClass name.	
 	self apply: aTrait on: aGeneratedClass oppositeTrait: oppositeTrait on: anotherGeneratedClass
 ]
 

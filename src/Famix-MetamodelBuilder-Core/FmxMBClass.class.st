@@ -69,7 +69,7 @@ FmxMBClass >> generate [
 		superclass: superclassName
 		traitDefinitions: self allTraitDefinitions
 		precedingTrait: (self additionalProperties at: #precedingTrait ifAbsent: [ nil ])
-		properties: (self properties select: #producesSlot)
+		properties: (self propertiesAndRelations select: #producesSlot)
 		in: self packageName
 		tag: self tag
 		comment: self commentWithRelations.
@@ -179,7 +179,7 @@ FmxMBClass >> generateRemotes [
 
 	self class environment at: self fullName ifAbsent: [ ^ self ].
 
-	(self properties select: #isRemote) do: [ :each | each generateAccessorsIn: self ]
+	(self propertiesAndRelations select: #isRemote) do: [ :each | each generateAccessorsIn: self ]
 ]
 
 { #category : 'generating-methods' }

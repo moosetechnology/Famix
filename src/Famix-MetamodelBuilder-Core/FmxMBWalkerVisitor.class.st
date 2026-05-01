@@ -45,9 +45,7 @@ FmxMBWalkerVisitor >> visitClass: aClass [
 	"Visit all properties of aClass"
 
 	self prepareForPropertiesIn: aClass.
-	aClass properties
-		do: [ :each | each acceptVisitor: self ]
-		separatedBy: [ self separateProperties ]
+	aClass propertiesAndRelations do: [ :each | each acceptVisitor: self ] separatedBy: [ self separateProperties ]
 ]
 
 { #category : 'visiting' }
@@ -55,7 +53,5 @@ FmxMBWalkerVisitor >> visitTrait: aTrait [
 	"visit all properties of aTrait"
 
 	self prepareForPropertiesIn: aTrait.
-	aTrait properties
-		do: [ :each | each acceptVisitor: self ]
-		separatedBy: [ self separateProperties ]
+	aTrait propertiesAndRelations do: [ :each | each acceptVisitor: self ] separatedBy: [ self separateProperties ]
 ]

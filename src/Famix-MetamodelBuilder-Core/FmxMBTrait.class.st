@@ -57,7 +57,7 @@ FmxMBTrait >> generate [
 		createTraitNamed: self fullName
 		traitDefinitions: self allTraitDefinitions
 		precedingTrait: (self additionalProperties at: #precedingTrait ifAbsent: [ nil ])
-		properties: (self properties select: #producesSlot)
+		properties: (self propertiesAndRelations select: #producesSlot)
 		in: self packageName
 		tag: self tag
 		comment: self commentWithRelations.
@@ -76,7 +76,8 @@ FmxMBTrait >> generateRemotes [
 	| aTrait |
 	aTrait := self class environment at: self fullName ifAbsent: [ ^ self ].
 
-	(self properties select: [ :prop | prop isRemote and: [ (aTrait localSelectors includes: prop name) not ] ]) do: [ :each | each generateAccessorsIn: self ]
+	(self propertiesAndRelations select: [ :prop | prop isRemote and: [ (aTrait localSelectors includes: prop name) not ] ]) do: [ :each |
+		each generateAccessorsIn: self ]
 ]
 
 { #category : 'testing' }
@@ -104,5 +105,5 @@ FmxMBTrait >> propertyName [
 { #category : 'accessing' }
 FmxMBTrait >> removeRelationSide: aRelationSide [
 
-	properties remove: aRelationSide ifAbsent: [ ].
+	propertiesAndRelations remove: aRelationSide ifAbsent: [ ].
 ]

@@ -205,18 +205,18 @@ FmxMBPlantTextVisitor >> visitTrait: aTrait [
 
 	| behaviorKey |
 	withAllTraits
-		ifFalse: [ (self checkTrait: aTrait) ifFalse: [^ self]]
+		ifFalse: [ (self checkTrait: aTrait) ifFalse: [ ^ self ] ]
 		ifTrue: [ self recordGeneralizationsForTrait: aTrait ].
 
 	behaviorKey := self ensureBehaviorNameFor: aTrait.
 
-	(self onlySingleUserOf: aTrait) ifTrue: [ self writeSingleUseOf: aTrait.].
+	(self onlySingleUserOf: aTrait) ifTrue: [ self writeSingleUseOf: aTrait ].
 
 	self writeTraitBeginningOf: aTrait with: behaviorKey.
 
-	aTrait properties do: [ :each | each acceptVisitor: self ].
+	aTrait propertiesAndRelations do: [ :each | each acceptVisitor: self ].
 
-	self writeTraitEnd.
+	self writeTraitEnd
 ]
 
 { #category : 'visiting' }
@@ -245,38 +245,40 @@ FmxMBPlantTextVisitor >> withoutAllTraits [
 FmxMBPlantTextVisitor >> writeClass: aClass mergingTraits: mergesTraits [
 
 	| behaviorKey displayedName |
-
 	displayedName := aClass name.
 
 	mergesTraits
-	ifTrue: [ 
-		(self behaviorNameOrNilFor:	aClass traitGeneralizations first)
-				ifNil: [ behaviorKey := self ensureBehaviorNameFor: aClass.
-					self mergeTrait: aClass traitGeneralizations first withBehaviorNamed: behaviorKey. ]
-				ifNotNil: [ :key |
-					behaviorKey := key.
-					self mergeTrait: aClass withBehaviorNamed: behaviorKey. ].
-	
-		displayedName := displayedName, ' / ', aClass traitGeneralizations first name ]
-	ifFalse: [ behaviorKey := self ensureBehaviorNameFor: aClass].
+		ifTrue: [
+				(self behaviorNameOrNilFor: aClass traitGeneralizations first)
+					ifNil: [
+							behaviorKey := self ensureBehaviorNameFor: aClass.
+							self mergeTrait: aClass traitGeneralizations first withBehaviorNamed: behaviorKey ]
+					ifNotNil: [ :key |
+							behaviorKey := key.
+							self mergeTrait: aClass withBehaviorNamed: behaviorKey ].
 
-	stream 
+				displayedName := displayedName , ' / ' , aClass traitGeneralizations first name ]
+		ifFalse: [ behaviorKey := self ensureBehaviorNameFor: aClass ].
+
+	stream
 		nextPutAll: 'class ';
 		nextPutAll: behaviorKey;
 		nextPutAll: ' as "';
 		nextPutAll: displayedName;
-		nextPutAll: '" {'; cr.
+		nextPutAll: '" {';
+		cr.
 
-	aClass properties do: [ :each | each acceptVisitor: self ].
-	
-	mergesTraits	ifTrue: [ 
-		| defs |
-		defs := typedProperties select: [ :each | each key = aClass traitGeneralizations first ].
-		defs do: [ :assoc | 
-			stream nextPutAll: assoc value ] ].
+	aClass propertiesAndRelations do: [ :each | each acceptVisitor: self ].
 
-	stream nextPutAll: '}'; cr; cr.
-	
+	mergesTraits ifTrue: [
+			| defs |
+			defs := typedProperties select: [ :each | each key = aClass traitGeneralizations first ].
+			defs do: [ :assoc | stream nextPutAll: assoc value ] ].
+
+	stream
+		nextPutAll: '}';
+		cr;
+		cr
 ]
 
 { #category : 'relations' }
@@ -334,13 +336,14 @@ FmxMBPlantTextVisitor >> writeRelations [
 
 { #category : 'writing' }
 FmxMBPlantTextVisitor >> writeSingleUseOf: aTrait [
+
 	| savedStream |
-		savedStream := stream.
-		stream := String new writeStream.
-		aTrait properties do: [ :each | each acceptVisitor: self ].
-		typedProperties add: aTrait -> stream contents.
-		stream := savedStream.
-		^ self
+	savedStream := stream.
+	stream := String new writeStream.
+	aTrait propertiesAndRelations do: [ :each | each acceptVisitor: self ].
+	typedProperties add: aTrait -> stream contents.
+	stream := savedStream.
+	^ self
 ]
 
 { #category : 'writing' }

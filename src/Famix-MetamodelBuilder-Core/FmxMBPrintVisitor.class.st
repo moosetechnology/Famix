@@ -18,8 +18,7 @@ Class {
 { #category : 'as yet unclassified' }
 FmxMBPrintVisitor >> prepareForPropertiesIn: aClassOrTrait [
 
-	(aClassOrTrait properties isNotEmpty or: [
-		 aClassOrTrait relations isNotEmpty ]) ifFalse: [ ^ self ].
+	aClassOrTrait propertiesAndRelations ifEmpty: [ ^ self ].
 
 	Transcript
 		cr;

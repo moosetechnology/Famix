@@ -211,6 +211,12 @@ FmxMBRelationSide >> oppositeName [
 ]
 
 { #category : 'accessing' }
+FmxMBRelationSide >> oppositeSide [
+
+	^ self otherSide
+]
+
+{ #category : 'accessing' }
 FmxMBRelationSide >> oppositeType [
 	^ (self otherSide builder configuration prefix , self otherSide relatedEntityName) asSymbol
 ]

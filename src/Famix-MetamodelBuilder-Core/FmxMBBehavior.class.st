@@ -5,12 +5,12 @@ Class {
 	#classTraits : 'FmxMBRelationSideTrait classTrait',
 	#instVars : [
 		'relations',
-		'properties',
 		'tag',
 		'prefix',
 		'packageName',
 		'testingSelectors',
-		'traitGeneralizations'
+		'traitGeneralizations',
+		'propertiesAndRelations'
 	],
 	#category : 'Famix-MetamodelBuilder-Core-Implementation',
 	#package : 'Famix-MetamodelBuilder-Core',
@@ -96,14 +96,21 @@ FmxMBBehavior >> allLocalTraits [
 FmxMBBehavior >> allProperties [
 	"Return my properties and the properties from my traits."
 
-	^ (self allTransitiveTraits flatCollect: [ :trait | trait properties ]) , self properties
+	^ self allPropertiesAndRelations reject: #isRelation
+]
+
+{ #category : 'accessing' }
+FmxMBBehavior >> allPropertiesAndRelations [
+	"Return my properties and the properties from my traits."
+
+	^ (self allTransitiveTraits flatCollect: [ :trait | trait propertiesAndRelations ]) , self propertiesAndRelations
 ]
 
 { #category : 'accessing' }
 FmxMBBehavior >> allRelations [
 	"Return my relations and the relations from my traits."
 
-	^ (self allTransitiveTraits flatCollect: [ :trait | trait relations ]) , self relations
+	^ self allPropertiesAndRelations select: #isRelation
 ]
 
 { #category : 'accessing' }
@@ -153,87 +160,83 @@ FmxMBBehavior >> commentWithRelations [
 	"It is sometimes hard to find our way through all the methods and relations of a moose entity. To help, I add information in the class comments about the different kind of relations in the model."
 
 	^ String streamContents: [ :aStream |
-		  aStream nextPutAll: self comment.
-		  self comment ifNotEmpty: [
-			  aStream
-				  cr;
-				  cr ].
-		  self allRelations ifNotEmpty: [ :rels |
-			  aStream
-				  nextPutAll: '## Relations
+			  aStream nextPutAll: self comment.
+			  self comment ifNotEmpty: [
+					  aStream
+						  cr;
+						  cr ].
+			  self allRelations ifNotEmpty: [ :rels |
+					  aStream
+						  nextPutAll: '## Relations
 ======================';
-				  cr;
-				  cr.
-			  OrderedDictionary new
-				  at: 'Parents' put: [ :relation | relation side isContainer ];
-				  at: 'Children' put: [ :relation | relation oppositeSide isContainer ];
-				  at: 'Outgoing dependencies' put: [ :relation | relation oppositeSide isSource ];
-				  at: 'Incoming dependencies' put: [ :relation | relation oppositeSide isTarget ];
-				  at: 'Association source' put: [ :relation | relation side isSource ];
-				  at: 'Association target' put: [ :relation | relation side isTarget ];
-				  at: 'Other' put: [ :relation |
-					  relation side isTarget not and: [
-							  relation side isSource not and: [
-									  relation side isContainer not and: [
-											  relation oppositeSide isTarget not and: [ relation oppositeSide isSource not and: [ relation oppositeSide isContainer not ] ] ] ] ] ];
-				  keysAndValuesDo: [ :relationKind :selectionBlock |
-					  (rels select: selectionBlock) ifNotEmpty: [ :parents |
+						  cr;
+						  cr.
+					  OrderedDictionary new
+						  at: 'Parents' put: [ :relation | relation isContainer ];
+						  at: 'Children' put: [ :relation | relation oppositeSide isContainer ];
+						  at: 'Outgoing dependencies' put: [ :relation | relation oppositeSide isSource ];
+						  at: 'Incoming dependencies' put: [ :relation | relation oppositeSide isTarget ];
+						  at: 'Association source' put: [ :relation | relation isSource ];
+						  at: 'Association target' put: [ :relation | relation isTarget ];
+						  at: 'Other' put: [ :relation |
+								  relation isTarget not and: [
+											  relation isSource not and: [
+													  relation isContainer not and: [
+															  relation oppositeSide isTarget not and: [ relation oppositeSide isSource not and: [ relation oppositeSide isContainer not ] ] ] ] ] ];
+						  keysAndValuesDo: [ :relationKind :selectionBlock |
+								  (rels select: selectionBlock) ifNotEmpty: [ :parents |
+											  aStream
+												  nextPutAll: '### ';
+												  nextPutAll: relationKind;
+												  cr;
+												  nextPutAll: '| Relation | Origin | Opposite | Type | Comment |';
+												  cr;
+												  nextPutAll: '|---|';
+												  cr.
+											  (parents sorted: [ :parent | parent generationStrategy relationSide name ] ascending) do: [ :parent |
+													  | strategy |
+													  strategy := parent generationStrategy.
+
+													  aStream
+														  nextPutAll: '| `';
+														  nextPutAll: strategy relationSide name;
+														  nextPutAll: '` | `';
+														  nextPutAll: strategy relationSide type;
+														  nextPutAll: '` | `';
+														  nextPutAll: strategy relationSide oppositeName;
+														  nextPutAll: '` | `';
+														  nextPutAll: strategy relationSide oppositeType;
+														  nextPutAll: '` | ';
+														  nextPutAll: (strategy relationSide comment copyWithRegex: (String with: Character cr with: $+) matchesReplacedWith: ' ');
+														  nextPut: $|;
+														  cr ].
+
+											  aStream cr ] ].
+					  aStream cr ].
+
+			  self allProperties ifNotEmpty: [ :props |
+					  aStream
+						  nextPutAll: '## Properties
+======================';
+						  cr;
+						  cr;
+						  nextPutAll: '| Name | Type | Default value | Comment |';
+						  cr;
+						  nextPutAll: '|---|';
+						  cr.
+
+					  (props sorted: #name ascending) do: [ :property |
 							  aStream
-								  nextPutAll: '### ';
-								  nextPutAll: relationKind;
-								  cr;
-								  nextPutAll: '| Relation | Origin | Opposite | Type | Comment |';
-								  cr;
-								  nextPutAll: '|---|';
-								  cr.
-							  (parents sorted: [ :parent | parent side generationStrategy relationSide name ] ascending) do: [ :parent |
-								  | strategy |
-								  strategy := parent side generationStrategy.
-
-								  aStream
-									  nextPutAll: '| `';
-									  nextPutAll: strategy relationSide name;
-									  nextPutAll: '` | `';
-									  nextPutAll: strategy relationSide type;
-									  nextPutAll: '` | `';
-									  nextPutAll: strategy relationSide oppositeName;
-									  nextPutAll: '` | `';
-									  nextPutAll: strategy relationSide oppositeType;
-									  nextPutAll: '` | ';
-									  nextPutAll: (strategy relationSide comment
-											   copyWithRegex: (String with: Character cr with: $+)
-											   matchesReplacedWith: ' ');
-									  nextPut: $|;
-									  cr ].
-
-							  aStream cr ] ].
-			  aStream cr ].
-
-		  (self allProperties reject: [ :p | p isRelation ]) ifNotEmpty: [ :props |
-			  aStream
-				  nextPutAll: '## Properties
-======================';
-				  cr;
-				  cr;
-				  nextPutAll: '| Name | Type | Default value | Comment |';
-				  cr;
-				  nextPutAll: '|---|';
-				  cr.
-
-			  (props sorted: #name ascending) do: [ :property |
-				  aStream
-					  nextPutAll: '| `';
-					  nextPutAll: property name;
-					  nextPutAll: '` | `';
-					  nextPutAll: property propertyType;
-					  nextPutAll: '` | ';
-					  print: property defaultValue;
-					  nextPutAll: ' | ';
-					  nextPutAll: (property comment
-							   copyWithRegex: (String with: Character cr with: $+)
-							   matchesReplacedWith: ' ');
-					  nextPut: $|;
-					  cr ] ] ]
+								  nextPutAll: '| `';
+								  nextPutAll: property name;
+								  nextPutAll: '` | `';
+								  nextPutAll: property propertyType;
+								  nextPutAll: '` | ';
+								  print: property defaultValue;
+								  nextPutAll: ' | ';
+								  nextPutAll: (property comment copyWithRegex: (String with: Character cr with: $+) matchesReplacedWith: ' ');
+								  nextPut: $|;
+								  cr ] ] ]
 ]
 
 { #category : 'settings - default' }
@@ -277,7 +280,8 @@ FmxMBBehavior >> generate [
 
 { #category : 'generating' }
 FmxMBBehavior >> generateAccessors [
-	self properties do: [ :each | each generateAccessorsIn: self ]
+
+	self propertiesAndRelations do: [ :each | each generateAccessorsIn: self ]
 ]
 
 { #category : 'generating' }
@@ -342,7 +346,7 @@ FmxMBBehavior >> inheritsFromTrait: aTrait without: aCollection [
 FmxMBBehavior >> initialize [
 	super initialize.
 	relations := OrderedCollection new.
-	properties := OrderedCollection new.
+	propertiesAndRelations := OrderedCollection new.
 	prefix := ''.
 	packageName := ''.
 	testingSelectors := Set new
@@ -441,7 +445,14 @@ FmxMBBehavior >> printOn: aStream [
 
 { #category : 'accessing' }
 FmxMBBehavior >> properties [
-	^ properties
+
+	^ propertiesAndRelations reject: #isRelation
+]
+
+{ #category : 'accessing' }
+FmxMBBehavior >> propertiesAndRelations [
+
+	^ propertiesAndRelations
 ]
 
 { #category : 'generating' }
@@ -472,7 +483,7 @@ FmxMBBehavior >> property: propertyName type: aTypeName [
 		         propertyType: aTypeName asSymbol;
 		         yourself.
 
-	self properties add: aSide.
+	self propertiesAndRelations add: aSide.
 
 	^ aSide
 ]
@@ -489,7 +500,7 @@ FmxMBBehavior >> property: propertyName type: aTypeName defaultValue: aValue [
 		         defaultValue: aValue;
 		         yourself.
 
-	self properties add: aSide.
+	self propertiesAndRelations add: aSide.
 
 	^ aSide
 ]
@@ -512,7 +523,8 @@ FmxMBBehavior >> relations [
 
 { #category : 'accessing' }
 FmxMBBehavior >> sides [
-	^ self properties
+
+	^ self propertiesAndRelations
 ]
 
 { #category : 'name conversion' }

@@ -58,7 +58,7 @@ FmxMBImportingContext >> generate [
 		superclass: superclass
 		traitDefinitions: self allTraitDefinitions
 		precedingTrait: (self additionalProperties at: #precedingTrait ifAbsent: [ nil ])
-		properties: (self properties select: #producesSlot)
+		properties: (self propertiesAndRelations select: #producesSlot)
 		in: self packageName
 		tag: self tag
 		comment: self comment.
