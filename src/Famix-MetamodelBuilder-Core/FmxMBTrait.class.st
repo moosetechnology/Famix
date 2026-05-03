@@ -21,20 +21,21 @@ FmxMBTrait >> allTraitGeneralizations [
 ]
 
 { #category : 'accessing' }
+FmxMBTrait >> annotationSuperclass [
+
+	^ self defaultSuperclassName
+]
+
+{ #category : 'accessing' }
 FmxMBTrait >> classGeneralization [
 
 	^ Trait
 ]
 
 { #category : 'accessing' }
-FmxMBTrait >> classGeneralization: anObject [
-	FmxMBTraitsGeneralizationError signal
-]
-
-{ #category : 'accessing' }
 FmxMBTrait >> defaultSuperclass [
 
-	^ self classGeneralization
+	^ Trait
 ]
 
 { #category : 'accessing' }

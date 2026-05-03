@@ -45,6 +45,14 @@ FmxMBClass >> allTransitiveTraitsIncludingClassGeneralization [
 ]
 
 { #category : 'accessing' }
+FmxMBClass >> annotationSuperclass [
+
+	^ (self classGeneralization isNil or: [ self classGeneralization = self defaultSuperclass ])
+		  ifTrue: [ self defaultSuperclassName ]
+		  ifFalse: [ self classGeneralization fullName ]
+]
+
+{ #category : 'accessing' }
 FmxMBClass >> classGeneralization [
 	^ classGeneralization
 ]

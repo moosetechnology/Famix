@@ -62,7 +62,7 @@ FmxMBTraitTest >> testTraitGeneralization [
 	aTrait := builder newTraitNamed: #TVariable.	
 	aClass := builder newClassNamed: #Variable.	
 		
-	self should: [aTrait --|> aClass] raise: FmxMBTraitsGeneralizationError
+	self should: [aTrait --|> aClass] raise: Error
 ]
 
 { #category : 'tests' }

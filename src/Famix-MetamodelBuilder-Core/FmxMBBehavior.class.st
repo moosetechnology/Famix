@@ -129,20 +129,16 @@ FmxMBBehavior >> allTransitiveTraitsIncludingClassGeneralization [
 	^ self allTransitiveTraits
 ]
 
+{ #category : 'accessing' }
+FmxMBBehavior >> annotationSuperclass [
+
+	^ self subclassResponsibility
+]
+
 { #category : 'converting' }
 FmxMBBehavior >> asRelationSideNamed: aPropertyName [
 
 	^ self property: aPropertyName
-]
-
-{ #category : 'accessing' }
-FmxMBBehavior >> classGeneralization [
-	^ self subclassResponsibility
-]
-
-{ #category : 'accessing' }
-FmxMBBehavior >> classGeneralization: anObject [
-	^ self subclassResponsibility
 ]
 
 { #category : 'accessing' }
@@ -278,11 +274,6 @@ FmxMBBehavior >> generateAddToCollection [
 { #category : 'generating' }
 FmxMBBehavior >> generateAnnotation [
 
-	| aSuperclassName |
-	aSuperclassName := (self classGeneralization isNil or: [ self classGeneralization = self defaultSuperclass ])
-		                   ifTrue: [ self defaultSuperclassName ]
-		                   ifFalse: [ self classGeneralization fullName ].
-
 	self
 		addMethod: ('annotation
 
@@ -291,7 +282,7 @@ FmxMBBehavior >> generateAnnotation [
 	<generated>{4}
 	^ self' format: {
 					 self name.
-					 aSuperclassName.
+					 self annotationSuperclass.
 					 self builder safeAnnotationPackageName.
 					 self optionalPragma })
 		classSide: true
