@@ -7,8 +7,9 @@ Class {
 }
 
 { #category : 'settings - default' }
-FmxMBModel >> defaultSuperclass [
-	^ MooseModel
+FmxMBModel >> defaultSuperclassName [
+
+	^ #MooseModel
 ]
 
 { #category : 'settings - default' }

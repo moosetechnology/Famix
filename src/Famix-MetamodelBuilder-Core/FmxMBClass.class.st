@@ -47,9 +47,7 @@ FmxMBClass >> allTransitiveTraitsIncludingClassGeneralization [
 { #category : 'accessing' }
 FmxMBClass >> annotationSuperclass [
 
-	^ (self classGeneralization isNil or: [ self classGeneralization = self defaultSuperclass ])
-		  ifTrue: [ self defaultSuperclassName ]
-		  ifFalse: [ self classGeneralization fullName ]
+	^ self superclassName
 ]
 
 { #category : 'accessing' }
@@ -68,17 +66,18 @@ FmxMBClass >> classGeneralization: anObject [
 	^ anObject
 ]
 
+{ #category : 'settings - default' }
+FmxMBClass >> defaultSuperclassName [
+
+	^ #MooseEntity
+]
+
 { #category : 'generating' }
 FmxMBClass >> generate [
 
-	| superclassName |
-	superclassName := self classGeneralization
-		                  ifNil: [ self defaultSuperclassName ]
-		                  ifNotNil: #fullName.
-
 	self builder environment
 		createClassNamed: self fullName asSymbol
-		superclass: superclassName
+		superclass: self superclassName
 		traitDefinitions: self allTraitDefinitions
 		precedingTrait: (self additionalProperties at: #precedingTrait ifAbsent: [ nil ])
 		properties: (self propertiesAndRelations select: #producesSlot)
@@ -252,6 +251,14 @@ FmxMBClass >> remoteClassGeneratization [
 FmxMBClass >> subclassOf: aClass [
 	
 	self generalization: aClass
+]
+
+{ #category : 'settings - default' }
+FmxMBClass >> superclassName [
+
+	^ self classGeneralization
+		  ifNil: [ self defaultSuperclassName ]
+		  ifNotNil: #fullName
 ]
 
 { #category : 'accessing' }

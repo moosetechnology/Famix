@@ -10,9 +10,9 @@ Class {
 }
 
 { #category : 'settings - default' }
-FmxMBClassGroup >> defaultSuperclass [
+FmxMBClassGroup >> defaultSuperclassName [
 
-	^ MooseSpecializedGroup
+	^ #MooseSpecializedGroup
 ]
 
 { #category : 'settings - default' }

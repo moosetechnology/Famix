@@ -22,25 +22,7 @@ FmxMBTrait >> allTraitGeneralizations [
 
 { #category : 'accessing' }
 FmxMBTrait >> annotationSuperclass [
-
-	^ self defaultSuperclassName
-]
-
-{ #category : 'accessing' }
-FmxMBTrait >> classGeneralization [
-
-	^ Trait
-]
-
-{ #category : 'accessing' }
-FmxMBTrait >> defaultSuperclass [
-
-	^ Trait
-]
-
-{ #category : 'accessing' }
-FmxMBTrait >> defaultSuperclassName [
-	"In case of Traits we want the annotation to point Object as superclass."
+	"For trait we declare the Fame superclass as Object"
 
 	^ 'Object'
 ]

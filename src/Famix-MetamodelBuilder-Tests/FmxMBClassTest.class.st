@@ -31,6 +31,15 @@ FmxMBClassTest >> testCannotHaveTwoSuperclasses [
 	self should: [ class1 --|> class3 ] raise: Error
 ]
 
+{ #category : 'tests' }
+FmxMBClassTest >> testDefaultSuperclassName [
+
+	| entity |
+	entity := builder newClassNamed: #Entity.
+
+	self assert: entity defaultSuperclassName equals: #MooseEntity
+]
+
 { #category : 'tests - names' }
 FmxMBClassTest >> testSingularPropertyName [
 

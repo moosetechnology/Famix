@@ -69,9 +69,8 @@ FmxMBBehavior >> addRelationSide: aRelation [
 { #category : 'accessing' }
 FmxMBBehavior >> addTraitGeneralization: aTrait [
 
-	(self traitGeneralizations includes: aTrait)
-		ifFalse: [ self traitGeneralizations add: aTrait ].
-		
+	(self traitGeneralizations includes: aTrait) ifFalse: [ self traitGeneralizations add: aTrait ].
+
 	^ aTrait
 ]
 
@@ -206,17 +205,6 @@ FmxMBBehavior >> commentWithRelations [
 								  nextPutAll: (property comment copyWithRegex: (String with: Character cr with: $+) matchesReplacedWith: ' ');
 								  nextPut: $|;
 								  cr ] ] ]
-]
-
-{ #category : 'settings - default' }
-FmxMBBehavior >> defaultSuperclass [
-
-	^ MooseEntity
-]
-
-{ #category : 'generating' }
-FmxMBBehavior >> defaultSuperclassName [
-	^ self defaultSuperclass name
 ]
 
 { #category : 'settings - default' }
@@ -629,25 +617,20 @@ FmxMBBehavior >> traitGeneralizations [
 	^ traitGeneralizations ifNil: [ traitGeneralizations := OrderedCollection new ]
 ]
 
-{ #category : 'accessing' }
-FmxMBBehavior >> uses: aTrait [
-
-	^ self generalization: aTrait
-]
-
 { #category : 'testing selectors' }
 FmxMBBehavior >> withGroup [
-	^ self builder groupOf: self
+
+	^ (self builder newClassGroupNamed: self name , 'Group')
+		  innerClass: self;
+		  yourself
 ]
 
 { #category : 'generalization' }
 FmxMBBehavior >> withPrecedenceOf: aTrait [
-	self additionalProperties
-		at: #precedingTrait
-		put:
-			(aTrait isSymbol
-				ifTrue: [ (self builder getTraitNamed: aTrait) fullName ]
-				ifFalse: [ aTrait fullName ])
+
+	self additionalProperties at: #precedingTrait put: (aTrait isSymbol
+			 ifTrue: [ (self builder getTraitNamed: aTrait) fullName ]
+			 ifFalse: [ aTrait fullName ])
 ]
 
 { #category : 'testing selectors' }

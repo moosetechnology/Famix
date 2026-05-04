@@ -325,16 +325,6 @@ In order to fix the issue you should use #remoteTrait:withPrefix: in your genera
 	^ self traitNamed: aSymbol
 ]
 
-{ #category : 'generating' }
-FamixMetamodelBuilder >> groupOf: aClass [
-
-	| group |
-	group := (self newClassGroupNamed: aClass name , 'Group')
-		         innerClass: aClass;
-		         yourself.
-	^ group
-]
-
 { #category : 'accessing' }
 FamixMetamodelBuilder >> importingContextName [
 
