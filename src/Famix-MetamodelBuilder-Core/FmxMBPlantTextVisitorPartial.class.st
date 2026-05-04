@@ -33,7 +33,7 @@ FmxMBPlantTextVisitorPartial >> isWantedClass: aClass [
 { #category : 'testing' }
 FmxMBPlantTextVisitorPartial >> isWantedRelation: aRelationSide [
 
-	^ aRelationSide sides allSatisfy: [ :side | side relatedClass isNotNil and: [ self isWantedClass: side relatedClass ] ]
+	^ aRelationSide relations allSatisfy: [ :side | side relatedClass isNotNil and: [ self isWantedClass: side relatedClass ] ]
 ]
 
 { #category : 'visiting' }

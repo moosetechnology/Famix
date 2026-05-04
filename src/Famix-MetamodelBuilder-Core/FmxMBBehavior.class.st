@@ -59,13 +59,11 @@ FmxMBBehavior >> addMethod: code protocol: protocol [
 ]
 
 { #category : 'accessing' }
-FmxMBBehavior >> addRelationSide: aRelationSide [
+FmxMBBehavior >> addRelationSide: aRelation [
 
-	"skip duplicities"
-	(self sides anySatisfy: [ :each | each  name = aRelationSide name ])
-		ifTrue: [ ^ self ].
+	(self relations anySatisfy: [ :relation | relation name = aRelation name ]) ifTrue: [ ^ self ].
 
-	self sides add: aRelationSide
+	self propertiesAndRelations add: aRelation
 ]
 
 { #category : 'accessing' }
@@ -503,12 +501,6 @@ FmxMBBehavior >> relationSectionsToCommentMap [
 FmxMBBehavior >> relations [
 
 	^ self propertiesAndRelations select: #isRelation
-]
-
-{ #category : 'accessing' }
-FmxMBBehavior >> sides [
-
-	^ self propertiesAndRelations
 ]
 
 { #category : 'name conversion' }

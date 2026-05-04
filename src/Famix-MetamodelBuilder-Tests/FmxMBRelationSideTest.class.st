@@ -164,44 +164,44 @@ FmxMBRelationSideTest >> testPropertyReservedName [
 FmxMBRelationSideTest >> testPropertyType [
 	"test if after changing of related trait of a relation side all will be consistent"
 
-	| tClass tComment tAccess side |
+	| tClass tComment tAccess relation |
 	tClass := builder newTraitNamed: #TClass.
 	tComment := builder newTraitNamed: #TComment.
 	tAccess := builder newTraitNamed: #TAccess.
 
-	(side := tClass property: #property1) - (tComment property: #property2).
+	(relation := tClass property: #property1) - (tComment property: #property2).
 
-	self assert: side relatedEntity equals: tClass.
-	self assertCollection: tClass sides asArray equals: {side}.
-	self assertEmpty: tAccess sides.
+	self assert: relation relatedEntity equals: tClass.
+	self assertCollection: tClass relations asArray equals: {relation}.
+	self assertEmpty: tAccess relations.
 
-	side trait: tAccess.
+	relation trait: tAccess.
 
-	self assert: side relatedEntity equals: tAccess.
-	self assertEmpty: tClass sides.
-	self assertCollection: tAccess sides asArray equals: {side}
+	self assert: relation relatedEntity equals: tAccess.
+	self assertEmpty: tClass relations.
+	self assertCollection: tAccess relations asArray equals: {relation}
 ]
 
 { #category : 'tests' }
 FmxMBRelationSideTest >> testReconnection [
 	"test if after changing of related trait of a relation side all will be consistent"
 
-	| tClass tComment tAccess side |
+	| tClass tComment tAccess relation |
 	tClass := builder newTraitNamed: #TClass.
 	tComment := builder newTraitNamed: #TComment.
 	tAccess := builder newTraitNamed: #TAccess.
 
-	(side := tClass property: #property1) - (tComment property: #property2).
+	(relation := tClass property: #property1) - (tComment property: #property2).
 
-	self assert: side relatedEntity equals: tClass.
-	self assertCollection: tClass sides asArray equals: {side}.
-	self assertEmpty: tAccess sides.
+	self assert: relation relatedEntity equals: tClass.
+	self assertCollection: tClass relations asArray equals: { relation }.
+	self assertEmpty: tAccess relations.
 
-	side trait: tAccess.
+	relation trait: tAccess.
 
-	self assert: side trait equals: tAccess.
-	self assertEmpty: tClass sides.
-	self assertCollection: tAccess sides asArray equals: {side}
+	self assert: relation trait equals: tAccess.
+	self assertEmpty: tClass relations.
+	self assertCollection: tAccess relations asArray equals: { relation }
 ]
 
 { #category : 'tests' }
