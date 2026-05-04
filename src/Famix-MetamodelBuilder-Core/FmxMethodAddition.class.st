@@ -80,10 +80,7 @@ FmxMethodAddition >> protocol: anObject [
 FmxMethodAddition >> selector [
 	"Cached"
 
-	^ selector ifNil: [
-			  selector := (self class compiler
-				               permitUndeclared: true;
-				               compile: sourceCode) selector ]
+	^ selector ifNil: [ selector := (OCParser parseMethod: sourceCode) selector ]
 ]
 
 { #category : 'accessing' }
