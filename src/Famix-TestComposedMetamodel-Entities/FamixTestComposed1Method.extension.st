@@ -15,6 +15,8 @@ FamixTestComposed1Method >> standardEntity [
 FamixTestComposed1Method >> standardEntity: anObject [
 
 	<generated>
+	<package: #'Famix-TestComposedMetamodel-Entities'>
+
 	(self attributeAt: #standardEntity ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self standardEntity.

@@ -14,6 +14,8 @@ FamixTestComposed2CustomEntity2 >> c12 [
 FamixTestComposed2CustomEntity2 >> c12: anObject [
 
 	<generated>
+	<package: #'Famix-TestComposedMetamodel-Entities'>
+
 	self attributeAt: #c12 put: (FMMultivalueLink on: self update: #c22s from: self c12 to: anObject).
 ]
 
@@ -31,5 +33,7 @@ FamixTestComposed2CustomEntity2 >> c2 [
 FamixTestComposed2CustomEntity2 >> c2: anObject [
 
 	<generated>
+	<package: #'Famix-TestComposedMetamodel-Entities'>
+
 	self attributeAt: #c2 put: (FMMultivalueLink on: self update: #c22s from: self c2 to: anObject).
 ]

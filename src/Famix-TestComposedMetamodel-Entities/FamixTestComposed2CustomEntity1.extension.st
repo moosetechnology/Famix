@@ -26,6 +26,8 @@ FamixTestComposed2CustomEntity1 >> c11 [
 FamixTestComposed2CustomEntity1 >> c11: anObject [
 
 	<generated>
+	<package: #'Famix-TestComposedMetamodel-Entities'>
+
 	(self attributeAt: #c11 ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self c11.
@@ -40,6 +42,8 @@ FamixTestComposed2CustomEntity1 >> c11: anObject [
 FamixTestComposed2CustomEntity1 >> c1: anObject [
 
 	<generated>
+	<package: #'Famix-TestComposedMetamodel-Entities'>
+
 	(self attributeAt: #c1 ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self c1.

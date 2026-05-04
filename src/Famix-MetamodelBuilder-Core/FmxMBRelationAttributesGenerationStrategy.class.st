@@ -52,58 +52,53 @@ FmxMBRelationAttributesGenerationStrategy >> generateGetterCoreOn: aStream for: 
 { #category : 'generation' }
 FmxMBRelationAttributesGenerationStrategy >> generateSetterCoreOn: aStream for: aRelationSide [
 
-	(aRelationSide isOne and: [ aRelationSide oppositeSide isOne ]) ifTrue: [ 
-		aStream
-			tab;
-			nextPutAll:
-				('(self attributeAt: #{1} ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].' 
-					 format: { aRelationSide name });
-			cr;
-			tab;
-			nextPutAll: 'anObject ifNil: [ | otherSide |';
-			cr;
-			tab;
-			tab;
-			nextPutAll:
-				('otherSide :=  self {1}.' format: { aRelationSide name });
-			cr;
-			tab;
-			tab;
-			nextPutAll: ('self attributeAt: #{1} put: anObject.' format:
-						 { aRelationSide name });
-			cr;
-			tab;
-			tab;
-			nextPutAll:
-				('otherSide {1}: nil ]' format: { aRelationSide oppositeSide name });
-			cr;
-			tab;
-			nextPutAll:
-				('ifNotNil: [ ' format: { aRelationSide oppositeSide name });
-			cr;
-			tab;
-			tab;
-			nextPutAll: ('self attributeAt: #{1} put: anObject.' format:
-						 { aRelationSide name });
-			cr;
-			tab;
-			tab;
-			nextPutAll:
-				('anObject {1}: self ]' format: { aRelationSide oppositeSide name }) ].
-
-	aRelationSide isMany ifTrue: [ 
-		aStream
-			tab;
-			nextPutAll:
-				('self {1} value: anObject' format: { aRelationSide name }) ].
-
-	(aRelationSide oppositeSide isMany and: [ aRelationSide isOne ]) 
-		ifTrue: [ 
+	aRelationSide remoteBuilderDo: [ :aRemoteBuilder |
 			aStream
 				tab;
-				nextPutAll:
-					('self attributeAt: #{1} put: (FMMultivalueLink on: self update: #{2} from: self {1} to: anObject).' 
-						 format: { 
+				nextPutAll: ('<package: #''{1}''>' format: { aRemoteBuilder generator packageName });
+				cr;
+				cr ].
+
+	(aRelationSide isOne and: [ aRelationSide oppositeSide isOne ]) ifTrue: [
+			aStream
+				tab;
+				nextPutAll: ('(self attributeAt: #{1} ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].' format: { aRelationSide name });
+				cr;
+				tab;
+				nextPutAll: 'anObject ifNil: [ | otherSide |';
+				cr;
+				tab;
+				tab;
+				nextPutAll: ('otherSide :=  self {1}.' format: { aRelationSide name });
+				cr;
+				tab;
+				tab;
+				nextPutAll: ('self attributeAt: #{1} put: anObject.' format: { aRelationSide name });
+				cr;
+				tab;
+				tab;
+				nextPutAll: ('otherSide {1}: nil ]' format: { aRelationSide oppositeSide name });
+				cr;
+				tab;
+				nextPutAll: ('ifNotNil: [ ' format: { aRelationSide oppositeSide name });
+				cr;
+				tab;
+				tab;
+				nextPutAll: ('self attributeAt: #{1} put: anObject.' format: { aRelationSide name });
+				cr;
+				tab;
+				tab;
+				nextPutAll: ('anObject {1}: self ]' format: { aRelationSide oppositeSide name }) ].
+
+	aRelationSide isMany ifTrue: [
+			aStream
+				tab;
+				nextPutAll: ('self {1} value: anObject' format: { aRelationSide name }) ].
+
+	(aRelationSide oppositeSide isMany and: [ aRelationSide isOne ]) ifTrue: [
+			aStream
+				tab;
+				nextPutAll: ('self attributeAt: #{1} put: (FMMultivalueLink on: self update: #{2} from: self {1} to: anObject).' format: {
 								 aRelationSide name.
 								 aRelationSide oppositeSide name }) ]
 ]

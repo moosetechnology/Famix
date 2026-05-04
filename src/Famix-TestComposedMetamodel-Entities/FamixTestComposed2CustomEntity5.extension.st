@@ -16,5 +16,7 @@ FamixTestComposed2CustomEntity5 >> associations [
 FamixTestComposed2CustomEntity5 >> associations: anObject [
 
 	<generated>
+	<package: #'Famix-TestComposedMetamodel-Entities'>
+
 	self associations value: anObject
 ]

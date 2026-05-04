@@ -16,6 +16,8 @@ FamixTestComposed2CustomEntity3 >> c13s [
 FamixTestComposed2CustomEntity3 >> c13s: anObject [
 
 	<generated>
+	<package: #'Famix-TestComposedMetamodel-Entities'>
+
 	self c13s value: anObject
 ]
 
@@ -35,5 +37,7 @@ FamixTestComposed2CustomEntity3 >> c3s [
 FamixTestComposed2CustomEntity3 >> c3s: anObject [
 
 	<generated>
+	<package: #'Famix-TestComposedMetamodel-Entities'>
+
 	self c3s value: anObject
 ]

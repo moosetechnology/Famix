@@ -16,6 +16,8 @@ FamixTestComposed1CustomEntity4 >> c24s [
 FamixTestComposed1CustomEntity4 >> c24s: anObject [
 
 	<generated>
+	<package: #'Famix-TestComposedMetamodel-Entities'>
+
 	self c24s value: anObject
 ]
 
@@ -34,5 +36,7 @@ FamixTestComposed1CustomEntity4 >> customEntities4 [
 FamixTestComposed1CustomEntity4 >> customEntities4: anObject [
 
 	<generated>
+	<package: #'Famix-TestComposedMetamodel-Entities'>
+
 	self customEntities4 value: anObject
 ]
