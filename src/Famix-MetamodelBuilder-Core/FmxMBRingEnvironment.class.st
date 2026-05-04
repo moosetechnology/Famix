@@ -191,10 +191,13 @@ FmxMBRingEnvironment >> recordMethodRemovalsOf: realClass [
 		                               collect: #method
 		                               thenReject: [ :m | m isFromTrait ].
 
+	"In case we have an extension, we remove it if the package is the right one"
+	self flag: #todo. "Demeter. Clean package name management."
+	generatedMethodsOfRealClass := generatedMethodsOfRealClass reject: [ :method | (method hasPragmaNamed: #package:) and: [ ((method pragmaAt: #package:) argumentAt: 1) ~= self builder generator packageName ] ].
+
 	generatedMethodNamesOfRealClass := generatedMethodsOfRealClass collect: #selector.
 
-	selectorsToGenerate := ((self changesOfType: FmxMethodAddition) select: [ :change |
-		                        change className = realClass instanceSide name and: [ change isClassSide = realClass isClassSide ] ]) collect: #selector.
+	selectorsToGenerate := ((self changesOfType: FmxMethodAddition) select: [ :change | change className = realClass instanceSide name and: [ change isClassSide = realClass isClassSide ] ]) collect: #selector.
 
 	"First we removed the generated methods should not be here anymore"
 	(generatedMethodNamesOfRealClass difference: selectorsToGenerate) ifNotEmpty: [ :selectorsOfRemovedGeneratedMethod |
