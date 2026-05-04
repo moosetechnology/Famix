@@ -202,22 +202,6 @@ FmxMBRingEnvironment >> recordMethodRemovalsOf: realClass [
 ]
 
 { #category : 'accessing' }
-FmxMBRingEnvironment >> recordRemovalOfGeneratedEntitiesNotPresentIn: resolvedClasses [
-	"Since the last generation it is possible some behaviorals were removed from the generator. In that case we should remove them. We will remove all classes and traits of Famix that are not part of the current generator."
-
-	(self changesOfType: FmxPackageAddition)
-		collect: #systemPackage
-		thenDo: [ :package |
-				package ifNotNil: [
-						package definedClasses
-							select: #isMetamodelEntity
-							thenDo: [ :class |
-									resolvedClasses
-										detect: [ :rgClass | rgClass name = class name ]
-										ifNone: [ changesToApply add: (FmxClassRemoval class: class) ] ] ] ]
-]
-
-{ #category : 'accessing' }
 FmxMBRingEnvironment >> recordRemovalOfGeneratedPackagesAndClasses [
 	"Since the last generation it is possible some behaviorals were removed from the generator. In that case we should remove them. We will remove all classes and traits of Famix that are not part of the current generator."
 
