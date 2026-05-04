@@ -198,7 +198,7 @@ FmxMBRingEnvironment >> recordMethodRemovalsOf: realClass [
 
 	"First we removed the generated methods should not be here anymore"
 	(generatedMethodNamesOfRealClass difference: selectorsToGenerate) ifNotEmpty: [ :selectorsOfRemovedGeneratedMethod |
-		changesToApply add: (FmxMethodRemovals className: realClass name isClassSide: realClass isClassSide selectors: selectorsOfRemovedGeneratedMethod) ]
+		changesToApply add: (FmxMethodRemovals className: realClass instanceSide name isClassSide: realClass isClassSide selectors: selectorsOfRemovedGeneratedMethod) ]
 ]
 
 { #category : 'accessing' }

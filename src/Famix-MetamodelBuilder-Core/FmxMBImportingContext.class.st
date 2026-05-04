@@ -13,7 +13,7 @@ newBuilder
 "
 Class {
 	#name : 'FmxMBImportingContext',
-	#superclass : 'FmxMBBehavior',
+	#superclass : 'FmxMBClass',
 	#category : 'Famix-MetamodelBuilder-Core-Implementation',
 	#package : 'Famix-MetamodelBuilder-Core',
 	#tag : 'Implementation'
@@ -26,46 +26,33 @@ FmxMBImportingContext >> acceptVisitor: aVisitor [
 ]
 
 { #category : 'accessing' }
-FmxMBImportingContext >> classGeneralization [
-
-	^ FamixImportingContext
-]
-
-{ #category : 'accessing' }
 FmxMBImportingContext >> comment [
 
 	^ 'This class is used to choose the entities to be imported when loading a model from file.
-It is used by `MiImportingContextPresenter` in a `MiImportModelFromFileDialog` to import a {1}Model.' 
-		  format: { self builder configuration prefix }
+It is used by `MiImportingContextPresenter` in a `MiImportModelFromFileDialog` to import a {1}Model.' format: { self builder configuration prefix }
 ]
 
-{ #category : 'settings - default' }
-FmxMBImportingContext >> defaultSuperclass [
+{ #category : 'accessing' }
+FmxMBImportingContext >> defaultSuperclassName [
 
-	^ self classGeneralization
+	^ #FamixImportingContext
 ]
 
 { #category : 'generating' }
 FmxMBImportingContext >> generate [
 
-	| superclass |
-	superclass := self classGeneralization
-		              ifNil: [ self defaultSuperclassName ]
-		              ifNotNil: #name.
-
-	self builder environment
-		createClassNamed: self fullName asSymbol
-		superclass: superclass
-		traitDefinitions: self allTraitDefinitions
-		precedingTrait: (self additionalProperties at: #precedingTrait ifAbsent: [ nil ])
-		properties: (self propertiesAndRelations select: #producesSlot)
-		in: self packageName
-		tag: self tag
-		comment: self comment.
+	super generate.
 
 	self generateImportingContextMetamodel.
 	self generateShouldImport.
 	self generateImport
+]
+
+{ #category : 'generating' }
+FmxMBImportingContext >> generateAnnotation [
+	"We do not want the importing context to be part of the MM so we skip this method generation"
+
+	
 ]
 
 { #category : 'generating-methods' }
@@ -126,8 +113,15 @@ FmxMBImportingContext >> generateShouldImport [
 						protocol: #testing ] ]
 ]
 
+{ #category : 'testing' }
+FmxMBImportingContext >> isRoot [
+	"I am not a MM class root because I am not part of the MM"
+
+	^ false
+]
+
 { #category : 'accessing' }
 FmxMBImportingContext >> name [
 
-	^ 'ImportingContext'
+	^ super name ifNil:[ 'ImportingContext']
 ]
