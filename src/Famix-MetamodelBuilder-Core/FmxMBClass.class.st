@@ -59,7 +59,11 @@ FmxMBClass >> classGeneralization [
 
 { #category : 'accessing' }
 FmxMBClass >> classGeneralization: anObject [
-	
+
+	classGeneralization ifNotNil: [
+			self error:
+				'Cannot have two superclasses for an entity. ' , self name , ' declared ' , classGeneralization name , ' as superclass and try to set also ' , anObject name
+				, ' as second superclass.' ].
 	classGeneralization := anObject.
 	^ anObject
 ]

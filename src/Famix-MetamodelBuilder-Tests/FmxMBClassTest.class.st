@@ -19,6 +19,19 @@ FmxMBClassTest >> newEntityNamed: aString [
 ]
 
 { #category : 'tests - names' }
+FmxMBClassTest >> testCannotHaveTwoSuperclasses [
+
+	| class1 class2 class3 |
+	class1 := builder newClassNamed: #Class1.
+	class2 := builder newClassNamed: #Class2.
+	class3 := builder newClassNamed: #Class3.
+
+
+	class1 --|> class2.
+	self should: [ class1 --|> class3 ] raise: Error
+]
+
+{ #category : 'tests - names' }
 FmxMBClassTest >> testSingularPropertyName [
 
 	"test if singularPropertyName is correctly created from a class name"
