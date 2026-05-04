@@ -47,7 +47,7 @@ FmxMethodAddition >> isRequired [
 		  ifNotNil: [ :class |
 				  class
 					  compiledMethodAt: self selector
-					  ifPresent: [ :method | (method hasPragmaNamed: #generated) and: (method sourceCode ~= sourceCode or: [ (method protocolName = protocol) not ]) ]
+					  ifPresent: [ :method | (method hasPragmaNamed: #generated) and: [ (method protocolName = protocol) not or: [ method sourceCode ~= sourceCode ] ] ]
 					  ifAbsent: [ true ] ]
 ]
 
@@ -78,9 +78,9 @@ FmxMethodAddition >> protocol: anObject [
 
 { #category : 'testing' }
 FmxMethodAddition >> selector [
-	"Cached"
+	"Cached - parsing only the signature"
 
-	^ selector ifNil: [ selector := (OCParser parseMethod: sourceCode) selector ]
+	^ selector ifNil: [ selector := (OCParser parseMethod: sourceCode lines first) selector ]
 ]
 
 { #category : 'accessing' }

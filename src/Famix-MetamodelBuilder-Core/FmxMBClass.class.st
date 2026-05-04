@@ -76,7 +76,7 @@ FmxMBClass >> defaultSuperclassName [
 FmxMBClass >> generate [
 
 	self builder environment
-		createClassNamed: self fullName asSymbol
+		createClassNamed: self fullName
 		superclass: self superclassName
 		traitDefinitions: self allTraitDefinitions
 		precedingTrait: (self additionalProperties at: #precedingTrait ifAbsent: [ nil ])

@@ -88,7 +88,7 @@ FamixMetamodelGenerator class >> generateAllMetamodels [
 { #category : 'generation' }
 FamixMetamodelGenerator class >> generateAllMetamodelsSuchAs: aBlock [
 
-	(self metamodelsToGenerate select: aBlock) do: [ :mm | mm generate ] displayingProgress: [ :mm | 'Regenerate ' , mm name ]
+	(self metamodelsToGenerate select: aBlock) do: [ :mm | mm generate ] displayingProgress: [ :mm | 'Regenerate ' , mm name ] every: 200
 ]
 
 { #category : 'generation' }
@@ -351,18 +351,14 @@ FamixMetamodelGenerator >> initialize [
 	builder := self newBuilder.
 	self adoptBuilder: builder.
 
-	subBuildersMapByPrefix := Dictionary newFrom:
-		                          (self class submetamodels collect: [ :each |
-			                           | subbuilder |
-			                           subbuilder := each
-				                                         builderWithDefinitions.
-			                           subbuilder parentBuilder: self builder.
-			                           builder environment: builder environment.
-			                           each prefix -> subbuilder ]).
+	subBuildersMapByPrefix := Dictionary newFrom: (self class submetamodels collect: [ :each |
+				                           | subbuilder |
+				                           subbuilder := each builderWithDefinitions.
+				                           subbuilder parentBuilder: self builder.
+				                           builder environment: builder environment.
+				                           each prefix -> subbuilder ]).
 
-	metamodelToolGenerators := self class metamodelToolGenerators
-		                           collect: [ :generatorClass |
-		                           generatorClass forGenerator: self ]
+	metamodelToolGenerators := self class metamodelToolGenerators collect: [ :generatorClass | generatorClass forGenerator: self ]
 ]
 
 { #category : 'accessing' }
