@@ -26,15 +26,14 @@ FmxMBClass >> allLocalTraits [
 { #category : 'accessing' }
 FmxMBClass >> allSuperclasses [
 
-	| result c g |
+	| result class g |
 	result := OrderedCollection new.
-	c := self.
-	self flag: #todo. "This #isKindOf: is just here for one object we use as superclass that is not a FmxMBClass in MooseModelGenerator... We sould kill that and simplify the code."
+	class := self.
 	[
-		g := c superclass.
-		g isNotNil and: [ g isKindOf: FmxMBClass ] ] whileTrue: [
+		g := class superclass.
+		g isNotNil ] whileTrue: [
 			result add: g.
-			c := g ].
+			class := g ].
 	^ result
 ]
 
@@ -43,7 +42,7 @@ FmxMBClass >> allTransitiveTraitsIncludingSuperclasses [
 
 	| result |
 	result := super allTransitiveTraitsIncludingSuperclasses.
-	self superclass ifNotNil: [ :class | class ~= Object ifTrue: [ result addAll: class allTransitiveTraitsIncludingSuperclasses ] ].
+	self superclass ifNotNil: [ :class | result addAll: class allTransitiveTraitsIncludingSuperclasses ].
 	^ result
 ]
 
