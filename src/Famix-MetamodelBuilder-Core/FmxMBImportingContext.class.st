@@ -44,7 +44,6 @@ FmxMBImportingContext >> generate [
 	super generate.
 
 	self generateImportingContextMetamodel.
-	self generateShouldImport.
 	self generateImport
 ]
 
@@ -58,12 +57,18 @@ FmxMBImportingContext >> generateAnnotation [
 { #category : 'generating-methods' }
 FmxMBImportingContext >> generateImport [
 
-	self builder classes do: [ :each | "No need to generate methods for model and groups."
-			(each isModelClass or: [ each isMetamodelClassGroup or: [ each isAbstractClass ] ]) ifFalse: [ "Associations and other entities are managed differently by the importing context"
-					each allTransitiveTraits
-						detect: [ :trait | trait name = #TAssociation ]
-						ifFound: [ self generateImportAssociation: each ]
-						ifNone: [ self generateImportConcreteEntity: each ] ] ]
+	self builder concreteClasses do: [ :each |
+			each allTransitiveTraits
+				detect: [ :trait | trait name = #TAssociation ]
+				ifFound: [ self generateImportAssociation: each ]
+				ifNone: [ self generateImportConcreteEntity: each ].
+
+			self
+				addMethod: ('shouldImport{1}
+
+	<generated>
+	^ self shouldImport: #{1}' format: { each name })
+				protocol: #testing ]
 ]
 
 { #category : 'generating-methods' }
@@ -98,18 +103,6 @@ FmxMBImportingContext >> generateImportingContextMetamodel [
 	^ {1}Model metamodel' format: { self prefix })
 		classSide: true
 		protocol: #accessing
-]
-
-{ #category : 'generating-methods' }
-FmxMBImportingContext >> generateShouldImport [
-
-	self builder concreteClasses do: [ :each |
-			self
-				addMethod: ('shouldImport{1}
-
-	<generated>
-	^ self shouldImport: #{1}' format: { each name })
-				protocol: #testing ]
 ]
 
 { #category : 'testing' }
