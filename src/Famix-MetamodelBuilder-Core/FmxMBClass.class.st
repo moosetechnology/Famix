@@ -55,6 +55,9 @@ FmxMBClass >> annotationSuperclass [
 
 { #category : 'settings - default' }
 FmxMBClass >> defaultSuperclassName [
+	"We have a special case with MooseObject that should inherit from Object."
+
+	self isMooseObject ifTrue: [ ^ #Object ].
 
 	^ #MooseEntity
 ]
@@ -214,9 +217,18 @@ FmxMBClass >> isMetamodelClass [
 ]
 
 { #category : 'testing' }
+FmxMBClass >> isMooseObject [
+
+	^ self name = 'Object' and: [ self prefix = 'Moose' ]
+]
+
+{ #category : 'testing' }
 FmxMBClass >> isRoot [
 
-	^ self superclass isNil
+	self superclass ifNotNil: [ ^ false ].
+	
+	"We have a special case with MooseObject because we do not want to consider it as a root but it inherits from Object."
+	^ self isMooseObject not
 ]
 
 { #category : 'generating' }
@@ -243,6 +255,7 @@ FmxMBClass >> superclass [
 
 { #category : 'accessing' }
 FmxMBClass >> superclass: aFmxClass [
+	"In the past we could have real objects here but this is not the case anymore"
 
 	superclass ifNotNil: [
 			self error:
