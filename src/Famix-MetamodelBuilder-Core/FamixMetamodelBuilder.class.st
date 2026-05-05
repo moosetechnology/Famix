@@ -438,9 +438,9 @@ FamixMetamodelBuilder >> newTrait [
 { #category : 'initialization' }
 FamixMetamodelBuilder >> newTraitNamed: aTraitName [
 
-	(self traits select: [ :each | 
-		 each fullName = (self configuration prefix , aTraitName) ]) 
-		ifNotEmpty: [ FmxMBEntityAlreadyExists signal ].
+	| fullName |
+	fullName := self configuration prefix , aTraitName.
+	(self traits select: [ :each | each fullName = fullName ]) ifNotEmpty: [ FmxMBEntityAlreadyExists signal ].
 
 	^ self unsafeNewTraitNamed: aTraitName
 ]
