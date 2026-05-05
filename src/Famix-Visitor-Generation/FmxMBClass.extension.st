@@ -5,7 +5,7 @@ FmxMBClass >> addTraitsFromGeneralizationsIn: aCollection [
 
 	super addTraitsFromGeneralizationsIn: aCollection.
 
-	self classGeneralization ifNotNil: [ :superclass |
+	self superclass ifNotNil: [ :superclass |
 		superclass addTraitsFromGeneralizationsIn: aCollection ].
 
 	^ aCollection
@@ -18,7 +18,7 @@ FmxMBClass >> behaviorsToVisit [
 	behaviorsToVisit := super behaviorsToVisit.
 
 	"Visit superclass if it is not #FamixXYZEntity"
-	self classGeneralization ifNotNil: [ :superclass |
+	self superclass ifNotNil: [ :superclass |
 		superclass name = #Entity ifFalse: [
 			behaviorsToVisit add: superclass ] ].
 
@@ -31,7 +31,7 @@ FmxMBClass >> traitsFromGeneralizations [
 	| traitsFromGeneralizations |
 	traitsFromGeneralizations := super traitsFromGeneralizations.
 
-	self classGeneralization ifNotNil: [ :superclass |
+	self superclass ifNotNil: [ :superclass |
 		superclass addTraitsFromGeneralizationsIn: traitsFromGeneralizations ].
 
 	^ traitsFromGeneralizations

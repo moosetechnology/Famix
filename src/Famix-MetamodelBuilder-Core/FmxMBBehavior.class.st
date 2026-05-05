@@ -121,7 +121,7 @@ FmxMBBehavior >> allTransitiveTraits [
 ]
 
 { #category : 'accessing' }
-FmxMBBehavior >> allTransitiveTraitsIncludingClassGeneralization [
+FmxMBBehavior >> allTransitiveTraitsIncludingSuperclasses [
 
 	^ self allTransitiveTraits
 ]
@@ -227,7 +227,7 @@ FmxMBBehavior >> generalization: anObject [
 		  ifFalse: [
 				  anObject isMetamodelTrait
 					  ifTrue: [ self addTraitGeneralization: anObject ]
-					  ifFalse: [ self classGeneralization: anObject ] ]
+					  ifFalse: [ self superclass: anObject ] ]
 ]
 
 { #category : 'generating' }

@@ -266,7 +266,7 @@ FamixMetamodelBuilder >> generateRemotes [
 FamixMetamodelBuilder >> generateTestingMethodsOfRemoteEntities [
 
 	| entitiesWithRemoteSuperclasses |
-	entitiesWithRemoteSuperclasses := self classes groupedBy: [ :class | class remoteClassGeneratization ].
+	entitiesWithRemoteSuperclasses := self classes groupedBy: [ :class | class remoteSuperclass ].
 
 
 	entitiesWithRemoteSuperclasses keysAndValuesDo: [ :remoteClass :subclasses |
@@ -557,7 +557,7 @@ FamixMetamodelBuilder >> sortedClasses [
 	^ self classes sorted: [ :class |
 		  class isModelClass
 			  ifTrue: [ -1 ]
-			  ifFalse: [ class allClassGeneralizations size ] ] ascending
+			  ifFalse: [ class allSuperclasses size ] ] ascending
 ]
 
 { #category : 'accessing' }

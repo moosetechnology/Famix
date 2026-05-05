@@ -42,6 +42,18 @@ FmxMBBuilderTest >> testClassNamed [
 ]
 
 { #category : 'tests' }
+FmxMBBuilderTest >> testConfiguration [
+	| config |
+	config := builder configuration.
+
+	self assert: config isNotNil.
+
+	self deny: config shouldGenerateFileImportHelpers.
+	config shouldGenerateFileImportHelpers: true.
+	self assert: config shouldGenerateFileImportHelpers
+]
+
+{ #category : 'tests' }
 FmxMBBuilderTest >> testEnsureClassNamed [
 
 	| c1 |

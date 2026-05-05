@@ -33,13 +33,12 @@ MooseModelGenerator >> defineClasses [
 	super defineClasses.
 
 	obj := builder newClassNamed: #Object.
-	obj classGeneralization: Object.
+	obj superclass: Object. "Cyril: I am REALLY not a fan of this. The superclass is always a FmxMBClass except for this one case... I hate that. It pushes us to have extensions of Object and some weird conditions in the code..."
 	abstractGroup := builder newClassNamed: #AbstractGroup.
 	group := builder newClassNamed: #Group.
 	specializedGroup := builder newClassNamed: #SpecializedGroup.
 	model := builder newClassNamed: #Model.
 	entity := builder newClassNamed: #Entity
-	
 ]
 
 { #category : 'definition' }

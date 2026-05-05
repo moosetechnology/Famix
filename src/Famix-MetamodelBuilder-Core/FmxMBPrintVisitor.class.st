@@ -48,13 +48,10 @@ FmxMBPrintVisitor >> visitClass: aClass [
 	self traceCrTab: ''.
 	aClass name trace.
 	self trace: ' -|> '.
-	(aClass classGeneralization
+	(aClass superclass
 		 ifNil: [ 'Entity' ]
-		 ifNotNil: [ :generalization | generalization name ]) trace.
-	aClass traitGeneralizations ifNotEmpty: [ :generalizations |
-		generalizations
-			do: [ :generalization | generalization name trace ]
-			separatedBy: [ ', ' trace ] ].
+		 ifNotNil: #name) trace.
+	aClass traitGeneralizations ifNotEmpty: [ :generalizations | generalizations do: [ :generalization | generalization name trace ] separatedBy: [ ', ' trace ] ].
 
 	super visitClass: aClass
 ]

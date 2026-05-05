@@ -2,9 +2,9 @@ Class {
 	#name : 'FmxMBClass',
 	#superclass : 'FmxMBBehavior',
 	#instVars : [
-		'classGeneralization',
 		'isAbstractClass',
-		'propertiesForEqualityCheck'
+		'propertiesForEqualityCheck',
+		'superclass'
 	],
 	#category : 'Famix-MetamodelBuilder-Core-Implementation',
 	#package : 'Famix-MetamodelBuilder-Core',
@@ -19,28 +19,31 @@ FmxMBClass >> acceptVisitor: aVisitor [
 ]
 
 { #category : 'accessing' }
-FmxMBClass >> allClassGeneralizations [
-	| result c g |
-	result := OrderedCollection new.
-	c := self.
-	[ g := c classGeneralization.
-	g isNotNil and: [ g isKindOf: FmxMBClass ] ]
-		whileTrue: [ result add: g.
-			c := g ].
-	^ result
-]
-
-{ #category : 'accessing' }
 FmxMBClass >> allLocalTraits [
 	^ self traitsFromRelations , super allLocalTraits
 ]
 
 { #category : 'accessing' }
-FmxMBClass >> allTransitiveTraitsIncludingClassGeneralization [
+FmxMBClass >> allSuperclasses [
+
+	| result c g |
+	result := OrderedCollection new.
+	c := self.
+	self flag: #todo. "This #isKindOf: is just here for one object we use as superclass that is not a FmxMBClass in MooseModelGenerator... We sould kill that and simplify the code."
+	[
+		g := c superclass.
+		g isNotNil and: [ g isKindOf: FmxMBClass ] ] whileTrue: [
+			result add: g.
+			c := g ].
+	^ result
+]
+
+{ #category : 'accessing' }
+FmxMBClass >> allTransitiveTraitsIncludingSuperclasses [
 
 	| result |
-	result := super allTransitiveTraitsIncludingClassGeneralization.
-	self classGeneralization ifNotNil: [ :class | class ~= Object ifTrue: [ result addAll: class allTransitiveTraitsIncludingClassGeneralization ] ].
+	result := super allTransitiveTraitsIncludingSuperclasses.
+	self superclass ifNotNil: [ :class | class ~= Object ifTrue: [ result addAll: class allTransitiveTraitsIncludingSuperclasses ] ].
 	^ result
 ]
 
@@ -48,22 +51,6 @@ FmxMBClass >> allTransitiveTraitsIncludingClassGeneralization [
 FmxMBClass >> annotationSuperclass [
 
 	^ self superclassName
-]
-
-{ #category : 'accessing' }
-FmxMBClass >> classGeneralization [
-	^ classGeneralization
-]
-
-{ #category : 'accessing' }
-FmxMBClass >> classGeneralization: anObject [
-
-	classGeneralization ifNotNil: [
-			self error:
-				'Cannot have two superclasses for an entity. ' , self name , ' declared ' , classGeneralization name , ' as superclass and try to set also ' , anObject name
-				, ' as second superclass.' ].
-	classGeneralization := anObject.
-	^ anObject
 ]
 
 { #category : 'settings - default' }
@@ -228,7 +215,8 @@ FmxMBClass >> isMetamodelClass [
 
 { #category : 'testing' }
 FmxMBClass >> isRoot [
-	^ self classGeneralization isNil
+
+	^ self superclass isNil
 ]
 
 { #category : 'generating' }
@@ -242,21 +230,32 @@ FmxMBClass >> optionalPragma [
 ]
 
 { #category : 'accessing' }
-FmxMBClass >> remoteClassGeneratization [
+FmxMBClass >> remoteSuperclass [
 
-	^ self allClassGeneralizations detect: #isRemote ifNone: [ nil ]
+	^ self allSuperclasses detect: #isRemote ifNone: [ nil ]
 ]
 
-{ #category : 'generalization' }
-FmxMBClass >> subclassOf: aClass [
-	
-	self generalization: aClass
+{ #category : 'accessing' }
+FmxMBClass >> superclass [
+
+	^ superclass
+]
+
+{ #category : 'accessing' }
+FmxMBClass >> superclass: aFmxClass [
+
+	superclass ifNotNil: [
+			self error:
+				'Cannot have two superclasses for an entity. ' , self name , ' declared ' , superclass name , ' as superclass and try to set also ' , aFmxClass name
+				, ' as second superclass.' ].
+	superclass := aFmxClass.
+	^ aFmxClass
 ]
 
 { #category : 'settings - default' }
 FmxMBClass >> superclassName [
 
-	^ self classGeneralization
+	^ self superclass
 		  ifNil: [ self defaultSuperclassName ]
 		  ifNotNil: #fullName
 ]

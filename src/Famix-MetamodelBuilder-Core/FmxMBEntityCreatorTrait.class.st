@@ -28,7 +28,7 @@ FmxMBEntityCreatorTrait >> generateEntityCreationMethods [
 
 	self builder concreteClasses do: [ :class |
 			self generateEntityCreationMethodFor: class.
-			(class allTransitiveTraitsIncludingClassGeneralization anySatisfy: [ :trait | trait prefix = #Famix and: [ trait name = #TNamedEntity ] ]) ifTrue: [
+			(class allTransitiveTraitsIncludingSuperclasses anySatisfy: [ :trait | trait prefix = #Famix and: [ trait name = #TNamedEntity ] ]) ifTrue: [
 				self generateNamedEntityCreationMethodFor: class ] ]
 ]
 

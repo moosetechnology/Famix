@@ -115,12 +115,10 @@ FmxMBPlantTextVisitor >> onlySingleUserOf: aTrait [
 { #category : 'private' }
 FmxMBPlantTextVisitor >> recordGeneralizationsForClass: aClass mergingTraits: mergesTrait [
 
-	aClass classGeneralization ifNotNil: [ :generalization | 
-		generalizationDefinitions add: generalization -> aClass ].
-	mergesTrait ifFalse: [ 
-		aClass traitGeneralizations ifNotEmpty: [ :generalizations | 
-			generalizations do: [ :generalization | 
-				generalizationDefinitions add: generalization -> aClass ] ] ]
+	aClass superclass ifNotNil: [ :superclass | generalizationDefinitions add: superclass -> aClass ].
+	mergesTrait ifFalse: [
+		aClass traitGeneralizations ifNotEmpty: [ :generalizations |
+			generalizations do: [ :generalization | generalizationDefinitions add: generalization -> aClass ] ] ]
 ]
 
 { #category : 'visiting' }
