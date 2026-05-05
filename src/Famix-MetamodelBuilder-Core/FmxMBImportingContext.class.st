@@ -103,14 +103,13 @@ FmxMBImportingContext >> generateImportingContextMetamodel [
 { #category : 'generating-methods' }
 FmxMBImportingContext >> generateShouldImport [
 
-	self builder classes do: [ :each | "No need to generate methods for model and groups."
-			(each isModelClass or: [ each isMetamodelClassGroup or: [ each isAbstractClass ] ]) ifFalse: [
-					self
-						addMethod: ('shouldImport{1}
+	self builder concreteClasses do: [ :each |
+			self
+				addMethod: ('shouldImport{1}
 
 	<generated>
 	^ self shouldImport: #{1}' format: { each name })
-						protocol: #testing ] ]
+				protocol: #testing ]
 ]
 
 { #category : 'testing' }

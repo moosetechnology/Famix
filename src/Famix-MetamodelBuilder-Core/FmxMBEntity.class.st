@@ -54,6 +54,12 @@ FmxMBEntity >> initialize [
 	isRemote := false.
 ]
 
+{ #category : 'testing' }
+FmxMBEntity >> isConcreteClass [
+
+	^ false
+]
+
 { #category : 'accessing' }
 FmxMBEntity >> isRemote [ 
 

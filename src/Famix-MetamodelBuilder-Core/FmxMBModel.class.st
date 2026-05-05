@@ -90,15 +90,6 @@ FmxMBModel >> generateSubmetamodelsMethod [
 			self addMethod: code classSide: true protocol: #accessing ]
 ]
 
-{ #category : 'generating-methods' }
-FmxMBModel >> generateTestingMethods [
-
-	"No need to define the testing methods in the #Model entity
-	because we already have a test that check that the entity is a Model"
-
-	
-]
-
 { #category : 'testing' }
 FmxMBModel >> isModelClass [
 

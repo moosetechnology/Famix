@@ -142,7 +142,7 @@ FamixMetamodelBuilder >> classes [
 { #category : 'accessing' }
 FamixMetamodelBuilder >> concreteClasses [
 
-	^ self classes reject: [ :class | class isAbstractClass or: [ class isModelClass or: [ class isMetamodelClassGroup ] ] ]
+	^ self classes select: #isConcreteClass
 ]
 
 { #category : 'accessing' }
@@ -377,10 +377,11 @@ FamixMetamodelBuilder >> newAbstractClassNamed: aClassName [
 FamixMetamodelBuilder >> newClass [
 
 	| aClass |
-	aClass := FmxMBClass new.
-	aClass builder: self.
-	aClass prefix: self configuration prefix.
-	aClass packageName: self configuration packageName.
+	aClass := FmxMBClassEntity new
+		          builder: self;
+		          prefix: self configuration prefix;
+		          packageName: self configuration packageName;
+		          yourself.
 	self classes add: aClass.
 	^ aClass
 ]
