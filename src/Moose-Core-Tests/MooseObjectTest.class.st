@@ -124,7 +124,7 @@ MooseObjectTest >> testValueOfFameProperty [
 
 	| entity property |
 	entity := FamixTest1Method named: 'Test'.
-	property := entity mooseDescription propertyNamed: #name.
+	property := entity metadescription propertyNamed: #name.
 
 	self assert: (entity valueOfFameProperty: property) equals: 'Test'
 ]
@@ -134,7 +134,7 @@ MooseObjectTest >> testValueOfFamePropertyWithWrongProperty [
 
 	| entity property |
 	entity := FamixTest1Method named: 'Test'.
-	property := FamixTest1Attribute mooseDescription propertyNamed: #numberOfAccesses.
+	property := FamixTest1Attribute metadescription propertyNamed: #numberOfAccesses.
 
 	"This property does not exist on a method so it should return nil with the current implementation"
 	self assert: (entity valueOfFameProperty: property) isNil

@@ -72,7 +72,7 @@ FamixTWithSourceLanguages >> sourceLanguageOr: unknownSourceLanguageClass [
 
 { #category : 'as yet unclassified' }
 FamixTWithSourceLanguages >> unknowSourceLanguageClass [
-	^ (self mooseDescription package
+	^ (self metadescription package
 		classNamed: 'UnknownSourceLanguage'
 		ifAbsent: [ self error: 'This entity has no source language, no model and no class implementing #FamixTUnknownSourceLanguage in it metamodel.' ])
 		implementingClass

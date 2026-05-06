@@ -126,7 +126,7 @@ FamixTestComposedMetamodels >> testMultivaluedRelationsAreSeenAsMultivalued [
 	"Regression test. If we add a multivalued relation to a remote entity, it was not considered as multivalued in Fame because we neither had a FMMany slot since it's remote, nor we had a multivalued pragma."
 
 	| relation |
-	relation := c12 mooseDescription allRelationProperties detect: [ :relation | relation name = 'c22s' ].
+	relation := c12 metadescription allRelationProperties detect: [ :relation | relation name = 'c22s' ].
 
 	self assert: relation isMultivalued
 ]

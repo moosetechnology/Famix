@@ -116,16 +116,17 @@ MooseGroup >> max: aSymbolOrBlock [
 	^ self inject: (aSymbolOrBlock value: self first) into: [ :max :each | max max: (aSymbolOrBlock value: each) ]
 ]
 
+{ #category : 'accessing' }
+MooseGroup >> metadescription [
+
+	^ self mooseModel
+		  ifNil: [ FM3NullClass new ]
+		  ifNotNil: [ :model | model metadescriptionFor: self class ]
+]
+
 { #category : 'public interface' }
 MooseGroup >> min: aSymbolOrBlock [
 	^ self inject: (aSymbolOrBlock value: self first) into: [ :min :each | min min: (aSymbolOrBlock value: each) ]
-]
-
-{ #category : 'accessing' }
-MooseGroup >> mooseDescription [
-	^ self mooseModel
-		ifNil: [ FM3NullClass new ]
-		ifNotNil: [ :model | model mooseDescriptionFor: self class ]
 ]
 
 { #category : 'printing' }
