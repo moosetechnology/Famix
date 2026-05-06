@@ -915,12 +915,12 @@ MooseQueryTest >> testWithSpecializedAssociation [
 	"The goal of this test is to check that MooseQuery is also able to query specialized associations."
 
 	| invoSpecialized result |
-	invoSpecialized := MooseQueryMockSpecializedInvocation new
+	invoSpecialized := FamixJavaParametricInvocation new
 		sender: method1;
 		addCandidate: method2;
 		receiver: var2;
 		mooseModel: model.
-	result := method1 query: #out with: MooseQueryMockSpecializedInvocation.
+	result := method1 query: #out with: FamixJavaParametricInvocation.
 	self assert: result size equals: 1.
 	self assert: result anyOne equals: invoSpecialized
 ]
