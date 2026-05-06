@@ -216,7 +216,7 @@ FmxMBRingEnvironment >> recordRemovalOfGeneratedPackagesAndClasses [
 		thenDo: [ :package |
 				package ifNotNil: [
 						package definedClasses
-							select: #isMetamodelEntity
+							select: #canBeGenerated
 							thenDo: [ :class | (classesToGenerate includes: class name) ifFalse: [ changesToApply add: (FmxClassRemoval class: class) ] ] ] ]
 ]
 

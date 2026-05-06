@@ -45,12 +45,11 @@ FmxMBTrait >> generate [
 		tag: self tag
 		comment: self commentWithRelations.
 
-	self generateAccessors.
-	self generateAnnotation.
-
-	self generateTestingMethods.
-
-	self generateAddToCollection
+	self
+		generateAccessors;
+		generateAnnotation;
+		generateTestingMethods;
+		generateAddToCollection
 ]
 
 { #category : 'generating' }

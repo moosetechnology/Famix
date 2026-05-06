@@ -182,8 +182,9 @@ FamixMetamodelBuilder >> ensureEntityClassIsTheCommonSuperclass [
 
 	"All classes should have a common superclass called Entity. Here we ensure it is created and used."
 
-	self classes iterator | #isRoot selectIt
-	| #isMetamodelClassGroup rejectIt | #isModelClass rejectIt
+	self classes iterator
+	| #isClassEntity selectIt
+	| #isRoot selectIt
 	| [ :class | class name = #Entity ] rejectIt
 	| [ :class | class --|> (self ensureAbstractClassNamed: #Entity) ] doIt
 	> NullAddableObject

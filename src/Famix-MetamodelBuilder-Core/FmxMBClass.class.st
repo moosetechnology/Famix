@@ -58,9 +58,6 @@ FmxMBClass >> annotationSuperclass [
 
 { #category : 'settings - default' }
 FmxMBClass >> defaultSuperclassName [
-	"We have a special case with MooseObject that should inherit from Object."
-
-	self isMooseObject ifTrue: [ ^ #Object ].
 
 	^ #MooseEntity
 ]
@@ -78,25 +75,7 @@ FmxMBClass >> generate [
 		tag: self tag
 		comment: self commentWithRelations.
 
-	self
-		generateAccessors;
-		generateAnnotation;
-		generateMetamodelMethod
-]
-
-{ #category : 'generating-methods' }
-FmxMBClass >> generateMetamodelMethod [
-
-	self isRoot ifFalse: [ ^ self ].
-
-	self builder model ifNotNil: [ :model |
-			self
-				addMethod: ('metamodel
-
-	<generated>
-	^ {1} metamodel' format: { model fullName })
-				classSide: true
-				protocol: #meta ]
+	self generateAccessors
 ]
 
 { #category : 'generating' }
@@ -111,21 +90,6 @@ FmxMBClass >> generateRemotes [
 FmxMBClass >> isMetamodelClass [
 
 	^ true
-]
-
-{ #category : 'testing' }
-FmxMBClass >> isMooseObject [
-
-	^ self name = 'Object' and: [ self prefix = 'Moose' ]
-]
-
-{ #category : 'testing' }
-FmxMBClass >> isRoot [
-
-	self superclass ifNotNil: [ ^ false ].
-	
-	"We have a special case with MooseObject because we do not want to consider it as a root but it inherits from Object."
-	^ self isMooseObject not
 ]
 
 { #category : 'accessing' }

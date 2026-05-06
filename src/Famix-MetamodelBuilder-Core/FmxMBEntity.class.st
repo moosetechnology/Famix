@@ -55,6 +55,12 @@ FmxMBEntity >> initialize [
 ]
 
 { #category : 'testing' }
+FmxMBEntity >> isClassEntity [
+
+	^ false
+]
+
+{ #category : 'testing' }
 FmxMBEntity >> isConcreteClass [
 
 	^ false

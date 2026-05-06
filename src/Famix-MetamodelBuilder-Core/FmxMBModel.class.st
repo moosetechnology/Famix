@@ -24,7 +24,8 @@ FmxMBModel >> generate [
 	super generate.
 	self
 		generateFileImportMethods;
-		generateSubmetamodelsMethod
+		generateSubmetamodelsMethod;
+		generateAnnotation
 ]
 
 { #category : 'generating-methods' }
@@ -60,15 +61,6 @@ FmxMBModel >> generateFileImportMethods [
 	^ {1}' format: { self builder importingContextName })
 		classSide: true
 		protocol: #accessing
-]
-
-{ #category : 'generating-methods' }
-FmxMBModel >> generateMetamodelMethod [
-
-	"no need to define the method #metamodel in the #Model entity
-	because it is already the #Model entity that hold the metamodel"
-
-	
 ]
 
 { #category : 'generating-methods' }

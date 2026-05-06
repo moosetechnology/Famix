@@ -10,6 +10,15 @@ Class {
 	#tag : 'Implementation'
 }
 
+{ #category : 'settings - default' }
+FmxMBClassEntity >> defaultSuperclassName [
+	"We have a special case with MooseObject that should inherit from Object."
+
+	self isMooseObject ifTrue: [ ^ #Object ].
+
+	^ super defaultSuperclassName
+]
+
 { #category : 'generating-methods' }
 FmxMBClassEntity >> generate [
 
@@ -18,7 +27,9 @@ FmxMBClassEntity >> generate [
 	self
 		generateIsAbstractMethodIfNecessary;
 		generateAddToCollection;
-		generateTestingMethods.
+		generateTestingMethods;
+		generateMetamodelMethod;
+		generateAnnotation.
 
 	propertiesForEqualityCheck ifNotNil: [
 			self
@@ -97,6 +108,21 @@ FmxMBClassEntity >> generateIsAbstractMethodIfNecessary [
 ]
 
 { #category : 'generating-methods' }
+FmxMBClassEntity >> generateMetamodelMethod [
+
+	self isRoot ifFalse: [ ^ self ].
+
+	self builder model ifNotNil: [ :model |
+			self
+				addMethod: ('metamodel
+
+	<generated>
+	^ {1} metamodel' format: { model fullName })
+				classSide: true
+				protocol: #meta ]
+]
+
+{ #category : 'generating-methods' }
 FmxMBClassEntity >> generateTestingMethods [
 
 	self isRoot ifTrue: [
@@ -124,9 +150,30 @@ FmxMBClassEntity >> isAbstractClass: aBoolean [
 ]
 
 { #category : 'testing' }
+FmxMBClassEntity >> isClassEntity [
+
+	^ true
+]
+
+{ #category : 'testing' }
 FmxMBClassEntity >> isConcreteClass [
 
 	^ self isAbstractClass not
+]
+
+{ #category : 'testing' }
+FmxMBClassEntity >> isMooseObject [
+
+	^ self name = 'Object' and: [ self prefix = 'Moose' ]
+]
+
+{ #category : 'testing' }
+FmxMBClassEntity >> isRoot [
+
+	self superclass ifNotNil: [ ^ false ]. 
+	
+	"We have a special case with MooseObject because we do not want to consider it as a root but it inherits from Object."
+	^ self isMooseObject not
 ]
 
 { #category : 'generating' }

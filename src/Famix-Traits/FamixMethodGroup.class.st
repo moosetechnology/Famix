@@ -6,22 +6,6 @@ Class {
 	#tag : 'Groups'
 }
 
-{ #category : 'meta' }
-FamixMethodGroup class >> annotation [
-
-	<FMClass: #MethodGroup super: #MooseSpecializedGroup>
-	<package: #'Famix-Traits'>
-	<generated>
-	^ self
-]
-
-{ #category : 'meta' }
-FamixMethodGroup class >> metamodel [
-
-	<generated>
-	^ FamixModel metamodel
-]
-
 { #category : 'navigation' }
 FamixMethodGroup >> allClasses [
 
