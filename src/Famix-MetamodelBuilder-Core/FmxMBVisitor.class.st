@@ -11,9 +11,16 @@ A minimum builder needs to subclass FamixMetamodelGenerator, and override the cl
 use the #FmxMBPrintVisitor class for a working example.
 
 general case:
+
+```st
 b := aFamixMetamodelGeneratorClass builderWithDefinitions.
 v := aFmxMBVisitorClass new.
-b acceptVisitor: v.
+b acceptVisitor: v
+```
+
+```st
+aFmxMBVisitorClass visit: (aFamixMetamodelGeneratorClass builderWithDefinitions)
+```
 "
 Class {
 	#name : 'FmxMBVisitor',
@@ -22,6 +29,15 @@ Class {
 	#package : 'Famix-MetamodelBuilder-Core',
 	#tag : 'Visitors'
 }
+
+{ #category : 'visiting' }
+FmxMBVisitor class >> visit: aFmxEntity [
+
+	| visitor |
+	visitor := self new.
+	aFmxEntity acceptVisitor: visitor.
+	^ visitor
+]
 
 { #category : 'visiting' }
 FmxMBVisitor >> visitBuilder: aBuilder [

@@ -55,7 +55,6 @@ Class {
 		'testingSelectorsMapping',
 		'configuration',
 		'parentBuilder',
-		'extensionBehaviors',
 		'withoutBuilder'
 	],
 	#category : 'Famix-MetamodelBuilder-Core-Basic',
@@ -226,12 +225,6 @@ FamixMetamodelBuilder >> environment: anObject [
 	environment := anObject
 ]
 
-{ #category : 'accessing' }
-FamixMetamodelBuilder >> extensionBehaviors [
-
-	^ extensionBehaviors
-]
-
 { #category : 'generating' }
 FamixMetamodelBuilder >> generate [
 
@@ -341,7 +334,6 @@ FamixMetamodelBuilder >> initialize [
 
 	classes := OrderedCollection new.
 	traits := OrderedCollection new.
-	extensionBehaviors := OrderedCollection new.
 	testingSelectorsMapping := Dictionary new.
 	withoutBuilder := false
 ]
@@ -483,7 +475,6 @@ FamixMetamodelBuilder >> prepareBehaviorsGeneration [
 	self classes do: [ :each | self testingSelectorsMapping at: each put: each testingSelectors ].
 	self traits do: [ :each | each generate ].
 	self sortedClasses do: [ :each | each generate ].
-	self extensionBehaviors do: [ :each | each generate ].
 	self generateTestingMethodsOfRemoteEntities
 ]
 
