@@ -93,6 +93,11 @@ The default export is done in a MSE format. JSON is also available'
 	aMetamodel exportMetamodelToMSEStream: aStream
 ]
 
+{ #category : 'accessing' }
+MooseModel class >> factory [
+	^ FMMetamodelFactory forModel: self
+]
+
 { #category : 'import-export' }
 MooseModel class >> importFrom: aStream [
 	^ self importFrom: aStream withMetamodel: self metamodel
@@ -462,6 +467,11 @@ MooseModel >> exportWithMetamodelUsingPrinter: aPrinter [
 		exportWithPrinter: aPrinter
 ]
 
+{ #category : 'accessing' }
+MooseModel >> factory [
+	^ self class factory
+]
+
 { #category : 'actions' }
 MooseModel >> flushPrivateState [
 	"Clean the private state caches of all the entities of the model. This will not impact attributes in the private state (informations you cannot derive)"
@@ -659,6 +669,18 @@ MooseModel >> isMooseModel [
 MooseModel >> localMooseModel [ 
 	 
 	^self
+]
+
+{ #category : 'accessing' }
+MooseModel >> metadescription [
+
+	^ self metadescriptionFor: self class
+]
+
+{ #category : 'accessing' }
+MooseModel >> metadescriptionFor: class [
+
+	^ self metamodel fmTypeOf: class instanceSide
 ]
 
 { #category : 'accessing' }
