@@ -121,13 +121,6 @@ MooseGroup >> min: aSymbolOrBlock [
 	^ self inject: (aSymbolOrBlock value: self first) into: [ :min :each | min min: (aSymbolOrBlock value: each) ]
 ]
 
-{ #category : 'accessing' }
-MooseGroup >> mooseDescription [
-	^ self mooseModel
-		ifNil: [ FM3NullClass new ]
-		ifNotNil: [ :model | model mooseDescriptionFor: self class ]
-]
-
 { #category : 'printing' }
 MooseGroup >> mooseNameOn: aStream [
 	"Hook to customize the rendered text of an entity. Do not specialize mooseName, but change/specialize this method if necessary."
