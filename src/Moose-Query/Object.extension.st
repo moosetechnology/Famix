@@ -14,3 +14,9 @@ Object >> entityHasOutgoingTypeDeclarations [
 Object >> ifNotBoolean: aBlock [
 	^ aBlock value
 ]
+
+{ #category : '*Moose-Query' }
+Object >> metadescription [
+
+	^ self class asMetadescription
+]

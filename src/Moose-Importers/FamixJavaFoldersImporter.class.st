@@ -151,7 +151,7 @@ FamixJavaFoldersImporter >> ensureVerveineJ [
 		        get;
 		        contents.
 
-	asset := ((NeoJSONReader fromString: json) at: #assets ifAbsent: [ self error: 'No asset present in the received JSON:' , json ])
+	asset := ((STONJSON fromString: json) at: #assets ifAbsent: [ self error: 'No asset present in the received JSON:' , json ])
 		         detect: [ :each | (each at: #name) beginsWith: 'VerveineJ-' ]
 		         ifNone: [ self error: 'No asset named VerveineJ present in the received JSON:' , json ].
 
