@@ -229,7 +229,9 @@ FamixMetamodelBuilder >> environment: anObject [
 { #category : 'generating' }
 FamixMetamodelBuilder >> generate [
 
+	| changesBuilder |
 	self prepareGeneration.
+	changesBuilder := FmxMBChangesBuilderVisitor visit: self.
 	self apply
 ]
 
