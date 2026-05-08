@@ -14,14 +14,10 @@ Class {
 FmxMBEntityCreatorTrait >> generate [
 
 	super generate.
-	self generateEntityCreationMethods
-]
-
-{ #category : 'generating' }
-FmxMBEntityCreatorTrait >> generateEntityCreationMethods [
 
 	self builder concreteClasses do: [ :class |
 			self addMethod: (FmxMBMethodsFactory instantiate: class) protocol: #'entity creation'.
+
 			(class allTransitiveTraitsIncludingSuperclasses anySatisfy: [ :trait | trait prefix = #Famix and: [ trait name = #TNamedEntity ] ]) ifTrue: [
 				self addMethod: (FmxMBMethodsFactory instantiateNamed: class) protocol: #'entity creation' ] ]
 ]

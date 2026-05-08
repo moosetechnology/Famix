@@ -24,22 +24,10 @@ FmxMBModel >> generate [
 	super generate.
 	self
 		generateFileImportMethods;
-		generateSubmetamodelsMethod;
-		generateAnnotation
-]
+		generateAnnotation.
 
-{ #category : 'generating-methods' }
-FmxMBModel >> generateAnnotation [
-	"I do not know why for model we take the fullName and not the name as for other classes... This is not coherant, we should review this in a Moose metting"
-
-	self
-		addMethod: (FmxMBMethodsFactory
-				 annotationFor: self fullName
-				 super: self superclassName
-				 package: self builder safeAnnotationPackageName
-				 isAbstract: false)
-		classSide: true
-		protocol: #meta
+	self builder allSubBuilders ifNotEmpty: [ :subBuilders |
+		self addMethod: (FmxMBMethodsFactory allSubmetamodelsPackagesNamesFor: subBuilders) classSide: true protocol: #accessing ]
 ]
 
 { #category : 'generating-methods' }
@@ -50,13 +38,6 @@ FmxMBModel >> generateFileImportMethods [
 	self addMethod: FmxMBMethodsFactory canBeImportedFromFile classSide: true protocol: #testing.
 
 	self addMethod: (FmxMBMethodsFactory importingClassNamed: self builder importingContextName) classSide: true protocol: #accessing
-]
-
-{ #category : 'generating-methods' }
-FmxMBModel >> generateSubmetamodelsMethod [
-
-	self builder allSubBuilders ifNotEmpty: [ :subBuilders |
-		self addMethod: (FmxMBMethodsFactory allSubmetamodelsPackagesNamesFor: subBuilders) classSide: true protocol: #accessing ]
 ]
 
 { #category : 'testing' }
