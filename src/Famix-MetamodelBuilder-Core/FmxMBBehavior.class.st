@@ -323,14 +323,6 @@ FmxMBBehavior >> isModelClass [
 	^ false
 ]
 
-{ #category : 'generating' }
-FmxMBBehavior >> optionalPragma [
-
-	"Override to add a pragma to your entity #annotation method"
-
-	^ String new
-]
-
 { #category : 'accessing' }
 FmxMBBehavior >> packageName [
 	^ packageName

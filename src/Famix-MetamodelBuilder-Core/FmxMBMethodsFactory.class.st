@@ -1,3 +1,10 @@
+"
+The Famix metamodel generator needs to generate a lot of methods. Those can be quite verbose.
+
+My responsisbility is to return the code of all methods to generate.
+
+I'll be used during the generation of a metamodel.
+"
 Class {
 	#name : 'FmxMBMethodsFactory',
 	#superclass : 'Object',

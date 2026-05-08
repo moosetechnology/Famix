@@ -43,45 +43,17 @@ FmxMBImportingContext >> generate [
 
 	super generate.
 
-	self generateImportingContextMetamodel.
-	self generateImport
-]
-
-{ #category : 'generating-methods' }
-FmxMBImportingContext >> generateImport [
+	self addMethod: (FmxMBMethodsFactory importedMetamodelForPrefix: self prefix) classSide: true protocol: #accessing.
 
 	self builder concreteClasses do: [ :each |
-			each allTransitiveTraits
-				detect: [ :trait | trait name = #TAssociation ]
-				ifFound: [ self generateImportAssociation: each ]
-				ifNone: [ self generateImportConcreteEntity: each ].
+			self
+				addMethod: (each allTransitiveTraits
+						 detect: [ :trait | trait name = #TAssociation ]
+						 ifFound: [ FmxMBMethodsFactory importAssociationNamed: each name ]
+						 ifNone: [ FmxMBMethodsFactory importEntityNamed: each name ])
+				protocol: #importing.
 
 			self addMethod: (FmxMBMethodsFactory shouldImportNamed: each name) protocol: #testing ]
-]
-
-{ #category : 'generating-methods' }
-FmxMBImportingContext >> generateImportAssociation: aFmxMBAssociationClass [
-
-	self addMethod: (FmxMBMethodsFactory importAssociationNamed: aFmxMBAssociationClass name) protocol: #importing
-]
-
-{ #category : 'generating-methods' }
-FmxMBImportingContext >> generateImportConcreteEntity: aFmxMBClass [
-
-	self addMethod: (FmxMBMethodsFactory importEntityNamed: aFmxMBClass name) protocol: #importing
-]
-
-{ #category : 'generating-methods' }
-FmxMBImportingContext >> generateImportingContextMetamodel [
-
-	self addMethod: (FmxMBMethodsFactory importedMetamodelForPrefix: self prefix) classSide: true protocol: #accessing
-]
-
-{ #category : 'testing' }
-FmxMBImportingContext >> isRoot [
-	"I am not a MM class root because I am not part of the MM"
-
-	^ false
 ]
 
 { #category : 'accessing' }

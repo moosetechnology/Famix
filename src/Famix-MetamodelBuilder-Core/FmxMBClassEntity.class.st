@@ -25,34 +25,16 @@ FmxMBClassEntity >> generate [
 	super generate.
 
 	self
-		generateIsAbstractMethodIfNecessary;
 		generateAddToCollection;
 		generateTestingMethods;
 		generateMetamodelMethod;
 		generateAnnotation.
 
+	self isAbstractClass ifTrue: [ self addMethod: (FmxMBMethodsFactory isAbstractFor: self fullName) classSide: true protocol: #testing ].
+
 	propertiesForEqualityCheck ifNotNil: [
-			self
-				generateEqualsMethod;
-				generateHashMethod ]
-]
-
-{ #category : 'generating-methods' }
-FmxMBClassEntity >> generateEqualsMethod [
-
-	self addMethod: (FmxMBMethodsFactory equalsForVariableNamed: 'a' , self fullName properties: propertiesForEqualityCheck) protocol: #comparing
-]
-
-{ #category : 'generating-methods' }
-FmxMBClassEntity >> generateHashMethod [
-
-	self addMethod: (FmxMBMethodsFactory hashForProperties: propertiesForEqualityCheck) protocol: #comparing
-]
-
-{ #category : 'generating' }
-FmxMBClassEntity >> generateIsAbstractMethodIfNecessary [
-
-	self isAbstractClass ifTrue: [ self addMethod: (FmxMBMethodsFactory isAbstractFor: self fullName) classSide: true protocol: #testing ]
+			self addMethod: (FmxMBMethodsFactory equalsForVariableNamed: 'a' , self fullName properties: propertiesForEqualityCheck) protocol: #comparing.
+			self addMethod: (FmxMBMethodsFactory hashForProperties: propertiesForEqualityCheck) protocol: #comparing ]
 ]
 
 { #category : 'generating-methods' }
@@ -115,16 +97,6 @@ FmxMBClassEntity >> isRoot [
 	
 	"We have a special case with MooseObject because we do not want to consider it as a root but it inherits from Object."
 	^ self isMooseObject not
-]
-
-{ #category : 'generating' }
-FmxMBClassEntity >> optionalPragma [
-
-	^ self isAbstractClass
-		  ifTrue: [ 
-			  '
-	<abstract>' ]
-		  ifFalse: [ super optionalPragma ]
 ]
 
 { #category : 'generalization' }
