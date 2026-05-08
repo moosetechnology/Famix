@@ -31,13 +31,7 @@ FmxMBClassGroup >> generate [
 { #category : 'generating-methods' }
 FmxMBClassGroup >> generateMooseGroupAnnotationIn: aFmxBehavioral as: aName [
 
-	aFmxBehavioral
-		addMethod: ('annotation{1}
-	<generated>
-	<mooseGroup>
-	^ {1}' format: { aName })
-		classSide: true
-		protocol: #groups
+	aFmxBehavioral addMethod: (FmxMBMethodsFactory groupAnnotationNamed: aName) classSide: true protocol: #groups
 ]
 
 { #category : 'accessing' }

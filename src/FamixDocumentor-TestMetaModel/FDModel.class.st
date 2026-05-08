@@ -10,7 +10,9 @@ Class {
 
 { #category : 'meta' }
 FDModel class >> annotation [
+
 	<FMClass: #FDModel super: #MooseModel>
 	<package: #'FamixDocumentor-TestMetaModel'>
 	<generated>
+	^ self
 ]

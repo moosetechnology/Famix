@@ -16,7 +16,9 @@ MooseMSEImporterTestModel class >> allSubmetamodelsPackagesNames [
 
 { #category : 'meta' }
 MooseMSEImporterTestModel class >> annotation [
+
 	<FMClass: #MooseMSEImporterTestModel super: #MooseModel>
 	<package: #'Moose-Core-Tests-Entities'>
 	<generated>
+	^ self
 ]

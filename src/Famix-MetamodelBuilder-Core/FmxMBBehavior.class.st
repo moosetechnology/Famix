@@ -244,33 +244,18 @@ FmxMBBehavior >> generateAccessors [
 { #category : 'generating' }
 FmxMBBehavior >> generateAddToCollection [
 
-	self relations do: [ :side |
-			side isMany ifTrue: [
-					| sideName |
-					sideName := side name.
-					self
-						addMethod: ('add{1}: anObject
-	<generated>
-	^ self {2} add: anObject' format: {
-									 sideName capitalized asSingular.
-									 sideName })
-						protocol: #adding ] ]
+	self relations do: [ :relation | relation isMany ifTrue: [ self addMethod: (FmxMBMethodsFactory addToCollectionFor: relation name) protocol: #adding ] ]
 ]
 
 { #category : 'generating' }
 FmxMBBehavior >> generateAnnotation [
 
 	self
-		addMethod: ('annotation
-
-	<FMClass: #{1} super: #{2}>
-	<package: {3}>
-	<generated>{4}
-	^ self' format: {
-					 self name.
-					 self annotationSuperclass.
-					 self builder safeAnnotationPackageName.
-					 self optionalPragma })
+		addMethod: (FmxMBMethodsFactory
+				 annotationFor: self name
+				 super: self annotationSuperclass
+				 package: self builder safeAnnotationPackageName
+				 isAbstract: self isAbstractClass)
 		classSide: true
 		protocol: #meta
 ]
@@ -278,7 +263,7 @@ FmxMBBehavior >> generateAnnotation [
 { #category : 'generating' }
 FmxMBBehavior >> generateTestingMethods [
 
-	self testingSelectors do: [ :aSelector | self addMethod: (aSelector , '\\	<generated>\	^ true') withCRs protocol: #testing ]
+	self testingSelectors do: [ :aSelector | self addMethod: (FmxMBMethodsFactory testReturning: true for: aSelector) protocol: #testing ]
 ]
 
 { #category : 'generalization' }
@@ -300,6 +285,12 @@ FmxMBBehavior >> initialize [
 	prefix := ''.
 	packageName := ''.
 	testingSelectors := Set new
+]
+
+{ #category : 'testing' }
+FmxMBBehavior >> isAbstractClass [
+
+	^ false
 ]
 
 { #category : 'testing' }

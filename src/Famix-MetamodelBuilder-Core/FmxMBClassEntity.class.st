@@ -40,71 +40,19 @@ FmxMBClassEntity >> generate [
 { #category : 'generating-methods' }
 FmxMBClassEntity >> generateEqualsMethod [
 
-	| code |
-	code := String streamContents: [ :stream |
-			        | variableName |
-			        variableName := 'a' , self fullName.
-			        stream << '= '.
-			        stream << variableName.
-			        stream << '
-
-	<generated>
-	^ '.
-			        stream
-				        << variableName;
-				        << ' ';
-				        << propertiesForEqualityCheck first;
-				        << ' = self ';
-				        << propertiesForEqualityCheck first.
-			        propertiesForEqualityCheck size > 1 ifTrue: [
-					        2 to: propertiesForEqualityCheck size do: [ :idx |
-							        stream << ' and: [ '.
-							        stream
-								        << variableName;
-								        << ' ';
-								        << (propertiesForEqualityCheck at: idx);
-								        << ' = self ';
-								        << (propertiesForEqualityCheck at: idx) ].
-					        2 to: propertiesForEqualityCheck size do: [ :idx | stream << '] ' ] ] ].
-
-	self addMethod: code protocol: #comparing
+	self addMethod: (FmxMBMethodsFactory equalsForVariableNamed: 'a' , self fullName properties: propertiesForEqualityCheck) protocol: #comparing
 ]
 
 { #category : 'generating-methods' }
 FmxMBClassEntity >> generateHashMethod [
 
-	| code |
-	code := String streamContents: [ :stream |
-			        stream << 'hash'.
-			        stream << '
-
-	<generated>
-	^ '.
-			        stream
-				        << 'self ';
-				        << propertiesForEqualityCheck first;
-				        << ' hash '.
-			        propertiesForEqualityCheck size > 1 ifTrue: [
-					        2 to: propertiesForEqualityCheck size do: [ :idx |
-							        stream
-								        << 'bitXor: self ';
-								        << (propertiesForEqualityCheck at: idx);
-								        << ' hash ' ] ] ].
-
-	self addMethod: code protocol: #comparing
+	self addMethod: (FmxMBMethodsFactory hashForProperties: propertiesForEqualityCheck) protocol: #comparing
 ]
 
 { #category : 'generating' }
 FmxMBClassEntity >> generateIsAbstractMethodIfNecessary [
 
-	self isAbstractClass ifTrue: [
-			self
-				addMethod: ('isAbstract
-
-	<generated>
-	^ self == {1}' format: { self fullName })
-				classSide: true
-				protocol: #testing ]
+	self isAbstractClass ifTrue: [ self addMethod: (FmxMBMethodsFactory isAbstractFor: self fullName) classSide: true protocol: #testing ]
 ]
 
 { #category : 'generating-methods' }
@@ -112,14 +60,7 @@ FmxMBClassEntity >> generateMetamodelMethod [
 
 	self isRoot ifFalse: [ ^ self ].
 
-	self builder model ifNotNil: [ :model |
-			self
-				addMethod: ('metamodel
-
-	<generated>
-	^ {1} metamodel' format: { model fullName })
-				classSide: true
-				protocol: #meta ]
+	self builder model ifNotNil: [ :model | self addMethod: (FmxMBMethodsFactory metamodelFor: model fullName) classSide: true protocol: #meta ]
 ]
 
 { #category : 'generating-methods' }
@@ -131,8 +72,8 @@ FmxMBClassEntity >> generateTestingMethods [
 			builder testingSelectorsMapping keysAndValuesDo: [ :concernedClass :selectors |
 				(builder shouldGeneratorTestingMethodsOf: concernedClass in: self) ifTrue: [ selectorsToGenerate addAll: selectors ] ].
 
-			(selectorsToGenerate difference: (self traitGeneralizations flatCollect: #testingSelectors)) do: [ :sel |
-				self addMethod: (sel , '\\	<generated>\	^ false') withCRs protocol: #testing ] ].
+			(selectorsToGenerate difference: (self traitGeneralizations flatCollect: #testingSelectors)) do: [ :selector |
+				self addMethod: (FmxMBMethodsFactory testReturning: false for: selector) protocol: #testing ] ].
 
 	super generateTestingMethods
 ]

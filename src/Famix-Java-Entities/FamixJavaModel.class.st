@@ -16,9 +16,11 @@ FamixJavaModel class >> allSubmetamodelsPackagesNames [
 
 { #category : 'meta' }
 FamixJavaModel class >> annotation [
+
 	<FMClass: #FamixJavaModel super: #MooseModel>
 	<package: #'Famix-Java-Entities'>
 	<generated>
+	^ self
 ]
 
 { #category : 'testing' }

@@ -30,14 +30,14 @@ FmxMBModel >> generate [
 
 { #category : 'generating-methods' }
 FmxMBModel >> generateAnnotation [
+	"I do not know why for model we take the fullName and not the name as for other classes... This is not coherant, we should review this in a Moose metting"
 
 	self
-		addMethod: ('annotation
-	<FMClass: #{1} super: #MooseModel>
-	<package: {2}>
-	<generated>' format: {
-					 self fullName.
-					 self builder safeAnnotationPackageName })
+		addMethod: (FmxMBMethodsFactory
+				 annotationFor: self fullName
+				 super: self defaultSuperclassName
+				 package: self builder safeAnnotationPackageName
+				 isAbstract: false)
 		classSide: true
 		protocol: #meta
 ]
@@ -47,39 +47,16 @@ FmxMBModel >> generateFileImportMethods [
 
 	self builder configuration shouldGenerateFileImportHelpers ifFalse: [ ^ self ].
 
-	self
-		addMethod: 'canBeImportedFromFile
-	<generated>
-	^true'
-		classSide: true
-		protocol: #testing.
+	self addMethod: FmxMBMethodsFactory canBeImportedFromFile classSide: true protocol: #testing.
 
-	self
-		addMethod: ('importingContextClass
-
-	<generated>
-	^ {1}' format: { self builder importingContextName })
-		classSide: true
-		protocol: #accessing
+	self addMethod: (FmxMBMethodsFactory importingClassNamed: self builder importingContextName) classSide: true protocol: #accessing
 ]
 
 { #category : 'generating-methods' }
 FmxMBModel >> generateSubmetamodelsMethod [
 
 	self builder allSubBuilders ifNotEmpty: [ :subBuilders |
-			| code |
-			code := String streamContents: [ :stream |
-					        | packages |
-					        stream nextPutAll: 'allSubmetamodelsPackagesNames
-	<generated>
-	^ #('.
-
-					        packages := (subBuilders collect: [ :subBuilder | subBuilder configuration packageName ]) asOrderedCollection sorted: #yourself descending.
-					        packages do: [ :package | stream print: package ] separatedBy: [ stream space ].
-
-					        stream nextPut: $) ].
-
-			self addMethod: code classSide: true protocol: #accessing ]
+		self addMethod: (FmxMBMethodsFactory allSubmetamodelsPackagesNamesFor: subBuilders) classSide: true protocol: #accessing ]
 ]
 
 { #category : 'testing' }
