@@ -13,7 +13,6 @@ FamixTest8Entity class >> annotation [
 	<package: #'Famix-Test8-Entities'>
 	<generated>
 	<abstract>
-	^ self
 ]
 
 { #category : 'testing' }

@@ -26,7 +26,6 @@ FamixJavaParametricMethod class >> annotation [
 	<FMClass: #ParametricMethod super: #FamixJavaMethod>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^ self
 ]
 
 { #category : 'visitor' }

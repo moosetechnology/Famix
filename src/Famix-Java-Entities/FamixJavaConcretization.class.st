@@ -39,7 +39,6 @@ FamixJavaConcretization class >> annotation [
 	<FMClass: #Concretization super: #FamixJavaEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^ self
 ]
 
 { #category : 'visitor' }

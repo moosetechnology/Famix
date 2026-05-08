@@ -50,7 +50,6 @@ FamixStAttribute class >> annotation [
 	<FMClass: #Attribute super: #FamixStNamedEntity>
 	<package: #'Famix-PharoSmalltalk-Entities'>
 	<generated>
-	^ self
 ]
 
 { #category : 'properties' }

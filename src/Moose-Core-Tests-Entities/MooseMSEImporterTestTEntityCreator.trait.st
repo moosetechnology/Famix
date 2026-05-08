@@ -17,7 +17,6 @@ MooseMSEImporterTestTEntityCreator classSide >> annotation [
 	<FMClass: #TEntityCreator super: #Object>
 	<package: #'Moose-Core-Tests-Entities'>
 	<generated>
-	^ self
 ]
 
 { #category : 'entity creation' }

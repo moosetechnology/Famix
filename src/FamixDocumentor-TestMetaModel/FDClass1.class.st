@@ -29,7 +29,6 @@ FDClass1 class >> annotation [
 	<FMClass: #Class1 super: #FDEntity>
 	<package: #'FamixDocumentor-TestMetaModel'>
 	<generated>
-	^ self
 ]
 
 { #category : 'accessing' }

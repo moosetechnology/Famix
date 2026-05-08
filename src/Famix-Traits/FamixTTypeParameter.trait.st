@@ -34,7 +34,6 @@ FamixTTypeParameter classSide >> annotation [
 	<FMClass: #TTypeParameter super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : 'visitor' }

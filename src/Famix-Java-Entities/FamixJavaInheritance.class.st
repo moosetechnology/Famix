@@ -38,7 +38,6 @@ FamixJavaInheritance class >> annotation [
 	<FMClass: #Inheritance super: #FamixJavaEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^ self
 ]
 
 { #category : 'visitor' }

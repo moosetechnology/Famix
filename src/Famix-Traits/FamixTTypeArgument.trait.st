@@ -28,7 +28,6 @@ FamixTTypeArgument classSide >> annotation [
 	<FMClass: #TTypeArgument super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : 'visitor' }

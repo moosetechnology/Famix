@@ -46,8 +46,7 @@ FmxMBMethodsFactory class >> annotationFor: aName super: superclassName package:
 
 	<FMClass: #{1} super: #{2}>
 	<package: {3}>
-	<generated>{4}
-	^ self' format: {
+	<generated>{4}' format: {
 			  aName.
 			  superclassName.
 			  package.

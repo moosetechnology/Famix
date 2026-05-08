@@ -23,7 +23,6 @@ FamixTNamedEntity classSide >> annotation [
 	<FMClass: #TNamedEntity super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : 'instance creation' }

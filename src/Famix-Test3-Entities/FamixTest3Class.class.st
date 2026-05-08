@@ -59,7 +59,6 @@ FamixTest3Class class >> annotation [
 	<FMClass: #Class super: #FamixTest3Type>
 	<package: #'Famix-Test3-Entities'>
 	<generated>
-	^ self
 ]
 
 { #category : 'groups' }

@@ -26,7 +26,6 @@ FamixTest8TInfectious classSide >> annotation [
 	<FMClass: #TInfectious super: #Object>
 	<package: #'Famix-Test8-Entities'>
 	<generated>
-	^ self
 ]
 
 { #category : 'adding' }

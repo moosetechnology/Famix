@@ -49,7 +49,6 @@ FamixTAssociation classSide >> annotation [
 	<FMClass: #TAssociation super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : 'instance creation' }

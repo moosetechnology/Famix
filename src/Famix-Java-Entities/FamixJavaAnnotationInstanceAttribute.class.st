@@ -37,7 +37,6 @@ FamixJavaAnnotationInstanceAttribute class >> annotation [
 	<FMClass: #AnnotationInstanceAttribute super: #FamixJavaSourcedEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^ self
 ]
 
 { #category : 'visitor' }

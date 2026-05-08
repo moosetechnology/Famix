@@ -32,7 +32,6 @@ FamixJavaWildcard class >> annotation [
 	<FMClass: #Wildcard super: #FamixJavaType>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^ self
 ]
 
 { #category : 'visitor' }

@@ -60,7 +60,6 @@ FamixJavaInterface class >> annotation [
 	<FMClass: #Interface super: #FamixJavaType>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^ self
 ]
 
 { #category : 'visitor' }

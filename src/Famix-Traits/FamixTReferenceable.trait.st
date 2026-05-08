@@ -38,7 +38,6 @@ FamixTReferenceable classSide >> annotation [
 	<FMClass: #TReferenceable super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : 'visitor' }

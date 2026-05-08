@@ -41,7 +41,6 @@ FamixTTraitUsage classSide >> annotation [
 	<FMClass: #TTraitUsage super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : 'visitor' }

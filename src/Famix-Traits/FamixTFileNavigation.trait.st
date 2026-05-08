@@ -34,7 +34,6 @@ FamixTFileNavigation classSide >> annotation [
 	<FMClass: #TFileNavigation super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : 'instance creation' }

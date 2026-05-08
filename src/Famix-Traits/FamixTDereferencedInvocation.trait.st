@@ -54,7 +54,6 @@ FamixTDereferencedInvocation classSide >> annotation [
 	<FMClass: #TDereferencedInvocation super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : 'visitor' }

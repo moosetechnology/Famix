@@ -30,7 +30,6 @@ FamixTIndexedFileNavigation classSide >> annotation [
 	<FMClass: #TIndexedFileNavigation super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : 'instance creation' }

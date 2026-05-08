@@ -17,5 +17,4 @@ FamixTestComposedComposedTEntityCreator classSide >> annotation [
 	<FMClass: #TEntityCreator super: #Object>
 	<package: #'Famix-TestComposedComposedMetamodel-Entities'>
 	<generated>
-	^ self
 ]

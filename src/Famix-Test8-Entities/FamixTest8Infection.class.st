@@ -49,7 +49,6 @@ FamixTest8Infection class >> annotation [
 	<FMClass: #Infection super: #FamixTest8Entity>
 	<package: #'Famix-Test8-Entities'>
 	<generated>
-	^ self
 ]
 
 { #category : 'accessing' }

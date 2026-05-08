@@ -26,5 +26,4 @@ FamixTestComposed2SourceLanguage class >> annotation [
 	<FMClass: #SourceLanguage super: #FamixTestComposed2Entity>
 	<package: #'Famix-TestComposedSubmetamodel2-Entities'>
 	<generated>
-	^ self
 ]

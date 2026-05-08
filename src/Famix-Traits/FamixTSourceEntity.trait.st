@@ -28,7 +28,6 @@ FamixTSourceEntity classSide >> annotation [
 	<FMClass: #TSourceEntity super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : 'visitor' }

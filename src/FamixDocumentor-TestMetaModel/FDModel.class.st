@@ -14,5 +14,4 @@ FDModel class >> annotation [
 	<FMClass: #Model super: #MooseModel>
 	<package: #'FamixDocumentor-TestMetaModel'>
 	<generated>
-	^ self
 ]

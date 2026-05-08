@@ -20,5 +20,4 @@ FamixTest2Model class >> annotation [
 	<FMClass: #Model super: #MooseModel>
 	<package: #'Famix-Test2-Entities'>
 	<generated>
-	^ self
 ]

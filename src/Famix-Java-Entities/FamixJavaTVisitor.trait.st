@@ -17,7 +17,6 @@ FamixJavaTVisitor classSide >> annotation [
 	<FMClass: #TVisitor super: #Object>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^ self
 ]
 
 { #category : 'visiting' }

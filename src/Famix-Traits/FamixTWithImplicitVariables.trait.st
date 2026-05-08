@@ -26,7 +26,6 @@ FamixTWithImplicitVariables classSide >> annotation [
 	<FMClass: #TWithImplicitVariables super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : 'visitor' }

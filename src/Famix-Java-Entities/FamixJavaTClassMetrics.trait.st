@@ -11,7 +11,6 @@ FamixJavaTClassMetrics classSide >> annotation [
 	<FMClass: #TClassMetrics super: #Object>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^ self
 ]
 
 { #category : 'visitor' }

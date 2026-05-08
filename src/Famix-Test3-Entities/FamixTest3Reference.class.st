@@ -38,5 +38,4 @@ FamixTest3Reference class >> annotation [
 	<FMClass: #Reference super: #FamixTest3Entity>
 	<package: #'Famix-Test3-Entities'>
 	<generated>
-	^ self
 ]

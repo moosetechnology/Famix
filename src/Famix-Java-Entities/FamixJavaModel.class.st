@@ -20,7 +20,6 @@ FamixJavaModel class >> annotation [
 	<FMClass: #Model super: #MooseModel>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^ self
 ]
 
 { #category : 'testing' }

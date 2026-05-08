@@ -63,7 +63,6 @@ FamixTClass classSide >> annotation [
 	<FMClass: #TClass super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : 'groups' }

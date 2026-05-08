@@ -23,7 +23,6 @@ FamixTCanBeClassSide classSide >> annotation [
 	<FMClass: #TCanBeClassSide super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : 'visitor' }

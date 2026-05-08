@@ -41,7 +41,6 @@ FamixTImport classSide >> annotation [
 	<FMClass: #TImport super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : 'visitor' }

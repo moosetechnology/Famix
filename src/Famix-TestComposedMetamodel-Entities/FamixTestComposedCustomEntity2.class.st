@@ -25,7 +25,6 @@ FamixTestComposedCustomEntity2 class >> annotation [
 	<FMClass: #CustomEntity2 super: #FamixTestComposedEntity>
 	<package: #'Famix-TestComposedMetamodel-Entities'>
 	<generated>
-	^ self
 ]
 
 { #category : 'adding' }

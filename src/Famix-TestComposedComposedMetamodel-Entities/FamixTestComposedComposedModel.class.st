@@ -20,5 +20,4 @@ FamixTestComposedComposedModel class >> annotation [
 	<FMClass: #Model super: #MooseModel>
 	<package: #'Famix-TestComposedComposedMetamodel-Entities'>
 	<generated>
-	^ self
 ]

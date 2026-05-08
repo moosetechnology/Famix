@@ -26,7 +26,6 @@ FamixTInvocable classSide >> annotation [
 	<FMClass: #TInvocable super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : 'visitor' }

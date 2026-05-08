@@ -31,7 +31,6 @@ FamixJavaComment class >> annotation [
 	<FMClass: #Comment super: #FamixJavaSourcedEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^ self
 ]
 
 { #category : 'visitor' }

@@ -54,7 +54,6 @@ FamixTReference classSide >> annotation [
 	<FMClass: #TReference super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : 'instance creation' }

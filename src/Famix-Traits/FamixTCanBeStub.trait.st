@@ -34,7 +34,6 @@ FamixTCanBeStub classSide >> annotation [
 	<FMClass: #TCanBeStub super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : 'visitor' }

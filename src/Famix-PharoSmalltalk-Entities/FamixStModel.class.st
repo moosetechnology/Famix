@@ -20,7 +20,6 @@ FamixStModel class >> annotation [
 	<FMClass: #Model super: #MooseModel>
 	<package: #'Famix-PharoSmalltalk-Entities'>
 	<generated>
-	^ self
 ]
 
 { #category : 'testing' }

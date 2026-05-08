@@ -41,7 +41,6 @@ FamixTFolder classSide >> annotation [
 	<FMClass: #TFolder super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : 'groups' }

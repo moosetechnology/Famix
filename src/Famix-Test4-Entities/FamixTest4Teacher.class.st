@@ -33,7 +33,6 @@ FamixTest4Teacher class >> annotation [
 	<FMClass: #Teacher super: #FamixTest4Person>
 	<package: #'Famix-Test4-Entities'>
 	<generated>
-	^ self
 ]
 
 { #category : 'adding' }

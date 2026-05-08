@@ -25,7 +25,6 @@ FamixTHasSignature classSide >> annotation [
 	<FMClass: #THasSignature super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : 'visitor' }

@@ -37,7 +37,6 @@ FamixTCohesionCouplingMetrics classSide >> annotation [
 	<FMClass: #TCohesionCouplingMetrics super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : 'metrics' }

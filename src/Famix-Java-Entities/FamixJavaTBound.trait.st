@@ -30,7 +30,6 @@ FamixJavaTBound classSide >> annotation [
 	<FMClass: #TBound super: #Object>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^ self
 ]
 
 { #category : 'visitor' }

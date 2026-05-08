@@ -37,7 +37,6 @@ FamixStAnnotationType class >> annotation [
 	<FMClass: #AnnotationType super: #FamixStNamedEntity>
 	<package: #'Famix-PharoSmalltalk-Entities'>
 	<generated>
-	^ self
 ]
 
 { #category : 'compatibility' }
