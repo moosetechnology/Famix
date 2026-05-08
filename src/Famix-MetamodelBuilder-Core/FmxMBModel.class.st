@@ -35,7 +35,7 @@ FmxMBModel >> generateAnnotation [
 	self
 		addMethod: (FmxMBMethodsFactory
 				 annotationFor: self fullName
-				 super: self defaultSuperclassName
+				 super: self superclassName
 				 package: self builder safeAnnotationPackageName
 				 isAbstract: false)
 		classSide: true

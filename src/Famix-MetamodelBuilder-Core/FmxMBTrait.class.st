@@ -20,13 +20,6 @@ FmxMBTrait >> allTraitGeneralizations [
 		   { each } , each allTraitGeneralizations ]) removeDuplicates
 ]
 
-{ #category : 'accessing' }
-FmxMBTrait >> annotationSuperclass [
-	"For trait we declare the Fame superclass as Object"
-
-	^ 'Object'
-]
-
 { #category : 'settings-default' }
 FmxMBTrait >> defaultTag [
 
@@ -88,4 +81,11 @@ FmxMBTrait >> propertyName [
 FmxMBTrait >> removeRelationSide: aRelationSide [
 
 	propertiesAndRelations remove: aRelationSide ifAbsent: [ ].
+]
+
+{ #category : 'accessing' }
+FmxMBTrait >> superclassName [
+	"For trait we declare the Fame superclass as Object"
+
+	^ 'Object'
 ]

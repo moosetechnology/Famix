@@ -126,12 +126,6 @@ FmxMBBehavior >> allTransitiveTraitsIncludingSuperclasses [
 	^ self allTransitiveTraits
 ]
 
-{ #category : 'accessing' }
-FmxMBBehavior >> annotationSuperclass [
-
-	^ self subclassResponsibility
-]
-
 { #category : 'converting' }
 FmxMBBehavior >> asRelationSideNamed: aPropertyName [
 
@@ -253,7 +247,7 @@ FmxMBBehavior >> generateAnnotation [
 	self
 		addMethod: (FmxMBMethodsFactory
 				 annotationFor: self name
-				 super: self annotationSuperclass
+				 super: self superclassName
 				 package: self builder safeAnnotationPackageName
 				 isAbstract: self isAbstractClass)
 		classSide: true
@@ -526,6 +520,13 @@ FmxMBBehavior >> sourceOneToOne: aFmxTrait [
 
 	(self property: (aFmxTrait name copyWithoutFirst: $T) uncapitalized)
 		source - (aFmxTrait property: #outgoing , self name)
+]
+
+{ #category : 'accessing' }
+FmxMBBehavior >> superclassName [
+	"Trait do not have a superclass but they declare one for the fame annotation"
+
+	^ self subclassResponsibility
 ]
 
 { #category : 'accessing' }
