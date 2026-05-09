@@ -1,175 +1,10 @@
 Class {
 	#name : 'FmxMBChangesBuilderVisitor',
-	#superclass : 'FmxMBWalkerVisitor',
-	#instVars : [
-		'builder',
-		'currentBehavioral',
-		'changesToApply'
-	],
+	#superclass : 'FmxMBAbstractChangesBuilderVisitor',
 	#category : 'Famix-MetamodelBuilder-Core-Implementation',
 	#package : 'Famix-MetamodelBuilder-Core',
 	#tag : 'Implementation'
 }
-
-{ #category : 'adding' }
-FmxMBChangesBuilderVisitor >> addMethod: sourceCode classSide: aBoolean protocol: protocol [
-
-	self
-		addMethod: sourceCode
-		in: currentBehavioral fullName
-		classSide: aBoolean
-		protocol: protocol
-]
-
-{ #category : 'adding' }
-FmxMBChangesBuilderVisitor >> addMethod: sourceCode in: aClassName classSide: aBoolean protocol: protocol [
-
-	changesToApply add: (FmxMethodAddition
-			 className: aClassName
-			 isClassSide: aBoolean
-			 sourceCode: sourceCode
-			 protocol: protocol)
-]
-
-{ #category : 'adding' }
-FmxMBChangesBuilderVisitor >> addMethod: sourceCode in: aClassName protocol: protocol [
-
-	self
-		addMethod: sourceCode
-		in: aClassName
-		classSide: false
-		protocol: protocol
-]
-
-{ #category : 'adding' }
-FmxMBChangesBuilderVisitor >> addMethod: sourceCode protocol: protocol [
-
-	self addMethod: sourceCode in: currentBehavioral fullName protocol: protocol
-]
-
-{ #category : 'accessing' }
-FmxMBChangesBuilderVisitor >> applyChanges [
-
-	| dependencies |
-	changesToApply ifEmpty: [ ^ self ]. 
-	
-	"Now we have a list of changes to apply. Some changes needs to by applied before others (for example, we need to create a classe to compile its methods or compile superclasses before their subclasses or traits before their users)."
-	dependencies := changesToApply inject: Dictionary new into: [ :dictionary :change |
-			                dictionary
-				                at: change put: (change followingChangesIn: (changesToApply copyWithout: change));
-				                yourself ].
-	(AITopologicalSorting sort: changesToApply followingIncomingProperty: [ :change | dependencies at: change ]) do: #apply
-]
-
-{ #category : 'initialization' }
-FmxMBChangesBuilderVisitor >> buildSlotsDefinitionsFor: properties existingClass: currentClass [
-
-	| modelSlotDefinitions |
-	currentClass
-		ifNil: [ modelSlotDefinitions := properties collect: [ :property | property slotDefinition ] ]
-		ifNotNil: [
-				| currentCustomSlots |
-				currentCustomSlots := currentClass localSlots copyWithoutAll: currentClass generatedSlots.
-
-				(currentClass generatedSlots reject: [ :generatedSlot | properties anySatisfy: [ :property | property name = generatedSlot name ] ]) ifNotEmpty: [
-					:slotRemovals | changesToApply add: (FmxSlotRemovals slots: slotRemovals) ].
-
-				modelSlotDefinitions := properties
-					                        reject: [ :property | currentCustomSlots anySatisfy: [ :slot | slot name = property name ] ]
-					                        thenCollect: [ :property | property slotDefinition ].
-
-				modelSlotDefinitions addAll: (currentCustomSlots collect: #definitionString) ].
-
-	modelSlotDefinitions ifEmpty: [ ^ nil ].
-	^ modelSlotDefinitions sorted
-]
-
-{ #category : 'cleaning' }
-FmxMBChangesBuilderVisitor >> changesOfType: aClass [
-
-	^ changesToApply select: [ :change | change isKindOf: aClass ]
-]
-
-{ #category : 'accessing' }
-FmxMBChangesBuilderVisitor >> changesToApply [
-	^ changesToApply
-]
-
-{ #category : 'initialization' }
-FmxMBChangesBuilderVisitor >> createClassNamed: className superclass: superclassName traitDefinitions: traitDefinitions precedingTrait: precedingTrait properties: properties in: defaultPackage tag: defaultTag comment: comment [
-
-	| realClass packageName tag change |
-	realClass := self class environment at: className ifAbsent: [ nil ].
-
-	packageName := realClass
-		               ifNil: [ defaultPackage ]
-		               ifNotNil: [ realClass package name ].
-	tag := realClass
-		       ifNil: [ defaultTag ]
-		       ifNotNil: [ realClass packageTag name ].
-
-	change := FmxClassAddition new.
-	change
-		name: className;
-		superclass: superclassName;
-		package: packageName;
-		tag: tag.
-
-	traitDefinitions ifNotEmpty: [ change traits: (self traitStringFrom: traitDefinitions precedingTrait: precedingTrait existingClass: realClass) ].
-
-	self validateProperties: properties.
-	change slots: (self buildSlotsDefinitionsFor: properties existingClass: realClass).
-	changesToApply add: change.
-
-	self ensurePackageNamed: packageName.
-
-	comment ifNotEmpty: [ changesToApply add: (FmxClassCommentUpdate className: className comment: comment) ]
-]
-
-{ #category : 'initialization' }
-FmxMBChangesBuilderVisitor >> createTraitNamed: traitName traitDefinitions: traitDefinitions precedingTrait: precedingTrait properties: properties in: defaultPackage tag: defaultTag comment: comment [
-
-	| packageName tag realClass change |
-	realClass := self class environment at: traitName ifAbsent: [ nil ].
-
-	packageName := realClass
-		               ifNil: [ defaultPackage ]
-		               ifNotNil: [ realClass package name ].
-	tag := realClass
-		       ifNil: [ defaultTag ]
-		       ifNotNil: [ realClass packageTag name ].
-
-	change := FmxTraitAddition new.
-	change
-		name: traitName;
-		package: packageName;
-		tag: tag.
-
-	traitDefinitions ifNotEmpty: [ change traits: (self traitStringFrom: traitDefinitions precedingTrait: precedingTrait existingClass: realClass) ].
-
-	properties ifNotEmpty: [
-			self validateProperties: properties.
-			change slots: (self buildSlotsDefinitionsFor: properties existingClass: realClass) ].
-	changesToApply add: change.
-
-	self ensurePackageNamed: packageName.
-
-	comment ifNotEmpty: [ changesToApply add: (FmxClassCommentUpdate className: traitName comment: comment) ]
-]
-
-{ #category : 'private' }
-FmxMBChangesBuilderVisitor >> ensurePackageNamed: packageName [
-
-	((self changesOfType: FmxPackageAddition) anySatisfy: [ :change | change packageName = packageName ]) ifTrue: [ ^ self ].
-
-	changesToApply add: (FmxPackageAddition named: packageName)
-]
-
-{ #category : 'accessing' }
-FmxMBChangesBuilderVisitor >> filterRedoundantChanges [
-
-	changesToApply := changesToApply select: #isRequired
-]
 
 { #category : 'as yet unclassified' }
 FmxMBChangesBuilderVisitor >> generateAddToCollection [
@@ -242,7 +77,7 @@ FmxMBChangesBuilderVisitor >> generateTestingMethodsOfRemoteEntities [
 												at: remoteClass fullName
 												ifPresent: [ :class |
 														(class includesSelector: selector) ifFalse: [
-															self addMethod: (self methodFactory testReturning: true for: selector) in: remoteClass name protocol: '*' , builder configuration packageName ] ]
+															self addMethod: (self methodFactory testReturning: true for: selector) in: remoteClass fullName protocol: '*' , builder configuration packageName ] ]
 												ifAbsent: [ self error: 'The class ' , remoteClass fullName , ' was not found in the system to generate a remote testing method.' ] ] ] ] ] ]
 ]
 
@@ -250,19 +85,6 @@ FmxMBChangesBuilderVisitor >> generateTestingMethodsOfRemoteEntities [
 FmxMBChangesBuilderVisitor >> generateTrueTestingMethods [
 
 	currentBehavioral testingSelectors do: [ :aSelector | self addMethod: (self methodFactory testReturning: true for: aSelector) protocol: #testing ]
-]
-
-{ #category : 'initialization' }
-FmxMBChangesBuilderVisitor >> initialize [
-
-	super initialize.
-	changesToApply := OrderedCollection new
-]
-
-{ #category : 'as yet unclassified' }
-FmxMBChangesBuilderVisitor >> methodFactory [
-
-	^ FmxMBMethodsFactory
 ]
 
 { #category : 'installing' }
@@ -316,45 +138,12 @@ FmxMBChangesBuilderVisitor >> registerRemovals [
 	self recordRemovalOfGeneratedPackagesAndClasses
 ]
 
-{ #category : 'installing' }
-FmxMBChangesBuilderVisitor >> traitStringFrom: traitDefinitions precedingTrait: precedingTrait existingClass: realClass [
-	"We need to collect the generated traits + the custom traits added by the user."
-
-	| customTraitNames traitCompositionString |
-	customTraitNames := ((realClass
-		                      ifNil: [ #(  ) ]
-		                      ifNotNil: [ :class | class traitComposition rootMembers ]) select: [ :e | realClass customTraitNames includes: e name ]) collect:
-		                    #traitCompositionExpression.
-	"manage methods to remove."
-	traitCompositionString := traitDefinitions , customTraitNames ifEmpty: [ ^ '{ }' ] ifNotEmpty: [ :definitions | definitions joinUsing: ' + ' ].
-
-	precedingTrait ifNil: [ ^ traitCompositionString ].
-
-	^ String streamContents: [ :s |
-			  s
-				  nextPutAll: '(';
-				  nextPutAll: traitCompositionString;
-				  nextPutAll: ' withPrecedenceOf: ';
-				  nextPutAll: precedingTrait;
-				  nextPutAll: ')' ]
-]
-
-{ #category : 'installing' }
-FmxMBChangesBuilderVisitor >> validateProperties: properties [
-
-	| names |
-	names := properties collect: #name.
-	self assert: names size = names asSet size description: 'Two properties of the same class cannot have the same names.'.
-	properties do: [ :property | property validate ]
-]
-
 { #category : 'visiting' }
 FmxMBChangesBuilderVisitor >> visitBuilder: aBuilder [
 
-	builder := aBuilder.
-	self ensurePackageNamed: aBuilder configuration packageName.
-
 	super visitBuilder: aBuilder.
+
+	self ensurePackageNamed: aBuilder configuration packageName.
 
 	self generateTestingMethodsOfRemoteEntities.
 
@@ -454,24 +243,6 @@ FmxMBChangesBuilderVisitor >> visitModel: aClass [
 ]
 
 { #category : 'visiting' }
-FmxMBChangesBuilderVisitor >> visitRelation: aRelation [
-
-	| generationStrategy protocol |
-	super visitRelation: aRelation.
-
-	generationStrategy := (aRelation producesSlot
-		                       ifTrue: [ FmxMBRelationSlotsGenerationStrategy ]
-		                       ifFalse: [ FmxMBRelationAttributesGenerationStrategy ]) defaultInstance.
-
-	protocol := aRelation isRemote
-		            ifTrue: [ '*' , builder parentBuilderPackageName ]
-		            ifFalse: [ #accessing ].
-
-	self addMethod: (generationStrategy generateSetterCodeFor: aRelation) protocol: protocol.
-	self addMethod: (generationStrategy generateGetterCodeFor: aRelation) protocol: protocol
-]
-
-{ #category : 'visiting' }
 FmxMBChangesBuilderVisitor >> visitTrait: aTrait [
 
 	currentBehavioral := aTrait.
@@ -498,19 +269,4 @@ FmxMBChangesBuilderVisitor >> visitTraitEntity: aTrait [
 	self
 		generateTrueTestingMethods;
 		generateAddToCollection
-]
-
-{ #category : 'visiting' }
-FmxMBChangesBuilderVisitor >> visitTypedProperty: aTypedProperty [
-
-	| protocol |
-	super visitTypedProperty: aTypedProperty.
-
-	protocol := aTypedProperty isRemote
-		            ifTrue: [ '*' , builder parentBuilderPackageName ]
-		            ifFalse: [ #accessing ].
-
-	self addMethod: (self methodFactory getTypedProperty: aTypedProperty) protocol: protocol.
-
-	self addMethod: (self methodFactory setTypedProperty: aTypedProperty name remote: aTypedProperty isRemote) protocol: protocol
 ]
