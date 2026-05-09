@@ -423,7 +423,7 @@ FamixMetamodelBuilder >> newClassNamed: aClassName comment: aString [
 FamixMetamodelBuilder >> newTrait [
 
 	| aTrait |
-	aTrait := FmxMBTrait new.
+	aTrait := FmxMBTraitEntity new.
 	aTrait builder: self.
 	aTrait prefix: self configuration prefix.
 	aTrait packageName: self configuration packageName.
