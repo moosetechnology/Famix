@@ -6,9 +6,9 @@ This is used when one of the side of the relation is remote.
 Class {
 	#name : 'FmxMBRelationAttributesGenerationStrategy',
 	#superclass : 'FmxMBRelationAccessorsGenerationStrategy',
-	#category : 'Famix-MetamodelBuilder-Core-Generation',
+	#category : 'Famix-MetamodelBuilder-Core-Implementation',
 	#package : 'Famix-MetamodelBuilder-Core',
-	#tag : 'Generation'
+	#tag : 'Implementation'
 }
 
 { #category : 'generation' }

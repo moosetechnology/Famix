@@ -9,6 +9,13 @@ Class {
 	#tag : 'Implementation'
 }
 
+{ #category : 'visitor' }
+FmxMBClassGroup >> acceptVisitor: aVisitor [
+
+	<ignoreForCoverage>
+	^ aVisitor visitClassGroup: self
+]
+
 { #category : 'settings - default' }
 FmxMBClassGroup >> defaultSuperclassName [
 

@@ -25,7 +25,7 @@ Class {
 FmxMBRelationSide >> acceptVisitor: aVisitor [
 
 	<ignoreForCoverage>
-	^ aVisitor visitRelationSide: self.
+	^ aVisitor visitRelation: self.
 ]
 
 { #category : 'converting' }
@@ -69,15 +69,17 @@ FmxMBRelationSide >> derived: anObject [
 { #category : 'generating' }
 FmxMBRelationSide >> generateGetterIn: aFmxBehavioral [
 
-	^ self generationStrategy generateGetterIn: aFmxBehavioral for: self
+	aFmxBehavioral addMethod: (self generationStrategy generateGetterCodeFor: self) protocol: (self isRemote
+			 ifTrue: [ '*' , self builder parentBuilderPackageName ]
+			 ifFalse: [ #accessing ])
 ]
 
 { #category : 'generating' }
 FmxMBRelationSide >> generateSetterIn: aFmxBehavioral [
 
-	self generationStrategy generateSetterIn: aFmxBehavioral for: self
-
-	
+	aFmxBehavioral addMethod: (self generationStrategy generateSetterCodeFor: self) protocol: (self isRemote
+			 ifTrue: [ '*' , self builder parentBuilderPackageName ]
+			 ifFalse: [ #accessing ])
 ]
 
 { #category : 'accessing' }

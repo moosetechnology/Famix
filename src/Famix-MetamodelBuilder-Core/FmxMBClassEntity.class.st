@@ -10,6 +10,13 @@ Class {
 	#tag : 'Implementation'
 }
 
+{ #category : 'visitor' }
+FmxMBClassEntity >> acceptVisitor: aVisitor [
+
+	<ignoreForCoverage>
+	^ aVisitor visitClassEntity: self
+]
+
 { #category : 'settings - default' }
 FmxMBClassEntity >> defaultSuperclassName [
 	"We have a special case with MooseObject that should inherit from Object."
@@ -97,6 +104,12 @@ FmxMBClassEntity >> isRoot [
 	
 	"We have a special case with MooseObject because we do not want to consider it as a root but it inherits from Object."
 	^ self isMooseObject not
+]
+
+{ #category : 'accessing' }
+FmxMBClassEntity >> propertiesForEqualityCheck [
+
+	^ propertiesForEqualityCheck
 ]
 
 { #category : 'generalization' }

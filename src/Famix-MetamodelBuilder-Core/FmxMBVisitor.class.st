@@ -40,6 +40,12 @@ FmxMBVisitor class >> visit: aFmxEntity [
 ]
 
 { #category : 'visiting' }
+FmxMBVisitor >> visitBehavioral: aBehavioral [
+
+	
+]
+
+{ #category : 'visiting' }
 FmxMBVisitor >> visitBuilder: aBuilder [
 
 	
@@ -47,16 +53,60 @@ FmxMBVisitor >> visitBuilder: aBuilder [
 
 { #category : 'visiting' }
 FmxMBVisitor >> visitClass: aClass [
+
+	self visitBehavioral: aClass
 ]
 
 { #category : 'visiting' }
-FmxMBVisitor >> visitRelationSide: aRelationSide [
+FmxMBVisitor >> visitClassEntity: aClass [
+
+	^ self visitClass: aClass
+]
+
+{ #category : 'visiting' }
+FmxMBVisitor >> visitClassGroup: aClass [
+
+	^ self visitClass: aClass
+]
+
+{ #category : 'visiting' }
+FmxMBVisitor >> visitEntityCreator: aTrait [
+
+	self visitTrait: aTrait
+]
+
+{ #category : 'visiting' }
+FmxMBVisitor >> visitImportingContext: aClass [
+
+	^ self visitClass: aClass
+]
+
+{ #category : 'visiting' }
+FmxMBVisitor >> visitModel: aClass [
+
+	^ self visitClass: aClass
+]
+
+{ #category : 'visiting' }
+FmxMBVisitor >> visitProperty: aRelationSide [
+
+	
+]
+
+{ #category : 'visiting' }
+FmxMBVisitor >> visitRelation: aRelation [
+
+	self visitProperty: aRelation
 ]
 
 { #category : 'visiting' }
 FmxMBVisitor >> visitTrait: aTrait [
+
+	self visitBehavioral: aTrait
 ]
 
 { #category : 'visiting' }
 FmxMBVisitor >> visitTypedProperty: aTypedProperty [
+
+	self visitProperty: aTypedProperty
 ]

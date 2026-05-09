@@ -15,7 +15,7 @@ Class {
 	#tag : 'Visitors'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : 'visiting' }
 FmxMBPrintVisitor >> prepareForPropertiesIn: aClassOrTrait [
 
 	aClassOrTrait propertiesAndRelations ifEmpty: [ ^ self ].
@@ -57,7 +57,7 @@ FmxMBPrintVisitor >> visitClass: aClass [
 ]
 
 { #category : 'visiting' }
-FmxMBPrintVisitor >> visitRelationSide: aRelationSide [
+FmxMBPrintVisitor >> visitRelation: aRelationSide [
 
 	self trace:
 		aRelationSide name , ' (' , aRelationSide oppositeType , ')'

@@ -232,6 +232,8 @@ FamixMetamodelBuilder >> generate [
 	| changesBuilder |
 	self prepareGeneration.
 	changesBuilder := FmxMBChangesBuilderVisitor visit: self.
+	changesBuilder changesToApply size = self environment rawChangesToApply size ifFalse: [ self halt ].
+
 	self apply
 ]
 

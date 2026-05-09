@@ -94,6 +94,62 @@ FmxMBMethodsFactory class >> equalsForVariableNamed: variableName properties: pr
 ]
 
 { #category : 'code generation' }
+FmxMBMethodsFactory class >> getTypedProperty: aProperty [
+
+	| propertyDefinition commentDefinition pragmaFormat |
+	pragmaFormat := aProperty defaultValue
+		                ifNil: [ '<FMProperty: #{1} type: #{2}>' ]
+		                ifNotNil: [ '<FMProperty: #{1} type: #{2} defaultValue: {3}>' ].
+	propertyDefinition := pragmaFormat format: {
+			                      aProperty name.
+			                      aProperty propertyType.
+			                      aProperty defaultValue printString }.
+
+	commentDefinition := aProperty comment ifNotEmpty: [ '<FMComment: {1}>' format: { aProperty comment printString } ].
+
+	^ String streamContents: [ :s |
+			  s
+				  nextPutAll: aProperty name;
+				  cr;
+				  cr.
+			  s
+				  tab;
+				  nextPutAll: propertyDefinition;
+				  cr.
+			  s
+				  tab;
+				  nextPutAll: '<generated>';
+				  cr.
+			  aProperty isMultivalued ifTrue: [
+					  s
+						  tab;
+						  nextPutAll: '<multivalued>';
+						  cr ].
+			  commentDefinition ifNotEmpty: [
+					  s
+						  tab;
+						  nextPutAll: commentDefinition;
+						  cr ].
+			  s
+				  tab;
+				  nextPutAll: '^ '.
+
+			  aProperty isRemote
+				  ifTrue: [
+						  s
+							  nextPutAll: 'self attributeAt: #';
+							  nextPutAll: aProperty name;
+							  nextPutAll: ' ifAbsent: [ nil ]' ]
+				  ifFalse: [ s nextPutAll: aProperty name ].
+
+
+			  aProperty defaultValue ifNotNil: [
+					  s nextPutAll: (' ifNil: [ {1} := {2} ]' format: {
+								   aProperty name.
+								   aProperty defaultValue printString }) ] ]
+]
+
+{ #category : 'code generation' }
 FmxMBMethodsFactory class >> groupAnnotationNamed: aName [
 
 	^ 'annotation{1}
@@ -197,6 +253,18 @@ FmxMBMethodsFactory class >> metamodelFor: className [
 
 	<generated>
 	^ {1} metamodel' format: { className }
+]
+
+{ #category : 'code generation' }
+FmxMBMethodsFactory class >> setTypedProperty: aName remote: aBoolean [
+
+	^ (String streamContents: [ :stream |
+			   stream nextPutAll: '{1}: anObject
+	<generated>
+	'.
+			   aBoolean
+				   ifTrue: [ stream nextPutAll: 'self attributeAt: #{1} put: anObject' ]
+				   ifFalse: [ stream nextPutAll: '{1} := anObject' ] ]) format: { aName }
 ]
 
 { #category : 'code generation' }

@@ -33,6 +33,13 @@ FmxMBBehavior >> <|-- anObject [
 	^ anObject
 ]
 
+{ #category : 'visiting' }
+FmxMBBehavior >> acceptVisitor: aVisitor [
+
+	<ignoreForCoverage>
+	^ aVisitor visitBehavioral: self
+]
+
 { #category : 'accessing' }
 FmxMBBehavior >> addAllTransitiveTraitsIn: aCollection [
 

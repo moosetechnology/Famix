@@ -183,6 +183,12 @@ FmxMBRingEnvironment >> initialize [
 	changesToApply := OrderedCollection new
 ]
 
+{ #category : 'testing' }
+FmxMBRingEnvironment >> rawChangesToApply [
+
+	^ changesToApply
+]
+
 { #category : 'installing' }
 FmxMBRingEnvironment >> recordMethodRemovalsOf: realClass [
 

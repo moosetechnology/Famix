@@ -18,6 +18,13 @@ FmxMBVisitorTrait >> acceptMethodProtocol [
 		  ifFalse: [ '*' , self packageName ]
 ]
 
+{ #category : 'visitor' }
+FmxMBVisitorTrait >> acceptVisitor: aVisitor [
+
+	<ignoreForCoverage>
+	^ aVisitor visitVisitor: self
+]
+
 { #category : 'accessing' }
 FmxMBVisitorTrait >> comment [
 
@@ -38,65 +45,15 @@ FmxMBVisitorTrait >> generate [
 		comment: self comment.
 
 	self generateAnnotation.
-	self generateCommonMethodsIfNecessary.
-	self generateVisitAndAcceptMethods
-]
 
-{ #category : 'generating' }
-FmxMBVisitorTrait >> generateAcceptMethodIn: aFmxMBBehavior [
-
-	aFmxMBBehavior
-		addMethod: ('accept: aVisitor
-
-	<generated>
-	^ aVisitor visit{1}: self' format: { aFmxMBBehavior fullName })
-		protocol: self acceptMethodProtocol
-]
-
-{ #category : 'generation - common' }
-FmxMBVisitorTrait >> generateCommonMethodsIfNecessary [
-
-	self allLocalTraits ifNotEmpty: [ ^ self ].
-
-	self generateVisitEntityMethod.
-	self generateVisitCollectionMethod
-]
-
-{ #category : 'generating' }
-FmxMBVisitorTrait >> generateVisitAndAcceptMethods [
+	self allLocalTraits ifEmpty: [
+			self addMethod: FmxMBMethodsFactory visitEntity protocol: #visiting.
+			self addMethod: FmxMBMethodsFactory visitCollection protocol: #visiting ].
 
 	(builder classes select: #isClassEntity) , (builder traits select: [ :fmxTrait | fmxTrait isMetamodelTrait and: [ fmxTrait isVisitorTrait not ] ]) do: [
 			:fmxMBBehavior |
-			self generateVisitMethodFor: fmxMBBehavior.
-			self generateAcceptMethodIn: fmxMBBehavior ]
-]
-
-{ #category : 'generation - common' }
-FmxMBVisitorTrait >> generateVisitCollectionMethod [
-
-	self
-		addMethod: 'visitCollection: aCollection
-
-	<generated>
-	^ aCollection collect: [ :each | each accept: self ]'
-		protocol: #visiting
-]
-
-{ #category : 'generation - common' }
-FmxMBVisitorTrait >> generateVisitEntityMethod [
-
-	self
-		addMethod: 'visitEntity: aFamixEntity
-
-	<generated>
-	^ aFamixEntity ifNotNil: [ aFamixEntity accept: self ]'
-		protocol: #visiting
-]
-
-{ #category : 'generation - visit' }
-FmxMBVisitorTrait >> generateVisitMethodFor: aFmxMBBehavior [
-
-	self addMethod: (String streamContents: [ :s | self writeVisitMethodFor: aFmxMBBehavior on: s ]) protocol: #visiting
+			self addMethod: (FmxMBMethodsFactory visitBehavioral: fmxMBBehavior) protocol: #visiting.
+			fmxMBBehavior addMethod: (FmxMBMethodsFactory acceptFor: fmxMBBehavior fullName) protocol: self acceptMethodProtocol ]
 ]
 
 { #category : 'initialization' }
@@ -111,63 +68,4 @@ FmxMBVisitorTrait >> initialize [
 FmxMBVisitorTrait >> isVisitorTrait [
 
 	^ true
-]
-
-{ #category : 'generation - visit' }
-FmxMBVisitorTrait >> writeTransitionFor: aFmxMBBehavior on: aStream [
-
-	aFmxMBBehavior relations ifNotEmpty: [
-		aStream
-			<< $.;
-			cr;
-			cr ]
-]
-
-{ #category : 'generation - visit' }
-FmxMBVisitorTrait >> writeVisitMethodFor: aFmxMBBehavior on: aStream [
-
-	self writeVisitMethodHeaderFor: aFmxMBBehavior on: aStream.
-	self writeVisitTraitsAndSuperclassFor: aFmxMBBehavior on: aStream.
-	self writeVisitRelationsFor: aFmxMBBehavior on: aStream
-]
-
-{ #category : 'generation - visit' }
-FmxMBVisitorTrait >> writeVisitMethodHeaderFor: aFmxMBBehavior on: aStream [
-
-	aStream <<('visit{1}: a{1}
-
-	<generated>
-' format: { aFmxMBBehavior fullName })
-]
-
-{ #category : 'generation - visit' }
-FmxMBVisitorTrait >> writeVisitRelationsFor: aFmxMBBehavior on: aStream [
-
-	aFmxMBBehavior relations
-		do: [ :relation |
-				aStream << ('	self visit{1}: a{2} {3}' format: {
-						 (relation isOne
-							  ifTrue: [ 'Entity' ]
-							  ifFalse: [ 'Collection' ]).
-						 aFmxMBBehavior fullName.
-						 relation name }) ]
-		separatedBy: [
-				aStream
-					<< $.;
-					cr ]
-]
-
-{ #category : 'generation - visit' }
-FmxMBVisitorTrait >> writeVisitTraitsAndSuperclassFor: aFmxMBBehavior on: aStream [
-
-	aFmxMBBehavior behaviorsToVisit
-		do: [ :behavior |
-			aStream << ('	self visit{1}: a{2}' format: {
-							 behavior fullName.
-							 aFmxMBBehavior fullName }) ]
-		separatedBy: [
-			aStream
-				<< '.';
-				cr ];
-		ifNotEmpty: [ self writeTransitionFor: aFmxMBBehavior on: aStream ]
 ]

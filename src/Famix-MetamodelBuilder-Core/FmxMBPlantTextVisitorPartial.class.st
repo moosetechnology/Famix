@@ -43,10 +43,10 @@ FmxMBPlantTextVisitorPartial >> visitClass: aClass [
 ]
 
 { #category : 'visiting' }
-FmxMBPlantTextVisitorPartial >> visitRelationSide: aRelationSide [
+FmxMBPlantTextVisitorPartial >> visitRelation: aRelationSide [
 	(self isWantedRelation: aRelationSide)
 	ifFalse: [ ^ self ].
-	super  visitRelationSide: aRelationSide
+	super  visitRelation: aRelationSide
 
 ]
 

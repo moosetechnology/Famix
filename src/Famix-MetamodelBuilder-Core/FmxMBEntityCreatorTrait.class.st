@@ -10,6 +10,13 @@ Class {
 	#tag : 'Implementation'
 }
 
+{ #category : 'visitor' }
+FmxMBEntityCreatorTrait >> acceptVisitor: aVisitor [
+
+	<ignoreForCoverage>
+	^ aVisitor visitEntityCreator: self
+]
+
 { #category : 'generating' }
 FmxMBEntityCreatorTrait >> generate [
 

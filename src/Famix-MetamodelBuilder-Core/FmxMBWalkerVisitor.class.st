@@ -33,25 +33,17 @@ FmxMBWalkerVisitor >> separateProperties [
 ]
 
 { #category : 'visiting' }
+FmxMBWalkerVisitor >> visitBehavioral: aBehavioral [
+	"Visit all properties of aClass"
+
+	self prepareForPropertiesIn: aBehavioral.
+	aBehavioral propertiesAndRelations do: [ :each | each acceptVisitor: self ] separatedBy: [ self separateProperties ]
+]
+
+{ #category : 'visiting' }
 FmxMBWalkerVisitor >> visitBuilder: aBuilder [
 	"Visit every Traits, and classes after that."
 
 	aBuilder sortedTraits do: [ :each | each acceptVisitor: self ].
 	aBuilder sortedClasses do: [ :each | each acceptVisitor: self ]
-]
-
-{ #category : 'visiting' }
-FmxMBWalkerVisitor >> visitClass: aClass [
-	"Visit all properties of aClass"
-
-	self prepareForPropertiesIn: aClass.
-	aClass propertiesAndRelations do: [ :each | each acceptVisitor: self ] separatedBy: [ self separateProperties ]
-]
-
-{ #category : 'visiting' }
-FmxMBWalkerVisitor >> visitTrait: aTrait [
-	"visit all properties of aTrait"
-
-	self prepareForPropertiesIn: aTrait.
-	aTrait propertiesAndRelations do: [ :each | each acceptVisitor: self ] separatedBy: [ self separateProperties ]
 ]

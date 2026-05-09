@@ -11,6 +11,13 @@ FmxMBProperty class >> isAbstract [
 	^ self = FmxMBProperty
 ]
 
+{ #category : 'visiting' }
+FmxMBProperty >> acceptVisitor: aVisitor [
+
+	<ignoreForCoverage>
+	^ aVisitor visitProperty: self
+]
+
 { #category : 'generating' }
 FmxMBProperty >> generateAccessorsIn: aFmxBehavioral [
 	self generateGetterIn: aFmxBehavioral.

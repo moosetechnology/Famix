@@ -6,6 +6,12 @@ Class {
 	#tag : 'Implementation'
 }
 
+{ #category : 'visitor' }
+FmxMBModel >> acceptVisitor: aVisitor [
+
+	^ aVisitor visitModel: self
+]
+
 { #category : 'settings - default' }
 FmxMBModel >> defaultSuperclassName [
 

@@ -33,59 +33,7 @@ FmxMBTypedProperty >> defaultValue: aValue [
 { #category : 'generating' }
 FmxMBTypedProperty >> generateGetterIn: aFmxBehavioral [
 
-	| methodSource propertyDefinition commentDefinition pragmaFormat |
-	pragmaFormat := self defaultValue
-		                ifNil: [ '<FMProperty: #{1} type: #{2}>' ]
-		                ifNotNil: [ '<FMProperty: #{1} type: #{2} defaultValue: {3}>' ].
-	propertyDefinition := pragmaFormat format: {
-			                      self name.
-			                      self propertyType.
-			                      self defaultValue printString }.
-
-	commentDefinition := self comment ifNotEmpty: [ '<FMComment: {1}>' format: { self comment printString } ].
-
-	methodSource := String streamContents: [ :s |
-			                s
-				                nextPutAll: self name;
-				                cr;
-				                cr.
-			                s
-				                tab;
-				                nextPutAll: propertyDefinition;
-				                cr.
-			                s
-				                tab;
-				                nextPutAll: '<generated>';
-				                cr.
-			                self isMultivalued ifTrue: [
-					                s
-						                tab;
-						                nextPutAll: '<multivalued>';
-						                cr ].
-			                commentDefinition ifNotEmpty: [
-					                s
-						                tab;
-						                nextPutAll: commentDefinition;
-						                cr ].
-			                s
-				                tab;
-				                nextPutAll: '^ '.
-
-			                self isRemote
-				                ifTrue: [
-						                s
-							                nextPutAll: 'self attributeAt: #';
-							                nextPutAll: self name;
-							                nextPutAll: ' ifAbsent: [ nil ]' ]
-				                ifFalse: [ s nextPutAll: self name ].
-
-
-			                self defaultValue ifNotNil: [
-					                s nextPutAll: (' ifNil: [ {1} := {2} ]' format: {
-								                 self name.
-								                 self defaultValue printString }) ] ].
-
-	aFmxBehavioral addMethod: methodSource protocol: (self isRemote
+	aFmxBehavioral addMethod: (FmxMBMethodsFactory getTypedProperty: self) protocol: (self isRemote
 			 ifTrue: [ '*' , self builder parentBuilderPackageName ]
 			 ifFalse: [ #accessing ])
 ]
@@ -93,16 +41,7 @@ FmxMBTypedProperty >> generateGetterIn: aFmxBehavioral [
 { #category : 'generating' }
 FmxMBTypedProperty >> generateSetterIn: aFmxBehavioral [
 
-	| methodToFormat |
-	methodToFormat := String streamContents: [ :stream |
-			                  stream nextPutAll: '{1}: anObject
-	<generated>
-	'.
-			                  self isRemote
-				                  ifTrue: [ stream nextPutAll: 'self attributeAt: #{1} put: anObject' ]
-				                  ifFalse: [ stream nextPutAll: '{1} := anObject' ] ].
-
-	aFmxBehavioral addMethod: (methodToFormat format: { self name }) protocol: (self isRemote
+	aFmxBehavioral addMethod: (FmxMBMethodsFactory setTypedProperty: self name remote: self isRemote) protocol: (self isRemote
 			 ifTrue: [ '*' , self builder parentBuilderPackageName ]
 			 ifFalse: [ 'accessing' ])
 ]
