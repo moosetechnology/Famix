@@ -26,7 +26,6 @@ FamixTWithTemplates classSide >> annotation [
 	<FMClass: #TWithTemplates super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : 'visitor' }

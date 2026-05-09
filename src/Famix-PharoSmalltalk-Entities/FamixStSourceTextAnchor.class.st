@@ -32,5 +32,4 @@ FamixStSourceTextAnchor class >> annotation [
 	<FMClass: #SourceTextAnchor super: #FamixStSourceAnchor>
 	<package: #'Famix-PharoSmalltalk-Entities'>
 	<generated>
-	^ self
 ]

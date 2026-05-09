@@ -17,7 +17,6 @@ FamixTest7TEntityCreator classSide >> annotation [
 	<FMClass: #TEntityCreator super: #Object>
 	<package: #'Famix-Test7-Entities'>
 	<generated>
-	^ self
 ]
 
 { #category : 'entity creation' }

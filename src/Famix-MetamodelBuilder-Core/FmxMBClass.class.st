@@ -50,12 +50,6 @@ FmxMBClass >> allTransitiveTraitsIncludingSuperclasses [
 	^ result
 ]
 
-{ #category : 'accessing' }
-FmxMBClass >> annotationSuperclass [
-
-	^ self superclassName
-]
-
 { #category : 'settings - default' }
 FmxMBClass >> defaultSuperclassName [
 

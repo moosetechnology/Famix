@@ -16,7 +16,8 @@ FamixStModel class >> allSubmetamodelsPackagesNames [
 
 { #category : 'meta' }
 FamixStModel class >> annotation [
-	<FMClass: #FamixStModel super: #MooseModel>
+
+	<FMClass: #Model super: #MooseModel>
 	<package: #'Famix-PharoSmalltalk-Entities'>
 	<generated>
 ]

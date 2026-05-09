@@ -53,7 +53,6 @@ FamixTAttribute classSide >> annotation [
 	<FMClass: #TAttribute super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : 'visitor' }

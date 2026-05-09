@@ -17,7 +17,6 @@ FDTEntityCreator classSide >> annotation [
 	<FMClass: #TEntityCreator super: #Object>
 	<package: #'FamixDocumentor-TestMetaModel'>
 	<generated>
-	^ self
 ]
 
 { #category : 'entity creation' }

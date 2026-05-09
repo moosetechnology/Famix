@@ -25,19 +25,7 @@ FmxMBClassGroup >> defaultTag [
 FmxMBClassGroup >> generate [
 
 	super generate.
-	self generateMooseGroupAnnotationIn: innerClass as: self fullName
-]
-
-{ #category : 'generating-methods' }
-FmxMBClassGroup >> generateMooseGroupAnnotationIn: aFmxBehavioral as: aName [
-
-	aFmxBehavioral
-		addMethod: ('annotation{1}
-	<generated>
-	<mooseGroup>
-	^ {1}' format: { aName })
-		classSide: true
-		protocol: #groups
+	innerClass addMethod: (FmxMBMethodsFactory groupAnnotationNamed: self fullName) classSide: true protocol: #groups
 ]
 
 { #category : 'accessing' }

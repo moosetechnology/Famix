@@ -26,7 +26,6 @@ FamixTTemplateUser classSide >> annotation [
 	<FMClass: #TTemplateUser super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : 'visitor' }

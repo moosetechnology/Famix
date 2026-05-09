@@ -61,7 +61,6 @@ FamixTAccess classSide >> annotation [
 	<FMClass: #TAccess super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : 'visitor' }

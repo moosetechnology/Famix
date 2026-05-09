@@ -68,7 +68,6 @@ FamixTAnnotationTypeAttribute classSide >> annotation [
 	<FMClass: #TAnnotationTypeAttribute super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : 'visitor' }

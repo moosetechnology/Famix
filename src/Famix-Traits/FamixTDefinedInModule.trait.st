@@ -26,7 +26,6 @@ FamixTDefinedInModule classSide >> annotation [
 	<FMClass: #TDefinedInModule super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : 'visitor' }

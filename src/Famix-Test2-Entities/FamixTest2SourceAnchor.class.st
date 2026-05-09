@@ -27,7 +27,6 @@ FamixTest2SourceAnchor class >> annotation [
 	<package: #'Famix-Test2-Entities'>
 	<generated>
 	<abstract>
-	^ self
 ]
 
 { #category : 'testing' }

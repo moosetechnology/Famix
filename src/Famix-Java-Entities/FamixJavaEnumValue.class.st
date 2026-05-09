@@ -53,7 +53,6 @@ FamixJavaEnumValue class >> annotation [
 	<FMClass: #EnumValue super: #FamixJavaVariable>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^ self
 ]
 
 { #category : 'visitor' }

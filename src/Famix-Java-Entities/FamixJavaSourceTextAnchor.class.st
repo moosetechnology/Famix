@@ -32,7 +32,6 @@ FamixJavaSourceTextAnchor class >> annotation [
 	<FMClass: #SourceTextAnchor super: #FamixJavaSourceAnchor>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^ self
 ]
 
 { #category : 'visitor' }

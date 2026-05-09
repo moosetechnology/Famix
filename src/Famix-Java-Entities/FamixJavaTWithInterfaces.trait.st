@@ -27,7 +27,6 @@ FamixJavaTWithInterfaces classSide >> annotation [
 	<FMClass: #TWithInterfaces super: #Object>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^ self
 ]
 
 { #category : 'visitor' }

@@ -41,7 +41,6 @@ FamixTInheritance classSide >> annotation [
 	<FMClass: #TInheritance super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : 'visitor' }

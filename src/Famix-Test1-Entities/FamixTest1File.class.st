@@ -37,5 +37,4 @@ FamixTest1File class >> annotation [
 	<FMClass: #File super: #FamixTest1NamedEntity>
 	<package: #'Famix-Test1-Entities'>
 	<generated>
-	^ self
 ]

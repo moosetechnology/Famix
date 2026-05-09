@@ -13,7 +13,7 @@ FamixTest8Test >> setUp [
 
 	super setUp.
 
-	associationFM3Class := FamixTest8Infection mooseDescription
+	associationFM3Class := FamixTest8Infection metadescription
 ]
 
 { #category : 'tests' }

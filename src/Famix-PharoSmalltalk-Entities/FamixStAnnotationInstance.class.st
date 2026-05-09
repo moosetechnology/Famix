@@ -32,7 +32,6 @@ FamixStAnnotationInstance class >> annotation [
 	<FMClass: #AnnotationInstance super: #FamixStSourcedEntity>
 	<package: #'Famix-PharoSmalltalk-Entities'>
 	<generated>
-	^ self
 ]
 
 { #category : 'accessing' }

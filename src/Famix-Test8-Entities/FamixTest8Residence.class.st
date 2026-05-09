@@ -42,7 +42,6 @@ FamixTest8Residence class >> annotation [
 	<FMClass: #Residence super: #FamixTest8Entity>
 	<package: #'Famix-Test8-Entities'>
 	<generated>
-	^ self
 ]
 
 { #category : 'accessing' }

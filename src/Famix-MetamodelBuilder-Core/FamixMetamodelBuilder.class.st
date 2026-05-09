@@ -246,7 +246,9 @@ FamixMetamodelBuilder >> generateImportingContext [
 	aClass prefix: self configuration prefix.
 	aClass packageName: self configuration packageName.
 	aClass tag: 'Import'.
-	aClass generate
+
+	self classes add: aClass.
+	^ aClass
 ]
 
 { #category : 'generating' }
@@ -486,15 +488,12 @@ FamixMetamodelBuilder >> prepareGeneration [
 
 	self environment ensurePackageNamed: self configuration packageName.
 	self ensureEntityClassIsTheCommonSuperclass.
-	self shouldGenerateModel
-		ifTrue: [
-				| model |
-				model := self model.
-				self withSubBuildersAddEntityCreatorTraitTo: model.
-				self prepareBehaviorsGeneration.
-				self generateImportingContext.
-				self entityCreatorTrait generateEntityCreationMethods ]
-		ifFalse: [ self prepareBehaviorsGeneration ]
+
+	self shouldGenerateModel ifTrue: [
+			self withSubBuildersAddEntityCreatorTraitTo: self model.
+			self generateImportingContext ].
+
+	self prepareBehaviorsGeneration
 ]
 
 { #category : 'printing' }

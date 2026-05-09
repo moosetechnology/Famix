@@ -62,7 +62,6 @@ FamixTException classSide >> annotation [
 	<FMClass: #TException super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : 'visitor' }

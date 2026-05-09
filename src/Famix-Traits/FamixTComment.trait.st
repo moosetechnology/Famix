@@ -35,7 +35,6 @@ FamixTComment classSide >> annotation [
 	<FMClass: #TComment super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : 'visitor' }

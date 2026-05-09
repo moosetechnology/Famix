@@ -23,7 +23,6 @@ FamixTHasVisibility classSide >> annotation [
 	<FMClass: #THasVisibility super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : 'visitor' }

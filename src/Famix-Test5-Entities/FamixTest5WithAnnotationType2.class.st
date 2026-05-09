@@ -26,5 +26,4 @@ FamixTest5WithAnnotationType2 class >> annotation [
 	<FMClass: #WithAnnotationType2 super: #FamixTest5Entity>
 	<package: #'Famix-Test5-Entities'>
 	<generated>
-	^ self
 ]

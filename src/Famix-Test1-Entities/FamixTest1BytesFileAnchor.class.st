@@ -27,5 +27,4 @@ FamixTest1BytesFileAnchor class >> annotation [
 	<FMClass: #BytesFileAnchor super: #FamixTest1SourceAnchor>
 	<package: #'Famix-Test1-Entities'>
 	<generated>
-	^ self
 ]

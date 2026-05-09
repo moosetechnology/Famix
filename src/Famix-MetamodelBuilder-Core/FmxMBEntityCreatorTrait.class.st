@@ -11,38 +11,15 @@ Class {
 }
 
 { #category : 'generating' }
-FmxMBEntityCreatorTrait >> generateEntityCreationMethodFor: aClass [
+FmxMBEntityCreatorTrait >> generate [
 
-	self
-		addMethod: ('new{1}
-
-	<generated>
-	^ self add: {2} new' format: {
-					 aClass name.
-					 aClass fullName })
-		protocol: #'entity creation'
-]
-
-{ #category : 'generating' }
-FmxMBEntityCreatorTrait >> generateEntityCreationMethods [
+	super generate.
 
 	self builder concreteClasses do: [ :class |
-			self generateEntityCreationMethodFor: class.
+			self addMethod: (FmxMBMethodsFactory instantiate: class) protocol: #'entity creation'.
+
 			(class allTransitiveTraitsIncludingSuperclasses anySatisfy: [ :trait | trait prefix = #Famix and: [ trait name = #TNamedEntity ] ]) ifTrue: [
-				self generateNamedEntityCreationMethodFor: class ] ]
-]
-
-{ #category : 'generating' }
-FmxMBEntityCreatorTrait >> generateNamedEntityCreationMethodFor: aClass [
-
-	self
-		addMethod: ('new{1}Named: aName
-
-	<generated>
-	^ self add: ({2} named: aName)' format: {
-					 aClass name.
-					 aClass fullName })
-		protocol: #'entity creation'
+				self addMethod: (FmxMBMethodsFactory instantiateNamed: class) protocol: #'entity creation' ] ]
 ]
 
 { #category : 'initialization' }

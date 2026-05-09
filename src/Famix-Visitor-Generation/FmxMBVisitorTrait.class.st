@@ -65,11 +65,8 @@ FmxMBVisitorTrait >> generateCommonMethodsIfNecessary [
 { #category : 'generating' }
 FmxMBVisitorTrait >> generateVisitAndAcceptMethods [
 
-	(builder classes reject: [ :fmxMBClass |
-		 fmxMBClass isModelClass or: [ fmxMBClass isMetamodelClassGroup ] ])
-	, (builder traits select: [ :fmxTrait |
-			 fmxTrait isMetamodelTrait and: [ fmxTrait isVisitorTrait not ] ])
-		do: [ :fmxMBBehavior |
+	(builder classes select: #isClassEntity) , (builder traits select: [ :fmxTrait | fmxTrait isMetamodelTrait and: [ fmxTrait isVisitorTrait not ] ]) do: [
+			:fmxMBBehavior |
 			self generateVisitMethodFor: fmxMBBehavior.
 			self generateAcceptMethodIn: fmxMBBehavior ]
 ]

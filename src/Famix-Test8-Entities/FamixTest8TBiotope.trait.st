@@ -26,7 +26,6 @@ FamixTest8TBiotope classSide >> annotation [
 	<FMClass: #TBiotope super: #Object>
 	<package: #'Famix-Test8-Entities'>
 	<generated>
-	^ self
 ]
 
 { #category : 'adding' }

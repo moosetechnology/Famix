@@ -13,5 +13,4 @@ FamixTest5TEntity classSide >> annotation [
 	<FMClass: #TEntity super: #Object>
 	<package: #'Famix-Test5-Entities'>
 	<generated>
-	^ self
 ]

@@ -24,22 +24,10 @@ FmxMBModel >> generate [
 	super generate.
 	self
 		generateFileImportMethods;
-		generateSubmetamodelsMethod;
-		generateAnnotation
-]
+		generateAnnotation.
 
-{ #category : 'generating-methods' }
-FmxMBModel >> generateAnnotation [
-
-	self
-		addMethod: ('annotation
-	<FMClass: #{1} super: #MooseModel>
-	<package: {2}>
-	<generated>' format: {
-					 self fullName.
-					 self builder safeAnnotationPackageName })
-		classSide: true
-		protocol: #meta
+	self builder allSubBuilders ifNotEmpty: [ :subBuilders |
+		self addMethod: (FmxMBMethodsFactory allSubmetamodelsPackagesNamesFor: subBuilders) classSide: true protocol: #accessing ]
 ]
 
 { #category : 'generating-methods' }
@@ -47,39 +35,9 @@ FmxMBModel >> generateFileImportMethods [
 
 	self builder configuration shouldGenerateFileImportHelpers ifFalse: [ ^ self ].
 
-	self
-		addMethod: 'canBeImportedFromFile
-	<generated>
-	^true'
-		classSide: true
-		protocol: #testing.
+	self addMethod: FmxMBMethodsFactory canBeImportedFromFile classSide: true protocol: #testing.
 
-	self
-		addMethod: ('importingContextClass
-
-	<generated>
-	^ {1}' format: { self builder importingContextName })
-		classSide: true
-		protocol: #accessing
-]
-
-{ #category : 'generating-methods' }
-FmxMBModel >> generateSubmetamodelsMethod [
-
-	self builder allSubBuilders ifNotEmpty: [ :subBuilders |
-			| code |
-			code := String streamContents: [ :stream |
-					        | packages |
-					        stream nextPutAll: 'allSubmetamodelsPackagesNames
-	<generated>
-	^ #('.
-
-					        packages := (subBuilders collect: [ :subBuilder | subBuilder configuration packageName ]) asOrderedCollection sorted: #yourself descending.
-					        packages do: [ :package | stream print: package ] separatedBy: [ stream space ].
-
-					        stream nextPut: $) ].
-
-			self addMethod: code classSide: true protocol: #accessing ]
+	self addMethod: (FmxMBMethodsFactory importingClassNamed: self builder importingContextName) classSide: true protocol: #accessing
 ]
 
 { #category : 'testing' }

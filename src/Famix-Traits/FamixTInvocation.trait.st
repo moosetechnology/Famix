@@ -60,7 +60,6 @@ FamixTInvocation classSide >> annotation [
 	<FMClass: #TInvocation super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : 'groups' }

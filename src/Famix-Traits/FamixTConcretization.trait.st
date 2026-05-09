@@ -46,7 +46,6 @@ FamixTConcretization classSide >> annotation [
 	<FMClass: #TConcretization super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : 'visitor' }

@@ -28,7 +28,6 @@ FamixTParametricAssociation classSide >> annotation [
 	<FMClass: #TParametricAssociation super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : 'visitor' }

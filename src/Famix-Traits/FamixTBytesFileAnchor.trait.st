@@ -32,7 +32,6 @@ FamixTBytesFileAnchor classSide >> annotation [
 	<FMClass: #TBytesFileAnchor super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : 'visitor' }

@@ -11,7 +11,6 @@ FamixTMethodMetrics classSide >> annotation [
 	<FMClass: #TMethodMetrics super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : 'visitor' }

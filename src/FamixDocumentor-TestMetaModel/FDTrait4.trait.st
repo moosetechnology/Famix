@@ -37,7 +37,6 @@ FDTrait4 classSide >> annotation [
 	<FMClass: #Trait4 super: #Object>
 	<package: #'FamixDocumentor-TestMetaModel'>
 	<generated>
-	^ self
 ]
 
 { #category : 'adding' }

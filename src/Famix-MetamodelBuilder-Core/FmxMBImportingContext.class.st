@@ -43,73 +43,17 @@ FmxMBImportingContext >> generate [
 
 	super generate.
 
-	self generateImportingContextMetamodel.
-	self generateImport
-]
-
-{ #category : 'generating' }
-FmxMBImportingContext >> generateAnnotation [
-	"We do not want the importing context to be part of the MM so we skip this method generation"
-
-	
-]
-
-{ #category : 'generating-methods' }
-FmxMBImportingContext >> generateImport [
+	self addMethod: (FmxMBMethodsFactory importedMetamodelForPrefix: self prefix) classSide: true protocol: #accessing.
 
 	self builder concreteClasses do: [ :each |
-			each allTransitiveTraits
-				detect: [ :trait | trait name = #TAssociation ]
-				ifFound: [ self generateImportAssociation: each ]
-				ifNone: [ self generateImportConcreteEntity: each ].
-
 			self
-				addMethod: ('shouldImport{1}
+				addMethod: (each allTransitiveTraits
+						 detect: [ :trait | trait name = #TAssociation ]
+						 ifFound: [ FmxMBMethodsFactory importAssociationNamed: each name ]
+						 ifNone: [ FmxMBMethodsFactory importEntityNamed: each name ])
+				protocol: #importing.
 
-	<generated>
-	^ self shouldImport: #{1}' format: { each name })
-				protocol: #testing ]
-]
-
-{ #category : 'generating-methods' }
-FmxMBImportingContext >> generateImportAssociation: aFmxMBAssociationClass [
-
-	self
-		addMethod: ('import{1}
-
-	<generated>
-	^ self importAssociation: (self class fm3ClassNamed: #{1})' format: { aFmxMBAssociationClass name })
-		protocol: #importing
-]
-
-{ #category : 'generating-methods' }
-FmxMBImportingContext >> generateImportConcreteEntity: aFmxMBClass [
-
-	self
-		addMethod: ('import{1}
-
-	<generated>
-	^ self importConcreteEntity: (self class fm3ClassNamed: #{1})' format: { aFmxMBClass name })
-		protocol: #importing
-]
-
-{ #category : 'generating-methods' }
-FmxMBImportingContext >> generateImportingContextMetamodel [
-
-	self
-		addMethod: ('importedMetamodel
-
-	<generated>
-	^ {1}Model metamodel' format: { self prefix })
-		classSide: true
-		protocol: #accessing
-]
-
-{ #category : 'testing' }
-FmxMBImportingContext >> isRoot [
-	"I am not a MM class root because I am not part of the MM"
-
-	^ false
+			self addMethod: (FmxMBMethodsFactory shouldImportNamed: each name) protocol: #testing ]
 ]
 
 { #category : 'accessing' }

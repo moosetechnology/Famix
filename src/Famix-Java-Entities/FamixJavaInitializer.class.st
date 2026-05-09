@@ -24,7 +24,6 @@ FamixJavaInitializer class >> annotation [
 	<FMClass: #Initializer super: #FamixJavaMethod>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^ self
 ]
 
 { #category : 'visitor' }

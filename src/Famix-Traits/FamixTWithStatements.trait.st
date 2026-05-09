@@ -38,7 +38,6 @@ FamixTWithStatements classSide >> annotation [
 	<FMClass: #TWithStatements super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : 'visitor' }

@@ -52,7 +52,6 @@ FamixTLocalVariable classSide >> annotation [
 	<FMClass: #TLocalVariable super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : 'visitor' }

@@ -63,7 +63,6 @@ FamixJavaEnum class >> annotation [
 	<FMClass: #Enum super: #FamixJavaType>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^ self
 ]
 
 { #category : 'visitor' }

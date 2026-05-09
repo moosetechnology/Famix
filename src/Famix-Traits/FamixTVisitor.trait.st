@@ -15,7 +15,6 @@ FamixTVisitor classSide >> annotation [
 	<FMClass: #TVisitor super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : 'visiting' }

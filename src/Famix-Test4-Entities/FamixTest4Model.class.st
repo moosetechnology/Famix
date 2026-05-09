@@ -10,7 +10,8 @@ Class {
 
 { #category : 'meta' }
 FamixTest4Model class >> annotation [
-	<FMClass: #FamixTest4Model super: #MooseModel>
+
+	<FMClass: #Model super: #MooseModel>
 	<package: #'Famix-Test4-Entities'>
 	<generated>
 ]

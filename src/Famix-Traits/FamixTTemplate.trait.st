@@ -32,7 +32,6 @@ FamixTTemplate classSide >> annotation [
 	<FMClass: #TTemplate super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : 'visitor' }

@@ -32,5 +32,4 @@ FamixTest8Virus class >> annotation [
 	<FMClass: #Virus super: #FamixTest8Entity>
 	<package: #'Famix-Test8-Entities'>
 	<generated>
-	^ self
 ]

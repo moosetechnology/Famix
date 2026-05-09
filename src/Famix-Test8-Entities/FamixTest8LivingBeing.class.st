@@ -26,5 +26,4 @@ FamixTest8LivingBeing class >> annotation [
 	<FMClass: #LivingBeing super: #FamixTest8Entity>
 	<package: #'Famix-Test8-Entities'>
 	<generated>
-	^ self
 ]

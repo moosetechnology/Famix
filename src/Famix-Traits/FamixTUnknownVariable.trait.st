@@ -42,7 +42,6 @@ FamixTUnknownVariable classSide >> annotation [
 	<FMClass: #TUnknownVariable super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : 'visitor' }

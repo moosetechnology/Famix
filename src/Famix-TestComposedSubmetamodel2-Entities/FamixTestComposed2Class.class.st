@@ -58,5 +58,4 @@ FamixTestComposed2Class class >> annotation [
 	<FMClass: #Class super: #FamixTestComposed2NamedEntity>
 	<package: #'Famix-TestComposedSubmetamodel2-Entities'>
 	<generated>
-	^ self
 ]

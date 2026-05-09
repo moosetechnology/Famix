@@ -32,5 +32,4 @@ FamixTest1SourceTextAnchor class >> annotation [
 	<FMClass: #SourceTextAnchor super: #FamixTest1SourceAnchor>
 	<package: #'Famix-Test1-Entities'>
 	<generated>
-	^ self
 ]

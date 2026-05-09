@@ -26,7 +26,6 @@ FamixTest8TResident classSide >> annotation [
 	<FMClass: #TResident super: #Object>
 	<package: #'Famix-Test8-Entities'>
 	<generated>
-	^ self
 ]
 
 { #category : 'adding' }
