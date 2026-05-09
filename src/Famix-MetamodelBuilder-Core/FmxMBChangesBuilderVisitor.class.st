@@ -14,17 +14,51 @@ Class {
 { #category : 'adding' }
 FmxMBChangesBuilderVisitor >> addMethod: sourceCode classSide: aBoolean protocol: protocol [
 
+	self
+		addMethod: sourceCode
+		in: currentBehavioral fullName
+		classSide: aBoolean
+		protocol: protocol
+]
+
+{ #category : 'adding' }
+FmxMBChangesBuilderVisitor >> addMethod: sourceCode in: aClassName classSide: aBoolean protocol: protocol [
+
 	changesToApply add: (FmxMethodAddition
-			 className: currentBehavioral name
+			 className: aClassName
 			 isClassSide: aBoolean
 			 sourceCode: sourceCode
 			 protocol: protocol)
 ]
 
 { #category : 'adding' }
+FmxMBChangesBuilderVisitor >> addMethod: sourceCode in: aClassName protocol: protocol [
+
+	self
+		addMethod: sourceCode
+		in: aClassName
+		classSide: false
+		protocol: protocol
+]
+
+{ #category : 'adding' }
 FmxMBChangesBuilderVisitor >> addMethod: sourceCode protocol: protocol [
 
-	self addMethod: sourceCode classSide: false protocol: protocol
+	self addMethod: sourceCode in: currentBehavioral fullName protocol: protocol
+]
+
+{ #category : 'accessing' }
+FmxMBChangesBuilderVisitor >> applyChanges [
+
+	| dependencies |
+	changesToApply ifEmpty: [ ^ self ]. 
+	
+	"Now we have a list of changes to apply. Some changes needs to by applied before others (for example, we need to create a classe to compile its methods or compile superclasses before their subclasses or traits before their users)."
+	dependencies := changesToApply inject: Dictionary new into: [ :dictionary :change |
+			                dictionary
+				                at: change put: (change followingChangesIn: (changesToApply copyWithout: change));
+				                yourself ].
+	(AITopologicalSorting sort: changesToApply followingIncomingProperty: [ :change | dependencies at: change ]) do: #apply
 ]
 
 { #category : 'initialization' }
@@ -131,6 +165,12 @@ FmxMBChangesBuilderVisitor >> ensurePackageNamed: packageName [
 	changesToApply add: (FmxPackageAddition named: packageName)
 ]
 
+{ #category : 'accessing' }
+FmxMBChangesBuilderVisitor >> filterRedoundantChanges [
+
+	changesToApply := changesToApply select: #isRequired
+]
+
 { #category : 'as yet unclassified' }
 FmxMBChangesBuilderVisitor >> generateAddToCollection [
 
@@ -183,6 +223,29 @@ FmxMBChangesBuilderVisitor >> generateMetamodelMethod [
 	builder model ifNotNil: [ :model | self addMethod: (self methodFactory metamodelFor: model fullName) classSide: true protocol: #meta ]
 ]
 
+{ #category : 'visiting' }
+FmxMBChangesBuilderVisitor >> generateTestingMethodsOfRemoteEntities [
+
+	| entitiesWithRemoteSuperclasses |
+	entitiesWithRemoteSuperclasses := builder classes groupedBy: [ :class | class remoteSuperclass ].
+
+
+	entitiesWithRemoteSuperclasses keysAndValuesDo: [ :remoteClass :subclasses |
+			remoteClass ifNotNil: [
+					| subclassesAndTraits |
+					subclassesAndTraits := subclasses flatCollectAsSet: [ :subclass | subclass allTransitiveTraits , { subclass } ].
+
+					builder testingSelectorsMapping keysAndValuesDo: [ :behavior :selectors |
+							((builder shouldGeneratorTestingMethodsOf: behavior in: remoteClass) and: [ subclassesAndTraits includes: behavior ]) ifTrue: [
+									selectors do: [ :selector |
+											self class environment
+												at: remoteClass fullName
+												ifPresent: [ :class |
+														(class includesSelector: selector) ifFalse: [
+															self addMethod: (self methodFactory testReturning: true for: selector) in: remoteClass name protocol: '*' , builder configuration packageName ] ]
+												ifAbsent: [ self error: 'The class ' , remoteClass fullName , ' was not found in the system to generate a remote testing method.' ] ] ] ] ] ]
+]
+
 { #category : 'as yet unclassified' }
 FmxMBChangesBuilderVisitor >> generateTrueTestingMethods [
 
@@ -200,6 +263,57 @@ FmxMBChangesBuilderVisitor >> initialize [
 FmxMBChangesBuilderVisitor >> methodFactory [
 
 	^ FmxMBMethodsFactory
+]
+
+{ #category : 'installing' }
+FmxMBChangesBuilderVisitor >> recordMethodRemovalsOf: realClass [
+
+	| generatedMethodsOfRealClass generatedMethodNamesOfRealClass selectorsToGenerate |
+	generatedMethodsOfRealClass := (Pragma allNamed: #generated in: realClass)
+		                               collect: #method
+		                               thenReject: [ :m | m isFromTrait ].
+
+	"In case we have an extension, we remove it if the package is the right one"
+	self flag: #todo. "Demeter. Clean package name management."
+	generatedMethodsOfRealClass := generatedMethodsOfRealClass reject: [ :method | (method hasPragmaNamed: #package:) and: [ ((method pragmaAt: #package:) argumentAt: 1) ~=  builder generator packageName ] ].
+
+	generatedMethodNamesOfRealClass := generatedMethodsOfRealClass collect: #selector.
+
+	selectorsToGenerate := ((self changesOfType: FmxMethodAddition) select: [ :change | change className = realClass instanceSide name and: [ change isClassSide = realClass isClassSide ] ]) collect: #selector.
+
+	"First we removed the generated methods should not be here anymore"
+	(generatedMethodNamesOfRealClass difference: selectorsToGenerate) ifNotEmpty: [ :selectorsOfRemovedGeneratedMethod |
+		changesToApply add: (FmxMethodRemovals className: realClass instanceSide name isClassSide: realClass isClassSide selectors: selectorsOfRemovedGeneratedMethod) ]
+]
+
+{ #category : 'accessing' }
+FmxMBChangesBuilderVisitor >> recordRemovalOfGeneratedPackagesAndClasses [
+	"Since the last generation it is possible some behaviorals were removed from the generator. In that case we should remove them. We will remove all classes and traits of Famix that are not part of the current generator."
+
+	| classesToGenerate |
+	classesToGenerate := (self changesOfType: FmxBehavioralAddition) collectAsSet: #name.
+
+	(self changesOfType: FmxPackageAddition)
+		collect: #systemPackage
+		thenDo: [ :package |
+				package ifNotNil: [
+						package definedClasses
+							select: #canBeGenerated
+							thenDo: [ :class | (classesToGenerate includes: class name) ifFalse: [ changesToApply add: (FmxClassRemoval class: class) ] ] ] ]
+]
+
+{ #category : 'visiting' }
+FmxMBChangesBuilderVisitor >> registerRemovals [
+
+	| classesToGenerate |
+	classesToGenerate := (self changesOfType: FmxBehavioralAddition) collectAsSet: #name.
+
+	classesToGenerate do: [ :className |
+			self class environment at: className asSymbol ifPresent: [ :realClass |
+					self recordMethodRemovalsOf: realClass.
+					self recordMethodRemovalsOf: realClass class ] ].
+
+	self recordRemovalOfGeneratedPackagesAndClasses
 ]
 
 { #category : 'installing' }
@@ -240,7 +354,11 @@ FmxMBChangesBuilderVisitor >> visitBuilder: aBuilder [
 	builder := aBuilder.
 	self ensurePackageNamed: aBuilder configuration packageName.
 
-	super visitBuilder: aBuilder
+	super visitBuilder: aBuilder.
+
+	self generateTestingMethodsOfRemoteEntities.
+
+	self registerRemovals
 ]
 
 { #category : 'visiting' }
@@ -285,7 +403,11 @@ FmxMBChangesBuilderVisitor >> visitClassEntity: aClass [
 FmxMBChangesBuilderVisitor >> visitClassGroup: aClass [
 
 	super visitClassGroup: aClass.
-	aClass innerClass addMethod: (self methodFactory groupAnnotationNamed: aClass fullName) classSide: true protocol: #groups
+	self
+		addMethod: (self methodFactory groupAnnotationNamed: aClass fullName)
+		in: aClass innerClass fullName
+		classSide: true
+		protocol: #groups
 ]
 
 { #category : 'visiting' }
@@ -363,12 +485,19 @@ FmxMBChangesBuilderVisitor >> visitTrait: aTrait [
 		tag: aTrait tag
 		comment: aTrait commentWithRelations.
 
-	self
-		generateAnnotation;
-		generateTrueTestingMethods;
-		generateAddToCollection.
+	self generateAnnotation.
 
 	super visitTrait: aTrait
+]
+
+{ #category : 'visiting' }
+FmxMBChangesBuilderVisitor >> visitTraitEntity: aTrait [
+
+	super visitTraitEntity: aTrait.
+
+	self
+		generateTrueTestingMethods;
+		generateAddToCollection
 ]
 
 { #category : 'visiting' }

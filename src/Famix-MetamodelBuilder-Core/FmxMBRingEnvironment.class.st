@@ -226,6 +226,12 @@ FmxMBRingEnvironment >> recordRemovalOfGeneratedPackagesAndClasses [
 							thenDo: [ :class | (classesToGenerate includes: class name) ifFalse: [ changesToApply add: (FmxClassRemoval class: class) ] ] ] ]
 ]
 
+{ #category : 'initialization' }
+FmxMBRingEnvironment >> reset [
+
+	changesToApply := OrderedCollection new
+]
+
 { #category : 'installing' }
 FmxMBRingEnvironment >> traitStringFrom: traitDefinitions precedingTrait: precedingTrait existingClass: realClass [
 	"We need to collect the generated traits + the custom traits added by the user."

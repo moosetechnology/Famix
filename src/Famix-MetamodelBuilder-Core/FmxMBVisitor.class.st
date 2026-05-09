@@ -106,6 +106,12 @@ FmxMBVisitor >> visitTrait: aTrait [
 ]
 
 { #category : 'visiting' }
+FmxMBVisitor >> visitTraitEntity: aTrait [
+
+	self visitTrait: aTrait
+]
+
+{ #category : 'visiting' }
 FmxMBVisitor >> visitTypedProperty: aTypedProperty [
 
 	self visitProperty: aTypedProperty

@@ -232,9 +232,8 @@ FamixMetamodelBuilder >> generate [
 	| changesBuilder |
 	self prepareGeneration.
 	changesBuilder := FmxMBChangesBuilderVisitor visit: self.
-	changesBuilder changesToApply size = self environment rawChangesToApply size ifFalse: [ self halt ].
-
-	self apply
+	changesBuilder filterRedoundantChanges.
+	changesBuilder applyChanges
 ]
 
 { #category : 'generating' }
@@ -255,6 +254,8 @@ FamixMetamodelBuilder >> generateImportingContext [
 
 { #category : 'generating' }
 FamixMetamodelBuilder >> generateRemotes [
+
+	self environment reset.
 
 	self traits do: [ :each | each generateRemotes ].
 	self classes do: [ :each | each generateRemotes ].
