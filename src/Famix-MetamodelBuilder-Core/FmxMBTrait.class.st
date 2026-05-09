@@ -6,6 +6,12 @@ Class {
 	#tag : 'Implementation'
 }
 
+{ #category : 'testing' }
+FmxMBTrait class >> isAbstract [
+
+	^ self = FmxMBTrait
+]
+
 { #category : 'visitor' }
 FmxMBTrait >> acceptVisitor: aVisitor [
 
@@ -38,11 +44,8 @@ FmxMBTrait >> generate [
 		tag: self tag
 		comment: self commentWithRelations.
 
-	self
-		generateAccessors;
-		generateAnnotation;
-		generateTestingMethods;
-		generateAddToCollection
+	self generateAnnotation.
+	self generateAccessors
 ]
 
 { #category : 'generating' }

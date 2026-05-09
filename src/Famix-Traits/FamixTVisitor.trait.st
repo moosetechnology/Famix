@@ -1,6 +1,8 @@
 "
 I am a visitor for FamixEntities. 
 I am generated with the metamodel.
+
+
 "
 Trait {
 	#name : 'FamixTVisitor',
