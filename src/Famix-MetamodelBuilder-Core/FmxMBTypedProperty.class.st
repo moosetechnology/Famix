@@ -31,22 +31,6 @@ FmxMBTypedProperty >> defaultValue: aValue [
 ]
 
 { #category : 'generating' }
-FmxMBTypedProperty >> generateGetterIn: aFmxBehavioral [
-
-	aFmxBehavioral addMethod: (FmxMBMethodsFactory getTypedProperty: self) protocol: (self isRemote
-			 ifTrue: [ '*' , self builder parentBuilderPackageName ]
-			 ifFalse: [ #accessing ])
-]
-
-{ #category : 'generating' }
-FmxMBTypedProperty >> generateSetterIn: aFmxBehavioral [
-
-	aFmxBehavioral addMethod: (FmxMBMethodsFactory setTypedProperty: self name remote: self isRemote) protocol: (self isRemote
-			 ifTrue: [ '*' , self builder parentBuilderPackageName ]
-			 ifFalse: [ 'accessing' ])
-]
-
-{ #category : 'generating' }
 FmxMBTypedProperty >> hasDefaultValue [
 	^ defaultValue isNotNil
 ]

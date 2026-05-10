@@ -252,8 +252,13 @@ FamixMetamodelGenerator >> builder: anObject [
 
 { #category : 'testing' }
 FamixMetamodelGenerator >> changesToApply [
+
+	| allChanges |
+	allChanges := OrderedCollection new.
 	self define.
-	^ self builder changesToApply
+	allChanges addAll: self builder changesToApply.
+	self subBuilders do: [ :remote | allChanges addAll: remote remoteChangesToApply ].
+	^ allChanges
 ]
 
 { #category : 'accessing' }
@@ -355,7 +360,6 @@ FamixMetamodelGenerator >> initialize [
 				                           | subbuilder |
 				                           subbuilder := each builderWithDefinitions.
 				                           subbuilder parentBuilder: self builder.
-				                           builder environment: builder environment.
 				                           each prefix -> subbuilder ]).
 
 	metamodelToolGenerators := self class metamodelToolGenerators collect: [ :generatorClass | generatorClass forGenerator: self ]

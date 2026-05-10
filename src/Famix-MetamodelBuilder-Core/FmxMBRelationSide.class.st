@@ -66,30 +66,6 @@ FmxMBRelationSide >> derived: anObject [
 	derived := anObject
 ]
 
-{ #category : 'generating' }
-FmxMBRelationSide >> generateGetterIn: aFmxBehavioral [
-
-	aFmxBehavioral addMethod: (self generationStrategy generateGetterCodeFor: self) protocol: (self isRemote
-			 ifTrue: [ '*' , self builder parentBuilderPackageName ]
-			 ifFalse: [ #accessing ])
-]
-
-{ #category : 'generating' }
-FmxMBRelationSide >> generateSetterIn: aFmxBehavioral [
-
-	aFmxBehavioral addMethod: (self generationStrategy generateSetterCodeFor: self) protocol: (self isRemote
-			 ifTrue: [ '*' , self builder parentBuilderPackageName ]
-			 ifFalse: [ #accessing ])
-]
-
-{ #category : 'accessing' }
-FmxMBRelationSide >> generationStrategy [
-
-	^ (self producesSlot
-		   ifTrue: [ FmxMBRelationSlotsGenerationStrategy ]
-		   ifFalse: [ FmxMBRelationAttributesGenerationStrategy ]) defaultInstance
-]
-
 { #category : 'initialization' }
 FmxMBRelationSide >> initialize [
 	super initialize.

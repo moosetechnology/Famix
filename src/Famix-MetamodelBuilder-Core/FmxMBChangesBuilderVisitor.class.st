@@ -6,14 +6,14 @@ Class {
 	#tag : 'Implementation'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : 'generation' }
 FmxMBChangesBuilderVisitor >> generateAddToCollection [
 
 	currentBehavioral relations do: [ :relation |
 		relation isMany ifTrue: [ self addMethod: (self methodFactory addToCollectionFor: relation name) protocol: #adding ] ]
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'generation' }
 FmxMBChangesBuilderVisitor >> generateAnnotation [
 
 	self
@@ -26,7 +26,7 @@ FmxMBChangesBuilderVisitor >> generateAnnotation [
 		protocol: #meta
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'generation' }
 FmxMBChangesBuilderVisitor >> generateFalseTestingMethods [
 
 	| selectorsToGenerate |
@@ -40,7 +40,7 @@ FmxMBChangesBuilderVisitor >> generateFalseTestingMethods [
 		self addMethod: (self methodFactory testReturning: false for: selector) protocol: #testing ]
 ]
 
-{ #category : 'generating-methods' }
+{ #category : 'generation' }
 FmxMBChangesBuilderVisitor >> generateFileImportMethods [
 
 	builder configuration shouldGenerateFileImportHelpers ifFalse: [ ^ self ].
@@ -50,7 +50,7 @@ FmxMBChangesBuilderVisitor >> generateFileImportMethods [
 	self addMethod: (self methodFactory importingClassNamed: builder importingContextName) classSide: true protocol: #accessing
 ]
 
-{ #category : 'generating-methods' }
+{ #category : 'generation' }
 FmxMBChangesBuilderVisitor >> generateMetamodelMethod [
 
 	currentBehavioral isRoot ifFalse: [ ^ self ].
@@ -58,7 +58,7 @@ FmxMBChangesBuilderVisitor >> generateMetamodelMethod [
 	builder model ifNotNil: [ :model | self addMethod: (self methodFactory metamodelFor: model fullName) classSide: true protocol: #meta ]
 ]
 
-{ #category : 'visiting' }
+{ #category : 'generation' }
 FmxMBChangesBuilderVisitor >> generateTestingMethodsOfRemoteEntities [
 
 	| entitiesWithRemoteSuperclasses |
@@ -81,13 +81,13 @@ FmxMBChangesBuilderVisitor >> generateTestingMethodsOfRemoteEntities [
 												ifAbsent: [ self error: 'The class ' , remoteClass fullName , ' was not found in the system to generate a remote testing method.' ] ] ] ] ] ]
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'generation' }
 FmxMBChangesBuilderVisitor >> generateTrueTestingMethods [
 
 	currentBehavioral testingSelectors do: [ :aSelector | self addMethod: (self methodFactory testReturning: true for: aSelector) protocol: #testing ]
 ]
 
-{ #category : 'installing' }
+{ #category : 'private' }
 FmxMBChangesBuilderVisitor >> recordMethodRemovalsOf: realClass [
 
 	| generatedMethodsOfRealClass generatedMethodNamesOfRealClass selectorsToGenerate |
@@ -108,7 +108,7 @@ FmxMBChangesBuilderVisitor >> recordMethodRemovalsOf: realClass [
 		changesToApply add: (FmxMethodRemovals className: realClass instanceSide name isClassSide: realClass isClassSide selectors: selectorsOfRemovedGeneratedMethod) ]
 ]
 
-{ #category : 'accessing' }
+{ #category : 'private' }
 FmxMBChangesBuilderVisitor >> recordRemovalOfGeneratedPackagesAndClasses [
 	"Since the last generation it is possible some behaviorals were removed from the generator. In that case we should remove them. We will remove all classes and traits of Famix that are not part of the current generator."
 
@@ -124,7 +124,7 @@ FmxMBChangesBuilderVisitor >> recordRemovalOfGeneratedPackagesAndClasses [
 							thenDo: [ :class | (classesToGenerate includes: class name) ifFalse: [ changesToApply add: (FmxClassRemoval class: class) ] ] ] ]
 ]
 
-{ #category : 'visiting' }
+{ #category : 'private' }
 FmxMBChangesBuilderVisitor >> registerRemovals [
 
 	| classesToGenerate |

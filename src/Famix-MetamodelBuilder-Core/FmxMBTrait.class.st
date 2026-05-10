@@ -32,32 +32,6 @@ FmxMBTrait >> defaultTag [
 	^ #Traits
 ]
 
-{ #category : 'generating' }
-FmxMBTrait >> generate [
-
-	self builder environment
-		createTraitNamed: self fullName
-		traitDefinitions: self allTraitDefinitions
-		precedingTrait: (self additionalProperties at: #precedingTrait ifAbsent: [ nil ])
-		properties: (self propertiesAndRelations select: #producesSlot)
-		in: self packageName
-		tag: self tag
-		comment: self commentWithRelations.
-
-	self generateAnnotation.
-	self generateAccessors
-]
-
-{ #category : 'generating' }
-FmxMBTrait >> generateRemotes [
-
-	| aTrait |
-	aTrait := self class environment at: self fullName ifAbsent: [ ^ self ].
-
-	(self propertiesAndRelations select: [ :prop | prop isRemote and: [ (aTrait localSelectors includes: prop name) not ] ]) do: [ :each |
-		each generateAccessorsIn: self ]
-]
-
 { #category : 'testing' }
 FmxMBTrait >> isMetamodelTrait [
 

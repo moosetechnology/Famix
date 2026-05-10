@@ -12,13 +12,3 @@ FmxMBTraitEntity >> acceptVisitor: aVisitor [
 	<ignoreForCoverage>
 	^ aVisitor visitTraitEntity: self
 ]
-
-{ #category : 'generating' }
-FmxMBTraitEntity >> generate [
-
-	super generate.
-
-	self
-		generateAddToCollection;
-		generateTestingMethods
-]

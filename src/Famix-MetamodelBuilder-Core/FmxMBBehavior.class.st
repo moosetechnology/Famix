@@ -48,23 +48,6 @@ FmxMBBehavior >> addAllTransitiveTraitsIn: aCollection [
 	^ aCollection
 ]
 
-{ #category : 'adding' }
-FmxMBBehavior >> addMethod: code classSide: boolean protocol: protocol [
-
-	self flag: #todo. "Demeter"
-	self builder environment
-		addMethod: code
-		in: self fullName
-		classSide: boolean
-		protocol: protocol
-]
-
-{ #category : 'adding' }
-FmxMBBehavior >> addMethod: code protocol: protocol [
-
-	^ self addMethod: code classSide: false protocol: protocol
-]
-
 { #category : 'accessing' }
 FmxMBBehavior >> addRelationSide: aRelation [
 
@@ -231,42 +214,6 @@ FmxMBBehavior >> generalization: anObject [
 					  ifFalse: [ self superclass: anObject ] ]
 ]
 
-{ #category : 'generating' }
-FmxMBBehavior >> generate [
-	^ self subclassResponsibility
-]
-
-{ #category : 'generating' }
-FmxMBBehavior >> generateAccessors [
-
-	self propertiesAndRelations do: [ :each | each generateAccessorsIn: self ]
-]
-
-{ #category : 'generating' }
-FmxMBBehavior >> generateAddToCollection [
-
-	self relations do: [ :relation | relation isMany ifTrue: [ self addMethod: (FmxMBMethodsFactory addToCollectionFor: relation name) protocol: #adding ] ]
-]
-
-{ #category : 'generating' }
-FmxMBBehavior >> generateAnnotation [
-
-	self
-		addMethod: (FmxMBMethodsFactory
-				 annotationFor: self name
-				 super: self superclassName
-				 package: self builder safeAnnotationPackageName
-				 isAbstract: self isAbstractClass)
-		classSide: true
-		protocol: #meta
-]
-
-{ #category : 'generating' }
-FmxMBBehavior >> generateTestingMethods [
-
-	self testingSelectors do: [ :aSelector | self addMethod: (FmxMBMethodsFactory testReturning: true for: aSelector) protocol: #testing ]
-]
-
 { #category : 'generalization' }
 FmxMBBehavior >> inheritsFromTrait: aTrait without: aCollection [
 	self --|> aTrait.
@@ -367,7 +314,7 @@ FmxMBBehavior >> prefix: anObject [
 	prefix := anObject
 ]
 
-{ #category : 'generating' }
+{ #category : 'printing' }
 FmxMBBehavior >> printOn: aStream [
 	<ignoreForCoverage>
 	aStream
@@ -389,7 +336,7 @@ FmxMBBehavior >> propertiesAndRelations [
 	^ propertiesAndRelations
 ]
 
-{ #category : 'generating' }
+{ #category : 'associations' }
 FmxMBBehavior >> property: propertyName [
 
 	| aSide |

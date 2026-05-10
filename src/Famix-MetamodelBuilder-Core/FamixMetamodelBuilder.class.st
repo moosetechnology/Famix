@@ -48,7 +48,6 @@ Class {
 	#name : 'FamixMetamodelBuilder',
 	#superclass : 'Object',
 	#instVars : [
-		'environment',
 		'classes',
 		'traits',
 		'generator',
@@ -91,12 +90,6 @@ FamixMetamodelBuilder >> allSubBuilders [
 ]
 
 { #category : 'accessing' }
-FamixMetamodelBuilder >> apply [
-
-	self environment apply
-]
-
-{ #category : 'accessing' }
 FamixMetamodelBuilder >> association: anAssociationName [
 
 	| association |
@@ -117,7 +110,10 @@ FamixMetamodelBuilder >> baseImportingContextName [
 FamixMetamodelBuilder >> changesToApply [
 
 	self prepareGeneration.
-	^ self environment changesToApply
+
+	^ (FmxMBChangesBuilderVisitor visit: self)
+		  filterRedoundantChanges;
+		  changesToApply
 ]
 
 { #category : 'initialization' }
@@ -214,26 +210,11 @@ FamixMetamodelBuilder >> entityCreatorTrait [
 					   yourself) ]
 ]
 
-{ #category : 'accessing' }
-FamixMetamodelBuilder >> environment [
-
-	^ environment
-]
-
-{ #category : 'accessing' }
-FamixMetamodelBuilder >> environment: anObject [
-
-	environment := anObject
-]
-
 { #category : 'generating' }
 FamixMetamodelBuilder >> generate [
 
-	| changesBuilder |
 	self prepareGeneration.
-	changesBuilder := FmxMBChangesBuilderVisitor visit: self.
-	changesBuilder filterRedoundantChanges.
-	changesBuilder applyChanges.
+	FmxMBChangesBuilderVisitor generate: self
 ]
 
 { #category : 'generating' }
@@ -255,37 +236,7 @@ FamixMetamodelBuilder >> generateImportingContext [
 { #category : 'generating' }
 FamixMetamodelBuilder >> generateRemotes [
 
-	self environment reset.
-
-
-	self traits do: [ :each | each generateRemotes ].
-	self classes do: [ :each | each generateRemotes ].
-	(FmxMBRemoteChangesBuilderVisitor visit: self)
-		filterRedoundantChanges;
-		applyChanges "self apply"
-]
-
-{ #category : 'generating' }
-FamixMetamodelBuilder >> generateTestingMethodsOfRemoteEntities [
-
-	| entitiesWithRemoteSuperclasses |
-	entitiesWithRemoteSuperclasses := self classes groupedBy: [ :class | class remoteSuperclass ].
-
-
-	entitiesWithRemoteSuperclasses keysAndValuesDo: [ :remoteClass :subclasses |
-			remoteClass ifNotNil: [
-					| subclassesAndTraits |
-					subclassesAndTraits := subclasses flatCollectAsSet: [ :subclass | subclass allTransitiveTraits , { subclass } ].
-
-					self testingSelectorsMapping keysAndValuesDo: [ :behavior :selectors |
-							((self shouldGeneratorTestingMethodsOf: behavior in: remoteClass) and: [ subclassesAndTraits includes: behavior ]) ifTrue: [
-									selectors do: [ :selector |
-											self class environment
-												at: remoteClass fullName
-												ifPresent: [ :class |
-														(class includesSelector: selector) ifFalse: [
-															remoteClass addMethod: ('{1}\\	<generated>\	^ false' withCRs format: { selector }) protocol: '*' , self configuration packageName ] ]
-												ifAbsent: [ self error: 'The class ' , remoteClass fullName , ' was not found in the system to generate a remote testing method.' ] ] ] ] ] ]
+	FmxMBRemoteChangesBuilderVisitor generate: self
 ]
 
 { #category : 'accessing' }
@@ -338,7 +289,6 @@ FamixMetamodelBuilder >> importingContextName [
 FamixMetamodelBuilder >> initialize [
 
 	super initialize.
-	environment := FmxMBRingEnvironment for: self.
 
 	configuration := FmxMBConfiguration new.
 
@@ -466,8 +416,7 @@ FamixMetamodelBuilder >> parentBuilder [
 { #category : 'accessing' }
 FamixMetamodelBuilder >> parentBuilder: anObject [
 
-	parentBuilder := anObject.
-	self environment: parentBuilder environment
+	parentBuilder := anObject
 ]
 
 { #category : 'tests support' }
@@ -482,16 +431,12 @@ FamixMetamodelBuilder >> parentBuilderPackageName [
 FamixMetamodelBuilder >> prepareBehaviorsGeneration [
 
 	self traitsWithSubBuildersTraits do: [ :each | self testingSelectorsMapping at: each put: each testingSelectors ].
-	self classes do: [ :each | self testingSelectorsMapping at: each put: each testingSelectors ].
-	self traits do: [ :each | each generate ].
-	self sortedClasses do: [ :each | each generate ].
-	self generateTestingMethodsOfRemoteEntities
+	self classes do: [ :each | self testingSelectorsMapping at: each put: each testingSelectors ]
 ]
 
 { #category : 'generating' }
 FamixMetamodelBuilder >> prepareGeneration [
 
-	self environment ensurePackageNamed: self configuration packageName.
 	self ensureEntityClassIsTheCommonSuperclass.
 
 	self shouldGenerateModel ifTrue: [
@@ -511,6 +456,14 @@ FamixMetamodelBuilder >> printOn: aStream [
 			nextPut: $(;
 			print: g class;
 			nextPut: $) ]
+]
+
+{ #category : 'generating' }
+FamixMetamodelBuilder >> remoteChangesToApply [
+
+	^ (FmxMBRemoteChangesBuilderVisitor visit: self)
+		  filterRedoundantChanges;
+		  changesToApply
 ]
 
 { #category : 'accessing' }

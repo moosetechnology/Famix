@@ -19,7 +19,7 @@ FmxMBAbstractChangesBuilderVisitor class >> generate: aBuilder [
 		applyChanges
 ]
 
-{ #category : 'adding' }
+{ #category : 'private' }
 FmxMBAbstractChangesBuilderVisitor >> addMethod: sourceCode classSide: aBoolean protocol: protocol [
 
 	self
@@ -29,7 +29,7 @@ FmxMBAbstractChangesBuilderVisitor >> addMethod: sourceCode classSide: aBoolean 
 		protocol: protocol
 ]
 
-{ #category : 'adding' }
+{ #category : 'private' }
 FmxMBAbstractChangesBuilderVisitor >> addMethod: sourceCode in: aClassName classSide: aBoolean protocol: protocol [
 
 	changesToApply add: (FmxMethodAddition
@@ -39,7 +39,7 @@ FmxMBAbstractChangesBuilderVisitor >> addMethod: sourceCode in: aClassName class
 			 protocol: protocol)
 ]
 
-{ #category : 'adding' }
+{ #category : 'private' }
 FmxMBAbstractChangesBuilderVisitor >> addMethod: sourceCode in: aClassName protocol: protocol [
 
 	self
@@ -49,13 +49,13 @@ FmxMBAbstractChangesBuilderVisitor >> addMethod: sourceCode in: aClassName proto
 		protocol: protocol
 ]
 
-{ #category : 'adding' }
+{ #category : 'private' }
 FmxMBAbstractChangesBuilderVisitor >> addMethod: sourceCode protocol: protocol [
 
 	self addMethod: sourceCode in: currentBehavioral fullName protocol: protocol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'operations' }
 FmxMBAbstractChangesBuilderVisitor >> applyChanges [
 
 	| dependencies |
@@ -69,7 +69,7 @@ FmxMBAbstractChangesBuilderVisitor >> applyChanges [
 	(AITopologicalSorting sort: changesToApply followingIncomingProperty: [ :change | dependencies at: change ]) do: #apply
 ]
 
-{ #category : 'initialization' }
+{ #category : 'private' }
 FmxMBAbstractChangesBuilderVisitor >> buildSlotsDefinitionsFor: properties existingClass: currentClass [
 
 	| modelSlotDefinitions |
@@ -92,7 +92,7 @@ FmxMBAbstractChangesBuilderVisitor >> buildSlotsDefinitionsFor: properties exist
 	^ modelSlotDefinitions sorted
 ]
 
-{ #category : 'cleaning' }
+{ #category : 'accessing' }
 FmxMBAbstractChangesBuilderVisitor >> changesOfType: aClass [
 
 	^ changesToApply select: [ :change | change isKindOf: aClass ]
@@ -103,7 +103,7 @@ FmxMBAbstractChangesBuilderVisitor >> changesToApply [
 	^ changesToApply
 ]
 
-{ #category : 'initialization' }
+{ #category : 'private' }
 FmxMBAbstractChangesBuilderVisitor >> createClassNamed: className superclass: superclassName traitDefinitions: traitDefinitions precedingTrait: precedingTrait properties: properties in: defaultPackage tag: defaultTag comment: comment [
 
 	| realClass packageName tag change |
@@ -134,7 +134,7 @@ FmxMBAbstractChangesBuilderVisitor >> createClassNamed: className superclass: su
 	comment ifNotEmpty: [ changesToApply add: (FmxClassCommentUpdate className: className comment: comment) ]
 ]
 
-{ #category : 'initialization' }
+{ #category : 'private' }
 FmxMBAbstractChangesBuilderVisitor >> createTraitNamed: traitName traitDefinitions: traitDefinitions precedingTrait: precedingTrait properties: properties in: defaultPackage tag: defaultTag comment: comment [
 
 	| packageName tag realClass change |
@@ -173,7 +173,7 @@ FmxMBAbstractChangesBuilderVisitor >> ensurePackageNamed: packageName [
 	changesToApply add: (FmxPackageAddition named: packageName)
 ]
 
-{ #category : 'accessing' }
+{ #category : 'operations' }
 FmxMBAbstractChangesBuilderVisitor >> filterRedoundantChanges [
 
 	changesToApply := changesToApply select: #isRequired
@@ -186,13 +186,13 @@ FmxMBAbstractChangesBuilderVisitor >> initialize [
 	changesToApply := OrderedCollection new
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 FmxMBAbstractChangesBuilderVisitor >> methodFactory [
 
 	^ FmxMBMethodsFactory
 ]
 
-{ #category : 'installing' }
+{ #category : 'private' }
 FmxMBAbstractChangesBuilderVisitor >> traitStringFrom: traitDefinitions precedingTrait: precedingTrait existingClass: realClass [
 	"We need to collect the generated traits + the custom traits added by the user."
 
@@ -215,7 +215,7 @@ FmxMBAbstractChangesBuilderVisitor >> traitStringFrom: traitDefinitions precedin
 				  nextPutAll: ')' ]
 ]
 
-{ #category : 'installing' }
+{ #category : 'private' }
 FmxMBAbstractChangesBuilderVisitor >> validateProperties: properties [
 
 	| names |

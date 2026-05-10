@@ -56,30 +56,6 @@ FmxMBClass >> defaultSuperclassName [
 	^ #MooseEntity
 ]
 
-{ #category : 'generating' }
-FmxMBClass >> generate [
-
-	self builder environment
-		createClassNamed: self fullName
-		superclass: self superclassName
-		traitDefinitions: self allTraitDefinitions
-		precedingTrait: (self additionalProperties at: #precedingTrait ifAbsent: [ nil ])
-		properties: (self propertiesAndRelations select: #producesSlot)
-		in: self packageName
-		tag: self tag
-		comment: self commentWithRelations.
-
-	self generateAccessors
-]
-
-{ #category : 'generating' }
-FmxMBClass >> generateRemotes [
-
-	self class environment at: self fullName ifAbsent: [ ^ self ].
-
-	(self propertiesAndRelations select: #isRemote) do: [ :each | each generateAccessorsIn: self ]
-]
-
 { #category : 'testing' }
 FmxMBClass >> isMetamodelClass [
 

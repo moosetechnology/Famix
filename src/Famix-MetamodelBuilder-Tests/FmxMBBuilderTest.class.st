@@ -18,19 +18,6 @@ Class {
 }
 
 { #category : 'tests' }
-FmxMBBuilderTest >> testChildBuildersShareTheSameEnvironment [
-
-	| parentBuilder childBuilder |
-	
-	parentBuilder := FamixMetamodelBuilder new.
-	childBuilder := FamixMetamodelBuilder new.
-	childBuilder parentBuilder: parentBuilder.
-
-	self assert: childBuilder environment equals: parentBuilder environment.
-
-]
-
-{ #category : 'tests' }
 FmxMBBuilderTest >> testClassNamed [
 
 	| c1 |

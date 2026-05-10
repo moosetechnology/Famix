@@ -17,18 +17,6 @@ FmxMBEntityCreatorTrait >> acceptVisitor: aVisitor [
 	^ aVisitor visitEntityCreator: self
 ]
 
-{ #category : 'generating' }
-FmxMBEntityCreatorTrait >> generate [
-
-	super generate.
-
-	self builder concreteClasses do: [ :class |
-			self addMethod: (FmxMBMethodsFactory instantiate: class) protocol: #'entity creation'.
-
-			(class allTransitiveTraitsIncludingSuperclasses anySatisfy: [ :trait | trait prefix = #Famix and: [ trait name = #TNamedEntity ] ]) ifTrue: [
-				self addMethod: (FmxMBMethodsFactory instantiateNamed: class) protocol: #'entity creation' ] ]
-]
-
 { #category : 'initialization' }
 FmxMBEntityCreatorTrait >> initialize [
 

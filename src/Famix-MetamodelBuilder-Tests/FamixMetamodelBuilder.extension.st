@@ -4,7 +4,6 @@ Extension { #name : 'FamixMetamodelBuilder' }
 FamixMetamodelBuilder >> beForTesting [
 
 	<ignoreForCoverage>
-	self environment: (FmxMBStubEnvironment for: self).
 	self configuration
 		prefix: 'Tst';
 		packageName: 'Tst'.

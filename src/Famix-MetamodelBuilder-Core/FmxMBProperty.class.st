@@ -18,38 +18,10 @@ FmxMBProperty >> acceptVisitor: aVisitor [
 	^ aVisitor visitProperty: self
 ]
 
-{ #category : 'generating' }
-FmxMBProperty >> generateAccessorsIn: aFmxBehavioral [
-	self generateGetterIn: aFmxBehavioral.
-	self generateSetterIn: aFmxBehavioral
-]
-
-{ #category : 'generating' }
-FmxMBProperty >> generateGetterIn: aFmxBehavioral [
-	<ignoreForCoverage>
-	self subclassResponsibility
-]
-
-{ #category : 'generating' }
-FmxMBProperty >> generateSetterIn: aFmxBehavioral [
-	<ignoreForCoverage>
-	self subclassResponsibility
-]
-
-{ #category : 'printing' }
-FmxMBProperty >> hasDefaultValue [
-	^ false
-]
-
 { #category : 'initialization' }
 FmxMBProperty >> initialize [
 	super initialize.
 	comment := ''
-]
-
-{ #category : 'printing' }
-FmxMBProperty >> isContainer [
-	^ false
 ]
 
 { #category : 'accessing' }

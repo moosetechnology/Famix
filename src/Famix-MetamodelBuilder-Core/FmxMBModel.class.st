@@ -24,28 +24,6 @@ FmxMBModel >> defaultTag [
 	^ #Model
 ]
 
-{ #category : 'generating' }
-FmxMBModel >> generate [
-
-	super generate.
-	self
-		generateFileImportMethods;
-		generateAnnotation.
-
-	self builder allSubBuilders ifNotEmpty: [ :subBuilders |
-		self addMethod: (FmxMBMethodsFactory allSubmetamodelsPackagesNamesFor: subBuilders) classSide: true protocol: #accessing ]
-]
-
-{ #category : 'generating-methods' }
-FmxMBModel >> generateFileImportMethods [
-
-	self builder configuration shouldGenerateFileImportHelpers ifFalse: [ ^ self ].
-
-	self addMethod: FmxMBMethodsFactory canBeImportedFromFile classSide: true protocol: #testing.
-
-	self addMethod: (FmxMBMethodsFactory importingClassNamed: self builder importingContextName) classSide: true protocol: #accessing
-]
-
 { #category : 'testing' }
 FmxMBModel >> isModelClass [
 

@@ -26,47 +26,6 @@ FmxMBClassEntity >> defaultSuperclassName [
 	^ super defaultSuperclassName
 ]
 
-{ #category : 'generating-methods' }
-FmxMBClassEntity >> generate [
-
-	super generate.
-
-	self
-		generateAddToCollection;
-		generateTestingMethods;
-		generateMetamodelMethod;
-		generateAnnotation.
-
-	self isAbstractClass ifTrue: [ self addMethod: (FmxMBMethodsFactory isAbstractFor: self fullName) classSide: true protocol: #testing ].
-
-	propertiesForEqualityCheck ifNotNil: [
-			self addMethod: (FmxMBMethodsFactory equalsForVariableNamed: 'a' , self fullName properties: propertiesForEqualityCheck) protocol: #comparing.
-			self addMethod: (FmxMBMethodsFactory hashForProperties: propertiesForEqualityCheck) protocol: #comparing ]
-]
-
-{ #category : 'generating-methods' }
-FmxMBClassEntity >> generateMetamodelMethod [
-
-	self isRoot ifFalse: [ ^ self ].
-
-	self builder model ifNotNil: [ :model | self addMethod: (FmxMBMethodsFactory metamodelFor: model fullName) classSide: true protocol: #meta ]
-]
-
-{ #category : 'generating-methods' }
-FmxMBClassEntity >> generateTestingMethods [
-
-	self isRoot ifTrue: [
-			| selectorsToGenerate |
-			selectorsToGenerate := Set new.
-			builder testingSelectorsMapping keysAndValuesDo: [ :concernedClass :selectors |
-				(builder shouldGeneratorTestingMethodsOf: concernedClass in: self) ifTrue: [ selectorsToGenerate addAll: selectors ] ].
-
-			(selectorsToGenerate difference: (self traitGeneralizations flatCollect: #testingSelectors)) do: [ :selector |
-				self addMethod: (FmxMBMethodsFactory testReturning: false for: selector) protocol: #testing ] ].
-
-	super generateTestingMethods
-]
-
 { #category : 'testing' }
 FmxMBClassEntity >> isAbstractClass [
 

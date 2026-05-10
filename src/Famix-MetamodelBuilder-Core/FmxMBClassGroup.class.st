@@ -28,13 +28,6 @@ FmxMBClassGroup >> defaultTag [
 	^ #Groups
 ]
 
-{ #category : 'generating' }
-FmxMBClassGroup >> generate [
-
-	super generate.
-	innerClass addMethod: (FmxMBMethodsFactory groupAnnotationNamed: self fullName) classSide: true protocol: #groups
-]
-
 { #category : 'accessing' }
 FmxMBClassGroup >> innerClass [
 	^ innerClass

@@ -38,24 +38,6 @@ FmxMBImportingContext >> defaultSuperclassName [
 	^ #FamixImportingContext
 ]
 
-{ #category : 'generating' }
-FmxMBImportingContext >> generate [
-
-	super generate.
-
-	self addMethod: (FmxMBMethodsFactory importedMetamodelForPrefix: self prefix) classSide: true protocol: #accessing.
-
-	self builder concreteClasses do: [ :each |
-			self
-				addMethod: (each allTransitiveTraits
-						 detect: [ :trait | trait name = #TAssociation ]
-						 ifFound: [ FmxMBMethodsFactory importAssociationNamed: each name ]
-						 ifNone: [ FmxMBMethodsFactory importEntityNamed: each name ])
-				protocol: #importing.
-
-			self addMethod: (FmxMBMethodsFactory shouldImportNamed: each name) protocol: #testing ]
-]
-
 { #category : 'accessing' }
 FmxMBImportingContext >> name [
 
