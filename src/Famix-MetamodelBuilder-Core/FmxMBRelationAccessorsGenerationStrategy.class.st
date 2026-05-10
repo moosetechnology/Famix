@@ -101,17 +101,3 @@ FmxMBRelationAccessorsGenerationStrategy >> generateSetterCoreOn: aStream for: a
 
 	^ self subclassResponsibility
 ]
-
-{ #category : 'testing' }
-FmxMBRelationAccessorsGenerationStrategy >> producesSlot [
-
-	^ false
-]
-
-{ #category : 'accessing' }
-FmxMBRelationAccessorsGenerationStrategy >> protocolFor: aRelation [
-
-	^ aRelation isRemote
-		  ifTrue: [ '*' , aRelation builder parentBuilderPackageName ]
-		  ifFalse: [ #accessing ]
-]

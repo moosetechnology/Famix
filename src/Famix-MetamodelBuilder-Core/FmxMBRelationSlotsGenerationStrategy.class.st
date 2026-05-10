@@ -30,9 +30,3 @@ FmxMBRelationSlotsGenerationStrategy >> generateSetterCoreOn: aStream for: aRela
 		ifTrue: [ aStream nextPutAll: ' := anObject' ]
 		ifFalse: [ aStream nextPutAll: ' value: anObject' ]
 ]
-
-{ #category : 'testing' }
-FmxMBRelationSlotsGenerationStrategy >> producesSlot [
-
-	^ true
-]

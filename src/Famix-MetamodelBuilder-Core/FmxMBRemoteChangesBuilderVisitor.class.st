@@ -1,3 +1,6 @@
+"
+I am a visitor to generate the metamodel code of everything that is remote.
+"
 Class {
 	#name : 'FmxMBRemoteChangesBuilderVisitor',
 	#superclass : 'FmxMBAbstractChangesBuilderVisitor',
