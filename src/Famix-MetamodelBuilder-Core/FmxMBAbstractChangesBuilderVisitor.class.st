@@ -6,9 +6,9 @@ Class {
 		'currentBehavioral',
 		'changesToApply'
 	],
-	#category : 'Famix-MetamodelBuilder-Core-Implementation',
+	#category : 'Famix-MetamodelBuilder-Core-Generation',
 	#package : 'Famix-MetamodelBuilder-Core',
-	#tag : 'Implementation'
+	#tag : 'Generation'
 }
 
 { #category : 'instance creation' }

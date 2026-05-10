@@ -1,9 +1,9 @@
 Class {
 	#name : 'FmxMBChangesBuilderVisitor',
 	#superclass : 'FmxMBAbstractChangesBuilderVisitor',
-	#category : 'Famix-MetamodelBuilder-Core-Implementation',
+	#category : 'Famix-MetamodelBuilder-Core-Generation',
 	#package : 'Famix-MetamodelBuilder-Core',
-	#tag : 'Implementation'
+	#tag : 'Generation'
 }
 
 { #category : 'generation' }

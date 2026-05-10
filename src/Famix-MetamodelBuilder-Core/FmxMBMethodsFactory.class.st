@@ -8,9 +8,9 @@ I'll be used during the generation of a metamodel.
 Class {
 	#name : 'FmxMBMethodsFactory',
 	#superclass : 'Object',
-	#category : 'Famix-MetamodelBuilder-Core-Implementation',
+	#category : 'Famix-MetamodelBuilder-Core-Generation',
 	#package : 'Famix-MetamodelBuilder-Core',
-	#tag : 'Implementation'
+	#tag : 'Generation'
 }
 
 { #category : 'code generation' }

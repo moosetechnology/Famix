@@ -7,9 +7,9 @@ I am a cleaning strategy that cleans nothing (Null design patter)
 Class {
 	#name : 'FamixMetamodelGeneratorNoCleaningStrategy',
 	#superclass : 'FamixAbstractMetamodelGeneratorCleaningStrategy',
-	#category : 'Famix-MetamodelBuilder-Core-Cleaning',
+	#category : 'Famix-MetamodelBuilder-Core-Basic',
 	#package : 'Famix-MetamodelBuilder-Core',
-	#tag : 'Cleaning'
+	#tag : 'Basic'
 }
 
 { #category : 'action' }

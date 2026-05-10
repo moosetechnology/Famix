@@ -9,9 +9,9 @@ Class {
 	#classInstVars : [
 		'defaultInstance'
 	],
-	#category : 'Famix-MetamodelBuilder-Core-Implementation',
+	#category : 'Famix-MetamodelBuilder-Core-Generation',
 	#package : 'Famix-MetamodelBuilder-Core',
-	#tag : 'Implementation'
+	#tag : 'Generation'
 }
 
 { #category : 'accessing' }
@@ -22,22 +22,22 @@ FmxMBRelationAccessorsGenerationStrategy class >> defaultInstance [
 ]
 
 { #category : 'generation' }
-FmxMBRelationAccessorsGenerationStrategy >> generateGetterCodeFor: aRelationSide [
+FmxMBRelationAccessorsGenerationStrategy >> generateGetterCodeFor: aRelation [
 
 	| commentDefinition |
-	commentDefinition := aRelationSide comment ifNotEmpty: [ :comment | '<FMComment: {1}>' format: { comment printString } ].
+	commentDefinition := aRelation comment ifNotEmpty: [ :comment | '<FMComment: {1}>' format: { comment printString } ].
 
 	^ String streamContents: [ :s |
 			  s
-				  nextPutAll: aRelationSide name;
+				  nextPutAll: aRelation name;
 				  cr;
 				  tab;
 				  nextPutAll: '"Relation named: #';
-				  nextPutAll: aRelationSide name;
+				  nextPutAll: aRelation name;
 				  nextPutAll: ' type: #';
-				  nextPutAll: aRelationSide oppositeType;
+				  nextPutAll: aRelation oppositeType;
 				  nextPutAll: ' opposite: #';
-				  nextPutAll: aRelationSide oppositeName;
+				  nextPutAll: aRelation oppositeName;
 				  nextPutAll: '"';
 				  cr;
 				  cr.
@@ -50,42 +50,42 @@ FmxMBRelationAccessorsGenerationStrategy >> generateGetterCodeFor: aRelationSide
 						  tab;
 						  nextPutAll: commentDefinition;
 						  cr ].
-			  aRelationSide isContainer ifTrue: [
+			  aRelation isContainer ifTrue: [
 					  s
 						  tab;
 						  nextPutAll: '<container>';
 						  cr ].
-			  aRelationSide isDerived ifTrue: [
+			  aRelation isDerived ifTrue: [
 					  s
 						  tab;
 						  nextPutAll: '<derived>';
 						  cr ].
-			  aRelationSide isSource ifTrue: [
+			  aRelation isSource ifTrue: [
 					  s
 						  tab;
 						  nextPutAll: '<source>';
 						  cr ].
-			  aRelationSide isTarget ifTrue: [
+			  aRelation isTarget ifTrue: [
 					  s
 						  tab;
 						  nextPutAll: '<target>';
 						  cr ].
 
-			  self generateGetterCoreOn: s for: aRelationSide ]
+			  self generateGetterCoreOn: s for: aRelation ]
 ]
 
 { #category : 'generation' }
-FmxMBRelationAccessorsGenerationStrategy >> generateGetterCoreOn: aStream for: aRelationSide [
+FmxMBRelationAccessorsGenerationStrategy >> generateGetterCoreOn: aStream for: aRelation [
 
 	^ self subclassResponsibility
 ]
 
 { #category : 'generation' }
-FmxMBRelationAccessorsGenerationStrategy >> generateSetterCodeFor: aRelationSide [
+FmxMBRelationAccessorsGenerationStrategy >> generateSetterCodeFor: aRelation [
 
 	^ String streamContents: [ :s |
 			  s
-				  nextPutAll: aRelationSide name;
+				  nextPutAll: aRelation name;
 				  nextPutAll: ': anObject';
 				  cr;
 				  cr.
@@ -93,11 +93,11 @@ FmxMBRelationAccessorsGenerationStrategy >> generateSetterCodeFor: aRelationSide
 				  tab;
 				  nextPutAll: '<generated>';
 				  cr.
-			  self generateSetterCoreOn: s for: aRelationSide ]
+			  self generateSetterCoreOn: s for: aRelation ]
 ]
 
 { #category : 'generation' }
-FmxMBRelationAccessorsGenerationStrategy >> generateSetterCoreOn: aStream for: aRelationSide [
+FmxMBRelationAccessorsGenerationStrategy >> generateSetterCoreOn: aStream for: aRelation [
 
 	^ self subclassResponsibility
 ]

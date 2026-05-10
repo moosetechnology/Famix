@@ -49,7 +49,7 @@ FmxMBBehavior >> addAllTransitiveTraitsIn: aCollection [
 ]
 
 { #category : 'accessing' }
-FmxMBBehavior >> addRelationSide: aRelation [
+FmxMBBehavior >> addRelation: aRelation [
 
 	(self relations anySatisfy: [ :relation | relation name = aRelation name ]) ifTrue: [ ^ self ].
 
@@ -117,7 +117,7 @@ FmxMBBehavior >> allTransitiveTraitsIncludingSuperclasses [
 ]
 
 { #category : 'converting' }
-FmxMBBehavior >> asRelationSideNamed: aPropertyName [
+FmxMBBehavior >> asRelationNamed: aPropertyName [
 
 	^ self property: aPropertyName
 ]
@@ -343,13 +343,13 @@ FmxMBBehavior >> property: propertyName [
 	
 	self assert: propertyName isString.
 	
-	aSide := FmxMBRelationSide new
+	aSide := FmxMBRelation new
 		builder: self builder;
 		relatedClass: self;
 		name: propertyName;
 		yourself.
 		
-	self addRelationSide: aSide.
+	self addRelation: aSide.
 	^ aSide.
 ]
 

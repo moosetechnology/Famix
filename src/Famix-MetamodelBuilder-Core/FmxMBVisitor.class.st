@@ -88,7 +88,7 @@ FmxMBVisitor >> visitModel: aClass [
 ]
 
 { #category : 'visiting' }
-FmxMBVisitor >> visitProperty: aRelationSide [
+FmxMBVisitor >> visitProperty: aRelation [
 
 	
 ]

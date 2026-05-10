@@ -11,7 +11,7 @@ FmxMBRelationSideTest >> testBasics [
 	"check trivial testing and accessing methods"
 
 	| side |
-	side := FmxMBRelationSide new.
+	side := FmxMBRelation new.
 
 	self assert: side cardinality equals: #one.
 	self deny: side isContainer.
@@ -99,7 +99,7 @@ FmxMBRelationSideTest >> testProperties [
 
 	| side |
 	
-	side := FmxMBRelationSide new.
+	side := FmxMBRelation new.
 
 	self deny: side isContainer.
 	side container: true.
@@ -154,7 +154,7 @@ FmxMBRelationSideTest >> testPropertyReservedName [
 	"simple tests of basic relation side properties"
 
 	| side |
-	side := FmxMBRelationSide new
+	side := FmxMBRelation new
 		builder: builder;
 		yourself.
 	self should: [ side name: 'class' ] raise: FmxMBPropertyNameIsReserved

@@ -55,9 +55,9 @@ FmxMBTrait >> propertyName [
 ]
 
 { #category : 'accessing' }
-FmxMBTrait >> removeRelationSide: aRelationSide [
+FmxMBTrait >> removeRelation: aRelation [
 
-	propertiesAndRelations remove: aRelationSide ifAbsent: [ ].
+	propertiesAndRelations remove: aRelation ifAbsent: [ ].
 ]
 
 { #category : 'accessing' }

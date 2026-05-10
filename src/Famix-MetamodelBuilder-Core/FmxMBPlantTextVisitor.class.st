@@ -192,9 +192,9 @@ FmxMBPlantTextVisitor >> visitClass: aClass [
 ]
 
 { #category : 'visiting' }
-FmxMBPlantTextVisitor >> visitRelation: aRelationSide [
+FmxMBPlantTextVisitor >> visitRelation: aRelation [
 
-	relations add: aRelationSide
+	relations add: aRelation
 ]
 
 { #category : 'visiting' }

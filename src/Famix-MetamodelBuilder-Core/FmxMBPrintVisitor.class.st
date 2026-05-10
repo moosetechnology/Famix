@@ -57,10 +57,10 @@ FmxMBPrintVisitor >> visitClass: aClass [
 ]
 
 { #category : 'visiting' }
-FmxMBPrintVisitor >> visitRelation: aRelationSide [
+FmxMBPrintVisitor >> visitRelation: aRelation [
 
 	self trace:
-		aRelationSide name , ' (' , aRelationSide oppositeType , ')'
+		aRelation name , ' (' , aRelation oppositeType , ')'
 ]
 
 { #category : 'visiting' }

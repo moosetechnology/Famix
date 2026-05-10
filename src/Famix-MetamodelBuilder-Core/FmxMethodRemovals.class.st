@@ -22,9 +22,9 @@ Class {
 	#instVars : [
 		'selectors'
 	],
-	#category : 'Famix-MetamodelBuilder-Core-Changes',
+	#category : 'Famix-MetamodelBuilder-Core-Generation',
 	#package : 'Famix-MetamodelBuilder-Core',
-	#tag : 'Changes'
+	#tag : 'Generation'
 }
 
 { #category : 'instance creation' }

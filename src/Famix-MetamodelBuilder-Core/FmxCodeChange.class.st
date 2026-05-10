@@ -16,9 +16,9 @@ Public API and Key Messages
 Class {
 	#name : 'FmxCodeChange',
 	#superclass : 'Object',
-	#category : 'Famix-MetamodelBuilder-Core-Changes',
+	#category : 'Famix-MetamodelBuilder-Core-Generation',
 	#package : 'Famix-MetamodelBuilder-Core',
-	#tag : 'Changes'
+	#tag : 'Generation'
 }
 
 { #category : 'testing' }
