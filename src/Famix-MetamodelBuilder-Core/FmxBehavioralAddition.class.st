@@ -6,7 +6,8 @@ Class {
 		'traits',
 		'slots',
 		'package',
-		'tag'
+		'tag',
+		'traitComposition'
 	],
 	#category : 'Famix-MetamodelBuilder-Core-Generation',
 	#package : 'Famix-MetamodelBuilder-Core',
@@ -24,7 +25,7 @@ FmxBehavioralAddition >> apply [
 			             package: package;
 			             tag: tag.
 
-		             traits ifNotNil: [ builder traits: (self class compiler evaluate: traits) ].
+		             traits ifNotNil: [ builder traits: self traitComposition ].
 		             slots ifNotNil: [ builder slots: (self class compiler evaluate: '{' , (slots joinUsing: '. ') , '}') ] ].
 
 	"If the class already exist we update it to not remove the class slots and shared variables."
@@ -55,10 +56,7 @@ FmxBehavioralAddition >> isRequired [
 					  ifTrue: [ self traits ifNotNil: [ ^ true ] ]
 					  ifFalse: [
 							  self traits ifNil: [ ^ true ].
-							  (OpalCompiler new
-								   failBlock: [ ^ true ];
-								   source: self traits;
-								   evaluate) asTraitComposition = realClass traitComposition ifFalse: [ ^ true ] ].
+							self traitComposition = realClass traitComposition ifFalse: [ ^ true ] ].
 
 				  realClass package name = self package ifFalse: [ ^ true ].
 				  realClass packageTag name ~= self tag ]
@@ -132,6 +130,16 @@ FmxBehavioralAddition >> tag [
 { #category : 'accessing' }
 FmxBehavioralAddition >> tag: anObject [
 	tag := anObject
+]
+
+{ #category : 'testing' }
+FmxBehavioralAddition >> traitComposition [
+	"Cached"
+
+	^ traitComposition ifNil: [
+			  traitComposition := (OpalCompiler new
+				                       source: self traits;
+				                       evaluate) asTraitComposition ]
 ]
 
 { #category : 'accessing' }
