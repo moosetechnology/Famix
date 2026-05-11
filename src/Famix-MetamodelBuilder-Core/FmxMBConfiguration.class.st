@@ -25,22 +25,12 @@ FmxMBConfiguration >> initialize [
 
 { #category : 'accessing' }
 FmxMBConfiguration >> packageName [
-	^ packageName ifNil: [ packageName := #'FamixMetamodelBulder-Generated' ]
+	^ packageName ifNil: [ packageName := #'FamixMetamodelBuilder-Generated' ]
 ]
 
 { #category : 'accessing' }
 FmxMBConfiguration >> packageName: anObject [
 	packageName := anObject
-]
-
-{ #category : 'accessing' }
-FmxMBConfiguration >> packageNameForAnnotations [
-	^ packageNameForAnnotations ifNil: [ self packageName ].
-]
-
-{ #category : 'accessing' }
-FmxMBConfiguration >> packageNameForAnnotations: anObject [
-	packageNameForAnnotations := anObject
 ]
 
 { #category : 'accessing' }

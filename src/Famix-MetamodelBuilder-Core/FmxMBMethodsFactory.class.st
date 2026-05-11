@@ -32,7 +32,7 @@ FmxMBMethodsFactory class >> allSubmetamodelsPackagesNamesFor: subBuilders [
 	<generated>
 	^ #('.
 
-			  packages := (subBuilders collect: [ :subBuilder | subBuilder configuration packageName ]) asOrderedCollection sorted: #yourself descending.
+			  packages := (subBuilders collect: [ :subBuilder | subBuilder packageName ]) asOrderedCollection sorted: #yourself descending.
 
 			  packages do: [ :package | stream print: package ] separatedBy: [ stream space ].
 

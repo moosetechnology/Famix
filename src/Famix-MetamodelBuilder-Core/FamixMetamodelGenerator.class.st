@@ -154,13 +154,6 @@ FamixMetamodelGenerator class >> packageName [
 ]
 
 { #category : 'accessing' }
-FamixMetamodelGenerator class >> packageNameForAnnotations [
-
-	<ignoreForCoverage>
-	^ self packageName
-]
-
-{ #category : 'accessing' }
 FamixMetamodelGenerator class >> prefix [
 
 	<ignoreForCoverage>
@@ -194,8 +187,7 @@ FamixMetamodelGenerator >> adoptBuilder: aBuilder [
 
 	aBuilder configuration
 		prefix: self prefix;
-		packageName: self packageName;
-		packageNameForAnnotations: self packageNameForAnnotations
+		packageName: self packageName
 ]
 
 { #category : 'accessing' }
@@ -415,13 +407,6 @@ FamixMetamodelGenerator >> newTraitNamed: aClassName comment: aString [
 FamixMetamodelGenerator >> packageName [
 
 	^ self class packageName
-
-]
-
-{ #category : 'definition' }
-FamixMetamodelGenerator >> packageNameForAnnotations [
-
-	^ self class packageNameForAnnotations
 
 ]
 

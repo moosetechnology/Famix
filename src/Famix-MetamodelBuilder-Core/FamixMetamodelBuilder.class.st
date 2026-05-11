@@ -206,7 +206,7 @@ FamixMetamodelBuilder >> entityCreatorTrait [
 			  self traits add: (FmxMBEntityCreatorTrait new
 					   builder: self;
 					   prefix: self configuration prefix;
-					   packageName: self configuration packageName;
+					   packageName: self packageName;
 					   yourself) ]
 ]
 
@@ -226,7 +226,7 @@ FamixMetamodelBuilder >> generateImportingContext [
 	aClass := FmxMBImportingContext new.
 	aClass builder: self.
 	aClass prefix: self configuration prefix.
-	aClass packageName: self configuration packageName.
+	aClass packageName: self packageName.
 	aClass tag: 'Import'.
 
 	self classes add: aClass.
@@ -308,7 +308,7 @@ FamixMetamodelBuilder >> model [
 	aClass := FmxMBModel new.
 	aClass builder: self.
 	aClass prefix: self configuration prefix.
-	aClass packageName: self configuration packageName.
+	aClass packageName: self packageName.
 	self classes add: aClass.
 	^ aClass
 ]
@@ -332,7 +332,7 @@ FamixMetamodelBuilder >> newClass [
 	aClass := FmxMBClassEntity new
 		          builder: self;
 		          prefix: self configuration prefix;
-		          packageName: self configuration packageName;
+		          packageName: self packageName;
 		          yourself.
 	self classes add: aClass.
 	^ aClass
@@ -345,7 +345,7 @@ FamixMetamodelBuilder >> newClassGroup [
 	aClass := FmxMBClassGroup new.
 	aClass builder: self.
 	aClass prefix: self configuration prefix.
-	aClass packageName: self configuration packageName.
+	aClass packageName: self packageName.
 	self classes add: aClass.
 	^ aClass
 ]
@@ -404,6 +404,12 @@ FamixMetamodelBuilder >> newTraitNamed: aClassName comment: aString [
 	^ (self newTraitNamed: aClassName)
 		  comment: aString;
 		  yourself
+]
+
+{ #category : 'accessing' }
+FamixMetamodelBuilder >> packageName [
+
+	^ self configuration packageName
 ]
 
 { #category : 'accessing' }
@@ -470,12 +476,6 @@ FamixMetamodelBuilder >> remoteChangesToApply [
 FamixMetamodelBuilder >> reservedKeywords [
 
 	^ { #class }
-]
-
-{ #category : 'accessing' }
-FamixMetamodelBuilder >> safeAnnotationPackageName [
-
-	^ self configuration packageNameForAnnotations asSymbol printString
 ]
 
 { #category : 'asserting' }

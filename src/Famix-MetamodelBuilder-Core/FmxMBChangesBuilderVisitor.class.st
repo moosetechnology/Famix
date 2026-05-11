@@ -23,7 +23,7 @@ FmxMBChangesBuilderVisitor >> generateAnnotation [
 		addMethod: (self methodFactory
 				 annotationFor: currentBehavioral name
 				 super: currentBehavioral superclassName
-				 package: builder safeAnnotationPackageName
+				 package: currentBehavioral packageName asSymbol printString
 				 isAbstract: currentBehavioral isAbstractClass)
 		classSide: true
 		protocol: #meta
@@ -80,7 +80,7 @@ FmxMBChangesBuilderVisitor >> generateTestingMethodsOfRemoteEntities [
 												at: remoteClass fullName
 												ifPresent: [ :class |
 														(class includesSelector: selector) ifFalse: [
-															self addMethod: (self methodFactory testReturning: true for: selector) in: remoteClass fullName protocol: '*' , builder configuration packageName ] ]
+															self addMethod: (self methodFactory testReturning: true for: selector) in: remoteClass fullName protocol: '*' , builder packageName ] ]
 												ifAbsent: [ self error: 'The class ' , remoteClass fullName , ' was not found in the system to generate a remote testing method.' ] ] ] ] ] ]
 ]
 
@@ -100,7 +100,7 @@ FmxMBChangesBuilderVisitor >> recordMethodRemovalsOf: realClass [
 
 	"In case we have an extension, we remove it if the package is the right one"
 	self flag: #todo. "Demeter. Clean package name management."
-	generatedMethodsOfRealClass := generatedMethodsOfRealClass reject: [ :method | (method hasPragmaNamed: #package:) and: [ ((method pragmaAt: #package:) argumentAt: 1) ~=  builder generator packageName ] ].
+	generatedMethodsOfRealClass := generatedMethodsOfRealClass reject: [ :method | (method hasPragmaNamed: #package:) and: [ ((method pragmaAt: #package:) argumentAt: 1) ~=  builder packageName ] ].
 
 	generatedMethodNamesOfRealClass := generatedMethodsOfRealClass collect: #selector.
 

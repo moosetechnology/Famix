@@ -113,16 +113,6 @@ FmxMBBuilderTest >> testParentBuilder [
 ]
 
 { #category : 'tests' }
-FmxMBBuilderTest >> testSafeAnnotationPackageName [
-
-	builder configuration packageName: 'Package'.
-	self assert: builder safeAnnotationPackageName equals: '#Package'.
-
-	builder configuration packageName: 'Package-Core'.
-	self assert: builder safeAnnotationPackageName equals: '#''Package-Core'''.	
-]
-
-{ #category : 'tests' }
 FmxMBBuilderTest >> testSortedClasses [
 
 	"test class sorting by their hierarchy"

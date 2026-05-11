@@ -32,7 +32,7 @@ FmxMBRelationAttributesGenerationStrategy >> generateGetterCoreOn: aStream for: 
 	aRelation remoteBuilderDo: [ :aRemoteBuilder |
 			aStream
 				tab;
-				nextPutAll: ('<package: #''{1}''>' format: { aRemoteBuilder generator packageName });
+				nextPutAll: ('<package: #''{1}''>' format: { aRemoteBuilder packageName });
 				cr ].
 
 	aStream
