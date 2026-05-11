@@ -32,7 +32,8 @@ FmxMBProperty >> isRelation [
 
 { #category : 'accessing' }
 FmxMBProperty >> name: aString [
-	(self builder reservedKeywords includes: aString) ifTrue: [ FmxMBPropertyNameIsReserved signal ].
+
+	(self reservedKeywords includes: aString) ifTrue: [ FmxMBPropertyNameIsReserved signal ].
 	name := aString
 ]
 

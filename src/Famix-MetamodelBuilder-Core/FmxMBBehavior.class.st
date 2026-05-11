@@ -4,6 +4,7 @@ Class {
 	#traits : 'FmxMBRelationSideTrait',
 	#classTraits : 'FmxMBRelationSideTrait classTrait',
 	#instVars : [
+		'builder',
 		'tag',
 		'prefix',
 		'packageName',
@@ -120,6 +121,17 @@ FmxMBBehavior >> allTransitiveTraitsIncludingSuperclasses [
 FmxMBBehavior >> asRelationNamed: aPropertyName [
 
 	^ self property: aPropertyName
+]
+
+{ #category : 'accessing' }
+FmxMBBehavior >> builder [
+
+	^ builder
+]
+
+{ #category : 'accessing' }
+FmxMBBehavior >> builder: anObject [
+	builder := anObject
 ]
 
 { #category : 'accessing' }
@@ -340,33 +352,21 @@ FmxMBBehavior >> propertiesAndRelations [
 FmxMBBehavior >> property: propertyName [
 
 	| aSide |
-	
 	self assert: propertyName isString.
-	
+
 	aSide := FmxMBRelation new
-		builder: self builder;
-		relatedClass: self;
-		name: propertyName;
-		yourself.
-		
+		         relatedClass: self;
+		         name: propertyName;
+		         yourself.
+
 	self addRelation: aSide.
-	^ aSide.
+	^ aSide
 ]
 
 { #category : 'accessing' }
 FmxMBBehavior >> property: propertyName type: aTypeName [
 
-	| aSide |
-	aSide := FmxMBTypedProperty new
-		         builder: self builder;
-		         name: propertyName;
-		         isRemote: self isRemote;
-		         propertyType: aTypeName asSymbol;
-		         yourself.
-
-	self propertiesAndRelations add: aSide.
-
-	^ aSide
+	^ self property: propertyName type: aTypeName defaultValue: nil
 ]
 
 { #category : 'accessing' }
@@ -374,7 +374,6 @@ FmxMBBehavior >> property: propertyName type: aTypeName defaultValue: aValue [
 
 	| aSide |
 	aSide := FmxMBTypedProperty new
-		         builder: self builder;
 		         name: propertyName;
 		         isRemote: self isRemote;
 		         propertyType: aTypeName asSymbol;

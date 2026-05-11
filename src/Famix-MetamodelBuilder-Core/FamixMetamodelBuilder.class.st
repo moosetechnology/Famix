@@ -472,12 +472,6 @@ FamixMetamodelBuilder >> remoteChangesToApply [
 		  changesToApply
 ]
 
-{ #category : 'accessing' }
-FamixMetamodelBuilder >> reservedKeywords [
-
-	^ { #class }
-]
-
 { #category : 'asserting' }
 FamixMetamodelBuilder >> shouldGenerateModel [
 

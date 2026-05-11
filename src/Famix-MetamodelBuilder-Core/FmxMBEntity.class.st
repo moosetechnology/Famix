@@ -4,7 +4,6 @@ Class {
 	#instVars : [
 		'name',
 		'comment',
-		'builder',
 		'additionalProperties',
 		'isRemote'
 	],
@@ -22,16 +21,6 @@ FmxMBEntity >> acceptVisitor: aVisitor [
 FmxMBEntity >> additionalProperties [
 
 	^ additionalProperties 
-]
-
-{ #category : 'accessing' }
-FmxMBEntity >> builder [
-	^ builder
-]
-
-{ #category : 'accessing' }
-FmxMBEntity >> builder: anObject [
-	builder := anObject
 ]
 
 { #category : 'accessing' }
@@ -98,4 +87,10 @@ FmxMBEntity >> remoteBuilder [
 FmxMBEntity >> remoteBuilder: aRemoteBuilder [
 
 	self additionalProperties at: #remoteBuilder put: aRemoteBuilder
+]
+
+{ #category : 'accessing' }
+FmxMBEntity >> reservedKeywords [
+
+	^ { #class }
 ]

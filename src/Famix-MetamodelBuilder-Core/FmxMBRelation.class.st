@@ -180,7 +180,8 @@ FmxMBRelation >> oppositeSide: anObject [
 
 { #category : 'accessing' }
 FmxMBRelation >> oppositeType [
-	^ (self oppositeSide builder configuration prefix , self oppositeSide relatedEntityName) asSymbol
+
+	^ (self oppositeClass prefix , self oppositeSide relatedEntityName) asSymbol
 ]
 
 { #category : 'private' }
@@ -312,7 +313,7 @@ FmxMBRelation >> trait: anObject [
 { #category : 'accessing' }
 FmxMBRelation >> type [
 
-	^ (self builder configuration prefix , self relatedEntityName) asSymbol
+	^ (self relatedClass prefix , self relatedEntityName) asSymbol
 ]
 
 { #category : 'generating' }
