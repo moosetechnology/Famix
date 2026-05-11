@@ -153,11 +153,7 @@ FmxMBRelationSideTest >> testProperties [
 FmxMBRelationSideTest >> testPropertyReservedName [
 	"simple tests of basic relation side properties"
 
-	| side |
-	side := FmxMBRelation new
-		builder: builder;
-		yourself.
-	self should: [ side name: 'class' ] raise: FmxMBPropertyNameIsReserved
+	self should: [ FmxMBRelation new name: 'class' ] raise: FmxMBPropertyNameIsReserved
 ]
 
 { #category : 'tests' }
