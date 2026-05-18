@@ -1,5 +1,8 @@
 "
 I am responsible for the generation of a visitor trait when generating a Famix metamodel.
+
+I will generate a visitor that is ""Top down"" and not ""Bottom up"". This means that the visit should start from the top entities and will propagate in the children. 
+
 See `FamixVisitorGenerator`.
 "
 Class {
@@ -157,18 +160,18 @@ FmxMBVisitorTrait >> writeVisitMethodHeaderFor: aFmxMBBehavior on: aStream [
 { #category : 'generation - visit' }
 FmxMBVisitorTrait >> writeVisitRelationsFor: aFmxMBBehavior on: aStream [
 
-	aFmxMBBehavior relations
+	(aFmxMBBehavior relations reject: [ :relation | relation side isContainer ])
 		do: [ :relation |
-			aStream << ('	self visit{1}: a{2} {3}' format: {
-					 (relation side isOne
-						  ifTrue: [ 'Entity' ]
-						  ifFalse: [ 'Collection' ]).
-					 aFmxMBBehavior fullName.
-					 relation side name }) ]
+				aStream << ('	self visit{1}: a{2} {3}' format: {
+						 (relation side isOne
+							  ifTrue: [ 'Entity' ]
+							  ifFalse: [ 'Collection' ]).
+						 aFmxMBBehavior fullName.
+						 relation side name }) ]
 		separatedBy: [
-			aStream
-				<< $.;
-				cr ]
+				aStream
+					<< $.;
+					cr ]
 ]
 
 { #category : 'generation - visit' }
