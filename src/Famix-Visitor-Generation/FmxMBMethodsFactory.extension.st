@@ -33,7 +33,7 @@ FmxMBMethodsFactory class >> visitBehavioral: aBehavioral [
 									  << $.;
 									  cr;
 									  cr ] ].
-			  aBehavioral relations
+			  (aBehavioral relations reject: #isContainer)
 				  do: [ :relation |
 						  aStream << ('	self visit{1}: a{2} {3}' format: {
 								   (relation isOne
