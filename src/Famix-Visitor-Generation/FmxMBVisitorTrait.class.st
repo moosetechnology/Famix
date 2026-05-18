@@ -1,5 +1,8 @@
 "
 I am responsible for the generation of a visitor trait when generating a Famix metamodel.
+
+I will generate a visitor that is ""Top down"" and not ""Bottom up"". This means that the visit should start from the top entities and will propagate in the children. 
+
 See `FamixVisitorGenerator`.
 "
 Class {
