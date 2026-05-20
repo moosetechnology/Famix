@@ -28,13 +28,6 @@ FamixTTraitUser classSide >> annotation [
 	<generated>
 ]
 
-{ #category : 'visitor' }
-FamixTTraitUser >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTTraitUser: self
-]
-
 { #category : 'adding' }
 FamixTTraitUser >> addTraitUsage: anObject [
 	<generated>

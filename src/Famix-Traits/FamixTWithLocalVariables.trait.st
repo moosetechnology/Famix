@@ -28,13 +28,6 @@ FamixTWithLocalVariables classSide >> annotation [
 	<generated>
 ]
 
-{ #category : 'visitor' }
-FamixTWithLocalVariables >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTWithLocalVariables: self
-]
-
 { #category : 'accessing' }
 FamixTWithLocalVariables >> addLocalVariable: aLocalVariable [
 	localVariables add: aLocalVariable

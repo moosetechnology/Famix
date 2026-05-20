@@ -31,13 +31,6 @@ FamixTFileAnchor classSide >> annotation [
 	<generated>
 ]
 
-{ #category : 'visitor' }
-FamixTFileAnchor >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTFileAnchor: self
-]
-
 { #category : 'adding' }
 FamixTFileAnchor >> addToFile: entity [
 	^ self correspondingFile addEntity: entity

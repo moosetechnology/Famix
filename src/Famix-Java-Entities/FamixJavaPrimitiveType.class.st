@@ -51,13 +51,6 @@ FamixJavaPrimitiveType class >> annotation [
 	<generated>
 ]
 
-{ #category : 'visitor' }
-FamixJavaPrimitiveType >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaPrimitiveType: self
-]
-
 { #category : 'testing' }
 FamixJavaPrimitiveType >> isPrimitiveType [
 

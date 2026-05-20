@@ -26,13 +26,6 @@ FamixJavaInitializer class >> annotation [
 	<generated>
 ]
 
-{ #category : 'visitor' }
-FamixJavaInitializer >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaInitializer: self
-]
-
 { #category : 'trait protocol conflict' }
 FamixJavaInitializer >> isConstructor [
 

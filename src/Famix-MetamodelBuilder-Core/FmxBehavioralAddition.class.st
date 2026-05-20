@@ -139,7 +139,7 @@ FmxBehavioralAddition >> traitComposition [
 	^ traitComposition ifNil: [
 			  traitComposition := (OpalCompiler new
 				                       source: self traits;
-				                       failBlock: [ nil ]; "This might happen if a trait is not yet in the system. In that case we return #nil to make #isRequired return true. Then during the application of the change I'll be recomputed."
+				                       failBlock: [ ^ nil ]; "This might happen if a trait is not yet in the system. In that case we return #nil to make #isRequired return true. Then during the application of the change I'll be recomputed."
 				                       evaluate) asTraitComposition ]
 ]
 

@@ -74,13 +74,6 @@ FamixTMethod classSide >> annotationFamixMethodGroup [
 	^ FamixMethodGroup
 ]
 
-{ #category : 'visitor' }
-FamixTMethod >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTMethod: self
-]
-
 { #category : 'Famix-Extensions-metrics-support' }
 FamixTMethod >> accessedAttributes [
 	"Returns the set of attributes of my class accessed by me (method). 

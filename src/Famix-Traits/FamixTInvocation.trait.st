@@ -69,13 +69,6 @@ FamixTInvocation classSide >> annotationFamixInvocationGroup [
 	^ FamixInvocationGroup
 ]
 
-{ #category : 'visitor' }
-FamixTInvocation >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTInvocation: self
-]
-
 { #category : 'adding' }
 FamixTInvocation >> addCandidate: aBehaviouralEntity [ 
 	candidates add: aBehaviouralEntity

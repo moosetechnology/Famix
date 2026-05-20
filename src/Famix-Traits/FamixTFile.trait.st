@@ -50,13 +50,6 @@ FamixTFile classSide >> annotationFamixFileGroup [
 	^ FamixFileGroup
 ]
 
-{ #category : 'visitor' }
-FamixTFile >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTFile: self
-]
-
 { #category : 'accessing' }
 FamixTFile >> addEntity: famixEntity [
 	self entities add: famixEntity

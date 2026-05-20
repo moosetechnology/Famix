@@ -37,13 +37,6 @@ FamixTComment classSide >> annotation [
 	<generated>
 ]
 
-{ #category : 'visitor' }
-FamixTComment >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTComment: self
-]
-
 { #category : 'accessing' }
 FamixTComment >> commentedEntity [
 	"Relation named: #commentedEntity type: #FamixTWithComments opposite: #comments"

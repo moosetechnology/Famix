@@ -13,13 +13,6 @@ FamixJavaTClassMetrics classSide >> annotation [
 	<generated>
 ]
 
-{ #category : 'visitor' }
-FamixJavaTClassMetrics >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaTClassMetrics: self
-]
-
 { #category : 'metrics' }
 FamixJavaTClassMetrics >> numberOfConstructorMethods [
 

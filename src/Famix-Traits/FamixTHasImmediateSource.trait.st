@@ -52,13 +52,6 @@ FamixTHasImmediateSource classSide >> source: aString model: aMooseModel [
 		yourself
 ]
 
-{ #category : 'visitor' }
-FamixTHasImmediateSource >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTHasImmediateSource: self
-]
-
 { #category : 'testing' }
 FamixTHasImmediateSource >> hasImmediateSource [
 

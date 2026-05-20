@@ -39,13 +39,6 @@ FamixJavaAnnotationInstanceAttribute class >> annotation [
 	<generated>
 ]
 
-{ #category : 'visitor' }
-FamixJavaAnnotationInstanceAttribute >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaAnnotationInstanceAttribute: self
-]
-
 { #category : 'accessing' }
 FamixJavaAnnotationInstanceAttribute >> name [
 	^ self annotationTypeAttribute ifNotNil: #name

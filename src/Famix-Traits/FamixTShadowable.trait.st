@@ -53,13 +53,6 @@ FamixTShadowable classSide >> annotation [
 	<generated>
 ]
 
-{ #category : 'visitor' }
-FamixTShadowable >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTShadowable: self
-]
-
 { #category : 'adding' }
 FamixTShadowable >> addShadowingEntity: anObject [
 	<generated>

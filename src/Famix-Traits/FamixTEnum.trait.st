@@ -61,10 +61,3 @@ FamixTEnum classSide >> annotation [
 	<package: #'Famix-Traits'>
 	<generated>
 ]
-
-{ #category : 'visitor' }
-FamixTEnum >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTEnum: self
-]

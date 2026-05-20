@@ -34,13 +34,6 @@ FamixTBytesFileAnchor classSide >> annotation [
 	<generated>
 ]
 
-{ #category : 'visitor' }
-FamixTBytesFileAnchor >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTBytesFileAnchor: self
-]
-
 { #category : 'accessing' }
 FamixTBytesFileAnchor >> endByte [
 

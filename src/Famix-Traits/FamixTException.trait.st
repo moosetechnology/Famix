@@ -64,13 +64,6 @@ FamixTException classSide >> annotation [
 	<generated>
 ]
 
-{ #category : 'visitor' }
-FamixTException >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTException: self
-]
-
 { #category : 'testing' }
 FamixTException >> isException [
 

@@ -56,13 +56,6 @@ FamixJavaLocalVariable class >> annotation [
 	<generated>
 ]
 
-{ #category : 'visitor' }
-FamixJavaLocalVariable >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaLocalVariable: self
-]
-
 { #category : 'printing' }
 FamixJavaLocalVariable >> mooseNameOn: stream [ 
 	| parent |

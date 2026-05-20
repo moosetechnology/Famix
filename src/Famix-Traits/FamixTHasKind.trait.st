@@ -27,13 +27,6 @@ FamixTHasKind classSide >> annotation [
 	<generated>
 ]
 
-{ #category : 'visitor' }
-FamixTHasKind >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTHasKind: self
-]
-
 { #category : 'accessing' }
 FamixTHasKind >> beConstant [
 

@@ -72,13 +72,6 @@ FamixJavaMethod class >> annotation [
 	<generated>
 ]
 
-{ #category : 'visitor' }
-FamixJavaMethod >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaMethod: self
-]
-
 { #category : 'Famix-Extensions' }
 FamixJavaMethod >> clientBehaviours [
 	<FMProperty: #clientBehaviours type: #FamixJavaMethod> <multivalued> <derived>

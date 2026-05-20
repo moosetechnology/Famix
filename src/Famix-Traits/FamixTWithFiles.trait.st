@@ -28,13 +28,6 @@ FamixTWithFiles classSide >> annotation [
 	<generated>
 ]
 
-{ #category : 'visitor' }
-FamixTWithFiles >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTWithFiles: self
-]
-
 { #category : 'accessing' }
 FamixTWithFiles >> addContainerFile: anObject [
 	containerFiles add: anObject

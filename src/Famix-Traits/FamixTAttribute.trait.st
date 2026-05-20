@@ -55,13 +55,6 @@ FamixTAttribute classSide >> annotation [
 	<generated>
 ]
 
-{ #category : 'visitor' }
-FamixTAttribute >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTAttribute: self
-]
-
 { #category : 'private' }
 FamixTAttribute >> accessorMethods [
 

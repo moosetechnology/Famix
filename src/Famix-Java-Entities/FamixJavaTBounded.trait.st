@@ -32,13 +32,6 @@ FamixJavaTBounded classSide >> annotation [
 	<generated>
 ]
 
-{ #category : 'visitor' }
-FamixJavaTBounded >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaTBounded: self
-]
-
 { #category : 'accessing' }
 FamixJavaTBounded >> lowerBound [
 	"Relation named: #lowerBound type: #FamixJavaTBound opposite: #lowerBoundedWildcards"

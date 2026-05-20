@@ -30,13 +30,6 @@ FamixTSourceAnchor classSide >> annotation [
 	<generated>
 ]
 
-{ #category : 'visitor' }
-FamixTSourceAnchor >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTSourceAnchor: self
-]
-
 { #category : 'accessing' }
 FamixTSourceAnchor >> allSourceAnchors [
 	^ { self }

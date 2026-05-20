@@ -35,13 +35,6 @@ FamixTFileInclude classSide >> annotation [
 	<generated>
 ]
 
-{ #category : 'visitor' }
-FamixTFileInclude >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTFileInclude: self
-]
-
 { #category : 'accessing' }
 FamixTFileInclude >> source [
 	"Relation named: #source type: #FamixTWithFileIncludes opposite: #outgoingIncludeRelations"

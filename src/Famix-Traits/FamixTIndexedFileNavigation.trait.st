@@ -51,13 +51,6 @@ FamixTIndexedFileNavigation classSide >> fileName: aString startPos: anInteger e
 		yourself
 ]
 
-{ #category : 'visitor' }
-FamixTIndexedFileNavigation >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTIndexedFileNavigation: self
-]
-
 { #category : 'matching' }
 FamixTIndexedFileNavigation >> beginsWith: aString [
 	"I return true if the source text I represent begins with the string as parameter.\

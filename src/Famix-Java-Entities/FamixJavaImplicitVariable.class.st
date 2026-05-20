@@ -50,13 +50,6 @@ FamixJavaImplicitVariable class >> annotation [
 	<generated>
 ]
 
-{ #category : 'visitor' }
-FamixJavaImplicitVariable >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaImplicitVariable: self
-]
-
 { #category : 'testing' }
 FamixJavaImplicitVariable >> isSelf [
 

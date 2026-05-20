@@ -34,13 +34,6 @@ FamixJavaTCanBeTransient classSide >> annotation [
 	<generated>
 ]
 
-{ #category : 'visitor' }
-FamixJavaTCanBeTransient >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaTCanBeTransient: self
-]
-
 { #category : 'accessing' }
 FamixJavaTCanBeTransient >> isTransient [
 

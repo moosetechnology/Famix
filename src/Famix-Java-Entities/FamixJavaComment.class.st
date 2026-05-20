@@ -33,13 +33,6 @@ FamixJavaComment class >> annotation [
 	<generated>
 ]
 
-{ #category : 'visitor' }
-FamixJavaComment >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaComment: self
-]
-
 { #category : 'converting' }
 FamixJavaComment >> asFamixJavaComment [
 	^ self

@@ -62,13 +62,6 @@ FamixTGlobalVariable classSide >> annotationFamixGlobalVariableGroup [
 	^ FamixGlobalVariableGroup
 ]
 
-{ #category : 'visitor' }
-FamixTGlobalVariable >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTGlobalVariable: self
-]
-
 { #category : 'testing' }
 FamixTGlobalVariable >> isGlobalVariable [
 

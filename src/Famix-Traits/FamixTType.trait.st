@@ -62,13 +62,6 @@ FamixTType classSide >> annotationFamixTypeGroup [
 	^ FamixTypeGroup
 ]
 
-{ #category : 'visitor' }
-FamixTType >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTType: self
-]
-
 { #category : 'adding' }
 FamixTType >> addIncomingTyping: anObject [
 	<generated>

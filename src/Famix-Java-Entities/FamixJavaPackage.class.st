@@ -71,13 +71,6 @@ FamixJavaPackage >> abstractness [
 	^ (nsClasses select: [ :c | c isAbstract ]) size / nsClasses size
 ]
 
-{ #category : 'visitor' }
-FamixJavaPackage >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaPackage: self
-]
-
 { #category : 'adding' }
 FamixJavaPackage >> addChildNamedEntity: aNamedEntity [
 	childEntities add: aNamedEntity

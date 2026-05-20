@@ -13,13 +13,6 @@ FamixTMethodMetrics classSide >> annotation [
 	<generated>
 ]
 
-{ #category : 'visitor' }
-FamixTMethodMetrics >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTMethodMetrics: self
-]
-
 { #category : 'metrics' }
 FamixTMethodMetrics >> cyclomaticComplexity [
 

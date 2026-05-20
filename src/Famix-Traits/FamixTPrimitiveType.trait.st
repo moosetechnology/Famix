@@ -45,13 +45,6 @@ FamixTPrimitiveType classSide >> annotation [
 	<generated>
 ]
 
-{ #category : 'visitor' }
-FamixTPrimitiveType >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTPrimitiveType: self
-]
-
 { #category : 'testing' }
 FamixTPrimitiveType >> isPrimitiveType [
 

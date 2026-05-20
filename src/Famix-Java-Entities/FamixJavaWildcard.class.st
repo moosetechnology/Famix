@@ -33,10 +33,3 @@ FamixJavaWildcard class >> annotation [
 	<package: #'Famix-Java-Entities'>
 	<generated>
 ]
-
-{ #category : 'visitor' }
-FamixJavaWildcard >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaWildcard: self
-]

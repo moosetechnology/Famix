@@ -63,13 +63,6 @@ FamixTAccess classSide >> annotation [
 	<generated>
 ]
 
-{ #category : 'visitor' }
-FamixTAccess >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTAccess: self
-]
-
 { #category : 'accessing' }
 FamixTAccess >> accessor [
 	"Relation named: #accessor type: #FamixTWithAccesses opposite: #accesses"

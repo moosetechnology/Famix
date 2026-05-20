@@ -28,10 +28,3 @@ FamixJavaIndexedFileAnchor class >> annotation [
 	<package: #'Famix-Java-Entities'>
 	<generated>
 ]
-
-{ #category : 'visitor' }
-FamixJavaIndexedFileAnchor >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaIndexedFileAnchor: self
-]

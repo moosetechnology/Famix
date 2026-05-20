@@ -43,10 +43,3 @@ FamixTUnknownVariable classSide >> annotation [
 	<package: #'Famix-Traits'>
 	<generated>
 ]
-
-{ #category : 'visitor' }
-FamixTUnknownVariable >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTUnknownVariable: self
-]

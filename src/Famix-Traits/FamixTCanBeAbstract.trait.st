@@ -25,13 +25,6 @@ FamixTCanBeAbstract classSide >> annotation [
 	<generated>
 ]
 
-{ #category : 'visitor' }
-FamixTCanBeAbstract >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTCanBeAbstract: self
-]
-
 { #category : 'accessing' }
 FamixTCanBeAbstract >> isAbstract [
 

@@ -44,13 +44,6 @@ FamixTCompilationUnit classSide >> annotation [
 	<generated>
 ]
 
-{ #category : 'visitor' }
-FamixTCompilationUnit >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTCompilationUnit: self
-]
-
 { #category : 'accessing' }
 FamixTCompilationUnit >> compilationUnitOwner [
 	"Relation named: #compilationUnitOwner type: #FamixTWithCompilationUnits opposite: #compilationUnit"

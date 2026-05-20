@@ -62,10 +62,3 @@ FamixJavaException class >> annotation [
 	<package: #'Famix-Java-Entities'>
 	<generated>
 ]
-
-{ #category : 'visitor' }
-FamixJavaException >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaException: self
-]

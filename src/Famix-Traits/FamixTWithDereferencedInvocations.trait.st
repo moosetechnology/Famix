@@ -28,13 +28,6 @@ FamixTWithDereferencedInvocations classSide >> annotation [
 	<generated>
 ]
 
-{ #category : 'visitor' }
-FamixTWithDereferencedInvocations >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTWithDereferencedInvocations: self
-]
-
 { #category : 'accessing' }
 FamixTWithDereferencedInvocations >> addDereferencedInvocation: aDeferencedInvocation [
 	dereferencedInvocations add: aDeferencedInvocation 

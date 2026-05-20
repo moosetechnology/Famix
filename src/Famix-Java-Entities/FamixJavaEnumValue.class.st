@@ -54,10 +54,3 @@ FamixJavaEnumValue class >> annotation [
 	<package: #'Famix-Java-Entities'>
 	<generated>
 ]
-
-{ #category : 'visitor' }
-FamixJavaEnumValue >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaEnumValue: self
-]

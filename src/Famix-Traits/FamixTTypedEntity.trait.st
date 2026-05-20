@@ -28,13 +28,6 @@ FamixTTypedEntity classSide >> annotation [
 	<generated>
 ]
 
-{ #category : 'visitor' }
-FamixTTypedEntity >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTTypedEntity: self
-]
-
 { #category : 'accessing' }
 FamixTTypedEntity >> declaredType [
 

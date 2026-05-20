@@ -38,13 +38,6 @@ FamixJavaTCanBeSynchronized classSide >> annotation [
 	<generated>
 ]
 
-{ #category : 'visitor' }
-FamixJavaTCanBeSynchronized >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaTCanBeSynchronized: self
-]
-
 { #category : 'accessing' }
 FamixJavaTCanBeSynchronized >> isSynchronized [
 

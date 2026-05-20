@@ -27,10 +27,3 @@ FamixJavaParametricInheritance class >> annotation [
 	<package: #'Famix-Java-Entities'>
 	<generated>
 ]
-
-{ #category : 'visitor' }
-FamixJavaParametricInheritance >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaParametricInheritance: self
-]

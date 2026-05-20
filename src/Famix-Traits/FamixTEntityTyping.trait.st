@@ -43,13 +43,6 @@ FamixTEntityTyping classSide >> annotation [
 	<generated>
 ]
 
-{ #category : 'visitor' }
-FamixTEntityTyping >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTEntityTyping: self
-]
-
 { #category : 'accessing' }
 FamixTEntityTyping >> declaredType [
 	"Relation named: #declaredType type: #FamixTType opposite: #incomingTypings"

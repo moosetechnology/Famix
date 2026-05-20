@@ -58,13 +58,6 @@ FamixJavaAnnotationType class >> annotation [
 	<generated>
 ]
 
-{ #category : 'visitor' }
-FamixJavaAnnotationType >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaAnnotationType: self
-]
-
 { #category : 'accessing-query' }
 FamixJavaAnnotationType >> annotatedEntities [
 	^ self instances collect: [:each | each annotatedEntity ]

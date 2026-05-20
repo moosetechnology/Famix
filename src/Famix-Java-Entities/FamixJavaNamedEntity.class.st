@@ -42,13 +42,6 @@ FamixJavaNamedEntity class >> isAbstract [
 	^ self == FamixJavaNamedEntity
 ]
 
-{ #category : 'visitor' }
-FamixJavaNamedEntity >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaNamedEntity: self
-]
-
 { #category : 'testing' }
 FamixJavaNamedEntity >> isNamedEntity [
 

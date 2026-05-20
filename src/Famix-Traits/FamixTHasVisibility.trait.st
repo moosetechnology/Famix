@@ -25,13 +25,6 @@ FamixTHasVisibility classSide >> annotation [
 	<generated>
 ]
 
-{ #category : 'visitor' }
-FamixTHasVisibility >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTHasVisibility: self
-]
-
 { #category : 'accessing' }
 FamixTHasVisibility >> bePackageVisibility [
 

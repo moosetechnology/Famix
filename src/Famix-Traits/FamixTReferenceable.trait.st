@@ -40,13 +40,6 @@ FamixTReferenceable classSide >> annotation [
 	<generated>
 ]
 
-{ #category : 'visitor' }
-FamixTReferenceable >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTReferenceable: self
-]
-
 { #category : 'accessing' }
 FamixTReferenceable >> addIncomingReference: aReference [ 
 	incomingReferences add: aReference

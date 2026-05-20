@@ -59,10 +59,3 @@ FamixJavaAttribute class >> annotation [
 	<package: #'Famix-Java-Entities'>
 	<generated>
 ]
-
-{ #category : 'visitor' }
-FamixJavaAttribute >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaAttribute: self
-]

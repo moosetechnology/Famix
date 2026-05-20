@@ -69,13 +69,6 @@ FamixJavaClass class >> annotation [
 	<generated>
 ]
 
-{ #category : 'visitor' }
-FamixJavaClass >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaClass: self
-]
-
 { #category : 'enumerating' }
 FamixJavaClass >> allImplementedInterfacesHierarchy [
 

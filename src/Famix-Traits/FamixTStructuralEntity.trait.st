@@ -46,13 +46,6 @@ FamixTStructuralEntity classSide >> annotation [
 	<generated>
 ]
 
-{ #category : 'visitor' }
-FamixTStructuralEntity >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTStructuralEntity: self
-]
-
 { #category : 'testing' }
 FamixTStructuralEntity >> isStructuralEntity [
 

@@ -30,13 +30,6 @@ FamixTImplementable classSide >> annotation [
 	<generated>
 ]
 
-{ #category : 'visitor' }
-FamixTImplementable >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTImplementable: self
-]
-
 { #category : 'adding' }
 FamixTImplementable >> addImplementation: anObject [
 	<generated>

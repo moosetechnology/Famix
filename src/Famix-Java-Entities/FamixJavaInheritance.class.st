@@ -40,13 +40,6 @@ FamixJavaInheritance class >> annotation [
 	<generated>
 ]
 
-{ #category : 'visitor' }
-FamixJavaInheritance >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaInheritance: self
-]
-
 { #category : 'Moose-Hismo' }
 FamixJavaInheritance >> historicalUniqueName [
 	

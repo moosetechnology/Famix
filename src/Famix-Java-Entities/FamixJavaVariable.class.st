@@ -35,10 +35,3 @@ FamixJavaVariable class >> isAbstract [
 	<generated>
 	^ self == FamixJavaVariable
 ]
-
-{ #category : 'visitor' }
-FamixJavaVariable >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaVariable: self
-]

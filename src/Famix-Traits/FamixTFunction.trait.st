@@ -64,13 +64,6 @@ FamixTFunction classSide >> annotation [
 	<generated>
 ]
 
-{ #category : 'visitor' }
-FamixTFunction >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTFunction: self
-]
-
 { #category : 'accessing' }
 FamixTFunction >> functionOwner [
 	"Relation named: #functionOwner type: #FamixTWithFunctions opposite: #functions"

@@ -39,10 +39,3 @@ FamixJavaImplementation class >> annotation [
 	<package: #'Famix-Java-Entities'>
 	<generated>
 ]
-
-{ #category : 'visitor' }
-FamixJavaImplementation >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaImplementation: self
-]

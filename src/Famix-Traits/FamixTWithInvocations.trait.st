@@ -28,13 +28,6 @@ FamixTWithInvocations classSide >> annotation [
 	<generated>
 ]
 
-{ #category : 'visitor' }
-FamixTWithInvocations >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTWithInvocations: self
-]
-
 { #category : 'adding' }
 FamixTWithInvocations >> addOutgoingInvocation: anInvocation [
 	outgoingInvocations add: anInvocation

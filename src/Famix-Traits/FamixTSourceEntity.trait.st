@@ -30,13 +30,6 @@ FamixTSourceEntity classSide >> annotation [
 	<generated>
 ]
 
-{ #category : 'visitor' }
-FamixTSourceEntity >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTSourceEntity: self
-]
-
 { #category : 'accessing' }
 FamixTSourceEntity >> allSourceAnchors [
 	^ self sourceAnchor
@@ -79,17 +72,6 @@ FamixTSourceEntity >> ensureMultiSourceAnchor [
 { #category : 'testing' }
 FamixTSourceEntity >> hasSourceAnchor [
 	^ self sourceAnchor isNotNil
-]
-
-{ #category : 'inspector' }
-FamixTSourceEntity >> inspectionSource: aBuilder [
-
-	<inspectorPresentationOrder: 3 title: 'SourceText'>
-	^ aBuilder newCode
-		  withoutSyntaxHighlight;
-		  withLineNumbers;
-		  text: self sourceText;
-		  beNotEditable
 ]
 
 { #category : 'inspector' }

@@ -72,13 +72,6 @@ FamixTClass classSide >> annotationFamixClassGroup [
 	^ FamixClassGroup
 ]
 
-{ #category : 'visitor' }
-FamixTClass >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTClass: self
-]
-
 { #category : 'Famix-Extensions-metrics-support' }
 FamixTClass >> accessedAttributes [
 	

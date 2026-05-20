@@ -36,13 +36,6 @@ FamixTTrait classSide >> annotation [
 	<generated>
 ]
 
-{ #category : 'visitor' }
-FamixTTrait >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTTrait: self
-]
-
 { #category : 'accessing' }
 FamixTTrait >> addIncomingTraitUsage: anObject [
 

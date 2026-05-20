@@ -34,13 +34,6 @@ FamixTThrowable classSide >> annotation [
 	<generated>
 ]
 
-{ #category : 'visitor' }
-FamixTThrowable >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTThrowable: self
-]
-
 { #category : 'adding' }
 FamixTThrowable >> addCatchingEntity: anObject [
 	<generated>

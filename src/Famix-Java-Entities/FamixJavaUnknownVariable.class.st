@@ -44,10 +44,3 @@ FamixJavaUnknownVariable class >> annotation [
 	<package: #'Famix-Java-Entities'>
 	<generated>
 ]
-
-{ #category : 'visitor' }
-FamixJavaUnknownVariable >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaUnknownVariable: self
-]

@@ -33,10 +33,3 @@ FamixJavaSourceTextAnchor class >> annotation [
 	<package: #'Famix-Java-Entities'>
 	<generated>
 ]
-
-{ #category : 'visitor' }
-FamixJavaSourceTextAnchor >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaSourceTextAnchor: self
-]

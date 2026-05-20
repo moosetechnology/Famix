@@ -30,13 +30,6 @@ FamixTTypeArgument classSide >> annotation [
 	<generated>
 ]
 
-{ #category : 'visitor' }
-FamixTTypeArgument >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTTypeArgument: self
-]
-
 { #category : 'adding' }
 FamixTTypeArgument >> addOutgoingConcretization: anObject [
 	<generated>

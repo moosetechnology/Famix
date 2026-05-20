@@ -30,13 +30,6 @@ FamixTWithGlobalVariables classSide >> annotation [
 	<generated>
 ]
 
-{ #category : 'visitor' }
-FamixTWithGlobalVariables >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTWithGlobalVariables: self
-]
-
 { #category : 'adding' }
 FamixTWithGlobalVariables >> addGlobalVariable: anObject [
 	<generated>

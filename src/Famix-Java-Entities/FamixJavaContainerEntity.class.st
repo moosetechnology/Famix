@@ -37,13 +37,6 @@ FamixJavaContainerEntity class >> isAbstract [
 	^ self == FamixJavaContainerEntity
 ]
 
-{ #category : 'visitor' }
-FamixJavaContainerEntity >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaContainerEntity: self
-]
-
 { #category : 'adding' }
 FamixJavaContainerEntity >> addClass: aClass [
 	

@@ -36,13 +36,6 @@ FamixTMultipleFileAnchor classSide >> annotation [
 	<generated>
 ]
 
-{ #category : 'visitor' }
-FamixTMultipleFileAnchor >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTMultipleFileAnchor: self
-]
-
 { #category : 'adding' }
 FamixTMultipleFileAnchor >> addFileAnchorWithPath: aPath [
 	self fileAnchors

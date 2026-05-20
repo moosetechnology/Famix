@@ -48,13 +48,6 @@ FamixTConcretization classSide >> annotation [
 	<generated>
 ]
 
-{ #category : 'visitor' }
-FamixTConcretization >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTConcretization: self
-]
-
 { #category : 'accessing' }
 FamixTConcretization >> triggeringAssociation [
 	"Relation named: #triggeringAssociation type: #FamixTParametricAssociation opposite: #concretizations"

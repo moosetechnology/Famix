@@ -56,13 +56,6 @@ FamixTDereferencedInvocation classSide >> annotation [
 	<generated>
 ]
 
-{ #category : 'visitor' }
-FamixTDereferencedInvocation >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTDereferencedInvocation: self
-]
-
 { #category : 'accessing' }
 FamixTDereferencedInvocation >> referencer [
 	"Relation named: #referencer type: #FamixTWithDereferencedInvocations opposite: #dereferencedInvocations"

@@ -40,10 +40,3 @@ FamixJavaConcretization class >> annotation [
 	<package: #'Famix-Java-Entities'>
 	<generated>
 ]
-
-{ #category : 'visitor' }
-FamixJavaConcretization >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaConcretization: self
-]

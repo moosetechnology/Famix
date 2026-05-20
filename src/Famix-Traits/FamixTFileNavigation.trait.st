@@ -59,13 +59,6 @@ FamixTFileNavigation classSide >> fileName: aString startLine: anInteger startCo
 		yourself
 ]
 
-{ #category : 'visitor' }
-FamixTFileNavigation >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTFileNavigation: self
-]
-
 { #category : 'accessing' }
 FamixTFileNavigation >> endColumn [
 

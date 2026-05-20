@@ -28,13 +28,6 @@ FamixTWithAccesses classSide >> annotation [
 	<generated>
 ]
 
-{ #category : 'visitor' }
-FamixTWithAccesses >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTWithAccesses: self
-]
-
 { #category : 'accessing' }
 FamixTWithAccesses >> accesses [
 	"Relation named: #accesses type: #FamixTAccess opposite: #accessor"

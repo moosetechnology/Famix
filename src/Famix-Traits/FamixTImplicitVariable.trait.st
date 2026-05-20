@@ -54,13 +54,6 @@ FamixTImplicitVariable classSide >> annotation [
 	<generated>
 ]
 
-{ #category : 'visitor' }
-FamixTImplicitVariable >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTImplicitVariable: self
-]
-
 { #category : 'accessing' }
 FamixTImplicitVariable >> declaredType [
 	"If we have a declared type, we return it. Else, we check if the implicit variable is self or super to determine the declared type."

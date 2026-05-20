@@ -28,13 +28,6 @@ FamixTInvocationsReceiver classSide >> annotation [
 	<generated>
 ]
 
-{ #category : 'visitor' }
-FamixTInvocationsReceiver >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTInvocationsReceiver: self
-]
-
 { #category : 'adding' }
 FamixTInvocationsReceiver >> addReceivingInvocation: anInvocation [
 	receivingInvocations add: anInvocation

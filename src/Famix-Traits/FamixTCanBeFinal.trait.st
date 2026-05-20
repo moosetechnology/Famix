@@ -25,13 +25,6 @@ FamixTCanBeFinal classSide >> annotation [
 	<generated>
 ]
 
-{ #category : 'visitor' }
-FamixTCanBeFinal >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTCanBeFinal: self
-]
-
 { #category : 'accessing' }
 FamixTCanBeFinal >> isFinal [
 
