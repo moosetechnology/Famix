@@ -1,8 +1,8 @@
 Class {
 	#name : 'MooseModelDescriptionTest',
 	#superclass : 'TestCase',
-	#category : 'Moose-Core-Tests',
-	#package : 'Moose-Core-Tests'
+	#category : 'Moose-Query-Test',
+	#package : 'Moose-Query-Test'
 }
 
 { #category : 'running' }
@@ -23,15 +23,17 @@ MooseModelDescriptionTest >> notTested_AllPropertyCommented [
 ]
 
 { #category : 'tests' }
-MooseModelDescriptionTest >> testAsMooseDescription [
-	self assert: FamixTest1Class asMooseDescription isFM3Class
+MooseModelDescriptionTest >> testAsMetadescription [
+
+	self assert: FamixTest1Class asMetadescription isFM3Class
 ]
 
 { #category : 'tests' }
-MooseModelDescriptionTest >> testAsMooseDescriptionAttributes [
+MooseModelDescriptionTest >> testAsMetadescriptionAttributes [
+
 	| classDescription typeDescription |
-	classDescription := FamixTest3Class asMooseDescription.
-	typeDescription := FamixTest3Type asMooseDescription.
+	classDescription := FamixTest3Class asMetadescription.
+	typeDescription := FamixTest3Type asMetadescription.
 	self assertEmpty: typeDescription properties.
 	self assert: (classDescription allProperties anySatisfy: [ :each | each name = #methods ])
 ]

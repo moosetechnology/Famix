@@ -14,22 +14,6 @@ FMMetamodelFactory class >> defaultModel [
 ]
 
 { #category : '*Moose-Core' }
-FMMetamodelFactory class >> forModel: aModel [
-
-	^ (self allFactories
-		   detect: [ :factory | factory isDefaultFor: aModel ]
-		   ifFound: [ :factory | factory ]
-		   ifNone: [ self ]) new
-		  forModel: aModel;
-		  yourself
-]
-
-{ #category : '*Moose-Core' }
-FMMetamodelFactory >> forModel: aModel [
-	fm3Package := aModel mooseDescription package
-]
-
-{ #category : '*Moose-Core' }
 FMMetamodelFactory class >> isDefaultFor: aModel [
 	^ self defaultModel = aModel
 ]

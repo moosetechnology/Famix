@@ -32,7 +32,7 @@ MQRelationMultipleTypesStrategy >> propertyTypes: anObject [
 { #category : 'selection' }
 MQRelationMultipleTypesStrategy >> selectPropertiesIn: anEntity [
 
-	^ anEntity class mooseDescription allRelationProperties select: [ 
+	^ anEntity class metadescription allRelationProperties select: [ 
 		  :property | 
 		  propertyTypes anySatisfy: [ :wantedType | 
 			  wantedType isOfType: property type implementingClass ] ]
