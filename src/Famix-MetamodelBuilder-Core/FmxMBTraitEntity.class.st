@@ -12,3 +12,9 @@ FmxMBTraitEntity >> acceptVisitor: aVisitor [
 	<ignoreForCoverage>
 	^ aVisitor visitTraitEntity: self
 ]
+
+{ #category : 'testing' }
+FmxMBTraitEntity >> isTraitEntity [
+
+	^ true
+]

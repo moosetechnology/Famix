@@ -66,6 +66,12 @@ FmxMBEntity >> isRemote: anObject [
 	isRemote := anObject
 ]
 
+{ #category : 'testing' }
+FmxMBEntity >> isTraitEntity [
+
+	^ false
+]
+
 { #category : 'accessing' }
 FmxMBEntity >> name [
 	^ name
