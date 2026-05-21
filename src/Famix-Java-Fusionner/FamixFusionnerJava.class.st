@@ -138,6 +138,18 @@ FamixFusionnerJava >> visitFamixTAssociation: aFamixTAssociation [
 		ifFalse: [ aFamixTAssociation target: resourceEntity ]
 ]
 
+{ #category : 'visiting' }
+FamixFusionnerJava >> visitFamixTClass: aTClass [
+	"We override because with the current implementation we have a problem if we do not visit two times some relations in exceptions."
+
+	self visitFamixTInvocationsReceiver: aTClass.
+	self visitFamixTType: aTClass.
+	self visitFamixTWithAttributes: aTClass.
+	self visitFamixTWithComments: aTClass.
+	self visitFamixTWithInheritances: aTClass.
+	self visitFamixTWithMethods: aTClass
+]
+
 { #category : 'visiting - traits' }
 FamixFusionnerJava >> visitFamixTInvocable: aFamixTInvocable [
 	"similar to #visitFamixTAssociation:
