@@ -14,7 +14,9 @@ FmxMBMethodsFactory class >> visitBehavioral: aBehavioral builder: aBuilder [
 
 	^ String streamContents: [ :aStream |
 			  | parameter |
-			  parameter := 'a' , aBehavioral fullName.
+			  parameter := (aBehavioral name first isVowel
+				                ifTrue: [ 'an' ]
+				                ifFalse: [ 'a' ]) , aBehavioral name capitalized.
 			  aStream << ('visit{1}: {2}
 
 	<generated>
@@ -43,7 +45,8 @@ FmxMBMethodsFactory class >> visitBehavioral: aBehavioral builder: aBuilder [
 													  ifFalse: [
 															  aStream
 																  tab;
-																  nextPutAll: '"We do not visit all behaviorals because some classes already visit it in their superclasses in this language implementation. Visiting them here also would cause a double visit of this trait."';
+																  nextPutAll:
+																	  '"We do not visit all behaviorals because some classes already visit it in their superclasses in this language implementation. Visiting them here also would cause a double visit of this trait."';
 																  cr;
 																  tab;
 																  nextPutAll: '({ '.
