@@ -533,6 +533,13 @@ FamixJavaTVisitor >> visitFamixTAccess: aFamixTAccess [
 ]
 
 { #category : 'visiting' }
+FamixJavaTVisitor >> visitFamixTAccessible: aFamixTAccessible [
+
+	<generated>
+	self visitCollection: aFamixTAccessible incomingAccesses
+]
+
+{ #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTAnnotationInstance: aFamixTAnnotationInstance [
 
 	<generated>
@@ -569,6 +576,17 @@ FamixJavaTVisitor >> visitFamixTAnnotationTypeAttribute: aFamixTAnnotationTypeAt
 ]
 
 { #category : 'visiting' }
+FamixJavaTVisitor >> visitFamixTAssociation: aFamixTAssociation [
+
+	<generated>
+	self visitFamixTSourceEntity: aFamixTAssociation.
+	self visitTAssociationMetaLevelDependency: aFamixTAssociation.
+
+	self visitEntity: aFamixTAssociation previous.
+	self visitEntity: aFamixTAssociation next
+]
+
+{ #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTAttribute: aFamixTAttribute [
 
 	<generated>
@@ -596,6 +614,13 @@ FamixJavaTVisitor >> visitFamixTCanBeFinal: aFamixTCanBeFinal [
 
 	<generated>
 
+]
+
+{ #category : 'visiting' }
+FamixJavaTVisitor >> visitFamixTCanBeStub: aFamixTCanBeStub [
+
+	<generated>
+	"We should visit FamixTSourceEntity but all its users in this language already visit it in their superclasses so we skip the call here."
 ]
 
 { #category : 'visiting' }
@@ -689,6 +714,13 @@ FamixJavaTVisitor >> visitFamixTException: aFamixTException [
 ]
 
 { #category : 'visiting' }
+FamixJavaTVisitor >> visitFamixTFileAnchor: aFamixTFileAnchor [
+
+	<generated>
+
+]
+
+{ #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTHasImmediateSource: aFamixTHasImmediateSource [
 
 	<generated>
@@ -697,6 +729,13 @@ FamixJavaTVisitor >> visitFamixTHasImmediateSource: aFamixTHasImmediateSource [
 
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTHasKind: aFamixTHasKind [
+
+	<generated>
+
+]
+
+{ #category : 'visiting' }
+FamixJavaTVisitor >> visitFamixTHasSignature: aFamixTHasSignature [
 
 	<generated>
 
@@ -770,6 +809,13 @@ FamixJavaTVisitor >> visitFamixTInheritance: aFamixTInheritance [
 ]
 
 { #category : 'visiting' }
+FamixJavaTVisitor >> visitFamixTInvocable: aFamixTInvocable [
+
+	<generated>
+	self visitCollection: aFamixTInvocable incomingInvocations
+]
+
+{ #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTInvocation: aFamixTInvocation [
 
 	<generated>
@@ -819,6 +865,13 @@ FamixJavaTVisitor >> visitFamixTMethod: aFamixTMethod [
 	self visitFamixTWithStatements: aFamixTMethod.
 	"We should visit TEntityMetaLevelDependency but all its users in this language already visit it in their superclasses so we skip the call here.".
 
+
+]
+
+{ #category : 'visiting' }
+FamixJavaTVisitor >> visitFamixTMethodMetrics: aFamixTMethodMetrics [
+
+	<generated>
 
 ]
 
@@ -888,6 +941,13 @@ FamixJavaTVisitor >> visitFamixTReference: aFamixTReference [
 ]
 
 { #category : 'visiting' }
+FamixJavaTVisitor >> visitFamixTReferenceable: aFamixTReferenceable [
+
+	<generated>
+	self visitCollection: aFamixTReferenceable incomingReferences
+]
+
+{ #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTSourceAnchor: aFamixTSourceAnchor [
 
 	<generated>
@@ -906,6 +966,17 @@ FamixJavaTVisitor >> visitFamixTSourceLanguage: aFamixTSourceLanguage [
 
 	<generated>
 	self visitCollection: aFamixTSourceLanguage sourcedEntities
+]
+
+{ #category : 'visiting' }
+FamixJavaTVisitor >> visitFamixTStructuralEntity: aFamixTStructuralEntity [
+
+	<generated>
+	self visitFamixTAccessible: aFamixTStructuralEntity.
+	self visitFamixTCanBeStub: aFamixTStructuralEntity.
+	"We should visit FamixTNamedEntity but all its users in this language already visit it in their superclasses so we skip the call here.".
+	self visitFamixTTypedEntity: aFamixTStructuralEntity.
+	"We should visit TEntityMetaLevelDependency but all its users in this language already visit it in their superclasses so we skip the call here."
 ]
 
 { #category : 'visiting' }
@@ -949,10 +1020,24 @@ FamixJavaTVisitor >> visitFamixTTypeParameter: aFamixTTypeParameter [
 ]
 
 { #category : 'visiting' }
+FamixJavaTVisitor >> visitFamixTTypedEntity: aFamixTTypedEntity [
+
+	<generated>
+	self visitEntity: aFamixTTypedEntity typing
+]
+
+{ #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTUnknownVariable: aFamixTUnknownVariable [
 
 	<generated>
 	self visitFamixTStructuralEntity: aFamixTUnknownVariable
+]
+
+{ #category : 'visiting' }
+FamixJavaTVisitor >> visitFamixTWithAccesses: aFamixTWithAccesses [
+
+	<generated>
+	self visitCollection: aFamixTWithAccesses accesses
 ]
 
 { #category : 'visiting' }
@@ -991,12 +1076,26 @@ FamixJavaTVisitor >> visitFamixTWithComments: aFamixTWithComments [
 ]
 
 { #category : 'visiting' }
+FamixJavaTVisitor >> visitFamixTWithEnumValues: aFamixTWithEnumValues [
+
+	<generated>
+	self visitCollection: aFamixTWithEnumValues enumValues
+]
+
+{ #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTWithExceptions: aFamixTWithExceptions [
 
 	<generated>
 	self visitCollection: aFamixTWithExceptions caughtExceptions.
 	self visitCollection: aFamixTWithExceptions declaredExceptions.
 	self visitCollection: aFamixTWithExceptions thrownExceptions
+]
+
+{ #category : 'visiting' }
+FamixJavaTVisitor >> visitFamixTWithImplicitVariables: aFamixTWithImplicitVariables [
+
+	<generated>
+	self visitCollection: aFamixTWithImplicitVariables implicitVariables
 ]
 
 { #category : 'visiting' }
@@ -1015,10 +1114,48 @@ FamixJavaTVisitor >> visitFamixTWithInheritances: aFamixTWithInheritances [
 ]
 
 { #category : 'visiting' }
+FamixJavaTVisitor >> visitFamixTWithInvocations: aFamixTWithInvocations [
+
+	<generated>
+	self visitCollection: aFamixTWithInvocations outgoingInvocations
+]
+
+{ #category : 'visiting' }
+FamixJavaTVisitor >> visitFamixTWithLocalVariables: aFamixTWithLocalVariables [
+
+	<generated>
+	self visitCollection: aFamixTWithLocalVariables localVariables
+]
+
+{ #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTWithMethods: aFamixTWithMethods [
 
 	<generated>
 	self visitCollection: aFamixTWithMethods methods
+]
+
+{ #category : 'visiting' }
+FamixJavaTVisitor >> visitFamixTWithParameters: aFamixTWithParameters [
+
+	<generated>
+	self visitCollection: aFamixTWithParameters parameters
+]
+
+{ #category : 'visiting' }
+FamixJavaTVisitor >> visitFamixTWithReferences: aFamixTWithReferences [
+
+	<generated>
+	self visitCollection: aFamixTWithReferences outgoingReferences
+]
+
+{ #category : 'visiting' }
+FamixJavaTVisitor >> visitFamixTWithStatements: aFamixTWithStatements [
+
+	<generated>
+	self visitFamixTCanBeStub: aFamixTWithStatements.
+	self visitFamixTWithAccesses: aFamixTWithStatements.
+	self visitFamixTWithInvocations: aFamixTWithStatements.
+	self visitFamixTWithReferences: aFamixTWithStatements
 ]
 
 { #category : 'visiting' }

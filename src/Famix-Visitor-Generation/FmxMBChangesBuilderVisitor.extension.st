@@ -8,7 +8,7 @@ FmxMBChangesBuilderVisitor >> generateVisitMethodsIn: aTrait [
 
 	localBehaviorsToVisit do: [ :fmxMBBehavior | self addMethod: (self methodFactory visitBehavioral: fmxMBBehavior builder: builder) protocol: #visiting ].
 
-	remoteTraits := localBehaviorsToVisit flatCollect: [ :class | class allTransitiveTraits select: #isRemote ] as: Set.
+	remoteTraits := (localBehaviorsToVisit flatCollect: [ :class | class allTransitiveTraits ] as: Set) \ localBehaviorsToVisit.
 
 	remoteTraits do: [ :fmxMBBehavior | self addMethod: (self methodFactory visitBehavioral: fmxMBBehavior builder: builder) protocol: #visiting ]
 ]
