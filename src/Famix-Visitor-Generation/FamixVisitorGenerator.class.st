@@ -53,12 +53,7 @@ FamixVisitorGenerator >> configureForGenerator: aFamixMetamodelGenerator [
 { #category : 'generating' }
 FamixVisitorGenerator >> define [
 
-	| visitorTrait |
-	visitorTrait := builder newVisitorTrait.
-	visitorTrait packageName: packageName.
-
-	builder allSubBuilders do: [ :subBuilder |
-		subBuilder traits
-			detect: [ :each | each isVisitorTrait ]
-			ifFound: [ :famixTVistior | visitorTrait --|> famixTVistior ] ]
+	builder newVisitorTrait
+		packageName: packageName;
+		yourself
 ]

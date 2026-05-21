@@ -44,7 +44,7 @@ FmxMBBehavior >> acceptVisitor: aVisitor [
 { #category : 'accessing' }
 FmxMBBehavior >> addAllTransitiveTraitsIn: aCollection [
 
-	aCollection add: self.
+	self isTraitEntity ifTrue: [ aCollection add: self ].
 	self allLocalTraits do: [ :trait | trait addAllTransitiveTraitsIn: aCollection ].
 	^ aCollection
 ]

@@ -6,19 +6,11 @@ FmxMBChangesBuilderVisitor >> generateVisitMethodsIn: aTrait [
 	| localBehaviorsToVisit remoteTraits |
 	localBehaviorsToVisit := (builder classes select: #isClassEntity) , (builder traits select: #isTraitEntity).
 
-	localBehaviorsToVisit do: [ :fmxMBBehavior | self addMethod: (self methodFactory visitBehavioral: fmxMBBehavior) protocol: #visiting ].
+	localBehaviorsToVisit do: [ :fmxMBBehavior | self addMethod: (self methodFactory visitBehavioral: fmxMBBehavior builder: builder) protocol: #visiting ].
 
-	remoteTraits := localBehaviorsToVisit flatCollect: [ :class | class allTransitiveTraits select: #isRemote ] as: Set
+	remoteTraits := localBehaviorsToVisit flatCollect: [ :class | class allTransitiveTraits select: #isRemote ] as: Set.
 
-	"remoteTraits do: [ :fmxMBBehavior |
-			| protocol |
-			self addMethod: (self methodFactory visitBehavioral: fmxMBBehavior) protocol: #visiting.
-
-			protocol := aTrait packageName == builder configuration packageName
-				            ifTrue: [ #visitor ]
-				            ifFalse: [ '*' , aTrait packageName ].
-
-			self addMethod: (self methodFactory acceptFor: fmxMBBehavior fullName) in: fmxMBBehavior fullName protocol: protocol ]"
+	remoteTraits do: [ :fmxMBBehavior | self addMethod: (self methodFactory visitBehavioral: fmxMBBehavior builder: builder) protocol: #visiting ]
 ]
 
 { #category : '*Famix-Visitor-Generation' }

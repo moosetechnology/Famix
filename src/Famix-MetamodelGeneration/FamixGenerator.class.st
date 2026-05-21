@@ -132,23 +132,10 @@ Class {
 	#package : 'Famix-MetamodelGeneration'
 }
 
-{ #category : 'additional tools' }
-FamixGenerator class >> metamodelToolGenerators [
-
-	^ { FamixVisitorGenerator }
-]
-
 { #category : 'accessing' }
 FamixGenerator class >> packageName [
 
 	^ #'Famix-Traits'
-]
-
-{ #category : 'accessing' }
-FamixGenerator class >> packageNameForVisitor [
-	"Generate visitor in the entities package. Discussed with N. Anquetil"
-
-	^ self packageName
 ]
 
 { #category : 'accessing' }
