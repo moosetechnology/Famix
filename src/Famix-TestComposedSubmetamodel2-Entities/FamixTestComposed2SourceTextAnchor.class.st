@@ -32,5 +32,4 @@ FamixTestComposed2SourceTextAnchor class >> annotation [
 	<FMClass: #SourceTextAnchor super: #FamixTestComposed2SourceAnchor>
 	<package: #'Famix-TestComposedSubmetamodel2-Entities'>
 	<generated>
-	^ self
 ]

@@ -38,12 +38,4 @@ FamixJavaImport class >> annotation [
 	<FMClass: #Import super: #FamixJavaEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixJavaImport >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaImport: self
 ]

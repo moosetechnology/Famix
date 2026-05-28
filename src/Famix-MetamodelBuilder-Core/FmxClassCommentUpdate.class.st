@@ -22,9 +22,9 @@ Class {
 	#instVars : [
 		'comment'
 	],
-	#category : 'Famix-MetamodelBuilder-Core-Changes',
+	#category : 'Famix-MetamodelBuilder-Core-Generation',
 	#package : 'Famix-MetamodelBuilder-Core',
-	#tag : 'Changes'
+	#tag : 'Generation'
 }
 
 { #category : 'instance creation' }
@@ -37,6 +37,7 @@ FmxClassCommentUpdate class >> className: aSymbol comment: aString [
 
 { #category : 'accessing' }
 FmxClassCommentUpdate >> apply [
+
 	self realClass comment: self comment
 ]
 
@@ -48,4 +49,12 @@ FmxClassCommentUpdate >> comment [
 { #category : 'accessing' }
 FmxClassCommentUpdate >> comment: anObject [
 	comment := anObject
+]
+
+{ #category : 'testing' }
+FmxClassCommentUpdate >> isRequired [
+
+	^ self realClass
+		  ifNil: [ true ]
+		  ifNotNil: [ :class | class comment ~= comment ]
 ]

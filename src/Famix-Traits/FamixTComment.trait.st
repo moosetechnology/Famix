@@ -35,14 +35,6 @@ FamixTComment classSide >> annotation [
 	<FMClass: #TComment super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixTComment >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTComment: self
 ]
 
 { #category : 'accessing' }

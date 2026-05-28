@@ -44,5 +44,4 @@ FamixTest3Access class >> annotation [
 	<FMClass: #Access super: #FamixTest3Entity>
 	<package: #'Famix-Test3-Entities'>
 	<generated>
-	^ self
 ]

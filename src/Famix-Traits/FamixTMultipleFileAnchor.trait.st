@@ -34,14 +34,6 @@ FamixTMultipleFileAnchor classSide >> annotation [
 	<FMClass: #TMultipleFileAnchor super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixTMultipleFileAnchor >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTMultipleFileAnchor: self
 ]
 
 { #category : 'adding' }

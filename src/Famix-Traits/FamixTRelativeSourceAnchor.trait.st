@@ -54,14 +54,6 @@ FamixTRelativeSourceAnchor classSide >> annotation [
 	<FMClass: #TRelativeSourceAnchor super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixTRelativeSourceAnchor >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTRelativeSourceAnchor: self
 ]
 
 { #category : 'accessing' }

@@ -26,14 +26,6 @@ FamixTDefinedInModule classSide >> annotation [
 	<FMClass: #TDefinedInModule super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixTDefinedInModule >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTDefinedInModule: self
 ]
 
 { #category : 'accessing' }

@@ -40,7 +40,6 @@ FamixStPackage class >> annotation [
 	<FMClass: #Package super: #FamixStNamedEntity>
 	<package: #'Famix-PharoSmalltalk-Entities'>
 	<generated>
-	^ self
 ]
 
 { #category : 'Famix-Extensions-metrics' }

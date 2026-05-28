@@ -44,7 +44,6 @@ FamixTest3Type class >> annotation [
 	<FMClass: #Type super: #FamixTest3NamedEntity>
 	<package: #'Famix-Test3-Entities'>
 	<generated>
-	^ self
 ]
 
 { #category : 'groups' }

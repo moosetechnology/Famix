@@ -41,14 +41,6 @@ FamixTEntityTyping classSide >> annotation [
 	<FMClass: #TEntityTyping super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixTEntityTyping >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTEntityTyping: self
 ]
 
 { #category : 'accessing' }

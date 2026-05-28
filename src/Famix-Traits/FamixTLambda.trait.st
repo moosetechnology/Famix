@@ -60,14 +60,6 @@ FamixTLambda classSide >> annotation [
 	<FMClass: #TLambda super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixTLambda >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTLambda: self
 ]
 
 { #category : 'accessing' }

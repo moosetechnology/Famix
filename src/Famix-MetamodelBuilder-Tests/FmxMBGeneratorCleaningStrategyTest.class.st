@@ -56,10 +56,17 @@ FmxMBGeneratorCleaningStrategyTest >> generateClasses [
 			(class slotNamed: #fursonas) inClass: #FmxTestCleaningStrategyEntity. "Here we change the type of the slot to ensure it is regenerated correctly"
 			class comment: 'Test' ]
 		ifAbsent: [ self fail ].
-	self class classInstaller make: [ :aBuilder |
+	
+	"We add a manually added class to ensure it is not removed. Also, we add a metadescribed trait to it to ensure we do not remove classes metadescribed from a trait"
+	self class environment at: #FmxTestCleaningStrategyTATrait ifPresent: [ :trait | 
+		
+		self class classInstaller make: [ :aBuilder |
 		aBuilder
 			name: #FmxCleanerTestAddedClass;
+			traits: trait;
 			package: self packageName ].
+		 ] ifAbsent: [ self fail ].
+		
 	self class classInstaller make: [ :aBuilder |
 		aBuilder
 			beTrait;

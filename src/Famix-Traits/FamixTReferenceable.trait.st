@@ -38,14 +38,6 @@ FamixTReferenceable classSide >> annotation [
 	<FMClass: #TReferenceable super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixTReferenceable >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTReferenceable: self
 ]
 
 { #category : 'accessing' }

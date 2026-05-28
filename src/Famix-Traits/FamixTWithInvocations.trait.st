@@ -26,14 +26,6 @@ FamixTWithInvocations classSide >> annotation [
 	<FMClass: #TWithInvocations super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixTWithInvocations >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTWithInvocations: self
 ]
 
 { #category : 'adding' }

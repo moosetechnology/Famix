@@ -43,10 +43,7 @@ FmxMBPlantTextVisitor >> behaviors [
 { #category : 'checking' }
 FmxMBPlantTextVisitor >> checkTrait: aTrait [
 
-	^ aTrait willGenerate and: [ 
-		  (traitsWithUsers includes: aTrait) and: [ 
-			  (aTrait builder classes flatCollect: [ :each | 
-				   each traitGeneralizations ]) includes: aTrait ] ]
+	^ (traitsWithUsers includes: aTrait) and: [ (aTrait builder classes flatCollect: [ :each | each traitGeneralizations ]) includes: aTrait ]
 ]
 
 { #category : 'accessing' }
@@ -108,22 +105,20 @@ FmxMBPlantTextVisitor >> mergeTraits: anObject [
 
 { #category : 'private' }
 FmxMBPlantTextVisitor >> onlySingleUserOf: aTrait [
-	^ ((aTrait builder classes select: #willGenerate)
-		count: [ :aClass | 
-			| traits |
-			traits := aClass traitGeneralizations.
-			traits size = 1 and: [ traits anyOne = aTrait ] ]) = 1
+
+	^ (aTrait builder classes count: [ :aClass |
+			   | traits |
+			   traits := aClass traitGeneralizations.
+			   traits size = 1 and: [ traits anyOne = aTrait ] ]) = 1
 ]
 
 { #category : 'private' }
 FmxMBPlantTextVisitor >> recordGeneralizationsForClass: aClass mergingTraits: mergesTrait [
 
-	aClass classGeneralization ifNotNil: [ :generalization | 
-		generalizationDefinitions add: generalization -> aClass ].
-	mergesTrait ifFalse: [ 
-		aClass traitGeneralizations ifNotEmpty: [ :generalizations | 
-			generalizations do: [ :generalization | 
-				generalizationDefinitions add: generalization -> aClass ] ] ]
+	aClass superclass ifNotNil: [ :superclass | generalizationDefinitions add: superclass -> aClass ].
+	mergesTrait ifFalse: [
+		aClass traitGeneralizations ifNotEmpty: [ :generalizations |
+			generalizations do: [ :generalization | generalizationDefinitions add: generalization -> aClass ] ] ]
 ]
 
 { #category : 'visiting' }
@@ -163,17 +158,16 @@ FmxMBPlantTextVisitor >> visitBuilder: aBuilder [
 		nextPutAll: 'hide empty members';
 		cr;
 		cr.
-	self gatherTraits ifTrue: [ 
-		stream
-			nextPutAll: 'together {';
-			cr ].
+	self gatherTraits ifTrue: [
+			stream
+				nextPutAll: 'together {';
+				cr ].
 	self selectTraitsWithUsersFrom: aBuilder.
-	(aBuilder traits select: #willGenerate) do: [ :each | 
-		each acceptVisitor: self ].
-	self gatherTraits ifTrue: [ 
-		stream
-			nextPutAll: '}';
-			cr ].
+	aBuilder traits do: [ :each | each acceptVisitor: self ].
+	self gatherTraits ifTrue: [
+			stream
+				nextPutAll: '}';
+				cr ].
 	aBuilder sortedClasses do: [ :each | each acceptVisitor: self ].
 	self writeGeneralizations.
 	self writeRelations.
@@ -187,9 +181,6 @@ FmxMBPlantTextVisitor >> visitBuilder: aBuilder [
 FmxMBPlantTextVisitor >> visitClass: aClass [
 
 	| mergesTrait | 
-
-	aClass willGenerate ifFalse: [ ^ self ].
-
 	mergesTrait := self mergeTraits 
 		and: [ aClass traitGeneralizations size = 1 
 		and: [ self onlySingleUserOf: aClass traitGeneralizations first ]].
@@ -201,10 +192,9 @@ FmxMBPlantTextVisitor >> visitClass: aClass [
 ]
 
 { #category : 'visiting' }
-FmxMBPlantTextVisitor >> visitRelationSide: aRelationSide [
+FmxMBPlantTextVisitor >> visitRelation: aRelation [
 
-	relations add: aRelationSide relation.
-
+	relations add: aRelation
 ]
 
 { #category : 'visiting' }
@@ -212,18 +202,18 @@ FmxMBPlantTextVisitor >> visitTrait: aTrait [
 
 	| behaviorKey |
 	withAllTraits
-		ifFalse: [ (self checkTrait: aTrait) ifFalse: [^ self]]
+		ifFalse: [ (self checkTrait: aTrait) ifFalse: [ ^ self ] ]
 		ifTrue: [ self recordGeneralizationsForTrait: aTrait ].
 
 	behaviorKey := self ensureBehaviorNameFor: aTrait.
 
-	(self onlySingleUserOf: aTrait) ifTrue: [ self writeSingleUseOf: aTrait.].
+	(self onlySingleUserOf: aTrait) ifTrue: [ self writeSingleUseOf: aTrait ].
 
 	self writeTraitBeginningOf: aTrait with: behaviorKey.
 
-	aTrait properties do: [ :each | each acceptVisitor: self ].
+	aTrait propertiesAndRelations do: [ :each | each acceptVisitor: self ].
 
-	self writeTraitEnd.
+	self writeTraitEnd
 ]
 
 { #category : 'visiting' }
@@ -274,7 +264,7 @@ FmxMBPlantTextVisitor >> writeClass: aClass mergingTraits: mergesTraits [
 		nextPutAll: displayedName;
 		nextPutAll: '" {'; cr.
 
-	aClass properties do: [ :each | each acceptVisitor: self ].
+	aClass propertiesAndRelations do: [ :each | each acceptVisitor: self ].
 	
 	mergesTraits	ifTrue: [ 
 		| defs |
@@ -289,13 +279,12 @@ FmxMBPlantTextVisitor >> writeClass: aClass mergingTraits: mergesTraits [
 { #category : 'relations' }
 FmxMBPlantTextVisitor >> writeGeneralizations [
 
-	generalizationDefinitions do: [ :each | 
-		(each key willGenerate and: [ each value willGenerate ]) ifTrue: [ 
+	generalizationDefinitions do: [ :each |
 			stream
 				nextPutAll: (self ensureBehaviorNameFor: each key);
 				nextPutAll: ' <|-- ';
 				nextPutAll: (self ensureBehaviorNameFor: each value);
-				cr ] ].
+				cr ].
 	stream cr
 ]
 
@@ -303,52 +292,49 @@ FmxMBPlantTextVisitor >> writeGeneralizations [
 FmxMBPlantTextVisitor >> writeRelations [
 
 	| isContainer |
+	relations do: [ :relation |
+			stream
+				nextPutAll: (self ensureBehaviorNameFor: relation relatedEntity);
+				nextPutAll: ' "';
+				nextPutAll: relation oppositeSide name;
+				space;
+				nextPutAll: relation oppositeSide shortCardinalityString;
+				space;
+				nextPutAll: '"'.
 
-	relations do: [ :relation | 
-		stream 
-			nextPutAll: (self ensureBehaviorNameFor: relation from relatedEntity);
-			nextPutAll:  ' "';
-			nextPutAll: relation to name; 
-			space; 
-			nextPutAll: relation oppositeRelation shortCardinalityString; 
-			space; 
-			nextPutAll: '"'.
-		
-		isContainer := relation from isContainer or: [ relation to isContainer ].
-		
-		stream space.
-		relation to isContainer 
-			ifTrue: [ stream nextPutAll: 'o' ].
+			isContainer := relation isContainer or: [ relation oppositeSide isContainer ].
 
-		isContainer 
-			ifTrue: [ stream nextPutAll: '-[#red]-'. ]
-			ifFalse: [ stream nextPutAll: '-[#black]-'. ].
-		
-		relation from isContainer 
-			ifTrue: [ stream nextPutAll: 'o' ].
-		stream space.
-		
-		stream 
-			nextPutAll: '"';
-			nextPutAll: relation from name;
-			space; 
-			nextPutAll: relation shortCardinalityString;
-			space;
-			nextPutAll: '" ';
-			nextPutAll: (self ensureBehaviorNameFor: relation to relatedEntity); 
-			cr]
-	
+			stream space.
+			relation oppositeSide isContainer ifTrue: [ stream nextPutAll: 'o' ].
+
+			isContainer
+				ifTrue: [ stream nextPutAll: '-[#red]-' ]
+				ifFalse: [ stream nextPutAll: '-[#black]-' ].
+
+			relation isContainer ifTrue: [ stream nextPutAll: 'o' ].
+			stream space.
+
+			stream
+				nextPutAll: '"';
+				nextPutAll: relation name;
+				space;
+				nextPutAll: relation shortCardinalityString;
+				space;
+				nextPutAll: '" ';
+				nextPutAll: (self ensureBehaviorNameFor: relation oppositeSide relatedEntity);
+				cr ]
 ]
 
 { #category : 'writing' }
 FmxMBPlantTextVisitor >> writeSingleUseOf: aTrait [
+
 	| savedStream |
-		savedStream := stream.
-		stream := String new writeStream.
-		aTrait properties do: [ :each | each acceptVisitor: self ].
-		typedProperties add: aTrait -> stream contents.
-		stream := savedStream.
-		^ self
+	savedStream := stream.
+	stream := String new writeStream.
+	aTrait propertiesAndRelations do: [ :each | each acceptVisitor: self ].
+	typedProperties add: aTrait -> stream contents.
+	stream := savedStream.
+	^ self
 ]
 
 { #category : 'writing' }

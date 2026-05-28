@@ -26,14 +26,6 @@ FamixTImportable classSide >> annotation [
 	<FMClass: #TImportable super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixTImportable >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTImportable: self
 ]
 
 { #category : 'adding' }

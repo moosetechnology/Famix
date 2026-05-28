@@ -49,7 +49,6 @@ FamixTAssociation classSide >> annotation [
 	<FMClass: #TAssociation super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : 'instance creation' }
@@ -65,13 +64,6 @@ FamixTAssociation classSide >> source: anEntity target: anotherEntity model: aMo
 	^ (self source: anEntity target: anotherEntity)
 		mooseModel: aMooseModel;
 		yourself
-]
-
-{ #category : 'visitor' }
-FamixTAssociation >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTAssociation: self
 ]
 
 { #category : 'accessing' }

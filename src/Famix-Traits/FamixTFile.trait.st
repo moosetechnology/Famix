@@ -41,7 +41,6 @@ FamixTFile classSide >> annotation [
 	<FMClass: #TFile super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : 'groups' }
@@ -49,13 +48,6 @@ FamixTFile classSide >> annotationFamixFileGroup [
 	<generated>
 	<mooseGroup>
 	^ FamixFileGroup
-]
-
-{ #category : 'visitor' }
-FamixTFile >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTFile: self
 ]
 
 { #category : 'accessing' }

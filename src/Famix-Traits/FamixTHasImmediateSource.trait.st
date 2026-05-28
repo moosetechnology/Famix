@@ -36,7 +36,6 @@ FamixTHasImmediateSource classSide >> annotation [
 	<FMClass: #THasImmediateSource super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : 'instance creation' }
@@ -51,13 +50,6 @@ FamixTHasImmediateSource classSide >> source: aString model: aMooseModel [
 	^ (self source: aString)
 		mooseModel: aMooseModel;
 		yourself
-]
-
-{ #category : 'visitor' }
-FamixTHasImmediateSource >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTHasImmediateSource: self
 ]
 
 { #category : 'testing' }

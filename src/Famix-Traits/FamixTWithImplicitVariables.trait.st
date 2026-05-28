@@ -26,14 +26,6 @@ FamixTWithImplicitVariables classSide >> annotation [
 	<FMClass: #TWithImplicitVariables super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixTWithImplicitVariables >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTWithImplicitVariables: self
 ]
 
 { #category : 'adding' }

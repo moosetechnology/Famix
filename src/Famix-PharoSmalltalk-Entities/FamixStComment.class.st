@@ -31,7 +31,6 @@ FamixStComment class >> annotation [
 	<FMClass: #Comment super: #FamixStSourcedEntity>
 	<package: #'Famix-PharoSmalltalk-Entities'>
 	<generated>
-	^ self
 ]
 
 { #category : 'accessing' }

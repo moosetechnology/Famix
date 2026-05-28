@@ -6,7 +6,7 @@ FamixMetamodelGenerator class >> packageNameForVisitor [
 	Examples: see overriding methods  "
 
 	<ignoreForCoverage>
-	self shouldBeImplemented
+	^ self packageName
 ]
 
 { #category : '*Famix-Visitor-Generation' }

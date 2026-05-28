@@ -28,14 +28,6 @@ FamixTImplementable classSide >> annotation [
 	<FMClass: #TImplementable super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixTImplementable >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTImplementable: self
 ]
 
 { #category : 'adding' }

@@ -38,5 +38,4 @@ FamixTest7Inheritance class >> annotation [
 	<FMClass: #Inheritance super: #FamixTest7Entity>
 	<package: #'Famix-Test7-Entities'>
 	<generated>
-	^ self
 ]

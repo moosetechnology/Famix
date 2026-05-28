@@ -27,7 +27,6 @@ FamixTest7SourcedEntity class >> annotation [
 	<package: #'Famix-Test7-Entities'>
 	<generated>
 	<abstract>
-	^ self
 ]
 
 { #category : 'testing' }

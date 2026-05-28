@@ -6,22 +6,6 @@ Class {
 	#tag : 'Groups'
 }
 
-{ #category : 'meta' }
-FamixTypeGroup class >> annotation [
-
-	<FMClass: #TypeGroup super: #MooseSpecializedGroup>
-	<package: #'Famix-Traits'>
-	<generated>
-	^ self
-]
-
-{ #category : 'meta' }
-FamixTypeGroup class >> metamodel [
-
-	<generated>
-	^ FamixModel metamodel
-]
-
 { #category : 'metrics' }
 FamixTypeGroup >> abstractness [
 	"Abstractness is the ratio between the number of abstract classes and the total number of classes in a package, in the range [0, 1]. 0 means the package is fully concrete, 1 it is fully abstract."

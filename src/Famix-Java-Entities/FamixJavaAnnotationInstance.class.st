@@ -32,14 +32,6 @@ FamixJavaAnnotationInstance class >> annotation [
 	<FMClass: #AnnotationInstance super: #FamixJavaSourcedEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixJavaAnnotationInstance >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaAnnotationInstance: self
 ]
 
 { #category : 'printing' }

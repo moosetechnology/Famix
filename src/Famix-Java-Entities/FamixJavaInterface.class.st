@@ -60,14 +60,6 @@ FamixJavaInterface class >> annotation [
 	<FMClass: #Interface super: #FamixJavaType>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixJavaInterface >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaInterface: self
 ]
 
 { #category : 'private' }

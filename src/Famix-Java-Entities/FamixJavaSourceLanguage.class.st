@@ -26,14 +26,6 @@ FamixJavaSourceLanguage class >> annotation [
 	<FMClass: #SourceLanguage super: #FamixJavaEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixJavaSourceLanguage >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaSourceLanguage: self
 ]
 
 { #category : 'testing' }

@@ -32,14 +32,6 @@ FamixTThrowable classSide >> annotation [
 	<FMClass: #TThrowable super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixTThrowable >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTThrowable: self
 ]
 
 { #category : 'adding' }

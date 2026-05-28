@@ -53,7 +53,6 @@ FamixTType classSide >> annotation [
 	<FMClass: #TType super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : 'groups' }
@@ -61,13 +60,6 @@ FamixTType classSide >> annotationFamixTypeGroup [
 	<generated>
 	<mooseGroup>
 	^ FamixTypeGroup
-]
-
-{ #category : 'visitor' }
-FamixTType >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTType: self
 ]
 
 { #category : 'adding' }

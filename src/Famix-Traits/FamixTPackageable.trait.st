@@ -26,14 +26,6 @@ FamixTPackageable classSide >> annotation [
 	<FMClass: #TPackageable super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixTPackageable >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTPackageable: self
 ]
 
 { #category : 'accessing' }

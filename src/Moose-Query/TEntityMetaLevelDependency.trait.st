@@ -94,7 +94,6 @@ TEntityMetaLevelDependency classSide >> annotation [
 	<FMClass: #TEntityMetaLevelDependency super: #Object>
 	<package: #'Moose-Query'>
 	<generated>
-	^ self
 ]
 
 { #category : 'accessing' }

@@ -1,67 +1,67 @@
 Trait {
 	#name : 'FmxMBRelationSideTrait',
-	#category : 'Famix-MetamodelBuilder-Core-Traits',
+	#category : 'Famix-MetamodelBuilder-Core-Implementation',
 	#package : 'Famix-MetamodelBuilder-Core',
-	#tag : 'Traits'
+	#tag : 'Implementation'
 }
 
 { #category : 'relations - arrows' }
-FmxMBRelationSideTrait >> *- aRelationSide [
+FmxMBRelationSideTrait >> *- relationOrBehavior [
 
-	^ self manyToOne: aRelationSide
+	^ self manyToOne: relationOrBehavior
 ]
 
 { #category : 'relations - arrows' }
-FmxMBRelationSideTrait >> *-* aRelationSide [
+FmxMBRelationSideTrait >> *-* relationOrBehavior [
 
-	^ self manyToMany: aRelationSide
+	^ self manyToMany: relationOrBehavior
 ]
 
 { #category : 'relations - arrows' }
-FmxMBRelationSideTrait >> *-<> aRelationSide [
+FmxMBRelationSideTrait >> *-<> relationOrBehavior [
 
-	^ self manyBelongTo: aRelationSide
+	^ self manyBelongTo: relationOrBehavior
 	
 ]
 
 { #category : 'relations - arrows' }
-FmxMBRelationSideTrait >> - aRelationSide [
+FmxMBRelationSideTrait >> - relationOrBehavior [
 
-	^ self oneToOne: aRelationSide
+	^ self oneToOne: relationOrBehavior
 ]
 
 { #category : 'relations - arrows' }
-FmxMBRelationSideTrait >> -* aRelationSide [
+FmxMBRelationSideTrait >> -* relationOrBehavior [
 
-	^ self oneToMany: aRelationSide
+	^ self oneToMany: relationOrBehavior
 ]
 
 { #category : 'relations - arrows' }
-FmxMBRelationSideTrait >> -<> aRelationSide [
+FmxMBRelationSideTrait >> -<> relationOrBehavior [
 
-	^ self oneBelongsTo: aRelationSide
+	^ self oneBelongsTo: relationOrBehavior
 
 	
 ]
 
 { #category : 'relations - arrows' }
-FmxMBRelationSideTrait >> <>- aRelationSide [
+FmxMBRelationSideTrait >> <>- relationOrBehavior [
 
-	^ self containsOne: aRelationSide
+	^ self containsOne: relationOrBehavior
 	
 ]
 
 { #category : 'relations - arrows' }
-FmxMBRelationSideTrait >> <>-* aRelationSide [
+FmxMBRelationSideTrait >> <>-* relationOrBehavior [
 
-	^ self containsMany: aRelationSide
+	^ self containsMany: relationOrBehavior
 	
 
 	
 ]
 
 { #category : 'relations - named' }
-FmxMBRelationSideTrait >> asRelationSideNamed: aPropertyName [
+FmxMBRelationSideTrait >> asRelationNamed: aPropertyName [
 
 	<ignoreForCoverage>
 	self explicitRequirement
@@ -69,122 +69,101 @@ FmxMBRelationSideTrait >> asRelationSideNamed: aPropertyName [
 ]
 
 { #category : 'relations - named containers' }
-FmxMBRelationSideTrait >> containsMany: aRelationSide [
+FmxMBRelationSideTrait >> containsMany: relationOrBehavior [
 
 	| aRelation |
-	aRelation := self oneToMany: aRelationSide.
-	aRelation right container.
+	aRelation := self oneToMany: relationOrBehavior.
+	aRelation oppositeSide container.
 	^ aRelation
 ]
 
 { #category : 'relations - named containers' }
-FmxMBRelationSideTrait >> containsOne: aRelationSide [
+FmxMBRelationSideTrait >> containsOne: relationOrBehavior [
 
 	| aRelation |
-	aRelation := self oneToOne: aRelationSide.
-	aRelation right container.
+	aRelation := self oneToOne: relationOrBehavior.
+	aRelation oppositeSide container.
 	^ aRelation
 ]
 
 { #category : 'relations - named containers' }
-FmxMBRelationSideTrait >> manyBelongTo: aRelationSide [
+FmxMBRelationSideTrait >> manyBelongTo: relationOrBehavior [
 
-	| aRelation |
-	aRelation := self manyToOne: aRelationSide.
-	aRelation left container.
-	^ aRelation
+	^ (self manyToOne: relationOrBehavior)
+		  container;
+		  yourself
 ]
 
 { #category : 'relations - named' }
-FmxMBRelationSideTrait >> manyToMany: aRelationSide [
+FmxMBRelationSideTrait >> manyToMany: relationOrBehavior [
 
-	| aRelation ownSide oppositeSide  |
-	
-	ownSide := self asRelationSideNamed: aRelationSide pluralPropertyName.
-	oppositeSide := aRelationSide asRelationSideNamed: self pluralPropertyName.
+	| ownSide oppositeSide |
+	ownSide := self asRelationNamed: relationOrBehavior pluralPropertyName.
+	oppositeSide := relationOrBehavior asRelationNamed: self pluralPropertyName.
 	ownSide many.
 	ownSide derived.
 	oppositeSide many.
-	aRelation := self relationFrom: ownSide to: oppositeSide.
+	ownSide oppositeSide: oppositeSide.
 
 	self isRemote ifTrue: [ ownSide makeRemote ].
-	aRelationSide isRemote ifTrue: [ oppositeSide makeRemote ].
-	(self isRemote and: [ aRelationSide isRemote not ]) ifTrue: [ oppositeSide makeNonremote ].
-	(self isRemote not and: [ aRelationSide isRemote ]) ifTrue: [ ownSide makeNonremote ].
-		
-	^ aRelation
-	
-	
+	relationOrBehavior isRemote ifTrue: [ oppositeSide makeRemote ].
+
+	^ ownSide
 ]
 
 { #category : 'relations - named' }
-FmxMBRelationSideTrait >> manyToOne: aRelationSide [
+FmxMBRelationSideTrait >> manyToOne: relationOrBehavior [
 
-	| aRelation ownSide oppositeSide  |
-	
-	ownSide := self asRelationSideNamed: aRelationSide singularPropertyName.
-	oppositeSide := aRelationSide asRelationSideNamed: self pluralPropertyName.
+	| ownSide oppositeSide |
+	ownSide := self asRelationNamed: relationOrBehavior singularPropertyName.
+	oppositeSide := relationOrBehavior asRelationNamed: self pluralPropertyName.
 	oppositeSide many.
 	oppositeSide derived.
-	aRelation := self relationFrom: ownSide to: oppositeSide.
+	ownSide oppositeSide: oppositeSide.
 
 	self isRemote ifTrue: [ ownSide makeRemote ].
-	aRelationSide isRemote ifTrue: [ oppositeSide makeRemote ].
-	(self isRemote and: [ aRelationSide isRemote not ]) ifTrue: [ oppositeSide makeNonremote ].
-	(self isRemote not and: [ aRelationSide isRemote ]) ifTrue: [ ownSide makeNonremote ].
-		
-	^ aRelation
-	
-	
+	relationOrBehavior isRemote ifTrue: [ oppositeSide makeRemote ].
+
+	^ ownSide
 ]
 
 { #category : 'relations - named containers' }
-FmxMBRelationSideTrait >> oneBelongsTo: aRelationSide [
+FmxMBRelationSideTrait >> oneBelongsTo: relationOrBehavior [
 
-	| aRelation |
-	aRelation := self oneToOne: aRelationSide.
-	aRelation left container.
-	^ aRelation
+	^ (self oneToOne: relationOrBehavior)
+		  container;
+		  yourself
 ]
 
 { #category : 'relations - named' }
-FmxMBRelationSideTrait >> oneToMany: aRelationSide [
+FmxMBRelationSideTrait >> oneToMany: relationOrBehavior [
 
-	| aRelation ownSide oppositeSide  |
-	ownSide := self asRelationSideNamed: aRelationSide pluralPropertyName.
-	oppositeSide := aRelationSide asRelationSideNamed: self singularPropertyName.
+	| ownSide oppositeSide |
+	ownSide := self asRelationNamed: relationOrBehavior pluralPropertyName.
+	oppositeSide := relationOrBehavior asRelationNamed: self singularPropertyName.
 	ownSide many.
 	ownSide derived.
-	aRelation := self relationFrom: ownSide to: oppositeSide.
+	ownSide oppositeSide: oppositeSide.
 
 	self isRemote ifTrue: [ ownSide makeRemote ].
-	aRelationSide isRemote ifTrue: [ oppositeSide makeRemote ].
-	(self isRemote and: [ aRelationSide isRemote not ]) ifTrue: [ oppositeSide makeNonremote ].
-	(self isRemote not and: [ aRelationSide isRemote ]) ifTrue: [ ownSide makeNonremote ].		
-		
-	^ aRelation
-	
-	
+	relationOrBehavior isRemote ifTrue: [ oppositeSide makeRemote ].
+
+	^ ownSide
 ]
 
 { #category : 'relations - named' }
-FmxMBRelationSideTrait >> oneToOne: aRelationSide [
+FmxMBRelationSideTrait >> oneToOne: relationOrBehavior [
 
-	| aRelation ownSide oppositeSide  |
-	
-	ownSide := self asRelationSideNamed: aRelationSide propertyName.
-	oppositeSide := aRelationSide asRelationSideNamed: self propertyName.
+	| ownSide oppositeSide |
+	ownSide := self asRelationNamed: relationOrBehavior propertyName.
+	oppositeSide := relationOrBehavior asRelationNamed: self propertyName.
 	oppositeSide derived.
-	aRelation := self relationFrom: ownSide to: oppositeSide.
-		
+	ownSide oppositeSide: oppositeSide.
+
 	self isRemote ifTrue: [ ownSide makeRemote ].
-	aRelationSide isRemote ifTrue: [ oppositeSide makeRemote ].
-	(self isRemote and: [ aRelationSide isRemote not ]) ifTrue: [ oppositeSide makeNonremote ].
-	(self isRemote not and: [ aRelationSide isRemote ]) ifTrue: [ ownSide makeNonremote ].
-		
-	^ aRelation
-	
-	
+	relationOrBehavior isRemote ifTrue: [ oppositeSide makeRemote ].
+
+	^ ownSide
 ]
 
 { #category : 'private' }
@@ -197,29 +176,4 @@ FmxMBRelationSideTrait >> pluralPropertyName [
 FmxMBRelationSideTrait >> propertyName [
 
 	^ self explicitRequirement
-]
-
-{ #category : 'private' }
-FmxMBRelationSideTrait >> relationFrom: ownSide to: oppositeSide [
-
-	| aRelation |
-	
-	aRelation := self builder newRelation
-		side: ownSide;
-		oppositeSide: oppositeSide;
-		builder: self builder;
-		yourself.	
-
-	ownSide remoteBuilderDo: [ :aRemoteBuilder |
-		aRemoteBuilder = self builder 
-			ifFalse: [ aRemoteBuilder relations add: aRelation ] ].
-		
-	ownSide relation: aRelation.	
-	oppositeSide relation: aRelation.
-
-	ownSide relatedClass ifNotNil: [ 
-		ownSide relatedClass addRelation: aRelation with: oppositeSide relatedEntity ].
-		
-	^ aRelation
-
 ]

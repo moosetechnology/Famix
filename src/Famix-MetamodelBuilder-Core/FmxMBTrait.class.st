@@ -6,6 +6,12 @@ Class {
 	#tag : 'Implementation'
 }
 
+{ #category : 'testing' }
+FmxMBTrait class >> isAbstract [
+
+	^ self = FmxMBTrait
+]
+
 { #category : 'visitor' }
 FmxMBTrait >> acceptVisitor: aVisitor [
 
@@ -20,83 +26,10 @@ FmxMBTrait >> allTraitGeneralizations [
 		   { each } , each allTraitGeneralizations ]) removeDuplicates
 ]
 
-{ #category : 'accessing' }
-FmxMBTrait >> classGeneralization [
-
-	^ self builder environment basicTrait
-]
-
-{ #category : 'accessing' }
-FmxMBTrait >> classGeneralization: anObject [
-	FmxMBTraitsGeneralizationError signal
-]
-
-{ #category : 'accessing' }
-FmxMBTrait >> defaultSuperclass [
-	
-	^ self builder environment basicTrait
-]
-
-{ #category : 'accessing' }
-FmxMBTrait >> defaultSuperclassName [
-	"In case of Traits we want the annotation to point Object as superclass."
-
-	^ 'Object'
-]
-
 { #category : 'settings-default' }
 FmxMBTrait >> defaultTag [
 
 	^ #Traits
-]
-
-{ #category : 'generating' }
-FmxMBTrait >> generate [
-
-	| aTrait traitName |
-	self willGenerate ifFalse: [ ^ self ].
-
-	traitName := self fullName.
-
-	aTrait := self builder environment
-		          createTraitNamed: traitName asSymbol
-		          uses: self allTraitNames
-		          slots: self slotDefinitions
-		          in: self packageName
-		          tag: self tag
-		          comment: self commentWithRelations.
-
-	self realClass: aTrait.
-
-	self generateAccessors.
-	self generateAnnotationIn: aTrait.
-
-	self generateTestingMethodsIn: aTrait.
-	self generateMethodsToRemoveFromTraitCompositionFor: aTrait.
-	self generatePrecedenceInTraitComposition: aTrait.
-
-	self generateAddToCollectionFor: aTrait
-]
-
-{ #category : 'generating' }
-FmxMBTrait >> generateRemoteAccessors [
-	(self properties select: [ :prop | 
-         prop isRemote and: [ 
-             (self realClass localSelectors includes: prop name) not ] ]) do: [ 
-        :each | each generateAccessorsIn: self realClass ]
-]
-
-{ #category : 'generating' }
-FmxMBTrait >> generateRemotes [
-	| aTrait traitName |
-	
-	traitName := self fullName.
-
-	aTrait := self class environment at: traitName asSymbol ifAbsent: [ builder environment classNamed: traitName asSymbol ].
-
-	self realClass: aTrait.
-	
-	self generateRemoteAccessors
 ]
 
 { #category : 'testing' }
@@ -122,7 +55,14 @@ FmxMBTrait >> propertyName [
 ]
 
 { #category : 'accessing' }
-FmxMBTrait >> removeRelationSide: aRelationSide [
+FmxMBTrait >> removeRelation: aRelation [
 
-	properties remove: aRelationSide ifAbsent: [ ].
+	propertiesAndRelations remove: aRelation ifAbsent: [ ].
+]
+
+{ #category : 'accessing' }
+FmxMBTrait >> superclassName [
+	"For trait we declare the Fame superclass as Object"
+
+	^ 'Object'
 ]

@@ -31,12 +31,9 @@ FmxMBPlantTextVisitorPartial >> isWantedClass: aClass [
 ]
 
 { #category : 'testing' }
-FmxMBPlantTextVisitorPartial >> isWantedRelation: aRelationSide [
-	^aRelationSide relation sides allSatisfy: [ :side |
-		side relatedClass notNil and: 
-		[ self isWantedClass: side relatedClass ]
-	]
+FmxMBPlantTextVisitorPartial >> isWantedRelation: aRelation [
 
+	^ aRelation relations allSatisfy: [ :side | side relatedClass isNotNil and: [ self isWantedClass: side relatedClass ] ]
 ]
 
 { #category : 'visiting' }
@@ -46,11 +43,10 @@ FmxMBPlantTextVisitorPartial >> visitClass: aClass [
 ]
 
 { #category : 'visiting' }
-FmxMBPlantTextVisitorPartial >> visitRelationSide: aRelationSide [
-	(self isWantedRelation: aRelationSide)
-	ifFalse: [ ^ self ].
-	super  visitRelationSide: aRelationSide
+FmxMBPlantTextVisitorPartial >> visitRelation: aRelation [
 
+	(self isWantedRelation: aRelation) ifFalse: [ ^ self ].
+	super visitRelation: aRelation
 ]
 
 { #category : 'relations' }

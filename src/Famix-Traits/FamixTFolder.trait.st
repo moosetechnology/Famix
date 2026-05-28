@@ -41,7 +41,6 @@ FamixTFolder classSide >> annotation [
 	<FMClass: #TFolder super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : 'groups' }
@@ -49,13 +48,6 @@ FamixTFolder classSide >> annotationFamixFolderGroup [
 	<generated>
 	<mooseGroup>
 	^ FamixFolderGroup
-]
-
-{ #category : 'visitor' }
-FamixTFolder >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTFolder: self
 ]
 
 { #category : 'adding' }

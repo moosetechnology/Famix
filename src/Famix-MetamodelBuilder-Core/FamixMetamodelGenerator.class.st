@@ -88,7 +88,7 @@ FamixMetamodelGenerator class >> generateAllMetamodels [
 { #category : 'generation' }
 FamixMetamodelGenerator class >> generateAllMetamodelsSuchAs: aBlock [
 
-	(self metamodelsToGenerate select: aBlock) do: [ :mm | mm generate ] displayingProgress: [ :mm | 'Regenerate ' , mm name ]
+	(self metamodelsToGenerate select: aBlock) do: [ :mm | mm generate ] displayingProgress: [ :mm | 'Regenerate ' , mm name ] every: 200
 ]
 
 { #category : 'generation' }
@@ -154,13 +154,6 @@ FamixMetamodelGenerator class >> packageName [
 ]
 
 { #category : 'accessing' }
-FamixMetamodelGenerator class >> packageNameForAnnotations [
-
-	<ignoreForCoverage>
-	^ self packageName
-]
-
-{ #category : 'accessing' }
 FamixMetamodelGenerator class >> prefix [
 
 	<ignoreForCoverage>
@@ -194,8 +187,7 @@ FamixMetamodelGenerator >> adoptBuilder: aBuilder [
 
 	aBuilder configuration
 		prefix: self prefix;
-		packageName: self packageName;
-		packageNameForAnnotations: self packageNameForAnnotations
+		packageName: self packageName
 ]
 
 { #category : 'accessing' }
@@ -213,12 +205,18 @@ FamixMetamodelGenerator >> allSubBuilders [
 FamixMetamodelGenerator >> apply: aTrait on: aGeneratedClass oppositeOn: anotherGeneratedClass [
 	"A shorter version of #apply:on:oppositeTrait:on:
 	Only works if aTrait has excatly 1 opposite (slot)"
-	| oppositeTrait |
 
-	((builder getTraitNamed: aTrait) properties size = 1) ifFalse: [ self error: '#apply:on:oppositeOn: only accept traits with a unique opposite' ].
+	| oppositeTrait properties |
+	properties := (builder getTraitNamed: aTrait) propertiesAndRelations.
 
-	oppositeTrait := (builder getTraitNamed: aTrait) properties anyOne relation side relatedClass name.	
-	self apply: aTrait on: aGeneratedClass oppositeTrait: oppositeTrait on: anotherGeneratedClass
+	properties size = 1 ifFalse: [ self error: '#apply:on:oppositeOn: only accept traits with a unique opposite' ].
+
+	oppositeTrait := properties anyOne oppositeClass name.
+	self
+		apply: aTrait
+		on: aGeneratedClass
+		oppositeTrait: oppositeTrait
+		on: anotherGeneratedClass
 ]
 
 { #category : 'definition' }
@@ -246,8 +244,13 @@ FamixMetamodelGenerator >> builder: anObject [
 
 { #category : 'testing' }
 FamixMetamodelGenerator >> changesToApply [
+
+	| allChanges |
+	allChanges := OrderedCollection new.
 	self define.
-	^ self builder changesToApply
+	allChanges addAll: self builder changesToApply.
+	self subBuilders do: [ :remote | allChanges addAll: remote remoteChangesToApply ].
+	^ allChanges
 ]
 
 { #category : 'accessing' }
@@ -345,18 +348,13 @@ FamixMetamodelGenerator >> initialize [
 	builder := self newBuilder.
 	self adoptBuilder: builder.
 
-	subBuildersMapByPrefix := Dictionary newFrom:
-		                          (self class submetamodels collect: [ :each |
-			                           | subbuilder |
-			                           subbuilder := each
-				                                         builderWithDefinitions.
-			                           subbuilder parentBuilder: self builder.
-			                           builder environment: builder environment.
-			                           each prefix -> subbuilder ]).
+	subBuildersMapByPrefix := Dictionary newFrom: (self class submetamodels collect: [ :each |
+				                           | subbuilder |
+				                           subbuilder := each builderWithDefinitions.
+				                           subbuilder parentBuilder: self builder.
+				                           each prefix -> subbuilder ]).
 
-	metamodelToolGenerators := self class metamodelToolGenerators
-		                           collect: [ :generatorClass |
-		                           generatorClass forGenerator: self ]
+	metamodelToolGenerators := self class metamodelToolGenerators collect: [ :generatorClass | generatorClass forGenerator: self ]
 ]
 
 { #category : 'accessing' }
@@ -409,13 +407,6 @@ FamixMetamodelGenerator >> newTraitNamed: aClassName comment: aString [
 FamixMetamodelGenerator >> packageName [
 
 	^ self class packageName
-
-]
-
-{ #category : 'definition' }
-FamixMetamodelGenerator >> packageNameForAnnotations [
-
-	^ self class packageNameForAnnotations
 
 ]
 

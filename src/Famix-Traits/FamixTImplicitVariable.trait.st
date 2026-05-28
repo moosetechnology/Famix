@@ -52,14 +52,6 @@ FamixTImplicitVariable classSide >> annotation [
 	<FMClass: #TImplicitVariable super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixTImplicitVariable >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTImplicitVariable: self
 ]
 
 { #category : 'accessing' }

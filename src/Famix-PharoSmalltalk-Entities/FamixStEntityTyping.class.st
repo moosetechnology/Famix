@@ -38,5 +38,4 @@ FamixStEntityTyping class >> annotation [
 	<FMClass: #EntityTyping super: #FamixStEntity>
 	<package: #'Famix-PharoSmalltalk-Entities'>
 	<generated>
-	^ self
 ]

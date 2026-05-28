@@ -26,12 +26,4 @@ FamixJavaParametricEntityTyping class >> annotation [
 	<FMClass: #ParametricEntityTyping super: #FamixJavaEntityTyping>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixJavaParametricEntityTyping >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaParametricEntityTyping: self
 ]

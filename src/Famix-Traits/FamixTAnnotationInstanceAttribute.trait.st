@@ -51,14 +51,6 @@ FamixTAnnotationInstanceAttribute classSide >> annotation [
 	<FMClass: #TAnnotationInstanceAttribute super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixTAnnotationInstanceAttribute >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTAnnotationInstanceAttribute: self
 ]
 
 { #category : 'accessing' }

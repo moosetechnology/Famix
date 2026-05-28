@@ -26,5 +26,4 @@ FamixTest1SourceLanguage class >> annotation [
 	<FMClass: #SourceLanguage super: #FamixTest1Entity>
 	<package: #'Famix-Test1-Entities'>
 	<generated>
-	^ self
 ]

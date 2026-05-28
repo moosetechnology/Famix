@@ -29,14 +29,6 @@ FamixTModule classSide >> annotation [
 	<FMClass: #TModule super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixTModule >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTModule: self
 ]
 
 { #category : 'accessing' }

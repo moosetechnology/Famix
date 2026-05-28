@@ -51,14 +51,6 @@ FamixTShadowable classSide >> annotation [
 	<FMClass: #TShadowable super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixTShadowable >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTShadowable: self
 ]
 
 { #category : 'adding' }

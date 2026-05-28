@@ -49,14 +49,6 @@ FamixJavaPrimitiveType class >> annotation [
 	<FMClass: #PrimitiveType super: #FamixJavaType>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixJavaPrimitiveType >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaPrimitiveType: self
 ]
 
 { #category : 'testing' }

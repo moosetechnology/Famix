@@ -34,7 +34,6 @@ FamixTFileSystemEntity classSide >> annotation [
 	<FMClass: #TFileSystemEntity super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : 'constants' }
@@ -53,13 +52,6 @@ FamixTFileSystemEntity classSide >> named: aName filedIn: aFolder [
 { #category : 'constants' }
 FamixTFileSystemEntity classSide >> systemFolderSeparatorString [
 	^ DiskStore delimiter asString 
-]
-
-{ #category : 'visitor' }
-FamixTFileSystemEntity >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTFileSystemEntity: self
 ]
 
 { #category : 'accessing' }

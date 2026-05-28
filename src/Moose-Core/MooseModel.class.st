@@ -31,6 +31,13 @@ MooseModel class >> annotation [
 ]
 
 { #category : 'testing' }
+MooseModel class >> canBeGenerated [
+	"Models are generated."
+
+	^ true
+]
+
+{ #category : 'testing' }
 MooseModel class >> canBeImportedFromFile [
 
 	^ false

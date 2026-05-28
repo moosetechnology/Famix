@@ -58,5 +58,4 @@ FamixTest2Class class >> annotation [
 	<FMClass: #Class super: #FamixTest2NamedEntity>
 	<package: #'Famix-Test2-Entities'>
 	<generated>
-	^ self
 ]

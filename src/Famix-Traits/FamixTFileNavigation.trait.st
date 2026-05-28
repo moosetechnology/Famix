@@ -34,7 +34,6 @@ FamixTFileNavigation classSide >> annotation [
 	<FMClass: #TFileNavigation super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : 'instance creation' }
@@ -58,13 +57,6 @@ FamixTFileNavigation classSide >> fileName: aString startLine: anInteger startCo
 		endLine: anInteger3;
 		endColumn: anInteger4;
 		yourself
-]
-
-{ #category : 'visitor' }
-FamixTFileNavigation >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTFileNavigation: self
 ]
 
 { #category : 'accessing' }

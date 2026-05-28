@@ -41,14 +41,6 @@ FamixTImplementation classSide >> annotation [
 	<FMClass: #TImplementation super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixTImplementation >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTImplementation: self
 ]
 
 { #category : 'accessing' }

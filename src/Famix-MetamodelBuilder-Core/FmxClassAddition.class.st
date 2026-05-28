@@ -21,18 +21,13 @@ Internal Representation and Key Implementation Points.
 "
 Class {
 	#name : 'FmxClassAddition',
-	#superclass : 'FmxCodeChange',
+	#superclass : 'FmxBehavioralAddition',
 	#instVars : [
-		'name',
-		'superclass',
-		'traits',
-		'slots',
-		'package',
-		'tag'
+		'superclass'
 	],
-	#category : 'Famix-MetamodelBuilder-Core-Changes',
+	#category : 'Famix-MetamodelBuilder-Core-Generation',
 	#package : 'Famix-MetamodelBuilder-Core',
-	#tag : 'Changes'
+	#tag : 'Generation'
 }
 
 { #category : 'accessing' }
@@ -43,24 +38,13 @@ FmxClassAddition class >> priority [
 ]
 
 { #category : 'accessing' }
-FmxClassAddition >> apply [
+FmxClassAddition >> followingChangesIn: changes [
+	"I should declare that each class with me as superclass should be built after me."
 
-	| makeBlock |
-	makeBlock := [ :builder |
-		             self initialize: builder.
-		             builder
-			             name: name;
-			             package: package;
-			             tag: tag.
-
-		             traits ifNotNil: [ builder traits: (self class compiler evaluate: traits) ].
-		             slots ifNotNil: [ builder slots: (self class compiler evaluate: slots) ] ].
-
-	"If the class already exist we update it to not remove the class slots and shared variables."
-	self class environment
-		at: name
-		ifPresent: [ :class | self class classInstaller update: class to: makeBlock ]
-		ifAbsent: [ self class classInstaller make: makeBlock ]
+	| result |
+	result := super followingChangesIn: changes.
+	result addAll: (changes select: [ :change | change priority = self priority and: [ change superclass = name ] ]).
+	^ result
 ]
 
 { #category : 'accessing' }
@@ -69,32 +53,22 @@ FmxClassAddition >> initialize: builder [
 	builder superclass: (self class environment at: superclass)
 ]
 
-{ #category : 'accessing' }
-FmxClassAddition >> name: anObject [
-	name := anObject
+{ #category : 'testing' }
+FmxClassAddition >> isRequired [
+
+	| realClass |
+	super isRequired ifTrue: [ ^ true ].
+
+	(realClass := self realClass) isTrait ifTrue: [ ^ true ].
+	^ self superclass ~= realClass superclass name
 ]
 
 { #category : 'accessing' }
-FmxClassAddition >> package: anObject [
-	package := anObject
-]
-
-{ #category : 'accessing' }
-FmxClassAddition >> slots: anObject [
-	slots := anObject
+FmxClassAddition >> superclass [
+	^ superclass
 ]
 
 { #category : 'accessing' }
 FmxClassAddition >> superclass: anObject [
 	superclass := anObject
-]
-
-{ #category : 'accessing' }
-FmxClassAddition >> tag: anObject [
-	tag := anObject
-]
-
-{ #category : 'accessing' }
-FmxClassAddition >> traits: anObject [
-	traits := anObject
 ]

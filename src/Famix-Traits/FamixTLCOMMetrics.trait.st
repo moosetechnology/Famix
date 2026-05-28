@@ -11,14 +11,6 @@ FamixTLCOMMetrics classSide >> annotation [
 	<FMClass: #TLCOMMetrics super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixTLCOMMetrics >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTLCOMMetrics: self
 ]
 
 { #category : 'Famix-Extensions-metrics-support' }

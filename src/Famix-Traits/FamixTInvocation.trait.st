@@ -60,7 +60,6 @@ FamixTInvocation classSide >> annotation [
 	<FMClass: #TInvocation super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : 'groups' }
@@ -68,13 +67,6 @@ FamixTInvocation classSide >> annotationFamixInvocationGroup [
 	<generated>
 	<mooseGroup>
 	^ FamixInvocationGroup
-]
-
-{ #category : 'visitor' }
-FamixTInvocation >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTInvocation: self
 ]
 
 { #category : 'adding' }

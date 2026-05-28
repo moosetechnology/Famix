@@ -62,14 +62,6 @@ FamixTFunction classSide >> annotation [
 	<FMClass: #TFunction super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixTFunction >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTFunction: self
 ]
 
 { #category : 'accessing' }

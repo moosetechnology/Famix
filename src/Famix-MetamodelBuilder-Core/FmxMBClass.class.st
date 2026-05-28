@@ -2,14 +2,18 @@ Class {
 	#name : 'FmxMBClass',
 	#superclass : 'FmxMBBehavior',
 	#instVars : [
-		'classGeneralization',
-		'isAbstractClass',
-		'propertiesForEqualityCheck'
+		'superclass'
 	],
 	#category : 'Famix-MetamodelBuilder-Core-Implementation',
 	#package : 'Famix-MetamodelBuilder-Core',
 	#tag : 'Implementation'
 }
+
+{ #category : 'testing' }
+FmxMBClass class >> isAbstract [
+
+	^ self = FmxMBClass
+]
 
 { #category : 'visitor' }
 FmxMBClass >> acceptVisitor: aVisitor [
@@ -19,206 +23,37 @@ FmxMBClass >> acceptVisitor: aVisitor [
 ]
 
 { #category : 'accessing' }
-FmxMBClass >> allClassGeneralizations [
-	| result c g |
-	result := OrderedCollection new.
-	c := self.
-	[ g := c classGeneralization.
-	g isNotNil and: [ g isKindOf: FmxMBClass ] ]
-		whileTrue: [ result add: g.
-			c := g ].
-	^ result
-]
-
-{ #category : 'accessing' }
 FmxMBClass >> allLocalTraits [
 	^ self traitsFromRelations , super allLocalTraits
 ]
 
 { #category : 'accessing' }
-FmxMBClass >> allTransitiveTraitsIncludingClassGeneralization [
+FmxMBClass >> allSuperclasses [
 
-	| result |
-	result := super allTransitiveTraitsIncludingClassGeneralization.
-	self classGeneralization ifNotNil: [ :class | class ~= Object ifTrue: [ result addAll: class allTransitiveTraitsIncludingClassGeneralization ] ].
+	| result class g |
+	result := OrderedCollection new.
+	class := self.
+	[
+		g := class superclass.
+		g isNotNil ] whileTrue: [
+			result add: g.
+			class := g ].
 	^ result
 ]
 
 { #category : 'accessing' }
-FmxMBClass >> classGeneralization [
-	^ classGeneralization
+FmxMBClass >> allTransitiveTraitsIncludingSuperclasses [
+
+	| result |
+	result := super allTransitiveTraitsIncludingSuperclasses.
+	self superclass ifNotNil: [ :class | result addAll: class allTransitiveTraitsIncludingSuperclasses ].
+	^ result
 ]
 
-{ #category : 'accessing' }
-FmxMBClass >> classGeneralization: anObject [
-	
-	classGeneralization := anObject.
-	^ anObject
-]
+{ #category : 'settings - default' }
+FmxMBClass >> defaultSuperclassName [
 
-{ #category : 'generating' }
-FmxMBClass >> generate [
-
-	| aClass aSuperclass aClassName |
-	self willGenerate ifFalse: [ ^ self ].
-
-	aClassName := self fullName.
-
-	aSuperclass := self classGeneralization
-		               ifNil: [ self defaultSuperclass ]
-		               ifNotNil: [ self classGeneralization realClass ].
-
-	aClass := self builder environment
-		          createClassNamed: aClassName asSymbol
-		          superclass: aSuperclass
-		          traitNames: self allTraitNames
-		          slots: self slotDefinitions
-		          in: self packageName
-		          tag: self tag
-		          comment: self commentWithRelations.
-
-	self realClass: aClass.
-
-	self generateAccessors.
-	self generateAnnotationIn: aClass.
-	self generateIsAbstractMethodIfNecessaryIn: aClass.
-
-	self generateTestingMethodsIn: aClass.
-	self generateRootMetamodelMethodIn: aClass.
-
-	self generateMethodsToRemoveFromTraitCompositionFor: aClass.
-	self generatePrecedenceInTraitComposition: aClass.
-
-	self generateAddToCollectionFor: aClass.
-
-	self generateEqualsMethodFor: aClass.
-	self generateHashMethodFor: aClass
-]
-
-{ #category : 'generating-methods' }
-FmxMBClass >> generateEqualsMethodFor: aClass [
-
-	propertiesForEqualityCheck ifNotNil: [
-		| variableName |
-		variableName := 'a' , aClass name.
-		self builder environment
-			compile: (String streamContents: [ :stream |
-					 stream << '= '.
-					 stream << variableName.
-					 stream << '
-
-	<generated>
-	^ '.
-					 stream
-						 << variableName;
-						 << ' ';
-						 << propertiesForEqualityCheck first;
-						 << ' = self ';
-						 << propertiesForEqualityCheck first.
-					 propertiesForEqualityCheck size > 1 ifTrue: [
-						 2 to: propertiesForEqualityCheck size do: [ :idx |
-							 stream << ' and: [ '.
-							 stream
-								 << variableName;
-								 << ' ';
-								 << (propertiesForEqualityCheck at: idx);
-								 << ' = self ';
-								 << (propertiesForEqualityCheck at: idx) ].
-						 2 to: propertiesForEqualityCheck size do: [ :idx |
-						 stream << '] ' ] ] ])
-			in: aClass instanceSide
-			classified: #comparing ]
-]
-
-{ #category : 'generating-methods' }
-FmxMBClass >> generateHashMethodFor: aClass [
-
-	propertiesForEqualityCheck ifNotNil: [
-		self builder environment
-			compile: (String streamContents: [ :stream |
-					 stream << 'hash'.
-					 stream << '
-
-	<generated>
-	^ '.
-					 stream
-						 << 'self ';
-						 << propertiesForEqualityCheck first;
-						 << ' hash '.
-					 propertiesForEqualityCheck size > 1 ifTrue: [
-						 2 to: propertiesForEqualityCheck size do: [ :idx |
-							 stream
-								 << 'bitXor: self ';
-								 << (propertiesForEqualityCheck at: idx);
-								 << ' hash ' ] ] ])
-			in: aClass instanceSide
-			classified: #comparing ]
-]
-
-{ #category : 'generating' }
-FmxMBClass >> generateIsAbstractMethodIfNecessaryIn: aClass [
-
-	self isAbstractClass ifTrue: [ 
-		aClass classSide
-			compile: ('isAbstract
-
-	<generated>
-	^ self == {1}' format: { aClass name asString })
-			classified: 'testing' ]
-]
-
-{ #category : 'generating' }
-FmxMBClass >> generateRemotes [
-	| aClass aClassName |
-	aClassName := self fullName.
-
-	aClass := self class environment at: aClassName asSymbol ifAbsent: [ self builder environment classNamed: aClassName asSymbol ].
-
-	self realClass: aClass.
-
-	self generateRemoteAccessors
-]
-
-{ #category : 'generating-methods' }
-FmxMBClass >> generateRootMetamodelMethodIn: aClass [
-	self isRoot ifFalse: [ ^ self ].
-
-	self builder model
-		ifNotNil: [ :model | 
-			aClass classSide
-				compile:
-					('metamodel
-
-	<generated>
-	^ {1} metamodel' format: {model fullName})
-				classified: 'meta' ]
-]
-
-{ #category : 'generating-methods' }
-FmxMBClass >> generateTestingMethodsIn: aClass [
-
-	self isRoot ifTrue: [
-			builder testingSelectorsMapping keysAndValuesDo: [ :concernedClass :selectors |
-					(builder shouldGeneratorTestingMethodsOf: concernedClass in: self) ifTrue: [
-							selectors do: [ :sel |
-									| selectorsFromTraits |
-									selectorsFromTraits := self traitGeneralizations flatCollect: #testingSelectors.
-									(selectorsFromTraits includes: sel) ifFalse: [
-										aClass instanceSide compile: ('{1}\\	<generated>\	^ false' withCRs format: { sel }) classified: #testing ] ] ] ] ].
-
-	super generateTestingMethodsIn: aClass
-]
-
-{ #category : 'testing' }
-FmxMBClass >> isAbstractClass [
-
-	^ isAbstractClass ifNil: [ false ]
-]
-
-{ #category : 'accessing' }
-FmxMBClass >> isAbstractClass: aBoolean [
-
-	isAbstractClass := aBoolean
+	^ #MooseEntity
 ]
 
 { #category : 'testing' }
@@ -227,42 +62,43 @@ FmxMBClass >> isMetamodelClass [
 	^ true
 ]
 
-{ #category : 'testing' }
-FmxMBClass >> isRoot [
-	^ self classGeneralization isNil
-]
+{ #category : 'accessing' }
+FmxMBClass >> remoteSuperclass [
 
-{ #category : 'generating' }
-FmxMBClass >> optionalPragma [
-
-	^ self isAbstractClass
-		  ifTrue: [ 
-			  '
-	<abstract>' ]
-		  ifFalse: [ super optionalPragma ]
+	^ self allSuperclasses detect: #isRemote ifNone: [ nil ]
 ]
 
 { #category : 'accessing' }
-FmxMBClass >> remoteClassGeneratization [
+FmxMBClass >> superclass [
 
-	^ self allClassGeneralizations detect: #isRemote ifNone: [ nil ]
+	^ superclass
 ]
 
-{ #category : 'generalization' }
-FmxMBClass >> subclassOf: aClass [
-	
-	self generalization: aClass
+{ #category : 'accessing' }
+FmxMBClass >> superclass: aFmxClass [
+	"In the past we could have real objects here but this is not the case anymore"
+
+	superclass ifNotNil: [
+			self error:
+				'Cannot have two superclasses for an entity. ' , self name , ' declared ' , superclass name , ' as superclass and try to set also ' , aFmxClass name
+				, ' as second superclass.' ].
+	superclass := aFmxClass.
+	^ aFmxClass
+]
+
+{ #category : 'settings - default' }
+FmxMBClass >> superclassName [
+
+	^ self superclass
+		  ifNil: [ self defaultSuperclassName ]
+		  ifNotNil: #fullName
 ]
 
 { #category : 'accessing' }
 FmxMBClass >> traitsFromRelations [
 	"returns traits defined by relations"
 
-	^ (self relations collect: [ :each | each side trait ] thenSelect: #isNotNil) asSet
-]
-
-{ #category : 'generalization' }
-FmxMBClass >> withEqualityCheckOn: aCollectionOfPropertySymbol [
-
-	propertiesForEqualityCheck := aCollectionOfPropertySymbol
+	^ (self relations
+		   collect: #trait
+		   thenSelect: #isNotNil) asSet
 ]

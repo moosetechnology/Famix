@@ -23,14 +23,6 @@ FamixTCanBeAbstract classSide >> annotation [
 	<FMClass: #TCanBeAbstract super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixTCanBeAbstract >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTCanBeAbstract: self
 ]
 
 { #category : 'accessing' }

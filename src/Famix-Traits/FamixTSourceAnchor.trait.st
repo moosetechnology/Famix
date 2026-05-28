@@ -28,14 +28,6 @@ FamixTSourceAnchor classSide >> annotation [
 	<FMClass: #TSourceAnchor super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixTSourceAnchor >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTSourceAnchor: self
 ]
 
 { #category : 'accessing' }

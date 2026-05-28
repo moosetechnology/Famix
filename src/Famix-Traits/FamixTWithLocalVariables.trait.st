@@ -26,14 +26,6 @@ FamixTWithLocalVariables classSide >> annotation [
 	<FMClass: #TWithLocalVariables super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixTWithLocalVariables >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTWithLocalVariables: self
 ]
 
 { #category : 'accessing' }

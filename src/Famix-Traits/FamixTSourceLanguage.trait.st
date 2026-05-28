@@ -31,14 +31,6 @@ FamixTSourceLanguage classSide >> annotation [
 	<FMClass: #TSourceLanguage super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixTSourceLanguage >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTSourceLanguage: self
 ]
 
 { #category : 'adding' }

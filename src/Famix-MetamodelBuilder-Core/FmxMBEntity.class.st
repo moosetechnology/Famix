@@ -4,8 +4,6 @@ Class {
 	#instVars : [
 		'name',
 		'comment',
-		'builder',
-		'willGenerate',
 		'additionalProperties',
 		'isRemote'
 	],
@@ -26,16 +24,6 @@ FmxMBEntity >> additionalProperties [
 ]
 
 { #category : 'accessing' }
-FmxMBEntity >> builder [
-	^ builder
-]
-
-{ #category : 'accessing' }
-FmxMBEntity >> builder: anObject [
-	builder := anObject
-]
-
-{ #category : 'accessing' }
 FmxMBEntity >> comment [
 	^ comment
 ]
@@ -51,9 +39,20 @@ FmxMBEntity >> initialize [
 	super initialize.	
 
 	comment := String new.
-	willGenerate := true.
 	additionalProperties := Dictionary new.
 	isRemote := false.
+]
+
+{ #category : 'testing' }
+FmxMBEntity >> isClassEntity [
+
+	^ false
+]
+
+{ #category : 'testing' }
+FmxMBEntity >> isConcreteClass [
+
+	^ false
 ]
 
 { #category : 'accessing' }
@@ -67,6 +66,12 @@ FmxMBEntity >> isRemote: anObject [
 	isRemote := anObject
 ]
 
+{ #category : 'testing' }
+FmxMBEntity >> isTraitEntity [
+
+	^ false
+]
+
 { #category : 'accessing' }
 FmxMBEntity >> name [
 	^ name
@@ -74,6 +79,7 @@ FmxMBEntity >> name [
 
 { #category : 'accessing' }
 FmxMBEntity >> name: anObject [
+
 	name := anObject
 ]
 
@@ -90,11 +96,7 @@ FmxMBEntity >> remoteBuilder: aRemoteBuilder [
 ]
 
 { #category : 'accessing' }
-FmxMBEntity >> willGenerate [
-	^ willGenerate
-]
+FmxMBEntity >> reservedKeywords [
 
-{ #category : 'accessing' }
-FmxMBEntity >> willGenerate: anObject [
-	willGenerate := anObject
+	^ { #class }
 ]

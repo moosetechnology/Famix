@@ -5,9 +5,8 @@ For more informations: https://moosequery.ferlicot.fr/
 "
 Trait {
 	#name : 'TMooseGroupDependencyQueries',
-	#category : 'Moose-Query-Traits',
-	#package : 'Moose-Query',
-	#tag : 'Traits'
+	#category : 'Famix-Deprecated',
+	#package : 'Famix-Deprecated'
 }
 
 { #category : 'querying' }

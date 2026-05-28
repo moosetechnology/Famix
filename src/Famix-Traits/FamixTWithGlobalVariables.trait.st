@@ -28,14 +28,6 @@ FamixTWithGlobalVariables classSide >> annotation [
 	<FMClass: #TWithGlobalVariables super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixTWithGlobalVariables >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTWithGlobalVariables: self
 ]
 
 { #category : 'adding' }

@@ -5,12 +5,3 @@ Class {
 	#package : 'Famix-Traits',
 	#tag : 'Groups'
 }
-
-{ #category : 'meta' }
-FamixClassGroup class >> annotation [
-
-	<FMClass: #ClassGroup super: #FamixTypeGroup>
-	<package: #'Famix-Traits'>
-	<generated>
-	^ self
-]

@@ -54,19 +54,11 @@ FamixTReference classSide >> annotation [
 	<FMClass: #TReference super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : 'instance creation' }
 FamixTReference classSide >> source: source target: target [
 	^ self new source: source; target: target
-]
-
-{ #category : 'visitor' }
-FamixTReference >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTReference: self
 ]
 
 { #category : 'testing' }

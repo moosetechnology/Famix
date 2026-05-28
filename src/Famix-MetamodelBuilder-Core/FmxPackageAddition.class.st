@@ -21,9 +21,9 @@ Class {
 	#instVars : [
 		'packageName'
 	],
-	#category : 'Famix-MetamodelBuilder-Core-Changes',
+	#category : 'Famix-MetamodelBuilder-Core-Generation',
 	#package : 'Famix-MetamodelBuilder-Core',
-	#tag : 'Changes'
+	#tag : 'Generation'
 }
 
 { #category : 'instance creation' }
@@ -46,6 +46,12 @@ FmxPackageAddition >> apply [
 	self packageOrganizer ensurePackage: self packageName
 ]
 
+{ #category : 'testing' }
+FmxPackageAddition >> isRequired [
+
+	^ self systemPackage isNil
+]
+
 { #category : 'accessing' }
 FmxPackageAddition >> packageName [ 
 
@@ -65,4 +71,10 @@ FmxPackageAddition >> printOn: aStream [
 		nextPut: $(;
 		nextPutAll: (packageName ifNil: [ #unamed ]);
 		nextPut: $)
+]
+
+{ #category : 'accessing' }
+FmxPackageAddition >> systemPackage [
+
+	^ self packageOrganizer packageNamed: self packageName ifAbsent: [ nil ]
 ]

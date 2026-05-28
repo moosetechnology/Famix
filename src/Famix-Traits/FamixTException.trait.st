@@ -62,14 +62,6 @@ FamixTException classSide >> annotation [
 	<FMClass: #TException super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixTException >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTException: self
 ]
 
 { #category : 'testing' }
