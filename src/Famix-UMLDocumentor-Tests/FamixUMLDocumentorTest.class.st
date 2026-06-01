@@ -7,9 +7,9 @@ Class {
 	#instVars : [
 		'documentor'
 	],
-	#category : 'Famix-UMLDocumentor-Tests-Generation',
+	#category : 'Famix-UMLDocumentor-Tests-Tests',
 	#package : 'Famix-UMLDocumentor-Tests',
-	#tag : 'Generation'
+	#tag : 'Tests'
 }
 
 { #category : 'running' }
@@ -65,16 +65,20 @@ FamixUMLDocumentorTest >> testBeWithoutStub [
 FamixUMLDocumentorTest >> testColorForEntity [
 
 	documentor
-		model: FDModel ;
-		model: FamixStModel ;
-		onlyClasses: { FDClass1 . FamixStClass } .
+		model: FDModel;
+		model: FD2Model;
+		onlyClasses: {
+				FDClass1.
+				FD2Class }.
 
 	self
-		assert: (documentor colorForEntity: (documentor fm3DescriptionOf: FDClass1))
-		equals: (documentor modelColors first value).
+		assert:
+		(documentor colorForEntity: (documentor fm3DescriptionOf: FDClass1))
+		equals: documentor modelColors first value.
 	self
-		assert: (documentor colorForEntity: (documentor fm3DescriptionOf: FamixStClass))
-		equals: (documentor modelColors second value).
+		assert:
+		(documentor colorForEntity: (documentor fm3DescriptionOf: FD2Class))
+		equals: documentor modelColors second value
 ]
 
 { #category : 'tests - generation' }

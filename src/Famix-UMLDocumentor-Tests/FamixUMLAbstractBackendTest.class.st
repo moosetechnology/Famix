@@ -4,10 +4,22 @@ Class {
 	#instVars : [
 		'backend'
 	],
-	#category : 'Famix-UMLDocumentor-Tests-Generation',
+	#category : 'Famix-UMLDocumentor-Tests-Tests',
 	#package : 'Famix-UMLDocumentor-Tests',
-	#tag : 'Generation'
+	#tag : 'Tests'
 }
+
+{ #category : 'testing' }
+FamixUMLAbstractBackendTest class >> isAbstract [
+
+	^ self = FamixUMLAbstractBackendTest
+]
+
+{ #category : 'accessing' }
+FamixUMLAbstractBackendTest >> backendClass [
+
+	self subclassResponsibility
+]
 
 { #category : 'running' }
 FamixUMLAbstractBackendTest >> classNamed: aString [
@@ -38,6 +50,7 @@ FamixUMLAbstractBackendTest >> property: aName type: aString [
 
 { #category : 'running' }
 FamixUMLAbstractBackendTest >> setUp [
+
 	super setUp.
 
 	backend := self backendClass new
