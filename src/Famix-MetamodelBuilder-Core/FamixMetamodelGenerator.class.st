@@ -157,7 +157,7 @@ FamixMetamodelGenerator class >> packageName [
 FamixMetamodelGenerator class >> prefix [
 
 	<ignoreForCoverage>
-	^ self packageName
+	^ self subclassResponsibility
 ]
 
 { #category : 'accessing' }
