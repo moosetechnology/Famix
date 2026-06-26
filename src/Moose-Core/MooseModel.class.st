@@ -224,6 +224,42 @@ MooseModel class >> importFromJSON: aStream withMetamodel: aMetamodel filteredBy
 			  FMImporterFilter on: importer filtering: famixElementNames ]
 ]
 
+{ #category : 'as yet unclassified' }
+MooseModel class >> importFromJSONSepareted: aStream withMetamodel: aMetamodel [
+	"Here we build with the default importer"
+
+	^ self
+		  importFromJSONSepareted: aStream
+		  withMetamodel: aMetamodel
+		  customizingImporterWith: [ :importer | importer ]
+]
+
+{ #category : 'as yet unclassified' }
+MooseModel class >> importFromJSONSepareted: aStream withMetamodel: aMetamodel customizingImporterWith: aBlock [
+	"I import a MSE with its metamodel and return a FMModel from it. It is possible to customize the importer via a block"
+
+	| model importer areWarningsEnabled |
+	
+	model := FMModel withMetamodel: aMetamodel.
+	importer := aBlock value:
+		            ((FMImporter model: model)
+			             autorizeDandlingReferencesAtEnd
+			             parser: FMJSONSeparatedRelationsParser;
+			             stream: aStream;
+			             yourself).
+
+	"We are currently updating the meta models and most parsers are not up to date.
+	We disable warnings to avoid all deprecation warnings during the transition phase."
+	areWarningsEnabled := Deprecation raiseWarning.
+	[
+		Deprecation raiseWarning: false.
+		importer run ] ensure: [
+		Deprecation raiseWarning: areWarningsEnabled ].
+
+	model updateCache.
+	^ model
+]
+
 { #category : 'import-export' }
 MooseModel class >> importFromMSEStream: aStream [
 	^ self new
@@ -507,6 +543,22 @@ MooseModel >> importFromJSON [
 		self importFromJSONStream: stream.
 		self name: file basenameWithoutExtension.
 		stream close ]
+]
+
+{ #category : 'import-export' }
+MooseModel >> importFromJSONSeparetedStream: aStream [
+	"Benchmarks
+	Time millisecondsToRun: [ MooseModel new importFromJSONStream: (StandardFileStream readOnlyFileNamed: 'network3.json') ].
+	Time millisecondsToRun: [ MooseModel new importFromJSONStream: (StandardFileStream readOnlyFileNamed: 'moose.json') ]. 178163 simon.denier 9/11/2009 12:29
+	 23678 -> simon.denier 9/11/2009 11:36 - initial run
+ 	 21551 -> simon.denier 9/11/2009 12:18 - IdentityHashSet (reverted)
+	 17560 -> simon_denier 9/21/2009 22:34 - removing metrics from MSE
+	"
+
+	^ self
+		  importFrom:
+		  (self class importFromJSONSepareted: aStream withMetamodel: self metamodel)
+		  named: (aStream localName withoutSuffix: '.json')
 ]
 
 { #category : 'import-export' }
