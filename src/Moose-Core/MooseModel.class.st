@@ -476,6 +476,14 @@ MooseModel >> exportMetamodelToMSEStream: aStream [
 ]
 
 { #category : 'import-export' }
+MooseModel >> exportSeparetedWithMetamodelUsingPrinter: aPrinter [
+
+	(FMModel withMetamodel: self metamodel)
+		addAll: self entities;
+		exportSeparetedWithPrinter: aPrinter
+]
+
+{ #category : 'import-export' }
 MooseModel >> exportTo: aStream [
 
 	self
@@ -486,6 +494,13 @@ MooseModel >> exportTo: aStream [
 		-> '`@model exportToMSEStream: `@stream'.
 
 	self exportToMSEStream: aStream
+]
+
+{ #category : 'import-export' }
+MooseModel >> exportToJSONSeparetedStream: aStream [
+
+	self detectEncodingOfAllFileAnchors.
+	self exportSeparetedWithMetamodelUsingPrinter: (FMJSONPrinter on: aStream)
 ]
 
 { #category : 'import-export' }
