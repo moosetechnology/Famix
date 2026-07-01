@@ -224,7 +224,7 @@ MooseModel class >> importFromJSON: aStream withMetamodel: aMetamodel filteredBy
 			  FMImporterFilter on: importer filtering: famixElementNames ]
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'import-export' }
 MooseModel class >> importFromJSONSepareted: aStream withMetamodel: aMetamodel [
 	"Here we build with the default importer"
 
@@ -234,17 +234,17 @@ MooseModel class >> importFromJSONSepareted: aStream withMetamodel: aMetamodel [
 		  customizingImporterWith: [ :importer | importer ]
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'import-export' }
 MooseModel class >> importFromJSONSepareted: aStream withMetamodel: aMetamodel customizingImporterWith: aBlock [
 	"I import a MSE with its metamodel and return a FMModel from it. It is possible to customize the importer via a block"
 
 	| model importer areWarningsEnabled |
-	
 	model := FMModel withMetamodel: aMetamodel.
 	importer := aBlock value:
 		            ((FMImporter model: model)
 			             autorizeDandlingReferencesAtEnd
-			             parser: FMJSONSeparatedRelationsParser;
+			             "parser: FMJSONSeparatedRelationsParse;"
+							parser: FMJSONSeparatedRelationsDirectParser;
 			             stream: aStream;
 			             yourself).
 
