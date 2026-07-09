@@ -500,7 +500,8 @@ MooseModel >> exportTo: aStream [
 MooseModel >> exportToJSONSeparetedStream: aStream [
 
 	self detectEncodingOfAllFileAnchors.
-	self exportSeparetedWithMetamodelUsingPrinter: (FMJSONPrinter on: aStream)
+	self exportSeparetedWithMetamodelUsingPrinter:
+		(FMJSONSeparatedCompactPrinter on: aStream)
 ]
 
 { #category : 'import-export' }
