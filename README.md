@@ -30,7 +30,7 @@ Note you can replace the #master by another branch such as #development or a tag
 
 ## Documentation
 
-Check out the [Moose wiki](https://modularmoose.org/moose-wiki/).
+Check out the [Moose wiki](https://modularmoose.org/beginners/install-moose/).
 
 ## Version management 
 
