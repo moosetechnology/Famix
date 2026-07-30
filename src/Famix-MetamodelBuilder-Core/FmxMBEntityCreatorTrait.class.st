@@ -10,43 +10,11 @@ Class {
 	#tag : 'Implementation'
 }
 
-{ #category : 'generating' }
-FmxMBEntityCreatorTrait >> generateEntityCreationMethodFor: aClass [
+{ #category : 'visitor' }
+FmxMBEntityCreatorTrait >> acceptVisitor: aVisitor [
 
-	self builder environment
-		compile: ('new{1}
-
-	<generated>
-	^ self add: {2} new' format: { 
-					 aClass name.
-					 aClass fullName })
-		in: self realClass
-		classified: 'entity creation'
-]
-
-{ #category : 'generating' }
-FmxMBEntityCreatorTrait >> generateEntityCreationMethods [
-
-	self builder classes
-		reject: [ :aClass | aClass isAbstractClass or: [ aClass isModelClass or: [ aClass isMetamodelClassGroup ] ] ]
-		thenDo: [ :class |
-				self generateEntityCreationMethodFor: class.
-				(class allTransitiveTraitsIncludingClassGeneralization anySatisfy: [ :trait | trait prefix = #Famix and: [ trait name = #TNamedEntity ] ]) ifTrue: [
-					self generateNamedEntityCreationMethodFor: class ] ]
-]
-
-{ #category : 'generating' }
-FmxMBEntityCreatorTrait >> generateNamedEntityCreationMethodFor: aClass [
-
-	^ self builder environment
-		  compile: ('new{1}Named: aName
-
-	<generated>
-	^ self add: ({2} named: aName)' format: { 
-					   aClass name.
-					   aClass fullName })
-		  in: self realClass
-		  classified: 'entity creation'
+	<ignoreForCoverage>
+	^ aVisitor visitEntityCreator: self
 ]
 
 { #category : 'initialization' }

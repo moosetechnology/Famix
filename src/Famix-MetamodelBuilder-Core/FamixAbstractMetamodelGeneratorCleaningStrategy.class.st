@@ -9,9 +9,9 @@ Cleaning strategies are used by a MM generator to know how to regenerate a MM.
 Class {
 	#name : 'FamixAbstractMetamodelGeneratorCleaningStrategy',
 	#superclass : 'Object',
-	#category : 'Famix-MetamodelBuilder-Core-Cleaning',
+	#category : 'Famix-MetamodelBuilder-Core-Basic',
 	#package : 'Famix-MetamodelBuilder-Core',
-	#tag : 'Cleaning'
+	#tag : 'Basic'
 }
 
 { #category : 'testing' }

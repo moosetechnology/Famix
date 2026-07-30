@@ -26,14 +26,6 @@ FamixTDefinedInModule classSide >> annotation [
 	<FMClass: #TDefinedInModule super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixTDefinedInModule >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTDefinedInModule: self
 ]
 
 { #category : 'accessing' }
@@ -51,11 +43,4 @@ FamixTDefinedInModule >> parentModule: anObject [
 
 	<generated>
 	parentModule := anObject
-]
-
-{ #category : 'navigation' }
-FamixTDefinedInModule >> parentModuleGroup [
-	<generated>
-	<navigation: 'ParentModule'>
-	^ MooseSpecializedGroup with: self parentModule
 ]

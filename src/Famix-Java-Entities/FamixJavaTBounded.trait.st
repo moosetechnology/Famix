@@ -30,14 +30,6 @@ FamixJavaTBounded classSide >> annotation [
 	<FMClass: #TBounded super: #Object>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixJavaTBounded >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaTBounded: self
 ]
 
 { #category : 'accessing' }

@@ -32,5 +32,4 @@ FamixTest8Bacteria class >> annotation [
 	<FMClass: #Bacteria super: #FamixTest8LivingBeing>
 	<package: #'Famix-Test8-Entities'>
 	<generated>
-	^ self
 ]

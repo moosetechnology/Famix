@@ -1,8 +1,8 @@
 Class {
 	#name : 'FamixTestComposed3Model',
 	#superclass : 'MooseModel',
-	#traits : 'FamixTestComposed1TEntityCreator + FamixTestComposed2TEntityCreator + FamixTestComposedTEntityCreator',
-	#classTraits : 'FamixTestComposed1TEntityCreator classTrait + FamixTestComposed2TEntityCreator classTrait + FamixTestComposedTEntityCreator classTrait',
+	#traits : 'FamixTestComposed1TEntityCreator + FamixTestComposed2TEntityCreator + FamixTestComposed3TEntityCreator + FamixTestComposedComposedTEntityCreator + FamixTestComposedTEntityCreator',
+	#classTraits : 'FamixTestComposed1TEntityCreator classTrait + FamixTestComposed2TEntityCreator classTrait + FamixTestComposed3TEntityCreator classTrait + FamixTestComposedComposedTEntityCreator classTrait + FamixTestComposedTEntityCreator classTrait',
 	#category : 'Famix-TestComposed3Metamodel-Entities-Model',
 	#package : 'Famix-TestComposed3Metamodel-Entities',
 	#tag : 'Model'
@@ -16,7 +16,8 @@ FamixTestComposed3Model class >> allSubmetamodelsPackagesNames [
 
 { #category : 'meta' }
 FamixTestComposed3Model class >> annotation [
-	<FMClass: #FamixTestComposed3Model super: #MooseModel>
+
+	<FMClass: #Model super: #MooseModel>
 	<package: #'Famix-TestComposed3Metamodel-Entities'>
 	<generated>
 ]

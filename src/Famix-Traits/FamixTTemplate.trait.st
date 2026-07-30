@@ -32,14 +32,6 @@ FamixTTemplate classSide >> annotation [
 	<FMClass: #TTemplate super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixTTemplate >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTTemplate: self
 ]
 
 { #category : 'accessing' }
@@ -63,13 +55,6 @@ FamixTTemplate >> templateOwner: anObject [
 
 	<generated>
 	templateOwner := anObject
-]
-
-{ #category : 'navigation' }
-FamixTTemplate >> templateOwnerGroup [
-	<generated>
-	<navigation: 'TemplateOwner'>
-	^ MooseSpecializedGroup with: self templateOwner
 ]
 
 { #category : 'accessing' }

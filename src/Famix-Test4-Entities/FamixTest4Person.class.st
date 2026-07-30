@@ -39,7 +39,6 @@ FamixTest4Person class >> annotation [
 	<package: #'Famix-Test4-Entities'>
 	<generated>
 	<abstract>
-	^ self
 ]
 
 { #category : 'testing' }
@@ -90,13 +89,6 @@ FamixTest4Person >> books: anObject [
 
 	<generated>
 	books value: anObject
-]
-
-{ #category : 'navigation' }
-FamixTest4Person >> booksGroup [
-	<generated>
-	<navigation: 'Books'>
-	^ MooseSpecializedGroup withAll: self books asSet
 ]
 
 { #category : 'accessing' }

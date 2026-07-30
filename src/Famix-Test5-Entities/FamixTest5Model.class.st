@@ -16,7 +16,8 @@ FamixTest5Model class >> allSubmetamodelsPackagesNames [
 
 { #category : 'meta' }
 FamixTest5Model class >> annotation [
-	<FMClass: #FamixTest5Model super: #MooseModel>
+
+	<FMClass: #Model super: #MooseModel>
 	<package: #'Famix-Test5-Entities'>
 	<generated>
 ]

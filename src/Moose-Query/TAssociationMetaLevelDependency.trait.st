@@ -16,7 +16,6 @@ TAssociationMetaLevelDependency classSide >> annotation [
 	<FMClass: #TAssociationMetaLevelDependency super: #Object>
 	<package: #'Moose-Query'>
 	<generated>
-	^ self
 ]
 
 { #category : 'accessing' }

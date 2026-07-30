@@ -23,7 +23,6 @@ FamixTNamedEntity classSide >> annotation [
 	<FMClass: #TNamedEntity super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : 'instance creation' }
@@ -39,13 +38,6 @@ FamixTNamedEntity classSide >> named: aString model: aMooseModel [
 		mooseModel: aMooseModel;
 		name: aString;
 		yourself
-]
-
-{ #category : 'visitor' }
-FamixTNamedEntity >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTNamedEntity: self
 ]
 
 { #category : 'printing' }

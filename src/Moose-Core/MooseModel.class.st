@@ -31,6 +31,13 @@ MooseModel class >> annotation [
 ]
 
 { #category : 'testing' }
+MooseModel class >> canBeGenerated [
+	"Models are generated."
+
+	^ true
+]
+
+{ #category : 'testing' }
 MooseModel class >> canBeImportedFromFile [
 
 	^ false
@@ -672,6 +679,18 @@ MooseModel >> localMooseModel [
 ]
 
 { #category : 'accessing' }
+MooseModel >> metadescription [
+
+	^ self metadescriptionFor: self class
+]
+
+{ #category : 'accessing' }
+MooseModel >> metadescriptionFor: class [
+
+	^ self metamodel fmTypeOf: class instanceSide
+]
+
+{ #category : 'accessing' }
 MooseModel >> metamodel [
 
 	^ metamodel ifNil: [ MooseModel metamodel ]
@@ -680,17 +699,6 @@ MooseModel >> metamodel [
 { #category : 'accessing' }
 MooseModel >> metamodel: anObject [
 	metamodel := anObject
-]
-
-{ #category : 'accessing' }
-MooseModel >> mooseDescription [
-	^ self mooseDescriptionFor: self class
-]
-
-{ #category : 'accessing' }
-MooseModel >> mooseDescriptionFor: class [
-
-	^ self metamodel fmTypeOf: class instanceSide
 ]
 
 { #category : 'accessing' }

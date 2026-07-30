@@ -38,12 +38,4 @@ FamixJavaEntityTyping class >> annotation [
 	<FMClass: #EntityTyping super: #FamixJavaEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixJavaEntityTyping >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaEntityTyping: self
 ]

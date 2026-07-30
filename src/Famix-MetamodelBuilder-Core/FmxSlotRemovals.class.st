@@ -4,6 +4,7 @@ Description
 
 I represent a the removal of slots from a class when updating an already generated metamodel.
 
+The slot removal is also managed in `FmxBehavioralAddition`, but if we do not do it before, we might end up with a duplicated slot in a hierarchy. So we first remove slots to remove and then we update the hierarchy.
 "
 Class {
 	#name : 'FmxSlotRemovals',
@@ -11,9 +12,9 @@ Class {
 	#instVars : [
 		'slots'
 	],
-	#category : 'Famix-MetamodelBuilder-Core-Changes',
+	#category : 'Famix-MetamodelBuilder-Core-Generation',
 	#package : 'Famix-MetamodelBuilder-Core',
-	#tag : 'Changes'
+	#tag : 'Generation'
 }
 
 { #category : 'accessing' }

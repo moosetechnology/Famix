@@ -26,5 +26,4 @@ FamixTest3ParametricClass class >> annotation [
 	<FMClass: #ParametricClass super: #FamixTest3Class>
 	<package: #'Famix-Test3-Entities'>
 	<generated>
-	^ self
 ]

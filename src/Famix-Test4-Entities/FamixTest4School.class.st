@@ -33,7 +33,6 @@ FamixTest4School class >> annotation [
 	<FMClass: #School super: #FamixTest4Entity>
 	<package: #'Famix-Test4-Entities'>
 	<generated>
-	^ self
 ]
 
 { #category : 'adding' }
@@ -70,13 +69,6 @@ FamixTest4School >> principal: anObject [
 	principal := anObject
 ]
 
-{ #category : 'navigation' }
-FamixTest4School >> principalGroup [
-	<generated>
-	<navigation: 'Principal'>
-	^ MooseSpecializedGroup with: self principal
-]
-
 { #category : 'accessing' }
 FamixTest4School >> rooms [
 	"Relation named: #rooms type: #FamixTest4Room opposite: #school"
@@ -91,13 +83,6 @@ FamixTest4School >> rooms: anObject [
 
 	<generated>
 	rooms value: anObject
-]
-
-{ #category : 'navigation' }
-FamixTest4School >> roomsGroup [
-	<generated>
-	<navigation: 'Rooms'>
-	^ MooseSpecializedGroup withAll: self rooms asSet
 ]
 
 { #category : 'accessing' }
@@ -116,13 +101,6 @@ FamixTest4School >> students: anObject [
 	students value: anObject
 ]
 
-{ #category : 'navigation' }
-FamixTest4School >> studentsGroup [
-	<generated>
-	<navigation: 'Students'>
-	^ MooseSpecializedGroup withAll: self students asSet
-]
-
 { #category : 'accessing' }
 FamixTest4School >> teachers [
 	"Relation named: #teachers type: #FamixTest4Teacher opposite: #school"
@@ -137,11 +115,4 @@ FamixTest4School >> teachers: anObject [
 
 	<generated>
 	teachers value: anObject
-]
-
-{ #category : 'navigation' }
-FamixTest4School >> teachersGroup [
-	<generated>
-	<navigation: 'Teachers'>
-	^ MooseSpecializedGroup withAll: self teachers asSet
 ]

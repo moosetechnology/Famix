@@ -38,7 +38,6 @@ FamixTNamespace classSide >> annotation [
 	<FMClass: #TNamespace super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : 'groups' }
@@ -46,13 +45,6 @@ FamixTNamespace classSide >> annotationFamixNamespaceGroup [
 	<generated>
 	<mooseGroup>
 	^ FamixNamespaceGroup
-]
-
-{ #category : 'visitor' }
-FamixTNamespace >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTNamespace: self
 ]
 
 { #category : 'testing' }

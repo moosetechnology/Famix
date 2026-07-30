@@ -59,5 +59,4 @@ FamixTest3Method class >> annotation [
 	<FMClass: #Method super: #FamixTest3NamedEntity>
 	<package: #'Famix-Test3-Entities'>
 	<generated>
-	^ self
 ]

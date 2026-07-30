@@ -33,13 +33,11 @@ MooseModelGenerator >> defineClasses [
 	super defineClasses.
 
 	obj := builder newClassNamed: #Object.
-	obj classGeneralization: Object.
 	abstractGroup := builder newClassNamed: #AbstractGroup.
 	group := builder newClassNamed: #Group.
 	specializedGroup := builder newClassNamed: #SpecializedGroup.
 	model := builder newClassNamed: #Model.
 	entity := builder newClassNamed: #Entity
-	
 ]
 
 { #category : 'definition' }
@@ -54,4 +52,12 @@ MooseModelGenerator >> defineHierarchy [
 	entity --|> obj
 
 	
+]
+
+{ #category : 'definition' }
+MooseModelGenerator >> newBuilder [
+
+	^ super newBuilder
+		  withoutModel;
+		  yourself
 ]

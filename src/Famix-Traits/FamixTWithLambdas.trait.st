@@ -28,14 +28,6 @@ FamixTWithLambdas classSide >> annotation [
 	<FMClass: #TWithLambdas super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixTWithLambdas >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTWithLambdas: self
 ]
 
 { #category : 'adding' }

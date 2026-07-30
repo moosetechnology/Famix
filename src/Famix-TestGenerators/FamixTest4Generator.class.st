@@ -34,14 +34,6 @@ FamixTest4Generator class >> prefix [
 ]
 
 { #category : 'definition' }
-FamixTest4Generator >> adoptBuilder: aBuilder [
-
-	super adoptBuilder: aBuilder.
-
-	aBuilder configuration navigationForNonContainers: true.
-]
-
-{ #category : 'definition' }
 FamixTest4Generator >> defineClasses [
 
 	super defineClasses.
@@ -94,6 +86,5 @@ FamixTest4Generator >> defineRelations [
 	student *-<> school.
 	teacher *-<> school.
 	student *-* teacher.
-	(school <>-* room) withNavigation.
-	
+	school <>-* room
 ]

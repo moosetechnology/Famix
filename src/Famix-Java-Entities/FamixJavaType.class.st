@@ -51,14 +51,6 @@ FamixJavaType class >> annotation [
 	<FMClass: #Type super: #FamixJavaContainerEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixJavaType >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaType: self
 ]
 
 { #category : 'Famix-Extensions' }

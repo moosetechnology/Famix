@@ -52,14 +52,6 @@ FamixTImplicitVariable classSide >> annotation [
 	<FMClass: #TImplicitVariable super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixTImplicitVariable >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTImplicitVariable: self
 ]
 
 { #category : 'accessing' }
@@ -114,11 +106,4 @@ FamixTImplicitVariable >> parentBehaviouralEntity: anObject [
 	self resetMooseName.
 	
 
-]
-
-{ #category : 'navigation' }
-FamixTImplicitVariable >> parentBehaviouralEntityGroup [
-	<generated>
-	<navigation: 'ParentBehaviouralEntity'>
-	^ MooseSpecializedGroup with: self parentBehaviouralEntity
 ]

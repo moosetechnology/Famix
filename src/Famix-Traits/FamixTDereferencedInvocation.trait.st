@@ -54,14 +54,6 @@ FamixTDereferencedInvocation classSide >> annotation [
 	<FMClass: #TDereferencedInvocation super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixTDereferencedInvocation >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTDereferencedInvocation: self
 ]
 
 { #category : 'accessing' }

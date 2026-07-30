@@ -27,12 +27,4 @@ FamixJavaIndexedFileAnchor class >> annotation [
 	<FMClass: #IndexedFileAnchor super: #FamixJavaSourceAnchor>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixJavaIndexedFileAnchor >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaIndexedFileAnchor: self
 ]

@@ -60,14 +60,6 @@ FamixTLambda classSide >> annotation [
 	<FMClass: #TLambda super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixTLambda >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTLambda: self
 ]
 
 { #category : 'accessing' }
@@ -85,11 +77,4 @@ FamixTLambda >> lambdaContainer: anObject [
 
 	<generated>
 	lambdaContainer := anObject
-]
-
-{ #category : 'navigation' }
-FamixTLambda >> lambdaContainerGroup [
-	<generated>
-	<navigation: 'LambdaContainer'>
-	^ MooseSpecializedGroup with: self lambdaContainer
 ]

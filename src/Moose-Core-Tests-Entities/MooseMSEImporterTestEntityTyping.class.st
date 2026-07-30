@@ -38,5 +38,4 @@ MooseMSEImporterTestEntityTyping class >> annotation [
 	<FMClass: #EntityTyping super: #MooseMSEImporterTestEntity>
 	<package: #'Moose-Core-Tests-Entities'>
 	<generated>
-	^ self
 ]

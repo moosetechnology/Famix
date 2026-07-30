@@ -37,7 +37,6 @@ FamixTCohesionCouplingMetrics classSide >> annotation [
 	<FMClass: #TCohesionCouplingMetrics super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : 'metrics' }
@@ -52,13 +51,6 @@ FamixTCohesionCouplingMetrics >> abstractness [
 	(nsClasses size == 0) ifTrue: [^nil].
 	
 	^ (nsClasses select: [:c | c isAbstract]) size / (nsClasses size)
-]
-
-{ #category : 'visitor' }
-FamixTCohesionCouplingMetrics >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTCohesionCouplingMetrics: self
 ]
 
 { #category : 'metrics' }

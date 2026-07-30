@@ -27,7 +27,6 @@ FamixJavaVariable class >> annotation [
 	<package: #'Famix-Java-Entities'>
 	<generated>
 	<abstract>
-	^ self
 ]
 
 { #category : 'testing' }
@@ -35,11 +34,4 @@ FamixJavaVariable class >> isAbstract [
 
 	<generated>
 	^ self == FamixJavaVariable
-]
-
-{ #category : 'visitor' }
-FamixJavaVariable >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaVariable: self
 ]

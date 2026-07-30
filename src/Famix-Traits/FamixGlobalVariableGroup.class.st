@@ -6,22 +6,6 @@ Class {
 	#tag : 'Groups'
 }
 
-{ #category : 'meta' }
-FamixGlobalVariableGroup class >> annotation [
-
-	<FMClass: #GlobalVariableGroup super: #MooseSpecializedGroup>
-	<package: #'Famix-Traits'>
-	<generated>
-	^ self
-]
-
-{ #category : 'meta' }
-FamixGlobalVariableGroup class >> metamodel [
-
-	<generated>
-	^ FamixModel metamodel
-]
-
 { #category : 'accessing' }
 FamixGlobalVariableGroup >> variableNamed: aVarName [
 	"Maybe mooseName should be used instead"

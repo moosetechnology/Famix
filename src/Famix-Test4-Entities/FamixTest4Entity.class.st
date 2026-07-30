@@ -25,7 +25,6 @@ FamixTest4Entity class >> annotation [
 	<package: #'Famix-Test4-Entities'>
 	<generated>
 	<abstract>
-	^ self
 ]
 
 { #category : 'testing' }

@@ -26,14 +26,6 @@ FamixTWithCompilationUnits classSide >> annotation [
 	<FMClass: #TWithCompilationUnits super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixTWithCompilationUnits >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTWithCompilationUnits: self
 ]
 
 { #category : 'accessing' }

@@ -1,64 +1,168 @@
 "
-FamixMetamodelBuilderRelation
+Represents a property referencing another entity
 "
 Class {
 	#name : 'FmxMBRelation',
-	#superclass : 'Object',
+	#superclass : 'FmxMBProperty',
+	#traits : 'FmxMBRelationSideTrait',
+	#classTraits : 'FmxMBRelationSideTrait classTrait',
 	#instVars : [
-		'side',
-		'oppositeSide',
-		'builder'
+		'cardinality',
+		'trait',
+		'container',
+		'relatedClass',
+		'derived',
+		'source',
+		'target',
+		'oppositeSide'
 	],
 	#category : 'Famix-MetamodelBuilder-Core-Implementation',
 	#package : 'Famix-MetamodelBuilder-Core',
 	#tag : 'Implementation'
 }
 
-{ #category : 'accessing' }
-FmxMBRelation >> builder [
-	^ builder
+{ #category : 'visitor' }
+FmxMBRelation >> acceptVisitor: aVisitor [
+
+	<ignoreForCoverage>
+	^ aVisitor visitRelation: self.
+]
+
+{ #category : 'converting' }
+FmxMBRelation >> asRelationNamed: aPropertyName [
+
+	"ignore the proposed name"
+	^ self 
 ]
 
 { #category : 'accessing' }
-FmxMBRelation >> builder: anObject [
-	builder := anObject
+FmxMBRelation >> cardinality [
+	^ cardinality
 ]
 
 { #category : 'accessing' }
-FmxMBRelation >> cardinalityString [
-	^ String
-		streamContents: [ :s | 
-			self to isMany ifTrue: [ s nextPutAll: '*' ] ifFalse: [ s nextPutAll: '1' ].
-			s nextPutAll: '..'.
-			self from isMany ifTrue: [ s nextPutAll: '*' ] ifFalse: [ s nextPutAll: '1' ] ]
+FmxMBRelation >> cardinality: anObject [
+	cardinality := anObject
+]
+
+{ #category : 'properties' }
+FmxMBRelation >> container [
+
+	container := true
 ]
 
 { #category : 'accessing' }
-FmxMBRelation >> from [
+FmxMBRelation >> container: anObject [
+	container := anObject
+]
 
-	^ side 
+{ #category : 'properties' }
+FmxMBRelation >> derived [
+	derived := true
+]
+
+{ #category : 'properties' }
+FmxMBRelation >> derived: anObject [
+	derived := anObject
+]
+
+{ #category : 'initialization' }
+FmxMBRelation >> initialize [
+	super initialize.
+
+	cardinality := #one.
+	container := false.
+	derived := false.
+	target := false.
+	source := false
+]
+
+{ #category : 'properties' }
+FmxMBRelation >> isContainer [
+
+	^ container
+]
+
+{ #category : 'properties' }
+FmxMBRelation >> isDerived [
+
+	^ derived
+]
+
+{ #category : 'testing' }
+FmxMBRelation >> isMany [
+
+	^ self cardinality = #many
+]
+
+{ #category : 'testing' }
+FmxMBRelation >> isOne [
+
+	^ self cardinality = #one
+]
+
+{ #category : 'testing' }
+FmxMBRelation >> isRelation [
+	^ true
+]
+
+{ #category : 'testing' }
+FmxMBRelation >> isRemote [
+
+	^ self relatedClass isRemote
+]
+
+{ #category : 'properties' }
+FmxMBRelation >> isSource [
+
+	^ source
+]
+
+{ #category : 'properties' }
+FmxMBRelation >> isTarget [
+
+	^ target
+]
+
+{ #category : 'converting' }
+FmxMBRelation >> makeRemote [
+
+	self isRemote: true
 ]
 
 { #category : 'accessing' }
-FmxMBRelation >> from: aBlock [
+FmxMBRelation >> many [
 
-	side := (FmxMBRelationSide new
-		relation: self;
-		builder: self builder;
-		yourself).
-	aBlock cull: side.
+	cardinality := #many
+]
+
+{ #category : 'properties' }
+FmxMBRelation >> noContainer [
+	
+	container := false
+]
+
+{ #category : 'properties' }
+FmxMBRelation >> notDerived [
+	
+	derived := false
 ]
 
 { #category : 'accessing' }
-FmxMBRelation >> left [
+FmxMBRelation >> one [
 
-	^ side 
+	cardinality := #one
 ]
 
 { #category : 'accessing' }
-FmxMBRelation >> oppositeRelation [
+FmxMBRelation >> oppositeClass [
 
-	^ self copy swapSides
+	^ oppositeSide relatedEntity
+]
+
+{ #category : 'accessing' }
+FmxMBRelation >> oppositeName [
+	^ self oppositeSide name asSymbol
 ]
 
 { #category : 'accessing' }
@@ -68,72 +172,153 @@ FmxMBRelation >> oppositeSide [
 
 { #category : 'accessing' }
 FmxMBRelation >> oppositeSide: anObject [
-	oppositeSide := anObject
+	"We keep an opposite relation bidirectional"
+
+	oppositeSide := anObject.
+	anObject oppositeSide = self ifFalse: [ anObject oppositeSide: self ]
 ]
 
 { #category : 'accessing' }
-FmxMBRelation >> right [
+FmxMBRelation >> oppositeType [
 
-	^ oppositeSide 
+	^ (self oppositeClass prefix , self oppositeSide relatedEntityName) asSymbol
+]
+
+{ #category : 'private' }
+FmxMBRelation >> pluralPropertyName [
+
+	^ self propertyName
+]
+
+{ #category : 'printing' }
+FmxMBRelation >> producesSlot [
+	"I produce a slot if one of the side is remote. Else we will use the attribute mecanism"
+
+	self relatedClass isRemote ifTrue: [ ^ false ].
+
+	^ self oppositeClass isRemote not
+]
+
+{ #category : 'private' }
+FmxMBRelation >> propertyName [
+
+	^ self relatedClass propertyName
+]
+
+{ #category : 'accessing' }
+FmxMBRelation >> relatedClass [
+	^ relatedClass
+]
+
+{ #category : 'accessing' }
+FmxMBRelation >> relatedClass: anObject [
+	relatedClass := anObject
+]
+
+{ #category : 'accessing' }
+FmxMBRelation >> relatedEntity [
+
+	^ trait ifNil: [ relatedClass ]
+]
+
+{ #category : 'accessing' }
+FmxMBRelation >> relatedEntityName [
+
+	^ self relatedEntity name
+]
+
+{ #category : 'accessing' }
+FmxMBRelation >> remoteBuilderDo: aBlock [
+
+	self relatedEntity additionalProperties at: #remoteBuilder ifPresent: aBlock
 ]
 
 { #category : 'accessing' }
 FmxMBRelation >> shortCardinalityString [
-	^ self from isMany ifTrue: [ '*' ] ifFalse: [ '' ]
-]
 
-{ #category : 'accessing' }
-FmxMBRelation >> side [
-
-	^ side
-]
-
-{ #category : 'accessing' }
-FmxMBRelation >> side: anObject [
-	side := anObject
+	^ self isMany
+		  ifTrue: [ '*' ]
+		  ifFalse: [ '' ]
 ]
 
 { #category : 'accessing' }
 FmxMBRelation >> sides [
 
-	^ { side. oppositeSide }
+	^ {
+		  self.
+		  self oppositeSide }
+]
+
+{ #category : 'name conversion' }
+FmxMBRelation >> singularPropertyName [
+
+	| normalizedName uncapitalized aName |
+	
+	aName := self propertyName.
+	
+	normalizedName := ((aName size >= 2) 
+		and: [ ((aName first:2) allSatisfy: #isUppercase)
+		and: [ aName beginsWith: 'T' ] ])
+			ifTrue: [ aName withoutPrefix: 'T' ]
+			ifFalse: [ aName ].	
+	
+	uncapitalized := normalizedName uncapitalized.
+	
+	^ uncapitalized
+
+]
+
+{ #category : 'generating' }
+FmxMBRelation >> slotExpression [
+
+	^ (cardinality = #one
+		   ifTrue: [ 'FMOne' ]
+		   ifFalse: [ 'FMMany' ]) , ' type: #' , self oppositeType , ' opposite: #' , self oppositeName
+]
+
+{ #category : 'properties' }
+FmxMBRelation >> source [
+
+	source := true.
+]
+
+{ #category : 'properties' }
+FmxMBRelation >> source: aBoolean [
+	source := aBoolean
+]
+
+{ #category : 'properties' }
+FmxMBRelation >> target [
+
+	target := true.
+]
+
+{ #category : 'properties' }
+FmxMBRelation >> target: anObject [
+	target := anObject
 ]
 
 { #category : 'accessing' }
-FmxMBRelation >> swapSides [
-
-	| temp |
-	temp := oppositeSide.
-	oppositeSide := side.
-	side := temp
+FmxMBRelation >> trait [
+	^ trait
 ]
 
 { #category : 'accessing' }
-FmxMBRelation >> to [
-
-	^ oppositeSide 
+FmxMBRelation >> trait: anObject [
+	self relatedEntity ifNotNil: [ :aRelatedEntity | aRelatedEntity removeRelation: self ].
+	trait := anObject.
+	trait addRelation: self
 ]
 
 { #category : 'accessing' }
-FmxMBRelation >> to: aBlock [
+FmxMBRelation >> type [
 
-	oppositeSide := (FmxMBRelationSide new
-		relation: self;
-		builder: self builder;
-		yourself).
-	aBlock cull: oppositeSide.
+	^ (self relatedClass prefix , self relatedEntityName) asSymbol
 ]
 
-{ #category : 'accessing' }
-FmxMBRelation >> withNavigation [
+{ #category : 'generating' }
+FmxMBRelation >> validate [
+	"Nothing to validate here"
 
-	self sides do: [ :aSide |
-		aSide withNavigationOf: self ]
-]
-
-{ #category : 'accessing' }
-FmxMBRelation >> withoutNavigation [
-
-	self sides do: [ :aSide |
-		aSide withoutNavigation ]
+	
 ]

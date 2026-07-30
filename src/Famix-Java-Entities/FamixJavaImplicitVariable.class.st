@@ -48,14 +48,6 @@ FamixJavaImplicitVariable class >> annotation [
 	<FMClass: #ImplicitVariable super: #FamixJavaVariable>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixJavaImplicitVariable >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaImplicitVariable: self
 ]
 
 { #category : 'testing' }

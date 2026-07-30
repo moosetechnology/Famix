@@ -6,22 +6,6 @@ Class {
 	#tag : 'Groups'
 }
 
-{ #category : 'meta' }
-FamixPackageGroup class >> annotation [
-
-	<FMClass: #PackageGroup super: #MooseSpecializedGroup>
-	<package: #'Famix-Traits'>
-	<generated>
-	^ self
-]
-
-{ #category : 'meta' }
-FamixPackageGroup class >> metamodel [
-
-	<generated>
-	^ FamixModel metamodel
-]
-
 { #category : 'navigation' }
 FamixPackageGroup >> allClasses [
 	^ self flatCollect: [ :p | p localClasses ]

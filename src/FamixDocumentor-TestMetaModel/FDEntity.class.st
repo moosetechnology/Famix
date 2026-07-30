@@ -13,7 +13,6 @@ FDEntity class >> annotation [
 	<package: #'FamixDocumentor-TestMetaModel'>
 	<generated>
 	<abstract>
-	^ self
 ]
 
 { #category : 'testing' }

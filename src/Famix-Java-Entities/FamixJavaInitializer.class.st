@@ -24,14 +24,6 @@ FamixJavaInitializer class >> annotation [
 	<FMClass: #Initializer super: #FamixJavaMethod>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixJavaInitializer >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaInitializer: self
 ]
 
 { #category : 'trait protocol conflict' }

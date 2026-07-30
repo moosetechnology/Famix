@@ -30,7 +30,6 @@ FamixTIndexedFileNavigation classSide >> annotation [
 	<FMClass: #TIndexedFileNavigation super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : 'instance creation' }
@@ -50,13 +49,6 @@ FamixTIndexedFileNavigation classSide >> fileName: aString startPos: anInteger e
 		startPos: anInteger;
 		endPos: anotherInteger;
 		yourself
-]
-
-{ #category : 'visitor' }
-FamixTIndexedFileNavigation >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTIndexedFileNavigation: self
 ]
 
 { #category : 'matching' }

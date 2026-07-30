@@ -36,14 +36,6 @@ FamixJavaTCanBeSynchronized classSide >> annotation [
 	<FMClass: #TCanBeSynchronized super: #Object>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixJavaTCanBeSynchronized >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaTCanBeSynchronized: self
 ]
 
 { #category : 'accessing' }

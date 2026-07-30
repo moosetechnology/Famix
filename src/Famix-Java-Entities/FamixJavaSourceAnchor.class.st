@@ -27,7 +27,6 @@ FamixJavaSourceAnchor class >> annotation [
 	<package: #'Famix-Java-Entities'>
 	<generated>
 	<abstract>
-	^ self
 ]
 
 { #category : 'testing' }
@@ -35,11 +34,4 @@ FamixJavaSourceAnchor class >> isAbstract [
 
 	<generated>
 	^ self == FamixJavaSourceAnchor
-]
-
-{ #category : 'visitor' }
-FamixJavaSourceAnchor >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaSourceAnchor: self
 ]

@@ -26,12 +26,4 @@ FamixJavaParametricInvocation class >> annotation [
 	<FMClass: #ParametricInvocation super: #FamixJavaInvocation>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixJavaParametricInvocation >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaParametricInvocation: self
 ]

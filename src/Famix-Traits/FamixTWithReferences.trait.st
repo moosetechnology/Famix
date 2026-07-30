@@ -26,14 +26,6 @@ FamixTWithReferences classSide >> annotation [
 	<FMClass: #TWithReferences super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixTWithReferences >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTWithReferences: self
 ]
 
 { #category : 'accessing' }

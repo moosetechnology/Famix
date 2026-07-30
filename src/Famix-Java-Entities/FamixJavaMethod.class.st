@@ -70,14 +70,6 @@ FamixJavaMethod class >> annotation [
 	<FMClass: #Method super: #FamixJavaContainerEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixJavaMethod >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaMethod: self
 ]
 
 { #category : 'Famix-Extensions' }

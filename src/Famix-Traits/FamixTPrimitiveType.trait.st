@@ -43,14 +43,6 @@ FamixTPrimitiveType classSide >> annotation [
 	<FMClass: #TPrimitiveType super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixTPrimitiveType >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTPrimitiveType: self
 ]
 
 { #category : 'testing' }

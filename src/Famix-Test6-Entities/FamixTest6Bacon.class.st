@@ -28,7 +28,6 @@ FamixTest6Bacon class >> annotation [
 	<FMClass: #Bacon super: #FamixTest6Entity>
 	<package: #'Famix-Test6-Entities'>
 	<generated>
-	^ self
 ]
 
 { #category : 'accessing' }

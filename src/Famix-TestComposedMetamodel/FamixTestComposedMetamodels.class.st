@@ -57,18 +57,6 @@ FamixTestComposedMetamodels >> setUp [
 ]
 
 { #category : 'tests' }
-FamixTestComposedMetamodels >> testGenerationOfComposedMetamodel [
-	| aGenerator env |
-	aGenerator := FamixTestComposedGenerator new beForTesting generate.
-	env := aGenerator builder environment ringEnvironment.
-
-	self
-		assert:
-			(((env ask behaviorNamed: #FamixTestComposedCustomEntity1) methodNamed: #customEntity1) sourceCode
-				includesSubstring: '<FMProperty: #customEntity1 type: #FamixTestComposed1CustomEntity1 opposite: #customEntity1>')
-]
-
-{ #category : 'tests' }
 FamixTestComposedMetamodels >> testImplicitManyToManyRemote [
 
 	c4 customEntities4: {c14}.
@@ -126,7 +114,7 @@ FamixTestComposedMetamodels >> testMultivaluedRelationsAreSeenAsMultivalued [
 	"Regression test. If we add a multivalued relation to a remote entity, it was not considered as multivalued in Fame because we neither had a FMMany slot since it's remote, nor we had a multivalued pragma."
 
 	| relation |
-	relation := c12 mooseDescription allRelationProperties detect: [ :relation | relation name = 'c22s' ].
+	relation := c12 metadescription allRelationProperties detect: [ :relation | relation name = 'c22s' ].
 
 	self assert: relation isMultivalued
 ]

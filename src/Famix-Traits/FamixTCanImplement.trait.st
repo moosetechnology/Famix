@@ -28,14 +28,6 @@ FamixTCanImplement classSide >> annotation [
 	<FMClass: #TCanImplement super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixTCanImplement >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTCanImplement: self
 ]
 
 { #category : 'adding' }

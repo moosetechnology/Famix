@@ -48,7 +48,6 @@ FamixTAnnotationInstance classSide >> annotation [
 	<FMClass: #TAnnotationInstance super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : 'groups' }
@@ -56,13 +55,6 @@ FamixTAnnotationInstance classSide >> annotationFamixAnnotationInstanceGroup [
 	<generated>
 	<mooseGroup>
 	^ FamixAnnotationInstanceGroup
-]
-
-{ #category : 'visitor' }
-FamixTAnnotationInstance >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTAnnotationInstance: self
 ]
 
 { #category : 'adding' }

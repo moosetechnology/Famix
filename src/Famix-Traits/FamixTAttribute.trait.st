@@ -53,14 +53,6 @@ FamixTAttribute classSide >> annotation [
 	<FMClass: #TAttribute super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixTAttribute >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTAttribute: self
 ]
 
 { #category : 'private' }
@@ -124,13 +116,6 @@ FamixTAttribute >> parentType: anObject [
 	parentType := anObject.
 	self resetMooseName.
 
-]
-
-{ #category : 'navigation' }
-FamixTAttribute >> parentTypeGroup [
-	<generated>
-	<navigation: 'ParentType'>
-	^ MooseSpecializedGroup with: self parentType
 ]
 
 { #category : 'printing' }

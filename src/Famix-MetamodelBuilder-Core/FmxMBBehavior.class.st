@@ -4,14 +4,13 @@ Class {
 	#traits : 'FmxMBRelationSideTrait',
 	#classTraits : 'FmxMBRelationSideTrait classTrait',
 	#instVars : [
-		'relations',
-		'realClass',
-		'properties',
+		'builder',
 		'tag',
 		'prefix',
 		'packageName',
 		'testingSelectors',
-		'traitGeneralizations'
+		'traitGeneralizations',
+		'propertiesAndRelations'
 	],
 	#category : 'Famix-MetamodelBuilder-Core-Implementation',
 	#package : 'Famix-MetamodelBuilder-Core',
@@ -35,39 +34,34 @@ FmxMBBehavior >> <|-- anObject [
 	^ anObject
 ]
 
+{ #category : 'visiting' }
+FmxMBBehavior >> acceptVisitor: aVisitor [
+
+	<ignoreForCoverage>
+	^ aVisitor visitBehavioral: self
+]
+
 { #category : 'accessing' }
 FmxMBBehavior >> addAllTransitiveTraitsIn: aCollection [
 
-	aCollection add: self.
+	self isTraitEntity ifTrue: [ aCollection add: self ].
 	self allLocalTraits do: [ :trait | trait addAllTransitiveTraitsIn: aCollection ].
 	^ aCollection
 ]
 
 { #category : 'accessing' }
-FmxMBBehavior >> addRelation: aRelation with: anotherClass [
+FmxMBBehavior >> addRelation: aRelation [
 
-	self relations add: aRelation.
-	anotherClass relations add: aRelation oppositeRelation
-	
-	
-]
+	(self relations anySatisfy: [ :relation | relation name = aRelation name ]) ifTrue: [ ^ self ].
 
-{ #category : 'accessing' }
-FmxMBBehavior >> addRelationSide: aRelationSide [
-
-	"skip duplicities"
-	(self sides anySatisfy: [ :each | each  name = aRelationSide name ])
-		ifTrue: [ ^ self ].
-
-	self sides add: aRelationSide
+	self propertiesAndRelations add: aRelation
 ]
 
 { #category : 'accessing' }
 FmxMBBehavior >> addTraitGeneralization: aTrait [
 
-	(self traitGeneralizations includes: aTrait)
-		ifFalse: [ self traitGeneralizations add: aTrait ].
-		
+	(self traitGeneralizations includes: aTrait) ifFalse: [ self traitGeneralizations add: aTrait ].
+
 	^ aTrait
 ]
 
@@ -77,27 +71,38 @@ FmxMBBehavior >> allLocalTraits [
 ]
 
 { #category : 'accessing' }
-FmxMBBehavior >> allNavigationGroups [
-	^ self navigationGroups , (self relations flatCollect: [ :relation | relation side navigationGroups ])
-]
-
-{ #category : 'accessing' }
 FmxMBBehavior >> allProperties [
 	"Return my properties and the properties from my traits."
 
-	^ (self allTransitiveTraits flatCollect: [ :trait | trait properties ]) , self properties
+	^ self allPropertiesAndRelations reject: #isRelation
+]
+
+{ #category : 'accessing' }
+FmxMBBehavior >> allPropertiesAndRelations [
+	"Return my properties and the properties from my traits."
+
+	^ (self allTransitiveTraits flatCollect: [ :trait | trait propertiesAndRelations ]) , self propertiesAndRelations
 ]
 
 { #category : 'accessing' }
 FmxMBBehavior >> allRelations [
 	"Return my relations and the relations from my traits."
 
-	^ (self allTransitiveTraits flatCollect: [ :trait | trait relations ]) , self relations
+	^ self allPropertiesAndRelations select: #isRelation
 ]
 
 { #category : 'accessing' }
-FmxMBBehavior >> allTraitNames [
-	^ (self allLocalTraits collect: #fullName) sorted
+FmxMBBehavior >> allTraitDefinitions [
+
+	^ self allLocalTraits ifEmpty: [ #(  ) ] ifNotEmpty: [ :traits |
+			  | methodsToRemove |
+			  methodsToRemove := self additionalProperties at: #methodsToRemoveFromTraitComposition ifAbsent: [ Dictionary new ].
+
+			  (traits sorted: #fullName ascending) collect: [ :trait |
+					  methodsToRemove
+						  at: trait fullName
+						  ifPresent: [ :methods | '(' , trait fullName , ' - {' , ('. ' join: (methods collect: #printString)) , '})' ]
+						  ifAbsent: [ trait fullName ] ] ]
 ]
 
 { #category : 'accessing' }
@@ -107,25 +112,26 @@ FmxMBBehavior >> allTransitiveTraits [
 ]
 
 { #category : 'accessing' }
-FmxMBBehavior >> allTransitiveTraitsIncludingClassGeneralization [
+FmxMBBehavior >> allTransitiveTraitsIncludingSuperclasses [
 
 	^ self allTransitiveTraits
 ]
 
 { #category : 'converting' }
-FmxMBBehavior >> asRelationSideNamed: aPropertyName [
+FmxMBBehavior >> asRelationNamed: aPropertyName [
 
 	^ self property: aPropertyName
 ]
 
 { #category : 'accessing' }
-FmxMBBehavior >> classGeneralization [
-	^ self subclassResponsibility
+FmxMBBehavior >> builder [
+
+	^ builder
 ]
 
 { #category : 'accessing' }
-FmxMBBehavior >> classGeneralization: anObject [
-	^ self subclassResponsibility
+FmxMBBehavior >> builder: anObject [
+	builder := anObject
 ]
 
 { #category : 'accessing' }
@@ -133,111 +139,74 @@ FmxMBBehavior >> commentWithRelations [
 	"It is sometimes hard to find our way through all the methods and relations of a moose entity. To help, I add information in the class comments about the different kind of relations in the model."
 
 	^ String streamContents: [ :aStream |
-		  aStream nextPutAll: self comment.
-		  self comment ifNotEmpty: [
-			  aStream
-				  cr;
-				  cr ].
-		  self allRelations ifNotEmpty: [ :rels |
-			  aStream
-				  nextPutAll: '## Relations
+			  self comment ifNotEmpty: [
+					  aStream
+						  nextPutAll: self comment;
+						  cr;
+						  cr ].
+			  self allRelations ifNotEmpty: [ :relations |
+					  aStream
+						  nextPutAll: '## Relations
 ======================';
-				  cr;
-				  cr.
-			  OrderedDictionary new
-				  at: 'Parents' put: [ :relation | relation side isContainer ];
-				  at: 'Children' put: [ :relation | relation oppositeSide isContainer ];
-				  at: 'Outgoing dependencies' put: [ :relation | relation oppositeSide isSource ];
-				  at: 'Incoming dependencies' put: [ :relation | relation oppositeSide isTarget ];
-				  at: 'Association source' put: [ :relation | relation side isSource ];
-				  at: 'Association target' put: [ :relation | relation side isTarget ];
-				  at: 'Other' put: [ :relation |
-					  relation side isTarget not and: [
-							  relation side isSource not and: [
-									  relation side isContainer not and: [
-											  relation oppositeSide isTarget not and: [ relation oppositeSide isSource not and: [ relation oppositeSide isContainer not ] ] ] ] ] ];
-				  keysAndValuesDo: [ :relationKind :selectionBlock |
-					  (rels select: selectionBlock) ifNotEmpty: [ :parents |
+						  cr;
+						  cr.
+					  self relationSectionsToCommentMap keysAndValuesDo: [ :sectionTitle :selectionBlock |
+							  (relations select: selectionBlock) ifNotEmpty: [ :selectedRelations |
+									  aStream
+										  nextPutAll: '### ';
+										  nextPutAll: sectionTitle;
+										  cr;
+										  nextPutAll: '| Relation | Origin | Opposite | Type | Comment |';
+										  cr;
+										  nextPutAll: '|---|';
+										  cr.
+									  (selectedRelations sorted: #name ascending) do: [ :relation |
+											  aStream
+												  nextPutAll: '| `';
+												  nextPutAll: relation name;
+												  nextPutAll: '` | `';
+												  nextPutAll: relation type;
+												  nextPutAll: '` | `';
+												  nextPutAll: relation oppositeName;
+												  nextPutAll: '` | `';
+												  nextPutAll: relation oppositeType;
+												  nextPutAll: '` | ';
+												  nextPutAll: (relation comment copyWithRegex: (String with: Character cr with: $+) matchesReplacedWith: ' ');
+												  nextPut: $|;
+												  cr ].
+
+									  aStream cr ] ].
+					  aStream cr ].
+
+			  self allProperties ifNotEmpty: [ :props |
+					  aStream
+						  nextPutAll: '## Properties
+======================';
+						  cr;
+						  cr;
+						  nextPutAll: '| Name | Type | Default value | Comment |';
+						  cr;
+						  nextPutAll: '|---|';
+						  cr.
+
+					  (props sorted: #name ascending) do: [ :property |
 							  aStream
-								  nextPutAll: '### ';
-								  nextPutAll: relationKind;
-								  cr;
-								  nextPutAll: '| Relation | Origin | Opposite | Type | Comment |';
-								  cr;
-								  nextPutAll: '|---|';
-								  cr.
-							  (parents sorted: [ :parent | parent side generationStrategy relationSide name ] ascending) do: [ :parent |
-								  | strategy |
-								  strategy := parent side generationStrategy.
-
-								  aStream
-									  nextPutAll: '| `';
-									  nextPutAll: strategy relationSide name;
-									  nextPutAll: '` | `';
-									  nextPutAll: strategy relationSide type;
-									  nextPutAll: '` | `';
-									  nextPutAll: strategy relationSide oppositeName;
-									  nextPutAll: '` | `';
-									  nextPutAll: strategy relationSide oppositeType;
-									  nextPutAll: '` | ';
-									  nextPutAll: (strategy relationSide comment
-											   copyWithRegex: (String with: Character cr with: $+)
-											   matchesReplacedWith: ' ');
-									  nextPut: $|;
-									  cr ].
-
-							  aStream cr ] ].
-			  aStream cr ].
-
-		  (self allProperties reject: [ :p | p isRelation ]) ifNotEmpty: [ :props |
-			  aStream
-				  nextPutAll: '## Properties
-======================';
-				  cr;
-				  cr;
-				  nextPutAll: '| Name | Type | Default value | Comment |';
-				  cr;
-				  nextPutAll: '|---|';
-				  cr.
-
-			  (props sorted: #name ascending) do: [ :property |
-				  aStream
-					  nextPutAll: '| `';
-					  nextPutAll: property name;
-					  nextPutAll: '` | `';
-					  nextPutAll: property propertyType;
-					  nextPutAll: '` | ';
-					  print: property defaultValue;
-					  nextPutAll: ' | ';
-					  nextPutAll: (property comment
-							   copyWithRegex: (String with: Character cr with: $+)
-							   matchesReplacedWith: ' ');
-					  nextPut: $|;
-					  cr ] ] ]
-]
-
-{ #category : 'settings - default' }
-FmxMBBehavior >> defaultSuperclass [
-	^ self builder environment basicSuperclass
-]
-
-{ #category : 'generating' }
-FmxMBBehavior >> defaultSuperclassName [
-	^ self defaultSuperclass name
+								  nextPutAll: '| `';
+								  nextPutAll: property name;
+								  nextPutAll: '` | `';
+								  nextPutAll: property propertyType;
+								  nextPutAll: '` | ';
+								  print: property defaultValue;
+								  nextPutAll: ' | ';
+								  nextPutAll: (property comment copyWithRegex: (String with: Character cr with: $+) matchesReplacedWith: ' ');
+								  nextPut: $|;
+								  cr ] ] ]
 ]
 
 { #category : 'settings - default' }
 FmxMBBehavior >> defaultTag [
 
 	^ #Entities
-]
-
-{ #category : 'generating' }
-FmxMBBehavior >> ensureRealClass [
-	^ realClass
-		ifNil: [ self generate.
-			self willGenerate: false.
-			self realClass ]
 ]
 
 { #category : 'accessing' }
@@ -254,124 +223,7 @@ FmxMBBehavior >> generalization: anObject [
 		  ifFalse: [
 				  anObject isMetamodelTrait
 					  ifTrue: [ self addTraitGeneralization: anObject ]
-					  ifFalse: [ self classGeneralization: anObject ] ]
-]
-
-{ #category : 'generating' }
-FmxMBBehavior >> generate [
-	^ self subclassResponsibility
-]
-
-{ #category : 'generating' }
-FmxMBBehavior >> generateAccessors [
-	self properties do: [ :each | each generateAccessorsIn: self realClass ]
-]
-
-{ #category : 'generating' }
-FmxMBBehavior >> generateAddToCollectionFor: aClass [
-	self relations
-		collect: #side
-		thenDo: [ :side | 
-			side isMany
-				ifTrue: [ | sideName |
-					sideName := side name.
-					self builder environment
-						compile:
-							('add{1}: anObject
-	<generated>
-	^ self {2} add: anObject' format: {sideName capitalized asSingular . sideName})
-						in: aClass instanceSide
-						classified: #adding ] ]
-]
-
-{ #category : 'generating' }
-FmxMBBehavior >> generateAnnotationIn: aRealClass superclass: aSuperclass [
-
-	| aSuperclassName |
-	aSuperclassName := aSuperclass
-		                   ifNotNil: [ aSuperclass name ]
-		                   ifNil: [ 
-			                   self classGeneralization
-			                   = self defaultSuperclass
-				                   ifTrue: [ self defaultSuperclassName ]
-				                   ifFalse: [ 
-					                   self classGeneralization
-						                   ifNil: [ self defaultSuperclassName ]
-						                   ifNotNil: [ :cg | cg realClass name ] ] ].
-
-	aRealClass classSide
-		compile: ('annotation
-
-	<FMClass: #{1} super: #{2}>
-	<package: {3}>
-	<generated>{4}
-	^ self' format: { 
-					 self name.
-					 aSuperclassName.
-					 self builder safeAnnotationPackageName.
-					 self optionalPragma })
-		classified: 'meta'
-]
-
-{ #category : 'generating' }
-FmxMBBehavior >> generateMethodsToRemoveFromTraitCompositionFor: aBehavioral [
-	"In case of method conflict the user can select methods to remove from a trait. In that case we give the information to ring here."
-
-	self additionalProperties
-		at: #methodsToRemoveFromTraitComposition
-		ifPresent: [ :methodsDictionary |
-			aBehavioral
-				propertyNamed: #methodsToRemoveFromTraitComposition
-				put: methodsDictionary ]
-]
-
-{ #category : 'generating' }
-FmxMBBehavior >> generateNavigationGroupsFor: aClass [
-	self allNavigationGroups
-		do: [ :aNavigationGroup | 
-			| sideName |
-			sideName := aNavigationGroup entity name.
-
-			self builder environment
-				compile:
-					((aNavigationGroup entity isMany
-						ifTrue: [ '{1}
-	<generated>
-	<navigation: ''{2}''>
-	^ MooseSpecializedGroup withAll: self {3} asSet' ]
-						ifFalse: [ '{1}
-	<generated>
-	<navigation: ''{2}''>
-	^ MooseSpecializedGroup with: self {3}' ]) format: {(sideName , 'Group') . sideName capitalized . sideName})
-				in: aClass instanceSide
-				classified: #navigation ]
-]
-
-{ #category : 'generating' }
-FmxMBBehavior >> generatePrecedenceInTraitComposition: aBehavioral [
-	"In case of method conflict the user can select methods to remove from a trait. In that case we give the information to ring here."
-
-	self additionalProperties
-		at: #precedingTrait
-		ifPresent: [ :value |
-			aBehavioral
-				propertyNamed: #precedingTrait
-				put: value ]
-]
-
-{ #category : 'generating' }
-FmxMBBehavior >> generateRemoteAccessors [
-	(self properties select: #isRemote) do: [ :each | each generateAccessorsIn: self realClass ]
-]
-
-{ #category : 'generating' }
-FmxMBBehavior >> generateTestingMethodsIn: aClass [
-
-	self testingSelectors do: [ :aSelector |
-		aClass instanceSide compile: ('{1}\\	<generated>\	^ true' withCRs format: { aSelector }) 
-		classified: #testing. ]
-
-
+					  ifFalse: [ self superclass: anObject ] ]
 ]
 
 { #category : 'generalization' }
@@ -387,12 +239,18 @@ FmxMBBehavior >> inheritsFromTrait: aTrait without: aCollection [
 
 { #category : 'initialization' }
 FmxMBBehavior >> initialize [
+
 	super initialize.
-	relations := OrderedCollection new.
-	properties := OrderedCollection new.
+	propertiesAndRelations := OrderedCollection new.
 	prefix := ''.
 	packageName := ''.
 	testingSelectors := Set new
+]
+
+{ #category : 'testing' }
+FmxMBBehavior >> isAbstractClass [
+
+	^ false
 ]
 
 { #category : 'testing' }
@@ -423,14 +281,6 @@ FmxMBBehavior >> isMetamodelTrait [
 FmxMBBehavior >> isModelClass [
 	"The class prefix, Model"
 	^ false
-]
-
-{ #category : 'generating' }
-FmxMBBehavior >> optionalPragma [
-
-	"Override to add a pragma to your entity #annotation method"
-
-	^ String new
 ]
 
 { #category : 'accessing' }
@@ -476,7 +326,7 @@ FmxMBBehavior >> prefix: anObject [
 	prefix := anObject
 ]
 
-{ #category : 'generating' }
+{ #category : 'printing' }
 FmxMBBehavior >> printOn: aStream [
 	<ignoreForCoverage>
 	aStream
@@ -488,40 +338,35 @@ FmxMBBehavior >> printOn: aStream [
 
 { #category : 'accessing' }
 FmxMBBehavior >> properties [
-	^ properties
+
+	^ propertiesAndRelations reject: #isRelation
 ]
 
-{ #category : 'generating' }
+{ #category : 'accessing' }
+FmxMBBehavior >> propertiesAndRelations [
+
+	^ propertiesAndRelations
+]
+
+{ #category : 'associations' }
 FmxMBBehavior >> property: propertyName [
 
 	| aSide |
-	
 	self assert: propertyName isString.
-	
-	aSide := FmxMBRelationSide new
-		builder: self builder;
-		relatedClass: self;
-		name: propertyName;
-		yourself.
-		
-	self addRelationSide: aSide.
-	^ aSide.
+
+	aSide := FmxMBRelation new
+		         relatedClass: self;
+		         name: propertyName;
+		         yourself.
+
+	self addRelation: aSide.
+	^ aSide
 ]
 
 { #category : 'accessing' }
 FmxMBBehavior >> property: propertyName type: aTypeName [
 
-	| aSide |
-	aSide := FmxMBTypedProperty new
-		         builder: self builder;
-		         name: propertyName;
-		         isRemote: self isRemote;
-		         propertyType: aTypeName asSymbol;
-		         yourself.
-
-	self properties add: aSide.
-
-	^ aSide
+	^ self property: propertyName type: aTypeName defaultValue: nil
 ]
 
 { #category : 'accessing' }
@@ -529,14 +374,13 @@ FmxMBBehavior >> property: propertyName type: aTypeName defaultValue: aValue [
 
 	| aSide |
 	aSide := FmxMBTypedProperty new
-		         builder: self builder;
 		         name: propertyName;
 		         isRemote: self isRemote;
 		         propertyType: aTypeName asSymbol;
 		         defaultValue: aValue;
 		         yourself.
 
-	self properties add: aSide.
+	self propertiesAndRelations add: aSide.
 
 	^ aSide
 ]
@@ -547,30 +391,34 @@ FmxMBBehavior >> propertyName [
 ]
 
 { #category : 'accessing' }
-FmxMBBehavior >> realClass [
-
-	^ realClass ifNil: [ self class environment at: self fullName  ]
-]
-
-{ #category : 'accessing' }
-FmxMBBehavior >> realClass: anObject [
-	realClass := anObject
-]
-
-{ #category : 'accessing' }
 FmxMBBehavior >> relatedEntityName [
 
 	^ self name
 ]
 
 { #category : 'accessing' }
-FmxMBBehavior >> relations [
-	^ relations
+FmxMBBehavior >> relationSectionsToCommentMap [
+	"When generating a class comment, we group the relations by kind. This method builds a dictionary to declare the sections to comment and declare how to select the relations inside."
+
+	^ OrderedDictionary new
+		  at: 'Parents' put: [ :relation | relation isContainer ];
+		  at: 'Children' put: [ :relation | relation oppositeSide isContainer ];
+		  at: 'Outgoing dependencies' put: [ :relation | relation oppositeSide isSource ];
+		  at: 'Incoming dependencies' put: [ :relation | relation oppositeSide isTarget ];
+		  at: 'Association source' put: [ :relation | relation isSource ];
+		  at: 'Association target' put: [ :relation | relation isTarget ];
+		  at: 'Other' put: [ :relation |
+				  relation isTarget not and: [
+							  relation isSource not and: [
+									  relation isContainer not and: [
+											  relation oppositeSide isTarget not and: [ relation oppositeSide isSource not and: [ relation oppositeSide isContainer not ] ] ] ] ] ];
+		  yourself
 ]
 
 { #category : 'accessing' }
-FmxMBBehavior >> sides [
-	^ self properties
+FmxMBBehavior >> relations [
+
+	^ self propertiesAndRelations select: #isRelation
 ]
 
 { #category : 'name conversion' }
@@ -588,17 +436,6 @@ FmxMBBehavior >> singularPropertyName [
 	
 	^ uncapitalized
 
-]
-
-{ #category : 'generating' }
-FmxMBBehavior >> slotDefinitions [
-	| slotGroups |
-	slotGroups := (self properties select: #producesSlot thenCollect: [ :property | property asSlot ]) groupedBy: #name.
-
-	"check that all slots with the same name have the same properties"
-	slotGroups valuesDo: [ :similarSlots | self assert: (similarSlots collect: #name) asSet size = 1 ].
-
-	^ slotGroups values collect: [ :each | each anyOne ]
 ]
 
 { #category : 'associations' }
@@ -636,6 +473,13 @@ FmxMBBehavior >> sourceOneToOne: aFmxTrait [
 
 	(self property: (aFmxTrait name copyWithoutFirst: $T) uncapitalized)
 		source - (aFmxTrait property: #outgoing , self name)
+]
+
+{ #category : 'accessing' }
+FmxMBBehavior >> superclassName [
+	"Trait do not have a superclass but they declare one for the fame annotation"
+
+	^ self subclassResponsibility
 ]
 
 { #category : 'accessing' }
@@ -710,25 +554,20 @@ FmxMBBehavior >> traitGeneralizations [
 	^ traitGeneralizations ifNil: [ traitGeneralizations := OrderedCollection new ]
 ]
 
-{ #category : 'accessing' }
-FmxMBBehavior >> uses: aTrait [
-
-	^ self generalization: aTrait
-]
-
 { #category : 'testing selectors' }
 FmxMBBehavior >> withGroup [
-	^ self builder groupOf: self
+
+	^ (self builder newClassGroupNamed: self name , 'Group')
+		  innerClass: self;
+		  yourself
 ]
 
 { #category : 'generalization' }
 FmxMBBehavior >> withPrecedenceOf: aTrait [
-	self additionalProperties
-		at: #precedingTrait
-		put:
-			(aTrait isSymbol
-				ifTrue: [ (self builder getTraitNamed: aTrait) fullName ]
-				ifFalse: [ aTrait fullName ])
+
+	self additionalProperties at: #precedingTrait put: (aTrait isSymbol
+			 ifTrue: [ (self builder getTraitNamed: aTrait) fullName ]
+			 ifFalse: [ aTrait fullName ])
 ]
 
 { #category : 'testing selectors' }

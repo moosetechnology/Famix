@@ -28,14 +28,6 @@ FamixTWithFileIncludes classSide >> annotation [
 	<FMClass: #TWithFileIncludes super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixTWithFileIncludes >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTWithFileIncludes: self
 ]
 
 { #category : 'accessing' }

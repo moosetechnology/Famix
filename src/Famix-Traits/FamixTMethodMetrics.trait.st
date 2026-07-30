@@ -11,14 +11,6 @@ FamixTMethodMetrics classSide >> annotation [
 	<FMClass: #TMethodMetrics super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixTMethodMetrics >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTMethodMetrics: self
 ]
 
 { #category : 'metrics' }

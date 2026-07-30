@@ -52,14 +52,6 @@ FamixTLocalVariable classSide >> annotation [
 	<FMClass: #TLocalVariable super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixTLocalVariable >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTLocalVariable: self
 ]
 
 { #category : 'printing' }
@@ -94,11 +86,4 @@ FamixTLocalVariable >> parentBehaviouralEntity: anObject [
 	self resetMooseName.
 	
 
-]
-
-{ #category : 'navigation' }
-FamixTLocalVariable >> parentBehaviouralEntityGroup [
-	<generated>
-	<navigation: 'ParentBehaviouralEntity'>
-	^ MooseSpecializedGroup with: self parentBehaviouralEntity
 ]

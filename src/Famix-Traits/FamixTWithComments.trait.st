@@ -26,14 +26,6 @@ FamixTWithComments classSide >> annotation [
 	<FMClass: #TWithComments super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixTWithComments >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTWithComments: self
 ]
 
 { #category : 'removing' }

@@ -54,14 +54,6 @@ FamixJavaLocalVariable class >> annotation [
 	<FMClass: #LocalVariable super: #FamixJavaVariable>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixJavaLocalVariable >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaLocalVariable: self
 ]
 
 { #category : 'printing' }

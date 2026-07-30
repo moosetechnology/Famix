@@ -30,7 +30,8 @@ FamixTest1Model class >> allSubmetamodelsPackagesNames [
 
 { #category : 'meta' }
 FamixTest1Model class >> annotation [
-	<FMClass: #FamixTest1Model super: #MooseModel>
+
+	<FMClass: #Model super: #MooseModel>
 	<package: #'Famix-Test1-Entities'>
 	<generated>
 ]

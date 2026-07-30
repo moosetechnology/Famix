@@ -34,7 +34,6 @@ FamixTest4Book class >> annotation [
 	<FMClass: #Book super: #FamixTest4Entity>
 	<package: #'Famix-Test4-Entities'>
 	<generated>
-	^ self
 ]
 
 { #category : 'comparing' }
@@ -79,11 +78,4 @@ FamixTest4Book >> person: anObject [
 
 	<generated>
 	person := anObject
-]
-
-{ #category : 'navigation' }
-FamixTest4Book >> personGroup [
-	<generated>
-	<navigation: 'Person'>
-	^ MooseSpecializedGroup with: self person
 ]

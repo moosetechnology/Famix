@@ -62,14 +62,6 @@ FamixTFunction classSide >> annotation [
 	<FMClass: #TFunction super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixTFunction >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTFunction: self
 ]
 
 { #category : 'accessing' }
@@ -88,13 +80,6 @@ FamixTFunction >> functionOwner: anObject [
 	functionOwner := anObject.
 	self resetMooseName.
 
-]
-
-{ #category : 'navigation' }
-FamixTFunction >> functionOwnerGroup [
-	<generated>
-	<navigation: 'FunctionOwner'>
-	^ MooseSpecializedGroup with: self functionOwner
 ]
 
 { #category : 'testing' }

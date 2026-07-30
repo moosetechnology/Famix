@@ -29,7 +29,6 @@ FamixTestComposedCustomEntity1 class >> annotation [
 	<FMClass: #CustomEntity1 super: #FamixTestComposedEntity>
 	<package: #'Famix-TestComposedMetamodel-Entities'>
 	<generated>
-	^ self
 ]
 
 { #category : 'accessing' }
@@ -76,11 +75,4 @@ FamixTestComposedCustomEntity1 >> customEntity1: anObject [
 	ifNotNil: [ 
 		self attributeAt: #customEntity1 put: anObject.
 		anObject customEntity1: self ]
-]
-
-{ #category : 'navigation' }
-FamixTestComposedCustomEntity1 >> customEntity1Group [
-	<generated>
-	<navigation: 'CustomEntity1'>
-	^ MooseSpecializedGroup with: self customEntity1
 ]

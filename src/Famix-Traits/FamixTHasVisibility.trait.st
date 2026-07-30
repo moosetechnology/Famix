@@ -23,14 +23,6 @@ FamixTHasVisibility classSide >> annotation [
 	<FMClass: #THasVisibility super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixTHasVisibility >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTHasVisibility: self
 ]
 
 { #category : 'accessing' }

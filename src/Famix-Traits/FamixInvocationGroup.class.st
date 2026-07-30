@@ -5,19 +5,3 @@ Class {
 	#package : 'Famix-Traits',
 	#tag : 'Groups'
 }
-
-{ #category : 'meta' }
-FamixInvocationGroup class >> annotation [
-
-	<FMClass: #InvocationGroup super: #MooseSpecializedGroup>
-	<package: #'Famix-Traits'>
-	<generated>
-	^ self
-]
-
-{ #category : 'meta' }
-FamixInvocationGroup class >> metamodel [
-
-	<generated>
-	^ FamixModel metamodel
-]

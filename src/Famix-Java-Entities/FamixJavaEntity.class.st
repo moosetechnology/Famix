@@ -13,7 +13,6 @@ FamixJavaEntity class >> annotation [
 	<package: #'Famix-Java-Entities'>
 	<generated>
 	<abstract>
-	^ self
 ]
 
 { #category : 'testing' }
@@ -28,13 +27,6 @@ FamixJavaEntity class >> metamodel [
 
 	<generated>
 	^ FamixJavaModel metamodel
-]
-
-{ #category : 'visitor' }
-FamixJavaEntity >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaEntity: self
 ]
 
 { #category : 'testing' }

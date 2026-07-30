@@ -38,7 +38,6 @@ FamixTAnnotationType classSide >> annotation [
 	<FMClass: #TAnnotationType super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : 'groups' }
@@ -46,13 +45,6 @@ FamixTAnnotationType classSide >> annotationFamixAnnotationTypeGroup [
 	<generated>
 	<mooseGroup>
 	^ FamixAnnotationTypeGroup
-]
-
-{ #category : 'visitor' }
-FamixTAnnotationType >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTAnnotationType: self
 ]
 
 { #category : 'accessing' }
@@ -77,13 +69,6 @@ FamixTAnnotationType >> annotationTypesContainer: anObject [
 
 	<generated>
 	annotationTypesContainer := anObject
-]
-
-{ #category : 'navigation' }
-FamixTAnnotationType >> annotationTypesContainerGroup [
-	<generated>
-	<navigation: 'AnnotationTypesContainer'>
-	^ MooseSpecializedGroup with: self annotationTypesContainer
 ]
 
 { #category : 'printing' }

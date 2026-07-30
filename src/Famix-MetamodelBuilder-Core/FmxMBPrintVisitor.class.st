@@ -15,11 +15,10 @@ Class {
 	#tag : 'Visitors'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : 'visiting' }
 FmxMBPrintVisitor >> prepareForPropertiesIn: aClassOrTrait [
 
-	(aClassOrTrait properties isNotEmpty or: [
-		 aClassOrTrait relations isNotEmpty ]) ifFalse: [ ^ self ].
+	aClassOrTrait propertiesAndRelations ifEmpty: [ ^ self ].
 
 	Transcript
 		cr;
@@ -49,22 +48,19 @@ FmxMBPrintVisitor >> visitClass: aClass [
 	self traceCrTab: ''.
 	aClass name trace.
 	self trace: ' -|> '.
-	(aClass classGeneralization
+	(aClass superclass
 		 ifNil: [ 'Entity' ]
-		 ifNotNil: [ :generalization | generalization name ]) trace.
-	aClass traitGeneralizations ifNotEmpty: [ :generalizations |
-		generalizations
-			do: [ :generalization | generalization name trace ]
-			separatedBy: [ ', ' trace ] ].
+		 ifNotNil: #name) trace.
+	aClass traitGeneralizations ifNotEmpty: [ :generalizations | generalizations do: [ :generalization | generalization name trace ] separatedBy: [ ', ' trace ] ].
 
 	super visitClass: aClass
 ]
 
 { #category : 'visiting' }
-FmxMBPrintVisitor >> visitRelationSide: aRelationSide [
+FmxMBPrintVisitor >> visitRelation: aRelation [
 
 	self trace:
-		aRelationSide name , ' (' , aRelationSide oppositeType , ')'
+		aRelation name , ' (' , aRelation oppositeType , ')'
 ]
 
 { #category : 'visiting' }

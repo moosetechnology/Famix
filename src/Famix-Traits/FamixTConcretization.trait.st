@@ -46,14 +46,6 @@ FamixTConcretization classSide >> annotation [
 	<FMClass: #TConcretization super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixTConcretization >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTConcretization: self
 ]
 
 { #category : 'accessing' }

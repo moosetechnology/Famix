@@ -29,14 +29,6 @@ FamixTFileAnchor classSide >> annotation [
 	<FMClass: #TFileAnchor super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixTFileAnchor >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTFileAnchor: self
 ]
 
 { #category : 'adding' }

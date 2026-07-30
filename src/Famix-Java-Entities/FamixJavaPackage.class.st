@@ -49,7 +49,6 @@ FamixJavaPackage class >> annotation [
 	<FMClass: #Package super: #FamixJavaContainerEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^ self
 ]
 
 { #category : 'Famix-Implementation' }
@@ -70,13 +69,6 @@ FamixJavaPackage >> abstractness [
 	nsClasses size == 0 ifTrue: [ ^ nil ].
 
 	^ (nsClasses select: [ :c | c isAbstract ]) size / nsClasses size
-]
-
-{ #category : 'visitor' }
-FamixJavaPackage >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaPackage: self
 ]
 
 { #category : 'adding' }

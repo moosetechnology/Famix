@@ -35,14 +35,6 @@ FamixTComment classSide >> annotation [
 	<FMClass: #TComment super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixTComment >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTComment: self
 ]
 
 { #category : 'accessing' }
@@ -60,13 +52,6 @@ FamixTComment >> commentedEntity: anObject [
 
 	<generated>
 	commentedEntity := anObject
-]
-
-{ #category : 'navigation' }
-FamixTComment >> commentedEntityGroup [
-	<generated>
-	<navigation: 'CommentedEntity'>
-	^ MooseSpecializedGroup with: self commentedEntity
 ]
 
 { #category : 'printing' }

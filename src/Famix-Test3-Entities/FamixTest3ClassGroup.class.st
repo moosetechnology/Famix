@@ -5,12 +5,3 @@ Class {
 	#package : 'Famix-Test3-Entities',
 	#tag : 'Entities'
 }
-
-{ #category : 'meta' }
-FamixTest3ClassGroup class >> annotation [
-
-	<FMClass: #ClassGroup super: #FamixTest3TypeGroup>
-	<package: #'Famix-Test3-Entities'>
-	<generated>
-	^ self
-]

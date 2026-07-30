@@ -26,14 +26,6 @@ FamixTTypedEntity classSide >> annotation [
 	<FMClass: #TTypedEntity super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixTTypedEntity >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTTypedEntity: self
 ]
 
 { #category : 'accessing' }

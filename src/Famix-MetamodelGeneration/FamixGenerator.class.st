@@ -132,23 +132,10 @@ Class {
 	#package : 'Famix-MetamodelGeneration'
 }
 
-{ #category : 'additional tools' }
-FamixGenerator class >> metamodelToolGenerators [
-
-	^ { FamixVisitorGenerator }
-]
-
 { #category : 'accessing' }
 FamixGenerator class >> packageName [
 
 	^ #'Famix-Traits'
-]
-
-{ #category : 'accessing' }
-FamixGenerator class >> packageNameForVisitor [
-	"Generate visitor in the entities package. Discussed with N. Anquetil"
-
-	^ self packageName
 ]
 
 { #category : 'accessing' }
@@ -1299,9 +1286,8 @@ FamixGenerator >> defineRelations [
 			comment: 'This property corresponds to the set of annotations associated to the entity').
 
 	((tAnnotationInstanceAttribute property: #parentAnnotationInstance)
-			comment: 'The instance of the annotation in which the attribute is used.';
-			container)
-		*-
+			comment: 'The instance of the annotation in which the attribute is used.')
+		*-<>
 	((tAnnotationInstance property: #attributes)
 			comment: 'This corresponds to the actual values of the attributes in an AnnotationInstance').
 
@@ -1313,9 +1299,8 @@ FamixGenerator >> defineRelations [
 			container"). "TODO: resolve"
 
 	((tAnnotationType property: #annotationTypesContainer)
-			comment: 'Container in which an AnnotationType may reside';
-			container	)
-		*-
+			comment: 'Container in which an AnnotationType may reside')
+		*-<>
 	((tWithAnnotationTypes property: #definedAnnotationTypes)
 			comment: 'The container in which the AnnotationTypes may be declared').
 
@@ -1332,16 +1317,14 @@ FamixGenerator >> defineRelations [
 			comment: 'Next association in an ordered collection of associations. Currently not supported by the Moose importer').
 
 	((tAttribute property: #parentType)
-			comment: 'Type declaring the attribute. belongsTo implementation';
-			container)
-		*-
+			comment: 'Type declaring the attribute. belongsTo implementation')
+		*-<>
 	((tWithAttributes property: #attributes)
 			comment: 'List of attributes declared by this type.').
 
 	((tCompilationUnit property: #compilationUnitOwner)
-			comment: 'The compilation unit that defines this module';
-			container)
-		-
+			comment: 'The compilation unit that defines this module')
+		-<>
 	((tWithCompilationUnits property: #compilationUnit)).
 
 	((tThrowable property: #catchingEntities))
@@ -1350,9 +1333,8 @@ FamixGenerator >> defineRelations [
 			comment: 'The exceptions caught by the method').
 
 	((tComment property: #commentedEntity)
-			comment: 'Source code commented by the comment';
-			container)
-		*-
+			comment: 'Source code commented by the comment')
+		*-<>
 	((tWithComments property: #comments)
 			comment: 'List of comments for the entity').
 
@@ -1368,17 +1350,15 @@ FamixGenerator >> defineRelations [
 			comment: 'List of invocations performed on BehaviouralEntities referenced by this entity').
 
 	((tEnumValue property: #parentEnum)
-			comment: 'The Enum declaring this value. It offers the implementation of belongsTo';
-			container)
-		*-
+			comment: 'The Enum declaring this value. It offers the implementation of belongsTo')
+		*-<>
 	((tWithEnumValues property: #enumValues)).
 
 	((tFolder property: #childrenFileSystemEntities)
 			comment: 'List of entities contained in this folder.')
-		-*
+		<>-*
 	((tFileSystemEntity property: #parentFolder)
-		comment: 'Folder entity containing this file.';
-		container).
+		comment: 'Folder entity containing this file.').
 
 	((tFile property: #entities)
 			comment: 'List of entities defined in the file')
@@ -1399,30 +1379,26 @@ FamixGenerator >> defineRelations [
 			comment: 'The include entities that have this file as a target.').
 
 	((tFunction property: #functionOwner)
-			comment: 'The container defining the function. The function is placed in a container, because certain languages can nest functions in functions.';
-			container)
-		*-
+			comment: 'The container defining the function. The function is placed in a container, because certain languages can nest functions in functions.')
+		*-<>
 	((tWithFunctions property: #functions)
 			comment: 'Functions defined in the container, if any.').
 
 	((tLambda property: #lambdaContainer)
-			comment: 'The container defining the lambda expression. The lambda is placed in a container, because certain languages can nest lambdas in lambdas.';
-			container)
-		*-
+			comment: 'The container defining the lambda expression. The lambda is placed in a container, because certain languages can nest lambdas in lambdas.')
+		*-<>
 	((tWithLambdas property: #lambdas)
 			comment: 'Lambdas defined in the container, if any.').
 
 	((tGlobalVariable property: #parentScope)
-			comment: 'Scope declaring the global variable. belongsTo implementation';
-			container)
-		*-
+			comment: 'Scope declaring the global variable. belongsTo implementation')
+		*-<>
 	((tWithGlobalVariables property: #globalVariables)
 			comment: 'Global variables defined in the scope, if any.').
 
 	((tImplicitVariable property: #parentBehaviouralEntity)
-			comment: 'The behaviour containing this implicit variable. belongsTo implementation';
-			container)
-		*-
+			comment: 'The behaviour containing this implicit variable. belongsTo implementation')
+		*-<>
 	((tWithImplicitVariables property: #implicitVariables)
 			comment: 'Implicit variables used locally by this behaviour.').
 
@@ -1461,36 +1437,31 @@ FamixGenerator >> defineRelations [
 			comment: 'List of imports of this entity').
 
 	((tLocalVariable property: #parentBehaviouralEntity)
-			comment: 'Behavioural entity declaring this local variable. belongsTo implementation';
-			container)
-		*-
+			comment: 'Behavioural entity declaring this local variable. belongsTo implementation')
+		*-<>
 	((tWithLocalVariables property: #localVariables)
 			comment: 'Variables locally defined by this behaviour.').
 
 	((tMethod property: #parentType)
-			comment: 'Type declaring the method. It provides the implementation for belongsTo.';
-			container)
-		*-
+			comment: 'Type declaring the method. It provides the implementation for belongsTo.')
+		*-<>
 	((tWithMethods property: #methods)
 			comment: 'Methods declared by this type.').
 
 	((tModule property: #moduleEntities))
-		-*
+		<>-*
 	((tDefinedInModule property: #parentModule)
-			comment: 'Module that contains the definition of this entity';
-			container).
+			comment: 'Module that contains the definition of this entity').
 
 	((tPackage property: #childEntities))
-		-*
+		<>-*
 	((tPackageable property: #parentPackage)
-		comment: 'Package containing the entity in the code structure (if applicable)';
-		container).
+		comment: 'Package containing the entity in the code structure (if applicable)').
 
 
 	((tParameter property: #parentBehaviouralEntity)
-			comment: 'Behavioural entity containing this parameter. belongsTo implementation';
-			container)
-		*-
+			comment: 'Behavioural entity containing this parameter. belongsTo implementation')
+		*-<>
 	((tWithParameters property: #parameters)
 			comment: 'List of formal parameters declared by this behaviour.').
 
@@ -1534,37 +1505,30 @@ FamixGenerator >> defineRelations [
 	((tWithInheritances property: #subInheritances)
 			comment: 'Subinheritance relationships, i.e. known subclasses of this type.').
 
-	((tTemplate property: #templateOwner) container)
-		*-
-	((tWithTemplates property: #templates)).
+	(tTemplate property: #templateOwner) *-<> (tWithTemplates property: #templates).
 
-	((tTemplate property: #templateUsers))
-		-*
-	((tTemplateUser property: #template)).
+	(tTemplate property: #templateUsers) -* (tTemplateUser property: #template).
 
-	((tThrowable property: #throwingEntities))
+	(tThrowable property: #throwingEntities)
 		*-*
 	((tWithExceptions property: #thrownExceptions)
 			comment: 'The exceptions thrown by the method').
 
-	((tTrait property: #traitOwner) container )
-		*-
-	((tWithTraits property: #traits)).
+	(tTrait property: #traitOwner ) *-<> (tWithTraits property: #traits).
 
-	((tTrait property: #incomingTraitUsages))
+	(tTrait property: #incomingTraitUsages)
 		-*
 	((tTraitUsage property: #trait)
 			source).
 
-	((tTraitUser property: #traitUsages))
+	(tTraitUser property: #traitUsages)
 		-*
 	((tTraitUsage property: #user)
 			target).
 
 	((tType property: #typeContainer)
-			comment: 'Container entity to which this type belongs. Container is a namespace, not a package (Smalltalk).';
-			container)
-		*-
+			comment: 'Container entity to which this type belongs. Container is a namespace, not a package (Smalltalk).')
+		*-<>
 	((tWithTypes property: #types)
 		comment: 'Types contained (declared) in this entity, if any.
 #types is declared in ContainerEntity because different kinds of container can embed types. Types are usually contained in a Famix.Namespace. But types can also be contained in a Famix.Class or Famix.Method (in Java with inner classes for example). Famix.Function can also contain some types such as structs.').

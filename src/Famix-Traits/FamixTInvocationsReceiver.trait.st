@@ -26,14 +26,6 @@ FamixTInvocationsReceiver classSide >> annotation [
 	<FMClass: #TInvocationsReceiver super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixTInvocationsReceiver >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTInvocationsReceiver: self
 ]
 
 { #category : 'adding' }

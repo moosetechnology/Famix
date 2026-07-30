@@ -26,14 +26,6 @@ FamixTWithEnumValues classSide >> annotation [
 	<FMClass: #TWithEnumValues super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixTWithEnumValues >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTWithEnumValues: self
 ]
 
 { #category : 'accessing' }

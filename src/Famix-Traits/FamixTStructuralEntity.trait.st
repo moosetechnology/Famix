@@ -44,14 +44,6 @@ FamixTStructuralEntity classSide >> annotation [
 	<FMClass: #TStructuralEntity super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixTStructuralEntity >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTStructuralEntity: self
 ]
 
 { #category : 'testing' }

@@ -38,5 +38,4 @@ MooseMSEImporterTestInheritance class >> annotation [
 	<FMClass: #Inheritance super: #MooseMSEImporterTestEntity>
 	<package: #'Moose-Core-Tests-Entities'>
 	<generated>
-	^ self
 ]

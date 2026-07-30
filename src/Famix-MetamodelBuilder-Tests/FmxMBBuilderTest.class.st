@@ -18,41 +18,6 @@ Class {
 }
 
 { #category : 'tests' }
-FmxMBBuilderTest >> testChildBuildersGeneration [
-	| parentBuilder childBuilder environment |
-	parentBuilder := FamixMetamodelBuilder forTesting.
-	parentBuilder configuration packageName: 'ParentBuilderPackage'.
-	parentBuilder ensureClassNamed: 'ParentEntity'.
-
-	childBuilder := FamixMetamodelBuilder new.
-	childBuilder parentBuilder: parentBuilder.
-	childBuilder configuration packageName: 'ChildBuilderPackage'.
-	childBuilder ensureClassNamed: 'ChildEntity'.
-
-	parentBuilder generate.
-	parentBuilder generateRemotes.
-
-	environment := parentBuilder environment ringEnvironment.
-
-	self assert: (environment ask behaviorNamed: #TstParentEntity) isNotNil.
-	self assert: (environment ask behaviorNamed: #TstParentEntity) package name equals: 'ParentBuilderPackage'.
-	self assert: (environment ask behaviorNamed: #TstChildEntity) isNil
-]
-
-{ #category : 'tests' }
-FmxMBBuilderTest >> testChildBuildersShareTheSameEnvironment [
-
-	| parentBuilder childBuilder |
-	
-	parentBuilder := FamixMetamodelBuilder new.
-	childBuilder := FamixMetamodelBuilder new.
-	childBuilder parentBuilder: parentBuilder.
-
-	self assert: childBuilder environment equals: parentBuilder environment.
-
-]
-
-{ #category : 'tests' }
 FmxMBBuilderTest >> testClassNamed [
 
 	| c1 |
@@ -61,6 +26,18 @@ FmxMBBuilderTest >> testClassNamed [
 
 	self assert: (builder classNamed: #C1) equals: c1.
 	self assert: (builder classNamed: #C2) isNil.
+]
+
+{ #category : 'tests' }
+FmxMBBuilderTest >> testConfiguration [
+	| config |
+	config := builder configuration.
+
+	self assert: config isNotNil.
+
+	self deny: config shouldGenerateFileImportHelpers.
+	config shouldGenerateFileImportHelpers: true.
+	self assert: config shouldGenerateFileImportHelpers
 ]
 
 { #category : 'tests' }
@@ -120,34 +97,6 @@ FmxMBBuilderTest >> testMultipleTraitsCreation [
 ]
 
 { #category : 'tests' }
-FmxMBBuilderTest >> testNewClassNamedComment [
-
-	| c1 aClass |
-	aClass := builder newClassNamed: #C1 comment: 'comment'.
-	self assert: aClass comment equals: 'comment'.
-	self assert: aClass isMetamodelClass.
-
-	builder generate.
-
-	c1 := builder testingEnvironment ask classNamed: 'TstC1'.
-	self assert: (c1 comment content beginsWith: 'comment')
-]
-
-{ #category : 'tests' }
-FmxMBBuilderTest >> testNewTraitNamedComment [
-
-	| t1 aTrait |
-	aTrait := builder newTraitNamed: #T1 comment: 'comment'.
-	self assert: aTrait comment equals: 'comment'.
-	self assert: aTrait isMetamodelTrait.
-
-	builder generate.
-
-	t1 := builder testingEnvironment ask traitNamed: 'TstT1'.
-	self assert: (t1 comment content beginsWith: 'comment')
-]
-
-{ #category : 'tests' }
 FmxMBBuilderTest >> testParentBuilder [
 
 	| parentBuilder childBuilder |
@@ -161,16 +110,6 @@ FmxMBBuilderTest >> testParentBuilder [
 	childBuilder parentBuilder: parentBuilder.
 	self assert: childBuilder parentBuilderPackageName equals: 'ParentBuilderPackage'
 
-]
-
-{ #category : 'tests' }
-FmxMBBuilderTest >> testSafeAnnotationPackageName [
-
-	builder configuration packageName: 'Package'.
-	self assert: builder safeAnnotationPackageName equals: '#Package'.
-
-	builder configuration packageName: 'Package-Core'.
-	self assert: builder safeAnnotationPackageName equals: '#''Package-Core'''.	
 ]
 
 { #category : 'tests' }

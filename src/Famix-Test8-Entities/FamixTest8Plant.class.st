@@ -26,5 +26,4 @@ FamixTest8Plant class >> annotation [
 	<FMClass: #Plant super: #FamixTest8LivingBeing>
 	<package: #'Famix-Test8-Entities'>
 	<generated>
-	^ self
 ]

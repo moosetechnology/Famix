@@ -62,14 +62,6 @@ FamixTEnumValue classSide >> annotation [
 	<FMClass: #TEnumValue super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixTEnumValue >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTEnumValue: self
 ]
 
 { #category : 'testing' }
@@ -107,13 +99,6 @@ FamixTEnumValue >> parentEnum: anObject [
 
 	<generated>
 	parentEnum := anObject
-]
-
-{ #category : 'navigation' }
-FamixTEnumValue >> parentEnumGroup [
-	<generated>
-	<navigation: 'ParentEnum'>
-	^ MooseSpecializedGroup with: self parentEnum
 ]
 
 { #category : 'accessing' }

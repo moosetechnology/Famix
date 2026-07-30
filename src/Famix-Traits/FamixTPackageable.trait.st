@@ -26,14 +26,6 @@ FamixTPackageable classSide >> annotation [
 	<FMClass: #TPackageable super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixTPackageable >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTPackageable: self
 ]
 
 { #category : 'accessing' }
@@ -57,11 +49,4 @@ FamixTPackageable >> parentPackage: anObject [
 
 	<generated>
 	parentPackage := anObject
-]
-
-{ #category : 'navigation' }
-FamixTPackageable >> parentPackageGroup [
-	<generated>
-	<navigation: 'ParentPackage'>
-	^ MooseSpecializedGroup with: self parentPackage
 ]

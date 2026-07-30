@@ -1,9 +1,9 @@
 Class {
 	#name : 'FmxMBEntityAlreadyExists',
 	#superclass : 'Error',
-	#category : 'Famix-MetamodelBuilder-Core-Implementation',
+	#category : 'Famix-MetamodelBuilder-Core-Exception',
 	#package : 'Famix-MetamodelBuilder-Core',
-	#tag : 'Implementation'
+	#tag : 'Exception'
 }
 
 { #category : 'accessing' }

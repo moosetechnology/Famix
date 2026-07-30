@@ -53,7 +53,6 @@ FamixTGlobalVariable classSide >> annotation [
 	<FMClass: #TGlobalVariable super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : 'groups' }
@@ -61,13 +60,6 @@ FamixTGlobalVariable classSide >> annotationFamixGlobalVariableGroup [
 	<generated>
 	<mooseGroup>
 	^ FamixGlobalVariableGroup
-]
-
-{ #category : 'visitor' }
-FamixTGlobalVariable >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTGlobalVariable: self
 ]
 
 { #category : 'testing' }
@@ -92,11 +84,4 @@ FamixTGlobalVariable >> parentScope: anObject [
 
 	<generated>
 	parentScope := anObject
-]
-
-{ #category : 'navigation' }
-FamixTGlobalVariable >> parentScopeGroup [
-	<generated>
-	<navigation: 'ParentScope'>
-	^ MooseSpecializedGroup with: self parentScope
 ]

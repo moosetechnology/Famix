@@ -51,14 +51,6 @@ FamixTAnnotationInstanceAttribute classSide >> annotation [
 	<FMClass: #TAnnotationInstanceAttribute super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixTAnnotationInstanceAttribute >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTAnnotationInstanceAttribute: self
 ]
 
 { #category : 'accessing' }
@@ -92,13 +84,6 @@ FamixTAnnotationInstanceAttribute >> parentAnnotationInstance: anObject [
 
 	<generated>
 	parentAnnotationInstance := anObject
-]
-
-{ #category : 'navigation' }
-FamixTAnnotationInstanceAttribute >> parentAnnotationInstanceGroup [
-	<generated>
-	<navigation: 'ParentAnnotationInstance'>
-	^ MooseSpecializedGroup with: self parentAnnotationInstance
 ]
 
 { #category : 'accessing' }

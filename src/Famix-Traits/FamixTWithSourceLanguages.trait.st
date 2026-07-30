@@ -26,14 +26,6 @@ FamixTWithSourceLanguages classSide >> annotation [
 	<FMClass: #TWithSourceLanguages super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixTWithSourceLanguages >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTWithSourceLanguages: self
 ]
 
 { #category : 'accessing' }
@@ -72,7 +64,7 @@ FamixTWithSourceLanguages >> sourceLanguageOr: unknownSourceLanguageClass [
 
 { #category : 'as yet unclassified' }
 FamixTWithSourceLanguages >> unknowSourceLanguageClass [
-	^ (self mooseDescription package
+	^ (self metadescription package
 		classNamed: 'UnknownSourceLanguage'
 		ifAbsent: [ self error: 'This entity has no source language, no model and no class implementing #FamixTUnknownSourceLanguage in it metamodel.' ])
 		implementingClass

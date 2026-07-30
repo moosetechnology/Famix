@@ -11,45 +11,17 @@ FmxMBProperty class >> isAbstract [
 	^ self = FmxMBProperty
 ]
 
-{ #category : 'accessing' }
-FmxMBProperty >> asSlot [
+{ #category : 'visiting' }
+FmxMBProperty >> acceptVisitor: aVisitor [
 
 	<ignoreForCoverage>
-	self subclassResponsibility
-]
-
-{ #category : 'generating' }
-FmxMBProperty >> generateAccessorsIn: aClassOrTrait [
-	self generateGetterIn: aClassOrTrait.
-	self generateSetterIn: aClassOrTrait
-]
-
-{ #category : 'generating' }
-FmxMBProperty >> generateGetterIn: aClassOrTrait [
-	<ignoreForCoverage>
-	self subclassResponsibility
-]
-
-{ #category : 'generating' }
-FmxMBProperty >> generateSetterIn: aClassOrTrait [
-	<ignoreForCoverage>
-	self subclassResponsibility
-]
-
-{ #category : 'printing' }
-FmxMBProperty >> hasDefaultValue [
-	^ false
+	^ aVisitor visitProperty: self
 ]
 
 { #category : 'initialization' }
 FmxMBProperty >> initialize [
 	super initialize.
 	comment := ''
-]
-
-{ #category : 'printing' }
-FmxMBProperty >> isContainer [
-	^ false
 ]
 
 { #category : 'accessing' }
@@ -60,7 +32,8 @@ FmxMBProperty >> isRelation [
 
 { #category : 'accessing' }
 FmxMBProperty >> name: aString [
-	(self builder reservedKeywords includes: aString) ifTrue: [ FmxMBPropertyNameIsReserved signal ].
+
+	(self reservedKeywords includes: aString) ifTrue: [ FmxMBPropertyNameIsReserved signal ].
 	name := aString
 ]
 
@@ -79,4 +52,22 @@ FmxMBProperty >> printOn: aStream [
 { #category : 'printing' }
 FmxMBProperty >> producesSlot [
 	^ true
+]
+
+{ #category : 'accessing' }
+FmxMBProperty >> slotDefinition [
+
+	^ '#' , self name , ' => ' , self slotExpression
+]
+
+{ #category : 'accessing' }
+FmxMBProperty >> slotExpression [
+
+	self subclassResponsibility
+]
+
+{ #category : 'validation' }
+FmxMBProperty >> validate [
+
+	self subclassResponsibility
 ]

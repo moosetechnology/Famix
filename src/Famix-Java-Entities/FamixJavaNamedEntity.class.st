@@ -33,7 +33,6 @@ FamixJavaNamedEntity class >> annotation [
 	<package: #'Famix-Java-Entities'>
 	<generated>
 	<abstract>
-	^ self
 ]
 
 { #category : 'testing' }
@@ -41,13 +40,6 @@ FamixJavaNamedEntity class >> isAbstract [
 
 	<generated>
 	^ self == FamixJavaNamedEntity
-]
-
-{ #category : 'visitor' }
-FamixJavaNamedEntity >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaNamedEntity: self
 ]
 
 { #category : 'testing' }

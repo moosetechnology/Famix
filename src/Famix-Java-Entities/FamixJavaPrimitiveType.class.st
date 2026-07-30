@@ -7,6 +7,11 @@
 |---|
 | `typeContainer` | `FamixTType` | `types` | `FamixTWithTypes` | Container entity to which this type belongs. Container is a namespace, not a package (Smalltalk).|
 
+### Outgoing dependencies
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `outgoingConcretizations` | `FamixTTypeArgument` | `typeArgument` | `FamixTConcretization` | Concretizations where this type is the type argument.|
+
 ### Incoming dependencies
 | Relation | Origin | Opposite | Type | Comment |
 |---|
@@ -31,8 +36,8 @@
 Class {
 	#name : 'FamixJavaPrimitiveType',
 	#superclass : 'FamixJavaType',
-	#traits : 'FamixTPrimitiveType',
-	#classTraits : 'FamixTPrimitiveType classTrait',
+	#traits : 'FamixTPrimitiveType + FamixTTypeArgument',
+	#classTraits : 'FamixTPrimitiveType classTrait + FamixTTypeArgument classTrait',
 	#category : 'Famix-Java-Entities-Entities',
 	#package : 'Famix-Java-Entities',
 	#tag : 'Entities'
@@ -44,14 +49,6 @@ FamixJavaPrimitiveType class >> annotation [
 	<FMClass: #PrimitiveType super: #FamixJavaType>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixJavaPrimitiveType >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaPrimitiveType: self
 ]
 
 { #category : 'testing' }

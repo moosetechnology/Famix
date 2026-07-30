@@ -30,14 +30,6 @@ FamixTWithExceptions classSide >> annotation [
 	<FMClass: #TWithExceptions super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixTWithExceptions >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTWithExceptions: self
 ]
 
 { #category : 'adding' }

@@ -8,8 +8,6 @@ It stores the contained entities in a storage variable that points to a MooseGro
 Class {
 	#name : 'MooseAbstractGroup',
 	#superclass : 'MooseObject',
-	#traits : 'TMooseGroupDependencyQueries',
-	#classTraits : 'TMooseGroupDependencyQueries classTrait',
 	#instVars : [
 		'storage'
 	],
@@ -682,6 +680,42 @@ MooseAbstractGroup >> printOn: aStream [
 	aStream nextPut: $(.
 	aStream print: self size.
 	aStream nextPut: $)
+]
+
+{ #category : 'querying' }
+MooseAbstractGroup >> queryAllIncoming [
+
+	^ MooseIncomingQueryResult on: self withAll: (self entities flatCollect: [ :m | m queryAllIncoming ])
+]
+
+{ #category : 'querying' }
+MooseAbstractGroup >> queryAllOutgoing [
+
+	^ MooseOutgoingQueryResult on: self withAll: (self entities flatCollect: [ :m | m queryAllOutgoing ])
+]
+
+{ #category : 'querying' }
+MooseAbstractGroup >> queryIncoming: aFAMIXClassAssociation [
+
+	^ MooseIncomingQueryResult on: self withAll: (self entities flatCollect: [ :m | m queryIncoming: aFAMIXClassAssociation ])
+]
+
+{ #category : 'querying' }
+MooseAbstractGroup >> queryLocalIncoming: aFAMIXClassAssociation [
+
+	^ MooseIncomingQueryResult on: self withAll: (self entities flatCollect: [ :m | m queryLocalIncoming: aFAMIXClassAssociation ])
+]
+
+{ #category : 'querying' }
+MooseAbstractGroup >> queryLocalOutgoing: aFAMIXClassAssociation [
+
+	^ MooseOutgoingQueryResult on: self withAll: (self entities flatCollect: [ :m | m queryLocalOutgoing: aFAMIXClassAssociation ])
+]
+
+{ #category : 'querying' }
+MooseAbstractGroup >> queryOutgoing: aFAMIXClassAssociation [
+
+	^ MooseOutgoingQueryResult on: self withAll: (self entities flatCollect: [ :m | m queryOutgoing: aFAMIXClassAssociation ])
 ]
 
 { #category : 'groups' }

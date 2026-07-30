@@ -59,5 +59,4 @@ MooseMSEImporterTestMethod class >> annotation [
 	<FMClass: #Method super: #MooseMSEImporterTestNamedEntity>
 	<package: #'Moose-Core-Tests-Entities'>
 	<generated>
-	^ self
 ]

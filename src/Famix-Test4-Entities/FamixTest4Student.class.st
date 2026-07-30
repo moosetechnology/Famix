@@ -33,7 +33,6 @@ FamixTest4Student class >> annotation [
 	<FMClass: #Student super: #FamixTest4Person>
 	<package: #'Famix-Test4-Entities'>
 	<generated>
-	^ self
 ]
 
 { #category : 'adding' }
@@ -58,13 +57,6 @@ FamixTest4Student >> school: anObject [
 	school := anObject
 ]
 
-{ #category : 'navigation' }
-FamixTest4Student >> schoolGroup [
-	<generated>
-	<navigation: 'School'>
-	^ MooseSpecializedGroup with: self school
-]
-
 { #category : 'accessing' }
 FamixTest4Student >> teachers [
 	"Relation named: #teachers type: #FamixTest4Teacher opposite: #students"
@@ -79,11 +71,4 @@ FamixTest4Student >> teachers: anObject [
 
 	<generated>
 	teachers value: anObject
-]
-
-{ #category : 'navigation' }
-FamixTest4Student >> teachersGroup [
-	<generated>
-	<navigation: 'Teachers'>
-	^ MooseSpecializedGroup withAll: self teachers asSet
 ]

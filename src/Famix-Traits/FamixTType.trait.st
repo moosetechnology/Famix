@@ -53,7 +53,6 @@ FamixTType classSide >> annotation [
 	<FMClass: #TType super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : 'groups' }
@@ -61,13 +60,6 @@ FamixTType classSide >> annotationFamixTypeGroup [
 	<generated>
 	<mooseGroup>
 	^ FamixTypeGroup
-]
-
-{ #category : 'visitor' }
-FamixTType >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTType: self
 ]
 
 { #category : 'adding' }
@@ -161,13 +153,6 @@ FamixTType >> typeContainer: anObject [
 	typeContainer := anObject.
 	self resetMooseName.
 
-]
-
-{ #category : 'navigation' }
-FamixTType >> typeContainerGroup [
-	<generated>
-	<navigation: 'TypeContainer'>
-	^ MooseSpecializedGroup with: self typeContainer
 ]
 
 { #category : 'as yet unclassified' }

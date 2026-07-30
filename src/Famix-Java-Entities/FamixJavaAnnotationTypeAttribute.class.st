@@ -54,14 +54,6 @@ FamixJavaAnnotationTypeAttribute class >> annotation [
 	<FMClass: #AnnotationTypeAttribute super: #FamixJavaVariable>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^ self
-]
-
-{ #category : 'visitor' }
-FamixJavaAnnotationTypeAttribute >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaAnnotationTypeAttribute: self
 ]
 
 { #category : 'accessing' }

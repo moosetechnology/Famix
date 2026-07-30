@@ -27,7 +27,6 @@ FamixTest4Room class >> annotation [
 	<FMClass: #Room super: #FamixTest4Entity>
 	<package: #'Famix-Test4-Entities'>
 	<generated>
-	^ self
 ]
 
 { #category : 'accessing' }
@@ -44,11 +43,4 @@ FamixTest4Room >> school: anObject [
 
 	<generated>
 	school := anObject
-]
-
-{ #category : 'navigation' }
-FamixTest4Room >> schoolGroup [
-	<generated>
-	<navigation: 'School'>
-	^ MooseSpecializedGroup with: self school
 ]
