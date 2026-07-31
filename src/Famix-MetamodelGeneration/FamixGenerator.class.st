@@ -1226,7 +1226,7 @@ FamixGenerator >> defineProperties [
 
 	(tAccess property: #isWrite type: #Boolean defaultValue: false) comment: 'Write access'.
 
-	(tAnnotationInstanceAttribute property: #value type: #String) comment: 'Actual value of the attribute used in an annotation'.
+	(tAnnotationInstanceAttribute property: #value type: #Object) comment: 'Actual value of the attribute used in an annotation'.
 
 	(tNamedEntity property: #name type: #String) comment: 'Basic name of the entity, not full reference.'.
 
