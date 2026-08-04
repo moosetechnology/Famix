@@ -105,6 +105,13 @@ MooseModel class >> factory [
 	^ FMMetamodelFactory forModel: self
 ]
 
+{ #category : 'fuel' }
+MooseModel class >> fuelIgnoredInstanceVariableNames [
+
+	^ super fuelIgnoredInstanceVariableNames,
+		#('cache' 'entityAttributes')
+]
+
 { #category : 'import-export' }
 MooseModel class >> importFrom: aStream [
 	^ self importFrom: aStream withMetamodel: self metamodel
@@ -175,6 +182,22 @@ MooseModel class >> importFrom: aStream withMetamodel: aMetamodel translationDic
 						   dictionary: translationDict;
 						   yourself);
 				  yourself ]
+]
+
+{ #category : 'import-export' }
+MooseModel class >> importFromFuelFile: aFileReference [
+
+	^ aFileReference binaryReadStreamDo: [ :stream |
+		self importFromFuelStream: stream
+	]
+]
+
+{ #category : 'import-export' }
+MooseModel class >> importFromFuelStream: aStream [
+	"Materializes and returns a Moose model from the provided binary Fuel stream."
+
+	^ FLMaterializer
+		materializeFrom: aStream
 ]
 
 { #category : 'import-export' }
@@ -497,6 +520,22 @@ MooseModel >> exportTo: aStream [
 ]
 
 { #category : 'import-export' }
+MooseModel >> exportToFuelFile: aFileReference [
+	aFileReference binaryWriteStreamDo: [ :stream |
+		self exportToFuelStream: stream
+	]
+]
+
+{ #category : 'import-export' }
+MooseModel >> exportToFuelStream: aStream [
+	"Serializes the receiver using Fuel into the provided binary stream."
+
+	FLSerializer
+		serialize: self
+		on: aStream
+]
+
+{ #category : 'import-export' }
 MooseModel >> exportToJSONSeparetedStream: aStream [
 
 	self detectEncodingOfAllFileAnchors.
@@ -536,6 +575,13 @@ MooseModel >> flushPrivateState [
 	"Clean the private state caches of all the entities of the model. This will not impact attributes in the private state (informations you cannot derive)"
 
 	self entities do: #flush displayingProgress: [ :entity | 'Cleaning cache of ' , entity mooseName ]
+]
+
+{ #category : 'fuel' }
+MooseModel >> fuelAfterMaterialization [
+
+	super fuelAfterMaterialization.
+	self resetPrivateState
 ]
 
 { #category : 'import-export' }
