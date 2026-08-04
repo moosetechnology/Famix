@@ -28,7 +28,7 @@ Instance Variables:
 
 | Name | Type | Default value | Comment |
 |---|
-| `value` | `String` | nil | Actual value of the attribute used in an annotation|
+| `value` | `Object` | nil | Actual value of the attribute used in an annotation|
 
 "
 Trait {
@@ -89,7 +89,7 @@ FamixTAnnotationInstanceAttribute >> parentAnnotationInstance: anObject [
 { #category : 'accessing' }
 FamixTAnnotationInstanceAttribute >> value [
 
-	<FMProperty: #value type: #String>
+	<FMProperty: #value type: #Object>
 	<generated>
 	<FMComment: 'Actual value of the attribute used in an annotation'>
 	^ value
