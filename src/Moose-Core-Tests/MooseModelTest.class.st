@@ -113,6 +113,60 @@ MooseModelTest >> testExportMetamodelToMSEStream [
 ]
 
 { #category : 'tests' }
+MooseModelTest >> testFuelFileRoundTrip [
+
+	| model entity file restored |
+
+	model := MooseModel new.
+	entity := MooseEntity new.
+	model add: entity.
+
+	file := FileLocator temp
+		/ 'moose-model-fuel-test.fuel'.
+
+	file ensureDelete.
+
+	[
+		model exportToFuelFile: file.
+
+		restored := MooseModel
+			importFromFuelFile: file.
+
+		self assert: file exists.
+		self deny: file size equals: 0.
+		self deny: model identicalTo: restored.
+		self assert: restored class equals: MooseModel.
+		self assert: restored size equals: 1.
+		self assert: restored first class equals: MooseEntity.
+		self assert: restored first mooseModel identicalTo: restored
+	] ensure: [
+		file ensureDelete
+	]
+]
+
+{ #category : 'tests' }
+MooseModelTest >> testFuelStreamRoundTrip [
+
+	| model entity stream bytes restored |
+	model := MooseModel new.
+	entity := MooseEntity new.
+	model add: entity.
+
+	stream := ByteArray new writeStream.
+	model exportToFuelStream: stream.
+	bytes := stream contents.
+
+	restored := MooseModel importFromFuelStream: bytes readStream.
+
+	self deny: bytes isEmpty.
+	self deny: model identicalTo: restored.
+	self assert: restored class equals: MooseModel.
+	self assert: restored size equals: 1.
+	self assert: restored first class equals: MooseEntity.
+	self assert: restored first mooseModel identicalTo: restored
+]
+
+{ #category : 'tests' }
 MooseModelTest >> testIntersectionWithRealCollection [
 	"A MooseModel should only contains Moose entities."
 
