@@ -298,6 +298,20 @@ MooseModel class >> importFromMSEStream: aStream filteredBy: anImportingContext 
 		  yourself
 ]
 
+{ #category : 'import-export' }
+MooseModel class >> importFromMessagePackStream: aStream [
+
+    | model importer |
+
+    model := self new.
+
+    importer := FMMessagePackModelImporter new.
+    importer model: model.
+    importer importFromStream: aStream.
+
+    ^ model
+]
+
 { #category : 'meta' }
 MooseModel class >> metamodel [
 
