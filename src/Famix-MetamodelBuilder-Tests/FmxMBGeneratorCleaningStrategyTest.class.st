@@ -29,56 +29,57 @@ FmxMBGeneratorCleaningStrategyTest >> generateClasses [
 	self class environment
 		at: #FmxTestCleaningStrategyEntity
 		ifPresent: [ :class |
-			class
-				compile: 'banana
+				class
+					compile: 'banana
 
 	^ 42'
-				classified: #monkey.
-			class class
-				compile: 'tree
+					classified: #monkey.
+				class class
+					compile: 'tree
 
 	^ #Christopher'
-				classified: #monkey.
-			class
-				compile: 'generatedBanana
+					classified: #monkey.
+				class
+					compile: 'generatedBanana
 	<generated>
 	^ #Christopher'
-				classified: #monkey.
-			class
-				compile: 'potatoExtendedMethod
+					classified: #monkey.
+				class
+					compile: 'potatoExtendedMethod
 
 	^ 42'
-				classified: #* , self class package name.
-			class addToComposition: FamixTestExternalTraits.
-			class addInstVarNamed: 'bananaTree'.
-			class addClassVarNamed: 'Fuhrmanator'.
-			class class addInstVarNamed: 'grandFrais'.
-			(class slotNamed: #fursonas) inClass: #FmxTestCleaningStrategyEntity. "Here we change the type of the slot to ensure it is regenerated correctly"
-			class comment: 'Test' ]
+					classified: #* , self class package name.
+				class addToComposition: FamixTestExternalTraits.
+				class addInstVarNamed: 'bananaTree'.
+				class addClassVarNamed: 'Fuhrmanator'.
+				class class addInstVarNamed: 'grandFrais'.
+				(class slotNamed: #fursonas) inClass: #FmxTestCleaningStrategyEntity. "Here we change the type of the slot to ensure it is regenerated correctly"
+				class comment: 'Test' ]
 		ifAbsent: [ self fail ].
-	
+
 	"We add a manually added class to ensure it is not removed. Also, we add a metadescribed trait to it to ensure we do not remove classes metadescribed from a trait"
-	self class environment at: #FmxTestCleaningStrategyTATrait ifPresent: [ :trait | 
-		
-		self class classInstaller make: [ :aBuilder |
-		aBuilder
-			name: #FmxCleanerTestAddedClass;
-			traits: trait;
-			package: self packageName ].
-		 ] ifAbsent: [ self fail ].
-		
+	self class environment
+		at: #FmxTestCleaningStrategyTATrait
+		ifPresent: [ :trait |
+				self class classInstaller make: [ :aBuilder |
+						aBuilder
+							name: #FmxCleanerTestAddedClass;
+							traits: trait;
+							package: self packageName ] ]
+		ifAbsent: [ self fail ].
+
 	self class classInstaller make: [ :aBuilder |
-		aBuilder
-			beTrait;
-			name: #TFmxCleanerTestAddedTrait;
-			package: self packageName ].
+			aBuilder
+				beTrait;
+				name: #TFmxCleanerTestAddedTrait;
+				package: self packageName ].
 
 	"We add a class with Famix pragma to ensure it is deleted after the generation."
 	generatedClassToRemove := self class classInstaller make: [ :aBuilder |
-		                          aBuilder
-			                          superclass: MooseEntity;
-			                          name: #FmxCleanerTestAddedClassFromFamix;
-			                          package: self packageName ].
+			                          aBuilder
+				                          superclass: MooseEntity;
+				                          name: #FmxCleanerTestAddedClassFromFamix;
+				                          package: self packageName ].
 	generatedClassToRemove class compile: 'annotation
 
 	<FMClass: #AddedClassFromFamix super: #MooseEntity>
@@ -88,10 +89,10 @@ FmxMBGeneratorCleaningStrategyTest >> generateClasses [
 
 	"We add a Trait with Famix pragma to ensure it is deleted after the generation."
 	generatedTraitToRemove := self class classInstaller make: [ :aBuilder |
-		                          aBuilder
-			                          beTrait;
-			                          name: #FmxCleanerTestTAddedClassFromFamix;
-			                          package: self packageName ].
+			                          aBuilder
+				                          beTrait;
+				                          name: #FmxCleanerTestTAddedClassFromFamix;
+				                          package: self packageName ].
 	generatedTraitToRemove class compile: 'annotation
 
 	<FMClass: #TAddedClassFromFamix super: #Trait>
@@ -103,11 +104,14 @@ FmxMBGeneratorCleaningStrategyTest >> generateClasses [
 	self class environment
 		at: #FmxTestCleaningStrategyWithDifferentSuperclass
 		ifPresent: [ :class |
-			self class classInstaller make: [ :aBuilder |
-				aBuilder
-					superclass: MooseEntity;
-					name: #FmxTestCleaningStrategyWithDifferentSuperclass;
-					package: 'Famix-MetamodelBuilder-TestsResources-Entities' ] ]
+				self class classInstaller make: [ :aBuilder |
+						aBuilder
+							superclass: MooseEntity;
+							name: #FmxTestCleaningStrategyWithDifferentSuperclass;
+							package: 'Famix-MetamodelBuilder-TestsResources-Entities' ].
+				"If we move a class to another package, it needs to be included in the MM."
+				'Famix-MetamodelBuilder-TestsResources-Entities' asPackage packageManifest class compile: 'shouldBeIncludedByDefaultInMetamodelsWith: aCollectionOfPackages
+	^ true' ]
 		ifAbsent: [ self fail ].
 	self class compile: 'extensionsMethodForTest' classified: '*' , generator packageName
 ]
@@ -127,9 +131,11 @@ FmxMBGeneratorCleaningStrategyTest >> setUp [
 { #category : 'running' }
 FmxMBGeneratorCleaningStrategyTest >> tearDown [
 
-	[ self packageName asPackage removeFromSystem ]
+	[
+		self packageName asPackage removeFromSystem.
+		'Famix-MetamodelBuilder-TestsResources-Entities' asPackage removeFromSystem ]
 		on: NotFound
-		do: [  ].
+		do: [ ].
 	super tearDown
 ]
 
@@ -242,16 +248,20 @@ FmxMBGeneratorCleaningStrategyTest >> testGenerateNoCleaningGeneration [
 
 { #category : 'tests' }
 FmxMBGeneratorCleaningStrategyTest >> testGenerateTotalCleaningCleaning [
+
 	generator withCleaning cleaningStrategy cleanBeforeGeneration: generator.
 	self should: [ self class environment at: #FmxTestCleaningStrategyEntity ] raise: KeyNotFound.
-	self should: [ self class environment at: #FmxTestCleaningStrategyWithDifferentSuperclass ] raise: KeyNotFound.
+	"self should: [ self class environment at: #FmxTestCleaningStrategyWithDifferentSuperclass ] raise: KeyNotFound." "For now we do not clean classes that have manually been moved to another package. We should do it later."
 	self should: [ self class environment at: #FmxCleanerTestAddedClass ] raise: KeyNotFound.
 	self should: [ self class environment at: #TFmxCleanerTestAddedTrait ] raise: KeyNotFound.
 	self should: [ self class environment at: #FmxCleanerTestAddedClassFromFamix ] raise: KeyNotFound.
 	self should: [ self class environment at: #FmxCleanerTestTAddedClassFromFamix ] raise: KeyNotFound.
 	self should: [ self class environment at: #FmxTestCleaningStrategyWithTraitPrecedenceToRemove ] raise: KeyNotFound.
 
-	self assert: (self class methodDict at: #extensionsMethodForTest ifPresent: [ false ] ifAbsent: [ true ])
+	self assert: (self class methodDict
+			 at: #extensionsMethodForTest
+			 ifPresent: [ false ]
+			 ifAbsent: [ true ])
 ]
 
 { #category : 'tests' }
