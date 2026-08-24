@@ -183,7 +183,7 @@ FamixTWithInheritances >> subclassHierarchyDepth: aNumber [
 
 { #category : 'enumerating' }
 FamixTWithInheritances >> subclassHierarchyGroup [
-	<navigation: 'All subclasses'>
+
 	^ MooseGroup withAll: self subclassHierarchy asSet withDescription: 'All subclasses of ' , self mooseName
 ]
 
@@ -219,10 +219,8 @@ FamixTWithInheritances >> superclassHierarchy [
 
 { #category : 'enumerating' }
 FamixTWithInheritances >> superclassHierarchyGroup [
-	<navigation: 'All superclasses'>
-	^ MooseGroup
-		withAll: self superclassHierarchy asSet
-		withDescription: 'All superclasses of ' , self mooseName
+
+	^ MooseGroup withAll: self superclassHierarchy asSet withDescription: 'All superclasses of ' , self mooseName
 ]
 
 { #category : 'Famix-Implementation' }

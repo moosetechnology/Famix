@@ -84,13 +84,6 @@ FamixTFile >> entities: anObject [
 	entities value: anObject
 ]
 
-{ #category : 'accessing' }
-FamixTFile >> entitiesGroup [
-	<navigation: 'Entities'>
-	
-	^ MooseGroup withAll: self entities withDescription: 'Entities defined in a file'
-]
-
 { #category : 'testing' }
 FamixTFile >> exists [
 	^ self fileExists 
