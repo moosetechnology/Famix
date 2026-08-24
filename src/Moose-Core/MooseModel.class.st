@@ -105,6 +105,13 @@ MooseModel class >> factory [
 	^ FMMetamodelFactory forModel: self
 ]
 
+{ #category : 'fuel' }
+MooseModel class >> fuelIgnoredInstanceVariableNames [
+
+	^ super fuelIgnoredInstanceVariableNames,
+		#('cache' 'entityAttributes')
+]
+
 { #category : 'import-export' }
 MooseModel class >> importFrom: aStream [
 	^ self importFrom: aStream withMetamodel: self metamodel
@@ -178,6 +185,22 @@ MooseModel class >> importFrom: aStream withMetamodel: aMetamodel translationDic
 ]
 
 { #category : 'import-export' }
+MooseModel class >> importFromFuelFile: aFileReference [
+
+	^ aFileReference binaryReadStreamDo: [ :stream |
+		self importFromFuelStream: stream
+	]
+]
+
+{ #category : 'import-export' }
+MooseModel class >> importFromFuelStream: aStream [
+	"Materializes and returns a Moose model from the provided binary Fuel stream."
+
+	^ FLMaterializer
+		materializeFrom: aStream
+]
+
+{ #category : 'import-export' }
 MooseModel class >> importFromJSON: aStream withMetamodel: aMetamodel [
 	"Here we build with the default importer"
 
@@ -225,6 +248,42 @@ MooseModel class >> importFromJSON: aStream withMetamodel: aMetamodel filteredBy
 ]
 
 { #category : 'import-export' }
+MooseModel class >> importFromJSONSepareted: aStream withMetamodel: aMetamodel [
+	"Here we build with the default importer"
+
+	^ self
+		  importFromJSONSepareted: aStream
+		  withMetamodel: aMetamodel
+		  customizingImporterWith: [ :importer | importer ]
+]
+
+{ #category : 'import-export' }
+MooseModel class >> importFromJSONSepareted: aStream withMetamodel: aMetamodel customizingImporterWith: aBlock [
+	"I import a MSE with its metamodel and return a FMModel from it. It is possible to customize the importer via a block"
+
+	| model importer areWarningsEnabled |
+	model := FMModel withMetamodel: aMetamodel.
+	importer := aBlock value:
+		            ((FMImporter model: model)
+			             autorizeDandlingReferencesAtEnd
+			             "parser: FMJSONSeparatedRelationsParse;"
+							parser: FMJSONSeparatedRelationsDirectParser;
+			             stream: aStream;
+			             yourself).
+
+	"We are currently updating the meta models and most parsers are not up to date.
+	We disable warnings to avoid all deprecation warnings during the transition phase."
+	areWarningsEnabled := Deprecation raiseWarning.
+	[
+		Deprecation raiseWarning: false.
+		importer run ] ensure: [
+		Deprecation raiseWarning: areWarningsEnabled ].
+
+	model updateCache.
+	^ model
+]
+
+{ #category : 'import-export' }
 MooseModel class >> importFromMSEStream: aStream [
 	^ self new
 		importFromMSEStream: aStream;
@@ -237,6 +296,20 @@ MooseModel class >> importFromMSEStream: aStream filteredBy: anImportingContext 
 	^ self new
 		  importFromMSEStream: aStream filteredBy: anImportingContext;
 		  yourself
+]
+
+{ #category : 'import-export' }
+MooseModel class >> importFromMessagePackStream: aStream [
+
+    | model importer |
+
+    model := self new.
+
+    importer := FMMessagePackModelImporter new.
+    importer model: model.
+    importer importFromStream: aStream.
+
+    ^ model
 ]
 
 { #category : 'meta' }
@@ -440,6 +513,14 @@ MooseModel >> exportMetamodelToMSEStream: aStream [
 ]
 
 { #category : 'import-export' }
+MooseModel >> exportSeparetedWithMetamodelUsingPrinter: aPrinter [
+
+	(FMModel withMetamodel: self metamodel)
+		addAll: self entities;
+		exportSeparetedWithPrinter: aPrinter
+]
+
+{ #category : 'import-export' }
 MooseModel >> exportTo: aStream [
 
 	self
@@ -450,6 +531,30 @@ MooseModel >> exportTo: aStream [
 		-> '`@model exportToMSEStream: `@stream'.
 
 	self exportToMSEStream: aStream
+]
+
+{ #category : 'import-export' }
+MooseModel >> exportToFuelFile: aFileReference [
+	aFileReference binaryWriteStreamDo: [ :stream |
+		self exportToFuelStream: stream
+	]
+]
+
+{ #category : 'import-export' }
+MooseModel >> exportToFuelStream: aStream [
+	"Serializes the receiver using Fuel into the provided binary stream."
+
+	FLSerializer
+		serialize: self
+		on: aStream
+]
+
+{ #category : 'import-export' }
+MooseModel >> exportToJSONSeparetedStream: aStream [
+
+	self detectEncodingOfAllFileAnchors.
+	self exportSeparetedWithMetamodelUsingPrinter:
+		(FMJSONSeparatedCompactPrinter on: aStream)
 ]
 
 { #category : 'import-export' }
@@ -486,6 +591,13 @@ MooseModel >> flushPrivateState [
 	self entities do: #flush displayingProgress: [ :entity | 'Cleaning cache of ' , entity mooseName ]
 ]
 
+{ #category : 'fuel' }
+MooseModel >> fuelAfterMaterialization [
+
+	super fuelAfterMaterialization.
+	self resetPrivateState
+]
+
 { #category : 'import-export' }
 MooseModel >> importFrom: aFMModel named: aString [
 
@@ -507,6 +619,22 @@ MooseModel >> importFromJSON [
 		self importFromJSONStream: stream.
 		self name: file basenameWithoutExtension.
 		stream close ]
+]
+
+{ #category : 'import-export' }
+MooseModel >> importFromJSONSeparetedStream: aStream [
+	"Benchmarks
+	Time millisecondsToRun: [ MooseModel new importFromJSONStream: (StandardFileStream readOnlyFileNamed: 'network3.json') ].
+	Time millisecondsToRun: [ MooseModel new importFromJSONStream: (StandardFileStream readOnlyFileNamed: 'moose.json') ]. 178163 simon.denier 9/11/2009 12:29
+	 23678 -> simon.denier 9/11/2009 11:36 - initial run
+ 	 21551 -> simon.denier 9/11/2009 12:18 - IdentityHashSet (reverted)
+	 17560 -> simon_denier 9/21/2009 22:34 - removing metrics from MSE
+	"
+
+	^ self
+		  importFrom:
+		  (self class importFromJSONSepareted: aStream withMetamodel: self metamodel)
+		  named: (aStream localName withoutSuffix: '.json')
 ]
 
 { #category : 'import-export' }
