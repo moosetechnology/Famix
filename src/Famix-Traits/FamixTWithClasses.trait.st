@@ -29,9 +29,12 @@ FamixTWithClasses classSide >> annotation [
 
 { #category : 'accessing' }
 FamixTWithClasses >> classes [
-	"Classes are usually seen as types from the point of view of a Container. However, there may other types (e.g. aspects) which we dont want to see as classes and are rejected by this method."
 
-	<navigation: 'Classes'>
+	<FMProperty: #classes type: #FamixTClass>
+	<FMComment:
+	'Classes are usually seen as types from the point of view of a Container. However, there may other types (e.g. aspects) which we dont want to see as classes and are rejected by this method.'>
+	<derived>
+	<multivalued>
 	^ self cacheAt: #classes ifAbsentPut: [ self types select: #isClass ]
 ]
 
