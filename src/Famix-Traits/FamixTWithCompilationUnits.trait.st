@@ -23,6 +23,7 @@ Trait {
 { #category : 'meta' }
 FamixTWithCompilationUnits classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TWithCompilationUnits super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -32,6 +33,7 @@ FamixTWithCompilationUnits classSide >> annotation [
 FamixTWithCompilationUnits >> compilationUnit [
 	"Relation named: #compilationUnit type: #FamixTCompilationUnit opposite: #compilationUnitOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<derived>
 	^ compilationUnit
@@ -40,6 +42,7 @@ FamixTWithCompilationUnits >> compilationUnit [
 { #category : 'accessing' }
 FamixTWithCompilationUnits >> compilationUnit: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	compilationUnit := anObject
 ]

@@ -40,8 +40,10 @@ FmxMBRelationAccessorsGenerationStrategy >> generateGetterCodeFor: aRelation [
 				  nextPutAll: aRelation oppositeName;
 				  nextPutAll: '"';
 				  cr;
-				  cr.
-			  s
+				  cr;
+				  tab;
+				  nextPutAll: '<ignoreForCoverage>';
+				  cr;
 				  tab;
 				  nextPutAll: '<generated>';
 				  cr.
@@ -88,8 +90,10 @@ FmxMBRelationAccessorsGenerationStrategy >> generateSetterCodeFor: aRelation [
 				  nextPutAll: aRelation name;
 				  nextPutAll: ': anObject';
 				  cr;
-				  cr.
-			  s
+				  cr;
+				  tab;
+				  nextPutAll: '<ignoreForCoverage>';
+				  cr;
 				  tab;
 				  nextPutAll: '<generated>';
 				  cr.

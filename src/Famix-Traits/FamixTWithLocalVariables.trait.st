@@ -23,6 +23,7 @@ Trait {
 { #category : 'meta' }
 FamixTWithLocalVariables classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TWithLocalVariables super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -37,6 +38,7 @@ FamixTWithLocalVariables >> addLocalVariable: aLocalVariable [
 FamixTWithLocalVariables >> localVariables [
 	"Relation named: #localVariables type: #FamixTLocalVariable opposite: #parentBehaviouralEntity"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Variables locally defined by this behaviour.'>
 	<derived>
@@ -46,6 +48,7 @@ FamixTWithLocalVariables >> localVariables [
 { #category : 'accessing' }
 FamixTWithLocalVariables >> localVariables: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	localVariables value: anObject
 ]

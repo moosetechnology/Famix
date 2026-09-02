@@ -50,6 +50,7 @@ Trait {
 { #category : 'meta' }
 FamixTType classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TType super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -57,6 +58,8 @@ FamixTType classSide >> annotation [
 
 { #category : 'groups' }
 FamixTType classSide >> annotationFamixTypeGroup [
+
+	<ignoreForCoverage>
 	<generated>
 	<mooseGroup>
 	^ FamixTypeGroup
@@ -64,6 +67,8 @@ FamixTType classSide >> annotationFamixTypeGroup [
 
 { #category : 'adding' }
 FamixTType >> addIncomingTyping: anObject [
+
+	<ignoreForCoverage>
 	<generated>
 	^ self incomingTypings add: anObject
 ]
@@ -87,6 +92,7 @@ FamixTType >> entityHasIncomingTypeDeclarations [
 FamixTType >> incomingTypings [
 	"Relation named: #incomingTypings type: #FamixTEntityTyping opposite: #declaredType"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Relations to the entities that have this as type.'>
 	<derived>
@@ -96,6 +102,7 @@ FamixTType >> incomingTypings [
 { #category : 'accessing' }
 FamixTType >> incomingTypings: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	incomingTypings value: anObject
 ]
@@ -103,6 +110,7 @@ FamixTType >> incomingTypings: anObject [
 { #category : 'testing' }
 FamixTType >> isType [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
@@ -141,6 +149,7 @@ FamixTType >> realType [
 FamixTType >> typeContainer [
 	"Relation named: #typeContainer type: #FamixTWithTypes opposite: #types"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Container entity to which this type belongs. Container is a namespace, not a package (Smalltalk).'>
 	<container>

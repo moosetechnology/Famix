@@ -62,6 +62,7 @@ Trait {
 { #category : 'meta' }
 FamixTMethod classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TMethod super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -69,6 +70,8 @@ FamixTMethod classSide >> annotation [
 
 { #category : 'groups' }
 FamixTMethod classSide >> annotationFamixMethodGroup [
+
+	<ignoreForCoverage>
 	<generated>
 	<mooseGroup>
 	^ FamixMethodGroup
@@ -144,6 +147,7 @@ FamixTMethod >> isInitializer [
 { #category : 'testing' }
 FamixTMethod >> isMethod [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
@@ -187,6 +191,7 @@ FamixTMethod >> overridingMethods [
 FamixTMethod >> parentType [
 	"Relation named: #parentType type: #FamixTWithMethods opposite: #methods"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Type declaring the method. It provides the implementation for belongsTo.'>
 	<container>

@@ -46,6 +46,7 @@ Class {
 { #category : 'meta' }
 FamixTest8Infection class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Infection super: #FamixTest8Entity>
 	<package: #'Famix-Test8-Entities'>
 	<generated>
@@ -55,6 +56,7 @@ FamixTest8Infection class >> annotation [
 FamixTest8Infection >> infectable [
 	"Relation named: #infectable type: #FamixTest8TInfectable opposite: #outgoingInfections"
 
+	<ignoreForCoverage>
 	<generated>
 	<source>
 	^ infectable
@@ -63,6 +65,7 @@ FamixTest8Infection >> infectable [
 { #category : 'accessing' }
 FamixTest8Infection >> infectable: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	infectable := anObject
 ]
@@ -71,6 +74,7 @@ FamixTest8Infection >> infectable: anObject [
 FamixTest8Infection >> infectious [
 	"Relation named: #infectious type: #FamixTest8TInfectious opposite: #incomingInfections"
 
+	<ignoreForCoverage>
 	<generated>
 	<target>
 	^ infectious
@@ -79,6 +83,7 @@ FamixTest8Infection >> infectious [
 { #category : 'accessing' }
 FamixTest8Infection >> infectious: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	infectious := anObject
 ]
@@ -87,12 +92,14 @@ FamixTest8Infection >> infectious: anObject [
 FamixTest8Infection >> isInvasive [
 
 	<FMProperty: #isInvasive type: #Boolean defaultValue: false>
+	<ignoreForCoverage>
 	<generated>
 	^ isInvasive ifNil: [ isInvasive := false ]
 ]
 
 { #category : 'accessing' }
 FamixTest8Infection >> isInvasive: anObject [
+	<ignoreForCoverage>
 	<generated>
 	isInvasive := anObject
 ]

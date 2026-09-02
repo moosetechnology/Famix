@@ -33,6 +33,7 @@ Trait {
 { #category : 'meta' }
 FamixTHasImmediateSource classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #THasImmediateSource super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -55,6 +56,7 @@ FamixTHasImmediateSource classSide >> source: aString model: aMooseModel [
 { #category : 'testing' }
 FamixTHasImmediateSource >> hasImmediateSource [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
@@ -68,6 +70,7 @@ FamixTHasImmediateSource >> hasSource [
 FamixTHasImmediateSource >> source [
 
 	<FMProperty: #source type: #String>
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Actual source code of the source entity'>
 	^ source
@@ -75,6 +78,7 @@ FamixTHasImmediateSource >> source [
 
 { #category : 'accessing' }
 FamixTHasImmediateSource >> source: anObject [
+	<ignoreForCoverage>
 	<generated>
 	source := anObject
 ]

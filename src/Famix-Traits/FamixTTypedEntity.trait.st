@@ -23,6 +23,7 @@ Trait {
 { #category : 'meta' }
 FamixTTypedEntity classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TTypedEntity super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -55,6 +56,7 @@ FamixTTypedEntity >> hasDeclaredType [
 FamixTTypedEntity >> typing [
 	"Relation named: #typing type: #FamixTEntityTyping opposite: #typedEntity"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Association linking this entity to its declared type.'>
 	^ typing
@@ -63,6 +65,7 @@ FamixTTypedEntity >> typing [
 { #category : 'accessing' }
 FamixTTypedEntity >> typing: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	typing := anObject
 ]

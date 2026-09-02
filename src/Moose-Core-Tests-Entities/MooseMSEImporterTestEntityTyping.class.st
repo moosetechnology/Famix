@@ -35,6 +35,7 @@ Class {
 { #category : 'meta' }
 MooseMSEImporterTestEntityTyping class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #EntityTyping super: #MooseMSEImporterTestEntity>
 	<package: #'Moose-Core-Tests-Entities'>
 	<generated>

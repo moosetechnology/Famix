@@ -38,6 +38,7 @@ Trait {
 { #category : 'meta' }
 FamixTFolder classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TFolder super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -45,6 +46,8 @@ FamixTFolder classSide >> annotation [
 
 { #category : 'groups' }
 FamixTFolder classSide >> annotationFamixFolderGroup [
+
+	<ignoreForCoverage>
 	<generated>
 	<mooseGroup>
 	^ FamixFolderGroup
@@ -57,6 +60,8 @@ FamixTFolder >> addChildFileSystemEntity: aFileOrFolder [
 
 { #category : 'adding' }
 FamixTFolder >> addChildrenFileSystemEntity: anObject [
+
+	<ignoreForCoverage>
 	<generated>
 	^ self childrenFileSystemEntities add: anObject
 ]
@@ -81,6 +86,7 @@ FamixTFolder >> allRecursiveFolders [
 FamixTFolder >> childrenFileSystemEntities [
 	"Relation named: #childrenFileSystemEntities type: #FamixTFileSystemEntity opposite: #parentFolder"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'List of entities contained in this folder.'>
 	<derived>
@@ -90,6 +96,7 @@ FamixTFolder >> childrenFileSystemEntities [
 { #category : 'accessing' }
 FamixTFolder >> childrenFileSystemEntities: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	childrenFileSystemEntities value: anObject
 ]

@@ -34,6 +34,7 @@ Class {
 { #category : 'meta' }
 FamixStAnnotationType class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #AnnotationType super: #FamixStNamedEntity>
 	<package: #'Famix-PharoSmalltalk-Entities'>
 	<generated>

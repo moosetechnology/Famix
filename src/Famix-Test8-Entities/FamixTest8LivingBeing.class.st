@@ -23,6 +23,7 @@ Class {
 { #category : 'meta' }
 FamixTest8LivingBeing class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #LivingBeing super: #FamixTest8Entity>
 	<package: #'Famix-Test8-Entities'>
 	<generated>

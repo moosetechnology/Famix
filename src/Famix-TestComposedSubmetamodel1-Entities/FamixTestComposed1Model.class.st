@@ -10,6 +10,8 @@ Class {
 
 { #category : 'accessing' }
 FamixTestComposed1Model class >> allSubmetamodelsPackagesNames [
+
+	<ignoreForCoverage>
 	<generated>
 	^ #(#'Moose-Query' #'Famix-Traits')
 ]
@@ -17,6 +19,7 @@ FamixTestComposed1Model class >> allSubmetamodelsPackagesNames [
 { #category : 'meta' }
 FamixTestComposed1Model class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Model super: #MooseModel>
 	<package: #'Famix-TestComposedSubmetamodel1-Entities'>
 	<generated>

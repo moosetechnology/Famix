@@ -31,6 +31,7 @@ Trait {
 { #category : 'meta' }
 FamixTFileNavigation classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TFileNavigation super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -63,6 +64,7 @@ FamixTFileNavigation classSide >> fileName: aString startLine: anInteger startCo
 FamixTFileNavigation >> endColumn [
 
 	<FMProperty: #endColumn type: #Number>
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Number of the end column'>
 	^ endColumn
@@ -70,6 +72,7 @@ FamixTFileNavigation >> endColumn [
 
 { #category : 'accessing' }
 FamixTFileNavigation >> endColumn: anObject [
+	<ignoreForCoverage>
 	<generated>
 	endColumn := anObject
 ]
@@ -78,6 +81,7 @@ FamixTFileNavigation >> endColumn: anObject [
 FamixTFileNavigation >> endLine [
 
 	<FMProperty: #endLine type: #Number>
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Number of the end line'>
 	^ endLine
@@ -85,6 +89,7 @@ FamixTFileNavigation >> endLine [
 
 { #category : 'accessing' }
 FamixTFileNavigation >> endLine: anObject [
+	<ignoreForCoverage>
 	<generated>
 	endLine := anObject
 ]
@@ -176,6 +181,7 @@ FamixTFileNavigation >> sourceText [
 FamixTFileNavigation >> startColumn [
 
 	<FMProperty: #startColumn type: #Number>
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Number of the start column'>
 	^ startColumn
@@ -183,6 +189,7 @@ FamixTFileNavigation >> startColumn [
 
 { #category : 'accessing' }
 FamixTFileNavigation >> startColumn: anObject [
+	<ignoreForCoverage>
 	<generated>
 	startColumn := anObject
 ]
@@ -191,6 +198,7 @@ FamixTFileNavigation >> startColumn: anObject [
 FamixTFileNavigation >> startLine [
 
 	<FMProperty: #startLine type: #Number>
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Number of the start line'>
 	^ startLine
@@ -198,6 +206,7 @@ FamixTFileNavigation >> startLine [
 
 { #category : 'accessing' }
 FamixTFileNavigation >> startLine: anObject [
+	<ignoreForCoverage>
 	<generated>
 	startLine := anObject
 ]

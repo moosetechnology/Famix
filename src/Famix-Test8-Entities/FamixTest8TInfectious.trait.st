@@ -23,6 +23,7 @@ Trait {
 { #category : 'meta' }
 FamixTest8TInfectious classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TInfectious super: #Object>
 	<package: #'Famix-Test8-Entities'>
 	<generated>
@@ -30,6 +31,8 @@ FamixTest8TInfectious classSide >> annotation [
 
 { #category : 'adding' }
 FamixTest8TInfectious >> addIncomingInfection: anObject [
+
+	<ignoreForCoverage>
 	<generated>
 	^ self incomingInfections add: anObject
 ]
@@ -38,6 +41,7 @@ FamixTest8TInfectious >> addIncomingInfection: anObject [
 FamixTest8TInfectious >> incomingInfections [
 	"Relation named: #incomingInfections type: #FamixTest8Infection opposite: #infectious"
 
+	<ignoreForCoverage>
 	<generated>
 	<derived>
 	^ incomingInfections
@@ -46,6 +50,7 @@ FamixTest8TInfectious >> incomingInfections [
 { #category : 'accessing' }
 FamixTest8TInfectious >> incomingInfections: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	incomingInfections value: anObject
 ]

@@ -41,6 +41,7 @@ Class {
 { #category : 'meta' }
 FamixJavaAccess class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Access super: #FamixJavaEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>

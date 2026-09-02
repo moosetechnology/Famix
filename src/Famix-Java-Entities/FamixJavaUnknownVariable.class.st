@@ -40,6 +40,7 @@ Class {
 { #category : 'meta' }
 FamixJavaUnknownVariable class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #UnknownVariable super: #FamixJavaVariable>
 	<package: #'Famix-Java-Entities'>
 	<generated>

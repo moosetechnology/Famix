@@ -23,6 +23,7 @@ Class {
 { #category : 'meta' }
 FamixJavaParametricInheritance class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #ParametricInheritance super: #FamixJavaInheritance>
 	<package: #'Famix-Java-Entities'>
 	<generated>

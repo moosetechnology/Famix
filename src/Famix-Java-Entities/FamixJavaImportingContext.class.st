@@ -15,6 +15,7 @@ Class {
 { #category : 'accessing' }
 FamixJavaImportingContext class >> importedMetamodel [
 
+	<ignoreForCoverage>
 	<generated>
 	^ FamixJavaModel metamodel
 ]
@@ -22,6 +23,7 @@ FamixJavaImportingContext class >> importedMetamodel [
 { #category : 'importing' }
 FamixJavaImportingContext >> importAccess [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importAssociation: (self class fm3ClassNamed: #Access)
 ]
@@ -29,6 +31,7 @@ FamixJavaImportingContext >> importAccess [
 { #category : 'importing' }
 FamixJavaImportingContext >> importAnnotationInstance [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #AnnotationInstance)
 ]
@@ -36,6 +39,7 @@ FamixJavaImportingContext >> importAnnotationInstance [
 { #category : 'importing' }
 FamixJavaImportingContext >> importAnnotationInstanceAttribute [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #AnnotationInstanceAttribute)
 ]
@@ -43,6 +47,7 @@ FamixJavaImportingContext >> importAnnotationInstanceAttribute [
 { #category : 'importing' }
 FamixJavaImportingContext >> importAnnotationType [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #AnnotationType)
 ]
@@ -50,6 +55,7 @@ FamixJavaImportingContext >> importAnnotationType [
 { #category : 'importing' }
 FamixJavaImportingContext >> importAnnotationTypeAttribute [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #AnnotationTypeAttribute)
 ]
@@ -57,6 +63,7 @@ FamixJavaImportingContext >> importAnnotationTypeAttribute [
 { #category : 'importing' }
 FamixJavaImportingContext >> importAttribute [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #Attribute)
 ]
@@ -64,6 +71,7 @@ FamixJavaImportingContext >> importAttribute [
 { #category : 'importing' }
 FamixJavaImportingContext >> importClass [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #Class)
 ]
@@ -71,6 +79,7 @@ FamixJavaImportingContext >> importClass [
 { #category : 'importing' }
 FamixJavaImportingContext >> importComment [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #Comment)
 ]
@@ -78,6 +87,7 @@ FamixJavaImportingContext >> importComment [
 { #category : 'importing' }
 FamixJavaImportingContext >> importConcretization [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importAssociation: (self class fm3ClassNamed: #Concretization)
 ]
@@ -85,6 +95,7 @@ FamixJavaImportingContext >> importConcretization [
 { #category : 'importing' }
 FamixJavaImportingContext >> importEntityTyping [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importAssociation: (self class fm3ClassNamed: #EntityTyping)
 ]
@@ -92,6 +103,7 @@ FamixJavaImportingContext >> importEntityTyping [
 { #category : 'importing' }
 FamixJavaImportingContext >> importEnum [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #Enum)
 ]
@@ -99,6 +111,7 @@ FamixJavaImportingContext >> importEnum [
 { #category : 'importing' }
 FamixJavaImportingContext >> importEnumValue [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #EnumValue)
 ]
@@ -106,6 +119,7 @@ FamixJavaImportingContext >> importEnumValue [
 { #category : 'importing' }
 FamixJavaImportingContext >> importException [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #Exception)
 ]
@@ -113,6 +127,7 @@ FamixJavaImportingContext >> importException [
 { #category : 'importing' }
 FamixJavaImportingContext >> importImplementation [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importAssociation: (self class fm3ClassNamed: #Implementation)
 ]
@@ -120,6 +135,7 @@ FamixJavaImportingContext >> importImplementation [
 { #category : 'importing' }
 FamixJavaImportingContext >> importImplicitVariable [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #ImplicitVariable)
 ]
@@ -127,6 +143,7 @@ FamixJavaImportingContext >> importImplicitVariable [
 { #category : 'importing' }
 FamixJavaImportingContext >> importImport [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importAssociation: (self class fm3ClassNamed: #Import)
 ]
@@ -134,6 +151,7 @@ FamixJavaImportingContext >> importImport [
 { #category : 'importing' }
 FamixJavaImportingContext >> importIndexedFileAnchor [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #IndexedFileAnchor)
 ]
@@ -141,6 +159,7 @@ FamixJavaImportingContext >> importIndexedFileAnchor [
 { #category : 'importing' }
 FamixJavaImportingContext >> importInheritance [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importAssociation: (self class fm3ClassNamed: #Inheritance)
 ]
@@ -148,6 +167,7 @@ FamixJavaImportingContext >> importInheritance [
 { #category : 'importing' }
 FamixJavaImportingContext >> importInitializer [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #Initializer)
 ]
@@ -155,6 +175,7 @@ FamixJavaImportingContext >> importInitializer [
 { #category : 'importing' }
 FamixJavaImportingContext >> importInterface [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #Interface)
 ]
@@ -162,6 +183,7 @@ FamixJavaImportingContext >> importInterface [
 { #category : 'importing' }
 FamixJavaImportingContext >> importInvocation [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importAssociation: (self class fm3ClassNamed: #Invocation)
 ]
@@ -169,6 +191,7 @@ FamixJavaImportingContext >> importInvocation [
 { #category : 'importing' }
 FamixJavaImportingContext >> importLocalVariable [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #LocalVariable)
 ]
@@ -176,6 +199,7 @@ FamixJavaImportingContext >> importLocalVariable [
 { #category : 'importing' }
 FamixJavaImportingContext >> importMethod [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #Method)
 ]
@@ -183,6 +207,7 @@ FamixJavaImportingContext >> importMethod [
 { #category : 'importing' }
 FamixJavaImportingContext >> importPackage [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #Package)
 ]
@@ -190,6 +215,7 @@ FamixJavaImportingContext >> importPackage [
 { #category : 'importing' }
 FamixJavaImportingContext >> importParameter [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #Parameter)
 ]
@@ -197,6 +223,7 @@ FamixJavaImportingContext >> importParameter [
 { #category : 'importing' }
 FamixJavaImportingContext >> importParametricClass [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #ParametricClass)
 ]
@@ -204,6 +231,7 @@ FamixJavaImportingContext >> importParametricClass [
 { #category : 'importing' }
 FamixJavaImportingContext >> importParametricEntityTyping [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #ParametricEntityTyping)
 ]
@@ -211,6 +239,7 @@ FamixJavaImportingContext >> importParametricEntityTyping [
 { #category : 'importing' }
 FamixJavaImportingContext >> importParametricImplementation [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #ParametricImplementation)
 ]
@@ -218,6 +247,7 @@ FamixJavaImportingContext >> importParametricImplementation [
 { #category : 'importing' }
 FamixJavaImportingContext >> importParametricInheritance [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #ParametricInheritance)
 ]
@@ -225,6 +255,7 @@ FamixJavaImportingContext >> importParametricInheritance [
 { #category : 'importing' }
 FamixJavaImportingContext >> importParametricInterface [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #ParametricInterface)
 ]
@@ -232,6 +263,7 @@ FamixJavaImportingContext >> importParametricInterface [
 { #category : 'importing' }
 FamixJavaImportingContext >> importParametricInvocation [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #ParametricInvocation)
 ]
@@ -239,6 +271,7 @@ FamixJavaImportingContext >> importParametricInvocation [
 { #category : 'importing' }
 FamixJavaImportingContext >> importParametricMethod [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #ParametricMethod)
 ]
@@ -246,6 +279,7 @@ FamixJavaImportingContext >> importParametricMethod [
 { #category : 'importing' }
 FamixJavaImportingContext >> importParametricReference [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #ParametricReference)
 ]
@@ -253,6 +287,7 @@ FamixJavaImportingContext >> importParametricReference [
 { #category : 'importing' }
 FamixJavaImportingContext >> importPrimitiveType [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #PrimitiveType)
 ]
@@ -260,6 +295,7 @@ FamixJavaImportingContext >> importPrimitiveType [
 { #category : 'importing' }
 FamixJavaImportingContext >> importReference [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importAssociation: (self class fm3ClassNamed: #Reference)
 ]
@@ -267,6 +303,7 @@ FamixJavaImportingContext >> importReference [
 { #category : 'importing' }
 FamixJavaImportingContext >> importSourceLanguage [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #SourceLanguage)
 ]
@@ -274,6 +311,7 @@ FamixJavaImportingContext >> importSourceLanguage [
 { #category : 'importing' }
 FamixJavaImportingContext >> importSourceTextAnchor [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #SourceTextAnchor)
 ]
@@ -281,6 +319,7 @@ FamixJavaImportingContext >> importSourceTextAnchor [
 { #category : 'importing' }
 FamixJavaImportingContext >> importType [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #Type)
 ]
@@ -288,6 +327,7 @@ FamixJavaImportingContext >> importType [
 { #category : 'importing' }
 FamixJavaImportingContext >> importTypeParameter [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #TypeParameter)
 ]
@@ -295,6 +335,7 @@ FamixJavaImportingContext >> importTypeParameter [
 { #category : 'importing' }
 FamixJavaImportingContext >> importUnknownVariable [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #UnknownVariable)
 ]
@@ -302,6 +343,7 @@ FamixJavaImportingContext >> importUnknownVariable [
 { #category : 'importing' }
 FamixJavaImportingContext >> importWildcard [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #Wildcard)
 ]
@@ -309,6 +351,7 @@ FamixJavaImportingContext >> importWildcard [
 { #category : 'testing' }
 FamixJavaImportingContext >> shouldImportAccess [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #Access
 ]
@@ -316,6 +359,7 @@ FamixJavaImportingContext >> shouldImportAccess [
 { #category : 'testing' }
 FamixJavaImportingContext >> shouldImportAnnotationInstance [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #AnnotationInstance
 ]
@@ -323,6 +367,7 @@ FamixJavaImportingContext >> shouldImportAnnotationInstance [
 { #category : 'testing' }
 FamixJavaImportingContext >> shouldImportAnnotationInstanceAttribute [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #AnnotationInstanceAttribute
 ]
@@ -330,6 +375,7 @@ FamixJavaImportingContext >> shouldImportAnnotationInstanceAttribute [
 { #category : 'testing' }
 FamixJavaImportingContext >> shouldImportAnnotationType [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #AnnotationType
 ]
@@ -337,6 +383,7 @@ FamixJavaImportingContext >> shouldImportAnnotationType [
 { #category : 'testing' }
 FamixJavaImportingContext >> shouldImportAnnotationTypeAttribute [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #AnnotationTypeAttribute
 ]
@@ -344,6 +391,7 @@ FamixJavaImportingContext >> shouldImportAnnotationTypeAttribute [
 { #category : 'testing' }
 FamixJavaImportingContext >> shouldImportAttribute [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #Attribute
 ]
@@ -351,6 +399,7 @@ FamixJavaImportingContext >> shouldImportAttribute [
 { #category : 'testing' }
 FamixJavaImportingContext >> shouldImportClass [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #Class
 ]
@@ -358,6 +407,7 @@ FamixJavaImportingContext >> shouldImportClass [
 { #category : 'testing' }
 FamixJavaImportingContext >> shouldImportComment [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #Comment
 ]
@@ -365,6 +415,7 @@ FamixJavaImportingContext >> shouldImportComment [
 { #category : 'testing' }
 FamixJavaImportingContext >> shouldImportConcretization [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #Concretization
 ]
@@ -372,6 +423,7 @@ FamixJavaImportingContext >> shouldImportConcretization [
 { #category : 'testing' }
 FamixJavaImportingContext >> shouldImportEntityTyping [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #EntityTyping
 ]
@@ -379,6 +431,7 @@ FamixJavaImportingContext >> shouldImportEntityTyping [
 { #category : 'testing' }
 FamixJavaImportingContext >> shouldImportEnum [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #Enum
 ]
@@ -386,6 +439,7 @@ FamixJavaImportingContext >> shouldImportEnum [
 { #category : 'testing' }
 FamixJavaImportingContext >> shouldImportEnumValue [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #EnumValue
 ]
@@ -393,6 +447,7 @@ FamixJavaImportingContext >> shouldImportEnumValue [
 { #category : 'testing' }
 FamixJavaImportingContext >> shouldImportException [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #Exception
 ]
@@ -400,6 +455,7 @@ FamixJavaImportingContext >> shouldImportException [
 { #category : 'testing' }
 FamixJavaImportingContext >> shouldImportImplementation [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #Implementation
 ]
@@ -407,6 +463,7 @@ FamixJavaImportingContext >> shouldImportImplementation [
 { #category : 'testing' }
 FamixJavaImportingContext >> shouldImportImplicitVariable [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #ImplicitVariable
 ]
@@ -414,6 +471,7 @@ FamixJavaImportingContext >> shouldImportImplicitVariable [
 { #category : 'testing' }
 FamixJavaImportingContext >> shouldImportImport [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #Import
 ]
@@ -421,6 +479,7 @@ FamixJavaImportingContext >> shouldImportImport [
 { #category : 'testing' }
 FamixJavaImportingContext >> shouldImportIndexedFileAnchor [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #IndexedFileAnchor
 ]
@@ -428,6 +487,7 @@ FamixJavaImportingContext >> shouldImportIndexedFileAnchor [
 { #category : 'testing' }
 FamixJavaImportingContext >> shouldImportInheritance [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #Inheritance
 ]
@@ -435,6 +495,7 @@ FamixJavaImportingContext >> shouldImportInheritance [
 { #category : 'testing' }
 FamixJavaImportingContext >> shouldImportInitializer [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #Initializer
 ]
@@ -442,6 +503,7 @@ FamixJavaImportingContext >> shouldImportInitializer [
 { #category : 'testing' }
 FamixJavaImportingContext >> shouldImportInterface [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #Interface
 ]
@@ -449,6 +511,7 @@ FamixJavaImportingContext >> shouldImportInterface [
 { #category : 'testing' }
 FamixJavaImportingContext >> shouldImportInvocation [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #Invocation
 ]
@@ -456,6 +519,7 @@ FamixJavaImportingContext >> shouldImportInvocation [
 { #category : 'testing' }
 FamixJavaImportingContext >> shouldImportLocalVariable [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #LocalVariable
 ]
@@ -463,6 +527,7 @@ FamixJavaImportingContext >> shouldImportLocalVariable [
 { #category : 'testing' }
 FamixJavaImportingContext >> shouldImportMethod [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #Method
 ]
@@ -470,6 +535,7 @@ FamixJavaImportingContext >> shouldImportMethod [
 { #category : 'testing' }
 FamixJavaImportingContext >> shouldImportPackage [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #Package
 ]
@@ -477,6 +543,7 @@ FamixJavaImportingContext >> shouldImportPackage [
 { #category : 'testing' }
 FamixJavaImportingContext >> shouldImportParameter [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #Parameter
 ]
@@ -484,6 +551,7 @@ FamixJavaImportingContext >> shouldImportParameter [
 { #category : 'testing' }
 FamixJavaImportingContext >> shouldImportParametricClass [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #ParametricClass
 ]
@@ -491,6 +559,7 @@ FamixJavaImportingContext >> shouldImportParametricClass [
 { #category : 'testing' }
 FamixJavaImportingContext >> shouldImportParametricEntityTyping [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #ParametricEntityTyping
 ]
@@ -498,6 +567,7 @@ FamixJavaImportingContext >> shouldImportParametricEntityTyping [
 { #category : 'testing' }
 FamixJavaImportingContext >> shouldImportParametricImplementation [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #ParametricImplementation
 ]
@@ -505,6 +575,7 @@ FamixJavaImportingContext >> shouldImportParametricImplementation [
 { #category : 'testing' }
 FamixJavaImportingContext >> shouldImportParametricInheritance [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #ParametricInheritance
 ]
@@ -512,6 +583,7 @@ FamixJavaImportingContext >> shouldImportParametricInheritance [
 { #category : 'testing' }
 FamixJavaImportingContext >> shouldImportParametricInterface [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #ParametricInterface
 ]
@@ -519,6 +591,7 @@ FamixJavaImportingContext >> shouldImportParametricInterface [
 { #category : 'testing' }
 FamixJavaImportingContext >> shouldImportParametricInvocation [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #ParametricInvocation
 ]
@@ -526,6 +599,7 @@ FamixJavaImportingContext >> shouldImportParametricInvocation [
 { #category : 'testing' }
 FamixJavaImportingContext >> shouldImportParametricMethod [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #ParametricMethod
 ]
@@ -533,6 +607,7 @@ FamixJavaImportingContext >> shouldImportParametricMethod [
 { #category : 'testing' }
 FamixJavaImportingContext >> shouldImportParametricReference [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #ParametricReference
 ]
@@ -540,6 +615,7 @@ FamixJavaImportingContext >> shouldImportParametricReference [
 { #category : 'testing' }
 FamixJavaImportingContext >> shouldImportPrimitiveType [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #PrimitiveType
 ]
@@ -547,6 +623,7 @@ FamixJavaImportingContext >> shouldImportPrimitiveType [
 { #category : 'testing' }
 FamixJavaImportingContext >> shouldImportReference [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #Reference
 ]
@@ -554,6 +631,7 @@ FamixJavaImportingContext >> shouldImportReference [
 { #category : 'testing' }
 FamixJavaImportingContext >> shouldImportSourceLanguage [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #SourceLanguage
 ]
@@ -561,6 +639,7 @@ FamixJavaImportingContext >> shouldImportSourceLanguage [
 { #category : 'testing' }
 FamixJavaImportingContext >> shouldImportSourceTextAnchor [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #SourceTextAnchor
 ]
@@ -568,6 +647,7 @@ FamixJavaImportingContext >> shouldImportSourceTextAnchor [
 { #category : 'testing' }
 FamixJavaImportingContext >> shouldImportType [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #Type
 ]
@@ -575,6 +655,7 @@ FamixJavaImportingContext >> shouldImportType [
 { #category : 'testing' }
 FamixJavaImportingContext >> shouldImportTypeParameter [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #TypeParameter
 ]
@@ -582,6 +663,7 @@ FamixJavaImportingContext >> shouldImportTypeParameter [
 { #category : 'testing' }
 FamixJavaImportingContext >> shouldImportUnknownVariable [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #UnknownVariable
 ]
@@ -589,6 +671,7 @@ FamixJavaImportingContext >> shouldImportUnknownVariable [
 { #category : 'testing' }
 FamixJavaImportingContext >> shouldImportWildcard [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #Wildcard
 ]

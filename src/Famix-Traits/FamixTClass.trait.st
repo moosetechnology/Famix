@@ -60,6 +60,7 @@ Trait {
 { #category : 'meta' }
 FamixTClass classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TClass super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -67,6 +68,8 @@ FamixTClass classSide >> annotation [
 
 { #category : 'groups' }
 FamixTClass classSide >> annotationFamixClassGroup [
+
+	<ignoreForCoverage>
 	<generated>
 	<mooseGroup>
 	^ FamixClassGroup
@@ -177,6 +180,7 @@ FamixTClass >> inheritedSignaturesToMethod [
 { #category : 'testing' }
 FamixTClass >> isClass [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]

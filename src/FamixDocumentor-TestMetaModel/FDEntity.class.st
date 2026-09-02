@@ -9,6 +9,7 @@ Class {
 { #category : 'meta' }
 FDEntity class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Entity super: #MooseEntity>
 	<package: #'FamixDocumentor-TestMetaModel'>
 	<generated>
@@ -18,6 +19,7 @@ FDEntity class >> annotation [
 { #category : 'testing' }
 FDEntity class >> isAbstract [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self == FDEntity
 ]
@@ -25,6 +27,7 @@ FDEntity class >> isAbstract [
 { #category : 'meta' }
 FDEntity class >> metamodel [
 
+	<ignoreForCoverage>
 	<generated>
 	^ FDModel metamodel
 ]

@@ -23,6 +23,7 @@ Trait {
 { #category : 'meta' }
 FamixTWithInvocations classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TWithInvocations super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -46,6 +47,7 @@ FamixTWithInvocations >> numberOfOutgoingInvocations [
 FamixTWithInvocations >> outgoingInvocations [
 	"Relation named: #outgoingInvocations type: #FamixTInvocation opposite: #sender"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Outgoing invocations sent by this behaviour.'>
 	<derived>
@@ -55,6 +57,7 @@ FamixTWithInvocations >> outgoingInvocations [
 { #category : 'accessing' }
 FamixTWithInvocations >> outgoingInvocations: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	outgoingInvocations value: anObject
 ]

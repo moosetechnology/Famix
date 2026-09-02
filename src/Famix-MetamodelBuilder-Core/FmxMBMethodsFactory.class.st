@@ -17,6 +17,8 @@ Class {
 FmxMBMethodsFactory class >> addToCollectionFor: aName [
 
 	^ 'add{1}: anObject
+
+	<ignoreForCoverage>
 	<generated>
 	^ self {2} add: anObject' format: {
 			  aName capitalized asSingular.
@@ -29,6 +31,8 @@ FmxMBMethodsFactory class >> allSubmetamodelsPackagesNamesFor: subBuilders [
 	^ String streamContents: [ :stream |
 			  | packages |
 			  stream nextPutAll: 'allSubmetamodelsPackagesNames
+
+	<ignoreForCoverage>
 	<generated>
 	^ #('.
 
@@ -44,6 +48,7 @@ FmxMBMethodsFactory class >> annotationFor: aName super: superclassName package:
 
 	^ 'annotation
 
+	<ignoreForCoverage>
 	<FMClass: #{1} super: #{2}>
 	<package: {3}>
 	<generated>{4}' format: {
@@ -61,6 +66,8 @@ FmxMBMethodsFactory class >> annotationFor: aName super: superclassName package:
 FmxMBMethodsFactory class >> canBeImportedFromFile [
 
 	^ 'canBeImportedFromFile
+
+	<ignoreForCoverage>
 	<generated>
 	^true'
 ]
@@ -74,6 +81,7 @@ FmxMBMethodsFactory class >> equalsForVariableNamed: variableName properties: pr
 				  << variableName;
 				  << '
 
+	<ignoreForCoverage>
 	<generated>
 	^ ';
 				  << variableName;
@@ -111,12 +119,13 @@ FmxMBMethodsFactory class >> getTypedProperty: aProperty [
 			  s
 				  nextPutAll: aProperty name;
 				  cr;
-				  cr.
-			  s
+				  cr;
 				  tab;
 				  nextPutAll: propertyDefinition;
-				  cr.
-			  s
+				  cr;
+				  tab;
+				  nextPutAll: '<ignoreForCoverage>';
+				  cr;
 				  tab;
 				  nextPutAll: '<generated>';
 				  cr.
@@ -153,6 +162,8 @@ FmxMBMethodsFactory class >> getTypedProperty: aProperty [
 FmxMBMethodsFactory class >> groupAnnotationNamed: aName [
 
 	^ 'annotation{1}
+
+	<ignoreForCoverage>
 	<generated>
 	<mooseGroup>
 	^ {1}' format: { aName }
@@ -165,6 +176,7 @@ FmxMBMethodsFactory class >> hashForProperties: properties [
 			  stream << 'hash'.
 			  stream << '
 
+	<ignoreForCoverage>
 	<generated>
 	^ '.
 			  stream
@@ -184,6 +196,7 @@ FmxMBMethodsFactory class >> importAssociationNamed: aName [
 
 	^ 'import{1}
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importAssociation: (self class fm3ClassNamed: #{1})' format: { aName }
 ]
@@ -193,6 +206,7 @@ FmxMBMethodsFactory class >> importEntityNamed: aName [
 
 	^ 'import{1}
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #{1})' format: { aName }
 ]
@@ -202,6 +216,7 @@ FmxMBMethodsFactory class >> importedMetamodelForPrefix: prefix [
 
 	^ 'importedMetamodel
 
+	<ignoreForCoverage>
 	<generated>
 	^ {1}Model metamodel' format: { prefix }
 ]
@@ -211,6 +226,7 @@ FmxMBMethodsFactory class >> importingClassNamed: aName [
 
 	^ 'importingContextClass
 
+	<ignoreForCoverage>
 	<generated>
 	^ {1}' format: { aName }
 ]
@@ -220,6 +236,7 @@ FmxMBMethodsFactory class >> instantiate: aClass [
 
 	^ 'new{1}
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: {2} new' format: {
 			  aClass name.
@@ -231,6 +248,7 @@ FmxMBMethodsFactory class >> instantiateNamed: aClass [
 
 	^ 'new{1}Named: aName
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: ({2} named: aName)' format: {
 			  aClass name.
@@ -242,6 +260,7 @@ FmxMBMethodsFactory class >> isAbstractFor: className [
 
 	^ 'isAbstract
 
+	<ignoreForCoverage>
 	<generated>
 	^ self == {1}' format: { className }
 ]
@@ -251,6 +270,7 @@ FmxMBMethodsFactory class >> metamodelFor: className [
 
 	^ 'metamodel
 
+	<ignoreForCoverage>
 	<generated>
 	^ {1} metamodel' format: { className }
 ]
@@ -260,6 +280,7 @@ FmxMBMethodsFactory class >> setTypedProperty: aName remote: aBoolean [
 
 	^ (String streamContents: [ :stream |
 			   stream nextPutAll: '{1}: anObject
+	<ignoreForCoverage>
 	<generated>
 	'.
 			   aBoolean
@@ -272,6 +293,7 @@ FmxMBMethodsFactory class >> shouldImportNamed: aName [
 
 	^ 'shouldImport{1}
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #{1}' format: { aName }
 ]
@@ -281,6 +303,7 @@ FmxMBMethodsFactory class >> testReturning: aBoolean for: aSelector [
 
 	^ '{1}
 
+	<ignoreForCoverage>
 	<generated>
 	^ {2}' format: {
 			  aSelector.

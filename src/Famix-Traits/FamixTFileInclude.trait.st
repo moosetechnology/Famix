@@ -30,6 +30,7 @@ Trait {
 { #category : 'meta' }
 FamixTFileInclude classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TFileInclude super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -39,6 +40,7 @@ FamixTFileInclude classSide >> annotation [
 FamixTFileInclude >> source [
 	"Relation named: #source type: #FamixTWithFileIncludes opposite: #outgoingIncludeRelations"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The file that is including'>
 	^ source
@@ -47,6 +49,7 @@ FamixTFileInclude >> source [
 { #category : 'accessing' }
 FamixTFileInclude >> source: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	source := anObject
 ]
@@ -55,6 +58,7 @@ FamixTFileInclude >> source: anObject [
 FamixTFileInclude >> target [
 	"Relation named: #target type: #FamixTWithFileIncludes opposite: #incomingIncludeRelations"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The file that is included'>
 	^ target
@@ -63,6 +67,7 @@ FamixTFileInclude >> target [
 { #category : 'accessing' }
 FamixTFileInclude >> target: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	target := anObject
 ]

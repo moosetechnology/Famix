@@ -57,6 +57,7 @@ Class {
 { #category : 'meta' }
 FamixJavaInterface class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Interface super: #FamixJavaType>
 	<package: #'Famix-Java-Entities'>
 	<generated>
@@ -84,6 +85,7 @@ FamixJavaInterface >> addMethodOverriding: aMethod in: aCollection [
 { #category : 'testing' }
 FamixJavaInterface >> isInterface [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]

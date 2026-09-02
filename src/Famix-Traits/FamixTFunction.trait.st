@@ -59,6 +59,7 @@ Trait {
 { #category : 'meta' }
 FamixTFunction classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TFunction super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -68,6 +69,7 @@ FamixTFunction classSide >> annotation [
 FamixTFunction >> functionOwner [
 	"Relation named: #functionOwner type: #FamixTWithFunctions opposite: #functions"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The container defining the function. The function is placed in a container, because certain languages can nest functions in functions.'>
 	<container>
@@ -85,6 +87,7 @@ FamixTFunction >> functionOwner: anObject [
 { #category : 'testing' }
 FamixTFunction >> isFunction [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]

@@ -41,6 +41,7 @@ Trait {
 { #category : 'meta' }
 FamixTPackage classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TPackage super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -48,6 +49,8 @@ FamixTPackage classSide >> annotation [
 
 { #category : 'groups' }
 FamixTPackage classSide >> annotationFamixPackageGroup [
+
+	<ignoreForCoverage>
 	<generated>
 	<mooseGroup>
 	^ FamixPackageGroup
@@ -63,6 +66,7 @@ FamixTPackage >> addChildEntity: anObject [
 FamixTPackage >> childEntities [
 	"Relation named: #childEntities type: #FamixTPackageable opposite: #parentPackage"
 
+	<ignoreForCoverage>
 	<generated>
 	<derived>
 	^ childEntities
@@ -71,6 +75,7 @@ FamixTPackage >> childEntities [
 { #category : 'accessing' }
 FamixTPackage >> childEntities: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	childEntities value: anObject
 ]
@@ -78,6 +83,7 @@ FamixTPackage >> childEntities: anObject [
 { #category : 'testing' }
 FamixTPackage >> isPackage [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]

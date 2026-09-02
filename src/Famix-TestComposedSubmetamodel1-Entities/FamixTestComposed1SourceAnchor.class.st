@@ -23,6 +23,7 @@ Class {
 { #category : 'meta' }
 FamixTestComposed1SourceAnchor class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #SourceAnchor super: #FamixTestComposed1Entity>
 	<package: #'Famix-TestComposedSubmetamodel1-Entities'>
 	<generated>
@@ -32,6 +33,7 @@ FamixTestComposed1SourceAnchor class >> annotation [
 { #category : 'testing' }
 FamixTestComposed1SourceAnchor class >> isAbstract [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self == FamixTestComposed1SourceAnchor
 ]

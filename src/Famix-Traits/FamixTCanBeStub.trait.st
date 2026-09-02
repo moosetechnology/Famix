@@ -31,6 +31,7 @@ Trait {
 { #category : 'meta' }
 FamixTCanBeStub classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TCanBeStub super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -39,6 +40,7 @@ FamixTCanBeStub classSide >> annotation [
 { #category : 'testing' }
 FamixTCanBeStub >> canBeStub [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
@@ -47,6 +49,7 @@ FamixTCanBeStub >> canBeStub [
 FamixTCanBeStub >> isStub [
 
 	<FMProperty: #isStub type: #Boolean defaultValue: false>
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.'>
 	^ isStub ifNil: [ isStub := false ]
@@ -54,6 +57,7 @@ FamixTCanBeStub >> isStub [
 
 { #category : 'accessing' }
 FamixTCanBeStub >> isStub: anObject [
+	<ignoreForCoverage>
 	<generated>
 	isStub := anObject
 ]

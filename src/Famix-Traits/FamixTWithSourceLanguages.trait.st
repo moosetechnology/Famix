@@ -23,6 +23,7 @@ Trait {
 { #category : 'meta' }
 FamixTWithSourceLanguages classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TWithSourceLanguages super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -32,6 +33,7 @@ FamixTWithSourceLanguages classSide >> annotation [
 FamixTWithSourceLanguages >> declaredSourceLanguage [
 	"Relation named: #declaredSourceLanguage type: #FamixTSourceLanguage opposite: #sourcedEntities"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The declared SourceLanguage for the source code of this entity'>
 	^ declaredSourceLanguage
@@ -40,6 +42,7 @@ FamixTWithSourceLanguages >> declaredSourceLanguage [
 { #category : 'accessing' }
 FamixTWithSourceLanguages >> declaredSourceLanguage: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	declaredSourceLanguage := anObject
 ]

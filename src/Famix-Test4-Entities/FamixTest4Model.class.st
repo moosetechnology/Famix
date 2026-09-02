@@ -11,6 +11,7 @@ Class {
 { #category : 'meta' }
 FamixTest4Model class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Model super: #MooseModel>
 	<package: #'Famix-Test4-Entities'>
 	<generated>

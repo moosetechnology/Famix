@@ -49,6 +49,7 @@ Trait {
 { #category : 'meta' }
 FamixTLocalVariable classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TLocalVariable super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -65,6 +66,7 @@ FamixTLocalVariable >> displayStringOn: aStream [
 { #category : 'testing' }
 FamixTLocalVariable >> isLocalVariable [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
@@ -73,6 +75,7 @@ FamixTLocalVariable >> isLocalVariable [
 FamixTLocalVariable >> parentBehaviouralEntity [
 	"Relation named: #parentBehaviouralEntity type: #FamixTWithLocalVariables opposite: #localVariables"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Behavioural entity declaring this local variable. belongsTo implementation'>
 	<container>

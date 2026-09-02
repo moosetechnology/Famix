@@ -23,6 +23,7 @@ Trait {
 { #category : 'meta' }
 FamixTWithAnnotationTypes classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TWithAnnotationTypes super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -38,6 +39,7 @@ FamixTWithAnnotationTypes >> addDefinedAnnotationType: aDefinedAnnotationType [
 FamixTWithAnnotationTypes >> definedAnnotationTypes [
 	"Relation named: #definedAnnotationTypes type: #FamixTAnnotationType opposite: #annotationTypesContainer"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The container in which the AnnotationTypes may be declared'>
 	<derived>
@@ -47,6 +49,7 @@ FamixTWithAnnotationTypes >> definedAnnotationTypes [
 { #category : 'accessing' }
 FamixTWithAnnotationTypes >> definedAnnotationTypes: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	definedAnnotationTypes value: anObject
 ]

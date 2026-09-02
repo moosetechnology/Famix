@@ -23,6 +23,7 @@ Trait {
 { #category : 'meta' }
 FamixTDefinedInModule classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TDefinedInModule super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -32,6 +33,7 @@ FamixTDefinedInModule classSide >> annotation [
 FamixTDefinedInModule >> parentModule [
 	"Relation named: #parentModule type: #FamixTModule opposite: #moduleEntities"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Module that contains the definition of this entity'>
 	<container>
@@ -41,6 +43,7 @@ FamixTDefinedInModule >> parentModule [
 { #category : 'accessing' }
 FamixTDefinedInModule >> parentModule: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	parentModule := anObject
 ]

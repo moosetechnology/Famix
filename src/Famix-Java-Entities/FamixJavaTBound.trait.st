@@ -27,6 +27,7 @@ Trait {
 { #category : 'meta' }
 FamixJavaTBound classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TBound super: #Object>
 	<package: #'Famix-Java-Entities'>
 	<generated>
@@ -34,12 +35,16 @@ FamixJavaTBound classSide >> annotation [
 
 { #category : 'adding' }
 FamixJavaTBound >> addLowerBoundedWildcard: anObject [
+
+	<ignoreForCoverage>
 	<generated>
 	^ self lowerBoundedWildcards add: anObject
 ]
 
 { #category : 'adding' }
 FamixJavaTBound >> addUpperBoundedWildcard: anObject [
+
+	<ignoreForCoverage>
 	<generated>
 	^ self upperBoundedWildcards add: anObject
 ]
@@ -48,6 +53,7 @@ FamixJavaTBound >> addUpperBoundedWildcard: anObject [
 FamixJavaTBound >> lowerBoundedWildcards [
 	"Relation named: #lowerBoundedWildcards type: #FamixJavaTBounded opposite: #lowerBound"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Wildcards lower bounded by this bound.'>
 	<derived>
@@ -57,6 +63,7 @@ FamixJavaTBound >> lowerBoundedWildcards [
 { #category : 'accessing' }
 FamixJavaTBound >> lowerBoundedWildcards: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	lowerBoundedWildcards value: anObject
 ]
@@ -65,6 +72,7 @@ FamixJavaTBound >> lowerBoundedWildcards: anObject [
 FamixJavaTBound >> upperBoundedWildcards [
 	"Relation named: #upperBoundedWildcards type: #FamixJavaTBounded opposite: #upperBound"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Wildcards upper bounded by this bound.'>
 	<derived>
@@ -74,6 +82,7 @@ FamixJavaTBound >> upperBoundedWildcards [
 { #category : 'accessing' }
 FamixJavaTBound >> upperBoundedWildcards: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	upperBoundedWildcards value: anObject
 ]

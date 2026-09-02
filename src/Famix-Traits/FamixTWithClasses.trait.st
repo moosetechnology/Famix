@@ -22,6 +22,7 @@ Trait {
 { #category : 'meta' }
 FamixTWithClasses classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TWithClasses super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
