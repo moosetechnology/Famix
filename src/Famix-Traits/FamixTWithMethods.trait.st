@@ -60,21 +60,13 @@ FamixTWithMethods >> methods: anObject [
 	methods value: anObject
 ]
 
-{ #category : 'accessing' }
-FamixTWithMethods >> methodsGroup [
-	<navigation: 'Methods'>
-	^MooseGroup
-		withAll: self methods
-		withDescription: 'Methods from ' , self mooseName
-]
-
 { #category : 'metrics' }
 FamixTWithMethods >> numberOfAbstractMethods [
 
 	<FMProperty: #numberOfAbstractMethods type: #Number>
 	<derived>
 	<FMComment: 'The number of abstract methods in the class'>
-	^ self cacheAt: #numberOfAbstractMethods ifAbsentPut: [ self methodsGroup count: [ :each | each isAbstract ] ]
+	^ self cacheAt: #numberOfAbstractMethods ifAbsentPut: [ self methods count: [ :each | each isAbstract ] ]
 ]
 
 { #category : 'metrics' }
@@ -141,7 +133,7 @@ FamixTWithMethods >> weightedMethodCount [
 	<FMProperty: #weightedMethodCount type: #Number>
 	<derived>
 	<FMComment: 'The sum of the complexity in a class'>
-	^ self cacheAt: #weightedMethodCount ifAbsent: [ self methodsGroup sumNumbers: #cyclomaticComplexity ]
+	^ self cacheAt: #weightedMethodCount ifAbsent: [ self methods sumNumbers: #cyclomaticComplexity ]
 ]
 
 { #category : 'metrics' }

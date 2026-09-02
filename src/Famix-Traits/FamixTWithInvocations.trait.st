@@ -61,14 +61,3 @@ FamixTWithInvocations >> outgoingInvocations: anObject [
 	<generated>
 	outgoingInvocations value: anObject
 ]
-
-{ #category : 'adding' }
-FamixTWithInvocations >> outgoingInvocationsGroup [
-	<navigation: 'Outgoing invocations'>
-	^ self cacheAt:
-		#outgoingInvocationsGroup
-		ifAbsentPut:
-			[MooseGroup
-				withAll: self outgoingInvocations
-				withDescription: 'Outgoing invocations from ' , self mooseName]
-]

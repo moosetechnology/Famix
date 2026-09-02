@@ -97,11 +97,8 @@ FamixStPackage >> localClasses [
 
 { #category : 'accessing' }
 FamixStPackage >> localClassesGroup [
-	<navigation: 'Local classes'>
 
-	^ FamixClassGroup 
-		withAll: self localClasses
-		withDescription: 'Local classes'
+	^ FamixClassGroup withAll: self localClasses withDescription: 'Local classes'
 ]
 
 { #category : 'accessing' }

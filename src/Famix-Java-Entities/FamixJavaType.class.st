@@ -174,11 +174,3 @@ FamixJavaType >> printOn: aStream [
 		nextPutAll: (self class name withoutPrefix: 'FamixJava');
 		nextPut: $)
 ]
-
-{ #category : 'Famix-Implementation' }
-FamixJavaType >> withSuperclassHierarchyGroup [
-	<navigation: 'With all superclasses'>
-	^ MooseGroup
-		withAll: self withSuperclassHierarchy asSet
-		withDescription: 'With all superclasses of ' , self mooseName
-]

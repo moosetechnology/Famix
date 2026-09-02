@@ -107,20 +107,8 @@ FamixTFolder >> files [
 ]
 
 { #category : 'adding' }
-FamixTFolder >> filesGroup [
-	<navigation: 'Files'>
-	^FamixFileGroup withAll: self files withDescription: 'Files'
-]
-
-{ #category : 'adding' }
 FamixTFolder >> folders [
 	^ self childrenFileSystemEntities select: #isFolder
-]
-
-{ #category : 'adding' }
-FamixTFolder >> foldersGroup [
-	<navigation: 'Folders'>
-	^FamixFolderGroup withAll: self folders withDescription: 'Folders'
 ]
 
 { #category : 'testing' }
