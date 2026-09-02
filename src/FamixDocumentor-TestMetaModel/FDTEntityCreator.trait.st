@@ -14,6 +14,7 @@ Trait {
 { #category : 'meta' }
 FDTEntityCreator classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TEntityCreator super: #Object>
 	<package: #'FamixDocumentor-TestMetaModel'>
 	<generated>
@@ -22,6 +23,7 @@ FDTEntityCreator classSide >> annotation [
 { #category : 'entity creation' }
 FDTEntityCreator >> newClass1 [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FDClass1 new
 ]
@@ -29,6 +31,7 @@ FDTEntityCreator >> newClass1 [
 { #category : 'entity creation' }
 FDTEntityCreator >> newClass2 [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FDClass2 new
 ]

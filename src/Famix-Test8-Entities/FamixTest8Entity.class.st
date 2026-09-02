@@ -9,6 +9,7 @@ Class {
 { #category : 'meta' }
 FamixTest8Entity class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Entity super: #MooseEntity>
 	<package: #'Famix-Test8-Entities'>
 	<generated>
@@ -18,6 +19,7 @@ FamixTest8Entity class >> annotation [
 { #category : 'testing' }
 FamixTest8Entity class >> isAbstract [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self == FamixTest8Entity
 ]
@@ -25,6 +27,7 @@ FamixTest8Entity class >> isAbstract [
 { #category : 'meta' }
 FamixTest8Entity class >> metamodel [
 
+	<ignoreForCoverage>
 	<generated>
 	^ FamixTest8Model metamodel
 ]
@@ -32,6 +35,7 @@ FamixTest8Entity class >> metamodel [
 { #category : 'testing' }
 FamixTest8Entity >> isAssociation [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]

@@ -25,6 +25,7 @@ Trait {
 { #category : 'meta' }
 FamixTParametricAssociation classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TParametricAssociation super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -32,6 +33,8 @@ FamixTParametricAssociation classSide >> annotation [
 
 { #category : 'adding' }
 FamixTParametricAssociation >> addConcretization: anObject [
+
+	<ignoreForCoverage>
 	<generated>
 	^ self concretizations add: anObject
 ]
@@ -40,6 +43,7 @@ FamixTParametricAssociation >> addConcretization: anObject [
 FamixTParametricAssociation >> concretizations [
 	"Relation named: #concretizations type: #FamixTConcretization opposite: #triggeringAssociation"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The parameter concretizations associated with this association.'>
 	<derived>
@@ -49,6 +53,7 @@ FamixTParametricAssociation >> concretizations [
 { #category : 'accessing' }
 FamixTParametricAssociation >> concretizations: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	concretizations value: anObject
 ]
@@ -56,6 +61,7 @@ FamixTParametricAssociation >> concretizations: anObject [
 { #category : 'testing' }
 FamixTParametricAssociation >> isParametricAssociation [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]

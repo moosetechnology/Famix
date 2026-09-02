@@ -21,6 +21,7 @@ Class {
 { #category : 'meta' }
 FamixJavaInitializer class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Initializer super: #FamixJavaMethod>
 	<package: #'Famix-Java-Entities'>
 	<generated>
@@ -40,6 +41,7 @@ FamixJavaInitializer >> isConstructor [
 FamixJavaInitializer >> isInitializationBlock [
 
 	<FMProperty: #isInitializationBlock type: #Boolean defaultValue: false>
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'If true, the entity is an initialization block.
 If false, the entity represents the definition of the attributes of a class'>
@@ -48,6 +50,7 @@ If false, the entity represents the definition of the attributes of a class'>
 
 { #category : 'accessing' }
 FamixJavaInitializer >> isInitializationBlock: anObject [
+	<ignoreForCoverage>
 	<generated>
 	isInitializationBlock := anObject
 ]

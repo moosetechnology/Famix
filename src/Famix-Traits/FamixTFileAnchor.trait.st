@@ -26,6 +26,7 @@ Trait {
 { #category : 'meta' }
 FamixTFileAnchor classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TFileAnchor super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -52,6 +53,7 @@ FamixTFileAnchor >> containerFiles [
 FamixTFileAnchor >> correspondingFile [
 
 	<FMProperty: #correspondingFile type: #FamixTFile>
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'File associated to this source anchor'>
 	^ correspondingFile
@@ -59,6 +61,7 @@ FamixTFileAnchor >> correspondingFile [
 
 { #category : 'accessing' }
 FamixTFileAnchor >> correspondingFile: anObject [
+	<ignoreForCoverage>
 	<generated>
 	correspondingFile := anObject
 ]
@@ -81,6 +84,7 @@ FamixTFileAnchor >> encoding [
 
 { #category : 'accessing' }
 FamixTFileAnchor >> encoding: anObject [
+	<ignoreForCoverage>
 	<generated>
 	encoding := anObject
 ]
@@ -99,6 +103,7 @@ FamixTFileAnchor >> endPos [
 FamixTFileAnchor >> fileName [
 
 	<FMProperty: #fileName type: #String>
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Name of the source file'>
 	^ fileName
@@ -147,6 +152,7 @@ FamixTFileAnchor >> isContiguousWith: anotherFileAnchor [
 { #category : 'testing' }
 FamixTFileAnchor >> isFileAnchor [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]

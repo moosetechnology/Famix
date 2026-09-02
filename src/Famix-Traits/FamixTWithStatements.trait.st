@@ -35,6 +35,7 @@ Trait {
 { #category : 'meta' }
 FamixTWithStatements classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TWithStatements super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -48,6 +49,7 @@ FamixTWithStatements >> computeCyclomaticComplexity [
 { #category : 'testing' }
 FamixTWithStatements >> isBehavioural [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]

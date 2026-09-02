@@ -26,6 +26,7 @@ Class {
 { #category : 'meta' }
 FDClass1 class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Class1 super: #FDEntity>
 	<package: #'FamixDocumentor-TestMetaModel'>
 	<generated>
@@ -35,6 +36,7 @@ FDClass1 class >> annotation [
 FDClass1 >> myTrait [
 	"Relation named: #myTrait type: #FDTrait4 opposite: #class1"
 
+	<ignoreForCoverage>
 	<generated>
 	^ myTrait
 ]
@@ -42,6 +44,7 @@ FDClass1 >> myTrait [
 { #category : 'accessing' }
 FDClass1 >> myTrait: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	myTrait := anObject
 ]

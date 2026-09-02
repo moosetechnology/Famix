@@ -31,6 +31,7 @@ Trait {
 { #category : 'meta' }
 FamixTFileSystemEntity classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TFileSystemEntity super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -121,6 +122,7 @@ FamixTFileSystemEntity >> numberOfLinesOfText [
 FamixTFileSystemEntity >> parentFolder [
 	"Relation named: #parentFolder type: #FamixTFolder opposite: #childrenFileSystemEntities"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Folder entity containing this file.'>
 	<container>

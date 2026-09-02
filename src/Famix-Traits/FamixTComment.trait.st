@@ -32,6 +32,7 @@ Trait {
 { #category : 'meta' }
 FamixTComment classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TComment super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -41,6 +42,7 @@ FamixTComment classSide >> annotation [
 FamixTComment >> commentedEntity [
 	"Relation named: #commentedEntity type: #FamixTWithComments opposite: #comments"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Source code commented by the comment'>
 	<container>
@@ -50,6 +52,7 @@ FamixTComment >> commentedEntity [
 { #category : 'accessing' }
 FamixTComment >> commentedEntity: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	commentedEntity := anObject
 ]
@@ -64,6 +67,7 @@ FamixTComment >> displayStringOn: aStream [
 { #category : 'testing' }
 FamixTComment >> isComment [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]

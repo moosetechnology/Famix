@@ -27,6 +27,7 @@ Trait {
 { #category : 'meta' }
 FamixTIndexedFileNavigation classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TIndexedFileNavigation super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -102,6 +103,7 @@ FamixTIndexedFileNavigation >> endLine [
 FamixTIndexedFileNavigation >> endPos [
 
 	<FMProperty: #endPos type: #Number>
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Stop position in the source'>
 	^ endPos
@@ -109,6 +111,7 @@ FamixTIndexedFileNavigation >> endPos [
 
 { #category : 'accessing' }
 FamixTIndexedFileNavigation >> endPos: anObject [
+	<ignoreForCoverage>
 	<generated>
 	endPos := anObject
 ]
@@ -172,6 +175,7 @@ FamixTIndexedFileNavigation >> startLine [
 FamixTIndexedFileNavigation >> startPos [
 
 	<FMProperty: #startPos type: #Number>
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Start position in the source'>
 	^ startPos
@@ -179,6 +183,7 @@ FamixTIndexedFileNavigation >> startPos [
 
 { #category : 'accessing' }
 FamixTIndexedFileNavigation >> startPos: anObject [
+	<ignoreForCoverage>
 	<generated>
 	startPos := anObject
 ]

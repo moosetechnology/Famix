@@ -14,6 +14,7 @@ Trait {
 { #category : 'meta' }
 FamixTestComposed3TEntityCreator classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TEntityCreator super: #Object>
 	<package: #'Famix-TestComposed3Metamodel-Entities'>
 	<generated>

@@ -14,6 +14,7 @@ Trait {
 { #category : 'meta' }
 FamixTest2TEntityCreator classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TEntityCreator super: #Object>
 	<package: #'Famix-Test2-Entities'>
 	<generated>
@@ -22,6 +23,7 @@ FamixTest2TEntityCreator classSide >> annotation [
 { #category : 'entity creation' }
 FamixTest2TEntityCreator >> newClass [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTest2Class new
 ]
@@ -29,6 +31,7 @@ FamixTest2TEntityCreator >> newClass [
 { #category : 'entity creation' }
 FamixTest2TEntityCreator >> newClassNamed: aName [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: (FamixTest2Class named: aName)
 ]
@@ -36,6 +39,7 @@ FamixTest2TEntityCreator >> newClassNamed: aName [
 { #category : 'entity creation' }
 FamixTest2TEntityCreator >> newComment [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTest2Comment new
 ]
@@ -43,6 +47,7 @@ FamixTest2TEntityCreator >> newComment [
 { #category : 'entity creation' }
 FamixTest2TEntityCreator >> newInheritance [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTest2Inheritance new
 ]
@@ -50,6 +55,7 @@ FamixTest2TEntityCreator >> newInheritance [
 { #category : 'entity creation' }
 FamixTest2TEntityCreator >> newSourceLanguage [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTest2SourceLanguage new
 ]
@@ -57,6 +63,7 @@ FamixTest2TEntityCreator >> newSourceLanguage [
 { #category : 'entity creation' }
 FamixTest2TEntityCreator >> newSourceTextAnchor [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTest2SourceTextAnchor new
 ]

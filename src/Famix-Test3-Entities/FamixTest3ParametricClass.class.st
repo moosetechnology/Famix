@@ -23,6 +23,7 @@ Class {
 { #category : 'meta' }
 FamixTest3ParametricClass class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #ParametricClass super: #FamixTest3Class>
 	<package: #'Famix-Test3-Entities'>
 	<generated>

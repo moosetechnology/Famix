@@ -41,6 +41,7 @@ Trait {
 { #category : 'meta' }
 FamixTStructuralEntity classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TStructuralEntity super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -49,6 +50,7 @@ FamixTStructuralEntity classSide >> annotation [
 { #category : 'testing' }
 FamixTStructuralEntity >> isStructuralEntity [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]

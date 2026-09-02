@@ -25,6 +25,7 @@ Trait {
 { #category : 'meta' }
 FamixTCanImplement classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TCanImplement super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -32,6 +33,8 @@ FamixTCanImplement classSide >> annotation [
 
 { #category : 'adding' }
 FamixTCanImplement >> addInterfaceImplementation: anObject [
+
+	<ignoreForCoverage>
 	<generated>
 	^ self interfaceImplementations add: anObject
 ]
@@ -68,6 +71,7 @@ FamixTCanImplement >> directImplementedInterfaces [
 FamixTCanImplement >> interfaceImplementations [
 	"Relation named: #interfaceImplementations type: #FamixTImplementation opposite: #implementingClass"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Implementation relationships'>
 	<derived>
@@ -77,6 +81,7 @@ FamixTCanImplement >> interfaceImplementations [
 { #category : 'accessing' }
 FamixTCanImplement >> interfaceImplementations: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	interfaceImplementations value: anObject
 ]

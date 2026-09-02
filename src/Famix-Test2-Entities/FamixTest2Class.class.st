@@ -55,6 +55,7 @@ Class {
 { #category : 'meta' }
 FamixTest2Class class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Class super: #FamixTest2NamedEntity>
 	<package: #'Famix-Test2-Entities'>
 	<generated>

@@ -23,6 +23,7 @@ Trait {
 { #category : 'meta' }
 FamixTWithTypeAliases classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TWithTypeAliases super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -30,6 +31,8 @@ FamixTWithTypeAliases classSide >> annotation [
 
 { #category : 'adding' }
 FamixTWithTypeAliases >> addTypeAlias: anObject [
+
+	<ignoreForCoverage>
 	<generated>
 	^ self typeAliases add: anObject
 ]
@@ -46,6 +49,7 @@ FamixTWithTypeAliases >> allTypeAliases [
 FamixTWithTypeAliases >> typeAliases [
 	"Relation named: #typeAliases type: #FamixTTypeAlias opposite: #aliasedType"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Aliases'>
 	<derived>
@@ -55,6 +59,7 @@ FamixTWithTypeAliases >> typeAliases [
 { #category : 'accessing' }
 FamixTWithTypeAliases >> typeAliases: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	typeAliases value: anObject
 ]

@@ -20,6 +20,7 @@ Trait {
 { #category : 'meta' }
 FamixTNamedEntity classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TNamedEntity super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -61,6 +62,7 @@ FamixTNamedEntity >> mooseNameOn: stream [
 FamixTNamedEntity >> name [
 
 	<FMProperty: #name type: #String>
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Basic name of the entity, not full reference.'>
 	^ name

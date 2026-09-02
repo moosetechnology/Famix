@@ -59,6 +59,7 @@ Trait {
 { #category : 'meta' }
 FamixTException classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TException super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -67,6 +68,7 @@ FamixTException classSide >> annotation [
 { #category : 'testing' }
 FamixTException >> isException [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]

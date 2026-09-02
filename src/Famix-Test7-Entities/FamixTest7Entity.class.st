@@ -9,6 +9,7 @@ Class {
 { #category : 'meta' }
 FamixTest7Entity class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Entity super: #MooseEntity>
 	<package: #'Famix-Test7-Entities'>
 	<generated>
@@ -18,6 +19,7 @@ FamixTest7Entity class >> annotation [
 { #category : 'testing' }
 FamixTest7Entity class >> isAbstract [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self == FamixTest7Entity
 ]
@@ -25,6 +27,7 @@ FamixTest7Entity class >> isAbstract [
 { #category : 'meta' }
 FamixTest7Entity class >> metamodel [
 
+	<ignoreForCoverage>
 	<generated>
 	^ FamixTest7Model metamodel
 ]
@@ -32,6 +35,7 @@ FamixTest7Entity class >> metamodel [
 { #category : 'testing' }
 FamixTest7Entity >> canBeStub [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -39,6 +43,7 @@ FamixTest7Entity >> canBeStub [
 { #category : 'testing' }
 FamixTest7Entity >> hasImmediateSource [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -46,6 +51,7 @@ FamixTest7Entity >> hasImmediateSource [
 { #category : 'testing' }
 FamixTest7Entity >> isAssociation [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -53,6 +59,7 @@ FamixTest7Entity >> isAssociation [
 { #category : 'testing' }
 FamixTest7Entity >> isBehavioural [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -60,6 +67,7 @@ FamixTest7Entity >> isBehavioural [
 { #category : 'testing' }
 FamixTest7Entity >> isClass [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -67,6 +75,7 @@ FamixTest7Entity >> isClass [
 { #category : 'testing' }
 FamixTest7Entity >> isComment [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -74,6 +83,7 @@ FamixTest7Entity >> isComment [
 { #category : 'testing' }
 FamixTest7Entity >> isInheritance [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -81,6 +91,7 @@ FamixTest7Entity >> isInheritance [
 { #category : 'testing' }
 FamixTest7Entity >> isMethod [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -88,6 +99,7 @@ FamixTest7Entity >> isMethod [
 { #category : 'testing' }
 FamixTest7Entity >> isNamedEntity [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -95,6 +107,7 @@ FamixTest7Entity >> isNamedEntity [
 { #category : 'testing' }
 FamixTest7Entity >> isQueryable [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -102,6 +115,7 @@ FamixTest7Entity >> isQueryable [
 { #category : 'testing' }
 FamixTest7Entity >> isType [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]

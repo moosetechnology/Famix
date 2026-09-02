@@ -29,6 +29,7 @@ Trait {
 { #category : 'meta' }
 FamixTWithInheritances classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TWithInheritances super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -142,6 +143,7 @@ FamixTWithInheritances >> numberOfSubclasses: aNumber [
 FamixTWithInheritances >> subInheritances [
 	"Relation named: #subInheritances type: #FamixTInheritance opposite: #superclass"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Subinheritance relationships, i.e. known subclasses of this type.'>
 	<derived>
@@ -151,6 +153,7 @@ FamixTWithInheritances >> subInheritances [
 { #category : 'accessing' }
 FamixTWithInheritances >> subInheritances: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	subInheritances value: anObject
 ]
@@ -191,6 +194,7 @@ FamixTWithInheritances >> subclassHierarchyGroup [
 FamixTWithInheritances >> superInheritances [
 	"Relation named: #superInheritances type: #FamixTInheritance opposite: #subclass"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Superinheritance relationships, i.e. known superclasses of this type.'>
 	<derived>
@@ -200,6 +204,7 @@ FamixTWithInheritances >> superInheritances [
 { #category : 'accessing' }
 FamixTWithInheritances >> superInheritances: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	superInheritances value: anObject
 ]

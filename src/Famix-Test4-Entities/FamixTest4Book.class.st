@@ -31,6 +31,7 @@ Class {
 { #category : 'meta' }
 FamixTest4Book class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Book super: #FamixTest4Entity>
 	<package: #'Famix-Test4-Entities'>
 	<generated>
@@ -39,6 +40,7 @@ FamixTest4Book class >> annotation [
 { #category : 'comparing' }
 FamixTest4Book >> = aFamixTest4Book [
 
+	<ignoreForCoverage>
 	<generated>
 	^ aFamixTest4Book id = self id
 ]
@@ -46,6 +48,7 @@ FamixTest4Book >> = aFamixTest4Book [
 { #category : 'comparing' }
 FamixTest4Book >> hash [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self id hash 
 ]
@@ -54,12 +57,14 @@ FamixTest4Book >> hash [
 FamixTest4Book >> id [
 
 	<FMProperty: #id type: #Number>
+	<ignoreForCoverage>
 	<generated>
 	^ id
 ]
 
 { #category : 'accessing' }
 FamixTest4Book >> id: anObject [
+	<ignoreForCoverage>
 	<generated>
 	id := anObject
 ]
@@ -68,6 +73,7 @@ FamixTest4Book >> id: anObject [
 FamixTest4Book >> person [
 	"Relation named: #person type: #FamixTest4Person opposite: #books"
 
+	<ignoreForCoverage>
 	<generated>
 	<container>
 	^ person
@@ -76,6 +82,7 @@ FamixTest4Book >> person [
 { #category : 'accessing' }
 FamixTest4Book >> person: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	person := anObject
 ]

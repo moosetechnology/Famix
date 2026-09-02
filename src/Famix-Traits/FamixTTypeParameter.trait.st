@@ -31,6 +31,7 @@ Trait {
 { #category : 'meta' }
 FamixTTypeParameter classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TTypeParameter super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -38,6 +39,8 @@ FamixTTypeParameter classSide >> annotation [
 
 { #category : 'adding' }
 FamixTTypeParameter >> addConcretization: anObject [
+
+	<ignoreForCoverage>
 	<generated>
 	^ self concretizations add: anObject
 ]
@@ -46,6 +49,7 @@ FamixTTypeParameter >> addConcretization: anObject [
 FamixTTypeParameter >> concretizations [
 	"Relation named: #concretizations type: #FamixTConcretization opposite: #typeParameter"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Known concretizations of this type parameter.'>
 	<derived>
@@ -55,6 +59,7 @@ FamixTTypeParameter >> concretizations [
 { #category : 'accessing' }
 FamixTTypeParameter >> concretizations: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	concretizations value: anObject
 ]
@@ -63,6 +68,7 @@ FamixTTypeParameter >> concretizations: anObject [
 FamixTTypeParameter >> genericEntity [
 	"Relation named: #genericEntity type: #FamixTParametricEntity opposite: #typeParameters"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Generic entity that declares this type parameter.'>
 	^ genericEntity
@@ -71,6 +77,7 @@ FamixTTypeParameter >> genericEntity [
 { #category : 'accessing' }
 FamixTTypeParameter >> genericEntity: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	genericEntity := anObject
 ]

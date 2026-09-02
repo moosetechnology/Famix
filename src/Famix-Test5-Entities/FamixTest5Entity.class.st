@@ -11,6 +11,7 @@ Class {
 { #category : 'meta' }
 FamixTest5Entity class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Entity super: #MooseEntity>
 	<package: #'Famix-Test5-Entities'>
 	<generated>
@@ -20,6 +21,7 @@ FamixTest5Entity class >> annotation [
 { #category : 'testing' }
 FamixTest5Entity class >> isAbstract [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self == FamixTest5Entity
 ]
@@ -27,6 +29,7 @@ FamixTest5Entity class >> isAbstract [
 { #category : 'meta' }
 FamixTest5Entity class >> metamodel [
 
+	<ignoreForCoverage>
 	<generated>
 	^ FamixTest5Model metamodel
 ]

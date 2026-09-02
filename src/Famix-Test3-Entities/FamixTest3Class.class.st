@@ -56,6 +56,7 @@ Class {
 { #category : 'meta' }
 FamixTest3Class class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Class super: #FamixTest3Type>
 	<package: #'Famix-Test3-Entities'>
 	<generated>
@@ -63,6 +64,8 @@ FamixTest3Class class >> annotation [
 
 { #category : 'groups' }
 FamixTest3Class class >> annotationFamixTest3ClassGroup [
+
+	<ignoreForCoverage>
 	<generated>
 	<mooseGroup>
 	^ FamixTest3ClassGroup

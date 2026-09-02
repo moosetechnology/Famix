@@ -23,6 +23,7 @@ Trait {
 { #category : 'meta' }
 FamixTWithMethods classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TWithMethods super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -44,6 +45,7 @@ FamixTWithMethods >> implements: aString [
 FamixTWithMethods >> methods [
 	"Relation named: #methods type: #FamixTMethod opposite: #parentType"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Methods declared by this type.'>
 	<derived>
@@ -53,6 +55,7 @@ FamixTWithMethods >> methods [
 { #category : 'accessing' }
 FamixTWithMethods >> methods: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	methods value: anObject
 ]

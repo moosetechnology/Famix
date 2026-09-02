@@ -41,6 +41,7 @@ Class {
 { #category : 'meta' }
 MooseMSEImporterTestPackage class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Package super: #MooseMSEImporterTestNamedEntity>
 	<package: #'Moose-Core-Tests-Entities'>
 	<generated>

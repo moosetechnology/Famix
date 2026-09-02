@@ -9,6 +9,7 @@ Class {
 { #category : 'meta' }
 FamixJavaEntity class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Entity super: #MooseEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
@@ -18,6 +19,7 @@ FamixJavaEntity class >> annotation [
 { #category : 'testing' }
 FamixJavaEntity class >> isAbstract [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self == FamixJavaEntity
 ]
@@ -25,6 +27,7 @@ FamixJavaEntity class >> isAbstract [
 { #category : 'meta' }
 FamixJavaEntity class >> metamodel [
 
+	<ignoreForCoverage>
 	<generated>
 	^ FamixJavaModel metamodel
 ]
@@ -32,6 +35,7 @@ FamixJavaEntity class >> metamodel [
 { #category : 'testing' }
 FamixJavaEntity >> canBeStub [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -39,6 +43,7 @@ FamixJavaEntity >> canBeStub [
 { #category : 'testing' }
 FamixJavaEntity >> hasImmediateSource [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -46,6 +51,7 @@ FamixJavaEntity >> hasImmediateSource [
 { #category : 'testing' }
 FamixJavaEntity >> isAccess [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -53,6 +59,7 @@ FamixJavaEntity >> isAccess [
 { #category : 'testing' }
 FamixJavaEntity >> isAssociation [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -60,6 +67,7 @@ FamixJavaEntity >> isAssociation [
 { #category : 'testing' }
 FamixJavaEntity >> isAttribute [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -67,6 +75,7 @@ FamixJavaEntity >> isAttribute [
 { #category : 'testing' }
 FamixJavaEntity >> isBehavioural [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -74,6 +83,7 @@ FamixJavaEntity >> isBehavioural [
 { #category : 'testing' }
 FamixJavaEntity >> isClass [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -81,6 +91,7 @@ FamixJavaEntity >> isClass [
 { #category : 'testing' }
 FamixJavaEntity >> isComment [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -88,6 +99,7 @@ FamixJavaEntity >> isComment [
 { #category : 'testing' }
 FamixJavaEntity >> isEnumValue [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -95,6 +107,7 @@ FamixJavaEntity >> isEnumValue [
 { #category : 'testing' }
 FamixJavaEntity >> isException [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -102,6 +115,7 @@ FamixJavaEntity >> isException [
 { #category : 'testing' }
 FamixJavaEntity >> isFileAnchor [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -109,6 +123,7 @@ FamixJavaEntity >> isFileAnchor [
 { #category : 'testing' }
 FamixJavaEntity >> isImplicitVariable [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -116,6 +131,7 @@ FamixJavaEntity >> isImplicitVariable [
 { #category : 'testing' }
 FamixJavaEntity >> isInheritance [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -123,6 +139,7 @@ FamixJavaEntity >> isInheritance [
 { #category : 'testing' }
 FamixJavaEntity >> isInterface [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -130,6 +147,7 @@ FamixJavaEntity >> isInterface [
 { #category : 'testing' }
 FamixJavaEntity >> isInvocation [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -137,6 +155,7 @@ FamixJavaEntity >> isInvocation [
 { #category : 'testing' }
 FamixJavaEntity >> isLocalVariable [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -144,6 +163,7 @@ FamixJavaEntity >> isLocalVariable [
 { #category : 'testing' }
 FamixJavaEntity >> isMethod [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -151,6 +171,7 @@ FamixJavaEntity >> isMethod [
 { #category : 'testing' }
 FamixJavaEntity >> isNamedEntity [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -158,6 +179,7 @@ FamixJavaEntity >> isNamedEntity [
 { #category : 'testing' }
 FamixJavaEntity >> isPackage [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -165,6 +187,7 @@ FamixJavaEntity >> isPackage [
 { #category : 'testing' }
 FamixJavaEntity >> isParametricAssociation [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -172,6 +195,7 @@ FamixJavaEntity >> isParametricAssociation [
 { #category : 'testing' }
 FamixJavaEntity >> isParametricEntity [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -179,6 +203,7 @@ FamixJavaEntity >> isParametricEntity [
 { #category : 'testing' }
 FamixJavaEntity >> isPrimitiveType [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -186,6 +211,7 @@ FamixJavaEntity >> isPrimitiveType [
 { #category : 'testing' }
 FamixJavaEntity >> isQueryable [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -193,6 +219,7 @@ FamixJavaEntity >> isQueryable [
 { #category : 'testing' }
 FamixJavaEntity >> isReference [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -200,6 +227,7 @@ FamixJavaEntity >> isReference [
 { #category : 'testing' }
 FamixJavaEntity >> isStructuralEntity [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -207,6 +235,7 @@ FamixJavaEntity >> isStructuralEntity [
 { #category : 'testing' }
 FamixJavaEntity >> isType [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]

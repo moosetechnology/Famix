@@ -23,6 +23,7 @@ Trait {
 { #category : 'meta' }
 FamixTWithAnnotationInstances classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TWithAnnotationInstances super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -60,6 +61,7 @@ FamixTWithAnnotationInstances >> annotationInstanceNamed: anAnnotationName ifAbs
 FamixTWithAnnotationInstances >> annotationInstances [
 	"Relation named: #annotationInstances type: #FamixTAnnotationInstance opposite: #annotatedEntity"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'This property corresponds to the set of annotations associated to the entity'>
 	<derived>
@@ -69,6 +71,7 @@ FamixTWithAnnotationInstances >> annotationInstances [
 { #category : 'accessing' }
 FamixTWithAnnotationInstances >> annotationInstances: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	annotationInstances value: anObject
 ]

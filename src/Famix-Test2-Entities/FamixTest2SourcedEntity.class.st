@@ -23,6 +23,7 @@ Class {
 { #category : 'meta' }
 FamixTest2SourcedEntity class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #SourcedEntity super: #FamixTest2Entity>
 	<package: #'Famix-Test2-Entities'>
 	<generated>
@@ -32,6 +33,7 @@ FamixTest2SourcedEntity class >> annotation [
 { #category : 'testing' }
 FamixTest2SourcedEntity class >> isAbstract [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self == FamixTest2SourcedEntity
 ]

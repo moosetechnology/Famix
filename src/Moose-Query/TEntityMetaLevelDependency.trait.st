@@ -91,6 +91,7 @@ TEntityMetaLevelDependency classSide >> allOutgoingAssociationTypesIn: aMetamode
 { #category : 'meta' }
 TEntityMetaLevelDependency classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TEntityMetaLevelDependency super: #Object>
 	<package: #'Moose-Query'>
 	<generated>
@@ -645,6 +646,7 @@ TEntityMetaLevelDependency >> isIncludedIn: anEntity containerSelectorsCache: co
 { #category : 'testing' }
 TEntityMetaLevelDependency >> isQueryable [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]

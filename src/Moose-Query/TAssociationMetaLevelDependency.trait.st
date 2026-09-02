@@ -13,6 +13,7 @@ Trait {
 { #category : 'meta' }
 TAssociationMetaLevelDependency classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TAssociationMetaLevelDependency super: #Object>
 	<package: #'Moose-Query'>
 	<generated>

@@ -39,6 +39,7 @@ Trait {
 { #category : 'meta' }
 FamixTUnknownVariable classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TUnknownVariable super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>

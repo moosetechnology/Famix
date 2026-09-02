@@ -9,6 +9,7 @@ Class {
 { #category : 'meta' }
 FamixStEntity class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Entity super: #MooseEntity>
 	<package: #'Famix-PharoSmalltalk-Entities'>
 	<generated>
@@ -18,6 +19,7 @@ FamixStEntity class >> annotation [
 { #category : 'testing' }
 FamixStEntity class >> isAbstract [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self == FamixStEntity
 ]
@@ -25,6 +27,7 @@ FamixStEntity class >> isAbstract [
 { #category : 'meta' }
 FamixStEntity class >> metamodel [
 
+	<ignoreForCoverage>
 	<generated>
 	^ FamixStModel metamodel
 ]
@@ -32,6 +35,7 @@ FamixStEntity class >> metamodel [
 { #category : 'testing' }
 FamixStEntity >> canBeStub [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -39,6 +43,7 @@ FamixStEntity >> canBeStub [
 { #category : 'testing' }
 FamixStEntity >> hasImmediateSource [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -46,6 +51,7 @@ FamixStEntity >> hasImmediateSource [
 { #category : 'testing' }
 FamixStEntity >> isAccess [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -53,6 +59,7 @@ FamixStEntity >> isAccess [
 { #category : 'testing' }
 FamixStEntity >> isAssociation [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -60,6 +67,7 @@ FamixStEntity >> isAssociation [
 { #category : 'testing' }
 FamixStEntity >> isAttribute [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -67,6 +75,7 @@ FamixStEntity >> isAttribute [
 { #category : 'testing' }
 FamixStEntity >> isBehavioural [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -74,6 +83,7 @@ FamixStEntity >> isBehavioural [
 { #category : 'testing' }
 FamixStEntity >> isClass [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -81,6 +91,7 @@ FamixStEntity >> isClass [
 { #category : 'testing' }
 FamixStEntity >> isComment [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -88,6 +99,7 @@ FamixStEntity >> isComment [
 { #category : 'testing' }
 FamixStEntity >> isGlobalVariable [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -95,6 +107,7 @@ FamixStEntity >> isGlobalVariable [
 { #category : 'testing' }
 FamixStEntity >> isImplicitVariable [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -102,6 +115,7 @@ FamixStEntity >> isImplicitVariable [
 { #category : 'testing' }
 FamixStEntity >> isInheritance [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -109,6 +123,7 @@ FamixStEntity >> isInheritance [
 { #category : 'testing' }
 FamixStEntity >> isInvocation [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -116,6 +131,7 @@ FamixStEntity >> isInvocation [
 { #category : 'testing' }
 FamixStEntity >> isLocalVariable [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -123,6 +139,7 @@ FamixStEntity >> isLocalVariable [
 { #category : 'testing' }
 FamixStEntity >> isMethod [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -130,6 +147,7 @@ FamixStEntity >> isMethod [
 { #category : 'testing' }
 FamixStEntity >> isNamedEntity [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -137,6 +155,7 @@ FamixStEntity >> isNamedEntity [
 { #category : 'testing' }
 FamixStEntity >> isNamespace [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -144,6 +163,7 @@ FamixStEntity >> isNamespace [
 { #category : 'testing' }
 FamixStEntity >> isPackage [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -157,6 +177,7 @@ FamixStEntity >> isParametricEntity [
 { #category : 'testing' }
 FamixStEntity >> isQueryable [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -164,6 +185,7 @@ FamixStEntity >> isQueryable [
 { #category : 'testing' }
 FamixStEntity >> isReference [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -176,6 +198,7 @@ FamixStEntity >> isSharedVariable [
 { #category : 'testing' }
 FamixStEntity >> isStructuralEntity [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -183,6 +206,7 @@ FamixStEntity >> isStructuralEntity [
 { #category : 'testing' }
 FamixStEntity >> isType [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]

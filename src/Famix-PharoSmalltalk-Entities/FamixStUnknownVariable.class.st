@@ -41,6 +41,7 @@ Class {
 { #category : 'meta' }
 FamixStUnknownVariable class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #UnknownVariable super: #FamixStNamedEntity>
 	<package: #'Famix-PharoSmalltalk-Entities'>
 	<generated>

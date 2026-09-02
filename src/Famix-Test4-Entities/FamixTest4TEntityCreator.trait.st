@@ -14,6 +14,7 @@ Trait {
 { #category : 'meta' }
 FamixTest4TEntityCreator classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TEntityCreator super: #Object>
 	<package: #'Famix-Test4-Entities'>
 	<generated>
@@ -22,6 +23,7 @@ FamixTest4TEntityCreator classSide >> annotation [
 { #category : 'entity creation' }
 FamixTest4TEntityCreator >> newBook [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTest4Book new
 ]
@@ -29,6 +31,7 @@ FamixTest4TEntityCreator >> newBook [
 { #category : 'entity creation' }
 FamixTest4TEntityCreator >> newCafeteria [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTest4Cafeteria new
 ]
@@ -36,6 +39,7 @@ FamixTest4TEntityCreator >> newCafeteria [
 { #category : 'entity creation' }
 FamixTest4TEntityCreator >> newClassroom [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTest4Classroom new
 ]
@@ -43,6 +47,7 @@ FamixTest4TEntityCreator >> newClassroom [
 { #category : 'entity creation' }
 FamixTest4TEntityCreator >> newPrincipal [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTest4Principal new
 ]
@@ -50,6 +55,7 @@ FamixTest4TEntityCreator >> newPrincipal [
 { #category : 'entity creation' }
 FamixTest4TEntityCreator >> newRoom [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTest4Room new
 ]
@@ -57,6 +63,7 @@ FamixTest4TEntityCreator >> newRoom [
 { #category : 'entity creation' }
 FamixTest4TEntityCreator >> newSchool [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTest4School new
 ]
@@ -64,6 +71,7 @@ FamixTest4TEntityCreator >> newSchool [
 { #category : 'entity creation' }
 FamixTest4TEntityCreator >> newStudent [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTest4Student new
 ]
@@ -71,6 +79,7 @@ FamixTest4TEntityCreator >> newStudent [
 { #category : 'entity creation' }
 FamixTest4TEntityCreator >> newTeacher [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTest4Teacher new
 ]

@@ -23,6 +23,7 @@ Trait {
 { #category : 'meta' }
 FamixTWithEnumValues classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TWithEnumValues super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -38,6 +39,7 @@ FamixTWithEnumValues >> addEnumValue: anObject [
 FamixTWithEnumValues >> enumValues [
 	"Relation named: #enumValues type: #FamixTEnumValue opposite: #parentEnum"
 
+	<ignoreForCoverage>
 	<generated>
 	<derived>
 	^ enumValues
@@ -46,6 +48,7 @@ FamixTWithEnumValues >> enumValues [
 { #category : 'accessing' }
 FamixTWithEnumValues >> enumValues: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	enumValues value: anObject
 ]

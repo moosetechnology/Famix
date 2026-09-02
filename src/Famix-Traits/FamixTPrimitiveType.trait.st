@@ -40,6 +40,7 @@ Trait {
 { #category : 'meta' }
 FamixTPrimitiveType classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TPrimitiveType super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -48,6 +49,7 @@ FamixTPrimitiveType classSide >> annotation [
 { #category : 'testing' }
 FamixTPrimitiveType >> isPrimitiveType [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]

@@ -29,6 +29,7 @@ Trait {
 { #category : 'meta' }
 FamixTBytesFileAnchor classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TBytesFileAnchor super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -38,6 +39,7 @@ FamixTBytesFileAnchor classSide >> annotation [
 FamixTBytesFileAnchor >> endByte [
 
 	<FMProperty: #endByte type: #Number>
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Stop position in the source in number of bytes'>
 	^ endByte
@@ -45,6 +47,7 @@ FamixTBytesFileAnchor >> endByte [
 
 { #category : 'accessing' }
 FamixTBytesFileAnchor >> endByte: anObject [
+	<ignoreForCoverage>
 	<generated>
 	endByte := anObject
 ]
@@ -74,6 +77,7 @@ FamixTBytesFileAnchor >> sourceText [
 FamixTBytesFileAnchor >> startByte [
 
 	<FMProperty: #startByte type: #Number>
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Start position in the source in number of bytes'>
 	^ startByte
@@ -81,6 +85,7 @@ FamixTBytesFileAnchor >> startByte [
 
 { #category : 'accessing' }
 FamixTBytesFileAnchor >> startByte: anObject [
+	<ignoreForCoverage>
 	<generated>
 	startByte := anObject
 ]

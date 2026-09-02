@@ -46,6 +46,7 @@ Class {
 { #category : 'meta' }
 FamixJavaPrimitiveType class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #PrimitiveType super: #FamixJavaType>
 	<package: #'Famix-Java-Entities'>
 	<generated>
@@ -54,6 +55,7 @@ FamixJavaPrimitiveType class >> annotation [
 { #category : 'testing' }
 FamixJavaPrimitiveType >> isPrimitiveType [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]

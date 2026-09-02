@@ -23,6 +23,7 @@ Trait {
 { #category : 'meta' }
 FamixTWithDereferencedInvocations classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TWithDereferencedInvocations super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -37,6 +38,7 @@ FamixTWithDereferencedInvocations >> addDereferencedInvocation: aDeferencedInvoc
 FamixTWithDereferencedInvocations >> dereferencedInvocations [
 	"Relation named: #dereferencedInvocations type: #FamixTDereferencedInvocation opposite: #referencer"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'List of invocations performed on BehaviouralEntities referenced by this entity'>
 	<derived>
@@ -46,6 +48,7 @@ FamixTWithDereferencedInvocations >> dereferencedInvocations [
 { #category : 'accessing' }
 FamixTWithDereferencedInvocations >> dereferencedInvocations: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	dereferencedInvocations value: anObject
 ]

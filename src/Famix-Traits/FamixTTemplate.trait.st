@@ -29,6 +29,7 @@ Trait {
 { #category : 'meta' }
 FamixTTemplate classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TTemplate super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -45,6 +46,7 @@ FamixTTemplate >> addTemplateUser: anObject [
 FamixTTemplate >> templateOwner [
 	"Relation named: #templateOwner type: #FamixTWithTemplates opposite: #templates"
 
+	<ignoreForCoverage>
 	<generated>
 	<container>
 	^ templateOwner
@@ -53,6 +55,7 @@ FamixTTemplate >> templateOwner [
 { #category : 'accessing' }
 FamixTTemplate >> templateOwner: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	templateOwner := anObject
 ]
@@ -61,6 +64,7 @@ FamixTTemplate >> templateOwner: anObject [
 FamixTTemplate >> templateUsers [
 	"Relation named: #templateUsers type: #FamixTTemplateUser opposite: #template"
 
+	<ignoreForCoverage>
 	<generated>
 	<derived>
 	^ templateUsers
@@ -69,6 +73,7 @@ FamixTTemplate >> templateUsers [
 { #category : 'accessing' }
 FamixTTemplate >> templateUsers: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	templateUsers value: anObject
 ]

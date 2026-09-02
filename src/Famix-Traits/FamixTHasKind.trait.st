@@ -22,6 +22,7 @@ Trait {
 { #category : 'meta' }
 FamixTHasKind classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #THasKind super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -120,6 +121,7 @@ FamixTHasKind >> isSetter [
 FamixTHasKind >> kind [
 
 	<FMProperty: #kind type: #String>
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Tag indicating a setter, getter, constant method'>
 	^ kind
@@ -127,6 +129,7 @@ FamixTHasKind >> kind [
 
 { #category : 'accessing' }
 FamixTHasKind >> kind: anObject [
+	<ignoreForCoverage>
 	<generated>
 	kind := anObject
 ]

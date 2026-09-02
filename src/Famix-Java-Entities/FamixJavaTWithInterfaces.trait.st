@@ -24,6 +24,7 @@ Trait {
 { #category : 'meta' }
 FamixJavaTWithInterfaces classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TWithInterfaces super: #Object>
 	<package: #'Famix-Java-Entities'>
 	<generated>

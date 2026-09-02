@@ -28,6 +28,7 @@ Class {
 { #category : 'meta' }
 FamixStComment class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Comment super: #FamixStSourcedEntity>
 	<package: #'Famix-PharoSmalltalk-Entities'>
 	<generated>

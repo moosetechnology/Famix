@@ -31,6 +31,7 @@ Trait {
 { #category : 'meta' }
 FamixTMultipleFileAnchor classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TMultipleFileAnchor super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -102,6 +103,7 @@ FamixTMultipleFileAnchor >> fileAnchors [
 
 { #category : 'accessing' }
 FamixTMultipleFileAnchor >> fileAnchors: anObject [
+	<ignoreForCoverage>
 	<generated>
 	fileAnchors := anObject
 ]

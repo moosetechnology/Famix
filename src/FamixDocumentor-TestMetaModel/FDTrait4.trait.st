@@ -34,6 +34,7 @@ Trait {
 { #category : 'meta' }
 FDTrait4 classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Trait4 super: #Object>
 	<package: #'FamixDocumentor-TestMetaModel'>
 	<generated>
@@ -41,6 +42,8 @@ FDTrait4 classSide >> annotation [
 
 { #category : 'adding' }
 FDTrait4 >> addClass1: anObject [
+
+	<ignoreForCoverage>
 	<generated>
 	^ self class1 add: anObject
 ]
@@ -49,6 +52,7 @@ FDTrait4 >> addClass1: anObject [
 FDTrait4 >> class1 [
 	"Relation named: #class1 type: #FDClass1 opposite: #myTrait"
 
+	<ignoreForCoverage>
 	<generated>
 	<derived>
 	^ class1
@@ -57,6 +61,7 @@ FDTrait4 >> class1 [
 { #category : 'accessing' }
 FDTrait4 >> class1: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	class1 value: anObject
 ]
@@ -65,6 +70,7 @@ FDTrait4 >> class1: anObject [
 FDTrait4 >> otherProp [
 
 	<FMProperty: #otherProp type: #Object>
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Another property in the trait'>
 	^ otherProp
@@ -72,6 +78,7 @@ FDTrait4 >> otherProp [
 
 { #category : 'accessing' }
 FDTrait4 >> otherProp: anObject [
+	<ignoreForCoverage>
 	<generated>
 	otherProp := anObject
 ]
@@ -80,6 +87,7 @@ FDTrait4 >> otherProp: anObject [
 FDTrait4 >> someProp [
 
 	<FMProperty: #someProp type: #String>
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'A property in the trait'>
 	^ someProp
@@ -87,6 +95,7 @@ FDTrait4 >> someProp [
 
 { #category : 'accessing' }
 FDTrait4 >> someProp: anObject [
+	<ignoreForCoverage>
 	<generated>
 	someProp := anObject
 ]

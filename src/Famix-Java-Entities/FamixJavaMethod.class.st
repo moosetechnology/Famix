@@ -67,6 +67,7 @@ Class {
 { #category : 'meta' }
 FamixJavaMethod class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Method super: #FamixJavaContainerEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>

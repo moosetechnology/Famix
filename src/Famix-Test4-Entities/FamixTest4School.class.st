@@ -30,6 +30,7 @@ Class {
 { #category : 'meta' }
 FamixTest4School class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #School super: #FamixTest4Entity>
 	<package: #'Famix-Test4-Entities'>
 	<generated>
@@ -37,18 +38,24 @@ FamixTest4School class >> annotation [
 
 { #category : 'adding' }
 FamixTest4School >> addRoom: anObject [
+
+	<ignoreForCoverage>
 	<generated>
 	^ self rooms add: anObject
 ]
 
 { #category : 'adding' }
 FamixTest4School >> addStudent: anObject [
+
+	<ignoreForCoverage>
 	<generated>
 	^ self students add: anObject
 ]
 
 { #category : 'adding' }
 FamixTest4School >> addTeacher: anObject [
+
+	<ignoreForCoverage>
 	<generated>
 	^ self teachers add: anObject
 ]
@@ -57,6 +64,7 @@ FamixTest4School >> addTeacher: anObject [
 FamixTest4School >> principal [
 	"Relation named: #principal type: #FamixTest4Principal opposite: #school"
 
+	<ignoreForCoverage>
 	<generated>
 	<derived>
 	^ principal
@@ -65,6 +73,7 @@ FamixTest4School >> principal [
 { #category : 'accessing' }
 FamixTest4School >> principal: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	principal := anObject
 ]
@@ -73,6 +82,7 @@ FamixTest4School >> principal: anObject [
 FamixTest4School >> rooms [
 	"Relation named: #rooms type: #FamixTest4Room opposite: #school"
 
+	<ignoreForCoverage>
 	<generated>
 	<derived>
 	^ rooms
@@ -81,6 +91,7 @@ FamixTest4School >> rooms [
 { #category : 'accessing' }
 FamixTest4School >> rooms: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	rooms value: anObject
 ]
@@ -89,6 +100,7 @@ FamixTest4School >> rooms: anObject [
 FamixTest4School >> students [
 	"Relation named: #students type: #FamixTest4Student opposite: #school"
 
+	<ignoreForCoverage>
 	<generated>
 	<derived>
 	^ students
@@ -97,6 +109,7 @@ FamixTest4School >> students [
 { #category : 'accessing' }
 FamixTest4School >> students: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	students value: anObject
 ]
@@ -105,6 +118,7 @@ FamixTest4School >> students: anObject [
 FamixTest4School >> teachers [
 	"Relation named: #teachers type: #FamixTest4Teacher opposite: #school"
 
+	<ignoreForCoverage>
 	<generated>
 	<derived>
 	^ teachers
@@ -113,6 +127,7 @@ FamixTest4School >> teachers [
 { #category : 'accessing' }
 FamixTest4School >> teachers: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	teachers value: anObject
 ]

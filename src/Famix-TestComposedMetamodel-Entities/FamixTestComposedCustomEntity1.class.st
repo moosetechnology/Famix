@@ -26,6 +26,7 @@ Class {
 { #category : 'meta' }
 FamixTestComposedCustomEntity1 class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #CustomEntity1 super: #FamixTestComposedEntity>
 	<package: #'Famix-TestComposedMetamodel-Entities'>
 	<generated>
@@ -35,6 +36,7 @@ FamixTestComposedCustomEntity1 class >> annotation [
 FamixTestComposedCustomEntity1 >> c21 [
 	"Relation named: #c21 type: #FamixTestComposed2CustomEntity1 opposite: #c1"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMProperty: #c21 type: #FamixTestComposed2CustomEntity1 opposite: #c1>
 	^ self attributeAt: #c21 ifAbsent: [ nil ]
@@ -43,6 +45,7 @@ FamixTestComposedCustomEntity1 >> c21 [
 { #category : 'accessing' }
 FamixTestComposedCustomEntity1 >> c21: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	(self attributeAt: #c21 ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
@@ -58,6 +61,7 @@ FamixTestComposedCustomEntity1 >> c21: anObject [
 FamixTestComposedCustomEntity1 >> customEntity1 [
 	"Relation named: #customEntity1 type: #FamixTestComposed1CustomEntity1 opposite: #customEntity1"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMProperty: #customEntity1 type: #FamixTestComposed1CustomEntity1 opposite: #customEntity1>
 	^ self attributeAt: #customEntity1 ifAbsent: [ nil ]
@@ -66,6 +70,7 @@ FamixTestComposedCustomEntity1 >> customEntity1 [
 { #category : 'accessing' }
 FamixTestComposedCustomEntity1 >> customEntity1: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	(self attributeAt: #customEntity1 ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |

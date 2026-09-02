@@ -4,6 +4,7 @@ Extension { #name : 'FamixTestComposed1CustomEntity5' }
 FamixTestComposed1CustomEntity5 >> associations [
 	"Relation named: #associations type: #FamixTestComposedAssociation opposite: #c15"
 
+	<ignoreForCoverage>
 	<generated>
 	<derived>
 	<FMProperty: #associations type: #FamixTestComposedAssociation opposite: #c15>
@@ -15,6 +16,7 @@ FamixTestComposed1CustomEntity5 >> associations [
 { #category : '*Famix-TestComposedMetamodel-Entities' }
 FamixTestComposed1CustomEntity5 >> associations: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	<package: #'Famix-TestComposedMetamodel-Entities'>
 

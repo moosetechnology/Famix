@@ -23,6 +23,7 @@ Class {
 { #category : 'meta' }
 FamixJavaSourceLanguage class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #SourceLanguage super: #FamixJavaEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>

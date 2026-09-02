@@ -9,6 +9,7 @@ Class {
 { #category : 'meta' }
 FamixTest4Classroom class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Classroom super: #FamixTest4Room>
 	<package: #'Famix-Test4-Entities'>
 	<generated>
