@@ -31,8 +31,8 @@ Trait {
 	#instVars : [
 		'#childEntities => FMMany type: #FamixTPackageable opposite: #parentPackage'
 	],
-	#traits : 'FamixTCanBeStub + FamixTNamedEntity + TEntityMetaLevelDependency',
-	#classTraits : 'FamixTCanBeStub classTrait + FamixTNamedEntity classTrait + TEntityMetaLevelDependency classTrait',
+	#traits : 'FamixTNamedEntity + FamixTCanBeStub + FamixTWithClasses + TEntityMetaLevelDependency',
+	#classTraits : 'FamixTNamedEntity classTrait + FamixTCanBeStub classTrait + FamixTWithClasses classTrait + TEntityMetaLevelDependency classTrait',
 	#category : 'Famix-Traits-Package',
 	#package : 'Famix-Traits',
 	#tag : 'Package'

@@ -1122,6 +1122,7 @@ FamixGenerator >> defineHierarchy [
 
 	tPackage --|> tNamedEntity.
 	tPackage --|> #TEntityMetaLevelDependency.
+	tPackage --|> tWithClasses.
 	tPackage --|> tCanBeStub.
 
 	tParameter --|> tStructuralEntity.
