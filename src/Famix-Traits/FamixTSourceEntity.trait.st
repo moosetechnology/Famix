@@ -25,6 +25,7 @@ Trait {
 { #category : 'meta' }
 FamixTSourceEntity classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TSourceEntity super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -126,6 +127,7 @@ FamixTSourceEntity >> shouldCountChildrenForLinesOfCodeIfNoSourceAnchor [
 FamixTSourceEntity >> sourceAnchor [
 	"Relation named: #sourceAnchor type: #FamixTSourceAnchor opposite: #element"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'SourceAnchor entity linking to the original source code for this entity'>
 	<derived>
@@ -135,6 +137,7 @@ FamixTSourceEntity >> sourceAnchor [
 { #category : 'accessing' }
 FamixTSourceEntity >> sourceAnchor: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	sourceAnchor := anObject
 ]

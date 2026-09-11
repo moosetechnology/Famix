@@ -23,6 +23,7 @@ Trait {
 { #category : 'meta' }
 FamixTInvocationsReceiver classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TInvocationsReceiver super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -37,6 +38,7 @@ FamixTInvocationsReceiver >> addReceivingInvocation: anInvocation [
 FamixTInvocationsReceiver >> receivingInvocations [
 	"Relation named: #receivingInvocations type: #FamixTInvocation opposite: #receiver"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'List of invocations performed on this entity (considered as the receiver)'>
 	<derived>
@@ -46,6 +48,7 @@ FamixTInvocationsReceiver >> receivingInvocations [
 { #category : 'accessing' }
 FamixTInvocationsReceiver >> receivingInvocations: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	receivingInvocations value: anObject
 ]

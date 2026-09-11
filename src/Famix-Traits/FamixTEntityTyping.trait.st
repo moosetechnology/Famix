@@ -38,6 +38,7 @@ Trait {
 { #category : 'meta' }
 FamixTEntityTyping classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TEntityTyping super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -47,6 +48,7 @@ FamixTEntityTyping classSide >> annotation [
 FamixTEntityTyping >> declaredType [
 	"Relation named: #declaredType type: #FamixTType opposite: #incomingTypings"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Type of the entity.'>
 	<target>
@@ -56,6 +58,7 @@ FamixTEntityTyping >> declaredType [
 { #category : 'accessing' }
 FamixTEntityTyping >> declaredType: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	declaredType := anObject
 ]
@@ -64,6 +67,7 @@ FamixTEntityTyping >> declaredType: anObject [
 FamixTEntityTyping >> typedEntity [
 	"Relation named: #typedEntity type: #FamixTTypedEntity opposite: #typing"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Entity deckaring the type.'>
 	<derived>
@@ -74,6 +78,7 @@ FamixTEntityTyping >> typedEntity [
 { #category : 'accessing' }
 FamixTEntityTyping >> typedEntity: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	typedEntity := anObject
 ]

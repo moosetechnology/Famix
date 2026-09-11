@@ -48,6 +48,7 @@ Class {
 { #category : 'meta' }
 FamixJavaType class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Type super: #FamixJavaContainerEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
@@ -172,12 +173,4 @@ FamixJavaType >> printOn: aStream [
 		nextPutAll: ' (';
 		nextPutAll: (self class name withoutPrefix: 'FamixJava');
 		nextPut: $)
-]
-
-{ #category : 'Famix-Implementation' }
-FamixJavaType >> withSuperclassHierarchyGroup [
-	<navigation: 'With all superclasses'>
-	^ MooseGroup
-		withAll: self withSuperclassHierarchy asSet
-		withDescription: 'With all superclasses of ' , self mooseName
 ]

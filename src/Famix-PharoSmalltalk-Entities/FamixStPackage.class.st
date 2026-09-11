@@ -37,6 +37,7 @@ Class {
 { #category : 'meta' }
 FamixStPackage class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Package super: #FamixStNamedEntity>
 	<package: #'Famix-PharoSmalltalk-Entities'>
 	<generated>
@@ -96,11 +97,8 @@ FamixStPackage >> localClasses [
 
 { #category : 'accessing' }
 FamixStPackage >> localClassesGroup [
-	<navigation: 'Local classes'>
 
-	^ FamixClassGroup 
-		withAll: self localClasses
-		withDescription: 'Local classes'
+	^ FamixClassGroup withAll: self localClasses withDescription: 'Local classes'
 ]
 
 { #category : 'accessing' }

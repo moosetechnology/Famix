@@ -24,6 +24,8 @@ Class {
 
 { #category : 'accessing' }
 FamixTest1Model class >> allSubmetamodelsPackagesNames [
+
+	<ignoreForCoverage>
 	<generated>
 	^ #(#'Moose-Query' #'Famix-Traits')
 ]
@@ -31,6 +33,7 @@ FamixTest1Model class >> allSubmetamodelsPackagesNames [
 { #category : 'meta' }
 FamixTest1Model class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Model super: #MooseModel>
 	<package: #'Famix-Test1-Entities'>
 	<generated>
@@ -48,6 +51,7 @@ FamixTest1Model class >> canBeImportedFromFile [
 { #category : 'accessing' }
 FamixTest1Model class >> importingContextClass [
 
+	<ignoreForCoverage>
 	<generated>
 	^ FamixTest1ImportingContext
 ]
@@ -56,12 +60,14 @@ FamixTest1Model class >> importingContextClass [
 FamixTest1Model >> modelHasProperties [
 
 	<FMProperty: #modelHasProperties type: #Object>
+	<ignoreForCoverage>
 	<generated>
 	^ modelHasProperties
 ]
 
 { #category : 'accessing' }
 FamixTest1Model >> modelHasProperties: anObject [
+	<ignoreForCoverage>
 	<generated>
 	modelHasProperties := anObject
 ]

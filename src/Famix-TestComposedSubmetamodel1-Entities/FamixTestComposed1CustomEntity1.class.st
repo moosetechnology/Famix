@@ -9,6 +9,7 @@ Class {
 { #category : 'meta' }
 FamixTestComposed1CustomEntity1 class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #CustomEntity1 super: #FamixTestComposed1Entity>
 	<package: #'Famix-TestComposedSubmetamodel1-Entities'>
 	<generated>

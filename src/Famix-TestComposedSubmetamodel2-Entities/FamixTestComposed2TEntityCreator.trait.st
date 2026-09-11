@@ -14,6 +14,7 @@ Trait {
 { #category : 'meta' }
 FamixTestComposed2TEntityCreator classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TEntityCreator super: #Object>
 	<package: #'Famix-TestComposedSubmetamodel2-Entities'>
 	<generated>
@@ -22,6 +23,7 @@ FamixTestComposed2TEntityCreator classSide >> annotation [
 { #category : 'entity creation' }
 FamixTestComposed2TEntityCreator >> newClass [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTestComposed2Class new
 ]
@@ -29,6 +31,7 @@ FamixTestComposed2TEntityCreator >> newClass [
 { #category : 'entity creation' }
 FamixTestComposed2TEntityCreator >> newClassNamed: aName [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: (FamixTestComposed2Class named: aName)
 ]
@@ -36,6 +39,7 @@ FamixTestComposed2TEntityCreator >> newClassNamed: aName [
 { #category : 'entity creation' }
 FamixTestComposed2TEntityCreator >> newComment [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTestComposed2Comment new
 ]
@@ -43,6 +47,7 @@ FamixTestComposed2TEntityCreator >> newComment [
 { #category : 'entity creation' }
 FamixTestComposed2TEntityCreator >> newCustomEntity1 [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTestComposed2CustomEntity1 new
 ]
@@ -50,6 +55,7 @@ FamixTestComposed2TEntityCreator >> newCustomEntity1 [
 { #category : 'entity creation' }
 FamixTestComposed2TEntityCreator >> newCustomEntity2 [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTestComposed2CustomEntity2 new
 ]
@@ -57,6 +63,7 @@ FamixTestComposed2TEntityCreator >> newCustomEntity2 [
 { #category : 'entity creation' }
 FamixTestComposed2TEntityCreator >> newCustomEntity3 [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTestComposed2CustomEntity3 new
 ]
@@ -64,6 +71,7 @@ FamixTestComposed2TEntityCreator >> newCustomEntity3 [
 { #category : 'entity creation' }
 FamixTestComposed2TEntityCreator >> newCustomEntity4 [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTestComposed2CustomEntity4 new
 ]
@@ -71,6 +79,7 @@ FamixTestComposed2TEntityCreator >> newCustomEntity4 [
 { #category : 'entity creation' }
 FamixTestComposed2TEntityCreator >> newCustomEntity5 [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTestComposed2CustomEntity5 new
 ]
@@ -78,6 +87,7 @@ FamixTestComposed2TEntityCreator >> newCustomEntity5 [
 { #category : 'entity creation' }
 FamixTestComposed2TEntityCreator >> newMethod [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTestComposed2Method new
 ]
@@ -85,6 +95,7 @@ FamixTestComposed2TEntityCreator >> newMethod [
 { #category : 'entity creation' }
 FamixTestComposed2TEntityCreator >> newMethodNamed: aName [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: (FamixTestComposed2Method named: aName)
 ]
@@ -92,6 +103,7 @@ FamixTestComposed2TEntityCreator >> newMethodNamed: aName [
 { #category : 'entity creation' }
 FamixTestComposed2TEntityCreator >> newSourceLanguage [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTestComposed2SourceLanguage new
 ]
@@ -99,6 +111,7 @@ FamixTestComposed2TEntityCreator >> newSourceLanguage [
 { #category : 'entity creation' }
 FamixTestComposed2TEntityCreator >> newSourceTextAnchor [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTestComposed2SourceTextAnchor new
 ]

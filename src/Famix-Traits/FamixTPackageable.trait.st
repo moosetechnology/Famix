@@ -23,6 +23,7 @@ Trait {
 { #category : 'meta' }
 FamixTPackageable classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TPackageable super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -38,6 +39,7 @@ FamixTPackageable >> isExtension [
 FamixTPackageable >> parentPackage [
 	"Relation named: #parentPackage type: #FamixTPackage opposite: #childEntities"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Package containing the entity in the code structure (if applicable)'>
 	<container>
@@ -47,6 +49,7 @@ FamixTPackageable >> parentPackage [
 { #category : 'accessing' }
 FamixTPackageable >> parentPackage: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	parentPackage := anObject
 ]

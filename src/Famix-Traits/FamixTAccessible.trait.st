@@ -23,6 +23,7 @@ Trait {
 { #category : 'meta' }
 FamixTAccessible classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TAccessible super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -72,6 +73,7 @@ FamixTAccessible >> globalAccesses [
 FamixTAccessible >> incomingAccesses [
 	"Relation named: #incomingAccesses type: #FamixTAccess opposite: #candidates"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'All Famix accesses pointing to this structural entity'>
 	^ incomingAccesses
@@ -80,6 +82,7 @@ FamixTAccessible >> incomingAccesses [
 { #category : 'accessing' }
 FamixTAccessible >> incomingAccesses: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	incomingAccesses value: anObject
 ]

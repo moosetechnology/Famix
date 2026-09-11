@@ -23,6 +23,7 @@ Trait {
 { #category : 'meta' }
 FamixTInvocable classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TInvocable super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -37,6 +38,7 @@ FamixTInvocable >> addIncomingInvocation: anInvocation [
 FamixTInvocable >> incomingInvocations [
 	"Relation named: #incomingInvocations type: #FamixTInvocation opposite: #candidates"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Incoming invocations from other behaviours computed by the candidate operator.'>
 	<derived>
@@ -46,6 +48,7 @@ FamixTInvocable >> incomingInvocations [
 { #category : 'accessing' }
 FamixTInvocable >> incomingInvocations: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	incomingInvocations value: anObject
 ]

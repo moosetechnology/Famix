@@ -11,6 +11,7 @@ Class {
 { #category : 'meta' }
 FDModel class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Model super: #MooseModel>
 	<package: #'FamixDocumentor-TestMetaModel'>
 	<generated>

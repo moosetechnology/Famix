@@ -30,6 +30,7 @@ Class {
 { #category : 'meta' }
 FamixTest4Student class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Student super: #FamixTest4Person>
 	<package: #'Famix-Test4-Entities'>
 	<generated>
@@ -37,6 +38,8 @@ FamixTest4Student class >> annotation [
 
 { #category : 'adding' }
 FamixTest4Student >> addTeacher: anObject [
+
+	<ignoreForCoverage>
 	<generated>
 	^ self teachers add: anObject
 ]
@@ -45,6 +48,7 @@ FamixTest4Student >> addTeacher: anObject [
 FamixTest4Student >> school [
 	"Relation named: #school type: #FamixTest4School opposite: #students"
 
+	<ignoreForCoverage>
 	<generated>
 	<container>
 	^ school
@@ -53,6 +57,7 @@ FamixTest4Student >> school [
 { #category : 'accessing' }
 FamixTest4Student >> school: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	school := anObject
 ]
@@ -61,6 +66,7 @@ FamixTest4Student >> school: anObject [
 FamixTest4Student >> teachers [
 	"Relation named: #teachers type: #FamixTest4Teacher opposite: #students"
 
+	<ignoreForCoverage>
 	<generated>
 	<derived>
 	^ teachers
@@ -69,6 +75,7 @@ FamixTest4Student >> teachers [
 { #category : 'accessing' }
 FamixTest4Student >> teachers: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	teachers value: anObject
 ]

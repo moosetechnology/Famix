@@ -35,6 +35,7 @@ Class {
 { #category : 'meta' }
 FamixTest7Inheritance class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Inheritance super: #FamixTest7Entity>
 	<package: #'Famix-Test7-Entities'>
 	<generated>

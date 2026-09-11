@@ -10,6 +10,8 @@ Class {
 
 { #category : 'accessing' }
 MooseMSEImporterTestModel class >> allSubmetamodelsPackagesNames [
+
+	<ignoreForCoverage>
 	<generated>
 	^ #(#'Moose-Query' #'Famix-Traits')
 ]
@@ -17,6 +19,7 @@ MooseMSEImporterTestModel class >> allSubmetamodelsPackagesNames [
 { #category : 'meta' }
 MooseMSEImporterTestModel class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Model super: #MooseModel>
 	<package: #'Moose-Core-Tests-Entities'>
 	<generated>

@@ -67,6 +67,7 @@ Class {
 { #category : 'meta' }
 FamixStMethod class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Method super: #FamixStNamedEntity>
 	<package: #'Famix-PharoSmalltalk-Entities'>
 	<generated>
@@ -264,6 +265,7 @@ FamixStMethod >> printProtocol [
 FamixStMethod >> protocol [
 
 	<FMProperty: #protocol type: #String>
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Protocol of the method'>
 	^ protocol
@@ -271,6 +273,7 @@ FamixStMethod >> protocol [
 
 { #category : 'accessing' }
 FamixStMethod >> protocol: anObject [
+	<ignoreForCoverage>
 	<generated>
 	protocol := anObject
 ]

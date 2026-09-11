@@ -14,6 +14,7 @@ Trait {
 { #category : 'meta' }
 FamixTestComposedTEntityCreator classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TEntityCreator super: #Object>
 	<package: #'Famix-TestComposedMetamodel-Entities'>
 	<generated>
@@ -22,6 +23,7 @@ FamixTestComposedTEntityCreator classSide >> annotation [
 { #category : 'entity creation' }
 FamixTestComposedTEntityCreator >> newAssociation [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTestComposedAssociation new
 ]
@@ -29,6 +31,7 @@ FamixTestComposedTEntityCreator >> newAssociation [
 { #category : 'entity creation' }
 FamixTestComposedTEntityCreator >> newCustomEntity1 [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTestComposedCustomEntity1 new
 ]
@@ -36,6 +39,7 @@ FamixTestComposedTEntityCreator >> newCustomEntity1 [
 { #category : 'entity creation' }
 FamixTestComposedTEntityCreator >> newCustomEntity2 [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTestComposedCustomEntity2 new
 ]
@@ -43,6 +47,7 @@ FamixTestComposedTEntityCreator >> newCustomEntity2 [
 { #category : 'entity creation' }
 FamixTestComposedTEntityCreator >> newCustomEntity3 [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTestComposedCustomEntity3 new
 ]
@@ -50,6 +55,7 @@ FamixTestComposedTEntityCreator >> newCustomEntity3 [
 { #category : 'entity creation' }
 FamixTestComposedTEntityCreator >> newCustomEntity4 [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTestComposedCustomEntity4 new
 ]
@@ -57,6 +63,7 @@ FamixTestComposedTEntityCreator >> newCustomEntity4 [
 { #category : 'entity creation' }
 FamixTestComposedTEntityCreator >> newStandardEntity [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTestComposedStandardEntity new
 ]

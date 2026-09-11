@@ -131,11 +131,10 @@ FmxMBGeneratorCleaningStrategyTest >> setUp [
 { #category : 'running' }
 FmxMBGeneratorCleaningStrategyTest >> tearDown [
 
-	[
-		self packageName asPackage removeFromSystem.
-		'Famix-MetamodelBuilder-TestsResources-Entities' asPackage removeFromSystem ]
-		on: NotFound
-		do: [ ].
+	{
+		self packageName.
+		'Famix-MetamodelBuilder-TestsResources-Entities' } do: [ :packageName | (packageName asPackageIfAbsent: [ nil ]) ifNotNil: #removeFromSystem ].
+
 	super tearDown
 ]
 

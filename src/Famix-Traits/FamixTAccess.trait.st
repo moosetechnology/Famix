@@ -58,6 +58,7 @@ Trait {
 { #category : 'meta' }
 FamixTAccess classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TAccess super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -67,6 +68,7 @@ FamixTAccess classSide >> annotation [
 FamixTAccess >> accessor [
 	"Relation named: #accessor type: #FamixTWithAccesses opposite: #accesses"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Behavioural entity making the access to the variable. from-side of the association'>
 	<source>
@@ -76,12 +78,15 @@ FamixTAccess >> accessor [
 { #category : 'accessing' }
 FamixTAccess >> accessor: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	accessor := anObject
 ]
 
 { #category : 'adding' }
 FamixTAccess >> addCandidate: anObject [
+
+	<ignoreForCoverage>
 	<generated>
 	^ self candidates add: anObject
 ]
@@ -90,6 +95,7 @@ FamixTAccess >> addCandidate: anObject [
 FamixTAccess >> candidates [
 	"Relation named: #candidates type: #FamixTAccessible opposite: #incomingAccesses"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Variables that cas be the accessed variable. to-side of the association. Most of the time it will be only one variable, but some languages might have candidates such as Python.'>
 	<derived>
@@ -100,6 +106,7 @@ FamixTAccess >> candidates [
 { #category : 'accessing' }
 FamixTAccess >> candidates: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	candidates value: anObject
 ]
@@ -127,6 +134,7 @@ FamixTAccess >> displayStringOn: aStream [
 { #category : 'testing' }
 FamixTAccess >> isAccess [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
@@ -157,6 +165,7 @@ FamixTAccess >> isWrite [
 
 { #category : 'accessing' }
 FamixTAccess >> isWrite: anObject [
+	<ignoreForCoverage>
 	<generated>
 	isWrite := anObject
 ]

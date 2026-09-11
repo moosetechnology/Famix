@@ -48,6 +48,7 @@ Trait {
 { #category : 'meta' }
 FamixTAnnotationInstanceAttribute classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TAnnotationInstanceAttribute super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -57,6 +58,7 @@ FamixTAnnotationInstanceAttribute classSide >> annotation [
 FamixTAnnotationInstanceAttribute >> annotationTypeAttribute [
 	"Relation named: #annotationTypeAttribute type: #FamixTAnnotationTypeAttribute opposite: #annotationAttributeInstances"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'This corresponds to the type of the attribute in an AnnotationInstance'>
 	^ annotationTypeAttribute
@@ -65,6 +67,7 @@ FamixTAnnotationInstanceAttribute >> annotationTypeAttribute [
 { #category : 'accessing' }
 FamixTAnnotationInstanceAttribute >> annotationTypeAttribute: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	annotationTypeAttribute := anObject
 ]
@@ -73,6 +76,7 @@ FamixTAnnotationInstanceAttribute >> annotationTypeAttribute: anObject [
 FamixTAnnotationInstanceAttribute >> parentAnnotationInstance [
 	"Relation named: #parentAnnotationInstance type: #FamixTAnnotationInstance opposite: #attributes"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The instance of the annotation in which the attribute is used.'>
 	<container>
@@ -82,6 +86,7 @@ FamixTAnnotationInstanceAttribute >> parentAnnotationInstance [
 { #category : 'accessing' }
 FamixTAnnotationInstanceAttribute >> parentAnnotationInstance: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	parentAnnotationInstance := anObject
 ]
@@ -90,6 +95,7 @@ FamixTAnnotationInstanceAttribute >> parentAnnotationInstance: anObject [
 FamixTAnnotationInstanceAttribute >> value [
 
 	<FMProperty: #value type: #Object>
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Actual value of the attribute used in an annotation'>
 	^ value
@@ -97,6 +103,7 @@ FamixTAnnotationInstanceAttribute >> value [
 
 { #category : 'accessing' }
 FamixTAnnotationInstanceAttribute >> value: anObject [
+	<ignoreForCoverage>
 	<generated>
 	value := anObject
 ]

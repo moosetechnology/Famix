@@ -29,6 +29,7 @@ Class {
 { #category : 'meta' }
 FamixTest8Virus class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Virus super: #FamixTest8Entity>
 	<package: #'Famix-Test8-Entities'>
 	<generated>

@@ -50,6 +50,7 @@ Class {
 { #category : 'meta' }
 FamixJavaEnumValue class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #EnumValue super: #FamixJavaVariable>
 	<package: #'Famix-Java-Entities'>
 	<generated>

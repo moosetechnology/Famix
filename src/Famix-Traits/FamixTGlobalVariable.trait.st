@@ -50,6 +50,7 @@ Trait {
 { #category : 'meta' }
 FamixTGlobalVariable classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TGlobalVariable super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -57,6 +58,8 @@ FamixTGlobalVariable classSide >> annotation [
 
 { #category : 'groups' }
 FamixTGlobalVariable classSide >> annotationFamixGlobalVariableGroup [
+
+	<ignoreForCoverage>
 	<generated>
 	<mooseGroup>
 	^ FamixGlobalVariableGroup
@@ -65,6 +68,7 @@ FamixTGlobalVariable classSide >> annotationFamixGlobalVariableGroup [
 { #category : 'testing' }
 FamixTGlobalVariable >> isGlobalVariable [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
@@ -73,6 +77,7 @@ FamixTGlobalVariable >> isGlobalVariable [
 FamixTGlobalVariable >> parentScope [
 	"Relation named: #parentScope type: #FamixTWithGlobalVariables opposite: #globalVariables"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Scope declaring the global variable. belongsTo implementation'>
 	<container>
@@ -82,6 +87,7 @@ FamixTGlobalVariable >> parentScope [
 { #category : 'accessing' }
 FamixTGlobalVariable >> parentScope: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	parentScope := anObject
 ]

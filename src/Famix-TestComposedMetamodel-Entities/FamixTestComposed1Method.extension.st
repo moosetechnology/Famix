@@ -4,6 +4,7 @@ Extension { #name : 'FamixTestComposed1Method' }
 FamixTestComposed1Method >> standardEntity [
 	"Relation named: #standardEntity type: #FamixTestComposedStandardEntity opposite: #method"
 
+	<ignoreForCoverage>
 	<generated>
 	<derived>
 	<FMProperty: #standardEntity type: #FamixTestComposedStandardEntity opposite: #method>
@@ -14,6 +15,7 @@ FamixTestComposed1Method >> standardEntity [
 { #category : '*Famix-TestComposedMetamodel-Entities' }
 FamixTestComposed1Method >> standardEntity: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	<package: #'Famix-TestComposedMetamodel-Entities'>
 

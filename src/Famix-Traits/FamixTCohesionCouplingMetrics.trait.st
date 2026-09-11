@@ -34,6 +34,7 @@ Trait {
 { #category : 'meta' }
 FamixTCohesionCouplingMetrics classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TCohesionCouplingMetrics super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>

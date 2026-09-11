@@ -23,6 +23,7 @@ Class {
 { #category : 'meta' }
 FamixStSourceAnchor class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #SourceAnchor super: #FamixStEntity>
 	<package: #'Famix-PharoSmalltalk-Entities'>
 	<generated>
@@ -32,6 +33,7 @@ FamixStSourceAnchor class >> annotation [
 { #category : 'testing' }
 FamixStSourceAnchor class >> isAbstract [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self == FamixStSourceAnchor
 ]

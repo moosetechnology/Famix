@@ -10,6 +10,7 @@ Trait {
 { #category : 'meta' }
 FDTrait2 classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Trait2 super: #Object>
 	<package: #'FamixDocumentor-TestMetaModel'>
 	<generated>

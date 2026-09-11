@@ -8,6 +8,7 @@ Trait {
 { #category : 'meta' }
 FamixTMethodMetrics classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TMethodMetrics super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>

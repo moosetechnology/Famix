@@ -23,6 +23,7 @@ Trait {
 { #category : 'meta' }
 FamixTWithComments classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TWithComments super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -39,6 +40,7 @@ FamixTWithComments >> addComment: aComment [
 FamixTWithComments >> comments [
 	"Relation named: #comments type: #FamixTComment opposite: #commentedEntity"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'List of comments for the entity'>
 	<derived>
@@ -48,6 +50,7 @@ FamixTWithComments >> comments [
 { #category : 'accessing' }
 FamixTWithComments >> comments: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	comments value: anObject
 ]

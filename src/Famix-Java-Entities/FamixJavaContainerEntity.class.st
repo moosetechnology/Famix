@@ -24,6 +24,7 @@ Class {
 { #category : 'meta' }
 FamixJavaContainerEntity class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #ContainerEntity super: #FamixJavaNamedEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
@@ -33,6 +34,7 @@ FamixJavaContainerEntity class >> annotation [
 { #category : 'testing' }
 FamixJavaContainerEntity class >> isAbstract [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self == FamixJavaContainerEntity
 ]

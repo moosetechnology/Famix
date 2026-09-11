@@ -38,6 +38,7 @@ Trait {
 { #category : 'meta' }
 FamixTFile classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TFile super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -45,6 +46,8 @@ FamixTFile classSide >> annotation [
 
 { #category : 'groups' }
 FamixTFile classSide >> annotationFamixFileGroup [
+
+	<ignoreForCoverage>
 	<generated>
 	<mooseGroup>
 	^ FamixFileGroup
@@ -71,6 +74,7 @@ FamixTFile >> averageNumberOfCharactersPerLine [
 FamixTFile >> entities [
 	"Relation named: #entities type: #FamixTWithFiles opposite: #containerFiles"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'List of entities defined in the file'>
 	<derived>
@@ -80,15 +84,9 @@ FamixTFile >> entities [
 { #category : 'accessing' }
 FamixTFile >> entities: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	entities value: anObject
-]
-
-{ #category : 'accessing' }
-FamixTFile >> entitiesGroup [
-	<navigation: 'Entities'>
-	
-	^ MooseGroup withAll: self entities withDescription: 'Entities defined in a file'
 ]
 
 { #category : 'testing' }

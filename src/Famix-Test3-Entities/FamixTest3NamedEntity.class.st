@@ -20,6 +20,7 @@ Class {
 { #category : 'meta' }
 FamixTest3NamedEntity class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #NamedEntity super: #FamixTest3Entity>
 	<package: #'Famix-Test3-Entities'>
 	<generated>
@@ -29,6 +30,7 @@ FamixTest3NamedEntity class >> annotation [
 { #category : 'testing' }
 FamixTest3NamedEntity class >> isAbstract [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self == FamixTest3NamedEntity
 ]
@@ -36,6 +38,7 @@ FamixTest3NamedEntity class >> isAbstract [
 { #category : 'testing' }
 FamixTest3NamedEntity >> isNamedEntity [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]

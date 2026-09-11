@@ -10,6 +10,8 @@ Class {
 
 { #category : 'accessing' }
 FamixJavaModel class >> allSubmetamodelsPackagesNames [
+
+	<ignoreForCoverage>
 	<generated>
 	^ #(#'Moose-Query' #'Famix-Traits')
 ]
@@ -17,6 +19,7 @@ FamixJavaModel class >> allSubmetamodelsPackagesNames [
 { #category : 'meta' }
 FamixJavaModel class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Model super: #MooseModel>
 	<package: #'Famix-Java-Entities'>
 	<generated>
@@ -24,6 +27,8 @@ FamixJavaModel class >> annotation [
 
 { #category : 'testing' }
 FamixJavaModel class >> canBeImportedFromFile [
+
+	<ignoreForCoverage>
 	<generated>
 	^true
 ]
@@ -31,6 +36,7 @@ FamixJavaModel class >> canBeImportedFromFile [
 { #category : 'accessing' }
 FamixJavaModel class >> importingContextClass [
 
+	<ignoreForCoverage>
 	<generated>
 	^ FamixJavaImportingContext
 ]

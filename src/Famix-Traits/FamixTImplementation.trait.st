@@ -38,6 +38,7 @@ Trait {
 { #category : 'meta' }
 FamixTImplementation classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TImplementation super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -47,6 +48,7 @@ FamixTImplementation classSide >> annotation [
 FamixTImplementation >> implementingClass [
 	"Relation named: #implementingClass type: #FamixTCanImplement opposite: #interfaceImplementations"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Class linked to in this relationship. from-side of the association'>
 	<source>
@@ -56,6 +58,7 @@ FamixTImplementation >> implementingClass [
 { #category : 'accessing' }
 FamixTImplementation >> implementingClass: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	implementingClass := anObject
 ]
@@ -64,6 +67,7 @@ FamixTImplementation >> implementingClass: anObject [
 FamixTImplementation >> interface [
 	"Relation named: #interface type: #FamixTImplementable opposite: #implementations"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Interface linked to in this relationship. to-side of the association'>
 	<target>
@@ -73,6 +77,7 @@ FamixTImplementation >> interface [
 { #category : 'accessing' }
 FamixTImplementation >> interface: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	interface := anObject
 ]

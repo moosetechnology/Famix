@@ -23,6 +23,7 @@ Class {
 { #category : 'meta' }
 FamixJavaVariable class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Variable super: #FamixJavaNamedEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
@@ -32,6 +33,7 @@ FamixJavaVariable class >> annotation [
 { #category : 'testing' }
 FamixJavaVariable class >> isAbstract [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self == FamixJavaVariable
 ]

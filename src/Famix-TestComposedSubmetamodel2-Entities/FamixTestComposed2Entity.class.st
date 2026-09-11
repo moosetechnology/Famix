@@ -9,6 +9,7 @@ Class {
 { #category : 'meta' }
 FamixTestComposed2Entity class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Entity super: #MooseEntity>
 	<package: #'Famix-TestComposedSubmetamodel2-Entities'>
 	<generated>
@@ -18,6 +19,7 @@ FamixTestComposed2Entity class >> annotation [
 { #category : 'testing' }
 FamixTestComposed2Entity class >> isAbstract [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self == FamixTestComposed2Entity
 ]
@@ -25,6 +27,7 @@ FamixTestComposed2Entity class >> isAbstract [
 { #category : 'meta' }
 FamixTestComposed2Entity class >> metamodel [
 
+	<ignoreForCoverage>
 	<generated>
 	^ FamixTestComposed2Model metamodel
 ]
@@ -32,6 +35,7 @@ FamixTestComposed2Entity class >> metamodel [
 { #category : 'testing' }
 FamixTestComposed2Entity >> canBeStub [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -39,6 +43,7 @@ FamixTestComposed2Entity >> canBeStub [
 { #category : 'testing' }
 FamixTestComposed2Entity >> hasImmediateSource [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -46,6 +51,7 @@ FamixTestComposed2Entity >> hasImmediateSource [
 { #category : 'testing' }
 FamixTestComposed2Entity >> isBehavioural [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -53,6 +59,7 @@ FamixTestComposed2Entity >> isBehavioural [
 { #category : 'testing' }
 FamixTestComposed2Entity >> isClass [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -60,6 +67,7 @@ FamixTestComposed2Entity >> isClass [
 { #category : 'testing' }
 FamixTestComposed2Entity >> isComment [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -67,6 +75,7 @@ FamixTestComposed2Entity >> isComment [
 { #category : 'testing' }
 FamixTestComposed2Entity >> isMethod [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -74,6 +83,7 @@ FamixTestComposed2Entity >> isMethod [
 { #category : 'testing' }
 FamixTestComposed2Entity >> isNamedEntity [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -81,6 +91,7 @@ FamixTestComposed2Entity >> isNamedEntity [
 { #category : 'testing' }
 FamixTestComposed2Entity >> isQueryable [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -88,6 +99,7 @@ FamixTestComposed2Entity >> isQueryable [
 { #category : 'testing' }
 FamixTestComposed2Entity >> isType [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]

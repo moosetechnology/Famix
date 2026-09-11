@@ -28,6 +28,7 @@ Trait {
 { #category : 'meta' }
 FamixTTypeAlias classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TTypeAlias super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -37,6 +38,7 @@ FamixTTypeAlias classSide >> annotation [
 FamixTTypeAlias >> aliasedType [
 	"Relation named: #aliasedType type: #FamixTWithTypeAliases opposite: #typeAliases"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Points to the actual type.'>
 	^ aliasedType
@@ -45,6 +47,7 @@ FamixTTypeAlias >> aliasedType [
 { #category : 'accessing' }
 FamixTTypeAlias >> aliasedType: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	aliasedType := anObject
 ]

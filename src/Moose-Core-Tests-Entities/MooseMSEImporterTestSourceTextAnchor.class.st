@@ -29,6 +29,7 @@ Class {
 { #category : 'meta' }
 MooseMSEImporterTestSourceTextAnchor class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #SourceTextAnchor super: #MooseMSEImporterTestSourceAnchor>
 	<package: #'Moose-Core-Tests-Entities'>
 	<generated>

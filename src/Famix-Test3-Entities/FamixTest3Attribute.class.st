@@ -45,6 +45,7 @@ Class {
 { #category : 'meta' }
 FamixTest3Attribute class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Attribute super: #FamixTest3Entity>
 	<package: #'Famix-Test3-Entities'>
 	<generated>
