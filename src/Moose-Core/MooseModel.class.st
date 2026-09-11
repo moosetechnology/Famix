@@ -299,6 +299,13 @@ MooseModel class >> importFromMSEStream: aStream filteredBy: anImportingContext 
 ]
 
 { #category : 'import-export' }
+MooseModel class >> importFromMessagePackFile: aFileReference [
+
+	^ aFileReference binaryReadStreamDo: [ :stream |
+		  self importFromMessagePackStream: stream ]
+]
+
+{ #category : 'import-export' }
 MooseModel class >> importFromMessagePackStream: aStream [
 
     | model importer |
@@ -323,6 +330,29 @@ MooseModel class >> named: aString [
 	^ self new
 		name: aString;
 		yourself
+]
+
+{ #category : 'import-export' }
+MooseModel class >> nicolasImportFromJSON: aStream withMetamodel: aMetamodel [
+
+	| model importer parser |
+	model := FMModel withMetamodel: aMetamodel.
+	importer := (FMImporter model: model)
+      autorizeDandlingReferencesAtEnd;
+      parser: FMJSONSeparatedRelationsDirectParser;
+      stream: aStream;
+      yourself.
+
+	parser := importer parser new
+      stream: importer stream;
+      importer: importer;
+      yourself.
+
+	[ Deprecation raiseWarning: false. parser basicRun ]
+      ensure: [ Deprecation raiseWarning: true ].
+
+	model updateCache.
+	^ model
 ]
 
 { #category : 'accessing' }
@@ -572,6 +602,15 @@ MooseModel >> exportToMSEStream: aStream [
 ]
 
 { #category : 'import-export' }
+MooseModel >> exportToMsgPackStream: aStream [
+
+	self detectEncodingOfAllFileAnchors.
+	aStream nextPutAll: (FMMessagePackModelExporter new
+			 model: self;
+			 messagePackBytes)
+]
+
+{ #category : 'import-export' }
 MooseModel >> exportWithMetamodelUsingPrinter: aPrinter [
 
 	(FMModel withMetamodel: self metamodel)
@@ -633,7 +672,7 @@ MooseModel >> importFromJSONSeparetedStream: aStream [
 
 	^ self
 		  importFrom:
-		  (self class importFromJSONSepareted: aStream withMetamodel: self metamodel)
+		  (self class nicolasImportFromJSON: aStream withMetamodel: self metamodel)
 		  named: (aStream localName withoutSuffix: '.json')
 ]
 
