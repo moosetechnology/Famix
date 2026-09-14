@@ -1,6 +1,9 @@
 Class {
 	#name : 'FamixJavaFoldersImporterTest',
 	#superclass : 'TestCase',
+	#instVars : [
+		'testFolder'
+	],
 	#category : 'Moose-Importers-Tests',
 	#package : 'Moose-Importers-Tests'
 }
@@ -14,13 +17,25 @@ FamixJavaFoldersImporterTest >> createTempFolder [
 	^ folder
 ]
 
+{ #category : 'running' }
+FamixJavaFoldersImporterTest >> setUp [
+	super setUp.
+
+	testFolder := self createTempFolder. 
+]
+
+{ #category : 'running' }
+FamixJavaFoldersImporterTest >> tearDown [
+
+	testFolder ensureDeleteAll.
+	super tearDown
+]
+
 { #category : 'tests' }
 FamixJavaFoldersImporterTest >> testModelRootFolder [
 
-	| folder model |
-	folder := self createTempFolder.
+	| model |
+	model := FamixJavaFoldersImporter importFolder: testFolder.
 
-	model := FamixJavaFoldersImporter importFolder: folder.
-
-	self assert: model rootFolder fullName equals: folder fullName
+	self assert: model rootFolder fullName equals: testFolder fullName
 ]
