@@ -236,6 +236,7 @@ FamixJavaFoldersImporter >> importModels [
 				run.
 
 			model name: folder basename.
+			model rootFolder: folder.
 			models add: model ]
 		displayingProgress: [ :folder | folder basename ]
 ]
