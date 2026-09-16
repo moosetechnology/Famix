@@ -270,7 +270,7 @@ FamixJavaFoldersImporter >> jdkVersion: aString [
 { #category : 'actions' }
 FamixJavaFoldersImporter >> jsonForFolder: folder [
 
-	^ folder basename , '.json'
+	^ FileLocator localDirectory fullName , '/' , folder basename , '.json'
 ]
 
 { #category : 'testing' }
