@@ -11,9 +11,11 @@ Class {
 { #category : 'tests' }
 FamixJavaFoldersImporterTest >> createTempFolder [
 
-	| folder |
+	| folder mainFile|
 	folder := FileLocator temp / UUID new asString.
 	folder ensureCreateDirectory.
+	mainFile := folder / 'main.java'.
+	mainFile ensureCreateFile.
 	^ folder
 ]
 
