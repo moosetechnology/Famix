@@ -11,11 +11,17 @@ Class {
 { #category : 'tests' }
 FamixJavaFoldersImporterTest >> createTempFolder [
 
-	| folder mainFile|
+	| folder mainFile |
 	folder := FileLocator temp / UUID new asString.
 	folder ensureCreateDirectory.
 	mainFile := folder / 'main.java'.
-	mainFile ensureCreateFile.
+	mainFile := folder / 'main.java'.
+	mainFile writeStreamDo: [ :stream |
+			stream nextPutAll: 'public class Main {
+	public static void main(String[] args) {
+		System.out.println("Hello");
+	}
+}' ].
 	^ folder
 ]
 
