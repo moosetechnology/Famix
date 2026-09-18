@@ -1,0 +1,25 @@
+name: Namespace hierarchy
+
+on:
+  pull_request:
+    paths:
+      - 'src/Famix-Visualizations/**'
+      - 'src/Famix-Visualizations-Tests/**'
+      - 'src/BaselineOfFamix/**'
+      - '.github/workflows/namespace-hierarchy*'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: hpi-swa/setup-smalltalkCI@c0a3a3b942ac515b6c3846ca2f65802d353757ef # v1
+        with:
+          smalltalk-image: Moose64-13
+      - name: Test namespace visualizations with the Roassal bundled in Moose
+        run: smalltalkci -s Moose64-13 .github/workflows/namespace-hierarchy-config.ston

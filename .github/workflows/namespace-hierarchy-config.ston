@@ -1,0 +1,13 @@
+SmalltalkCISpec {
+  #loading : [ SCIMetacelloLoadSpec {
+    #baseline : 'Famix',
+    #directory : '../../src',
+    #load : [ 'Famix-Visualizations-Tests' ],
+    #onConflict : #useIncoming,
+    #onUpgrade : #useIncoming
+  } ],
+  #testing : {
+    #packages : [ 'Famix-Visualizations-Tests' ],
+    #failOnZeroTests : true
+  }
+}
