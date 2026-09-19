@@ -138,7 +138,7 @@ MooseGroupTest >> testMetadescriptionKeepsExactGroupRegistration [
 	| model |
 	model := FamixTest1Model new.
 	group add: model newClass.
-	self assert: group metadescription identicalTo: (model metadescriptionFor: MooseGroup)
+	self assert: group metadescription identicalTo: (model metadescriptionFor: self actualClass)
 ]
 
 { #category : 'tests' }
