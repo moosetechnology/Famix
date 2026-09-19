@@ -119,9 +119,16 @@ MooseGroup >> max: aSymbolOrBlock [
 { #category : 'accessing' }
 MooseGroup >> metadescription [
 
-	^ self mooseModel
-		  ifNil: [ FM3NullClass new ]
-		  ifNotNil: [ :model | model metadescriptionFor: self class ]
+	| model metamodel |
+	model := self mooseModel.
+	model ifNil: [ ^ FM3NullClass new ].
+	metamodel := model metamodel.
+	"Specialized groups are not necessarily registered in the entity metamodel.
+	Resolve the nearest registered superclass, preserving exact matches."
+	self class withAllSuperclasses do: [ :groupClass |
+		(metamodel descriptionOf: groupClass ifAbsent: [ nil ])
+			ifNotNil: [ :description | ^ description ] ].
+	^ FM3NullClass new
 ]
 
 { #category : 'public interface' }
