@@ -120,6 +120,44 @@ MooseGroupTest >> testIsOfType [
 ]
 
 { #category : 'tests' }
+MooseGroupTest >> testMetadescriptionOfSpecializedGroup [
+
+	| model entity specializedGroup |
+	model := FamixTest1Model new.
+	entity := model newClass.
+	specializedGroup := FamixTypeGroup with: entity.
+	self assert: (model metamodel descriptionOf: FamixTypeGroup ifAbsent: [ nil ]) isNil.
+	self
+		assert: specializedGroup metadescription
+		identicalTo: (model metadescriptionFor: MooseSpecializedGroup)
+]
+
+{ #category : 'tests' }
+MooseGroupTest >> testMetadescriptionKeepsExactGroupRegistration [
+
+	| model |
+	model := FamixTest1Model new.
+	group add: model newClass.
+	self assert: group metadescription identicalTo: (model metadescriptionFor: self actualClass)
+]
+
+{ #category : 'tests' }
+MooseGroupTest >> testMetadescriptionWithoutModel [
+
+	self assert: (group metadescription isKindOf: FM3NullClass)
+]
+
+{ #category : 'tests' }
+MooseGroupTest >> testMetadescriptionKeepsExactModelAndEntityRegistration [
+
+	| model entity |
+	model := FamixTest1Model new.
+	entity := model newClass.
+	self assert: model metadescription identicalTo: (model metadescriptionFor: model class).
+	self assert: entity metadescription identicalTo: (model metadescriptionFor: entity class)
+]
+
+{ #category : 'tests' }
 MooseGroupTest >> testNumberOfPackages [
 
 	self assert: group numberOfPackages equals: 0.
