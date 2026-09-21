@@ -4,7 +4,6 @@ Class {
 	#instVars : [
 		'c1',
 		'c2',
-		'c3',
 		'm1',
 		'm2',
 		'm3',
