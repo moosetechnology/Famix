@@ -1,8 +1,7 @@
 Class {
 	#name : 'FamixJavaParametricTest',
-	#superclass : 'TestCase',
+	#superclass : 'FamixAbstractExportTestCase',
 	#instVars : [
-		'model',
 		'stringClass',
 		'listTypeParameter',
 		'genericListClass'
