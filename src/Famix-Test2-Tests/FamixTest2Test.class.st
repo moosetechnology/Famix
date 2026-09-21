@@ -1,8 +1,7 @@
 Class {
 	#name : 'FamixTest2Test',
-	#superclass : 'TestCase',
+	#superclass : 'FamixAbstractExportTestCase',
 	#instVars : [
-		'model',
 		'c1',
 		'c2',
 		'c3',

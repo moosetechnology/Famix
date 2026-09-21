@@ -101,30 +101,39 @@ FamixStMethod >> compiledMethod [
 { #category : 'Famix-Extensions-private' }
 FamixStMethod >> computeCyclomaticComplexity [
 
-	^ (self isStub or: [ self smalltalkClass isNil ])
-		ifTrue: [ self notExistentMetricValue ]
-		ifFalse: [ (RBVisitorForFamixMetrics for: self) cyclomaticNumber ]
+	^ self hasAvailableClass
+		  ifTrue: [ (RBVisitorForFamixMetrics for: self) cyclomaticNumber ]
+		  ifFalse: [ self notExistentMetricValue ]
 ]
 
 { #category : 'Famix-Extensions-private' }
 FamixStMethod >> computeNumberOfConditionals [
-	^ self isStub
-		ifTrue: [ self notExistentMetricValue ]
-		ifFalse: [ (RBVisitorForFamixMetrics for: self) numberOfConditionals ]
+
+	^ self hasAvailableClass
+		  ifTrue: [ (RBVisitorForFamixMetrics for: self) numberOfConditionals ]
+		  ifFalse: [ self notExistentMetricValue ]
 ]
 
 { #category : 'Famix-Extensions-private' }
 FamixStMethod >> computeNumberOfMessageSends [
-	^ self isStub
-		ifTrue: [ self notExistentMetricValue ]
-		ifFalse: [ (RBVisitorForFamixMetrics for: self) numberOfMessageSends ]
+
+	^ self hasAvailableClass
+		  ifTrue: [ (RBVisitorForFamixMetrics for: self) numberOfMessageSends ]
+		  ifFalse: [ self notExistentMetricValue ]
 ]
 
 { #category : 'Famix-Extensions-private' }
 FamixStMethod >> computeNumberOfStatements [
-	^ self isStub
-		ifTrue: [ self notExistentMetricValue ]
-		ifFalse: [ (RBVisitorForFamixMetrics for: self) numberOfStatements ]
+
+	^ self hasAvailableClass
+		  ifTrue: [ (RBVisitorForFamixMetrics for: self) numberOfStatements ]
+		  ifFalse: [ self notExistentMetricValue ]
+]
+
+{ #category : 'Famix-Extensions-metrics-support' }
+FamixStMethod >> hasAvailableClass [
+
+	^ self isStub not and: [ self smalltalkClass isNotNil ]
 ]
 
 { #category : 'Famix-Extensions-private' }

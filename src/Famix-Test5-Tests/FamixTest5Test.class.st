@@ -1,9 +1,6 @@
 Class {
 	#name : 'FamixTest5Test',
-	#superclass : 'TestCase',
-	#instVars : [
-		'model'
-	],
+	#superclass : 'FamixAbstractExportTestCase',
 	#category : 'Famix-Test5-Tests',
 	#package : 'Famix-Test5-Tests'
 }
