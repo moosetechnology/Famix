@@ -93,6 +93,14 @@ FamixTest1ImportingContext >> importIndexedFileAnchor [
 ]
 
 { #category : 'importing' }
+FamixTest1ImportingContext >> importInheritance [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self importAssociation: (self class fm3ClassNamed: #Inheritance)
+]
+
+{ #category : 'importing' }
 FamixTest1ImportingContext >> importMethod [
 
 	<ignoreForCoverage>
@@ -194,6 +202,14 @@ FamixTest1ImportingContext >> shouldImportIndexedFileAnchor [
 	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #IndexedFileAnchor
+]
+
+{ #category : 'testing' }
+FamixTest1ImportingContext >> shouldImportInheritance [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self shouldImport: #Inheritance
 ]
 
 { #category : 'testing' }

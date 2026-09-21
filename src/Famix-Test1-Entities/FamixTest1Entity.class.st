@@ -97,6 +97,14 @@ FamixTest1Entity >> isFileAnchor [
 ]
 
 { #category : 'testing' }
+FamixTest1Entity >> isInheritance [
+
+	<ignoreForCoverage>
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
 FamixTest1Entity >> isMethod [
 
 	<ignoreForCoverage>

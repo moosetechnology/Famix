@@ -23,20 +23,20 @@
 
 "
 Class {
-	#name : 'FamixTest7Inheritance',
-	#superclass : 'FamixTest7Entity',
+	#name : 'FamixTest1Inheritance',
+	#superclass : 'FamixTest1Entity',
 	#traits : 'FamixTInheritance',
 	#classTraits : 'FamixTInheritance classTrait',
-	#category : 'Famix-Test7-Entities-Entities',
-	#package : 'Famix-Test7-Entities',
+	#category : 'Famix-Test1-Entities-Entities',
+	#package : 'Famix-Test1-Entities',
 	#tag : 'Entities'
 }
 
 { #category : 'meta' }
-FamixTest7Inheritance class >> annotation [
+FamixTest1Inheritance class >> annotation [
 
 	<ignoreForCoverage>
-	<FMClass: #Inheritance super: #FamixTest7Entity>
-	<package: #'Famix-Test7-Entities'>
+	<FMClass: #Inheritance super: #FamixTest1Entity>
+	<package: #'Famix-Test1-Entities'>
 	<generated>
 ]

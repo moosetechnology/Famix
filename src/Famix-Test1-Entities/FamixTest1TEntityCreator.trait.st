@@ -125,6 +125,14 @@ FamixTest1TEntityCreator >> newIndexedFileAnchor [
 ]
 
 { #category : 'entity creation' }
+FamixTest1TEntityCreator >> newInheritance [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self add: FamixTest1Inheritance new
+]
+
+{ #category : 'entity creation' }
 FamixTest1TEntityCreator >> newMethod [
 
 	<ignoreForCoverage>
