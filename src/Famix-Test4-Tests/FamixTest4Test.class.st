@@ -13,7 +13,8 @@ Class {
 		'book1',
 		'book2',
 		'teacher1',
-		'teacher2'
+		'teacher2',
+		'computer'
 	],
 	#category : 'Famix-Test4-Tests',
 	#package : 'Famix-Test4-Tests'
@@ -21,6 +22,7 @@ Class {
 
 { #category : 'running' }
 FamixTest4Test >> setUp [
+
 	super setUp.
 
 	model := FamixTest4Model new.
@@ -30,7 +32,6 @@ FamixTest4Test >> setUp [
 	classroom2 := FamixTest4Classroom new.
 	cafeteria := FamixTest4Cafeteria new.
 	principal := FamixTest4Principal new.
-	student1 := FamixTest4Student new.
 	student1 := FamixTest4Student new.
 	student2 := FamixTest4Student new.
 	student2 firstName: 'firstname'.
@@ -42,17 +43,42 @@ FamixTest4Test >> setUp [
 	teacher2 firstName: 'Bob'.
 	book1 := FamixTest4Book new.
 	book2 := FamixTest4Book new.
+	computer := FamixTest4Computer new.
 
-	model addAll: {school . classroom1 . classroom2 . cafeteria . principal . student1 . student2 . student3 . book1 . book2 . teacher1 . teacher2}.
+	model addAll: {
+			school.
+			classroom1.
+			classroom2.
+			cafeteria.
+			principal.
+			student1.
+			student2.
+			student3.
+			book1.
+			book2.
+			teacher1.
+			teacher2.
+			computer }.
 
-	school students: {student1 . student2 . student3}.
-	school teachers: {teacher1 . teacher2}.
-	teacher1 students: {student1 . student2}.
-	teacher2 students: {student3}.
+	school students: {
+			student1.
+			student2.
+			student3 }.
+	school teachers: {
+			teacher1.
+			teacher2 }.
+	teacher1 students: {
+			student1.
+			student2 }.
+	teacher2 students: { student3 }.
 	school principal: principal.
-	school rooms: {classroom1 . classroom2 . cafeteria}.
+	school rooms: {
+			classroom1.
+			classroom2.
+			cafeteria }.
 	book1 person: student1.
-	book2 person: principal
+	book2 person: principal.
+	classroom1 computer: computer
 ]
 
 { #category : 'tests' }
@@ -82,4 +108,14 @@ FamixTest4Test >> testRelations [
 	self assert: principal school equals: school.
 	self assert: (student1 teachers includes: teacher1).
 	self deny: (student1 teachers includes: teacher2)
+]
+
+{ #category : 'tests' }
+FamixTest4Test >> testStoredOneToOneContainmentNotDuplicatedByRoundTrip [
+	"Regression test: a stored one-to-one containment relation (classroom <>- computer) must not
+	be duplicated by the export/import round trip."
+
+	self assert: classroom1 computer equals: computer.
+	self assert: computer classroom equals: classroom1.
+	self assert: (model allWithType: FamixTest4Computer) size equals: 1
 ]

@@ -39,7 +39,12 @@ Class {
 		'model',
 		'tCanBeClassSide',
 		'bytesFileAnchor',
-		'inheritance'
+		'inheritance',
+		'annotationType1',
+		'withAnnotationType1',
+		'annotationType2',
+		'withAnnotationType2',
+		'tEntity'
 	],
 	#category : 'Famix-TestGenerators',
 	#package : 'Famix-TestGenerators'
@@ -77,13 +82,23 @@ FamixTest1Generator >> defineClasses [
 	folder := builder newClassNamed: #Folder.
 	indexedFileAnchor := builder newClassNamed: #IndexedFileAnchor.
 	bytesFileAnchor := builder newClassNamed: #BytesFileAnchor.
-	multipleFileAnchor := builder newClassNamed: #MultipleFileAnchor
+	multipleFileAnchor := builder newClassNamed: #MultipleFileAnchor.
+
+	annotationType1 := builder newClassNamed: #AnnotationType1.
+	withAnnotationType1 := builder newClassNamed: #WithAnnotationType1.
+
+	annotationType2 := builder newClassNamed: #AnnotationType2.
+	withAnnotationType2 := builder newClassNamed: #WithAnnotationType2
 ]
 
 { #category : 'definition' }
 FamixTest1Generator >> defineHierarchy [
 
 	super defineHierarchy.
+
+	(builder ensureClassNamed: #Entity) --|> tEntity.
+
+	tEntity --|> #TEntityMetaLevelDependency.
 
 	association --|> #TAssociation.
 
@@ -127,7 +142,6 @@ FamixTest1Generator >> defineHierarchy [
 		--|> tCanBeClassSide;
 		--|> #TWithComments.
 
-
 	multipleFileAnchor --|> sourceAnchor.
 	multipleFileAnchor --|> #TMultipleFileAnchor.
 
@@ -145,10 +159,26 @@ FamixTest1Generator >> defineProperties [
 ]
 
 { #category : 'definition' }
-FamixTest1Generator >> defineTraits [ 
+FamixTest1Generator >> defineRelations [
+
+	super defineRelations.
+
+	self
+		apply: #TAnnotationType
+		on: annotationType1
+		oppositeTrait: #TWithAnnotationTypes
+		on: withAnnotationType1.
+
+	self apply: #TWithAnnotationTypes on: withAnnotationType2 oppositeOn: annotationType2
+]
+
+{ #category : 'definition' }
+FamixTest1Generator >> defineTraits [
 
 	super defineTraits.
-	tCanBeClassSide := builder newTraitNamed: #TCanBeClassSide. 
+
+	tCanBeClassSide := builder newTraitNamed: #TCanBeClassSide.
+	tEntity := builder newTraitNamed: #TEntity
 ]
 
 { #category : 'definition' }

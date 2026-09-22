@@ -1,6 +1,8 @@
 Class {
 	#name : 'FamixTest1Entity',
 	#superclass : 'MooseEntity',
+	#traits : 'FamixTest1TEntity',
+	#classTraits : 'FamixTest1TEntity classTrait',
 	#category : 'Famix-Test1-Entities-Entities',
 	#package : 'Famix-Test1-Entities',
 	#tag : 'Entities'
@@ -114,14 +116,6 @@ FamixTest1Entity >> isMethod [
 
 { #category : 'testing' }
 FamixTest1Entity >> isNamedEntity [
-
-	<ignoreForCoverage>
-	<generated>
-	^ false
-]
-
-{ #category : 'testing' }
-FamixTest1Entity >> isQueryable [
 
 	<ignoreForCoverage>
 	<generated>
