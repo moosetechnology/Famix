@@ -46,7 +46,8 @@ FamixTest4Generator >> defineClasses [
 	school := builder newClassNamed: #School.
 	room := builder newClassNamed: #Room.
 	classroom := builder newClassNamed: #Classroom.
-	cafeteria := builder newClassNamed: #Cafeteria
+	cafeteria := builder newClassNamed: #Cafeteria.
+	computer := builder newClassNamed: #Computer
 ]
 
 { #category : 'definition' }
@@ -86,5 +87,6 @@ FamixTest4Generator >> defineRelations [
 	student *-<> school.
 	teacher *-<> school.
 	student *-* teacher.
-	school <>-* room
+	school <>-* room.
+	classroom <>- computer
 ]

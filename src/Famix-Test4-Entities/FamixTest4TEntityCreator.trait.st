@@ -45,6 +45,14 @@ FamixTest4TEntityCreator >> newClassroom [
 ]
 
 { #category : 'entity creation' }
+FamixTest4TEntityCreator >> newComputer [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self add: FamixTest4Computer new
+]
+
+{ #category : 'entity creation' }
 FamixTest4TEntityCreator >> newPrincipal [
 
 	<ignoreForCoverage>
