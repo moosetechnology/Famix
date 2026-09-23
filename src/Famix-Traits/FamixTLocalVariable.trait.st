@@ -79,6 +79,7 @@ FamixTLocalVariable >> parentBehaviouralEntity [
 	<generated>
 	<FMComment: 'Behavioural entity declaring this local variable. belongsTo implementation'>
 	<container>
+	<derived>
 	^ parentBehaviouralEntity
 ]
 

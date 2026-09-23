@@ -64,6 +64,7 @@ FamixTDereferencedInvocation >> referencer [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Structural entity that references the BehaviouralEntity invoked'>
+	<derived>
 	^ referencer
 ]
 

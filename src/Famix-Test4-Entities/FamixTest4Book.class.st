@@ -76,6 +76,7 @@ FamixTest4Book >> person [
 	<ignoreForCoverage>
 	<generated>
 	<container>
+	<derived>
 	^ person
 ]
 

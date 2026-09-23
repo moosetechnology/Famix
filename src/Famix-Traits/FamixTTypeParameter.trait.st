@@ -52,7 +52,6 @@ FamixTTypeParameter >> concretizations [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Known concretizations of this type parameter.'>
-	<derived>
 	^ concretizations
 ]
 
@@ -71,6 +70,7 @@ FamixTTypeParameter >> genericEntity [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Generic entity that declares this type parameter.'>
+	<derived>
 	^ genericEntity
 ]
 

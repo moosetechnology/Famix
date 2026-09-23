@@ -51,6 +51,7 @@ FamixTImport >> importedEntity [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Imported entity'>
+	<derived>
 	<target>
 	^ importedEntity
 ]
@@ -70,6 +71,7 @@ FamixTImport >> importingEntity [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Importing entity'>
+	<derived>
 	<source>
 	^ importingEntity
 ]

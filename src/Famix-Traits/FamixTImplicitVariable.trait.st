@@ -99,6 +99,7 @@ FamixTImplicitVariable >> parentBehaviouralEntity [
 	<generated>
 	<FMComment: 'The behaviour containing this implicit variable. belongsTo implementation'>
 	<container>
+	<derived>
 	^ parentBehaviouralEntity
 ]
 

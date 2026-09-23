@@ -46,7 +46,6 @@ FamixTTypeArgument >> outgoingConcretizations [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Concretizations where this type is the type argument.'>
-	<derived>
 	^ outgoingConcretizations
 ]
 

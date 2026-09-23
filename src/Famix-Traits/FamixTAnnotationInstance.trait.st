@@ -75,6 +75,7 @@ FamixTAnnotationInstance >> annotatedEntity [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The NamedEntity on which the annotation occurs.'>
+	<derived>
 	^ annotatedEntity
 ]
 
@@ -93,6 +94,7 @@ FamixTAnnotationInstance >> annotationType [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Refers to the type of an annotation. (In some languages, Java and C#, an annotation as an explicit type). '>
+	<derived>
 	^ annotationType
 ]
 
@@ -111,7 +113,6 @@ FamixTAnnotationInstance >> attributes [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'This corresponds to the actual values of the attributes in an AnnotationInstance'>
-	<derived>
 	^ attributes
 ]
 

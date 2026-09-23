@@ -77,6 +77,7 @@ FamixTReference >> referencer [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Source entity making the reference. from-side of the association'>
+	<derived>
 	<source>
 	^ referencer
 ]
@@ -96,6 +97,7 @@ FamixTReference >> referredEntity [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Target entity referenced. to-side of the association'>
+	<derived>
 	<target>
 	^ referredEntity
 ]

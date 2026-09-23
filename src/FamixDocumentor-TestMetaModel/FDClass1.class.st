@@ -38,6 +38,7 @@ FDClass1 >> myTrait [
 
 	<ignoreForCoverage>
 	<generated>
+	<derived>
 	^ myTrait
 ]
 

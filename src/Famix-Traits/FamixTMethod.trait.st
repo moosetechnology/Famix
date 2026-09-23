@@ -195,6 +195,7 @@ FamixTMethod >> parentType [
 	<generated>
 	<FMComment: 'Type declaring the method. It provides the implementation for belongsTo.'>
 	<container>
+	<derived>
 	^ parentType
 ]
 

@@ -36,6 +36,7 @@ FamixTWithSourceLanguages >> declaredSourceLanguage [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The declared SourceLanguage for the source code of this entity'>
+	<derived>
 	^ declaredSourceLanguage
 ]
 

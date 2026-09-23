@@ -51,6 +51,7 @@ FamixTImplementation >> implementingClass [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Class linked to in this relationship. from-side of the association'>
+	<derived>
 	<source>
 	^ implementingClass
 ]
@@ -70,6 +71,7 @@ FamixTImplementation >> interface [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Interface linked to in this relationship. to-side of the association'>
+	<derived>
 	<target>
 	^ interface
 ]

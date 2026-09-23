@@ -36,7 +36,6 @@ FamixTWithAccesses >> accesses [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Accesses to variables made by this behaviour.'>
-	<derived>
 	^ accesses
 ]
 

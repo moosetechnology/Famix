@@ -58,6 +58,7 @@ FamixTest8Infection >> infectable [
 
 	<ignoreForCoverage>
 	<generated>
+	<derived>
 	<source>
 	^ infectable
 ]
@@ -76,6 +77,7 @@ FamixTest8Infection >> infectious [
 
 	<ignoreForCoverage>
 	<generated>
+	<derived>
 	<target>
 	^ infectious
 ]

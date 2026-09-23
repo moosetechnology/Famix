@@ -44,7 +44,6 @@ FamixTImportable >> incomingImports [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'List of imports of this entity'>
-	<derived>
 	^ incomingImports
 ]
 

@@ -42,7 +42,6 @@ FamixTWithAnnotationTypes >> definedAnnotationTypes [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The container in which the AnnotationTypes may be declared'>
-	<derived>
 	^ definedAnnotationTypes
 ]
 

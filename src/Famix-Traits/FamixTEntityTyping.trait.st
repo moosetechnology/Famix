@@ -51,6 +51,7 @@ FamixTEntityTyping >> declaredType [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Type of the entity.'>
+	<derived>
 	<target>
 	^ declaredType
 ]

@@ -56,6 +56,7 @@ FamixTConcretization >> triggeringAssociation [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The association that triggers this concretization.'>
+	<derived>
 	^ triggeringAssociation
 ]
 
@@ -74,6 +75,7 @@ FamixTConcretization >> typeArgument [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The type argument that concretizes the type parameter'>
+	<derived>
 	<source>
 	^ typeArgument
 ]
@@ -93,6 +95,7 @@ FamixTConcretization >> typeParameter [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Type parameter linked to in this relationship.'>
+	<derived>
 	<target>
 	^ typeParameter
 ]

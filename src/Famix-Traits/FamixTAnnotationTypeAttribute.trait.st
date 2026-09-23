@@ -84,7 +84,6 @@ FamixTAnnotationTypeAttribute >> annotationAttributeInstances [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'A collection of AnnotationInstanceAttribute which hold the usages of this attribute in actual AnnotationInstances'>
-	<derived>
 	^ annotationAttributeInstances
 ]
 

@@ -183,6 +183,7 @@ FamixTInvocation >> receiver [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Named entity (variable, class...) receiving the invocation. to-side of the association'>
+	<derived>
 	^ receiver
 ]
 
@@ -201,6 +202,7 @@ FamixTInvocation >> sender [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Behavioural entity making the call. from-side of the association'>
+	<derived>
 	<source>
 	^ sender
 ]

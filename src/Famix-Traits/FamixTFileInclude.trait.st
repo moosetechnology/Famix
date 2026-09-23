@@ -43,6 +43,7 @@ FamixTFileInclude >> source [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The file that is including'>
+	<derived>
 	^ source
 ]
 
@@ -61,6 +62,7 @@ FamixTFileInclude >> target [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The file that is included'>
+	<derived>
 	^ target
 ]
 

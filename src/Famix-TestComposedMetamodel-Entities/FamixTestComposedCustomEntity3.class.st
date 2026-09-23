@@ -34,6 +34,7 @@ FamixTestComposedCustomEntity3 >> c23 [
 
 	<ignoreForCoverage>
 	<generated>
+	<derived>
 	<FMProperty: #c23 type: #FamixTestComposed2CustomEntity3 opposite: #c3s>
 	^ self attributeAt: #c23 ifAbsent: [ nil ]
 ]
@@ -52,6 +53,7 @@ FamixTestComposedCustomEntity3 >> customEntity3 [
 
 	<ignoreForCoverage>
 	<generated>
+	<derived>
 	<FMProperty: #customEntity3 type: #FamixTestComposed1CustomEntity3 opposite: #customEntities3>
 	^ self attributeAt: #customEntity3 ifAbsent: [ nil ]
 ]

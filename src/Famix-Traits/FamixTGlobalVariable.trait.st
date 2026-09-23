@@ -81,6 +81,7 @@ FamixTGlobalVariable >> parentScope [
 	<generated>
 	<FMComment: 'Scope declaring the global variable. belongsTo implementation'>
 	<container>
+	<derived>
 	^ parentScope
 ]
 

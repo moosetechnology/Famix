@@ -81,6 +81,7 @@ FamixTParameter >> parentBehaviouralEntity [
 	<generated>
 	<FMComment: 'Behavioural entity containing this parameter. belongsTo implementation'>
 	<container>
+	<derived>
 	^ parentBehaviouralEntity
 ]
 
