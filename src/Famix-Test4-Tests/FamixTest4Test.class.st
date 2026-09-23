@@ -101,6 +101,11 @@ FamixTest4Test >> testEqualityStudent [
 ]
 
 { #category : 'tests' }
+FamixTest4Test >> testModelNotImportableFromFile [
+	self deny: FamixTest4Model canBeImportedFromFile
+]
+
+{ #category : 'tests' }
 FamixTest4Test >> testRelations [
 	self assert: (principal books includes: book2).
 	self assert: (student1 books includes: book1).
