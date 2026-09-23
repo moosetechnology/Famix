@@ -182,9 +182,7 @@ BaselineOfFamix >> packages: spec [
 		package: 'Famix-Test3-Tests' with: [ spec requires: #( 'Famix-Test3-Entities' ) ];
 		package: 'Famix-Test4-Entities' with: [ spec requires: #( 'BasicTraits' ) ];
 		package: 'Famix-Test4-Tests' with: [ spec requires: #( 'Famix-Test4-Entities' ) ];
-				package: 'Famix-Test6-Entities' with: [ spec requires: #( 'BasicTraits' ) ];
-		package: 'Famix-Test6-Tests' with: [ spec requires: #( 'Famix-Test6-Entities' ) ];
-		package: 'Famix-Test8-Entities' with: [ spec requires: #( 'BasicTraits' ) ];
+						package: 'Famix-Test8-Entities' with: [ spec requires: #( 'BasicTraits' ) ];
 		package: 'Famix-Test8-Tests' with: [ spec requires: #( 'Famix-Test8-Entities' ) ];
 		package: 'Famix-Test9-Tests';
 		package: 'Famix-Test10-Tests';

@@ -74,7 +74,13 @@ FamixTest4Generator >> defineProperties [
 	person withEqualityCheckOn: { #firstName. #lastName. #age }.
 
 	book property: #id type: #Number.
-	book withEqualityCheckOn: { #id }
+	book withEqualityCheckOn: { #id }.
+
+	room property: #capacity type: #Number defaultValue: 12.
+	room property: #hasWindows type: #Boolean defaultValue: true.
+	room property: #purpose type: #String defaultValue: ''.
+
+	classroom property: #hasProjector type: #Boolean defaultValue: false
 ]
 
 { #category : 'definition' }
