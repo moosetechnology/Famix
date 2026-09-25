@@ -18,7 +18,7 @@
 
 | Name | Type | Default value | Comment |
 |---|
-| `value` | `String` | nil | Actual value of the attribute used in an annotation|
+| `value` | `Object` | nil | Actual value of the attribute used in an annotation|
 
 "
 Class {
@@ -34,6 +34,7 @@ Class {
 { #category : 'meta' }
 FamixStAnnotationInstanceAttribute class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #AnnotationInstanceAttribute super: #FamixStSourcedEntity>
 	<package: #'Famix-PharoSmalltalk-Entities'>
 	<generated>

@@ -51,6 +51,7 @@ Class {
 { #category : 'meta' }
 FamixJavaLocalVariable class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #LocalVariable super: #FamixJavaVariable>
 	<package: #'Famix-Java-Entities'>
 	<generated>

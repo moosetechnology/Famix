@@ -23,6 +23,7 @@ Trait {
 { #category : 'meta' }
 FamixTest8TBiotope classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TBiotope super: #Object>
 	<package: #'Famix-Test8-Entities'>
 	<generated>
@@ -30,6 +31,8 @@ FamixTest8TBiotope classSide >> annotation [
 
 { #category : 'adding' }
 FamixTest8TBiotope >> addIncomingResidence: anObject [
+
+	<ignoreForCoverage>
 	<generated>
 	^ self incomingResidences add: anObject
 ]
@@ -38,6 +41,7 @@ FamixTest8TBiotope >> addIncomingResidence: anObject [
 FamixTest8TBiotope >> incomingResidences [
 	"Relation named: #incomingResidences type: #FamixTest8Residence opposite: #biotope"
 
+	<ignoreForCoverage>
 	<generated>
 	<derived>
 	^ incomingResidences
@@ -46,6 +50,7 @@ FamixTest8TBiotope >> incomingResidences [
 { #category : 'accessing' }
 FamixTest8TBiotope >> incomingResidences: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	incomingResidences value: anObject
 ]

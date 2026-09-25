@@ -14,6 +14,7 @@ Trait {
 { #category : 'meta' }
 MooseMSEImporterTestTEntityCreator classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TEntityCreator super: #Object>
 	<package: #'Moose-Core-Tests-Entities'>
 	<generated>
@@ -22,6 +23,7 @@ MooseMSEImporterTestTEntityCreator classSide >> annotation [
 { #category : 'entity creation' }
 MooseMSEImporterTestTEntityCreator >> newAttribute [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: MooseMSEImporterTestAttribute new
 ]
@@ -29,6 +31,7 @@ MooseMSEImporterTestTEntityCreator >> newAttribute [
 { #category : 'entity creation' }
 MooseMSEImporterTestTEntityCreator >> newAttributeNamed: aName [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: (MooseMSEImporterTestAttribute named: aName)
 ]
@@ -36,6 +39,7 @@ MooseMSEImporterTestTEntityCreator >> newAttributeNamed: aName [
 { #category : 'entity creation' }
 MooseMSEImporterTestTEntityCreator >> newClass [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: MooseMSEImporterTestClass new
 ]
@@ -43,6 +47,7 @@ MooseMSEImporterTestTEntityCreator >> newClass [
 { #category : 'entity creation' }
 MooseMSEImporterTestTEntityCreator >> newClassNamed: aName [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: (MooseMSEImporterTestClass named: aName)
 ]
@@ -50,6 +55,7 @@ MooseMSEImporterTestTEntityCreator >> newClassNamed: aName [
 { #category : 'entity creation' }
 MooseMSEImporterTestTEntityCreator >> newComment [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: MooseMSEImporterTestComment new
 ]
@@ -57,6 +63,7 @@ MooseMSEImporterTestTEntityCreator >> newComment [
 { #category : 'entity creation' }
 MooseMSEImporterTestTEntityCreator >> newEntityTyping [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: MooseMSEImporterTestEntityTyping new
 ]
@@ -64,6 +71,7 @@ MooseMSEImporterTestTEntityCreator >> newEntityTyping [
 { #category : 'entity creation' }
 MooseMSEImporterTestTEntityCreator >> newInheritance [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: MooseMSEImporterTestInheritance new
 ]
@@ -71,6 +79,7 @@ MooseMSEImporterTestTEntityCreator >> newInheritance [
 { #category : 'entity creation' }
 MooseMSEImporterTestTEntityCreator >> newMethod [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: MooseMSEImporterTestMethod new
 ]
@@ -78,6 +87,7 @@ MooseMSEImporterTestTEntityCreator >> newMethod [
 { #category : 'entity creation' }
 MooseMSEImporterTestTEntityCreator >> newMethodNamed: aName [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: (MooseMSEImporterTestMethod named: aName)
 ]
@@ -85,6 +95,7 @@ MooseMSEImporterTestTEntityCreator >> newMethodNamed: aName [
 { #category : 'entity creation' }
 MooseMSEImporterTestTEntityCreator >> newNamespace [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: MooseMSEImporterTestNamespace new
 ]
@@ -92,6 +103,7 @@ MooseMSEImporterTestTEntityCreator >> newNamespace [
 { #category : 'entity creation' }
 MooseMSEImporterTestTEntityCreator >> newNamespaceNamed: aName [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: (MooseMSEImporterTestNamespace named: aName)
 ]
@@ -99,6 +111,7 @@ MooseMSEImporterTestTEntityCreator >> newNamespaceNamed: aName [
 { #category : 'entity creation' }
 MooseMSEImporterTestTEntityCreator >> newPackage [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: MooseMSEImporterTestPackage new
 ]
@@ -106,6 +119,7 @@ MooseMSEImporterTestTEntityCreator >> newPackage [
 { #category : 'entity creation' }
 MooseMSEImporterTestTEntityCreator >> newPackageNamed: aName [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: (MooseMSEImporterTestPackage named: aName)
 ]
@@ -113,6 +127,7 @@ MooseMSEImporterTestTEntityCreator >> newPackageNamed: aName [
 { #category : 'entity creation' }
 MooseMSEImporterTestTEntityCreator >> newPrimitiveType [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: MooseMSEImporterTestPrimitiveType new
 ]
@@ -120,6 +135,7 @@ MooseMSEImporterTestTEntityCreator >> newPrimitiveType [
 { #category : 'entity creation' }
 MooseMSEImporterTestTEntityCreator >> newPrimitiveTypeNamed: aName [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: (MooseMSEImporterTestPrimitiveType named: aName)
 ]
@@ -127,6 +143,7 @@ MooseMSEImporterTestTEntityCreator >> newPrimitiveTypeNamed: aName [
 { #category : 'entity creation' }
 MooseMSEImporterTestTEntityCreator >> newSourceLanguage [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: MooseMSEImporterTestSourceLanguage new
 ]
@@ -134,6 +151,7 @@ MooseMSEImporterTestTEntityCreator >> newSourceLanguage [
 { #category : 'entity creation' }
 MooseMSEImporterTestTEntityCreator >> newSourceTextAnchor [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: MooseMSEImporterTestSourceTextAnchor new
 ]

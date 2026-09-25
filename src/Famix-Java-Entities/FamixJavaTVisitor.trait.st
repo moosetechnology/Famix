@@ -14,6 +14,7 @@ Trait {
 { #category : 'meta' }
 FamixJavaTVisitor classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TVisitor super: #Object>
 	<package: #'Famix-Java-Entities'>
 	<generated>
@@ -22,6 +23,7 @@ FamixJavaTVisitor classSide >> annotation [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitCollection: aCollection [
 
+	<ignoreForCoverage>
 	<generated>
 	^ aCollection collect: [ :each | each accept: self ]
 ]
@@ -29,6 +31,7 @@ FamixJavaTVisitor >> visitCollection: aCollection [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitEntity: aFamixEntity [
 
+	<ignoreForCoverage>
 	<generated>
 	^ aFamixEntity ifNotNil: [ aFamixEntity accept: self ]
 ]
@@ -36,6 +39,7 @@ FamixJavaTVisitor >> visitEntity: aFamixEntity [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaAccess: anAccess [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixTAccess: anAccess
 ]
@@ -43,6 +47,7 @@ FamixJavaTVisitor >> visitFamixJavaAccess: anAccess [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaAnnotationInstance: anAnnotationInstance [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixTAnnotationInstance: anAnnotationInstance.
 	self visitFamixJavaSourcedEntity: anAnnotationInstance
@@ -51,6 +56,7 @@ FamixJavaTVisitor >> visitFamixJavaAnnotationInstance: anAnnotationInstance [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaAnnotationInstanceAttribute: anAnnotationInstanceAttribute [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixTAnnotationInstanceAttribute: anAnnotationInstanceAttribute.
 	self visitFamixJavaSourcedEntity: anAnnotationInstanceAttribute
@@ -59,6 +65,7 @@ FamixJavaTVisitor >> visitFamixJavaAnnotationInstanceAttribute: anAnnotationInst
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaAnnotationType: anAnnotationType [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixTAnnotationType: anAnnotationType.
 	self visitFamixTHasVisibility: anAnnotationType.
@@ -74,6 +81,7 @@ FamixJavaTVisitor >> visitFamixJavaAnnotationType: anAnnotationType [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaAnnotationTypeAttribute: anAnnotationTypeAttribute [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixTAnnotationTypeAttribute: anAnnotationTypeAttribute.
 	self visitFamixTWithComments: anAnnotationTypeAttribute.
@@ -83,6 +91,7 @@ FamixJavaTVisitor >> visitFamixJavaAnnotationTypeAttribute: anAnnotationTypeAttr
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaAttribute: anAttribute [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixJavaTCanBeTransient: anAttribute.
 	self visitFamixJavaTCanBeVolatile: anAttribute.
@@ -97,6 +106,7 @@ FamixJavaTVisitor >> visitFamixJavaAttribute: anAttribute [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaClass: aClass [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixJavaTClassMetrics: aClass.
 	self visitFamixTCanBeAbstract: aClass.
@@ -117,6 +127,7 @@ FamixJavaTVisitor >> visitFamixJavaClass: aClass [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaComment: aComment [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixTComment: aComment.
 	self visitFamixJavaSourcedEntity: aComment
@@ -125,6 +136,7 @@ FamixJavaTVisitor >> visitFamixJavaComment: aComment [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaConcretization: aConcretization [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixTConcretization: aConcretization
 ]
@@ -132,6 +144,7 @@ FamixJavaTVisitor >> visitFamixJavaConcretization: aConcretization [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaContainerEntity: aContainerEntity [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixJavaTWithInterfaces: aContainerEntity.
 	self visitFamixTWithAnnotationTypes: aContainerEntity.
@@ -142,6 +155,7 @@ FamixJavaTVisitor >> visitFamixJavaContainerEntity: aContainerEntity [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaEntity: anEntity [
 
+	<ignoreForCoverage>
 	<generated>
 
 ]
@@ -149,6 +163,7 @@ FamixJavaTVisitor >> visitFamixJavaEntity: anEntity [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaEntityTyping: anEntityTyping [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixTEntityTyping: anEntityTyping
 ]
@@ -156,6 +171,7 @@ FamixJavaTVisitor >> visitFamixJavaEntityTyping: anEntityTyping [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaEnum: anEnum [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixTEnum: anEnum.
 	self visitFamixTHasVisibility: anEnum.
@@ -173,6 +189,7 @@ FamixJavaTVisitor >> visitFamixJavaEnum: anEnum [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaEnumValue: anEnumValue [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixTEnumValue: anEnumValue.
 	self visitFamixTWithComments: anEnumValue.
@@ -182,6 +199,7 @@ FamixJavaTVisitor >> visitFamixJavaEnumValue: anEnumValue [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaException: anException [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixTException: anException.
 	self visitFamixJavaClass: anException
@@ -190,6 +208,7 @@ FamixJavaTVisitor >> visitFamixJavaException: anException [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaImplementation: anImplementation [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixTImplementation: anImplementation
 ]
@@ -197,6 +216,7 @@ FamixJavaTVisitor >> visitFamixJavaImplementation: anImplementation [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaImplicitVariable: anImplicitVariable [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixTImplicitVariable: anImplicitVariable.
 	self visitFamixJavaVariable: anImplicitVariable
@@ -205,6 +225,7 @@ FamixJavaTVisitor >> visitFamixJavaImplicitVariable: anImplicitVariable [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaImport: anImport [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixTImport: anImport
 ]
@@ -212,6 +233,7 @@ FamixJavaTVisitor >> visitFamixJavaImport: anImport [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaIndexedFileAnchor: anIndexedFileAnchor [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixTIndexedFileNavigation: anIndexedFileAnchor.
 	self visitFamixJavaSourceAnchor: anIndexedFileAnchor
@@ -220,6 +242,7 @@ FamixJavaTVisitor >> visitFamixJavaIndexedFileAnchor: anIndexedFileAnchor [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaInheritance: anInheritance [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixTInheritance: anInheritance
 ]
@@ -227,6 +250,7 @@ FamixJavaTVisitor >> visitFamixJavaInheritance: anInheritance [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaInitializer: anInitializer [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixJavaMethod: anInitializer
 ]
@@ -234,6 +258,7 @@ FamixJavaTVisitor >> visitFamixJavaInitializer: anInitializer [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaInterface: anInterface [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixTCanBeClassSide: anInterface.
 	self visitFamixTCanBeFinal: anInterface.
@@ -254,6 +279,7 @@ FamixJavaTVisitor >> visitFamixJavaInterface: anInterface [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaInvocation: anInvocation [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixTInvocation: anInvocation
 ]
@@ -261,6 +287,7 @@ FamixJavaTVisitor >> visitFamixJavaInvocation: anInvocation [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaLocalVariable: aLocalVariable [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixTCanBeFinal: aLocalVariable.
 	self visitFamixTLocalVariable: aLocalVariable.
@@ -271,6 +298,7 @@ FamixJavaTVisitor >> visitFamixJavaLocalVariable: aLocalVariable [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaMethod: aMethod [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixJavaTCanBeSynchronized: aMethod.
 	self visitFamixTCanBeAbstract: aMethod.
@@ -288,6 +316,7 @@ FamixJavaTVisitor >> visitFamixJavaMethod: aMethod [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaNamedEntity: aNamedEntity [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixTNamedEntity: aNamedEntity.
 	self visitFamixTWithAnnotationInstances: aNamedEntity.
@@ -298,6 +327,7 @@ FamixJavaTVisitor >> visitFamixJavaNamedEntity: aNamedEntity [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaPackage: aPackage [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixTImportable: aPackage.
 	self visitFamixTPackage: aPackage.
@@ -309,6 +339,7 @@ FamixJavaTVisitor >> visitFamixJavaPackage: aPackage [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaParameter: aParameter [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixTCanBeFinal: aParameter.
 	self visitFamixTParameter: aParameter.
@@ -319,6 +350,7 @@ FamixJavaTVisitor >> visitFamixJavaParameter: aParameter [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaParametricClass: aParametricClass [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixTParametricEntity: aParametricClass.
 	self visitFamixJavaClass: aParametricClass
@@ -327,6 +359,7 @@ FamixJavaTVisitor >> visitFamixJavaParametricClass: aParametricClass [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaParametricEntityTyping: aParametricEntityTyping [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixTParametricAssociation: aParametricEntityTyping.
 	self visitFamixJavaEntityTyping: aParametricEntityTyping
@@ -335,6 +368,7 @@ FamixJavaTVisitor >> visitFamixJavaParametricEntityTyping: aParametricEntityTypi
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaParametricImplementation: aParametricImplementation [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixTParametricAssociation: aParametricImplementation.
 	self visitFamixJavaImplementation: aParametricImplementation
@@ -343,6 +377,7 @@ FamixJavaTVisitor >> visitFamixJavaParametricImplementation: aParametricImplemen
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaParametricInheritance: aParametricInheritance [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixTParametricAssociation: aParametricInheritance.
 	self visitFamixJavaInheritance: aParametricInheritance
@@ -351,6 +386,7 @@ FamixJavaTVisitor >> visitFamixJavaParametricInheritance: aParametricInheritance
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaParametricInterface: aParametricInterface [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixTParametricEntity: aParametricInterface.
 	self visitFamixJavaInterface: aParametricInterface
@@ -359,6 +395,7 @@ FamixJavaTVisitor >> visitFamixJavaParametricInterface: aParametricInterface [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaParametricInvocation: aParametricInvocation [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixTParametricAssociation: aParametricInvocation.
 	self visitFamixJavaInvocation: aParametricInvocation
@@ -367,6 +404,7 @@ FamixJavaTVisitor >> visitFamixJavaParametricInvocation: aParametricInvocation [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaParametricMethod: aParametricMethod [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixTParametricEntity: aParametricMethod.
 	self visitFamixJavaMethod: aParametricMethod
@@ -375,6 +413,7 @@ FamixJavaTVisitor >> visitFamixJavaParametricMethod: aParametricMethod [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaParametricReference: aParametricReference [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixTParametricAssociation: aParametricReference.
 	self visitFamixJavaReference: aParametricReference
@@ -383,6 +422,7 @@ FamixJavaTVisitor >> visitFamixJavaParametricReference: aParametricReference [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaPrimitiveType: aPrimitiveType [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixTPrimitiveType: aPrimitiveType.
 	self visitFamixTTypeArgument: aPrimitiveType.
@@ -392,6 +432,7 @@ FamixJavaTVisitor >> visitFamixJavaPrimitiveType: aPrimitiveType [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaReference: aReference [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixTReference: aReference
 ]
@@ -399,6 +440,7 @@ FamixJavaTVisitor >> visitFamixJavaReference: aReference [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaSourceAnchor: aSourceAnchor [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixTSourceAnchor: aSourceAnchor
 ]
@@ -406,6 +448,7 @@ FamixJavaTVisitor >> visitFamixJavaSourceAnchor: aSourceAnchor [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaSourceLanguage: aSourceLanguage [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixTSourceLanguage: aSourceLanguage
 ]
@@ -413,6 +456,7 @@ FamixJavaTVisitor >> visitFamixJavaSourceLanguage: aSourceLanguage [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaSourceTextAnchor: aSourceTextAnchor [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixTHasImmediateSource: aSourceTextAnchor.
 	self visitFamixJavaSourceAnchor: aSourceTextAnchor
@@ -421,6 +465,7 @@ FamixJavaTVisitor >> visitFamixJavaSourceTextAnchor: aSourceTextAnchor [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaSourcedEntity: aSourcedEntity [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixTSourceEntity: aSourcedEntity
 ]
@@ -428,6 +473,7 @@ FamixJavaTVisitor >> visitFamixJavaSourcedEntity: aSourcedEntity [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaTBound: aTBound [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitCollection: aTBound lowerBoundedWildcards.
 	self visitCollection: aTBound upperBoundedWildcards
@@ -436,6 +482,7 @@ FamixJavaTVisitor >> visitFamixJavaTBound: aTBound [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaTBounded: aTBounded [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitEntity: aTBounded lowerBound.
 	self visitEntity: aTBounded upperBound
@@ -444,6 +491,7 @@ FamixJavaTVisitor >> visitFamixJavaTBounded: aTBounded [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaTCanBeSynchronized: aTCanBeSynchronized [
 
+	<ignoreForCoverage>
 	<generated>
 
 ]
@@ -451,6 +499,7 @@ FamixJavaTVisitor >> visitFamixJavaTCanBeSynchronized: aTCanBeSynchronized [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaTCanBeTransient: aTCanBeTransient [
 
+	<ignoreForCoverage>
 	<generated>
 
 ]
@@ -458,6 +507,7 @@ FamixJavaTVisitor >> visitFamixJavaTCanBeTransient: aTCanBeTransient [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaTCanBeVolatile: aTCanBeVolatile [
 
+	<ignoreForCoverage>
 	<generated>
 
 ]
@@ -465,6 +515,7 @@ FamixJavaTVisitor >> visitFamixJavaTCanBeVolatile: aTCanBeVolatile [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaTClassMetrics: aTClassMetrics [
 
+	<ignoreForCoverage>
 	<generated>
 
 ]
@@ -472,6 +523,7 @@ FamixJavaTVisitor >> visitFamixJavaTClassMetrics: aTClassMetrics [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaTWithInterfaces: aTWithInterfaces [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixTWithTypes: aTWithInterfaces
 ]
@@ -479,6 +531,7 @@ FamixJavaTVisitor >> visitFamixJavaTWithInterfaces: aTWithInterfaces [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaType: aType [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixJavaTBound: aType.
 	self visitFamixTType: aType.
@@ -489,6 +542,7 @@ FamixJavaTVisitor >> visitFamixJavaType: aType [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaTypeParameter: aTypeParameter [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixJavaTBounded: aTypeParameter.
 	self visitFamixTThrowable: aTypeParameter.
@@ -500,6 +554,7 @@ FamixJavaTVisitor >> visitFamixJavaTypeParameter: aTypeParameter [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaUnknownVariable: anUnknownVariable [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixTUnknownVariable: anUnknownVariable.
 	self visitFamixJavaVariable: anUnknownVariable
@@ -508,6 +563,7 @@ FamixJavaTVisitor >> visitFamixJavaUnknownVariable: anUnknownVariable [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaVariable: aVariable [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixTInvocationsReceiver: aVariable.
 	self visitFamixJavaNamedEntity: aVariable
@@ -516,6 +572,7 @@ FamixJavaTVisitor >> visitFamixJavaVariable: aVariable [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixJavaWildcard: aWildcard [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixJavaTBounded: aWildcard.
 	self visitFamixTTypeArgument: aWildcard.
@@ -525,6 +582,7 @@ FamixJavaTVisitor >> visitFamixJavaWildcard: aWildcard [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTAccess: aTAccess [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixTAssociation: aTAccess.
 
@@ -535,6 +593,7 @@ FamixJavaTVisitor >> visitFamixTAccess: aTAccess [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTAccessible: aTAccessible [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitCollection: aTAccessible incomingAccesses
 ]
@@ -542,6 +601,7 @@ FamixJavaTVisitor >> visitFamixTAccessible: aTAccessible [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTAnnotationInstance: aTAnnotationInstance [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitTEntityMetaLevelDependency: aTAnnotationInstance.
 
@@ -553,6 +613,7 @@ FamixJavaTVisitor >> visitFamixTAnnotationInstance: aTAnnotationInstance [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTAnnotationInstanceAttribute: aTAnnotationInstanceAttribute [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitTEntityMetaLevelDependency: aTAnnotationInstanceAttribute.
 
@@ -562,6 +623,7 @@ FamixJavaTVisitor >> visitFamixTAnnotationInstanceAttribute: aTAnnotationInstanc
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTAnnotationType: aTAnnotationType [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitCollection: aTAnnotationType instances
 ]
@@ -569,6 +631,7 @@ FamixJavaTVisitor >> visitFamixTAnnotationType: aTAnnotationType [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTAnnotationTypeAttribute: aTAnnotationTypeAttribute [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixTAttribute: aTAnnotationTypeAttribute.
 
@@ -578,6 +641,7 @@ FamixJavaTVisitor >> visitFamixTAnnotationTypeAttribute: aTAnnotationTypeAttribu
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTAssociation: aTAssociation [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixTSourceEntity: aTAssociation.
 	self visitTAssociationMetaLevelDependency: aTAssociation.
@@ -589,6 +653,7 @@ FamixJavaTVisitor >> visitFamixTAssociation: aTAssociation [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTAttribute: aTAttribute [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixTStructuralEntity: aTAttribute.
 
@@ -598,6 +663,7 @@ FamixJavaTVisitor >> visitFamixTAttribute: aTAttribute [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTCanBeAbstract: aTCanBeAbstract [
 
+	<ignoreForCoverage>
 	<generated>
 
 ]
@@ -605,6 +671,7 @@ FamixJavaTVisitor >> visitFamixTCanBeAbstract: aTCanBeAbstract [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTCanBeClassSide: aTCanBeClassSide [
 
+	<ignoreForCoverage>
 	<generated>
 
 ]
@@ -612,6 +679,7 @@ FamixJavaTVisitor >> visitFamixTCanBeClassSide: aTCanBeClassSide [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTCanBeFinal: aTCanBeFinal [
 
+	<ignoreForCoverage>
 	<generated>
 
 ]
@@ -619,6 +687,7 @@ FamixJavaTVisitor >> visitFamixTCanBeFinal: aTCanBeFinal [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTCanBeStub: aTCanBeStub [
 
+	<ignoreForCoverage>
 	<generated>
 	"We should visit FamixTSourceEntity but all its users in this language already visit it in their superclasses so we skip the call here."
 ]
@@ -626,6 +695,7 @@ FamixJavaTVisitor >> visitFamixTCanBeStub: aTCanBeStub [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTCanImplement: aTCanImplement [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitCollection: aTCanImplement interfaceImplementations
 ]
@@ -633,6 +703,7 @@ FamixJavaTVisitor >> visitFamixTCanImplement: aTCanImplement [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTClass: aTClass [
 
+	<ignoreForCoverage>
 	<generated>
 	"We do not visit all behaviorals because some classes already visit it in their superclasses in this language implementation. Visiting them here also would cause a double visit of this trait."
 	({ FamixJavaException } includes: aTClass class)
@@ -653,6 +724,7 @@ FamixJavaTVisitor >> visitFamixTClass: aTClass [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTClassMetrics: aTClassMetrics [
 
+	<ignoreForCoverage>
 	<generated>
 
 ]
@@ -660,6 +732,7 @@ FamixJavaTVisitor >> visitFamixTClassMetrics: aTClassMetrics [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTComment: aTComment [
 
+	<ignoreForCoverage>
 	<generated>
 	"We should visit FamixTSourceEntity but all its users in this language already visit it in their superclasses so we skip the call here.".
 	self visitTEntityMetaLevelDependency: aTComment.
@@ -670,6 +743,7 @@ FamixJavaTVisitor >> visitFamixTComment: aTComment [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTConcretization: aTConcretization [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixTAssociation: aTConcretization.
 
@@ -681,6 +755,7 @@ FamixJavaTVisitor >> visitFamixTConcretization: aTConcretization [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTEntityTyping: aTEntityTyping [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixTAssociation: aTEntityTyping.
 
@@ -691,6 +766,7 @@ FamixJavaTVisitor >> visitFamixTEntityTyping: aTEntityTyping [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTEnum: aTEnum [
 
+	<ignoreForCoverage>
 	<generated>
 	"We should visit FamixTType but all its users in this language already visit it in their superclasses so we skip the call here.".
 	self visitFamixTWithEnumValues: aTEnum
@@ -699,6 +775,7 @@ FamixJavaTVisitor >> visitFamixTEnum: aTEnum [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTEnumValue: aTEnumValue [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixTStructuralEntity: aTEnumValue.
 
@@ -708,6 +785,7 @@ FamixJavaTVisitor >> visitFamixTEnumValue: aTEnumValue [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTException: aTException [
 
+	<ignoreForCoverage>
 	<generated>
 	"We should visit FamixTClass but all its users in this language already visit it in their superclasses so we skip the call here.".
 	self visitFamixTThrowable: aTException
@@ -716,6 +794,7 @@ FamixJavaTVisitor >> visitFamixTException: aTException [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTFileAnchor: aTFileAnchor [
 
+	<ignoreForCoverage>
 	<generated>
 
 ]
@@ -723,6 +802,7 @@ FamixJavaTVisitor >> visitFamixTFileAnchor: aTFileAnchor [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTHasImmediateSource: aTHasImmediateSource [
 
+	<ignoreForCoverage>
 	<generated>
 	"We should visit FamixTSourceAnchor but all its users in this language already visit it in their superclasses so we skip the call here."
 ]
@@ -730,6 +810,7 @@ FamixJavaTVisitor >> visitFamixTHasImmediateSource: aTHasImmediateSource [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTHasKind: aTHasKind [
 
+	<ignoreForCoverage>
 	<generated>
 
 ]
@@ -737,6 +818,7 @@ FamixJavaTVisitor >> visitFamixTHasKind: aTHasKind [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTHasSignature: aTHasSignature [
 
+	<ignoreForCoverage>
 	<generated>
 
 ]
@@ -744,6 +826,7 @@ FamixJavaTVisitor >> visitFamixTHasSignature: aTHasSignature [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTHasVisibility: aTHasVisibility [
 
+	<ignoreForCoverage>
 	<generated>
 
 ]
@@ -751,6 +834,7 @@ FamixJavaTVisitor >> visitFamixTHasVisibility: aTHasVisibility [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTImplementable: aTImplementable [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitCollection: aTImplementable implementations
 ]
@@ -758,6 +842,7 @@ FamixJavaTVisitor >> visitFamixTImplementable: aTImplementable [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTImplementation: aTImplementation [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixTAssociation: aTImplementation.
 
@@ -768,6 +853,7 @@ FamixJavaTVisitor >> visitFamixTImplementation: aTImplementation [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTImplicitVariable: aTImplicitVariable [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixTStructuralEntity: aTImplicitVariable.
 
@@ -777,6 +863,7 @@ FamixJavaTVisitor >> visitFamixTImplicitVariable: aTImplicitVariable [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTImport: aTImport [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixTAssociation: aTImport.
 
@@ -787,6 +874,7 @@ FamixJavaTVisitor >> visitFamixTImport: aTImport [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTImportable: aTImportable [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitCollection: aTImportable incomingImports
 ]
@@ -794,6 +882,7 @@ FamixJavaTVisitor >> visitFamixTImportable: aTImportable [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTIndexedFileNavigation: aTIndexedFileNavigation [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixTFileAnchor: aTIndexedFileNavigation
 ]
@@ -801,6 +890,7 @@ FamixJavaTVisitor >> visitFamixTIndexedFileNavigation: aTIndexedFileNavigation [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTInheritance: aTInheritance [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixTAssociation: aTInheritance.
 
@@ -811,6 +901,7 @@ FamixJavaTVisitor >> visitFamixTInheritance: aTInheritance [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTInvocable: aTInvocable [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitCollection: aTInvocable incomingInvocations
 ]
@@ -818,6 +909,7 @@ FamixJavaTVisitor >> visitFamixTInvocable: aTInvocable [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTInvocation: aTInvocation [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixTAssociation: aTInvocation.
 	self visitFamixTHasSignature: aTInvocation.
@@ -830,6 +922,7 @@ FamixJavaTVisitor >> visitFamixTInvocation: aTInvocation [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTInvocationsReceiver: aTInvocationsReceiver [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitCollection: aTInvocationsReceiver receivingInvocations
 ]
@@ -837,6 +930,7 @@ FamixJavaTVisitor >> visitFamixTInvocationsReceiver: aTInvocationsReceiver [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTLCOMMetrics: aTLCOMMetrics [
 
+	<ignoreForCoverage>
 	<generated>
 
 ]
@@ -844,6 +938,7 @@ FamixJavaTVisitor >> visitFamixTLCOMMetrics: aTLCOMMetrics [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTLocalVariable: aTLocalVariable [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixTStructuralEntity: aTLocalVariable.
 
@@ -853,6 +948,7 @@ FamixJavaTVisitor >> visitFamixTLocalVariable: aTLocalVariable [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTMethod: aTMethod [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixTHasSignature: aTMethod.
 	self visitFamixTInvocable: aTMethod.
@@ -871,6 +967,7 @@ FamixJavaTVisitor >> visitFamixTMethod: aTMethod [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTMethodMetrics: aTMethodMetrics [
 
+	<ignoreForCoverage>
 	<generated>
 
 ]
@@ -878,6 +975,7 @@ FamixJavaTVisitor >> visitFamixTMethodMetrics: aTMethodMetrics [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTNamedEntity: aTNamedEntity [
 
+	<ignoreForCoverage>
 	<generated>
 
 ]
@@ -885,6 +983,7 @@ FamixJavaTVisitor >> visitFamixTNamedEntity: aTNamedEntity [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTPackage: aTPackage [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixTCanBeStub: aTPackage.
 	"We should visit FamixTNamedEntity but all its users in this language already visit it in their superclasses so we skip the call here.".
@@ -896,6 +995,7 @@ FamixJavaTVisitor >> visitFamixTPackage: aTPackage [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTPackageable: aTPackageable [
 
+	<ignoreForCoverage>
 	<generated>
 
 ]
@@ -903,6 +1003,7 @@ FamixJavaTVisitor >> visitFamixTPackageable: aTPackageable [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTParameter: aTParameter [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixTStructuralEntity: aTParameter.
 
@@ -912,6 +1013,7 @@ FamixJavaTVisitor >> visitFamixTParameter: aTParameter [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTParametricAssociation: aTParametricAssociation [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitCollection: aTParametricAssociation concretizations
 ]
@@ -919,6 +1021,7 @@ FamixJavaTVisitor >> visitFamixTParametricAssociation: aTParametricAssociation [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTParametricEntity: aTParametricEntity [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitCollection: aTParametricEntity typeParameters
 ]
@@ -926,6 +1029,7 @@ FamixJavaTVisitor >> visitFamixTParametricEntity: aTParametricEntity [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTPrimitiveType: aTPrimitiveType [
 
+	<ignoreForCoverage>
 	<generated>
 	"We should visit FamixTType but all its users in this language already visit it in their superclasses so we skip the call here."
 ]
@@ -933,6 +1037,7 @@ FamixJavaTVisitor >> visitFamixTPrimitiveType: aTPrimitiveType [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTReference: aTReference [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixTAssociation: aTReference.
 
@@ -943,6 +1048,7 @@ FamixJavaTVisitor >> visitFamixTReference: aTReference [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTReferenceable: aTReferenceable [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitCollection: aTReferenceable incomingReferences
 ]
@@ -950,6 +1056,7 @@ FamixJavaTVisitor >> visitFamixTReferenceable: aTReferenceable [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTSourceAnchor: aTSourceAnchor [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitEntity: aTSourceAnchor element
 ]
@@ -957,6 +1064,7 @@ FamixJavaTVisitor >> visitFamixTSourceAnchor: aTSourceAnchor [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTSourceEntity: aTSourceEntity [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitEntity: aTSourceEntity sourceAnchor
 ]
@@ -964,6 +1072,7 @@ FamixJavaTVisitor >> visitFamixTSourceEntity: aTSourceEntity [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTSourceLanguage: aTSourceLanguage [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitCollection: aTSourceLanguage sourcedEntities
 ]
@@ -971,6 +1080,7 @@ FamixJavaTVisitor >> visitFamixTSourceLanguage: aTSourceLanguage [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTStructuralEntity: aTStructuralEntity [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixTAccessible: aTStructuralEntity.
 	self visitFamixTCanBeStub: aTStructuralEntity.
@@ -982,6 +1092,7 @@ FamixJavaTVisitor >> visitFamixTStructuralEntity: aTStructuralEntity [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTThrowable: aTThrowable [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitCollection: aTThrowable catchingEntities.
 	self visitCollection: aTThrowable declaringEntities.
@@ -991,6 +1102,7 @@ FamixJavaTVisitor >> visitFamixTThrowable: aTThrowable [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTType: aTType [
 
+	<ignoreForCoverage>
 	<generated>
 	"We do not visit all behaviorals because some classes already visit it in their superclasses in this language implementation. Visiting them here also would cause a double visit of this trait."
 	({ FamixJavaClass . FamixJavaEnum . FamixJavaException . FamixJavaPrimitiveType } includes: aTType class)
@@ -1007,6 +1119,7 @@ FamixJavaTVisitor >> visitFamixTType: aTType [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTTypeArgument: aTTypeArgument [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitCollection: aTTypeArgument outgoingConcretizations
 ]
@@ -1014,6 +1127,7 @@ FamixJavaTVisitor >> visitFamixTTypeArgument: aTTypeArgument [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTTypeParameter: aTTypeParameter [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitCollection: aTTypeParameter concretizations.
 	self visitEntity: aTTypeParameter genericEntity
@@ -1022,6 +1136,7 @@ FamixJavaTVisitor >> visitFamixTTypeParameter: aTTypeParameter [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTTypedEntity: aTTypedEntity [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitEntity: aTTypedEntity typing
 ]
@@ -1029,6 +1144,7 @@ FamixJavaTVisitor >> visitFamixTTypedEntity: aTTypedEntity [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTUnknownVariable: aTUnknownVariable [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixTStructuralEntity: aTUnknownVariable
 ]
@@ -1036,6 +1152,7 @@ FamixJavaTVisitor >> visitFamixTUnknownVariable: aTUnknownVariable [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTWithAccesses: aTWithAccesses [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitCollection: aTWithAccesses accesses
 ]
@@ -1043,6 +1160,7 @@ FamixJavaTVisitor >> visitFamixTWithAccesses: aTWithAccesses [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTWithAnnotationInstances: aTWithAnnotationInstances [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitCollection: aTWithAnnotationInstances annotationInstances
 ]
@@ -1050,6 +1168,7 @@ FamixJavaTVisitor >> visitFamixTWithAnnotationInstances: aTWithAnnotationInstanc
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTWithAnnotationTypes: aTWithAnnotationTypes [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitCollection: aTWithAnnotationTypes definedAnnotationTypes
 ]
@@ -1057,6 +1176,7 @@ FamixJavaTVisitor >> visitFamixTWithAnnotationTypes: aTWithAnnotationTypes [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTWithAttributes: aTWithAttributes [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitCollection: aTWithAttributes attributes
 ]
@@ -1064,6 +1184,7 @@ FamixJavaTVisitor >> visitFamixTWithAttributes: aTWithAttributes [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTWithClasses: aTWithClasses [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixTWithTypes: aTWithClasses
 ]
@@ -1071,6 +1192,7 @@ FamixJavaTVisitor >> visitFamixTWithClasses: aTWithClasses [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTWithComments: aTWithComments [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitCollection: aTWithComments comments
 ]
@@ -1078,6 +1200,7 @@ FamixJavaTVisitor >> visitFamixTWithComments: aTWithComments [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTWithEnumValues: aTWithEnumValues [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitCollection: aTWithEnumValues enumValues
 ]
@@ -1085,6 +1208,7 @@ FamixJavaTVisitor >> visitFamixTWithEnumValues: aTWithEnumValues [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTWithExceptions: aTWithExceptions [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitCollection: aTWithExceptions caughtExceptions.
 	self visitCollection: aTWithExceptions declaredExceptions.
@@ -1094,6 +1218,7 @@ FamixJavaTVisitor >> visitFamixTWithExceptions: aTWithExceptions [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTWithImplicitVariables: aTWithImplicitVariables [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitCollection: aTWithImplicitVariables implicitVariables
 ]
@@ -1101,6 +1226,7 @@ FamixJavaTVisitor >> visitFamixTWithImplicitVariables: aTWithImplicitVariables [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTWithImports: aTWithImports [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitCollection: aTWithImports imports
 ]
@@ -1108,6 +1234,7 @@ FamixJavaTVisitor >> visitFamixTWithImports: aTWithImports [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTWithInheritances: aTWithInheritances [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitCollection: aTWithInheritances superInheritances.
 	self visitCollection: aTWithInheritances subInheritances
@@ -1116,6 +1243,7 @@ FamixJavaTVisitor >> visitFamixTWithInheritances: aTWithInheritances [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTWithInvocations: aTWithInvocations [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitCollection: aTWithInvocations outgoingInvocations
 ]
@@ -1123,6 +1251,7 @@ FamixJavaTVisitor >> visitFamixTWithInvocations: aTWithInvocations [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTWithLocalVariables: aTWithLocalVariables [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitCollection: aTWithLocalVariables localVariables
 ]
@@ -1130,6 +1259,7 @@ FamixJavaTVisitor >> visitFamixTWithLocalVariables: aTWithLocalVariables [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTWithMethods: aTWithMethods [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitCollection: aTWithMethods methods
 ]
@@ -1137,6 +1267,7 @@ FamixJavaTVisitor >> visitFamixTWithMethods: aTWithMethods [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTWithParameters: aTWithParameters [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitCollection: aTWithParameters parameters
 ]
@@ -1144,6 +1275,7 @@ FamixJavaTVisitor >> visitFamixTWithParameters: aTWithParameters [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTWithReferences: aTWithReferences [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitCollection: aTWithReferences outgoingReferences
 ]
@@ -1151,6 +1283,7 @@ FamixJavaTVisitor >> visitFamixTWithReferences: aTWithReferences [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTWithStatements: aTWithStatements [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitFamixTCanBeStub: aTWithStatements.
 	self visitFamixTWithAccesses: aTWithStatements.
@@ -1161,6 +1294,7 @@ FamixJavaTVisitor >> visitFamixTWithStatements: aTWithStatements [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitFamixTWithTypes: aTWithTypes [
 
+	<ignoreForCoverage>
 	<generated>
 	self visitCollection: aTWithTypes types
 ]
@@ -1168,6 +1302,7 @@ FamixJavaTVisitor >> visitFamixTWithTypes: aTWithTypes [
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitTAssociationMetaLevelDependency: aTAssociationMetaLevelDependency [
 
+	<ignoreForCoverage>
 	<generated>
 
 ]
@@ -1175,6 +1310,7 @@ FamixJavaTVisitor >> visitTAssociationMetaLevelDependency: aTAssociationMetaLeve
 { #category : 'visiting' }
 FamixJavaTVisitor >> visitTEntityMetaLevelDependency: aTEntityMetaLevelDependency [
 
+	<ignoreForCoverage>
 	<generated>
 
 ]

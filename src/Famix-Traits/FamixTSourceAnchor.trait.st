@@ -25,6 +25,7 @@ Trait {
 { #category : 'meta' }
 FamixTSourceAnchor classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TSourceAnchor super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -58,6 +59,7 @@ FamixTSourceAnchor >> containerFiles [
 FamixTSourceAnchor >> element [
 	"Relation named: #element type: #FamixTSourceEntity opposite: #sourceAnchor"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Enable the accessibility to the famix entity that this class is a source pointer for'>
 	^ element
@@ -66,6 +68,7 @@ FamixTSourceAnchor >> element [
 { #category : 'accessing' }
 FamixTSourceAnchor >> element: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	element := anObject
 ]

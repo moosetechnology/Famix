@@ -23,6 +23,7 @@ Trait {
 { #category : 'meta' }
 FamixTWithParameters classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TWithParameters super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -51,6 +52,7 @@ FamixTWithParameters >> numberOfParameters: aNumber [
 FamixTWithParameters >> parameters [
 	"Relation named: #parameters type: #FamixTParameter opposite: #parentBehaviouralEntity"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'List of formal parameters declared by this behaviour.'>
 	<derived>
@@ -60,6 +62,7 @@ FamixTWithParameters >> parameters [
 { #category : 'accessing' }
 FamixTWithParameters >> parameters: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	parameters value: anObject
 ]

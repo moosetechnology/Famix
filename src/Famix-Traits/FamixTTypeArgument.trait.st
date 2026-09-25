@@ -25,6 +25,7 @@ Trait {
 { #category : 'meta' }
 FamixTTypeArgument classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TTypeArgument super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -32,6 +33,8 @@ FamixTTypeArgument classSide >> annotation [
 
 { #category : 'adding' }
 FamixTTypeArgument >> addOutgoingConcretization: anObject [
+
+	<ignoreForCoverage>
 	<generated>
 	^ self outgoingConcretizations add: anObject
 ]
@@ -40,6 +43,7 @@ FamixTTypeArgument >> addOutgoingConcretization: anObject [
 FamixTTypeArgument >> outgoingConcretizations [
 	"Relation named: #outgoingConcretizations type: #FamixTConcretization opposite: #typeArgument"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Concretizations where this type is the type argument.'>
 	<derived>
@@ -49,6 +53,7 @@ FamixTTypeArgument >> outgoingConcretizations [
 { #category : 'accessing' }
 FamixTTypeArgument >> outgoingConcretizations: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	outgoingConcretizations value: anObject
 ]

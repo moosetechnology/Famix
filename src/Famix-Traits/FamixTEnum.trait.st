@@ -57,6 +57,7 @@ Trait {
 { #category : 'meta' }
 FamixTEnum classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TEnum super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>

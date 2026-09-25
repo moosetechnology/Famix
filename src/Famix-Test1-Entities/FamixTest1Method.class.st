@@ -60,6 +60,7 @@ Class {
 { #category : 'meta' }
 FamixTest1Method class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Method super: #FamixTest1NamedEntity>
 	<package: #'Famix-Test1-Entities'>
 	<generated>

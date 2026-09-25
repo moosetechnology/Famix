@@ -23,6 +23,7 @@ Class {
 { #category : 'meta' }
 MooseMSEImporterTestSourceAnchor class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #SourceAnchor super: #MooseMSEImporterTestEntity>
 	<package: #'Moose-Core-Tests-Entities'>
 	<generated>
@@ -32,6 +33,7 @@ MooseMSEImporterTestSourceAnchor class >> annotation [
 { #category : 'testing' }
 MooseMSEImporterTestSourceAnchor class >> isAbstract [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self == MooseMSEImporterTestSourceAnchor
 ]

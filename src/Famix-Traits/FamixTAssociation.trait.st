@@ -46,6 +46,7 @@ Trait {
 { #category : 'meta' }
 FamixTAssociation classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TAssociation super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -106,6 +107,7 @@ FamixTAssociation >> displayStringOn: aStream [
 { #category : 'testing' }
 FamixTAssociation >> isAssociation [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
@@ -114,6 +116,7 @@ FamixTAssociation >> isAssociation [
 FamixTAssociation >> next [
 	"Relation named: #next type: #FamixTAssociation opposite: #previous"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Next association in an ordered collection of associations. Currently not supported by the Moose importer'>
 	<derived>
@@ -123,6 +126,7 @@ FamixTAssociation >> next [
 { #category : 'accessing' }
 FamixTAssociation >> next: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	next := anObject
 ]
@@ -131,6 +135,7 @@ FamixTAssociation >> next: anObject [
 FamixTAssociation >> previous [
 	"Relation named: #previous type: #FamixTAssociation opposite: #next"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Previous association in an ordered collection of associations. Currently not supported by the Moose importer'>
 	^ previous
@@ -139,6 +144,7 @@ FamixTAssociation >> previous [
 { #category : 'accessing' }
 FamixTAssociation >> previous: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	previous := anObject
 ]

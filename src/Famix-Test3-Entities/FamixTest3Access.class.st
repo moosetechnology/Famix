@@ -41,6 +41,7 @@ Class {
 { #category : 'meta' }
 FamixTest3Access class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Access super: #FamixTest3Entity>
 	<package: #'Famix-Test3-Entities'>
 	<generated>

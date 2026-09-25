@@ -20,6 +20,7 @@ Trait {
 { #category : 'meta' }
 FamixTCanBeClassSide classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TCanBeClassSide super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -29,6 +30,7 @@ FamixTCanBeClassSide classSide >> annotation [
 FamixTCanBeClassSide >> isClassSide [
 
 	<FMProperty: #isClassSide type: #Boolean defaultValue: false>
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Entity can be declared class side i.e. static'>
 	^ isClassSide ifNil: [ isClassSide := false ]
@@ -36,6 +38,7 @@ FamixTCanBeClassSide >> isClassSide [
 
 { #category : 'accessing' }
 FamixTCanBeClassSide >> isClassSide: anObject [
+	<ignoreForCoverage>
 	<generated>
 	isClassSide := anObject
 ]

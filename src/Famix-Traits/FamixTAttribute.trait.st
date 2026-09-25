@@ -50,6 +50,7 @@ Trait {
 { #category : 'meta' }
 FamixTAttribute classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TAttribute super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -79,6 +80,7 @@ FamixTAttribute >> hierarchyNestingLevel: aNumber [
 { #category : 'testing' }
 FamixTAttribute >> isAttribute [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
@@ -104,6 +106,7 @@ FamixTAttribute >> mooseNameOn: aStream [
 FamixTAttribute >> parentType [
 	"Relation named: #parentType type: #FamixTWithAttributes opposite: #attributes"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Type declaring the attribute. belongsTo implementation'>
 	<container>

@@ -27,6 +27,7 @@ Trait {
 { #category : 'meta' }
 FamixTWithExceptions classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TWithExceptions super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -34,18 +35,24 @@ FamixTWithExceptions classSide >> annotation [
 
 { #category : 'adding' }
 FamixTWithExceptions >> addCaughtException: anObject [
+
+	<ignoreForCoverage>
 	<generated>
 	^ self caughtExceptions add: anObject
 ]
 
 { #category : 'adding' }
 FamixTWithExceptions >> addDeclaredException: anObject [
+
+	<ignoreForCoverage>
 	<generated>
 	^ self declaredExceptions add: anObject
 ]
 
 { #category : 'adding' }
 FamixTWithExceptions >> addThrownException: anObject [
+
+	<ignoreForCoverage>
 	<generated>
 	^ self thrownExceptions add: anObject
 ]
@@ -63,6 +70,7 @@ FamixTWithExceptions >> allExceptions [
 FamixTWithExceptions >> caughtExceptions [
 	"Relation named: #caughtExceptions type: #FamixTThrowable opposite: #catchingEntities"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The exceptions caught by the method'>
 	^ caughtExceptions
@@ -71,6 +79,7 @@ FamixTWithExceptions >> caughtExceptions [
 { #category : 'accessing' }
 FamixTWithExceptions >> caughtExceptions: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	caughtExceptions value: anObject
 ]
@@ -79,6 +88,7 @@ FamixTWithExceptions >> caughtExceptions: anObject [
 FamixTWithExceptions >> declaredExceptions [
 	"Relation named: #declaredExceptions type: #FamixTThrowable opposite: #declaringEntities"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The exceptions declared by the method'>
 	^ declaredExceptions
@@ -87,6 +97,7 @@ FamixTWithExceptions >> declaredExceptions [
 { #category : 'accessing' }
 FamixTWithExceptions >> declaredExceptions: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	declaredExceptions value: anObject
 ]
@@ -95,6 +106,7 @@ FamixTWithExceptions >> declaredExceptions: anObject [
 FamixTWithExceptions >> thrownExceptions [
 	"Relation named: #thrownExceptions type: #FamixTThrowable opposite: #throwingEntities"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The exceptions thrown by the method'>
 	^ thrownExceptions
@@ -103,6 +115,7 @@ FamixTWithExceptions >> thrownExceptions [
 { #category : 'accessing' }
 FamixTWithExceptions >> thrownExceptions: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	thrownExceptions value: anObject
 ]

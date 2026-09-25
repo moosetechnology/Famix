@@ -35,6 +35,7 @@ Trait {
 { #category : 'meta' }
 FamixTReferenceable classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TReferenceable super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -49,6 +50,7 @@ FamixTReferenceable >> addIncomingReference: aReference [
 FamixTReferenceable >> incomingReferences [
 	"Relation named: #incomingReferences type: #FamixTReference opposite: #referredEntity"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'References to this entity by other entities.'>
 	<derived>
@@ -58,6 +60,7 @@ FamixTReferenceable >> incomingReferences [
 { #category : 'accessing' }
 FamixTReferenceable >> incomingReferences: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	incomingReferences value: anObject
 ]

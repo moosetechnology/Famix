@@ -25,6 +25,7 @@ Trait {
 { #category : 'meta' }
 FamixTWithLambdas classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TWithLambdas super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -32,6 +33,8 @@ FamixTWithLambdas classSide >> annotation [
 
 { #category : 'adding' }
 FamixTWithLambdas >> addLambda: anObject [
+
+	<ignoreForCoverage>
 	<generated>
 	^ self lambdas add: anObject
 ]
@@ -40,6 +43,7 @@ FamixTWithLambdas >> addLambda: anObject [
 FamixTWithLambdas >> lambdas [
 	"Relation named: #lambdas type: #FamixTLambda opposite: #lambdaContainer"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Lambdas defined in the container, if any.'>
 	<derived>
@@ -49,6 +53,7 @@ FamixTWithLambdas >> lambdas [
 { #category : 'accessing' }
 FamixTWithLambdas >> lambdas: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	lambdas value: anObject
 ]

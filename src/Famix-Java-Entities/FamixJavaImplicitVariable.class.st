@@ -45,6 +45,7 @@ Class {
 { #category : 'meta' }
 FamixJavaImplicitVariable class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #ImplicitVariable super: #FamixJavaVariable>
 	<package: #'Famix-Java-Entities'>
 	<generated>

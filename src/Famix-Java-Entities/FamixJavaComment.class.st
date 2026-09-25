@@ -28,6 +28,7 @@ Class {
 { #category : 'meta' }
 FamixJavaComment class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Comment super: #FamixJavaSourcedEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>

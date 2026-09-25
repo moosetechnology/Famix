@@ -5,6 +5,7 @@ FmxMBMethodsFactory class >> acceptFor: aName [
 
 	^ 'accept: aVisitor
 
+	<ignoreForCoverage>
 	<generated>
 	^ aVisitor visit{1}: self' format: { aName }
 ]
@@ -19,6 +20,7 @@ FmxMBMethodsFactory class >> visitBehavioral: aBehavioral builder: aBuilder [
 				                ifFalse: [ 'a' ]) , aBehavioral name capitalized.
 			  aStream << ('visit{1}: {2}
 
+	<ignoreForCoverage>
 	<generated>
 ' format: {
 					   aBehavioral fullName.
@@ -93,6 +95,7 @@ FmxMBMethodsFactory class >> visitCollection [
 
 	^ 'visitCollection: aCollection
 
+	<ignoreForCoverage>
 	<generated>
 	^ aCollection collect: [ :each | each accept: self ]'
 ]
@@ -102,6 +105,7 @@ FmxMBMethodsFactory class >> visitEntity [
 
 	^ 'visitEntity: aFamixEntity
 
+	<ignoreForCoverage>
 	<generated>
 	^ aFamixEntity ifNotNil: [ aFamixEntity accept: self ]'
 ]

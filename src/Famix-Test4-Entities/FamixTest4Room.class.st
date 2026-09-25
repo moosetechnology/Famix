@@ -24,6 +24,7 @@ Class {
 { #category : 'meta' }
 FamixTest4Room class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Room super: #FamixTest4Entity>
 	<package: #'Famix-Test4-Entities'>
 	<generated>
@@ -33,6 +34,7 @@ FamixTest4Room class >> annotation [
 FamixTest4Room >> school [
 	"Relation named: #school type: #FamixTest4School opposite: #rooms"
 
+	<ignoreForCoverage>
 	<generated>
 	<container>
 	^ school
@@ -41,6 +43,7 @@ FamixTest4Room >> school [
 { #category : 'accessing' }
 FamixTest4Room >> school: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	school := anObject
 ]

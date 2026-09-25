@@ -35,6 +35,7 @@ Trait {
 { #category : 'meta' }
 FamixTAnnotationType classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TAnnotationType super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -42,6 +43,8 @@ FamixTAnnotationType classSide >> annotation [
 
 { #category : 'groups' }
 FamixTAnnotationType classSide >> annotationFamixAnnotationTypeGroup [
+
+	<ignoreForCoverage>
 	<generated>
 	<mooseGroup>
 	^ FamixAnnotationTypeGroup
@@ -58,6 +61,7 @@ FamixTAnnotationType >> addInstance: anObject [
 FamixTAnnotationType >> annotationTypesContainer [
 	"Relation named: #annotationTypesContainer type: #FamixTWithAnnotationTypes opposite: #definedAnnotationTypes"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Container in which an AnnotationType may reside'>
 	<container>
@@ -67,6 +71,7 @@ FamixTAnnotationType >> annotationTypesContainer [
 { #category : 'accessing' }
 FamixTAnnotationType >> annotationTypesContainer: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	annotationTypesContainer := anObject
 ]
@@ -81,6 +86,7 @@ FamixTAnnotationType >> displayStringOn: aStream [
 FamixTAnnotationType >> instances [
 	"Relation named: #instances type: #FamixTAnnotationInstance opposite: #annotationType"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Annotations of this type'>
 	<derived>
@@ -90,6 +96,7 @@ FamixTAnnotationType >> instances [
 { #category : 'accessing' }
 FamixTAnnotationType >> instances: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	instances value: anObject
 ]

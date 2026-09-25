@@ -60,9 +60,12 @@ FamixNamespaceGroupHierarchy >> buildNodes [
 { #category : 'building' }
 FamixNamespaceGroupHierarchy >> connectNodes [
 
-	RSEdgeBuilder line
+	RSLineBuilder line
 		shapes: canvas nodes;
-		connectToAll: [ :namespace | namespace containersOfType: FamixTNamespace ]
+		connectToAll: [ :namespace |
+			(namespace containers flatCollectAsSet: [ :container |
+				container containersOfType: FamixTNamespace ])
+				reject: [ :container | container == namespace ] ]
 ]
 
 { #category : 'accessing' }
@@ -72,7 +75,7 @@ FamixNamespaceGroupHierarchy >> famixNamespaceGroup: anObject [
 
 { #category : 'building' }
 FamixNamespaceGroupHierarchy >> setLayout [
-	RSClusterLayout new on: canvas nodes
+	RSClusterTreeLayout new on: canvas nodes
 ]
 
 { #category : 'shapes' }

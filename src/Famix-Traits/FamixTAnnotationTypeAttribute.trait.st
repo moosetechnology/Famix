@@ -65,6 +65,7 @@ Trait {
 { #category : 'meta' }
 FamixTAnnotationTypeAttribute classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TAnnotationTypeAttribute super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -80,6 +81,7 @@ FamixTAnnotationTypeAttribute >> addAnnotationAttributeInstance: anObject [
 FamixTAnnotationTypeAttribute >> annotationAttributeInstances [
 	"Relation named: #annotationAttributeInstances type: #FamixTAnnotationInstanceAttribute opposite: #annotationTypeAttribute"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'A collection of AnnotationInstanceAttribute which hold the usages of this attribute in actual AnnotationInstances'>
 	<derived>
@@ -89,6 +91,7 @@ FamixTAnnotationTypeAttribute >> annotationAttributeInstances [
 { #category : 'accessing' }
 FamixTAnnotationTypeAttribute >> annotationAttributeInstances: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	annotationAttributeInstances value: anObject
 ]

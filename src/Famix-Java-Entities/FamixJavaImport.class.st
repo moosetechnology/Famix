@@ -35,6 +35,7 @@ Class {
 { #category : 'meta' }
 FamixJavaImport class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Import super: #FamixJavaEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>

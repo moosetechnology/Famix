@@ -23,6 +23,7 @@ Class {
 { #category : 'meta' }
 MooseMSEImporterTestSourcedEntity class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #SourcedEntity super: #MooseMSEImporterTestEntity>
 	<package: #'Moose-Core-Tests-Entities'>
 	<generated>
@@ -32,6 +33,7 @@ MooseMSEImporterTestSourcedEntity class >> annotation [
 { #category : 'testing' }
 MooseMSEImporterTestSourcedEntity class >> isAbstract [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self == MooseMSEImporterTestSourcedEntity
 ]

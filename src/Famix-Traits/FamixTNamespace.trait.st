@@ -35,6 +35,7 @@ Trait {
 { #category : 'meta' }
 FamixTNamespace classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TNamespace super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -42,6 +43,8 @@ FamixTNamespace classSide >> annotation [
 
 { #category : 'groups' }
 FamixTNamespace classSide >> annotationFamixNamespaceGroup [
+
+	<ignoreForCoverage>
 	<generated>
 	<mooseGroup>
 	^ FamixNamespaceGroup
@@ -50,6 +53,7 @@ FamixTNamespace classSide >> annotationFamixNamespaceGroup [
 { #category : 'testing' }
 FamixTNamespace >> isNamespace [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]

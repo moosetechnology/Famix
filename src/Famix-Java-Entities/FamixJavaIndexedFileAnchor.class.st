@@ -24,6 +24,7 @@ Class {
 { #category : 'meta' }
 FamixJavaIndexedFileAnchor class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #IndexedFileAnchor super: #FamixJavaSourceAnchor>
 	<package: #'Famix-Java-Entities'>
 	<generated>

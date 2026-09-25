@@ -29,6 +29,7 @@ Class {
 { #category : 'meta' }
 FamixJavaWildcard class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Wildcard super: #FamixJavaType>
 	<package: #'Famix-Java-Entities'>
 	<generated>

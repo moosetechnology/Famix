@@ -9,6 +9,7 @@ Class {
 { #category : 'meta' }
 FamixTestComposedEntity class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Entity super: #MooseEntity>
 	<package: #'Famix-TestComposedMetamodel-Entities'>
 	<generated>
@@ -18,6 +19,7 @@ FamixTestComposedEntity class >> annotation [
 { #category : 'testing' }
 FamixTestComposedEntity class >> isAbstract [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self == FamixTestComposedEntity
 ]
@@ -25,6 +27,7 @@ FamixTestComposedEntity class >> isAbstract [
 { #category : 'meta' }
 FamixTestComposedEntity class >> metamodel [
 
+	<ignoreForCoverage>
 	<generated>
 	^ FamixTestComposedModel metamodel
 ]
@@ -32,6 +35,7 @@ FamixTestComposedEntity class >> metamodel [
 { #category : 'testing' }
 FamixTestComposedEntity >> isAssociation [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]

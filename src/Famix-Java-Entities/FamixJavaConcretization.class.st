@@ -36,6 +36,7 @@ Class {
 { #category : 'meta' }
 FamixJavaConcretization class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Concretization super: #FamixJavaEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>

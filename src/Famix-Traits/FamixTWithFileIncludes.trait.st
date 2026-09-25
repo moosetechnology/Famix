@@ -25,6 +25,7 @@ Trait {
 { #category : 'meta' }
 FamixTWithFileIncludes classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TWithFileIncludes super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -46,6 +47,7 @@ FamixTWithFileIncludes >> addOutgoingIncludeRelation: anObject [
 FamixTWithFileIncludes >> incomingIncludeRelations [
 	"Relation named: #incomingIncludeRelations type: #FamixTFileInclude opposite: #target"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The include entities that have this file as a target.'>
 	<derived>
@@ -55,6 +57,7 @@ FamixTWithFileIncludes >> incomingIncludeRelations [
 { #category : 'accessing' }
 FamixTWithFileIncludes >> incomingIncludeRelations: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	incomingIncludeRelations value: anObject
 ]
@@ -63,6 +66,7 @@ FamixTWithFileIncludes >> incomingIncludeRelations: anObject [
 FamixTWithFileIncludes >> outgoingIncludeRelations [
 	"Relation named: #outgoingIncludeRelations type: #FamixTFileInclude opposite: #source"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The include entities that have this file as a source.'>
 	<derived>
@@ -72,6 +76,7 @@ FamixTWithFileIncludes >> outgoingIncludeRelations [
 { #category : 'accessing' }
 FamixTWithFileIncludes >> outgoingIncludeRelations: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	outgoingIncludeRelations value: anObject
 ]

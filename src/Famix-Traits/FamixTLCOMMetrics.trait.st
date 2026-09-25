@@ -8,6 +8,7 @@ Trait {
 { #category : 'meta' }
 FamixTLCOMMetrics classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TLCOMMetrics super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>

@@ -43,6 +43,7 @@ Trait {
 { #category : 'meta' }
 FamixTConcretization classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TConcretization super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -52,6 +53,7 @@ FamixTConcretization classSide >> annotation [
 FamixTConcretization >> triggeringAssociation [
 	"Relation named: #triggeringAssociation type: #FamixTParametricAssociation opposite: #concretizations"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The association that triggers this concretization.'>
 	^ triggeringAssociation
@@ -60,6 +62,7 @@ FamixTConcretization >> triggeringAssociation [
 { #category : 'accessing' }
 FamixTConcretization >> triggeringAssociation: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	triggeringAssociation := anObject
 ]
@@ -68,6 +71,7 @@ FamixTConcretization >> triggeringAssociation: anObject [
 FamixTConcretization >> typeArgument [
 	"Relation named: #typeArgument type: #FamixTTypeArgument opposite: #outgoingConcretizations"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The type argument that concretizes the type parameter'>
 	<source>
@@ -77,6 +81,7 @@ FamixTConcretization >> typeArgument [
 { #category : 'accessing' }
 FamixTConcretization >> typeArgument: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	typeArgument := anObject
 ]
@@ -85,6 +90,7 @@ FamixTConcretization >> typeArgument: anObject [
 FamixTConcretization >> typeParameter [
 	"Relation named: #typeParameter type: #FamixTTypeParameter opposite: #concretizations"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Type parameter linked to in this relationship.'>
 	<target>
@@ -94,6 +100,7 @@ FamixTConcretization >> typeParameter [
 { #category : 'accessing' }
 FamixTConcretization >> typeParameter: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	typeParameter := anObject
 ]

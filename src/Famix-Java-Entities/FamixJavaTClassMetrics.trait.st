@@ -8,6 +8,7 @@ Trait {
 { #category : 'meta' }
 FamixJavaTClassMetrics classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TClassMetrics super: #Object>
 	<package: #'Famix-Java-Entities'>
 	<generated>

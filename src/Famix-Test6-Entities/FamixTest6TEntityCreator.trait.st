@@ -14,6 +14,7 @@ Trait {
 { #category : 'meta' }
 FamixTest6TEntityCreator classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TEntityCreator super: #Object>
 	<package: #'Famix-Test6-Entities'>
 	<generated>
@@ -22,6 +23,7 @@ FamixTest6TEntityCreator classSide >> annotation [
 { #category : 'entity creation' }
 FamixTest6TEntityCreator >> newBacon [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTest6Bacon new
 ]
@@ -29,6 +31,7 @@ FamixTest6TEntityCreator >> newBacon [
 { #category : 'entity creation' }
 FamixTest6TEntityCreator >> newComment [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTest6Comment new
 ]
@@ -36,6 +39,7 @@ FamixTest6TEntityCreator >> newComment [
 { #category : 'entity creation' }
 FamixTest6TEntityCreator >> newSourceLanguage [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTest6SourceLanguage new
 ]
@@ -43,6 +47,7 @@ FamixTest6TEntityCreator >> newSourceLanguage [
 { #category : 'entity creation' }
 FamixTest6TEntityCreator >> newSourceTextAnchor [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTest6SourceTextAnchor new
 ]
@@ -50,6 +55,7 @@ FamixTest6TEntityCreator >> newSourceTextAnchor [
 { #category : 'entity creation' }
 FamixTest6TEntityCreator >> newSpam [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTest6Spam new
 ]

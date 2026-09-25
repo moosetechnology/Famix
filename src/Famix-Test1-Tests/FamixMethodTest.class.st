@@ -34,12 +34,12 @@ FamixMethodTest >> testCyclomaticComplexity [
 { #category : 'tests' }
 FamixMethodTest >> testIsClass [
 
-	self assert: c1 isClass. 	
-	self assert: c2 isClass. 
+	self assert: c1 isClass.
+	self assert: c2 isClass.
 	self deny: m1 isClass.
 	self deny: m2 isClass.
-	self deny: anchor1 isClass.
-	self deny: anchor2 isClass.
+	self deny: self anchor1 isClass.
+	self deny: self anchor2 isClass
 ]
 
 { #category : 'tests' }

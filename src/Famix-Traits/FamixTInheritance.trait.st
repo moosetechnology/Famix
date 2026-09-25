@@ -38,6 +38,7 @@ Trait {
 { #category : 'meta' }
 FamixTInheritance classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TInheritance super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -54,6 +55,7 @@ FamixTInheritance >> displayStringOn: aStream [
 { #category : 'testing' }
 FamixTInheritance >> isInheritance [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
@@ -62,6 +64,7 @@ FamixTInheritance >> isInheritance [
 FamixTInheritance >> subclass [
 	"Relation named: #subclass type: #FamixTWithInheritances opposite: #superInheritances"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Subclass linked to in this relationship. from-side of the association'>
 	<source>
@@ -71,6 +74,7 @@ FamixTInheritance >> subclass [
 { #category : 'accessing' }
 FamixTInheritance >> subclass: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	subclass := anObject
 ]
@@ -79,6 +83,7 @@ FamixTInheritance >> subclass: anObject [
 FamixTInheritance >> superclass [
 	"Relation named: #superclass type: #FamixTWithInheritances opposite: #subInheritances"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Superclass linked to in this relationship. to-side of the association'>
 	<target>
@@ -88,6 +93,7 @@ FamixTInheritance >> superclass [
 { #category : 'accessing' }
 FamixTInheritance >> superclass: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	superclass := anObject
 ]

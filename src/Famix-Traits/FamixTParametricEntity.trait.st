@@ -32,6 +32,7 @@ Trait {
 { #category : 'meta' }
 FamixTParametricEntity classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TParametricEntity super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -39,6 +40,8 @@ FamixTParametricEntity classSide >> annotation [
 
 { #category : 'adding' }
 FamixTParametricEntity >> addTypeParameter: anObject [
+
+	<ignoreForCoverage>
 	<generated>
 	^ self typeParameters add: anObject
 ]
@@ -83,6 +86,7 @@ FamixTParametricEntity >> isGenericEntity [
 { #category : 'testing' }
 FamixTParametricEntity >> isParametricEntity [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
@@ -91,6 +95,7 @@ FamixTParametricEntity >> isParametricEntity [
 FamixTParametricEntity >> typeParameters [
 	"Relation named: #typeParameters type: #FamixTTypeParameter opposite: #genericEntity"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The type parameters of this parametric entity. They can any type with the exception of primitive types'>
 	<derived>
@@ -100,6 +105,7 @@ FamixTParametricEntity >> typeParameters [
 { #category : 'accessing' }
 FamixTParametricEntity >> typeParameters: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	typeParameters value: anObject
 ]

@@ -49,6 +49,7 @@ Trait {
 { #category : 'meta' }
 FamixTImplicitVariable classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TImplicitVariable super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -73,6 +74,7 @@ FamixTImplicitVariable >> declaredType [
 { #category : 'testing' }
 FamixTImplicitVariable >> isImplicitVariable [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
@@ -93,6 +95,7 @@ FamixTImplicitVariable >> isSuper [
 FamixTImplicitVariable >> parentBehaviouralEntity [
 	"Relation named: #parentBehaviouralEntity type: #FamixTWithImplicitVariables opposite: #implicitVariables"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The behaviour containing this implicit variable. belongsTo implementation'>
 	<container>

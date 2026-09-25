@@ -25,6 +25,7 @@ Class {
 { #category : 'meta' }
 FamixTest1Association class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Association super: #FamixTest1Entity>
 	<package: #'Famix-Test1-Entities'>
 	<generated>

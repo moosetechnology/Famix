@@ -59,6 +59,7 @@ Trait {
 { #category : 'meta' }
 FamixTEnumValue classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TEnumValue super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -67,6 +68,7 @@ FamixTEnumValue classSide >> annotation [
 { #category : 'testing' }
 FamixTEnumValue >> isEnumValue [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
@@ -88,6 +90,7 @@ FamixTEnumValue >> mooseNameSeparator [
 FamixTEnumValue >> parentEnum [
 	"Relation named: #parentEnum type: #FamixTWithEnumValues opposite: #enumValues"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The Enum declaring this value. It offers the implementation of belongsTo'>
 	<container>
@@ -97,6 +100,7 @@ FamixTEnumValue >> parentEnum [
 { #category : 'accessing' }
 FamixTEnumValue >> parentEnum: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	parentEnum := anObject
 ]

@@ -1,8 +1,7 @@
 Class {
 	#name : 'FamixJavaQueryTest',
-	#superclass : 'TestCase',
+	#superclass : 'FamixAbstractExportTestCase',
 	#instVars : [
-		'model',
 		'p1',
 		'p2',
 		'c1',

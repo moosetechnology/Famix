@@ -57,6 +57,7 @@ Class {
 { #category : 'meta' }
 FamixStClass class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Class super: #FamixStNamedEntity>
 	<package: #'Famix-PharoSmalltalk-Entities'>
 	<generated>
@@ -184,7 +185,7 @@ FamixStClass >> numberOfMessageSends [
 	<FMProperty: #numberOfMessageSends type: #Number>
 	<derived>
 	<FMComment: 'The number of message sends from a class'>
-	^ self cacheAt: #numberOfMessageSends ifAbsent: [ self methodsGroup sumNumbers: #numberOfMessageSends ]
+	^ self cacheAt: #numberOfMessageSends ifAbsent: [ self methods sumNumbers: #numberOfMessageSends ]
 ]
 
 { #category : 'as yet unclassified' }

@@ -59,6 +59,7 @@ Trait {
 { #category : 'meta' }
 FamixTParameter classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TParameter super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -76,6 +77,7 @@ FamixTParameter >> displayStringOn: aStream [
 FamixTParameter >> parentBehaviouralEntity [
 	"Relation named: #parentBehaviouralEntity type: #FamixTWithParameters opposite: #parameters"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Behavioural entity containing this parameter. belongsTo implementation'>
 	<container>

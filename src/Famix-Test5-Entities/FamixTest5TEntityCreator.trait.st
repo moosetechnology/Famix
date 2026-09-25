@@ -14,6 +14,7 @@ Trait {
 { #category : 'meta' }
 FamixTest5TEntityCreator classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TEntityCreator super: #Object>
 	<package: #'Famix-Test5-Entities'>
 	<generated>
@@ -22,6 +23,7 @@ FamixTest5TEntityCreator classSide >> annotation [
 { #category : 'entity creation' }
 FamixTest5TEntityCreator >> newAnnotationType1 [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTest5AnnotationType1 new
 ]
@@ -29,6 +31,7 @@ FamixTest5TEntityCreator >> newAnnotationType1 [
 { #category : 'entity creation' }
 FamixTest5TEntityCreator >> newAnnotationType2 [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTest5AnnotationType2 new
 ]
@@ -36,6 +39,7 @@ FamixTest5TEntityCreator >> newAnnotationType2 [
 { #category : 'entity creation' }
 FamixTest5TEntityCreator >> newWithAnnotationType1 [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTest5WithAnnotationType1 new
 ]
@@ -43,6 +47,7 @@ FamixTest5TEntityCreator >> newWithAnnotationType1 [
 { #category : 'entity creation' }
 FamixTest5TEntityCreator >> newWithAnnotationType2 [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTest5WithAnnotationType2 new
 ]

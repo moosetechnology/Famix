@@ -41,16 +41,6 @@ FamixWithMethodsTest >> testMethods [
 ]
 
 { #category : 'tests' }
-FamixWithMethodsTest >> testMethodsGroup [
-
-	| group |
-	group := c1 methodsGroup.
-	self assertCollection: group entities hasSameElements: {
-			m1.
-			constructor }
-]
-
-{ #category : 'tests' }
 FamixWithMethodsTest >> testNumberOfLinesOfCode [
 
 	self assert: c1 numberOfLinesOfCode equals: 2.

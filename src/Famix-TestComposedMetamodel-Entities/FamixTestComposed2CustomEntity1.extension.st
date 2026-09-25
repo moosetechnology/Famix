@@ -4,6 +4,7 @@ Extension { #name : 'FamixTestComposed2CustomEntity1' }
 FamixTestComposed2CustomEntity1 >> c1 [
 	"Relation named: #c1 type: #FamixTestComposedCustomEntity1 opposite: #c21"
 
+	<ignoreForCoverage>
 	<generated>
 	<derived>
 	<FMProperty: #c1 type: #FamixTestComposedCustomEntity1 opposite: #c21>
@@ -15,6 +16,7 @@ FamixTestComposed2CustomEntity1 >> c1 [
 FamixTestComposed2CustomEntity1 >> c11 [
 	"Relation named: #c11 type: #FamixTestComposed1CustomEntity1 opposite: #c21"
 
+	<ignoreForCoverage>
 	<generated>
 	<derived>
 	<FMProperty: #c11 type: #FamixTestComposed1CustomEntity1 opposite: #c21>
@@ -25,6 +27,7 @@ FamixTestComposed2CustomEntity1 >> c11 [
 { #category : '*Famix-TestComposedMetamodel-Entities' }
 FamixTestComposed2CustomEntity1 >> c11: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	<package: #'Famix-TestComposedMetamodel-Entities'>
 
@@ -41,6 +44,7 @@ FamixTestComposed2CustomEntity1 >> c11: anObject [
 { #category : '*Famix-TestComposedMetamodel-Entities' }
 FamixTestComposed2CustomEntity1 >> c1: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	<package: #'Famix-TestComposedMetamodel-Entities'>
 

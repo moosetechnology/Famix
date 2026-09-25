@@ -21,6 +21,7 @@ Class {
 { #category : 'meta' }
 FamixTestComposedStandardEntity class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #StandardEntity super: #FamixTestComposedEntity>
 	<package: #'Famix-TestComposedMetamodel-Entities'>
 	<generated>
@@ -30,6 +31,7 @@ FamixTestComposedStandardEntity class >> annotation [
 FamixTestComposedStandardEntity >> method [
 	"Relation named: #method type: #FamixTestComposed1Method opposite: #standardEntity"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMProperty: #method type: #FamixTestComposed1Method opposite: #standardEntity>
 	^ self attributeAt: #method ifAbsent: [ nil ]
@@ -38,6 +40,7 @@ FamixTestComposedStandardEntity >> method [
 { #category : 'accessing' }
 FamixTestComposedStandardEntity >> method: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	(self attributeAt: #method ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |

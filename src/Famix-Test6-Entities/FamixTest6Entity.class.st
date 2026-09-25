@@ -9,6 +9,7 @@ Class {
 { #category : 'meta' }
 FamixTest6Entity class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Entity super: #MooseEntity>
 	<package: #'Famix-Test6-Entities'>
 	<generated>
@@ -18,6 +19,7 @@ FamixTest6Entity class >> annotation [
 { #category : 'testing' }
 FamixTest6Entity class >> isAbstract [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self == FamixTest6Entity
 ]
@@ -25,6 +27,7 @@ FamixTest6Entity class >> isAbstract [
 { #category : 'meta' }
 FamixTest6Entity class >> metamodel [
 
+	<ignoreForCoverage>
 	<generated>
 	^ FamixTest6Model metamodel
 ]
@@ -32,6 +35,7 @@ FamixTest6Entity class >> metamodel [
 { #category : 'testing' }
 FamixTest6Entity >> hasImmediateSource [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -39,6 +43,7 @@ FamixTest6Entity >> hasImmediateSource [
 { #category : 'testing' }
 FamixTest6Entity >> isComment [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -46,6 +51,7 @@ FamixTest6Entity >> isComment [
 { #category : 'testing' }
 FamixTest6Entity >> isNamedEntity [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -53,6 +59,7 @@ FamixTest6Entity >> isNamedEntity [
 { #category : 'testing' }
 FamixTest6Entity >> isQueryable [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]

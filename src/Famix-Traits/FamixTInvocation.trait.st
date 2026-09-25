@@ -57,6 +57,7 @@ Trait {
 { #category : 'meta' }
 FamixTInvocation classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TInvocation super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
@@ -64,6 +65,8 @@ FamixTInvocation classSide >> annotation [
 
 { #category : 'groups' }
 FamixTInvocation classSide >> annotationFamixInvocationGroup [
+
+	<ignoreForCoverage>
 	<generated>
 	<mooseGroup>
 	^ FamixInvocationGroup
@@ -83,6 +86,7 @@ FamixTInvocation >> anyCandidate [
 FamixTInvocation >> candidates [
 	"Relation named: #candidates type: #FamixTInvocable opposite: #incomingInvocations"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'List of candidate behavioural entities for receiving the invocation'>
 	<target>
@@ -92,6 +96,7 @@ FamixTInvocation >> candidates [
 { #category : 'accessing' }
 FamixTInvocation >> candidates: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	candidates value: anObject
 ]
@@ -150,6 +155,7 @@ FamixTInvocation >> invokedEntity: anEntity [
 { #category : 'testing' }
 FamixTInvocation >> isInvocation [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
@@ -174,6 +180,7 @@ FamixTInvocation >> isSuperInvocation [
 FamixTInvocation >> receiver [
 	"Relation named: #receiver type: #FamixTInvocationsReceiver opposite: #receivingInvocations"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Named entity (variable, class...) receiving the invocation. to-side of the association'>
 	^ receiver
@@ -182,6 +189,7 @@ FamixTInvocation >> receiver [
 { #category : 'accessing' }
 FamixTInvocation >> receiver: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	receiver := anObject
 ]
@@ -190,6 +198,7 @@ FamixTInvocation >> receiver: anObject [
 FamixTInvocation >> sender [
 	"Relation named: #sender type: #FamixTWithInvocations opposite: #outgoingInvocations"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Behavioural entity making the call. from-side of the association'>
 	<source>
@@ -199,6 +208,7 @@ FamixTInvocation >> sender [
 { #category : 'accessing' }
 FamixTInvocation >> sender: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	sender := anObject
 ]
