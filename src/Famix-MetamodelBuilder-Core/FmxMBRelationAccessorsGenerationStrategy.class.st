@@ -57,11 +57,6 @@ FmxMBRelationAccessorsGenerationStrategy >> generateGetterCodeFor: aRelation [
 						  tab;
 						  nextPutAll: '<container>';
 						  cr ].
-			  aRelation isDerived ifTrue: [
-					  s
-						  tab;
-						  nextPutAll: '<derived>';
-						  cr ].
 			  aRelation isSource ifTrue: [
 					  s
 						  tab;
