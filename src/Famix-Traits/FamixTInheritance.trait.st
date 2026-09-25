@@ -67,6 +67,7 @@ FamixTInheritance >> subclass [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Subclass linked to in this relationship. from-side of the association'>
+	<derived>
 	<source>
 	^ subclass
 ]
@@ -86,6 +87,7 @@ FamixTInheritance >> superclass [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Superclass linked to in this relationship. to-side of the association'>
+	<derived>
 	<target>
 	^ superclass
 ]

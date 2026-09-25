@@ -6,7 +6,6 @@ FamixTestComposed1CustomEntity2 >> c22s [
 
 	<ignoreForCoverage>
 	<generated>
-	<derived>
 	<FMProperty: #c22s type: #FamixTestComposed2CustomEntity2 opposite: #c12>
 	<multivalued>
 	<package: #'Famix-TestComposedMetamodel-Entities'>
@@ -29,6 +28,7 @@ FamixTestComposed1CustomEntity2 >> customEntity2 [
 
 	<ignoreForCoverage>
 	<generated>
+	<derived>
 	<FMProperty: #customEntity2 type: #FamixTestComposedCustomEntity2 opposite: #customEntities2>
 	<package: #'Famix-TestComposedMetamodel-Entities'>
 	^ self attributeAt: #customEntity2 ifAbsent: [ nil ]

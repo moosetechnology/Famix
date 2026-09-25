@@ -43,7 +43,6 @@ FamixTest8TInfectious >> incomingInfections [
 
 	<ignoreForCoverage>
 	<generated>
-	<derived>
 	^ incomingInfections
 ]
 

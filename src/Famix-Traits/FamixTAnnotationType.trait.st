@@ -65,6 +65,7 @@ FamixTAnnotationType >> annotationTypesContainer [
 	<generated>
 	<FMComment: 'Container in which an AnnotationType may reside'>
 	<container>
+	<derived>
 	^ annotationTypesContainer
 ]
 
@@ -89,7 +90,6 @@ FamixTAnnotationType >> instances [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Annotations of this type'>
-	<derived>
 	^ instances
 ]
 

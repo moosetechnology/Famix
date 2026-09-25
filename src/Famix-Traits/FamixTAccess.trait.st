@@ -71,6 +71,7 @@ FamixTAccess >> accessor [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Behavioural entity making the access to the variable. from-side of the association'>
+	<derived>
 	<source>
 	^ accessor
 ]

@@ -37,6 +37,7 @@ FamixTDefinedInModule >> parentModule [
 	<generated>
 	<FMComment: 'Module that contains the definition of this entity'>
 	<container>
+	<derived>
 	^ parentModule
 ]
 

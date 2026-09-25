@@ -61,6 +61,7 @@ FamixTAnnotationInstanceAttribute >> annotationTypeAttribute [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'This corresponds to the type of the attribute in an AnnotationInstance'>
+	<derived>
 	^ annotationTypeAttribute
 ]
 
@@ -80,6 +81,7 @@ FamixTAnnotationInstanceAttribute >> parentAnnotationInstance [
 	<generated>
 	<FMComment: 'The instance of the annotation in which the attribute is used.'>
 	<container>
+	<derived>
 	^ parentAnnotationInstance
 ]
 

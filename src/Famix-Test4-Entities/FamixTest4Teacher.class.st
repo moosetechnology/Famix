@@ -51,6 +51,7 @@ FamixTest4Teacher >> school [
 	<ignoreForCoverage>
 	<generated>
 	<container>
+	<derived>
 	^ school
 ]
 

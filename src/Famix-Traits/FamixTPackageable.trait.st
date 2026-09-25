@@ -43,6 +43,7 @@ FamixTPackageable >> parentPackage [
 	<generated>
 	<FMComment: 'Package containing the entity in the code structure (if applicable)'>
 	<container>
+	<derived>
 	^ parentPackage
 ]
 

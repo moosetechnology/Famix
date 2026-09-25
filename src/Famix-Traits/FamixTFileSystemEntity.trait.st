@@ -126,6 +126,7 @@ FamixTFileSystemEntity >> parentFolder [
 	<generated>
 	<FMComment: 'Folder entity containing this file.'>
 	<container>
+	<derived>
 	^ parentFolder
 ]
 

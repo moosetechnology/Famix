@@ -46,6 +46,7 @@ FamixTComment >> commentedEntity [
 	<generated>
 	<FMComment: 'Source code commented by the comment'>
 	<container>
+	<derived>
 	^ commentedEntity
 ]
 

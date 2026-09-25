@@ -47,6 +47,7 @@ FamixTestComposedAssociation >> c15 [
 
 	<ignoreForCoverage>
 	<generated>
+	<derived>
 	<target>
 	<FMProperty: #c15 type: #FamixTestComposed1CustomEntity5 opposite: #associations>
 	^ self attributeAt: #c15 ifAbsent: [ nil ]
@@ -66,6 +67,7 @@ FamixTestComposedAssociation >> c25 [
 
 	<ignoreForCoverage>
 	<generated>
+	<derived>
 	<source>
 	<FMProperty: #c25 type: #FamixTestComposed2CustomEntity5 opposite: #associations>
 	^ self attributeAt: #c25 ifAbsent: [ nil ]

@@ -71,6 +71,7 @@ FamixTLambda >> lambdaContainer [
 	<generated>
 	<FMComment: 'The container defining the lambda expression. The lambda is placed in a container, because certain languages can nest lambdas in lambdas.'>
 	<container>
+	<derived>
 	^ lambdaContainer
 ]
 

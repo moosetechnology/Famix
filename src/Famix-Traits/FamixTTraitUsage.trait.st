@@ -50,6 +50,7 @@ FamixTTraitUsage >> trait [
 
 	<ignoreForCoverage>
 	<generated>
+	<derived>
 	<source>
 	^ trait
 ]
@@ -68,6 +69,7 @@ FamixTTraitUsage >> user [
 
 	<ignoreForCoverage>
 	<generated>
+	<derived>
 	<target>
 	^ user
 ]

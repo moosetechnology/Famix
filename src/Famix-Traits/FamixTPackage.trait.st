@@ -68,7 +68,6 @@ FamixTPackage >> childEntities [
 
 	<ignoreForCoverage>
 	<generated>
-	<derived>
 	^ childEntities
 ]
 

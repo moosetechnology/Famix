@@ -40,6 +40,7 @@ FamixJavaTBounded >> lowerBound [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Lower bound on wildcard, specified by super keyword.'>
+	<derived>
 	^ lowerBound
 ]
 
@@ -58,6 +59,7 @@ FamixJavaTBounded >> upperBound [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Upper bound on wildcard, specified by extends keyword.'>
+	<derived>
 	^ upperBound
 ]
 

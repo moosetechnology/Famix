@@ -56,7 +56,6 @@ FamixJavaTBound >> lowerBoundedWildcards [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Wildcards lower bounded by this bound.'>
-	<derived>
 	^ lowerBoundedWildcards
 ]
 
@@ -75,7 +74,6 @@ FamixJavaTBound >> upperBoundedWildcards [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Wildcards upper bounded by this bound.'>
-	<derived>
 	^ upperBoundedWildcards
 ]
 

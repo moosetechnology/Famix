@@ -110,6 +110,7 @@ FamixTAttribute >> parentType [
 	<generated>
 	<FMComment: 'Type declaring the attribute. belongsTo implementation'>
 	<container>
+	<derived>
 	^ parentType
 ]
 

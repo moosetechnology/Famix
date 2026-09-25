@@ -51,6 +51,7 @@ FamixTest8Residence >> biotope [
 
 	<ignoreForCoverage>
 	<generated>
+	<derived>
 	<target>
 	^ biotope
 ]
@@ -69,6 +70,7 @@ FamixTest8Residence >> resident [
 
 	<ignoreForCoverage>
 	<generated>
+	<derived>
 	<source>
 	^ resident
 ]

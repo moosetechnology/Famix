@@ -35,6 +35,7 @@ FamixTTemplateUser >> template [
 
 	<ignoreForCoverage>
 	<generated>
+	<derived>
 	^ template
 ]
 

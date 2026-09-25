@@ -49,6 +49,7 @@ FamixTTemplate >> templateOwner [
 	<ignoreForCoverage>
 	<generated>
 	<container>
+	<derived>
 	^ templateOwner
 ]
 
@@ -66,7 +67,6 @@ FamixTTemplate >> templateUsers [
 
 	<ignoreForCoverage>
 	<generated>
-	<derived>
 	^ templateUsers
 ]
 

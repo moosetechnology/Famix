@@ -41,7 +41,6 @@ FamixTWithTraits >> traits [
 
 	<ignoreForCoverage>
 	<generated>
-	<derived>
 	^ traits
 ]
 

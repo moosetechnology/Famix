@@ -48,7 +48,6 @@ FamixTWithMethods >> methods [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Methods declared by this type.'>
-	<derived>
 	^ methods
 ]
 

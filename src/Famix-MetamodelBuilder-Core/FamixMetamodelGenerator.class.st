@@ -19,6 +19,11 @@ You should extend me and then redefine the methods:
 	-<> oneBelongsTo:
 	*-<> manyBelongTo:
 
+In one-to-one, one-to-many and many-to-one relations the one side is
+derived and the many side is stored (in source order), so ordered
+collections survive an export/import round trip.
+
+
 
 Once the metamodel is defined, use:
 	MyModelGenerator generate.

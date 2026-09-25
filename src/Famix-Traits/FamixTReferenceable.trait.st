@@ -53,7 +53,6 @@ FamixTReferenceable >> incomingReferences [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'References to this entity by other entities.'>
-	<derived>
 	^ incomingReferences
 ]
 

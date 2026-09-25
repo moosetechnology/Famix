@@ -50,7 +50,6 @@ FamixTTrait >> incomingTraitUsages [
 
 	<ignoreForCoverage>
 	<generated>
-	<derived>
 	^ incomingTraitUsages
 ]
 
@@ -69,6 +68,7 @@ FamixTTrait >> traitOwner [
 	<ignoreForCoverage>
 	<generated>
 	<container>
+	<derived>
 	^ traitOwner
 ]
 

@@ -41,6 +41,7 @@ FamixTTypeAlias >> aliasedType [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Points to the actual type.'>
+	<derived>
 	^ aliasedType
 ]
 

@@ -94,6 +94,7 @@ FamixTEnumValue >> parentEnum [
 	<generated>
 	<FMComment: 'The Enum declaring this value. It offers the implementation of belongsTo'>
 	<container>
+	<derived>
 	^ parentEnum
 ]
 

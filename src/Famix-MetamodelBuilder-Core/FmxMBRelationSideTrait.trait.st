@@ -118,7 +118,7 @@ FmxMBRelationSideTrait >> manyToOne: relationOrBehavior [
 	ownSide := self asRelationNamed: relationOrBehavior singularPropertyName.
 	oppositeSide := relationOrBehavior asRelationNamed: self pluralPropertyName.
 	oppositeSide many.
-	oppositeSide derived.
+	ownSide derived.
 	ownSide oppositeSide: oppositeSide.
 
 	self isRemote ifTrue: [ ownSide makeRemote ].
@@ -142,7 +142,7 @@ FmxMBRelationSideTrait >> oneToMany: relationOrBehavior [
 	ownSide := self asRelationNamed: relationOrBehavior pluralPropertyName.
 	oppositeSide := relationOrBehavior asRelationNamed: self singularPropertyName.
 	ownSide many.
-	ownSide derived.
+	oppositeSide derived.
 	ownSide oppositeSide: oppositeSide.
 
 	self isRemote ifTrue: [ ownSide makeRemote ].

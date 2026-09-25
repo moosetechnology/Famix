@@ -37,6 +37,7 @@ FamixTest4Room >> school [
 	<ignoreForCoverage>
 	<generated>
 	<container>
+	<derived>
 	^ school
 ]
 

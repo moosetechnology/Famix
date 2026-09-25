@@ -98,7 +98,6 @@ FamixTParametricEntity >> typeParameters [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The type parameters of this parametric entity. They can any type with the exception of primitive types'>
-	<derived>
 	^ typeParameters
 ]
 
