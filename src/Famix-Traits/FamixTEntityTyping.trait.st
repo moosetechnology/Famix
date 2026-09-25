@@ -70,7 +70,6 @@ FamixTEntityTyping >> typedEntity [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Entity deckaring the type.'>
-	<derived>
 	<source>
 	^ typedEntity
 ]

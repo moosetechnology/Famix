@@ -41,7 +41,6 @@ FamixTWithDereferencedInvocations >> dereferencedInvocations [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'List of invocations performed on BehaviouralEntities referenced by this entity'>
-	<derived>
 	^ dereferencedInvocations
 ]
 

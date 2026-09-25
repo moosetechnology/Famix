@@ -119,7 +119,6 @@ FamixTAssociation >> next [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Next association in an ordered collection of associations. Currently not supported by the Moose importer'>
-	<derived>
 	^ next
 ]
 

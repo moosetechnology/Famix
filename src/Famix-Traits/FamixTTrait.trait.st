@@ -50,7 +50,6 @@ FamixTTrait >> incomingTraitUsages [
 
 	<ignoreForCoverage>
 	<generated>
-	<derived>
 	^ incomingTraitUsages
 ]
 

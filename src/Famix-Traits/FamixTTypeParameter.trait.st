@@ -52,7 +52,6 @@ FamixTTypeParameter >> concretizations [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Known concretizations of this type parameter.'>
-	<derived>
 	^ concretizations
 ]
 

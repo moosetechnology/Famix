@@ -95,7 +95,6 @@ FamixTType >> incomingTypings [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Relations to the entities that have this as type.'>
-	<derived>
 	^ incomingTypings
 ]
 

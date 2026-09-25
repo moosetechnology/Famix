@@ -43,7 +43,6 @@ FamixTest8TResident >> outgoingResidences [
 
 	<ignoreForCoverage>
 	<generated>
-	<derived>
 	^ outgoingResidences
 ]
 

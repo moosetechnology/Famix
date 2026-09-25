@@ -52,7 +52,6 @@ FamixTWithTypeAliases >> typeAliases [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Aliases'>
-	<derived>
 	^ typeAliases
 ]
 

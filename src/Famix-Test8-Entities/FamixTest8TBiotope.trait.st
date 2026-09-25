@@ -43,7 +43,6 @@ FamixTest8TBiotope >> incomingResidences [
 
 	<ignoreForCoverage>
 	<generated>
-	<derived>
 	^ incomingResidences
 ]
 

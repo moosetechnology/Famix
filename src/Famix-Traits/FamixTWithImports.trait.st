@@ -43,7 +43,6 @@ FamixTWithImports >> imports [
 
 	<ignoreForCoverage>
 	<generated>
-	<derived>
 	^ imports
 ]
 

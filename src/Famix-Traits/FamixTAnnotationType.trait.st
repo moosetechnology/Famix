@@ -89,7 +89,6 @@ FamixTAnnotationType >> instances [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Annotations of this type'>
-	<derived>
 	^ instances
 ]
 

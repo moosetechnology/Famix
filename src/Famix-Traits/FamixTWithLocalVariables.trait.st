@@ -41,7 +41,6 @@ FamixTWithLocalVariables >> localVariables [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Variables locally defined by this behaviour.'>
-	<derived>
 	^ localVariables
 ]
 

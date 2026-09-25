@@ -50,7 +50,6 @@ FamixTestComposedCustomEntity2 >> c22s [
 
 	<ignoreForCoverage>
 	<generated>
-	<derived>
 	<FMProperty: #c22s type: #FamixTestComposed2CustomEntity2 opposite: #c2>
 	<multivalued>
 	^ self attributeAt: #c22s ifAbsentPut: [ FMMultivalueLink on: self opposite: #c2: ]
@@ -70,7 +69,6 @@ FamixTestComposedCustomEntity2 >> customEntities2 [
 
 	<ignoreForCoverage>
 	<generated>
-	<derived>
 	<FMProperty: #customEntities2 type: #FamixTestComposed1CustomEntity2 opposite: #customEntity2>
 	<multivalued>
 	^ self attributeAt: #customEntities2 ifAbsentPut: [ FMMultivalueLink on: self opposite: #customEntity2: ]

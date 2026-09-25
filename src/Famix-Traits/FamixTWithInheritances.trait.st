@@ -146,7 +146,6 @@ FamixTWithInheritances >> subInheritances [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Subinheritance relationships, i.e. known subclasses of this type.'>
-	<derived>
 	^ subInheritances
 ]
 
@@ -197,7 +196,6 @@ FamixTWithInheritances >> superInheritances [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Superinheritance relationships, i.e. known superclasses of this type.'>
-	<derived>
 	^ superInheritances
 ]
 

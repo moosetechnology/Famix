@@ -41,7 +41,6 @@ FamixTWithAttributes >> attributes [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'List of attributes declared by this type.'>
-	<derived>
 	^ attributes
 ]
 

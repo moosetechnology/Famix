@@ -41,7 +41,6 @@ FamixTWithEnumValues >> enumValues [
 
 	<ignoreForCoverage>
 	<generated>
-	<derived>
 	^ enumValues
 ]
 
