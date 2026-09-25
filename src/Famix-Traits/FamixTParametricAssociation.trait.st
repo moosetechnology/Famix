@@ -46,7 +46,6 @@ FamixTParametricAssociation >> concretizations [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The parameter concretizations associated with this association.'>
-	<derived>
 	^ concretizations
 ]
 

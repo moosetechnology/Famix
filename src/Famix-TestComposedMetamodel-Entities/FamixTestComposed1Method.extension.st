@@ -6,7 +6,6 @@ FamixTestComposed1Method >> standardEntity [
 
 	<ignoreForCoverage>
 	<generated>
-	<derived>
 	<FMProperty: #standardEntity type: #FamixTestComposedStandardEntity opposite: #method>
 	<package: #'Famix-TestComposedMetamodel-Entities'>
 	^ self attributeAt: #standardEntity ifAbsent: [ nil ]

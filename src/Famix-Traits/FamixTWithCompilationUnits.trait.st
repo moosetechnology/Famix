@@ -35,7 +35,6 @@ FamixTWithCompilationUnits >> compilationUnit [
 
 	<ignoreForCoverage>
 	<generated>
-	<derived>
 	^ compilationUnit
 ]
 

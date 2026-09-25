@@ -6,7 +6,6 @@ FamixTestComposed1CustomEntity4 >> c24s [
 
 	<ignoreForCoverage>
 	<generated>
-	<derived>
 	<FMProperty: #c24s type: #FamixTestComposed2CustomEntity4 opposite: #c14s>
 	<multivalued>
 	<package: #'Famix-TestComposedMetamodel-Entities'>

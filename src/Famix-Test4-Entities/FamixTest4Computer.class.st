@@ -37,7 +37,6 @@ FamixTest4Computer >> classroom [
 	<ignoreForCoverage>
 	<generated>
 	<container>
-	<derived>
 	^ classroom
 ]
 

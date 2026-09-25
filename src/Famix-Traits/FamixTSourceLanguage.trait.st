@@ -71,7 +71,6 @@ FamixTSourceLanguage >> sourcedEntities [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'References to the entities saying explicitly that are written in this language.'>
-	<derived>
 	^ sourcedEntities
 ]
 

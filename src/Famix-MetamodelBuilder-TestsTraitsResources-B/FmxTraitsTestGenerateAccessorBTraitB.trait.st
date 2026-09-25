@@ -19,7 +19,6 @@ FmxTraitsTestGenerateAccessorBTraitB >> relationToA [
 	"Relation named: #relationToA type: #FmxTraitsTestGenerateAccessorATraitA opposite: #relationToB"
 
 	<generated>
-	<derived>
 	<FMProperty: #relationToA type: #FmxTraitsTestGenerateAccessorATraitA opposite: #relationToB>
 	^ self attributeAt: #relationToA ifAbsent: [ nil ]
 ]

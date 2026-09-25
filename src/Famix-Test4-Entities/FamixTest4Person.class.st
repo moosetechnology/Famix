@@ -88,7 +88,6 @@ FamixTest4Person >> books [
 
 	<ignoreForCoverage>
 	<generated>
-	<derived>
 	^ books
 ]
 

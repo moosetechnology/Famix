@@ -130,7 +130,6 @@ FamixTSourceEntity >> sourceAnchor [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'SourceAnchor entity linking to the original source code for this entity'>
-	<derived>
 	^ sourceAnchor
 ]
 

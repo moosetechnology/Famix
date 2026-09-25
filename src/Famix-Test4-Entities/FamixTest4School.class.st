@@ -66,7 +66,6 @@ FamixTest4School >> principal [
 
 	<ignoreForCoverage>
 	<generated>
-	<derived>
 	^ principal
 ]
 
@@ -84,7 +83,6 @@ FamixTest4School >> rooms [
 
 	<ignoreForCoverage>
 	<generated>
-	<derived>
 	^ rooms
 ]
 
@@ -102,7 +100,6 @@ FamixTest4School >> students [
 
 	<ignoreForCoverage>
 	<generated>
-	<derived>
 	^ students
 ]
 
@@ -120,7 +117,6 @@ FamixTest4School >> teachers [
 
 	<ignoreForCoverage>
 	<generated>
-	<derived>
 	^ teachers
 ]
 

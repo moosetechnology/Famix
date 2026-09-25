@@ -68,7 +68,6 @@ FamixTest4Student >> teachers [
 
 	<ignoreForCoverage>
 	<generated>
-	<derived>
 	^ teachers
 ]
 

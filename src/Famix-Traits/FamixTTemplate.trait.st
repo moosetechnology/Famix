@@ -66,7 +66,6 @@ FamixTTemplate >> templateUsers [
 
 	<ignoreForCoverage>
 	<generated>
-	<derived>
 	^ templateUsers
 ]
 
