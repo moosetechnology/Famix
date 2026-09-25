@@ -3,10 +3,7 @@ test that when entities passed a scope, they reply their outgoing or incoming ac
 "
 Class {
 	#name : 'FamixDependencyDetectorTest',
-	#superclass : 'TestCase',
-	#instVars : [
-		'model'
-	],
+	#superclass : 'FamixAbstractExportTestCase',
 	#category : 'Famix-Test3-Tests',
 	#package : 'Famix-Test3-Tests'
 }
@@ -71,12 +68,13 @@ FamixDependencyDetectorTest >> p3 [
 
 { #category : 'running' }
 FamixDependencyDetectorTest >> setUp [
+
 	super setUp.
 	model := FamixTest3Model new.
 	1 to: 3 do: [ :number | self createTestEntities: number ].
-	FamixTest3Invocation source: self m1 target: {self m2} model: model.
-	FamixTest3Invocation source: self m2 target: {self m1} model: model.
-	FamixTest3Access source: self m1 target: self a3
+	FamixTest3Invocation source: self m1 target: { self m2 } model: model.
+	FamixTest3Invocation source: self m2 target: { self m1 } model: model.
+	FamixTest3Access source: self m1 target: self a3 model: model
 ]
 
 { #category : 'tests-clients' }

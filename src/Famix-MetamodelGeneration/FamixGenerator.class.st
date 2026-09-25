@@ -169,7 +169,13 @@ For each access in the source code, there is one famix access created even if it
 { #category : 'comments' }
 FamixGenerator >> commentForTAccessible [
 
-	^ ''
+	^ 'It corresponds to the target of an access.
+For example if the method foo accesses the instance variable x, there is an access with the following information:
+	(i) From: aFamixTMethod (foo)
+	(ii) To: aFamixTAttribute (x)
+	
+The variable x is accessible (FamixTAttribute uses FamixTAccessible).
+	'
 ]
 
 { #category : 'comments' }
@@ -327,7 +333,7 @@ FamixGenerator >> commentForTDeclaredException [
 { #category : 'comments' }
 FamixGenerator >> commentForTDefinedInModule [
 
-	^ ''
+	^ 'It corresponds to the entities defined in a module.'
 ]
 
 { #category : 'comments' }
@@ -393,13 +399,13 @@ FamixGenerator >> commentForTFileAnchor [
 { #category : 'comments' }
 FamixGenerator >> commentForTFileInclude [
 
-	^ ''
+	^ 'It corresponds to an entity that can include a file.'
 ]
 
 { #category : 'comments' }
 FamixGenerator >> commentForTFileNavigation [
 
-	^ ''
+	^ 'This trait enables to navigate into file by specifying start and end, column and line.'
 ]
 
 { #category : 'comments' }
@@ -457,19 +463,27 @@ FamixGenerator >> commentForTImplicitVariable [
 { #category : 'comments' }
 FamixGenerator >> commentForTIndexedFileNavigation [
 
-	^ ''
+	^ 'This trait enables to navigate into indexed file by specifying start and end positions.'
 ]
 
 { #category : 'comments' }
 FamixGenerator >> commentForTInheritance [
 
-	^ ''
+	^ 'This trait corresponds to the inheritance relation. For example, if class A inherits from class B, there is an inheritance between A (accessible through subclass) and B (accessible through superclass). '
 ]
 
 { #category : 'comments' }
 FamixGenerator >> commentForTInvocable [
 
-	^ ''
+	^ 'It corresponds to the candidates of an invocation.
+FamixTInvocation has:
+   (i)  sender: the behavioral entity that sends the message;
+   (ii) receiver: the structural entity (variable) that receives the message;
+   (iii) candidates: the list of potential behavioral entities that are actually being invoked. This is particularly useful for dynamic languages.
+
+Candidates use the trait TInvocable.
+
+'
 ]
 
 { #category : 'comments' }
@@ -490,7 +504,13 @@ will produce one invocation association from current method to a variable anObje
 { #category : 'comments' }
 FamixGenerator >> commentForTInvocationsReceiver [
 
-	^ ''
+	^ 'It corresponds to the entity that can be the receiver of an invocation.
+FamixTInvocation has:
+   (i)  sender: the behavioral entity that sends the message;
+   (ii) receiver: the structural entity (variable) that receives the message;
+   (iii) candidates: the list of potential behavioral entities that are actually being invoked. This is particularly useful for dynamic languages.
+
+'
 ]
 
 { #category : 'comments' }
@@ -523,7 +543,7 @@ FamixGenerator >> commentForTModule [
 { #category : 'comments' }
 FamixGenerator >> commentForTNamed [
 
-	^ ''
+	^ 'It corresponds to entities that have a name.'
 ]
 
 { #category : 'comments' }
@@ -547,7 +567,7 @@ Java extractors map Java packages to FamixTNamespaces. They can also mirror the 
 { #category : 'comments' }
 FamixGenerator >> commentForTPackageable [
 
-	^ ''
+	^ 'It corresponds to entities that can be gathered in a package (e.g., class and package).'
 ]
 
 { #category : 'comments' }
@@ -733,27 +753,15 @@ FamixGenerator >> commentForTStructuralEntity [
 ]
 
 { #category : 'comments' }
-FamixGenerator >> commentForTSub [
-
-	^ ''
-]
-
-{ #category : 'comments' }
-FamixGenerator >> commentForTSuper [
-
-	^ ''
-]
-
-{ #category : 'comments' }
 FamixGenerator >> commentForTTemplate [
 
-	^ ''
+	^ 'Corresponds to C++ templates aka generics.'
 ]
 
 { #category : 'comments' }
 FamixGenerator >> commentForTTemplateUser [
 
-	^ ''
+	^ 'It corresponds to the user of a template.'
 ]
 
 { #category : 'comments' }
@@ -826,85 +834,79 @@ FamixGenerator >> commentForTTypedStructure [
 { #category : 'comments' }
 FamixGenerator >> commentForTWithAccesses [
 
-	^ ''
+	^ 'It corresponds to entities that can access to accessible entities (e.g., instance variables).'
 ]
 
 { #category : 'comments' }
 FamixGenerator >> commentForTWithAnnotationInstances [
 
-	^ ''
+	^ 'It corresponds to entities that can be annotated with annotations.'
 ]
 
 { #category : 'comments' }
 FamixGenerator >> commentForTWithAnnotationTypes [
 
-	^ ''
+	^ 'It corresponds to entities that can be annotated with annotations.'
 ]
 
 { #category : 'comments' }
 FamixGenerator >> commentForTWithAttributes [
 
-	^ ''
+	^ 'It corresponds to entities that have attributes (e.g., classes have instance variables that correspond to attributes).'
 ]
 
 { #category : 'comments' }
 FamixGenerator >> commentForTWithCaughtExceptions [
 
-	^ ''
+	^ 'It corresponds to entities that catch an exception.'
 ]
 
 { #category : 'comments' }
 FamixGenerator >> commentForTWithClasses [
 
-	^ ''
+	^ 'It corresponds to entities that can include classes (e.g., packages and classes in some languages).'
 ]
 
 { #category : 'comments' }
 FamixGenerator >> commentForTWithComments [
 
-	^ ''
-]
-
-{ #category : 'comments' }
-FamixGenerator >> commentForTWithDeclaredExceptions [
-
-	^ ''
+	^ 'It corresponds to entities that can be linked to a comment (e.g., methods and classes).'
 ]
 
 { #category : 'comments' }
 FamixGenerator >> commentForTWithDereferencedInvocations [
 
-	^ ''
+	^ 'It corresponds to entities that can dereference invocations.'
 ]
 
 { #category : 'comments' }
 FamixGenerator >> commentForTWithEnumValues [
 
-	^ ''
+	^ 'It corresponds to entities that have enumeration values (i.e., enumerations).'
 ]
 
 { #category : 'comments' }
 FamixGenerator >> commentForTWithExceptions [
 
-	^ ''
+	^ 'It corresponds to entities that can manipulate exceptions (catch, throw, etc.).'
 ]
 
 { #category : 'comments' }
 FamixGenerator >> commentForTWithFileIncludes [
 
-	^ ''
+	^ 'It corresponds to entities that can include files.'
 ]
 
 { #category : 'comments' }
 FamixGenerator >> commentForTWithFiles [
 
-	^ ''
+	^ 'It corresponds to entities that can include files, such as modules.'
 ]
 
 { #category : 'comments' }
 FamixGenerator >> commentForTWithFunctions [
 
-	^ ''
+	^ 'It corresponds to entities that can contain functions.'
 ]
 
 { #category : 'comments' }
@@ -916,19 +918,19 @@ FamixGenerator >> commentForTWithGlobalVariables [
 { #category : 'comments' }
 FamixGenerator >> commentForTWithImplicitVariables [
 
-	^ ''
+	^ 'It corresponds to entities that can contain implicite variables (methods).'
 ]
 
 { #category : 'comments' }
 FamixGenerator >> commentForTWithInheritances [
 
-	^ ''
+	^ 'It corresponds to entities that can inherit from other entities.'
 ]
 
 { #category : 'comments' }
 FamixGenerator >> commentForTWithInvocations [
 
-	^ ''
+	^ 'It corresponds to entities that can contain invocations. An example is a method that can contain invocation to other methods.'
 ]
 
 { #category : 'comments' }
@@ -940,73 +942,73 @@ FamixGenerator >> commentForTWithLambdas [
 { #category : 'comments' }
 FamixGenerator >> commentForTWithLocalVariables [
 
-	^ ''
+	^ 'It corresponds to entities that can contain local variables.'
 ]
 
 { #category : 'comments' }
 FamixGenerator >> commentForTWithMethods [
 
-	^ ''
+	^ 'It corresponds to entities that can contain methods (e.g., classes).'
 ]
 
 { #category : 'comments' }
 FamixGenerator >> commentForTWithPackages [
 
-	^ ''
+	^ 'It corresponds to entities that can contain packages (e.g., packages).'
 ]
 
 { #category : 'comments' }
 FamixGenerator >> commentForTWithParameters [
 
-	^ ''
+	^ 'It corresponds to entities that can have parameters (e.g., method parameters).'
 ]
 
 { #category : 'comments' }
 FamixGenerator >> commentForTWithReferences [
 
-	^ ''
+	^ 'It corresponds to entities that can contain references to other entities.'
 ]
 
 { #category : 'comments' }
 FamixGenerator >> commentForTWithSourceLanguage [
 
-	^ ''
+	^ 'It correspond to entities that contain information about the source language.'
 ]
 
 { #category : 'comments' }
 FamixGenerator >> commentForTWithTemplates [
 
-	^ ''
+	^ 'It corresponds to entities that can have templates.'
 ]
 
 { #category : 'comments' }
 FamixGenerator >> commentForTWithThrownExceptions [
 
-	^ ''
+	^ 'It corresponds to entities that can list exceptions that may be thrown.'
 ]
 
 { #category : 'comments' }
 FamixGenerator >> commentForTWithTraits [
 
-	^ ''
+	^ 'It corresponds to entities that can use traits.'
 ]
 
 { #category : 'comments' }
 FamixGenerator >> commentForTWithTypeAliases [
 
-	^ ''
+	^ 'It corresponds to entities that have type aliases.'
 ]
 
 { #category : 'comments' }
 FamixGenerator >> commentForTWithTypedStructures [
 
-	^ ''
+	^ 'It corresponds to entities that can contain type structures.'
 ]
 
 { #category : 'comments' }
 FamixGenerator >> commentForTWithTypes [
 
-	^ ''
+	^ 'It corresponds to entities that can contain types. An example is packages that can contain types such as classes, exceptions, or enumeration.'
 ]
 
 { #category : 'definition' }
