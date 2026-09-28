@@ -41,7 +41,6 @@ FamixTWithReferences >> outgoingReferences [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'References from this entity to other entities.'>
-	<derived>
 	^ outgoingReferences
 ]
 

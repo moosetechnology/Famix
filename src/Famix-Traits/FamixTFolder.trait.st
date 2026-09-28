@@ -89,7 +89,6 @@ FamixTFolder >> childrenFileSystemEntities [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'List of entities contained in this folder.'>
-	<derived>
 	^ childrenFileSystemEntities
 ]
 

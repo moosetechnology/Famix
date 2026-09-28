@@ -27,7 +27,6 @@ FamixTestComposed1CustomEntity3 >> customEntities3 [
 
 	<ignoreForCoverage>
 	<generated>
-	<derived>
 	<FMProperty: #customEntities3 type: #FamixTestComposedCustomEntity3 opposite: #customEntity3>
 	<multivalued>
 	<package: #'Famix-TestComposedMetamodel-Entities'>

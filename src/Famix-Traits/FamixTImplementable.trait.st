@@ -46,7 +46,6 @@ FamixTImplementable >> implementations [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Implementation relationships.'>
-	<derived>
 	^ implementations
 ]
 

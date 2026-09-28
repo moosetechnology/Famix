@@ -6,7 +6,6 @@ FamixTestComposed1CustomEntity5 >> associations [
 
 	<ignoreForCoverage>
 	<generated>
-	<derived>
 	<FMProperty: #associations type: #FamixTestComposedAssociation opposite: #c15>
 	<multivalued>
 	<package: #'Famix-TestComposedMetamodel-Entities'>

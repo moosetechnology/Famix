@@ -83,7 +83,6 @@ FamixTShadowable >> shadowingEntities [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Entities shadowing me in my defining scope.'>
-	<derived>
 	^ shadowingEntities
 ]
 

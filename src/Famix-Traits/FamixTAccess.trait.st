@@ -98,7 +98,6 @@ FamixTAccess >> candidates [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Variables that cas be the accessed variable. to-side of the association. Most of the time it will be only one variable, but some languages might have candidates such as Python.'>
-	<derived>
 	<target>
 	^ candidates
 ]

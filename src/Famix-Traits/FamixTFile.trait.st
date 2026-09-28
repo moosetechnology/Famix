@@ -77,7 +77,6 @@ FamixTFile >> entities [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'List of entities defined in the file'>
-	<derived>
 	^ entities
 ]
 

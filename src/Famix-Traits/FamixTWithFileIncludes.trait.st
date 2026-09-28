@@ -50,7 +50,6 @@ FamixTWithFileIncludes >> incomingIncludeRelations [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The include entities that have this file as a target.'>
-	<derived>
 	^ incomingIncludeRelations
 ]
 
@@ -69,7 +68,6 @@ FamixTWithFileIncludes >> outgoingIncludeRelations [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The include entities that have this file as a source.'>
-	<derived>
 	^ outgoingIncludeRelations
 ]
 

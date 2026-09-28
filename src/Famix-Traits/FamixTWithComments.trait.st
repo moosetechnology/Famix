@@ -43,7 +43,6 @@ FamixTWithComments >> comments [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'List of comments for the entity'>
-	<derived>
 	^ comments
 ]
 

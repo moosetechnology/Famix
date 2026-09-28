@@ -53,7 +53,6 @@ FamixTModule >> moduleEntities [
 
 	<ignoreForCoverage>
 	<generated>
-	<derived>
 	^ moduleEntities
 ]
 

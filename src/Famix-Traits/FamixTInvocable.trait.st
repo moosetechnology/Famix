@@ -41,7 +41,6 @@ FamixTInvocable >> incomingInvocations [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Incoming invocations from other behaviours computed by the candidate operator.'>
-	<derived>
 	^ incomingInvocations
 ]
 
