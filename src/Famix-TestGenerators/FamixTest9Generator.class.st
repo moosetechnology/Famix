@@ -3,7 +3,8 @@ Class {
 	#superclass : 'FamixBasicInfrastructureGenerator',
 	#instVars : [
 		'superclass',
-		'subclass'
+		'subclass',
+		'myClass'
 	],
 	#category : 'Famix-TestGenerators',
 	#package : 'Famix-TestGenerators'
@@ -32,13 +33,20 @@ FamixTest9Generator class >> shouldBeUpToDateInLatestMoose [
 FamixTest9Generator >> defineClasses [
 
 	superclass := self builder newClassNamed: #MySuperclass.
-	subclass := self builder newClassNamed: #MySubclass
+	subclass := self builder newClassNamed: #MySubclass.
+	myClass := self builder newClassNamed: #MyClass
 ]
 
 { #category : 'definition' }
 FamixTest9Generator >> defineHierarchy [
 
 	subclass --|> superclass
+]
+
+{ #category : 'definition' }
+FamixTest9Generator >> defineProperties [
+
+	myClass property: #isTasty type: #Boolean
 ]
 
 { #category : 'definition' }

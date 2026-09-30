@@ -18,6 +18,13 @@ FamixTest9BisGenerator class >> prefix [
 ]
 
 { #category : 'definition' }
+FamixTest9BisGenerator >> defineProperties [
+	"Here everything is the same except for the default value of the property"
+
+	myClass property: #isTasty type: #Boolean defaultValue: true
+]
+
+{ #category : 'definition' }
 FamixTest9BisGenerator >> defineRelations [
 
 	"Here everything is the same except for the entities on the relation"
