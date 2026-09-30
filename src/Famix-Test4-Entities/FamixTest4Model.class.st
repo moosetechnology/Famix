@@ -8,6 +8,14 @@ Class {
 	#tag : 'Model'
 }
 
+{ #category : 'accessing' }
+FamixTest4Model class >> allSubmetamodelsPackagesNames [
+
+	<ignoreForCoverage>
+	<generated>
+	^ #(#'Moose-Query' #'Famix-Traits')
+]
+
 { #category : 'meta' }
 FamixTest4Model class >> annotation [
 

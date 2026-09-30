@@ -7,6 +7,11 @@
 |---|
 | `computer` | `FamixTest4Classroom` | `classroom` | `FamixTest4Computer` | |
 
+### Incoming dependencies
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `incomingClassSessions` | `FamixTest4TClassroom` | `classroom` | `FamixTest4ClassSession` | |
+
 
 ## Properties
 ======================
@@ -19,6 +24,8 @@
 Class {
 	#name : 'FamixTest4Classroom',
 	#superclass : 'FamixTest4Room',
+	#traits : 'FamixTest4TClassroom',
+	#classTraits : 'FamixTest4TClassroom classTrait',
 	#instVars : [
 		'#computer => FMOne type: #FamixTest4Computer opposite: #classroom',
 		'#hasProjector => FMProperty defaultValue: false'

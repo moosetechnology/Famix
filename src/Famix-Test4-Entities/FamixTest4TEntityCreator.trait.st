@@ -37,6 +37,14 @@ FamixTest4TEntityCreator >> newCafeteria [
 ]
 
 { #category : 'entity creation' }
+FamixTest4TEntityCreator >> newClassSession [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self add: FamixTest4ClassSession new
+]
+
+{ #category : 'entity creation' }
 FamixTest4TEntityCreator >> newClassroom [
 
 	<ignoreForCoverage>

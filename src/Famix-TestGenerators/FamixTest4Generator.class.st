@@ -15,7 +15,10 @@ Class {
 		'cafeteria',
 		'restroom',
 		'computer',
-		'desk'
+		'desk',
+		'tTeacher',
+		'tClassroom',
+		'classSession'
 	],
 	#category : 'Famix-TestGenerators',
 	#package : 'Famix-TestGenerators'
@@ -31,6 +34,26 @@ FamixTest4Generator class >> packageName [
 FamixTest4Generator class >> prefix [
 
 	^ #'FamixTest4'
+]
+
+{ #category : 'accessing' }
+FamixTest4Generator class >> submetamodels [
+
+	^ { FamixGenerator }
+]
+
+{ #category : 'definition' }
+FamixTest4Generator >> defineAssociations [
+	"The source: and target: defaults are used on purpose: they are the only variants that
+	name the opposite properties outgoing<ClassName>s and incoming<ClassName>s. The
+	one-to-one and one-to-many variants do not pluralize the association name."
+
+	super defineAssociations.
+
+	classSession := (self builder association: #ClassSession)
+		                source: tTeacher;
+		                target: tClassroom;
+		                yourself
 ]
 
 { #category : 'definition' }
@@ -52,13 +75,18 @@ FamixTest4Generator >> defineClasses [
 
 { #category : 'definition' }
 FamixTest4Generator >> defineHierarchy [
+
 	super defineHierarchy.
 
 	principal --|> person.
 	student --|> person.
 	teacher --|> person.
 	classroom --|> room.
-	cafeteria --|> room
+	cafeteria --|> room.
+
+	"TTeacher -> ClassSession -> TClassroom"
+	teacher --|> tTeacher.
+	classroom --|> tClassroom
 ]
 
 { #category : 'definition' }
@@ -95,4 +123,14 @@ FamixTest4Generator >> defineRelations [
 	student *-* teacher.
 	school <>-* room.
 	classroom <>- computer
+]
+
+{ #category : 'definition' }
+FamixTest4Generator >> defineTraits [
+	"TTeacher -> ClassSession -> TClassroom"
+
+	super defineTraits.
+
+	tTeacher := self builder newTraitNamed: #TTeacher.
+	tClassroom := self builder newTraitNamed: #TClassroom
 ]

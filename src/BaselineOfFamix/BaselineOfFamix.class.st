@@ -131,6 +131,7 @@ BaselineOfFamix >> packageRepositoryURL [
 
 { #category : 'baselines' }
 BaselineOfFamix >> packages: spec [
+
 	spec
 		package: 'Moose-Query' with: [ spec requires: #( 'Fame' 'DeepTraverser' 'CollectionExtensions' ) ];
 		package: 'Moose-Core' with: [ spec requires: #( 'Fame' 'Moose-Query' ) ];
@@ -155,7 +156,7 @@ BaselineOfFamix >> packages: spec [
 		package: 'Famix-Java-Generator' with: [ spec requires: #( 'Basic' 'Famix-Visitor-Generation' ) ];
 		package: 'Famix-Java-Entities' with: [ spec requires: #( 'BasicTraits' ) ];
 		package: 'Famix-Java-Fusionner' with: [ spec requires: #( 'Famix-Java-Entities' ) ];
-		package: 'Famix-Java-Tests' with: [ spec requires: #( 'Famix-Java-Entities' 'Famix-Java-Generator' 'Famix-Tests') ];
+		package: 'Famix-Java-Tests' with: [ spec requires: #( 'Famix-Java-Entities' 'Famix-Java-Generator' 'Famix-Tests' ) ];
 		package: 'Moose-TestResources-LAN';
 		package: 'Moose-TestResources-LCOM';
 		package: 'Moose-Query-Test' with: [ spec requires: #( 'Moose-Query' 'Famix-Java-Entities' ) ];
@@ -174,15 +175,13 @@ BaselineOfFamix >> packages: spec [
 		package: 'Famix-MetamodelBuilder-TestsTraitsResources-A' with: [ spec requires: #( 'Basic' ) ];
 		package: 'Famix-MetamodelBuilder-TestsTraitsResources-B' with: [ spec requires: #( 'Basic' 'Famix-MetamodelBuilder-TestsTraitsResources-A' ) ];
 		package: 'Famix-Test1-Entities' with: [ spec requires: #( 'BasicTraits' ) ];
-		package: 'Famix-Test1-Tests' with: [ spec requires: #( 'Famix-Test1-Entities' 'Famix-Tests') ];
+		package: 'Famix-Test1-Tests' with: [ spec requires: #( 'Famix-Test1-Entities' 'Famix-Tests' ) ];
 		package: 'Famix-Test2-Entities' with: [ spec requires: #( 'BasicTraits' ) ];
-		package: 'Famix-Test2-Tests' with: [ spec requires: #( 'Famix-Test2-Entities' 'Famix-Tests') ];
+		package: 'Famix-Test2-Tests' with: [ spec requires: #( 'Famix-Test2-Entities' 'Famix-Tests' ) ];
 		package: 'Famix-Test3-Entities' with: [ spec requires: #( 'BasicTraits' ) ];
-		package: 'Famix-Test3-Tests' with: [ spec requires: #( 'Famix-Test3-Entities' 'Famix-Tests') ];
+		package: 'Famix-Test3-Tests' with: [ spec requires: #( 'Famix-Test3-Entities' 'Famix-Tests' ) ];
 		package: 'Famix-Test4-Entities' with: [ spec requires: #( 'BasicTraits' ) ];
-		package: 'Famix-Test4-Tests' with: [ spec requires: #( 'Famix-Test4-Entities' 'Famix-Tests') ];
-		package: 'Famix-Test8-Entities' with: [ spec requires: #( 'BasicTraits' ) ];
-		package: 'Famix-Test8-Tests' with: [ spec requires: #( 'Famix-Test8-Entities' 'Famix-Tests' ) ];
+		package: 'Famix-Test4-Tests' with: [ spec requires: #( 'Famix-Test4-Entities' 'Famix-Tests' ) ];
 		package: 'Famix-Test9-Tests' with: [ spec requires: #( 'Famix-TestGenerators' ) ];
 		package: 'Famix-TestComposedSubmetamodel1-Entities' with: [ spec requires: #( 'BasicTraits' ) ];
 		package: 'Famix-TestComposedSubmetamodel2-Entities' with: [ spec requires: #( 'BasicTraits' ) ];
@@ -195,7 +194,6 @@ BaselineOfFamix >> packages: spec [
 		package: 'Famix-UMLDocumentor' with: [ spec requires: #( 'Core' ) ];
 		package: 'Famix-UMLDocumentor-Tests' with: [ spec requires: #( 'Famix-UMLDocumentor' 'FamixDocumentor-TestMetaModel' ) ];
 		package: 'FamixDocumentor-TestMetaModel'
-
 ]
 
 { #category : 'accessing' }

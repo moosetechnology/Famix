@@ -44,6 +44,14 @@ FamixTest4Entity class >> metamodel [
 	^ FamixTest4Model metamodel
 ]
 
+{ #category : 'testing' }
+FamixTest4Entity >> isAssociation [
+
+	<ignoreForCoverage>
+	<generated>
+	^ false
+]
+
 { #category : 'accessing' }
 FamixTest4Entity >> name [
 

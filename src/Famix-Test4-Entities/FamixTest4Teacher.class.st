@@ -7,6 +7,11 @@
 |---|
 | `school` | `FamixTest4Teacher` | `teachers` | `FamixTest4School` | |
 
+### Outgoing dependencies
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `outgoingClassSessions` | `FamixTest4TTeacher` | `teacher` | `FamixTest4ClassSession` | |
+
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
@@ -18,6 +23,8 @@
 Class {
 	#name : 'FamixTest4Teacher',
 	#superclass : 'FamixTest4Person',
+	#traits : 'FamixTest4TTeacher',
+	#classTraits : 'FamixTest4TTeacher classTrait',
 	#instVars : [
 		'#school => FMOne type: #FamixTest4School opposite: #teachers',
 		'#students => FMMany type: #FamixTest4Student opposite: #teachers'
