@@ -21,14 +21,16 @@ Trait {
 { #category : #meta }
 FamixTest8TResident classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TResident super: #Object>
 	<package: #'Famix-Test8-Entities'>
 	<generated>
-	^ self
 ]
 
 { #category : #adding }
 FamixTest8TResident >> addOutgoingResidence: anObject [
+
+	<ignoreForCoverage>
 	<generated>
 	^ self outgoingResidences add: anObject
 ]
@@ -37,14 +39,15 @@ FamixTest8TResident >> addOutgoingResidence: anObject [
 FamixTest8TResident >> outgoingResidences [
 	"Relation named: #outgoingResidences type: #FamixTest8Residence opposite: #resident"
 
+	<ignoreForCoverage>
 	<generated>
-	<derived>
 	^ outgoingResidences
 ]
 
 { #category : #accessing }
 FamixTest8TResident >> outgoingResidences: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	outgoingResidences value: anObject
 ]

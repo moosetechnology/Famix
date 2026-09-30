@@ -7,15 +7,19 @@
 |---|
 | `parentBehaviouralEntity` | `FamixTImplicitVariable` | `implicitVariables` | `FamixTWithImplicitVariables` | The behaviour containing this implicit variable. belongsTo implementation|
 
+### Outgoing dependencies
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `typing` | `FamixTTypedEntity` | `typedEntity` | `FamixTEntityTyping` | Association linking this entity to its declared type.|
+
 ### Incoming dependencies
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `incomingAccesses` | `FamixTAccessible` | `variable` | `FamixTAccess` | All Famix accesses pointing to this structural entity|
+| `incomingAccesses` | `FamixTAccessible` | `candidates` | `FamixTAccess` | All Famix accesses pointing to this structural entity|
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `declaredType` | `FamixTTypedEntity` | `typedEntities` | `FamixTType` | Type of the entity, if any|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
 
 
@@ -39,17 +43,16 @@ Class {
 { #category : #meta }
 FamixJavaImplicitVariable class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #ImplicitVariable super: #FamixJavaVariable>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^ self
 ]
 
-{ #category : #visitor }
-FamixJavaImplicitVariable >> accept: aVisitor [
+{ #category : #testing }
+FamixJavaImplicitVariable >> isSelf [
 
-	<generated>
-	^ aVisitor visitFamixJavaImplicitVariable: self
+	^ self name = 'this'
 ]
 
 { #category : #printing }

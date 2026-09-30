@@ -12,15 +12,16 @@ Trait {
 { #category : #meta }
 FamixTest8TEntityCreator classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TEntityCreator super: #Object>
 	<package: #'Famix-Test8-Entities'>
 	<generated>
-	^ self
 ]
 
 { #category : #'entity creation' }
 FamixTest8TEntityCreator >> newAnimal [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTest8Animal new
 ]
@@ -28,6 +29,7 @@ FamixTest8TEntityCreator >> newAnimal [
 { #category : #'entity creation' }
 FamixTest8TEntityCreator >> newBacteria [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTest8Bacteria new
 ]
@@ -35,6 +37,7 @@ FamixTest8TEntityCreator >> newBacteria [
 { #category : #'entity creation' }
 FamixTest8TEntityCreator >> newBiotope [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTest8Biotope new
 ]
@@ -42,6 +45,7 @@ FamixTest8TEntityCreator >> newBiotope [
 { #category : #'entity creation' }
 FamixTest8TEntityCreator >> newInfection [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTest8Infection new
 ]
@@ -49,6 +53,7 @@ FamixTest8TEntityCreator >> newInfection [
 { #category : #'entity creation' }
 FamixTest8TEntityCreator >> newLivingBeing [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTest8LivingBeing new
 ]
@@ -56,6 +61,7 @@ FamixTest8TEntityCreator >> newLivingBeing [
 { #category : #'entity creation' }
 FamixTest8TEntityCreator >> newPlant [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTest8Plant new
 ]
@@ -63,6 +69,7 @@ FamixTest8TEntityCreator >> newPlant [
 { #category : #'entity creation' }
 FamixTest8TEntityCreator >> newResidence [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTest8Residence new
 ]
@@ -70,6 +77,7 @@ FamixTest8TEntityCreator >> newResidence [
 { #category : #'entity creation' }
 FamixTest8TEntityCreator >> newVirus [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTest8Virus new
 ]

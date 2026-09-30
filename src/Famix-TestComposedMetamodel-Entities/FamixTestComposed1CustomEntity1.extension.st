@@ -1,19 +1,23 @@
 Extension { #name : #FamixTestComposed1CustomEntity1 }
 
-{ #category : #'*Famix-TestComposedMetamodel-Entities-accessing' }
+{ #category : #'*Famix-TestComposedMetamodel-Entities' }
 FamixTestComposed1CustomEntity1 >> c21 [
 	"Relation named: #c21 type: #FamixTestComposed2CustomEntity1 opposite: #c11"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMProperty: #c21 type: #FamixTestComposed2CustomEntity1 opposite: #c11>
 	<package: #'Famix-TestComposedMetamodel-Entities'>
 	^ self attributeAt: #c21 ifAbsent: [ nil ]
 ]
 
-{ #category : #'*Famix-TestComposedMetamodel-Entities-accessing' }
+{ #category : #'*Famix-TestComposedMetamodel-Entities' }
 FamixTestComposed1CustomEntity1 >> c21: anObject [
 
+	<ignoreForCoverage>
 	<generated>
+	<package: #'Famix-TestComposedMetamodel-Entities'>
+
 	(self attributeAt: #c21 ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self c21.
@@ -24,22 +28,25 @@ FamixTestComposed1CustomEntity1 >> c21: anObject [
 		anObject c11: self ]
 ]
 
-{ #category : #'*Famix-TestComposedMetamodel-Entities-accessing' }
+{ #category : #'*Famix-TestComposedMetamodel-Entities' }
 FamixTestComposed1CustomEntity1 >> customEntity1 [
 	"Relation named: #customEntity1 type: #FamixTestComposedCustomEntity1 opposite: #customEntity1"
 
+	<ignoreForCoverage>
 	<generated>
 	<container>
-	<derived>
 	<FMProperty: #customEntity1 type: #FamixTestComposedCustomEntity1 opposite: #customEntity1>
 	<package: #'Famix-TestComposedMetamodel-Entities'>
 	^ self attributeAt: #customEntity1 ifAbsent: [ nil ]
 ]
 
-{ #category : #'*Famix-TestComposedMetamodel-Entities-accessing' }
+{ #category : #'*Famix-TestComposedMetamodel-Entities' }
 FamixTestComposed1CustomEntity1 >> customEntity1: anObject [
 
+	<ignoreForCoverage>
 	<generated>
+	<package: #'Famix-TestComposedMetamodel-Entities'>
+
 	(self attributeAt: #customEntity1 ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self customEntity1.

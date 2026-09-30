@@ -26,8 +26,8 @@ Class {
 { #category : #meta }
 FamixTest6Comment class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Comment super: #FamixTest6SourcedEntity>
 	<package: #'Famix-Test6-Entities'>
 	<generated>
-	^ self
 ]

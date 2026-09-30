@@ -21,17 +21,10 @@ Trait {
 { #category : #meta }
 FamixTWithTypes classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TWithTypes super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : #visitor }
-FamixTWithTypes >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTWithTypes: self
 ]
 
 { #category : #adding }
@@ -62,16 +55,17 @@ FamixTWithTypes >> allRecursiveTypesDo: aBlock [
 FamixTWithTypes >> types [
 	"Relation named: #types type: #FamixTType opposite: #typeContainer"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Types contained (declared) in this entity, if any.
 #types is declared in ContainerEntity because different kinds of container can embed types. Types are usually contained in a Famix.Namespace. But types can also be contained in a Famix.Class or Famix.Method (in Java with inner classes for example). Famix.Function can also contain some types such as structs.'>
-	<derived>
 	^ types
 ]
 
 { #category : #accessing }
 FamixTWithTypes >> types: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	types value: anObject
 ]

@@ -26,8 +26,8 @@ Class {
 { #category : #meta }
 FamixTest3PrimitiveType class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #PrimitiveType super: #FamixTest3Type>
 	<package: #'Famix-Test3-Entities'>
 	<generated>
-	^ self
 ]

@@ -1,6 +1,8 @@
 "
 This class is used to choose the entities to be imported when loading a model from file.
 It is used by `MiImportingContextPresenter` in a `MiImportModelFromFileDialog` to import a FamixTest1Model.
+
+
 "
 Class {
 	#name : #FamixTest1ImportingContext,
@@ -11,6 +13,7 @@ Class {
 { #category : #accessing }
 FamixTest1ImportingContext class >> importedMetamodel [
 
+	<ignoreForCoverage>
 	<generated>
 	^ FamixTest1Model metamodel
 ]
@@ -18,6 +21,7 @@ FamixTest1ImportingContext class >> importedMetamodel [
 { #category : #importing }
 FamixTest1ImportingContext >> importAssociation [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importAssociation: (self class fm3ClassNamed: #Association)
 ]
@@ -25,13 +29,23 @@ FamixTest1ImportingContext >> importAssociation [
 { #category : #importing }
 FamixTest1ImportingContext >> importAttribute [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #Attribute)
 ]
 
 { #category : #importing }
+FamixTest1ImportingContext >> importBytesFileAnchor [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self importConcreteEntity: (self class fm3ClassNamed: #BytesFileAnchor)
+]
+
+{ #category : #importing }
 FamixTest1ImportingContext >> importClass [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #Class)
 ]
@@ -39,6 +53,7 @@ FamixTest1ImportingContext >> importClass [
 { #category : #importing }
 FamixTest1ImportingContext >> importComment [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #Comment)
 ]
@@ -46,6 +61,7 @@ FamixTest1ImportingContext >> importComment [
 { #category : #importing }
 FamixTest1ImportingContext >> importFile [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #File)
 ]
@@ -53,6 +69,7 @@ FamixTest1ImportingContext >> importFile [
 { #category : #importing }
 FamixTest1ImportingContext >> importFileAnchor [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #FileAnchor)
 ]
@@ -60,6 +77,7 @@ FamixTest1ImportingContext >> importFileAnchor [
 { #category : #importing }
 FamixTest1ImportingContext >> importFolder [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #Folder)
 ]
@@ -67,6 +85,7 @@ FamixTest1ImportingContext >> importFolder [
 { #category : #importing }
 FamixTest1ImportingContext >> importIndexedFileAnchor [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #IndexedFileAnchor)
 ]
@@ -74,6 +93,7 @@ FamixTest1ImportingContext >> importIndexedFileAnchor [
 { #category : #importing }
 FamixTest1ImportingContext >> importMethod [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #Method)
 ]
@@ -81,6 +101,7 @@ FamixTest1ImportingContext >> importMethod [
 { #category : #importing }
 FamixTest1ImportingContext >> importMultipleFileAnchor [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #MultipleFileAnchor)
 ]
@@ -88,6 +109,7 @@ FamixTest1ImportingContext >> importMultipleFileAnchor [
 { #category : #importing }
 FamixTest1ImportingContext >> importSourceLanguage [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #SourceLanguage)
 ]
@@ -95,6 +117,7 @@ FamixTest1ImportingContext >> importSourceLanguage [
 { #category : #importing }
 FamixTest1ImportingContext >> importSourceTextAnchor [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #SourceTextAnchor)
 ]
@@ -102,6 +125,7 @@ FamixTest1ImportingContext >> importSourceTextAnchor [
 { #category : #testing }
 FamixTest1ImportingContext >> shouldImportAssociation [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #Association
 ]
@@ -109,13 +133,23 @@ FamixTest1ImportingContext >> shouldImportAssociation [
 { #category : #testing }
 FamixTest1ImportingContext >> shouldImportAttribute [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #Attribute
 ]
 
 { #category : #testing }
+FamixTest1ImportingContext >> shouldImportBytesFileAnchor [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self shouldImport: #BytesFileAnchor
+]
+
+{ #category : #testing }
 FamixTest1ImportingContext >> shouldImportClass [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #Class
 ]
@@ -123,6 +157,7 @@ FamixTest1ImportingContext >> shouldImportClass [
 { #category : #testing }
 FamixTest1ImportingContext >> shouldImportComment [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #Comment
 ]
@@ -130,6 +165,7 @@ FamixTest1ImportingContext >> shouldImportComment [
 { #category : #testing }
 FamixTest1ImportingContext >> shouldImportFile [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #File
 ]
@@ -137,6 +173,7 @@ FamixTest1ImportingContext >> shouldImportFile [
 { #category : #testing }
 FamixTest1ImportingContext >> shouldImportFileAnchor [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #FileAnchor
 ]
@@ -144,6 +181,7 @@ FamixTest1ImportingContext >> shouldImportFileAnchor [
 { #category : #testing }
 FamixTest1ImportingContext >> shouldImportFolder [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #Folder
 ]
@@ -151,6 +189,7 @@ FamixTest1ImportingContext >> shouldImportFolder [
 { #category : #testing }
 FamixTest1ImportingContext >> shouldImportIndexedFileAnchor [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #IndexedFileAnchor
 ]
@@ -158,6 +197,7 @@ FamixTest1ImportingContext >> shouldImportIndexedFileAnchor [
 { #category : #testing }
 FamixTest1ImportingContext >> shouldImportMethod [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #Method
 ]
@@ -165,6 +205,7 @@ FamixTest1ImportingContext >> shouldImportMethod [
 { #category : #testing }
 FamixTest1ImportingContext >> shouldImportMultipleFileAnchor [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #MultipleFileAnchor
 ]
@@ -172,6 +213,7 @@ FamixTest1ImportingContext >> shouldImportMultipleFileAnchor [
 { #category : #testing }
 FamixTest1ImportingContext >> shouldImportSourceLanguage [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #SourceLanguage
 ]
@@ -179,6 +221,7 @@ FamixTest1ImportingContext >> shouldImportSourceLanguage [
 { #category : #testing }
 FamixTest1ImportingContext >> shouldImportSourceTextAnchor [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #SourceTextAnchor
 ]

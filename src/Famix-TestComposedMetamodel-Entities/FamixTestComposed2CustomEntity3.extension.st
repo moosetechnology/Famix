@@ -1,37 +1,45 @@
 Extension { #name : #FamixTestComposed2CustomEntity3 }
 
-{ #category : #'*Famix-TestComposedMetamodel-Entities-accessing' }
+{ #category : #'*Famix-TestComposedMetamodel-Entities' }
 FamixTestComposed2CustomEntity3 >> c13s [
 	"Relation named: #c13s type: #FamixTestComposed1CustomEntity3 opposite: #c23"
 
+	<ignoreForCoverage>
 	<generated>
-	<derived>
 	<FMProperty: #c13s type: #FamixTestComposed1CustomEntity3 opposite: #c23>
+	<multivalued>
 	<package: #'Famix-TestComposedMetamodel-Entities'>
 	^ self attributeAt: #c13s ifAbsentPut: [ FMMultivalueLink on: self opposite: #c23: ]
 ]
 
-{ #category : #'*Famix-TestComposedMetamodel-Entities-accessing' }
+{ #category : #'*Famix-TestComposedMetamodel-Entities' }
 FamixTestComposed2CustomEntity3 >> c13s: anObject [
 
+	<ignoreForCoverage>
 	<generated>
+	<package: #'Famix-TestComposedMetamodel-Entities'>
+
 	self c13s value: anObject
 ]
 
-{ #category : #'*Famix-TestComposedMetamodel-Entities-accessing' }
+{ #category : #'*Famix-TestComposedMetamodel-Entities' }
 FamixTestComposed2CustomEntity3 >> c3s [
 	"Relation named: #c3s type: #FamixTestComposedCustomEntity3 opposite: #c23"
 
+	<ignoreForCoverage>
 	<generated>
-	<derived>
 	<FMProperty: #c3s type: #FamixTestComposedCustomEntity3 opposite: #c23>
+	<multivalued>
 	<package: #'Famix-TestComposedMetamodel-Entities'>
 	^ self attributeAt: #c3s ifAbsentPut: [ FMMultivalueLink on: self opposite: #c23: ]
 ]
 
-{ #category : #'*Famix-TestComposedMetamodel-Entities-accessing' }
+{ #category : #'*Famix-TestComposedMetamodel-Entities' }
 FamixTestComposed2CustomEntity3 >> c3s: anObject [
 
+	<ignoreForCoverage>
 	<generated>
+	<package: #'Famix-TestComposedMetamodel-Entities'>
+
 	self c3s value: anObject
 ]

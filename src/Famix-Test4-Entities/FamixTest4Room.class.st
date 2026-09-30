@@ -22,16 +22,17 @@ Class {
 { #category : #meta }
 FamixTest4Room class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Room super: #FamixTest4Entity>
 	<package: #'Famix-Test4-Entities'>
 	<generated>
-	^ self
 ]
 
 { #category : #accessing }
 FamixTest4Room >> school [
 	"Relation named: #school type: #FamixTest4School opposite: #rooms"
 
+	<ignoreForCoverage>
 	<generated>
 	<container>
 	^ school
@@ -40,13 +41,7 @@ FamixTest4Room >> school [
 { #category : #accessing }
 FamixTest4Room >> school: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	school := anObject
-]
-
-{ #category : #navigation }
-FamixTest4Room >> schoolGroup [
-	<generated>
-	<navigation: 'School'>
-	^ MooseSpecializedGroup with: self school
 ]

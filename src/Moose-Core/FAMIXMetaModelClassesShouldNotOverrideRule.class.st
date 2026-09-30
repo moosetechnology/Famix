@@ -50,6 +50,12 @@ FamixMetaModelClassesShouldNotOverrideRule >> metaModelClasses [
 ]
 
 { #category : #accessing }
+FamixMetaModelClassesShouldNotOverrideRule >> name [
+
+	^ 'Metamodel classes should not override #mooseName nor #printString'
+]
+
+{ #category : #accessing }
 FamixMetaModelClassesShouldNotOverrideRule >> selectorsThatShouldNotBeOverridden [
 
 	^ #(#mooseName #printString)

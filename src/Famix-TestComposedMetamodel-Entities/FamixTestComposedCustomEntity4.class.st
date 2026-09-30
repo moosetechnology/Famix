@@ -20,20 +20,24 @@ Class {
 { #category : #meta }
 FamixTestComposedCustomEntity4 class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #CustomEntity4 super: #FamixTestComposedEntity>
 	<package: #'Famix-TestComposedMetamodel-Entities'>
 	<generated>
-	^ self
 ]
 
 { #category : #adding }
 FamixTestComposedCustomEntity4 >> addC24: anObject [
+
+	<ignoreForCoverage>
 	<generated>
 	^ self c24s add: anObject
 ]
 
 { #category : #adding }
 FamixTestComposedCustomEntity4 >> addCustomEntities4: anObject [
+
+	<ignoreForCoverage>
 	<generated>
 	^ self customEntities4 add: anObject
 ]
@@ -42,15 +46,17 @@ FamixTestComposedCustomEntity4 >> addCustomEntities4: anObject [
 FamixTestComposedCustomEntity4 >> c24s [
 	"Relation named: #c24s type: #FamixTestComposed2CustomEntity4 opposite: #c4s"
 
+	<ignoreForCoverage>
 	<generated>
-	<derived>
 	<FMProperty: #c24s type: #FamixTestComposed2CustomEntity4 opposite: #c4s>
+	<multivalued>
 	^ self attributeAt: #c24s ifAbsentPut: [ FMMultiMultivalueLink on: self opposite: #c4s ]
 ]
 
 { #category : #accessing }
 FamixTestComposedCustomEntity4 >> c24s: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	self c24s value: anObject
 ]
@@ -59,15 +65,17 @@ FamixTestComposedCustomEntity4 >> c24s: anObject [
 FamixTestComposedCustomEntity4 >> customEntities4 [
 	"Relation named: #customEntities4 type: #FamixTestComposed1CustomEntity4 opposite: #customEntities4"
 
+	<ignoreForCoverage>
 	<generated>
-	<derived>
 	<FMProperty: #customEntities4 type: #FamixTestComposed1CustomEntity4 opposite: #customEntities4>
+	<multivalued>
 	^ self attributeAt: #customEntities4 ifAbsentPut: [ FMMultiMultivalueLink on: self opposite: #customEntities4 ]
 ]
 
 { #category : #accessing }
 FamixTestComposedCustomEntity4 >> customEntities4: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	self customEntities4 value: anObject
 ]

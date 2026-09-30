@@ -27,8 +27,8 @@ Class {
 { #category : #meta }
 FamixTest2SourceTextAnchor class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #SourceTextAnchor super: #FamixTest2SourceAnchor>
 	<package: #'Famix-Test2-Entities'>
 	<generated>
-	^ self
 ]

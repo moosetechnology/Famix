@@ -18,23 +18,17 @@ Trait {
 { #category : #meta }
 FamixTCanBeFinal classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TCanBeFinal super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : #visitor }
-FamixTCanBeFinal >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTCanBeFinal: self
 ]
 
 { #category : #accessing }
 FamixTCanBeFinal >> isFinal [
 
 	<FMProperty: #isFinal type: #Boolean defaultValue: false>
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Entity can be declared final'>
 	^ isFinal ifNil: [ isFinal := false ]
@@ -42,6 +36,7 @@ FamixTCanBeFinal >> isFinal [
 
 { #category : #accessing }
 FamixTCanBeFinal >> isFinal: anObject [
+	<ignoreForCoverage>
 	<generated>
 	isFinal := anObject
 ]

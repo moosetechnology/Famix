@@ -21,17 +21,10 @@ Trait {
 { #category : #meta }
 FamixTWithAnnotationInstances classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TWithAnnotationInstances super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : #visitor }
-FamixTWithAnnotationInstances >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTWithAnnotationInstances: self
 ]
 
 { #category : #accessing }
@@ -66,15 +59,16 @@ FamixTWithAnnotationInstances >> annotationInstanceNamed: anAnnotationName ifAbs
 FamixTWithAnnotationInstances >> annotationInstances [
 	"Relation named: #annotationInstances type: #FamixTAnnotationInstance opposite: #annotatedEntity"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'This property corresponds to the set of annotations associated to the entity'>
-	<derived>
 	^ annotationInstances
 ]
 
 { #category : #accessing }
 FamixTWithAnnotationInstances >> annotationInstances: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	annotationInstances value: anObject
 ]
@@ -97,14 +91,15 @@ FamixTWithAnnotationInstances >> isAnnotatedWith: anAnnotationName [
 
 { #category : #metrics }
 FamixTWithAnnotationInstances >> numberOfAnnotationInstances [
+
 	<FMProperty: #numberOfAnnotationInstances type: #Number>
 	<derived>
 	<FMComment: 'The number of annotation instances defined in the class or in any of its methods'>
-
-	^self
-		lookUpPropertyNamed: #numberOfAnnotationInstances
-		computedAs: [
-			self annotationInstances size + (self children inject: 0 into: [:sum :each | sum + each numberOfAnnotationInstances])]
+	^ self cacheAt: #numberOfAnnotationInstances ifAbsentPut: [
+			  self annotationInstances size + (self containedEntities inject: 0 into: [ :sum :each |
+					   (each isOfType: FamixTWithAnnotationInstances)
+						   ifTrue: [ sum + each numberOfAnnotationInstances ]
+						   ifFalse: [ sum ] ]) ]
 ]
 
 { #category : #metrics }

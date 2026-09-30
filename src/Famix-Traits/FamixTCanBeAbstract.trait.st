@@ -18,23 +18,17 @@ Trait {
 { #category : #meta }
 FamixTCanBeAbstract classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TCanBeAbstract super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : #visitor }
-FamixTCanBeAbstract >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTCanBeAbstract: self
 ]
 
 { #category : #accessing }
 FamixTCanBeAbstract >> isAbstract [
 
 	<FMProperty: #isAbstract type: #Boolean defaultValue: false>
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Entity can be declared abstract'>
 	^ isAbstract ifNil: [ isAbstract := false ]
@@ -42,6 +36,7 @@ FamixTCanBeAbstract >> isAbstract [
 
 { #category : #accessing }
 FamixTCanBeAbstract >> isAbstract: anObject [
+	<ignoreForCoverage>
 	<generated>
 	isAbstract := anObject
 ]

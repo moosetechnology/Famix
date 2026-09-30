@@ -33,14 +33,6 @@ FamixTest4Generator class >> prefix [
 ]
 
 { #category : #definition }
-FamixTest4Generator >> adoptBuilder: aBuilder [
-
-	super adoptBuilder: aBuilder.
-
-	aBuilder configuration navigationForNonContainers: true.
-]
-
-{ #category : #definition }
 FamixTest4Generator >> defineClasses [
 
 	super defineClasses.
@@ -53,7 +45,8 @@ FamixTest4Generator >> defineClasses [
 	school := builder newClassNamed: #School.
 	room := builder newClassNamed: #Room.
 	classroom := builder newClassNamed: #Classroom.
-	cafeteria := builder newClassNamed: #Cafeteria
+	cafeteria := builder newClassNamed: #Cafeteria.
+	computer := builder newClassNamed: #Computer
 ]
 
 { #category : #definition }
@@ -93,6 +86,6 @@ FamixTest4Generator >> defineRelations [
 	student *-<> school.
 	teacher *-<> school.
 	student *-* teacher.
-	(school <>-* room) withNavigation.
-	
+	school <>-* room.
+	classroom <>- computer
 ]

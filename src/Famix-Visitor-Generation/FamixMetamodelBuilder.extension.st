@@ -13,6 +13,6 @@ FamixMetamodelBuilder >> newVisitorTrait [
 	visitorTrait builder: self.
 	visitorTrait prefix: self configuration prefix.
 
-	extensionBehaviors add: visitorTrait.
+	self traits add: visitorTrait.
 	^ visitorTrait
 ]

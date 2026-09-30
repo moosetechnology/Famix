@@ -7,8 +7,8 @@ Class {
 { #category : #meta }
 FamixTest4Cafeteria class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Cafeteria super: #FamixTest4Room>
 	<package: #'Famix-Test4-Entities'>
 	<generated>
-	^ self
 ]

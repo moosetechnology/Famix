@@ -6,17 +6,10 @@ Trait {
 { #category : #meta }
 FamixTLCOMMetrics classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TLCOMMetrics super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : #visitor }
-FamixTLCOMMetrics >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTLCOMMetrics: self
 ]
 
 { #category : #'Famix-Extensions-metrics-support' }
@@ -76,10 +69,7 @@ FamixTLCOMMetrics >> lcom2 [
 	<FMProperty: #lcom2 type: #Number>
 	<FMComment: 'lack of cohesion in methods 2 (lcom2)'>
 	<derived>
-
-	^ self
-		lookUpPropertyNamed: #lcom2
-		computedAs: [self calculateLCOM2]
+	^ self cacheAt: #lcom2 ifAbsentPut: [ self calculateLCOM2 ]
 ]
 
 { #category : #'Famix-Extensions-metrics-support' }
@@ -88,8 +78,5 @@ FamixTLCOMMetrics >> lcom3 [
 	<FMProperty: #lcom3 type: #Number>
 	<FMComment: 'lack of cohesion in methods 3 (lcom3)'>
 	<derived>
-
-	^ self
-		lookUpPropertyNamed: #lcom3
-		computedAs: [self calculateLCOM3]
+	^ self cacheAt: #lcom3 ifAbsentPut: [ self calculateLCOM3 ]
 ]

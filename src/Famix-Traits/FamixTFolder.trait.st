@@ -36,24 +36,19 @@ Trait {
 { #category : #meta }
 FamixTFolder classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TFolder super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : #groups }
 FamixTFolder classSide >> annotationFamixFolderGroup [
+
+	<ignoreForCoverage>
 	<generated>
 	<mooseGroup>
 	^ FamixFolderGroup
-]
-
-{ #category : #visitor }
-FamixTFolder >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTFolder: self
 ]
 
 { #category : #adding }
@@ -63,6 +58,8 @@ FamixTFolder >> addChildFileSystemEntity: aFileOrFolder [
 
 { #category : #adding }
 FamixTFolder >> addChildrenFileSystemEntity: anObject [
+
+	<ignoreForCoverage>
 	<generated>
 	^ self childrenFileSystemEntities add: anObject
 ]
@@ -87,15 +84,16 @@ FamixTFolder >> allRecursiveFolders [
 FamixTFolder >> childrenFileSystemEntities [
 	"Relation named: #childrenFileSystemEntities type: #FamixTFileSystemEntity opposite: #parentFolder"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'List of entities contained in this folder.'>
-	<derived>
 	^ childrenFileSystemEntities
 ]
 
 { #category : #accessing }
 FamixTFolder >> childrenFileSystemEntities: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	childrenFileSystemEntities value: anObject
 ]
@@ -106,20 +104,8 @@ FamixTFolder >> files [
 ]
 
 { #category : #adding }
-FamixTFolder >> filesGroup [
-	<navigation: 'Files'>
-	^FamixFileGroup withAll: self files withDescription: 'Files'
-]
-
-{ #category : #adding }
 FamixTFolder >> folders [
 	^ self childrenFileSystemEntities select: #isFolder
-]
-
-{ #category : #adding }
-FamixTFolder >> foldersGroup [
-	<navigation: 'Folders'>
-	^FamixFolderGroup withAll: self folders withDescription: 'Folders'
 ]
 
 { #category : #testing }
@@ -129,42 +115,38 @@ FamixTFolder >> isFolder [
 
 { #category : #properties }
 FamixTFolder >> numberOfEmptyLinesOfText [
+
 	<FMProperty: #numberOfEmptyLinesOfText type: #Number>
 	<FMComment: 'Number of empty lines of text'>
 	<derived>
-	^ self lookUpPropertyNamed: #numberOfEmptyLinesOfText computedAs: [ 
-		self files, self folders sumNumbers: #numberOfEmptyLinesOfText
-	]
+	^ self cacheAt: #numberOfEmptyLinesOfText ifAbsentPut: [ self files , self folders sumNumbers: #numberOfEmptyLinesOfText ]
 ]
 
 { #category : #properties }
 FamixTFolder >> numberOfFiles [
+
 	<FMProperty: #numberOfFiles type: #Number>
 	<FMComment: 'The number of files in a folder'>
 	<derived>
-	^self
-		lookUpPropertyNamed: #numberOfFiles
-		computedAs: [self files size]
+	^ self cacheAt: #numberOfFiles ifAbsentPut: [ self files size ]
 ]
 
 { #category : #properties }
 FamixTFolder >> numberOfFolders [
+
 	<FMProperty: #numberOfFolders type: #Number>
 	<FMComment: 'The number of folders in a folder'>
 	<derived>
-	^self
-		lookUpPropertyNamed: #numberOfFolders
-		computedAs: [self folders size]
+	^ self cacheAt: #numberOfFolders ifAbsentPut: [ self folders size ]
 ]
 
 { #category : #properties }
 FamixTFolder >> totalNumberOfLinesOfText [
+
 	<FMProperty: #totalNumberOfLinesOfText type: #Number>
 	<FMComment: 'Number of lines of text'>
 	<derived>
-	^ self
-		lookUpPropertyNamed: #totalNumberOfLinesOfText
-		computedAs: [ self files , self folders sumNumbers: #totalNumberOfLinesOfText ]
+	^ self cacheAt: #totalNumberOfLinesOfText ifAbsentPut: [ self files , self folders sumNumbers: #totalNumberOfLinesOfText ]
 ]
 
 { #category : #properties }

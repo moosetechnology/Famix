@@ -49,10 +49,10 @@ Trait {
 { #category : #meta }
 FamixTReference classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TReference super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : #'instance creation' }
@@ -60,16 +60,10 @@ FamixTReference classSide >> source: source target: target [
 	^ self new source: source; target: target
 ]
 
-{ #category : #visitor }
-FamixTReference >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTReference: self
-]
-
 { #category : #testing }
 FamixTReference >> isReference [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
@@ -78,6 +72,7 @@ FamixTReference >> isReference [
 FamixTReference >> referencer [
 	"Relation named: #referencer type: #FamixTWithReferences opposite: #outgoingReferences"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Source entity making the reference. from-side of the association'>
 	<source>
@@ -87,6 +82,7 @@ FamixTReference >> referencer [
 { #category : #accessing }
 FamixTReference >> referencer: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	referencer := anObject
 ]
@@ -95,6 +91,7 @@ FamixTReference >> referencer: anObject [
 FamixTReference >> referredEntity [
 	"Relation named: #referredEntity type: #FamixTReferenceable opposite: #incomingReferences"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Target entity referenced. to-side of the association'>
 	<target>
@@ -104,6 +101,7 @@ FamixTReference >> referredEntity [
 { #category : #accessing }
 FamixTReference >> referredEntity: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	referredEntity := anObject
 ]

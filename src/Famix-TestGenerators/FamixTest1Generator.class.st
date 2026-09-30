@@ -37,7 +37,8 @@ Class {
 		'multipleFileAnchor',
 		'class',
 		'model',
-		'tCanBeClassSide'
+		'tCanBeClassSide',
+		'bytesFileAnchor'
 	],
 	#category : #'Famix-TestGenerators'
 }
@@ -71,6 +72,7 @@ FamixTest1Generator >> defineClasses [
 	fileAnchor := builder newClassNamed: #FileAnchor.
 	folder := builder newClassNamed: #Folder.
 	indexedFileAnchor := builder newClassNamed: #IndexedFileAnchor.
+	bytesFileAnchor := builder newClassNamed: #BytesFileAnchor.
 	multipleFileAnchor := builder newClassNamed: #MultipleFileAnchor
 ]
 
@@ -86,6 +88,9 @@ FamixTest1Generator >> defineHierarchy [
 		--|> #TAttribute;
 		--|> #TSourceEntity;
 	  --|> tCanBeClassSide.
+	
+	bytesFileAnchor --|> sourceAnchor.
+	bytesFileAnchor --|> #TBytesFileAnchor.
 
 	class
 		--|> namedEntity ;

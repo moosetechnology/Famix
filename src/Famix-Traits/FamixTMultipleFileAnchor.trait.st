@@ -29,17 +29,10 @@ Trait {
 { #category : #meta }
 FamixTMultipleFileAnchor classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TMultipleFileAnchor super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : #visitor }
-FamixTMultipleFileAnchor >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTMultipleFileAnchor: self
 ]
 
 { #category : #adding }
@@ -71,9 +64,11 @@ FamixTMultipleFileAnchor >> allSourceAnchorsDo: aBlock [
 
 { #category : #accessing }
 FamixTMultipleFileAnchor >> containerFiles [
-	^ self
-		propertyNamed: #containerFiles
-		ifAbsentPut: [ self fileAnchors collect: #correspondingFile thenReject: #isNil ]
+
+	^ self cacheAt: #containerFiles ifAbsentPut: [
+			  self fileAnchors
+				  collect: #correspondingFile
+				  thenReject: #isNil ]
 ]
 
 { #category : #adding }
@@ -106,6 +101,7 @@ FamixTMultipleFileAnchor >> fileAnchors [
 
 { #category : #accessing }
 FamixTMultipleFileAnchor >> fileAnchors: anObject [
+	<ignoreForCoverage>
 	<generated>
 	fileAnchors := anObject
 ]

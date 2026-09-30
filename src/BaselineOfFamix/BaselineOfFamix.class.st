@@ -82,7 +82,7 @@ BaselineOfFamix >> fame: spec [
 BaselineOfFamix >> groups: spec [
 
 	^ spec
-		  group: 'Core' with: #( 'Famix-Traits' 'Moose-Query-Extensions' );
+		  group: 'Core' with: #('Moose-Query' 'BasicTraits' );
 		  group: 'Minimal' with: #( 'Moose-Core' );
 		  group: 'Basic'
 		  with: #( 'Famix-BasicInfrastructure' 'Famix-MetamodelGeneration' 'Moose-Core-Generator' );
@@ -155,12 +155,12 @@ BaselineOfFamix >> packages: spec [
 		package: 'Moose-Query' with: [ spec requires: #( 'Fame' 'DeepTraverser' 'CollectionExtensions' ) ];
 		package: 'Moose-Core' with: [ spec requires: #( 'Fame' 'Moose-Query' ) ];
 		package: 'Moose-Core-Generator' with: [ spec requires: #( 'Famix-MetamodelBuilder-Core' ) ];
-		package: 'Moose-Query-Extensions' with: [ spec requires: #( 'Moose-Query' 'BasicTraits' ) ];
 		package: 'Famix-Traits' with: [ spec requires: #( 'Moose-Core' ) ];
 		package: 'Famix-Visitor-Generation' with: [ spec requires: #( 'Famix-MetamodelBuilder-Core' ) ];
 		package: 'Famix-MetamodelBuilder-Core' with: [ spec requires: #( 'Moose-Core' 'SingularizePluralize' ) ];
 		package: 'Famix-MetamodelGeneration' with: [ spec requires: #( 'Famix-MetamodelBuilder-Core' 'Famix-Visitor-Generation' ) ];
 		package: 'Famix-Visualizations' with: [ spec requires: #( 'Famix-Traits' 'Fame' 'Moose-Core' ) ];
+		package: 'Famix-Visualizations-Tests' with: [ spec requires: #( 'Famix-Visualizations' 'Famix-PharoSmalltalk-Entities' ) ];
 		package: 'Famix-BasicInfrastructure' with: [ spec requires: #( 'Famix-MetamodelGeneration' ) ];
 		package: 'Famix-Smalltalk-Utils' with: [ spec requires: #( 'Moose-Core' ) ];
 		package: 'Moose-Importers' with: [ spec requires: #( 'BasicTraits' ) ];
@@ -244,7 +244,7 @@ BaselineOfFamix >> singularizePluralize: spec [
 
 	spec baseline: 'SingularizePluralize' with: [ 
 		spec repository:
-			'github://pharo-contributions/SingularizePluralize:v1.1/src' ]
+			'github://pharo-contributions/SingularizePluralize:v1.2/src' ]
 ]
 
 { #category : #dependencies }

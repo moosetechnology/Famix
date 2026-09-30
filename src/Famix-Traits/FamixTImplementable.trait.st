@@ -23,21 +23,16 @@ Trait {
 { #category : #meta }
 FamixTImplementable classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TImplementable super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : #visitor }
-FamixTImplementable >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTImplementable: self
 ]
 
 { #category : #adding }
 FamixTImplementable >> addImplementation: anObject [
+
+	<ignoreForCoverage>
 	<generated>
 	^ self implementations add: anObject
 ]
@@ -46,15 +41,22 @@ FamixTImplementable >> addImplementation: anObject [
 FamixTImplementable >> implementations [
 	"Relation named: #implementations type: #FamixTImplementation opposite: #interface"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Implementation relationships.'>
-	<derived>
 	^ implementations
 ]
 
 { #category : #accessing }
 FamixTImplementable >> implementations: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	implementations value: anObject
+]
+
+{ #category : #accessing }
+FamixTImplementable >> implementors [
+
+	^ self implementations collect: #implementingClass
 ]

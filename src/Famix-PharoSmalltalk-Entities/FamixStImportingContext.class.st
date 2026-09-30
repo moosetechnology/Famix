@@ -1,6 +1,8 @@
 "
 This class is used to choose the entities to be imported when loading a model from file.
 It is used by `MiImportingContextPresenter` in a `MiImportModelFromFileDialog` to import a FamixStModel.
+
+
 "
 Class {
 	#name : #FamixStImportingContext,
@@ -11,6 +13,7 @@ Class {
 { #category : #accessing }
 FamixStImportingContext class >> importedMetamodel [
 
+	<ignoreForCoverage>
 	<generated>
 	^ FamixStModel metamodel
 ]
@@ -18,6 +21,7 @@ FamixStImportingContext class >> importedMetamodel [
 { #category : #importing }
 FamixStImportingContext >> importAccess [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importAssociation: (self class fm3ClassNamed: #Access)
 ]
@@ -25,6 +29,7 @@ FamixStImportingContext >> importAccess [
 { #category : #importing }
 FamixStImportingContext >> importAnnotationInstance [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #AnnotationInstance)
 ]
@@ -32,6 +37,7 @@ FamixStImportingContext >> importAnnotationInstance [
 { #category : #importing }
 FamixStImportingContext >> importAnnotationInstanceAttribute [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #AnnotationInstanceAttribute)
 ]
@@ -39,6 +45,7 @@ FamixStImportingContext >> importAnnotationInstanceAttribute [
 { #category : #importing }
 FamixStImportingContext >> importAnnotationType [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #AnnotationType)
 ]
@@ -46,6 +53,7 @@ FamixStImportingContext >> importAnnotationType [
 { #category : #importing }
 FamixStImportingContext >> importAnnotationTypeAttribute [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #AnnotationTypeAttribute)
 ]
@@ -53,6 +61,7 @@ FamixStImportingContext >> importAnnotationTypeAttribute [
 { #category : #importing }
 FamixStImportingContext >> importAttribute [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #Attribute)
 ]
@@ -60,6 +69,7 @@ FamixStImportingContext >> importAttribute [
 { #category : #importing }
 FamixStImportingContext >> importClass [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #Class)
 ]
@@ -67,13 +77,23 @@ FamixStImportingContext >> importClass [
 { #category : #importing }
 FamixStImportingContext >> importComment [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #Comment)
 ]
 
 { #category : #importing }
+FamixStImportingContext >> importEntityTyping [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self importAssociation: (self class fm3ClassNamed: #EntityTyping)
+]
+
+{ #category : #importing }
 FamixStImportingContext >> importGlobalVariable [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #GlobalVariable)
 ]
@@ -81,6 +101,7 @@ FamixStImportingContext >> importGlobalVariable [
 { #category : #importing }
 FamixStImportingContext >> importImplicitVariable [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #ImplicitVariable)
 ]
@@ -88,6 +109,7 @@ FamixStImportingContext >> importImplicitVariable [
 { #category : #importing }
 FamixStImportingContext >> importInheritance [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importAssociation: (self class fm3ClassNamed: #Inheritance)
 ]
@@ -95,6 +117,7 @@ FamixStImportingContext >> importInheritance [
 { #category : #importing }
 FamixStImportingContext >> importInvocation [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importAssociation: (self class fm3ClassNamed: #Invocation)
 ]
@@ -102,6 +125,7 @@ FamixStImportingContext >> importInvocation [
 { #category : #importing }
 FamixStImportingContext >> importLocalVariable [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #LocalVariable)
 ]
@@ -109,6 +133,7 @@ FamixStImportingContext >> importLocalVariable [
 { #category : #importing }
 FamixStImportingContext >> importMethod [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #Method)
 ]
@@ -116,6 +141,7 @@ FamixStImportingContext >> importMethod [
 { #category : #importing }
 FamixStImportingContext >> importNamespace [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #Namespace)
 ]
@@ -123,6 +149,7 @@ FamixStImportingContext >> importNamespace [
 { #category : #importing }
 FamixStImportingContext >> importPackage [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #Package)
 ]
@@ -130,6 +157,7 @@ FamixStImportingContext >> importPackage [
 { #category : #importing }
 FamixStImportingContext >> importParameter [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #Parameter)
 ]
@@ -137,6 +165,7 @@ FamixStImportingContext >> importParameter [
 { #category : #importing }
 FamixStImportingContext >> importPharoEntitySourceAnchor [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #PharoEntitySourceAnchor)
 ]
@@ -144,6 +173,7 @@ FamixStImportingContext >> importPharoEntitySourceAnchor [
 { #category : #importing }
 FamixStImportingContext >> importReference [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importAssociation: (self class fm3ClassNamed: #Reference)
 ]
@@ -151,6 +181,7 @@ FamixStImportingContext >> importReference [
 { #category : #importing }
 FamixStImportingContext >> importSourceLanguage [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #SourceLanguage)
 ]
@@ -158,6 +189,7 @@ FamixStImportingContext >> importSourceLanguage [
 { #category : #importing }
 FamixStImportingContext >> importSourceTextAnchor [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #SourceTextAnchor)
 ]
@@ -165,6 +197,7 @@ FamixStImportingContext >> importSourceTextAnchor [
 { #category : #importing }
 FamixStImportingContext >> importUnknownVariable [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #UnknownVariable)
 ]
@@ -172,6 +205,7 @@ FamixStImportingContext >> importUnknownVariable [
 { #category : #testing }
 FamixStImportingContext >> shouldImportAccess [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #Access
 ]
@@ -179,6 +213,7 @@ FamixStImportingContext >> shouldImportAccess [
 { #category : #testing }
 FamixStImportingContext >> shouldImportAnnotationInstance [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #AnnotationInstance
 ]
@@ -186,6 +221,7 @@ FamixStImportingContext >> shouldImportAnnotationInstance [
 { #category : #testing }
 FamixStImportingContext >> shouldImportAnnotationInstanceAttribute [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #AnnotationInstanceAttribute
 ]
@@ -193,6 +229,7 @@ FamixStImportingContext >> shouldImportAnnotationInstanceAttribute [
 { #category : #testing }
 FamixStImportingContext >> shouldImportAnnotationType [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #AnnotationType
 ]
@@ -200,6 +237,7 @@ FamixStImportingContext >> shouldImportAnnotationType [
 { #category : #testing }
 FamixStImportingContext >> shouldImportAnnotationTypeAttribute [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #AnnotationTypeAttribute
 ]
@@ -207,6 +245,7 @@ FamixStImportingContext >> shouldImportAnnotationTypeAttribute [
 { #category : #testing }
 FamixStImportingContext >> shouldImportAttribute [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #Attribute
 ]
@@ -214,6 +253,7 @@ FamixStImportingContext >> shouldImportAttribute [
 { #category : #testing }
 FamixStImportingContext >> shouldImportClass [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #Class
 ]
@@ -221,13 +261,23 @@ FamixStImportingContext >> shouldImportClass [
 { #category : #testing }
 FamixStImportingContext >> shouldImportComment [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #Comment
 ]
 
 { #category : #testing }
+FamixStImportingContext >> shouldImportEntityTyping [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self shouldImport: #EntityTyping
+]
+
+{ #category : #testing }
 FamixStImportingContext >> shouldImportGlobalVariable [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #GlobalVariable
 ]
@@ -235,6 +285,7 @@ FamixStImportingContext >> shouldImportGlobalVariable [
 { #category : #testing }
 FamixStImportingContext >> shouldImportImplicitVariable [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #ImplicitVariable
 ]
@@ -242,6 +293,7 @@ FamixStImportingContext >> shouldImportImplicitVariable [
 { #category : #testing }
 FamixStImportingContext >> shouldImportInheritance [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #Inheritance
 ]
@@ -249,6 +301,7 @@ FamixStImportingContext >> shouldImportInheritance [
 { #category : #testing }
 FamixStImportingContext >> shouldImportInvocation [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #Invocation
 ]
@@ -256,6 +309,7 @@ FamixStImportingContext >> shouldImportInvocation [
 { #category : #testing }
 FamixStImportingContext >> shouldImportLocalVariable [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #LocalVariable
 ]
@@ -263,6 +317,7 @@ FamixStImportingContext >> shouldImportLocalVariable [
 { #category : #testing }
 FamixStImportingContext >> shouldImportMethod [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #Method
 ]
@@ -270,6 +325,7 @@ FamixStImportingContext >> shouldImportMethod [
 { #category : #testing }
 FamixStImportingContext >> shouldImportNamespace [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #Namespace
 ]
@@ -277,6 +333,7 @@ FamixStImportingContext >> shouldImportNamespace [
 { #category : #testing }
 FamixStImportingContext >> shouldImportPackage [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #Package
 ]
@@ -284,6 +341,7 @@ FamixStImportingContext >> shouldImportPackage [
 { #category : #testing }
 FamixStImportingContext >> shouldImportParameter [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #Parameter
 ]
@@ -291,6 +349,7 @@ FamixStImportingContext >> shouldImportParameter [
 { #category : #testing }
 FamixStImportingContext >> shouldImportPharoEntitySourceAnchor [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #PharoEntitySourceAnchor
 ]
@@ -298,6 +357,7 @@ FamixStImportingContext >> shouldImportPharoEntitySourceAnchor [
 { #category : #testing }
 FamixStImportingContext >> shouldImportReference [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #Reference
 ]
@@ -305,6 +365,7 @@ FamixStImportingContext >> shouldImportReference [
 { #category : #testing }
 FamixStImportingContext >> shouldImportSourceLanguage [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #SourceLanguage
 ]
@@ -312,6 +373,7 @@ FamixStImportingContext >> shouldImportSourceLanguage [
 { #category : #testing }
 FamixStImportingContext >> shouldImportSourceTextAnchor [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #SourceTextAnchor
 ]
@@ -319,6 +381,7 @@ FamixStImportingContext >> shouldImportSourceTextAnchor [
 { #category : #testing }
 FamixStImportingContext >> shouldImportUnknownVariable [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #UnknownVariable
 ]

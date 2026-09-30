@@ -5,7 +5,9 @@ Class {
 		'annotationType1',
 		'withAnnotationType1',
 		'annotationType2',
-		'withAnnotationType2'
+		'withAnnotationType2',
+		'entity',
+		'tEntity'
 	],
 	#category : #'Famix-TestGenerators'
 }
@@ -37,7 +39,18 @@ FamixTest5Generator >> defineClasses [
 	
 	annotationType2 := builder newClassNamed: #AnnotationType2.
 	withAnnotationType2 := builder newClassNamed: #WithAnnotationType2.
+	
+	entity := builder ensureClassNamed: #Entity
+]
 
+{ #category : #definition }
+FamixTest5Generator >> defineHierarchy [
+
+	super defineHierarchy.
+
+	entity --|> tEntity.
+
+	tEntity --|> #TEntityMetaLevelDependency
 ]
 
 { #category : #definition }
@@ -49,4 +62,11 @@ FamixTest5Generator >> defineRelations [
 
 	self apply: #TWithAnnotationTypes on: withAnnotationType2 oppositeOn: annotationType2.
 
+]
+
+{ #category : #definition }
+FamixTest5Generator >> defineTraits [
+	super defineTraits.
+	
+	tEntity := builder newTraitNamed: #TEntity
 ]

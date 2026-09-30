@@ -24,6 +24,7 @@ A FamixTMethod is always contained in a parentType.
 | `accesses` | `FamixTWithAccesses` | `accessor` | `FamixTAccess` | Accesses to variables made by this behaviour.|
 | `outgoingInvocations` | `FamixTWithInvocations` | `sender` | `FamixTInvocation` | Outgoing invocations sent by this behaviour.|
 | `outgoingReferences` | `FamixTWithReferences` | `referencer` | `FamixTReference` | References from this entity to other entities.|
+| `typing` | `FamixTTypedEntity` | `typedEntity` | `FamixTEntityTyping` | Association linking this entity to its declared type.|
 
 ### Incoming dependencies
 | Relation | Origin | Opposite | Type | Comment |
@@ -33,7 +34,6 @@ A FamixTMethod is always contained in a parentType.
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `declaredType` | `FamixTTypedEntity` | `typedEntities` | `FamixTType` | Type of the entity, if any|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
 
 
@@ -60,24 +60,27 @@ Trait {
 { #category : #meta }
 FamixTMethod classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TMethod super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : #groups }
 FamixTMethod classSide >> annotationFamixMethodGroup [
+
+	<ignoreForCoverage>
 	<generated>
 	<mooseGroup>
 	^ FamixMethodGroup
 ]
 
-{ #category : #visitor }
-FamixTMethod >> accept: aVisitor [
+{ #category : #'Famix-Extensions-metrics-support' }
+FamixTMethod >> accessedAttributes [
+	"Returns the set of attributes of my class accessed by me (method). 
+	Used to support the calculation of LCOM"
 
-	<generated>
-	^ aVisitor visitFamixTMethod: self
+	^ ((self queryOutgoing: FamixTAccess) opposites withinContainerUsing: FamixTClass) asSet select: #isAttribute
 ]
 
 { #category : #accessing }
@@ -90,9 +93,24 @@ FamixTMethod >> firstOverridingMethods [
 	^ overridingMethods
 ]
 
+{ #category : #'Famix-Extensions' }
+FamixTMethod >> invokedBehaviours [
+
+	^ (self queryOutgoing: FamixTInvocation) opposites
+]
+
 { #category : #asserting }
 FamixTMethod >> isAccessor [
 	^ self isSetter or: [ self isGetter ]
+]
+
+{ #category : #testing }
+FamixTMethod >> isConstructor [
+
+	<FMProperty: #isConstructor type: #Boolean>
+	<FMComment: 'Is the method a constructor for its class?'>
+	<derived>
+	^ self shouldBeImplemented
 ]
 
 { #category : #testing }
@@ -119,8 +137,15 @@ FamixTMethod >> isInSameClassAs: aMethod [
 ]
 
 { #category : #testing }
+FamixTMethod >> isInitializer [
+
+	^ self shouldBeImplemented
+]
+
+{ #category : #testing }
 FamixTMethod >> isMethod [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
@@ -134,6 +159,20 @@ FamixTMethod >> mooseNameOn: stream [
 	self signature
 		ifNotNil: [ :aSignature | stream nextPutAll: aSignature ]
 		ifNil: [ self name ifNotNil: [ :aName | stream nextPutAll: aName ] ]
+]
+
+{ #category : #metrics }
+FamixTMethod >> numberOfConditionals [
+
+	<FMProperty: #numberOfConditionals type: #Number>
+	<FMComment: 'The number of conditionals in a method'>
+	^ self attributeAt: #numberOfConditionals ifAbsent: [ self notExistentMetricValue ]
+]
+
+{ #category : #metrics }
+FamixTMethod >> numberOfConditionals: aNumber [
+
+	self attributeAt: #numberOfConditionals put: aNumber
 ]
 
 { #category : #testing }
@@ -150,6 +189,7 @@ FamixTMethod >> overridingMethods [
 FamixTMethod >> parentType [
 	"Relation named: #parentType type: #FamixTWithMethods opposite: #methods"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Type declaring the method. It provides the implementation for belongsTo.'>
 	<container>
@@ -162,13 +202,6 @@ FamixTMethod >> parentType: anObject [
 	parentType := anObject.
 	self resetMooseName.
 
-]
-
-{ #category : #navigation }
-FamixTMethod >> parentTypeGroup [
-	<generated>
-	<navigation: 'ParentType'>
-	^ MooseSpecializedGroup with: self parentType
 ]
 
 { #category : #testing }

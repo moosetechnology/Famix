@@ -27,15 +27,8 @@ Class {
 { #category : #meta }
 FamixJavaSourceTextAnchor class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #SourceTextAnchor super: #FamixJavaSourceAnchor>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^ self
-]
-
-{ #category : #visitor }
-FamixJavaSourceTextAnchor >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaSourceTextAnchor: self
 ]

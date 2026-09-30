@@ -27,8 +27,8 @@ Class {
 { #category : #meta }
 FamixStSourceTextAnchor class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #SourceTextAnchor super: #FamixStSourceAnchor>
 	<package: #'Famix-PharoSmalltalk-Entities'>
 	<generated>
-	^ self
 ]

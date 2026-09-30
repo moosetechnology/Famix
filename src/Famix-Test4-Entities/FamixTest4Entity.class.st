@@ -19,16 +19,17 @@ Class {
 { #category : #meta }
 FamixTest4Entity class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Entity super: #MooseEntity>
 	<package: #'Famix-Test4-Entities'>
 	<generated>
 	<abstract>
-	^ self
 ]
 
 { #category : #testing }
 FamixTest4Entity class >> isAbstract [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self == FamixTest4Entity
 ]
@@ -36,6 +37,7 @@ FamixTest4Entity class >> isAbstract [
 { #category : #meta }
 FamixTest4Entity class >> metamodel [
 
+	<ignoreForCoverage>
 	<generated>
 	^ FamixTest4Model metamodel
 ]
@@ -44,12 +46,14 @@ FamixTest4Entity class >> metamodel [
 FamixTest4Entity >> name [
 
 	<FMProperty: #name type: #String>
+	<ignoreForCoverage>
 	<generated>
 	^ name
 ]
 
 { #category : #accessing }
 FamixTest4Entity >> name: anObject [
+	<ignoreForCoverage>
 	<generated>
 	name := anObject
 ]

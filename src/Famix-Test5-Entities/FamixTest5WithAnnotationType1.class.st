@@ -21,8 +21,8 @@ Class {
 { #category : #meta }
 FamixTest5WithAnnotationType1 class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #WithAnnotationType1 super: #FamixTest5Entity>
 	<package: #'Famix-Test5-Entities'>
 	<generated>
-	^ self
 ]

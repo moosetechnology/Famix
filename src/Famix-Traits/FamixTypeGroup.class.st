@@ -4,22 +4,6 @@ Class {
 	#category : #'Famix-Traits-Groups'
 }
 
-{ #category : #meta }
-FamixTypeGroup class >> annotation [
-
-	<FMClass: #TypeGroup super: #MooseSpecializedGroup>
-	<package: #'Famix-Traits'>
-	<generated>
-	^ self
-]
-
-{ #category : #meta }
-FamixTypeGroup class >> metamodel [
-
-	<generated>
-	^ FamixModel metamodel
-]
-
 { #category : #metrics }
 FamixTypeGroup >> abstractness [
 	"Abstractness is the ratio between the number of abstract classes and the total number of classes in a package, in the range [0, 1]. 0 means the package is fully concrete, 1 it is fully abstract."
@@ -46,10 +30,9 @@ FamixTypeGroup >> afferentCoupling [
 	cgClasses := self allClasses select: [ :c | c isInstanceSide ].
 	cgTypes := cgClasses flatCollect: [ :c | c allRecursiveTypes ].
 	cgClasses := (cgClasses union: cgTypes) asArray.
-	^ (cgClasses
-		flatCollect:
-			[ :cgClass | (cgClass queryAllIncoming atScope: FamixTType) select: [ :invokingClass | (cgClasses includes: invokingClass) not and: [ invokingClass isInstanceSide ] ] ])
-		asSet size
+	^ (cgClasses flatCollect: [ :cgClass |
+			   (cgClass queryAllIncoming containersOfType: FamixTType) select: [ :invokingClass |
+				   (cgClasses includes: invokingClass) not and: [ invokingClass isInstanceSide ] ] ]) asSet size
 ]
 
 { #category : #navigation }
@@ -64,7 +47,8 @@ FamixTypeGroup >> allMethods [
 
 { #category : #navigation }
 FamixTypeGroup >> allPackages [
-	^ FamixPackageGroup withAll: (self entities flatCollectAsSet: [ :c | c atScope: FamixTPackage ])
+
+	^ FamixPackageGroup withAll: (self entities flatCollectAsSet: [ :c | c containersOfType: FamixTPackage ])
 ]
 
 { #category : #metrics }
@@ -81,42 +65,38 @@ FamixTypeGroup >> averageHierarchyHeighth [
 
 { #category : #metrics }
 FamixTypeGroup >> averageNumberOfAttributes [
+
 	<FMProperty: #averageNumberOfAttributes type: #Number>
 	<FMComment: 'Average number of attributes per class'>
-
-	^self
-		lookUpPropertyNamed: #averageNumberOfAttributes
-		computedAs: [(self average: [:each | each numberOfAttributes ]) asFloat]
+	<derived>
+	^ self cacheAt: #averageNumberOfAttributes ifAbsentPut: [ (self average: [ :each | each numberOfAttributes ]) asFloat ]
 ]
 
 { #category : #metrics }
 FamixTypeGroup >> averageNumberOfLinesOfCode [
+
 	<FMProperty: #averageNumberOfMethods type: #Number>
 	<FMComment: 'Average number of methods per class'>
-	
-	^self
-		lookUpPropertyNamed: #averageNumberOfMethods
-		computedAs: [(self average: [:each | each numberOfLinesOfCode ]) asFloat]
+	<derived>
+	^ self cacheAt: #averageNumberOfMethods ifAbsentPut: [ (self average: [ :each | each numberOfLinesOfCode ]) asFloat ]
 ]
 
 { #category : #metrics }
 FamixTypeGroup >> averageNumberOfMethods [
+
 	<FMProperty: #averageNumberOfMethods type: #Number>
 	<FMComment: 'Average number of methods per class'>
-
-	^self
-		lookUpPropertyNamed: #averageNumberOfMethods
-		computedAs: [(self average: [:each | each numberOfMethods ]) asFloat]
+	<derived>
+	^ self cacheAt: #averageNumberOfMethods ifAbsentPut: [ (self average: [ :each | each numberOfMethods ]) asFloat ]
 ]
 
 { #category : #metrics }
 FamixTypeGroup >> averageNumberOfStatements [
-	<FMProperty: #averageNumberOfStatements type: #Number>
-	<FMComment: 'Average number of statements per class'>	
 
-	^self
-		lookUpPropertyNamed: #averageNumberOfStatements
-		computedAs: [(self average: [:each | each numberOfStatements]) asFloat]
+	<FMProperty: #averageNumberOfStatements type: #Number>
+	<FMComment: 'Average number of statements per class'>
+	<derived>
+	^ self cacheAt: #averageNumberOfStatements ifAbsentPut: [ (self average: [ :each | each numberOfStatements ]) asFloat ]
 ]
 
 { #category : #metrics }
@@ -130,12 +110,10 @@ FamixTypeGroup >> bunchCohesion [
 	cgClasses := self allClasses select: [ :c | c isInstanceSide ].
 	cgTypes := cgClasses flatCollect: [ :c | c allRecursiveTypes ].
 	cgClasses := (cgClasses union: cgTypes) asArray.
-	cgClasses size == 0
-		ifTrue: [ ^ 0.0 ].
-	intraConnectivities := (cgClasses
-		collect: [ :cgClass | (cgClass queryAllOutgoing opposites atScope: FamixTType) select: [ :class | (cgClasses includes: class) and: [ class isInstanceSide ] ] ])
-		inject: 0
-		into: [ :subTotal :each | subTotal + each size ].
+	cgClasses size == 0 ifTrue: [ ^ 0.0 ].
+	intraConnectivities := (cgClasses collect: [ :cgClass |
+		                        (cgClass queryAllOutgoing opposites containersOfType: FamixTType) select: [ :class |
+			                        (cgClasses includes: class) and: [ class isInstanceSide ] ] ]) inject: 0 into: [ :subTotal :each | subTotal + each size ].
 	^ intraConnectivities / cgClasses size squared asFloat
 ]
 
@@ -154,12 +132,12 @@ FamixTypeGroup >> bunchCouplingWith: aClassGroup [
 		ifTrue: [ ^ 0.0 ].
 	interConnectivities := (cgClasses
 		collect:
-			[ :cgClass | (cgClass queryAllOutgoing opposites atScope: FamixTType) select: [ :referencedClass | (dependClasses includes: referencedClass) and: [ referencedClass isInstanceSide ] ] ])
+			[ :cgClass | (cgClass queryAllOutgoing opposites containersOfType: FamixTType) select: [ :referencedClass | (dependClasses includes: referencedClass) and: [ referencedClass isInstanceSide ] ] ])
 		inject: 0
 		into: [ :subTotal :each | subTotal + each size ].
 	interConnectivities := ((cgClasses
 		collect:
-			[ :cgClass | (cgClass queryAllIncoming opposites atScope: FamixTType) select: [ :referencingClass | (dependClasses includes: referencingClass) and: [ referencingClass isInstanceSide ] ] ])
+			[ :cgClass | (cgClass queryAllIncoming opposites containersOfType: FamixTType) select: [ :referencingClass | (dependClasses includes: referencingClass) and: [ referencingClass isInstanceSide ] ] ])
 		inject: 0
 		into: [ :subTotal :each | subTotal + each size ]) + interConnectivities.
 	^ interConnectivities / (2 * cgClasses size * dependClasses size) asFloat
@@ -200,8 +178,8 @@ FamixTypeGroup >> efferentCoupling [
 	cgClasses := self allClasses select: [ :c | c isInstanceSide ].
 	cgTypes := cgClasses flatCollect: [ :c | c allRecursiveTypes ].
 	cgClasses := (cgClasses union: cgTypes) asArray.
-	^ (cgClasses flatCollect: [ :aClass | (aClass queryAllOutgoing atScope: FamixTType) select: [ :c | (cgClasses includes: c) not and: [ c isInstanceSide ] ] ])
-		asSet size
+	^ (cgClasses flatCollect: [ :aClass |
+		   (aClass queryAllOutgoing containersOfType: FamixTType) select: [ :c | (cgClasses includes: c) not and: [ c isInstanceSide ] ] ]) asSet size
 ]
 
 { #category : #metrics }

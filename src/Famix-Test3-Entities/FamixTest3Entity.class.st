@@ -7,16 +7,17 @@ Class {
 { #category : #meta }
 FamixTest3Entity class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Entity super: #MooseEntity>
 	<package: #'Famix-Test3-Entities'>
 	<generated>
 	<abstract>
-	^ self
 ]
 
 { #category : #testing }
 FamixTest3Entity class >> isAbstract [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self == FamixTest3Entity
 ]
@@ -24,13 +25,31 @@ FamixTest3Entity class >> isAbstract [
 { #category : #meta }
 FamixTest3Entity class >> metamodel [
 
+	<ignoreForCoverage>
 	<generated>
 	^ FamixTest3Model metamodel
 ]
 
 { #category : #testing }
+FamixTest3Entity >> canBeStub [
+
+	<ignoreForCoverage>
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+FamixTest3Entity >> hasImmediateSource [
+
+	<ignoreForCoverage>
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
 FamixTest3Entity >> isAccess [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -38,6 +57,7 @@ FamixTest3Entity >> isAccess [
 { #category : #testing }
 FamixTest3Entity >> isAssociation [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -45,6 +65,7 @@ FamixTest3Entity >> isAssociation [
 { #category : #testing }
 FamixTest3Entity >> isAttribute [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -52,6 +73,7 @@ FamixTest3Entity >> isAttribute [
 { #category : #testing }
 FamixTest3Entity >> isBehavioural [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -59,6 +81,7 @@ FamixTest3Entity >> isBehavioural [
 { #category : #testing }
 FamixTest3Entity >> isClass [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -73,6 +96,7 @@ FamixTest3Entity >> isComment [
 { #category : #testing }
 FamixTest3Entity >> isInvocation [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -80,6 +104,7 @@ FamixTest3Entity >> isInvocation [
 { #category : #testing }
 FamixTest3Entity >> isMethod [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -87,6 +112,7 @@ FamixTest3Entity >> isMethod [
 { #category : #testing }
 FamixTest3Entity >> isNamedEntity [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -94,6 +120,7 @@ FamixTest3Entity >> isNamedEntity [
 { #category : #testing }
 FamixTest3Entity >> isPackage [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -101,6 +128,7 @@ FamixTest3Entity >> isPackage [
 { #category : #testing }
 FamixTest3Entity >> isParametricEntity [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -108,6 +136,7 @@ FamixTest3Entity >> isParametricEntity [
 { #category : #testing }
 FamixTest3Entity >> isQueryable [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -115,6 +144,7 @@ FamixTest3Entity >> isQueryable [
 { #category : #testing }
 FamixTest3Entity >> isReference [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -122,6 +152,7 @@ FamixTest3Entity >> isReference [
 { #category : #testing }
 FamixTest3Entity >> isStructuralEntity [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -129,6 +160,7 @@ FamixTest3Entity >> isStructuralEntity [
 { #category : #testing }
 FamixTest3Entity >> isType [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]

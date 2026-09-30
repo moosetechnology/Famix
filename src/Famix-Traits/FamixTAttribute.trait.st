@@ -10,15 +10,19 @@ FamixTAttribute represents a field of a class. It is an attribute of the parent 
 |---|
 | `parentType` | `FamixTAttribute` | `attributes` | `FamixTWithAttributes` | Type declaring the attribute. belongsTo implementation|
 
+### Outgoing dependencies
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `typing` | `FamixTTypedEntity` | `typedEntity` | `FamixTEntityTyping` | Association linking this entity to its declared type.|
+
 ### Incoming dependencies
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `incomingAccesses` | `FamixTAccessible` | `variable` | `FamixTAccess` | All Famix accesses pointing to this structural entity|
+| `incomingAccesses` | `FamixTAccessible` | `candidates` | `FamixTAccess` | All Famix accesses pointing to this structural entity|
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `declaredType` | `FamixTTypedEntity` | `typedEntities` | `FamixTType` | Type of the entity, if any|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
 
 
@@ -44,28 +48,26 @@ Trait {
 { #category : #meta }
 FamixTAttribute classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TAttribute super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
-{ #category : #visitor }
-FamixTAttribute >> accept: aVisitor [
+{ #category : #private }
+FamixTAttribute >> accessorMethods [
 
-	<generated>
-	^ aVisitor visitFamixTAttribute: self
+	^ (self incomingAccesses collectAsSet: [ :each | each source ])
+		  select: [ :each | each isGetter or: [ each isSetter ] ]
 ]
 
 { #category : #metrics }
 FamixTAttribute >> hierarchyNestingLevel [
+
 	<FMProperty: #hierarchyNestingLevel type: #Number>
 	<derived>
 	<FMComment: 'Attribute hierarchy nesting level'>
-		
-	^self
-		lookUpPropertyNamed: #hierarchyNestingLevel
-		computedAs: [self parentType hierarchyNestingLevel]
+	^ self cacheAt: #hierarchyNestingLevel ifAbsent: [ self parentType hierarchyNestingLevel ]
 ]
 
 { #category : #metrics }
@@ -76,8 +78,17 @@ FamixTAttribute >> hierarchyNestingLevel: aNumber [
 { #category : #testing }
 FamixTAttribute >> isAttribute [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
+]
+
+{ #category : #testing }
+FamixTAttribute >> isDead [
+
+	"If it is only accessed by accessors and its accessors are not called"
+	^ (self incomingAccesses collectAsSet: #source) = self accessorMethods
+		  and: [ self accessorMethods allSatisfy: #isDead ]
 ]
 
 { #category : #printing }
@@ -93,6 +104,7 @@ FamixTAttribute >> mooseNameOn: aStream [
 FamixTAttribute >> parentType [
 	"Relation named: #parentType type: #FamixTWithAttributes opposite: #attributes"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Type declaring the attribute. belongsTo implementation'>
 	<container>
@@ -105,13 +117,6 @@ FamixTAttribute >> parentType: anObject [
 	parentType := anObject.
 	self resetMooseName.
 
-]
-
-{ #category : #navigation }
-FamixTAttribute >> parentTypeGroup [
-	<generated>
-	<navigation: 'ParentType'>
-	^ MooseSpecializedGroup with: self parentType
 ]
 
 { #category : #printing }

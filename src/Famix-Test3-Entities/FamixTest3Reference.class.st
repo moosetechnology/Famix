@@ -33,8 +33,8 @@ Class {
 { #category : #meta }
 FamixTest3Reference class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Reference super: #FamixTest3Entity>
 	<package: #'Famix-Test3-Entities'>
 	<generated>
-	^ self
 ]

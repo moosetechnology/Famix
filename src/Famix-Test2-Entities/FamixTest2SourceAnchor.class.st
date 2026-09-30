@@ -21,16 +21,17 @@ Class {
 { #category : #meta }
 FamixTest2SourceAnchor class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #SourceAnchor super: #FamixTest2Entity>
 	<package: #'Famix-Test2-Entities'>
 	<generated>
 	<abstract>
-	^ self
 ]
 
 { #category : #testing }
 FamixTest2SourceAnchor class >> isAbstract [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self == FamixTest2SourceAnchor
 ]

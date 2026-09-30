@@ -37,16 +37,17 @@ Class {
 { #category : #meta }
 FamixTest8Residence class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Residence super: #FamixTest8Entity>
 	<package: #'Famix-Test8-Entities'>
 	<generated>
-	^ self
 ]
 
 { #category : #accessing }
 FamixTest8Residence >> biotope [
 	"Relation named: #biotope type: #FamixTest8TBiotope opposite: #incomingResidences"
 
+	<ignoreForCoverage>
 	<generated>
 	<target>
 	^ biotope
@@ -55,6 +56,7 @@ FamixTest8Residence >> biotope [
 { #category : #accessing }
 FamixTest8Residence >> biotope: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	biotope := anObject
 ]
@@ -63,6 +65,7 @@ FamixTest8Residence >> biotope: anObject [
 FamixTest8Residence >> resident [
 	"Relation named: #resident type: #FamixTest8TResident opposite: #outgoingResidences"
 
+	<ignoreForCoverage>
 	<generated>
 	<source>
 	^ resident
@@ -71,6 +74,7 @@ FamixTest8Residence >> resident [
 { #category : #accessing }
 FamixTest8Residence >> resident: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	resident := anObject
 ]

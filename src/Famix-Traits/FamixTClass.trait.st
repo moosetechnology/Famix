@@ -29,6 +29,7 @@ A class is typically scoped in a namespace. To model nested or anonymous classes
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `incomingReferences` | `FamixTReferenceable` | `referredEntity` | `FamixTReference` | References to this entity by other entities.|
+| `incomingTypings` | `FamixTType` | `declaredType` | `FamixTEntityTyping` | Relations to the entities that have this as type.|
 | `subInheritances` | `FamixTWithInheritances` | `superclass` | `FamixTInheritance` | Subinheritance relationships, i.e. known subclasses of this type.|
 
 ### Other
@@ -36,7 +37,6 @@ A class is typically scoped in a namespace. To model nested or anonymous classes
 |---|
 | `receivingInvocations` | `FamixTInvocationsReceiver` | `receiver` | `FamixTInvocation` | List of invocations performed on this entity (considered as the receiver)|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
-| `typedEntities` | `FamixTType` | `declaredType` | `FamixTTypedEntity` | Entities that have this type as declaredType|
 
 
 ## Properties
@@ -58,24 +58,29 @@ Trait {
 { #category : #meta }
 FamixTClass classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TClass super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : #groups }
 FamixTClass classSide >> annotationFamixClassGroup [
+
+	<ignoreForCoverage>
 	<generated>
 	<mooseGroup>
 	^ FamixClassGroup
 ]
 
-{ #category : #visitor }
-FamixTClass >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTClass: self
+{ #category : #'Famix-Extensions-metrics-support' }
+FamixTClass >> accessedAttributes [
+	
+	"Returns my attributes accessed by my methods. If the same attribute is accessed 
+	by two different methods it is counted twice.
+	Used to support the calculation of LCOM"
+	
+	^ self methodsWithoutSutbsAndConstructors asOrderedCollection flatCollect: [ :method | method accessedAttributes ]
 ]
 
 { #category : #adding }
@@ -127,9 +132,7 @@ FamixTClass >> inheritedAttributes [
 	| inheritedAttrs |
 	inheritedAttrs := OrderedCollection new.
 	self allSuperclassesDo: [ :each |
-		inheritedAttrs addAll: (each isParametricEntity
-				 ifTrue: [ each genericEntity ]
-				 ifFalse: [ each ]) attributes ].
+		inheritedAttrs addAll: each attributes ].
 	^ inheritedAttrs
 ]
 
@@ -175,6 +178,7 @@ FamixTClass >> inheritedSignaturesToMethod [
 { #category : #testing }
 FamixTClass >> isClass [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
@@ -187,15 +191,16 @@ FamixTClass >> isObjectClass [
 
 { #category : #testing }
 FamixTClass >> isTestCase [
+
 	<FMProperty: #isTestCase type: #Boolean>
 	<FMComment: 'True if the method is considered as a test'>
-	<derived>
 	^ self attributeAt: #isTestCase ifAbsent: [ false ]
 ]
 
 { #category : #testing }
 FamixTClass >> isTestCase: aBoolean [
-	^ self attributeAt: #isTestCase put: true
+
+	^ self attributeAt: #isTestCase put: aBoolean
 ]
 
 { #category : #enumerating }
@@ -206,16 +211,15 @@ FamixTClass >> overriddenMethods [
 
 { #category : #metrics }
 FamixTClass >> weightOfAClass [
+
 	<FMProperty: #weightOfAClass type: #Number>
+	<FMComment: 'Weight of a class'>
 	<derived>
-	<FMComment: 'Weight of a class'>	
-			
-	^self
-		lookUpPropertyNamed: #weightOfAClass
-		computedAs: [self notExistentMetricValue]
+	^ self attributeAt: #weightOfAClass ifAbsent: [ self notExistentMetricValue ]
 ]
 
 { #category : #metrics }
 FamixTClass >> weightOfAClass: aNumber [
-	self cacheAt: #weightOfAClass put: aNumber
+
+	self attributeAt: #weightOfAClass put: aNumber
 ]

@@ -33,8 +33,8 @@ Class {
 { #category : #meta }
 FamixTest2Inheritance class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Inheritance super: #FamixTest2Entity>
 	<package: #'Famix-Test2-Entities'>
 	<generated>
-	^ self
 ]

@@ -21,28 +21,23 @@ Trait {
 { #category : #meta }
 FamixTPackageable classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TPackageable super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : #visitor }
-FamixTPackageable >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTPackageable: self
 ]
 
 { #category : #accessing }
 FamixTPackageable >> isExtension [
-	^ (self belongsTo atScope: FamixTPackage) ~= (self atScope: FamixTPackage)
+
+	^ (self belongsTo containersOfType: FamixTPackage) ~= (self containersOfType: FamixTPackage)
 ]
 
 { #category : #accessing }
 FamixTPackageable >> parentPackage [
 	"Relation named: #parentPackage type: #FamixTPackage opposite: #childEntities"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Package containing the entity in the code structure (if applicable)'>
 	<container>
@@ -52,13 +47,7 @@ FamixTPackageable >> parentPackage [
 { #category : #accessing }
 FamixTPackageable >> parentPackage: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	parentPackage := anObject
-]
-
-{ #category : #navigation }
-FamixTPackageable >> parentPackageGroup [
-	<generated>
-	<navigation: 'ParentPackage'>
-	^ MooseSpecializedGroup with: self parentPackage
 ]

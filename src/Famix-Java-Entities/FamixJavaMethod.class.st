@@ -21,6 +21,7 @@
 | `accesses` | `FamixTWithAccesses` | `accessor` | `FamixTAccess` | Accesses to variables made by this behaviour.|
 | `outgoingInvocations` | `FamixTWithInvocations` | `sender` | `FamixTInvocation` | Outgoing invocations sent by this behaviour.|
 | `outgoingReferences` | `FamixTWithReferences` | `referencer` | `FamixTReference` | References from this entity to other entities.|
+| `typing` | `FamixTTypedEntity` | `typedEntity` | `FamixTEntityTyping` | Association linking this entity to its declared type.|
 
 ### Incoming dependencies
 | Relation | Origin | Opposite | Type | Comment |
@@ -33,7 +34,6 @@
 |---|
 | `caughtExceptions` | `FamixTWithExceptions` | `catchingEntities` | `FamixTThrowable` | The exceptions caught by the method|
 | `declaredExceptions` | `FamixTWithExceptions` | `declaringEntities` | `FamixTThrowable` | The exceptions declared by the method|
-| `declaredType` | `FamixTTypedEntity` | `typedEntities` | `FamixTType` | Type of the entity, if any|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
 | `thrownExceptions` | `FamixTWithExceptions` | `throwingEntities` | `FamixTThrowable` | The exceptions thrown by the method|
 
@@ -48,7 +48,7 @@
 | `isFinal` | `Boolean` | false | Entity can be declared final|
 | `isStub` | `Boolean` | false | Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.|
 | `isSynchronized` | `Boolean` | false | Entity can be declared synchronized|
-| `kind` | `String` | nil | Tag indicating a setter, getter, constant, constructor method|
+| `kind` | `String` | nil | Tag indicating a setter, getter, constant method|
 | `name` | `String` | nil | Basic name of the entity, not full reference.|
 | `signature` | `String` | nil | Signature of the message being sent|
 | `visibility` | `String` | nil | Visibility of the entity|
@@ -65,26 +65,10 @@ Class {
 { #category : #meta }
 FamixJavaMethod class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Method super: #FamixJavaContainerEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^ self
-]
-
-{ #category : #visitor }
-FamixJavaMethod >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaMethod: self
-]
-
-{ #category : #'Famix-Extensions-metrics-support' }
-FamixJavaMethod >> accessedAttributes [
-	
-	"Returns the set of attributes of my class accessed by me (method). 
-	Used to support the calculation of LCOM"
-	
-	^ (self queryOutgoingAccesses opposites withinParentUsing: FamixTClass) asSet select: #isAttribute
 ]
 
 { #category : #'Famix-Extensions' }
@@ -124,11 +108,6 @@ FamixJavaMethod >> innerClassesImplementingMethods [
 ]
 
 { #category : #'Famix-Extensions' }
-FamixJavaMethod >> invokedBehaviours [
-	^ self queryAllOutgoingInvocations opposites
-]
-
-{ #category : #'Famix-Extensions' }
 FamixJavaMethod >> invokedMethods [
 	<FMProperty: #invokedMethods type: #FamixJavaMethod> <derived> <multivalued>
 	<FMComment: 'The methods invoked by the receiver'>
@@ -138,7 +117,8 @@ FamixJavaMethod >> invokedMethods [
 
 { #category : #'Famix-Extensions' }
 FamixJavaMethod >> invokingBehaviours [
-	^ self queryAllIncomingInvocations opposites
+
+	^ (self queryIncoming: FamixTInvocation) opposites
 ]
 
 { #category : #'Famix-Extensions' }
@@ -162,6 +142,24 @@ FamixJavaMethod >> isClassInitializer [
 	<derived>
 	<FMComment: 'True if the method is an initializer of the class (i.e. contains the attribute init env)'>
 	^ #initializer = self kind or: [ self cacheAt: #isClassInitializer ifAbsent: [ false ] ]
+]
+
+{ #category : #'trait protocol conflict' }
+FamixJavaMethod >> isConstructor [
+
+	<FMProperty: #isConstructor type: #Boolean>
+	<FMComment: 'Is the method a constructor for its class?'>
+	<derived>
+	^ false
+]
+
+{ #category : #testing }
+FamixJavaMethod >> isDefault [
+
+	<FMProperty: #isDefault type: #Boolean>
+	<derived>
+	<FMComment: 'True if the method has the default modifier. This means it is a method from an interface with a default implementation.'>
+	^ #default = self kind
 ]
 
 { #category : #testing }
@@ -212,11 +210,44 @@ FamixJavaMethod >> isImplementing [
 ]
 
 { #category : #testing }
+FamixJavaMethod >> isInitializationBlock [
+	"Return true if I represent an initialization block. I can either be static or not. You can use #isClassSide to find out."
+
+	^ '<Initializer>' = self name
+]
+
+{ #category : #testing }
+FamixJavaMethod >> isInitializer [
+
+	^ false
+]
+
+{ #category : #testing }
+FamixJavaMethod >> isInstanceInitializationBlock [
+
+	^ self isInitializationBlock and: [ self isClassSide not ]
+]
+
+{ #category : #testing }
 FamixJavaMethod >> isJUnit4Test [
 	<FMProperty: #isJUnit4Test type: #Boolean>
 	<derived>
 	<FMComment: 'True if the method is considered as a Junit 4 Java test'>
 	^ self isAnnotatedWith: 'Test'
+]
+
+{ #category : #testing }
+FamixJavaMethod >> isMethodDefinition [
+	"I am here to know if a method is a method declaration or a method definition. 
+	
+	Not all methods are defined. Abstract methods and most methods from interfaces are not defined."
+
+	self isAbstract ifTrue: [ ^false ].
+
+	self parentType isInterface ifFalse: [ ^ true ].
+	
+	"If the parent is an interface, we have a definition if the method has the #default or #static keyword"
+	^ self isDefault or: [ self isClassSide ]
 ]
 
 { #category : #testing }
@@ -259,42 +290,18 @@ FamixJavaMethod >> isSetter [
 ]
 
 { #category : #testing }
-FamixJavaMethod >> isSurelyInvokedBy: aFAMIXMethod [
-	| outgoingInvo |
-	((self isAbstract or: [ aFAMIXMethod isAbstract ]) or: [ (outgoingInvo := aFAMIXMethod queryAllOutgoingInvocations) isEmpty ])
-		ifFalse: [ outgoingInvo
-				do: [ :invo | 
-					(invo signature = self signature and: [ invo isASureInvocation ])
-						ifTrue: [ | invocationRVar |
-							invocationRVar := invo getReceivingFAMIXClass.
-							(invocationRVar isNotNil and: [ (invocationRVar lookUp: self signature) = self ]) ifTrue: [ ^ true ] ] ] ].
-	^ false
+FamixJavaMethod >> isStaticInitializationBlock [
+
+	^ self isInitializationBlock and: [ self isClassSide ]
 ]
 
 { #category : #accessing }
 FamixJavaMethod >> numberOfAccesses [
+
 	<FMProperty: #numberOfAccesses type: #Number>
 	<derived>
 	<FMComment: 'The number of accesses from a method'>
-	
-	^ self 
-		lookUpPropertyNamed: #numberOfAccesses
-		computedAs: [ self accesses size ]
-]
-
-{ #category : #'Famix-Extensions-private' }
-FamixJavaMethod >> numberOfConditionals [
-	<FMProperty: #numberOfConditionals type: #Number>
-	<FMComment: 'The number of conditionals in a method'>
-	^ self
-		lookUpPropertyNamed: #numberOfConditionals
-		computedAs: [ 
-			self notExistentMetricValue ] 
-]
-
-{ #category : #'Famix-Extensions-private' }
-FamixJavaMethod >> numberOfConditionals: aNumber [
-	self cacheAt: #numberOfConditionals put: aNumber
+	^ self cacheAt: #numberOfAccesses ifAbsentPut: [ self accesses size ]
 ]
 
 { #category : #'Famix-Extensions' }

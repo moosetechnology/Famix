@@ -21,17 +21,10 @@ Trait {
 { #category : #meta }
 FamixTWithMethods classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TWithMethods super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : #visitor }
-FamixTWithMethods >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTWithMethods: self
 ]
 
 { #category : #accessing }
@@ -50,33 +43,27 @@ FamixTWithMethods >> implements: aString [
 FamixTWithMethods >> methods [
 	"Relation named: #methods type: #FamixTMethod opposite: #parentType"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Methods declared by this type.'>
-	<derived>
 	^ methods
 ]
 
 { #category : #accessing }
 FamixTWithMethods >> methods: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	methods value: anObject
 ]
 
-{ #category : #accessing }
-FamixTWithMethods >> methodsGroup [
-	<navigation: 'Methods'>
-	^MooseGroup
-		withAll: self methods
-		withDescription: 'Methods from ' , self mooseName
-]
-
 { #category : #metrics }
 FamixTWithMethods >> numberOfAbstractMethods [
+
 	<FMProperty: #numberOfAbstractMethods type: #Number>
 	<derived>
 	<FMComment: 'The number of abstract methods in the class'>
-	^ self lookUpPropertyNamed: #numberOfAbstractMethods computedAs: [ self methodsGroup count: [ :each | each isAbstract ] ]
+	^ self cacheAt: #numberOfAbstractMethods ifAbsentPut: [ self methods count: [ :each | each isAbstract ] ]
 ]
 
 { #category : #metrics }
@@ -86,13 +73,11 @@ FamixTWithMethods >> numberOfAbstractMethods: aNumber [
 
 { #category : #accessing }
 FamixTWithMethods >> numberOfMethods [
+
 	<FMProperty: #numberOfMethods type: #Number>
 	<derived>
 	<FMComment: 'The number of methods in a class'>
-
-	^self
-		lookUpPropertyNamed: #numberOfMethods
-		computedAs: [self methods size]
+	^ self cacheAt: #numberOfMethods ifAbsent: [ self methods size ]
 ]
 
 { #category : #accessing }
@@ -102,37 +87,36 @@ FamixTWithMethods >> numberOfMethods: aNumber [
 
 { #category : #metrics }
 FamixTWithMethods >> tightClassCohesion [
+
 	<FMProperty: #tightClassCohesion type: #Number>
 	<derived>
 	<FMComment: 'Tight class cohesion of a class'>
 	self flag: #TODO.
-	^ self
-		lookUpPropertyNamed: #tightClassCohesion
-		computedAs: [ | tcc accessDictionary nom |
-			tcc := 0.
-			accessDictionary := Dictionary new.
-			self methods
-				do: [ :eachMethod | 
-					eachMethod accesses
-						do: [ :eachAccess | 
-							| var |
-							var := eachAccess variable.
-							var isAttribute
-								ifTrue: [ | varName accessedFrom |
-									varName := var name.
-									accessedFrom := accessDictionary at: varName ifAbsent: [  ].
-									accessedFrom
-										ifNil: [ accessedFrom := Set new.
-											accessDictionary at: varName put: accessedFrom ].
-									accessedFrom add: eachMethod name ] ] ].
-			accessDictionary values
-				do: [ :each | 
-					| size |
-					size := each size.
-					tcc := tcc + (size * (size - 1) / 2) ].
-			nom := self numberOfMethods.
-			tcc := (nom = 0 or: [ nom = 1 ]) ifFalse: [ tcc / (nom * (nom - 1) / 2) ] ifTrue: [ 0 ].
-			tcc asFloat ]
+	^ self cacheAt: #tightClassCohesion ifAbsentPut: [
+			  | tcc accessDictionary nom |
+			  tcc := 0.
+			  accessDictionary := Dictionary new.
+			  self methods do: [ :eachMethod |
+					  eachMethod accesses do: [ :eachAccess |
+							  | var |
+							  var := eachAccess variable.
+							  var isAttribute ifTrue: [
+									  | varName accessedFrom |
+									  varName := var name.
+									  accessedFrom := accessDictionary at: varName ifAbsent: [ ].
+									  accessedFrom ifNil: [
+											  accessedFrom := Set new.
+											  accessDictionary at: varName put: accessedFrom ].
+									  accessedFrom add: eachMethod name ] ] ].
+			  accessDictionary values do: [ :each |
+					  | size |
+					  size := each size.
+					  tcc := tcc + (size * (size - 1) / 2) ].
+			  nom := self numberOfMethods.
+			  tcc := (nom = 0 or: [ nom = 1 ])
+				         ifFalse: [ tcc / (nom * (nom - 1) / 2) ]
+				         ifTrue: [ 0 ].
+			  tcc asFloat ]
 ]
 
 { #category : #metrics }
@@ -142,13 +126,11 @@ FamixTWithMethods >> tightClassCohesion: aNumber [
 
 { #category : #metrics }
 FamixTWithMethods >> weightedMethodCount [
+
 	<FMProperty: #weightedMethodCount type: #Number>
 	<derived>
 	<FMComment: 'The sum of the complexity in a class'>
-			
-	^self
-		lookUpPropertyNamed: #weightedMethodCount
-		computedAs: [self methodsGroup sumNumbers: #cyclomaticComplexity]
+	^ self cacheAt: #weightedMethodCount ifAbsent: [ self methods sumNumbers: #cyclomaticComplexity ]
 ]
 
 { #category : #metrics }

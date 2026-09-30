@@ -35,10 +35,10 @@ Class {
 { #category : #meta }
 FamixStNamespace class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Namespace super: #FamixStNamedEntity>
 	<package: #'Famix-PharoSmalltalk-Entities'>
 	<generated>
-	^ self
 ]
 
 { #category : #'Famix-Extensions-metrics' }
@@ -81,13 +81,11 @@ FamixStNamespace >> numberOfClasses: aNumber [
 
 { #category : #'Famix-Extensions' }
 FamixStNamespace >> numberOfMethods [
+
 	<FMProperty: #numberOfMethods type: #Number>
 	<derived>
 	<FMComment: 'The number of methods in a namespace'>
-	
-	^self
-		lookUpPropertyNamed: #numberOfMethods
-		computedAs: [self types inject: 0 into: [ :sum :each | sum + each numberOfMethods ]]
+	^ self cacheAt: #numberOfMethods ifAbsentPut: [ self types inject: 0 into: [ :sum :each | sum + each numberOfMethods ] ]
 ]
 
 { #category : #'Famix-Extensions' }

@@ -21,8 +21,8 @@ Class {
 { #category : #meta }
 FamixTest8Biotope class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Biotope super: #FamixTest8Entity>
 	<package: #'Famix-Test8-Entities'>
 	<generated>
-	^ self
 ]

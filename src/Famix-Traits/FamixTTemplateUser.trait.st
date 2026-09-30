@@ -21,23 +21,17 @@ Trait {
 { #category : #meta }
 FamixTTemplateUser classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TTemplateUser super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : #visitor }
-FamixTTemplateUser >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTTemplateUser: self
 ]
 
 { #category : #accessing }
 FamixTTemplateUser >> template [
 	"Relation named: #template type: #FamixTTemplate opposite: #templateUsers"
 
+	<ignoreForCoverage>
 	<generated>
 	^ template
 ]
@@ -45,6 +39,7 @@ FamixTTemplateUser >> template [
 { #category : #accessing }
 FamixTTemplateUser >> template: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	template := anObject
 ]

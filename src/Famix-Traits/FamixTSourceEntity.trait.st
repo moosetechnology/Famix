@@ -23,17 +23,10 @@ Trait {
 { #category : #meta }
 FamixTSourceEntity classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TSourceEntity super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : #visitor }
-FamixTSourceEntity >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTSourceEntity: self
 ]
 
 { #category : #accessing }
@@ -55,7 +48,7 @@ FamixTSourceEntity >> computeNumberOfLinesOfCode [
 
 	(self isStub not and: [ self shouldCountChildrenForLinesOfCodeIfNoSourceAnchor ]) ifFalse: [ ^ self notExistentMetricValue ].
 
-	^ self children sumNumbers: #numberOfLinesOfCode
+	^ self containedEntities sumNumbers: #numberOfLinesOfCode
 ]
 
 { #category : #'source anchor' }
@@ -80,6 +73,12 @@ FamixTSourceEntity >> hasSourceAnchor [
 	^ self sourceAnchor isNotNil
 ]
 
+{ #category : #inspector }
+FamixTSourceEntity >> inspectionSourceContext: aContext [
+
+	aContext active: self sourceText isNotEmpty
+]
+
 { #category : #'source anchor' }
 FamixTSourceEntity >> multipleFileAnchorClass [
 	^ self mooseModel
@@ -90,16 +89,12 @@ FamixTSourceEntity >> multipleFileAnchorClass [
 				ifAbsent: [ self error: 'This metamodel does not includes the full concept of MultipleFileAnchor needed.' ] ]
 ]
 
-{ #category : #properties }
-FamixTSourceEntity >> notExistentMetricValue [
-	^ self explicitRequirement
-]
-
 { #category : #metrics }
 FamixTSourceEntity >> numberOfLinesOfCode [
+
 	<FMProperty: #numberOfLinesOfCode type: #Number>
 	<FMComment: 'The number of lines of code in a method.'>
-	^ self lookUpPropertyNamed: #numberOfLinesOfCode computedAs: [ self computeNumberOfLinesOfCode ]
+	^ self cacheAt: #numberOfLinesOfCode ifAbsent: [ self computeNumberOfLinesOfCode ]
 ]
 
 { #category : #metrics }
@@ -109,18 +104,16 @@ FamixTSourceEntity >> numberOfLinesOfCode: aNumber [
 
 { #category : #metrics }
 FamixTSourceEntity >> numberOfLinesOfCodeWithMoreThanOneCharacter [
+
 	<FMProperty: #numberOfLinesOfCodeWithMoreThanOneCharacter type: #Number>
 	<derived>
-	<FMComment:
-		'This metric is essentially similar to the numberOfLinesOfCode one, 
+	<FMComment: 'This metric is essentially similar to the numberOfLinesOfCode one, 
 	the difference being that it only counts the lines with more than one non-whitespace characters.
 	This metric is particularly useful for comparing the density of other metrics on a line of code.
 	For example, depending on the formatting style chosen a Java curly brace, or a Smalltalk block 
 	can appear inline or on a separate line. For normalization purposes, these commonly appearing 
 	cases can be ruled out through the present metric.'>
-	^ self
-		lookUpPropertyNamed: #numberOfLinesOfCodeWithMoreThanOneCharacter
-		computedAs: [ (self sourceText lines select: [ :line | line trimBoth size > 1 ]) size ]
+	^ self cacheAt: #numberOfLinesOfCodeWithMoreThanOneCharacter ifAbsentPut: [ (self sourceText lines select: [ :line | line trimBoth size > 1 ]) size ]
 ]
 
 { #category : #metrics }
@@ -132,15 +125,16 @@ FamixTSourceEntity >> shouldCountChildrenForLinesOfCodeIfNoSourceAnchor [
 FamixTSourceEntity >> sourceAnchor [
 	"Relation named: #sourceAnchor type: #FamixTSourceAnchor opposite: #element"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'SourceAnchor entity linking to the original source code for this entity'>
-	<derived>
 	^ sourceAnchor
 ]
 
 { #category : #accessing }
 FamixTSourceEntity >> sourceAnchor: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	sourceAnchor := anObject
 ]

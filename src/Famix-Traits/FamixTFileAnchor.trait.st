@@ -24,17 +24,10 @@ Trait {
 { #category : #meta }
 FamixTFileAnchor classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TFileAnchor super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : #visitor }
-FamixTFileAnchor >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTFileAnchor: self
 ]
 
 { #category : #adding }
@@ -58,6 +51,7 @@ FamixTFileAnchor >> containerFiles [
 FamixTFileAnchor >> correspondingFile [
 
 	<FMProperty: #correspondingFile type: #FamixTFile>
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'File associated to this source anchor'>
 	^ correspondingFile
@@ -65,6 +59,7 @@ FamixTFileAnchor >> correspondingFile [
 
 { #category : #accessing }
 FamixTFileAnchor >> correspondingFile: anObject [
+	<ignoreForCoverage>
 	<generated>
 	correspondingFile := anObject
 ]
@@ -87,6 +82,7 @@ FamixTFileAnchor >> encoding [
 
 { #category : #accessing }
 FamixTFileAnchor >> encoding: anObject [
+	<ignoreForCoverage>
 	<generated>
 	encoding := anObject
 ]
@@ -105,6 +101,7 @@ FamixTFileAnchor >> endPos [
 FamixTFileAnchor >> fileName [
 
 	<FMProperty: #fileName type: #String>
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Name of the source file'>
 	^ fileName
@@ -125,6 +122,20 @@ FamixTFileAnchor >> hasSource [
 	^ self sourcesAreReadable
 ]
 
+{ #category : #inspector }
+FamixTFileAnchor >> inspectionFullSource: aBuilder [
+
+	<inspectorPresentationOrder: 5 title: 'Full sourceText'>
+	^ aBuilder newCode
+		  withoutSyntaxHighlight;
+		  withLineNumbers;
+		  text: self completeText;
+		  addTextSegmentDecoration: (SpTextPresenterDecorator forHighlight
+				   interval: (self startPos to: self endPos + 1);
+				   yourself);
+		  beNotEditable
+]
+
 { #category : #testing }
 FamixTFileAnchor >> isContiguousWith: anotherFileAnchor [
 	"compute to see if two entities are contiguous (i.e one followed by the other on consective lines) in a file by looking at their indexed file anchors"
@@ -139,6 +150,7 @@ FamixTFileAnchor >> isContiguousWith: anotherFileAnchor [
 { #category : #testing }
 FamixTFileAnchor >> isFileAnchor [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
@@ -165,6 +177,12 @@ FamixTFileAnchor >> rootFolder [
 	^ self mooseModel rootFolder
 ]
 
+{ #category : #accessing }
+FamixTFileAnchor >> sourceText [
+
+	^ self explicitRequirement
+]
+
 { #category : #testing }
 FamixTFileAnchor >> sourcesAreReadable [
 	^ self fileReference
@@ -174,7 +192,7 @@ FamixTFileAnchor >> sourcesAreReadable [
 
 { #category : #accessing }
 FamixTFileAnchor >> startLine [
-	^ self explicitRequirement
+	^ self cacheAt: #startLine ifAbsentPut: [ self completeText lineNumberCorrespondingToIndex: self startPos ]
 ]
 
 { #category : #accessing }

@@ -21,8 +21,8 @@ Class {
 { #category : #meta }
 FamixTest1SourceLanguage class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #SourceLanguage super: #FamixTest1Entity>
 	<package: #'Famix-Test1-Entities'>
 	<generated>
-	^ self
 ]

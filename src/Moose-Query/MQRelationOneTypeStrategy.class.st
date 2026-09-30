@@ -30,6 +30,6 @@ MQRelationOneTypeStrategy >> propertyType: anObject [
 { #category : #selection }
 MQRelationOneTypeStrategy >> selectPropertiesIn: anEntity [
 
-	^ anEntity mooseDescription allRelationProperties select: [ :relation | 
+	^ anEntity metadescription allRelationProperties select: [ :relation | 
 		  propertyType isOfType: relation type implementingClass ]
 ]

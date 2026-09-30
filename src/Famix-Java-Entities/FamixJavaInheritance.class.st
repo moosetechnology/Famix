@@ -33,17 +33,10 @@ Class {
 { #category : #meta }
 FamixJavaInheritance class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Inheritance super: #FamixJavaEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^ self
-]
-
-{ #category : #visitor }
-FamixJavaInheritance >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaInheritance: self
 ]
 
 { #category : #'Moose-Hismo' }

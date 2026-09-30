@@ -115,16 +115,24 @@ MooseGroup >> max: aSymbolOrBlock [
 	^ self inject: (aSymbolOrBlock value: self first) into: [ :max :each | max max: (aSymbolOrBlock value: each) ]
 ]
 
+{ #category : #accessing }
+MooseGroup >> metadescription [
+
+	| model metamodel |
+	model := self mooseModel.
+	model ifNil: [ ^ FM3NullClass new ].
+	metamodel := model metamodel.
+	"Specialized groups are not necessarily registered in the entity metamodel.
+	Resolve the nearest registered superclass, preserving exact matches."
+	self class withAllSuperclasses do: [ :groupClass |
+		(metamodel descriptionOf: groupClass ifAbsent: [ nil ])
+			ifNotNil: [ :description | ^ description ] ].
+	^ FM3NullClass new
+]
+
 { #category : #'public interface' }
 MooseGroup >> min: aSymbolOrBlock [
 	^ self inject: (aSymbolOrBlock value: self first) into: [ :min :each | min min: (aSymbolOrBlock value: each) ]
-]
-
-{ #category : #accessing }
-MooseGroup >> mooseDescription [
-	^ self mooseModel
-		ifNil: [ FM3NullClass new ]
-		ifNotNil: [ :model | model mooseDescriptionFor: self class ]
 ]
 
 { #category : #printing }
@@ -209,5 +217,6 @@ MooseGroup >> species [
 
 { #category : #properties }
 MooseGroup >> sumOfPropertyNamed: aPropertyName [
-	^ self inject: 0 into: [ :sum :each | sum + (each propertyNamed: aPropertyName ifNil: [ 0 ]) ]
+
+	^ self inject: 0 into: [ :sum :each | sum + (each cacheAt: aPropertyName ifAbsent: [ 0 ]) ]
 ]

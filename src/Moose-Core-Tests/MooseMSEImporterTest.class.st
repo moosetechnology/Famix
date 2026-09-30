@@ -97,10 +97,11 @@ MooseMSEImporterTest >> testOnePrimitiveTypeAndMethod [
 
 	| mooseModel |
 	mooseModel := self readMSEStream: '(
-(Moose-Core-Tests-Entities.PrimitiveType (id: 1) (name ''int''))
-(Moose-Core-Tests-Entities.Class (id: 2) (name ''ClassA''))
-(Moose-Core-Tests-Entities.Method (id: 3) (name ''methodA'') (declaredType (ref: 1)) (parentType (ref: 2)))
-)' readStream.
+	(Moose-Core-Tests-Entities.Class (id: 1) (name ''classA''))
+	(Moose-Core-Tests-Entities.Method (id: 2)
+		(name ''methodA'') (parentType (ref: 1)) (typing (ref: 3)))
+	(Moose-Core-Tests-Entities.PrimitiveType (id: 4) (name ''int''))
+	(Moose-Core-Tests-Entities.EntityTyping (id: 3) (declaredType (ref: 4))))' readStream.
 	self
 		assert: (mooseModel allPrimitiveTypes collect: #name) first
 		equals: 'int'.
@@ -168,14 +169,9 @@ MooseMSEImporterTest >> testUndeclaredProperty [
 	"The importer writes a trace when a property is undeclared.
 	This line will appear in CI traces, hence the following:"
 	self crTrace: '[Testing: This line is expected] '.
-	mooseModel := self readMSEStream:
-		              '((Moose-Core-Tests-Entities.Class (name ''ClassA'') (Undeclared 42) ))'
-			              readStream.
+	mooseModel := self readMSEStream: '((Moose-Core-Tests-Entities.Class (name ''ClassA'') (Undeclared 42) ))' readStream.
 
 	self assert: mooseModel allClasses first name equals: 'ClassA'.
-	self assert:
-		(mooseModel allClasses first propertyNamed: #Undeclared) isNotNil.
-	self
-		assert: (mooseModel allClasses first propertyNamed: #Undeclared)
-		equals: 42
+	self assert: (mooseModel allClasses first attributeAt: #Undeclared) isNotNil.
+	self assert: (mooseModel allClasses first attributeAt: #Undeclared) equals: 42
 ]

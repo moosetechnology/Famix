@@ -21,21 +21,16 @@ Trait {
 { #category : #meta }
 FamixTTraitUser classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TTraitUser super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : #visitor }
-FamixTTraitUser >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTTraitUser: self
 ]
 
 { #category : #adding }
 FamixTTraitUser >> addTraitUsage: anObject [
+
+	<ignoreForCoverage>
 	<generated>
 	^ self traitUsages add: anObject
 ]
@@ -44,14 +39,15 @@ FamixTTraitUser >> addTraitUsage: anObject [
 FamixTTraitUser >> traitUsages [
 	"Relation named: #traitUsages type: #FamixTTraitUsage opposite: #user"
 
+	<ignoreForCoverage>
 	<generated>
-	<derived>
 	^ traitUsages
 ]
 
 { #category : #accessing }
 FamixTTraitUser >> traitUsages: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	traitUsages value: anObject
 ]

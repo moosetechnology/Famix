@@ -21,6 +21,7 @@ FamixTFunction represents a behavioural entity in a procedural language.
 | `accesses` | `FamixTWithAccesses` | `accessor` | `FamixTAccess` | Accesses to variables made by this behaviour.|
 | `outgoingInvocations` | `FamixTWithInvocations` | `sender` | `FamixTInvocation` | Outgoing invocations sent by this behaviour.|
 | `outgoingReferences` | `FamixTWithReferences` | `referencer` | `FamixTReference` | References from this entity to other entities.|
+| `typing` | `FamixTTypedEntity` | `typedEntity` | `FamixTEntityTyping` | Association linking this entity to its declared type.|
 
 ### Incoming dependencies
 | Relation | Origin | Opposite | Type | Comment |
@@ -30,7 +31,6 @@ FamixTFunction represents a behavioural entity in a procedural language.
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `declaredType` | `FamixTTypedEntity` | `typedEntities` | `FamixTType` | Type of the entity, if any|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
 
 
@@ -57,23 +57,17 @@ Trait {
 { #category : #meta }
 FamixTFunction classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TFunction super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : #visitor }
-FamixTFunction >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTFunction: self
 ]
 
 { #category : #accessing }
 FamixTFunction >> functionOwner [
 	"Relation named: #functionOwner type: #FamixTWithFunctions opposite: #functions"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The container defining the function. The function is placed in a container, because certain languages can nest functions in functions.'>
 	<container>
@@ -88,16 +82,10 @@ FamixTFunction >> functionOwner: anObject [
 
 ]
 
-{ #category : #navigation }
-FamixTFunction >> functionOwnerGroup [
-	<generated>
-	<navigation: 'FunctionOwner'>
-	^ MooseSpecializedGroup with: self functionOwner
-]
-
 { #category : #testing }
 FamixTFunction >> isFunction [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]

@@ -27,17 +27,10 @@ Trait {
 { #category : #meta }
 FamixTWithInheritances classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TWithInheritances super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : #visitor }
-FamixTWithInheritances >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTWithInheritances: self
 ]
 
 { #category : #accessing }
@@ -82,17 +75,18 @@ FamixTWithInheritances >> directSuperclasses [
 
 { #category : #metrics }
 FamixTWithInheritances >> hierarchyNestingLevel [
+
 	<FMProperty: #hierarchyNestingLevel type: #Number>
 	<derived>
 	<FMComment: 'The nesting of a class inside the hierarchy'>
-	^ self
-		lookUpPropertyNamed: #hierarchyNestingLevel
-		computedAs: [ | currentMaxDepth |
-			(self directSuperclasses isEmpty or: [ self isStub ])
-				ifTrue: [ 0 ]
-				ifFalse: [ currentMaxDepth := 0.
-					self allSuperclassesDo: [ :aClass | currentMaxDepth := currentMaxDepth max: aClass hierarchyNestingLevel ].
-					currentMaxDepth + 1 ] ]
+	^ self cacheAt: #hierarchyNestingLevel ifAbsent: [
+			  | currentMaxDepth |
+			  (self directSuperclasses isEmpty or: [ self isStub ])
+				  ifTrue: [ 0 ]
+				  ifFalse: [
+						  currentMaxDepth := 0.
+						  self allSuperclassesDo: [ :aClass | currentMaxDepth := currentMaxDepth max: aClass hierarchyNestingLevel ].
+						  currentMaxDepth + 1 ] ]
 ]
 
 { #category : #metrics }
@@ -131,10 +125,11 @@ FamixTWithInheritances >> numberOfDirectSubclasses: aNumber [
 
 { #category : #metrics }
 FamixTWithInheritances >> numberOfSubclasses [
+
 	<FMProperty: #numberOfSubclasses type: #Number>
 	<derived>
 	<FMComment: 'The number of subclasses of a class'>
-	^ self lookUpPropertyNamed: #numberOfSubclasses computedAs: [ self subInheritances size ]
+	^ self cacheAt: #numberOfSubclasses ifAbsent: [ self subInheritances size ]
 ]
 
 { #category : #metrics }
@@ -146,15 +141,16 @@ FamixTWithInheritances >> numberOfSubclasses: aNumber [
 FamixTWithInheritances >> subInheritances [
 	"Relation named: #subInheritances type: #FamixTInheritance opposite: #superclass"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Subinheritance relationships, i.e. known subclasses of this type.'>
-	<derived>
 	^ subInheritances
 ]
 
 { #category : #accessing }
 FamixTWithInheritances >> subInheritances: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	subInheritances value: anObject
 ]
@@ -187,7 +183,7 @@ FamixTWithInheritances >> subclassHierarchyDepth: aNumber [
 
 { #category : #enumerating }
 FamixTWithInheritances >> subclassHierarchyGroup [
-	<navigation: 'All subclasses'>
+
 	^ MooseGroup withAll: self subclassHierarchy asSet withDescription: 'All subclasses of ' , self mooseName
 ]
 
@@ -195,15 +191,16 @@ FamixTWithInheritances >> subclassHierarchyGroup [
 FamixTWithInheritances >> superInheritances [
 	"Relation named: #superInheritances type: #FamixTInheritance opposite: #subclass"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Superinheritance relationships, i.e. known superclasses of this type.'>
-	<derived>
 	^ superInheritances
 ]
 
 { #category : #accessing }
 FamixTWithInheritances >> superInheritances: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	superInheritances value: anObject
 ]
@@ -223,10 +220,8 @@ FamixTWithInheritances >> superclassHierarchy [
 
 { #category : #enumerating }
 FamixTWithInheritances >> superclassHierarchyGroup [
-	<navigation: 'All superclasses'>
-	^ MooseGroup
-		withAll: self superclassHierarchy asSet
-		withDescription: 'All superclasses of ' , self mooseName
+
+	^ MooseGroup withAll: self superclassHierarchy asSet withDescription: 'All superclasses of ' , self mooseName
 ]
 
 { #category : #'Famix-Implementation' }

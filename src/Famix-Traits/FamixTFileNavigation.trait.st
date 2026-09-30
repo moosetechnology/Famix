@@ -29,10 +29,10 @@ Trait {
 { #category : #meta }
 FamixTFileNavigation classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TFileNavigation super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : #'instance creation' }
@@ -58,17 +58,11 @@ FamixTFileNavigation classSide >> fileName: aString startLine: anInteger startCo
 		yourself
 ]
 
-{ #category : #visitor }
-FamixTFileNavigation >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTFileNavigation: self
-]
-
 { #category : #accessing }
 FamixTFileNavigation >> endColumn [
 
 	<FMProperty: #endColumn type: #Number>
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Number of the end column'>
 	^ endColumn
@@ -76,6 +70,7 @@ FamixTFileNavigation >> endColumn [
 
 { #category : #accessing }
 FamixTFileNavigation >> endColumn: anObject [
+	<ignoreForCoverage>
 	<generated>
 	endColumn := anObject
 ]
@@ -84,6 +79,7 @@ FamixTFileNavigation >> endColumn: anObject [
 FamixTFileNavigation >> endLine [
 
 	<FMProperty: #endLine type: #Number>
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Number of the end line'>
 	^ endLine
@@ -91,19 +87,21 @@ FamixTFileNavigation >> endLine [
 
 { #category : #accessing }
 FamixTFileNavigation >> endLine: anObject [
+	<ignoreForCoverage>
 	<generated>
 	endLine := anObject
 ]
 
 { #category : #accessing }
 FamixTFileNavigation >> endPos [
-	^ [ self
-		lookUpPropertyNamed: #endPos
-		computedAs: [ | text |
-			((text := self completeText) intervalOfLine: self endLine - 1) last
-				+ (self endColumn ifNil: [ (text lines at: self endLine) size	"In case I do not have any endcolumn." ]) ] ]
-		on: SubscriptOutOfBounds
-		do: [ :err | 0 ]
+
+	^ [
+		  self cacheAt: #endPos ifAbsentPut: [
+				  | text |
+				  ((text := self completeText) intervalOfLine: self endLine - 1) last
+				  + (self endColumn ifNil: [ (text lines at: self endLine) size "In case I do not have any endcolumn." ]) ] ]
+		  on: SubscriptOutOfBounds
+		  do: [ :err | 0 ]
 ]
 
 { #category : #testing }
@@ -181,6 +179,7 @@ FamixTFileNavigation >> sourceText [
 FamixTFileNavigation >> startColumn [
 
 	<FMProperty: #startColumn type: #Number>
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Number of the start column'>
 	^ startColumn
@@ -188,6 +187,7 @@ FamixTFileNavigation >> startColumn [
 
 { #category : #accessing }
 FamixTFileNavigation >> startColumn: anObject [
+	<ignoreForCoverage>
 	<generated>
 	startColumn := anObject
 ]
@@ -196,6 +196,7 @@ FamixTFileNavigation >> startColumn: anObject [
 FamixTFileNavigation >> startLine [
 
 	<FMProperty: #startLine type: #Number>
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Number of the start line'>
 	^ startLine
@@ -203,19 +204,18 @@ FamixTFileNavigation >> startLine [
 
 { #category : #accessing }
 FamixTFileNavigation >> startLine: anObject [
+	<ignoreForCoverage>
 	<generated>
 	startLine := anObject
 ]
 
 { #category : #accessing }
 FamixTFileNavigation >> startPos [
-	^ self
-		lookUpPropertyNamed: #startPos
-		computedAs: [ (self completeText
-				intervalOfLine:
-					(self startLine
-						ifNil: [ 1 ]
-						ifNotNil: [ :start | start - 1 ])) last + (self startColumn ifNil: [ 0 ]) ]
+
+	^ self cacheAt: #startPos ifAbsentPut: [
+			  (self completeText intervalOfLine: (self startLine
+					    ifNil: [ 1 ]
+					    ifNotNil: [ :start | start - 1 ])) last + (self startColumn ifNil: [ 0 ]) ]
 ]
 
 { #category : #testing }

@@ -55,23 +55,17 @@ Trait {
 { #category : #meta }
 FamixTLambda classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TLambda super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : #visitor }
-FamixTLambda >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTLambda: self
 ]
 
 { #category : #accessing }
 FamixTLambda >> lambdaContainer [
 	"Relation named: #lambdaContainer type: #FamixTWithLambdas opposite: #lambdas"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The container defining the lambda expression. The lambda is placed in a container, because certain languages can nest lambdas in lambdas.'>
 	<container>
@@ -81,13 +75,7 @@ FamixTLambda >> lambdaContainer [
 { #category : #accessing }
 FamixTLambda >> lambdaContainer: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	lambdaContainer := anObject
-]
-
-{ #category : #navigation }
-FamixTLambda >> lambdaContainerGroup [
-	<generated>
-	<navigation: 'LambdaContainer'>
-	^ MooseSpecializedGroup with: self lambdaContainer
 ]

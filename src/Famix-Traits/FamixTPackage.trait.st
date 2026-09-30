@@ -39,24 +39,19 @@ Trait {
 { #category : #meta }
 FamixTPackage classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TPackage super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : #groups }
 FamixTPackage classSide >> annotationFamixPackageGroup [
+
+	<ignoreForCoverage>
 	<generated>
 	<mooseGroup>
 	^ FamixPackageGroup
-]
-
-{ #category : #visitor }
-FamixTPackage >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTPackage: self
 ]
 
 { #category : #accessing }
@@ -69,14 +64,15 @@ FamixTPackage >> addChildEntity: anObject [
 FamixTPackage >> childEntities [
 	"Relation named: #childEntities type: #FamixTPackageable opposite: #parentPackage"
 
+	<ignoreForCoverage>
 	<generated>
-	<derived>
 	^ childEntities
 ]
 
 { #category : #accessing }
 FamixTPackage >> childEntities: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	childEntities value: anObject
 ]
@@ -84,8 +80,30 @@ FamixTPackage >> childEntities: anObject [
 { #category : #testing }
 FamixTPackage >> isPackage [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
+]
+
+{ #category : #metrics }
+FamixTPackage >> numberOfClientPackages [
+
+	<FMProperty: #numberOfClientPackages type: #Number>
+	<FMComment: 'The number of packages which depend on this package'>
+	<derived>
+	^ self cacheAt: #numberOfClientPackages ifAbsentPut: [ self allClientsAtMyScope size ]
+]
+
+{ #category : #metrics }
+FamixTPackage >> relativeImportanceForSystem [
+
+	<FMProperty: #relativeImportanceForSystem type: #Number>
+	<FMComment: 'The number of client packages normalized by the total number of packages'>
+	<derived>
+	^ self cacheAt: #relativeImportanceForSystem ifAbsentPut: [
+			  self mooseModel allModelPackages size > 1
+				  ifTrue: [ self numberOfClientPackages / (self mooseModel allModelPackages size - 1) ]
+				  ifFalse: [ 0 ] ]
 ]
 
 { #category : #metrics }
@@ -94,8 +112,5 @@ FamixTPackage >> weightedMethodCount [
 	<FMProperty: #weightedMethodCount type: #Number>
 	<FMComment: 'The sum of the complexity in a package'>
 	<derived>
-	^ self
-		  lookUpPropertyNamed: #WMC
-		  computedAs: [ 
-		  (self toScope: FamixTWithMethods) sum: #weightedMethodCount ]
+	^ self cacheAt: #WMC ifAbsentPut: [ (self containedEntitiesOfType: FamixTWithMethods) sum: #weightedMethodCount ]
 ]

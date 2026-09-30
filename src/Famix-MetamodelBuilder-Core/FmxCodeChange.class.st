@@ -16,7 +16,7 @@ Public API and Key Messages
 Class {
 	#name : #FmxCodeChange,
 	#superclass : #Object,
-	#category : #'Famix-MetamodelBuilder-Core-Changes'
+	#category : #'Famix-MetamodelBuilder-Core-Generation'
 }
 
 { #category : #testing }
@@ -25,12 +25,37 @@ FmxCodeChange class >> isAbstract [
 ]
 
 { #category : #accessing }
+FmxCodeChange class >> priority [
+	"My subclass can override me and put a smaller number to be applied before other changes.."
+
+	^ 10
+]
+
+{ #category : #accessing }
 FmxCodeChange >> apply [
 	self subclassResponsibility
 ]
 
-{ #category : #testing }
-FmxCodeChange >> isRemoval [
+{ #category : #accessing }
+FmxCodeChange >> followingChangesIn: changes [
+	"I should filter the changes in parameter to select changes that should be built after me."
 
-	^ false
+	^ changes select: [ :change | self priority < change priority ]
+]
+
+{ #category : #testing }
+FmxCodeChange >> isRequired [
+
+	^ true
+]
+
+{ #category : #accessing }
+FmxCodeChange >> priority [
+
+	^ self class priority
+]
+
+{ #category : #sorting }
+FmxCodeChange >> threeWayCompareTo: anotherObject [
+	^ self printString threeWayCompareTo: anotherObject printString
 ]

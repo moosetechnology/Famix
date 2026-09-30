@@ -8,8 +8,6 @@ It stores the contained entities in a storage variable that points to a MooseGro
 Class {
 	#name : #MooseAbstractGroup,
 	#superclass : #MooseObject,
-	#traits : 'TMooseGroupDependencyQueries',
-	#classTraits : 'TMooseGroupDependencyQueries classTrait',
 	#instVars : [
 		'storage'
 	],
@@ -70,8 +68,9 @@ MooseAbstractGroup >> addLast: anEntity [
 
 { #category : #accessing }
 MooseAbstractGroup >> allContainers [
+
 	<navigation: 'All containers'>
-	^ self lookUpPropertyNamed: #allContainers computedAs: [ self entities select: #isContainerEntity ]
+	^ self cacheAt: #allContainers ifAbsent: [ self entities select: #isContainerEntity ]
 ]
 
 { #category : #groups }
@@ -83,8 +82,9 @@ MooseAbstractGroup >> allMatching: aClassOrTrait [
 
 { #category : #accessing }
 MooseAbstractGroup >> allModelContainers [
+
 	<navigation: 'All model containers'>
-	^ self lookUpPropertyNamed: #allModelContainers computedAs: [ self computeAllModelContainers ]
+	^ self cacheAt: #allModelContainers ifAbsent: [ self computeAllModelContainers ]
 ]
 
 { #category : #groups }
@@ -382,23 +382,25 @@ MooseAbstractGroup >> entitiesDo: aBlock [
 ]
 
 { #category : #'public interface' }
-MooseAbstractGroup >> entityNamed: aSymbol [ 
-	 
-	^self 
-		entityNamed: aSymbol 
-		ifAbsent: [nil]
+MooseAbstractGroup >> entityNamed: aSymbol [
+
+	^ self entityNamed: aSymbol ifAbsent: [ nil ]
 ]
 
 { #category : #'public interface' }
-MooseAbstractGroup >> entityNamed: aMooseName ifAbsent: aBlock [ 
-	^ self entityStorage at: aMooseName ifAbsent: aBlock
+MooseAbstractGroup >> entityNamed: aMooseName ifAbsent: aBlock [
+
+	^ self entities
+		  detect: [ :entity | entity hasUniqueMooseNameInModel and: [ entity mooseName = aMooseName ] ]
+		  ifNone: aBlock
 ]
 
 { #category : #'public interface' }
 MooseAbstractGroup >> entityNamed: aMooseName ifAbsent: aBlock ifPresent: anotherBlock [
+
 	| entity |
-	entity := self entityStorage at: aMooseName ifAbsent: [ nil ].
-	^ entity ifNil: [ aBlock value ] ifNotNil: [ anotherBlock value: entity ]
+	entity := self entityNamed: aMooseName ifAbsent: [ ^ aBlock value ].
+	^ anotherBlock value: entity
 ]
 
 { #category : #'public interface' }
@@ -592,6 +594,12 @@ MooseAbstractGroup >> isEmpty [
 ]
 
 { #category : #testing }
+MooseAbstractGroup >> isEmptyOrNil [
+
+	^ self entityStorage isEmptyOrNil
+]
+
+{ #category : #testing }
 MooseAbstractGroup >> isNotEmpty [
 	"Answer whether the receiver contains any elements."
 
@@ -673,6 +681,42 @@ MooseAbstractGroup >> printOn: aStream [
 	aStream nextPut: $)
 ]
 
+{ #category : #querying }
+MooseAbstractGroup >> queryAllIncoming [
+
+	^ MooseIncomingQueryResult on: self withAll: (self entities flatCollect: [ :m | m queryAllIncoming ])
+]
+
+{ #category : #querying }
+MooseAbstractGroup >> queryAllOutgoing [
+
+	^ MooseOutgoingQueryResult on: self withAll: (self entities flatCollect: [ :m | m queryAllOutgoing ])
+]
+
+{ #category : #querying }
+MooseAbstractGroup >> queryIncoming: aFAMIXClassAssociation [
+
+	^ MooseIncomingQueryResult on: self withAll: (self entities flatCollect: [ :m | m queryIncoming: aFAMIXClassAssociation ])
+]
+
+{ #category : #querying }
+MooseAbstractGroup >> queryLocalIncoming: aFAMIXClassAssociation [
+
+	^ MooseIncomingQueryResult on: self withAll: (self entities flatCollect: [ :m | m queryLocalIncoming: aFAMIXClassAssociation ])
+]
+
+{ #category : #querying }
+MooseAbstractGroup >> queryLocalOutgoing: aFAMIXClassAssociation [
+
+	^ MooseOutgoingQueryResult on: self withAll: (self entities flatCollect: [ :m | m queryLocalOutgoing: aFAMIXClassAssociation ])
+]
+
+{ #category : #querying }
+MooseAbstractGroup >> queryOutgoing: aFAMIXClassAssociation [
+
+	^ MooseOutgoingQueryResult on: self withAll: (self entities flatCollect: [ :m | m queryOutgoing: aFAMIXClassAssociation ])
+]
+
 { #category : #groups }
 MooseAbstractGroup >> rawAllUsing: aTrait [
 	"This is an optimization of #allUsing: when we do not need to manipulate a MooseGroup as result."
@@ -727,17 +771,10 @@ MooseAbstractGroup >> removeEntity: anEntity [
 	^ self entityStorage remove: anEntity
 ]
 
-{ #category : #loading }
-MooseAbstractGroup >> resetMooseNameFor: anEntity [
-	self entityStorage resetMooseNameFor: anEntity.
-	" this is safe, but probably a bit overdone "
-	self flush
-]
-
 { #category : #accessing }
 MooseAbstractGroup >> rootEntities [
 
-	^ self propertyNamed: #rootEntities ifAbsentPut: [ self entities select: [ :entity | entity isQueryable and: [ entity isRoot ] ] ]
+	^ self cacheAt: #rootEntities ifAbsentPut: [ self entities select: [ :entity | entity isQueryable and: [ entity isRoot ] ] ]
 ]
 
 { #category : #accessing }
@@ -750,6 +787,12 @@ MooseAbstractGroup >> second [
 MooseAbstractGroup >> select: aBlock [ 
 	 
 	^self entities select: aBlock
+]
+
+{ #category : #enumerating }
+MooseAbstractGroup >> select: aSelectBlock thenCollect: aCollectBlock [
+
+	^ self entities select: aSelectBlock thenCollect: aCollectBlock
 ]
 
 { #category : #enumerating }

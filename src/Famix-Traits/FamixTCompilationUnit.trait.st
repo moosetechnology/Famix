@@ -1,5 +1,5 @@
 "
-I represent a compilation unit file. Typically a .c or .cpp file
+I represent a compilation unit file
 
 ## Relations
 ======================
@@ -31,29 +31,23 @@ Trait {
 	],
 	#traits : 'FamixTFile',
 	#classTraits : 'FamixTFile classTrait',
-	#category : #'Famix-Traits-CompilationUnit'
+	#category : #'Famix-Traits-Traits'
 }
 
 { #category : #meta }
 FamixTCompilationUnit classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TCompilationUnit super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : #visitor }
-FamixTCompilationUnit >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTCompilationUnit: self
 ]
 
 { #category : #accessing }
 FamixTCompilationUnit >> compilationUnitOwner [
 	"Relation named: #compilationUnitOwner type: #FamixTWithCompilationUnits opposite: #compilationUnit"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The compilation unit that defines this module'>
 	<container>
@@ -63,13 +57,7 @@ FamixTCompilationUnit >> compilationUnitOwner [
 { #category : #accessing }
 FamixTCompilationUnit >> compilationUnitOwner: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	compilationUnitOwner := anObject
-]
-
-{ #category : #navigation }
-FamixTCompilationUnit >> compilationUnitOwnerGroup [
-	<generated>
-	<navigation: 'CompilationUnitOwner'>
-	^ MooseSpecializedGroup with: self compilationUnitOwner
 ]

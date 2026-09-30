@@ -30,23 +30,17 @@ Trait {
 { #category : #meta }
 FamixTComment classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TComment super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : #visitor }
-FamixTComment >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTComment: self
 ]
 
 { #category : #accessing }
 FamixTComment >> commentedEntity [
 	"Relation named: #commentedEntity type: #FamixTWithComments opposite: #comments"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Source code commented by the comment'>
 	<container>
@@ -56,41 +50,9 @@ FamixTComment >> commentedEntity [
 { #category : #accessing }
 FamixTComment >> commentedEntity: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	commentedEntity := anObject
-]
-
-{ #category : #navigation }
-FamixTComment >> commentedEntityGroup [
-	<generated>
-	<navigation: 'CommentedEntity'>
-	^ MooseSpecializedGroup with: self commentedEntity
-]
-
-{ #category : #accessing }
-FamixTComment >> container [
-
-	"Marked as deprecated in January, 2023"
-
-	self
-		deprecated: 'Use #commentedEntity instead'
-		transformWith:
-		'`@receiver container' -> '`@receiver commentedEntity'.
-
-	^ self commentedEntity
-]
-
-{ #category : #accessing }
-FamixTComment >> container: anObject [
-
-	"Marked as deprecated in January, 2023"
-
-	self
-		deprecated: 'Use #commentedEntity: instead'
-		transformWith:
-		'`@receiver container: `@arg' -> '`@receiver commentedEntity: `@arg'.
-
-	self commentedEntity: anObject
 ]
 
 { #category : #printing }

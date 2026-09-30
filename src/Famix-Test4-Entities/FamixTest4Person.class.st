@@ -33,16 +33,17 @@ Class {
 { #category : #meta }
 FamixTest4Person class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Person super: #FamixTest4Entity>
 	<package: #'Famix-Test4-Entities'>
 	<generated>
 	<abstract>
-	^ self
 ]
 
 { #category : #testing }
 FamixTest4Person class >> isAbstract [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self == FamixTest4Person
 ]
@@ -50,12 +51,15 @@ FamixTest4Person class >> isAbstract [
 { #category : #comparing }
 FamixTest4Person >> = aFamixTest4Person [
 
+	<ignoreForCoverage>
 	<generated>
 	^ aFamixTest4Person firstName = self firstName and: [ aFamixTest4Person lastName = self lastName and: [ aFamixTest4Person age = self age] ] 
 ]
 
 { #category : #adding }
 FamixTest4Person >> addBook: anObject [
+
+	<ignoreForCoverage>
 	<generated>
 	^ self books add: anObject
 ]
@@ -64,12 +68,14 @@ FamixTest4Person >> addBook: anObject [
 FamixTest4Person >> age [
 
 	<FMProperty: #age type: #Number>
+	<ignoreForCoverage>
 	<generated>
 	^ age
 ]
 
 { #category : #accessing }
 FamixTest4Person >> age: anObject [
+	<ignoreForCoverage>
 	<generated>
 	age := anObject
 ]
@@ -78,35 +84,31 @@ FamixTest4Person >> age: anObject [
 FamixTest4Person >> books [
 	"Relation named: #books type: #FamixTest4Book opposite: #person"
 
+	<ignoreForCoverage>
 	<generated>
-	<derived>
 	^ books
 ]
 
 { #category : #accessing }
 FamixTest4Person >> books: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	books value: anObject
-]
-
-{ #category : #navigation }
-FamixTest4Person >> booksGroup [
-	<generated>
-	<navigation: 'Books'>
-	^ MooseSpecializedGroup withAll: self books asSet
 ]
 
 { #category : #accessing }
 FamixTest4Person >> firstName [
 
 	<FMProperty: #firstName type: #String>
+	<ignoreForCoverage>
 	<generated>
 	^ firstName
 ]
 
 { #category : #accessing }
 FamixTest4Person >> firstName: anObject [
+	<ignoreForCoverage>
 	<generated>
 	firstName := anObject
 ]
@@ -114,6 +116,7 @@ FamixTest4Person >> firstName: anObject [
 { #category : #comparing }
 FamixTest4Person >> hash [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self firstName hash bitXor: self lastName hash bitXor: self age hash 
 ]
@@ -122,12 +125,14 @@ FamixTest4Person >> hash [
 FamixTest4Person >> lastName [
 
 	<FMProperty: #lastName type: #String>
+	<ignoreForCoverage>
 	<generated>
 	^ lastName
 ]
 
 { #category : #accessing }
 FamixTest4Person >> lastName: anObject [
+	<ignoreForCoverage>
 	<generated>
 	lastName := anObject
 ]

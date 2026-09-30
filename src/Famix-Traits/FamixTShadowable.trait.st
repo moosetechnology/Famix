@@ -46,21 +46,16 @@ Trait {
 { #category : #meta }
 FamixTShadowable classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TShadowable super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : #visitor }
-FamixTShadowable >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTShadowable: self
 ]
 
 { #category : #adding }
 FamixTShadowable >> addShadowingEntity: anObject [
+
+	<ignoreForCoverage>
 	<generated>
 	^ self shadowingEntities add: anObject
 ]
@@ -68,6 +63,7 @@ FamixTShadowable >> addShadowingEntity: anObject [
 { #category : #testing }
 FamixTShadowable >> isShadowable [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
@@ -82,15 +78,16 @@ FamixTShadowable >> isShadowed [
 FamixTShadowable >> shadowingEntities [
 	"Relation named: #shadowingEntities type: #FamixTShadower opposite: #shadowedEntity"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Entities shadowing me in my defining scope.'>
-	<derived>
 	^ shadowingEntities
 ]
 
 { #category : #accessing }
 FamixTShadowable >> shadowingEntities: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	shadowingEntities value: anObject
 ]

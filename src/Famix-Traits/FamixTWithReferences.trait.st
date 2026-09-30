@@ -21,17 +21,10 @@ Trait {
 { #category : #meta }
 FamixTWithReferences classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TWithReferences super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : #visitor }
-FamixTWithReferences >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTWithReferences: self
 ]
 
 { #category : #accessing }
@@ -43,15 +36,16 @@ FamixTWithReferences >> addOutgoingReference: aReference [
 FamixTWithReferences >> outgoingReferences [
 	"Relation named: #outgoingReferences type: #FamixTReference opposite: #referencer"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'References from this entity to other entities.'>
-	<derived>
 	^ outgoingReferences
 ]
 
 { #category : #accessing }
 FamixTWithReferences >> outgoingReferences: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	outgoingReferences value: anObject
 ]

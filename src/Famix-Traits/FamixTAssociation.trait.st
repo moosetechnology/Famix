@@ -44,10 +44,10 @@ Trait {
 { #category : #meta }
 FamixTAssociation classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TAssociation super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : #'instance creation' }
@@ -63,13 +63,6 @@ FamixTAssociation classSide >> source: anEntity target: anotherEntity model: aMo
 	^ (self source: anEntity target: anotherEntity)
 		mooseModel: aMooseModel;
 		yourself
-]
-
-{ #category : #visitor }
-FamixTAssociation >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTAssociation: self
 ]
 
 { #category : #accessing }
@@ -112,6 +105,7 @@ FamixTAssociation >> displayStringOn: aStream [
 { #category : #testing }
 FamixTAssociation >> isAssociation [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
@@ -120,15 +114,16 @@ FamixTAssociation >> isAssociation [
 FamixTAssociation >> next [
 	"Relation named: #next type: #FamixTAssociation opposite: #previous"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Next association in an ordered collection of associations. Currently not supported by the Moose importer'>
-	<derived>
 	^ next
 ]
 
 { #category : #accessing }
 FamixTAssociation >> next: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	next := anObject
 ]
@@ -137,6 +132,7 @@ FamixTAssociation >> next: anObject [
 FamixTAssociation >> previous [
 	"Relation named: #previous type: #FamixTAssociation opposite: #next"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Previous association in an ordered collection of associations. Currently not supported by the Moose importer'>
 	^ previous
@@ -145,6 +141,7 @@ FamixTAssociation >> previous [
 { #category : #accessing }
 FamixTAssociation >> previous: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	previous := anObject
 ]

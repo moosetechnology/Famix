@@ -11,12 +11,12 @@
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `incomingReferences` | `FamixTReferenceable` | `referredEntity` | `FamixTReference` | References to this entity by other entities.|
+| `incomingTypings` | `FamixTType` | `declaredType` | `FamixTEntityTyping` | Relations to the entities that have this as type.|
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
-| `typedEntities` | `FamixTType` | `declaredType` | `FamixTTypedEntity` | Entities that have this type as declaredType|
 
 
 ## Properties
@@ -39,14 +39,16 @@ Class {
 { #category : #meta }
 FamixTest3Type class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Type super: #FamixTest3NamedEntity>
 	<package: #'Famix-Test3-Entities'>
 	<generated>
-	^ self
 ]
 
 { #category : #groups }
 FamixTest3Type class >> annotationFamixTest3TypeGroup [
+
+	<ignoreForCoverage>
 	<generated>
 	<mooseGroup>
 	^ FamixTest3TypeGroup

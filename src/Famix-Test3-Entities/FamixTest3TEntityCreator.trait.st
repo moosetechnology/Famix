@@ -12,15 +12,16 @@ Trait {
 { #category : #meta }
 FamixTest3TEntityCreator classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TEntityCreator super: #Object>
 	<package: #'Famix-Test3-Entities'>
 	<generated>
-	^ self
 ]
 
 { #category : #'entity creation' }
 FamixTest3TEntityCreator >> newAccess [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTest3Access new
 ]
@@ -28,6 +29,7 @@ FamixTest3TEntityCreator >> newAccess [
 { #category : #'entity creation' }
 FamixTest3TEntityCreator >> newAttribute [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTest3Attribute new
 ]
@@ -35,6 +37,7 @@ FamixTest3TEntityCreator >> newAttribute [
 { #category : #'entity creation' }
 FamixTest3TEntityCreator >> newAttributeNamed: aName [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: (FamixTest3Attribute named: aName)
 ]
@@ -42,6 +45,7 @@ FamixTest3TEntityCreator >> newAttributeNamed: aName [
 { #category : #'entity creation' }
 FamixTest3TEntityCreator >> newClass [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTest3Class new
 ]
@@ -49,6 +53,7 @@ FamixTest3TEntityCreator >> newClass [
 { #category : #'entity creation' }
 FamixTest3TEntityCreator >> newClassNamed: aName [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: (FamixTest3Class named: aName)
 ]
@@ -56,6 +61,7 @@ FamixTest3TEntityCreator >> newClassNamed: aName [
 { #category : #'entity creation' }
 FamixTest3TEntityCreator >> newComment [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTest3Comment new
 ]
@@ -63,6 +69,7 @@ FamixTest3TEntityCreator >> newComment [
 { #category : #'entity creation' }
 FamixTest3TEntityCreator >> newInvocation [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTest3Invocation new
 ]
@@ -70,6 +77,7 @@ FamixTest3TEntityCreator >> newInvocation [
 { #category : #'entity creation' }
 FamixTest3TEntityCreator >> newMethod [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTest3Method new
 ]
@@ -77,6 +85,7 @@ FamixTest3TEntityCreator >> newMethod [
 { #category : #'entity creation' }
 FamixTest3TEntityCreator >> newMethodNamed: aName [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: (FamixTest3Method named: aName)
 ]
@@ -84,6 +93,7 @@ FamixTest3TEntityCreator >> newMethodNamed: aName [
 { #category : #'entity creation' }
 FamixTest3TEntityCreator >> newPackage [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTest3Package new
 ]
@@ -91,6 +101,7 @@ FamixTest3TEntityCreator >> newPackage [
 { #category : #'entity creation' }
 FamixTest3TEntityCreator >> newPackageNamed: aName [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: (FamixTest3Package named: aName)
 ]
@@ -98,20 +109,39 @@ FamixTest3TEntityCreator >> newPackageNamed: aName [
 { #category : #'entity creation' }
 FamixTest3TEntityCreator >> newParametricClass [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTest3ParametricClass new
 ]
 
 { #category : #'entity creation' }
+FamixTest3TEntityCreator >> newParametricClassNamed: aName [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self add: (FamixTest3ParametricClass named: aName)
+]
+
+{ #category : #'entity creation' }
 FamixTest3TEntityCreator >> newPrimitiveType [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTest3PrimitiveType new
 ]
 
 { #category : #'entity creation' }
+FamixTest3TEntityCreator >> newPrimitiveTypeNamed: aName [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self add: (FamixTest3PrimitiveType named: aName)
+]
+
+{ #category : #'entity creation' }
 FamixTest3TEntityCreator >> newReference [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTest3Reference new
 ]
@@ -119,6 +149,7 @@ FamixTest3TEntityCreator >> newReference [
 { #category : #'entity creation' }
 FamixTest3TEntityCreator >> newSourceLanguage [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTest3SourceLanguage new
 ]
@@ -126,6 +157,7 @@ FamixTest3TEntityCreator >> newSourceLanguage [
 { #category : #'entity creation' }
 FamixTest3TEntityCreator >> newSourceTextAnchor [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTest3SourceTextAnchor new
 ]
@@ -133,6 +165,7 @@ FamixTest3TEntityCreator >> newSourceTextAnchor [
 { #category : #'entity creation' }
 FamixTest3TEntityCreator >> newType [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTest3Type new
 ]
@@ -140,6 +173,7 @@ FamixTest3TEntityCreator >> newType [
 { #category : #'entity creation' }
 FamixTest3TEntityCreator >> newTypeNamed: aName [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: (FamixTest3Type named: aName)
 ]

@@ -21,8 +21,8 @@ Class {
 { #category : #meta }
 MooseMSEImporterTestSourceLanguage class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #SourceLanguage super: #MooseMSEImporterTestEntity>
 	<package: #'Moose-Core-Tests-Entities'>
 	<generated>
-	^ self
 ]

@@ -43,28 +43,25 @@ Trait {
 { #category : #meta }
 FamixTAnnotationInstance classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TAnnotationInstance super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : #groups }
 FamixTAnnotationInstance classSide >> annotationFamixAnnotationInstanceGroup [
+
+	<ignoreForCoverage>
 	<generated>
 	<mooseGroup>
 	^ FamixAnnotationInstanceGroup
 ]
 
-{ #category : #visitor }
-FamixTAnnotationInstance >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTAnnotationInstance: self
-]
-
 { #category : #adding }
 FamixTAnnotationInstance >> addAttribute: anObject [
+
+	<ignoreForCoverage>
 	<generated>
 	^ self attributes add: anObject
 ]
@@ -73,6 +70,7 @@ FamixTAnnotationInstance >> addAttribute: anObject [
 FamixTAnnotationInstance >> annotatedEntity [
 	"Relation named: #annotatedEntity type: #FamixTWithAnnotationInstances opposite: #annotationInstances"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The NamedEntity on which the annotation occurs.'>
 	^ annotatedEntity
@@ -81,6 +79,7 @@ FamixTAnnotationInstance >> annotatedEntity [
 { #category : #accessing }
 FamixTAnnotationInstance >> annotatedEntity: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	annotatedEntity := anObject
 ]
@@ -89,6 +88,7 @@ FamixTAnnotationInstance >> annotatedEntity: anObject [
 FamixTAnnotationInstance >> annotationType [
 	"Relation named: #annotationType type: #FamixTAnnotationType opposite: #instances"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Refers to the type of an annotation. (In some languages, Java and C#, an annotation as an explicit type). '>
 	^ annotationType
@@ -97,6 +97,7 @@ FamixTAnnotationInstance >> annotationType [
 { #category : #accessing }
 FamixTAnnotationInstance >> annotationType: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	annotationType := anObject
 ]
@@ -105,15 +106,16 @@ FamixTAnnotationInstance >> annotationType: anObject [
 FamixTAnnotationInstance >> attributes [
 	"Relation named: #attributes type: #FamixTAnnotationInstanceAttribute opposite: #parentAnnotationInstance"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'This corresponds to the actual values of the attributes in an AnnotationInstance'>
-	<derived>
 	^ attributes
 ]
 
 { #category : #accessing }
 FamixTAnnotationInstance >> attributes: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	attributes value: anObject
 ]

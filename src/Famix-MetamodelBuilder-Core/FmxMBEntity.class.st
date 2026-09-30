@@ -4,9 +4,6 @@ Class {
 	#instVars : [
 		'name',
 		'comment',
-		'builder',
-		'willGenerate',
-		'navigationGroups',
 		'additionalProperties',
 		'isRemote'
 	],
@@ -25,16 +22,6 @@ FmxMBEntity >> additionalProperties [
 ]
 
 { #category : #accessing }
-FmxMBEntity >> builder [
-	^ builder
-]
-
-{ #category : #accessing }
-FmxMBEntity >> builder: anObject [
-	builder := anObject
-]
-
-{ #category : #accessing }
 FmxMBEntity >> comment [
 	^ comment
 ]
@@ -50,10 +37,20 @@ FmxMBEntity >> initialize [
 	super initialize.	
 
 	comment := String new.
-	willGenerate := true.
-	navigationGroups := Set new.
 	additionalProperties := Dictionary new.
 	isRemote := false.
+]
+
+{ #category : #testing }
+FmxMBEntity >> isClassEntity [
+
+	^ false
+]
+
+{ #category : #testing }
+FmxMBEntity >> isConcreteClass [
+
+	^ false
 ]
 
 { #category : #accessing }
@@ -67,6 +64,12 @@ FmxMBEntity >> isRemote: anObject [
 	isRemote := anObject
 ]
 
+{ #category : #testing }
+FmxMBEntity >> isTraitEntity [
+
+	^ false
+]
+
 { #category : #accessing }
 FmxMBEntity >> name [
 	^ name
@@ -74,18 +77,8 @@ FmxMBEntity >> name [
 
 { #category : #accessing }
 FmxMBEntity >> name: anObject [
+
 	name := anObject
-]
-
-{ #category : #accessing }
-FmxMBEntity >> navigationGroups [
-	^ navigationGroups
-]
-
-{ #category : #accessing }
-FmxMBEntity >> navigationGroups: anObject [
-	<ignoreForCoverage>
-	navigationGroups := anObject
 ]
 
 { #category : #accessing }
@@ -101,26 +94,7 @@ FmxMBEntity >> remoteBuilder: aRemoteBuilder [
 ]
 
 { #category : #accessing }
-FmxMBEntity >> willGenerate [
-	^ willGenerate
-]
+FmxMBEntity >> reservedKeywords [
 
-{ #category : #accessing }
-FmxMBEntity >> willGenerate: anObject [
-	willGenerate := anObject
-]
-
-{ #category : #navigation }
-FmxMBEntity >> withNavigationOf: aRelation [
-
-	self navigationGroups add: (FmxMBNavigationGroup new 
-		name: self name;
-		entity: self;
-		relation: aRelation;
-		yourself).
-]
-
-{ #category : #navigation }
-FmxMBEntity >> withoutNavigation [
-	navigationGroups := Set new.
+	^ { #class }
 ]

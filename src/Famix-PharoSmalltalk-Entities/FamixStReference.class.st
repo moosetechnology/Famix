@@ -33,8 +33,8 @@ Class {
 { #category : #meta }
 FamixStReference class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Reference super: #FamixStEntity>
 	<package: #'Famix-PharoSmalltalk-Entities'>
 	<generated>
-	^ self
 ]

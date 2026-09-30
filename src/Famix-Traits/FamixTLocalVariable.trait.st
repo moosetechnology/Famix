@@ -9,15 +9,19 @@ FamixTLocalVariable represents a local variable in the scope of a behavioural en
 |---|
 | `parentBehaviouralEntity` | `FamixTLocalVariable` | `localVariables` | `FamixTWithLocalVariables` | Behavioural entity declaring this local variable. belongsTo implementation|
 
+### Outgoing dependencies
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `typing` | `FamixTTypedEntity` | `typedEntity` | `FamixTEntityTyping` | Association linking this entity to its declared type.|
+
 ### Incoming dependencies
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `incomingAccesses` | `FamixTAccessible` | `variable` | `FamixTAccess` | All Famix accesses pointing to this structural entity|
+| `incomingAccesses` | `FamixTAccessible` | `candidates` | `FamixTAccess` | All Famix accesses pointing to this structural entity|
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `declaredType` | `FamixTTypedEntity` | `typedEntities` | `FamixTType` | Type of the entity, if any|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
 
 
@@ -43,17 +47,10 @@ Trait {
 { #category : #meta }
 FamixTLocalVariable classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TLocalVariable super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : #visitor }
-FamixTLocalVariable >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTLocalVariable: self
 ]
 
 { #category : #printing }
@@ -67,6 +64,7 @@ FamixTLocalVariable >> displayStringOn: aStream [
 { #category : #testing }
 FamixTLocalVariable >> isLocalVariable [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
@@ -75,6 +73,7 @@ FamixTLocalVariable >> isLocalVariable [
 FamixTLocalVariable >> parentBehaviouralEntity [
 	"Relation named: #parentBehaviouralEntity type: #FamixTWithLocalVariables opposite: #localVariables"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Behavioural entity declaring this local variable. belongsTo implementation'>
 	<container>
@@ -88,11 +87,4 @@ FamixTLocalVariable >> parentBehaviouralEntity: anObject [
 	self resetMooseName.
 	
 
-]
-
-{ #category : #navigation }
-FamixTLocalVariable >> parentBehaviouralEntityGroup [
-	<generated>
-	<navigation: 'ParentBehaviouralEntity'>
-	^ MooseSpecializedGroup with: self parentBehaviouralEntity
 ]

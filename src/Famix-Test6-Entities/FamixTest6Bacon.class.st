@@ -23,22 +23,24 @@ Class {
 { #category : #meta }
 FamixTest6Bacon class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Bacon super: #FamixTest6Entity>
 	<package: #'Famix-Test6-Entities'>
 	<generated>
-	^ self
 ]
 
 { #category : #accessing }
 FamixTest6Bacon >> brand [
 
 	<FMProperty: #brand type: #String defaultValue: ''>
+	<ignoreForCoverage>
 	<generated>
 	^ brand ifNil: [ brand := '' ]
 ]
 
 { #category : #accessing }
 FamixTest6Bacon >> brand: anObject [
+	<ignoreForCoverage>
 	<generated>
 	brand := anObject
 ]
@@ -47,12 +49,14 @@ FamixTest6Bacon >> brand: anObject [
 FamixTest6Bacon >> eggs [
 
 	<FMProperty: #eggs type: #Number defaultValue: 12>
+	<ignoreForCoverage>
 	<generated>
 	^ eggs ifNil: [ eggs := 12 ]
 ]
 
 { #category : #accessing }
 FamixTest6Bacon >> eggs: anObject [
+	<ignoreForCoverage>
 	<generated>
 	eggs := anObject
 ]
@@ -61,12 +65,14 @@ FamixTest6Bacon >> eggs: anObject [
 FamixTest6Bacon >> isFood [
 
 	<FMProperty: #isFood type: #Boolean defaultValue: true>
+	<ignoreForCoverage>
 	<generated>
 	^ isFood ifNil: [ isFood := true ]
 ]
 
 { #category : #accessing }
 FamixTest6Bacon >> isFood: anObject [
+	<ignoreForCoverage>
 	<generated>
 	isFood := anObject
 ]

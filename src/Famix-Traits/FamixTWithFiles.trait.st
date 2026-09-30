@@ -21,17 +21,10 @@ Trait {
 { #category : #meta }
 FamixTWithFiles classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TWithFiles super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : #visitor }
-FamixTWithFiles >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTWithFiles: self
 ]
 
 { #category : #accessing }
@@ -44,6 +37,7 @@ FamixTWithFiles >> addContainerFile: anObject [
 FamixTWithFiles >> containerFiles [
 	"Relation named: #containerFiles type: #FamixTFile opposite: #entities"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'List of files containing the entity'>
 	^ containerFiles
@@ -52,6 +46,7 @@ FamixTWithFiles >> containerFiles [
 { #category : #accessing }
 FamixTWithFiles >> containerFiles: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	containerFiles value: anObject
 ]

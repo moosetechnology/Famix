@@ -29,17 +29,10 @@ Trait {
 { #category : #meta }
 FamixTTrait classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TTrait super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : #visitor }
-FamixTTrait >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTTrait: self
 ]
 
 { #category : #accessing }
@@ -53,14 +46,15 @@ FamixTTrait >> addIncomingTraitUsage: anObject [
 FamixTTrait >> incomingTraitUsages [
 	"Relation named: #incomingTraitUsages type: #FamixTTraitUsage opposite: #trait"
 
+	<ignoreForCoverage>
 	<generated>
-	<derived>
 	^ incomingTraitUsages
 ]
 
 { #category : #accessing }
 FamixTTrait >> incomingTraitUsages: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	incomingTraitUsages value: anObject
 ]
@@ -69,6 +63,7 @@ FamixTTrait >> incomingTraitUsages: anObject [
 FamixTTrait >> traitOwner [
 	"Relation named: #traitOwner type: #FamixTWithTraits opposite: #traits"
 
+	<ignoreForCoverage>
 	<generated>
 	<container>
 	^ traitOwner
@@ -77,13 +72,7 @@ FamixTTrait >> traitOwner [
 { #category : #accessing }
 FamixTTrait >> traitOwner: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	traitOwner := anObject
-]
-
-{ #category : #navigation }
-FamixTTrait >> traitOwnerGroup [
-	<generated>
-	<navigation: 'TraitOwner'>
-	^ MooseSpecializedGroup with: self traitOwner
 ]

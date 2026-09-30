@@ -4,7 +4,7 @@ FamixMetamodelBuilderIncompletePropertyDefiniton
 Class {
 	#name : #FmxMBIncompletePropertyDefiniton,
 	#superclass : #Error,
-	#category : #'Famix-MetamodelBuilder-Core-Implementation'
+	#category : #'Famix-MetamodelBuilder-Core-Exception'
 }
 
 { #category : #accessing }

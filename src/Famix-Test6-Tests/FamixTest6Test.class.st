@@ -9,8 +9,7 @@ FamixTest6Test >> testDefaultValueEmptyString [
 
 	| bacon brandProperty newBrand |
 	bacon := FamixTest6Bacon new.
-	brandProperty := bacon mooseDescription properties detect: [ :each |
-		                 each name = #brand ].
+	brandProperty := bacon metadescription properties detect: [ :each | each name = #brand ].
 
 	self assert: bacon brand equals: ''.
 	self assert: brandProperty defaultValue equals: ''.
@@ -26,8 +25,7 @@ FamixTest6Test >> testDefaultValueOnCreation [
 
 	| bacon brandProperty |
 	bacon := FamixTest6Bacon new.
-	brandProperty := (bacon mooseDescription properties select: [ :each |
-		                  each name = #isFood ]) at: 1.
+	brandProperty := (bacon metadescription properties select: [ :each | each name = #isFood ]) at: 1.
 
 	self assert: bacon isFood.
 	self assert: brandProperty defaultValue.
@@ -42,8 +40,7 @@ FamixTest6Test >> testDefaultValueOnCreation2 [
 
 	| bacon eggProperty |
 	bacon := FamixTest6Bacon new.
-	eggProperty := (bacon mooseDescription properties select: [ :each | 
-		                each name = #eggs ]) at: 1.
+	eggProperty := (bacon metadescription properties select: [ :each | each name = #eggs ]) at: 1.
 
 	self assert: bacon eggs equals: 12.
 	self assert: eggProperty defaultValue equals: 12.
