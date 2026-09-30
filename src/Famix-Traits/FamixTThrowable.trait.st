@@ -65,7 +65,6 @@ FamixTThrowable >> catchingEntities [
 
 	<ignoreForCoverage>
 	<generated>
-	<derived>
 	^ catchingEntities
 ]
 
@@ -83,7 +82,6 @@ FamixTThrowable >> declaringEntities [
 
 	<ignoreForCoverage>
 	<generated>
-	<derived>
 	^ declaringEntities
 ]
 
@@ -101,7 +99,6 @@ FamixTThrowable >> throwingEntities [
 
 	<ignoreForCoverage>
 	<generated>
-	<derived>
 	^ throwingEntities
 ]
 

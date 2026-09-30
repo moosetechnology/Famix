@@ -50,7 +50,6 @@ FamixTest8TInfectable >> outgoingInfections [
 
 	<ignoreForCoverage>
 	<generated>
-	<derived>
 	^ outgoingInfections
 ]
 

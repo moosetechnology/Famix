@@ -46,7 +46,6 @@ FamixTWithLambdas >> lambdas [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Lambdas defined in the container, if any.'>
-	<derived>
 	^ lambdas
 ]
 

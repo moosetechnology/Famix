@@ -54,7 +54,6 @@ FDTrait4 >> class1 [
 
 	<ignoreForCoverage>
 	<generated>
-	<derived>
 	^ class1
 ]
 

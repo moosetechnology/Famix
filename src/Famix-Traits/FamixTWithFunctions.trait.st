@@ -42,7 +42,6 @@ FamixTWithFunctions >> functions [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Functions defined in the container, if any.'>
-	<derived>
 	^ functions
 ]
 

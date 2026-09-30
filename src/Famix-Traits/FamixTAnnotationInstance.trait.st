@@ -111,7 +111,6 @@ FamixTAnnotationInstance >> attributes [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'This corresponds to the actual values of the attributes in an AnnotationInstance'>
-	<derived>
 	^ attributes
 ]
 

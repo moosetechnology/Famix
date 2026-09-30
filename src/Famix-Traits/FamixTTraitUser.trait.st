@@ -43,7 +43,6 @@ FamixTTraitUser >> traitUsages [
 
 	<ignoreForCoverage>
 	<generated>
-	<derived>
 	^ traitUsages
 ]
 

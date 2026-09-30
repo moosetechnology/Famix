@@ -41,7 +41,6 @@ FamixTWithImplicitVariables >> implicitVariables [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Implicit variables used locally by this behaviour.'>
-	<derived>
 	^ implicitVariables
 ]
 

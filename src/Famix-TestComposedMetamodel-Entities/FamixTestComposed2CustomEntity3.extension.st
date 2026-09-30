@@ -6,7 +6,6 @@ FamixTestComposed2CustomEntity3 >> c13s [
 
 	<ignoreForCoverage>
 	<generated>
-	<derived>
 	<FMProperty: #c13s type: #FamixTestComposed1CustomEntity3 opposite: #c23>
 	<multivalued>
 	<package: #'Famix-TestComposedMetamodel-Entities'>
@@ -29,7 +28,6 @@ FamixTestComposed2CustomEntity3 >> c3s [
 
 	<ignoreForCoverage>
 	<generated>
-	<derived>
 	<FMProperty: #c3s type: #FamixTestComposedCustomEntity3 opposite: #c23>
 	<multivalued>
 	<package: #'Famix-TestComposedMetamodel-Entities'>

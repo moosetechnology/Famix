@@ -55,7 +55,6 @@ FamixTWithParameters >> parameters [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'List of formal parameters declared by this behaviour.'>
-	<derived>
 	^ parameters
 ]
 

@@ -41,7 +41,6 @@ FamixTWithTemplates >> templates [
 
 	<ignoreForCoverage>
 	<generated>
-	<derived>
 	^ templates
 ]
 

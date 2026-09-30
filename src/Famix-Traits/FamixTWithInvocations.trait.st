@@ -50,7 +50,6 @@ FamixTWithInvocations >> outgoingInvocations [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Outgoing invocations sent by this behaviour.'>
-	<derived>
 	^ outgoingInvocations
 ]
 

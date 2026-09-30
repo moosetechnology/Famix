@@ -74,7 +74,6 @@ FamixTCanImplement >> interfaceImplementations [
 	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Implementation relationships'>
-	<derived>
 	^ interfaceImplementations
 ]
 
