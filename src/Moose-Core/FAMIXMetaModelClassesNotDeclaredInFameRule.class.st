@@ -53,3 +53,9 @@ FamixMetaModelClassesNotDeclaredInFameRule >> metaModelClasses [
 	"return all classes that have to be checked in this rule"
 	^ metaModelClasses ifNil: [metaModelClasses := MooseEntity withAllSubclasses].
 ]
+
+{ #category : #accessing }
+FamixMetaModelClassesNotDeclaredInFameRule >> name [
+
+	^ 'A metamodel class should be properly declared using a <FMClass:super:> pragma.'
+]

@@ -1,4 +1,6 @@
 "
+It correspond to entities that contain information about the source language.
+
 ## Relations
 ======================
 
@@ -11,56 +13,53 @@
 
 "
 Trait {
-	#name : #FamixTWithSourceLanguages,
+	#name : 'FamixTWithSourceLanguages',
 	#instVars : [
 		'#declaredSourceLanguage => FMOne type: #FamixTSourceLanguage opposite: #sourcedEntities'
 	],
-	#category : #'Famix-Traits-SourceLanguage'
+	#category : 'Famix-Traits-SourceLanguage',
+	#package : 'Famix-Traits',
+	#tag : 'SourceLanguage'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTWithSourceLanguages classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TWithSourceLanguages super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
-{ #category : #visitor }
-FamixTWithSourceLanguages >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTWithSourceLanguages: self
-]
-
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithSourceLanguages >> declaredSourceLanguage [
 	"Relation named: #declaredSourceLanguage type: #FamixTSourceLanguage opposite: #sourcedEntities"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The declared SourceLanguage for the source code of this entity'>
 	^ declaredSourceLanguage
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithSourceLanguages >> declaredSourceLanguage: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	declaredSourceLanguage := anObject
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTWithSourceLanguages >> isUnknown [
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithSourceLanguages >> sourceLanguage [
 	^ self sourceLanguageOr: self unknowSourceLanguageClass
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 FamixTWithSourceLanguages >> sourceLanguageOr: unknownSourceLanguageClass [
 	^ self declaredSourceLanguage ifNil: [
 		self mooseModel 
@@ -68,9 +67,9 @@ FamixTWithSourceLanguages >> sourceLanguageOr: unknownSourceLanguageClass [
 			ifNotNil: #sourceLanguage ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 FamixTWithSourceLanguages >> unknowSourceLanguageClass [
-	^ (self mooseDescription package
+	^ (self metadescription package
 		classNamed: 'UnknownSourceLanguage'
 		ifAbsent: [ self error: 'This entity has no source language, no model and no class implementing #FamixTUnknownSourceLanguage in it metamodel.' ])
 		implementingClass

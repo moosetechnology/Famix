@@ -20,6 +20,7 @@
 |---|
 | `imports` | `FamixTWithImports` | `importingEntity` | `FamixTImport` | |
 | `interfaceImplementations` | `FamixTCanImplement` | `implementingClass` | `FamixTImplementation` | Implementation relationships|
+| `outgoingConcretizations` | `FamixTTypeArgument` | `typeArgument` | `FamixTConcretization` | Concretizations where this type is the type argument.|
 | `superInheritances` | `FamixTWithInheritances` | `subclass` | `FamixTInheritance` | Superinheritance relationships, i.e. known superclasses of this type.|
 
 ### Incoming dependencies
@@ -27,6 +28,7 @@
 |---|
 | `incomingImports` | `FamixTImportable` | `importedEntity` | `FamixTImport` | List of imports of this entity|
 | `incomingReferences` | `FamixTReferenceable` | `referredEntity` | `FamixTReference` | References to this entity by other entities.|
+| `incomingTypings` | `FamixTType` | `declaredType` | `FamixTEntityTyping` | Relations to the entities that have this as type.|
 | `subInheritances` | `FamixTWithInheritances` | `superclass` | `FamixTInheritance` | Subinheritance relationships, i.e. known subclasses of this type.|
 
 ### Other
@@ -34,7 +36,6 @@
 |---|
 | `receivingInvocations` | `FamixTInvocationsReceiver` | `receiver` | `FamixTInvocation` | List of invocations performed on this entity (considered as the receiver)|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
-| `typedEntities` | `FamixTType` | `declaredType` | `FamixTTypedEntity` | Entities that have this type as declaredType|
 
 
 ## Properties
@@ -53,35 +54,18 @@
 Class {
 	#name : #FamixJavaClass,
 	#superclass : #FamixJavaType,
-	#traits : 'FamixJavaTClassMetrics + FamixTCanBeAbstract + FamixTCanBeClassSide + FamixTCanBeFinal + FamixTCanImplement + FamixTClass + FamixTClassMetrics + FamixTHasVisibility + FamixTImportable + FamixTLCOMMetrics + FamixTPackageable + FamixTWithImports',
-	#classTraits : 'FamixJavaTClassMetrics classTrait + FamixTCanBeAbstract classTrait + FamixTCanBeClassSide classTrait + FamixTCanBeFinal classTrait + FamixTCanImplement classTrait + FamixTClass classTrait + FamixTClassMetrics classTrait + FamixTHasVisibility classTrait + FamixTImportable classTrait + FamixTLCOMMetrics classTrait + FamixTPackageable classTrait + FamixTWithImports classTrait',
+	#traits : 'FamixJavaTClassMetrics + FamixTCanBeAbstract + FamixTCanBeClassSide + FamixTCanBeFinal + FamixTCanImplement + FamixTClass + FamixTClassMetrics + FamixTHasVisibility + FamixTImportable + FamixTLCOMMetrics + FamixTPackageable + FamixTTypeArgument + FamixTWithImports',
+	#classTraits : 'FamixJavaTClassMetrics classTrait + FamixTCanBeAbstract classTrait + FamixTCanBeClassSide classTrait + FamixTCanBeFinal classTrait + FamixTCanImplement classTrait + FamixTClass classTrait + FamixTClassMetrics classTrait + FamixTHasVisibility classTrait + FamixTImportable classTrait + FamixTLCOMMetrics classTrait + FamixTPackageable classTrait + FamixTTypeArgument classTrait + FamixTWithImports classTrait',
 	#category : #'Famix-Java-Entities-Entities'
 }
 
 { #category : #meta }
 FamixJavaClass class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Class super: #FamixJavaType>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^ self
-]
-
-{ #category : #visitor }
-FamixJavaClass >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaClass: self
-]
-
-{ #category : #'Famix-Extensions-metrics-support' }
-FamixJavaClass >> accessedAttributes [
-	
-	"Returns my attributes accessed by my methods. If the same attribute is accessed 
-	by two different methods it is counted twice.
-	Used to support the calculation of LCOM"
-	
-	^ self methodsWithoutSutbsAndConstructors asOrderedCollection flatCollect: [ :method | method accessedAttributes ]
 ]
 
 { #category : #enumerating }
@@ -98,9 +82,12 @@ FamixJavaClass >> allImplementedInterfacesHierarchy [
 
 { #category : #enumerating }
 FamixJavaClass >> allImplementedInterfacesHierarchyDo: aBlock [
+	"runs aBlock on all implemented interfaces (and their inherited super-interfaces) by the receiver or any of its super-classes
+	 Therefore goes up the interface inheritance hierarchy and the class inheritance hierarchy"
 
-	self directImplementedInterfaces do: [ :directInterface |
-		directInterface withSuperclassesDo: aBlock ]
+	self allImplementedInterfacesDo: aBlock.
+	
+	self allSuperclassesDo: [ :superClass | superClass allImplementedInterfacesHierarchyDo: aBlock ]
 ]
 
 { #category : #accessing }
@@ -188,6 +175,7 @@ FamixJavaClass >> isTestCase [
 
 { #category : #private }
 FamixJavaClass >> lookUpInInterfaces: aMethodSignature [
+	"search for a method signature in the implemented interfaces or the inherited methods"
 
 	self allImplementedInterfacesHierarchyDo: [ :interface |
 		(interface lookUp: aMethodSignature) ifNotNil: [ :method | ^ method ] ].
@@ -198,11 +186,10 @@ FamixJavaClass >> lookUpInInterfaces: aMethodSignature [
 
 { #category : #'Famix-Extensions-metrics-support' }
 FamixJavaClass >> methodsWithoutSutbsAndConstructors [
-
 	"Removing stub and contructor methods. Used to support the calculation of LCOM."
-	
-	^ (self methods select: [ :each | 
-		each isStub not and: [each isConstructor not]]) asSet
+
+	^ (self methods select: [ :each |
+		   each isStub not and: [ each isConstructor not ] ]) asSet
 ]
 
 { #category : #printing }

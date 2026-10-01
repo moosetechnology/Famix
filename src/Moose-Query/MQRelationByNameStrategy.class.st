@@ -30,6 +30,5 @@ MQRelationByNameStrategy >> name: anObject [
 { #category : #selection }
 MQRelationByNameStrategy >> selectPropertiesIn: anEntity [
 
-	^ anEntity mooseDescription allRelationProperties select: [ :relation | 
-		  relation name = name ]
+	^ anEntity metadescription allRelationProperties select: [ :relation | relation name = name ]
 ]

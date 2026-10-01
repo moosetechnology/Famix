@@ -17,42 +17,47 @@
 
 "
 Trait {
-	#name : #FamixTCanBeStub,
+	#name : 'FamixTCanBeStub',
 	#instVars : [
 		'#isStub => FMProperty defaultValue: false'
 	],
 	#traits : 'FamixTSourceEntity',
 	#classTraits : 'FamixTSourceEntity classTrait',
-	#category : #'Famix-Traits-PrimitiveProperties'
+	#category : 'Famix-Traits-PrimitiveProperties',
+	#package : 'Famix-Traits',
+	#tag : 'PrimitiveProperties'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTCanBeStub classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TCanBeStub super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
-{ #category : #visitor }
-FamixTCanBeStub >> accept: aVisitor [
+{ #category : 'testing' }
+FamixTCanBeStub >> canBeStub [
 
+	<ignoreForCoverage>
 	<generated>
-	^ aVisitor visitFamixTCanBeStub: self
+	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTCanBeStub >> isStub [
 
 	<FMProperty: #isStub type: #Boolean defaultValue: false>
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.'>
 	^ isStub ifNil: [ isStub := false ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTCanBeStub >> isStub: anObject [
+	<ignoreForCoverage>
 	<generated>
 	isStub := anObject
 ]

@@ -31,23 +31,17 @@ Trait {
 { #category : #meta }
 FamixJavaTCanBeSynchronized classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TCanBeSynchronized super: #Object>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^ self
-]
-
-{ #category : #visitor }
-FamixJavaTCanBeSynchronized >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaTCanBeSynchronized: self
 ]
 
 { #category : #accessing }
 FamixJavaTCanBeSynchronized >> isSynchronized [
 
 	<FMProperty: #isSynchronized type: #Boolean defaultValue: false>
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Entity can be declared synchronized'>
 	^ isSynchronized ifNil: [ isSynchronized := false ]
@@ -55,6 +49,7 @@ FamixJavaTCanBeSynchronized >> isSynchronized [
 
 { #category : #accessing }
 FamixJavaTCanBeSynchronized >> isSynchronized: anObject [
+	<ignoreForCoverage>
 	<generated>
 	isSynchronized := anObject
 ]

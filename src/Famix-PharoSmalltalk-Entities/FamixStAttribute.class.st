@@ -7,15 +7,19 @@
 |---|
 | `parentType` | `FamixTAttribute` | `attributes` | `FamixTWithAttributes` | Type declaring the attribute. belongsTo implementation|
 
+### Outgoing dependencies
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `typing` | `FamixTTypedEntity` | `typedEntity` | `FamixTEntityTyping` | Association linking this entity to its declared type.|
+
 ### Incoming dependencies
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `incomingAccesses` | `FamixTAccessible` | `variable` | `FamixTAccess` | All Famix accesses pointing to this structural entity|
+| `incomingAccesses` | `FamixTAccessible` | `candidates` | `FamixTAccess` | All Famix accesses pointing to this structural entity|
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `declaredType` | `FamixTTypedEntity` | `typedEntities` | `FamixTType` | Type of the entity, if any|
 | `receivingInvocations` | `FamixTInvocationsReceiver` | `receiver` | `FamixTInvocation` | List of invocations performed on this entity (considered as the receiver)|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
 
@@ -41,10 +45,10 @@ Class {
 { #category : #meta }
 FamixStAttribute class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Attribute super: #FamixStNamedEntity>
 	<package: #'Famix-PharoSmalltalk-Entities'>
 	<generated>
-	^ self
 ]
 
 { #category : #properties }
@@ -59,4 +63,10 @@ FamixStAttribute >> isSharedVariable [
 	<FMProperty: #isSharedVariable type: #Boolean>
 	<FMComment: 'True if the attribute is a shared variable'>
 	^ self attributeAt: #isSharedVariable ifAbsent: [ false ]
+]
+
+{ #category : #testing }
+FamixStAttribute >> isSharedVariable: aBoolean [
+
+	^ self attributeAt: #isSharedVariable put: aBoolean
 ]

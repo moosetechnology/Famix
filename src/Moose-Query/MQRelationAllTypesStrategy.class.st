@@ -13,5 +13,5 @@ Class {
 { #category : #selection }
 MQRelationAllTypesStrategy >> selectPropertiesIn: anEntity [
 
-	^ anEntity class mooseDescription allRelationProperties
+	^ anEntity class metadescription allRelationProperties
 ]

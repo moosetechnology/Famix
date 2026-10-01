@@ -27,23 +27,17 @@ Trait {
 { #category : #meta }
 FamixJavaTCanBeTransient classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TCanBeTransient super: #Object>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^ self
-]
-
-{ #category : #visitor }
-FamixJavaTCanBeTransient >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaTCanBeTransient: self
 ]
 
 { #category : #accessing }
 FamixJavaTCanBeTransient >> isTransient [
 
 	<FMProperty: #isTransient type: #Boolean defaultValue: false>
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Entity can be declared transient'>
 	^ isTransient ifNil: [ isTransient := false ]
@@ -51,6 +45,7 @@ FamixJavaTCanBeTransient >> isTransient [
 
 { #category : #accessing }
 FamixJavaTCanBeTransient >> isTransient: anObject [
+	<ignoreForCoverage>
 	<generated>
 	isTransient := anObject
 ]

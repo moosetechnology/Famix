@@ -37,7 +37,7 @@ MQScopeAbstractStopStrategy >> hash [
 ]
 
 { #category : #testing }
-MQScopeAbstractStopStrategy >> shouldBeSelected: anEntity [
+MQScopeAbstractStopStrategy >> selectMatchingElements: aCollection [
 	^ self subclassResponsibility
 ]
 

@@ -27,30 +27,25 @@ Class {
 { #category : #meta }
 FamixJavaNamedEntity class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #NamedEntity super: #FamixJavaSourcedEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
 	<abstract>
-	^ self
 ]
 
 { #category : #testing }
 FamixJavaNamedEntity class >> isAbstract [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self == FamixJavaNamedEntity
-]
-
-{ #category : #visitor }
-FamixJavaNamedEntity >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaNamedEntity: self
 ]
 
 { #category : #testing }
 FamixJavaNamedEntity >> isNamedEntity [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
@@ -65,6 +60,7 @@ FamixJavaNamedEntity >> stubFormattedName [
 ]
 
 { #category : #testing }
-FamixJavaNamedEntity >> topLevelPackage [ 
-	^ (self atScope: FamixTPackage) anyOne topLevelPackage 
+FamixJavaNamedEntity >> topLevelPackage [
+
+	^ (self containersOfType: FamixTPackage) anyOne topLevelPackage
 ]

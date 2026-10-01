@@ -13,48 +13,46 @@ A container having Global variables
 
 "
 Trait {
-	#name : #FamixTWithGlobalVariables,
+	#name : 'FamixTWithGlobalVariables',
 	#instVars : [
 		'#globalVariables => FMMany type: #FamixTGlobalVariable opposite: #parentScope'
 	],
-	#category : #'Famix-Traits-GlobalVariable'
+	#category : 'Famix-Traits-GlobalVariable',
+	#package : 'Famix-Traits',
+	#tag : 'GlobalVariable'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTWithGlobalVariables classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TWithGlobalVariables super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
-{ #category : #visitor }
-FamixTWithGlobalVariables >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTWithGlobalVariables: self
-]
-
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTWithGlobalVariables >> addGlobalVariable: anObject [
+
+	<ignoreForCoverage>
 	<generated>
 	^ self globalVariables add: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithGlobalVariables >> globalVariables [
 	"Relation named: #globalVariables type: #FamixTGlobalVariable opposite: #parentScope"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Global variables defined in the scope, if any.'>
-	<derived>
 	^ globalVariables
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithGlobalVariables >> globalVariables: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	globalVariables value: anObject
 ]

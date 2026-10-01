@@ -1,4 +1,6 @@
 "
+It corresponds to entities that have a name.
+
 ## Properties
 ======================
 
@@ -8,30 +10,32 @@
 
 "
 Trait {
-	#name : #FamixTNamedEntity,
+	#name : 'FamixTNamedEntity',
 	#instVars : [
 		'#name => FMProperty'
 	],
-	#category : #'Famix-Traits-Named'
+	#category : 'Famix-Traits-Named',
+	#package : 'Famix-Traits',
+	#tag : 'Named'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTNamedEntity classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TNamedEntity super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 FamixTNamedEntity classSide >> named: aString [
 	^ self new
 		name: aString;
 		yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 FamixTNamedEntity classSide >> named: aString model: aMooseModel [
 	^ self new
 		mooseModel: aMooseModel;
@@ -39,40 +43,34 @@ FamixTNamedEntity classSide >> named: aString model: aMooseModel [
 		yourself
 ]
 
-{ #category : #visitor }
-FamixTNamedEntity >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTNamedEntity: self
-]
-
-{ #category : #printing }
+{ #category : 'printing' }
 FamixTNamedEntity >> displayStringOn: aStream [
 
 	self name ifNotNil: [ :n | aStream << n ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTNamedEntity >> hasUniqueMooseNameInModel [
 	" all subclasses should call the method: 'resetMooseName' if a change causes the moosename to change "
 	^ true
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixTNamedEntity >> mooseNameOn: stream [
 	self name ifNotNil: [ :n | stream nextPutAll: n ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTNamedEntity >> name [
 
 	<FMProperty: #name type: #String>
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Basic name of the entity, not full reference.'>
 	^ name
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTNamedEntity >> name: anObject [
 
 	name := anObject.
@@ -80,8 +78,10 @@ FamixTNamedEntity >> name: anObject [
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTNamedEntity >> resetMooseName [
-	(super resetMooseName and: [ self class withAllSuperclasses anySatisfy: [ :class | class isComposedBy: TEntityMetaLevelDependency ] ]) ifTrue: [ self children do: [ :entity | entity resetMooseName ] ].
+
+	(super resetMooseName and: [ self class withAllSuperclasses anySatisfy: [ :class | class isComposedBy: TEntityMetaLevelDependency ] ]) ifTrue: [
+		self containedEntities do: [ :entity | entity resetMooseName ] ].
 	^ false
 ]

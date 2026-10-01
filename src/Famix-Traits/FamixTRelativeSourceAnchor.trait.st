@@ -35,7 +35,7 @@ Internal Representation and Key Implementation Points.
 
 "
 Trait {
-	#name : #FamixTRelativeSourceAnchor,
+	#name : 'FamixTRelativeSourceAnchor',
 	#instVars : [
 		'#relatedAnchor => FMProperty',
 		'#startPos => FMProperty',
@@ -43,31 +43,26 @@ Trait {
 	],
 	#traits : 'FamixTSourceAnchor',
 	#classTraits : 'FamixTSourceAnchor classTrait',
-	#category : #'Famix-Traits-SourceAnchor'
+	#category : 'Famix-Traits-SourceAnchor',
+	#package : 'Famix-Traits',
+	#tag : 'SourceAnchor'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTRelativeSourceAnchor classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TRelativeSourceAnchor super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
-{ #category : #visitor }
-FamixTRelativeSourceAnchor >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTRelativeSourceAnchor: self
-]
-
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTRelativeSourceAnchor >> completeText [
 	^ self relatedAnchor sourceText
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTRelativeSourceAnchor >> endLine [
 	^ self
 		cacheAt: #endLine
@@ -75,63 +70,67 @@ FamixTRelativeSourceAnchor >> endLine [
 			self cacheAt: #endLine ifAbsent: [ self error ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTRelativeSourceAnchor >> endPos [
 
 	<FMProperty: #endPos type: #Number>
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Stop position in the source'>
 	^ endPos
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTRelativeSourceAnchor >> endPos: anObject [
+	<ignoreForCoverage>
 	<generated>
 	endPos := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTRelativeSourceAnchor >> ensureStartAndEndLineAreSet [
 	self initializeStartAndEndLineFrom: self relatedAnchor sourceText
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTRelativeSourceAnchor >> fileName [
 	^ self relatedAnchor fileName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTRelativeSourceAnchor >> initializeStartAndEndLineFrom: sourceText [
 	self cacheAt: #startLine put: (sourceText lineNumberCorrespondingToIndex: self startPos) + (self relatedAnchor startLine ifNil: [ 0 ]).
 	self cacheAt: #endLine put: (sourceText lineNumberCorrespondingToIndex: self endPos) + (self relatedAnchor startLine ifNil: [ 0 ])
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTRelativeSourceAnchor >> relatedAnchor [
 
 	<FMProperty: #relatedAnchor type: #FamixTSourceAnchor>
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Source anchor to which I am relative.'>
 	^ relatedAnchor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTRelativeSourceAnchor >> relatedAnchor: anObject [
+	<ignoreForCoverage>
 	<generated>
 	relatedAnchor := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTRelativeSourceAnchor >> sourceText [
 	^ self relatedAnchor sourceTextFrom: self startPos to: self endPos
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTRelativeSourceAnchor >> sourceTextFrom: start to: end [
 	^ self relatedAnchor sourceTextFrom: start + self startPos - 1 to: self startPos + end - 1
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTRelativeSourceAnchor >> startLine [
 	^ self
 		cacheAt: #startLine
@@ -139,17 +138,19 @@ FamixTRelativeSourceAnchor >> startLine [
 			self cacheAt: #startLine ifAbsent: [ self error ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTRelativeSourceAnchor >> startPos [
 
 	<FMProperty: #startPos type: #Number>
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Start position in the source'>
 	^ startPos
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTRelativeSourceAnchor >> startPos: anObject [
+	<ignoreForCoverage>
 	<generated>
 	startPos := anObject
 ]

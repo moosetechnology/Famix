@@ -1,4 +1,6 @@
 "
+It corresponds to entities that can contain local variables.
+
 ## Relations
 ======================
 
@@ -11,47 +13,43 @@
 
 "
 Trait {
-	#name : #FamixTWithLocalVariables,
+	#name : 'FamixTWithLocalVariables',
 	#instVars : [
 		'#localVariables => FMMany type: #FamixTLocalVariable opposite: #parentBehaviouralEntity'
 	],
-	#category : #'Famix-Traits-LocalVariable'
+	#category : 'Famix-Traits-LocalVariable',
+	#package : 'Famix-Traits',
+	#tag : 'LocalVariable'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTWithLocalVariables classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TWithLocalVariables super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
-{ #category : #visitor }
-FamixTWithLocalVariables >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTWithLocalVariables: self
-]
-
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithLocalVariables >> addLocalVariable: aLocalVariable [
 	localVariables add: aLocalVariable
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithLocalVariables >> localVariables [
 	"Relation named: #localVariables type: #FamixTLocalVariable opposite: #parentBehaviouralEntity"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Variables locally defined by this behaviour.'>
-	<derived>
 	^ localVariables
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithLocalVariables >> localVariables: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	localVariables value: anObject
 ]

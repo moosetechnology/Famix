@@ -27,23 +27,17 @@ Trait {
 { #category : #meta }
 FamixJavaTCanBeVolatile classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TCanBeVolatile super: #Object>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^ self
-]
-
-{ #category : #visitor }
-FamixJavaTCanBeVolatile >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaTCanBeVolatile: self
 ]
 
 { #category : #accessing }
 FamixJavaTCanBeVolatile >> isVolatile [
 
 	<FMProperty: #isVolatile type: #Boolean defaultValue: false>
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Entity can be declared volatile'>
 	^ isVolatile ifNil: [ isVolatile := false ]
@@ -51,6 +45,7 @@ FamixJavaTCanBeVolatile >> isVolatile [
 
 { #category : #accessing }
 FamixJavaTCanBeVolatile >> isVolatile: anObject [
+	<ignoreForCoverage>
 	<generated>
 	isVolatile := anObject
 ]

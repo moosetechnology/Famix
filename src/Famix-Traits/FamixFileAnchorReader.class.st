@@ -1,6 +1,6 @@
 Class {
-	#name : #FamixFileAnchorReader,
-	#superclass : #Object,
+	#name : 'FamixFileAnchorReader',
+	#superclass : 'Object',
 	#instVars : [
 		'readStream',
 		'writeStream',
@@ -9,10 +9,11 @@ Class {
 		'char',
 		'startLine'
 	],
-	#category : #'Famix-Traits'
+	#category : 'Famix-Traits',
+	#package : 'Famix-Traits'
 }
 
-{ #category : #reading }
+{ #category : 'reading' }
 FamixFileAnchorReader class >> readStream: aReadStream for: aFAMIXFileAnchor into: aWriteStream [
 	^ self new
 		readStream: aReadStream;
@@ -21,23 +22,23 @@ FamixFileAnchorReader class >> readStream: aReadStream for: aFAMIXFileAnchor int
 		read
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixFileAnchorReader >> fileAnchor: anObject [
 	fileAnchor := anObject
 ]
 
-{ #category : #reading }
+{ #category : 'reading' }
 FamixFileAnchorReader >> increment [
 	lineCount := lineCount + 1
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FamixFileAnchorReader >> initialize [
 	super initialize.
 	lineCount := 1
 ]
 
-{ #category : #reading }
+{ #category : 'reading' }
 FamixFileAnchorReader >> manageNewLineReturnBeforeStartFromCr: aBoolean [
 	self increment.
 	lineCount = self startLine ifFalse: [ ^ self ].
@@ -47,7 +48,7 @@ FamixFileAnchorReader >> manageNewLineReturnBeforeStartFromCr: aBoolean [
 	self readUntilStartColumn
 ]
 
-{ #category : #reading }
+{ #category : 'reading' }
 FamixFileAnchorReader >> read [
 	[ [ self tryToRead ]
 		on: ZnCharacterEncodingError
@@ -61,12 +62,12 @@ FamixFileAnchorReader >> read [
 			[ "If the model is wrong, the file can be smaller than the model think. In that case we just stop the reading" ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixFileAnchorReader >> readStream: anObject [
 	readStream := anObject
 ]
 
-{ #category : #reading }
+{ #category : 'reading' }
 FamixFileAnchorReader >> readUntil: endLine [
 	[ lineCount < endLine ]
 		whileTrue: [ (char := readStream next) isCr
@@ -82,7 +83,7 @@ FamixFileAnchorReader >> readUntil: endLine [
 	self readUntilEndColumn
 ]
 
-{ #category : #reading }
+{ #category : 'reading' }
 FamixFileAnchorReader >> readUntilEndColumn [
 	fileAnchor endColumn
 		ifNil: [ readStream peek ifNotNil: [ [ (char := readStream next) isCr or: [ char isLf ] ] whileFalse: [ writeStream nextPut: char ] ] ]
@@ -94,7 +95,7 @@ FamixFileAnchorReader >> readUntilEndColumn [
 			writeStream nextPutAll: (readStream next: numberOfCharToRead) ]
 ]
 
-{ #category : #reading }
+{ #category : 'reading' }
 FamixFileAnchorReader >> readUntilStart [
 	[ lineCount < self startLine ]
 		whileTrue: [ (char := readStream next) isCr
@@ -105,31 +106,31 @@ FamixFileAnchorReader >> readUntilStart [
 						ifTrue: [ self manageNewLineReturnBeforeStartFromCr: false ] ] ]
 ]
 
-{ #category : #reading }
+{ #category : 'reading' }
 FamixFileAnchorReader >> readUntilStartColumn [
 	readStream skip: (fileAnchor startColumn ifNil: [ 1 ]) - 1
 ]
 
-{ #category : #reading }
+{ #category : 'reading' }
 FamixFileAnchorReader >> reset [
 	self initialize.
 	readStream reset.
 	writeStream reset
 ]
 
-{ #category : #reading }
+{ #category : 'reading' }
 FamixFileAnchorReader >> skipNextIfLf [
 	"I will probably be called after a CR to remove a possible CRLF"
 
 	readStream peek isLf ifTrue: [ readStream next ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixFileAnchorReader >> startLine [
 	^ startLine ifNil: [ startLine := fileAnchor startLine ifNil: [ 1 ] ]
 ]
 
-{ #category : #reading }
+{ #category : 'reading' }
 FamixFileAnchorReader >> tryToRead [
 	self readUntilStart.
 	fileAnchor endLine
@@ -137,7 +138,7 @@ FamixFileAnchorReader >> tryToRead [
 		ifNotNil: [ :endLine | self readUntil: endLine ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixFileAnchorReader >> writeStream: anObject [
 	writeStream := anObject
 ]

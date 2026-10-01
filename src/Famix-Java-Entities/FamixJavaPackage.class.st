@@ -44,10 +44,10 @@ Class {
 { #category : #meta }
 FamixJavaPackage class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Package super: #FamixJavaContainerEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^ self
 ]
 
 { #category : #'Famix-Implementation' }
@@ -70,13 +70,6 @@ FamixJavaPackage >> abstractness [
 	^ (nsClasses select: [ :c | c isAbstract ]) size / nsClasses size
 ]
 
-{ #category : #visitor }
-FamixJavaPackage >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaPackage: self
-]
-
 { #category : #adding }
 FamixJavaPackage >> addChildNamedEntity: aNamedEntity [
 	childEntities add: aNamedEntity
@@ -89,7 +82,7 @@ FamixJavaPackage >> afferentCoupling [
 	<FMProperty: #afferentCoupling type: #Number>
 	<derived>
 	<FMComment: 'Afferent Coupling of a package'>
-	^ ((self queryAllIncoming atScope: FamixTType) outOfParentUsing: FamixTPackage) size
+	^ ((self queryAllIncoming containersOfType: FamixTType) outOfContainerUsing: FamixTPackage) size
 ]
 
 { #category : #'Famix-Extensions' }
@@ -109,7 +102,7 @@ FamixJavaPackage >> bunchCohesion [
 	myClasses := self classes.
 	myClasses := myClasses union: (myClasses flatCollect: [ :c | c allRecursiveTypes ]).
 	myClasses size == 0 ifTrue: [ ^ nil ].
-	intraConnectivities := (myClasses collect: [ :c | (c queryAllOutgoing atScope: FamixTType) withinParentUsing: FamixTPackage ]) inject: 0 into: [ :subTotal :each | subTotal + each size ].
+	intraConnectivities := (myClasses collect: [ :c | (c queryAllOutgoing containersOfType: FamixTType) withinContainerUsing: FamixTPackage ]) inject: 0 into: [ :subTotal :each | subTotal + each size ].
 	^ intraConnectivities / myClasses size squared asFloat
 ]
 
@@ -125,11 +118,11 @@ FamixJavaPackage >> bunchCouplingWith: aPackage [
 	(myClasses size == 0 or: [ otherClasses size == 0 ]) ifTrue: [ ^ nil ].
 
 	"All outgoing dependencies"
-	interConnectivities := (myClasses collect: [ :c | (c queryAllOutgoing atScope: FamixTType) within: aPackage ]) inject: 0 into: [ :subTotal :each | subTotal + each size ].
+	interConnectivities := (myClasses collect: [ :c | (c queryAllOutgoing containersOfType: FamixTType) within: aPackage ]) inject: 0 into: [ :subTotal :each | subTotal + each size ].
 
 	"Plus all incoming dependencies"
 	interConnectivities := interConnectivities
-		+ ((myClasses collect: [ :c | (c queryAllIncoming atScope: FamixTType) within: aPackage ]) inject: 0 into: [ :subTotal :each | subTotal + each size ]).
+		+ ((myClasses collect: [ :c | (c queryAllIncoming containersOfType: FamixTType) within: aPackage ]) inject: 0 into: [ :subTotal :each | subTotal + each size ]).
 	^ interConnectivities / (2 * myClasses size * otherClasses size) asFloat
 ]
 
@@ -144,11 +137,11 @@ FamixJavaPackage >> bunchCouplingWithAll [
 	myClasses ifEmpty: [ ^ nil ].
 
 	"All outgoing dependencies"
-	interConnectivities := (myClasses collect: [ :c | (c queryAllOutgoing atScope: FamixTType) outOfParentUsing: FamixTPackage ]) inject: 0 into: [ :subTotal :each | subTotal + each size ].
+	interConnectivities := (myClasses collect: [ :c | (c queryAllOutgoing containersOfType: FamixTType) outOfContainerUsing: FamixTPackage ]) inject: 0 into: [ :subTotal :each | subTotal + each size ].
 
 	"Plus all incoming dependencies"
 	interConnectivities := interConnectivities
-		+ ((myClasses collect: [ :c | (c queryAllIncoming atScope: FamixTType) outOfParentUsing: FamixTPackage ]) inject: 0 into: [ :subTotal :each | subTotal + each size ]).
+		+ ((myClasses collect: [ :c | (c queryAllIncoming containersOfType: FamixTType) outOfContainerUsing: FamixTPackage ]) inject: 0 into: [ :subTotal :each | subTotal + each size ]).
 	^ interConnectivities / (2 * myClasses size * (allClasses size - myClasses size)) asFloat
 ]
 
@@ -196,7 +189,7 @@ FamixJavaPackage >> efferentCoupling [
 	<FMProperty: #efferentCoupling type: #Number>
 	<derived>
 	<FMComment: 'Efferent Coupling of a package'>
-	^ ((self queryAllOutgoing outOfParentUsing: FamixTPackage) atScope: FamixTType) size
+	^ ((self queryAllOutgoing outOfContainerUsing: FamixTPackage) containersOfType: FamixTType) size
 ]
 
 { #category : #'Famix-Extensions-metrics' }
@@ -231,7 +224,7 @@ FamixJavaPackage >> martinCohesion [
 	myClasses := self classes.
 	myClasses := myClasses union: (myClasses flatCollect: [ :c | c allRecursiveTypes ]).
 	myClasses size == 0 ifTrue: [ ^ nil ].
-	intraConnectivities := (myClasses collect: [ :c | (c queryAllOutgoing atScope: FamixTType) withoutSelfLoops withinParentUsing: FamixTPackage ]) inject: 0 into: [ :subTotal :each | subTotal + each size ].
+	intraConnectivities := (myClasses collect: [ :c | (c queryAllOutgoing containersOfType: FamixTType) withoutSelfLoops withinContainerUsing: FamixTPackage ]) inject: 0 into: [ :subTotal :each | subTotal + each size ].
 	^ ((intraConnectivities + 1) / myClasses size) asFloat
 ]
 
@@ -252,26 +245,12 @@ FamixJavaPackage >> mooseNameOn: stream [
 ]
 
 { #category : #accessing }
-FamixJavaPackage >> numberOfClientPackages [
-	<FMProperty: #numberOfClientPackages type: #Number>
-	<FMComment: 'The number of packages which depend on this package'>
-	<derived>
-	^ self lookUpPropertyNamed: #numberOfClientPackages computedAs: [ self allClientsAtMyScope size ]
-]
-
-{ #category : #accessing }
-FamixJavaPackage >> numberOfClientPackages: aNumber [
-	self cacheAt: #numberOfClientPackages put: aNumber
-]
-
-{ #category : #accessing }
 FamixJavaPackage >> numberOfMethods [
+
 	<FMProperty: #numberOfMethods type: #Number>
 	<FMComment: 'The number of methods in a package'>
 	<derived>
-	^ self
-		lookUpPropertyNamed: #numberOfMethods
-		computedAs: [ self types inject: 0 into: [ :sum :each | sum + each numberOfMethods ] ]
+	^ self cacheAt: #numberOfMethods ifAbsentPut: [ self types inject: 0 into: [ :sum :each | sum + each numberOfMethods ] ]
 ]
 
 { #category : #accessing }
@@ -289,22 +268,6 @@ FamixJavaPackage >> printOn: aStream [
 			nextPut: $. ].
 	self name ifNotNil: [ aStream nextPutAll: self name ].
 	aStream nextPutAll: ' (Package)'
-]
-
-{ #category : #'Famix-Extensions-metrics' }
-FamixJavaPackage >> relativeImportanceForSystem [
-	<FMProperty: #relativeImportanceForSystem type: #Number>
-	<derived>
-	<FMComment: 'The number of client packages normalized by the total number of packages'>
-	
-	^ self lookUpPropertyNamed: #relativeImportanceForSystem
-				 computedAs: [
-					(self mooseModel allModelPackages size > 1)
-						ifTrue:[
-							self numberOfClientPackages / (self mooseModel allModelPackages size - 1)
-							]
-						ifFalse: [0]
-						]
 ]
 
 { #category : #testing }

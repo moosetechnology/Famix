@@ -1,4 +1,6 @@
 "
+It corresponds to entities that can contain references to other entities.
+
 ## Relations
 ======================
 
@@ -11,47 +13,43 @@
 
 "
 Trait {
-	#name : #FamixTWithReferences,
+	#name : 'FamixTWithReferences',
 	#instVars : [
 		'#outgoingReferences => FMMany type: #FamixTReference opposite: #referencer'
 	],
-	#category : #'Famix-Traits-Reference'
+	#category : 'Famix-Traits-Reference',
+	#package : 'Famix-Traits',
+	#tag : 'Reference'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTWithReferences classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TWithReferences super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
-{ #category : #visitor }
-FamixTWithReferences >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTWithReferences: self
-]
-
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithReferences >> addOutgoingReference: aReference [ 
 	outgoingReferences add: aReference
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithReferences >> outgoingReferences [
 	"Relation named: #outgoingReferences type: #FamixTReference opposite: #referencer"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'References from this entity to other entities.'>
-	<derived>
 	^ outgoingReferences
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithReferences >> outgoingReferences: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	outgoingReferences value: anObject
 ]

@@ -17,30 +17,32 @@
 
 "
 Trait {
-	#name : #FamixTFileSystemEntity,
+	#name : 'FamixTFileSystemEntity',
 	#instVars : [
 		'#parentFolder => FMOne type: #FamixTFolder opposite: #childrenFileSystemEntities'
 	],
-	#traits : 'FamixTNamedEntity',
-	#classTraits : 'FamixTNamedEntity classTrait',
-	#category : #'Famix-Traits-File'
+	#traits : 'FamixTNamedEntity + TEntityMetaLevelDependency',
+	#classTraits : 'FamixTNamedEntity classTrait + TEntityMetaLevelDependency classTrait',
+	#category : 'Famix-Traits-File',
+	#package : 'Famix-Traits',
+	#tag : 'File'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTFileSystemEntity classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TFileSystemEntity super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
-{ #category : #constants }
+{ #category : 'constants' }
 FamixTFileSystemEntity classSide >> famixFolderSeparatorString [
 	^ '/'
 ]
 
-{ #category : #constants }
+{ #category : 'constants' }
 FamixTFileSystemEntity classSide >> named: aName filedIn: aFolder [
 	^ self new
 		name: (aName copyReplaceAll: self systemFolderSeparatorString with: self famixFolderSeparatorString) asSymbol;
@@ -48,59 +50,52 @@ FamixTFileSystemEntity classSide >> named: aName filedIn: aFolder [
 		yourself
 ]
 
-{ #category : #constants }
+{ #category : 'constants' }
 FamixTFileSystemEntity classSide >> systemFolderSeparatorString [
 	^ DiskStore delimiter asString 
 ]
 
-{ #category : #visitor }
-FamixTFileSystemEntity >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTFileSystemEntity: self
-]
-
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTFileSystemEntity >> fileReference [
 	^ FileSystem disk referenceTo: (self mooseName copyReplaceAll: self class famixFolderSeparatorString with: FileSystem disk delimiter asString)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTFileSystemEntity >> fullName [
 	^ self mooseName
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTFileSystemEntity >> ifFolder: aBlock [
 	^ self isFolder ifTrue: [ aBlock value ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTFileSystemEntity >> ifFolder: aBlock1 ifNotFolder: aBlock2 [
 	^ self isFolder ifTrue: [ aBlock1 value ] ifFalse: [ aBlock2 value ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTFileSystemEntity >> ifNotFolder: aBlock [
 	^ self isFolder ifFalse: [ aBlock value ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTFileSystemEntity >> ifNotFolder: aBlock1 ifFolder: aBlock2 [
 	^ self isFolder ifFalse: [ aBlock1 value ] ifTrue: [ aBlock2 value ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTFileSystemEntity >> isFolder [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTFileSystemEntity >> isRoot [
 	^ self parentFolder isNil
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixTFileSystemEntity >> mooseNameOn: aStream [
 	self parentFolder
 		ifNotNil: [ :parent | 
@@ -109,43 +104,38 @@ FamixTFileSystemEntity >> mooseNameOn: aStream [
 	self name ifNotNil: [ :aName | aStream nextPutAll: aName ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTFileSystemEntity >> numberOfEmptyLinesOfText [
 	^ self explicitRequirement
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTFileSystemEntity >> numberOfLinesOfText [
+
 	<FMProperty: #numberOfLinesOfText type: #Number>
 	<FMComment: 'Number of lines of text which are not empty in a file'>
 	<derived>
-	^ self lookUpPropertyNamed: #numberOfLinesOfText computedAs: [ self totalNumberOfLinesOfText - self numberOfEmptyLinesOfText ]
+	^ self cacheAt: #numberOfLinesOfText ifAbsentPut: [ self totalNumberOfLinesOfText - self numberOfEmptyLinesOfText ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTFileSystemEntity >> parentFolder [
 	"Relation named: #parentFolder type: #FamixTFolder opposite: #childrenFileSystemEntities"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Folder entity containing this file.'>
 	<container>
 	^ parentFolder
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTFileSystemEntity >> parentFolder: anObject [
 	parentFolder := anObject.
 	self resetMooseName
 ]
 
-{ #category : #navigation }
-FamixTFileSystemEntity >> parentFolderGroup [
-	<generated>
-	<navigation: 'ParentFolder'>
-	^ MooseSpecializedGroup with: self parentFolder
-]
-
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTFileSystemEntity >> totalNumberOfLinesOfText [
 	^ self explicitRequirement
 ]

@@ -8,40 +8,37 @@
 
 "
 Trait {
-	#name : #FamixTCanBeFinal,
+	#name : 'FamixTCanBeFinal',
 	#instVars : [
 		'#isFinal => FMProperty defaultValue: false'
 	],
-	#category : #'Famix-Traits-PrimitiveProperties'
+	#category : 'Famix-Traits-PrimitiveProperties',
+	#package : 'Famix-Traits',
+	#tag : 'PrimitiveProperties'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTCanBeFinal classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TCanBeFinal super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
-{ #category : #visitor }
-FamixTCanBeFinal >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTCanBeFinal: self
-]
-
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTCanBeFinal >> isFinal [
 
 	<FMProperty: #isFinal type: #Boolean defaultValue: false>
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Entity can be declared final'>
 	^ isFinal ifNil: [ isFinal := false ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTCanBeFinal >> isFinal: anObject [
+	<ignoreForCoverage>
 	<generated>
 	isFinal := anObject
 ]

@@ -7,10 +7,10 @@ FamixNamespaceGroup >> hierarchy [
 ]
 
 { #category : #'*Famix-Visualizations' }
-FamixNamespaceGroup >> inspectorShowInHierarchy [
+FamixNamespaceGroup >> inspectionHierarchy: aBuilder [
 
 	<inspectorPresentationOrder: 10 title: 'Hierarchy'>
-	^ self withinOverallHierarchy asInspectorPresenter
+	^ self withinOverallHierarchy buildInspectorPresenter: aBuilder
 ]
 
 { #category : #'*Famix-Visualizations' }

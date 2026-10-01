@@ -36,74 +36,74 @@ Note that FamixTReference was defined between two FamixTContainerEntity entities
 
 "
 Trait {
-	#name : #FamixTReference,
+	#name : 'FamixTReference',
 	#instVars : [
 		'#referencer => FMOne type: #FamixTWithReferences opposite: #outgoingReferences',
 		'#referredEntity => FMOne type: #FamixTReferenceable opposite: #incomingReferences'
 	],
 	#traits : 'FamixTAssociation',
 	#classTraits : 'FamixTAssociation classTrait',
-	#category : #'Famix-Traits-Reference'
+	#category : 'Famix-Traits-Reference',
+	#package : 'Famix-Traits',
+	#tag : 'Reference'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTReference classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TReference super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 FamixTReference classSide >> source: source target: target [
 	^ self new source: source; target: target
 ]
 
-{ #category : #visitor }
-FamixTReference >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTReference: self
-]
-
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTReference >> isReference [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTReference >> referencer [
 	"Relation named: #referencer type: #FamixTWithReferences opposite: #outgoingReferences"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Source entity making the reference. from-side of the association'>
 	<source>
 	^ referencer
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTReference >> referencer: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	referencer := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTReference >> referredEntity [
 	"Relation named: #referredEntity type: #FamixTReferenceable opposite: #incomingReferences"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Target entity referenced. to-side of the association'>
 	<target>
 	^ referredEntity
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTReference >> referredEntity: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	referredEntity := anObject
 ]

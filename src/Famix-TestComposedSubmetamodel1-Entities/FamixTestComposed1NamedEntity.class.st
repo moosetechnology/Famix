@@ -18,16 +18,17 @@ Class {
 { #category : #meta }
 FamixTestComposed1NamedEntity class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #NamedEntity super: #FamixTestComposed1Entity>
 	<package: #'Famix-TestComposedSubmetamodel1-Entities'>
 	<generated>
 	<abstract>
-	^ self
 ]
 
 { #category : #testing }
 FamixTestComposed1NamedEntity class >> isAbstract [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self == FamixTestComposed1NamedEntity
 ]
@@ -35,6 +36,7 @@ FamixTestComposed1NamedEntity class >> isAbstract [
 { #category : #testing }
 FamixTestComposed1NamedEntity >> isNamedEntity [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]

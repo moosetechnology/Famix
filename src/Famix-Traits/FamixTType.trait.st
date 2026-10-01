@@ -17,12 +17,12 @@ A type can have multiple subtypes or supertypes. These are modelled by means of 
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `incomingReferences` | `FamixTReferenceable` | `referredEntity` | `FamixTReference` | References to this entity by other entities.|
+| `incomingTypings` | `FamixTType` | `declaredType` | `FamixTEntityTyping` | Relations to the entities that have this as type.|
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
-| `typedEntities` | `FamixTType` | `declaredType` | `FamixTTypedEntity` | Entities that have this type as declaredType|
 
 
 ## Properties
@@ -35,63 +35,86 @@ A type can have multiple subtypes or supertypes. These are modelled by means of 
 
 "
 Trait {
-	#name : #FamixTType,
+	#name : 'FamixTType',
 	#instVars : [
-		'#typeContainer => FMOne type: #FamixTWithTypes opposite: #types',
-		'#typedEntities => FMMany type: #FamixTTypedEntity opposite: #declaredType'
+		'#incomingTypings => FMMany type: #FamixTEntityTyping opposite: #declaredType',
+		'#typeContainer => FMOne type: #FamixTWithTypes opposite: #types'
 	],
 	#traits : 'FamixTCanBeStub + FamixTNamedEntity + FamixTReferenceable + TEntityMetaLevelDependency',
 	#classTraits : 'FamixTCanBeStub classTrait + FamixTNamedEntity classTrait + FamixTReferenceable classTrait + TEntityMetaLevelDependency classTrait',
-	#category : #'Famix-Traits-Type'
+	#category : 'Famix-Traits-Type',
+	#package : 'Famix-Traits',
+	#tag : 'Type'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTType classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TType super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
-{ #category : #groups }
+{ #category : 'groups' }
 FamixTType classSide >> annotationFamixTypeGroup [
+
+	<ignoreForCoverage>
 	<generated>
 	<mooseGroup>
 	^ FamixTypeGroup
 ]
 
-{ #category : #visitor }
-FamixTType >> accept: aVisitor [
+{ #category : 'adding' }
+FamixTType >> addIncomingTyping: anObject [
 
+	<ignoreForCoverage>
 	<generated>
-	^ aVisitor visitFamixTType: self
+	^ self incomingTypings add: anObject
 ]
 
-{ #category : #adding }
-FamixTType >> addTypedEntity: anObject [
-	<generated>
-	^ self typedEntities add: anObject
-]
-
-{ #category : #deprecated }
+{ #category : 'deprecated' }
 FamixTType >> belongsTo [
-	^ self parentPackage ifNil: [ self parents ifNotEmpty: #anyOne ifEmpty: [ nil ] ]
+
+	^ self parentPackage ifNil: [
+			  self containers
+				  ifNotEmpty: #anyOne
+				  ifEmpty: [ nil ] ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTType >> entityHasIncomingTypeDeclarations [
-	^ self typedEntities isNotEmpty
+
+	^ self incomingDeclarations isNotEmpty
 ]
 
-{ #category : #testing }
+{ #category : 'accessing' }
+FamixTType >> incomingTypings [
+	"Relation named: #incomingTypings type: #FamixTEntityTyping opposite: #declaredType"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'Relations to the entities that have this as type.'>
+	^ incomingTypings
+]
+
+{ #category : 'accessing' }
+FamixTType >> incomingTypings: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	incomingTypings value: anObject
+]
+
+{ #category : 'testing' }
 FamixTType >> isType [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixTType >> mooseNameOn: aStream [
 	self typeContainer
 		ifNotNil: [ :parent |
@@ -100,17 +123,14 @@ FamixTType >> mooseNameOn: aStream [
 	self name ifNotNil: [ :n | aStream nextPutAll: n ]
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTType >> numberOfAccessesToForeignData [
 
-	self deprecated:
-		'This method will be removed in the nex version of Moose'.
-	^ self
-		  lookUpPropertyNamed: #numberOfAccessesToForeignData
-		  computedAs: [ self notExistentMetricValue ]
+	self deprecated: 'This method will be removed in the nex version of Moose'.
+	^ self cacheAt: #numberOfAccessesToForeignData ifAbsentPut: [ self notExistentMetricValue ]
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTType >> numberOfAccessesToForeignData: aNumber [
 
 	self deprecated:
@@ -118,23 +138,24 @@ FamixTType >> numberOfAccessesToForeignData: aNumber [
 	self cacheAt: #numberOfAccessesToForeignData put: aNumber
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTType >> realType [
 	"All types except the alias ones are real"
 	^ self 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTType >> typeContainer [
 	"Relation named: #typeContainer type: #FamixTWithTypes opposite: #types"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Container entity to which this type belongs. Container is a namespace, not a package (Smalltalk).'>
 	<container>
 	^ typeContainer
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTType >> typeContainer: anObject [
 
 	typeContainer := anObject.
@@ -142,26 +163,8 @@ FamixTType >> typeContainer: anObject [
 
 ]
 
-{ #category : #navigation }
-FamixTType >> typeContainerGroup [
-	<generated>
-	<navigation: 'TypeContainer'>
-	^ MooseSpecializedGroup with: self typeContainer
-]
-
-{ #category : #accessing }
+{ #category : 'as yet unclassified' }
 FamixTType >> typedEntities [
-	"Relation named: #typedEntities type: #FamixTTypedEntity opposite: #declaredType"
 
-	<generated>
-	<FMComment: 'Entities that have this type as declaredType'>
-	<derived>
-	^ typedEntities
-]
-
-{ #category : #accessing }
-FamixTType >> typedEntities: anObject [
-
-	<generated>
-	typedEntities value: anObject
+	^ self incomingTypings collect: #source
 ]

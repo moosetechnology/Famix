@@ -10,40 +10,37 @@ The signature of any behavioural entity
 
 "
 Trait {
-	#name : #FamixTHasSignature,
+	#name : 'FamixTHasSignature',
 	#instVars : [
 		'#signature => FMProperty'
 	],
-	#category : #'Famix-Traits-Behavioral'
+	#category : 'Famix-Traits-Behavioral',
+	#package : 'Famix-Traits',
+	#tag : 'Behavioral'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTHasSignature classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #THasSignature super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
-{ #category : #visitor }
-FamixTHasSignature >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTHasSignature: self
-]
-
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTHasSignature >> signature [
 
 	<FMProperty: #signature type: #String>
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Signature of the message being sent'>
 	^ signature
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTHasSignature >> signature: anObject [
+	<ignoreForCoverage>
 	<generated>
 	signature := anObject
 ]

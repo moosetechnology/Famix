@@ -23,7 +23,7 @@ For each access in the source code, there is one famix access created even if it
 ### Association target
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `variable` | `FamixTAccess` | `incomingAccesses` | `FamixTAccessible` | Variable accessed. to-side of the association|
+| `candidates` | `FamixTAccess` | `incomingAccesses` | `FamixTAccessible` | Variables that cas be the accessed variable. to-side of the association. Most of the time it will be only one variable, but some languages might have candidates such as Python.|
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
@@ -42,66 +42,103 @@ For each access in the source code, there is one famix access created even if it
 
 "
 Trait {
-	#name : #FamixTAccess,
+	#name : 'FamixTAccess',
 	#instVars : [
 		'#accessor => FMOne type: #FamixTWithAccesses opposite: #accesses',
-		'#isWrite => FMProperty defaultValue: false',
-		'#variable => FMOne type: #FamixTAccessible opposite: #incomingAccesses'
+		'#candidates => FMMany type: #FamixTAccessible opposite: #incomingAccesses',
+		'#isWrite => FMProperty defaultValue: false'
 	],
 	#traits : 'FamixTAssociation',
 	#classTraits : 'FamixTAssociation classTrait',
-	#category : #'Famix-Traits-Access'
+	#category : 'Famix-Traits-Access',
+	#package : 'Famix-Traits',
+	#tag : 'Access'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTAccess classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TAccess super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
-{ #category : #visitor }
-FamixTAccess >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTAccess: self
-]
-
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAccess >> accessor [
 	"Relation named: #accessor type: #FamixTWithAccesses opposite: #accesses"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Behavioural entity making the access to the variable. from-side of the association'>
 	<source>
 	^ accessor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAccess >> accessor: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	accessor := anObject
 ]
 
-{ #category : #printing }
+{ #category : 'adding' }
+FamixTAccess >> addCandidate: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self candidates add: anObject
+]
+
+{ #category : 'accessing' }
+FamixTAccess >> candidates [
+	"Relation named: #candidates type: #FamixTAccessible opposite: #incomingAccesses"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'Variables that cas be the accessed variable. to-side of the association. Most of the time it will be only one variable, but some languages might have candidates such as Python.'>
+	<target>
+	^ candidates
+]
+
+{ #category : 'accessing' }
+FamixTAccess >> candidates: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	candidates value: anObject
+]
+
+{ #category : 'printing' }
+FamixTAccess >> displayFullStringOn: aStream [
+
+	self source displayFullStringOn: aStream.
+	aStream nextPutAll: ' -> '.
+	(self candidates size = 1
+		 ifTrue: [ self variable ]
+		 ifFalse: [ self candidates ]) displayStringOn: aStream
+]
+
+{ #category : 'printing' }
 FamixTAccess >> displayStringOn: aStream [
 
-	variable displayStringOn: aStream.
+	(self candidates size = 1
+		 ifTrue: [ self variable ]
+		 ifFalse: [ self candidates ]) displayStringOn: aStream.
 	aStream << ' accessed in '.
 	accessor displayStringOn: aStream
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTAccess >> isAccess [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAccess >> isRead [
 	<FMProperty: #isRead type: #Boolean>
 	<derived>
@@ -109,7 +146,7 @@ FamixTAccess >> isRead [
 	^ isWrite ifNil: [ false ] ifNotNil: [ isWrite not ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAccess >> isReadWriteUnknown [
 	<FMProperty: #isReadWriteUnknown type: #Boolean> <derived>
 	<FMComment: ''>
@@ -117,7 +154,7 @@ FamixTAccess >> isReadWriteUnknown [
 	^ isWrite isNil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAccess >> isWrite [
 
 	<FMProperty: #isWrite type: #Boolean>
@@ -125,31 +162,39 @@ FamixTAccess >> isWrite [
 	^ isWrite ifNil: [ false ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAccess >> isWrite: anObject [
+	<ignoreForCoverage>
 	<generated>
 	isWrite := anObject
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixTAccess >> printOn: aStream [
 	super printOn: aStream.
 	aStream nextPutAll: ' (Access)'
 ]
 
-{ #category : #accessing }
-FamixTAccess >> variable [
-	"Relation named: #variable type: #FamixTAccessible opposite: #incomingAccesses"
+{ #category : 'accessing' }
+FamixTAccess >> target: aTarget [
 
-	<generated>
-	<FMComment: 'Variable accessed. to-side of the association'>
-	<target>
-	^ variable
+	aTarget isCollection
+		ifTrue: [ self candidates: aTarget ]
+		ifFalse: [ self variable: aTarget ]
 ]
 
-{ #category : #accessing }
-FamixTAccess >> variable: anObject [
+{ #category : 'accessing' }
+FamixTAccess >> variable [
+	"This method returns only one candidate if there is one, or raises an error if there is more or less than one candidate."
 
-	<generated>
-	variable := anObject
+	self candidates size = 1 ifFalse: [
+		self error: '1 candidate was expected but ' , self candidates size asString , ' candidates are present in this invocation.' ].
+
+	^ self candidates anyOne
+]
+
+{ #category : 'accessing' }
+FamixTAccess >> variable: anEntity [
+
+	^ self candidates: { anEntity }
 ]

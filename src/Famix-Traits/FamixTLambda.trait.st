@@ -43,51 +43,41 @@ FamixTLabmda represents a behavioural entity that does not have a name. It can b
 
 "
 Trait {
-	#name : #FamixTLambda,
+	#name : 'FamixTLambda',
 	#instVars : [
 		'#lambdaContainer => FMOne type: #FamixTWithLambdas opposite: #lambdas'
 	],
 	#traits : 'FamixTHasSignature + FamixTInvocable + FamixTWithLocalVariables + FamixTWithParameters + FamixTWithStatements + TEntityMetaLevelDependency',
 	#classTraits : 'FamixTHasSignature classTrait + FamixTInvocable classTrait + FamixTWithLocalVariables classTrait + FamixTWithParameters classTrait + FamixTWithStatements classTrait + TEntityMetaLevelDependency classTrait',
-	#category : #'Famix-Traits-Lambda'
+	#category : 'Famix-Traits-Lambda',
+	#package : 'Famix-Traits',
+	#tag : 'Lambda'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTLambda classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TLambda super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
-{ #category : #visitor }
-FamixTLambda >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTLambda: self
-]
-
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTLambda >> lambdaContainer [
 	"Relation named: #lambdaContainer type: #FamixTWithLambdas opposite: #lambdas"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The container defining the lambda expression. The lambda is placed in a container, because certain languages can nest lambdas in lambdas.'>
 	<container>
 	^ lambdaContainer
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTLambda >> lambdaContainer: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	lambdaContainer := anObject
-]
-
-{ #category : #navigation }
-FamixTLambda >> lambdaContainerGroup [
-	<generated>
-	<navigation: 'LambdaContainer'>
-	^ MooseSpecializedGroup with: self lambdaContainer
 ]

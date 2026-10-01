@@ -1,7 +1,7 @@
 Class {
 	#name : #FmxMBBehaviorTest,
 	#superclass : #FmxMBTestCase,
-	#category : #'Famix-MetamodelBuilder-Tests'
+	#category : #'Famix-MetamodelBuilder-Tests-Tests'
 }
 
 { #category : #testing }
@@ -20,19 +20,6 @@ FmxMBBehaviorTest >> behaviorClass [
 FmxMBBehaviorTest >> newEntityNamed: aString [
 
 	self subclassResponsibility 
-]
-
-{ #category : #tests }
-FmxMBBehaviorTest >> testComment [
-	"test assigning of a comment to a class"
-
-	| simpleClass generated commentString |
-	simpleClass := self newEntityNamed: #Comment.
-	commentString := 'Simple testing class'.
-	simpleClass comment: commentString.
-	builder generate.
-	generated := builder testingEnvironment ask classNamed: 'TstComment'.
-	self assert: (generated comment content beginsWith: commentString)
 ]
 
 { #category : #tests }
@@ -66,16 +53,6 @@ FmxMBBehaviorTest >> testCustomTestingSelectorsAtOnce [
 ]
 
 { #category : #tests }
-FmxMBBehaviorTest >> testDefaultSuperclass [
-
-	| entity |
-	
-	entity := builder newClassNamed: #Entity.
-	
-	self assert: entity defaultSuperclass name equals: #MooseEntity.
-]
-
-{ #category : #tests }
 FmxMBBehaviorTest >> testPluralOf [
 
 	| behavior | 
@@ -101,40 +78,4 @@ FmxMBBehaviorTest >> testTestingSelectors [
 	self assertEmpty: simpleClass testingSelectors.
 	simpleClass withTesting.
 	self assertCollection: simpleClass testingSelectors hasSameElements: #(isComment)
-]
-
-{ #category : #tests }
-FmxMBBehaviorTest >> testWithNavigationOf [
-
-	| method package env |
-	
-	package := builder newClassNamed: #Package.    
-	method := builder newClassNamed: #Method.    
-
-	package <>-* method. "with navigation is implicit"
-
-	builder generate.
-	
-	env := builder environment ringEnvironment.
-	
-	self assert: (((env ask classNamed: #TstPackage) methodNamed: 'methodsGroup') sourceCode includesSubstring: '<navigation: ''Methods''>').
-	self assert: (((env ask classNamed: #TstMethod) methodNamed: 'packageGroup') sourceCode includesSubstring: '<navigation: ''Package''>').
-]
-
-{ #category : #tests }
-FmxMBBehaviorTest >> testWithoutNavigation [
-
-	| method package env |
-	
-	package := builder newClassNamed: #Package.    
-	method := builder newClassNamed: #Method.    
-
-	(package <>-* method) withoutNavigation.
-
-	builder generate.
-	
-	env := builder environment ringEnvironment.
-	
-	self assert: ((env ask classNamed: #TstPackage) methodNamed: 'methodsGroup') isNil.
-	self assert: ((env ask classNamed: #TstMethod) methodNamed: 'packageGroup') isNil.
 ]

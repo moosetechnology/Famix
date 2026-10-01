@@ -1,22 +1,25 @@
 Class {
 	#name : #FamixTest1Entity,
 	#superclass : #MooseEntity,
+	#traits : 'FamixTest1TEntity',
+	#classTraits : 'FamixTest1TEntity classTrait',
 	#category : #'Famix-Test1-Entities-Entities'
 }
 
 { #category : #meta }
 FamixTest1Entity class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Entity super: #MooseEntity>
 	<package: #'Famix-Test1-Entities'>
 	<generated>
 	<abstract>
-	^ self
 ]
 
 { #category : #testing }
 FamixTest1Entity class >> isAbstract [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self == FamixTest1Entity
 ]
@@ -24,13 +27,31 @@ FamixTest1Entity class >> isAbstract [
 { #category : #meta }
 FamixTest1Entity class >> metamodel [
 
+	<ignoreForCoverage>
 	<generated>
 	^ FamixTest1Model metamodel
 ]
 
 { #category : #testing }
+FamixTest1Entity >> canBeStub [
+
+	<ignoreForCoverage>
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+FamixTest1Entity >> hasImmediateSource [
+
+	<ignoreForCoverage>
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
 FamixTest1Entity >> isAssociation [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -38,6 +59,7 @@ FamixTest1Entity >> isAssociation [
 { #category : #testing }
 FamixTest1Entity >> isAttribute [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -45,6 +67,7 @@ FamixTest1Entity >> isAttribute [
 { #category : #testing }
 FamixTest1Entity >> isBehavioural [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -52,6 +75,7 @@ FamixTest1Entity >> isBehavioural [
 { #category : #testing }
 FamixTest1Entity >> isClass [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -59,6 +83,7 @@ FamixTest1Entity >> isClass [
 { #category : #testing }
 FamixTest1Entity >> isComment [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -66,6 +91,15 @@ FamixTest1Entity >> isComment [
 { #category : #testing }
 FamixTest1Entity >> isFileAnchor [
 
+	<ignoreForCoverage>
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+FamixTest1Entity >> isInheritance [
+
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -73,6 +107,7 @@ FamixTest1Entity >> isFileAnchor [
 { #category : #testing }
 FamixTest1Entity >> isMethod [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -80,13 +115,7 @@ FamixTest1Entity >> isMethod [
 { #category : #testing }
 FamixTest1Entity >> isNamedEntity [
 
-	<generated>
-	^ false
-]
-
-{ #category : #testing }
-FamixTest1Entity >> isQueryable [
-
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -94,6 +123,7 @@ FamixTest1Entity >> isQueryable [
 { #category : #testing }
 FamixTest1Entity >> isStructuralEntity [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -101,6 +131,7 @@ FamixTest1Entity >> isStructuralEntity [
 { #category : #testing }
 FamixTest1Entity >> isType [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]

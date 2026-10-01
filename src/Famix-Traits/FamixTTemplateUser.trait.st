@@ -1,4 +1,6 @@
 "
+It corresponds to the user of a template.
+
 ## Relations
 ======================
 
@@ -11,40 +13,37 @@
 
 "
 Trait {
-	#name : #FamixTTemplateUser,
+	#name : 'FamixTTemplateUser',
 	#instVars : [
 		'#template => FMOne type: #FamixTTemplate opposite: #templateUsers'
 	],
-	#category : #'Famix-Traits-Template'
+	#category : 'Famix-Traits-Template',
+	#package : 'Famix-Traits',
+	#tag : 'Template'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTTemplateUser classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TTemplateUser super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
-{ #category : #visitor }
-FamixTTemplateUser >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTTemplateUser: self
-]
-
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTTemplateUser >> template [
 	"Relation named: #template type: #FamixTTemplate opposite: #templateUsers"
 
+	<ignoreForCoverage>
 	<generated>
 	^ template
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTTemplateUser >> template: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	template := anObject
 ]

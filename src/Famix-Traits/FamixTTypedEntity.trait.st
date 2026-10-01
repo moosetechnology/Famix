@@ -2,60 +2,70 @@
 ## Relations
 ======================
 
-### Other
+### Outgoing dependencies
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `declaredType` | `FamixTTypedEntity` | `typedEntities` | `FamixTType` | Type of the entity, if any|
+| `typing` | `FamixTTypedEntity` | `typedEntity` | `FamixTEntityTyping` | Association linking this entity to its declared type.|
 
 
 
 "
 Trait {
-	#name : #FamixTTypedEntity,
+	#name : 'FamixTTypedEntity',
 	#instVars : [
-		'#declaredType => FMOne type: #FamixTType opposite: #typedEntities'
+		'#typing => FMOne type: #FamixTEntityTyping opposite: #typedEntity'
 	],
-	#category : #'Famix-Traits-Type'
+	#category : 'Famix-Traits-Type',
+	#package : 'Famix-Traits',
+	#tag : 'Type'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTTypedEntity classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TTypedEntity super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
-{ #category : #visitor }
-FamixTTypedEntity >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTTypedEntity: self
-]
-
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTTypedEntity >> declaredType [
-	"Relation named: #declaredType type: #FamixTType opposite: #typedEntities"
 
-	<generated>
-	<FMComment: 'Type of the entity, if any'>
-	^ declaredType
+	^ self typing ifNotNil: [ self typing declaredType ]
 ]
 
-{ #category : #accessing }
-FamixTTypedEntity >> declaredType: anObject [
-
-	<generated>
-	declaredType := anObject
-]
-
-{ #category : #'moose query' }
+{ #category : 'testing' }
 FamixTTypedEntity >> entityHasOutgoingTypeDeclarations [
+
+	self
+		deprecated: 'Use #hasDeclaredType instead.'
+		transformWith: '`@receiver entityHasOutgoingTypeDeclarations'
+			-> '`@receiver hasDeclaredType'.
+
 	^ self hasDeclaredType
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTTypedEntity >> hasDeclaredType [
+
 	^ self declaredType isNotNil
+]
+
+{ #category : 'accessing' }
+FamixTTypedEntity >> typing [
+	"Relation named: #typing type: #FamixTEntityTyping opposite: #typedEntity"
+
+	<ignoreForCoverage>
+	<generated>
+	<FMComment: 'Association linking this entity to its declared type.'>
+	^ typing
+]
+
+{ #category : 'accessing' }
+FamixTTypedEntity >> typing: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	typing := anObject
 ]

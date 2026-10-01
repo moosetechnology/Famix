@@ -1,4 +1,6 @@
 "
+It corresponds to entities that can contain implicite variables (methods).
+
 ## Relations
 ======================
 
@@ -11,47 +13,43 @@
 
 "
 Trait {
-	#name : #FamixTWithImplicitVariables,
+	#name : 'FamixTWithImplicitVariables',
 	#instVars : [
 		'#implicitVariables => FMMany type: #FamixTImplicitVariable opposite: #parentBehaviouralEntity'
 	],
-	#category : #'Famix-Traits-ImplicitVariable'
+	#category : 'Famix-Traits-ImplicitVariable',
+	#package : 'Famix-Traits',
+	#tag : 'ImplicitVariable'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTWithImplicitVariables classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TWithImplicitVariables super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
-{ #category : #visitor }
-FamixTWithImplicitVariables >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTWithImplicitVariables: self
-]
-
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTWithImplicitVariables >> addImplicitVariable: anImplicitVariable [
 	implicitVariables add: anImplicitVariable
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithImplicitVariables >> implicitVariables [
 	"Relation named: #implicitVariables type: #FamixTImplicitVariable opposite: #parentBehaviouralEntity"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Implicit variables used locally by this behaviour.'>
-	<derived>
 	^ implicitVariables
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithImplicitVariables >> implicitVariables: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	implicitVariables value: anObject
 ]

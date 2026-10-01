@@ -1,4 +1,6 @@
 "
+It corresponds to entities that can include files, such as modules.
+
 ## Relations
 ======================
 
@@ -11,47 +13,44 @@
 
 "
 Trait {
-	#name : #FamixTWithFiles,
+	#name : 'FamixTWithFiles',
 	#instVars : [
 		'#containerFiles => FMMany type: #FamixTFile opposite: #entities'
 	],
-	#category : #'Famix-Traits-File'
+	#category : 'Famix-Traits-File',
+	#package : 'Famix-Traits',
+	#tag : 'File'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTWithFiles classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TWithFiles super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
-{ #category : #visitor }
-FamixTWithFiles >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTWithFiles: self
-]
-
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithFiles >> addContainerFile: anObject [
 	containerFiles add: anObject
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithFiles >> containerFiles [
 	"Relation named: #containerFiles type: #FamixTFile opposite: #entities"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'List of files containing the entity'>
 	^ containerFiles
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithFiles >> containerFiles: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	containerFiles value: anObject
 ]

@@ -13,55 +13,74 @@ I can be the source of an implementation (cf a class implementing an Interface)
 
 "
 Trait {
-	#name : #FamixTCanImplement,
+	#name : 'FamixTCanImplement',
 	#instVars : [
 		'#interfaceImplementations => FMMany type: #FamixTImplementation opposite: #implementingClass'
 	],
-	#category : #'Famix-Traits-Implementation'
+	#category : 'Famix-Traits-Implementation',
+	#package : 'Famix-Traits',
+	#tag : 'Implementation'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTCanImplement classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TCanImplement super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
-{ #category : #visitor }
-FamixTCanImplement >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTCanImplement: self
-]
-
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTCanImplement >> addInterfaceImplementation: anObject [
+
+	<ignoreForCoverage>
 	<generated>
 	^ self interfaceImplementations add: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'enumerating' }
+FamixTCanImplement >> allImplementedInterfaces [
+	"runs aBlock on all implemented interfaces and the interfaces they inherit"
+
+	| implementedInterfaces |
+	implementedInterfaces := OrderedCollection new.
+
+	self allImplementedInterfacesDo: [ :interface | implementedInterfaces add: interface ].
+
+	^implementedInterfaces 
+]
+
+{ #category : 'enumerating' }
+FamixTCanImplement >> allImplementedInterfacesDo: aBlock [
+	"runs aBlock on all implemented interfaces and the interfaces they inherit"
+
+	self interfaceImplementations do: [ :implementation |
+			aBlock value: implementation interface.
+			implementation interface allSuperclassesDo: aBlock ]
+]
+
+{ #category : 'accessing' }
 FamixTCanImplement >> directImplementedInterfaces [
 
 	^ self interfaceImplementations collect: [ :implementation |
 		  implementation interface ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTCanImplement >> interfaceImplementations [
 	"Relation named: #interfaceImplementations type: #FamixTImplementation opposite: #implementingClass"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Implementation relationships'>
-	<derived>
 	^ interfaceImplementations
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTCanImplement >> interfaceImplementations: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	interfaceImplementations value: anObject
 ]

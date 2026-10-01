@@ -1,26 +1,12 @@
 Class {
-	#name : #FamixTypeGroup,
-	#superclass : #MooseSpecializedGroup,
-	#category : #'Famix-Traits-Groups'
+	#name : 'FamixTypeGroup',
+	#superclass : 'MooseSpecializedGroup',
+	#category : 'Famix-Traits-Groups',
+	#package : 'Famix-Traits',
+	#tag : 'Groups'
 }
 
-{ #category : #meta }
-FamixTypeGroup class >> annotation [
-
-	<FMClass: #TypeGroup super: #MooseSpecializedGroup>
-	<package: #'Famix-Traits'>
-	<generated>
-	^ self
-]
-
-{ #category : #meta }
-FamixTypeGroup class >> metamodel [
-
-	<generated>
-	^ FamixModel metamodel
-]
-
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTypeGroup >> abstractness [
 	"Abstractness is the ratio between the number of abstract classes and the total number of classes in a package, in the range [0, 1]. 0 means the package is fully concrete, 1 it is fully abstract."
 
@@ -35,7 +21,7 @@ FamixTypeGroup >> abstractness [
 	^ (nsClasses select: [:c | c isAbstract]) size / (nsClasses size) asFloat
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTypeGroup >> afferentCoupling [
 	"Afferent coupling for a class group is the number of external classes that depend upon this class group"
 
@@ -46,28 +32,28 @@ FamixTypeGroup >> afferentCoupling [
 	cgClasses := self allClasses select: [ :c | c isInstanceSide ].
 	cgTypes := cgClasses flatCollect: [ :c | c allRecursiveTypes ].
 	cgClasses := (cgClasses union: cgTypes) asArray.
-	^ (cgClasses
-		flatCollect:
-			[ :cgClass | (cgClass queryAllIncoming atScope: FamixTType) select: [ :invokingClass | (cgClasses includes: invokingClass) not and: [ invokingClass isInstanceSide ] ] ])
-		asSet size
+	^ (cgClasses flatCollect: [ :cgClass |
+			   (cgClass queryAllIncoming containersOfType: FamixTType) select: [ :invokingClass |
+				   (cgClasses includes: invokingClass) not and: [ invokingClass isInstanceSide ] ] ]) asSet size
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FamixTypeGroup >> allClasses [
 	^ self
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FamixTypeGroup >> allMethods [
 	^ self flatCollect: [ :c | c methods ]
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FamixTypeGroup >> allPackages [
-	^ FamixPackageGroup withAll: (self entities flatCollectAsSet: [ :c | c atScope: FamixTPackage ])
+
+	^ FamixPackageGroup withAll: (self entities flatCollectAsSet: [ :c | c containersOfType: FamixTPackage ])
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTypeGroup >> averageHierarchyHeighth [ 
 	"average hierarchy height" 
 
@@ -79,47 +65,43 @@ FamixTypeGroup >> averageHierarchyHeighth [
 
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTypeGroup >> averageNumberOfAttributes [
+
 	<FMProperty: #averageNumberOfAttributes type: #Number>
 	<FMComment: 'Average number of attributes per class'>
-
-	^self
-		lookUpPropertyNamed: #averageNumberOfAttributes
-		computedAs: [(self average: [:each | each numberOfAttributes ]) asFloat]
+	<derived>
+	^ self cacheAt: #averageNumberOfAttributes ifAbsentPut: [ (self average: [ :each | each numberOfAttributes ]) asFloat ]
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTypeGroup >> averageNumberOfLinesOfCode [
+
 	<FMProperty: #averageNumberOfMethods type: #Number>
 	<FMComment: 'Average number of methods per class'>
-	
-	^self
-		lookUpPropertyNamed: #averageNumberOfMethods
-		computedAs: [(self average: [:each | each numberOfLinesOfCode ]) asFloat]
+	<derived>
+	^ self cacheAt: #averageNumberOfMethods ifAbsentPut: [ (self average: [ :each | each numberOfLinesOfCode ]) asFloat ]
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTypeGroup >> averageNumberOfMethods [
+
 	<FMProperty: #averageNumberOfMethods type: #Number>
 	<FMComment: 'Average number of methods per class'>
-
-	^self
-		lookUpPropertyNamed: #averageNumberOfMethods
-		computedAs: [(self average: [:each | each numberOfMethods ]) asFloat]
+	<derived>
+	^ self cacheAt: #averageNumberOfMethods ifAbsentPut: [ (self average: [ :each | each numberOfMethods ]) asFloat ]
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTypeGroup >> averageNumberOfStatements [
-	<FMProperty: #averageNumberOfStatements type: #Number>
-	<FMComment: 'Average number of statements per class'>	
 
-	^self
-		lookUpPropertyNamed: #averageNumberOfStatements
-		computedAs: [(self average: [:each | each numberOfStatements]) asFloat]
+	<FMProperty: #averageNumberOfStatements type: #Number>
+	<FMComment: 'Average number of statements per class'>
+	<derived>
+	^ self cacheAt: #averageNumberOfStatements ifAbsentPut: [ (self average: [ :each | each numberOfStatements ]) asFloat ]
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTypeGroup >> bunchCohesion [
 	"Computing cohesion (Bunch formula). It is also considered anonymous and inner classes (in Java)."
 
@@ -130,16 +112,14 @@ FamixTypeGroup >> bunchCohesion [
 	cgClasses := self allClasses select: [ :c | c isInstanceSide ].
 	cgTypes := cgClasses flatCollect: [ :c | c allRecursiveTypes ].
 	cgClasses := (cgClasses union: cgTypes) asArray.
-	cgClasses size == 0
-		ifTrue: [ ^ 0.0 ].
-	intraConnectivities := (cgClasses
-		collect: [ :cgClass | (cgClass queryAllOutgoing opposites atScope: FamixTType) select: [ :class | (cgClasses includes: class) and: [ class isInstanceSide ] ] ])
-		inject: 0
-		into: [ :subTotal :each | subTotal + each size ].
+	cgClasses size == 0 ifTrue: [ ^ 0.0 ].
+	intraConnectivities := (cgClasses collect: [ :cgClass |
+		                        (cgClass queryAllOutgoing opposites containersOfType: FamixTType) select: [ :class |
+			                        (cgClasses includes: class) and: [ class isInstanceSide ] ] ]) inject: 0 into: [ :subTotal :each | subTotal + each size ].
 	^ intraConnectivities / cgClasses size squared asFloat
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTypeGroup >> bunchCouplingWith: aClassGroup [
 	"Computing coupling (Bunch formula) from aClassGroup to receiver. It is also considered anonymous and inner classes (in Java)"
 
@@ -154,18 +134,18 @@ FamixTypeGroup >> bunchCouplingWith: aClassGroup [
 		ifTrue: [ ^ 0.0 ].
 	interConnectivities := (cgClasses
 		collect:
-			[ :cgClass | (cgClass queryAllOutgoing opposites atScope: FamixTType) select: [ :referencedClass | (dependClasses includes: referencedClass) and: [ referencedClass isInstanceSide ] ] ])
+			[ :cgClass | (cgClass queryAllOutgoing opposites containersOfType: FamixTType) select: [ :referencedClass | (dependClasses includes: referencedClass) and: [ referencedClass isInstanceSide ] ] ])
 		inject: 0
 		into: [ :subTotal :each | subTotal + each size ].
 	interConnectivities := ((cgClasses
 		collect:
-			[ :cgClass | (cgClass queryAllIncoming opposites atScope: FamixTType) select: [ :referencingClass | (dependClasses includes: referencingClass) and: [ referencingClass isInstanceSide ] ] ])
+			[ :cgClass | (cgClass queryAllIncoming opposites containersOfType: FamixTType) select: [ :referencingClass | (dependClasses includes: referencingClass) and: [ referencingClass isInstanceSide ] ] ])
 		inject: 0
 		into: [ :subTotal :each | subTotal + each size ]) + interConnectivities.
 	^ interConnectivities / (2 * cgClasses size * dependClasses size) asFloat
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FamixTypeGroup >> commonExternalSuperclasses [
 	| result |
 	result := Set new.
@@ -174,7 +154,7 @@ FamixTypeGroup >> commonExternalSuperclasses [
 	^result
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTypeGroup >> distance [
 	"D = A + I - 1. A package should be balanced between abstractness and instability, i.e., somewhere between abstract and stable or concrete and unstable. This rule defines the main sequence by the equation A + I - 1 = 0. D is the distance to the main sequence."
 	<FMProperty: #distance type: #Number>
@@ -189,7 +169,7 @@ FamixTypeGroup >> distance [
 	^ abstractness + instability - 1
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTypeGroup >> efferentCoupling [
 	"Efferent coupling for a class group is the number of classes it depends upon"
 
@@ -200,11 +180,11 @@ FamixTypeGroup >> efferentCoupling [
 	cgClasses := self allClasses select: [ :c | c isInstanceSide ].
 	cgTypes := cgClasses flatCollect: [ :c | c allRecursiveTypes ].
 	cgClasses := (cgClasses union: cgTypes) asArray.
-	^ (cgClasses flatCollect: [ :aClass | (aClass queryAllOutgoing atScope: FamixTType) select: [ :c | (cgClasses includes: c) not and: [ c isInstanceSide ] ] ])
-		asSet size
+	^ (cgClasses flatCollect: [ :aClass |
+		   (aClass queryAllOutgoing containersOfType: FamixTType) select: [ :c | (cgClasses includes: c) not and: [ c isInstanceSide ] ] ]) asSet size
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTypeGroup >> instability [
 	"I =	Ce(P)/(Ce(P)+Ca(P)), in the range [0, 1]. 0 means package is maximally stable (i.e., no dependency to other packages and can not change without big consequences), 1 means it is unstable."
 	<FMProperty: #instability type: #Number>
@@ -219,7 +199,7 @@ FamixTypeGroup >> instability [
 	^ efferentCoupling / (efferentCoupling + afferentCoupling) asFloat
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FamixTypeGroup >> withCommonSuperclasses [
 	| result |
 	result := self asSet.

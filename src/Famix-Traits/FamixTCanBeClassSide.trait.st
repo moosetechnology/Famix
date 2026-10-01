@@ -8,40 +8,37 @@
 
 "
 Trait {
-	#name : #FamixTCanBeClassSide,
+	#name : 'FamixTCanBeClassSide',
 	#instVars : [
 		'#isClassSide => FMProperty defaultValue: false'
 	],
-	#category : #'Famix-Traits-PrimitiveProperties'
+	#category : 'Famix-Traits-PrimitiveProperties',
+	#package : 'Famix-Traits',
+	#tag : 'PrimitiveProperties'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTCanBeClassSide classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TCanBeClassSide super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
-{ #category : #visitor }
-FamixTCanBeClassSide >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTCanBeClassSide: self
-]
-
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTCanBeClassSide >> isClassSide [
 
 	<FMProperty: #isClassSide type: #Boolean defaultValue: false>
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Entity can be declared class side i.e. static'>
 	^ isClassSide ifNil: [ isClassSide := false ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTCanBeClassSide >> isClassSide: anObject [
+	<ignoreForCoverage>
 	<generated>
 	isClassSide := anObject
 ]

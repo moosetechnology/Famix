@@ -33,8 +33,8 @@ Class {
 { #category : #meta }
 FamixStInheritance class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Inheritance super: #FamixStEntity>
 	<package: #'Famix-PharoSmalltalk-Entities'>
 	<generated>
-	^ self
 ]

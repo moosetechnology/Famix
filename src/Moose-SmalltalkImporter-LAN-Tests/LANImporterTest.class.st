@@ -286,7 +286,8 @@ LANImporterTest >> testNamespace [
 
 { #category : #tests }
 LANImporterTest >> testNamespaceReification [
-	self model allClasses do: [ :each | self assert: (each parents anySatisfy: [ :p | p usesFamixTrait: FamixTNamespace ]) ]
+
+	self model allClasses do: [ :each | self assert: (each containers anySatisfy: [ :p | p usesFamixTrait: FamixTNamespace ]) ]
 ]
 
 { #category : #tests }

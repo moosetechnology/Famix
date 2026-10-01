@@ -26,8 +26,8 @@ Class {
 { #category : #meta }
 MooseMSEImporterTestComment class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Comment super: #MooseMSEImporterTestSourcedEntity>
 	<package: #'Moose-Core-Tests-Entities'>
 	<generated>
-	^ self
 ]

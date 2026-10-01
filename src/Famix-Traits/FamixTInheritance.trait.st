@@ -1,4 +1,6 @@
 "
+This trait corresponds to the inheritance relation. For example, if class A inherits from class B, there is an inheritance between A (accessible through subclass) and B (accessible through superclass). 
+
 ## Relations
 ======================
 
@@ -23,33 +25,28 @@
 
 "
 Trait {
-	#name : #FamixTInheritance,
+	#name : 'FamixTInheritance',
 	#instVars : [
 		'#subclass => FMOne type: #FamixTWithInheritances opposite: #superInheritances',
 		'#superclass => FMOne type: #FamixTWithInheritances opposite: #subInheritances'
 	],
 	#traits : 'FamixTAssociation',
 	#classTraits : 'FamixTAssociation classTrait',
-	#category : #'Famix-Traits-Inheritance'
+	#category : 'Famix-Traits-Inheritance',
+	#package : 'Famix-Traits',
+	#tag : 'Inheritance'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTInheritance classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TInheritance super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
-{ #category : #visitor }
-FamixTInheritance >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTInheritance: self
-]
-
-{ #category : #printing }
+{ #category : 'printing' }
 FamixTInheritance >> displayStringOn: aStream [
 
 	self subclass displayStringOn: aStream.
@@ -57,43 +54,48 @@ FamixTInheritance >> displayStringOn: aStream [
 	self superclass displayStringOn: aStream
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTInheritance >> isInheritance [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTInheritance >> subclass [
 	"Relation named: #subclass type: #FamixTWithInheritances opposite: #superInheritances"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Subclass linked to in this relationship. from-side of the association'>
 	<source>
 	^ subclass
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTInheritance >> subclass: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	subclass := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTInheritance >> superclass [
 	"Relation named: #superclass type: #FamixTWithInheritances opposite: #subInheritances"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Superclass linked to in this relationship. to-side of the association'>
 	<target>
 	^ superclass
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTInheritance >> superclass: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	superclass := anObject
 ]

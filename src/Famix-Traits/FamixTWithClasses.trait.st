@@ -1,4 +1,6 @@
 "
+It corresponds to entities that can include classes (e.g., packages and classes in some languages).
+
 ## Relations
 ======================
 
@@ -11,37 +13,35 @@
 
 "
 Trait {
-	#name : #FamixTWithClasses,
+	#name : 'FamixTWithClasses',
 	#traits : 'FamixTWithTypes',
 	#classTraits : 'FamixTWithTypes classTrait',
-	#category : #'Famix-Traits-Class'
+	#category : 'Famix-Traits-Class',
+	#package : 'Famix-Traits',
+	#tag : 'Class'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTWithClasses classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TWithClasses super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
-{ #category : #visitor }
-FamixTWithClasses >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTWithClasses: self
-]
-
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithClasses >> classes [
-	"Classes are usually seen as types from the point of view of a Container. However, there may other types (e.g. aspects) which we dont want to see as classes and are rejected by this method."
 
-	<navigation: 'Classes'>
+	<FMProperty: #classes type: #FamixTClass>
+	<FMComment:
+	'Classes are usually seen as types from the point of view of a Container. However, there may other types (e.g. aspects) which we dont want to see as classes and are rejected by this method.'>
+	<derived>
+	<multivalued>
 	^ self cacheAt: #classes ifAbsentPut: [ self types select: #isClass ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithClasses >> numberOfClasses [
 	<FMProperty: #numberOfClasses type: #Number>
 	<derived>

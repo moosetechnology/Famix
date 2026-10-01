@@ -8,40 +8,37 @@
 
 "
 Trait {
-	#name : #FamixTCanBeAbstract,
+	#name : 'FamixTCanBeAbstract',
 	#instVars : [
 		'#isAbstract => FMProperty defaultValue: false'
 	],
-	#category : #'Famix-Traits-PrimitiveProperties'
+	#category : 'Famix-Traits-PrimitiveProperties',
+	#package : 'Famix-Traits',
+	#tag : 'PrimitiveProperties'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTCanBeAbstract classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TCanBeAbstract super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
-{ #category : #visitor }
-FamixTCanBeAbstract >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTCanBeAbstract: self
-]
-
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTCanBeAbstract >> isAbstract [
 
 	<FMProperty: #isAbstract type: #Boolean defaultValue: false>
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Entity can be declared abstract'>
 	^ isAbstract ifNil: [ isAbstract := false ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTCanBeAbstract >> isAbstract: anObject [
+	<ignoreForCoverage>
 	<generated>
 	isAbstract := anObject
 ]

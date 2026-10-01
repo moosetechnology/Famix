@@ -1,85 +1,67 @@
+"
+Checks that regenerating the FamixTest4 meta-model with slight differences updates the already generated entities, both when the meta-model is deleted first and when it is regenerated in place. The differences are introduced by FamixTest4BisGenerator: the targets of the relation between the two entities are changed and a default value is added to a property.
+"
 Class {
 	#name : #FamixTest4Test,
 	#superclass : #TestCase,
-	#instVars : [
-		'model',
-		'school',
-		'classroom1',
-		'classroom2',
-		'cafeteria',
-		'principal',
-		'student1',
-		'student2',
-		'student3',
-		'book1',
-		'book2',
-		'teacher1',
-		'teacher2'
-	],
 	#category : #'Famix-Test4-Tests'
 }
 
 { #category : #running }
-FamixTest4Test >> setUp [
-	super setUp.
+FamixTest4Test >> tearDown [
 
-	model := FamixTest4Model new.
-
-	school := FamixTest4School new.
-	classroom1 := FamixTest4Classroom new.
-	classroom2 := FamixTest4Classroom new.
-	cafeteria := FamixTest4Cafeteria new.
-	principal := FamixTest4Principal new.
-	student1 := FamixTest4Student new.
-	student1 := FamixTest4Student new.
-	student2 := FamixTest4Student new.
-	student2 firstName: 'firstname'.
-	student2 lastName: 'lastName'.
-	student3 := FamixTest4Student new.
-	teacher1 := FamixTest4Teacher new.
-	teacher1 firstName: 'John'.
-	teacher2 := FamixTest4Teacher new.
-	teacher2 firstName: 'Bob'.
-	book1 := FamixTest4Book new.
-	book2 := FamixTest4Book new.
-
-	model addAll: {school . classroom1 . classroom2 . cafeteria . principal . student1 . student2 . student3 . book1 . book2 . teacher1 . teacher2}.
-
-	school students: {student1 . student2 . student3}.
-	school teachers: {teacher1 . teacher2}.
-	teacher1 students: {student1 . student2}.
-	teacher2 students: {student3}.
-	school principal: principal.
-	school rooms: {classroom1 . classroom2 . cafeteria}.
-	book1 person: student1.
-	book2 person: principal
+	FamixTest4Generator packageName asPackageIfAbsent: [ ^ super tearDown ].
+	FamixTest4Generator deleteMetaModel.
+	super tearDown
 ]
 
 { #category : #tests }
-FamixTest4Test >> testAbstractClasses [
+FamixTest4Test >> testRegenerationWithSlightDifferencesFromScratchAppliesDefaultValue [
 
-	self assert: FamixTest4Entity isAbstract.
-	self assert: FamixTest4Person isAbstract
+	FamixTest4Generator generate.
+	FamixTest4Generator deleteMetaModel.
+
+	FamixTest4BisGenerator generate.
+
+	"Explicitly check that the default value is true"
+	self assert: ((self class environment at: #FamixTest4MyClass) slotNamed: #isTasty) defaultValue equals: true
 ]
 
 { #category : #tests }
-FamixTest4Test >> testEqualityStudent [
+FamixTest4Test >> testRegenerationWithSlightDifferencesFromScratchWorks [
 
-	| sameStudent |
-	"A copy of student2 to test same"
-	sameStudent := FamixTest4Student new.
-	sameStudent firstName: 'firstname'.
-	sameStudent lastName: 'lastName'.
-
-	self assert: student2 equals: sameStudent
+	"We generate the meta-model"
+	FamixTest4Generator generate.
+	
+	"We remove it entirely, and we generate a slightly different version of it"
+	FamixTest4Generator deleteMetaModel.
+	FamixTest4BisGenerator generate.
+	
+	self assert: ((self class environment at: #FamixTest4MySubclass) definesSlotNamed: #mySuperclass).
+	self assert: ((self class environment at: #FamixTest4MySuperclass) definesSlotNamed: #mySubclasses)
 ]
 
 { #category : #tests }
-FamixTest4Test >> testRelations [
-	self assert: (principal books includes: book2).
-	self assert: (student1 books includes: book1).
-	self assert: classroom1 school equals: school.
-	self assert: principal school equals: school.
-	self assert: (student1 teachers includes: teacher1).
-	self deny: (student1 teachers includes: teacher2)
+FamixTest4Test >> testRegenerationWithSlightDifferencesRedefinesRelation [
+	"This is a smoke test checking that generation does not fail"
+
+	"We generate the meta-model"
+
+	FamixTest4Generator generate.
+
+	FamixTest4BisGenerator generate.
+
+	self assert: ((self class environment at: #FamixTest4MySubclass) definesSlotNamed: #mySuperclass).
+	self assert: ((self class environment at: #FamixTest4MySuperclass) definesSlotNamed: #mySubclasses)
+]
+
+{ #category : #tests }
+FamixTest4Test >> testRegenerationWithSlightDifferencesRedefinesSlotDefaultValue [
+
+	FamixTest4Generator generate.
+
+	FamixTest4BisGenerator generate.
+
+	"Explicitly check that the default value is true"
+	self assert: ((self class environment at: #FamixTest4MyClass) slotNamed: #isTasty) defaultValue equals: true
 ]

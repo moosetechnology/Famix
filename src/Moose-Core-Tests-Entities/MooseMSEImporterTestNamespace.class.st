@@ -33,8 +33,8 @@ Class {
 { #category : #meta }
 MooseMSEImporterTestNamespace class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Namespace super: #MooseMSEImporterTestNamedEntity>
 	<package: #'Moose-Core-Tests-Entities'>
 	<generated>
-	^ self
 ]

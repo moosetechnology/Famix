@@ -1,24 +1,24 @@
 Extension { #name : #FamixTypeGroup }
 
 { #category : #'*Famix-Visualizations' }
-FamixTypeGroup >> inspectorShowComplexity [
-
-	<inspectorPresentationOrder: 10 title: 'System Complexity'>
-	^ self systemComplexity asInspectorPresenter
-]
-
-{ #category : #'*Famix-Visualizations' }
-FamixTypeGroup >> inspectorShowNesting [
+FamixTypeGroup >> inspectionNesting: aBuilder [
 
 	<inspectorPresentationOrder: 10 title: 'Nesting'>
-	^ self nesting asInspectorPresenter
+	^ self nesting buildInspectorPresenter: aBuilder
 ]
 
 { #category : #'*Famix-Visualizations' }
-FamixTypeGroup >> inspectorShowUML [
+FamixTypeGroup >> inspectionSystemComplexity: aBuilder [
+
+	<inspectorPresentationOrder: 10 title: 'System Complexity'>
+	^ self systemComplexity buildInspectorPresenter: aBuilder
+]
+
+{ #category : #'*Famix-Visualizations' }
+FamixTypeGroup >> inspectionUML: aBuilder [
 
 	<inspectorPresentationOrder: 10 title: 'UML'>
-	^ self uml asInspectorPresenter
+	^ self uml buildInspectorPresenter: aBuilder
 ]
 
 { #category : #'*Famix-Visualizations' }

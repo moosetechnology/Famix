@@ -11,47 +11,45 @@
 
 "
 Trait {
-	#name : #FamixTTraitUser,
+	#name : 'FamixTTraitUser',
 	#instVars : [
 		'#traitUsages => FMMany type: #FamixTTraitUsage opposite: #user'
 	],
-	#category : #'Famix-Traits-Trait'
+	#category : 'Famix-Traits-Trait',
+	#package : 'Famix-Traits',
+	#tag : 'Trait'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTTraitUser classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TTraitUser super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
-{ #category : #visitor }
-FamixTTraitUser >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTTraitUser: self
-]
-
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTTraitUser >> addTraitUsage: anObject [
+
+	<ignoreForCoverage>
 	<generated>
 	^ self traitUsages add: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTTraitUser >> traitUsages [
 	"Relation named: #traitUsages type: #FamixTTraitUsage opposite: #user"
 
+	<ignoreForCoverage>
 	<generated>
-	<derived>
 	^ traitUsages
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTTraitUser >> traitUsages: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	traitUsages value: anObject
 ]

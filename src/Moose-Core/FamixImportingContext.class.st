@@ -30,6 +30,13 @@ FamixImportingContext class >> allMetamodelConcreteEntities [
 					  fm3Trait name = #TAssociation ] ] ] ]
 ]
 
+{ #category : #testing }
+FamixImportingContext class >> canBeGenerated [
+	"My subclasses are generated."
+
+	^ self ~= FamixImportingContext
+]
+
 { #category : #accessing }
 FamixImportingContext class >> fm3ClassNamed: aName [
 

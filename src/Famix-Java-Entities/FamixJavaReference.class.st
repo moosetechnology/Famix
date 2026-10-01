@@ -33,17 +33,10 @@ Class {
 { #category : #meta }
 FamixJavaReference class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Reference super: #FamixJavaEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^ self
-]
-
-{ #category : #visitor }
-FamixJavaReference >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaReference: self
 ]
 
 { #category : #printing }

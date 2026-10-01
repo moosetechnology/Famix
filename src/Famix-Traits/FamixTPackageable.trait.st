@@ -1,4 +1,6 @@
 "
+It corresponds to entities that can be gathered in a package (e.g., class and package).
+
 ## Relations
 ======================
 
@@ -11,54 +13,45 @@
 
 "
 Trait {
-	#name : #FamixTPackageable,
+	#name : 'FamixTPackageable',
 	#instVars : [
 		'#parentPackage => FMOne type: #FamixTPackage opposite: #childEntities'
 	],
-	#category : #'Famix-Traits-Package'
+	#category : 'Famix-Traits-Package',
+	#package : 'Famix-Traits',
+	#tag : 'Package'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTPackageable classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TPackageable super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
-{ #category : #visitor }
-FamixTPackageable >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTPackageable: self
-]
-
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTPackageable >> isExtension [
-	^ (self belongsTo atScope: FamixTPackage) ~= (self atScope: FamixTPackage)
+
+	^ (self belongsTo containersOfType: FamixTPackage) ~= (self containersOfType: FamixTPackage)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTPackageable >> parentPackage [
 	"Relation named: #parentPackage type: #FamixTPackage opposite: #childEntities"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Package containing the entity in the code structure (if applicable)'>
 	<container>
 	^ parentPackage
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTPackageable >> parentPackage: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	parentPackage := anObject
-]
-
-{ #category : #navigation }
-FamixTPackageable >> parentPackageGroup [
-	<generated>
-	<navigation: 'ParentPackage'>
-	^ MooseSpecializedGroup with: self parentPackage
 ]

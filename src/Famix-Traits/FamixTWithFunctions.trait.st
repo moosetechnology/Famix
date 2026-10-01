@@ -1,4 +1,6 @@
 "
+It corresponds to entities that can contain functions.
+
 ## Relations
 ======================
 
@@ -11,48 +13,44 @@
 
 "
 Trait {
-	#name : #FamixTWithFunctions,
+	#name : 'FamixTWithFunctions',
 	#instVars : [
 		'#functions => FMMany type: #FamixTFunction opposite: #functionOwner'
 	],
-	#category : #'Famix-Traits-Behavioral'
+	#category : 'Famix-Traits-Behavioral',
+	#package : 'Famix-Traits',
+	#tag : 'Behavioral'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTWithFunctions classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TWithFunctions super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
-{ #category : #visitor }
-FamixTWithFunctions >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTWithFunctions: self
-]
-
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithFunctions >> addFunction: anObject [
 	functions add: anObject
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithFunctions >> functions [
 	"Relation named: #functions type: #FamixTFunction opposite: #functionOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Functions defined in the container, if any.'>
-	<derived>
 	^ functions
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithFunctions >> functions: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	functions value: anObject
 ]

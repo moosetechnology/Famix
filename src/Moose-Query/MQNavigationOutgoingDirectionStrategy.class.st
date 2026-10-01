@@ -21,8 +21,9 @@ MQNavigationOutgoingDirectionStrategy class >> entityFor: anAssociation [
 ]
 
 { #category : #accessing }
-MQNavigationOutgoingDirectionStrategy class >> msePropertiesOf: anEntity [
-	^ anEntity outgoingMSEProperties
+MQNavigationOutgoingDirectionStrategy class >> famePropertiesOf: anEntity [
+
+	^ anEntity outgoingFameProperties
 ]
 
 { #category : #accessing }

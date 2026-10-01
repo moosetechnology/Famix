@@ -1,64 +1,42 @@
 Trait {
-	#name : #FamixTMethodMetrics,
-	#category : #'Famix-Traits-Behavioral'
+	#name : 'FamixTMethodMetrics',
+	#category : 'Famix-Traits-Behavioral',
+	#package : 'Famix-Traits',
+	#tag : 'Behavioral'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTMethodMetrics classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TMethodMetrics super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
-{ #category : #visitor }
-FamixTMethodMetrics >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTMethodMetrics: self
-]
-
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTMethodMetrics >> cyclomaticComplexity [
+
 	<FMProperty: #cyclomaticComplexity type: #Number>
 	<FMComment: 'The number of linear-independent paths through a method.'>
-	^ self lookUpPropertyNamed: #cyclomaticComplexity computedAs: [ self computeCyclomaticComplexity ]
+	^ self cacheAt: #cyclomaticComplexity ifAbsent: [ self computeCyclomaticComplexity ]
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTMethodMetrics >> cyclomaticComplexity: aNumber [
 	self cacheAt: #cyclomaticComplexity put: aNumber
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTMethodMetrics >> hierarchyNestingLevel [
+
 	<FMProperty: #hierarchyNestingLevel type: #Number>
 	<derived>
 	<FMComment: 'The nesting level in the hierarchy'>
-	
-	^self
-		lookUpPropertyNamed: #hierarchyNestingLevel
-		computedAs: [ self parentType hierarchyNestingLevel]
+	^ self cacheAt: #hierarchyNestingLevel ifAbsent: [ self parentType hierarchyNestingLevel ]
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTMethodMetrics >> hierarchyNestingLevel: aNumber [
 	self cacheAt: #hierarchyNestingLevel put: aNumber
-]
-
-{ #category : #'Famix-Extensions-metrics-support' }
-FamixTMethodMetrics >> numberOfAnnotationInstances [
-	<FMProperty: #numberOfAnnotationInstances type: #Number>
-	<derived>
-	<FMComment: 'The number of annotation instances defined in the method'>
-
-	^self
-		lookUpPropertyNamed: #numberOfAnnotationInstances
-		computedAs: [self annotationInstances size]
-]
-
-{ #category : #metrics }
-FamixTMethodMetrics >> numberOfAnnotationInstances: aNumber [
-	self cacheAt: #numberOfAnnotationInstances put: aNumber
 ]

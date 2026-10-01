@@ -33,12 +33,12 @@ FamixMethodTest >> testCyclomaticComplexity [
 { #category : #tests }
 FamixMethodTest >> testIsClass [
 
-	self assert: c1 isClass. 	
-	self assert: c2 isClass. 
+	self assert: c1 isClass.
+	self assert: c2 isClass.
 	self deny: m1 isClass.
 	self deny: m2 isClass.
-	self deny: anchor1 isClass.
-	self deny: anchor2 isClass.
+	self deny: self anchor1 isClass.
+	self deny: self anchor2 isClass
 ]
 
 { #category : #tests }
@@ -62,9 +62,7 @@ FamixMethodTest >> testIsConstant [
 FamixMethodTest >> testIsConstructor [
 
 	self deny: m1 isConstructor.
-	m1 isConstructor: true.
-	self assert: m1 isConstructor.
-
+	self assert: constructor isConstructor
 ]
 
 { #category : #tests }
@@ -142,7 +140,7 @@ FamixMethodTest >> testParentTypeIsStub [
 { #category : #tests }
 FamixMethodTest >> testRelations [
 
-	self assertCollection: c1 methods hasSameElements:  { m1 }.	
+	self assertCollection: c1 methods hasSameElements:  { constructor. m1 }.	
 	self assertCollection: c2 methods hasSameElements:  { m2. m3 }.
 	self assertCollection: m1 parentType equals: c1.
 	self assertCollection: m2 parentType equals: c2.

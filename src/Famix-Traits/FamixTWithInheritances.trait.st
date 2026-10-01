@@ -1,4 +1,6 @@
 "
+It corresponds to entities that can inherit from other entities.
+
 ## Relations
 ======================
 
@@ -16,41 +18,36 @@
 
 "
 Trait {
-	#name : #FamixTWithInheritances,
+	#name : 'FamixTWithInheritances',
 	#instVars : [
 		'#superInheritances => FMMany type: #FamixTInheritance opposite: #subclass',
 		'#subInheritances => FMMany type: #FamixTInheritance opposite: #superclass'
 	],
-	#category : #'Famix-Traits-Inheritance'
+	#category : 'Famix-Traits-Inheritance',
+	#package : 'Famix-Traits',
+	#tag : 'Inheritance'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTWithInheritances classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TWithInheritances super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
-{ #category : #visitor }
-FamixTWithInheritances >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTWithInheritances: self
-]
-
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithInheritances >> addSubInheritance: anInheritance [ 
 	subInheritances add: anInheritance
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithInheritances >> addSuperInheritance: anInheritance [ 
 	superInheritances add: anInheritance
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 FamixTWithInheritances >> allSubclassesDo: aBlock [
 
 	self subInheritances do: [ :each | 
@@ -58,7 +55,7 @@ FamixTWithInheritances >> allSubclassesDo: aBlock [
 		each subclass allSubclassesDo: aBlock ]
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 FamixTWithInheritances >> allSuperclassesDo: aBlock [
 
 	self superInheritances do: [ :each | 
@@ -66,57 +63,58 @@ FamixTWithInheritances >> allSuperclassesDo: aBlock [
 		each superclass allSuperclassesDo: aBlock ]
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 FamixTWithInheritances >> directSubclasses [
 	"returns a collection with all subclasses of this class"
 
 	^ self subInheritances collect: #subclass
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 FamixTWithInheritances >> directSuperclasses [
 	"returns a collection with all superclasses of this class"
 
 	^ self superInheritances collect: #superclass
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTWithInheritances >> hierarchyNestingLevel [
+
 	<FMProperty: #hierarchyNestingLevel type: #Number>
 	<derived>
 	<FMComment: 'The nesting of a class inside the hierarchy'>
-	^ self
-		lookUpPropertyNamed: #hierarchyNestingLevel
-		computedAs: [ | currentMaxDepth |
-			(self directSuperclasses isEmpty or: [ self isStub ])
-				ifTrue: [ 0 ]
-				ifFalse: [ currentMaxDepth := 0.
-					self allSuperclassesDo: [ :aClass | currentMaxDepth := currentMaxDepth max: aClass hierarchyNestingLevel ].
-					currentMaxDepth + 1 ] ]
+	^ self cacheAt: #hierarchyNestingLevel ifAbsent: [
+			  | currentMaxDepth |
+			  (self directSuperclasses isEmpty or: [ self isStub ])
+				  ifTrue: [ 0 ]
+				  ifFalse: [
+						  currentMaxDepth := 0.
+						  self allSuperclassesDo: [ :aClass | currentMaxDepth := currentMaxDepth max: aClass hierarchyNestingLevel ].
+						  currentMaxDepth + 1 ] ]
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTWithInheritances >> hierarchyNestingLevel: aNumber [
 	self cacheAt: #hierarchyNestingLevel put: aNumber
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTWithInheritances >> inheritsFrom: aClass [
 	self allSuperclassesDo: [ :each | each = aClass ifTrue: [ ^ true ] ].
 	^ false
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 FamixTWithInheritances >> isHierarchyRoot [
 	^ self superclassHierarchyGroup allSatisfy: [ :each | each isNil or: [ each isStub ] ]
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 FamixTWithInheritances >> isHierarchyRootWithin: aClassGroup [
 	^ (self superclassHierarchyGroup intersection: aClassGroup) isEmpty
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTWithInheritances >> numberOfDirectSubclasses [
 	<FMProperty: #numberOfDirectSubclasses type: #Number>
 	<FMComment: 'The number of direct subclasses'>
@@ -124,42 +122,44 @@ FamixTWithInheritances >> numberOfDirectSubclasses [
 	^ self cacheAt: #numberOfDirectSubclasses ifAbsentPut: [ self directSubclasses size ]
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTWithInheritances >> numberOfDirectSubclasses: aNumber [
 	self cacheAt: #numberOfDirectSubclasses put: aNumber
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTWithInheritances >> numberOfSubclasses [
+
 	<FMProperty: #numberOfSubclasses type: #Number>
 	<derived>
 	<FMComment: 'The number of subclasses of a class'>
-	^ self lookUpPropertyNamed: #numberOfSubclasses computedAs: [ self subInheritances size ]
+	^ self cacheAt: #numberOfSubclasses ifAbsent: [ self subInheritances size ]
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTWithInheritances >> numberOfSubclasses: aNumber [
 	self cacheAt: #numberOfSubclasses put: aNumber
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithInheritances >> subInheritances [
 	"Relation named: #subInheritances type: #FamixTInheritance opposite: #superclass"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Subinheritance relationships, i.e. known subclasses of this type.'>
-	<derived>
 	^ subInheritances
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithInheritances >> subInheritances: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	subInheritances value: anObject
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 FamixTWithInheritances >> subclassHierarchy [
 	| subclasses |
 	subclasses := OrderedCollection new.
@@ -167,7 +167,7 @@ FamixTWithInheritances >> subclassHierarchy [
 	^ subclasses
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTWithInheritances >> subclassHierarchyDepth [
 	<FMProperty: #subclassHierarchyDepth type: #Number>
 	<derived>
@@ -180,40 +180,41 @@ FamixTWithInheritances >> subclassHierarchyDepth [
 			1 + currentMaxDepth ]
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTWithInheritances >> subclassHierarchyDepth: aNumber [
 	self cacheAt: #subclassHierarchyDepth put: aNumber
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 FamixTWithInheritances >> subclassHierarchyGroup [
-	<navigation: 'All subclasses'>
+
 	^ MooseGroup withAll: self subclassHierarchy asSet withDescription: 'All subclasses of ' , self mooseName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithInheritances >> superInheritances [
 	"Relation named: #superInheritances type: #FamixTInheritance opposite: #subclass"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Superinheritance relationships, i.e. known superclasses of this type.'>
-	<derived>
 	^ superInheritances
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithInheritances >> superInheritances: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	superInheritances value: anObject
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 FamixTWithInheritances >> superclass [
 	^ self superInheritances ifEmpty: [ nil ] ifNotEmpty: [ self superInheritances anyOne superclass ]
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 FamixTWithInheritances >> superclassHierarchy [
 	| superclasses |
 	superclasses := OrderedCollection new.
@@ -221,15 +222,13 @@ FamixTWithInheritances >> superclassHierarchy [
 	^ superclasses
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 FamixTWithInheritances >> superclassHierarchyGroup [
-	<navigation: 'All superclasses'>
-	^ MooseGroup
-		withAll: self superclassHierarchy asSet
-		withDescription: 'All superclasses of ' , self mooseName
+
+	^ MooseGroup withAll: self superclassHierarchy asSet withDescription: 'All superclasses of ' , self mooseName
 ]
 
-{ #category : #'Famix-Implementation' }
+{ #category : 'Famix-Implementation' }
 FamixTWithInheritances >> understands: signature [
 	"returns true if a class is able to respond to an invocation to aSignature on itself; false otherwise"
 
@@ -238,7 +237,7 @@ FamixTWithInheritances >> understands: signature [
 	^false
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 FamixTWithInheritances >> withSubclassHierarchy [
 	^ self subclassHierarchy 
 		addFirst: self realType;
@@ -247,13 +246,13 @@ FamixTWithInheritances >> withSubclassHierarchy [
 		yourself.
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 FamixTWithInheritances >> withSubclassesDo: aBlock [
 	aBlock value: self.
 	self allSubclassesDo: aBlock
 ]
 
-{ #category : #'Famix-Implementation' }
+{ #category : 'Famix-Implementation' }
 FamixTWithInheritances >> withSuperclassHierarchy [
 	self flag: #'We should add something to handle the typeAliases in C++, etc.'.
 	^ self realType superclassHierarchy 
@@ -262,7 +261,7 @@ FamixTWithInheritances >> withSuperclassHierarchy [
 		yourself
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 FamixTWithInheritances >> withSuperclassesDo: aBlock [
 	aBlock value: self.
 	self allSuperclassesDo: aBlock

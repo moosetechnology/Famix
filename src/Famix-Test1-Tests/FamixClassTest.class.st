@@ -1,8 +1,26 @@
 Class {
 	#name : #FamixClassTest,
 	#superclass : #FamixTest1SimpleModelTest,
+	#instVars : [
+		'a2'
+	],
 	#category : #'Famix-Test1-Tests'
 }
+
+{ #category : #running }
+FamixClassTest >> setUp [
+
+	super setUp.
+	a2 := FamixTest1Attribute named: 'attribute2' model: model.
+	c1 addAttribute: a2
+]
+
+{ #category : #tests }
+FamixClassTest >> testAttributesOrder [
+	"Regression test. Before exporting and importing entities was switching the order of the many side of one-many relations."
+
+	self assert: (c1 attributes collect: #name) equals: #( 'attribute1' 'attribute2' ) asOrderedCollection
+]
 
 { #category : #tests }
 FamixClassTest >> testComments [
@@ -35,12 +53,12 @@ FamixClassTest >> testHasComments [
 { #category : #tests }
 FamixClassTest >> testIsClass [
 
-	self assert: c1 isClass. 	
-	self assert: c2 isClass. 
+	self assert: c1 isClass.
+	self assert: c2 isClass.
 	self deny: m1 isClass.
 	self deny: m2 isClass.
-	self deny: anchor1 isClass.
-	self deny: anchor2 isClass.
+	self deny: self anchor1 isClass.
+	self deny: self anchor2 isClass
 ]
 
 { #category : #tests }

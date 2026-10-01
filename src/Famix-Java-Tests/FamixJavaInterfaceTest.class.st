@@ -21,8 +21,6 @@ FamixJavaInterfaceTest >> testClassContainInterface [
 { #category : #tests }
 FamixJavaInterfaceTest >> testImplementation [
 
-
-	
 	| interface class impl |
 	interface := FamixJavaInterface new.
 	class := FamixJavaClass new.
@@ -30,10 +28,8 @@ FamixJavaInterfaceTest >> testImplementation [
 	impl interface: interface.
 	impl implementingClass: class.
 
-	
 	self assertCollection: interface implementations hasSameElements: { impl }.
-	self assertCollection: class interfaceImplementations hasSameElements: { impl }.
-	
+	self assertCollection: class interfaceImplementations hasSameElements: { impl }
 ]
 
 { #category : #tests }

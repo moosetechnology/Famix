@@ -16,41 +16,38 @@ Instance Variables:
 
 "
 Trait {
-	#name : #FamixTTypeAlias,
+	#name : 'FamixTTypeAlias',
 	#instVars : [
 		'#aliasedType => FMOne type: #FamixTWithTypeAliases opposite: #typeAliases'
 	],
-	#category : #'Famix-Traits-TypeAlias'
+	#category : 'Famix-Traits-TypeAlias',
+	#package : 'Famix-Traits',
+	#tag : 'TypeAlias'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTTypeAlias classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TTypeAlias super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
-{ #category : #visitor }
-FamixTTypeAlias >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTTypeAlias: self
-]
-
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTTypeAlias >> aliasedType [
 	"Relation named: #aliasedType type: #FamixTWithTypeAliases opposite: #typeAliases"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Points to the actual type.'>
 	^ aliasedType
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTTypeAlias >> aliasedType: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	aliasedType := anObject
 ]

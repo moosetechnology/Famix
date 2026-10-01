@@ -1,4 +1,6 @@
 "
+It corresponds to the entities defined in a module.
+
 ## Relations
 ======================
 
@@ -11,49 +13,39 @@
 
 "
 Trait {
-	#name : #FamixTDefinedInModule,
+	#name : 'FamixTDefinedInModule',
 	#instVars : [
 		'#parentModule => FMOne type: #FamixTModule opposite: #moduleEntities'
 	],
-	#category : #'Famix-Traits-Module'
+	#category : 'Famix-Traits-Module',
+	#package : 'Famix-Traits',
+	#tag : 'Module'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTDefinedInModule classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TDefinedInModule super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
-{ #category : #visitor }
-FamixTDefinedInModule >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTDefinedInModule: self
-]
-
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTDefinedInModule >> parentModule [
 	"Relation named: #parentModule type: #FamixTModule opposite: #moduleEntities"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Module that contains the definition of this entity'>
 	<container>
 	^ parentModule
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTDefinedInModule >> parentModule: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	parentModule := anObject
-]
-
-{ #category : #navigation }
-FamixTDefinedInModule >> parentModuleGroup [
-	<generated>
-	<navigation: 'ParentModule'>
-	^ MooseSpecializedGroup with: self parentModule
 ]

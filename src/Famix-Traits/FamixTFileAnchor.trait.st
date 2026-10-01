@@ -12,64 +12,61 @@ This offers a source anchor that connects a sourced entity to a file through a r
 
 "
 Trait {
-	#name : #FamixTFileAnchor,
+	#name : 'FamixTFileAnchor',
 	#instVars : [
 		'#correspondingFile => FMProperty',
 		'#encoding => FMProperty',
 		'#fileName => FMProperty'
 	],
-	#category : #'Famix-Traits-SourceAnchor'
+	#category : 'Famix-Traits-SourceAnchor',
+	#package : 'Famix-Traits',
+	#tag : 'SourceAnchor'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTFileAnchor classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TFileAnchor super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
-{ #category : #visitor }
-FamixTFileAnchor >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTFileAnchor: self
-]
-
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTFileAnchor >> addToFile: entity [
 	^ self correspondingFile addEntity: entity
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTFileAnchor >> completeText [
 	self sourcesAreReadable ifFalse: [ ^ '' ].
 
 	^ self fileReference binaryReadStreamDo: [ :in | (ZnCharacterReadStream on: in encoding: self encoding) upToEnd ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTFileAnchor >> containerFiles [
 	^ self correspondingFile ifNil: [ {} ] ifNotNil: [ :file | {file} ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTFileAnchor >> correspondingFile [
 
 	<FMProperty: #correspondingFile type: #FamixTFile>
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'File associated to this source anchor'>
 	^ correspondingFile
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTFileAnchor >> correspondingFile: anObject [
+	<ignoreForCoverage>
 	<generated>
 	correspondingFile := anObject
 ]
 
-{ #category : #decoding }
+{ #category : 'decoding' }
 FamixTFileAnchor >> detectEncoding [
 	self fileReference ifAbsent: [ ^ nil ].
 
@@ -78,54 +75,70 @@ FamixTFileAnchor >> detectEncoding [
 		do: [ nil ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTFileAnchor >> encoding [
 	<FMProperty: #encoding type: #String>
 	<FMComment: 'A string representing the encoding of a file'>
 	^ encoding ifNil: [ encoding := self detectEncoding ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTFileAnchor >> encoding: anObject [
+	<ignoreForCoverage>
 	<generated>
 	encoding := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTFileAnchor >> endLine [
 	^ self explicitRequirement
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTFileAnchor >> endPos [
 	^ self explicitRequirement
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTFileAnchor >> fileName [
 
 	<FMProperty: #fileName type: #String>
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Name of the source file'>
 	^ fileName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTFileAnchor >> fileName: aFileName [
 	fileName := aFileName copyReplaceAll: '\' with: '/'. 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTFileAnchor >> fileReference [
 	^ self rootFolder asFileReference resolve: self fileName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTFileAnchor >> hasSource [
 	^ self sourcesAreReadable
 ]
 
-{ #category : #testing }
+{ #category : 'inspector' }
+FamixTFileAnchor >> inspectionFullSource: aBuilder [
+
+	<inspectorPresentationOrder: 5 title: 'Full sourceText'>
+	^ aBuilder newCode
+		  withoutSyntaxHighlight;
+		  withLineNumbers;
+		  text: self completeText;
+		  addTextSegmentDecoration: (SpTextPresenterDecorator forHighlight
+				   interval: (self startPos to: self endPos + 1);
+				   yourself);
+		  beNotEditable
+]
+
+{ #category : 'testing' }
 FamixTFileAnchor >> isContiguousWith: anotherFileAnchor [
 	"compute to see if two entities are contiguous (i.e one followed by the other on consective lines) in a file by looking at their indexed file anchors"
 
@@ -136,48 +149,55 @@ FamixTFileAnchor >> isContiguousWith: anotherFileAnchor [
 	^ anotherFileAnchor endLine + 1 = self startLine
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTFileAnchor >> isFileAnchor [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTFileAnchor >> lineCount [
 	^ self hasSource
 		ifTrue: [ self sourceText lineCount ]
 		ifFalse: [ self notExistentMetricValue ]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixTFileAnchor >> mooseNameOn: aStream [
 	aStream nextPutAll: (self fileName ifNil: [ 'No associated file' ])
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 FamixTFileAnchor >> privateHasEncoding [
 	^ encoding isNotNil
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FamixTFileAnchor >> rootFolder [
 	^ self mooseModel rootFolder
 ]
 
-{ #category : #testing }
+{ #category : 'accessing' }
+FamixTFileAnchor >> sourceText [
+
+	^ self explicitRequirement
+]
+
+{ #category : 'testing' }
 FamixTFileAnchor >> sourcesAreReadable [
 	^ self fileReference
 		ifExists: [ :file | file size > 0 ]
 		ifAbsent: [ false ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTFileAnchor >> startLine [
-	^ self explicitRequirement
+	^ self cacheAt: #startLine ifAbsentPut: [ self completeText lineNumberCorrespondingToIndex: self startPos ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTFileAnchor >> startPos [
 	^ self explicitRequirement
 ]

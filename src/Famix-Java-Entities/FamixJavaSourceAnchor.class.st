@@ -21,23 +21,17 @@ Class {
 { #category : #meta }
 FamixJavaSourceAnchor class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #SourceAnchor super: #FamixJavaEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
 	<abstract>
-	^ self
 ]
 
 { #category : #testing }
 FamixJavaSourceAnchor class >> isAbstract [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self == FamixJavaSourceAnchor
-]
-
-{ #category : #visitor }
-FamixJavaSourceAnchor >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaSourceAnchor: self
 ]

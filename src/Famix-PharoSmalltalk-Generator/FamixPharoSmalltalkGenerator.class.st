@@ -20,7 +20,8 @@ Class {
 		'parameter',
 		'reference',
 		'unknownVariable',
-		'pharoEntitySourceAnchor'
+		'pharoEntitySourceAnchor',
+		'entityTyping'
 	],
 	#category : #'Famix-PharoSmalltalk-Generator'
 }
@@ -59,6 +60,7 @@ FamixPharoSmalltalkGenerator >> defineClasses [
 	package := self newClassNamed: #Package.
 	parameter := self newClassNamed: #Parameter.
 	reference := self newClassNamed: #Reference.
+	entityTyping := self newClassNamed: #EntityTyping.
 	unknownVariable := self newClassNamed: #UnknownVariable.
 
 ]
@@ -82,9 +84,8 @@ FamixPharoSmalltalkGenerator >> defineHierarchy [
 	annotationType --|> #TWithAttributes.
 	annotationType --|> #TPackageable.
 
-	annotationTypeAttribute --|> namedEntity.
-	annotationTypeAttribute --|> #TEntityMetaLevelDependency.
 	annotationTypeAttribute --|> sourcedEntity.
+	annotationTypeAttribute --|> #TEntityMetaLevelDependency.
 	annotationTypeAttribute --|> #TAnnotationTypeAttribute.
 
 	attribute --|> namedEntity.
@@ -120,6 +121,7 @@ FamixPharoSmalltalkGenerator >> defineHierarchy [
 	method --|> #TCanBeAbstract.
 	method --|> #THasKind.
 	method --|> #TWithComments.
+	method --|> #TWithComments.
 	method --|> #TWithAnnotationInstances.
 	method --|> #TCanBeClassSide.
 	method --|> #TPackageable.
@@ -145,9 +147,10 @@ FamixPharoSmalltalkGenerator >> defineHierarchy [
 	parameter --|> #TInvocationsReceiver.
 
 	reference --|> #TReference.
+	
+	entityTyping --|> #TEntityTyping. 
 
 	pharoEntitySourceAnchor --|> sourceAnchor.
-
 
 	unknownVariable --|> namedEntity.
 	unknownVariable --|> #TUnknownVariable.

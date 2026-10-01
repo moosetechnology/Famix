@@ -9,15 +9,19 @@ FamixTLocalVariable represents a local variable in the scope of a behavioural en
 |---|
 | `parentBehaviouralEntity` | `FamixTLocalVariable` | `localVariables` | `FamixTWithLocalVariables` | Behavioural entity declaring this local variable. belongsTo implementation|
 
+### Outgoing dependencies
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `typing` | `FamixTTypedEntity` | `typedEntity` | `FamixTEntityTyping` | Association linking this entity to its declared type.|
+
 ### Incoming dependencies
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `incomingAccesses` | `FamixTAccessible` | `variable` | `FamixTAccess` | All Famix accesses pointing to this structural entity|
+| `incomingAccesses` | `FamixTAccessible` | `candidates` | `FamixTAccess` | All Famix accesses pointing to this structural entity|
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `declaredType` | `FamixTTypedEntity` | `typedEntities` | `FamixTType` | Type of the entity, if any|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
 
 
@@ -31,32 +35,27 @@ FamixTLocalVariable represents a local variable in the scope of a behavioural en
 
 "
 Trait {
-	#name : #FamixTLocalVariable,
+	#name : 'FamixTLocalVariable',
 	#instVars : [
 		'#parentBehaviouralEntity => FMOne type: #FamixTWithLocalVariables opposite: #localVariables'
 	],
 	#traits : 'FamixTStructuralEntity',
 	#classTraits : 'FamixTStructuralEntity classTrait',
-	#category : #'Famix-Traits-LocalVariable'
+	#category : 'Famix-Traits-LocalVariable',
+	#package : 'Famix-Traits',
+	#tag : 'LocalVariable'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTLocalVariable classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TLocalVariable super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
-{ #category : #visitor }
-FamixTLocalVariable >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTLocalVariable: self
-]
-
-{ #category : #printing }
+{ #category : 'printing' }
 FamixTLocalVariable >> displayStringOn: aStream [
 
 	self name ifNotNil: [ :n | aStream << n << ' in ' ].
@@ -64,35 +63,30 @@ FamixTLocalVariable >> displayStringOn: aStream [
 		pbe displayStringOn: aStream ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTLocalVariable >> isLocalVariable [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTLocalVariable >> parentBehaviouralEntity [
 	"Relation named: #parentBehaviouralEntity type: #FamixTWithLocalVariables opposite: #localVariables"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Behavioural entity declaring this local variable. belongsTo implementation'>
 	<container>
 	^ parentBehaviouralEntity
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTLocalVariable >> parentBehaviouralEntity: anObject [
 
 	parentBehaviouralEntity := anObject.
 	self resetMooseName.
 	
 
-]
-
-{ #category : #navigation }
-FamixTLocalVariable >> parentBehaviouralEntityGroup [
-	<generated>
-	<navigation: 'ParentBehaviouralEntity'>
-	^ MooseSpecializedGroup with: self parentBehaviouralEntity
 ]

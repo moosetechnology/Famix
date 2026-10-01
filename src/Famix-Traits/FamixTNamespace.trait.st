@@ -24,38 +24,36 @@ When an entity is placed inside a namespace, the fully qualified name (mooseName
 
 "
 Trait {
-	#name : #FamixTNamespace,
+	#name : 'FamixTNamespace',
 	#traits : 'FamixTCanBeStub + FamixTNamedEntity + TEntityMetaLevelDependency',
 	#classTraits : 'FamixTCanBeStub classTrait + FamixTNamedEntity classTrait + TEntityMetaLevelDependency classTrait',
-	#category : #'Famix-Traits-Named'
+	#category : 'Famix-Traits-Named',
+	#package : 'Famix-Traits',
+	#tag : 'Named'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTNamespace classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TNamespace super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
-{ #category : #groups }
+{ #category : 'groups' }
 FamixTNamespace classSide >> annotationFamixNamespaceGroup [
+
+	<ignoreForCoverage>
 	<generated>
 	<mooseGroup>
 	^ FamixNamespaceGroup
 ]
 
-{ #category : #visitor }
-FamixTNamespace >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTNamespace: self
-]
-
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTNamespace >> isNamespace [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]

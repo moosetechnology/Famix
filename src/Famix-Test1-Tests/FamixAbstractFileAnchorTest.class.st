@@ -10,6 +10,11 @@ FamixAbstractFileAnchorTest class >> isAbstract [
 ]
 
 { #category : #helpers }
+FamixAbstractFileAnchorTest >> adaptAnchorForCrlf: anchor [
+	"Nothing by default"
+]
+
+{ #category : #helpers }
 FamixAbstractFileAnchorTest >> anchorForClassTest [
 	"I should return a file anchor of a class for some tests as testLineCount."
 
@@ -66,12 +71,9 @@ FamixAbstractFileAnchorTest >> testIsFileAnchor [
 
 { #category : #tests }
 FamixAbstractFileAnchorTest >> testLineCount [
-	| file anchor |
-	(file := FileSystem memory / 'test.txt')
-		ensureCreateFile;
-		writeStreamDo: [ :s | s << self sourceCodeForTest ].
+
+	| anchor |
 	anchor := self anchorForClassTest.
-	anchor stub fileReference willReturn: file.
 	self assert: anchor lineCount equals: 17
 ]
 
@@ -82,6 +84,7 @@ FamixAbstractFileAnchorTest >> testLineCountWithCRLF [
 		ensureCreateFile;
 		writeStreamDo: [ :s | s << (self sourceCodeForTest copyReplaceAll: String cr with: String crlf) ].
 	anchor := self anchorForClassTest.
+	self adaptAnchorForCrlf: anchor.
 	anchor stub fileReference willReturn: file.
 	self assert: anchor lineCount equals: 17
 ]

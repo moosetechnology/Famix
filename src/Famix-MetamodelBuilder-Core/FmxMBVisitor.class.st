@@ -11,15 +11,37 @@ A minimum builder needs to subclass FamixMetamodelGenerator, and override the cl
 use the #FmxMBPrintVisitor class for a working example.
 
 general case:
+
+```st
 b := aFamixMetamodelGeneratorClass builderWithDefinitions.
 v := aFmxMBVisitorClass new.
-b acceptVisitor: v.
+b acceptVisitor: v
+```
+
+```st
+aFmxMBVisitorClass visit: (aFamixMetamodelGeneratorClass builderWithDefinitions)
+```
 "
 Class {
 	#name : #FmxMBVisitor,
 	#superclass : #Object,
 	#category : #'Famix-MetamodelBuilder-Core-Visitors'
 }
+
+{ #category : #visiting }
+FmxMBVisitor class >> visit: aFmxEntity [
+
+	| visitor |
+	visitor := self new.
+	aFmxEntity acceptVisitor: visitor.
+	^ visitor
+]
+
+{ #category : #visiting }
+FmxMBVisitor >> visitBehavioral: aBehavioral [
+
+	
+]
 
 { #category : #visiting }
 FmxMBVisitor >> visitBuilder: aBuilder [
@@ -29,16 +51,66 @@ FmxMBVisitor >> visitBuilder: aBuilder [
 
 { #category : #visiting }
 FmxMBVisitor >> visitClass: aClass [
+
+	self visitBehavioral: aClass
 ]
 
 { #category : #visiting }
-FmxMBVisitor >> visitRelationSide: aRelationSide [
+FmxMBVisitor >> visitClassEntity: aClass [
+
+	^ self visitClass: aClass
+]
+
+{ #category : #visiting }
+FmxMBVisitor >> visitClassGroup: aClass [
+
+	^ self visitClass: aClass
+]
+
+{ #category : #visiting }
+FmxMBVisitor >> visitEntityCreator: aTrait [
+
+	self visitTrait: aTrait
+]
+
+{ #category : #visiting }
+FmxMBVisitor >> visitImportingContext: aClass [
+
+	^ self visitClass: aClass
+]
+
+{ #category : #visiting }
+FmxMBVisitor >> visitModel: aClass [
+
+	^ self visitClass: aClass
+]
+
+{ #category : #visiting }
+FmxMBVisitor >> visitProperty: aRelation [
+
+	
+]
+
+{ #category : #visiting }
+FmxMBVisitor >> visitRelation: aRelation [
+
+	self visitProperty: aRelation
 ]
 
 { #category : #visiting }
 FmxMBVisitor >> visitTrait: aTrait [
+
+	self visitBehavioral: aTrait
+]
+
+{ #category : #visiting }
+FmxMBVisitor >> visitTraitEntity: aTrait [
+
+	self visitTrait: aTrait
 ]
 
 { #category : #visiting }
 FmxMBVisitor >> visitTypedProperty: aTypedProperty [
+
+	self visitProperty: aTypedProperty
 ]

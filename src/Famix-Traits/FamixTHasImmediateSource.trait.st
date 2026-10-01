@@ -19,66 +19,71 @@ An immediate source is the source code of the entity stored directly into its so
 
 "
 Trait {
-	#name : #FamixTHasImmediateSource,
+	#name : 'FamixTHasImmediateSource',
 	#instVars : [
 		'#source => FMProperty'
 	],
 	#traits : 'FamixTSourceAnchor',
 	#classTraits : 'FamixTSourceAnchor classTrait',
-	#category : #'Famix-Traits-SourceAnchor'
+	#category : 'Famix-Traits-SourceAnchor',
+	#package : 'Famix-Traits',
+	#tag : 'SourceAnchor'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTHasImmediateSource classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #THasImmediateSource super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 FamixTHasImmediateSource classSide >> source: aString [
 	^ self new
 		source: aString;
 		yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 FamixTHasImmediateSource classSide >> source: aString model: aMooseModel [
 	^ (self source: aString)
 		mooseModel: aMooseModel;
 		yourself
 ]
 
-{ #category : #visitor }
-FamixTHasImmediateSource >> accept: aVisitor [
+{ #category : 'testing' }
+FamixTHasImmediateSource >> hasImmediateSource [
 
+	<ignoreForCoverage>
 	<generated>
-	^ aVisitor visitFamixTHasImmediateSource: self
+	^ true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTHasImmediateSource >> hasSource [
 	^ self source isEmptyOrNil not
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTHasImmediateSource >> source [
 
 	<FMProperty: #source type: #String>
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Actual source code of the source entity'>
 	^ source
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTHasImmediateSource >> source: anObject [
+	<ignoreForCoverage>
 	<generated>
 	source := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTHasImmediateSource >> sourceText [
 
 	^ self source

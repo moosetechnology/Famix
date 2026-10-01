@@ -8,19 +8,25 @@ Class {
 
 { #category : #accessing }
 FamixStModel class >> allSubmetamodelsPackagesNames [
+
+	<ignoreForCoverage>
 	<generated>
 	^ #(#'Moose-Query' #'Famix-Traits')
 ]
 
 { #category : #meta }
 FamixStModel class >> annotation [
-	<FMClass: #FamixStModel super: #MooseModel>
+
+	<ignoreForCoverage>
+	<FMClass: #Model super: #MooseModel>
 	<package: #'Famix-PharoSmalltalk-Entities'>
 	<generated>
 ]
 
 { #category : #testing }
 FamixStModel class >> canBeImportedFromFile [
+
+	<ignoreForCoverage>
 	<generated>
 	^true
 ]
@@ -28,6 +34,7 @@ FamixStModel class >> canBeImportedFromFile [
 { #category : #accessing }
 FamixStModel class >> importingContextClass [
 
+	<ignoreForCoverage>
 	<generated>
 	^ FamixStImportingContext
 ]

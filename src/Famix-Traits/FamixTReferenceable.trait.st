@@ -23,47 +23,43 @@ We found 3 solutions to manage this:
 
 "
 Trait {
-	#name : #FamixTReferenceable,
+	#name : 'FamixTReferenceable',
 	#instVars : [
 		'#incomingReferences => FMMany type: #FamixTReference opposite: #referredEntity'
 	],
-	#category : #'Famix-Traits-Reference'
+	#category : 'Famix-Traits-Reference',
+	#package : 'Famix-Traits',
+	#tag : 'Reference'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTReferenceable classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TReferenceable super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
-{ #category : #visitor }
-FamixTReferenceable >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTReferenceable: self
-]
-
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTReferenceable >> addIncomingReference: aReference [ 
 	incomingReferences add: aReference
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTReferenceable >> incomingReferences [
 	"Relation named: #incomingReferences type: #FamixTReference opposite: #referredEntity"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'References to this entity by other entities.'>
-	<derived>
 	^ incomingReferences
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTReferenceable >> incomingReferences: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	incomingReferences value: anObject
 ]

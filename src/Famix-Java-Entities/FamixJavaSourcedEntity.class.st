@@ -21,25 +21,19 @@ Class {
 { #category : #meta }
 FamixJavaSourcedEntity class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #SourcedEntity super: #FamixJavaEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
 	<abstract>
-	^ self
 ]
 
 { #category : #testing }
 FamixJavaSourcedEntity class >> isAbstract [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self == FamixJavaSourcedEntity
-]
-
-{ #category : #visitor }
-FamixJavaSourcedEntity >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaSourcedEntity: self
 ]
 
 { #category : #'Famix-SourceAnchor' }
@@ -68,17 +62,6 @@ FamixJavaSourcedEntity >> fileAnchorPath: aString startPos: anInteger endPos: an
 				startPos: anInteger
 				endPos: anotherInteger
 				model: self mooseModel)
-]
-
-{ #category : #'Famix-Extensions' }
-FamixJavaSourcedEntity >> numberOfJavaNullChecks [
-	<FMProperty: #numberOfJavaNullChecks type: #Number> <derived>
-	^self
-		lookUpPropertyNamed: #numberOfJavaNullChecks
-		computedAs: [
-			| nullCheckTextPatterns |
-			nullCheckTextPatterns := #('== null' '!= null' 'null ==' 'null !=').
-			(self sourceText allRegexMatches: ( '|' join: nullCheckTextPatterns)) size ]
 ]
 
 { #category : #'Famix-Extensions' }
