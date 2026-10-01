@@ -1,20 +1,20 @@
-Extension { #name : #MooseModel }
+Extension { #name : 'MooseModel' }
 
-{ #category : #'*Famix-Traits' }
+{ #category : '*Famix-Traits' }
 MooseModel >> allModelEntities [
 
 	<navigation: 'All model entities'>
 	^ self cacheAt: #allModelEntities ifAbsent: [ self entities reject: #isStub ]
 ]
 
-{ #category : #'*Famix-Traits' }
+{ #category : '*Famix-Traits' }
 MooseModel >> allSourceLanguages [
 
 	^ self allUsing: FamixTSourceLanguage.
 
 ]
 
-{ #category : #'*Famix-Traits' }
+{ #category : '*Famix-Traits' }
 MooseModel >> averageCyclomaticComplexity [
 
 	<FMProperty: #averageCyclomaticComplexity type: #Number>
@@ -23,7 +23,7 @@ MooseModel >> averageCyclomaticComplexity [
 	^ self cacheAt: #averageCyclomaticComplexity ifAbsentPut: [ (self allMethods collect: #cyclomaticComplexity) ifEmpty: [ 1 ] ifNotEmpty: #average ]
 ]
 
-{ #category : #'*Famix-Traits' }
+{ #category : '*Famix-Traits' }
 MooseModel >> numberOfClassesPerPackage [
 
 	<FMProperty: #numberOfClassesPerPackage type: #Number>
@@ -32,7 +32,7 @@ MooseModel >> numberOfClassesPerPackage [
 	^ self cacheAt: #numberOfClassesPerPackage ifAbsentPut: [ self numberOfMethods / self numberOfClasses ]
 ]
 
-{ #category : #'*Famix-Traits' }
+{ #category : '*Famix-Traits' }
 MooseModel >> numberOfLinesOfCodePerMethod [
 
 	<FMProperty: #numberOfLinesOfCodePerMethod type: #Number>
@@ -41,7 +41,7 @@ MooseModel >> numberOfLinesOfCodePerMethod [
 	^ self cacheAt: #numberOfLinesOfCodePerMethod ifAbsentPut: [ self numberOfLinesOfCode / self numberOfMethods ]
 ]
 
-{ #category : #'*Famix-Traits' }
+{ #category : '*Famix-Traits' }
 MooseModel >> numberOfLinesOfCodePerPackage [
 
 	<FMProperty: #numberOfLinesOfCodePerPackage type: #Number>
@@ -50,7 +50,7 @@ MooseModel >> numberOfLinesOfCodePerPackage [
 	^ self cacheAt: #numberOfLinesOfCodePerPackage ifAbsentPut: [ self numberOfLinesOfCode / self numberOfPackages ]
 ]
 
-{ #category : #'*Famix-Traits' }
+{ #category : '*Famix-Traits' }
 MooseModel >> numberOfMethods [
 
 	<FMProperty: #numberOfMethods type: #Number>
@@ -59,7 +59,7 @@ MooseModel >> numberOfMethods [
 	^ self cacheAt: #numberOfMethods ifAbsentPut: [ self allMethods size ]
 ]
 
-{ #category : #'*Famix-Traits' }
+{ #category : '*Famix-Traits' }
 MooseModel >> numberOfMethodsPerPackage [
 
 	<FMProperty: #numberOfClassesPerPackage type: #Number>
@@ -68,7 +68,7 @@ MooseModel >> numberOfMethodsPerPackage [
 	^ self cacheAt: #numberOfMethodsPerPackage ifAbsentPut: [ self numberOfMethods / self numberOfPackages ]
 ]
 
-{ #category : #'*Famix-Traits' }
+{ #category : '*Famix-Traits' }
 MooseModel >> numberOfModelClasses [
 
 	<FMProperty: #numberOfModelClasses type: #Number>
@@ -77,7 +77,7 @@ MooseModel >> numberOfModelClasses [
 	^ self cacheAt: #numberOfModelClasses ifAbsentPut: [ self allModelClasses size ]
 ]
 
-{ #category : #'*Famix-Traits' }
+{ #category : '*Famix-Traits' }
 MooseModel >> numberOfModelMethods [
 
 	<FMProperty: #numberOfModelMethods type: #Number>
@@ -86,7 +86,7 @@ MooseModel >> numberOfModelMethods [
 	^ self cacheAt: #numberOfModelMethods ifAbsentPut: [ self allModelMethods size ]
 ]
 
-{ #category : #'*Famix-Traits' }
+{ #category : '*Famix-Traits' }
 MooseModel >> sourceLanguage [
 	<FMProperty: #sourceLanguage type: #FamixTSourceLanguage>
 	<FMComment: 'Source of the Language to which the model corresponds'>
@@ -97,7 +97,7 @@ MooseModel >> sourceLanguage [
 				ifNone: [ nil ] ]
 ]
 
-{ #category : #'*Famix-Traits' }
+{ #category : '*Famix-Traits' }
 MooseModel >> sourceLanguage: aFamixSourceLanguage [
 	self attributeAt: #sourceLanguage put: aFamixSourceLanguage.
 	aFamixSourceLanguage mooseModel: self

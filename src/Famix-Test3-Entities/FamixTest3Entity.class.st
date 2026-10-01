@@ -8,15 +8,17 @@
 
 "
 Class {
-	#name : #FamixTest3Entity,
-	#superclass : #MooseEntity,
+	#name : 'FamixTest3Entity',
+	#superclass : 'MooseEntity',
 	#instVars : [
 		'#name => FMProperty'
 	],
-	#category : #'Famix-Test3-Entities-Entities'
+	#category : 'Famix-Test3-Entities-Entities',
+	#package : 'Famix-Test3-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTest3Entity class >> annotation [
 
 	<ignoreForCoverage>
@@ -26,7 +28,7 @@ FamixTest3Entity class >> annotation [
 	<abstract>
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTest3Entity class >> isAbstract [
 
 	<ignoreForCoverage>
@@ -34,7 +36,7 @@ FamixTest3Entity class >> isAbstract [
 	^ self == FamixTest3Entity
 ]
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTest3Entity class >> metamodel [
 
 	<ignoreForCoverage>
@@ -42,7 +44,7 @@ FamixTest3Entity class >> metamodel [
 	^ FamixTest3Model metamodel
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTest3Entity >> isAssociation [
 
 	<ignoreForCoverage>
@@ -50,14 +52,7 @@ FamixTest3Entity >> isAssociation [
 	^ false
 ]
 
-{ #category : #testing }
-FamixTest3Entity >> isComment [
-
-	<generated>
-	^ false
-]
-
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest3Entity >> name [
 
 	<FMProperty: #name type: #String>
@@ -66,7 +61,7 @@ FamixTest3Entity >> name [
 	^ name
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest3Entity >> name: anObject [
 	<ignoreForCoverage>
 	<generated>

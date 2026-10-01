@@ -11,14 +11,16 @@
 
 "
 Trait {
-	#name : #FamixTest3TTeacher,
+	#name : 'FamixTest3TTeacher',
 	#instVars : [
 		'#outgoingClassSessions => FMMany type: #FamixTest3ClassSession opposite: #teacher'
 	],
-	#category : #'Famix-Test3-Entities-Traits'
+	#category : 'Famix-Test3-Entities-Traits',
+	#package : 'Famix-Test3-Entities',
+	#tag : 'Traits'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTest3TTeacher classSide >> annotation [
 
 	<ignoreForCoverage>
@@ -27,7 +29,7 @@ FamixTest3TTeacher classSide >> annotation [
 	<generated>
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTest3TTeacher >> addOutgoingClassSession: anObject [
 
 	<ignoreForCoverage>
@@ -35,7 +37,7 @@ FamixTest3TTeacher >> addOutgoingClassSession: anObject [
 	^ self outgoingClassSessions add: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest3TTeacher >> outgoingClassSessions [
 	"Relation named: #outgoingClassSessions type: #FamixTest3ClassSession opposite: #teacher"
 
@@ -44,7 +46,7 @@ FamixTest3TTeacher >> outgoingClassSessions [
 	^ outgoingClassSessions
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest3TTeacher >> outgoingClassSessions: anObject [
 
 	<ignoreForCoverage>

@@ -8,14 +8,16 @@
 
 "
 Trait {
-	#name : #FamixTCanBeAbstract,
+	#name : 'FamixTCanBeAbstract',
 	#instVars : [
 		'#isAbstract => FMProperty defaultValue: false'
 	],
-	#category : #'Famix-Traits-PrimitiveProperties'
+	#category : 'Famix-Traits-PrimitiveProperties',
+	#package : 'Famix-Traits',
+	#tag : 'PrimitiveProperties'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTCanBeAbstract classSide >> annotation [
 
 	<ignoreForCoverage>
@@ -24,7 +26,7 @@ FamixTCanBeAbstract classSide >> annotation [
 	<generated>
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTCanBeAbstract >> isAbstract [
 
 	<FMProperty: #isAbstract type: #Boolean defaultValue: false>
@@ -34,7 +36,7 @@ FamixTCanBeAbstract >> isAbstract [
 	^ isAbstract ifNil: [ isAbstract := false ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTCanBeAbstract >> isAbstract: anObject [
 	<ignoreForCoverage>
 	<generated>

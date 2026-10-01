@@ -13,14 +13,16 @@ FamixTSourceAnchor is an abstract class representing a pointer to a source. The 
 
 "
 Trait {
-	#name : #FamixTSourceAnchor,
+	#name : 'FamixTSourceAnchor',
 	#instVars : [
 		'#element => FMOne type: #FamixTSourceEntity opposite: #sourceAnchor'
 	],
-	#category : #'Famix-Traits-SourceAnchor'
+	#category : 'Famix-Traits-SourceAnchor',
+	#package : 'Famix-Traits',
+	#tag : 'SourceAnchor'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTSourceAnchor classSide >> annotation [
 
 	<ignoreForCoverage>
@@ -29,17 +31,17 @@ FamixTSourceAnchor classSide >> annotation [
 	<generated>
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTSourceAnchor >> allSourceAnchors [
 	^ { self }
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 FamixTSourceAnchor >> allSourceAnchorsDo: aBlock [
 	^ aBlock value: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTSourceAnchor >> completeText [
 	"The complete text of a FileAnchor contains all the code of the file pointed by the source anchor. On the contrary the #sourceText return only the pant of the file concerned by the entity. For example a FAMIXFileAnchon knows the start line and end line of the source anchor into the file."
 
@@ -48,12 +50,12 @@ FamixTSourceAnchor >> completeText [
 	^ self sourceText
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTSourceAnchor >> containerFiles [
 	^ {}
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTSourceAnchor >> element [
 	"Relation named: #element type: #FamixTSourceEntity opposite: #sourceAnchor"
 
@@ -63,7 +65,7 @@ FamixTSourceAnchor >> element [
 	^ element
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTSourceAnchor >> element: anObject [
 
 	<ignoreForCoverage>
@@ -71,12 +73,12 @@ FamixTSourceAnchor >> element: anObject [
 	element := anObject
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTSourceAnchor >> hasSource [
 	^ self explicitRequirement
 ]
 
-{ #category : #inspector }
+{ #category : 'inspector' }
 FamixTSourceAnchor >> inspectionSource: aBuilder [
 
 	<inspectorPresentationOrder: 4 title: 'SourceText'>
@@ -87,19 +89,19 @@ FamixTSourceAnchor >> inspectionSource: aBuilder [
 		  beNotEditable
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTSourceAnchor >> isFileAnchor [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTSourceAnchor >> isMultiple [
 	"Return true for source anchors in multiple parts."
 
 	^ false
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTSourceAnchor >> lineCount [
 	<FMProperty: #lineCount type: #Number>
 	<derived>
@@ -107,26 +109,26 @@ FamixTSourceAnchor >> lineCount [
 	^ self privateLineCount
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 FamixTSourceAnchor >> privateLineCount [
 	^ self sourceText
 		ifNotNil: #lineCount
 		ifNil: [ self notExistentMetricValue ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTSourceAnchor >> sourceText [
 	^ self explicitRequirement
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTSourceAnchor >> sourceTextFrom: startPosition to: endPosition [
 	self sourceText size < endPosition ifTrue: [ ^ '' ].
 	
 	^ self sourceText copyFrom: startPosition to: endPosition
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTSourceAnchor >> startBeforeFileAnchor: aTSourceAnchor [
 	(self startLine isNil or: [ aTSourceAnchor startLine isNil ]) ifTrue: [ ^ false ].
 		

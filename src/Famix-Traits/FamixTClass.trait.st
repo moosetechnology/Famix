@@ -49,13 +49,15 @@ A class is typically scoped in a namespace. To model nested or anonymous classes
 
 "
 Trait {
-	#name : #FamixTClass,
+	#name : 'FamixTClass',
 	#traits : 'FamixTInvocationsReceiver + (FamixTType - {#queryStaticIncomingAssociations. #queryStaticOutgoingAssociations}) + FamixTWithAttributes + FamixTWithComments + FamixTWithInheritances + FamixTWithMethods',
 	#classTraits : 'FamixTInvocationsReceiver classTrait + FamixTType classTrait + FamixTWithAttributes classTrait + FamixTWithComments classTrait + FamixTWithInheritances classTrait + FamixTWithMethods classTrait',
-	#category : #'Famix-Traits-Class'
+	#category : 'Famix-Traits-Class',
+	#package : 'Famix-Traits',
+	#tag : 'Class'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTClass classSide >> annotation [
 
 	<ignoreForCoverage>
@@ -64,7 +66,7 @@ FamixTClass classSide >> annotation [
 	<generated>
 ]
 
-{ #category : #groups }
+{ #category : 'groups' }
 FamixTClass classSide >> annotationFamixClassGroup [
 
 	<ignoreForCoverage>
@@ -73,7 +75,7 @@ FamixTClass classSide >> annotationFamixClassGroup [
 	^ FamixClassGroup
 ]
 
-{ #category : #'Famix-Extensions-metrics-support' }
+{ #category : 'Famix-Extensions-metrics-support' }
 FamixTClass >> accessedAttributes [
 	
 	"Returns my attributes accessed by my methods. If the same attribute is accessed 
@@ -83,7 +85,7 @@ FamixTClass >> accessedAttributes [
 	^ self methodsWithoutSutbsAndConstructors asOrderedCollection flatCollect: [ :method | method accessedAttributes ]
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTClass >> addFirstMethodsOverriding: aMethod in: aCollection [
 
 	self directSubclasses do: [ :subClass |
@@ -93,7 +95,7 @@ FamixTClass >> addFirstMethodsOverriding: aMethod in: aCollection [
 			ifNone: [ subClass addMethodOverriding: aMethod in: aCollection ] ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 FamixTClass >> addMethodOverriding: aMethod in: aCollection [
 
 	self directSubclasses do: [ :subClass |
@@ -103,14 +105,14 @@ FamixTClass >> addMethodOverriding: aMethod in: aCollection [
 		subClass addMethodOverriding: aMethod in: aCollection ]
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTClass >> addedMethods [
 	| allHierarchyMethodSignatures |
 	allHierarchyMethodSignatures := self allHierarchyMethods collect: #signature.
 	^ self methods reject: [ :each | allHierarchyMethodSignatures includes: each signature ]
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 FamixTClass >> allHierarchyMethods [
 
 	| allHierarchyMethods |
@@ -120,13 +122,13 @@ FamixTClass >> allHierarchyMethods [
 	^ allHierarchyMethods
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 FamixTClass >> allMethods [
 
 	^ self methods , self inheritedMethods 
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 FamixTClass >> inheritedAttributes [
 
 	| inheritedAttrs |
@@ -136,7 +138,7 @@ FamixTClass >> inheritedAttributes [
 	^ inheritedAttrs
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 FamixTClass >> inheritedMethods [
 
 	| inheritedMethods |
@@ -151,7 +153,7 @@ FamixTClass >> inheritedMethods [
 	^ inheritedMethods
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 FamixTClass >> inheritedSignatures [
 
 	| inheritedSignatures |
@@ -162,7 +164,7 @@ FamixTClass >> inheritedSignatures [
 	^ inheritedSignatures
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 FamixTClass >> inheritedSignaturesToMethod [
 
 	| inheritedSignaturesToMethod |
@@ -175,7 +177,7 @@ FamixTClass >> inheritedSignaturesToMethod [
 	^ inheritedSignaturesToMethod
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTClass >> isClass [
 
 	<ignoreForCoverage>
@@ -183,13 +185,13 @@ FamixTClass >> isClass [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTClass >> isObjectClass [
 
 	^ self name = 'Object'
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTClass >> isTestCase [
 
 	<FMProperty: #isTestCase type: #Boolean>
@@ -197,19 +199,19 @@ FamixTClass >> isTestCase [
 	^ self attributeAt: #isTestCase ifAbsent: [ false ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTClass >> isTestCase: aBoolean [
 
 	^ self attributeAt: #isTestCase put: aBoolean
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 FamixTClass >> overriddenMethods [
 
 	^ self methods select: [ :m | self allHierarchyMethods anySatisfy: [ :superMethod | superMethod signature = m signature ] ].
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTClass >> weightOfAClass [
 
 	<FMProperty: #weightOfAClass type: #Number>
@@ -218,7 +220,7 @@ FamixTClass >> weightOfAClass [
 	^ self attributeAt: #weightOfAClass ifAbsent: [ self notExistentMetricValue ]
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTClass >> weightOfAClass: aNumber [
 
 	self attributeAt: #weightOfAClass put: aNumber

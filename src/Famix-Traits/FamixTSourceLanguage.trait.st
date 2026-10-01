@@ -16,14 +16,16 @@ One can create a default source language for a project by not associating any en
 
 "
 Trait {
-	#name : #FamixTSourceLanguage,
+	#name : 'FamixTSourceLanguage',
 	#instVars : [
 		'#sourcedEntities => FMMany type: #FamixTWithSourceLanguages opposite: #declaredSourceLanguage'
 	],
-	#category : #'Famix-Traits-SourceLanguage'
+	#category : 'Famix-Traits-SourceLanguage',
+	#package : 'Famix-Traits',
+	#tag : 'SourceLanguage'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTSourceLanguage classSide >> annotation [
 
 	<ignoreForCoverage>
@@ -32,37 +34,37 @@ FamixTSourceLanguage classSide >> annotation [
 	<generated>
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTSourceLanguage >> addSourcedEntity: aSourcedEntity [
 	^ self sourcedEntities add: aSourcedEntity
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixTSourceLanguage >> displayStringOn: aStream [
 
 	aStream << self name
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTSourceLanguage >> isAttached [
 	"Returns whether the receiver (a language) has some entities associated with it. By default, if there are no entities attached, it means that all of them are of this language."
 
 	^ self sourcedEntities isNotEmpty
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTSourceLanguage >> isUnknown [
 	^ false
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixTSourceLanguage >> mooseNameOn: aStream [
 	aStream
 		nextPutAll: 'a ';
 		nextPutAll: self class name
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTSourceLanguage >> sourcedEntities [
 	"Relation named: #sourcedEntities type: #FamixTWithSourceLanguages opposite: #declaredSourceLanguage"
 
@@ -72,7 +74,7 @@ FamixTSourceLanguage >> sourcedEntities [
 	^ sourcedEntities
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTSourceLanguage >> sourcedEntities: anObject [
 
 	<ignoreForCoverage>

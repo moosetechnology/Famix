@@ -19,18 +19,20 @@
 
 "
 Class {
-	#name : #FamixTest3Person,
-	#superclass : #FamixTest3Entity,
+	#name : 'FamixTest3Person',
+	#superclass : 'FamixTest3Entity',
 	#instVars : [
 		'#firstName => FMProperty',
 		'#lastName => FMProperty',
 		'#age => FMProperty',
 		'#books => FMMany type: #FamixTest3Book opposite: #person'
 	],
-	#category : #'Famix-Test3-Entities-Entities'
+	#category : 'Famix-Test3-Entities-Entities',
+	#package : 'Famix-Test3-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTest3Person class >> annotation [
 
 	<ignoreForCoverage>
@@ -40,7 +42,7 @@ FamixTest3Person class >> annotation [
 	<abstract>
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTest3Person class >> isAbstract [
 
 	<ignoreForCoverage>
@@ -48,7 +50,7 @@ FamixTest3Person class >> isAbstract [
 	^ self == FamixTest3Person
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 FamixTest3Person >> = aFamixTest3Person [
 
 	<ignoreForCoverage>
@@ -56,7 +58,7 @@ FamixTest3Person >> = aFamixTest3Person [
 	^ aFamixTest3Person firstName = self firstName and: [ aFamixTest3Person lastName = self lastName and: [ aFamixTest3Person age = self age] ] 
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTest3Person >> addBook: anObject [
 
 	<ignoreForCoverage>
@@ -64,7 +66,7 @@ FamixTest3Person >> addBook: anObject [
 	^ self books add: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest3Person >> age [
 
 	<FMProperty: #age type: #Number>
@@ -73,14 +75,14 @@ FamixTest3Person >> age [
 	^ age
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest3Person >> age: anObject [
 	<ignoreForCoverage>
 	<generated>
 	age := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest3Person >> books [
 	"Relation named: #books type: #FamixTest3Book opposite: #person"
 
@@ -89,7 +91,7 @@ FamixTest3Person >> books [
 	^ books
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest3Person >> books: anObject [
 
 	<ignoreForCoverage>
@@ -97,7 +99,7 @@ FamixTest3Person >> books: anObject [
 	books value: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest3Person >> firstName [
 
 	<FMProperty: #firstName type: #String>
@@ -106,14 +108,14 @@ FamixTest3Person >> firstName [
 	^ firstName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest3Person >> firstName: anObject [
 	<ignoreForCoverage>
 	<generated>
 	firstName := anObject
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 FamixTest3Person >> hash [
 
 	<ignoreForCoverage>
@@ -121,7 +123,7 @@ FamixTest3Person >> hash [
 	^ self firstName hash bitXor: self lastName hash bitXor: self age hash 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest3Person >> lastName [
 
 	<FMProperty: #lastName type: #String>
@@ -130,7 +132,7 @@ FamixTest3Person >> lastName [
 	^ lastName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest3Person >> lastName: anObject [
 	<ignoreForCoverage>
 	<generated>

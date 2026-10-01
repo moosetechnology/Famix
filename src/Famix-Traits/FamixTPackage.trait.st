@@ -27,16 +27,18 @@ Java extractors map Java packages to FamixTNamespaces. They can also mirror the 
 
 "
 Trait {
-	#name : #FamixTPackage,
+	#name : 'FamixTPackage',
 	#instVars : [
 		'#childEntities => FMMany type: #FamixTPackageable opposite: #parentPackage'
 	],
 	#traits : 'FamixTCanBeStub + FamixTNamedEntity + TEntityMetaLevelDependency',
 	#classTraits : 'FamixTCanBeStub classTrait + FamixTNamedEntity classTrait + TEntityMetaLevelDependency classTrait',
-	#category : #'Famix-Traits-Package'
+	#category : 'Famix-Traits-Package',
+	#package : 'Famix-Traits',
+	#tag : 'Package'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTPackage classSide >> annotation [
 
 	<ignoreForCoverage>
@@ -45,7 +47,7 @@ FamixTPackage classSide >> annotation [
 	<generated>
 ]
 
-{ #category : #groups }
+{ #category : 'groups' }
 FamixTPackage classSide >> annotationFamixPackageGroup [
 
 	<ignoreForCoverage>
@@ -54,13 +56,13 @@ FamixTPackage classSide >> annotationFamixPackageGroup [
 	^ FamixPackageGroup
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTPackage >> addChildEntity: anObject [
 	childEntities add: anObject
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTPackage >> childEntities [
 	"Relation named: #childEntities type: #FamixTPackageable opposite: #parentPackage"
 
@@ -69,7 +71,7 @@ FamixTPackage >> childEntities [
 	^ childEntities
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTPackage >> childEntities: anObject [
 
 	<ignoreForCoverage>
@@ -77,7 +79,7 @@ FamixTPackage >> childEntities: anObject [
 	childEntities value: anObject
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTPackage >> isPackage [
 
 	<ignoreForCoverage>
@@ -85,7 +87,7 @@ FamixTPackage >> isPackage [
 	^ true
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTPackage >> numberOfClientPackages [
 
 	<FMProperty: #numberOfClientPackages type: #Number>
@@ -94,7 +96,7 @@ FamixTPackage >> numberOfClientPackages [
 	^ self cacheAt: #numberOfClientPackages ifAbsentPut: [ self allClientsAtMyScope size ]
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTPackage >> relativeImportanceForSystem [
 
 	<FMProperty: #relativeImportanceForSystem type: #Number>
@@ -106,7 +108,7 @@ FamixTPackage >> relativeImportanceForSystem [
 				  ifFalse: [ 0 ] ]
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTPackage >> weightedMethodCount [
 
 	<FMProperty: #weightedMethodCount type: #Number>

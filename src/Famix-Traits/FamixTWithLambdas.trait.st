@@ -13,14 +13,16 @@ I represent an entity that can owned lambda expressions.
 
 "
 Trait {
-	#name : #FamixTWithLambdas,
+	#name : 'FamixTWithLambdas',
 	#instVars : [
 		'#lambdas => FMMany type: #FamixTLambda opposite: #lambdaContainer'
 	],
-	#category : #'Famix-Traits-Lambda'
+	#category : 'Famix-Traits-Lambda',
+	#package : 'Famix-Traits',
+	#tag : 'Lambda'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTWithLambdas classSide >> annotation [
 
 	<ignoreForCoverage>
@@ -29,7 +31,7 @@ FamixTWithLambdas classSide >> annotation [
 	<generated>
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTWithLambdas >> addLambda: anObject [
 
 	<ignoreForCoverage>
@@ -37,7 +39,7 @@ FamixTWithLambdas >> addLambda: anObject [
 	^ self lambdas add: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithLambdas >> lambdas [
 	"Relation named: #lambdas type: #FamixTLambda opposite: #lambdaContainer"
 
@@ -47,7 +49,7 @@ FamixTWithLambdas >> lambdas [
 	^ lambdas
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithLambdas >> lambdas: anObject [
 
 	<ignoreForCoverage>

@@ -17,16 +17,18 @@
 
 "
 Trait {
-	#name : #FamixTCanBeStub,
+	#name : 'FamixTCanBeStub',
 	#instVars : [
 		'#isStub => FMProperty defaultValue: false'
 	],
 	#traits : 'FamixTSourceEntity',
 	#classTraits : 'FamixTSourceEntity classTrait',
-	#category : #'Famix-Traits-PrimitiveProperties'
+	#category : 'Famix-Traits-PrimitiveProperties',
+	#package : 'Famix-Traits',
+	#tag : 'PrimitiveProperties'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTCanBeStub classSide >> annotation [
 
 	<ignoreForCoverage>
@@ -35,7 +37,7 @@ FamixTCanBeStub classSide >> annotation [
 	<generated>
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTCanBeStub >> canBeStub [
 
 	<ignoreForCoverage>
@@ -43,7 +45,7 @@ FamixTCanBeStub >> canBeStub [
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTCanBeStub >> isStub [
 
 	<FMProperty: #isStub type: #Boolean defaultValue: false>
@@ -53,7 +55,7 @@ FamixTCanBeStub >> isStub [
 	^ isStub ifNil: [ isStub := false ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTCanBeStub >> isStub: anObject [
 	<ignoreForCoverage>
 	<generated>

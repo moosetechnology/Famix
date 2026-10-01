@@ -1,9 +1,11 @@
 Trait {
-	#name : #FamixTMethodMetrics,
-	#category : #'Famix-Traits-Behavioral'
+	#name : 'FamixTMethodMetrics',
+	#category : 'Famix-Traits-Behavioral',
+	#package : 'Famix-Traits',
+	#tag : 'Behavioral'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTMethodMetrics classSide >> annotation [
 
 	<ignoreForCoverage>
@@ -12,7 +14,7 @@ FamixTMethodMetrics classSide >> annotation [
 	<generated>
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTMethodMetrics >> cyclomaticComplexity [
 
 	<FMProperty: #cyclomaticComplexity type: #Number>
@@ -20,12 +22,12 @@ FamixTMethodMetrics >> cyclomaticComplexity [
 	^ self cacheAt: #cyclomaticComplexity ifAbsent: [ self computeCyclomaticComplexity ]
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTMethodMetrics >> cyclomaticComplexity: aNumber [
 	self cacheAt: #cyclomaticComplexity put: aNumber
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTMethodMetrics >> hierarchyNestingLevel [
 
 	<FMProperty: #hierarchyNestingLevel type: #Number>
@@ -34,7 +36,7 @@ FamixTMethodMetrics >> hierarchyNestingLevel [
 	^ self cacheAt: #hierarchyNestingLevel ifAbsent: [ self parentType hierarchyNestingLevel ]
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTMethodMetrics >> hierarchyNestingLevel: aNumber [
 	self cacheAt: #hierarchyNestingLevel put: aNumber
 ]

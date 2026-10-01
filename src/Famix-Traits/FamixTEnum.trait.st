@@ -46,13 +46,15 @@ Instance Variables:
 
 "
 Trait {
-	#name : #FamixTEnum,
+	#name : 'FamixTEnum',
 	#traits : 'FamixTType + FamixTWithEnumValues',
 	#classTraits : 'FamixTType classTrait + FamixTWithEnumValues classTrait',
-	#category : #'Famix-Traits-Enum'
+	#category : 'Famix-Traits-Enum',
+	#package : 'Famix-Traits',
+	#tag : 'Enum'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTEnum classSide >> annotation [
 
 	<ignoreForCoverage>

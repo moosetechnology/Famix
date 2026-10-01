@@ -27,7 +27,7 @@ Relation between a concrete type and a generic type parameter.
 
 "
 Trait {
-	#name : #FamixTConcretization,
+	#name : 'FamixTConcretization',
 	#instVars : [
 		'#triggeringAssociation => FMOne type: #FamixTParametricAssociation opposite: #concretizations',
 		'#typeArgument => FMOne type: #FamixTTypeArgument opposite: #outgoingConcretizations',
@@ -35,10 +35,12 @@ Trait {
 	],
 	#traits : 'FamixTAssociation',
 	#classTraits : 'FamixTAssociation classTrait',
-	#category : #'Famix-Traits-Parametrics'
+	#category : 'Famix-Traits-Parametrics',
+	#package : 'Famix-Traits',
+	#tag : 'Parametrics'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTConcretization classSide >> annotation [
 
 	<ignoreForCoverage>
@@ -47,7 +49,7 @@ FamixTConcretization classSide >> annotation [
 	<generated>
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTConcretization >> triggeringAssociation [
 	"Relation named: #triggeringAssociation type: #FamixTParametricAssociation opposite: #concretizations"
 
@@ -57,7 +59,7 @@ FamixTConcretization >> triggeringAssociation [
 	^ triggeringAssociation
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTConcretization >> triggeringAssociation: anObject [
 
 	<ignoreForCoverage>
@@ -65,7 +67,7 @@ FamixTConcretization >> triggeringAssociation: anObject [
 	triggeringAssociation := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTConcretization >> typeArgument [
 	"Relation named: #typeArgument type: #FamixTTypeArgument opposite: #outgoingConcretizations"
 
@@ -76,7 +78,7 @@ FamixTConcretization >> typeArgument [
 	^ typeArgument
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTConcretization >> typeArgument: anObject [
 
 	<ignoreForCoverage>
@@ -84,7 +86,7 @@ FamixTConcretization >> typeArgument: anObject [
 	typeArgument := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTConcretization >> typeParameter [
 	"Relation named: #typeParameter type: #FamixTTypeParameter opposite: #concretizations"
 
@@ -95,7 +97,7 @@ FamixTConcretization >> typeParameter [
 	^ typeParameter
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTConcretization >> typeParameter: anObject [
 
 	<ignoreForCoverage>

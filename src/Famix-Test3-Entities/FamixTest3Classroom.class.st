@@ -22,18 +22,20 @@
 
 "
 Class {
-	#name : #FamixTest3Classroom,
-	#superclass : #FamixTest3Room,
+	#name : 'FamixTest3Classroom',
+	#superclass : 'FamixTest3Room',
 	#traits : 'FamixTest3TClassroom',
 	#classTraits : 'FamixTest3TClassroom classTrait',
 	#instVars : [
 		'#computer => FMOne type: #FamixTest3Computer opposite: #classroom',
 		'#hasProjector => FMProperty defaultValue: false'
 	],
-	#category : #'Famix-Test3-Entities-Entities'
+	#category : 'Famix-Test3-Entities-Entities',
+	#package : 'Famix-Test3-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTest3Classroom class >> annotation [
 
 	<ignoreForCoverage>
@@ -42,7 +44,7 @@ FamixTest3Classroom class >> annotation [
 	<generated>
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest3Classroom >> computer [
 	"Relation named: #computer type: #FamixTest3Computer opposite: #classroom"
 
@@ -51,7 +53,7 @@ FamixTest3Classroom >> computer [
 	^ computer
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest3Classroom >> computer: anObject [
 
 	<ignoreForCoverage>
@@ -59,7 +61,7 @@ FamixTest3Classroom >> computer: anObject [
 	computer := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest3Classroom >> hasProjector [
 
 	<FMProperty: #hasProjector type: #Boolean defaultValue: false>
@@ -68,7 +70,7 @@ FamixTest3Classroom >> hasProjector [
 	^ hasProjector ifNil: [ hasProjector := false ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest3Classroom >> hasProjector: anObject [
 	<ignoreForCoverage>
 	<generated>

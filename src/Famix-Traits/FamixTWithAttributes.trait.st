@@ -1,4 +1,6 @@
 "
+It corresponds to entities that have attributes (e.g., classes have instance variables that correspond to attributes).
+
 ## Relations
 ======================
 
@@ -11,14 +13,16 @@
 
 "
 Trait {
-	#name : #FamixTWithAttributes,
+	#name : 'FamixTWithAttributes',
 	#instVars : [
 		'#attributes => FMMany type: #FamixTAttribute opposite: #parentType'
 	],
-	#category : #'Famix-Traits-Attribute'
+	#category : 'Famix-Traits-Attribute',
+	#package : 'Famix-Traits',
+	#tag : 'Attribute'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTWithAttributes classSide >> annotation [
 
 	<ignoreForCoverage>
@@ -27,12 +31,12 @@ FamixTWithAttributes classSide >> annotation [
 	<generated>
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTWithAttributes >> addAttribute: anAttribute [
 	attributes add: anAttribute
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithAttributes >> attributes [
 	"Relation named: #attributes type: #FamixTAttribute opposite: #parentType"
 
@@ -42,7 +46,7 @@ FamixTWithAttributes >> attributes [
 	^ attributes
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithAttributes >> attributes: anObject [
 
 	<ignoreForCoverage>
@@ -50,7 +54,7 @@ FamixTWithAttributes >> attributes: anObject [
 	attributes value: anObject
 ]
 
-{ #category : #'Famix-Extensions' }
+{ #category : 'Famix-Extensions' }
 FamixTWithAttributes >> numberOfAttributes [
 
 	<FMProperty: #numberOfAttributes type: #Number>
@@ -59,7 +63,7 @@ FamixTWithAttributes >> numberOfAttributes [
 	^ self cacheAt: #numberOfAttributes ifAbsent: [ self attributes size ]
 ]
 
-{ #category : #'Famix-Extensions' }
+{ #category : 'Famix-Extensions' }
 FamixTWithAttributes >> numberOfAttributes: aNumber [
 	self cacheAt: #numberOfAttributes put: aNumber
 ]

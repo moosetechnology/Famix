@@ -1,4 +1,6 @@
 "
+This trait enables to navigate into indexed file by specifying start and end positions.
+
 ## Properties
 ======================
 
@@ -12,17 +14,19 @@
 
 "
 Trait {
-	#name : #FamixTIndexedFileNavigation,
+	#name : 'FamixTIndexedFileNavigation',
 	#instVars : [
 		'#endPos => FMProperty',
 		'#startPos => FMProperty'
 	],
 	#traits : 'FamixTFileAnchor',
 	#classTraits : 'FamixTFileAnchor classTrait',
-	#category : #'Famix-Traits-SourceAnchor'
+	#category : 'Famix-Traits-SourceAnchor',
+	#package : 'Famix-Traits',
+	#tag : 'SourceAnchor'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTIndexedFileNavigation classSide >> annotation [
 
 	<ignoreForCoverage>
@@ -31,7 +35,7 @@ FamixTIndexedFileNavigation classSide >> annotation [
 	<generated>
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 FamixTIndexedFileNavigation classSide >> fileName: aString startPos: anInteger endPos: anotherInteger [
 	^ self new
 		fileName: aString;
@@ -40,7 +44,7 @@ FamixTIndexedFileNavigation classSide >> fileName: aString startPos: anInteger e
 		yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 FamixTIndexedFileNavigation classSide >> fileName: aString startPos: anInteger endPos: anotherInteger model: aMooseModel [
 	^ self new
 		mooseModel: aMooseModel;
@@ -50,7 +54,7 @@ FamixTIndexedFileNavigation classSide >> fileName: aString startPos: anInteger e
 		yourself
 ]
 
-{ #category : #matching }
+{ #category : 'matching' }
 FamixTIndexedFileNavigation >> beginsWith: aString [
 	"I return true if the source text I represent begins with the string as parameter.\
 	For example, in Python I can check if a comment begins with a triple double quote to know if it is a docstring"
@@ -70,7 +74,7 @@ FamixTIndexedFileNavigation >> beginsWith: aString [
 			  (stream next: aString size) = aString ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 FamixTIndexedFileNavigation >> countNumberOfLinesRuturnsFrom: aStream from: start to: end [
 	"Here is a speedup version of the #lineCount method for the IndexedFileAnchors.
 	If we have the file of the entity, instead of reading the full file we can jump directly to the startPos in the stream of the file and read the characters until the endPos. 
@@ -92,12 +96,12 @@ FamixTIndexedFileNavigation >> countNumberOfLinesRuturnsFrom: aStream from: star
 	^ count
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTIndexedFileNavigation >> endLine [
 	^ self cacheAt: #endLine ifAbsentPut: [ self completeText lineNumberCorrespondingToIndex: self endPos ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTIndexedFileNavigation >> endPos [
 
 	<FMProperty: #endPos type: #Number>
@@ -107,26 +111,26 @@ FamixTIndexedFileNavigation >> endPos [
 	^ endPos
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTIndexedFileNavigation >> endPos: anObject [
 	<ignoreForCoverage>
 	<generated>
 	endPos := anObject
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTIndexedFileNavigation >> isWithin: aFileAnchor [
 	"Test whether aSourceAnchor is contained within receiver. We test the positions before the file name because it is faster."
 
 	^ startPos >= aFileAnchor startPos and: [ endPos <= aFileAnchor endPos and: [ fileName = aFileAnchor fileName ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTIndexedFileNavigation >> lineCount [
 	^ self lineCountFromFileReference: self fileReference
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 FamixTIndexedFileNavigation >> lineCountFromFileReference: file [
 	^ file
 		ifExists: [ file
@@ -137,7 +141,7 @@ FamixTIndexedFileNavigation >> lineCountFromFileReference: file [
 		ifAbsent: [ self privateLineCount ]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixTIndexedFileNavigation >> mooseNameOn: aStream [
 	super mooseNameOn: aStream.
 	aStream
@@ -149,7 +153,7 @@ FamixTIndexedFileNavigation >> mooseNameOn: aStream [
 		nextPut: $)
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 FamixTIndexedFileNavigation >> sourceText [
 	| start |
 	self sourcesAreReadable ifFalse: [ ^ '' ].
@@ -164,12 +168,12 @@ FamixTIndexedFileNavigation >> sourceText [
 			stream next: (endPos ifNil: [ in size + 1 ]) - start + 1 ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTIndexedFileNavigation >> startLine [
 	^ self cacheAt: #startLine ifAbsentPut: [ self completeText lineNumberCorrespondingToIndex: self startPos ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTIndexedFileNavigation >> startPos [
 
 	<FMProperty: #startPos type: #Number>
@@ -179,7 +183,7 @@ FamixTIndexedFileNavigation >> startPos [
 	^ startPos
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTIndexedFileNavigation >> startPos: anObject [
 	<ignoreForCoverage>
 	<generated>

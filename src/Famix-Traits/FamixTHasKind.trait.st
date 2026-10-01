@@ -10,14 +10,16 @@ This is an indicator that a method is a setter, getter, constant, or constructor
 
 "
 Trait {
-	#name : #FamixTHasKind,
+	#name : 'FamixTHasKind',
 	#instVars : [
 		'#kind => FMProperty'
 	],
-	#category : #'Famix-Traits-PrimitiveProperties'
+	#category : 'Famix-Traits-PrimitiveProperties',
+	#package : 'Famix-Traits',
+	#tag : 'PrimitiveProperties'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTHasKind classSide >> annotation [
 
 	<ignoreForCoverage>
@@ -26,13 +28,13 @@ FamixTHasKind classSide >> annotation [
 	<generated>
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTHasKind >> beConstant [
 
 	self kind: #constant
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTHasKind >> beConstructor [
 
 	self deprecated:
@@ -43,19 +45,19 @@ Please make sure your entity uses this trait and overrides #isConstructor instea
 	self kind: #constructor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTHasKind >> beGetter [
 
 	self kind: #getter
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTHasKind >> beSetter [
 
 	self kind: #setter
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTHasKind >> isConstant [
 
 	<FMProperty: #isConstant type: #Boolean>
@@ -64,7 +66,7 @@ FamixTHasKind >> isConstant [
 	^ #constant = self kind
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTHasKind >> isConstructor [
 
 	self deprecated:
@@ -76,7 +78,7 @@ It should compute if the method is a constructor based on language-specific crit
 		  self cacheAt: #isConstructor ifAbsent: [ false ] ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTHasKind >> isConstructor: aBoolean [
 
 	self deprecated:
@@ -89,7 +91,7 @@ Please make sure your entity uses this trait and overrides #isConstructor instea
 		ifFalse: [ self isConstructor ifTrue: [ self kind: nil ] ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTHasKind >> isGetter [
 
 	<FMProperty: #isGetter type: #Boolean>
@@ -98,7 +100,7 @@ FamixTHasKind >> isGetter [
 	^ #getter = self kind
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTHasKind >> isPureAccessor [
 
 	^ self isGetter or: [ 
@@ -106,7 +108,7 @@ FamixTHasKind >> isPureAccessor [
 			  self cacheAt: #isPureAccessor ifAbsent: [ false ] ] ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTHasKind >> isSetter [
 
 	<FMProperty: #isSetter type: #Boolean>
@@ -115,7 +117,7 @@ FamixTHasKind >> isSetter [
 	^ #setter = self kind
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTHasKind >> kind [
 
 	<FMProperty: #kind type: #String>
@@ -125,7 +127,7 @@ FamixTHasKind >> kind [
 	^ kind
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTHasKind >> kind: anObject [
 	<ignoreForCoverage>
 	<generated>

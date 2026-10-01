@@ -1,10 +1,12 @@
 Class {
-	#name : #FamixTest3Cafeteria,
-	#superclass : #FamixTest3Room,
-	#category : #'Famix-Test3-Entities-Entities'
+	#name : 'FamixTest3Cafeteria',
+	#superclass : 'FamixTest3Room',
+	#category : 'Famix-Test3-Entities-Entities',
+	#package : 'Famix-Test3-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTest3Cafeteria class >> annotation [
 
 	<ignoreForCoverage>

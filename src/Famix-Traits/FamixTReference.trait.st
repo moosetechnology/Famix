@@ -36,17 +36,19 @@ Note that FamixTReference was defined between two FamixTContainerEntity entities
 
 "
 Trait {
-	#name : #FamixTReference,
+	#name : 'FamixTReference',
 	#instVars : [
 		'#referencer => FMOne type: #FamixTWithReferences opposite: #outgoingReferences',
 		'#referredEntity => FMOne type: #FamixTReferenceable opposite: #incomingReferences'
 	],
 	#traits : 'FamixTAssociation',
 	#classTraits : 'FamixTAssociation classTrait',
-	#category : #'Famix-Traits-Reference'
+	#category : 'Famix-Traits-Reference',
+	#package : 'Famix-Traits',
+	#tag : 'Reference'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTReference classSide >> annotation [
 
 	<ignoreForCoverage>
@@ -55,12 +57,12 @@ FamixTReference classSide >> annotation [
 	<generated>
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 FamixTReference classSide >> source: source target: target [
 	^ self new source: source; target: target
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTReference >> isReference [
 
 	<ignoreForCoverage>
@@ -68,7 +70,7 @@ FamixTReference >> isReference [
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTReference >> referencer [
 	"Relation named: #referencer type: #FamixTWithReferences opposite: #outgoingReferences"
 
@@ -79,7 +81,7 @@ FamixTReference >> referencer [
 	^ referencer
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTReference >> referencer: anObject [
 
 	<ignoreForCoverage>
@@ -87,7 +89,7 @@ FamixTReference >> referencer: anObject [
 	referencer := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTReference >> referredEntity [
 	"Relation named: #referredEntity type: #FamixTReferenceable opposite: #incomingReferences"
 
@@ -98,7 +100,7 @@ FamixTReference >> referredEntity [
 	^ referredEntity
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTReference >> referredEntity: anObject [
 
 	<ignoreForCoverage>

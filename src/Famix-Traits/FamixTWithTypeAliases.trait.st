@@ -1,4 +1,6 @@
 "
+It corresponds to entities that have type aliases.
+
 ## Relations
 ======================
 
@@ -11,14 +13,16 @@
 
 "
 Trait {
-	#name : #FamixTWithTypeAliases,
+	#name : 'FamixTWithTypeAliases',
 	#instVars : [
 		'#typeAliases => FMMany type: #FamixTTypeAlias opposite: #aliasedType'
 	],
-	#category : #'Famix-Traits-TypeAlias'
+	#category : 'Famix-Traits-TypeAlias',
+	#package : 'Famix-Traits',
+	#tag : 'TypeAlias'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTWithTypeAliases classSide >> annotation [
 
 	<ignoreForCoverage>
@@ -27,7 +31,7 @@ FamixTWithTypeAliases classSide >> annotation [
 	<generated>
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTWithTypeAliases >> addTypeAlias: anObject [
 
 	<ignoreForCoverage>
@@ -35,7 +39,7 @@ FamixTWithTypeAliases >> addTypeAlias: anObject [
 	^ self typeAliases add: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithTypeAliases >> allTypeAliases [
 	| all |
 	all := OrderedCollection withAll: self typeAliases.
@@ -43,7 +47,7 @@ FamixTWithTypeAliases >> allTypeAliases [
 	^ all
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithTypeAliases >> typeAliases [
 	"Relation named: #typeAliases type: #FamixTTypeAlias opposite: #aliasedType"
 
@@ -53,7 +57,7 @@ FamixTWithTypeAliases >> typeAliases [
 	^ typeAliases
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithTypeAliases >> typeAliases: anObject [
 
 	<ignoreForCoverage>

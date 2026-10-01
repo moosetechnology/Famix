@@ -1,10 +1,12 @@
 Class {
-	#name : #FamixFolderGroup,
-	#superclass : #MooseSpecializedGroup,
-	#category : #'Famix-Traits-Groups'
+	#name : 'FamixFolderGroup',
+	#superclass : 'MooseSpecializedGroup',
+	#category : 'Famix-Traits-Groups',
+	#package : 'Famix-Traits',
+	#tag : 'Groups'
 }
 
-{ #category : #'accessing - dynamic' }
+{ #category : 'accessing - dynamic' }
 FamixFolderGroup >> allFiles [
 	| files |
 	files := OrderedCollection new.

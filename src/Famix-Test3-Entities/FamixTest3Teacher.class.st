@@ -21,18 +21,20 @@
 
 "
 Class {
-	#name : #FamixTest3Teacher,
-	#superclass : #FamixTest3Person,
+	#name : 'FamixTest3Teacher',
+	#superclass : 'FamixTest3Person',
 	#traits : 'FamixTest3TTeacher',
 	#classTraits : 'FamixTest3TTeacher classTrait',
 	#instVars : [
 		'#school => FMOne type: #FamixTest3School opposite: #teachers',
 		'#students => FMMany type: #FamixTest3Student opposite: #teachers'
 	],
-	#category : #'Famix-Test3-Entities-Entities'
+	#category : 'Famix-Test3-Entities-Entities',
+	#package : 'Famix-Test3-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTest3Teacher class >> annotation [
 
 	<ignoreForCoverage>
@@ -41,7 +43,7 @@ FamixTest3Teacher class >> annotation [
 	<generated>
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTest3Teacher >> addStudent: anObject [
 
 	<ignoreForCoverage>
@@ -49,7 +51,7 @@ FamixTest3Teacher >> addStudent: anObject [
 	^ self students add: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest3Teacher >> school [
 	"Relation named: #school type: #FamixTest3School opposite: #teachers"
 
@@ -59,7 +61,7 @@ FamixTest3Teacher >> school [
 	^ school
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest3Teacher >> school: anObject [
 
 	<ignoreForCoverage>
@@ -67,7 +69,7 @@ FamixTest3Teacher >> school: anObject [
 	school := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest3Teacher >> students [
 	"Relation named: #students type: #FamixTest3Student opposite: #teachers"
 
@@ -76,7 +78,7 @@ FamixTest3Teacher >> students [
 	^ students
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest3Teacher >> students: anObject [
 
 	<ignoreForCoverage>

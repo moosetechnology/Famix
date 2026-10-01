@@ -23,17 +23,19 @@
 
 "
 Trait {
-	#name : #FamixTTraitUsage,
+	#name : 'FamixTTraitUsage',
 	#instVars : [
 		'#trait => FMOne type: #FamixTTrait opposite: #incomingTraitUsages',
 		'#user => FMOne type: #FamixTTraitUser opposite: #traitUsages'
 	],
 	#traits : 'FamixTAssociation',
 	#classTraits : 'FamixTAssociation classTrait',
-	#category : #'Famix-Traits-Trait'
+	#category : 'Famix-Traits-Trait',
+	#package : 'Famix-Traits',
+	#tag : 'Trait'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTTraitUsage classSide >> annotation [
 
 	<ignoreForCoverage>
@@ -42,7 +44,7 @@ FamixTTraitUsage classSide >> annotation [
 	<generated>
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTTraitUsage >> trait [
 	"Relation named: #trait type: #FamixTTrait opposite: #incomingTraitUsages"
 
@@ -52,7 +54,7 @@ FamixTTraitUsage >> trait [
 	^ trait
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTTraitUsage >> trait: anObject [
 
 	<ignoreForCoverage>
@@ -60,7 +62,7 @@ FamixTTraitUsage >> trait: anObject [
 	trait := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTTraitUsage >> user [
 	"Relation named: #user type: #FamixTTraitUser opposite: #traitUsages"
 
@@ -70,7 +72,7 @@ FamixTTraitUsage >> user [
 	^ user
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTTraitUsage >> user: anObject [
 
 	<ignoreForCoverage>

@@ -45,16 +45,18 @@ Instance Variables:
 
 "
 Trait {
-	#name : #FamixTEnumValue,
+	#name : 'FamixTEnumValue',
 	#instVars : [
 		'#parentEnum => FMOne type: #FamixTWithEnumValues opposite: #enumValues'
 	],
 	#traits : 'FamixTStructuralEntity',
 	#classTraits : 'FamixTStructuralEntity classTrait',
-	#category : #'Famix-Traits-Enum'
+	#category : 'Famix-Traits-Enum',
+	#package : 'Famix-Traits',
+	#tag : 'Enum'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTEnumValue classSide >> annotation [
 
 	<ignoreForCoverage>
@@ -63,7 +65,7 @@ FamixTEnumValue classSide >> annotation [
 	<generated>
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTEnumValue >> isEnumValue [
 
 	<ignoreForCoverage>
@@ -71,7 +73,7 @@ FamixTEnumValue >> isEnumValue [
 	^ true
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixTEnumValue >> mooseNameOn: aStream [
 	(self belongsTo isNotNil and: [ self belongsTo name isNotNil ])
 		ifTrue: [ self belongsTo mooseNameOn: aStream.
@@ -79,12 +81,12 @@ FamixTEnumValue >> mooseNameOn: aStream [
 	super mooseNameOn: aStream
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTEnumValue >> mooseNameSeparator [
 	^ '::'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTEnumValue >> parentEnum [
 	"Relation named: #parentEnum type: #FamixTWithEnumValues opposite: #enumValues"
 
@@ -95,7 +97,7 @@ FamixTEnumValue >> parentEnum [
 	^ parentEnum
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTEnumValue >> parentEnum: anObject [
 
 	<ignoreForCoverage>
@@ -103,7 +105,7 @@ FamixTEnumValue >> parentEnum: anObject [
 	parentEnum := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTEnumValue >> parentType [ 
 
 	^ self parentEnum

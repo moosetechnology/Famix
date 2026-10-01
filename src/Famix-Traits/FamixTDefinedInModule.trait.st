@@ -1,4 +1,6 @@
 "
+It corresponds to the entities defined in a module.
+
 ## Relations
 ======================
 
@@ -11,14 +13,16 @@
 
 "
 Trait {
-	#name : #FamixTDefinedInModule,
+	#name : 'FamixTDefinedInModule',
 	#instVars : [
 		'#parentModule => FMOne type: #FamixTModule opposite: #moduleEntities'
 	],
-	#category : #'Famix-Traits-Module'
+	#category : 'Famix-Traits-Module',
+	#package : 'Famix-Traits',
+	#tag : 'Module'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTDefinedInModule classSide >> annotation [
 
 	<ignoreForCoverage>
@@ -27,7 +31,7 @@ FamixTDefinedInModule classSide >> annotation [
 	<generated>
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTDefinedInModule >> parentModule [
 	"Relation named: #parentModule type: #FamixTModule opposite: #moduleEntities"
 
@@ -38,7 +42,7 @@ FamixTDefinedInModule >> parentModule [
 	^ parentModule
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTDefinedInModule >> parentModule: anObject [
 
 	<ignoreForCoverage>

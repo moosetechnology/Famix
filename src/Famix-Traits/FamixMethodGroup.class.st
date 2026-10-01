@@ -1,27 +1,29 @@
 Class {
-	#name : #FamixMethodGroup,
-	#superclass : #MooseSpecializedGroup,
-	#category : #'Famix-Traits-Groups'
+	#name : 'FamixMethodGroup',
+	#superclass : 'MooseSpecializedGroup',
+	#category : 'Famix-Traits-Groups',
+	#package : 'Famix-Traits',
+	#tag : 'Groups'
 }
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FamixMethodGroup >> allClasses [
 
 	^ FamixTypeGroup withAll: (self entities flatCollectAsSet: [ :m | m containersOfType: FamixTClass ])
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FamixMethodGroup >> allMethods [
 	^ self
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FamixMethodGroup >> allPackages [
 
 	^ FamixPackageGroup withAll: (self entities flatCollectAsSet: [ :m | m containersOfType: FamixTPackage ])
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixMethodGroup >> averageNumberOfInvocations [
 
 	<FMProperty: #averageNumberOfInvocations type: #Number>
@@ -30,7 +32,7 @@ FamixMethodGroup >> averageNumberOfInvocations [
 	^ self cacheAt: #averageNumberOfInvocations ifAbsentPut: [ self average: [ :each | each numberOfOutgoingInvocations ] ]
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixMethodGroup >> averageNumberOfLinesOfCode [
 
 	<FMProperty: #averageNumberOfLinesOfCode type: #Number>
@@ -39,7 +41,7 @@ FamixMethodGroup >> averageNumberOfLinesOfCode [
 	^ self cacheAt: #averageNumberOfLinesOfCode ifAbsentPut: [ self average: [ :each | each numberOfLinesOfCode ] ]
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixMethodGroup >> averageNumberOfParameters [
 
 	<FMProperty: #averageNumberOfParameters type: #Number>

@@ -35,17 +35,19 @@ A type can have multiple subtypes or supertypes. These are modelled by means of 
 
 "
 Trait {
-	#name : #FamixTType,
+	#name : 'FamixTType',
 	#instVars : [
 		'#incomingTypings => FMMany type: #FamixTEntityTyping opposite: #declaredType',
 		'#typeContainer => FMOne type: #FamixTWithTypes opposite: #types'
 	],
 	#traits : 'FamixTCanBeStub + FamixTNamedEntity + FamixTReferenceable + TEntityMetaLevelDependency',
 	#classTraits : 'FamixTCanBeStub classTrait + FamixTNamedEntity classTrait + FamixTReferenceable classTrait + TEntityMetaLevelDependency classTrait',
-	#category : #'Famix-Traits-Type'
+	#category : 'Famix-Traits-Type',
+	#package : 'Famix-Traits',
+	#tag : 'Type'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTType classSide >> annotation [
 
 	<ignoreForCoverage>
@@ -54,7 +56,7 @@ FamixTType classSide >> annotation [
 	<generated>
 ]
 
-{ #category : #groups }
+{ #category : 'groups' }
 FamixTType classSide >> annotationFamixTypeGroup [
 
 	<ignoreForCoverage>
@@ -63,7 +65,7 @@ FamixTType classSide >> annotationFamixTypeGroup [
 	^ FamixTypeGroup
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTType >> addIncomingTyping: anObject [
 
 	<ignoreForCoverage>
@@ -71,7 +73,7 @@ FamixTType >> addIncomingTyping: anObject [
 	^ self incomingTypings add: anObject
 ]
 
-{ #category : #deprecated }
+{ #category : 'deprecated' }
 FamixTType >> belongsTo [
 
 	^ self parentPackage ifNil: [
@@ -80,13 +82,13 @@ FamixTType >> belongsTo [
 				  ifEmpty: [ nil ] ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTType >> entityHasIncomingTypeDeclarations [
 
 	^ self incomingDeclarations isNotEmpty
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTType >> incomingTypings [
 	"Relation named: #incomingTypings type: #FamixTEntityTyping opposite: #declaredType"
 
@@ -96,7 +98,7 @@ FamixTType >> incomingTypings [
 	^ incomingTypings
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTType >> incomingTypings: anObject [
 
 	<ignoreForCoverage>
@@ -104,7 +106,7 @@ FamixTType >> incomingTypings: anObject [
 	incomingTypings value: anObject
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTType >> isType [
 
 	<ignoreForCoverage>
@@ -112,7 +114,7 @@ FamixTType >> isType [
 	^ true
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixTType >> mooseNameOn: aStream [
 	self typeContainer
 		ifNotNil: [ :parent |
@@ -121,14 +123,14 @@ FamixTType >> mooseNameOn: aStream [
 	self name ifNotNil: [ :n | aStream nextPutAll: n ]
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTType >> numberOfAccessesToForeignData [
 
 	self deprecated: 'This method will be removed in the nex version of Moose'.
 	^ self cacheAt: #numberOfAccessesToForeignData ifAbsentPut: [ self notExistentMetricValue ]
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTType >> numberOfAccessesToForeignData: aNumber [
 
 	self deprecated:
@@ -136,13 +138,13 @@ FamixTType >> numberOfAccessesToForeignData: aNumber [
 	self cacheAt: #numberOfAccessesToForeignData put: aNumber
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTType >> realType [
 	"All types except the alias ones are real"
 	^ self 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTType >> typeContainer [
 	"Relation named: #typeContainer type: #FamixTWithTypes opposite: #types"
 
@@ -153,7 +155,7 @@ FamixTType >> typeContainer [
 	^ typeContainer
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTType >> typeContainer: anObject [
 
 	typeContainer := anObject.
@@ -161,7 +163,7 @@ FamixTType >> typeContainer: anObject [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 FamixTType >> typedEntities [
 
 	^ self incomingTypings collect: #source

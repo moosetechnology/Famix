@@ -13,14 +13,16 @@ FamixTSourcedEntity models any fact in a program source and it is the superclass
 
 "
 Trait {
-	#name : #FamixTSourceEntity,
+	#name : 'FamixTSourceEntity',
 	#instVars : [
 		'#sourceAnchor => FMOne type: #FamixTSourceAnchor opposite: #element'
 	],
-	#category : #'Famix-Traits-SourceAnchor'
+	#category : 'Famix-Traits-SourceAnchor',
+	#package : 'Famix-Traits',
+	#tag : 'SourceAnchor'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTSourceEntity classSide >> annotation [
 
 	<ignoreForCoverage>
@@ -29,19 +31,19 @@ FamixTSourceEntity classSide >> annotation [
 	<generated>
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTSourceEntity >> allSourceAnchors [
 	^ self sourceAnchor
 		ifNil: [ {} ]
 		ifNotNil: #allSourceAnchors
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 FamixTSourceEntity >> allSourceAnchorsDo: aBlock [
 	^ self sourceAnchor ifNotNil: [ :sa | sa allSourceAnchorsDo: aBlock ]
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTSourceEntity >> computeNumberOfLinesOfCode [
 	self hasSourceAnchor ifTrue: [ ^ self sourceAnchor lineCount ].
 	self sourceText = '' ifFalse: [ ^ self sourceText lineCount ].
@@ -51,12 +53,12 @@ FamixTSourceEntity >> computeNumberOfLinesOfCode [
 	^ self containedEntities sumNumbers: #numberOfLinesOfCode
 ]
 
-{ #category : #'source anchor' }
+{ #category : 'source anchor' }
 FamixTSourceEntity >> defineMultiSourceAnchorWithPath: aPath [
 	 self ensureMultiSourceAnchor addFileAnchorWithPath: aPath
 ]
 
-{ #category : #'source anchor' }
+{ #category : 'source anchor' }
 FamixTSourceEntity >> ensureMultiSourceAnchor [
 	^ self sourceAnchor
 		ifNil: [ self
@@ -68,18 +70,18 @@ FamixTSourceEntity >> ensureMultiSourceAnchor [
 				sourceAnchor ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTSourceEntity >> hasSourceAnchor [
 	^ self sourceAnchor isNotNil
 ]
 
-{ #category : #inspector }
+{ #category : 'inspector' }
 FamixTSourceEntity >> inspectionSourceContext: aContext [
 
 	aContext active: self sourceText isNotEmpty
 ]
 
-{ #category : #'source anchor' }
+{ #category : 'source anchor' }
 FamixTSourceEntity >> multipleFileAnchorClass [
 	^ self mooseModel
 		ifNil: [ self error: 'The model need to be set for this feature to work.' ]
@@ -89,7 +91,7 @@ FamixTSourceEntity >> multipleFileAnchorClass [
 				ifAbsent: [ self error: 'This metamodel does not includes the full concept of MultipleFileAnchor needed.' ] ]
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTSourceEntity >> numberOfLinesOfCode [
 
 	<FMProperty: #numberOfLinesOfCode type: #Number>
@@ -97,12 +99,12 @@ FamixTSourceEntity >> numberOfLinesOfCode [
 	^ self cacheAt: #numberOfLinesOfCode ifAbsent: [ self computeNumberOfLinesOfCode ]
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTSourceEntity >> numberOfLinesOfCode: aNumber [
 	self cacheAt: #numberOfLinesOfCode put: aNumber
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTSourceEntity >> numberOfLinesOfCodeWithMoreThanOneCharacter [
 
 	<FMProperty: #numberOfLinesOfCodeWithMoreThanOneCharacter type: #Number>
@@ -116,12 +118,12 @@ FamixTSourceEntity >> numberOfLinesOfCodeWithMoreThanOneCharacter [
 	^ self cacheAt: #numberOfLinesOfCodeWithMoreThanOneCharacter ifAbsentPut: [ (self sourceText lines select: [ :line | line trimBoth size > 1 ]) size ]
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTSourceEntity >> shouldCountChildrenForLinesOfCodeIfNoSourceAnchor [
 	^ self isContainerEntity
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTSourceEntity >> sourceAnchor [
 	"Relation named: #sourceAnchor type: #FamixTSourceAnchor opposite: #element"
 
@@ -131,7 +133,7 @@ FamixTSourceEntity >> sourceAnchor [
 	^ sourceAnchor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTSourceEntity >> sourceAnchor: anObject [
 
 	<ignoreForCoverage>
@@ -139,7 +141,7 @@ FamixTSourceEntity >> sourceAnchor: anObject [
 	sourceAnchor := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTSourceEntity >> sourceText [
 	<FMProperty: #sourceText type: #String>
 	<derived>

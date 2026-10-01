@@ -35,16 +35,18 @@ FamixTImplicitVariable represents a variable defined by the compiler in a contex
 
 "
 Trait {
-	#name : #FamixTImplicitVariable,
+	#name : 'FamixTImplicitVariable',
 	#instVars : [
 		'#parentBehaviouralEntity => FMOne type: #FamixTWithImplicitVariables opposite: #implicitVariables'
 	],
 	#traits : 'FamixTStructuralEntity',
 	#classTraits : 'FamixTStructuralEntity classTrait',
-	#category : #'Famix-Traits-ImplicitVariable'
+	#category : 'Famix-Traits-ImplicitVariable',
+	#package : 'Famix-Traits',
+	#tag : 'ImplicitVariable'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTImplicitVariable classSide >> annotation [
 
 	<ignoreForCoverage>
@@ -53,7 +55,7 @@ FamixTImplicitVariable classSide >> annotation [
 	<generated>
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTImplicitVariable >> declaredType [
 	"If we have a declared type, we return it. Else, we check if the implicit variable is self or super to determine the declared type."
 
@@ -69,7 +71,7 @@ FamixTImplicitVariable >> declaredType [
 	^ nil
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTImplicitVariable >> isImplicitVariable [
 
 	<ignoreForCoverage>
@@ -77,19 +79,19 @@ FamixTImplicitVariable >> isImplicitVariable [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTImplicitVariable >> isSelf [
 
 	^ self shouldBeImplemented
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTImplicitVariable >> isSuper [
 
 	^ self name = 'super'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTImplicitVariable >> parentBehaviouralEntity [
 	"Relation named: #parentBehaviouralEntity type: #FamixTWithImplicitVariables opposite: #implicitVariables"
 
@@ -100,7 +102,7 @@ FamixTImplicitVariable >> parentBehaviouralEntity [
 	^ parentBehaviouralEntity
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTImplicitVariable >> parentBehaviouralEntity: anObject [
 
 	parentBehaviouralEntity := anObject.

@@ -1,4 +1,6 @@
 "
+It corresponds to entities that have enumeration values (i.e., enumerations).
+
 ## Relations
 ======================
 
@@ -11,14 +13,16 @@
 
 "
 Trait {
-	#name : #FamixTWithEnumValues,
+	#name : 'FamixTWithEnumValues',
 	#instVars : [
 		'#enumValues => FMMany type: #FamixTEnumValue opposite: #parentEnum'
 	],
-	#category : #'Famix-Traits-Enum'
+	#category : 'Famix-Traits-Enum',
+	#package : 'Famix-Traits',
+	#tag : 'Enum'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTWithEnumValues classSide >> annotation [
 
 	<ignoreForCoverage>
@@ -27,13 +31,13 @@ FamixTWithEnumValues classSide >> annotation [
 	<generated>
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithEnumValues >> addEnumValue: anObject [
 	enumValues add: anObject
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithEnumValues >> enumValues [
 	"Relation named: #enumValues type: #FamixTEnumValue opposite: #parentEnum"
 
@@ -42,7 +46,7 @@ FamixTWithEnumValues >> enumValues [
 	^ enumValues
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithEnumValues >> enumValues: anObject [
 
 	<ignoreForCoverage>

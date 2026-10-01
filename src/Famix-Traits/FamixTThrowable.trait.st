@@ -15,16 +15,18 @@ TThrowable represents all types of possible exceptions.
 
 "
 Trait {
-	#name : #FamixTThrowable,
+	#name : 'FamixTThrowable',
 	#instVars : [
 		'#catchingEntities => FMMany type: #FamixTWithExceptions opposite: #caughtExceptions',
 		'#declaringEntities => FMMany type: #FamixTWithExceptions opposite: #declaredExceptions',
 		'#throwingEntities => FMMany type: #FamixTWithExceptions opposite: #thrownExceptions'
 	],
-	#category : #'Famix-Traits-Exception'
+	#category : 'Famix-Traits-Exception',
+	#package : 'Famix-Traits',
+	#tag : 'Exception'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTThrowable classSide >> annotation [
 
 	<ignoreForCoverage>
@@ -33,7 +35,7 @@ FamixTThrowable classSide >> annotation [
 	<generated>
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTThrowable >> addCatchingEntity: anObject [
 
 	<ignoreForCoverage>
@@ -41,7 +43,7 @@ FamixTThrowable >> addCatchingEntity: anObject [
 	^ self catchingEntities add: anObject
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTThrowable >> addDeclaringEntity: anObject [
 
 	<ignoreForCoverage>
@@ -49,7 +51,7 @@ FamixTThrowable >> addDeclaringEntity: anObject [
 	^ self declaringEntities add: anObject
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTThrowable >> addThrowingEntity: anObject [
 
 	<ignoreForCoverage>
@@ -57,7 +59,7 @@ FamixTThrowable >> addThrowingEntity: anObject [
 	^ self throwingEntities add: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTThrowable >> catchingEntities [
 	"Relation named: #catchingEntities type: #FamixTWithExceptions opposite: #caughtExceptions"
 
@@ -66,7 +68,7 @@ FamixTThrowable >> catchingEntities [
 	^ catchingEntities
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTThrowable >> catchingEntities: anObject [
 
 	<ignoreForCoverage>
@@ -74,7 +76,7 @@ FamixTThrowable >> catchingEntities: anObject [
 	catchingEntities value: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTThrowable >> declaringEntities [
 	"Relation named: #declaringEntities type: #FamixTWithExceptions opposite: #declaredExceptions"
 
@@ -83,7 +85,7 @@ FamixTThrowable >> declaringEntities [
 	^ declaringEntities
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTThrowable >> declaringEntities: anObject [
 
 	<ignoreForCoverage>
@@ -91,7 +93,7 @@ FamixTThrowable >> declaringEntities: anObject [
 	declaringEntities value: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTThrowable >> throwingEntities [
 	"Relation named: #throwingEntities type: #FamixTWithExceptions opposite: #thrownExceptions"
 
@@ -100,7 +102,7 @@ FamixTThrowable >> throwingEntities [
 	^ throwingEntities
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTThrowable >> throwingEntities: anObject [
 
 	<ignoreForCoverage>

@@ -48,16 +48,18 @@ A FamixTMethod is always contained in a parentType.
 
 "
 Trait {
-	#name : #FamixTMethod,
+	#name : 'FamixTMethod',
 	#instVars : [
 		'#parentType => FMOne type: #FamixTWithMethods opposite: #methods'
 	],
 	#traits : 'FamixTHasSignature + FamixTInvocable + FamixTMethodMetrics + FamixTNamedEntity + FamixTTypedEntity + FamixTWithImplicitVariables + FamixTWithLocalVariables + FamixTWithParameters + FamixTWithStatements + TEntityMetaLevelDependency',
 	#classTraits : 'FamixTHasSignature classTrait + FamixTInvocable classTrait + FamixTMethodMetrics classTrait + FamixTNamedEntity classTrait + FamixTTypedEntity classTrait + FamixTWithImplicitVariables classTrait + FamixTWithLocalVariables classTrait + FamixTWithParameters classTrait + FamixTWithStatements classTrait + TEntityMetaLevelDependency classTrait',
-	#category : #'Famix-Traits-Behavioral'
+	#category : 'Famix-Traits-Behavioral',
+	#package : 'Famix-Traits',
+	#tag : 'Behavioral'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTMethod classSide >> annotation [
 
 	<ignoreForCoverage>
@@ -66,7 +68,7 @@ FamixTMethod classSide >> annotation [
 	<generated>
 ]
 
-{ #category : #groups }
+{ #category : 'groups' }
 FamixTMethod classSide >> annotationFamixMethodGroup [
 
 	<ignoreForCoverage>
@@ -75,7 +77,7 @@ FamixTMethod classSide >> annotationFamixMethodGroup [
 	^ FamixMethodGroup
 ]
 
-{ #category : #'Famix-Extensions-metrics-support' }
+{ #category : 'Famix-Extensions-metrics-support' }
 FamixTMethod >> accessedAttributes [
 	"Returns the set of attributes of my class accessed by me (method). 
 	Used to support the calculation of LCOM"
@@ -83,7 +85,7 @@ FamixTMethod >> accessedAttributes [
 	^ ((self queryOutgoing: FamixTAccess) opposites withinContainerUsing: FamixTClass) asSet select: #isAttribute
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTMethod >> firstOverridingMethods [
 
 	| overridingMethods |
@@ -93,18 +95,18 @@ FamixTMethod >> firstOverridingMethods [
 	^ overridingMethods
 ]
 
-{ #category : #'Famix-Extensions' }
+{ #category : 'Famix-Extensions' }
 FamixTMethod >> invokedBehaviours [
 
 	^ (self queryOutgoing: FamixTInvocation) opposites
 ]
 
-{ #category : #asserting }
+{ #category : 'asserting' }
 FamixTMethod >> isAccessor [
 	^ self isSetter or: [ self isGetter ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTMethod >> isConstructor [
 
 	<FMProperty: #isConstructor type: #Boolean>
@@ -113,7 +115,7 @@ FamixTMethod >> isConstructor [
 	^ self shouldBeImplemented
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTMethod >> isDelegating [
 
 	^ (self outgoingInvocations flatCollect: #target) anySatisfy: [ :each | 
@@ -121,7 +123,7 @@ FamixTMethod >> isDelegating [
 			  (each isInSameClassAs: self) not ] ] 
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTMethod >> isExtending [
 
 	^ (self outgoingInvocations reject: [ :each | each receiver isNil ]) 
@@ -130,19 +132,19 @@ FamixTMethod >> isExtending [
 				  (each candidates collect: #signature) includes: self signature ] ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTMethod >> isInSameClassAs: aMethod [
 
 	^ aMethod parentType == self parentType
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTMethod >> isInitializer [
 
 	^ self shouldBeImplemented
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTMethod >> isMethod [
 
 	<ignoreForCoverage>
@@ -150,7 +152,7 @@ FamixTMethod >> isMethod [
 	^ true
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixTMethod >> mooseNameOn: stream [
 	self parentType
 		ifNotNil: [ :parent | 
@@ -161,7 +163,7 @@ FamixTMethod >> mooseNameOn: stream [
 		ifNil: [ self name ifNotNil: [ :aName | stream nextPutAll: aName ] ]
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTMethod >> numberOfConditionals [
 
 	<FMProperty: #numberOfConditionals type: #Number>
@@ -169,13 +171,13 @@ FamixTMethod >> numberOfConditionals [
 	^ self attributeAt: #numberOfConditionals ifAbsent: [ self notExistentMetricValue ]
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTMethod >> numberOfConditionals: aNumber [
 
 	self attributeAt: #numberOfConditionals put: aNumber
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTMethod >> overridingMethods [
 
 	| overridingMethods |
@@ -185,7 +187,7 @@ FamixTMethod >> overridingMethods [
 	^ overridingMethods
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTMethod >> parentType [
 	"Relation named: #parentType type: #FamixTWithMethods opposite: #methods"
 
@@ -196,7 +198,7 @@ FamixTMethod >> parentType [
 	^ parentType
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTMethod >> parentType: anObject [
 
 	parentType := anObject.
@@ -204,7 +206,7 @@ FamixTMethod >> parentType: anObject [
 
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTMethod >> parentTypeIsStub [
 
 	^ self parentType ifNotNil: [ :e | e isStub ] ifNil: [ true ]

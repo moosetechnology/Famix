@@ -24,13 +24,15 @@
 
 "
 Trait {
-	#name : #FamixTWithStatements,
+	#name : 'FamixTWithStatements',
 	#traits : 'FamixTCanBeStub + FamixTWithAccesses + FamixTWithInvocations + FamixTWithReferences',
 	#classTraits : 'FamixTCanBeStub classTrait + FamixTWithAccesses classTrait + FamixTWithInvocations classTrait + FamixTWithReferences classTrait',
-	#category : #'Famix-Traits-Behavioral'
+	#category : 'Famix-Traits-Behavioral',
+	#package : 'Famix-Traits',
+	#tag : 'Behavioral'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTWithStatements classSide >> annotation [
 
 	<ignoreForCoverage>
@@ -39,12 +41,12 @@ FamixTWithStatements classSide >> annotation [
 	<generated>
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTWithStatements >> computeCyclomaticComplexity [
 	^ self notExistentMetricValue
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTWithStatements >> isBehavioural [
 
 	<ignoreForCoverage>
@@ -52,14 +54,14 @@ FamixTWithStatements >> isBehavioural [
 	^ true
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 FamixTWithStatements >> numberOfLinesOfDeadCode [
 
 	self deprecated: 'This method will be removed in the next version of Moose'.
 	^ self cacheAt: #numberOflinesOfDeadCode ifAbsentPut: [ self deadChildren sumNumbers: #numberOfLinesOfCode ]
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTWithStatements >> numberOfStatements [
 
 	<FMProperty: #numberOfStatements type: #Number>
@@ -67,12 +69,12 @@ FamixTWithStatements >> numberOfStatements [
 	^ self attributeAt: #numberOfStatements ifAbsent: [ self notExistentMetricValue ]
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTWithStatements >> numberOfStatements: aNumber [
 	self attributeAt: #numberOfStatements put: aNumber
 ]
 
-{ #category : #asserting }
+{ #category : 'asserting' }
 FamixTWithStatements >> shouldCountChildrenForLinesOfCodeIfNoSourceAnchor [
 	^ false
 ]

@@ -43,16 +43,18 @@ FamixTLabmda represents a behavioural entity that does not have a name. It can b
 
 "
 Trait {
-	#name : #FamixTLambda,
+	#name : 'FamixTLambda',
 	#instVars : [
 		'#lambdaContainer => FMOne type: #FamixTWithLambdas opposite: #lambdas'
 	],
 	#traits : 'FamixTHasSignature + FamixTInvocable + FamixTWithLocalVariables + FamixTWithParameters + FamixTWithStatements + TEntityMetaLevelDependency',
 	#classTraits : 'FamixTHasSignature classTrait + FamixTInvocable classTrait + FamixTWithLocalVariables classTrait + FamixTWithParameters classTrait + FamixTWithStatements classTrait + TEntityMetaLevelDependency classTrait',
-	#category : #'Famix-Traits-Lambda'
+	#category : 'Famix-Traits-Lambda',
+	#package : 'Famix-Traits',
+	#tag : 'Lambda'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTLambda classSide >> annotation [
 
 	<ignoreForCoverage>
@@ -61,7 +63,7 @@ FamixTLambda classSide >> annotation [
 	<generated>
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTLambda >> lambdaContainer [
 	"Relation named: #lambdaContainer type: #FamixTWithLambdas opposite: #lambdas"
 
@@ -72,7 +74,7 @@ FamixTLambda >> lambdaContainer [
 	^ lambdaContainer
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTLambda >> lambdaContainer: anObject [
 
 	<ignoreForCoverage>

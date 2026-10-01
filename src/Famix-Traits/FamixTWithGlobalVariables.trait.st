@@ -13,14 +13,16 @@ A container having Global variables
 
 "
 Trait {
-	#name : #FamixTWithGlobalVariables,
+	#name : 'FamixTWithGlobalVariables',
 	#instVars : [
 		'#globalVariables => FMMany type: #FamixTGlobalVariable opposite: #parentScope'
 	],
-	#category : #'Famix-Traits-GlobalVariable'
+	#category : 'Famix-Traits-GlobalVariable',
+	#package : 'Famix-Traits',
+	#tag : 'GlobalVariable'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTWithGlobalVariables classSide >> annotation [
 
 	<ignoreForCoverage>
@@ -29,7 +31,7 @@ FamixTWithGlobalVariables classSide >> annotation [
 	<generated>
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTWithGlobalVariables >> addGlobalVariable: anObject [
 
 	<ignoreForCoverage>
@@ -37,7 +39,7 @@ FamixTWithGlobalVariables >> addGlobalVariable: anObject [
 	^ self globalVariables add: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithGlobalVariables >> globalVariables [
 	"Relation named: #globalVariables type: #FamixTGlobalVariable opposite: #parentScope"
 
@@ -47,7 +49,7 @@ FamixTWithGlobalVariables >> globalVariables [
 	^ globalVariables
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithGlobalVariables >> globalVariables: anObject [
 
 	<ignoreForCoverage>

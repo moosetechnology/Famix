@@ -29,7 +29,7 @@ Instance Variables:
 
 "
 Trait {
-	#name : #FamixTAnnotationInstance,
+	#name : 'FamixTAnnotationInstance',
 	#instVars : [
 		'#annotatedEntity => FMOne type: #FamixTWithAnnotationInstances opposite: #annotationInstances',
 		'#annotationType => FMOne type: #FamixTAnnotationType opposite: #instances',
@@ -37,10 +37,12 @@ Trait {
 	],
 	#traits : 'TEntityMetaLevelDependency',
 	#classTraits : 'TEntityMetaLevelDependency classTrait',
-	#category : #'Famix-Traits-AnnotationInstance'
+	#category : 'Famix-Traits-AnnotationInstance',
+	#package : 'Famix-Traits',
+	#tag : 'AnnotationInstance'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTAnnotationInstance classSide >> annotation [
 
 	<ignoreForCoverage>
@@ -49,7 +51,7 @@ FamixTAnnotationInstance classSide >> annotation [
 	<generated>
 ]
 
-{ #category : #groups }
+{ #category : 'groups' }
 FamixTAnnotationInstance classSide >> annotationFamixAnnotationInstanceGroup [
 
 	<ignoreForCoverage>
@@ -58,7 +60,7 @@ FamixTAnnotationInstance classSide >> annotationFamixAnnotationInstanceGroup [
 	^ FamixAnnotationInstanceGroup
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTAnnotationInstance >> addAttribute: anObject [
 
 	<ignoreForCoverage>
@@ -66,7 +68,7 @@ FamixTAnnotationInstance >> addAttribute: anObject [
 	^ self attributes add: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAnnotationInstance >> annotatedEntity [
 	"Relation named: #annotatedEntity type: #FamixTWithAnnotationInstances opposite: #annotationInstances"
 
@@ -76,7 +78,7 @@ FamixTAnnotationInstance >> annotatedEntity [
 	^ annotatedEntity
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAnnotationInstance >> annotatedEntity: anObject [
 
 	<ignoreForCoverage>
@@ -84,7 +86,7 @@ FamixTAnnotationInstance >> annotatedEntity: anObject [
 	annotatedEntity := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAnnotationInstance >> annotationType [
 	"Relation named: #annotationType type: #FamixTAnnotationType opposite: #instances"
 
@@ -94,7 +96,7 @@ FamixTAnnotationInstance >> annotationType [
 	^ annotationType
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAnnotationInstance >> annotationType: anObject [
 
 	<ignoreForCoverage>
@@ -102,7 +104,7 @@ FamixTAnnotationInstance >> annotationType: anObject [
 	annotationType := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAnnotationInstance >> attributes [
 	"Relation named: #attributes type: #FamixTAnnotationInstanceAttribute opposite: #parentAnnotationInstance"
 
@@ -112,7 +114,7 @@ FamixTAnnotationInstance >> attributes [
 	^ attributes
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAnnotationInstance >> attributes: anObject [
 
 	<ignoreForCoverage>
@@ -120,7 +122,7 @@ FamixTAnnotationInstance >> attributes: anObject [
 	attributes value: anObject
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixTAnnotationInstance >> displayStringOn: aStream [
 
 	self annotationType displayStringOn: aStream.

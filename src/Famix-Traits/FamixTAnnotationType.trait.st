@@ -22,15 +22,17 @@ Instance Variables:
 
 "
 Trait {
-	#name : #FamixTAnnotationType,
+	#name : 'FamixTAnnotationType',
 	#instVars : [
 		'#annotationTypesContainer => FMOne type: #FamixTWithAnnotationTypes opposite: #definedAnnotationTypes',
 		'#instances => FMMany type: #FamixTAnnotationInstance opposite: #annotationType'
 	],
-	#category : #'Famix-Traits-AnnotationType'
+	#category : 'Famix-Traits-AnnotationType',
+	#package : 'Famix-Traits',
+	#tag : 'AnnotationType'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTAnnotationType classSide >> annotation [
 
 	<ignoreForCoverage>
@@ -39,7 +41,7 @@ FamixTAnnotationType classSide >> annotation [
 	<generated>
 ]
 
-{ #category : #groups }
+{ #category : 'groups' }
 FamixTAnnotationType classSide >> annotationFamixAnnotationTypeGroup [
 
 	<ignoreForCoverage>
@@ -48,14 +50,14 @@ FamixTAnnotationType classSide >> annotationFamixAnnotationTypeGroup [
 	^ FamixAnnotationTypeGroup
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAnnotationType >> addInstance: anObject [
 
 	instances add: anObject
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAnnotationType >> annotationTypesContainer [
 	"Relation named: #annotationTypesContainer type: #FamixTWithAnnotationTypes opposite: #definedAnnotationTypes"
 
@@ -66,7 +68,7 @@ FamixTAnnotationType >> annotationTypesContainer [
 	^ annotationTypesContainer
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAnnotationType >> annotationTypesContainer: anObject [
 
 	<ignoreForCoverage>
@@ -74,13 +76,13 @@ FamixTAnnotationType >> annotationTypesContainer: anObject [
 	annotationTypesContainer := anObject
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixTAnnotationType >> displayStringOn: aStream [
 
 	self name ifNotNil: [ :n | aStream << '@' << n ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAnnotationType >> instances [
 	"Relation named: #instances type: #FamixTAnnotationInstance opposite: #annotationType"
 
@@ -90,7 +92,7 @@ FamixTAnnotationType >> instances [
 	^ instances
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAnnotationType >> instances: anObject [
 
 	<ignoreForCoverage>
@@ -98,7 +100,7 @@ FamixTAnnotationType >> instances: anObject [
 	instances value: anObject
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixTAnnotationType >> mooseNameOn: aStream [
 	self annotationTypesContainer
 		ifNotNil: [ :parent | 

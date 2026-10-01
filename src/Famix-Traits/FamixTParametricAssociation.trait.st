@@ -13,14 +13,16 @@ An association that is linked to a ParameterConcretization
 
 "
 Trait {
-	#name : #FamixTParametricAssociation,
+	#name : 'FamixTParametricAssociation',
 	#instVars : [
 		'#concretizations => FMMany type: #FamixTConcretization opposite: #triggeringAssociation'
 	],
-	#category : #'Famix-Traits-Parametrics'
+	#category : 'Famix-Traits-Parametrics',
+	#package : 'Famix-Traits',
+	#tag : 'Parametrics'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTParametricAssociation classSide >> annotation [
 
 	<ignoreForCoverage>
@@ -29,7 +31,7 @@ FamixTParametricAssociation classSide >> annotation [
 	<generated>
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTParametricAssociation >> addConcretization: anObject [
 
 	<ignoreForCoverage>
@@ -37,7 +39,7 @@ FamixTParametricAssociation >> addConcretization: anObject [
 	^ self concretizations add: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTParametricAssociation >> concretizations [
 	"Relation named: #concretizations type: #FamixTConcretization opposite: #triggeringAssociation"
 
@@ -47,7 +49,7 @@ FamixTParametricAssociation >> concretizations [
 	^ concretizations
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTParametricAssociation >> concretizations: anObject [
 
 	<ignoreForCoverage>
@@ -55,7 +57,7 @@ FamixTParametricAssociation >> concretizations: anObject [
 	concretizations value: anObject
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTParametricAssociation >> isParametricAssociation [
 
 	<ignoreForCoverage>

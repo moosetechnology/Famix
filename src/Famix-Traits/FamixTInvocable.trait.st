@@ -1,4 +1,14 @@
 "
+It corresponds to the candidates of an invocation.
+FamixTInvocation has:
+   (i)  sender: the behavioral entity that sends the message;
+   (ii) receiver: the structural entity (variable) that receives the message;
+   (iii) candidates: the list of potential behavioral entities that are actually being invoked. This is particularly useful for dynamic languages.
+
+Candidates use the trait TInvocable.
+
+
+
 ## Relations
 ======================
 
@@ -11,14 +21,16 @@
 
 "
 Trait {
-	#name : #FamixTInvocable,
+	#name : 'FamixTInvocable',
 	#instVars : [
 		'#incomingInvocations => FMMany type: #FamixTInvocation opposite: #candidates'
 	],
-	#category : #'Famix-Traits-Invocation'
+	#category : 'Famix-Traits-Invocation',
+	#package : 'Famix-Traits',
+	#tag : 'Invocation'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTInvocable classSide >> annotation [
 
 	<ignoreForCoverage>
@@ -27,12 +39,12 @@ FamixTInvocable classSide >> annotation [
 	<generated>
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTInvocable >> addIncomingInvocation: anInvocation [
 	incomingInvocations add: anInvocation
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTInvocable >> incomingInvocations [
 	"Relation named: #incomingInvocations type: #FamixTInvocation opposite: #candidates"
 
@@ -42,7 +54,7 @@ FamixTInvocable >> incomingInvocations [
 	^ incomingInvocations
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTInvocable >> incomingInvocations: anObject [
 
 	<ignoreForCoverage>

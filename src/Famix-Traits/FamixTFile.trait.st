@@ -24,16 +24,18 @@ It represents a file in the file system.
 
 "
 Trait {
-	#name : #FamixTFile,
+	#name : 'FamixTFile',
 	#instVars : [
 		'#entities => FMMany type: #FamixTWithFiles opposite: #containerFiles'
 	],
 	#traits : 'FamixTFileSystemEntity',
 	#classTraits : 'FamixTFileSystemEntity classTrait',
-	#category : #'Famix-Traits-File'
+	#category : 'Famix-Traits-File',
+	#package : 'Famix-Traits',
+	#tag : 'File'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTFile classSide >> annotation [
 
 	<ignoreForCoverage>
@@ -42,7 +44,7 @@ FamixTFile classSide >> annotation [
 	<generated>
 ]
 
-{ #category : #groups }
+{ #category : 'groups' }
 FamixTFile classSide >> annotationFamixFileGroup [
 
 	<ignoreForCoverage>
@@ -51,12 +53,12 @@ FamixTFile classSide >> annotationFamixFileGroup [
 	^ FamixFileGroup
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTFile >> addEntity: famixEntity [
 	self entities add: famixEntity
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTFile >> averageNumberOfCharactersPerLine [
 
 	<FMProperty: #averageNumberOfCharactersPerLine type: #Number>
@@ -68,7 +70,7 @@ FamixTFile >> averageNumberOfCharactersPerLine [
 				  ifTrue: [ 0 ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTFile >> entities [
 	"Relation named: #entities type: #FamixTWithFiles opposite: #containerFiles"
 
@@ -78,7 +80,7 @@ FamixTFile >> entities [
 	^ entities
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTFile >> entities: anObject [
 
 	<ignoreForCoverage>
@@ -86,24 +88,24 @@ FamixTFile >> entities: anObject [
 	entities value: anObject
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTFile >> exists [
 	^ self fileExists 
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTFile >> fileExists [
 	self name ifNil: [ ^ false ].
 	^ self fileReference exists
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTFile >> ifFileExistsDo: aBlock [
 	self name ifNil: [ ^ aBlock value ].
 	^ self fileExists ifTrue: [ aBlock value ]
 ]
 
-{ #category : #properties }
+{ #category : 'properties' }
 FamixTFile >> numberOfBytes [
 
 	<FMProperty: #numberOfBytes type: #Number>
@@ -115,7 +117,7 @@ FamixTFile >> numberOfBytes [
 				  ifFalse: [ 0 ] ]
 ]
 
-{ #category : #properties }
+{ #category : 'properties' }
 FamixTFile >> numberOfCharacters [
 
 	<FMProperty: #numberOfCharacters type: #Number>
@@ -124,7 +126,7 @@ FamixTFile >> numberOfCharacters [
 	^ self cacheAt: #numberOfCharacters ifAbsentPut: [ self sourceText size ]
 ]
 
-{ #category : #properties }
+{ #category : 'properties' }
 FamixTFile >> numberOfEmptyLinesOfText [
 
 	<FMProperty: #numberOfEmptyLinesOfText type: #Number>
@@ -136,7 +138,7 @@ FamixTFile >> numberOfEmptyLinesOfText [
 				  ifFalse: [ 0 ] ]
 ]
 
-{ #category : #properties }
+{ #category : 'properties' }
 FamixTFile >> numberOfKiloBytes [
 
 	<FMProperty: #numberOfKiloBytes type: #Number>
@@ -145,12 +147,12 @@ FamixTFile >> numberOfKiloBytes [
 	^ self cacheAt: #numberOfKiloBytes ifAbsentPut: [ (self numberOfBytes / 1024) asFloat ]
 ]
 
-{ #category : #properties }
+{ #category : 'properties' }
 FamixTFile >> readStream [
 	^ self fileReference readStream
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTFile >> sourceText [
 
 	^ self cacheAt: #sourceText ifAbsentPut: [
@@ -159,13 +161,13 @@ FamixTFile >> sourceText [
 				  ifFalse: [ '' ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTFile >> sourceText: aString [
 
 	^ self cacheAt: #sourceText put: aString
 ]
 
-{ #category : #properties }
+{ #category : 'properties' }
 FamixTFile >> totalNumberOfLinesOfText [
 
 	<FMProperty: #totalNumberOfLinesOfText type: #Number>

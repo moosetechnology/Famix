@@ -1,9 +1,11 @@
 Trait {
-	#name : #FamixTLCOMMetrics,
-	#category : #'Famix-Traits-Support'
+	#name : 'FamixTLCOMMetrics',
+	#category : 'Famix-Traits-Support',
+	#package : 'Famix-Traits',
+	#tag : 'Support'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTLCOMMetrics classSide >> annotation [
 
 	<ignoreForCoverage>
@@ -12,7 +14,7 @@ FamixTLCOMMetrics classSide >> annotation [
 	<generated>
 ]
 
-{ #category : #'Famix-Extensions-metrics-support' }
+{ #category : 'Famix-Extensions-metrics-support' }
 FamixTLCOMMetrics >> calculateLCOM2 [
 	
 	"Definitions used for LCOM2 and LCOM3 m	number of procedures (methods) in class
@@ -37,7 +39,7 @@ FamixTLCOMMetrics >> calculateLCOM2 [
 	^ (1 - (sumMa / (m*a)))
 ]
 
-{ #category : #'Famix-Extensions-metrics-support' }
+{ #category : 'Famix-Extensions-metrics-support' }
 FamixTLCOMMetrics >> calculateLCOM3 [
 	
 	"Definitions used for LCOM2 and LCOM3 m	number of procedures (methods) in class
@@ -63,7 +65,7 @@ FamixTLCOMMetrics >> calculateLCOM3 [
 	^ (m - (sumMa/a)) / (m-1)
 ]
 
-{ #category : #'Famix-Extensions-metrics-support' }
+{ #category : 'Famix-Extensions-metrics-support' }
 FamixTLCOMMetrics >> lcom2 [
 
 	<FMProperty: #lcom2 type: #Number>
@@ -72,7 +74,7 @@ FamixTLCOMMetrics >> lcom2 [
 	^ self cacheAt: #lcom2 ifAbsentPut: [ self calculateLCOM2 ]
 ]
 
-{ #category : #'Famix-Extensions-metrics-support' }
+{ #category : 'Famix-Extensions-metrics-support' }
 FamixTLCOMMetrics >> lcom3 [
 
 	<FMProperty: #lcom3 type: #Number>

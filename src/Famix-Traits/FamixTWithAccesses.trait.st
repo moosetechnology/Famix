@@ -1,4 +1,6 @@
 "
+It corresponds to entities that can access to accessible entities (e.g., instance variables).
+
 ## Relations
 ======================
 
@@ -11,14 +13,16 @@
 
 "
 Trait {
-	#name : #FamixTWithAccesses,
+	#name : 'FamixTWithAccesses',
 	#instVars : [
 		'#accesses => FMMany type: #FamixTAccess opposite: #accessor'
 	],
-	#category : #'Famix-Traits-Access'
+	#category : 'Famix-Traits-Access',
+	#package : 'Famix-Traits',
+	#tag : 'Access'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTWithAccesses classSide >> annotation [
 
 	<ignoreForCoverage>
@@ -27,7 +31,7 @@ FamixTWithAccesses classSide >> annotation [
 	<generated>
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithAccesses >> accesses [
 	"Relation named: #accesses type: #FamixTAccess opposite: #accessor"
 
@@ -37,7 +41,7 @@ FamixTWithAccesses >> accesses [
 	^ accesses
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithAccesses >> accesses: anObject [
 
 	<ignoreForCoverage>
@@ -45,7 +49,7 @@ FamixTWithAccesses >> accesses: anObject [
 	accesses value: anObject
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTWithAccesses >> addAccess: anAccess [ 
 	accesses add: anAccess
 ]

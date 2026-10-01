@@ -1,4 +1,6 @@
 "
+It corresponds to entities that can contain types. An example is packages that can contain types such as classes, exceptions, or enumeration.
+
 ## Relations
 ======================
 
@@ -11,14 +13,16 @@
 
 "
 Trait {
-	#name : #FamixTWithTypes,
+	#name : 'FamixTWithTypes',
 	#instVars : [
 		'#types => FMMany type: #FamixTType opposite: #typeContainer'
 	],
-	#category : #'Famix-Traits-Type'
+	#category : 'Famix-Traits-Type',
+	#package : 'Famix-Traits',
+	#tag : 'Type'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTWithTypes classSide >> annotation [
 
 	<ignoreForCoverage>
@@ -27,12 +31,12 @@ FamixTWithTypes classSide >> annotation [
 	<generated>
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTWithTypes >> addType: aType [ 
 	types add: aType
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithTypes >> allRecursiveTypes [
 	"Retrieves all nested types recursively"
 	
@@ -42,7 +46,7 @@ FamixTWithTypes >> allRecursiveTypes [
 	^ result
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithTypes >> allRecursiveTypesDo: aBlock [
 	"Traverses all nested types recursively"
 
@@ -51,7 +55,7 @@ FamixTWithTypes >> allRecursiveTypesDo: aBlock [
 		each allRecursiveTypesDo: aBlock ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithTypes >> types [
 	"Relation named: #types type: #FamixTType opposite: #typeContainer"
 
@@ -62,7 +66,7 @@ FamixTWithTypes >> types [
 	^ types
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithTypes >> types: anObject [
 
 	<ignoreForCoverage>

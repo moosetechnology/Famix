@@ -1,4 +1,6 @@
 "
+Corresponds to C++ templates aka generics.
+
 ## Relations
 ======================
 
@@ -16,15 +18,17 @@
 
 "
 Trait {
-	#name : #FamixTTemplate,
+	#name : 'FamixTTemplate',
 	#instVars : [
 		'#templateOwner => FMOne type: #FamixTWithTemplates opposite: #templates',
 		'#templateUsers => FMMany type: #FamixTTemplateUser opposite: #template'
 	],
-	#category : #'Famix-Traits-Template'
+	#category : 'Famix-Traits-Template',
+	#package : 'Famix-Traits',
+	#tag : 'Template'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTTemplate classSide >> annotation [
 
 	<ignoreForCoverage>
@@ -33,14 +37,14 @@ FamixTTemplate classSide >> annotation [
 	<generated>
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTTemplate >> addTemplateUser: anObject [
 
 	templateUsers add: anObject
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTTemplate >> templateOwner [
 	"Relation named: #templateOwner type: #FamixTWithTemplates opposite: #templates"
 
@@ -50,7 +54,7 @@ FamixTTemplate >> templateOwner [
 	^ templateOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTTemplate >> templateOwner: anObject [
 
 	<ignoreForCoverage>
@@ -58,7 +62,7 @@ FamixTTemplate >> templateOwner: anObject [
 	templateOwner := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTTemplate >> templateUsers [
 	"Relation named: #templateUsers type: #FamixTTemplateUser opposite: #template"
 
@@ -67,7 +71,7 @@ FamixTTemplate >> templateUsers [
 	^ templateUsers
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTTemplate >> templateUsers: anObject [
 
 	<ignoreForCoverage>

@@ -8,14 +8,16 @@
 
 "
 Trait {
-	#name : #FamixTCanBeClassSide,
+	#name : 'FamixTCanBeClassSide',
 	#instVars : [
 		'#isClassSide => FMProperty defaultValue: false'
 	],
-	#category : #'Famix-Traits-PrimitiveProperties'
+	#category : 'Famix-Traits-PrimitiveProperties',
+	#package : 'Famix-Traits',
+	#tag : 'PrimitiveProperties'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTCanBeClassSide classSide >> annotation [
 
 	<ignoreForCoverage>
@@ -24,7 +26,7 @@ FamixTCanBeClassSide classSide >> annotation [
 	<generated>
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTCanBeClassSide >> isClassSide [
 
 	<FMProperty: #isClassSide type: #Boolean defaultValue: false>
@@ -34,7 +36,7 @@ FamixTCanBeClassSide >> isClassSide [
 	^ isClassSide ifNil: [ isClassSide := false ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTCanBeClassSide >> isClassSide: anObject [
 	<ignoreForCoverage>
 	<generated>

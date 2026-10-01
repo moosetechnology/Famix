@@ -14,17 +14,19 @@ I am a file anchor that saves the position of the source code in the file using 
 
 "
 Trait {
-	#name : #FamixTBytesFileAnchor,
+	#name : 'FamixTBytesFileAnchor',
 	#instVars : [
 		'#startByte => FMProperty',
 		'#endByte => FMProperty'
 	],
 	#traits : 'FamixTFileAnchor',
 	#classTraits : 'FamixTFileAnchor classTrait',
-	#category : #'Famix-Traits-SourceAnchor'
+	#category : 'Famix-Traits-SourceAnchor',
+	#package : 'Famix-Traits',
+	#tag : 'SourceAnchor'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTBytesFileAnchor classSide >> annotation [
 
 	<ignoreForCoverage>
@@ -33,7 +35,7 @@ FamixTBytesFileAnchor classSide >> annotation [
 	<generated>
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTBytesFileAnchor >> endByte [
 
 	<FMProperty: #endByte type: #Number>
@@ -43,25 +45,25 @@ FamixTBytesFileAnchor >> endByte [
 	^ endByte
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTBytesFileAnchor >> endByte: anObject [
 	<ignoreForCoverage>
 	<generated>
 	endByte := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTBytesFileAnchor >> endLine [
 	^ self cacheAt: #endLine ifAbsentPut: [ self completeText lineNumberCorrespondingToIndex: self endPos ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTBytesFileAnchor >> endPos [
 
 	^ self cacheAt: #endPos ifAbsentPut: [ self startPos + self sourceText size - 1 ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTBytesFileAnchor >> sourceText [
 
 	self sourcesAreReadable ifFalse: [ ^ '' ].
@@ -71,7 +73,7 @@ FamixTBytesFileAnchor >> sourceText [
 			  (in next: self endByte - (self startByte - 1)) decodeWith: self encoding ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTBytesFileAnchor >> startByte [
 
 	<FMProperty: #startByte type: #Number>
@@ -81,19 +83,19 @@ FamixTBytesFileAnchor >> startByte [
 	^ startByte
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTBytesFileAnchor >> startByte: anObject [
 	<ignoreForCoverage>
 	<generated>
 	startByte := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTBytesFileAnchor >> startLine [
 	^ self cacheAt: #startLine ifAbsentPut: [ self completeText lineNumberCorrespondingToIndex: self startPos ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTBytesFileAnchor >> startPos [
 
 	^ self

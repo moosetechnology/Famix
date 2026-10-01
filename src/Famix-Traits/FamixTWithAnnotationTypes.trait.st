@@ -1,4 +1,6 @@
 "
+It corresponds to entities that can be annotated with annotations.
+
 ## Relations
 ======================
 
@@ -11,14 +13,16 @@
 
 "
 Trait {
-	#name : #FamixTWithAnnotationTypes,
+	#name : 'FamixTWithAnnotationTypes',
 	#instVars : [
 		'#definedAnnotationTypes => FMMany type: #FamixTAnnotationType opposite: #annotationTypesContainer'
 	],
-	#category : #'Famix-Traits-AnnotationType'
+	#category : 'Famix-Traits-AnnotationType',
+	#package : 'Famix-Traits',
+	#tag : 'AnnotationType'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTWithAnnotationTypes classSide >> annotation [
 
 	<ignoreForCoverage>
@@ -27,13 +31,13 @@ FamixTWithAnnotationTypes classSide >> annotation [
 	<generated>
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithAnnotationTypes >> addDefinedAnnotationType: aDefinedAnnotationType [
 	definedAnnotationTypes add: aDefinedAnnotationType 
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithAnnotationTypes >> definedAnnotationTypes [
 	"Relation named: #definedAnnotationTypes type: #FamixTAnnotationType opposite: #annotationTypesContainer"
 
@@ -43,7 +47,7 @@ FamixTWithAnnotationTypes >> definedAnnotationTypes [
 	^ definedAnnotationTypes
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithAnnotationTypes >> definedAnnotationTypes: anObject [
 
 	<ignoreForCoverage>

@@ -1,4 +1,6 @@
 "
+It corresponds to entities that can include classes (e.g., packages and classes in some languages).
+
 ## Relations
 ======================
 
@@ -11,13 +13,15 @@
 
 "
 Trait {
-	#name : #FamixTWithClasses,
+	#name : 'FamixTWithClasses',
 	#traits : 'FamixTWithTypes',
 	#classTraits : 'FamixTWithTypes classTrait',
-	#category : #'Famix-Traits-Class'
+	#category : 'Famix-Traits-Class',
+	#package : 'Famix-Traits',
+	#tag : 'Class'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTWithClasses classSide >> annotation [
 
 	<ignoreForCoverage>
@@ -26,7 +30,7 @@ FamixTWithClasses classSide >> annotation [
 	<generated>
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithClasses >> classes [
 
 	<FMProperty: #classes type: #FamixTClass>
@@ -37,7 +41,7 @@ FamixTWithClasses >> classes [
 	^ self cacheAt: #classes ifAbsentPut: [ self types select: #isClass ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithClasses >> numberOfClasses [
 	<FMProperty: #numberOfClasses type: #Number>
 	<derived>

@@ -23,14 +23,16 @@ We found 3 solutions to manage this:
 
 "
 Trait {
-	#name : #FamixTReferenceable,
+	#name : 'FamixTReferenceable',
 	#instVars : [
 		'#incomingReferences => FMMany type: #FamixTReference opposite: #referredEntity'
 	],
-	#category : #'Famix-Traits-Reference'
+	#category : 'Famix-Traits-Reference',
+	#package : 'Famix-Traits',
+	#tag : 'Reference'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTReferenceable classSide >> annotation [
 
 	<ignoreForCoverage>
@@ -39,12 +41,12 @@ FamixTReferenceable classSide >> annotation [
 	<generated>
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTReferenceable >> addIncomingReference: aReference [ 
 	incomingReferences add: aReference
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTReferenceable >> incomingReferences [
 	"Relation named: #incomingReferences type: #FamixTReference opposite: #referredEntity"
 
@@ -54,7 +56,7 @@ FamixTReferenceable >> incomingReferences [
 	^ incomingReferences
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTReferenceable >> incomingReferences: anObject [
 
 	<ignoreForCoverage>

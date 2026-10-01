@@ -10,14 +10,16 @@ The signature of any behavioural entity
 
 "
 Trait {
-	#name : #FamixTHasSignature,
+	#name : 'FamixTHasSignature',
 	#instVars : [
 		'#signature => FMProperty'
 	],
-	#category : #'Famix-Traits-Behavioral'
+	#category : 'Famix-Traits-Behavioral',
+	#package : 'Famix-Traits',
+	#tag : 'Behavioral'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTHasSignature classSide >> annotation [
 
 	<ignoreForCoverage>
@@ -26,7 +28,7 @@ FamixTHasSignature classSide >> annotation [
 	<generated>
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTHasSignature >> signature [
 
 	<FMProperty: #signature type: #String>
@@ -36,7 +38,7 @@ FamixTHasSignature >> signature [
 	^ signature
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTHasSignature >> signature: anObject [
 	<ignoreForCoverage>
 	<generated>

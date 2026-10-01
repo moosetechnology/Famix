@@ -23,17 +23,19 @@
 
 "
 Trait {
-	#name : #FamixTEntityTyping,
+	#name : 'FamixTEntityTyping',
 	#instVars : [
 		'#declaredType => FMOne type: #FamixTType opposite: #incomingTypings',
 		'#typedEntity => FMOne type: #FamixTTypedEntity opposite: #typing'
 	],
 	#traits : 'FamixTAssociation',
 	#classTraits : 'FamixTAssociation classTrait',
-	#category : #'Famix-Traits-Type'
+	#category : 'Famix-Traits-Type',
+	#package : 'Famix-Traits',
+	#tag : 'Type'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTEntityTyping classSide >> annotation [
 
 	<ignoreForCoverage>
@@ -42,7 +44,7 @@ FamixTEntityTyping classSide >> annotation [
 	<generated>
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTEntityTyping >> declaredType [
 	"Relation named: #declaredType type: #FamixTType opposite: #incomingTypings"
 
@@ -53,7 +55,7 @@ FamixTEntityTyping >> declaredType [
 	^ declaredType
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTEntityTyping >> declaredType: anObject [
 
 	<ignoreForCoverage>
@@ -61,7 +63,7 @@ FamixTEntityTyping >> declaredType: anObject [
 	declaredType := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTEntityTyping >> typedEntity [
 	"Relation named: #typedEntity type: #FamixTTypedEntity opposite: #typing"
 
@@ -72,7 +74,7 @@ FamixTEntityTyping >> typedEntity [
 	^ typedEntity
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTEntityTyping >> typedEntity: anObject [
 
 	<ignoreForCoverage>

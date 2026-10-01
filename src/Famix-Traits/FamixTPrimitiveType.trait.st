@@ -29,13 +29,15 @@
 
 "
 Trait {
-	#name : #FamixTPrimitiveType,
+	#name : 'FamixTPrimitiveType',
 	#traits : 'FamixTType',
 	#classTraits : 'FamixTType classTrait',
-	#category : #'Famix-Traits-Type'
+	#category : 'Famix-Traits-Type',
+	#package : 'Famix-Traits',
+	#tag : 'Type'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTPrimitiveType classSide >> annotation [
 
 	<ignoreForCoverage>
@@ -44,7 +46,7 @@ FamixTPrimitiveType classSide >> annotation [
 	<generated>
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTPrimitiveType >> isPrimitiveType [
 
 	<ignoreForCoverage>

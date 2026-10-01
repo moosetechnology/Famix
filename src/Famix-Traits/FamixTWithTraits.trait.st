@@ -1,4 +1,6 @@
 "
+It corresponds to entities that can use traits.
+
 ## Relations
 ======================
 
@@ -11,14 +13,16 @@
 
 "
 Trait {
-	#name : #FamixTWithTraits,
+	#name : 'FamixTWithTraits',
 	#instVars : [
 		'#traits => FMMany type: #FamixTTrait opposite: #traitOwner'
 	],
-	#category : #'Famix-Traits-Trait'
+	#category : 'Famix-Traits-Trait',
+	#package : 'Famix-Traits',
+	#tag : 'Trait'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTWithTraits classSide >> annotation [
 
 	<ignoreForCoverage>
@@ -27,13 +31,13 @@ FamixTWithTraits classSide >> annotation [
 	<generated>
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithTraits >> addTrait: anObject [
 	traits add: anObject
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithTraits >> traits [
 	"Relation named: #traits type: #FamixTTrait opposite: #traitOwner"
 
@@ -42,7 +46,7 @@ FamixTWithTraits >> traits [
 	^ traits
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithTraits >> traits: anObject [
 
 	<ignoreForCoverage>

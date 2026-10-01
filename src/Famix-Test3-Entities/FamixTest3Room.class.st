@@ -19,18 +19,20 @@
 
 "
 Class {
-	#name : #FamixTest3Room,
-	#superclass : #FamixTest3Entity,
+	#name : 'FamixTest3Room',
+	#superclass : 'FamixTest3Entity',
 	#instVars : [
 		'#capacity => FMProperty defaultValue: 12',
 		'#hasWindows => FMProperty defaultValue: true',
 		'#purpose => FMProperty defaultValue: \'\'',
 		'#school => FMOne type: #FamixTest3School opposite: #rooms'
 	],
-	#category : #'Famix-Test3-Entities-Entities'
+	#category : 'Famix-Test3-Entities-Entities',
+	#package : 'Famix-Test3-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTest3Room class >> annotation [
 
 	<ignoreForCoverage>
@@ -39,7 +41,7 @@ FamixTest3Room class >> annotation [
 	<generated>
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest3Room >> capacity [
 
 	<FMProperty: #capacity type: #Number defaultValue: 12>
@@ -48,14 +50,14 @@ FamixTest3Room >> capacity [
 	^ capacity ifNil: [ capacity := 12 ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest3Room >> capacity: anObject [
 	<ignoreForCoverage>
 	<generated>
 	capacity := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest3Room >> hasWindows [
 
 	<FMProperty: #hasWindows type: #Boolean defaultValue: true>
@@ -64,14 +66,14 @@ FamixTest3Room >> hasWindows [
 	^ hasWindows ifNil: [ hasWindows := true ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest3Room >> hasWindows: anObject [
 	<ignoreForCoverage>
 	<generated>
 	hasWindows := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest3Room >> purpose [
 
 	<FMProperty: #purpose type: #String defaultValue: ''>
@@ -80,14 +82,14 @@ FamixTest3Room >> purpose [
 	^ purpose ifNil: [ purpose := '' ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest3Room >> purpose: anObject [
 	<ignoreForCoverage>
 	<generated>
 	purpose := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest3Room >> school [
 	"Relation named: #school type: #FamixTest3School opposite: #rooms"
 
@@ -97,7 +99,7 @@ FamixTest3Room >> school [
 	^ school
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest3Room >> school: anObject [
 
 	<ignoreForCoverage>

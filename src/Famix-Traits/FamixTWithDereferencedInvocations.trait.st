@@ -1,4 +1,6 @@
 "
+It corresponds to entities that can dereference invocations.
+
 ## Relations
 ======================
 
@@ -11,14 +13,16 @@
 
 "
 Trait {
-	#name : #FamixTWithDereferencedInvocations,
+	#name : 'FamixTWithDereferencedInvocations',
 	#instVars : [
 		'#dereferencedInvocations => FMMany type: #FamixTDereferencedInvocation opposite: #referencer'
 	],
-	#category : #'Famix-Traits-DereferencedInvocation'
+	#category : 'Famix-Traits-DereferencedInvocation',
+	#package : 'Famix-Traits',
+	#tag : 'DereferencedInvocation'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTWithDereferencedInvocations classSide >> annotation [
 
 	<ignoreForCoverage>
@@ -27,12 +31,12 @@ FamixTWithDereferencedInvocations classSide >> annotation [
 	<generated>
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithDereferencedInvocations >> addDereferencedInvocation: aDeferencedInvocation [
 	dereferencedInvocations add: aDeferencedInvocation 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithDereferencedInvocations >> dereferencedInvocations [
 	"Relation named: #dereferencedInvocations type: #FamixTDereferencedInvocation opposite: #referencer"
 
@@ -42,7 +46,7 @@ FamixTWithDereferencedInvocations >> dereferencedInvocations [
 	^ dereferencedInvocations
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithDereferencedInvocations >> dereferencedInvocations: anObject [
 
 	<ignoreForCoverage>

@@ -14,18 +14,20 @@
 
 "
 Class {
-	#name : #FamixTest3School,
-	#superclass : #FamixTest3Entity,
+	#name : 'FamixTest3School',
+	#superclass : 'FamixTest3Entity',
 	#instVars : [
 		'#principal => FMOne type: #FamixTest3Principal opposite: #school',
 		'#students => FMMany type: #FamixTest3Student opposite: #school',
 		'#teachers => FMMany type: #FamixTest3Teacher opposite: #school',
 		'#rooms => FMMany type: #FamixTest3Room opposite: #school'
 	],
-	#category : #'Famix-Test3-Entities-Entities'
+	#category : 'Famix-Test3-Entities-Entities',
+	#package : 'Famix-Test3-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTest3School class >> annotation [
 
 	<ignoreForCoverage>
@@ -34,7 +36,7 @@ FamixTest3School class >> annotation [
 	<generated>
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTest3School >> addRoom: anObject [
 
 	<ignoreForCoverage>
@@ -42,7 +44,7 @@ FamixTest3School >> addRoom: anObject [
 	^ self rooms add: anObject
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTest3School >> addStudent: anObject [
 
 	<ignoreForCoverage>
@@ -50,7 +52,7 @@ FamixTest3School >> addStudent: anObject [
 	^ self students add: anObject
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTest3School >> addTeacher: anObject [
 
 	<ignoreForCoverage>
@@ -58,7 +60,7 @@ FamixTest3School >> addTeacher: anObject [
 	^ self teachers add: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest3School >> principal [
 	"Relation named: #principal type: #FamixTest3Principal opposite: #school"
 
@@ -67,7 +69,7 @@ FamixTest3School >> principal [
 	^ principal
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest3School >> principal: anObject [
 
 	<ignoreForCoverage>
@@ -75,7 +77,7 @@ FamixTest3School >> principal: anObject [
 	principal := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest3School >> rooms [
 	"Relation named: #rooms type: #FamixTest3Room opposite: #school"
 
@@ -84,7 +86,7 @@ FamixTest3School >> rooms [
 	^ rooms
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest3School >> rooms: anObject [
 
 	<ignoreForCoverage>
@@ -92,7 +94,7 @@ FamixTest3School >> rooms: anObject [
 	rooms value: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest3School >> students [
 	"Relation named: #students type: #FamixTest3Student opposite: #school"
 
@@ -101,7 +103,7 @@ FamixTest3School >> students [
 	^ students
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest3School >> students: anObject [
 
 	<ignoreForCoverage>
@@ -109,7 +111,7 @@ FamixTest3School >> students: anObject [
 	students value: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest3School >> teachers [
 	"Relation named: #teachers type: #FamixTest3Teacher opposite: #school"
 
@@ -118,7 +120,7 @@ FamixTest3School >> teachers [
 	^ teachers
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest3School >> teachers: anObject [
 
 	<ignoreForCoverage>

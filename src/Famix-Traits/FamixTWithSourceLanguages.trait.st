@@ -1,4 +1,6 @@
 "
+It correspond to entities that contain information about the source language.
+
 ## Relations
 ======================
 
@@ -11,14 +13,16 @@
 
 "
 Trait {
-	#name : #FamixTWithSourceLanguages,
+	#name : 'FamixTWithSourceLanguages',
 	#instVars : [
 		'#declaredSourceLanguage => FMOne type: #FamixTSourceLanguage opposite: #sourcedEntities'
 	],
-	#category : #'Famix-Traits-SourceLanguage'
+	#category : 'Famix-Traits-SourceLanguage',
+	#package : 'Famix-Traits',
+	#tag : 'SourceLanguage'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTWithSourceLanguages classSide >> annotation [
 
 	<ignoreForCoverage>
@@ -27,7 +31,7 @@ FamixTWithSourceLanguages classSide >> annotation [
 	<generated>
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithSourceLanguages >> declaredSourceLanguage [
 	"Relation named: #declaredSourceLanguage type: #FamixTSourceLanguage opposite: #sourcedEntities"
 
@@ -37,7 +41,7 @@ FamixTWithSourceLanguages >> declaredSourceLanguage [
 	^ declaredSourceLanguage
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithSourceLanguages >> declaredSourceLanguage: anObject [
 
 	<ignoreForCoverage>
@@ -45,17 +49,17 @@ FamixTWithSourceLanguages >> declaredSourceLanguage: anObject [
 	declaredSourceLanguage := anObject
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTWithSourceLanguages >> isUnknown [
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithSourceLanguages >> sourceLanguage [
 	^ self sourceLanguageOr: self unknowSourceLanguageClass
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 FamixTWithSourceLanguages >> sourceLanguageOr: unknownSourceLanguageClass [
 	^ self declaredSourceLanguage ifNil: [
 		self mooseModel 
@@ -63,7 +67,7 @@ FamixTWithSourceLanguages >> sourceLanguageOr: unknownSourceLanguageClass [
 			ifNotNil: #sourceLanguage ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 FamixTWithSourceLanguages >> unknowSourceLanguageClass [
 	^ (self metadescription package
 		classNamed: 'UnknownSourceLanguage'

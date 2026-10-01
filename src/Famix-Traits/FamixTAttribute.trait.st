@@ -36,16 +36,18 @@ FamixTAttribute represents a field of a class. It is an attribute of the parent 
 
 "
 Trait {
-	#name : #FamixTAttribute,
+	#name : 'FamixTAttribute',
 	#instVars : [
 		'#parentType => FMOne type: #FamixTWithAttributes opposite: #attributes'
 	],
 	#traits : 'FamixTStructuralEntity',
 	#classTraits : 'FamixTStructuralEntity classTrait',
-	#category : #'Famix-Traits-Attribute'
+	#category : 'Famix-Traits-Attribute',
+	#package : 'Famix-Traits',
+	#tag : 'Attribute'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTAttribute classSide >> annotation [
 
 	<ignoreForCoverage>
@@ -54,14 +56,14 @@ FamixTAttribute classSide >> annotation [
 	<generated>
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 FamixTAttribute >> accessorMethods [
 
 	^ (self incomingAccesses collectAsSet: [ :each | each source ])
 		  select: [ :each | each isGetter or: [ each isSetter ] ]
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTAttribute >> hierarchyNestingLevel [
 
 	<FMProperty: #hierarchyNestingLevel type: #Number>
@@ -70,12 +72,12 @@ FamixTAttribute >> hierarchyNestingLevel [
 	^ self cacheAt: #hierarchyNestingLevel ifAbsent: [ self parentType hierarchyNestingLevel ]
 ]
 
-{ #category : #metrics }
+{ #category : 'metrics' }
 FamixTAttribute >> hierarchyNestingLevel: aNumber [
 	self cacheAt: #hierarchyNestingLevel put: aNumber
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTAttribute >> isAttribute [
 
 	<ignoreForCoverage>
@@ -83,7 +85,7 @@ FamixTAttribute >> isAttribute [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTAttribute >> isDead [
 
 	"If it is only accessed by accessors and its accessors are not called"
@@ -91,7 +93,7 @@ FamixTAttribute >> isDead [
 		  and: [ self accessorMethods allSatisfy: #isDead ]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixTAttribute >> mooseNameOn: aStream [
 	self parentType
 		ifNotNil: [ :parent | 
@@ -100,7 +102,7 @@ FamixTAttribute >> mooseNameOn: aStream [
 	self name ifNotNil: [ aStream nextPutAll: self name ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAttribute >> parentType [
 	"Relation named: #parentType type: #FamixTWithAttributes opposite: #attributes"
 
@@ -111,7 +113,7 @@ FamixTAttribute >> parentType [
 	^ parentType
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAttribute >> parentType: anObject [
 
 	parentType := anObject.
@@ -119,7 +121,7 @@ FamixTAttribute >> parentType: anObject [
 
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixTAttribute >> printOn: aStream [
 	self parentType
 		ifNotNil: [ :parent | 

@@ -32,7 +32,7 @@ Instance Variables:
 
 "
 Trait {
-	#name : #FamixTAnnotationInstanceAttribute,
+	#name : 'FamixTAnnotationInstanceAttribute',
 	#instVars : [
 		'#annotationTypeAttribute => FMOne type: #FamixTAnnotationTypeAttribute opposite: #annotationAttributeInstances',
 		'#parentAnnotationInstance => FMOne type: #FamixTAnnotationInstance opposite: #attributes',
@@ -40,10 +40,12 @@ Trait {
 	],
 	#traits : 'TEntityMetaLevelDependency',
 	#classTraits : 'TEntityMetaLevelDependency classTrait',
-	#category : #'Famix-Traits-AnnotationInstanceAttribute'
+	#category : 'Famix-Traits-AnnotationInstanceAttribute',
+	#package : 'Famix-Traits',
+	#tag : 'AnnotationInstanceAttribute'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTAnnotationInstanceAttribute classSide >> annotation [
 
 	<ignoreForCoverage>
@@ -52,7 +54,7 @@ FamixTAnnotationInstanceAttribute classSide >> annotation [
 	<generated>
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAnnotationInstanceAttribute >> annotationTypeAttribute [
 	"Relation named: #annotationTypeAttribute type: #FamixTAnnotationTypeAttribute opposite: #annotationAttributeInstances"
 
@@ -62,7 +64,7 @@ FamixTAnnotationInstanceAttribute >> annotationTypeAttribute [
 	^ annotationTypeAttribute
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAnnotationInstanceAttribute >> annotationTypeAttribute: anObject [
 
 	<ignoreForCoverage>
@@ -70,7 +72,7 @@ FamixTAnnotationInstanceAttribute >> annotationTypeAttribute: anObject [
 	annotationTypeAttribute := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAnnotationInstanceAttribute >> parentAnnotationInstance [
 	"Relation named: #parentAnnotationInstance type: #FamixTAnnotationInstance opposite: #attributes"
 
@@ -81,7 +83,7 @@ FamixTAnnotationInstanceAttribute >> parentAnnotationInstance [
 	^ parentAnnotationInstance
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAnnotationInstanceAttribute >> parentAnnotationInstance: anObject [
 
 	<ignoreForCoverage>
@@ -89,7 +91,7 @@ FamixTAnnotationInstanceAttribute >> parentAnnotationInstance: anObject [
 	parentAnnotationInstance := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAnnotationInstanceAttribute >> value [
 
 	<FMProperty: #value type: #Object>
@@ -99,7 +101,7 @@ FamixTAnnotationInstanceAttribute >> value [
 	^ value
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAnnotationInstanceAttribute >> value: anObject [
 	<ignoreForCoverage>
 	<generated>

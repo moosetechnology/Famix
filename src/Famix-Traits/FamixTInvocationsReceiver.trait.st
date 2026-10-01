@@ -1,4 +1,12 @@
 "
+It corresponds to the entity that can be the receiver of an invocation.
+FamixTInvocation has:
+   (i)  sender: the behavioral entity that sends the message;
+   (ii) receiver: the structural entity (variable) that receives the message;
+   (iii) candidates: the list of potential behavioral entities that are actually being invoked. This is particularly useful for dynamic languages.
+
+
+
 ## Relations
 ======================
 
@@ -11,14 +19,16 @@
 
 "
 Trait {
-	#name : #FamixTInvocationsReceiver,
+	#name : 'FamixTInvocationsReceiver',
 	#instVars : [
 		'#receivingInvocations => FMMany type: #FamixTInvocation opposite: #receiver'
 	],
-	#category : #'Famix-Traits-Invocation'
+	#category : 'Famix-Traits-Invocation',
+	#package : 'Famix-Traits',
+	#tag : 'Invocation'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTInvocationsReceiver classSide >> annotation [
 
 	<ignoreForCoverage>
@@ -27,12 +37,12 @@ FamixTInvocationsReceiver classSide >> annotation [
 	<generated>
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTInvocationsReceiver >> addReceivingInvocation: anInvocation [
 	receivingInvocations add: anInvocation
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTInvocationsReceiver >> receivingInvocations [
 	"Relation named: #receivingInvocations type: #FamixTInvocation opposite: #receiver"
 
@@ -42,7 +52,7 @@ FamixTInvocationsReceiver >> receivingInvocations [
 	^ receivingInvocations
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTInvocationsReceiver >> receivingInvocations: anObject [
 
 	<ignoreForCoverage>

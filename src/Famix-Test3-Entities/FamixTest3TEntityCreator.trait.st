@@ -5,11 +5,13 @@ It provides an API for creating entities and adding them to the model.
 
 "
 Trait {
-	#name : #FamixTest3TEntityCreator,
-	#category : #'Famix-Test3-Entities-Model'
+	#name : 'FamixTest3TEntityCreator',
+	#category : 'Famix-Test3-Entities-Model',
+	#package : 'Famix-Test3-Entities',
+	#tag : 'Model'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTest3TEntityCreator classSide >> annotation [
 
 	<ignoreForCoverage>
@@ -18,7 +20,7 @@ FamixTest3TEntityCreator classSide >> annotation [
 	<generated>
 ]
 
-{ #category : #'entity creation' }
+{ #category : 'entity creation' }
 FamixTest3TEntityCreator >> newBook [
 
 	<ignoreForCoverage>
@@ -26,7 +28,7 @@ FamixTest3TEntityCreator >> newBook [
 	^ self add: FamixTest3Book new
 ]
 
-{ #category : #'entity creation' }
+{ #category : 'entity creation' }
 FamixTest3TEntityCreator >> newCafeteria [
 
 	<ignoreForCoverage>
@@ -34,7 +36,7 @@ FamixTest3TEntityCreator >> newCafeteria [
 	^ self add: FamixTest3Cafeteria new
 ]
 
-{ #category : #'entity creation' }
+{ #category : 'entity creation' }
 FamixTest3TEntityCreator >> newClassSession [
 
 	<ignoreForCoverage>
@@ -42,7 +44,7 @@ FamixTest3TEntityCreator >> newClassSession [
 	^ self add: FamixTest3ClassSession new
 ]
 
-{ #category : #'entity creation' }
+{ #category : 'entity creation' }
 FamixTest3TEntityCreator >> newClassroom [
 
 	<ignoreForCoverage>
@@ -50,7 +52,7 @@ FamixTest3TEntityCreator >> newClassroom [
 	^ self add: FamixTest3Classroom new
 ]
 
-{ #category : #'entity creation' }
+{ #category : 'entity creation' }
 FamixTest3TEntityCreator >> newComputer [
 
 	<ignoreForCoverage>
@@ -58,7 +60,7 @@ FamixTest3TEntityCreator >> newComputer [
 	^ self add: FamixTest3Computer new
 ]
 
-{ #category : #'entity creation' }
+{ #category : 'entity creation' }
 FamixTest3TEntityCreator >> newPrincipal [
 
 	<ignoreForCoverage>
@@ -66,7 +68,7 @@ FamixTest3TEntityCreator >> newPrincipal [
 	^ self add: FamixTest3Principal new
 ]
 
-{ #category : #'entity creation' }
+{ #category : 'entity creation' }
 FamixTest3TEntityCreator >> newRoom [
 
 	<ignoreForCoverage>
@@ -74,7 +76,7 @@ FamixTest3TEntityCreator >> newRoom [
 	^ self add: FamixTest3Room new
 ]
 
-{ #category : #'entity creation' }
+{ #category : 'entity creation' }
 FamixTest3TEntityCreator >> newSchool [
 
 	<ignoreForCoverage>
@@ -82,7 +84,7 @@ FamixTest3TEntityCreator >> newSchool [
 	^ self add: FamixTest3School new
 ]
 
-{ #category : #'entity creation' }
+{ #category : 'entity creation' }
 FamixTest3TEntityCreator >> newStudent [
 
 	<ignoreForCoverage>
@@ -90,7 +92,7 @@ FamixTest3TEntityCreator >> newStudent [
 	^ self add: FamixTest3Student new
 ]
 
-{ #category : #'entity creation' }
+{ #category : 'entity creation' }
 FamixTest3TEntityCreator >> newTeacher [
 
 	<ignoreForCoverage>

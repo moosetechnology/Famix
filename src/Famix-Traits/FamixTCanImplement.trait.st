@@ -13,14 +13,16 @@ I can be the source of an implementation (cf a class implementing an Interface)
 
 "
 Trait {
-	#name : #FamixTCanImplement,
+	#name : 'FamixTCanImplement',
 	#instVars : [
 		'#interfaceImplementations => FMMany type: #FamixTImplementation opposite: #implementingClass'
 	],
-	#category : #'Famix-Traits-Implementation'
+	#category : 'Famix-Traits-Implementation',
+	#package : 'Famix-Traits',
+	#tag : 'Implementation'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTCanImplement classSide >> annotation [
 
 	<ignoreForCoverage>
@@ -29,7 +31,7 @@ FamixTCanImplement classSide >> annotation [
 	<generated>
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTCanImplement >> addInterfaceImplementation: anObject [
 
 	<ignoreForCoverage>
@@ -37,7 +39,7 @@ FamixTCanImplement >> addInterfaceImplementation: anObject [
 	^ self interfaceImplementations add: anObject
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 FamixTCanImplement >> allImplementedInterfaces [
 	"runs aBlock on all implemented interfaces and the interfaces they inherit"
 
@@ -49,7 +51,7 @@ FamixTCanImplement >> allImplementedInterfaces [
 	^implementedInterfaces 
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 FamixTCanImplement >> allImplementedInterfacesDo: aBlock [
 	"runs aBlock on all implemented interfaces and the interfaces they inherit"
 
@@ -58,14 +60,14 @@ FamixTCanImplement >> allImplementedInterfacesDo: aBlock [
 			implementation interface allSuperclassesDo: aBlock ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTCanImplement >> directImplementedInterfaces [
 
 	^ self interfaceImplementations collect: [ :implementation |
 		  implementation interface ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTCanImplement >> interfaceImplementations [
 	"Relation named: #interfaceImplementations type: #FamixTImplementation opposite: #implementingClass"
 
@@ -75,7 +77,7 @@ FamixTCanImplement >> interfaceImplementations [
 	^ interfaceImplementations
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTCanImplement >> interfaceImplementations: anObject [
 
 	<ignoreForCoverage>

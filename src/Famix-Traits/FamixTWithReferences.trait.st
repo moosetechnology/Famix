@@ -1,4 +1,6 @@
 "
+It corresponds to entities that can contain references to other entities.
+
 ## Relations
 ======================
 
@@ -11,14 +13,16 @@
 
 "
 Trait {
-	#name : #FamixTWithReferences,
+	#name : 'FamixTWithReferences',
 	#instVars : [
 		'#outgoingReferences => FMMany type: #FamixTReference opposite: #referencer'
 	],
-	#category : #'Famix-Traits-Reference'
+	#category : 'Famix-Traits-Reference',
+	#package : 'Famix-Traits',
+	#tag : 'Reference'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTWithReferences classSide >> annotation [
 
 	<ignoreForCoverage>
@@ -27,12 +31,12 @@ FamixTWithReferences classSide >> annotation [
 	<generated>
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithReferences >> addOutgoingReference: aReference [ 
 	outgoingReferences add: aReference
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithReferences >> outgoingReferences [
 	"Relation named: #outgoingReferences type: #FamixTReference opposite: #referencer"
 
@@ -42,7 +46,7 @@ FamixTWithReferences >> outgoingReferences [
 	^ outgoingReferences
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithReferences >> outgoingReferences: anObject [
 
 	<ignoreForCoverage>

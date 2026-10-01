@@ -1,4 +1,12 @@
 "
+It corresponds to the target of an access.
+For example if the method foo accesses the instance variable x, there is an access with the following information:
+	(i) From: aFamixTMethod (foo)
+	(ii) To: aFamixTAttribute (x)
+	
+The variable x is accessible (FamixTAttribute uses FamixTAccessible).
+	
+
 ## Relations
 ======================
 
@@ -11,14 +19,16 @@
 
 "
 Trait {
-	#name : #FamixTAccessible,
+	#name : 'FamixTAccessible',
 	#instVars : [
 		'#incomingAccesses => FMMany type: #FamixTAccess opposite: #candidates'
 	],
-	#category : #'Famix-Traits-Access'
+	#category : 'Famix-Traits-Access',
+	#package : 'Famix-Traits',
+	#tag : 'Access'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTAccessible classSide >> annotation [
 
 	<ignoreForCoverage>
@@ -27,20 +37,20 @@ FamixTAccessible classSide >> annotation [
 	<generated>
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAccessible >> accessingClasses [
 
 	^(self accessingMethods collectAsSet: [:each | each belongsTo]) asOrderedCollection
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAccessible >> accessingMethods [
 
 	^ self incomingAccesses collectAsSet: [:anAccess | anAccess accessor].
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAccessible >> accessors [
 	<FMProperty: #accessors type: #FamixTWithAccesses>
 	<multivalued>
@@ -48,12 +58,12 @@ FamixTAccessible >> accessors [
 	^ (self incomingAccesses collectAsSet: [ :each | each accessor ]) asMooseGroup
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTAccessible >> addIncomingAccess: anAccess [
 	incomingAccesses add: anAccess
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAccessible >> globalAccesses [
 	| attrclass globalAccesses |
 	attrclass := self belongsTo.
@@ -67,7 +77,7 @@ FamixTAccessible >> globalAccesses [
 	^globalAccesses
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAccessible >> incomingAccesses [
 	"Relation named: #incomingAccesses type: #FamixTAccess opposite: #candidates"
 
@@ -77,7 +87,7 @@ FamixTAccessible >> incomingAccesses [
 	^ incomingAccesses
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAccessible >> incomingAccesses: anObject [
 
 	<ignoreForCoverage>
@@ -85,7 +95,7 @@ FamixTAccessible >> incomingAccesses: anObject [
 	incomingAccesses value: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAccessible >> localAccesses [
 	| attrclass localAccesses |
 	attrclass := self belongsTo.
@@ -99,7 +109,7 @@ FamixTAccessible >> localAccesses [
 	^localAccesses
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAccessible >> numberOfAccesses [
 
 	<FMProperty: #numberOfAccesses type: #Number>
@@ -108,7 +118,7 @@ FamixTAccessible >> numberOfAccesses [
 	^ self cacheAt: #numberOfAccesses ifAbsent: [ self incomingAccesses size ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAccessible >> numberOfAccessingClasses [
 
 	<FMProperty: #numberOfAccessingClasses type: #Number>
@@ -117,7 +127,7 @@ FamixTAccessible >> numberOfAccessingClasses [
 	^ self cacheAt: #numberOfAccessingClasses ifAbsent: [ self accessingClasses size ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAccessible >> numberOfAccessingMethods [
 
 	<FMProperty: #numberOfAccessingMethods type: #Number>
@@ -126,7 +136,7 @@ FamixTAccessible >> numberOfAccessingMethods [
 	^ self cacheAt: #numberOfAccessingMethods ifAbsent: [ self accessingMethods size ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAccessible >> numberOfGlobalAccesses [
 
 	<FMProperty: #numberOfGlobalAccesses type: #Number>
@@ -135,7 +145,7 @@ FamixTAccessible >> numberOfGlobalAccesses [
 	^ self cacheAt: #numberOfGlobalAccesses ifAbsent: [ self globalAccesses size ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAccessible >> numberOfLocalAccesses [
 
 	<FMProperty: #numberOfLocalAccesses type: #Number>
@@ -144,7 +154,7 @@ FamixTAccessible >> numberOfLocalAccesses [
 	^ self cacheAt: #numberOfLocalAccesses ifAbsent: [ self localAccesses size ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAccessible >> readAccesses [
 	
 	^self incomingAccesses select: [:each | each isRead]

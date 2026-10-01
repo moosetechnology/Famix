@@ -23,18 +23,20 @@
 
 "
 Class {
-	#name : #FamixTest3ClassSession,
-	#superclass : #FamixTest3Entity,
+	#name : 'FamixTest3ClassSession',
+	#superclass : 'FamixTest3Entity',
 	#traits : 'FamixTAssociation',
 	#classTraits : 'FamixTAssociation classTrait',
 	#instVars : [
 		'#classroom => FMOne type: #FamixTest3TClassroom opposite: #incomingClassSessions',
 		'#teacher => FMOne type: #FamixTest3TTeacher opposite: #outgoingClassSessions'
 	],
-	#category : #'Famix-Test3-Entities-Entities'
+	#category : 'Famix-Test3-Entities-Entities',
+	#package : 'Famix-Test3-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTest3ClassSession class >> annotation [
 
 	<ignoreForCoverage>
@@ -43,7 +45,7 @@ FamixTest3ClassSession class >> annotation [
 	<generated>
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest3ClassSession >> classroom [
 	"Relation named: #classroom type: #FamixTest3TClassroom opposite: #incomingClassSessions"
 
@@ -53,7 +55,7 @@ FamixTest3ClassSession >> classroom [
 	^ classroom
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest3ClassSession >> classroom: anObject [
 
 	<ignoreForCoverage>
@@ -61,7 +63,7 @@ FamixTest3ClassSession >> classroom: anObject [
 	classroom := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest3ClassSession >> teacher [
 	"Relation named: #teacher type: #FamixTest3TTeacher opposite: #outgoingClassSessions"
 
@@ -71,7 +73,7 @@ FamixTest3ClassSession >> teacher [
 	^ teacher
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest3ClassSession >> teacher: anObject [
 
 	<ignoreForCoverage>

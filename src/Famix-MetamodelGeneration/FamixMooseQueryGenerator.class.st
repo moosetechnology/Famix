@@ -1,26 +1,27 @@
 Class {
-	#name : #FamixMooseQueryGenerator,
-	#superclass : #FamixMetamodelGenerator,
+	#name : 'FamixMooseQueryGenerator',
+	#superclass : 'FamixMetamodelGenerator',
 	#instVars : [
 		'tAssociationMetaLevelDependency',
 		'tEntityMetaLevelDependency'
 	],
-	#category : #'Famix-MetamodelGeneration'
+	#category : 'Famix-MetamodelGeneration',
+	#package : 'Famix-MetamodelGeneration'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMooseQueryGenerator class >> packageName [
 
 	^ #'Moose-Query'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixMooseQueryGenerator class >> prefix [
 
 	^ ''
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FamixMooseQueryGenerator >> defineTraits [
 
 	tAssociationMetaLevelDependency := builder newTraitNamed: #TAssociationMetaLevelDependency.

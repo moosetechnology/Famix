@@ -42,7 +42,7 @@ For each access in the source code, there is one famix access created even if it
 
 "
 Trait {
-	#name : #FamixTAccess,
+	#name : 'FamixTAccess',
 	#instVars : [
 		'#accessor => FMOne type: #FamixTWithAccesses opposite: #accesses',
 		'#candidates => FMMany type: #FamixTAccessible opposite: #incomingAccesses',
@@ -50,10 +50,12 @@ Trait {
 	],
 	#traits : 'FamixTAssociation',
 	#classTraits : 'FamixTAssociation classTrait',
-	#category : #'Famix-Traits-Access'
+	#category : 'Famix-Traits-Access',
+	#package : 'Famix-Traits',
+	#tag : 'Access'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTAccess classSide >> annotation [
 
 	<ignoreForCoverage>
@@ -62,7 +64,7 @@ FamixTAccess classSide >> annotation [
 	<generated>
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAccess >> accessor [
 	"Relation named: #accessor type: #FamixTWithAccesses opposite: #accesses"
 
@@ -73,7 +75,7 @@ FamixTAccess >> accessor [
 	^ accessor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAccess >> accessor: anObject [
 
 	<ignoreForCoverage>
@@ -81,7 +83,7 @@ FamixTAccess >> accessor: anObject [
 	accessor := anObject
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTAccess >> addCandidate: anObject [
 
 	<ignoreForCoverage>
@@ -89,7 +91,7 @@ FamixTAccess >> addCandidate: anObject [
 	^ self candidates add: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAccess >> candidates [
 	"Relation named: #candidates type: #FamixTAccessible opposite: #incomingAccesses"
 
@@ -100,7 +102,7 @@ FamixTAccess >> candidates [
 	^ candidates
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAccess >> candidates: anObject [
 
 	<ignoreForCoverage>
@@ -108,7 +110,7 @@ FamixTAccess >> candidates: anObject [
 	candidates value: anObject
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixTAccess >> displayFullStringOn: aStream [
 
 	self source displayFullStringOn: aStream.
@@ -118,7 +120,7 @@ FamixTAccess >> displayFullStringOn: aStream [
 		 ifFalse: [ self candidates ]) displayStringOn: aStream
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixTAccess >> displayStringOn: aStream [
 
 	(self candidates size = 1
@@ -128,7 +130,7 @@ FamixTAccess >> displayStringOn: aStream [
 	accessor displayStringOn: aStream
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTAccess >> isAccess [
 
 	<ignoreForCoverage>
@@ -136,7 +138,7 @@ FamixTAccess >> isAccess [
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAccess >> isRead [
 	<FMProperty: #isRead type: #Boolean>
 	<derived>
@@ -144,7 +146,7 @@ FamixTAccess >> isRead [
 	^ isWrite ifNil: [ false ] ifNotNil: [ isWrite not ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAccess >> isReadWriteUnknown [
 	<FMProperty: #isReadWriteUnknown type: #Boolean> <derived>
 	<FMComment: ''>
@@ -152,7 +154,7 @@ FamixTAccess >> isReadWriteUnknown [
 	^ isWrite isNil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAccess >> isWrite [
 
 	<FMProperty: #isWrite type: #Boolean>
@@ -160,20 +162,20 @@ FamixTAccess >> isWrite [
 	^ isWrite ifNil: [ false ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAccess >> isWrite: anObject [
 	<ignoreForCoverage>
 	<generated>
 	isWrite := anObject
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixTAccess >> printOn: aStream [
 	super printOn: aStream.
 	aStream nextPutAll: ' (Access)'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAccess >> target: aTarget [
 
 	aTarget isCollection
@@ -181,7 +183,7 @@ FamixTAccess >> target: aTarget [
 		ifFalse: [ self variable: aTarget ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAccess >> variable [
 	"This method returns only one candidate if there is one, or raises an error if there is more or less than one candidate."
 
@@ -191,7 +193,7 @@ FamixTAccess >> variable [
 	^ self candidates anyOne
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAccess >> variable: anEntity [
 
 	^ self candidates: { anEntity }

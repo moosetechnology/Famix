@@ -1,4 +1,6 @@
 "
+It corresponds to entities that can manipulate exceptions (catch, throw, etc.).
+
 ## Relations
 ======================
 
@@ -13,16 +15,18 @@
 
 "
 Trait {
-	#name : #FamixTWithExceptions,
+	#name : 'FamixTWithExceptions',
 	#instVars : [
 		'#caughtExceptions => FMMany type: #FamixTThrowable opposite: #catchingEntities',
 		'#declaredExceptions => FMMany type: #FamixTThrowable opposite: #declaringEntities',
 		'#thrownExceptions => FMMany type: #FamixTThrowable opposite: #throwingEntities'
 	],
-	#category : #'Famix-Traits-Exception'
+	#category : 'Famix-Traits-Exception',
+	#package : 'Famix-Traits',
+	#tag : 'Exception'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTWithExceptions classSide >> annotation [
 
 	<ignoreForCoverage>
@@ -31,7 +35,7 @@ FamixTWithExceptions classSide >> annotation [
 	<generated>
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTWithExceptions >> addCaughtException: anObject [
 
 	<ignoreForCoverage>
@@ -39,7 +43,7 @@ FamixTWithExceptions >> addCaughtException: anObject [
 	^ self caughtExceptions add: anObject
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTWithExceptions >> addDeclaredException: anObject [
 
 	<ignoreForCoverage>
@@ -47,7 +51,7 @@ FamixTWithExceptions >> addDeclaredException: anObject [
 	^ self declaredExceptions add: anObject
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTWithExceptions >> addThrownException: anObject [
 
 	<ignoreForCoverage>
@@ -55,7 +59,7 @@ FamixTWithExceptions >> addThrownException: anObject [
 	^ self thrownExceptions add: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithExceptions >> allExceptions [
 
 	<derived>
@@ -64,7 +68,7 @@ FamixTWithExceptions >> allExceptions [
 		  asMooseGroup
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithExceptions >> caughtExceptions [
 	"Relation named: #caughtExceptions type: #FamixTThrowable opposite: #catchingEntities"
 
@@ -74,7 +78,7 @@ FamixTWithExceptions >> caughtExceptions [
 	^ caughtExceptions
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithExceptions >> caughtExceptions: anObject [
 
 	<ignoreForCoverage>
@@ -82,7 +86,7 @@ FamixTWithExceptions >> caughtExceptions: anObject [
 	caughtExceptions value: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithExceptions >> declaredExceptions [
 	"Relation named: #declaredExceptions type: #FamixTThrowable opposite: #declaringEntities"
 
@@ -92,7 +96,7 @@ FamixTWithExceptions >> declaredExceptions [
 	^ declaredExceptions
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithExceptions >> declaredExceptions: anObject [
 
 	<ignoreForCoverage>
@@ -100,7 +104,7 @@ FamixTWithExceptions >> declaredExceptions: anObject [
 	declaredExceptions value: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithExceptions >> thrownExceptions [
 	"Relation named: #thrownExceptions type: #FamixTThrowable opposite: #throwingEntities"
 
@@ -110,7 +114,7 @@ FamixTWithExceptions >> thrownExceptions [
 	^ thrownExceptions
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithExceptions >> thrownExceptions: anObject [
 
 	<ignoreForCoverage>

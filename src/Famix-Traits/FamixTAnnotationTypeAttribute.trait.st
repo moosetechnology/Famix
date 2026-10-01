@@ -51,16 +51,18 @@ Instance Variables:
 
 "
 Trait {
-	#name : #FamixTAnnotationTypeAttribute,
+	#name : 'FamixTAnnotationTypeAttribute',
 	#instVars : [
 		'#annotationAttributeInstances => FMMany type: #FamixTAnnotationInstanceAttribute opposite: #annotationTypeAttribute'
 	],
 	#traits : 'FamixTAttribute',
 	#classTraits : 'FamixTAttribute classTrait',
-	#category : #'Famix-Traits-AnnotationTypeAttribute'
+	#category : 'Famix-Traits-AnnotationTypeAttribute',
+	#package : 'Famix-Traits',
+	#tag : 'AnnotationTypeAttribute'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTAnnotationTypeAttribute classSide >> annotation [
 
 	<ignoreForCoverage>
@@ -69,13 +71,13 @@ FamixTAnnotationTypeAttribute classSide >> annotation [
 	<generated>
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAnnotationTypeAttribute >> addAnnotationAttributeInstance: anObject [
 	annotationAttributeInstances add: anObject
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAnnotationTypeAttribute >> annotationAttributeInstances [
 	"Relation named: #annotationAttributeInstances type: #FamixTAnnotationInstanceAttribute opposite: #annotationTypeAttribute"
 
@@ -85,7 +87,7 @@ FamixTAnnotationTypeAttribute >> annotationAttributeInstances [
 	^ annotationAttributeInstances
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTAnnotationTypeAttribute >> annotationAttributeInstances: anObject [
 
 	<ignoreForCoverage>

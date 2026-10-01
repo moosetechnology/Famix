@@ -11,15 +11,17 @@
 
 "
 Class {
-	#name : #FamixTest3Computer,
-	#superclass : #FamixTest3Entity,
+	#name : 'FamixTest3Computer',
+	#superclass : 'FamixTest3Entity',
 	#instVars : [
 		'#classroom => FMOne type: #FamixTest3Classroom opposite: #computer'
 	],
-	#category : #'Famix-Test3-Entities-Entities'
+	#category : 'Famix-Test3-Entities-Entities',
+	#package : 'Famix-Test3-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTest3Computer class >> annotation [
 
 	<ignoreForCoverage>
@@ -28,7 +30,7 @@ FamixTest3Computer class >> annotation [
 	<generated>
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest3Computer >> classroom [
 	"Relation named: #classroom type: #FamixTest3Classroom opposite: #computer"
 
@@ -38,7 +40,7 @@ FamixTest3Computer >> classroom [
 	^ classroom
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest3Computer >> classroom: anObject [
 
 	<ignoreForCoverage>

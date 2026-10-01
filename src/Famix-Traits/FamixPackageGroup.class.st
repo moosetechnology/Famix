@@ -1,20 +1,22 @@
 Class {
-	#name : #FamixPackageGroup,
-	#superclass : #MooseSpecializedGroup,
-	#category : #'Famix-Traits-Groups'
+	#name : 'FamixPackageGroup',
+	#superclass : 'MooseSpecializedGroup',
+	#category : 'Famix-Traits-Groups',
+	#package : 'Famix-Traits',
+	#tag : 'Groups'
 }
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FamixPackageGroup >> allClasses [
 	^ self flatCollect: [ :p | p localClasses ]
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FamixPackageGroup >> allMethods [
 	^ self flatCollect: [ :p | p methods ]
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 FamixPackageGroup >> allPackages [
 	^ self
 ]

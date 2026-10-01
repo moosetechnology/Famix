@@ -17,16 +17,18 @@
 
 "
 Class {
-	#name : #FamixTest3Book,
-	#superclass : #FamixTest3Entity,
+	#name : 'FamixTest3Book',
+	#superclass : 'FamixTest3Entity',
 	#instVars : [
 		'#id => FMProperty',
 		'#person => FMOne type: #FamixTest3Person opposite: #books'
 	],
-	#category : #'Famix-Test3-Entities-Entities'
+	#category : 'Famix-Test3-Entities-Entities',
+	#package : 'Famix-Test3-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTest3Book class >> annotation [
 
 	<ignoreForCoverage>
@@ -35,7 +37,7 @@ FamixTest3Book class >> annotation [
 	<generated>
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 FamixTest3Book >> = aFamixTest3Book [
 
 	<ignoreForCoverage>
@@ -43,7 +45,7 @@ FamixTest3Book >> = aFamixTest3Book [
 	^ aFamixTest3Book id = self id
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 FamixTest3Book >> hash [
 
 	<ignoreForCoverage>
@@ -51,7 +53,7 @@ FamixTest3Book >> hash [
 	^ self id hash 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest3Book >> id [
 
 	<FMProperty: #id type: #Number>
@@ -60,14 +62,14 @@ FamixTest3Book >> id [
 	^ id
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest3Book >> id: anObject [
 	<ignoreForCoverage>
 	<generated>
 	id := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest3Book >> person [
 	"Relation named: #person type: #FamixTest3Person opposite: #books"
 
@@ -77,7 +79,7 @@ FamixTest3Book >> person [
 	^ person
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTest3Book >> person: anObject [
 
 	<ignoreForCoverage>

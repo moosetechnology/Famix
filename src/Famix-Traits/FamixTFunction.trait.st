@@ -45,16 +45,18 @@ FamixTFunction represents a behavioural entity in a procedural language.
 
 "
 Trait {
-	#name : #FamixTFunction,
+	#name : 'FamixTFunction',
 	#instVars : [
 		'#functionOwner => FMOne type: #FamixTWithFunctions opposite: #functions'
 	],
 	#traits : 'FamixTHasSignature + FamixTInvocable + FamixTNamedEntity + FamixTTypedEntity + FamixTWithLocalVariables + FamixTWithParameters + FamixTWithStatements + TEntityMetaLevelDependency',
 	#classTraits : 'FamixTHasSignature classTrait + FamixTInvocable classTrait + FamixTNamedEntity classTrait + FamixTTypedEntity classTrait + FamixTWithLocalVariables classTrait + FamixTWithParameters classTrait + FamixTWithStatements classTrait + TEntityMetaLevelDependency classTrait',
-	#category : #'Famix-Traits-Behavioral'
+	#category : 'Famix-Traits-Behavioral',
+	#package : 'Famix-Traits',
+	#tag : 'Behavioral'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTFunction classSide >> annotation [
 
 	<ignoreForCoverage>
@@ -63,7 +65,7 @@ FamixTFunction classSide >> annotation [
 	<generated>
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTFunction >> functionOwner [
 	"Relation named: #functionOwner type: #FamixTWithFunctions opposite: #functions"
 
@@ -74,7 +76,7 @@ FamixTFunction >> functionOwner [
 	^ functionOwner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTFunction >> functionOwner: anObject [
 
 	functionOwner := anObject.
@@ -82,7 +84,7 @@ FamixTFunction >> functionOwner: anObject [
 
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTFunction >> isFunction [
 
 	<ignoreForCoverage>
@@ -90,7 +92,7 @@ FamixTFunction >> isFunction [
 	^ true
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixTFunction >> mooseNameOn: stream [
 	| parent |
 	parent := self functionOwner.

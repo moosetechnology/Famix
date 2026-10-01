@@ -1,4 +1,6 @@
 "
+It corresponds to entities that can contain invocations. An example is a method that can contain invocation to other methods.
+
 ## Relations
 ======================
 
@@ -11,14 +13,16 @@
 
 "
 Trait {
-	#name : #FamixTWithInvocations,
+	#name : 'FamixTWithInvocations',
 	#instVars : [
 		'#outgoingInvocations => FMMany type: #FamixTInvocation opposite: #sender'
 	],
-	#category : #'Famix-Traits-Invocation'
+	#category : 'Famix-Traits-Invocation',
+	#package : 'Famix-Traits',
+	#tag : 'Invocation'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTWithInvocations classSide >> annotation [
 
 	<ignoreForCoverage>
@@ -27,12 +31,12 @@ FamixTWithInvocations classSide >> annotation [
 	<generated>
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 FamixTWithInvocations >> addOutgoingInvocation: anInvocation [
 	outgoingInvocations add: anInvocation
 ]
 
-{ #category : #'Famix-Extensions-private' }
+{ #category : 'Famix-Extensions-private' }
 FamixTWithInvocations >> numberOfOutgoingInvocations [
 
 	<FMProperty: #numberOfOutgoingInvocations type: #Number>
@@ -41,7 +45,7 @@ FamixTWithInvocations >> numberOfOutgoingInvocations [
 	^ self cacheAt: #numberOfOutgoingInvocations ifAbsent: [ self outgoingInvocations size ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithInvocations >> outgoingInvocations [
 	"Relation named: #outgoingInvocations type: #FamixTInvocation opposite: #sender"
 
@@ -51,7 +55,7 @@ FamixTWithInvocations >> outgoingInvocations [
 	^ outgoingInvocations
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTWithInvocations >> outgoingInvocations: anObject [
 
 	<ignoreForCoverage>

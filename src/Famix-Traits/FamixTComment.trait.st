@@ -18,16 +18,18 @@ FamixTComment represents one instance of a comment (in the sense of programming 
 
 "
 Trait {
-	#name : #FamixTComment,
+	#name : 'FamixTComment',
 	#instVars : [
 		'#commentedEntity => FMOne type: #FamixTWithComments opposite: #comments'
 	],
 	#traits : 'FamixTSourceEntity + TEntityMetaLevelDependency',
 	#classTraits : 'FamixTSourceEntity classTrait + TEntityMetaLevelDependency classTrait',
-	#category : #'Famix-Traits-Comment'
+	#category : 'Famix-Traits-Comment',
+	#package : 'Famix-Traits',
+	#tag : 'Comment'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FamixTComment classSide >> annotation [
 
 	<ignoreForCoverage>
@@ -36,7 +38,7 @@ FamixTComment classSide >> annotation [
 	<generated>
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTComment >> commentedEntity [
 	"Relation named: #commentedEntity type: #FamixTWithComments opposite: #comments"
 
@@ -47,7 +49,7 @@ FamixTComment >> commentedEntity [
 	^ commentedEntity
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FamixTComment >> commentedEntity: anObject [
 
 	<ignoreForCoverage>
@@ -55,14 +57,14 @@ FamixTComment >> commentedEntity: anObject [
 	commentedEntity := anObject
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixTComment >> displayStringOn: aStream [
 
 	aStream << 'comment on '.
 	self commentedEntity displayStringOn: aStream
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FamixTComment >> isComment [
 
 	<ignoreForCoverage>
@@ -70,7 +72,7 @@ FamixTComment >> isComment [
 	^ true
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 FamixTComment >> printOn: aStream [
 
 	self sourceText ifNotNil: [ :sourceText | 
