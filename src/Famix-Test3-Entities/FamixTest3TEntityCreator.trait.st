@@ -21,161 +21,81 @@ FamixTest3TEntityCreator classSide >> annotation [
 ]
 
 { #category : 'entity creation' }
-FamixTest3TEntityCreator >> newAccess [
+FamixTest3TEntityCreator >> newBook [
 
 	<ignoreForCoverage>
 	<generated>
-	^ self add: FamixTest3Access new
+	^ self add: FamixTest3Book new
 ]
 
 { #category : 'entity creation' }
-FamixTest3TEntityCreator >> newAttribute [
+FamixTest3TEntityCreator >> newCafeteria [
 
 	<ignoreForCoverage>
 	<generated>
-	^ self add: FamixTest3Attribute new
+	^ self add: FamixTest3Cafeteria new
 ]
 
 { #category : 'entity creation' }
-FamixTest3TEntityCreator >> newAttributeNamed: aName [
+FamixTest3TEntityCreator >> newClassSession [
 
 	<ignoreForCoverage>
 	<generated>
-	^ self add: (FamixTest3Attribute named: aName)
+	^ self add: FamixTest3ClassSession new
 ]
 
 { #category : 'entity creation' }
-FamixTest3TEntityCreator >> newClass [
+FamixTest3TEntityCreator >> newClassroom [
 
 	<ignoreForCoverage>
 	<generated>
-	^ self add: FamixTest3Class new
+	^ self add: FamixTest3Classroom new
 ]
 
 { #category : 'entity creation' }
-FamixTest3TEntityCreator >> newClassNamed: aName [
+FamixTest3TEntityCreator >> newComputer [
 
 	<ignoreForCoverage>
 	<generated>
-	^ self add: (FamixTest3Class named: aName)
+	^ self add: FamixTest3Computer new
 ]
 
 { #category : 'entity creation' }
-FamixTest3TEntityCreator >> newComment [
+FamixTest3TEntityCreator >> newPrincipal [
 
 	<ignoreForCoverage>
 	<generated>
-	^ self add: FamixTest3Comment new
+	^ self add: FamixTest3Principal new
 ]
 
 { #category : 'entity creation' }
-FamixTest3TEntityCreator >> newInvocation [
+FamixTest3TEntityCreator >> newRoom [
 
 	<ignoreForCoverage>
 	<generated>
-	^ self add: FamixTest3Invocation new
+	^ self add: FamixTest3Room new
 ]
 
 { #category : 'entity creation' }
-FamixTest3TEntityCreator >> newMethod [
+FamixTest3TEntityCreator >> newSchool [
 
 	<ignoreForCoverage>
 	<generated>
-	^ self add: FamixTest3Method new
+	^ self add: FamixTest3School new
 ]
 
 { #category : 'entity creation' }
-FamixTest3TEntityCreator >> newMethodNamed: aName [
+FamixTest3TEntityCreator >> newStudent [
 
 	<ignoreForCoverage>
 	<generated>
-	^ self add: (FamixTest3Method named: aName)
+	^ self add: FamixTest3Student new
 ]
 
 { #category : 'entity creation' }
-FamixTest3TEntityCreator >> newPackage [
+FamixTest3TEntityCreator >> newTeacher [
 
 	<ignoreForCoverage>
 	<generated>
-	^ self add: FamixTest3Package new
-]
-
-{ #category : 'entity creation' }
-FamixTest3TEntityCreator >> newPackageNamed: aName [
-
-	<ignoreForCoverage>
-	<generated>
-	^ self add: (FamixTest3Package named: aName)
-]
-
-{ #category : 'entity creation' }
-FamixTest3TEntityCreator >> newParametricClass [
-
-	<ignoreForCoverage>
-	<generated>
-	^ self add: FamixTest3ParametricClass new
-]
-
-{ #category : 'entity creation' }
-FamixTest3TEntityCreator >> newParametricClassNamed: aName [
-
-	<ignoreForCoverage>
-	<generated>
-	^ self add: (FamixTest3ParametricClass named: aName)
-]
-
-{ #category : 'entity creation' }
-FamixTest3TEntityCreator >> newPrimitiveType [
-
-	<ignoreForCoverage>
-	<generated>
-	^ self add: FamixTest3PrimitiveType new
-]
-
-{ #category : 'entity creation' }
-FamixTest3TEntityCreator >> newPrimitiveTypeNamed: aName [
-
-	<ignoreForCoverage>
-	<generated>
-	^ self add: (FamixTest3PrimitiveType named: aName)
-]
-
-{ #category : 'entity creation' }
-FamixTest3TEntityCreator >> newReference [
-
-	<ignoreForCoverage>
-	<generated>
-	^ self add: FamixTest3Reference new
-]
-
-{ #category : 'entity creation' }
-FamixTest3TEntityCreator >> newSourceLanguage [
-
-	<ignoreForCoverage>
-	<generated>
-	^ self add: FamixTest3SourceLanguage new
-]
-
-{ #category : 'entity creation' }
-FamixTest3TEntityCreator >> newSourceTextAnchor [
-
-	<ignoreForCoverage>
-	<generated>
-	^ self add: FamixTest3SourceTextAnchor new
-]
-
-{ #category : 'entity creation' }
-FamixTest3TEntityCreator >> newType [
-
-	<ignoreForCoverage>
-	<generated>
-	^ self add: FamixTest3Type new
-]
-
-{ #category : 'entity creation' }
-FamixTest3TEntityCreator >> newTypeNamed: aName [
-
-	<ignoreForCoverage>
-	<generated>
-	^ self add: (FamixTest3Type named: aName)
+	^ self add: FamixTest3Teacher new
 ]

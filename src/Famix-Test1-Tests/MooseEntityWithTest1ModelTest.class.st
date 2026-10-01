@@ -22,5 +22,10 @@ MooseEntityWithTest1ModelTest >> testRootEntities [
 
 	self assertCollection: model rootEntities hasSameElements: {
 			c1.
-			c2 }
+			c2.
+			c1 sourceAnchor.
+			m1 sourceAnchor.
+			m2 sourceAnchor.
+			m3 sourceAnchor.
+			a1 sourceAnchor }
 ]

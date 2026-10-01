@@ -38,7 +38,13 @@ Class {
 		'class',
 		'model',
 		'tCanBeClassSide',
-		'bytesFileAnchor'
+		'bytesFileAnchor',
+		'inheritance',
+		'annotationType1',
+		'withAnnotationType1',
+		'annotationType2',
+		'withAnnotationType2',
+		'tEntity'
 	],
 	#category : 'Famix-TestGenerators',
 	#package : 'Famix-TestGenerators'
@@ -58,6 +64,7 @@ FamixTest1Generator class >> prefix [
 
 { #category : 'definition' }
 FamixTest1Generator >> defineClasses [
+
 	super defineClasses.
 
 	model := builder model.
@@ -68,35 +75,47 @@ FamixTest1Generator >> defineClasses [
 	method := builder newClassNamed: #Method.
 	attribute := builder newClassNamed: #Attribute.
 	association := builder newClassNamed: #Association.
+	inheritance := builder newClassNamed: #Inheritance.
 
 	file := builder newClassNamed: #File.
 	fileAnchor := builder newClassNamed: #FileAnchor.
 	folder := builder newClassNamed: #Folder.
 	indexedFileAnchor := builder newClassNamed: #IndexedFileAnchor.
 	bytesFileAnchor := builder newClassNamed: #BytesFileAnchor.
-	multipleFileAnchor := builder newClassNamed: #MultipleFileAnchor
+	multipleFileAnchor := builder newClassNamed: #MultipleFileAnchor.
+
+	annotationType1 := builder newClassNamed: #AnnotationType1.
+	withAnnotationType1 := builder newClassNamed: #WithAnnotationType1.
+
+	annotationType2 := builder newClassNamed: #AnnotationType2.
+	withAnnotationType2 := builder newClassNamed: #WithAnnotationType2
 ]
 
 { #category : 'definition' }
 FamixTest1Generator >> defineHierarchy [
+
 	super defineHierarchy.
+
+	(builder ensureClassNamed: #Entity) --|> tEntity.
+
+	tEntity --|> #TEntityMetaLevelDependency.
 
 	association --|> #TAssociation.
 
 	attribute
-		--|> namedEntity ;
-		--|> #TWithSourceLanguages ;
+		--|> namedEntity;
+		--|> #TWithSourceLanguages;
 		--|> #TAttribute;
 		--|> #TSourceEntity;
-	  --|> tCanBeClassSide.
-	
+		--|> tCanBeClassSide.
+
 	bytesFileAnchor --|> sourceAnchor.
 	bytesFileAnchor --|> #TBytesFileAnchor.
 
 	class
-		--|> namedEntity ;
-		--|> #TWithSourceLanguages ;
-		--|> #TClass ;
+		--|> namedEntity;
+		--|> #TWithSourceLanguages;
+		--|> #TClass;
 		--|> #TSourceEntity;
 		--|> #TPackageable;
 		--|> #TWithComments.
@@ -113,21 +132,22 @@ FamixTest1Generator >> defineHierarchy [
 	indexedFileAnchor --|> sourceAnchor.
 	indexedFileAnchor --|> #TIndexedFileNavigation.
 
+	inheritance --|> #TInheritance.
+
 	method
-		--|> namedEntity ;
-		--|> #TWithSourceLanguages ;
-		--|> #TMethod; 
+		--|> namedEntity;
+		--|> #TWithSourceLanguages;
+		--|> #TMethod;
 		--|> #THasKind;
-		--|> tCanBeClassSide ;
+		--|> tCanBeClassSide;
 		--|> #TWithComments.
-		
 
 	multipleFileAnchor --|> sourceAnchor.
 	multipleFileAnchor --|> #TMultipleFileAnchor.
 
 	sourcedEntity
-		--|> #TWithFiles ;
-		--|> #TWithSourceLanguages.
+		--|> #TWithFiles;
+		--|> #TWithSourceLanguages
 ]
 
 { #category : 'definition' }
@@ -139,10 +159,26 @@ FamixTest1Generator >> defineProperties [
 ]
 
 { #category : 'definition' }
-FamixTest1Generator >> defineTraits [ 
+FamixTest1Generator >> defineRelations [
+
+	super defineRelations.
+
+	self
+		apply: #TAnnotationType
+		on: annotationType1
+		oppositeTrait: #TWithAnnotationTypes
+		on: withAnnotationType1.
+
+	self apply: #TWithAnnotationTypes on: withAnnotationType2 oppositeOn: annotationType2
+]
+
+{ #category : 'definition' }
+FamixTest1Generator >> defineTraits [
 
 	super defineTraits.
-	tCanBeClassSide := builder newTraitNamed: #TCanBeClassSide. 
+
+	tCanBeClassSide := builder newTraitNamed: #TCanBeClassSide.
+	tEntity := builder newTraitNamed: #TEntity
 ]
 
 { #category : 'definition' }

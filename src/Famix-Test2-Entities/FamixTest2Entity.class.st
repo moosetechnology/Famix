@@ -49,7 +49,31 @@ FamixTest2Entity >> hasImmediateSource [
 ]
 
 { #category : 'testing' }
+FamixTest2Entity >> isAccess [
+
+	<ignoreForCoverage>
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
 FamixTest2Entity >> isAssociation [
+
+	<ignoreForCoverage>
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
+FamixTest2Entity >> isAttribute [
+
+	<ignoreForCoverage>
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
+FamixTest2Entity >> isBehavioural [
 
 	<ignoreForCoverage>
 	<generated>
@@ -73,7 +97,15 @@ FamixTest2Entity >> isComment [
 ]
 
 { #category : 'testing' }
-FamixTest2Entity >> isInheritance [
+FamixTest2Entity >> isInvocation [
+
+	<ignoreForCoverage>
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
+FamixTest2Entity >> isMethod [
 
 	<ignoreForCoverage>
 	<generated>
@@ -89,7 +121,39 @@ FamixTest2Entity >> isNamedEntity [
 ]
 
 { #category : 'testing' }
+FamixTest2Entity >> isPackage [
+
+	<ignoreForCoverage>
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
+FamixTest2Entity >> isParametricEntity [
+
+	<ignoreForCoverage>
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
 FamixTest2Entity >> isQueryable [
+
+	<ignoreForCoverage>
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
+FamixTest2Entity >> isReference [
+
+	<ignoreForCoverage>
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
+FamixTest2Entity >> isStructuralEntity [
 
 	<ignoreForCoverage>
 	<generated>

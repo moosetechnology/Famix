@@ -21,6 +21,22 @@ FamixTest1TEntityCreator classSide >> annotation [
 ]
 
 { #category : 'entity creation' }
+FamixTest1TEntityCreator >> newAnnotationType1 [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self add: FamixTest1AnnotationType1 new
+]
+
+{ #category : 'entity creation' }
+FamixTest1TEntityCreator >> newAnnotationType2 [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self add: FamixTest1AnnotationType2 new
+]
+
+{ #category : 'entity creation' }
 FamixTest1TEntityCreator >> newAssociation [
 
 	<ignoreForCoverage>
@@ -125,6 +141,14 @@ FamixTest1TEntityCreator >> newIndexedFileAnchor [
 ]
 
 { #category : 'entity creation' }
+FamixTest1TEntityCreator >> newInheritance [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self add: FamixTest1Inheritance new
+]
+
+{ #category : 'entity creation' }
 FamixTest1TEntityCreator >> newMethod [
 
 	<ignoreForCoverage>
@@ -162,4 +186,20 @@ FamixTest1TEntityCreator >> newSourceTextAnchor [
 	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTest1SourceTextAnchor new
+]
+
+{ #category : 'entity creation' }
+FamixTest1TEntityCreator >> newWithAnnotationType1 [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self add: FamixTest1WithAnnotationType1 new
+]
+
+{ #category : 'entity creation' }
+FamixTest1TEntityCreator >> newWithAnnotationType2 [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self add: FamixTest1WithAnnotationType2 new
 ]

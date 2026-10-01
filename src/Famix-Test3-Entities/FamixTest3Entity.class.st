@@ -1,6 +1,18 @@
+"
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+|---|
+| `name` | `String` | nil | |
+
+"
 Class {
 	#name : 'FamixTest3Entity',
 	#superclass : 'MooseEntity',
+	#instVars : [
+		'#name => FMProperty'
+	],
 	#category : 'Famix-Test3-Entities-Entities',
 	#package : 'Famix-Test3-Entities',
 	#tag : 'Entities'
@@ -33,30 +45,6 @@ FamixTest3Entity class >> metamodel [
 ]
 
 { #category : 'testing' }
-FamixTest3Entity >> canBeStub [
-
-	<ignoreForCoverage>
-	<generated>
-	^ false
-]
-
-{ #category : 'testing' }
-FamixTest3Entity >> hasImmediateSource [
-
-	<ignoreForCoverage>
-	<generated>
-	^ false
-]
-
-{ #category : 'testing' }
-FamixTest3Entity >> isAccess [
-
-	<ignoreForCoverage>
-	<generated>
-	^ false
-]
-
-{ #category : 'testing' }
 FamixTest3Entity >> isAssociation [
 
 	<ignoreForCoverage>
@@ -64,106 +52,18 @@ FamixTest3Entity >> isAssociation [
 	^ false
 ]
 
-{ #category : 'testing' }
-FamixTest3Entity >> isAttribute [
+{ #category : 'accessing' }
+FamixTest3Entity >> name [
 
+	<FMProperty: #name type: #String>
 	<ignoreForCoverage>
 	<generated>
-	^ false
+	^ name
 ]
 
-{ #category : 'testing' }
-FamixTest3Entity >> isBehavioural [
-
+{ #category : 'accessing' }
+FamixTest3Entity >> name: anObject [
 	<ignoreForCoverage>
 	<generated>
-	^ false
-]
-
-{ #category : 'testing' }
-FamixTest3Entity >> isClass [
-
-	<ignoreForCoverage>
-	<generated>
-	^ false
-]
-
-{ #category : 'testing' }
-FamixTest3Entity >> isComment [
-
-	<ignoreForCoverage>
-	<generated>
-	^ false
-]
-
-{ #category : 'testing' }
-FamixTest3Entity >> isInvocation [
-
-	<ignoreForCoverage>
-	<generated>
-	^ false
-]
-
-{ #category : 'testing' }
-FamixTest3Entity >> isMethod [
-
-	<ignoreForCoverage>
-	<generated>
-	^ false
-]
-
-{ #category : 'testing' }
-FamixTest3Entity >> isNamedEntity [
-
-	<ignoreForCoverage>
-	<generated>
-	^ false
-]
-
-{ #category : 'testing' }
-FamixTest3Entity >> isPackage [
-
-	<ignoreForCoverage>
-	<generated>
-	^ false
-]
-
-{ #category : 'testing' }
-FamixTest3Entity >> isParametricEntity [
-
-	<ignoreForCoverage>
-	<generated>
-	^ false
-]
-
-{ #category : 'testing' }
-FamixTest3Entity >> isQueryable [
-
-	<ignoreForCoverage>
-	<generated>
-	^ false
-]
-
-{ #category : 'testing' }
-FamixTest3Entity >> isReference [
-
-	<ignoreForCoverage>
-	<generated>
-	^ false
-]
-
-{ #category : 'testing' }
-FamixTest3Entity >> isStructuralEntity [
-
-	<ignoreForCoverage>
-	<generated>
-	^ false
-]
-
-{ #category : 'testing' }
-FamixTest3Entity >> isType [
-
-	<ignoreForCoverage>
-	<generated>
-	^ false
+	name := anObject
 ]

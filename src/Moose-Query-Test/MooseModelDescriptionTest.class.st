@@ -32,8 +32,8 @@ MooseModelDescriptionTest >> testAsMetadescription [
 MooseModelDescriptionTest >> testAsMetadescriptionAttributes [
 
 	| classDescription typeDescription |
-	classDescription := FamixTest3Class asMetadescription.
-	typeDescription := FamixTest3Type asMetadescription.
+	classDescription := FamixTest2Class asMetadescription.
+	typeDescription := FamixTest2Type asMetadescription.
 	self assertEmpty: typeDescription properties.
 	self assert: (classDescription allProperties anySatisfy: [ :each | each name = #methods ])
 ]

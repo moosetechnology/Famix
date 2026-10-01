@@ -5,6 +5,7 @@
 ### Parents
 | Relation | Origin | Opposite | Type | Comment |
 |---|
+| `parentPackage` | `FamixTPackageable` | `childEntities` | `FamixTPackage` | Package containing the entity in the code structure (if applicable)|
 | `typeContainer` | `FamixTType` | `types` | `FamixTWithTypes` | Container entity to which this type belongs. Container is a namespace, not a package (Smalltalk).|
 
 ### Children
@@ -44,9 +45,9 @@
 "
 Class {
 	#name : 'FamixTest2Class',
-	#superclass : 'FamixTest2NamedEntity',
-	#traits : 'FamixTClass',
-	#classTraits : 'FamixTClass classTrait',
+	#superclass : 'FamixTest2Type',
+	#traits : 'FamixTClass + FamixTPackageable',
+	#classTraits : 'FamixTClass classTrait + FamixTPackageable classTrait',
 	#category : 'Famix-Test2-Entities-Entities',
 	#package : 'Famix-Test2-Entities',
 	#tag : 'Entities'
@@ -56,7 +57,16 @@ Class {
 FamixTest2Class class >> annotation [
 
 	<ignoreForCoverage>
-	<FMClass: #Class super: #FamixTest2NamedEntity>
+	<FMClass: #Class super: #FamixTest2Type>
 	<package: #'Famix-Test2-Entities'>
 	<generated>
+]
+
+{ #category : 'groups' }
+FamixTest2Class class >> annotationFamixTest2ClassGroup [
+
+	<ignoreForCoverage>
+	<generated>
+	<mooseGroup>
+	^ FamixTest2ClassGroup
 ]

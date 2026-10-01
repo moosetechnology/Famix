@@ -21,6 +21,22 @@ FamixTest1ImportingContext class >> importedMetamodel [
 ]
 
 { #category : 'importing' }
+FamixTest1ImportingContext >> importAnnotationType1 [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self importConcreteEntity: (self class fm3ClassNamed: #AnnotationType1)
+]
+
+{ #category : 'importing' }
+FamixTest1ImportingContext >> importAnnotationType2 [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self importConcreteEntity: (self class fm3ClassNamed: #AnnotationType2)
+]
+
+{ #category : 'importing' }
 FamixTest1ImportingContext >> importAssociation [
 
 	<ignoreForCoverage>
@@ -93,6 +109,14 @@ FamixTest1ImportingContext >> importIndexedFileAnchor [
 ]
 
 { #category : 'importing' }
+FamixTest1ImportingContext >> importInheritance [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self importAssociation: (self class fm3ClassNamed: #Inheritance)
+]
+
+{ #category : 'importing' }
 FamixTest1ImportingContext >> importMethod [
 
 	<ignoreForCoverage>
@@ -122,6 +146,38 @@ FamixTest1ImportingContext >> importSourceTextAnchor [
 	<ignoreForCoverage>
 	<generated>
 	^ self importConcreteEntity: (self class fm3ClassNamed: #SourceTextAnchor)
+]
+
+{ #category : 'importing' }
+FamixTest1ImportingContext >> importWithAnnotationType1 [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self importConcreteEntity: (self class fm3ClassNamed: #WithAnnotationType1)
+]
+
+{ #category : 'importing' }
+FamixTest1ImportingContext >> importWithAnnotationType2 [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self importConcreteEntity: (self class fm3ClassNamed: #WithAnnotationType2)
+]
+
+{ #category : 'testing' }
+FamixTest1ImportingContext >> shouldImportAnnotationType1 [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self shouldImport: #AnnotationType1
+]
+
+{ #category : 'testing' }
+FamixTest1ImportingContext >> shouldImportAnnotationType2 [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self shouldImport: #AnnotationType2
 ]
 
 { #category : 'testing' }
@@ -197,6 +253,14 @@ FamixTest1ImportingContext >> shouldImportIndexedFileAnchor [
 ]
 
 { #category : 'testing' }
+FamixTest1ImportingContext >> shouldImportInheritance [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self shouldImport: #Inheritance
+]
+
+{ #category : 'testing' }
 FamixTest1ImportingContext >> shouldImportMethod [
 
 	<ignoreForCoverage>
@@ -226,4 +290,20 @@ FamixTest1ImportingContext >> shouldImportSourceTextAnchor [
 	<ignoreForCoverage>
 	<generated>
 	^ self shouldImport: #SourceTextAnchor
+]
+
+{ #category : 'testing' }
+FamixTest1ImportingContext >> shouldImportWithAnnotationType1 [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self shouldImport: #WithAnnotationType1
+]
+
+{ #category : 'testing' }
+FamixTest1ImportingContext >> shouldImportWithAnnotationType2 [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self shouldImport: #WithAnnotationType2
 ]

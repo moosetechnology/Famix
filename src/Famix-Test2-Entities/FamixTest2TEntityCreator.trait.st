@@ -21,6 +21,30 @@ FamixTest2TEntityCreator classSide >> annotation [
 ]
 
 { #category : 'entity creation' }
+FamixTest2TEntityCreator >> newAccess [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self add: FamixTest2Access new
+]
+
+{ #category : 'entity creation' }
+FamixTest2TEntityCreator >> newAttribute [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self add: FamixTest2Attribute new
+]
+
+{ #category : 'entity creation' }
+FamixTest2TEntityCreator >> newAttributeNamed: aName [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self add: (FamixTest2Attribute named: aName)
+]
+
+{ #category : 'entity creation' }
 FamixTest2TEntityCreator >> newClass [
 
 	<ignoreForCoverage>
@@ -45,11 +69,83 @@ FamixTest2TEntityCreator >> newComment [
 ]
 
 { #category : 'entity creation' }
-FamixTest2TEntityCreator >> newInheritance [
+FamixTest2TEntityCreator >> newInvocation [
 
 	<ignoreForCoverage>
 	<generated>
-	^ self add: FamixTest2Inheritance new
+	^ self add: FamixTest2Invocation new
+]
+
+{ #category : 'entity creation' }
+FamixTest2TEntityCreator >> newMethod [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self add: FamixTest2Method new
+]
+
+{ #category : 'entity creation' }
+FamixTest2TEntityCreator >> newMethodNamed: aName [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self add: (FamixTest2Method named: aName)
+]
+
+{ #category : 'entity creation' }
+FamixTest2TEntityCreator >> newPackage [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self add: FamixTest2Package new
+]
+
+{ #category : 'entity creation' }
+FamixTest2TEntityCreator >> newPackageNamed: aName [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self add: (FamixTest2Package named: aName)
+]
+
+{ #category : 'entity creation' }
+FamixTest2TEntityCreator >> newParametricClass [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self add: FamixTest2ParametricClass new
+]
+
+{ #category : 'entity creation' }
+FamixTest2TEntityCreator >> newParametricClassNamed: aName [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self add: (FamixTest2ParametricClass named: aName)
+]
+
+{ #category : 'entity creation' }
+FamixTest2TEntityCreator >> newPrimitiveType [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self add: FamixTest2PrimitiveType new
+]
+
+{ #category : 'entity creation' }
+FamixTest2TEntityCreator >> newPrimitiveTypeNamed: aName [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self add: (FamixTest2PrimitiveType named: aName)
+]
+
+{ #category : 'entity creation' }
+FamixTest2TEntityCreator >> newReference [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self add: FamixTest2Reference new
 ]
 
 { #category : 'entity creation' }
@@ -66,4 +162,20 @@ FamixTest2TEntityCreator >> newSourceTextAnchor [
 	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixTest2SourceTextAnchor new
+]
+
+{ #category : 'entity creation' }
+FamixTest2TEntityCreator >> newType [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self add: FamixTest2Type new
+]
+
+{ #category : 'entity creation' }
+FamixTest2TEntityCreator >> newTypeNamed: aName [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self add: (FamixTest2Type named: aName)
 ]
