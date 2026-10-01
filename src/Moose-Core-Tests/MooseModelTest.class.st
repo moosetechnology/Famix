@@ -62,15 +62,15 @@ MooseModelTest >> testAsMSEString [
 { #category : 'tests' }
 MooseModelTest >> testCacheInvalidationAfterAdd [
 	self assertEmpty: group allClasses.
-	group add: FamixTest3Class new.
+	group add: FamixTest2Class new.
 	self assert: group allClasses size equals: 1
 ]
 
 { #category : 'tests' }
 MooseModelTest >> testCacheInvalidationAfterMultipleAddRemove [
 	| classA classB |
-	classA := FamixTest3Class named: 'ClassA'.
-	classB := FamixTest3Class named: 'ClassB'.
+	classA := FamixTest2Class named: 'ClassA'.
+	classB := FamixTest2Class named: 'ClassB'.
 	group add: classA.
 	self assert: group allClasses size equals: 1.
 	group add: classB.
@@ -88,7 +88,7 @@ MooseModelTest >> testCacheInvalidationAfterMultipleAddRemove [
 { #category : 'tests' }
 MooseModelTest >> testCacheInvalidationAfterRemove [
 	| class |
-	class := FamixTest3Class named: 'AClass'.
+	class := FamixTest2Class named: 'AClass'.
 	group add: class.
 	self assert: group allClasses size equals: 1.
 	group remove: class.

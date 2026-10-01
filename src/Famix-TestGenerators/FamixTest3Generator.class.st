@@ -1,19 +1,24 @@
 Class {
 	#name : 'FamixTest3Generator',
-	#superclass : 'FamixBasicInfrastructureGenerator',
+	#superclass : 'FamixMetamodelGenerator',
 	#instVars : [
-		'classEntity',
-		'primitiveType',
-		'method',
-		'type',
-		'reference',
-		'invocation',
-		'classEntitygroup',
-		'typeGroup',
-		'attribute',
-		'access',
-		'package',
-		'parametricClass'
+		'book',
+		'person',
+		'principal',
+		'student',
+		'teacher',
+		'school',
+		'schoolBoard',
+		'playground',
+		'room',
+		'classroom',
+		'cafeteria',
+		'restroom',
+		'computer',
+		'desk',
+		'tTeacher',
+		'tClassroom',
+		'classSession'
 	],
 	#category : 'Famix-TestGenerators',
 	#package : 'Famix-TestGenerators'
@@ -31,23 +36,41 @@ FamixTest3Generator class >> prefix [
 	^ #'FamixTest3'
 ]
 
+{ #category : 'accessing' }
+FamixTest3Generator class >> submetamodels [
+
+	^ { FamixGenerator }
+]
+
+{ #category : 'definition' }
+FamixTest3Generator >> defineAssociations [
+	"The source: and target: defaults are used on purpose: they are the only variants that
+	name the opposite properties outgoing<ClassName>s and incoming<ClassName>s. The
+	one-to-one and one-to-many variants do not pluralize the association name."
+
+	super defineAssociations.
+
+	classSession := (self builder association: #ClassSession)
+		                source: tTeacher;
+		                target: tClassroom;
+		                yourself
+]
+
 { #category : 'definition' }
 FamixTest3Generator >> defineClasses [
 
 	super defineClasses.
 
-	access := builder newClassNamed: #Access.
-	attribute := builder newClassNamed: #Attribute.
-	classEntity := builder newClassNamed: #Class.
-	classEntitygroup := classEntity withGroup.
-	method := builder newClassNamed: #Method.
-	package := builder newClassNamed: #Package.
-	type := builder newClassNamed: #Type.
-	typeGroup := type withGroup.
-	primitiveType := builder newClassNamed: #PrimitiveType.
-	reference := builder newClassNamed: #Reference.
-	invocation := builder newClassNamed: #Invocation.
-	parametricClass := builder newClassNamed: #ParametricClass.
+	book := builder newClassNamed: #Book.
+	person := builder newAbstractClassNamed: #Person.
+	principal := builder newClassNamed: #Principal.
+	student := builder newClassNamed: #Student.
+	teacher := builder newClassNamed: #Teacher.
+	school := builder newClassNamed: #School.
+	room := builder newClassNamed: #Room.
+	classroom := builder newClassNamed: #Classroom.
+	cafeteria := builder newClassNamed: #Cafeteria.
+	computer := builder newClassNamed: #Computer
 ]
 
 { #category : 'definition' }
@@ -55,33 +78,59 @@ FamixTest3Generator >> defineHierarchy [
 
 	super defineHierarchy.
 
-	access --|> #TAccess.
+	principal --|> person.
+	student --|> person.
+	teacher --|> person.
+	classroom --|> room.
+	cafeteria --|> room.
 
-	attribute --|> #TAttribute.
+	"TTeacher -> ClassSession -> TClassroom"
+	teacher --|> tTeacher.
+	classroom --|> tClassroom
+]
 
-	type --|> namedEntity.
-	type --|> #TType.
+{ #category : 'definition' }
+FamixTest3Generator >> defineProperties [
 
-	classEntity --|> type.
-	classEntity --|> #TClass.
-	classEntity --|> #TPackageable.
+	super defineProperties.
 
-	parametricClass --|> classEntity.
-	parametricClass --|> #TParametricEntity.
+	(builder ensureClassNamed: #Entity) property: #name type: #String.
 
-	method --|> namedEntity.
-	method --|> #TMethod.
+	person property: #firstName type: #String.
+	person property: #lastName type: #String.
+	person property: #age type: #Number.
+	person withEqualityCheckOn: { #firstName. #lastName. #age }.
 
-	package --|> #TPackage.
+	book property: #id type: #Number.
+	book withEqualityCheckOn: { #id }.
 
-	primitiveType --|> type.
-	primitiveType --|> #TWithTypes.
-	primitiveType --|> #TReferenceable.
+	room property: #capacity type: #Number defaultValue: 12.
+	room property: #hasWindows type: #Boolean defaultValue: true.
+	room property: #purpose type: #String defaultValue: ''.
 
-	reference --|> #TReference.
+	classroom property: #hasProjector type: #Boolean defaultValue: false
+]
 
-	invocation --|> #TInvocation.
+{ #category : 'definition' }
+FamixTest3Generator >> defineRelations [
 
-	"groups"
-	classEntitygroup --|> typeGroup
+	super defineRelations.
+
+	book *-<> person.
+	principal -<> school.
+	student *-<> school.
+	teacher *-<> school.
+	student *-* teacher.
+	school <>-* room.
+	classroom <>- computer
+]
+
+{ #category : 'definition' }
+FamixTest3Generator >> defineTraits [
+	"TTeacher -> ClassSession -> TClassroom"
+
+	super defineTraits.
+
+	tTeacher := self builder newTraitNamed: #TTeacher.
+	tClassroom := self builder newTraitNamed: #TClassroom
 ]

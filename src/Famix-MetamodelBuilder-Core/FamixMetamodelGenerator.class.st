@@ -277,7 +277,7 @@ FamixMetamodelGenerator >> define [
 
 { #category : 'definition' }
 FamixMetamodelGenerator >> defineAssociations [
-	"See example in FamixTest4Generator>>#defineAssociations"
+	"See example in FamixTest3Generator>>#defineAssociations"
 
 	
 ]
