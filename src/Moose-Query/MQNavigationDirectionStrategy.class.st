@@ -33,6 +33,11 @@ MQNavigationDirectionStrategy class >> entityFor: anAssociation [
 	^ self subclassResponsibility
 ]
 
+{ #category : #accessing }
+MQNavigationDirectionStrategy class >> famePropertiesOf: anEntity [
+	^ self subclassResponsibility
+]
+
 { #category : #'instance creation' }
 MQNavigationDirectionStrategy class >> fromSymbol: aSymbol [
 	"I return the right strategy from a Symbol representing a direction"
@@ -43,11 +48,6 @@ MQNavigationDirectionStrategy class >> fromSymbol: aSymbol [
 { #category : #testing }
 MQNavigationDirectionStrategy class >> isAbstract [
 	^ self = MQNavigationDirectionStrategy
-]
-
-{ #category : #accessing }
-MQNavigationDirectionStrategy class >> msePropertiesOf: anEntity [
-	^ self subclassResponsibility
 ]
 
 { #category : #accessing }

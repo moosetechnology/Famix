@@ -7,16 +7,17 @@ Class {
 { #category : #meta }
 MooseMSEImporterTestEntity class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Entity super: #MooseEntity>
 	<package: #'Moose-Core-Tests-Entities'>
 	<generated>
 	<abstract>
-	^ self
 ]
 
 { #category : #testing }
 MooseMSEImporterTestEntity class >> isAbstract [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self == MooseMSEImporterTestEntity
 ]
@@ -24,13 +25,31 @@ MooseMSEImporterTestEntity class >> isAbstract [
 { #category : #meta }
 MooseMSEImporterTestEntity class >> metamodel [
 
+	<ignoreForCoverage>
 	<generated>
 	^ MooseMSEImporterTestModel metamodel
 ]
 
 { #category : #testing }
+MooseMSEImporterTestEntity >> canBeStub [
+
+	<ignoreForCoverage>
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+MooseMSEImporterTestEntity >> hasImmediateSource [
+
+	<ignoreForCoverage>
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
 MooseMSEImporterTestEntity >> isAssociation [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -38,6 +57,7 @@ MooseMSEImporterTestEntity >> isAssociation [
 { #category : #testing }
 MooseMSEImporterTestEntity >> isAttribute [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -45,6 +65,7 @@ MooseMSEImporterTestEntity >> isAttribute [
 { #category : #testing }
 MooseMSEImporterTestEntity >> isBehavioural [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -52,6 +73,7 @@ MooseMSEImporterTestEntity >> isBehavioural [
 { #category : #testing }
 MooseMSEImporterTestEntity >> isClass [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -59,6 +81,7 @@ MooseMSEImporterTestEntity >> isClass [
 { #category : #testing }
 MooseMSEImporterTestEntity >> isComment [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -66,6 +89,7 @@ MooseMSEImporterTestEntity >> isComment [
 { #category : #testing }
 MooseMSEImporterTestEntity >> isInheritance [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -73,6 +97,7 @@ MooseMSEImporterTestEntity >> isInheritance [
 { #category : #testing }
 MooseMSEImporterTestEntity >> isMethod [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -80,6 +105,7 @@ MooseMSEImporterTestEntity >> isMethod [
 { #category : #testing }
 MooseMSEImporterTestEntity >> isNamedEntity [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -87,6 +113,7 @@ MooseMSEImporterTestEntity >> isNamedEntity [
 { #category : #testing }
 MooseMSEImporterTestEntity >> isNamespace [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -94,6 +121,7 @@ MooseMSEImporterTestEntity >> isNamespace [
 { #category : #testing }
 MooseMSEImporterTestEntity >> isPackage [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -101,6 +129,7 @@ MooseMSEImporterTestEntity >> isPackage [
 { #category : #testing }
 MooseMSEImporterTestEntity >> isPrimitiveType [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -108,6 +137,7 @@ MooseMSEImporterTestEntity >> isPrimitiveType [
 { #category : #testing }
 MooseMSEImporterTestEntity >> isQueryable [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -115,6 +145,7 @@ MooseMSEImporterTestEntity >> isQueryable [
 { #category : #testing }
 MooseMSEImporterTestEntity >> isStructuralEntity [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -122,6 +153,7 @@ MooseMSEImporterTestEntity >> isStructuralEntity [
 { #category : #testing }
 MooseMSEImporterTestEntity >> isType [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]

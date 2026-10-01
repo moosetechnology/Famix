@@ -49,17 +49,10 @@ Trait {
 { #category : #meta }
 FamixTRelativeSourceAnchor classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TRelativeSourceAnchor super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : #visitor }
-FamixTRelativeSourceAnchor >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTRelativeSourceAnchor: self
 ]
 
 { #category : #accessing }
@@ -79,6 +72,7 @@ FamixTRelativeSourceAnchor >> endLine [
 FamixTRelativeSourceAnchor >> endPos [
 
 	<FMProperty: #endPos type: #Number>
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Stop position in the source'>
 	^ endPos
@@ -86,6 +80,7 @@ FamixTRelativeSourceAnchor >> endPos [
 
 { #category : #accessing }
 FamixTRelativeSourceAnchor >> endPos: anObject [
+	<ignoreForCoverage>
 	<generated>
 	endPos := anObject
 ]
@@ -110,6 +105,7 @@ FamixTRelativeSourceAnchor >> initializeStartAndEndLineFrom: sourceText [
 FamixTRelativeSourceAnchor >> relatedAnchor [
 
 	<FMProperty: #relatedAnchor type: #FamixTSourceAnchor>
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Source anchor to which I am relative.'>
 	^ relatedAnchor
@@ -117,6 +113,7 @@ FamixTRelativeSourceAnchor >> relatedAnchor [
 
 { #category : #accessing }
 FamixTRelativeSourceAnchor >> relatedAnchor: anObject [
+	<ignoreForCoverage>
 	<generated>
 	relatedAnchor := anObject
 ]
@@ -143,6 +140,7 @@ FamixTRelativeSourceAnchor >> startLine [
 FamixTRelativeSourceAnchor >> startPos [
 
 	<FMProperty: #startPos type: #Number>
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Start position in the source'>
 	^ startPos
@@ -150,6 +148,7 @@ FamixTRelativeSourceAnchor >> startPos [
 
 { #category : #accessing }
 FamixTRelativeSourceAnchor >> startPos: anObject [
+	<ignoreForCoverage>
 	<generated>
 	startPos := anObject
 ]

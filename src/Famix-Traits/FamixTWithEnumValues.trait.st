@@ -21,17 +21,10 @@ Trait {
 { #category : #meta }
 FamixTWithEnumValues classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TWithEnumValues super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : #visitor }
-FamixTWithEnumValues >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTWithEnumValues: self
 ]
 
 { #category : #accessing }
@@ -44,14 +37,15 @@ FamixTWithEnumValues >> addEnumValue: anObject [
 FamixTWithEnumValues >> enumValues [
 	"Relation named: #enumValues type: #FamixTEnumValue opposite: #parentEnum"
 
+	<ignoreForCoverage>
 	<generated>
-	<derived>
 	^ enumValues
 ]
 
 { #category : #accessing }
 FamixTWithEnumValues >> enumValues: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	enumValues value: anObject
 ]

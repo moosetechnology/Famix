@@ -5,6 +5,7 @@
 ### Parents
 | Relation | Origin | Opposite | Type | Comment |
 |---|
+| `parentPackage` | `FamixTPackageable` | `childEntities` | `FamixTPackage` | Package containing the entity in the code structure (if applicable)|
 | `typeContainer` | `FamixTType` | `types` | `FamixTWithTypes` | Container entity to which this type belongs. Container is a namespace, not a package (Smalltalk).|
 
 ### Children
@@ -23,6 +24,7 @@
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `incomingReferences` | `FamixTReferenceable` | `referredEntity` | `FamixTReference` | References to this entity by other entities.|
+| `incomingTypings` | `FamixTType` | `declaredType` | `FamixTEntityTyping` | Relations to the entities that have this as type.|
 | `subInheritances` | `FamixTWithInheritances` | `superclass` | `FamixTInheritance` | Subinheritance relationships, i.e. known subclasses of this type.|
 
 ### Other
@@ -30,7 +32,6 @@
 |---|
 | `receivingInvocations` | `FamixTInvocationsReceiver` | `receiver` | `FamixTInvocation` | List of invocations performed on this entity (considered as the receiver)|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
-| `typedEntities` | `FamixTType` | `declaredType` | `FamixTTypedEntity` | Entities that have this type as declaredType|
 
 
 ## Properties
@@ -44,17 +45,26 @@
 "
 Class {
 	#name : #FamixTest2Class,
-	#superclass : #FamixTest2NamedEntity,
-	#traits : 'FamixTClass',
-	#classTraits : 'FamixTClass classTrait',
+	#superclass : #FamixTest2Type,
+	#traits : 'FamixTClass + FamixTPackageable',
+	#classTraits : 'FamixTClass classTrait + FamixTPackageable classTrait',
 	#category : #'Famix-Test2-Entities-Entities'
 }
 
 { #category : #meta }
 FamixTest2Class class >> annotation [
 
-	<FMClass: #Class super: #FamixTest2NamedEntity>
+	<ignoreForCoverage>
+	<FMClass: #Class super: #FamixTest2Type>
 	<package: #'Famix-Test2-Entities'>
 	<generated>
-	^ self
+]
+
+{ #category : #groups }
+FamixTest2Class class >> annotationFamixTest2ClassGroup [
+
+	<ignoreForCoverage>
+	<generated>
+	<mooseGroup>
+	^ FamixTest2ClassGroup
 ]

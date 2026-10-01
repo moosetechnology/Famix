@@ -21,17 +21,10 @@ Trait {
 { #category : #meta }
 FamixTWithImplicitVariables classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TWithImplicitVariables super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : #visitor }
-FamixTWithImplicitVariables >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTWithImplicitVariables: self
 ]
 
 { #category : #adding }
@@ -43,15 +36,16 @@ FamixTWithImplicitVariables >> addImplicitVariable: anImplicitVariable [
 FamixTWithImplicitVariables >> implicitVariables [
 	"Relation named: #implicitVariables type: #FamixTImplicitVariable opposite: #parentBehaviouralEntity"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Implicit variables used locally by this behaviour.'>
-	<derived>
 	^ implicitVariables
 ]
 
 { #category : #accessing }
 FamixTWithImplicitVariables >> implicitVariables: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	implicitVariables value: anObject
 ]

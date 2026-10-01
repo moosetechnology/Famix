@@ -26,17 +26,10 @@ Trait {
 { #category : #meta }
 FamixTSourceLanguage classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TSourceLanguage super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : #visitor }
-FamixTSourceLanguage >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTSourceLanguage: self
 ]
 
 { #category : #adding }
@@ -73,15 +66,16 @@ FamixTSourceLanguage >> mooseNameOn: aStream [
 FamixTSourceLanguage >> sourcedEntities [
 	"Relation named: #sourcedEntities type: #FamixTWithSourceLanguages opposite: #declaredSourceLanguage"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'References to the entities saying explicitly that are written in this language.'>
-	<derived>
 	^ sourcedEntities
 ]
 
 { #category : #accessing }
 FamixTSourceLanguage >> sourcedEntities: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	sourcedEntities value: anObject
 ]

@@ -29,15 +29,6 @@ MooseAbstractVisualization class >> icon [
 	^ self subclassResponsibility
 ]
 
-{ #category : #display }
-MooseAbstractVisualization >> asInspectorPresenter [
-
-	self build.
-	^ SpRoassal3InspectorPresenter new
-		  canvas: self canvas;
-		  yourself
-]
-
 { #category : #building }
 MooseAbstractVisualization >> build [
 	self buildLegend.
@@ -48,6 +39,15 @@ MooseAbstractVisualization >> build [
 					menu addTitle: (self mooseInterestingEntityForNode: node) mooseName.
 					menu
 						addAllFrom: (self mooseInterestingEntityForNode: node) mooseMenu ])
+]
+
+{ #category : #display }
+MooseAbstractVisualization >> buildInspectorPresenter: aBuilder [
+
+	self build.
+	^ (aBuilder instantiate: SpRoassalInspectorPresenter)
+		  canvas: self canvas;
+		  yourself
 ]
 
 { #category : #building }

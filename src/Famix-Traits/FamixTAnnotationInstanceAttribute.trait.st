@@ -28,7 +28,7 @@ Instance Variables:
 
 | Name | Type | Default value | Comment |
 |---|
-| `value` | `String` | nil | Actual value of the attribute used in an annotation|
+| `value` | `Object` | nil | Actual value of the attribute used in an annotation|
 
 "
 Trait {
@@ -46,23 +46,17 @@ Trait {
 { #category : #meta }
 FamixTAnnotationInstanceAttribute classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TAnnotationInstanceAttribute super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : #visitor }
-FamixTAnnotationInstanceAttribute >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTAnnotationInstanceAttribute: self
 ]
 
 { #category : #accessing }
 FamixTAnnotationInstanceAttribute >> annotationTypeAttribute [
 	"Relation named: #annotationTypeAttribute type: #FamixTAnnotationTypeAttribute opposite: #annotationAttributeInstances"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'This corresponds to the type of the attribute in an AnnotationInstance'>
 	^ annotationTypeAttribute
@@ -71,6 +65,7 @@ FamixTAnnotationInstanceAttribute >> annotationTypeAttribute [
 { #category : #accessing }
 FamixTAnnotationInstanceAttribute >> annotationTypeAttribute: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	annotationTypeAttribute := anObject
 ]
@@ -79,6 +74,7 @@ FamixTAnnotationInstanceAttribute >> annotationTypeAttribute: anObject [
 FamixTAnnotationInstanceAttribute >> parentAnnotationInstance [
 	"Relation named: #parentAnnotationInstance type: #FamixTAnnotationInstance opposite: #attributes"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The instance of the annotation in which the attribute is used.'>
 	<container>
@@ -88,21 +84,16 @@ FamixTAnnotationInstanceAttribute >> parentAnnotationInstance [
 { #category : #accessing }
 FamixTAnnotationInstanceAttribute >> parentAnnotationInstance: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	parentAnnotationInstance := anObject
-]
-
-{ #category : #navigation }
-FamixTAnnotationInstanceAttribute >> parentAnnotationInstanceGroup [
-	<generated>
-	<navigation: 'ParentAnnotationInstance'>
-	^ MooseSpecializedGroup with: self parentAnnotationInstance
 ]
 
 { #category : #accessing }
 FamixTAnnotationInstanceAttribute >> value [
 
-	<FMProperty: #value type: #String>
+	<FMProperty: #value type: #Object>
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Actual value of the attribute used in an annotation'>
 	^ value
@@ -110,6 +101,7 @@ FamixTAnnotationInstanceAttribute >> value [
 
 { #category : #accessing }
 FamixTAnnotationInstanceAttribute >> value: anObject [
+	<ignoreForCoverage>
 	<generated>
 	value := anObject
 ]

@@ -36,23 +36,17 @@ Trait {
 { #category : #meta }
 FamixTTraitUsage classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TTraitUsage super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : #visitor }
-FamixTTraitUsage >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTTraitUsage: self
 ]
 
 { #category : #accessing }
 FamixTTraitUsage >> trait [
 	"Relation named: #trait type: #FamixTTrait opposite: #incomingTraitUsages"
 
+	<ignoreForCoverage>
 	<generated>
 	<source>
 	^ trait
@@ -61,6 +55,7 @@ FamixTTraitUsage >> trait [
 { #category : #accessing }
 FamixTTraitUsage >> trait: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	trait := anObject
 ]
@@ -69,6 +64,7 @@ FamixTTraitUsage >> trait: anObject [
 FamixTTraitUsage >> user [
 	"Relation named: #user type: #FamixTTraitUser opposite: #traitUsages"
 
+	<ignoreForCoverage>
 	<generated>
 	<target>
 	^ user
@@ -77,6 +73,7 @@ FamixTTraitUsage >> user [
 { #category : #accessing }
 FamixTTraitUsage >> user: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	user := anObject
 ]

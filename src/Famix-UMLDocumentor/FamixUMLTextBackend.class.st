@@ -27,7 +27,7 @@ FamixUMLTextBackend >> export: entities [
 	
 	^[outputStream close ; contents]
 	on: MessageNotUnderstood
-	do: [ "for ZnCharacterWriteStream do3s not answer to #contents :-("
+	do: [ "for ZnCharacterWriteStream which does not answer to #contents :-("
 		''
 	]
 ]
@@ -50,8 +50,8 @@ FamixUMLTextBackend >> generateClass: aClass [
 { #category : #generating }
 FamixUMLTextBackend >> generateClassFooter: aUMLClass [
 
-	outputStream
-		cr.
+	"outputStream
+		cr."
 ]
 
 { #category : #generating }
@@ -59,7 +59,8 @@ FamixUMLTextBackend >> generateClassHeader: aClass [
 
 	outputStream
 		<< 'aUMLClass: ' ;
-		<< aClass name
+		<< aClass name ;
+		cr
 ]
 
 { #category : #generating }
@@ -111,7 +112,7 @@ FamixUMLTextBackend >> generateProperty: property [
 
 	outputStream
 		<< '  ' ;
-		<< property type name ;
+		<< property type ;
 		<< ' : ' ;
 		<< property name ;
 		cr

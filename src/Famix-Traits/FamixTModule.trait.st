@@ -24,17 +24,10 @@ Trait {
 { #category : #meta }
 FamixTModule classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TModule super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : #visitor }
-FamixTModule >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTModule: self
 ]
 
 { #category : #accessing }
@@ -47,6 +40,7 @@ FamixTModule >> addModuleEntity: anObject [
 { #category : #testing }
 FamixTModule >> isModule [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
@@ -55,14 +49,15 @@ FamixTModule >> isModule [
 FamixTModule >> moduleEntities [
 	"Relation named: #moduleEntities type: #FamixTDefinedInModule opposite: #parentModule"
 
+	<ignoreForCoverage>
 	<generated>
-	<derived>
 	^ moduleEntities
 ]
 
 { #category : #accessing }
 FamixTModule >> moduleEntities: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	moduleEntities value: anObject
 ]

@@ -12,15 +12,16 @@ Trait {
 { #category : #meta }
 FamixStTEntityCreator classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TEntityCreator super: #Object>
 	<package: #'Famix-PharoSmalltalk-Entities'>
 	<generated>
-	^ self
 ]
 
 { #category : #'entity creation' }
 FamixStTEntityCreator >> newAccess [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixStAccess new
 ]
@@ -28,6 +29,7 @@ FamixStTEntityCreator >> newAccess [
 { #category : #'entity creation' }
 FamixStTEntityCreator >> newAnnotationInstance [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixStAnnotationInstance new
 ]
@@ -35,6 +37,7 @@ FamixStTEntityCreator >> newAnnotationInstance [
 { #category : #'entity creation' }
 FamixStTEntityCreator >> newAnnotationInstanceAttribute [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixStAnnotationInstanceAttribute new
 ]
@@ -42,6 +45,7 @@ FamixStTEntityCreator >> newAnnotationInstanceAttribute [
 { #category : #'entity creation' }
 FamixStTEntityCreator >> newAnnotationType [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixStAnnotationType new
 ]
@@ -49,6 +53,7 @@ FamixStTEntityCreator >> newAnnotationType [
 { #category : #'entity creation' }
 FamixStTEntityCreator >> newAnnotationTypeAttribute [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixStAnnotationTypeAttribute new
 ]
@@ -56,13 +61,23 @@ FamixStTEntityCreator >> newAnnotationTypeAttribute [
 { #category : #'entity creation' }
 FamixStTEntityCreator >> newAnnotationTypeAttributeNamed: aName [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: (FamixStAnnotationTypeAttribute named: aName)
 ]
 
 { #category : #'entity creation' }
+FamixStTEntityCreator >> newAnnotationTypeNamed: aName [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self add: (FamixStAnnotationType named: aName)
+]
+
+{ #category : #'entity creation' }
 FamixStTEntityCreator >> newAttribute [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixStAttribute new
 ]
@@ -70,6 +85,7 @@ FamixStTEntityCreator >> newAttribute [
 { #category : #'entity creation' }
 FamixStTEntityCreator >> newAttributeNamed: aName [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: (FamixStAttribute named: aName)
 ]
@@ -77,6 +93,7 @@ FamixStTEntityCreator >> newAttributeNamed: aName [
 { #category : #'entity creation' }
 FamixStTEntityCreator >> newClass [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixStClass new
 ]
@@ -84,6 +101,7 @@ FamixStTEntityCreator >> newClass [
 { #category : #'entity creation' }
 FamixStTEntityCreator >> newClassNamed: aName [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: (FamixStClass named: aName)
 ]
@@ -91,13 +109,23 @@ FamixStTEntityCreator >> newClassNamed: aName [
 { #category : #'entity creation' }
 FamixStTEntityCreator >> newComment [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixStComment new
 ]
 
 { #category : #'entity creation' }
+FamixStTEntityCreator >> newEntityTyping [
+
+	<ignoreForCoverage>
+	<generated>
+	^ self add: FamixStEntityTyping new
+]
+
+{ #category : #'entity creation' }
 FamixStTEntityCreator >> newGlobalVariable [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixStGlobalVariable new
 ]
@@ -105,6 +133,7 @@ FamixStTEntityCreator >> newGlobalVariable [
 { #category : #'entity creation' }
 FamixStTEntityCreator >> newGlobalVariableNamed: aName [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: (FamixStGlobalVariable named: aName)
 ]
@@ -112,6 +141,7 @@ FamixStTEntityCreator >> newGlobalVariableNamed: aName [
 { #category : #'entity creation' }
 FamixStTEntityCreator >> newImplicitVariable [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixStImplicitVariable new
 ]
@@ -119,6 +149,7 @@ FamixStTEntityCreator >> newImplicitVariable [
 { #category : #'entity creation' }
 FamixStTEntityCreator >> newImplicitVariableNamed: aName [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: (FamixStImplicitVariable named: aName)
 ]
@@ -126,6 +157,7 @@ FamixStTEntityCreator >> newImplicitVariableNamed: aName [
 { #category : #'entity creation' }
 FamixStTEntityCreator >> newInheritance [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixStInheritance new
 ]
@@ -133,6 +165,7 @@ FamixStTEntityCreator >> newInheritance [
 { #category : #'entity creation' }
 FamixStTEntityCreator >> newInvocation [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixStInvocation new
 ]
@@ -140,6 +173,7 @@ FamixStTEntityCreator >> newInvocation [
 { #category : #'entity creation' }
 FamixStTEntityCreator >> newLocalVariable [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixStLocalVariable new
 ]
@@ -147,6 +181,7 @@ FamixStTEntityCreator >> newLocalVariable [
 { #category : #'entity creation' }
 FamixStTEntityCreator >> newLocalVariableNamed: aName [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: (FamixStLocalVariable named: aName)
 ]
@@ -154,6 +189,7 @@ FamixStTEntityCreator >> newLocalVariableNamed: aName [
 { #category : #'entity creation' }
 FamixStTEntityCreator >> newMethod [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixStMethod new
 ]
@@ -161,6 +197,7 @@ FamixStTEntityCreator >> newMethod [
 { #category : #'entity creation' }
 FamixStTEntityCreator >> newMethodNamed: aName [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: (FamixStMethod named: aName)
 ]
@@ -168,6 +205,7 @@ FamixStTEntityCreator >> newMethodNamed: aName [
 { #category : #'entity creation' }
 FamixStTEntityCreator >> newNamespace [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixStNamespace new
 ]
@@ -175,6 +213,7 @@ FamixStTEntityCreator >> newNamespace [
 { #category : #'entity creation' }
 FamixStTEntityCreator >> newNamespaceNamed: aName [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: (FamixStNamespace named: aName)
 ]
@@ -182,6 +221,7 @@ FamixStTEntityCreator >> newNamespaceNamed: aName [
 { #category : #'entity creation' }
 FamixStTEntityCreator >> newPackage [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixStPackage new
 ]
@@ -189,6 +229,7 @@ FamixStTEntityCreator >> newPackage [
 { #category : #'entity creation' }
 FamixStTEntityCreator >> newPackageNamed: aName [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: (FamixStPackage named: aName)
 ]
@@ -196,6 +237,7 @@ FamixStTEntityCreator >> newPackageNamed: aName [
 { #category : #'entity creation' }
 FamixStTEntityCreator >> newParameter [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixStParameter new
 ]
@@ -203,6 +245,7 @@ FamixStTEntityCreator >> newParameter [
 { #category : #'entity creation' }
 FamixStTEntityCreator >> newParameterNamed: aName [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: (FamixStParameter named: aName)
 ]
@@ -210,6 +253,7 @@ FamixStTEntityCreator >> newParameterNamed: aName [
 { #category : #'entity creation' }
 FamixStTEntityCreator >> newPharoEntitySourceAnchor [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixStPharoEntitySourceAnchor new
 ]
@@ -217,6 +261,7 @@ FamixStTEntityCreator >> newPharoEntitySourceAnchor [
 { #category : #'entity creation' }
 FamixStTEntityCreator >> newReference [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixStReference new
 ]
@@ -224,6 +269,7 @@ FamixStTEntityCreator >> newReference [
 { #category : #'entity creation' }
 FamixStTEntityCreator >> newSourceLanguage [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixStSourceLanguage new
 ]
@@ -231,6 +277,7 @@ FamixStTEntityCreator >> newSourceLanguage [
 { #category : #'entity creation' }
 FamixStTEntityCreator >> newSourceTextAnchor [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixStSourceTextAnchor new
 ]
@@ -238,6 +285,7 @@ FamixStTEntityCreator >> newSourceTextAnchor [
 { #category : #'entity creation' }
 FamixStTEntityCreator >> newUnknownVariable [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: FamixStUnknownVariable new
 ]
@@ -245,6 +293,7 @@ FamixStTEntityCreator >> newUnknownVariable [
 { #category : #'entity creation' }
 FamixStTEntityCreator >> newUnknownVariableNamed: aName [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self add: (FamixStUnknownVariable named: aName)
 ]

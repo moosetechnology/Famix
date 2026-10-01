@@ -30,6 +30,13 @@ MooseModel class >> annotation [
 ]
 
 { #category : #testing }
+MooseModel class >> canBeGenerated [
+	"Models are generated."
+
+	^ true
+]
+
+{ #category : #testing }
 MooseModel class >> canBeImportedFromFile [
 
 	^ false
@@ -339,13 +346,20 @@ MooseModel >> addNoAnnounce: anElement [
 
 { #category : #'dead code' }
 MooseModel >> allBehaviouralsWithDeadCode [
+
 	<navigation: 'All behaviourals with dead code'>
-	^ self lookUpPropertyNamed: #allBehaviouralsWithDeadCode computedAs: [ self computeAllBehaviouralsWithDeadCode ]
+	^ self cacheAt: #allBehaviouralsWithDeadCode ifAbsent: [ self computeAllBehaviouralsWithDeadCode ]
 ]
 
 { #category : #accessing }
 MooseModel >> allRootContainers [
 	^ self allModelContainers select: #isRoot
+]
+
+{ #category : #'import-export' }
+MooseModel >> asJSONString [
+
+	^ String streamContents: [ :stream | self exportToJSONStream: stream ]
 ]
 
 { #category : #'import-export' }
@@ -382,9 +396,8 @@ MooseModel >> computeNumberOfLinesOfCode [
 
 { #category : #'dead code' }
 MooseModel >> deadCodeRate [
-	^ self
-		lookUpPropertyNamed: #deadCodeRate
-		computedAs: [ self allBehaviouralsWithDeadCode size / self allModelBehaviourals size ]
+
+	^ self cacheAt: #deadCodeRate ifAbsentPut: [ self allBehaviouralsWithDeadCode size / self allModelBehaviourals size ]
 ]
 
 { #category : #'import-export' }
@@ -665,6 +678,18 @@ MooseModel >> localMooseModel [
 ]
 
 { #category : #accessing }
+MooseModel >> metadescription [
+
+	^ self metadescriptionFor: self class
+]
+
+{ #category : #accessing }
+MooseModel >> metadescriptionFor: class [
+
+	^ self metamodel fmTypeOf: class instanceSide
+]
+
+{ #category : #accessing }
 MooseModel >> metamodel [
 
 	^ metamodel ifNil: [ MooseModel metamodel ]
@@ -673,17 +698,6 @@ MooseModel >> metamodel [
 { #category : #accessing }
 MooseModel >> metamodel: anObject [
 	metamodel := anObject
-]
-
-{ #category : #accessing }
-MooseModel >> mooseDescription [
-	^ self mooseDescriptionFor: self class
-]
-
-{ #category : #accessing }
-MooseModel >> mooseDescriptionFor: class [
-
-	^ self metamodel fmTypeOf: class instanceSide
 ]
 
 { #category : #accessing }
@@ -711,28 +725,26 @@ MooseModel >> name: aStringOrSymbol [
 
 { #category : #metrics }
 MooseModel >> numberOfClasses [
+
 	<FMProperty: #numberOfClasses type: #Number>
 	<FMComment: 'The number of classes'>
-	
-	^self
-		lookUpPropertyNamed: #numberOfClasses
-		computedAs: [ self allClasses size ]
+	^ self cacheAt: #numberOfClasses ifAbsentPut: [ self allClasses size ]
 ]
 
 { #category : #metrics }
 MooseModel >> numberOfLinesOfCode [
+
 	<FMProperty: #numberOfLinesOfCode type: #Number>
 	<FMComment: 'The number of lines of code of the project.'>
-	^ self lookUpPropertyNamed: #numberOfLinesOfCode computedAs: [ self computeNumberOfLinesOfCode ]
+	^ self cacheAt: #numberOfLinesOfCode ifAbsentPut: [ self computeNumberOfLinesOfCode ]
 ]
 
 { #category : #metrics }
 MooseModel >> numberOfLinesOfCodePerClass [
+
 	<FMProperty: #numberOfLinesOfCodePerClass type: #Number>
 	<FMComment: 'The number of lines of code per class in the model'>
-	^ self
-		lookUpPropertyNamed: #numberOfLinesOfCodePerClass
-		computedAs: [ self numberOfLinesOfCode / self numberOfClasses ]
+	^ self cacheAt: #numberOfLinesOfCodePerClass ifAbsentPut: [ self numberOfLinesOfCode / self numberOfClasses ]
 ]
 
 { #category : #accessing }

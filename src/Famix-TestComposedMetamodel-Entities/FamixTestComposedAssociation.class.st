@@ -33,16 +33,17 @@ Class {
 { #category : #meta }
 FamixTestComposedAssociation class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Association super: #FamixTestComposedStandardEntity>
 	<package: #'Famix-TestComposedMetamodel-Entities'>
 	<generated>
-	^ self
 ]
 
 { #category : #accessing }
 FamixTestComposedAssociation >> c15 [
 	"Relation named: #c15 type: #FamixTestComposed1CustomEntity5 opposite: #associations"
 
+	<ignoreForCoverage>
 	<generated>
 	<target>
 	<FMProperty: #c15 type: #FamixTestComposed1CustomEntity5 opposite: #associations>
@@ -52,6 +53,7 @@ FamixTestComposedAssociation >> c15 [
 { #category : #accessing }
 FamixTestComposedAssociation >> c15: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	self attributeAt: #c15 put: (FMMultivalueLink on: self update: #associations from: self c15 to: anObject).
 ]
@@ -60,6 +62,7 @@ FamixTestComposedAssociation >> c15: anObject [
 FamixTestComposedAssociation >> c25 [
 	"Relation named: #c25 type: #FamixTestComposed2CustomEntity5 opposite: #associations"
 
+	<ignoreForCoverage>
 	<generated>
 	<source>
 	<FMProperty: #c25 type: #FamixTestComposed2CustomEntity5 opposite: #associations>
@@ -69,6 +72,7 @@ FamixTestComposedAssociation >> c25 [
 { #category : #accessing }
 FamixTestComposedAssociation >> c25: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	self attributeAt: #c25 put: (FMMultivalueLink on: self update: #associations from: self c25 to: anObject).
 ]

@@ -21,23 +21,17 @@ Class {
 { #category : #meta }
 FamixJavaVariable class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Variable super: #FamixJavaNamedEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
 	<abstract>
-	^ self
 ]
 
 { #category : #testing }
 FamixJavaVariable class >> isAbstract [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self == FamixJavaVariable
-]
-
-{ #category : #visitor }
-FamixJavaVariable >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaVariable: self
 ]

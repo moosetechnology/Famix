@@ -29,8 +29,9 @@ MQAbstractQuery >> execute [
 
 { #category : #initialization }
 MQAbstractQuery >> initialize [
+
 	super initialize.
-	result := Set new
+	result := IdentitySet new
 ]
 
 { #category : #accessing }

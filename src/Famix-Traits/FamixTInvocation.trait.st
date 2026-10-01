@@ -55,24 +55,19 @@ Trait {
 { #category : #meta }
 FamixTInvocation classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TInvocation super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : #groups }
 FamixTInvocation classSide >> annotationFamixInvocationGroup [
+
+	<ignoreForCoverage>
 	<generated>
 	<mooseGroup>
 	^ FamixInvocationGroup
-]
-
-{ #category : #visitor }
-FamixTInvocation >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTInvocation: self
 ]
 
 { #category : #adding }
@@ -89,6 +84,7 @@ FamixTInvocation >> anyCandidate [
 FamixTInvocation >> candidates [
 	"Relation named: #candidates type: #FamixTInvocable opposite: #incomingInvocations"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'List of candidate behavioural entities for receiving the invocation'>
 	<target>
@@ -98,6 +94,7 @@ FamixTInvocation >> candidates [
 { #category : #accessing }
 FamixTInvocation >> candidates: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	candidates value: anObject
 ]
@@ -137,36 +134,6 @@ FamixTInvocation >> displayStringOn: aStream [
 		ifNil: [ aStream nextPutAll: ' ? ' ]
 ]
 
-{ #category : #'instance creation' }
-FamixTInvocation >> getReceivingFAMIXClass [
-
-	self
-		deprecated: 'Please use getReceivingFamixClass instead'
-		transformWith: '`@receiver getReceivingFAMIXClass'
-			-> '`@receiver getReceivingFamixClass'.
-	^ self getReceivingFamixClass
-]
-
-{ #category : #'instance creation' }
-FamixTInvocation >> getReceivingFamixClass [
-
-	"Returns the Famix class of the receiver. If the receiver is a Famix class, this one is returned. 
-	If it is self or super, the corresponding Famix class is returned. 
-	The receiver may not be nil"
-
-	| tmpReceiver |
-	tmpReceiver := self receiver.
-
-	tmpReceiver isImplicitVariable
-		ifTrue: [ 
-			| belongsTo |
-			belongsTo := tmpReceiver belongsTo parentType.
-			tmpReceiver isSelf ifTrue: [ ^ belongsTo ].
-			tmpReceiver isSuper ifTrue: [ 
-				^ belongsTo superclass ifNil: [ belongsTo ] ] ]
-		ifFalse: [ ^ tmpReceiver ]
-]
-
 { #category : #accessing }
 FamixTInvocation >> invokedEntity [
 	"This method returns only one candidate if there is one, or raises an error if there is more or less than one candidate."
@@ -186,14 +153,32 @@ FamixTInvocation >> invokedEntity: anEntity [
 { #category : #testing }
 FamixTInvocation >> isInvocation [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
+]
+
+{ #category : #testing }
+FamixTInvocation >> isSelfInvocation [
+
+	self receiver ifNil: [ ^ false ].
+
+	^ self receiver isImplicitVariable and: [ self receiver isSelf ]
+]
+
+{ #category : #testing }
+FamixTInvocation >> isSuperInvocation [
+
+	self receiver ifNil: [ ^ false ].
+
+	^ self receiver isImplicitVariable and: [ self receiver isSuper ]
 ]
 
 { #category : #accessing }
 FamixTInvocation >> receiver [
 	"Relation named: #receiver type: #FamixTInvocationsReceiver opposite: #receivingInvocations"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Named entity (variable, class...) receiving the invocation. to-side of the association'>
 	^ receiver
@@ -202,6 +187,7 @@ FamixTInvocation >> receiver [
 { #category : #accessing }
 FamixTInvocation >> receiver: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	receiver := anObject
 ]
@@ -210,6 +196,7 @@ FamixTInvocation >> receiver: anObject [
 FamixTInvocation >> sender [
 	"Relation named: #sender type: #FamixTWithInvocations opposite: #outgoingInvocations"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Behavioural entity making the call. from-side of the association'>
 	<source>
@@ -219,6 +206,15 @@ FamixTInvocation >> sender [
 { #category : #accessing }
 FamixTInvocation >> sender: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	sender := anObject
+]
+
+{ #category : #accessing }
+FamixTInvocation >> target: aTarget [
+
+	aTarget isCollection
+		ifTrue: [ self candidates: aTarget ]
+		ifFalse: [ self invokedEntity: aTarget ]
 ]

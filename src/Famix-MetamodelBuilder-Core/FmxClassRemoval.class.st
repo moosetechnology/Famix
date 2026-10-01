@@ -22,7 +22,7 @@ Class {
 	#instVars : [
 		'class'
 	],
-	#category : #'Famix-MetamodelBuilder-Core-Changes'
+	#category : #'Famix-MetamodelBuilder-Core-Generation'
 }
 
 { #category : #'instance creation' }
@@ -30,6 +30,13 @@ FmxClassRemoval class >> class: aClass [
 	^ self new
 		classToRemove: aClass;
 		yourself
+]
+
+{ #category : #accessing }
+FmxClassRemoval class >> priority [
+	"Class removal happens after method and slot removals."
+
+	^ 3
 ]
 
 { #category : #accessing }
@@ -45,12 +52,6 @@ FmxClassRemoval >> classToRemove [
 { #category : #accessing }
 FmxClassRemoval >> classToRemove: anObject [
 	class := anObject
-]
-
-{ #category : #testing }
-FmxClassRemoval >> isRemoval [
-
-	^ true
 ]
 
 { #category : #printing }

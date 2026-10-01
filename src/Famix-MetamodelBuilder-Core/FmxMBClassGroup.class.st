@@ -7,31 +7,23 @@ Class {
 	#category : #'Famix-MetamodelBuilder-Core-Implementation'
 }
 
+{ #category : #visitor }
+FmxMBClassGroup >> acceptVisitor: aVisitor [
+
+	<ignoreForCoverage>
+	^ aVisitor visitClassGroup: self
+]
+
 { #category : #'settings - default' }
-FmxMBClassGroup >> defaultSuperclass [
-	^ self builder environment basicGroupSuperclass
+FmxMBClassGroup >> defaultSuperclassName [
+
+	^ #MooseSpecializedGroup
 ]
 
 { #category : #'settings - default' }
 FmxMBClassGroup >> defaultTag [
-	^ self builder configuration groupTag
-]
 
-{ #category : #generating }
-FmxMBClassGroup >> generate [
-	super generate.
-	self generateMooseGroupAnnotationIn: innerClass ensureRealClass as: self fullName superclass: nil.
-]
-
-{ #category : #'generating-methods' }
-FmxMBClassGroup >> generateMooseGroupAnnotationIn: aRealClass as: aName superclass: aSuperclass [
-
-	aRealClass classSide
-		compile: ('annotation{1}
-	<generated>
-	<mooseGroup>
-	^ {1}' format: { aName })
-		classified: 'groups'
+	^ #Groups
 ]
 
 { #category : #accessing }

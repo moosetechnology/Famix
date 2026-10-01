@@ -18,10 +18,10 @@ Trait {
 { #category : #meta }
 FamixTNamedEntity classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TNamedEntity super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : #'instance creation' }
@@ -37,13 +37,6 @@ FamixTNamedEntity classSide >> named: aString model: aMooseModel [
 		mooseModel: aMooseModel;
 		name: aString;
 		yourself
-]
-
-{ #category : #visitor }
-FamixTNamedEntity >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTNamedEntity: self
 ]
 
 { #category : #printing }
@@ -67,6 +60,7 @@ FamixTNamedEntity >> mooseNameOn: stream [
 FamixTNamedEntity >> name [
 
 	<FMProperty: #name type: #String>
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Basic name of the entity, not full reference.'>
 	^ name
@@ -82,6 +76,8 @@ FamixTNamedEntity >> name: anObject [
 
 { #category : #accessing }
 FamixTNamedEntity >> resetMooseName [
-	(super resetMooseName and: [ self class withAllSuperclasses anySatisfy: [ :class | class isComposedBy: TEntityMetaLevelDependency ] ]) ifTrue: [ self children do: [ :entity | entity resetMooseName ] ].
+
+	(super resetMooseName and: [ self class withAllSuperclasses anySatisfy: [ :class | class isComposedBy: TEntityMetaLevelDependency ] ]) ifTrue: [
+		self containedEntities do: [ :entity | entity resetMooseName ] ].
 	^ false
 ]

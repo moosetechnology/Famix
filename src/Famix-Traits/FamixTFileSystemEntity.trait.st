@@ -21,18 +21,18 @@ Trait {
 	#instVars : [
 		'#parentFolder => FMOne type: #FamixTFolder opposite: #childrenFileSystemEntities'
 	],
-	#traits : 'FamixTNamedEntity',
-	#classTraits : 'FamixTNamedEntity classTrait',
+	#traits : 'FamixTNamedEntity + TEntityMetaLevelDependency',
+	#classTraits : 'FamixTNamedEntity classTrait + TEntityMetaLevelDependency classTrait',
 	#category : #'Famix-Traits-File'
 }
 
 { #category : #meta }
 FamixTFileSystemEntity classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TFileSystemEntity super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : #constants }
@@ -51,13 +51,6 @@ FamixTFileSystemEntity classSide >> named: aName filedIn: aFolder [
 { #category : #constants }
 FamixTFileSystemEntity classSide >> systemFolderSeparatorString [
 	^ DiskStore delimiter asString 
-]
-
-{ #category : #visitor }
-FamixTFileSystemEntity >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTFileSystemEntity: self
 ]
 
 { #category : #accessing }
@@ -116,16 +109,18 @@ FamixTFileSystemEntity >> numberOfEmptyLinesOfText [
 
 { #category : #accessing }
 FamixTFileSystemEntity >> numberOfLinesOfText [
+
 	<FMProperty: #numberOfLinesOfText type: #Number>
 	<FMComment: 'Number of lines of text which are not empty in a file'>
 	<derived>
-	^ self lookUpPropertyNamed: #numberOfLinesOfText computedAs: [ self totalNumberOfLinesOfText - self numberOfEmptyLinesOfText ]
+	^ self cacheAt: #numberOfLinesOfText ifAbsentPut: [ self totalNumberOfLinesOfText - self numberOfEmptyLinesOfText ]
 ]
 
 { #category : #accessing }
 FamixTFileSystemEntity >> parentFolder [
 	"Relation named: #parentFolder type: #FamixTFolder opposite: #childrenFileSystemEntities"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Folder entity containing this file.'>
 	<container>
@@ -136,13 +131,6 @@ FamixTFileSystemEntity >> parentFolder [
 FamixTFileSystemEntity >> parentFolder: anObject [
 	parentFolder := anObject.
 	self resetMooseName
-]
-
-{ #category : #navigation }
-FamixTFileSystemEntity >> parentFolderGroup [
-	<generated>
-	<navigation: 'ParentFolder'>
-	^ MooseSpecializedGroup with: self parentFolder
 ]
 
 { #category : #accessing }

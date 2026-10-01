@@ -25,23 +25,17 @@ Trait {
 { #category : #meta }
 FamixJavaTBounded classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TBounded super: #Object>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^ self
-]
-
-{ #category : #visitor }
-FamixJavaTBounded >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaTBounded: self
 ]
 
 { #category : #accessing }
 FamixJavaTBounded >> lowerBound [
 	"Relation named: #lowerBound type: #FamixJavaTBound opposite: #lowerBoundedWildcards"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Lower bound on wildcard, specified by super keyword.'>
 	^ lowerBound
@@ -50,6 +44,7 @@ FamixJavaTBounded >> lowerBound [
 { #category : #accessing }
 FamixJavaTBounded >> lowerBound: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	lowerBound := anObject
 ]
@@ -58,6 +53,7 @@ FamixJavaTBounded >> lowerBound: anObject [
 FamixJavaTBounded >> upperBound [
 	"Relation named: #upperBound type: #FamixJavaTBound opposite: #upperBoundedWildcards"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Upper bound on wildcard, specified by extends keyword.'>
 	^ upperBound
@@ -66,6 +62,7 @@ FamixJavaTBounded >> upperBound [
 { #category : #accessing }
 FamixJavaTBounded >> upperBound: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	upperBound := anObject
 ]

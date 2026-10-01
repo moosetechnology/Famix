@@ -9,18 +9,18 @@ FamixTest >> classWithUnknownAttribute [
 
 	^ '
 (
-	(Famix-Test3-Entities.Class (id: 1)
+	(Famix-Test2-Entities.Class (id: 1)
 		(name ''AClass'') 
 		(unknownMetric 3)
 	)
-	(Famix-Test3-Entities.Class (id: 2)
+	(Famix-Test2-Entities.Class (id: 2)
 		(name ''SuperClass'')
 	)
-	(Famix-Test3-Entities.Reference (id: 3)
+	(Famix-Test2-Entities.Reference (id: 3)
 		(referencer (ref: 4))
 		(referredType (ref: 2))
 	)
-	(Famix-Test3-Entities.Method (id: 4)
+	(Famix-Test2-Entities.Method (id: 4)
 		(name ''aMethod'') 
 		(parentType (ref: 1))
 	)
@@ -32,10 +32,10 @@ FamixTest >> oneClassAndOneMethod [
 	
 	^'
 (
-	(Famix-Test3-Entities.Class (id: 1)
+	(Famix-Test2-Entities.Class (id: 1)
 		(name ''AClass'') 
 	)
-	(Famix-Test3-Entities.Method
+	(Famix-Test2-Entities.Method
 		(name ''aMethod'') 
 		(parentType (ref: 1))
 	)
@@ -48,11 +48,11 @@ FamixTest >> oneClassAndOneMethod [
 { #category : #tests }
 FamixTest >> testMSEImport [
 	| importer model |
-	importer := (FMImporter model: (FMModel withMetamodel: FamixTest3Model metamodel))
+	importer := (FMImporter model: (FMModel withMetamodel: FamixTest2Model metamodel))
 		fromString: self oneClassAndOneMethod;
 		run.
 	self assert: importer model elements size equals: 2.
-	model := FamixTest3Model new.
+	model := FamixTest2Model new.
 	model addAll: importer model elements.
 	self assert: model allClasses size equals: 1.
 	self assert: model allMethods size equals: 1
@@ -66,12 +66,12 @@ FamixTest >> testRobustMSEImport [
 	This line will appear in CI traces, hence the following:"
 	self crTrace: '[Testing: This line is expected] '.
 	importer := (FMImporter model:
-			             (FMModel withMetamodel: FamixTest3Model metamodel))
+			             (FMModel withMetamodel: FamixTest2Model metamodel))
 		            fromString: self classWithUnknownAttribute;
 		            run.
 
 	self assert: importer model elements size equals: 4.
-	model := FamixTest3Model new.
+	model := FamixTest2Model new.
 	model addAll: importer model elements.
 	self assert: model allClasses size equals: 2.
 	self assert: model allMethods size equals: 1.
@@ -81,8 +81,8 @@ FamixTest >> testRobustMSEImport [
 { #category : #tests }
 FamixTest >> testSlot [
 	| fClass fMethod |
-	fClass := FamixTest3Class new.
-	fMethod := FamixTest3Method new.
+	fClass := FamixTest2Class new.
+	fMethod := FamixTest2Method new.
 	fMethod parentType: fClass.
 	self assert: (fClass methods at: 1) equals: fMethod
 ]
@@ -90,14 +90,14 @@ FamixTest >> testSlot [
 { #category : #tests }
 FamixTest >> testSourcesAnchorsAreNotDuplicatedAfterExport [
 	| model tempFile importedModel |
-	model := FamixTest3Model new name: 'Perdu'.
-	FamixTest3Class new
+	model := FamixTest2Model new name: 'Perdu'.
+	FamixTest2Class new
 		name: 'Class';
-		sourceAnchor: (FamixTest3SourceTextAnchor source: 'some text' model: model);
+		sourceAnchor: (FamixTest2SourceTextAnchor source: 'some text' model: model);
 		mooseModel: model.
 	tempFile := (FileSystem memory / 'export-test.mse') ensureCreateFile.
 	tempFile writeStreamDo: [ :s | model exportToMSEStream: s ].
-	importedModel := FamixTest3Model new importFromMSEStream: tempFile readStream.
+	importedModel := FamixTest2Model new importFromMSEStream: tempFile readStream.
 	self assert: importedModel size equals: model size.
 	self assert: importedModel allClasses anyOne sourceAnchor isNotNil
 ]

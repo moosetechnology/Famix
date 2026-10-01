@@ -20,23 +20,17 @@ Trait {
 { #category : #meta }
 FamixTHasSignature classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #THasSignature super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : #visitor }
-FamixTHasSignature >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTHasSignature: self
 ]
 
 { #category : #accessing }
 FamixTHasSignature >> signature [
 
 	<FMProperty: #signature type: #String>
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Signature of the message being sent'>
 	^ signature
@@ -44,6 +38,7 @@ FamixTHasSignature >> signature [
 
 { #category : #accessing }
 FamixTHasSignature >> signature: anObject [
+	<ignoreForCoverage>
 	<generated>
 	signature := anObject
 ]

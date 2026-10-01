@@ -70,8 +70,13 @@ MooseEntity class >> model: aMooseModel [
 
 { #category : #dependencies }
 MooseEntity >> addAllChildrenDependenciesThrough: aDirectionStrategy in: aCollection [
-	aCollection addAll: (aDirectionStrategy dependenciesAtReceiverScopeOf: self).
-	self children do: [ :each | each addAllChildrenDependenciesThrough: aDirectionStrategy in: aCollection ].
+
+	aCollection addAll:
+		(aDirectionStrategy dependenciesAtReceiverScopeOf: self).
+	self containedEntities do: [ :each |
+			each
+				addAllChildrenDependenciesThrough: aDirectionStrategy
+				in: aCollection ].
 	^ aCollection
 ]
 
@@ -116,6 +121,12 @@ MooseEntity >> allProvidersIn: aMooseGroup forModel: aMooseModel [
 	^ FamixDependenciesDetector computeProvidersOf: self from: aMooseGroup in: aMooseModel
 ]
 
+{ #category : #converting }
+MooseEntity >> asOrderedCollection [
+
+	^ OrderedCollection with: self
+]
+
 { #category : #dependencies }
 MooseEntity >> canRecursivelyBeItsParent [
 	^ false
@@ -134,12 +145,13 @@ MooseEntity >> detectDependenciesUsing: aDetector [
 { #category : #properties }
 MooseEntity >> handleFameProperty: aSymbol value: anObject [
 	"If my super method is able to handle the missing property, I'm doing nothing. Else I save the value in the properties of the entity."
+
 	| value |
 	(super handleFameProperty: aSymbol value: anObject) ifTrue: [ ^ self ].
 	value := (anObject isCollection and: [ anObject size = 1 ])
 		         ifTrue: [ anObject anyOne ]
 		         ifFalse: [ anObject ].
-	self propertyNamed: aSymbol put: value
+	self attributeAt: aSymbol put: value
 ]
 
 { #category : #initialization }
@@ -174,7 +186,7 @@ MooseEntity >> isLinkedTo: anEntity dependancyDirection: aDirectionStrategy in: 
 
 	| allLinksWithParents |
 	allLinksWithParents := self allChildrenDependenciesThrough: aDirectionStrategy.
-	allLinksWithParents addAll: (allLinksWithParents flatCollect: #allParents).
+	allLinksWithParents addAll: (allLinksWithParents flatCollect: #allContainers).
 
 	^ anEntity isInListOfPossibleLinks: allLinksWithParents forModel: aMooseModel
 ]

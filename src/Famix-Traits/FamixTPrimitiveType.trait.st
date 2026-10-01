@@ -11,12 +11,12 @@
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `incomingReferences` | `FamixTReferenceable` | `referredEntity` | `FamixTReference` | References to this entity by other entities.|
+| `incomingTypings` | `FamixTType` | `declaredType` | `FamixTEntityTyping` | Relations to the entities that have this as type.|
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
-| `typedEntities` | `FamixTType` | `declaredType` | `FamixTTypedEntity` | Entities that have this type as declaredType|
 
 
 ## Properties
@@ -38,22 +38,16 @@ Trait {
 { #category : #meta }
 FamixTPrimitiveType classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TPrimitiveType super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : #visitor }
-FamixTPrimitiveType >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTPrimitiveType: self
 ]
 
 { #category : #testing }
 FamixTPrimitiveType >> isPrimitiveType [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]

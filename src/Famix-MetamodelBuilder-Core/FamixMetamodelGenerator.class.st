@@ -78,11 +78,15 @@ FamixMetamodelGenerator class >> generate [
 
 { #category : #generation }
 FamixMetamodelGenerator class >> generateAllMetamodels [
+
 	<script>
-	FMRelationSlot allSubInstancesDo: #initialize.
-	self metamodelsToGenerate
-		do: [ :mm | mm generate ]
-		displayingProgress: [ :mm | 'Regenerate ' , mm name ]
+	self generateAllMetamodelsSuchAs: [ :generator | true ]
+]
+
+{ #category : #generation }
+FamixMetamodelGenerator class >> generateAllMetamodelsSuchAs: aBlock [
+
+	(self metamodelsToGenerate select: aBlock) do: [ :mm | mm generate ] displayingProgress: [ :mm | 'Regenerate ' , mm name ] every: 200
 ]
 
 { #category : #generation }
@@ -148,17 +152,10 @@ FamixMetamodelGenerator class >> packageName [
 ]
 
 { #category : #accessing }
-FamixMetamodelGenerator class >> packageNameForAnnotations [
-
-	<ignoreForCoverage>
-	^ self packageName
-]
-
-{ #category : #accessing }
 FamixMetamodelGenerator class >> prefix [
 
 	<ignoreForCoverage>
-	^ self packageName
+	^ self subclassResponsibility
 ]
 
 { #category : #accessing }
@@ -188,8 +185,7 @@ FamixMetamodelGenerator >> adoptBuilder: aBuilder [
 
 	aBuilder configuration
 		prefix: self prefix;
-		packageName: self packageName;
-		packageNameForAnnotations: self packageNameForAnnotations
+		packageName: self packageName
 ]
 
 { #category : #accessing }
@@ -207,12 +203,18 @@ FamixMetamodelGenerator >> allSubBuilders [
 FamixMetamodelGenerator >> apply: aTrait on: aGeneratedClass oppositeOn: anotherGeneratedClass [
 	"A shorter version of #apply:on:oppositeTrait:on:
 	Only works if aTrait has excatly 1 opposite (slot)"
-	| oppositeTrait |
 
-	((builder getTraitNamed: aTrait) properties size = 1) ifFalse: [ self error: '#apply:on:oppositeOn: only accept traits with a unique opposite' ].
+	| oppositeTrait properties |
+	properties := (builder getTraitNamed: aTrait) propertiesAndRelations.
 
-	oppositeTrait := (builder getTraitNamed: aTrait) properties anyOne relation side relatedClass name.	
-	self apply: aTrait on: aGeneratedClass oppositeTrait: oppositeTrait on: anotherGeneratedClass
+	properties size = 1 ifFalse: [ self error: '#apply:on:oppositeOn: only accept traits with a unique opposite' ].
+
+	oppositeTrait := properties anyOne oppositeClass name.
+	self
+		apply: aTrait
+		on: aGeneratedClass
+		oppositeTrait: oppositeTrait
+		on: anotherGeneratedClass
 ]
 
 { #category : #definition }
@@ -240,8 +242,13 @@ FamixMetamodelGenerator >> builder: anObject [
 
 { #category : #testing }
 FamixMetamodelGenerator >> changesToApply [
+
+	| allChanges |
+	allChanges := OrderedCollection new.
 	self define.
-	^ self builder changesToApply
+	allChanges addAll: self builder changesToApply.
+	self subBuilders do: [ :remote | allChanges addAll: remote remoteChangesToApply ].
+	^ allChanges
 ]
 
 { #category : #accessing }
@@ -268,7 +275,7 @@ FamixMetamodelGenerator >> define [
 
 { #category : #definition }
 FamixMetamodelGenerator >> defineAssociations [
-	"See example in FamixTest8Generator>>#defineAssociations"
+	"See example in FamixTest3Generator>>#defineAssociations"
 
 	
 ]
@@ -339,18 +346,13 @@ FamixMetamodelGenerator >> initialize [
 	builder := self newBuilder.
 	self adoptBuilder: builder.
 
-	subBuildersMapByPrefix := Dictionary newFrom:
-		                          (self class submetamodels collect: [ :each |
-			                           | subbuilder |
-			                           subbuilder := each
-				                                         builderWithDefinitions.
-			                           subbuilder parentBuilder: self builder.
-			                           builder environment: builder environment.
-			                           each prefix -> subbuilder ]).
+	subBuildersMapByPrefix := Dictionary newFrom: (self class submetamodels collect: [ :each |
+				                           | subbuilder |
+				                           subbuilder := each builderWithDefinitions.
+				                           subbuilder parentBuilder: self builder.
+				                           each prefix -> subbuilder ]).
 
-	metamodelToolGenerators := self class metamodelToolGenerators
-		                           collect: [ :generatorClass |
-		                           generatorClass forGenerator: self ]
+	metamodelToolGenerators := self class metamodelToolGenerators collect: [ :generatorClass | generatorClass forGenerator: self ]
 ]
 
 { #category : #accessing }
@@ -407,13 +409,6 @@ FamixMetamodelGenerator >> packageName [
 ]
 
 { #category : #definition }
-FamixMetamodelGenerator >> packageNameForAnnotations [
-
-	^ self class packageNameForAnnotations
-
-]
-
-{ #category : #definition }
 FamixMetamodelGenerator >> prefix [
 
 	^ self class prefix
@@ -421,18 +416,26 @@ FamixMetamodelGenerator >> prefix [
 
 { #category : #definition }
 FamixMetamodelGenerator >> remoteEntity: anEntityName withPrefix: aPrefixName [
-	^ ((subBuildersMapByPrefix at: aPrefixName) ensureClassNamed: anEntityName)
-		isRemote: true;
-		remoteBuilder: builder;
-		yourself
+
+	| subBuilder |
+	subBuilder := subBuildersMapByPrefix at: aPrefixName ifAbsent: [ NotFound signalFor: aPrefixName in: subBuildersMapByPrefix keys ].
+
+	^ ((subBuilder classNamed: anEntityName) ifNil: [ NotFound signalFor: anEntityName in: subBuilder classes ])
+		  isRemote: true;
+		  remoteBuilder: builder;
+		  yourself
 ]
 
 { #category : #definition }
 FamixMetamodelGenerator >> remoteTrait: anEntityName withPrefix: aPrefixName [
-	^ ((subBuildersMapByPrefix at: aPrefixName) traitNamed: anEntityName)
-		isRemote: true;
-		remoteBuilder: builder;
-		yourself
+
+	| subBuilder |
+	subBuilder := subBuildersMapByPrefix at: aPrefixName ifAbsent: [ NotFound signalFor: aPrefixName in: subBuildersMapByPrefix keys ].
+
+	^ ((subBuilder traitNamed: anEntityName) ifNil: [ NotFound signalFor: anEntityName in: subBuilder traits ])
+		  isRemote: true;
+		  remoteBuilder: builder;
+		  yourself
 ]
 
 { #category : #accessing }

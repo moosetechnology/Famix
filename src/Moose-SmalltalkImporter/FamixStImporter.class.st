@@ -120,17 +120,24 @@ FamixStImporter >> createAttribute: name for: aClass [
 
 	| attribute realName possibleTypes |
 	realName := self nameForInstanceVariable: name class: aClass.
-	attribute := (self scopeOfClass: aClass) at: realName bind: self factory attribute new.
+	attribute := (self scopeOfClass: aClass)
+		             at: realName
+		             bind: self factory attribute new.
 	attribute stub: true.
 	attribute name: realName asSymbol.
 	self importingContext shouldMergeClassAndMetaclass
-		ifTrue: [ attribute parentType: (self ensureClass: aClass instanceSide) ]
+		ifTrue: [
+		attribute parentType: (self ensureClass: aClass instanceSide) ]
 		ifFalse: [ attribute parentType: (self ensureClass: aClass) ].
 	attribute isClassSide: aClass isMeta.
 	"now we use RoelTyper to see a unique type can be retrieve for this attribute: "
 	self importingContext shouldComputeTypeOfAttributes ifTrue: [
-		possibleTypes := (TypeCollector typeInstvar: name asSymbol ofClassWithLookup: aClass) types.
-		possibleTypes size = 1 ifTrue: [ attribute declaredType: (self ensureClass: possibleTypes first instanceSide) ] ].
+		possibleTypes := (TypeCollector
+			                  typeInstvar: name asSymbol
+			                  ofClassWithLookup: aClass) types.
+		possibleTypes size = 1 ifTrue: [
+			attribute typing: (FamixStEntityTyping new declaredType:
+					 (self ensureClass: possibleTypes first instanceSide)) ] ].
 	^ attribute
 ]
 
@@ -194,14 +201,13 @@ FamixStImporter >> createClassVarAttribute: name for: aClass [
 ]
 
 { #category : #'private-entity-creation' }
-FamixStImporter >> createGlobalVariable: name value: value [ 
-	 
-	| global | 
-	global := globals 
-		at: name 
-		put: self factory globalVariable new. 
-	global name: name. 
-	global declaredType: (self ensureClass: value class ).
+FamixStImporter >> createGlobalVariable: name value: value [
+
+	| global |
+	global := globals at: name put: self factory globalVariable new.
+	global name: name.
+	global typing: (self factory entityTyping new declaredType:
+			 (self ensureClass: value class)).
 	^ global
 ]
 

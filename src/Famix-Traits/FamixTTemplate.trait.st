@@ -27,17 +27,10 @@ Trait {
 { #category : #meta }
 FamixTTemplate classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TTemplate super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : #visitor }
-FamixTTemplate >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTTemplate: self
 ]
 
 { #category : #accessing }
@@ -51,6 +44,7 @@ FamixTTemplate >> addTemplateUser: anObject [
 FamixTTemplate >> templateOwner [
 	"Relation named: #templateOwner type: #FamixTWithTemplates opposite: #templates"
 
+	<ignoreForCoverage>
 	<generated>
 	<container>
 	^ templateOwner
@@ -59,29 +53,24 @@ FamixTTemplate >> templateOwner [
 { #category : #accessing }
 FamixTTemplate >> templateOwner: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	templateOwner := anObject
-]
-
-{ #category : #navigation }
-FamixTTemplate >> templateOwnerGroup [
-	<generated>
-	<navigation: 'TemplateOwner'>
-	^ MooseSpecializedGroup with: self templateOwner
 ]
 
 { #category : #accessing }
 FamixTTemplate >> templateUsers [
 	"Relation named: #templateUsers type: #FamixTTemplateUser opposite: #template"
 
+	<ignoreForCoverage>
 	<generated>
-	<derived>
 	^ templateUsers
 ]
 
 { #category : #accessing }
 FamixTTemplate >> templateUsers: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	templateUsers value: anObject
 ]

@@ -21,32 +21,52 @@ Internal Representation and Key Implementation Points.
 "
 Class {
 	#name : #FmxClassAddition,
-	#superclass : #FmxCodeChange,
+	#superclass : #FmxBehavioralAddition,
 	#instVars : [
-		'creationCode'
+		'superclass'
 	],
-	#category : #'Famix-MetamodelBuilder-Core-Changes'
+	#category : #'Famix-MetamodelBuilder-Core-Generation'
 }
 
-{ #category : #'instance creation' }
-FmxClassAddition class >> creationCode: aString [
-	^ self new
-		creationCode: aString;
-		yourself
+{ #category : #accessing }
+FmxClassAddition class >> priority [
+	"Class addition/update happens before we update and add methods."
+
+	^ 4
 ]
 
 { #category : #accessing }
-FmxClassAddition >> apply [
+FmxClassAddition >> followingChangesIn: changes [
+	"I should declare that each class with me as superclass should be built after me."
 
-	self class compiler evaluate: self creationCode
+	| result |
+	result := super followingChangesIn: changes.
+	result addAll: (changes select: [ :change | change priority = self priority and: [ change superclass = name ] ]).
+	^ result
 ]
 
 { #category : #accessing }
-FmxClassAddition >> creationCode [
-	^ creationCode
+FmxClassAddition >> initialize: builder [
+
+	builder superclass: (self class environment at: superclass)
+]
+
+{ #category : #testing }
+FmxClassAddition >> isRequired [
+
+	| realClass |
+	super isRequired ifTrue: [ ^ true ].
+
+	(realClass := self realClass) isTrait ifTrue: [ ^ true ].
+	^ self superclass ~= realClass superclass name
 ]
 
 { #category : #accessing }
-FmxClassAddition >> creationCode: anObject [
-	creationCode := anObject
+FmxClassAddition >> superclass [
+	^ superclass
+]
+
+{ #category : #accessing }
+FmxClassAddition >> superclass: anObject [
+	superclass := anObject
 ]

@@ -43,6 +43,7 @@ FamixTypeGroupNesting >> build [
 
 { #category : #building }
 FamixTypeGroupNesting >> buildLegend [
+
 	| legend |
 	legend := RSLegend new.
 	legend container: self canvas.
@@ -55,26 +56,26 @@ FamixTypeGroupNesting >> buildLegend [
 
 { #category : #shapes }
 FamixTypeGroupNesting >> classShapeFor: aClass [
+
 	^ RSBox new
-		model: aClass;
-		color:
-			((famixTypeGroup includes: aClass)
-				ifTrue: [ Color blue muchLighter ]
-				ifFalse: [ Color white ]);
-		borderColor: Color gray;
-		size: (aClass numberOfMethods max: 5);
-		popupText: [ :class | class name ];
-		yourself
+		  model: aClass;
+		  color: ((famixTypeGroup includes: aClass)
+				   ifTrue: [ Color blue muchLighter ]
+				   ifFalse: [ Color white ]);
+		  borderColor: Color gray;
+		  size: (aClass numberOfMethods max: 5);
+		  popupText: [ :class | class name ];
+		  yourself
 ]
 
 { #category : #shapes }
 FamixTypeGroupNesting >> entitiesIn: aContainer [
-	^ (((aContainer toScope: FamixTPackage) copyWithout: aContainer)
-		collect: [ :c | self entitiesIn: c ])
-		,
-			((aContainer toScope: FamixTType)
-				reject: [ :class | class isStub ]
-				thenCollect: [ :c | self classShapeFor: c ])
+
+	^ (((aContainer containedEntitiesOfType: FamixTPackage) copyWithout:
+		    aContainer) collect: [ :c | self entitiesIn: c ])
+	  , ((aContainer containedEntitiesOfType: FamixTType)
+			   reject: [ :class | class isStub ]
+			   thenCollect: [ :c | self classShapeFor: c ])
 ]
 
 { #category : #accessing }
@@ -84,10 +85,11 @@ FamixTypeGroupNesting >> famixTypeGroup: aFamixTypeGroup [
 
 { #category : #accessing }
 FamixTypeGroupNesting >> modelPackages [
-	^ famixTypeGroup mooseModel allPackages
-		select: [ :container | 
-			container isRoot
-				and: [ (container toScope: FamixTType) anySatisfy: [ :c | c isStub not ] ] ]
+
+	^ famixTypeGroup mooseModel allPackages select: [ :container |
+			  container isRoot and: [
+					  (container containedEntitiesOfType: FamixTType) anySatisfy: [
+						  :c | c isStub not ] ] ]
 ]
 
 { #category : #shapes }

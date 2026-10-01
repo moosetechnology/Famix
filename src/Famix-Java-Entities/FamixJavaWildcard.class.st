@@ -2,6 +2,11 @@
 ## Relations
 ======================
 
+### Outgoing dependencies
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `outgoingConcretizations` | `FamixTTypeArgument` | `typeArgument` | `FamixTConcretization` | Concretizations where this type is the type argument.|
+
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
@@ -14,23 +19,16 @@
 Class {
 	#name : #FamixJavaWildcard,
 	#superclass : #FamixJavaType,
-	#traits : 'FamixJavaTBounded',
-	#classTraits : 'FamixJavaTBounded classTrait',
+	#traits : 'FamixJavaTBounded + FamixTTypeArgument',
+	#classTraits : 'FamixJavaTBounded classTrait + FamixTTypeArgument classTrait',
 	#category : #'Famix-Java-Entities-Entities'
 }
 
 { #category : #meta }
 FamixJavaWildcard class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Wildcard super: #FamixJavaType>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^ self
-]
-
-{ #category : #visitor }
-FamixJavaWildcard >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaWildcard: self
 ]

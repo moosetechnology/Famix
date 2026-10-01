@@ -19,15 +19,19 @@ int addNumbers(int a, int b) {
 |---|
 | `parentBehaviouralEntity` | `FamixTParameter` | `parameters` | `FamixTWithParameters` | Behavioural entity containing this parameter. belongsTo implementation|
 
+### Outgoing dependencies
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `typing` | `FamixTTypedEntity` | `typedEntity` | `FamixTEntityTyping` | Association linking this entity to its declared type.|
+
 ### Incoming dependencies
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `incomingAccesses` | `FamixTAccessible` | `variable` | `FamixTAccess` | All Famix accesses pointing to this structural entity|
+| `incomingAccesses` | `FamixTAccessible` | `candidates` | `FamixTAccess` | All Famix accesses pointing to this structural entity|
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `declaredType` | `FamixTTypedEntity` | `typedEntities` | `FamixTType` | Type of the entity, if any|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
 
 
@@ -53,17 +57,10 @@ Trait {
 { #category : #meta }
 FamixTParameter classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TParameter super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : #visitor }
-FamixTParameter >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTParameter: self
 ]
 
 { #category : #printing }
@@ -78,6 +75,7 @@ FamixTParameter >> displayStringOn: aStream [
 FamixTParameter >> parentBehaviouralEntity [
 	"Relation named: #parentBehaviouralEntity type: #FamixTWithParameters opposite: #parameters"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Behavioural entity containing this parameter. belongsTo implementation'>
 	<container>
@@ -90,11 +88,4 @@ FamixTParameter >> parentBehaviouralEntity: anObject [
 	parentBehaviouralEntity := anObject.
 	self resetMooseName.
 
-]
-
-{ #category : #navigation }
-FamixTParameter >> parentBehaviouralEntityGroup [
-	<generated>
-	<navigation: 'ParentBehaviouralEntity'>
-	^ MooseSpecializedGroup with: self parentBehaviouralEntity
 ]

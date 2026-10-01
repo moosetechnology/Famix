@@ -21,21 +21,16 @@ Trait {
 { #category : #meta }
 FamixTWithImports classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TWithImports super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : #visitor }
-FamixTWithImports >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTWithImports: self
 ]
 
 { #category : #adding }
 FamixTWithImports >> addImport: anObject [
+
+	<ignoreForCoverage>
 	<generated>
 	^ self imports add: anObject
 ]
@@ -44,14 +39,15 @@ FamixTWithImports >> addImport: anObject [
 FamixTWithImports >> imports [
 	"Relation named: #imports type: #FamixTImport opposite: #importingEntity"
 
+	<ignoreForCoverage>
 	<generated>
-	<derived>
 	^ imports
 ]
 
 { #category : #accessing }
 FamixTWithImports >> imports: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	imports value: anObject
 ]

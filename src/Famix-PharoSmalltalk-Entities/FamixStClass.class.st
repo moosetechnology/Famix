@@ -24,6 +24,7 @@
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `incomingReferences` | `FamixTReferenceable` | `referredEntity` | `FamixTReference` | References to this entity by other entities.|
+| `incomingTypings` | `FamixTType` | `declaredType` | `FamixTEntityTyping` | Relations to the entities that have this as type.|
 | `subInheritances` | `FamixTWithInheritances` | `superclass` | `FamixTInheritance` | Subinheritance relationships, i.e. known subclasses of this type.|
 
 ### Other
@@ -31,7 +32,6 @@
 |---|
 | `receivingInvocations` | `FamixTInvocationsReceiver` | `receiver` | `FamixTInvocation` | List of invocations performed on this entity (considered as the receiver)|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
-| `typedEntities` | `FamixTType` | `declaredType` | `FamixTTypedEntity` | Entities that have this type as declaredType|
 
 
 ## Properties
@@ -55,20 +55,10 @@ Class {
 { #category : #meta }
 FamixStClass class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Class super: #FamixStNamedEntity>
 	<package: #'Famix-PharoSmalltalk-Entities'>
 	<generated>
-	^ self
-]
-
-{ #category : #'Famix-Extensions-metrics-support' }
-FamixStClass >> accessedAttributes [
-	
-	"Returns my attributes accessed by my methods. If the same attribute is accessed 
-	by two different methods it is counted twice.
-	Used to support the calculation of LCOM"
-	
-	^ self methodsWithoutSutbsAndConstructors asOrderedCollection flatCollect: [ :method | method accessedAttributes ]
 ]
 
 { #category : #accessing }
@@ -96,7 +86,8 @@ FamixStClass >> computeNumberOfLinesOfCode [
 
 { #category : #accessing }
 FamixStClass >> extendedInPackages [
-	^ self extendedMethods flatCollectAsSet: [ :m | m atScope: FamixTPackage ]
+
+	^ self extendedMethods flatCollectAsSet: [ :m | m containersOfType: FamixTPackage ]
 ]
 
 { #category : #accessing }
@@ -105,6 +96,14 @@ FamixStClass >> extendedMethods [
 	<FMComment: 'Methods which are class extensions in this class.'>
 	<derived>
 	^ self methods select: #isExtension
+]
+
+{ #category : #testing }
+FamixStClass >> inheritsFromTestCase [
+
+	self withSuperclassesDo: [ :each |
+		each name = 'TestCase' ifTrue: [ ^ true ] ].
+	^ false
 ]
 
 { #category : #accessing }
@@ -174,18 +173,17 @@ FamixStClass >> lookUp: signature [
 FamixStClass >> methodsWithoutSutbsAndConstructors [
 	"Removing stub and contructor methods. Used to support the calculation of LCOM."
 
-	^ (self methods select: [ :each | each isStub not and: [ each isConstructor not ] ]) asSet
+	^ (self methods select: [ :each |
+		   each isStub not and: [ each isConstructor not ] ]) asSet
 ]
 
 { #category : #metrics }
 FamixStClass >> numberOfMessageSends [
+
 	<FMProperty: #numberOfMessageSends type: #Number>
 	<derived>
 	<FMComment: 'The number of message sends from a class'>
-	
-	^self
-		lookUpPropertyNamed: #numberOfMessageSends
-		computedAs: [self methodsGroup sumNumbers: #numberOfMessageSends]
+	^ self cacheAt: #numberOfMessageSends ifAbsent: [ self methods sumNumbers: #numberOfMessageSends ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -195,10 +193,11 @@ FamixStClass >> numberOfMessageSends: aNumber [
 
 { #category : #metrics }
 FamixStClass >> numberOfMethodProtocols [
+
 	<FMProperty: #numberOfMethodProtocols type: #Number>
 	<derived>
 	<FMComment: 'The number of method protocols in a class'>
-	^ self lookUpPropertyNamed: #numberOfMethodProtocols computedAs: [ ((self methods collect: [ :each | each protocol ]) reject: #isNil) asSet size ]
+	^ self cacheAt: #numberOfMethodProtocols ifAbsent: [ ((self methods collect: [ :each | each protocol ]) reject: #isNil) asSet size ]
 ]
 
 { #category : #metrics }

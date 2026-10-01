@@ -13,6 +13,7 @@ Class {
 }
 
 { #category : #testing }
-MQScopeAllTypesStrategy >> shouldBeSelected: anEntity [
-	^ true
+MQScopeAllTypesStrategy >> selectMatchingElements: aCollection [
+
+	^ aCollection
 ]

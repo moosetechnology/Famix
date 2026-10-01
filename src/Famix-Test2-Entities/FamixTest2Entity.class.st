@@ -7,16 +7,17 @@ Class {
 { #category : #meta }
 FamixTest2Entity class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Entity super: #MooseEntity>
 	<package: #'Famix-Test2-Entities'>
 	<generated>
 	<abstract>
-	^ self
 ]
 
 { #category : #testing }
 FamixTest2Entity class >> isAbstract [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self == FamixTest2Entity
 ]
@@ -24,13 +25,55 @@ FamixTest2Entity class >> isAbstract [
 { #category : #meta }
 FamixTest2Entity class >> metamodel [
 
+	<ignoreForCoverage>
 	<generated>
 	^ FamixTest2Model metamodel
 ]
 
 { #category : #testing }
+FamixTest2Entity >> canBeStub [
+
+	<ignoreForCoverage>
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+FamixTest2Entity >> hasImmediateSource [
+
+	<ignoreForCoverage>
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+FamixTest2Entity >> isAccess [
+
+	<ignoreForCoverage>
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
 FamixTest2Entity >> isAssociation [
 
+	<ignoreForCoverage>
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+FamixTest2Entity >> isAttribute [
+
+	<ignoreForCoverage>
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+FamixTest2Entity >> isBehavioural [
+
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -38,6 +81,7 @@ FamixTest2Entity >> isAssociation [
 { #category : #testing }
 FamixTest2Entity >> isClass [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -45,13 +89,23 @@ FamixTest2Entity >> isClass [
 { #category : #testing }
 FamixTest2Entity >> isComment [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
 
 { #category : #testing }
-FamixTest2Entity >> isInheritance [
+FamixTest2Entity >> isInvocation [
 
+	<ignoreForCoverage>
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+FamixTest2Entity >> isMethod [
+
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -59,6 +113,23 @@ FamixTest2Entity >> isInheritance [
 { #category : #testing }
 FamixTest2Entity >> isNamedEntity [
 
+	<ignoreForCoverage>
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+FamixTest2Entity >> isPackage [
+
+	<ignoreForCoverage>
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+FamixTest2Entity >> isParametricEntity [
+
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -66,6 +137,23 @@ FamixTest2Entity >> isNamedEntity [
 { #category : #testing }
 FamixTest2Entity >> isQueryable [
 
+	<ignoreForCoverage>
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+FamixTest2Entity >> isReference [
+
+	<ignoreForCoverage>
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+FamixTest2Entity >> isStructuralEntity [
+
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]
@@ -73,6 +161,7 @@ FamixTest2Entity >> isQueryable [
 { #category : #testing }
 FamixTest2Entity >> isType [
 
+	<ignoreForCoverage>
 	<generated>
 	^ false
 ]

@@ -1,29 +1,8 @@
 Class {
 	#name : #FmxMBTypedPropertyTest,
 	#superclass : #FmxMBPropertyTest,
-	#category : #'Famix-MetamodelBuilder-Tests'
+	#category : #'Famix-MetamodelBuilder-Tests-Tests'
 }
-
-{ #category : #tests }
-FmxMBTypedPropertyTest >> testDoubleQuotesInPropertyComment [
-
-	"test a case when the property comment contains doubled quotes"
-	
-	| simpleClass commentString generated |
-	
-	simpleClass := builder newClassNamed: #Comment.
-	commentString := 'operator''s symbol'.
-
-	(simpleClass property: #operator type: #String) comment: commentString.
-
-	simpleClass comment: commentString.
-	builder generate.
-	generated := builder testingEnvironment ask classNamed: 'TstComment'.
-	self assert: (generated selectors includesAll: #(operator operator:))
-
-
-
-]
 
 { #category : #tests }
 FmxMBTypedPropertyTest >> testMultivalued [

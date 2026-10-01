@@ -1,13 +1,14 @@
 Extension { #name : #Collection }
 
 { #category : #'*Moose-Query' }
-Collection >> isIncludedIn: anEntity parentSelectorsCache: aCollection [
+Collection >> isIncludedIn: anEntity containerSelectorsCache: aCollection [
 	"Use dispatch on entities or collections for performance reasons."
 
-	^ self anySatisfy: [ :each | each isIncludedIn: anEntity parentSelectorsCache: aCollection ]
+	^ self anySatisfy: [ :each | each isIncludedIn: anEntity containerSelectorsCache: aCollection ]
 ]
 
 { #category : #'*Moose-Query' }
-Collection >> scopeForQuery: aQuery direction: aDirection [
-	1 to: self size do: [ :ind | aDirection scopeFor: (self at: ind) query: aQuery ]
+Collection >> scopeForQuery: aQuery [
+
+	^ aQuery scopeFor: self
 ]

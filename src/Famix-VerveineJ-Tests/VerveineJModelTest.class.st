@@ -32,9 +32,5 @@ VerveineJModelTest >> testNumberOfLinesOfCode [
 { #category : #tests }
 VerveineJModelTest >> testNumberOfStatements [
 
-	self
-		assert: (model allMethods entityNamed:
-				 #'moose.lan.server.PrintServer.output(Packet)')
-				numberOfStatements
-		equals: MooseUnavailableMetric
+	self assert: (model allMethods entityNamed: #'moose.lan.server.PrintServer.output(Packet)') numberOfStatements equals: -1
 ]

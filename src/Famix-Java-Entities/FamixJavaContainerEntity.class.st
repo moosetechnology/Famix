@@ -22,25 +22,19 @@ Class {
 { #category : #meta }
 FamixJavaContainerEntity class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #ContainerEntity super: #FamixJavaNamedEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
 	<abstract>
-	^ self
 ]
 
 { #category : #testing }
 FamixJavaContainerEntity class >> isAbstract [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self == FamixJavaContainerEntity
-]
-
-{ #category : #visitor }
-FamixJavaContainerEntity >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaContainerEntity: self
 ]
 
 { #category : #adding }

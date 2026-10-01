@@ -56,11 +56,11 @@ MooseAbstractGroupTest >> testAddLast [
 
 { #category : #tests }
 MooseAbstractGroupTest >> testAllMatching [
-	group addAll: {FamixTest3Class new . FamixTest3Type new}.
+	group addAll: {FamixTest2Class new . FamixTest2Type new}.
 	self assert: (group allMatching: FamixTClass) size equals: 1.
 	self assert: (group allMatching: FamixTType) size equals: 2.
-	self assert: (group allMatching: FamixTest3Class) size equals: 1.
-	self assert: (group allMatching: FamixTest3Type) size equals: 1.
+	self assert: (group allMatching: FamixTest2Class) size equals: 1.
+	self assert: (group allMatching: FamixTest2Type) size equals: 1.
 	self assertEmpty: (group allMatching: Object)
 ]
 
@@ -74,17 +74,17 @@ MooseAbstractGroupTest >> testAllSatisfy [
 
 { #category : #tests }
 MooseAbstractGroupTest >> testAllUsing [
-	group addAll: {FamixTest3Class new . FamixTest3Type new . FamixTest3ParametricClass new}.
-	self should: [ group allUsing: FamixTest3Type ] raise: MooseAllUsingOnClass.
+	group addAll: {FamixTest2Class new . FamixTest2Type new . FamixTest2ParametricClass new}.
+	self should: [ group allUsing: FamixTest2Type ] raise: MooseAllUsingOnClass.
 	self assert: (group allUsing: FamixTClass) size equals: 2.
 	self assert: (group allUsing: FamixTType) size equals: 3.
 ]
 
 { #category : #tests }
 MooseAbstractGroupTest >> testAllWithSubTypesOf [
-	group addAll: {FamixTest3Class new . FamixTest3Type new}.
-	self assert: (group allWithSubTypesOf: FamixTest3Type) size equals: 2.
-	self assert: (group allWithSubTypesOf: FamixTest3Class) size equals: 1.
+	group addAll: {FamixTest2Class new . FamixTest2Type new}.
+	self assert: (group allWithSubTypesOf: FamixTest2Type) size equals: 2.
+	self assert: (group allWithSubTypesOf: FamixTest2Class) size equals: 1.
 	self assert: (group allWithSubTypesOf: MooseEntity) size equals: 2
 ]
 
@@ -92,40 +92,40 @@ MooseAbstractGroupTest >> testAllWithSubTypesOf [
 MooseAbstractGroupTest >> testAllWithSubTypesOfAny [
 	group
 		addAll:
-			{FamixTest3Class new.
-			FamixTest3Invocation new.
-			FamixTest3PrimitiveType new}.
+			{FamixTest2Class new.
+			FamixTest2Invocation new.
+			FamixTest2PrimitiveType new}.
 	self
-		assert: (group allWithSubTypesOfAny: {FamixTest3NamedEntity}) size
+		assert: (group allWithSubTypesOfAny: {FamixTest2NamedEntity}) size
 		equals: 2.
 		self
-		assert: (group allWithSubTypesOfAny: {FamixTest3NamedEntity. FamixTest3Invocation}) size
+		assert: (group allWithSubTypesOfAny: {FamixTest2NamedEntity. FamixTest2Invocation}) size
 		equals: 3
 ]
 
 { #category : #tests }
 MooseAbstractGroupTest >> testAllWithSubTypesOfThenAllWithType [
-	group addAll: {FamixTest3Class new . FamixTest3Type new}.
-	self assert: (group allWithSubTypesOf: FamixTest3Type) size equals: 2.
-	self assert: (group allWithType: FamixTest3Type) size equals: 1.
-	self assert: (group allWithType: FamixTest3Class) size equals: 1.
+	group addAll: {FamixTest2Class new . FamixTest2Type new}.
+	self assert: (group allWithSubTypesOf: FamixTest2Type) size equals: 2.
+	self assert: (group allWithType: FamixTest2Type) size equals: 1.
+	self assert: (group allWithType: FamixTest2Class) size equals: 1.
 ]
 
 { #category : #tests }
 MooseAbstractGroupTest >> testAllWithType [
-	group addAll: {FamixTest3Class new . FamixTest3Type new}.
-	self assert: (group allWithType: FamixTest3Class) size equals: 1.
-	self assert: (group allWithType: FamixTest3Type) size equals: 1.
+	group addAll: {FamixTest2Class new . FamixTest2Type new}.
+	self assert: (group allWithType: FamixTest2Class) size equals: 1.
+	self assert: (group allWithType: FamixTest2Type) size equals: 1.
 	self should: [ (group allWithType: FamixTClass) size ] raise: MooseAllWithTypeOnTrait.
 	self assertEmpty: (group allWithType: Object)
 ]
 
 { #category : #tests }
 MooseAbstractGroupTest >> testAllWithTypeThenAllWithSubTypesOf [
-	group addAll: {FamixTest3Class new . FamixTest3Type new}.
-	self assert: (group allWithType: FamixTest3Type) size equals: 1.
-	self assert: (group allWithType: FamixTest3Class) size equals: 1.
-	self assert: (group allWithSubTypesOf: FamixTest3Type) size equals: 2.
+	group addAll: {FamixTest2Class new . FamixTest2Type new}.
+	self assert: (group allWithType: FamixTest2Type) size equals: 1.
+	self assert: (group allWithType: FamixTest2Class) size equals: 1.
+	self assert: (group allWithSubTypesOf: FamixTest2Type) size equals: 2.
 	
 ]
 
@@ -140,12 +140,12 @@ MooseAbstractGroupTest >> testAnySatisfy [
 { #category : #tests }
 MooseAbstractGroupTest >> testAverage [
 	| classA classB |
-	classA := FamixTest3Class new
-		addMethod: FamixTest3Method new;
+	classA := FamixTest2Class new
+		addMethod: FamixTest2Method new;
 		yourself.
-	classB := FamixTest3Class new
-		addMethod: FamixTest3Method new;
-		addMethod: FamixTest3Method new;
+	classB := FamixTest2Class new
+		addMethod: FamixTest2Method new;
+		addMethod: FamixTest2Method new;
 		yourself.
 	group addAll: {classA . classB}.
 	self assert: (group average: #numberOfMethods) equals: 1.5
@@ -153,7 +153,7 @@ MooseAbstractGroupTest >> testAverage [
 
 { #category : #tests }
 MooseAbstractGroupTest >> testCollect [
-	#('A' 'B' 'C') do: [ :each | group add: (FamixTest3Method named: each) ].
+	#('A' 'B' 'C') do: [ :each | group add: (FamixTest2Method named: each) ].
 	self assertCollection: (group collect: #name) hasSameElements: #('A' 'B' 'C')
 ]
 
@@ -168,13 +168,13 @@ MooseAbstractGroupTest >> testContains [
 { #category : #tests }
 MooseAbstractGroupTest >> testCopy [
 	| copy |
-	group := self actualClass with: FamixTest3Method new.
+	group := self actualClass with: FamixTest2Method new.
 	copy := group copy.
 	self deny: copy identicalTo: group.
 	self deny: copy entities identicalTo: group entities.
 	self assert: copy entities equals: group entities.
 	self deny: copy entityStorage identicalTo: group entityStorage.
-	copy add: FamixTest3Method new.
+	copy add: FamixTest2Method new.
 	self assert: copy size equals: 2.
 	self assert: group size equals: 1
 ]
@@ -187,9 +187,9 @@ MooseAbstractGroupTest >> testCount [
 { #category : #tests }
 MooseAbstractGroupTest >> testDetect [
 	| b |
-	group add: (FamixTest3Method named: 'A').
-	group add: (b := FamixTest3Method named: 'B').
-	group add: (FamixTest3Method named: 'C').
+	group add: (FamixTest2Method named: 'A').
+	group add: (b := FamixTest2Method named: 'B').
+	group add: (FamixTest2Method named: 'C').
 	self assert: (group detect: [ :el | el name = 'B' ]) identicalTo: b
 ]
 
@@ -252,7 +252,7 @@ MooseAbstractGroupTest >> testEntitiesDo [
 { #category : #tests }
 MooseAbstractGroupTest >> testEntityNamedIfAbsentIfPresent [
 	| result class |
-	group add: (class := FamixTest3Class named: 'A').
+	group add: (class := FamixTest2Class named: 'A').
 	result := group entityNamed: 'X' ifAbsent: [ 42 ] ifPresent: [ :i | self fail ].
 	self assert: result equals: 42.
 	result := group entityNamed: class mooseName ifAbsent: [ self fail ] ifPresent: [ :cls | cls name ].
@@ -300,7 +300,7 @@ MooseAbstractGroupTest >> testGroupSize [
 { #category : #tests }
 MooseAbstractGroupTest >> testGroupedBy [
 	| v |
-	group addAll: ((1 to: 5) collect: [ :i | FamixTest3Class named: i asString ]).
+	group addAll: ((1 to: 5) collect: [ :i | FamixTest2Class named: i asString ]).
 	self assert: group size equals: 5.
 	v := group groupedBy: [ :e | e name asNumber odd ].
 	self assert: v isDictionary.
@@ -374,8 +374,8 @@ MooseAbstractGroupTest >> testLast [
 
 { #category : #tests }
 MooseAbstractGroupTest >> testNumberOfEntityUsing [
-	group addAll: {FamixTest3Class new . FamixTest3Type new}.
-	self should: [ group numberOfEntityUsing: FamixTest3Type ] raise: MooseAllUsingOnClass.
+	group addAll: {FamixTest2Class new . FamixTest2Type new}.
+	self should: [ group numberOfEntityUsing: FamixTest2Type ] raise: MooseAllUsingOnClass.
 	self assert: (group numberOfEntityUsing: FamixTClass) equals: 1.
 	self assert: (group numberOfEntityUsing: FamixTType) equals: 2
 ]
@@ -399,9 +399,10 @@ MooseAbstractGroupTest >> testOccurenceOf [
 
 { #category : #tests }
 MooseAbstractGroupTest >> testPropertyNamed [
-	self should: [group propertyNamed: #UNKNOWN] raise: NotFound.
-	group propertyNamed: 'UNKNOWN' put: 10.
-	self assert: (group propertyNamed: #UNKNOWN) equals: 10
+
+	self should: [ group cacheAt: #UNKNOWN ] raise: NotFound.
+	group cacheAt: 'UNKNOWN' put: 10.
+	self assert: (group cacheAt: #UNKNOWN) equals: 10
 ]
 
 { #category : #tests }

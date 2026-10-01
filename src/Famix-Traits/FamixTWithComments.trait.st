@@ -21,17 +21,10 @@ Trait {
 { #category : #meta }
 FamixTWithComments classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TWithComments super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : #visitor }
-FamixTWithComments >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTWithComments: self
 ]
 
 { #category : #removing }
@@ -45,15 +38,16 @@ FamixTWithComments >> addComment: aComment [
 FamixTWithComments >> comments [
 	"Relation named: #comments type: #FamixTComment opposite: #commentedEntity"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'List of comments for the entity'>
-	<derived>
 	^ comments
 ]
 
 { #category : #accessing }
 FamixTWithComments >> comments: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	comments value: anObject
 ]
@@ -71,8 +65,9 @@ FamixTWithComments >> numberOfComments [
 
 	<FMProperty: #numberOfComments type: #Number>
 	<derived>
-	<FMComment: 'The number of comments in the entity. Does not count comments of children entities (for example, for a class, I will count the comments associated to the class and not the methods or arguments.'>
-	^ self lookUpPropertyNamed: #numberOfComments computedAs: [ self comments size ]
+	<FMComment:
+	'The number of comments in the entity. Does not count comments of children entities (for example, for a class, I will count the comments associated to the class and not the methods or arguments.'>
+	^ self cacheAt: #numberOfComments ifAbsent: [ self comments size ]
 ]
 
 { #category : #accessing }

@@ -21,32 +21,26 @@ Trait {
 { #category : #meta }
 FamixTWithAccesses classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TWithAccesses super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : #visitor }
-FamixTWithAccesses >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTWithAccesses: self
 ]
 
 { #category : #accessing }
 FamixTWithAccesses >> accesses [
 	"Relation named: #accesses type: #FamixTAccess opposite: #accessor"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Accesses to variables made by this behaviour.'>
-	<derived>
 	^ accesses
 ]
 
 { #category : #accessing }
 FamixTWithAccesses >> accesses: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	accesses value: anObject
 ]

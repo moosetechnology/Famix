@@ -18,17 +18,10 @@ Trait {
 { #category : #meta }
 FamixTHasVisibility classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #THasVisibility super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : #visitor }
-FamixTHasVisibility >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTHasVisibility: self
 ]
 
 { #category : #accessing }
@@ -115,6 +108,7 @@ FamixTHasVisibility >> isPublic: aBoolean [
 FamixTHasVisibility >> visibility [
 
 	<FMProperty: #visibility type: #String>
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Visibility of the entity'>
 	^ visibility
@@ -122,6 +116,7 @@ FamixTHasVisibility >> visibility [
 
 { #category : #accessing }
 FamixTHasVisibility >> visibility: anObject [
+	<ignoreForCoverage>
 	<generated>
 	visibility := anObject
 ]

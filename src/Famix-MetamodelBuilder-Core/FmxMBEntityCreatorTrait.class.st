@@ -8,46 +8,11 @@ Class {
 	#category : #'Famix-MetamodelBuilder-Core-Implementation'
 }
 
-{ #category : #generating }
-FmxMBEntityCreatorTrait >> generateEntityCreationMethodFor: cls [
+{ #category : #visitor }
+FmxMBEntityCreatorTrait >> acceptVisitor: aVisitor [
 
-	self builder environment
-		compile: ('new{1}
-
-	<generated>
-	^ self add: {2} new' format: { 
-					 cls name.
-					 cls fullName })
-		in: self realClass
-		classified: 'entity creation'
-]
-
-{ #category : #generating }
-FmxMBEntityCreatorTrait >> generateEntityCreationMethods [
-
-	self builder classes
-		reject: [ :cls |
-			cls isAbstractClass or: [
-				cls isModelClass or: [ cls isMetamodelClassGroup ] ] ]
-		thenDo: [ :cls |
-			self generateEntityCreationMethodFor: cls.
-			(cls allTransitiveTraits anySatisfy: [ :trait |
-				 trait prefix = #Famix and: [ trait name = #TNamedEntity ] ])
-				ifTrue: [ self generateNamedEntityCreationMethodFor: cls ] ]
-]
-
-{ #category : #generating }
-FmxMBEntityCreatorTrait >> generateNamedEntityCreationMethodFor: cls [
-
-	^ self builder environment
-		  compile: ('new{1}Named: aName
-
-	<generated>
-	^ self add: ({2} named: aName)' format: { 
-					   cls name.
-					   cls fullName })
-		  in: self realClass
-		  classified: 'entity creation'
+	<ignoreForCoverage>
+	^ aVisitor visitEntityCreator: self
 ]
 
 { #category : #initialization }

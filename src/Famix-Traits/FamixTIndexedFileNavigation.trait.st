@@ -25,10 +25,10 @@ Trait {
 { #category : #meta }
 FamixTIndexedFileNavigation classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TIndexedFileNavigation super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
 ]
 
 { #category : #'instance creation' }
@@ -50,11 +50,24 @@ FamixTIndexedFileNavigation classSide >> fileName: aString startPos: anInteger e
 		yourself
 ]
 
-{ #category : #visitor }
-FamixTIndexedFileNavigation >> accept: aVisitor [
+{ #category : #matching }
+FamixTIndexedFileNavigation >> beginsWith: aString [
+	"I return true if the source text I represent begins with the string as parameter.\
+	For example, in Python I can check if a comment begins with a triple double quote to know if it is a docstring"
+	
+	| start |
+	"We could do `self sourceText beginsWith: aStrin` but this would take more time since we would need to read the full source text."
+	self sourcesAreReadable ifFalse: [ self error: 'The root folder is not set to the valid file reference.' ].
 
-	<generated>
-	^ aVisitor visitFamixTIndexedFileNavigation: self
+	start := startPos ifNil: [ 1 ].
+
+	^ self fileReference binaryReadStreamDo: [ :in |
+			  | stream |
+			  stream := ZnCharacterReadStream on: in encoding: self encoding.
+			  aString size > (start + (endPos ifNil: [ in size + 1 ])) ifTrue: [ ^ false "String is bigger than the sourceText" ].
+
+			  stream position: start - 1.
+			  (stream next: aString size) = aString ]
 ]
 
 { #category : #private }
@@ -88,6 +101,7 @@ FamixTIndexedFileNavigation >> endLine [
 FamixTIndexedFileNavigation >> endPos [
 
 	<FMProperty: #endPos type: #Number>
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Stop position in the source'>
 	^ endPos
@@ -95,6 +109,7 @@ FamixTIndexedFileNavigation >> endPos [
 
 { #category : #accessing }
 FamixTIndexedFileNavigation >> endPos: anObject [
+	<ignoreForCoverage>
 	<generated>
 	endPos := anObject
 ]
@@ -145,7 +160,7 @@ FamixTIndexedFileNavigation >> sourceText [
 		binaryReadStreamDo: [ :in | 
 			| stream |
 			stream := ZnCharacterReadStream on: in encoding: self encoding.
-			1 to: start - 1 do: [ :i | stream next ].
+			stream position:  start - 1.
 			stream next: (endPos ifNil: [ in size + 1 ]) - start + 1 ]
 ]
 
@@ -158,6 +173,7 @@ FamixTIndexedFileNavigation >> startLine [
 FamixTIndexedFileNavigation >> startPos [
 
 	<FMProperty: #startPos type: #Number>
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Start position in the source'>
 	^ startPos
@@ -165,6 +181,7 @@ FamixTIndexedFileNavigation >> startPos [
 
 { #category : #accessing }
 FamixTIndexedFileNavigation >> startPos: anObject [
+	<ignoreForCoverage>
 	<generated>
 	startPos := anObject
 ]

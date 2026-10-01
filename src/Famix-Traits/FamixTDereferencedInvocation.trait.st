@@ -49,23 +49,17 @@ Trait {
 { #category : #meta }
 FamixTDereferencedInvocation classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TDereferencedInvocation super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : #visitor }
-FamixTDereferencedInvocation >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTDereferencedInvocation: self
 ]
 
 { #category : #accessing }
 FamixTDereferencedInvocation >> referencer [
 	"Relation named: #referencer type: #FamixTWithDereferencedInvocations opposite: #dereferencedInvocations"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Structural entity that references the BehaviouralEntity invoked'>
 	^ referencer
@@ -74,6 +68,7 @@ FamixTDereferencedInvocation >> referencer [
 { #category : #accessing }
 FamixTDereferencedInvocation >> referencer: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	referencer := anObject
 ]

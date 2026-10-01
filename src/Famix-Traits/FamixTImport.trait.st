@@ -36,23 +36,17 @@ Trait {
 { #category : #meta }
 FamixTImport classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TImport super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : #visitor }
-FamixTImport >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTImport: self
 ]
 
 { #category : #accessing }
 FamixTImport >> importedEntity [
 	"Relation named: #importedEntity type: #FamixTImportable opposite: #incomingImports"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Imported entity'>
 	<target>
@@ -62,6 +56,7 @@ FamixTImport >> importedEntity [
 { #category : #accessing }
 FamixTImport >> importedEntity: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	importedEntity := anObject
 ]
@@ -70,6 +65,7 @@ FamixTImport >> importedEntity: anObject [
 FamixTImport >> importingEntity [
 	"Relation named: #importingEntity type: #FamixTWithImports opposite: #imports"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Importing entity'>
 	<source>
@@ -79,6 +75,7 @@ FamixTImport >> importingEntity [
 { #category : #accessing }
 FamixTImport >> importingEntity: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	importingEntity := anObject
 ]

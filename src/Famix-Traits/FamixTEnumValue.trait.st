@@ -19,15 +19,19 @@ Instance Variables:
 |---|
 | `parentEnum` | `FamixTEnumValue` | `enumValues` | `FamixTWithEnumValues` | The Enum declaring this value. It offers the implementation of belongsTo|
 
+### Outgoing dependencies
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `typing` | `FamixTTypedEntity` | `typedEntity` | `FamixTEntityTyping` | Association linking this entity to its declared type.|
+
 ### Incoming dependencies
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `incomingAccesses` | `FamixTAccessible` | `variable` | `FamixTAccess` | All Famix accesses pointing to this structural entity|
+| `incomingAccesses` | `FamixTAccessible` | `candidates` | `FamixTAccess` | All Famix accesses pointing to this structural entity|
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `declaredType` | `FamixTTypedEntity` | `typedEntities` | `FamixTType` | Type of the entity, if any|
 | `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
 
 
@@ -53,22 +57,16 @@ Trait {
 { #category : #meta }
 FamixTEnumValue classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TEnumValue super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : #visitor }
-FamixTEnumValue >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTEnumValue: self
 ]
 
 { #category : #testing }
 FamixTEnumValue >> isEnumValue [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]
@@ -90,6 +88,7 @@ FamixTEnumValue >> mooseNameSeparator [
 FamixTEnumValue >> parentEnum [
 	"Relation named: #parentEnum type: #FamixTWithEnumValues opposite: #enumValues"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'The Enum declaring this value. It offers the implementation of belongsTo'>
 	<container>
@@ -99,15 +98,9 @@ FamixTEnumValue >> parentEnum [
 { #category : #accessing }
 FamixTEnumValue >> parentEnum: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	parentEnum := anObject
-]
-
-{ #category : #navigation }
-FamixTEnumValue >> parentEnumGroup [
-	<generated>
-	<navigation: 'ParentEnum'>
-	^ MooseSpecializedGroup with: self parentEnum
 ]
 
 { #category : #accessing }

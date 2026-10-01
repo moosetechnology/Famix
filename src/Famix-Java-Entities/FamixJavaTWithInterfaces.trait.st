@@ -22,27 +22,17 @@ Trait {
 { #category : #meta }
 FamixJavaTWithInterfaces classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TWithInterfaces super: #Object>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^ self
-]
-
-{ #category : #visitor }
-FamixJavaTWithInterfaces >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaTWithInterfaces: self
 ]
 
 { #category : #accessing }
 FamixJavaTWithInterfaces >> containedInterfaces [
 	"Classes are usually seen as types from the point of view of a Container. However, there may other types (e.g. aspects) which we dont want to see as classes and are rejected by this method."
 
-	<navigation: 'Contained Interfaces'>
-	^ self
-		  cacheAt: #containedInterfaces 
-		  ifAbsentPut: [ self types select: #isInterface ]
+	^ self cacheAt: #containedInterfaces ifAbsentPut: [ self types select: #isInterface ]
 ]
 
 { #category : #accessing }

@@ -26,17 +26,10 @@ Class {
 { #category : #meta }
 FamixJavaComment class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Comment super: #FamixJavaSourcedEntity>
 	<package: #'Famix-Java-Entities'>
 	<generated>
-	^ self
-]
-
-{ #category : #visitor }
-FamixJavaComment >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixJavaComment: self
 ]
 
 { #category : #converting }

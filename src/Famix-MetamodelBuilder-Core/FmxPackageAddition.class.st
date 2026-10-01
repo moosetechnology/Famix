@@ -21,7 +21,7 @@ Class {
 	#instVars : [
 		'packageName'
 	],
-	#category : #'Famix-MetamodelBuilder-Core-Changes'
+	#category : #'Famix-MetamodelBuilder-Core-Generation'
 }
 
 { #category : #'instance creation' }
@@ -32,9 +32,22 @@ FmxPackageAddition class >> named: aName [
 ]
 
 { #category : #accessing }
+FmxPackageAddition class >> priority [
+	"This is what has the less impact of all."
+
+	^ 0
+]
+
+{ #category : #accessing }
 FmxPackageAddition >> apply [
 
 	self packageOrganizer ensurePackage: self packageName
+]
+
+{ #category : #testing }
+FmxPackageAddition >> isRequired [
+
+	^ self systemPackage isNil
 ]
 
 { #category : #accessing }
@@ -56,4 +69,10 @@ FmxPackageAddition >> printOn: aStream [
 		nextPut: $(;
 		nextPutAll: (packageName ifNil: [ #unamed ]);
 		nextPut: $)
+]
+
+{ #category : #accessing }
+FmxPackageAddition >> systemPackage [
+
+	^ self packageOrganizer packageNamed: self packageName ifAbsent: [ nil ]
 ]

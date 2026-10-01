@@ -21,17 +21,10 @@ Trait {
 { #category : #meta }
 FamixTWithInvocations classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TWithInvocations super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : #visitor }
-FamixTWithInvocations >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTWithInvocations: self
 ]
 
 { #category : #adding }
@@ -45,35 +38,23 @@ FamixTWithInvocations >> numberOfOutgoingInvocations [
 	<FMProperty: #numberOfOutgoingInvocations type: #Number>
 	<derived>
 	<FMComment: 'The number of invocations in a method'>
-	^ self
-		  lookUpPropertyNamed: #numberOfOutgoingInvocations
-		  computedAs: [ self outgoingInvocations size ]
+	^ self cacheAt: #numberOfOutgoingInvocations ifAbsent: [ self outgoingInvocations size ]
 ]
 
 { #category : #accessing }
 FamixTWithInvocations >> outgoingInvocations [
 	"Relation named: #outgoingInvocations type: #FamixTInvocation opposite: #sender"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Outgoing invocations sent by this behaviour.'>
-	<derived>
 	^ outgoingInvocations
 ]
 
 { #category : #accessing }
 FamixTWithInvocations >> outgoingInvocations: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	outgoingInvocations value: anObject
-]
-
-{ #category : #adding }
-FamixTWithInvocations >> outgoingInvocationsGroup [
-	<navigation: 'Outgoing invocations'>
-	^ self cacheAt:
-		#outgoingInvocationsGroup
-		ifAbsentPut:
-			[MooseGroup
-				withAll: self outgoingInvocations
-				withDescription: 'Outgoing invocations from ' , self mooseName]
 ]

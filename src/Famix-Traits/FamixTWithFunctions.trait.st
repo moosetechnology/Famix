@@ -21,17 +21,10 @@ Trait {
 { #category : #meta }
 FamixTWithFunctions classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TWithFunctions super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : #visitor }
-FamixTWithFunctions >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTWithFunctions: self
 ]
 
 { #category : #accessing }
@@ -44,15 +37,16 @@ FamixTWithFunctions >> addFunction: anObject [
 FamixTWithFunctions >> functions [
 	"Relation named: #functions type: #FamixTFunction opposite: #functionOwner"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Functions defined in the container, if any.'>
-	<derived>
 	^ functions
 ]
 
 { #category : #accessing }
 FamixTWithFunctions >> functions: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	functions value: anObject
 ]

@@ -21,17 +21,10 @@ Trait {
 { #category : #meta }
 FamixTWithAttributes classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TWithAttributes super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : #visitor }
-FamixTWithAttributes >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTWithAttributes: self
 ]
 
 { #category : #adding }
@@ -43,28 +36,27 @@ FamixTWithAttributes >> addAttribute: anAttribute [
 FamixTWithAttributes >> attributes [
 	"Relation named: #attributes type: #FamixTAttribute opposite: #parentType"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'List of attributes declared by this type.'>
-	<derived>
 	^ attributes
 ]
 
 { #category : #accessing }
 FamixTWithAttributes >> attributes: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	attributes value: anObject
 ]
 
 { #category : #'Famix-Extensions' }
 FamixTWithAttributes >> numberOfAttributes [
+
 	<FMProperty: #numberOfAttributes type: #Number>
 	<derived>
 	<FMComment: 'The number of attributes in the class'>
-	
-	^self
-		lookUpPropertyNamed: #numberOfAttributes
-		computedAs: [self attributes size]
+	^ self cacheAt: #numberOfAttributes ifAbsent: [ self attributes size ]
 ]
 
 { #category : #'Famix-Extensions' }

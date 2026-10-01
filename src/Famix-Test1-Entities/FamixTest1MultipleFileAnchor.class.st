@@ -27,8 +27,8 @@ Class {
 { #category : #meta }
 FamixTest1MultipleFileAnchor class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #MultipleFileAnchor super: #FamixTest1SourceAnchor>
 	<package: #'Famix-Test1-Entities'>
 	<generated>
-	^ self
 ]

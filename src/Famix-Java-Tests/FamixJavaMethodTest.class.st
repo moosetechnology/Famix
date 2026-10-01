@@ -159,11 +159,13 @@ FamixJavaMethodTest >> testIsGetter [
 	self deny: method isGetter.
 
 	method name: 'getLogin'.
-	method declaredType: (FamixJavaClass named: 'String').
+	method typing: (FamixJavaEntityTyping new declaredType:
+			 (FamixJavaClass named: 'String')).
 	self assert: method isGetter.
 
 	method name: 'getLogin'.
-	method declaredType: (FamixJavaPrimitiveType named: 'void').
+	method typing: (FamixJavaEntityTyping new declaredType:
+			 (FamixJavaPrimitiveType named: 'void')).
 	self deny: method isGetter
 ]
 
@@ -171,16 +173,61 @@ FamixJavaMethodTest >> testIsGetter [
 FamixJavaMethodTest >> testIsGetterForBooleanAttribute [
 
 	method name: 'isActif'.
-	method declaredType: (FamixJavaPrimitiveType named: 'boolean').
+	method typing: (FamixJavaEntityTyping new declaredType:
+			 (FamixJavaPrimitiveType named: 'boolean')).
 	self assert: method isGetter.
 
 	method name: 'isActif'.
-	method declaredType: (FamixJavaClass named: 'Boolean').
+	method typing: (FamixJavaEntityTyping new declaredType:
+			 (FamixJavaClass named: 'Boolean')).
 	self assert: method isGetter.
 
 	method name: 'isActif'.
-	method declaredType: (FamixJavaClass named: 'String').
+	method typing: (FamixJavaEntityTyping new declaredType:
+			 (FamixJavaClass named: 'String')).
 	self deny: method isGetter
+]
+
+{ #category : #tests }
+FamixJavaMethodTest >> testIsMethodDefinition [
+
+	| class |
+	class := FamixJavaClass new.
+	method := FamixJavaMethod new.
+	method parentType: class.
+
+	self assert: method isMethodDefinition.
+	
+	"Abstract method should not be considered as defined."
+	class := FamixJavaClass new.
+	method := FamixJavaMethod new.
+	method parentType: class.
+	method isAbstract: true.
+
+	self deny: method isMethodDefinition.
+	
+	"Method from interfaces should not be considered as defined."
+	class := FamixJavaInterface new.
+	method := FamixJavaMethod new.
+	method parentType: class.
+
+	self deny: method isMethodDefinition.
+	
+	"Method from interfaces with #default keyword should be considered as defined."
+	class := FamixJavaInterface new.
+	method := FamixJavaMethod new.
+	method parentType: class.
+	method kind: #default.
+
+	self assert: method isMethodDefinition.
+	
+	"Method from interfaces with #static keyword should be considered as defined."
+	class := FamixJavaInterface new.
+	method := FamixJavaMethod new.
+	method parentType: class.
+	method isClassSide: true.
+
+	self assert: method isMethodDefinition.
 ]
 
 { #category : #tests }
@@ -204,7 +251,8 @@ FamixJavaMethodTest >> testIsSetter [
 	method parameters: { FamixJavaParameter new }.
 	self deny: method isSetter.
 
-	method declaredType: (FamixJavaPrimitiveType named: 'void').
+	method typing: (FamixJavaEntityTyping new declaredType:
+			 (FamixJavaPrimitiveType named: 'void')).
 	self assert: method isSetter
 ]
 
@@ -291,13 +339,13 @@ FamixJavaMethodTest >> testOverride [
 		name: 'method';
 		signature: 'method()';
 		parentType: c1;
-		declaredType: c1;
+		typing: (FamixJavaEntityTyping new declaredType: c1);
 		yourself.
 	method
 		name: 'method';
 		signature: 'method()';
 		parentType: c2;
-		declaredType: c2.
+		typing: (FamixJavaEntityTyping new declaredType: c2).
 	c2
 		addSuperInheritance:
 			(FamixJavaInheritance new

@@ -23,23 +23,39 @@ Trait {
 { #category : #meta }
 FamixTCanImplement classSide >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #TCanImplement super: #Object>
 	<package: #'Famix-Traits'>
 	<generated>
-	^ self
-]
-
-{ #category : #visitor }
-FamixTCanImplement >> accept: aVisitor [
-
-	<generated>
-	^ aVisitor visitFamixTCanImplement: self
 ]
 
 { #category : #adding }
 FamixTCanImplement >> addInterfaceImplementation: anObject [
+
+	<ignoreForCoverage>
 	<generated>
 	^ self interfaceImplementations add: anObject
+]
+
+{ #category : #enumerating }
+FamixTCanImplement >> allImplementedInterfaces [
+	"runs aBlock on all implemented interfaces and the interfaces they inherit"
+
+	| implementedInterfaces |
+	implementedInterfaces := OrderedCollection new.
+
+	self allImplementedInterfacesDo: [ :interface | implementedInterfaces add: interface ].
+
+	^implementedInterfaces 
+]
+
+{ #category : #enumerating }
+FamixTCanImplement >> allImplementedInterfacesDo: aBlock [
+	"runs aBlock on all implemented interfaces and the interfaces they inherit"
+
+	self interfaceImplementations do: [ :implementation |
+			aBlock value: implementation interface.
+			implementation interface allSuperclassesDo: aBlock ]
 ]
 
 { #category : #accessing }
@@ -53,15 +69,16 @@ FamixTCanImplement >> directImplementedInterfaces [
 FamixTCanImplement >> interfaceImplementations [
 	"Relation named: #interfaceImplementations type: #FamixTImplementation opposite: #implementingClass"
 
+	<ignoreForCoverage>
 	<generated>
 	<FMComment: 'Implementation relationships'>
-	<derived>
 	^ interfaceImplementations
 ]
 
 { #category : #accessing }
 FamixTCanImplement >> interfaceImplementations: anObject [
 
+	<ignoreForCoverage>
 	<generated>
 	interfaceImplementations value: anObject
 ]

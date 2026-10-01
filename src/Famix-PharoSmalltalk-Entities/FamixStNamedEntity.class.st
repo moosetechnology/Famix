@@ -27,16 +27,17 @@ Class {
 { #category : #meta }
 FamixStNamedEntity class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #NamedEntity super: #FamixStSourcedEntity>
 	<package: #'Famix-PharoSmalltalk-Entities'>
 	<generated>
 	<abstract>
-	^ self
 ]
 
 { #category : #testing }
 FamixStNamedEntity class >> isAbstract [
 
+	<ignoreForCoverage>
 	<generated>
 	^ self == FamixStNamedEntity
 ]
@@ -44,6 +45,7 @@ FamixStNamedEntity class >> isAbstract [
 { #category : #testing }
 FamixStNamedEntity >> isNamedEntity [
 
+	<ignoreForCoverage>
 	<generated>
 	^ true
 ]

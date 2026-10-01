@@ -33,8 +33,8 @@ Class {
 { #category : #meta }
 MooseMSEImporterTestInheritance class >> annotation [
 
+	<ignoreForCoverage>
 	<FMClass: #Inheritance super: #MooseMSEImporterTestEntity>
 	<package: #'Moose-Core-Tests-Entities'>
 	<generated>
-	^ self
 ]
