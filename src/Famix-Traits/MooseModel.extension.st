@@ -62,7 +62,7 @@ MooseModel >> numberOfMethods [
 { #category : '*Famix-Traits' }
 MooseModel >> numberOfMethodsPerPackage [
 
-	<FMProperty: #numberOfClassesPerPackage type: #Number>
+	<FMProperty: #numberOfMethodsPerPackage type: #Number>
 	<FMComment: 'The number of methods per package in the model'>
 	<derived>
 	^ self cacheAt: #numberOfMethodsPerPackage ifAbsentPut: [ self numberOfMethods / self numberOfPackages ]
