@@ -54,6 +54,12 @@ FM3Type >> testingSelector: aString [
 ]
 
 { #category : '*Famix-MetamodelBuilder-Core' }
+FM3Type >> withEqualityCheckOn: aCollectionOfProperty [
+
+	self flag: #ignoreForNow
+]
+
+{ #category : '*Famix-MetamodelBuilder-Core' }
 FM3Type >> withGroup [
 
 	self flag: #ignoreForNow
