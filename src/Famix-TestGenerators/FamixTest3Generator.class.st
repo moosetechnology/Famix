@@ -27,7 +27,7 @@ Class {
 { #category : 'accessing' }
 FamixTest3Generator class >> packageName [
 
-	^ #'Famix-Test3-Entities'
+	^ #'Famix-Test3-Fame-Entities'
 ]
 
 { #category : 'accessing' }
