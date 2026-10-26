@@ -57,6 +57,15 @@ FamixMetamodelGenerator class >> builderWithDefinitions [
 ]
 
 { #category : 'accessing' }
+FamixMetamodelGenerator class >> builderWithDefinitionsUsingBuilderClass: aBuilderClass [
+
+	| generator |
+	generator := self new.
+	generator builder: (aBuilderClass forGenerator: generator).
+	^ generator define builder
+]
+
+{ #category : 'accessing' }
 FamixMetamodelGenerator class >> composedMetaModels [
 	^ self allSubclasses select: [ :mm | mm isAbstract not and: [ mm isComposed ] ]
 ]
@@ -187,7 +196,19 @@ FamixMetamodelGenerator >> adoptBuilder: aBuilder [
 
 	aBuilder configuration
 		prefix: self prefix;
-		packageName: self packageName
+		packageName: self packageName.
+	subBuildersMapByPrefix := Dictionary newFrom:
+		                          (self class submetamodels collect: [ :each |
+				                           | subbuilder |
+				                           subbuilder := each
+					                                         builderWithDefinitionsUsingBuilderClass:
+					                                         aBuilder class.
+				                           subbuilder parentBuilder: self builder.
+				                           each prefix -> subbuilder ]).
+
+	metamodelToolGenerators := self class metamodelToolGenerators
+		                           collect: [ :generatorClass |
+		                           generatorClass forGenerator: self ]
 ]
 
 { #category : 'accessing' }
@@ -239,7 +260,9 @@ FamixMetamodelGenerator >> builder [
 
 { #category : 'accessing' }
 FamixMetamodelGenerator >> builder: anObject [
-	builder := anObject
+
+	builder := anObject.
+	self adoptBuilder: builder
 ]
 
 { #category : 'testing' }
@@ -312,11 +335,12 @@ FamixMetamodelGenerator >> defineTraits [
 FamixMetamodelGenerator >> generate [
 	"Next step to improve the cleaning is to add a report. For example if we cannot migrate a method since its class was removed from the MM, we should get notified with a report object."
 
-	EpMonitor
-		disableDuring: [ self define.
+	EpMonitor disableDuring: [
+			self define.
 			self cleaningStrategy
-				withCleaningDo: [ self builder generate.
-					self subBuilders do: #generateRemotes ]
+				withCleaningDo: [
+						self builder generate.
+						self subBuilders do: #generateRemotes ]
 				with: self ].
 	self class withMooseModelDo: #resetMetamodel
 ]
@@ -345,16 +369,7 @@ FamixMetamodelGenerator >> initialize [
 
 	self withoutCleaning.
 
-	builder := self newBuilder.
-	self adoptBuilder: builder.
-
-	subBuildersMapByPrefix := Dictionary newFrom: (self class submetamodels collect: [ :each |
-				                           | subbuilder |
-				                           subbuilder := each builderWithDefinitions.
-				                           subbuilder parentBuilder: self builder.
-				                           each prefix -> subbuilder ]).
-
-	metamodelToolGenerators := self class metamodelToolGenerators collect: [ :generatorClass | generatorClass forGenerator: self ]
+	builder := self newBuilder
 ]
 
 { #category : 'accessing' }
