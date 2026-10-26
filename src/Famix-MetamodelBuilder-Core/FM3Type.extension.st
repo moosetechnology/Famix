@@ -14,7 +14,37 @@ FM3Type >> --|> anObject [
 { #category : '*Famix-MetamodelBuilder-Core' }
 FM3Type >> builder [
 
-	^ self metamodel additionalProperty: #famixFamelBuilder for: self
+	^ self metamodel additionalProperty: #famixFameBuilder for: self
+]
+
+{ #category : '*Famix-MetamodelBuilder-Core' }
+FM3Type >> inheritsFromTrait: tType without: aCollectionOfSelector [
+
+	self flag: #ignoreForNow
+]
+
+{ #category : '*Famix-MetamodelBuilder-Core' }
+FM3Type >> property: propertyName [
+
+	^ self property: propertyName type: nil defaultValue: nil
+]
+
+{ #category : '*Famix-MetamodelBuilder-Core' }
+FM3Type >> property: propertyName type: propertyType [
+
+	^ self property: propertyName type: propertyType defaultValue: nil
+]
+
+{ #category : '*Famix-MetamodelBuilder-Core' }
+FM3Type >> property: propertyName type: propertyType defaultValue: aDefaultValue [
+
+	^ self propertyNamed: propertyName ifAbsent: [
+			  | property |
+			  property := FM3Property named: propertyName.
+			  propertyType ifNotNil: [ property type: propertyType ].
+			  aDefaultValue ifNotNil: [ property defaultValue: aDefaultValue ].
+			  self properties add: property.
+			  property ]
 ]
 
 { #category : '*Famix-MetamodelBuilder-Core' }

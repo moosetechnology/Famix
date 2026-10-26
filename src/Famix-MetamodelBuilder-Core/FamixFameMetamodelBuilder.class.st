@@ -32,11 +32,28 @@ FamixFameMetamodelBuilder >> ensurePackageNamed: aString [
 
 { #category : 'initialization' }
 FamixFameMetamodelBuilder >> getTraitNamed: aSymbol [
+	"Check if I contain a trait of this name. If yes, return it. 
+	If no, check if one of my subMM has a trait of this name. If one is found, return it. If more is found raise an error. If non is found, create a new trait of this name and return it."
 
-	| trait |
-	self halt.
-	trait := super getTraitNamed: aSymbol.
-	^ trait
+	| remoteTraits |
+	remoteTraits := Dictionary new.
+	self allSubBuilders do: [ :builder |
+		builder traits
+			detect: [ :each | each name = aSymbol ]
+			ifFound: [ :trait | remoteTraits at: builder put: trait ] ].
+	remoteTraits size = 1 ifTrue: [
+		| trait |
+		trait := remoteTraits values anyOne.
+		metamodel additionalProperty: #famixFameRemoteBuilder for: trait ifAbsentPut: self.
+		^ trait ].
+	remoteTraits size > 1 ifTrue: [
+		self error: ('Multiple remote traits named {1} where found in sub metamodels. Found in: {2}.
+In order to fix the issue you should use #remoteTrait:withPrefix: in your generator to select yourself the right trait to use. If you want to create an entity of this name in your model and not use the trait of this name from a sub metamodel, declare this trait before referencing it.'
+				 format: {
+						 aSymbol.
+						 (', ' join: (remoteTraits keys collect: [ :builder | builder generator asString ])) }) ].
+
+	^ self traitNamed: aSymbol
 ]
 
 { #category : 'initialization' }
@@ -54,7 +71,7 @@ FamixFameMetamodelBuilder >> newClass [
 	aClass package: (self ensurePackageNamed: self configuration packageName).
 	self classes add: aClass.
 	metamodel add: aClass.
-	metamodel additionalProperty: #famixFamelBuilder for: aClass ifAbsentPut: self.
+	metamodel additionalProperty: #famixFameBuilder for: aClass ifAbsentPut: self.
 	^ aClass
 ]
 
@@ -73,6 +90,6 @@ FamixFameMetamodelBuilder >> newTrait [
 		(self ensurePackageNamed: self configuration packageName).
 	self traits add: aTrait.
 	metamodel add: aTrait.
-	metamodel additionalProperty: #famixFamelBuilder for: aTrait ifAbsentPut: self.
+	metamodel additionalProperty: #famixFameBuilder for: aTrait ifAbsentPut: self.
 	^ aTrait
 ]
