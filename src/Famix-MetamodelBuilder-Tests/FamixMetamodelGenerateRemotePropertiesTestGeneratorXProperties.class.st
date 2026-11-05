@@ -39,5 +39,6 @@ FamixMetamodelGenerateRemotePropertiesTestGeneratorXProperties >> defineClasses 
 FamixMetamodelGenerateRemotePropertiesTestGeneratorXProperties >> defineProperties [
 
 	super defineProperties.
-	entityX property: #testProperty type: #String
+	entityX property: #testProperty type: #String.
+	entityX property: #testPropertyWithDefault type: #Number defaultValue: 0
 ]

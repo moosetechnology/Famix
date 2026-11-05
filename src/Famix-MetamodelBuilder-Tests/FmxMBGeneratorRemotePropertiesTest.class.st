@@ -46,6 +46,14 @@ FmxMBGeneratorRemotePropertiesTest >> testDefaultNilPropertyOfEntityA [
 ]
 
 { #category : 'tests' }
+FmxMBGeneratorRemotePropertiesTest >> testDefaultValuePropertyOfEntityA [
+
+	self assert: entityA testPropertyWithDefault equals: 0.
+	entityA testPropertyWithDefault: 3.
+	self assert: entityA testPropertyWithDefault equals: 3
+]
+
+{ #category : 'tests' }
 FmxMBGeneratorRemotePropertiesTest >> testRemotePropertyIsInCorrectPackage [
 
 	| getterMethod setterMethod |
