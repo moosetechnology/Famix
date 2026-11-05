@@ -148,14 +148,15 @@ FmxMBMethodsFactory class >> getTypedProperty: aProperty [
 						  s
 							  nextPutAll: 'self attributeAt: #';
 							  nextPutAll: aProperty name;
-							  nextPutAll: ' ifAbsent: [ nil ]' ]
-				  ifFalse: [ s nextPutAll: aProperty name ].
-
-
-			  aProperty defaultValue ifNotNil: [
-					  s nextPutAll: (' ifNil: [ {1} := {2} ]' format: {
-								   aProperty name.
-								   aProperty defaultValue printString }) ] ]
+							  nextPutAll: ' ifAbsent: [ ';
+							  nextPutAll: aProperty defaultValue printString;
+							  nextPutAll: ' ]' ]
+				  ifFalse: [
+						  s nextPutAll: aProperty name.
+						  aProperty defaultValue ifNotNil: [
+								  s nextPutAll: (' ifNil: [ {1} := {2} ]' format: {
+											   aProperty name.
+											   aProperty defaultValue printString }) ] ] ]
 ]
 
 { #category : 'code generation' }
