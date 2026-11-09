@@ -236,6 +236,7 @@ FamixJavaFoldersImporter >> importModels [
 				run.
 
 			model name: folder basename.
+			model rootFolder: folder.
 			models add: model ]
 		displayingProgress: [ :folder | folder basename ]
 ]
@@ -269,7 +270,7 @@ FamixJavaFoldersImporter >> jdkVersion: aString [
 { #category : 'actions' }
 FamixJavaFoldersImporter >> jsonForFolder: folder [
 
-	^ folder basename , '.json'
+	^ FileLocator localDirectory fullName , '/' , folder basename , '.json'
 ]
 
 { #category : 'testing' }
