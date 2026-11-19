@@ -24,6 +24,27 @@ FmxMBGeneratorRemoteAccessorTest >> setUp [
 ]
 
 { #category : 'tests' }
+FmxMBGeneratorRemoteAccessorTest >> testAddRemoteManyToManyRelation [
+
+	entityA perform: #addManyManyB: with: entityB.
+	self assert: ((entityA perform: #manyManyB) includes: entityB).
+	self assert: ((entityB perform: #manyManyA) includes: entityA).
+	entityB perform: #addManyManyA: with: entityA.
+	self assert: (entityA perform: #manyManyB) size equals: 1
+]
+
+{ #category : 'tests' }
+FmxMBGeneratorRemoteAccessorTest >> testAddRemoteOneToManyRelation [
+
+	| method |
+	method := entityA class >> #addManyB:.
+	self assert: method package name equals: FamixMetamodelGenerateRemoteAccessorTestGeneratorAB packageName.
+	entityA perform: #addManyB: with: entityB.
+	self assert: ((entityA perform: #manyB) includes: entityB).
+	self assert: (entityB perform: #oneA) identicalTo: entityA
+]
+
+{ #category : 'tests' }
 FmxMBGeneratorRemoteAccessorTest >> testCanRemoveManyRelationFromEntityA [
 	entityA manyB add: entityB.
 	entityA manyB removeAll.
@@ -95,4 +116,49 @@ FmxMBGeneratorRemoteAccessorTest >> testCanSetRelationFromEntityB [
 	entityB relationToA: entityA.
 	self assert: entityB relationToA equals: entityA. 
 	self assert: entityA relationToB equals: entityB.
+]
+
+{ #category : 'tests' }
+FmxMBGeneratorRemoteAccessorTest >> testGeneratesSingularAdderForRemoteArguments [
+
+	| generator remoteA remoteB metamodel |
+	generator := FamixMetamodelGenerateRemoteAccessorTestGeneratorAB new.
+	generator define.
+	remoteA := generator remoteEntity: #EntityA withPrefix: #FmxTestGenerateAccessorA.
+	remoteB := generator remoteEntity: #EntityB withPrefix: #FmxTestGenerateAccessorB.
+	(remoteA property: #arguments) -* (remoteB property: #argumentInSpan).
+	[
+		metamodel := generator builder buildMetamodel.
+		FamixFameMaterializer new materialize: metamodel.
+		entityA perform: #addArgument: with: entityB.
+		self assert: ((entityA perform: #arguments) includes: entityB).
+		self assert: (entityB perform: #argumentInSpan) identicalTo: entityA.
+		self assert: (entityA class >> #addArgument: pragmaAt: #package:) arguments first equals: generator packageName ] ensure: [
+		FamixMetamodelGenerateRemoteAccessorTestGeneratorAB generate ]
+]
+
+{ #category : 'tests' }
+FmxMBGeneratorRemoteAccessorTest >> testGeneratorDeclaresNoLocalEntities [
+
+	| generator |
+	generator := FamixMetamodelGenerateRemoteAccessorTestGeneratorAB new.
+	generator define.
+	self assertEmpty: generator builder classes.
+	self assertEmpty: generator builder traits
+]
+
+{ #category : 'tests' }
+FmxMBGeneratorRemoteAccessorTest >> testRemovesObsoleteRemoteRelationMethods [
+
+	| generator metamodel |
+	generator := FamixMetamodelGenerateRemoteAccessorTestGeneratorAB new.
+	generator define.
+	generator subBuilders do: [ :subbuilder |
+		subbuilder classes , subbuilder traits do: [ :behavior | behavior propertiesAndRelations removeAll ] ].
+	[
+		metamodel := generator builder buildMetamodel.
+		FamixFameMaterializer new materialize: metamodel.
+		self deny: (entityA class includesSelector: #manyB).
+		self deny: (entityA class includesSelector: #addManyB:).
+		self deny: (entityB class includesSelector: #oneA) ] ensure: [ FamixMetamodelGenerateRemoteAccessorTestGeneratorAB generate ]
 ]

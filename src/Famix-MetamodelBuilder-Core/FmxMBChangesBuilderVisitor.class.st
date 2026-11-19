@@ -91,6 +91,12 @@ FmxMBChangesBuilderVisitor >> generateTrueTestingMethods [
 ]
 
 { #category : 'private' }
+FmxMBChangesBuilderVisitor >> generatedPackageName [
+
+	^ builder packageName
+]
+
+{ #category : 'private' }
 FmxMBChangesBuilderVisitor >> recordMethodRemovalsOf: realClass [
 
 	| generatedMethodsOfRealClass generatedMethodNamesOfRealClass selectorsToGenerate |
@@ -100,7 +106,10 @@ FmxMBChangesBuilderVisitor >> recordMethodRemovalsOf: realClass [
 
 	"In case we have an extension, we remove it if the package is the right one"
 	self flag: #todo. "Demeter. Clean package name management."
-	generatedMethodsOfRealClass := generatedMethodsOfRealClass reject: [ :method | (method hasPragmaNamed: #package:) and: [ ((method pragmaAt: #package:) argumentAt: 1) ~=  builder packageName ] ].
+	generatedMethodsOfRealClass := generatedMethodsOfRealClass reject: [ :method |
+		(method isExtension and: [ method package name ~= self generatedPackageName ]) or: [
+			(method hasPragmaNamed: #package:) and: [
+				((method pragmaAt: #package:) argumentAt: 1) ~= self generatedPackageName ] ] ].
 
 	generatedMethodNamesOfRealClass := generatedMethodsOfRealClass collect: #selector.
 

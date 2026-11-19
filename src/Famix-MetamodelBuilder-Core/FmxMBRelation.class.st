@@ -234,6 +234,12 @@ FmxMBRelation >> remoteBuilderDo: aBlock [
 ]
 
 { #category : 'accessing' }
+FmxMBRelation >> remotePackageDo: aBlock [
+
+	self remoteBuilderDo: [ :remoteBuilder | aBlock value: remoteBuilder packageName ]
+]
+
+{ #category : 'accessing' }
 FmxMBRelation >> shortCardinalityString [
 
 	^ self isMany

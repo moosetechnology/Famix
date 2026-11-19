@@ -29,10 +29,10 @@ FmxMBRelationAttributesGenerationStrategy >> generateGetterCoreOn: aStream for: 
 				nextPutAll: '<multivalued>';
 				cr ].
 
-	aRelation remoteBuilderDo: [ :aRemoteBuilder |
+	aRelation remotePackageDo: [ :packageName |
 			aStream
 				tab;
-				nextPutAll: ('<package: #''{1}''>' format: { aRemoteBuilder packageName });
+				nextPutAll: ('<package: #''{1}''>' format: { packageName });
 				cr ].
 
 	aStream
@@ -52,10 +52,10 @@ FmxMBRelationAttributesGenerationStrategy >> generateGetterCoreOn: aStream for: 
 { #category : 'generation' }
 FmxMBRelationAttributesGenerationStrategy >> generateSetterCoreOn: aStream for: aRelation [
 
-	aRelation remoteBuilderDo: [ :aRemoteBuilder |
+	aRelation remotePackageDo: [ :packageName |
 			aStream
 				tab;
-				nextPutAll: ('<package: #''{1}''>' format: { aRemoteBuilder generator packageName });
+				nextPutAll: ('<package: #''{1}''>' format: { packageName });
 				cr;
 				cr ].
 

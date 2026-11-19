@@ -47,8 +47,9 @@ FmxClassCommentUpdate >> comment [
 ]
 
 { #category : 'accessing' }
-FmxClassCommentUpdate >> comment: anObject [
-	comment := anObject
+FmxClassCommentUpdate >> comment: aString [
+
+	comment := aString trimLeft
 ]
 
 { #category : 'testing' }

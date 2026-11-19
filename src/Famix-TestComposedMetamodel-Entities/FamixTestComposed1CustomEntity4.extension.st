@@ -1,6 +1,24 @@
 Extension { #name : 'FamixTestComposed1CustomEntity4' }
 
 { #category : '*Famix-TestComposedMetamodel-Entities' }
+FamixTestComposed1CustomEntity4 >> addC24: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	<package: #'Famix-TestComposedMetamodel-Entities'>
+	^ self c24s add: anObject
+]
+
+{ #category : '*Famix-TestComposedMetamodel-Entities' }
+FamixTestComposed1CustomEntity4 >> addCustomEntities4: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	<package: #'Famix-TestComposedMetamodel-Entities'>
+	^ self customEntities4 add: anObject
+]
+
+{ #category : '*Famix-TestComposedMetamodel-Entities' }
 FamixTestComposed1CustomEntity4 >> c24s [
 	"Relation named: #c24s type: #FamixTestComposed2CustomEntity4 opposite: #c14s"
 

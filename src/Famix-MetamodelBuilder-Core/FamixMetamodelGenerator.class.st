@@ -50,19 +50,16 @@ FamixMetamodelGenerator class >> addSubmetamodelsToGenerateFrom: aCollection to:
 			self addSubmetamodelsToGenerateFrom: mm submetamodels to: metamodels ]
 ]
 
+{ #category : 'generation' }
+FamixMetamodelGenerator class >> buildMetamodel [
+
+	^ self new buildMetamodel
+]
+
 { #category : 'accessing' }
 FamixMetamodelGenerator class >> builderWithDefinitions [
 
 	^ self new define builder
-]
-
-{ #category : 'accessing' }
-FamixMetamodelGenerator class >> builderWithDefinitionsUsingBuilderClass: aBuilderClass [
-
-	| generator |
-	generator := self new.
-	generator builder: (aBuilderClass forGenerator: generator).
-	^ generator define builder
 ]
 
 { #category : 'accessing' }
@@ -197,18 +194,17 @@ FamixMetamodelGenerator >> adoptBuilder: aBuilder [
 	aBuilder configuration
 		prefix: self prefix;
 		packageName: self packageName.
-	subBuildersMapByPrefix := Dictionary newFrom:
-		                          (self class submetamodels collect: [ :each |
+	subBuildersMapByPrefix := Dictionary newFrom: (self class submetamodels collect: [ :each |
 				                           | subbuilder |
-				                           subbuilder := each
-					                                         builderWithDefinitionsUsingBuilderClass:
-					                                         aBuilder class.
+				                           subbuilder := each builderWithDefinitions.
+				                           subbuilder prepareGeneration.
+				                           { subbuilder } , subbuilder allSubBuilders asArray do: [ :definedBuilder |
+						                           definedBuilder classes , definedBuilder traits do: [ :behavior |
+								                           behavior propertiesAndRelations do: [ :property |
+									                           property additionalProperties at: #definingPackage ifAbsentPut: [ subbuilder packageName ] ] ] ].
 				                           subbuilder parentBuilder: self builder.
 				                           each prefix -> subbuilder ]).
-
-	metamodelToolGenerators := self class metamodelToolGenerators
-		                           collect: [ :generatorClass |
-		                           generatorClass forGenerator: self ]
+	metamodelToolGenerators := self class metamodelToolGenerators collect: [ :generatorClass | generatorClass forGenerator: self ]
 ]
 
 { #category : 'accessing' }
@@ -253,6 +249,13 @@ FamixMetamodelGenerator >> apply: aTrait on: aGeneratedClass oppositeTrait: anot
 	anotherGeneratedClass --|> anotherTrait 
 ]
 
+{ #category : 'generation' }
+FamixMetamodelGenerator >> buildMetamodel [
+
+	self define.
+	^ self builder buildMetamodel
+]
+
 { #category : 'accessing' }
 FamixMetamodelGenerator >> builder [
 	^ builder
@@ -265,15 +268,10 @@ FamixMetamodelGenerator >> builder: anObject [
 	self adoptBuilder: builder
 ]
 
-{ #category : 'testing' }
+{ #category : 'generation' }
 FamixMetamodelGenerator >> changesToApply [
 
-	| allChanges |
-	allChanges := OrderedCollection new.
-	self define.
-	allChanges addAll: self builder changesToApply.
-	self subBuilders do: [ :remote | allChanges addAll: remote remoteChangesToApply ].
-	^ allChanges
+	^ FamixFameMaterializer new changesFor: self buildMetamodel
 ]
 
 { #category : 'accessing' }
@@ -333,16 +331,12 @@ FamixMetamodelGenerator >> defineTraits [
 
 { #category : 'generation' }
 FamixMetamodelGenerator >> generate [
-	"Next step to improve the cleaning is to add a report. For example if we cannot migrate a method since its class was removed from the MM, we should get notified with a report object."
 
+	| metamodel |
 	EpMonitor disableDuring: [
-			self define.
-			self cleaningStrategy
-				withCleaningDo: [
-						self builder generate.
-						self subBuilders do: #generateRemotes ]
-				with: self ].
-	self class withMooseModelDo: #resetMetamodel
+			metamodel := self buildMetamodel.
+			self cleaningStrategy withCleaningDo: [ FamixFameMaterializer new materialize: metamodel ] with: self ].
+	self class withMooseModelDo: [ :modelClass | modelClass metamodel: metamodel ]
 ]
 
 { #category : 'generation' }
@@ -366,10 +360,8 @@ FamixMetamodelGenerator >> generatedPackage [
 FamixMetamodelGenerator >> initialize [
 
 	super initialize.
-
 	self withoutCleaning.
-
-	builder := self newBuilder
+	self builder: self newBuilder
 ]
 
 { #category : 'accessing' }
