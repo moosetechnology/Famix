@@ -1,6 +1,15 @@
 Extension { #name : 'FamixTestComposed1CustomEntity5' }
 
 { #category : '*Famix-TestComposedMetamodel-Entities' }
+FamixTestComposed1CustomEntity5 >> addAssociation: anObject [
+
+	<ignoreForCoverage>
+	<generated>
+	<package: #'Famix-TestComposedMetamodel-Entities'>
+	^ self associations add: anObject
+]
+
+{ #category : '*Famix-TestComposedMetamodel-Entities' }
 FamixTestComposed1CustomEntity5 >> associations [
 	"Relation named: #associations type: #FamixTestComposedAssociation opposite: #c15"
 

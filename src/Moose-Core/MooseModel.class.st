@@ -245,6 +245,14 @@ MooseModel class >> metamodel [
 	^ metamodel ifNil: [ self resetMetamodel ]
 ]
 
+{ #category : 'meta' }
+MooseModel class >> metamodel: aMetamodel [
+
+	metamodel := aMetamodel.
+	metamodel classes do: [ :description | description implementingClass resetMooseEntityCache ].
+	self allInstancesDo: [ :model | model updateMetamodelTo: metamodel ]
+]
+
 { #category : 'instance creation' }
 MooseModel class >> named: aString [
 	^ self new
@@ -280,13 +288,8 @@ MooseModel class >> packagesToProcessToCreateMetamodel [
 
 { #category : 'meta' }
 MooseModel class >> resetMetamodel [
-	metamodel := FMMetaModelBuilder metamodelFromPackages: self packagesToProcessToCreateMetamodel.
 
-	"MooseEntity has a cache for some infos. When we regenerate a MM we need to flush this cache."
-	metamodel classes do: [ :fm3Class | fm3Class implementingClass resetMooseEntityCache ].
-	
-	self allInstancesDo: [ :model | model updateMetamodelTo: metamodel ].
-
+	self metamodel: (FMMetaModelBuilder metamodelFromPackages: self packagesToProcessToCreateMetamodel).
 	^ metamodel
 ]
 

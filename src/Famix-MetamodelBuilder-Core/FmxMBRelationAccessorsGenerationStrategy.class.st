@@ -68,6 +68,11 @@ FmxMBRelationAccessorsGenerationStrategy >> generateGetterCodeFor: aRelation [
 						  nextPutAll: '<target>';
 						  cr ].
 
+			  aRelation isDerived ifTrue: [
+					  s
+						  tab;
+						  nextPutAll: '<derived>';
+						  cr ].
 			  self generateGetterCoreOn: s for: aRelation ]
 ]
 

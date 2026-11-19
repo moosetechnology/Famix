@@ -107,13 +107,15 @@ FamixMetamodelBuilder >> baseImportingContextName [
 ]
 
 { #category : 'generating' }
+FamixMetamodelBuilder >> buildMetamodel [
+
+	^ FamixFameMetamodelBuilder new buildFrom: self
+]
+
+{ #category : 'generating' }
 FamixMetamodelBuilder >> changesToApply [
 
-	self prepareGeneration.
-
-	^ (FmxMBChangesBuilderVisitor visit: self)
-		  filterRedoundantChanges;
-		  changesToApply
+	^ FamixFameMaterializer new changesFor: self buildMetamodel
 ]
 
 { #category : 'initialization' }
@@ -213,8 +215,7 @@ FamixMetamodelBuilder >> entityCreatorTrait [
 { #category : 'generating' }
 FamixMetamodelBuilder >> generate [
 
-	self prepareGeneration.
-	FmxMBChangesBuilderVisitor generate: self
+	^ FamixFameMaterializer new materialize: self buildMetamodel
 ]
 
 { #category : 'generating' }

@@ -32,6 +32,39 @@ Note you can replace the #master by another branch such as #development or a tag
 
 Check out the [Moose wiki](https://modularmoose.org/beginners/install-moose/).
 
+### Metamodel generation
+
+Define entities and relations with the existing generator DSL, then run:
+
+```Smalltalk
+MyMetamodelGenerator generate
+```
+
+Generation first builds a Fame `FMMetaModel`, then materializes Pharo code and
+installs that same description on the generated Moose model class. Changes are
+filtered and ordered before application; obsolete generated code is removed and
+handwritten code is preserved.
+
+To inspect the description before installing code:
+
+```Smalltalk
+metamodel := MyMetamodelGenerator buildMetamodel
+```
+
+This does not install classes or methods. The description includes dependencies,
+handwritten property annotations, and metamodel extensions included by default.
+Famix support methods and helper classes are retained as generation metadata.
+
+An inspected or modified description can be materialized explicitly:
+
+```Smalltalk
+FamixFameMaterializer new materialize: metamodel.
+MyModel metamodel: metamodel
+```
+
+Use the generator's `generate` entry point when applying its configured cleaning
+strategy and updating existing model instances.
+
 ## Version management 
 
 This project use semantic versioning to define the releases. This means that each stable release of the project will be assigned a version number of the form `vX.Y.Z`. 
